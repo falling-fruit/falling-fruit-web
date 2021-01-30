@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+<h1 align="center">
+  <a href="https://fallingfruit.org">
+    <img
+      src="https://fallingfruit.org/new_logo_300x.jpg"
+      width="150"
+    />
+  </a>
+  <br />
+  Falling Fruit
+  <br />
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  A <a href="https://uiuc.hack4impact.org/" target="_blank">Hack4Impact UIUC</a> project.
+</p>
 
-## Available Scripts
+<p align="center">
+  <img src="https://img.shields.io/badge/license-GPLv3-blue?style=flat-square" />
+</p>
 
-In the project directory, you can run:
+## About
 
-### `yarn start`
+React-based, mobile-friendly frontend for Falling Fruit's website.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Team
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/arpanlaha/">
+        <img
+          src="https://uiuc.hack4impact.org/images/people/rebecca_xun.jpg"
+          width="500px"
+        />
+        <br />
+        <b>Rebecca Xun</b>
+        <br />
+        <sub>Product Manager</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="http://www.linkedin.com/in/jeffrey-tang/">
+        <img
+          src="https://uiuc.hack4impact.org/images/people/jeffrey_tang.jpg"
+          width="500px"
+        />
+        <br />
+        <b>Jeffrey Tang</b>
+        <br />
+        <sub>Technical Lead</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="">
+        <img
+          src=""
+          width="500px"
+        />
+        <br />
+        <b>Siraj Chokshi</b>
+        <br />
+        <sub>Product Designer</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="">
+        <img
+          src=""
+          width="500px"
+        />
+        <br />
+        <b>Lauren Ho</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="">
+        <img
+          src=""
+          width="500px"
+        />
+        <br />
+        <b>Ashwin Saxena</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="">
+        <img
+          src=""
+          width="500px"
+        />
+        <br />
+        <b>Archna Sobti</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="">
+        <img
+          src=""
+          width="500px"
+        />
+        <br />
+        <b>Vasu Chalasani</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
-### `yarn test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The latest version of this application can be found at [falling-fruit.vercel.app](https://falling-fruit.vercel.app). To install and set up locally, run `yarn && yarn start`.
 
-### `yarn build`
+## Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This application is built with React. Vercel is used for automatic deployment.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<hr />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[GPLv3](./LICENSE) licensed · © 2021 [Hack4Impact UIUC](https://github.com/hack4impact-uiuc)
