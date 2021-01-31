@@ -117,7 +117,13 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
 
 ## Usage
 
-The latest version of this application can be found at [falling-fruit.vercel.app](https://falling-fruit.vercel.app). To install and set up locally, run `yarn && yarn start`.
+The latest version of this application can be found at [falling-fruit.vercel.app](https://falling-fruit.vercel.app).
+
+To setup and run locally:
+
+1. Setup environment variables: `cp example.env .env`, then edit and fill in `.env`.
+2. Install dependencies: `yarn`
+3. Run: `yarn start`
 
 ## Technologies
 
