@@ -11,7 +11,12 @@ const Types = () => {
     fetchTypes()
   }, [])
 
-  return <div>{types && types.map((type) => <div>{type.en_name}</div>)}</div>
+  return (
+    <div>
+      {types &&
+        types.map((type, index) => <div key={index}>{type.en_name}</div>)}
+    </div>
+  )
 }
 
 export default Types

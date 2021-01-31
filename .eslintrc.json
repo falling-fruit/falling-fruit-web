@@ -1,12 +1,9 @@
 {
-  "root": true,
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "parser": "babel-eslint",
-  "extends": ["react-app", "airbnb", "prettier"],
-  "plugins": [],
+  "extends": [
+    "plugin:@hack4impact-uiuc/base",
+    "plugin:@hack4impact-uiuc/react"
+  ],
+  "plugins": ["@hack4impact-uiuc"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
