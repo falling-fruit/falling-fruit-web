@@ -101,9 +101,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="">
+      <a href="https://www.linkedin.com/in/vasu-chalasani-a83684157/">
         <img
-          src=""
+          src="https://media-exp1.licdn.com/dms/image/C4E03AQH7lS9vYj8mKQ/profile-displayphoto-shrink_400_400/0/1610659960728?e=1618444800&v=beta&t=BuWdSkQpyFJxFFNCOO8KRT8i-QsDwosg6urcRjy8Wvo"
           width="500px"
         />
         <br />
