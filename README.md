@@ -77,13 +77,13 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
   </tr>
   <tr>
     <td align="center">
-      <a href="">
+      <a href="https://www.linkedin.com/in/arman-rafati-6907991b5">
         <img
-          src=""
+          src="https://uiuc.hack4impact.org/images/people/arman_rafati.jpg"
           width="500px"
         />
         <br />
-        <b>Ashwin Saxena</b>
+        <b>Arman Rafati</b>
         <br />
         <sub>Software Developer</sub>
       </a>
