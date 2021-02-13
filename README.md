@@ -89,7 +89,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="">
+      <a href="https://www.linkedin.com/in/archna-sobti">
         <img
           src="https://uiuc.hack4impact.org/images/people/archna_sobti.jpg"
           width="500px"
