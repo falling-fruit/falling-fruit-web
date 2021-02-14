@@ -8,15 +8,32 @@ import {
 
 const Map = withScriptjs(
   withGoogleMap((props) => {
-    const { defaultView, locations } = props
+    const {
+      view,
+      locations,
+      onLocationSelect,
+      onZoomChanged,
+      onCenterChanged,
+      onBoundsChanged,
+      setMapRef,
+    } = props
 
     return (
       <GoogleMap
-        defaultZoom={defaultView.zoom}
-        defaultCenter={{ lat: defaultView.lat, lng: defaultView.lng }}
+        // TODO: Figure out if setting the ref like this is only way to get the zoom/center/bounds changes
+        ref={setMapRef}
+        zoom={view.zoom}
+        center={view.center}
+        onZoomChanged={onZoomChanged}
+        onCenterChanged={onCenterChanged}
+        onBoundsChanged={onBoundsChanged}
       >
         {locations.map((location, i) => (
-          <Marker key={i} position={{ lat: location.lat, lng: location.lng }} />
+          <Marker
+            key={i}
+            position={{ lat: location.lat, lng: location.lng }}
+            onClick={() => onLocationSelect(location.id)}
+          />
         ))}
       </GoogleMap>
     )

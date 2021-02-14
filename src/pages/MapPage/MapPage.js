@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './MapPage.module.scss'
 import Map from '../../components/Map/Map.js'
 
@@ -22,14 +22,42 @@ const locations = [
 ]
 
 const DEFAULT_VIEW_STATE = {
-  lat: 40.1125785,
-  lng: -88.2287926,
+  center: {
+    lat: 40.1125785,
+    lng: -88.2287926,
+  },
   zoom: 2,
 }
 
 const MapPage = () => {
+  const [view, setView] = useState(DEFAULT_VIEW_STATE)
+  const [mapRef, setMapRef] = useState(null)
+
   const onLocationSelect = (locationId) => {
     console.log(`Location: ${locationId} selected!`)
+  }
+
+  // TODO: Figure out which callbacks and values we need to store in the view object
+  const onZoomChanged = () => {
+    const newZoom = mapRef.getZoom()
+    setView((prev) => ({
+      ...prev,
+      zoom: newZoom,
+    }))
+  }
+
+  const onCenterChanged = () => {
+    const newCenter = mapRef.getCenter().toJSON()
+    setView((prev) => ({
+      ...prev,
+      center: newCenter,
+    }))
+  }
+
+  const onBoundsChanged = () => {
+    // TODO: Store bounds in the view object?
+    const currBounds = mapRef.getBounds().toJSON()
+    console.log('Bounds changed: ', currBounds)
   }
 
   return (
@@ -40,8 +68,12 @@ const MapPage = () => {
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
         onLocationSelect={onLocationSelect}
-        defaultView={DEFAULT_VIEW_STATE}
+        onZoomChanged={onZoomChanged}
+        onCenterChanged={onCenterChanged}
+        onBoundsChanged={onBoundsChanged}
+        view={view}
         locations={locations}
+        setMapRef={setMapRef}
       />
     </div>
   )
