@@ -28,6 +28,7 @@ const DEFAULT_VIEW_STATE = {
 }
 
 const MapPage = () => {
+  // can we call this onMarkerSelect?
   const onLocationSelect = (locationId) => {
     console.log(`Location: ${locationId} selected!`)
   }

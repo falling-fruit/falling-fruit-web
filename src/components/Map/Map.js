@@ -8,7 +8,7 @@ import {
 
 const Map = withScriptjs(
   withGoogleMap((props) => {
-    const { defaultView, locations } = props
+    const { onLocationSelect, defaultView, locations } = props
 
     return (
       <GoogleMap
@@ -16,7 +16,11 @@ const Map = withScriptjs(
         defaultCenter={{ lat: defaultView.lat, lng: defaultView.lng }}
       >
         {locations.map((location, i) => (
-          <Marker key={i} position={{ lat: location.lat, lng: location.lng }} />
+          <Marker
+            onClick={() => onLocationSelect(location.id)}
+            key={i}
+            position={{ lat: location.lat, lng: location.lng }}
+          />
         ))}
       </GoogleMap>
     )
