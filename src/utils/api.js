@@ -26,6 +26,18 @@ const handleResponse = (request) =>
     },
   )
 
+export const LOCALE = {
+  EN: 'en',
+  DE: 'de',
+  EL: 'el',
+  ES: 'es',
+  FR: 'fr',
+  HE: 'he',
+  IT: 'it',
+  NL: 'nl',
+  PL: 'pl',
+}
+
 export const getClusters = (
   { swlng, nelng, swlat, nelat },
   zoom = 0,
@@ -45,18 +57,6 @@ export const getClusters = (
       },
     }),
   )
-
-export const LOCALE = {
-  EN: 'en',
-  DE: 'de',
-  EL: 'el',
-  ES: 'es',
-  FR: 'fr',
-  HE: 'he',
-  IT: 'it',
-  NL: 'nl',
-  PL: 'pl',
-}
 
 export const getLocations = (
   { swlng, nelng, swlat, nelat },
