@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {
   withScriptjs,
   withGoogleMap,
@@ -8,13 +7,20 @@ import {
 } from 'react-google-maps'
 
 const Map = withScriptjs(
-  withGoogleMap((props) => (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
-      {props.isMarkerShown && (
-        <Marker position={{ lat: -34.397, lng: 150.644 }} />
-      )}
-    </GoogleMap>
-  )),
+  withGoogleMap((props) => {
+    const { defaultView, locations } = props
+
+    return (
+      <GoogleMap
+        defaultZoom={defaultView.zoom}
+        defaultCenter={{ lat: defaultView.lat, lng: defaultView.lng }}
+      >
+        {locations.map((location, i) => (
+          <Marker key={i} position={{ lat: location.lat, lng: location.lng }} />
+        ))}
+      </GoogleMap>
+    )
+  }),
 )
 
 export default Map
