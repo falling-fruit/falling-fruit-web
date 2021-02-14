@@ -19,6 +19,16 @@ const locations = [
     lat: 40.112657,
     lng: -88.2278543,
   },
+  {
+    id: 4,
+    lat: 60.1125785,
+    lng: -88.2287926,
+  },
+  {
+    id: 5,
+    lat: 60.112657,
+    lng: -88.2278543,
+  },
 ]
 
 const DEFAULT_VIEW_STATE = {
@@ -32,6 +42,9 @@ const MapPage = () => {
   const onLocationSelect = (locationId) => {
     console.log(`Location: ${locationId} selected!`)
   }
+  const onClusterSelect = () => {
+    console.log(`You have selected a cluster!`)
+  }
 
   return (
     <div className={styles.mapContainer}>
@@ -40,6 +53,7 @@ const MapPage = () => {
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
+        onClusterSelect={onClusterSelect}
         onLocationSelect={onLocationSelect}
         defaultView={DEFAULT_VIEW_STATE}
         locations={locations}
