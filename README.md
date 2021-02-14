@@ -9,7 +9,6 @@
   Falling Fruit
   <br />
 </h1>
-
 <p align="center">
   A <a href="https://uiuc.hack4impact.org/" target="_blank">Hack4Impact UIUC</a> project.
 </p>
@@ -51,9 +50,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="">
+      <a href="https://linkedin.com/in/sirajchokshi">
         <img
-          src=""
+          src="https://uiuc.hack4impact.org/images/people/siraj_chokshi.jpg"
           width="500px"
         />
         <br />
@@ -63,9 +62,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="">
+      <a href="http://www.github.com/laurenho025">
         <img
-          src=""
+          src="https://uiuc.hack4impact.org/images/people/lauren_ho.jpg"
           width="500px"
         />
         <br />
@@ -89,9 +88,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="">
+      <a href="https://www.linkedin.com/in/archna-sobti">
         <img
-          src=""
+          src="https://uiuc.hack4impact.org/images/people/archna_sobti.jpg"
           width="500px"
         />
         <br />
@@ -101,9 +100,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="">
+      <a href="https://www.linkedin.com/in/vasu-chalasani-a83684157/">
         <img
-          src=""
+          src="https://media-exp1.licdn.com/dms/image/C4E03AQH7lS9vYj8mKQ/profile-displayphoto-shrink_400_400/0/1610659960728?e=1618444800&v=beta&t=BuWdSkQpyFJxFFNCOO8KRT8i-QsDwosg6urcRjy8Wvo"
           width="500px"
         />
         <br />
