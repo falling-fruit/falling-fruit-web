@@ -58,7 +58,7 @@ export const LOCALE = {
   PL: 'pl',
 }
 
-export const getLocation = (
+export const getLocations = (
   { swlng, nelng, swlat, nelat },
   includeMunicipal = false,
   categories = null,
@@ -91,39 +91,84 @@ export const getLocation = (
     }),
   )
 
-// export const postLocation = (
-//   {lng, lat},
-//   type_ids = null,
-//   includeMunicipal = false,
-//   c = null,
-//   t = null,
-//   locale,
-//   invasive = false,
-//   limit = 1000,
-//   offset = 0,
-//   reviews = false,
-//   lng = 0,
-//   lat = 0
-// ) =>
-//   handleResponse(
-//     instance.post('/locations.json', photo_data, {
-//       params: {
-//         swlng,
-//         nelng,
-//         swlat,
-//         nelat,
-//         municipal: includeMunicipal ? 1 : 0,
-//         c: categories,
-//         t: types,
-//         invasive: invasive ? 1 : 0,
-//         limit,
-//         offset,
-//         locale,
-//         reviews: reviews ? 1 : 0,
-//         lng,
-//         lat
-//       },
-//     }),
-//   )
+export const postLocations = (
+  { lng, lat },
+  type_ids,
+  author = null,
+  description = null,
+  season_start = 0,
+  season_stop = 0,
+  no_season = false,
+  unverified = false,
+  access = 0,
+  comment = null,
+  fruiting = 0,
+  quality_rating = 0,
+  yield_rating = 0,
+  observed_on = null,
+  photo_file_name = null,
+  photo_data,
+) =>
+  handleResponse(
+    instance.post('/locations.json', photo_data, {
+      params: {
+        lng,
+        lat,
+        type_ids,
+        author,
+        description,
+        season_start,
+        season_stop,
+        no_season,
+        unverified,
+        access,
+        comment,
+        fruiting,
+        quality_rating,
+        yield_rating,
+        observed_on,
+        photo_file_name,
+      },
+    }),
+  )
+
+export const getLocationById = (id, locale = LOCALE.en) =>
+  handleResponse(
+    instance.get('/locations/{id}.json', {
+      params: {
+        id,
+        locale,
+      },
+    }),
+  )
+
+export const editLocation = (
+  id,
+  { lng, lat },
+  type_ids,
+  author = null,
+  description = null,
+  season_start = 0,
+  season_stop = 0,
+  no_season = false,
+  unverified = false,
+  access = 0,
+) =>
+  handleResponse(
+    instance.post('/locations/{id}.json', null, {
+      params: {
+        lng,
+        lat,
+        type_ids,
+        author,
+        description,
+        season_start,
+        season_stop,
+        no_season,
+        unverified,
+        access,
+      },
+    }),
+  )
 
 export const getTypes = () => handleResponse(instance.get('/types.json', {}))
