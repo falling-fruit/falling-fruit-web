@@ -5,6 +5,7 @@ import {
   GoogleMap,
   Marker,
 } from 'react-google-maps'
+import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer'
 
 const Map = withScriptjs(
   withGoogleMap((props) => {
@@ -12,6 +13,7 @@ const Map = withScriptjs(
       view,
       locations,
       onLocationSelect,
+      onClusterSelect,
       onZoomChanged,
       onCenterChanged,
       onBoundsChanged,
@@ -28,13 +30,21 @@ const Map = withScriptjs(
         onCenterChanged={onCenterChanged}
         onBoundsChanged={onBoundsChanged}
       >
-        {locations.map((location, i) => (
-          <Marker
-            key={i}
-            position={{ lat: location.lat, lng: location.lng }}
-            onClick={() => onLocationSelect(location.id)}
-          />
-        ))}
+        {
+          // TODO: Figure out why marker cluster thinks there are 6 markers when there are only 3
+        }
+        <MarkerClusterer
+          onClick={onClusterSelect}
+          defaultMinimumClusterSize={5}
+        >
+          {locations.map((location, i) => (
+            <Marker
+              key={i}
+              onClick={() => onLocationSelect(location.id)}
+              position={{ lat: location.lat, lng: location.lng }}
+            />
+          ))}
+        </MarkerClusterer>
       </GoogleMap>
     )
   }),
