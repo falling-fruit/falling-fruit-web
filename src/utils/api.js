@@ -171,4 +171,32 @@ export const editLocation = (
     }),
   )
 
-export const getTypes = () => handleResponse(instance.get('/types.json', {}))
+export const getTypes = (
+  { swlng = null, nelng = null, swlat = null, nelat = null },
+  zoom = 0,
+  muni = false,
+  locale = LOCALE.EN,
+  types = null,
+  urls = false,
+  categories = null,
+  uncategorized = false,
+  pending = false,
+) =>
+  handleResponse(
+    instance.get('/types.json', {
+      params: {
+        swlng,
+        nelng,
+        swlat,
+        nelat,
+        zoom,
+        muni: muni ? 1 : 0,
+        locale,
+        t: types,
+        urls: urls ? 1 : 0,
+        categories,
+        uncategorized: uncategorized ? 1 : 0,
+        pending: pending ? 0 : 1,
+      },
+    }),
+  )
