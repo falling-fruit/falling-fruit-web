@@ -218,3 +218,29 @@ export const getReviews = (id) =>
       },
     }),
   )
+
+export const postReview = (
+  id,
+  author = null,
+  comment = null,
+  fruiting = null,
+  quality_rating = null,
+  yield_rating = null,
+  observed_on = null,
+  photo_file_name = null,
+  photo_data,
+) =>
+  handleResponse(
+    instance.post('/locations/{id}/review.json', photo_data, {
+      params: {
+        id,
+        author,
+        comment,
+        fruiting,
+        quality_rating,
+        yield_rating,
+        observed_on,
+        photo_file_name,
+      },
+    }),
+  )
