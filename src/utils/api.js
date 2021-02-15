@@ -209,3 +209,12 @@ export const getTypesById = (id) =>
       },
     }),
   )
+
+export const getReviews = (id) =>
+  handleResponse(
+    instance.get('/locations/{id}/reviews.json', {
+      params: {
+        id,
+      },
+    }),
+  )
