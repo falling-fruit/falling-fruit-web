@@ -200,3 +200,12 @@ export const getTypes = (
       },
     }),
   )
+
+export const getTypesById = (id) =>
+  handleResponse(
+    instance.get('/types/{id}.json', {
+      params: {
+        id,
+      },
+    }),
+  )
