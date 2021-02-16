@@ -31,64 +31,26 @@ const locations = [
   },
 ]
 
+const DEFAULT_CENTER_LAT = 40.1125785
+
+const DEFAULT_CENTER_LNG = -88.2287926
+
 const DEFAULT_VIEW_STATE = {
-  center: {
-    lat: 40.1125785,
-    lng: -88.2287926,
-  },
+  center: [DEFAULT_CENTER_LAT, DEFAULT_CENTER_LNG],
   zoom: 2,
 }
 
 const MapPage = () => {
-  const [view, setView] = useState(DEFAULT_VIEW_STATE)
-  const [mapRef, setMapRef] = useState(null)
-
-  const onLocationSelect = (locationId) => {
-    console.log(`Location: ${locationId} selected!`)
-  }
-
-  const onClusterSelect = () => {
-    console.log(`You have selected a cluster!`)
-  }
-
-  // TODO: Figure out which callbacks and values we need to store in the view object
-  const onZoomChanged = () => {
-    const newZoom = mapRef.getZoom()
-    setView((prev) => ({
-      ...prev,
-      zoom: newZoom,
-    }))
-  }
-
-  const onCenterChanged = () => {
-    const newCenter = mapRef.getCenter().toJSON()
-    setView((prev) => ({
-      ...prev,
-      center: newCenter,
-    }))
-  }
-
-  const onBoundsChanged = () => {
-    // TODO: Store bounds in the view object?
-    const currBounds = mapRef.getBounds().toJSON()
-    console.log('Bounds changed: ', currBounds)
-  }
+  const [view] = useState(DEFAULT_VIEW_STATE)
 
   return (
     <div className={styles.mapContainer}>
       <Map
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-        onClusterSelect={onClusterSelect}
-        onLocationSelect={onLocationSelect}
-        onZoomChanged={onZoomChanged}
-        onCenterChanged={onCenterChanged}
-        onBoundsChanged={onBoundsChanged}
+        bootstrapURLKeys={{
+          key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
+        }}
         view={view}
         locations={locations}
-        setMapRef={setMapRef}
       />
     </div>
   )

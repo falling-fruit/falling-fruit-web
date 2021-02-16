@@ -1,53 +1,21 @@
 import React from 'react'
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from 'react-google-maps'
-import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer'
+import GoogleMap from 'google-map-react'
+import Marker from '../Marker/Marker.js'
 
-const Map = withScriptjs(
-  withGoogleMap((props) => {
-    const {
-      view,
-      locations,
-      onLocationSelect,
-      onClusterSelect,
-      onZoomChanged,
-      onCenterChanged,
-      onBoundsChanged,
-      setMapRef,
-    } = props
+const Map = (props) => {
+  const { view, bootstrapURLKeys, locations } = props
 
-    return (
-      <GoogleMap
-        // TODO: Figure out if setting the ref like this is only way to get the zoom/center/bounds changes
-        ref={setMapRef}
-        zoom={view.zoom}
-        center={view.center}
-        onZoomChanged={onZoomChanged}
-        onCenterChanged={onCenterChanged}
-        onBoundsChanged={onBoundsChanged}
-      >
-        {
-          // TODO: Figure out why marker cluster thinks there are 6 markers when there are only 3
-        }
-        <MarkerClusterer
-          onClick={onClusterSelect}
-          defaultMinimumClusterSize={5}
-        >
-          {locations.map((location, i) => (
-            <Marker
-              key={i}
-              onClick={() => onLocationSelect(location.id)}
-              position={{ lat: location.lat, lng: location.lng }}
-            />
-          ))}
-        </MarkerClusterer>
-      </GoogleMap>
-    )
-  }),
-)
+  return (
+    <GoogleMap
+      bootstrapURLKeys={bootstrapURLKeys}
+      center={view.center}
+      zoom={view.zoom}
+    >
+      {locations.map((location, i) => (
+        <Marker key={i} lat={location.lat} lng={location.lng} />
+      ))}
+    </GoogleMap>
+  )
+}
 
 export default Map
