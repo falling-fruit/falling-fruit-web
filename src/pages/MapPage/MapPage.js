@@ -35,9 +35,17 @@ const DEFAULT_CENTER_LAT = 40.1125785
 
 const DEFAULT_CENTER_LNG = -88.2287926
 
+const DEFAULT_ZOOM = 2
+
 const DEFAULT_VIEW_STATE = {
   center: [DEFAULT_CENTER_LAT, DEFAULT_CENTER_LNG],
-  zoom: 2,
+  zoom: DEFAULT_ZOOM,
+}
+
+const handleViewChange = ({ center, zoom, marginBounds }) => {
+  console.log('onBoundsChange center: ', center)
+  console.log('onBoundsChange zoom: ', zoom)
+  console.log('onBoundsChange bounds: ', marginBounds)
 }
 
 const MapPage = () => {
@@ -51,6 +59,7 @@ const MapPage = () => {
         }}
         view={view}
         locations={locations}
+        onChange={handleViewChange}
       />
     </div>
   )

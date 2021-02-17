@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Marker.module.scss'
 
-// TODO: Marker styling/icon
+// TODO: Marker styling/icon that Siraj wants
 const Marker = () => <div className={styles.marker} />
 
 export default Marker
