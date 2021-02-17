@@ -40,16 +40,18 @@ const DEFAULT_ZOOM = 2
 const DEFAULT_VIEW_STATE = {
   center: [DEFAULT_CENTER_LAT, DEFAULT_CENTER_LNG],
   zoom: DEFAULT_ZOOM,
-}
-
-const handleViewChange = ({ center, zoom, marginBounds }) => {
-  console.log('onBoundsChange center: ', center)
-  console.log('onBoundsChange zoom: ', zoom)
-  console.log('onBoundsChange bounds: ', marginBounds)
+  bounds: null,
 }
 
 const MapPage = () => {
-  const [view] = useState(DEFAULT_VIEW_STATE)
+  const [view, setView] = useState(DEFAULT_VIEW_STATE)
+
+  const handleViewChange = ({ center, zoom, bounds }) => {
+    console.log('new center: ', center)
+    console.log('new zoom: ', zoom)
+    console.log('new bounds: ', bounds)
+    setView({ center, zoom, bounds })
+  }
 
   return (
     <div className={styles.mapContainer}>
