@@ -11,14 +11,14 @@ import {
 } from '../utils/api'
 
 const ApiWrapperTest = () => {
-  const [clusters, setClusters] = useState({})
-  const [locations, setLocations] = useState({})
-  const [locationById, setLocationById] = useState({})
-  const [reviews, setReviews] = useState({})
-  const [types, setTypes] = useState({})
-  const [typesById, setTypesById] = useState({})
-  const [postedLocations, setPostedLocations] = useState({})
-  const [postedReviws, setPostedReviews] = useState({})
+  const [clusters, setClusters] = useState(null)
+  const [locations, setLocations] = useState(null)
+  const [locationById, setLocationById] = useState(null)
+  const [reviews, setReviews] = useState(null)
+  const [types, setTypes] = useState(null)
+  const [typesById, setTypesById] = useState(null)
+  const [postedLocations, setPostedLocations] = useState(null)
+  const [postedReviws, setPostedReviews] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
