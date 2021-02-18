@@ -53,6 +53,10 @@ const MapPage = () => {
     setView({ center, zoom, bounds })
   }
 
+  const handleMarkerClick = (id, markerProps) => {
+    console.log('Marker clicked: ', id, markerProps)
+  }
+
   return (
     <div className={styles.mapContainer}>
       <Map
@@ -61,7 +65,8 @@ const MapPage = () => {
         }}
         view={view}
         locations={locations}
-        onChange={handleViewChange}
+        handleViewChange={handleViewChange}
+        handleMarkerClick={handleMarkerClick}
       />
     </div>
   )
