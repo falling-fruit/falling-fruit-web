@@ -3,8 +3,8 @@ import styles from './Marker.module.scss'
 
 // TODO: Marker styling/icon that Siraj wants
 const Marker = (props) => {
-  const { onClick, lat, lng } = props
-  return <button className={styles.marker} onClick={() => onClick(lat, lng)} />
+  const { onClick, id } = props
+  return <button className={styles.marker} onClick={() => onClick(id)} />
 }
 
 export default Marker

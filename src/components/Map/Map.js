@@ -36,6 +36,7 @@ const Map = (props) => {
             <Marker
               key={location.id}
               onClick={handleLocationClick}
+              id={location.id}
               lat={location.lat}
               lng={location.lng}
             />

@@ -38,6 +38,11 @@ const clusters = [
     lng: -88.2314734,
     count: 50,
   },
+  {
+    lat: 60.1125785,
+    lng: -88.2278543,
+    count: 25,
+  },
 ]
 
 const DEFAULT_CENTER_LAT = 40.1125785
@@ -59,8 +64,9 @@ const MapPage = () => {
     setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
-  const handleLocationClick = (lat, lng) => {
-    console.log('Location clicked: ', lat, lng)
+  const handleLocationClick = (id) => {
+    // TODO: Retrieve location data from server
+    console.log('Location clicked: ', id)
   }
 
   const handleClusterClick = (lat, lng) => {
