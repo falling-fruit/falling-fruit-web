@@ -1,6 +1,7 @@
-import { PageTabs, TabList, Tab, TabPanels, TabPanel } from '../ui/PageTabs'
-import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
 import { ListUl } from '@styled-icons/boxicons-regular'
+import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
+
+import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 
 const ExamplePage = () => (
   <PageTabs>

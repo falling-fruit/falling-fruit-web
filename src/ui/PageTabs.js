@@ -1,7 +1,8 @@
-import styled from 'styled-components'
-import { Tabs, TabPanels, TabPanel, TabList, Tab } from '@reach/tabs'
 import '@reach/tabs/styles.css'
+
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
 import { StyledIconBase } from '@styled-icons/styled-icon'
+import styled from 'styled-components'
 
 const PageTabs = styled(Tabs)`
   color: ${({ theme }) => theme.textColor};
@@ -39,4 +40,4 @@ const PageTabs = styled(Tabs)`
   }
 `
 
-export { PageTabs, TabPanels, TabPanel, TabList, Tab }
+export { PageTabs, Tab, TabList, TabPanel, TabPanels }
