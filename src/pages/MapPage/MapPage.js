@@ -34,19 +34,9 @@ const locations = [
 // Mock cluster data
 const clusters = [
   {
-    lat: 42.1127151,
-    lng: -87.2314734,
-    count: 100,
-  },
-  {
-    lat: 46.1125785,
-    lng: -83.2287926,
-    count: 200,
-  },
-  {
-    lat: 35.112657,
-    lng: -85.2278543,
-    count: 300,
+    lat: 40.1127151,
+    lng: -88.2314734,
+    count: 50,
   },
 ]
 
@@ -69,11 +59,21 @@ const MapPage = () => {
     console.log('new center: ', center)
     console.log('new zoom: ', zoom)
     console.log('new bounds: ', bounds)
-    setView({ center, zoom, bounds })
   }
 
-  const handleMarkerClick = (id, markerProps) => {
-    console.log('Marker clicked: ', id, markerProps)
+  const handleMarkerClick = (lat, lng) => {
+    console.log('Marker clicked: ', lat, lng)
+  }
+
+  const handleClusterClick = (lat, lng) => {
+    setView((prevState) => ({
+      ...prevState,
+      center: [lat, lng],
+      zoom: prevState.zoom + 2,
+    }))
+    console.log('view: ', view)
+
+    console.log('Cluster clicked: ', lat, lng)
   }
 
   return (
@@ -87,6 +87,7 @@ const MapPage = () => {
         clusters={clusters}
         handleViewChange={handleViewChange}
         handleMarkerClick={handleMarkerClick}
+        handleClusterClick={handleClusterClick}
       />
     </div>
   )
