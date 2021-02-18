@@ -3,6 +3,8 @@ import GoogleMap from 'google-map-react'
 import Marker from '../Marker/Marker.js'
 import Cluster from '../Cluster/Cluster.js'
 
+const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+
 const Map = (props) => {
   const {
     bootstrapURLKeys,
@@ -21,13 +23,19 @@ const Map = (props) => {
       onChange={handleViewChange}
       onChildClick={handleMarkerClick}
     >
-      {locations.map((location) => (
+      {view.zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT
+        ? locations.map((location) => (
+            <Marker key={location.id} lat={location.lat} lng={location.lng} />
+          ))
+        : clusters.map((cluster, index) => (
+            <Cluster key={index} lat={cluster.lat} lng={cluster.lng} />
+          ))}
+      {/* 
+      {view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT && locations.map((location) => (
         <Marker key={location.id} lat={location.lat} lng={location.lng} />
       ))}
 
-      {clusters.map((cluster, index) => (
-        <Cluster key={index} lat={cluster.lat} lng={cluster.lng} />
-      ))}
+      {} */}
     </GoogleMap>
   )
 }
