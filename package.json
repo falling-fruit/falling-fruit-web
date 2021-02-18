@@ -8,23 +8,27 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "semantic-ui-react": "^2.0.3",
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
+    "@craco/craco": "^6.1.1",
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
+    "@semantic-ui-react/craco-less": "^1.2.1",
     "eslint": "^7.2.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.3",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "semantic-ui-less": "^2.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
     "lint": "eslint --fix src -c .eslintrc.json --ext js,jsx",
     "format": "prettier --write \"./**/*.{js,jsx,css,scss,json,md}\"",
     "format:check": "prettier --check \"./**/*.{js,jsx,css,scss,json,md}\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "browserslist": {
     "production": [
