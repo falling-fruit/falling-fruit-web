@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './MapPage.module.scss'
 import Map from '../../components/Map/Map.js'
 
@@ -45,6 +45,8 @@ const clusters = [
   },
 ]
 
+const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+
 const DEFAULT_CENTER_LAT = 40.1125785
 
 const DEFAULT_CENTER_LNG = -88.2287926
@@ -59,13 +61,27 @@ const DEFAULT_VIEW_STATE = {
 
 const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
+  const [markerData, setMarkerData] = useState(null)
+  const [showLocations, setShowLocations] = useState(false)
+
+  useEffect(() => {
+    if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+      // TODO: Fetch cluster data from server
+      setMarkerData(clusters)
+      setShowLocations(false)
+    } else {
+      // TODO: Fetch location data from server
+      setMarkerData(locations)
+      setShowLocations(true)
+    }
+  }, [view.zoom])
 
   const handleViewChange = ({ center, zoom, bounds }) => {
     setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
   const handleLocationClick = (id) => {
-    // TODO: Retrieve location data from server
+    // TODO: Fetch location data from server
     console.log('Location clicked: ', id)
   }
 
@@ -79,17 +95,19 @@ const MapPage = () => {
 
   return (
     <div className={styles.mapContainer}>
-      <Map
-        bootstrapURLKeys={{
-          key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
-        }}
-        view={view}
-        locations={locations}
-        clusters={clusters}
-        handleViewChange={handleViewChange}
-        handleLocationClick={handleLocationClick}
-        handleClusterClick={handleClusterClick}
-      />
+      {markerData && (
+        <Map
+          bootstrapURLKeys={{
+            key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
+          }}
+          view={view}
+          markerData={markerData}
+          showLocations={showLocations}
+          handleViewChange={handleViewChange}
+          handleLocationClick={handleLocationClick}
+          handleClusterClick={handleClusterClick}
+        />
+      )}
     </div>
   )
 }
