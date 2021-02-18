@@ -56,13 +56,11 @@ const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
 
   const handleViewChange = ({ center, zoom, bounds }) => {
-    console.log('new center: ', center)
-    console.log('new zoom: ', zoom)
-    console.log('new bounds: ', bounds)
+    setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
-  const handleMarkerClick = (lat, lng) => {
-    console.log('Marker clicked: ', lat, lng)
+  const handleLocationClick = (lat, lng) => {
+    console.log('Location clicked: ', lat, lng)
   }
 
   const handleClusterClick = (lat, lng) => {
@@ -71,9 +69,6 @@ const MapPage = () => {
       center: [lat, lng],
       zoom: prevState.zoom + 2,
     }))
-    console.log('view: ', view)
-
-    console.log('Cluster clicked: ', lat, lng)
   }
 
   return (
@@ -86,7 +81,7 @@ const MapPage = () => {
         locations={locations}
         clusters={clusters}
         handleViewChange={handleViewChange}
-        handleMarkerClick={handleMarkerClick}
+        handleLocationClick={handleLocationClick}
         handleClusterClick={handleClusterClick}
       />
     </div>

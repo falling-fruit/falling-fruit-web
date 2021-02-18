@@ -9,11 +9,11 @@ const Map = (props) => {
   const {
     bootstrapURLKeys,
     view,
-    locations,
     clusters,
+    locations,
     handleViewChange,
     handleClusterClick,
-    handleMarkerClick,
+    handleLocationClick,
   } = props
 
   return (
@@ -23,24 +23,21 @@ const Map = (props) => {
       zoom={view.zoom}
       onChange={handleViewChange}
     >
-      {
-        //TODO: Zoom back out should remove markers and render clusters
-      }
-      {view.zoom > VISIBLE_CLUSTER_ZOOM_LIMIT
-        ? locations.map((location) => (
-            <Marker
-              onClick={handleMarkerClick}
-              key={location.id}
-              lat={location.lat}
-              lng={location.lng}
-            />
-          ))
-        : clusters.map((cluster, index) => (
+      {view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
+        ? clusters.map((cluster, index) => (
             <Cluster
               key={index}
               onClick={handleClusterClick}
               lat={cluster.lat}
               lng={cluster.lng}
+            />
+          ))
+        : locations.map((location) => (
+            <Marker
+              key={location.id}
+              onClick={handleLocationClick}
+              lat={location.lat}
+              lng={location.lng}
             />
           ))}
     </GoogleMap>
