@@ -31,6 +31,25 @@ const locations = [
   },
 ]
 
+// Mock cluster data
+const clusters = [
+  {
+    lat: 42.1127151,
+    lng: -87.2314734,
+    count: 100,
+  },
+  {
+    lat: 46.1125785,
+    lng: -83.2287926,
+    count: 200,
+  },
+  {
+    lat: 35.112657,
+    lng: -85.2278543,
+    count: 300,
+  },
+]
+
 const DEFAULT_CENTER_LAT = 40.1125785
 
 const DEFAULT_CENTER_LNG = -88.2287926
@@ -65,6 +84,7 @@ const MapPage = () => {
         }}
         view={view}
         locations={locations}
+        clusters={clusters}
         handleViewChange={handleViewChange}
         handleMarkerClick={handleMarkerClick}
       />
