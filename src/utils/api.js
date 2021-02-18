@@ -37,11 +37,12 @@ export const LOCALE = {
   NL: 'nl',
   PL: 'pl',
 }
+Object.freeze(LOCALE)
 
 export const getClusters = (
   { swlng, nelng, swlat, nelat },
   zoom = 0,
-  muni = false,
+  includeMunicipal = false,
   types = null,
 ) =>
   handleResponse(
@@ -52,7 +53,7 @@ export const getClusters = (
         swlat,
         nelat,
         zoom,
-        muni: muni ? 1 : 0,
+        muni: includeMunicipal ? 1 : 0,
         t: types,
       },
     }),
@@ -77,7 +78,7 @@ export const getLocations = (
         nelng,
         swlat,
         nelat,
-        municipal: includeMunicipal ? 1 : 0,
+        muni: includeMunicipal ? 1 : 0,
         c: categories,
         t: types,
         invasive: invasive ? 1 : 0,
@@ -107,7 +108,7 @@ export const postLocations = (
   yield_rating = 0,
   observed_on = null,
   photo_file_name = null,
-  photo_data,
+  { photo_data } = null,
 ) =>
   handleResponse(
     instance.post('/locations.json', photo_data, {
@@ -134,9 +135,8 @@ export const postLocations = (
 
 export const getLocationById = (id, locale = LOCALE.en) =>
   handleResponse(
-    instance.get('/locations/{id}.json', {
+    instance.get(`/locations/${id}.json`, {
       params: {
-        id,
         locale,
       },
     }),
@@ -155,7 +155,7 @@ export const editLocation = (
   access = 0,
 ) =>
   handleResponse(
-    instance.post('/locations/{id}.json', null, {
+    instance.post(`/locations/${id}.json`, null, {
       params: {
         lng,
         lat,
@@ -172,10 +172,7 @@ export const editLocation = (
   )
 
 export const getTypes = (
-  swlng = null,
-  nelng = null,
-  swlat = null,
-  nelat = null,
+  { swlng, nelng, swlat, nelat } = 0,
   zoom = 0,
   muni = false,
   locale = LOCALE.EN,
@@ -205,20 +202,12 @@ export const getTypes = (
   )
 
 export const getTypesById = (id) =>
-  handleResponse(
-    instance.get('/types/{id}.json', {
-      params: {
-        id,
-      },
-    }),
-  )
+  handleResponse(instance.get(`/types/${id}.json`))
 
 export const getReviews = (id) =>
   handleResponse(
-    instance.get('/locations/{id}/reviews.json', {
-      params: {
-        id,
-      },
+    instance.get(`/locations/${id}/reviews.json`, {
+      params: {},
     }),
   )
 
@@ -231,12 +220,11 @@ export const postReview = (
   yield_rating = null,
   observed_on = null,
   photo_file_name = null,
-  photo_data,
+  { photo_data },
 ) =>
   handleResponse(
-    instance.post('/locations/{id}/review.json', photo_data, {
+    instance.post(`/locations/${id}/review.json`, photo_data, {
       params: {
-        id,
         author,
         comment,
         fruiting,
