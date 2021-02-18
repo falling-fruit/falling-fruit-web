@@ -172,7 +172,7 @@ export const editLocation = (
   )
 
 export const getTypes = (
-  { swlng, nelng, swlat, nelat },
+  { swlng, nelng, swlat, nelat } = 0,
   zoom = 0,
   muni = false,
   locale = LOCALE.EN,
