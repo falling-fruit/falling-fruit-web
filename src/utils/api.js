@@ -196,7 +196,7 @@ export const getTypes = (
         urls: urls ? 1 : 0,
         categories,
         uncategorized: uncategorized ? 1 : 0,
-        pending: pending ? 0 : 1,
+        pending: pending ? 1 : 0,
       },
     }),
   )
