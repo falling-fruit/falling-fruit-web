@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Lato', sans-serif;
+    color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
   }
@@ -15,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   h2 { font-size: 22.75px; }
   h3 { font-size: 18px; }
   h4 { 
-    font-weight: normal
+    font-weight: normal;
     font-size: 18px;
   }
   h5 { font-size: 14px; }
