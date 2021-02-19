@@ -2,6 +2,8 @@
 
 import axios from 'axios'
 
+import { paths } from './api-schema'
+
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   params: {
@@ -26,6 +28,8 @@ const handleResponse = (request) =>
     },
   )
 
+// Since all of the locale values are in the TypeScript schema now, we don't
+// need this "enum" anymore. Please delete it!
 export const LOCALE = {
   EN: 'en',
   DE: 'de',
@@ -40,22 +44,11 @@ export const LOCALE = {
 Object.freeze(LOCALE)
 
 export const getClusters = (
-  { swlng, nelng, swlat, nelat },
-  zoom = 0,
-  includeMunicipal = false,
-  types = null,
+  params: paths['/clusters.json']['get']['parameters']['query'],
 ) =>
   handleResponse(
     instance.get('/clusters.json', {
-      params: {
-        swlng,
-        nelng,
-        swlat,
-        nelat,
-        zoom,
-        muni: includeMunicipal ? 1 : 0,
-        t: types,
-      },
+      params,
     }),
   )
 
@@ -108,6 +101,7 @@ export const postLocations = (
   yield_rating = 0,
   observed_on = null,
   photo_file_name = null,
+  // See below for how to handle photo_data.
   { photo_data } = null,
 ) =>
   handleResponse(
@@ -133,12 +127,13 @@ export const postLocations = (
     }),
   )
 
-export const getLocationById = (id, locale = LOCALE.en) =>
+export const getLocationById = (
+  id: paths['/locations/{id}.json']['get']['parameters']['path']['id'],
+  params: paths['/locations/{id}.json']['get']['parameters']['query'],
+) =>
   handleResponse(
     instance.get(`/locations/${id}.json`, {
-      params: {
-        locale,
-      },
+      params,
     }),
   )
 
@@ -172,7 +167,7 @@ export const editLocation = (
   )
 
 export const getTypes = (
-  { swlng, nelng, swlat, nelat } = 0,
+  { swlng, nelng, swlat, nelat },
   zoom = 0,
   muni = false,
   locale = LOCALE.EN,
@@ -220,6 +215,17 @@ export const postReview = (
   yield_rating = null,
   observed_on = null,
   photo_file_name = null,
+  // You will want to take photo_data in the same way you take id, with a few differences:
+  // 1. Type it as photo_data: File
+  // 2. Send it as multi-part form data. See here: https://stackoverflow.com/a/43014086/2411756
+  //    (for formData.append, use "photo_data" for the 1st argument, and the actual argument photo_data for the 2nd argument)
+  // 3. Make sure you pass the correct headers in Axios!
+  // 4. Pass formData directly as the 2nd argument of instance.post.
+  // If you're having trouble, please read through these links:
+  // - https://developer.mozilla.org/en-US/docs/Web/API/FormData
+  // - https://developer.mozilla.org/en-US/docs/Web/API/FormData/append
+  // You will need to give this function an actual body, i.e. add braces after => and return handleResponse after
+  // you finish building the formData object.
   { photo_data },
 ) =>
   handleResponse(
