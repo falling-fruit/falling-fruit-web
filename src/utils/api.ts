@@ -43,6 +43,7 @@ export const LOCALE = {
 }
 Object.freeze(LOCALE)
 
+// Follow this example!
 export const getClusters = (
   params: paths['/clusters.json']['get']['parameters']['query'],
 ) =>
@@ -127,6 +128,7 @@ export const postLocations = (
     }),
   )
 
+// Follow this example!
 export const getLocationById = (
   id: paths['/locations/{id}.json']['get']['parameters']['path']['id'],
   params: paths['/locations/{id}.json']['get']['parameters']['query'],
