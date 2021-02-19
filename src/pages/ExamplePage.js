@@ -1,7 +1,13 @@
 import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
 
-import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
+import {
+  PageTabs,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+} from '../components/ui/PageTabs'
 
 const ExamplePage = () => (
   <PageTabs>
