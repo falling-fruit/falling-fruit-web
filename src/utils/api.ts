@@ -218,11 +218,11 @@ export const postReview = (
   observed_on = null,
   photo_file_name = null,
   // You will want to take photo_data in the same way you take id, with a few differences:
-  // 1. Type it as photo_data: File
+  // 1. Type it as photo_data?: File (the ? makes it optional)
   // 2. Send it as multi-part form data. See here: https://stackoverflow.com/a/43014086/2411756
   //    (for formData.append, use "photo_data" for the 1st argument, and the actual argument photo_data for the 2nd argument)
   // 3. Make sure you pass the correct headers in Axios!
-  // 4. Pass formData directly as the 2nd argument of instance.post.
+  // 4. Pass formData directly as the 2nd argument of instance.post. However, if (!photo_data), pass null instead!
   // If you're having trouble, please read through these links:
   // - https://developer.mozilla.org/en-US/docs/Web/API/FormData
   // - https://developer.mozilla.org/en-US/docs/Web/API/FormData/append
