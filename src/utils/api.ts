@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 import { paths } from './api-schema'
 
@@ -11,7 +11,7 @@ const instance = axios.create({
   },
 })
 
-const handleResponse = (request) =>
+const handleResponse = (request: Promise<AxiosResponse<any>>) =>
   request.then(
     (res) => {
       // v0.2 API handles client-side parameter errors with
