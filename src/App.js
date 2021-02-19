@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import ExamplePage from './pages/ExamplePage'
 import Types from './pages/Types'
-import GlobalStyle, { theme } from './ui/GlobalStyle'
 
 const App = () => (
   <ThemeProvider theme={theme}>
