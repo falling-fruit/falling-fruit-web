@@ -1,6 +1,7 @@
 import { ListUl } from '@styled-icons/boxicons-regular'
-import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
+import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 
+import Button from '../components/ui/Button'
 import {
   PageTabs,
   Tab,
@@ -14,6 +15,12 @@ const ExamplePage = () => (
     <TabPanels>
       <TabPanel>
         <p>Settings</p>
+        <Button icon={<Star />}>Review</Button>
+        <Button icon={<Flag />} secondary>
+          Report
+        </Button>
+        <br />
+        <br />
       </TabPanel>
       <TabPanel>
         <p>Map</p>
