@@ -9,14 +9,14 @@ const PageTabs = styled(Tabs)`
 
   [data-reach-tab-list] {
     display: flex;
-    background: white;
+    background: ${({ theme }) => theme.background};
   }
 
   [data-reach-tab] {
     flex-grow: 1;
-    background: white;
+    background: ${({ theme }) => theme.background};
     height: 86px;
-    border-top: 8px solid #e0e1e2;
+    border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
     border-bottom: none;
   }
 
@@ -27,15 +27,15 @@ const PageTabs = styled(Tabs)`
   }
 
   :not([data-selected]) ${StyledIconBase} {
-    color: #e0e1e2;
+    color: ${({ theme }) => theme.secondaryBackground};
   }
 
   [data-selected] {
-    color: #ffa41b;
-    border-top-color: #ffa41b;
+    color: ${({ theme }) => theme.orange};
+    border-top-color: ${({ theme }) => theme.orange};
 
     ${StyledIconBase} {
-      color: #ffa41b;
+      color: ${({ theme }) => theme.orange};
     }
   }
 `
