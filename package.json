@@ -30,9 +30,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "lint": "eslint --fix src -c .eslintrc.json --ext js,jsx",
-    "format": "prettier --write \"./**/*.{js,jsx,css,scss,json,md}\"",
-    "format:check": "prettier --check \"./**/*.{js,jsx,css,scss,json,md}\"",
+    "lint": "eslint --fix src --ext js,jsx,ts,tsx",
+    "lint:check": "eslint src --ext js,jsx,ts,tsx",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
+    "format:check": "prettier --check \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -57,10 +58,10 @@
     }
   },
   "lint-staged": {
-    "./**/*.{js,css,scss,json,md,jsx}": [
+    "./**/*.{js,jsx,ts,tsx,css,scss,json,md}": [
       "prettier --write"
     ],
-    "./**/*.{js,jsx}": [
+    "./**/*.{js,jsx,ts,tsx}": [
       "eslint --fix -c .eslintrc.json"
     ]
   }
