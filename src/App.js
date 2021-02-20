@@ -1,19 +1,29 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import ExamplePage from './pages/ExamplePage'
+import Map from './pages/MapPage/MapPage'
 import Types from './pages/Types'
-import MapPage from './pages/MapPage/MapPage.js'
 
 const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/types">
-        <Types />
-      </Route>
-      <Route exact path="/">
-        <MapPage />
-      </Route>
-      <Route>Not found</Route>
-    </Switch>
-  </Router>
+  <ThemeProvider theme={theme}>
+    <Router>
+      <Switch>
+        <Route exact path="/types">
+          <Types />
+        </Route>
+        <Route exact path="/">
+          <Map />
+        </Route>
+        <Route exact path="/examplePage">
+          <ExamplePage />
+        </Route>
+        <Route>Not found</Route>
+      </Switch>
+    </Router>
+    <GlobalStyle />
+  </ThemeProvider>
 )
 
 export default App

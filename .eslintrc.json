@@ -3,9 +3,11 @@
     "plugin:@hack4impact-uiuc/base",
     "plugin:@hack4impact-uiuc/react"
   ],
-  "plugins": ["@hack4impact-uiuc"],
+  "plugins": ["@hack4impact-uiuc", "simple-import-sort"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   }
 }

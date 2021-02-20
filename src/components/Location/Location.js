@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styles from './Location.module.scss'
 
 // TODO: Location styling/icon that Siraj wants

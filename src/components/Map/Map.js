@@ -1,7 +1,8 @@
-import React from 'react'
 import GoogleMap from 'google-map-react'
-import Location from '../Location/Location.js'
+import React from 'react'
+
 import Cluster from '../Cluster/Cluster.js'
+import Location from '../Location/Location.js'
 
 const Map = (props) => {
   const {
