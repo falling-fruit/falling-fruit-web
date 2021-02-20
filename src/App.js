@@ -2,8 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import ExamplePage from './pages/ExamplePage'
-import Map from './pages/MapPage/MapPage'
+import HomePage from './pages/HomePage'
 import Types from './pages/Types'
 
 const App = () => (
@@ -14,10 +13,7 @@ const App = () => (
           <Types />
         </Route>
         <Route exact path="/">
-          <Map />
-        </Route>
-        <Route exact path="/examplePage">
-          <ExamplePage />
+          <HomePage />
         </Route>
         <Route>Not found</Route>
       </Switch>
