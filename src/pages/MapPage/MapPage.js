@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import styles from './MapPage.module.scss'
+import React, { useEffect, useState } from 'react'
+
 import Map from '../../components/Map/Map.js'
+import styles from './MapPage.module.scss'
 
 // Mock location data
 const locations = [
