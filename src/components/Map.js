@@ -11,9 +11,10 @@ const Map = (props) => {
     view,
     markerData,
     showLocations,
-    handleViewChange,
-    handleClusterClick,
-    handleLocationClick,
+    onZoomAnimationEnd,
+    onDragEnd,
+    onClusterClick,
+    onLocationClick,
   } = props
 
   return (
@@ -21,13 +22,14 @@ const Map = (props) => {
       bootstrapURLKeys={bootstrapURLKeys}
       center={view.center}
       zoom={view.zoom}
-      onChange={handleViewChange}
+      onZoomAnimationEnd={onZoomAnimationEnd}
+      onDragEnd={onDragEnd}
     >
       {markerData.map((marker, index) =>
         showLocations ? (
           <Location
             key={marker.id}
-            onClick={handleLocationClick}
+            onClick={onLocationClick}
             id={marker.id}
             lat={marker.lat}
             lng={marker.lng}
@@ -35,7 +37,7 @@ const Map = (props) => {
         ) : (
           <Cluster
             key={index}
-            onClick={handleClusterClick}
+            onClick={onClusterClick}
             lat={marker.lat}
             lng={marker.lng}
             count={marker.count}
@@ -51,9 +53,10 @@ Map.propTypes = {
   view: PropTypes.object.isRequired,
   markerData: PropTypes.arrayOf(PropTypes.object).isRequired,
   showLocations: PropTypes.bool.isRequired,
-  handleViewChange: PropTypes.func.isRequired,
-  handleClusterClick: PropTypes.func.isRequired,
-  handleLocationClick: PropTypes.func.isRequired,
+  onZoomAnimationEnd: PropTypes.func.isRequired,
+  onDragEnd: PropTypes.func.isRequired,
+  onClusterClick: PropTypes.func.isRequired,
+  onLocationClick: PropTypes.func.isRequired,
 }
 
 export default Map

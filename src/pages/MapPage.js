@@ -82,17 +82,26 @@ const MapPage = () => {
     }
   }, [view.zoom])
 
-  const handleViewChange = ({ center, zoom, bounds }) => {
-    console.log('handleViewChange')
-    setView({ center: [center.lat, center.lng], zoom, bounds })
+  const onZoomAnimationEnd = (zoom) => {
+    setView((prevState) => ({
+      ...prevState,
+      zoom,
+    }))
   }
 
-  const handleLocationClick = (id) => {
+  const onDragEnd = ({ center }) => {
+    setView((prevState) => ({
+      ...prevState,
+      center: [center.lat, center.lng],
+    }))
+  }
+
+  const onLocationClick = (id) => {
     // TODO: Fetch location data from server
     console.log('Location clicked: ', id)
   }
 
-  const handleClusterClick = (lat, lng) => {
+  const onClusterClick = (lat, lng) => {
     setView((prevState) => ({
       ...prevState,
       center: [lat, lng],
@@ -109,9 +118,10 @@ const MapPage = () => {
         view={view}
         markerData={markerData}
         showLocations={showLocations}
-        handleViewChange={handleViewChange}
-        handleLocationClick={handleLocationClick}
-        handleClusterClick={handleClusterClick}
+        onZoomAnimationEnd={onZoomAnimationEnd}
+        onDragEnd={onDragEnd}
+        onLocationClick={onLocationClick}
+        onClusterClick={onClusterClick}
       />
     </MapContainer>
   )
