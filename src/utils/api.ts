@@ -177,24 +177,22 @@ export const getTypes = (
     }),
   )
 
-export const getTypesById = (id) =>
-  handleResponse(instance.get(`/types/${id}.json`))
-
-export const getReviews = (id) =>
+export const getTypesById = (
+  id: paths['/types/{id}.json']['get']['parameters']['path']['id'],
+) =>
   handleResponse(
-    instance.get(`/locations/${id}/reviews.json`, {
-      params: {},
-    }),
+    instance.get(`/types/${id}.json`)
+  )
+
+export const getReviews = (
+  id: paths['/locations/{id}/reviews.json']['get']['parameters']['path']['id'],
+) =>
+  handleResponse(
+    instance.get(`/locations/${id}/reviews.json`)
   )
 
 export const postReview = (
-  id,
-  author = null,
-  comment = null,
-  fruiting = null,
-  quality_rating = null,
-  yield_rating = null,
-  observed_on = null,
+  id: paths['/locations/{id}/review.json']['post']['parameters']['path']['id'],
   photo_file_name = null,
   // You will want to take photo_data in the same way you take id, with a few differences:
   // 1. Type it as photo_data?: File (the ? makes it optional)
@@ -207,7 +205,7 @@ export const postReview = (
   // - https://developer.mozilla.org/en-US/docs/Web/API/FormData/append
   // You will need to give this function an actual body, i.e. add braces after => and return handleResponse after
   // you finish building the formData object.
-  { photo_data },
+  photo_data
 ) =>
   handleResponse(
     instance.post(`/locations/${id}/review.json`, photo_data, {
