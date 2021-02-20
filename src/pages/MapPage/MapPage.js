@@ -36,7 +36,7 @@ const clusters = [
   {
     lat: 40.1127151,
     lng: -88.2314734,
-    count: 50,
+    count: 1000,
   },
   {
     lat: 60.1125785,
@@ -51,7 +51,7 @@ const DEFAULT_CENTER_LAT = 40.1125785
 
 const DEFAULT_CENTER_LNG = -88.2287926
 
-const DEFAULT_ZOOM = 2
+const DEFAULT_ZOOM = 1
 
 const DEFAULT_VIEW_STATE = {
   center: [DEFAULT_CENTER_LAT, DEFAULT_CENTER_LNG],

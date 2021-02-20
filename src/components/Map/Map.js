@@ -36,6 +36,7 @@ const Map = (props) => {
             onClick={handleClusterClick}
             lat={marker.lat}
             lng={marker.lng}
+            count={marker.count}
           />
         ),
       )}
