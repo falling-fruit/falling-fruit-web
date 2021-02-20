@@ -27,6 +27,14 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
       return null
     },
   )
+const fileToFormData = (photo_data: File | undefined) => {
+  if (photo_data != null) {
+    var formData = new FormData();
+    return formData.append("photo_data", photo_data)
+  } 
+  return null;
+  
+};
 
 // Follow this example!
 export const getClusters = (
@@ -50,12 +58,12 @@ export const getLocations = (
 
 export const postLocations = (
   params: paths['/locations.json']['post']['parameters']['query'],
-  photo_data?: File['/locations.json']['post']['parameters']['query'] ,
+  photo_data?: File,
 ) => {
-  var formData = new FormData();
-  formData.append("photo_data", photo_data)
+  var formData = fileToFormData(photo_data);
+  
   return handleResponse(
-    instance.post('/locations.json', photo_data, {
+    instance.post('/locations.json', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -63,6 +71,18 @@ export const postLocations = (
     }),
   )
 }
+
+// You will want to take photo_data in the same way you take id, with a few differences:
+  // 1. Type it as photo_data?: File (the ? makes it optional)
+  // 2. Send it as multi-part form data. See here: https://stackoverflow.com/a/43014086/2411756
+  //    (for formData.append, use "photo_data" for the 1st argument, and the actual argument photo_data for the 2nd argument)
+  // 3. Make sure you pass the correct headers in Axios!
+  // 4. Pass formData directly as the 2nd argument of instance.post. However, if (!photo_data), pass null instead!
+  // If you're having trouble, please read through these links:
+  // - https://developer.mozilla.org/en-US/docs/Web/API/FormData
+  // - https://developer.mozilla.org/en-US/docs/Web/API/FormData/append
+  // You will need to give this function an actual body, i.e. add braces after => and return handleResponse after
+  // you finish building the formData object.
   
 export const getLocationById = (
   id: paths['/locations/{id}.json']['get']['parameters']['path']['id'],
