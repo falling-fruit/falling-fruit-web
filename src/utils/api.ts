@@ -27,8 +27,8 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
       return null
     },
   )
-const fileToFormData = (photo_data: File | undefined) => {
-  if (photo_data !== null) {
+const fileToFormData = (photo_data: string | Blob | undefined) => {
+  if (photo_data !== undefined) {
     var formData = new FormData();
     return formData.append("photo_data", photo_data)
   } 
