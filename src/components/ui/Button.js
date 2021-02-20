@@ -4,7 +4,8 @@ const StyledButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-items: center;
-
+  height: 42px;
+  font-size: 16px;
   color: ${({ secondary, theme }) =>
     secondary ? theme.orange : theme.background};
   font-weight: 700;
@@ -13,7 +14,7 @@ const StyledButton = styled.button`
   border: 2px solid ${({ theme }) => theme.orange};
   box-sizing: border-box;
   border-radius: 100px;
-  padding: 14px 11px;
+  padding: 0 14px;
   cursor: pointer;
 
   svg {
