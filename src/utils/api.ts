@@ -85,37 +85,20 @@ export const editLocation = (
   )
 
 export const getTypes = (
-  { swlng, nelng, swlat, nelat },
-  zoom = 0,
-  muni = false,
-  locale = LOCALE.EN,
-  types = null,
-  urls = false,
-  categories = null,
-  uncategorized = false,
-  pending = false,
+  params: paths['/types.json']['get']['parameters']['query'],
 ) =>
   handleResponse(
     instance.get('/types.json', {
-      params: {
-        swlng,
-        nelng,
-        swlat,
-        nelat,
-        zoom,
-        muni: muni ? 1 : 0,
-        locale,
-        t: types,
-        urls: urls ? 1 : 0,
-        categories,
-        uncategorized: uncategorized ? 1 : 0,
-        pending: pending ? 1 : 0,
-      },
+      params,
     }),
   )
 
-export const getTypesById = (id) =>
-  handleResponse(instance.get(`/types/${id}.json`))
+export const getTypesById = (
+  id: paths['/types/{id}.json']['get']['parameters']['path']['id'],
+) =>
+  handleResponse(
+    instance.get(`/types/${id}.json`)
+  )
 
 export const getReviews = (id) =>
   handleResponse(
