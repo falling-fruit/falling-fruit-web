@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './Cluster.module.scss'
 
 const MIN_CLUSTER_DIAMETER = 30
@@ -25,6 +26,13 @@ const Cluster = (props) => {
       <p>{count}</p>
     </button>
   )
+}
+
+Cluster.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
 }
 
 export default Cluster

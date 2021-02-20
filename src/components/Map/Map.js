@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import GoogleMap from 'google-map-react'
 import Location from '../Location/Location.js'
 import Cluster from '../Cluster/Cluster.js'
@@ -42,6 +43,16 @@ const Map = (props) => {
       )}
     </GoogleMap>
   )
+}
+
+Map.propTypes = {
+  bootstrapURLKeys: PropTypes.object.isRequired,
+  view: PropTypes.object.isRequired,
+  markerData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showLocations: PropTypes.bool.isRequired,
+  handleViewChange: PropTypes.func.isRequired,
+  handleClusterClick: PropTypes.func.isRequired,
+  handleLocationClick: PropTypes.func.isRequired,
 }
 
 export default Map

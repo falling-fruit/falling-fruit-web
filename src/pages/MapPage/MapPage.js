@@ -61,7 +61,7 @@ const DEFAULT_VIEW_STATE = {
 
 const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
-  const [markerData, setMarkerData] = useState(null)
+  const [markerData, setMarkerData] = useState([])
   const [showLocations, setShowLocations] = useState(false)
 
   useEffect(() => {
@@ -95,19 +95,17 @@ const MapPage = () => {
 
   return (
     <div className={styles.mapContainer}>
-      {markerData && (
-        <Map
-          bootstrapURLKeys={{
-            key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
-          }}
-          view={view}
-          markerData={markerData}
-          showLocations={showLocations}
-          handleViewChange={handleViewChange}
-          handleLocationClick={handleLocationClick}
-          handleClusterClick={handleClusterClick}
-        />
-      )}
+      <Map
+        bootstrapURLKeys={{
+          key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
+        }}
+        view={view}
+        markerData={markerData}
+        showLocations={showLocations}
+        handleViewChange={handleViewChange}
+        handleLocationClick={handleLocationClick}
+        handleClusterClick={handleClusterClick}
+      />
     </div>
   )
 }
