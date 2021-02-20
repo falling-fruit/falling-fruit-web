@@ -1,5 +1,6 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './Cluster.module.scss'
 
 const MIN_CLUSTER_DIAMETER = 30

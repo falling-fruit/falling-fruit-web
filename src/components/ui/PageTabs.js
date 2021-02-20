@@ -5,6 +5,11 @@ import { StyledIconBase } from '@styled-icons/styled-icon'
 import styled from 'styled-components'
 
 const PageTabs = styled(Tabs)`
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+
   [data-reach-tab-list] {
     display: flex;
     background: ${({ theme }) => theme.background};

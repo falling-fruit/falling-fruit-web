@@ -1,5 +1,4 @@
-// TODO: Fix height so tabs and map fit together nicely
 .mapContainer {
-  height: 90vh;
+  height: calc(100vh - 86px);
   width: 100%;
 }
