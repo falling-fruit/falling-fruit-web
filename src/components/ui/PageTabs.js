@@ -17,7 +17,7 @@ const PageTabs = styled(Tabs)`
     [data-reach-tab] {
       flex-grow: 1;
       background: ${({ theme }) => theme.background};
-      height: 86px;
+      height: ${({ theme }) => theme.tabsHeight};
       border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
       border-bottom: none;
 

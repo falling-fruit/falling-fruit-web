@@ -1,15 +1,26 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
-import styles from './Cluster.module.scss'
+import styled from 'styled-components'
 
 const MIN_CLUSTER_DIAMETER = 30
 
 const MAX_CLUSTER_DIAMETER = 100
 
 // TODO: Cluster styling/icon that Siraj wants
+const ClusterContainer = styled.button`
+  width: ${(props) => props.diameter}px;
+  height: ${(props) => props.diameter}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: rgba(35, 74, 201, 0.214);
+  transform: translate(-50%, -50%);
+`
+
 const Cluster = (props) => {
   const { onClick, lat, lng, count } = props
+
   const diameter = Math.min(
     Math.max(
       (Math.round(Math.log(count) / Math.log(10)) + 2) * 10,
@@ -19,13 +30,9 @@ const Cluster = (props) => {
   )
 
   return (
-    <button
-      style={{ width: `${diameter}px`, height: `${diameter}px` }}
-      className={styles.cluster}
-      onClick={() => onClick(lat, lng)}
-    >
+    <ClusterContainer diameter={diameter} onClick={() => onClick(lat, lng)}>
       <p>{count}</p>
-    </button>
+    </ClusterContainer>
   )
 }
 

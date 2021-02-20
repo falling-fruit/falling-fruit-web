@@ -9,7 +9,7 @@ import {
   TabPanel,
   TabPanels,
 } from '../components/ui/PageTabs'
-import MapPage from './MapPage/MapPage'
+import MapPage from './MapPage'
 
 const HomePage = () => (
   <PageTabs>

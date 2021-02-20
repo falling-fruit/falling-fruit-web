@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
-import Map from '../../components/Map/Map.js'
-import styles from './MapPage.module.scss'
+import Map from '../components/Map'
 
 // Mock location data
 const locations = [
@@ -60,6 +60,11 @@ const DEFAULT_VIEW_STATE = {
   bounds: null,
 }
 
+const MapContainer = styled.div`
+  height: calc(100vh - ${({ theme }) => theme.tabsHeight});
+  width: 100%;
+`
+
 const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [markerData, setMarkerData] = useState([])
@@ -78,6 +83,7 @@ const MapPage = () => {
   }, [view.zoom])
 
   const handleViewChange = ({ center, zoom, bounds }) => {
+    console.log('handleViewChange')
     setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
@@ -95,7 +101,7 @@ const MapPage = () => {
   }
 
   return (
-    <div className={styles.mapContainer}>
+    <MapContainer>
       <Map
         bootstrapURLKeys={{
           key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
@@ -107,7 +113,7 @@ const MapPage = () => {
         handleLocationClick={handleLocationClick}
         handleClusterClick={handleClusterClick}
       />
-    </div>
+    </MapContainer>
   )
 }
 
