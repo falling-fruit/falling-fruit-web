@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components'
 
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import ExamplePage from './pages/ExamplePage'
+import MapPage from './pages/MapPage'
 import Types from './pages/Types'
 
 const App = () => (
@@ -11,6 +12,9 @@ const App = () => (
       <Switch>
         <Route exact path="/types">
           <Types />
+        </Route>
+        <Route exact path="/map">
+          <MapPage />
         </Route>
         <Route exact path="/">
           <ExamplePage />
