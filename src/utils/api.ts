@@ -29,14 +29,12 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
   )
 const fileToFormData = (photo_data: string | Blob | undefined) => {
   if (photo_data !== undefined) {
-    var formData = new FormData();
+    const formData = new FormData();
     return formData.append("photo_data", photo_data)
   } 
   return null;
-  
 };
 
-// Follow this example!
 export const getClusters = (
   params: paths['/clusters.json']['get']['parameters']['query'],
 ) =>
@@ -58,19 +56,15 @@ export const getLocations = (
 
 export const postLocations = (
   params: paths['/locations.json']['post']['parameters']['query'],
-  photo_data?: File,
-) => {
-  var formData = fileToFormData(photo_data);
-  
-  return handleResponse(
-    instance.post('/locations.json', formData, {
+  photoData?: File,
+) => handleResponse(
+    instance.post('/locations.json', fileToFormData(photoData), {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
       params,
     }),
   )
-}
 
 // You will want to take photo_data in the same way you take id, with a few differences:
   // 1. Type it as photo_data?: File (the ? makes it optional)
