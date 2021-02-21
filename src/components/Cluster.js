@@ -2,8 +2,16 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
+/**
+ * The minimum cluster diameter in pixels.
+ * @constant {number}
+ */
 const MIN_CLUSTER_DIAMETER = 30
 
+/**
+ * The maximum cluster diameter in pixels.
+ * @constant {number}
+ */
 const MAX_CLUSTER_DIAMETER = 100
 
 // TODO: Cluster styling/icon that Siraj wants
@@ -18,6 +26,11 @@ const ClusterContainer = styled.button`
   transform: translate(-50%, -50%);
 `
 
+/**
+ * Component for a cluster displayed on the map.
+ * @param {function} onClick - The handler called when this cluster is clicked
+ * @param {number} count - The total number of locations within this cluster
+ */
 const Cluster = ({ onClick, count }) => {
   const calculateDiameter = (count) =>
     Math.min(

@@ -5,6 +5,16 @@ import React from 'react'
 import Cluster from './Cluster'
 import Location from './Location'
 
+/**
+ * Wrapper component around google-map-react.
+ * @param {string} googleMapsAPIKey - The google maps API key
+ * @param {Object} view - The current view state
+ * @param {Object[]} locations - The locations to display
+ * @param {Object[]} clusters - The clusters to display
+ * @param {function} onClusterClick - The function called when a cluster is clicked
+ * @param {function} onLocationClick - The function called when a location is clicked
+ * @param {function} onViewChange - The function called when the view state is changed
+ */
 const Map = ({
   googleMapsAPIKey,
   view,
