@@ -1,7 +1,14 @@
 import { ListUl } from '@styled-icons/boxicons-regular'
-import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
+import {
+  Cog,
+  Flag,
+  MapAlt,
+  SearchAlt2 as Search,
+  Star,
+} from '@styled-icons/boxicons-solid'
 
 import Button from '../components/ui/Button'
+import StyledInput from '../components/ui/Input'
 import {
   PageTabs,
   Tab,
@@ -19,6 +26,19 @@ const ExamplePage = () => (
         <Button icon={<Flag />} secondary>
           Report
         </Button>
+        <br />
+        <br />
+        <StyledInput
+          placeholder="Search for a location..."
+          onChange={(e) => console.log(e.target.value)}
+          icon={<Search />}
+        />
+        <br />
+        <StyledInput
+          label="Form Input"
+          placeholder="'Sugar Maple'"
+          onChange={(e) => console.log(e.target.value)}
+        />
         <br />
         <br />
       </TabPanel>
