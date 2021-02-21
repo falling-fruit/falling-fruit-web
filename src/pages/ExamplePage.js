@@ -31,11 +31,12 @@ const ExamplePage = () => (
         <StyledInput
           placeholder="Search for a location..."
           onChange={(e) => console.log(e.target.value)}
+          onEnter={(e) => window.alert(`Received:\n${e?.target?.value}`)}
           icon={<Search />}
         />
         <br />
         <StyledInput
-          label="Form Input"
+          label="Demo Form Input"
           placeholder="'Sugar Maple'"
           onChange={(e) => console.log(e.target.value)}
         />

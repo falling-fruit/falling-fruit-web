@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-const Input = ({ placeholder, onChange, label, icon, className }) => {
-  const id = label?.toLowerCase().split(' ').join('-').concat(className)
+const Input = ({ placeholder, onChange, onEnter, label, icon, className }) => {
+  const id = label?.toLowerCase().split(' ').join('-').concat(`-${className}`)
 
   return (
     <div className={className}>
@@ -9,6 +9,9 @@ const Input = ({ placeholder, onChange, label, icon, className }) => {
       <div>
         <input
           onChange={onChange}
+          onKeyDown={(e) => {
+            e.key === 'Enter' && onEnter?.(e)
+          }}
           type="text"
           placeholder={placeholder ?? ''}
           id={id}
