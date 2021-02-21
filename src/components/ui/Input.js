@@ -61,8 +61,9 @@ const StyledInput = styled(Input)`
     }
 
     svg {
-      height: 36px;
+      height: 28px;
       width: auto;
+      pointer-events: none;
     }
   }
 `

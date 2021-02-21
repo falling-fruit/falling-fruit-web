@@ -1,14 +1,8 @@
-import { ListUl } from '@styled-icons/boxicons-regular'
-import {
-  Cog,
-  Flag,
-  MapAlt,
-  SearchAlt2 as Search,
-  Star,
-} from '@styled-icons/boxicons-solid'
+import { ListUl, SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
+import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../components/ui/Button'
-import StyledInput from '../components/ui/Input'
+import Input from '../components/ui/Input'
 import {
   PageTabs,
   Tab,
@@ -16,6 +10,9 @@ import {
   TabPanel,
   TabPanels,
 } from '../components/ui/PageTabs'
+import TagList from '../components/ui/TagList'
+
+const { Tag } = TagList
 
 const ExamplePage = () => (
   <PageTabs>
@@ -28,19 +25,24 @@ const ExamplePage = () => (
         </Button>
         <br />
         <br />
-        <StyledInput
+        <Input
           placeholder="Search for a location..."
           onChange={(e) => console.log(e.target.value)}
           onEnter={(e) => window.alert(`Received:\n${e?.target?.value}`)}
           icon={<Search />}
         />
         <br />
-        <StyledInput
+        <Input
           label="Demo Form Input"
           placeholder="'Sugar Maple'"
           onChange={(e) => console.log(e.target.value)}
         />
         <br />
+        <TagList>
+          {['Rebecca', 'Jeffrey'].map((name) => (
+            <Tag key={name}>{name}</Tag>
+          ))}
+        </TagList>
         <br />
       </TabPanel>
       <TabPanel>
