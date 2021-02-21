@@ -77,7 +77,7 @@ export const getLocationById = (
     }),
   )
 
-export const editLocation = (
+export const updateLocation = (
   id: paths['/locations/{id}.json']['post']['parameters']['path']['id'],
   params: paths['/locations/{id}.json']['post']['parameters']['query'],
 ) =>
@@ -96,7 +96,7 @@ export const getTypes = (
     }),
   )
 
-export const getTypesById = (
+export const getTypeById = (
   id: paths['/types/{id}.json']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/types/${id}.json`))
 
