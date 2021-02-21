@@ -30,11 +30,11 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
 
 const fileToFormData = (photoData: string | Blob | undefined) => {
   if (photoData !== undefined) {
-    const formData = new FormData();
-    return formData.append("photo_data", photoData)
-  } 
-  return null;
-};
+    const formData = new FormData()
+    return formData.append('photo_data', photoData)
+  }
+  return null
+}
 
 export const getClusters = (
   params: paths['/clusters.json']['get']['parameters']['query'],
@@ -52,21 +52,21 @@ export const getLocations = (
     instance.get('/locations.json', {
       params,
     }),
-  )  
-
+  )
 
 export const addLocation = (
   params: paths['/locations.json']['post']['parameters']['query'],
   photoData?: File,
-) => handleResponse(
+) =>
+  handleResponse(
     instance.post('/locations.json', fileToFormData(photoData), {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
       },
       params,
     }),
   )
-  
+
 export const getLocationById = (
   id: paths['/locations/{id}.json']['get']['parameters']['path']['id'],
   params: paths['/locations/{id}.json']['get']['parameters']['query'],
@@ -98,29 +98,22 @@ export const getTypes = (
 
 export const getTypesById = (
   id: paths['/types/{id}.json']['get']['parameters']['path']['id'],
-) =>
-  handleResponse(
-    instance.get(`/types/${id}.json`)
-  )
+) => handleResponse(instance.get(`/types/${id}.json`))
 
 export const getReviews = (
   locationId: paths['/locations/{id}/reviews.json']['get']['parameters']['path']['id'],
-) =>
-  handleResponse(
-    instance.get(`/locations/${locationId}/reviews.json`)
-  )
-  
+) => handleResponse(instance.get(`/locations/${locationId}/reviews.json`))
+
 export const addReview = (
   params: paths['/locations/{id}/review.json']['post']['parameters']['query'],
   id: paths['/locations/{id}/review.json']['post']['parameters']['path']['id'],
-  photoData?: File
+  photoData?: File,
 ) =>
   handleResponse(
     instance.post(`/locations/${id}/review.json`, fileToFormData(photoData), {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
       },
       params,
     }),
   )
-
