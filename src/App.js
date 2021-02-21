@@ -19,7 +19,7 @@ const App = () => (
         <Route exact path="/">
           <ExamplePage />
         </Route>
-        <Route>"Not found"</Route>
+        <Route>Not found</Route>
       </Switch>
     </Router>
     <GlobalStyle />

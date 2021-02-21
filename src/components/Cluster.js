@@ -27,23 +27,27 @@ const ClusterContainer = styled.button`
 `
 
 /**
+ * Helper function to calculate a cluster's diameter given its count
+ * @function calculateDiameter
+ * @param {number} count - The total number of locations within this cluster
+ * @return {number} - The diameter of the cluster in pixels
+ */
+const calculateDiameter = (count) =>
+  Math.min(
+    Math.max((Math.round(Math.log10(count)) + 2) * 10, MIN_CLUSTER_DIAMETER),
+    MAX_CLUSTER_DIAMETER,
+  )
+
+/**
  * Component for a cluster displayed on the map.
  * @param {function} onClick - The handler called when this cluster is clicked
  * @param {number} count - The total number of locations within this cluster
  */
-const Cluster = ({ onClick, count }) => {
-  const calculateDiameter = (count) =>
-    Math.min(
-      Math.max((Math.round(Math.log10(count)) + 2) * 10, MIN_CLUSTER_DIAMETER),
-      MAX_CLUSTER_DIAMETER,
-    )
-
-  return (
-    <ClusterContainer diameter={calculateDiameter(count)} onClick={onClick}>
-      <p>{count}</p>
-    </ClusterContainer>
-  )
-}
+const Cluster = ({ onClick, count }) => (
+  <ClusterContainer diameter={calculateDiameter(count)} onClick={onClick}>
+    <p>{count}</p>
+  </ClusterContainer>
+)
 
 Cluster.propTypes = {
   onClick: PropTypes.func.isRequired,
