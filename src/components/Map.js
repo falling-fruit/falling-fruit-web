@@ -5,8 +5,6 @@ import React from 'react'
 import Cluster from './Cluster'
 import Location from './Location'
 
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
-
 const Map = ({
   googleMapsAPIKey,
   view,
@@ -22,25 +20,23 @@ const Map = ({
     zoom={view.zoom}
     onChange={onViewChange}
   >
-    {view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
-      ? clusters.map((marker, index) => (
-          <Cluster
-            key={index}
-            onClick={onClusterClick}
-            lat={marker.lat}
-            lng={marker.lng}
-            count={marker.count}
-          />
-        ))
-      : locations.map((marker) => (
-          <Location
-            key={marker.id}
-            onClick={() => onLocationClick(location)}
-            id={marker.id}
-            lat={marker.lat}
-            lng={marker.lng}
-          />
-        ))}
+    {clusters.map((cluster, index) => (
+      <Cluster
+        key={index}
+        onClick={() => onClusterClick(cluster.lat, cluster.lng)}
+        count={cluster.count}
+        lat={cluster.lat}
+        lng={cluster.lng}
+      />
+    ))}
+    {locations.map((location) => (
+      <Location
+        key={location.id}
+        onClick={() => onLocationClick(location.id)}
+        lat={location.lat}
+        lng={location.lng}
+      />
+    ))}
   </GoogleMap>
 )
 

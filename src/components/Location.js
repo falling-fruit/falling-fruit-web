@@ -15,7 +15,6 @@ const Location = ({ onClick }) => <LocationContainer onClick={onClick} />
 
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
 }
 
 export default Location

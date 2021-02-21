@@ -46,6 +46,8 @@ const clusterData = [
   },
 ]
 
+const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+
 const DEFAULT_CENTER_LAT = 40.1125785
 
 const DEFAULT_CENTER_LNG = -88.2287926
@@ -63,8 +65,6 @@ const MapContainer = styled.div`
   width: 100%;
 `
 
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
-
 const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [locations, setLocations] = useState([])
@@ -74,9 +74,11 @@ const MapPage = () => {
     if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
       // TODO: Fetch cluster data from server
       setClusters(clusterData)
+      setLocations([])
     } else {
       // TODO: Fetch location data from server
       setLocations(locationData)
+      setClusters([])
     }
   }, [view.zoom])
 
