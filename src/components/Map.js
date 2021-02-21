@@ -5,8 +5,16 @@ import React from 'react'
 import Cluster from './Cluster'
 import Location from './Location'
 
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
-
+/**
+ * Wrapper component around google-map-react.
+ * @param {string} googleMapsAPIKey - The google maps API key
+ * @param {Object} view - The current view state
+ * @param {Object[]} locations - The locations to display
+ * @param {Object[]} clusters - The clusters to display
+ * @param {function} onClusterClick - The function called when a cluster is clicked
+ * @param {function} onLocationClick - The function called when a location is clicked
+ * @param {function} onViewChange - The function called when the view state is changed
+ */
 const Map = ({
   googleMapsAPIKey,
   view,
@@ -22,25 +30,23 @@ const Map = ({
     zoom={view.zoom}
     onChange={onViewChange}
   >
-    {view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
-      ? clusters.map((marker, index) => (
-          <Cluster
-            key={index}
-            onClick={onClusterClick}
-            lat={marker.lat}
-            lng={marker.lng}
-            count={marker.count}
-          />
-        ))
-      : locations.map((marker) => (
-          <Location
-            key={marker.id}
-            onClick={() => onLocationClick(location)}
-            id={marker.id}
-            lat={marker.lat}
-            lng={marker.lng}
-          />
-        ))}
+    {clusters.map((cluster, index) => (
+      <Cluster
+        key={index}
+        onClick={() => onClusterClick(cluster.lat, cluster.lng)}
+        count={cluster.count}
+        lat={cluster.lat}
+        lng={cluster.lng}
+      />
+    ))}
+    {locations.map((location) => (
+      <Location
+        key={location.id}
+        onClick={() => onLocationClick(location.id)}
+        lat={location.lat}
+        lng={location.lng}
+      />
+    ))}
   </GoogleMap>
 )
 

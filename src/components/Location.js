@@ -11,11 +11,14 @@ const LocationContainer = styled.button`
   transform: translate(-50%, -50%);
 `
 
+/**
+ * Component for a location displayed on the map.
+ * @param {function} onClick - The handler called when this location is clicked
+ */
 const Location = ({ onClick }) => <LocationContainer onClick={onClick} />
 
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
 }
 
 export default Location

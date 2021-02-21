@@ -46,12 +46,38 @@ const clusterData = [
   },
 ]
 
+/**
+ * Maximum zoom level at which clusters will be displayed. At zoom levels
+ * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
+ * @constant {number}
+ */
+const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+
+/**
+ * Default latitude of the map's center.
+ * @constant {number}
+ */
 const DEFAULT_CENTER_LAT = 40.1125785
 
+/**
+ * Default longitude of the map's center.
+ * @constant {number}
+ */
 const DEFAULT_CENTER_LNG = -88.2287926
 
+/**
+ * Default zoom level.
+ * @constant {number}
+ */
 const DEFAULT_ZOOM = 1
 
+/**
+ * Default view state of the map.
+ * @constant {Object}
+ * @property {number[]} center - The latitude and longitude of the map's center
+ * @property {number} zoom - The map's zoom level
+ * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
+ */
 const DEFAULT_VIEW_STATE = {
   center: [DEFAULT_CENTER_LAT, DEFAULT_CENTER_LNG],
   zoom: DEFAULT_ZOOM,
@@ -63,8 +89,6 @@ const MapContainer = styled.div`
   width: 100%;
 `
 
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
-
 const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [locations, setLocations] = useState([])
@@ -74,9 +98,11 @@ const MapPage = () => {
     if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
       // TODO: Fetch cluster data from server
       setClusters(clusterData)
+      setLocations([])
     } else {
       // TODO: Fetch location data from server
       setLocations(locationData)
+      setClusters([])
     }
   }, [view.zoom])
 
