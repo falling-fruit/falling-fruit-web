@@ -11,10 +11,7 @@ const LocationContainer = styled.button`
   transform: translate(-50%, -50%);
 `
 
-const Location = (props) => {
-  const { onClick, id } = props
-  return <LocationContainer onClick={() => onClick(id)} />
-}
+const Location = ({ onClick }) => <LocationContainer onClick={onClick} />
 
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,

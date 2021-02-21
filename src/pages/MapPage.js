@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Map from '../components/Map'
 
 // Mock location data
-const locations = [
+const locationData = [
   {
     id: 1,
     lat: 40.1127151,
@@ -33,7 +33,7 @@ const locations = [
 ]
 
 // Mock cluster data
-const clusters = [
+const clusterData = [
   {
     lat: 40.1127151,
     lng: -88.2314734,
@@ -45,8 +45,6 @@ const clusters = [
     count: 25,
   },
 ]
-
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
 const DEFAULT_CENTER_LAT = 40.1125785
 
@@ -65,20 +63,20 @@ const MapContainer = styled.div`
   width: 100%;
 `
 
+const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+
 const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
-  const [markerData, setMarkerData] = useState([])
-  const [showLocations, setShowLocations] = useState(false)
+  const [locations, setLocations] = useState([])
+  const [clusters, setClusters] = useState([])
 
   useEffect(() => {
     if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
       // TODO: Fetch cluster data from server
-      setMarkerData(clusters)
-      setShowLocations(false)
+      setClusters(clusterData)
     } else {
       // TODO: Fetch location data from server
-      setMarkerData(locations)
-      setShowLocations(true)
+      setLocations(locationData)
     }
   }, [view.zoom])
 
@@ -102,12 +100,10 @@ const MapPage = () => {
   return (
     <MapContainer>
       <Map
-        bootstrapURLKeys={{
-          key: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
-        }}
+        googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
-        markerData={markerData}
-        showLocations={showLocations}
+        locations={locations}
+        clusters={clusters}
         onViewChange={onViewChange}
         onLocationClick={onLocationClick}
         onClusterClick={onClusterClick}

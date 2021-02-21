@@ -5,34 +5,25 @@ import React from 'react'
 import Cluster from './Cluster'
 import Location from './Location'
 
-const Map = (props) => {
-  const {
-    bootstrapURLKeys,
-    view,
-    markerData,
-    showLocations,
-    onClusterClick,
-    onLocationClick,
-    onViewChange,
-  } = props
+const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
-  return (
-    <GoogleMap
-      bootstrapURLKeys={bootstrapURLKeys}
-      center={view.center}
-      zoom={view.zoom}
-      onChange={onViewChange}
-    >
-      {markerData.map((marker, index) =>
-        showLocations ? (
-          <Location
-            key={marker.id}
-            onClick={onLocationClick}
-            id={marker.id}
-            lat={marker.lat}
-            lng={marker.lng}
-          />
-        ) : (
+const Map = ({
+  googleMapsAPIKey,
+  view,
+  locations,
+  clusters,
+  onClusterClick,
+  onLocationClick,
+  onViewChange,
+}) => (
+  <GoogleMap
+    bootstrapURLKeys={{ key: googleMapsAPIKey }}
+    center={view.center}
+    zoom={view.zoom}
+    onChange={onViewChange}
+  >
+    {view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
+      ? clusters.map((marker, index) => (
           <Cluster
             key={index}
             onClick={onClusterClick}
@@ -40,17 +31,24 @@ const Map = (props) => {
             lng={marker.lng}
             count={marker.count}
           />
-        ),
-      )}
-    </GoogleMap>
-  )
-}
+        ))
+      : locations.map((marker) => (
+          <Location
+            key={marker.id}
+            onClick={() => onLocationClick(location)}
+            id={marker.id}
+            lat={marker.lat}
+            lng={marker.lng}
+          />
+        ))}
+  </GoogleMap>
+)
 
 Map.propTypes = {
-  bootstrapURLKeys: PropTypes.object.isRequired,
+  googleMapsAPIKey: PropTypes.string.isRequired,
   view: PropTypes.object.isRequired,
-  markerData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  showLocations: PropTypes.bool.isRequired,
+  locations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  clusters: PropTypes.arrayOf(PropTypes.object).isRequired,
   onViewChange: PropTypes.func.isRequired,
   onClusterClick: PropTypes.func.isRequired,
   onLocationClick: PropTypes.func.isRequired,

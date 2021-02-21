@@ -18,19 +18,18 @@ const ClusterContainer = styled.button`
   transform: translate(-50%, -50%);
 `
 
-const Cluster = (props) => {
-  const { onClick, lat, lng, count } = props
-
-  const diameter = Math.min(
-    Math.max(
-      (Math.round(Math.log(count) / Math.log(10)) + 2) * 10,
-      MIN_CLUSTER_DIAMETER,
-    ),
-    MAX_CLUSTER_DIAMETER,
-  )
+const Cluster = ({ onClick, lat, lng, count }) => {
+  const calculateDiameter = (count) =>
+    Math.min(
+      Math.max((Math.round(Math.log10(count)) + 2) * 10, MIN_CLUSTER_DIAMETER),
+      MAX_CLUSTER_DIAMETER,
+    )
 
   return (
-    <ClusterContainer diameter={diameter} onClick={() => onClick(lat, lng)}>
+    <ClusterContainer
+      diameter={calculateDiameter(count)}
+      onClick={() => onClick(lat, lng)}
+    >
       <p>{count}</p>
     </ClusterContainer>
   )
