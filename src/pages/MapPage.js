@@ -110,15 +110,15 @@ const MapPage = () => {
     setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
-  const onLocationClick = (id) => {
+  const onLocationClick = (location) => {
     // TODO: Fetch location data from server
-    console.log('Location clicked: ', id)
+    console.log('Location clicked: ', location.id)
   }
 
-  const onClusterClick = (lat, lng) => {
+  const onClusterClick = (cluster) => {
     setView((prevState) => ({
       ...prevState,
-      center: [lat, lng],
+      center: [cluster.lat, cluster.lng],
       zoom: prevState.zoom + 2,
     }))
   }

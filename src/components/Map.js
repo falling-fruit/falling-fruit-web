@@ -33,7 +33,7 @@ const Map = ({
     {clusters.map((cluster, index) => (
       <Cluster
         key={index}
-        onClick={() => onClusterClick(cluster.lat, cluster.lng)}
+        onClick={() => onClusterClick(cluster)}
         count={cluster.count}
         lat={cluster.lat}
         lng={cluster.lng}
@@ -42,7 +42,7 @@ const Map = ({
     {locations.map((location) => (
       <Location
         key={location.id}
-        onClick={() => onLocationClick(location.id)}
+        onClick={() => onLocationClick(location)}
         lat={location.lat}
         lng={location.lng}
       />
