@@ -27,10 +27,11 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
       return null
     },
   )
-const fileToFormData = (photo_data: string | Blob | undefined) => {
-  if (photo_data !== undefined) {
+
+const fileToFormData = (photoData: string | Blob | undefined) => {
+  if (photoData !== undefined) {
     var formData = new FormData();
-    return formData.append("photo_data", photo_data)
+    return formData.append("photo_data", photoData)
   } 
   return null;
   
@@ -56,7 +57,7 @@ export const getLocations = (
   )  
 
 
-export const postLocations = (
+export const addLocation = (
   params: paths['/locations.json']['post']['parameters']['query'],
   photo_data?: File,
 ) => {
@@ -115,16 +116,13 @@ export const getReviews = (
     instance.get(`/locations/${locationId}/reviews.json`)
   )
   
-export const postReview = (
+export const addReview = (
   params: paths['/locations/{id}/review.json']['post']['parameters']['query'],
   id: paths['/locations/{id}/review.json']['post']['parameters']['path']['id'],
-  photo_data?: File
+  photoData?: File
 ) => {
-
-  var formData = fileToFormData(photo_data);
-  
   return handleResponse(
-    instance.post(`/locations/${id}/review.json`, formData, {
+    instance.post(`/locations/${id}/review.json`, fileToFormData(photoData), {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
