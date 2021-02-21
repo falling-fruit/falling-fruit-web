@@ -10,9 +10,7 @@ import {
   TabPanel,
   TabPanels,
 } from '../components/ui/PageTabs'
-import TagList from '../components/ui/TagList'
-
-const { Tag } = TagList
+import { Tag, TagList } from '../components/ui/Tag'
 
 const ExamplePage = () => (
   <PageTabs>

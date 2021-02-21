@@ -39,6 +39,4 @@ const Tag = styled(UnstyledTag)`
   }
 `
 
-TagList.Tag = Tag
-
-export default TagList
+export { Tag, TagList }
