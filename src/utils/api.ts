@@ -34,10 +34,8 @@ const fileToFormData = (photoData: string | Blob | undefined) => {
     return formData.append("photo_data", photoData)
   } 
   return null;
-  
 };
 
-// Follow this example!
 export const getClusters = (
   params: paths['/clusters.json']['get']['parameters']['query'],
 ) =>
@@ -59,19 +57,15 @@ export const getLocations = (
 
 export const addLocation = (
   params: paths['/locations.json']['post']['parameters']['query'],
-  photo_data?: File,
-) => {
-  var formData = fileToFormData(photo_data);
-  
-  return handleResponse(
-    instance.post('/locations.json', formData, {
+  photoData?: File,
+) => handleResponse(
+    instance.post('/locations.json', fileToFormData(photoData), {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
       params,
     }),
   )
-}
   
 export const getLocationById = (
   id: paths['/locations/{id}.json']['get']['parameters']['path']['id'],
