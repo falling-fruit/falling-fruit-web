@@ -114,8 +114,14 @@ export const addReview = (
   locationId: paths['/locations/{id}/review.json']['post']['parameters']['path']['id'],
   params: paths['/locations/{id}/review.json']['post']['parameters']['query'],
   photoData?: File
+<<<<<<< HEAD
 ) =>  handleResponse(
     instance.post(`/locations/${locationId}/review.json`, fileToFormData(photoData), {
+=======
+) =>
+  handleResponse(
+    instance.post(`/locations/${id}/review.json`, fileToFormData(photoData), {
+>>>>>>> 322ee739ddeb002a38b465569b82a5bede2e5b19
       headers: {
         'Content-Type': 'multipart/form-data'
       },
