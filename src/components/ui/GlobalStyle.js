@@ -51,8 +51,8 @@ const theme = {
   orange: '#FFA41B',
   blue: '#4183C4',
   green: '#73CD7C',
-  // variables
-  tabsHeight: '86px',
+  // // variables
+  // tabsHeight: '86px',
 }
 
 export default GlobalStyle

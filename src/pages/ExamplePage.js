@@ -9,9 +9,8 @@ import {
   TabPanel,
   TabPanels,
 } from '../components/ui/PageTabs'
-import MapPage from './MapPage'
 
-const HomePage = () => (
+const ExamplePage = () => (
   <PageTabs>
     <TabPanels>
       <TabPanel>
@@ -24,7 +23,7 @@ const HomePage = () => (
         <br />
       </TabPanel>
       <TabPanel>
-        <MapPage />
+        <p>Map</p>
       </TabPanel>
       <TabPanel>
         <p>List</p>
@@ -47,4 +46,4 @@ const HomePage = () => (
   </PageTabs>
 )
 
-export default HomePage
+export default ExamplePage

@@ -5,11 +5,6 @@ import { StyledIconBase } from '@styled-icons/styled-icon'
 import styled from 'styled-components'
 
 const PageTabs = styled(Tabs)`
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  justify-content: space-between;
-
   [data-reach-tab-list] {
     display: flex;
     background: ${({ theme }) => theme.background};
@@ -17,7 +12,7 @@ const PageTabs = styled(Tabs)`
     [data-reach-tab] {
       flex-grow: 1;
       background: ${({ theme }) => theme.background};
-      height: ${({ theme }) => theme.tabsHeight};
+      height: 86px;
       border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
       border-bottom: none;
 

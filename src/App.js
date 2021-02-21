@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import HomePage from './pages/HomePage'
+import ExamplePage from './pages/ExamplePage'
+import MapPage from './pages/MapPage'
 import Types from './pages/Types'
 
 const App = () => (
@@ -12,10 +13,13 @@ const App = () => (
         <Route exact path="/types">
           <Types />
         </Route>
-        <Route exact path="/">
-          <HomePage />
+        <Route exact path="/map">
+          <MapPage />
         </Route>
-        <Route>Not found</Route>
+        <Route exact path="/">
+          <ExamplePage />
+        </Route>
+        <Route>"Not found"</Route>
       </Switch>
     </Router>
     <GlobalStyle />

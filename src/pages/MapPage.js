@@ -61,7 +61,7 @@ const DEFAULT_VIEW_STATE = {
 }
 
 const MapContainer = styled.div`
-  height: calc(100vh - ${({ theme }) => theme.tabsHeight});
+  height: 100vh;
   width: 100%;
 `
 
@@ -82,18 +82,8 @@ const MapPage = () => {
     }
   }, [view.zoom])
 
-  const onZoomAnimationEnd = (zoom) => {
-    setView((prevState) => ({
-      ...prevState,
-      zoom,
-    }))
-  }
-
-  const onDragEnd = ({ center }) => {
-    setView((prevState) => ({
-      ...prevState,
-      center: [center.lat, center.lng],
-    }))
+  const onViewChange = ({ center, zoom, bounds }) => {
+    setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
   const onLocationClick = (id) => {
@@ -118,8 +108,7 @@ const MapPage = () => {
         view={view}
         markerData={markerData}
         showLocations={showLocations}
-        onZoomAnimationEnd={onZoomAnimationEnd}
-        onDragEnd={onDragEnd}
+        onViewChange={onViewChange}
         onLocationClick={onLocationClick}
         onClusterClick={onClusterClick}
       />

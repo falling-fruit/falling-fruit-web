@@ -11,10 +11,9 @@ const Map = (props) => {
     view,
     markerData,
     showLocations,
-    onZoomAnimationEnd,
-    onDragEnd,
     onClusterClick,
     onLocationClick,
+    onViewChange,
   } = props
 
   return (
@@ -22,8 +21,7 @@ const Map = (props) => {
       bootstrapURLKeys={bootstrapURLKeys}
       center={view.center}
       zoom={view.zoom}
-      onZoomAnimationEnd={onZoomAnimationEnd}
-      onDragEnd={onDragEnd}
+      onChange={onViewChange}
     >
       {markerData.map((marker, index) =>
         showLocations ? (
@@ -53,8 +51,7 @@ Map.propTypes = {
   view: PropTypes.object.isRequired,
   markerData: PropTypes.arrayOf(PropTypes.object).isRequired,
   showLocations: PropTypes.bool.isRequired,
-  onZoomAnimationEnd: PropTypes.func.isRequired,
-  onDragEnd: PropTypes.func.isRequired,
+  onViewChange: PropTypes.func.isRequired,
   onClusterClick: PropTypes.func.isRequired,
   onLocationClick: PropTypes.func.isRequired,
 }
