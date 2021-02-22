@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
+import DesktopLayout from './components/desktop/DesktopLayout'
+import MainPage from './components/MainPage'
+import MobileLayout from './components/mobile/MobileLayout'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import DesktopLayout from './pages/desktop/DesktopLayout'
-import MainPage from './pages/MainPage'
-import MobileLayout from './pages/mobile/MobileLayout'
 
 const App = () => (
   <ThemeProvider theme={theme}>

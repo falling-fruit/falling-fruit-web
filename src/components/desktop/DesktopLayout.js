@@ -1,16 +1,22 @@
 import styled from 'styled-components'
 
-import DesktopHeader from '../../components/DesktopHeader'
-import MapPage from '../MapPage'
+import MapPage from '../map/MapPage'
+import Header from './Header'
 
 const DesktopContainer = styled.div`
   height: 100%;
 `
 
+const MapContainer = styled.div`
+  height: 100%;
+`
+
 const DesktopLayout = () => (
   <DesktopContainer>
-    <DesktopHeader />
-    <MapPage />
+    <Header />
+    <MapContainer>
+      <MapPage />
+    </MapContainer>
   </DesktopContainer>
 )
 

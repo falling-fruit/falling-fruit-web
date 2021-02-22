@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import Map from '../components/Map'
+import Map from './Map'
 
 // Mock location data
 const locationData = [

@@ -1,7 +1,4 @@
-import {
-  DesktopBreakpoint,
-  MobileBreakpoint,
-} from '../components/ui/Breakpoint'
+import { DesktopBreakpoint, MobileBreakpoint } from './Breakpoint'
 import DesktopLayout from './desktop/DesktopLayout'
 import MobileLayout from './mobile/MobileLayout'
 

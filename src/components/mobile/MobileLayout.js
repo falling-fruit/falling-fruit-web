@@ -1,15 +1,9 @@
 import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 
-import Button from '../../components/ui/Button'
-import {
-  PageTabs,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from '../../components/ui/PageTabs'
-import MapPage from '../MapPage'
+import MapPage from '../map/MapPage'
+import Button from '../ui/Button'
+import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 
 const MobileLayout = () => (
   <PageTabs defaultIndex={1}>
