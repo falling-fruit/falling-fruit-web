@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 import MapPage from '../map/MapPage'
+import ResizablePane from '../ui/ResizablePane'
 import Header from './Header'
-import Pane from './Pane'
 
 const DesktopContainer = styled.div`
   height: 100%;
@@ -19,7 +19,7 @@ const DesktopLayout = () => (
   <DesktopContainer>
     <Header />
     <MapContainer>
-      <Pane />
+      <ResizablePane minWidth={400} />
       <MapPage />
     </MapContainer>
   </DesktopContainer>
