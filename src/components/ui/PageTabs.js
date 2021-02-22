@@ -7,7 +7,7 @@ import styled from 'styled-components'
 const PageTabs = styled(Tabs)`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 
   [data-reach-tab-panels] {
     flex: 1;

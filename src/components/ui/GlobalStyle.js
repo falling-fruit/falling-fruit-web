@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  #root {
+    height: 100vh;
+  }
+
   h1, h2, h3, h5, h6 {
     font-weight: bold;
   }
