@@ -1,16 +1,10 @@
-import { DesktopBreakpoint, MobileBreakpoint } from './Breakpoint'
+import { useIsDesktop } from '../utils/breakpointHooks'
 import DesktopLayout from './desktop/DesktopLayout'
 import MobileLayout from './mobile/MobileLayout'
 
-const MainPage = () => (
-  <>
-    <DesktopBreakpoint>
-      <DesktopLayout />
-    </DesktopBreakpoint>
-    <MobileBreakpoint>
-      <MobileLayout />
-    </MobileBreakpoint>
-  </>
-)
+const MainPage = () => {
+  const isDesktop = useIsDesktop()
+  return isDesktop ? <DesktopLayout /> : <MobileLayout />
+}
 
 export default MainPage
