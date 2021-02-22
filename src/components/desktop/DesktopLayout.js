@@ -19,7 +19,7 @@ const DesktopLayout = () => (
   <DesktopContainer>
     <Header />
     <MapContainer>
-      <ResizablePane defaultWidth="21.5vw" minWidth={310} maxWidth="34.75vw" />
+      <ResizablePane minWidth={310} maxWidth="21.5vw" defaultWidth="21.5vw" />
       <MapPage />
     </MapContainer>
   </DesktopContainer>
