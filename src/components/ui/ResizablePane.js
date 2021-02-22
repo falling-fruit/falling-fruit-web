@@ -1,8 +1,8 @@
 import { Resizable } from 're-resizable'
 import styled from 'styled-components'
 
-const ResizablePane = styled(Resizable).attrs(() => ({
-  defaultSize: { height: '100%' },
+const ResizablePane = styled(Resizable).attrs((props) => ({
+  defaultSize: { width: props.defaultWidth, height: '100%' },
   enable: { right: true }, // enable resizing only to the right
 }))`
   position: absolute !important;
