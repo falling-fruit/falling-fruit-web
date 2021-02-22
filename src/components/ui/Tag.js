@@ -1,27 +1,11 @@
 import styled from 'styled-components'
 
-const UnstyledTagList = ({ children, className }) => (
-  <ul className={className}>{children}</ul>
-)
-
-const TagList = styled(UnstyledTagList)`
+const TagList = styled.ul`
   padding: 0;
   list-style: none;
 `
 
-const UnstyledTag = ({ children, color, backgroundColor, className }) => (
-  <li
-    style={{
-      color: color ?? 'default',
-      backgroundColor: backgroundColor ?? 'default',
-    }}
-    className={className}
-  >
-    {children}
-  </li>
-)
-
-const Tag = styled(UnstyledTag)`
+const Tag = styled.li`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -31,8 +15,9 @@ const Tag = styled(UnstyledTag)`
   padding: 0 10px;
   font-size: 12px;
   font-weight: bold;
-  background: ${({ theme }) => theme.transparentOrange};
-  color: ${({ theme }) => theme.orange};
+  background-color: ${({ theme, backgroundColor }) =>
+    backgroundColor ?? theme.transparentOrange};
+  color: ${({ theme, color }) => color ?? theme.orange};
 
   &:not(:last-child) {
     margin-right: 6px;

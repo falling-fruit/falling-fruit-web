@@ -15,7 +15,6 @@ const Input = ({ placeholder, onChange, onEnter, label, icon, className }) => {
           type="text"
           placeholder={placeholder ?? ''}
           id={id}
-          name={id}
         />
         {icon}
       </div>
@@ -49,6 +48,7 @@ const StyledInput = styled(Input)`
       display: block;
       width: 100%;
       outline: none;
+      height: 44px;
 
       &::placeholder {
         color: ${({ theme }) => theme.tertiaryText};
