@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 
 import Map from '../components/Map'
 
@@ -84,11 +83,6 @@ const DEFAULT_VIEW_STATE = {
   bounds: null,
 }
 
-const MapContainer = styled.div`
-  height: 100vh;
-  width: 100%;
-`
-
 const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [locations, setLocations] = useState([])
@@ -107,6 +101,7 @@ const MapPage = () => {
   }, [view.zoom])
 
   const onViewChange = ({ center, zoom, bounds }) => {
+    console.log('onViewChange called', { center, zoom, bounds })
     setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
@@ -124,17 +119,15 @@ const MapPage = () => {
   }
 
   return (
-    <MapContainer>
-      <Map
-        googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-        view={view}
-        locations={locations}
-        clusters={clusters}
-        onViewChange={onViewChange}
-        onLocationClick={onLocationClick}
-        onClusterClick={onClusterClick}
-      />
-    </MapContainer>
+    <Map
+      googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+      view={view}
+      locations={locations}
+      clusters={clusters}
+      onViewChange={onViewChange}
+      onLocationClick={onLocationClick}
+      onClusterClick={onClusterClick}
+    />
   )
 }
 
