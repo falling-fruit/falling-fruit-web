@@ -6,7 +6,9 @@ import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePane from './SidePane'
 
-const MAX_PANE_WIDTH = 21.5 // unit is vw
+// Min and max pane width, in pixels
+const MIN_PANE_WIDTH = () => 310 // eslint-disable-line no-magic-numbers
+const MAX_PANE_WIDTH = (vw) => (21.5 * vw) / 100 // eslint-disable-line no-magic-numbers
 
 const DesktopContainer = styled.div`
   height: 100%;
@@ -40,9 +42,9 @@ const DesktopLayout = () => (
       {({ width: vw }) => (
         <StyledSplit
           split="vertical"
-          minSize={310}
-          maxSize={(MAX_PANE_WIDTH / 100) * vw}
-          defaultSize={(MAX_PANE_WIDTH / 100) * vw}
+          minSize={MIN_PANE_WIDTH(vw)}
+          maxSize={MAX_PANE_WIDTH(vw)}
+          defaultSize={MAX_PANE_WIDTH(vw)}
         >
           <SidePane />
           <MapPane>
