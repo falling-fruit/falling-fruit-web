@@ -1,3 +1,4 @@
+import WindowSize from '@reach/window-size'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
@@ -22,7 +23,9 @@ const App = () => (
         <Route>Not found</Route>
       </Switch>
     </Router>
-    <GlobalStyle />
+    <WindowSize>
+      {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+    </WindowSize>
   </ThemeProvider>
 )
 
