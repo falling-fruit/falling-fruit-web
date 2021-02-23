@@ -8,6 +8,12 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  #root {
+    // We use innerHeight instead of vh here to avoid viewport issues on mobile
+    // This gets passed in from App via @reach/window-size
+    height: ${({ windowSize }) => windowSize.height}px;
+  }
+
   h1, h2, h3, h5, h6 {
     font-weight: bold;
   }

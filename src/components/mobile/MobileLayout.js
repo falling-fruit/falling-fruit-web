@@ -1,19 +1,14 @@
 import { ListUl, SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 
-import Button from '../components/ui/Button'
-import Input from '../components/ui/Input'
-import {
-  PageTabs,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from '../components/ui/PageTabs'
-import { Tag, TagList } from '../components/ui/Tag'
+import MapPage from '../map/MapPage'
+import Button from '../ui/Button'
+import Input from '../ui/Input'
+import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
+import { Tag, TagList } from '../ui/Tag'
 
-const ExamplePage = () => (
-  <PageTabs>
+const MobileLayout = () => (
+  <PageTabs defaultIndex={1}>
     <TabPanels>
       <TabPanel>
         <p>Settings</p>
@@ -44,7 +39,7 @@ const ExamplePage = () => (
         <br />
       </TabPanel>
       <TabPanel>
-        <p>Map</p>
+        <MapPage />
       </TabPanel>
       <TabPanel>
         <p>List</p>
@@ -67,4 +62,4 @@ const ExamplePage = () => (
   </PageTabs>
 )
 
-export default ExamplePage
+export default MobileLayout

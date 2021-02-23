@@ -1,28 +1,31 @@
+import WindowSize from '@reach/window-size'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
+import DesktopLayout from './components/desktop/DesktopLayout'
+import MainPage from './components/MainPage'
+import MobileLayout from './components/mobile/MobileLayout'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import ExamplePage from './pages/ExamplePage'
-import MapPage from './pages/MapPage'
-import Types from './pages/Types'
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <Router>
       <Switch>
-        <Route exact path="/types">
-          <Types />
+        <Route path="/desktop">
+          <DesktopLayout />
         </Route>
-        <Route exact path="/map">
-          <MapPage />
+        <Route path="/mobile">
+          <MobileLayout />
         </Route>
-        <Route exact path="/">
-          <ExamplePage />
+        <Route path="/">
+          <MainPage />
         </Route>
         <Route>Not found</Route>
       </Switch>
     </Router>
-    <GlobalStyle />
+    <WindowSize>
+      {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+    </WindowSize>
   </ThemeProvider>
 )
 
