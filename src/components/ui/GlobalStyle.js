@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: 'Lato', sans-serif;
+    font-family: ${({ theme }) => theme.fonts};
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
@@ -46,6 +46,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const theme = {
+  fonts: '"Lato", sans-serif',
   // text colors
   text: '#9B9B9B',
   secondaryText: '#5A5A5A',
@@ -55,6 +56,7 @@ const theme = {
   secondaryBackground: '#E0E1E2',
   // palette
   orange: '#FFA41B',
+  transparentOrange: '#FFEDD1',
   blue: '#4183C4',
   green: '#73CD7C',
 }
