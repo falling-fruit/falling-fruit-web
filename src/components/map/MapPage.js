@@ -1,36 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import { getClusters } from '../../utils/api'
+import { getClusters, getLocations } from '../../utils/api'
 import Map from './Map'
-
-// Mock location data
-const locationData = [
-  {
-    id: 1,
-    lat: 40.1127151,
-    lng: -88.2314734,
-  },
-  {
-    id: 2,
-    lat: 40.1125785,
-    lng: -88.2287926,
-  },
-  {
-    id: 3,
-    lat: 40.112657,
-    lng: -88.2278543,
-  },
-  {
-    id: 4,
-    lat: 60.1125785,
-    lng: -88.2287926,
-  },
-  {
-    id: 5,
-    lat: 60.112657,
-    lng: -88.2278543,
-  },
-]
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -91,8 +62,15 @@ const MapPage = () => {
           setClusters(clusters)
           setLocations([])
         } else {
-          // TODO: Fetch location data from server
-          setLocations(locationData)
+          const query = {
+            swlng: view.bounds.sw.lng,
+            nelng: view.bounds.ne.lng,
+            swlat: view.bounds.sw.lat,
+            nelat: view.bounds.ne.lat,
+            muni: 1,
+          }
+          const locations = await getLocations(query)
+          setLocations(locations)
           setClusters([])
         }
       }
