@@ -7,6 +7,8 @@ import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { Tag, TagList } from '../ui/Tag'
+import LocationIcon from './parisImage.jpeg'
+import Arrow from './Vector.png'
 
 const MobileLayout = () => (
   <PageTabs defaultIndex={2}>
@@ -44,7 +46,12 @@ const MobileLayout = () => (
       </TabPanel>
       <TabPanel>
         <p>List</p>
-        <ListEntry primaryText="Location" secondaryText="Champaign, IL" />
+        <ListEntry
+          leftIcon={<img src={LocationIcon} alt="Location Icon"></img>}
+          primaryText="Location"
+          secondaryText="Champaign, IL"
+          rightIcon={<img src={Arrow} alt="Arrow Icon"></img>}
+        />
       </TabPanel>
     </TabPanels>
     <TabList>

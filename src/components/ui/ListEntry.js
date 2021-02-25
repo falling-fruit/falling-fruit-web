@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 const LeftIcon = styled.div`
   border-radius: 50%;
-  background-color: #5a5a5a;
   align-self: center;
-  width: 36px;
-  height: 36px;
+  max-width: 36px;
+  max-height: 36px;
   margin: 10px 18px 11px 22px;
+  overflow: hidden;
 `
 const StyledPrimaryText = styled.h1`
     align-items: center
@@ -30,7 +30,6 @@ const StyledListContainer = styled.div`
   flex-direction: row;
   align-self: center;
   justify-content: space-around;
-  height: 57px;
 `
 // TODO: Adjust spacing between LeftIcon, TextContainer, and RightIcon
 const TextContainer = styled.div`
@@ -44,7 +43,6 @@ const RightIcon = styled.div`
   width: 16px;
   height: 16px;
   align-self: center;
-  background-color: #4183c4;
   margin-right: 22px;
 `
 
