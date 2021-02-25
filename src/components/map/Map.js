@@ -14,6 +14,7 @@ import Location from './Location'
  * @param {function} onClusterClick - The function called when a cluster is clicked
  * @param {function} onLocationClick - The function called when a location is clicked
  * @param {function} onViewChange - The function called when the view state is changed
+ *
  */
 const Map = ({
   googleMapsAPIKey,

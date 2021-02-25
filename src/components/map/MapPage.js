@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import { getClusters } from '../../utils/api'
 import Map from './Map'
 
 // Mock location data
@@ -28,20 +29,6 @@ const locationData = [
     id: 5,
     lat: 60.112657,
     lng: -88.2278543,
-  },
-]
-
-// Mock cluster data
-const clusterData = [
-  {
-    lat: 40.1127151,
-    lng: -88.2314734,
-    count: 1000,
-  },
-  {
-    lat: 60.1125785,
-    lng: -88.2278543,
-    count: 25,
   },
 ]
 
@@ -89,16 +76,29 @@ const MapPage = () => {
   const [clusters, setClusters] = useState([])
 
   useEffect(() => {
-    if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-      // TODO: Fetch cluster data from server
-      setClusters(clusterData)
-      setLocations([])
-    } else {
-      // TODO: Fetch location data from server
-      setLocations(locationData)
-      setClusters([])
+    async function fetchClusterAndLocationData() {
+      if (view.bounds) {
+        if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+          const query = {
+            swlng: view.bounds.sw.lng,
+            nelng: view.bounds.ne.lng,
+            swlat: view.bounds.sw.lat,
+            nelat: view.bounds.ne.lat,
+            zoom: view.zoom,
+            muni: 1,
+          }
+          const clusters = await getClusters(query)
+          setClusters(clusters)
+          setLocations([])
+        } else {
+          // TODO: Fetch location data from server
+          setLocations(locationData)
+          setClusters([])
+        }
+      }
     }
-  }, [view.zoom])
+    fetchClusterAndLocationData()
+  }, [view])
 
   const onViewChange = ({ center, zoom, bounds }) => {
     console.log('onViewChange called', { center, zoom, bounds })
