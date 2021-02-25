@@ -4,45 +4,48 @@ const LeftIcon = styled.div`
   border-radius: 50%;
   background-color: #5a5a5a;
   align-self: center;
-  width: 25px;
-  height: 25px;
+  width: 36px;
+  height: 36px;
+  margin: 10px 18px 11px 22px;
 `
 const StyledPrimaryText = styled.h1`
     align-items: center
     font-weight: bold;
     color: #5A5A5A;
     font-size: 14px;
-    line-height: 17px;
-    margin:2px;
+    margin-top:14px;
+    margin-bottom:auto;
 `
 const StyledSecondaryText = styled.h2`
   align-items: center;
   font-weight: normal;
   color: #5a5a5a;
   font-size: 12px;
-  line-height: 14px;
-  margin: 2px;
+  margin-top: auto;
+  margin-bottom: 14px;
 `
 
 const StyledListContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: start;
-  width: 25%;
+  align-self: center;
+  justify-content: space-around;
+  height: 57px;
 `
 // TODO: Adjust spacing between LeftIcon, TextContainer, and RightIcon
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: 50%;
+  flex-grow: 2;
+  margin-inline-end: auto;
 `
 const RightIcon = styled.div`
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 16px;
+  height: 16px;
   align-self: center;
   background-color: #4183c4;
+  margin-right: 22px;
 `
 
 const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
