@@ -2,7 +2,7 @@
 
 import axios, { AxiosResponse } from 'axios'
 
-import { paths } from './api-schema'
+import { paths } from './apiSchema'
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
