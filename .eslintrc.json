@@ -14,5 +14,5 @@
     "simple-import-sort/exports": "error",
     "sort-imports": "off"
   },
-  "ignorePatterns": ["api-schema.ts"]
+  "ignorePatterns": ["apiSchema.ts"]
 }
