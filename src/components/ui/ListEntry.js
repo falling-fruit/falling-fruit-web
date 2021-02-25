@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const LeftIcon = styled.div`
@@ -56,5 +57,12 @@ const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
     <RightIcon>{rightIcon}</RightIcon>
   </StyledListContainer>
 )
+
+ListEntry.propTypes = {
+  leftIcon: PropTypes.node,
+  primaryText: PropTypes.string,
+  secondaryText: PropTypes.string,
+  rightIcon: PropTypes.node,
+}
 
 export default ListEntry

@@ -52,6 +52,12 @@ const MobileLayout = () => (
           secondaryText="Champaign, IL"
           rightIcon={<img src={Arrow} alt="Arrow Icon"></img>}
         />
+        <ListEntry
+          leftIcon={<img src={LocationIcon} alt="Location Icon"></img>}
+          primaryText="Location"
+          secondaryText="Champaign, IL"
+          rightIcon={<img src={Arrow} alt="Arrow Icon"></img>}
+        />
       </TabPanel>
     </TabPanels>
     <TabList>
