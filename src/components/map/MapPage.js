@@ -70,6 +70,8 @@ const MapPage = () => {
             muni: 1,
           }
           const locations = await getLocations(query)
+          // Remove number of locations returned and total locations available from result
+          locations.splice(0, 2)
           setLocations(locations)
           setClusters([])
         }

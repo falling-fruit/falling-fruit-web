@@ -14,7 +14,6 @@ import Location from './Location'
  * @param {function} onClusterClick - The function called when a cluster is clicked
  * @param {function} onLocationClick - The function called when a location is clicked
  * @param {function} onViewChange - The function called when the view state is changed
- *
  */
 const Map = ({
   googleMapsAPIKey,
@@ -40,9 +39,9 @@ const Map = ({
         lng={cluster.lng}
       />
     ))}
-    {locations.map((location) => (
+    {locations.map((location, index) => (
       <Location
-        key={location.id}
+        key={index}
         onClick={() => onLocationClick(location)}
         lat={location.lat}
         lng={location.lng}
