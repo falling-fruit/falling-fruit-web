@@ -1,19 +1,32 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Types from './pages/Types'
-import ExamplePage from './pages/ExamplePage'
+import WindowSize from '@reach/window-size'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+
+import DesktopLayout from './components/desktop/DesktopLayout'
+import MainPage from './components/MainPage'
+import MobileLayout from './components/mobile/MobileLayout'
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 
 const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/types">
-        <Types />
-      </Route>
-      <Route exact path="/">
-        <ExamplePage />
-      </Route>
-      <Route>Not found</Route>
-    </Switch>
-  </Router>
+  <ThemeProvider theme={theme}>
+    <Router>
+      <Switch>
+        <Route path="/desktop">
+          <DesktopLayout />
+        </Route>
+        <Route path="/mobile">
+          <MobileLayout />
+        </Route>
+        <Route path="/">
+          <MainPage />
+        </Route>
+        <Route>Not found</Route>
+      </Switch>
+    </Router>
+    <WindowSize>
+      {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+    </WindowSize>
+  </ThemeProvider>
 )
 
 export default App

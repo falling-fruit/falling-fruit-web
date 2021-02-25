@@ -11,3 +11,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Emojify PR Title
         uses: pineapplelol/emojify-pr-title@v1.2
+        with:
+          use-emoji-map: true
