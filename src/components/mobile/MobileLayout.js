@@ -4,11 +4,12 @@ import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 import MapPage from '../map/MapPage'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
+import ListEntry from '../ui/ListEntry'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { Tag, TagList } from '../ui/Tag'
 
 const MobileLayout = () => (
-  <PageTabs defaultIndex={1}>
+  <PageTabs defaultIndex={2}>
     <TabPanels>
       <TabPanel>
         <p>Settings</p>
@@ -43,6 +44,7 @@ const MobileLayout = () => (
       </TabPanel>
       <TabPanel>
         <p>List</p>
+        <ListEntry primaryText="Location" secondaryText="Champaign, IL" />
       </TabPanel>
     </TabPanels>
     <TabList>
