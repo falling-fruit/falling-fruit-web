@@ -9,30 +9,29 @@ const LeftIcon = styled.div`
   margin: 10px 18px 11px 22px;
   overflow: hidden;
 `
-const StyledPrimaryText = styled.h1`
-    align-items: center
-    font-weight: bold;
-    color: #5A5A5A;
-    font-size: 14px;
-    margin-top:14px;
-    margin-bottom:auto;
+const PrimaryText = styled.h1`
+  align-items: center
+  font-weight: bold;
+  color: ${({ theme }) => theme.secondaryText};
+  font-size: 14px;
+  margin-top: 14px;
+  margin-bottom: auto;
 `
-const StyledSecondaryText = styled.h2`
+const SecondaryText = styled.h2`
   align-items: center;
   font-weight: normal;
-  color: #5a5a5a;
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 12px;
   margin-top: auto;
   margin-bottom: 14px;
 `
 
-const StyledListContainer = styled.div`
+const ListContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-self: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `
-// TODO: Adjust spacing between LeftIcon, TextContainer, and RightIcon
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,21 +40,22 @@ const TextContainer = styled.div`
   margin-inline-end: auto;
 `
 const RightIcon = styled.div`
-  width: 16px;
-  height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  overflow: hidden;
   align-self: center;
   margin-right: 22px;
 `
 
 const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
-  <StyledListContainer>
+  <ListContainer>
     <LeftIcon>{leftIcon}</LeftIcon>
     <TextContainer>
-      <StyledPrimaryText>{primaryText}</StyledPrimaryText>
-      <StyledSecondaryText>{secondaryText}</StyledSecondaryText>
+      <PrimaryText>{primaryText}</PrimaryText>
+      <SecondaryText>{secondaryText}</SecondaryText>
     </TextContainer>
     <RightIcon>{rightIcon}</RightIcon>
-  </StyledListContainer>
+  </ListContainer>
 )
 
 ListEntry.propTypes = {
