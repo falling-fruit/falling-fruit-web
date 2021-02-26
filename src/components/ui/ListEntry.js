@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const LeftIcon = styled.div`
   border-radius: 50%;
-  align-self: center;
   max-width: 36px;
   max-height: 36px;
   overflow: hidden;
@@ -24,11 +23,11 @@ const ListContainer = styled.div`
   flex-direction: row;
   padding: 0 22px;
   height: 57px;
+  align-items: center;
 `
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-self: center;
   color: ${({ theme }) => theme.secondaryText};
   justify-content: center;
   margin-left: 18px;
@@ -38,7 +37,6 @@ const RightIcon = styled.div`
   max-width: 16px;
   max-height: 16px;
   overflow: hidden;
-  align-self: center;
 `
 
 const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
