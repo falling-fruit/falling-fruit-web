@@ -6,7 +6,6 @@ const LeftIcon = styled.div`
   align-self: center;
   max-width: 36px;
   max-height: 36px;
-  margin: 10px 18px 11px 22px;
   overflow: hidden;
 `
 const PrimaryText = styled.div`
@@ -28,23 +27,23 @@ const SecondaryText = styled.div`
 const ListContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-self: center;
-  justify-content: space-between;
+  padding: 0 22px;
+  height: 57px;
 `
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-self: center;
-  margin-inline-end: auto;
   color: ${({ theme }) => theme.secondaryText};
   justify-content: center;
+  margin-left: 18px;
+  flex: 1;
 `
 const RightIcon = styled.div`
   max-width: 16px;
   max-height: 16px;
   overflow: hidden;
   align-self: center;
-  margin-right: 22px;
 `
 
 const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
