@@ -9,21 +9,20 @@ const LeftIcon = styled.div`
   margin: 10px 18px 11px 22px;
   overflow: hidden;
 `
-const PrimaryText = styled.h1`
+const PrimaryText = styled.div`
   align-items: center
   font-weight: bold;
-  color: ${({ theme }) => theme.secondaryText};
   font-size: 14px;
-  margin-top: 14px;
-  margin-bottom: auto;
+  ${'' /* margin-top: 14px;
+  margin-bottom: auto; */}
 `
-const SecondaryText = styled.h2`
+const SecondaryText = styled.div`
   align-items: center;
   font-weight: normal;
-  color: ${({ theme }) => theme.secondaryText};
   font-size: 12px;
-  margin-top: auto;
-  margin-bottom: 14px;
+  ${'' /* margin-top: auto; */}
+  ${'' /* margin-top: auto;
+  margin-bottom: 14px; */}
 `
 
 const ListContainer = styled.div`
@@ -36,8 +35,9 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-self: center;
-  flex-grow: 2;
   margin-inline-end: auto;
+  color: ${({ theme }) => theme.secondaryText};
+  justify-content: center;
 `
 const RightIcon = styled.div`
   max-width: 16px;
