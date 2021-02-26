@@ -12,16 +12,11 @@ const PrimaryText = styled.div`
   align-items: center
   font-weight: bold;
   font-size: 14px;
-  ${'' /* margin-top: 14px;
-  margin-bottom: auto; */}
 `
 const SecondaryText = styled.div`
   align-items: center;
   font-weight: normal;
   font-size: 12px;
-  ${'' /* margin-top: auto; */}
-  ${'' /* margin-top: auto;
-  margin-bottom: 14px; */}
 `
 
 const ListContainer = styled.div`
