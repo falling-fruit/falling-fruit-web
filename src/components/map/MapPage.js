@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
 import { getClusters, getLocations } from '../../utils/api'
 import Map from './Map'
+
+const LoadingText = styled.p`
+  position: absolute;
+  z-index: 1;
+`
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -45,10 +51,12 @@ const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
       if (view.bounds) {
+        setIsLoading(true)
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
           const query = {
             swlng: view.bounds.sw.lng,
@@ -75,6 +83,7 @@ const MapPage = () => {
           setLocations(locations)
           setClusters([])
         }
+        setIsLoading(false)
       }
     }
     fetchClusterAndLocationData()
@@ -99,15 +108,18 @@ const MapPage = () => {
   }
 
   return (
-    <Map
-      googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-      view={view}
-      locations={locations}
-      clusters={clusters}
-      onViewChange={onViewChange}
-      onLocationClick={onLocationClick}
-      onClusterClick={onClusterClick}
-    />
+    <div style={{ height: '100%', width: '100%' }}>
+      {isLoading && <LoadingText>Loading...</LoadingText>}
+      <Map
+        googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        view={view}
+        locations={locations}
+        clusters={clusters}
+        onViewChange={onViewChange}
+        onLocationClick={onLocationClick}
+        onClusterClick={onClusterClick}
+      />
+    </div>
   )
 }
 
