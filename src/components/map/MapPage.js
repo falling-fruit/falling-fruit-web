@@ -57,29 +57,26 @@ const MapPage = () => {
     async function fetchClusterAndLocationData() {
       if (view.bounds) {
         setIsLoading(true)
+        const query = {
+          swlng: view.bounds.sw.lng,
+          nelng: view.bounds.ne.lng,
+          swlat: view.bounds.sw.lat,
+          nelat: view.bounds.ne.lat,
+          muni: 1,
+        }
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-          const query = {
-            swlng: view.bounds.sw.lng,
-            nelng: view.bounds.ne.lng,
-            swlat: view.bounds.sw.lat,
-            nelat: view.bounds.ne.lat,
-            zoom: view.zoom,
-            muni: 1,
-          }
-          const clusters = await getClusters(query)
+          const getClustersQuery = { ...query }
+          getClustersQuery['zoom'] = view.zoom
+          const clusters = await getClusters(getClustersQuery)
           setClusters(clusters)
           setLocations([])
         } else {
-          const query = {
-            swlng: view.bounds.sw.lng,
-            nelng: view.bounds.ne.lng,
-            swlat: view.bounds.sw.lat,
-            nelat: view.bounds.ne.lat,
-            muni: 1,
-          }
-          const locations = await getLocations(query)
-          // Remove number of locations returned and total locations available from result
-          locations.splice(0, 2)
+          /* eslint-disable no-unused-vars */
+          const [
+            numLocationsReturned,
+            totalLocations,
+            ...locations
+          ] = await getLocations(query)
           setLocations(locations)
           setClusters([])
         }
@@ -108,7 +105,7 @@ const MapPage = () => {
   }
 
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <>
       {isLoading && <LoadingText>Loading...</LoadingText>}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
@@ -119,7 +116,7 @@ const MapPage = () => {
         onLocationClick={onLocationClick}
         onClusterClick={onClusterClick}
       />
-    </div>
+    </>
   )
 }
 

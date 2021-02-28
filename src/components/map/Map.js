@@ -30,18 +30,18 @@ const Map = ({
     zoom={view.zoom}
     onChange={onViewChange}
   >
-    {clusters.map((cluster, index) => (
+    {clusters.map((cluster) => (
       <Cluster
-        key={index}
+        key={JSON.stringify(cluster)}
         onClick={() => onClusterClick(cluster)}
         count={cluster.count}
         lat={cluster.lat}
         lng={cluster.lng}
       />
     ))}
-    {locations.map((location, index) => (
+    {locations.map((location) => (
       <Location
-        key={index}
+        key={location.id}
         onClick={() => onLocationClick(location)}
         lat={location.lat}
         lng={location.lng}
