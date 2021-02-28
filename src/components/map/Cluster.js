@@ -14,17 +14,28 @@ const MIN_CLUSTER_DIAMETER = 30
  */
 const MAX_CLUSTER_DIAMETER = 100
 
-// TODO: Cluster styling/icon that Siraj wants
 const ClusterContainer = styled.button`
   width: ${(props) => props.diameter}px;
   height: ${(props) => props.diameter}px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
   border-radius: 100%;
-  background: rgba(35, 74, 201, 0.214);
+  color: white;
+  background: ${({ theme }) => theme.blue};
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.12);
   transform: translate(-50%, -50%);
 `
+
+/**
+ * Helper function to round and format cluster labels
+ * @function calculateDiameter
+ * @param {number} count - The total number of locations within this cluster
+ * @return {string} - The rounded number label with letter k,m or none
+ */
+const formatClusterLabel = (count) =>
+  count < 1000 ? count : `${Math.ceil(count / 1000).toString()}K`
 
 /**
  * Helper function to calculate a cluster's diameter given its count
@@ -45,7 +56,7 @@ const calculateDiameter = (count) =>
  */
 const Cluster = ({ onClick, count }) => (
   <ClusterContainer diameter={calculateDiameter(count)} onClick={onClick}>
-    <p>{count}</p>
+    <p>{formatClusterLabel(count)}</p>
   </ClusterContainer>
 )
 
