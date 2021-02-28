@@ -1,4 +1,8 @@
-import { ListUl, SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
+import {
+  ChevronRight,
+  ListUl,
+  SearchAlt2 as Search,
+} from '@styled-icons/boxicons-regular'
 import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 
 import MapPage from '../map/MapPage'
@@ -8,7 +12,6 @@ import ListEntry from '../ui/ListEntry'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { Tag, TagList } from '../ui/Tag'
 import LocationIcon from './parisImage.jpeg'
-import Arrow from './Vector.png'
 
 const MobileLayout = () => (
   <PageTabs defaultIndex={2}>
@@ -50,13 +53,12 @@ const MobileLayout = () => (
           leftIcon={<img src={LocationIcon} alt="Location Icon"></img>}
           primaryText="Location"
           secondaryText="Champaign, IL"
-          rightIcon={<img src={Arrow} alt="Arrow Icon"></img>}
+          rightIcon={<img src={ChevronRight} alt="Arrow Icon"></img>}
         />
         <ListEntry
           leftIcon={<img src={LocationIcon} alt="Location Icon"></img>}
           primaryText="Location"
-          secondaryText="Champaign, IL"
-          rightIcon={<img src={Arrow} alt="Arrow Icon"></img>}
+          rightIcon={<img src={ChevronRight} alt="Arrow Icon"></img>}
         />
       </TabPanel>
     </TabPanels>

@@ -8,7 +8,7 @@ const LeftIcon = styled.div`
   overflow: hidden;
 `
 const PrimaryText = styled.div`
-  align-items: center
+  align-items: center;
   font-weight: bold;
   font-size: 14px;
 `
