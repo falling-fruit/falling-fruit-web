@@ -6,9 +6,18 @@ const LeftIcon = styled.div`
   max-width: 36px;
   max-height: 36px;
   overflow: hidden;
+
+  ${'' /* TODO: Fix image filling */}
+  & > * {
+    width: 100%;
+    height: 100%;
+
+    object-position: center;
+    object-fit: contain;
+  }
 `
 const PrimaryText = styled.div`
-  align-items: center;
+  align-items: center
   font-weight: bold;
   font-size: 14px;
 `
@@ -34,9 +43,10 @@ const TextContainer = styled.div`
   flex: 1;
 `
 const RightIcon = styled.div`
-  max-width: 16px;
-  max-height: 16px;
+  max-width: 32px;
+  width: 100%;
   overflow: hidden;
+  color: #4183c4;
 `
 
 const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (

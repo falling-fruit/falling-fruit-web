@@ -9,9 +9,10 @@ import MapPage from '../map/MapPage'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
+import MapTooltip from '../ui/MapTooltip'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { Tag, TagList } from '../ui/Tag'
-import LocationIcon from './parisImage.jpeg'
+// import LocationIcon from './parisImage.jpeg'
 
 const MobileLayout = () => (
   <PageTabs defaultIndex={2}>
@@ -50,15 +51,26 @@ const MobileLayout = () => (
       <TabPanel>
         <p>List</p>
         <ListEntry
-          leftIcon={<img src={LocationIcon} alt="Location Icon"></img>}
+          leftIcon={<Star />}
           primaryText="Location"
           secondaryText="Champaign, IL"
-          rightIcon={<img src={ChevronRight} alt="Arrow Icon"></img>}
+          rightIcon={<ChevronRight />}
         />
         <ListEntry
-          leftIcon={<img src={LocationIcon} alt="Location Icon"></img>}
+          leftIcon={<Star />}
           primaryText="Location"
-          rightIcon={<img src={ChevronRight} alt="Arrow Icon"></img>}
+          secondaryText="Champaign, IL"
+          rightIcon={<ChevronRight />}
+        />
+        <MapTooltip
+          ListEntry={
+            <ListEntry
+              leftIcon={<Star />}
+              primaryText="Location"
+              secondaryText="San Francisco, CA"
+              rightIcon={<ChevronRight />}
+            />
+          }
         />
       </TabPanel>
     </TabPanels>
