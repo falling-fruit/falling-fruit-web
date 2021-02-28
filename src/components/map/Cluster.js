@@ -26,13 +26,18 @@ const ClusterContainer = styled.button`
   background: ${({ theme }) => theme.blue};
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.12);
   transform: translate(-50%, -50%);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 `
 
 /**
  * Helper function to round and format cluster labels
- * @function calculateDiameter
+ * @function formatClusterLabel
  * @param {number} count - The total number of locations within this cluster
- * @return {string} - The rounded number label with letter k,m or none
+ * @return {string} - The rounded number label
  */
 const formatClusterLabel = (count) =>
   count < 1000 ? count : `${Math.ceil(count / 1000).toString()}K`
