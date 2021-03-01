@@ -21,6 +21,10 @@ const PageTabs = styled(Tabs)`
   [data-reach-tab-list] {
     display: flex;
     background: ${({ theme }) => theme.background};
+    padding-bottom: env(
+      safe-area-inset-bottom,
+      0
+    ); // Moves tab buttons above home bar
 
     [data-reach-tab] {
       flex: 1;
