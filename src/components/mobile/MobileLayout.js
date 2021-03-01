@@ -15,7 +15,7 @@ import { Tag, TagList } from '../ui/Tag'
 // import LocationIcon from './parisImage.jpeg'
 
 const MobileLayout = () => (
-  <PageTabs defaultIndex={2}>
+  <PageTabs defaultIndex={2} style={{ backgroundColor: '#e5e5e5' }}>
     <TabPanels>
       <TabPanel>
         <p>Settings</p>

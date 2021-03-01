@@ -1,18 +1,11 @@
 // import PropTypes from 'prop-types'
 import '@reach/tooltip/styles.css'
 
-import { Tooltip } from '@reach/tooltip'
 import styled from 'styled-components'
 
-const ListEntryWrapper = styled.div`
-  position: relative;
-  width: 224px;
-  height: 54px;
-  background: #ffffff;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.12);
-  border-radius: 44px;
-`
-const StyledTooltip = styled(Tooltip)`
+import TriangleTooltip from './TriangleTooltip'
+
+const StyledTooltip = styled(TriangleTooltip)`
   background-color: #fff;
   border: none;
   box-shadow: none;
@@ -24,7 +17,7 @@ const StyledTooltip = styled(Tooltip)`
 
 const MapTooltip = ({ ListEntry }) => (
   <div>
-    <StyledTooltip label={<ListEntryWrapper> {ListEntry} </ListEntryWrapper>}>
+    <StyledTooltip label={ListEntry}>
       <button style={{ fontSize: 25 }}>Location</button>
     </StyledTooltip>
   </div>
