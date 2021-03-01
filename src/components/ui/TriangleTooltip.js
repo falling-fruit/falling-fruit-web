@@ -19,7 +19,7 @@ const TriangleTooltip = ({ children, label, 'aria-label': ariaLabel }) => {
   // destructure off what we need to position the triangle
   const { isVisible, triggerRect } = tooltip
   return (
-    <React.Fragment>
+    <div>
       {React.cloneElement(children, trigger)}
       {isVisible && (
         // The Triangle. We position it relative to the trigger, not the popup
@@ -38,7 +38,9 @@ const TriangleTooltip = ({ children, label, 'aria-label': ariaLabel }) => {
               height: 0,
               borderLeft: '10px solid transparent',
               borderRight: '10px solid transparent',
-              borderBottom: '10px solid white',
+              borderBottom: '10px solid #FFF',
+              zIndex: '999', // moves triangle above the tooltip
+              boxShadow: 'none',
             }}
           />
         </Portal>
@@ -51,14 +53,14 @@ const TriangleTooltip = ({ children, label, 'aria-label': ariaLabel }) => {
           width: '224px',
           height: '54px',
           background: 'white',
-          boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.12)',
           borderRadius: '44px',
           border: 'none',
-          padding: '0.5em 1em',
+          boxShadow: 'none',
+          marginTop: '1px',
         }}
         position={centered}
       />
-    </React.Fragment>
+    </div>
   )
 }
 export default TriangleTooltip

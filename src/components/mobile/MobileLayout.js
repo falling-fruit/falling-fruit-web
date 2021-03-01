@@ -15,7 +15,7 @@ import { Tag, TagList } from '../ui/Tag'
 // import LocationIcon from './parisImage.jpeg'
 
 const MobileLayout = () => (
-  <PageTabs defaultIndex={2} style={{ backgroundColor: '#e5e5e5' }}>
+  <PageTabs defaultIndex={2}>
     <TabPanels>
       <TabPanel>
         <p>Settings</p>
@@ -65,7 +65,6 @@ const MobileLayout = () => (
         <MapTooltip
           ListEntry={
             <ListEntry
-              leftIcon={<Star />}
               primaryText="Location"
               secondaryText="San Francisco, CA"
               rightIcon={<ChevronRight />}
