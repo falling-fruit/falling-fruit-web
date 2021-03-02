@@ -21,7 +21,7 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
 
   const handleTabChange = (tabIndex) => {
     setTabIndex(tabIndex)
-    history.push(tabPaths[tabIndex].path)
+    history.push(tabPaths[tabIndex])
   }
 
   return [tabIndex, handleTabChange]
