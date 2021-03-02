@@ -62,7 +62,7 @@ ListEntry.propTypes = {
   leftIcon: PropTypes.node,
   primaryText: PropTypes.string,
   secondaryText: PropTypes.string,
-  // rightIcon: PropTypes.node,
+  rightIcon: PropTypes.node,
 }
 
 export default ListEntry
