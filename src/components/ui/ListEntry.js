@@ -40,7 +40,12 @@ const TextContainer = styled.div`
   flex: 1;
 `
 const RightIcon = styled.div`
-  color: #4183c4;
+  width: 32px;
+  height: 32px;
+  color: ${({ theme }) => theme.blue};
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
 `
 
 const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
@@ -58,7 +63,7 @@ ListEntry.propTypes = {
   leftIcon: PropTypes.node,
   primaryText: PropTypes.string,
   secondaryText: PropTypes.string,
-  rightIcon: PropTypes.node,
+  // rightIcon: PropTypes.node,
 }
 
 export default ListEntry

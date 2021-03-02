@@ -15,7 +15,7 @@ import { Tag, TagList } from '../ui/Tag'
 import Image from './Image.png'
 import Leaf from './leaf.png'
 const MobileLayout = () => (
-  <PageTabs defaultIndex={1}>
+  <PageTabs defaultIndex={2}>
     <TabPanels>
       <TabPanel>
         <p>Settings</p>
