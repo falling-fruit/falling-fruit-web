@@ -65,9 +65,7 @@ const MapPage = () => {
           muni: 1,
         }
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-          const getClustersQuery = { ...query }
-          getClustersQuery['zoom'] = view.zoom
-          const clusters = await getClusters(getClustersQuery)
+          const clusters = await getClusters({ ...query, zoom: view.zoom })
           setClusters(clusters)
           setLocations([])
         } else {

@@ -35,7 +35,7 @@ const ClusterContainer = styled.button`
  * @return {string} - The rounded number label with letter k,m or none
  */
 const formatClusterLabel = (count) =>
-  count < 1000 ? count : `${Math.ceil(count / 1000).toString()}K`
+  count < 1000 ? count : `${Math.ceil(count / 1000)}K`
 
 /**
  * Helper function to calculate a cluster's diameter given its count
