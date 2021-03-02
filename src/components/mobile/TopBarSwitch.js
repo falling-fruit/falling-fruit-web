@@ -2,19 +2,18 @@ import { Route, Switch } from 'react-router-dom'
 
 import Search from '../search/Search'
 import TopBar from '../ui/TopBar'
+import EntryBar from './EntryBar'
 
 const TopBarSwitch = () => (
   <Switch>
-    <Route path="/map">
-      <TopBar>
+    <TopBar>
+      <Route path="/map">
         <Search />
-      </TopBar>
-    </Route>
-    <Route path="/list">
-      <TopBar>
-        <Search />
-      </TopBar>
-    </Route>
+      </Route>
+      <Route path="/list">
+        <EntryBar />
+      </Route>
+    </TopBar>
     <Route></Route>
   </Switch>
 )

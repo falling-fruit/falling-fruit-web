@@ -36,9 +36,11 @@ const useDefaultTabIndex = () => {
   let defaultIndex = TABS.findIndex(({ path }) => path === pathname)
   // eslint-disable-next-line no-magic-numbers
   if (defaultIndex === -1) {
-    // If no path,
-    history.replace(TABS[DEFAULT_TAB].path)
     defaultIndex = DEFAULT_TAB
+    // Replace default URL with path to default tab but ignore "real" paths
+    if (pathname === '/') {
+      history.replace(TABS[DEFAULT_TAB].path)
+    }
   }
 
   return defaultIndex
