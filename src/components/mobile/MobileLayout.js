@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
 
+import EntryDetails from '../entry/EntryDetails'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
-import EntryPage from './EntryPage'
 import { DEFAULT_TAB, TABS } from './tabs'
 import TopBarSwitch from './TopBarSwitch'
 
@@ -19,8 +19,7 @@ const useRoutedTabs = (defaultTab, tabs) => {
     const matchedIndex = tabs.findIndex(({ path }) => path === pathname)
     // eslint-disable-next-line no-magic-numbers
     if (matchedIndex !== -1) {
-      // Hack: Allow google-map-react to render so that onViewChange doesn't break
-      setTimeout(() => setTabIndex(matchedIndex), 500)
+      setTabIndex(matchedIndex)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -51,8 +50,8 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
-          <Route path="/entry">
-            <EntryPage />
+          <Route path="/entry/:id">
+            <EntryDetails />
           </Route>
           <Route>{tabPanels}</Route>
         </Switch>
