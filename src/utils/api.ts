@@ -12,21 +12,14 @@ const instance = axios.create({
 })
 
 const handleResponse = (request: Promise<AxiosResponse<any>>) =>
-  request.then(
-    (res) => {
-      // v0.2 API handles client-side parameter errors with
-      // a 200 response and an error string in the body
-      if (res.data.error) {
-        console.error(res.data.error)
-        return null
-      }
-      return res.data
-    },
-    (err) => {
-      console.error(err)
-      return null
-    },
-  )
+  request.then((res) => {
+    // v0.2 API handles client-side parameter errors with
+    // a 200 response and an error string in the body
+    if (res.data.error) {
+      throw new Error(res.data.error)
+    }
+    return res.data
+  })
 
 const fileToFormData = (photoData: string | Blob | undefined) => {
   if (photoData !== undefined) {
