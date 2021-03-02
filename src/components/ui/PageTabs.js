@@ -22,6 +22,7 @@ const PageTabs = styled(Tabs)`
 
   [data-reach-tab-list] {
     display: flex;
+    height: 80px;
     background: ${({ theme }) => theme.background};
     padding-bottom: env(
       safe-area-inset-bottom,
@@ -30,10 +31,11 @@ const PageTabs = styled(Tabs)`
 
     [data-reach-tab] {
       flex: 1;
-      text-align: center;
-      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       font-size: 10px;
-      box-sizing: border-box;
       border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
       border-bottom: none;
 
@@ -43,8 +45,8 @@ const PageTabs = styled(Tabs)`
 
       ${StyledIconBase} {
         display: block;
-        margin: 0 auto;
-        height: 32px;
+        margin: 0 auto 2px;
+        height: 36px;
       }
 
       &:not([data-selected]) {

@@ -2,14 +2,7 @@ import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
 
 import MapPage from '../map/MapPage'
-import {
-  LinkTab,
-  PageTabs,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from '../ui/PageTabs'
+import { LinkTab, PageTabs, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import Settings from './Settings'
 import TopBarSwitch from './TopBarSwitch'
 
@@ -28,10 +21,10 @@ const MobileLayout = () => (
       </TabPanel>
     </TabPanels>
     <TabList>
-      <Tab to="/settings">
+      <LinkTab to="/settings">
         <Cog />
         Settings
-      </Tab>
+      </LinkTab>
       <LinkTab to="/map">
         <MapAlt />
         Map
