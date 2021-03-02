@@ -6,15 +6,22 @@ import EntryBar from './EntryBar'
 
 const TopBarSwitch = () => (
   <Switch>
-    <TopBar>
-      <Route path="/map">
-        <Search />
-      </Route>
-      <Route path="/list">
-        <EntryBar />
-      </Route>
-    </TopBar>
-    <Route></Route>
+    <Route path="/settings"></Route>
+    <Route>
+      <TopBar>
+        <Switch>
+          <Route path="/map">
+            <Search />
+          </Route>
+          <Route path="/list">
+            <Search />
+          </Route>
+          <Route path="/entry">
+            <EntryBar />
+          </Route>
+        </Switch>
+      </TopBar>
+    </Route>
   </Switch>
 )
 

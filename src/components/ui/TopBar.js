@@ -6,7 +6,7 @@ const TopBar = styled.div`
   right: 0;
   top: 0;
   z-index: 1;
-  background: #ffffff;
+  background: ${({ theme }) => theme.background};
   border-radius: 0 0 44px 44px;
   filter: drop-shadow(0px -1px 8px ${({ theme }) => theme.shadow});
   padding: 16px;
