@@ -6,6 +6,7 @@
     "@reach/tabs": "^0.13.0",
     "@reach/tooltip": "^0.13.2",
     "@reach/window-size": "^0.13.2",
+    "@styled-icons/bootstrap": "^10.25.0",
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/boxicons-solid": "^10.23.0",
     "axios": "^0.21.1",

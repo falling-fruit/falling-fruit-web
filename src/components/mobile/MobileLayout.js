@@ -1,3 +1,4 @@
+import { CursorFill } from '@styled-icons/bootstrap/'
 import {
   ChevronRight,
   ListUl,
@@ -9,13 +10,12 @@ import MapPage from '../map/MapPage'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
-import MapTooltip from '../ui/MapTooltip'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { Tag, TagList } from '../ui/Tag'
-// import LocationIcon from './parisImage.jpeg'
-
+import Image from './Image.png'
+import Leaf from './leaf.png'
 const MobileLayout = () => (
-  <PageTabs defaultIndex={2}>
+  <PageTabs defaultIndex={1}>
     <TabPanels>
       <TabPanel>
         <p>Settings</p>
@@ -51,25 +51,26 @@ const MobileLayout = () => (
       <TabPanel>
         <p>List</p>
         <ListEntry
-          leftIcon={<Star />}
+          leftIcon={<img src={Image} alt={'hi'}></img>}
           primaryText="Location"
           secondaryText="Champaign, IL"
+          rightIcon={<CursorFill />}
+        />
+        <ListEntry
+          leftIcon={<img src={Image} alt={'hi'}></img>}
+          primaryText="Location"
           rightIcon={<ChevronRight />}
         />
         <ListEntry
-          leftIcon={<Star />}
-          primaryText="Location"
-          secondaryText="Champaign, IL"
+          leftIcon={<img src={Leaf} alt={'hi'}></img>}
+          primaryText="Entry"
+          secondaryText="0.3 miles"
           rightIcon={<ChevronRight />}
         />
-        <MapTooltip
-          ListEntry={
-            <ListEntry
-              primaryText="Location"
-              secondaryText="San Francisco, CA"
-              rightIcon={<ChevronRight />}
-            />
-          }
+        <ListEntry
+          leftIcon={<img src={Leaf} alt={'hi'}></img>}
+          primaryText="Entry"
+          rightIcon={<ChevronRight />}
         />
       </TabPanel>
     </TabPanels>

@@ -7,17 +7,14 @@ const LeftIcon = styled.div`
   max-height: 36px;
   overflow: hidden;
 
-  ${'' /* TODO: Fix image filling */}
   & > * {
     width: 100%;
     height: 100%;
-
-    object-position: center;
-    object-fit: contain;
   }
 `
+
 const PrimaryText = styled.div`
-  align-items: center
+  align-items: center;
   font-weight: bold;
   font-size: 14px;
 `
@@ -43,7 +40,7 @@ const TextContainer = styled.div`
   flex: 1;
 `
 const RightIcon = styled.div`
-  max-width: 32px;
+  max-width: 16px;
   width: 100%;
   overflow: hidden;
   color: #4183c4;
