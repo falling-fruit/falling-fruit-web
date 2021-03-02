@@ -12,7 +12,6 @@ const LeftIcon = styled.div`
     height: 100%;
   }
 `
-
 const PrimaryText = styled.div`
   align-items: center;
   font-weight: bold;

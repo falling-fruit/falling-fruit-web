@@ -1,21 +1,13 @@
-import { CursorFill } from '@styled-icons/bootstrap/'
-import {
-  ChevronRight,
-  ListUl,
-  SearchAlt2 as Search,
-} from '@styled-icons/boxicons-regular'
+import { ListUl, SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 
 import MapPage from '../map/MapPage'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
-import ListEntry from '../ui/ListEntry'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { Tag, TagList } from '../ui/Tag'
-import Image from './Image.png'
-import Leaf from './leaf.png'
 const MobileLayout = () => (
-  <PageTabs defaultIndex={2}>
+  <PageTabs defaultIndex={1}>
     <TabPanels>
       <TabPanel>
         <p>Settings</p>
@@ -50,6 +42,7 @@ const MobileLayout = () => (
       </TabPanel>
       <TabPanel>
         <p>List</p>
+        {/* TODO: Remove before merging 
         <ListEntry
           leftIcon={<img src={Image} alt={'hi'}></img>}
           primaryText="Location"
@@ -71,7 +64,7 @@ const MobileLayout = () => (
           leftIcon={<img src={Leaf} alt={'hi'}></img>}
           primaryText="Entry"
           rightIcon={<ChevronRight size={32} />}
-        />
+        /> */}
       </TabPanel>
     </TabPanels>
     <TabList>
