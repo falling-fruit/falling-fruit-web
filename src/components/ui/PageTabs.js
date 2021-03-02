@@ -37,10 +37,6 @@ const PageTabs = styled(Tabs)`
       border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
       border-bottom: none;
 
-      // Remove link styling
-      color: inherit;
-      text-decoration: inherit;
-
       ${StyledIconBase} {
         display: block;
         margin: 0 auto 2px;
