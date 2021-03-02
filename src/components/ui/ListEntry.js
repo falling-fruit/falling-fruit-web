@@ -29,6 +29,7 @@ const ListContainer = styled.div`
   padding: 0 22px;
   height: 57px;
   align-items: center;
+  border-bottom: 1px solid #e0e1e2;
 `
 const TextContainer = styled.div`
   display: flex;

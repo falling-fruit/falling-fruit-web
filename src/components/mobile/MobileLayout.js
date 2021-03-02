@@ -43,7 +43,7 @@ const MobileLayout = () => (
       <TabPanel>
         <p>List</p>
         {/* TODO: Remove before merging 
-        <ListEntry
+        {/* <ListEntry
           leftIcon={<img src={Image} alt={'hi'}></img>}
           primaryText="Location"
           secondaryText="Champaign, IL"
@@ -53,18 +53,14 @@ const MobileLayout = () => (
           leftIcon={<img src={Image} alt={'hi'}></img>}
           primaryText="Location"
           rightIcon={<CursorFill size={16} />}
-        />
-        <ListEntry
-          leftIcon={<img src={Leaf} alt={'hi'}></img>}
+        /> */}
+        {/* <ListEntry
           primaryText="Entry"
           secondaryText="0.3 miles"
-          rightIcon={<ChevronRight size={32} />}
         />
         <ListEntry
-          leftIcon={<img src={Leaf} alt={'hi'}></img>}
           primaryText="Entry"
-          rightIcon={<ChevronRight size={32} />}
-        /> */}
+        />  */}
       </TabPanel>
     </TabPanels>
     <TabList>
