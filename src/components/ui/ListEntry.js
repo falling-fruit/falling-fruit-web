@@ -40,12 +40,12 @@ const TextContainer = styled.div`
   flex: 1;
 `
 const RightIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
   color: ${({ theme }) => theme.blue};
-  text-align: center;
-  vertical-align: middle;
-  display: table-cell;
 `
 
 const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
