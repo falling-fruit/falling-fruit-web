@@ -54,23 +54,23 @@ const MobileLayout = () => (
           leftIcon={<img src={Image} alt={'hi'}></img>}
           primaryText="Location"
           secondaryText="Champaign, IL"
-          rightIcon={<CursorFill />}
+          rightIcon={<CursorFill size={16} />}
         />
         <ListEntry
           leftIcon={<img src={Image} alt={'hi'}></img>}
           primaryText="Location"
-          rightIcon={<ChevronRight />}
+          rightIcon={<CursorFill size={16} />}
         />
         <ListEntry
           leftIcon={<img src={Leaf} alt={'hi'}></img>}
           primaryText="Entry"
           secondaryText="0.3 miles"
-          rightIcon={<ChevronRight />}
+          rightIcon={<ChevronRight size={32} />}
         />
         <ListEntry
           leftIcon={<img src={Leaf} alt={'hi'}></img>}
           primaryText="Entry"
-          rightIcon={<ChevronRight />}
+          rightIcon={<ChevronRight size={32} />}
         />
       </TabPanel>
     </TabPanels>

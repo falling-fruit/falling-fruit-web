@@ -40,9 +40,6 @@ const TextContainer = styled.div`
   flex: 1;
 `
 const RightIcon = styled.div`
-  max-width: 16px;
-  width: 100%;
-  overflow: hidden;
   color: #4183c4;
 `
 
