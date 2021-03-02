@@ -16,8 +16,9 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
     if (matchedIndex !== -1) {
       setTabIndex(matchedIndex)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // This useEffect has no dependencies because we only want to set the initial
+    // tabIndex the first time, rather than every time the pathname changes
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleTabChange = (tabIndex) => {
     setTabIndex(tabIndex)

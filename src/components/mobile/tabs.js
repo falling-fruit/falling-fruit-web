@@ -5,6 +5,7 @@ import MapPage from '../map/MapPage'
 import SettingsPage from './SettingsPage'
 
 const DEFAULT_TAB = 1 // Map
+
 const TABS = [
   {
     path: '/settings',

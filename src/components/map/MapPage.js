@@ -76,6 +76,7 @@ const MapPage = () => {
             totalLocations,
             ...locations
           ] = await getLocations(query)
+          /* eslint-enable no-unused-vars */
           setLocations(locations)
           setClusters([])
         }

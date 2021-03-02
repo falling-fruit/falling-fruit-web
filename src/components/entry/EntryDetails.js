@@ -1,7 +1,9 @@
 import { useRouteMatch } from 'react-router-dom'
 
 const EntryDetails = () => {
-  const { id } = useRouteMatch().params
+  const {
+    params: { id },
+  } = useRouteMatch()
 
   return (
     <div>

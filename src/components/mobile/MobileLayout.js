@@ -15,8 +15,9 @@ const MobileLayout = () => {
   const tabPanels = TABS.map(({ path, panel }) => (
     <TabPanel key={path}>{panel}</TabPanel>
   ))
+
   const tabList = TABS.map(({ path, icon, label }) => (
-    <Tab key={path} to={path}>
+    <Tab key={path}>
       {icon}
       {label}
     </Tab>
