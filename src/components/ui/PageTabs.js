@@ -2,8 +2,6 @@ import '@reach/tabs/styles.css'
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
 import { StyledIconBase } from '@styled-icons/styled-icon'
-import { forwardRef } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const PageTabs = styled(Tabs)`
@@ -67,13 +65,4 @@ const PageTabs = styled(Tabs)`
   }
 `
 
-// See https://github.com/reach/reach-ui/issues/632
-// Used to make Reach Tab into a link that interacts with router
-const CustomLink = forwardRef((props, ref) => (
-  <Link {...props} innerRef={ref} />
-))
-CustomLink.displayName = 'CustomLink'
-
-const LinkTab = (props) => <Tab as={CustomLink} {...props} />
-
-export { LinkTab, PageTabs, Tab, TabList, TabPanel, TabPanels }
+export { PageTabs, Tab, TabList, TabPanel, TabPanels }

@@ -1,70 +1,53 @@
-import { ListUl } from '@styled-icons/boxicons-regular'
-import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
+import { useEffect, useState } from 'react'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
 
-import MapPage from '../map/MapPage'
-import { LinkTab, PageTabs, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
+import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import EntryPage from './EntryPage'
-import Settings from './Settings'
+import { DEFAULT_TAB, TABS } from './tabs'
 import TopBarSwitch from './TopBarSwitch'
 
-const DEFAULT_TAB = 1 // Map
-const TABS = [
-  {
-    path: '/settings',
-    icon: <Cog />,
-    label: 'Settings',
-    panel: <Settings />,
-  },
-  {
-    path: '/map',
-    icon: <MapAlt />,
-    label: 'Map',
-    panel: <MapPage />,
-  },
-  {
-    path: '/list',
-    icon: <ListUl />,
-    label: 'List',
-    panel: <p>List</p>,
-  },
-]
-
 /**
- * Hook to get the default tab index on page load from the URL path.
+ * Hook to get and set the current tab, while updating the URL location on tab change.
  */
-const useDefaultTabIndex = () => {
+const useRoutedTabs = (defaultTab, tabs) => {
+  const [tabIndex, setTabIndex] = useState(defaultTab)
   const { pathname } = useLocation()
   const history = useHistory()
 
-  let defaultIndex = TABS.findIndex(({ path }) => path === pathname)
-  // eslint-disable-next-line no-magic-numbers
-  if (defaultIndex === -1) {
-    defaultIndex = DEFAULT_TAB
-    // Replace default URL with path to default tab but ignore "real" paths, like /entry
-    if (pathname === '/') {
-      history.replace(TABS[DEFAULT_TAB].path)
+  // Set the initial tabIndex from the URL on page load
+  useEffect(() => {
+    const matchedIndex = tabs.findIndex(({ path }) => path === pathname)
+    // eslint-disable-next-line no-magic-numbers
+    if (matchedIndex !== -1) {
+      // Hack: Allow google-map-react to render so that onViewChange doesn't break
+      setTimeout(() => setTabIndex(matchedIndex), 500)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleTabChange = (tabIndex) => {
+    setTabIndex(tabIndex)
+    history.push(tabs[tabIndex].path)
   }
 
-  return defaultIndex
+  return [tabIndex, handleTabChange]
 }
 
 const MobileLayout = () => {
-  const defaultTabIndex = useDefaultTabIndex()
+  const [tabIndex, handleTabChange] = useRoutedTabs(DEFAULT_TAB, TABS)
 
   const tabPanels = TABS.map(({ path, panel }) => (
     <TabPanel key={path}>{panel}</TabPanel>
   ))
   const tabList = TABS.map(({ path, icon, label }) => (
-    <LinkTab key={path} to={path}>
+    <Tab key={path} to={path}>
       {icon}
       {label}
-    </LinkTab>
+    </Tab>
   ))
 
   return (
-    <PageTabs defaultIndex={defaultTabIndex}>
+    <PageTabs index={tabIndex} onChange={handleTabChange}>
       <TabPanels>
         <TopBarSwitch />
         <Switch>

@@ -5,7 +5,7 @@ import Button from '../ui/Button'
 import Input from '../ui/Input'
 import { Tag, TagList } from '../ui/Tag'
 
-const Settings = () => (
+const SettingsPage = () => (
   <>
     <p>Settings</p>
     <Button icon={<Star />}>Review</Button>
@@ -36,4 +36,4 @@ const Settings = () => (
   </>
 )
 
-export default Settings
+export default SettingsPage

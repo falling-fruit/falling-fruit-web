@@ -8,7 +8,8 @@ import styled from 'styled-components'
 const Location = styled.button`
   width: 15px;
   height: 15px;
-  border-radius: 100%;
+  padding: 0;
+  border-radius: 50%;
   background: ${({ theme }) => theme.blue};
   transform: translate(-50%, -50%);
   border: none;
