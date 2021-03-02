@@ -1,49 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
+import { getClusters, getLocations } from '../../utils/api'
 import Map from './Map'
 
-// Mock location data
-const locationData = [
-  {
-    id: 1,
-    lat: 40.1127151,
-    lng: -88.2314734,
-  },
-  {
-    id: 2,
-    lat: 40.1125785,
-    lng: -88.2287926,
-  },
-  {
-    id: 3,
-    lat: 40.112657,
-    lng: -88.2278543,
-  },
-  {
-    id: 4,
-    lat: 60.1125785,
-    lng: -88.2287926,
-  },
-  {
-    id: 5,
-    lat: 60.112657,
-    lng: -88.2278543,
-  },
-]
-
-// Mock cluster data
-const clusterData = [
-  {
-    lat: 40.1127151,
-    lng: -88.2314734,
-    count: 1000,
-  },
-  {
-    lat: 60.1125785,
-    lng: -88.2278543,
-    count: 25,
-  },
-]
+const LoadingText = styled.p`
+  position: absolute;
+  z-index: 1;
+`
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -87,18 +51,38 @@ const MapPage = () => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-      // TODO: Fetch cluster data from server
-      setClusters(clusterData)
-      setLocations([])
-    } else {
-      // TODO: Fetch location data from server
-      setLocations(locationData)
-      setClusters([])
+    async function fetchClusterAndLocationData() {
+      if (view.bounds) {
+        setIsLoading(true)
+        const query = {
+          swlng: view.bounds.sw.lng,
+          nelng: view.bounds.ne.lng,
+          swlat: view.bounds.sw.lat,
+          nelat: view.bounds.ne.lat,
+          muni: 1,
+        }
+        if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+          const clusters = await getClusters({ ...query, zoom: view.zoom })
+          setClusters(clusters)
+          setLocations([])
+        } else {
+          /* eslint-disable no-unused-vars */
+          const [
+            numLocationsReturned,
+            totalLocations,
+            ...locations
+          ] = await getLocations(query)
+          setLocations(locations)
+          setClusters([])
+        }
+        setIsLoading(false)
+      }
     }
-  }, [view.zoom])
+    fetchClusterAndLocationData()
+  }, [view])
 
   const onViewChange = ({ center, zoom, bounds }) => {
     console.log('onViewChange called', { center, zoom, bounds })
@@ -119,15 +103,18 @@ const MapPage = () => {
   }
 
   return (
-    <Map
-      googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-      view={view}
-      locations={locations}
-      clusters={clusters}
-      onViewChange={onViewChange}
-      onLocationClick={onLocationClick}
-      onClusterClick={onClusterClick}
-    />
+    <>
+      {isLoading && <LoadingText>Loading...</LoadingText>}
+      <Map
+        googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        view={view}
+        locations={locations}
+        clusters={clusters}
+        onViewChange={onViewChange}
+        onLocationClick={onLocationClick}
+        onClusterClick={onClusterClick}
+      />
+    </>
   )
 }
 

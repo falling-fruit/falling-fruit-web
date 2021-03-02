@@ -30,9 +30,9 @@ const Map = ({
     zoom={view.zoom}
     onChange={onViewChange}
   >
-    {clusters.map((cluster, index) => (
+    {clusters.map((cluster) => (
       <Cluster
-        key={index}
+        key={JSON.stringify(cluster)}
         onClick={() => onClusterClick(cluster)}
         count={cluster.count}
         lat={cluster.lat}
