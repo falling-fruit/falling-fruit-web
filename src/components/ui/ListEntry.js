@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const LeftIcon = styled.div`
-  border-radius: 50%;
-  max-width: 36px;
-  max-height: 36px;
-  overflow: hidden;
+// const LIST_ENTRY_HEIGHTS = {
+//   sm: "47px",
+//   md: "57px",
+// };
 
+const Icons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 36px;
   & > * {
-    width: 100%;
-    height: 100%;
+    padding: 8px;
   }
 `
 const PrimaryText = styled.div`
@@ -22,14 +25,13 @@ const SecondaryText = styled.div`
   font-weight: normal;
   font-size: 12px;
 `
-
 const ListContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding: 0 22px;
   height: 57px;
   align-items: center;
-  border-bottom: 1px solid #e0e1e2;
+  border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
 `
 const TextContainer = styled.div`
   display: flex;
@@ -39,23 +41,15 @@ const TextContainer = styled.div`
   margin-left: 18px;
   flex: 1;
 `
-const RightIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  color: ${({ theme }) => theme.blue};
-`
 
-const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcon }) => (
+const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcons }) => (
   <ListContainer>
-    <LeftIcon>{leftIcon}</LeftIcon>
+    <Icons>{leftIcon}</Icons>
     <TextContainer>
       <PrimaryText>{primaryText}</PrimaryText>
       <SecondaryText>{secondaryText}</SecondaryText>
     </TextContainer>
-    <RightIcon>{rightIcon}</RightIcon>
+    <Icons>{rightIcons}</Icons>
   </ListContainer>
 )
 
@@ -63,7 +57,7 @@ ListEntry.propTypes = {
   leftIcon: PropTypes.node,
   primaryText: PropTypes.string,
   secondaryText: PropTypes.string,
-  rightIcon: PropTypes.node,
+  rightIcons: PropTypes.node,
 }
 
 export default ListEntry

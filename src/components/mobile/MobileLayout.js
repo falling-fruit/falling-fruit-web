@@ -4,8 +4,22 @@ import { Cog, Flag, MapAlt, Star } from '@styled-icons/boxicons-solid'
 import MapPage from '../map/MapPage'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
+import ListEntry from '../ui/ListEntry'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { Tag, TagList } from '../ui/Tag'
+import Leaf from './leaf.png'
+
+const ManyIcons = [
+  <img key={1} src={Leaf} alt={'hi'} />,
+  <img key={2} src={Leaf} alt={'hi'} />,
+  <img key={3} src={Leaf} alt={'hi'} />,
+]
+
+const TwoIcons = [
+  <img key={1} src={Leaf} alt={'hi'} />,
+  <img key={2} src={Leaf} alt={'hi'} />,
+]
+
 const MobileLayout = () => (
   <PageTabs defaultIndex={1}>
     <TabPanels>
@@ -55,11 +69,54 @@ const MobileLayout = () => (
           rightIcon={<CursorFill size={16} />}
         /> */}
         {/* <ListEntry
+          primaryText="Location"
+          secondaryText="Champaign, IL"
+        /> */}
+        <ListEntry
+          primaryText="Location"
+          secondaryText="Champaign, IL"
+          rightIcons={ManyIcons}
+        />
+        <ListEntry
+          leftIcon={TwoIcons}
+          primaryText="Entry"
+          rightIcons={TwoIcons}
+        />
+        <ListEntry
+          leftIcon={<img src={Leaf} alt={'hi'} />}
+          primaryText="Entry"
+          rightIcons={TwoIcons}
+        />
+        <ListEntry
+          leftIcon={<img src={Leaf} alt={'hi'} />}
           primaryText="Entry"
           secondaryText="0.3 miles"
         />
         <ListEntry
           primaryText="Entry"
+          secondaryText="0.3 miles"
+          rightIcons={TwoIcons}
+        />
+        <ListEntry
+          primaryText="Entry"
+          secondaryText="0.3 miles"
+          rightIcons={<img src={Leaf} alt={'hi'} />}
+        />
+
+        {/* <ListEntry
+          leftIcon={<Star key={32} />}
+          primaryText="Entry"
+          rightIcons={RightIcons}
+        /> 
+        <ListEntry
+          leftIcon={<Star key={32} />}
+          primaryText="Entry"
+          rightIcons={RightIcons}
+        /> 
+        <ListEntry
+          leftIcon={<Star key={32} />}
+          primaryText="Entry"
+          rightIcons={RightIcons}
         />  */}
       </TabPanel>
     </TabPanels>
