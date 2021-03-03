@@ -1,24 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
 /**
  * Hook to get and set the current tab, while updating the URL location on tab change.
  */
 const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
-  const [tabIndex, setTabIndex] = useState(defaultTabIndex)
   const { pathname } = useLocation()
   const history = useHistory()
-
-  // Set the initial tabIndex from the URL on page load
-  useEffect(() => {
+  const [tabIndex, setTabIndex] = useState(() => {
+    // Set the initial tabIndex from the URL on page load
     const matchedIndex = tabPaths.indexOf(pathname)
-    // eslint-disable-next-line no-magic-numbers
-    if (matchedIndex !== -1) {
-      setTabIndex(matchedIndex)
-    }
-    // This useEffect has no dependencies because we only want to set the initial
-    // tabIndex the first time, rather than every time the pathname changes
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    return matchedIndex === -1 ? defaultTabIndex : matchedIndex
+  })
 
   const handleTabChange = (tabIndex) => {
     setTabIndex(tabIndex)
