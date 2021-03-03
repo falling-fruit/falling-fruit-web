@@ -76,11 +76,13 @@ const MobileLayout = () => (
           primaryText="Location"
           secondaryText="Champaign, IL"
           rightIcons={ManyIcons}
+          size={57}
         />
         <ListEntry
           leftIcon={TwoIcons}
           primaryText="Entry"
           rightIcons={TwoIcons}
+          size={57}
         />
         <ListEntry
           leftIcon={<img src={Leaf} alt={'hi'} />}
@@ -96,6 +98,7 @@ const MobileLayout = () => (
           primaryText="Entry"
           secondaryText="0.3 miles"
           rightIcons={TwoIcons}
+          size={57}
         />
         <ListEntry
           primaryText="Entry"

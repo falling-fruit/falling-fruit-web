@@ -31,7 +31,9 @@ const ListContainer = styled.div`
   padding: 0 22px;
   height: 57px;
   align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+  &:not(:last-child) {
+    border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+  }
 `
 const TextContainer = styled.div`
   display: flex;
