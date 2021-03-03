@@ -29,6 +29,7 @@ const Map = ({
     center={view.center}
     zoom={view.zoom}
     onChange={onViewChange}
+    resetBoundsOnResize
   >
     {clusters.map((cluster) => (
       <Cluster

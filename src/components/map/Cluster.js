@@ -24,7 +24,7 @@ const ClusterContainer = styled.button`
   border-radius: 100%;
   color: white;
   background: ${({ theme }) => theme.blue};
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 4px 1px ${({ theme }) => theme.shadow};
   transform: translate(-50%, -50%);
   cursor: pointer;
 

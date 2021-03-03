@@ -54,6 +54,7 @@ const theme = {
   // background
   background: '#FFFFFF',
   secondaryBackground: '#E0E1E2',
+  shadow: 'rgba(0, 0, 0, 0.12)',
   // palette
   orange: '#FFA41B',
   transparentOrange: '#FFEDD1',
