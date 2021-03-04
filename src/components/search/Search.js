@@ -35,9 +35,6 @@ const Search = () => {
     setValue(e.target.value)
   }
 
-  // const handleSelect = (val) => {
-  //   setValue(val, false)
-  // }
   ;<Input
     placeholder="Search for a location..."
     onChange={handleInput}
