@@ -3,7 +3,10 @@ import { Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
 import Input from '../ui/Input'
+import ListEntry from '../ui/ListEntry'
 import { Tag, TagList } from '../ui/Tag'
+
+const TwoIcons = [<Star size="16" key={1} />, <Star size="16" key={2} />]
 
 const SettingsPage = () => (
   <>
@@ -33,6 +36,18 @@ const SettingsPage = () => (
       ))}
     </TagList>
     <br />
+    <ListEntry
+      leftIcons={<Star size="16" />}
+      primaryText="Entry"
+      secondaryText="0.3 miles"
+    />
+    <ListEntry
+      primaryText="Entry"
+      secondaryText="0.3 miles"
+      rightIcons={TwoIcons}
+      size={57}
+    />
+    <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
   </>
 )
 
