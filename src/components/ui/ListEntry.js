@@ -44,20 +44,14 @@ const TextContainer = styled.div`
   flex: 1;
 `
 
-const ListEntry = ({
-  leftIcon,
-  primaryText,
-  secondaryText,
-  rightIcons,
-  iconSize,
-}) => (
+const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcons }) => (
   <ListContainer>
-    <Icons size={iconSize}>{leftIcon}</Icons>
+    <Icons>{leftIcon}</Icons>
     <TextContainer>
       <PrimaryText>{primaryText}</PrimaryText>
       <SecondaryText>{secondaryText}</SecondaryText>
     </TextContainer>
-    <Icons size={iconSize}>{rightIcons}</Icons>
+    <Icons>{rightIcons}</Icons>
   </ListContainer>
 )
 
