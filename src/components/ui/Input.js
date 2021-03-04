@@ -8,6 +8,7 @@ const Input = ({
   label,
   icon,
   className,
+  ...props
 }) => {
   const id = label?.toLowerCase().split(' ').join('-').concat(`-${className}`)
 
@@ -24,6 +25,7 @@ const Input = ({
           type="text"
           placeholder={placeholder ?? ''}
           id={id}
+          {...props}
         />
         {icon}
       </div>

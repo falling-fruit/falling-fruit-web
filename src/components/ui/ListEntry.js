@@ -20,7 +20,7 @@ const SecondaryText = styled.div`
   font-weight: normal;
   font-size: 12px;
 `
-const ListContainer = styled.div`
+const ListContainer = styled.li`
   display: flex;
   flex-direction: row;
   padding: 0 22px;
