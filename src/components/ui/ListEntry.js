@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-// const LIST_ENTRY_HEIGHTS = {
-//   sm: "47px",
-//   md: "57px",
-// };
-
 const Icons = styled.div`
   display: flex;
   justify-content: center;
@@ -44,9 +39,9 @@ const TextContainer = styled.div`
   flex: 1;
 `
 
-const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcons }) => (
+const ListEntry = ({ leftIcons, primaryText, secondaryText, rightIcons }) => (
   <ListContainer>
-    <Icons>{leftIcon}</Icons>
+    <Icons>{leftIcons}</Icons>
     <TextContainer>
       <PrimaryText>{primaryText}</PrimaryText>
       <SecondaryText>{secondaryText}</SecondaryText>
@@ -56,7 +51,7 @@ const ListEntry = ({ leftIcon, primaryText, secondaryText, rightIcons }) => (
 )
 
 ListEntry.propTypes = {
-  leftIcon: PropTypes.node,
+  leftIcons: PropTypes.node,
   primaryText: PropTypes.string,
   secondaryText: PropTypes.string,
   rightIcons: PropTypes.node,

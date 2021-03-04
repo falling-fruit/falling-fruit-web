@@ -1,4 +1,4 @@
-import { useIsDesktop } from '../utils/breakpointHooks'
+import { useIsDesktop } from '../utils/useBreakpoint'
 import DesktopLayout from './desktop/DesktopLayout'
 import MobileLayout from './mobile/MobileLayout'
 

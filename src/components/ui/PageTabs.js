@@ -20,19 +20,27 @@ const PageTabs = styled(Tabs)`
 
   [data-reach-tab-list] {
     display: flex;
+    height: 80px;
     background: ${({ theme }) => theme.background};
+    padding-bottom: env(
+      safe-area-inset-bottom,
+      0
+    ); // Moves tab buttons above home bar
 
     [data-reach-tab] {
       flex: 1;
-      background: ${({ theme }) => theme.background};
-      height: 86px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
       border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
       border-bottom: none;
 
       ${StyledIconBase} {
         display: block;
-        margin: 0 auto 6px;
-        height: 32px;
+        margin: 0 auto 2px;
+        height: 36px;
       }
 
       &:not([data-selected]) {

@@ -1,26 +1,25 @@
 import WindowSize from '@reach/window-size'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import DesktopLayout from './components/desktop/DesktopLayout'
 import MainPage from './components/MainPage'
-import MobileLayout from './components/mobile/MobileLayout'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <Router>
       <Switch>
-        <Route path="/desktop">
-          <DesktopLayout />
+        <Route exact path="/">
+          <Redirect to="/map" />
         </Route>
-        <Route path="/mobile">
-          <MobileLayout />
-        </Route>
-        <Route path="/">
+        <Route>
           <MainPage />
         </Route>
-        <Route>Not found</Route>
       </Switch>
     </Router>
     <WindowSize>

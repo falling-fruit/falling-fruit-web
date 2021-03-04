@@ -24,7 +24,7 @@ const StyledSplit = styled(SplitPane)`
     width: 10px;
     cursor: col-resize;
     z-index: 1;
-    box-shadow: 8px 0px 8px -4px rgba(0, 0, 0, 0.12);
+    box-shadow: 8px 0px 8px -4px ${({ theme }) => theme.shadow};
   }
 `
 

@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
-const Input = ({ placeholder, onChange, onEnter, label, icon, className }) => {
+const Input = ({
+  placeholder,
+  value,
+  onChange,
+  onEnter,
+  label,
+  icon,
+  className,
+}) => {
   const id = label?.toLowerCase().split(' ').join('-').concat(`-${className}`)
 
   return (
@@ -8,6 +16,7 @@ const Input = ({ placeholder, onChange, onEnter, label, icon, className }) => {
       {label && <label htmlFor={id}>{label}</label>}
       <div>
         <input
+          value={value}
           onChange={onChange}
           onKeyDown={(e) => {
             e.key === 'Enter' && onEnter?.(e)
@@ -41,7 +50,7 @@ const StyledInput = styled(Input)`
 
     input {
       color: ${({ theme }) => theme.secondaryText};
-      font-size: 15px;
+      font-size: 16px;
       font-family: ${({ theme }) => theme.fonts};
       padding: 0;
       border: none;
