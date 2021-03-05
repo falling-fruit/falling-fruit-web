@@ -8,7 +8,6 @@ import {
   // ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox'
-import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import Geocode from 'react-geocode'
 import { useHistory } from 'react-router-dom'
 import usePlacesAutocomplete from 'use-places-autocomplete'
@@ -50,12 +49,6 @@ const Search = () => {
     setValue(e.target.value)
   }
 
-  ;<Input
-    placeholder="Search for a location..."
-    onChange={handleInput}
-    onEnter={(e) => window.alert(`Received:\n${e?.target?.value}`)}
-    icon={<SearchAlt2 />}
-  />
   return (
     <Combobox onSelect={onSelectHandler} aria-labelledby="demo">
       <ComboboxInput

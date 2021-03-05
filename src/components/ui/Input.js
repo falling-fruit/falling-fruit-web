@@ -1,37 +1,36 @@
+import React from 'react'
 import styled from 'styled-components'
 
-const Input = ({
-  placeholder,
-  value,
-  onChange,
-  onEnter,
-  label,
-  icon,
-  className,
-  ...props
-}) => {
-  const id = label?.toLowerCase().split(' ').join('-').concat(`-${className}`)
+const Input = React.forwardRef(
+  (
+    { placeholder, value, onChange, onEnter, label, icon, className, ...props },
+    ref,
+  ) => {
+    const id = label?.toLowerCase().split(' ').join('-').concat(`-${className}`)
 
-  return (
-    <div className={className}>
-      {label && <label htmlFor={id}>{label}</label>}
-      <div>
-        <input
-          value={value}
-          onChange={onChange}
-          onKeyDown={(e) => {
-            e.key === 'Enter' && onEnter?.(e)
-          }}
-          type="text"
-          placeholder={placeholder ?? ''}
-          id={id}
-          {...props}
-        />
-        {icon}
+    return (
+      <div className={className}>
+        {label && <label htmlFor={id}>{label}</label>}
+        <div>
+          <input
+            value={value}
+            onChange={onChange}
+            onKeyDown={(e) => {
+              e.key === 'Enter' && onEnter?.(e)
+            }}
+            type="text"
+            placeholder={placeholder ?? ''}
+            id={id}
+            ref={ref}
+            {...props}
+          />
+          {icon}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  },
+)
+Input.displayName = 'Input'
 
 const StyledInput = styled(Input)`
   label {
