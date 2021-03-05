@@ -51,10 +51,11 @@ const EntryDetails = () => {
             Last Updated June 26, 2019 by Jeffrey Tang
           </ItalicizedText>
 
-          <Button icon={<Star />}> Review </Button>
-          <Button icon={<Flag />} secondary>
-            {' '}
-            Report{' '}
+          <Button>
+            <Star /> Review
+          </Button>
+          <Button secondary>
+            <Flag /> Report
           </Button>
         </>
         <p>EntryDetails for id: {id}</p>
