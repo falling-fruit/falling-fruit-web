@@ -25,6 +25,7 @@ const StyledButton = styled.button`
   }
 `
 
+// TODO: forward ref and remaining props in all UI components, rather than taking specific props
 const Button = ({ onClick, secondary = false, icon, children }) => (
   <StyledButton onClick={onClick} secondary={secondary}>
     {icon}
