@@ -5,7 +5,6 @@ import {
   ComboboxInput,
   ComboboxList,
   ComboboxOption,
-  ComboboxPopover,
 } from '@reach/combobox'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -15,6 +14,7 @@ import usePlacesAutocomplete, {
 } from 'use-places-autocomplete'
 
 import Input from '../ui/Input'
+import SearchEntry from './SearchEntry'
 
 const Search = () => {
   // const [swlat, setSwlat] = useState(0)
@@ -63,14 +63,14 @@ const Search = () => {
         onChange={handleInput}
         disabled={!ready}
       />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === 'OK' &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
+      <ComboboxList>
+        {status === 'OK' &&
+          data.map(({ place_id, description }) => (
+            <ComboboxOption as={SearchEntry} key={place_id} value={description}>
+              {[description, 'this is secondary']}
+            </ComboboxOption>
+          ))}
+      </ComboboxList>
     </Combobox>
   )
 }
