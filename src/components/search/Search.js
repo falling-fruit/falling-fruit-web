@@ -8,34 +8,49 @@ import {
   // ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox'
-import Geocode from 'react-geocode'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import usePlacesAutocomplete from 'use-places-autocomplete'
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from 'use-places-autocomplete'
 
 import Input from '../ui/Input'
 
 const Search = () => {
-  Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
-  // const [swlng, setSwlng] = useState(0);
   // const [swlat, setSwlat] = useState(0)
-  // const [nelng, setNelng] = useState(0)
+  // const [swlng, setSwlng] = useState(0)
   // const [nelat, setNelat] = useState(0)
+  // const [nelng, setNelng] = useState(0)
+  const [centerLat, setCenterLat] = useState(0)
+  const [centerLng, setCenterLng] = useState(0)
+
   let history = useHistory()
 
   const onSelectHandler = (item) => {
     console.log(item)
-    getLongitudeAndLatitudeFromAddress()
+    getLongitudeAndLatitudeFromAddress(item)
     history.push({
       pathname: '/map',
-      search: `?query=${item}`,
+      search: `?centerLat=${centerLat}&centerLng=${centerLng}`,
     })
   }
 
-  const getLongitudeAndLatitudeFromAddress = () => {
-    Geocode.fromAddress('Eiffel Tower').then((response) => {
-      const { lat, lng } = response.results[0].geometry.location
-      console.log(lat, lng)
-    })
+  const getLongitudeAndLatitudeFromAddress = (description) => {
+    getGeocode({ address: description })
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        setCenterLat(lat)
+        setCenterLng(lng)
+      })
+
+    // .then((results) => getLatLng(results[0]))
+    // .then(({ lat, lng }) => {
+    //   console.log('Coordinates: ', { lat, lng })
+    // })
+    // .catch((error) => {
+    //   console.log('Error: ', error)
+    // })
   }
 
   const {
