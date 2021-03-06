@@ -1670,6 +1670,14 @@
     "@babel/runtime" "^7.12.5"
     "@styled-icons/styled-icon" "^10.6.0"
 
+"@styled-icons/fa-solid@^10.26.0":
+  version "10.26.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/fa-solid/-/fa-solid-10.26.0.tgz#be8fe8f54888ea611401d30428fc7f0d0806e3fc"
+  integrity sha512-59/2KbnaP2euOR6UvZd1hncLvPTWJ1iT4Ohu7SV6tEvivDY/e2+uRMZiQlUgAGhzkmzQwYDeftaoiQaZeIfa4w==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@styled-icons/styled-icon" "^10.6.0"
+
 "@styled-icons/styled-icon@^10.6.0":
   version "10.6.3"
   resolved "https://registry.yarnpkg.com/@styled-icons/styled-icon/-/styled-icon-10.6.3.tgz#eae0e5e18fd601ac47e821bb9c2e099810e86403"
