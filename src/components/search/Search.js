@@ -5,7 +5,6 @@ import {
   ComboboxInput,
   ComboboxList,
   ComboboxOption,
-  // ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox'
 import { useState } from 'react'
@@ -43,14 +42,6 @@ const Search = () => {
         setCenterLat(lat)
         setCenterLng(lng)
       })
-
-    // .then((results) => getLatLng(results[0]))
-    // .then(({ lat, lng }) => {
-    //   console.log('Coordinates: ', { lat, lng })
-    // })
-    // .catch((error) => {
-    //   console.log('Error: ', error)
-    // })
   }
 
   const {
