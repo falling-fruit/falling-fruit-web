@@ -1,8 +1,9 @@
 import { CursorFill } from '@styled-icons/bootstrap'
 import { Map } from '@styled-icons/boxicons-solid'
+import React from 'react'
 
 import ListEntry from '../ui/ListEntry'
-const SearchEntry = ({ children }) => {
+const SearchEntry = React.forwardRef(({ children }, ref) => {
   const [primaryText, secondaryText] = children
 
   const leftIcon = (
@@ -29,8 +30,11 @@ const SearchEntry = ({ children }) => {
       primaryText={primaryText}
       secondaryText={secondaryText}
       rightIcons={rightIcon}
+      ref={ref}
     />
   )
-}
+})
+
+SearchEntry.displayName = 'SearchEntry'
 
 export default SearchEntry

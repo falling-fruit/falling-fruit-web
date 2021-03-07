@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 
 const Icons = styled.div`
@@ -38,23 +39,25 @@ const TextContainer = styled.div`
   margin-left: 18px;
   flex: 1;
 `
-
-const ListEntry = ({ leftIcons, primaryText, secondaryText, rightIcons }) => (
-  <ListContainer>
-    <Icons>{leftIcons}</Icons>
-    <TextContainer>
-      <PrimaryText>{primaryText}</PrimaryText>
-      <SecondaryText>{secondaryText}</SecondaryText>
-    </TextContainer>
-    <Icons>{rightIcons}</Icons>
-  </ListContainer>
+const ListEntry = React.forwardRef(
+  ({ leftIcons, primaryText, secondaryText, rightIcons }, ref) => (
+    <ListContainer ref={ref}>
+      <Icons>{leftIcons}</Icons>
+      <TextContainer>
+        <PrimaryText>{primaryText}</PrimaryText>
+        <SecondaryText>{secondaryText}</SecondaryText>
+      </TextContainer>
+      <Icons>{rightIcons}</Icons>
+    </ListContainer>
+  ),
 )
-
 ListEntry.propTypes = {
   leftIcons: PropTypes.node,
   primaryText: PropTypes.string,
   secondaryText: PropTypes.string,
   rightIcons: PropTypes.node,
 }
+
+ListEntry.displayName = 'ListEntry'
 
 export default ListEntry
