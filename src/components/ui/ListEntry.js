@@ -11,12 +11,10 @@ const Icons = styled.div`
   }
 `
 const PrimaryText = styled.div`
-  align-items: center;
   font-weight: bold;
   font-size: 14px;
 `
 const SecondaryText = styled.div`
-  align-items: center;
   font-weight: normal;
   font-size: 12px;
 `
@@ -39,11 +37,22 @@ const TextContainer = styled.div`
   flex: 1;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis; //TODO: Fix becacause ellipsis doesnt show up
+  div {
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `
 
-const ListEntry = ({ leftIcons, primaryText, secondaryText, rightIcons }) => (
-  <ListContainer>
+const ListEntry = ({
+  leftIcons,
+  primaryText,
+  secondaryText,
+  rightIcons,
+  onClick,
+}) => (
+  <ListContainer onClick={onClick}>
     <Icons>{leftIcons}</Icons>
     <TextContainer>
       <PrimaryText>{primaryText}</PrimaryText>

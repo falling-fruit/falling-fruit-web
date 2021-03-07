@@ -1,8 +1,7 @@
 import { Map, Navigation } from '@styled-icons/boxicons-solid'
 
 import ListEntry from '../ui/ListEntry'
-const SearchEntry = ({ children }) => {
-  console.log(children)
+const SearchEntry = ({ children, onClick }) => {
   const [primaryText, secondaryText] = children
 
   // TODO: change colors to theme colors
@@ -26,6 +25,7 @@ const SearchEntry = ({ children }) => {
       primaryText={primaryText}
       secondaryText={secondaryText}
       rightIcons={<Navigation size={20} color={'#4183C4'} />}
+      onClick={onClick}
     />
   )
 }
