@@ -28,7 +28,6 @@ const Search = () => {
     getLongitudeAndLatitudeFromAddress(item)
     history.push({
       pathname: '/map',
-      search: `?${centerCoords}`,
     })
   }
 
