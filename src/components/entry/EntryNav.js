@@ -24,6 +24,7 @@ const EntryNavTextContainer = styled.div`
 const EntryNavIconsContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 110px;
 `
 
 const EntryNav = () => {
