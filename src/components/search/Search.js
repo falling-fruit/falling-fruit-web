@@ -27,8 +27,6 @@ const Search = () => {
   let history = useHistory()
 
   const onSelectHandler = (item) => {
-    console.log('hello')
-
     console.log(item)
     getLongitudeAndLatitudeFromAddress(item)
     history.push({
@@ -67,11 +65,16 @@ const Search = () => {
       />
       <ComboboxList>
         {status === 'OK' &&
-          data.map(({ place_id, description }) => (
-            <ComboboxOption as={SearchEntry} key={place_id} value={place_id}>
-              {[description, 'this is secondary']}
-            </ComboboxOption>
-          ))}
+          data.map(
+            ({
+              place_id,
+              structured_formatting: { main_text, secondary_text },
+            }) => (
+              <ComboboxOption as={SearchEntry} key={place_id} value={place_id}>
+                {[main_text, secondary_text]}
+              </ComboboxOption>
+            ),
+          )}
       </ComboboxList>
     </Combobox>
   )

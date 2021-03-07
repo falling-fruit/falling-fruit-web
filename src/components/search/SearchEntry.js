@@ -1,10 +1,11 @@
-import { CursorFill } from '@styled-icons/bootstrap'
-import { Map } from '@styled-icons/boxicons-solid'
+import { Map, Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
 import ListEntry from '../ui/ListEntry'
-const SearchEntry = React.forwardRef(({ children }, ref) => {
+const SearchEntry = React.forwardRef(({ children, onClick }, ref) => {
   const [primaryText, secondaryText] = children
+
+  // TODO: change colors to theme colors
 
   const leftIcon = (
     <div
@@ -18,18 +19,14 @@ const SearchEntry = React.forwardRef(({ children }, ref) => {
       <Map size={20} color={'white'} />
     </div>
   )
-  const rightIcon = (
-    <div style={{ width: '20px' }}>
-      <CursorFill size={20} color={'#4183C4'} />
-    </div>
-  )
 
   return (
     <ListEntry
       leftIcons={leftIcon}
       primaryText={primaryText}
       secondaryText={secondaryText}
-      rightIcons={rightIcon}
+      rightIcons={<Navigation size={20} color={'#4183C4'} />}
+      onClick={onClick}
       ref={ref}
     />
   )

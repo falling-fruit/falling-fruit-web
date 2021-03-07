@@ -12,12 +12,10 @@ const Icons = styled.div`
   }
 `
 const PrimaryText = styled.div`
-  align-items: center;
   font-weight: bold;
   font-size: 14px;
 `
 const SecondaryText = styled.div`
-  align-items: center;
   font-weight: normal;
   font-size: 12px;
 `
@@ -38,10 +36,19 @@ const TextContainer = styled.div`
   justify-content: center;
   margin-left: 18px;
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  div {
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `
+
 const ListEntry = React.forwardRef(
-  ({ leftIcons, primaryText, secondaryText, rightIcons }, ref) => (
-    <ListContainer ref={ref}>
+  ({ leftIcons, primaryText, secondaryText, rightIcons, onClick }, ref) => (
+    <ListContainer onClick={onClick} ref={ref}>
       <Icons>{leftIcons}</Icons>
       <TextContainer>
         <PrimaryText>{primaryText}</PrimaryText>
