@@ -1,5 +1,4 @@
-import { CursorFill } from '@styled-icons/bootstrap'
-import { Map } from '@styled-icons/boxicons-solid'
+import { Map, Navigation } from '@styled-icons/boxicons-solid'
 
 import ListEntry from '../ui/ListEntry'
 const SearchEntry = ({ children }) => {
@@ -26,7 +25,7 @@ const SearchEntry = ({ children }) => {
       leftIcons={leftIcon}
       primaryText={primaryText}
       secondaryText={secondaryText}
-      rightIcons={<CursorFill size={20} color={'#4183C4'} />}
+      rightIcons={<Navigation size={20} color={'#4183C4'} />}
     />
   )
 }
