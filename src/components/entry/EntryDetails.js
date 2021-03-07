@@ -6,10 +6,22 @@ import styled from 'styled-components'
 import Button from '../ui/Button'
 import { Tag } from '../ui/Tag'
 
-const ItalicizedText = styled.p`
-  font-size: 14px;
-  font-style: italic;
-`
+/*
+axios.get('/user', {
+    params: {
+      ID: 12345
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });  
+*/
 
 // Just make width 100% and the height will automatically be fit
 const ImageContainer = styled.img`
@@ -20,8 +32,18 @@ const TextContainer = styled.div`
   margin: 23px;
 `
 
-const EntryHeader = styled.div`
-  line-height: 12px;
+//I have no clue where the bottom margin was ever set to something other than 0, but it needs
+const PlantName = styled.h2`
+  margin-bottom: 0px;
+  color: #333333;
+`
+
+const ScientificName = styled.small`
+  font-style: italic;
+`
+
+const TagContainer = styled.div`
+  margin-top: 12px;
 `
 
 /* Row gap nor line-height is working here to make the distance between all elements 14px
@@ -31,10 +53,29 @@ const DescriptionContainer = styled.div`
 `
 */
 
+const Description = styled.p`
+  color: #5a5a5a;
+`
+
+const UpdateText = styled.p`
+  font-size: 14px;
+  font-style: italic;
+`
+
 const ButtonSpacing = styled.div`
   button {
     margin-right: 14px;
   }
+`
+
+const ResourceHeader = styled.h3`
+  color: #333333;
+`
+
+const IndividualResourceContainer = styled.small`
+  display: flex;
+  column-count: 2;
+  column-gap: 12px;
 `
 
 const EntryDetails = () => {
@@ -50,21 +91,22 @@ const EntryDetails = () => {
       />
 
       <TextContainer>
-        <EntryHeader>
-          <h3>American Tulip Tree</h3>
-          <Tag>Invasive</Tag>
-          <Tag>Private, But Overhanging</Tag>
-        </EntryHeader>
+        <div>
+          <PlantName>American Tulip Tree</PlantName>
+          <ScientificName>Liriodendron Tulipifera</ScientificName>
+          <TagContainer>
+            <Tag>Invasive</Tag>
+            <Tag>Private, But Overhanging</Tag>
+          </TagContainer>
+        </div>
 
         <>
-          <p>
+          <Description>
             [1x] Tuliptree (Liriodendron tulipifera) @ 211 E John St (Front).
             Tree Lawn or Parkway.
-          </p>
+          </Description>
 
-          <ItalicizedText>
-            Last Updated June 26, 2019 by Jeffrey Tang
-          </ItalicizedText>
+          <UpdateText>Last Updated June 26, 2019 by Jeffrey Tang</UpdateText>
 
           <ButtonSpacing>
             <Button icon={<Star />}> Review </Button>
@@ -73,6 +115,18 @@ const EntryDetails = () => {
               Report{' '}
             </Button>
           </ButtonSpacing>
+        </>
+
+        <>
+          <ResourceHeader>Other Resources</ResourceHeader>
+          <IndividualResourceContainer>
+            <Star height="20px" width="25px" />
+            <div>Wikipedia</div>
+          </IndividualResourceContainer>
+          <IndividualResourceContainer>
+            <Flag height="20px" width="25px" />
+            <div>Eat the Weeds</div>
+          </IndividualResourceContainer>
         </>
         <p>EntryDetails for id: {id}</p>
       </TextContainer>
