@@ -70,13 +70,11 @@ const MapPage = () => {
           setClusters(clusters)
           setLocations([])
         } else {
-          /* eslint-disable no-unused-vars */
           const [
-            numLocationsReturned,
-            totalLocations,
+            _numLocationsReturned,
+            _totalLocations,
             ...locations
           ] = await getLocations(query)
-          /* eslint-enable no-unused-vars */
           setLocations(locations)
           setClusters([])
         }
