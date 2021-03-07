@@ -11,15 +11,15 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete'
-import { useQueryParams } from 'use-query-params'
+import { NumberParam, useQueryParams } from 'use-query-params'
 
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
 const Search = () => {
   const [centerCoords, setCenterCoords] = useQueryParams({
-    centerLat: 0,
-    centerLng: 0,
+    centerLat: NumberParam,
+    centerLng: NumberParam,
   })
 
   let history = useHistory()
@@ -39,9 +39,10 @@ const Search = () => {
     getGeocode({ placeId })
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        console.log(lat)
-        console.log(lng)
-        setCenterCoords({ ...centerCoords, centerLat: lat, centerLng: lng })
+        setCenterCoords(
+          { ...centerCoords, centerLat: lat, centerLng: lng },
+          'push',
+        )
       })
   }
 
