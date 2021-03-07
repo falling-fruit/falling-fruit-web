@@ -6,6 +6,13 @@
   "plugins": ["simple-import-sort", "@hack4impact-uiuc"],
   "rules": {
     "no-magic-numbers": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       1,
