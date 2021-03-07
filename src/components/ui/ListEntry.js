@@ -37,6 +37,9 @@ const TextContainer = styled.div`
   justify-content: center;
   margin-left: 18px;
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; //TODO: Fix becacause ellipsis doesnt show up
 `
 
 const ListEntry = ({ leftIcons, primaryText, secondaryText, rightIcons }) => (

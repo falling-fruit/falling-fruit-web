@@ -5,6 +5,8 @@ import ListEntry from '../ui/ListEntry'
 const SearchEntry = ({ children }) => {
   const [primaryText, secondaryText] = children
 
+  // TODO: change colors to theme colors
+
   const leftIcon = (
     <div
       style={{
@@ -17,18 +19,13 @@ const SearchEntry = ({ children }) => {
       <Map size={20} color={'white'} />
     </div>
   )
-  const rightIcon = (
-    <div style={{ width: '20px' }}>
-      <CursorFill size={20} color={'#4183C4'} />
-    </div>
-  )
 
   return (
     <ListEntry
       leftIcons={leftIcon}
       primaryText={primaryText}
       secondaryText={secondaryText}
-      rightIcons={rightIcon}
+      rightIcons={<CursorFill size={20} color={'#4183C4'} />}
     />
   )
 }
