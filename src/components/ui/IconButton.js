@@ -20,6 +20,10 @@ const StyledIconButton = styled.button`
   &:focus {
     outline: none;
   }
+
+  svg {
+    height: 50%;
+  }
 `
 
 const RaisedIconButtonContainer = styled.span`
