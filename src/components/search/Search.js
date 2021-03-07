@@ -25,13 +25,10 @@ const Search = () => {
   let history = useHistory()
 
   const onSelectHandler = (item) => {
-    console.log(item)
     getLongitudeAndLatitudeFromAddress(item)
-    console.log(centerCoords.centerLat)
-    console.log(centerCoords.centerLng)
     history.push({
       pathname: '/map',
-      search: `?centerLat=${centerCoords.centerLat}&centerLng=${centerCoords.centerLng}`,
+      search: `?${centerCoords}`,
     })
   }
 
