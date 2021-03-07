@@ -3,6 +3,7 @@ import { Map } from '@styled-icons/boxicons-solid'
 
 import ListEntry from '../ui/ListEntry'
 const SearchEntry = ({ children }) => {
+  console.log(children)
   const [primaryText, secondaryText] = children
 
   // TODO: change colors to theme colors

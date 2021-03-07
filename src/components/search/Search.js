@@ -65,11 +65,16 @@ const Search = () => {
       />
       <ComboboxList>
         {status === 'OK' &&
-          data.map(({ place_id, description }) => (
-            <ComboboxOption as={SearchEntry} key={place_id} value={description}>
-              {[description, 'this is secondary']}
-            </ComboboxOption>
-          ))}
+          data.map(
+            ({
+              place_id,
+              structured_formatting: { main_text, secondary_text },
+            }) => (
+              <ComboboxOption as={SearchEntry} key={place_id} value={main_text}>
+                {[main_text, secondary_text]}
+              </ComboboxOption>
+            ),
+          )}
       </ComboboxList>
     </Combobox>
   )
