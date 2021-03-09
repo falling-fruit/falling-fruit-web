@@ -1,27 +1,11 @@
 import { Flag, Star } from '@styled-icons/boxicons-solid'
+import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
-//import Image from 'react'
 import styled from 'styled-components'
 
+import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import { Tag } from '../ui/Tag'
-
-/*
-axios.get('/user', {
-    params: {
-      ID: 12345
-    }
-  })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-  .then(function () {
-    // always executed
-  });  
-*/
 
 // Just make width 100% and the height will automatically be fit
 const ImageContainer = styled.img`
@@ -83,17 +67,28 @@ const EntryDetails = () => {
     params: { id },
   } = useRouteMatch()
 
-  return (
+  const [locationData, setLocationData] = useState()
+  const [locationTypeData, setLocationTypeData] = useState()
+
+  useEffect(() => {
+    async function fetchEntryDetails() {
+      const locationData = await getLocationById(id)
+      setLocationData(locationData)
+
+      const locationTypeData = await getTypeById(locationData.type_ids[0])
+      setLocationTypeData(locationTypeData)
+    }
+    fetchEntryDetails()
+  }, [id])
+
+  return locationData && locationTypeData ? (
     <div>
-      <ImageContainer
-        src="https://www.gardenia.net/storage/app/public/uploads/images/detail/643gzxmHGfT9MuRJNRiGTeuIYZYoqvEyUaTEyGJw.jpeg"
-        alt="american tulip tree"
-      />
+      <ImageContainer src={locationData.photos[0].photo.original} alt="" />
 
       <TextContainer>
         <div>
-          <PlantName>American Tulip Tree</PlantName>
-          <ScientificName>Liriodendron Tulipifera</ScientificName>
+          <PlantName>{locationData.type_names[0]}</PlantName>
+          <ScientificName>{locationTypeData.scientific_name}</ScientificName>
           <TagContainer>
             <Tag>Invasive</Tag>
             <Tag>Private, But Overhanging</Tag>
@@ -102,11 +97,11 @@ const EntryDetails = () => {
 
         <>
           <Description>
-            [1x] Tuliptree (Liriodendron tulipifera) @ 211 E John St (Front).
-            Tree Lawn or Parkway.
+            {console.log(locationData.address)}
+            {locationData.description} @ {locationData.address}
           </Description>
 
-          <UpdateText>Last Updated June 26, 2019 by Jeffrey Tang</UpdateText>
+          <UpdateText>Last Updated at {locationTypeData.updated_at}</UpdateText>
 
           <ButtonSpacing>
             <Button icon={<Star />}> Review </Button>
@@ -121,15 +116,25 @@ const EntryDetails = () => {
           <ResourceHeader>Other Resources</ResourceHeader>
           <IndividualResourceContainer>
             <Star height="20px" width="25px" />
-            <div>Wikipedia</div>
+            <a href={locationTypeData.wikipedia_url}>Wikipedia</a>
           </IndividualResourceContainer>
           <IndividualResourceContainer>
             <Flag height="20px" width="25px" />
-            <div>Eat the Weeds</div>
+            <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
           </IndividualResourceContainer>
         </>
         <p>EntryDetails for id: {id}</p>
       </TextContainer>
+    </div>
+  ) : (
+    <div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>Loading...</p>
     </div>
   )
 }
