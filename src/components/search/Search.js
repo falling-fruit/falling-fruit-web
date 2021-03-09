@@ -6,32 +6,28 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox'
-import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete'
+import { NumberParam, useQueryParams } from 'use-query-params'
 
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
 const Search = () => {
-  // const [swlat, setSwlat] = useState(0)
-  // const [swlng, setSwlng] = useState(0)
-  // const [nelat, setNelat] = useState(0)
-  // const [nelng, setNelng] = useState(0)
-  const [centerLat, setCenterLat] = useState(0)
-  const [centerLng, setCenterLng] = useState(0)
+  const [centerCoords, setCenterCoords] = useQueryParams({
+    centerLat: NumberParam,
+    centerLng: NumberParam,
+  })
 
   let history = useHistory()
 
   const onSelectHandler = (item) => {
-    console.log(item)
     getLongitudeAndLatitudeFromAddress(item)
     history.push({
       pathname: '/map',
-      search: `?centerLat=${centerLat}&centerLng=${centerLng}`,
     })
   }
 
@@ -39,8 +35,10 @@ const Search = () => {
     getGeocode({ placeId })
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        setCenterLat(lat)
-        setCenterLng(lng)
+        setCenterCoords(
+          { ...centerCoords, centerLat: lat, centerLng: lng },
+          'push',
+        )
       })
   }
 
