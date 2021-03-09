@@ -2,6 +2,7 @@ import { Map, Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
 import ListEntry from '../ui/ListEntry'
+
 const SearchEntry = React.forwardRef(({ children, onClick }, ref) => {
   const [primaryText, secondaryText] = children
 

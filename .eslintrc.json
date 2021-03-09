@@ -20,6 +20,8 @@
     ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
     "sort-imports": "off"
   },
   "ignorePatterns": ["apiSchema.ts"]
