@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import {
+  NumberParam,
+  NumericObjectParam,
+  useQueryParams,
+} from 'use-query-params'
 
 import { getClusters, getLocations } from '../../utils/api'
 import Map from './Map'
@@ -41,28 +46,40 @@ const DEFAULT_ZOOM = 1
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const DEFAULT_VIEW_STATE = {
-  center: [DEFAULT_CENTER_LAT, DEFAULT_CENTER_LNG],
+const _DEFAULT_VIEW_STATE = {
+  center: { lat: DEFAULT_CENTER_LAT, lng: DEFAULT_CENTER_LNG },
   zoom: DEFAULT_ZOOM,
   bounds: null,
 }
 
 const MapPage = () => {
-  const [view, setView] = useState(DEFAULT_VIEW_STATE)
+  const [view, setView] = useQueryParams({
+    center: NumericObjectParam,
+    zoom: NumberParam,
+  })
+
+  const [bounds, setBounds] = useQueryParams({
+    ne: NumericObjectParam,
+    nw: NumericObjectParam,
+    se: NumericObjectParam,
+    sw: NumericObjectParam,
+  })
+
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (view.bounds?.ne.lng) {
+      if (bounds.ne?.lng) {
         // Map has received real bounds
+        console.log(bounds, 'here1')
         setIsLoading(true)
         const query = {
-          swlng: view.bounds.sw.lng,
-          nelng: view.bounds.ne.lng,
-          swlat: view.bounds.sw.lat,
-          nelat: view.bounds.ne.lat,
+          swlng: bounds.sw.lng,
+          nelng: bounds.ne.lng,
+          swlat: bounds.sw.lat,
+          nelat: bounds.ne.lat,
           muni: 1,
         }
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
@@ -82,11 +99,13 @@ const MapPage = () => {
       }
     }
     fetchClusterAndLocationData()
-  }, [view])
+  }, [view, bounds])
 
   const onViewChange = ({ center, zoom, bounds }) => {
+    console.log(bounds, 'here2')
     console.log('onViewChange called', { center, zoom, bounds })
-    setView({ center: [center.lat, center.lng], zoom, bounds })
+    setView({ center: [center.lat, center.lng], zoom })
+    setBounds(bounds)
   }
 
   const onLocationClick = (location) => {
