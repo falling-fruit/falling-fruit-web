@@ -1,5 +1,6 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { Map, Pencil } from '@styled-icons/boxicons-solid'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { theme } from '../ui/GlobalStyle'
@@ -28,6 +29,10 @@ const EntryNavIconsContainer = styled.div`
 `
 
 const EntryNav = () => {
+  const history = useHistory()
+
+  const onBackButtonClick = () => history.goBack()
+
   const onEditButtonClick = () => {
     // TODO: edit entry callback
     console.log('Edit entry details clicked')
@@ -41,13 +46,13 @@ const EntryNav = () => {
   return (
     <EntryNavContainer>
       <EntryNavTextContainer>
-        <ArrowBack color={theme.secondaryText} />
+        <ArrowBack onClick={onBackButtonClick} color={theme.secondaryText} />
         <p>Results</p>
       </EntryNavTextContainer>
       <EntryNavIconsContainer>
         <IconButton
           size={50}
-          raised={false}
+          raised
           icon={<Pencil color={theme.secondaryText} />}
           onClick={onEditButtonClick}
           label={'edit-entry-details'}
