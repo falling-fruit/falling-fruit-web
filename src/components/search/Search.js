@@ -5,8 +5,10 @@ import {
   ComboboxInput,
   ComboboxList,
   ComboboxOption,
+  ComboboxPopover,
 } from '@reach/combobox'
-import { useHistory } from 'react-router-dom'
+import { useRef } from 'react'
+import styled from 'styled-components'
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -16,19 +18,40 @@ import { NumberParam, useQueryParams } from 'use-query-params'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
+// TODO: ask Siraj how highlighting should look
+// TODO: for long option descriptions, scroll to beginning of input
+const StyledComboboxPopover = styled(ComboboxPopover)`
+  border: none;
+  background: none;
+  padding-top: 8px;
+`
+
 const Search = () => {
   const [centerCoords, setCenterCoords] = useQueryParams({
     centerLat: NumberParam,
     centerLng: NumberParam,
   })
 
-  let history = useHistory()
+  // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
+  // So we will keep a map of the value to the place id, which handleSelect also needs
+  const descriptionToPlaceId = useRef({})
 
-  const onSelectHandler = (item) => {
-    getLongitudeAndLatitudeFromAddress(item)
-    history.push({
-      pathname: '/map',
-    })
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+  } = usePlacesAutocomplete()
+
+  const handleInput = (e) => {
+    setValue(e.target.value)
+  }
+
+  const handleSelect = (description) => {
+    setValue(description)
+    getLongitudeAndLatitudeFromAddress(
+      descriptionToPlaceId.current[description],
+    )
   }
 
   const getLongitudeAndLatitudeFromAddress = (placeId) => {
@@ -42,38 +65,39 @@ const Search = () => {
       })
   }
 
-  const {
-    ready,
-    value,
-    suggestions: { status, data },
-    setValue,
-  } = usePlacesAutocomplete()
-
-  const handleInput = (e) => {
-    setValue(e.target.value)
-  }
-
   return (
-    <Combobox onSelect={onSelectHandler} aria-labelledby="demo">
+    <Combobox onSelect={handleSelect} aria-labelledby="demo">
       <ComboboxInput
         as={Input}
         value={value}
         onChange={handleInput}
         disabled={!ready}
       />
-      <ComboboxList>
-        {status === 'OK' &&
-          data.map(
-            ({
-              place_id,
-              structured_formatting: { main_text, secondary_text },
-            }) => (
-              <ComboboxOption as={SearchEntry} key={place_id} value={place_id}>
-                {[main_text, secondary_text]}
-              </ComboboxOption>
-            ),
-          )}
-      </ComboboxList>
+      <StyledComboboxPopover portal={false}>
+        <ComboboxList>
+          {status === 'OK' &&
+            data.map((suggestion) => {
+              const {
+                place_id,
+                description,
+                structured_formatting: { main_text, secondary_text },
+              } = suggestion
+
+              // Allow handleSelect to access the place id (see above)
+              descriptionToPlaceId.current[description] = place_id
+
+              return (
+                <ComboboxOption
+                  as={SearchEntry}
+                  key={place_id}
+                  value={description}
+                >
+                  {[main_text, secondary_text]}
+                </ComboboxOption>
+              )
+            })}
+        </ComboboxList>
+      </StyledComboboxPopover>
     </Combobox>
   )
 }
