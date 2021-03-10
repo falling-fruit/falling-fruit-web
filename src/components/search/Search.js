@@ -10,6 +10,7 @@ import {
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
+// TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
 
 import Input from '../ui/Input'
