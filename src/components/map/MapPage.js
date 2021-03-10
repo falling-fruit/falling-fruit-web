@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { getClusters, getLocations } from '../../utils/api'
@@ -48,6 +49,7 @@ const DEFAULT_VIEW_STATE = {
 }
 
 const MapPage = () => {
+  const history = useHistory()
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
@@ -89,10 +91,7 @@ const MapPage = () => {
     setView({ center: [center.lat, center.lng], zoom, bounds })
   }
 
-  const onLocationClick = (location) => {
-    // TODO: Fetch location data from server
-    console.log('Location clicked: ', location.id)
-  }
+  const onLocationClick = (location) => history.push(`/entry/${location.id}`)
 
   const onClusterClick = (cluster) => {
     setView((prevState) => ({
