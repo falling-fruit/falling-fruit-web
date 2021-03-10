@@ -2,7 +2,8 @@ import { Map, Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
 import ListEntry from '../ui/ListEntry'
-const SearchEntry = React.forwardRef(({ children, onClick }, ref) => {
+
+const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   const [primaryText, secondaryText] = children
 
   // TODO: change colors to theme colors
@@ -26,8 +27,8 @@ const SearchEntry = React.forwardRef(({ children, onClick }, ref) => {
       primaryText={primaryText}
       secondaryText={secondaryText}
       rightIcons={<Navigation size={20} color={'#4183C4'} />}
-      onClick={onClick}
       ref={ref}
+      {...props}
     />
   )
 })

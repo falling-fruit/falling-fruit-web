@@ -47,8 +47,8 @@ const TextContainer = styled.div`
 `
 
 const ListEntry = React.forwardRef(
-  ({ leftIcons, primaryText, secondaryText, rightIcons, onClick }, ref) => (
-    <ListContainer onClick={onClick} ref={ref}>
+  ({ leftIcons, primaryText, secondaryText, rightIcons, ...props }, ref) => (
+    <ListContainer ref={ref} {...props}>
       <Icons>{leftIcons}</Icons>
       <TextContainer>
         <PrimaryText>{primaryText}</PrimaryText>
