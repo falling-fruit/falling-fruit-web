@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const StyledIconButton = styled.button`
   display: flex;
@@ -23,18 +23,14 @@ const StyledIconButton = styled.button`
 
   svg {
     height: 50%;
+    ${({ raised, size }) =>
+      raised &&
+      css`
+        border: 2px solid orange;
+        border-radius: 50%;
+        padding: ${size / 5}px;
+      `}
   }
-`
-
-const RaisedIconButtonContainer = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: ${({ size }) => size}px;
-  height: ${({ size }) => size}px;
-  border: 2px solid;
-  border-color: orange;
 `
 
 const IconButton = ({ size, raised, icon, onClick, label }) => (
@@ -44,13 +40,7 @@ const IconButton = ({ size, raised, icon, onClick, label }) => (
     raised={raised}
     onClick={onClick}
   >
-    {raised ? (
-      <RaisedIconButtonContainer size={size - 10}>
-        {icon}
-      </RaisedIconButtonContainer>
-    ) : (
-      icon
-    )}
+    {icon}
   </StyledIconButton>
 )
 

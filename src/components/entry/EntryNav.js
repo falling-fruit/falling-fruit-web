@@ -52,7 +52,7 @@ const EntryNav = () => {
       <EntryNavIconsContainer>
         <IconButton
           size={50}
-          raised
+          raised={false}
           icon={<Pencil color={theme.secondaryText} />}
           onClick={onEditButtonClick}
           label={'edit-entry-details'}
