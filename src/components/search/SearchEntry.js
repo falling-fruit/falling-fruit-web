@@ -7,13 +7,14 @@ const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   const [primaryText, secondaryText] = children
 
   // TODO: change colors to theme colors
-
+  // TODO: make the circle icon a reusable UI component
   const leftIcon = (
     <div
       style={{
         background: '#5A5A5A',
-        width: '20px',
-        height: '20px',
+        width: '36px',
+        height: '36px',
+        boxSizing: 'border-box',
         borderRadius: '50%',
       }}
     >
