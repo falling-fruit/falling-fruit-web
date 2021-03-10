@@ -7,6 +7,7 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox'
+import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
@@ -69,6 +70,7 @@ const Search = () => {
         value={value}
         onChange={handleInput}
         disabled={!ready}
+        icon={<SearchAlt2 />}
       />
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
