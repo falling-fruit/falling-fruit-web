@@ -7,12 +7,12 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox'
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
-import { NumericObjectParam, useQueryParams } from 'use-query-params'
 
 import Input from '../ui/Input'
+import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
 
 const getViewportBounds = async (placeId) => {
@@ -37,10 +37,7 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
 `
 
 const Search = () => {
-  const [_bounds, setBounds] = useQueryParams({
-    ne: NumericObjectParam,
-    sw: NumericObjectParam,
-  })
+  const { setViewport } = useContext(SearchContext)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
   // So we will keep a map of the value to the place id, which handleSelect also needs
@@ -62,7 +59,7 @@ const Search = () => {
     const viewportBounds = await getViewportBounds(
       descriptionToPlaceId.current[description],
     )
-    setBounds(viewportBounds)
+    setViewport(viewportBounds)
   }
 
   return (

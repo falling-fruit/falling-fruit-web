@@ -1,9 +1,9 @@
 import { fitBounds } from 'google-map-react'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { NumericObjectParam, useQueryParams } from 'use-query-params'
 
 import { getClusters, getLocations } from '../../utils/api'
+import SearchContext from '../search/SearchContext'
 import Map from './Map'
 
 const LoadingText = styled.p`
@@ -52,6 +52,12 @@ const DEFAULT_VIEW_STATE = {
 
 const MapPage = () => {
   const container = useRef(null)
+  const { viewport } = useContext(SearchContext)
+
+  const [view, setView] = useState(DEFAULT_VIEW_STATE)
+  const [locations, setLocations] = useState([])
+  const [clusters, setClusters] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const fitContainerBounds = (bounds) => {
     const { offsetWidth, offsetHeight } = container.current
@@ -61,34 +67,24 @@ const MapPage = () => {
     })
   }
 
-  const [view, setView] = useState(DEFAULT_VIEW_STATE)
-  const [bounds, setBounds] = useQueryParams({
-    ne: NumericObjectParam,
-    sw: NumericObjectParam,
-  })
-
   // Allow setting view via bounds
   useEffect(() => {
-    if (bounds) {
-      setView(fitContainerBounds(bounds))
+    if (viewport) {
+      setView(fitContainerBounds(viewport))
     }
-  }, [bounds, setView])
-
-  const [locations, setLocations] = useState([])
-  const [clusters, setClusters] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  }, [viewport, setView])
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (bounds) {
+      if (view.bounds) {
         // Map has received real bounds
         setIsLoading(true)
 
         const query = {
-          nelat: bounds.ne.lat,
-          nelng: bounds.ne.lng,
-          swlat: bounds.sw.lat,
-          swlng: bounds.sw.lng,
+          nelat: view.bounds.ne.lat,
+          nelng: view.bounds.ne.lng,
+          swlat: view.bounds.sw.lat,
+          swlng: view.bounds.sw.lng,
           muni: 1,
         }
 
@@ -112,16 +108,11 @@ const MapPage = () => {
       }
     }
     fetchClusterAndLocationData()
-  }, [view, bounds])
+  }, [view])
 
-  const handleViewChange = ({ center, zoom, bounds }) => {
-    console.log('handleViewChange', center, zoom, bounds)
-    const { nw: _nw, se: _se, ...necessaryBounds } = bounds
-    setBounds(necessaryBounds)
-    setView({
-      center,
-      zoom,
-    })
+  const handleViewChange = (view) => {
+    console.log('handleViewChange', view)
+    setView(view)
   }
 
   const handleLocationClick = (location) => {
@@ -141,7 +132,7 @@ const MapPage = () => {
       {isLoading && <LoadingText>Loading...</LoadingText>}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-        view={{ ...view, bounds }}
+        view={view}
         locations={locations}
         clusters={clusters}
         onViewChange={handleViewChange}
