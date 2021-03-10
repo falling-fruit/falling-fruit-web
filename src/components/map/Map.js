@@ -1,6 +1,6 @@
-import GoogleMap, { fitBounds } from 'google-map-react'
+import GoogleMap from 'google-map-react'
 import PropTypes from 'prop-types'
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 
 import Cluster from './Cluster'
 import Location from './Location'
@@ -23,54 +23,33 @@ const Map = ({
   onClusterClick,
   onLocationClick,
   onViewChange,
-}) => {
-  const mapRef = useRef(null)
-
-  useEffect(() => {
-    if (view.bounds && mapRef.current) {
-      const { offsetWidth, offsetHeight } = mapRef.current.getDiv()
-      const { center, zoom } = fitBounds(view.bounds, {
-        width: offsetWidth,
-        height: offsetHeight,
-      })
-
-      mapRef.current.setCenter(center)
-      mapRef.current.setZoom(zoom)
-    }
-  }, [view.bounds])
-
-  return (
-    <GoogleMap
-      bootstrapURLKeys={{ key: googleMapsAPIKey }}
-      center={view.center}
-      zoom={view.zoom}
-      onChange={onViewChange}
-      resetBoundsOnResize
-      yesIWantToUseGoogleMapApiInternals
-      onGoogleApiLoaded={({ map }) => {
-        mapRef.current = map
-      }}
-    >
-      {clusters.map((cluster) => (
-        <Cluster
-          key={JSON.stringify(cluster)}
-          onClick={() => onClusterClick(cluster)}
-          count={cluster.count}
-          lat={cluster.lat}
-          lng={cluster.lng}
-        />
-      ))}
-      {locations.map((location) => (
-        <Location
-          key={location.id}
-          onClick={() => onLocationClick(location)}
-          lat={location.lat}
-          lng={location.lng}
-        />
-      ))}
-    </GoogleMap>
-  )
-}
+}) => (
+  <GoogleMap
+    bootstrapURLKeys={{ key: googleMapsAPIKey }}
+    center={view.center}
+    zoom={view.zoom}
+    onChange={onViewChange}
+    resetBoundsOnResize
+  >
+    {clusters.map((cluster) => (
+      <Cluster
+        key={JSON.stringify(cluster)}
+        onClick={() => onClusterClick(cluster)}
+        count={cluster.count}
+        lat={cluster.lat}
+        lng={cluster.lng}
+      />
+    ))}
+    {locations.map((location) => (
+      <Location
+        key={location.id}
+        onClick={() => onLocationClick(location)}
+        lat={location.lat}
+        lng={location.lng}
+      />
+    ))}
+  </GoogleMap>
+)
 
 Map.propTypes = {
   googleMapsAPIKey: PropTypes.string.isRequired,

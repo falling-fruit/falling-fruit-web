@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { fitBounds } from 'google-map-react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { NumericObjectParam, useQueryParams } from 'use-query-params'
 
@@ -7,6 +8,8 @@ import Map from './Map'
 
 const LoadingText = styled.p`
   position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
 `
 
@@ -48,11 +51,28 @@ const DEFAULT_VIEW_STATE = {
 }
 
 const MapPage = () => {
+  const container = useRef(null)
+
+  const fitContainerBounds = (bounds) => {
+    const { offsetWidth, offsetHeight } = container.current
+    return fitBounds(bounds, {
+      width: offsetWidth,
+      height: offsetHeight,
+    })
+  }
+
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [bounds, setBounds] = useQueryParams({
     ne: NumericObjectParam,
     sw: NumericObjectParam,
   })
+
+  // Allow setting view via bounds
+  useEffect(() => {
+    if (bounds) {
+      setView(fitContainerBounds(bounds))
+    }
+  }, [bounds, setView])
 
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
@@ -60,7 +80,7 @@ const MapPage = () => {
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (bounds && bounds.ne?.lat) {
+      if (bounds) {
         // Map has received real bounds
         setIsLoading(true)
 
@@ -117,7 +137,7 @@ const MapPage = () => {
   }
 
   return (
-    <>
+    <div style={{ width: '100%', height: '100%' }} ref={container}>
       {isLoading && <LoadingText>Loading...</LoadingText>}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
@@ -128,7 +148,7 @@ const MapPage = () => {
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
       />
-    </>
+    </div>
   )
 }
 

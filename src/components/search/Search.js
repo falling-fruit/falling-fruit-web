@@ -15,6 +15,19 @@ import { NumericObjectParam, useQueryParams } from 'use-query-params'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
+const getViewportBounds = async (placeId) => {
+  const results = await getGeocode({ placeId })
+  const {
+    geometry: { viewport },
+  } = results[0]
+
+  const [ne, sw] = [viewport.getNorthEast(), viewport.getSouthWest()]
+  return {
+    ne: { lat: ne.lat(), lng: ne.lng() },
+    sw: { lat: sw.lat(), lng: sw.lng() },
+  }
+}
+
 // TODO: ask Siraj how highlighting should look
 // TODO: for long option descriptions, scroll to beginning of input
 const StyledComboboxPopover = styled(ComboboxPopover)`
@@ -46,19 +59,10 @@ const Search = () => {
 
   const handleSelect = async (description) => {
     setValue(description, false)
-
-    const results = await getGeocode({
-      placeId: descriptionToPlaceId.current[description],
-    })
-    const {
-      geometry: { viewport },
-    } = results[0]
-
-    const [ne, sw] = [viewport.getNorthEast(), viewport.getSouthWest()]
-    setBounds({
-      ne: { lat: ne.lat(), lng: ne.lng() },
-      sw: { lat: sw.lat(), lng: sw.lng() },
-    })
+    const viewportBounds = await getViewportBounds(
+      descriptionToPlaceId.current[description],
+    )
+    setBounds(viewportBounds)
   }
 
   return (
