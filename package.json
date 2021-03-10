@@ -1,7 +1,10 @@
 {
   "name": "falling-fruit",
+  "description": "React-based, mobile-friendly frontend for Falling Fruit's website",
   "version": "0.1.0",
   "private": true,
+  "license": "GPL-3.0",
+  "homepage": "https://falling-fruit.vercel.app/",
   "dependencies": {
     "@reach/tabs": "^0.13.0",
     "@reach/window-size": "^0.13.2",
