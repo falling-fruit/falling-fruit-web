@@ -10,11 +10,7 @@ import {
 import { useRef } from 'react'
 import styled from 'styled-components'
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
-import {
-  NumberParam,
-  NumericObjectParam,
-  useQueryParams,
-} from 'use-query-params'
+import { NumericObjectParam, useQueryParams } from 'use-query-params'
 
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
@@ -28,15 +24,8 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
 `
 
 const Search = () => {
-  const [_view, setView] = useQueryParams({
-    center: NumericObjectParam,
-    zoom: NumberParam,
-  })
-
   const [_bounds, setBounds] = useQueryParams({
     ne: NumericObjectParam,
-    nw: NumericObjectParam,
-    se: NumericObjectParam,
     sw: NumericObjectParam,
   })
 
@@ -55,29 +44,20 @@ const Search = () => {
     setValue(e.target.value)
   }
 
-  const handleSelect = (description) => {
+  const handleSelect = async (description) => {
     setValue(description, false)
-    getLongitudeAndLatitudeFromAddress(
-      descriptionToPlaceId.current[description],
-    )
-  }
 
-  const getLongitudeAndLatitudeFromAddress = (placeId) => {
-    getGeocode({ placeId }).then((results) => {
-      const {
-        geometry: { location, viewport },
-      } = results[0]
-      const [ne, sw] = [viewport.getNorthEast(), viewport.getSouthWest()]
+    const results = await getGeocode({
+      placeId: descriptionToPlaceId.current[description],
+    })
+    const {
+      geometry: { viewport },
+    } = results[0]
 
-      setView({ center: { lat: location.lat(), lng: location.lng() } })
-      setBounds({
-        ne: { lat: ne.lat(), lng: ne.lng() },
-        nw: { lat: ne.lat(), lng: ne.lng() },
-        se: { lat: sw.lat(), lng: sw.lng() },
-        sw: { lat: sw.lat(), lng: sw.lng() },
-      })
-
-      return { location, viewport }
+    const [ne, sw] = [viewport.getNorthEast(), viewport.getSouthWest()]
+    setBounds({
+      ne: { lat: ne.lat(), lng: ne.lng() },
+      sw: { lat: sw.lat(), lng: sw.lng() },
     })
   }
 

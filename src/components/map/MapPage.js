@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import {
-  NumberParam,
-  NumericObjectParam,
-  useQueryParams,
-} from 'use-query-params'
+import { NumericObjectParam, useQueryParams } from 'use-query-params'
 
 import { getClusters, getLocations } from '../../utils/api'
 import Map from './Map'
@@ -46,22 +42,15 @@ const DEFAULT_ZOOM = 1
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const _DEFAULT_VIEW_STATE = {
+const DEFAULT_VIEW_STATE = {
   center: { lat: DEFAULT_CENTER_LAT, lng: DEFAULT_CENTER_LNG },
   zoom: DEFAULT_ZOOM,
-  bounds: null,
 }
 
 const MapPage = () => {
-  const [view, setView] = useQueryParams({
-    center: NumericObjectParam,
-    zoom: NumberParam,
-  })
-
+  const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [bounds, setBounds] = useQueryParams({
     ne: NumericObjectParam,
-    nw: NumericObjectParam,
-    se: NumericObjectParam,
     sw: NumericObjectParam,
   })
 
@@ -71,19 +60,21 @@ const MapPage = () => {
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (bounds.ne?.lng) {
+      if (bounds && bounds.ne?.lat) {
         // Map has received real bounds
-        console.log(bounds, 'here1')
         setIsLoading(true)
+
         const query = {
-          swlng: bounds.sw.lng,
+          nelat: bounds.ne.lat,
           nelng: bounds.ne.lng,
           swlat: bounds.sw.lat,
-          nelat: bounds.ne.lat,
+          swlng: bounds.sw.lng,
           muni: 1,
         }
+
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
           const clusters = await getClusters({ ...query, zoom: view.zoom })
+
           setClusters(clusters)
           setLocations([])
         } else {
@@ -92,32 +83,36 @@ const MapPage = () => {
             _totalLocations,
             ...locations
           ] = await getLocations(query)
+
           setLocations(locations)
           setClusters([])
         }
+
         setIsLoading(false)
       }
     }
     fetchClusterAndLocationData()
   }, [view, bounds])
 
-  const onViewChange = ({ center, zoom, bounds }) => {
-    console.log(bounds, 'here2')
-    console.log('onViewChange called', { center, zoom, bounds })
-    setView({ center: [center.lat, center.lng], zoom })
-    setBounds(bounds)
+  const handleViewChange = ({ center, zoom, bounds }) => {
+    console.log('handleViewChange', center, zoom, bounds)
+    const { nw: _nw, se: _se, ...necessaryBounds } = bounds
+    setBounds(necessaryBounds)
+    setView({
+      center,
+      zoom,
+    })
   }
 
-  const onLocationClick = (location) => {
+  const handleLocationClick = (location) => {
     // TODO: Fetch location data from server
     console.log('Location clicked: ', location.id)
   }
 
-  const onClusterClick = (cluster) => {
-    setView((prevState) => ({
-      ...prevState,
-      center: [cluster.lat, cluster.lng],
-      zoom: prevState.zoom + 2,
+  const handleClusterClick = (cluster) => {
+    setView(({ zoom: prevZoom }) => ({
+      center: { lat: cluster.lat, lng: cluster.lng },
+      zoom: prevZoom + 2,
     }))
   }
 
@@ -126,12 +121,12 @@ const MapPage = () => {
       {isLoading && <LoadingText>Loading...</LoadingText>}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-        view={view}
+        view={{ ...view, bounds }}
         locations={locations}
         clusters={clusters}
-        onViewChange={onViewChange}
-        onLocationClick={onLocationClick}
-        onClusterClick={onClusterClick}
+        onViewChange={handleViewChange}
+        onLocationClick={handleLocationClick}
+        onClusterClick={handleClusterClick}
       />
     </>
   )

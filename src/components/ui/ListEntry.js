@@ -58,13 +58,14 @@ const ListEntry = React.forwardRef(
     </ListContainer>
   ),
 )
+
+ListEntry.displayName = 'ListEntry'
+
 ListEntry.propTypes = {
   leftIcons: PropTypes.node,
   primaryText: PropTypes.string,
   secondaryText: PropTypes.string,
   rightIcons: PropTypes.node,
 }
-
-ListEntry.displayName = 'ListEntry'
 
 export default ListEntry
