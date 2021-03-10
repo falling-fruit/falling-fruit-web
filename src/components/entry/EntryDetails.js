@@ -7,6 +7,21 @@ import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import { Tag } from '../ui/Tag'
 
+function getAccessType(accessTypeNumber) {
+  switch (accessTypeNumber) {
+    case 0:
+      return "On lister's property"
+    case 1:
+      return 'Received permission from owner'
+    case 2:
+      return 'Public property'
+    case 3:
+      return 'Private but overhanging'
+    case 4:
+      return 'Private property'
+  }
+}
+
 // Just make width 100% and the height will automatically be fit
 const ImageContainer = styled.img`
   width: 100%;
@@ -90,8 +105,7 @@ const EntryDetails = () => {
           <PlantName>{locationData.type_names[0]}</PlantName>
           <ScientificName>{locationTypeData.scientific_name}</ScientificName>
           <TagContainer>
-            <Tag>Invasive</Tag>
-            <Tag>Private, But Overhanging</Tag>
+            <Tag>{getAccessType(locationData.access)}</Tag>
           </TagContainer>
         </div>
 
