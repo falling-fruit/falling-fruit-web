@@ -22,6 +22,14 @@ function getAccessType(accessTypeNumber) {
   }
 }
 
+function parseISOString(s) {
+  const date = new Date(s)
+  // Unsure about time zones .getUTCOffset()?
+  return `${date.toLocaleString('default', {
+    month: 'long',
+  })} ${date.getDay()}, ${date.getFullYear()}`
+}
+
 // Just make width 100% and the height will automatically be fit
 const ImageContainer = styled.img`
   width: 100%;
@@ -115,7 +123,9 @@ const EntryDetails = () => {
             {locationData.description} @ {locationData.address}
           </Description>
 
-          <UpdateText>Last Updated at {locationTypeData.updated_at}</UpdateText>
+          <UpdateText>
+            Last Updated {parseISOString(locationTypeData.updated_at)}
+          </UpdateText>
 
           <ButtonSpacing>
             <Button icon={<Star />}> Review </Button>
