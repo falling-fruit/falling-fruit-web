@@ -7,19 +7,12 @@ import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import { Tag } from '../ui/Tag'
 
-function getAccessType(accessTypeNumber) {
-  switch (accessTypeNumber) {
-    case 0:
-      return "On lister's property"
-    case 1:
-      return 'Received permission from owner'
-    case 2:
-      return 'Public property'
-    case 3:
-      return 'Private but overhanging'
-    case 4:
-      return 'Private property'
-  }
+const ACCESS_TYPE = {
+  0: "On lister's property",
+  1: 'Received permission from owner',
+  2: 'Public property',
+  3: 'Private but overhanging',
+  4: 'Private property',
 }
 
 function parseISOString(s) {
@@ -30,8 +23,8 @@ function parseISOString(s) {
   })} ${date.getDay()}, ${date.getFullYear()}`
 }
 
-// Just make width 100% and the height will automatically be fit
 const ImageContainer = styled.img`
+  margin-top: 90px;
   width: 100%;
 `
 
@@ -39,7 +32,6 @@ const TextContainer = styled.div`
   margin: 23px;
 `
 
-//I have no clue where the bottom margin was ever set to something other than 0, but it needs
 const PlantName = styled.h2`
   margin-bottom: 0px;
   color: #333333;
@@ -113,7 +105,7 @@ const EntryDetails = () => {
           <PlantName>{locationData.type_names[0]}</PlantName>
           <ScientificName>{locationTypeData.scientific_name}</ScientificName>
           <TagContainer>
-            <Tag>{getAccessType(locationData.access)}</Tag>
+            <Tag>{ACCESS_TYPE[locationData.access]}</Tag>
           </TagContainer>
         </div>
 
