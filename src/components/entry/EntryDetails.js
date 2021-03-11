@@ -23,12 +23,16 @@ function parseISOString(dateString) {
   })} ${date.getDay()}, ${date.getFullYear()}`
 }
 
-const ImageContainer = styled.img`
+const EntryDetailsPageContainer = styled.div`
+  overflow-y: scroll;
   margin-top: 90px;
+`
+
+const ImageContainer = styled.img`
   width: 100%;
 `
 
-const TextContainer = styled.div`
+const EntryDetailsContent = styled.div`
   margin: 23px;
 `
 
@@ -96,17 +100,19 @@ const EntryDetails = () => {
   }, [id])
 
   return locationData && locationTypeData ? (
-    <div>
-      <ImageContainer src={locationData.photos[0].photo.original} alt="" />
+    <EntryDetailsPageContainer>
+      {locationData.photos.length > 0 && (
+        <ImageContainer src={locationData.photos[0].photo.original} alt="" />
+      )}
 
-      <TextContainer>
-        <div>
-          <PlantName>{locationData.type_names[0]}</PlantName>
-          <ScientificName>{locationTypeData.scientific_name}</ScientificName>
+      <EntryDetailsContent>
+        <PlantName>{locationData.type_names[0]}</PlantName>
+        <ScientificName>{locationTypeData.scientific_name}</ScientificName>
+        {locationData.access && (
           <TagContainer>
             <Tag>{ACCESS_TYPE[locationData.access]}</Tag>
           </TagContainer>
-        </div>
+        )}
 
         <DescriptionContainer>
           <Description>
@@ -119,10 +125,11 @@ const EntryDetails = () => {
           </UpdateText>
 
           <ButtonSpacing>
-            <Button icon={<Star />}> Review </Button>
-            <Button icon={<Flag />} secondary>
-              {' '}
-              Report{' '}
+            <Button>
+              <Star /> Review
+            </Button>
+            <Button secondary>
+              <Flag /> Report
             </Button>
           </ButtonSpacing>
         </DescriptionContainer>
@@ -136,18 +143,12 @@ const EntryDetails = () => {
           <Flag height="20px" width="25px" />
           <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
         </IndividualResourceContainer>
-      </TextContainer>
-    </div>
+      </EntryDetailsContent>
+    </EntryDetailsPageContainer>
   ) : (
-    <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+    <EntryDetailsPageContainer>
       <p>Loading...</p>
-    </div>
+    </EntryDetailsPageContainer>
   )
 }
 
