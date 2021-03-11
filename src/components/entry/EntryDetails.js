@@ -15,8 +15,8 @@ const ACCESS_TYPE = {
   4: 'Private property',
 }
 
-function parseISOString(s) {
-  const date = new Date(s)
+function parseISOString(dateString) {
+  const date = new Date(dateString)
   // Unsure about time zones .getUTCOffset()?
   return `${date.toLocaleString('default', {
     month: 'long',
@@ -45,12 +45,11 @@ const TagContainer = styled.div`
   margin-top: 12px;
 `
 
-/* Row gap nor line-height is working here to make the distance between all elements 14px
 const DescriptionContainer = styled.div`
-  grid-template-rows: 100%
-  row-gap: 14px;
+  & > *:not(:last-child) {
+    margin-bottom: 14px;
+  }
 `
-*/
 
 const Description = styled.p`
   color: #5a5a5a;
@@ -109,7 +108,7 @@ const EntryDetails = () => {
           </TagContainer>
         </div>
 
-        <>
+        <DescriptionContainer>
           <Description>
             {console.log(locationData.address)}
             {locationData.description} @ {locationData.address}
@@ -126,20 +125,17 @@ const EntryDetails = () => {
               Report{' '}
             </Button>
           </ButtonSpacing>
-        </>
+        </DescriptionContainer>
 
-        <>
-          <ResourceHeader>Other Resources</ResourceHeader>
-          <IndividualResourceContainer>
-            <Star height="20px" width="25px" />
-            <a href={locationTypeData.wikipedia_url}>Wikipedia</a>
-          </IndividualResourceContainer>
-          <IndividualResourceContainer>
-            <Flag height="20px" width="25px" />
-            <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
-          </IndividualResourceContainer>
-        </>
-        <p>EntryDetails for id: {id}</p>
+        <ResourceHeader>Other Resources</ResourceHeader>
+        <IndividualResourceContainer>
+          <Star height="20px" width="25px" />
+          <a href={locationTypeData.wikipedia_url}>Wikipedia</a>
+        </IndividualResourceContainer>
+        <IndividualResourceContainer>
+          <Flag height="20px" width="25px" />
+          <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
+        </IndividualResourceContainer>
       </TextContainer>
     </div>
   ) : (
