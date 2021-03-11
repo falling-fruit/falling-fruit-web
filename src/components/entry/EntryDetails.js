@@ -24,7 +24,6 @@ function parseISOString(dateString) {
 }
 
 const EntryDetailsPageContainer = styled.div`
-  overflow-y: scroll;
   margin-top: 90px;
 `
 

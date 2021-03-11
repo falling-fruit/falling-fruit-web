@@ -12,6 +12,7 @@ const PageTabs = styled(Tabs)`
   [data-reach-tab-panels] {
     flex: 1;
     display: flex;
+    overflow: hidden;
 
     [data-reach-tab-panel] {
       flex: 1;
