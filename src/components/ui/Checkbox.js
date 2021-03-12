@@ -6,56 +6,62 @@ import styled from 'styled-components'
 
 const Checkbox = React.forwardRef(({ ...props }, ref) => (
   <div>
-    <CustomCheckboxContainer style={}>
+    <CustomCheckboxContainer>
       <CustomCheckboxInput
         ref={ref}
         checked={props.checked}
         onChange={props.onChange}
         {...props}
-        style={{ width: '15px', height: '15px' }}
       />
-      <span aria-hidden style={{ width: '15px', height: '15px' }} />
+      <span aria-hidden />
     </CustomCheckboxContainer>
   </div>
 ))
 Checkbox.displayName = 'Checkbox'
 
 const StyledCheckbox = styled(Checkbox)`
-  label {
-    color: ${({ theme }) => theme.secondaryText}; afefse
-    font-weight: bold;
-    line-height: 2;
-  }
 
-  & > div {
-    height: 46px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 23px;
-    border: 1px solid ${({ theme }) => theme.secondaryBackground};
-    box-sizing: border-box;
-    padding: 0 20px;
-
-    input {
-      color: ${({ theme }) => theme.secondaryText};
-      font-size: 16px;
-      font-family: ${({ theme }) => theme.fonts};
-      padding: 0;
-      border: none;
-      display: block;
-      width: 100%;
-      outline: none;
-      height: 44px;
-
-      &::placeholder {
-        color: ${({ theme }) => theme.tertiaryText};
-      }
+    CustomCheckboxContainer {
+      color: ${({ theme }) => theme.background};
+      background: ${(props) => {
+        if (props.checked) {
+          return ({ theme }) => theme.orange
+        } else if (!props.checked) {
+          return ({ theme }) => theme.transparentOrange
+        } else {
+          return ({ theme }) => theme.transparentOrange
+        }
+      }};
+      border: 2.57143px solid #FFA41B;
+      box-sizing: border-box;
+      border-radius: 3.42857px;
     }
 
-    &:focus-within {
-      box-shadow: 0 0 0 1pt rgb(0, 95, 204);
-      box-shadow: 0 0 0 1pt -webkit-focus-ring-color;
+    span {
+      display: "block";
+      position: "absolute";
+      width: "60%";
+      height: "60%";
+      top: "50%";
+      left: "50%";
+      transition: "transform 200ms ease-out, background 200ms ease-out",
+      zIndex: 1,
+      background: ${(props) => {
+        if (props.checked) {
+          return ({ theme }) => theme.orange
+        } else if (!props.checked) {
+          return ({ theme }) => theme.orange
+        } else {
+          return ({ theme }) => theme.transparentOrange
+        }
+      }};
+      transform: ${(props) => {
+        if (props.checked) {
+          return '`translate(-50%, -50%) scaleX(1) scaleY(1)`'
+        } else if (!props.checked) {
+          return '`translate(-50%, -50%) scaleX(0) scaleY(0.4)`'
+        }
+      }};
     }
 
     svg {
