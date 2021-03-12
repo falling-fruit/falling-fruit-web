@@ -8,7 +8,7 @@ const Icons = styled.div`
   align-items: center;
   max-height: 36px;
   & > * {
-    padding: 8px;
+    margin: 8px;
   }
 `
 const PrimaryText = styled.div`
