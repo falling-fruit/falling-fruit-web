@@ -37,8 +37,8 @@ const StyledCheckbox = styled(Checkbox)`
     position: absolute;
     width: 60%;
     height: 60%;
-    top: 50%;
-    left: 50%;
+    top: 20%;
+    left: 20%;
     transition: transform 200ms ease-out, background 200ms ease-out;
     zindex: 1;
     background: ${(props) => {
@@ -47,16 +47,16 @@ const StyledCheckbox = styled(Checkbox)`
       } else if (props.checked === false) {
         return ({ theme }) => theme.transparentOrange
       } else {
-        return ({ theme }) => theme.transparentOrange
+        return ({ theme }) => theme.orange
       }
     }};
     transform: ${(props) => {
       if (props.checked === true) {
-        return `translate(-50%, -50%) scaleX(1) scaleY(1)`
+        return `scaleX(1) scaleY(1)`
       } else if (props.checked === 'mixed') {
-        return `translate(-50%, -50%) scaleX(1) scaleY(1)`
+        return `scaleX(1) scaleY(1)`
       } else {
-        return `translate(-50%, -50%) scaleX(1) scaleY(1)`
+        return `scaleX(1) scaleY(1)`
       }
     }};
   }
