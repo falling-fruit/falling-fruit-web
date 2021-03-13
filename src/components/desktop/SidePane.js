@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
-import EntryDetails from './EntryDetailsWrapper'
+import EntryDetailsWrapper from './EntryDetailsWrapper'
 import SidePaneSwitch from './SidePaneSwitch'
 
 const PaneContainer = styled.div`
@@ -14,7 +14,7 @@ const SidePane = () => (
     <SidePaneSwitch />
     <Switch>
       <Route path="/entry/:id">
-        <EntryDetails />
+        <EntryDetailsWrapper />
       </Route>
       <Route>Side Pane Details</Route>
     </Switch>

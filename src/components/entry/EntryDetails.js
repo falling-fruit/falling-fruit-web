@@ -1,10 +1,12 @@
-import { Flag, Star } from '@styled-icons/boxicons-solid'
+import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
+import { theme } from '../ui/GlobalStyle'
+import IconButton from '../ui/IconButton'
 import { Tag } from '../ui/Tag'
 
 const ACCESS_TYPE = {
@@ -25,7 +27,8 @@ function parseISOString(dateString) {
 
 const EntryDetailsPageContainer = styled.div`
   overflow: scroll;
-  margin-top: 90px;
+  height: 100%;
+  margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
 `
 
 const ImageContainer = styled.img`
@@ -37,12 +40,19 @@ const EntryDetailsContent = styled.div`
 `
 
 const PlantName = styled.h2`
+  margin-top: 0px;
   margin-bottom: 0px;
   color: #333333;
 `
 
 const ScientificName = styled.small`
   font-style: italic;
+`
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const TagContainer = styled.div`
@@ -80,7 +90,7 @@ const IndividualResourceContainer = styled.small`
   column-gap: 12px;
 `
 
-const EntryDetails = () => {
+const EntryDetails = ({ isDesktop }) => {
   const {
     params: { id },
   } = useRouteMatch()
@@ -99,23 +109,39 @@ const EntryDetails = () => {
     fetchEntryDetails()
   }, [id])
 
+  const handleMapButtonClick = () => {
+    // TODO: handle map button click
+    console.log('Map Button Clicked')
+  }
+
   return locationData && locationTypeData ? (
-    <EntryDetailsPageContainer>
+    <EntryDetailsPageContainer isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
         <ImageContainer src={locationData.photos[0].photo.original} alt="" />
       )}
 
       <EntryDetailsContent>
-        <PlantName>{locationData.type_names[0]}</PlantName>
-        <ScientificName>{locationTypeData.scientific_name}</ScientificName>
+        <HeaderContainer>
+          <div>
+            <PlantName>{locationData.type_names[0]}</PlantName>
+            <ScientificName>{locationTypeData.scientific_name}</ScientificName>
+          </div>
+          {isDesktop && (
+            <IconButton
+              size={40}
+              raised={false}
+              icon={<Map color={theme.secondaryText} />}
+              onClick={handleMapButtonClick}
+              label="add location"
+            />
+          )}
+        </HeaderContainer>
         <TagContainer>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
           <Tag>{locationData.unverified ? 'Unverified' : 'Verified'}</Tag>
         </TagContainer>
-        )
         <DescriptionContainer>
           <Description>
-            {console.log(locationData.address)}
             {locationData.description} @ {locationData.address}
           </Description>
 
