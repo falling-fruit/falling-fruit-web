@@ -18,6 +18,11 @@ const CircleIcon = styled.div`
     width: 60%;
     color: #fff;
   }
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `
 
 export default CircleIcon

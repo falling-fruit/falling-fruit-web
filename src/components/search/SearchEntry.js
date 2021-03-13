@@ -1,8 +1,11 @@
-import { Map, Navigation } from '@styled-icons/boxicons-solid'
+// import { Map, Navigation } from '@styled-icons/boxicons-solid'
+import { Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
 import CircleIcon from '../ui/CircleIcon'
 import ListEntry from '../ui/ListEntry'
+// import Plantpic from './plantpic.png'
+import smallplant from './smallplant.png'
 
 const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   const [primaryText, secondaryText] = children
@@ -10,8 +13,8 @@ const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   // TODO: change colors to theme colors
   // TODO: make the circle icon a reusable UI component
   const leftIcon = (
-    <CircleIcon backgroundColor={'#4183C4'}>
-      <Map />
+    <CircleIcon backgroundColor={'#5a5a5a'}>
+      <img src={smallplant} alt={'plant'}></img>
     </CircleIcon>
   )
 
