@@ -108,12 +108,11 @@ const EntryDetails = () => {
       <EntryDetailsContent>
         <PlantName>{locationData.type_names[0]}</PlantName>
         <ScientificName>{locationTypeData.scientific_name}</ScientificName>
-        {locationData.access && (
-          <TagContainer>
-            <Tag>{ACCESS_TYPE[locationData.access]}</Tag>
-          </TagContainer>
-        )}
-
+        <TagContainer>
+          {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
+          <Tag>{locationData.unverified ? 'Unverified' : 'Verified'}</Tag>
+        </TagContainer>
+        )
         <DescriptionContainer>
           <Description>
             {console.log(locationData.address)}
@@ -133,7 +132,6 @@ const EntryDetails = () => {
             </Button>
           </ButtonSpacing>
         </DescriptionContainer>
-
         <ResourceHeader>Other Resources</ResourceHeader>
         <IndividualResourceContainer>
           <Star height="20px" width="25px" />
