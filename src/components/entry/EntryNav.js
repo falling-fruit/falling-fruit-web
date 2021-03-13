@@ -28,7 +28,7 @@ const EntryNavIconsContainer = styled.div`
   width: 110px;
 `
 
-const EntryNav = () => {
+const EntryNav = ({ isDesktop }) => {
   const history = useHistory()
 
   const onBackButtonClick = () => history.goBack()
@@ -47,24 +47,26 @@ const EntryNav = () => {
     <EntryNavContainer>
       <EntryNavTextContainer>
         <ArrowBack onClick={onBackButtonClick} color={theme.secondaryText} />
-        <p>Results</p>
+        <p>{isDesktop ? 'Back to Results' : 'Results'}</p>
       </EntryNavTextContainer>
-      <EntryNavIconsContainer>
-        <IconButton
-          size={50}
-          raised={false}
-          icon={<Pencil color={theme.secondaryText} />}
-          onClick={onEditButtonClick}
-          label={'edit-entry-details'}
-        />
-        <IconButton
-          size={50}
-          raised={false}
-          icon={<Map color={theme.secondaryText} />}
-          onClick={onMapButtonClick}
-          label={'map-entry-details'}
-        />
-      </EntryNavIconsContainer>
+      {!isDesktop && (
+        <EntryNavIconsContainer>
+          <IconButton
+            size={50}
+            raised={false}
+            icon={<Pencil color={theme.secondaryText} />}
+            onClick={onEditButtonClick}
+            label={'edit-entry-details'}
+          />
+          <IconButton
+            size={50}
+            raised={false}
+            icon={<Map color={theme.secondaryText} />}
+            onClick={onMapButtonClick}
+            label={'map-entry-details'}
+          />
+        </EntryNavIconsContainer>
+      )}
     </EntryNavContainer>
   )
 }

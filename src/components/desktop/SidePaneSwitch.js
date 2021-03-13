@@ -15,7 +15,7 @@ const SidePaneSwitch = () => (
           <Search />
         </Route>
         <Route path="/entry">
-          <EntryNav />
+          <EntryNav isDesktop />
         </Route>
       </Switch>
     </Route>
