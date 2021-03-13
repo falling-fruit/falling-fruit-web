@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 
 const Icons = styled.div`
@@ -11,16 +12,14 @@ const Icons = styled.div`
   }
 `
 const PrimaryText = styled.div`
-  align-items: center;
   font-weight: bold;
   font-size: 14px;
 `
 const SecondaryText = styled.div`
-  align-items: center;
   font-weight: normal;
   font-size: 12px;
 `
-const ListContainer = styled.div`
+const ListContainer = styled.li`
   display: flex;
   flex-direction: row;
   padding: 0 22px;
@@ -37,18 +36,30 @@ const TextContainer = styled.div`
   justify-content: center;
   margin-left: 18px;
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  div {
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `
 
-const ListEntry = ({ leftIcons, primaryText, secondaryText, rightIcons }) => (
-  <ListContainer>
-    <Icons>{leftIcons}</Icons>
-    <TextContainer>
-      <PrimaryText>{primaryText}</PrimaryText>
-      <SecondaryText>{secondaryText}</SecondaryText>
-    </TextContainer>
-    <Icons>{rightIcons}</Icons>
-  </ListContainer>
+const ListEntry = React.forwardRef(
+  ({ leftIcons, primaryText, secondaryText, rightIcons, ...props }, ref) => (
+    <ListContainer ref={ref} {...props}>
+      <Icons>{leftIcons}</Icons>
+      <TextContainer>
+        <PrimaryText>{primaryText}</PrimaryText>
+        <SecondaryText>{secondaryText}</SecondaryText>
+      </TextContainer>
+      <Icons>{rightIcons}</Icons>
+    </ListContainer>
+  ),
 )
+
+ListEntry.displayName = 'ListEntry'
 
 ListEntry.propTypes = {
   leftIcons: PropTypes.node,
