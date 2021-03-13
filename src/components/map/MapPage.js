@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { fitBounds } from 'google-map-react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { getClusters, getLocations } from '../../utils/api'
+import SearchContext from '../search/SearchContext'
 import Map from './Map'
+import MapContext from './MapContext'
 
 const LoadingText = styled.p`
   position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
 `
 
@@ -17,58 +22,47 @@ const LoadingText = styled.p`
  */
 const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
-/**
- * Default latitude of the map's center.
- * @constant {number}
- */
-const DEFAULT_CENTER_LAT = 40.1125785
-
-/**
- * Default longitude of the map's center.
- * @constant {number}
- */
-const DEFAULT_CENTER_LNG = -88.2287926
-
-/**
- * Default zoom level.
- * @constant {number}
- */
-const DEFAULT_ZOOM = 1
-
-/**
- * Default view state of the map.
- * @constant {Object}
- * @property {number[]} center - The latitude and longitude of the map's center
- * @property {number} zoom - The map's zoom level
- * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
- */
-const DEFAULT_VIEW_STATE = {
-  center: [DEFAULT_CENTER_LAT, DEFAULT_CENTER_LNG],
-  zoom: DEFAULT_ZOOM,
-  bounds: null,
-}
-
 const MapPage = () => {
   const history = useHistory()
-  const [view, setView] = useState(DEFAULT_VIEW_STATE)
+  const container = useRef(null)
+  const { viewport: searchViewport } = useContext(SearchContext)
+  const { view, setView } = useContext(MapContext)
+
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+  const fitContainerBounds = (bounds) => {
+    const { offsetWidth, offsetHeight } = container.current
+    return fitBounds(bounds, {
+      width: offsetWidth,
+      height: offsetHeight,
+    })
+  }
+
+  useEffect(() => {
+    if (searchViewport) {
+      setView(fitContainerBounds(searchViewport))
+    }
+  }, [searchViewport, setView])
+
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (view.bounds?.ne.lng) {
+      if (view.bounds) {
         // Map has received real bounds
         setIsLoading(true)
+
         const query = {
-          swlng: view.bounds.sw.lng,
+          nelat: view.bounds.ne.lat,
           nelng: view.bounds.ne.lng,
           swlat: view.bounds.sw.lat,
-          nelat: view.bounds.ne.lat,
+          swlng: view.bounds.sw.lng,
           muni: 1,
         }
+
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
           const clusters = await getClusters({ ...query, zoom: view.zoom })
+
           setClusters(clusters)
           setLocations([])
         } else {
@@ -77,43 +71,45 @@ const MapPage = () => {
             _totalLocations,
             ...locations
           ] = await getLocations(query)
+
           setLocations(locations)
           setClusters([])
         }
+
         setIsLoading(false)
       }
     }
     fetchClusterAndLocationData()
   }, [view])
 
-  const onViewChange = ({ center, zoom, bounds }) => {
-    console.log('onViewChange called', { center, zoom, bounds })
-    setView({ center: [center.lat, center.lng], zoom, bounds })
+  const handleViewChange = (view) => {
+    console.log('handleViewChange', view)
+    setView(view)
   }
 
-  const onLocationClick = (location) => history.push(`/entry/${location.id}`)
+  const handleLocationClick = (location) =>
+    history.push(`/entry/${location.id}`)
 
-  const onClusterClick = (cluster) => {
-    setView((prevState) => ({
-      ...prevState,
-      center: [cluster.lat, cluster.lng],
-      zoom: prevState.zoom + 2,
+  const handleClusterClick = (cluster) => {
+    setView(({ zoom: prevZoom }) => ({
+      center: { lat: cluster.lat, lng: cluster.lng },
+      zoom: prevZoom + 2,
     }))
   }
 
   return (
-    <>
+    <div style={{ width: '100%', height: '100%' }} ref={container}>
       {isLoading && <LoadingText>Loading...</LoadingText>}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
         locations={locations}
         clusters={clusters}
-        onViewChange={onViewChange}
-        onLocationClick={onLocationClick}
-        onClusterClick={onClusterClick}
+        onViewChange={handleViewChange}
+        onLocationClick={handleLocationClick}
+        onClusterClick={handleClusterClick}
       />
-    </>
+    </div>
   )
 }
 
