@@ -49,6 +49,8 @@ const SettingsPage = () => (
       size={57}
     />
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
+    <Checkbox checked></Checkbox>
+    <Checkbox checked={false}></Checkbox>
     <Checkbox checked={'mixed'}></Checkbox>
   </>
 )
