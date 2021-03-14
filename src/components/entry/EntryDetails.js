@@ -27,7 +27,6 @@ function parseISOString(dateString) {
 
 const EntryDetailsPageContainer = styled.div`
   overflow: scroll;
-  height: 100%;
   margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
 `
 
@@ -138,7 +137,9 @@ const EntryDetails = ({ isDesktop }) => {
         </HeaderContainer>
         <TagContainer>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
-          <Tag>{locationData.unverified ? 'Unverified' : 'Verified'}</Tag>
+          <Tag color="#4183C4" backgroundColor="#D9E6F3">
+            {locationData.unverified ? 'Unverified' : 'Verified'}
+          </Tag>
         </TagContainer>
         <DescriptionContainer>
           <Description>
