@@ -46,7 +46,7 @@ const MapPage = () => {
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (view.bounds?.ne.lat) {
+      if (view.bounds?.ne.lat != null) {
         // Map has received real bounds
         setIsLoading(true)
 

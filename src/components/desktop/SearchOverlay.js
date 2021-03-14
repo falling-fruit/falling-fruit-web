@@ -9,7 +9,7 @@ const SearchOverlay = styled(Search)`
   }
 
   [data-reach-combobox-popover] {
-    // TODO: this is tricky, but make highlighting contained wihtin the border radius
+    // TODO: this is tricky, but make highlighting contained within the border radius
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     padding-bottom: 10px;

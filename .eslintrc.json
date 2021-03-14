@@ -5,6 +5,13 @@
   ],
   "plugins": ["simple-import-sort", "@hack4impact-uiuc"],
   "rules": {
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
     "no-else-return": "off",
     "no-magic-numbers": "off",
     "no-unused-vars": [
