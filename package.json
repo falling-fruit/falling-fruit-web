@@ -12,7 +12,6 @@
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/boxicons-solid": "^10.23.0",
     "axios": "^0.21.1",
-    "craco": "^0.0.3",
     "google-map-react": "^2.1.9",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -35,14 +34,14 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "start": "ESLINT_NO_DEV_ERRORS=true craco start",
+    "start": "ESLINT_NO_DEV_ERRORS=true react-scripts start",
     "lint": "yarn lint:check --fix",
     "lint:check": "eslint src --ext js,jsx,ts,tsx",
     "format": "yarn format:output --write",
     "format:check": "yarn format:output --check",
     "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
-    "build": "craco build",
-    "test": "craco test",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": {
