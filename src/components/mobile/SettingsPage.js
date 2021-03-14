@@ -2,7 +2,6 @@ import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
-import Checkbox from '../ui/Checkbox'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import { Tag, TagList } from '../ui/Tag'
@@ -49,9 +48,6 @@ const SettingsPage = () => (
       size={57}
     />
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
-    <Checkbox checked></Checkbox>
-    <Checkbox checked={false}></Checkbox>
-    <Checkbox checked={'mixed'}></Checkbox>
   </>
 )
 
