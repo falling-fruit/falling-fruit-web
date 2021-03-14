@@ -56,17 +56,13 @@ const StyledCheckbox = styled(Checkbox)`
     transition: transform 200ms ease-out, background 200ms ease-out;
     zindex: 1;
     background: ${(props) => {
-      if (props.checked === false) {
-        return ({ theme }) => theme.transparentOrange
-      } else {
+      if (props.checked === 'mixed') {
         return ({ theme }) => theme.orange
       }
     }};
     transform: ${(props) => {
       if (props.checked === 'mixed') {
         return `scaleX(1) scaleY(1)` //TODO: change to styled icons
-      } else {
-        return `scaleX(1) scaleY(1)`
       }
     }};
   }
