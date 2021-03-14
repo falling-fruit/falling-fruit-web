@@ -5,23 +5,25 @@ import { Check } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components'
 
-const Checkbox = React.forwardRef((props, ref) => (
-  <div className={props.className}>
-    <CustomCheckboxContainer>
-      <CustomCheckboxInput
-        checked={props.checked}
-        onChange={props.onChange}
-        ref={ref}
-        {...props}
-      />
-      {props.checked === true ? (
-        <StyledCheck size="21" />
-      ) : (
-        <span aria-hidden></span>
-      )}
-    </CustomCheckboxContainer>
-  </div>
-))
+const Checkbox = React.forwardRef(
+  ({ className, checked, onChange, ...props }, ref) => (
+    <div className={className}>
+      <CustomCheckboxContainer>
+        <CustomCheckboxInput
+          checked={checked}
+          onChange={onChange}
+          ref={ref}
+          {...props}
+        />
+        {props.checked === true ? (
+          <StyledCheck size="21" />
+        ) : (
+          <span aria-hidden></span>
+        )}
+      </CustomCheckboxContainer>
+    </div>
+  ),
+)
 Checkbox.displayName = 'Checkbox'
 
 const StyledCheck = styled(Check)`
@@ -68,7 +70,7 @@ const StyledCheckbox = styled(Checkbox)`
     }};
     transform: ${(props) => {
       if (props.checked === 'mixed') {
-        return `scaleX(1) scaleY(1)`
+        return `scaleX(1) scaleY(1)` //TODO: change to styled icons
       } else {
         return `scaleX(1) scaleY(1)`
       }
