@@ -15,11 +15,7 @@ const Checkbox = React.forwardRef(
           ref={ref}
           {...props}
         />
-        {props.checked === true ? (
-          <StyledCheck size="21" />
-        ) : (
-          <span aria-hidden></span>
-        )}
+        {checked === true ? <StyledCheck size="21" /> : <span aria-hidden />}
       </CustomCheckboxContainer>
     </div>
   ),
@@ -60,9 +56,7 @@ const StyledCheckbox = styled(Checkbox)`
     transition: transform 200ms ease-out, background 200ms ease-out;
     zindex: 1;
     background: ${(props) => {
-      if (props.checked === true) {
-        return ({ theme }) => theme.orange
-      } else if (props.checked === false) {
+      if (props.checked === false) {
         return ({ theme }) => theme.transparentOrange
       } else {
         return ({ theme }) => theme.orange
