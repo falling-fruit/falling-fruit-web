@@ -7,6 +7,8 @@ import SidePaneSwitch from './SidePaneSwitch'
 const PaneContainer = styled.div`
   padding: 20px 10px;
   padding-right: 0px;
+  overflow: scroll;
+  height: 100%;
 `
 
 const SidePane = () => (
