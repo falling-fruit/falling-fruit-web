@@ -60,11 +60,6 @@ const StyledCheckbox = styled(Checkbox)`
         return ({ theme }) => theme.orange
       }
     }};
-    transform: ${(props) => {
-      if (props.checked === 'mixed') {
-        return `scaleX(1) scaleY(1)` //TODO: change to styled icons
-      }
-    }};
   }
 `
 
