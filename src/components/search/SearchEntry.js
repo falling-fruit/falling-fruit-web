@@ -1,20 +1,17 @@
-// import { Map, Navigation } from '@styled-icons/boxicons-solid'
-import { Navigation } from '@styled-icons/boxicons-solid'
+import { Map, Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
 import CircleIcon from '../ui/CircleIcon'
+import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
-// import Plantpic from './plantpic.png'
-import tree from './tree.png'
 
 const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   const [primaryText, secondaryText] = children
 
-  // TODO: change colors to theme colors
-  // TODO: make the circle icon a reusable UI component
+  // TODO: Add current location to search dropdown
   const leftIcon = (
-    <CircleIcon backgroundColor={'#5a5a5a'}>
-      <img src={tree} alt={'plant'}></img>
+    <CircleIcon backgroundColor={theme.secondaryText}>
+      <Map />
     </CircleIcon>
   )
 
