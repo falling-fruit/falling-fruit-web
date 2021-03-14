@@ -1599,6 +1599,17 @@
     "@reach/utils" "0.13.2"
     tslib "^2.1.0"
 
+"@reach/checkbox@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@reach/checkbox/-/checkbox-0.13.2.tgz#b972b922cf6cea0c2bbabca0129c58307b566a4e"
+  integrity sha512-PffLj9G7y7cnm53/Ni52DrbHUGbB2ohhe3KVQH6CMY3fuRAN00kJEkIoWR2Yh5VON3lxS9E6vEFn4c+3F6dYYA==
+  dependencies:
+    "@reach/auto-id" "0.13.2"
+    "@reach/machine" "0.13.2"
+    "@reach/utils" "0.13.2"
+    prop-types "^15.7.2"
+    tslib "^2.1.0"
+
 "@reach/combobox@^0.13.2":
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/@reach/combobox/-/combobox-0.13.2.tgz#f0a38c685a2704f6a189709e63cd7e25809da1e4"
@@ -1627,6 +1638,15 @@
   integrity sha512-8FdcYF48U3RXeMTlaYPO0JZ7RD01z8pUl6sCAXcDBw1Hony4ZgiubjZOHD9c+fOZrC9kHqD+yJfIb6K+T+vabw==
   dependencies:
     "@reach/utils" "0.13.2"
+    tslib "^2.1.0"
+
+"@reach/machine@0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@reach/machine/-/machine-0.13.2.tgz#744302f5ce2d4e5fd0527ae0baa60d325b2325d8"
+  integrity sha512-sYwkap6s4Rh2Uvs1IwMH537UJ1lHalMjjQlIV1cgruvOSVLvEB4WiGZpiKU6OS4WPVFW+iYuJwNW1mbGGSJkQg==
+  dependencies:
+    "@reach/utils" "0.13.2"
+    "@xstate/fsm" "1.4.0"
     tslib "^2.1.0"
 
 "@reach/observe-rect@1.2.0":
@@ -2402,6 +2422,11 @@
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
+
+"@xstate/fsm@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@xstate/fsm/-/fsm-1.4.0.tgz#6fd082336fde4d026e9e448576189ee5265fa51a"
+  integrity sha512-uTHDeu2xI5E1IFwf37JFQM31RrH7mY7877RqPBS4ZqSNUwoLDuct8AhBWaXGnVizBAYyimVwgCyGa9z/NiRhXA==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
