@@ -14,8 +14,7 @@ const CircleIcon = styled.div`
   overflow: hidden;
 
   ${StyledIconBase} {
-    // TODO: ask Siraj what % to use
-    width: 60%;
+    width: 65%;
     color: #fff;
   }
   & > img {

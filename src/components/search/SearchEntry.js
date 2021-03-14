@@ -5,7 +5,7 @@ import React from 'react'
 import CircleIcon from '../ui/CircleIcon'
 import ListEntry from '../ui/ListEntry'
 // import Plantpic from './plantpic.png'
-import smallplant from './smallplant.png'
+import tree from './tree.png'
 
 const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   const [primaryText, secondaryText] = children
@@ -14,7 +14,7 @@ const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   // TODO: make the circle icon a reusable UI component
   const leftIcon = (
     <CircleIcon backgroundColor={'#5a5a5a'}>
-      <img src={smallplant} alt={'plant'}></img>
+      <img src={tree} alt={'plant'}></img>
     </CircleIcon>
   )
 
