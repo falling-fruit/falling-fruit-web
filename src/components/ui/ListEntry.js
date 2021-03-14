@@ -7,8 +7,8 @@ const Icons = styled.div`
   justify-content: center;
   align-items: center;
   max-height: 36px;
-  & > * {
-    margin: 0 4px;
+  & > *:not(:last-child) {
+    margin: 0 8px;
   }
 `
 const PrimaryText = styled.div`
