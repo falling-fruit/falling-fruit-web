@@ -1,12 +1,26 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
-import { Flag, Star } from '@styled-icons/boxicons-solid'
+import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
+import MyAccordionButton from '../ui/MyAccordionButton'
 import { Tag, TagList } from '../ui/Tag'
 
 const TwoIcons = [<Star size="16" key={1} />, <Star size="16" key={2} />]
+const leftIcon = (
+  <div
+    style={{
+      background: '#5A5A5A',
+      width: '36px',
+      height: '36px',
+      boxSizing: 'border-box',
+      borderRadius: '50%',
+    }}
+  >
+    <Map size={20} color={'white'} />
+  </div>
+)
 
 const SettingsPage = () => (
   <>
@@ -48,6 +62,7 @@ const SettingsPage = () => (
       size={57}
     />
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
+    <MyAccordionButton leftIcon={leftIcon} text="Options"></MyAccordionButton>
   </>
 )
 

@@ -1583,6 +1583,17 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@reach/accordion@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@reach/accordion/-/accordion-0.13.2.tgz#0fd6ac089df685bf092233b4a1efcec123fcc377"
+  integrity sha512-qZZNPNm04C/ZiWSqLDjBhPUIYcdAl/15nCiaqqiWUB867pEoU6Xqb+0zjKP9FF+fCjLPulioHL4HX/IHddYAoA==
+  dependencies:
+    "@reach/auto-id" "0.13.2"
+    "@reach/descendants" "0.13.2"
+    "@reach/utils" "0.13.2"
+    prop-types "^15.7.2"
+    tslib "^2.1.0"
+
 "@reach/auto-id@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.13.0.tgz#0dfa4c1af46d1ad68d8282c786c03362ae35e335"
