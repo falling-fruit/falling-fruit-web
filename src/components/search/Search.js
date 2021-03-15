@@ -9,7 +9,7 @@ import {
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { useContext, useRef } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
 
@@ -38,7 +38,7 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
   padding-top: 8px;
 `
 
-const Search = () => {
+const Search = (props) => {
   const { setViewport } = useContext(SearchContext)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
@@ -65,13 +65,18 @@ const Search = () => {
   }
 
   return (
-    <Combobox onSelect={handleSelect} aria-labelledby="demo">
+    <Combobox
+      onSelect={handleSelect}
+      aria-label="Search for a location"
+      {...props}
+    >
       <ComboboxInput
         as={Input}
         value={value}
         onChange={handleInput}
         disabled={!ready}
         icon={<SearchAlt2 />}
+        placeholder="Search for a location..."
       />
       <StyledComboboxPopover portal={false}>
         <ComboboxList>

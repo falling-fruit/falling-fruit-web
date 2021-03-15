@@ -1,16 +1,9 @@
-import styled from 'styled-components'
-
-import Search from '../search/Search'
-
-const PaneContainer = styled.div`
-  padding: 20px 10px;
-  padding-right: 0px;
-`
+import SearchOverlay from './SearchOverlay'
 
 const SidePane = () => (
-  <PaneContainer>
-    <Search />
-  </PaneContainer>
+  <>
+    <SearchOverlay />
+  </>
 )
 
 export default SidePane

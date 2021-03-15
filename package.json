@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
+    "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.8",
