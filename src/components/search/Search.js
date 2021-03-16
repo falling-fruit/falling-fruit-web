@@ -55,6 +55,15 @@ const Search = (props) => {
   const handleInput = (e) => {
     setValue(e.target.value)
   }
+  let currentLocation = {
+    place_id: '00000000000000',
+    description: 'Current Location',
+    structured_formatting: {
+      main_text: 'Current Location',
+      secondary_text: 'current_city',
+    },
+  }
+  const fullData = [currentLocation, ...data]
 
   const handleSelect = async (description) => {
     setValue(description, false)
@@ -81,7 +90,7 @@ const Search = (props) => {
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
           {status === 'OK' &&
-            data.map((suggestion) => {
+            fullData.map((suggestion) => {
               const {
                 place_id,
                 description,
