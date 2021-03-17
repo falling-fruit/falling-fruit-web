@@ -8,7 +8,7 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
@@ -19,6 +19,7 @@ import SearchEntry from './SearchEntry'
 
 const getViewportBounds = async (placeId) => {
   const results = await getGeocode({ placeId })
+  console.log(`{results}`)
   const {
     geometry: { viewport },
   } = results[0]
@@ -28,6 +29,26 @@ const getViewportBounds = async (placeId) => {
     ne: { lat: ne.lat(), lng: ne.lng() },
     sw: { lat: sw.lat(), lng: sw.lng() },
   }
+}
+
+const extractCityName = (latlng) => {
+  const geocoder = new window.google.maps.Geocoder()
+
+  return new Promise((resolve, reject) => {
+    geocoder.geocode({ location: latlng }, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          resolve(
+            results[0].plus_code.compound_code.split(' ').slice(1).join(' '),
+          )
+        } else {
+          reject('No results found')
+        }
+      } else {
+        reject(`Geocoder failed due to: ${status}`)
+      }
+    })
+  })
 }
 
 // TODO: ask Siraj how highlighting should look
@@ -52,22 +73,29 @@ const Search = (props) => {
     setValue,
   } = usePlacesAutocomplete()
 
+  const [currLocation, setCurrLocation] = useState({})
+
   const handleInput = (e) => {
     setValue(e.target.value)
   }
 
-  const locSuccess = (pos) => {
+  // make a geolocation hook
+  const locSuccess = async (pos) => {
     console.log('success!')
     var lat = pos.coords.latitude
     var lon = pos.coords.longitude
-    alert(`${lat} ${lon}`)
 
-    return [lat, lon]
+    const latlng = {
+      lat: lat,
+      lng: lon,
+    }
+
+    const cityName = await extractCityName(latlng)
+    setCurrLocation({ name: cityName, coords: latlng })
   }
 
-  const locError = (err) => {
+  const locError = () => {
     console.log('error!')
-    alert(err)
   }
 
   const handleLocationError = (browserHasGeolocation) => {
@@ -93,21 +121,34 @@ const Search = (props) => {
   }, [])
 
   let currentLocation = {
-    place_id: '00000000000000',
+    place_id: '123',
     description: 'Current Location',
     structured_formatting: {
       main_text: 'Current Location',
-      secondary_text: 'current_city',
+      secondary_text: `${currLocation.name}`,
     },
   }
 
   const fullData = [currentLocation, ...data]
 
   const handleSelect = async (description) => {
+    if (description === 'Current Location') {
+      console.log(currLocation.coords)
+
+      const { lat, lng } = currLocation.coords
+      const viewportBounds = {
+        ne: { lat: lat + 0.001, lng: lng + 0.001 },
+        sw: { lat: lat - 0.001, lng: lng - 0.001 },
+      }
+      console.log(viewportBounds)
+      setViewport(viewportBounds)
+    }
+    // put a fixed viewport around the lat and long of the current location
     setValue(description, false)
     const viewportBounds = await getViewportBounds(
       descriptionToPlaceId.current[description],
     )
+    console.log(viewportBounds)
     setViewport(viewportBounds)
   }
 
@@ -136,7 +177,9 @@ const Search = (props) => {
               } = suggestion
 
               // Allow handleSelect to access the place id (see above)
-              descriptionToPlaceId.current[description] = place_id
+              if (place_id) {
+                descriptionToPlaceId.current[description] = place_id
+              }
 
               return (
                 <ComboboxOption
