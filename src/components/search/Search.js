@@ -58,9 +58,10 @@ const Search = (props) => {
 
   const locSuccess = (pos) => {
     console.log('success!')
-    alert(pos)
     var lat = pos.coords.latitude
     var lon = pos.coords.longitude
+    alert(`${lat} ${lon}`)
+
     return [lat, lon]
   }
 
