@@ -1,4 +1,5 @@
 import { Wikipedia } from '@styled-icons/boxicons-logos'
+//import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
@@ -90,7 +91,14 @@ const ResourceHeader = styled.h3`
   color: #333333;
 `
 
+const ResourceLink = styled.a`
+  font-size: 16px;
+`
+
 const IndividualResourceContainer = styled.small`
+  & > *:not(:last-child) {
+    margin-bottom: 14px;
+  }
   display: flex;
   column-count: 2;
   column-gap: 12px;
@@ -170,14 +178,18 @@ const EntryDetails = ({ isDesktop }) => {
         {locationTypeData.usda_symbol && (
           <IndividualResourceContainer>
             <img src={USDALogo} height="20px" width="25px" alt="USDA logo" />
-            <a href={locationTypeData.usda_symbol}>USDA</a>
+            <ResourceLink href={locationTypeData.usda_symbol}>
+              USDA
+            </ResourceLink>
           </IndividualResourceContainer>
         )}
 
         {locationTypeData.wikipedia_url && (
           <IndividualResourceContainer>
             <Wikipedia height="20px" width="25px" />
-            <a href={locationTypeData.wikipedia_url}>Wikipedia</a>
+            <ResourceLink href={locationTypeData.wikipedia_url}>
+              Wikipedia
+            </ResourceLink>
           </IndividualResourceContainer>
         )}
 
@@ -189,7 +201,9 @@ const EntryDetails = ({ isDesktop }) => {
               width="25px"
               alt="Eat the Weeds logo"
             />
-            <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
+            <ResourceLink href={locationTypeData.eat_the_weeds_url}>
+              Eat the Weeds
+            </ResourceLink>
           </IndividualResourceContainer>
         )}
 
@@ -201,7 +215,9 @@ const EntryDetails = ({ isDesktop }) => {
               width="25px"
               alt="Foraging Texas logo"
             />
-            <a href={locationTypeData.foraging_texas_url}>Foraging Texas</a>
+            <ResourceLink href={locationTypeData.foraging_texas_url}>
+              Foraging Texas
+            </ResourceLink>
           </IndividualResourceContainer>
         )}
 
@@ -213,7 +229,9 @@ const EntryDetails = ({ isDesktop }) => {
               width="25px"
               alt="Urban Mushrooms logo"
             />
-            <a href={locationTypeData.urban_mushrooms_url}>Urban Mushrooms</a>
+            <ResourceLink href={locationTypeData.urban_mushrooms_url}>
+              Urban Mushrooms
+            </ResourceLink>
           </IndividualResourceContainer>
         )}
 
@@ -225,7 +243,9 @@ const EntryDetails = ({ isDesktop }) => {
               width="25px"
               alt="Fruitipedia logo"
             />
-            <a href={locationTypeData.fruitipedia_url}>Fruitipedia</a>
+            <ResourceLink href={locationTypeData.fruitipedia_url}>
+              Fruitipedia
+            </ResourceLink>
           </IndividualResourceContainer>
         )}
       </EntryDetailsContent>
