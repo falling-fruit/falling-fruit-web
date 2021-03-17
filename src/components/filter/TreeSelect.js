@@ -49,10 +49,6 @@ const data = [
   },
 ]
 
-const texts = {
-  inlineSearchPlaceholder: 'Search for a type...',
-}
-
 const TreeSelectContainer = styled.div`
   .dropdown-trigger.arrow.top {
     display: none;
@@ -71,6 +67,8 @@ const TreeSelectContainer = styled.div`
     flex-direction: column;
     width: 100%;
     padding: 0 !important;
+    box-shadow: none !important;
+    border-top: none !important;
   }
 
   .search {
@@ -78,18 +76,19 @@ const TreeSelectContainer = styled.div`
     width: 100% !important;
     box-sizing: border-box;
     padding: 9px 12px;
+    margin-bottom: 10px;
     border: 1px solid ${({ theme }) => theme.secondaryBackground} !important;
     border-radius: 20px;
   }
 
   .infinite-scroll-component {
     max-height: 120px;
+    border: 1px solid ${({ theme }) => theme.secondaryBackground};
+    border-radius: 7px;
   }
 
   .react-dropdown-tree-select {
-    background-color: red;
-    height: 170px;
-    padding-top: 12px;
+    height: 180px;
   }
 `
 
@@ -97,7 +96,7 @@ const TreeSelect = () => (
   <TreeSelectContainer>
     <DropdownTreeSelect
       data={data}
-      texts={texts}
+      texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
       showDropdown="always"
       keepTreeOnSearch
       inlineSearchInput

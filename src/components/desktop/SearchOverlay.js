@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import Search from '../search/Search'
+import SearchWrapper from '../filter/SearchWrapper'
 
-const SearchOverlay = styled(Search)`
+const SearchOverlay = styled(SearchWrapper)`
   & > div:first-child {
     // ComboboxInput
     padding: 10px 10px 0 10px;
