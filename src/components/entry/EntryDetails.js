@@ -1,3 +1,4 @@
+import { Wikipedia } from '@styled-icons/boxicons-logos'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
@@ -8,6 +9,11 @@ import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import { Tag } from '../ui/Tag'
+import EatTheWeedsLogo from './EatTheWeeds.svg'
+import ForagingTexasLogo from './ForagingTexasLogo.svg'
+import FruitipediaLogo from './FruitipediaLogo.svg'
+import UrbanMushroomsLogo from './UrbanMushroomsLogo.svg'
+import USDALogo from './USDA.svg'
 
 const ACCESS_TYPE = {
   0: "On lister's property",
@@ -17,9 +23,14 @@ const ACCESS_TYPE = {
   4: 'Private property',
 }
 
-function parseISOString(dateString) {
+const parseISOString = (dateString) => {
   const date = new Date(dateString)
-  // Unsure about time zones .getUTCOffset()?
+
+  /*
+  const options = {}
+  const localeDateString = date.toLocaleString(default, );
+  */
+
   return `${date.toLocaleString('default', {
     month: 'long',
   })} ${date.getDay()}, ${date.getFullYear()}`
@@ -142,9 +153,7 @@ const EntryDetails = ({ isDesktop }) => {
           </Tag>
         </TagContainer>
         <DescriptionContainer>
-          <Description>
-            {locationData.description} @ {locationData.address}
-          </Description>
+          <Description>{locationData.description}</Description>
 
           <UpdateText>
             Last Updated {parseISOString(locationTypeData.updated_at)}
@@ -159,15 +168,70 @@ const EntryDetails = ({ isDesktop }) => {
             </Button>
           </ButtonSpacing>
         </DescriptionContainer>
+
         <ResourceHeader>Other Resources</ResourceHeader>
-        <IndividualResourceContainer>
-          <Star height="20px" width="25px" />
-          <a href={locationTypeData.wikipedia_url}>Wikipedia</a>
-        </IndividualResourceContainer>
-        <IndividualResourceContainer>
-          <Flag height="20px" width="25px" />
-          <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
-        </IndividualResourceContainer>
+
+        {locationTypeData.usda_symbol && (
+          <IndividualResourceContainer>
+            <img src={USDALogo} height="20px" width="25px" alt="USDA logo" />
+            <a href={locationTypeData.usda_symbol}>USDA</a>
+          </IndividualResourceContainer>
+        )}
+
+        {locationTypeData.wikipedia_url && (
+          <IndividualResourceContainer>
+            <Wikipedia height="20px" width="25px" />
+            <a href={locationTypeData.wikipedia_url}>Wikipedia</a>
+          </IndividualResourceContainer>
+        )}
+
+        {locationTypeData.eat_the_weeds_url && (
+          <IndividualResourceContainer>
+            <img
+              src={EatTheWeedsLogo}
+              height="20px"
+              width="25px"
+              alt="Eat the Weeds logo"
+            />
+            <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
+          </IndividualResourceContainer>
+        )}
+
+        {locationTypeData.foraging_texas_url && (
+          <IndividualResourceContainer>
+            <img
+              src={ForagingTexasLogo}
+              height="20px"
+              width="25px"
+              alt="Fruitipedia logo"
+            />
+            <a href={locationTypeData.foraging_texas_url}>Foraging Texas</a>
+          </IndividualResourceContainer>
+        )}
+
+        {locationTypeData.urban_mushrooms_url && (
+          <IndividualResourceContainer>
+            <img
+              src={UrbanMushroomsLogo}
+              height="20px"
+              width="25px"
+              alt="Fruitipedia logo"
+            />
+            <a href={locationTypeData.urban_mushrooms_url}>Urban Mushrooms</a>
+          </IndividualResourceContainer>
+        )}
+
+        {locationTypeData.fruitipedia_url && (
+          <IndividualResourceContainer>
+            <img
+              src={FruitipediaLogo}
+              height="20px"
+              width="25px"
+              alt="Fruitipedia logo"
+            />
+            <a href={locationTypeData.fruitipedia_url}>Fruitipedia</a>
+          </IndividualResourceContainer>
+        )}
       </EntryDetailsContent>
     </EntryDetailsPageContainer>
   ) : (
