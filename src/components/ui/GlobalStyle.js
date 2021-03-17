@@ -45,7 +45,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+/**
+ * @constant {number}
+ * Max width in pixels for which the mobile layout should be displayed
+ */
+const MOBILE_MAX_WIDTH = 767
+
 const theme = {
+  // media queries for mobile and desktop
+  device: {
+    mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
+    desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
+  },
   fonts: '"Lato", sans-serif',
   // text colors
   text: '#9B9B9B',
@@ -63,4 +74,4 @@ const theme = {
 }
 
 export default GlobalStyle
-export { theme }
+export { MOBILE_MAX_WIDTH, theme }
