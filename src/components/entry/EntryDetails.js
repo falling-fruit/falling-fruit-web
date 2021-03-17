@@ -10,9 +10,9 @@ import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import { Tag } from '../ui/Tag'
 import EatTheWeedsLogo from './EatTheWeeds.svg'
-import ForagingTexasLogo from './ForagingTexasLogo.svg'
-import FruitipediaLogo from './FruitipediaLogo.svg'
-import UrbanMushroomsLogo from './UrbanMushroomsLogo.svg'
+import ForagingTexasLogo from './ForagingTexas.png'
+import FruitipediaLogo from './Fruitipedia.png'
+import UrbanMushroomsLogo from './UrbanMushrooms.png'
 import USDALogo from './USDA.svg'
 
 const ACCESS_TYPE = {
@@ -215,7 +215,7 @@ const EntryDetails = ({ isDesktop }) => {
               src={UrbanMushroomsLogo}
               height="20px"
               width="25px"
-              alt="Fruitipedia logo"
+              alt="Urban Mushrooms logo"
             />
             <a href={locationTypeData.urban_mushrooms_url}>Urban Mushrooms</a>
           </IndividualResourceContainer>
