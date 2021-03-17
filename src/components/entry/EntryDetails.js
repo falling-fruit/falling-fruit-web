@@ -33,6 +33,7 @@ const parseISOString = (dateString) => {
   return `${localeDateString}`
 }
 
+// Wraps the entire page and gives it a top margin if on mobile
 const EntryDetailsPageContainer = styled.div`
   overflow: scroll;
   margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
@@ -42,6 +43,7 @@ const ImageContainer = styled.img`
   width: 100%;
 `
 
+// Wraps all text in the container
 const EntryDetailsContent = styled.div`
   margin: 23px;
 `
@@ -56,16 +58,19 @@ const ScientificName = styled.small`
   font-style: italic;
 `
 
+// Wraps the plant name and scientific name, as well as an icon button for desktop
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
 
+// Wraps all tags
 const TagContainer = styled.div`
   margin-top: 12px;
 `
 
+// Wraps description, last updated text, and review and report buttons
 const DescriptionContainer = styled.div`
   & > *:not(:last-child) {
     margin-bottom: 14px;
@@ -95,6 +100,12 @@ const ResourceLink = styled.a`
   font-size: 16px;
 `
 
+const ResourceImage = styled.img`
+  height: 20px;
+  width: 25px;
+`
+
+// Wraps all resource images and their links
 const IndividualResourceContainer = styled.small`
   & > *:not(:last-child) {
     margin-bottom: 14px;
@@ -177,7 +188,7 @@ const EntryDetails = ({ isDesktop }) => {
 
         {locationTypeData.usda_symbol && (
           <IndividualResourceContainer>
-            <img src={USDALogo} height="20px" width="25px" alt="USDA logo" />
+            <ResourceImage src={USDALogo} alt="USDA logo" />
             <ResourceLink href={locationTypeData.usda_symbol}>
               USDA
             </ResourceLink>
@@ -195,12 +206,7 @@ const EntryDetails = ({ isDesktop }) => {
 
         {locationTypeData.eat_the_weeds_url && (
           <IndividualResourceContainer>
-            <img
-              src={EatTheWeedsLogo}
-              height="20px"
-              width="25px"
-              alt="Eat the Weeds logo"
-            />
+            <ResourceImage src={EatTheWeedsLogo} alt="Eat the Weeds logo" />
             <ResourceLink href={locationTypeData.eat_the_weeds_url}>
               Eat the Weeds
             </ResourceLink>
@@ -209,12 +215,7 @@ const EntryDetails = ({ isDesktop }) => {
 
         {locationTypeData.foraging_texas_url && (
           <IndividualResourceContainer>
-            <img
-              src={ForagingTexasLogo}
-              height="20px"
-              width="25px"
-              alt="Foraging Texas logo"
-            />
+            <ResourceImage src={ForagingTexasLogo} alt="Foraging Texas logo" />
             <ResourceLink href={locationTypeData.foraging_texas_url}>
               Foraging Texas
             </ResourceLink>
@@ -223,10 +224,8 @@ const EntryDetails = ({ isDesktop }) => {
 
         {locationTypeData.urban_mushrooms_url && (
           <IndividualResourceContainer>
-            <img
+            <ResourceImage
               src={UrbanMushroomsLogo}
-              height="20px"
-              width="25px"
               alt="Urban Mushrooms logo"
             />
             <ResourceLink href={locationTypeData.urban_mushrooms_url}>
@@ -237,12 +236,7 @@ const EntryDetails = ({ isDesktop }) => {
 
         {locationTypeData.fruitipedia_url && (
           <IndividualResourceContainer>
-            <img
-              src={FruitipediaLogo}
-              height="20px"
-              width="25px"
-              alt="Fruitipedia logo"
-            />
+            <ResourceImage src={FruitipediaLogo} alt="Fruitipedia logo" />
             <ResourceLink href={locationTypeData.fruitipedia_url}>
               Fruitipedia
             </ResourceLink>
