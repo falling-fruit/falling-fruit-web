@@ -26,14 +26,10 @@ const ACCESS_TYPE = {
 const parseISOString = (dateString) => {
   const date = new Date(dateString)
 
-  /*
-  const options = {}
-  const localeDateString = date.toLocaleString(default, );
-  */
+  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+  const localeDateString = date.toLocaleDateString(undefined, options)
 
-  return `${date.toLocaleString('default', {
-    month: 'long',
-  })} ${date.getDay()}, ${date.getFullYear()}`
+  return `${localeDateString}`
 }
 
 const EntryDetailsPageContainer = styled.div`
@@ -203,7 +199,7 @@ const EntryDetails = ({ isDesktop }) => {
               src={ForagingTexasLogo}
               height="20px"
               width="25px"
-              alt="Fruitipedia logo"
+              alt="Foraging Texas logo"
             />
             <a href={locationTypeData.foraging_texas_url}>Foraging Texas</a>
           </IndividualResourceContainer>
