@@ -8,7 +8,7 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
@@ -55,6 +55,42 @@ const Search = (props) => {
   const handleInput = (e) => {
     setValue(e.target.value)
   }
+
+  const locSuccess = (pos) => {
+    console.log('success!')
+    alert(pos)
+    var lat = pos.coords.latitude
+    var lon = pos.coords.longitude
+    return [lat, lon]
+  }
+
+  const locError = (err) => {
+    console.log('error!')
+    alert(err)
+  }
+
+  const handleLocationError = (browserHasGeolocation) => {
+    console.log(
+      browserHasGeolocation
+        ? 'Error: The Geolocation service failed.'
+        : "Error: Your browser doesn't support geolocation.",
+    )
+  }
+  useEffect(() => {
+    if (navigator.geolocation) {
+      console.log('entered')
+
+      navigator.geolocation.getCurrentPosition(locSuccess, locError, {
+        timeout: 5000,
+      })
+    } else {
+      console.log('ERR')
+
+      // Browser doesn't support Geolocation
+      handleLocationError(false)
+    }
+  }, [])
+
   let currentLocation = {
     place_id: '00000000000000',
     description: 'Current Location',
@@ -63,6 +99,7 @@ const Search = (props) => {
       secondary_text: 'current_city',
     },
   }
+
   const fullData = [currentLocation, ...data]
 
   const handleSelect = async (description) => {
