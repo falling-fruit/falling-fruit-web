@@ -17,6 +17,8 @@ import Input from '../ui/Input'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
 
+const BOUND = 0.001
+
 const getViewportBounds = async (placeId) => {
   const results = await getGeocode({ placeId })
   console.log(`{results}`)
@@ -137,8 +139,8 @@ const Search = (props) => {
 
       const { lat, lng } = currLocation.coords
       const viewportBounds = {
-        ne: { lat: lat + 0.001, lng: lng + 0.001 },
-        sw: { lat: lat - 0.001, lng: lng - 0.001 },
+        ne: { lat: lat + BOUND, lng: lng + BOUND },
+        sw: { lat: lat - BOUND, lng: lng - BOUND },
       }
       console.log(viewportBounds)
       setViewport(viewportBounds)
