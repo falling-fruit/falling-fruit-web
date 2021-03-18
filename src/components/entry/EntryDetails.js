@@ -1,4 +1,3 @@
-import { Wikipedia } from '@styled-icons/boxicons-logos'
 //import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
@@ -10,11 +9,7 @@ import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import { Tag } from '../ui/Tag'
-import EatTheWeedsLogo from './EatTheWeeds.svg'
-import ForagingTexasLogo from './ForagingTexas.png'
-import FruitipediaLogo from './Fruitipedia.png'
-import UrbanMushroomsLogo from './UrbanMushrooms.png'
-import USDALogo from './USDA.svg'
+import { RESOURCES } from './resources'
 
 const ACCESS_TYPE = {
   0: "On lister's property",
@@ -139,6 +134,22 @@ const EntryDetails = ({ isDesktop }) => {
     console.log('Map Button Clicked')
   }
 
+  const resources = RESOURCES.map(
+    ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
+      locationTypeData?.[urlKey] && (
+        <IndividualResourceContainer>
+          <ResourceImage src={icon} alt={iconAlt} />
+          <ResourceLink
+            target="_blank"
+            rel="noopener noreferrer"
+            href={urlFormatter(locationTypeData[urlKey])}
+          >
+            {title}
+          </ResourceLink>
+        </IndividualResourceContainer>
+      ),
+  )
+
   return locationData && locationTypeData ? (
     <EntryDetailsPageContainer isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
@@ -186,62 +197,7 @@ const EntryDetails = ({ isDesktop }) => {
 
         <ResourceHeader>Other Resources</ResourceHeader>
 
-        {locationTypeData.usda_symbol && (
-          <IndividualResourceContainer>
-            <ResourceImage src={USDALogo} alt="USDA logo" />
-            <ResourceLink href={locationTypeData.usda_symbol}>
-              USDA
-            </ResourceLink>
-          </IndividualResourceContainer>
-        )}
-
-        {locationTypeData.wikipedia_url && (
-          <IndividualResourceContainer>
-            <Wikipedia height="20px" width="25px" />
-            <ResourceLink href={locationTypeData.wikipedia_url}>
-              Wikipedia
-            </ResourceLink>
-          </IndividualResourceContainer>
-        )}
-
-        {locationTypeData.eat_the_weeds_url && (
-          <IndividualResourceContainer>
-            <ResourceImage src={EatTheWeedsLogo} alt="Eat the Weeds logo" />
-            <ResourceLink href={locationTypeData.eat_the_weeds_url}>
-              Eat the Weeds
-            </ResourceLink>
-          </IndividualResourceContainer>
-        )}
-
-        {locationTypeData.foraging_texas_url && (
-          <IndividualResourceContainer>
-            <ResourceImage src={ForagingTexasLogo} alt="Foraging Texas logo" />
-            <ResourceLink href={locationTypeData.foraging_texas_url}>
-              Foraging Texas
-            </ResourceLink>
-          </IndividualResourceContainer>
-        )}
-
-        {locationTypeData.urban_mushrooms_url && (
-          <IndividualResourceContainer>
-            <ResourceImage
-              src={UrbanMushroomsLogo}
-              alt="Urban Mushrooms logo"
-            />
-            <ResourceLink href={locationTypeData.urban_mushrooms_url}>
-              Urban Mushrooms
-            </ResourceLink>
-          </IndividualResourceContainer>
-        )}
-
-        {locationTypeData.fruitipedia_url && (
-          <IndividualResourceContainer>
-            <ResourceImage src={FruitipediaLogo} alt="Fruitipedia logo" />
-            <ResourceLink href={locationTypeData.fruitipedia_url}>
-              Fruitipedia
-            </ResourceLink>
-          </IndividualResourceContainer>
-        )}
+        {resources}
       </EntryDetailsContent>
     </EntryDetailsPageContainer>
   ) : (
