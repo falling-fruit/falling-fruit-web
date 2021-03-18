@@ -8,7 +8,7 @@ import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
-import { Tag } from '../ui/Tag'
+import { Tag, TagList } from '../ui/Tag'
 import { RESOURCES } from './resources'
 
 const ACCESS_TYPE = {
@@ -54,19 +54,14 @@ const ScientificName = styled.small`
 `
 
 // Wraps the plant name and scientific name, as well as an icon button for desktop
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
 
-// Wraps all tags
-const TagContainer = styled.div`
-  margin-top: 12px;
-`
-
 // Wraps description, last updated text, and review and report buttons
-const DescriptionContainer = styled.div`
+const DescriptionContainer = styled.section`
   & > *:not(:last-child) {
     margin-bottom: 14px;
   }
@@ -172,12 +167,12 @@ const EntryDetails = ({ isDesktop }) => {
             />
           )}
         </HeaderContainer>
-        <TagContainer>
+        <TagList>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
           <Tag color="#4183C4" backgroundColor="#D9E6F3">
             {locationData.unverified ? 'Unverified' : 'Verified'}
           </Tag>
-        </TagContainer>
+        </TagList>
         <DescriptionContainer>
           <Description>{locationData.description}</Description>
 
