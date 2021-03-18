@@ -1,4 +1,3 @@
-//import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
@@ -19,18 +18,17 @@ const ACCESS_TYPE = {
   4: 'Private property',
 }
 
-const parseISOString = (dateString) => {
-  const date = new Date(dateString)
+const formatISOString = (dateString) =>
+  new Date(dateString).toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
-  const options = { year: 'numeric', month: 'long', day: 'numeric' }
-  const localeDateString = date.toLocaleDateString(undefined, options)
-
-  return `${localeDateString}`
-}
+// TODO: Reduce number of styled components by using selectors in the container
 
 // Wraps the entire page and gives it a top margin if on mobile
 const EntryDetailsPageContainer = styled.div`
-  overflow: scroll;
   margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
 `
 
@@ -40,7 +38,8 @@ const ImageContainer = styled.img`
 
 // Wraps all text in the container
 const EntryDetailsContent = styled.div`
-  margin: 23px;
+  padding: 23px;
+  box-sizing: border-box;
 `
 
 const PlantName = styled.h2`
@@ -169,6 +168,7 @@ const EntryDetails = ({ isDesktop }) => {
         </HeaderContainer>
         <TagList>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
+          {/* TODO: Put tag colors in theme/use constants somehow */}
           <Tag color="#4183C4" backgroundColor="#D9E6F3">
             {locationData.unverified ? 'Unverified' : 'Verified'}
           </Tag>
@@ -177,7 +177,7 @@ const EntryDetails = ({ isDesktop }) => {
           <Description>{locationData.description}</Description>
 
           <UpdateText>
-            Last Updated {parseISOString(locationTypeData.updated_at)}
+            Last Updated {formatISOString(locationTypeData.updated_at)}
           </UpdateText>
 
           <ButtonSpacing>

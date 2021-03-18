@@ -1,7 +1,7 @@
 import { fitBounds } from 'google-map-react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import { getClusters, getLocations } from '../../utils/api'
 import SearchContext from '../search/SearchContext'
@@ -48,7 +48,7 @@ const MapPage = () => {
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (view.bounds) {
+      if (view.bounds?.ne.lat != null) {
         // Map has received real bounds
         setIsLoading(true)
 
@@ -80,6 +80,8 @@ const MapPage = () => {
       }
     }
     fetchClusterAndLocationData()
+    // TODO: Need to debounce this so that the server doesn't get killed
+    // See: https://usehooks.com/useDebounce/
   }, [view])
 
   const handleViewChange = (view) => {

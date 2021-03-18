@@ -1,16 +1,12 @@
 import { useWindowSize } from '@reach/window-size'
 
-/**
- * @constant {number}
- * Max width in pixels for which the mobile layout should be displayed
- */
-const MOBILE_MAX_WIDTH = 767
+import { MOBILE_MAX_WIDTH } from '../components/ui/GlobalStyle'
 
 /**
  * Hook that returns whether current window size is within [minWidth, maxWidth]
  * and [minHeight, maxHeight].
  */
-export const useBreakpoint = ({
+const useBreakpoint = ({
   minWidth = 0,
   maxWidth = Infinity,
   minHeight = 0,
@@ -25,7 +21,8 @@ export const useBreakpoint = ({
   )
 }
 
-export const useIsDesktop = () =>
-  useBreakpoint({ minWidth: MOBILE_MAX_WIDTH + 1 })
+const useIsMobile = () => useBreakpoint({ maxWidth: MOBILE_MAX_WIDTH })
 
-export const useIsMobile = () => useBreakpoint({ maxWidth: MOBILE_MAX_WIDTH })
+const useIsDesktop = () => useBreakpoint({ minWidth: MOBILE_MAX_WIDTH + 1 })
+
+export { useBreakpoint, useIsDesktop, useIsMobile }

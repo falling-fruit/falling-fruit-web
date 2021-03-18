@@ -7,8 +7,8 @@ const Icons = styled.div`
   justify-content: center;
   align-items: center;
   max-height: 36px;
-  & > * {
-    padding: 8px;
+  & > *:not(:last-child) {
+    margin: 0 8px;
   }
 `
 const PrimaryText = styled.div`
@@ -22,7 +22,7 @@ const SecondaryText = styled.div`
 const ListContainer = styled.li`
   display: flex;
   flex-direction: row;
-  padding: 0 22px;
+  padding: 0 14px;
   height: 57px;
   align-items: center;
   &:not(:last-child) {

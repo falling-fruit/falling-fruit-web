@@ -1,10 +1,10 @@
 import WindowSize from '@reach/window-size'
 import SplitPane from 'react-split-pane'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import MapPage from '../map/MapPage'
 import Header from './Header'
-import SidePane from './SidePane'
+import SidePaneSwitch from './SidePaneSwitch'
 
 // Min and max pane width, in pixels
 const MIN_PANE_WIDTH = () => 310 // eslint-disable-line no-magic-numbers
@@ -19,12 +19,14 @@ const DesktopContainer = styled.div`
 const StyledSplit = styled(SplitPane)`
   position: relative !important;
   flex: 1;
+  // TODO: ask Siraj to fix box-shadow here. Side pane overlay needs a shadow
 
   .Resizer {
     width: 10px;
+    margin: 0 -5px;
     cursor: col-resize;
     z-index: 1;
-    box-shadow: 8px 0px 8px -4px ${({ theme }) => theme.shadow};
+    opacity: 0;
   }
 `
 
@@ -46,7 +48,7 @@ const DesktopLayout = () => (
           maxSize={MAX_PANE_WIDTH(vw)}
           defaultSize={MAX_PANE_WIDTH(vw)}
         >
-          <SidePane />
+          <SidePaneSwitch />
           <MapPane>
             <MapPage />
           </MapPane>
