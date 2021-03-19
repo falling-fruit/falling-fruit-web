@@ -7,7 +7,8 @@ import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
-import { Tag } from '../ui/Tag'
+import { Tag, TagList } from '../ui/Tag'
+import { RESOURCES } from './resources'
 
 const ACCESS_TYPE = {
   0: "On lister's property",
@@ -17,16 +18,17 @@ const ACCESS_TYPE = {
   4: 'Private property',
 }
 
-function parseISOString(dateString) {
-  const date = new Date(dateString)
-  // Unsure about time zones .getUTCOffset()?
-  return `${date.toLocaleString('default', {
+const formatISOString = (dateString) =>
+  new Date(dateString).toLocaleDateString(undefined, {
+    year: 'numeric',
     month: 'long',
-  })} ${date.getDay()}, ${date.getFullYear()}`
-}
+    day: 'numeric',
+  })
 
+// TODO: Reduce number of styled components by using selectors in the container
+
+// Wraps the entire page and gives it a top margin if on mobile
 const EntryDetailsPageContainer = styled.div`
-  overflow: scroll;
   margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
 `
 
@@ -34,8 +36,10 @@ const ImageContainer = styled.img`
   width: 100%;
 `
 
+// Wraps all text in the container
 const EntryDetailsContent = styled.div`
-  margin: 23px;
+  padding: 23px;
+  box-sizing: border-box;
 `
 
 const PlantName = styled.h2`
@@ -48,17 +52,15 @@ const ScientificName = styled.small`
   font-style: italic;
 `
 
-const HeaderContainer = styled.div`
+// Wraps the plant name and scientific name, as well as an icon button for desktop
+const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
 
-const TagContainer = styled.div`
-  margin-top: 12px;
-`
-
-const DescriptionContainer = styled.div`
+// Wraps description, last updated text, and review and report buttons
+const DescriptionContainer = styled.section`
   & > *:not(:last-child) {
     margin-bottom: 14px;
   }
@@ -83,7 +85,20 @@ const ResourceHeader = styled.h3`
   color: #333333;
 `
 
+const ResourceLink = styled.a`
+  font-size: 16px;
+`
+
+const ResourceImage = styled.img`
+  height: 20px;
+  width: 25px;
+`
+
+// Wraps all resource images and their links
 const IndividualResourceContainer = styled.small`
+  & > *:not(:last-child) {
+    margin-bottom: 14px;
+  }
   display: flex;
   column-count: 2;
   column-gap: 12px;
@@ -113,6 +128,22 @@ const EntryDetails = ({ isDesktop }) => {
     console.log('Map Button Clicked')
   }
 
+  const resources = RESOURCES.map(
+    ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
+      locationTypeData?.[urlKey] && (
+        <IndividualResourceContainer>
+          <ResourceImage src={icon} alt={iconAlt} />
+          <ResourceLink
+            target="_blank"
+            rel="noopener noreferrer"
+            href={urlFormatter(locationTypeData[urlKey])}
+          >
+            {title}
+          </ResourceLink>
+        </IndividualResourceContainer>
+      ),
+  )
+
   return locationData && locationTypeData ? (
     <EntryDetailsPageContainer isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
@@ -138,19 +169,18 @@ const EntryDetails = ({ isDesktop }) => {
             />
           )}
         </HeaderContainer>
-        <TagContainer>
+        <TagList>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
+          {/* TODO: Put tag colors in theme/use constants somehow */}
           <Tag color="#4183C4" backgroundColor="#D9E6F3">
             {locationData.unverified ? 'Unverified' : 'Verified'}
           </Tag>
-        </TagContainer>
+        </TagList>
         <DescriptionContainer>
-          <Description>
-            {locationData.description} @ {locationData.address}
-          </Description>
+          <Description>{locationData.description}</Description>
 
           <UpdateText>
-            Last Updated {parseISOString(locationTypeData.updated_at)}
+            Last Updated {formatISOString(locationTypeData.updated_at)}
           </UpdateText>
 
           <ButtonSpacing>
@@ -162,15 +192,10 @@ const EntryDetails = ({ isDesktop }) => {
             </Button>
           </ButtonSpacing>
         </DescriptionContainer>
+
         <ResourceHeader>Other Resources</ResourceHeader>
-        <IndividualResourceContainer>
-          <Star height="20px" width="25px" />
-          <a href={locationTypeData.wikipedia_url}>Wikipedia</a>
-        </IndividualResourceContainer>
-        <IndividualResourceContainer>
-          <Flag height="20px" width="25px" />
-          <a href={locationTypeData.eat_the_weeds_url}>Eat the Weeds</a>
-        </IndividualResourceContainer>
+
+        {resources}
       </EntryDetailsContent>
     </EntryDetailsPageContainer>
   ) : (
