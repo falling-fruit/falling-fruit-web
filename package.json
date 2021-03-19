@@ -35,7 +35,7 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "ESLINT_NO_DEV_ERRORS=true react-scripts start",
     "lint": "yarn lint:check --fix",
     "lint:check": "eslint src --ext js,jsx,ts,tsx",
     "format": "yarn format:output --write",
