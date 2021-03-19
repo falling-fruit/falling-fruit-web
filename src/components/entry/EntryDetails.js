@@ -18,6 +18,10 @@ const ACCESS_TYPE = {
   4: 'Private property',
 }
 
+/**
+ * Helper function to convert ISO date string into "month date, year" format.
+ * @param {string} dateString - The ISO date to convert
+ */
 const formatISOString = (dateString) =>
   new Date(dateString).toLocaleDateString(undefined, {
     year: 'numeric',
