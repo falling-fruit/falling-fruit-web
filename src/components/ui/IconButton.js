@@ -8,10 +8,15 @@ const StyledIconButton = styled.button`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   padding: 0;
-  background-color: white;
+  background-color: ${({ pressed, theme }) =>
+    pressed ? theme.transparentOrange : 'white'};
   border-radius: 50%;
   border: 2px solid
     ${({ raised, theme }) => (raised ? 'white' : theme.secondaryBackground)};
+  ${({ pressed, theme }) =>
+    pressed &&
+    `border-color: ${theme.orange};
+	`}
   ${({ raised, theme }) =>
     raised &&
     `box-shadow: 0 0 8px 1px ${theme.shadow};
