@@ -116,7 +116,10 @@ const EntryDetails = ({ isDesktop }) => {
   return locationData && locationTypeData ? (
     <EntryDetailsPageContainer isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
-        <ImageContainer src={locationData.photos[0].photo.original} alt="" />
+        <ImageContainer
+          src={locationData.photos[0].photo.original}
+          alt="entry-details-photo"
+        />
       )}
 
       <EntryDetailsContent>
