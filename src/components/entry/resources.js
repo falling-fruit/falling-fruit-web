@@ -5,6 +5,7 @@ import UrbanMushroomsLogo from './icons/UrbanMushrooms.png'
 import USDALogo from './icons/USDA.svg'
 import WikipediaLogo from './icons/Wikipedia.svg'
 
+/* TODO: Convert logos to original images instead of SVGs */
 const RESOURCES = [
   {
     title: 'Eat the Weeds',
