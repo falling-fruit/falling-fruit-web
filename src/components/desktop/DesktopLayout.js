@@ -7,8 +7,10 @@ import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
 
 // Min and max pane width, in pixels
-const MIN_PANE_WIDTH = () => 310 // eslint-disable-line no-magic-numbers
-const MAX_PANE_WIDTH = (vw) => (21.5 * vw) / 100 // eslint-disable-line no-magic-numbers
+const MIN_PANE_WIDTH = () => 310
+const MAX_PANE_WIDTH = (vw) => (21.5 * vw) / 100
+const DEFAULT_PANE_WIDTH = (vw) =>
+  Math.max(MAX_PANE_WIDTH(vw), MIN_PANE_WIDTH(vw))
 
 const DesktopContainer = styled.div`
   height: 100%;
@@ -46,7 +48,7 @@ const DesktopLayout = () => (
           split="vertical"
           minSize={MIN_PANE_WIDTH(vw)}
           maxSize={MAX_PANE_WIDTH(vw)}
-          defaultSize={MAX_PANE_WIDTH(vw)}
+          defaultSize={DEFAULT_PANE_WIDTH(vw)}
         >
           <SidePaneSwitch />
           <MapPane>

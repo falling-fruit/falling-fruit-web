@@ -147,6 +147,7 @@ const EntryDetails = ({ isDesktop }) => {
   return locationData && locationTypeData ? (
     <EntryDetailsPageContainer isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
+        // TODO: use alt based off of photo description or filename
         <ImageContainer
           src={locationData.photos[0].photo.original}
           alt="entry-details-photo"
