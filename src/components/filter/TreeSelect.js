@@ -49,6 +49,7 @@ const data = [
   },
 ]
 
+/* TODO: Checkbox styling */
 const TreeSelectContainer = styled.div`
   .dropdown-trigger.arrow.top {
     display: none;

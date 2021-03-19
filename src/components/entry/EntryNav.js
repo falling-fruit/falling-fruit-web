@@ -55,6 +55,7 @@ const EntryNav = ({ isDesktop }) => {
           <IconButton
             size={50}
             raised={false}
+            pressed={false}
             icon={<Pencil color={theme.secondaryText} />}
             onClick={onEditButtonClick}
             label={'edit-entry-details'}
@@ -62,6 +63,7 @@ const EntryNav = ({ isDesktop }) => {
           <IconButton
             size={50}
             raised={false}
+            pressed={false}
             icon={<Map color={theme.secondaryText} />}
             onClick={onMapButtonClick}
             label={'map-entry-details'}

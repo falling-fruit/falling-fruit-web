@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import SearchWrapper from '../filter/SearchWrapper'
+import SearchWrapper from '../SearchWrapper'
 
 const SearchOverlay = styled(SearchWrapper)`
   & > div:first-child {

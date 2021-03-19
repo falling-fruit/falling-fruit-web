@@ -167,6 +167,7 @@ const EntryDetails = ({ isDesktop }) => {
             <IconButton
               size={40}
               raised={false}
+              pressed={false}
               icon={<Map color={theme.secondaryText} />}
               onClick={handleMapButtonClick}
               label="add location"

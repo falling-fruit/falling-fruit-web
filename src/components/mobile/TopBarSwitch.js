@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 
 import EntryNav from '../entry/EntryNav'
-import SearchWrapper from '../filter/SearchWrapper'
+import SearchWrapper from '../SearchWrapper'
 import TopBar from '../ui/TopBar'
 
 const TopBarSwitch = () => (

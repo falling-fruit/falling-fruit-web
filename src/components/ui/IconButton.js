@@ -33,12 +33,13 @@ const StyledIconButton = styled.button`
   }
 `
 
-const IconButton = ({ size, raised, icon, onClick, label }) => (
+const IconButton = ({ size, raised, icon, onClick, label, pressed }) => (
   <StyledIconButton
     aria-label={label}
     size={size}
     raised={raised}
     onClick={onClick}
+    pressed={pressed}
   >
     {icon}
   </StyledIconButton>
@@ -50,6 +51,7 @@ IconButton.propTypes = {
   icon: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
   size: PropTypes.number.isRequired,
+  pressed: PropTypes.bool.isRequired,
 }
 
 export default IconButton
