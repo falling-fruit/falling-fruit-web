@@ -21,7 +21,12 @@ const DesktopContainer = styled.div`
 const StyledSplit = styled(SplitPane)`
   position: relative !important;
   flex: 1;
+
   // TODO: ask Siraj to fix box-shadow here. Side pane overlay needs a shadow
+
+  .Pane.vertical {
+    overflow-y: auto;
+  }
 
   .Resizer {
     width: 10px;
