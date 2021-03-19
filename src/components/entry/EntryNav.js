@@ -29,6 +29,10 @@ const EntryNavIconsContainer = styled.div`
   width: 110px;
 `
 
+const ArrowBackButton = styled(ArrowBack)`
+  cursor: pointer;
+`
+
 const EntryNav = ({ isDesktop }) => {
   const history = useHistory()
 
@@ -44,10 +48,19 @@ const EntryNav = ({ isDesktop }) => {
     console.log('View entry on map clicked')
   }
 
+  const onEnter = (event, callback) => event?.key === 'Enter' && callback?.()
+
   return (
     <EntryNavContainer>
       <EntryNavTextContainer>
-        <ArrowBack onClick={onBackButtonClick} color={theme.secondaryText} />
+        <ArrowBackButton
+          role="button"
+          tabIndex={0}
+          aria-pressed="false"
+          onKeyDown={(e) => onEnter(e, onBackButtonClick)}
+          onClick={onBackButtonClick}
+          color={theme.secondaryText}
+        />
         <p>{isDesktop ? 'Back to Results' : 'Results'}</p>
       </EntryNavTextContainer>
       {!isDesktop && (
