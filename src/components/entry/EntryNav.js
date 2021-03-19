@@ -48,7 +48,11 @@ const EntryNav = ({ isDesktop }) => {
     console.log('View entry on map clicked')
   }
 
-  const onEnter = (event, callback) => event?.key === 'Enter' && callback?.()
+  const onEnter = (event, callback) => {
+    if (event.key === 'Enter') {
+      callback()
+    }
+  }
 
   return (
     <EntryNavContainer>
