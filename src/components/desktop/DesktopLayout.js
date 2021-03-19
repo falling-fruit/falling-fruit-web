@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 
 import MapPage from '../map/MapPage'
 import Header from './Header'
-import SidePane from './SidePane'
+import SidePaneSwitch from './SidePaneSwitch'
 
 // Min and max pane width, in pixels
 const MIN_PANE_WIDTH = () => 310 // eslint-disable-line no-magic-numbers
@@ -48,7 +48,7 @@ const DesktopLayout = () => (
           maxSize={MAX_PANE_WIDTH(vw)}
           defaultSize={MAX_PANE_WIDTH(vw)}
         >
-          <SidePane />
+          <SidePaneSwitch />
           <MapPane>
             <MapPage />
           </MapPane>

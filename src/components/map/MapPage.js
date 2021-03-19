@@ -1,5 +1,6 @@
 import { fitBounds } from 'google-map-react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getClusters, getLocations } from '../../utils/api'
@@ -22,6 +23,7 @@ const LoadingText = styled.p`
 const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
 const MapPage = () => {
+  const history = useHistory()
   const container = useRef(null)
   const { viewport: searchViewport } = useContext(SearchContext)
   const { view, setView } = useContext(MapContext)
@@ -78,6 +80,8 @@ const MapPage = () => {
       }
     }
     fetchClusterAndLocationData()
+    // TODO: Need to debounce this so that the server doesn't get killed
+    // See: https://usehooks.com/useDebounce/
   }, [view])
 
   const handleViewChange = (view) => {
@@ -85,10 +89,8 @@ const MapPage = () => {
     setView(view)
   }
 
-  const handleLocationClick = (location) => {
-    // TODO: Fetch location data from server
-    console.log('Location clicked: ', location.id)
-  }
+  const handleLocationClick = (location) =>
+    history.push(`/entry/${location.id}`)
 
   const handleClusterClick = (cluster) => {
     setView(({ zoom: prevZoom }) => ({
