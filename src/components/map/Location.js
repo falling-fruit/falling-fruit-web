@@ -15,6 +15,7 @@ const Location = styled.button`
   border: none;
   cursor: pointer;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.12);
+  opacity: 0.75;
 
   &:focus {
     outline: none;
