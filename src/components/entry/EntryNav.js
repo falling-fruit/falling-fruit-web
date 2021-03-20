@@ -35,13 +35,11 @@ const ArrowBackButton = styled(ArrowBack)`
 
 const EntryNav = ({ isDesktop }) => {
   const history = useHistory()
-  const {
-    state: { fromPage },
-  } = useLocation()
+  const { state } = useLocation()
 
   const onBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    history.push(fromPage ?? '/map')
+    history.push(state?.fromPage ?? '/map')
   }
 
   const onEditButtonClick = () => {
