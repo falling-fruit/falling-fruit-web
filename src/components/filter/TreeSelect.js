@@ -38,13 +38,13 @@ const TreeSelectContainer = styled.div`
   }
 
   .infinite-scroll-component {
-    max-height: 120px;
+    max-height: calc(60vh - 60px);
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     border-radius: 7px;
   }
 
   .react-dropdown-tree-select {
-    height: 180px;
+    height: 60vh;
   }
 `
 
