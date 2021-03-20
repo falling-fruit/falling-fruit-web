@@ -27,6 +27,7 @@ const MapPage = () => {
   const container = useRef(null)
   const { viewport: searchViewport } = useContext(SearchContext)
   const { view, setView } = useContext(MapContext)
+  const { filters } = useContext(SearchContext)
 
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
@@ -57,11 +58,15 @@ const MapPage = () => {
           nelng: view.bounds.ne.lng,
           swlat: view.bounds.sw.lat,
           swlng: view.bounds.sw.lng,
-          muni: 1,
+          muni: filters.muni,
+          t: `${filters.types}`,
         }
 
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-          const clusters = await getClusters({ ...query, zoom: view.zoom })
+          const clusters = await getClusters({
+            ...query,
+            zoom: view.zoom,
+          })
 
           setClusters(clusters)
           setLocations([])
@@ -70,7 +75,7 @@ const MapPage = () => {
             _numLocationsReturned,
             _totalLocations,
             ...locations
-          ] = await getLocations(query)
+          ] = await getLocations({ ...query, invasive: filters.invasive })
 
           setLocations(locations)
           setClusters([])
@@ -82,7 +87,7 @@ const MapPage = () => {
     fetchClusterAndLocationData()
     // TODO: Need to debounce this so that the server doesn't get killed
     // See: https://usehooks.com/useDebounce/
-  }, [view])
+  }, [view, filters])
 
   const handleViewChange = (view) => {
     console.log('handleViewChange', view)
