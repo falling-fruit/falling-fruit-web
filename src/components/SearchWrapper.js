@@ -24,13 +24,18 @@ const SearchWrapper = () => {
   const [typeMapping] = useState(new Map())
 
   /**
-   * Helper function to add or remove a given type Id from an array of type Ids
+   * Helper function to add or remove a given type ID from an array of type Ids
    * @param {number[]} types - The current type IDs to filter on
    * @param {number} id - The selected type ID to add or remove from types
+   * @param {boolean} checked - Whether the type ID should be added or removed
    */
-  const updateTypes = (types, id) => {
+  const updateTypes = (types, id, checked) => {
     const index = types.indexOf(id)
-    index === -1 ? types.push(id) : types.splice(index, 1)
+    if (checked && index === -1) {
+      types.push(id)
+    } else if (!checked) {
+      types.splice(index, 1)
+    }
   }
 
   /**
@@ -82,14 +87,15 @@ const SearchWrapper = () => {
     if (isRoot) {
       currentTypeObject.children.forEach((child) => {
         const childId = child.value
-        updateTypes(types, childId)
+        updateTypes(types, childId, currentNode.checked)
       })
     } else {
-      updateTypes(types, currentId)
+      updateTypes(types, currentId, currentNode.checked)
     }
 
     // TODO: Figure out why setting the context is messing with checked
     // Issue: checking parent node does not check all children nodes
+    console.log('TYPES: ', types)
     setFilters({ ...filters, types })
   }
 
