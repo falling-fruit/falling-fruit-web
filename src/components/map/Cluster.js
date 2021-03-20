@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 /**
  * The minimum cluster diameter in pixels.

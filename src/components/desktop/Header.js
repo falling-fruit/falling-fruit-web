@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 // Might become a navbar, so use <nav> for this
 const DesktopHeader = styled.header`

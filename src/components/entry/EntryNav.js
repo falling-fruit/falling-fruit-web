@@ -1,7 +1,7 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { Map, Pencil } from '@styled-icons/boxicons-solid'
 import { useHistory, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'

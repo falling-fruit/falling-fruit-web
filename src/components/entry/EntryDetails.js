@@ -1,7 +1,7 @@
 import { Flag, ImageAdd, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
