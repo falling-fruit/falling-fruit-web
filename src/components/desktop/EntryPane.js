@@ -4,13 +4,22 @@ import EntryDetails from '../entry/EntryDetails'
 import EntryNav from '../entry/EntryNav'
 
 const StyledEntryPane = styled.div`
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const ScrollingEntryDetails = styled.div`
+  flex: 1;
+  overflow: auto;
 `
 
 const EntryPane = () => (
   <StyledEntryPane>
     <EntryNav isDesktop />
-    <EntryDetails isDesktop />
+    <ScrollingEntryDetails>
+      <EntryDetails isDesktop />
+    </ScrollingEntryDetails>
   </StyledEntryPane>
 )
 

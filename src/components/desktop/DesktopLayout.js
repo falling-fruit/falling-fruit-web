@@ -12,9 +12,9 @@ const MAX_PANE_WIDTH = (vw) => Math.max((21.5 * vw) / 100, MIN_PANE_WIDTH(vw))
 const DEFAULT_PANE_WIDTH = MAX_PANE_WIDTH
 
 const DesktopContainer = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 `
 
 const StyledSplit = styled(SplitPane)`
@@ -22,7 +22,6 @@ const StyledSplit = styled(SplitPane)`
   flex: 1;
 
   .Pane1 {
-    overflow-y: auto;
     z-index: 1;
     box-shadow: 2px 0px 8px ${({ theme }) => theme.shadow};
   }
