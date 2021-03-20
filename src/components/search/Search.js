@@ -41,6 +41,10 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
 const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
+
+  & > div {
+    flex: 1;
+  }
 `
 
 const Search = ({ filterPressed, filterButton }) => {
@@ -70,7 +74,11 @@ const Search = ({ filterPressed, filterButton }) => {
   }
 
   return (
-    <Combobox onSelect={handleSelect} aria-label="Search for a location">
+    <Combobox
+      onSelect={handleSelect}
+      aria-label="Search for a location"
+      style={{ width: '100%' }}
+    >
       <SearchBarContainer>
         <ComboboxInput
           as={Input}
