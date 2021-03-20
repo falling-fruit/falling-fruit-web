@@ -249,7 +249,7 @@ const EntryDetails = ({ isDesktop }) => {
         <PhotoGrid>
           <ImageWrapper
             className="main-image"
-            src={locationData.photos[0].photo.original}
+            src={locationData.photos[0].photo.medium}
             alt={locationData.type_names.join(', ')}
           />
           {locationData.photos.length > 1 && (
@@ -265,7 +265,7 @@ const EntryDetails = ({ isDesktop }) => {
               )}
               <ImageWrapper
                 className="extra-images"
-                src={locationData.photos[1].photo.original}
+                src={locationData.photos[1].photo.medium}
                 alt={locationData.type_names.join(', ')}
               />
             </ExtraImagesWrapper>
