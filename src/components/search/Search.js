@@ -45,6 +45,10 @@ const SearchBarContainer = styled.div`
   & > div {
     flex: 1;
   }
+
+  button {
+    margin-left: 10px;
+  }
 `
 
 const Search = ({ filterPressed, filterButton }) => {

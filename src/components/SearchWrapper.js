@@ -6,6 +6,7 @@ import { getTypesMock } from '../utils/api'
 import Filter from './filter/Filter'
 import MapContext from './map/MapContext'
 import Search from './search/Search'
+import SearchContext from './search/SearchContext'
 import { theme } from './ui/GlobalStyle'
 import IconButton from './ui/IconButton'
 
@@ -17,21 +18,26 @@ const SearchBarContainer = styled.div`
 
 const SearchWrapper = () => {
   const { view } = useContext(MapContext)
+  const { filters, setFilters } = useContext(SearchContext)
 
   const [filterPressed, setFilterPressed] = useState(false)
-  const [municipal, setMunicipal] = useState(false)
-  const [invasive, setInvasive] = useState(false)
   const [typeMapping] = useState(new Map())
 
-  const handleTypeFilterChange = (currentNode, selectedNodes) => {
-    console.log('Current node: ', currentNode)
-    console.log('Selected nodes: ', selectedNodes)
+  const handleTypeFilterChange = (currentNode) => {
+    if (currentNode.checked) {
+      setFilters({ ...filters, types: [...filters.types, currentNode.value] })
+    } else {
+      setFilters({
+        ...filters,
+        types: [filters.types.filter((typeId) => typeId !== currentNode.value)],
+      })
+    }
   }
 
   const handleCheckboxChange = (event) => {
     event.target.name === 'municipal'
-      ? setMunicipal(!municipal)
-      : setInvasive(!invasive)
+      ? setFilters({ ...filters, muni: !filters.muni })
+      : setFilters({ ...filters, invasive: !filters.invasive })
   }
 
   const handleFilterButtonClick = () => setFilterPressed(!filterPressed)
@@ -46,7 +52,7 @@ const SearchWrapper = () => {
           swlat: bounds.sw.lat,
           nelat: bounds.ne.lat,
           zoom: zoom,
-          muni: municipal,
+          muni: filters.muni,
         }
         const types = await getTypesMock(query)
         // TODO: create tree object for TreeSelect to use as data
@@ -57,7 +63,7 @@ const SearchWrapper = () => {
     const buildTypeMapping = (types) => {
       types.forEach((type) => {
         const typeObject = {
-          label: type.scientific_name,
+          label: type.name,
           value: type.id,
           expanded: true,
           children: [],
@@ -72,7 +78,7 @@ const SearchWrapper = () => {
     }
 
     fetchTypes()
-  }, [view, municipal, typeMapping])
+  }, [view, filters, typeMapping])
 
   const buildTreeSelectData = () => [...typeMapping.values()]
 
