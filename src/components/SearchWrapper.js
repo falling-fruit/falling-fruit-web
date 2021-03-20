@@ -39,12 +39,13 @@ const SearchWrapper = () => {
   useEffect(() => {
     const fetchTypes = async () => {
       if (view.bounds) {
+        const { zoom, bounds } = view
         const query = {
-          swlng: view.bounds.sw.lat,
-          nelng: view.bounds.ne.lng,
-          swlat: view.bounds.sw.lat,
-          nelat: view.bounds.ne.lat,
-          zoom: view.zoom,
+          swlng: bounds.sw.lat,
+          nelng: bounds.ne.lng,
+          swlat: bounds.sw.lat,
+          nelat: bounds.ne.lat,
+          zoom: zoom,
           muni: municipal,
         }
         const types = await getTypes(query)
@@ -75,18 +76,22 @@ const SearchWrapper = () => {
   return (
     <div>
       <SearchBarContainer>
-        <Search filterPressed={filterPressed} />
-        <IconButton
-          size={45}
-          raised={false}
-          pressed={filterPressed}
-          icon={
-            <FilterIcon
-              color={filterPressed ? theme.orange : theme.secondaryText}
+        <Search
+          filterPressed={filterPressed}
+          filterButton={
+            <IconButton
+              size={45}
+              raised={false}
+              pressed={filterPressed}
+              icon={
+                <FilterIcon
+                  color={filterPressed ? theme.orange : theme.secondaryText}
+                />
+              }
+              onClick={handleFilterButtonClick}
+              label="filter-button"
             />
           }
-          onClick={handleFilterButtonClick}
-          label="filter-button"
         />
       </SearchBarContainer>
       {filterPressed && (
