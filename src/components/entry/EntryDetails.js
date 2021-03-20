@@ -29,7 +29,9 @@ const formatISOString = (dateString) =>
 
 // Wraps the entire page and gives it a top margin if on mobile
 const EntryDetailsPageContainer = styled.div`
-  margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
+  margin-top: ${(props) => (props.isDesktop ? '0px' : '110px')};
+  padding-top: ${(props) => (props.isDesktop ? '0px' : '10px')};
+  overflow: auto;
 `
 
 // Wraps all text in the container
@@ -229,7 +231,7 @@ const EntryDetails = ({ isDesktop }) => {
   const resources = RESOURCES.map(
     ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
       locationTypeData?.[urlKey] && (
-        <IndividualResourceContainer>
+        <IndividualResourceContainer key={urlKey}>
           <ResourceImage src={icon} alt={iconAlt} />
           <ResourceLink
             target="_blank"
