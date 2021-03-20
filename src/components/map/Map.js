@@ -34,7 +34,10 @@ const Map = ({
     {clusters.map((cluster) => (
       <Cluster
         key={JSON.stringify(cluster)}
-        onClick={() => onClusterClick(cluster)}
+        onClick={(event) => {
+          onClusterClick(cluster)
+          event.stopPropagation()
+        }}
         count={cluster.count}
         lat={cluster.lat}
         lng={cluster.lng}
@@ -43,7 +46,10 @@ const Map = ({
     {locations.map((location) => (
       <Location
         key={location.id}
-        onClick={() => onLocationClick(location)}
+        onClick={(event) => {
+          onLocationClick(location)
+          event.stopPropagation()
+        }}
         lat={location.lat}
         lng={location.lng}
       />
