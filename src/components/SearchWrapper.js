@@ -1,8 +1,10 @@
 import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-solid'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { getTypes } from '../utils/api'
 import Filter from './filter/Filter'
+import MapContext from './map/MapContext'
 import Search from './search/Search'
 import { theme } from './ui/GlobalStyle'
 import IconButton from './ui/IconButton'
@@ -14,9 +16,17 @@ const SearchBarContainer = styled.div`
 `
 
 const SearchWrapper = () => {
+  const { view } = useContext(MapContext)
+
   const [filterPressed, setFilterPressed] = useState(false)
   const [municipal, setMunicipal] = useState(false)
   const [invasive, setInvasive] = useState(false)
+  const [typeMapping] = useState(new Map())
+
+  const handleTypeFilterChange = (currentNode, selectedNodes) => {
+    console.log('Current node: ', currentNode)
+    console.log('Selected nodes: ', selectedNodes)
+  }
 
   const handleCheckboxChange = (event) => {
     event.target.name === 'municipal'
@@ -26,12 +36,48 @@ const SearchWrapper = () => {
 
   const handleFilterButtonClick = () => setFilterPressed(!filterPressed)
 
+  useEffect(() => {
+    const fetchTypes = async () => {
+      if (view.bounds) {
+        const query = {
+          swlng: view.bounds.sw.lat,
+          nelng: view.bounds.ne.lng,
+          swlat: view.bounds.sw.lat,
+          nelat: view.bounds.ne.lat,
+          zoom: view.zoom,
+          muni: municipal,
+        }
+        const types = await getTypes(query)
+        // TODO: create tree object for TreeSelect to use as data
+        buildTypeMapping(types)
+      }
+    }
+
+    const buildTypeMapping = (types) => {
+      types.forEach((type) => {
+        const typeObject = {
+          label: type.scientific_name,
+          value: type.id,
+          children: [],
+        }
+        if (!type.parent_id) {
+          typeMapping.set(type.parent_id, typeObject)
+        } else {
+          const parentTypeObject = typeMapping.get(type.parent_id)
+          parentTypeObject.children.push(typeObject)
+        }
+      })
+    }
+
+    fetchTypes()
+  }, [view, municipal, typeMapping])
+
   return (
     <div>
       <SearchBarContainer>
         <Search filterPressed={filterPressed} />
         <IconButton
-          size={40}
+          size={45}
           raised={false}
           pressed={filterPressed}
           icon={
@@ -43,7 +89,12 @@ const SearchWrapper = () => {
           label="filter-button"
         />
       </SearchBarContainer>
-      {filterPressed && <Filter handleCheckboxChange={handleCheckboxChange} />}
+      {filterPressed && (
+        <Filter
+          handleTypeFilterChange={handleTypeFilterChange}
+          handleCheckboxChange={handleCheckboxChange}
+        />
+      )}
     </div>
   )
 }

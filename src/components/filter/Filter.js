@@ -3,10 +3,10 @@ import React from 'react'
 import Checkboxes from './Checkboxes'
 import TreeSelect from './TreeSelect'
 
-const Filter = ({ handleCheckboxChange }) => (
+const Filter = ({ handleTypeFilterChange, handleCheckboxChange }) => (
   <>
     <p>Edible Type</p>
-    <TreeSelect />
+    <TreeSelect handleTypeFilterChange={handleTypeFilterChange} />
     <Checkboxes handleCheckboxChange={handleCheckboxChange} />
   </>
 )

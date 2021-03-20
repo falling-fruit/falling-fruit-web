@@ -38,9 +38,7 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
   padding-top: 8px;
 `
 
-const Search = (props) => {
-  const { filterPressed } = props
-
+const Search = ({ filterPressed }) => {
   const { setViewport } = useContext(SearchContext)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
@@ -67,11 +65,7 @@ const Search = (props) => {
   }
 
   return (
-    <Combobox
-      onSelect={handleSelect}
-      aria-label="Search for a location"
-      {...props}
-    >
+    <Combobox onSelect={handleSelect} aria-label="Search for a location">
       <ComboboxInput
         as={Input}
         value={value}

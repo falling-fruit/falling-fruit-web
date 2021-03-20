@@ -93,7 +93,7 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = () => (
+const TreeSelect = ({ handleTypeFilterChange }) => (
   <TreeSelectContainer>
     <DropdownTreeSelect
       data={data}
@@ -101,6 +101,7 @@ const TreeSelect = () => (
       showDropdown="always"
       keepTreeOnSearch
       inlineSearchInput
+      onChange={handleTypeFilterChange}
     />
   </TreeSelectContainer>
 )
