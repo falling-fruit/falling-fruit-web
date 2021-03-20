@@ -208,6 +208,9 @@ const EntryDetails = ({ isDesktop }) => {
 
   useEffect(() => {
     async function fetchEntryDetails() {
+      // Show loading between type selections
+      setLocationData(null)
+
       const locationData = await getLocationById(id)
       const typeData = await getTypeById(locationData.type_ids[0])
 
