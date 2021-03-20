@@ -7,10 +7,9 @@ import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
 
 // Min and max pane width, in pixels
-const MIN_PANE_WIDTH = () => 310
-const MAX_PANE_WIDTH = (vw) => (21.5 * vw) / 100
-const DEFAULT_PANE_WIDTH = (vw) =>
-  Math.max(MAX_PANE_WIDTH(vw), MIN_PANE_WIDTH(vw))
+const MIN_PANE_WIDTH = (_vw) => 310
+const MAX_PANE_WIDTH = (vw) => Math.max((21.5 * vw) / 100, MIN_PANE_WIDTH(vw))
+const DEFAULT_PANE_WIDTH = MAX_PANE_WIDTH
 
 const DesktopContainer = styled.div`
   height: 100%;
@@ -31,7 +30,8 @@ const StyledSplit = styled(SplitPane)`
   .Resizer {
     width: 10px;
     margin: 0 -5px;
-    cursor: col-resize;
+    cursor: ${(props) =>
+      props.minSize < props.maxSize ? 'col-resize' : 'default'};
     z-index: 1;
   }
 `
