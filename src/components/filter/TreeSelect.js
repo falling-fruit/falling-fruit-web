@@ -35,6 +35,7 @@ const TreeSelectContainer = styled.div`
     margin-bottom: 10px;
     border: 1px solid ${({ theme }) => theme.secondaryBackground} !important;
     border-radius: 20px;
+    font-family: ${({ theme }) => theme.fonts};
   }
 
   .infinite-scroll-component {
