@@ -89,8 +89,12 @@ const MapPage = () => {
     setView(view)
   }
 
-  const handleLocationClick = (location) =>
-    history.push(`/entry/${location.id}`)
+  const handleLocationClick = (location) => {
+    history.push({
+      pathname: `/entry/${location.id}`,
+      state: { fromPage: '/map' },
+    })
+  }
 
   const handleClusterClick = (cluster) => {
     setView(({ zoom: prevZoom }) => ({

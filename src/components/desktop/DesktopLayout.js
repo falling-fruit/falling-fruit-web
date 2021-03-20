@@ -22,10 +22,10 @@ const StyledSplit = styled(SplitPane)`
   position: relative !important;
   flex: 1;
 
-  // TODO: ask Siraj to fix box-shadow here. Side pane overlay needs a shadow
-
-  .Pane.vertical {
+  .Pane1 {
     overflow-y: auto;
+    z-index: 1;
+    box-shadow: 2px 0px 8px ${({ theme }) => theme.shadow};
   }
 
   .Resizer {
@@ -33,7 +33,6 @@ const StyledSplit = styled(SplitPane)`
     margin: 0 -5px;
     cursor: col-resize;
     z-index: 1;
-    opacity: 0;
   }
 `
 

@@ -1,4 +1,4 @@
-import { Flag, ImageAdd,Map, Star } from '@styled-icons/boxicons-solid'
+import { Flag, ImageAdd, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
