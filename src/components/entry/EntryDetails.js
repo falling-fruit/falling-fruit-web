@@ -28,78 +28,76 @@ const formatISOString = (dateString) =>
 // TODO: Reduce number of styled components by using selectors in the container
 
 // Wraps the entire page and gives it a top margin if on mobile
-const EntryDetailsPageContainer = styled.div`
+const Page = styled.div`
   margin-top: ${(props) => (props.isDesktop ? '0px' : '110px')};
   padding-top: ${(props) => (props.isDesktop ? '0px' : '10px')};
   overflow: auto;
 `
 
-// Wraps all text in the container
-const EntryDetailsContent = styled.div`
+const TextContent = styled.div`
   padding: 23px;
   box-sizing: border-box;
-`
 
-const PlantName = styled.h2`
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: #333333;
-`
+  h2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #333333;
+  }
 
-const ScientificName = styled.small`
-  font-style: italic;
-`
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-// Wraps the plant name and scientific name, as well as an icon button for desktop
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
+  small {
+    font-size: 14px;
+    font-style: italic;
+  }
 
-// Wraps description, last updated text, and review and report buttons
-const DescriptionContainer = styled.section`
-  & > *:not(:last-child) {
-    margin-bottom: 14px;
+  h3 {
+    color: #333333;
+    // TODO: siraj - add this to theme?
+  }
+
+  a {
+    font-size: 16px;
   }
 `
 
-const Description = styled.p`
-  color: #5a5a5a;
-`
+// Wraps description, last updated text, and review and report buttons
+const Description = styled.section`
+  & > *:not(:last-child) {
+    margin-bottom: 14px;
+  }
 
-const UpdateText = styled.p`
-  font-size: 14px;
-  font-style: italic;
-`
+  p {
+    color: #5a5a5a;
+  }
 
-const ButtonSpacing = styled.div`
+  small {
+    display: block;
+    font-style: italic;
+  }
+
   button {
     margin-right: 14px;
   }
 `
 
-const ResourceHeader = styled.h3`
-  color: #333333;
-`
-
-const ResourceLink = styled.a`
-  font-size: 16px;
-`
-
-const ResourceImage = styled.img`
-  height: 20px;
-  width: 25px;
-`
-
 // Wraps all resource images and their links
-const IndividualResourceContainer = styled.small`
+const Resource = styled.small`
   & > *:not(:last-child) {
     margin-bottom: 14px;
   }
   display: flex;
   column-count: 2;
   column-gap: 12px;
+
+  img {
+    height: 20px;
+    width: 25px;
+  }
 `
 
 const PhotoGrid = styled.figure`
@@ -125,13 +123,13 @@ const PhotoGrid = styled.figure`
   .add-more {
     grid-area: add-more;
   }
-`
 
-const ImageWrapper = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
 `
 
 const ExtraImagesWrapper = styled.button`
@@ -231,25 +229,26 @@ const EntryDetails = ({ isDesktop }) => {
   const resources = RESOURCES.map(
     ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
       locationTypeData?.[urlKey] && (
-        <IndividualResourceContainer key={urlKey}>
-          <ResourceImage src={icon} alt={iconAlt} />
-          <ResourceLink
+        <Resource key={urlKey}>
+          <img src={icon} alt={iconAlt} />
+          <a
             target="_blank"
             rel="noopener noreferrer"
             href={urlFormatter(locationTypeData[urlKey])}
           >
             {title}
-          </ResourceLink>
-        </IndividualResourceContainer>
+          </a>
+        </Resource>
       ),
   )
 
   return locationData && locationTypeData ? (
-    <EntryDetailsPageContainer isDesktop={isDesktop}>
+    <Page isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
+        // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
         // TODO: use alt based off of photo description or filename
         <PhotoGrid>
-          <ImageWrapper
+          <img
             className="main-image"
             src={locationData.photos[0].photo.medium}
             alt={locationData.type_names.join(', ')}
@@ -265,7 +264,7 @@ const EntryDetails = ({ isDesktop }) => {
                   Photos
                 </div>
               )}
-              <ImageWrapper
+              <img
                 className="extra-images"
                 src={locationData.photos[1].photo.medium}
                 alt={locationData.type_names.join(', ')}
@@ -280,11 +279,11 @@ const EntryDetails = ({ isDesktop }) => {
         </PhotoGrid>
       )}
 
-      <EntryDetailsContent>
-        <HeaderContainer>
+      <TextContent>
+        <header>
           <div>
-            <PlantName>{locationData.type_names[0]}</PlantName>
-            <ScientificName>{locationTypeData.scientific_name}</ScientificName>
+            <h2>{locationData.type_names[0]}</h2>
+            <small>{locationTypeData.scientific_name}</small>
           </div>
           {isDesktop && (
             <IconButton
@@ -295,40 +294,35 @@ const EntryDetails = ({ isDesktop }) => {
               label="add location"
             />
           )}
-        </HeaderContainer>
+        </header>
         <TagList>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
-          {/* TODO: Put tag colors in theme/use constants somehow */}
+          {/* TODO: Siraj - Put tag colors in theme/use constants somehow */}
           <Tag color="#4183C4" backgroundColor="#D9E6F3">
             {locationData.unverified ? 'Unverified' : 'Verified'}
           </Tag>
         </TagList>
-        <DescriptionContainer>
-          <Description>{locationData.description}</Description>
-
-          <UpdateText>
+        <Description>
+          <p>{locationData.description}</p>
+          <small>
             Last Updated {formatISOString(locationTypeData.updated_at)}
-          </UpdateText>
+          </small>
+          <Button>
+            <Star /> Review
+          </Button>
+          <Button secondary>
+            <Flag /> Report
+          </Button>
+        </Description>
 
-          <ButtonSpacing>
-            <Button>
-              <Star /> Review
-            </Button>
-            <Button secondary>
-              <Flag /> Report
-            </Button>
-          </ButtonSpacing>
-        </DescriptionContainer>
-
-        <ResourceHeader>Other Resources</ResourceHeader>
-
+        <h3>Other Resources</h3>
         {resources}
-      </EntryDetailsContent>
-    </EntryDetailsPageContainer>
+      </TextContent>
+    </Page>
   ) : (
-    <EntryDetailsPageContainer>
+    <Page>
       <p>Loading...</p>
-    </EntryDetailsPageContainer>
+    </Page>
   )
 }
 
