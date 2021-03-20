@@ -1,11 +1,11 @@
 import { Flag, ImageAdd, Map, Star } from '@styled-icons/boxicons-solid'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
+import { ThemeContext } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
-import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import { Tag, TagList } from '../ui/Tag'
 import { RESOURCES } from './resources'
@@ -72,7 +72,7 @@ const Description = styled.section`
   }
 
   p {
-    color: #5a5a5a;
+    color: ${({ theme }) => theme.secondaryText};
   }
 
   small {
@@ -189,7 +189,6 @@ const ImageUpload = styled.label`
 
   svg {
     width: 31px;
-    height: auto;
   }
 
   input {
@@ -198,20 +197,22 @@ const ImageUpload = styled.label`
 `
 
 const EntryDetails = ({ isDesktop }) => {
+  const themeContext = useContext(ThemeContext)
+
   const {
     params: { id },
   } = useRouteMatch()
 
   const [locationData, setLocationData] = useState()
-  const [locationTypeData, setLocationTypeData] = useState()
+  const [typeData, setTypeData] = useState()
 
   useEffect(() => {
     async function fetchEntryDetails() {
       const locationData = await getLocationById(id)
-      setLocationData(locationData)
+      const typeData = await getTypeById(locationData.type_ids[0])
 
-      const locationTypeData = await getTypeById(locationData.type_ids[0])
-      setLocationTypeData(locationTypeData)
+      setLocationData(locationData)
+      setTypeData(typeData)
     }
     fetchEntryDetails()
   }, [id])
@@ -228,13 +229,13 @@ const EntryDetails = ({ isDesktop }) => {
 
   const resources = RESOURCES.map(
     ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
-      locationTypeData?.[urlKey] && (
+      typeData?.[urlKey] && (
         <Resource key={urlKey}>
           <img src={icon} alt={iconAlt} />
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={urlFormatter(locationTypeData[urlKey])}
+            href={urlFormatter(typeData[urlKey])}
           >
             {title}
           </a>
@@ -242,7 +243,7 @@ const EntryDetails = ({ isDesktop }) => {
       ),
   )
 
-  return locationData && locationTypeData ? (
+  return locationData && typeData ? (
     <Page isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
         // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
@@ -283,13 +284,13 @@ const EntryDetails = ({ isDesktop }) => {
         <header>
           <div>
             <h2>{locationData.type_names[0]}</h2>
-            <small>{locationTypeData.scientific_name}</small>
+            <small>{typeData.scientific_name}</small>
           </div>
           {isDesktop && (
             <IconButton
               size={40}
               raised={false}
-              icon={<Map color={theme.secondaryText} />}
+              icon={<Map color={themeContext.secondaryText} />}
               onClick={handleMapButtonClick}
               label="add location"
             />
@@ -304,9 +305,7 @@ const EntryDetails = ({ isDesktop }) => {
         </TagList>
         <Description>
           <p>{locationData.description}</p>
-          <small>
-            Last Updated {formatISOString(locationTypeData.updated_at)}
-          </small>
+          <small>Last Updated {formatISOString(typeData.updated_at)}</small>
           <Button>
             <Star /> Review
           </Button>
