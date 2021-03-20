@@ -148,6 +148,7 @@ const EntryDetails = ({ isDesktop }) => {
     <EntryDetailsPageContainer isDesktop={isDesktop}>
       {locationData.photos.length > 0 && (
         // TODO: use alt based off of photo description or filename
+        // TODO: use the small version of the photo, not the original
         <ImageContainer
           src={locationData.photos[0].photo.original}
           alt="entry-details-photo"

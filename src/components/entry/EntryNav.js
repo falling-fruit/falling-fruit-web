@@ -1,6 +1,6 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { Map, Pencil } from '@styled-icons/boxicons-solid'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { theme } from '../ui/GlobalStyle'
@@ -35,8 +35,14 @@ const ArrowBackButton = styled(ArrowBack)`
 
 const EntryNav = ({ isDesktop }) => {
   const history = useHistory()
+  const {
+    state: { fromPage },
+  } = useLocation()
 
-  const onBackButtonClick = () => history.goBack()
+  const onBackButtonClick = () => {
+    // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
+    history.push(fromPage ?? '/map')
+  }
 
   const onEditButtonClick = () => {
     // TODO: edit entry callback
