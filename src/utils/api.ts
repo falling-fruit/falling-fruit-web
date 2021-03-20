@@ -89,6 +89,51 @@ export const getTypes = (
     }),
   )
 
+export const getTypesMock = () => [
+  {
+    id: 377,
+    scientific_name: 'Acacia',
+    name: 'Wattle',
+    parent_id: null,
+  },
+  {
+    id: 327,
+    scientific_name: 'Acacia aneura',
+    name: 'Mulga acacia',
+    parent_id: 377,
+  },
+  {
+    id: 1236,
+    scientific_name: 'Acacia coriacea',
+    name: 'Wiry wattle',
+    parent_id: 377,
+  },
+  {
+    id: 979,
+    scientific_name: 'Acacia cultriformis',
+    name: 'Knife-leaf wattle',
+    parent_id: 377,
+  },
+  {
+    id: 175,
+    scientific_name: 'Acer',
+    name: 'Maple',
+    parent_id: null,
+  },
+  {
+    id: 1347,
+    scientific_name: 'Acer circinatum',
+    name: 'Vine maple',
+    parent_id: 175,
+  },
+  {
+    id: 952,
+    scientific_name: 'Acer floridanum',
+    name: 'Florida maple',
+    parent_id: 175,
+  },
+]
+
 export const getTypeById = (
   id: paths['/types/{id}.json']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/types/${id}.json`))

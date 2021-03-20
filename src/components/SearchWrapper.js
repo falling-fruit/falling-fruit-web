@@ -2,7 +2,7 @@ import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-solid'
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
-import { getTypes } from '../utils/api'
+import { getTypesMock } from '../utils/api'
 import Filter from './filter/Filter'
 import MapContext from './map/MapContext'
 import Search from './search/Search'
@@ -48,7 +48,7 @@ const SearchWrapper = () => {
           zoom: zoom,
           muni: municipal,
         }
-        const types = await getTypes(query)
+        const types = await getTypesMock(query)
         // TODO: create tree object for TreeSelect to use as data
         buildTypeMapping(types)
       }
@@ -59,10 +59,11 @@ const SearchWrapper = () => {
         const typeObject = {
           label: type.scientific_name,
           value: type.id,
+          expanded: true,
           children: [],
         }
         if (!type.parent_id) {
-          typeMapping.set(type.parent_id, typeObject)
+          typeMapping.set(type.id, typeObject)
         } else {
           const parentTypeObject = typeMapping.get(type.parent_id)
           parentTypeObject.children.push(typeObject)
@@ -72,6 +73,8 @@ const SearchWrapper = () => {
 
     fetchTypes()
   }, [view, municipal, typeMapping])
+
+  const buildTreeSelectData = () => [...typeMapping.values()]
 
   return (
     <div>
@@ -98,6 +101,7 @@ const SearchWrapper = () => {
         <Filter
           handleTypeFilterChange={handleTypeFilterChange}
           handleCheckboxChange={handleCheckboxChange}
+          treeSelectData={buildTreeSelectData()}
         />
       )}
     </div>

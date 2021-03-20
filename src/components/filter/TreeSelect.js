@@ -4,51 +4,6 @@ import React from 'react'
 import DropdownTreeSelect from 'react-dropdown-tree-select'
 import styled from 'styled-components/macro'
 
-const data = [
-  {
-    label: 'Acacia',
-    value: 'Acacia',
-    expanded: true,
-    children: [
-      {
-        label: 'Mulga acacia',
-        value: 'Mulga acacia',
-      },
-      {
-        label: 'Swamp wattle',
-        value: 'Swamp wattle',
-      },
-      {
-        label: 'Cooba',
-        value: 'Cooba',
-      },
-      {
-        label: 'Coojong',
-        value: 'Coojong',
-      },
-      {
-        label: 'Shoestring acacia',
-        value: 'Shoestring acacia',
-      },
-    ],
-  },
-  {
-    label: 'Maple',
-    value: 'Maple',
-    expanded: true,
-    children: [
-      {
-        label: 'Vine maple',
-        value: 'Vine maple',
-      },
-      {
-        label: 'Rocky mountain maple',
-        value: 'Rocky mountain maple',
-      },
-    ],
-  },
-]
-
 /* TODO: Checkbox styling */
 const TreeSelectContainer = styled.div`
   .dropdown-trigger.arrow.top {
@@ -93,10 +48,10 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ handleTypeFilterChange }) => (
+const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => (
   <TreeSelectContainer>
     <DropdownTreeSelect
-      data={data}
+      data={treeSelectData}
       texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
       showDropdown="always"
       keepTreeOnSearch
