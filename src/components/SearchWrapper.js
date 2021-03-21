@@ -17,7 +17,7 @@ import { theme } from './ui/GlobalStyle'
 import IconButton from './ui/IconButton'
 
 const StyledSearchWrapper = styled.div`
-  margin: 10px;
+  ${({ isDesktop }) => isDesktop && `padding: 10px`}
 `
 
 const SearchBarContainer = styled.div`
@@ -120,7 +120,7 @@ const SearchWrapper = () => {
   }, [view])
 
   return (
-    <StyledSearchWrapper>
+    <StyledSearchWrapper isDesktop={isDesktop}>
       <SearchBarContainer>
         <Search
           filterPressed={filterPressed}

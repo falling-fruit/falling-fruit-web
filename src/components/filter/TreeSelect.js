@@ -42,13 +42,16 @@ const TreeSelectContainer = styled.div`
 
   .infinite-scroll-component {
     height: 100% !important;
-    max-height: calc(60vh - 60px);
+    ${({ isDesktop }) =>
+      isDesktop
+        ? `max-height: calc(30vh - 60px)`
+        : `max-height: calc(60vh - 60px)`};
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     border-radius: 7px;
   }
 
   .react-dropdown-tree-select {
-    height: 60vh;
+    height: ${({ isDesktop }) => (isDesktop ? 30 : 60)}vh;
   }
 
   ul {
@@ -60,8 +63,8 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => (
-  <TreeSelectContainer>
+const TreeSelect = ({ handleTypeFilterChange, treeSelectData, isDesktop }) => (
+  <TreeSelectContainer isDesktop={isDesktop}>
     <DropdownTreeSelect
       data={treeSelectData}
       texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
