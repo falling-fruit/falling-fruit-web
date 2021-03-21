@@ -67,8 +67,6 @@ const ImageUpload = styled.label`
   @media only screen and ${({ theme }) => theme.device.mobile} {
     border-radius: 0;
     border: none;
-    color: ${({ theme }) => theme.orange};
-    background: none;
   }
 `
 
