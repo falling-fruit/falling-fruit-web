@@ -66,6 +66,7 @@ const SearchWrapper = () => {
   }
 
   const handleCheckboxChange = (event) => {
+    console.log('HELLO')
     event.target.name === 'municipal'
       ? setFilters((prevFilters) => ({
           ...prevFilters,

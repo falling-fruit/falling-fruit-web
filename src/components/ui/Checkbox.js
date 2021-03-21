@@ -7,17 +7,12 @@ import styled from 'styled-components'
 //TODO: change all checkboxed to styled components
 const Checkbox = React.forwardRef(
   ({ className, checked, onChange, ...props }, ref) => (
-    <div className={className}>
-      <CustomCheckboxContainer>
-        <CustomCheckboxInput
-          checked={checked}
-          onChange={onChange}
-          ref={ref}
-          {...props}
-        />
+    <span className={className}>
+      <CustomCheckboxContainer onChange={onChange} checked={checked}>
+        <CustomCheckboxInput ref={ref} {...props} />
         {checked === true ? <StyledCheck size="21" /> : <span aria-hidden />}
       </CustomCheckboxContainer>
-    </div>
+    </span>
   ),
 )
 Checkbox.displayName = 'Checkbox'
@@ -54,7 +49,7 @@ const StyledCheckbox = styled(Checkbox)`
     width: 60%;
     height: 60%;
     transition: transform 200ms ease-out, background 200ms ease-out;
-    zindex: 1;
+    z-index: 1;
     background: ${(props) => {
       if (props.checked === 'mixed') {
         return ({ theme }) => theme.orange

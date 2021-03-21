@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 
 import SearchContext from '../search/SearchContext'
+import Checkbox from '../ui/Checkbox'
 
 /* TODO: Checkbox styling */
 const Checkboxes = ({ handleCheckboxChange }) => {
@@ -8,8 +9,9 @@ const Checkboxes = ({ handleCheckboxChange }) => {
   const { muni, invasive } = filters
   return (
     <form>
-      <label>
-        <input
+      <label htmlFor="muni">
+        <Checkbox
+          id="muni"
           checked={muni}
           name="municipal"
           type="checkbox"
@@ -18,8 +20,9 @@ const Checkboxes = ({ handleCheckboxChange }) => {
         Municipal Tree Inventories
       </label>
       <br />
-      <label>
-        <input
+      <label htmlFor="invasive">
+        <Checkbox
+          id="invasive"
           checked={invasive}
           name="invasive"
           type="checkbox"
