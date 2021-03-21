@@ -12,7 +12,7 @@ const EntryNavContainer = styled.div`
   align-items: center;
   padding: 10px;
 
-  @media only screen and (${({ theme }) => theme.device.mobile}) {
+  @media ${({ theme }) => theme.device.mobile} {
     padding: 0;
   }
 `

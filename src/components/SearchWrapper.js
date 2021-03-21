@@ -9,14 +9,11 @@ import { theme } from './ui/GlobalStyle'
 import IconButton from './ui/IconButton'
 
 // TODO: change most isDesktop usages to media queries with theme.device
-const StyledSearchWrapper = styled.div`
-  ${({ isDesktop }) => isDesktop && `padding: 10px`}
-`
-
 const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${({ isDesktop }) => isDesktop && `margin: 10px`};
 `
 
 const SearchWrapper = () => {
@@ -24,8 +21,8 @@ const SearchWrapper = () => {
   const isDesktop = useIsDesktop()
 
   return (
-    <StyledSearchWrapper isDesktop={isDesktop}>
-      <SearchBarContainer>
+    <>
+      <SearchBarContainer isDesktop={isDesktop}>
         <Search
           filterPressed={filterPressed}
           setFilterPressed={setFilterPressed}
@@ -48,7 +45,7 @@ const SearchWrapper = () => {
         />
       </SearchBarContainer>
       <Filter isOpen={filterPressed} />
-    </StyledSearchWrapper>
+    </>
   )
 }
 
