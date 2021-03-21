@@ -4,6 +4,8 @@ import React from 'react'
 import DropdownTreeSelect from 'react-dropdown-tree-select'
 import styled from 'styled-components/macro'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
+
 /* TODO: Checkbox styling */
 const TreeSelectContainer = styled.div`
   .dropdown-trigger.arrow.top {
@@ -63,18 +65,22 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ handleTypeFilterChange, treeSelectData, isDesktop }) => (
-  <TreeSelectContainer isDesktop={isDesktop}>
-    <DropdownTreeSelect
-      data={treeSelectData}
-      texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
-      showDropdown="always"
-      showPartiallySelected
-      keepTreeOnSearch
-      inlineSearchInput
-      onChange={handleTypeFilterChange}
-    />
-  </TreeSelectContainer>
-)
+const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <TreeSelectContainer isDesktop={isDesktop}>
+      <DropdownTreeSelect
+        data={treeSelectData}
+        texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
+        showDropdown="always"
+        showPartiallySelected
+        keepTreeOnSearch
+        inlineSearchInput
+        onChange={handleTypeFilterChange}
+      />
+    </TreeSelectContainer>
+  )
+}
 
 export default TreeSelect
