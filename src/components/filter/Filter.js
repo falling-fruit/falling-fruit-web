@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypesMock } from '../../utils/getTypesMock'
@@ -21,11 +21,14 @@ const StyledFilter = styled.div`
   }
 `
 
-const Filter = ({ isOpen }) => {
+const Filter = ({
+  isOpen,
+  treeSelectData,
+  setTreeSelectData,
+  setFilterCount,
+}) => {
   const { view } = useContext(MapContext)
   const { filters, setFilters } = useContext(SearchContext)
-
-  const [treeSelectData, setTreeSelectData] = useState([])
 
   /**
    * Helper function to add or remove a given type ID from an array of type Ids
@@ -42,7 +45,7 @@ const Filter = ({ isOpen }) => {
     }
   }
 
-  const handleTypeFilterChange = (currentNode) => {
+  const handleTypeFilterChange = (currentNode, selectedNodes) => {
     const currentId = currentNode.value
     let types = [...filters.types]
     let currentTypeObject = null
@@ -65,6 +68,7 @@ const Filter = ({ isOpen }) => {
     }
 
     setFilters((prevFilters) => ({ ...prevFilters, types }))
+    setFilterCount(getFilterCount(selectedNodes))
   }
 
   const handleCheckboxChange = (event) => {
@@ -77,6 +81,18 @@ const Filter = ({ isOpen }) => {
           ...prevFilters,
           invasive: !prevFilters.invasive,
         }))
+  }
+
+  const getFilterCount = (selectedNodes) => {
+    let countTotal = 0
+    selectedNodes.forEach((node) => {
+      const count = node.label.slice(
+        node.label.indexOf('(') + 1,
+        node.label.length - 1,
+      )
+      countTotal += parseInt(count)
+    })
+    return countTotal > 99 ? '99+' : countTotal.toString()
   }
 
   useEffect(() => {

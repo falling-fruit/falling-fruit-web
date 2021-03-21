@@ -3,6 +3,7 @@ import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 const StyledIconButton = styled.button`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +40,31 @@ const StyledIconButton = styled.button`
   }
 `
 
-const IconButton = ({ size, raised, icon, onClick, label, pressed }) => (
+const FilterCount = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.orange};
+  color: white;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+`
+
+const IconButton = ({
+  size,
+  raised,
+  icon,
+  onClick,
+  label,
+  pressed,
+  filterCount,
+}) => (
   <StyledIconButton
     aria-label={label}
     size={size}
@@ -48,6 +73,7 @@ const IconButton = ({ size, raised, icon, onClick, label, pressed }) => (
     pressed={pressed}
   >
     {icon}
+    {filterCount && <FilterCount>{filterCount}</FilterCount>}
   </StyledIconButton>
 )
 
