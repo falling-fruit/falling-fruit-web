@@ -59,6 +59,7 @@ const StyledHeader = styled.header`
   }
 `
 
+// TODO: Clean up file structure (i.e. logo_white.svg) from ./public
 const Header = () => (
   <StyledHeader>
     <img src="logo_white.svg" alt="Falling Fruit Logo" />
