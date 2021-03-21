@@ -8,8 +8,8 @@ import styled from 'styled-components'
 const Checkbox = React.forwardRef(
   ({ className, checked, onChange, ...props }, ref) => (
     <span className={className}>
-      <CustomCheckboxContainer onChange={onChange} checked={checked}>
-        <CustomCheckboxInput ref={ref} {...props} />
+      <CustomCheckboxContainer onChange={onChange}>
+        <CustomCheckboxInput checked={checked} ref={ref} {...props} />
         {checked === true ? <StyledCheck size="21" /> : <span aria-hidden />}
       </CustomCheckboxContainer>
     </span>
