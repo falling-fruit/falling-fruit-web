@@ -62,7 +62,11 @@ const SettingsPage = () => (
       size={57}
     />
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
-    <MyAccordionButton leftIcons={leftIcon} text="Options"></MyAccordionButton>
+    <MyAccordionButton
+      leftIcons={leftIcon}
+      text="Options"
+      panelIsOpen={false}
+    ></MyAccordionButton>
   </>
 )
 

@@ -1,44 +1,32 @@
 import '@reach/accordion/styles.css'
 
 import { AccordionButton } from '@reach/accordion'
+import { ChevronDown, ChevronLeft } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components'
 
+import ListEntry from './ListEntry'
+
 //TODO: get rid of li from wrapping ListEntry
 
-const Icons = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-height: 36px;
-  & > * {
-    padding: 8px;
-  }
-`
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: ${({ theme }) => theme.secondaryText};
-  justify-content: center;
-  margin-left: 18px;
-  flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  div {
-    align-items: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+const StyledListEntry = styled(ListEntry)`
+  font-family: Lato;
+  font-size: 15px;
 `
 
 const MyAccordionButton = React.forwardRef(
   ({ leftIcons, text, panelIsOpen, className, ...props }, ref) => (
     <div className={className}>
       <AccordionButton ref={ref} {...props}>
-        <Icons>{leftIcons}</Icons>
-        <TextContainer>{text}</TextContainer>
-        <Icons>{panelIsOpen}</Icons>
+        <StyledListEntry
+          leftIcons={leftIcons}
+          primaryText={text}
+          rightIcons={
+            panelIsOpen ? <ChevronDown size="21" /> : <ChevronLeft size="21" />
+          }
+          ref={ref}
+          {...props}
+        />
       </AccordionButton>
     </div>
   ),
@@ -53,12 +41,7 @@ const StyledAccordionButton = styled(MyAccordionButton)`
     align-items: center;
     padding: 5px 0px;
     background: white;
-  }
-  [data-reach-accordion-button][aria-expanded] {
-    /* styles for buttons in open accordion items */
-  }
-  [data-reach-accordion-button][disabled] {
-    /* styles for all buttons in disabled accordion items */
+    border: none;
   }
 `
 
