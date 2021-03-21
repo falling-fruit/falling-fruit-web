@@ -101,31 +101,27 @@ const ExtraImagesWrapper = styled.button`
   }
 `
 
-const PhotoData = ({ locationData, onViewLightbox }) =>
-  locationData.photos.length > 0 && (
+const PhotoData = ({ photos, altText, onViewLightbox }) =>
+  photos.length > 0 && (
     // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
     // TODO: use alt based off of photo description or filename
     <StyledPhotoGrid>
-      <img
-        className="main-image"
-        src={locationData.photos[0].photo.medium}
-        alt={locationData.type_names.join(', ')}
-      />
-      {locationData.photos.length > 1 && (
+      <img className="main-image" src={photos[0].photo.medium} alt={altText} />
+      {photos.length > 1 && (
         <ExtraImagesWrapper
           onClick={onViewLightbox}
-          disabled={locationData.photos.length < 3}
+          disabled={photos.length < 3}
         >
-          {locationData.photos.length > 2 && (
+          {photos.length > 2 && (
             <div className="other-photos-mask">
-              <span>{locationData.photos.length - 2}</span>
+              <span>{photos.length - 2}</span>
               Photos
             </div>
           )}
           <img
             className="extra-images"
-            src={locationData.photos[1].photo.medium}
-            alt={locationData.type_names.join(', ')}
+            src={photos[1].photo.medium}
+            alt={altText}
           />
         </ExtraImagesWrapper>
       )}

@@ -35,7 +35,7 @@ const Page = styled.div`
   overflow: auto;
 `
 
-const TextContent = styled.div`
+const TextContent = styled.article`
   padding: 23px;
   box-sizing: border-box;
 
@@ -123,7 +123,8 @@ const EntryDetails = ({ isDesktop }) => {
   return locationData && typeData ? (
     <Page isDesktop={isDesktop}>
       <PhotoGrid
-        locationData={locationData}
+        photos={locationData.photos}
+        altText={locationData.type_names.join(', ')}
         handleViewLightbox={handleViewLightbox}
       />
       <TextContent>
