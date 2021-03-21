@@ -21,21 +21,27 @@ export const getTypeObjectFromId = (currentNode, targetId) => {
  * @param {Object} currentTypeObject - The current type object to update
  * @param {boolean} checked - Whether the current node and its children should be checked
  */
-// export const updateCheckedForAllChildren = (currentTypeObject, checked) => {
-//   currentTypeObject.checked = checked
-//   for (const child of currentTypeObject.children) {
-//     updateCheckedForAllChildren(child, checked)
-//   }
-// }
+export const updateCheckedForAllChildren = (currentTypeObject, checked) => {
+  currentTypeObject.checked = checked
+  for (const child of currentTypeObject.children) {
+    updateCheckedForAllChildren(child, checked)
+  }
+}
 
+/**
+ * Helper function to build the tree select data
+ * @param {Object[]} types - Array of type objects
+ */
 export const buildTreeSelectData = (types, filters) => {
   let typeMapping = new Map()
   types.forEach((type) => {
+    console.log('HERE: ', filters.types.indexOf(type.id))
+
     const typeObject = {
       label: type.name,
       value: type.id,
       expanded: true,
-      checked: filters.types.indexOf(type.id) !== -1,
+      checked: true,
       children: [],
     }
     if (!type.parent_id) {

@@ -3,7 +3,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypesMock } from '../utils/api'
-import { buildTreeSelectData, getTypeObjectFromId } from '../utils/typeTree'
+import {
+  buildTreeSelectData,
+  getTypeObjectFromId,
+  updateCheckedForAllChildren,
+} from '../utils/typeTree'
 import Filter from './filter/Filter'
 import MapContext from './map/MapContext'
 import Search from './search/Search'
@@ -41,7 +45,7 @@ const SearchWrapper = () => {
 
   const handleTypeFilterChange = (currentNode) => {
     const currentId = currentNode.value
-    let types = filters.types
+    let types = [...filters.types]
     let currentTypeObject = null
     for (const root of treeSelectData) {
       currentTypeObject = getTypeObjectFromId(root, currentId)
@@ -49,6 +53,8 @@ const SearchWrapper = () => {
         break
       }
     }
+
+    updateCheckedForAllChildren(currentTypeObject, currentNode.checked)
 
     if (currentTypeObject.children.length !== 0) {
       currentTypeObject.children.forEach((child) => {
@@ -59,14 +65,10 @@ const SearchWrapper = () => {
       updateTypes(types, currentId, currentNode.checked)
     }
 
-    // TODO: Figure out why setting the context is messing with checked
-    // Issue: checking parent node does not check all children nodes
     setFilters((prevFilters) => ({ ...prevFilters, types }))
-    console.log('HERE: ', types)
   }
 
   const handleCheckboxChange = (event) => {
-    console.log('HELLO')
     event.target.name === 'municipal'
       ? setFilters((prevFilters) => ({
           ...prevFilters,
@@ -81,7 +83,7 @@ const SearchWrapper = () => {
   const handleFilterButtonClick = () => setFilterPressed(!filterPressed)
 
   useEffect(() => {
-    const fetchTypes = async () => {
+    const fetchTypesAndBuildTreeSelectData = async () => {
       if (view.bounds) {
         const { zoom, bounds } = view
         const query = {
@@ -106,7 +108,7 @@ const SearchWrapper = () => {
       }
     }
 
-    fetchTypes()
+    fetchTypesAndBuildTreeSelectData()
   }, [view])
 
   return (
