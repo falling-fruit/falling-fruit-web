@@ -8,12 +8,17 @@ import {
   getTypeObjectFromId,
   updateCheckedForAllChildren,
 } from '../utils/typeTree'
+import { useIsDesktop } from '../utils/useBreakpoint'
 import Filter from './filter/Filter'
 import MapContext from './map/MapContext'
 import Search from './search/Search'
 import SearchContext from './search/SearchContext'
 import { theme } from './ui/GlobalStyle'
 import IconButton from './ui/IconButton'
+
+const StyledSearchWrapper = styled.div`
+  margin: 10px;
+`
 
 const SearchBarContainer = styled.div`
   display: flex;
@@ -27,6 +32,8 @@ const SearchWrapper = () => {
 
   const [filterPressed, setFilterPressed] = useState(false)
   const [treeSelectData, setTreeSelectData] = useState([])
+
+  const isDesktop = useIsDesktop()
 
   /**
    * Helper function to add or remove a given type ID from an array of type Ids
@@ -113,7 +120,7 @@ const SearchWrapper = () => {
   }, [view])
 
   return (
-    <div>
+    <StyledSearchWrapper>
       <SearchBarContainer>
         <Search
           filterPressed={filterPressed}
@@ -138,9 +145,10 @@ const SearchWrapper = () => {
           handleTypeFilterChange={handleTypeFilterChange}
           handleCheckboxChange={handleCheckboxChange}
           treeSelectData={treeSelectData}
+          isDesktop={isDesktop}
         />
       )}
-    </div>
+    </StyledSearchWrapper>
   )
 }
 
