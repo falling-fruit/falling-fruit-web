@@ -123,7 +123,7 @@ const Search = (props) => {
   }, [])
 
   let currentLocation = {
-    place_id: '123',
+    place_id: null,
     description: 'Current Location',
     structured_formatting: {
       main_text: 'Current Location',
@@ -188,6 +188,7 @@ const Search = (props) => {
                   as={SearchEntry}
                   key={place_id}
                   value={description}
+                  isCurrent={place_id === null}
                 >
                   {[main_text, secondary_text]}
                 </ComboboxOption>
