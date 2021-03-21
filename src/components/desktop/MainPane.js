@@ -1,9 +1,9 @@
 import SearchOverlay from './SearchOverlay'
 
-const SidePane = () => (
+const MainPane = () => (
   <>
     <SearchOverlay />
   </>
 )
 
-export default SidePane
+export default MainPane
