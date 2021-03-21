@@ -51,7 +51,7 @@ const SearchBarContainer = styled.div`
   }
 `
 
-const Search = ({ filterPressed, filterButton }) => {
+const Search = ({ filterPressed, setFilterPressed, filterButton }) => {
   const { setViewport } = useContext(SearchContext)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
@@ -66,6 +66,9 @@ const Search = ({ filterPressed, filterButton }) => {
   } = usePlacesAutocomplete()
 
   const handleInput = (e) => {
+    if (filterPressed) {
+      setFilterPressed(false)
+    }
     setValue(e.target.value)
   }
 
