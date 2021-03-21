@@ -35,7 +35,7 @@ const Page = styled.div`
   overflow: auto;
 `
 
-const TextContent = styled.main`
+const TextContent = styled.div`
   padding: 23px;
   box-sizing: border-box;
 
