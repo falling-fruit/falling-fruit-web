@@ -9,6 +9,12 @@ const StyledHeader = styled.header`
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
 
+  img {
+    height: 60%;
+    width: auto;
+    margin: 20% 10px;
+  }
+
   nav {
     height: 100%;
     ul {
@@ -55,7 +61,7 @@ const StyledHeader = styled.header`
 
 const Header = () => (
   <StyledHeader>
-    <div>LOGO</div>
+    <img src="logo_white.svg" alt="Falling Fruit Logo" />
     <nav>
       <ul>
         <li className="active">Map</li>
