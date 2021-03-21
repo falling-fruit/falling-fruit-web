@@ -36,11 +36,17 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
   border: none;
   background: none;
   padding-top: 8px;
+  @media ${({ theme }) => theme.device.desktop} {
+    box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 `
 
 const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px 10px 0 10px;
 
   & > div {
     flex: 1;
