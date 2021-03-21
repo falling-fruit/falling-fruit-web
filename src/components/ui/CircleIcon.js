@@ -1,5 +1,5 @@
 import { StyledIconBase } from '@styled-icons/styled-icon'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const CircleIcon = styled.div`
   display: flex;
