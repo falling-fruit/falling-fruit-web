@@ -2,11 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypesMock } from '../../utils/getTypesMock'
-import {
-  buildTreeSelectData,
-  getTypeObjectFromId,
-  updateCheckedForAllChildren,
-} from '../../utils/typeTree'
+import { buildTreeSelectData, getTypeObjectFromId } from '../../utils/typeTree'
 import MapContext from '../map/MapContext'
 import SearchContext from '../search/SearchContext'
 import Checkboxes from './Checkboxes'
@@ -56,8 +52,6 @@ const Filter = ({
       }
     }
 
-    updateCheckedForAllChildren(currentTypeObject, currentNode.checked)
-
     if (currentTypeObject.children.length !== 0) {
       currentTypeObject.children.forEach((child) => {
         const childId = child.value
@@ -97,8 +91,9 @@ const Filter = ({
 
   useEffect(() => {
     const fetchTypesAndBuildTreeSelectData = async () => {
-      if (view.bounds) {
-        const { zoom, bounds } = view
+      const { zoom, bounds } = view
+
+      if (bounds) {
         const query = {
           swlng: bounds.sw.lat,
           nelng: bounds.ne.lng,
@@ -115,7 +110,7 @@ const Filter = ({
           types: typeIds,
         }))
         // Build the tree select data
-        const treeSelectData = buildTreeSelectData(types, filters)
+        const treeSelectData = buildTreeSelectData(types, filters.types)
         console.log(treeSelectData)
         setTreeSelectData(treeSelectData)
       }
@@ -124,6 +119,8 @@ const Filter = ({
     fetchTypesAndBuildTreeSelectData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view])
+
+  console.log('rerender', filters)
 
   return (
     isOpen && (

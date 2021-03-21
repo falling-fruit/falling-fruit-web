@@ -17,22 +17,10 @@ export const getTypeObjectFromId = (currentNode, targetId) => {
 }
 
 /**
- * Recursive helper function to update the 'checked' field of a type object and all of its children
- * @param {Object} currentTypeObject - The current type object to update
- * @param {boolean} checked - Whether the current node and its children should be checked
- */
-export const updateCheckedForAllChildren = (currentTypeObject, checked) => {
-  currentTypeObject.checked = checked
-  for (const child of currentTypeObject.children) {
-    updateCheckedForAllChildren(child, checked)
-  }
-}
-
-/**
  * Helper function to build the tree select data
  * @param {Object[]} types - Array of type objects
  */
-export const buildTreeSelectData = (types) => {
+export const buildTreeSelectData = (types, filterTypes) => {
   let typeMapping = new Map()
   let typeCounts = new Map()
   types.forEach((type) => {
@@ -40,7 +28,7 @@ export const buildTreeSelectData = (types) => {
       label: `${type.name} (${type.count})`,
       value: type.id,
       expanded: true,
-      checked: true,
+      checked: filterTypes.includes(type.id),
       children: [],
     }
     if (!type.parent_id) {
@@ -58,7 +46,7 @@ export const buildTreeSelectData = (types) => {
       label: `Other (${typeCounts.get(root.value)})`,
       value: root.value,
       expanded: true,
-      checked: true,
+      checked: filterTypes.includes(root.value),
       children: [],
     }
     root.children.push(otherTypeObject)
@@ -74,6 +62,7 @@ export const buildTreeSelectData = (types) => {
     )} (${childCount})`
     // Root still needs value to differentiate from other roots
     root.value = `root ${root.value}`
+    // root.checked = true
   })
 
   return [...typeMapping.values()]

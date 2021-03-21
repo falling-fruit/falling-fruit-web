@@ -1,8 +1,9 @@
 import 'react-dropdown-tree-select/dist/styles.css'
 
 import React from 'react'
-import DropdownTreeSelect from 'react-dropdown-tree-select'
 import styled from 'styled-components/macro'
+
+import NonrenderTreeSelect from './NonrenderTreeSelect'
 
 /* TODO: Checkbox styling */
 const TreeSelectContainer = styled.div`
@@ -72,7 +73,7 @@ const TreeSelectContainer = styled.div`
 
 const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => (
   <TreeSelectContainer>
-    <DropdownTreeSelect
+    <NonrenderTreeSelect
       data={treeSelectData}
       texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
       showDropdown="always"
