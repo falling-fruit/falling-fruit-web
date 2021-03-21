@@ -32,13 +32,12 @@ export const updateCheckedForAllChildren = (currentTypeObject, checked) => {
  * Helper function to build the tree select data
  * @param {Object[]} types - Array of type objects
  */
-export const buildTreeSelectData = (types, filters) => {
+export const buildTreeSelectData = (types) => {
   let typeMapping = new Map()
+  let typeCounts = new Map()
   types.forEach((type) => {
-    console.log('HERE: ', filters.types.indexOf(type.id))
-
     const typeObject = {
-      label: type.name,
+      label: `${type.name} (${type.count})`,
       value: type.id,
       expanded: true,
       checked: true,
@@ -50,6 +49,30 @@ export const buildTreeSelectData = (types, filters) => {
       const parentTypeObject = typeMapping.get(type.parent_id)
       parentTypeObject.children.push(typeObject)
     }
+    typeCounts.set(type.id, type.count)
   })
+
+  typeMapping.forEach((root) => {
+    // Add "Other" filter category to the root's children array
+    const otherTypeObject = {
+      label: `Other (${typeCounts.get(root.value)})`,
+      value: root.value,
+      expanded: true,
+      checked: true,
+      children: [],
+    }
+    root.children.push(otherTypeObject)
+
+    // Rename label of root node to be the sum of child counts
+    let childCount = 0
+    root.children.forEach((child) => {
+      childCount += typeCounts.get(child.value)
+    })
+    root.label = `${root.label.slice(
+      0,
+      root.label.indexOf('('),
+    )} (${childCount})`
+  })
+
   return [...typeMapping.values()]
 }
