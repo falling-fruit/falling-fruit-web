@@ -62,6 +62,7 @@ const theme = {
   text: '#9b9b9b',
   secondaryText: '#5a5a5a',
   tertiaryText: '#979797',
+  headerText: '#333333',
   // background
   background: '#ffffff',
   secondaryBackground: '#e0e1e2',

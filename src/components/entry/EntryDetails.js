@@ -1,4 +1,4 @@
-import { Flag, ImageAdd, Map, Star } from '@styled-icons/boxicons-solid'
+import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useContext, useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import { ThemeContext } from 'styled-components'
@@ -8,7 +8,8 @@ import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import IconButton from '../ui/IconButton'
 import { Tag, TagList } from '../ui/Tag'
-import { RESOURCES } from './resources'
+import PhotoGrid from './PhotoGrid'
+import ResourceList from './ResourceList'
 
 const ACCESS_TYPE = {
   0: "On lister's property",
@@ -34,14 +35,14 @@ const Page = styled.div`
   overflow: auto;
 `
 
-const TextContent = styled.div`
+const TextContent = styled.main`
   padding: 23px;
   box-sizing: border-box;
 
   h2 {
     margin-top: 0px;
     margin-bottom: 0px;
-    color: #333333;
+    color: ${({ theme }) => theme.headerText};
   }
 
   header {
@@ -56,7 +57,7 @@ const TextContent = styled.div`
   }
 
   h3 {
-    color: #333333;
+    color: ${({ theme }) => theme.headerText};
     // TODO: siraj - add this to theme?
   }
 
@@ -82,117 +83,6 @@ const Description = styled.section`
 
   button {
     margin-right: 14px;
-  }
-`
-
-// Wraps all resource images and their links
-const Resource = styled.small`
-  & > *:not(:last-child) {
-    margin-bottom: 14px;
-  }
-  display: flex;
-  column-count: 2;
-  column-gap: 12px;
-
-  img {
-    height: 20px;
-    width: 25px;
-  }
-`
-
-const PhotoGrid = styled.figure`
-  padding: 0;
-  margin: 0 auto;
-  height: 184px;
-  width: calc(100% - 20px);
-
-  display: grid;
-  grid-template-columns: 1fr 92px;
-  grid-template-rows: 50% 50%;
-  gap: 6.5px;
-  grid-template-areas:
-    'main-image extra-image'
-    'main-image add-more';
-
-  .main-image {
-    grid-area: main-image;
-  }
-  .extra-images {
-    grid-area: extra-image;
-  }
-  .add-more {
-    grid-area: add-more;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-`
-
-const ExtraImagesWrapper = styled.button`
-  display: block;
-  cursor: pointer;
-  padding: 0;
-  border: none;
-  position: relative;
-  border-radius: 4px;
-  overflow: hidden;
-
-  &:disabled {
-    pointer-events: none;
-  }
-
-  & > img {
-    left: 0;
-    top: 0;
-  }
-
-  & > .other-photos-mask {
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    position: absolute;
-    color: white;
-    background: linear-gradient(180deg, rgba(48, 45, 44, 0.4) 0%, #302d2c 100%);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    font-weight: 700;
-    font-size: 13px;
-
-    & > span {
-      font-size: 24px;
-    }
-  }
-`
-
-const ImageUpload = styled.label`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-weight: 13px;
-  cursor: pointer;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 2px solid ${({ theme }) => theme.text};
-  font-weight: 700;
-
-  svg {
-    width: 31px;
-  }
-
-  input {
-    display: none;
   }
 `
 
@@ -230,59 +120,12 @@ const EntryDetails = ({ isDesktop }) => {
     console.log('Open Image Slideshow/Lightbox')
   }
 
-  const resources = RESOURCES.map(
-    ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
-      typeData?.[urlKey] && (
-        <Resource key={urlKey}>
-          <img src={icon} alt={iconAlt} />
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={urlFormatter(typeData[urlKey])}
-          >
-            {title}
-          </a>
-        </Resource>
-      ),
-  )
-
   return locationData && typeData ? (
     <Page isDesktop={isDesktop}>
-      {locationData.photos.length > 0 && (
-        // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
-        // TODO: use alt based off of photo description or filename
-        <PhotoGrid>
-          <img
-            className="main-image"
-            src={locationData.photos[0].photo.medium}
-            alt={locationData.type_names.join(', ')}
-          />
-          {locationData.photos.length > 1 && (
-            <ExtraImagesWrapper
-              onClick={handleViewLightbox}
-              disabled={locationData.photos.length < 3}
-            >
-              {locationData.photos.length > 2 && (
-                <div className="other-photos-mask">
-                  <span>{locationData.photos.length - 2}</span>
-                  Photos
-                </div>
-              )}
-              <img
-                className="extra-images"
-                src={locationData.photos[1].photo.medium}
-                alt={locationData.type_names.join(', ')}
-              />
-            </ExtraImagesWrapper>
-          )}
-          <ImageUpload>
-            <ImageAdd />
-            Add Photo
-            <input type="file" />
-          </ImageUpload>
-        </PhotoGrid>
-      )}
-
+      <PhotoGrid
+        locationData={locationData}
+        handleViewLightbox={handleViewLightbox}
+      />
       <TextContent>
         <header>
           <div>
@@ -318,7 +161,7 @@ const EntryDetails = ({ isDesktop }) => {
         </Description>
 
         <h3>Other Resources</h3>
-        {resources}
+        <ResourceList typeData={typeData} />
       </TextContent>
     </Page>
   ) : (
