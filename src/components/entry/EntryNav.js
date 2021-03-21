@@ -11,6 +11,10 @@ const EntryNavContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+
+  @media only screen and ${({ theme }) => theme.device.mobile} {
+    padding: 0;
+  }
 `
 
 const EntryNavTextContainer = styled.div`
