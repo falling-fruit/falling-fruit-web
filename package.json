@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "homepage": "https://falling-fruit.vercel.app/",
   "dependencies": {
-    "@reach/accordion": "^0.13.2",
+    "@reach/checkbox": "^0.13.2",
     "@reach/combobox": "^0.13.2",
     "@reach/tabs": "^0.13.0",
     "@reach/window-size": "^0.13.2",
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
+    "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.8",

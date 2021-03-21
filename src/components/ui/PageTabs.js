@@ -2,7 +2,7 @@ import '@reach/tabs/styles.css'
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
 import { StyledIconBase } from '@styled-icons/styled-icon'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const PageTabs = styled(Tabs)`
   display: flex;
@@ -12,6 +12,7 @@ const PageTabs = styled(Tabs)`
   [data-reach-tab-panels] {
     flex: 1;
     display: flex;
+    overflow: hidden;
 
     [data-reach-tab-panel] {
       flex: 1;
@@ -22,10 +23,8 @@ const PageTabs = styled(Tabs)`
     display: flex;
     height: 80px;
     background: ${({ theme }) => theme.background};
-    padding-bottom: env(
-      safe-area-inset-bottom,
-      0
-    ); // Moves tab buttons above home bar
+    // Moves tab buttons above home bar on iOS mobile
+    padding-bottom: env(safe-area-inset-bottom, 0);
 
     [data-reach-tab] {
       flex: 1;

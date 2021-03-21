@@ -1,25 +1,18 @@
 import { Map, Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
+import CircleIcon from '../ui/CircleIcon'
+import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
 
 const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   const [primaryText, secondaryText] = children
 
-  // TODO: change colors to theme colors
-  // TODO: make the circle icon a reusable UI component
+  // TODO: Add current location to search dropdown
   const leftIcon = (
-    <div
-      style={{
-        background: '#5A5A5A',
-        width: '36px',
-        height: '36px',
-        boxSizing: 'border-box',
-        borderRadius: '50%',
-      }}
-    >
-      <Map size={20} color={'white'} />
-    </div>
+    <CircleIcon backgroundColor={theme.secondaryText}>
+      <Map />
+    </CircleIcon>
   )
 
   return (
