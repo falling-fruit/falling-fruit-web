@@ -47,7 +47,7 @@ const SearchWrapper = () => {
           }
         />
       </SearchBarContainer>
-      {filterPressed && <Filter />}
+      <Filter isOpen={filterPressed} />
     </StyledSearchWrapper>
   )
 }

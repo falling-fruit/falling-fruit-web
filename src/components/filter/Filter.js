@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { getTypesMock } from '../../utils/api'
+import { getTypesMock } from '../../utils/getTypesMock'
 import {
   buildTreeSelectData,
   getTypeObjectFromId,
@@ -11,7 +11,7 @@ import SearchContext from '../search/SearchContext'
 import Checkboxes from './Checkboxes'
 import TreeSelect from './TreeSelect'
 
-const Filter = () => {
+const Filter = ({ isOpen }) => {
   const { view } = useContext(MapContext)
   const { filters, setFilters } = useContext(SearchContext)
 
@@ -83,8 +83,7 @@ const Filter = () => {
         }
         const types = await getTypesMock(query)
         // Set initial filter type IDs to all returned types
-        const typeIds = []
-        types.forEach((type) => typeIds.push(type.id))
+        const typeIds = types.map((type) => type.id)
         setFilters((prevFilters) => ({
           ...prevFilters,
           types: typeIds,
@@ -100,14 +99,16 @@ const Filter = () => {
   }, [view])
 
   return (
-    <>
-      <p>Edible Type</p>
-      <TreeSelect
-        handleTypeFilterChange={handleTypeFilterChange}
-        treeSelectData={treeSelectData}
-      />
-      <Checkboxes handleCheckboxChange={handleCheckboxChange} />
-    </>
+    isOpen && (
+      <>
+        <p>Edible Type</p>
+        <TreeSelect
+          handleTypeFilterChange={handleTypeFilterChange}
+          treeSelectData={treeSelectData}
+        />
+        <Checkboxes handleCheckboxChange={handleCheckboxChange} />
+      </>
+    )
   )
 }
 
