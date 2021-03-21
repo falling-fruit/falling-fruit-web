@@ -72,7 +72,8 @@ export const buildTreeSelectData = (types) => {
       0,
       root.label.indexOf('('),
     )} (${childCount})`
-    root.value = undefined
+    // Root still needs value to differentiate from other roots
+    root.value = `root ${root.value}`
   })
 
   return [...typeMapping.values()]

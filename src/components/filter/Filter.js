@@ -90,6 +90,7 @@ const Filter = ({ isOpen }) => {
         }))
         // Build the tree select data
         const treeSelectData = buildTreeSelectData(types, filters)
+        console.log(treeSelectData)
         setTreeSelectData(treeSelectData)
       }
     }
