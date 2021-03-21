@@ -31,8 +31,8 @@ const formatISOString = (dateString) =>
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
-  margin-top: ${(props) => (props.isDesktop ? '0px' : '110px')};
-  padding-top: ${(props) => (props.isDesktop ? '0px' : '10px')};
+  margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
+  padding: 0;
   overflow: auto;
   width: 100%;
 `
