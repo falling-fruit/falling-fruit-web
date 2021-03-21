@@ -58,7 +58,7 @@ const MapPage = () => {
           nelng: view.bounds.ne.lng,
           swlat: view.bounds.sw.lat,
           swlng: view.bounds.sw.lng,
-          muni: filters.muni,
+          muni: filters.muni ? 1 : 0,
           t: `${filters.types}`,
         }
 
@@ -75,7 +75,10 @@ const MapPage = () => {
             _numLocationsReturned,
             _totalLocations,
             ...locations
-          ] = await getLocations({ ...query, invasive: filters.invasive })
+          ] = await getLocations({
+            ...query,
+            invasive: filters.invasive ? 1 : 0,
+          })
 
           setLocations(locations)
           setClusters([])

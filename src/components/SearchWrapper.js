@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypesMock } from '../utils/api'
+import { buildTreeSelectData, getTypeObjectFromId } from '../utils/typeTree'
 import Filter from './filter/Filter'
 import MapContext from './map/MapContext'
 import Search from './search/Search'
@@ -21,7 +22,7 @@ const SearchWrapper = () => {
   const { filters, setFilters } = useContext(SearchContext)
 
   const [filterPressed, setFilterPressed] = useState(false)
-  const [typeMapping] = useState(new Map())
+  const [treeSelectData, setTreeSelectData] = useState([])
 
   /**
    * Helper function to add or remove a given type ID from an array of type Ids
@@ -38,53 +39,18 @@ const SearchWrapper = () => {
     }
   }
 
-  /**
-   * Recursive helper function to get the type object given a type ID
-   * @param {number} targetId - The type ID to find
-   * @returns {Object} The type mapping object for the given type ID
-   */
-  const getTypeObjectFromId = (currentNode, targetId) => {
-    if (currentNode.value === targetId) {
-      return currentNode
-    }
-
-    for (const child of currentNode.children) {
-      const res = getTypeObjectFromId(child, targetId)
-      if (res) {
-        return res
-      }
-    }
-  }
-
-  /**
-   * Recursive helper function to update the 'checked' field of a type object and all of its children
-   * @param {Object} currentTypeObject - The current type object to update
-   * @param {boolean} checked - Whether the current node and its children should be checked
-   */
-  // const updateCheckedForAllChildren = (currentTypeObject, checked) => {
-  //   currentTypeObject.checked = checked
-  //   for (const child of currentTypeObject.children) {
-  //     updateCheckedForAllChildren(child, checked)
-  //   }
-  // }
-
   const handleTypeFilterChange = (currentNode) => {
     const currentId = currentNode.value
     let types = filters.types
-
-    let currentTypeObject = typeMapping.get(currentId)
-    let isRoot = true
-    if (!currentTypeObject) {
-      isRoot = false
-      for (const root of typeMapping.values()) {
-        currentTypeObject = getTypeObjectFromId(root, currentId)
-        if (currentTypeObject) {
-          break
-        }
+    let currentTypeObject = null
+    for (const root of treeSelectData) {
+      currentTypeObject = getTypeObjectFromId(root, currentId)
+      if (currentTypeObject) {
+        break
       }
     }
 
-    if (isRoot) {
+    if (currentTypeObject.children.length !== 0) {
       currentTypeObject.children.forEach((child) => {
         const childId = child.value
         updateTypes(types, childId, currentNode.checked)
@@ -95,14 +61,20 @@ const SearchWrapper = () => {
 
     // TODO: Figure out why setting the context is messing with checked
     // Issue: checking parent node does not check all children nodes
-    console.log('TYPES: ', types)
-    setFilters({ ...filters, types })
+    setFilters((prevFilters) => ({ ...prevFilters, types }))
+    console.log('HERE: ', types)
   }
 
   const handleCheckboxChange = (event) => {
     event.target.name === 'municipal'
-      ? setFilters({ ...filters, muni: (filters.muni + 1) % 2 })
-      : setFilters({ ...filters, invasive: (filters.invasive + 1) % 2 })
+      ? setFilters((prevFilters) => ({
+          ...prevFilters,
+          muni: !prevFilters.muni,
+        }))
+      : setFilters((prevFilters) => ({
+          ...prevFilters,
+          invasive: !prevFilters.invasive,
+        }))
   }
 
   const handleFilterButtonClick = () => setFilterPressed(!filterPressed)
@@ -120,32 +92,21 @@ const SearchWrapper = () => {
           muni: filters.muni,
         }
         const types = await getTypesMock(query)
-        buildTypeMapping(types)
+        // Set initial filter type IDs to all returned types
+        const typeIds = []
+        types.forEach((type) => typeIds.push(type.id))
+        setFilters((prevFilters) => ({
+          ...prevFilters,
+          types: typeIds,
+        }))
+        // Build the tree select data
+        const treeSelectData = buildTreeSelectData(types, filters)
+        setTreeSelectData(treeSelectData)
       }
     }
 
-    const buildTypeMapping = (types) => {
-      types.forEach((type) => {
-        const typeObject = {
-          label: type.name,
-          value: type.id,
-          expanded: true,
-          checked: filters.types.indexOf(type.id) !== -1,
-          children: [],
-        }
-        if (!type.parent_id) {
-          typeMapping.set(type.id, typeObject)
-        } else {
-          const parentTypeObject = typeMapping.get(type.parent_id)
-          parentTypeObject.children.push(typeObject)
-        }
-      })
-    }
-
     fetchTypes()
-  }, [view, filters, typeMapping])
-
-  const buildTreeSelectData = () => [...typeMapping.values()]
+  }, [view])
 
   return (
     <div>
@@ -172,7 +133,7 @@ const SearchWrapper = () => {
         <Filter
           handleTypeFilterChange={handleTypeFilterChange}
           handleCheckboxChange={handleCheckboxChange}
-          treeSelectData={buildTreeSelectData()}
+          treeSelectData={treeSelectData}
         />
       )}
     </div>

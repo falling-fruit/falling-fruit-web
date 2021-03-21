@@ -55,6 +55,7 @@ const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => (
       data={treeSelectData}
       texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
       showDropdown="always"
+      showPartiallySelected
       keepTreeOnSearch
       inlineSearchInput
       onChange={handleTypeFilterChange}
