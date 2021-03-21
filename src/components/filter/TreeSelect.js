@@ -4,8 +4,6 @@ import React from 'react'
 import DropdownTreeSelect from 'react-dropdown-tree-select'
 import styled from 'styled-components/macro'
 
-import { useIsDesktop } from '../../utils/useBreakpoint'
-
 /* TODO: Checkbox styling */
 const TreeSelectContainer = styled.div`
   .dropdown-trigger.arrow.top {
@@ -44,16 +42,23 @@ const TreeSelectContainer = styled.div`
 
   .infinite-scroll-component {
     height: 100% !important;
-    ${({ isDesktop }) =>
-      isDesktop
-        ? `max-height: calc(30vh - 60px)`
-        : `max-height: calc(60vh - 60px)`};
+    @media ${({ theme }) => theme.device.desktop} {
+      max-height: calc(30vh - 60px);
+    }
+    @media ${({ theme }) => theme.device.mobile} {
+      max-height: calc(60vh - 60px);
+    }
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     border-radius: 7px;
   }
 
   .react-dropdown-tree-select {
-    height: ${({ isDesktop }) => (isDesktop ? 30 : 60)}vh;
+    @media ${({ theme }) => theme.device.desktop} {
+      height: 30vh;
+    }
+    @media ${({ theme }) => theme.device.mobile} {
+      height: 60vh;
+    }
   }
 
   ul {
@@ -65,22 +70,18 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => {
-  const isDesktop = useIsDesktop()
-
-  return (
-    <TreeSelectContainer isDesktop={isDesktop}>
-      <DropdownTreeSelect
-        data={treeSelectData}
-        texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
-        showDropdown="always"
-        showPartiallySelected
-        keepTreeOnSearch
-        inlineSearchInput
-        onChange={handleTypeFilterChange}
-      />
-    </TreeSelectContainer>
-  )
-}
+const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => (
+  <TreeSelectContainer>
+    <DropdownTreeSelect
+      data={treeSelectData}
+      texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
+      showDropdown="always"
+      showPartiallySelected
+      keepTreeOnSearch
+      inlineSearchInput
+      onChange={handleTypeFilterChange}
+    />
+  </TreeSelectContainer>
+)
 
 export default TreeSelect

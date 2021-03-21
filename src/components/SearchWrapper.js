@@ -2,13 +2,11 @@ import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-solid'
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 
-import { useIsDesktop } from '../utils/useBreakpoint'
 import Filter from './filter/Filter'
 import Search from './search/Search'
 import { theme } from './ui/GlobalStyle'
 import IconButton from './ui/IconButton'
 
-// TODO: change most isDesktop usages to media queries with theme.device
 const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
@@ -17,11 +15,10 @@ const SearchBarContainer = styled.div`
 
 const SearchWrapper = () => {
   const [filterPressed, setFilterPressed] = useState(false)
-  const isDesktop = useIsDesktop()
 
   return (
     <>
-      <SearchBarContainer isDesktop={isDesktop}>
+      <SearchBarContainer>
         <Search
           filterPressed={filterPressed}
           setFilterPressed={setFilterPressed}
