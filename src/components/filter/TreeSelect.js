@@ -15,12 +15,14 @@ const TreeSelectContainer = styled.div`
   }
 
   .dropdown {
+    height: 100%;
     width: 100%;
   }
 
   .dropdown-content {
     display: flex;
     flex-direction: column;
+    height: 100%;
     width: 100%;
     padding: 0 !important;
     box-shadow: none !important;
@@ -39,6 +41,7 @@ const TreeSelectContainer = styled.div`
   }
 
   .infinite-scroll-component {
+    height: 100% !important;
     max-height: calc(60vh - 60px);
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     border-radius: 7px;
@@ -46,6 +49,14 @@ const TreeSelectContainer = styled.div`
 
   .react-dropdown-tree-select {
     height: 60vh;
+  }
+
+  ul {
+    height: 100%;
+  }
+
+  ul > div {
+    height: 100%;
   }
 `
 
