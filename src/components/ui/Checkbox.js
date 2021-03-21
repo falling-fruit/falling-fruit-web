@@ -3,7 +3,7 @@ import '@reach/checkbox/styles.css'
 import { CustomCheckboxContainer, CustomCheckboxInput } from '@reach/checkbox'
 import { Check } from '@styled-icons/boxicons-regular'
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 //TODO: change all checkboxed to styled components
 const Checkbox = React.forwardRef(
   ({ className, checked, onChange, ...props }, ref) => (

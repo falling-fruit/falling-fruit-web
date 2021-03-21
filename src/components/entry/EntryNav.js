@@ -1,7 +1,7 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { Map, Pencil } from '@styled-icons/boxicons-solid'
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import { useHistory, useLocation } from 'react-router-dom'
+import styled from 'styled-components/macro'
 
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
@@ -11,6 +11,10 @@ const EntryNavContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+
+  @media only screen and ${({ theme }) => theme.device.mobile} {
+    padding: 0;
+  }
 `
 
 const EntryNavTextContainer = styled.div`
@@ -29,10 +33,18 @@ const EntryNavIconsContainer = styled.div`
   width: 110px;
 `
 
+const ArrowBackButton = styled(ArrowBack)`
+  cursor: pointer;
+`
+
 const EntryNav = ({ isDesktop }) => {
   const history = useHistory()
+  const { state } = useLocation()
 
-  const onBackButtonClick = () => history.goBack()
+  const onBackButtonClick = () => {
+    // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
+    history.push(state?.fromPage ?? '/map')
+  }
 
   const onEditButtonClick = () => {
     // TODO: edit entry callback
@@ -44,10 +56,23 @@ const EntryNav = ({ isDesktop }) => {
     console.log('View entry on map clicked')
   }
 
+  const onEnter = (event, callback) => {
+    if (event.key === 'Enter') {
+      callback()
+    }
+  }
+
   return (
     <EntryNavContainer>
       <EntryNavTextContainer>
-        <ArrowBack onClick={onBackButtonClick} color={theme.secondaryText} />
+        <ArrowBackButton
+          role="button"
+          tabIndex={0}
+          aria-pressed="false"
+          onKeyDown={(e) => onEnter(e, onBackButtonClick)}
+          onClick={onBackButtonClick}
+          color={theme.secondaryText}
+        />
         <p>{isDesktop ? 'Back to Results' : 'Results'}</p>
       </EntryNavTextContainer>
       {!isDesktop && (

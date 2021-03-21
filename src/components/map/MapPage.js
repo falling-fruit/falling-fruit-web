@@ -49,24 +49,23 @@ const MapPage = () => {
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
-      if (view.bounds?.ne.lat != null) {
+      const { zoom, bounds } = view
+
+      if (bounds?.ne.lat != null) {
         // Map has received real bounds
         setIsLoading(true)
 
         const query = {
-          nelat: view.bounds.ne.lat,
-          nelng: view.bounds.ne.lng,
-          swlat: view.bounds.sw.lat,
-          swlng: view.bounds.sw.lng,
+          nelat: bounds.ne.lat,
+          nelng: bounds.ne.lng,
+          swlat: bounds.sw.lat,
+          swlng: bounds.sw.lng,
           muni: filters.muni ? 1 : 0,
           t: `${filters.types}`,
         }
 
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-          const clusters = await getClusters({
-            ...query,
-            zoom: view.zoom,
-          })
+          const clusters = await getClusters({ ...query, zoom })
 
           setClusters(clusters)
           setLocations([])
@@ -88,8 +87,6 @@ const MapPage = () => {
       }
     }
     fetchClusterAndLocationData()
-    // TODO: Need to debounce this so that the server doesn't get killed
-    // See: https://usehooks.com/useDebounce/
   }, [view, filters])
 
   const handleViewChange = (view) => {
@@ -97,8 +94,12 @@ const MapPage = () => {
     setView(view)
   }
 
-  const handleLocationClick = (location) =>
-    history.push(`/entry/${location.id}`)
+  const handleLocationClick = (location) => {
+    history.push({
+      pathname: `/entry/${location.id}`,
+      state: { fromPage: '/map' },
+    })
+  }
 
   const handleClusterClick = (cluster) => {
     setView(({ zoom: prevZoom }) => ({
