@@ -124,6 +124,7 @@ const SearchWrapper = () => {
       <SearchBarContainer>
         <Search
           filterPressed={filterPressed}
+          setFilterPressed={setFilterPressed}
           filterButton={
             <IconButton
               size={45}
