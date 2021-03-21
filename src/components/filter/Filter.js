@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import styled from 'styled-components/macro'
 
 import { getTypesMock } from '../../utils/api'
 import {
@@ -11,7 +12,18 @@ import SearchContext from '../search/SearchContext'
 import Checkboxes from './Checkboxes'
 import TreeSelect from './TreeSelect'
 
-const Filter = () => {
+const FilterWrapper = styled.div`
+  ${({ isDesktop, theme }) =>
+    isDesktop &&
+    `
+      box-shadow: 0 3px 5px ${theme.shadow};
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      padding: 0 10px 16px 10px;
+  `};
+`
+
+const Filter = ({ isDesktop }) => {
   const { view } = useContext(MapContext)
   const { filters, setFilters } = useContext(SearchContext)
 
@@ -100,14 +112,14 @@ const Filter = () => {
   }, [view])
 
   return (
-    <>
+    <FilterWrapper isDesktop={isDesktop}>
       <p>Edible Type</p>
       <TreeSelect
         handleTypeFilterChange={handleTypeFilterChange}
         treeSelectData={treeSelectData}
       />
       <Checkboxes handleCheckboxChange={handleCheckboxChange} />
-    </>
+    </FilterWrapper>
   )
 }
 
