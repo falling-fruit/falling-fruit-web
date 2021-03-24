@@ -24,13 +24,12 @@ const useGeoLocation = () => {
   }
 
   const locSuccess = async (pos) => {
-    console.log('success!')
     var lat = pos.coords.latitude
-    var lon = pos.coords.longitude
+    var lng = pos.coords.longitude
 
     const latlng = {
       lat: lat,
-      lng: lon,
+      lng: lng,
     }
 
     const cityName = await extractCityName(latlng)
@@ -38,7 +37,8 @@ const useGeoLocation = () => {
   }
 
   const locError = () => {
-    console.log('error!')
+    // User did provide us access to their location
+    console.log('Unable to get current position')
   }
 
   const handleLocationError = (browserHasGeolocation) => {
@@ -50,14 +50,10 @@ const useGeoLocation = () => {
   }
   useEffect(() => {
     if (navigator.geolocation) {
-      console.log('entered')
-
       navigator.geolocation.getCurrentPosition(locSuccess, locError, {
         timeout: 5000,
       })
     } else {
-      console.log('ERR')
-
       // Browser doesn't support Geolocation
       handleLocationError(false)
     }
