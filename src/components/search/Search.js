@@ -8,11 +8,12 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef } from 'react'
 import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
 
+import useGeoLocation from '../../utils/useGeoLocation'
 import Input from '../ui/Input'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
@@ -31,26 +32,6 @@ const getViewportBounds = async (placeId) => {
     ne: { lat: ne.lat(), lng: ne.lng() },
     sw: { lat: sw.lat(), lng: sw.lng() },
   }
-}
-
-const extractCityName = (latlng) => {
-  const geocoder = new window.google.maps.Geocoder()
-
-  return new Promise((resolve, reject) => {
-    geocoder.geocode({ location: latlng }, (results, status) => {
-      if (status === 'OK') {
-        if (results[0]) {
-          resolve(
-            results[0].plus_code.compound_code.split(' ').slice(1).join(' '),
-          )
-        } else {
-          reject('No results found')
-        }
-      } else {
-        reject(`Geocoder failed due to: ${status}`)
-      }
-    })
-  })
 }
 
 // TODO: ask Siraj how highlighting should look
@@ -75,52 +56,11 @@ const Search = (props) => {
     setValue,
   } = usePlacesAutocomplete()
 
-  const [currLocation, setCurrLocation] = useState({})
-
   const handleInput = (e) => {
     setValue(e.target.value)
   }
 
-  // make a geolocation hook
-  const locSuccess = async (pos) => {
-    console.log('success!')
-    var lat = pos.coords.latitude
-    var lon = pos.coords.longitude
-
-    const latlng = {
-      lat: lat,
-      lng: lon,
-    }
-
-    const cityName = await extractCityName(latlng)
-    setCurrLocation({ name: cityName, coords: latlng })
-  }
-
-  const locError = () => {
-    console.log('error!')
-  }
-
-  const handleLocationError = (browserHasGeolocation) => {
-    console.log(
-      browserHasGeolocation
-        ? 'Error: The Geolocation service failed.'
-        : "Error: Your browser doesn't support geolocation.",
-    )
-  }
-  useEffect(() => {
-    if (navigator.geolocation) {
-      console.log('entered')
-
-      navigator.geolocation.getCurrentPosition(locSuccess, locError, {
-        timeout: 5000,
-      })
-    } else {
-      console.log('ERR')
-
-      // Browser doesn't support Geolocation
-      handleLocationError(false)
-    }
-  }, [])
+  const currLocation = useGeoLocation()
 
   let currentLocation = {
     place_id: null,
