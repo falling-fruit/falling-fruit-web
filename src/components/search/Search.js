@@ -13,7 +13,7 @@ import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
 
-import useGeoLocation from '../../utils/useGeoLocation'
+import useGeolocation from '../../utils/useGeolocation'
 import Input from '../ui/Input'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
@@ -60,7 +60,7 @@ const Search = (props) => {
     setValue(e.target.value)
   }
 
-  const currLocation = useGeoLocation()
+  const currLocation = useGeolocation()
 
   let currentLocation = {
     place_id: null,

@@ -1,7 +1,36 @@
 import { useEffect, useState } from 'react'
 
-const useGeoLocation = () => {
+const useGeolocation = () => {
   const [currentLocation, setCurrentLocation] = useState({})
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(locSuccess, locError, {
+        timeout: 5000,
+      })
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false)
+    }
+  }, [])
+
+  const locSuccess = async (pos) => {
+    var lat = pos.coords.latitude
+    var lng = pos.coords.longitude
+
+    const latlng = {
+      lat: lat,
+      lng: lng,
+    }
+
+    const cityName = await extractCityName(latlng)
+    setCurrentLocation({ name: cityName, coords: latlng })
+  }
+
+  const locError = () => {
+    // User did provide us access to their location
+    console.log('Unable to get current position')
+  }
 
   const extractCityName = (latlng) => {
     const geocoder = new window.google.maps.Geocoder()
@@ -23,24 +52,6 @@ const useGeoLocation = () => {
     })
   }
 
-  const locSuccess = async (pos) => {
-    var lat = pos.coords.latitude
-    var lng = pos.coords.longitude
-
-    const latlng = {
-      lat: lat,
-      lng: lng,
-    }
-
-    const cityName = await extractCityName(latlng)
-    setCurrentLocation({ name: cityName, coords: latlng })
-  }
-
-  const locError = () => {
-    // User did provide us access to their location
-    console.log('Unable to get current position')
-  }
-
   const handleLocationError = (browserHasGeolocation) => {
     console.log(
       browserHasGeolocation
@@ -48,18 +59,8 @@ const useGeoLocation = () => {
         : "Error: Your browser doesn't support geolocation.",
     )
   }
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(locSuccess, locError, {
-        timeout: 5000,
-      })
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false)
-    }
-  }, [])
 
   return currentLocation
 }
 
-export default useGeoLocation
+export default useGeolocation
