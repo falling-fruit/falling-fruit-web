@@ -5,6 +5,7 @@ import { ChevronDown, ChevronLeft } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components'
 
+import { theme } from './GlobalStyle'
 import ListEntry from './ListEntry'
 
 //TODO: get rid of li from wrapping ListEntry
@@ -12,8 +13,9 @@ import ListEntry from './ListEntry'
 const StyledListEntry = styled(ListEntry)`
   font-family: Lato;
   font-size: 15px;
-  width: 100%;
+  font-weight: 700 !important;
   text-align: left;
+  width: 100%;
 `
 
 const MyAccordionButton = React.forwardRef(
@@ -24,7 +26,11 @@ const MyAccordionButton = React.forwardRef(
           leftIcons={leftIcons}
           primaryText={text}
           rightIcons={
-            panelIsOpen ? <ChevronDown size="21" /> : <ChevronLeft size="21" />
+            panelIsOpen ? (
+              <ChevronDown size="21" color={theme.orange} />
+            ) : (
+              <ChevronLeft size="21" color={theme.orange} />
+            )
           }
           ref={ref}
           {...props}

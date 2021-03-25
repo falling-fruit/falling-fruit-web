@@ -1,5 +1,5 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
-import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
+import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
 import CircleIcon from '../ui/CircleIcon'
@@ -12,8 +12,8 @@ import { Tag, TagList } from '../ui/Tag'
 const TwoIcons = [<Star size="16" key={1} />, <Star size="16" key={2} />]
 
 const LeftIcon = (
-  <CircleIcon backgroundColor={theme.secondaryText}>
-    <Map />
+  <CircleIcon backgroundColor={theme.transparentOrange}>
+    <Cog color={theme.orange} />
   </CircleIcon>
 )
 
