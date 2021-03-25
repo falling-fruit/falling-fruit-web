@@ -78,10 +78,10 @@ const Search = (props) => {
         icon={<SearchAlt2 />}
         placeholder="Search for a location..."
       />
-      <StyledComboboxPopover portal={false}>
-        <ComboboxList>
-          {status === 'OK' &&
-            data.map((suggestion) => {
+      {status === 'OK' && (
+        <StyledComboboxPopover portal={false}>
+          <ComboboxList>
+            {data.map((suggestion) => {
               const {
                 place_id,
                 description,
@@ -101,8 +101,9 @@ const Search = (props) => {
                 </ComboboxOption>
               )
             })}
-        </ComboboxList>
-      </StyledComboboxPopover>
+          </ComboboxList>
+        </StyledComboboxPopover>
+      )}
     </Combobox>
   )
 }

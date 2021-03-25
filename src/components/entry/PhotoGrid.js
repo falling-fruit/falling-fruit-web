@@ -6,11 +6,11 @@ const StyledPhotoGrid = styled.figure`
   margin: 0 auto;
   height: 184px;
   width: calc(100% - 20px);
-
   display: grid;
   grid-template-columns: 1fr 92px;
   grid-template-rows: 50% 50%;
   gap: 6.5px;
+
   grid-template-areas:
     'main-image extra-image'
     'main-image add-more';
@@ -31,6 +31,14 @@ const StyledPhotoGrid = styled.figure`
     object-fit: cover;
     border-radius: 4px;
   }
+
+  @media only screen and ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+    gap: 0;
+    img {
+      border-radius: 0;
+    }
+  }
 `
 
 const ImageUpload = styled.label`
@@ -44,6 +52,7 @@ const ImageUpload = styled.label`
   cursor: pointer;
   box-sizing: border-box;
   border-radius: 4px;
+
   border: 2px solid ${({ theme }) => theme.text};
   font-weight: 700;
 
@@ -54,6 +63,11 @@ const ImageUpload = styled.label`
   input {
     display: none;
   }
+
+  @media only screen and ${({ theme }) => theme.device.mobile} {
+    border-radius: 0;
+    border: none;
+  }
 `
 
 const ExtraImagesWrapper = styled.button`
@@ -63,6 +77,10 @@ const ExtraImagesWrapper = styled.button`
   border: none;
   position: relative;
   border-radius: 4px;
+  @media only screen and ${({ theme }) => theme.device.mobile} {
+    border-radius: 0;
+  }
+
   overflow: hidden;
 
   &:disabled {
