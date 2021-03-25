@@ -59,18 +59,19 @@ const theme = {
   },
   fonts: '"Lato", sans-serif',
   // text colors
-  text: '#9B9B9B',
-  secondaryText: '#5A5A5A',
+  text: '#9b9b9b',
+  secondaryText: '#5a5a5a',
   tertiaryText: '#979797',
+  headerText: '#333333',
   // background
-  background: '#FFFFFF',
-  secondaryBackground: '#E0E1E2',
+  background: '#ffffff',
+  secondaryBackground: '#e0e1e2',
   shadow: 'rgba(0, 0, 0, 0.12)',
   // palette
-  orange: '#FFA41B',
-  transparentOrange: '#FFEDD1',
-  blue: '#4183C4',
-  green: '#73CD7C',
+  orange: '#ffa41b',
+  transparentOrange: '#ffedd1',
+  blue: '#4183c4',
+  green: '#73cd7c',
 }
 
 export default GlobalStyle

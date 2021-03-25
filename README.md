@@ -52,7 +52,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
     <td align="center">
       <a href="https://linkedin.com/in/sirajchokshi">
         <img
-          src="https://uiuc.hack4impact.org/images/people/siraj_chokshi.jpg"
+          src="https://avatars.githubusercontent.com/u/19193347"
           width="500px"
         />
         <br />

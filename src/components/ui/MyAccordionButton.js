@@ -12,6 +12,8 @@ import ListEntry from './ListEntry'
 const StyledListEntry = styled(ListEntry)`
   font-family: Lato;
   font-size: 15px;
+  width: 100%;
+  text-align: left;
 `
 
 const MyAccordionButton = React.forwardRef(
@@ -42,6 +44,7 @@ const StyledAccordionButton = styled(MyAccordionButton)`
     padding: 5px 0px;
     background: white;
     border: none;
+    width: 100%;
   }
 `
 

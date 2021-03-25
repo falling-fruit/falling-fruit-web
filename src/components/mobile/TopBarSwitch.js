@@ -7,17 +7,19 @@ import TopBar from '../ui/TopBar'
 const TopBarSwitch = () => (
   <Switch>
     <Route path="/settings"></Route>
-    <Route>
+    <Route path="/entry">
       <TopBar>
+        <EntryNav />
+      </TopBar>
+    </Route>
+    <Route>
+      <TopBar rounded>
         <Switch>
           <Route path="/map">
             <Search />
           </Route>
           <Route path="/list">
             <Search />
-          </Route>
-          <Route path="/entry">
-            <EntryNav />
           </Route>
         </Switch>
       </TopBar>
