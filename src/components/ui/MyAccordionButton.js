@@ -1,7 +1,7 @@
 import '@reach/accordion/styles.css'
 
 import { AccordionButton } from '@reach/accordion'
-import { ChevronDown, ChevronLeft } from '@styled-icons/boxicons-regular'
+import { ChevronDown, ChevronRight } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -29,7 +29,7 @@ const MyAccordionButton = React.forwardRef(
             panelIsOpen ? (
               <ChevronDown size="21" color={theme.orange} />
             ) : (
-              <ChevronLeft size="21" color={theme.orange} />
+              <ChevronRight size="21" color={theme.orange} />
             )
           }
           ref={ref}
