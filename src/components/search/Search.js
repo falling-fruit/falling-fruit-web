@@ -22,7 +22,6 @@ const BOUND = 0.001
 
 const getViewportBounds = async (placeId) => {
   const results = await getGeocode({ placeId })
-  console.log(`{results}`)
   const {
     geometry: { viewport },
   } = results[0]
@@ -67,22 +66,17 @@ const Search = (props) => {
     description: 'Current Location',
     structured_formatting: {
       main_text: 'Current Location',
-      secondary_text: `${currLocation.name}`,
+      secondary_text: `${currLocation ? currLocation.name : ''}`,
     },
   }
 
-  const fullData = [currentLocation, ...data]
-
   const handleSelect = async (description) => {
     if (description === 'Current Location') {
-      console.log(currLocation.coords)
-
       const { lat, lng } = currLocation.coords
       const viewportBounds = {
         ne: { lat: lat + BOUND, lng: lng + BOUND },
         sw: { lat: lat - BOUND, lng: lng - BOUND },
       }
-      console.log(viewportBounds)
       setViewport(viewportBounds)
     }
     // put a fixed viewport around the lat and long of the current location
@@ -90,7 +84,6 @@ const Search = (props) => {
     const viewportBounds = await getViewportBounds(
       descriptionToPlaceId.current[description],
     )
-    console.log(viewportBounds)
     setViewport(viewportBounds)
   }
 
@@ -98,6 +91,7 @@ const Search = (props) => {
     <Combobox
       onSelect={handleSelect}
       aria-label="Search for a location"
+      openOnFocus
       {...props}
     >
       <ComboboxInput
@@ -109,9 +103,24 @@ const Search = (props) => {
         placeholder="Search for a location..."
       />
       <StyledComboboxPopover portal={false}>
+        <ComboboxList></ComboboxList>
         <ComboboxList>
+          {console.log(`${`val is  ${value}`}   ${value === ''}`)}
+          {value === '' && (
+            <ComboboxOption
+              as={SearchEntry}
+              key={1}
+              value={currentLocation.description}
+              isCurrent={currentLocation.place_id === null}
+            >
+              {[
+                currentLocation.structured_formatting.main_text,
+                currentLocation.structured_formatting.secondary_text,
+              ]}
+            </ComboboxOption>
+          )}
           {status === 'OK' &&
-            fullData.map((suggestion) => {
+            data.map((suggestion) => {
               const {
                 place_id,
                 description,
