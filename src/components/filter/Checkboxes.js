@@ -1,14 +1,24 @@
 import React, { useContext } from 'react'
+import styled from 'styled-components/macro'
 
 import SearchContext from '../search/SearchContext'
 import Checkbox from '../ui/Checkbox'
+
+const StyledLabel = styled.label`
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+`
 
 const Checkboxes = ({ handleCheckboxChange }) => {
   const { filters } = useContext(SearchContext)
   const { muni, invasive } = filters
   return (
     <form>
-      <label htmlFor="muni" style={{ display: 'flex', alignItems: 'center' }}>
+      <StyledLabel htmlFor="muni">
         <Checkbox
           id="muni"
           checked={muni}
@@ -16,12 +26,8 @@ const Checkboxes = ({ handleCheckboxChange }) => {
           onChange={handleCheckboxChange}
         />
         Municipal Tree Inventories
-      </label>
-      <br />
-      <label
-        htmlFor="invasive"
-        style={{ display: 'flex', alignItems: 'center' }}
-      >
+      </StyledLabel>
+      <StyledLabel htmlFor="invasive">
         <Checkbox
           id="invasive"
           checked={invasive}
@@ -29,7 +35,7 @@ const Checkboxes = ({ handleCheckboxChange }) => {
           onChange={handleCheckboxChange}
         />
         Invasive Species Only
-      </label>
+      </StyledLabel>
     </form>
   )
 }
