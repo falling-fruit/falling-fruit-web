@@ -41,6 +41,7 @@ const TreeSelectContainer = styled.div`
     font-family: ${({ theme }) => theme.fonts};
   }
 
+  // TODO: this breaks the infinite scroll of react-dropdown-tree-select
   .infinite-scroll-component {
     height: 100% !important;
     @media ${({ theme }) => theme.device.desktop} {

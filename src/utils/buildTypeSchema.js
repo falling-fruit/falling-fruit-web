@@ -1,6 +1,6 @@
 const listToTree = (types) => {
   const typeMap = {}
-  typeMap[null] = { id: null, children: [] }
+  typeMap[null] = { name: 'All', id: null, children: [] }
 
   for (const type of types) {
     typeMap[type.id] = type
@@ -86,7 +86,7 @@ const buildTypeSchema = (types, checkedTypes) => {
   replaceRootCounts(tree)
   addTreeSelectFields(tree, checkedTypes)
 
-  return tree.children
+  return tree
 }
 
 const addTypes = (types, node) => {
