@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import buildTypeSchema from '../../utils/buildTypeSchema'
 import { getTypesMock } from '../../utils/getTypesMock'
-import { buildTreeSelectData } from '../../utils/typeTree'
 import MapContext from '../map/MapContext'
 import SearchContext from '../search/SearchContext'
 import CheckboxFilters from './CheckboxFilters'
@@ -13,7 +13,7 @@ const addTypes = (types, node) => {
     types.push(node.value)
   }
 
-  for (const child of node.children2) {
+  for (const child of node.childrenCopy) {
     addTypes(types, child)
   }
 }
@@ -77,7 +77,7 @@ const Filter = ({ isOpen }) => {
           types: typeIds,
         }))
         // Build the tree select data
-        const treeSelectData = buildTreeSelectData(types, filters.types)
+        const treeSelectData = buildTypeSchema(types, filters.types)
         setTreeData(treeSelectData)
       }
     }
