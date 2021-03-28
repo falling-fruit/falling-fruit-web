@@ -5,8 +5,23 @@ import { getTypesMock } from '../../utils/getTypesMock'
 import { buildTreeSelectData, getTypeObjectFromId } from '../../utils/typeTree'
 import MapContext from '../map/MapContext'
 import SearchContext from '../search/SearchContext'
-import Checkboxes from './Checkboxes'
+import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
+
+/**
+ * Helper function to add or remove a given type ID from an array of type Ids
+ * @param {number[]} types - The current type IDs to filter on
+ * @param {number} id - The selected type ID to add or remove from types
+ * @param {boolean} checked - Whether the type ID should be added or removed
+ */
+const updateTypes = (types, id, checked) => {
+  const index = types.indexOf(id)
+  if (checked && index === -1) {
+    types.push(id)
+  } else if (!checked) {
+    types.splice(index, 1)
+  }
+}
 
 const StyledFilter = styled.div`
   @media ${({ theme }) => theme.device.desktop} {
@@ -17,31 +32,13 @@ const StyledFilter = styled.div`
   }
 `
 
-const Filter = ({
-  isOpen,
-  treeSelectData,
-  setTreeSelectData,
-  setFilterCount,
-}) => {
+const Filter = ({ isOpen, treeSelectData, setTreeSelectData }) => {
   const { view } = useContext(MapContext)
   const { filters, setFilters } = useContext(SearchContext)
 
-  /**
-   * Helper function to add or remove a given type ID from an array of type Ids
-   * @param {number[]} types - The current type IDs to filter on
-   * @param {number} id - The selected type ID to add or remove from types
-   * @param {boolean} checked - Whether the type ID should be added or removed
-   */
-  const updateTypes = (types, id, checked) => {
-    const index = types.indexOf(id)
-    if (checked && index === -1) {
-      types.push(id)
-    } else if (!checked) {
-      types.splice(index, 1)
-    }
-  }
+  const handleTypeFilterChange = (currentNode) => {
+    console.log(currentNode, currentNode.checked)
 
-  const handleTypeFilterChange = (currentNode, selectedNodes) => {
     const currentId = currentNode.value
     let types = [...filters.types]
     let currentTypeObject = null
@@ -52,7 +49,7 @@ const Filter = ({
       }
     }
 
-    if (currentTypeObject.children.length !== 0) {
+    if (currentTypeObject.children.length > 0) {
       currentTypeObject.children.forEach((child) => {
         const childId = child.value
         updateTypes(types, childId, currentNode.checked)
@@ -62,21 +59,10 @@ const Filter = ({
     }
 
     setFilters((prevFilters) => ({ ...prevFilters, types }))
-    setFilterCount(getFilterCount(selectedNodes))
+    // setFilterCount(getFilterCount(selectedNodes))
   }
 
-  const handleCheckboxChange = (event) => {
-    event.target.name === 'municipal'
-      ? setFilters((prevFilters) => ({
-          ...prevFilters,
-          muni: !prevFilters.muni,
-        }))
-      : setFilters((prevFilters) => ({
-          ...prevFilters,
-          invasive: !prevFilters.invasive,
-        }))
-  }
-
+  /*
   const getFilterCount = (selectedNodes) => {
     let countTotal = 0
     selectedNodes.forEach((node) => {
@@ -88,6 +74,7 @@ const Filter = ({
     })
     return countTotal > 99 ? '99+' : countTotal.toString()
   }
+  */
 
   useEffect(() => {
     const fetchTypesAndBuildTreeSelectData = async () => {
@@ -130,7 +117,7 @@ const Filter = ({
           handleTypeFilterChange={handleTypeFilterChange}
           treeSelectData={treeSelectData}
         />
-        <Checkboxes handleCheckboxChange={handleCheckboxChange} />
+        <CheckboxFilters values={filters} onChange={setFilters} />
       </StyledFilter>
     )
   )

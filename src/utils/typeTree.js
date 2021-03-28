@@ -21,8 +21,9 @@ export const getTypeObjectFromId = (currentNode, targetId) => {
  * @param {Object[]} types - Array of type objects
  */
 export const buildTreeSelectData = (types, filterTypes) => {
-  let typeMapping = new Map()
-  let typeCounts = new Map()
+  const typeMapping = new Map()
+  const typeCounts = new Map()
+
   types.forEach((type) => {
     const typeObject = {
       label: `${type.name} (${type.count})`,
