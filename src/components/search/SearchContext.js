@@ -8,7 +8,7 @@ import { createContext } from 'react'
  * @property {number[]} types - Array of type IDs to filter on
  */
 const DEFAULT_FILTERS = {
-  muni: false,
+  muni: true,
   invasive: false,
   types: [],
 }

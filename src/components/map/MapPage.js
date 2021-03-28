@@ -89,11 +89,6 @@ const MapPage = () => {
     fetchClusterAndLocationData()
   }, [view, filters])
 
-  const handleViewChange = (view) => {
-    console.log('handleViewChange', view)
-    setView(view)
-  }
-
   const handleLocationClick = (location) => {
     history.push({
       pathname: `/entry/${location.id}`,
@@ -116,7 +111,7 @@ const MapPage = () => {
         view={view}
         locations={locations}
         clusters={clusters}
-        onViewChange={handleViewChange}
+        onViewChange={setView}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
       />

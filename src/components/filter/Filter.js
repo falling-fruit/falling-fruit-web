@@ -1,22 +1,13 @@
+import { intersection } from 'lodash'
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
-import buildTypeSchema from '../../utils/buildTypeSchema'
-import { getTypesMock } from '../../utils/getTypesMock'
+import { getTypes } from '../../utils/api'
+import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
 import MapContext from '../map/MapContext'
 import SearchContext from '../search/SearchContext'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
-
-const addTypes = (types, node) => {
-  if (typeof node.value === 'number') {
-    types.push(node.value)
-  }
-
-  for (const child of node.childrenCopy) {
-    addTypes(types, child)
-  }
-}
 
 const StyledFilter = styled.div`
   @media ${({ theme }) => theme.device.desktop} {
@@ -33,28 +24,11 @@ const Filter = ({ isOpen }) => {
   const [treeData, setTreeData] = useState([])
 
   const handleTreeChange = (currentNode, selectedNodes) => {
-    const selectedTypes = []
-    for (const node of selectedNodes) {
-      addTypes(selectedTypes, node)
-    }
-
-    setFilters((prevFilters) => ({ ...prevFilters, types: selectedTypes }))
-    // setFilterCount(getFilterCount(selectedNodes))
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      types: getSelectedTypes(selectedNodes),
+    }))
   }
-
-  /*
-  const getFilterCount = (selectedNodes) => {
-    let countTotal = 0
-    selectedNodes.forEach((node) => {
-      const count = node.label.slice(
-        node.label.indexOf('(') + 1,
-        node.label.length - 1,
-      )
-      countTotal += parseInt(count)
-    })
-    return countTotal > 99 ? '99+' : countTotal.toString()
-  }
-  */
 
   useEffect(() => {
     const updateTypesTree = async () => {
@@ -66,25 +40,33 @@ const Filter = ({ isOpen }) => {
           nelng: bounds.ne.lng,
           swlat: bounds.sw.lat,
           nelat: bounds.ne.lat,
-          zoom: zoom,
+          zoom: Math.min(zoom, 12),
           muni: filters.muni,
         }
-        const types = await getTypesMock(query)
-        // Keep type ids that still exist
-        const typeIds = types.map((type) => type.id)
+        const types = await getTypes(query)
+        console.log(types)
+
+        // Keep only types that still exist in the current view
+        const newTypes = types.map((type) => type.id)
         setFilters((prevFilters) => ({
           ...prevFilters,
-          types: typeIds,
+          types:
+            prevFilters.types === null
+              ? newTypes
+              : intersection(prevFilters.types, newTypes),
         }))
-        // Build the tree select data
-        const treeSelectData = buildTypeSchema(types, filters.types)
-        setTreeData(treeSelectData)
+
+        setTreeData(buildTypeSchema(types, filters.types))
       }
     }
 
-    updateTypesTree()
+    if (isOpen) {
+      updateTypesTree()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [view])
+  }, [view, isOpen])
+
+  console.log(filters.types)
 
   return (
     isOpen && (

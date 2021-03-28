@@ -1,4 +1,4 @@
-export const getTypesMock = () => [
+export const getTypes = () => [
   {
     id: 377,
     scientific_name: 'Acacia',
