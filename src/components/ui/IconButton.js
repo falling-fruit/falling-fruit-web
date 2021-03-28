@@ -40,7 +40,7 @@ const StyledIconButton = styled.button`
   }
 `
 
-const FilterCount = styled.div`
+const Subscript = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,7 +63,7 @@ const IconButton = ({
   onClick,
   label,
   pressed,
-  filterCount,
+  subscript,
 }) => (
   <StyledIconButton
     aria-label={label}
@@ -73,7 +73,7 @@ const IconButton = ({
     pressed={pressed}
   >
     {icon}
-    {filterCount && <FilterCount>{filterCount}</FilterCount>}
+    {subscript && <Subscript>{subscript}</Subscript>}
   </StyledIconButton>
 )
 

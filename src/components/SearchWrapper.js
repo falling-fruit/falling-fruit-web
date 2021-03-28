@@ -1,11 +1,9 @@
-import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-solid'
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 
 import Filter from './filter/Filter'
+import FilterIconButton from './filter/FilterIconButton'
 import Search from './search/Search'
-import { theme } from './ui/GlobalStyle'
-import IconButton from './ui/IconButton'
 
 const SearchBarContainer = styled.div`
   display: flex;
@@ -14,35 +12,19 @@ const SearchBarContainer = styled.div`
 `
 
 const SearchWrapper = () => {
-  const [filterPressed, setFilterPressed] = useState(false)
-  const [filterCount, setFilterCount] = useState(null)
+  const [filterOpen, setFilterOpen] = useState(false)
 
   return (
     <>
       <SearchBarContainer>
         <Search
-          filterPressed={filterPressed}
-          setFilterPressed={setFilterPressed}
-          filterButton={
-            <IconButton
-              size={45}
-              raised={false}
-              pressed={filterPressed}
-              icon={
-                <FilterIcon
-                  color={filterPressed ? theme.orange : theme.secondaryText}
-                />
-              }
-              onClick={() =>
-                setFilterPressed((filterPressed) => !filterPressed)
-              }
-              label="filter-button"
-              filterCount={filterCount}
-            />
+          onType={() => setFilterOpen(false)}
+          sideButton={
+            <FilterIconButton pressed={filterOpen} setPressed={setFilterOpen} />
           }
         />
       </SearchBarContainer>
-      <Filter isOpen={filterPressed} setFilterCount={setFilterCount} />
+      <Filter isOpen={filterOpen} />
     </>
   )
 }

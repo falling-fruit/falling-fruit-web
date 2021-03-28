@@ -44,7 +44,6 @@ const Filter = ({ isOpen }) => {
           muni: filters.muni,
         }
         const types = await getTypes(query)
-        console.log(types)
 
         // Keep only types that still exist in the current view
         const newTypes = types.map((type) => type.id)
@@ -65,8 +64,6 @@ const Filter = ({ isOpen }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, isOpen])
-
-  console.log(filters.types)
 
   return (
     isOpen && (

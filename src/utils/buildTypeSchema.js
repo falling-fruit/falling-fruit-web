@@ -8,15 +8,12 @@ const listToTree = (types) => {
   }
 
   for (const type of types) {
-    try {
-      typeMap[type.parent_id].children.push(type)
-    } catch (e) {
-      // TODO: some parents types aren't included in API response,
-      // presumably because the parent types don't have counts in the view
-    }
+    // Some parents types aren't included in API response, presumably because
+    // the parent types don't have counts in the view
+    // TODO: Should the parent types be included in the hierarchy?
+    const parent_id = type.parent_id in typeMap ? type.parent_id : null
+    typeMap[parent_id].children.push(type)
   }
-
-  console.log(typeMap)
 
   return typeMap[null] // sentinel root
 }
@@ -70,7 +67,7 @@ const addTreeSelectFields = (root, checkedTypes) => {
   // This value isn't important, as long as it's unique, because we will be using node.id
   root.value = `${root.name}-${root.id}`
   root.expanded = true
-  root.checked = checkedTypes.includes(root.id)
+  root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.id)
   // Copy children for onChange to access, because TreeSelect resets children to undefined
   root.childrenCopy = root.children
   // Rename to typeId to prevent weird issues

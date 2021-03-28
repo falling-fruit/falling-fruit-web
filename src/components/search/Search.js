@@ -59,7 +59,7 @@ const SearchBarContainer = styled.div`
   }
 `
 
-const Search = ({ filterPressed, setFilterPressed, filterButton }) => {
+const Search = ({ onType, sideButton }) => {
   const { setViewport } = useContext(SearchContext)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
@@ -74,9 +74,7 @@ const Search = ({ filterPressed, setFilterPressed, filterButton }) => {
   } = usePlacesAutocomplete()
 
   const handleInput = (e) => {
-    if (filterPressed) {
-      setFilterPressed(false)
-    }
+    onType()
     setValue(e.target.value)
   }
 
@@ -103,7 +101,7 @@ const Search = ({ filterPressed, setFilterPressed, filterButton }) => {
           icon={<SearchAlt2 />}
           placeholder="Search for a location..."
         />
-        {filterButton}
+        {sideButton}
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
@@ -119,15 +117,13 @@ const Search = ({ filterPressed, setFilterPressed, filterButton }) => {
               descriptionToPlaceId.current[description] = place_id
 
               return (
-                !filterPressed && (
-                  <ComboboxOption
-                    as={SearchEntry}
-                    key={place_id}
-                    value={description}
-                  >
-                    {[main_text, secondary_text]}
-                  </ComboboxOption>
-                )
+                <ComboboxOption
+                  as={SearchEntry}
+                  key={place_id}
+                  value={description}
+                >
+                  {[main_text, secondary_text]}
+                </ComboboxOption>
               )
             })}
         </ComboboxList>
