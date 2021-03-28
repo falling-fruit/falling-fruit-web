@@ -51,8 +51,8 @@ const ListEntry = React.forwardRef(
     <ListContainer ref={ref} {...props}>
       <Icons>{leftIcons}</Icons>
       <TextContainer>
-        <PrimaryText>{primaryText}</PrimaryText>
-        <SecondaryText>{secondaryText}</SecondaryText>
+        <PrimaryText className="primaryText">{primaryText}</PrimaryText>
+        <SecondaryText className="secondaryText">{secondaryText}</SecondaryText>
       </TextContainer>
       <Icons>{rightIcons}</Icons>
     </ListContainer>
