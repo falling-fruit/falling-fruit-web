@@ -15,6 +15,7 @@ const CHECKBOX_FIELDS = [
 ]
 
 const StyledLabel = styled.label`
+  cursor: pointer;
   display: flex;
   align-items: center;
 

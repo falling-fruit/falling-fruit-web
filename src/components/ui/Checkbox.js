@@ -11,6 +11,9 @@ const StyledCheck = styled(Check)`
 `
 
 const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
+  input {
+    cursor: pointer;
+  }
   border: 3px solid ${({ theme }) => theme.orange};
   border-radius: 4px;
   background: ${({ checked, theme }) =>
