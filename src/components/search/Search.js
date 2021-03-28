@@ -116,7 +116,6 @@ const Search = (props) => {
       />
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
-          {console.log(`${`val is  ${value}`}   ${value === ''}`)}
           {!isDesktop && value === '' && (
             <ComboboxOption
               as={SearchEntry}

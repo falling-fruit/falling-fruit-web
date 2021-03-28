@@ -6,18 +6,19 @@ import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 
 const DesktopSearch = () => {
-  console.log('hi')
-
   const LocationButton = styled.button`
+    width: 48px;
     background: none;
     color: inherit;
     border: none;
-    border-right: 1px solid;
-    border-color: #e0e1e2;
-    padding: 10px;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
+    border-radius: 50% 0 0 50%;
+    border-right: 1px solid #e0e1e2;
+    padding: 10px 0;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px rgb(0, 95, 204);
+      box-shadow: 0 0 0 1px -webkit-focus-ring-color;
+    }
   `
 
   const DesktopInput = styled.div`
@@ -27,24 +28,20 @@ const DesktopSearch = () => {
     box-sizing: border-box;
 
     &:focus-within {
-      box-shadow: 0 0 0 1pt rgb(0, 95, 204);
-      box-shadow: 0 0 0 1pt -webkit-focus-ring-color;
-    }
-
-    svg {
-      height: 28px;
-      width: auto;
-      pointer-events: none;
+      border: solid 1px rgb(0, 95, 204);
+      border-color: -webkit-focus-ring-color;
     }
   `
 
   const StyledInput = styled(Input)`
+    width: 100%;
     margin-left: 10px;
 
     & > div {
       border: none;
+      padding-left: 0;
     }
-    &:focus-within {
+    &:focus-within > div {
       box-shadow: none;
     }
   `
