@@ -1,19 +1,12 @@
 import { fitBounds } from 'google-map-react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components/macro'
 
 import { getClusters, getLocations } from '../../utils/api'
 import SearchContext from '../search/SearchContext'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import Map from './Map'
 import MapContext from './MapContext'
-
-const LoadingText = styled.p`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -104,8 +97,11 @@ const MapPage = () => {
   }
 
   return (
-    <div style={{ width: '100%', height: '100%' }} ref={container}>
-      {isLoading && <LoadingText>Loading...</LoadingText>}
+    <div
+      style={{ width: '100%', height: '100%', position: 'relative' }}
+      ref={container}
+    >
+      {isLoading && <LoadingIndicator />}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}

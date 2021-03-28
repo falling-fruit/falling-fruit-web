@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import IconButton from '../ui/IconButton'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import { Tag, TagList } from '../ui/Tag'
 import PhotoGrid from './PhotoGrid'
 import ResourceList from './ResourceList'
@@ -43,6 +44,7 @@ const Page = styled.div`
     padding-top: 10px;
   }
   overflow: auto;
+  width: 100%;
 `
 
 const TextContent = styled.article`
@@ -68,7 +70,6 @@ const TextContent = styled.article`
 
   h3 {
     color: ${({ theme }) => theme.headerText};
-    // TODO: siraj - add this to theme?
   }
 
   a {
@@ -178,7 +179,7 @@ const EntryDetails = ({ isDesktop }) => {
     </Page>
   ) : (
     <Page>
-      <p>Loading...</p>
+      <LoadingIndicator vertical cover />
     </Page>
   )
 }
