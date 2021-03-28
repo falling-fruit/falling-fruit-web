@@ -14,13 +14,18 @@ const CHECKBOX_FIELDS = [
   },
 ]
 
-const Field = styled.label`
-  display: block;
+const StyledLabel = styled.label`
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
 `
 
 const CheckboxFilters = ({ values, onChange }) =>
   CHECKBOX_FIELDS.map(({ field, label }) => (
-    <Field key={field} htmlFor={field}>
+    <StyledLabel key={field} htmlFor={field}>
       <Checkbox
         id={field}
         checked={values[field]}
@@ -33,7 +38,7 @@ const CheckboxFilters = ({ values, onChange }) =>
         }
       />
       {label}
-    </Field>
+    </StyledLabel>
   ))
 
 export default CheckboxFilters
