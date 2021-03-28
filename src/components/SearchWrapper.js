@@ -15,7 +15,6 @@ const SearchBarContainer = styled.div`
 
 const SearchWrapper = () => {
   const [filterPressed, setFilterPressed] = useState(false)
-  const [treeSelectData, setTreeSelectData] = useState([])
   const [filterCount, setFilterCount] = useState(null)
 
   return (
@@ -43,12 +42,7 @@ const SearchWrapper = () => {
           }
         />
       </SearchBarContainer>
-      <Filter
-        isOpen={filterPressed}
-        treeSelectData={treeSelectData}
-        setTreeSelectData={setTreeSelectData}
-        setFilterCount={setFilterCount}
-      />
+      <Filter isOpen={filterPressed} setFilterCount={setFilterCount} />
     </>
   )
 }

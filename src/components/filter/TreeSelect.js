@@ -71,16 +71,17 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ handleTypeFilterChange, treeSelectData }) => (
+const TreeSelect = ({ data, onChange, ...props }) => (
   <TreeSelectContainer>
     <NonrenderTreeSelect
-      data={treeSelectData}
+      data={data}
+      onChange={onChange}
       texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
       showDropdown="always"
       showPartiallySelected
       keepTreeOnSearch
       inlineSearchInput
-      onChange={handleTypeFilterChange}
+      {...props}
     />
   </TreeSelectContainer>
 )

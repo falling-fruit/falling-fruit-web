@@ -1,25 +1,20 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypesMock } from '../../utils/getTypesMock'
-import { buildTreeSelectData, getTypeObjectFromId } from '../../utils/typeTree'
+import { buildTreeSelectData } from '../../utils/typeTree'
 import MapContext from '../map/MapContext'
 import SearchContext from '../search/SearchContext'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
 
-/**
- * Helper function to add or remove a given type ID from an array of type Ids
- * @param {number[]} types - The current type IDs to filter on
- * @param {number} id - The selected type ID to add or remove from types
- * @param {boolean} checked - Whether the type ID should be added or removed
- */
-const updateTypes = (types, id, checked) => {
-  const index = types.indexOf(id)
-  if (checked && index === -1) {
-    types.push(id)
-  } else if (!checked) {
-    types.splice(index, 1)
+const addTypes = (types, node) => {
+  if (typeof node.value === 'number') {
+    types.push(node.value)
+  }
+
+  for (const child of node.children2) {
+    addTypes(types, child)
   }
 }
 
@@ -32,33 +27,18 @@ const StyledFilter = styled.div`
   }
 `
 
-const Filter = ({ isOpen, treeSelectData, setTreeSelectData }) => {
+const Filter = ({ isOpen }) => {
   const { view } = useContext(MapContext)
   const { filters, setFilters } = useContext(SearchContext)
+  const [treeData, setTreeData] = useState([])
 
-  const handleTypeFilterChange = (currentNode) => {
-    console.log(currentNode, currentNode.checked)
-
-    const currentId = currentNode.value
-    let types = [...filters.types]
-    let currentTypeObject = null
-    for (const root of treeSelectData) {
-      currentTypeObject = getTypeObjectFromId(root, currentId)
-      if (currentTypeObject) {
-        break
-      }
+  const handleTreeChange = (currentNode, selectedNodes) => {
+    const selectedTypes = []
+    for (const node of selectedNodes) {
+      addTypes(selectedTypes, node)
     }
 
-    if (currentTypeObject.children.length > 0) {
-      currentTypeObject.children.forEach((child) => {
-        const childId = child.value
-        updateTypes(types, childId, currentNode.checked)
-      })
-    } else {
-      updateTypes(types, currentId, currentNode.checked)
-    }
-
-    setFilters((prevFilters) => ({ ...prevFilters, types }))
+    setFilters((prevFilters) => ({ ...prevFilters, types: selectedTypes }))
     // setFilterCount(getFilterCount(selectedNodes))
   }
 
@@ -77,7 +57,7 @@ const Filter = ({ isOpen, treeSelectData, setTreeSelectData }) => {
   */
 
   useEffect(() => {
-    const fetchTypesAndBuildTreeSelectData = async () => {
+    const updateTypesTree = async () => {
       const { zoom, bounds } = view
 
       if (bounds) {
@@ -90,7 +70,7 @@ const Filter = ({ isOpen, treeSelectData, setTreeSelectData }) => {
           muni: filters.muni,
         }
         const types = await getTypesMock(query)
-        // Set initial filter type IDs to all returned types
+        // Keep type ids that still exist
         const typeIds = types.map((type) => type.id)
         setFilters((prevFilters) => ({
           ...prevFilters,
@@ -98,25 +78,19 @@ const Filter = ({ isOpen, treeSelectData, setTreeSelectData }) => {
         }))
         // Build the tree select data
         const treeSelectData = buildTreeSelectData(types, filters.types)
-        console.log(treeSelectData)
-        setTreeSelectData(treeSelectData)
+        setTreeData(treeSelectData)
       }
     }
 
-    fetchTypesAndBuildTreeSelectData()
+    updateTypesTree()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view])
-
-  console.log('rerender', filters)
 
   return (
     isOpen && (
       <StyledFilter>
         <p>Edible Type</p>
-        <TreeSelect
-          handleTypeFilterChange={handleTypeFilterChange}
-          treeSelectData={treeSelectData}
-        />
+        <TreeSelect data={treeData} onChange={handleTreeChange} />
         <CheckboxFilters values={filters} onChange={setFilters} />
       </StyledFilter>
     )

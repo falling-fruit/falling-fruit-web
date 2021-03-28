@@ -6,7 +6,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 const StyledCheck = styled(Check)`
-  display: ${({ checked }) => (checked ? 'block' : 'none')};
+  display: ${({ $checked }) => ($checked ? 'block' : 'none')};
   color: white;
 `
 
@@ -17,10 +17,14 @@ const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
     checked ? theme.orange : theme.transparentOrange};
 `
 
-const Checkbox = ({ checked, name, onChange, id }) => (
-  <StyledCustomCheckboxContainer checked={checked} onChange={onChange}>
+const Checkbox = ({ checked, name, onChange, id, ...props }) => (
+  <StyledCustomCheckboxContainer
+    checked={checked}
+    onChange={onChange}
+    {...props}
+  >
     <CustomCheckboxInput id={id} name={name} />
-    <StyledCheck checked={checked} />
+    <StyledCheck $checked={checked} />
   </StyledCustomCheckboxContainer>
 )
 
