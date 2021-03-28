@@ -81,6 +81,7 @@ const TreeSelect = ({ data, onChange, ...props }) => (
       showDropdown="always"
       showPartiallySelected
       keepTreeOnSearch
+      keepChildrenOnSearch
       inlineSearchInput
       {...props}
     />

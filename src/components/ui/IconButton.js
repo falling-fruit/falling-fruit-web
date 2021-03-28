@@ -3,6 +3,7 @@ import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 const StyledIconButton = styled.button`
+  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
