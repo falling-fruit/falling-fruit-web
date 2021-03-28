@@ -1,6 +1,7 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Flag, Star } from '@styled-icons/boxicons-solid'
 
+import DesktopSearch from '../search/DesktopSearch'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
@@ -48,6 +49,7 @@ const SettingsPage = () => (
       size={57}
     />
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
+    <DesktopSearch />
   </>
 )
 

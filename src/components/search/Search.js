@@ -8,11 +8,12 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import useGeolocation from '../../utils/useGeolocation'
 import Input from '../ui/Input'
 import SearchContext from './SearchContext'
@@ -43,6 +44,7 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
 
 const Search = (props) => {
   const { setViewport } = useContext(SearchContext)
+  const isDesktop = useIsDesktop()
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
   // So we will keep a map of the value to the place id, which handleSelect also needs
@@ -87,6 +89,15 @@ const Search = (props) => {
     setViewport(viewportBounds)
   }
 
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (value === '') {
+      inputRef.current.blur()
+      inputRef.current.focus()
+    }
+  }, [value])
+
   return (
     <Combobox
       onSelect={handleSelect}
@@ -98,15 +109,15 @@ const Search = (props) => {
         as={Input}
         value={value}
         onChange={handleInput}
+        ref={inputRef}
         disabled={!ready}
         icon={<SearchAlt2 />}
         placeholder="Search for a location..."
       />
       <StyledComboboxPopover portal={false}>
-        <ComboboxList></ComboboxList>
         <ComboboxList>
           {console.log(`${`val is  ${value}`}   ${value === ''}`)}
-          {value === '' && (
+          {!isDesktop && value === '' && (
             <ComboboxOption
               as={SearchEntry}
               key={1}
