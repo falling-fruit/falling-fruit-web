@@ -1,13 +1,17 @@
 import '@reach/checkbox/styles.css'
 
 import { CustomCheckboxContainer, CustomCheckboxInput } from '@reach/checkbox'
-import { Check } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components/macro'
 
-const StyledCheck = styled(Check)`
-  display: ${({ $checked }) => ($checked ? 'block' : 'none')};
-  color: white;
+const StyledCheckmark = styled.div`
+  display: ${({ $checked }) => !$checked && 'none'};
+  height: 100%;
+  width: 100%;
+  background: url('/checkmark/checkmark.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 `
 
 const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
@@ -37,7 +41,7 @@ const Checkbox = ({ checked, name, onChange, id, ...props }) => (
     {...props}
   >
     <CustomCheckboxInput id={id} name={name} />
-    {checked === 'mixed' ? <span /> : <StyledCheck $checked={checked} />}
+    {checked === 'mixed' ? <span /> : <StyledCheckmark $checked={checked} />}
   </StyledCustomCheckboxContainer>
 )
 
