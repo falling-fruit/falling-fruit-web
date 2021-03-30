@@ -63,8 +63,47 @@ const TreeSelectContainer = styled.div`
     }
   }
 
+  label {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-item {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+  }
+
+  .checkbox-item:before {
+    cursor: pointer;
+    border: 3px solid ${({ theme }) => theme.orange};
+    border-radius: 4px;
+    content: '';
+    background: ${({ theme }) => theme.transparentOrange};
+    display: flex;
+    width: 15px;
+    height: 15px;
+  }
+
+  .checkbox-item:checked:before {
+    background: url('/checkmark/checkmark.svg');
+    background-color: ${({ theme }) => theme.orange};
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .checkbox-item:indeterminate:before {
+    background: url('/checkmark/mixed_checkmark.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
   ul {
     height: 100%;
+    font-weight: 700;
   }
 
   ul > div {
