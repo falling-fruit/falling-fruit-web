@@ -16,6 +16,19 @@ const StyledFilter = styled.div`
     border-bottom-right-radius: 30px;
     padding: 0 10px 16px 10px;
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .edible-type-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.secondaryText};
+    margin-top: 18px;
+    margin-bottom: 7px;
+  }
 `
 
 const Filter = ({ isOpen }) => {
@@ -68,9 +81,13 @@ const Filter = ({ isOpen }) => {
   return (
     isOpen && (
       <StyledFilter>
-        <p>Edible Type</p>
-        <TreeSelect data={treeData} onChange={handleTreeChange} />
-        <CheckboxFilters values={filters} onChange={setFilters} />
+        <div>
+          <p className="edible-type-text">Edible Type</p>
+          <TreeSelect data={treeData} onChange={handleTreeChange} />
+        </div>
+        <div>
+          <CheckboxFilters values={filters} onChange={setFilters} />
+        </div>
       </StyledFilter>
     )
   )

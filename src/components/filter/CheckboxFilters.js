@@ -18,9 +18,16 @@ const StyledLabel = styled.label`
   cursor: pointer;
   display: flex;
   align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.secondaryText};
 
   &:not(:last-child) {
     margin-bottom: 8px;
+
+    @media ${({ theme }) => theme.device.mobile} {
+      margin-top: 15px;
+    }
   }
 `
 
