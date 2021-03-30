@@ -14,10 +14,21 @@ const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
   input {
     cursor: pointer;
   }
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 3px solid ${({ theme }) => theme.orange};
   border-radius: 4px;
   background: ${({ checked, theme }) =>
-    checked ? theme.orange : theme.transparentOrange};
+    checked && checked !== 'mixed' ? theme.orange : theme.transparentOrange};
+
+  & > span {
+    width: 60%;
+    height: 60%;
+    z-index: 1;
+    background: ${({ theme }) => theme.orange};
+    border-radius: 1px;
+  }
 `
 
 const Checkbox = ({ checked, name, onChange, id, ...props }) => (
@@ -27,7 +38,7 @@ const Checkbox = ({ checked, name, onChange, id, ...props }) => (
     {...props}
   >
     <CustomCheckboxInput id={id} name={name} />
-    <StyledCheck $checked={checked} />
+    {checked === 'mixed' ? <span /> : <StyledCheck $checked={checked} />}
   </StyledCustomCheckboxContainer>
 )
 
