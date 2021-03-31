@@ -1,4 +1,3 @@
-import { Accordion, AccordionItem, AccordionPanel } from '@reach/accordion'
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 
@@ -7,7 +6,12 @@ import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
-import SettingsAccordionButton from '../ui/SettingsAccordionButton'
+import {
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
+  SettingsAccordion,
+} from '../ui/SettingsAccordion'
 import { Tag, TagList } from '../ui/Tag'
 
 const TwoIcons = [<Star size="16" key={1} />, <Star size="16" key={2} />]
@@ -58,20 +62,16 @@ const SettingsPage = () => (
       size={57}
     />
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
-    <Accordion collapsible multiple>
+    <SettingsAccordion>
       <AccordionItem>
-        <SettingsAccordionButton
-          leftIcons={LeftIcon}
-          text="Options"
-          panelIsOpen={false}
-        />
+        <AccordionButton leftIcons={LeftIcon} text="Options" />
         <AccordionPanel>
           Here are some detailed instructions about doing a thing. I am very
           complex and probably contain a lot of content, so a user can hide or
           show me by clicking the button above.
         </AccordionPanel>
       </AccordionItem>
-    </Accordion>
+    </SettingsAccordion>
   </>
 )
 
