@@ -11,6 +11,8 @@ const useGeolocation = () => {
       // Browser doesn't support Geolocation
       handleLocationError(false)
     }
+    // TODO: Figure out of this doesnt need to be disabled
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const locSuccess = async (pos) => {
