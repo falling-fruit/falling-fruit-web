@@ -34,13 +34,13 @@ const getViewportBounds = async (placeId) => {
     sw: { lat: sw.lat(), lng: sw.lng() },
   }
 }
-// TODO: Fix Button
-const Button = (props) => (
+
+const CurrentLocationButton = (props) => (
   <button {...props}>
     <CurrentLocation size={24} />
   </button>
 )
-const CurrentLocationButton = styled(Button)`
+const StyledCurrentLocationButton = styled(CurrentLocationButton)`
   background: none;
   color: inherit;
   border: none;
@@ -137,7 +137,7 @@ const Search = (props) => {
         icon={<SearchAlt2 />}
         prepend={
           isDesktop && (
-            <CurrentLocationButton
+            <StyledCurrentLocationButton
               disabled={currLocation === undefined}
               onClick={() => handleSelect('Current Location')}
             />
