@@ -20,6 +20,7 @@ const ResourceList = ({ typeData }) =>
     ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
       typeData?.[urlKey] && (
         <Resource
+          key={urlKey}
           target="_blank"
           rel="noopener noreferrer"
           href={urlFormatter(typeData[urlKey])}

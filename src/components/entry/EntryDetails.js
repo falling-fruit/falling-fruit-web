@@ -8,6 +8,7 @@ import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import IconButton from '../ui/IconButton'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import ResourceAccordion from '../ui/ResourcesAccordion'
 import { Tag, TagList } from '../ui/Tag'
 import PhotoGrid from './PhotoGrid'
 import ResourceList from './ResourceList'
@@ -27,7 +28,13 @@ const formatISOString = (dateString) =>
     day: 'numeric',
   })
 
-// TODO: Reduce number of styled components by using selectors in the container
+/*
+const displayResourceAccordions = (locationData) => {
+  for (var i = 0; i < locationData.type_names.size; i++) {
+    
+  }
+}
+*/
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
@@ -121,6 +128,12 @@ const EntryDetails = ({ isDesktop }) => {
     console.log('Open Image Slideshow/Lightbox')
   }
 
+  const handleAccordionClick = () => {
+    // TODO: connect to resource accordions
+    console.log('Resource Accordion Opened')
+    return false
+  }
+
   return locationData && typeData ? (
     <Page isDesktop={isDesktop}>
       <PhotoGrid
@@ -164,6 +177,11 @@ const EntryDetails = ({ isDesktop }) => {
 
         <h3>Other Resources</h3>
         <ResourceList typeData={typeData} />
+        <ResourceAccordion
+          typeName={locationData.type_names[0]}
+          scientificName={typeData.scientific_name}
+          panelIsOpen={handleAccordionClick}
+        />
       </TextContent>
     </Page>
   ) : (
