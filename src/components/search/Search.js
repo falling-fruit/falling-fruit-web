@@ -34,7 +34,6 @@ const getViewportBounds = async (placeId) => {
     sw: { lat: sw.lat(), lng: sw.lng() },
   }
 }
-
 const CurrentLocationButton = (props) => (
   <button {...props}>
     <CurrentLocation size={24} />
@@ -125,7 +124,7 @@ const Search = (props) => {
     <Combobox
       onSelect={handleSelect}
       aria-label="Search for a location"
-      openOnFocus
+      openOnFocus={!isDesktop}
       {...props}
     >
       <ComboboxInput
