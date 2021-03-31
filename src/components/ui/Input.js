@@ -3,7 +3,18 @@ import styled from 'styled-components'
 
 const Input = React.forwardRef(
   (
-    { placeholder, value, onChange, onEnter, label, icon, className, ...props },
+    {
+      placeholder,
+      value,
+      onChange,
+      onEnter,
+      label,
+      icon,
+      className,
+      prepend,
+      append,
+      ...props
+    },
     ref,
   ) => {
     const id = label?.toLowerCase().split(' ').join('-').concat(`-${className}`)
@@ -12,6 +23,7 @@ const Input = React.forwardRef(
       <div className={className}>
         {label && <label htmlFor={id}>{label}</label>}
         <div>
+          {prepend}
           <input
             value={value}
             onChange={onChange}
@@ -25,6 +37,7 @@ const Input = React.forwardRef(
             {...props}
           />
           {icon}
+          {append}
         </div>
       </div>
     )
@@ -48,6 +61,7 @@ const StyledInput = styled(Input)`
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     box-sizing: border-box;
     padding: 0 20px;
+    padding-left: ${(props) => (props.prepend ? '5px' : 'default')};
 
     input {
       color: ${({ theme }) => theme.secondaryText};
@@ -59,6 +73,7 @@ const StyledInput = styled(Input)`
       width: 100%;
       outline: none;
       height: 44px;
+      padding-left: ${(props) => (props.prepend ? '10px' : 0)};
 
       &::placeholder {
         color: ${({ theme }) => theme.tertiaryText};

@@ -8,6 +8,7 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
+import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import { useContext, useEffect, useRef } from 'react'
 import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
@@ -33,6 +34,28 @@ const getViewportBounds = async (placeId) => {
     sw: { lat: sw.lat(), lng: sw.lng() },
   }
 }
+// TODO: Fix Button
+const Button = (props) => (
+  <button {...props}>
+    <CurrentLocation size={24} />
+  </button>
+)
+const CurrentLocationButton = styled(Button)`
+  background: none;
+  color: inherit;
+  border: none;
+  height: 100%;
+  border-radius: 50% 0 0 50%;
+  border-right: 1px solid #e0e1e2;
+
+  svg {
+    color: ${({ theme }) => theme.blue};
+  }
+
+  &:disabled svg {
+    color: ${({ theme }) => theme.tertiaryText};
+  }
+`
 
 // TODO: ask Siraj how highlighting should look
 // TODO: for long option descriptions, scroll to beginning of input
@@ -112,6 +135,14 @@ const Search = (props) => {
         ref={inputRef}
         disabled={!ready}
         icon={<SearchAlt2 />}
+        prepend={
+          isDesktop && (
+            <CurrentLocationButton
+              disabled={currLocation === undefined}
+              onClick={() => handleSelect('Current Location')}
+            />
+          )
+        }
         placeholder="Search for a location..."
       />
       <StyledComboboxPopover portal={false}>
