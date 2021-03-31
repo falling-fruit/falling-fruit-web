@@ -2,8 +2,6 @@ import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
-import CircleIcon from '../ui/CircleIcon'
-import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import {
@@ -13,14 +11,6 @@ import {
   SettingsAccordion,
 } from '../ui/SettingsAccordion'
 import { Tag, TagList } from '../ui/Tag'
-
-const TwoIcons = [<Star size="16" key={1} />, <Star size="16" key={2} />]
-
-const LeftIcon = (
-  <CircleIcon backgroundColor={theme.transparentOrange}>
-    <Cog color={theme.orange} />
-  </CircleIcon>
-)
 
 const SettingsPage = () => (
   <>
@@ -58,13 +48,13 @@ const SettingsPage = () => (
     <ListEntry
       primaryText="Entry"
       secondaryText="0.3 miles"
-      rightIcons={TwoIcons}
+      rightIcons={[<Star size="16" key={1} />, <Star size="16" key={2} />]}
       size={57}
     />
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
     <SettingsAccordion>
       <AccordionItem>
-        <AccordionButton leftIcons={LeftIcon} text="Options" />
+        <AccordionButton LeftIcon={Cog} text="Options" />
         <AccordionPanel>
           Here are some detailed instructions about doing a thing. I am very
           complex and probably contain a lot of content, so a user can hide or

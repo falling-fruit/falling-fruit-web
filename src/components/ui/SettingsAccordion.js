@@ -10,10 +10,9 @@ import {
 import { ChevronDown, ChevronRight } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
+import CircleIcon from '../ui/CircleIcon'
 import { theme } from './GlobalStyle'
 import ListEntry from './ListEntry'
-
-//TODO: get rid of li from wrapping ListEntry
 
 const StyledListEntry = styled(ListEntry)`
   width: 100%;
@@ -37,14 +36,18 @@ const StyledAccordionButton = styled(ReachAccordionButton)`
   font-family: ${({ theme }) => theme.fonts};
 `
 
-const AccordionButton = ({ leftIcons, text, ...props }) => {
+const AccordionButton = ({ LeftIcon, text, ...props }) => {
   const { isExpanded } = useAccordionItemContext()
   const ChevronIcon = isExpanded ? ChevronDown : ChevronRight
 
   return (
     <StyledAccordionButton {...props}>
       <StyledListEntry
-        leftIcons={leftIcons}
+        leftIcons={
+          <CircleIcon backgroundColor={theme.transparentOrange}>
+            <LeftIcon color={theme.orange} />
+          </CircleIcon>
+        }
         primaryText={text}
         rightIcons={<ChevronIcon size="21" color={theme.orange} />}
       />
