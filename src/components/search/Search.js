@@ -86,7 +86,7 @@ const Search = (props) => {
 
   const currLocation = useGeolocation()
 
-  let currentLocation = {
+  let currentLocationEntry = {
     place_id: null,
     description: 'Current Location',
     structured_formatting: {
@@ -97,6 +97,7 @@ const Search = (props) => {
 
   const handleSelect = async (description) => {
     if (description === 'Current Location') {
+      // Use fixed viewport around the lat and long of the current location
       const { lat, lng } = currLocation.coords
       const viewportBounds = {
         ne: { lat: lat + BOUND, lng: lng + BOUND },
@@ -104,7 +105,6 @@ const Search = (props) => {
       }
       setViewport(viewportBounds)
     }
-    // put a fixed viewport around the lat and long of the current location
     setValue(description, false)
     const viewportBounds = await getViewportBounds(
       descriptionToPlaceId.current[description],
@@ -147,16 +147,21 @@ const Search = (props) => {
       />
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
-          {!isDesktop && value === '' && (
+          {/**
+              Render the current location suggestion only if it
+              on mobile, the current location is defined, and
+              the input is empty
+             */}
+          {!isDesktop && currLocation !== undefined && value === '' && (
             <ComboboxOption
               as={SearchEntry}
               key={1}
-              value={currentLocation.description}
-              isCurrent={currentLocation.place_id === null}
+              value={currentLocationEntry.description}
+              isCurrent={currentLocationEntry.place_id === null}
             >
               {[
-                currentLocation.structured_formatting.main_text,
-                currentLocation.structured_formatting.secondary_text,
+                currentLocationEntry.structured_formatting.main_text,
+                currentLocationEntry.structured_formatting.secondary_text,
               ]}
             </ComboboxOption>
           )}
