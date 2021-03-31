@@ -50,6 +50,7 @@ const Subscript = styled.div`
   color: white;
   width: 20px;
   height: 20px;
+  font-family: ${({ theme }) => theme.fonts};
   font-size: 10px;
   position: absolute;
   bottom: 0;
