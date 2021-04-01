@@ -17,4 +17,5 @@ const extractCityName = (latlng) => {
     })
   })
 }
+
 export default extractCityName

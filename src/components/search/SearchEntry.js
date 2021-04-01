@@ -10,7 +10,6 @@ const SearchEntry = React.forwardRef(
   ({ children, isCurrent, ...props }, ref) => {
     const [primaryText, secondaryText] = children
 
-    // TODO: Add current location to search dropdown
     const leftIcon = isCurrent ? (
       <CircleIcon backgroundColor={theme.blue}>
         <CurrentLocation />

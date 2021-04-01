@@ -80,6 +80,24 @@ const StyledInput = styled(Input)`
       }
     }
 
+    button {
+      background: none;
+      color: inherit;
+      border: none;
+      height: 100%;
+
+      ${
+        '' /* // TODO: Find if there is a better way to do this?
+       Trying to only have border radius if something is prepended.
+       Also, only have border-right if it's a prepend, and only border-left for append
+         */
+      }
+      border-radius: ${(props) => (props.prepend ? '0 50% 50% 0' : 'none')};
+      border-right: ${(props) =>
+        props.prepend ? '1px solid #e0e1e2' : 'none'};
+      border-left: ${(props) => (props.append ? '1px solid #e0e1e2' : 'none')};
+    }
+
     &:focus-within {
       box-shadow: 0 0 0 1pt rgb(0, 95, 204);
       box-shadow: 0 0 0 1pt -webkit-focus-ring-color;

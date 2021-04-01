@@ -21,7 +21,7 @@ import Input from '../ui/Input'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
 
-const BOUND = 0.001
+const CURRENT_LOCATION_VIEWPORT_RADIUS = 0.001
 
 const getViewportBounds = async (placeId) => {
   const results = await getGeocode({ placeId })
@@ -41,13 +41,6 @@ const CurrentLocationButton = (props) => (
   </button>
 )
 const StyledCurrentLocationButton = styled(CurrentLocationButton)`
-  background: none;
-  color: inherit;
-  border: none;
-  height: 100%;
-  border-radius: 50% 0 0 50%;
-  border-right: 1px solid #e0e1e2;
-
   svg {
     color: ${({ theme }) => theme.blue};
   }
@@ -68,12 +61,14 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
 const Search = (props) => {
   const { setViewport } = useContext(SearchContext)
   const isDesktop = useIsDesktop()
-  const geoLocation = useGeolocation()
-  const [cityName, setCityName] = useState(undefined)
+  const geolocation = useGeolocation()
+  const [cityName, setCityName] = useState(null)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
   // So we will keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
+
+  const inputRef = useRef(null)
 
   const {
     ready,
@@ -82,6 +77,13 @@ const Search = (props) => {
     setValue,
   } = usePlacesAutocomplete()
 
+  useEffect(() => {
+    if (value === '') {
+      inputRef.current.blur()
+      inputRef.current.focus()
+    }
+  }, [value])
+
   const handleInput = (e) => {
     setValue(e.target.value)
   }
@@ -89,15 +91,15 @@ const Search = (props) => {
   useEffect(() => {
     async function getCityName() {
       const city = await extractCityName({
-        lat: geoLocation.latitude,
-        lng: geoLocation.longitude,
+        lat: geolocation.latitude,
+        lng: geolocation.longitude,
       })
       setCityName(city)
     }
     getCityName()
     // TODO: Need to debounce this so that the server doesn't get killed
     // See: https://usehooks.com/useDebounce/
-  }, [geoLocation])
+  }, [geolocation])
 
   let currentLocationEntry = {
     place_id: null,
@@ -109,41 +111,39 @@ const Search = (props) => {
   }
 
   const handleSelect = async (description) => {
+    let viewportBounds
     if (description === 'Current Location') {
       // Use fixed viewport around the lat and long of the current location
-      const lat = geoLocation.latitude
-      const lng = geoLocation.longitude
+      const lat = geolocation.latitude
+      const lng = geolocation.longitude
 
-      const viewportBounds = {
-        ne: { lat: lat + BOUND, lng: lng + BOUND },
-        sw: { lat: lat - BOUND, lng: lng - BOUND },
+      viewportBounds = {
+        ne: {
+          lat: lat + CURRENT_LOCATION_VIEWPORT_RADIUS,
+          lng: lng + CURRENT_LOCATION_VIEWPORT_RADIUS,
+        },
+        sw: {
+          lat: lat - CURRENT_LOCATION_VIEWPORT_RADIUS,
+          lng: lng - CURRENT_LOCATION_VIEWPORT_RADIUS,
+        },
       }
       setViewport(viewportBounds)
+    } else {
+      viewportBounds = await getViewportBounds(
+        descriptionToPlaceId.current[description],
+      )
     }
     setValue(description, false)
-    const viewportBounds = await getViewportBounds(
-      descriptionToPlaceId.current[description],
-    )
     setViewport(viewportBounds)
   }
-
-  const inputRef = useRef(null)
-
-  useEffect(() => {
-    if (value === '') {
-      inputRef.current.blur()
-      inputRef.current.focus()
-    }
-  }, [value])
-
+  // TODO: Search suggestions are not closing when the entry is clicked
   return (
     <Combobox
       onSelect={handleSelect}
       aria-label="Search for a location"
-      openOnFocus={!isDesktop && cityName !== undefined}
+      openOnFocus={!isDesktop && cityName !== null}
       {...props}
     >
-      {console.log(cityName)}
       <ComboboxInput
         as={Input}
         value={value}
@@ -151,10 +151,10 @@ const Search = (props) => {
         ref={inputRef}
         disabled={!ready}
         icon={<SearchAlt2 />}
-        prepend={
+        append={
           isDesktop && (
             <StyledCurrentLocationButton
-              disabled={cityName === undefined}
+              disabled={cityName === null}
               onClick={() => handleSelect('Current Location')}
             />
           )
@@ -190,9 +190,7 @@ const Search = (props) => {
               } = suggestion
 
               // Allow handleSelect to access the place id (see above)
-              if (place_id) {
-                descriptionToPlaceId.current[description] = place_id
-              }
+              descriptionToPlaceId.current[description] = place_id
 
               return (
                 <ComboboxOption
