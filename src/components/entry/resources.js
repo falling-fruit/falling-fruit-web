@@ -1,11 +1,10 @@
-import EatTheWeedsLogo from './icons/EatTheWeeds.svg'
+import EatTheWeedsLogo from './icons/EatTheWeeds.png'
 import ForagingTexasLogo from './icons/ForagingTexas.png'
 import FruitipediaLogo from './icons/Fruitipedia.png'
 import UrbanMushroomsLogo from './icons/UrbanMushrooms.png'
 import USDALogo from './icons/USDA.svg'
 import WikipediaLogo from './icons/Wikipedia.svg'
 
-/* TODO: Convert logos to original images instead of SVGs */
 const RESOURCES = [
   {
     title: 'Eat the Weeds',
@@ -33,8 +32,8 @@ const RESOURCES = [
   },
   {
     title: 'USDA',
-    urlFormatter: (url) => `https://plants.usda.gov/core/profile?symbol=${url}`,
     urlKey: 'usda_symbol',
+    urlFormatter: (url) => `https://plants.usda.gov/core/profile?symbol=${url}`,
     icon: USDALogo,
     iconAlt: 'USDA logo',
   },

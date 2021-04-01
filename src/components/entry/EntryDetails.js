@@ -1,14 +1,16 @@
-import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
+import { Flag, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
-import { theme } from '../ui/GlobalStyle'
-import IconButton from '../ui/IconButton'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import { Tag, TagList } from '../ui/Tag'
-import { RESOURCES } from './resources'
+import TypeTitle from '../ui/TypeTitle'
+import PhotoGrid from './PhotoGrid'
+import ResourceList from './ResourceList'
+import TypesHeader from './TypesHeader'
 
 const ACCESS_TYPE = {
   0: "On lister's property",
@@ -25,83 +27,49 @@ const formatISOString = (dateString) =>
     day: 'numeric',
   })
 
-// TODO: Reduce number of styled components by using selectors in the container
-
 // Wraps the entire page and gives it a top margin if on mobile
-const EntryDetailsPageContainer = styled.div`
+const Page = styled.div`
   margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
-`
-
-const ImageContainer = styled.img`
+  padding: 0;
+  overflow: auto;
   width: 100%;
 `
 
-// Wraps all text in the container
-const EntryDetailsContent = styled.div`
+const TextContent = styled.article`
   padding: 23px;
   box-sizing: border-box;
-`
 
-const PlantName = styled.h2`
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: #333333;
-`
+  h3 {
+    color: ${({ theme }) => theme.headerText};
+  }
 
-const ScientificName = styled.small`
-  font-style: italic;
-`
+  a {
+    font-size: 16px;
+  }
 
-// Wraps the plant name and scientific name, as well as an icon button for desktop
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ul {
+    margin-top: 0;
+  }
 `
 
 // Wraps description, last updated text, and review and report buttons
-const DescriptionContainer = styled.section`
+const Description = styled.section`
   & > *:not(:last-child) {
     margin-bottom: 14px;
   }
-`
 
-const Description = styled.p`
-  color: #5a5a5a;
-`
+  p {
+    color: ${({ theme }) => theme.secondaryText};
+  }
 
-const UpdateText = styled.p`
-  font-size: 14px;
-  font-style: italic;
-`
+  small {
+    display: block;
+    font-style: italic;
+  }
 
-const ButtonSpacing = styled.div`
   button {
     margin-right: 14px;
   }
-`
-
-const ResourceHeader = styled.h3`
-  color: #333333;
-`
-
-const ResourceLink = styled.a`
-  font-size: 16px;
-`
-
-const ResourceImage = styled.img`
-  height: 20px;
-  width: 25px;
-`
-
-// Wraps all resource images and their links
-const IndividualResourceContainer = styled.small`
-  & > *:not(:last-child) {
-    margin-bottom: 14px;
-  }
-  display: flex;
-  column-count: 2;
-  column-gap: 12px;
 `
 
 const EntryDetails = ({ isDesktop }) => {
@@ -110,98 +78,85 @@ const EntryDetails = ({ isDesktop }) => {
   } = useRouteMatch()
 
   const [locationData, setLocationData] = useState()
-  const [locationTypeData, setLocationTypeData] = useState()
+  const [typesData, setTypesData] = useState()
 
   useEffect(() => {
     async function fetchEntryDetails() {
-      const locationData = await getLocationById(id)
-      setLocationData(locationData)
+      // Show loading between entry selections
+      setLocationData(null)
 
-      const locationTypeData = await getTypeById(locationData.type_ids[0])
-      setLocationTypeData(locationTypeData)
+      const locationData = await getLocationById(id)
+      const typesData = await Promise.all(
+        locationData.type_ids.map(getTypeById),
+      )
+
+      setLocationData(locationData)
+      setTypesData(typesData)
     }
     fetchEntryDetails()
   }, [id])
 
-  const handleMapButtonClick = () => {
-    // TODO: handle map button click
+  const _handleAddressClick = () => {
+    // TODO: handle address click
     console.log('Map Button Clicked')
   }
 
-  const resources = RESOURCES.map(
-    ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
-      locationTypeData?.[urlKey] && (
-        <IndividualResourceContainer>
-          <ResourceImage src={icon} alt={iconAlt} />
-          <ResourceLink
-            target="_blank"
-            rel="noopener noreferrer"
-            href={urlFormatter(locationTypeData[urlKey])}
-          >
-            {title}
-          </ResourceLink>
-        </IndividualResourceContainer>
-      ),
+  const handleViewLightbox = () => {
+    // TODO: connect to lightbox once implemented
+    console.log('Open Image Slideshow/Lightbox')
+  }
+
+  const typesHeader =
+    typesData && typesData.length === 1 ? (
+      <TypeTitle
+        primaryText={typesData[0].en_name}
+        secondaryText={typesData[0].scientific_name}
+      />
+    ) : (
+      <TypesHeader typesData={typesData} />
+    )
+
+  // TypesHeader shows the resources if more than one type
+  const otherResources = typesData && typesData.length === 1 && (
+    <>
+      <h3>Other Resources</h3>
+      <ResourceList typeData={typesData[0]} />
+    </>
   )
 
-  return locationData && locationTypeData ? (
-    <EntryDetailsPageContainer isDesktop={isDesktop}>
-      {locationData.photos.length > 0 && (
-        <ImageContainer
-          src={locationData.photos[0].photo.original}
-          alt="entry-details-photo"
-        />
-      )}
-
-      <EntryDetailsContent>
-        <HeaderContainer>
-          <div>
-            <PlantName>{locationData.type_names[0]}</PlantName>
-            <ScientificName>{locationTypeData.scientific_name}</ScientificName>
-          </div>
-          {isDesktop && (
-            <IconButton
-              size={40}
-              raised={false}
-              icon={<Map color={theme.secondaryText} />}
-              onClick={handleMapButtonClick}
-              label="add location"
-            />
-          )}
-        </HeaderContainer>
+  return locationData && typesData ? (
+    <Page isDesktop={isDesktop}>
+      <PhotoGrid
+        photos={locationData.photos}
+        altText={locationData.type_names.join(', ')}
+        handleViewLightbox={handleViewLightbox}
+      />
+      <TextContent>
         <TagList>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
-          {/* TODO: Put tag colors in theme/use constants somehow */}
+          {/* TODO: Siraj - Put tag colors in theme/use constants somehow/map from object */}
           <Tag color="#4183C4" backgroundColor="#D9E6F3">
             {locationData.unverified ? 'Unverified' : 'Verified'}
           </Tag>
         </TagList>
-        <DescriptionContainer>
-          <Description>{locationData.description}</Description>
-
-          <UpdateText>
-            Last Updated {formatISOString(locationTypeData.updated_at)}
-          </UpdateText>
-
-          <ButtonSpacing>
-            <Button>
-              <Star /> Review
-            </Button>
-            <Button secondary>
-              <Flag /> Report
-            </Button>
-          </ButtonSpacing>
-        </DescriptionContainer>
-
-        <ResourceHeader>Other Resources</ResourceHeader>
-
-        {resources}
-      </EntryDetailsContent>
-    </EntryDetailsPageContainer>
+        {typesHeader}
+        <Description>
+          <p>{locationData.description}</p>
+          <small>Last Updated {formatISOString(locationData.updated_at)}</small>
+          <Button>
+            <Star /> Review
+          </Button>
+          <Button secondary>
+            <Flag /> Report
+          </Button>
+        </Description>
+        {otherResources}
+      </TextContent>
+    </Page>
   ) : (
-    <EntryDetailsPageContainer>
-      <p>Loading...</p>
-    </EntryDetailsPageContainer>
+    <Page>
+      <LoadingIndicator vertical cover />
+    </Page>
   )
 }
 

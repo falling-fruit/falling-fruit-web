@@ -1,5 +1,5 @@
 import { StyledIconBase } from '@styled-icons/styled-icon'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const CircleIcon = styled.div`
   display: flex;
@@ -15,7 +15,6 @@ const CircleIcon = styled.div`
 
   ${StyledIconBase} {
     width: 65%;
-    color: #fff;
   }
   & > img {
     width: 100%;
