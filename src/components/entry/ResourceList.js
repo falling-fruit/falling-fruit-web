@@ -7,7 +7,7 @@ const Resource = styled.a`
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 
   img {
     width: 25px;

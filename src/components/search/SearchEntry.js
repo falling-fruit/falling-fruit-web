@@ -11,7 +11,7 @@ const SearchEntry = React.forwardRef(({ children, ...props }, ref) => {
   // TODO: Add current location to search dropdown
   const leftIcon = (
     <CircleIcon backgroundColor={theme.secondaryText}>
-      <Map />
+      <Map color={theme.background} />
     </CircleIcon>
   )
 

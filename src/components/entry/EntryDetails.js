@@ -1,16 +1,16 @@
-import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
-import React, { useContext, useEffect, useState } from 'react'
+import { Flag, Star } from '@styled-icons/boxicons-solid'
+import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import { ThemeContext } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
-import IconButton from '../ui/IconButton'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Tag, TagList } from '../ui/Tag'
+import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
 import ResourceList from './ResourceList'
+import TypesHeader from './TypesHeader'
 
 const ACCESS_TYPE = {
   0: "On lister's property",
@@ -31,8 +31,6 @@ const formatISOString = (dateString) =>
     day: 'numeric',
   })
 
-// TODO: Reduce number of styled components by using selectors in the container
-
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
   margin-top: 0px;
@@ -49,29 +47,16 @@ const TextContent = styled.article`
   padding: 23px;
   box-sizing: border-box;
 
-  h2 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    color: ${({ theme }) => theme.headerText};
-  }
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  small {
-    font-size: 14px;
-    font-style: italic;
-  }
-
   h3 {
     color: ${({ theme }) => theme.headerText};
   }
 
   a {
     font-size: 16px;
+  }
+
+  ul {
+    margin-top: 0;
   }
 `
 
@@ -96,31 +81,31 @@ const Description = styled.section`
 `
 
 const EntryDetails = ({ isDesktop }) => {
-  const themeContext = useContext(ThemeContext)
-
   const {
     params: { id },
   } = useRouteMatch()
 
   const [locationData, setLocationData] = useState()
-  const [typeData, setTypeData] = useState()
+  const [typesData, setTypesData] = useState()
 
   useEffect(() => {
     async function fetchEntryDetails() {
-      // Show loading between type selections
+      // Show loading between entry selections
       setLocationData(null)
 
       const locationData = await getLocationById(id)
-      const typeData = await getTypeById(locationData.type_ids[0])
+      const typesData = await Promise.all(
+        locationData.type_ids.map(getTypeById),
+      )
 
       setLocationData(locationData)
-      setTypeData(typeData)
+      setTypesData(typesData)
     }
     fetchEntryDetails()
   }, [id])
 
-  const handleMapButtonClick = () => {
-    // TODO: handle map button click
+  const _handleAddressClick = () => {
+    // TODO: handle address click
     console.log('Map Button Clicked')
   }
 
@@ -129,7 +114,25 @@ const EntryDetails = ({ isDesktop }) => {
     console.log('Open Image Slideshow/Lightbox')
   }
 
-  return locationData && typeData ? (
+  const typesHeader =
+    typesData && typesData.length === 1 ? (
+      <TypeTitle
+        primaryText={typesData[0].en_name}
+        secondaryText={typesData[0].scientific_name}
+      />
+    ) : (
+      <TypesHeader typesData={typesData} />
+    )
+
+  // TypesHeader shows the resources if more than one type
+  const otherResources = typesData && typesData.length === 1 && (
+    <>
+      <h3>Other Resources</h3>
+      <ResourceList typeData={typesData[0]} />
+    </>
+  )
+
+  return locationData && typesData ? (
     <Page isDesktop={isDesktop}>
       <PhotoGrid
         photos={locationData.photos}
@@ -137,30 +140,17 @@ const EntryDetails = ({ isDesktop }) => {
         handleViewLightbox={handleViewLightbox}
       />
       <TextContent>
-        <header>
-          <div>
-            <h2>{locationData.type_names[0]}</h2>
-            <small>{typeData.scientific_name}</small>
-          </div>
-          {isDesktop && (
-            <IconButton
-              size={40}
-              icon={<Map color={themeContext.secondaryText} />}
-              onClick={handleMapButtonClick}
-              label="add location"
-            />
-          )}
-        </header>
         <TagList>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
-          {/* TODO: Siraj - Put tag colors in theme/use constants somehow */}
+          {/* TODO: Siraj - Put tag colors in theme/use constants somehow/map from object */}
           <Tag color="#4183C4" backgroundColor="#D9E6F3">
             {locationData.unverified ? 'Unverified' : 'Verified'}
           </Tag>
         </TagList>
+        {typesHeader}
         <Description>
           <p>{locationData.description}</p>
-          <small>Last Updated {formatISOString(typeData.updated_at)}</small>
+          <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <Button>
             <Star /> Review
           </Button>
@@ -168,9 +158,7 @@ const EntryDetails = ({ isDesktop }) => {
             <Flag /> Report
           </Button>
         </Description>
-
-        <h3>Other Resources</h3>
-        <ResourceList typeData={typeData} />
+        {otherResources}
       </TextContent>
     </Page>
   ) : (
