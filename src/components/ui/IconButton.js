@@ -80,7 +80,7 @@ const IconButton = ({
 )
 
 IconButton.propTypes = {
-  raised: PropTypes.bool.isRequired,
+  raised: PropTypes.bool,
   label: PropTypes.string.isRequired,
   icon: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
