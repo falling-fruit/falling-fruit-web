@@ -5,6 +5,11 @@ import UrbanMushroomsLogo from './icons/UrbanMushrooms.png'
 import USDALogo from './icons/USDA.svg'
 import WikipediaLogo from './icons/Wikipedia.svg'
 
+/**
+ * Resource information for Entry Details. Includes the resource title,
+ * url key, logo icon, and icon alt text.
+ * @constant {Object[]}
+ */
 const RESOURCES = [
   {
     title: 'Eat the Weeds',

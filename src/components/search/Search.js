@@ -36,9 +36,30 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
   border: none;
   background: none;
   padding-top: 8px;
+  @media ${({ theme }) => theme.device.desktop} {
+    box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 `
 
-const Search = (props) => {
+const SearchBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  @media ${({ theme }) => theme.device.desktop} {
+    padding: 10px 10px 0 10px;
+  }
+
+  & > div {
+    flex: 1;
+  }
+
+  button {
+    margin-left: 10px;
+  }
+`
+
+const Search = ({ onType, sideButton }) => {
   const { setViewport } = useContext(SearchContext)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
@@ -53,6 +74,7 @@ const Search = (props) => {
   } = usePlacesAutocomplete()
 
   const handleInput = (e) => {
+    onType()
     setValue(e.target.value)
   }
 
@@ -68,20 +90,23 @@ const Search = (props) => {
     <Combobox
       onSelect={handleSelect}
       aria-label="Search for a location"
-      {...props}
+      style={{ width: '100%' }}
     >
-      <ComboboxInput
-        as={Input}
-        value={value}
-        onChange={handleInput}
-        disabled={!ready}
-        icon={<SearchAlt2 />}
-        placeholder="Search for a location..."
-      />
-      {status === 'OK' && (
-        <StyledComboboxPopover portal={false}>
-          <ComboboxList>
-            {data.map((suggestion) => {
+      <SearchBarContainer>
+        <ComboboxInput
+          as={Input}
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          icon={<SearchAlt2 />}
+          placeholder="Search for a location..."
+        />
+        {sideButton}
+      </SearchBarContainer>
+      <StyledComboboxPopover portal={false}>
+        <ComboboxList>
+          {status === 'OK' &&
+            data.map((suggestion) => {
               const {
                 place_id,
                 description,
@@ -101,9 +126,8 @@ const Search = (props) => {
                 </ComboboxOption>
               )
             })}
-          </ComboboxList>
-        </StyledComboboxPopover>
-      )}
+        </ComboboxList>
+      </StyledComboboxPopover>
     </Combobox>
   )
 }

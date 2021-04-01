@@ -12,7 +12,7 @@ const EntryNavContainer = styled.div`
   align-items: center;
   padding: 10px;
 
-  @media only screen and ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     padding: 0;
   }
 `
@@ -79,14 +79,12 @@ const EntryNav = ({ isDesktop }) => {
         <EntryNavIconsContainer>
           <IconButton
             size={50}
-            raised={false}
             icon={<Pencil color={theme.secondaryText} />}
             onClick={onEditButtonClick}
             label={'edit-entry-details'}
           />
           <IconButton
             size={50}
-            raised={false}
             icon={<Map color={theme.secondaryText} />}
             onClick={onMapButtonClick}
             label={'map-entry-details'}

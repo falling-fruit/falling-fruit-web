@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 
 import EntryNav from '../entry/EntryNav'
-import Search from '../search/Search'
+import SearchWrapper from '../SearchWrapper'
 import TopBar from '../ui/TopBar'
 
 const TopBarSwitch = () => (
@@ -16,10 +16,10 @@ const TopBarSwitch = () => (
       <TopBar rounded>
         <Switch>
           <Route path="/map">
-            <Search />
+            <SearchWrapper />
           </Route>
           <Route path="/list">
-            <Search />
+            <SearchWrapper />
           </Route>
         </Switch>
       </TopBar>
