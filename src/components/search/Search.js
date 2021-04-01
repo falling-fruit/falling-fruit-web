@@ -151,7 +151,7 @@ const Search = (props) => {
         ref={inputRef}
         disabled={!ready}
         icon={<SearchAlt2 />}
-        append={
+        prepend={
           isDesktop && (
             <StyledCurrentLocationButton
               disabled={cityName === null}

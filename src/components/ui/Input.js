@@ -92,7 +92,7 @@ const StyledInput = styled(Input)`
        Also, only have border-right if it's a prepend, and only border-left for append
          */
       }
-      border-radius: ${(props) => (props.prepend ? '0 50% 50% 0' : 'none')};
+      border-radius: ${(props) => (props.prepend ? '50% 0 0 50%' : 'none')};
       border-right: ${(props) =>
         props.prepend ? '1px solid #e0e1e2' : 'none'};
       border-left: ${(props) => (props.append ? '1px solid #e0e1e2' : 'none')};

@@ -12,11 +12,11 @@ const SearchEntry = React.forwardRef(
 
     const leftIcon = isCurrent ? (
       <CircleIcon backgroundColor={theme.blue}>
-        <CurrentLocation />
+        <CurrentLocation color={'white'} />
       </CircleIcon>
     ) : (
       <CircleIcon backgroundColor={theme.secondaryText}>
-        <Map />
+        <Map color={'white'} />
       </CircleIcon>
     )
 
