@@ -1,12 +1,12 @@
-import ResourceAccordion from '../ui/ResourcesAccordion'
+import { TypesAccordion } from '../ui/TypesAccordion'
 
 const Accordion = ({ typeData }) =>
   typeData.type_names.map(({ typeName, scientificName }, index) => (
-    <ResourceAccordion
+    <TypesAccordion
       key={index}
       typeName={typeName}
       scientificName={scientificName}
-    ></ResourceAccordion>
+    ></TypesAccordion>
   ))
 
 export default Accordion
