@@ -2,7 +2,6 @@ import '@reach/accordion/styles.css'
 
 import {
   Accordion,
-  AccordionButton as ReachAccordionButton,
   AccordionItem,
   AccordionPanel,
   useAccordionItemContext,
@@ -12,6 +11,7 @@ import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from './GlobalStyle'
+import IndicatorAccordionButton from './IndicatorAccordionButton'
 import ListEntry from './ListEntry'
 
 const StyledListEntry = styled(ListEntry)`
@@ -23,25 +23,12 @@ const StyledListEntry = styled(ListEntry)`
   }
 `
 
-const StyledAccordionButton = styled(ReachAccordionButton)`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0px;
-  background: white;
-  border: none;
-  text-align: left;
-  width: 100%;
-  font-family: ${({ theme }) => theme.fonts};
-`
-
-const AccordionButton = ({ LeftIcon, text, ...props }) => {
+const SettingsAccordionButton = ({ LeftIcon, text, ...props }) => {
   const { isExpanded } = useAccordionItemContext()
   const ChevronIcon = isExpanded ? ChevronDown : ChevronRight
 
   return (
-    <StyledAccordionButton {...props}>
+    <IndicatorAccordionButton {...props}>
       <StyledListEntry
         leftIcons={
           <CircleIcon backgroundColor={theme.transparentOrange}>
@@ -51,7 +38,7 @@ const AccordionButton = ({ LeftIcon, text, ...props }) => {
         primaryText={text}
         rightIcons={<ChevronIcon size="21" color={theme.orange} />}
       />
-    </StyledAccordionButton>
+    </IndicatorAccordionButton>
   )
 }
 
@@ -59,4 +46,9 @@ const SettingsAccordion = (props) => (
   <Accordion collapsible multiple {...props} />
 )
 
-export { AccordionButton, AccordionItem, AccordionPanel, SettingsAccordion }
+export {
+  AccordionItem,
+  AccordionPanel,
+  SettingsAccordion,
+  SettingsAccordionButton,
+}
