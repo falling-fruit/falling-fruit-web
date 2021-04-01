@@ -1,6 +1,24 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
+const AddOn = styled.div`
+  ${
+    ''
+    /* Siraj, is there a better way to write this css?
+     */
+  }
+  height: 100%;
+  & > * {
+    background: none;
+    color: inherit;
+    border: none;
+    height: 100%;
+    border-radius: ${(props) => (props.prepend ? '50% 0 0 50%' : 'none')};
+    border-right: ${(props) => (props.prepend ? '1px solid #e0e1e2' : 'none')};
+    border-left: ${(props) => (!props.prepend ? '1px solid #e0e1e2' : 'none')};
+  }
+`
+
 const Input = React.forwardRef(
   (
     {
@@ -23,7 +41,7 @@ const Input = React.forwardRef(
       <div className={className}>
         {label && <label htmlFor={id}>{label}</label>}
         <div>
-          {prepend}
+          <AddOn prepend> {prepend} </AddOn>
           <input
             value={value}
             onChange={onChange}
@@ -37,7 +55,7 @@ const Input = React.forwardRef(
             {...props}
           />
           {icon}
-          {append}
+          <AddOn prepend={false}> {append} </AddOn>
         </div>
       </div>
     )
@@ -78,24 +96,6 @@ const StyledInput = styled(Input)`
       &::placeholder {
         color: ${({ theme }) => theme.tertiaryText};
       }
-    }
-
-    button {
-      background: none;
-      color: inherit;
-      border: none;
-      height: 100%;
-
-      ${
-        '' /* // TODO: Find if there is a better way to do this?
-       Trying to only have border radius if something is prepended.
-       Also, only have border-right if it's a prepend, and only border-left for append
-         */
-      }
-      border-radius: ${(props) => (props.prepend ? '50% 0 0 50%' : 'none')};
-      border-right: ${(props) =>
-        props.prepend ? '1px solid #e0e1e2' : 'none'};
-      border-left: ${(props) => (props.append ? '1px solid #e0e1e2' : 'none')};
     }
 
     &:focus-within {

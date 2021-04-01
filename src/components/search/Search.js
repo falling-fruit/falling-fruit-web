@@ -111,29 +111,28 @@ const Search = (props) => {
   }
 
   const handleSelect = async (description) => {
+    setValue(description, false)
+
     let viewportBounds
     if (description === 'Current Location') {
       // Use fixed viewport around the lat and long of the current location
-      const lat = geolocation.latitude
-      const lng = geolocation.longitude
+      const { latitude, longitude } = geolocation
 
       viewportBounds = {
         ne: {
-          lat: lat + CURRENT_LOCATION_VIEWPORT_RADIUS,
-          lng: lng + CURRENT_LOCATION_VIEWPORT_RADIUS,
+          lat: latitude + CURRENT_LOCATION_VIEWPORT_RADIUS,
+          lng: longitude + CURRENT_LOCATION_VIEWPORT_RADIUS,
         },
         sw: {
-          lat: lat - CURRENT_LOCATION_VIEWPORT_RADIUS,
-          lng: lng - CURRENT_LOCATION_VIEWPORT_RADIUS,
+          lat: latitude - CURRENT_LOCATION_VIEWPORT_RADIUS,
+          lng: longitude - CURRENT_LOCATION_VIEWPORT_RADIUS,
         },
       }
-      setViewport(viewportBounds)
     } else {
       viewportBounds = await getViewportBounds(
         descriptionToPlaceId.current[description],
       )
     }
-    setValue(description, false)
     setViewport(viewportBounds)
   }
   // TODO: Search suggestions are not closing when the entry is clicked
