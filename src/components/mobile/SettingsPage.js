@@ -5,10 +5,10 @@ import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import {
-  AccordionButton,
   AccordionItem,
   AccordionPanel,
   SettingsAccordion,
+  SettingsAccordionButton,
 } from '../ui/SettingsAccordion'
 import { Tag, TagList } from '../ui/Tag'
 
@@ -54,7 +54,7 @@ const SettingsPage = () => (
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
     <SettingsAccordion>
       <AccordionItem>
-        <AccordionButton LeftIcon={Cog} text="Options" />
+        <SettingsAccordionButton LeftIcon={Cog} text="Options" />
         <AccordionPanel>
           Here are some detailed instructions about doing a thing. I am very
           complex and probably contain a lot of content, so a user can hide or

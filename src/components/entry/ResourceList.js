@@ -7,7 +7,7 @@ const Resource = styled.a`
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 
   img {
     width: 25px;
@@ -20,6 +20,7 @@ const ResourceList = ({ typeData }) =>
     ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
       typeData?.[urlKey] && (
         <Resource
+          key={urlKey}
           target="_blank"
           rel="noopener noreferrer"
           href={urlFormatter(typeData[urlKey])}
