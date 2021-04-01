@@ -54,7 +54,7 @@ const MapPage = () => {
           swlat: bounds.sw.lat,
           swlng: bounds.sw.lng,
           muni: filters.muni ? 1 : 0,
-          t: `${filters.types}`,
+          t: filters.types.toString(),
         }
 
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
