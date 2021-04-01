@@ -13,7 +13,6 @@ const FilterIconButton = ({ pressed, setPressed }) => {
   return (
     <IconButton
       size={45}
-      raised={false}
       pressed={pressed}
       icon={<FilterIcon color={pressed ? theme.orange : theme.secondaryText} />}
       onClick={() => setPressed((pressed) => !pressed)}

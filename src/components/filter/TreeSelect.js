@@ -5,12 +5,8 @@ import styled from 'styled-components/macro'
 
 import NonrenderTreeSelect from './NonrenderTreeSelect'
 
-/* TODO: Checkbox styling */
 const TreeSelectContainer = styled.div`
-  .dropdown-trigger.arrow.top {
-    display: none;
-  }
-
+  .dropdown-trigger.arrow.top,
   .toggle.expanded {
     display: none;
   }
@@ -44,9 +40,7 @@ const TreeSelectContainer = styled.div`
   // TODO: this breaks the infinite scroll of react-dropdown-tree-select
   .infinite-scroll-component {
     height: 100% !important;
-    @media ${({ theme }) => theme.device.desktop} {
-      max-height: calc(30vh - 60px);
-    }
+    max-height: calc(30vh - 60px);
     @media ${({ theme }) => theme.device.mobile} {
       max-height: calc(60vh - 60px);
     }
@@ -55,9 +49,7 @@ const TreeSelectContainer = styled.div`
   }
 
   .react-dropdown-tree-select {
-    @media ${({ theme }) => theme.device.desktop} {
-      height: 30vh;
-    }
+    height: 30vh;
     @media ${({ theme }) => theme.device.mobile} {
       height: 60vh;
     }

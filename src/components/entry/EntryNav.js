@@ -79,16 +79,12 @@ const EntryNav = ({ isDesktop }) => {
         <EntryNavIconsContainer>
           <IconButton
             size={50}
-            raised={false}
-            pressed={false}
             icon={<Pencil color={theme.secondaryText} />}
             onClick={onEditButtonClick}
             label={'edit-entry-details'}
           />
           <IconButton
             size={50}
-            raised={false}
-            pressed={false}
             icon={<Map color={theme.secondaryText} />}
             onClick={onMapButtonClick}
             label={'map-entry-details'}

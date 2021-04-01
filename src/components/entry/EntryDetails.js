@@ -35,10 +35,8 @@ const formatISOString = (dateString) =>
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
-  @media ${({ theme }) => theme.device.desktop} {
-    margin-top: 0px;
-    padding-top: 0px;
-  }
+  margin-top: 0px;
+  padding-top: 0px;
   @media ${({ theme }) => theme.device.mobile} {
     margin-top: 110px;
     padding-top: 10px;
@@ -147,8 +145,6 @@ const EntryDetails = ({ isDesktop }) => {
           {isDesktop && (
             <IconButton
               size={40}
-              raised={false}
-              pressed={false}
               icon={<Map color={themeContext.secondaryText} />}
               onClick={handleMapButtonClick}
               label="add location"
