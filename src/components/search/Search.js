@@ -9,13 +9,14 @@ import {
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete'
 
+import extractCityName from '../../utils/extractCityName'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import useGeolocation from '../../utils/useGeolocation'
 import Input from '../ui/Input'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
@@ -67,6 +68,8 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
 const Search = (props) => {
   const { setViewport } = useContext(SearchContext)
   const isDesktop = useIsDesktop()
+  const geoLocation = useGeolocation()
+  const [cityName, setCityName] = useState(undefined)
 
   // Hack: Reach's Combobox passes the ComboboxOption's value to handleSelect
   // So we will keep a map of the value to the place id, which handleSelect also needs
@@ -83,21 +86,34 @@ const Search = (props) => {
     setValue(e.target.value)
   }
 
-  const currLocation = useGeolocation()
+  useEffect(() => {
+    async function getCityName() {
+      const city = await extractCityName({
+        lat: geoLocation.latitude,
+        lng: geoLocation.longitude,
+      })
+      setCityName(city)
+    }
+    getCityName()
+    // TODO: Need to debounce this so that the server doesn't get killed
+    // See: https://usehooks.com/useDebounce/
+  }, [geoLocation])
 
   let currentLocationEntry = {
     place_id: null,
     description: 'Current Location',
     structured_formatting: {
       main_text: 'Current Location',
-      secondary_text: `${currLocation ? currLocation.name : ''}`,
+      secondary_text: `${cityName ? cityName : ''}`,
     },
   }
 
   const handleSelect = async (description) => {
     if (description === 'Current Location') {
       // Use fixed viewport around the lat and long of the current location
-      const { lat, lng } = currLocation.coords
+      const lat = geoLocation.latitude
+      const lng = geoLocation.longitude
+
       const viewportBounds = {
         ne: { lat: lat + BOUND, lng: lng + BOUND },
         sw: { lat: lat - BOUND, lng: lng - BOUND },
@@ -124,9 +140,10 @@ const Search = (props) => {
     <Combobox
       onSelect={handleSelect}
       aria-label="Search for a location"
-      openOnFocus={!isDesktop}
+      openOnFocus={!isDesktop && cityName !== undefined}
       {...props}
     >
+      {console.log(cityName)}
       <ComboboxInput
         as={Input}
         value={value}
@@ -137,7 +154,7 @@ const Search = (props) => {
         prepend={
           isDesktop && (
             <StyledCurrentLocationButton
-              disabled={currLocation === undefined}
+              disabled={cityName === undefined}
               onClick={() => handleSelect('Current Location')}
             />
           )
@@ -151,7 +168,7 @@ const Search = (props) => {
               on mobile, the current location is defined, and
               the input is empty
              */}
-          {!isDesktop && currLocation !== undefined && value === '' && (
+          {!isDesktop && cityName !== undefined && value === '' && (
             <ComboboxOption
               as={SearchEntry}
               key={1}
