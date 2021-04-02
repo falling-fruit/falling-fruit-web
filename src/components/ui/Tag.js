@@ -1,3 +1,4 @@
+import { transparentize } from 'polished'
 import styled from 'styled-components/macro'
 
 const TagList = styled.ul`
@@ -15,8 +16,8 @@ const Tag = styled.li`
   padding: 0 10px;
   font-size: 12px;
   font-weight: bold;
-  background-color: ${({ theme, backgroundColor }) =>
-    backgroundColor ?? theme.transparentOrange};
+  background-color: ${({ theme, color, backgroundColor }) =>
+    backgroundColor ?? transparentize(0.8, color ?? theme.orange)};
   color: ${({ theme, color }) => color ?? theme.orange};
 
   &:not(:last-child) {

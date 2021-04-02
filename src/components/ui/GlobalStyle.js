@@ -72,7 +72,12 @@ const theme = {
   transparentOrange: '#ffedd1',
   blue: '#4183c4',
   green: '#73cd7c',
-  // TODO: add non-brand tag colors
+  // tag colors
+  tag: {
+    access: '#ffa41b',
+    verified: '#4183c4',
+    unverified: '#ff61ef',
+  },
 }
 
 export default GlobalStyle
