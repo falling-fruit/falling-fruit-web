@@ -72,6 +72,7 @@ const theme = {
   transparentOrange: '#ffedd1',
   blue: '#4183c4',
   green: '#73cd7c',
+  // TODO: add non-brand tag colors
 }
 
 export default GlobalStyle
