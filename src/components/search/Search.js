@@ -29,6 +29,10 @@ const CurrentLocationButton = (props) => (
 )
 
 const StyledCurrentLocationButton = styled(CurrentLocationButton)`
+  &:enabled {
+    cursor: pointer;
+  }
+
   svg {
     color: ${({ theme }) => theme.blue};
   }
