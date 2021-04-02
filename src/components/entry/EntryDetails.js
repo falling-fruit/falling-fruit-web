@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
+import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Tag, TagList } from '../ui/Tag'
 import TypeTitle from '../ui/TypeTitle'
@@ -143,7 +144,7 @@ const EntryDetails = ({ isDesktop }) => {
         <TagList>
           {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
           {/* TODO: Siraj - Put tag colors in theme/use constants somehow/map from object */}
-          <Tag color="#4183C4" backgroundColor="#D9E6F3">
+          <Tag color={theme.blue} backgroundColor="#D9E6F3">
             {locationData.unverified ? 'Unverified' : 'Verified'}
           </Tag>
         </TagList>

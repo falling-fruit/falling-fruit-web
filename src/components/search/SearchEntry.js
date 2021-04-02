@@ -12,11 +12,11 @@ const SearchEntry = React.forwardRef(
 
     const leftIcon = isCurrent ? (
       <CircleIcon backgroundColor={theme.blue}>
-        <CurrentLocation color={'white'} />
+        <CurrentLocation color={theme.background} />
       </CircleIcon>
     ) : (
       <CircleIcon backgroundColor={theme.secondaryText}>
-        <Map color={'white'} />
+        <Map color={theme.background} />
       </CircleIcon>
     )
 
@@ -25,7 +25,7 @@ const SearchEntry = React.forwardRef(
         leftIcons={leftIcon}
         primaryText={primaryText}
         secondaryText={secondaryText}
-        rightIcons={<Navigation size={20} color={'#4183C4'} />}
+        rightIcons={<Navigation size={20} color={theme.blue} />}
         ref={ref}
         {...props}
       />
