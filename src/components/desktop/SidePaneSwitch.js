@@ -5,10 +5,16 @@ import MainPane from './MainPane'
 
 const SidePaneSwitch = () => (
   <Switch>
-    <Route path="/entry/:id">
+    <Route exact path="/entry/:id">
       <EntryPane />
     </Route>
-    <Route>
+    <Route exact path="/map">
+      <MainPane />
+    </Route>
+    <Route exact path="/list">
+      <MainPane />
+    </Route>
+    <Route exact path="/">
       <MainPane />
     </Route>
   </Switch>

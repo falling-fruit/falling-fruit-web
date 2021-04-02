@@ -20,6 +20,10 @@ const ACCESS_TYPE = {
   4: 'Private property',
 }
 
+/**
+ * Helper function to convert ISO date string into "month date, year" format.
+ * @param {string} dateString - The ISO date to convert
+ */
 const formatISOString = (dateString) =>
   new Date(dateString).toLocaleDateString(undefined, {
     year: 'numeric',
@@ -29,8 +33,12 @@ const formatISOString = (dateString) =>
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
-  margin-top: ${(props) => (props.isDesktop ? '0px' : '90px')};
-  padding: 0;
+  margin-top: 0px;
+  padding-top: 0px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 110px;
+    padding-top: 10px;
+  }
   overflow: auto;
   width: 100%;
 `

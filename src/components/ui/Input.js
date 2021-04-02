@@ -55,7 +55,7 @@ const Input = React.forwardRef(
             {...props}
           />
           {icon}
-          <AddOn prepend={false}> {append} </AddOn>
+          <AddOn prepend={false}>{append}</AddOn>
         </div>
       </div>
     )

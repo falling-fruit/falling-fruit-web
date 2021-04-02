@@ -20,6 +20,7 @@ const MapPage = () => {
   const container = useRef(null)
   const { viewport: searchViewport } = useContext(SearchContext)
   const { view, setView } = useContext(MapContext)
+  const { filters } = useContext(SearchContext)
 
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
@@ -52,10 +53,11 @@ const MapPage = () => {
           nelng: bounds.ne.lng,
           swlat: bounds.sw.lat,
           swlng: bounds.sw.lng,
-          muni: 1,
+          muni: filters.muni ? 1 : 0,
+          t: filters.types.toString(),
         }
 
-        if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+        if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
           const clusters = await getClusters({ ...query, zoom })
 
           setClusters(clusters)
@@ -65,7 +67,10 @@ const MapPage = () => {
             _numLocationsReturned,
             _totalLocations,
             ...locations
-          ] = await getLocations(query)
+          ] = await getLocations({
+            ...query,
+            invasive: filters.invasive ? 1 : 0,
+          })
 
           setLocations(locations)
           setClusters([])
@@ -75,12 +80,7 @@ const MapPage = () => {
       }
     }
     fetchClusterAndLocationData()
-  }, [view])
-
-  const handleViewChange = (view) => {
-    console.log('handleViewChange', view)
-    setView(view)
-  }
+  }, [view, filters])
 
   const handleLocationClick = (location) => {
     history.push({
@@ -107,7 +107,7 @@ const MapPage = () => {
         view={view}
         locations={locations}
         clusters={clusters}
-        onViewChange={handleViewChange}
+        onViewChange={setView}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
       />
