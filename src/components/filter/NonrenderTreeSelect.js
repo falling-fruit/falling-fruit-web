@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import isEqual from 'lodash/isEqual'
+import equals from 'ramda/src/equals'
 import React, { Component } from 'react'
 import DropdownTreeSelect from 'react-dropdown-tree-select'
 
@@ -12,7 +12,7 @@ export default class NonrenderTreeSelect extends Component {
   }
 
   static getDerivedStateFromProps = (nextProps, prevState) => {
-    if (!isEqual(nextProps.data, prevState.data)) {
+    if (!equals(nextProps.data, prevState.data)) {
       return { data: nextProps.data }
     } else {
       return {}
@@ -20,7 +20,7 @@ export default class NonrenderTreeSelect extends Component {
   }
 
   shouldComponentUpdate = (nextProps) =>
-    !isEqual(nextProps.data, this.state.data)
+    !equals(nextProps.data, this.state.data)
 
   render() {
     const { data: _data, ...rest } = this.props

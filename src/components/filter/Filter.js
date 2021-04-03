@@ -1,4 +1,4 @@
-import { intersection } from 'lodash'
+import intersection from 'ramda/src/intersection'
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
