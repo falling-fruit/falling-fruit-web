@@ -2,8 +2,11 @@ import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
+import FormLabel from '../ui/FormLabel'
+import FormTag from '../ui/FormTag'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
+import StyledSectionHeading from '../ui/SectionHeading'
 import {
   AccordionItem,
   AccordionPanel,
@@ -51,7 +54,6 @@ const SettingsPage = () => (
       rightIcons={[<Star size="16" key={1} />, <Star size="16" key={2} />]}
       size={57}
     />
-
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
     <SettingsAccordion>
       <AccordionItem>
@@ -63,6 +65,11 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
+    <FormLabel for="description">Description</FormLabel>
+    <input style={{ display: 'block' }} id="description" />
+    <StyledSectionHeading>Been here? Leave a Review</StyledSectionHeading>
+    <FormTag>Optional</FormTag>
+    <input style={{ display: 'block' }} id="hi" />
   </>
 )
 
