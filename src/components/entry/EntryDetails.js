@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
+import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Tag, TagList } from '../ui/Tag'
 import TypeTitle from '../ui/TypeTitle'
@@ -36,7 +37,7 @@ const Page = styled.div`
   margin-top: 0px;
   padding-top: 0px;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 110px;
+    margin-top: 80px;
     padding-top: 10px;
   }
   overflow: auto;
@@ -114,6 +115,19 @@ const EntryDetails = ({ isDesktop }) => {
     console.log('Open Image Slideshow/Lightbox')
   }
 
+  const tagList = locationData && (
+    <TagList>
+      {locationData.access && (
+        <Tag color={theme.tag.access}>{ACCESS_TYPE[locationData.access]}</Tag>
+      )}
+      {locationData.unverified ? (
+        <Tag color={theme.tag.unverified}>Unverified</Tag>
+      ) : (
+        <Tag color={theme.tag.verified}>Verified</Tag>
+      )}
+    </TagList>
+  )
+
   const typesHeader =
     typesData && typesData.length === 1 ? (
       <TypeTitle
@@ -140,13 +154,7 @@ const EntryDetails = ({ isDesktop }) => {
         handleViewLightbox={handleViewLightbox}
       />
       <TextContent>
-        <TagList>
-          {locationData.access && <Tag>{ACCESS_TYPE[locationData.access]}</Tag>}
-          {/* TODO: Siraj - Put tag colors in theme/use constants somehow/map from object */}
-          <Tag color="#4183C4" backgroundColor="#D9E6F3">
-            {locationData.unverified ? 'Unverified' : 'Verified'}
-          </Tag>
-        </TagList>
+        {tagList}
         {typesHeader}
         <Description>
           <p>{locationData.description}</p>
