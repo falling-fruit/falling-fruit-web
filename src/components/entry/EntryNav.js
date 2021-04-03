@@ -10,24 +10,36 @@ const EntryNavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  height: 28px;
+  padding: 15px 10px 10px;
 
   @media ${({ theme }) => theme.device.mobile} {
+    height: 60px;
     padding: 0;
   }
 `
 
-const EntryNavTextContainer = styled.div`
+const Text = styled.div`
   display: flex;
   align-items: center;
+  color: ${({ theme }) => theme.secondaryText};
+
+  p {
+    font-size: 15px;
+  }
 
   svg {
-    height: 25px;
-    margin-right: 10px;
+    height: 20px;
+    margin-right: 7px;
+
+    @media ${({ theme }) => theme.device.mobile} {
+      margin-left: 5px;
+      height: 25px;
+    }
   }
 `
 
-const EntryNavIconsContainer = styled.div`
+const Icons = styled.div`
   display: flex;
   justify-content: space-between;
   width: 110px;
@@ -64,7 +76,7 @@ const EntryNav = ({ isDesktop }) => {
 
   return (
     <EntryNavContainer>
-      <EntryNavTextContainer>
+      <Text>
         <ArrowBackButton
           role="button"
           tabIndex={0}
@@ -73,23 +85,23 @@ const EntryNav = ({ isDesktop }) => {
           onClick={onBackButtonClick}
           color={theme.secondaryText}
         />
-        <p>{isDesktop ? 'Back to Results' : 'Results'}</p>
-      </EntryNavTextContainer>
+        {isDesktop && <p>Back to Results</p>}
+      </Text>
       {!isDesktop && (
-        <EntryNavIconsContainer>
+        <Icons>
           <IconButton
             size={50}
             icon={<Pencil color={theme.secondaryText} />}
             onClick={onEditButtonClick}
-            label={'edit-entry-details'}
+            label="edit-entry-details"
           />
           <IconButton
             size={50}
             icon={<Map color={theme.secondaryText} />}
             onClick={onMapButtonClick}
-            label={'map-entry-details'}
+            label="map-entry-details"
           />
-        </EntryNavIconsContainer>
+        </Icons>
       )}
     </EntryNavContainer>
   )
