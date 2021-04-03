@@ -7,13 +7,14 @@ const StyledSlider = styled(Slider)`
   width: 80%;
   margin-right: 40px;
   margin-left: 40px;
+  color: text;
 
-  [data-reach-slider] {
+  [data-reach-slider-track] {
+    background: ${({ theme }) => theme.secondaryBackground};
   }
 
   [data-reach-slider-range] {
-    background: ${({ theme }) => theme.secondaryBackground};
-    align-self: center;
+    align-self: contain;
   }
 
   [data-reach-slider-handle] {
@@ -22,11 +23,18 @@ const StyledSlider = styled(Slider)`
     background: ${({ theme }) => theme.transparentOrange};
     border-radius: 50%;
   }
-  color: gray;
+
+  [data-reach-slider-marker] {
+    background: ${({ theme }) => theme.secondaryBackground};
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+  }
 `
 
 const StyledLabel = styled.div`
   margin-top: 20px;
+  margin-right: 5px;
 `
 
 const populateMarkers = (labels) =>
