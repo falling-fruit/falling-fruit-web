@@ -1,3 +1,7 @@
+/**
+ * Converts a result from the Geocoding API to an object with city, state,
+ * country, and country code
+ */
 const resultToLocationInfo = (result) => {
   const locationInfo = {}
 
@@ -15,6 +19,10 @@ const resultToLocationInfo = (result) => {
   return locationInfo
 }
 
+/**
+ * Reverse geocodes latitude and longitude to return an object with city,
+ * state, country, and country code
+ */
 const getLocationInfo = async (lat, lng) => {
   const geocoder = new window.google.maps.Geocoder()
   const { results } = await geocoder.geocode({ location: { lat, lng } })
@@ -26,6 +34,10 @@ const getLocationInfo = async (lat, lng) => {
   }
 }
 
+/**
+ * Reverse geocodes latitude and longitude to return a string formatted as
+ * "<city>, <state>, <country>"
+ */
 const getFormattedLocationInfo = async (lat, lng) => {
   const { city, state, country } = await getLocationInfo(lat, lng)
   if (state) {
