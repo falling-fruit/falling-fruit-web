@@ -37,12 +37,7 @@ const Page = styled.div`
   margin-top: 0px;
   padding-top: 0px;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 80px;
-    padding-top: 10px;
-  }
-
-  figure {
-    margin-bottom: 8px;
+    margin-top: 87px;
   }
 
   overflow: auto;
@@ -50,7 +45,7 @@ const Page = styled.div`
 `
 
 const TextContent = styled.article`
-  padding: 23px;
+  padding: 10px 23px;
   @media ${({ theme }) => theme.device.desktop} {
     padding: 12px;
   }
@@ -66,8 +61,7 @@ const TextContent = styled.article`
   }
 
   ul {
-    margin-top: 0;
-    margin-bottom: 8px;
+    margin: 8px 0;
   }
 `
 

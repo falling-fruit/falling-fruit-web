@@ -14,7 +14,7 @@ const EntryNavContainer = styled.div`
   padding: 15px 10px 10px;
 
   @media ${({ theme }) => theme.device.mobile} {
-    height: 60px;
+    height: 55px;
     padding: 0;
   }
 `
