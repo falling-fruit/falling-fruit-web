@@ -1,6 +1,7 @@
 import { fitBounds } from 'google-map-react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useGeolocation } from 'react-use'
 
 import { getClusters, getLocations } from '../../utils/api'
 import SearchContext from '../search/SearchContext'
@@ -25,6 +26,8 @@ const MapPage = () => {
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+
+  const geolocation = useGeolocation({ enableHighAccuracy: true })
 
   const fitContainerBounds = (bounds) => {
     const { offsetWidth, offsetHeight } = container.current
@@ -105,6 +108,7 @@ const MapPage = () => {
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
+        geolocation={geolocation}
         locations={locations}
         clusters={clusters}
         onViewChange={setView}

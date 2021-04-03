@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Cluster from './Cluster'
+import Geolocation from './Geolocation'
 import Location from './Location'
 
 /**
@@ -18,6 +19,7 @@ import Location from './Location'
 const Map = ({
   googleMapsAPIKey,
   view,
+  geolocation,
   locations,
   clusters,
   onClusterClick,
@@ -31,6 +33,13 @@ const Map = ({
     onChange={onViewChange}
     resetBoundsOnResize
   >
+    {!geolocation.loading && (
+      <Geolocation
+        lat={geolocation.latitude}
+        lng={geolocation.longitude}
+        heading={geolocation.heading}
+      />
+    )}
     {clusters.map((cluster) => (
       <Cluster
         key={JSON.stringify(cluster)}
@@ -60,6 +69,7 @@ const Map = ({
 Map.propTypes = {
   googleMapsAPIKey: PropTypes.string.isRequired,
   view: PropTypes.object.isRequired,
+  geolocation: PropTypes.object,
   locations: PropTypes.arrayOf(PropTypes.object).isRequired,
   clusters: PropTypes.arrayOf(PropTypes.object).isRequired,
   onViewChange: PropTypes.func.isRequired,
