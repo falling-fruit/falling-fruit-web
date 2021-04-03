@@ -7,10 +7,10 @@ import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
 
 const SearchEntry = React.forwardRef(
-  ({ children, isCurrent, ...props }, ref) => {
+  ({ children, isCurrentLocation, ...props }, ref) => {
     const [primaryText, secondaryText] = children
 
-    const leftIcon = isCurrent ? (
+    const leftIcon = isCurrentLocation ? (
       <CircleIcon backgroundColor={theme.blue}>
         <CurrentLocation color={theme.background} />
       </CircleIcon>

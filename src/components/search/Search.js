@@ -168,7 +168,7 @@ const Search = ({ onType, sideButton, ...props }) => {
               <ComboboxOption
                 as={SearchEntry}
                 value={'Current Location'}
-                isCurrent
+                isCurrentLocation
               >
                 {['Current Location', cityName ?? '']}
               </ComboboxOption>
