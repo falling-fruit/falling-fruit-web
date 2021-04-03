@@ -18,8 +18,4 @@ const StyledTextarea = styled.textarea`
   }
 `
 
-const Textarea = ({ placeholder }) => (
-  <StyledTextarea placeholder={placeholder} />
-)
-
-export default Textarea
+export default StyledTextarea
