@@ -15,14 +15,11 @@ const StyledTextarea = styled.textarea`
   ::placeholder {
     color: ${({ theme }) => theme.tertiaryText};
     font-family: ${({ theme }) => theme.fonts};
-    font-size: 18px;
   }
 `
 
-const Textarea = ({ placeholder }) => {
-  console.log('hi')
-
-  return <StyledTextarea placeholder={placeholder} />
-}
+const Textarea = ({ placeholder }) => (
+  <StyledTextarea placeholder={placeholder} />
+)
 
 export default Textarea
