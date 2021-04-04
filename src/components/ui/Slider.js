@@ -4,17 +4,11 @@ import { Slider, SliderInput, SliderMarker, SliderTrack } from '@reach/slider'
 import styled from 'styled-components/macro'
 
 const StyledSlider = styled(Slider)`
-  width: 80%;
   margin-right: 40px;
   margin-left: 40px;
-  color: text;
 
   [data-reach-slider-track] {
     background: ${({ theme }) => theme.secondaryBackground};
-  }
-
-  [data-reach-slider-range] {
-    align-self: contain;
   }
 
   [data-reach-slider-handle] {
@@ -34,7 +28,6 @@ const StyledSlider = styled(Slider)`
 
 const StyledLabel = styled.div`
   margin-top: 20px;
-  margin-right: 5px;
 `
 
 const populateMarkers = (labels) =>
@@ -44,8 +37,8 @@ const populateMarkers = (labels) =>
     </SliderMarker>
   ))
 
-const FeedbackSlider = ({ labels, steps }) => (
-  <StyledSlider min={0} max={steps - 1} step={1}>
+const FeedbackSlider = ({ labels, steps, ...props }) => (
+  <StyledSlider min={0} max={steps - 1} step={1} {...props}>
     {populateMarkers(labels)}
     <SliderInput>
       <SliderTrack></SliderTrack>
