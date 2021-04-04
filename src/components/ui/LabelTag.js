@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-const FormTag = styled.li`
+const LabelTag = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,9 +13,6 @@ const FormTag = styled.li`
   color: ${({ theme }) => theme.text};
   background-color: #dadada;
   text-transform: uppercase;
-
-  &:not(:last-child) {
-    margin-right: 6px;
-  }
+  margin-left: 5px;
 `
-export default FormTag
+export default LabelTag

@@ -2,11 +2,10 @@ import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
-import FormLabel from '../ui/FormLabel'
-import FormTag from '../ui/FormTag'
 import Input from '../ui/Input'
+import Label from '../ui/Label'
 import ListEntry from '../ui/ListEntry'
-import StyledSectionHeading from '../ui/SectionHeading'
+import SectionHeading from '../ui/SectionHeading'
 import {
   AccordionItem,
   AccordionPanel,
@@ -65,11 +64,10 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
-    <FormLabel for="description">Description</FormLabel>
-    <input style={{ display: 'block' }} id="description" />
-    <StyledSectionHeading>Been here? Leave a Review</StyledSectionHeading>
-    <FormTag>Optional</FormTag>
-    <input style={{ display: 'block' }} id="hi" />
+    <Label for="description">Description</Label>
+    <Input />
+    <SectionHeading title="Been here? Leave a Review" labelText="Optional" />
+    <Input />
   </>
 )
 
