@@ -1,3 +1,4 @@
+import { rgba } from 'polished'
 import styled from 'styled-components/macro'
 
 const Heading = styled.div`
@@ -10,10 +11,11 @@ const Heading = styled.div`
   height: 55px;
   width: 70px;
   clip-path: polygon(35% 0%, 65% 0%, 100% 100%, 0% 100%);
+  // Fix gradient in Safari: https://css-tricks.com/thing-know-gradients-transparent-black/
   background: linear-gradient(
     to bottom,
     ${({ theme }) => theme.orange},
-    transparent
+    ${({ theme }) => rgba(theme.orange, 0)}
   );
 `
 

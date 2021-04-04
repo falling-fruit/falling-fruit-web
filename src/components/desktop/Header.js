@@ -44,6 +44,7 @@ const StyledHeader = styled.header`
           width: 90%;
           height: 45px;
           font-size: 100%;
+          font-family: inherit;
           font-weight: 500;
           cursor: pointer;
         }
