@@ -11,17 +11,7 @@ const PrimaryText = styled.div`
 const StyledCircleIcon = styled(CircleIcon)`
   border: ${({ theme }) => theme.secondaryText} 2px solid;
 `
-
-const ProgressBarStep = ({ label, stepNumber, className }) => (
-  <div className={className}>
-    <StyledCircleIcon backgroundColor={theme.secondaryBackground}>
-      <PrimaryText color={theme.secondaryText}>{stepNumber}</PrimaryText>
-    </StyledCircleIcon>
-    <PrimaryText color={theme.tertiaryText}>{label}</PrimaryText>
-  </div>
-)
-
-const StyledProgressBarStep = styled(ProgressBarStep)`
+const StyledProgressBarStep = styled.div`
   position: relative;
   & + & {
     flex-grow: 1;
@@ -41,6 +31,14 @@ const StyledProgressBarStep = styled(ProgressBarStep)`
     width: calc(100% - 34px);
   }
 `
-StyledProgressBarStep.displayName = 'ProgressBarStep'
 
-export default StyledProgressBarStep
+const ProgressBarStep = ({ label, stepNumber }) => (
+  <StyledProgressBarStep>
+    <StyledCircleIcon backgroundColor={theme.secondaryBackground}>
+      <PrimaryText color={theme.secondaryText}>{stepNumber}</PrimaryText>
+    </StyledCircleIcon>
+    <PrimaryText color={theme.tertiaryText}>{label}</PrimaryText>
+  </StyledProgressBarStep>
+)
+
+export default ProgressBarStep
