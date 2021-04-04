@@ -45,6 +45,7 @@ const BackButton = styled.button`
 
     @media ${({ theme }) => theme.device.mobile} {
       height: 25px;
+      padding-left: 5px;
     }
   }
 `
