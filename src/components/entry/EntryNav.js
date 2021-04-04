@@ -15,7 +15,7 @@ const StyledEntryNav = styled.div`
     align-items: center;
 
     height: 55px;
-    margin: 0;
+    padding: 0;
   }
 `
 

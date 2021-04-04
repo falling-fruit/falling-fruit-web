@@ -83,7 +83,7 @@ const Search = ({ onType, sideButton, ...props }) => {
   const [cityName, setCityName] = useState(null)
   useEffect(() => {
     async function fetchCityName() {
-      if (geolocation.latitude) {
+      if (geolocation.latitude !== null) {
         const city = await getFormattedLocationInfo(
           geolocation.latitude,
           geolocation.longitude,

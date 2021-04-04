@@ -28,7 +28,8 @@ const MapPage = () => {
   const [clusters, setClusters] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const geolocation = useGeolocation({ enableHighAccuracy: true })
+  //const geolocation = useGeolocation({ enableHighAccuracy: true })
+  const geolocation = useGeolocation()
 
   const fitContainerBounds = (bounds) => {
     const { offsetWidth, offsetHeight } = container.current
