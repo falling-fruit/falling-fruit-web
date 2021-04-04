@@ -1,49 +1,63 @@
 import '@reach/slider/styles.css'
 
-import { Slider, SliderInput, SliderMarker, SliderTrack } from '@reach/slider'
+import {
+  SliderHandle,
+  SliderInput,
+  SliderMarker,
+  SliderTrack,
+} from '@reach/slider'
 import styled from 'styled-components/macro'
 
-const StyledSlider = styled(Slider)`
-  margin-right: 40px;
-  margin-left: 40px;
-
+const StyledSliderInput = styled(SliderInput)`
   [data-reach-slider-track] {
+    height: 6px;
     background: ${({ theme }) => theme.secondaryBackground};
   }
 
   [data-reach-slider-handle] {
-    border: 4px solid;
-    border-color: orange;
-    background: ${({ theme }) => theme.transparentOrange};
+    box-sizing: border-box;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
+    border: 4px solid ${({ theme }) => theme.orange};
+    background-color: ${({ theme }) => theme.transparentOrange};
   }
 
   [data-reach-slider-marker] {
-    background: ${({ theme }) => theme.secondaryBackground};
+    position: relative;
+    height: 12px;
+    width: 12px;
     border-radius: 50%;
-    height: 16px;
-    width: 16px;
+    background-color: ${({ theme }) => theme.secondaryBackground};
+
+    div {
+      font-size: 12px;
+      margin-top: 20px;
+      /* Centers labels under each marker */
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      /* Centers text inside the label */
+      text-align: center;
+      /* Prevents line breaks */
+      white-space: nowrap;
+    }
   }
 `
 
-const StyledLabel = styled.div`
-  margin-top: 20px;
-`
+// We intentionally omit SliderRange because we don't want to highlight parts of the track
+const Slider = ({ labels, ...props }) => (
+  <StyledSliderInput max={labels.length - 1} {...props}>
+    <SliderTrack>
+      {labels.map((label, index) => (
+        <SliderMarker key={index} value={index}>
+          <div>{label}</div>
+        </SliderMarker>
+      ))}
 
-const populateMarkers = (labels) =>
-  labels.map((label, index) => (
-    <SliderMarker key={label} value={index}>
-      <StyledLabel>{label}</StyledLabel>
-    </SliderMarker>
-  ))
-
-const FeedbackSlider = ({ labels, steps, ...props }) => (
-  <StyledSlider min={0} max={steps - 1} step={1} {...props}>
-    {populateMarkers(labels)}
-    <SliderInput>
-      <SliderTrack></SliderTrack>
-    </SliderInput>
-  </StyledSlider>
+      <SliderHandle />
+    </SliderTrack>
+  </StyledSliderInput>
 )
 
-export { FeedbackSlider }
+export { Slider }
