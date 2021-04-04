@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
 import { getClusters, getLocations } from '../../utils/api'
+import { getGeolocationBounds } from '../../utils/viewportBounds'
 import SearchContext from '../search/SearchContext'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import Map from './Map'
@@ -85,6 +86,10 @@ const MapPage = () => {
     fetchClusterAndLocationData()
   }, [view, filters])
 
+  const handleGeolocationClick = () => {
+    setView(fitContainerBounds(getGeolocationBounds(geolocation)))
+  }
+
   const handleLocationClick = (location) => {
     history.push({
       pathname: `/entry/${location.id}`,
@@ -112,6 +117,7 @@ const MapPage = () => {
         locations={locations}
         clusters={clusters}
         onViewChange={setView}
+        onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
       />

@@ -22,6 +22,7 @@ const Map = ({
   geolocation,
   locations,
   clusters,
+  onGeolocationClick,
   onClusterClick,
   onLocationClick,
   onViewChange,
@@ -35,6 +36,7 @@ const Map = ({
   >
     {!geolocation.loading && (
       <Geolocation
+        onClick={onGeolocationClick}
         lat={geolocation.latitude}
         lng={geolocation.longitude}
         heading={geolocation.heading}

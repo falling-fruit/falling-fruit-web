@@ -51,14 +51,6 @@ const TextContent = styled.article`
 
   box-sizing: border-box;
 
-  h3 {
-    color: ${({ theme }) => theme.headerText};
-  }
-
-  a {
-    font-size: 16px;
-  }
-
   ul {
     margin: 0 0 12px 0;
   }
