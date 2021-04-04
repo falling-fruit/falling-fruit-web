@@ -6,26 +6,37 @@ import styled from 'styled-components/macro'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 
-const EntryNavContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 28px;
-  padding: 15px 10px 10px;
+const StyledEntryNav = styled.div`
+  padding: 25px 10px 15px;
 
   @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     height: 55px;
-    padding: 0;
+    margin: 0;
   }
 `
 
-const Text = styled.div`
+const BackButton = styled.button`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.secondaryText};
+  font-size: 15px;
+  font-weight: bold;
 
-  p {
-    font-size: 15px;
+  /* Reset button styles */
+  cursor: pointer;
+  font-family: inherit;
+  border: 0;
+  padding: 0;
+  background: none;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    /* Make the touch target bigger */
+    width: 75px;
+    height: 100%;
   }
 
   svg {
@@ -33,7 +44,6 @@ const Text = styled.div`
     margin-right: 7px;
 
     @media ${({ theme }) => theme.device.mobile} {
-      margin-left: 5px;
       height: 25px;
     }
   }
@@ -43,10 +53,6 @@ const Icons = styled.div`
   display: flex;
   justify-content: space-between;
   width: 110px;
-`
-
-const ArrowBackButton = styled(ArrowBack)`
-  cursor: pointer;
 `
 
 const EntryNav = ({ isDesktop }) => {
@@ -68,25 +74,12 @@ const EntryNav = ({ isDesktop }) => {
     console.log('View entry on map clicked')
   }
 
-  const onEnter = (event, callback) => {
-    if (event.key === 'Enter') {
-      callback()
-    }
-  }
-
   return (
-    <EntryNavContainer>
-      <Text>
-        <ArrowBackButton
-          role="button"
-          tabIndex={0}
-          aria-pressed="false"
-          onKeyDown={(e) => onEnter(e, onBackButtonClick)}
-          onClick={onBackButtonClick}
-          color={theme.secondaryText}
-        />
-        {isDesktop && <p>Back to Results</p>}
-      </Text>
+    <StyledEntryNav>
+      <BackButton onClick={onBackButtonClick} tabindex={0}>
+        <ArrowBack />
+        {isDesktop && 'Back to Results'}
+      </BackButton>
       {!isDesktop && (
         <Icons>
           <IconButton
@@ -103,7 +96,7 @@ const EntryNav = ({ isDesktop }) => {
           />
         </Icons>
       )}
-    </EntryNavContainer>
+    </StyledEntryNav>
   )
 }
 

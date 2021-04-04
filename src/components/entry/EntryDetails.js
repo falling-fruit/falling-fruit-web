@@ -34,10 +34,8 @@ const formatISOString = (dateString) =>
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
-  margin-top: 0px;
-  padding-top: 0px;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 87px;
+    padding-top: 87px;
   }
 
   overflow: auto;
@@ -45,7 +43,8 @@ const Page = styled.div`
 `
 
 const TextContent = styled.article`
-  padding: 10px 23px;
+  padding: 20px 23px;
+
   @media ${({ theme }) => theme.device.desktop} {
     padding: 12px;
   }
@@ -61,7 +60,7 @@ const TextContent = styled.article`
   }
 
   ul {
-    margin: 8px 0;
+    margin: 0 0 12px 0;
   }
 `
 
@@ -85,7 +84,7 @@ const Description = styled.section`
   }
 `
 
-const EntryDetails = ({ isDesktop }) => {
+const EntryDetails = () => {
   const {
     params: { id },
   } = useRouteMatch()
@@ -151,7 +150,7 @@ const EntryDetails = ({ isDesktop }) => {
   )
 
   return locationData && typesData ? (
-    <Page isDesktop={isDesktop}>
+    <Page>
       <PhotoGrid
         photos={locationData.photos}
         altText={locationData.type_names.join(', ')}
