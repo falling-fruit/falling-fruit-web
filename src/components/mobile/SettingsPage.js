@@ -10,6 +10,7 @@ import {
   SettingsAccordion,
   SettingsAccordionButton,
 } from '../ui/SettingsAccordion'
+import { FeedbackSlider } from '../ui/Slider'
 import { Tag, TagList } from '../ui/Tag'
 
 const SettingsPage = () => (
@@ -63,6 +64,11 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
+
+    <FeedbackSlider
+      labels={['taco', 'taco1', 'taco2', 'taco3', 'taco4']}
+      steps={5}
+    />
   </>
 )
 
