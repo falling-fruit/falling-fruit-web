@@ -5,12 +5,12 @@ const StyledTextarea = styled.textarea`
   box-sizing: border-box;
   border-radius: 12px;
   padding: 15px 20px;
-  resize: none;
+  resize: vertical;
   color: ${({ theme }) => theme.secondaryText};
   font-family: ${({ theme }) => theme.fonts};
   font-size: 18px;
   width: 100%;
-  height: 120px;
+  height: 140px;
 
   ::placeholder {
     color: ${({ theme }) => theme.tertiaryText};
