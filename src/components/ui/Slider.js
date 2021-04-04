@@ -11,7 +11,7 @@ import styled from 'styled-components/macro'
 const StyledSliderInput = styled(SliderInput)`
   [data-reach-slider-track] {
     height: 6px;
-    background: ${({ theme }) => theme.secondaryBackground};
+    background-color: ${({ theme }) => theme.secondaryBackground};
   }
 
   [data-reach-slider-handle] {
