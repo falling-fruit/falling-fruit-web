@@ -4,6 +4,7 @@ import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
+import ProgressBar from '../ui/ProgressBar'
 import {
   AccordionItem,
   AccordionPanel,
@@ -63,6 +64,7 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
+    <ProgressBar labels={['step1', 'step2', 'step3']} />
   </>
 )
 

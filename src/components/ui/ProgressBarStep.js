@@ -8,15 +8,39 @@ const PrimaryText = styled.div`
   font-size: 15px;
   color: ${({ color }) => color};
 `
-const ProgressBarStep = ({ label, stepNumber }) => (
-  <div>
-    <CircleIcon>
-      <PrimaryText color={theme.orange}>{stepNumber}</PrimaryText>
-    </CircleIcon>
-    <PrimaryText>{label}</PrimaryText>
+const StyledCircleIcon = styled(CircleIcon)`
+  border: ${({ theme }) => theme.secondaryText} 2px solid;
+`
+
+const ProgressBarStep = ({ label, stepNumber, className }) => (
+  <div className={className}>
+    <StyledCircleIcon backgroundColor={theme.secondaryBackground}>
+      <PrimaryText color={theme.secondaryText}>{stepNumber}</PrimaryText>
+    </StyledCircleIcon>
+    <PrimaryText color={theme.tertiaryText}>{label}</PrimaryText>
   </div>
 )
-//Notes:
-//Step component
 
-export default ProgressBarStep
+const StyledProgressBarStep = styled(ProgressBarStep)`
+  position: relative;
+  & + & {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  & + &::before {
+    top: calc(50% - 0.6rem);
+    right: 36px;
+    height: 100%;
+    position: absolute;
+    align-self: center;
+    content: '';
+    border-top: 2.5px solid black;
+    width: calc(100% - 34px);
+  }
+`
+StyledProgressBarStep.displayName = 'ProgressBarStep'
+
+export default StyledProgressBarStep
