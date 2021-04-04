@@ -3,13 +3,13 @@ import styled from 'styled-components/macro'
 const Heading = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
-  transform: translate(-50%, 0);
+  left: -35px;
+  transform-origin: top center;
   transform: rotate(${({ heading }) => heading}deg);
 
-  height: 50px;
-  width: 30px;
-  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+  height: 55px;
+  width: 70px;
+  clip-path: polygon(35% 0%, 65% 0%, 100% 100%, 0% 100%);
   background: linear-gradient(
     to bottom,
     ${({ theme }) => theme.orange},
@@ -19,11 +19,10 @@ const Heading = styled.div`
 
 const Pin = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  z-index: 1;
+
   transform: translate(-50%, -50%);
 
-  z-index: 1;
   width: 22px;
   height: 22px;
   border: 6px solid #fefefe;
@@ -35,9 +34,9 @@ const GeolocationWrapper = styled.div`
   position: relative;
 `
 
-const Geolocation = ({ heading, ...props }) => (
+const Geolocation = ({ heading, onClick, ...props }) => (
   <GeolocationWrapper {...props}>
-    <Pin />
+    <Pin onClick={onClick} />
     {heading && <Heading heading={heading} />}
   </GeolocationWrapper>
 )
