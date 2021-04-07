@@ -11,7 +11,6 @@ import {
   SettingsAccordionButton,
 } from '../ui/SettingsAccordion'
 import { Tag, TagList } from '../ui/Tag'
-import Textarea from '../ui/Textarea'
 
 const SettingsPage = () => (
   <>
@@ -52,7 +51,6 @@ const SettingsPage = () => (
       rightIcons={[<Star size="16" key={1} />, <Star size="16" key={2} />]}
       size={57}
     />
-
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
     <SettingsAccordion>
       <AccordionItem>
@@ -64,7 +62,6 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
-    <Textarea placeholder="Lorem ipsum..." />
   </>
 )
 
