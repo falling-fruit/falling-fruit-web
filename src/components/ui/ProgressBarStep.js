@@ -29,15 +29,21 @@ const StyledProgressBarStep = styled.div`
     position: absolute;
     align-self: center;
     content: '';
-    border-top: ${({ $nodeStatus, theme }) =>
-        $nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
+    border-top: ${({ $nodeStatus }) => {
+        console.log($nodeStatus)
+        $nodeStatus
+      }}
       2.5px solid;
     width: calc(100% - 34px);
   }
 `
 
 const ProgressBarStep = ({ label, stepNumber, nodeStatus }) => (
-  <StyledProgressBarStep $nodeStatus={nodeStatus}>
+  <StyledProgressBarStep
+    $nodeStatus={
+      nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange
+    }
+  >
     <StyledCircleIcon
       backgroundColor={
         nodeStatus === 'incomplete'

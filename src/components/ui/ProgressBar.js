@@ -18,7 +18,7 @@ const getStepStatus = (index, currentStep) => {
   }
 }
 
-const ProgressBar = ({ labels, className, currentStep }) => (
+const ProgressBar = ({ labels, className, currentStep, onChange }) => (
   <StyledProgressBar className={className}>
     {labels.map((label, index) => (
       <ProgressBarStep
@@ -26,6 +26,7 @@ const ProgressBar = ({ labels, className, currentStep }) => (
         key={index}
         stepNumber={index + 1}
         nodeStatus={getStepStatus(index, currentStep)}
+        onClick={onChange(index)}
       />
     ))}
   </StyledProgressBar>
