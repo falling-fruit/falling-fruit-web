@@ -30,7 +30,7 @@ const Input = React.forwardRef(
     ref,
   ) => (
     <div className={className}>
-      <AddOn prepend> {prepend} </AddOn>
+      <AddOn prepend>{prepend}</AddOn>
       <input
         value={value}
         onChange={onChange}
@@ -70,7 +70,7 @@ const StyledInput = styled(Input)`
     width: 100%;
     outline: none;
     height: 44px;
-    padding-left: ${(props) => (props.prepend ? '10px' : 0)};
+    padding-left: ${(props) => (props.prepend ? '10px' : '0')};
 
     &::placeholder {
       color: ${({ theme }) => theme.tertiaryText};

@@ -11,7 +11,7 @@ const LabelTag = styled.span`
   font-size: 9px;
   font-weight: bold;
   color: ${({ theme }) => theme.text};
-  background-color: #dadada;
+  background-color: ${({ theme }) => theme.secondaryBackground};
   text-transform: uppercase;
   margin-left: 5px;
 `
