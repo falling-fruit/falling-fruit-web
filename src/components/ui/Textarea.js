@@ -12,7 +12,7 @@ const Textarea = styled.textarea`
   width: 100%;
   height: 140px;
 
-  ::placeholder {
+  &::placeholder {
     color: ${({ theme }) => theme.tertiaryText};
     font-family: ${({ theme }) => theme.fonts};
   }
