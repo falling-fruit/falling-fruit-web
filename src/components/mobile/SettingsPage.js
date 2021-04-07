@@ -2,6 +2,7 @@ import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
+import CaptionInput from '../ui/CaptionInput'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import {
@@ -63,6 +64,8 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
+
+    <CaptionInput leftIcons={<Star size="16" />} />
   </>
 )
 
