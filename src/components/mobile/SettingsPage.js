@@ -65,7 +65,7 @@ const SettingsPage = () => (
     </SettingsAccordion>
 
     <Slider
-      style={{ marginLeft: 40, marginRight: 40 }}
+      style={{ margin: '0 40px' }}
       labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
       steps={5}
     />
