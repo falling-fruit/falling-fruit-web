@@ -3,7 +3,10 @@ import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 
 import Button from '../ui/Button'
 import Input from '../ui/Input'
+import Label from '../ui/Label'
+import LabelTag from '../ui/LabelTag'
 import ListEntry from '../ui/ListEntry'
+import SectionHeading from '../ui/SectionHeading'
 import {
   AccordionItem,
   AccordionPanel,
@@ -51,7 +54,6 @@ const SettingsPage = () => (
       rightIcons={[<Star size="16" key={1} />, <Star size="16" key={2} />]}
       size={57}
     />
-
     <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
     <SettingsAccordion>
       <AccordionItem>
@@ -63,6 +65,12 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
+    <Label for="description">Description</Label>
+    <Input />
+    <SectionHeading>
+      Been here? Leave a Review <LabelTag>Optional</LabelTag>
+    </SectionHeading>
+    <Input />
   </>
 )
 
