@@ -64,7 +64,10 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
-    <ProgressBar labels={['step1', 'step2', 'step3']} currentStep={2} />
+    <ProgressBar
+      labels={['step1', 'step2', 'step3', 'step4', 'step5']}
+      currentStep={1}
+    />
   </>
 )
 

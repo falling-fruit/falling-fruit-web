@@ -1,3 +1,4 @@
+import { Check } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components/macro'
 
@@ -29,20 +30,18 @@ const StyledProgressBarStep = styled.div`
     position: absolute;
     align-self: center;
     content: '';
-    border-top: ${({ $nodeStatus }) => {
-        console.log($nodeStatus)
-        $nodeStatus
-      }}
+    border-top: ${({ $nodeStatus, theme }) =>
+        $nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
       2.5px solid;
     width: calc(100% - 34px);
   }
 `
 
-const ProgressBarStep = ({ label, stepNumber, nodeStatus }) => (
+const ProgressBarStep = ({ label, stepNumber, nodeStatus, onNodeClick }) => (
   <StyledProgressBarStep
-    $nodeStatus={
-      nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange
-    }
+    $nodeStatus={nodeStatus}
+    // eslint-disable-next-line
+    onClick={(event) => onNodeClick(stepNumber)}
   >
     <StyledCircleIcon
       backgroundColor={
@@ -52,11 +51,17 @@ const ProgressBarStep = ({ label, stepNumber, nodeStatus }) => (
       }
       $nodeStatus={nodeStatus}
     >
-      <PrimaryText
-        color={nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
-      >
-        {stepNumber}
-      </PrimaryText>
+      {nodeStatus === 'complete' ? (
+        <Check color={theme.orange}></Check>
+      ) : (
+        <PrimaryText
+          color={
+            nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange
+          }
+        >
+          {stepNumber}
+        </PrimaryText>
+      )}
     </StyledCircleIcon>
     <PrimaryText
       color={nodeStatus === 'incomplete' ? theme.tertiaryText : theme.orange}
