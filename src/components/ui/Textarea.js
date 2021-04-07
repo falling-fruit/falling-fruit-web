@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro'
 
-const StyledTextarea = styled.textarea`
+const Textarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.secondaryBackground};
   box-sizing: border-box;
   border-radius: 12px;
   padding: 15px 20px;
   resize: vertical;
   color: ${({ theme }) => theme.secondaryText};
-  font-family: ${({ theme }) => theme.fonts};
+  font-family: inherit;
   font-size: 18px;
   width: 100%;
   height: 140px;
@@ -18,4 +18,4 @@ const StyledTextarea = styled.textarea`
   }
 `
 
-export default StyledTextarea
+export default Textarea
