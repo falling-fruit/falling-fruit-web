@@ -1,6 +1,6 @@
 import { Flag, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
@@ -77,9 +77,7 @@ const Description = styled.section`
 `
 
 const EntryDetails = () => {
-  const {
-    params: { id },
-  } = useRouteMatch()
+  const { id } = useParams()
 
   const [locationData, setLocationData] = useState()
   const [typesData, setTypesData] = useState()
