@@ -9,7 +9,9 @@ const PrimaryText = styled.div`
   color: ${({ color }) => color};
 `
 const StyledCircleIcon = styled(CircleIcon)`
-  border: ${({ theme }) => theme.secondaryText} 2px solid;
+  border: ${({ $nodeStatus, theme }) =>
+      $nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
+    2px solid;
 `
 const StyledProgressBarStep = styled.div`
   position: relative;
@@ -27,17 +29,34 @@ const StyledProgressBarStep = styled.div`
     position: absolute;
     align-self: center;
     content: '';
-    border-top: 2.5px solid black;
+    border-top: ${({ $nodeStatus, theme }) =>
+        $nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
+      2.5px solid;
     width: calc(100% - 34px);
   }
 `
 
-const ProgressBarStep = ({ label, stepNumber }) => (
-  <StyledProgressBarStep>
-    <StyledCircleIcon backgroundColor={theme.secondaryBackground}>
-      <PrimaryText color={theme.secondaryText}>{stepNumber}</PrimaryText>
+const ProgressBarStep = ({ label, stepNumber, nodeStatus }) => (
+  <StyledProgressBarStep $nodeStatus={nodeStatus}>
+    <StyledCircleIcon
+      backgroundColor={
+        nodeStatus === 'incomplete'
+          ? theme.secondaryBackground
+          : theme.transparentOrange
+      }
+      $nodeStatus={nodeStatus}
+    >
+      <PrimaryText
+        color={nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
+      >
+        {stepNumber}
+      </PrimaryText>
     </StyledCircleIcon>
-    <PrimaryText color={theme.tertiaryText}>{label}</PrimaryText>
+    <PrimaryText
+      color={nodeStatus === 'incomplete' ? theme.tertiaryText : theme.orange}
+    >
+      {label}
+    </PrimaryText>
   </StyledProgressBarStep>
 )
 

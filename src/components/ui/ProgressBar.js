@@ -7,6 +7,16 @@ const StyledProgressBar = styled.div`
   display: flex;
   justify-content: space-between;
 `
+const getStepStatus = (index, currentStep) => {
+  const refactoredIndex = index + 1
+  if (refactoredIndex === currentStep) {
+    return 'active'
+  } else if (refactoredIndex < currentStep) {
+    return 'complete'
+  } else {
+    return 'incomplete'
+  }
+}
 
 const ProgressBar = ({ labels, className, currentStep }) => (
   <StyledProgressBar className={className}>
@@ -15,7 +25,7 @@ const ProgressBar = ({ labels, className, currentStep }) => (
         label={label}
         key={index}
         stepNumber={index + 1}
-        isActive={currentStep === index}
+        nodeStatus={getStepStatus(index, currentStep)}
       />
     ))}
   </StyledProgressBar>
