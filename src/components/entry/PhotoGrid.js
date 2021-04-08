@@ -10,6 +10,10 @@ const StyledPhotoGrid = styled.figure`
   grid-template-columns: 1fr 92px;
   grid-template-rows: 50% 50%;
   gap: 6.5px;
+  @media ${({ theme }) => theme.device.desktop} {
+    // Height is not real height on desktop, add padding = gap
+    padding-bottom: 6.5px;
+  }
 
   grid-template-areas:
     'main-image extra-image'

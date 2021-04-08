@@ -16,11 +16,14 @@ import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import {
+  getGeolocationBounds,
+  getPlaceBounds,
+} from '../../utils/viewportBounds'
 import Input from '../ui/Input'
 import { getFormattedLocationInfo } from './locationInfo'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
-import { getGeolocationBounds, getPlaceBounds } from './viewportBounds'
 
 const CurrentLocationButton = (props) => (
   <button {...props}>
@@ -80,7 +83,7 @@ const Search = ({ onType, sideButton, ...props }) => {
   const [cityName, setCityName] = useState(null)
   useEffect(() => {
     async function fetchCityName() {
-      if (!geolocation.loading) {
+      if (geolocation.latitude !== null) {
         const city = await getFormattedLocationInfo(
           geolocation.latitude,
           geolocation.longitude,
@@ -134,7 +137,7 @@ const Search = ({ onType, sideButton, ...props }) => {
     <Combobox
       onSelect={handleSelect}
       aria-label="Search for a location"
-      openOnFocus={!isDesktop && cityName !== null}
+      openOnFocus={!isDesktop && geolocation.latitude !== null}
       {...props}
     >
       <SearchBarContainer>
@@ -148,7 +151,7 @@ const Search = ({ onType, sideButton, ...props }) => {
           prepend={
             isDesktop && (
               <StyledCurrentLocationButton
-                disabled={cityName === null}
+                disabled={geolocation.latitude === null}
                 onClick={() => handleSelect('Current Location')}
               />
             )
@@ -164,7 +167,7 @@ const Search = ({ onType, sideButton, ...props }) => {
               on mobile, the current location is defined, and
               the input is empty */
 
-            !isDesktop && cityName !== undefined && value === '' && (
+            !isDesktop && geolocation.latitude !== null && value === '' && (
               <ComboboxOption
                 as={SearchEntry}
                 value={'Current Location'}

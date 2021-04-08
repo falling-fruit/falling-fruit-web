@@ -10,6 +10,7 @@ import {
   SettingsAccordion,
   SettingsAccordionButton,
 } from '../ui/SettingsAccordion'
+import { Slider } from '../ui/Slider'
 import { Tag, TagList } from '../ui/Tag'
 
 const SettingsPage = () => (
@@ -65,6 +66,12 @@ const SettingsPage = () => (
         </AccordionPanel>
       </AccordionItem>
     </SettingsAccordion>
+
+    <Slider
+      style={{ margin: '0 40px' }}
+      labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
+      steps={5}
+    />
   </>
 )
 
