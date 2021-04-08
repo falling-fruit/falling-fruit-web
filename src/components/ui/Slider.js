@@ -9,6 +9,9 @@ import {
 import styled from 'styled-components/macro'
 
 const StyledSliderInput = styled(SliderInput)`
+  // Extra padding to account for text under each marker
+  padding-bottom: 24px;
+
   [data-reach-slider-track] {
     height: 6px;
     background-color: ${({ theme }) => theme.secondaryBackground};

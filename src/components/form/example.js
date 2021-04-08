@@ -33,7 +33,7 @@ const SignupForm = () => (
 
       <Textarea name="feedback" label="Feedback" />
 
-      <Slider name="fruiting" label="Fruiting" labels={[1, 2, 3, 4, 5]} />
+      <Slider name="fruiting" label="Fruiting" labels={['p', 'p', 3, 4, 5]} />
 
       <Button type="submit">Submit</Button>
     </Form>
