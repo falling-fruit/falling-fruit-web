@@ -25,7 +25,7 @@ const SignupForm = () => (
     }}
   >
     <Form>
-      <Input name="firstName" label="First Name" />
+      <Input name="firstName" label="First Name" required />
 
       <Input name="lastName" label="Last Name" />
 

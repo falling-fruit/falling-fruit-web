@@ -3,18 +3,15 @@ import styled from 'styled-components/macro'
 import { validatedColor } from './GlobalStyle'
 
 const LabelTag = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
   border-radius: 4px;
+  vertical-align: 0.25em;
   height: 15px;
   padding: 2px;
+  margin-left: 5px;
   font-size: 9px;
   font-weight: bold;
-  color: ${validatedColor('background', 'text')};
+  color: ${validatedColor('text', 'background')};
   background-color: ${validatedColor('secondaryBackground')};
   text-transform: uppercase;
-  margin-left: 5px;
 `
 export default LabelTag

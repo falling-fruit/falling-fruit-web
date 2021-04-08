@@ -19,7 +19,7 @@ const FormikSlider = (props) => {
 
   return (
     <LabeledSlider
-      $invalid={touched && error}
+      invalid={touched && error}
       value={value}
       onChange={setValue}
       {...props}
