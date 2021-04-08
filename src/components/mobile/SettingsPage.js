@@ -15,9 +15,11 @@ import { Tag, TagList } from '../ui/Tag'
 const SettingsPage = () => (
   <>
     <p>Settings</p>
-    <Button icon={<Star />}>Review</Button>
-    <Button icon={<Flag />} secondary>
-      Report
+    <Button>
+      <Star /> Review
+    </Button>
+    <Button secondary>
+      <Flag /> Report
     </Button>
     <br />
     <br />

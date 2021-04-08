@@ -6,11 +6,11 @@ const StyledButton = styled.button`
   justify-items: center;
   height: 36px;
   font-size: 14px;
-  color: ${({ secondary, theme }) =>
-    secondary ? theme.orange : theme.background};
+  color: ${({ $secondary, theme }) =>
+    $secondary ? theme.orange : theme.background};
   font-weight: 700;
-  background-color: ${({ secondary, theme }) =>
-    secondary ? theme.background : theme.orange};
+  background-color: ${({ $secondary, theme }) =>
+    $secondary ? theme.background : theme.orange};
   border: 2px solid ${({ theme }) => theme.orange};
   box-sizing: border-box;
   border-radius: 100px;
@@ -26,11 +26,8 @@ const StyledButton = styled.button`
 `
 
 // TODO: forward ref and remaining props in all UI components, rather than taking specific props
-const Button = ({ onClick, secondary = false, icon, children }) => (
-  <StyledButton onClick={onClick} secondary={secondary}>
-    {icon}
-    {children}
-  </StyledButton>
+const Button = ({ secondary = false, ...props }) => (
+  <StyledButton $secondary={secondary} {...props} />
 )
 
 export default Button
