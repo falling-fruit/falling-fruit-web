@@ -9,6 +9,7 @@
     "@reach/accordion": "^0.13.2",
     "@reach/checkbox": "^0.13.2",
     "@reach/combobox": "^0.13.2",
+    "@reach/slider": "^0.15.0",
     "@reach/tabs": "^0.13.0",
     "@reach/window-size": "^0.13.2",
     "@styled-icons/boxicons-regular": "^10.23.0",

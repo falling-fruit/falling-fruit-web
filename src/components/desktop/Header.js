@@ -31,7 +31,6 @@ const StyledHeader = styled.header`
         margin: 0;
         height: 100%;
         color: white;
-        font-size: 16px;
         cursor: pointer;
 
         button {
@@ -44,7 +43,8 @@ const StyledHeader = styled.header`
           border: none;
           width: 90%;
           height: 45px;
-          font-size: 16px;
+          font-size: 100%;
+          font-family: inherit;
           font-weight: 500;
           cursor: pointer;
         }

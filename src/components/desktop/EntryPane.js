@@ -18,7 +18,7 @@ const EntryPane = () => (
   <StyledEntryPane>
     <EntryNav isDesktop />
     <ScrollingEntryDetails>
-      <EntryDetails isDesktop />
+      <EntryDetails />
     </ScrollingEntryDetails>
   </StyledEntryPane>
 )
