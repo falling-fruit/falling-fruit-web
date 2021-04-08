@@ -10,10 +10,11 @@ const PrimaryText = styled.div`
   color: ${({ color }) => color};
 `
 const StyledCircleIcon = styled(CircleIcon)`
-  border: ${({ $nodeStatus, theme }) =>
-      $nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
+  border: ${({ $status, theme }) =>
+      $status === 'incomplete' ? theme.secondaryText : theme.orange}
     2px solid;
 `
+
 const StyledProgressBarStep = styled.div`
   position: relative;
   & + & {
@@ -30,41 +31,41 @@ const StyledProgressBarStep = styled.div`
     position: absolute;
     align-self: center;
     content: '';
-    border-top: ${({ $nodeStatus, theme }) =>
-        $nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange}
-      2.5px solid;
+    border-top: ${({ theme }) => theme.secondaryText} 2.5px solid;
     width: calc(100% - 34px);
+  }
+
+  // TODO: fix specificity of ::before CSS
+
+  &::before {
+    border-color: ${({ $status, theme }) =>
+      $status === 'incomplete' ? theme.secondaryText : theme.orange} !important;
   }
 `
 
-const ProgressBarStep = ({ label, stepNumber, nodeStatus, onNodeClick }) => (
-  <StyledProgressBarStep
-    $nodeStatus={nodeStatus}
-    // eslint-disable-next-line
-    onClick={(event) => onNodeClick(stepNumber)}
-  >
+const ProgressBarStep = ({ label, stepNumber, status, onClick }) => (
+  <StyledProgressBarStep $status={status}>
     <StyledCircleIcon
       backgroundColor={
-        nodeStatus === 'incomplete'
+        status === 'incomplete'
           ? theme.secondaryBackground
           : theme.transparentOrange
       }
-      $nodeStatus={nodeStatus}
+      $status={status}
+      onClick={onClick}
     >
-      {nodeStatus === 'complete' ? (
+      {status === 'complete' ? (
         <Check color={theme.orange}></Check>
       ) : (
         <PrimaryText
-          color={
-            nodeStatus === 'incomplete' ? theme.secondaryText : theme.orange
-          }
+          color={status === 'incomplete' ? theme.secondaryText : theme.orange}
         >
           {stepNumber}
         </PrimaryText>
       )}
     </StyledCircleIcon>
     <PrimaryText
-      color={nodeStatus === 'incomplete' ? theme.tertiaryText : theme.orange}
+      color={status === 'incomplete' ? theme.tertiaryText : theme.orange}
     >
       {label}
     </PrimaryText>

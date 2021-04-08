@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React } from 'react'
 import styled from 'styled-components/macro'
 
 import ProgressBarStep from '../ui/ProgressBarStep'
@@ -8,7 +8,7 @@ const StyledProgressBar = styled.div`
   justify-content: space-between;
 `
 const getStepStatus = (index, currentStep) => {
-  const refactoredIndex = index + 1
+  const refactoredIndex = index
   if (refactoredIndex === currentStep) {
     return 'active'
   } else if (refactoredIndex < currentStep) {
@@ -18,31 +18,18 @@ const getStepStatus = (index, currentStep) => {
   }
 }
 
-const ProgressBar = ({ labels, className, currentStep }) => {
-  //is this the way to go, understand how rendering works with this
-  //variable naming
-  const [current, setCurrent] = useState(currentStep)
-
-  const handleChange = (label) => {
-    setCurrent(label)
-    console.log(label)
-    //how to do reduce redundancy in functions
-  }
-
-  return (
-    <StyledProgressBar className={className}>
-      {labels.map((label, index) => (
-        <ProgressBarStep
-          label={label}
-          key={index} //good practice to have key
-          stepNumber={index + 1}
-          nodeStatus={getStepStatus(index, current)}
-          //difference between implementing onClick = event -> right here
-          onNodeClick={handleChange}
-        />
-      ))}
-    </StyledProgressBar>
-  )
-}
+const ProgressBar = ({ labels, className, currentStep, onChange }) => (
+  <StyledProgressBar className={className}>
+    {labels.map((label, index) => (
+      <ProgressBarStep
+        label={label}
+        key={index}
+        stepNumber={index + 1}
+        status={getStepStatus(index, currentStep)}
+        onClick={() => onChange(index)}
+      />
+    ))}
+  </StyledProgressBar>
+)
 
 export default ProgressBar
