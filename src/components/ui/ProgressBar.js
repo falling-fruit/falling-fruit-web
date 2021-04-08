@@ -7,25 +7,24 @@ const StyledProgressBar = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const getStepStatus = (index, currentStep) => {
-  const refactoredIndex = index
-  if (refactoredIndex === currentStep) {
+const getStepStatus = (index, step) => {
+  if (index === step) {
     return 'active'
-  } else if (refactoredIndex < currentStep) {
+  } else if (index < step) {
     return 'complete'
   } else {
     return 'incomplete'
   }
 }
 
-const ProgressBar = ({ labels, className, currentStep, onChange }) => (
+const ProgressBar = ({ labels, className, step, onChange }) => (
   <StyledProgressBar className={className}>
     {labels.map((label, index) => (
       <ProgressBarStep
         label={label}
         key={index}
         stepNumber={index + 1}
-        status={getStepStatus(index, currentStep)}
+        status={getStepStatus(index, step)}
         onClick={() => onChange(index)}
       />
     ))}

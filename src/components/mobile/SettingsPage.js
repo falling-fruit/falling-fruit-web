@@ -16,7 +16,7 @@ import { Slider } from '../ui/Slider'
 import { Tag, TagList } from '../ui/Tag'
 
 const SettingsPage = () => {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(2)
   return (
     <>
       <p>Settings</p>
@@ -77,7 +77,7 @@ const SettingsPage = () => {
       <br></br>
       <ProgressBar
         labels={['step1', 'step2', 'step3', 'step4', 'step5']}
-        currentStep={currentStep}
+        step={currentStep}
         onChange={setCurrentStep}
       />
     </>

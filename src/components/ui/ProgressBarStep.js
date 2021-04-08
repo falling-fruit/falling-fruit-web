@@ -5,11 +5,8 @@ import styled from 'styled-components/macro'
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from './GlobalStyle'
 
-const PrimaryText = styled.div`
-  font-size: 15px;
-  color: ${({ color }) => color};
-`
 const StyledCircleIcon = styled(CircleIcon)`
+  color: ${({ $color }) => $color};
   border: ${({ $status, theme }) =>
       $status === 'incomplete' ? theme.secondaryText : theme.orange}
     2px solid;
@@ -17,6 +14,9 @@ const StyledCircleIcon = styled(CircleIcon)`
 
 const StyledProgressBarStep = styled.div`
   position: relative;
+  font-size: 15px;
+  color: ${({ $color }) => $color};
+
   & + & {
     flex-grow: 1;
     display: flex;
@@ -44,8 +44,12 @@ const StyledProgressBarStep = styled.div`
 `
 
 const ProgressBarStep = ({ label, stepNumber, status, onClick }) => (
-  <StyledProgressBarStep $status={status}>
+  <StyledProgressBarStep
+    $status={status}
+    $color={status === 'incomplete' ? theme.tertiaryText : theme.orange}
+  >
     <StyledCircleIcon
+      $color={status === 'incomplete' ? theme.secondaryText : theme.orange}
       backgroundColor={
         status === 'incomplete'
           ? theme.secondaryBackground
@@ -57,18 +61,10 @@ const ProgressBarStep = ({ label, stepNumber, status, onClick }) => (
       {status === 'complete' ? (
         <Check color={theme.orange}></Check>
       ) : (
-        <PrimaryText
-          color={status === 'incomplete' ? theme.secondaryText : theme.orange}
-        >
-          {stepNumber}
-        </PrimaryText>
+        <div> {stepNumber} </div>
       )}
     </StyledCircleIcon>
-    <PrimaryText
-      color={status === 'incomplete' ? theme.tertiaryText : theme.orange}
-    >
-      {label}
-    </PrimaryText>
+    <div> {label} </div>
   </StyledProgressBarStep>
 )
 
