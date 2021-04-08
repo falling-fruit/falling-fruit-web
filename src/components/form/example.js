@@ -3,7 +3,7 @@ import React from 'react'
 import * as Yup from 'yup'
 
 import Button from '../ui/Button'
-import { Input, Textarea } from './FormikWrappers'
+import { Input, Slider, Textarea } from './FormikWrappers'
 
 const SignupForm = () => (
   <Formik
@@ -32,6 +32,8 @@ const SignupForm = () => (
       <Input name="email" label="Email!" />
 
       <Textarea name="feedback" label="Feedback" />
+
+      <Slider name="fruiting" label="Fruiting" labels={[1, 2, 3, 4, 5]} />
 
       <Button type="submit">Submit</Button>
     </Form>

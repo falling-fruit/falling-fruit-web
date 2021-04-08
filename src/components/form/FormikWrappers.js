@@ -9,17 +9,22 @@ const FormikInput = withLabeledField(Input)
 
 const FormikTextarea = withLabeledField(Textarea)
 
-const FormikSlider = ({ name, props }) => {
-  const [_field, meta, helpers] = useField(name)
+const FormikSlider = (props) => {
+  const [_field, meta, helpers] = useField(props)
 
   const { value, touched, error } = meta
   const { setValue } = helpers
 
-  const LabeledSlider = withLabel(
-    <Slider value={value} onChange={setValue} {...props} />,
-  )
+  const LabeledSlider = withLabel(Slider)
 
-  return <LabeledSlider $invalid={touched && error} />
+  return (
+    <LabeledSlider
+      $invalid={touched && error}
+      value={value}
+      onChange={setValue}
+      {...props}
+    />
+  )
 }
 
 export {

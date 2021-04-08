@@ -46,18 +46,19 @@ const StyledSliderInput = styled(SliderInput)`
 `
 
 // We intentionally omit SliderRange because we don't want to highlight parts of the track
-const Slider = ({ labels, ...props }) => (
-  <StyledSliderInput max={labels.length - 1} {...props}>
-    <SliderTrack>
-      {labels.map((label, index) => (
-        <SliderMarker key={index} value={index}>
-          <div>{label}</div>
-        </SliderMarker>
-      ))}
+const Slider = ({ labels = null, ...props }) =>
+  labels && (
+    <StyledSliderInput max={labels.length - 1} {...props}>
+      <SliderTrack>
+        {labels.map((label, index) => (
+          <SliderMarker key={index} value={index}>
+            <div>{label}</div>
+          </SliderMarker>
+        ))}
 
-      <SliderHandle />
-    </SliderTrack>
-  </StyledSliderInput>
-)
+        <SliderHandle />
+      </SliderTrack>
+    </StyledSliderInput>
+  )
 
 export { Slider }
