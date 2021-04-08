@@ -28,6 +28,7 @@ const SettingsPage = () => (
       onChange={(e) => console.log(e.target.value)}
       onEnter={(e) => window.alert(`Received:\n${e?.target?.value}`)}
       icon={<Search />}
+      $invalid
     />
     <br />
     <Input
