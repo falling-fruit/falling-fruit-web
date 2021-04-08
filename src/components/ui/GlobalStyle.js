@@ -14,6 +14,10 @@ const GlobalStyle = createGlobalStyle`
     height: ${({ windowSize }) => windowSize.height}px;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    color: ${({ theme }) => theme.headerText};
+  }
+
   h1, h2, h3, h5, h6 {
     font-weight: bold;
   }

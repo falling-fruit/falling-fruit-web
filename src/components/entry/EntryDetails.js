@@ -1,6 +1,6 @@
 import { Flag, Star } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
@@ -34,30 +34,25 @@ const formatISOString = (dateString) =>
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
-  margin-top: 0px;
-  padding-top: 0px;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 80px;
-    padding-top: 10px;
+    padding-top: 87px;
   }
+
   overflow: auto;
   width: 100%;
 `
 
 const TextContent = styled.article`
-  padding: 23px;
+  padding: 20px 23px;
+
+  @media ${({ theme }) => theme.device.desktop} {
+    padding: 12px;
+  }
+
   box-sizing: border-box;
 
-  h3 {
-    color: ${({ theme }) => theme.headerText};
-  }
-
-  a {
-    font-size: 16px;
-  }
-
   ul {
-    margin-top: 0;
+    margin: 0 0 12px 0;
   }
 `
 
@@ -81,10 +76,8 @@ const Description = styled.section`
   }
 `
 
-const EntryDetails = ({ isDesktop }) => {
-  const {
-    params: { id },
-  } = useRouteMatch()
+const EntryDetails = () => {
+  const { id } = useParams()
 
   const [locationData, setLocationData] = useState()
   const [typesData, setTypesData] = useState()
@@ -147,7 +140,7 @@ const EntryDetails = ({ isDesktop }) => {
   )
 
   return locationData && typesData ? (
-    <Page isDesktop={isDesktop}>
+    <Page>
       <PhotoGrid
         photos={locationData.photos}
         altText={locationData.type_names.join(', ')}
@@ -159,12 +152,14 @@ const EntryDetails = ({ isDesktop }) => {
         <Description>
           <p>{locationData.description}</p>
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
-          <Button>
-            <Star /> Review
-          </Button>
-          <Button secondary>
-            <Flag /> Report
-          </Button>
+          <div>
+            <Button>
+              <Star /> Review
+            </Button>
+            <Button secondary>
+              <Flag /> Report
+            </Button>
+          </div>
         </Description>
         {otherResources}
       </TextContent>
