@@ -1,4 +1,3 @@
-//import { Times } from '@styled-icons/fa-solid' &times;
 import styled from 'styled-components/macro'
 
 import CircleIcon from './CircleIcon'
@@ -15,11 +14,7 @@ const StyledCaptionInput = styled(ListEntry)`
 
 const CaptionInput = ({ value, onChange, onDelete, onClick, image }) => (
   <StyledCaptionInput
-    leftIcons={
-      <CircleIcon height="100%" width="100%">
-        {image}
-      </CircleIcon>
-    }
+    leftIcons={<CircleIcon>{image}</CircleIcon>}
     primaryText={
       <Input placeholder="Add a caption..." onChange={onChange} value={value} />
     }
@@ -37,5 +32,3 @@ const CaptionInput = ({ value, onChange, onDelete, onClick, image }) => (
 )
 
 export default CaptionInput
-
-//return CaptionInput
