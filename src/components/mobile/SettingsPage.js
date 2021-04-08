@@ -64,7 +64,7 @@ const SettingsPage = () => (
       </AccordionItem>
     </SettingsAccordion>
 
-    <CaptionInput leftIcons={<Star size="16" />} />
+    <CaptionInput image={<Star />} />
   </>
 )
 
