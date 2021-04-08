@@ -5,7 +5,6 @@ const StyledTypeTitle = styled.div`
 
   h2 {
     font-size: ${({ small }) => (small ? 18 : 22.75)}px;
-    color: ${({ theme }) => theme.headerText};
     margin-top: 0px;
     margin-bottom: 0px;
   }

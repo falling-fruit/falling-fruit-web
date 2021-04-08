@@ -1,8 +1,10 @@
 import { fitBounds } from 'google-map-react'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useGeolocation } from 'react-use'
 
 import { getClusters, getLocations } from '../../utils/api'
+import { getGeolocationBounds } from '../../utils/viewportBounds'
 import SearchContext from '../search/SearchContext'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import Map from './Map'
@@ -25,6 +27,9 @@ const MapPage = () => {
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+
+  //const geolocation = useGeolocation({ enableHighAccuracy: true })
+  const geolocation = useGeolocation()
 
   const fitContainerBounds = (bounds) => {
     const { offsetWidth, offsetHeight } = container.current
@@ -82,6 +87,10 @@ const MapPage = () => {
     fetchClusterAndLocationData()
   }, [view, filters])
 
+  const handleGeolocationClick = () => {
+    setView(fitContainerBounds(getGeolocationBounds(geolocation)))
+  }
+
   const handleLocationClick = (location) => {
     history.push({
       pathname: `/entry/${location.id}`,
@@ -105,9 +114,11 @@ const MapPage = () => {
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
+        geolocation={geolocation}
         locations={locations}
         clusters={clusters}
         onViewChange={setView}
+        onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
       />
