@@ -1,5 +1,4 @@
 import { Check } from '@styled-icons/boxicons-regular'
-import React from 'react'
 import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
@@ -14,6 +13,9 @@ const StyledCircleIcon = styled(CircleIcon)`
   border: ${({ $status, theme }) =>
       $status === 'incomplete' ? theme.secondaryText : theme.orange}
     2px solid;
+  svg {
+    color: ${({ theme }) => theme.orange};
+  }
 `
 
 const StyledProgressBarStep = styled.div`
@@ -47,20 +49,13 @@ const StyledProgressBarStep = styled.div`
       $status === 'incomplete' ? theme.secondaryText : theme.orange} !important;
   }
 `
-const StyledCheck = styled(Check)`
-  color: ${({ theme }) => theme.orange};
-`
 
-const ProgressBarStep = ({ label, stepNumber, status, onClick }) => (
+const ProgressBarStep = ({ label, children, status, onClick }) => (
   <StyledProgressBarStep $status={status}>
     <StyledCircleIcon $status={status} onClick={onClick}>
-      {status === 'complete' ? (
-        <StyledCheck></StyledCheck>
-      ) : (
-        <div> {stepNumber} </div>
-      )}
+      {status === 'complete' ? <Check /> : <div>{children}</div>}
     </StyledCircleIcon>
-    <div> {label} </div>
+    <div>{label}</div>
   </StyledProgressBarStep>
 )
 

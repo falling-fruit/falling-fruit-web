@@ -73,8 +73,8 @@ const SettingsPage = () => {
         labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
         steps={5}
       />
-      <br></br>
-      <br></br>
+      <br />
+      <br />
       <ProgressBar
         labels={['step1', 'step2', 'step3', 'step4', 'step5']}
         step={currentStep}

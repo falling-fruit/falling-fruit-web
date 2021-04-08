@@ -1,4 +1,3 @@
-import { React } from 'react'
 import styled from 'styled-components/macro'
 
 import ProgressBarStep from '../ui/ProgressBarStep'
@@ -26,7 +25,9 @@ const ProgressBar = ({ labels, className, step, onChange }) => (
         stepNumber={index + 1}
         status={getStepStatus(index, step)}
         onClick={() => onChange(index)}
-      />
+      >
+        {index + 1}
+      </ProgressBarStep>
     ))}
   </StyledProgressBar>
 )
