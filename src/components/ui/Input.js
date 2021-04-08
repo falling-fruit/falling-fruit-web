@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
+import { validatedColor } from './GlobalStyle'
+
 const AddOn = styled.div`
   height: 100%;
   & > * {
@@ -55,7 +57,7 @@ const StyledInput = styled(Input)`
   justify-content: space-between;
   align-items: center;
   border-radius: 23px;
-  border: 1px solid ${({ theme }) => theme.secondaryBackground};
+  border: 1px solid ${validatedColor()};
   box-sizing: border-box;
   padding: 0 20px;
   padding-left: ${(props) => (props.prepend ? '5px' : 'default')};

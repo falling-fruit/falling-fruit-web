@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro'
 
+import { validatedColor } from './GlobalStyle'
+
 const LabelTag = styled.span`
   display: inline-flex;
   align-items: center;
@@ -10,8 +12,8 @@ const LabelTag = styled.span`
   padding: 2px;
   font-size: 9px;
   font-weight: bold;
-  color: ${({ theme }) => theme.text};
-  background-color: ${({ theme }) => theme.secondaryBackground};
+  color: ${validatedColor('background', 'text')};
+  background-color: ${validatedColor('secondaryBackground')};
   text-transform: uppercase;
   margin-left: 5px;
 `
