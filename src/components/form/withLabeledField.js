@@ -4,18 +4,20 @@ import compose from 'ramda/src/compose'
 import Label from '../ui/Label'
 
 export const withLabel = (WrappedField) => ({ label, $invalid, ...props }) => {
-  const FieldWithLabel = (
+  const id = props.id || props.name
+
+  const fieldWithLabel = (
     <>
       {label && (
-        <Label htmlFor={props.id || props.name} $invalid={$invalid}>
+        <Label htmlFor={id} $invalid={$invalid}>
           {label}
         </Label>
       )}
-      <WrappedField $invalid={$invalid} {...props} />
+      <WrappedField $invalid={$invalid} id={id} {...props} />
     </>
   )
 
-  return FieldWithLabel
+  return fieldWithLabel
 }
 
 export const withField = (WrappedComponent, type) => (props) => {
@@ -30,4 +32,4 @@ export const withField = (WrappedComponent, type) => (props) => {
   )
 }
 
-export const withLabeledField = compose(withLabel, withField)
+export const withLabeledField = compose(withField, withLabel)

@@ -1,10 +1,9 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
 
 import Button from '../ui/Button'
-import Input from '../ui/Input'
-import Label from '../ui/Label'
+import { Input, Textarea } from './FormikWrappers'
 
 const SignupForm = () => (
   <Formik
@@ -26,17 +25,13 @@ const SignupForm = () => (
     }}
   >
     <Form>
-      <Label htmlFor="firstName">First Name</Label>
-      <Field name="firstName" type="text" as={Input} />
-      <ErrorMessage name="firstName" />
+      <Input name="firstName" label="First Name" />
 
-      <Label htmlFor="lastName">Last Name</Label>
-      <Field name="lastName" type="text" as={Input} />
-      <ErrorMessage name="lastName" />
+      <Input name="lastName" label="Last Name" />
 
-      <Label htmlFor="email">Email Address</Label>
-      <Field name="email" type="email" as={Input} />
-      <ErrorMessage name="email" />
+      <Input name="email" label="Email!" />
+
+      <Textarea name="feedback" label="Feedback" />
 
       <Button type="submit">Submit</Button>
     </Form>
