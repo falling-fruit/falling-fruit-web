@@ -7,6 +7,7 @@ import { theme } from './GlobalStyle'
 
 const StyledCircleIcon = styled(CircleIcon)`
   color: ${({ $color }) => $color};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   border: ${({ $status, theme }) =>
       $status === 'incomplete' ? theme.secondaryText : theme.orange}
     2px solid;
@@ -50,7 +51,7 @@ const ProgressBarStep = ({ label, stepNumber, status, onClick }) => (
   >
     <StyledCircleIcon
       $color={status === 'incomplete' ? theme.secondaryText : theme.orange}
-      backgroundColor={
+      $backgroundColor={
         status === 'incomplete'
           ? theme.secondaryBackground
           : theme.transparentOrange
