@@ -6,6 +6,7 @@ import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import Modal from '../ui/Modal'
+import ProgressBar from '../ui/ProgressBar'
 import {
   AccordionItem,
   AccordionPanel,
@@ -20,6 +21,7 @@ const SettingsPage = () => {
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
   const buttonRef = useRef()
+  const [currentStep, setCurrentStep] = useState(2)
   return (
     <>
       <p>Settings</p>
@@ -59,6 +61,7 @@ const SettingsPage = () => {
         rightIcons={[<Star size="16" key={1} />, <Star size="16" key={2} />]}
         size={57}
       />
+
       <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
       <SettingsAccordion>
         <AccordionItem>
@@ -70,21 +73,23 @@ const SettingsPage = () => {
           </AccordionPanel>
         </AccordionItem>
       </SettingsAccordion>
-
       <Slider
         style={{ margin: '0 40px' }}
         labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
         steps={5}
       />
-
       <br />
       <br />
+      <ProgressBar
+        labels={['step1', 'step2', 'step3', 'step4', 'step5']}
+        step={currentStep}
+        onChange={setCurrentStep}
+      />
       <br />
       <br />
       <button onClick={open} ref={buttonRef}>
         Show Dialog
       </button>
-      <h1>hello</h1>
       <Modal isOpen={showDialog} onDismiss={close}>
         <p>Pass the button ref to Dialog and the button.</p>
         <button onClick={close}>Not me</button>
