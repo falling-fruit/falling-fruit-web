@@ -18,6 +18,7 @@ import { Slider } from '../ui/Slider'
 import { Tag, TagList } from '../ui/Tag'
 
 const SettingsPage = () => {
+  // TODO: Move form components and type select logic to separate Form page
   const [currentStep, setCurrentStep] = useState(2)
   const [typeOptions, setTypeOptions] = useState([])
 
@@ -33,10 +34,19 @@ const SettingsPage = () => {
     fetchTypes()
   }, [])
 
+  const handleTypeSelect = (types) => {
+    const typeIds = types.map((t) => t.value)
+    console.log('Selected type IDs: ', typeIds)
+  }
+
   return (
     <>
       <p>Settings</p>
-      <SelectWrapper options={typeOptions} placeholder="Select a type..." />
+      <SelectWrapper
+        onChange={handleTypeSelect}
+        options={typeOptions}
+        placeholder="Select a type..."
+      />
       <br />
       <Button icon={<Star />}>Review</Button>
       <Button icon={<Flag />} secondary>

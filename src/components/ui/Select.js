@@ -36,13 +36,16 @@ const StyledSelect = styled(Select)`
   }
 `
 
-const SelectWrapper = ({ options, placeholder }) => (
+const SelectWrapper = ({ options, placeholder, onChange }) => (
   <StyledSelect
     className="select-container"
     classNamePrefix="select"
     options={options}
     isMulti
     placeholder={placeholder}
+    onChange={onChange}
+    closeMenuOnSelect={false}
+    blurInputOnSelect={false}
   />
 )
 
