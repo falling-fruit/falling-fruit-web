@@ -1,7 +1,8 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
+import { getTypes } from '../../utils/api'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
@@ -18,10 +19,24 @@ import { Tag, TagList } from '../ui/Tag'
 
 const SettingsPage = () => {
   const [currentStep, setCurrentStep] = useState(2)
+  const [typeOptions, setTypeOptions] = useState([])
+
+  useEffect(() => {
+    async function fetchTypes() {
+      const types = await getTypes()
+      const options = types.map((t) => ({
+        value: t.id,
+        label: `${t.name} [${t.scientific_name}]`,
+      }))
+      setTypeOptions(options)
+    }
+    fetchTypes()
+  }, [])
+
   return (
     <>
       <p>Settings</p>
-      <SelectWrapper />
+      <SelectWrapper options={typeOptions} placeholder="Select a type..." />
       <br />
       <Button icon={<Star />}>Review</Button>
       <Button icon={<Flag />} secondary>

@@ -2,12 +2,6 @@ import React from 'react'
 import Select from 'react-select'
 import styled from 'styled-components/macro'
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-]
-
 const StyledSelect = styled(Select)`
   .select__indicators {
     display: none;
@@ -42,13 +36,13 @@ const StyledSelect = styled(Select)`
   }
 `
 
-const SelectWrapper = () => (
+const SelectWrapper = ({ options, placeholder }) => (
   <StyledSelect
     className="select-container"
     classNamePrefix="select"
     options={options}
     isMulti
-    placeholder="Select a type..."
+    placeholder={placeholder}
   />
 )
 
