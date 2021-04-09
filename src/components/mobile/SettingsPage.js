@@ -6,6 +6,7 @@ import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import ProgressBar from '../ui/ProgressBar'
+import { SelectWrapper } from '../ui/Select'
 import {
   AccordionItem,
   AccordionPanel,
@@ -20,6 +21,8 @@ const SettingsPage = () => {
   return (
     <>
       <p>Settings</p>
+      <SelectWrapper />
+      <br />
       <Button icon={<Star />}>Review</Button>
       <Button icon={<Flag />} secondary>
         Report
