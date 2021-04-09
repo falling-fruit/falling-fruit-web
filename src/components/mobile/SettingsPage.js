@@ -27,7 +27,7 @@ const SettingsPage = () => {
       const types = await getTypes()
       const options = types.map((t) => ({
         value: t.id,
-        label: `${t.name} [${t.scientific_name}]`,
+        label: `${t.name}`,
       }))
       setTypeOptions(options)
     }
