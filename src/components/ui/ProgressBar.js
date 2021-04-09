@@ -22,7 +22,6 @@ const ProgressBar = ({ labels, className, step, onChange }) => (
       <ProgressBarStep
         label={label}
         key={index}
-        stepNumber={index + 1}
         status={getStepStatus(index, step)}
         onClick={() => onChange(index)}
       >
