@@ -8,6 +8,6 @@ const StyledDialog = styled(Dialog)`
   width: 75%;
   height: 70%;
 `
-const Modal = ({ ...props }) => <StyledDialog {...props}> </StyledDialog>
+const Modal = ({ ...props }) => <StyledDialog {...props} />
 
 export default Modal

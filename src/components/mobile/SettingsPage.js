@@ -1,6 +1,6 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import Button from '../ui/Button'
 import Input from '../ui/Input'
@@ -19,6 +19,7 @@ const SettingsPage = () => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
+  const buttonRef = useRef()
   return (
     <>
       <p>Settings</p>
@@ -78,11 +79,18 @@ const SettingsPage = () => {
 
       <br />
       <br />
-      <button onClick={open}>Show Dialog</button>
+      <br />
+      <br />
+      <button onClick={open} ref={buttonRef}>
+        Show Dialog
+      </button>
+      <h1>hello</h1>
       <Modal isOpen={showDialog} onDismiss={close}>
         <p>Pass the button ref to Dialog and the button.</p>
         <button onClick={close}>Not me</button>
-        <button onClick={close}>Got me!</button>
+        <button ref={buttonRef} onClick={close}>
+          Got me!
+        </button>
       </Modal>
     </>
   )
