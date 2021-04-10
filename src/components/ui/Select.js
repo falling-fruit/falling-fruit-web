@@ -1,8 +1,8 @@
 import React from 'react'
-import Select from 'react-select'
+import WindowedSelect from 'react-windowed-select'
 import styled from 'styled-components/macro'
 
-const StyledSelect = styled(Select)`
+const StyledSelect = styled(WindowedSelect)`
   .select__indicators {
     display: none;
   }
