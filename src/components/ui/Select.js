@@ -1,5 +1,5 @@
 import React from 'react'
-import WindowedSelect from 'react-windowed-select'
+import WindowedSelect, { createFilter } from 'react-windowed-select'
 import styled from 'styled-components/macro'
 
 const StyledSelect = styled(WindowedSelect)`
@@ -46,6 +46,8 @@ const SelectWrapper = ({ options, placeholder, onChange }) => (
     onChange={onChange}
     closeMenuOnSelect={false}
     blurInputOnSelect={false}
+    // Reduces typing lag
+    filterOption={createFilter({ ignoreAccents: false })}
   />
 )
 
