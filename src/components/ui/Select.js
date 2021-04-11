@@ -44,6 +44,9 @@ const StyledSelect = styled(Select)`
 
 const LIST_ITEM_HEIGHT = 35
 
+/**
+ * Wrapper around react-window. This is used to replace the menu list component of react-select.
+ */
 const MenuList = ({ children, maxHeight }) => (
   <List
     height={maxHeight}
