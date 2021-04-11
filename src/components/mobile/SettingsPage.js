@@ -46,6 +46,7 @@ const SettingsPage = () => {
         onChange={handleTypeSelect}
         options={typeOptions}
         placeholder="Select a type..."
+        isMulti
       />
       <br />
       <Button icon={<Star />}>Review</Button>

@@ -1,10 +1,16 @@
 import React from 'react'
-import WindowedSelect from 'react-windowed-select'
+import Select from 'react-select'
+import { FixedSizeList as List } from 'react-window'
 import styled from 'styled-components/macro'
 
-const StyledSelect = styled(WindowedSelect)`
-  .select__indicators {
+const StyledSelect = styled(Select)`
+  .select__clear-indicator,
+  .select__indicator-separator {
     display: none;
+  }
+
+  .select__dropdown-indicator {
+    color: ${({ theme }) => theme.headerText};
   }
 
   .select__control {
@@ -36,12 +42,25 @@ const StyledSelect = styled(WindowedSelect)`
   }
 `
 
-const SelectWrapper = ({ options, placeholder, onChange }) => (
+const LIST_ITEM_HEIGHT = 35
+
+const MenuList = ({ children, maxHeight }) => (
+  <List
+    height={maxHeight}
+    itemCount={children.length}
+    itemSize={LIST_ITEM_HEIGHT}
+  >
+    {({ index, style }) => <div style={style}>{children[index]}</div>}
+  </List>
+)
+
+const SelectWrapper = ({ options, placeholder, onChange, isMulti }) => (
   <StyledSelect
+    components={{ MenuList }}
     className="select-container"
     classNamePrefix="select"
     options={options}
-    isMulti
+    isMulti={isMulti}
     placeholder={placeholder}
     onChange={onChange}
     closeMenuOnSelect={false}
