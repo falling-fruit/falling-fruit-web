@@ -1,3 +1,4 @@
+import { X as X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
 import CircleIcon from './CircleIcon'
@@ -9,10 +10,9 @@ const StyledCaptionInput = styled(ListEntry)`
   padding: 8px;
   height: 33px;
   display: flex;
-  justify-content: space-between;
 `
 
-const CaptionInput = ({ value, onChange, onDelete, onClick, image }) => (
+const CaptionInput = ({ value, onChange, onDelete, image }) => (
   <StyledCaptionInput
     leftIcons={<CircleIcon>{image}</CircleIcon>}
     primaryText={
@@ -21,11 +21,9 @@ const CaptionInput = ({ value, onChange, onDelete, onClick, image }) => (
     rightIcons={
       <IconButton
         size="44"
-        raised={false}
-        icon={<> &times; </>}
-        onClick={onClick}
+        icon={<X />}
+        onClick={onDelete}
         label="Delete image caption"
-        pressed={onDelete}
       />
     }
   ></StyledCaptionInput>

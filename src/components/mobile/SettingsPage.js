@@ -65,7 +65,14 @@ const SettingsPage = () => (
       </AccordionItem>
     </SettingsAccordion>
 
-    <CaptionInput image={<Star />} />
+    <CaptionInput
+      image={
+        <img
+          src="http://s3-us-west-2.amazonaws.com/fallingfruit-production/observations/photos/000/002/745/medium/open-uri20131213-3992-1szjh9k.jpg"
+          alt="tree"
+        />
+      }
+    />
     <Slider
       style={{ margin: '0 40px' }}
       labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
