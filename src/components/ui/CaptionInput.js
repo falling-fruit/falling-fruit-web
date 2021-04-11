@@ -26,7 +26,7 @@ const CaptionInput = ({ value, onChange, onDelete, image }) => (
         label="Delete image caption"
       />
     }
-  ></StyledCaptionInput>
+  />
 )
 
 export default CaptionInput
