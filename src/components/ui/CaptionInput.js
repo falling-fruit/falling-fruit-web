@@ -8,19 +8,28 @@ import ListEntry from './ListEntry'
 
 const StyledCaptionInput = styled(ListEntry)`
   padding: 8px;
-  height: 33px;
+  height: 16px;
   display: flex;
+`
+
+const StyledInput = styled(Input)`
+  font-size: 16px;
+  height: 36px;
 `
 
 const CaptionInput = ({ value, onChange, onDelete, image }) => (
   <StyledCaptionInput
-    leftIcons={<CircleIcon>{image}</CircleIcon>}
+    leftIcons={<CircleIcon size="36">{image}</CircleIcon>}
     primaryText={
-      <Input placeholder="Add a caption..." onChange={onChange} value={value} />
+      <StyledInput
+        placeholder="Add a caption..."
+        onChange={onChange}
+        value={value}
+      />
     }
     rightIcons={
       <IconButton
-        size="44"
+        size="36"
         icon={<X />}
         onClick={onDelete}
         label="Delete image caption"
