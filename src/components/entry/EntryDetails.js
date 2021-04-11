@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
+import { getStreetAddress } from '../../utils/locationInfo'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -81,18 +82,20 @@ const EntryDetails = () => {
 
   const [locationData, setLocationData] = useState()
   const [typesData, setTypesData] = useState()
-
   useEffect(() => {
     async function fetchEntryDetails() {
       // Show loading between entry selections
       setLocationData(null)
-
       const locationData = await getLocationById(id)
+      const streetAddress = await getStreetAddress(
+        locationData.lat,
+        locationData.lng,
+      )
       const typesData = await Promise.all(
         locationData.type_ids.map(getTypeById),
       )
-
-      setLocationData(locationData)
+      // TODO: Make this it's own state
+      setLocationData({ ...locationData, street_address: streetAddress })
       setTypesData(typesData)
     }
     fetchEntryDetails()
@@ -151,6 +154,8 @@ const EntryDetails = () => {
         {typesHeader}
         <Description>
           <p>{locationData.description}</p>
+          <p>{locationData.street_address}</p>
+          <p>"Seasonality will go here"</p>
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>
             <Button>

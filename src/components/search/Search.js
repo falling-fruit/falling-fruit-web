@@ -15,13 +15,13 @@ import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
+import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import {
   getGeolocationBounds,
   getPlaceBounds,
 } from '../../utils/viewportBounds'
 import Input from '../ui/Input'
-import { getFormattedLocationInfo } from './locationInfo'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
 
