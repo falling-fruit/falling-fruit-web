@@ -1,5 +1,5 @@
 import React from 'react'
-import Select from 'react-select'
+import Select, { createFilter } from 'react-select'
 import { FixedSizeList as List } from 'react-window'
 import styled from 'styled-components/macro'
 
@@ -65,6 +65,8 @@ const SelectWrapper = ({ options, placeholder, onChange, isMulti }) => (
     onChange={onChange}
     closeMenuOnSelect={false}
     blurInputOnSelect={false}
+    // Reduces typing lag
+    filterOption={createFilter({ ignoreAccents: false })}
   />
 )
 
