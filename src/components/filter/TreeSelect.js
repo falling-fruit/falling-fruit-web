@@ -6,9 +6,41 @@ import styled from 'styled-components/macro'
 import NonrenderTreeSelect from './NonrenderTreeSelect'
 
 const TreeSelectContainer = styled.div`
-  .dropdown-trigger.arrow.top,
   .toggle.expanded {
     display: none;
+  }
+
+  .dropdown-trigger.arrow.top,
+  .dropdown-trigger.arrow.bottom {
+    ${({ popover }) => !popover && `display: none`};
+    border-radius: 23px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid ${({ theme }) => theme.secondaryBackground};
+
+    ::after {
+      display: none;
+    }
+  }
+
+  .tag-item {
+    .tag {
+      background-color: ${({ theme }) => theme.transparentOrange};
+      border-color: ${({ theme }) => theme.transparentOrange};
+      color: ${({ theme }) => theme.orange};
+      border-radius: 20px;
+      padding: 0px 10px 0px 10px;
+      font-size: 12px;
+
+      .tag-remove {
+        display: none;
+      }
+    }
+
+    .placeholder {
+      color: ${({ theme }) => theme.text};
+      font-weight: 400;
+    }
   }
 
   .dropdown {
@@ -103,13 +135,16 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ data, onChange, ...props }) => (
-  <TreeSelectContainer>
+const TreeSelect = ({ data, onChange, popover, ...props }) => (
+  <TreeSelectContainer popover={popover}>
     <NonrenderTreeSelect
       data={data}
       onChange={onChange}
-      texts={{ inlineSearchPlaceholder: 'Search for a type...' }}
-      showDropdown="always"
+      texts={{
+        placeholder: 'Select a type...',
+        inlineSearchPlaceholder: 'Search for a type...',
+      }}
+      showDropdown={popover ? undefined : 'always'}
       showPartiallySelected
       keepTreeOnSearch
       keepChildrenOnSearch
