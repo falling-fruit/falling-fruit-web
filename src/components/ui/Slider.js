@@ -48,6 +48,8 @@ const StyledSliderInput = styled(SliderInput)`
   }
 `
 
+// TODO: fix slider losing focus after one keyboard left or right
+
 // We intentionally omit SliderRange because we don't want to highlight parts of the track
 const Slider = ({ labels = null, ...props }) =>
   labels && (

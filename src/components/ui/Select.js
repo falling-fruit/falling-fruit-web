@@ -3,6 +3,8 @@ import Select, { createFilter } from 'react-select'
 import { FixedSizeList as List } from 'react-window'
 import styled from 'styled-components/macro'
 
+import { validatedColor } from './GlobalStyle'
+
 const StyledSelect = styled(Select)`
   .select__clear-indicator,
   .select__indicator-separator {
@@ -14,7 +16,7 @@ const StyledSelect = styled(Select)`
   }
 
   .select__control {
-    border: 1px solid ${({ theme }) => theme.secondaryBackground};
+    border: 1px solid ${validatedColor()};
     border-radius: 23px;
     padding: 6px 7px;
   }
@@ -66,8 +68,6 @@ const SelectWrapper = ({ options, placeholder, onChange, isMulti }) => (
     isMulti={isMulti}
     placeholder={placeholder}
     onChange={onChange}
-    closeMenuOnSelect={false}
-    blurInputOnSelect={false}
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
   />

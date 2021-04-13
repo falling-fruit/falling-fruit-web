@@ -3,11 +3,17 @@ import React from 'react'
 import * as Yup from 'yup'
 
 import Button from '../ui/Button'
-import { Input, Slider, Textarea } from './FormikWrappers'
+import { Input, Select, Slider, Textarea } from './FormikWrappers'
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+]
 
 const SignupForm = () => (
   <Formik
-    initialValues={{ firstName: '', lastName: '', email: '' }}
+    initialValues={{ firstName: '', lastName: '', email: '', fruiting: 3 }}
     validationSchema={Yup.object({
       firstName: Yup.string()
         .max(15, 'Must be 15 characters or less')
@@ -34,6 +40,8 @@ const SignupForm = () => (
       <Textarea name="feedback" label="Feedback" />
 
       <Slider name="fruiting" label="Fruiting" labels={['p', 'p', 3, 4, 5]} />
+
+      <Select name="types" label="Types" options={options} />
 
       <Button type="submit">Submit</Button>
     </Form>

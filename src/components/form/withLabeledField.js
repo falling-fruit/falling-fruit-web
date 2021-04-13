@@ -1,44 +1,52 @@
 import { useField } from 'formik'
-import compose from 'ramda/src/compose'
 
 import Label from '../ui/Label'
 import LabelTag from '../ui/LabelTag'
 
-export const withLabel = (WrappedField) => ({
-  label,
-  required,
-  optional,
-  invalid,
-  ...props
-}) => {
-  const id = props.id || props.name
-
-  const fieldWithLabel = (
+export const withLabel = (WrappedField) => {
+  const FieldWithLabel = ({
+    label,
+    required,
+    optional,
+    invalid,
+    id,
+    name,
+    ...props
+  }) => (
     <>
       {label && (
-        <Label htmlFor={id} $invalid={invalid}>
+        <Label htmlFor={id || name} $invalid={invalid}>
           {label}
           {required && <LabelTag $invalid={invalid}>Required</LabelTag>}
           {optional && <LabelTag $invalid={invalid}>Optional</LabelTag>}
         </Label>
       )}
-      <WrappedField $invalid={invalid} id={id} {...props} />
+      <WrappedField $invalid={invalid} id={id || name} name={name} {...props} />
     </>
   )
 
-  return fieldWithLabel
+  return FieldWithLabel
 }
 
-export const withField = (WrappedComponent, type) => (props) => {
-  const [field, meta] = useField({ ...props, type })
+export const withField = (WrappedComponent, type, bypassFormik = false) => (
+  props,
+) => {
+  const [field, meta, helpers] = useField({ ...props, type })
+  const customProps = bypassFormik
+    ? {
+        value: meta.value,
+        onChange: helpers.setValue,
+      }
+    : field
 
   return (
     <WrappedComponent
       invalid={meta.touched && meta.error}
-      {...field}
+      {...customProps}
       {...props}
     />
   )
 }
 
-export const withLabeledField = compose(withField, withLabel)
+export const withLabeledField = (WrappedField, type, bypassFormik) =>
+  withField(withLabel(WrappedField), type, bypassFormik)

@@ -1,34 +1,17 @@
-import { useField } from 'formik'
-
 import Input from '../ui/Input'
+import { SelectWrapper } from '../ui/Select'
 import { Slider } from '../ui/Slider'
 import Textarea from '../ui/Textarea'
-import { withLabel, withLabeledField } from './withLabeledField'
+import { withLabeledField } from './withLabeledField'
 
 const FormikInput = withLabeledField(Input)
-
 const FormikTextarea = withLabeledField(Textarea)
-
-const FormikSlider = (props) => {
-  const [_field, meta, helpers] = useField(props)
-
-  const { value, touched, error } = meta
-  const { setValue } = helpers
-
-  const LabeledSlider = withLabel(Slider)
-
-  return (
-    <LabeledSlider
-      invalid={touched && error}
-      value={value}
-      onChange={setValue}
-      {...props}
-    />
-  )
-}
+const FormikSlider = withLabeledField(Slider, undefined, true)
+const FormikSelect = withLabeledField(SelectWrapper, undefined, true)
 
 export {
   FormikInput as Input,
+  FormikSelect as Select,
   FormikSlider as Slider,
   FormikTextarea as Textarea,
 }
