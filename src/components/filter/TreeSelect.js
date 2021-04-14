@@ -1,6 +1,5 @@
 import 'react-dropdown-tree-select/dist/styles.css'
 
-import React from 'react'
 import styled from 'styled-components/macro'
 
 import NonrenderTreeSelect from './NonrenderTreeSelect'
@@ -144,7 +143,7 @@ const TreeSelect = ({ data, onChange, popover, ...props }) => (
         placeholder: 'Select a type...',
         inlineSearchPlaceholder: 'Search for a type...',
       }}
-      showDropdown={popover ? undefined : 'always'}
+      showDropdown={popover ? 'default' : 'always'}
       showPartiallySelected
       keepTreeOnSearch
       keepChildrenOnSearch

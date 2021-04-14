@@ -1,4 +1,3 @@
-import React from 'react'
 import Select, { createFilter } from 'react-select'
 import { FixedSizeList as List } from 'react-window'
 import styled from 'styled-components/macro'
