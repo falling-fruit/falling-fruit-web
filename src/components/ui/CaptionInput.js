@@ -10,6 +10,14 @@ const StyledCaptionInput = styled(ListEntry)`
   height: 36px;
   margin-bottom: 16px;
   border-bottom: 0px !important;
+
+  div:first-child {
+    margin-right: 2px;
+  }
+
+  div:last-child {
+    margin-left: 2px;
+  }
 `
 
 const StyledInput = styled(Input)`
