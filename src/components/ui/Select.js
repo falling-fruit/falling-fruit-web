@@ -22,6 +22,11 @@ const StyledSelect = styled(Select)`
     padding: 6px 7px;
   }
 
+  .select__input {
+    font-family: ${({ theme }) => theme.fonts};
+    color: ${({ theme }) => theme.secondaryText};
+  }
+
   .select__placeholder {
     color: ${({ theme }) => theme.text};
   }
@@ -70,24 +75,10 @@ const MenuList = ({ children, maxHeight }) => (
   </FixedSizeList>
 )
 
-const SelectWrapper = ({
-  options,
-  placeholder,
-  onChange,
-  isMulti,
-  closeMenuOnSelect,
-  blurInputOnSelect,
-  ...props
-}) => (
+const SelectWrapper = (props) => (
   <StyledSelect
     components={{ MenuList }}
     classNamePrefix="select"
-    options={options}
-    isMulti={isMulti}
-    placeholder={placeholder}
-    onChange={onChange}
-    closeMenuOnSelect={closeMenuOnSelect}
-    blurInputOnSelect={blurInputOnSelect}
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
     {...props}
