@@ -91,7 +91,6 @@ const SelectWrapper = ({
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
     {...props}
-    menuIsOpen
   />
 )
 
