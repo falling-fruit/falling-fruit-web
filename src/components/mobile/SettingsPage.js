@@ -6,6 +6,7 @@ import { getTypes } from '../../utils/api'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
+import Modal from '../ui/Modal'
 import ProgressBar from '../ui/ProgressBar'
 import { Select } from '../ui/Select'
 import {
@@ -19,6 +20,7 @@ import { Tag, TagList } from '../ui/Tag'
 
 const SettingsPage = () => {
   // TODO: Move form components and type select logic to separate Form page
+  const [showDialog, setShowDialog] = useState(false)
   const [currentStep, setCurrentStep] = useState(2)
   const [typeOptions, setTypeOptions] = useState([])
 
@@ -113,6 +115,14 @@ const SettingsPage = () => {
         step={currentStep}
         onChange={setCurrentStep}
       />
+      <br />
+      <br />
+      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+      <Modal isOpen={showDialog} onDismiss={() => setShowDialog(false)}>
+        <p>Pass the button ref to Dialog and the button.</p>
+        <button onClick={() => setShowDialog(false)}>Not me</button>
+        <button onClick={() => setShowDialog(false)}>Got me!</button>
+      </Modal>
     </>
   )
 }
