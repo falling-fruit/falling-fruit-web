@@ -4,7 +4,16 @@ import * as Yup from 'yup'
 
 import Button from '../ui/Button'
 import Modal from '../ui/Modal'
-import { Input, Select, Textarea } from './FormikWrappers'
+import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
+
+// Flagging is currently not supported in the Node API
+const PROBLEM_TYPE_OPTIONS = [
+  { label: 'Spam', value: 0 },
+  { label: 'Does not exist', value: 1 },
+  { label: 'Duplicate', value: 2 },
+  { label: 'Inappropriate review photo', value: 3 },
+  { label: 'Inappropriate review comment', value: 4 },
+]
 
 const StyledModal = styled(Modal)`
   h3 {
@@ -26,21 +35,16 @@ const Buttons = styled.div`
   }
 `
 
-// Flagging is currently not supported in the main API
-const PROBLEM_TYPE_OPTIONS = [
-  { label: 'Spam', value: 0 },
-  { label: 'Does not exist', value: 1 },
-  { label: 'Duplicate', value: 2 },
-  { label: 'Inappropriate review photo', value: 3 },
-  { label: 'Inappropriate review comment', value: 4 },
-]
-
-const ReportModal = ({ typeId: _typeId, name, ...props }) => (
-  <StyledModal {...props}>
+const ReportModal = ({ typeId: _typeId, name, onDismiss, ...props }) => (
+  <StyledModal aria-label="Report dialog" onDismiss={onDismiss} {...props}>
     <h3>Report {name}</h3>
 
     <Formik
-      initialValues={{ problemType: '', description: '', email: '' }}
+      initialValues={{
+        problemType: PROBLEM_TYPE_OPTIONS[0],
+        description: '',
+        email: '',
+      }}
       validationSchema={Yup.object({
         problemType: Yup.object().oneOf(PROBLEM_TYPE_OPTIONS).required(),
         description: Yup.string().required(),
@@ -61,8 +65,15 @@ const ReportModal = ({ typeId: _typeId, name, ...props }) => (
         />
         <Textarea name="description" label="Description" />
         <Input name="email" label="Email" optional />
+        <Recaptcha
+          name="recaptcha"
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+          size="invisible"
+        />
         <Buttons>
-          <Button secondary>Cancel</Button>
+          <Button type="button" onclick={onDismiss} secondary>
+            Cancel
+          </Button>
           <Button type="submit">Submit</Button>
         </Buttons>
       </Form>

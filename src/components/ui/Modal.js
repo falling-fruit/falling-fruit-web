@@ -9,7 +9,6 @@ const Modal = styled(Dialog)`
   border-radius: 23px;
   padding: 23px 17px 23px 17px;
   width: 80%;
-  max-height: 70%;
 `
 
 export default Modal
