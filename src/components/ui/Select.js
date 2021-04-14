@@ -2,7 +2,11 @@ import Select, { createFilter } from 'react-select'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
+const LIST_ITEM_HEIGHT = 46
+
 const StyledSelect = styled(Select)`
+  font-size: 18px;
+
   .select__clear-indicator,
   .select__indicator-separator {
     display: none;
@@ -39,9 +43,19 @@ const StyledSelect = styled(Select)`
       display: none;
     }
   }
-`
 
-const LIST_ITEM_HEIGHT = 35
+  .select__menu {
+    div:not(:last-child) {
+      border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+    }
+  }
+
+  .select__option {
+    height: ${LIST_ITEM_HEIGHT}px;
+    display: flex;
+    align-items: center;
+  }
+`
 
 /**
  * Wrapper around react-window. This is used to replace the menu list component of react-select.
@@ -77,6 +91,7 @@ const SelectWrapper = ({
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
     {...props}
+    menuIsOpen
   />
 )
 
