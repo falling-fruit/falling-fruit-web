@@ -7,9 +7,9 @@ import Input from './Input'
 import ListEntry from './ListEntry'
 
 const StyledCaptionInput = styled(ListEntry)`
-  padding: 8px;
-  height: 16px;
-  display: flex;
+  height: 36px;
+  margin-bottom: 16px;
+  border-bottom: 0px !important;
 `
 
 const StyledInput = styled(Input)`
