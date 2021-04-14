@@ -1,11 +1,14 @@
-import React from 'react'
 import Select, { createFilter } from 'react-select'
-import { FixedSizeList as List } from 'react-window'
+import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
 import { validatedColor } from './GlobalStyle'
 
+const LIST_ITEM_HEIGHT = 46
+
 const StyledSelect = styled(Select)`
+  font-size: 18px;
+
   .select__clear-indicator,
   .select__indicator-separator {
     display: none;
@@ -42,35 +45,55 @@ const StyledSelect = styled(Select)`
       display: none;
     }
   }
-`
 
-const LIST_ITEM_HEIGHT = 35
+  .select__menu {
+    div:not(:last-child) {
+      border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+    }
+  }
+
+  .select__option {
+    height: ${LIST_ITEM_HEIGHT}px;
+    display: flex;
+    align-items: center;
+  }
+`
 
 /**
  * Wrapper around react-window. This is used to replace the menu list component of react-select.
  */
 const MenuList = ({ children, maxHeight }) => (
-  <List
+  <FixedSizeList
     height={maxHeight}
     itemCount={children.length}
     itemSize={LIST_ITEM_HEIGHT}
   >
     {({ index, style }) => <div style={style}>{children[index]}</div>}
-  </List>
+  </FixedSizeList>
 )
 
-const SelectWrapper = ({ options, placeholder, onChange, isMulti }) => (
+const SelectWrapper = ({
+  options,
+  placeholder,
+  onChange,
+  isMulti,
+  closeMenuOnSelect,
+  blurInputOnSelect,
+  ...props
+}) => (
   <StyledSelect
     components={{ MenuList }}
-    className="select-container"
     classNamePrefix="select"
     options={options}
     isMulti={isMulti}
     placeholder={placeholder}
     onChange={onChange}
+    closeMenuOnSelect={closeMenuOnSelect}
+    blurInputOnSelect={blurInputOnSelect}
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
+    {...props}
   />
 )
 
-export { SelectWrapper }
+export { SelectWrapper as Select }

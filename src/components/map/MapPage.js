@@ -1,5 +1,5 @@
 import { fitBounds } from 'google-map-react'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
