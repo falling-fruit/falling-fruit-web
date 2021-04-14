@@ -48,5 +48,5 @@ export const withField = (WrappedComponent, type, bypassFormik = false) => (
   )
 }
 
-export const withLabeledField = (WrappedField, type, bypassFormik) =>
-  withField(withLabel(WrappedField), type, bypassFormik)
+export const withLabeledField = (WrappedField, ...args) =>
+  withField(withLabel(WrappedField), ...args)
