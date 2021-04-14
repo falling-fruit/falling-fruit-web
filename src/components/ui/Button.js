@@ -1,9 +1,6 @@
 import styled from 'styled-components/macro'
 
 const StyledButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-items: center;
   height: 36px;
   font-size: 14px;
   color: ${({ $secondary, theme }) =>

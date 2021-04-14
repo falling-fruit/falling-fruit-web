@@ -3,10 +3,10 @@ import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
 
 import { getTypes } from '../../utils/api'
+import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
-import Modal from '../ui/Modal'
 import ProgressBar from '../ui/ProgressBar'
 import { Select } from '../ui/Select'
 import {
@@ -44,6 +44,14 @@ const SettingsPage = () => {
   return (
     <>
       <p>Settings</p>
+      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+      <ReportModal
+        name="American Tulip Tree"
+        isOpen={showDialog}
+        onDismiss={() => setShowDialog(false)}
+      />
+      <br />
+
       <Select
         onChange={handleTypeSelect}
         options={typeOptions}
@@ -117,12 +125,6 @@ const SettingsPage = () => {
       />
       <br />
       <br />
-      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
-      <Modal isOpen={showDialog} onDismiss={() => setShowDialog(false)}>
-        <p>Pass the button ref to Dialog and the button.</p>
-        <button onClick={() => setShowDialog(false)}>Not me</button>
-        <button onClick={() => setShowDialog(false)}>Got me!</button>
-      </Modal>
     </>
   )
 }

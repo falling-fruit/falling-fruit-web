@@ -24,6 +24,7 @@ const StyledSliderInput = styled(SliderInput)`
     border-radius: 50%;
     border: 4px solid ${({ theme }) => theme.orange};
     background-color: ${({ theme }) => theme.transparentOrange};
+    z-index: auto;
   }
 
   [data-reach-slider-marker] {
