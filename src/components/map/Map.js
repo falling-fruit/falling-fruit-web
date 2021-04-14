@@ -63,6 +63,7 @@ const Map = ({
         }}
         lat={location.lat}
         lng={location.lng}
+        label={'bye'}
       />
     ))}
   </GoogleMap>

@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
  * Component for a location displayed on the map.
  * @param {function} onClick - The handler called when this location is clicked
  */
-const Location = styled.button`
+const LocationContainer = styled.button`
   width: 15px;
   height: 15px;
   padding: 0;
@@ -20,10 +20,32 @@ const Location = styled.button`
   &:focus {
     outline: none;
   }
+  z-index: -1;
 `
-
+const StyledDiv = styled.div`
+  font-size: 14px;
+  color: ${({ theme }) => theme.headerText};
+  line-height: 17px;
+  text-shadow: 0px 0px 4.03946px rgba(0, 0, 0, 0.45);
+  margin-top: -5px;
+  /* Centers labels under each location */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Centers text inside the label */
+  text-align: center;
+  /* Prevents line breaks */
+  white-space: nowrap;
+`
+const Location = ({ label }) => (
+  <>
+    <LocationContainer></LocationContainer>
+    <StyledDiv>{label}</StyledDiv>
+  </>
+)
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
+  label: PropTypes.string,
 }
 
 export default Location
