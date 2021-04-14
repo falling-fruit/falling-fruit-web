@@ -7,7 +7,7 @@ import Button from '../ui/Button'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import ProgressBar from '../ui/ProgressBar'
-import { SelectWrapper } from '../ui/Select'
+import { Select } from '../ui/Select'
 import {
   AccordionItem,
   AccordionPanel,
@@ -42,11 +42,13 @@ const SettingsPage = () => {
   return (
     <>
       <p>Settings</p>
-      <SelectWrapper
+      <Select
         onChange={handleTypeSelect}
         options={typeOptions}
         placeholder="Select a type..."
         isMulti
+        closeMenuOnSelect={false}
+        blurInputOnSelect={false}
       />
       <br />
       <Button icon={<Star />}>Review</Button>
