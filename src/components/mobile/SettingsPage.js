@@ -6,6 +6,7 @@ import Button from '../ui/Button'
 import CaptionInput from '../ui/CaptionInput'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
+import Modal from '../ui/Modal'
 import ProgressBar from '../ui/ProgressBar'
 import {
   AccordionItem,
@@ -17,6 +18,7 @@ import { Slider } from '../ui/Slider'
 import { Tag, TagList } from '../ui/Tag'
 
 const SettingsPage = () => {
+  const [showDialog, setShowDialog] = useState(false)
   const [currentStep, setCurrentStep] = useState(2)
   return (
     <>
@@ -95,6 +97,14 @@ const SettingsPage = () => {
         step={currentStep}
         onChange={setCurrentStep}
       />
+      <br />
+      <br />
+      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+      <Modal isOpen={showDialog} onDismiss={() => setShowDialog(false)}>
+        <p>Pass the button ref to Dialog and the button.</p>
+        <button onClick={() => setShowDialog(false)}>Not me</button>
+        <button onClick={() => setShowDialog(false)}>Got me!</button>
+      </Modal>
     </>
   )
 }
