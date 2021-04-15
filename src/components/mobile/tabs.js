@@ -2,6 +2,7 @@ import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
 
 import MapPage from '../map/MapPage'
+import ListPage from './ListPage'
 import SettingsPage from './SettingsPage'
 
 const DEFAULT_TAB = 1 // Map
@@ -23,7 +24,7 @@ const TABS = [
     path: '/list',
     icon: <ListUl />,
     label: 'List',
-    panel: <p>List</p>,
+    panel: <ListPage />,
   },
 ]
 
