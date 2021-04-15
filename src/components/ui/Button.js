@@ -1,10 +1,15 @@
 import styled from 'styled-components/macro'
 
 const StyledButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: 36px;
   font-size: 14px;
+  line-height: 14px;
   color: ${({ $secondary, theme }) =>
     $secondary ? theme.orange : theme.background};
+  font-family: inherit;
   font-weight: 700;
   background-color: ${({ $secondary, theme }) =>
     $secondary ? theme.background : theme.orange};
@@ -18,7 +23,7 @@ const StyledButton = styled.button`
     height: 1em;
     width: 1em;
     fill: currentColor;
-    margin-right: 0.25em;
+    margin: 0 0.25em;
   }
 `
 
