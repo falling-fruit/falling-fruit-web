@@ -17,6 +17,10 @@ const StyledCaptionInput = styled(ListEntry)`
 
   div:last-child {
     margin-left: 2px;
+
+    svg {
+      height: 62%;
+    }
   }
 `
 
