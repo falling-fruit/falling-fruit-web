@@ -1,7 +1,7 @@
 import { useField } from 'formik'
 
 import Label from '../ui/Label'
-import LabelTag from '../ui/LabelTag'
+import { Optional, Required } from '../ui/LabelTag'
 
 export const withLabel = (WrappedField) => {
   const FieldWithLabel = ({
@@ -17,8 +17,8 @@ export const withLabel = (WrappedField) => {
       {label && (
         <Label htmlFor={id || name} $invalid={invalid}>
           {label}
-          {required && <LabelTag $invalid={invalid}>Required</LabelTag>}
-          {optional && <LabelTag $invalid={invalid}>Optional</LabelTag>}
+          {required && <Required $invalid={invalid} />}
+          {optional && <Optional $invalid={invalid} />}
         </Label>
       )}
       <WrappedField $invalid={invalid} id={id || name} name={name} {...props} />

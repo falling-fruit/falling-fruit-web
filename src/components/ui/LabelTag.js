@@ -14,4 +14,9 @@ const LabelTag = styled.span`
   background-color: ${validatedColor('secondaryBackground')};
   text-transform: uppercase;
 `
+
+const Required = (props) => <LabelTag {...props}>Required</LabelTag>
+const Optional = (props) => <LabelTag {...props}>Optional</LabelTag>
+
 export default LabelTag
+export { Optional, Required }
