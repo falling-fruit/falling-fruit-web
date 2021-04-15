@@ -4,6 +4,7 @@ import styled from 'styled-components/macro'
 /**
  * Component for a location displayed on the map.
  * @param {function} onClick - The handler called when this location is clicked
+ * @param {boolean} label - The optional location label that will appear underneath location icon
  */
 const LocationContainer = styled.button`
   width: 15px;
@@ -20,12 +21,10 @@ const LocationContainer = styled.button`
   &:focus {
     outline: none;
   }
-  z-index: -1;
 `
 const StyledDiv = styled.div`
   font-size: 14px;
   color: ${({ theme }) => theme.headerText};
-  line-height: 17px;
   text-shadow: 0px 0px 4.03946px rgba(0, 0, 0, 0.45);
   margin-top: -5px;
   /* Centers labels under each location */
@@ -36,6 +35,7 @@ const StyledDiv = styled.div`
   text-align: center;
   /* Prevents line breaks */
   white-space: nowrap;
+  z-index: 2;
 `
 const Location = ({ label }) => (
   <>

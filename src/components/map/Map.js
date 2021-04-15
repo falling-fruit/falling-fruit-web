@@ -65,7 +65,7 @@ const Map = ({
         }}
         lat={location.lat}
         lng={location.lng}
-        label={showLabels && 'hello'}
+        label={showLabels && location.type_names[0]}
       />
     ))}
   </GoogleMap>
@@ -80,6 +80,7 @@ Map.propTypes = {
   onViewChange: PropTypes.func.isRequired,
   onClusterClick: PropTypes.func.isRequired,
   onLocationClick: PropTypes.func.isRequired,
+  showLabels: PropTypes.bool,
 }
 
 export default Map
