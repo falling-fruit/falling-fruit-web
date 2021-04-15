@@ -8,7 +8,7 @@ import ProgressBar from '../ui/ProgressBar'
 
 const StyledForm = styled(Form)`
   box-sizing: border-box;
-  padding: 0 27px 20px;
+  padding: 8px 27px 20px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ const ProgressButtons = styled.div`
   }
 `
 
-const FormikStep = ({ children }) => <>{children}</>
+const FormikStep = ({ label: _label, children }) => <>{children}</>
 
 const FormikStepper = ({ children, onSubmit, ...props }) => {
   const childrenArray = Children.toArray(children)
@@ -46,19 +46,21 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
   const currentChild = childrenArray[step]
   const isLastStep = step === childrenArray.length - 1
 
+  const handleSubmit = async (values, helpers) => {
+    if (isLastStep) {
+      await onSubmit(values, helpers)
+      setStep(childrenArray.length)
+    } else {
+      setStep((s) => s + 1)
+      // helpers.setTouched({})
+    }
+  }
+
   return (
     <Formik
       {...props}
       validationSchema={currentChild.props.validationSchema}
-      onSubmit={async (values, helpers) => {
-        if (isLastStep) {
-          await onSubmit(values, helpers)
-          setStep(childrenArray.length)
-        } else {
-          setStep((s) => s + 1)
-          helpers.setTouched({})
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
         <StyledForm>
@@ -68,6 +70,7 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
             {step > 0 && (
               <Button
                 secondary
+                type="button"
                 disabled={isSubmitting}
                 onClick={() => setStep((s) => s - 1)}
                 leftIcon={<LeftArrowAlt />}
