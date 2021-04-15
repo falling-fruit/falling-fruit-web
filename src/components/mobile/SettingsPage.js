@@ -3,6 +3,7 @@ import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 
 import Button from '../ui/Button'
+import CaptionInput from '../ui/CaptionInput'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
 import ProgressBar from '../ui/ProgressBar'
@@ -55,6 +56,20 @@ const SettingsPage = () => {
         secondaryText="0.3 miles"
         rightIcons={[<Star size="16" key={1} />, <Star size="16" key={2} />]}
         size={57}
+      />
+
+      <CaptionInput
+        image={
+          <img
+            src="http://s3-us-west-2.amazonaws.com/fallingfruit-production/observations/photos/000/002/745/medium/open-uri20131213-3992-1szjh9k.jpg"
+            alt="tree"
+          />
+        }
+      />
+      <Slider
+        style={{ margin: '0 40px' }}
+        labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
+        steps={5}
       />
 
       <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
