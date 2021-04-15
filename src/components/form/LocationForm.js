@@ -4,8 +4,16 @@ import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
-import { Step, Stepper } from './FormikStepper'
+import { FormikStepper, Step } from './FormikStepper'
 import { Input, Select, Slider, Textarea } from './FormikWrappers'
+
+const StyledLocationForm = styled.div`
+  width: 100%;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 90px;
+  }
+`
 
 const InlineSelects = styled.div`
   display: flex;
@@ -85,18 +93,20 @@ const step3 = (
 )
 
 export const LocationForm = () => (
-  <Stepper
-    initialValues={{
-      types: [],
-      description: '',
-      access: null,
-      fruiting: 1,
-      quality_rating: 2,
-      yield_rating: 2,
-    }}
-  >
-    {step1}
-    {step2}
-    {step3}
-  </Stepper>
+  <StyledLocationForm>
+    <FormikStepper
+      initialValues={{
+        types: [],
+        description: '',
+        access: null,
+        fruiting: 1,
+        quality_rating: 2,
+        yield_rating: 2,
+      }}
+    >
+      {step1}
+      {step2}
+      {step3}
+    </FormikStepper>
+  </StyledLocationForm>
 )

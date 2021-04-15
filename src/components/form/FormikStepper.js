@@ -98,4 +98,4 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
   )
 }
 
-export { FormikStep as Step, FormikStepper as Stepper }
+export { FormikStepper, FormikStep as Step }

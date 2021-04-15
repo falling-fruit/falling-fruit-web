@@ -38,6 +38,9 @@ const StyledIconButton = styled.button`
         border-radius: 50%;
         padding: ${size / 5}px;
       `}
+
+    color: ${({ pressed, raised, theme }) =>
+      pressed ? theme.orange : raised ? theme.orange : theme.secondaryText};
   }
 `
 

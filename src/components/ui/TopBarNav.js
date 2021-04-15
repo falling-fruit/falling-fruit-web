@@ -1,0 +1,50 @@
+import styled from 'styled-components/macro'
+
+import BackButton from './BackButton'
+
+const StyledBackButton = styled(BackButton)`
+  /* Make the touch target bigger */
+  width: 75px;
+  height: 100%;
+  margin-left: 10px;
+
+  svg {
+    height: 25px;
+  }
+`
+
+const StyledTopBarNav = styled.div`
+  height: 55px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > div {
+    flex: 1;
+    height: 100%;
+  }
+`
+
+const Icons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & > *:not(:last-child) {
+    margin: 0 8px;
+  }
+`
+
+const TopBarNav = ({ left, onBack, title, rightIcons }) => (
+  <StyledTopBarNav>
+    <div>
+      {left}
+      {onBack && <StyledBackButton onClick={onBack} tabindex={0} />}
+    </div>
+    <h3>{title}</h3>
+    <Icons>{rightIcons}</Icons>
+  </StyledTopBarNav>
+)
+
+export default TopBarNav

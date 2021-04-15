@@ -76,7 +76,7 @@ const Description = styled.section`
   }
 `
 
-const EntryDetails = () => {
+const EntryDetails = ({ className }) => {
   const { id } = useParams()
 
   const [locationData, setLocationData] = useState()
@@ -139,32 +139,38 @@ const EntryDetails = () => {
     </>
   )
 
-  return locationData && typesData ? (
-    <Page>
-      <PhotoGrid
-        photos={locationData.photos}
-        altText={locationData.type_names.join(', ')}
-        handleViewLightbox={handleViewLightbox}
-      />
-      <TextContent>
-        {tagList}
-        {typesHeader}
-        <Description>
-          <p>{locationData.description}</p>
-          <small>Last Updated {formatISOString(locationData.updated_at)}</small>
-          <div>
-            <Button leftIcon={<Star />}>Review</Button>
-            <Button leftIcon={<Flag />} secondary>
-              Report
-            </Button>
-          </div>
-        </Description>
-        {otherResources}
-      </TextContent>
-    </Page>
-  ) : (
-    <Page>
-      <LoadingIndicator vertical cover />
+  const isReady = locationData && typesData
+
+  return (
+    <Page className={className}>
+      {isReady ? (
+        <>
+          <PhotoGrid
+            photos={locationData.photos}
+            altText={locationData.type_names.join(', ')}
+            handleViewLightbox={handleViewLightbox}
+          />
+          <TextContent>
+            {tagList}
+            {typesHeader}
+            <Description>
+              <p>{locationData.description}</p>
+              <small>
+                Last Updated {formatISOString(locationData.updated_at)}
+              </small>
+              <div>
+                <Button leftIcon={<Star />}>Review</Button>
+                <Button leftIcon={<Flag />} secondary>
+                  Report
+                </Button>
+              </div>
+            </Description>
+            {otherResources}
+          </TextContent>{' '}
+        </>
+      ) : (
+        <LoadingIndicator vertical cover />
+      )}
     </Page>
   )
 }
