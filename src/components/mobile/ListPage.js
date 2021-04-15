@@ -61,7 +61,7 @@ const ListPage = () => {
           rightIcons={<ChevronRight size="16" color={theme.blue} />}
           primaryText={location.type_names[0]}
           secondaryText={`${convertMetersToMiles(location.distance)} miles`}
-          onClick={handleListEntryClick(location.id)}
+          onClick={() => handleListEntryClick(location.id)}
         />
       ))}
     </ListPageContainer>
