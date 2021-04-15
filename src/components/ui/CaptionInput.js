@@ -1,4 +1,4 @@
-import { X as X } from '@styled-icons/boxicons-regular'
+import { X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
 import CircleIcon from './CircleIcon'
