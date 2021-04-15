@@ -153,11 +153,9 @@ const EntryDetails = () => {
           <p>{locationData.description}</p>
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>
-            <Button>
-              <Star /> Review
-            </Button>
-            <Button secondary>
-              <Flag /> Report
+            <Button leftIcon={<Star />}>Review</Button>
+            <Button leftIcon={<Flag />} secondary>
+              Report
             </Button>
           </div>
         </Description>

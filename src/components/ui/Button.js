@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro'
 
+import { prepend } from './GlobalStyle'
+
 const StyledButton = styled.button`
   display: inline-flex;
   align-items: center;
@@ -23,13 +25,26 @@ const StyledButton = styled.button`
     height: 1em;
     width: 1em;
     fill: currentColor;
-    margin: 0 0.25em;
   }
 `
 
+const Icon = styled.span`
+  ${prepend('margin', '0.25em')}
+`
+
 // TODO: forward ref and remaining props in all UI components, rather than taking specific props
-const Button = ({ secondary = false, ...props }) => (
-  <StyledButton $secondary={secondary} {...props} />
+const Button = ({
+  secondary = false,
+  leftIcon,
+  rightIcon,
+  children,
+  ...props
+}) => (
+  <StyledButton $secondary={secondary} {...props}>
+    {leftIcon && <Icon $prepend>{leftIcon}</Icon>}
+    {children}
+    {rightIcon && <Icon>{rightIcon}</Icon>}
+  </StyledButton>
 )
 
 export default Button

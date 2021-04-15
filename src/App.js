@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import { SignupForm } from './components/form/example'
+import { LocationForm } from './components/form/LocationForm'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 
@@ -16,7 +16,7 @@ const App = () => (
     <Router>
       <Switch>
         <Route exact path="/form">
-          <SignupForm />
+          <LocationForm />
         </Route>
         <Route exact path="/">
           <Redirect to="/map" />

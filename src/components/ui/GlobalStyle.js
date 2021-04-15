@@ -45,6 +45,9 @@ const validatedColor = (
 ) => ({ $invalid, theme }) =>
   $invalid ? theme[invalidThemeColor] : theme[validThemeColor]
 
+const prepend = (prefix = '', value) => ({ $prepend }) =>
+  `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
+
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${({ theme }) => theme.fonts};
@@ -95,4 +98,4 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default GlobalStyle
-export { MOBILE_MAX_WIDTH, theme, validatedColor }
+export { MOBILE_MAX_WIDTH, prepend, theme, validatedColor }

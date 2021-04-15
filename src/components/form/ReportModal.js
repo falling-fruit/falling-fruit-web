@@ -29,7 +29,7 @@ const Buttons = styled.div`
     // Should width be manually adjusted?
     width: 130px;
 
-    &:first-child {
+    &:not(last-child) {
       margin-right: 12px;
     }
   }

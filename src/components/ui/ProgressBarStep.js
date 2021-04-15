@@ -24,6 +24,14 @@ const StyledProgressBarStep = styled.div`
   color: ${({ $status, theme }) =>
     $status === 'incomplete' ? theme.tertiaryText : theme.orange};
 
+  > div:last-child {
+    // Step Label
+    text-align: center;
+    width: 36px;
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
   & + & {
     flex-grow: 1;
     display: flex;
@@ -39,7 +47,8 @@ const StyledProgressBarStep = styled.div`
     align-self: center;
     content: '';
     border-top: ${({ theme }) => theme.secondaryText} 2.5px solid;
-    width: calc(100% - 34px);
+    width: 100%;
+    z-index: -1;
   }
 
   // TODO: fix specificity of ::before CSS
