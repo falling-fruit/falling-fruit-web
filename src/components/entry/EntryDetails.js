@@ -1,10 +1,13 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Flag, Star } from '@styled-icons/boxicons-solid'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import { getStreetAddress } from '../../utils/locationInfo'
+import SearchContext from '../search/SearchContext'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -81,11 +84,15 @@ const EntryDetails = () => {
   const { id } = useParams()
 
   const [locationData, setLocationData] = useState()
+  const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
+  const history = useHistory()
+
+  const { setSelectedLocation } = useContext(SearchContext)
+
   useEffect(() => {
     async function fetchEntryDetails() {
       // Show loading between entry selections
-      setLocationData(null)
       const locationData = await getLocationById(id)
       const streetAddress = await getStreetAddress(
         locationData.lat,
@@ -95,7 +102,8 @@ const EntryDetails = () => {
         locationData.type_ids.map(getTypeById),
       )
       // TODO: Make this it's own state
-      setLocationData({ ...locationData, street_address: streetAddress })
+      setAddress(streetAddress)
+      setLocationData(locationData)
       setTypesData(typesData)
     }
     fetchEntryDetails()
@@ -103,6 +111,10 @@ const EntryDetails = () => {
 
   const _handleAddressClick = () => {
     // TODO: handle address click
+
+    setSelectedLocation(locationData)
+    history.push('/map')
+
     console.log('Map Button Clicked')
   }
 
@@ -154,7 +166,8 @@ const EntryDetails = () => {
         {typesHeader}
         <Description>
           <p>{locationData.description}</p>
-          <p>{locationData.street_address}</p>
+          {/* // eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+          <p onClick={_handleAddressClick}>{address}</p>
           <p>"Seasonality will go here"</p>
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>

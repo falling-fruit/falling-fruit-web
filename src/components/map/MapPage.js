@@ -21,6 +21,8 @@ const MapPage = () => {
   const history = useHistory()
   const container = useRef(null)
   const { viewport: searchViewport } = useContext(SearchContext)
+  const { selectedLocation } = useContext(SearchContext)
+
   const { view, setView } = useContext(MapContext)
   const { filters } = useContext(SearchContext)
 
@@ -44,6 +46,17 @@ const MapPage = () => {
       setView(fitContainerBounds(searchViewport))
     }
   }, [searchViewport, setView])
+
+  useEffect(() => {
+    if (selectedLocation) {
+      const location = {
+        latitude: selectedLocation.lat,
+        longitude: selectedLocation.lng,
+      }
+
+      setView(fitContainerBounds(getGeolocationBounds(location)))
+    }
+  }, [selectedLocation, setView])
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
