@@ -7,16 +7,17 @@ import Input from './Input'
 import ListEntry from './ListEntry'
 
 const StyledCaptionInput = styled(ListEntry)`
+  padding: 0;
   height: 36px;
   margin-bottom: 16px;
   border-bottom: 0px !important;
 
-  div:first-child {
-    margin-right: 2px;
+  > div:first-child {
+    margin-right: 5px;
   }
 
-  div:last-child {
-    margin-left: 2px;
+  > div:last-child {
+    margin-left: 5px;
 
     svg {
       height: 62%;
