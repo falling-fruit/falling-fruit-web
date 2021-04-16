@@ -23,6 +23,9 @@ const StyledTopBarNav = styled.div`
   > div {
     flex: 1;
     height: 100%;
+
+    display: flex;
+    align-items: center;
   }
 `
 
@@ -39,8 +42,8 @@ const Icons = styled.div`
 const TopBarNav = ({ left, onBack, title, rightIcons }) => (
   <StyledTopBarNav>
     <div>
-      {left}
       {onBack && <StyledBackButton onClick={onBack} tabindex={0} />}
+      {left}
     </div>
     <h3>{title}</h3>
     <Icons>{rightIcons}</Icons>

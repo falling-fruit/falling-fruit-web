@@ -20,14 +20,7 @@ const TopBarSwitch = () => (
     </Route>
     <Route>
       <TopBar>
-        <Switch>
-          <Route path="/map">
-            <SearchWrapper />
-          </Route>
-          <Route path="/list">
-            <SearchWrapper />
-          </Route>
-        </Switch>
+        <SearchWrapper />
       </TopBar>
     </Route>
   </Switch>

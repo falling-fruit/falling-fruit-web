@@ -1,8 +1,13 @@
+import { transparentize } from 'polished'
 import PropTypes from 'prop-types'
-import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 const StyledIconButton = styled.button`
+  // Solve second color using CSS vars
+  --color: ${({ color, theme }) => color ?? theme.orange};
+  --transparent-color: ${({ color, theme }) =>
+    transparentize(0.8, color ?? theme.orange)};
+
   cursor: pointer;
   position: relative;
   display: flex;
@@ -12,35 +17,29 @@ const StyledIconButton = styled.button`
   height: ${({ size }) => size}px;
   padding: 0;
   background-color: ${({ pressed, theme }) =>
-    pressed ? theme.transparentOrange : 'white'};
+    pressed ? 'var(--transparent-color)' : theme.background};
   border-radius: 50%;
   border: ${({ raised, theme }) =>
-    raised ? '2px solid white' : `1px solid ${theme.secondaryBackground}`};
-  ${({ pressed, theme }) =>
-    pressed &&
-    `border-color: ${theme.orange};
-	`}
-  ${({ raised, theme }) =>
-    raised &&
-    `box-shadow: 0 0 8px 1px ${theme.shadow};
-	`}
+    raised
+      ? `3px solid ${theme.background}`
+      : `1px solid ${theme.secondaryBackground}`};
+  ${({ pressed }) => pressed && `border-color: var(--color);`}
+  ${({ raised, theme }) => raised && `box-shadow: 0 0 8px 1px ${theme.shadow};`}
 
   &:focus {
     outline: none;
   }
 
   svg {
-    height: 50%;
+    ${({ raised }) => !raised && 'height: 50%;'}
     ${({ raised, size }) =>
       raised &&
-      css`
-        border: 2px solid orange;
+      `border: 3px solid var(--color);
         border-radius: 50%;
-        padding: ${size / 5}px;
-      `}
+        padding: ${size / 20}px;`}
 
     color: ${({ pressed, raised, theme }) =>
-      pressed ? theme.orange : raised ? theme.orange : theme.secondaryText};
+      pressed || raised ? `var(--color)` : theme.secondaryText};
   }
 `
 
@@ -61,22 +60,8 @@ const Subscript = styled.div`
   z-index: 1;
 `
 
-const IconButton = ({
-  size,
-  raised,
-  icon,
-  onClick,
-  label,
-  pressed,
-  subscript,
-}) => (
-  <StyledIconButton
-    aria-label={label}
-    size={size}
-    raised={raised}
-    onClick={onClick}
-    pressed={pressed}
-  >
+const IconButton = ({ icon, label, subscript, ...props }) => (
+  <StyledIconButton aria-label={label} {...props}>
     {icon}
     {subscript && <Subscript>{subscript}</Subscript>}
   </StyledIconButton>
@@ -84,6 +69,7 @@ const IconButton = ({
 
 IconButton.propTypes = {
   raised: PropTypes.bool,
+  color: PropTypes.string,
   label: PropTypes.string.isRequired,
   icon: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,

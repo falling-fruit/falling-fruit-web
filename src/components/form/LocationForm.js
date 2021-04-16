@@ -11,7 +11,7 @@ const StyledLocationForm = styled.div`
   width: 100%;
 
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 90px;
+    margin-top: 87px;
   }
 `
 

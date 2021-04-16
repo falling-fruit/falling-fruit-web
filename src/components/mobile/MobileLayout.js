@@ -29,17 +29,17 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
-          <Route path="/entry/new">
+          <Route path="/entry/new/details">
             <LocationForm />
           </Route>
+          <Route path={['/map', '/list', '/entry/new']}>{tabPanels}</Route>
           <Route path="/entry/:id">
             <EntryDetails />
           </Route>
-          <Route>{tabPanels}</Route>
         </Switch>
       </TabPanels>
       <Switch>
-        <Route path="/entry/new"></Route>
+        <Route path="/entry/new/details"></Route>
         <Route>
           <TabList>{tabList}</TabList>
         </Route>

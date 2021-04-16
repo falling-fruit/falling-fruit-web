@@ -63,7 +63,7 @@ const Filter = ({ isOpen }) => {
           // Keep only types that still exist in the current view
           const newTypes =
             prevFilters.types === null
-              ? newTypes
+              ? typeIds
               : intersection(prevFilters.types, typeIds)
 
           setTreeData(buildTypeSchema(types, newTypes))
