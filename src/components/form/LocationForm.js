@@ -1,11 +1,13 @@
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { getTypes } from '../../utils/api'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import { FormikStepper, Step } from './FormikStepper'
-import { Input, Select, Slider, Textarea } from './FormikWrappers'
+import { Select, Slider, Textarea } from './FormikWrappers'
 
 const StyledLocationForm = styled.div`
   width: 100%;
@@ -38,75 +40,99 @@ const WideButton = styled(Button).attrs({
   border-width: 1px;
 `
 
-const step1 = (
-  <Step label="Step 1">
-    <Input name="types" label="Types" required />
-    <Textarea name="description" label="Description" />
-    <Select name="access" label="Property Access" />
-  </Step>
-)
+export const LocationForm = () => {
+  const [typeOptions, setTypeOptions] = useState([])
 
-const step2 = (
-  <Step label="Step 2">
-    <Label>
-      Seasonality
-      <Optional />
-    </Label>
-    <InlineSelects>
-      <Select name="season_start" />
-      <span>to</span>
-      <Select name="season_end" />
-    </InlineSelects>
+  useEffect(() => {
+    async function fetchTypes() {
+      const types = await getTypes()
+      const options = types.map((t) => ({
+        value: t.id,
+        label: t.name,
+      }))
+      setTypeOptions(options)
+    }
+    fetchTypes()
+  }, [])
 
-    <Label>
-      Upload Images
-      <Optional />
-    </Label>
-    <WideButton>Take or Upload Photo</WideButton>
-  </Step>
-)
+  const step1 = (
+    <Step label="Step 1">
+      <Select
+        name="types"
+        label="Types"
+        options={typeOptions}
+        isMulti
+        closeMenuOnSelect={false}
+        blurInputOnSelect={false}
+        required
+      />
+      <Textarea name="description" label="Description" />
+      <Select name="access" label="Property Access" />
+    </Step>
+  )
 
-const step3 = (
-  <Step label="Step 3">
-    <SectionHeading>
-      Leave a Review
-      <Optional />
-    </SectionHeading>
-    <Textarea name="comment" placeholder="Lorem ipsum..." />
+  const step2 = (
+    <Step label="Step 2">
+      <Label>
+        Seasonality
+        <Optional />
+      </Label>
+      <InlineSelects>
+        <Select name="season_start" />
+        <span>to</span>
+        <Select name="season_end" />
+      </InlineSelects>
 
-    <Slider
-      name="fruiting"
-      label="Fruiting Status"
-      labels={['Flowers', 'Unripe fruit', 'Ripe fruit']}
-    />
-    <Slider
-      name="quality_rating"
-      label="Quality"
-      labels={['Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-    <Slider
-      name="yield_rating"
-      label="Yield"
-      labels={['Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-  </Step>
-)
+      <Label>
+        Upload Images
+        <Optional />
+      </Label>
+      <WideButton type="button">Take or Upload Photo</WideButton>
+    </Step>
+  )
 
-export const LocationForm = () => (
-  <StyledLocationForm>
-    <FormikStepper
-      initialValues={{
-        types: [],
-        description: '',
-        access: null,
-        fruiting: 1,
-        quality_rating: 2,
-        yield_rating: 2,
-      }}
-    >
-      {step1}
-      {step2}
-      {step3}
-    </FormikStepper>
-  </StyledLocationForm>
-)
+  const step3 = (
+    <Step label="Step 3">
+      <SectionHeading>
+        Leave a Review
+        <Optional />
+      </SectionHeading>
+      <Textarea name="comment" placeholder="Lorem ipsum..." />
+
+      <Slider
+        name="fruiting"
+        label="Fruiting Status"
+        labels={['Flowers', 'Unripe fruit', 'Ripe fruit']}
+      />
+      <Slider
+        name="quality_rating"
+        label="Quality"
+        labels={['Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
+      />
+      <Slider
+        name="yield_rating"
+        label="Yield"
+        labels={['Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
+      />
+    </Step>
+  )
+
+  return (
+    <StyledLocationForm>
+      <FormikStepper
+        initialValues={{
+          types: [],
+          description: '',
+          access: null,
+          fruiting: 1,
+          quality_rating: 2,
+          yield_rating: 2,
+        }}
+      >
+        {step1}
+        {step2}
+        {step3}
+      </FormikStepper>
+    </StyledLocationForm>
+  )
+}

@@ -108,6 +108,7 @@ const SettingsPage = () => {
             alt="tree"
           />
         }
+        onDelete={() => console.log('deleted')}
       />
       <Slider
         style={{ margin: '0 40px' }}

@@ -26,7 +26,7 @@ const LocationNav = () => {
 
   return (
     <Switch>
-      <Route path="/entry/new">
+      <Route path="/entry/new" exact>
         <TopBarNav
           left={
             <Instructions>

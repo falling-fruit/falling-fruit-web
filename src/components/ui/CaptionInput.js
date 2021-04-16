@@ -41,7 +41,7 @@ const CaptionInput = ({ value, onChange, onDelete, image }) => (
     }
     rightIcons={
       <IconButton
-        size="36"
+        size={36}
         icon={<X />}
         onClick={onDelete}
         label="Delete image caption"
