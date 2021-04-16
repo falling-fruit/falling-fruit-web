@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypes } from '../../utils/api'
@@ -7,7 +7,7 @@ import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import { FormikStepper, Step } from './FormikStepper'
-import { Select, Slider, Textarea } from './FormikWrappers'
+import { FileUpload, Select, Slider, Textarea } from './FormikWrappers'
 
 const StyledLocationForm = styled.div`
   width: 100%;
@@ -38,10 +38,12 @@ const WideButton = styled(Button).attrs({
   width: 100%;
   height: 46px;
   border-width: 1px;
+  font-weight: normal;
 `
 
 export const LocationForm = () => {
   const [typeOptions, setTypeOptions] = useState([])
+  const fileUploadRef = useRef()
 
   useEffect(() => {
     async function fetchTypes() {
@@ -87,7 +89,14 @@ export const LocationForm = () => {
         Upload Images
         <Optional />
       </Label>
-      <WideButton type="button">Take or Upload Photo</WideButton>
+      <WideButton type="button" onClick={() => fileUploadRef.current.click()}>
+        Take or Upload Photo
+      </WideButton>
+      <FileUpload
+        name="photo"
+        style={{ display: 'none' }}
+        ref={fileUploadRef}
+      />
     </Step>
   )
 
@@ -128,6 +137,7 @@ export const LocationForm = () => {
           quality_rating: 2,
           yield_rating: 2,
         }}
+        onSubmit={() => console.log('submitted')}
       >
         {step1}
         {step2}

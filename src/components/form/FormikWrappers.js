@@ -1,4 +1,5 @@
 import { useField } from 'formik'
+import { forwardRef } from 'react'
 import Reaptcha from 'reaptcha'
 
 import Input from '../ui/Input'
@@ -18,7 +19,25 @@ const FormikRecaptcha = ({ name, ...props }) => {
   return <Reaptcha onVerify={helpers.setValue} {...props} />
 }
 
+const FormikFileUpload = forwardRef(({ name, ...props }, ref) => {
+  const [_field, _meta, helpers] = useField(name)
+
+  return (
+    <input
+      ref={ref}
+      name={name}
+      type="file"
+      onChange={(event) => {
+        helpers.setValue(event.currentTarget.files[0])
+      }}
+      {...props}
+    />
+  )
+})
+FormikFileUpload.displayName = 'FormikFileUpload'
+
 export {
+  FormikFileUpload as FileUpload,
   FormikInput as Input,
   FormikRecaptcha as Recaptcha,
   FormikSelect as Select,
