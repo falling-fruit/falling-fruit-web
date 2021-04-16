@@ -83,6 +83,7 @@ const Step1 = ({ typeOptions }) => (
 
 const Step2 = () => {
   const fileUploadRef = useRef()
+  // TODO: instead of doing this... just wrap both the file upload and the caption inputs in a new Formik field
   const {
     values: { photo },
     setFieldValue,
