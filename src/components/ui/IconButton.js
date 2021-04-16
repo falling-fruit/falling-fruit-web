@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 const StyledIconButton = styled.button`
-  // Solve second color using CSS vars
   --color: ${({ color, theme }) => color ?? theme.orange};
   --transparent-color: ${({ color, theme }) =>
     transparentize(0.8, color ?? theme.orange)};

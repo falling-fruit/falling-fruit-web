@@ -19,6 +19,8 @@ import MapContext from './MapContext'
  */
 const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
+const ADD_LOCATION_ZOOM = 18
+
 const MapPage = () => {
   const history = useHistory()
   const location = useLocation()
@@ -55,12 +57,10 @@ const MapPage = () => {
       // Zoom into add location
       setView((prevView) => {
         oldView.current = prevView
-        return fitContainerBounds(
-          getGeolocationBounds({
-            latitude: prevView.center.lat,
-            longitude: prevView.center.lng,
-          }),
-        )
+        return {
+          ...prevView,
+          zoom: ADD_LOCATION_ZOOM,
+        }
       })
     } else {
       // Restore the old view the user had before adding the location
