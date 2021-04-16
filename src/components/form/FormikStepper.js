@@ -42,6 +42,7 @@ const FormikStep = ({ label: _label, children }) => <>{children}</>
 const FormikStepper = ({ children, onSubmit, ...props }) => {
   const childrenArray = Children.toArray(children)
   const [step, setStep] = useState(0)
+  const [completed, setCompleted] = useState(false)
 
   const currentChild = childrenArray[step]
   const isLastStep = step === childrenArray.length - 1
@@ -49,7 +50,7 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
   const handleSubmit = async (values, helpers) => {
     if (isLastStep) {
       await onSubmit(values, helpers)
-      setStep(childrenArray.length)
+      setCompleted(true)
     } else {
       setStep((s) => s + 1)
       // helpers.setTouched({})
@@ -89,7 +90,7 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
 
           <ProgressBar
             labels={childrenArray.map((child) => child.props.label)}
-            step={step}
+            step={completed ? childrenArray.length + 1 : step}
             onChange={setStep}
           />
         </StyledForm>
