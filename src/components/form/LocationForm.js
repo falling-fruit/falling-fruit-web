@@ -1,5 +1,5 @@
 import { useFormikContext } from 'formik'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypes } from '../../utils/api'
@@ -88,6 +88,21 @@ const Step2 = () => {
     setFieldValue,
   } = useFormikContext()
 
+  const captionInput = useMemo(
+    () =>
+      photo && (
+        <CaptionInput
+          image={<img src={URL.createObjectURL(photo)} alt="Upload preview" />}
+          value={photo.name}
+          onDelete={() => {
+            fileUploadRef.current.value = ''
+            setFieldValue('photo', null)
+          }}
+        />
+      ),
+    [photo, setFieldValue],
+  )
+
   return (
     <>
       <Label>
@@ -112,15 +127,7 @@ const Step2 = () => {
         style={{ display: 'none' }}
         ref={fileUploadRef}
       />
-      {photo && (
-        <CaptionInput
-          image={<img src={URL.createObjectURL(photo)} alt="Upload preview" />}
-          onDelete={() => {
-            fileUploadRef.current.value = ''
-            setFieldValue('photo', null)
-          }}
-        />
-      )}
+      {captionInput}
     </>
   )
 }
@@ -172,7 +179,7 @@ export const LocationForm = () => {
     <Step3 key={3} />,
   ]
   const formikSteps = steps.map((step, index) => (
-    <Step key={step.props.key} label={`Step ${index + 1}`}>
+    <Step key={index} label={`Step ${index + 1}`}>
       {step}
     </Step>
   ))
@@ -188,7 +195,7 @@ export const LocationForm = () => {
           quality_rating: 2,
           yield_rating: 2,
         }}
-        onSubmit={() => console.log('submitted')}
+        onSubmit={(values) => console.log('submitted location form', values)}
       >
         {formikSteps}
       </FormikStepper>
