@@ -49,6 +49,7 @@ const MapPage = () => {
 
   useEffect(() => {
     if (selectedLocation) {
+      // TODO: Make getGeolocationBounds take in (lat, lng)
       const location = {
         latitude: selectedLocation.lat,
         longitude: selectedLocation.lng,

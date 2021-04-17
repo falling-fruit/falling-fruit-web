@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { Flag, Star } from '@styled-icons/boxicons-solid'
+import { Calendar } from '@styled-icons/boxicons-regular'
+import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useContext, useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -16,6 +17,24 @@ import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
 import ResourceList from './ResourceList'
 import TypesHeader from './TypesHeader'
+
+const IconBesideText = styled.div`
+  display: flex;
+  font-family: inherit;
+  color: ${({ theme }) => theme.secondaryText};
+  font-style: normal;
+
+  font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
+  font-size: 16px;
+  line-height: 17px;
+  align-items: center;
+  small {
+    margin-left: 4px;
+    font-size: inherit;
+    width: ${(props) => props.diameter}px;
+    font-style: normal !important;
+  }
+`
 
 const ACCESS_TYPE = {
   0: "On lister's property",
@@ -111,9 +130,9 @@ const EntryDetails = () => {
 
   const _handleAddressClick = () => {
     // TODO: handle address click
-
-    setSelectedLocation(locationData)
     history.push('/map')
+    console.log(locationData)
+    setSelectedLocation(locationData)
 
     console.log('Map Button Clicked')
   }
@@ -167,8 +186,14 @@ const EntryDetails = () => {
         <Description>
           <p>{locationData.description}</p>
           {/* // eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-          <p onClick={_handleAddressClick}>{address}</p>
-          <p>"Seasonality will go here"</p>
+          <IconBesideText bold onClick={_handleAddressClick}>
+            <Map color={theme.secondaryText} size={20} />
+            <small>{address}</small>
+          </IconBesideText>
+          <IconBesideText>
+            <Calendar color={theme.secondaryText} size={20} />
+            <small>{'In season from X to Y'}</small>
+          </IconBesideText>
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>
             <Button>
