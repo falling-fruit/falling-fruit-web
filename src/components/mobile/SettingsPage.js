@@ -1,4 +1,4 @@
-import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
+/*import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 
@@ -14,89 +14,66 @@ import {
   SettingsAccordionButton,
 } from '../ui/SettingsAccordion'
 import { Slider } from '../ui/Slider'
-import { Tag, TagList } from '../ui/Tag'
+import { Tag, TagList } from '../ui/Tag'*/
+import styled from 'styled-components/macro'
 
-const SettingsPage = () => {
-  const [currentStep, setCurrentStep] = useState(2)
-  return (
-    <>
-      <p>Settings</p>
-      <Button icon={<Star />}>Review</Button>
-      <Button icon={<Flag />} secondary>
-        Report
-      </Button>
-      <br />
-      <br />
-      <Input
-        placeholder="Search for a location..."
-        onChange={(e) => console.log(e.target.value)}
-        onEnter={(e) => window.alert(`Received:\n${e?.target?.value}`)}
-        icon={<Search />}
-      />
-      <br />
-      <Input
-        label="Demo Form Input"
-        placeholder="'Sugar Maple'"
-        onChange={(e) => console.log(e.target.value)}
-      />
-      <br />
-      <TagList>
-        {['Rebecca', 'Jeffrey'].map((name) => (
-          <Tag key={name}>{name}</Tag>
-        ))}
-      </TagList>
-      <br />
-      <ListEntry
-        leftIcons={<Star size="16" />}
-        primaryText="Entry"
-        secondaryText="0.3 miles"
-      />
-      <ListEntry
-        primaryText="Entry"
-        secondaryText="0.3 miles"
-        rightIcons={[<Star size="16" key={1} />, <Star size="16" key={2} />]}
-        size={57}
-      />
+import Checkbox from '../ui/Checkbox'
+import CircleIcon from '../ui/CircleIcon'
 
-      <CaptionInput
-        image={
-          <img
-            src="http://s3-us-west-2.amazonaws.com/fallingfruit-production/observations/photos/000/002/745/medium/open-uri20131213-3992-1szjh9k.jpg"
-            alt="tree"
-          />
-        }
-      />
-      <Slider
-        style={{ margin: '0 40px' }}
-        labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
-        steps={5}
-      />
+const PageMargin = styled.div`
+  margin: 26px;
 
-      <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
-      <SettingsAccordion>
-        <AccordionItem>
-          <SettingsAccordionButton LeftIcon={Cog} text="Options" />
-          <AccordionPanel>
-            Here are some detailed instructions about doing a thing. I am very
-            complex and probably contain a lot of content, so a user can hide or
-            show me by clicking the button above.
-          </AccordionPanel>
-        </AccordionItem>
-      </SettingsAccordion>
-      <Slider
-        style={{ margin: '0 40px' }}
-        labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
-        steps={5}
-      />
-      <br />
-      <br />
-      <ProgressBar
-        labels={['step1', 'step2', 'step3', 'step4', 'step5']}
-        step={currentStep}
-        onChange={setCurrentStep}
-      />
-    </>
-  )
-}
+  & > *:not(:last-child) {
+    margin-bottom: 14px;
+  }
+
+  h5 {
+    margin: 0px;
+    color: ${({ theme }) => theme.secondaryText};
+  }
+
+  small {
+    color: ${({ theme }) => theme.tertiaryText};
+  }
+`
+
+const CheckboxLabels = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+const ToggleLabels = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const StyledCircleIcon = styled(CircleIcon)`
+  height: 70px;
+  width: 70px;
+  border-radius: 5%;
+  color: gray;
+`
+
+// small should be h3
+const SettingsPage = () => (
+  <PageMargin>
+    <h2>Settings</h2>
+    <h3>Viewing Preferences</h3>
+    <CheckboxLabels>
+      <Checkbox></Checkbox>
+      <h5>Show Labels</h5>
+    </CheckboxLabels>
+
+    <h3>Map Preferences</h3>
+    <ToggleLabels>
+      <h5>Show Labels</h5>
+    </ToggleLabels>
+
+    <h5>Map</h5>
+
+    <StyledCircleIcon></StyledCircleIcon>
+  </PageMargin>
+)
 
 export default SettingsPage
