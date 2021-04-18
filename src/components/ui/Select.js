@@ -67,7 +67,7 @@ const StyledSelect = styled(Select)`
  */
 const MenuList = ({ children, maxHeight }) => (
   <FixedSizeList
-    height={maxHeight}
+    height={maxHeight ? maxHeight : '0px'}
     itemCount={children.length}
     itemSize={LIST_ITEM_HEIGHT}
   >
