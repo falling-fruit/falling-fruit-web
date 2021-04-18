@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
  * @param {function} onClick - The handler called when this location is clicked
  * @param {boolean} label - The optional location label that will appear underneath location icon
  */
-const LocationContainer = styled.button`
+const LocationButton = styled.button`
   width: 15px;
   height: 15px;
   padding: 0;
@@ -22,10 +22,10 @@ const LocationContainer = styled.button`
     outline: none;
   }
 `
-const StyledDiv = styled.div`
+const Label = styled.div`
   font-size: 14px;
   color: ${({ theme }) => theme.headerText};
-  text-shadow: 0px 0px 4.03946px rgba(0, 0, 0, 0.45);
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
   margin-top: -5px;
   /* Centers labels under each location */
   position: absolute;
@@ -35,12 +35,12 @@ const StyledDiv = styled.div`
   text-align: center;
   /* Prevents line breaks */
   white-space: nowrap;
-  z-index: 2;
+  z-index: 1;
 `
-const Location = ({ label }) => (
+const Location = ({ label, ...props }) => (
   <>
-    <LocationContainer></LocationContainer>
-    <StyledDiv>{label}</StyledDiv>
+    <LocationButton {...props} />
+    <Label>{label}</Label>
   </>
 )
 Location.propTypes = {
