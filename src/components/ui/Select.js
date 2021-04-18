@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 const LIST_ITEM_HEIGHT = 46
 
 const StyledSelect = styled(Select)`
-  font-size: 18px;
+  font-size: 16px;
 
   .select__clear-indicator,
   .select__indicator-separator {
