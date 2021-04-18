@@ -19,7 +19,7 @@ const StyledSelect = styled(Select)`
   .select__control {
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     border-radius: 23px;
-    padding: 6px 7px;
+    padding: 3px 10px;
   }
 
   .select__input {
