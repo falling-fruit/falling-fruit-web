@@ -8,7 +8,6 @@ import SearchContext, { DEFAULT_FILTERS } from './search/SearchContext'
 import SettingsContext, { DEFAULT_SETTINGS } from './ui/SettingsContext'
 
 const MainPage = () => {
-  // TODO: make a custom hook that stores state. Move all contexts into contexts folder
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   const [viewport, setViewport] = useState(null)
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
