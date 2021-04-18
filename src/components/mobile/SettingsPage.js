@@ -6,6 +6,7 @@ import Button from '../ui/Button'
 import CaptionInput from '../ui/CaptionInput'
 import Input from '../ui/Input'
 import ListEntry from '../ui/ListEntry'
+import Modal from '../ui/Modal'
 import ProgressBar from '../ui/ProgressBar'
 import {
   AccordionItem,
