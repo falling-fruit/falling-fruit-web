@@ -8,10 +8,12 @@ import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import { getStreetAddress } from '../../utils/locationInfo'
+import MapContext from '../map/MapContext'
 import SearchContext from '../search/SearchContext'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
 import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
@@ -23,17 +25,22 @@ const IconBesideText = styled.div`
   font-family: inherit;
   color: ${({ theme }) => theme.secondaryText};
   font-style: normal;
-
   font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
-  font-size: 16px;
-  line-height: 17px;
   align-items: center;
-  small {
-    margin-left: 4px;
-    font-size: inherit;
-    width: ${(props) => props.diameter}px;
-    font-style: normal !important;
+  ${'' /* Check with Siraj to see if he's ok with me doing this */}
+  :nth-child(2) {
+    margin-bottom: 4px !important;
   }
+  p {
+    margin: 0 0 0 4px;
+    font-size: 14px;
+  }
+`
+const LocationText = styled(ResetButton)`
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 0 0 4px;
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 const ACCESS_TYPE = {
@@ -101,7 +108,7 @@ const Description = styled.section`
 
 const EntryDetails = () => {
   const { id } = useParams()
-
+  const { setView } = useContext(MapContext)
   const [locationData, setLocationData] = useState()
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
@@ -117,6 +124,7 @@ const EntryDetails = () => {
         locationData.lat,
         locationData.lng,
       )
+
       const typesData = await Promise.all(
         locationData.type_ids.map(getTypeById),
       )
@@ -129,12 +137,13 @@ const EntryDetails = () => {
   }, [id])
 
   const _handleAddressClick = () => {
-    // TODO: handle address click
     history.push('/map')
-    console.log(locationData)
+    const tempViewState = {
+      center: { lat: locationData.lat, lng: locationData.lng },
+      zoom: 18,
+    }
+    setView(tempViewState)
     setSelectedLocation(locationData)
-
-    console.log('Map Button Clicked')
   }
 
   const handleViewLightbox = () => {
@@ -188,11 +197,11 @@ const EntryDetails = () => {
           {/* // eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
           <IconBesideText bold onClick={_handleAddressClick}>
             <Map color={theme.secondaryText} size={20} />
-            <small>{address}</small>
+            <LocationText>{address}</LocationText>
           </IconBesideText>
           <IconBesideText>
             <Calendar color={theme.secondaryText} size={20} />
-            <small>{'In season from X to Y'}</small>
+            <p>{'In season from X to Y'}</p>
           </IconBesideText>
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>

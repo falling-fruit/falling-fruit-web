@@ -1,7 +1,8 @@
 import GoogleMap from 'google-map-react'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
 
+import SearchContext from '../search/SearchContext'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
 import Location from './Location'
@@ -26,47 +27,52 @@ const Map = ({
   onClusterClick,
   onLocationClick,
   onViewChange,
-}) => (
-  <GoogleMap
-    bootstrapURLKeys={{ key: googleMapsAPIKey }}
-    center={view.center}
-    zoom={view.zoom}
-    onChange={onViewChange}
-    resetBoundsOnResize
-  >
-    {!geolocation.loading && (
-      <Geolocation
-        onClick={onGeolocationClick}
-        lat={geolocation.latitude}
-        lng={geolocation.longitude}
-        heading={geolocation.heading}
-      />
-    )}
-    {clusters.map((cluster) => (
-      <Cluster
-        key={JSON.stringify(cluster)}
-        onClick={(event) => {
-          onClusterClick(cluster)
-          event.stopPropagation()
-        }}
-        count={cluster.count}
-        lat={cluster.lat}
-        lng={cluster.lng}
-      />
-    ))}
-    {locations.map((location) => (
-      <Location
-        key={location.id}
-        onClick={(event) => {
-          onLocationClick(location)
-          event.stopPropagation()
-        }}
-        lat={location.lat}
-        lng={location.lng}
-      />
-    ))}
-  </GoogleMap>
-)
+}) => {
+  const { selectedLocation } = useContext(SearchContext)
+
+  return (
+    <GoogleMap
+      bootstrapURLKeys={{ key: googleMapsAPIKey }}
+      center={view.center}
+      zoom={view.zoom}
+      onChange={onViewChange}
+      resetBoundsOnResize
+    >
+      {!geolocation.loading && (
+        <Geolocation
+          onClick={onGeolocationClick}
+          lat={geolocation.latitude}
+          lng={geolocation.longitude}
+          heading={geolocation.heading}
+        />
+      )}
+      {clusters.map((cluster) => (
+        <Cluster
+          key={JSON.stringify(cluster)}
+          onClick={(event) => {
+            onClusterClick(cluster)
+            event.stopPropagation()
+          }}
+          count={cluster.count}
+          lat={cluster.lat}
+          lng={cluster.lng}
+        />
+      ))}
+      {locations.map((location) => (
+        <Location
+          key={location.id}
+          onClick={(event) => {
+            onLocationClick(location)
+            event.stopPropagation()
+          }}
+          lat={location.lat}
+          lng={location.lng}
+          selected={location.id === selectedLocation?.id}
+        />
+      ))}
+    </GoogleMap>
+  )
+}
 
 Map.propTypes = {
   googleMapsAPIKey: PropTypes.string.isRequired,

@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components/macro'
 
+import ResetButton from '../ui/ResetButton'
+
 /**
  * The minimum cluster diameter in pixels.
  * @constant {number}
@@ -14,13 +16,12 @@ const MIN_CLUSTER_DIAMETER = 30
  */
 const MAX_CLUSTER_DIAMETER = 100
 
-const ClusterContainer = styled.button`
+const ClusterContainer = styled(ResetButton)`
   width: ${(props) => props.diameter}px;
   height: ${(props) => props.diameter}px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
   border-radius: 100%;
   color: white;
   background: ${({ theme }) => theme.blue};

@@ -124,7 +124,10 @@ const Search = ({ onType, sideButton, ...props }) => {
 
     let viewportBounds
     if (description === 'Current Location') {
-      viewportBounds = getGeolocationBounds(geolocation)
+      viewportBounds = getGeolocationBounds(
+        geolocation.latitude,
+        geolocation.longitude,
+      )
     } else {
       viewportBounds = await getPlaceBounds(
         descriptionToPlaceId.current[description],

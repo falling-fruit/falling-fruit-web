@@ -49,13 +49,15 @@ const MapPage = () => {
 
   useEffect(() => {
     if (selectedLocation) {
-      // TODO: Make getGeolocationBounds take in (lat, lng)
-      const location = {
-        latitude: selectedLocation.lat,
-        longitude: selectedLocation.lng,
-      }
-
-      setView(fitContainerBounds(getGeolocationBounds(location)))
+      setTimeout(
+        () =>
+          setView(
+            fitContainerBounds(
+              getGeolocationBounds(selectedLocation.lat, selectedLocation.lng),
+            ),
+          ),
+        500,
+      )
     }
   }, [selectedLocation, setView])
 
@@ -102,7 +104,11 @@ const MapPage = () => {
   }, [view, filters])
 
   const handleGeolocationClick = () => {
-    setView(fitContainerBounds(getGeolocationBounds(geolocation)))
+    setView(
+      fitContainerBounds(
+        getGeolocationBounds(geolocation.latitude, geolocation.longitude),
+      ),
+    )
   }
 
   const handleLocationClick = (location) => {
