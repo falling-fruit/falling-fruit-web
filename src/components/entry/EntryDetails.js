@@ -18,6 +18,11 @@ import { Tag, TagList } from '../ui/Tag'
 import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
 import ResourceList from './ResourceList'
+import {
+  ACCESS_TYPE,
+  formatISOString,
+  formatSeasonality,
+} from './textFormatters'
 import TypesHeader from './TypesHeader'
 
 const IconBesideText = styled.div`
@@ -27,10 +32,11 @@ const IconBesideText = styled.div`
   font-style: normal;
   font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
   align-items: center;
-  ${'' /* Check with Siraj to see if he's ok with me doing this */}
-  :nth-child(2) {
-    margin-bottom: 4px !important;
+  ${
+    '' /* Ask Siraj best way to set the bottom margin to 4px only if the same element is below it */
+    /* Ask Siraj about how address goes to 2 lines when the pane is made a bit smaller */
   }
+
   p {
     margin: 0 0 0 4px;
     font-size: 14px;
@@ -42,25 +48,6 @@ const LocationText = styled(ResetButton)`
   margin: 0 0 0 4px;
   color: ${({ theme }) => theme.secondaryText};
 `
-
-const ACCESS_TYPE = {
-  0: "On lister's property",
-  1: 'Received permission from owner',
-  2: 'Public property',
-  3: 'Private but overhanging',
-  4: 'Private property',
-}
-
-/**
- * Helper function to convert ISO date string into "month date, year" format.
- * @param {string} dateString - The ISO date to convert
- */
-const formatISOString = (dateString) =>
-  new Date(dateString).toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
@@ -189,6 +176,7 @@ const EntryDetails = () => {
         altText={locationData.type_names.join(', ')}
         handleViewLightbox={handleViewLightbox}
       />
+      {console.log(locationData)}
       <TextContent>
         {tagList}
         {typesHeader}
@@ -199,10 +187,17 @@ const EntryDetails = () => {
             <Map color={theme.secondaryText} size={20} />
             <LocationText>{address}</LocationText>
           </IconBesideText>
-          <IconBesideText>
-            <Calendar color={theme.secondaryText} size={20} />
-            <p>{'In season from X to Y'}</p>
-          </IconBesideText>
+          {locationData.season_start && locationData.season_stop && (
+            <IconBesideText>
+              <Calendar color={theme.secondaryText} size={20} />
+              <p>
+                {formatSeasonality(
+                  locationData.season_start,
+                  locationData.season_stop,
+                )}
+              </p>
+            </IconBesideText>
+          )}
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>
             <Button>
