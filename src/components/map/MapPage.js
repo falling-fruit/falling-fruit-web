@@ -3,13 +3,13 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
+import MapContext from '../../contexts/MapContext'
+import SearchContext from '../../contexts/SearchContext'
+import SettingsContext from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
 import { getGeolocationBounds } from '../../utils/viewportBounds'
-import SearchContext from '../search/SearchContext'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import SettingsContext from '../ui/SettingsContext'
 import Map from './Map'
-import MapContext from './MapContext'
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels

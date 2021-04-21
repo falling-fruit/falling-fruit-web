@@ -1,7 +1,7 @@
 import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-solid'
 import { useContext } from 'react'
 
-import SearchContext from '../search/SearchContext'
+import SearchContext from '../../contexts/SearchContext'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 

@@ -2,10 +2,10 @@ import intersection from 'ramda/src/intersection'
 import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import MapContext from '../../contexts/MapContext'
+import SearchContext from '../../contexts/SearchContext'
 import { getTypes } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
-import MapContext from '../map/MapContext'
-import SearchContext from '../search/SearchContext'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
 
