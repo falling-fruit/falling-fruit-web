@@ -12,7 +12,7 @@ const CheckBoxLabel = styled.label`
   width: 42px;
   height: 26px;
   border-radius: 15px;
-  background: ${({ theme }) => theme.transparentOrange};
+  background: ${({ theme }) => theme.tertiaryText};
   cursor: pointer;
   &::after {
     content: '';
@@ -33,7 +33,7 @@ const CheckBox = styled.input`
   width: 42px;
   height: 26px;
   &:checked + ${CheckBoxLabel} {
-    background: orange;
+    background: ${({ theme }) => theme.orange};
     &::after {
       content: '';
       display: block;
