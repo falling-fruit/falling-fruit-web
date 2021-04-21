@@ -34,7 +34,9 @@ const IconBesideText = styled.div`
   align-items: center;
   ${
     '' /* Ask Siraj best way to set the bottom margin to 4px only if the same element is below it */
-    /* Ask Siraj about how address goes to 2 lines when the pane is made a bit smaller */
+  }
+  & + & {
+    margin-top: 4px !important;
   }
 
   p {
@@ -44,6 +46,7 @@ const IconBesideText = styled.div`
 `
 const LocationText = styled(ResetButton)`
   font-weight: bold;
+  text-align: left;
   font-size: 14px;
   margin: 0 0 0 4px;
   color: ${({ theme }) => theme.secondaryText};
@@ -75,12 +78,13 @@ const TextContent = styled.article`
 
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
-  & > *:not(:last-child) {
-    margin-bottom: 14px;
+  & > *:not(:first-child) {
+    margin-top: 14px;
   }
 
-  p {
+  & > p {
     color: ${({ theme }) => theme.secondaryText};
+    margin-bottom: 14px;
   }
 
   small {
@@ -182,8 +186,7 @@ const EntryDetails = () => {
         {typesHeader}
         <Description>
           <p>{locationData.description}</p>
-          {/* // eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-          <IconBesideText bold onClick={_handleAddressClick}>
+          <IconBesideText bold onClick={_handleAddressClick} tabIndex={0}>
             <Map color={theme.secondaryText} size={20} />
             <LocationText>{address}</LocationText>
           </IconBesideText>
