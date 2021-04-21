@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import equals from 'ramda/src/equals'
-import React, { Component } from 'react'
+import { Component } from 'react'
 import DropdownTreeSelect from 'react-dropdown-tree-select'
 
 // Long story. See https://dowjones.github.io/react-dropdown-tree-select/#/story/prevent-re-render-on-parent-render-hoc

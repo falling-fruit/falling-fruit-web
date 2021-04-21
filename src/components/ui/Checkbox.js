@@ -1,7 +1,6 @@
 import '@reach/checkbox/styles.css'
 
 import { CustomCheckboxContainer, CustomCheckboxInput } from '@reach/checkbox'
-import React from 'react'
 import styled from 'styled-components/macro'
 
 const StyledCheckmark = styled.div`
