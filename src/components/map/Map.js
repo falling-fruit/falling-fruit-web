@@ -16,6 +16,7 @@ import Location from './Location'
  * @param {function} onClusterClick - The function called when a cluster is clicked
  * @param {function} onLocationClick - The function called when a location is clicked
  * @param {function} onViewChange - The function called when the view state is changed
+ * @param {boolean} showLabels - Will display labels under locations if true
  */
 const Map = ({
   googleMapsAPIKey,
@@ -27,6 +28,7 @@ const Map = ({
   onClusterClick,
   onLocationClick,
   onViewChange,
+  showLabels,
 }) => {
   const { selectedLocation } = useContext(SearchContext)
 
@@ -68,6 +70,7 @@ const Map = ({
           lat={location.lat}
           lng={location.lng}
           selected={location.id === selectedLocation?.id}
+          label={showLabels && location.type_names[0]}
         />
       ))}
     </GoogleMap>
@@ -83,6 +86,7 @@ Map.propTypes = {
   onViewChange: PropTypes.func.isRequired,
   onClusterClick: PropTypes.func.isRequired,
   onLocationClick: PropTypes.func.isRequired,
+  showLabels: PropTypes.bool,
 }
 
 export default Map

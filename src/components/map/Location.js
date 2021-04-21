@@ -8,6 +8,7 @@ import ResetButton from '../ui/ResetButton'
 /**
  * Component for a location displayed on the map.
  * @param {function} onClick - The handler called when this location is clicked
+ * @param {boolean} label - The optional location label that will appear underneath location icon
  */
 const LocationButton = styled(ResetButton)`
   position: relative;
@@ -30,13 +31,30 @@ const LocationButton = styled(ResetButton)`
     color: ${({ theme }) => theme.orange};
   }
 `
-
-const Location = ({ selected, ...props }) => (
-  <LocationButton {...props}>{selected && <Map size={48} />}</LocationButton>
+const Label = styled.div`
+  font-size: 14px;
+  color: ${({ theme }) => theme.headerText};
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
+  margin-top: -5px;
+  /* Centers labels under each location */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Centers text inside the label */
+  text-align: center;
+  /* Prevents line breaks */
+  white-space: nowrap;
+  z-index: 1;
+`
+const Location = ({ label, selected, ...props }) => (
+  <>
+    <LocationButton {...props}>{selected && <Map size={48} />}</LocationButton>
+    <Label>{label}</Label>
+  </>
 )
-
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
+  label: PropTypes.string,
 }
 
 export default Location

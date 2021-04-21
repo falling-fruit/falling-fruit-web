@@ -1,5 +1,5 @@
 import { fitBounds } from 'google-map-react'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
@@ -7,6 +7,7 @@ import { getClusters, getLocations } from '../../utils/api'
 import { getGeolocationBounds } from '../../utils/viewportBounds'
 import SearchContext from '../search/SearchContext'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import SettingsContext from '../ui/SettingsContext'
 import Map from './Map'
 import MapContext from './MapContext'
 
@@ -25,6 +26,7 @@ const MapPage = () => {
 
   const { view, setView } = useContext(MapContext)
   const { filters } = useContext(SearchContext)
+  const { showLabels } = useContext(SettingsContext)
 
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
@@ -141,6 +143,7 @@ const MapPage = () => {
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
+        showLabels={showLabels}
       />
     </div>
   )

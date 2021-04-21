@@ -14,8 +14,8 @@ const StyledIconButton = styled(ResetButton)`
   background-color: ${({ pressed, theme }) =>
     pressed ? theme.transparentOrange : 'white'};
   border-radius: 50%;
-  border: 2px solid
-    ${({ raised, theme }) => (raised ? 'white' : theme.secondaryBackground)};
+  border: ${({ raised, theme }) =>
+    raised ? '2px solid white' : `1px solid ${theme.secondaryBackground}`};
   ${({ pressed, theme }) =>
     pressed &&
     `border-color: ${theme.orange};

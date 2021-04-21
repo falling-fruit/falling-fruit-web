@@ -10,6 +10,7 @@ const Icons = styled.div`
   & > *:not(:last-child) {
     margin: 0 8px;
   }
+  ${(props) => (props.$prepend ? 'margin-right' : 'margin-left')}: 18px;
 `
 const PrimaryText = styled.div`
   font-weight: bold;
@@ -34,7 +35,6 @@ const TextContainer = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.secondaryText};
   justify-content: center;
-  margin-left: 18px;
   flex: 1;
   overflow: hidden;
   white-space: nowrap;
@@ -50,12 +50,12 @@ const TextContainer = styled.div`
 const ListEntry = React.forwardRef(
   ({ leftIcons, primaryText, secondaryText, rightIcons, ...props }, ref) => (
     <ListContainer ref={ref} {...props}>
-      <Icons>{leftIcons}</Icons>
+      {leftIcons && <Icons $prepend>{leftIcons}</Icons>}
       <TextContainer>
         <PrimaryText className="primaryText">{primaryText}</PrimaryText>
         <SecondaryText className="secondaryText">{secondaryText}</SecondaryText>
       </TextContainer>
-      <Icons>{rightIcons}</Icons>
+      {rightIcons && <Icons>{rightIcons}</Icons>}
     </ListContainer>
   ),
 )
@@ -64,7 +64,7 @@ ListEntry.displayName = 'ListEntry'
 
 ListEntry.propTypes = {
   leftIcons: PropTypes.node,
-  primaryText: PropTypes.string,
+  primaryText: PropTypes.node,
   secondaryText: PropTypes.string,
   rightIcons: PropTypes.node,
 }
