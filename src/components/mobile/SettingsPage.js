@@ -20,6 +20,7 @@ import styled from 'styled-components/macro'
 
 import Checkbox from '../ui/Checkbox'
 import CircleIcon from '../ui/CircleIcon'
+import ToggleSwitch from '../ui/ToggleSwitch'
 
 const PageMargin = styled.div`
   margin: 26px;
@@ -44,6 +45,7 @@ const CheckboxLabels = styled.div`
   align-items: center;
 `
 
+// rename to something more holistic
 const ToggleLabels = styled.div`
   display: flex;
   justify-content: space-between;
@@ -56,20 +58,27 @@ const StyledCircleIcon = styled(CircleIcon)`
   color: gray;
 `
 
-// small should be h3
 const SettingsPage = () => (
   <PageMargin>
     <h2>Settings</h2>
     <h3>Viewing Preferences</h3>
     <CheckboxLabels>
-      <Checkbox></Checkbox>
+      <Checkbox />
       <h5>Show Labels</h5>
+    </CheckboxLabels>
+
+    <CheckboxLabels>
+      <Checkbox />
+      <h5>Show Scientific Names</h5>
     </CheckboxLabels>
 
     <h3>Map Preferences</h3>
     <ToggleLabels>
       <h5>Show Labels</h5>
+      <ToggleSwitch />
     </ToggleLabels>
+
+    <h3>Language Preferences</h3>
 
     <h5>Map</h5>
 
