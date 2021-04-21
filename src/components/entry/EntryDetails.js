@@ -1,5 +1,5 @@
 import { Flag, Star } from '@styled-icons/boxicons-solid'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 

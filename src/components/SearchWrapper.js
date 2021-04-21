@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import Filter from './filter/Filter'
 import FilterIconButton from './filter/FilterIconButton'
