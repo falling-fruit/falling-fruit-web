@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import React, { useContext, useEffect, useState } from 'react'
@@ -32,9 +30,7 @@ const IconBesideText = styled.div`
   font-style: normal;
   font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
   align-items: center;
-  ${
-    '' /* Ask Siraj best way to set the bottom margin to 4px only if the same element is below it */
-  }
+
   & + & {
     margin-top: 4px !important;
   }
@@ -119,7 +115,6 @@ const EntryDetails = () => {
       const typesData = await Promise.all(
         locationData.type_ids.map(getTypeById),
       )
-      // TODO: Make this it's own state
       setAddress(streetAddress)
       setLocationData(locationData)
       setTypesData(typesData)
@@ -180,7 +175,6 @@ const EntryDetails = () => {
         altText={locationData.type_names.join(', ')}
         handleViewLightbox={handleViewLightbox}
       />
-      {console.log(locationData)}
       <TextContent>
         {tagList}
         {typesHeader}

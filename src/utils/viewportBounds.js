@@ -4,7 +4,6 @@ const CURRENT_LOCATION_VIEWPORT_RADIUS = 0.001
 
 export const getGeolocationBounds = (latitude, longitude) =>
   // Use fixed viewport around the lat and long of the current location
-
   ({
     ne: {
       lat: latitude + CURRENT_LOCATION_VIEWPORT_RADIUS,
