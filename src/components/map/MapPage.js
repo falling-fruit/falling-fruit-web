@@ -24,7 +24,7 @@ const MapPage = () => {
   const { viewport: searchViewport } = useContext(SearchContext)
   const { view, setView } = useContext(MapContext)
   const { filters } = useContext(SearchContext)
-  const { showLabels } = useContext(SettingsContext)
+  const { settings } = useContext(SettingsContext)
 
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
@@ -123,7 +123,7 @@ const MapPage = () => {
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
-        showLabels={showLabels}
+        showLabels={settings.showLabels}
       />
     </div>
   )
