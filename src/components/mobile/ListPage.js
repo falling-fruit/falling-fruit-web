@@ -40,8 +40,7 @@ const ListPage = () => {
     fetchListEntries()
   }, [view])
 
-  const loadMoreItems = async () => {
-    console.log('loadMoreItems()')
+  const loadNextPage = async () => {
     setIsNextPageLoading(true)
     const { bounds, center } = view
     const newLocations = await getLocations({
@@ -54,8 +53,7 @@ const ListPage = () => {
       limit: LIMIT,
       offset: locations.length,
     })
-
-    setHasMoreItems(newLocations.length + locations.length < newLocations[1])
+    setHasMoreItems(newLocations[0] === 0)
     setLocations([...locations].concat(newLocations.slice(2)))
     setIsNextPageLoading(false)
   }
@@ -71,7 +69,7 @@ const ListPage = () => {
     <ListPageContainer>
       <List
         locations={locations}
-        loadNextPage={loadMoreItems}
+        loadNextPage={loadNextPage}
         handleListEntryClick={handleListEntryClick}
         hasMoreItems={hasMoreItems}
         isNextPageLoading={isNextPageLoading}

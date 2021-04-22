@@ -2,6 +2,7 @@ import { ChevronRight, Star } from '@styled-icons/boxicons-solid'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
+import styled from 'styled-components/macro'
 
 import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
@@ -11,6 +12,10 @@ const convertMetersToMiles = (meters) => {
   miles = miles.slice(0, miles.indexOf('.') + 3)
   return miles
 }
+
+const StyledRow = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+`
 
 const List = ({
   locations,
@@ -43,7 +48,7 @@ const List = ({
         />
       )
     }
-    return <div style={style}>{row}</div>
+    return <StyledRow style={style}>{row}</StyledRow>
   }
 
   return (
@@ -58,7 +63,7 @@ const List = ({
             <FixedSizeList
               height={height}
               width={width}
-              itemSize={50}
+              itemSize={57}
               itemCount={itemCount}
               onItemsRendered={onItemsRendered}
               ref={ref}
