@@ -26,9 +26,11 @@ const MapPage = () => {
   const { filters } = useSearch()
   const { settings } = useSettings()
 
-  const [locations, setLocations] = useState([])
-  const [clusters, setClusters] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [mapData, setMapData] = useState({
+    locations: [],
+    clusters: [],
+    isLoading: true,
+  })
 
   //const geolocation = useGeolocation({ enableHighAccuracy: true })
   const geolocation = useGeolocation()
@@ -53,7 +55,7 @@ const MapPage = () => {
 
       if (bounds?.ne.lat != null) {
         // Map has received real bounds
-        setIsLoading(true)
+        setMapData((prevMapData) => ({ ...prevMapData, isLoading: true }))
 
         const query = {
           nelat: bounds.ne.lat,
@@ -62,13 +64,13 @@ const MapPage = () => {
           swlng: bounds.sw.lng,
           muni: filters.muni ? 1 : 0,
           t: filters.types.toString(),
+          limit: 250,
         }
 
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
           const clusters = await getClusters({ ...query, zoom })
 
-          setClusters(clusters)
-          setLocations([])
+          setMapData({ locations: [], clusters, isLoading: false })
         } else {
           const [
             _numLocationsReturned,
@@ -79,11 +81,8 @@ const MapPage = () => {
             invasive: filters.invasive ? 1 : 0,
           })
 
-          setLocations(locations)
-          setClusters([])
+          setMapData({ locations, clusters: [], isLoading: false })
         }
-
-        setIsLoading(false)
       }
     }
     fetchClusterAndLocationData()
@@ -112,13 +111,13 @@ const MapPage = () => {
       style={{ width: '100%', height: '100%', position: 'relative' }}
       ref={container}
     >
-      {isLoading && <LoadingIndicator />}
+      {mapData.isLoading && <LoadingIndicator />}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
         geolocation={geolocation}
-        locations={locations}
-        clusters={clusters}
+        locations={mapData.locations}
+        clusters={mapData.clusters}
         onViewChange={setView}
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
