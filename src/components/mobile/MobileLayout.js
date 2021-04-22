@@ -1,17 +1,12 @@
 import { Route, Switch } from 'react-router-dom'
 
-import useRoutedTabs from '../../utils/useRoutedTabs'
 import EntryDetails from '../entry/EntryDetails'
-import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
+import { Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
+import { RoutedPageTabs } from './RoutedPageTabs'
 import { DEFAULT_TAB, TABS } from './tabs'
 import TopBarSwitch from './TopBarSwitch'
 
 const MobileLayout = () => {
-  const [tabIndex, handleTabChange] = useRoutedTabs(
-    TABS.map(({ path }) => path),
-    DEFAULT_TAB,
-  )
-
   const tabPanels = TABS.map(({ path, panel }) => (
     <TabPanel key={path}>{panel}</TabPanel>
   ))
@@ -24,7 +19,10 @@ const MobileLayout = () => {
   ))
 
   return (
-    <PageTabs index={tabIndex} onChange={handleTabChange}>
+    <RoutedPageTabs
+      tabPaths={TABS.map(({ path }) => path)}
+      defaultTabIndex={DEFAULT_TAB}
+    >
       <TabPanels>
         <TopBarSwitch />
         <Switch>
@@ -35,7 +33,7 @@ const MobileLayout = () => {
         </Switch>
       </TabPanels>
       <TabList>{tabList}</TabList>
-    </PageTabs>
+    </RoutedPageTabs>
   )
 }
 

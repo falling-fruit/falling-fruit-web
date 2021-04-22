@@ -27,4 +27,9 @@ const TABS = [
   },
 ]
 
-export { DEFAULT_TAB, TABS }
+const PATH_TO_INDEX = {}
+TABS.forEach(({ path }, index) => {
+  PATH_TO_INDEX[path] = index
+})
+
+export { DEFAULT_TAB, PATH_TO_INDEX, TABS }
