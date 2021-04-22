@@ -1,15 +1,15 @@
 import { fitBounds } from 'google-map-react'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
+import { useMap } from '../../contexts/MapContext'
+import { useSearch } from '../../contexts/SearchContext'
+import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
 import { getGeolocationBounds } from '../../utils/viewportBounds'
-import SearchContext from '../search/SearchContext'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import SettingsContext from '../ui/SettingsContext'
 import Map from './Map'
-import MapContext from './MapContext'
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -21,10 +21,10 @@ const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 const MapPage = () => {
   const history = useHistory()
   const container = useRef(null)
-  const { viewport: searchViewport } = useContext(SearchContext)
-  const { view, setView } = useContext(MapContext)
-  const { filters } = useContext(SearchContext)
-  const { showLabels } = useContext(SettingsContext)
+  const { viewport: searchViewport } = useSearch()
+  const { view, setView } = useMap()
+  const { filters } = useSearch()
+  const { settings } = useSettings()
 
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])
@@ -123,7 +123,7 @@ const MapPage = () => {
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
-        showLabels={showLabels}
+        showLabels={settings.showLabels}
       />
     </div>
   )
