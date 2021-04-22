@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { memo } from 'react'
 import styled from 'styled-components/macro'
 
 /**
@@ -58,11 +59,13 @@ const calculateDiameter = (count) =>
  * @param {function} onClick - The handler called when this cluster is clicked
  * @param {number} count - The total number of locations within this cluster
  */
-const Cluster = ({ onClick, count }) => (
+const Cluster = memo(({ onClick, count }) => (
   <ClusterContainer diameter={calculateDiameter(count)} onClick={onClick}>
     <p>{formatClusterLabel(count)}</p>
   </ClusterContainer>
-)
+))
+
+Cluster.displayName = 'Cluster'
 
 Cluster.propTypes = {
   onClick: PropTypes.func.isRequired,

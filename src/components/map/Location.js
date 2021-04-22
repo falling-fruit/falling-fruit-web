@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { memo } from 'react'
 import styled from 'styled-components/macro'
 
 /**
@@ -22,6 +23,7 @@ const LocationButton = styled.button`
     outline: none;
   }
 `
+
 const Label = styled.div`
   font-size: 14px;
   color: ${({ theme }) => theme.headerText};
@@ -37,12 +39,16 @@ const Label = styled.div`
   white-space: nowrap;
   z-index: 1;
 `
-const Location = ({ label, ...props }) => (
+
+const Location = memo(({ label, ...props }) => (
   <>
     <LocationButton {...props} />
     <Label>{label}</Label>
   </>
-)
+))
+
+Location.displayName = 'Location'
+
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
   label: PropTypes.string,
