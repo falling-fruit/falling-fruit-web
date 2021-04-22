@@ -11,10 +11,10 @@ const DEFAULT_SETTINGS = {
 
 const SettingsContext = createContext()
 
-const SettingsProvider = ({ children, ...props }) => {
+const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS)
   return (
-    <SettingsContext.Provider value={{ settings, setSettings }} {...props}>
+    <SettingsContext.Provider value={{ settings, setSettings }}>
       {children}
     </SettingsContext.Provider>
   )
@@ -22,5 +22,4 @@ const SettingsProvider = ({ children, ...props }) => {
 
 const useSettings = () => useContext(SettingsContext)
 
-export { SettingsProvider }
-export { useSettings }
+export { SettingsProvider, useSettings }

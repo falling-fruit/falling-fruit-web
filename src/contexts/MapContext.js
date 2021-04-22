@@ -32,15 +32,15 @@ const DEFAULT_VIEW_STATE = {
 
 const MapContext = createContext()
 
-const MapProvider = ({ children, ...props }) => {
+const MapProvider = ({ children }) => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
   return (
-    <MapContext.Provider value={{ view, setView }} {...props}>
+    <MapContext.Provider value={{ view, setView }}>
       {children}
     </MapContext.Provider>
   )
 }
 
 const useMap = () => useContext(MapContext)
-export { MapProvider }
-export { useMap }
+
+export { MapProvider, useMap }

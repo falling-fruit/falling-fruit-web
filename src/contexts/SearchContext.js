@@ -15,13 +15,12 @@ const DEFAULT_FILTERS = {
 
 const SearchContext = createContext()
 
-const SearchProvider = ({ children, ...props }) => {
+const SearchProvider = ({ children }) => {
   const [viewport, setViewport] = useState(null)
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
   return (
     <SearchContext.Provider
       value={{ viewport, setViewport, filters, setFilters }}
-      {...props}
     >
       {children}
     </SearchContext.Provider>
@@ -30,5 +29,4 @@ const SearchProvider = ({ children, ...props }) => {
 
 const useSearch = () => useContext(SearchContext)
 
-export { SearchProvider }
-export { useSearch }
+export { SearchProvider, useSearch }
