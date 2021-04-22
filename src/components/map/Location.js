@@ -48,6 +48,7 @@ const Label = styled.div`
 `
 const Location = ({ label, selected, ...props }) => (
   <>
+    {/* "selected" will be used in a future PR which will put a pin on the location when it's clicked */}
     <LocationButton {...props}>{selected && <Map size={48} />}</LocationButton>
     <Label>{label}</Label>
   </>

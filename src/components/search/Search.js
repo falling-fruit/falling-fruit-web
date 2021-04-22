@@ -9,18 +9,18 @@ import {
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
+import { MapProvider } from '../../contexts/MapContext'
+import { useSearch } from '../../contexts/SearchContext'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getProperViewState } from '../../utils/viewportBounds'
-import MapContext from '../map/MapContext'
 import Input from '../ui/Input'
-import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
 
 const CurrentLocationButton = (props) => (
@@ -73,13 +73,13 @@ const SearchBarContainer = styled.div`
 `
 
 const Search = ({ onType, sideButton, ...props }) => {
-  const { setViewport } = useContext(SearchContext)
+  const { setViewport } = useSearch()
   const isDesktop = useIsDesktop()
 
   // Geolocation and current city name
   const geolocation = useGeolocation()
   const [cityName, setCityName] = useState(null)
-  const { setView } = useContext(MapContext)
+  const { setView } = MapProvider
 
   useEffect(() => {
     async function fetchCityName() {

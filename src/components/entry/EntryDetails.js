@@ -1,14 +1,13 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { useMap } from '../../contexts/MapContext'
 import { getLocationById, getTypeById } from '../../utils/api'
 import { getStreetAddress } from '../../utils/locationInfo'
 import { getProperViewState } from '../../utils/viewportBounds'
-import MapContext from '../map/MapContext'
-import SearchContext from '../search/SearchContext'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -98,13 +97,11 @@ const Description = styled.section`
 
 const EntryDetails = () => {
   const { id } = useParams()
-  const { setView } = useContext(MapContext)
+  const { setView } = useMap()
   const [locationData, setLocationData] = useState()
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
-
-  const { setSelectedLocation } = useContext(SearchContext)
 
   useEffect(() => {
     async function fetchEntryDetails() {
@@ -128,7 +125,6 @@ const EntryDetails = () => {
   const handleAddressClick = () => {
     history.push('/map')
     setView(getProperViewState(locationData.lat, locationData.lng))
-    setSelectedLocation(locationData)
   }
 
   const handleViewLightbox = () => {
