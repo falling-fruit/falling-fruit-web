@@ -25,10 +25,9 @@ import TypesHeader from './TypesHeader'
 
 const IconBesideText = styled.div`
   display: flex;
-  font-family: inherit;
   color: ${({ theme }) => theme.secondaryText};
   font-style: normal;
-  font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
+  font-weight: ${($props) => ($props.bold ? 'bold' : 'normal')};
   align-items: center;
 
   ${'' /* TODO: Add another wrapper */}
@@ -179,17 +178,19 @@ const EntryDetails = () => {
             <Map color={theme.secondaryText} size={20} />
             <LocationText>{address}</LocationText>
           </IconBesideText>
-          {locationData.season_start && locationData.season_stop && (
-            <IconBesideText>
-              <Calendar color={theme.secondaryText} size={20} />
-              <p>
-                {formatSeasonality(
-                  locationData.season_start,
-                  locationData.season_stop,
-                )}
-              </p>
-            </IconBesideText>
-          )}
+          {locationData.no_season ||
+            (locationData.season_start && locationData.season_stop && (
+              <IconBesideText>
+                <Calendar color={theme.secondaryText} size={20} />
+                <p>
+                  {formatSeasonality(
+                    locationData.season_start,
+                    locationData.season_stop,
+                    locationData.no_season,
+                  )}
+                </p>
+              </IconBesideText>
+            ))}
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>
             <Button>

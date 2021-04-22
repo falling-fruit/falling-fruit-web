@@ -17,5 +17,9 @@ export const ACCESS_TYPE = {
   4: 'Private property',
 }
 
-export const formatSeasonality = (startMonth, endMonth) =>
-  `In season from ${startMonth} to ${endMonth}`
+export const formatSeasonality = (startMonth, endMonth, noSeason) => {
+  if (noSeason || (startMonth === 0 && endMonth === 11)) {
+    return 'Year Round'
+  }
+  return `In season from ${startMonth} to ${endMonth}`
+}

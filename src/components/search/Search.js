@@ -15,7 +15,7 @@ import styled from 'styled-components/macro'
 // TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
-import { MapProvider } from '../../contexts/MapContext'
+import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -79,7 +79,7 @@ const Search = ({ onType, sideButton, ...props }) => {
   // Geolocation and current city name
   const geolocation = useGeolocation()
   const [cityName, setCityName] = useState(null)
-  const { setView } = MapProvider
+  const { setView } = useMap()
 
   useEffect(() => {
     async function fetchCityName() {
