@@ -10,11 +10,9 @@ const RoutedPageTabs = ({ tabPaths, defaultTabIndex, children }) => {
   const { tabIndex, handleTabChange } = routedTabs
 
   return (
-    <TabsContext.Provider value={routedTabs}>
-      <PageTabs index={tabIndex} onChange={handleTabChange}>
-        {children}
-      </PageTabs>
-    </TabsContext.Provider>
+    <PageTabs index={tabIndex} onChange={handleTabChange}>
+      <TabsContext.Provider value={routedTabs}>{children}</TabsContext.Provider>
+    </PageTabs>
   )
 }
 
