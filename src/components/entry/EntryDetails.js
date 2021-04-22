@@ -45,6 +45,7 @@ const LocationText = styled(ResetButton)`
   text-align: left;
   font-size: 14px;
   margin: 0 0 0 4px;
+  flex: 1;
   color: ${({ theme }) => theme.secondaryText};
 `
 
@@ -124,11 +125,7 @@ const EntryDetails = () => {
 
   const _handleAddressClick = () => {
     history.push('/map')
-    const tempViewState = {
-      center: { lat: locationData.lat, lng: locationData.lng },
-      zoom: 18,
-    }
-    setView(tempViewState)
+    setView()
     setSelectedLocation(locationData)
   }
 
