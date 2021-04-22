@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import MapContext from '../../contexts/MapContext'
-import SearchContext from '../../contexts/SearchContext'
+import { useSearch } from '../../contexts/SearchContext'
 import { getTypes } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
 import CheckboxFilters from './CheckboxFilters'
@@ -33,7 +33,7 @@ const StyledFilter = styled.div`
 
 const Filter = ({ isOpen }) => {
   const { view } = useContext(MapContext)
-  const { filters, setFilters } = useContext(SearchContext)
+  const { filters, setFilters } = useSearch()
   const [treeData, setTreeData] = useState([])
 
   const handleTreeChange = (currentNode, selectedNodes) => {

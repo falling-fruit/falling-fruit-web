@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
 import MapContext from '../../contexts/MapContext'
-import SearchContext from '../../contexts/SearchContext'
-import SettingsContext from '../../contexts/SettingsContext'
+import { useSearch } from '../../contexts/SearchContext'
+import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
 import { getGeolocationBounds } from '../../utils/viewportBounds'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -21,10 +21,10 @@ const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 const MapPage = () => {
   const history = useHistory()
   const container = useRef(null)
-  const { viewport: searchViewport } = useContext(SearchContext)
+  const { viewport: searchViewport } = useSearch()
   const { view, setView } = useContext(MapContext)
-  const { filters } = useContext(SearchContext)
-  const { settings } = useContext(SettingsContext)
+  const { filters } = useSearch()
+  const { settings } = useSettings()
 
   const [locations, setLocations] = useState([])
   const [clusters, setClusters] = useState([])

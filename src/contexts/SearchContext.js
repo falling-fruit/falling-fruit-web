@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 /**
  * Default filter selections.
@@ -15,5 +15,20 @@ const DEFAULT_FILTERS = {
 
 const SearchContext = createContext()
 
-export default SearchContext
-export { DEFAULT_FILTERS }
+const SearchProvider = ({ children, ...props }) => {
+  const [viewport, setViewport] = useState(null)
+  const [filters, setFilters] = useState(DEFAULT_FILTERS)
+  return (
+    <SearchContext.Provider
+      value={{ viewport, setViewport, filters, setFilters }}
+      {...props}
+    >
+      {children}
+    </SearchContext.Provider>
+  )
+}
+
+const useSearch = () => useContext(SearchContext)
+
+export { SearchProvider }
+export { useSearch }

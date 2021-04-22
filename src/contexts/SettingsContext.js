@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 /**
  * Default filter selections.
@@ -11,5 +11,16 @@ const DEFAULT_SETTINGS = {
 
 const SettingsContext = createContext()
 
-export default SettingsContext
-export { DEFAULT_SETTINGS }
+const SettingsProvider = ({ children, ...props }) => {
+  const [settings, setSettings] = useState(DEFAULT_SETTINGS)
+  return (
+    <SettingsContext.Provider value={{ settings, setSettings }} {...props}>
+      {children}
+    </SettingsContext.Provider>
+  )
+}
+
+const useSettings = () => useContext(SettingsContext)
+
+export { SettingsProvider }
+export { useSettings }
