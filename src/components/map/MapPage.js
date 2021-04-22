@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
 import { getClusters, getLocations } from '../../utils/api'
-import { getGeolocationBounds } from '../../utils/viewportBounds'
+import { getProperViewState } from '../../utils/viewportBounds'
 import SearchContext from '../search/SearchContext'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import SettingsContext from '../ui/SettingsContext'
@@ -22,7 +22,6 @@ const MapPage = () => {
   const history = useHistory()
   const container = useRef(null)
   const { viewport: searchViewport } = useContext(SearchContext)
-  const { selectedLocation } = useContext(SearchContext)
 
   const { view, setView } = useContext(MapContext)
   const { filters } = useContext(SearchContext)
@@ -48,20 +47,6 @@ const MapPage = () => {
       setView(fitContainerBounds(searchViewport))
     }
   }, [searchViewport, setView])
-
-  useEffect(() => {
-    if (selectedLocation) {
-      setTimeout(
-        () =>
-          setView(
-            fitContainerBounds(
-              getGeolocationBounds(selectedLocation.lat, selectedLocation.lng),
-            ),
-          ),
-        500,
-      )
-    }
-  }, [selectedLocation, setView])
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
@@ -106,11 +91,7 @@ const MapPage = () => {
   }, [view, filters])
 
   const handleGeolocationClick = () => {
-    setView(
-      fitContainerBounds(
-        getGeolocationBounds(geolocation.latitude, geolocation.longitude),
-      ),
-    )
+    setView(getProperViewState(geolocation.latitude, geolocation.longitude))
   }
 
   const handleLocationClick = (location) => {

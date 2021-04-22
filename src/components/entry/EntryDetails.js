@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 
 import { getLocationById, getTypeById } from '../../utils/api'
 import { getStreetAddress } from '../../utils/locationInfo'
+import { getProperViewState } from '../../utils/viewportBounds'
 import MapContext from '../map/MapContext'
 import SearchContext from '../search/SearchContext'
 import Button from '../ui/Button'
@@ -31,6 +32,7 @@ const IconBesideText = styled.div`
   font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
   align-items: center;
 
+  ${'' /* TODO: Add another wrapper */}
   & + & {
     margin-top: 4px !important;
   }
@@ -123,9 +125,9 @@ const EntryDetails = () => {
     fetchEntryDetails()
   }, [id])
 
-  const _handleAddressClick = () => {
+  const handleAddressClick = () => {
     history.push('/map')
-    setView()
+    setView(getProperViewState(locationData.lat, locationData.lng))
     setSelectedLocation(locationData)
   }
 
@@ -177,7 +179,7 @@ const EntryDetails = () => {
         {typesHeader}
         <Description>
           <p>{locationData.description}</p>
-          <IconBesideText bold onClick={_handleAddressClick} tabIndex={0}>
+          <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
             <Map color={theme.secondaryText} size={20} />
             <LocationText>{address}</LocationText>
           </IconBesideText>

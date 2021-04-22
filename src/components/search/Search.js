@@ -17,10 +17,8 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import {
-  getGeolocationBounds,
-  getPlaceBounds,
-} from '../../utils/viewportBounds'
+import { getPlaceBounds, getProperViewState } from '../../utils/viewportBounds'
+import MapContext from '../map/MapContext'
 import Input from '../ui/Input'
 import SearchContext from './SearchContext'
 import SearchEntry from './SearchEntry'
@@ -81,6 +79,8 @@ const Search = ({ onType, sideButton, ...props }) => {
   // Geolocation and current city name
   const geolocation = useGeolocation()
   const [cityName, setCityName] = useState(null)
+  const { setView } = useContext(MapContext)
+
   useEffect(() => {
     async function fetchCityName() {
       if (geolocation.latitude !== null) {
@@ -124,16 +124,13 @@ const Search = ({ onType, sideButton, ...props }) => {
 
     let viewportBounds
     if (description === 'Current Location') {
-      viewportBounds = getGeolocationBounds(
-        geolocation.latitude,
-        geolocation.longitude,
-      )
+      setView(getProperViewState(geolocation.latitude, geolocation.longitude))
     } else {
       viewportBounds = await getPlaceBounds(
         descriptionToPlaceId.current[description],
       )
+      setViewport(viewportBounds)
     }
-    setViewport(viewportBounds)
   }
 
   return (
