@@ -1,8 +1,8 @@
 import intersection from 'ramda/src/intersection'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
-import MapContext from '../../contexts/MapContext'
+import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { getTypes } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
@@ -32,7 +32,7 @@ const StyledFilter = styled.div`
 `
 
 const Filter = ({ isOpen }) => {
-  const { view } = useContext(MapContext)
+  const { view } = useMap()
   const { filters, setFilters } = useSearch()
   const [treeData, setTreeData] = useState([])
 

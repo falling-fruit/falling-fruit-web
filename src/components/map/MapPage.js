@@ -1,9 +1,9 @@
 import { fitBounds } from 'google-map-react'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
-import MapContext from '../../contexts/MapContext'
+import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
@@ -22,7 +22,7 @@ const MapPage = () => {
   const history = useHistory()
   const container = useRef(null)
   const { viewport: searchViewport } = useSearch()
-  const { view, setView } = useContext(MapContext)
+  const { view, setView } = useMap()
   const { filters } = useSearch()
   const { settings } = useSettings()
 

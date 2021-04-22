@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 /**
  * Default latitude of the map's center.
@@ -32,5 +32,15 @@ const DEFAULT_VIEW_STATE = {
 
 const MapContext = createContext()
 
-export default MapContext
-export { DEFAULT_VIEW_STATE }
+const MapProvider = ({ children, ...props }) => {
+  const [view, setView] = useState(DEFAULT_VIEW_STATE)
+  return (
+    <MapContext.Provider value={{ view, setView }} {...props}>
+      {children}
+    </MapContext.Provider>
+  )
+}
+
+const useMap = () => useContext(MapContext)
+export { MapProvider }
+export { useMap }
