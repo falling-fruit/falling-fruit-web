@@ -1,6 +1,7 @@
 import { ChevronRight, Star } from '@styled-icons/boxicons-solid'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
+import InfiniteLoader from 'react-window-infinite-loader'
 
 import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
@@ -11,32 +12,61 @@ const convertMetersToMiles = (meters) => {
   return miles
 }
 
-const List = ({ locations, handleListEntryClick }) => {
-  const renderRow = ({ index }) => {
-    const location = locations[index]
-    return (
-      <ListEntry
-        key={location.id}
-        leftIcons={<Star size="16" />}
-        rightIcons={<ChevronRight size="16" color={theme.blue} />}
-        primaryText={location.type_names[0]}
-        secondaryText={`${convertMetersToMiles(location.distance)} miles`}
-        onClick={() => handleListEntryClick(location.id)}
-      />
-    )
+const List = ({
+  locations,
+  handleListEntryClick,
+  loadNextPage,
+  hasMoreItems,
+  isNextPageLoading,
+}) => {
+  const itemCount = hasMoreItems ? locations.length + 1 : locations.length
+
+  // eslint-disable-next-line no-empty-function
+  const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage
+
+  const isItemLoaded = (index) => !hasMoreItems || index < locations.length
+
+  const renderRow = ({ index, style }) => {
+    let row
+    if (!isItemLoaded(index)) {
+      row = <ListEntry primaryText="Loading..." />
+    } else {
+      const location = locations[index]
+      row = (
+        <ListEntry
+          key={location.id}
+          leftIcons={<Star size="16" />}
+          rightIcons={<ChevronRight size="16" color={theme.blue} />}
+          primaryText={location.type_names[0]}
+          secondaryText={`${convertMetersToMiles(location.distance)} miles`}
+          onClick={() => handleListEntryClick(location.id)}
+        />
+      )
+    }
+    return <div style={style}>{row}</div>
   }
 
   return (
     <AutoSizer>
       {({ height, width }) => (
-        <FixedSizeList
-          height={height}
-          width={width}
-          itemSize={50}
-          itemCount={locations.length}
+        <InfiniteLoader
+          isItemLoaded={isItemLoaded}
+          itemCount={itemCount}
+          loadMoreItems={loadMoreItems}
         >
-          {renderRow}
-        </FixedSizeList>
+          {({ onItemsRendered, ref }) => (
+            <FixedSizeList
+              height={height}
+              width={width}
+              itemSize={50}
+              itemCount={itemCount}
+              onItemsRendered={onItemsRendered}
+              ref={ref}
+            >
+              {renderRow}
+            </FixedSizeList>
+          )}
+        </InfiniteLoader>
       )}
     </AutoSizer>
   )
