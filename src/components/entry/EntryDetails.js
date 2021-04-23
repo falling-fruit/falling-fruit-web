@@ -8,9 +8,7 @@ import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Tag, TagList } from '../ui/Tag'
-import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
-import ResourceList from './ResourceList'
 import TypesHeader from './TypesHeader'
 
 const ACCESS_TYPE = {
@@ -121,24 +119,6 @@ const EntryDetails = () => {
     </TagList>
   )
 
-  const typesHeader =
-    typesData && typesData.length === 1 ? (
-      <TypeTitle
-        primaryText={typesData[0].en_name}
-        secondaryText={typesData[0].scientific_name}
-      />
-    ) : (
-      <TypesHeader typesData={typesData} />
-    )
-
-  // TypesHeader shows the resources if more than one type
-  const otherResources = typesData && typesData.length === 1 && (
-    <>
-      <h3>Other Resources</h3>
-      <ResourceList typeData={typesData[0]} />
-    </>
-  )
-
   return locationData && typesData ? (
     <Page>
       <PhotoGrid
@@ -148,7 +128,7 @@ const EntryDetails = () => {
       />
       <TextContent>
         {tagList}
-        {typesHeader}
+        <TypesHeader typesData={typesData} />
         <Description>
           <p>{locationData.description}</p>
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
@@ -161,7 +141,6 @@ const EntryDetails = () => {
             </Button>
           </div>
         </Description>
-        {otherResources}
       </TextContent>
     </Page>
   ) : (
