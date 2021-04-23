@@ -19,7 +19,7 @@ import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { getPlaceBounds, getProperViewState } from '../../utils/viewportBounds'
+import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
@@ -124,7 +124,7 @@ const Search = ({ onType, sideButton, ...props }) => {
 
     let viewportBounds
     if (description === 'Current Location') {
-      setView(getProperViewState(geolocation.latitude, geolocation.longitude))
+      setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
     } else {
       viewportBounds = await getPlaceBounds(
         descriptionToPlaceId.current[description],

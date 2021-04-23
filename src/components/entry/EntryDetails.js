@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 import { useMap } from '../../contexts/MapContext'
 import { getLocationById, getTypeById } from '../../utils/api'
 import { getStreetAddress } from '../../utils/locationInfo'
-import { getProperViewState } from '../../utils/viewportBounds'
+import { getZoomedInView } from '../../utils/viewportBounds'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -101,6 +101,9 @@ const EntryDetails = () => {
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
+  const hasSeasonality =
+    locationData.no_season ||
+    (locationData.season_start && locationData.season_stop)
 
   useEffect(() => {
     async function fetchEntryDetails() {
@@ -123,7 +126,7 @@ const EntryDetails = () => {
 
   const handleAddressClick = () => {
     history.push('/map')
-    setView(getProperViewState(locationData.lat, locationData.lng))
+    setView(getZoomedInView(locationData.lat, locationData.lng))
   }
 
   const handleViewLightbox = () => {
@@ -178,19 +181,18 @@ const EntryDetails = () => {
             <Map color={theme.secondaryText} size={20} />
             <LocationText>{address}</LocationText>
           </IconBesideText>
-          {locationData.no_season ||
-            (locationData.season_start && locationData.season_stop && (
-              <IconBesideText>
-                <Calendar color={theme.secondaryText} size={20} />
-                <p>
-                  {formatSeasonality(
-                    locationData.season_start,
-                    locationData.season_stop,
-                    locationData.no_season,
-                  )}
-                </p>
-              </IconBesideText>
-            ))}
+          {hasSeasonality && (
+            <IconBesideText>
+              <Calendar color={theme.secondaryText} size={20} />
+              <p>
+                {formatSeasonality(
+                  locationData.season_start,
+                  locationData.season_stop,
+                  locationData.no_season,
+                )}
+              </p>
+            </IconBesideText>
+          )}
           <small>Last Updated {formatISOString(locationData.updated_at)}</small>
           <div>
             <Button>

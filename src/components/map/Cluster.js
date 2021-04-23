@@ -26,7 +26,6 @@ const ClusterContainer = styled(ResetButton)`
   background: ${({ theme }) => theme.blue};
   box-shadow: 0 0 4px 1px ${({ theme }) => theme.shadow};
   transform: translate(-50%, -50%);
-  cursor: pointer;
 
   &:focus {
     outline: none;

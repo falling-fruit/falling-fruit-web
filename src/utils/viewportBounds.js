@@ -1,9 +1,9 @@
 import { getGeocode } from 'use-places-autocomplete'
 
-export const getProperViewState = (latitude, longitude) =>
-  // Use fixed viewport around the lat and long of the current location
+export const getZoomedInView = (centerLat, centerLng) =>
+  // Update this comment -- Use fixed zoom level centered at lat and long
   ({
-    center: { lat: latitude, lng: longitude },
+    center: { lat: centerLat, lng: centerLng },
     zoom: 18,
   })
 

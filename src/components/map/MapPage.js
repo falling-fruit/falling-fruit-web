@@ -7,7 +7,7 @@ import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
-import { getProperViewState } from '../../utils/viewportBounds'
+import { getZoomedInView } from '../../utils/viewportBounds'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import Map from './Map'
 
@@ -90,7 +90,7 @@ const MapPage = () => {
   }, [view, filters])
 
   const handleGeolocationClick = () => {
-    setView(getProperViewState(geolocation.latitude, geolocation.longitude))
+    setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
   }
 
   const handleLocationClick = (location) => {
