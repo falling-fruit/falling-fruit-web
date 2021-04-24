@@ -21,6 +21,7 @@ const SecondaryText = styled.div`
   font-size: 12px;
 `
 const ListContainer = styled.li`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   padding: 0 14px;

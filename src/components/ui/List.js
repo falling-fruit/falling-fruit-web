@@ -2,7 +2,6 @@ import { ChevronRight, Star } from '@styled-icons/boxicons-solid'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
-import styled from 'styled-components/macro'
 
 import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
@@ -12,10 +11,6 @@ const convertMetersToMiles = (meters) => {
   miles = miles.slice(0, miles.indexOf('.') + 3)
   return miles
 }
-
-const StyledRow = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
-`
 
 const List = ({
   locations,
@@ -34,7 +29,7 @@ const List = ({
   const renderRow = ({ index, style }) => {
     let row
     if (!isItemLoaded(index)) {
-      row = <ListEntry primaryText="Loading..." />
+      row = <ListEntry primaryText="Loading..." style={style} />
     } else {
       const location = locations[index]
       row = (
@@ -45,21 +40,22 @@ const List = ({
           primaryText={location.type_names[0]}
           secondaryText={`${convertMetersToMiles(location.distance)} miles`}
           onClick={() => handleListEntryClick(location.id)}
+          style={style}
         />
       )
     }
-    return <StyledRow style={style}>{row}</StyledRow>
+    return row
   }
 
   return (
-    <AutoSizer>
-      {({ height, width }) => (
-        <InfiniteLoader
-          isItemLoaded={isItemLoaded}
-          itemCount={itemCount}
-          loadMoreItems={loadMoreItems}
-        >
-          {({ onItemsRendered, ref }) => (
+    <InfiniteLoader
+      isItemLoaded={isItemLoaded}
+      itemCount={itemCount}
+      loadMoreItems={loadMoreItems}
+    >
+      {({ onItemsRendered, ref }) => (
+        <AutoSizer>
+          {({ height, width }) => (
             <FixedSizeList
               height={height}
               width={width}
@@ -71,9 +67,9 @@ const List = ({
               {renderRow}
             </FixedSizeList>
           )}
-        </InfiniteLoader>
+        </AutoSizer>
       )}
-    </AutoSizer>
+    </InfiniteLoader>
   )
 }
 
