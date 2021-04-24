@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro'
 
 import { prepend } from './GlobalStyle'
+import ResetButton from './ResetButton'
 
-const StyledButton = styled.button`
+const StyledButton = styled(ResetButton)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +12,6 @@ const StyledButton = styled.button`
   line-height: 14px;
   color: ${({ $secondary, theme }) =>
     $secondary ? theme.orange : theme.background};
-  font-family: inherit;
   font-weight: 700;
   background-color: ${({ $secondary, theme }) =>
     $secondary ? theme.background : theme.orange};
@@ -19,7 +19,6 @@ const StyledButton = styled.button`
   box-sizing: border-box;
   border-radius: 100px;
   padding: 0 24px;
-  cursor: pointer;
 
   svg {
     height: 1em;

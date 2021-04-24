@@ -1,16 +1,17 @@
 import { fitBounds } from 'google-map-react'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
+import { useMap } from '../../contexts/MapContext'
+import { useSearch } from '../../contexts/SearchContext'
+import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
-import { getGeolocationBounds } from '../../utils/viewportBounds'
-import SearchContext from '../search/SearchContext'
+import { getZoomedInView } from '../../utils/viewportBounds'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import Map from './Map'
-import MapContext from './MapContext'
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -25,8 +26,9 @@ const MapPage = () => {
   const history = useHistory()
   const location = useLocation()
   const container = useRef(null)
-  const { viewport: searchViewport, filters } = useContext(SearchContext)
-  const { view, setView } = useContext(MapContext)
+  const { viewport: searchViewport, filters } = useSearch()
+  const { view, setView } = useMap()
+  const { settings } = useSettings()
 
   const oldView = useRef(null)
   const [locations, setLocations] = useState([])
@@ -113,7 +115,7 @@ const MapPage = () => {
   }, [view, filters])
 
   const handleGeolocationClick = () => {
-    setView(fitContainerBounds(getGeolocationBounds(geolocation)))
+    setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
   }
 
   const handleLocationClick = (location) => {
@@ -155,6 +157,7 @@ const MapPage = () => {
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
+        showLabels={settings.showLabels}
       />
     </div>
   )

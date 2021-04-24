@@ -1,11 +1,10 @@
 import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-solid'
-import { useContext } from 'react'
 
-import SearchContext from '../search/SearchContext'
+import { useSearch } from '../../contexts/SearchContext'
 import IconButton from '../ui/IconButton'
 
 const FilterIconButton = ({ pressed, setPressed }) => {
-  const { filters } = useContext(SearchContext)
+  const { filters } = useSearch()
   const typesLength = filters.types.length
   const filterCount = typesLength >= 99 ? '99+' : `${typesLength}`
 

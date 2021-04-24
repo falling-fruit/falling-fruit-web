@@ -28,9 +28,9 @@ const SettingsPage = () => {
   useEffect(() => {
     async function fetchTypes() {
       const types = await getTypes()
-      const options = types.map((t) => ({
-        value: t.id,
-        label: t.name,
+      const options = types.map((type) => ({
+        value: type.id,
+        label: type.name,
       }))
       setTypeOptions(options)
     }
@@ -38,7 +38,7 @@ const SettingsPage = () => {
   }, [])
 
   const handleTypeSelect = (types) => {
-    const typeIds = types.map((t) => t.value)
+    const typeIds = types.map((type) => type.value)
     console.log('Selected type IDs: ', typeIds)
   }
 
@@ -62,11 +62,9 @@ const SettingsPage = () => {
         blurInputOnSelect={false}
       />
       <br />
-      <Button>
-        <Star /> Review
-      </Button>
-      <Button secondary>
-        <Flag /> Report
+      <Button leftIcon={<Star />}>Review</Button>
+      <Button leftIcon={<Flag />} secondary>
+        Report
       </Button>
       <br />
       <br />

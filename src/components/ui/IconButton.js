@@ -2,19 +2,19 @@ import { transparentize } from 'polished'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-const StyledIconButton = styled.button`
+import ResetButton from './ResetButton'
+
+const StyledIconButton = styled(ResetButton)`
   --color: ${({ color, theme }) => color ?? theme.orange};
   --transparent-color: ${({ color, theme }) =>
     transparentize(0.8, color ?? theme.orange)};
 
-  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
-  padding: 0;
   background-color: ${({ pressed, theme }) =>
     pressed ? 'var(--transparent-color)' : theme.background};
   border-radius: 50%;

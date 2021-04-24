@@ -7,7 +7,7 @@ import { validatedColor } from './GlobalStyle'
 const LIST_ITEM_HEIGHT = 46
 
 const StyledSelect = styled(Select)`
-  font-size: 18px;
+  font-size: 16px;
 
   .select__clear-indicator,
   .select__indicator-separator {
@@ -21,7 +21,12 @@ const StyledSelect = styled(Select)`
   .select__control {
     border: 1px solid ${validatedColor()};
     border-radius: 23px;
-    padding: 6px 7px;
+    padding: 3px 10px;
+  }
+
+  .select__input {
+    font-family: ${({ theme }) => theme.fonts};
+    color: ${({ theme }) => theme.secondaryText};
   }
 
   .select__placeholder {
@@ -64,7 +69,7 @@ const StyledSelect = styled(Select)`
  */
 const MenuList = ({ children, maxHeight }) => (
   <FixedSizeList
-    height={maxHeight}
+    height={maxHeight ? maxHeight : '0px'}
     itemCount={children.length}
     itemSize={LIST_ITEM_HEIGHT}
   >
@@ -72,24 +77,10 @@ const MenuList = ({ children, maxHeight }) => (
   </FixedSizeList>
 )
 
-const SelectWrapper = ({
-  options,
-  placeholder,
-  onChange,
-  isMulti,
-  closeMenuOnSelect,
-  blurInputOnSelect,
-  ...props
-}) => (
+const SelectWrapper = (props) => (
   <StyledSelect
     components={{ MenuList }}
     classNamePrefix="select"
-    options={options}
-    isMulti={isMulti}
-    placeholder={placeholder}
-    onChange={onChange}
-    closeMenuOnSelect={closeMenuOnSelect}
-    blurInputOnSelect={blurInputOnSelect}
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
     {...props}

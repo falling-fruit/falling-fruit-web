@@ -1,8 +1,8 @@
 import { useField } from 'formik'
-import { forwardRef, useContext, useEffect } from 'react'
+import { forwardRef, useEffect } from 'react'
 import Reaptcha from 'reaptcha'
 
-import MapContext from '../map/MapContext'
+import { useMap } from '../../contexts/MapContext'
 import Input from '../ui/Input'
 import { Select } from '../ui/Select'
 import { Slider } from '../ui/Slider'
@@ -24,7 +24,7 @@ const FormikMapCenter = ({ name }) => {
   const [_field, _meta, { setValue }] = useField(name)
   const {
     view: { center },
-  } = useContext(MapContext)
+  } = useMap()
 
   useEffect(() => setValue({ lat: center.lat, lng: center.lng }), [
     setValue,

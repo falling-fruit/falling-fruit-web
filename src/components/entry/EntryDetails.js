@@ -1,36 +1,53 @@
-import { Flag, Star } from '@styled-icons/boxicons-solid'
+import { Calendar } from '@styled-icons/boxicons-regular'
+import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { useMap } from '../../contexts/MapContext'
 import { getLocationById, getTypeById } from '../../utils/api'
+import { getStreetAddress } from '../../utils/locationInfo'
+import { getZoomedInView } from '../../utils/viewportBounds'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
 import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
 import ResourceList from './ResourceList'
+import {
+  ACCESS_TYPE,
+  formatISOString,
+  formatSeasonality,
+} from './textFormatters'
 import TypesHeader from './TypesHeader'
 
-const ACCESS_TYPE = {
-  0: "On lister's property",
-  1: 'Received permission from owner',
-  2: 'Public property',
-  3: 'Private but overhanging',
-  4: 'Private property',
-}
+const IconBesideText = styled.div`
+  display: flex;
+  color: ${({ theme }) => theme.secondaryText};
+  font-style: normal;
+  font-weight: ${($props) => ($props.bold ? 'bold' : 'normal')};
+  align-items: center;
 
-/**
- * Helper function to convert ISO date string into "month date, year" format.
- * @param {string} dateString - The ISO date to convert
- */
-const formatISOString = (dateString) =>
-  new Date(dateString).toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  ${'' /* TODO: Add another wrapper */}
+  & + & {
+    margin-top: 4px !important;
+  }
+
+  p {
+    margin: 0 0 0 4px;
+    font-size: 14px;
+  }
+`
+const LocationText = styled(ResetButton)`
+  font-weight: bold;
+  text-align: left;
+  font-size: 14px;
+  margin: 0 0 0 4px;
+  flex: 1;
+  color: ${({ theme }) => theme.secondaryText};
+`
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
@@ -58,12 +75,13 @@ const TextContent = styled.article`
 
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
-  & > *:not(:last-child) {
-    margin-bottom: 14px;
+  & > *:not(:first-child) {
+    margin-top: 14px;
   }
 
-  p {
+  & > p {
     color: ${({ theme }) => theme.secondaryText};
+    margin-bottom: 14px;
   }
 
   small {
@@ -78,29 +96,37 @@ const Description = styled.section`
 
 const EntryDetails = ({ className }) => {
   const { id } = useParams()
-
+  const { setView } = useMap()
   const [locationData, setLocationData] = useState()
+  const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
+  const history = useHistory()
+  const hasSeasonality =
+    locationData.no_season ||
+    (locationData.season_start && locationData.season_stop)
 
   useEffect(() => {
     async function fetchEntryDetails() {
       // Show loading between entry selections
-      setLocationData(null)
-
       const locationData = await getLocationById(id)
+      const streetAddress = await getStreetAddress(
+        locationData.lat,
+        locationData.lng,
+      )
+
       const typesData = await Promise.all(
         locationData.type_ids.map(getTypeById),
       )
-
+      setAddress(streetAddress)
       setLocationData(locationData)
       setTypesData(typesData)
     }
     fetchEntryDetails()
   }, [id])
 
-  const _handleAddressClick = () => {
-    // TODO: handle address click
-    console.log('Map Button Clicked')
+  const handleAddressClick = () => {
+    history.push('/map')
+    setView(getZoomedInView(locationData.lat, locationData.lng))
   }
 
   const handleViewLightbox = () => {
@@ -155,9 +181,28 @@ const EntryDetails = ({ className }) => {
             {typesHeader}
             <Description>
               <p>{locationData.description}</p>
+
+              <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
+                <Map color={theme.secondaryText} size={20} />
+                <LocationText>{address}</LocationText>
+              </IconBesideText>
+              {hasSeasonality && (
+                <IconBesideText>
+                  <Calendar color={theme.secondaryText} size={20} />
+                  <p>
+                    {formatSeasonality(
+                      locationData.season_start,
+                      locationData.season_stop,
+                      locationData.no_season,
+                    )}
+                  </p>
+                </IconBesideText>
+              )}
+
               <small>
                 Last Updated {formatISOString(locationData.updated_at)}
               </small>
+
               <div>
                 <Button leftIcon={<Star />}>Review</Button>
                 <Button leftIcon={<Flag />} secondary>
@@ -166,7 +211,7 @@ const EntryDetails = ({ className }) => {
               </div>
             </Description>
             {otherResources}
-          </TextContent>{' '}
+          </TextContent>
         </>
       ) : (
         <LoadingIndicator vertical cover />
