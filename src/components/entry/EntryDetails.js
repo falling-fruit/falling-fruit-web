@@ -101,9 +101,6 @@ const EntryDetails = () => {
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
-  const hasSeasonality =
-    locationData.no_season ||
-    (locationData.season_start && locationData.season_stop)
 
   useEffect(() => {
     async function fetchEntryDetails() {
@@ -181,7 +178,8 @@ const EntryDetails = () => {
             <Map color={theme.secondaryText} size={20} />
             <LocationText>{address}</LocationText>
           </IconBesideText>
-          {hasSeasonality && (
+          {(locationData.no_season ||
+            (locationData.season_start && locationData.season_stop)) && (
             <IconBesideText>
               <Calendar color={theme.secondaryText} size={20} />
               <p>
