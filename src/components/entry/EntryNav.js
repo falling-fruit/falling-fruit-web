@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
+import ResetButton from '../ui/ResetButton'
 
 const StyledEntryNav = styled.div`
   padding: 25px 10px 15px;
@@ -19,19 +20,12 @@ const StyledEntryNav = styled.div`
   }
 `
 
-const BackButton = styled.button`
+const BackButton = styled(ResetButton)`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.secondaryText};
   font-size: 15px;
   font-weight: bold;
-
-  /* Reset button styles */
-  cursor: pointer;
-  font-family: inherit;
-  border: 0;
-  padding: 0;
-  background: none;
 
   @media ${({ theme }) => theme.device.mobile} {
     /* Make the touch target bigger */

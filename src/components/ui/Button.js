@@ -1,6 +1,8 @@
 import styled from 'styled-components/macro'
 
-const StyledButton = styled.button`
+import ResetButton from './ResetButton'
+
+const StyledButton = styled(ResetButton)`
   display: inline-flex;
   align-items: center;
   justify-items: center;
