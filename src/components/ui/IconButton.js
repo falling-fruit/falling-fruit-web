@@ -2,15 +2,15 @@ import PropTypes from 'prop-types'
 import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
-const StyledIconButton = styled.button`
-  cursor: pointer;
+import ResetButton from './ResetButton'
+
+const StyledIconButton = styled(ResetButton)`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
-  padding: 0;
   background-color: ${({ pressed, theme }) =>
     pressed ? theme.transparentOrange : 'white'};
   border-radius: 50%;
