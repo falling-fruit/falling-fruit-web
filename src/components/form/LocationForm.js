@@ -78,6 +78,15 @@ const Step1 = ({ typeOptions }) => (
     />
     <Textarea name="description" label="Description" />
     <Select name="access" label="Property Access" />
+    <Label>
+      Seasonality
+      <Optional />
+    </Label>
+    <InlineSelects>
+      <Select name="season_start" options={MONTH_OPTIONS} />
+      <span>to</span>
+      <Select name="season_end" options={MONTH_OPTIONS} />
+    </InlineSelects>
   </>
 )
 
@@ -106,16 +115,6 @@ const Step2 = () => {
 
   return (
     <>
-      <Label>
-        Seasonality
-        <Optional />
-      </Label>
-      <InlineSelects>
-        <Select name="season_start" options={MONTH_OPTIONS} />
-        <span>to</span>
-        <Select name="season_end" options={MONTH_OPTIONS} />
-      </InlineSelects>
-
       <Label>
         Upload Images
         <Optional />
