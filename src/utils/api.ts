@@ -59,6 +59,7 @@ export const addLocation = (
       params,
     }),
   )
+
 export const getLocationById = (
   id: paths['/locations/{id}.json']['get']['parameters']['path']['id'],
   params: paths['/locations/{id}.json']['get']['parameters']['query'],
