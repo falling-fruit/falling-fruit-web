@@ -3,7 +3,12 @@ import InfiniteLoader from 'react-window-infinite-loader'
 
 import FixedSizeList from './FixedSizeList'
 
-const List = ({ locations, loadNextPage, hasMoreItems, isNextPageLoading }) => {
+const InfiniteList = ({
+  locations,
+  loadNextPage,
+  hasMoreItems,
+  isNextPageLoading,
+}) => {
   const itemCount = hasMoreItems ? locations.length + 1 : locations.length
 
   // eslint-disable-next-line no-empty-function
@@ -36,4 +41,4 @@ const List = ({ locations, loadNextPage, hasMoreItems, isNextPageLoading }) => {
   )
 }
 
-export default List
+export default InfiniteList

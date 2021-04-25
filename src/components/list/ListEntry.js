@@ -12,25 +12,29 @@ const Icons = styled.div`
   }
   ${(props) => (props.$prepend ? 'margin-right' : 'margin-left')}: 18px;
 `
+
 const PrimaryText = styled.div`
   font-weight: bold;
   font-size: 14px;
 `
+
 const SecondaryText = styled.div`
   font-weight: normal;
   font-size: 12px;
 `
+
 const ListContainer = styled.li`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   padding: 0 14px;
-  height: 57px;
+  height: ${(props) => props.height};
   align-items: center;
   &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
   }
 `
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -32,6 +32,7 @@ const FixedSizeList = ({
     const location = locations[index]
     return location ? (
       <ListEntry
+        height={itemSize}
         key={location.id}
         leftIcons={<Star size="16" />}
         rightIcons={<ChevronRight size="16" color={theme.blue} />}
