@@ -1,10 +1,16 @@
 import { useContext, useEffect, useState } from 'react'
+import styled from 'styled-components/macro'
 
 import { getLocations } from '../../utils/api'
 import MapContext from '../map/MapContext'
 import FixedSizeList from './FixedSizeList'
 
 const LIMIT = 30
+
+const StyledListContainer = styled.div`
+  display: flex;
+  height: 100%;
+`
 
 const PagedList = () => {
   const { view } = useContext(MapContext)
@@ -34,13 +40,15 @@ const PagedList = () => {
   }, [view])
 
   return (
-    <FixedSizeList
-      itemSize={42}
-      height={800}
-      width={310}
-      locations={locations}
-      itemCount={30}
-    />
+    <StyledListContainer>
+      <FixedSizeList
+        itemSize={42}
+        height={800}
+        width={310}
+        locations={locations}
+        itemCount={30}
+      />
+    </StyledListContainer>
   )
 }
 

@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import InfiniteLoader from 'react-window-infinite-loader'
 
@@ -9,12 +10,21 @@ const InfiniteList = ({
   hasMoreItems,
   isNextPageLoading,
 }) => {
+  const history = useHistory()
+
   const itemCount = hasMoreItems ? locations.length + 1 : locations.length
 
   // eslint-disable-next-line no-empty-function
   const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage
 
   const isItemLoaded = (index) => !hasMoreItems || index < locations.length
+
+  const handleListEntryClick = (id) => {
+    history.push({
+      pathname: `/entry/${id}`,
+      state: { fromPage: '/map' },
+    })
+  }
 
   return (
     <InfiniteLoader
@@ -33,6 +43,7 @@ const InfiniteList = ({
               onItemsRendered={onItemsRendered}
               ref={ref}
               locations={locations}
+              handleListEntryClick={handleListEntryClick}
             />
           )}
         </AutoSizer>

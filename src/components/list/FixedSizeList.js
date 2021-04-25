@@ -1,5 +1,4 @@
 import { ChevronRight, Star } from '@styled-icons/boxicons-solid'
-import { useHistory } from 'react-router-dom'
 import { FixedSizeList as List } from 'react-window'
 
 import { theme } from '../ui/GlobalStyle'
@@ -17,17 +16,9 @@ const FixedSizeList = ({
   itemSize,
   itemCount,
   locations,
+  handleListEntryClick,
   ...props
 }) => {
-  const history = useHistory()
-
-  const handleListEntryClick = (id) => {
-    history.push({
-      pathname: `/entry/${id}`,
-      state: { fromPage: '/map' },
-    })
-  }
-
   const renderRow = ({ index, style }) => {
     const location = locations[index]
     return location ? (
