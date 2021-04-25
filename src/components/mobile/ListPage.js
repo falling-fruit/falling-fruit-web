@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getLocations } from '../../utils/api'
+import List from '../list/List'
 import MapContext from '../map/MapContext'
-import List from '../ui/List'
 
 const LIMIT = 30
 

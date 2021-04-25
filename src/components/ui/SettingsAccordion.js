@@ -9,10 +9,10 @@ import {
 import { ChevronDown, ChevronRight } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
+import ListEntry from '../list/ListEntry'
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from './GlobalStyle'
 import IndicatorAccordionButton from './IndicatorAccordionButton'
-import ListEntry from './ListEntry'
 
 const StyledListEntry = styled(ListEntry)`
   width: 100%;
