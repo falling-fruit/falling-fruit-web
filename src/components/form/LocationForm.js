@@ -11,7 +11,15 @@ import SectionHeading from '../ui/SectionHeading'
 import { FormikStepper, Step } from './FormikStepper'
 import { FileUpload, Select, Slider, Textarea } from './FormikWrappers'
 
-const MONTH_NAMES = [
+const PROPERTY_ACCESS_LABELS = [
+  'Source is on my property',
+  'I have permission from the owner to add the source',
+  'Source is on public land',
+  'Source is on private property but overhangs public land',
+  'Source is on private property (ask before you pick)',
+]
+
+const MONTH_LABELS = [
   'January',
   'February',
   'March',
@@ -26,10 +34,15 @@ const MONTH_NAMES = [
   'December',
 ]
 
-const MONTH_OPTIONS = MONTH_NAMES.map((month, index) => ({
-  label: month,
-  value: index,
-}))
+const labelsToOptions = (labels) =>
+  labels.map((label, index) => ({
+    label,
+    value: index,
+  }))
+
+const PROPERTY_ACCESS_OPTIONS = labelsToOptions(PROPERTY_ACCESS_LABELS)
+
+const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 
 const StyledLocationForm = styled.div`
   width: 100%;
@@ -62,7 +75,7 @@ const WideButton = styled(Button).attrs({
   border-width: 1px;
   font-weight: normal;
 
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 `
 
 const Step1 = ({ typeOptions }) => (
@@ -77,7 +90,11 @@ const Step1 = ({ typeOptions }) => (
       required
     />
     <Textarea name="description" label="Description" />
-    <Select name="access" label="Property Access" />
+    <Select
+      name="access"
+      label="Property Access"
+      options={PROPERTY_ACCESS_OPTIONS}
+    />
     <Label>
       Seasonality
       <Optional />
@@ -143,17 +160,17 @@ const Step3 = () => (
     <Slider
       name="fruiting"
       label="Fruiting Status"
-      labels={['Flowers', 'Unripe fruit', 'Ripe fruit']}
+      labels={['Unsure', 'Flowers', 'Unripe fruit', 'Ripe fruit']}
     />
     <Slider
       name="quality_rating"
       label="Quality"
-      labels={['Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
+      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
     />
     <Slider
       name="yield_rating"
       label="Yield"
-      labels={['Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
+      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
     />
   </>
 )
@@ -191,9 +208,9 @@ export const LocationForm = () => {
           types: [],
           description: '',
           access: null,
-          fruiting: 1,
-          quality_rating: 2,
-          yield_rating: 2,
+          fruiting: 0,
+          quality_rating: 0,
+          yield_rating: 0,
         }}
         onSubmit={(values) => console.log('submitted location form', values)}
       >
