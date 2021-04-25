@@ -53,7 +53,7 @@ const ListPage = () => {
       limit: LIMIT,
       offset: locations.length,
     })
-    setHasMoreItems(newLocations[0] === 0)
+    setHasMoreItems(newLocations[0] !== 0)
     setLocations([...locations].concat(newLocations.slice(2)))
     setIsNextPageLoading(false)
   }
