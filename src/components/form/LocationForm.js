@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 
 import { getTypes } from '../../utils/api'
 import Button from '../ui/Button'
-import CaptionInput from '../ui/CaptionInput'
+import ImagePreview from '../ui/ImagePreview'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
@@ -101,14 +101,14 @@ const Step2 = () => {
   const captionInput = useMemo(
     () =>
       photo && (
-        <CaptionInput
-          image={<img src={URL.createObjectURL(photo)} alt="Upload preview" />}
-          value={photo.name}
+        <ImagePreview
           onDelete={() => {
             fileUploadRef.current.value = ''
             setFieldValue('photo', null)
           }}
-        />
+        >
+          <img src={URL.createObjectURL(photo)} alt="Upload preview" />
+        </ImagePreview>
       ),
     [photo, setFieldValue],
   )
