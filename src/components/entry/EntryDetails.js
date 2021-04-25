@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocationById, getTypeById } from '../../utils/api'
-import { getStreetAddress } from '../../utils/locationInfo'
+import { getStreetAddress, hasSeasonality } from '../../utils/locationInfo'
 import { getZoomedInView } from '../../utils/viewportBounds'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
@@ -101,9 +101,6 @@ const EntryDetails = () => {
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
-  const hasSeasonality =
-    locationData.no_season ||
-    (locationData.season_start && locationData.season_stop)
 
   useEffect(() => {
     async function fetchEntryDetails() {
@@ -181,7 +178,7 @@ const EntryDetails = () => {
             <Map color={theme.secondaryText} size={20} />
             <LocationText>{address}</LocationText>
           </IconBesideText>
-          {hasSeasonality && (
+          {hasSeasonality(locationData) && (
             <IconBesideText>
               <Calendar color={theme.secondaryText} size={20} />
               <p>
