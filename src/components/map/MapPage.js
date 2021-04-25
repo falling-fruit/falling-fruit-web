@@ -26,6 +26,22 @@ const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
  */
 const ADD_LOCATION_ZOOM = 18
 
+/**
+ * Normalize longitude to range [-180, 180].
+ *
+ * @param {number} longitude Longitude in degrees.
+ * @returns Longitude in degrees in the range [-180, 180].
+ */
+const normalizeLongitude = (longitude) => {
+  while (longitude < -180) {
+    longitude += 360
+  }
+  while (longitude > 180) {
+    longitude -= 360
+  }
+  return longitude
+}
+
 const MapPage = () => {
   const history = useHistory()
   const location = useLocation()
@@ -86,9 +102,9 @@ const MapPage = () => {
 
         const query = {
           nelat: bounds.ne.lat,
-          nelng: bounds.ne.lng,
+          nelng: normalizeLongitude(bounds.ne.lng),
           swlat: bounds.sw.lat,
-          swlng: bounds.sw.lng,
+          swlng: normalizeLongitude(bounds.sw.lng),
           muni: filters.muni ? 1 : 0,
           t: filters.types.toString(),
         }
