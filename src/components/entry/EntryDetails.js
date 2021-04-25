@@ -79,12 +79,12 @@ const Description = styled.section`
     margin-top: 14px;
   }
 
-  & > p {
+  & > p:first-child {
     color: ${({ theme }) => theme.secondaryText};
     margin-bottom: 14px;
   }
 
-  small {
+  & > .updatedTime {
     display: block;
     font-style: italic;
   }
@@ -196,9 +196,12 @@ const EntryDetails = ({ className }) => {
                 </IconBesideText>
               )}
 
-              <small>
-                Last Updated {formatISOString(locationData.updated_at)}
-              </small>
+              <p className="updatedTime">
+                Last Updated{' '}
+                <time dateTime={locationData.updated_at}>
+                  {formatISOString(locationData.updated_at)}
+                </time>
+              </p>
 
               <div>
                 <Button leftIcon={<Star />}>Review</Button>

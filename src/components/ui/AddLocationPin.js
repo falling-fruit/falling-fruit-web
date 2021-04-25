@@ -2,6 +2,8 @@ import styled from 'styled-components/macro'
 
 import PinSvg from './AddLocationPin.svg'
 
+// TODO: use icon from a library
+
 const AddLocationPin = styled.img.attrs({
   src: PinSvg,
 })`

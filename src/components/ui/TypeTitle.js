@@ -9,7 +9,8 @@ const StyledTypeTitle = styled.div`
     margin-bottom: 0px;
   }
 
-  small {
+  h3 {
+    margin-top: 0px;
     font-size: ${({ small }) => (small ? 14 : 16)}px;
     font-style: italic;
     color: ${({ theme }) => theme.text};
@@ -19,7 +20,7 @@ const StyledTypeTitle = styled.div`
 const TypeTitle = ({ primaryText, secondaryText, small }) => (
   <StyledTypeTitle small={small}>
     <h2>{primaryText}</h2>
-    <small>{secondaryText}</small>
+    <h3>{secondaryText}</h3>
   </StyledTypeTitle>
 )
 

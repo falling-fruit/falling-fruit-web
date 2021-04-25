@@ -15,13 +15,13 @@ const FormikSlider = withLabeledField(Slider, undefined, true)
 const FormikSelect = withLabeledField(Select, undefined, true)
 
 const FormikRecaptcha = ({ name, ...props }) => {
-  const [_field, _meta, helpers] = useField(name)
+  const [, , helpers] = useField(name)
 
   return <Reaptcha onVerify={helpers.setValue} {...props} />
 }
 
 const FormikMapCenter = ({ name }) => {
-  const [_field, _meta, { setValue }] = useField(name)
+  const [, , { setValue }] = useField(name)
   const {
     view: { center },
   } = useMap()
@@ -36,7 +36,7 @@ const FormikMapCenter = ({ name }) => {
 }
 
 const FormikFileUpload = forwardRef(({ name, ...props }, ref) => {
-  const [_field, _meta, helpers] = useField(name)
+  const [, , helpers] = useField(name)
 
   return (
     <input

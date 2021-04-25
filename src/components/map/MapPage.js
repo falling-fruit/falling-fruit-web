@@ -20,6 +20,10 @@ import Map from './Map'
  */
 const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
+/**
+ * When user is adding a location, zoom in to this zoom level
+ * @constant {number}
+ */
 const ADD_LOCATION_ZOOM = 18
 
 const MapPage = () => {
