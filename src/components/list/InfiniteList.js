@@ -34,7 +34,6 @@ const List = ({
               onItemsRendered={onItemsRendered}
               ref={ref}
               handleListEntryClick={handleListEntryClick}
-              isItemLoaded={isItemLoaded}
               locations={locations}
             />
           )}

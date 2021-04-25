@@ -15,18 +15,14 @@ const FixedSizeList = ({
   width,
   itemSize,
   itemCount,
-  isItemLoaded,
   locations,
   handleListEntryClick,
   ...props
 }) => {
   const renderRow = ({ index, style }) => {
-    let row
-    if (!isItemLoaded(index)) {
-      row = <ListEntry primaryText="Loading..." style={style} />
-    } else {
-      const location = locations[index]
-      row = (
+    const location = locations[index]
+    return (
+      location && (
         <ListEntry
           key={location.id}
           leftIcons={<Star size="16" />}
@@ -37,8 +33,7 @@ const FixedSizeList = ({
           style={style}
         />
       )
-    }
-    return row
+    )
   }
 
   return (
