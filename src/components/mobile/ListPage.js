@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getLocations } from '../../utils/api'
@@ -14,7 +13,6 @@ const ListPageContainer = styled.div`
 `
 
 const ListPage = () => {
-  const history = useHistory()
   const { view } = useContext(MapContext)
   const [locations, setLocations] = useState([])
   const [hasMoreItems, setHasMoreItems] = useState(false)
@@ -33,7 +31,7 @@ const ListPage = () => {
           lat: center.lat,
           limit: LIMIT,
         })
-        setHasMoreItems(locations.length < locations[1])
+        setHasMoreItems(locations[0] < locations[1])
         setLocations(locations.slice(2))
       }
     }
@@ -58,19 +56,11 @@ const ListPage = () => {
     setIsNextPageLoading(false)
   }
 
-  const handleListEntryClick = (id) => {
-    history.push({
-      pathname: `/entry/${id}`,
-      state: { fromPage: '/map' },
-    })
-  }
-
   return (
     <ListPageContainer>
       <List
         locations={locations}
         loadNextPage={loadNextPage}
-        handleListEntryClick={handleListEntryClick}
         hasMoreItems={hasMoreItems}
         isNextPageLoading={isNextPageLoading}
       />

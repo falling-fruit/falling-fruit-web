@@ -1,9 +1,10 @@
+import PagedList from '../list/PagedList'
 import SearchOverlay from './SearchOverlay'
 
 const MainPane = () => (
-  /* TODO: Add child components to MainPane */
   <>
     <SearchOverlay />
+    <PagedList />
   </>
 )
 
