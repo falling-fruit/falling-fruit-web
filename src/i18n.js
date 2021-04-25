@@ -2,11 +2,26 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
 // the translations
-// (tip move them in a JSON file and import them)
 const resources = {
   en: {
     translation: {
-      'Welcome to React': 'Welcome to React and react-i18next',
+      'Falling Fruit': 'Falling Fruit',
+      'Search for a location': 'Search for a location',
+      'Municipal Tree Inventories': 'Municipal Tree Inventories',
+      'Invasive Species Only': 'Invasive Species Only',
+      Report: 'Report',
+      Review: 'Review',
+      'Other Resources': 'Other Resources',
+      Wikipedia: 'Wikipedia',
+      'Last Updated': 'Last Updatd',
+      'Back to Results': 'Back to Results',
+      Verified: 'Verified',
+      Map: 'Map',
+      About: 'About',
+      Login: 'Login',
+      'Private but overhanging': 'Private but overhanging',
+      'Public Property': 'Public Property',
+      Filter: 'Filter',
     },
   },
   fr: {
