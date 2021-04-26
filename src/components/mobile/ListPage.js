@@ -1,10 +1,10 @@
 import { useRect } from '@reach/rect'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
 import InfiniteList from '../list/InfiniteList'
-import MapContext from '../map/MapContext'
 
 // TODO: Ask Jeffrey what the limit for mobile list view should be
 const LIMIT = 30
@@ -15,7 +15,7 @@ const ListPageContainer = styled.div`
 `
 
 const ListPage = () => {
-  const { view } = useContext(MapContext)
+  const { view } = useMap()
   const [locations, setLocations] = useState([])
   const [hasMoreItems, setHasMoreItems] = useState(false)
   const [isNextPageLoading, setIsNextPageLoading] = useState(false)

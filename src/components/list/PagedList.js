@@ -1,9 +1,9 @@
 import { useRect } from '@reach/rect'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
-import MapContext from '../map/MapContext'
 import FixedSizeList from './FixedSizeList'
 
 const LIMIT = 30
@@ -15,7 +15,7 @@ const StyledListContainer = styled.div`
 const PagedList = () => {
   const container = useRef()
   const rect = useRect(container) ?? { width: 0, height: 0 }
-  const { view } = useContext(MapContext)
+  const { view } = useMap()
   const [locations, setLocations] = useState([])
   // const [hasMoreItems, setHasMoreItems] = useState(false)
   // const [isNextPageLoading, setIsNextPageLoading] = useState(false)
