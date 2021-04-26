@@ -55,7 +55,7 @@ const Location = ({ label, selected, ...props }) => (
 )
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 }
 
 export default Location
