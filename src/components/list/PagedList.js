@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getLocations } from '../../utils/api'
@@ -13,6 +13,7 @@ const StyledListContainer = styled.div`
 `
 
 const PagedList = () => {
+  const container = useRef(null)
   const { view } = useContext(MapContext)
   const [locations, setLocations] = useState([])
   // const [hasMoreItems, setHasMoreItems] = useState(false)
@@ -40,13 +41,21 @@ const PagedList = () => {
   }, [view])
 
   return (
-    <StyledListContainer>
+    <StyledListContainer ref={container}>
       <FixedSizeList
         itemSize={42}
-        height={800}
-        width={310}
         locations={locations}
-        itemCount={30}
+        itemCount={LIMIT}
+        height={
+          container.current
+            ? container.current.getBoundingClientRect().height
+            : 0
+        }
+        width={
+          container.current
+            ? container.current.getBoundingClientRect().width
+            : 0
+        }
       />
     </StyledListContainer>
   )

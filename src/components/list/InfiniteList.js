@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom'
-import AutoSizer from 'react-virtualized-auto-sizer'
 import InfiniteLoader from 'react-window-infinite-loader'
 
 import FixedSizeList from './FixedSizeList'
@@ -9,6 +8,8 @@ const InfiniteList = ({
   loadNextPage,
   hasMoreItems,
   isNextPageLoading,
+  height,
+  width,
 }) => {
   const history = useHistory()
 
@@ -33,20 +34,16 @@ const InfiniteList = ({
       loadMoreItems={loadMoreItems}
     >
       {({ onItemsRendered, ref }) => (
-        <AutoSizer>
-          {({ height, width }) => (
-            <FixedSizeList
-              height={height}
-              width={width}
-              itemSize={57}
-              itemCount={itemCount}
-              onItemsRendered={onItemsRendered}
-              ref={ref}
-              locations={locations}
-              handleListEntryClick={handleListEntryClick}
-            />
-          )}
-        </AutoSizer>
+        <FixedSizeList
+          height={height}
+          width={width}
+          itemSize={57}
+          itemCount={itemCount}
+          onItemsRendered={onItemsRendered}
+          ref={ref}
+          locations={locations}
+          handleListEntryClick={handleListEntryClick}
+        />
       )}
     </InfiniteLoader>
   )

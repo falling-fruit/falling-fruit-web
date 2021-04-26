@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getLocations } from '../../utils/api'
@@ -10,10 +10,13 @@ const LIMIT = 30
 
 const ListPageContainer = styled.div`
   margin-top: 85px;
-  height: calc(100% - 85px);
+  margin-bottom: 80px;
+  display: flex;
+  height: 100%;
 `
 
 const ListPage = () => {
+  const container = useRef(null)
   const { view } = useContext(MapContext)
   const [locations, setLocations] = useState([])
   const [hasMoreItems, setHasMoreItems] = useState(false)
@@ -58,8 +61,18 @@ const ListPage = () => {
   }
 
   return (
-    <ListPageContainer>
+    <ListPageContainer ref={container}>
       <InfiniteList
+        height={
+          container.current
+            ? container.current.getBoundingClientRect().height
+            : 0
+        }
+        width={
+          container.current
+            ? container.current.getBoundingClientRect().width
+            : 0
+        }
         locations={locations}
         loadNextPage={loadNextPage}
         hasMoreItems={hasMoreItems}
