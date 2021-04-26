@@ -11,8 +11,6 @@ const LIMIT = 30
 
 const ListPageContainer = styled.div`
   margin-top: 85px;
-  margin-bottom: 80px;
-  display: flex;
   height: 100%;
 `
 

@@ -34,7 +34,7 @@ const FixedSizeList = ({
       />
     ) : null
   }
-  console.log('HERE: ', height, width)
+
   return (
     <List
       height={height}
