@@ -35,7 +35,7 @@ const PagedList = () => {
         })
         // setHasMoreItems(locations[0] < locations[1])
         setLocations(locations.slice(2))
-        console.log('HERE: ', locations)
+        // console.log('HERE: ', locations)
       }
     }
     fetchListEntries()
@@ -46,7 +46,7 @@ const PagedList = () => {
       <FixedSizeList
         itemSize={42}
         locations={locations}
-        itemCount={LIMIT}
+        itemCount={locations.length}
         height={rect.height}
         width={rect.width}
       />
