@@ -1,12 +1,12 @@
 import { Cog } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
+import PagedList from '../list/PagedList'
 import {
   AccordionItem,
   SettingsAccordion,
   SettingsAccordionButton,
 } from '../ui/SettingsAccordion'
-import ListWrapper from './ListWrapper'
 import SearchOverlay from './SearchOverlay'
 
 const StyledContainer = styled.div`
@@ -18,7 +18,7 @@ const StyledContainer = styled.div`
 const MainPane = () => (
   <StyledContainer>
     <SearchOverlay />
-    <ListWrapper />
+    <PagedList />
     <SettingsAccordion>
       <AccordionItem>
         <SettingsAccordionButton LeftIcon={Cog} text="Settings" />

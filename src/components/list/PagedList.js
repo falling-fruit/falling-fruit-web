@@ -1,15 +1,34 @@
 import { useRect } from '@reach/rect'
+import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
+import SquareButton from '../ui/SquareButton'
 import FixedSizeList from './FixedSizeList'
 
 const LIMIT = 30
 
+const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
 const StyledListContainer = styled.div`
   height: 100%;
+`
+
+const StyledPageInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+`
+
+const StyledPageNav = styled.div`
+  display: flex;
 `
 
 const PagedList = () => {
@@ -44,15 +63,24 @@ const PagedList = () => {
   }, [view])
 
   return (
-    <StyledListContainer ref={container}>
-      <FixedSizeList
-        itemSize={42}
-        locations={locations}
-        itemCount={locations.length}
-        height={rect.height}
-        width={rect.width}
-      />
-    </StyledListContainer>
+    <StyledContainer>
+      <StyledListContainer ref={container}>
+        <FixedSizeList
+          itemSize={42}
+          locations={locations}
+          itemCount={locations.length}
+          height={rect.height}
+          width={rect.width}
+        />
+      </StyledListContainer>
+      <StyledPageInfo>
+        Showing Results 1 - 30
+        <StyledPageNav>
+          <SquareButton icon={<ChevronLeft />} />
+          <SquareButton icon={<ChevronRight />} />
+        </StyledPageNav>
+      </StyledPageInfo>
+    </StyledContainer>
   )
 }
 
