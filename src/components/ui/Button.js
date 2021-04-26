@@ -1,35 +1,48 @@
 import styled from 'styled-components/macro'
 
-const StyledButton = styled.button`
+import { prepend } from './GlobalStyle'
+import ResetButton from './ResetButton'
+
+const StyledButton = styled(ResetButton)`
   display: inline-flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   height: 36px;
   font-size: 14px;
-  color: ${({ secondary, theme }) =>
-    secondary ? theme.orange : theme.background};
+  line-height: 14px;
+  color: ${({ $secondary, theme }) =>
+    $secondary ? theme.orange : theme.background};
   font-weight: 700;
-  background-color: ${({ secondary, theme }) =>
-    secondary ? theme.background : theme.orange};
+  background-color: ${({ $secondary, theme }) =>
+    $secondary ? theme.background : theme.orange};
   border: 2px solid ${({ theme }) => theme.orange};
   box-sizing: border-box;
   border-radius: 100px;
   padding: 0 24px;
-  cursor: pointer;
 
   svg {
     height: 1em;
     width: 1em;
     fill: currentColor;
-    margin-right: 0.25em;
   }
 `
 
+const Icon = styled.span`
+  ${prepend('margin', '0.25em')}
+`
+
 // TODO: forward ref and remaining props in all UI components, rather than taking specific props
-const Button = ({ onClick, secondary = false, icon, children }) => (
-  <StyledButton onClick={onClick} secondary={secondary}>
-    {icon}
+const Button = ({
+  secondary = false,
+  leftIcon,
+  rightIcon,
+  children,
+  ...props
+}) => (
+  <StyledButton $secondary={secondary} {...props}>
+    {leftIcon && <Icon $prepend>{leftIcon}</Icon>}
     {children}
+    {rightIcon && <Icon>{rightIcon}</Icon>}
   </StyledButton>
 )
 

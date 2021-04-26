@@ -1,11 +1,11 @@
 import intersection from 'ramda/src/intersection'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { useMap } from '../../contexts/MapContext'
+import { useSearch } from '../../contexts/SearchContext'
 import { getTypes } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
-import MapContext from '../map/MapContext'
-import SearchContext from '../search/SearchContext'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
 
@@ -32,8 +32,8 @@ const StyledFilter = styled.div`
 `
 
 const Filter = ({ isOpen }) => {
-  const { view } = useContext(MapContext)
-  const { filters, setFilters } = useContext(SearchContext)
+  const { view } = useMap()
+  const { filters, setFilters } = useSearch()
   const [treeData, setTreeData] = useState([])
 
   const handleTreeChange = (currentNode, selectedNodes) => {
@@ -57,26 +57,29 @@ const Filter = ({ isOpen }) => {
           muni: filters.muni,
         }
         const types = await getTypes(query)
+        const typeIds = types.map((type) => type.id)
 
-        // Keep only types that still exist in the current view
-        const newTypes = types.map((type) => type.id)
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          types:
+        setFilters((prevFilters) => {
+          // Keep only types that still exist in the current view
+          const newTypes =
             prevFilters.types === null
-              ? newTypes
-              : intersection(prevFilters.types, newTypes),
-        }))
+              ? typeIds
+              : intersection(prevFilters.types, typeIds)
 
-        setTreeData(buildTypeSchema(types, filters.types))
+          setTreeData(buildTypeSchema(types, newTypes))
+
+          return {
+            ...prevFilters,
+            types: newTypes,
+          }
+        })
       }
     }
 
     if (isOpen) {
       updateTypesTree()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [view, isOpen])
+  }, [view, isOpen, filters.muni, setFilters])
 
   return (
     isOpen && (

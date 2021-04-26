@@ -3,11 +3,11 @@ import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
 
 import { getTypes } from '../../utils/api'
+import { ReportModal } from '../form/ReportModal'
 import ListEntry from '../list/ListEntry'
 import Button from '../ui/Button'
 import CaptionInput from '../ui/CaptionInput'
 import Input from '../ui/Input'
-import Modal from '../ui/Modal'
 import ProgressBar from '../ui/ProgressBar'
 import { Select } from '../ui/Select'
 import {
@@ -45,6 +45,14 @@ const SettingsPage = () => {
   return (
     <>
       <p>Settings</p>
+      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+      <ReportModal
+        name="American Tulip Tree"
+        isOpen={showDialog}
+        onDismiss={() => setShowDialog(false)}
+      />
+      <br />
+
       <Select
         onChange={handleTypeSelect}
         options={typeOptions}
@@ -54,8 +62,8 @@ const SettingsPage = () => {
         blurInputOnSelect={false}
       />
       <br />
-      <Button icon={<Star />}>Review</Button>
-      <Button icon={<Flag />} secondary>
+      <Button leftIcon={<Star />}>Review</Button>
+      <Button leftIcon={<Flag />} secondary>
         Report
       </Button>
       <br />
@@ -98,6 +106,7 @@ const SettingsPage = () => {
             alt="tree"
           />
         }
+        onDelete={() => console.log('deleted')}
       />
       <Slider
         style={{ margin: '0 40px' }}
@@ -130,12 +139,6 @@ const SettingsPage = () => {
       />
       <br />
       <br />
-      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
-      <Modal isOpen={showDialog} onDismiss={() => setShowDialog(false)}>
-        <p>Pass the button ref to Dialog and the button.</p>
-        <button onClick={() => setShowDialog(false)}>Not me</button>
-        <button onClick={() => setShowDialog(false)}>Got me!</button>
-      </Modal>
     </>
   )
 }
