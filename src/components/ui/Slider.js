@@ -9,6 +9,9 @@ import {
 import styled from 'styled-components/macro'
 
 const StyledSliderInput = styled(SliderInput)`
+  // Extra padding to account for space above handle and text under each marker
+  padding: 7px 20px 24px;
+
   [data-reach-slider-track] {
     height: 6px;
     background-color: ${({ theme }) => theme.secondaryBackground};
@@ -21,6 +24,7 @@ const StyledSliderInput = styled(SliderInput)`
     border-radius: 50%;
     border: 4px solid ${({ theme }) => theme.orange};
     background-color: ${({ theme }) => theme.transparentOrange};
+    z-index: auto;
   }
 
   [data-reach-slider-marker] {
@@ -45,19 +49,22 @@ const StyledSliderInput = styled(SliderInput)`
   }
 `
 
-// We intentionally omit SliderRange because we don't want to highlight parts of the track
-const Slider = ({ labels, ...props }) => (
-  <StyledSliderInput max={labels.length - 1} {...props}>
-    <SliderTrack>
-      {labels.map((label, index) => (
-        <SliderMarker key={index} value={index}>
-          <div>{label}</div>
-        </SliderMarker>
-      ))}
+// TODO: fix slider losing focus after one keyboard left or right
 
-      <SliderHandle />
-    </SliderTrack>
-  </StyledSliderInput>
-)
+// We intentionally omit SliderRange because we don't want to highlight parts of the track
+const Slider = ({ labels = null, ...props }) =>
+  labels && (
+    <StyledSliderInput max={labels.length - 1} {...props}>
+      <SliderTrack>
+        {labels.map((label, index) => (
+          <SliderMarker key={index} value={index}>
+            <div>{label}</div>
+          </SliderMarker>
+        ))}
+
+        <SliderHandle />
+      </SliderTrack>
+    </StyledSliderInput>
+  )
 
 export { Slider }

@@ -1,18 +1,22 @@
 import styled from 'styled-components/macro'
 
+import { validatedColor } from './GlobalStyle'
+
 const LabelTag = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
   border-radius: 4px;
+  vertical-align: 0.25em;
   height: 15px;
   padding: 2px;
+  margin-left: 5px;
   font-size: 9px;
   font-weight: bold;
-  color: ${({ theme }) => theme.text};
-  background-color: ${({ theme }) => theme.secondaryBackground};
+  color: ${validatedColor('text', 'background')};
+  background-color: ${validatedColor('secondaryBackground')};
   text-transform: uppercase;
-  margin-left: 5px;
 `
+
+const Required = (props) => <LabelTag {...props}>Required</LabelTag>
+const Optional = (props) => <LabelTag {...props}>Optional</LabelTag>
+
 export default LabelTag
+export { Optional, Required }

@@ -2,6 +2,8 @@ import Select, { createFilter } from 'react-select'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
+import { validatedColor } from './GlobalStyle'
+
 const LIST_ITEM_HEIGHT = 46
 
 const StyledSelect = styled(Select)`
@@ -17,7 +19,7 @@ const StyledSelect = styled(Select)`
   }
 
   .select__control {
-    border: 1px solid ${({ theme }) => theme.secondaryBackground};
+    border: 1px solid ${validatedColor()};
     border-radius: 23px;
     padding: 3px 10px;
   }

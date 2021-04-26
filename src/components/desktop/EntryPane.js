@@ -1,25 +1,22 @@
 import styled from 'styled-components/macro'
 
 import EntryDetails from '../entry/EntryDetails'
-import EntryNav from '../entry/EntryNav'
+import EntryBack from './EntryBack'
 
 const StyledEntryPane = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-`
 
-const ScrollingEntryDetails = styled.div`
-  flex: 1;
-  overflow: auto;
+  div:last-child {
+    flex: 1;
+  }
 `
 
 const EntryPane = () => (
   <StyledEntryPane>
-    <EntryNav isDesktop />
-    <ScrollingEntryDetails>
-      <EntryDetails />
-    </ScrollingEntryDetails>
+    <EntryBack />
+    <EntryDetails />
   </StyledEntryPane>
 )
 

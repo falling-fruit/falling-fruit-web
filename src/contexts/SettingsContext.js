@@ -6,7 +6,7 @@ import { createContext, useContext, useState } from 'react'
  * @property {boolean} showLabels - Determines if labels appear under locations
  */
 const DEFAULT_SETTINGS = {
-  showLabels: true,
+  showLabels: false,
 }
 
 const SettingsContext = createContext()

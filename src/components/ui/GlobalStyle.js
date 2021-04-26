@@ -1,5 +1,53 @@
 import { createGlobalStyle } from 'styled-components'
 
+/**
+ * @constant {number}
+ * Max width in pixels for which the mobile layout should be displayed
+ */
+const MOBILE_MAX_WIDTH = 767
+
+const theme = {
+  // media queries for mobile and desktop
+  device: {
+    mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
+    desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
+  },
+  fonts: '"Lato", sans-serif',
+  // text colors
+  text: '#9b9b9b',
+  secondaryText: '#5a5a5a',
+  tertiaryText: '#979797',
+  headerText: '#333333',
+  // background
+  background: '#ffffff',
+  secondaryBackground: '#e0e1e2',
+  shadow: 'rgba(0, 0, 0, 0.12)',
+  // palette
+  orange: '#ffa41b',
+  transparentOrange: '#ffedd1',
+  blue: '#4183c4',
+  green: '#73cd7c',
+  invalid: '#ff2633',
+  // tag colors
+  tag: {
+    access: '#ffa41b',
+    verified: '#4183c4',
+    unverified: '#ff61ef',
+  },
+}
+
+// TODO: try to create more functional theme helpers
+// and maybe move all the colors into a colors object, and add a getColor theme helper
+
+const validatedColor = (
+  validThemeColor = 'secondaryBackground',
+  invalidThemeColor = 'invalid',
+) => ({ $invalid, theme }) =>
+  $invalid ? theme[invalidThemeColor] : theme[validThemeColor]
+
+const prepend = (prefix = '', value) => ({ $prepend }) =>
+  `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
+
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${({ theme }) => theme.fonts};
@@ -49,40 +97,5 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-/**
- * @constant {number}
- * Max width in pixels for which the mobile layout should be displayed
- */
-const MOBILE_MAX_WIDTH = 767
-
-const theme = {
-  // media queries for mobile and desktop
-  device: {
-    mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
-    desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
-  },
-  fonts: '"Lato", sans-serif',
-  // text colors
-  text: '#9b9b9b',
-  secondaryText: '#5a5a5a',
-  tertiaryText: '#979797',
-  headerText: '#333333',
-  // background
-  background: '#ffffff',
-  secondaryBackground: '#e0e1e2',
-  shadow: 'rgba(0, 0, 0, 0.12)',
-  // palette
-  orange: '#ffa41b',
-  transparentOrange: '#ffedd1',
-  blue: '#4183c4',
-  green: '#73cd7c',
-  // tag colors
-  tag: {
-    access: '#ffa41b',
-    verified: '#4183c4',
-    unverified: '#ff61ef',
-  },
-}
-
 export default GlobalStyle
-export { MOBILE_MAX_WIDTH, theme }
+export { MOBILE_MAX_WIDTH, prepend, theme, validatedColor }

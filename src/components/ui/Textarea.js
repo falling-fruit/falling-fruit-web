@@ -1,7 +1,9 @@
 import styled from 'styled-components/macro'
 
+import { validatedColor } from '../ui/GlobalStyle'
+
 const Textarea = styled.textarea`
-  border: 1px solid ${({ theme }) => theme.secondaryBackground};
+  border: 1px solid ${validatedColor()};
   box-sizing: border-box;
   border-radius: 12px;
   padding: 15px 20px;
