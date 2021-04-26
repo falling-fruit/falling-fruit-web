@@ -38,6 +38,8 @@ const ListPage = () => {
         })
         setHasMoreItems(locations[0] < locations[1])
         setLocations(locations.slice(2))
+      } else {
+        setLocations([])
       }
     }
     fetchListEntries()

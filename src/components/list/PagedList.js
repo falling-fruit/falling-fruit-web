@@ -36,6 +36,8 @@ const PagedList = () => {
         // setHasMoreItems(locations[0] < locations[1])
         setLocations(locations.slice(2))
         // console.log('HERE: ', locations)
+      } else {
+        setLocations([])
       }
     }
     fetchListEntries()
