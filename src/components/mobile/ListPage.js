@@ -1,3 +1,4 @@
+import { useRect } from '@reach/rect'
 import { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
@@ -16,11 +17,13 @@ const ListPageContainer = styled.div`
 `
 
 const ListPage = () => {
-  const container = useRef(null)
   const { view } = useContext(MapContext)
   const [locations, setLocations] = useState([])
   const [hasMoreItems, setHasMoreItems] = useState(false)
   const [isNextPageLoading, setIsNextPageLoading] = useState(false)
+
+  const container = useRef()
+  const rect = useRect(container) ?? { width: 0, height: 0 }
 
   useEffect(() => {
     const fetchListEntries = async () => {
@@ -63,16 +66,8 @@ const ListPage = () => {
   return (
     <ListPageContainer ref={container}>
       <InfiniteList
-        height={
-          container.current
-            ? container.current.getBoundingClientRect().height
-            : 0
-        }
-        width={
-          container.current
-            ? container.current.getBoundingClientRect().width
-            : 0
-        }
+        width={rect.width}
+        height={rect.height}
         locations={locations}
         loadNextPage={loadNextPage}
         hasMoreItems={hasMoreItems}
