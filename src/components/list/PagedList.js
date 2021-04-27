@@ -36,8 +36,8 @@ const PagedList = () => {
   const rect = useRect(container) ?? { width: 0, height: 0 }
   const { view } = useMap()
   const [locations, setLocations] = useState([])
-  // const [hasMoreItems, setHasMoreItems] = useState(false)
-  // const [isNextPageLoading, setIsNextPageLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
     const fetchListEntries = async () => {
@@ -52,15 +52,52 @@ const PagedList = () => {
           lat: center.lat,
           limit: LIMIT,
         })
-        // setHasMoreItems(locations[0] < locations[1])
+        setCurrentPage(0)
+        setTotalPages(Math.ceil(locations[1] / LIMIT))
         setLocations(locations.slice(2))
-        // console.log('HERE: ', locations)
       } else {
         setLocations([])
       }
     }
     fetchListEntries()
   }, [view])
+
+  const handlePreviousPageClick = async () => {
+    if (currentPage > 0) {
+      const { bounds, center } = view
+      setCurrentPage(currentPage - 1)
+      const locations = await getLocations({
+        swlng: bounds.sw.lng,
+        nelng: bounds.ne.lng,
+        swlat: bounds.sw.lat,
+        nelat: bounds.ne.lat,
+        lng: center.lng,
+        lat: center.lat,
+        limit: LIMIT,
+        offset: currentPage * LIMIT,
+      })
+      setTotalPages(Math.ceil(locations[1] / LIMIT))
+      setLocations(locations.slice(2))
+    }
+  }
+
+  const handleNextPageClick = async () => {
+    if (currentPage + 1 < totalPages) {
+      setCurrentPage(currentPage + 1)
+      const { bounds, center } = view
+      const locations = await getLocations({
+        swlng: bounds.sw.lng,
+        nelng: bounds.ne.lng,
+        swlat: bounds.sw.lat,
+        nelat: bounds.ne.lat,
+        lng: center.lng,
+        lat: center.lat,
+        limit: LIMIT,
+      })
+      setTotalPages(Math.ceil(locations[1] / LIMIT))
+      setLocations(locations.slice(2))
+    }
+  }
 
   return (
     <StyledContainer>
@@ -73,13 +110,23 @@ const PagedList = () => {
           width={rect.width}
         />
       </StyledListContainer>
-      <StyledPageInfo>
-        Showing Results 1 - 30
-        <StyledPageNav>
-          <SquareButton icon={<ChevronLeft />} />
-          <SquareButton icon={<ChevronRight />} />
-        </StyledPageNav>
-      </StyledPageInfo>
+      {locations.length > 0 && (
+        <StyledPageInfo>
+          Showing Results {currentPage + 1} - {totalPages}
+          <StyledPageNav>
+            <SquareButton
+              icon={<ChevronLeft />}
+              disabled={!currentPage}
+              onClick={handlePreviousPageClick}
+            />
+            <SquareButton
+              icon={<ChevronRight />}
+              disabled={currentPage + 1 === totalPages}
+              onClick={handleNextPageClick}
+            />
+          </StyledPageNav>
+        </StyledPageInfo>
+      )}
     </StyledContainer>
   )
 }
