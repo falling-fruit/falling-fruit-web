@@ -8,7 +8,7 @@ const EntryReviews = () => {
     <Page>
       <TextContent>
         <h2>Reviews</h2>
-        <Rating title="Fruiting" score={77} />
+        <Rating title="Fruiting" score={22} />
       </TextContent>
     </Page>
   )

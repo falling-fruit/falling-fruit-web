@@ -6,11 +6,18 @@ const Title = styled.p`
 `
 const Bar = styled.div`
   height: 5px;
-  background: #73cd7c;
+  background: #c4c4c4;
   margin: 0 12px;
   border-radius: 9px;
 
   ${'' /* TODO: Change background to style before requesting review */}
+`
+const Score = styled.div`
+  height: 5px;
+  z-index: 1;
+  width: ${(props) => props.score}%;
+  border-radius: 9px;
+  background: #73cd7c;
 `
 
 const RatingContainer = styled.div`
@@ -18,10 +25,12 @@ const RatingContainer = styled.div`
   align-items: center;
 `
 
-const Rating = ({ title }) => (
+const Rating = ({ title, score }) => (
   <RatingContainer>
     <Title>{title}</Title>
-    <Bar />
+    <Bar>
+      <Score score={score} />
+    </Bar>
   </RatingContainer>
 )
 
