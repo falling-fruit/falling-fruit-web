@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import EntryDetails from '../entry/EntryDetails'
+import EntryTabs from '../entry/EntryTabs'
 import EntryBack from './EntryBack'
 
 const StyledEntryPane = styled.div`
@@ -16,7 +16,7 @@ const StyledEntryPane = styled.div`
 const EntryPane = () => (
   <StyledEntryPane>
     <EntryBack />
-    <EntryDetails />
+    <EntryTabs />
   </StyledEntryPane>
 )
 

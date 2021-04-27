@@ -14,6 +14,7 @@ import LoadingIndicator from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
 import TypeTitle from '../ui/TypeTitle'
+import { Page, TextContent } from './EntryTabs'
 import PhotoGrid from './PhotoGrid'
 import ResourceList from './ResourceList'
 import {
@@ -47,30 +48,6 @@ const LocationText = styled(ResetButton)`
   margin: 0 0 0 4px;
   flex: 1;
   color: ${({ theme }) => theme.secondaryText};
-`
-
-// Wraps the entire page and gives it a top margin if on mobile
-const Page = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
-    padding-top: 87px;
-  }
-
-  overflow: auto;
-  width: 100%;
-`
-
-const TextContent = styled.article`
-  padding: 20px 23px;
-
-  @media ${({ theme }) => theme.device.desktop} {
-    padding: 12px;
-  }
-
-  box-sizing: border-box;
-
-  ul {
-    margin: 0 0 12px 0;
-  }
 `
 
 // Wraps description, last updated text, and review and report buttons
