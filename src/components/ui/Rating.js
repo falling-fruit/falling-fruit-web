@@ -17,7 +17,7 @@ const Score = styled.div`
   z-index: 1;
   width: ${(props) => props.score}%;
   border-radius: 9px;
-  background: #73cd7c;
+  background: ${(props) => props.color};
 `
 
 const RatingContainer = styled.div`
@@ -25,11 +25,18 @@ const RatingContainer = styled.div`
   align-items: center;
 `
 
+const getRedToGreen = (percent) => {
+  const r =
+    percent < 50 ? 255 : Math.floor(255 - ((percent * 2 - 100) * 255) / 100)
+  const g = percent > 50 ? 255 : Math.floor((percent * 2 * 255) / 100)
+  return `rgb(${r},${g},120)`
+}
+
 const Rating = ({ title, score }) => (
   <RatingContainer>
     <Title>{title}</Title>
     <Bar>
-      <Score score={score} />
+      <Score score={score} color={getRedToGreen(score)} />
     </Bar>
   </RatingContainer>
 )
