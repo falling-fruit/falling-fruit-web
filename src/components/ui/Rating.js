@@ -3,6 +3,8 @@ import styled from 'styled-components/macro'
 const Title = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.tertiaryText};
+  margin: 4px;
+  flex-basis: 15%;
 `
 const Bar = styled.div`
   height: 5px;
