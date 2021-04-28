@@ -19,7 +19,7 @@ const EntryReviews = () => {
           description="Great place to find fruits, however yield is pretty low which makes me mad >:("
           date="12/09/2002"
           name="Rebecca Xun"
-        />
+        ></Review>
         <Review
           ratings={RATINGS}
           description="Great place to find fruits, however yield is pretty low which makes me mad >:("

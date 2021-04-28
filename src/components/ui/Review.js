@@ -2,6 +2,19 @@ import styled from 'styled-components/macro'
 
 import Rating from './Rating'
 
+const Label = styled.p`
+  font-size: 12px;
+  color: ${({ theme }) => theme.tertiaryText};
+  margin: 4px;
+`
+const RatingTable = styled.table`
+  width: 100%;
+  margin-bottom: 6px;
+
+  td:nth-child(2) {
+    width: 100%;
+  }
+`
 const ReviewDescription = styled.section`
   blockquote {
     font-size: 16px;
@@ -20,9 +33,24 @@ const ReviewContainer = styled.div`
 
 const Review = ({ ratings, description, date, name }) => (
   <ReviewContainer>
-    {ratings.map((rating, key) => (
-      <Rating key={key} label={rating.label} percentage={rating.percentage} />
-    ))}
+    <RatingTable>
+      {ratings.map((rating, key) => (
+        <tr key={key}>
+          <td>
+            <Label>{rating.label}</Label>
+          </td>
+          <td>
+            <Rating key={key} percentage={rating.percentage} />
+          </td>
+        </tr>
+      ))}
+    </RatingTable>
+
+    {/*    <Label key={key} label={rating.label} />
+            </td>
+            <td>
+         
+           */}
 
     <ReviewDescription>
       <blockquote>{description}</blockquote>

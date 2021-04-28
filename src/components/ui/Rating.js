@@ -3,19 +3,11 @@ import styled from 'styled-components/macro'
 // TODO: Look into Table / Grid
 // TODO: Fix title vertical centering
 
-const Label = styled.p`
-  font-size: 12px;
-  color: ${({ theme }) => theme.tertiaryText};
-  margin: 4px;
-  flex-basis: 15%;
-`
 const Bar = styled.div`
   height: 5px;
-  background: #c4c4c4;
+  background: ${({ theme }) => theme.secondaryBackground};
   margin: 0 12px;
   border-radius: 9px;
-
-  ${'' /* TODO: Change background to style before requesting review */}
 `
 const Score = styled.div`
   height: 5px;
@@ -24,10 +16,11 @@ const Score = styled.div`
   background: ${(props) => getRedToGreen(props.percentage)};
 `
 
-const RatingContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
+// const RatingContainer = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr 4fr;
+//   align-items: center;
+// `
 
 const getRedToGreen = (percentage) => {
   if (percentage <= 0.33) {
@@ -39,13 +32,13 @@ const getRedToGreen = (percentage) => {
   }
 }
 
-const Rating = ({ label, percentage }) => (
-  <RatingContainer>
-    <Label>{label}</Label>
-    <Bar>
-      <Score percentage={percentage} />
-    </Bar>
-  </RatingContainer>
+const Rating = ({ percentage }) => (
+  // <RatingContainer>
+  //   <Label>{label}</Label>
+  <Bar>
+    <Score percentage={percentage} />
+  </Bar>
+  // </RatingContainer>
 )
 
 export default Rating

@@ -20,6 +20,9 @@ export const TextContent = styled.article`
   @media ${({ theme }) => theme.device.desktop} {
     padding: 12px;
   }
+  h2 {
+    font-size: 18px;
+  }
 
   box-sizing: border-box;
 
