@@ -27,7 +27,9 @@ const theme = {
   transparentOrange: '#ffedd1',
   blue: '#4183c4',
   green: '#73cd7c',
+  red: '#ff8188',
   invalid: '#ff2633',
+
   // tag colors
   tag: {
     access: '#ffa41b',

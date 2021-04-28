@@ -28,6 +28,8 @@ export const TextContent = styled.article`
   }
 `
 
+// TODO: create /ui/EntryTabs.js, and move all UI stuff into it. Mirror the PageTabs
+// Rename Overview and Reviews
 const EntryTab = styled(PageTabs)`
   [data-reach-tab-list] {
     height: 40px;
@@ -52,6 +54,7 @@ const EntryTabs = () => {
   return (
     <EntryTab>
       <TabList>
+        {/* TODO: Use Routing */}
         <Tab>Overview</Tab>
         <Tab>Reviews</Tab>
       </TabList>

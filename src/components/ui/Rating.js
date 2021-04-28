@@ -1,6 +1,9 @@
 import styled from 'styled-components/macro'
 
-const Title = styled.p`
+// TODO: Look into Table / Grid
+// TODO: Fix title vertical centering
+
+const Label = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.tertiaryText};
   margin: 4px;
@@ -16,10 +19,9 @@ const Bar = styled.div`
 `
 const Score = styled.div`
   height: 5px;
-  z-index: 1;
-  width: ${(props) => props.score}%;
+  width: ${(props) => props.percentage * 100}%;
   border-radius: 9px;
-  background: ${(props) => props.color};
+  background: ${(props) => getRedToGreen(props.percentage)};
 `
 
 const RatingContainer = styled.div`
@@ -27,18 +29,21 @@ const RatingContainer = styled.div`
   align-items: center;
 `
 
-const getRedToGreen = (percent) => {
-  const r =
-    percent < 50 ? 255 : Math.floor(255 - ((percent * 2 - 100) * 255) / 100)
-  const g = percent > 50 ? 255 : Math.floor((percent * 2 * 255) / 100)
-  return `rgb(${r},${g},120)`
+const getRedToGreen = (percentage) => {
+  if (percentage <= 0.33) {
+    return ({ theme }) => theme.red
+  } else if (percentage <= 0.66) {
+    return ({ theme }) => theme.orange
+  } else {
+    return ({ theme }) => theme.green
+  }
 }
 
-const Rating = ({ title, score }) => (
+const Rating = ({ label, percentage }) => (
   <RatingContainer>
-    <Title>{title}</Title>
+    <Label>{label}</Label>
     <Bar>
-      <Score score={score} color={getRedToGreen(score)} />
+      <Score percentage={percentage} />
     </Bar>
   </RatingContainer>
 )

@@ -38,10 +38,15 @@ const Tile = styled.div`
 
 const ImagePreview = ({ children, onDelete }) => (
   <Tile>
-    {children}
-    <DeleteButton onClick={onDelete}>
-      <X />
-    </DeleteButton>
+    {/* small boolean prop cuz it's smaller */}
+    {/*  */}
+    {children}(
+    {onDelete && (
+      <DeleteButton onClick={onDelete}>
+        <X />
+      </DeleteButton>
+    )}
+    )
   </Tile>
 )
 
