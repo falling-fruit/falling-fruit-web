@@ -43,6 +43,7 @@ const InfiniteList = ({
           ref={ref}
           locations={locations}
           handleListEntryClick={handleListEntryClick}
+          isNextPageLoading={isNextPageLoading}
         />
       )}
     </InfiniteLoader>

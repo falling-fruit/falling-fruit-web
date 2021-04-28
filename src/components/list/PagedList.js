@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
 import Checkbox from '../ui/Checkbox'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import SquareButton from '../ui/SquareButton'
 import EntryList from './EntryList'
 
@@ -56,6 +57,7 @@ const PagedList = () => {
   const [totalPages, setTotalPages] = useState(0)
   const [updateOnMapMove, setUpdateOnMapMove] = useState(false)
   const [currentView, setCurrentView] = useState(undefined)
+  const [loadingNextPage, setLoadingNextPage] = useState(false)
 
   useEffect(() => {
     const setInitialView = () => {
@@ -79,6 +81,7 @@ const PagedList = () => {
   useEffect(() => {
     const fetchCurrentListEntries = async () => {
       if (currentView !== undefined) {
+        setLoadingNextPage(true)
         const { bounds, center } = currentView
         const locations = await getLocations({
           swlng: bounds.sw.lng,
@@ -92,6 +95,7 @@ const PagedList = () => {
         })
         setTotalPages(Math.ceil(locations[1] / LIMIT))
         setLocations(locations.slice(2))
+        setLoadingNextPage(false)
       }
     }
     fetchCurrentListEntries()
@@ -122,14 +126,18 @@ const PagedList = () => {
   return (
     <StyledContainer>
       <StyledListContainer ref={container}>
-        <EntryList
-          itemSize={42}
-          locations={locations}
-          itemCount={locations.length}
-          height={rect.height}
-          width={rect.width}
-          handleListEntryClick={handleListEntryClick}
-        />
+        {loadingNextPage ? (
+          <LoadingIndicator vertical cover />
+        ) : (
+          <EntryList
+            itemSize={42}
+            locations={locations}
+            itemCount={locations.length}
+            height={rect.height}
+            width={rect.width}
+            handleListEntryClick={handleListEntryClick}
+          />
+        )}
       </StyledListContainer>
       <StyledPageInfo visible={locations.length > 0}>
         <StyledPageNav>

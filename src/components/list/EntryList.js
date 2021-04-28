@@ -21,18 +21,26 @@ const EntryList = ({
 }) => {
   const renderRow = ({ index, style }) => {
     const location = locations[index]
-    return location ? (
-      <ListEntry
-        height={itemSize}
-        key={location.id}
-        leftIcons={<Star size="16" />}
-        rightIcons={<ChevronRight size="16" color={theme.blue} />}
-        primaryText={location.type_names[0]}
-        secondaryText={`${convertMetersToMiles(location.distance)} miles`}
-        onClick={() => handleListEntryClick(location.id)}
-        style={style}
-      />
-    ) : null
+    let row = null
+    if (location) {
+      row = (
+        <ListEntry
+          height={itemSize}
+          key={location.id}
+          leftIcons={<Star size="16" />}
+          rightIcons={<ChevronRight size="16" color={theme.blue} />}
+          primaryText={location.type_names[0]}
+          secondaryText={`${convertMetersToMiles(location.distance)} miles`}
+          onClick={() => handleListEntryClick(location.id)}
+          style={style}
+        />
+      )
+    } else if (index < itemCount) {
+      row = (
+        <ListEntry height={itemSize} primaryText="Loading..." style={style} />
+      )
+    }
+    return row
   }
 
   return (
