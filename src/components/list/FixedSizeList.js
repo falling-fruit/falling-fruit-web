@@ -1,7 +1,6 @@
-import { ChevronRight, Star } from '@styled-icons/boxicons-solid'
+import { Star } from '@styled-icons/boxicons-solid'
 import { FixedSizeList as List } from 'react-window'
 
-import { theme } from '../ui/GlobalStyle'
 import ListEntry from './ListEntry'
 
 const convertMetersToMiles = (meters) => {
@@ -17,6 +16,7 @@ const FixedSizeList = ({
   itemCount,
   locations,
   handleListEntryClick,
+  rightIcons,
   ...props
 }) => {
   const renderRow = ({ index, style }) => {
@@ -26,10 +26,14 @@ const FixedSizeList = ({
         height={itemSize}
         key={location.id}
         leftIcons={<Star size="16" />}
-        rightIcons={<ChevronRight size="16" color={theme.blue} />}
+        rightIcons={rightIcons}
         primaryText={location.type_names[0]}
         secondaryText={`${convertMetersToMiles(location.distance)} miles`}
-        onClick={() => handleListEntryClick(location.id)}
+        onClick={
+          handleListEntryClick
+            ? () => handleListEntryClick(location.id)
+            : undefined
+        }
         style={style}
       />
     ) : null

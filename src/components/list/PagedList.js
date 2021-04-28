@@ -1,10 +1,13 @@
 import { useRect } from '@reach/rect'
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
+import { InfoCircle, Map } from '@styled-icons/boxicons-solid'
 import { useEffect, useRef, useState } from 'react'
+// import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
+import IconButton from '../ui/IconButton'
 import SquareButton from '../ui/SquareButton'
 import FixedSizeList from './FixedSizeList'
 
@@ -34,6 +37,7 @@ const StyledPageNav = styled.div`
 `
 
 const PagedList = () => {
+  // const history = useHistory()
   const container = useRef()
   const rect = useRect(container) ?? { width: 0, height: 0 }
   const { view } = useMap()
@@ -102,6 +106,14 @@ const PagedList = () => {
     }
   }
 
+  const handleInfoButtonClick = () => {
+    // TODO: Figure out how to pass id to rightIcons on click handler
+  }
+
+  const handleMapButtonClick = () => {
+    // TODO: Figure out how to pass id to rightIcons on click handler
+  }
+
   return (
     <StyledContainer>
       <StyledListContainer ref={container}>
@@ -111,6 +123,22 @@ const PagedList = () => {
           itemCount={locations.length}
           height={rect.height}
           width={rect.width}
+          rightIcons={
+            <>
+              <IconButton
+                size={30}
+                icon={<Map />}
+                label="map-entry-location"
+                onClick={handleMapButtonClick}
+              />
+              <IconButton
+                size={30}
+                icon={<InfoCircle />}
+                label="map-entry-details"
+                onClick={handleInfoButtonClick}
+              />
+            </>
+          }
         />
       </StyledListContainer>
       <StyledPageInfo visible={locations.length > 0}>

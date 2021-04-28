@@ -1,6 +1,8 @@
+import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { useHistory } from 'react-router-dom'
 import InfiniteLoader from 'react-window-infinite-loader'
 
+import { theme } from '../ui/GlobalStyle'
 import FixedSizeList from './FixedSizeList'
 
 const InfiniteList = ({
@@ -43,6 +45,7 @@ const InfiniteList = ({
           ref={ref}
           locations={locations}
           handleListEntryClick={handleListEntryClick}
+          rightIcons={<ChevronRight size="16" color={theme.blue} />}
         />
       )}
     </InfiniteLoader>
