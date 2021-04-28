@@ -1,22 +1,11 @@
 import { getGeocode } from 'use-places-autocomplete'
 
-const CURRENT_LOCATION_VIEWPORT_RADIUS = 0.001
-
-export const getGeolocationBounds = (geolocation) => {
-  // Use fixed viewport around the lat and long of the current location
-  const { latitude, longitude } = geolocation
-
-  return {
-    ne: {
-      lat: latitude + CURRENT_LOCATION_VIEWPORT_RADIUS,
-      lng: longitude + CURRENT_LOCATION_VIEWPORT_RADIUS,
-    },
-    sw: {
-      lat: latitude - CURRENT_LOCATION_VIEWPORT_RADIUS,
-      lng: longitude - CURRENT_LOCATION_VIEWPORT_RADIUS,
-    },
-  }
-}
+export const getZoomedInView = (centerLat, centerLng) =>
+  // Use fixed zoom level centered at lat and long
+  ({
+    center: { lat: centerLat, lng: centerLng },
+    zoom: 18,
+  })
 
 export const getPlaceBounds = async (placeId) => {
   const results = await getGeocode({ placeId })
