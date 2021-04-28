@@ -25,6 +25,8 @@ const StyledPageInfo = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
 `
 
 const StyledPageNav = styled.div`
@@ -65,7 +67,6 @@ const PagedList = () => {
   const handlePreviousPageClick = async () => {
     if (currentPage > 0) {
       const { bounds, center } = view
-      setCurrentPage(currentPage - 1)
       const locations = await getLocations({
         swlng: bounds.sw.lng,
         nelng: bounds.ne.lng,
@@ -74,16 +75,16 @@ const PagedList = () => {
         lng: center.lng,
         lat: center.lat,
         limit: LIMIT,
-        offset: currentPage * LIMIT,
+        offset: (currentPage - 1) * LIMIT,
       })
       setTotalPages(Math.ceil(locations[1] / LIMIT))
       setLocations(locations.slice(2))
+      setCurrentPage(currentPage - 1)
     }
   }
 
   const handleNextPageClick = async () => {
     if (currentPage + 1 < totalPages) {
-      setCurrentPage(currentPage + 1)
       const { bounds, center } = view
       const locations = await getLocations({
         swlng: bounds.sw.lng,
@@ -93,9 +94,11 @@ const PagedList = () => {
         lng: center.lng,
         lat: center.lat,
         limit: LIMIT,
+        offset: (currentPage + 1) * LIMIT,
       })
       setTotalPages(Math.ceil(locations[1] / LIMIT))
       setLocations(locations.slice(2))
+      setCurrentPage(currentPage + 1)
     }
   }
 
@@ -110,23 +113,21 @@ const PagedList = () => {
           width={rect.width}
         />
       </StyledListContainer>
-      {locations.length > 0 && (
-        <StyledPageInfo>
-          Showing Results {currentPage + 1} - {totalPages}
-          <StyledPageNav>
-            <SquareButton
-              icon={<ChevronLeft />}
-              disabled={!currentPage}
-              onClick={handlePreviousPageClick}
-            />
-            <SquareButton
-              icon={<ChevronRight />}
-              disabled={currentPage + 1 === totalPages}
-              onClick={handleNextPageClick}
-            />
-          </StyledPageNav>
-        </StyledPageInfo>
-      )}
+      <StyledPageInfo visible={locations.length > 0}>
+        Showing Results {currentPage + 1} - {totalPages}
+        <StyledPageNav>
+          <SquareButton
+            icon={<ChevronLeft />}
+            disabled={!currentPage}
+            onClick={handlePreviousPageClick}
+          />
+          <SquareButton
+            icon={<ChevronRight />}
+            disabled={currentPage + 1 === totalPages}
+            onClick={handleNextPageClick}
+          />
+        </StyledPageNav>
+      </StyledPageInfo>
     </StyledContainer>
   )
 }
