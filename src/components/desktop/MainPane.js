@@ -15,15 +15,20 @@ const StyledContainer = styled.div`
   height: 100%;
 `
 
+const StyledSettingsAccordian = styled(SettingsAccordion)`
+  padding: 10px 0 10px 0;
+  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
+`
+
 const MainPane = () => (
   <StyledContainer>
     <SearchOverlay />
     <PagedList />
-    <SettingsAccordion>
+    <StyledSettingsAccordian>
       <AccordionItem>
         <SettingsAccordionButton LeftIcon={Cog} text="Settings" />
       </AccordionItem>
-    </SettingsAccordion>
+    </StyledSettingsAccordian>
   </StyledContainer>
 )
 

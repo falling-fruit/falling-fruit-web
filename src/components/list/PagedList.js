@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
+import Checkbox from '../ui/Checkbox'
 import SquareButton from '../ui/SquareButton'
 import EntryList from './EntryList'
 
@@ -23,15 +24,26 @@ const StyledListContainer = styled.div`
 
 const StyledPageInfo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+  flex-direction: column;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
 `
 
 const StyledPageNav = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
+`
+
+const StyledNavButtonContainer = styled.div`
+  display: flex;
+`
+
+const StyledCheckboxContainer = styled.div`
+  display: flex;
+  padding: 10px;
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 const PagedList = () => {
@@ -40,13 +52,18 @@ const PagedList = () => {
   const rect = useRect(container) ?? { width: 0, height: 0 }
   const { view } = useMap()
   const [locations, setLocations] = useState([])
-  const [currentPage, setCurrentPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(undefined)
+  const [totalPages, setTotalPages] = useState(undefined)
+  const [updateOnMapMove, setUpdateOnMapMove] = useState(false)
 
   useEffect(() => {
     const fetchListEntries = async () => {
       const { bounds, zoom, center } = view
-      if (bounds?.ne.lat != null && zoom > 12) {
+      if (
+        bounds?.ne.lat != null &&
+        zoom > 12 &&
+        (currentPage === undefined || updateOnMapMove)
+      ) {
         const locations = await getLocations({
           swlng: bounds.sw.lng,
           nelng: bounds.ne.lng,
@@ -59,12 +76,16 @@ const PagedList = () => {
         setCurrentPage(0)
         setTotalPages(Math.ceil(locations[1] / LIMIT))
         setLocations(locations.slice(2))
-      } else {
+      } else if (zoom <= 12) {
         setLocations([])
+        setCurrentPage(undefined)
+        setTotalPages(undefined)
       }
     }
     fetchListEntries()
-  }, [view])
+  }, [view, updateOnMapMove])
+
+  const handleCheckboxClick = () => setUpdateOnMapMove(!updateOnMapMove)
 
   const handlePreviousPageClick = async () => {
     if (currentPage > 0) {
@@ -125,19 +146,30 @@ const PagedList = () => {
         />
       </StyledListContainer>
       <StyledPageInfo visible={locations.length > 0}>
-        Showing Results {currentPage + 1} - {totalPages}
         <StyledPageNav>
-          <SquareButton
-            icon={<ChevronLeft />}
-            disabled={!currentPage}
-            onClick={handlePreviousPageClick}
-          />
-          <SquareButton
-            icon={<ChevronRight />}
-            disabled={currentPage + 1 === totalPages}
-            onClick={handleNextPageClick}
-          />
+          Showing Results {currentPage + 1} - {totalPages}
+          <StyledNavButtonContainer>
+            <SquareButton
+              icon={<ChevronLeft />}
+              disabled={!currentPage}
+              onClick={handlePreviousPageClick}
+            />
+            <SquareButton
+              icon={<ChevronRight />}
+              disabled={currentPage + 1 === totalPages}
+              onClick={handleNextPageClick}
+            />
+          </StyledNavButtonContainer>
         </StyledPageNav>
+        <StyledCheckboxContainer>
+          <Checkbox
+            id="update-on-map-move"
+            name="update-on-map-move"
+            onChange={handleCheckboxClick}
+            checked={updateOnMapMove}
+          />
+          Update results when map moves
+        </StyledCheckboxContainer>
       </StyledPageInfo>
     </StyledContainer>
   )
