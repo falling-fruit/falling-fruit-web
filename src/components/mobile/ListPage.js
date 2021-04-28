@@ -23,32 +23,8 @@ const ListPage = () => {
   const container = useRef()
   const rect = useRect(container) ?? { width: 0, height: 0 }
 
-  useEffect(() => {
-    const fetchListEntries = async () => {
-      const { bounds, zoom, center } = view
-      if (bounds?.ne.lat != null && zoom > 12) {
-        const locations = await getLocations({
-          swlng: bounds.sw.lng,
-          nelng: bounds.ne.lng,
-          swlat: bounds.sw.lat,
-          nelat: bounds.ne.lat,
-          lng: center.lng,
-          lat: center.lat,
-          limit: LIMIT,
-        })
-        setHasMoreItems(locations[0] < locations[1])
-        setLocations(locations.slice(2))
-      } else {
-        setLocations([])
-      }
-    }
-    fetchListEntries()
-  }, [view])
-
-  const loadNextPage = async () => {
-    setIsNextPageLoading(true)
-    const { bounds, center } = view
-    const newLocations = await getLocations({
+  const fetchListEntries = async (bounds, center, offset) => {
+    const locations = await getLocations({
       swlng: bounds.sw.lng,
       nelng: bounds.ne.lng,
       swlat: bounds.sw.lat,
@@ -56,11 +32,36 @@ const ListPage = () => {
       lng: center.lng,
       lat: center.lat,
       limit: LIMIT,
-      offset: locations.length,
+      offset,
     })
+    return locations
+  }
+
+  useEffect(() => {
+    const fetchInitialListEntries = async () => {
+      const { bounds, zoom, center } = view
+      if (bounds?.ne.lat != null && zoom > 12) {
+        const locations = await fetchListEntries(bounds, center, 0)
+        setHasMoreItems(locations[0] < locations[1])
+        setLocations(locations.slice(2))
+      } else {
+        setLocations([])
+      }
+    }
+    fetchInitialListEntries()
+  }, [view])
+
+  const loadNextPage = async () => {
+    setIsNextPageLoading(true)
+    const { bounds, center } = view
+    const newLocations = await fetchListEntries(
+      bounds,
+      center,
+      locations.length,
+    )
+    setIsNextPageLoading(false)
     setHasMoreItems(newLocations[0] !== 0)
     setLocations([...locations].concat(newLocations.slice(2)))
-    setIsNextPageLoading(false)
   }
 
   return (
