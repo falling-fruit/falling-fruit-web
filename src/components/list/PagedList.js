@@ -52,18 +52,34 @@ const PagedList = () => {
   const rect = useRect(container) ?? { width: 0, height: 0 }
   const { view } = useMap()
   const [locations, setLocations] = useState([])
-  const [currentPage, setCurrentPage] = useState(undefined)
-  const [totalPages, setTotalPages] = useState(undefined)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
   const [updateOnMapMove, setUpdateOnMapMove] = useState(false)
+  const [currentView, setCurrentView] = useState(undefined)
 
   useEffect(() => {
-    const fetchListEntries = async () => {
-      const { bounds, zoom, center } = view
+    const setInitialView = () => {
+      const { bounds, zoom } = view
       if (
         bounds?.ne.lat != null &&
         zoom > 12 &&
-        (currentPage === undefined || updateOnMapMove)
+        (updateOnMapMove || currentView === undefined)
       ) {
+        setCurrentView(view)
+      } else if (zoom <= 12) {
+        setLocations([])
+        setCurrentView(undefined)
+        setCurrentPage(0)
+      }
+    }
+    setInitialView()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view, updateOnMapMove])
+
+  useEffect(() => {
+    const fetchCurrentListEntries = async () => {
+      if (currentView !== undefined) {
+        const { bounds, center } = currentView
         const locations = await getLocations({
           swlng: bounds.sw.lng,
           nelng: bounds.ne.lng,
@@ -72,55 +88,25 @@ const PagedList = () => {
           lng: center.lng,
           lat: center.lat,
           limit: LIMIT,
+          offset: currentPage * LIMIT,
         })
-        setCurrentPage(0)
         setTotalPages(Math.ceil(locations[1] / LIMIT))
         setLocations(locations.slice(2))
-      } else if (zoom <= 12) {
-        setLocations([])
-        setCurrentPage(undefined)
-        setTotalPages(undefined)
       }
     }
-    fetchListEntries()
-  }, [view, updateOnMapMove])
+    fetchCurrentListEntries()
+  }, [currentPage, currentView])
 
   const handleCheckboxClick = () => setUpdateOnMapMove(!updateOnMapMove)
 
-  const handlePreviousPageClick = async () => {
+  const handlePreviousPageClick = () => {
     if (currentPage > 0) {
-      const { bounds, center } = view
-      const locations = await getLocations({
-        swlng: bounds.sw.lng,
-        nelng: bounds.ne.lng,
-        swlat: bounds.sw.lat,
-        nelat: bounds.ne.lat,
-        lng: center.lng,
-        lat: center.lat,
-        limit: LIMIT,
-        offset: (currentPage - 1) * LIMIT,
-      })
-      setTotalPages(Math.ceil(locations[1] / LIMIT))
-      setLocations(locations.slice(2))
       setCurrentPage(currentPage - 1)
     }
   }
 
-  const handleNextPageClick = async () => {
+  const handleNextPageClick = () => {
     if (currentPage + 1 < totalPages) {
-      const { bounds, center } = view
-      const locations = await getLocations({
-        swlng: bounds.sw.lng,
-        nelng: bounds.ne.lng,
-        swlat: bounds.sw.lat,
-        nelat: bounds.ne.lat,
-        lng: center.lng,
-        lat: center.lat,
-        limit: LIMIT,
-        offset: (currentPage + 1) * LIMIT,
-      })
-      setTotalPages(Math.ceil(locations[1] / LIMIT))
-      setLocations(locations.slice(2))
       setCurrentPage(currentPage + 1)
     }
   }
