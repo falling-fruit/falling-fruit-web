@@ -5,12 +5,19 @@ import styled from 'styled-components/macro'
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
 import InfiniteList from '../list/InfiniteList'
-
 // TODO: Ask Jeffrey what the limit for mobile list view should be
 const LIMIT = 30
 
 const ListPageContainer = styled.div`
   margin-top: 85px;
+  height: 100%;
+`
+
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100%;
 `
 
@@ -66,14 +73,21 @@ const ListPage = () => {
 
   return (
     <ListPageContainer ref={container}>
-      <InfiniteList
-        width={rect.width}
-        height={rect.height}
-        locations={locations}
-        loadNextPage={loadNextPage}
-        hasMoreItems={hasMoreItems}
-        isNextPageLoading={isNextPageLoading}
-      />
+      {locations.length === 0 ? (
+        <LoadingContainer>
+          <img src="/magnify_map.svg" alt="magnify-map-icon" />
+          <p>Zoom into a location to see Entry Data</p>
+        </LoadingContainer>
+      ) : (
+        <InfiniteList
+          width={rect.width}
+          height={rect.height}
+          locations={locations}
+          loadNextPage={loadNextPage}
+          hasMoreItems={hasMoreItems}
+          isNextPageLoading={isNextPageLoading}
+        />
+      )}
     </ListPageContainer>
   )
 }
