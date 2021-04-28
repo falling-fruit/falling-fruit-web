@@ -9,8 +9,7 @@ const StyledResetButton = styled(ResetButton)`
   width: 100px;
   background-color: gray;
   position: relative;
-  border: ${({ selected, theme }) => selected && theme.blue};
-  border-width: 4px;
+  border: 4px solid ${({ selected, theme }) => selected && theme.blue};
 
   h5 {
     bottom: 5%;

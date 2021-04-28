@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 
 import Checkbox from '../ui/Checkbox'
@@ -7,7 +8,7 @@ import TileButton from '../ui/TileButton'
 import ToggleSwitch from '../ui/ToggleSwitch'
 
 // rename to pagestyling or something
-const PageMargin = styled.div`
+const Page = styled.div`
   margin: 26px;
 
   & > *:not(:last-child) {
@@ -45,70 +46,119 @@ const StyledCircleIcon = styled(CircleIcon)`
   color: gray;
 `
 
-const SettingsPage = () => (
-  // label tags for bicycle overview (html label look up)
-  <PageMargin>
-    <h2>Settings</h2>
-    <h3>Viewing Preferences</h3>
-    <CheckboxLabels>
-      <Checkbox name="Show Labels" />
-      <h5>Show Labels</h5>
-    </CheckboxLabels>
+const SettingsPage = () => {
+  const [mapView, setMapView] = useState()
+  const [mapOverlay, setMapOverlay] = useState()
 
-    <CheckboxLabels>
-      <Checkbox name="Scientific Names" />
-      <h5>Show Scientific Names</h5>
-    </CheckboxLabels>
+  return (
+    // label tags for bicycle overview (html label look up)
+    <Page>
+      <h2>Settings</h2>
+      <h3>Viewing Preferences</h3>
+      <CheckboxLabels>
+        <label htmlFor="Show Labels">
+          <Checkbox id="Show Labels" name="Show Labels" />
+          <h5>Show Labels</h5>
+        </label>
+      </CheckboxLabels>
 
-    <h3>Map Preferences</h3>
-    <ToggleLabels>
-      <h5>Show Labels</h5>
-      <ToggleSwitch />
-    </ToggleLabels>
+      <CheckboxLabels>
+        <Checkbox name="Scientific Names" />
+        <h5>Show Scientific Names</h5>
+      </CheckboxLabels>
 
-    <h5>Map View</h5>
+      <h3>Map Preferences</h3>
+      <ToggleLabels>
+        <h5>Show Labels</h5>
+        <ToggleSwitch />
+      </ToggleLabels>
 
-    <ToggleLabels>
-      <label htmlFor="Default">
-        <TileButton id="Default" label="Default" />
-      </label>
-      <label htmlFor="Satellite">
-        <TileButton id="Satellite" label="Satellite" />
-      </label>
-      <label htmlFor="Terrain">
-        <TileButton id="Terrain" label="Terrain" />
-      </label>
-    </ToggleLabels>
+      <h5>Map View</h5>
+      <ToggleLabels>
+        <TileButton
+          id="Default"
+          label="Default"
+          onClick={() => setMapView('Default')}
+          selected={mapView === 'Default'}
+        />
 
-    <h5>Map Overlays</h5>
-    <ToggleLabels>
-      <label htmlFor="None">
-        <TileButton id="None" label="None" />
-      </label>
-      <label htmlFor="Biking">
-        <TileButton id="Biking" label="Biking" />
-      </label>
-      <label htmlFor="Transit">
-        <TileButton id="Transit" label="Transit" />
-      </label>
-    </ToggleLabels>
+        <TileButton
+          id="Satellite"
+          label="Satellite"
+          onClick={() => setMapView('Satellite')}
+          selected={mapView === 'Satellite'}
+        />
 
-    <h3>Language Preferences</h3>
+        <TileButton
+          id="Terrain"
+          label="Terrain"
+          onClick={() => setMapView('Terrain')}
+          selected={mapView === 'Terrain'}
+        />
+      </ToggleLabels>
 
-    <ToggleLabels>
-      <h5>Language Preference</h5>
-      <Select
-        width="200px"
-        options={[]}
-        placeholder="English"
-        isMulti
-        closeMenuOnSelect={false}
-        blurInputOnSelect={false}
-      />
-    </ToggleLabels>
+      <h5>Map Overlays</h5>
+      <ToggleLabels>
+        <TileButton
+          id="None"
+          label="None"
+          onClick={() => {
+            setMapOverlay('None')
+          }}
+          selected={mapOverlay === 'None'}
+        />
 
-    <StyledCircleIcon />
-  </PageMargin>
-)
+        <TileButton
+          id="Biking"
+          label="Biking"
+          onClick={() => {
+            setMapOverlay('Biking')
+          }}
+          selected={mapOverlay === 'Biking'}
+        />
+
+        <TileButton
+          id="Transit"
+          label="Transit"
+          onClick={() => {
+            setMapOverlay('Transit')
+          }}
+          selected={mapOverlay === 'Transit'}
+        />
+      </ToggleLabels>
+
+      <h3>Language Preferences</h3>
+
+      <ToggleLabels>
+        <h5>Language Preference</h5>
+        <Select
+          width="200px"
+          options={[]}
+          placeholder="English"
+          isMulti
+          closeMenuOnSelect={false}
+          blurInputOnSelect={false}
+        />
+      </ToggleLabels>
+
+      <ToggleLabels>
+        <CheckboxLabels>
+          <Checkbox name="Show Labels" />
+          <h5>Data Language</h5>
+        </CheckboxLabels>
+        <Select
+          width="200px"
+          options={[]}
+          placeholder="English"
+          isMulti
+          closeMenuOnSelect={false}
+          blurInputOnSelect={false}
+        />
+      </ToggleLabels>
+
+      <StyledCircleIcon />
+    </Page>
+  )
+}
 
 export default SettingsPage
