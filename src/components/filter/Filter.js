@@ -1,5 +1,6 @@
 import intersection from 'ramda/src/intersection'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
@@ -35,6 +36,7 @@ const Filter = ({ isOpen }) => {
   const { view } = useMap()
   const { filters, setFilters } = useSearch()
   const [treeData, setTreeData] = useState([])
+  const { t } = useTranslation()
 
   const handleTreeChange = (currentNode, selectedNodes) => {
     setFilters((prevFilters) => ({
@@ -85,7 +87,7 @@ const Filter = ({ isOpen }) => {
     isOpen && (
       <StyledFilter>
         <div>
-          <p className="edible-type-text">Edible Type</p>
+          <p className="edible-type-text"> {t('Edible Types')}</p>
           <TreeSelect data={treeData} onChange={handleTreeChange} />
         </div>
         <div>

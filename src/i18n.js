@@ -13,7 +13,7 @@ const resources = {
       Review: 'Review',
       'Other Resources': 'Other Resources',
       Wikipedia: 'Wikipedia',
-      'Last Updated': 'Last Updatd',
+      'Last Updated': 'Last Updated',
       'Back to Results': 'Back to Results',
       Verified: 'Verified',
       Map: 'Map',
@@ -83,6 +83,8 @@ const resources = {
       'In Season': 'In Season',
       Photos: 'Photos',
       Logout: 'Logout',
+      always: 'always',
+      default: 'default',
     },
   },
   fr: {

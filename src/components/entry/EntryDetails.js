@@ -1,6 +1,7 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -102,6 +103,8 @@ const EntryDetails = ({ className }) => {
   const [typesData, setTypesData] = useState()
   const history = useHistory()
 
+  const { t } = useTranslation()
+
   useEffect(() => {
     async function fetchEntryDetails() {
       // Show loading between entry selections
@@ -137,9 +140,9 @@ const EntryDetails = ({ className }) => {
         <Tag color={theme.tag.access}>{ACCESS_TYPE[locationData.access]}</Tag>
       )}
       {locationData.unverified ? (
-        <Tag color={theme.tag.unverified}>Unverified</Tag>
+        <Tag color={theme.tag.unverified}>{t('Unverified')}</Tag>
       ) : (
-        <Tag color={theme.tag.verified}>Verified</Tag>
+        <Tag color={theme.tag.verified}>{t('Verified')}</Tag>
       )}
     </TagList>
   )
@@ -157,7 +160,7 @@ const EntryDetails = ({ className }) => {
   // TypesHeader shows the resources if more than one type
   const otherResources = typesData && typesData.length === 1 && (
     <>
-      <h3>Other Resources</h3>
+      <h3>{t('Other Resources')}</h3>
       <ResourceList typeData={typesData[0]} />
     </>
   )
@@ -197,16 +200,16 @@ const EntryDetails = ({ className }) => {
               )}
 
               <p className="updatedTime">
-                Last Updated{' '}
+                {t('Last Updated')}{' '}
                 <time dateTime={locationData.updated_at}>
                   {formatISOString(locationData.updated_at)}
                 </time>
               </p>
 
               <div>
-                <Button leftIcon={<Star />}>Review</Button>
+                <Button leftIcon={<Star />}>{t('Review')}</Button>
                 <Button leftIcon={<Flag />} secondary>
-                  Report
+                  {t('Report')}
                 </Button>
               </div>
             </Description>

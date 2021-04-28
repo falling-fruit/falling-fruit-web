@@ -1,4 +1,5 @@
 import { Loader } from '@styled-icons/boxicons-regular'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 const LoadingIndicatorWrapper = styled.div`
@@ -72,10 +73,13 @@ const LoadingIndicatorWrapper = styled.div`
  * - cover {boolean} - covers container with loading state when true
  * - vertical {boolean} - arranged vertically when true
  */
-export default function LoadingIndicator(props) {
+const LoadingIndicator = (props) => {
+  const { t } = useTranslation()
   return (
     <LoadingIndicatorWrapper {...props}>
-      <Loader /> Loading...
+      <Loader /> {t('Loading...')}
     </LoadingIndicatorWrapper>
   )
 }
+
+export default LoadingIndicator

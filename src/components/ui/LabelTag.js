@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { validatedColor } from './GlobalStyle'
@@ -15,8 +16,15 @@ const LabelTag = styled.span`
   text-transform: uppercase;
 `
 
-const Required = (props) => <LabelTag {...props}>Required</LabelTag>
-const Optional = (props) => <LabelTag {...props}>Optional</LabelTag>
+const Required = (props) => {
+  const { t } = useTranslation()
+  return <LabelTag {...props}>{t('Required')}</LabelTag>
+}
+
+const Optional = (props) => {
+  const { t } = useTranslation()
+  return <LabelTag {...props}>{t('Optional')}</LabelTag>
+}
 
 export default LabelTag
 export { Optional, Required }
