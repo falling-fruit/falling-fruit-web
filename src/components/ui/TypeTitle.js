@@ -10,6 +10,7 @@ const StyledTypeTitle = styled.div`
   }
 
   h3 {
+    margin-top: 0;
     font-size: 14px;
     font-style: italic;
     color: ${({ theme }) => theme.text};
