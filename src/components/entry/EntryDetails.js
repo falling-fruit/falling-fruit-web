@@ -1,6 +1,6 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -79,12 +79,12 @@ const Description = styled.section`
     margin-top: 14px;
   }
 
-  & > p {
+  & > p:first-child {
     color: ${({ theme }) => theme.secondaryText};
     margin-bottom: 14px;
   }
 
-  small {
+  & > .updatedTime {
     display: block;
     font-style: italic;
   }
@@ -94,7 +94,7 @@ const Description = styled.section`
   }
 `
 
-const EntryDetails = () => {
+const EntryDetails = ({ className }) => {
   const { id } = useParams()
   const { setView } = useMap()
   const [locationData, setLocationData] = useState()
@@ -162,50 +162,60 @@ const EntryDetails = () => {
     </>
   )
 
-  return locationData && typesData ? (
-    <Page>
-      <PhotoGrid
-        photos={locationData.photos}
-        altText={locationData.type_names.join(', ')}
-        handleViewLightbox={handleViewLightbox}
-      />
-      <TextContent>
-        {tagList}
-        {typesHeader}
-        <Description>
-          <p>{locationData.description}</p>
-          <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
-            <Map color={theme.secondaryText} size={20} />
-            <LocationText>{address}</LocationText>
-          </IconBesideText>
-          {hasSeasonality(locationData) && (
-            <IconBesideText>
-              <Calendar color={theme.secondaryText} size={20} />
-              <p>
-                {formatSeasonality(
-                  locationData.season_start,
-                  locationData.season_stop,
-                  locationData.no_season,
-                )}
+  const isReady = locationData && typesData
+
+  return (
+    <Page className={className}>
+      {isReady ? (
+        <>
+          <PhotoGrid
+            photos={locationData.photos}
+            altText={locationData.type_names.join(', ')}
+            handleViewLightbox={handleViewLightbox}
+          />
+          <TextContent>
+            {tagList}
+            {typesHeader}
+            <Description>
+              <p>{locationData.description}</p>
+
+              <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
+                <Map color={theme.secondaryText} size={20} />
+                <LocationText>{address}</LocationText>
+              </IconBesideText>
+              {hasSeasonality(locationData) && (
+                <IconBesideText>
+                  <Calendar color={theme.secondaryText} size={20} />
+                  <p>
+                    {formatSeasonality(
+                      locationData.season_start,
+                      locationData.season_stop,
+                      locationData.no_season,
+                    )}
+                  </p>
+                </IconBesideText>
+              )}
+
+              <p className="updatedTime">
+                Last Updated{' '}
+                <time dateTime={locationData.updated_at}>
+                  {formatISOString(locationData.updated_at)}
+                </time>
               </p>
-            </IconBesideText>
-          )}
-          <small>Last Updated {formatISOString(locationData.updated_at)}</small>
-          <div>
-            <Button>
-              <Star /> Review
-            </Button>
-            <Button secondary>
-              <Flag /> Report
-            </Button>
-          </div>
-        </Description>
-        {otherResources}
-      </TextContent>
-    </Page>
-  ) : (
-    <Page>
-      <LoadingIndicator vertical cover />
+
+              <div>
+                <Button leftIcon={<Star />}>Review</Button>
+                <Button leftIcon={<Flag />} secondary>
+                  Report
+                </Button>
+              </div>
+            </Description>
+            {otherResources}
+          </TextContent>
+        </>
+      ) : (
+        <LoadingIndicator vertical cover />
+      )}
     </Page>
   )
 }
