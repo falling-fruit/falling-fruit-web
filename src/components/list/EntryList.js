@@ -2,6 +2,7 @@ import { ChevronRight, Star } from '@styled-icons/boxicons-solid'
 import { FixedSizeList } from 'react-window'
 
 import { theme } from '../ui/GlobalStyle'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import ListEntry from './ListEntry'
 
 const convertMetersToMiles = (meters) => {
@@ -37,7 +38,9 @@ const EntryList = ({
       )
     } else if (index < itemCount) {
       row = (
-        <ListEntry height={itemSize} primaryText="Loading..." style={style} />
+        <div style={style}>
+          <LoadingIndicator />
+        </div>
       )
     }
     return row
