@@ -1,6 +1,5 @@
 import styled from 'styled-components/macro'
 
-// TODO: Look into Table / Grid
 // TODO: Fix title vertical centering
 
 const Bar = styled.div`
@@ -16,12 +15,6 @@ const Score = styled.div`
   background: ${(props) => getRedToGreen(props.percentage)};
 `
 
-// const RatingContainer = styled.div`
-//   display: grid;
-//   grid-template-columns: 1fr 4fr;
-//   align-items: center;
-// `
-
 const getRedToGreen = (percentage) => {
   if (percentage <= 0.33) {
     return ({ theme }) => theme.red
@@ -33,12 +26,9 @@ const getRedToGreen = (percentage) => {
 }
 
 const Rating = ({ percentage }) => (
-  // <RatingContainer>
-  //   <Label>{label}</Label>
   <Bar>
     <Score percentage={percentage} />
   </Bar>
-  // </RatingContainer>
 )
 
 export default Rating

@@ -30,28 +30,23 @@ const ReviewDescription = styled.section`
 const ReviewContainer = styled.div`
   margin-bottom: 20px;
 `
-
 const Review = ({ ratings, description, date, name }) => (
   <ReviewContainer>
     <RatingTable>
-      {ratings.map((rating, key) => (
-        <tr key={key}>
-          <td>
-            <Label>{rating.label}</Label>
-          </td>
-          <td>
-            <Rating key={key} percentage={rating.percentage} />
-          </td>
-        </tr>
-      ))}
+      {ratings.map(
+        (rating, key) =>
+          rating.percentage && (
+            <tr key={key}>
+              <td>
+                <Label>{rating.label}</Label>
+              </td>
+              <td>
+                <Rating key={key} percentage={rating.percentage} />
+              </td>
+            </tr>
+          ),
+      )}
     </RatingTable>
-
-    {/*    <Label key={key} label={rating.label} />
-            </td>
-            <td>
-         
-           */}
-
     <ReviewDescription>
       <blockquote>{description}</blockquote>
       {/* Include the images */}
