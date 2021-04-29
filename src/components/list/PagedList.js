@@ -148,8 +148,9 @@ const PagedList = () => {
       </StyledListContainer>
       <StyledPageInfo visible={locations.length > 0}>
         <StyledPageNav>
-          Showing Results {currentOffset + 1} -{' '}
-          {currentOffset + locations.length}
+          {`Showing Results ${currentOffset + 1} - ${
+            currentOffset + locations.length
+          }`}
           <StyledNavButtonContainer>
             <SquareButton
               icon={<ChevronLeft />}
