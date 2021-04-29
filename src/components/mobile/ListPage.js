@@ -9,7 +9,6 @@ import InfiniteList from '../list/InfiniteList'
 const LIMIT = 30
 
 const ListPageContainer = styled.div`
-  margin-top: 85px;
   height: 100%;
 `
 

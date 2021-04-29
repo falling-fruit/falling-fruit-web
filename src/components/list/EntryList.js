@@ -1,6 +1,7 @@
-import { ChevronRight, Star } from '@styled-icons/boxicons-solid'
+import { ChevronRight, Pin } from '@styled-icons/boxicons-solid'
 import { FixedSizeList } from 'react-window'
 
+import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import ListEntry from './ListEntry'
@@ -28,7 +29,15 @@ const EntryList = ({
         <ListEntry
           height={itemSize}
           key={location.id}
-          leftIcons={<Star size="16" />}
+          leftIcons={
+            <CircleIcon>
+              {location.photo ? (
+                <img src={location.photo.medium} alt="entry-icon" />
+              ) : (
+                <Pin />
+              )}
+            </CircleIcon>
+          }
           rightIcons={<ChevronRight size="16" color={theme.blue} />}
           primaryText={location.type_names[0]}
           secondaryText={`${convertMetersToMiles(location.distance)} miles`}
