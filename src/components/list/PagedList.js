@@ -39,6 +39,11 @@ const StyledPageNav = styled.div`
 
 const StyledNavButtonContainer = styled.div`
   display: flex;
+  button {
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
 `
 
 const StyledCheckboxContainer = styled.div`
