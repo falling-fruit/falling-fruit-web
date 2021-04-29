@@ -27,7 +27,6 @@ const EntryList = ({
     if (location) {
       row = (
         <ListEntry
-          height={itemSize}
           key={location.id}
           leftIcons={
             <CircleIcon>

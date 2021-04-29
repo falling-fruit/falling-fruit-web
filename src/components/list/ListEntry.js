@@ -28,7 +28,7 @@ const ListContainer = styled.li`
   display: flex;
   flex-direction: row;
   padding: 0 14px;
-  height: ${(props) => props.height};
+  height: 57px;
   align-items: center;
   &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
