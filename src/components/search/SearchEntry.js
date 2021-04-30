@@ -2,9 +2,9 @@ import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import { Map, Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
-import ListEntry from '../list/ListEntry'
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
+import ListEntry from '../ui/ListEntry'
 
 const SearchEntry = React.forwardRef(
   ({ children, isCurrentLocation, ...props }, ref) => {

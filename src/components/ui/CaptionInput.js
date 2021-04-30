@@ -1,10 +1,10 @@
 import { X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
-import ListEntry from '../list/ListEntry'
 import CircleIcon from './CircleIcon'
 import IconButton from './IconButton'
 import Input from './Input'
+import ListEntry from './ListEntry'
 
 const StyledCaptionInput = styled(ListEntry)`
   padding: 0;

@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 
 import ResetButton from './ResetButton'
 
-const StyledResetButton = styled(ResetButton)`
+const SquareButton = styled(ResetButton)`
   display: flex;
   height: 22px;
   width: 22px;
@@ -16,11 +16,5 @@ const StyledResetButton = styled(ResetButton)`
       disabled ? theme.secondaryBackground : theme.orange};
   }
 `
-
-const SquareButton = ({ icon, disabled, ...props }) => (
-  <StyledResetButton disabled={disabled} {...props}>
-    {icon}
-  </StyledResetButton>
-)
 
 export default SquareButton

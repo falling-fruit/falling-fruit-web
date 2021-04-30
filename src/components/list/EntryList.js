@@ -1,16 +1,18 @@
-import { ChevronRight, Pin } from '@styled-icons/boxicons-solid'
+import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { FixedSizeList } from 'react-window'
+import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
+import ListEntry from '../ui/ListEntry'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import ListEntry from './ListEntry'
+import { ReactComponent as LeafIcon } from './leaf.svg'
 
-const convertMetersToMiles = (meters) => {
-  let miles = (meters * 0.000621371192).toString()
-  miles = miles.slice(0, miles.indexOf('.') + 3)
-  return miles
-}
+const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
+
+const StyledListEntry = styled(ListEntry)`
+  cursor: pointer;
+`
 
 const EntryList = ({
   height,
@@ -26,14 +28,14 @@ const EntryList = ({
     let row = null
     if (location) {
       row = (
-        <ListEntry
+        <StyledListEntry
           key={location.id}
           leftIcons={
-            <CircleIcon>
+            <CircleIcon backgroundColor={theme.green}>
               {location.photo ? (
                 <img src={location.photo.medium} alt="entry-icon" />
               ) : (
-                <Pin />
+                <LeafIcon />
               )}
             </CircleIcon>
           }

@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react'
 
 import { getTypes } from '../../utils/api'
 import { ReportModal } from '../form/ReportModal'
-import ListEntry from '../list/ListEntry'
 import Button from '../ui/Button'
 import CaptionInput from '../ui/CaptionInput'
 import Input from '../ui/Input'
+import ListEntry from '../ui/ListEntry'
 import ProgressBar from '../ui/ProgressBar'
 import { Select } from '../ui/Select'
 import {

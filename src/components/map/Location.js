@@ -55,6 +55,7 @@ const Location = ({ label, selected, ...props }) => (
 )
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
+  // TODO: Correct the instance in MapPage
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 }
 

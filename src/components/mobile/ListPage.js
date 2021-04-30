@@ -30,6 +30,7 @@ const ListPage = () => {
   const rect = useRect(container) ?? { width: 0, height: 0 }
 
   const fetchListEntries = async (bounds, center, offset) => {
+    // TODO: Include filters by consolidating all getLocations API calls
     const locations = await getLocations({
       swlng: bounds.sw.lng,
       nelng: bounds.ne.lng,
@@ -67,15 +68,22 @@ const ListPage = () => {
     )
     setIsNextPageLoading(false)
     setHasMoreItems(newLocations[0] !== 0)
-    setLocations([...locations].concat(newLocations.slice(2)))
+    setLocations((locations) => [...locations, ...newLocations.slice(2)])
   }
 
   return (
     <ListPageContainer ref={container}>
       {locations.length === 0 ? (
         <LoadingContainer>
-          <img src="/magnify_map.svg" alt="magnify-map-icon" />
-          <p>Zoom into a location to see Entry Data</p>
+          <img
+            src={view.zoom > 12 ? '/no_results_icon.svg' : '/magnify_map.svg'}
+            alt="loading-list-icon"
+          />
+          <p>
+            {view.zoom > 12
+              ? 'No Results Found'
+              : 'Zoom into a location to see Entry Data'}
+          </p>
         </LoadingContainer>
       ) : (
         <InfiniteList
