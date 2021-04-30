@@ -19,7 +19,7 @@ const StyledListEntry = styled(ListEntry)`
 
   .primaryText {
     font-size: 15px;
-    font-weight: 700;
+    font-weight: bold;
   }
 `
 
