@@ -15,6 +15,7 @@ const StyledTypeTitle = styled.div`
     color: ${({ theme }) => theme.text};
     margin-top: 0px;
     margin-bottom: 0px;
+    font-weight: normal;
   }
 `
 

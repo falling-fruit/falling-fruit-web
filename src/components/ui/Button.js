@@ -12,7 +12,7 @@ const StyledButton = styled(ResetButton)`
   line-height: 14px;
   color: ${({ $secondary, theme }) =>
     $secondary ? theme.orange : theme.background};
-  font-weight: 700;
+  font-weight: bold;
   background-color: ${({ $secondary, theme }) =>
     $secondary ? theme.background : theme.orange};
   border: 2px solid ${({ theme }) => theme.orange};

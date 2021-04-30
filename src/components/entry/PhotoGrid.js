@@ -60,7 +60,7 @@ const ImageUpload = styled.label`
   border-radius: 4px;
 
   border: 2px solid ${({ theme }) => theme.text};
-  font-weight: 700;
+  font-weight: bold;
 
   svg {
     width: 31px;
@@ -113,7 +113,7 @@ const ExtraImagesWrapper = styled(ResetButton)`
     justify-content: center;
     align-items: center;
 
-    font-weight: 700;
+    font-weight: bold;
     font-size: 13px;
 
     & > span {
