@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 
+import { formatISOString } from '../entry/textFormatters'
 import Rating from './Rating'
 
 const Label = styled.p`
@@ -30,28 +31,54 @@ const ReviewDescription = styled.section`
 const ReviewContainer = styled.div`
   margin-bottom: 20px;
 `
-const Review = ({ ratings, description, date, name }) => (
+
+const RATINGS = [
+  {
+    title: 'Fruiting',
+    urlKey: 'fruiting',
+    total: 3,
+  },
+  {
+    title: 'Quality',
+    urlKey: 'quality_rating',
+    total: 5,
+  },
+  {
+    title: 'Yield',
+    urlKey: 'yield_rating',
+    total: 5,
+  },
+]
+
+const Review = ({ review }) => (
   <ReviewContainer>
     <RatingTable>
-      {ratings.map(
-        (rating, key) =>
-          rating.percentage && (
+      {RATINGS.map(
+        ({ title, urlKey, total }, key) =>
+          review[urlKey] && (
             <tr key={key}>
               <td>
-                <Label>{rating.label}</Label>
+                <Label>{title}</Label>
               </td>
               <td>
-                <Rating key={key} percentage={rating.percentage} />
+                <Rating
+                  key={key}
+                  percentage={
+                    title === 'Fruiting'
+                      ? review[urlKey] / total
+                      : review[urlKey] / total
+                  }
+                />
               </td>
             </tr>
           ),
       )}
     </RatingTable>
     <ReviewDescription>
-      <blockquote>{description}</blockquote>
+      <blockquote>{review.comment}</blockquote>
       {/* Include the images */}
       <cite>
-        Reviewed {date} by {name}
+        Reviewed {formatISOString(review.created_at)} by {review.author}
       </cite>
     </ReviewDescription>
   </ReviewContainer>

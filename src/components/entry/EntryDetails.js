@@ -91,6 +91,7 @@ const EntryDetails = ({ className }) => {
       const typesData = await Promise.all(
         locationData.type_ids.map(getTypeById),
       )
+
       setAddress(streetAddress)
       setLocationData(locationData)
       setTypesData(typesData)
