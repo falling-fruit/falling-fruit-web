@@ -1,7 +1,7 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useParams, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
@@ -49,9 +49,9 @@ const LocationText = styled(ResetButton)`
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
+  /* @media ${({ theme }) => theme.device.mobile} {
     padding-top: 87px;
-  }
+  } */
 
   overflow: auto;
   width: 100%;
@@ -99,6 +99,9 @@ const EntryDetails = ({ className }) => {
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
+  const { path } = useRouteMatch()
+
+  console.log(path)
 
   useEffect(() => {
     async function fetchEntryDetails() {
