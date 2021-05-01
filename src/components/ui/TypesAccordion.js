@@ -32,11 +32,7 @@ const TypesAccordionButton = ({ commonName, scientificName, ...props }) => {
 
   return (
     <IndicatorAccordionButton {...props}>
-      <TypeTitle
-        primaryText={commonName}
-        secondaryText={scientificName}
-        small
-      />
+      <TypeTitle primaryText={commonName} secondaryText={scientificName} />
       {arrowIcon}
     </IndicatorAccordionButton>
   )

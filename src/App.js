@@ -8,6 +8,7 @@ import {
 import { ThemeProvider } from 'styled-components'
 
 import ComponentDemos from './components/ComponentDemos'
+import { LocationForm } from './components/form/LocationForm'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 
@@ -15,6 +16,9 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <Router>
       <Switch>
+        <Route exact path="/form">
+          <LocationForm />
+        </Route>
         <Route exact path="/">
           <Redirect to="/map" />
         </Route>

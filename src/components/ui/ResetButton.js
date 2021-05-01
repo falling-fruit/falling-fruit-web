@@ -6,7 +6,8 @@ const ResetButton = styled.button`
   padding: 0;
   font-family: inherit;
   cursor: pointer;
-  outline: inherit;
+  // TODO: should outline be removed? a11y
+  // outline: inherit;
 `
 
 export default ResetButton

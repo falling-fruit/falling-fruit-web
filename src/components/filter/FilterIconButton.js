@@ -1,7 +1,6 @@
 import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-solid'
 
 import { useSearch } from '../../contexts/SearchContext'
-import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 
 const FilterIconButton = ({ pressed, setPressed }) => {
@@ -13,7 +12,7 @@ const FilterIconButton = ({ pressed, setPressed }) => {
     <IconButton
       size={45}
       pressed={pressed}
-      icon={<FilterIcon color={pressed ? theme.orange : theme.secondaryText} />}
+      icon={<FilterIcon />}
       onClick={() => setPressed((pressed) => !pressed)}
       subscript={typesLength > 0 && filterCount}
       label="filter-button"

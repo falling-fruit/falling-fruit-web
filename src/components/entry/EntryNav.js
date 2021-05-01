@@ -1,56 +1,10 @@
-import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { Map, Pencil } from '@styled-icons/boxicons-solid'
 import { useHistory, useLocation } from 'react-router-dom'
-import styled from 'styled-components/macro'
 
-import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
-import ResetButton from '../ui/ResetButton'
+import TopBarNav from '../ui/TopBarNav'
 
-const StyledEntryNav = styled.div`
-  padding: 25px 10px 15px;
-
-  @media ${({ theme }) => theme.device.mobile} {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    height: 55px;
-    padding: 0;
-  }
-`
-
-const BackButton = styled(ResetButton)`
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.secondaryText};
-  font-size: 15px;
-  font-weight: bold;
-
-  @media ${({ theme }) => theme.device.mobile} {
-    /* Make the touch target bigger */
-    width: 75px;
-    height: 100%;
-  }
-
-  svg {
-    height: 20px;
-    margin-right: 7px;
-
-    @media ${({ theme }) => theme.device.mobile} {
-      height: 25px;
-      padding-left: 5px;
-    }
-  }
-`
-
-const Icons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 110px;
-`
-
-const EntryNav = ({ isDesktop }) => {
+const EntryNav = () => {
   const history = useHistory()
   const { state } = useLocation()
 
@@ -70,28 +24,25 @@ const EntryNav = ({ isDesktop }) => {
   }
 
   return (
-    <StyledEntryNav>
-      <BackButton onClick={onBackButtonClick} tabindex={0}>
-        <ArrowBack />
-        {isDesktop && 'Back to Results'}
-      </BackButton>
-      {!isDesktop && (
-        <Icons>
+    <TopBarNav
+      onBack={onBackButtonClick}
+      rightIcons={
+        <>
           <IconButton
             size={50}
-            icon={<Pencil color={theme.secondaryText} />}
+            icon={<Pencil />}
             onClick={onEditButtonClick}
             label="edit-entry-details"
           />
           <IconButton
             size={50}
-            icon={<Map color={theme.secondaryText} />}
+            icon={<Map />}
             onClick={onMapButtonClick}
             label="map-entry-details"
           />
-        </Icons>
-      )}
-    </StyledEntryNav>
+        </>
+      }
+    />
   )
 }
 

@@ -1,21 +1,19 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocationById, getTypeById } from '../../utils/api'
-import { getStreetAddress } from '../../utils/locationInfo'
+import { getStreetAddress, hasSeasonality } from '../../utils/locationInfo'
 import { getZoomedInView } from '../../utils/viewportBounds'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
-import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
-import ResourceList from './ResourceList'
 import {
   ACCESS_TYPE,
   formatISOString,
@@ -79,12 +77,12 @@ const Description = styled.section`
     margin-top: 14px;
   }
 
-  & > p {
+  & > p:first-child {
     color: ${({ theme }) => theme.secondaryText};
     margin-bottom: 14px;
   }
 
-  small {
+  & > .updatedTime {
     display: block;
     font-style: italic;
   }
@@ -94,16 +92,13 @@ const Description = styled.section`
   }
 `
 
-const EntryDetails = () => {
+const EntryDetails = ({ className }) => {
   const { id } = useParams()
   const { setView } = useMap()
   const [locationData, setLocationData] = useState()
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
-  const hasSeasonality =
-    locationData.no_season ||
-    (locationData.season_start && locationData.season_stop)
 
   useEffect(() => {
     async function fetchEntryDetails() {
@@ -147,68 +142,59 @@ const EntryDetails = () => {
     </TagList>
   )
 
-  const typesHeader =
-    typesData && typesData.length === 1 ? (
-      <TypeTitle
-        primaryText={typesData[0].en_name}
-        secondaryText={typesData[0].scientific_name}
-      />
-    ) : (
-      <TypesHeader typesData={typesData} />
-    )
+  const isReady = locationData && typesData
 
-  // TypesHeader shows the resources if more than one type
-  const otherResources = typesData && typesData.length === 1 && (
-    <>
-      <h3>Other Resources</h3>
-      <ResourceList typeData={typesData[0]} />
-    </>
-  )
+  return (
+    <Page className={className}>
+      {isReady ? (
+        <>
+          <PhotoGrid
+            photos={locationData.photos}
+            altText={locationData.type_names.join(', ')}
+            handleViewLightbox={handleViewLightbox}
+          />
+          <TextContent>
+            {tagList}
+            <TypesHeader typesData={typesData} />
+            <Description>
+              <p>{locationData.description}</p>
 
-  return locationData && typesData ? (
-    <Page>
-      <PhotoGrid
-        photos={locationData.photos}
-        altText={locationData.type_names.join(', ')}
-        handleViewLightbox={handleViewLightbox}
-      />
-      <TextContent>
-        {tagList}
-        {typesHeader}
-        <Description>
-          <p>{locationData.description}</p>
-          <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
-            <Map color={theme.secondaryText} size={20} />
-            <LocationText>{address}</LocationText>
-          </IconBesideText>
-          {hasSeasonality && (
-            <IconBesideText>
-              <Calendar color={theme.secondaryText} size={20} />
-              <p>
-                {formatSeasonality(
-                  locationData.season_start,
-                  locationData.season_stop,
-                  locationData.no_season,
-                )}
+              <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
+                <Map color={theme.secondaryText} size={20} />
+                <LocationText>{address}</LocationText>
+              </IconBesideText>
+              {hasSeasonality(locationData) && (
+                <IconBesideText>
+                  <Calendar color={theme.secondaryText} size={20} />
+                  <p>
+                    {formatSeasonality(
+                      locationData.season_start,
+                      locationData.season_stop,
+                      locationData.no_season,
+                    )}
+                  </p>
+                </IconBesideText>
+              )}
+
+              <p className="updatedTime">
+                Last Updated{' '}
+                <time dateTime={locationData.updated_at}>
+                  {formatISOString(locationData.updated_at)}
+                </time>
               </p>
-            </IconBesideText>
-          )}
-          <small>Last Updated {formatISOString(locationData.updated_at)}</small>
-          <div>
-            <Button>
-              <Star /> Review
-            </Button>
-            <Button secondary>
-              <Flag /> Report
-            </Button>
-          </div>
-        </Description>
-        {otherResources}
-      </TextContent>
-    </Page>
-  ) : (
-    <Page>
-      <LoadingIndicator vertical cover />
+
+              <div>
+                <Button leftIcon={<Star />}>Review</Button>
+                <Button leftIcon={<Flag />} secondary>
+                  Report
+                </Button>
+              </div>
+            </Description>
+          </TextContent>
+        </>
+      ) : (
+        <LoadingIndicator vertical cover />
+      )}
     </Page>
   )
 }
