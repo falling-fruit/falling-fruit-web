@@ -14,22 +14,29 @@ const windowHeight = window.innerHeight
 const OPEN_NAV_SIZE = 0.75
 
 const MainContainer = styled.div`
-  position: relative;
+  position: absolute;
   height: 100%;
   overflow: hidden;
   width: 100%;
+  bottom: 80px;
+  left: 0;
 `
 
 const Overflow = styled.div`
   position: absolute;
+  background-color: white;
   width: 100%;
   bottom: 0px;
   top: 0;
   overflow: hidden;
+  padding-bottom: 20px;
 
-  button {
+  & > button#toggle {
     margin: 0;
     width: 100%;
+  }
+  *:not(#toggle) {
+    pointer-events: ${({ open }) => (open ? 'auto' : 'none !important')};
   }
 `
 
@@ -122,7 +129,7 @@ const PullContainer = forwardRef(
         // If already open and percent openend is less than the opened percentage + 10
         // Else let open
         if (open) {
-          if (percentOpened < OPEN_NAV_SIZE * 200 - 10) {
+          if (percentOpened < OPEN_NAV_SIZE * 100 - 10) {
             setY = 0
             setOpen(false)
             onChange(false)
@@ -166,15 +173,24 @@ const PullContainer = forwardRef(
           top: styleProps.top.interpolate(topInterpolate),
         }}
       >
-        <Overflow>
+        <Overflow open={open}>
           <button
+            id="toggle"
             style={{ backgroundColor: 'red', opacity: 0.5 }}
             data-_pull
             onClick={() => setContainerOpen(!open)}
           >
-            handle
+            ^
           </button>
-          <div style={{ height: '100%', overflow: 'auto' }}>{children}</div>
+          <div
+            style={{ height: '100%', overflow: 'auto' }}
+            onClick={() => !open && setContainerOpen(true)}
+            role={!open && 'button'}
+            tabIndex={!open ? 0 : -1}
+            onKeyDown={() => !open && console.log('entered')}
+          >
+            {children}
+          </div>
         </Overflow>
       </Container>
     )
@@ -193,7 +209,7 @@ PullContainer.displayName = 'PullContainer'
 export default function Drawer({ children }) {
   return (
     <MainContainer>
-      <PullContainer overflowHeight={200}>{children}</PullContainer>
+      <PullContainer overflowHeight={315}>{children}</PullContainer>
     </MainContainer>
   )
 }
