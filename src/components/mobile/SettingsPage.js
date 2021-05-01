@@ -46,9 +46,16 @@ const StyledCircleIcon = styled(CircleIcon)`
   color: gray;
 `
 
+// TODO: create a component that takes in both a label and a right and left component
+// TODO: use a map for the tile buttons
+// TODO: fix the css for the drop down
+
 const SettingsPage = () => {
   const [mapView, setMapView] = useState()
   const [mapOverlay, setMapOverlay] = useState()
+  const [showLabels, setShowLabels] = useState()
+  const [showScientificNames, setShowScientificNames] = useState()
+  const [dataLanguage, setDataLanguage] = useState()
 
   return (
     // label tags for bicycle overview (html label look up)
@@ -57,14 +64,30 @@ const SettingsPage = () => {
       <h3>Viewing Preferences</h3>
       <CheckboxLabels>
         <label htmlFor="Show Labels">
-          <Checkbox id="Show Labels" name="Show Labels" />
+          <Checkbox
+            id="Show Labels"
+            name="Show Labels"
+            onClick={() => setShowLabels(showLabels ? !showLabels : true)}
+            checked={showLabels}
+          />
           <h5>Show Labels</h5>
         </label>
       </CheckboxLabels>
 
       <CheckboxLabels>
-        <Checkbox name="Scientific Names" />
-        <h5>Show Scientific Names</h5>
+        <label htmlFor="Scientific Names">
+          <Checkbox
+            id="Scientific Names"
+            name="Scientific Names"
+            onClick={() =>
+              setShowScientificNames(
+                showScientificNames ? !showScientificNames : true,
+              )
+            }
+            checked={showScientificNames}
+          />
+          <h5>Show Scientific Names</h5>
+        </label>
       </CheckboxLabels>
 
       <h3>Map Preferences</h3>
@@ -143,8 +166,17 @@ const SettingsPage = () => {
 
       <ToggleLabels>
         <CheckboxLabels>
-          <Checkbox name="Show Labels" />
-          <h5>Data Language</h5>
+          <label htmlFor="Data Language">
+            <Checkbox
+              name="Data Language"
+              id="Data Language"
+              onClick={() =>
+                setDataLanguage(dataLanguage ? !dataLanguage : true)
+              }
+              checked={dataLanguage}
+            />
+            <h5>Data Language</h5>
+          </label>
         </CheckboxLabels>
         <Select
           width="200px"
