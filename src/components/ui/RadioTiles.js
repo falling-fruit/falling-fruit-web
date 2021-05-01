@@ -9,14 +9,14 @@ const TileRow = styled.div`
 
 const RadioTiles = ({ options, value: selectedValue, onChange }) => (
   <TileRow>
-    {options.map(({ label, value, imageUrl }) => (
+    {options.map(({ label, value, image }) => (
       <TileButton
         key={value}
         $selected={value === selectedValue}
         label={label}
         onClick={() => onChange(value)}
       >
-        {imageUrl && <img src={imageUrl} alt={label} />}
+        {image && <img src={image} alt={label} />}
       </TileButton>
     ))}
   </TileRow>

@@ -10,6 +10,7 @@ const StyledResetButton = styled(ResetButton)`
   position: relative;
   border: 4px solid
     ${({ $selected, theme }) => ($selected ? theme.blue : theme.background)};
+  overflow: hidden;
 
   p {
     position: absolute;

@@ -6,6 +6,11 @@ import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
+import Bicycling from './mapTiles/bicycling.png'
+import Road from './mapTiles/road.png'
+import Satellite from './mapTiles/satellite.png'
+import Terrain from './mapTiles/terrain.png'
+import Transit from './mapTiles/transit.png'
 
 const LANGUAGE_OPTIONS = [
   { value: 'en', label: 'English' },
@@ -87,14 +92,17 @@ const SettingsPage = () => {
           {
             label: 'Default',
             value: 'roadmap',
+            image: Road,
           },
           {
             label: 'Satellite',
             value: 'hybrid',
+            image: Satellite,
           },
           {
             label: 'Terrain',
             value: 'terrain',
+            image: Terrain,
           },
         ]}
         value={settings.mapType}
@@ -112,14 +120,17 @@ const SettingsPage = () => {
           {
             label: 'None',
             value: null,
+            image: Road,
           },
           {
             label: 'Biking',
             value: 'BicyclingLayer',
+            image: Bicycling,
           },
           {
             label: 'Transit',
             value: 'TransitLayer',
+            image: Transit,
           },
         ]}
         value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}

@@ -2,7 +2,7 @@ import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
 
 import MapPage from '../map/MapPage'
-import SettingsPage from './SettingsPage'
+import SettingsPage from '../settings/SettingsPage'
 
 const DEFAULT_TAB = 1 // Map
 

@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 
-import SettingsPage from '../mobile/SettingsPage'
+import SettingsPage from '../settings/SettingsPage'
 import EntryPane from './EntryPane'
 import MainPane from './MainPane'
 
