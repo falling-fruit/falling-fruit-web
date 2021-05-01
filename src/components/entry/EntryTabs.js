@@ -33,29 +33,25 @@ export const TextContent = styled.article`
 
 // Rename Overview and Reviews
 
-const EntryTabs = () => {
-  console.log('tabs')
+const EntryTabs = () => (
+  <Page>
+    <EntryTab>
+      <TabList>
+        {/* TODO: Use Routing */}
+        <Tab>Overview</Tab>
+        <Tab>Reviews</Tab>
+      </TabList>
 
-  return (
-    <Page>
-      <EntryTab>
-        <TabList>
-          {/* TODO: Use Routing */}
-          <Tab>Overview</Tab>
-          <Tab>Reviews</Tab>
-        </TabList>
-
-        <TabPanels>
-          <TabPanel>
-            <EntryOverview />
-          </TabPanel>
-          <TabPanel>
-            <EntryReviews />
-          </TabPanel>
-        </TabPanels>
-      </EntryTab>
-    </Page>
-  )
-}
+      <TabPanels>
+        <TabPanel>
+          <EntryOverview />
+        </TabPanel>
+        <TabPanel>
+          <EntryReviews />
+        </TabPanel>
+      </TabPanels>
+    </EntryTab>
+  </Page>
+)
 
 export default EntryTabs

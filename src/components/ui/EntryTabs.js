@@ -4,7 +4,7 @@ import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 
 const EntryTab = styled(PageTabs)`
   [data-reach-tab-list] {
-    height: 40px;
+    height: 50px;
     [data-reach-tab] {
       display: flex;
 

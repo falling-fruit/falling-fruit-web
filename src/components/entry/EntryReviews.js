@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { getReviews } from '../../utils/api'
 import ImagePreview from '../ui/ImagePreview'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import { TextContent } from './EntryTabs'
 import Review from './Review'
 
@@ -25,16 +26,19 @@ const EntryReviews = () => {
 
   return (
     <TextContent>
-      <h2>Reviews</h2>
-      {console.log('data', reviewData)}
-      {reviewData &&
-        reviewData.map((review, key) => <Review key={key} review={review} />)}
-      {reviewData &&
+      <h2>{`Reviews ${reviewData ? `(${reviewData.length})` : ''}`}</h2>
+      {reviewData ? (
         reviewData.map((review, key) => (
-          <StyledImagePreview $small key={key}>
-            <img src={review.photo.thumb} alt={review.title}></img>
-          </StyledImagePreview>
-        ))}
+          <div key={key}>
+            <Review key={key} review={review} />
+            <StyledImagePreview $small key={key}>
+              <img src={review.photo.thumb} alt={review.title}></img>
+            </StyledImagePreview>
+          </div>
+        ))
+      ) : (
+        <LoadingIndicator vertical cover />
+      )}
     </TextContent>
   )
 }
