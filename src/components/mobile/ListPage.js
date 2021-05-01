@@ -48,6 +48,7 @@ const ListPage = () => {
     const fetchInitialListEntries = async () => {
       const { bounds, zoom, center } = view
       if (bounds?.ne.lat != null && zoom > 12) {
+        console.log('HERE')
         const locations = await fetchListEntries(bounds, center, 0)
         setHasMoreItems(locations[0] < locations[1])
         setLocations(locations.slice(2))

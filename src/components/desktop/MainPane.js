@@ -2,6 +2,7 @@ import { Cog } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
 import PagedList from '../list/PagedList'
+import Button from '../ui/Button'
 import {
   AccordionItem,
   SettingsAccordion,
@@ -9,10 +10,17 @@ import {
 } from '../ui/SettingsAccordion'
 import SearchOverlay from './SearchOverlay'
 
-const StyledContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+`
+
+const StyledButton = styled(Button)`
+  background-color: white;
+  color: ${({ theme }) => theme.orange};
+  margin: 10px 10px;
+  padding: 15px 0;
 `
 
 const StyledSettingsAccordion = styled(SettingsAccordion)`
@@ -21,15 +29,16 @@ const StyledSettingsAccordion = styled(SettingsAccordion)`
 `
 
 const MainPane = () => (
-  <StyledContainer>
+  <Container>
     <SearchOverlay />
     <PagedList />
+    <StyledButton>Add a Location</StyledButton>
     <StyledSettingsAccordion>
       <AccordionItem>
         <SettingsAccordionButton LeftIcon={Cog} text="Settings" />
       </AccordionItem>
     </StyledSettingsAccordion>
-  </StyledContainer>
+  </Container>
 )
 
 export default MainPane
