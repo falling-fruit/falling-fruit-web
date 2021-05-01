@@ -14,8 +14,8 @@ const StyledEntryBack = styled.div`
 `
 
 const EntryBack = () => {
-  const { state } = useLocation()
   const history = useHistory()
+  const { state } = useLocation()
 
   const onBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
