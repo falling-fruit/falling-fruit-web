@@ -62,11 +62,11 @@ const SettingsPage = ({ hideTitle }) => {
 
       {[
         {
-          field: t('showLabels'),
+          field: 'showLabels',
           label: t('Show Labels'),
         },
         {
-          field: t('showScientificNames'),
+          field: 'showScientificNames',
           label: t('Show Scientific Names'),
         },
       ].map(({ field, label }) => (
@@ -94,18 +94,18 @@ const SettingsPage = ({ hideTitle }) => {
       <RadioTiles
         options={[
           {
-            label: t('Default'),
+            label: 'Default',
             value: t('roadmap'),
             image: Road,
           },
           {
             label: t('Satellite'),
-            value: t('hybrid'),
+            value: 'hybrid',
             image: Satellite,
           },
           {
             label: t('Terrain'),
-            value: t('terrain'),
+            value: 'terrain',
             image: Terrain,
           },
         ]}

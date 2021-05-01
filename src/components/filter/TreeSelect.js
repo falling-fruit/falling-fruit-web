@@ -146,7 +146,7 @@ const TreeSelect = ({ data, onChange, popover, ...props }) => {
           placeholder: t('Select a type...'),
           inlineSearchPlaceholder: t('Search for a type...'),
         }}
-        showDropdown={popover ? t('default') : t('always')}
+        showDropdown={popover ? 'default' : 'always'}
         showPartiallySelected
         keepTreeOnSearch
         keepChildrenOnSearch

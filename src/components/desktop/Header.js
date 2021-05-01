@@ -68,8 +68,8 @@ const Header = () => {
       <img src="/logo_white.svg" alt="Falling Fruit Logo" />
       <nav>
         <ul>
-          <li className="active"> {t('Map')}</li>
-          <li> {t('About')}</li>
+          <li className="active">{t('Map')}</li>
+          <li>{t('About')}</li>
           <li>
             <button>
               <User /> {t('Login')}

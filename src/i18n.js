@@ -11,12 +11,11 @@ i18n
     react: {
       useSuspense: false,
     },
-    fallbackLng: 'en',
+    fallbackLng: 'en', // default language if no language is detected by LanguageDetector
     interpolation: {
       escapeValue: false,
     },
     backend: {
-      // for all available options read the backend's repository readme file
       loadPath: '/locales/{{lng}}.json',
     },
   })
