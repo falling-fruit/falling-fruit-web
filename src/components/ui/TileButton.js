@@ -1,28 +1,37 @@
 import styled from 'styled-components/macro'
 
-/*import { theme } from './GlobalStyle'*/
 import ResetButton from './ResetButton'
 
 const StyledResetButton = styled(ResetButton)`
-  border-radius: 7px;
+  border-radius: 10px;
   height: 100px;
   width: 100px;
-  background-color: gray;
+  background-color: #c4c4c4;
   position: relative;
-  border: 4px solid ${({ selected, theme }) => selected && theme.blue};
+  border: 4px solid
+    ${({ $selected, theme }) => ($selected ? theme.blue : theme.background)};
 
-  h5 {
-    bottom: 5%;
-    left: 5%;
-    z-index: 2;
+  p {
     position: absolute;
-    color: black;
+    left: 6px;
+    bottom: 5px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.black};
+  }
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `
 
-const TileButton = ({ label, selected, onClick }) => (
-  <StyledResetButton selected={selected} onClick={onClick}>
-    <h5>{label}</h5>
+const TileButton = ({ label, children, ...props }) => (
+  <StyledResetButton {...props}>
+    <p>{label}</p>
+    {children}
   </StyledResetButton>
 )
 

@@ -17,7 +17,7 @@ const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
   input {
     cursor: pointer;
   }
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 3px solid ${({ theme }) => theme.orange};

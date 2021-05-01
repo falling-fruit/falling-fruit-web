@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 
 /**
  * Default filter selections.
@@ -7,14 +7,25 @@ import { createContext, useContext, useState } from 'react'
  */
 const DEFAULT_SETTINGS = {
   showLabels: false,
+  showScientificNames: false,
+  mapView: 'default',
+  mapOverlay: 'none',
+  language: 'en',
+  overrideDataLanguage: false,
 }
 
 const SettingsContext = createContext()
 
+const settingsReducer = (settings, partialSettings) => ({
+  ...settings,
+  ...partialSettings,
+})
+
 const SettingsProvider = ({ children }) => {
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS)
+  const [settings, addSetting] = useReducer(settingsReducer, DEFAULT_SETTINGS)
+
   return (
-    <SettingsContext.Provider value={{ settings, setSettings }}>
+    <SettingsContext.Provider value={{ settings, addSetting }}>
       {children}
     </SettingsContext.Provider>
   )

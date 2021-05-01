@@ -1,196 +1,164 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { useSettings } from '../../contexts/SettingsContext'
 import Checkbox from '../ui/Checkbox'
-import CircleIcon from '../ui/CircleIcon'
+import LabeledRow from '../ui/LabeledRow'
+import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
-import TileButton from '../ui/TileButton'
-import ToggleSwitch from '../ui/ToggleSwitch'
-//import MapOverlayList from './mapOverlayList'
-//import MapViewList from './mapViewList'
 
-// rename to pagestyling or something
+const LANGUAGE_OPTIONS = [
+  { value: 'en', label: 'English' },
+  { value: 'fr', label: 'Français' },
+  { value: 'es', label: 'Español' },
+  { value: 'de', label: 'Deutsch' },
+  { value: 'it', label: 'Italiano' },
+]
+
 const Page = styled.div`
-  margin: 26px;
+  padding: 26px;
 
-  & > *:not(:last-child) {
+  h2 {
+    margin-top: 0;
+  }
+
+  > *:not(:last-child) {
     margin-bottom: 14px;
   }
 
-  h5 {
+  > h3 {
+    font-weight: normal;
+    font-size: 16px;
+    color: ${({ theme }) => theme.tertiaryText};
+    margin: 24px 0;
+  }
+
+  > h5 {
     margin: 0px;
     color: ${({ theme }) => theme.secondaryText};
   }
-
-  small {
-    color: ${({ theme }) => theme.tertiaryText};
-  }
 `
-
-// rename because this contains both the checkbox and the tag that goes with it
-const CheckboxLabels = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`
-
-// rename to something more holistic
-const ToggleLabels = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
-
-const StyledCircleIcon = styled(CircleIcon)`
-  height: 70px;
-  width: 70px;
-  border-radius: 5%;
-  color: gray;
-`
-
-// TODO: create a component that takes in both a label and a right and left component
-// TODO: use a map for the tile buttons
-// TODO: fix the css for the drop down
 
 const SettingsPage = () => {
-  const [mapView, setMapView] = useState()
-  const [mapOverlay, setMapOverlay] = useState()
-  const [showLabels, setShowLabels] = useState()
-  const [showScientificNames, setShowScientificNames] = useState()
-  const [dataLanguage, setDataLanguage] = useState()
+  const { settings, addSetting } = useSettings()
+  const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
 
   return (
-    // label tags for bicycle overview (html label look up)
     <Page>
       <h2>Settings</h2>
       <h3>Viewing Preferences</h3>
-      <CheckboxLabels>
-        <label htmlFor="Show Labels">
-          <Checkbox
-            id="Show Labels"
-            name="Show Labels"
-            onClick={() => setShowLabels(showLabels ? !showLabels : true)}
-            checked={showLabels}
-          />
-          <h5>Show Labels</h5>
-        </label>
-      </CheckboxLabels>
 
-      <CheckboxLabels>
-        <label htmlFor="Scientific Names">
-          <Checkbox
-            id="Scientific Names"
-            name="Scientific Names"
-            onClick={() =>
-              setShowScientificNames(
-                showScientificNames ? !showScientificNames : true,
-              )
-            }
-            checked={showScientificNames}
-          />
-          <h5>Show Scientific Names</h5>
-        </label>
-      </CheckboxLabels>
+      {[
+        {
+          field: 'showLabels',
+          label: 'Show Labels',
+        },
+        {
+          field: 'showScientificNames',
+          label: 'Show Scientific Names',
+        },
+      ].map(({ field, label }) => (
+        <LabeledRow
+          key={field}
+          left={
+            <Checkbox
+              id={field}
+              onClick={(e) =>
+                addSetting({
+                  [field]: e.target.checked,
+                })
+              }
+              checked={settings[field]}
+            />
+          }
+          label={<label htmlFor={field}>{label}</label>}
+        />
+      ))}
 
       <h3>Map Preferences</h3>
-      <ToggleLabels>
-        <h5>Show Labels</h5>
-        <ToggleSwitch />
-      </ToggleLabels>
 
       <h5>Map View</h5>
-      <ToggleLabels>
-        <TileButton
-          id="Default"
-          label="Default"
-          onClick={() => setMapView('Default')}
-          selected={mapView === 'Default'}
-        />
 
-        <TileButton
-          id="Satellite"
-          label="Satellite"
-          onClick={() => setMapView('Satellite')}
-          selected={mapView === 'Satellite'}
-        />
-
-        <TileButton
-          id="Terrain"
-          label="Terrain"
-          onClick={() => setMapView('Terrain')}
-          selected={mapView === 'Terrain'}
-        />
-      </ToggleLabels>
+      <RadioTiles
+        options={[
+          {
+            label: 'Default',
+            value: 'default',
+          },
+          {
+            label: 'Satellite',
+            value: 'satellite',
+          },
+          {
+            label: 'Terrain',
+            value: 'terrain',
+          },
+        ]}
+        value={settings.mapView}
+        onChange={(value) =>
+          addSetting({
+            mapView: value,
+          })
+        }
+      />
 
       <h5>Map Overlays</h5>
-      <ToggleLabels>
-        <TileButton
-          id="None"
-          label="None"
-          onClick={() => {
-            setMapOverlay('None')
-          }}
-          selected={mapOverlay === 'None'}
-        />
 
-        <TileButton
-          id="Biking"
-          label="Biking"
-          onClick={() => {
-            setMapOverlay('Biking')
-          }}
-          selected={mapOverlay === 'Biking'}
-        />
-
-        <TileButton
-          id="Transit"
-          label="Transit"
-          onClick={() => {
-            setMapOverlay('Transit')
-          }}
-          selected={mapOverlay === 'Transit'}
-        />
-      </ToggleLabels>
+      <RadioTiles
+        options={[
+          {
+            label: 'None',
+            value: 'none',
+          },
+          {
+            label: 'Biking',
+            value: 'biking',
+          },
+          {
+            label: 'Transit',
+            value: 'transit',
+          },
+        ]}
+        value={settings.mapOverlay}
+        onChange={(value) =>
+          addSetting({
+            mapOverlay: value,
+          })
+        }
+      />
 
       <h3>Language Preferences</h3>
 
-      <ToggleLabels>
-        <h5>Language Preference</h5>
-        <Select
-          width="200px"
-          options={[]}
-          placeholder="English"
-          isMulti
-          closeMenuOnSelect={false}
-          blurInputOnSelect={false}
-        />
-      </ToggleLabels>
+      <LabeledRow
+        label={<label htmlFor="languagePreference">Language Preference</label>}
+        right={
+          <Select
+            options={LANGUAGE_OPTIONS}
+            value={LANGUAGE_OPTIONS.find(
+              (option) => option.value === settings.language,
+            )}
+            onChange={(option) => addSetting({ language: option.value })}
+          />
+        }
+      />
 
-      <ToggleLabels>
-        <CheckboxLabels>
-          <label htmlFor="Data Language">
-            <Checkbox
-              name="Data Language"
-              id="Data Language"
-              onClick={() =>
-                setDataLanguage(dataLanguage ? !dataLanguage : true)
-              }
-              checked={dataLanguage}
-            />
-            <h5>Data Language</h5>
-          </label>
-        </CheckboxLabels>
-        <Select
-          width="200px"
-          options={[]}
-          placeholder="English"
-          isMulti
-          closeMenuOnSelect={false}
-          blurInputOnSelect={false}
-        />
-      </ToggleLabels>
-
-      <StyledCircleIcon />
+      <LabeledRow
+        left={
+          <Checkbox
+            id="dataLanguage"
+            onClick={(event) => setOverrideDataLanguage(event.target.checked)}
+            checked={overrideDataLanguage}
+          />
+        }
+        label={<label htmlFor="dataLanguage">Data Language</label>}
+        right={
+          <Select
+            options={[]}
+            isDisabled={!overrideDataLanguage}
+            placeholder="Select..."
+          />
+        }
+      />
     </Page>
   )
 }
