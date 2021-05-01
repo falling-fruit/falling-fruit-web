@@ -6,6 +6,8 @@ import CircleIcon from '../ui/CircleIcon'
 import { Select } from '../ui/Select'
 import TileButton from '../ui/TileButton'
 import ToggleSwitch from '../ui/ToggleSwitch'
+//import MapOverlayList from './mapOverlayList'
+//import MapViewList from './mapViewList'
 
 // rename to pagestyling or something
 const Page = styled.div`

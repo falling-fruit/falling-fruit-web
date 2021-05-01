@@ -4,6 +4,12 @@ import styled from 'styled-components/macro'
 
 const CheckBoxWrapper = styled.div`
   position: relative;
+
+  label {
+    font-weight: bold;
+    font-size: 14px;
+    color: ${({ theme }) => theme.headerText};
+  }
 `
 const CheckBoxLabel = styled.label`
   position: absolute;
@@ -46,10 +52,11 @@ const CheckBox = styled.input`
   }
 `
 
-const ToggleSwitch = () => (
+const ToggleSwitch = ({ label }) => (
   <CheckBoxWrapper>
     <CheckBox id="checkbox" type="checkbox" />
     <CheckBoxLabel htmlFor="checkbox" />
+    <label>{label}</label>
   </CheckBoxWrapper>
 )
 
