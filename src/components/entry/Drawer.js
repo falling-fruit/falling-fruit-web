@@ -28,7 +28,7 @@ const Overflow = styled.div`
   width: 100%;
   bottom: 0px;
   top: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   & > button#toggle {
     margin: 0;
@@ -40,9 +40,16 @@ const Overflow = styled.div`
       width: 4em;
       position: absolute;
       top: -10px;
-      left: calc(42e);
+      left: calc(50% - 2em);
       background: blue;
       border-radius: 3px;
+    }
+    &::after {
+      content: '';
+      height: 1em;
+      width: 100%;
+      position: absolute;
+      top: -1em;
     }
   }
 
@@ -197,7 +204,6 @@ const PullContainer = forwardRef(
         <Overflow open={open}>
           <button
             id="toggle"
-            style={{ backgroundColor: 'red', opacity: 0.5 }}
             data-_pull
             onClick={() => setContainerOpen(!open)}
           />

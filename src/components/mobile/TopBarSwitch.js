@@ -8,7 +8,7 @@ import TopBar from '../ui/TopBar'
 const TopBarSwitch = () => (
   <Switch>
     <Route path="/settings"></Route>
-    <Route path={['/map/entry/new', '/list/entry/new']}>
+    <Route path={['/map/entry/new']}>
       <TopBar>
         <LocationNav />
       </TopBar>

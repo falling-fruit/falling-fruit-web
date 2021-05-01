@@ -13,7 +13,9 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
 
   const [tabIndex, setTabIndex] = useState(() => {
     // Set the initial tabIndex from the URL on page load
-    const matchedIndex = tabPaths.indexOf(pathname)
+    const matchedIndex = tabPaths.findIndex((tabName) =>
+      pathname.includes(tabName),
+    )
     return matchedIndex === -1 ? defaultTabIndex : matchedIndex
   })
 

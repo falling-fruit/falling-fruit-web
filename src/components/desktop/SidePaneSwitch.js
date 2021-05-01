@@ -9,7 +9,7 @@ const SidePaneSwitch = () => (
     <Route exact path="/settings">
       <SettingsPane />
     </Route>
-    <Route exact path="/entry/:id">
+    <Route exact path="/map/entry/:id">
       <EntryPane />
     </Route>
     <Route exact path="/map">

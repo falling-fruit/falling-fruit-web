@@ -75,7 +75,7 @@ const MapPage = () => {
     }
   }, [searchViewport, setView])
 
-  const isAddingLocation = location.pathname === '/entry/new'
+  const isAddingLocation = location.pathname === '/map/entry/new'
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -153,7 +153,7 @@ const MapPage = () => {
   }
 
   const handleAddLocationClick = () => {
-    history.push('/entry/new')
+    history.push('/map/entry/new')
   }
 
   return (
