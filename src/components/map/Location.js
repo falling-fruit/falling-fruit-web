@@ -1,6 +1,7 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import { transparentize } from 'polished'
 import PropTypes from 'prop-types'
+import { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import ResetButton from '../ui/ResetButton'
@@ -31,6 +32,7 @@ const LocationButton = styled(ResetButton)`
     color: ${({ theme }) => theme.orange};
   }
 `
+
 const Label = styled.div`
   font-size: 14px;
   color: ${({ theme }) => theme.headerText};
@@ -46,13 +48,17 @@ const Label = styled.div`
   white-space: nowrap;
   z-index: 1;
 `
-const Location = ({ label, selected, ...props }) => (
+
+const Location = memo(({ label, selected, ...props }) => (
   <>
     {/* "selected" will be used in a future PR which will put a pin on the location when it's clicked */}
     <LocationButton {...props}>{selected && <Map size={48} />}</LocationButton>
     <Label>{label}</Label>
   </>
-)
+))
+
+Location.displayName = 'Location'
+
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
   label: PropTypes.string,

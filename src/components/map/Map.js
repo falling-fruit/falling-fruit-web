@@ -35,6 +35,7 @@ const Map = ({
     onChange={onViewChange}
     resetBoundsOnResize
   >
+    {console.log('map rerender')}
     {!geolocation.loading && (
       <Geolocation
         onClick={onGeolocationClick}
