@@ -53,21 +53,21 @@ const Page = styled.div`
 const SettingsPage = ({ hideTitle }) => {
   const { settings, addSetting } = useSettings()
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   return (
     <Page hideTitle={hideTitle}>
       {!hideTitle && <h2>Settings</h2>}
-      <h3>Viewing Preferences</h3>
+      <h3>{t('Viewing Preferences')}</h3>
 
       {[
         {
-          field: 'showLabels',
-          label: 'Show Labels',
+          field: t('showLabels'),
+          label: t('Show Labels'),
         },
         {
-          field: 'showScientificNames',
-          label: 'Show Scientific Names',
+          field: t('showScientificNames'),
+          label: t('Show Scientific Names'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -87,25 +87,25 @@ const SettingsPage = ({ hideTitle }) => {
         />
       ))}
 
-      <h3>Map Preferences</h3>
+      <h3>{t('Map Preferences')}</h3>
 
-      <h5>Map View</h5>
+      <h5>{t('Map View')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: 'Default',
-            value: 'roadmap',
+            label: t('Default'),
+            value: t('roadmap'),
             image: Road,
           },
           {
-            label: 'Satellite',
-            value: 'hybrid',
+            label: t('Satellite'),
+            value: t('hybrid'),
             image: Satellite,
           },
           {
-            label: 'Terrain',
-            value: 'terrain',
+            label: t('Terrain'),
+            value: t('terrain'),
             image: Terrain,
           },
         ]}
@@ -117,22 +117,22 @@ const SettingsPage = ({ hideTitle }) => {
         }
       />
 
-      <h5>Map Overlays</h5>
+      <h5>{t('Map Overlays')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: 'None',
+            label: t('None'),
             value: null,
             image: Road,
           },
           {
-            label: 'Biking',
+            label: t('Biking'),
             value: 'BicyclingLayer',
             image: Bicycling,
           },
           {
-            label: 'Transit',
+            label: t('Transit'),
             value: 'TransitLayer',
             image: Transit,
           },
@@ -145,10 +145,12 @@ const SettingsPage = ({ hideTitle }) => {
         }
       />
 
-      <h3>Language Preferences</h3>
+      <h3>{t('Language Preferences')}</h3>
 
       <LabeledRow
-        label={<label htmlFor="languagePreference">Language Preference</label>}
+        label={
+          <label htmlFor="languagePreference">{t('Language Preference')}</label>
+        }
         right={
           <Select
             options={LANGUAGE_OPTIONS}
@@ -157,6 +159,7 @@ const SettingsPage = ({ hideTitle }) => {
             )}
             onChange={(option) => {
               i18n.changeLanguage(option.value)
+              console.log(i18n.language)
             }}
           />
         }
@@ -170,12 +173,12 @@ const SettingsPage = ({ hideTitle }) => {
             checked={overrideDataLanguage}
           />
         }
-        label={<label htmlFor="dataLanguage">Data Language</label>}
+        label={<label htmlFor="dataLanguage">{t('Data Language')}</label>}
         right={
           <Select
             options={[]}
             isDisabled={!overrideDataLanguage}
-            placeholder="Select..."
+            placeholder={t('Select...')}
           />
         }
       />
