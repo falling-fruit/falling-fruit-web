@@ -7,7 +7,7 @@ import Location from './Location'
 
 /**
  * Wrapper component around google-map-react.
- * @param {string} googleMapsAPIKey - The google maps API key
+ * @param {string} apiKey - The google maps API key
  * @param {Object} view - The current view state
  * @param {Object[]} locations - The locations to display
  * @param {Object[]} clusters - The clusters to display
@@ -17,7 +17,7 @@ import Location from './Location'
  * @param {boolean} showLabels - Will display labels under locations if true
  */
 const Map = ({
-  googleMapsAPIKey,
+  apiKey,
   view,
   geolocation,
   locations,
@@ -27,9 +27,13 @@ const Map = ({
   onLocationClick,
   onViewChange,
   showLabels,
+  mapType,
 }) => (
   <GoogleMap
-    bootstrapURLKeys={{ key: googleMapsAPIKey }}
+    bootstrapURLKeys={{ key: apiKey }}
+    options={() => ({
+      mapTypeId: mapType,
+    })}
     center={view.center}
     zoom={view.zoom}
     onChange={onViewChange}
@@ -66,7 +70,7 @@ const Map = ({
         lng={location.lng}
         // TODO: Add pin on location click
         // selected={location.id === selectedLocation?.id}
-        label={showLabels && location.type_names[0]}
+        label={showLabels ? location.type_names[0] : undefined}
       />
     ))}
   </GoogleMap>

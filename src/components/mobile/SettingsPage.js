@@ -83,7 +83,7 @@ const SettingsPage = () => {
         options={[
           {
             label: 'Default',
-            value: 'default',
+            value: 'roadmap',
           },
           {
             label: 'Satellite',
@@ -94,10 +94,10 @@ const SettingsPage = () => {
             value: 'terrain',
           },
         ]}
-        value={settings.mapView}
+        value={settings.mapType}
         onChange={(value) =>
           addSetting({
-            mapView: value,
+            mapType: value,
           })
         }
       />
