@@ -1,7 +1,7 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useHistory, useParams, useRouteMatch } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
@@ -49,9 +49,10 @@ const LocationText = styled(ResetButton)`
 
 // Wraps the entire page and gives it a top margin if on mobile
 const Page = styled.div`
-  /* @media ${({ theme }) => theme.device.mobile} {
-    padding-top: 87px;
-  } */
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ isDrawer }) =>
+      isDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
+  }
 
   overflow: auto;
   width: 100%;
@@ -99,11 +100,12 @@ const EntryDetails = ({ className }) => {
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
-  const { path } = useRouteMatch()
-
-  console.log(path)
+  const { pathname } = useLocation()
 
   useEffect(() => {
+    // clear location data when id changes
+    setLocationData(undefined)
+
     async function fetchEntryDetails() {
       // Show loading between entry selections
       const locationData = await getLocationById(id)
@@ -148,7 +150,7 @@ const EntryDetails = ({ className }) => {
   const isReady = locationData && typesData
 
   return (
-    <Page className={className}>
+    <Page className={className} isDrawer={pathname.split('/')[1] === 'map'}>
       {isReady ? (
         <>
           <PhotoGrid

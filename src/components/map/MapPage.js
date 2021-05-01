@@ -140,7 +140,7 @@ const MapPage = () => {
 
   const handleLocationClick = (location) => {
     history.push({
-      pathname: `/entry/${location.id}`,
+      pathname: `/map/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
   }
