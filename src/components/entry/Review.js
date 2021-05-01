@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 
-import { formatISOString } from '../entry/textFormatters'
-import Rating from './Rating'
+import Rating from '../ui/Rating'
+import { formatISOString } from './textFormatters'
 
 const Label = styled.p`
   font-size: 12px;

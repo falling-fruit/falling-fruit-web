@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { getReviews } from '../../utils/api'
-import Review from '../ui/Review'
 import { Page, TextContent } from './EntryTabs'
+import Review from './Review'
 
 const EntryReviews = () => {
   const [reviewData, setReviewData] = useState()
@@ -21,7 +21,6 @@ const EntryReviews = () => {
     <Page>
       <TextContent>
         <h2>Reviews</h2>
-
         {reviewData &&
           reviewData.map((review, key) => <Review key={key} review={review} />)}
       </TextContent>
