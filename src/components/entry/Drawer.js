@@ -69,7 +69,8 @@ export default function Drawer({ children }) {
       // when the user releases the sheet, we check whether it passed
       // the threshold for it to close, or if we reset it to its open position
       if (last) {
-        vy > 0.5 ? close(vy) : open({ canceled })
+        console.log(my, height, vy)
+        vy > 0.25 ? close(vy) : open({ canceled })
       }
 
       // when the user keeps dragging, we just move the sheet according to
