@@ -16,7 +16,8 @@ const CircleIcon = styled.div`
   ${StyledIconBase} {
     width: 65%;
   }
-  & > img {
+
+  > img {
     width: 100%;
     height: 100%;
     object-fit: cover;

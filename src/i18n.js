@@ -21,6 +21,4 @@ i18n
     },
   })
 
-//how to use language detector and namespaces for this (add init), fallback UI, (doesn't work without lng)
-
 export default i18n

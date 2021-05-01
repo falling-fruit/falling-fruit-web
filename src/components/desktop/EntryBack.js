@@ -1,6 +1,6 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import BackButton from '../ui/BackButton'
@@ -15,6 +15,7 @@ const StyledEntryBack = styled.div`
 `
 
 const EntryBack = () => {
+  const history = useHistory()
   const { state } = useLocation()
   const { t } = useTranslation()
 

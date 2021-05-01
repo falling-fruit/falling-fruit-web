@@ -9,6 +9,7 @@ import { useMap } from '../../contexts/MapContext'
 import { getLocationById, getTypeById } from '../../utils/api'
 import { getStreetAddress, hasSeasonality } from '../../utils/locationInfo'
 import { getZoomedInView } from '../../utils/viewportBounds'
+import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -100,6 +101,7 @@ const EntryDetails = ({ className }) => {
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
 
   const { t } = useTranslation()
 
@@ -145,15 +147,22 @@ const EntryDetails = ({ className }) => {
     </TagList>
   )
 
+  const allTypeNames = locationData && locationData.type_names.join(', ')
   const isReady = locationData && typesData
 
   return (
     <Page className={className}>
       {isReady ? (
         <>
+          <ReportModal
+            locationId={locationData.id}
+            name={allTypeNames}
+            isOpen={isReportModalOpen}
+            onDismiss={() => setIsReportModalOpen(false)}
+          />
           <PhotoGrid
             photos={locationData.photos}
-            altText={locationData.type_names.join(', ')}
+            altText={allTypeNames}
             handleViewLightbox={handleViewLightbox}
           />
           <TextContent>
@@ -187,9 +196,13 @@ const EntryDetails = ({ className }) => {
               </p>
 
               <div>
-                <Button leftIcon={<Star />}>{t('Review')}</Button>
-                <Button leftIcon={<Flag />} secondary>
-                  {t('Report')}
+                <Button leftIcon={<Star />}>Review</Button>
+                <Button
+                  leftIcon={<Flag />}
+                  secondary
+                  onClick={() => setIsReportModalOpen(true)}
+                >
+                  Report
                 </Button>
               </div>
             </Description>
