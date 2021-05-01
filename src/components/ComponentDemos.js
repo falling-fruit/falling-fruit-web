@@ -1,12 +1,15 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { getTypes } from '../utils/api'
+import { ReportModal } from './form/ReportModal'
 import Button from './ui/Button'
 import CaptionInput from './ui/CaptionInput'
 import Input from './ui/Input'
 import ListEntry from './ui/ListEntry'
 import ProgressBar from './ui/ProgressBar'
+import { Select } from './ui/Select'
 import {
   AccordionItem,
   AccordionPanel,
@@ -16,13 +19,51 @@ import {
 import { Slider } from './ui/Slider'
 import { Tag, TagList } from './ui/Tag'
 
-const ComponentDemos = () => {
+const SettingsPage = () => {
+  // TODO: Move form components and type select logic to separate Form page
+  const [showDialog, setShowDialog] = useState(false)
   const [currentStep, setCurrentStep] = useState(2)
+  const [typeOptions, setTypeOptions] = useState([])
+
+  useEffect(() => {
+    async function fetchTypes() {
+      const types = await getTypes()
+      const options = types.map((type) => ({
+        value: type.id,
+        label: type.name,
+      }))
+      setTypeOptions(options)
+    }
+    fetchTypes()
+  }, [])
+
+  const handleTypeSelect = (types) => {
+    const typeIds = types.map((type) => type.value)
+    console.log('Selected type IDs: ', typeIds)
+  }
+
   return (
     <>
-      <p>Component Demos</p>
-      <Button icon={<Star />}>Review</Button>
-      <Button icon={<Flag />} secondary>
+      <p>Settings</p>
+      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+      <ReportModal
+        name="American Tulip Tree"
+        isOpen={showDialog}
+        onDismiss={() => setShowDialog(false)}
+      />
+      <br />
+
+      <Select
+        onChange={handleTypeSelect}
+        options={typeOptions}
+        placeholder="Select a type..."
+        isMulti
+        closeMenuOnSelect={false}
+        blurInputOnSelect={false}
+      />
+      <br />
+      <Button leftIcon={<Star />}>Review</Button>
+      <Button leftIcon={<Flag />} secondary>
         Report
       </Button>
       <br />
@@ -65,6 +106,7 @@ const ComponentDemos = () => {
             alt="tree"
           />
         }
+        onDelete={() => console.log('deleted')}
       />
       <Slider
         style={{ margin: '0 40px' }}
@@ -95,8 +137,10 @@ const ComponentDemos = () => {
         step={currentStep}
         onChange={setCurrentStep}
       />
+      <br />
+      <br />
     </>
   )
 }
 
-export default ComponentDemos
+export default SettingsPage
