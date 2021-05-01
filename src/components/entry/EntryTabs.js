@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 
 import { EntryTab, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
-import EntryDetails from './EntryDetails'
+import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 
 // Wraps the entire page and gives it a top margin if on mobile
@@ -46,7 +46,7 @@ const EntryTabs = () => {
 
       <TabPanels>
         <TabPanel>
-          <EntryDetails />
+          <EntryOverview />
         </TabPanel>
         <TabPanel>
           <EntryReviews />
