@@ -47,4 +47,25 @@ const getFormattedLocationInfo = async (lat, lng) => {
   }
 }
 
-export { getFormattedLocationInfo, getLocationInfo }
+/**
+ * Reverse geocodes latitude and longitude to returns the street address
+ */
+const getStreetAddress = async (lat, lng) => {
+  const geocoder = new window.google.maps.Geocoder()
+  const { results } = await geocoder.geocode({ location: { lat, lng } })
+  return results[0].formatted_address
+}
+
+/**
+ * Returns whether the location has seasonality information
+ */
+const hasSeasonality = (locationData) =>
+  locationData.no_season ||
+  (locationData.season_start && locationData.season_stop)
+
+export {
+  getFormattedLocationInfo,
+  getLocationInfo,
+  getStreetAddress,
+  hasSeasonality,
+}

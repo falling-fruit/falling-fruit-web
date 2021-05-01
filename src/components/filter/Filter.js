@@ -24,7 +24,7 @@ const StyledFilter = styled.div`
 
   .edible-type-text {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: bold;
     color: ${({ theme }) => theme.secondaryText};
     margin-top: 18px;
     margin-bottom: 7px;
@@ -57,26 +57,29 @@ const Filter = ({ isOpen }) => {
           muni: filters.muni,
         }
         const types = await getTypes(query)
+        const typeIds = types.map((type) => type.id)
 
-        // Keep only types that still exist in the current view
-        const newTypes = types.map((type) => type.id)
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          types:
+        setFilters((prevFilters) => {
+          // Keep only types that still exist in the current view
+          const newTypes =
             prevFilters.types === null
-              ? newTypes
-              : intersection(prevFilters.types, newTypes),
-        }))
+              ? typeIds
+              : intersection(prevFilters.types, typeIds)
 
-        setTreeData(buildTypeSchema(types, filters.types))
+          setTreeData(buildTypeSchema(types, newTypes))
+
+          return {
+            ...prevFilters,
+            types: newTypes,
+          }
+        })
       }
     }
 
     if (isOpen) {
       updateTypesTree()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [view, isOpen])
+  }, [view, isOpen, filters.muni, setFilters])
 
   return (
     isOpen && (

@@ -65,6 +65,8 @@ const Map = ({
         }}
         lat={location.lat}
         lng={location.lng}
+        // TODO: Add pin on location click
+        // selected={location.id === selectedLocation?.id}
         label={showLabels && location.type_names[0]}
       />
     ))}

@@ -1,6 +1,8 @@
 import { ImageAdd } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
+import ResetButton from '../ui/ResetButton'
+
 const StyledPhotoGrid = styled.figure`
   padding: 0;
   margin: 0 auto;
@@ -58,7 +60,7 @@ const ImageUpload = styled.label`
   border-radius: 4px;
 
   border: 2px solid ${({ theme }) => theme.text};
-  font-weight: 700;
+  font-weight: bold;
 
   svg {
     width: 31px;
@@ -74,11 +76,8 @@ const ImageUpload = styled.label`
   }
 `
 
-const ExtraImagesWrapper = styled.button`
+const ExtraImagesWrapper = styled(ResetButton)`
   display: block;
-  cursor: pointer;
-  padding: 0;
-  border: none;
   position: relative;
   border-radius: 4px;
   @media only screen and ${({ theme }) => theme.device.mobile} {
@@ -114,7 +113,7 @@ const ExtraImagesWrapper = styled.button`
     justify-content: center;
     align-items: center;
 
-    font-weight: 700;
+    font-weight: bold;
     font-size: 13px;
 
     & > span {
