@@ -57,7 +57,7 @@ const SettingsPage = ({ hideTitle }) => {
 
   return (
     <Page hideTitle={hideTitle}>
-      {!hideTitle && <h2>Settings</h2>}
+      {!hideTitle && <h2>{t('Settings')}</h2>}
       <h3>{t('Viewing Preferences')}</h3>
 
       {[
