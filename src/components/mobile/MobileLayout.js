@@ -41,17 +41,17 @@ const MobileLayout = () => {
           <Route path="/list/entry/:id">
             <EntryDetails />
           </Route>
-          <Route path={['/map', '/list', '/settings', '/entry/new']}>
-            {tabPanels}
-          </Route>
         </Switch>
+        <Route path={['/map', '/list', '/settings', '/entry/new']}>
+          {tabPanels}
+        </Route>
       </TabPanels>
       <Switch>
         <Route
           path={['/map/entry/new/details', '/list/entry/new/details']}
         ></Route>
         <Route>
-          <TabList>{tabList}</TabList>
+          <TabList style={{ zIndex: 999 }}>{tabList}</TabList>
         </Route>
       </Switch>
     </PageTabs>
