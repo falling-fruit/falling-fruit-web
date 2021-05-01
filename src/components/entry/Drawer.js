@@ -29,7 +29,6 @@ const Overflow = styled.div`
   bottom: 0px;
   top: 0;
   overflow: hidden;
-  padding-bottom: 20px;
 
   & > button#toggle {
     margin: 0;
@@ -86,6 +85,10 @@ const PullContainer = forwardRef(
     }))
 
     const setContainerOpen = (shouldOpen) => {
+      if (shouldOpen === open) {
+        return
+      }
+
       if (shouldOpen) {
         set({
           top: 0,
