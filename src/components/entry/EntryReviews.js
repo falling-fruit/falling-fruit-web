@@ -38,6 +38,7 @@ const EntryReviews = () => {
         ))
       ) : (
         <LoadingIndicator vertical cover />
+        /* Is the loading indicated centered correctly? */
       )}
     </TextContent>
   )

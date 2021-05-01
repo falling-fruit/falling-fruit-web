@@ -69,8 +69,11 @@ const Description = styled.section`
     margin-right: 14px;
   }
 `
+const EntryOverviewContainer = styled.div`
+  height: 100%;
+`
 
-const EntryDetails = ({ className }) => {
+const EntryOverview = ({ className }) => {
   const { id } = useParams()
   const { setView } = useMap()
   const [locationData, setLocationData] = useState()
@@ -126,7 +129,9 @@ const EntryDetails = ({ className }) => {
   const isReady = locationData && typesData
 
   return (
-    <div className={className}>
+    <EntryOverviewContainer className={className}>
+      {/* Probably a better way to center the loading indicator?
+       */}
       {isReady ? (
         <>
           <ReportModal
@@ -186,8 +191,8 @@ const EntryDetails = ({ className }) => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </div>
+    </EntryOverviewContainer>
   )
 }
 
-export default EntryDetails
+export default EntryOverview

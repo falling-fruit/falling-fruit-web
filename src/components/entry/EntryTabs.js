@@ -41,7 +41,6 @@ const EntryTabs = () => (
         <Tab>Overview</Tab>
         <Tab>Reviews</Tab>
       </TabList>
-
       <TabPanels>
         <TabPanel>
           <EntryOverview />
