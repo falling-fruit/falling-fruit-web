@@ -33,10 +33,28 @@ const Overflow = styled.div`
   & > button#toggle {
     margin: 0;
     width: 100%;
+
+    &::before {
+      content: '';
+      height: 6px;
+      width: 4em;
+      position: absolute;
+      top: -10px;
+      left: calc(42e);
+      background: blue;
+      border-radius: 3px;
+    }
   }
+
   *:not(#toggle) {
     pointer-events: ${({ open }) => (open ? 'auto' : 'none !important')};
   }
+`
+
+const EntryWrapper = styled.div`
+  /* margin: 20vh 0; */
+  height: 100%;
+  overflow: auto;
 `
 
 const Container = styled(animated.div)`
@@ -182,18 +200,15 @@ const PullContainer = forwardRef(
             style={{ backgroundColor: 'red', opacity: 0.5 }}
             data-_pull
             onClick={() => setContainerOpen(!open)}
-          >
-            ^
-          </button>
-          <div
-            style={{ height: '100%', overflow: 'auto' }}
+          />
+          <EntryWrapper
             onClick={() => !open && setContainerOpen(true)}
             role={!open && 'button'}
-            tabIndex={!open ? 0 : -1}
+            tabIndex={-1}
             onKeyDown={() => !open && console.log('entered')}
           >
             {children}
-          </div>
+          </EntryWrapper>
         </Overflow>
       </Container>
     )
