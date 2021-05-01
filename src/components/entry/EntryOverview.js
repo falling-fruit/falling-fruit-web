@@ -69,9 +69,6 @@ const Description = styled.section`
     margin-right: 14px;
   }
 `
-const EntryOverviewContainer = styled.div`
-  height: 100%;
-`
 
 const EntryOverview = ({ className }) => {
   const { id } = useParams()
@@ -129,8 +126,8 @@ const EntryOverview = ({ className }) => {
   const isReady = locationData && typesData
 
   return (
-    <EntryOverviewContainer className={className}>
-      {/* Probably a better way to center the loading indicator?
+    <div className={className}>
+      {/* Need to center this loading indicator!
        */}
       {isReady ? (
         <>
@@ -191,7 +188,7 @@ const EntryOverview = ({ className }) => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </EntryOverviewContainer>
+    </div>
   )
 }
 
