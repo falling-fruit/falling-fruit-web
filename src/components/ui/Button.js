@@ -19,6 +19,7 @@ const StyledButton = styled(ResetButton)`
   box-sizing: border-box;
   border-radius: 100px;
   padding: 0 24px;
+  // TODO: make raised and add a location button in main pane
 
   svg {
     height: 1em;

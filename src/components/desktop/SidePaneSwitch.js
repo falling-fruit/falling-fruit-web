@@ -1,13 +1,13 @@
 import { Route, Switch } from 'react-router-dom'
 
-import SettingsPage from '../settings/SettingsPage'
 import EntryPane from './EntryPane'
 import MainPane from './MainPane'
+import SettingsPane from './SettingsPane'
 
 const SidePaneSwitch = () => (
   <Switch>
     <Route exact path="/settings">
-      <SettingsPage />
+      <SettingsPane />
     </Route>
     <Route exact path="/entry/:id">
       <EntryPane />

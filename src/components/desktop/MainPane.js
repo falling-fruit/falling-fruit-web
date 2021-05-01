@@ -1,4 +1,5 @@
 import { Cog } from '@styled-icons/boxicons-solid'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import PagedList from '../list/PagedList'
@@ -28,17 +29,30 @@ const StyledSettingsAccordion = styled(SettingsAccordion)`
   border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
 `
 
-const MainPane = () => (
-  <Container>
-    <SearchOverlay />
-    <PagedList />
-    <StyledButton>Add a Location</StyledButton>
-    <StyledSettingsAccordion>
-      <AccordionItem>
-        <SettingsAccordionButton LeftIcon={Cog} text="Settings" />
-      </AccordionItem>
-    </StyledSettingsAccordion>
-  </Container>
-)
+const MainPane = () => {
+  const history = useHistory()
+
+  return (
+    <Container>
+      <SearchOverlay />
+      <PagedList />
+      <StyledButton>Add a Location</StyledButton>
+      <StyledSettingsAccordion>
+        <AccordionItem>
+          <SettingsAccordionButton
+            LeftIcon={Cog}
+            text="Settings"
+            onClick={() =>
+              history.push({
+                pathname: '/settings',
+                state: { fromPage: '/map' },
+              })
+            }
+          />
+        </AccordionItem>
+      </StyledSettingsAccordion>
+    </Container>
+  )
+}
 
 export default MainPane
