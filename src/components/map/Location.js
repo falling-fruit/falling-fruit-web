@@ -19,6 +19,7 @@ const LocationButton = styled(ResetButton)`
   background: ${({ theme }) => transparentize(0.25, theme.blue)};
   transform: translate(-50%, -50%);
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.12);
+  z-index: 2;
 
   &:focus {
     outline: none;

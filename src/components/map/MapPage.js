@@ -177,6 +177,8 @@ const MapPage = () => {
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
+        mapType={settings.mapType}
+        layerTypes={settings.mapLayers}
         showLabels={settings.showLabels}
       />
     </div>

@@ -1,3 +1,5 @@
+import { MONTH_LABELS } from '../form/LocationForm'
+
 /**
  * Helper function to convert ISO date string into "month date, year" format.
  * @param {string} dateString - The ISO date to convert
@@ -21,5 +23,5 @@ export const formatSeasonality = (startMonth, endMonth, noSeason) => {
   if (noSeason || (startMonth === 0 && endMonth === 11)) {
     return 'Year Round'
   }
-  return `In season from ${startMonth} to ${endMonth}`
+  return `In season from ${MONTH_LABELS[startMonth]} to ${MONTH_LABELS[endMonth]}`
 }

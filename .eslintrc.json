@@ -22,6 +22,7 @@
         "argsIgnorePattern": "^_"
       }
     ],
+    "@hack4impact-uiuc/no-null-ternary": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       1,

@@ -2,8 +2,8 @@ import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
 
 import MapPage from '../map/MapPage'
+import SettingsPage from '../settings/SettingsPage'
 import ListPage from './ListPage'
-import SettingsPage from './SettingsPage'
 
 const DEFAULT_TAB = 1 // Map
 
