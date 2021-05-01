@@ -136,6 +136,7 @@ const PullContainer = forwardRef(
 
     useEffect(() => {
       set({ top: overflowHeight })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [overflowHeight])
 
     const bind = useDrag(({ down, movement, cancel, event }) => {
