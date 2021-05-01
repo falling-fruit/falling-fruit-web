@@ -1,5 +1,6 @@
 import { useRect } from '@reach/rect'
 import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
@@ -21,6 +22,7 @@ const LoadingContainer = styled.div`
 `
 
 const ListPage = () => {
+  const { pathname } = useLocation()
   const { view } = useMap()
   const [locations, setLocations] = useState([])
   const [hasMoreItems, setHasMoreItems] = useState(false)
@@ -47,8 +49,7 @@ const ListPage = () => {
   useEffect(() => {
     const fetchInitialListEntries = async () => {
       const { bounds, zoom, center } = view
-      if (bounds?.ne.lat != null && zoom > 12) {
-        console.log('HERE')
+      if (bounds?.ne.lat != null && zoom > 12 && pathname === '/list') {
         const locations = await fetchListEntries(bounds, center, 0)
         setHasMoreItems(locations[0] < locations[1])
         setLocations(locations.slice(2))
@@ -57,7 +58,22 @@ const ListPage = () => {
       }
     }
     fetchInitialListEntries()
-  }, [view])
+  }, [view, pathname])
+
+  useEffect(() => {
+    const fetchInitialListEntries = async () => {
+      const { bounds, zoom, center } = view
+      if (bounds?.ne.lat != null && zoom > 12 && pathname === 'list') {
+        console.log('HERE: ', pathname)
+        const locations = await fetchListEntries(bounds, center, 0)
+        setHasMoreItems(locations[0] < locations[1])
+        setLocations(locations.slice(2))
+      } else {
+        setLocations([])
+      }
+    }
+    fetchInitialListEntries()
+  }, [view, pathname])
 
   const loadNextPage = async () => {
     setIsNextPageLoading(true)
