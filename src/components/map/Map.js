@@ -28,12 +28,14 @@ const Map = ({
   onViewChange,
   showLabels,
   mapType,
+  layerTypes,
 }) => (
   <GoogleMap
     bootstrapURLKeys={{ key: apiKey }}
     options={() => ({
       mapTypeId: mapType,
     })}
+    layerTypes={layerTypes}
     center={view.center}
     zoom={view.zoom}
     onChange={onViewChange}
@@ -85,6 +87,8 @@ Map.propTypes = {
   onViewChange: PropTypes.func.isRequired,
   onClusterClick: PropTypes.func.isRequired,
   onLocationClick: PropTypes.func.isRequired,
+  mapType: PropTypes.string,
+  layerTypes: PropTypes.arrayOf(PropTypes.string),
   showLabels: PropTypes.bool,
 }
 

@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS = {
   showLabels: false,
   showScientificNames: false,
   mapType: 'roadmap',
-  mapOverlay: 'none',
+  mapLayers: [],
   language: 'en',
   overrideDataLanguage: false,
 }

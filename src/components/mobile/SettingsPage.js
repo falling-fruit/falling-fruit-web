@@ -17,6 +17,7 @@ const LANGUAGE_OPTIONS = [
 
 const Page = styled.div`
   padding: 26px;
+  overflow: auto;
 
   h2 {
     margin-top: 0;
@@ -87,7 +88,7 @@ const SettingsPage = () => {
           },
           {
             label: 'Satellite',
-            value: 'satellite',
+            value: 'hybrid',
           },
           {
             label: 'Terrain',
@@ -108,24 +109,26 @@ const SettingsPage = () => {
         options={[
           {
             label: 'None',
-            value: 'none',
+            value: null,
           },
           {
             label: 'Biking',
-            value: 'biking',
+            value: 'BicyclingLayer',
           },
           {
             label: 'Transit',
-            value: 'transit',
+            value: 'TransitLayer',
           },
         ]}
-        value={settings.mapOverlay}
+        value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
         onChange={(value) =>
           addSetting({
-            mapOverlay: value,
+            mapLayers: value ? [value] : [],
           })
         }
       />
+
+      {console.log(settings)}
 
       <h3>Language Preferences</h3>
 
