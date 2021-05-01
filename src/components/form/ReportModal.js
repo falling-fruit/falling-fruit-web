@@ -16,6 +16,7 @@ const PROBLEM_TYPE_OPTIONS = [
 ]
 
 const StyledModal = styled(Modal)`
+  margin: 15vh auto;
   h3 {
     margin-top: 0;
   }
@@ -35,7 +36,12 @@ const Buttons = styled.div`
   }
 `
 
-const ReportModal = ({ typeId: _typeId, name, onDismiss, ...props }) => (
+const ReportModal = ({
+  locationId: _locationId,
+  name,
+  onDismiss,
+  ...props
+}) => (
   <StyledModal aria-label="Report dialog" onDismiss={onDismiss} {...props}>
     <h3>Report {name}</h3>
 
@@ -71,7 +77,7 @@ const ReportModal = ({ typeId: _typeId, name, onDismiss, ...props }) => (
           size="invisible"
         />
         <Buttons>
-          <Button type="button" onclick={onDismiss} secondary>
+          <Button type="button" onClick={onDismiss} secondary>
             Cancel
           </Button>
           <Button type="submit">Submit</Button>

@@ -16,6 +16,8 @@ const LANGUAGE_OPTIONS = [
 ]
 
 const Page = styled.div`
+  box-sizing: border-box;
+  height: 100%;
   padding: 26px;
   overflow: auto;
 
