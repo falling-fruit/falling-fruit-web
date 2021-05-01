@@ -12,13 +12,14 @@ const StyledButton = styled(ResetButton)`
   line-height: 14px;
   color: ${({ $secondary, theme }) =>
     $secondary ? theme.orange : theme.background};
-  font-weight: 700;
+  font-weight: bold;
   background-color: ${({ $secondary, theme }) =>
     $secondary ? theme.background : theme.orange};
   border: 2px solid ${({ theme }) => theme.orange};
   box-sizing: border-box;
   border-radius: 100px;
   padding: 0 24px;
+  // TODO: make raised and add a location button in main pane
 
   svg {
     height: 1em;

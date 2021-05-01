@@ -19,7 +19,8 @@ const PROPERTY_ACCESS_LABELS = [
   'Source is on private property (ask before you pick)',
 ]
 
-const MONTH_LABELS = [
+// TODO: move this to commmon utils constants
+export const MONTH_LABELS = [
   'January',
   'February',
   'March',

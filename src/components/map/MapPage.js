@@ -48,12 +48,15 @@ const MapPage = () => {
   const container = useRef(null)
   const { viewport: searchViewport, filters } = useSearch()
   const { view, setView } = useMap()
+  // Need oldView to save the previous view before zooming into adding a location
+  const oldView = useRef(null)
   const { settings } = useSettings()
 
-  const oldView = useRef(null)
-  const [locations, setLocations] = useState([])
-  const [clusters, setClusters] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [mapData, setMapData] = useState({
+    locations: [],
+    clusters: [],
+    isLoading: true,
+  })
 
   //const geolocation = useGeolocation({ enableHighAccuracy: true })
   const geolocation = useGeolocation()
@@ -98,7 +101,7 @@ const MapPage = () => {
 
       if (bounds?.ne.lat != null) {
         // Map has received real bounds
-        setIsLoading(true)
+        setMapData((prevMapData) => ({ ...prevMapData, isLoading: true }))
 
         const query = {
           nelat: bounds.ne.lat,
@@ -107,13 +110,13 @@ const MapPage = () => {
           swlng: normalizeLongitude(bounds.sw.lng),
           muni: filters.muni ? 1 : 0,
           t: filters.types.toString(),
+          limit: 250,
         }
 
         if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
           const clusters = await getClusters({ ...query, zoom })
 
-          setClusters(clusters)
-          setLocations([])
+          setMapData({ locations: [], clusters, isLoading: false })
         } else {
           const [
             _numLocationsReturned,
@@ -124,11 +127,8 @@ const MapPage = () => {
             invasive: filters.invasive ? 1 : 0,
           })
 
-          setLocations(locations)
-          setClusters([])
+          setMapData({ locations, clusters: [], isLoading: false })
         }
-
-        setIsLoading(false)
       }
     }
     fetchClusterAndLocationData()
@@ -161,7 +161,7 @@ const MapPage = () => {
       style={{ width: '100%', height: '100%', position: 'relative' }}
       ref={container}
     >
-      {isLoading && <LoadingIndicator />}
+      {mapData.isLoading && <LoadingIndicator />}
       {isAddingLocation ? (
         <AddLocationPin />
       ) : (
@@ -171,12 +171,14 @@ const MapPage = () => {
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
         geolocation={geolocation}
-        locations={isAddingLocation ? [] : locations}
-        clusters={isAddingLocation ? [] : clusters}
+        locations={isAddingLocation ? [] : mapData.locations}
+        clusters={isAddingLocation ? [] : mapData.clusters}
         onViewChange={setView}
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}
+        mapType={settings.mapType}
+        layerTypes={settings.mapLayers}
         showLabels={settings.showLabels}
       />
     </div>
