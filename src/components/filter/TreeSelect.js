@@ -39,7 +39,7 @@ const TreeSelectContainer = styled.div`
 
     .placeholder {
       color: ${({ theme }) => theme.text};
-      font-weight: 400;
+      font-weight: normal;
     }
   }
 
@@ -127,7 +127,7 @@ const TreeSelectContainer = styled.div`
 
   ul {
     height: 100%;
-    font-weight: 700;
+    font-weight: bold;
   }
 
   ul > div {

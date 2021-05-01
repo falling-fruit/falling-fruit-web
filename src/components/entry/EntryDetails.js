@@ -14,9 +14,7 @@ import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
-import TypeTitle from '../ui/TypeTitle'
 import PhotoGrid from './PhotoGrid'
-import ResourceList from './ResourceList'
 import {
   ACCESS_TYPE,
   formatISOString,
@@ -147,24 +145,6 @@ const EntryDetails = ({ className }) => {
     </TagList>
   )
 
-  const typesHeader =
-    typesData && typesData.length === 1 ? (
-      <TypeTitle
-        primaryText={typesData[0].en_name}
-        secondaryText={typesData[0].scientific_name}
-      />
-    ) : (
-      <TypesHeader typesData={typesData} />
-    )
-
-  // TypesHeader shows the resources if more than one type
-  const otherResources = typesData && typesData.length === 1 && (
-    <>
-      <h3>{t('Other Resources')}</h3>
-      <ResourceList typeData={typesData[0]} />
-    </>
-  )
-
   const isReady = locationData && typesData
 
   return (
@@ -178,7 +158,7 @@ const EntryDetails = ({ className }) => {
           />
           <TextContent>
             {tagList}
-            {typesHeader}
+            <TypesHeader typesData={typesData} />
             <Description>
               <p>{locationData.description}</p>
 
@@ -213,7 +193,6 @@ const EntryDetails = ({ className }) => {
                 </Button>
               </div>
             </Description>
-            {otherResources}
           </TextContent>
         </>
       ) : (

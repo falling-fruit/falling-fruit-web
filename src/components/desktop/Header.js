@@ -27,7 +27,7 @@ const StyledHeader = styled.header`
       li {
         display: inline-grid;
         place-items: center;
-        font-weight: 600;
+        font-weight: bold;
         width: 110px;
         margin: 0;
         height: 100%;
@@ -46,7 +46,7 @@ const StyledHeader = styled.header`
           height: 45px;
           font-size: 100%;
           font-family: inherit;
-          font-weight: 500;
+          font-weight: normal;
           cursor: pointer;
         }
 

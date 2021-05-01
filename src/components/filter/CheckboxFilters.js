@@ -18,7 +18,7 @@ const StyledLabel = styled.label`
   display: flex;
   align-items: center;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
 
   &:not(:last-child) {
