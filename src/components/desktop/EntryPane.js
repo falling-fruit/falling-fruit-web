@@ -1,23 +1,9 @@
-import styled from 'styled-components/macro'
-
-import EntryTabs from '../entry/EntryTabs'
+import EntryDetails from '../entry/EntryDetails'
 import EntryBack from './EntryBack'
-
-const StyledEntryPane = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  div:last-child {
-    flex: 1;
-  }
-`
+import NavPane from './NavPane'
 
 const EntryPane = () => (
-  <StyledEntryPane>
-    <EntryBack />
-    <EntryTabs />
-  </StyledEntryPane>
+  <NavPane nav={<EntryBack />} content={<EntryDetails />} />
 )
 
 export default EntryPane

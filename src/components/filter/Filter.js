@@ -24,7 +24,7 @@ const StyledFilter = styled.div`
 
   .edible-type-text {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: bold;
     color: ${({ theme }) => theme.secondaryText};
     margin-top: 18px;
     margin-bottom: 7px;

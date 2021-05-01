@@ -8,15 +8,14 @@ import { useMap } from '../../contexts/MapContext'
 import { getLocationById, getTypeById } from '../../utils/api'
 import { getStreetAddress, hasSeasonality } from '../../utils/locationInfo'
 import { getZoomedInView } from '../../utils/viewportBounds'
+import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
-import TypeTitle from '../ui/TypeTitle'
 import { Page, TextContent } from './EntryTabs'
 import PhotoGrid from './PhotoGrid'
-import ResourceList from './ResourceList'
 import {
   ACCESS_TYPE,
   formatISOString,
@@ -78,6 +77,7 @@ const EntryDetails = ({ className }) => {
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
 
   useEffect(() => {
     async function fetchEntryDetails() {
@@ -122,38 +122,27 @@ const EntryDetails = ({ className }) => {
     </TagList>
   )
 
-  const typesHeader =
-    typesData && typesData.length === 1 ? (
-      <TypeTitle
-        primaryText={typesData[0].en_name}
-        secondaryText={typesData[0].scientific_name}
-      />
-    ) : (
-      <TypesHeader typesData={typesData} />
-    )
-
-  // TypesHeader shows the resources if more than one type
-  const otherResources = typesData && typesData.length === 1 && (
-    <>
-      <h3>Other Resources</h3>
-      <ResourceList typeData={typesData[0]} />
-    </>
-  )
-
+  const allTypeNames = locationData && locationData.type_names.join(', ')
   const isReady = locationData && typesData
 
   return (
     <Page className={className}>
       {isReady ? (
         <>
+          <ReportModal
+            locationId={locationData.id}
+            name={allTypeNames}
+            isOpen={isReportModalOpen}
+            onDismiss={() => setIsReportModalOpen(false)}
+          />
           <PhotoGrid
             photos={locationData.photos}
-            altText={locationData.type_names.join(', ')}
+            altText={allTypeNames}
             handleViewLightbox={handleViewLightbox}
           />
           <TextContent>
             {tagList}
-            {typesHeader}
+            <TypesHeader typesData={typesData} />
             <Description>
               <p>{locationData.description}</p>
 
@@ -183,12 +172,15 @@ const EntryDetails = ({ className }) => {
 
               <div>
                 <Button leftIcon={<Star />}>Review</Button>
-                <Button leftIcon={<Flag />} secondary>
+                <Button
+                  leftIcon={<Flag />}
+                  secondary
+                  onClick={() => setIsReportModalOpen(true)}
+                >
                   Report
                 </Button>
               </div>
             </Description>
-            {otherResources}
           </TextContent>
         </>
       ) : (
