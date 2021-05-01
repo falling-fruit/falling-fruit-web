@@ -47,13 +47,13 @@ const Page = styled.div`
   }
 `
 
-const SettingsPage = () => {
+const SettingsPage = ({ hideTitle }) => {
   const { settings, addSetting } = useSettings()
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
 
   return (
     <Page>
-      <h2>Settings</h2>
+      {!hideTitle && <h2>Settings</h2>}
       <h3>Viewing Preferences</h3>
 
       {[
