@@ -1,103 +1,199 @@
-import { useWindowSize } from '@reach/window-size'
-import React from 'react'
-import { a, config, useSpring } from 'react-spring'
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react'
+import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 import styled from 'styled-components/macro'
 
-const height = 230
+const windowHeight = window.innerHeight
 
-const DrawerWrapper = styled.div`
-  position: fixed;
-  height: 100vh;
+const OPEN_NAV_SIZE = 0.75
+
+const MainContainer = styled.div`
+  position: relative;
+  height: 100%;
+  overflow: hidden;
   width: 100%;
+`
 
-  .sheet {
-    z-index: 100;
-    position: fixed;
-    left: 0;
-    height: calc(100vh + 100px);
-    width: 100vw;
-    background: #fff;
-    touch-action: none;
-    filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.12));
-  }
+const Overflow = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  top: 0;
+  overflow: hidden;
 
-  /* .sheet > .clip {
-    border-radius: 44px 44px 0px;
-    overflow: hidden;
-    filter: drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.12));
-    height: 100%;
-  } */
-
-  .sheet::before {
-    content: '';
-    position: absolute;
-    width: 2em;
-    border-radius: 2px;
-    top: -14px;
-    height: 4px;
-    background-color: ${({ theme }) => theme.secondaryBackground};
-    left: calc(50% - 1em);
+  button {
+    margin: 0;
+    width: 100%;
   }
 `
 
-export default function Drawer({ children }) {
-  const [{ y }, set] = useSpring(() => ({ y: 0 }))
-  const { height: _windowHeight } = useWindowSize()
+const Container = styled(animated.div)`
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  max-height: ${OPEN_NAV_SIZE * windowHeight}px;
+  height: 100%;
 
-  const open = ({ canceled }) => {
-    // when cancel is true, it means that the user passed the upwards threshold
-    // so we change the spring config to create a nice wobbly effect
-    set({
-      y: -height * 1.5,
-      immediate: false,
-      config: canceled ? config.wobbly : config.stiff,
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -${windowHeight * 0.04}px;
+    height: ${windowHeight * 0.04}px;
+    width: 100%;
+    background-color: ${({ backgroundColor }) => backgroundColor || '#c3cfe2'};
+  }
+`
+
+// data-pull should be set on element that can be pulled
+const canPull = (element) => {
+  if (element && element.dataset && element.dataset.pull) {
+    return true
+  } else if (element.parentNode) {
+    return canPull(element.parentNode)
+  }
+
+  return false
+}
+
+const PullContainer = forwardRef(
+  ({ children, overflowHeight, onChange, className }, ref) => {
+    const trans = (y) => `translateY(${y}px)`
+    const topInterpolate = (px) => `calc(100% - ${px}px)`
+    const [open, setOpen] = useState(false)
+    const refContainer = useRef()
+
+    const [styleProps, set] = useSpring(() => ({
+      y: 0,
+      top: overflowHeight,
+      config: {
+        mass: 1,
+        tension: 350,
+        friction: 40,
+      },
+    }))
+
+    const setContainerOpen = (shouldOpen) => {
+      if (shouldOpen) {
+        set({
+          top: 0,
+          y: -OPEN_NAV_SIZE * windowHeight,
+        })
+      } else {
+        set({
+          top: overflowHeight,
+          y: 0,
+        })
+      }
+      setOpen(shouldOpen)
+    }
+
+    useImperativeHandle(ref, () => ({
+      setOpen(shouldOpen) {
+        setContainerOpen(shouldOpen)
+      },
+    }))
+
+    useEffect(() => {
+      set({ top: overflowHeight })
+    }, [overflowHeight])
+
+    const bind = useDrag(({ down, movement, cancel, event }) => {
+      if (event.persist) {
+        event.persist()
+        if (event.target && !canPull(event.target)) {
+          cancel()
+        }
+      }
+
+      const { top } = refContainer.current.getBoundingClientRect()
+      let setTop = overflowHeight
+      let setY = movement[1]
+      const percentOverflow = (overflowHeight * 100) / windowHeight
+      const percentOpened = ((windowHeight - top) / windowHeight) * 100
+
+      // If not down -> if release pull
+      if (!down) {
+        // If already open and percent openend is less than the opened percentage + 10
+        // Else let open
+        if (open) {
+          if (percentOpened < OPEN_NAV_SIZE * 200 - 10) {
+            setY = 0
+            setOpen(false)
+            onChange(false)
+          } else {
+            setY = -OPEN_NAV_SIZE * windowHeight
+            setTop = 0
+          }
+          // If not open and open more than 5% of overflow then open it
+          // Else stay closed
+        } else if (percentOpened > percentOverflow + 5) {
+          setY = -OPEN_NAV_SIZE * windowHeight
+          setTop = 0
+          setOpen(true)
+          onChange(true)
+        } else {
+          setY = 0
+        }
+      } else {
+        // If is pulling and pull to bottom or top more than 2% then cancel
+        // If is pulling and open, set top to opened value
+        if (open) {
+          setTop = OPEN_NAV_SIZE * windowHeight
+        }
+        if (percentOpened < 0 || percentOpened > OPEN_NAV_SIZE * 100 + 2) {
+          cancel()
+        }
+      }
+      set({
+        y: setY,
+        top: setTop,
+      })
     })
-  }
-  const close = (velocity = 0) => {
-    set({ y: 0, immediate: false, config: { ...config.stiff, velocity } })
-  }
 
-  const bind = useDrag(
-    ({ last, vxvy: [, vy], movement: [, my], cancel, canceled }) => {
-      // if the user drags up passed a threshold, then we cancel
-      // the drag so that the sheet resets to its open position
-      if (my < -height * 1.5 - 70) {
-        cancel()
-      }
-
-      // when the user releases the sheet, we check whether it passed
-      // the threshold for it to close, or if we reset it to its open position
-      if (last) {
-        console.log(my, height, vy)
-        vy > 0.25 ? close(vy) : open({ canceled })
-      }
-
-      // when the user keeps dragging, we just move the sheet according to
-      // the cursor position
-      else {
-        set({ y: my, immediate: true })
-      }
-    },
-    {
-      initial: () => [0, y.get()],
-      filterTaps: true,
-      bounds: { top: 0 },
-      rubberband: true,
-    },
-  )
-
-  const display = y.to((py) => (py < height ? 'block' : 'none'))
-
-  return (
-    <DrawerWrapper>
-      <a.div
-        className="sheet"
+    return (
+      <Container
+        className={className}
+        ref={refContainer}
         {...bind()}
-        style={{ display, bottom: `calc(-100vh + ${height - 100}px)`, y }}
+        style={{
+          transform: styleProps.y.interpolate(trans),
+          top: styleProps.top.interpolate(topInterpolate),
+        }}
       >
-        <div className="clip">{children}</div>
-      </a.div>
-    </DrawerWrapper>
+        <Overflow>
+          <button
+            style={{ backgroundColor: 'red', opacity: 0.5 }}
+            data-_pull
+            onClick={() => setContainerOpen(!open)}
+          >
+            handle
+          </button>
+          <div style={{ height: '100%', overflow: 'auto' }}>{children}</div>
+        </Overflow>
+      </Container>
+    )
+  },
+)
+
+PullContainer.defaultProps = {
+  overflowHeight: 0,
+  children: null,
+  // eslint-disable-next-line no-empty-function
+  onChange: () => {},
+}
+
+PullContainer.displayName = 'PullContainer'
+
+export default function Drawer({ children }) {
+  return (
+    <MainContainer>
+      <PullContainer overflowHeight={200}>{children}</PullContainer>
+    </MainContainer>
   )
 }
