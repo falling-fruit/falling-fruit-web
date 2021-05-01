@@ -61,7 +61,8 @@ Location.displayName = 'Location'
 
 Location.propTypes = {
   onClick: PropTypes.func.isRequired,
-  label: PropTypes.string,
+  // TODO: Correct the instance in MapPage
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 }
 
 export default Location
