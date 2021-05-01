@@ -7,6 +7,10 @@ import { useHistory, useLocation } from 'react-router-dom'
 const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
   const { pathname } = useLocation()
   const history = useHistory()
+
+  // get breadcrumbs
+  const segments = pathname.split('/')
+
   const [tabIndex, setTabIndex] = useState(() => {
     // Set the initial tabIndex from the URL on page load
     const matchedIndex = tabPaths.indexOf(pathname)
@@ -15,7 +19,14 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
 
   const handleTabChange = (tabIndex) => {
     setTabIndex(tabIndex)
-    history.push(tabPaths[tabIndex])
+
+    // on shallow match return to shallow root
+    if (segments[1] === tabPaths[tabIndex].slice(1)) {
+      history.push(tabPaths[tabIndex])
+    } else {
+      // otherwise push new shallow while keeping deep link
+      history.push([tabPaths[tabIndex], ...segments.splice(2)].join('/'))
+    }
   }
 
   return [tabIndex, handleTabChange]
