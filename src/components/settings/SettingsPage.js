@@ -94,8 +94,8 @@ const SettingsPage = ({ hideTitle }) => {
       <RadioTiles
         options={[
           {
-            label: 'Default',
-            value: t('roadmap'),
+            label: t('Default'),
+            value: 'roadmap',
             image: Road,
           },
           {
