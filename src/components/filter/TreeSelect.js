@@ -1,5 +1,6 @@
 import 'react-dropdown-tree-select/dist/styles.css'
 
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import NonrenderTreeSelect from './NonrenderTreeSelect'
@@ -134,23 +135,26 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ data, onChange, popover, ...props }) => (
-  <TreeSelectContainer popover={popover}>
-    <NonrenderTreeSelect
-      data={data}
-      onChange={onChange}
-      texts={{
-        placeholder: 'Select a type...',
-        inlineSearchPlaceholder: 'Search for a type...',
-      }}
-      showDropdown={popover ? 'default' : 'always'}
-      showPartiallySelected
-      keepTreeOnSearch
-      keepChildrenOnSearch
-      inlineSearchInput
-      {...props}
-    />
-  </TreeSelectContainer>
-)
+const TreeSelect = ({ data, onChange, popover, ...props }) => {
+  const { t } = useTranslation()
+  return (
+    <TreeSelectContainer popover={popover}>
+      <NonrenderTreeSelect
+        data={data}
+        onChange={onChange}
+        texts={{
+          placeholder: t('Select a type...'),
+          inlineSearchPlaceholder: t('Search for a type...'),
+        }}
+        showDropdown={popover ? 'default' : 'always'}
+        showPartiallySelected
+        keepTreeOnSearch
+        keepChildrenOnSearch
+        inlineSearchInput
+        {...props}
+      />
+    </TreeSelectContainer>
+  )
+}
 
 export default TreeSelect

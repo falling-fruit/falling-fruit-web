@@ -1,5 +1,6 @@
 import { fitBounds } from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
@@ -48,6 +49,7 @@ const MapPage = () => {
   const container = useRef(null)
   const { viewport: searchViewport, filters } = useSearch()
   const { view, setView } = useMap()
+  const { i18n } = useTranslation()
   // Need oldView to save the previous view before zooming into adding a location
   const oldView = useRef(null)
   const { settings } = useSettings()
@@ -125,6 +127,7 @@ const MapPage = () => {
           ] = await getLocations({
             ...query,
             invasive: filters.invasive ? 1 : 0,
+            locale: i18n.language === 'en-US' ? 'fr' : i18n.language,
           })
 
           setMapData({ locations, clusters: [], isLoading: false })
@@ -132,7 +135,7 @@ const MapPage = () => {
       }
     }
     fetchClusterAndLocationData()
-  }, [view, filters])
+  }, [view, filters, i18n.language])
 
   const handleGeolocationClick = () => {
     setView(getZoomedInView(geolocation.latitude, geolocation.longitude))

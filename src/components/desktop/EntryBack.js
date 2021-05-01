@@ -1,4 +1,5 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
+import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -16,6 +17,7 @@ const StyledEntryBack = styled.div`
 const EntryBack = () => {
   const history = useHistory()
   const { state } = useLocation()
+  const { t } = useTranslation()
 
   const onBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
@@ -26,7 +28,7 @@ const EntryBack = () => {
     <StyledEntryBack>
       <BackButton onClick={onBackButtonClick}>
         <ArrowBack />
-        Back to Results
+        {t('Back to Results')}
       </BackButton>
     </StyledEntryBack>
   )
