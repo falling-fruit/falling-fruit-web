@@ -33,18 +33,26 @@ const MobileLayout = () => {
           <Route path={['/map/entry/new/details', '/list/entry/new/details']}>
             <LocationForm />
           </Route>
-          <Route path="/map/entry/:id">
-            <Drawer>
-              <EntryDetails />
-            </Drawer>
-          </Route>
           <Route path="/list/entry/:id">
             <EntryDetails />
           </Route>
+          <Route
+            path={[
+              '/map',
+              '/list',
+              '/settings',
+              '/list/entry/new',
+              '/map/entry/new',
+            ]}
+          >
+            <Route path="/map/entry/:id">
+              <Drawer>
+                <EntryDetails />
+              </Drawer>
+            </Route>
+            {tabPanels}
+          </Route>
         </Switch>
-        <Route path={['/map', '/list', '/settings', '/entry/new']}>
-          {tabPanels}
-        </Route>
       </TabPanels>
       <Switch>
         <Route
