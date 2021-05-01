@@ -37,22 +37,24 @@ const EntryTabs = () => {
   console.log('tabs')
 
   return (
-    <EntryTab>
-      <TabList>
-        {/* TODO: Use Routing */}
-        <Tab>Overview</Tab>
-        <Tab>Reviews</Tab>
-      </TabList>
+    <Page>
+      <EntryTab>
+        <TabList>
+          {/* TODO: Use Routing */}
+          <Tab>Overview</Tab>
+          <Tab>Reviews</Tab>
+        </TabList>
 
-      <TabPanels>
-        <TabPanel>
-          <EntryOverview />
-        </TabPanel>
-        <TabPanel>
-          <EntryReviews />
-        </TabPanel>
-      </TabPanels>
-    </EntryTab>
+        <TabPanels>
+          <TabPanel>
+            <EntryOverview />
+          </TabPanel>
+          <TabPanel>
+            <EntryReviews />
+          </TabPanel>
+        </TabPanels>
+      </EntryTab>
+    </Page>
   )
 }
 

@@ -14,7 +14,7 @@ import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
-import { Page, TextContent } from './EntryTabs'
+import { TextContent } from './EntryTabs'
 import PhotoGrid from './PhotoGrid'
 import {
   ACCESS_TYPE,
@@ -126,7 +126,7 @@ const EntryDetails = ({ className }) => {
   const isReady = locationData && typesData
 
   return (
-    <Page className={className}>
+    <div className={className}>
       {isReady ? (
         <>
           <ReportModal
@@ -186,7 +186,7 @@ const EntryDetails = ({ className }) => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </Page>
+    </div>
   )
 }
 

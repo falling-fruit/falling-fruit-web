@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { getReviews } from '../../utils/api'
 import ImagePreview from '../ui/ImagePreview'
-import { Page, TextContent } from './EntryTabs'
+import { TextContent } from './EntryTabs'
 import Review from './Review'
 
 const StyledImagePreview = styled(ImagePreview)`
@@ -24,19 +24,18 @@ const EntryReviews = () => {
   }, [id])
 
   return (
-    <Page>
-      <TextContent>
-        <h2>Reviews</h2>
-        {reviewData &&
-          reviewData.map((review, key) => <Review key={key} review={review} />)}
-        {reviewData &&
-          reviewData.map((review, key) => (
-            <StyledImagePreview $small key={key}>
-              <img src={review.photo.thumb} alt={review.title}></img>
-            </StyledImagePreview>
-          ))}
-      </TextContent>
-    </Page>
+    <TextContent>
+      <h2>Reviews</h2>
+      {console.log('data', reviewData)}
+      {reviewData &&
+        reviewData.map((review, key) => <Review key={key} review={review} />)}
+      {reviewData &&
+        reviewData.map((review, key) => (
+          <StyledImagePreview $small key={key}>
+            <img src={review.photo.thumb} alt={review.title}></img>
+          </StyledImagePreview>
+        ))}
+    </TextContent>
   )
 }
 
