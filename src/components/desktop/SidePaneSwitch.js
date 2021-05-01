@@ -1,10 +1,14 @@
 import { Route, Switch } from 'react-router-dom'
 
+import SettingsPage from '../mobile/SettingsPage'
 import EntryPane from './EntryPane'
 import MainPane from './MainPane'
 
 const SidePaneSwitch = () => (
   <Switch>
+    <Route exact path="/settings">
+      <SettingsPage />
+    </Route>
     <Route exact path="/entry/:id">
       <EntryPane />
     </Route>

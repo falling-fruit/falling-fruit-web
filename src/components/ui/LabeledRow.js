@@ -1,7 +1,6 @@
 import styled from 'styled-components/macro'
 
 const StyledLabeledInput = styled.div`
-  // can labels pass styling on to descendents like this? or should i be doing & > * or something or is that the same thing
   display: flex;
   align-items: center;
   justify-content: space-between;

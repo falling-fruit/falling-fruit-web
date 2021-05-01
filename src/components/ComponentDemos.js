@@ -19,7 +19,7 @@ import {
 import { Slider } from './ui/Slider'
 import { Tag, TagList } from './ui/Tag'
 
-const SettingsPage = () => {
+const ComponentDemos = () => {
   // TODO: Move form components and type select logic to separate Form page
   const [showDialog, setShowDialog] = useState(false)
   const [currentStep, setCurrentStep] = useState(2)
@@ -143,4 +143,4 @@ const SettingsPage = () => {
   )
 }
 
-export default SettingsPage
+export default ComponentDemos
