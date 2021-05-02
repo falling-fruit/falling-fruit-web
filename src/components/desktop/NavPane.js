@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 
 const StyledNavPane = styled.div`
+  overflow: auto;
   display: flex;
   flex-direction: column;
   height: 100%;

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
 import useRoutedTabs from '../../utils/useRoutedTabs'
-import EntryDetails from '../entry/EntryDetails'
+import EntryTabs from '../entry/EntryTabs'
 import { LocationForm } from '../form/LocationForm'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { DEFAULT_TAB, getTabs } from './tabs'
@@ -46,7 +46,7 @@ const MobileLayout = () => {
             {tabPanels}
           </Route>
           <Route path="/entry/:id">
-            <EntryDetails />
+            <EntryTabs />
           </Route>
         </Switch>
       </TabPanels>
