@@ -9,7 +9,7 @@ const Modal = styled(Dialog)`
   border-radius: 23px;
   padding: 23px 17px;
   width: 80%;
-  z-index: 3;
+  // TODO: other elements look very strange on desktop
   // TODO: min-width for smaller devices (width < 300px)
 `
 
