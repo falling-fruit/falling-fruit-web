@@ -34,6 +34,7 @@ function Sheet({ id, children }) {
     push present to the end of the synchronous callstack
     */
     setTimeout(() => drawer.present({ animate: true }), 0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   return <div id={id}>{children}</div>
