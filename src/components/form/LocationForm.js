@@ -1,25 +1,25 @@
-import { useFormikContext } from 'formik'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getTypes } from '../../utils/api'
 import Button from '../ui/Button'
-import ImagePreview from '../ui/ImagePreview'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
-import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
-import { FormikStepper, Step } from './FormikStepper'
-import { FileUpload, Select, Slider, Textarea } from './FormikWrappers'
+import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
+import { Select, Textarea } from './FormikWrappers'
+import {
+  INITIAL_REVIEW_VALUES,
+  ReviewPhotoStep,
+  ReviewStep,
+} from './ReviewForm'
 
 const INITIAL_VALUES = {
   types: [],
   description: '',
   access: null,
-  fruiting: 0,
-  quality_rating: 0,
-  yield_rating: 0,
+  ...INITIAL_REVIEW_VALUES,
 }
 
 const PROPERTY_ACCESS_LABELS = [
@@ -82,18 +82,7 @@ const InlineSelects = styled.div`
   }
 `
 
-const WideButton = styled(Button).attrs({
-  secondary: true,
-})`
-  width: 100%;
-  height: 46px;
-  border-width: 1px;
-  font-weight: normal;
-
-  margin-bottom: 24px;
-`
-
-const Step1 = ({ typeOptions }) => (
+const LocationStep = ({ typeOptions }) => (
   <>
     <Select
       name="types"
@@ -122,74 +111,6 @@ const Step1 = ({ typeOptions }) => (
   </>
 )
 
-const Step2 = () => (
-  <>
-    <SectionHeading>
-      Leave a Review
-      <Optional />
-    </SectionHeading>
-    <Textarea name="comment" placeholder="Lorem ipsum..." />
-
-    <Slider
-      name="fruiting"
-      label="Fruiting Status"
-      labels={['Unsure', 'Flowers', 'Unripe fruit', 'Ripe fruit']}
-    />
-    <Slider
-      name="quality_rating"
-      label="Quality"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-    <Slider
-      name="yield_rating"
-      label="Yield"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-  </>
-)
-
-const Step3 = () => {
-  const fileUploadRef = useRef()
-  // TODO: instead of doing this... just wrap both the file upload and the caption inputs in a new Formik field
-  const {
-    values: { photo },
-    setFieldValue,
-  } = useFormikContext()
-
-  const captionInput = useMemo(
-    () =>
-      photo && (
-        <ImagePreview
-          onDelete={() => {
-            fileUploadRef.current.value = ''
-            setFieldValue('photo', null)
-          }}
-        >
-          <img src={URL.createObjectURL(photo)} alt="Upload preview" />
-        </ImagePreview>
-      ),
-    [photo, setFieldValue],
-  )
-
-  return (
-    <>
-      <Label>
-        Upload Images
-        <Optional />
-      </Label>
-      <WideButton type="button" onClick={() => fileUploadRef.current.click()}>
-        Take or Upload Photo
-      </WideButton>
-      <FileUpload
-        name="photo"
-        style={{ display: 'none' }}
-        ref={fileUploadRef}
-      />
-      {captionInput}
-    </>
-  )
-}
-
 export const LocationForm = ({ desktop }) => {
   // TODO: create a "going back" util
   const history = useHistory()
@@ -210,9 +131,9 @@ export const LocationForm = ({ desktop }) => {
   }, [])
 
   const steps = [
-    <Step1 key={1} typeOptions={typeOptions} />,
-    <Step2 key={2} />,
-    <Step3 key={3} />,
+    <LocationStep key={1} typeOptions={typeOptions} />,
+    <ReviewStep key={2} />,
+    <ReviewPhotoStep key={3} />,
   ]
 
   const formikSteps = steps.map((step, index) => (
@@ -230,8 +151,22 @@ export const LocationForm = ({ desktop }) => {
     <StyledLocationForm>
       <StepDisplay
         initialValues={INITIAL_VALUES}
-        onCancel={() => history.push(state?.fromPage ?? '/map')}
         onSubmit={handleSubmit}
+        // For all steps only
+        renderButtons={(isSubmitting) => (
+          <ProgressButtons>
+            <Button
+              secondary
+              type="button"
+              onClick={() => history.push(state?.fromPage ?? '/map')}
+            >
+              Cancel
+            </Button>
+            <Button disabled={isSubmitting} type="submit">
+              {isSubmitting ? 'Submitting' : 'Submit'}
+            </Button>
+          </ProgressButtons>
+        )}
       >
         {formikSteps}
       </StepDisplay>

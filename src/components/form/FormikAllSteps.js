@@ -1,8 +1,5 @@
 import { Formik } from 'formik'
 
-import Button from '../ui/Button'
-import { ProgressButtons } from './FormikStepper'
-
 // TODO: to be used when combining the validation schemas of individual steps
 const _mergeSchemas = (...schemas) => {
   const [first, ...rest] = schemas
@@ -15,7 +12,7 @@ const _mergeSchemas = (...schemas) => {
   return merged
 }
 
-const FormikAllSteps = ({ children, onCancel, ...props }) => (
+const FormikAllSteps = ({ children, renderButtons, ...props }) => (
   <Formik
     /*validationSchema={mergeSchemas(
             ...steps.map((step) => step.props.validationSchema),
@@ -25,20 +22,7 @@ const FormikAllSteps = ({ children, onCancel, ...props }) => (
     {({ isSubmitting }) => (
       <>
         {children}
-
-        <ProgressButtons>
-          <Button
-            secondary
-            type="button"
-            disabled={isSubmitting}
-            onClick={onCancel}
-          >
-            Cancel
-          </Button>
-          <Button disabled={isSubmitting} type="submit">
-            {isSubmitting ? 'Submitting' : 'Submit'}
-          </Button>
-        </ProgressButtons>
+        {renderButtons(isSubmitting)}
       </>
     )}
   </Formik>
