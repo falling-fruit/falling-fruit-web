@@ -8,6 +8,7 @@ const StyledHeaderPane = styled.div`
   height: 100%;
 
   > div:last-child {
+    overflow: auto;
     flex: 1;
   }
 `

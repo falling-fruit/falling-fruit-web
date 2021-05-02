@@ -22,8 +22,10 @@ const SidePaneSwitch = () => (
             <SettingsPage desktop />
           </Route>
           <Route exact path="/entry/:id">
-            <EntryOverview />
-            <EntryReviews />
+            <div>
+              <EntryOverview />
+              <EntryReviews />
+            </div>
           </Route>
         </Switch>
       </NavPane>
