@@ -1,4 +1,4 @@
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 
 // TODO: to be used when combining the validation schemas of individual steps
 const _mergeSchemas = (...schemas) => {
@@ -20,10 +20,10 @@ const FormikAllSteps = ({ children, renderButtons, ...props }) => (
     {...props}
   >
     {({ isSubmitting }) => (
-      <>
+      <Form>
         {children}
         {renderButtons(isSubmitting)}
-      </>
+      </Form>
     )}
   </Formik>
 )

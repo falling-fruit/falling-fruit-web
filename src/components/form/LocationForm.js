@@ -142,8 +142,10 @@ export const LocationForm = ({ desktop }) => {
     </Step>
   ))
 
-  const handleSubmit = (values) =>
+  const handleSubmit = (values) => {
     console.log('submitted location form', values)
+    history.push('/map')
+  }
 
   const StepDisplay = desktop ? FormikAllSteps : FormikStepper
 
@@ -157,7 +159,6 @@ export const LocationForm = ({ desktop }) => {
           <ProgressButtons>
             <Button
               secondary
-              type="button"
               onClick={() => history.push(state?.fromPage ?? '/map')}
             >
               Cancel
