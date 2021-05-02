@@ -33,7 +33,6 @@ const ReviewDescription = styled.section`
 
 const ReviewContainer = styled.div`
   height: 100%;
-  overflow: auto;
   margin-bottom: 20px;
 `
 
