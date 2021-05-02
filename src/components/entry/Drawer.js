@@ -239,7 +239,7 @@ PullContainer.displayName = 'PullContainer'
 export default function Drawer({ children }) {
   return (
     <MainContainer>
-      <PullContainer overflowHeight={315}>{children}</PullContainer>
+      <PullContainer overflowHeight={275}>{children}</PullContainer>
     </MainContainer>
   )
 }

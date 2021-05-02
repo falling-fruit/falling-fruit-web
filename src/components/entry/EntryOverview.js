@@ -1,7 +1,8 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useHistory, useLocation, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
@@ -14,6 +15,7 @@ import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
+import { TextContent } from './EntryTabs'
 import PhotoGrid from './PhotoGrid'
 import {
   ACCESS_TYPE,
@@ -48,31 +50,6 @@ const LocationText = styled(ResetButton)`
   color: ${({ theme }) => theme.secondaryText};
 `
 
-// Wraps the entire page and gives it a top margin if on mobile
-const Page = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
-    ${({ isDrawer }) =>
-      isDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
-  }
-
-  overflow: auto;
-  width: 100%;
-`
-
-const TextContent = styled.article`
-  padding: 20px 23px;
-
-  @media ${({ theme }) => theme.device.desktop} {
-    padding: 12px;
-  }
-
-  box-sizing: border-box;
-
-  ul {
-    margin: 0 0 12px 0;
-  }
-`
-
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   & > *:not(:first-child) {
@@ -94,15 +71,16 @@ const Description = styled.section`
   }
 `
 
-const EntryDetails = ({ className }) => {
+const EntryOverview = ({ className }) => {
   const { id } = useParams()
   const { setView } = useMap()
   const [locationData, setLocationData] = useState()
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
   const history = useHistory()
-  const { pathname } = useLocation()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     // clear location data when id changes
@@ -119,6 +97,7 @@ const EntryDetails = ({ className }) => {
       const typesData = await Promise.all(
         locationData.type_ids.map(getTypeById),
       )
+
       setAddress(streetAddress)
       setLocationData(locationData)
       setTypesData(typesData)
@@ -142,9 +121,9 @@ const EntryDetails = ({ className }) => {
         <Tag color={theme.tag.access}>{ACCESS_TYPE[locationData.access]}</Tag>
       )}
       {locationData.unverified ? (
-        <Tag color={theme.tag.unverified}>Unverified</Tag>
+        <Tag color={theme.tag.unverified}>{t('Unverified')}</Tag>
       ) : (
-        <Tag color={theme.tag.verified}>Verified</Tag>
+        <Tag color={theme.tag.verified}>{t('Verified')}</Tag>
       )}
     </TagList>
   )
@@ -153,7 +132,9 @@ const EntryDetails = ({ className }) => {
   const isReady = locationData && typesData
 
   return (
-    <Page className={className} isDrawer={pathname.split('/')[1] === 'map'}>
+    <div className={className}>
+      {/* TODO: Properly center this loading indicator! */}
+
       {isReady ? (
         <>
           <ReportModal
@@ -191,7 +172,7 @@ const EntryDetails = ({ className }) => {
               )}
 
               <p className="updatedTime">
-                Last Updated{' '}
+                {t('Last Updated')}{' '}
                 <time dateTime={locationData.updated_at}>
                   {formatISOString(locationData.updated_at)}
                 </time>
@@ -213,8 +194,8 @@ const EntryDetails = ({ className }) => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </Page>
+    </div>
   )
 }
 
-export default EntryDetails
+export default EntryOverview

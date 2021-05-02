@@ -21,8 +21,8 @@ const DeleteButton = styled(ResetButton)`
 const Tile = styled.div`
   position: relative;
   display: inline-block;
-  width: 70px;
-  height: 70px;
+  width: ${(props) => (props.$small ? '48px' : '70px')};
+  height: ${(props) => (props.$small ? '48px' : '70px')};
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.background};
   overflow: visible;
@@ -36,12 +36,14 @@ const Tile = styled.div`
   }
 `
 
-const ImagePreview = ({ children, onDelete }) => (
-  <Tile>
+const ImagePreview = ({ children, className, onDelete, $small }) => (
+  <Tile className={className} $small={$small}>
     {children}
-    <DeleteButton onClick={onDelete}>
-      <X />
-    </DeleteButton>
+    {onDelete && (
+      <DeleteButton onClick={onDelete}>
+        <X />
+      </DeleteButton>
+    )}
   </Tile>
 )
 

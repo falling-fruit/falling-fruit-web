@@ -36,7 +36,16 @@ const MainPane = () => {
     <Container>
       <SearchOverlay />
       <PagedList />
-      <StyledButton>Add a Location</StyledButton>
+      <StyledButton
+        onClick={() =>
+          history.push({
+            pathname: '/entry/new',
+            state: { fromPage: '/map' },
+          })
+        }
+      >
+        Add a Location
+      </StyledButton>
       <StyledSettingsAccordion>
         <AccordionItem>
           <SettingsAccordionButton
