@@ -1,21 +1,25 @@
 import styled from 'styled-components/macro'
 
-const StyledNavPane = styled.div`
-  overflow: auto;
+import NavBack from './NavBack'
+
+const StyledHeaderPane = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
 
-  div:last-child {
+  > div:last-child {
+    overflow: auto;
     flex: 1;
   }
 `
 
-const EntryPane = ({ nav, content }) => (
-  <StyledNavPane>
+const HeaderPane = ({ nav, children, className }) => (
+  <StyledHeaderPane className={className}>
     {nav}
-    {content}
-  </StyledNavPane>
+    {children}
+  </StyledHeaderPane>
 )
 
-export default EntryPane
+const NavPane = (props) => <HeaderPane nav={<NavBack />} {...props} />
+
+export { HeaderPane, NavPane }

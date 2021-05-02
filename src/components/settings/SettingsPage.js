@@ -26,8 +26,8 @@ const Page = styled.div`
   height: 100%;
   padding: 26px;
   overflow: auto;
-  ${({ hideTitle }) =>
-    hideTitle && 'padding-top: 0; h3:first-child { margin-top: 8px; }'}
+  ${({ desktop }) =>
+    desktop && 'padding-top: 0; h3:first-child { margin-top: 8px; }'}
 
   h2 {
     margin-top: 0;
@@ -50,14 +50,14 @@ const Page = styled.div`
   }
 `
 
-const SettingsPage = ({ hideTitle }) => {
+const SettingsPage = ({ desktop }) => {
   const { settings, addSetting } = useSettings()
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
 
   return (
-    <Page hideTitle={hideTitle}>
-      {!hideTitle && <h2>{t('Settings')}</h2>}
+    <Page desktop={desktop}>
+      {!desktop && <h2>{t('Settings')}</h2>}
       <h3>{t('Viewing Preferences')}</h3>
 
       {[

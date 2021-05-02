@@ -1,8 +1,12 @@
 import styled from 'styled-components/macro'
 
+import ImagePreview from '../ui/ImagePreview'
 import Rating from '../ui/Rating'
 import { formatISOString } from './textFormatters'
 
+const ReviewContainer = styled.div`
+  margin-bottom: 20px;
+`
 const Label = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.tertiaryText};
@@ -20,6 +24,7 @@ const RatingTable = styled.table`
   }
 `
 const ReviewDescription = styled.section`
+  margin-bottom: 8px;
   blockquote {
     font-size: 16px;
     color: ${({ theme }) => theme.secondaryText};
@@ -30,10 +35,8 @@ const ReviewDescription = styled.section`
     font-size: 14px;
   }
 `
-
-const ReviewContainer = styled.div`
-  height: 100%;
-  margin-bottom: 20px;
+const StyledImagePreview = styled(ImagePreview)`
+  margin-right: 7px;
 `
 
 const RATINGS = [
@@ -77,6 +80,9 @@ const Review = ({ review }) => (
         Reviewed {formatISOString(review.created_at)} by {review.author}
       </cite>
     </ReviewDescription>
+    <StyledImagePreview $small>
+      <img src={review.photo.thumb} alt={review.title} />
+    </StyledImagePreview>
   </ReviewContainer>
 )
 

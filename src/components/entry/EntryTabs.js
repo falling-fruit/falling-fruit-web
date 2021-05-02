@@ -21,6 +21,7 @@ export const TextContent = styled.article`
     padding: 12px;
   }
   h2 {
+    margin-top: 0;
     font-size: 18px;
   }
 
