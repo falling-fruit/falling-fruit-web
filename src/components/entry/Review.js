@@ -6,7 +6,7 @@ import { formatISOString } from './textFormatters'
 const Label = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.tertiaryText};
-  margin: 3px;
+  margin: 3px 0px;
 `
 const RatingTable = styled.table`
   width: 100%;
