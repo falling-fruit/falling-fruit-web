@@ -12,10 +12,10 @@ const Score = styled.div`
   height: 5px;
   width: ${(props) => props.percentage * 100}%;
   border-radius: 9px;
-  background: ${(props) => getRedToGreen(props.percentage)};
+  background: ${(props) => getRatingBarColor(props.percentage)};
 `
 
-const getRedToGreen = (percentage) => {
+const getRatingBarColor = (percentage) => {
   if (percentage <= 0.33) {
     return ({ theme }) => theme.red
   } else if (percentage <= 0.66) {

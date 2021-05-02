@@ -31,8 +31,6 @@ export const TextContent = styled.article`
   }
 `
 
-// Rename Overview and Reviews
-
 const EntryTabs = () => (
   <Page>
     <EntryTab>
