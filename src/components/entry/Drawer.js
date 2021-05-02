@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-const MainContainer = styled.div`
+const Container = styled.div`
   position: absolute;
   height: 100%;
   overflow: hidden;
@@ -11,8 +11,8 @@ const MainContainer = styled.div`
   bottom: 80px;
   left: 0;
 `
-
-function BottomSheet({ id, children }) {
+// TODO: Extract CupertinoPane into its own wrapper component
+function Sheet({ id, children }) {
   const history = useHistory()
 
   useEffect(() => {
@@ -29,6 +29,10 @@ function BottomSheet({ id, children }) {
       onDidDismiss: () => history.push('/map'),
     })
 
+    /*
+    HACK: Fix for race condition using setTimeout @ 0 ms to 
+    push present to the end of the synchronous callstack
+    */
     setTimeout(() => drawer.present({ animate: true }), 0)
   }, [id])
 
@@ -37,8 +41,8 @@ function BottomSheet({ id, children }) {
 
 export default function Drawer({ children }) {
   return (
-    <MainContainer>
-      <BottomSheet id={'map-bottom-drawer'}>{children}</BottomSheet>
-    </MainContainer>
+    <Container>
+      <Sheet id={'map-bottom-drawer'}>{children}</Sheet>
+    </Container>
   )
 }
