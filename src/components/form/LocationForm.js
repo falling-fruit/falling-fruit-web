@@ -159,6 +159,7 @@ export const LocationForm = ({ desktop }) => {
           <ProgressButtons>
             <Button
               secondary
+              type="button"
               onClick={() => history.push(state?.fromPage ?? '/map')}
             >
               Cancel
