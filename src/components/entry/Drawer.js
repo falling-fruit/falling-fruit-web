@@ -9,6 +9,7 @@ import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 import styled from 'styled-components/macro'
 
+// TODO Use Reach Hook for Window Height
 const windowHeight = window.innerHeight
 
 const OPEN_NAV_SIZE = 0.75
@@ -64,7 +65,6 @@ const Overflow = styled.div`
 `
 
 const EntryWrapper = styled.div`
-  /* margin: 20vh 0; */
   height: 100%;
   overflow: auto;
 `
@@ -82,7 +82,6 @@ const Container = styled(animated.div)`
     bottom: -${windowHeight * 0.04}px;
     height: ${windowHeight * 0.04}px;
     width: 100%;
-    background-color: ${({ backgroundColor }) => backgroundColor || '#c3cfe2'};
   }
 `
 
@@ -98,7 +97,7 @@ const canPull = (element) => {
 }
 
 const PullContainer = forwardRef(
-  ({ children, overflowHeight, onChange, className }, ref) => {
+  ({ children, overflowHeight, className }, ref) => {
     const trans = (y) => `translateY(${y}px)`
     const topInterpolate = (px) => `calc(100% - ${px}px)`
     const [open, setOpen] = useState(false)
@@ -166,7 +165,6 @@ const PullContainer = forwardRef(
           if (percentOpened < OPEN_NAV_SIZE * 100 - 10) {
             setY = 0
             setOpen(false)
-            onChange(false)
           } else {
             setY = -OPEN_NAV_SIZE * windowHeight
             setTop = 0
@@ -177,7 +175,6 @@ const PullContainer = forwardRef(
           setY = -OPEN_NAV_SIZE * windowHeight
           setTop = 0
           setOpen(true)
-          onChange(true)
         } else {
           setY = 0
         }
@@ -207,6 +204,9 @@ const PullContainer = forwardRef(
           top: styleProps.top.interpolate(topInterpolate),
         }}
       >
+        {
+          // TODO: add back `data-pull` attr for gestures
+        }
         <Overflow open={open}>
           <button
             id="toggle"
@@ -230,8 +230,6 @@ const PullContainer = forwardRef(
 PullContainer.defaultProps = {
   overflowHeight: 0,
   children: null,
-  // eslint-disable-next-line no-empty-function
-  onChange: () => {},
 }
 
 PullContainer.displayName = 'PullContainer'
