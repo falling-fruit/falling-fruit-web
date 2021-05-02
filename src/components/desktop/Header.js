@@ -1,4 +1,5 @@
 import { User } from '@styled-icons/boxicons-solid'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 const StyledHeader = styled.header`
@@ -60,21 +61,24 @@ const StyledHeader = styled.header`
 `
 
 // TODO: Clean up file structure (i.e. logo_white.svg) from ./public
-const Header = () => (
-  <StyledHeader>
-    <img src="/logo_white.svg" alt="Falling Fruit Logo" />
-    <nav>
-      <ul>
-        <li className="active">Map</li>
-        <li>About</li>
-        <li>
-          <button>
-            <User /> Login
-          </button>
-        </li>
-      </ul>
-    </nav>
-  </StyledHeader>
-)
+const Header = () => {
+  const { t } = useTranslation()
+  return (
+    <StyledHeader>
+      <img src="/logo_white.svg" alt="Falling Fruit Logo" />
+      <nav>
+        <ul>
+          <li className="active">{t('Map')}</li>
+          <li>{t('About')}</li>
+          <li>
+            <button>
+              <User /> {t('Login')}
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </StyledHeader>
+  )
+}
 
 export default Header

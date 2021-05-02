@@ -1,4 +1,5 @@
 import { X } from '@styled-icons/boxicons-regular'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import CircleIcon from './CircleIcon'
@@ -30,25 +31,28 @@ const StyledInput = styled(Input)`
   height: 36px;
 `
 
-const CaptionInput = ({ value, onChange, onDelete, image }) => (
-  <StyledCaptionInput
-    leftIcons={<CircleIcon size="36">{image}</CircleIcon>}
-    primaryText={
-      <StyledInput
-        placeholder="Add a caption..."
-        onChange={onChange}
-        value={value}
-      />
-    }
-    rightIcons={
-      <IconButton
-        size={36}
-        icon={<X />}
-        onClick={onDelete}
-        label="Delete image caption"
-      />
-    }
-  />
-)
+const CaptionInput = ({ value, onChange, onDelete, image }) => {
+  const { t } = useTranslation()
+  return (
+    <StyledCaptionInput
+      leftIcons={<CircleIcon size="36">{image}</CircleIcon>}
+      primaryText={
+        <StyledInput
+          placeholder={t('Add a caption...')}
+          onChange={onChange}
+          value={value}
+        />
+      }
+      rightIcons={
+        <IconButton
+          size={36}
+          icon={<X />}
+          onClick={onDelete}
+          label={t('Delete image caption')}
+        />
+      }
+    />
+  )
+}
 
 export default CaptionInput

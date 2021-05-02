@@ -10,7 +10,6 @@ const DEFAULT_SETTINGS = {
   showScientificNames: false,
   mapType: 'roadmap',
   mapLayers: [],
-  language: 'en',
   overrideDataLanguage: false,
 }
 

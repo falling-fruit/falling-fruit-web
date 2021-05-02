@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { useSettings } from '../../contexts/SettingsContext'
@@ -13,7 +14,7 @@ import Terrain from './mapTiles/terrain.png'
 import Transit from './mapTiles/transit.png'
 
 const LANGUAGE_OPTIONS = [
-  { value: 'en', label: 'English' },
+  { value: 'en-US', label: 'English' },
   { value: 'fr', label: 'Français' },
   { value: 'es', label: 'Español' },
   { value: 'de', label: 'Deutsch' },
@@ -52,20 +53,21 @@ const Page = styled.div`
 const SettingsPage = ({ hideTitle }) => {
   const { settings, addSetting } = useSettings()
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
+  const { t, i18n } = useTranslation()
 
   return (
     <Page hideTitle={hideTitle}>
-      {!hideTitle && <h2>Settings</h2>}
-      <h3>Viewing Preferences</h3>
+      {!hideTitle && <h2>{t('Settings')}</h2>}
+      <h3>{t('Viewing Preferences')}</h3>
 
       {[
         {
           field: 'showLabels',
-          label: 'Show Labels',
+          label: t('Show Labels'),
         },
         {
           field: 'showScientificNames',
-          label: 'Show Scientific Names',
+          label: t('Show Scientific Names'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -85,24 +87,24 @@ const SettingsPage = ({ hideTitle }) => {
         />
       ))}
 
-      <h3>Map Preferences</h3>
+      <h3>{t('Map Preferences')}</h3>
 
-      <h5>Map View</h5>
+      <h5>{t('Map View')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: 'Default',
+            label: t('Default'),
             value: 'roadmap',
             image: Road,
           },
           {
-            label: 'Satellite',
+            label: t('Satellite'),
             value: 'hybrid',
             image: Satellite,
           },
           {
-            label: 'Terrain',
+            label: t('Terrain'),
             value: 'terrain',
             image: Terrain,
           },
@@ -115,22 +117,22 @@ const SettingsPage = ({ hideTitle }) => {
         }
       />
 
-      <h5>Map Overlays</h5>
+      <h5>{t('Map Overlays')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: 'None',
+            label: t('None'),
             value: null,
             image: Road,
           },
           {
-            label: 'Biking',
+            label: t('Biking'),
             value: 'BicyclingLayer',
             image: Bicycling,
           },
           {
-            label: 'Transit',
+            label: t('Transit'),
             value: 'TransitLayer',
             image: Transit,
           },
@@ -143,19 +145,22 @@ const SettingsPage = ({ hideTitle }) => {
         }
       />
 
-      {console.log(settings)}
-
-      <h3>Language Preferences</h3>
+      <h3>{t('Language Preferences')}</h3>
 
       <LabeledRow
-        label={<label htmlFor="languagePreference">Language Preference</label>}
+        label={
+          <label htmlFor="languagePreference">{t('Language Preference')}</label>
+        }
         right={
           <Select
             options={LANGUAGE_OPTIONS}
             value={LANGUAGE_OPTIONS.find(
-              (option) => option.value === settings.language,
+              (option) => option.value === i18n.language,
             )}
-            onChange={(option) => addSetting({ language: option.value })}
+            onChange={(option) => {
+              i18n.changeLanguage(option.value)
+              console.log(i18n.language)
+            }}
           />
         }
       />
@@ -168,12 +173,12 @@ const SettingsPage = ({ hideTitle }) => {
             checked={overrideDataLanguage}
           />
         }
-        label={<label htmlFor="dataLanguage">Data Language</label>}
+        label={<label htmlFor="dataLanguage">{t('Data Language')}</label>}
         right={
           <Select
             options={[]}
             isDisabled={!overrideDataLanguage}
-            placeholder="Select..."
+            placeholder={t('Select...')}
           />
         }
       />

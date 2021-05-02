@@ -1,6 +1,7 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -79,6 +80,8 @@ const EntryOverview = ({ className }) => {
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
 
+  const { t } = useTranslation()
+
   useEffect(() => {
     async function fetchEntryDetails() {
       // Show loading between entry selections
@@ -115,9 +118,9 @@ const EntryOverview = ({ className }) => {
         <Tag color={theme.tag.access}>{ACCESS_TYPE[locationData.access]}</Tag>
       )}
       {locationData.unverified ? (
-        <Tag color={theme.tag.unverified}>Unverified</Tag>
+        <Tag color={theme.tag.unverified}>{t('Unverified')}</Tag>
       ) : (
-        <Tag color={theme.tag.verified}>Verified</Tag>
+        <Tag color={theme.tag.verified}>{t('Verified')}</Tag>
       )}
     </TagList>
   )
@@ -166,7 +169,7 @@ const EntryOverview = ({ className }) => {
               )}
 
               <p className="updatedTime">
-                Last Updated{' '}
+                {t('Last Updated')}{' '}
                 <time dateTime={locationData.updated_at}>
                   {formatISOString(locationData.updated_at)}
                 </time>
