@@ -5,6 +5,7 @@ import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 const EntryTab = styled(PageTabs)`
   [data-reach-tab-list] {
     height: 50px;
+
     [data-reach-tab] {
       display: flex;
 
@@ -18,8 +19,9 @@ const EntryTab = styled(PageTabs)`
       }
     }
   }
+  [data-reach-tab-panels] [data-reach-tab-panel] {
+    overflow: auto;
+  }
 `
-const StyledTabPanel = styled(TabPanel)`
-  overflow: auto;
-`
-export { EntryTab, StyledTabPanel, Tab, TabList, TabPanels }
+
+export { EntryTab, Tab, TabList, TabPanel, TabPanels }

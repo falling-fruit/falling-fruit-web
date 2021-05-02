@@ -1,12 +1,6 @@
 import styled from 'styled-components/macro'
 
-import {
-  EntryTab,
-  StyledTabPanel,
-  Tab,
-  TabList,
-  TabPanels,
-} from '../ui/EntryTabs'
+import { EntryTab, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 
@@ -46,12 +40,12 @@ const EntryTabs = () => (
         <Tab>Reviews</Tab>
       </TabList>
       <TabPanels>
-        <StyledTabPanel>
+        <TabPanel>
           <EntryOverview />
-        </StyledTabPanel>
-        <StyledTabPanel>
+        </TabPanel>
+        <TabPanel>
           <EntryReviews />
-        </StyledTabPanel>
+        </TabPanel>
       </TabPanels>
     </EntryTab>
   </Page>
