@@ -35,17 +35,17 @@ const ReviewContainer = styled.div`
 const RATINGS = [
   {
     title: 'Fruiting',
-    urlKey: 'fruiting',
+    ratingKey: 'fruiting',
     total: 3,
   },
   {
     title: 'Quality',
-    urlKey: 'quality_rating',
+    ratingKey: 'quality_rating',
     total: 5,
   },
   {
     title: 'Yield',
-    urlKey: 'yield_rating',
+    ratingKey: 'yield_rating',
     total: 5,
   },
 ]
@@ -54,21 +54,14 @@ const Review = ({ review }) => (
   <ReviewContainer>
     <RatingTable>
       {RATINGS.map(
-        ({ title, urlKey, total }, key) =>
-          review[urlKey] && (
+        ({ title, ratingKey, total }, key) =>
+          review[ratingKey] && (
             <tr key={key}>
               <td>
                 <Label>{title}</Label>
               </td>
               <td>
-                <Rating
-                  key={key}
-                  percentage={
-                    title === 'Fruiting'
-                      ? review[urlKey] / total
-                      : review[urlKey] / total
-                  }
-                />
+                <Rating key={key} percentage={review[ratingKey] / total} />
               </td>
             </tr>
           ),
@@ -76,7 +69,6 @@ const Review = ({ review }) => (
     </RatingTable>
     <ReviewDescription>
       <blockquote>{review.comment}</blockquote>
-      {/* Include the images */}
       <cite>
         Reviewed {formatISOString(review.created_at)} by {review.author}
       </cite>
