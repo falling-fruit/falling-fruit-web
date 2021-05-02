@@ -27,11 +27,11 @@ const WideButton = styled(Button).attrs({
   margin-bottom: 24px;
 `
 
-export const ReviewStep = () => (
+export const ReviewStep = ({ standalone }) => (
   <>
     <SectionHeading>
       Leave a Review
-      <Optional />
+      {!standalone && <Optional />}
     </SectionHeading>
     <Textarea name="comment" placeholder="Lorem ipsum..." />
 
@@ -108,7 +108,7 @@ export const ReviewForm = () => {
         </Button>
       )}
     >
-      <ReviewStep />
+      <ReviewStep standalone />
       <ReviewPhotoStep />
     </FormikAllSteps>
   )
