@@ -6,14 +6,17 @@ import { formatISOString } from './textFormatters'
 const Label = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.tertiaryText};
-  margin: 4px;
+  margin: 3px;
 `
 const RatingTable = styled.table`
   width: 100%;
   margin-bottom: 6px;
-
+  border-spacing: 0;
   td:nth-child(2) {
     width: 100%;
+  }
+  td {
+    padding: 0;
   }
 `
 const ReviewDescription = styled.section`
