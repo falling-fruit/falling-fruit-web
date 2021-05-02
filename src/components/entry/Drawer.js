@@ -28,28 +28,33 @@ const Overflow = styled.div`
   width: 100%;
   bottom: 0px;
   top: 0;
-  /* overflow: hidden; */
+  ${({ open }) =>
+    open ? 'overflow: hidden; border-radius: 44px 44px 0 0' : ''};
 
   & > button#toggle {
     margin: 0;
     width: 100%;
+    background: none;
+    border: none;
+    /* height: 3em; */
 
     &::before {
       content: '';
       height: 6px;
       width: 4em;
       position: absolute;
-      top: -10px;
+      top: ${({ open }) => (open ? '1em' : '-1em')};
       left: calc(50% - 2em);
-      background: blue;
+      background: ${({ theme }) => theme.secondaryText};
       border-radius: 3px;
     }
     &::after {
       content: '';
-      height: 1em;
+      height: 6em;
       width: 100%;
       position: absolute;
-      top: -1em;
+      top: -3em;
+      cursor: pointer;
     }
   }
 
