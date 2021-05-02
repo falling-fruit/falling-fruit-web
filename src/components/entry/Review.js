@@ -5,7 +5,6 @@ import Rating from '../ui/Rating'
 import { formatISOString } from './textFormatters'
 
 const ReviewContainer = styled.div`
-  height: 100%;
   margin-bottom: 20px;
 `
 const Label = styled.p`
