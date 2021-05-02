@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 
-import EntryDetails from '../entry/EntryDetails'
+import EntryOverview from '../entry/EntryOverview'
+import EntryReviews from '../entry/EntryReviews'
 import { LocationForm } from '../form/LocationForm'
 import SettingsPage from '../settings/SettingsPage'
 import MainPane from './MainPane'
@@ -21,7 +22,8 @@ const SidePaneSwitch = () => (
             <SettingsPage desktop />
           </Route>
           <Route exact path="/entry/:id">
-            <EntryDetails />
+            <EntryOverview />
+            <EntryReviews />
           </Route>
         </Switch>
       </NavPane>

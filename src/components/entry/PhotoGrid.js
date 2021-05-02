@@ -1,4 +1,5 @@
 import { ImageAdd } from '@styled-icons/boxicons-solid'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import ResetButton from '../ui/ResetButton'
@@ -122,36 +123,44 @@ const ExtraImagesWrapper = styled(ResetButton)`
   }
 `
 
-const PhotoData = ({ photos, altText, onViewLightbox }) =>
-  photos.length > 0 && (
-    // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
-    // TODO: use alt based off of photo description or filename
-    <StyledPhotoGrid>
-      <img className="main-image" src={photos[0].photo.medium} alt={altText} />
-      {photos.length > 1 && (
-        <ExtraImagesWrapper
-          onClick={onViewLightbox}
-          disabled={photos.length < 3}
-        >
-          {photos.length > 2 && (
-            <div className="other-photos-mask">
-              <span>{photos.length - 2}</span>
-              Photos
-            </div>
-          )}
-          <img
-            className="extra-images"
-            src={photos[1].photo.medium}
-            alt={altText}
-          />
-        </ExtraImagesWrapper>
-      )}
-      <ImageUpload>
-        <ImageAdd />
-        Add Photo
-        <input type="file" />
-      </ImageUpload>
-    </StyledPhotoGrid>
+const PhotoData = ({ photos, altText, onViewLightbox }) => {
+  const { t } = useTranslation()
+  return (
+    photos.length > 0 && (
+      // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
+      // TODO: use alt based off of photo description or filename
+      <StyledPhotoGrid>
+        <img
+          className="main-image"
+          src={photos[0].photo.medium}
+          alt={altText}
+        />
+        {photos.length > 1 && (
+          <ExtraImagesWrapper
+            onClick={onViewLightbox}
+            disabled={photos.length < 3}
+          >
+            {photos.length > 2 && (
+              <div className="other-photos-mask">
+                <span>{photos.length - 2}</span>
+                {t('Photos')}
+              </div>
+            )}
+            <img
+              className="extra-images"
+              src={photos[1].photo.medium}
+              alt={altText}
+            />
+          </ExtraImagesWrapper>
+        )}
+        <ImageUpload>
+          <ImageAdd />
+          {t('Add Photo')}
+          <input type="file" />
+        </ImageUpload>
+      </StyledPhotoGrid>
+    )
   )
+}
 
 export default PhotoData
