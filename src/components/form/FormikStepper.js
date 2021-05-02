@@ -7,28 +7,26 @@ import Button from '../ui/Button'
 import ProgressBar from '../ui/ProgressBar'
 
 const StyledForm = styled(Form)`
-  box-sizing: border-box;
-  padding: 8px 27px 20px;
   height: 100%;
   display: flex;
   flex-direction: column;
 
   > div:first-child {
+    // Expand form content up until progress bar
     flex: 1;
-  }
-
-  > div:last-child {
-    // Progress bar
-    padding: 0 35px;
   }
 `
 
-const ProgressButtons = styled.div`
+const StyledProgressBar = styled(ProgressBar)`
+  padding: 0 35px;
+`
+
+export const ProgressButtons = styled.div`
   margin-bottom: 16px;
   text-align: center;
 
   button {
-    // Should width be manually adjusted?
+    // TODO: Should width be manually adjusted?
     width: 130px;
 
     &:not(:last-child) {
@@ -67,7 +65,7 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
         <StyledForm>
           <div>{currentChild}</div>
 
-          <ProgressButtons $twoButtons>
+          <ProgressButtons>
             {step > 0 && (
               <Button
                 secondary
@@ -88,7 +86,7 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
             </Button>
           </ProgressButtons>
 
-          <ProgressBar
+          <StyledProgressBar
             labels={childrenArray.map((child) => child.props.label)}
             step={completed ? childrenArray.length + 1 : step}
             onChange={setStep}

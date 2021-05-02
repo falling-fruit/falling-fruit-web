@@ -1,5 +1,6 @@
 import { useFormikContext } from 'formik'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getTypes } from '../../utils/api'
@@ -8,8 +9,18 @@ import ImagePreview from '../ui/ImagePreview'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
+import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, Step } from './FormikStepper'
 import { FileUpload, Select, Slider, Textarea } from './FormikWrappers'
+
+const INITIAL_VALUES = {
+  types: [],
+  description: '',
+  access: null,
+  fruiting: 0,
+  quality_rating: 0,
+  yield_rating: 0,
+}
 
 const PROPERTY_ACCESS_LABELS = [
   'Source is on my property',
@@ -46,9 +57,12 @@ const PROPERTY_ACCESS_OPTIONS = labelsToOptions(PROPERTY_ACCESS_LABELS)
 const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 
 const StyledLocationForm = styled.div`
+  box-sizing: border-box;
   width: 100%;
+  padding: 0 10px;
 
   @media ${({ theme }) => theme.device.mobile} {
+    padding: 8px 27px 20px;
     margin-top: 87px;
   }
 `
@@ -108,7 +122,33 @@ const Step1 = ({ typeOptions }) => (
   </>
 )
 
-const Step2 = () => {
+const Step2 = () => (
+  <>
+    <SectionHeading>
+      Leave a Review
+      <Optional />
+    </SectionHeading>
+    <Textarea name="comment" placeholder="Lorem ipsum..." />
+
+    <Slider
+      name="fruiting"
+      label="Fruiting Status"
+      labels={['Unsure', 'Flowers', 'Unripe fruit', 'Ripe fruit']}
+    />
+    <Slider
+      name="quality_rating"
+      label="Quality"
+      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
+    />
+    <Slider
+      name="yield_rating"
+      label="Yield"
+      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
+    />
+  </>
+)
+
+const Step3 = () => {
   const fileUploadRef = useRef()
   // TODO: instead of doing this... just wrap both the file upload and the caption inputs in a new Formik field
   const {
@@ -150,33 +190,11 @@ const Step2 = () => {
   )
 }
 
-const Step3 = () => (
-  <>
-    <SectionHeading>
-      Leave a Review
-      <Optional />
-    </SectionHeading>
-    <Textarea name="comment" placeholder="Lorem ipsum..." />
+export const LocationForm = ({ desktop }) => {
+  // TODO: create a "going back" util
+  const history = useHistory()
+  const { state } = useLocation()
 
-    <Slider
-      name="fruiting"
-      label="Fruiting Status"
-      labels={['Unsure', 'Flowers', 'Unripe fruit', 'Ripe fruit']}
-    />
-    <Slider
-      name="quality_rating"
-      label="Quality"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-    <Slider
-      name="yield_rating"
-      label="Yield"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-  </>
-)
-
-export const LocationForm = () => {
   const [typeOptions, setTypeOptions] = useState([])
 
   useEffect(() => {
@@ -196,27 +214,27 @@ export const LocationForm = () => {
     <Step2 key={2} />,
     <Step3 key={3} />,
   ]
+
   const formikSteps = steps.map((step, index) => (
     <Step key={index} label={`Step ${index + 1}`}>
       {step}
     </Step>
   ))
 
+  const handleSubmit = (values) =>
+    console.log('submitted location form', values)
+
+  const StepDisplay = desktop ? FormikAllSteps : FormikStepper
+
   return (
     <StyledLocationForm>
-      <FormikStepper
-        initialValues={{
-          types: [],
-          description: '',
-          access: null,
-          fruiting: 0,
-          quality_rating: 0,
-          yield_rating: 0,
-        }}
-        onSubmit={(values) => console.log('submitted location form', values)}
+      <StepDisplay
+        initialValues={INITIAL_VALUES}
+        onCancel={() => history.push(state?.fromPage ?? '/map')}
+        onSubmit={handleSubmit}
       >
         {formikSteps}
-      </FormikStepper>
+      </StepDisplay>
     </StyledLocationForm>
   )
 }
