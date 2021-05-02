@@ -127,8 +127,9 @@ const EntryOverview = ({ className }) => {
 
   return (
     <div className={className}>
-      {/* Need to center this loading indicator!
-       */}
+      {/* TODO: Properly center this loading indicator! */}
+      {/* TODO: Find out if overflow for this page works properly on mobile */}
+
       {isReady ? (
         <>
           <ReportModal

@@ -19,4 +19,7 @@ const EntryTab = styled(PageTabs)`
     }
   }
 `
-export { EntryTab, Tab, TabList, TabPanel, TabPanels }
+const StyledTabPanel = styled(TabPanel)`
+  overflow: auto;
+`
+export { EntryTab, StyledTabPanel, Tab, TabList, TabPanels }
