@@ -18,7 +18,7 @@ export default function Drawer({ children }) {
   return (
     <Container>
       <CupertinoPane
-        id="test"
+        id="map-entry-bottom-drawer"
         config={{
           breaks: {
             top: { enabled: true, height: 500, bounce: true },
