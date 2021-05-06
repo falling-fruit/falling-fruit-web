@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+
+import { getTypes } from '../utils/api'
 
 /**
  * Default filter selections.
@@ -18,9 +20,33 @@ const SearchContext = createContext()
 const SearchProvider = ({ children }) => {
   const [viewport, setViewport] = useState(null)
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
+  const [typesById, setTypesById] = useState()
+
+  useEffect(() => {
+    const preloadTypes = async () => {
+      // Preload type data
+      const types = await getTypes({
+        swlat: -85,
+        nelat: 85,
+        swlng: -180,
+        nelng: 180,
+        zoom: 0,
+      })
+
+      const newTypesById = {}
+      for (const type of types) {
+        newTypesById[type.id] = type
+      }
+
+      setTypesById(newTypesById)
+    }
+
+    preloadTypes()
+  }, [setTypesById])
+
   return (
     <SearchContext.Provider
-      value={{ viewport, setViewport, filters, setFilters }}
+      value={{ viewport, setViewport, filters, setFilters, typesById }}
     >
       {children}
     </SearchContext.Provider>
