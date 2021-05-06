@@ -1,11 +1,11 @@
-import intersection from 'ramda/src/intersection'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
-import { getTypes } from '../../utils/api'
+import { useSettings } from '../../contexts/SettingsContext'
+import { getTypeCounts } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
@@ -34,8 +34,9 @@ const StyledFilter = styled.div`
 
 const Filter = ({ isOpen }) => {
   const { view } = useMap()
-  const { filters, setFilters } = useSearch()
+  const { filters, setFilters, typesById } = useSearch()
   const [treeData, setTreeData] = useState([])
+  const { settings } = useSettings()
   const { t } = useTranslation()
 
   const handleTreeChange = (currentNode, selectedNodes) => {
@@ -58,36 +59,36 @@ const Filter = ({ isOpen }) => {
           zoom: Math.min(zoom, 12),
           muni: filters.muni,
         }
-        const types = await getTypes(query)
-        const typeIds = types.map((type) => type.id)
 
-        setFilters((prevFilters) => {
-          // Keep only types that still exist in the current view
-          const newTypes =
-            prevFilters.types === null
-              ? typeIds
-              : intersection(prevFilters.types, typeIds)
+        const counts = await getTypeCounts(query)
 
-          setTreeData(buildTypeSchema(types, newTypes))
+        const countsById = {}
+        for (const count of counts) {
+          countsById[count.id] = count.count
+        }
 
-          return {
-            ...prevFilters,
-            types: newTypes,
-          }
-        })
+        setTreeData(
+          buildTypeSchema(
+            Object.values(typesById),
+            countsById,
+            filters.types,
+            settings.showScientificNames,
+          ),
+        )
       }
     }
 
-    if (isOpen) {
+    if (isOpen && typesById) {
       updateTypesTree()
     }
-  }, [view, isOpen, filters.muni, setFilters])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view, isOpen, filters.muni, setFilters, typesById])
 
   return (
     isOpen && (
       <StyledFilter>
         <div>
-          <p className="edible-type-text"> {t('Edible Types')}</p>
+          <p className="edible-type-text">{t('Edible Types')}</p>
           <TreeSelect data={treeData} onChange={handleTreeChange} />
         </div>
         <div>

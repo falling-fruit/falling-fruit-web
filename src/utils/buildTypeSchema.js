@@ -45,25 +45,30 @@ const moveRootToOther = (root) => {
   }
 }
 
-const replaceRootCounts = (root) => {
+const replaceRootCounts = (root, countsById) => {
   if (root.children.length === 0) {
-    // Leaf nodes already have correct count
+    root.count = countsById[root.id] ?? 0
     return
   }
 
   let childCounts = 0
 
   for (const child of root.children) {
-    replaceRootCounts(child)
+    replaceRootCounts(child, countsById)
     childCounts += child.count
   }
 
   root.count = childCounts
 }
 
-const addTreeSelectFields = (root, checkedTypes) => {
+const addTreeSelectFields = (root, checkedTypes, showScientificNames) => {
   // Add necessary fields for react-dropdown-tree-select
-  root.label = `${root.name} (${root.count})`
+  const name =
+    root.scientific_name && showScientificNames
+      ? `${root.name} [${root.scientific_name}]`
+      : root.name
+
+  root.label = `${name} (${root.count})`
   // This value isn't important, as long as it's unique, because we will be using node.id
   root.value = `${root.name}-${root.id}`
   root.expanded = true
@@ -75,16 +80,27 @@ const addTreeSelectFields = (root, checkedTypes) => {
   root.id = undefined
 
   for (const child of root.children) {
-    addTreeSelectFields(child, checkedTypes)
+    addTreeSelectFields(child, checkedTypes, showScientificNames)
   }
 }
 
-const buildTypeSchema = (types, checkedTypes) => {
+const sortChildrenByCount = (node) => {
+  // Sort children by descending count, so that available entries appear first
+  node.children.sort((typeA, typeB) => typeB.count - typeA.count)
+}
+
+const buildTypeSchema = (
+  types,
+  countsById,
+  checkedTypes,
+  showScientificName,
+) => {
   const tree = listToTree(types)
 
   moveRootToOther(tree)
-  replaceRootCounts(tree)
-  addTreeSelectFields(tree, checkedTypes)
+  replaceRootCounts(tree, countsById)
+  addTreeSelectFields(tree, checkedTypes, showScientificName)
+  sortChildrenByCount(tree)
 
   return tree
 }

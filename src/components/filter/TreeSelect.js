@@ -127,7 +127,6 @@ const TreeSelectContainer = styled.div`
 
   ul {
     height: 100%;
-    font-weight: bold;
   }
 
   ul > div {
