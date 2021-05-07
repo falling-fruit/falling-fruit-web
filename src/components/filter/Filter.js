@@ -48,7 +48,8 @@ const Filter = ({ isOpen }) => {
 
   useEffect(() => {
     const updateTypesTree = async () => {
-      const { zoom, bounds } = view
+      const { bounds } = view
+      console.log(bounds)
 
       if (bounds) {
         const query = {
@@ -56,8 +57,7 @@ const Filter = ({ isOpen }) => {
           nelng: bounds.ne.lng,
           swlat: bounds.sw.lat,
           nelat: bounds.ne.lat,
-          zoom: Math.min(zoom, 12),
-          muni: filters.muni,
+          muni: filters.muni ? '1' : '0',
         }
 
         const counts = await getTypeCounts(query)
@@ -66,6 +66,8 @@ const Filter = ({ isOpen }) => {
         for (const count of counts) {
           countsById[count.id] = count.count
         }
+
+        console.log(counts)
 
         setTreeData(
           buildTypeSchema(
