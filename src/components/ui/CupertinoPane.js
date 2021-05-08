@@ -1,12 +1,13 @@
-import { CupertinoPane } from 'cupertino-pane'
+import { CupertinoPane as VanillaCupertinoPane } from 'cupertino-pane'
+import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 
 /**
  * React wrapper for CupertinoPane
  */
-export default function CupertinoPaneWrapper({ id, children, config }) {
+export default function CupertinoPane({ id, children, config }) {
   useEffect(() => {
-    const drawer = new CupertinoPane(`#${id}`, config)
+    const drawer = new VanillaCupertinoPane(`#${id}`, config)
 
     /*
       HACK: Fix for race condition using setTimeout @ 0 ms to 
@@ -17,4 +18,10 @@ export default function CupertinoPaneWrapper({ id, children, config }) {
   }, [id])
 
   return <div id={id}>{children}</div>
+}
+
+CupertinoPane.propTypes = {
+  id: PropTypes.string.isRequired,
+  children: PropTypes.any,
+  config: PropTypes.any,
 }
