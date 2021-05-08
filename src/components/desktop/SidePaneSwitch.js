@@ -18,7 +18,7 @@ const SidePaneSwitch = () => (
           <Route path="/map/entry/new">
             <LocationForm desktop />
           </Route>
-          <Route exact path="/settings">
+          <Route path="/settings">
             <SettingsPage desktop />
           </Route>
           <Route exact path={['/map/entry/:id', '/list/entry/:id']}>

@@ -84,7 +84,7 @@ const EntryOverview = ({ className }) => {
 
   useEffect(() => {
     // clear location data when id changes
-    setLocationData(undefined)
+    setLocationData(null)
 
     async function fetchEntryDetails() {
       // Show loading between entry selections

@@ -9,6 +9,7 @@ const EntryNav = () => {
   const { state } = useLocation()
 
   const onBackButtonClick = () => {
+    // TODO: extract into routing utils
     // Default to going back to the list. This occurs when the user opens /entry/{typeId} directly
     history.push(state?.fromPage ?? '/list')
   }

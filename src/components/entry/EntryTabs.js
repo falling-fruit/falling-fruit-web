@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { EntryTab, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
@@ -8,8 +7,8 @@ import EntryReviews from './EntryReviews'
 // Wraps the entire page and gives it a top margin if on mobile
 export const Page = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
-    ${({ isDrawer }) =>
-      isDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
+    ${({ isInDrawer }) =>
+      isInDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
   }
 
   overflow: auto;
@@ -34,28 +33,24 @@ export const TextContent = styled.article`
   }
 `
 
-const EntryTabs = () => {
-  const { pathname } = useLocation()
-
-  return (
-    <Page isDrawer={pathname.split('/')[1] === 'map'}>
-      <EntryTab>
-        <TabList>
-          {/* TODO: Use Routing */}
-          <Tab>Overview</Tab>
-          <Tab>Reviews</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <EntryOverview />
-          </TabPanel>
-          <TabPanel>
-            <EntryReviews />
-          </TabPanel>
-        </TabPanels>
-      </EntryTab>
-    </Page>
-  )
-}
+const EntryTabs = ({ isInDrawer }) => (
+  <Page isInDrawer={isInDrawer}>
+    <EntryTab>
+      <TabList>
+        {/* TODO: Use Routing */}
+        <Tab>Overview</Tab>
+        <Tab>Reviews</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          <EntryOverview />
+        </TabPanel>
+        <TabPanel>
+          <EntryReviews />
+        </TabPanel>
+      </TabPanels>
+    </EntryTab>
+  </Page>
+)
 
 export default EntryTabs

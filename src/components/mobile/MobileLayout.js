@@ -40,7 +40,7 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
-          <Route path={['/map/entry/new/details']}>
+          <Route path="/map/entry/new/details">
             <LocationForm />
           </Route>
           <Route path="/list/entry/:id">
@@ -48,10 +48,10 @@ const MobileLayout = () => {
           </Route>
           <Route path={['/map', '/list', '/settings', '/map/entry/new']}>
             <Switch>
-              <Route path={'/map/entry/new'} />
+              <Route path="/map/entry/new" />
               <Route path="/map/entry/:id">
                 <Drawer>
-                  <EntryTabs />
+                  <EntryTabs isInDrawer />
                 </Drawer>
               </Route>
             </Switch>
@@ -60,8 +60,11 @@ const MobileLayout = () => {
         </Switch>
       </TabPanels>
       <Switch>
-        <Route path={['/map/entry/new/details']}></Route>
+        <Route path="/map/entry/new/details" />
         <Route>
+          {
+            // TODO use z-index from enum and override in PageTabs
+          }
           <TabList style={{ zIndex: 999 }}>{tabList}</TabList>
         </Route>
       </Switch>
