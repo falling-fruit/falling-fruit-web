@@ -49,10 +49,14 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
   border: none;
   background: none;
   padding-top: 8px;
+
   @media ${({ theme }) => theme.device.desktop} {
     box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+
+    position: absolute;
+    width: 100%;
   }
 `
 
