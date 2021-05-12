@@ -78,7 +78,7 @@ const SearchBarContainer = styled.div`
   }
 `
 
-const Search = ({ onType, sideButton, ...props }) => {
+const Search = ({ onType, sideButton, filter, ...props }) => {
   const { setViewport } = useSearch()
   const isDesktop = useIsDesktop()
 
@@ -208,6 +208,7 @@ const Search = ({ onType, sideButton, ...props }) => {
             })}
         </ComboboxList>
       </StyledComboboxPopover>
+      {filter}
     </Combobox>
   )
 }

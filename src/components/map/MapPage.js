@@ -43,7 +43,7 @@ const normalizeLongitude = (longitude) => {
   return longitude
 }
 
-const MapPage = () => {
+const MapPage = ({ desktop }) => {
   const history = useHistory()
   const location = useLocation()
   const container = useRef(null)
@@ -168,7 +168,7 @@ const MapPage = () => {
       {isAddingLocation ? (
         <AddLocationPin />
       ) : (
-        <AddLocationButton onClick={handleAddLocationClick} />
+        !desktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}

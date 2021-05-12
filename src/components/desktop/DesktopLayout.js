@@ -55,7 +55,7 @@ const DesktopLayout = () => (
         >
           <SidePaneSwitch />
           <MapPane>
-            <MapPage />
+            <MapPage desktop />
           </MapPane>
         </StyledSplit>
       )}

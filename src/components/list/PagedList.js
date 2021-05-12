@@ -79,7 +79,7 @@ const PagedList = () => {
 
   useEffect(() => {
     const fetchCurrentListEntries = async () => {
-      if (currentView !== undefined) {
+      if (currentView) {
         setLoadingNextPage(true)
         const { bounds, center } = currentView
         // TODO: consolidate querying logic
