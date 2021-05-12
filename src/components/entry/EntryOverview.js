@@ -134,12 +134,13 @@ const EntryOverview = ({ className }) => {
 
       {isReady ? (
         <>
-          <ReportModal
-            locationId={locationData.id}
-            name={allTypeNames}
-            isOpen={isReportModalOpen}
-            onDismiss={() => setIsReportModalOpen(false)}
-          />
+          {isReportModalOpen && (
+            <ReportModal
+              locationId={locationData.id}
+              name={allTypeNames}
+              onDismiss={() => setIsReportModalOpen(false)}
+            />
+          )}
           <PhotoGrid
             photos={locationData.photos}
             altText={allTypeNames}
