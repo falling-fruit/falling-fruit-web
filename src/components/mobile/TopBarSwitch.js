@@ -2,7 +2,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import EntryNav from '../entry/EntryNav'
 import LocationNav from '../form/LocationNav'
-import SearchWrapper from '../SearchWrapper'
+import Search from '../search/Search'
 import TopBar from '../ui/TopBar'
 
 const TopBarSwitch = () => (
@@ -20,7 +20,7 @@ const TopBarSwitch = () => (
     </Route>
     <Route>
       <TopBar>
-        <SearchWrapper />
+        <Search />
       </TopBar>
     </Route>
   </Switch>

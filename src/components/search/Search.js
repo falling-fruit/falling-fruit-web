@@ -20,6 +20,8 @@ import { useSearch } from '../../contexts/SearchContext'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
+import Filter from '../filter/Filter'
+import FilterIconButton from '../filter/FilterIconButton'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
@@ -78,7 +80,7 @@ const SearchBarContainer = styled.div`
   }
 `
 
-const Search = ({ onType, sideButton, filter, ...props }) => {
+const Search = (props) => {
   const { setViewport } = useSearch()
   const isDesktop = useIsDesktop()
 
@@ -86,6 +88,9 @@ const Search = ({ onType, sideButton, filter, ...props }) => {
   const geolocation = useGeolocation()
   const [cityName, setCityName] = useState(null)
   const { setView } = useMap()
+
+  // Filter visible
+  const [filterOpen, setFilterOpen] = useState(false)
 
   useEffect(() => {
     async function fetchCityName() {
@@ -121,7 +126,7 @@ const Search = ({ onType, sideButton, filter, ...props }) => {
   }, [value])
 
   const handleChange = (e) => {
-    onType()
+    setFilterOpen(false)
     setValue(e.target.value)
   }
 
@@ -164,7 +169,8 @@ const Search = ({ onType, sideButton, filter, ...props }) => {
           }
           placeholder="Search for a location..."
         />
-        {sideButton}
+
+        <FilterIconButton pressed={filterOpen} setPressed={setFilterOpen} />
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
@@ -208,7 +214,8 @@ const Search = ({ onType, sideButton, filter, ...props }) => {
             })}
         </ComboboxList>
       </StyledComboboxPopover>
-      {filter}
+
+      <Filter isOpen={filterOpen} />
     </Combobox>
   )
 }
