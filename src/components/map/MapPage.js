@@ -127,7 +127,7 @@ const MapPage = ({ desktop }) => {
           ] = await getLocations({
             ...query,
             invasive: filters.invasive ? 1 : 0,
-            locale: i18n.language === 'en-US' ? 'fr' : i18n.language,
+            locale: i18n.language === 'en-US' ? 'en' : i18n.language,
           })
 
           setMapData({ locations, clusters: [], isLoading: false })
