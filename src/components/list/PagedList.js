@@ -121,8 +121,8 @@ const PagedList = () => {
   const handleListEntryClick = (id) => {
     // TODO: Render pin on map for the clicked list entry
     history.push({
-      pathname: `/entry/${id}`,
-      state: { fromPage: '/map' },
+      pathname: `/list/entry/${id}`,
+      state: { fromPage: '/list' },
     })
   }
 

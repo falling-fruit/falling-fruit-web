@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
 import useRoutedTabs from '../../utils/useRoutedTabs'
+import Drawer from '../entry/Drawer'
 import EntryTabs from '../entry/EntryTabs'
 import { LocationForm } from '../form/LocationForm'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
@@ -39,21 +40,32 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
-          <Route path="/entry/new/details">
+          <Route path="/map/entry/new/details">
             <LocationForm />
           </Route>
-          <Route path={['/map', '/list', '/settings', '/entry/new']}>
-            {tabPanels}
-          </Route>
-          <Route path="/entry/:id">
+          <Route path="/list/entry/:id">
             <EntryTabs />
+          </Route>
+          <Route path={['/map', '/list', '/settings', '/map/entry/new']}>
+            <Switch>
+              <Route path="/map/entry/new" />
+              <Route path="/map/entry/:id">
+                <Drawer>
+                  <EntryTabs isInDrawer />
+                </Drawer>
+              </Route>
+            </Switch>
+            {tabPanels}
           </Route>
         </Switch>
       </TabPanels>
       <Switch>
-        <Route path="/entry/new/details"></Route>
+        <Route path="/map/entry/new/details" />
         <Route>
-          <TabList>{tabList}</TabList>
+          {
+            // TODO use z-index from enum and override in PageTabs
+          }
+          <TabList style={{ zIndex: 999 }}>{tabList}</TabList>
         </Route>
       </Switch>
     </PageTabs>

@@ -83,6 +83,9 @@ const EntryOverview = ({ className }) => {
   const { t } = useTranslation()
 
   useEffect(() => {
+    // clear location data when id changes
+    setLocationData(null)
+
     async function fetchEntryDetails() {
       // Show loading between entry selections
       const locationData = await getLocationById(id)

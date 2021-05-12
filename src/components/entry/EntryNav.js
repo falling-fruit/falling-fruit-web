@@ -9,8 +9,9 @@ const EntryNav = () => {
   const { state } = useLocation()
 
   const onBackButtonClick = () => {
-    // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    history.push(state?.fromPage ?? '/map')
+    // TODO: extract into routing utils
+    // Default to going back to the list. This occurs when the user opens /entry/{typeId} directly
+    history.push(state?.fromPage ?? '/list')
   }
 
   const onEditButtonClick = () => {
