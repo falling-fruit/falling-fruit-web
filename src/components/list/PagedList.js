@@ -10,6 +10,7 @@ import Checkbox from '../ui/Checkbox'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import SquareButton from '../ui/SquareButton'
 import EntryList from './EntryList'
+import { NoResultsFound, ShouldZoomIn } from './ListLoading'
 
 const LIMIT = 30
 
@@ -50,13 +51,6 @@ const CheckboxContainer = styled.div`
   display: flex;
   padding: 10px;
   color: ${({ theme }) => theme.secondaryText};
-`
-
-const NoResultsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 `
 
 const PagedList = () => {
@@ -128,7 +122,7 @@ const PagedList = () => {
 
   return (
     <Container>
-      {view.zoom > 12 && (
+      {view.zoom > 12 ? (
         <>
           <ListContainer ref={container}>
             {loadingNextPage ? (
@@ -143,9 +137,7 @@ const PagedList = () => {
                 handleListEntryClick={handleListEntryClick}
               />
             ) : (
-              <NoResultsContainer>
-                <img src={'/no_results_icon.svg'} alt="no-results-icon" />
-              </NoResultsContainer>
+              <NoResultsFound />
             )}
           </ListContainer>
           <PageInfo>
@@ -185,6 +177,8 @@ const PagedList = () => {
             </CheckboxContainer>
           </PageInfo>
         </>
+      ) : (
+        <ShouldZoomIn />
       )}
     </Container>
   )

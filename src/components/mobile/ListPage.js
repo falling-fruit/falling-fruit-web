@@ -6,18 +6,11 @@ import styled from 'styled-components/macro'
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
 import InfiniteList from '../list/InfiniteList'
+import { NoResultsFound, ShouldZoomIn } from '../list/ListLoading'
 // TODO: Ask Jeffrey what the limit for mobile list view should be
 const LIMIT = 30
 
 const ListPageContainer = styled.div`
-  height: 100%;
-`
-
-const LoadingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
 `
 
@@ -88,32 +81,25 @@ const ListPage = () => {
     setLocations((locations) => [...locations, ...newLocations.slice(2)])
   }
 
-  return (
-    <ListPageContainer ref={container}>
-      {locations.length === 0 ? (
-        <LoadingContainer>
-          <img
-            src={view.zoom > 12 ? '/no_results_icon.svg' : '/magnify_map.svg'}
-            alt="loading-list-icon"
-          />
-          <p>
-            {view.zoom > 12
-              ? 'No Results Found'
-              : 'Zoom into a location to see Entry Data'}
-          </p>
-        </LoadingContainer>
-      ) : (
-        <InfiniteList
-          width={rect.width}
-          height={rect.height}
-          locations={locations}
-          loadNextPage={loadNextPage}
-          hasMoreItems={hasMoreItems}
-          isNextPageLoading={isNextPageLoading}
-        />
-      )}
-    </ListPageContainer>
-  )
+  let content
+  if (view.zoom <= 12) {
+    content = <ShouldZoomIn />
+  } else if (locations.length === 0) {
+    content = <NoResultsFound />
+  } else {
+    content = (
+      <InfiniteList
+        width={rect.width}
+        height={rect.height}
+        locations={locations}
+        loadNextPage={loadNextPage}
+        hasMoreItems={hasMoreItems}
+        isNextPageLoading={isNextPageLoading}
+      />
+    )
+  }
+
+  return <ListPageContainer ref={container}>{content}</ListPageContainer>
 }
 
 export default ListPage
