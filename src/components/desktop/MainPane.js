@@ -2,9 +2,9 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import PagedList from '../list/PagedList'
+import SearchWrapper from '../SearchWrapper'
 import Button from '../ui/Button'
 import { SettingsAccordionButton } from '../ui/SettingsAccordion'
-import SearchOverlay from './SearchOverlay'
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ const MainPane = () => {
 
   return (
     <Container>
-      <SearchOverlay />
+      <SearchWrapper />
       <PagedList />
       <StyledButton
         onClick={() =>
