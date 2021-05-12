@@ -102,7 +102,7 @@ const ExtraImagesWrapper = styled(ResetButton)`
     left: 0;
     top: 0;
     position: absolute;
-    color: white;
+    color: ${({ theme }) => theme.background};
     background: linear-gradient(
       180deg,
       rgba(48, 45, 44, 0.4) 0%,

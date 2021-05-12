@@ -31,7 +31,7 @@ const StyledHeader = styled.header`
         width: 110px;
         margin: 0;
         height: 100%;
-        color: white;
+        color: ${({ theme }) => theme.background};
         cursor: pointer;
 
         button {
@@ -52,7 +52,7 @@ const StyledHeader = styled.header`
 
         button,
         &.active {
-          background-color: white;
+          background-color: ${({ theme }) => theme.background};
           color: ${({ theme }) => theme.orange};
         }
       }

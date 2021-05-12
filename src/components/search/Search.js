@@ -48,7 +48,7 @@ const StyledCurrentLocationButton = styled(CurrentLocationButton)`
 const StyledComboboxPopover = styled(ComboboxPopover)`
   border: none;
   background: none;
-  padding-top: 8px;
+  margin-top: 8px;
 
   @media ${({ theme }) => theme.device.desktop} {
     box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
@@ -57,6 +57,8 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
 
     position: absolute;
     width: 100%;
+    z-index: 1;
+    background-color: ${({ theme }) => theme.background};
   }
 `
 

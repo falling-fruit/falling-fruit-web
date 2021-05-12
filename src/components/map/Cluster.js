@@ -23,7 +23,7 @@ const ClusterContainer = styled(ResetButton)`
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  color: white;
+  color: ${({ theme }) => theme.background};
   background: ${({ theme }) => theme.blue};
   box-shadow: 0 0 4px 1px ${({ theme }) => theme.shadow};
   transform: translate(-50%, -50%);

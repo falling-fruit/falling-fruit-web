@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 const StyledButton = styled(Button)`
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.orange};
   margin: 10px 10px;
   padding: 15px 0;

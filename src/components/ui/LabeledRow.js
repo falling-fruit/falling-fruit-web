@@ -24,8 +24,8 @@ const StyledLabeledInput = styled.div`
 
 // TODO: should language preferences be a grid instead of flex
 
-const LabeledRow = ({ label, left, right }) => (
-  <StyledLabeledInput>
+const LabeledRow = ({ label, left, right, ...props }) => (
+  <StyledLabeledInput {...props}>
     <div>
       {left}
       {label}

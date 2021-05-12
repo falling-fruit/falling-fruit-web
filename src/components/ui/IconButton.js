@@ -48,7 +48,7 @@ const Subscript = styled.div`
   justify-content: center;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.orange};
-  color: white;
+  color: ${({ theme }) => theme.background};
   width: 20px;
   height: 20px;
   font-family: ${({ theme }) => theme.fonts};
