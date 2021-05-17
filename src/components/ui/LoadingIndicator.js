@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 const LoadingIndicatorWrapper = styled.div`
   --size: 18px;
 
-  @media only screen and ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     --size: 16px;
   }
 
