@@ -20,7 +20,10 @@ const StyledButton = styled(Button)`
   // TODO: Siraj add box shadow and extra white border. What's the best way to add another white border? ("raised" prop)
 `
 
-const SettingsButton = styled(SettingsAccordionButton)`
+const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
+  ...props,
+  forwardedAs: 'button',
+}))`
   padding: 5px 0;
   border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
 `
