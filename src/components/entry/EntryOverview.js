@@ -102,7 +102,10 @@ const EntryOverview = ({ className }) => {
       setLocationData(locationData)
       setTypesData(typesData)
     }
-    fetchEntryDetails()
+
+    if (typesById) {
+      fetchEntryDetails()
+    }
   }, [id, typesById])
 
   const handleAddressClick = () => {

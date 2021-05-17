@@ -37,6 +37,7 @@ const EntryList = forwardRef(
             key={location.id}
             leftIcons={
               <CircleIcon backgroundColor={theme.green}>
+                {/* TODO: locations currently don't have a photo tied to them, so never shows up */}
                 {location.photo ? (
                   <img src={location.photo.medium} alt="entry-icon" />
                 ) : (
