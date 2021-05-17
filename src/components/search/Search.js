@@ -182,7 +182,7 @@ const Search = (props) => {
             !isDesktop && geolocation.latitude !== null && value === '' && (
               <ComboboxOption
                 as={SearchEntry}
-                value={'Current Location'}
+                value="Current Location"
                 isCurrentLocation
               >
                 {['Current Location', cityName ?? '']}

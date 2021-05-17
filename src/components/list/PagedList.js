@@ -1,6 +1,6 @@
 import { useRect } from '@reach/rect'
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -49,58 +49,58 @@ const PagedList = () => {
   const container = useRef()
   const rect = useRect(container) ?? { width: 0, height: 0 }
   const { view } = useMap()
+
   const [locations, setLocations] = useState([])
   const [currentOffset, setCurrentOffset] = useState(0)
   const [totalLocations, setTotalLocations] = useState(0)
-  const [updateOnMapMove, setUpdateOnMapMove] = useState(false)
-  // currentView stores the map viewport to use for when update list on map move is unchecked
-  const [currentView, setCurrentView] = useState(null)
   const [loadingNextPage, setLoadingNextPage] = useState(false)
+
+  // If updateOnMapMove flag/checkbox is checked, then the list view is only updated when a new location is "searched"
+  const [updateOnMapMove, setUpdateOnMapMove] = useState(false)
+  // currentView stores the map viewport to use for when update results on map move is unchecked
+  const currentView = useRef()
+
+  const fetchPageWithOffset = useCallback(async (offset) => {
+    setLoadingNextPage(true)
+    setCurrentOffset(offset)
+
+    const { bounds, center } = currentView.current
+    // TODO: consolidate querying logic
+    const locations = await getLocations({
+      swlng: bounds.sw.lng,
+      nelng: bounds.ne.lng,
+      swlat: bounds.sw.lat,
+      nelat: bounds.ne.lat,
+      lng: center.lng,
+      lat: center.lat,
+      limit: LIMIT,
+      offset,
+    })
+    setTotalLocations(locations[1])
+    setLocations(locations.slice(2))
+
+    setLoadingNextPage(false)
+  }, [])
 
   useEffect(() => {
     const setInitialView = () => {
-      const { bounds, zoom } = view
-      if (
-        bounds?.ne.lat != null &&
-        zoom > VISIBLE_CLUSTER_ZOOM_LIMIT &&
-        (updateOnMapMove || currentView == null)
-      ) {
-        setCurrentView(view)
-        setCurrentOffset(0)
-        setLocations([])
-      } else if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-        setLocations([])
-        setCurrentView(undefined)
-        setCurrentOffset(0)
+      const { bounds, center, zoom, newBounds } = view
+
+      if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
+        // When setView(fitContainerBounds(...)) is used (i.e. when searching), bounds appear in newBounds momentarily
+        // So we can take advantage of that to know when bounds change due to a search result
+        // TODO: This should change to using a new "searched" flag in global state eventually, indicating whether the current
+        // bounds are a result of searching
+        const properBounds = updateOnMapMove ? bounds : newBounds
+
+        if (properBounds?.ne.lat != null) {
+          currentView.current = { zoom, center, bounds: properBounds }
+          fetchPageWithOffset(0)
+        }
       }
     }
     setInitialView()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [view, currentView])
-
-  useEffect(() => {
-    const fetchCurrentListEntries = async () => {
-      if (currentView) {
-        setLoadingNextPage(true)
-        const { bounds, center } = currentView
-        // TODO: consolidate querying logic
-        const locations = await getLocations({
-          swlng: bounds.sw.lng,
-          nelng: bounds.ne.lng,
-          swlat: bounds.sw.lat,
-          nelat: bounds.ne.lat,
-          lng: center.lng,
-          lat: center.lat,
-          limit: LIMIT,
-          offset: currentOffset,
-        })
-        setTotalLocations(locations[1])
-        setLocations(locations.slice(2))
-        setLoadingNextPage(false)
-      }
-    }
-    fetchCurrentListEntries()
-  }, [currentOffset, currentView])
+  }, [view, updateOnMapMove, fetchPageWithOffset])
 
   const handleListEntryClick = (id) => {
     // TODO: Render pin on map for the clicked list entry
@@ -141,13 +141,13 @@ const PagedList = () => {
         <NavButtonContainer>
           <SquareButton
             disabled={currentOffset === 0}
-            onClick={() => setCurrentOffset(currentOffset - LIMIT)}
+            onClick={() => fetchPageWithOffset(currentOffset - LIMIT)}
           >
             <ChevronLeft />
           </SquareButton>
           <SquareButton
             disabled={currentOffset + LIMIT >= totalLocations}
-            onClick={() => setCurrentOffset(currentOffset + LIMIT)}
+            onClick={() => fetchPageWithOffset(currentOffset + LIMIT)}
           >
             <ChevronRight />
           </SquareButton>
