@@ -9,7 +9,7 @@ import { getLocations } from '../../utils/api'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
-import LoadingIndicator from '../ui/LoadingIndicator'
+import { LoadingOverlay } from '../ui/LoadingIndicator'
 import SquareButton from '../ui/SquareButton'
 import EntryList from './EntryList'
 import { NoResultsFound, ShouldZoomIn } from './ListLoading'
@@ -24,7 +24,15 @@ const Container = styled.div`
 `
 
 const ListContainer = styled.div`
+  position: relative;
   height: 100%;
+
+  > div:first-child {
+    width: 100%;
+    height: 100%;
+
+    ${({ $disabled }) => $disabled && 'opacity: 0.4;'}
+  }
 `
 
 const PageNav = styled.div`
@@ -54,7 +62,7 @@ const PagedList = () => {
   const [loadingNextPage, setLoadingNextPage] = useState(false)
 
   // If updateOnMapMove flag/checkbox is checked, then the list view is only updated when a new location is "searched"
-  const [updateOnMapMove, setUpdateOnMapMove] = useState(false)
+  const [updateOnMapMove, setUpdateOnMapMove] = useState(true)
   // currentView stores the map viewport to use for when update results on map move is unchecked
   const currentView = useRef()
 
@@ -116,21 +124,22 @@ const PagedList = () => {
     <Rect>
       {({ rect, ref }) => (
         <Container>
-          <ListContainer ref={ref}>
-            {loadingNextPage ? (
-              <LoadingIndicator vertical cover />
-            ) : locations.length > 0 ? (
-              <EntryList
-                itemSize={42}
-                locations={locations}
-                itemCount={locations.length}
-                height={rect.height}
-                width={rect.width}
-                handleListEntryClick={handleListEntryClick}
-              />
-            ) : (
-              <NoResultsFound />
-            )}
+          <ListContainer ref={ref} $disabled={loadingNextPage}>
+            <div>
+              {locations.length > 0 ? (
+                <EntryList
+                  itemSize={42}
+                  locations={locations}
+                  itemCount={locations.length}
+                  height={rect.height}
+                  width={rect.width}
+                  handleListEntryClick={handleListEntryClick}
+                />
+              ) : (
+                <NoResultsFound />
+              )}
+            </div>
+            {loadingNextPage && <LoadingOverlay />}
           </ListContainer>
           <PageNav>
             {locations.length > 0

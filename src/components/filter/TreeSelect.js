@@ -4,15 +4,8 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { ShouldZoomIn } from '../list/ListLoading'
-import LoadingIndicator from '../ui/LoadingIndicator'
+import { LoadingOverlay } from '../ui/LoadingIndicator'
 import NonrenderTreeSelect from './NonrenderTreeSelect'
-
-const LoadingOverlay = styled(LoadingIndicator)`
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`
 
 const ShouldZoomInOverlay = styled(ShouldZoomIn)`
   position: absolute;
