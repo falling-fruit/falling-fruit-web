@@ -55,6 +55,11 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
+
+    @media ${({ theme }) => theme.mobile} {
+      // Disable overscrolling on iOS
+      overflow: hidden;
+    }
   }
 
   #root {
