@@ -4388,6 +4388,11 @@ csstype@^3.0.2, csstype@^3.0.6:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.7.tgz#2a5fb75e1015e84dd15692f71e89a1450290950b"
   integrity sha512-KxnUB0ZMlnUWCsx2Z8MUsr6qV6ja1w9ArPErJaJaF8a5SOWoHLIszeCTKGRGRgtLgYrs1E8CHkNSP1VZTTPc9g==
 
+cupertino-pane@^1.2.61:
+  version "1.2.61"
+  resolved "https://registry.yarnpkg.com/cupertino-pane/-/cupertino-pane-1.2.61.tgz#f505513380f9448becf3a1d00348c4f5a9bdee28"
+  integrity sha512-A+x28n5YEkLWDtHOXiKlIZo1sOpWI4J+vHGPNevDw6PbHISwJXXiIq3uO7U+Sj1KsRkTuiJbiZjaYC0fVzP3lg==
+
 cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"

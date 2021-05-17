@@ -17,6 +17,7 @@
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/boxicons-solid": "^10.23.0",
     "axios": "^0.21.1",
+    "cupertino-pane": "^1.2.61",
     "formik": "^2.2.6",
     "google-map-react": "^2.1.9",
     "i18next": "^20.2.1",

@@ -7,7 +7,8 @@ import EntryReviews from './EntryReviews'
 // Wraps the entire page and gives it a top margin if on mobile
 export const Page = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
-    padding-top: 87px;
+    ${({ isInDrawer }) =>
+      isInDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
   }
 
   overflow: auto;
@@ -32,8 +33,8 @@ export const TextContent = styled.article`
   }
 `
 
-const EntryTabs = () => (
-  <Page>
+const EntryTabs = ({ isInDrawer }) => (
+  <Page isInDrawer={isInDrawer}>
     <EntryTab>
       <TabList>
         {/* TODO: Use Routing */}
