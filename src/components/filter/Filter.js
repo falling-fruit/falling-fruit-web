@@ -74,8 +74,6 @@ const Filter = ({ isOpen }) => {
           countsById[count.id] = count.count
         }
 
-        console.log(counts)
-
         setTreeData(
           buildTypeSchema(
             Object.values(typesById),

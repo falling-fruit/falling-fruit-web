@@ -3,16 +3,16 @@ const listToTree = (types) => {
   typeMap[null] = { name: 'All', id: null, children: [] }
 
   for (const type of types) {
-    typeMap[type.id] = type
+    // Make a copy of the type, to avoid modifying arguments
+    // In this case, our preloaded type database in Object.values(typesById)
+    typeMap[type.id] = { ...type }
     typeMap[type.id].children = []
   }
 
   for (const type of types) {
-    // Some parents types aren't included in API response, presumably because
-    // the parent types don't have counts in the view
-    // TODO: Should the parent types be included in the hierarchy?
+    // TODO: Some parents types aren't included in API response, don't know why
     const parent_id = type.parent_id in typeMap ? type.parent_id : null
-    typeMap[parent_id].children.push(type)
+    typeMap[parent_id].children.push(typeMap[type.id])
   }
 
   return typeMap[null] // sentinel root
