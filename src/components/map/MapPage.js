@@ -19,7 +19,7 @@ import Map from './Map'
  * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
  * @constant {number}
  */
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
 /**
  * When user is adding a location, zoom in to this zoom level

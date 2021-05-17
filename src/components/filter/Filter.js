@@ -7,6 +7,7 @@ import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 import { getTypeCounts } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
+import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
 
@@ -43,6 +44,7 @@ const Filter = ({ isOpen }) => {
   const { view } = useMap()
   const { filters, setFilters, typesById } = useSearch()
   const [treeData, setTreeData] = useState([])
+  const [treeDataLoading, setTreeDataLoading] = useState(false)
   const { settings } = useSettings()
   const { t } = useTranslation()
 
@@ -55,10 +57,11 @@ const Filter = ({ isOpen }) => {
 
   useEffect(() => {
     const updateTypesTree = async () => {
-      const { bounds } = view
-      console.log(bounds)
+      const { zoom, bounds } = view
 
-      if (bounds) {
+      if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT && bounds) {
+        setTreeDataLoading(true)
+
         const query = {
           swlng: bounds.sw.lat,
           nelng: bounds.ne.lng,
@@ -82,6 +85,8 @@ const Filter = ({ isOpen }) => {
             settings.showScientificNames,
           ),
         )
+
+        setTreeDataLoading(false)
       }
     }
 
@@ -96,7 +101,12 @@ const Filter = ({ isOpen }) => {
       <StyledFilter>
         <div>
           <p className="edible-type-text">{t('Edible Types')}</p>
-          <TreeSelect data={treeData} onChange={handleTreeChange} />
+          <TreeSelect
+            data={treeData}
+            shouldZoomIn={view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT}
+            loading={treeDataLoading}
+            onChange={handleTreeChange}
+          />
         </div>
         <div>
           <CheckboxFilters values={filters} onChange={setFilters} />

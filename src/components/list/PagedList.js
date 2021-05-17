@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
+import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -61,13 +62,13 @@ const PagedList = () => {
       const { bounds, zoom } = view
       if (
         bounds?.ne.lat != null &&
-        zoom > 12 &&
+        zoom > VISIBLE_CLUSTER_ZOOM_LIMIT &&
         (updateOnMapMove || currentView == null)
       ) {
         setCurrentView(view)
         setCurrentOffset(0)
         setLocations([])
-      } else if (zoom <= 12) {
+      } else if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
         setLocations([])
         setCurrentView(undefined)
         setCurrentOffset(0)
@@ -109,7 +110,7 @@ const PagedList = () => {
     })
   }
 
-  if (view.zoom <= 12) {
+  if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
     return <ShouldZoomIn />
   }
 
