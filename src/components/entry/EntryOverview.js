@@ -6,7 +6,8 @@ import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
-import { getLocationById, getTypeById } from '../../utils/api'
+import { useSearch } from '../../contexts/SearchContext'
+import { getLocationById } from '../../utils/api'
 import { getStreetAddress, hasSeasonality } from '../../utils/locationInfo'
 import { getZoomedInView } from '../../utils/viewportBounds'
 import { ReportModal } from '../form/ReportModal'
@@ -74,6 +75,7 @@ const Description = styled.section`
 const EntryOverview = ({ className }) => {
   const { id } = useParams()
   const { setView } = useMap()
+  const { typesById } = useSearch()
   const [locationData, setLocationData] = useState()
   const [address, setAddress] = useState('')
   const [typesData, setTypesData] = useState()
@@ -91,16 +93,14 @@ const EntryOverview = ({ className }) => {
         locationData.lng,
       )
 
-      const typesData = await Promise.all(
-        locationData.type_ids.map(getTypeById),
-      )
+      const typesData = locationData.type_ids.map((typeId) => typesById[typeId])
 
       setAddress(streetAddress)
       setLocationData(locationData)
       setTypesData(typesData)
     }
     fetchEntryDetails()
-  }, [id])
+  }, [id, typesById])
 
   const handleAddressClick = () => {
     history.push('/map')
