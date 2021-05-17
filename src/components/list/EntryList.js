@@ -1,4 +1,5 @@
 import { ChevronRight } from '@styled-icons/boxicons-solid'
+import { forwardRef } from 'react'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
@@ -14,59 +15,66 @@ const StyledListEntry = styled(ListEntry)`
   cursor: pointer;
 `
 
-const EntryList = ({
-  height,
-  width,
-  itemSize,
-  itemCount,
-  locations,
-  handleListEntryClick,
-  ...props
-}) => {
-  const renderRow = ({ index, style }) => {
-    const location = locations[index]
-    let row = null
-    if (location) {
-      row = (
-        <StyledListEntry
-          key={location.id}
-          leftIcons={
-            <CircleIcon backgroundColor={theme.green}>
-              {location.photo ? (
-                <img src={location.photo.medium} alt="entry-icon" />
-              ) : (
-                <LeafIcon />
-              )}
-            </CircleIcon>
-          }
-          rightIcons={<ChevronRight size="16" color={theme.blue} />}
-          primaryText={location.type_names[0]}
-          secondaryText={`${convertMetersToMiles(location.distance)} miles`}
-          onClick={() => handleListEntryClick(location.id)}
-          style={style}
-        />
-      )
-    } else if (index < itemCount) {
-      row = (
-        <div style={style}>
-          <LoadingIndicator />
-        </div>
-      )
+const EntryList = forwardRef(
+  (
+    {
+      height,
+      width,
+      itemSize,
+      itemCount,
+      locations,
+      handleListEntryClick,
+      ...props
+    },
+    ref,
+  ) => {
+    const renderRow = ({ index, style }) => {
+      const location = locations[index]
+      let row = null
+      if (location) {
+        row = (
+          <StyledListEntry
+            key={location.id}
+            leftIcons={
+              <CircleIcon backgroundColor={theme.green}>
+                {location.photo ? (
+                  <img src={location.photo.medium} alt="entry-icon" />
+                ) : (
+                  <LeafIcon />
+                )}
+              </CircleIcon>
+            }
+            rightIcons={<ChevronRight size="16" color={theme.blue} />}
+            primaryText={location.type_names[0]}
+            secondaryText={`${convertMetersToMiles(location.distance)} miles`}
+            onClick={() => handleListEntryClick(location.id)}
+            style={style}
+          />
+        )
+      } else if (index < itemCount) {
+        row = (
+          <div style={style}>
+            <LoadingIndicator />
+          </div>
+        )
+      }
+      return row
     }
-    return row
-  }
 
-  return (
-    <FixedSizeList
-      height={height}
-      width={width}
-      itemSize={itemSize}
-      itemCount={itemCount}
-      {...props}
-    >
-      {renderRow}
-    </FixedSizeList>
-  )
-}
+    return (
+      <FixedSizeList
+        height={height}
+        width={width}
+        itemSize={itemSize}
+        itemCount={itemCount}
+        ref={ref}
+        {...props}
+      >
+        {renderRow}
+      </FixedSizeList>
+    )
+  },
+)
+EntryList.displayName = 'EntryList'
 
 export default EntryList
