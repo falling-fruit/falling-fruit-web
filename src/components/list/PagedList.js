@@ -1,4 +1,4 @@
-import { useRect } from '@reach/rect'
+import { Rect } from '@reach/rect'
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -46,8 +46,6 @@ const NavButtonContainer = styled.div`
 
 const PagedList = () => {
   const history = useHistory()
-  const container = useRef()
-  const rect = useRect(container) ?? { width: 0, height: 0 }
   const { view } = useMap()
 
   const [locations, setLocations] = useState([])
@@ -115,61 +113,65 @@ const PagedList = () => {
   }
 
   return (
-    <Container>
-      <ListContainer ref={container}>
-        {loadingNextPage ? (
-          <LoadingIndicator vertical cover />
-        ) : locations.length > 0 ? (
-          <EntryList
-            itemSize={42}
-            locations={locations}
-            itemCount={locations.length}
-            height={rect.height}
-            width={rect.width}
-            handleListEntryClick={handleListEntryClick}
-          />
-        ) : (
-          <NoResultsFound />
-        )}
-      </ListContainer>
-      <PageNav>
-        {locations.length > 0
-          ? `Showing Results ${currentOffset + 1} - ${
-              currentOffset + locations.length
-            }`
-          : 'No Results Found'}
-        <NavButtonContainer>
-          <SquareButton
-            disabled={currentOffset === 0}
-            onClick={() => fetchPageWithOffset(currentOffset - LIMIT)}
-          >
-            <ChevronLeft />
-          </SquareButton>
-          <SquareButton
-            disabled={currentOffset + LIMIT >= totalLocations}
-            onClick={() => fetchPageWithOffset(currentOffset + LIMIT)}
-          >
-            <ChevronRight />
-          </SquareButton>
-        </NavButtonContainer>
-      </PageNav>
+    <Rect>
+      {({ rect, ref }) => (
+        <Container>
+          <ListContainer ref={ref}>
+            {loadingNextPage ? (
+              <LoadingIndicator vertical cover />
+            ) : locations.length > 0 ? (
+              <EntryList
+                itemSize={42}
+                locations={locations}
+                itemCount={locations.length}
+                height={rect.height}
+                width={rect.width}
+                handleListEntryClick={handleListEntryClick}
+              />
+            ) : (
+              <NoResultsFound />
+            )}
+          </ListContainer>
+          <PageNav>
+            {locations.length > 0
+              ? `Showing Results ${currentOffset + 1} - ${
+                  currentOffset + locations.length
+                }`
+              : 'No Results Found'}
+            <NavButtonContainer>
+              <SquareButton
+                disabled={currentOffset === 0}
+                onClick={() => fetchPageWithOffset(currentOffset - LIMIT)}
+              >
+                <ChevronLeft />
+              </SquareButton>
+              <SquareButton
+                disabled={currentOffset + LIMIT >= totalLocations}
+                onClick={() => fetchPageWithOffset(currentOffset + LIMIT)}
+              >
+                <ChevronRight />
+              </SquareButton>
+            </NavButtonContainer>
+          </PageNav>
 
-      <LabeledRow
-        style={{ padding: 10 }}
-        left={
-          <Checkbox
-            id="update-on-map-move"
-            onChange={(e) => setUpdateOnMapMove(e.target.checked)}
-            checked={updateOnMapMove}
+          <LabeledRow
+            style={{ padding: 10 }}
+            left={
+              <Checkbox
+                id="update-on-map-move"
+                onChange={(e) => setUpdateOnMapMove(e.target.checked)}
+                checked={updateOnMapMove}
+              />
+            }
+            label={
+              <label htmlFor="update-on-map-move">
+                Update results when map moves
+              </label>
+            }
           />
-        }
-        label={
-          <label htmlFor="update-on-map-move">
-            Update results when map moves
-          </label>
-        }
-      />
-    </Container>
+        </Container>
+      )}
+    </Rect>
   )
 }
 
