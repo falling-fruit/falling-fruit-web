@@ -32,6 +32,7 @@ const SearchProvider = ({ children }) => {
         nelng: 180,
         zoom: 0,
         urls: 1,
+        muni: 1,
       })
 
       const newTypesById = {}

@@ -78,7 +78,6 @@ const EntryOverview = ({ className }) => {
   const { typesById } = useSearch()
   const [locationData, setLocationData] = useState()
   const [address, setAddress] = useState('')
-  const [typesData, setTypesData] = useState()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
 
@@ -96,11 +95,8 @@ const EntryOverview = ({ className }) => {
         locationData.lng,
       )
 
-      const typesData = locationData.type_ids.map((typeId) => typesById[typeId])
-
       setAddress(streetAddress)
       setLocationData(locationData)
-      setTypesData(typesData)
     }
 
     if (typesById) {
@@ -132,13 +128,12 @@ const EntryOverview = ({ className }) => {
   )
 
   const allTypeNames = locationData && locationData.type_names.join(', ')
-  const isReady = locationData && typesData
 
   return (
     <div className={className}>
       {/* TODO: Properly center this loading indicator! */}
 
-      {isReady ? (
+      {locationData ? (
         <>
           {isReportModalOpen && (
             <ReportModal
@@ -154,7 +149,11 @@ const EntryOverview = ({ className }) => {
           />
           <TextContent>
             {tagList}
-            <TypesHeader typesData={typesData} />
+            <TypesHeader
+              typesData={locationData.type_ids.map(
+                (typeId) => typesById[typeId],
+              )}
+            />
             <Description>
               <p>{locationData.description}</p>
 
