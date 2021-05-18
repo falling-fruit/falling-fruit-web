@@ -3,6 +3,8 @@ import { forwardRef } from 'react'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
+import { useSearch } from '../../contexts/SearchContext'
+import { useSettings } from '../../contexts/SettingsContext'
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
@@ -13,6 +15,11 @@ const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
 
 const StyledListEntry = styled(ListEntry)`
   cursor: pointer;
+`
+
+const ScientificName = styled.span`
+  font-weight: normal;
+  font-style: italic;
 `
 
 const EntryList = forwardRef(
@@ -28,6 +35,9 @@ const EntryList = forwardRef(
     },
     ref,
   ) => {
+    const { settings } = useSettings()
+    const { typesById } = useSearch()
+
     const renderRow = ({ index, style }) => {
       const location = locations[index]
       let row = null
@@ -46,7 +56,16 @@ const EntryList = forwardRef(
               </CircleIcon>
             }
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={location.type_names[0]}
+            primaryText={
+              <>
+                {location.type_names[0]}{' '}
+                {settings.showScientificNames && (
+                  <ScientificName>
+                    [{typesById[location.type_ids[0]].scientific_name}]
+                  </ScientificName>
+                )}
+              </>
+            }
             secondaryText={`${convertMetersToMiles(location.distance)} miles`}
             onClick={() => handleListEntryClick(location.id)}
             style={style}
