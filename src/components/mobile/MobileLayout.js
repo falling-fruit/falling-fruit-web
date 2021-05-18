@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import useRoutedTabs from '../../utils/useRoutedTabs'
 import Drawer from '../entry/Drawer'
-import EntryTabs from '../entry/EntryTabs'
+import Entry from '../entry/Entry'
 import { LocationForm } from '../form/LocationForm'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { DEFAULT_TAB, getTabs } from './tabs'
@@ -43,14 +43,14 @@ const MobileLayout = () => {
             <LocationForm />
           </Route>
           <Route path="/list/entry/:id">
-            <EntryTabs />
+            <Entry />
           </Route>
           <Route path={['/map', '/list', '/settings', '/map/entry/new']}>
             <Switch>
               <Route path="/map/entry/new" />
               <Route path="/map/entry/:id">
                 <Drawer>
-                  <EntryTabs isInDrawer />
+                  <Entry isInDrawer />
                 </Drawer>
               </Route>
             </Switch>

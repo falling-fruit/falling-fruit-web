@@ -129,6 +129,9 @@ const PhotoData = ({ photos, altText, onViewLightbox }) => {
     photos.length > 0 && (
       // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
       // TODO: use alt based off of photo description or filename
+
+      // TODO: connect to lightbox once implemented
+      // TODO: this should be in the photogrid itself, shouldn't have to be handled here
       <StyledPhotoGrid>
         <img
           className="main-image"

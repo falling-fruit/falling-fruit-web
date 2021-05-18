@@ -1,5 +1,5 @@
 import { Map, Pencil } from '@styled-icons/boxicons-solid'
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 
 import IconButton from '../ui/IconButton'
 import TopBarNav from '../ui/TopBarNav'
@@ -7,9 +7,7 @@ import TopBarNav from '../ui/TopBarNav'
 const EntryNav = () => {
   const history = useHistory()
   const { state } = useLocation()
-  const {
-    params: { id },
-  } = useRouteMatch()
+  const { id } = useParams()
 
   const onBackButtonClick = () => {
     // TODO: extract into routing utils

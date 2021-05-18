@@ -84,7 +84,7 @@ Map.propTypes = {
   view: PropTypes.object.isRequired,
   geolocation: PropTypes.object,
   locations: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedLocationId: PropTypes.bool,
+  selectedLocationId: PropTypes.number,
   clusters: PropTypes.arrayOf(PropTypes.object).isRequired,
   onViewChange: PropTypes.func.isRequired,
   onClusterClick: PropTypes.func.isRequired,
