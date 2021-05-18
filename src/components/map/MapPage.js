@@ -1,7 +1,7 @@
 import { fitBounds } from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
 import { useMap } from '../../contexts/MapContext'
@@ -45,7 +45,14 @@ const normalizeLongitude = (longitude) => {
 
 const MapPage = ({ desktop }) => {
   const history = useHistory()
-  const location = useLocation()
+  const match = useRouteMatch({
+    path: '/map/entry/:entryId',
+    exact: true,
+  })
+
+  const isAddingLocation = match?.params.entryId === 'new'
+  const entryId = match?.params.entryId && parseInt(match.params.entryId)
+
   const container = useRef(null)
   const { viewport: searchViewport, filters } = useSearch()
   const { view, setView } = useMap()
@@ -76,8 +83,6 @@ const MapPage = ({ desktop }) => {
       setView(fitContainerBounds(searchViewport))
     }
   }, [searchViewport, setView])
-
-  const isAddingLocation = location.pathname === '/map/entry/new'
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -175,6 +180,7 @@ const MapPage = ({ desktop }) => {
         view={view}
         geolocation={geolocation}
         locations={isAddingLocation ? [] : mapData.locations}
+        selectedLocationId={entryId}
         clusters={isAddingLocation ? [] : mapData.clusters}
         onViewChange={setView}
         onGeolocationClick={handleGeolocationClick}

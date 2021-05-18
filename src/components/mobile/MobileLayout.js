@@ -11,7 +11,6 @@ import TopBarSwitch from './TopBarSwitch'
 
 const MobileLayout = () => {
   useTranslation()
-
   const tabs = getTabs()
 
   const [tabIndex, handleTabChange] = useRoutedTabs(

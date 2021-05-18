@@ -65,6 +65,7 @@ const Description = styled.section`
   & > .updatedTime {
     display: block;
     font-style: italic;
+    color: ${({ theme }) => theme.text};
   }
 
   button {

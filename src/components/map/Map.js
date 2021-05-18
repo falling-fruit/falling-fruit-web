@@ -21,6 +21,7 @@ const Map = ({
   view,
   geolocation,
   locations,
+  selectedLocationId,
   clusters,
   onGeolocationClick,
   onClusterClick,
@@ -71,7 +72,7 @@ const Map = ({
         lat={location.lat}
         lng={location.lng}
         // TODO: Add pin on location click
-        // selected={location.id === selectedLocation?.id}
+        selected={location.id === selectedLocationId}
         label={showLabels ? location.type_names[0] : undefined}
       />
     ))}
@@ -83,6 +84,7 @@ Map.propTypes = {
   view: PropTypes.object.isRequired,
   geolocation: PropTypes.object,
   locations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedLocationId: PropTypes.bool,
   clusters: PropTypes.arrayOf(PropTypes.object).isRequired,
   onViewChange: PropTypes.func.isRequired,
   onClusterClick: PropTypes.func.isRequired,

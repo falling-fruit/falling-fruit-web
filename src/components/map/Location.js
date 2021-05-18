@@ -6,6 +6,19 @@ import styled from 'styled-components/macro'
 
 import ResetButton from '../ui/ResetButton'
 
+const MapPin = styled(Map)`
+  // TODO: adjust intrusiveness of pin
+  height: 48px;
+  z-index: 3;
+  color: ${({ theme }) => theme.orange};
+
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: -20px;
+  filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.45));
+  color: ${({ theme }) => theme.orange};
+`
+
 /**
  * Component for a location displayed on the map.
  * @param {function} onClick - The handler called when this location is clicked
@@ -23,14 +36,6 @@ const LocationButton = styled(ResetButton)`
 
   &:focus {
     outline: none;
-  }
-
-  svg {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: -12px;
-    filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.45));
-    color: ${({ theme }) => theme.orange};
   }
 `
 
@@ -53,7 +58,8 @@ const Label = styled.div`
 const Location = memo(({ label, selected, ...props }) => (
   <>
     {/* "selected" will be used in a future PR which will put a pin on the location when it's clicked */}
-    <LocationButton {...props}>{selected && <Map size={48} />}</LocationButton>
+    {selected && <MapPin />}
+    <LocationButton {...props} />
     <Label>{label}</Label>
   </>
 ))
