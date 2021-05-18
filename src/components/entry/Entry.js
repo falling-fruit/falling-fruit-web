@@ -47,6 +47,8 @@ const Entry = ({ isInDrawer }) => {
 
   useEffect(() => {
     async function fetchEntryData() {
+      setLocationData(null)
+
       const [locationData, reviews] = await Promise.all([
         getLocationById(id),
         getReviews(id),

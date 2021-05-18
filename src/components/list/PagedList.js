@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
+import { useFilteredParams } from '../../utils/useFilteredParams'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
@@ -55,6 +56,7 @@ const NavButtonContainer = styled.div`
 const PagedList = () => {
   const history = useHistory()
   const { view } = useMap()
+  const getFilteredParams = useFilteredParams()
 
   const [locations, setLocations] = useState([])
   const [currentOffset, setCurrentOffset] = useState(0)
@@ -70,18 +72,16 @@ const PagedList = () => {
     setLoadingNextPage(true)
     setCurrentOffset(offset)
 
-    const { bounds, center } = currentView.current
-    // TODO: consolidate querying logic
-    const locations = await getLocations({
-      swlng: bounds.sw.lng,
-      nelng: bounds.ne.lng,
-      swlat: bounds.sw.lat,
-      nelat: bounds.ne.lat,
-      lng: center.lng,
-      lat: center.lat,
-      limit: LIMIT,
-      offset,
-    })
+    const locations = await getLocations(
+      getFilteredParams(
+        {
+          limit: LIMIT,
+          offset,
+        },
+        true,
+        currentView.current,
+      ),
+    )
     setTotalLocations(locations[1])
     setLocations(locations.slice(2))
 
