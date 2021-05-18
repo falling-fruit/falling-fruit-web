@@ -82,6 +82,7 @@ const LoadingIndicator = (props) => {
   )
 }
 
+// TODO: make a loading overlay that grays out the background instead of setting opacity on background elements
 const LoadingOverlay = styled(LoadingIndicator)`
   position: absolute;
   top: 0;
