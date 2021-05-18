@@ -68,25 +68,28 @@ const PagedList = () => {
   // currentView stores the map viewport to use for when update results on map move is unchecked
   const currentView = useRef()
 
-  const fetchPageWithOffset = useCallback(async (offset) => {
-    setLoadingNextPage(true)
-    setCurrentOffset(offset)
+  const fetchPageWithOffset = useCallback(
+    async (offset) => {
+      setLoadingNextPage(true)
+      setCurrentOffset(offset)
 
-    const locations = await getLocations(
-      getFilteredParams(
-        {
-          limit: LIMIT,
-          offset,
-        },
-        true,
-        currentView.current,
-      ),
-    )
-    setTotalLocations(locations[1])
-    setLocations(locations.slice(2))
+      const locations = await getLocations(
+        getFilteredParams(
+          {
+            limit: LIMIT,
+            offset,
+          },
+          true,
+          currentView.current,
+        ),
+      )
+      setTotalLocations(locations[1])
+      setLocations(locations.slice(2))
 
-    setLoadingNextPage(false)
-  }, [])
+      setLoadingNextPage(false)
+    },
+    [getFilteredParams],
+  )
 
   useEffect(() => {
     const setInitialView = () => {
