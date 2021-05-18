@@ -38,7 +38,7 @@ const MainPane = () => {
       <StyledButton
         onClick={() =>
           history.push({
-            pathname: '/entry/new',
+            pathname: '/map/entry/new',
             state: { fromPage: '/map' },
           })
         }

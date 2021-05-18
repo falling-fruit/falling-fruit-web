@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { getTypes } from '../../utils/api'
+import { useSearch } from '../../contexts/SearchContext'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -115,20 +115,18 @@ export const LocationForm = ({ desktop }) => {
   // TODO: create a "going back" util
   const history = useHistory()
   const { state } = useLocation()
+  const { typesById } = useSearch()
 
-  const [typeOptions, setTypeOptions] = useState([])
-
-  useEffect(() => {
-    async function fetchTypes() {
-      const types = await getTypes()
-      const options = types.map((t) => ({
-        value: t.id,
-        label: t.name,
-      }))
-      setTypeOptions(options)
-    }
-    fetchTypes()
-  }, [])
+  const typeOptions = useMemo(
+    () =>
+      typesById
+        ? Object.values(typesById).map((t) => ({
+            value: t.id,
+            label: t.name,
+          }))
+        : [],
+    [typesById],
+  )
 
   const steps = [
     <LocationStep key={1} typeOptions={typeOptions} />,
