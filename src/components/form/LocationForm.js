@@ -150,6 +150,7 @@ export const LocationForm = ({ desktop }) => {
   return (
     <StyledLocationForm>
       <StepDisplay
+        validateOnChange={false}
         initialValues={INITIAL_VALUES}
         onSubmit={handleSubmit}
         // For all steps only
