@@ -134,8 +134,8 @@ const PagedList = () => {
                   itemSize={42}
                   locations={locations}
                   itemCount={locations.length}
-                  height={rect.height}
-                  width={rect.width}
+                  height={rect?.height ?? 0}
+                  width={rect?.width ?? 0}
                   handleListEntryClick={handleListEntryClick}
                 />
               ) : (
