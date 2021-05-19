@@ -21,7 +21,7 @@ const EntryReviews = () => {
 
   return (
     <TextContent>
-      <h2>{`Reviews ${reviews ? `(${reviews.length})` : ''}`}</h2>
+      <h2>Reviews{reviews && ` (${reviews.length})`}</h2>
       {reviews ? (
         <>
           {reviews.map((review, index) => (

@@ -19,7 +19,7 @@ import Map from './Map'
  * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
  * @constant {number}
  */
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
 /**
  * When user is adding a location, zoom in to this zoom level
@@ -43,7 +43,7 @@ const normalizeLongitude = (longitude) => {
   return longitude
 }
 
-const MapPage = () => {
+const MapPage = ({ desktop }) => {
   const history = useHistory()
   const location = useLocation()
   const container = useRef(null)
@@ -127,7 +127,7 @@ const MapPage = () => {
           ] = await getLocations({
             ...query,
             invasive: filters.invasive ? 1 : 0,
-            locale: i18n.language === 'en-US' ? 'fr' : i18n.language,
+            locale: i18n.language === 'en-US' ? 'en' : i18n.language,
           })
 
           setMapData({ locations, clusters: [], isLoading: false })
@@ -168,7 +168,7 @@ const MapPage = () => {
       {isAddingLocation ? (
         <AddLocationPin />
       ) : (
-        <AddLocationButton onClick={handleAddLocationClick} />
+        !desktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
       <Map
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}

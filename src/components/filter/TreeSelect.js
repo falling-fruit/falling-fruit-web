@@ -3,16 +3,33 @@ import 'react-dropdown-tree-select/dist/styles.css'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import { ShouldZoomIn } from '../list/ListLoading'
+import { LoadingOverlay } from '../ui/LoadingIndicator'
 import NonrenderTreeSelect from './NonrenderTreeSelect'
 
+const ShouldZoomInOverlay = styled(ShouldZoomIn)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  img {
+    height: 70px;
+  }
+`
+
 const TreeSelectContainer = styled.div`
+  // For loading indicator
+  position: relative;
+
   .toggle.expanded {
     display: none;
   }
 
   .dropdown-trigger.arrow.top,
   .dropdown-trigger.arrow.bottom {
-    ${({ popover }) => !popover && `display: none`};
+    ${({ $popover }) => !$popover && `display: none`};
     border-radius: 23px;
     box-sizing: border-box;
     width: 100%;
@@ -46,6 +63,8 @@ const TreeSelectContainer = styled.div`
   .dropdown {
     height: 100%;
     width: 100%;
+
+    ${({ $disabled }) => $disabled && 'opacity: 0.4;'}
   }
 
   .dropdown-content {
@@ -127,7 +146,6 @@ const TreeSelectContainer = styled.div`
 
   ul {
     height: 100%;
-    font-weight: bold;
   }
 
   ul > div {
@@ -135,10 +153,17 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeSelect = ({ data, onChange, popover, ...props }) => {
+const TreeSelect = ({
+  data,
+  loading,
+  shouldZoomIn,
+  onChange,
+  popover,
+  ...props
+}) => {
   const { t } = useTranslation()
   return (
-    <TreeSelectContainer popover={popover}>
+    <TreeSelectContainer $popover={popover} $disabled={loading || shouldZoomIn}>
       <NonrenderTreeSelect
         data={data}
         onChange={onChange}
@@ -153,6 +178,10 @@ const TreeSelect = ({ data, onChange, popover, ...props }) => {
         inlineSearchInput
         {...props}
       />
+      {loading && <LoadingOverlay />}
+      {shouldZoomIn && (
+        <ShouldZoomInOverlay text="Zoom in to see type filters" />
+      )}
     </TreeSelectContainer>
   )
 }

@@ -4,6 +4,33 @@
  */
 
 export interface paths {
+  "/users.json": {
+    post: {
+      parameters: {
+        query: {
+          /** User email. */
+          email: string;
+          /** User password. */
+          password: string;
+          /** User name. */
+          name?: string;
+          /** Whether the user's `name` should be displayed as the author name on locations and reviews added by this user. */
+          add_anonymously?: { [key: string]: any };
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": Partial<{
+              auth_token: string;
+            }> &
+              Partial<components["schemas"]["Error"]>;
+          };
+        };
+      };
+    };
+  };
   "/login.json": {
     get: {
       parameters: {
@@ -71,6 +98,40 @@ export interface paths {
       };
     };
   };
+  "/types/counts.json": {
+    get: {
+      parameters: {
+        query: {
+          /** Longitude of southwest corner in WGS84 decimal degrees. Must be used with `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations within these bounds. */
+          swlng?: number;
+          /** Longitude of northeast corner in WGS84 decimal degrees. */
+          nelng?: number;
+          /** Latitude of southwest corner in WGS84 decimal degrees. */
+          swlat?: number;
+          /** Latitude of northeast corner in WGS84 decimal degrees. */
+          nelat?: number;
+          /** Zoom level, where the world is divided into a 2<sup>zoom</sup> x 2<sup>zoom</sup> grid. Used with `swlng`, `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations whose Cluster centerpoints at this zoom level fall within the bounds. Otherwise, an exact count is performed using Location coordinates. */
+          zoom?: number;
+          /** Whether to return (and count) the Types of Locations imported from municipal tree inventories. */
+          muni?: 0 | 1;
+          /** Type categories to return. */
+          c?: components["parameters"]["c"];
+          /** Whether to return uncategorized types. */
+          uncategorized?: 0 | 1;
+          /** Whether to return pending types. */
+          pending?: 0 | 1;
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["TypeCount"][];
+          };
+        };
+      };
+    };
+  };
   "/types.json": {
     get: {
       parameters: {
@@ -83,7 +144,7 @@ export interface paths {
           swlat?: number;
           /** Latitude of northeast corner in WGS84 decimal degrees. */
           nelat?: number;
-          /** Zoom level, where the world is divided into a 2<sup>zoom</sup> x 2<sup>zoom</sup> grid. Used with `swlng`, `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations whose Cluster centerpoints at this zoome level fall within the bounds. */
+          /** Zoom level, where the world is divided into a 2<sup>zoom</sup> x 2<sup>zoom</sup> grid. Used with `swlng`, `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations whose Cluster centerpoints at this zoom level fall within the bounds. */
           zoom?: number;
           /** Whether to return (and count) the Types of Locations imported from municipal tree inventories. */
           muni?: 0 | 1;
@@ -195,7 +256,7 @@ export interface paths {
           season_start?: components["parameters"]["season_start"];
           /** Last month in season (zero-based). */
           season_stop?: components["parameters"]["season_stop"];
-          /** Whether always in season (e.g. rosemary). Equivalent to `season_stop=0` (January) and `season_stop=11` (December). */
+          /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
           no_season?: components["parameters"]["no_season"];
           /** Whether needs verification. */
           unverified?: components["parameters"]["unverified"];
@@ -306,7 +367,7 @@ export interface paths {
           season_start?: components["parameters"]["season_start"];
           /** Last month in season (zero-based). */
           season_stop?: components["parameters"]["season_stop"];
-          /** Whether always in season (e.g. rosemary). Equivalent to `season_stop=0` (January) and `season_stop=11` (December). */
+          /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
           no_season?: components["parameters"]["no_season"];
           /** Whether needs verification. */
           unverified?: components["parameters"]["unverified"];
@@ -435,6 +496,8 @@ export interface components {
     BaseType: {
       /** Unique identifier. */
       id: number;
+      /** Type ID of taxonomic parent. */
+      parent_id: number | null;
       /** Whether pending admin review. */
       pending: boolean;
       /**
@@ -513,8 +576,6 @@ export interface components {
       created_at: string;
       /** Date and time of last update in format YYYY-MM-DDThh:mm:ss.sssZ. */
       updated_at: string;
-      /** Type ID of taxonomic parent. */
-      parent_id: number | null;
       /**
        * Edibility rating.
        * - -1: Not worth it (or toxic)
@@ -551,13 +612,18 @@ export interface components {
       unverified: boolean;
     };
     ListLocation: components["schemas"]["BaseLocation"] & {
-      /** Whether Type matched query (0) or not (1). */
-      sort: 0 | 1;
       /** Photo basename. */
       photo_file_name?: string | null;
       photo?: components["schemas"]["PhotoPaths"];
       /** Distance in meters from provided centerpoint. */
       distance?: number;
+    };
+    /** Number of Location Types in an area. */
+    TypeCount: {
+      /** Type ID. */
+      id: number;
+      /** Number of Locations with that Type ID. */
+      count: number;
     };
     SingleLocation: components["schemas"]["BaseLocation"] & {
       /**
@@ -585,6 +651,16 @@ export interface components {
       num_reviews: number;
       /** Review photos. */
       photos: components["schemas"]["Photo"][];
+      /** First month in season (zero-based). */
+      season_start: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+      /** Last month in season (zero-based). */
+      season_stop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+      /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
+      no_season: boolean;
+      /** Date and time created. */
+      created_at: string;
+      /** Date and time last updated. */
+      updated_at: string;
     };
     /** Observations of and opinions about a Location. */
     Review: {
@@ -592,10 +668,16 @@ export interface components {
       id: number;
       /** Location ID. */
       location_id: number;
+      /** User ID. */
+      user_id: number | null;
       /** Comment. */
       comment: string | null;
       /** Date and time visited in format YYYY-MM-DDThh:mm:ss.sssZ. */
       observed_on: string | null;
+      /** Date and time created. */
+      created_at: string;
+      /** Date and time last updated. */
+      updated_at: string;
       /** Fruiting status. */
       fruiting: (0 | 1 | 2) | null;
       /** Quality rating. */
@@ -651,7 +733,18 @@ export interface components {
     /** Type categories to return. */
     c: ("forager" | "freegan" | "honeybee" | "grafter")[];
     /** Locale of common name labels to return. */
-    locale: "en" | "de" | "el" | "es" | "fr" | "he" | "it" | "nl" | "pl";
+    locale:
+      | "en"
+      | "de"
+      | "el"
+      | "es"
+      | "fr"
+      | "he"
+      | "it"
+      | "nl"
+      | "pl"
+      | "pt_br"
+      | "zh_tw";
     /** IDs of Types to include (or all if empty or missing). */
     t: number[];
     /** Location ID. */
@@ -670,7 +763,7 @@ export interface components {
     season_start: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
     /** Last month in season (zero-based). */
     season_stop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
-    /** Whether always in season (e.g. rosemary). Equivalent to `season_stop=0` (January) and `season_stop=11` (December). */
+    /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
     no_season: boolean;
     /** Whether needs verification. */
     unverified: boolean;

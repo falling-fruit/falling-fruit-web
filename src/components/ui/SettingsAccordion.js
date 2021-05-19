@@ -7,6 +7,7 @@ import {
   useAccordionItemContext,
 } from '@reach/accordion'
 import { ChevronDown, ChevronRight } from '@styled-icons/boxicons-regular'
+import { Cog } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
@@ -23,7 +24,11 @@ const StyledListEntry = styled(ListEntry)`
   }
 `
 
-const SettingsAccordionButton = ({ LeftIcon, text, ...props }) => {
+const SettingsAccordionButton = ({
+  LeftIcon = Cog,
+  text = 'Settings',
+  ...props
+}) => {
   const { isExpanded } = useAccordionItemContext()
   const ChevronIcon = isExpanded ? ChevronDown : ChevronRight
 

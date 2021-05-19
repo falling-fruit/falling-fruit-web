@@ -39,7 +39,7 @@ const StyledPhotoGrid = styled.figure`
     border-radius: 4px;
   }
 
-  @media only screen and ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
     gap: 0;
     img {
@@ -71,7 +71,7 @@ const ImageUpload = styled.label`
     display: none;
   }
 
-  @media only screen and ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     border-radius: 0;
     border: none;
   }
@@ -81,7 +81,7 @@ const ExtraImagesWrapper = styled(ResetButton)`
   display: block;
   position: relative;
   border-radius: 4px;
-  @media only screen and ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     border-radius: 0;
   }
 
@@ -102,7 +102,7 @@ const ExtraImagesWrapper = styled(ResetButton)`
     left: 0;
     top: 0;
     position: absolute;
-    color: white;
+    color: ${({ theme }) => theme.background};
     background: linear-gradient(
       180deg,
       rgba(48, 45, 44, 0.4) 0%,

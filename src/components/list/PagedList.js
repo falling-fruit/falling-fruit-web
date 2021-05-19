@@ -1,15 +1,18 @@
-import { useRect } from '@reach/rect'
+import { Rect } from '@reach/rect'
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
+import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import Checkbox from '../ui/Checkbox'
-import LoadingIndicator from '../ui/LoadingIndicator'
+import LabeledRow from '../ui/LabeledRow'
+import { LoadingOverlay } from '../ui/LoadingIndicator'
 import SquareButton from '../ui/SquareButton'
 import EntryList from './EntryList'
+import { NoResultsFound, ShouldZoomIn } from './ListLoading'
 
 const LIMIT = 30
 
@@ -21,12 +24,15 @@ const Container = styled.div`
 `
 
 const ListContainer = styled.div`
+  position: relative;
   height: 100%;
-`
 
-const PageInfo = styled.div`
-  display: flex;
-  flex-direction: column;
+  > div:first-child {
+    width: 100%;
+    height: 100%;
+
+    ${({ $disabled }) => $disabled && 'opacity: 0.4;'}
+  }
 `
 
 const PageNav = styled.div`
@@ -46,77 +52,61 @@ const NavButtonContainer = styled.div`
   }
 `
 
-const CheckboxContainer = styled.div`
-  display: flex;
-  padding: 10px;
-  color: ${({ theme }) => theme.secondaryText};
-`
-
-const NoResultsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`
-
 const PagedList = () => {
   const history = useHistory()
-  const container = useRef()
-  const rect = useRect(container) ?? { width: 0, height: 0 }
   const { view } = useMap()
+
   const [locations, setLocations] = useState([])
   const [currentOffset, setCurrentOffset] = useState(0)
   const [totalLocations, setTotalLocations] = useState(0)
-  const [updateOnMapMove, setUpdateOnMapMove] = useState(false)
-  // currentView stores the map viewport to use for when update list on map move is unchecked
-  const [currentView, setCurrentView] = useState(undefined)
   const [loadingNextPage, setLoadingNextPage] = useState(false)
+
+  // If updateOnMapMove flag/checkbox is checked, then the list view is only updated when a new location is "searched"
+  const [updateOnMapMove, setUpdateOnMapMove] = useState(true)
+  // currentView stores the map viewport to use for when update results on map move is unchecked
+  const currentView = useRef()
+
+  const fetchPageWithOffset = useCallback(async (offset) => {
+    setLoadingNextPage(true)
+    setCurrentOffset(offset)
+
+    const { bounds, center } = currentView.current
+    // TODO: consolidate querying logic
+    const locations = await getLocations({
+      swlng: bounds.sw.lng,
+      nelng: bounds.ne.lng,
+      swlat: bounds.sw.lat,
+      nelat: bounds.ne.lat,
+      lng: center.lng,
+      lat: center.lat,
+      limit: LIMIT,
+      offset,
+    })
+    setTotalLocations(locations[1])
+    setLocations(locations.slice(2))
+
+    setLoadingNextPage(false)
+  }, [])
 
   useEffect(() => {
     const setInitialView = () => {
-      const { bounds, zoom } = view
-      if (
-        bounds?.ne.lat != null &&
-        zoom > 12 &&
-        (updateOnMapMove || currentView === undefined)
-      ) {
-        setCurrentView(view)
-        setCurrentOffset(0)
-        setLocations([])
-      } else if (zoom <= 12) {
-        setLocations([])
-        setCurrentView(undefined)
-        setCurrentOffset(0)
+      const { bounds, center, zoom, newBounds } = view
+
+      if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
+        // When setView(fitContainerBounds(...)) is used (i.e. when searching), bounds appear in newBounds momentarily
+        // So we can take advantage of that to know when bounds change due to a search result
+        // TODO: This should change to using a new "searched" flag in global state eventually, indicating whether the current
+        // bounds are a result of searching
+        const properBounds = updateOnMapMove ? bounds : newBounds
+
+        if (properBounds?.ne.lat != null) {
+          currentView.current = { zoom, center, bounds: properBounds }
+          fetchPageWithOffset(0)
+        }
       }
     }
     setInitialView()
-  }, [view, updateOnMapMove, currentView])
-
-  useEffect(() => {
-    const fetchCurrentListEntries = async () => {
-      if (currentView !== undefined) {
-        setLoadingNextPage(true)
-        const { bounds, center } = currentView
-        // TODO: consolidate querying logic
-        const locations = await getLocations({
-          swlng: bounds.sw.lng,
-          nelng: bounds.ne.lng,
-          swlat: bounds.sw.lat,
-          nelat: bounds.ne.lat,
-          lng: center.lng,
-          lat: center.lat,
-          limit: LIMIT,
-          offset: currentOffset,
-        })
-        setTotalLocations(locations[1])
-        setLocations(locations.slice(2))
-        setLoadingNextPage(false)
-      }
-    }
-    fetchCurrentListEntries()
-  }, [currentOffset, currentView])
-
-  const handleCheckboxClick = () => setUpdateOnMapMove(!updateOnMapMove)
+  }, [view, updateOnMapMove, fetchPageWithOffset])
 
   const handleListEntryClick = (id) => {
     // TODO: Render pin on map for the clicked list entry
@@ -126,67 +116,71 @@ const PagedList = () => {
     })
   }
 
+  if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+    return <ShouldZoomIn />
+  }
+
   return (
-    <Container>
-      {view.zoom > 12 && (
-        <>
-          <ListContainer ref={container}>
-            {loadingNextPage ? (
-              <LoadingIndicator vertical cover />
-            ) : locations.length > 0 ? (
-              <EntryList
-                itemSize={42}
-                locations={locations}
-                itemCount={locations.length}
-                height={rect.height}
-                width={rect.width}
-                handleListEntryClick={handleListEntryClick}
-              />
-            ) : (
-              <NoResultsContainer>
-                <img src={'/no_results_icon.svg'} alt="no-results-icon" />
-              </NoResultsContainer>
-            )}
-          </ListContainer>
-          <PageInfo>
-            <PageNav>
+    <Rect>
+      {({ rect, ref }) => (
+        <Container>
+          <ListContainer ref={ref} $disabled={loadingNextPage}>
+            <div>
               {locations.length > 0 ? (
-                <>
-                  Showing Results {currentOffset + 1} -{' '}
-                  {currentOffset + locations.length}
-                </>
+                <EntryList
+                  itemSize={42}
+                  locations={locations}
+                  itemCount={locations.length}
+                  height={rect.height}
+                  width={rect.width}
+                  handleListEntryClick={handleListEntryClick}
+                />
               ) : (
-                <>No Results Found</>
+                <NoResultsFound />
               )}
-              <NavButtonContainer>
-                <SquareButton
-                  disabled={currentOffset === 0}
-                  onClick={() => setCurrentOffset(currentOffset - LIMIT)}
-                >
-                  <ChevronLeft />
-                </SquareButton>
-                <SquareButton
-                  disabled={currentOffset + LIMIT >= totalLocations}
-                  onClick={() => setCurrentOffset(currentOffset + LIMIT)}
-                >
-                  <ChevronRight />
-                </SquareButton>
-              </NavButtonContainer>
-            </PageNav>
-            {/* TODO: Eventually use Label component in Archna's settings PR */}
-            <CheckboxContainer>
+            </div>
+            {loadingNextPage && <LoadingOverlay />}
+          </ListContainer>
+          <PageNav>
+            {locations.length > 0
+              ? `Showing Results ${currentOffset + 1} - ${
+                  currentOffset + locations.length
+                }`
+              : 'No Results Found'}
+            <NavButtonContainer>
+              <SquareButton
+                disabled={currentOffset === 0}
+                onClick={() => fetchPageWithOffset(currentOffset - LIMIT)}
+              >
+                <ChevronLeft />
+              </SquareButton>
+              <SquareButton
+                disabled={currentOffset + LIMIT >= totalLocations}
+                onClick={() => fetchPageWithOffset(currentOffset + LIMIT)}
+              >
+                <ChevronRight />
+              </SquareButton>
+            </NavButtonContainer>
+          </PageNav>
+
+          <LabeledRow
+            style={{ padding: 10 }}
+            left={
               <Checkbox
                 id="update-on-map-move"
-                name="update-on-map-move"
-                onChange={handleCheckboxClick}
+                onChange={(e) => setUpdateOnMapMove(e.target.checked)}
                 checked={updateOnMapMove}
               />
-              Update results when map moves
-            </CheckboxContainer>
-          </PageInfo>
-        </>
+            }
+            label={
+              <label htmlFor="update-on-map-move">
+                Update results when map moves
+              </label>
+            }
+          />
+        </Container>
       )}
-    </Container>
+    </Rect>
   )
 }
 

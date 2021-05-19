@@ -20,6 +20,8 @@ import { useSearch } from '../../contexts/SearchContext'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
+import Filter from '../filter/Filter'
+import FilterIconButton from '../filter/FilterIconButton'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
@@ -48,11 +50,17 @@ const StyledCurrentLocationButton = styled(CurrentLocationButton)`
 const StyledComboboxPopover = styled(ComboboxPopover)`
   border: none;
   background: none;
-  padding-top: 8px;
+  margin-top: 8px;
+
   @media ${({ theme }) => theme.device.desktop} {
     box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    background-color: ${({ theme }) => theme.background};
   }
 `
 
@@ -72,7 +80,7 @@ const SearchBarContainer = styled.div`
   }
 `
 
-const Search = ({ onType, sideButton, ...props }) => {
+const Search = (props) => {
   const { setViewport } = useSearch()
   const isDesktop = useIsDesktop()
 
@@ -80,6 +88,9 @@ const Search = ({ onType, sideButton, ...props }) => {
   const geolocation = useGeolocation()
   const [cityName, setCityName] = useState(null)
   const { setView } = useMap()
+
+  // Filter visible
+  const [filterOpen, setFilterOpen] = useState(false)
 
   useEffect(() => {
     async function fetchCityName() {
@@ -115,7 +126,7 @@ const Search = ({ onType, sideButton, ...props }) => {
   }, [value])
 
   const handleChange = (e) => {
-    onType()
+    setFilterOpen(false)
     setValue(e.target.value)
   }
 
@@ -158,7 +169,8 @@ const Search = ({ onType, sideButton, ...props }) => {
           }
           placeholder="Search for a location..."
         />
-        {sideButton}
+
+        <FilterIconButton pressed={filterOpen} setPressed={setFilterOpen} />
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
@@ -170,7 +182,7 @@ const Search = ({ onType, sideButton, ...props }) => {
             !isDesktop && geolocation.latitude !== null && value === '' && (
               <ComboboxOption
                 as={SearchEntry}
-                value={'Current Location'}
+                value="Current Location"
                 isCurrentLocation
               >
                 {['Current Location', cityName ?? '']}
@@ -202,6 +214,8 @@ const Search = ({ onType, sideButton, ...props }) => {
             })}
         </ComboboxList>
       </StyledComboboxPopover>
+
+      <Filter isOpen={filterOpen} />
     </Combobox>
   )
 }

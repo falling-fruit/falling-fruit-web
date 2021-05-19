@@ -60,19 +60,21 @@ const RATINGS = [
 const Review = ({ review }) => (
   <ReviewContainer>
     <RatingTable>
-      {RATINGS.map(
-        ({ title, ratingKey, total }, key) =>
-          review[ratingKey] && (
-            <tr key={key}>
-              <td>
-                <Label>{title}</Label>
-              </td>
-              <td>
-                <Rating key={key} percentage={review[ratingKey] / total} />
-              </td>
-            </tr>
-          ),
-      )}
+      <tbody>
+        {RATINGS.map(
+          ({ title, ratingKey, total }, key) =>
+            review[ratingKey] && (
+              <tr key={key}>
+                <td>
+                  <Label>{title}</Label>
+                </td>
+                <td>
+                  <Rating key={key} percentage={review[ratingKey] / total} />
+                </td>
+              </tr>
+            ),
+        )}
+      </tbody>
     </RatingTable>
     <ReviewDescription>
       <blockquote>{review.comment}</blockquote>

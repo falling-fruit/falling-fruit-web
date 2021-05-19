@@ -10,7 +10,7 @@ const IndicatorAccordionButton = styled(AccordionButton)`
   padding: 0;
   border: none;
   width: 100%;
-  background: white;
+  background: ${({ theme }) => theme.background};
   text-align: left;
   font-family: ${({ theme }) => theme.fonts};
 `

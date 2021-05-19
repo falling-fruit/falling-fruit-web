@@ -159,7 +159,6 @@ const SettingsPage = ({ desktop }) => {
             )}
             onChange={(option) => {
               i18n.changeLanguage(option.value)
-              console.log(i18n.language)
             }}
           />
         }

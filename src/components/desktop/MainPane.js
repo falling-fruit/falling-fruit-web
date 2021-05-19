@@ -1,15 +1,10 @@
-import { Cog } from '@styled-icons/boxicons-solid'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import PagedList from '../list/PagedList'
+import Search from '../search/Search'
 import Button from '../ui/Button'
-import {
-  AccordionItem,
-  SettingsAccordion,
-  SettingsAccordionButton,
-} from '../ui/SettingsAccordion'
-import SearchOverlay from './SearchOverlay'
+import { SettingsAccordionButton } from '../ui/SettingsAccordion'
 
 const Container = styled.div`
   display: flex;
@@ -18,14 +13,18 @@ const Container = styled.div`
 `
 
 const StyledButton = styled(Button)`
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.orange};
   margin: 10px 10px;
   padding: 15px 0;
+  // TODO: Siraj add box shadow and extra white border. What's the best way to add another white border? ("raised" prop)
 `
 
-const StyledSettingsAccordion = styled(SettingsAccordion)`
-  padding: 10px 0 10px 0;
+const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
+  ...props,
+  forwardedAs: 'button',
+}))`
+  padding: 5px 0;
   border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
 `
 
@@ -34,32 +33,26 @@ const MainPane = () => {
 
   return (
     <Container>
-      <SearchOverlay />
+      <Search />
       <PagedList />
       <StyledButton
         onClick={() =>
           history.push({
-            pathname: '/entry/new',
+            pathname: '/map/entry/new',
             state: { fromPage: '/map' },
           })
         }
       >
         Add a Location
       </StyledButton>
-      <StyledSettingsAccordion>
-        <AccordionItem>
-          <SettingsAccordionButton
-            LeftIcon={Cog}
-            text="Settings"
-            onClick={() =>
-              history.push({
-                pathname: '/settings',
-                state: { fromPage: '/map' },
-              })
-            }
-          />
-        </AccordionItem>
-      </StyledSettingsAccordion>
+      <SettingsButton
+        onClick={() =>
+          history.push({
+            pathname: '/settings',
+            state: { fromPage: '/map' },
+          })
+        }
+      />
     </Container>
   )
 }

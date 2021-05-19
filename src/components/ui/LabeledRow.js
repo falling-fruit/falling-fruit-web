@@ -17,14 +17,15 @@ const StyledLabeledInput = styled.div`
       font-size: 14px;
       font-weight: bold;
       color: ${({ theme }) => theme.secondaryText};
+      cursor: pointer;
     }
   }
 `
 
 // TODO: should language preferences be a grid instead of flex
 
-const LabeledRow = ({ label, left, right }) => (
-  <StyledLabeledInput>
+const LabeledRow = ({ label, left, right, ...props }) => (
+  <StyledLabeledInput {...props}>
     <div>
       {left}
       {label}

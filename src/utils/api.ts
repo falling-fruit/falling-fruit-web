@@ -89,6 +89,15 @@ export const getTypes = (
     }),
   )
 
+export const getTypeCounts = (
+  params: paths['/types/counts.json']['get']['parameters']['query'],
+) =>
+  handleResponse(
+    instance.get('/types/counts.json', {
+      params,
+    }),
+  )
+
 export const getTypeById = (
   id: paths['/types/{id}.json']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/types/${id}.json`))

@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 const LoadingIndicatorWrapper = styled.div`
   --size: 18px;
 
-  @media only screen and ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     --size: 16px;
   }
 
@@ -82,4 +82,13 @@ const LoadingIndicator = (props) => {
   )
 }
 
+const LoadingOverlay = styled(LoadingIndicator)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`
+
 export default LoadingIndicator
+export { LoadingOverlay }
