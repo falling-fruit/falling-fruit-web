@@ -16,11 +16,13 @@ const Icons = styled.div`
 const PrimaryText = styled.div`
   font-weight: bold;
   font-size: 14px;
+  color: ${({ theme }) => theme.headerText};
 `
 
 const SecondaryText = styled.div`
   font-weight: normal;
   font-size: 12px;
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 const ListContainer = styled.li`

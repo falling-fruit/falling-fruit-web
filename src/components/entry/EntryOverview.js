@@ -81,6 +81,7 @@ const EntryOverview = ({ locationData, className }) => {
   const { t } = useTranslation()
 
   useEffect(() => {
+    // TODO: stop making geocoding requests, they're expensive. Get address from API
     // clear location data when id changes
     async function fetchStreetAddress() {
       // Show loading between entry selections
