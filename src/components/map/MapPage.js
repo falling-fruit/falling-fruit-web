@@ -1,13 +1,13 @@
 import { fitBounds } from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
+import { useFilteredParams } from '../../utils/useFilteredParams'
 import { getZoomedInView } from '../../utils/viewportBounds'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
@@ -27,32 +27,23 @@ export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
  */
 const ADD_LOCATION_ZOOM = 18
 
-/**
- * Normalize longitude to range [-180, 180].
- *
- * @param {number} longitude Longitude in degrees.
- * @returns Longitude in degrees in the range [-180, 180].
- */
-const normalizeLongitude = (longitude) => {
-  while (longitude < -180) {
-    longitude += 360
-  }
-  while (longitude > 180) {
-    longitude -= 360
-  }
-  return longitude
-}
-
 const MapPage = ({ desktop }) => {
   const history = useHistory()
-  const location = useLocation()
+  const match = useRouteMatch({
+    path: '/map/entry/:entryId',
+    exact: true,
+  })
+
+  const isAddingLocation = match?.params.entryId === 'new'
+  const entryId = match?.params.entryId && parseInt(match.params.entryId)
+
   const container = useRef(null)
-  const { viewport: searchViewport, filters } = useSearch()
+  const { viewport: searchViewport } = useSearch()
   const { view, setView } = useMap()
-  const { i18n } = useTranslation()
   // Need oldView to save the previous view before zooming into adding a location
   const oldView = useRef(null)
   const { settings } = useSettings()
+  const getFilteredParams = useFilteredParams()
 
   const [mapData, setMapData] = useState({
     locations: [],
@@ -76,8 +67,6 @@ const MapPage = ({ desktop }) => {
       setView(fitContainerBounds(searchViewport))
     }
   }, [searchViewport, setView])
-
-  const isAddingLocation = location.pathname === '/map/entry/new'
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -105,18 +94,14 @@ const MapPage = ({ desktop }) => {
         // Map has received real bounds
         setMapData((prevMapData) => ({ ...prevMapData, isLoading: true }))
 
-        const query = {
-          nelat: bounds.ne.lat,
-          nelng: normalizeLongitude(bounds.ne.lng),
-          swlat: bounds.sw.lat,
-          swlng: normalizeLongitude(bounds.sw.lng),
-          muni: filters.muni ? 1 : 0,
-          t: filters.types.toString(),
+        const params = {
           limit: 250,
         }
 
-        if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-          const clusters = await getClusters({ ...query, zoom })
+        if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+          const clusters = await getClusters(
+            getFilteredParams({ ...params, zoom }),
+          )
 
           setMapData({ locations: [], clusters, isLoading: false })
         } else {
@@ -124,18 +109,14 @@ const MapPage = ({ desktop }) => {
             _numLocationsReturned,
             _totalLocations,
             ...locations
-          ] = await getLocations({
-            ...query,
-            invasive: filters.invasive ? 1 : 0,
-            locale: i18n.language === 'en-US' ? 'en' : i18n.language,
-          })
+          ] = await getLocations(getFilteredParams(params))
 
           setMapData({ locations, clusters: [], isLoading: false })
         }
       }
     }
     fetchClusterAndLocationData()
-  }, [view, filters, i18n.language])
+  }, [view, getFilteredParams])
 
   const handleGeolocationClick = () => {
     setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
@@ -175,6 +156,7 @@ const MapPage = ({ desktop }) => {
         view={view}
         geolocation={geolocation}
         locations={isAddingLocation ? [] : mapData.locations}
+        selectedLocationId={entryId}
         clusters={isAddingLocation ? [] : mapData.clusters}
         onViewChange={setView}
         onGeolocationClick={handleGeolocationClick}

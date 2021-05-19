@@ -7,6 +7,7 @@ import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 import { getTypeCounts } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
+import { useFilteredParams } from '../../utils/useFilteredParams'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
@@ -43,6 +44,8 @@ const StyledFilter = styled.div`
 const Filter = ({ isOpen }) => {
   const { view } = useMap()
   const { filters, setFilters, typesById } = useSearch()
+  const getFilteredParams = useFilteredParams()
+
   const [treeData, setTreeData] = useState([])
   const [treeDataLoading, setTreeDataLoading] = useState(false)
   const { settings } = useSettings()
@@ -62,15 +65,7 @@ const Filter = ({ isOpen }) => {
       if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT && bounds) {
         setTreeDataLoading(true)
 
-        const query = {
-          swlng: bounds.sw.lat,
-          nelng: bounds.ne.lng,
-          swlat: bounds.sw.lat,
-          nelat: bounds.ne.lat,
-          muni: filters.muni ? '1' : '0',
-        }
-
-        const counts = await getTypeCounts(query)
+        const counts = await getTypeCounts(getFilteredParams())
 
         const countsById = {}
         for (const count of counts) {

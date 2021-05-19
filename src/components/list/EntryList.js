@@ -18,8 +18,10 @@ const StyledListEntry = styled(ListEntry)`
 `
 
 const ScientificName = styled.span`
+  margin-left: 2px;
   font-weight: normal;
   font-style: italic;
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 const EntryList = forwardRef(
@@ -61,7 +63,7 @@ const EntryList = forwardRef(
                 {location.type_names[0]}{' '}
                 {settings.showScientificNames && (
                   <ScientificName>
-                    [{typesById[location.type_ids[0]].scientific_name}]
+                    {typesById[location.type_ids[0]].scientific_name}
                   </ScientificName>
                 )}
               </>

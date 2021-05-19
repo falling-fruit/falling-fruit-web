@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { getLocations } from '../../utils/api'
+import { useFilteredParams } from '../../utils/useFilteredParams'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
@@ -55,6 +56,7 @@ const NavButtonContainer = styled.div`
 const PagedList = () => {
   const history = useHistory()
   const { view } = useMap()
+  const getFilteredParams = useFilteredParams()
 
   const [locations, setLocations] = useState([])
   const [currentOffset, setCurrentOffset] = useState(0)
@@ -66,27 +68,28 @@ const PagedList = () => {
   // currentView stores the map viewport to use for when update results on map move is unchecked
   const currentView = useRef()
 
-  const fetchPageWithOffset = useCallback(async (offset) => {
-    setLoadingNextPage(true)
-    setCurrentOffset(offset)
+  const fetchPageWithOffset = useCallback(
+    async (offset) => {
+      setLoadingNextPage(true)
+      setCurrentOffset(offset)
 
-    const { bounds, center } = currentView.current
-    // TODO: consolidate querying logic
-    const locations = await getLocations({
-      swlng: bounds.sw.lng,
-      nelng: bounds.ne.lng,
-      swlat: bounds.sw.lat,
-      nelat: bounds.ne.lat,
-      lng: center.lng,
-      lat: center.lat,
-      limit: LIMIT,
-      offset,
-    })
-    setTotalLocations(locations[1])
-    setLocations(locations.slice(2))
+      const locations = await getLocations(
+        getFilteredParams(
+          {
+            limit: LIMIT,
+            offset,
+          },
+          true,
+          currentView.current,
+        ),
+      )
+      setTotalLocations(locations[1])
+      setLocations(locations.slice(2))
 
-    setLoadingNextPage(false)
-  }, [])
+      setLoadingNextPage(false)
+    },
+    [getFilteredParams],
+  )
 
   useEffect(() => {
     const setInitialView = () => {
@@ -131,8 +134,8 @@ const PagedList = () => {
                   itemSize={42}
                   locations={locations}
                   itemCount={locations.length}
-                  height={rect.height}
-                  width={rect.width}
+                  height={rect?.height ?? 0}
+                  width={rect?.width ?? 0}
                   handleListEntryClick={handleListEntryClick}
                 />
               ) : (

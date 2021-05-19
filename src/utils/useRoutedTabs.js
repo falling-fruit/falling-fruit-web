@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
 
 /**
  * Hook to get and set the current tab, while updating the URL location on tab change.
+ * Notice that the router/pathname "owns" the currently selected tab. When the pathname changes,
+ * the tab index in the tabs component is synced to it. This is so that we can control the
+ * current tab panel via the URL, anywhere throughout the app.
  */
 const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
   const { pathname } = useLocation()
   const history = useHistory()
 
-  const [tabIndex, setTabIndex] = useState(() => {
-    // Set the initial tabIndex from the URL on page load
+  const [tabIndex, setTabIndex] = useState(defaultTabIndex)
+
+  useEffect(() => {
     const matchedIndex = tabPaths.findIndex((tabName) =>
       matchPath(pathname, {
         path: tabName,
@@ -17,12 +21,13 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
         strict: false,
       }),
     )
-    return matchedIndex === -1 ? defaultTabIndex : matchedIndex
-  })
+
+    if (matchedIndex !== -1) {
+      setTabIndex(matchedIndex)
+    }
+  }, [pathname, tabPaths, defaultTabIndex])
 
   const handleTabChange = (tabIndex) => {
-    setTabIndex(tabIndex)
-
     // on shallow match return to shallow root
     if (
       matchPath(pathname, {

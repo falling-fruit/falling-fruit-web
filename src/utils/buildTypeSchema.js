@@ -35,7 +35,7 @@ const moveRootToOther = (root) => {
   if (root.count > 0) {
     const other = {
       id: root.id,
-      name: 'Other',
+      name: 'Uncategorized/Other',
       count: root.count,
       children: [],
       parent_id: root.id,

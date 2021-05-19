@@ -8,6 +8,7 @@ import ListPage from './ListPage'
 
 const DEFAULT_TAB = 1 // Map
 
+// Exposed as a function so that labels can be re-translated if language changes
 const getTabs = () => [
   {
     path: '/settings',

@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 
-const EntryTab = styled(PageTabs)`
+const EntryTabs = styled(PageTabs)`
   [data-reach-tab-list] {
     height: 50px;
 
@@ -24,4 +24,4 @@ const EntryTab = styled(PageTabs)`
   }
 `
 
-export { EntryTab, Tab, TabList, TabPanel, TabPanels }
+export { EntryTabs, Tab, TabList, TabPanel, TabPanels }

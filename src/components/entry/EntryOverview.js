@@ -2,12 +2,11 @@ import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
-import { getLocationById } from '../../utils/api'
 import { getStreetAddress, hasSeasonality } from '../../utils/locationInfo'
 import { getZoomedInView } from '../../utils/viewportBounds'
 import { ReportModal } from '../form/ReportModal'
@@ -16,8 +15,7 @@ import { theme } from '../ui/GlobalStyle'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
-import { TextContent } from './EntryTabs'
-import PhotoGrid from './PhotoGrid'
+import { TextContent } from './Entry'
 import {
   ACCESS_TYPE,
   formatISOString,
@@ -65,6 +63,7 @@ const Description = styled.section`
   & > .updatedTime {
     display: block;
     font-style: italic;
+    color: ${({ theme }) => theme.text};
   }
 
   button {
@@ -72,11 +71,9 @@ const Description = styled.section`
   }
 `
 
-const EntryOverview = ({ className }) => {
-  const { id } = useParams()
+const EntryOverview = ({ locationData, className }) => {
   const { setView } = useMap()
   const { typesById } = useSearch()
-  const [locationData, setLocationData] = useState()
   const [address, setAddress] = useState('')
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -84,34 +81,24 @@ const EntryOverview = ({ className }) => {
   const { t } = useTranslation()
 
   useEffect(() => {
+    // TODO: stop making geocoding requests, they're expensive. Get address from API
     // clear location data when id changes
-    setLocationData(null)
-
-    async function fetchEntryDetails() {
+    async function fetchStreetAddress() {
       // Show loading between entry selections
-      const locationData = await getLocationById(id)
       const streetAddress = await getStreetAddress(
         locationData.lat,
         locationData.lng,
       )
 
       setAddress(streetAddress)
-      setLocationData(locationData)
     }
 
-    if (typesById) {
-      fetchEntryDetails()
-    }
-  }, [id, typesById])
+    fetchStreetAddress()
+  }, [locationData])
 
   const handleAddressClick = () => {
     history.push('/map')
     setView(getZoomedInView(locationData.lat, locationData.lng))
-  }
-
-  const handleViewLightbox = () => {
-    // TODO: connect to lightbox once implemented
-    console.log('Open Image Slideshow/Lightbox')
   }
 
   const tagList = locationData && (
@@ -142,11 +129,6 @@ const EntryOverview = ({ className }) => {
               onDismiss={() => setIsReportModalOpen(false)}
             />
           )}
-          <PhotoGrid
-            photos={locationData.photos}
-            altText={allTypeNames}
-            handleViewLightbox={handleViewLightbox}
-          />
           <TextContent>
             {tagList}
             <TypesHeader
