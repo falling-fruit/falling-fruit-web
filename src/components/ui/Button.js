@@ -1,3 +1,4 @@
+import { darken } from 'polished'
 import styled from 'styled-components/macro'
 
 import { prepend } from './GlobalStyle'
@@ -20,6 +21,14 @@ const StyledButton = styled(ResetButton)`
   border-radius: 100px;
   padding: 0 24px;
   // TODO: make raised and add a location button in main pane
+
+  :hover {
+    background: ${({ $secondary, theme }) =>
+      $secondary ? theme.orange : darken(0.1, theme.orange)};
+    border-color: ${({ $secondary, theme }) =>
+      $secondary ? theme.orange : darken(0.1, theme.orange)};
+    color: ${({ theme }) => theme.background};
+  }
 
   svg {
     height: 1em;
