@@ -15,13 +15,13 @@ const Icons = styled.div`
 
 const PrimaryText = styled.div`
   font-weight: bold;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: ${({ theme }) => theme.headerText};
 `
 
 const SecondaryText = styled.div`
   font-weight: normal;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: ${({ theme }) => theme.secondaryText};
 `
 

@@ -8,8 +8,8 @@ const StyledButton = styled(ResetButton)`
   align-items: center;
   justify-content: center;
   height: 36px;
-  font-size: 14px;
-  line-height: 14px;
+  font-size: 0.875rem;
+  line-height: 1em;
   color: ${({ $secondary, theme }) =>
     $secondary ? theme.orange : theme.background};
   font-weight: bold;

@@ -10,7 +10,7 @@ const Textarea = styled.textarea`
   resize: vertical;
   color: ${({ theme }) => theme.secondaryText};
   font-family: inherit;
-  font-size: 18px;
+  font-size: 1.125rem;
   width: 100%;
   height: 140px;
 

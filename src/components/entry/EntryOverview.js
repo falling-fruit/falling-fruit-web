@@ -37,13 +37,13 @@ const IconBesideText = styled.div`
 
   p {
     margin: 0 0 0 4px;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 `
 const LocationText = styled(ResetButton)`
   font-weight: bold;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 0 0 0 4px;
   flex: 1;
   color: ${({ theme }) => theme.secondaryText};

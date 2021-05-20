@@ -50,6 +50,15 @@ const prepend = (prefix = '', value) => ({ $prepend }) =>
   `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
 
 const GlobalStyle = createGlobalStyle`
+
+  :root {
+    font-size: 16px;
+
+    @media ${({ theme }) => theme.desktop} {
+      font-size: 14px;
+    }
+  }
+
   body {
     font-family: ${({ theme }) => theme.fonts};
     color: ${({ theme }) => theme.text};
@@ -76,25 +85,25 @@ const GlobalStyle = createGlobalStyle`
     font-weight: bold;
   }
 
-  h1 { font-size: 26px; }
-  h2 { font-size: 22.75px; }
-  h3 { font-size: 18px; }
+  h1 { font-size: 1.625rem; }
+  h2 { font-size: 1.375rem; }
+  h3 { font-size: 1.125rem; }
   h4 { 
     font-weight: normal;
-    font-size: 18px;
+    font-size: 1.125rem;
   }
-  h5 { font-size: 14px; }
+  h5 { font-size: 0.875rem; }
   h6 { 
-    font-size: 10px;
+    font-size: 0.625rem;
     text-transform: uppercase;
   }
 
   p {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 
   p.small {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   a {

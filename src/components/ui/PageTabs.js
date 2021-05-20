@@ -32,7 +32,7 @@ const PageTabs = styled(Tabs)`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
+      font-size: 0.625rem;
       border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
       border-bottom: none;
 

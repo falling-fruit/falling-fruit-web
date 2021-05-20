@@ -33,7 +33,7 @@ const StyledFilter = styled.div`
   }
 
   .edible-type-text {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
     color: ${({ theme }) => theme.secondaryText};
     margin-top: 18px;

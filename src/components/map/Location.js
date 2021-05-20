@@ -40,7 +40,7 @@ const LocationButton = styled(ResetButton)`
 `
 
 const Label = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   color: ${({ theme }) => theme.headerText};
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
   margin-top: -5px;

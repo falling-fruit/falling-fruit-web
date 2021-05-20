@@ -39,7 +39,7 @@ const Page = styled.div`
 
   > h3 {
     font-weight: normal;
-    font-size: 16px;
+    font-size: 1rem;
     color: ${({ theme }) => theme.tertiaryText};
     margin: 24px 0;
   }

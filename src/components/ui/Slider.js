@@ -35,7 +35,7 @@ const StyledSliderInput = styled(SliderInput)`
     background-color: ${({ theme }) => theme.secondaryBackground};
 
     div {
-      font-size: 12px;
+      font-size: 0.75rem;
       margin-top: 20px;
       /* Centers labels under each marker */
       position: absolute;

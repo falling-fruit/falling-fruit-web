@@ -47,7 +47,7 @@ const TreeSelectContainer = styled.div`
       color: ${({ theme }) => theme.orange};
       border-radius: 20px;
       padding: 0px 10px 0px 10px;
-      font-size: 12px;
+      font-size: 0.75rem;
 
       .tag-remove {
         display: none;
