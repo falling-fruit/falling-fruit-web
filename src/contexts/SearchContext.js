@@ -46,6 +46,8 @@ const SearchProvider = ({ children }) => {
     preloadTypes()
   }, [setTypesById])
 
+  // TODO: Is this the right approach for simplifying access to localized common name
+
   const getTypeNames = useCallback(
     (id) =>
       typesById[id].common_names[
@@ -54,7 +56,7 @@ const SearchProvider = ({ children }) => {
     [typesById, i18n.language],
   )
 
-  const getTypeName = (id) => getTypeNames(id)[0]
+  const getTypeName = (id) => getTypeNames(id)?.[0]
 
   return (
     <SearchContext.Provider
