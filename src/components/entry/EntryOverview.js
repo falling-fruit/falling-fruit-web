@@ -12,7 +12,7 @@ import { getZoomedInView } from '../../utils/viewportBounds'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
-import LoadingIndicator from '../ui/LoadingIndicator'
+import { LoadingOverlay } from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
 import { TextContent } from './Entry'
@@ -37,13 +37,13 @@ const IconBesideText = styled.div`
 
   p {
     margin: 0 0 0 4px;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 `
 const LocationText = styled(ResetButton)`
   font-weight: bold;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 0 0 0 4px;
   flex: 1;
   color: ${({ theme }) => theme.secondaryText};
@@ -51,6 +51,10 @@ const LocationText = styled(ResetButton)`
 
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
+  p {
+    font-size: 1rem;
+  }
+
   & > *:not(:first-child) {
     margin-top: 14px;
   }
@@ -63,6 +67,7 @@ const Description = styled.section`
   & > .updatedTime {
     display: block;
     font-style: italic;
+    font-size: 1rem;
     color: ${({ theme }) => theme.text};
   }
 
@@ -118,67 +123,60 @@ const EntryOverview = ({ locationData, className }) => {
 
   return (
     <div className={className}>
-      {/* TODO: Properly center this loading indicator! */}
+      <>
+        {isReportModalOpen && (
+          <ReportModal
+            locationId={locationData.id}
+            name={allTypeNames}
+            onDismiss={() => setIsReportModalOpen(false)}
+          />
+        )}
+        <TextContent>
+          {tagList}
+          <TypesHeader
+            typesData={locationData.type_ids.map((typeId) => typesById[typeId])}
+          />
+          <Description>
+            <p>{locationData.description}</p>
 
-      {locationData ? (
-        <>
-          {isReportModalOpen && (
-            <ReportModal
-              locationId={locationData.id}
-              name={allTypeNames}
-              onDismiss={() => setIsReportModalOpen(false)}
-            />
-          )}
-          <TextContent>
-            {tagList}
-            <TypesHeader
-              typesData={locationData.type_ids.map(
-                (typeId) => typesById[typeId],
-              )}
-            />
-            <Description>
-              <p>{locationData.description}</p>
-
-              <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
-                <Map color={theme.secondaryText} size={20} />
-                <LocationText>{address}</LocationText>
+            <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
+              <Map color={theme.secondaryText} size={20} />
+              <LocationText>{address}</LocationText>
+            </IconBesideText>
+            {hasSeasonality(locationData) && (
+              <IconBesideText>
+                <Calendar color={theme.secondaryText} size={20} />
+                <p>
+                  {formatSeasonality(
+                    locationData.season_start,
+                    locationData.season_stop,
+                    locationData.no_season,
+                  )}
+                </p>
               </IconBesideText>
-              {hasSeasonality(locationData) && (
-                <IconBesideText>
-                  <Calendar color={theme.secondaryText} size={20} />
-                  <p>
-                    {formatSeasonality(
-                      locationData.season_start,
-                      locationData.season_stop,
-                      locationData.no_season,
-                    )}
-                  </p>
-                </IconBesideText>
-              )}
+            )}
 
-              <p className="updatedTime">
-                {t('Last Updated')}{' '}
-                <time dateTime={locationData.updated_at}>
-                  {formatISOString(locationData.updated_at)}
-                </time>
-              </p>
+            <p className="updatedTime">
+              {t('Last Updated')}{' '}
+              <time dateTime={locationData.updated_at}>
+                {formatISOString(locationData.updated_at)}
+              </time>
+            </p>
 
-              <div>
-                <Button leftIcon={<Star />}>Review</Button>
-                <Button
-                  leftIcon={<Flag />}
-                  secondary
-                  onClick={() => setIsReportModalOpen(true)}
-                >
-                  Report
-                </Button>
-              </div>
-            </Description>
-          </TextContent>
-        </>
-      ) : (
-        <LoadingIndicator vertical cover />
-      )}
+            <div>
+              <Button leftIcon={<Star />}>Review</Button>
+              <Button
+                leftIcon={<Flag />}
+                secondary
+                onClick={() => setIsReportModalOpen(true)}
+              >
+                Report
+              </Button>
+            </div>
+          </Description>
+        </TextContent>
+      </>
+      {!locationData && <LoadingOverlay />}
     </div>
   )
 }

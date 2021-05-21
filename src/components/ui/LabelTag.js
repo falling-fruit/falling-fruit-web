@@ -9,7 +9,7 @@ const LabelTag = styled.span`
   height: 15px;
   padding: 2px;
   margin-left: 5px;
-  font-size: 9px;
+  font-size: 0.5625rem;
   font-weight: bold;
   color: ${validatedColor('text', 'background')};
   background-color: ${validatedColor('secondaryBackground')};

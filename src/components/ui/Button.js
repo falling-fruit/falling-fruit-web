@@ -1,3 +1,4 @@
+import { darken } from 'polished'
 import styled from 'styled-components/macro'
 
 import { prepend } from './GlobalStyle'
@@ -8,8 +9,8 @@ const StyledButton = styled(ResetButton)`
   align-items: center;
   justify-content: center;
   height: 36px;
-  font-size: 14px;
-  line-height: 14px;
+  line-height: 0.375rem;
+  font-size: 0.875rem;
   color: ${({ $secondary, theme }) =>
     $secondary ? theme.orange : theme.background};
   font-weight: bold;
@@ -20,6 +21,16 @@ const StyledButton = styled(ResetButton)`
   border-radius: 100px;
   padding: 0 24px;
   // TODO: make raised and add a location button in main pane
+
+  @media ${({ theme }) => theme.device.desktop} {
+    :hover {
+      background: ${({ $secondary, theme }) =>
+        $secondary ? theme.orange : darken(0.1, theme.orange)};
+      border-color: ${({ $secondary, theme }) =>
+        $secondary ? theme.orange : darken(0.1, theme.orange)};
+      color: ${({ theme }) => theme.background};
+    }
+  }
 
   svg {
     height: 1em;

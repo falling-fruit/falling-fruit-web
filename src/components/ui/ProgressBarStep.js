@@ -20,7 +20,7 @@ const StyledCircleIcon = styled(CircleIcon)`
 
 const StyledProgressBarStep = styled.div`
   position: relative;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: ${({ $status, theme }) =>
     $status === 'incomplete' ? theme.tertiaryText : theme.orange};
 
@@ -29,7 +29,7 @@ const StyledProgressBarStep = styled.div`
     text-align: center;
     width: 36px;
     margin-top: 4px;
-    font-size: 10px;
+    font-size: 0.625rem;
   }
 
   & + & {

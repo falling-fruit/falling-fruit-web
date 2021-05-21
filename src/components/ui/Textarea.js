@@ -6,11 +6,11 @@ const Textarea = styled.textarea`
   border: 1px solid ${validatedColor()};
   box-sizing: border-box;
   border-radius: 12px;
-  padding: 15px 20px;
+  padding: 0.75rem 1rem;
   resize: vertical;
   color: ${({ theme }) => theme.secondaryText};
   font-family: inherit;
-  font-size: 18px;
+  font-size: 1rem;
   width: 100%;
   height: 140px;
 

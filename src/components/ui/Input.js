@@ -64,7 +64,7 @@ const StyledInput = styled(Input)`
 
   input {
     color: ${({ theme }) => theme.secondaryText};
-    font-size: 16px;
+    font-size: 1rem;
     font-family: ${({ theme }) => theme.fonts};
     padding: 0;
     border: none;

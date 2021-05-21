@@ -7,7 +7,7 @@ const CheckBoxWrapper = styled.div`
 
   label {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: ${({ theme }) => theme.headerText};
   }
 `

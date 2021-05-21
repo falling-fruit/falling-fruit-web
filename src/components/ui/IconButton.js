@@ -37,6 +37,7 @@ const StyledIconButton = styled(ResetButton)`
         border-radius: 50%;
         padding: ${size / 20}px;`}
 
+    width: 100%;
     color: ${({ pressed, raised, theme }) =>
       pressed || raised ? `var(--color)` : theme.secondaryText};
   }
@@ -52,7 +53,7 @@ const Subscript = styled.div`
   width: 20px;
   height: 20px;
   font-family: ${({ theme }) => theme.fonts};
-  font-size: 10px;
+  font-size: 0.625rem;
   position: absolute;
   bottom: 0;
   right: 0;
