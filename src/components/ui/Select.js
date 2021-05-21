@@ -77,9 +77,9 @@ const MenuList = ({ children, maxHeight }) => (
   </FixedSizeList>
 )
 
-const SelectWrapper = (props) => (
+const SelectWrapper = ({ isVirtualized, ...props }) => (
   <StyledSelect
-    components={{ MenuList }}
+    components={isVirtualized ? { MenuList } : {}}
     classNamePrefix="select"
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}

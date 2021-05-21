@@ -93,6 +93,7 @@ const LocationStep = ({ typeOptions }) => (
       closeMenuOnSelect={false}
       blurInputOnSelect={false}
       formatOptionLabel={(option) => <TypeName typeId={option.value} />}
+      isVirtualized
       required
     />
     <Textarea name="description" label="Description" />
@@ -100,15 +101,20 @@ const LocationStep = ({ typeOptions }) => (
       name="access"
       label="Property Access"
       options={PROPERTY_ACCESS_OPTIONS}
+      isSearchable={false}
     />
     <Label>
       Seasonality
       <Optional />
     </Label>
     <InlineSelects>
-      <Select name="season_start" options={MONTH_OPTIONS} />
+      <Select
+        name="season_start"
+        options={MONTH_OPTIONS}
+        isSearchable={false}
+      />
       <span>to</span>
-      <Select name="season_end" options={MONTH_OPTIONS} />
+      <Select name="season_end" options={MONTH_OPTIONS} isSearchable={false} />
     </InlineSelects>
   </>
 )
