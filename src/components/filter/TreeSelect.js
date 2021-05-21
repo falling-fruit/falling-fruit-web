@@ -110,6 +110,10 @@ const TreeSelectContainer = styled.div`
     display: flex;
     align-items: center;
     font-size: 0.875rem;
+
+    span {
+      margin-left: 0.25rem;
+    }
   }
 
   .checkbox-item {
