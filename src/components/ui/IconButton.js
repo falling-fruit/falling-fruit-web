@@ -37,6 +37,7 @@ const StyledIconButton = styled(ResetButton)`
         border-radius: 50%;
         padding: ${size / 20}px;`}
 
+    width: 100%;
     color: ${({ pressed, raised, theme }) =>
       pressed || raised ? `var(--color)` : theme.secondaryText};
   }
