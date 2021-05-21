@@ -18,7 +18,8 @@ const StyledFilter = styled.div`
   @media ${({ theme }) => theme.device.desktop} {
     position: absolute;
     width: 100%;
-    z-index: 1;
+    // TODO: order z-indexes in enum
+    z-index: 99;
     background-color: ${({ theme }) => theme.background};
 
     box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};

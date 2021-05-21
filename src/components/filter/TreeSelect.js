@@ -109,6 +109,7 @@ const TreeSelectContainer = styled.div`
   label {
     display: flex;
     align-items: center;
+    font-size: 0.875rem;
   }
 
   .checkbox-item {
@@ -125,8 +126,8 @@ const TreeSelectContainer = styled.div`
     content: '';
     background: ${({ theme }) => theme.transparentOrange};
     display: flex;
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
   }
 
   .checkbox-item:checked:before {
