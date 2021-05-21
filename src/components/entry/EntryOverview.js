@@ -5,10 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
-import { getStreetAddress, hasSeasonality } from '../../utils/locationInfo'
-import { getZoomedInView } from '../../utils/viewportBounds'
+import { hasSeasonality } from '../../utils/locationInfo'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
@@ -77,7 +75,6 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
-  const { setView } = useMap()
   const { typesById } = useSearch()
   const [address, setAddress] = useState('')
   const history = useHistory()
@@ -87,9 +84,8 @@ const EntryOverview = ({ locationData, className }) => {
 
   useEffect(() => {
     // TODO: stop making geocoding requests, they're expensive. Get address from API
-    // clear location data when id changes
+    /*
     async function fetchStreetAddress() {
-      // Show loading between entry selections
       const streetAddress = await getStreetAddress(
         locationData.lat,
         locationData.lng,
@@ -99,11 +95,16 @@ const EntryOverview = ({ locationData, className }) => {
     }
 
     fetchStreetAddress()
+    */
+    setAddress(
+      '201 N Goodwin Ave, Urbana, IL 61801. (reverse geocoding disabled)',
+    )
   }, [locationData])
 
   const handleAddressClick = () => {
-    history.push('/map')
-    setView(getZoomedInView(locationData.lat, locationData.lng))
+    history.push(`/map/entry/${locationData.id}`)
+    // Disabling zoom in for now
+    // setView(getZoomedInView(locationData.lat, locationData.lng))
   }
 
   const tagList = locationData && (

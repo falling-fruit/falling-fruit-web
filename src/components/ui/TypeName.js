@@ -33,14 +33,12 @@ export const TypeName = ({ typeId }) => {
   const { settings } = useSettings()
   // TODO: internationalize
 
-  return (
-    typesById && (
-      <div>
-        <CommonName>{typesById[typeId].name}</CommonName>
-        {settings.showScientificNames && (
-          <ScientificName>{typesById[typeId].scientific_name}</ScientificName>
-        )}
-      </div>
-    )
-  )
+  return typesById ? (
+    <div>
+      <CommonName>{typesById[typeId].name}</CommonName>
+      {settings.showScientificNames && (
+        <ScientificName>{typesById[typeId].scientific_name}</ScientificName>
+      )}
+    </div>
+  ) : null
 }
