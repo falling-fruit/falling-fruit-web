@@ -92,7 +92,8 @@ const LoadingOverlay = styled(LoadingIndicator)`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => transparentize(0.6, theme.background)};
+  background-color: ${({ theme }) =>
+    transparentize(0.6, theme.secondaryBackground)};
 
   span {
     display: none;

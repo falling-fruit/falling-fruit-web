@@ -92,9 +92,7 @@ const LocationStep = ({ typeOptions }) => (
       isMulti
       closeMenuOnSelect={false}
       blurInputOnSelect={false}
-      formatOptionLabel={(option) => (
-        <TypeName typeId={option.value} isTwoLines />
-      )}
+      formatOptionLabel={(option) => <TypeName typeId={option.value} />}
       required
     />
     <Textarea name="description" label="Description" />

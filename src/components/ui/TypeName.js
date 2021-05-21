@@ -4,24 +4,31 @@ import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 
 const CommonName = styled.span`
-  display: ${({ isTwoLines }) => (isTwoLines ? 'block' : 'inline')};
+  .select__option & {
+    // Two lines. Has line break between common and scientific name
+    display: block;
+  }
 
+  font-size: 0.875rem;
   font-weight: bold;
-  font-size: 14px;
   color: ${({ theme }) => theme.headerText};
 `
 
 const ScientificName = styled.span`
-  display: ${({ isTwoLines }) => (isTwoLines ? 'block' : 'inline')};
-  ${({ isTwoLines }) => !isTwoLines && 'margin-left: 5px;'}
+  margin-left: 5px;
+  .select__option & {
+    // Two lines. Has line break between common and scientific name
+    display: block;
+    margin-left: 0;
+  }
 
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: normal;
   font-style: italic;
   color: ${({ theme }) => theme.secondaryText};
 `
 
-export const TypeName = ({ typeId, isTwoLines = false }) => {
+export const TypeName = ({ typeId }) => {
   const { typesById } = useSearch()
   const { settings } = useSettings()
   // TODO: internationalize
@@ -29,13 +36,9 @@ export const TypeName = ({ typeId, isTwoLines = false }) => {
   return (
     typesById && (
       <div>
-        <CommonName isTwoLines={isTwoLines}>
-          {typesById[typeId].name}
-        </CommonName>
+        <CommonName>{typesById[typeId].name}</CommonName>
         {settings.showScientificNames && (
-          <ScientificName isTwoLines={isTwoLines}>
-            {typesById[typeId].scientific_name}
-          </ScientificName>
+          <ScientificName>{typesById[typeId].scientific_name}</ScientificName>
         )}
       </div>
     )
