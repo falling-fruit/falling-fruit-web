@@ -28,7 +28,7 @@ const ScientificName = styled.span`
   margin-left: 2px;
   font-weight: normal;
   font-style: italic;
-  color: ${({ theme }) => theme.secondaryBackground};
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 const EntryList = forwardRef(
