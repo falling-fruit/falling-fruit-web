@@ -35,9 +35,8 @@ export const useFilteredParams = () => {
 
   const getFilteredParams = useCallback(
     (params = {}, includeCenter = false, view = mapView) => ({
-      muni: filters.muni ? 1 : 0,
-      t: filters.types.join(','),
-      invasive: filters.invasive ? 1 : 0,
+      types: filters.types.join(','),
+      muni: filters.muni,
       ...convertBounds(view.bounds),
       ...(includeCenter && convertCenter(view.center)),
       ...params,

@@ -66,7 +66,9 @@ const Filter = ({ isOpen }) => {
       if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT && bounds) {
         setTreeDataLoading(true)
 
-        const counts = await getTypeCounts(getFilteredParams())
+        const counts = await getTypeCounts(
+          getFilteredParams({ types: undefined }), // Don't filter by own filtered types when querying for counts
+        )
 
         const countsById = {}
         for (const count of counts) {
