@@ -45,6 +45,7 @@ const TextContainer = styled.div`
   flex: 1;
   overflow: hidden;
   white-space: nowrap;
+
   div {
     align-items: center;
     overflow: hidden;
