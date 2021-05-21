@@ -81,9 +81,11 @@ const Review = ({ review }) => (
         Reviewed {formatISOString(review.created_at)} by {review.author}
       </cite>
     </ReviewDescription>
-    <StyledImagePreview $small>
-      <img src={review.photo.thumb} alt={review.title} />
-    </StyledImagePreview>
+    {review.photos.map((photo) => (
+      <StyledImagePreview $small key={photo.thumb}>
+        <img src={photo.thumb} alt={review.title} />
+      </StyledImagePreview>
+    ))}
   </ReviewContainer>
 )
 

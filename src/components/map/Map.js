@@ -73,7 +73,7 @@ const Map = ({
         lng={location.lng}
         // TODO: Add pin on location click
         selected={location.id === selectedLocationId}
-        label={showLabels ? location.type_names[0] : undefined}
+        label={showLabels ? location.typeName : undefined}
       />
     ))}
   </GoogleMap>

@@ -45,7 +45,7 @@ const MapPage = ({ desktop }) => {
   const entryId = match?.params.entryId && parseInt(match.params.entryId)
 
   const container = useRef(null)
-  const { viewport: searchViewport } = useSearch()
+  const { viewport: searchViewport, getTypeName } = useSearch()
   const { view, setView } = useMap()
   // Need oldView to save the previous view before zooming into adding a location
   const oldView = useRef(null)
@@ -123,12 +123,21 @@ const MapPage = ({ desktop }) => {
             ...locations
           ] = await getLocations(getFilteredParams(params))
 
-          setMapData({ locations, clusters: [], isLoading: false })
+          const locationsWithTypeNames = locations.map((location) => ({
+            ...location,
+            typeName: getTypeName(location.type_ids[0]),
+          }))
+
+          setMapData({
+            locations: locationsWithTypeNames,
+            clusters: [],
+            isLoading: false,
+          })
         }
       }
     }
     fetchClusterAndLocationData()
-  }, [view, getFilteredParams, isAddingLocation])
+  }, [view, getFilteredParams, isAddingLocation, getTypeName])
 
   const handleGeolocationClick = () => {
     setView(getZoomedInView(geolocation.latitude, geolocation.longitude))

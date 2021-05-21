@@ -133,11 +133,7 @@ const PhotoData = ({ photos, altText, onViewLightbox }) => {
       // TODO: connect to lightbox once implemented
       // TODO: this should be in the photogrid itself, shouldn't have to be handled here
       <StyledPhotoGrid>
-        <img
-          className="main-image"
-          src={photos[0].photo.medium}
-          alt={altText}
-        />
+        <img className="main-image" src={photos[0].medium} alt={altText} />
         {photos.length > 1 && (
           <ExtraImagesWrapper
             onClick={onViewLightbox}
@@ -151,7 +147,7 @@ const PhotoData = ({ photos, altText, onViewLightbox }) => {
             )}
             <img
               className="extra-images"
-              src={photos[1].photo.medium}
+              src={photos[1].medium}
               alt={altText}
             />
           </ExtraImagesWrapper>

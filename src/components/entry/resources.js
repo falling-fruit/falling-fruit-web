@@ -13,40 +13,33 @@ import WikipediaLogo from './icons/Wikipedia.svg'
 const RESOURCES = [
   {
     title: 'Eat the Weeds',
-    urlKey: 'eat_the_weeds_url',
+    urlKey: 'eat_the_weeds',
     icon: EatTheWeedsLogo,
-    iconAlt: 'Eat the Weeds logo',
   },
   {
     title: 'Foraging Texas',
-    urlKey: 'foraging_texas_url',
+    urlKey: 'foraging_texas',
     icon: ForagingTexasLogo,
-    iconAlt: 'Foraging Texas logo',
   },
   {
     title: 'Fruitipedia',
-    urlKey: 'fruitipedia_url',
+    urlKey: 'fruitipedia',
     icon: FruitipediaLogo,
-    iconAlt: 'Fruitipedia logo',
   },
   {
     title: 'Urban Mushrooms',
-    urlKey: 'urban_mushrooms_url',
+    urlKey: 'urban_mushrooms',
     icon: UrbanMushroomsLogo,
-    iconAlt: 'Urban Mushrooms logo',
   },
   {
     title: 'USDA',
-    urlKey: 'usda_symbol',
-    urlFormatter: (url) => `https://plants.usda.gov/core/profile?symbol=${url}`,
+    urlKey: 'usda',
     icon: USDALogo,
-    iconAlt: 'USDA logo',
   },
   {
     title: 'Wikipedia',
-    urlKey: 'wikipedia_url',
+    urlKey: 'wikipedia',
     icon: WikipediaLogo,
-    iconAlt: 'Wikipedia logo',
   },
 ]
 

@@ -29,15 +29,15 @@ const ScientificName = styled.span`
 `
 
 export const TypeName = ({ typeId }) => {
-  const { typesById } = useSearch()
+  const { typesById, getTypeName } = useSearch()
   const { settings } = useSettings()
   // TODO: internationalize
 
   return typesById ? (
     <div>
-      <CommonName>{typesById[typeId].name}</CommonName>
+      <CommonName>{getTypeName(typeId)}</CommonName>
       {settings.showScientificNames && (
-        <ScientificName>{typesById[typeId].scientific_name}</ScientificName>
+        <ScientificName>{typesById[typeId].scientific_names[0]}</ScientificName>
       )}
     </div>
   ) : null
