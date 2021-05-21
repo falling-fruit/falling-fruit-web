@@ -16,6 +16,7 @@ import EntryList from './EntryList'
 import { NoResultsFound, ShouldZoomIn } from './ListLoading'
 
 const LIMIT = 30
+const LIST_ENTRY_HEIGHT = 42
 
 const Container = styled.div`
   display: flex;
@@ -59,7 +60,7 @@ const PagedList = () => {
   const [locations, setLocations] = useState([])
   const [currentOffset, setCurrentOffset] = useState(0)
   const [totalLocations, setTotalLocations] = useState(0)
-  const [loadingNextPage, setLoadingNextPage] = useState(false)
+  const [loadingNextPage, setLoadingNextPage] = useState(true)
 
   // If updateOnMapMove flag/checkbox is checked, then the list view is only updated when a new location is "searched"
   const [updateOnMapMove, setUpdateOnMapMove] = useState(true)
@@ -117,30 +118,34 @@ const PagedList = () => {
     })
   }
 
-  if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-    return <ShouldZoomIn />
-  }
-
   return (
     <Rect>
       {({ rect, ref }) => (
         <Container>
           <ListContainer ref={ref}>
             <div>
-              {locations.length > 0 ? (
-                <EntryList
-                  itemSize={42}
-                  locations={locations}
-                  itemCount={locations.length}
-                  height={rect?.height ?? 0}
-                  width={rect?.width ?? 0}
-                  handleListEntryClick={handleListEntryClick}
-                />
+              {view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT ? (
+                <ShouldZoomIn />
               ) : (
-                <NoResultsFound />
+                <>
+                  {loadingNextPage || locations.length > 0 ? (
+                    <EntryList
+                      itemSize={LIST_ENTRY_HEIGHT}
+                      locations={locations}
+                      itemCount={locations.length}
+                      height={rect?.height ?? 0}
+                      width={rect?.width ?? 0}
+                      handleListEntryClick={handleListEntryClick}
+                    />
+                  ) : (
+                    <NoResultsFound />
+                  )}
+                  {loadingNextPage && locations.length !== 0 && (
+                    <LoadingOverlay />
+                  )}
+                </>
               )}
             </div>
-            {loadingNextPage && <LoadingOverlay />}
           </ListContainer>
           <PageNav>
             {locations.length > 0
