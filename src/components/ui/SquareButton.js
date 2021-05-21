@@ -14,6 +14,7 @@ const SquareButton = styled(ResetButton)`
   svg {
     color: ${({ disabled, theme }) =>
       disabled ? theme.secondaryBackground : theme.orange};
+    width: 100%;
   }
 `
 

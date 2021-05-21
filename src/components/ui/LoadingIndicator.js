@@ -1,4 +1,5 @@
 import { Loader } from '@styled-icons/boxicons-regular'
+import { transparentize } from 'polished'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
@@ -77,7 +78,9 @@ const LoadingIndicator = (props) => {
   const { t } = useTranslation()
   return (
     <LoadingIndicatorWrapper {...props}>
-      <Loader /> {t('Loading...')}
+      <span>
+        <Loader /> {t('Loading...')}
+      </span>
     </LoadingIndicatorWrapper>
   )
 }
@@ -89,6 +92,11 @@ const LoadingOverlay = styled(LoadingIndicator)`
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => transparentize(0.6, theme.background)};
+
+  span {
+    display: none;
+  }
 `
 
 export default LoadingIndicator
