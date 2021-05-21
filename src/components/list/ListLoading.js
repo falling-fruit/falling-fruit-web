@@ -8,15 +8,15 @@ const LoadingContainer = styled.div`
   height: 100%;
 `
 
-const ListLoading = ({ image, text, ...props }) => (
+const ListState = ({ image, text, ...props }) => (
   <LoadingContainer {...props}>
-    <img src={image} alt="loading-list-icon" />
+    {image && <img src={image} alt="loading-list-icon" />}
     <p>{text}</p>
   </LoadingContainer>
 )
 
 const ShouldZoomIn = (props) => (
-  <ListLoading
+  <ListState
     image="/magnify_map.svg"
     text="Zoom into a location to see Entry Data"
     {...props}
@@ -24,11 +24,7 @@ const ShouldZoomIn = (props) => (
 )
 
 const NoResultsFound = (props) => (
-  <ListLoading
-    image="/no_results_icon.svg"
-    text="No Results Found"
-    {...props}
-  />
+  <ListState image="/no_results_icon.svg" text="No Results Found" {...props} />
 )
 
 export { NoResultsFound, ShouldZoomIn }

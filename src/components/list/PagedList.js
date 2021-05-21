@@ -10,7 +10,7 @@ import { useFilteredParams } from '../../utils/useFilteredParams'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
-import { LoadingOverlay } from '../ui/LoadingIndicator'
+import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
 import SquareButton from '../ui/SquareButton'
 import EntryList from './EntryList'
 import { NoResultsFound, ShouldZoomIn } from './ListLoading'
@@ -27,12 +27,7 @@ const Container = styled.div`
 
 const ListContainer = styled.div`
   position: relative;
-  height: 100%;
-
-  > div:first-child {
-    width: 100%;
-    height: 100%;
-  }
+  flex: 1;
 `
 
 const PageNav = styled.div`
@@ -119,35 +114,36 @@ const PagedList = () => {
   }
 
   const shouldZoomIn = view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
+  const resultsLoaded = locations.length > 0
 
   return (
     <Rect>
       {({ rect, ref }) => (
         <Container>
           <ListContainer ref={ref}>
-            <div>
-              {shouldZoomIn ? (
-                <ShouldZoomIn />
-              ) : (
-                <>
-                  {loadingNextPage || locations.length > 0 ? (
-                    <EntryList
-                      itemSize={LIST_ENTRY_HEIGHT}
-                      locations={locations}
-                      itemCount={locations.length}
-                      height={rect?.height ?? 0}
-                      width={rect?.width ?? 0}
-                      handleListEntryClick={handleListEntryClick}
-                    />
-                  ) : (
-                    <NoResultsFound />
-                  )}
-                  {loadingNextPage && locations.length !== 0 && (
-                    <LoadingOverlay />
-                  )}
-                </>
-              )}
-            </div>
+            {shouldZoomIn ? (
+              <ShouldZoomIn />
+            ) : (
+              <>
+                {loadingNextPage || resultsLoaded ? (
+                  <EntryList
+                    itemSize={LIST_ENTRY_HEIGHT}
+                    locations={locations}
+                    itemCount={locations.length}
+                    height={rect?.height ?? 0}
+                    width={rect?.width ?? 0}
+                    handleListEntryClick={handleListEntryClick}
+                  />
+                ) : (
+                  <NoResultsFound />
+                )}
+                {loadingNextPage && (
+                  <LoadingOverlay>
+                    {!resultsLoaded && <LoadingIndicator />}
+                  </LoadingOverlay>
+                )}
+              </>
+            )}
           </ListContainer>
           <PageNav>
             {!shouldZoomIn && locations.length > 0
