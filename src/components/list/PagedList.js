@@ -118,13 +118,15 @@ const PagedList = () => {
     })
   }
 
+  const shouldZoomIn = view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
+
   return (
     <Rect>
       {({ rect, ref }) => (
         <Container>
           <ListContainer ref={ref}>
             <div>
-              {view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT ? (
+              {shouldZoomIn ? (
                 <ShouldZoomIn />
               ) : (
                 <>
@@ -148,20 +150,22 @@ const PagedList = () => {
             </div>
           </ListContainer>
           <PageNav>
-            {locations.length > 0
+            {!shouldZoomIn && locations.length > 0
               ? `Showing Results ${currentOffset + 1} - ${
                   currentOffset + locations.length
                 }`
               : 'No Results Found'}
             <NavButtonContainer>
               <SquareButton
-                disabled={currentOffset === 0}
+                disabled={currentOffset === 0 || shouldZoomIn}
                 onClick={() => fetchPageWithOffset(currentOffset - LIMIT)}
               >
                 <ChevronLeft />
               </SquareButton>
               <SquareButton
-                disabled={currentOffset + LIMIT >= totalLocations}
+                disabled={
+                  currentOffset + LIMIT >= totalLocations || shouldZoomIn
+                }
                 onClick={() => fetchPageWithOffset(currentOffset + LIMIT)}
               >
                 <ChevronRight />
