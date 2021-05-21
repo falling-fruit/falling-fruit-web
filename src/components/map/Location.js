@@ -1,5 +1,4 @@
 import { Map } from '@styled-icons/boxicons-solid'
-import { transparentize } from 'polished'
 import PropTypes from 'prop-types'
 import { memo } from 'react'
 import styled from 'styled-components/macro'
@@ -29,9 +28,10 @@ const LocationButton = styled(ResetButton)`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: ${({ theme }) => transparentize(0.25, theme.blue)};
+  background-color: ${({ theme }) => theme.blue};
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.12);
+
+  border: 2px solid ${({ theme }) => theme.background};
   z-index: 2;
 
   &:focus {
