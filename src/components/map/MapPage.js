@@ -2,6 +2,7 @@ import { fitBounds } from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
+import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
@@ -27,10 +28,16 @@ export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
  */
 const ADD_LOCATION_ZOOM = 18
 
+const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+`
+
 const MapPage = ({ desktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
-    path: '/map/entry/:entryId',
+    path: '/(map|list)/entry/:entryId',
     exact: true,
   })
 
@@ -48,7 +55,7 @@ const MapPage = ({ desktop }) => {
   const [mapData, setMapData] = useState({
     locations: [],
     clusters: [],
-    isLoading: true,
+    isLoading: false,
   })
 
   //const geolocation = useGeolocation({ enableHighAccuracy: true })
@@ -76,6 +83,7 @@ const MapPage = ({ desktop }) => {
         return {
           ...prevView,
           zoom: ADD_LOCATION_ZOOM,
+          isAddingLocation: false,
         }
       })
     } else {
@@ -88,6 +96,10 @@ const MapPage = ({ desktop }) => {
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
+      if (isAddingLocation) {
+        return
+      }
+
       const { zoom, bounds } = view
 
       if (bounds?.ne.lat != null) {
@@ -116,7 +128,7 @@ const MapPage = ({ desktop }) => {
       }
     }
     fetchClusterAndLocationData()
-  }, [view, getFilteredParams])
+  }, [view, getFilteredParams, isAddingLocation])
 
   const handleGeolocationClick = () => {
     setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
@@ -145,7 +157,7 @@ const MapPage = ({ desktop }) => {
       style={{ width: '100%', height: '100%', position: 'relative' }}
       ref={container}
     >
-      {mapData.isLoading && <LoadingIndicator />}
+      {mapData.isLoading && <BottomLeftLoadingIndicator />}
       {isAddingLocation ? (
         <AddLocationPin />
       ) : (

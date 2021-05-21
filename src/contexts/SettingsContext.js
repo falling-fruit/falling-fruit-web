@@ -7,7 +7,7 @@ import { createContext, useContext, useReducer } from 'react'
  */
 const DEFAULT_SETTINGS = {
   showLabels: false,
-  showScientificNames: false,
+  showScientificNames: true,
   mapType: 'roadmap',
   mapLayers: [],
   overrideDataLanguage: false,

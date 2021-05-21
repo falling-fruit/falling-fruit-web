@@ -1,3 +1,4 @@
+import { transparentize } from 'polished'
 import Select, { createFilter } from 'react-select'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
@@ -47,7 +48,17 @@ const StyledSelect = styled(Select)`
     }
 
     &__remove {
-      display: none;
+      padding: 0;
+      margin-left: 0.25rem;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-bottom: -1px;
+      color: ${({ theme }) => theme.secondaryText};
+
+      :hover {
+        color: ${({ theme }) => theme.red};
+        background-color: ${({ theme }) => transparentize(0.8, theme.red)};
+      }
     }
   }
 
@@ -77,9 +88,9 @@ const MenuList = ({ children, maxHeight }) => (
   </FixedSizeList>
 )
 
-const SelectWrapper = (props) => (
+const SelectWrapper = ({ isVirtualized, ...props }) => (
   <StyledSelect
-    components={{ MenuList }}
+    components={isVirtualized ? { MenuList } : {}}
     classNamePrefix="select"
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}

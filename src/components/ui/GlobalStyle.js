@@ -110,6 +110,11 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: underline;
     color: ${({ theme }) => theme.blue};
   }
+
+  [data-reach-dialog-overlay] {
+    // Should be in z-index constants
+    z-index: 99;
+  }
 `
 
 export default GlobalStyle

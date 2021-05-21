@@ -6,6 +6,7 @@ import { useSearch } from '../../contexts/SearchContext'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
+import { TypeName } from '../ui/TypeName'
 import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Select, Textarea } from './FormikWrappers'
@@ -91,6 +92,8 @@ const LocationStep = ({ typeOptions }) => (
       isMulti
       closeMenuOnSelect={false}
       blurInputOnSelect={false}
+      formatOptionLabel={(option) => <TypeName typeId={option.value} />}
+      isVirtualized
       required
     />
     <Textarea name="description" label="Description" />
@@ -98,15 +101,20 @@ const LocationStep = ({ typeOptions }) => (
       name="access"
       label="Property Access"
       options={PROPERTY_ACCESS_OPTIONS}
+      isSearchable={false}
     />
     <Label>
       Seasonality
       <Optional />
     </Label>
     <InlineSelects>
-      <Select name="season_start" options={MONTH_OPTIONS} />
+      <Select
+        name="season_start"
+        options={MONTH_OPTIONS}
+        isSearchable={false}
+      />
       <span>to</span>
-      <Select name="season_end" options={MONTH_OPTIONS} />
+      <Select name="season_end" options={MONTH_OPTIONS} isSearchable={false} />
     </InlineSelects>
   </>
 )
@@ -120,9 +128,9 @@ export const LocationForm = ({ desktop }) => {
   const typeOptions = useMemo(
     () =>
       typesById
-        ? Object.values(typesById).map((t) => ({
-            value: t.id,
-            label: t.name,
+        ? Object.values(typesById).map(({ id, name, scientific_name }) => ({
+            value: id,
+            label: `${name} [${scientific_name}]`,
           }))
         : [],
     [typesById],

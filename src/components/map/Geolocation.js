@@ -20,6 +20,7 @@ const Heading = styled.div`
 `
 
 const Pin = styled.div`
+  cursor: pointer;
   position: absolute;
   z-index: 1;
 

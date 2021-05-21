@@ -16,6 +16,19 @@ const SquareButton = styled(ResetButton)`
       disabled ? theme.secondaryBackground : theme.orange};
     width: 100%;
   }
+  ${({ disabled, theme }) =>
+    !disabled &&
+    `
+      @media ${theme.device.desktop} {
+
+        :hover {
+          background: ${theme.orange};
+          svg {
+            color: ${theme.background};
+          }
+        }
+      }
+    `}
 `
 
 export default SquareButton

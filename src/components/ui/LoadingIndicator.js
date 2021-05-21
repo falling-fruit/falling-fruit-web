@@ -1,70 +1,22 @@
-import { Loader } from '@styled-icons/boxicons-regular'
 import { transparentize } from 'polished'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import Spinner from './Spinner'
+
 const LoadingIndicatorWrapper = styled.div`
-  --size: 18px;
-
-  @media ${({ theme }) => theme.device.mobile} {
-    --size: 16px;
-  }
-
-  ${(props) =>
-    props.cover
-      ? `width: 100%;
-  height: 100%;`
-      : `position: absolute;
-  bottom: 10px;
-  left: 10px;`}
+  ${(props) => props.cover && `width: 100%; height: 100%;`}
 
   z-index: 1;
   display: flex;
   flex-direction: ${(props) => (props.vertical ? 'column' : 'row')};
   align-items: center;
   justify-content: center;
-  font-size: var(--size);
+  font-size: 1rem;
   color: ${({ theme }) => theme.secondaryText};
 
-  svg {
-    width: calc(var(--size) * 1.75);
-    height: calc(var(--size) * 1.75);
-    margin-right: ${(props) => (props.vertical ? 0 : '0.25em')};
-    --animation: spin 1.2s infinite ease-in-out;
-
-    @media (prefers-reduced-motion: reduce) {
-      --animation: none;
-    }
-
-    -webkit-animation: var(--animation);
-    -moz-animation: var(--animation);
-    -o-animation: var(--animation);
-    animation: var(--animation);
-
-    @-moz-keyframes spin {
-      from {
-        -moz-transform: rotate(0deg);
-      }
-      to {
-        -moz-transform: rotate(360deg);
-      }
-    }
-    @-webkit-keyframes spin {
-      from {
-        -webkit-transform: rotate(0deg);
-      }
-      to {
-        -webkit-transform: rotate(360deg);
-      }
-    }
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
+  & > svg {
+    ${(props) => !props.vertical && 'margin-right: 5px'};
   }
 `
 /**
@@ -78,25 +30,27 @@ const LoadingIndicator = (props) => {
   const { t } = useTranslation()
   return (
     <LoadingIndicatorWrapper {...props}>
-      <span>
-        <Loader /> {t('Loading...')}
-      </span>
+      <Spinner /> {t('Loading...')}
     </LoadingIndicatorWrapper>
   )
 }
 
-// TODO: make a loading overlay that grays out the background instead of setting opacity on background elements
-const LoadingOverlay = styled(LoadingIndicator)`
+/**
+ * LoadingOverlay - masked loading indicator
+ */
+const LoadingOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => transparentize(0.6, theme.background)};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  span {
-    display: none;
-  }
+  ${({ children, theme }) =>
+    !children &&
+    `background-color: ${transparentize(0.6, theme.secondaryBackground)};`}
 `
 
 export default LoadingIndicator

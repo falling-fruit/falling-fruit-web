@@ -99,15 +99,12 @@ const Entry = ({ isInDrawer }) => {
             {entryReviews}
           </>
         )}
+        {isLoading && <LoadingOverlay />}
       </>
     )
   }
 
-  return (
-    <Page isInDrawer={isInDrawer}>
-      {content} {isLoading && <LoadingOverlay />}
-    </Page>
-  )
+  return <Page isInDrawer={isInDrawer}>{content}</Page>
 }
 
 export default Entry
