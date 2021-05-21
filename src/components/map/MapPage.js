@@ -48,7 +48,7 @@ const MapPage = ({ desktop }) => {
   const [mapData, setMapData] = useState({
     locations: [],
     clusters: [],
-    isLoading: true,
+    isLoading: false,
   })
 
   //const geolocation = useGeolocation({ enableHighAccuracy: true })
@@ -76,6 +76,7 @@ const MapPage = ({ desktop }) => {
         return {
           ...prevView,
           zoom: ADD_LOCATION_ZOOM,
+          isAddingLocation: false,
         }
       })
     } else {
@@ -88,6 +89,10 @@ const MapPage = ({ desktop }) => {
 
   useEffect(() => {
     async function fetchClusterAndLocationData() {
+      if (isAddingLocation) {
+        return
+      }
+
       const { zoom, bounds } = view
 
       if (bounds?.ne.lat != null) {
@@ -116,7 +121,7 @@ const MapPage = ({ desktop }) => {
       }
     }
     fetchClusterAndLocationData()
-  }, [view, getFilteredParams])
+  }, [view, getFilteredParams, isAddingLocation])
 
   const handleGeolocationClick = () => {
     setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
