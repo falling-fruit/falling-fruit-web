@@ -22,12 +22,14 @@ const StyledButton = styled(ResetButton)`
   padding: 0 24px;
   // TODO: make raised and add a location button in main pane
 
-  :hover {
-    background: ${({ $secondary, theme }) =>
-      $secondary ? theme.orange : darken(0.1, theme.orange)};
-    border-color: ${({ $secondary, theme }) =>
-      $secondary ? theme.orange : darken(0.1, theme.orange)};
-    color: ${({ theme }) => theme.background};
+  @media ${({ theme }) => theme.device.desktop} {
+    :hover {
+      background: ${({ $secondary, theme }) =>
+        $secondary ? theme.orange : darken(0.1, theme.orange)};
+      border-color: ${({ $secondary, theme }) =>
+        $secondary ? theme.orange : darken(0.1, theme.orange)};
+      color: ${({ theme }) => theme.background};
+    }
   }
 
   svg {

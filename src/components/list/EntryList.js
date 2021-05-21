@@ -17,8 +17,10 @@ const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
 const StyledListEntry = styled(ListEntry)`
   cursor: pointer;
 
-  :hover {
-    background-color: ${({ theme }) => darken(0.05, theme.background)};
+  @media ${({ theme }) => theme.device.desktop} {
+    :hover {
+      background-color: ${({ theme }) => darken(0.05, theme.background)};
+    }
   }
 `
 
