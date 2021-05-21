@@ -21,6 +21,7 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
     return res.data
   })
 
+/* Not used yet
 const fileToFormData = (photoData: string | Blob | undefined) => {
   if (photoData !== undefined) {
     const formData = new FormData()
@@ -28,92 +29,85 @@ const fileToFormData = (photoData: string | Blob | undefined) => {
   }
   return null
 }
+*/
 
 export const getClusters = (
-  params: paths['/clusters.json']['get']['parameters']['query'],
+  params: paths['/clusters']['get']['parameters']['query'],
 ) =>
   handleResponse(
-    instance.get('/clusters.json', {
+    instance.get('/clusters', {
       params,
     }),
   )
 
 export const getLocations = (
-  params: paths['/locations.json']['get']['parameters']['query'],
+  params: paths['/locations']['get']['parameters']['query'],
 ) =>
   handleResponse(
-    instance.get('/locations.json', {
+    instance.get('/locations', {
       params,
     }),
   )
 
+/* Not implemented
 export const addLocation = (
-  params: paths['/locations.json']['post']['parameters']['query'],
+  params: paths['/locations']['post']['parameters']['query'],
   photoData?: File,
 ) =>
   handleResponse(
-    instance.post('/locations.json', fileToFormData(photoData), {
+    instance.post('/locations', fileToFormData(photoData), {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
       params,
     }),
   )
+*/
 
 export const getLocationById = (
-  id: paths['/locations/{id}.json']['get']['parameters']['path']['id'],
-  params: paths['/locations/{id}.json']['get']['parameters']['query'],
-) =>
-  handleResponse(
-    instance.get(`/locations/${id}.json`, {
-      params,
-    }),
-  )
+  id: paths['/locations/{id}']['get']['parameters']['path']['id'],
+) => handleResponse(instance.get(`/locations/${id}`))
 
+/* Not implemented
 export const updateLocation = (
-  id: paths['/locations/{id}.json']['post']['parameters']['path']['id'],
-  params: paths['/locations/{id}.json']['post']['parameters']['query'],
+  id: paths['/locations/{id}']['post']['parameters']['path']['id'],
+  params: paths['/locations/{id}']['post']['parameters']['query'],
 ) =>
   handleResponse(
-    instance.post(`/locations/${id}.json`, null, {
+    instance.post(`/locations/${id}`, null, {
       params,
     }),
   )
+*/
 
-export const getTypes = (
-  params: paths['/types.json']['get']['parameters']['query'],
-) =>
-  handleResponse(
-    instance.get('/types.json', {
-      params,
-    }),
-  )
+export const getTypes = () => handleResponse(instance.get('/types'))
 
 export const getTypeCounts = (
-  params: paths['/types/counts.json']['get']['parameters']['query'],
+  params: paths['/types/counts']['get']['parameters']['query'],
 ) =>
   handleResponse(
-    instance.get('/types/counts.json', {
+    instance.get('/types/counts', {
       params,
     }),
   )
 
 export const getTypeById = (
-  id: paths['/types/{id}.json']['get']['parameters']['path']['id'],
-) => handleResponse(instance.get(`/types/${id}.json`))
+  id: paths['/types/{id}']['get']['parameters']['path']['id'],
+) => handleResponse(instance.get(`/types/${id}`))
 
 export const getReviews = (
-  locationId: paths['/locations/{id}/reviews.json']['get']['parameters']['path']['id'],
-) => handleResponse(instance.get(`/locations/${locationId}/reviews.json`))
+  locationId: paths['/locations/{id}/reviews']['get']['parameters']['path']['id'],
+) => handleResponse(instance.get(`/locations/${locationId}/reviews`))
 
+/* Not implemented
 export const addReview = (
-  locationId: paths['/locations/{id}/review.json']['post']['parameters']['path']['id'],
-  params: paths['/locations/{id}/review.json']['post']['parameters']['query'],
+  locationId: paths['/locations/{id}/review']['post']['parameters']['path']['id'],
+  params: paths['/locations/{id}/review']['post']['parameters']['query'],
   photoData?: File,
 ) =>
   handleResponse(
     instance.post(
-      `/locations/${locationId}/review.json`,
+      `/locations/${locationId}/review`,
       fileToFormData(photoData),
       {
         headers: {
@@ -123,3 +117,4 @@ export const addReview = (
       },
     ),
   )
+*/

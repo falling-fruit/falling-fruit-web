@@ -63,7 +63,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api-docs/master/spec/v0.2.yaml --output src/utils/apiSchema.ts"
+    "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/master/spec/openapi.yml --output src/utils/apiSchema.ts"
   },
   "browserslist": {
     "production": [
