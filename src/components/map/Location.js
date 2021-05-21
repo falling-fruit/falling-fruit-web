@@ -42,7 +42,7 @@ const LocationButton = styled(ResetButton)`
 const Label = styled.div`
   font-size: 0.875rem;
   color: ${({ theme }) => theme.headerText};
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
+  /* text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45); */
   margin-top: -5px;
   /* Centers labels under each location */
   position: absolute;
@@ -53,6 +53,11 @@ const Label = styled.div`
   /* Prevents line breaks */
   white-space: nowrap;
   z-index: 1;
+
+  text-shadow: -1px -1px 0 ${({ theme }) => theme.background},
+    1px -1px 0 ${({ theme }) => theme.background},
+    -1px 1px 0 ${({ theme }) => theme.background},
+    1px 1px 0 ${({ theme }) => theme.background};
 `
 
 const Location = memo(({ label, selected, ...props }) => (
