@@ -30,7 +30,7 @@ const ADD_LOCATION_ZOOM = 18
 const MapPage = ({ desktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
-    path: '/map/entry/:entryId',
+    path: '/(map|list)/entry/:entryId',
     exact: true,
   })
 
