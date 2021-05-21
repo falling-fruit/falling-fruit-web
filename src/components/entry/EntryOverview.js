@@ -51,6 +51,10 @@ const LocationText = styled(ResetButton)`
 
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
+  p {
+    font-size: 1rem;
+  }
+
   & > *:not(:first-child) {
     margin-top: 14px;
   }
@@ -63,6 +67,7 @@ const Description = styled.section`
   & > .updatedTime {
     display: block;
     font-style: italic;
+    font-size: 1rem;
     color: ${({ theme }) => theme.text};
   }
 

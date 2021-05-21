@@ -29,7 +29,7 @@ export const TextContent = styled.article`
   }
   h2 {
     margin-top: 0;
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 
   box-sizing: border-box;
