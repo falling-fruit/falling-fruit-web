@@ -10,7 +10,7 @@ const BackButton = styled(ResetButton).attrs((props) => ({
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.secondaryText};
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: bold;
 `
 

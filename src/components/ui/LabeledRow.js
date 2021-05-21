@@ -14,7 +14,7 @@ const StyledLabeledInput = styled.div`
     }
 
     > label {
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: bold;
       color: ${({ theme }) => theme.secondaryText};
       cursor: pointer;

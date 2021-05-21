@@ -1,5 +1,4 @@
 import { Map } from '@styled-icons/boxicons-solid'
-import { transparentize } from 'polished'
 import PropTypes from 'prop-types'
 import { memo } from 'react'
 import styled from 'styled-components/macro'
@@ -29,9 +28,10 @@ const LocationButton = styled(ResetButton)`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: ${({ theme }) => transparentize(0.25, theme.blue)};
+  background-color: ${({ theme }) => theme.blue};
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.12);
+
+  border: 2px solid ${({ theme }) => theme.background};
   z-index: 2;
 
   &:focus {
@@ -40,9 +40,8 @@ const LocationButton = styled(ResetButton)`
 `
 
 const Label = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   color: ${({ theme }) => theme.headerText};
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
   margin-top: -5px;
   /* Centers labels under each location */
   position: absolute;
@@ -53,6 +52,11 @@ const Label = styled.div`
   /* Prevents line breaks */
   white-space: nowrap;
   z-index: 1;
+
+  text-shadow: -1px -1px 0 ${({ theme }) => theme.background},
+    1px -1px 0 ${({ theme }) => theme.background},
+    -1px 1px 0 ${({ theme }) => theme.background},
+    1px 1px 0 ${({ theme }) => theme.background};
 `
 
 const Location = memo(({ label, selected, ...props }) => (

@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 import { useSearch } from '../../contexts/SearchContext'
 import { getLocationById, getReviews } from '../../utils/api'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
-import LoadingIndicator from '../ui/LoadingIndicator'
+import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 import PhotoGrid from './PhotoGrid'
@@ -29,7 +29,7 @@ export const TextContent = styled.article`
   }
   h2 {
     margin-top: 0;
-    font-size: 18px;
+    font-size: 1rem;
   }
 
   box-sizing: border-box;
@@ -43,11 +43,12 @@ const Entry = ({ isInDrawer }) => {
   const { typesById } = useSearch()
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
+  const [isLoading, setIsLoading] = useState(true)
   const { id } = useParams()
 
   useEffect(() => {
     async function fetchEntryData() {
-      setLocationData(null)
+      setIsLoading(true)
 
       const [locationData, reviews] = await Promise.all([
         getLocationById(id),
@@ -56,6 +57,8 @@ const Entry = ({ isInDrawer }) => {
 
       setLocationData(locationData)
       setReviews(reviews)
+
+      setIsLoading(false)
     }
 
     if (typesById) {
@@ -63,13 +66,14 @@ const Entry = ({ isInDrawer }) => {
     }
   }, [id, typesById])
 
-  let content
-  if (!locationData || !reviews) {
-    content = <LoadingIndicator vertical cover />
-  } else {
-    const entryOverview = <EntryOverview locationData={locationData} />
-    const entryReviews = <EntryReviews reviews={reviews} />
+  const entryOverview = <EntryOverview locationData={locationData} />
+  const entryReviews = <EntryReviews reviews={reviews} />
 
+  let content
+
+  if (!locationData || !reviews) {
+    content = <LoadingIndicator cover vertical />
+  } else {
     content = (
       <>
         <PhotoGrid
@@ -99,7 +103,11 @@ const Entry = ({ isInDrawer }) => {
     )
   }
 
-  return <Page isInDrawer={isInDrawer}>{content}</Page>
+  return (
+    <Page isInDrawer={isInDrawer}>
+      {content} {isLoading && <LoadingOverlay />}
+    </Page>
+  )
 }
 
 export default Entry

@@ -27,7 +27,7 @@ const StyledCaptionInput = styled(ListEntry)`
 `
 
 const StyledInput = styled(Input)`
-  font-size: 16px;
+  font-size: 1rem;
   height: 36px;
 `
 

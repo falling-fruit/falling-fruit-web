@@ -31,8 +31,6 @@ const ListContainer = styled.div`
   > div:first-child {
     width: 100%;
     height: 100%;
-
-    ${({ $disabled }) => $disabled && 'opacity: 0.4;'}
   }
 `
 
@@ -127,7 +125,7 @@ const PagedList = () => {
     <Rect>
       {({ rect, ref }) => (
         <Container>
-          <ListContainer ref={ref} $disabled={loadingNextPage}>
+          <ListContainer ref={ref}>
             <div>
               {locations.length > 0 ? (
                 <EntryList

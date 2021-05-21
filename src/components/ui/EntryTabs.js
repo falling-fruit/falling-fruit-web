@@ -9,7 +9,7 @@ const EntryTabs = styled(PageTabs)`
     [data-reach-tab] {
       display: flex;
 
-      font-size: 14px;
+      font-size: 0.875rem;
       border-top: none;
 
       border-bottom: 3px solid ${({ theme }) => theme.secondaryBackground};

@@ -47,7 +47,7 @@ const TreeSelectContainer = styled.div`
       color: ${({ theme }) => theme.orange};
       border-radius: 20px;
       padding: 0px 10px 0px 10px;
-      font-size: 12px;
+      font-size: 0.75rem;
 
       .tag-remove {
         display: none;
@@ -109,6 +109,11 @@ const TreeSelectContainer = styled.div`
   label {
     display: flex;
     align-items: center;
+    font-size: 0.875rem;
+
+    span {
+      margin-left: 0.25rem;
+    }
   }
 
   .checkbox-item {
@@ -125,8 +130,8 @@ const TreeSelectContainer = styled.div`
     content: '';
     background: ${({ theme }) => theme.transparentOrange};
     display: flex;
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
   }
 
   .checkbox-item:checked:before {

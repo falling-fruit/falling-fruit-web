@@ -7,14 +7,19 @@ const CircleIcon = styled.div`
   align-items: center;
   background: ${({ backgroundColor }) => backgroundColor};
   padding: 0;
-  width: 36px;
-  height: 36px;
+  width: 1.75rem;
+  height: 1.75rem;
   box-sizing: border-box;
   border-radius: 50%;
   overflow: hidden;
 
   ${StyledIconBase} {
     width: 65%;
+  }
+
+  > svg {
+    width: 1rem;
+    height: auto;
   }
 
   > img {

@@ -1,4 +1,5 @@
 import { ChevronRight } from '@styled-icons/boxicons-solid'
+import { darken } from 'polished'
 import { forwardRef } from 'react'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
@@ -14,6 +15,12 @@ const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
 
 const StyledListEntry = styled(ListEntry)`
   cursor: pointer;
+
+  @media ${({ theme }) => theme.device.desktop} {
+    :hover {
+      background-color: ${({ theme }) => darken(0.05, theme.background)};
+    }
+  }
 `
 
 const EntryList = forwardRef(

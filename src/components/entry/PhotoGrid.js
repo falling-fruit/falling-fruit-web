@@ -115,10 +115,10 @@ const ExtraImagesWrapper = styled(ResetButton)`
     align-items: center;
 
     font-weight: bold;
-    font-size: 13px;
+    font-size: 0.8125rem;
 
     & > span {
-      font-size: 24px;
+      font-size: 1.5rem;
     }
   }
 `

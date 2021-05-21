@@ -7,7 +7,7 @@ import { validatedColor } from './GlobalStyle'
 const LIST_ITEM_HEIGHT = 46
 
 const StyledSelect = styled(Select)`
-  font-size: 16px;
+  font-size: 1rem;
 
   .select__clear-indicator,
   .select__indicator-separator {

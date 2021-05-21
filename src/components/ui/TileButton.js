@@ -17,7 +17,7 @@ const StyledResetButton = styled(ResetButton)`
     left: 6px;
     bottom: 5px;
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
     color: ${({ theme }) => theme.black};
   }

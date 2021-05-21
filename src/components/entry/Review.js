@@ -8,7 +8,7 @@ const ReviewContainer = styled.div`
   margin-bottom: 20px;
 `
 const Label = styled.p`
-  font-size: 12px;
+  font-size: 0.75rem;
   color: ${({ theme }) => theme.tertiaryText};
   margin: 3px 0px;
 `
@@ -26,13 +26,13 @@ const RatingTable = styled.table`
 const ReviewDescription = styled.section`
   margin-bottom: 8px;
   blockquote {
-    font-size: 16px;
+    font-size: 1rem;
     color: ${({ theme }) => theme.secondaryText};
     margin: 0 0 4px 0;
   }
   cite {
     font-style: italic;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 `
 const StyledImagePreview = styled(ImagePreview)`

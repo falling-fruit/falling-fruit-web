@@ -15,13 +15,13 @@ const Icons = styled.div`
 
 const PrimaryText = styled.div`
   font-weight: bold;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: ${({ theme }) => theme.headerText};
 `
 
 const SecondaryText = styled.div`
   font-weight: normal;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: ${({ theme }) => theme.secondaryText};
 `
 
@@ -30,7 +30,7 @@ const ListContainer = styled.li`
   display: flex;
   flex-direction: row;
   padding: 0 14px;
-  height: 57px;
+  height: 42px;
   align-items: center;
   &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};

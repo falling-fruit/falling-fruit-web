@@ -14,7 +14,7 @@ const Tag = styled.li`
   border-radius: 12px;
   height: 23px;
   padding: 0 10px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: bold;
   background-color: ${({ theme, color, backgroundColor }) =>
     backgroundColor ?? transparentize(0.8, color ?? theme.orange)};
