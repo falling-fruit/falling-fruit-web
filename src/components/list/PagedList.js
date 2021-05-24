@@ -110,6 +110,7 @@ const PagedList = () => {
       pathname: `/list/entry/${id}`,
       state: { fromPage: '/list' },
     })
+    setHoveredLocationId(null)
   }
 
   const shouldZoomIn = view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
