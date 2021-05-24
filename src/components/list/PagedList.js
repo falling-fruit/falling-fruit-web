@@ -1,5 +1,6 @@
 import { Rect } from '@reach/rect'
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
+import { debounce } from 'debounce'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -50,6 +51,7 @@ const NavButtonContainer = styled.div`
 const PagedList = () => {
   const history = useHistory()
   const { view, setHoveredLocationId, setListLocations } = useMap()
+  const setHoveredLocationIdDebounced = debounce(setHoveredLocationId, 200)
   const getFilteredParams = useFilteredParams()
 
   const [locations, setLocations] = useState([])
@@ -129,9 +131,11 @@ const PagedList = () => {
                     itemCount={locations.length}
                     height={rect?.height ?? 0}
                     width={rect?.width ?? 0}
-                    handleEntryClick={handleEntryClick}
-                    handleEntryMouseEnter={setHoveredLocationId}
-                    handleEntryMouseLeave={() => setHoveredLocationId(null)}
+                    onEntryClick={handleEntryClick}
+                    onEntryMouseEnter={setHoveredLocationIdDebounced}
+                    onEntryMouseLeave={() =>
+                      setHoveredLocationIdDebounced(null)
+                    }
                   />
                 ) : (
                   <NoResultsFound />

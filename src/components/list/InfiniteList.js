@@ -42,7 +42,7 @@ const InfiniteList = ({
           onItemsRendered={onItemsRendered}
           ref={ref}
           locations={locations}
-          handleEntryClick={handleEntryClick}
+          onEntryClick={handleEntryClick}
           isNextPageLoading={isNextPageLoading}
         />
       )}
