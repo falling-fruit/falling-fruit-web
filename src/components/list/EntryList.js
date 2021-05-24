@@ -58,9 +58,9 @@ const EntryList = forwardRef(
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
             secondaryText={`${convertMetersToMiles(location.distance)} miles`}
-            onClick={(e) => handleEntryClick(location.id, e)}
-            onMouseEnter={(e) => handleEntryMouseEnter(location.id, e)}
-            onMouseLeave={(e) => handleEntryMouseLeave(location.id, e)}
+            onClick={(e) => handleEntryClick?.(location.id, e)}
+            onMouseEnter={(e) => handleEntryMouseEnter?.(location.id, e)}
+            onMouseLeave={(e) => handleEntryMouseLeave?.(location.id, e)}
             style={style}
           />
         )

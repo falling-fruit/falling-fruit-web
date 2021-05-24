@@ -1,5 +1,5 @@
 import { fitBounds } from 'google-map-react'
-import union from 'ramda/src/union'
+import { eqBy, prop, unionWith } from 'ramda'
 import { useEffect, useRef, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
@@ -176,7 +176,9 @@ const MapPage = ({ desktop }) => {
         view={view}
         geolocation={geolocation}
         locations={
-          isAddingLocation ? [] : union(mapData.locations, listLocations)
+          isAddingLocation
+            ? []
+            : unionWith(eqBy(prop('id')), mapData.locations, listLocations)
         }
         selectedLocationId={entryId}
         hoveredLocationId={hoveredLocationId}
