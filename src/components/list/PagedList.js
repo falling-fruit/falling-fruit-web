@@ -87,23 +87,20 @@ const PagedList = () => {
   )
 
   useEffect(() => {
-    const setInitialView = () => {
-      const { bounds, center, zoom, newBounds } = view
+    const { bounds, center, zoom, newBounds } = view
 
-      if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
-        // When setView(fitContainerBounds(...)) is used (i.e. when searching), bounds appear in newBounds momentarily
-        // So we can take advantage of that to know when bounds change due to a search result
-        // TODO: This should change to using a new "searched" flag in global state eventually, indicating whether the current
-        // bounds are a result of searching
-        const properBounds = updateOnMapMove ? bounds : newBounds
+    if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
+      // When setView(fitContainerBounds(...)) is used (i.e. when searching), bounds appear in newBounds momentarily
+      // So we can take advantage of that to know when bounds change due to a search result
+      // TODO: This should change to using a new "searched" flag in global state eventually, indicating whether the current
+      // bounds are a result of searching
+      const properBounds = updateOnMapMove ? bounds : newBounds
 
-        if (properBounds?.ne.lat != null) {
-          currentView.current = { zoom, center, bounds: properBounds }
-          fetchPageWithOffset(0)
-        }
+      if (properBounds?.ne.lat != null) {
+        currentView.current = { zoom, center, bounds: properBounds }
+        fetchPageWithOffset(0)
       }
     }
-    setInitialView()
   }, [view, updateOnMapMove, fetchPageWithOffset])
 
   const handleEntryClick = (id) => {
