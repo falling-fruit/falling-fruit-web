@@ -1,4 +1,5 @@
 import { fitBounds } from 'google-map-react'
+import union from 'ramda/src/union'
 import { useEffect, useRef, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
@@ -46,7 +47,13 @@ const MapPage = ({ desktop }) => {
 
   const container = useRef(null)
   const { viewport: searchViewport } = useSearch()
-  const { view, setView, hoveredLocationId, setHoveredLocationId } = useMap()
+  const {
+    view,
+    setView,
+    hoveredLocationId,
+    setHoveredLocationId,
+    listLocations,
+  } = useMap()
   // Need oldView to save the previous view before zooming into adding a location
   const oldView = useRef(null)
   const { settings } = useSettings()
@@ -168,7 +175,9 @@ const MapPage = ({ desktop }) => {
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
         geolocation={geolocation}
-        locations={isAddingLocation ? [] : mapData.locations}
+        locations={
+          isAddingLocation ? [] : union(mapData.locations, listLocations)
+        }
         selectedLocationId={entryId}
         hoveredLocationId={hoveredLocationId}
         clusters={isAddingLocation ? [] : mapData.clusters}

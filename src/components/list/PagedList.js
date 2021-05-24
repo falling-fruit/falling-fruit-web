@@ -49,7 +49,7 @@ const NavButtonContainer = styled.div`
 
 const PagedList = () => {
   const history = useHistory()
-  const { view, setHoveredLocationId } = useMap()
+  const { view, setHoveredLocationId, setListLocations } = useMap()
   const getFilteredParams = useFilteredParams()
 
   const [locations, setLocations] = useState([])
@@ -79,10 +79,11 @@ const PagedList = () => {
       )
       setTotalLocations(locations[1])
       setLocations(locations.slice(2))
+      setListLocations(locations.slice(2))
 
       setLoadingNextPage(false)
     },
-    [getFilteredParams],
+    [getFilteredParams, setListLocations],
   )
 
   useEffect(() => {
