@@ -34,8 +34,11 @@ const MapContext = createContext()
 
 const MapProvider = ({ children }) => {
   const [view, setView] = useState(DEFAULT_VIEW_STATE)
+  const [hoveredLocationId, setHoveredLocationId] = useState()
   return (
-    <MapContext.Provider value={{ view, setView }}>
+    <MapContext.Provider
+      value={{ view, setView, hoveredLocationId, setHoveredLocationId }}
+    >
       {children}
     </MapContext.Provider>
   )

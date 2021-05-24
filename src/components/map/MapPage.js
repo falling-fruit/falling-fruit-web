@@ -46,7 +46,7 @@ const MapPage = ({ desktop }) => {
 
   const container = useRef(null)
   const { viewport: searchViewport } = useSearch()
-  const { view, setView } = useMap()
+  const { view, setView, hoveredLocationId, setHoveredLocationId } = useMap()
   // Need oldView to save the previous view before zooming into adding a location
   const oldView = useRef(null)
   const { settings } = useSettings()
@@ -139,6 +139,7 @@ const MapPage = ({ desktop }) => {
       pathname: `/map/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
+    setHoveredLocationId(null)
   }
 
   const handleClusterClick = (cluster) => {
@@ -169,6 +170,7 @@ const MapPage = ({ desktop }) => {
         geolocation={geolocation}
         locations={isAddingLocation ? [] : mapData.locations}
         selectedLocationId={entryId}
+        hoveredLocationId={hoveredLocationId}
         clusters={isAddingLocation ? [] : mapData.clusters}
         onViewChange={setView}
         onGeolocationClick={handleGeolocationClick}

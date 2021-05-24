@@ -49,7 +49,7 @@ const NavButtonContainer = styled.div`
 
 const PagedList = () => {
   const history = useHistory()
-  const { view } = useMap()
+  const { view, setHoveredLocationId } = useMap()
   const getFilteredParams = useFilteredParams()
 
   const [locations, setLocations] = useState([])
@@ -105,8 +105,7 @@ const PagedList = () => {
     setInitialView()
   }, [view, updateOnMapMove, fetchPageWithOffset])
 
-  const handleListEntryClick = (id) => {
-    // TODO: Render pin on map for the clicked list entry
+  const handleEntryClick = (id) => {
     history.push({
       pathname: `/list/entry/${id}`,
       state: { fromPage: '/list' },
@@ -132,7 +131,9 @@ const PagedList = () => {
                     itemCount={locations.length}
                     height={rect?.height ?? 0}
                     width={rect?.width ?? 0}
-                    handleListEntryClick={handleListEntryClick}
+                    handleEntryClick={handleEntryClick}
+                    handleEntryMouseEnter={setHoveredLocationId}
+                    handleEntryMouseLeave={() => setHoveredLocationId(null)}
                   />
                 ) : (
                   <NoResultsFound />
