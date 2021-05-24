@@ -51,7 +51,7 @@ const NavButtonContainer = styled.div`
 const PagedList = () => {
   const history = useHistory()
   const { view, setHoveredLocationId, setListLocations } = useMap()
-  const setHoveredLocationIdDebounced = debounce(setHoveredLocationId, 200)
+  const setHoveredLocationIdDebounced = debounce(setHoveredLocationId, 50)
   const getFilteredParams = useFilteredParams()
 
   const [locations, setLocations] = useState([])
