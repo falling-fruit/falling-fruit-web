@@ -1371,6 +1371,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/lato@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-4.3.0.tgz#78710130f8bfccae41b637cf62d3c68bd1193cc1"
+  integrity sha512-/qm5j4mEjaOSOl7OI8Q2tzt/QDzDMYNDhSvJPiFqY/ClxYGtqt1nBW5DRHiZOirI/IWl0tX3adoILOBMz/cRWA==
+
 "@googlemaps/js-api-loader@^1.7.0":
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.11.1.tgz#b7f02c04d8d8602fb4bd873b03685fccefce1c6f"

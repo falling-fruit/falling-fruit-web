@@ -6,6 +6,7 @@
   "license": "GPL-3.0",
   "homepage": "https://falling-fruit.vercel.app/",
   "dependencies": {
+    "@fontsource/lato": "^4.3.0",
     "@reach/accordion": "^0.13.2",
     "@reach/checkbox": "^0.13.2",
     "@reach/combobox": "^0.13.2",
