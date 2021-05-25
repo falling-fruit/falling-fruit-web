@@ -44,7 +44,7 @@ const SearchProvider = ({ children }) => {
     }
 
     preloadTypes()
-  }, [setTypesById])
+  }, [])
 
   return (
     <SearchContext.Provider

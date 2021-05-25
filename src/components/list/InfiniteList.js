@@ -20,7 +20,7 @@ const InfiniteList = ({
 
   const isItemLoaded = (index) => !hasMoreItems || index < locations.length
 
-  const handleListEntryClick = (id) => {
+  const handleEntryClick = (id) => {
     history.push({
       pathname: `/list/entry/${id}`,
       state: { fromPage: '/list' },
@@ -42,7 +42,7 @@ const InfiniteList = ({
           onItemsRendered={onItemsRendered}
           ref={ref}
           locations={locations}
-          handleListEntryClick={handleListEntryClick}
+          onEntryClick={handleEntryClick}
           isNextPageLoading={isNextPageLoading}
         />
       )}
