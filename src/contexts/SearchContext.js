@@ -44,7 +44,7 @@ const SearchProvider = ({ children }) => {
     }
 
     preloadTypes()
-  }, [setTypesById])
+  }, [])
 
   // TODO: Is this the right approach for simplifying access to localized common name
 

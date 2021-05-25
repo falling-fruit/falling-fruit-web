@@ -1,5 +1,6 @@
 import { Rect } from '@reach/rect'
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
+import { debounce } from 'debounce'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -49,7 +50,8 @@ const NavButtonContainer = styled.div`
 
 const PagedList = () => {
   const history = useHistory()
-  const { view } = useMap()
+  const { view, setHoveredLocationId, setListLocations } = useMap()
+  const setHoveredLocationIdDebounced = debounce(setHoveredLocationId, 50)
   const getFilteredParams = useFilteredParams()
 
   const [locations, setLocations] = useState([])
@@ -79,38 +81,40 @@ const PagedList = () => {
       )
       setTotalLocations(locations[1])
       setLocations(locations.slice(2))
+      // TODO: eventually will be consolidated with locations in global state
+      setListLocations(locations.slice(2))
 
       setLoadingNextPage(false)
     },
-    [getFilteredParams],
+    [getFilteredParams, setListLocations],
   )
 
   useEffect(() => {
-    const setInitialView = () => {
-      const { bounds, center, zoom, newBounds } = view
+    const { bounds, center, zoom, newBounds } = view
 
-      if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
-        // When setView(fitContainerBounds(...)) is used (i.e. when searching), bounds appear in newBounds momentarily
-        // So we can take advantage of that to know when bounds change due to a search result
-        // TODO: This should change to using a new "searched" flag in global state eventually, indicating whether the current
-        // bounds are a result of searching
-        const properBounds = updateOnMapMove ? bounds : newBounds
+    if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
+      // When setView(fitContainerBounds(...)) is used (i.e. when searching), bounds appear in newBounds momentarily
+      // So we can take advantage of that to know when bounds change due to a search result
+      // TODO: This should change to using a new "searched" flag in global state eventually, indicating whether the current
+      // bounds are a result of searching
+      const properBounds = updateOnMapMove ? bounds : newBounds
 
-        if (properBounds?.ne.lat != null) {
-          currentView.current = { zoom, center, bounds: properBounds }
-          fetchPageWithOffset(0)
-        }
+      if (properBounds?.ne.lat != null) {
+        currentView.current = { zoom, center, bounds: properBounds }
+        fetchPageWithOffset(0)
       }
+    } else {
+      // TODO: this is a temporary fix
+      setListLocations([])
     }
-    setInitialView()
-  }, [view, updateOnMapMove, fetchPageWithOffset])
+  }, [view, updateOnMapMove, fetchPageWithOffset, setListLocations])
 
-  const handleListEntryClick = (id) => {
-    // TODO: Render pin on map for the clicked list entry
+  const handleEntryClick = (id) => {
     history.push({
       pathname: `/list/entry/${id}`,
       state: { fromPage: '/list' },
     })
+    setHoveredLocationId(null)
   }
 
   const shouldZoomIn = view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
@@ -132,7 +136,11 @@ const PagedList = () => {
                     itemCount={locations.length}
                     height={rect?.height ?? 0}
                     width={rect?.width ?? 0}
-                    handleListEntryClick={handleListEntryClick}
+                    onEntryClick={handleEntryClick}
+                    onEntryMouseEnter={setHoveredLocationIdDebounced}
+                    onEntryMouseLeave={() =>
+                      setHoveredLocationIdDebounced(null)
+                    }
                   />
                 ) : (
                   <NoResultsFound />

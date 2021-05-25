@@ -1,4 +1,5 @@
 import { fitBounds } from 'google-map-react'
+import { eqBy, prop, unionWith } from 'ramda'
 import { useEffect, useRef, useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
@@ -46,7 +47,13 @@ const MapPage = ({ desktop }) => {
 
   const container = useRef(null)
   const { viewport: searchViewport, getTypeName } = useSearch()
-  const { view, setView } = useMap()
+  const {
+    view,
+    setView,
+    hoveredLocationId,
+    setHoveredLocationId,
+    listLocations,
+  } = useMap()
   // Need oldView to save the previous view before zooming into adding a location
   const oldView = useRef(null)
   const { settings } = useSettings()
@@ -69,12 +76,14 @@ const MapPage = ({ desktop }) => {
     })
   }
 
+  // TODO: get rid of useEffect by moving state into redux
   useEffect(() => {
     if (searchViewport) {
       setView(fitContainerBounds(searchViewport))
     }
   }, [searchViewport, setView])
 
+  // TODO: same here
   useEffect(() => {
     if (isAddingLocation) {
       // Zoom into add location
@@ -94,50 +103,47 @@ const MapPage = ({ desktop }) => {
     }
   }, [isAddingLocation, setView])
 
-  useEffect(() => {
-    async function fetchClusterAndLocationData() {
-      if (isAddingLocation) {
-        return
+  const handleViewChange = async (newView) => {
+    setView(newView)
+
+    if (isAddingLocation) {
+      return
+    }
+
+    const { zoom, bounds } = newView
+
+    if (bounds?.ne.lat != null) {
+      // Map has received real bounds
+      setMapData((prevMapData) => ({ ...prevMapData, isLoading: true }))
+
+      const params = {
+        limit: 250,
       }
 
-      const { zoom, bounds } = view
+      if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+        const clusters = await getClusters(
+          getFilteredParams({ ...params, zoom }, false, newView),
+        )
 
-      if (bounds?.ne.lat != null) {
-        // Map has received real bounds
-        setMapData((prevMapData) => ({ ...prevMapData, isLoading: true }))
+        setMapData({ locations: [], clusters, isLoading: false })
+      } else {
+        const locations = await getLocations(
+          getFilteredParams(params, false, newView),
+        )
 
-        const params = {
-          limit: 250,
-        }
+        const locationsWithTypeNames = locations.map((location) => ({
+          ...location,
+          typeName: getTypeName(location.type_ids[0]),
+        }))
 
-        if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-          const clusters = await getClusters(
-            getFilteredParams({ ...params, zoom }),
-          )
-
-          setMapData({ locations: [], clusters, isLoading: false })
-        } else {
-          const [
-            _numLocationsReturned,
-            _totalLocations,
-            ...locations
-          ] = await getLocations(getFilteredParams(params))
-
-          const locationsWithTypeNames = locations.map((location) => ({
-            ...location,
-            typeName: getTypeName(location.type_ids[0]),
-          }))
-
-          setMapData({
-            locations: locationsWithTypeNames,
-            clusters: [],
-            isLoading: false,
-          })
-        }
+        setMapData({
+          locations: locationsWithTypeNames,
+          clusters: [],
+          isLoading: false,
+        })
       }
     }
-    fetchClusterAndLocationData()
-  }, [view, getFilteredParams, isAddingLocation, getTypeName])
+  }
 
   const handleGeolocationClick = () => {
     setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
@@ -148,6 +154,7 @@ const MapPage = ({ desktop }) => {
       pathname: `/map/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
+    setHoveredLocationId(null)
   }
 
   const handleClusterClick = (cluster) => {
@@ -176,10 +183,15 @@ const MapPage = ({ desktop }) => {
         googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
         geolocation={geolocation}
-        locations={isAddingLocation ? [] : mapData.locations}
+        locations={
+          isAddingLocation
+            ? []
+            : unionWith(eqBy(prop('id')), mapData.locations, listLocations)
+        }
         selectedLocationId={entryId}
+        hoveredLocationId={hoveredLocationId}
         clusters={isAddingLocation ? [] : mapData.clusters}
-        onViewChange={setView}
+        onViewChange={handleViewChange}
         onGeolocationClick={handleGeolocationClick}
         onLocationClick={handleLocationClick}
         onClusterClick={handleClusterClick}

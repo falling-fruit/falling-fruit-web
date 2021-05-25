@@ -22,6 +22,7 @@ const Map = ({
   geolocation,
   locations,
   selectedLocationId,
+  hoveredLocationId,
   clusters,
   onGeolocationClick,
   onClusterClick,
@@ -71,8 +72,10 @@ const Map = ({
         }}
         lat={location.lat}
         lng={location.lng}
-        // TODO: Add pin on location click
-        selected={location.id === selectedLocationId}
+        selected={
+          location.id === selectedLocationId ||
+          location.id === hoveredLocationId
+        }
         label={showLabels ? location.typeName : undefined}
       />
     ))}
