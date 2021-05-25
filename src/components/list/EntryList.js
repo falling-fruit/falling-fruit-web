@@ -23,24 +23,18 @@ const StyledListEntry = styled(ListEntry)`
   }
 `
 
+// TODO: skeleton for unloaded rows and allow arbitrarily scrolling down.
+// See http://bvaughn.github.io/react-virtualized/#/components/InfiniteLoader
+
 const EntryList = forwardRef(
   (
-    {
-      height,
-      width,
-      itemSize,
-      itemCount,
-      locations,
-      onEntryClick,
-      onEntryMouseEnter,
-      onEntryMouseLeave,
-      ...props
-    },
+    { locations, onEntryClick, onEntryMouseEnter, onEntryMouseLeave, ...props },
     ref,
   ) => {
     const renderRow = ({ index, style }) => {
       const location = locations[index]
-      let row = null
+
+      let row
       if (location) {
         row = (
           <StyledListEntry
@@ -49,7 +43,7 @@ const EntryList = forwardRef(
               <CircleIcon backgroundColor={theme.green}>
                 {/* TODO: locations currently don't have a photo tied to them, so never shows up */}
                 {location.photo ? (
-                  <img src={location.photo.medium} alt="entry-icon" />
+                  <img src={location.photo.thumb} alt="entry-icon" />
                 ) : (
                   <LeafIcon />
                 )}
@@ -64,25 +58,17 @@ const EntryList = forwardRef(
             style={style}
           />
         )
-      } else if (index < itemCount) {
+      } else {
         row = (
-          <div style={style}>
-            <LoadingIndicator />
-          </div>
+          <StyledListEntry secondaryText={<LoadingIndicator />} style={style} />
         )
       }
+
       return row
     }
 
     return (
-      <FixedSizeList
-        height={height}
-        width={width}
-        itemSize={itemSize}
-        itemCount={itemCount}
-        ref={ref}
-        {...props}
-      >
+      <FixedSizeList ref={ref} {...props}>
         {renderRow}
       </FixedSizeList>
     )

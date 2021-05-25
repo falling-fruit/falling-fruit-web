@@ -28,18 +28,17 @@ const ListPage = () => {
   const container = useRef()
   const rect = useRect(container) ?? { width: 0, height: 0 }
 
-  const loadNextPage = useCallback(
+  const loadLocations = useCallback(
     async (offset) => {
       setIsNextPageLoading(true)
+
       const locationResults = await getLocations(
         getFilteredParams({ limit: MOBILE_LIST_LOAD_LIMIT, offset }, true),
       )
-      setIsNextPageLoading(false)
+      setHasMoreItems(locationResults.length !== 0)
+      setLocations((locations) => [...locations, ...locationResults])
 
-      setLocations((locations) => {
-        setHasMoreItems(locations.length !== 0)
-        return [...locations, ...locationResults]
-      })
+      setIsNextPageLoading(false)
     },
     [getFilteredParams],
   )
@@ -51,17 +50,17 @@ const ListPage = () => {
       zoom > VISIBLE_CLUSTER_ZOOM_LIMIT &&
       pathname === '/list'
     ) {
-      // TODO: would be nice to get both here, or perhaps a bool of whether there is more
-      loadNextPage(0)
+      // TODO: would be nice to get total count here, or perhaps a bool of whether there is more
+      loadLocations(0)
     } else {
       setLocations([])
     }
-  }, [view, pathname, loadNextPage])
+  }, [view, pathname, loadLocations])
 
   let content
   if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
     content = <ShouldZoomIn />
-  } else if (locations.length === 0) {
+  } else if (locations.length === 0 && !isNextPageLoading) {
     content = <NoResultsFound />
   } else {
     content = (
@@ -69,7 +68,7 @@ const ListPage = () => {
         width={rect.width}
         height={rect.height}
         locations={locations}
-        loadNextPage={() => loadNextPage(locations.length)}
+        loadNextPage={() => loadLocations(locations.length)}
         hasMoreItems={hasMoreItems}
         isNextPageLoading={isNextPageLoading}
       />
