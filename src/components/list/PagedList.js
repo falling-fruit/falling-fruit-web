@@ -81,6 +81,7 @@ const PagedList = () => {
       )
       setTotalLocations(locations[1])
       setLocations(locations.slice(2))
+      // TODO: eventually will be consolidated with locations in global state
       setListLocations(locations.slice(2))
 
       setLoadingNextPage(false)
@@ -102,8 +103,11 @@ const PagedList = () => {
         currentView.current = { zoom, center, bounds: properBounds }
         fetchPageWithOffset(0)
       }
+    } else {
+      // TODO: this is a temporary fix
+      setListLocations([])
     }
-  }, [view, updateOnMapMove, fetchPageWithOffset])
+  }, [view, updateOnMapMove, fetchPageWithOffset, setListLocations])
 
   const handleEntryClick = (id) => {
     history.push({
