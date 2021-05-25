@@ -49,6 +49,15 @@ export const getLocations = (
     }),
   )
 
+export const getLocationsCount = (
+  params: paths['/locations/count']['get']['parameters']['query'],
+) =>
+  handleResponse(
+    instance.get('/locations/count', {
+      params,
+    }),
+  )
+
 /* Not implemented
 export const addLocation = (
   params: paths['/locations']['post']['parameters']['query'],

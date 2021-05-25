@@ -1,5 +1,5 @@
 import { useRect } from '@reach/rect'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -28,48 +28,35 @@ const ListPage = () => {
   const container = useRef()
   const rect = useRect(container) ?? { width: 0, height: 0 }
 
+  const loadNextPage = useCallback(
+    async (offset) => {
+      setIsNextPageLoading(true)
+      const locationResults = await getLocations(
+        getFilteredParams({ limit: MOBILE_LIST_LOAD_LIMIT, offset }, true),
+      )
+      setIsNextPageLoading(false)
+
+      setLocations((locations) => {
+        setHasMoreItems(locations.length !== 0)
+        return [...locations, ...locationResults]
+      })
+    },
+    [getFilteredParams],
+  )
+
   useEffect(() => {
-    const fetchInitialListEntries = async () => {
-      const { bounds, zoom } = view
-      if (
-        bounds?.ne.lat != null &&
-        zoom > VISIBLE_CLUSTER_ZOOM_LIMIT &&
-        pathname === '/list'
-      ) {
-        const [
-          numLocations,
-          totalLocations,
-          ...locationResults
-        ] = await getLocations(
-          getFilteredParams({ limit: MOBILE_LIST_LOAD_LIMIT, offset: 0 }, true),
-        )
-
-        setHasMoreItems(numLocations < totalLocations)
-        setLocations(locationResults)
-      } else {
-        setLocations([])
-      }
+    const { bounds, zoom } = view
+    if (
+      bounds?.ne.lat != null &&
+      zoom > VISIBLE_CLUSTER_ZOOM_LIMIT &&
+      pathname === '/list'
+    ) {
+      // TODO: would be nice to get both here, or perhaps a bool of whether there is more
+      loadNextPage(0)
+    } else {
+      setLocations([])
     }
-    fetchInitialListEntries()
-  }, [view, pathname, getFilteredParams])
-
-  const loadNextPage = async () => {
-    setIsNextPageLoading(true)
-    const [
-      numLocations,
-      _totalLocations,
-      ...locationResults
-    ] = await getLocations(
-      getFilteredParams(
-        { limit: MOBILE_LIST_LOAD_LIMIT, offset: locations.length },
-        true,
-      ),
-    )
-    setIsNextPageLoading(false)
-
-    setHasMoreItems(numLocations !== 0)
-    setLocations((locations) => [...locations, ...locationResults])
-  }
+  }, [view, pathname, loadNextPage])
 
   let content
   if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
@@ -82,7 +69,7 @@ const ListPage = () => {
         width={rect.width}
         height={rect.height}
         locations={locations}
-        loadNextPage={loadNextPage}
+        loadNextPage={() => loadNextPage(locations.length)}
         hasMoreItems={hasMoreItems}
         isNextPageLoading={isNextPageLoading}
       />

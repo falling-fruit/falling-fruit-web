@@ -16,7 +16,7 @@ import SquareButton from '../ui/SquareButton'
 import EntryList from './EntryList'
 import { NoResultsFound, ShouldZoomIn } from './ListLoading'
 
-const LIMIT = 30
+const DESKTOP_PAGE_LIMIT = 30
 const LIST_ENTRY_HEIGHT = 42
 
 const Container = styled.div`
@@ -69,20 +69,17 @@ const PagedList = () => {
       setLoadingNextPage(true)
       setCurrentOffset(offset)
 
-      const locations = await getLocations(
+      const locationResults = await getLocations(
         getFilteredParams(
-          {
-            limit: LIMIT,
-            offset,
-          },
+          { limit: DESKTOP_PAGE_LIMIT, offset },
           true,
           currentView.current,
         ),
       )
-      setTotalLocations(locations[1])
-      setLocations(locations.slice(2))
-      // TODO: eventually will be consolidated with locations in global state
-      setListLocations(locations.slice(2))
+
+      setTotalLocations(100) // TODO: fix once /locations endpoint is updated
+      setLocations(locationResults)
+      setListLocations(locationResults)
 
       setLoadingNextPage(false)
     },
@@ -97,6 +94,7 @@ const PagedList = () => {
       // So we can take advantage of that to know when bounds change due to a search result
       // TODO: This should change to using a new "searched" flag in global state eventually, indicating whether the current
       // bounds are a result of searching
+      // TODO: this will all get fixed in Redux
       const properBounds = updateOnMapMove ? bounds : newBounds
 
       if (properBounds?.ne.lat != null) {
@@ -157,20 +155,25 @@ const PagedList = () => {
             {!shouldZoomIn && locations.length > 0
               ? `Showing Results ${currentOffset + 1} - ${
                   currentOffset + locations.length
-                }`
+                } of ${totalLocations}`
               : 'No Results Found'}
             <NavButtonContainer>
               <SquareButton
                 disabled={currentOffset === 0 || shouldZoomIn}
-                onClick={() => fetchPageWithOffset(currentOffset - LIMIT)}
+                onClick={() =>
+                  fetchPageWithOffset(currentOffset - DESKTOP_PAGE_LIMIT)
+                }
               >
                 <ChevronLeft />
               </SquareButton>
               <SquareButton
                 disabled={
-                  currentOffset + LIMIT >= totalLocations || shouldZoomIn
+                  currentOffset + DESKTOP_PAGE_LIMIT >= totalLocations ||
+                  shouldZoomIn
                 }
-                onClick={() => fetchPageWithOffset(currentOffset + LIMIT)}
+                onClick={() =>
+                  fetchPageWithOffset(currentOffset + DESKTOP_PAGE_LIMIT)
+                }
               >
                 <ChevronRight />
               </SquareButton>
