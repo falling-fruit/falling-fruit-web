@@ -11,16 +11,16 @@ import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
-import { useMap } from '../../contexts/MapContext'
-import { useSearch } from '../../contexts/SearchContext'
+import { fitBounds, zoomIn } from '../../redux/mapSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
+import { getPlaceBounds } from '../../utils/viewportBounds'
 import Filter from '../filter/Filter'
 import FilterIconButton from '../filter/FilterIconButton'
 import Input from '../ui/Input'
@@ -84,13 +84,12 @@ const SearchBarContainer = styled.div`
 `
 
 const Search = (props) => {
-  const { setViewport } = useSearch()
+  const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
 
   // Geolocation and current city name
   const geolocation = useGeolocation()
   const [cityName, setCityName] = useState(null)
-  const { setView } = useMap()
 
   // Filter visible
   const [filterOpen, setFilterOpen] = useState(false)
@@ -147,14 +146,16 @@ const Search = (props) => {
   const handleSelect = async (description) => {
     setValue(description, false)
 
-    let viewportBounds
     if (description === 'Current Location') {
-      setView(getZoomedInView(geolocation.latitude, geolocation.longitude))
-    } else {
-      viewportBounds = await getPlaceBounds(
-        descriptionToPlaceId.current[description],
+      dispatch(
+        zoomIn({ lat: geolocation.latitude, lng: geolocation.longitude }),
       )
-      setViewport(viewportBounds)
+    } else {
+      dispatch(
+        fitBounds(
+          await getPlaceBounds(descriptionToPlaceId.current[description]),
+        ),
+      )
     }
   }
 

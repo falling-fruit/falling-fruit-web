@@ -1,4 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { fitBounds as fitBoundsWithSize } from 'google-map-react'
+
+import { getClusters, getLocations } from '../utils/api'
+import { selectParams } from './selectParams'
 
 /**
  * Default view state of the map.
@@ -12,43 +16,95 @@ const DEFAULT_VIEW_STATE = {
   zoom: 1,
 }
 
-const setReducer = (key) => (state, action) => ({
+export const setReducer = (key) => (state, action) => ({
   ...state,
   [key]: action.payload,
 })
 
-const updateReducer = (key) => (state, action) => ({
+export const updateReducer = (key) => (state, action) => ({
   ...state,
   [key]: { ...state[key], ...action.payload },
 })
 
+export const fetchMapLocations = createAsyncThunk(
+  'map/fetchMapLocations',
+  async (_, { getState }) =>
+    await getLocations(selectParams(getState(), { limit: 250 })),
+)
+
+export const fetchMapClusters = createAsyncThunk(
+  'map/fetchMapClusters',
+  async (_, { getState }) => {
+    const state = getState()
+    return await getClusters(selectParams(state, { zoom: state.map.view.zoom }))
+  },
+)
+
 export const mapSlice = createSlice({
   name: 'map',
   initialState: {
-    typesById: null,
-    filterTreeData: null,
-    isDesktop: null,
     view: DEFAULT_VIEW_STATE,
-    listLocations: [],
-    mapLocations: [],
-    mapClusters: [],
+    oldView: null,
+    isLoading: false,
+    locations: [],
+    clusters: [],
     hoveredLocationId: null,
-    filters: {},
   },
   reducers: {
-    setTypesById: setReducer('typesById'),
-    updateFilterTreeData: updateReducer('filterTreeData'),
-    setIsDesktop: setReducer('isDesktop'),
-    setView: setReducer('setView'),
+    setView: setReducer('view'),
+    zoomInAndSave: (state) => {
+      state.oldView = { ...state.view }
+      state.view.zoom = 18
+    },
+    restoreOldView: (state) => {
+      if (state.oldView) {
+        state.view = { ...state.oldView }
+      }
+    },
+    zoomIn: (state, action) => {
+      state.view = {
+        center: action.payload,
+        zoom: 16,
+      }
+    },
+    fitBounds: (state, action) => {
+      state.view = fitBoundsWithSize(action.payload, state.view.size)
+    },
+    clusterClick: (state, action) => {
+      state.view = {
+        center: action.payload,
+        zoom: state.view.zoom + 2,
+      }
+    },
     setHoveredLocationId: setReducer('hoveredLocationId'),
-    updateFilters: updateReducer('filters'),
+  },
+  extraReducers: {
+    [fetchMapLocations.pending]: (state) => {
+      state.isLoading = true
+    },
+    [fetchMapLocations.fulfilled]: (state, action) => {
+      state.locations = action.payload
+      state.clusters = []
+      state.isLoading = false
+    },
+
+    [fetchMapClusters.pending]: (state) => {
+      state.isLoading = true
+    },
+    [fetchMapClusters.fulfilled]: (state, action) => {
+      state.clusters = action.payload
+      state.locations = []
+      state.isLoading = false
+    },
   },
 })
 
 export const {
-  setTypesById,
-  setFilterTreeData,
-  setIsDesktop,
+  zoomInAndSave,
+  restoreOldView,
+  zoomIn,
+  fitBounds,
+  clusterClick,
   setView,
   setHoveredLocationId,
   updateFilters,
