@@ -25,7 +25,7 @@ const ResourceList = ({ typeData }) =>
           rel="noopener noreferrer"
           href={typeData.urls[urlKey]}
         >
-          <img src={icon} alt={`${icon} logo`} />
+          <img src={icon} alt={`${title} logo`} />
           <span>{title}</span>
         </Resource>
       ),
