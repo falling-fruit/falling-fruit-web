@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { updateSettings } from '../../store/settingsSlice'
+import { updateSettings } from '../../redux/settingsSlice'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import RadioTiles from '../ui/RadioTiles'
@@ -30,7 +30,7 @@ const Page = styled.div`
   ${({ desktop }) =>
     desktop && 'padding-top: 0; h3:first-child { margin-top: 8px; }'}
 
-  h2 {
+  > h2 {
     margin-top: 0;
   }
 
