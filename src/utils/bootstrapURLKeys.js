@@ -4,7 +4,6 @@
 
 export const bootstrapURLKeys = {
   apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   version: 'beta',
   libraries: ['places'],
 }

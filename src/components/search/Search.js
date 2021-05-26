@@ -1,6 +1,5 @@
 import '@reach/combobox/styles.css'
 
-import { Loader } from '@googlemaps/js-api-loader'
 import {
   Combobox,
   ComboboxInput,
@@ -10,6 +9,7 @@ import {
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
+import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
@@ -25,6 +25,8 @@ import Filter from '../filter/Filter'
 import FilterIconButton from '../filter/FilterIconButton'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
+
+const { googleMapLoader } = GoogleMapReact
 
 const CurrentLocationButton = (props) => (
   <button {...props}>
@@ -87,28 +89,11 @@ const Search = (props) => {
 
   // Geolocation and current city name
   const geolocation = useGeolocation()
-  const [mapsReady, setMapsReady] = useState(false)
   const [cityName, setCityName] = useState(null)
   const { setView } = useMap()
 
   // Filter visible
   const [filterOpen, setFilterOpen] = useState(false)
-
-  useEffect(() => {
-    async function fetchCityName() {
-      if (geolocation.latitude !== null) {
-        const city = await getFormattedLocationInfo(
-          geolocation.latitude,
-          geolocation.longitude,
-        )
-        setCityName(city)
-      }
-    }
-
-    if (mapsReady) {
-      fetchCityName()
-    }
-  }, [geolocation, mapsReady])
 
   // Open the popover again when the value changes back to empty
   const inputRef = useRef(null)
@@ -128,12 +113,24 @@ const Search = (props) => {
   })
 
   useEffect(() => {
-    const loader = new Loader(bootstrapURLKeys)
-    loader.load().then(() => {
-      init()
-      setMapsReady(true)
-    })
+    googleMapLoader(bootstrapURLKeys).then(init)
   }, [init])
+
+  useEffect(() => {
+    async function fetchCityName() {
+      if (geolocation.latitude !== null) {
+        const city = await getFormattedLocationInfo(
+          geolocation.latitude,
+          geolocation.longitude,
+        )
+        setCityName(city)
+      }
+    }
+
+    if (ready) {
+      fetchCityName()
+    }
+  }, [geolocation, ready])
 
   useEffect(() => {
     if (value === '') {
