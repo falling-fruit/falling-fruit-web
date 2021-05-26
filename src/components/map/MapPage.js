@@ -1,13 +1,13 @@
 import { fitBounds } from 'google-map-react'
 import { eqBy, prop, unionWith } from 'ramda'
 import { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
-import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useFilteredParams } from '../../utils/useFilteredParams'
@@ -57,7 +57,7 @@ const MapPage = ({ desktop }) => {
   } = useMap()
   // Need oldView to save the previous view before zooming into adding a location
   const oldView = useRef(null)
-  const { settings } = useSettings()
+  const settings = useSelector((state) => state.settings)
   const getFilteredParams = useFilteredParams()
 
   const [mapData, setMapData] = useState({

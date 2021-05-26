@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { useSettings } from '../../contexts/SettingsContext'
+import { updateSettings } from '../../store/settingsSlice'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import RadioTiles from '../ui/RadioTiles'
@@ -51,7 +52,9 @@ const Page = styled.div`
 `
 
 const SettingsPage = ({ desktop }) => {
-  const { settings, addSetting } = useSettings()
+  const dispatch = useDispatch()
+  const settings = useSelector((state) => state.settings)
+
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
 
@@ -76,9 +79,11 @@ const SettingsPage = ({ desktop }) => {
             <Checkbox
               id={field}
               onClick={(e) =>
-                addSetting({
-                  [field]: e.target.checked,
-                })
+                dispatch(
+                  updateSettings({
+                    [field]: e.target.checked,
+                  }),
+                )
               }
               checked={settings[field]}
             />
@@ -111,9 +116,11 @@ const SettingsPage = ({ desktop }) => {
         ]}
         value={settings.mapType}
         onChange={(value) =>
-          addSetting({
-            mapType: value,
-          })
+          dispatch(
+            updateSettings({
+              mapType: value,
+            }),
+          )
         }
       />
 
@@ -139,9 +146,11 @@ const SettingsPage = ({ desktop }) => {
         ]}
         value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
         onChange={(value) =>
-          addSetting({
-            mapLayers: value ? [value] : [],
-          })
+          dispatch(
+            updateSettings({
+              mapLayers: value ? [value] : [],
+            }),
+          )
         }
       />
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
-import { useSettings } from '../../contexts/SettingsContext'
 import { getTypeCounts } from '../../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
 import { useFilteredParams } from '../../utils/useFilteredParams'
@@ -43,13 +43,16 @@ const StyledFilter = styled.div`
 `
 
 const Filter = ({ isOpen }) => {
+  const showScientificNames = useSelector(
+    (state) => state.settings.showScientificNames,
+  )
+
   const { view } = useMap()
   const { filters, setFilters, typesById } = useSearch()
   const getFilteredParams = useFilteredParams()
 
   const [treeData, setTreeData] = useState([])
   const [treeDataLoading, setTreeDataLoading] = useState(false)
-  const { settings } = useSettings()
   const { t } = useTranslation()
 
   const handleTreeChange = (currentNode, selectedNodes) => {
@@ -80,7 +83,7 @@ const Filter = ({ isOpen }) => {
             Object.values(typesById),
             countsById,
             filters.types,
-            settings.showScientificNames,
+            showScientificNames,
           ),
         )
 
