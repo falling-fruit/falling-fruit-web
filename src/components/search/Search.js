@@ -13,7 +13,6 @@ import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import { useEffect, useRef, useState } from 'react'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
-// TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { useMap } from '../../contexts/MapContext'
