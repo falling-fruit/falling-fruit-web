@@ -113,7 +113,7 @@ const MapPage = ({ desktop }) => {
 
     const { zoom, bounds } = newView
 
-    if (bounds?.ne.lat != null) {
+    if (bounds?.ne.lat != null && zoom > 1) {
       // Map has received real bounds
       setMapData((prevMapData) => ({ ...prevMapData, isLoading: true }))
 
