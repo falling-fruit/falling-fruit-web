@@ -9,6 +9,7 @@ import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
+import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useFilteredParams } from '../../utils/useFilteredParams'
 import { getZoomedInView } from '../../utils/viewportBounds'
 import AddLocationButton from '../ui/AddLocationButton'
@@ -180,7 +181,7 @@ const MapPage = ({ desktop }) => {
         !desktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
       <Map
-        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        bootstrapURLKeys={bootstrapURLKeys}
         view={view}
         geolocation={geolocation}
         locations={

@@ -17,7 +17,7 @@ import Location from './Location'
  * @param {boolean} showLabels - Will display labels under locations if true
  */
 const Map = ({
-  apiKey,
+  bootstrapURLKeys,
   view,
   geolocation,
   locations,
@@ -33,7 +33,7 @@ const Map = ({
   layerTypes,
 }) => (
   <GoogleMapReact
-    bootstrapURLKeys={{ key: apiKey }}
+    bootstrapURLKeys={bootstrapURLKeys}
     options={() => ({
       mapTypeId: mapType,
     })}
@@ -83,7 +83,7 @@ const Map = ({
 )
 
 Map.propTypes = {
-  googleMapsAPIKey: PropTypes.string.isRequired,
+  bootstrapURLKeys: PropTypes.object.isRequired,
   view: PropTypes.object.isRequired,
   geolocation: PropTypes.object,
   locations: PropTypes.arrayOf(PropTypes.object).isRequired,

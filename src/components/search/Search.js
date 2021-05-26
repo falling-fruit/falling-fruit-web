@@ -1,5 +1,6 @@
 import '@reach/combobox/styles.css'
 
+import { Wrapper } from '@googlemaps/react-wrapper'
 import {
   Combobox,
   ComboboxInput,
@@ -17,6 +18,7 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
+import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
@@ -222,4 +224,10 @@ const Search = (props) => {
   )
 }
 
-export default Search
+const SearchWithApi = (props) => (
+  <Wrapper {...bootstrapURLKeys}>
+    <Search {...props} />
+  </Wrapper>
+)
+
+export default SearchWithApi
