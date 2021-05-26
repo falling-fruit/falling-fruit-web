@@ -1,6 +1,6 @@
 import '@reach/tabs/styles.css'
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import { Tabs } from '@reach/tabs'
 import { StyledIconBase } from '@styled-icons/styled-icon'
 import styled from 'styled-components/macro'
 
@@ -60,4 +60,5 @@ const PageTabs = styled(Tabs)`
   }
 `
 
-export { PageTabs, Tab, TabList, TabPanel, TabPanels }
+export { Tab, TabList, TabPanel, TabPanels } from '@reach/tabs'
+export { PageTabs }

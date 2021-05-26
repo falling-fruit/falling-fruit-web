@@ -1,5 +1,6 @@
 import '@reach/combobox/styles.css'
 
+import { Loader } from '@googlemaps/js-api-loader'
 import {
   Combobox,
   ComboboxInput,
@@ -12,11 +13,11 @@ import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import { useEffect, useRef, useState } from 'react'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
-// TODO: Switch to https://www.npmjs.com/package/@googlemaps/js-api-loader
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
+import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
@@ -86,6 +87,7 @@ const Search = (props) => {
 
   // Geolocation and current city name
   const geolocation = useGeolocation()
+  const [mapsReady, setMapsReady] = useState(false)
   const [cityName, setCityName] = useState(null)
   const { setView } = useMap()
 
@@ -102,8 +104,11 @@ const Search = (props) => {
         setCityName(city)
       }
     }
-    fetchCityName()
-  }, [geolocation])
+
+    if (mapsReady) {
+      fetchCityName()
+    }
+  }, [geolocation, mapsReady])
 
   // Open the popover again when the value changes back to empty
   const inputRef = useRef(null)
@@ -112,11 +117,23 @@ const Search = (props) => {
   const descriptionToPlaceId = useRef({})
 
   const {
+    init,
     ready,
     value,
     suggestions: { status, data },
     setValue,
-  } = usePlacesAutocomplete()
+  } = usePlacesAutocomplete({
+    initOnMount: false,
+    debounce: 200,
+  })
+
+  useEffect(() => {
+    const loader = new Loader(bootstrapURLKeys)
+    loader.load().then(() => {
+      init()
+      setMapsReady(true)
+    })
+  }, [init])
 
   useEffect(() => {
     if (value === '') {

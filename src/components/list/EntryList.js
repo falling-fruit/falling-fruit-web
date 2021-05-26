@@ -1,16 +1,17 @@
 import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { darken } from 'polished'
 import { forwardRef } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
 import ListEntry from '../ui/ListEntry'
-import LoadingIndicator from '../ui/LoadingIndicator'
 import { TypeName } from '../ui/TypeName'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
+// TODO: use settings for this
 const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
 
 const StyledListEntry = styled(ListEntry)`
@@ -23,38 +24,27 @@ const StyledListEntry = styled(ListEntry)`
   }
 `
 
+const EntryIcon = ({ imageSrc }) => (
+  <CircleIcon backgroundColor={theme.green}>
+    {imageSrc ? <img src={imageSrc} alt="entry-icon" /> : <LeafIcon />}
+  </CircleIcon>
+)
+
 const EntryList = forwardRef(
   (
-    {
-      height,
-      width,
-      itemSize,
-      itemCount,
-      locations,
-      onEntryClick,
-      onEntryMouseEnter,
-      onEntryMouseLeave,
-      ...props
-    },
+    { locations, onEntryClick, onEntryMouseEnter, onEntryMouseLeave, ...props },
     ref,
   ) => {
-    const renderRow = ({ index, style }) => {
+    const Item = ({ index, style }) => {
       const location = locations[index]
-      let row = null
+
+      let content
       if (location) {
-        row = (
+        content = (
           <StyledListEntry
             key={location.id}
-            leftIcons={
-              <CircleIcon backgroundColor={theme.green}>
-                {/* TODO: locations currently don't have a photo tied to them, so never shows up */}
-                {location.photo ? (
-                  <img src={location.photo.medium} alt="entry-icon" />
-                ) : (
-                  <LeafIcon />
-                )}
-              </CircleIcon>
-            }
+            // TODO: locations currently don't have a photo tied to them, so never shows up
+            leftIcons={<EntryIcon imageSrc={location.photo?.thumb} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
             secondaryText={`${convertMetersToMiles(location.distance)} miles`}
@@ -64,26 +54,25 @@ const EntryList = forwardRef(
             style={style}
           />
         )
-      } else if (index < itemCount) {
-        row = (
-          <div style={style}>
-            <LoadingIndicator />
-          </div>
+      } else {
+        // Row not yet loaded
+        content = (
+          <StyledListEntry
+            leftIcons={<Skeleton circle width="1.75rem" height="1.75rem" />}
+            rightIcons={<ChevronRight size="16" color={theme.tertiaryText} />}
+            primaryText={<Skeleton width={150} />}
+            secondaryText={<Skeleton width={50} />}
+            style={style}
+          />
         )
       }
-      return row
+
+      return content
     }
 
     return (
-      <FixedSizeList
-        height={height}
-        width={width}
-        itemSize={itemSize}
-        itemCount={itemCount}
-        ref={ref}
-        {...props}
-      >
-        {renderRow}
+      <FixedSizeList ref={ref} {...props}>
+        {Item}
       </FixedSizeList>
     )
   },

@@ -1,4 +1,4 @@
-import GoogleMap from 'google-map-react'
+import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
 
 import Cluster from './Cluster'
@@ -17,7 +17,7 @@ import Location from './Location'
  * @param {boolean} showLabels - Will display labels under locations if true
  */
 const Map = ({
-  apiKey,
+  bootstrapURLKeys,
   view,
   geolocation,
   locations,
@@ -32,8 +32,8 @@ const Map = ({
   mapType,
   layerTypes,
 }) => (
-  <GoogleMap
-    bootstrapURLKeys={{ key: apiKey }}
+  <GoogleMapReact
+    bootstrapURLKeys={bootstrapURLKeys}
     options={() => ({
       mapTypeId: mapType,
     })}
@@ -72,19 +72,18 @@ const Map = ({
         }}
         lat={location.lat}
         lng={location.lng}
-        // TODO: Add pin on location click
         selected={
           location.id === selectedLocationId ||
           location.id === hoveredLocationId
         }
-        label={showLabels ? location.type_names[0] : undefined}
+        label={showLabels ? location.typeName : undefined}
       />
     ))}
-  </GoogleMap>
+  </GoogleMapReact>
 )
 
 Map.propTypes = {
-  googleMapsAPIKey: PropTypes.string.isRequired,
+  bootstrapURLKeys: PropTypes.object.isRequired,
   view: PropTypes.object.isRequired,
   geolocation: PropTypes.object,
   locations: PropTypes.arrayOf(PropTypes.object).isRequired,

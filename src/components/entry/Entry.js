@@ -40,7 +40,7 @@ export const TextContent = styled.article`
 `
 
 const Entry = ({ isInDrawer }) => {
-  const { typesById } = useSearch()
+  const { typesById, getTypeName } = useSearch()
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
@@ -74,11 +74,13 @@ const Entry = ({ isInDrawer }) => {
   if (!locationData || !reviews) {
     content = <LoadingIndicator cover vertical />
   } else {
+    const allReviewPhotos = reviews.map((review) => review.photos).flat()
+
     content = (
       <>
         <PhotoGrid
-          photos={locationData.photos}
-          altText={locationData.type_names.join(', ')}
+          photos={allReviewPhotos}
+          altText={locationData.type_ids.map(getTypeName).join(', ')}
         />
 
         {isInDrawer ? (

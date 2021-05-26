@@ -1,5 +1,4 @@
 import { useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import { useMap } from '../contexts/MapContext'
 import { useSearch } from '../contexts/SearchContext'
@@ -21,33 +20,28 @@ const normalizeLongitude = (longitude) => {
 }
 
 const convertBounds = (bounds) => ({
-  nelat: bounds.ne.lat,
-  nelng: normalizeLongitude(bounds.ne.lng),
-  swlat: bounds.sw.lat,
-  swlng: normalizeLongitude(bounds.sw.lng),
+  bounds: `${bounds.sw.lat},${normalizeLongitude(bounds.sw.lng)}|${
+    bounds.ne.lat
+  },${normalizeLongitude(bounds.ne.lng)}`,
 })
 
 const convertCenter = (center) => ({
-  lng: center.lng,
-  lat: center.lat,
+  center: `${center.lat},${center.lng}`,
 })
 
 export const useFilteredParams = () => {
-  const { i18n } = useTranslation()
   const { filters } = useSearch()
   const { view: mapView } = useMap()
 
   const getFilteredParams = useCallback(
     (params = {}, includeCenter = false, view = mapView) => ({
-      muni: filters.muni ? 1 : 0,
-      t: filters.types.toString(),
-      invasive: filters.invasive ? 1 : 0,
-      locale: i18n.language === 'en-US' ? 'en' : i18n.language,
+      types: filters.types.join(','),
+      muni: filters.muni,
       ...convertBounds(view.bounds),
-      ...(includeCenter ? convertCenter(view.center) : {}),
+      ...(includeCenter && convertCenter(view.center)),
       ...params,
     }),
-    [filters, i18n.language, mapView],
+    [filters, mapView],
   )
 
   return getFilteredParams

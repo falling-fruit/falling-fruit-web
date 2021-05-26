@@ -1,6 +1,6 @@
 const listToTree = (types) => {
   const typeMap = {}
-  typeMap[null] = { name: 'All', id: null, children: [] }
+  typeMap.null = { name: 'All', id: null, children: [] }
 
   for (const type of types) {
     // Make a copy of the type, to avoid modifying arguments
@@ -15,7 +15,7 @@ const listToTree = (types) => {
     typeMap[parent_id].children.push(typeMap[type.id])
   }
 
-  return typeMap[null] // sentinel root
+  return typeMap.null // sentinel root
 }
 
 const moveRootToOther = (root) => {

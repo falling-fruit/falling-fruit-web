@@ -17,15 +17,15 @@ const Resource = styled.a`
 
 const ResourceList = ({ typeData }) =>
   RESOURCES.map(
-    ({ title, urlFormatter = (url) => url, urlKey, icon, iconAlt }) =>
-      typeData?.[urlKey] && (
+    ({ title, urlKey, icon }) =>
+      typeData?.urls[urlKey] && (
         <Resource
           key={urlKey}
           target="_blank"
           rel="noopener noreferrer"
-          href={urlFormatter(typeData[urlKey])}
+          href={typeData.urls[urlKey]}
         >
-          <img src={icon} alt={iconAlt} />
+          <img src={icon} alt={`${title} logo`} />
           <span>{title}</span>
         </Resource>
       ),

@@ -4,7 +4,7 @@ export const getZoomedInView = (centerLat, centerLng) =>
   // Use fixed zoom level centered at lat and long
   ({
     center: { lat: centerLat, lng: centerLng },
-    zoom: 18,
+    zoom: 16,
   })
 
 export const getPlaceBounds = async (placeId) => {

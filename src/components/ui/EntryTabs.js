@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
+import { PageTabs } from '../ui/PageTabs'
 
 const EntryTabs = styled(PageTabs)`
   [data-reach-tab-list] {
@@ -24,4 +24,5 @@ const EntryTabs = styled(PageTabs)`
   }
 `
 
-export { EntryTabs, Tab, TabList, TabPanel, TabPanels }
+export { Tab, TabList, TabPanel, TabPanels } from '@reach/tabs'
+export { EntryTabs }

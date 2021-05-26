@@ -1,5 +1,5 @@
 import { useRect } from '@reach/rect'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -28,61 +28,48 @@ const ListPage = () => {
   const container = useRef()
   const rect = useRect(container) ?? { width: 0, height: 0 }
 
+  const loadLocations = useCallback(
+    async (offset) => {
+      setIsNextPageLoading(true)
+
+      const locationResults = await getLocations(
+        getFilteredParams({ limit: MOBILE_LIST_LOAD_LIMIT, offset }, true),
+      )
+      setHasMoreItems(locationResults.length !== 0)
+      setLocations((locations) => [...locations, ...locationResults])
+
+      setIsNextPageLoading(false)
+    },
+    [getFilteredParams],
+  )
+
   useEffect(() => {
-    const fetchInitialListEntries = async () => {
-      const { bounds, zoom } = view
-      if (
-        bounds?.ne.lat != null &&
-        zoom > VISIBLE_CLUSTER_ZOOM_LIMIT &&
-        pathname === '/list'
-      ) {
-        const [
-          numLocations,
-          totalLocations,
-          ...locationResults
-        ] = await getLocations(
-          getFilteredParams({ limit: MOBILE_LIST_LOAD_LIMIT, offset: 0 }, true),
-        )
-
-        setHasMoreItems(numLocations < totalLocations)
-        setLocations(locationResults)
-      } else {
-        setLocations([])
-      }
+    const { bounds, zoom } = view
+    if (
+      bounds?.ne.lat != null &&
+      zoom > VISIBLE_CLUSTER_ZOOM_LIMIT &&
+      pathname === '/list'
+    ) {
+      // TODO: would be nice to get total count here, or perhaps a bool of whether there is more
+      loadLocations(0)
+    } else {
+      setLocations([])
     }
-    fetchInitialListEntries()
-  }, [view, pathname, getFilteredParams])
-
-  const loadNextPage = async () => {
-    setIsNextPageLoading(true)
-    const [
-      numLocations,
-      _totalLocations,
-      ...locationResults
-    ] = await getLocations(
-      getFilteredParams(
-        { limit: MOBILE_LIST_LOAD_LIMIT, offset: locations.length },
-        true,
-      ),
-    )
-    setIsNextPageLoading(false)
-
-    setHasMoreItems(numLocations !== 0)
-    setLocations((locations) => [...locations, ...locationResults])
-  }
+  }, [view, pathname, loadLocations])
 
   let content
   if (view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
     content = <ShouldZoomIn />
-  } else if (locations.length === 0) {
+  } else if (locations.length === 0 && !isNextPageLoading) {
     content = <NoResultsFound />
   } else {
     content = (
       <InfiniteList
+        itemCount={1000}
         width={rect.width}
         height={rect.height}
         locations={locations}
-        loadNextPage={loadNextPage}
+        loadNextPage={() => loadLocations(locations.length)}
         hasMoreItems={hasMoreItems}
         isNextPageLoading={isNextPageLoading}
       />

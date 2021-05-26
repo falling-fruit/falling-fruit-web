@@ -4,34 +4,61 @@
  */
 
 export interface paths {
-  "/users.json": {
+  "/users": {
+    /** The `email` cannot match the email of an existing User. */
     post: {
-      parameters: {
-        query: {
-          /** User email. */
-          email: string;
-          /** User password. */
-          password: string;
-          /** User name. */
-          name?: string;
-          /** Whether the user's `name` should be displayed as the author name on locations and reviews added by this user. */
-          add_anonymously?: { [key: string]: any };
-        };
-      };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": Partial<{
-              auth_token: string;
-            }> &
-              Partial<components["schemas"]["Error"]>;
+            "application/json": components["schemas"]["User"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            /** Email. */
+            email: string;
+            /** Password. */
+            password: string;
+            /** Display name. */
+            name?: string;
+            /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
+            add_anonymously?: boolean;
           };
         };
       };
     };
   };
-  "/login.json": {
+  "/users/{id}": {
+    /** Restricted to the same User. */
+    put: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["User"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            /** Email. */
+            email: string;
+            /** Password. */
+            password: string;
+            /** Display name. */
+            name: string;
+            /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
+            add_anonymously: boolean;
+          };
+        };
+      };
+    };
+  };
+  "/users/token": {
     get: {
       parameters: {
         query: {
@@ -45,81 +72,74 @@ export interface paths {
         /** Success */
         200: {
           content: {
-            "application/json": Partial<{
-              auth_token: string;
-            }> &
-              Partial<components["schemas"]["Error"]>;
+            "application/json": string;
           };
         };
       };
     };
   };
-  "/logout.json": {
-    get: {
-      responses: {
-        /** Success */
-        200: {
-          content: {
-            "application/json": Partial<{ [key: string]: any }> &
-              Partial<components["schemas"]["Error"]>;
-          };
-        };
-      };
-    };
-  };
-  "/clusters.json": {
+  "/clusters": {
     get: {
       parameters: {
         query: {
-          /** Longitude of southwest corner in WGS84 decimal degrees. */
-          swlng: components["parameters"]["swlng"];
-          /** Longitude of northeast corner in WGS84 decimal degrees. */
-          nelng: components["parameters"]["nelng"];
-          /** Latitude of southwest corner in WGS84 decimal degrees. */
-          swlat: components["parameters"]["swlat"];
-          /** Latitude of northeast corner in WGS84 decimal degrees. */
-          nelat: components["parameters"]["nelat"];
+          /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
+          bounds: components["parameters"]["bounds"];
           /** Zoom level, where the world is divided into a 2<sup>zoom</sup> x 2<sup>zoom</sup> grid. */
           zoom?: components["parameters"]["zoom"];
           /** Whether to include Locations imported from municipal tree inventories. */
           muni?: components["parameters"]["muni"];
-          /** IDs of Types to include (or all if empty or missing). */
-          t?: components["parameters"]["t"];
+          /** IDs of Types to include (or all if empty). */
+          types?: components["parameters"]["types"];
         };
       };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": Partial<components["schemas"]["Cluster"][]> &
-              Partial<components["schemas"]["Error"]>;
+            "application/json": components["schemas"]["Cluster"][];
           };
         };
       };
     };
   };
-  "/types/counts.json": {
+  "/types": {
+    get: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Type"][];
+          };
+        };
+      };
+    };
+  };
+  "/types/{id}": {
+    get: {
+      parameters: {
+        path: {
+          /** Type ID. */
+          id: components["parameters"]["type_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Type"];
+          };
+        };
+      };
+    };
+  };
+  "/types/counts": {
     get: {
       parameters: {
         query: {
-          /** Longitude of southwest corner in WGS84 decimal degrees. Must be used with `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations within these bounds. */
-          swlng?: number;
-          /** Longitude of northeast corner in WGS84 decimal degrees. */
-          nelng?: number;
-          /** Latitude of southwest corner in WGS84 decimal degrees. */
-          swlat?: number;
-          /** Latitude of northeast corner in WGS84 decimal degrees. */
-          nelat?: number;
-          /** Zoom level, where the world is divided into a 2<sup>zoom</sup> x 2<sup>zoom</sup> grid. Used with `swlng`, `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations whose Cluster centerpoints at this zoom level fall within the bounds. Otherwise, an exact count is performed using Location coordinates. */
-          zoom?: number;
-          /** Whether to return (and count) the Types of Locations imported from municipal tree inventories. */
-          muni?: 0 | 1;
-          /** Type categories to return. */
-          c?: components["parameters"]["c"];
-          /** Whether to return uncategorized types. */
-          uncategorized?: 0 | 1;
-          /** Whether to return pending types. */
-          pending?: 0 | 1;
+          /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
+          bounds: components["parameters"]["bounds"];
+          /** Whether to include Locations imported from municipal tree inventories. */
+          muni?: components["parameters"]["muni"];
         };
       };
       responses: {
@@ -132,270 +152,111 @@ export interface paths {
       };
     };
   };
-  "/types.json": {
+  "/locations": {
     get: {
       parameters: {
         query: {
-          /** Longitude of southwest corner in WGS84 decimal degrees. Must be used with `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations within these bounds. */
-          swlng?: number;
-          /** Longitude of northeast corner in WGS84 decimal degrees. */
-          nelng?: number;
-          /** Latitude of southwest corner in WGS84 decimal degrees. */
-          swlat?: number;
-          /** Latitude of northeast corner in WGS84 decimal degrees. */
-          nelat?: number;
-          /** Zoom level, where the world is divided into a 2<sup>zoom</sup> x 2<sup>zoom</sup> grid. Used with `swlng`, `nelng`, `swlat`, and `nelat`. If provided, only returns (and counts) the Types of Locations whose Cluster centerpoints at this zoom level fall within the bounds. */
-          zoom?: number;
-          /** Whether to return (and count) the Types of Locations imported from municipal tree inventories. */
-          muni?: 0 | 1;
-          /** Locale of common name labels to return. */
-          locale?: components["parameters"]["locale"];
-          /** Whether to return URL properties. */
-          urls?: 0 | 1;
-          /** Type categories to return. */
-          c?: components["parameters"]["c"];
-          /** Whether to return uncategorized types. */
-          uncategorized?: 0 | 1;
-          /** Whether to return pending types. */
-          pending?: 0 | 1;
-        };
-      };
-      responses: {
-        /** Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["ListType"][];
-          };
-        };
-      };
-    };
-  };
-  "/types/{id}.json": {
-    get: {
-      parameters: {
-        path: {
-          /** Type ID */
-          id: number;
-        };
-      };
-      responses: {
-        /** Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["SingleType"];
-          };
-        };
-      };
-    };
-  };
-  "/locations.json": {
-    get: {
-      parameters: {
-        query: {
-          /** Longitude of southwest corner in WGS84 decimal degrees. */
-          swlng: components["parameters"]["swlng"];
-          /** Longitude of northeast corner in WGS84 decimal degrees. */
-          nelng: components["parameters"]["nelng"];
-          /** Latitude of southwest corner in WGS84 decimal degrees. */
-          swlat: components["parameters"]["swlat"];
-          /** Latitude of northeast corner in WGS84 decimal degrees. */
-          nelat: components["parameters"]["nelat"];
+          /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
+          bounds: components["parameters"]["bounds"];
           /** Whether to include Locations imported from municipal tree inventories. */
           muni?: components["parameters"]["muni"];
-          /** Type categories to return. */
-          c?: components["parameters"]["c"];
-          /** IDs of Types to include (or all if empty or missing). */
-          t?: components["parameters"]["t"];
-          /** Locale of common name labels to return. */
-          locale?: components["parameters"]["locale"];
-          /**
-           * Whether to return Types flagged as invasive species.
-           * - 0: Hides invasive species.
-           * - 1: Only returns invasive species.
-           */
-          invasive?: 0 | 1;
+          /** IDs of Types to include (or all if empty). */
+          types?: components["parameters"]["types"];
           /** Maximum number of Locations to return. */
           limit?: number;
           /** Offset from which to apply `limit`. */
           offset?: number;
-          /** Whether to return first Review photo (if available). */
-          reviews?: 0 | 1;
-          /** Longitude in WGS84 decimal degrees. Must be used with `lat`. If provided, the distance to each Location is returned. */
-          lng?: number;
-          /** Latitude in WGS84 decimal degrees. */
-          lat?: number;
+          /** Center `latitude,longitude` in WGS84 decimal degrees. If provided, Locations are returned in order of increasing distance and the distance to each Location is returned. Longitude must be in the interval [-180, 180] and latitude in the interval [-90, 90]. */
+          center?: number[];
         };
       };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": (
-              | number
-              | number
-              | components["schemas"]["ListLocation"]
-            )[];
+            "application/json": components["schemas"]["ListLocation"][];
           };
         };
       };
     };
     post: {
-      parameters: {
-        query: {
-          /** Longitude in WGS84 decimal degrees. */
-          lng: components["parameters"]["lng"];
-          /** Latitude in WGS84 decimal degrees. */
-          lat: components["parameters"]["lat"];
-          /** Type IDs. */
-          type_ids: components["parameters"]["type_ids"];
-          /** Author name. If not provided, defaults to the User's name if the user has not opted to add locations anonymously. */
-          author?: components["parameters"]["author"];
-          /** Description. */
-          description?: components["parameters"]["description"];
-          /** First month in season (zero-based). */
-          season_start?: components["parameters"]["season_start"];
-          /** Last month in season (zero-based). */
-          season_stop?: components["parameters"]["season_stop"];
-          /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
-          no_season?: components["parameters"]["no_season"];
-          /** Whether needs verification. */
-          unverified?: components["parameters"]["unverified"];
-          /**
-           * Access level.
-           * - 0: Location is on my property.
-           * - 1: I have permission from the owner to add this Location.
-           * - 2: Location is on public land.
-           * - 3: Location is on private property but overhangs public property.
-           * - 4: Location is on private property.
-           */
-          access?: components["parameters"]["access"];
-          /** Review comment. */
-          comment?: components["parameters"]["comment"];
-          /**
-           * Fruiting status.
-           * - 0: Flowers.
-           * - 1: Unripe fruit.
-           * - 2: Ripe fruit.
-           */
-          fruiting?: components["parameters"]["fruiting"];
-          /**
-           * Quality rating.
-           * - 0: Poor.
-           * - 1: Fair.
-           * - 2: Good.
-           * - 3: Very good.
-           * - 4: Excellent.
-           */
-          quality_rating?: components["parameters"]["quality_rating"];
-          /**
-           * Yield rating.
-           * - 0: Poor.
-           * - 1: Fair.
-           * - 2: Good.
-           * - 3: Very good.
-           * - 4: Excellent.
-           */
-          yield_rating?: components["parameters"]["yield_rating"];
-          /** Date visited in format YYYY-MM-DD. */
-          observed_on?: components["parameters"]["observed_on"];
-          /** Photo file basename. */
-          photo_file_name?: components["parameters"]["photo_file_name"];
-        };
-      };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": {
-              /** ID of new Location. */
-              location_id: number;
-              /** ID of new Review. */
-              observation_id?: number;
-              images?: components["schemas"]["PhotoPaths"];
-            };
+            "application/json": components["schemas"]["Location"];
           };
         };
       };
       requestBody: {
         content: {
-          "multipart/form-data": {
-            photo_data?: string;
+          "application/json": components["schemas"]["EditLocation"];
+        };
+      };
+    };
+  };
+  "/locations/count": {
+    get: {
+      parameters: {
+        query: {
+          /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
+          bounds: components["parameters"]["bounds"];
+          /** Whether to include Locations imported from municipal tree inventories. */
+          muni?: components["parameters"]["muni"];
+          /** IDs of Types to include (or all if empty). */
+          types?: components["parameters"]["types"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": number;
           };
         };
       };
     };
   };
-  "/locations/{id}.json": {
+  "/locations/{id}": {
     get: {
       parameters: {
         path: {
           /** Location ID. */
           id: components["parameters"]["location_id"];
         };
-        query: {
-          /** Locale of common name labels to return. */
-          locale?: components["parameters"]["locale"];
-        };
       };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": components["schemas"]["SingleLocation"];
+            "application/json": components["schemas"]["Location"];
           };
         };
       };
     };
-    post: {
+    put: {
       parameters: {
         path: {
           /** Location ID. */
           id: components["parameters"]["location_id"];
         };
-        query: {
-          /** Longitude in WGS84 decimal degrees. */
-          lng: components["parameters"]["lng"];
-          /** Latitude in WGS84 decimal degrees. */
-          lat: components["parameters"]["lat"];
-          /** Type IDs. */
-          type_ids: components["parameters"]["type_ids"];
-          /** Author name. If not provided, defaults to the User's name if the user has not opted to add locations anonymously. */
-          author?: components["parameters"]["author"];
-          /** Description. */
-          description?: components["parameters"]["description"];
-          /** First month in season (zero-based). */
-          season_start?: components["parameters"]["season_start"];
-          /** Last month in season (zero-based). */
-          season_stop?: components["parameters"]["season_stop"];
-          /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
-          no_season?: components["parameters"]["no_season"];
-          /** Whether needs verification. */
-          unverified?: components["parameters"]["unverified"];
-          /**
-           * Access level.
-           * - 0: Location is on my property.
-           * - 1: I have permission from the owner to add this Location.
-           * - 2: Location is on public land.
-           * - 3: Location is on private property but overhangs public property.
-           * - 4: Location is on private property.
-           */
-          access?: components["parameters"]["access"];
-        };
       };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": {
-              /** ID of new Location. */
-              location_id: number;
-            };
+            "application/json": components["schemas"]["Location"];
           };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["EditLocation"];
         };
       };
     };
   };
-  "/locations/{id}/reviews.json": {
+  "/locations/{id}/reviews": {
     get: {
       parameters: {
         path: {
@@ -412,68 +273,72 @@ export interface paths {
         };
       };
     };
-  };
-  "/locations/{id}/review.json": {
+    /** Uploaded photos are currently ignored. */
     post: {
       parameters: {
         path: {
           /** Location ID. */
           id: components["parameters"]["location_id"];
         };
-        query: {
-          /** Author name. If not provided, defaults to the User's name if the user has not opted to add locations anonymously. */
-          author?: components["parameters"]["author"];
-          /** Review comment. */
-          comment?: components["parameters"]["comment"];
-          /**
-           * Fruiting status.
-           * - 0: Flowers.
-           * - 1: Unripe fruit.
-           * - 2: Ripe fruit.
-           */
-          fruiting?: components["parameters"]["fruiting"];
-          /**
-           * Quality rating.
-           * - 0: Poor.
-           * - 1: Fair.
-           * - 2: Good.
-           * - 3: Very good.
-           * - 4: Excellent.
-           */
-          quality_rating?: components["parameters"]["quality_rating"];
-          /**
-           * Yield rating.
-           * - 0: Poor.
-           * - 1: Fair.
-           * - 2: Good.
-           * - 3: Very good.
-           * - 4: Excellent.
-           */
-          yield_rating?: components["parameters"]["yield_rating"];
-          /** Date visited in format YYYY-MM-DD. */
-          observed_on?: components["parameters"]["observed_on"];
-          /** Photo file basename. */
-          photo_file_name?: components["parameters"]["photo_file_name"];
-        };
       };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": {
-              /** ID of Location. */
-              location_id: number;
-              /** ID of new Review. */
-              observation_id: number;
-              images?: components["schemas"]["PhotoPaths"];
-            };
+            "application/json": components["schemas"]["Review"];
           };
         };
       };
       requestBody: {
         content: {
           "multipart/form-data": {
-            photo_data?: string;
+            json: components["schemas"]["EditReview"];
+            /** Photos to upload. */
+            photos?: string[] | null;
+          };
+        };
+      };
+    };
+  };
+  "/reviews/{id}": {
+    get: {
+      parameters: {
+        path: {
+          /** Review ID. */
+          id: components["parameters"]["review_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Review"];
+          };
+        };
+      };
+    };
+    /** Uploaded photos are currently ignored. */
+    put: {
+      parameters: {
+        path: {
+          /** Review ID. */
+          id: components["parameters"]["review_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Review"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "multipart/form-data": {
+            json: components["schemas"]["EditReview"];
+            /** Photos to upload. */
+            photos?: string[] | null;
           };
         };
       };
@@ -483,25 +348,42 @@ export interface paths {
 
 export interface components {
   schemas: {
+    IdField: {
+      /** Unique identifier. */
+      id: number;
+    };
+    LatLngFields: {
+      /** Latitude in WGS84 decimal degrees. */
+      lat?: number;
+      /** Longitude in WGS84 decimal degrees. */
+      lng?: number;
+    };
+    DateFields: {
+      /** Date and time created in format YYYY-MM-DDThh:mm:ss.sssZ. */
+      created_at: string;
+      /** Date and time last updated in format YYYY-MM-DDThh:mm:ss.sssZ. */
+      updated_at: string;
+    };
     /** Number of Locations in an area. */
-    Cluster: {
-      /** Longitude of the centerpoint of the Locations (in WGS84 decimal degrees). */
-      lng: number;
-      /** Latitude of the centerpoint of the Locations (in WGS84 decimal degrees). */
-      lat: number;
+    Cluster: components["schemas"]["LatLngFields"] & {
       /** Number of Locations. Locations with multiple Types are counted as their number of Types. */
       count: number;
     };
-    /** Location type. */
-    BaseType: {
-      /** Unique identifier. */
+    /** Number of Location Types in an area. */
+    TypeCount: {
+      /** Type ID. */
       id: number;
+      /** Number of Locations with that Type ID. */
+      count: number;
+    };
+    /** Type properties that can be edited. Properties `scientific_names` and `common_names['en']` cannot both be empty. */
+    EditType: {
       /** Type ID of taxonomic parent. */
-      parent_id: number | null;
+      parent_id?: number | null;
       /** Whether pending admin review. */
-      pending: boolean;
+      pending?: boolean;
       /**
-       * Scientific name.
+       * Scientific names, starting with the preferred synonym.
        * - Genus (or higher rank): Prunus
        * - Subgenus: Prunus subg. Amygdalus
        * - Species: Prunus domestica
@@ -509,11 +391,9 @@ export interface components {
        * - Hybrid: Prunus x eminens, Prunus cerasus x Prunus fruticosa
        * - Cultivar: Prunus persica 'George IV', Prunus domestica subsp. domestica 'Italian', Acer truncatum x platanoides 'Keithsform'
        */
-      scientific_name: string | null;
-      /** Scientific synonyms (comma-delimited). */
-      scientific_synonyms: string | null;
+      scientific_names?: string[];
       /**
-       * Taxonomic rank
+       * Taxonomic rank.
        * - 0: Polyphyletic
        * - 1: Kingdom
        * - 2: Phylum
@@ -525,107 +405,37 @@ export interface components {
        * - 8: Species
        * - 9: Subspecies
        */
-      taxonomic_rank: number | null;
-      /** Categories as the decimal representation of a reverse binary mask of all possible categories [forager, freegan, honeybee, grafter]. For example, 1 ('0001' in binary) is reversed to '1000' and therefore [forager]. */
-      category_mask: number | null;
-      /** English name. */
-      en_name: string;
-      /** English synonyms (comma-delimited). */
-      en_synonyms: string | null;
-      /** German name. */
-      de_name: string | null;
-      /** Greek name. */
-      el_name: string | null;
-      /** Spanish name. */
-      es_name: string | null;
-      /** French name. */
-      fr_name: string | null;
-      /** Hebrew name. */
-      he_name: string | null;
-      /** Italian name. */
-      it_name: string | null;
-      /** Dutch name. */
-      nl_name: string | null;
-      /** Polish name. */
-      pl_name: string | null;
-      /** Brazilian Portuguese name. */
-      pt_br_name: string | null;
-      /** Taiwanese Chinese name (in traditional characters). */
-      zh_tw_name: string | null;
-      /** USDA symbol (TODO). */
-      usda_symbol?: string | null;
-      /** English Wikipedia (https://en.wikipedia.org) page. */
-      wikipedia_url?: string | null;
-      /** Eat the Weeds (https://www.eattheweeds.com) page. */
-      eat_the_weeds_url?: string | null;
-      /** Foraging Texas (https://www.foragingtexas.com) page. */
-      foraging_texas_url?: string | null;
-      /** Urban Mushrooms (https://urbanmushrooms.com) page. */
-      urban_mushrooms_url?: string | null;
-      /** Fruitipedia (http://www.fruitipedia.com) page. */
-      fruitipedia_url?: string | null;
-    };
-    ListType: components["schemas"]["BaseType"] & {
-      /** Common name in requested locale. */
-      name: string | null;
-      /** Number of Locations with Type in bounds at the requested zoom level. */
-      count?: number;
-    };
-    SingleType: components["schemas"]["BaseType"] & {
-      /** Date and time of creation in format YYYY-MM-DDThh:mm:ss.sssZ. */
-      created_at: string;
-      /** Date and time of last update in format YYYY-MM-DDThh:mm:ss.sssZ. */
-      updated_at: string;
+      taxonomic_rank?: number | null;
+      /** Common names, starting with the preferred synonym, by language code (e.g. `en`) and optional region code (e.g. `en_us`). */
+      common_names?: { [key: string]: string[] };
       /**
-       * Edibility rating.
-       * - -1: Not worth it (or toxic)
-       * - 1: Include
-       * - 2: Maybe include
+       * Links to more information, by resource code.
+       * - wikipedia: English Wikipedia (https://en.wikipedia.org)
+       * - eat_the_weeds: Eat the Weeds (https://www.eattheweeds.com)
+       * - foraging_texas: Foraging Texas (https://www.foragingtexas.com)
+       * - urban_mushrooms: Urban Mushrooms (http://urbanmushrooms.com)
+       * - fruitipedia: Fruitipedia (http://www.fruitipedia.com)
+       * - usda: USDA Plants Database (https://plants.usda.gov)
        */
-      edibility: (-1 | 1 | 2) | null;
-      /** Arabic name. */
-      ar_name: string | null;
-      /** Slovak name. */
-      sk_name: string | null;
-      /** Slovene name. */
-      sv_name: string | null;
-      /** Turkish name. */
-      tr_name: string | null;
-      /** Admin notes. */
-      notes: string | null;
+      urls?: { [key: string]: string };
     };
-    /** Location. */
-    BaseLocation: {
-      /** Unique identifier */
-      id: number;
-      /** Longitude in WGS84 decimal degrees. */
-      lng: number;
-      /** Latitude in WGS84 decimal degrees. */
-      lat: number;
+    /** All Type properties. */
+    Type: components["schemas"]["IdField"] &
+      components["schemas"]["DateFields"] &
+      components["schemas"]["EditType"] & { [key: string]: any };
+    ListLocation: components["schemas"]["IdField"] &
+      components["schemas"]["LatLngFields"] & {
+        /** Type IDs. */
+        type_ids: number[];
+        /** Distance in meters from provided centerpoint. */
+        distance?: number;
+      };
+    /** Location properties that can be edited. */
+    EditLocation: components["schemas"]["LatLngFields"] & {
       /** Type IDs. */
       type_ids: number[];
-      /** Type common names in requested locale. */
-      type_names: (string | null)[];
-      /** Author name. */
-      author: string | null;
       /** Whether suspected to be wrong in some way and requires verification. */
-      unverified: boolean;
-    };
-    ListLocation: components["schemas"]["BaseLocation"] & {
-      /** Photo basename. */
-      photo_file_name?: string | null;
-      photo?: components["schemas"]["PhotoPaths"];
-      /** Distance in meters from provided centerpoint. */
-      distance?: number;
-    };
-    /** Number of Location Types in an area. */
-    TypeCount: {
-      /** Type ID. */
-      id: number;
-      /** Number of Locations with that Type ID. */
-      count: number;
-    };
-    SingleLocation: components["schemas"]["BaseLocation"] & {
+      unverified?: boolean;
       /**
        * Access level.
        * - 0: Location is on my property.
@@ -634,137 +444,100 @@ export interface components {
        * - 3: Location is on private property but overhangs public property.
        * - 4: Location is on private property.
        */
-      access: (0 | 1 | 2 | 3 | 4) | null;
-      /** Address. Provided for imported locations whose coordinates had to be geocoded from an address. */
-      address: string | null;
-      /** City (reverse-geocoded from coordinates). */
-      city: string | null;
-      /** State (reverse-geocoded from coordinates). */
-      state: string | null;
-      /** County (reverse-geocoded from coordinates). */
-      country: string | null;
+      access?: (0 | 1 | 2 | 3 | 4) | null;
       /** Description. */
-      description: string | null;
-      /** Whether imported from a municipal tree inventory. */
-      muni: boolean;
-      /** Number of reviews. */
-      num_reviews: number;
-      /** Review photos. */
-      photos: components["schemas"]["Photo"][];
+      description?: string | null;
       /** First month in season (zero-based). */
-      season_start: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+      season_start?: number;
       /** Last month in season (zero-based). */
-      season_stop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
-      /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
-      no_season: boolean;
-      /** Date and time created. */
-      created_at: string;
-      /** Date and time last updated. */
-      updated_at: string;
+      season_stop?: number;
+    };
+    /** All Location properties. */
+    Location: components["schemas"]["IdField"] &
+      components["schemas"]["EditLocation"] &
+      components["schemas"]["DateFields"] & {
+        /** Address. Either provided for imported locations whose coordinates had to be geocoded from the address or reverse-geocoded from coordinates. */
+        address: string | null;
+        /** City (reverse-geocoded from coordinates). */
+        city: string | null;
+        /** State (reverse-geocoded from coordinates). */
+        state: string | null;
+        /** County (reverse-geocoded from coordinates). */
+        country: string | null;
+        /** Whether imported from a municipal tree inventory. */
+        muni: boolean;
+      };
+    /** Review properties that can be edited. */
+    EditReview: {
+      /** Comment. */
+      comment?: string | null;
+      /** Date visited in format YYYY-MM-DD. */
+      observed_on?: string | null;
+      /** Fruiting status. */
+      fruiting?: (0 | 1 | 2) | null;
+      /** Quality rating. */
+      quality_rating?: (0 | 1 | 2 | 3 | 4) | null;
+      /** Yield rating. */
+      yield_rating?: (0 | 1 | 2 | 3 | 4) | null;
     };
     /** Observations of and opinions about a Location. */
-    Review: {
-      /** Review ID. */
-      id: number;
-      /** Location ID. */
-      location_id: number;
-      /** User ID. */
-      user_id: number | null;
-      /** Comment. */
-      comment: string | null;
-      /** Date and time visited in format YYYY-MM-DDThh:mm:ss.sssZ. */
-      observed_on: string | null;
-      /** Date and time created. */
-      created_at: string;
-      /** Date and time last updated. */
-      updated_at: string;
-      /** Fruiting status. */
-      fruiting: (0 | 1 | 2) | null;
-      /** Quality rating. */
-      quality_rating: (0 | 1 | 2 | 3 | 4) | null;
-      /** Yield rating. */
-      yield_rating: (0 | 1 | 2 | 3 | 4) | null;
-      /** Author name. */
-      author: string | null;
-      /** Original photo file name. */
-      photo_file_name: string | null;
-      /** Photo caption. */
-      photo_caption: string | null;
-      photo: components["schemas"]["PhotoPaths"];
-    };
-    /** Paths to different sizes of a Photo. */
-    PhotoPaths: {
+    Review: components["schemas"]["IdField"] &
+      components["schemas"]["EditReview"] &
+      components["schemas"]["DateFields"] & {
+        /** Location ID. */
+        location_id: number;
+        /** User ID. */
+        user_id: number | null;
+        photos: components["schemas"]["Photo"][];
+      };
+    /** Location photo. */
+    Photo: {
+      /** Path to thumbnail. */
+      thumb: string;
       /** Path to medium size file. */
       medium: string;
       /** Path to original file. */
       original: string;
-      /** Path to thumbnail. */
-      thumb: string;
     };
-    /** Review photo. */
-    Photo: {
-      /** Unique identifier */
-      id: number;
-      /** Date and time of last update in format YYYY-MM-DDThh:mm:ss.sssZ. */
-      photo_updated_at: string;
-      /** Basename. */
-      photo_file_name: string;
-      photo: components["schemas"]["PhotoPaths"];
-    };
-    /** Error response. */
-    Error: {
-      /** Error message. */
-      error: string;
-    };
+    User: components["schemas"]["IdField"] &
+      components["schemas"]["DateFields"] & {
+        /** Email. */
+        email: string;
+        /** Display name. */
+        name: string;
+        /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
+        add_anonymously: boolean;
+      };
   };
   parameters: {
-    /** Longitude of southwest corner in WGS84 decimal degrees. */
-    swlng: number;
-    /** Longitude of northeast corner in WGS84 decimal degrees. */
-    nelng: number;
-    /** Latitude of southwest corner in WGS84 decimal degrees. */
-    swlat: number;
-    /** Latitude of northeast corner in WGS84 decimal degrees. */
-    nelat: number;
+    /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
+    bounds: number[][];
     /** Zoom level, where the world is divided into a 2<sup>zoom</sup> x 2<sup>zoom</sup> grid. */
     zoom: number;
     /** Whether to include Locations imported from municipal tree inventories. */
-    muni: 0 | 1;
-    /** Type categories to return. */
-    c: ("forager" | "freegan" | "honeybee" | "grafter")[];
-    /** Locale of common name labels to return. */
-    locale:
-      | "en"
-      | "de"
-      | "el"
-      | "es"
-      | "fr"
-      | "he"
-      | "it"
-      | "nl"
-      | "pl"
-      | "pt_br"
-      | "zh_tw";
-    /** IDs of Types to include (or all if empty or missing). */
-    t: number[];
+    muni: boolean;
+    /** Whether to include pending Types. */
+    pending: boolean;
+    /** IDs of Types to include (or all if empty). */
+    types: number[];
     /** Location ID. */
     location_id: number;
+    /** Type ID. */
+    type_id: number;
+    /** Review ID. */
+    review_id: number;
     /** Longitude in WGS84 decimal degrees. */
     lng: number;
     /** Latitude in WGS84 decimal degrees. */
     lat: number;
-    /** Type IDs. */
-    type_ids: number[];
     /** Author name. If not provided, defaults to the User's name if the user has not opted to add locations anonymously. */
     author: string;
     /** Description. */
     description: string;
-    /** First month in season (zero-based). */
-    season_start: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
-    /** Last month in season (zero-based). */
-    season_stop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
-    /** Whether always in season (e.g. rosemary). Equivalent to `season_start=0` (January) and `season_stop=11` (December). */
-    no_season: boolean;
+    /** First month in season. */
+    season_start: number;
+    /** Last month in season. */
+    season_stop: number;
     /** Whether needs verification. */
     unverified: boolean;
     /**
@@ -805,8 +578,6 @@ export interface components {
     yield_rating: 0 | 1 | 2 | 3 | 4;
     /** Date visited in format YYYY-MM-DD. */
     observed_on: string;
-    /** Photo file basename. */
-    photo_file_name: string;
   };
 }
 

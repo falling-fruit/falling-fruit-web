@@ -6,6 +6,8 @@
   "license": "GPL-3.0",
   "homepage": "https://falling-fruit.vercel.app/",
   "dependencies": {
+    "@fontsource/lato": "^4.3.0",
+    "@googlemaps/js-api-loader": "^1.11.4",
     "@reach/accordion": "^0.13.2",
     "@reach/checkbox": "^0.13.2",
     "@reach/combobox": "^0.13.2",
@@ -31,6 +33,7 @@
     "react-dropdown-tree-select": "^2.5.1",
     "react-i18next": "^11.8.13",
     "react-is": "^17.0.1",
+    "react-loading-skeleton": "^2.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
@@ -64,7 +67,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api-docs/master/spec/v0.2.yaml --output src/utils/apiSchema.ts"
+    "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/master/spec/openapi.yml --output src/utils/apiSchema.ts"
   },
   "browserslist": {
     "production": [

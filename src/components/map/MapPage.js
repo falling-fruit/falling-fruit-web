@@ -9,6 +9,7 @@ import { useMap } from '../../contexts/MapContext'
 import { useSearch } from '../../contexts/SearchContext'
 import { useSettings } from '../../contexts/SettingsContext'
 import { getClusters, getLocations } from '../../utils/api'
+import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useFilteredParams } from '../../utils/useFilteredParams'
 import { getZoomedInView } from '../../utils/viewportBounds'
 import AddLocationButton from '../ui/AddLocationButton'
@@ -46,7 +47,7 @@ const MapPage = ({ desktop }) => {
   const entryId = match?.params.entryId && parseInt(match.params.entryId)
 
   const container = useRef(null)
-  const { viewport: searchViewport } = useSearch()
+  const { viewport: searchViewport, getTypeName } = useSearch()
   const {
     view,
     setView,
@@ -127,13 +128,20 @@ const MapPage = ({ desktop }) => {
 
         setMapData({ locations: [], clusters, isLoading: false })
       } else {
-        const [
-          _numLocationsReturned,
-          _totalLocations,
-          ...locations
-        ] = await getLocations(getFilteredParams(params, false, newView))
+        const locations = await getLocations(
+          getFilteredParams(params, false, newView),
+        )
 
-        setMapData({ locations, clusters: [], isLoading: false })
+        const locationsWithTypeNames = locations.map((location) => ({
+          ...location,
+          typeName: getTypeName(location.type_ids[0]),
+        }))
+
+        setMapData({
+          locations: locationsWithTypeNames,
+          clusters: [],
+          isLoading: false,
+        })
       }
     }
   }
@@ -173,7 +181,7 @@ const MapPage = ({ desktop }) => {
         !desktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
       <Map
-        googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        bootstrapURLKeys={bootstrapURLKeys}
         view={view}
         geolocation={geolocation}
         locations={

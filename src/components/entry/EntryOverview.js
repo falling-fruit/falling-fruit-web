@@ -75,7 +75,7 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
-  const { typesById } = useSearch()
+  const { typesById, getTypeName } = useSearch()
   const [address, setAddress] = useState('')
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -120,7 +120,7 @@ const EntryOverview = ({ locationData, className }) => {
     </TagList>
   )
 
-  const allTypeNames = locationData && locationData.type_names.join(', ')
+  const allTypeNames = locationData?.type_ids.map(getTypeName).join(', ')
 
   return (
     <div className={className}>
