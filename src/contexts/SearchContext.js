@@ -50,7 +50,7 @@ const SearchProvider = ({ children }) => {
 
   const getTypeNames = useCallback(
     (id) =>
-      typesById[id].common_names[
+      typesById[id]?.common_names[
         i18n.language === 'en-US' ? 'en' : i18n.language
       ],
     [typesById, i18n.language],
