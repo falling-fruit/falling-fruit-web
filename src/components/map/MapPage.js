@@ -180,7 +180,7 @@ const MapPage = ({ desktop }) => {
         !desktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
       <Map
-        googleMapsAPIKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         view={view}
         geolocation={geolocation}
         locations={

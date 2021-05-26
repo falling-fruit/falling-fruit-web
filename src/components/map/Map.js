@@ -1,4 +1,4 @@
-import GoogleMap from 'google-map-react'
+import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
 
 import Cluster from './Cluster'
@@ -32,7 +32,7 @@ const Map = ({
   mapType,
   layerTypes,
 }) => (
-  <GoogleMap
+  <GoogleMapReact
     bootstrapURLKeys={{ key: apiKey }}
     options={() => ({
       mapTypeId: mapType,
@@ -79,7 +79,7 @@ const Map = ({
         label={showLabels ? location.typeName : undefined}
       />
     ))}
-  </GoogleMap>
+  </GoogleMapReact>
 )
 
 Map.propTypes = {
