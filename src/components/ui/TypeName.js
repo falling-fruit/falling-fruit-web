@@ -39,7 +39,9 @@ export const TypeName = ({ typeId }) => {
     <div>
       <CommonName>{getTypeName(typeId)}</CommonName>
       {showScientificNames && (
-        <ScientificName>{typesById[typeId].scientific_names[0]}</ScientificName>
+        <ScientificName>
+          {typesById[typeId]?.scientific_names[0]}
+        </ScientificName>
       )}
     </div>
   ) : null
