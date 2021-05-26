@@ -116,7 +116,9 @@ const Search = (props) => {
     value,
     suggestions: { status, data },
     setValue,
-  } = usePlacesAutocomplete()
+  } = usePlacesAutocomplete({
+    debounce: 200,
+  })
 
   useEffect(() => {
     if (value === '') {
