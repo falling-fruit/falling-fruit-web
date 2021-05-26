@@ -120,8 +120,7 @@ const EntryOverview = ({ locationData, className }) => {
     </TagList>
   )
 
-  const allTypeNames =
-    locationData && locationData.type_ids.map(getTypeName).join(', ')
+  const allTypeNames = locationData?.type_ids.map(getTypeName).join(', ')
 
   return (
     <div className={className}>

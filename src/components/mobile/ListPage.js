@@ -65,6 +65,7 @@ const ListPage = () => {
   } else {
     content = (
       <InfiniteList
+        itemCount={1000}
         width={rect.width}
         height={rect.height}
         locations={locations}

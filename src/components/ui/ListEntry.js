@@ -73,7 +73,7 @@ ListEntry.displayName = 'ListEntry'
 ListEntry.propTypes = {
   leftIcons: PropTypes.node,
   primaryText: PropTypes.node,
-  secondaryText: PropTypes.string,
+  secondaryText: PropTypes.node,
   rightIcons: PropTypes.node,
 }
 

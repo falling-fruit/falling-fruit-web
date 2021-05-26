@@ -4,6 +4,7 @@ import InfiniteLoader from 'react-window-infinite-loader'
 import EntryList from './EntryList'
 
 const InfiniteList = ({
+  itemCount,
   locations,
   loadNextPage,
   hasMoreItems,
@@ -12,8 +13,6 @@ const InfiniteList = ({
   width,
 }) => {
   const history = useHistory()
-
-  const itemCount = hasMoreItems ? locations.length + 1 : locations.length
 
   // eslint-disable-next-line no-empty-function
   const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage
@@ -43,7 +42,6 @@ const InfiniteList = ({
           ref={ref}
           locations={locations}
           onEntryClick={handleEntryClick}
-          isNextPageLoading={isNextPageLoading}
         />
       )}
     </InfiniteLoader>
