@@ -26,7 +26,7 @@ export interface paths {
             name?: string;
             /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
             add_anonymously?: boolean;
-          } & { [key: string]: any };
+          };
         };
       };
     };
@@ -53,7 +53,7 @@ export interface paths {
             name: string;
             /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
             add_anonymously: boolean;
-          } & { [key: string]: any };
+          };
         };
       };
     };
@@ -295,7 +295,7 @@ export interface paths {
             json: components["schemas"]["EditReview"];
             /** Photos to upload. */
             photos?: string[] | null;
-          } & { [key: string]: any };
+          };
         };
       };
     };
@@ -339,7 +339,7 @@ export interface paths {
             json: components["schemas"]["EditReview"];
             /** Photos to upload. */
             photos?: string[] | null;
-          } & { [key: string]: any };
+          };
         };
       };
     };
@@ -351,32 +351,31 @@ export interface components {
     IdField: {
       /** Unique identifier. */
       id: number;
-    } & { [key: string]: any };
+    };
     LatLngFields: {
       /** Latitude in WGS84 decimal degrees. */
       lat?: number;
       /** Longitude in WGS84 decimal degrees. */
       lng?: number;
-    } & { [key: string]: any };
+    };
     DateFields: {
       /** Date and time created in format YYYY-MM-DDThh:mm:ss.sssZ. */
       created_at: string;
       /** Date and time last updated in format YYYY-MM-DDThh:mm:ss.sssZ. */
       updated_at: string;
-    } & { [key: string]: any };
+    };
     /** Number of Locations in an area. */
-    Cluster: components["schemas"]["LatLngFields"] &
-      ({
-        /** Number of Locations. Locations with multiple Types are counted as their number of Types. */
-        count: number;
-      } & { [key: string]: any }) & { [key: string]: any };
+    Cluster: components["schemas"]["LatLngFields"] & {
+      /** Number of Locations. Locations with multiple Types are counted as their number of Types. */
+      count: number;
+    };
     /** Number of Location Types in an area. */
     TypeCount: {
       /** Type ID. */
       id: number;
       /** Number of Locations with that Type ID. */
       count: number;
-    } & { [key: string]: any };
+    };
     /** Type properties that can be edited. Properties `scientific_names` and `common_names['en']` cannot both be empty. */
     EditType: {
       /** Type ID of taxonomic parent. */
@@ -419,49 +418,44 @@ export interface components {
        * - usda: USDA Plants Database (https://plants.usda.gov)
        */
       urls?: { [key: string]: string };
-    } & { [key: string]: any };
+    };
     /** All Type properties. */
     Type: components["schemas"]["IdField"] &
       components["schemas"]["DateFields"] &
-      components["schemas"]["EditType"] & { [key: string]: any } & {
-        [key: string]: any;
-      };
+      components["schemas"]["EditType"] & { [key: string]: any };
     ListLocation: components["schemas"]["IdField"] &
-      components["schemas"]["LatLngFields"] &
-      ({
+      components["schemas"]["LatLngFields"] & {
         /** Type IDs. */
         type_ids: number[];
         /** Distance in meters from provided centerpoint. */
         distance?: number;
-      } & { [key: string]: any }) & { [key: string]: any };
+      };
     /** Location properties that can be edited. */
-    EditLocation: components["schemas"]["LatLngFields"] &
-      ({
-        /** Type IDs. */
-        type_ids: number[];
-        /** Whether suspected to be wrong in some way and requires verification. */
-        unverified?: boolean;
-        /**
-         * Access level.
-         * - 0: Location is on my property.
-         * - 1: I have permission from the owner to add this Location.
-         * - 2: Location is on public land.
-         * - 3: Location is on private property but overhangs public property.
-         * - 4: Location is on private property.
-         */
-        access?: (0 | 1 | 2 | 3 | 4) | null;
-        /** Description. */
-        description?: string | null;
-        /** First month in season (zero-based). */
-        season_start?: number;
-        /** Last month in season (zero-based). */
-        season_stop?: number;
-      } & { [key: string]: any }) & { [key: string]: any };
+    EditLocation: components["schemas"]["LatLngFields"] & {
+      /** Type IDs. */
+      type_ids: number[];
+      /** Whether suspected to be wrong in some way and requires verification. */
+      unverified?: boolean;
+      /**
+       * Access level.
+       * - 0: Location is on my property.
+       * - 1: I have permission from the owner to add this Location.
+       * - 2: Location is on public land.
+       * - 3: Location is on private property but overhangs public property.
+       * - 4: Location is on private property.
+       */
+      access?: (0 | 1 | 2 | 3 | 4) | null;
+      /** Description. */
+      description?: string | null;
+      /** First month in season (zero-based). */
+      season_start?: number;
+      /** Last month in season (zero-based). */
+      season_stop?: number;
+    };
     /** All Location properties. */
     Location: components["schemas"]["IdField"] &
       components["schemas"]["EditLocation"] &
-      components["schemas"]["DateFields"] &
-      ({
+      components["schemas"]["DateFields"] & {
         /** Address. Either provided for imported locations whose coordinates had to be geocoded from the address or reverse-geocoded from coordinates. */
         address: string | null;
         /** City (reverse-geocoded from coordinates). */
@@ -472,7 +466,7 @@ export interface components {
         country: string | null;
         /** Whether imported from a municipal tree inventory. */
         muni: boolean;
-      } & { [key: string]: any }) & { [key: string]: any };
+      };
     /** Review properties that can be edited. */
     EditReview: {
       /** Comment. */
@@ -485,18 +479,17 @@ export interface components {
       quality_rating?: (0 | 1 | 2 | 3 | 4) | null;
       /** Yield rating. */
       yield_rating?: (0 | 1 | 2 | 3 | 4) | null;
-    } & { [key: string]: any };
+    };
     /** Observations of and opinions about a Location. */
     Review: components["schemas"]["IdField"] &
       components["schemas"]["EditReview"] &
-      components["schemas"]["DateFields"] &
-      ({
+      components["schemas"]["DateFields"] & {
         /** Location ID. */
         location_id: number;
         /** User ID. */
         user_id: number | null;
         photos: components["schemas"]["Photo"][];
-      } & { [key: string]: any }) & { [key: string]: any };
+      };
     /** Location photo. */
     Photo: {
       /** Path to thumbnail. */
@@ -505,17 +498,16 @@ export interface components {
       medium: string;
       /** Path to original file. */
       original: string;
-    } & { [key: string]: any };
+    };
     User: components["schemas"]["IdField"] &
-      components["schemas"]["DateFields"] &
-      ({
+      components["schemas"]["DateFields"] & {
         /** Email. */
         email: string;
         /** Display name. */
         name: string;
         /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
         add_anonymously: boolean;
-      } & { [key: string]: any }) & { [key: string]: any };
+      };
   };
   parameters: {
     /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
