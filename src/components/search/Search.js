@@ -1,6 +1,6 @@
 import '@reach/combobox/styles.css'
 
-import { Wrapper } from '@googlemaps/react-wrapper'
+import { Loader } from '@googlemaps/js-api-loader'
 import {
   Combobox,
   ComboboxInput,
@@ -88,6 +88,7 @@ const Search = (props) => {
 
   // Geolocation and current city name
   const geolocation = useGeolocation()
+  const [mapsReady, setMapsReady] = useState(false)
   const [cityName, setCityName] = useState(null)
   const { setView } = useMap()
 
@@ -104,8 +105,11 @@ const Search = (props) => {
         setCityName(city)
       }
     }
-    fetchCityName()
-  }, [geolocation])
+
+    if (mapsReady) {
+      fetchCityName()
+    }
+  }, [geolocation, mapsReady])
 
   // Open the popover again when the value changes back to empty
   const inputRef = useRef(null)
@@ -114,13 +118,23 @@ const Search = (props) => {
   const descriptionToPlaceId = useRef({})
 
   const {
+    init,
     ready,
     value,
     suggestions: { status, data },
     setValue,
   } = usePlacesAutocomplete({
+    initOnMount: false,
     debounce: 200,
   })
+
+  useEffect(() => {
+    const loader = new Loader(bootstrapURLKeys)
+    loader.load().then(() => {
+      init()
+      setMapsReady(true)
+    })
+  }, [init])
 
   useEffect(() => {
     if (value === '') {
@@ -224,10 +238,4 @@ const Search = (props) => {
   )
 }
 
-const SearchWithApi = (props) => (
-  <Wrapper {...bootstrapURLKeys}>
-    <Search {...props} />
-  </Wrapper>
-)
-
-export default SearchWithApi
+export default Search
