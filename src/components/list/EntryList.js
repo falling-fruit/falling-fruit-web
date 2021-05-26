@@ -24,13 +24,11 @@ const StyledListEntry = styled(ListEntry)`
   }
 `
 
-const defaultEntryIcon = (
+const EntryIcon = ({ imageSrc }) => (
   <CircleIcon backgroundColor={theme.green}>
-    <LeafIcon />
+    {imageSrc ? <img src={imageSrc} alt="entry-icon" /> : <LeafIcon />}
   </CircleIcon>
 )
-
-const chevronRight = <ChevronRight size="16" color={theme.blue} />
 
 const EntryList = forwardRef(
   (
@@ -46,16 +44,8 @@ const EntryList = forwardRef(
           <StyledListEntry
             key={location.id}
             // TODO: locations currently don't have a photo tied to them, so never shows up
-            leftIcons={
-              location.photo ? (
-                <CircleIcon>
-                  <img src={location.photo.thumb} alt="entry-icon" />
-                </CircleIcon>
-              ) : (
-                defaultEntryIcon
-              )
-            }
-            rightIcons={chevronRight}
+            leftIcons={<EntryIcon imageSrc={location.photo?.thumb} />}
+            rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
             secondaryText={`${convertMetersToMiles(location.distance)} miles`}
             onClick={(e) => onEntryClick?.(location.id, e)}
@@ -68,8 +58,8 @@ const EntryList = forwardRef(
         // Row not yet loaded
         content = (
           <StyledListEntry
-            leftIcons={defaultEntryIcon}
-            rightIcons={chevronRight}
+            leftIcons={<Skeleton circle width="1.75rem" height="1.75rem" />}
+            rightIcons={<ChevronRight size="16" color={theme.tertiaryText} />}
             primaryText={<Skeleton width={150} />}
             secondaryText={<Skeleton width={50} />}
             style={style}
