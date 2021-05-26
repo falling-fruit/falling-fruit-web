@@ -11,7 +11,7 @@ import { ThemeProvider } from 'styled-components'
 import ComponentDemos from './components/ComponentDemos'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import store from './store'
+import store from './redux/store'
 
 const App = () => (
   <Provider store={store}>
