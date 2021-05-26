@@ -19,6 +19,7 @@
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/boxicons-solid": "^10.23.0",
     "axios": "^0.21.1",
+    "connected-react-router": "^6.9.1",
     "cupertino-pane": "^1.2.61",
     "debounce": "^1.2.1",
     "formik": "^2.2.6",
