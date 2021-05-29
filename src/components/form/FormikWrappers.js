@@ -1,8 +1,7 @@
 import { useField } from 'formik'
-import { forwardRef, useEffect } from 'react'
+import { forwardRef } from 'react'
 import Reaptcha from 'reaptcha'
 
-import { useMap } from '../../contexts/MapContext'
 import Input from '../ui/Input'
 import { Select } from '../ui/Select'
 import { Slider } from '../ui/Slider'
@@ -18,21 +17,6 @@ const FormikRecaptcha = ({ name, ...props }) => {
   const [, , helpers] = useField(name)
 
   return <Reaptcha onVerify={helpers.setValue} {...props} />
-}
-
-const FormikMapCenter = ({ name }) => {
-  const [, , { setValue }] = useField(name)
-  const {
-    view: { center },
-  } = useMap()
-
-  useEffect(() => setValue({ lat: center.lat, lng: center.lng }), [
-    setValue,
-    center.lat,
-    center.lng,
-  ])
-
-  return null
 }
 
 const FormikFileUpload = forwardRef(({ name, ...props }, ref) => {
@@ -55,7 +39,6 @@ FormikFileUpload.displayName = 'FormikFileUpload'
 export {
   FormikFileUpload as FileUpload,
   FormikInput as Input,
-  FormikMapCenter as MapCenter,
   FormikRecaptcha as Recaptcha,
   FormikSelect as Select,
   FormikSlider as Slider,
