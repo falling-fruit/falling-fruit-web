@@ -26,7 +26,6 @@ const ListPage = () => {
 
   useEffect(() => {
     if (pathname === '/list') {
-      console.log('fetching')
       dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
     }
   }, [pathname, dispatch])

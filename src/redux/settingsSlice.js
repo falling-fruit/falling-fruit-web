@@ -17,10 +17,10 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState: DEFAULT_SETTINGS,
   reducers: {
-    update: (state, action) => ({ ...state, ...action.payload }),
+    updateSettings: (state, action) => ({ ...state, ...action.payload }),
   },
 })
 
-export const { update: updateSettings } = settingsSlice.actions
+export const { updateSettings } = settingsSlice.actions
 
 export default settingsSlice.reducer

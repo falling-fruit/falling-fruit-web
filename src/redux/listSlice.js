@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getLocations } from '../utils/api'
+import { getLocations, getLocationsCount } from '../utils/api'
+import { updateSelection } from './filterSlice'
 import { setReducer, setView } from './mapSlice'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
@@ -14,7 +15,7 @@ export const fetchListLocations = createAsyncThunk(
       offset,
       extend,
       locations: await getLocations(params),
-      ...(fetchCount && { totalCount: 100 }), // await getLocationsCount(params) }),
+      ...(fetchCount && (await getLocationsCount(params))),
     }
   },
 )
@@ -53,7 +54,7 @@ export const listSlice = createSlice({
       state.isLoading = true
     },
     [fetchListLocations.fulfilled]: (state, action) => {
-      const { extend, offset, locations, totalCount } = action.payload
+      const { extend, offset, locations, count } = action.payload
 
       if (extend) {
         state.locations.push(...locations)
@@ -62,11 +63,15 @@ export const listSlice = createSlice({
       }
 
       state.offset = offset
-      if (totalCount !== undefined) {
-        state.totalCount = totalCount
+      if (count !== undefined) {
+        state.totalCount = count
       }
 
       state.isLoading = false
+    },
+
+    [updateSelection.type]: (state) => {
+      state.shouldFetchNewLocations = true
     },
   },
 })

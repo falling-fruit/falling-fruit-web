@@ -4,6 +4,7 @@ import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../components/map/MapPage'
 import { getTypeCounts } from '../utils/api'
 import { buildTypeSchema, getSelectedTypes } from '../utils/buildTypeSchema'
 import { selectParams } from './selectParams'
+import { fetchLocations } from './viewChange'
 
 export const fetchFilterCounts = createAsyncThunk(
   'map/fetchFilterCounts',
@@ -42,7 +43,7 @@ export const filterSlice = createSlice({
     closeFilter: (state) => {
       state.isOpen = false
     },
-    selectionChanged: (state, action) => {
+    updateSelection: (state, action) => {
       state.types = getSelectedTypes(action.payload)
     },
   },
@@ -73,7 +74,7 @@ export const {
   setFilters,
   openFilter,
   closeFilter,
-  selectionChanged,
+  updateSelection,
 } = filterSlice.actions
 
 export const openFilterAndFetch = () => (dispatch, getState) => {
@@ -83,6 +84,11 @@ export const openFilterAndFetch = () => (dispatch, getState) => {
   if (state.map.view.zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
     dispatch(fetchFilterCounts())
   }
+}
+
+export const selectionChanged = (types) => (dispatch) => {
+  dispatch(updateSelection(types))
+  dispatch(fetchLocations())
 }
 
 export default filterSlice.reducer

@@ -11,8 +11,6 @@ import ResourceList from './ResourceList'
 const TypesHeader = ({ typeIds }) => {
   const { typesById, getCommonName, getScientificName } = useTypesById()
 
-  console.log(typeIds, typesById?.[218])
-
   return (
     <TypesAccordion>
       {typeIds
