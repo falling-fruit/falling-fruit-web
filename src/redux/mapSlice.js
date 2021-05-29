@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { fitBounds as fitBoundsWithSize } from 'google-map-react'
+import { fitBounds } from 'google-map-react'
 
 import { getClusters, getLocations } from '../utils/api'
+import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 
 /**
@@ -51,7 +52,11 @@ export const mapSlice = createSlice({
     hoveredLocationId: null,
   },
   reducers: {
+    // important: only dispatch setView in the handler of onViewChange in MapPage
+    // this should be called viewChange
     setView: setReducer('view'),
+    setHoveredLocationId: setReducer('hoveredLocationId'),
+
     zoomInAndSave: (state) => {
       state.oldView = { ...state.view }
       state.view.zoom = 18
@@ -67,18 +72,18 @@ export const mapSlice = createSlice({
         zoom: 16,
       }
     },
-    fitBounds: (state, action) => {
-      state.view = fitBoundsWithSize(action.payload, state.view.size)
-    },
     clusterClick: (state, action) => {
       state.view = {
         center: action.payload,
         zoom: state.view.zoom + 2,
       }
     },
-    setHoveredLocationId: setReducer('hoveredLocationId'),
   },
   extraReducers: {
+    [searchView.type]: (state, action) => {
+      state.view = fitBounds(action.payload, state.view.size)
+    },
+
     [fetchMapLocations.pending]: (state) => {
       state.isLoading = true
     },
@@ -103,7 +108,6 @@ export const {
   zoomInAndSave,
   restoreOldView,
   zoomIn,
-  fitBounds,
   clusterClick,
   setView,
   setHoveredLocationId,

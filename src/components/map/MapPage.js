@@ -56,7 +56,6 @@ const MapPage = ({ desktop }) => {
     if (isAddingLocation) {
       dispatch(zoomInAndSave())
     } else {
-      // Restore the old view the user had before adding the location
       dispatch(restoreOldView())
     }
   }, [dispatch, isAddingLocation])

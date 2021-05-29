@@ -7,7 +7,6 @@ const InfiniteList = ({
   itemCount,
   locations,
   loadNextPage,
-  hasMoreItems,
   isNextPageLoading,
   height,
   width,
@@ -17,7 +16,7 @@ const InfiniteList = ({
   // eslint-disable-next-line no-empty-function
   const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage
 
-  const isItemLoaded = (index) => !hasMoreItems || index < locations.length
+  const isItemLoaded = (index) => index < locations.length
 
   const handleEntryClick = (id) => {
     history.push({

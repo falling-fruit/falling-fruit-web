@@ -16,7 +16,8 @@ import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
-import { fitBounds, zoomIn } from '../../redux/mapSlice'
+import { zoomIn } from '../../redux/mapSlice'
+import { searchView } from '../../redux/searchView'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -152,7 +153,7 @@ const Search = (props) => {
       )
     } else {
       dispatch(
-        fitBounds(
+        searchView(
           await getPlaceBounds(descriptionToPlaceId.current[description]),
         ),
       )

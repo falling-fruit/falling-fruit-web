@@ -19,10 +19,10 @@ export const store = configureStore({
     misc: miscReducer,
     router: connectRouter(history),
   },
-  middleware: (getDefaultMiddleware) => [
-    ...getDefaultMiddleware(),
-    routerMiddleware(history),
-  ],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      routerMiddleware(history),
+    ),
 })
 
 store.dispatch(fetchAllTypes())

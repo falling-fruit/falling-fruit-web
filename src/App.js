@@ -8,6 +8,7 @@ import ComponentDemos from './components/ComponentDemos'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { history, store } from './redux/store'
+import { ConnectedBreakpoint } from './utils/useBreakpoint'
 
 const App = () => (
   <Provider store={store}>
@@ -27,6 +28,7 @@ const App = () => (
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
+        <ConnectedBreakpoint />
       </ThemeProvider>
     </ConnectedRouter>
   </Provider>

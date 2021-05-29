@@ -24,19 +24,15 @@ const convertCenter = (center) => ({
   center: `${center.lat},${center.lng}`,
 })
 
-export const selectParams = (
-  state,
-  extraParams = {},
-  includeCenter = false,
-) => {
+export const selectParams = (state, extraParams = {}, isMap = true) => {
   const { types, muni } = state.filter
-  const { view } = state.map
+  const { view } = isMap ? state.map : state.list
 
   const params = {
     types: types.join(','),
     muni,
     ...convertBounds(view.bounds),
-    ...(includeCenter && convertCenter(view.center)),
+    ...(!isMap && convertCenter(view.center)),
     ...extraParams,
   }
 

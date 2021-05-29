@@ -13,7 +13,7 @@ export const allLocationsSelector = createSelector(
     unionWith(eqBy(prop('id')), mapLocations, listLocations),
 )
 
-export const viewChange = (view) => (dispatch) => {
+export const viewChange = (view) => (dispatch, getState) => {
   dispatch(setView(view))
 
   /* router
@@ -32,7 +32,19 @@ export const viewChange = (view) => (dispatch) => {
       dispatch(fetchMapClusters())
     } else {
       dispatch(fetchMapLocations())
-      dispatch(fetchListLocations())
+
+      const state = getState()
+      if (state.misc.isDesktop && state.list.shouldFetchNewLocations) {
+        dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
+      }
+
+      // If on desktop, map moves, and updateOnMapMove, reset offset to 0 and fetch list locations: offset 0, limit 30
+      // If on desktop, search viewport changes, ^^^
+      // If on desktop, updateOnMapMove is unchecked, custom error state
+
+      // If route is not /settings and is on desktop, refresh results
+
+      // Zoom in to see locations
 
       /* selector
       const locationsWithTypeNames = locations.map((location) => ({
