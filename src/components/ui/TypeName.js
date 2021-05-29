@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import { useSearch } from '../../contexts/SearchContext'
+import { useTypesById } from '../../redux/useTypesById'
 
 const CommonName = styled.span`
   .select__option & {
@@ -29,20 +29,17 @@ const ScientificName = styled.span`
 `
 
 export const TypeName = ({ typeId }) => {
-  const { typesById, getTypeName } = useSearch()
+  const { getCommonName, getScientificName } = useTypesById()
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
-  // TODO: internationalize
 
-  return typesById ? (
+  return (
     <div>
-      <CommonName>{getTypeName(typeId)}</CommonName>
+      <CommonName>{getCommonName(typeId)}</CommonName>
       {showScientificNames && (
-        <ScientificName>
-          {typesById[typeId]?.scientific_names[0]}
-        </ScientificName>
+        <ScientificName>{getScientificName(typeId)}</ScientificName>
       )}
     </div>
-  ) : null
+  )
 }

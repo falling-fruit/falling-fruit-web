@@ -11,6 +11,7 @@ import {
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
+import { useTypesById } from '../../redux/useTypesById'
 import { allLocationsSelector, viewChange } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import AddLocationButton from '../ui/AddLocationButton'
@@ -41,6 +42,7 @@ const MapPage = ({ desktop }) => {
   const isAddingLocation = match?.params.entryId === 'new'
   const entryId = match?.params.entryId && parseInt(match.params.entryId)
 
+  const { getCommonName } = useTypesById()
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
   const view = useSelector((state) => state.map.view)
@@ -85,7 +87,14 @@ const MapPage = ({ desktop }) => {
         view={view}
         geolocation={geolocation}
         clusters={isAddingLocation ? [] : clusters}
-        locations={isAddingLocation ? [] : allLocations}
+        locations={
+          isAddingLocation
+            ? []
+            : allLocations.map((location) => ({
+                ...location,
+                typeName: getCommonName(location.type_ids[0]),
+              }))
+        }
         selectedLocationId={entryId}
         hoveredLocationId={hoveredLocationId}
         onViewChange={(newView) => dispatch(viewChange(newView))}

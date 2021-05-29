@@ -63,10 +63,12 @@ const replaceRootCounts = (root, countsById) => {
 
 const addTreeSelectFields = (root, checkedTypes, showScientificNames) => {
   // Add necessary fields for react-dropdown-tree-select
+  const commonName = root.name ?? root.common_names.en[0]
+  const scientificName = root.scientific_names?.[0]
   const name =
-    root.scientific_name && showScientificNames
-      ? `${root.name} [${root.scientific_name}]`
-      : root.name
+    scientificName && showScientificNames
+      ? `${commonName} [${scientificName}]`
+      : commonName
 
   root.label = `${name} (${root.count})`
   // This value isn't important, as long as it's unique, because we will be using node.id

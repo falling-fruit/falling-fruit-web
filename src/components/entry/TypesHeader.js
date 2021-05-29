@@ -1,4 +1,4 @@
-import { useSearch } from '../../contexts/SearchContext'
+import { useTypesById } from '../../redux/useTypesById'
 import {
   TypesAccordion,
   TypesAccordionButton,
@@ -7,19 +7,19 @@ import {
 } from '../ui/TypesAccordion'
 import ResourceList from './ResourceList'
 
-const TypesHeader = ({ typesData }) => {
-  const { getTypeName } = useSearch()
+const TypesHeader = ({ typeIds }) => {
+  const { typesById, getCommonName, getScientificName } = useTypesById()
 
   return (
     <TypesAccordion>
-      {typesData.map((typeData) => (
-        <TypesAccordionItem key={typeData.id}>
+      {typeIds.map((id) => (
+        <TypesAccordionItem key={id}>
           <TypesAccordionButton
-            commonName={getTypeName(typeData.id)}
-            scientificName={typeData.scientific_names[0]}
+            commonName={getCommonName(id)}
+            scientificName={getScientificName(id)}
           />
           <TypesAccordionPanel>
-            <ResourceList typeData={typeData} />
+            <ResourceList urls={typesById[id].urls} />
           </TypesAccordionPanel>
         </TypesAccordionItem>
       ))}

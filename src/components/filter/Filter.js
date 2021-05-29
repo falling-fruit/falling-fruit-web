@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { useMap } from '../../contexts/MapContext'
-import { useSearch } from '../../contexts/SearchContext'
-import { getTypeCounts } from '../../utils/api'
-import { buildTypeSchema, getSelectedTypes } from '../../utils/buildTypeSchema'
-import { useFilteredParams } from '../../utils/useFilteredParams'
+import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import CheckboxFilters from './CheckboxFilters'
 import TreeSelect from './TreeSelect'
@@ -43,59 +38,12 @@ const StyledFilter = styled.div`
 `
 
 const Filter = ({ isOpen }) => {
-  const showScientificNames = useSelector(
-    (state) => state.settings.showScientificNames,
-  )
+  const dispatch = useDispatch()
+  const view = useSelector((state) => state.map.view)
+  const filters = useSelector((state) => state.filter)
+  const { treeData, isLoading } = filters
 
-  const { view } = useMap()
-  const { filters, setFilters, typesById } = useSearch()
-  const getFilteredParams = useFilteredParams()
-
-  const [treeData, setTreeData] = useState([])
-  const [treeDataLoading, setTreeDataLoading] = useState(false)
   const { t } = useTranslation()
-
-  const handleTreeChange = (currentNode, selectedNodes) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      types: getSelectedTypes(selectedNodes),
-    }))
-  }
-
-  useEffect(() => {
-    const updateTypesTree = async () => {
-      const { zoom, bounds } = view
-
-      if (zoom > VISIBLE_CLUSTER_ZOOM_LIMIT && bounds) {
-        setTreeDataLoading(true)
-
-        const counts = await getTypeCounts(
-          getFilteredParams({ types: undefined }), // Don't filter by own filtered types when querying for counts
-        )
-
-        const countsById = {}
-        for (const count of counts) {
-          countsById[count.id] = count.count
-        }
-
-        setTreeData(
-          buildTypeSchema(
-            Object.values(typesById),
-            countsById,
-            filters.types,
-            showScientificNames,
-          ),
-        )
-
-        setTreeDataLoading(false)
-      }
-    }
-
-    if (isOpen && typesById) {
-      updateTypesTree()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [view, isOpen, filters.muni, setFilters, typesById])
 
   return (
     isOpen && (
@@ -105,12 +53,17 @@ const Filter = ({ isOpen }) => {
           <TreeSelect
             data={treeData}
             shouldZoomIn={view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT}
-            loading={treeDataLoading}
-            onChange={handleTreeChange}
+            loading={isLoading}
+            onChange={(currentNode, selectedNodes) =>
+              dispatch(selectionChanged(selectedNodes))
+            }
           />
         </div>
         <div>
-          <CheckboxFilters values={filters} onChange={setFilters} />
+          <CheckboxFilters
+            values={filters}
+            onChange={(values) => dispatch(setFilters(values))}
+          />
         </div>
       </StyledFilter>
     )

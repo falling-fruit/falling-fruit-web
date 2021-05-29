@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
+import { fetchFilterCounts } from './filterSlice'
 import { fetchListLocations } from './listSlice'
 import { fetchMapClusters, fetchMapLocations, setView } from './mapSlice'
 
@@ -15,12 +16,6 @@ export const allLocationsSelector = createSelector(
 
 export const viewChange = (view) => (dispatch, getState) => {
   dispatch(setView(view))
-
-  /* router
-  if (isAddingLocation) {
-    return
-  }
-  */
 
   console.log('viewchange', view)
 
@@ -38,6 +33,10 @@ export const viewChange = (view) => (dispatch, getState) => {
         dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
       }
 
+      if (state.filter.isOpen) {
+        dispatch(fetchFilterCounts())
+      }
+
       // If on desktop, map moves, and updateOnMapMove, reset offset to 0 and fetch list locations: offset 0, limit 30
       // If on desktop, search viewport changes, ^^^
       // If on desktop, updateOnMapMove is unchecked, custom error state
@@ -45,13 +44,6 @@ export const viewChange = (view) => (dispatch, getState) => {
       // If route is not /settings and is on desktop, refresh results
 
       // Zoom in to see locations
-
-      /* selector
-      const locationsWithTypeNames = locations.map((location) => ({
-        ...location,
-        typeName: getTypeName(location.type_ids[0]),
-      }))
-      */
     }
   }
 }

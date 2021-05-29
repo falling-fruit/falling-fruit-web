@@ -11,11 +11,12 @@ import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
+import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
 import { zoomIn } from '../../redux/mapSlice'
 import { searchView } from '../../redux/searchView'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -29,13 +30,9 @@ import SearchEntry from './SearchEntry'
 
 const { googleMapLoader } = GoogleMapReact
 
-const CurrentLocationButton = (props) => (
-  <button {...props}>
-    <CurrentLocation size={24} />
-  </button>
-)
-
-const StyledCurrentLocationButton = styled(CurrentLocationButton)`
+const CurrentLocationButton = styled.button.attrs({
+  children: <CurrentLocation size={24} />,
+})`
   &:enabled {
     cursor: pointer;
   }
@@ -93,7 +90,7 @@ const Search = (props) => {
   const [cityName, setCityName] = useState(null)
 
   // Filter visible
-  const [filterOpen, setFilterOpen] = useState(false)
+  const filterOpen = useSelector((state) => state.filter.isOpen)
 
   // Open the popover again when the value changes back to empty
   const inputRef = useRef(null)
@@ -140,7 +137,7 @@ const Search = (props) => {
   }, [value])
 
   const handleChange = (e) => {
-    setFilterOpen(false)
+    dispatch(closeFilter())
     setValue(e.target.value)
   }
 
@@ -177,7 +174,7 @@ const Search = (props) => {
           icon={<SearchAlt2 />}
           prepend={
             isDesktop && (
-              <StyledCurrentLocationButton
+              <CurrentLocationButton
                 disabled={geolocation.latitude === null}
                 onClick={() => handleSelect('Current Location')}
               />
@@ -186,7 +183,16 @@ const Search = (props) => {
           placeholder="Search for a location..."
         />
 
-        <FilterIconButton pressed={filterOpen} setPressed={setFilterOpen} />
+        <FilterIconButton
+          pressed={filterOpen}
+          onClick={() => {
+            if (filterOpen) {
+              dispatch(closeFilter())
+            } else {
+              dispatch(openFilterAndFetch())
+            }
+          }}
+        />
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>

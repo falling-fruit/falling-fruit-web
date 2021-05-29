@@ -111,7 +111,6 @@ export const {
   clusterClick,
   setView,
   setHoveredLocationId,
-  updateFilters,
 } = mapSlice.actions
 
 export default mapSlice.reducer
