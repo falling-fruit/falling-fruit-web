@@ -12,7 +12,10 @@ import {
   zoomInAndSave,
 } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { allLocationsSelector, viewChange } from '../../redux/viewChange'
+import {
+  allLocationsSelector,
+  viewChangeAndFetch,
+} from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
@@ -97,7 +100,7 @@ const MapPage = ({ desktop }) => {
         }
         selectedLocationId={entryId}
         hoveredLocationId={hoveredLocationId}
-        onViewChange={(newView) => dispatch(viewChange(newView))}
+        onViewChange={(newView) => dispatch(viewChangeAndFetch(newView))}
         onGeolocationClick={() => {
           dispatch(
             zoomIn({ lat: geolocation.latitude, lng: geolocation.longitude }),

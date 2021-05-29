@@ -3,7 +3,7 @@ import { eqBy, prop, unionWith } from 'ramda'
 
 import { fetchFilterCounts } from './filterSlice'
 import { fetchListLocations } from './listSlice'
-import { fetchMapClusters, fetchMapLocations, setView } from './mapSlice'
+import { fetchMapClusters, fetchMapLocations, viewChange } from './mapSlice'
 
 const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
@@ -35,10 +35,10 @@ export const fetchLocations = () => (dispatch, getState) => {
   }
 }
 
-export const viewChange = (view) => (dispatch, getState) => {
+export const viewChangeAndFetch = (view) => (dispatch, getState) => {
   const state = getState()
 
-  dispatch(setView(view))
+  dispatch(viewChange(view))
   dispatch(fetchLocations())
 
   if (state.filter.isOpen) {

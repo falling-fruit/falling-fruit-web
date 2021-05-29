@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
 import { updateSelection } from './filterSlice'
-import { setReducer, setView } from './mapSlice'
+import { setReducer, viewChange } from './mapSlice'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 
@@ -36,7 +36,7 @@ export const listSlice = createSlice({
     setUpdateOnMapMove: setReducer('updateOnMapMove'),
   },
   extraReducers: {
-    [setView.type]: (state, action) => {
+    [viewChange.type]: (state, action) => {
       if (state.updateOnMapMove || state.isViewSearched) {
         // If updateOnMapMove flag/checkbox is unchecked, then the list view is only updated when a new location is "searched"
         state.view = action.payload

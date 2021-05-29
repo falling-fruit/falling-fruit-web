@@ -104,7 +104,6 @@ const EntryOverview = ({ locationData, className }) => {
   const handleAddressClick = () => {
     history.push(`/map/entry/${locationData.id}`)
     // Disabling zoom in for now
-    // setView(getZoomedInView(locationData.lat, locationData.lng))
   }
 
   const tagList = locationData && (

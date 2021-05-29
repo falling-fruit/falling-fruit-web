@@ -52,9 +52,9 @@ export const mapSlice = createSlice({
     hoveredLocationId: null,
   },
   reducers: {
-    // important: only dispatch setView in the handler of onViewChange in MapPage
+    // important: only dispatch viewChange in the handler of onViewChange in MapPage
     // this should be called viewChange
-    setView: setReducer('view'),
+    viewChange: setReducer('view'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
 
     zoomInAndSave: (state) => {
@@ -109,7 +109,7 @@ export const {
   restoreOldView,
   zoomIn,
   clusterClick,
-  setView,
+  viewChange,
   setHoveredLocationId,
 } = mapSlice.actions
 

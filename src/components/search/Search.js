@@ -137,7 +137,9 @@ const Search = (props) => {
   }, [value])
 
   const handleChange = (e) => {
-    dispatch(closeFilter())
+    if (filterOpen) {
+      dispatch(closeFilter())
+    }
     setValue(e.target.value)
   }
 
