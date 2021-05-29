@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { MOBILE_MAX_WIDTH } from '../components/ui/GlobalStyle'
-import { setIsDesktop } from '../redux/miscSlice'
+import { layoutChange } from '../redux/miscSlice'
 
 /**
  * Hook that returns whether current window size is within [minWidth, maxWidth]
@@ -33,7 +33,7 @@ const ConnectedBreakpoint = () => {
   const isDesktop = useIsDesktop()
 
   useEffect(() => {
-    dispatch(setIsDesktop(isDesktop))
+    dispatch(layoutChange({ isDesktop }))
   }, [isDesktop, dispatch])
 
   return null

@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypes } from '../utils/api'
-import { setReducer } from './mapSlice'
 
 export const fetchAllTypes = createAsyncThunk(
   'misc/fetchAllTypes',
@@ -15,7 +14,9 @@ export const miscSlice = createSlice({
     isDesktop: null,
   },
   reducers: {
-    setIsDesktop: setReducer('isDesktop'),
+    layoutChange: (state, action) => {
+      state.isDesktop = action.payload.isDesktop
+    },
   },
   extraReducers: {
     [fetchAllTypes.fulfilled]: (state, action) => {
@@ -29,6 +30,6 @@ export const miscSlice = createSlice({
   },
 })
 
-export const { setIsDesktop } = miscSlice.actions
+export const { layoutChange } = miscSlice.actions
 
 export default miscSlice.reducer
