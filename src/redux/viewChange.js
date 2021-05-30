@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
 import { fetchFilterCounts } from './filterSlice'
-import { fetchListLocations } from './listSlice'
+import { clearListLocations, fetchListLocations } from './listSlice'
 import { fetchMapClusters, fetchMapLocations, viewChange } from './mapSlice'
 
 /**
@@ -10,7 +10,7 @@ import { fetchMapClusters, fetchMapLocations, viewChange } from './mapSlice'
  * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
  * @constant {number}
  */
-const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
 export const getIsShowingClusters = (state) =>
   state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
@@ -33,6 +33,7 @@ export const fetchLocations = () => (dispatch, getState) => {
     // Map has received real bounds
     if (getIsShowingClusters(state)) {
       dispatch(fetchMapClusters())
+      dispatch(clearListLocations())
     } else {
       dispatch(fetchMapLocations())
 
