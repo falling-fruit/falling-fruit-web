@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 
 import { fetchListLocations, setUpdateOnMapMove } from '../../redux/listSlice'
 import { setHoveredLocationId } from '../../redux/mapSlice'
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
+import { getIsShowingClusters } from '../../redux/viewChange'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
@@ -51,12 +51,12 @@ const PagedList = () => {
   const history = useHistory()
 
   const dispatch = useDispatch()
-  const zoom = useSelector((state) => state.map.view.zoom)
   const offset = useSelector((state) => state.list.offset)
   const totalLocations = useSelector((state) => state.list.totalCount)
   const locations = useSelector((state) => state.list.locations)
   const updateOnMapMove = useSelector((state) => state.list.updateOnMapMove)
   const loadingNextPage = useSelector((state) => state.list.isLoading)
+  const isShowingClusters = useSelector(getIsShowingClusters)
   const setHoveredLocationIdDebounced = debounce(
     (id) => dispatch(setHoveredLocationId(id)),
     50,
@@ -70,7 +70,6 @@ const PagedList = () => {
     dispatch(setHoveredLocationId(null))
   }
 
-  const shouldZoomIn = zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
   const resultsLoaded = locations.length > 0
 
   return (
@@ -78,7 +77,7 @@ const PagedList = () => {
       {({ rect, ref }) => (
         <Container>
           <ListContainer ref={ref}>
-            {shouldZoomIn ? (
+            {isShowingClusters ? (
               <ShouldZoomIn />
             ) : (
               <>
@@ -107,14 +106,14 @@ const PagedList = () => {
             )}
           </ListContainer>
           <PageNav>
-            {!shouldZoomIn && locations.length > 0
+            {!isShowingClusters && locations.length > 0
               ? `Showing Results ${offset + 1} - ${
                   offset + locations.length
                 } of ${totalLocations}`
               : 'No Results Found'}
             <NavButtonContainer>
               <SquareButton
-                disabled={offset === 0 || shouldZoomIn}
+                disabled={offset === 0 || isShowingClusters}
                 onClick={() =>
                   dispatch(
                     fetchListLocations({ offset: offset - DESKTOP_PAGE_LIMIT }),
@@ -125,7 +124,8 @@ const PagedList = () => {
               </SquareButton>
               <SquareButton
                 disabled={
-                  offset + DESKTOP_PAGE_LIMIT >= totalLocations || shouldZoomIn
+                  offset + DESKTOP_PAGE_LIMIT >= totalLocations ||
+                  isShowingClusters
                 }
                 onClick={() =>
                   dispatch(

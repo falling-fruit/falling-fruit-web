@@ -5,9 +5,9 @@ import { useLocation } from 'react-use'
 import styled from 'styled-components/macro'
 
 import { fetchListLocations } from '../../redux/listSlice'
+import { getIsShowingClusters } from '../../redux/viewChange'
 import InfiniteList from '../list/InfiniteList'
 import { NoResultsFound, ShouldZoomIn } from '../list/ListLoading'
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 
 const ListPageContainer = styled.div`
   height: 100%;
@@ -19,10 +19,10 @@ const ListPage = () => {
   const rect = useRect(container) ?? { width: 0, height: 0 }
 
   const dispatch = useDispatch()
-  const zoom = useSelector((state) => state.map.view.zoom)
   const totalLocations = useSelector((state) => state.list.totalCount)
   const locations = useSelector((state) => state.list.locations)
   const isNextPageLoading = useSelector((state) => state.list.isLoading)
+  const isShowingClusters = useSelector(getIsShowingClusters)
 
   useEffect(() => {
     if (pathname === '/list') {
@@ -31,7 +31,7 @@ const ListPage = () => {
   }, [pathname, dispatch])
 
   let content
-  if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+  if (isShowingClusters) {
     content = <ShouldZoomIn />
   } else if (locations.length === 0 && !isNextPageLoading) {
     content = <NoResultsFound />

@@ -11,22 +11,12 @@ import {
   zoomInAndSave,
 } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import {
-  allLocationsSelector,
-  viewChangeAndFetch,
-} from '../../redux/viewChange'
+import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import Map from './Map'
-
-/**
- * Maximum zoom level at which clusters will be displayed. At zoom levels
- * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
- * @constant {number}
- */
-export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
@@ -48,7 +38,7 @@ const MapPage = ({ desktop }) => {
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
   const view = useSelector((state) => state.map.view)
-  const allLocations = useSelector(allLocationsSelector)
+  const allLocations = useSelector(getAllLocations)
   const clusters = useSelector((state) => state.map.clusters)
   const isLoading = useSelector((state) => state.map.isLoading)
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)

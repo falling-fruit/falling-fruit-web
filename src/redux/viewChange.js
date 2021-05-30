@@ -5,9 +5,17 @@ import { fetchFilterCounts } from './filterSlice'
 import { fetchListLocations } from './listSlice'
 import { fetchMapClusters, fetchMapLocations, viewChange } from './mapSlice'
 
+/**
+ * Maximum zoom level at which clusters will be displayed. At zoom levels
+ * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
+ * @constant {number}
+ */
 const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
-export const allLocationsSelector = createSelector(
+export const getIsShowingClusters = (state) =>
+  state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
+
+export const getAllLocations = createSelector(
   (state) => state.map.locations,
   (state) => state.list.locations,
   (state) => state.misc.isDesktop,
@@ -18,11 +26,12 @@ export const allLocationsSelector = createSelector(
 )
 
 export const fetchLocations = () => (dispatch, getState) => {
-  const { zoom, bounds } = getState().map.view
+  const state = getState()
+  const { zoom, bounds } = state.map.view
 
   if (bounds?.ne.lat != null && zoom > 1) {
     // Map has received real bounds
-    if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+    if (getIsShowingClusters(state)) {
       dispatch(fetchMapClusters())
     } else {
       dispatch(fetchMapLocations())
