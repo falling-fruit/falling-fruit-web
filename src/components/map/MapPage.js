@@ -7,7 +7,6 @@ import styled from 'styled-components/macro'
 import {
   clusterClick,
   restoreOldView,
-  setHoveredLocationId,
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
@@ -65,13 +64,11 @@ const MapPage = ({ desktop }) => {
     }
   }, [dispatch, isAddingLocation])
 
-  const handleLocationClick = (location) => {
+  const handleLocationClick = (location) =>
     history.push({
       pathname: `/map/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
-    dispatch(setHoveredLocationId(null))
-  }
 
   const handleAddLocationClick = () => {
     history.push('/map/entry/new')
@@ -98,8 +95,7 @@ const MapPage = ({ desktop }) => {
                 typeName: getCommonName(location.type_ids[0]),
               }))
         }
-        selectedLocationId={entryId}
-        hoveredLocationId={hoveredLocationId}
+        activeLocationId={entryId || hoveredLocationId}
         onViewChange={(newView) => dispatch(viewChangeAndFetch(newView))}
         onGeolocationClick={() => {
           dispatch(

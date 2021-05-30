@@ -21,8 +21,7 @@ const Map = ({
   view,
   geolocation,
   locations,
-  selectedLocationId,
-  hoveredLocationId,
+  activeLocationId,
   clusters,
   onGeolocationClick,
   onClusterClick,
@@ -72,10 +71,7 @@ const Map = ({
         }}
         lat={location.lat}
         lng={location.lng}
-        selected={
-          location.id === selectedLocationId ||
-          location.id === hoveredLocationId
-        }
+        selected={location.id === activeLocationId}
         label={showLabels ? location.typeName : undefined}
       />
     ))}
