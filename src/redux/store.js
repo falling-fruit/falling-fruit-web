@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 
 import filterReducer from './filterSlice'
@@ -17,12 +16,9 @@ export const store = configureStore({
     filter: filterReducer,
     settings: settingsReducer,
     misc: miscReducer,
-    router: connectRouter(history),
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(
-      routerMiddleware(history),
-    ),
+    getDefaultMiddleware({ serializableCheck: false }),
 })
 
 store.dispatch(fetchAllTypes())
