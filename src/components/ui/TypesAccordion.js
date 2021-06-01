@@ -11,7 +11,6 @@ import styled from 'styled-components/macro'
 
 import { theme } from './GlobalStyle'
 import IndicatorAccordionButton from './IndicatorAccordionButton'
-import TypeTitle from './TypeTitle'
 
 const TypesAccordionItem = styled(AccordionItem)`
   margin-top: 15px;
@@ -22,7 +21,7 @@ const TypesAccordionPanel = styled(AccordionPanel)`
   padding-top: 12px;
 `
 
-const TypesAccordionButton = ({ commonName, scientificName, ...props }) => {
+const TypesAccordionButton = ({ children, ...props }) => {
   const { isExpanded } = useAccordionItemContext()
   const arrowIcon = isExpanded ? (
     <UpArrow size="21" color={theme.orange} />
@@ -32,7 +31,7 @@ const TypesAccordionButton = ({ commonName, scientificName, ...props }) => {
 
   return (
     <IndicatorAccordionButton {...props}>
-      <TypeTitle primaryText={commonName} secondaryText={scientificName} />
+      {children}
       {arrowIcon}
     </IndicatorAccordionButton>
   )

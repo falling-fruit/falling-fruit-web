@@ -60,8 +60,10 @@ const getStreetAddress = async (lat, lng) => {
  * Returns whether the location has seasonality information
  */
 const hasSeasonality = (locationData) =>
-  locationData.no_season ||
-  (locationData.season_start && locationData.season_stop)
+  !!(
+    locationData.no_season ||
+    (locationData.season_start && locationData.season_stop)
+  )
 
 export {
   getFormattedLocationInfo,

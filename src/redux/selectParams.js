@@ -1,8 +1,3 @@
-import { useCallback } from 'react'
-
-import { useMap } from '../contexts/MapContext'
-import { useSearch } from '../contexts/SearchContext'
-
 /**
  * Normalize longitude to range [-180, 180].
  *
@@ -29,20 +24,17 @@ const convertCenter = (center) => ({
   center: `${center.lat},${center.lng}`,
 })
 
-export const useFilteredParams = () => {
-  const { filters } = useSearch()
-  const { view: mapView } = useMap()
+export const selectParams = (state, extraParams = {}, isMap = true) => {
+  const { types, muni } = state.filter
+  const { view } = isMap ? state.map : state.list
 
-  const getFilteredParams = useCallback(
-    (params = {}, includeCenter = false, view = mapView) => ({
-      types: filters.types.join(','),
-      muni: filters.muni,
-      ...convertBounds(view.bounds),
-      ...(includeCenter && convertCenter(view.center)),
-      ...params,
-    }),
-    [filters, mapView],
-  )
+  const params = {
+    types: types.join(','),
+    muni,
+    ...convertBounds(view.bounds),
+    ...(!isMap && convertCenter(view.center)),
+    ...extraParams,
+  }
 
-  return getFilteredParams
+  return params
 }

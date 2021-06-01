@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { useSearch } from '../../contexts/SearchContext'
+import { useTypesById } from '../../redux/useTypesById'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
@@ -75,7 +75,7 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
-  const { typesById, getTypeName } = useSearch()
+  const { getLocationTypes } = useTypesById()
   const [address, setAddress] = useState('')
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -104,7 +104,6 @@ const EntryOverview = ({ locationData, className }) => {
   const handleAddressClick = () => {
     history.push(`/map/entry/${locationData.id}`)
     // Disabling zoom in for now
-    // setView(getZoomedInView(locationData.lat, locationData.lng))
   }
 
   const tagList = locationData && (
@@ -120,23 +119,19 @@ const EntryOverview = ({ locationData, className }) => {
     </TagList>
   )
 
-  const allTypeNames = locationData?.type_ids.map(getTypeName).join(', ')
-
   return (
     <div className={className}>
       <>
         {isReportModalOpen && (
           <ReportModal
             locationId={locationData.id}
-            name={allTypeNames}
+            name={getLocationTypes(locationData)}
             onDismiss={() => setIsReportModalOpen(false)}
           />
         )}
         <TextContent>
           {tagList}
-          <TypesHeader
-            typesData={locationData.type_ids.map((typeId) => typesById[typeId])}
-          />
+          <TypesHeader typeIds={locationData.type_ids} />
           <Description>
             <p>{locationData.description}</p>
 

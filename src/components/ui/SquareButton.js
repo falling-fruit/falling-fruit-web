@@ -16,6 +16,7 @@ const SquareButton = styled(ResetButton)`
       disabled ? theme.secondaryBackground : theme.orange};
     width: 100%;
   }
+
   ${({ disabled, theme }) =>
     !disabled &&
     `

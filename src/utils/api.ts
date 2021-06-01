@@ -4,6 +4,10 @@ import axios, { AxiosResponse } from 'axios'
 
 import { paths } from './apiSchema'
 
+class APIError extends Error {
+  name = 'APIError'
+}
+
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   params: {
@@ -12,14 +16,22 @@ const instance = axios.create({
 })
 
 const handleResponse = (request: Promise<AxiosResponse<any>>) =>
-  request.then((res) => {
-    // v0.2 API handles client-side parameter errors with
-    // a 200 response and an error string in the body
-    if (res.data.error) {
-      throw new Error(res.data.error)
-    }
-    return res.data
-  })
+  request
+    .then(
+      (res) =>
+        // v0.2 API handles client-side parameter errors with
+        // a 200 response and an error string in the body
+        res.data,
+    )
+    .catch((error) => {
+      const message = error.response.data.error
+      if (message) {
+        console.error('APIError:', message, error)
+        throw new APIError({ ...error, message })
+      } else {
+        throw error
+      }
+    })
 
 /* Not used yet
 const fileToFormData = (photoData: string | Blob | undefined) => {

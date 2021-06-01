@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { useSearch } from '../../contexts/SearchContext'
+import { useTypesById } from '../../redux/useTypesById'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -123,7 +123,7 @@ export const LocationForm = ({ desktop }) => {
   // TODO: create a "going back" util
   const history = useHistory()
   const { state } = useLocation()
-  const { typesById } = useSearch()
+  const { typesById } = useTypesById()
 
   const typeOptions = useMemo(
     () =>

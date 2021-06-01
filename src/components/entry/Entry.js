@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { useSearch } from '../../contexts/SearchContext'
 import { getLocationById, getReviews } from '../../utils/api'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
@@ -40,7 +39,6 @@ export const TextContent = styled.article`
 `
 
 const Entry = ({ isInDrawer }) => {
-  const { typesById, getTypeName } = useSearch()
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
@@ -61,10 +59,8 @@ const Entry = ({ isInDrawer }) => {
       setIsLoading(false)
     }
 
-    if (typesById) {
-      fetchEntryData()
-    }
-  }, [id, typesById])
+    fetchEntryData()
+  }, [id])
 
   const entryOverview = <EntryOverview locationData={locationData} />
   const entryReviews = <EntryReviews reviews={reviews} />
@@ -78,10 +74,7 @@ const Entry = ({ isInDrawer }) => {
 
     content = (
       <>
-        <PhotoGrid
-          photos={allReviewPhotos}
-          altText={locationData.type_ids.map(getTypeName).join(', ')}
-        />
+        <PhotoGrid photos={allReviewPhotos} altText={locationData.address} />
 
         {isInDrawer ? (
           <EntryTabs>
