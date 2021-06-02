@@ -35,6 +35,9 @@ const Map = ({
     bootstrapURLKeys={bootstrapURLKeys}
     options={() => ({
       mapTypeId: mapType,
+      disableDefaultUI: true,
+      // TODO: should we disable tilt?
+      // tilt: 0,
     })}
     layerTypes={layerTypes}
     center={view.center}

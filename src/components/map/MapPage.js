@@ -16,6 +16,7 @@ import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import TrackLocationButton from '../ui/TrackLocationButton'
 import Map from './Map'
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
@@ -24,7 +25,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   bottom: 10px;
 `
 
-const MapPage = ({ desktop }) => {
+const MapPage = ({ isDesktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
     path: '/(map|list)/entry/:entryId',
@@ -70,8 +71,10 @@ const MapPage = ({ desktop }) => {
       {isAddingLocation ? (
         <AddLocationPin />
       ) : (
-        !desktop && <AddLocationButton onClick={handleAddLocationClick} />
+        !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
+      {!isDesktop && <TrackLocationButton />}
+
       <Map
         bootstrapURLKeys={bootstrapURLKeys}
         view={view}
