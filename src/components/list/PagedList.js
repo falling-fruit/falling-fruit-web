@@ -1,8 +1,8 @@
-import { Rect } from '@reach/rect'
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
 import { debounce } from 'debounce'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import AutoSizer from 'react-virtualized-auto-sizer'
 import styled from 'styled-components/macro'
 
 import { fetchListLocations, setUpdateOnMapMove } from '../../redux/listSlice'
@@ -18,7 +18,7 @@ import { NoResultsFound, ShouldZoomIn } from './ListLoading'
 const DESKTOP_PAGE_LIMIT = 30
 const LIST_ENTRY_HEIGHT = 42
 
-const Container = styled.div`
+const Page = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -28,22 +28,20 @@ const Container = styled.div`
 const ListContainer = styled.div`
   position: relative;
   flex: 1;
+  border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
 `
 
 const PageNav = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
-`
+  margin: 10px;
 
-const NavButtonContainer = styled.div`
-  display: flex;
-  button {
-    &:not(:last-child) {
-      margin-right: 4px;
-    }
+  span {
+    flex: 1;
+  }
+
+  button:not(:last-child) {
+    margin-right: 4px;
   }
 `
 
@@ -73,89 +71,88 @@ const PagedList = () => {
   const resultsLoaded = locations.length > 0
 
   return (
-    <Rect>
-      {({ rect, ref }) => (
-        <Container>
-          <ListContainer ref={ref}>
-            {isShowingClusters ? (
-              <ShouldZoomIn />
-            ) : (
-              <>
-                {loadingNextPage || resultsLoaded ? (
+    <Page>
+      <ListContainer>
+        {isShowingClusters ? (
+          <ShouldZoomIn />
+        ) : (
+          <>
+            {loadingNextPage || resultsLoaded ? (
+              <AutoSizer>
+                {({ height, width }) => (
                   <EntryList
                     itemSize={LIST_ENTRY_HEIGHT}
                     locations={locations}
                     itemCount={locations.length}
-                    height={rect?.height ?? 0}
-                    width={rect?.width ?? 0}
+                    height={height}
+                    width={width}
                     onEntryClick={handleEntryClick}
                     onEntryMouseEnter={setHoveredLocationIdDebounced}
                     onEntryMouseLeave={() =>
                       setHoveredLocationIdDebounced(null)
                     }
                   />
-                ) : (
-                  <NoResultsFound />
                 )}
-                {loadingNextPage && (
-                  <LoadingOverlay>
-                    {!resultsLoaded && <LoadingIndicator />}
-                  </LoadingOverlay>
-                )}
-              </>
+              </AutoSizer>
+            ) : (
+              <NoResultsFound />
             )}
-          </ListContainer>
-          <PageNav>
-            {!isShowingClusters && locations.length > 0
-              ? `Showing Results ${offset + 1} - ${
-                  offset + locations.length
-                } of ${totalLocations}`
-              : 'No Results Found'}
-            <NavButtonContainer>
-              <SquareButton
-                disabled={offset === 0 || isShowingClusters}
-                onClick={() =>
-                  dispatch(
-                    fetchListLocations({ offset: offset - DESKTOP_PAGE_LIMIT }),
-                  )
-                }
-              >
-                <ChevronLeft />
-              </SquareButton>
-              <SquareButton
-                disabled={
-                  offset + DESKTOP_PAGE_LIMIT >= totalLocations ||
-                  isShowingClusters
-                }
-                onClick={() =>
-                  dispatch(
-                    fetchListLocations({ offset: offset + DESKTOP_PAGE_LIMIT }),
-                  )
-                }
-              >
-                <ChevronRight />
-              </SquareButton>
-            </NavButtonContainer>
-          </PageNav>
+            {loadingNextPage && (
+              <LoadingOverlay>
+                {!resultsLoaded && <LoadingIndicator />}
+              </LoadingOverlay>
+            )}
+          </>
+        )}
+      </ListContainer>
+      <PageNav>
+        <span>
+          {!isShowingClusters && locations.length > 0
+            ? `Showing Results ${offset + 1} - ${
+                offset + locations.length
+              } of ${totalLocations}`
+            : 'No Results Found'}
+        </span>
+        <SquareButton
+          disabled={offset === 0 || isShowingClusters}
+          onClick={() =>
+            dispatch(
+              fetchListLocations({ offset: offset - DESKTOP_PAGE_LIMIT }),
+            )
+          }
+        >
+          <ChevronLeft />
+        </SquareButton>
+        <SquareButton
+          disabled={
+            offset + DESKTOP_PAGE_LIMIT >= totalLocations || isShowingClusters
+          }
+          onClick={() =>
+            dispatch(
+              fetchListLocations({ offset: offset + DESKTOP_PAGE_LIMIT }),
+            )
+          }
+        >
+          <ChevronRight />
+        </SquareButton>
+      </PageNav>
 
-          <LabeledRow
-            style={{ padding: 10 }}
-            left={
-              <Checkbox
-                id="update-on-map-move"
-                onChange={(e) => dispatch(setUpdateOnMapMove(e.target.checked))}
-                checked={updateOnMapMove}
-              />
-            }
-            label={
-              <label htmlFor="update-on-map-move">
-                Update results when map moves
-              </label>
-            }
+      <LabeledRow
+        style={{ margin: 10 }}
+        left={
+          <Checkbox
+            id="update-on-map-move"
+            onChange={(e) => dispatch(setUpdateOnMapMove(e.target.checked))}
+            checked={updateOnMapMove}
           />
-        </Container>
-      )}
-    </Rect>
+        }
+        label={
+          <label htmlFor="update-on-map-move">
+            Update results when map moves
+          </label>
+        }
+      />
+    </Page>
   )
 }
 

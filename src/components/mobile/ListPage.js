@@ -1,22 +1,15 @@
-import { useRect } from '@reach/rect'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import styled from 'styled-components/macro'
+import AutoSizer from 'react-virtualized-auto-sizer'
 
 import { fetchListLocations } from '../../redux/listSlice'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import InfiniteList from '../list/InfiniteList'
 import { NoResultsFound, ShouldZoomIn } from '../list/ListLoading'
 
-const ListPageContainer = styled.div`
-  height: 100%;
-`
-
 const ListPage = () => {
   const { pathname } = useLocation()
-  const container = useRef()
-  const rect = useRect(container) ?? { width: 0, height: 0 }
 
   const dispatch = useDispatch()
   const totalLocations = useSelector((state) => state.list.totalCount)
@@ -30,29 +23,30 @@ const ListPage = () => {
     }
   }, [pathname, dispatch])
 
-  let content
   if (isShowingClusters) {
-    content = <ShouldZoomIn />
+    return <ShouldZoomIn />
   } else if (locations.length === 0 && !isNextPageLoading) {
-    content = <NoResultsFound />
+    return <NoResultsFound />
   } else {
-    content = (
-      <InfiniteList
-        itemCount={totalLocations}
-        width={rect.width}
-        height={rect.height}
-        locations={locations}
-        loadNextPage={() =>
-          dispatch(
-            fetchListLocations({ offset: locations.length, extend: true }),
-          )
-        }
-        isNextPageLoading={isNextPageLoading}
-      />
+    return (
+      <AutoSizer>
+        {({ width, height }) => (
+          <InfiniteList
+            itemCount={totalLocations}
+            width={width}
+            height={height}
+            locations={locations}
+            loadNextPage={() =>
+              dispatch(
+                fetchListLocations({ offset: locations.length, extend: true }),
+              )
+            }
+            isNextPageLoading={isNextPageLoading}
+          />
+        )}
+      </AutoSizer>
     )
   }
-
-  return <ListPageContainer ref={container}>{content}</ListPageContainer>
 }
 
 export default ListPage
