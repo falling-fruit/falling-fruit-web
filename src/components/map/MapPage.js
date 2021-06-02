@@ -1,12 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useRouteMatch } from 'react-router-dom'
-import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 
 import {
   clusterClick,
   restoreOldView,
+  startTrackingLocation,
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
@@ -17,6 +17,7 @@ import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import TrackLocationButton from '../ui/TrackLocationButton'
+import { ConnectedGeolocation } from './ConnectedGeolocation'
 import Map from './Map'
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
@@ -43,9 +44,11 @@ const MapPage = ({ isDesktop }) => {
   const clusters = useSelector((state) => state.map.clusters)
   const isLoading = useSelector((state) => state.map.isLoading)
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
-
-  //const geolocation = useGeolocation({ enableHighAccuracy: true })
-  const geolocation = useGeolocation()
+  const geolocation = useSelector((state) => state.map.geolocation)
+  const isTrackingLocation = useSelector(
+    (state) => state.map.isTrackingLocation,
+  )
+  const [locationRequested, setLocationRequested] = useState(false)
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -73,7 +76,17 @@ const MapPage = ({ isDesktop }) => {
       ) : (
         !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
-      {!isDesktop && <TrackLocationButton />}
+      {!isDesktop && (
+        <TrackLocationButton
+          $active={isTrackingLocation}
+          onClick={() => {
+            dispatch(startTrackingLocation())
+            setLocationRequested(true)
+          }}
+        />
+      )}
+
+      {locationRequested && <ConnectedGeolocation />}
 
       <Map
         bootstrapURLKeys={bootstrapURLKeys}

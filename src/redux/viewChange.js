@@ -3,7 +3,12 @@ import { eqBy, prop, unionWith } from 'ramda'
 
 import { fetchFilterCounts } from './filterSlice'
 import { clearListLocations, fetchListLocations } from './listSlice'
-import { fetchMapClusters, fetchMapLocations, viewChange } from './mapSlice'
+import {
+  fetchMapClusters,
+  fetchMapLocations,
+  stopTrackingLocation,
+  viewChange,
+} from './mapSlice'
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -11,6 +16,8 @@ import { fetchMapClusters, fetchMapLocations, viewChange } from './mapSlice'
  * @constant {number}
  */
 export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+
+const STOP_TRACKING_LOCATION_DIST = 0.0000001
 
 export const getIsShowingClusters = (state) =>
   state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
@@ -45,10 +52,28 @@ export const fetchLocations = () => (dispatch, getState) => {
   }
 }
 
-export const viewChangeAndFetch = (view) => (dispatch, getState) => {
+const shouldStopTrackingLocation = (geolocation, newView) => {
+  if (!geolocation) {
+    return false
+  }
+
+  const { lat, lng } = newView.center
+  const { latitude, longitude } = geolocation
+
+  const dist = Math.pow(lat - latitude, 2) + Math.pow(longitude - lng, 2)
+
+  console.log('shouldStopTrackingLocation', geolocation, newView, dist)
+  return dist >= STOP_TRACKING_LOCATION_DIST
+}
+
+export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
 
-  dispatch(viewChange(view))
+  if (shouldStopTrackingLocation(state.map.geolocation, newView)) {
+    dispatch(stopTrackingLocation())
+  }
+
+  dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
   if (state.filter.isOpen) {

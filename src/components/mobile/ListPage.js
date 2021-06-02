@@ -1,7 +1,7 @@
 import { useRect } from '@reach/rect'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-use'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { fetchListLocations } from '../../redux/listSlice'

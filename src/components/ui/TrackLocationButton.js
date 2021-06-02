@@ -1,4 +1,4 @@
-import { CurrentLocation } from '@styled-icons/boxicons-regular'
+import { Navigation } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
 import IconButton from './IconButton'
@@ -6,13 +6,13 @@ import IconButton from './IconButton'
 const TrackLocationButton = styled(IconButton).attrs((props) => ({
   label: 'Track location',
   size: 68,
-  icon: <CurrentLocation />,
-  color: props.theme.blue,
+  icon: <Navigation />,
+  color: props.$active ? props.theme.blue : props.theme.tertiaryText,
   raised: true,
   ...props,
 }))`
   svg {
-    padding: 5px;
+    padding: 15px;
   }
 
   position: absolute;

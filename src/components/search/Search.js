@@ -10,17 +10,15 @@ import {
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import GoogleMapReact from 'google-map-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
-import { zoomIn } from '../../redux/mapSlice'
 import { searchView } from '../../redux/searchView'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
-import { getFormattedLocationInfo } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds } from '../../utils/viewportBounds'
 import Filter from '../filter/Filter'
@@ -84,16 +82,10 @@ const SearchBarContainer = styled.div`
 const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
-
-  // Geolocation and current city name
   const geolocation = useGeolocation()
-  const [cityName, setCityName] = useState(null)
 
-  // Filter visible
   const filterOpen = useSelector((state) => state.filter.isOpen)
 
-  // Open the popover again when the value changes back to empty
-  const inputRef = useRef(null)
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
@@ -113,29 +105,6 @@ const Search = (props) => {
     googleMapLoader(bootstrapURLKeys).then(init)
   }, [init])
 
-  useEffect(() => {
-    async function fetchCityName() {
-      if (geolocation.latitude !== null) {
-        const city = await getFormattedLocationInfo(
-          geolocation.latitude,
-          geolocation.longitude,
-        )
-        setCityName(city)
-      }
-    }
-
-    if (ready) {
-      fetchCityName()
-    }
-  }, [geolocation, ready])
-
-  useEffect(() => {
-    if (value === '') {
-      inputRef.current.blur()
-      inputRef.current.focus()
-    }
-  }, [value])
-
   const handleChange = (e) => {
     if (filterOpen) {
       dispatch(closeFilter())
@@ -146,24 +115,17 @@ const Search = (props) => {
   const handleSelect = async (description) => {
     setValue(description, false)
 
-    if (description === 'Current Location') {
-      dispatch(
-        zoomIn({ lat: geolocation.latitude, lng: geolocation.longitude }),
-      )
-    } else {
-      dispatch(
-        searchView(
-          await getPlaceBounds(descriptionToPlaceId.current[description]),
-        ),
-      )
-    }
+    dispatch(
+      searchView(
+        await getPlaceBounds(descriptionToPlaceId.current[description]),
+      ),
+    )
   }
 
   return (
     <Combobox
       onSelect={handleSelect}
       aria-label="Search for a location"
-      openOnFocus={!isDesktop && geolocation.latitude !== null}
       {...props}
     >
       <SearchBarContainer>
@@ -171,7 +133,6 @@ const Search = (props) => {
           as={Input}
           value={value}
           onChange={handleChange}
-          ref={inputRef}
           disabled={!ready}
           icon={<SearchAlt2 />}
           prepend={
@@ -198,22 +159,6 @@ const Search = (props) => {
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
-          {
-            /* Render the current location suggestion only if it
-              on mobile, the current location is defined, and
-              the input is empty */
-
-            !isDesktop && geolocation.latitude !== null && value === '' && (
-              <ComboboxOption
-                as={SearchEntry}
-                value="Current Location"
-                isCurrentLocation
-              >
-                {['Current Location', cityName ?? '']}
-              </ComboboxOption>
-            )
-          }
-
           {status === 'OK' &&
             data.map((suggestion) => {
               const {

@@ -50,12 +50,40 @@ export const mapSlice = createSlice({
     locations: [],
     clusters: [],
     hoveredLocationId: null,
+    geolocation: null,
+    isTrackingLocation: false,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
     // this should be called viewChange
     viewChange: setReducer('view'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
+
+    startTrackingLocation: (state) => {
+      state.isTrackingLocation = true
+
+      if (state.geolocation) {
+        state.view.zoom = 16
+        state.view.center = {
+          lat: state.geolocation.latitude,
+          lng: state.geolocation.longitude,
+        }
+      }
+    },
+    stopTrackingLocation: (state) => {
+      state.isTrackingLocation = false
+    },
+
+    geolocationChange: (state, action) => {
+      state.geolocation = action.payload
+
+      if (state.isTrackingLocation) {
+        state.view.center = {
+          lat: state.geolocation.latitude,
+          lng: state.geolocation.longitude,
+        }
+      }
+    },
 
     zoomInAndSave: (state) => {
       state.oldView = { ...state.view }
@@ -111,6 +139,9 @@ export const {
   clusterClick,
   viewChange,
   setHoveredLocationId,
+  startTrackingLocation,
+  stopTrackingLocation,
+  geolocationChange,
 } = mapSlice.actions
 
 export default mapSlice.reducer
