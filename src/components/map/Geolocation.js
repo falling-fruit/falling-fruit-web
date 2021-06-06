@@ -35,6 +35,35 @@ const Pin = styled.div`
 
 const GeolocationWrapper = styled.div`
   position: relative;
+
+  &::before {
+    content: '';
+    width: 33px;
+    height: 33px;
+
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+
+    border-radius: 50%;
+    background: radial-gradient(
+      ${({ theme }) => rgba(theme.orange, 0.75)},
+      ${({ theme }) => rgba(theme.orange, 0)}
+    );
+    animation: 3s ease infinite pulse;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+    }
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
 `
 
 const Geolocation = ({ heading, onClick, ...props }) => (
