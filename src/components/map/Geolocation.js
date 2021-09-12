@@ -1,4 +1,5 @@
 import { rgba } from 'polished'
+import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 const Heading = styled.div`
@@ -26,9 +27,9 @@ const Pin = styled.div`
 
   transform: translate(-50%, -50%);
 
-  width: 22px;
-  height: 22px;
-  border: 6px solid #fefefe;
+  width: 28px;
+  height: 28px;
+
   border-radius: 50%;
   background: ${({ theme }) => theme.orange};
 `
@@ -36,24 +37,50 @@ const Pin = styled.div`
 const GeolocationWrapper = styled.div`
   position: relative;
 
-  &::before {
+  &::before,
+  &::after {
     content: '';
-    width: 33px;
-    height: 33px;
+    width: 34px;
+    height: 34px;
 
     position: absolute;
     transform: translate(-50%, -50%);
     transform-origin: 50% 50%;
 
     border-radius: 50%;
-    background: radial-gradient(
-      ${({ theme }) => rgba(theme.orange, 0.75)},
-      ${({ theme }) => rgba(theme.orange, 0)}
-    );
-    animation: 3s ease infinite pulse;
   }
 
-  @keyframes pulse {
+  ${({ heading }) =>
+    !heading &&
+    css`
+      &::before {
+        background: radial-gradient(
+          ${({ theme }) => rgba(theme.orange, 0.75)},
+          ${({ theme }) => rgba(theme.orange, 0)}
+        );
+        animation: 3s ease infinite pulseScale;
+      }
+    `}
+
+  &::after {
+    z-index: 1;
+    box-shadow: 0 0 0 7px #fefefe inset;
+    animation: 3s ease infinite pulseBoxShadow;
+  }
+
+  @keyframes pulseBoxShadow {
+    0% {
+      box-shadow: 0 0 0 7px #fefefe inset;
+    }
+    50% {
+      box-shadow: 0 0 0 5px #fefefe inset;
+    }
+    0% {
+      box-shadow: 0 0 0 7px #fefefe inset;
+    }
+  }
+
+  @keyframes pulseScale {
     0% {
       transform: translate(-50%, -50%) scale(1);
     }
