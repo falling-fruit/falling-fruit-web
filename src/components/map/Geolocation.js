@@ -36,6 +36,7 @@ const Pin = styled.div`
 
 const GeolocationWrapper = styled.div`
   position: relative;
+  z-index: 2;
 
   &::before,
   &::after {
@@ -54,6 +55,7 @@ const GeolocationWrapper = styled.div`
     !heading &&
     css`
       &::before {
+        z-index: 1;
         background: radial-gradient(
           ${({ theme }) => rgba(theme.orange, 0.75)},
           ${({ theme }) => rgba(theme.orange, 0)}
@@ -63,7 +65,7 @@ const GeolocationWrapper = styled.div`
     `}
 
   &::after {
-    z-index: 1;
+    z-index: 3;
     box-shadow: 0 0 0 7px #fefefe inset;
     animation: 3s ease infinite pulseBoxShadow;
   }
