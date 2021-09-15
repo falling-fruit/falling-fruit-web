@@ -1,0 +1,7 @@
+site_name: Falling Fruit Documentation
+nav:
+  - Home: 'index.md'
+  - 'VS Code':
+      - 'Auto-Linting and Formatting': 'vscode/auto-linting-and-formatting.md'
+      - 'General Tips': 'vscode/general-tips.md'
+theme: readthedocs
