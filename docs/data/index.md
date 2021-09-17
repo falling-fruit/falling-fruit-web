@@ -1,3 +1,3 @@
-# Welcome to the Falling Fruit docs
+# Welcome
 
 Look at the table of contents or hit next to get started :)
