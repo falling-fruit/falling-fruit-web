@@ -1,0 +1,25 @@
+:root {
+  --orange: #ff9900;
+  --orange-light: #ffc266;
+  --orange-dark: #e68a00;
+  --orange-transparent: #ffedd1;
+
+  --md-primary-fg-color: var(--orange);
+  --md-primary-fg-color--light: var(--orange-light);
+  --md-primary-fg-color--dark: var(--orange-dark);
+
+  --md-accent-fg-color: var(--orange-light);
+  --md-accent-fg-color--transparent: var(--orange-transparent);
+}
+
+footer {
+  margin-top: 5em;
+}
+
+.md-footer-meta {
+  display: none;
+}
+
+.md-header__title {
+  margin-left: 0;
+}

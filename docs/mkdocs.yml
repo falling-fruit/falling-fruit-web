@@ -4,5 +4,10 @@ nav:
   - 'VS Code':
       - 'Auto-Linting and Formatting': 'vscode/auto-linting-and-formatting.md'
       - 'General Tips': 'vscode/general-tips.md'
-theme: readthedocs
+  # - 'Repository': 'https://github.com/hack4impact-uiuc/falling-fruit'
+theme:
+  name: material
+  logo: _assets/logo.svg
+extra_css:
+  - _styles/index.css
 docs_dir: 'data'
