@@ -1,23 +1,23 @@
 :root {
+  /* palette */
   --orange: #ff9900;
   --orange-light: #ffc266;
   --orange-dark: #e68a00;
-  --orange-transparent: #ffedd1;
 
+  --blue: #4183c4;
+  --blue-transparent: #4183c46e;
+
+  /* overrides */
   --md-primary-fg-color: var(--orange);
   --md-primary-fg-color--light: var(--orange-light);
   --md-primary-fg-color--dark: var(--orange-dark);
 
-  --md-accent-fg-color: var(--orange-light);
-  --md-accent-fg-color--transparent: var(--orange-transparent);
+  --md-accent-fg-color: var(--blue);
+  --md-accent-fg-color--transparent: var(--blue-transparent);
 }
 
 footer {
   margin-top: 5em;
-}
-
-.md-footer-meta {
-  display: none;
 }
 
 .md-header__title {
