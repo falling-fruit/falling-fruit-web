@@ -14,6 +14,7 @@ theme:
   favicon: _assets/favicon.png
 
 plugins:
+  - search
   - git-revision-date
 
 extra_css:
