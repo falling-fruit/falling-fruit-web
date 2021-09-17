@@ -1,1 +1,4 @@
 mkdocs
+mkdocs-material
+mkdocs-git-revision-date-plugin
+mkdocs-awesome-pages-plugin
