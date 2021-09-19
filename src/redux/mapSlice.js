@@ -17,6 +17,8 @@ const DEFAULT_VIEW_STATE = {
   zoom: 1,
 }
 
+const TRACKING_LOCATION_ZOOM = 16
+
 export const setReducer = (key) => (state, action) => ({
   ...state,
   [key]: action.payload,
@@ -52,6 +54,7 @@ export const mapSlice = createSlice({
     hoveredLocationId: null,
     geolocation: null,
     isTrackingLocation: false,
+    justStartedTrackingLocation: false,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
@@ -60,6 +63,7 @@ export const mapSlice = createSlice({
     setHoveredLocationId: setReducer('hoveredLocationId'),
 
     startTrackingLocation: (state) => {
+      console.log('startTrackingLocation')
       state.isTrackingLocation = true
 
       if (state.geolocation) {
@@ -67,6 +71,9 @@ export const mapSlice = createSlice({
           lat: state.geolocation.latitude,
           lng: state.geolocation.longitude,
         }
+        state.view.zoom = TRACKING_LOCATION_ZOOM
+      } else {
+        state.justStartedTrackingLocation = true
       }
     },
     stopTrackingLocation: (state) => {
@@ -74,15 +81,21 @@ export const mapSlice = createSlice({
     },
 
     geolocationChange: (state, action) => {
-      if (action.payload.error) {
+      if (action.payload.loading) {
+        // Loading
+      } else if (action.payload.error) {
         // TODO: send a toast that geolocation isn't working
+        state.isTrackingLocation = false
+        state.justStartedTrackingLocation = false
       } else if (state.isTrackingLocation) {
-        // Then move to the geolocation
+        // If user is tracking location, then center screen continually on geolocation
 
-        if (state.geolocation?.loading && !action.payload.loading) {
-          // Geolocation just kicked in
-          state.view.zoom = 16
+        if (state.justStartedTrackingLocation) {
+          // If user just started tracking location, then we should zoom in, too
+          state.justStartedTrackingLocation = false
+          state.view.zoom = TRACKING_LOCATION_ZOOM
         }
+        // Otherwise, keep the current zoom and re-center the screen
 
         state.view.center = {
           lat: action.payload.latitude,
