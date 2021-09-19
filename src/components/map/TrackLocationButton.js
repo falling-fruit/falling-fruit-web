@@ -14,7 +14,7 @@ const spin = keyframes`
   to {
     transform: rotate(360deg);
   }
-`
+` // TODO: whole icon is spinning for some reason
 
 const SpinningLoader = styled(LoaderAlt)`
   animation: 1s linear ${spin} infinite;
