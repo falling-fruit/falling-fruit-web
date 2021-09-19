@@ -54,7 +54,7 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
   ...props,
 }))`
   svg {
-    padding: 15px;
+    padding: 10px;
   }
 
   position: absolute;
