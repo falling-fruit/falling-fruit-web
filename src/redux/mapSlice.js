@@ -55,6 +55,7 @@ export const mapSlice = createSlice({
     geolocation: null,
     isTrackingLocation: false,
     justStartedTrackingLocation: false,
+    locationRequested: false,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
@@ -63,7 +64,7 @@ export const mapSlice = createSlice({
     setHoveredLocationId: setReducer('hoveredLocationId'),
 
     startTrackingLocation: (state) => {
-      console.log('startTrackingLocation')
+      state.locationRequested = true
       state.isTrackingLocation = true
 
       if (state.geolocation) {

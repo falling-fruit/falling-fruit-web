@@ -9,7 +9,6 @@ export const ConnectedGeolocation = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(geolocation)
     dispatch(geolocationChange(geolocation))
   }, [geolocation, dispatch])
 

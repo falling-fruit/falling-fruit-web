@@ -8,11 +8,9 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
-import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
@@ -23,26 +21,11 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds } from '../../utils/viewportBounds'
 import Filter from '../filter/Filter'
 import FilterIconButton from '../filter/FilterIconButton'
+import TrackLocationButton from '../map/TrackLocationButton'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
 
 const { googleMapLoader } = GoogleMapReact
-
-const CurrentLocationButton = styled.button.attrs({
-  children: <CurrentLocation size={24} />,
-})`
-  &:enabled {
-    cursor: pointer;
-  }
-
-  svg {
-    color: ${({ theme }) => theme.blue};
-  }
-
-  &:disabled svg {
-    color: ${({ theme }) => theme.tertiaryText};
-  }
-`
 
 // TODO: ask Siraj how highlighting should look
 // TODO: for long option descriptions, scroll to beginning of input
@@ -82,7 +65,6 @@ const SearchBarContainer = styled.div`
 const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
-  const geolocation = useGeolocation()
 
   const filterOpen = useSelector((state) => state.filter.isOpen)
 
@@ -135,14 +117,7 @@ const Search = (props) => {
           onChange={handleChange}
           disabled={!ready}
           icon={<SearchAlt2 />}
-          prepend={
-            isDesktop && (
-              <CurrentLocationButton
-                disabled={geolocation.latitude === null}
-                onClick={() => handleSelect('Current Location')}
-              />
-            )
-          }
+          prepend={isDesktop && <TrackLocationButton isIcon={false} />}
           placeholder="Search for a location..."
         />
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -6,7 +6,6 @@ import styled from 'styled-components/macro'
 import {
   clusterClick,
   restoreOldView,
-  startTrackingLocation,
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
@@ -16,9 +15,9 @@ import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import TrackLocationButton from '../ui/TrackLocationButton'
 import { ConnectedGeolocation } from './ConnectedGeolocation'
 import Map from './Map'
+import TrackLocationButton from './TrackLocationButton'
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
@@ -45,10 +44,7 @@ const MapPage = ({ isDesktop }) => {
   const isLoading = useSelector((state) => state.map.isLoading)
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
   const geolocation = useSelector((state) => state.map.geolocation)
-  const isTrackingLocation = useSelector(
-    (state) => state.map.isTrackingLocation,
-  )
-  const [locationRequested, setLocationRequested] = useState(false)
+  const locationRequested = useSelector((state) => state.map.locationRequested)
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -76,18 +72,7 @@ const MapPage = ({ isDesktop }) => {
       ) : (
         !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
-      {!isDesktop && (
-        <TrackLocationButton
-          $disabled={geolocation?.error}
-          $loading={geolocation?.loading}
-          $active={isTrackingLocation}
-          onClick={() => {
-            dispatch(startTrackingLocation())
-            navigator.geolocation.getCurrentPosition(console.log)
-            setLocationRequested(true)
-          }}
-        />
-      )}
+      {!isDesktop && <TrackLocationButton isIcon />}
 
       {locationRequested && <ConnectedGeolocation />}
 
