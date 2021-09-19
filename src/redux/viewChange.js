@@ -17,8 +17,6 @@ import {
  */
 export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
-const STOP_TRACKING_LOCATION_DIST = 2000
-
 export const getIsShowingClusters = (state) =>
   state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
 
@@ -52,7 +50,7 @@ export const fetchLocations = () => (dispatch, getState) => {
   }
 }
 
-const shouldStopTrackingLocation = (geolocation, newView) => {
+const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
   // Allows the user a certain amount of leeway to adjust the zoom without disabling tracking current location
 
   if (!geolocation || geolocation.loading) {
@@ -78,13 +76,22 @@ const shouldStopTrackingLocation = (geolocation, newView) => {
     STOP_TRACKING_LOCATION_DIST,
   )
   */
-  return screenDist >= STOP_TRACKING_LOCATION_DIST
+  return screenDist >= threshold
 }
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
 
-  if (shouldStopTrackingLocation(state.map.geolocation, newView)) {
+  // TODO: fine-tune this constant
+  const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
+
+  if (
+    shouldStopTrackingLocation(
+      state.map.geolocation,
+      newView,
+      stopTrackingLocationThreshold,
+    )
+  ) {
     dispatch(stopTrackingLocation())
   }
 
