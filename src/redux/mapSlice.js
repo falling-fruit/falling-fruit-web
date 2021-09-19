@@ -39,7 +39,9 @@ export const fetchMapClusters = createAsyncThunk(
   'map/fetchMapClusters',
   async (_, { getState }) => {
     const state = getState()
-    return await getClusters(selectParams(state, { zoom: state.map.view.zoom }))
+    return await getClusters(
+      selectParams(state, { zoom: state.map.view.zoom + 1 }),
+    )
   },
 )
 
