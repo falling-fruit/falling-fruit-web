@@ -67,12 +67,17 @@ const shouldStopTrackingLocation = (geolocation, newView) => {
   // TODO: fine-tune this formula
   const screenDist = dist * Math.pow(Math.pow(2, newView.zoom), 2)
 
+  // Uncomment if fine-tuning screenDist formula
+  /*
   console.log(
-    'shouldStopTrackingLocation',
+    'shouldStopTrackingLocation. zoom:',
     newView.zoom,
+    'screenDist:',
     screenDist,
+    'threshold:',
     STOP_TRACKING_LOCATION_DIST,
   )
+  */
   return screenDist >= STOP_TRACKING_LOCATION_DIST
 }
 
