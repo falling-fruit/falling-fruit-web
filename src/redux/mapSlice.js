@@ -63,7 +63,6 @@ export const mapSlice = createSlice({
       state.isTrackingLocation = true
 
       if (state.geolocation) {
-        state.view.zoom = 16
         state.view.center = {
           lat: state.geolocation.latitude,
           lng: state.geolocation.longitude,
@@ -77,10 +76,19 @@ export const mapSlice = createSlice({
     geolocationChange: (state, action) => {
       state.geolocation = action.payload
 
-      if (state.isTrackingLocation) {
+      if (action.payload.error) {
+        // TODO: send a toast that geolocation isn't working
+      } else if (state.isTrackingLocation) {
+        // Then move to the geolocation
+
+        if (state.geolocation?.loading && !action.payload.loading) {
+          // Geolocation just kicked in
+          state.view.zoom = 16
+        }
+
         state.view.center = {
-          lat: state.geolocation.latitude,
-          lng: state.geolocation.longitude,
+          lat: action.payload.latitude,
+          lng: action.payload.longitude,
         }
       }
     },

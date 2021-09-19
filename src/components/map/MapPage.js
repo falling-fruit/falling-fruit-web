@@ -78,9 +78,12 @@ const MapPage = ({ isDesktop }) => {
       )}
       {!isDesktop && (
         <TrackLocationButton
+          $disabled={geolocation?.error}
+          $loading={geolocation?.loading}
           $active={isTrackingLocation}
           onClick={() => {
             dispatch(startTrackingLocation())
+            navigator.geolocation.getCurrentPosition(console.log)
             setLocationRequested(true)
           }}
         />
