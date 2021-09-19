@@ -17,7 +17,7 @@ import {
  */
 export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
 
-const STOP_TRACKING_LOCATION_DIST = 0.0000001
+const STOP_TRACKING_LOCATION_DIST = 2000
 
 export const getIsShowingClusters = (state) =>
   state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
@@ -53,7 +53,9 @@ export const fetchLocations = () => (dispatch, getState) => {
 }
 
 const shouldStopTrackingLocation = (geolocation, newView) => {
-  if (!geolocation) {
+  // Allows the user a certain amount of leeway to adjust the zoom without disabling tracking current location
+
+  if (!geolocation || geolocation.loading) {
     return false
   }
 
@@ -61,9 +63,17 @@ const shouldStopTrackingLocation = (geolocation, newView) => {
   const { latitude, longitude } = geolocation
 
   const dist = Math.pow(lat - latitude, 2) + Math.pow(longitude - lng, 2)
+  // We need to take into account new zoom to convert true distance to how much the user moved the center on the screen
+  // TODO: fine-tune this formula
+  const screenDist = dist * Math.pow(Math.pow(2, newView.zoom), 2)
 
-  console.log('shouldStopTrackingLocation', geolocation, newView, dist)
-  return dist >= STOP_TRACKING_LOCATION_DIST
+  console.log(
+    'shouldStopTrackingLocation',
+    newView.zoom,
+    screenDist,
+    STOP_TRACKING_LOCATION_DIST,
+  )
+  return screenDist >= STOP_TRACKING_LOCATION_DIST
 }
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
