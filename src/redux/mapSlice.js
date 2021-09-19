@@ -74,8 +74,6 @@ export const mapSlice = createSlice({
     },
 
     geolocationChange: (state, action) => {
-      state.geolocation = action.payload
-
       if (action.payload.error) {
         // TODO: send a toast that geolocation isn't working
       } else if (state.isTrackingLocation) {
@@ -91,6 +89,8 @@ export const mapSlice = createSlice({
           lng: action.payload.longitude,
         }
       }
+
+      state.geolocation = action.payload
     },
 
     zoomInAndSave: (state) => {
