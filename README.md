@@ -38,6 +38,18 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
+      <a href="https://linkedin.com/in/sirajchokshi">
+        <img
+          src="https://avatars.githubusercontent.com/u/19193347"
+          width="500px"
+        />
+        <br />
+        <b>Siraj Chokshi</b>
+        <br />
+        <sub>Product Manager</sub>
+      </a>
+    </td>
+    <td align="center">
       <a href="http://www.linkedin.com/in/jeffrey-tang/">
         <img
           src="https://uiuc.hack4impact.org/images/people/jeffrey_tang.jpg"
@@ -47,18 +59,6 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
         <b>Jeffrey Tang</b>
         <br />
         <sub>Technical Lead</sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://linkedin.com/in/sirajchokshi">
-        <img
-          src="https://avatars.githubusercontent.com/u/19193347"
-          width="500px"
-        />
-        <br />
-        <b>Siraj Chokshi</b>
-        <br />
-        <sub>Product Designer</sub>
       </a>
     </td>
     <td align="center">
@@ -83,6 +83,57 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
         />
         <br />
         <b>Arman Rafati</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#ashanks-linkedin">
+        <img
+          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          width="500px"
+        />
+        <br />
+        <b>Ashank Behara</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#daniels-linkedin">
+        <img
+          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          width="500px"
+        />
+        <br />
+        <b>Daniel Moon</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#riyas-linkedin">
+        <img
+          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          width="500px"
+        />
+        <br />
+        <b>Riya Jain</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="#alberts-linkedin">
+        <img
+          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          width="500px"
+        />
+        <br />
+        <b>Albert Xiao</b>
         <br />
         <sub>Software Developer</sub>
       </a>
