@@ -2,36 +2,36 @@
   "mapping": [
     { "fix": ["🔧"] },
     { "bug": ["🐛"] },
-    
+
     { "authentication": ["🔒"] },
-    
+
     { "design": ["🎨"] },
     { "style": ["🎨"] },
 
     { "desktop": ["💻"] },
     { "mobile": ["📱"] },
     { "responsive": ["📱"] },
-    
+
     { "docs": ["📚"] },
     { "documentation": ["📚"] },
-    
+
     { "location": ["📍"] },
     { "locations": ["📍"] },
     { "map": ["🗺"] },
     { "settings": ["⚙️"] },
     { "image": ["📷"] },
     { "photo": ["📷"] },
-    
+
     { "internationalize": ["💬"] },
     { "i18n": ["💬"] },
-    
+
     { "redux": ["🔄"] },
     { "context": ["🔄"] },
-    
+
     { "search": ["🔍"] },
     { "filter": ["🎛"] },
     { "filtering": ["🎛"] },
-    
+
     { "patch": ["🤕"] },
     { "upgrade": ["⬆️"] },
     { "update": ["⬆️"] },
