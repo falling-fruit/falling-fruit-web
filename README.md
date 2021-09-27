@@ -127,9 +127,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
   </tr>
   <tr>
     <td align="center">
-      <a href="#alberts-linkedin">
+      <a href="https://www.linkedin.com/in/albert-xiao-7b697119a/">
         <img
-          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          src="https://user-images.githubusercontent.com/25853164/134980925-b6a9000f-f790-4016-bc92-4fc06ddebc5e.jpg"
           width="500px"
         />
         <br />
