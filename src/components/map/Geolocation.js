@@ -36,7 +36,7 @@ const Pin = styled.div`
 
 const GeolocationWrapper = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   &::before,
   &::after {
