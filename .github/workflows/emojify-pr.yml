@@ -13,4 +13,4 @@ jobs:
         uses: pineapplelol/emojify-pr-title@v1.4.1
         with:
           use-emoji-map: true
-          emoji-map: https://github.com/hack4impact-uiuc/falling-fruit/blob/main/.github/workflows/mappings.json
+          emoji-map: https://raw.githubusercontent.com/hack4impact-uiuc/falling-fruit/main/.github/workflows/mappings.json
