@@ -169,6 +169,8 @@ const SettingsPage = ({ desktop }) => {
             onChange={(option) => {
               i18n.changeLanguage(option.value)
             }}
+            isSearchable={false}
+            menuPlacement="top"
           />
         }
       />
@@ -187,6 +189,8 @@ const SettingsPage = ({ desktop }) => {
             options={[]}
             isDisabled={!overrideDataLanguage}
             placeholder={t('Select...')}
+            isSearchable={false}
+            menuPlacement="top"
           />
         }
       />
