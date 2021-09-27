@@ -45,7 +45,7 @@ const Map = ({
     onChange={onViewChange}
     resetBoundsOnResize
   >
-    {geolocation && !geolocation?.loading && (
+    {geolocation && !geolocation.loading && (
       <Geolocation
         onClick={onGeolocationClick}
         lat={geolocation.latitude}
