@@ -1,33 +1,23 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useRouteMatch } from 'react-router-dom'
-import { useGeolocation } from 'react-use'
 import styled from 'styled-components/macro'
 
 import {
   clusterClick,
   restoreOldView,
-  setHoveredLocationId,
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import {
-  allLocationsSelector,
-  viewChangeAndFetch,
-} from '../../redux/viewChange'
+import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import { ConnectedGeolocation } from './ConnectedGeolocation'
 import Map from './Map'
-
-/**
- * Maximum zoom level at which clusters will be displayed. At zoom levels
- * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
- * @constant {number}
- */
-export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+import TrackLocationButton from './TrackLocationButton'
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
@@ -35,7 +25,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   bottom: 10px;
 `
 
-const MapPage = ({ desktop }) => {
+const MapPage = ({ isDesktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
     path: '/(map|list)/entry/:entryId',
@@ -49,13 +39,12 @@ const MapPage = ({ desktop }) => {
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
   const view = useSelector((state) => state.map.view)
-  const allLocations = useSelector(allLocationsSelector)
+  const allLocations = useSelector(getAllLocations)
   const clusters = useSelector((state) => state.map.clusters)
   const isLoading = useSelector((state) => state.map.isLoading)
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
-
-  //const geolocation = useGeolocation({ enableHighAccuracy: true })
-  const geolocation = useGeolocation()
+  const geolocation = useSelector((state) => state.map.geolocation)
+  const locationRequested = useSelector((state) => state.map.locationRequested)
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -65,13 +54,11 @@ const MapPage = ({ desktop }) => {
     }
   }, [dispatch, isAddingLocation])
 
-  const handleLocationClick = (location) => {
+  const handleLocationClick = (location) =>
     history.push({
       pathname: `/map/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
-    dispatch(setHoveredLocationId(null))
-  }
 
   const handleAddLocationClick = () => {
     history.push('/map/entry/new')
@@ -83,8 +70,12 @@ const MapPage = ({ desktop }) => {
       {isAddingLocation ? (
         <AddLocationPin />
       ) : (
-        !desktop && <AddLocationButton onClick={handleAddLocationClick} />
+        !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
+      {!isDesktop && <TrackLocationButton isIcon />}
+
+      {locationRequested && <ConnectedGeolocation />}
+
       <Map
         bootstrapURLKeys={bootstrapURLKeys}
         view={view}
@@ -98,8 +89,7 @@ const MapPage = ({ desktop }) => {
                 typeName: getCommonName(location.type_ids[0]),
               }))
         }
-        selectedLocationId={entryId}
-        hoveredLocationId={hoveredLocationId}
+        activeLocationId={entryId || hoveredLocationId}
         onViewChange={(newView) => dispatch(viewChangeAndFetch(newView))}
         onGeolocationClick={() => {
           dispatch(

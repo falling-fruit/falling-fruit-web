@@ -34,6 +34,9 @@ export const listSlice = createSlice({
   },
   reducers: {
     setUpdateOnMapMove: setReducer('updateOnMapMove'),
+    clearListLocations: (state) => {
+      state.locations = []
+    },
   },
   extraReducers: {
     [viewChange.type]: (state, action) => {
@@ -76,6 +79,6 @@ export const listSlice = createSlice({
   },
 })
 
-export const { setUpdateOnMapMove } = listSlice.actions
+export const { setUpdateOnMapMove, clearListLocations } = listSlice.actions
 
 export default listSlice.reducer
