@@ -3,50 +3,35 @@ export const tableData = [
     id: 1,
     common_name: 'Honey locust',
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
-    links: [
-      'https://fallingfruit.org/wikipedia_icon.png',
-      'http://plants.usda.gov/java/profile?symbol=ROPS',
-    ],
+    links: ['https://fallingfruit.org/wikipedia_icon.png'],
     locations: 9,
   },
   {
     id: 2,
     common_name: 'Honey qqq',
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
-    links: [
-      'https://fallingfruit.org/wikipedia_icon.png',
-      'http://plants.usda.gov/java/profile?symbol=ROPS',
-    ],
+    links: ['https://fallingfruit.org/wikipedia_icon.png'],
     locations: 9,
   },
   {
     id: 3,
     common_name: 'ddd rrr',
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
-    links: [
-      'https://fallingfruit.org/wikipedia_icon.png',
-      'http://plants.usda.gov/java/profile?symbol=ROPS',
-    ],
+    links: ['https://fallingfruit.org/wikipedia_icon.png'],
     locations: 5,
   },
   {
     id: 4,
     common_name: 'ss ff',
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
-    links: [
-      'https://fallingfruit.org/wikipedia_icon.png',
-      'http://plants.usda.gov/java/profile?symbol=ROPS',
-    ],
+    links: ['i  ', 'b '],
     locations: 9,
   },
   {
     id: 5,
     common_name: 'Honey dd',
     scientific_name: " pseudoacacia 'Unifoliola",
-    links: [
-      'https://fallingfruit.org/wikipedia_icon.png',
-      'http://plants.usda.gov/java/profile?symbol=ROPS',
-    ],
+    links: [],
     locations: 4,
   },
 ]
@@ -54,10 +39,10 @@ export const tableData = [
 export default function getTableData(data) {
   // object initialization
   let result = {
-    columns: [],
+    columns: new Map(),
     data,
   }
-  let columns = []
+  let columns = new Map()
 
   // return on null case
   if (data.length === 0) {
@@ -66,7 +51,6 @@ export default function getTableData(data) {
 
   //declare column objects
   let json_keys = Object.keys(data[0])
-  console.log(json_keys)
   for (var i = 0; i < json_keys.length; i++) {
     let key = json_keys[i]
     if (key === 'id') {
@@ -96,9 +80,8 @@ export default function getTableData(data) {
     column.name = name
 
     // append to columns object
-    columns.push(column)
+    columns.set(key, column)
   }
   result.columns = columns
-
   return result
 }

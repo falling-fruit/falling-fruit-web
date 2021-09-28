@@ -44,6 +44,31 @@ const ComponentDemos = () => {
   //   console.log('Selected type IDs: ', typeIds)
   // }
 
+  const custom_link_sort = (row_one, row_two) => {
+    if (row_one.links.length > row_two.links.length) {
+      return 1
+    } else if (row_two.links.length > row_one.links.length) {
+      return -1
+    }
+    return 0
+  }
+
+  let sorted_columns = [
+    {
+      id: 'locations',
+      custom_sort: false,
+    },
+    {
+      id: 'links',
+      custom_sort: true,
+      sortFunction: custom_link_sort,
+    },
+    {
+      id: 'common_name',
+      custom_sort: false,
+    },
+  ]
+
   let table_data = getTableData(tableData)
   return (
     <div>
@@ -140,7 +165,11 @@ const ComponentDemos = () => {
         step={currentStep}
         onChange={setCurrentStep}
       /> */}
-      <DataTableComponent columns={table_data.columns} data={table_data.data} />
+      <DataTableComponent
+        columns={table_data.columns}
+        data={table_data.data}
+        sorted_columns={sorted_columns}
+      />
     </div>
   )
 }
