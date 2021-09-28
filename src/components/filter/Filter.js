@@ -5,7 +5,8 @@ import styled from 'styled-components/macro'
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
 import CheckboxFilters from './CheckboxFilters'
-import TreeSelect from './TreeSelect'
+//import TreeSelect from './TreeSelect'
+import RCTreeSelect from './RCTreeSelect'
 
 const StyledFilter = styled.div`
   box-sizing: border-box;
@@ -50,7 +51,7 @@ const Filter = ({ isOpen }) => {
       <StyledFilter>
         <div>
           <p className="edible-type-text">{t('Edible Types')}</p>
-          <TreeSelect
+          <RCTreeSelect
             data={treeData}
             shouldZoomIn={view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT}
             loading={isLoading}

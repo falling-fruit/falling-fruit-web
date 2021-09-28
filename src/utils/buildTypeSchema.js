@@ -70,7 +70,7 @@ const addTreeSelectFields = (root, checkedTypes, showScientificNames) => {
       ? `${commonName} [${scientificName}]`
       : commonName
 
-  root.label = `${name} (${root.count})`
+  root.title = `${name} (${root.count})`
   // This value isn't important, as long as it's unique, because we will be using node.id
   root.value = `${root.name}-${root.id}`
   root.expanded = true
