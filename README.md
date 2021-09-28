@@ -76,9 +76,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
   </tr>
   <tr>
     <td align="center">
-      <a href="https://www.linkedin.com/in/arman-rafati-6907991b5">
+      <a href="https://www.linkedin.com/in/armanrafati/">
         <img
-          src="https://uiuc.hack4impact.org/images/people/arman_rafati.jpg"
+          src="https://user-images.githubusercontent.com/46976119/134970401-021d8107-0340-48b5-818b-e4959cdc3c13.jpg"
           width="500px"
         />
         <br />
@@ -88,7 +88,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="#ashanks-linkedin">
+      <a href="https://www.linkedin.com/in/ashankbehara/">
         <img
           src="https://uiuc.hack4impact.org/images/values/value-1.svg"
           width="500px"
@@ -100,9 +100,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="#daniels-linkedin">
+      <a href="https://www.linkedin.com/in/daniel-moon1">
         <img
-          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          src="https://uiuc.hack4impact.org/images/people/daniel_moon.jpg"
           width="500px"
         />
         <br />
@@ -112,9 +112,9 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
       </a>
     </td>
     <td align="center">
-      <a href="#riyas-linkedin">
+      <a href="https://www.linkedin.com/in/riyajain5/">
         <img
-          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          src="https://uiuc.hack4impact.org/images/people/riya_jain.jpg"
           width="500px"
         />
         <br />

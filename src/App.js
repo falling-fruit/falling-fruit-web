@@ -1,18 +1,17 @@
 import WindowSize from '@reach/window-size'
-import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import ComponentDemos from './components/ComponentDemos'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import { history, store } from './redux/store'
+import { store } from './redux/store'
 import { ConnectedBreakpoint } from './utils/useBreakpoint'
 
 const App = () => (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/">
@@ -30,7 +29,7 @@ const App = () => (
         </WindowSize>
         <ConnectedBreakpoint />
       </ThemeProvider>
-    </ConnectedRouter>
+    </BrowserRouter>
   </Provider>
 )
 
