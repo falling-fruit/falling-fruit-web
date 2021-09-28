@@ -1,51 +1,80 @@
-import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
-import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
-import { useEffect, useState } from 'react'
+// import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
+// import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
+// import { useEffect, useState } from 'react'
 
-import { getTypes } from '../utils/api'
-import { ReportModal } from './form/ReportModal'
-import Button from './ui/Button'
-import CaptionInput from './ui/CaptionInput'
-import Input from './ui/Input'
-import ListEntry from './ui/ListEntry'
-import ProgressBar from './ui/ProgressBar'
-import { Select } from './ui/Select'
-import {
-  AccordionItem,
-  AccordionPanel,
-  SettingsAccordion,
-  SettingsAccordionButton,
-} from './ui/SettingsAccordion'
-import { Slider } from './ui/Slider'
-import { Tag, TagList } from './ui/Tag'
+// import { getTypes } from '../utils/api'
+import { tableData } from '../utils/formatTableData'
+// import { ReportModal } from './form/ReportModal'
+// import Button from './ui/Button'
+// import CaptionInput from './ui/CaptionInput'
+import DataTableComponent from './ui/DataTable'
+// import Input from './ui/Input'
+// import ListEntry from './ui/ListEntry'
+// import ProgressBar from './ui/ProgressBar'
+// import { Select } from './ui/Select'
+// import {
+//   AccordionItem,
+//   AccordionPanel,
+//   SettingsAccordion,
+//   SettingsAccordionButton,
+// } from './ui/SettingsAccordion'
+// import { Slider } from './ui/Slider'
+// import { Tag, TagList } from './ui/Tag'
 
 const ComponentDemos = () => {
   // TODO: Move form components and type select logic to separate Form page
-  const [showDialog, setShowDialog] = useState(false)
-  const [currentStep, setCurrentStep] = useState(2)
-  const [typeOptions, setTypeOptions] = useState([])
+  // const [showDialog, setShowDialog] = useState(false)
+  // const [currentStep, setCurrentStep] = useState(2)
+  // const [typeOptions, setTypeOptions] = useState([])
 
-  useEffect(() => {
-    async function fetchTypes() {
-      const types = await getTypes()
-      const options = types.map((type) => ({
-        value: type.id,
-        label: type.name,
-      }))
-      setTypeOptions(options)
-    }
-    fetchTypes()
-  }, [])
+  // useEffect(() => {
+  //   async function fetchTypes() {
+  //     // const types = await getTypes()
+  //     // const options = types.map((type) => ({
+  //     //   value: type.id,
+  //     //   label: type.name,
+  //     // }))
+  //     // setTypeOptions(options)
+  //   }
+  //   fetchTypes()
+  // }, [])
 
-  const handleTypeSelect = (types) => {
-    const typeIds = types.map((type) => type.value)
-    console.log('Selected type IDs: ', typeIds)
-  }
+  // const handleTypeSelect = (types) => {
+  //   const typeIds = types.map((type) => type.value)
+  //   console.log('Selected type IDs: ', typeIds)
+  // }
+
+  const columns = [
+    {
+      id: 'commonName',
+      name: 'Common name',
+      selector: (row) => row.commonName,
+      sortable: true,
+    },
+    {
+      id: 'scientificName',
+      name: 'Scientific name',
+      selector: (row) => row.scientificName,
+      sortable: true,
+    },
+    {
+      id: 'links',
+      name: 'Links',
+      selector: (row) => row.links,
+      sortable: true,
+    },
+    {
+      id: 'locations',
+      name: 'Locations',
+      selector: (row) => row.locations,
+      sortable: true,
+    },
+  ]
 
   return (
-    <>
+    <div>
       <p>Settings</p>
-      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+      {/* <button onClick={() => setShowDialog(true)}>Show Dialog</button>
       <ReportModal
         name="American Tulip Tree"
         isOpen={showDialog}
@@ -112,9 +141,9 @@ const ComponentDemos = () => {
         style={{ margin: '0 40px' }}
         labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
         steps={5}
-      />
+      /> */}
 
-      <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
+      {/* <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
       <SettingsAccordion>
         <AccordionItem>
           <SettingsAccordionButton LeftIcon={Cog} text="Options" />
@@ -136,10 +165,10 @@ const ComponentDemos = () => {
         labels={['step1', 'step2', 'step3', 'step4', 'step5']}
         step={currentStep}
         onChange={setCurrentStep}
-      />
-      <br />
-      <br />
-    </>
+      /> */}
+
+      <DataTableComponent columns={columns} data={tableData} />
+    </div>
   )
 }
 
