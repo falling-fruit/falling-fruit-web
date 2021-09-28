@@ -31,7 +31,7 @@ export const tableData = [
     id: 5,
     common_name: 'Honey dd',
     scientific_name: " pseudoacacia 'Unifoliola",
-    links: [],
+    links: ['ashank ', 'is ', 'hot'],
     locations: 4,
   },
 ]

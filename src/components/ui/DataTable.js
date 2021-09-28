@@ -1,7 +1,7 @@
 import DataTable from 'react-data-table-component'
 
 const DataTableComponent = ({ data, columns, sorted_columns }) => {
-  function set_sortable() {
+  function set_sortable_columns() {
     for (var i = 0; i < sorted_columns.length; i++) {
       let key = sorted_columns[i].id
       if (!columns.has(key)) {
@@ -18,7 +18,7 @@ const DataTableComponent = ({ data, columns, sorted_columns }) => {
     return Array.from(columns.values())
   }
 
-  return <DataTable pagination columns={set_sortable()} data={data} />
+  return <DataTable pagination columns={set_sortable_columns()} data={data} />
 }
 
 export default DataTableComponent
