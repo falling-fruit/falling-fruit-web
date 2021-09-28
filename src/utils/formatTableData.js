@@ -1,8 +1,8 @@
 export const tableData = [
   {
     id: 1,
-    commonName: 'Honey locust',
-    scientificName: "Robinia pseudoacacia 'Unifoliola",
+    common_name: 'Honey locust',
+    scientific_name: "Robinia pseudoacacia 'Unifoliola",
     links: [
       'https://fallingfruit.org/wikipedia_icon.png',
       'http://plants.usda.gov/java/profile?symbol=ROPS',
@@ -11,8 +11,8 @@ export const tableData = [
   },
   {
     id: 2,
-    commonName: 'Honey qqq',
-    scientificName: "Robinia pseudoacacia 'Unifoliola",
+    common_name: 'Honey qqq',
+    scientific_name: "Robinia pseudoacacia 'Unifoliola",
     links: [
       'https://fallingfruit.org/wikipedia_icon.png',
       'http://plants.usda.gov/java/profile?symbol=ROPS',
@@ -21,8 +21,8 @@ export const tableData = [
   },
   {
     id: 3,
-    commonName: 'ddd rrr',
-    scientificName: "Robinia pseudoacacia 'Unifoliola",
+    common_name: 'ddd rrr',
+    scientific_name: "Robinia pseudoacacia 'Unifoliola",
     links: [
       'https://fallingfruit.org/wikipedia_icon.png',
       'http://plants.usda.gov/java/profile?symbol=ROPS',
@@ -31,8 +31,8 @@ export const tableData = [
   },
   {
     id: 4,
-    commonName: 'ss ff',
-    scientificName: "Robinia pseudoacacia 'Unifoliola",
+    common_name: 'ss ff',
+    scientific_name: "Robinia pseudoacacia 'Unifoliola",
     links: [
       'https://fallingfruit.org/wikipedia_icon.png',
       'http://plants.usda.gov/java/profile?symbol=ROPS',
@@ -41,8 +41,8 @@ export const tableData = [
   },
   {
     id: 5,
-    commonName: 'Honey dd',
-    scientificName: " pseudoacacia 'Unifoliola",
+    common_name: 'Honey dd',
+    scientific_name: " pseudoacacia 'Unifoliola",
     links: [
       'https://fallingfruit.org/wikipedia_icon.png',
       'http://plants.usda.gov/java/profile?symbol=ROPS',
@@ -50,3 +50,55 @@ export const tableData = [
     locations: 4,
   },
 ]
+
+export default function getTableData(data) {
+  // object initialization
+  let result = {
+    columns: [],
+    data,
+  }
+  let columns = []
+
+  // return on null case
+  if (data.length === 0) {
+    return result
+  }
+
+  //declare column objects
+  let json_keys = Object.keys(data[0])
+  console.log(json_keys)
+  for (var i = 0; i < json_keys.length; i++) {
+    let key = json_keys[i]
+    if (key === 'id') {
+      continue
+    }
+
+    //default column object
+    let column = {
+      id: '',
+      name: '',
+      selector: (row) => row[key],
+      sortable: false,
+    }
+
+    // unique column id
+    column.id = key
+
+    // column title
+    let splits = key.split('_')
+    let name = ''
+    for (var j = 0; j < splits.length; j++) {
+      let str = splits[j]
+      let lower = str.toLowerCase()
+      // eslint-disable-next-line prefer-template
+      name = name + str.charAt(0).toUpperCase() + lower.slice(1) + ' '
+    }
+    column.name = name
+
+    // append to columns object
+    columns.push(column)
+  }
+  result.columns = columns
+
+  return result
+}

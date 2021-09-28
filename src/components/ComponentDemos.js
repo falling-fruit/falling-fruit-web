@@ -3,7 +3,7 @@
 // import { useEffect, useState } from 'react'
 
 // import { getTypes } from '../utils/api'
-import { tableData } from '../utils/formatTableData'
+import getTableData, { tableData } from '../utils/formatTableData'
 // import { ReportModal } from './form/ReportModal'
 // import Button from './ui/Button'
 // import CaptionInput from './ui/CaptionInput'
@@ -44,37 +44,11 @@ const ComponentDemos = () => {
   //   console.log('Selected type IDs: ', typeIds)
   // }
 
-  const columns = [
-    {
-      id: 'commonName',
-      name: 'Common name',
-      selector: (row) => row.commonName,
-      sortable: true,
-    },
-    {
-      id: 'scientificName',
-      name: 'Scientific name',
-      selector: (row) => row.scientificName,
-      sortable: true,
-    },
-    {
-      id: 'links',
-      name: 'Links',
-      selector: (row) => row.links,
-      sortable: true,
-    },
-    {
-      id: 'locations',
-      name: 'Locations',
-      selector: (row) => row.locations,
-      sortable: true,
-    },
-  ]
-
+  let table_data = getTableData(tableData)
   return (
     <div>
-      <p>Settings</p>
-      {/* <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+      {/*<p>Settings</p>
+       <button onClick={() => setShowDialog(true)}>Show Dialog</button>
       <ReportModal
         name="American Tulip Tree"
         isOpen={showDialog}
@@ -166,8 +140,7 @@ const ComponentDemos = () => {
         step={currentStep}
         onChange={setCurrentStep}
       /> */}
-
-      <DataTableComponent columns={columns} data={tableData} />
+      <DataTableComponent columns={table_data.columns} data={table_data.data} />
     </div>
   )
 }
