@@ -54,7 +54,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
     <td align="center">
       <a href="http://www.github.com/laurenho025">
         <img
-          src="https://uiuc.hack4impact.org/images/people/lauren_ho.jpg"
+          src="https://avatars.githubusercontent.com/u/42976373"
           width="500px"
         />
         <br />
