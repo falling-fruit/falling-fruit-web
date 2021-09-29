@@ -23,20 +23,10 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
 
 ## Team
 
+### Fall 2021
+
 <table align="center">
   <tr>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/arpanlaha/">
-        <img
-          src="https://uiuc.hack4impact.org/images/people/rebecca_xun.jpg"
-          width="500px"
-        />
-        <br />
-        <b>Rebecca Xun</b>
-        <br />
-        <sub>Product Manager</sub>
-      </a>
-    </td>
     <td align="center">
       <a href="https://linkedin.com/in/sirajchokshi">
         <img
@@ -52,7 +42,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
     <td align="center">
       <a href="http://www.linkedin.com/in/jeffrey-tang/">
         <img
-          src="https://uiuc.hack4impact.org/images/people/jeffrey_tang.jpg"
+          src="https://user-images.githubusercontent.com/4369024/135347659-638b9e56-0875-4f57-8923-858d65e819e1.jpg"
           width="500px"
         />
         <br />
@@ -73,8 +63,6 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
         <sub>Software Developer</sub>
       </a>
     </td>
-  </tr>
-  <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/armanrafati/">
         <img
@@ -87,6 +75,8 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
         <sub>Software Developer</sub>
       </a>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/ashankbehara/">
         <img
@@ -123,9 +113,6 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
         <sub>Software Developer</sub>
       </a>
     </td>
-
-  </tr>
-  <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/albert-xiao-7b697119a/">
         <img
@@ -134,6 +121,75 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
         />
         <br />
         <b>Albert Xiao</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+### Spring 2021
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/rebeccaxun/">
+        <img
+          src="https://uiuc.hack4impact.org/images/people/rebecca_xun.jpg"
+          width="500px"
+        />
+        <br />
+        <b>Rebecca Xun</b>
+        <br />
+        <sub>Product Manager</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="http://www.linkedin.com/in/jeffrey-tang/">
+        <img
+          src="https://uiuc.hack4impact.org/images/people/jeffrey_tang.jpg"
+          width="500px"
+        />
+        <br />
+        <b>Jeffrey Tang</b>
+        <br />
+        <sub>Technical Lead</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://linkedin.com/in/sirajchokshi">
+        <img
+          src="https://avatars.githubusercontent.com/u/19193347"
+          width="500px"
+        />
+        <br />
+        <b>Siraj Chokshi</b>
+        <br />
+        <sub>Product Designer</sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="http://www.github.com/laurenho025">
+        <img
+          src="https://uiuc.hack4impact.org/images/people/lauren_ho.jpg"
+          width="500px"
+        />
+        <br />
+        <b>Lauren Ho</b>
+        <br />
+        <sub>Software Developer</sub>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/arman-rafati-6907991b5">
+        <img
+          src="https://uiuc.hack4impact.org/images/people/arman_rafati.jpg"
+          width="500px"
+        />
+        <br />
+        <b>Arman Rafati</b>
         <br />
         <sub>Software Developer</sub>
       </a>
