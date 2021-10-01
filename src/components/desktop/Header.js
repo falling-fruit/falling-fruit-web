@@ -40,7 +40,6 @@ const StyledHeader = styled.header`
           background-color: ${({ theme }) => theme.secondaryBackground};
           color: ${({ theme }) => theme.orange};
           box-sizing: border-box;
-          /* border-bottom: 1px solid ${({ theme }) => theme.orange}; */
 
           ::before {
             content: '';
@@ -80,23 +79,22 @@ const StyledHeader = styled.header`
           box-shadow: rgba(0,0,0,0.05) 0 15px 15px;
           text-align: center; 
           width: 100%;
-        }
 
-        .dropdown-content a {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-        }
+          a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+          }
 
-        .dropdown:hover .dropdown-content {
-          display: block;
-        }
+          .dropdown:hover {
+            display: block;
 
-        .dropdown:hover .dropbtn {
-          box-sizing: border-box;
-          //background-color: ${({ theme }) => theme.secondaryBackground};
-          color: ${({ theme }) => theme.text};
+            .dropbtn {
+              box-sizing: border-box;
+              color: ${({ theme }) => theme.text};
+            }
+          }
         }
 
         button {
