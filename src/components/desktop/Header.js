@@ -1,3 +1,4 @@
+import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
@@ -9,7 +10,8 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
-
+  z-index: 1;
+  
   img {
     height: 60%;
     width: auto;
@@ -18,7 +20,6 @@ const StyledHeader = styled.header`
 
   nav {
     height: 100%;
-    z-index: 2;
     ul {
       list-style: none;
       padding: 0;
@@ -39,7 +40,7 @@ const StyledHeader = styled.header`
           background-color: ${({ theme }) => theme.secondaryBackground};
           color: ${({ theme }) => theme.orange};
           box-sizing: border-box;
-          border-bottom: 3px solid ${({ theme }) => theme.orange};
+          border-bottom: 1px solid ${({ theme }) => theme.orange};
         }
 
         .dropdown {
@@ -51,17 +52,17 @@ const StyledHeader = styled.header`
           background-color: ${({ theme }) => theme.background};
           color: ${({ theme }) => theme.text};
           padding: 16px;
-          font-size: 16px;
+          display: inline;
           border: none;
         }
 
         .dropdown-content {
           display: none;
           position: absolute;
+          margin-top: 10px;
           background-color: ${({ theme }) => theme.background};
           min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          z-index: 1;
+          border-radius: 0px 0px 6px 6px;
         }
 
         .dropdown-content a {
@@ -76,7 +77,7 @@ const StyledHeader = styled.header`
         }
 
         .dropdown:hover .dropbtn {
-          background-color: ${({ theme }) => theme.secondaryBackground};
+          box-sizing: border-box;
         }
 
         button {
@@ -93,14 +94,14 @@ const StyledHeader = styled.header`
           font-family: inherit;
           font-weight: normal;
           cursor: pointer;
+          background-color: ${({ theme }) => theme.background};
         }
 
         button,
         &.active {
-          background-color: ${({ theme }) => theme.background};
           color: ${({ theme }) => theme.orange};
         }
-      }
+
     }
   }
 `
@@ -117,7 +118,9 @@ const Header = () => {
           <li>{t('Page 2')}</li>
           <li>
             <div className="dropdown">
-              <button className="dropbtn">Dropdown</button>
+              <li className="dropbtn">
+                Dropdown <CaretDown style={{ height: '8px' }} />
+              </li>
               <div className="dropdown-content">
                 <a href="#hi">Page 1</a>
                 <a href="#hi">Page 2</a>
