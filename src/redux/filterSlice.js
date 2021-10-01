@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../components/map/MapPage'
 import { getTypeCounts } from '../utils/api'
-import { buildTypeSchema, getSelectedTypes } from '../utils/buildTypeSchema'
+import { buildTypeSchema } from '../utils/buildTypeSchema'
 import { selectParams } from './selectParams'
 import { fetchLocations } from './viewChange'
 
@@ -44,7 +44,7 @@ export const filterSlice = createSlice({
       state.isOpen = false
     },
     updateSelection: (state, action) => {
-      state.types = getSelectedTypes(action.payload)
+      state.types = action.payload
     },
   },
   extraReducers: {

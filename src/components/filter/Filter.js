@@ -52,7 +52,7 @@ const Filter = ({ isOpen }) => {
         <div>
           <p className="edible-type-text">{t('Edible Types')}</p>
           <RCTreeSelect
-            data={treeData}
+            data={[treeData]}
             shouldZoomIn={view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT}
             loading={isLoading}
             onChange={(currentNode, selectedNodes) =>
