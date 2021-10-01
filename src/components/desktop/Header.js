@@ -34,14 +34,26 @@ const StyledHeader = styled.header`
         height: 100%;
         color: ${({ theme }) => theme.text};
         cursor: pointer;
-
-        li,
+        position: relative;
+        
         &.active {
           background-color: ${({ theme }) => theme.secondaryBackground};
           color: ${({ theme }) => theme.orange};
           box-sizing: border-box;
-          border-bottom: 1px solid ${({ theme }) => theme.orange};
+          /* border-bottom: 1px solid ${({ theme }) => theme.orange}; */
+
+          ::before {
+            content: '';
+            width: 100%;
+            position: absolute;
+            background-color: ${({ theme }) => theme.orange};
+            height: 3px;
+            bottom: 0;
+            left: 0;
+          }
         }
+
+
 
         .dropdown {
           position: relative;
@@ -54,15 +66,20 @@ const StyledHeader = styled.header`
           padding: 16px;
           display: inline;
           border: none;
+          height: 100%;
+          width: 100%;
         }
+
 
         .dropdown-content {
           display: none;
           position: absolute;
-          margin-top: 10px;
+          margin-top: 15px;
           background-color: ${({ theme }) => theme.background};
-          min-width: 160px;
           border-radius: 0px 0px 6px 6px;
+          box-shadow: rgba(0,0,0,0.05) 0 15px 15px;
+          text-align: center; 
+          width: 100%;
         }
 
         .dropdown-content a {
@@ -78,6 +95,8 @@ const StyledHeader = styled.header`
 
         .dropdown:hover .dropbtn {
           box-sizing: border-box;
+          //background-color: ${({ theme }) => theme.secondaryBackground};
+          color: ${({ theme }) => theme.text};
         }
 
         button {
@@ -118,9 +137,9 @@ const Header = () => {
           <li>{t('Page 2')}</li>
           <li>
             <div className="dropdown">
-              <li className="dropbtn">
+              <div className="dropbtn">
                 Dropdown <CaretDown style={{ height: '8px' }} />
-              </li>
+              </div>
               <div className="dropdown-content">
                 <a href="#hi">Page 1</a>
                 <a href="#hi">Page 2</a>
