@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypes } from '../utils/api'
-import getTableData, { tableData } from '../utils/formatTableData'
+import getTableData, { sampleTableData } from '../utils/formatTableData'
 import { ReportModal } from './form/ReportModal'
 import Button from './ui/Button'
 import CaptionInput from './ui/CaptionInput'
@@ -50,32 +50,32 @@ const ComponentDemos = () => {
     console.log('Selected type IDs: ', typeIds)
   }
 
-  const custom_link_sort = (row_one, row_two) => {
-    if (row_one.links.length > row_two.links.length) {
+  const customLinkSort = (rowOne, rowTwo) => {
+    if (rowOne.links.length > rowTwo.links.length) {
       return 1
-    } else if (row_two.links.length > row_one.links.length) {
+    } else if (rowTwo.links.length > rowOne.links.length) {
       return -1
     }
     return 0
   }
 
-  let sorted_columns = [
+  const sortedColumns = [
     {
       id: 'locations',
-      custom_sort: false,
+      customSort: false,
     },
     {
       id: 'links',
-      custom_sort: true,
-      sortFunction: custom_link_sort,
+      customSort: true,
+      sortFunction: customLinkSort,
     },
     {
       id: 'common_name',
-      custom_sort: false,
+      customSort: false,
     },
   ]
 
-  let table_data = getTableData(tableData)
+  const tableData = getTableData(sampleTableData)
   return (
     <ScrollablePage>
       <p>Settings</p>
@@ -172,9 +172,9 @@ const ComponentDemos = () => {
         onChange={setCurrentStep}
       />
       <DataTableComponent
-        columns={table_data.columns}
-        data={table_data.data}
-        sorted_columns={sorted_columns}
+        columns={tableData.columns}
+        data={tableData.data}
+        sortedColumns={sortedColumns}
       />
     </ScrollablePage>
   )

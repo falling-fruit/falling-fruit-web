@@ -21,7 +21,7 @@ const DataTableWrapper = styled.div`
 const DataTableComponent = ({ data, columns, sortedColumn }) => {
   function setSortableColumns() {
     if (columns.has('links')) {
-      let json = columns.get('links')
+      const json = columns.get('links')
       json.format = (row) => {
         const links = row.links
         return links.map((link, index) => (
@@ -34,11 +34,11 @@ const DataTableComponent = ({ data, columns, sortedColumn }) => {
     }
 
     for (let i = 0; i < sortedColumn.length; i++) {
-      let key = sortedColumn[i].id
+      const key = sortedColumn[i].id
       if (!columns.has(key)) {
         continue
       }
-      let json = columns.get(key)
+      const json = columns.get(key)
       json.sortable = true
       if (sortedColumn[i].custom_sort) {
         json.sortFunction = sortedColumn[i].sortFunction

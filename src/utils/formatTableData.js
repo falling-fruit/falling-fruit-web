@@ -1,4 +1,4 @@
-export const tableData = [
+export const sampleTableData = [
   {
     id: 1,
     common_name: 'Honey locust',
@@ -38,11 +38,11 @@ export const tableData = [
 
 export default function getTableData(data) {
   // object initialization
-  let result = {
+  const result = {
     columns: new Map(),
     data,
   }
-  let columns = new Map()
+  const columns = new Map()
 
   // return on null case
   if (data.length === 0) {
@@ -52,7 +52,7 @@ export default function getTableData(data) {
   //declare column objects
   const json_keys = Object.keys(data[0])
   for (var i = 0; i < json_keys.length; i++) {
-    let key = json_keys[i]
+    const key = json_keys[i]
     if (key === 'id') {
       continue
     }
@@ -69,7 +69,7 @@ export default function getTableData(data) {
     column.id = key
 
     // column title
-    let splits = key.split('_')
+    const splits = key.split('_')
     let name = ''
     for (const split of splits) {
       let str = split
