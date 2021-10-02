@@ -50,7 +50,7 @@ export default function getTableData(data) {
   }
 
   //declare column objects
-  let json_keys = Object.keys(data[0])
+  const json_keys = Object.keys(data[0])
   for (var i = 0; i < json_keys.length; i++) {
     let key = json_keys[i]
     if (key === 'id') {
@@ -58,7 +58,7 @@ export default function getTableData(data) {
     }
 
     //default column object
-    let column = {
+    const column = {
       id: '',
       name: '',
       selector: (row) => row[key],
@@ -71,11 +71,10 @@ export default function getTableData(data) {
     // column title
     let splits = key.split('_')
     let name = ''
-    for (var j = 0; j < splits.length; j++) {
-      let str = splits[j]
+    for (const split of splits) {
+      let str = split
       let lower = str.toLowerCase()
-      // eslint-disable-next-line prefer-template
-      name = name + str.charAt(0).toUpperCase() + lower.slice(1) + ' '
+      name = `${name + str.charAt(0).toUpperCase() + lower.slice(1)} `
     }
     column.name = name
 

@@ -18,8 +18,8 @@ const DataTableWrapper = styled.div`
   }
 `
 
-const DataTableComponent = ({ data, columns, sorted_columns }) => {
-  function set_sortable_columns() {
+const DataTableComponent = ({ data, columns, sortedColumn }) => {
+  function setSortableColumns() {
     if (columns.has('links')) {
       let json = columns.get('links')
       json.format = (row) => {
@@ -33,16 +33,15 @@ const DataTableComponent = ({ data, columns, sorted_columns }) => {
       columns.set('links', json)
     }
 
-    for (let i = 0; i < sorted_columns.length; i++) {
-      let key = sorted_columns[i].id
+    for (let i = 0; i < sortedColumn.length; i++) {
+      let key = sortedColumn[i].id
       if (!columns.has(key)) {
         continue
       }
       let json = columns.get(key)
       json.sortable = true
-      if (sorted_columns[i].custom_sort) {
-        console.log(key)
-        json.sortFunction = sorted_columns[i].sortFunction
+      if (sortedColumn[i].custom_sort) {
+        json.sortFunction = sortedColumn[i].sortFunction
       }
       columns.set(key, json)
     }
@@ -51,7 +50,7 @@ const DataTableComponent = ({ data, columns, sorted_columns }) => {
 
   return (
     <DataTableWrapper>
-      <DataTable pagination columns={set_sortable_columns()} data={data} />
+      <DataTable pagination columns={setSortableColumns()} data={data} />
     </DataTableWrapper>
   )
 }
