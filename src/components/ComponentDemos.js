@@ -1,48 +1,54 @@
-// import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
-// import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
-// import { useEffect, useState } from 'react'
+import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
+import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components/macro'
 
-// import { getTypes } from '../utils/api'
+import { getTypes } from '../utils/api'
 import getTableData, { tableData } from '../utils/formatTableData'
-// import { ReportModal } from './form/ReportModal'
-// import Button from './ui/Button'
-// import CaptionInput from './ui/CaptionInput'
+import { ReportModal } from './form/ReportModal'
+import Button from './ui/Button'
+import CaptionInput from './ui/CaptionInput'
 import DataTableComponent from './ui/DataTable'
-// import Input from './ui/Input'
-// import ListEntry from './ui/ListEntry'
-// import ProgressBar from './ui/ProgressBar'
-// import { Select } from './ui/Select'
-// import {
-//   AccordionItem,
-//   AccordionPanel,
-//   SettingsAccordion,
-//   SettingsAccordionButton,
-// } from './ui/SettingsAccordion'
-// import { Slider } from './ui/Slider'
-// import { Tag, TagList } from './ui/Tag'
+import Input from './ui/Input'
+import ListEntry from './ui/ListEntry'
+import ProgressBar from './ui/ProgressBar'
+import { Select } from './ui/Select'
+import {
+  AccordionItem,
+  AccordionPanel,
+  SettingsAccordion,
+  SettingsAccordionButton,
+} from './ui/SettingsAccordion'
+import { Slider } from './ui/Slider'
+import { Tag, TagList } from './ui/Tag'
+
+const ScrollablePage = styled.div`
+  overflow-y: scroll;
+  height: inherit;
+`
 
 const ComponentDemos = () => {
   // TODO: Move form components and type select logic to separate Form page
-  // const [showDialog, setShowDialog] = useState(false)
-  // const [currentStep, setCurrentStep] = useState(2)
-  // const [typeOptions, setTypeOptions] = useState([])
+  const [showDialog, setShowDialog] = useState(false)
+  const [currentStep, setCurrentStep] = useState(2)
+  const [typeOptions, setTypeOptions] = useState([])
 
-  // useEffect(() => {
-  //   async function fetchTypes() {
-  //     // const types = await getTypes()
-  //     // const options = types.map((type) => ({
-  //     //   value: type.id,
-  //     //   label: type.name,
-  //     // }))
-  //     // setTypeOptions(options)
-  //   }
-  //   fetchTypes()
-  // }, [])
+  useEffect(() => {
+    async function fetchTypes() {
+      const types = await getTypes()
+      const options = types.map((type) => ({
+        value: type.id,
+        label: type.name,
+      }))
+      setTypeOptions(options)
+    }
+    fetchTypes()
+  }, [])
 
-  // const handleTypeSelect = (types) => {
-  //   const typeIds = types.map((type) => type.value)
-  //   console.log('Selected type IDs: ', typeIds)
-  // }
+  const handleTypeSelect = (types) => {
+    const typeIds = types.map((type) => type.value)
+    console.log('Selected type IDs: ', typeIds)
+  }
 
   const custom_link_sort = (row_one, row_two) => {
     if (row_one.links.length > row_two.links.length) {
@@ -71,9 +77,9 @@ const ComponentDemos = () => {
 
   let table_data = getTableData(tableData)
   return (
-    <div>
-      {/*<p>Settings</p>
-       <button onClick={() => setShowDialog(true)}>Show Dialog</button>
+    <ScrollablePage>
+      <p>Settings</p>
+      <button onClick={() => setShowDialog(true)}>Show Dialog</button>
       <ReportModal
         name="American Tulip Tree"
         isOpen={showDialog}
@@ -140,9 +146,9 @@ const ComponentDemos = () => {
         style={{ margin: '0 40px' }}
         labels={['Label 1', null, 'Label 3', 'Label 4', 'Label 5']}
         steps={5}
-      /> */}
+      />
 
-      {/* <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
+      <ListEntry primaryText="Entry" rightIcons={<Star size="16" />} />
       <SettingsAccordion>
         <AccordionItem>
           <SettingsAccordionButton LeftIcon={Cog} text="Options" />
@@ -164,13 +170,13 @@ const ComponentDemos = () => {
         labels={['step1', 'step2', 'step3', 'step4', 'step5']}
         step={currentStep}
         onChange={setCurrentStep}
-      /> */}
+      />
       <DataTableComponent
         columns={table_data.columns}
         data={table_data.data}
         sorted_columns={sorted_columns}
       />
-    </div>
+    </ScrollablePage>
   )
 }
 
