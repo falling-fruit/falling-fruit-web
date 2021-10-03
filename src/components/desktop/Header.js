@@ -52,8 +52,6 @@ const StyledHeader = styled.header`
           }
         }
 
-
-
         .dropdown {
           position: relative;
           display: inline-block;
@@ -69,6 +67,9 @@ const StyledHeader = styled.header`
           width: 100%;
         }
 
+        .dropdown:hover .dropdown-content {
+          display: block;          
+        }
 
         .dropdown-content {
           display: none;
@@ -87,14 +88,6 @@ const StyledHeader = styled.header`
             display: block;
           }
 
-          .dropdown:hover {
-            display: block;
-
-            .dropbtn {
-              box-sizing: border-box;
-              color: ${({ theme }) => theme.text};
-            }
-          }
         }
 
         button {
