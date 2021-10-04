@@ -67,6 +67,7 @@ const ReportModal = ({
         <Select
           name="problemType"
           label="Problem Type"
+          isSearchable={false}
           options={PROBLEM_TYPE_OPTIONS}
         />
         <Textarea name="description" label="Description" />

@@ -1,28 +1,21 @@
-import { useRect } from '@reach/rect'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-use'
-import styled from 'styled-components/macro'
+import { useLocation } from 'react-router-dom'
+import AutoSizer from 'react-virtualized-auto-sizer'
 
 import { fetchListLocations } from '../../redux/listSlice'
+import { getIsShowingClusters } from '../../redux/viewChange'
 import InfiniteList from '../list/InfiniteList'
 import { NoResultsFound, ShouldZoomIn } from '../list/ListLoading'
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
-
-const ListPageContainer = styled.div`
-  height: 100%;
-`
 
 const ListPage = () => {
   const { pathname } = useLocation()
-  const container = useRef()
-  const rect = useRect(container) ?? { width: 0, height: 0 }
 
   const dispatch = useDispatch()
-  const zoom = useSelector((state) => state.map.view.zoom)
   const totalLocations = useSelector((state) => state.list.totalCount)
   const locations = useSelector((state) => state.list.locations)
   const isNextPageLoading = useSelector((state) => state.list.isLoading)
+  const isShowingClusters = useSelector(getIsShowingClusters)
 
   useEffect(() => {
     if (pathname === '/list') {
@@ -30,29 +23,30 @@ const ListPage = () => {
     }
   }, [pathname, dispatch])
 
-  let content
-  if (zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-    content = <ShouldZoomIn />
+  if (isShowingClusters) {
+    return <ShouldZoomIn />
   } else if (locations.length === 0 && !isNextPageLoading) {
-    content = <NoResultsFound />
+    return <NoResultsFound />
   } else {
-    content = (
-      <InfiniteList
-        itemCount={totalLocations}
-        width={rect.width}
-        height={rect.height}
-        locations={locations}
-        loadNextPage={() =>
-          dispatch(
-            fetchListLocations({ offset: locations.length, extend: true }),
-          )
-        }
-        isNextPageLoading={isNextPageLoading}
-      />
+    return (
+      <AutoSizer>
+        {({ width, height }) => (
+          <InfiniteList
+            itemCount={totalLocations}
+            width={width}
+            height={height}
+            locations={locations}
+            loadNextPage={() =>
+              dispatch(
+                fetchListLocations({ offset: locations.length, extend: true }),
+              )
+            }
+            isNextPageLoading={isNextPageLoading}
+          />
+        )}
+      </AutoSizer>
     )
   }
-
-  return <ListPageContainer ref={container}>{content}</ListPageContainer>
 }
 
 export default ListPage

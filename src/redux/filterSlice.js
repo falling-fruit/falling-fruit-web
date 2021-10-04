@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../components/map/MapPage'
 import { getTypeCounts } from '../utils/api'
 import { buildTypeSchema } from '../utils/buildTypeSchema'
 import { selectParams } from './selectParams'
-import { fetchLocations } from './viewChange'
+import { fetchLocations, getIsShowingClusters } from './viewChange'
 
 export const fetchFilterCounts = createAsyncThunk(
   'map/fetchFilterCounts',
@@ -81,7 +80,7 @@ export const openFilterAndFetch = () => (dispatch, getState) => {
   const state = getState()
   dispatch(openFilter())
 
-  if (state.map.view.zoom > VISIBLE_CLUSTER_ZOOM_LIMIT) {
+  if (!getIsShowingClusters(state)) {
     dispatch(fetchFilterCounts())
   }
 }

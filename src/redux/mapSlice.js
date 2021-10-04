@@ -17,6 +17,8 @@ const DEFAULT_VIEW_STATE = {
   zoom: 1,
 }
 
+const TRACKING_LOCATION_ZOOM = 16
+
 export const setReducer = (key) => (state, action) => ({
   ...state,
   [key]: action.payload,
@@ -52,12 +54,60 @@ export const mapSlice = createSlice({
     locations: [],
     clusters: [],
     hoveredLocationId: null,
+    geolocation: null,
+    isTrackingLocation: false,
+    justStartedTrackingLocation: false,
+    locationRequested: false,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
     // this should be called viewChange
     viewChange: setReducer('view'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
+
+    startTrackingLocation: (state) => {
+      state.locationRequested = true
+      state.isTrackingLocation = true
+
+      if (state.geolocation) {
+        state.view.center = {
+          lat: state.geolocation.latitude,
+          lng: state.geolocation.longitude,
+        }
+        state.view.zoom = TRACKING_LOCATION_ZOOM
+      } else {
+        state.justStartedTrackingLocation = true
+      }
+    },
+    stopTrackingLocation: (state) => {
+      state.isTrackingLocation = false
+    },
+
+    geolocationChange: (state, action) => {
+      if (action.payload.loading) {
+        // Loading
+      } else if (action.payload.error) {
+        // TODO: send a toast that geolocation isn't working
+        state.isTrackingLocation = false
+        state.justStartedTrackingLocation = false
+      } else if (state.isTrackingLocation) {
+        // If user is tracking location, then center screen continually on geolocation
+
+        if (state.justStartedTrackingLocation) {
+          // If user just started tracking location, then we should zoom in, too
+          state.justStartedTrackingLocation = false
+          state.view.zoom = TRACKING_LOCATION_ZOOM
+        }
+        // Otherwise, keep the current zoom and re-center the screen
+
+        state.view.center = {
+          lat: action.payload.latitude,
+          lng: action.payload.longitude,
+        }
+      }
+
+      state.geolocation = action.payload
+    },
 
     zoomInAndSave: (state) => {
       state.oldView = { ...state.view }
@@ -113,6 +163,9 @@ export const {
   clusterClick,
   viewChange,
   setHoveredLocationId,
+  startTrackingLocation,
+  stopTrackingLocation,
+  geolocationChange,
 } = mapSlice.actions
 
 export default mapSlice.reducer

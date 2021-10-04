@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../map/MapPage'
+import { getIsShowingClusters } from '../../redux/viewChange'
 import CheckboxFilters from './CheckboxFilters'
 //import TreeSelect from './TreeSelect'
 import RCTreeSelect from './RCTreeSelect'
@@ -40,8 +40,8 @@ const StyledFilter = styled.div`
 
 const Filter = ({ isOpen }) => {
   const dispatch = useDispatch()
-  const view = useSelector((state) => state.map.view)
   const filters = useSelector((state) => state.filter)
+  const isShowingClusters = useSelector(getIsShowingClusters)
   const { treeData, isLoading } = filters
 
   const { t } = useTranslation()
@@ -52,8 +52,8 @@ const Filter = ({ isOpen }) => {
         <div>
           <p className="edible-type-text">{t('Edible Types')}</p>
           <RCTreeSelect
-            data={[treeData]}
-            shouldZoomIn={view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT}
+            data={treeData}
+            shouldZoomIn={isShowingClusters}
             loading={isLoading}
             onChange={(currentNode, selectedNodes) =>
               dispatch(selectionChanged(selectedNodes))
