@@ -5,7 +5,6 @@ import styled from 'styled-components/macro'
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import CheckboxFilters from './CheckboxFilters'
-//import TreeSelect from './TreeSelect'
 import RCTreeSelect from './RCTreeSelect'
 
 const StyledFilter = styled.div`
@@ -55,8 +54,8 @@ const Filter = ({ isOpen }) => {
             data={treeData}
             shouldZoomIn={isShowingClusters}
             loading={isLoading}
-            onChange={(selectedNodes) =>
-              dispatch(selectionChanged(selectedNodes))
+            onChange={(selectedTypes) =>
+              dispatch(selectionChanged(selectedTypes))
             }
           />
         </div>

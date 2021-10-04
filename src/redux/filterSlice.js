@@ -43,7 +43,6 @@ export const filterSlice = createSlice({
       state.isOpen = false
     },
     updateSelection: (state, action) => {
-      console.log(action.payload)
       state.types = action.payload
     },
   },

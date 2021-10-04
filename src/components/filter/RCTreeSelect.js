@@ -1,20 +1,12 @@
-//import "../../../node_modules/rc-tree/assets/index.css";
 import './rc-tree.css'
 import './rc-select.css'
 
 import TreeSelect from 'rc-tree-select'
 
-//import { updateSelection } from '../../redux/filterSlice'
-
-const RCTreeSelect = ({
-  data,
-  onChange,
-  //...props
-}) => (
-  //const { t } = useTranslation()
+const RCTreeSelect = ({ data, onChange }) => (
   <TreeSelect
     onChange={onChange}
-    treeData={[data]}
+    treeData={data}
     placeholder={<span>Search for a type...</span>}
     style={{ width: 300 }}
     dropdownStyle={{
