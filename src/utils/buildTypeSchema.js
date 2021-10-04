@@ -72,7 +72,7 @@ const addTreeSelectFields = (root, checkedTypes, showScientificNames) => {
 
   root.title = `${name} (${root.count})`
   // This value isn't important, as long as it's unique, because we will be using node.id
-  root.value = `${root.name}-${root.id}`
+  root.value = `${root.id}`
   root.expanded = true
   root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.id)
   // Copy children for onChange to access, because TreeSelect resets children to undefined

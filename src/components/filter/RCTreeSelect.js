@@ -4,14 +4,17 @@ import './rc-select.css'
 
 import TreeSelect from 'rc-tree-select'
 
+//import { updateSelection } from '../../redux/filterSlice'
+
 const RCTreeSelect = ({
   data,
+  onChange,
   //...props
 }) => (
   //const { t } = useTranslation()
   <TreeSelect
-    onChange={(e) => console.log('select -> ', e)}
-    treeData={data}
+    onChange={onChange}
+    treeData={[data]}
     placeholder={<span>Search for a type...</span>}
     style={{ width: 300 }}
     dropdownStyle={{
@@ -23,6 +26,7 @@ const RCTreeSelect = ({
     allowClear
     multiple
     treeCheckable
+    treeDefaultExpandAll
   />
 )
 

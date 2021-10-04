@@ -55,7 +55,7 @@ const Filter = ({ isOpen }) => {
             data={treeData}
             shouldZoomIn={isShowingClusters}
             loading={isLoading}
-            onChange={(currentNode, selectedNodes) =>
+            onChange={(selectedNodes) =>
               dispatch(selectionChanged(selectedNodes))
             }
           />
