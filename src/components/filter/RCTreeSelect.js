@@ -9,9 +9,15 @@ import TreeSelect from 'rc-tree-select'
 const RCTreeSelect = ({
   data,
   onChange,
+  value,
   //...props
 }) => (
   //const { t } = useTranslation()
+  /*{
+    console.log(value)
+    console.log(data)
+    console.log(onChange)
+  }*/
   <TreeSelect
     onChange={onChange}
     treeData={[data]}
@@ -22,6 +28,8 @@ const RCTreeSelect = ({
       overflow: 'auto',
       zIndex: 1500,
     }}
+    onSearch={(e) => console.log(e)}
+    value={value}
     showSearch
     allowClear
     multiple

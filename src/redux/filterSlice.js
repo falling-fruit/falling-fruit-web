@@ -44,7 +44,10 @@ export const filterSlice = createSlice({
     },
     updateSelection: (state, action) => {
       console.log(action.payload)
-      state.types = action.payload
+      state.types =
+        action.payload /*.map((value) =>
+        value.substring(value.indexOf(']') + 2),
+      )*/
     },
   },
   extraReducers: {
