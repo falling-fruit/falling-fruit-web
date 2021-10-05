@@ -1,6 +1,7 @@
-import { Flag } from '@styled-icons/boxicons-solid'
 import DataTable from 'react-data-table-component'
 import styled from 'styled-components/macro'
+
+import { RESOURCES } from '../entry/resources'
 
 const DataTableWrapper = styled.div`
   .rdt {
@@ -18,30 +19,53 @@ const DataTableWrapper = styled.div`
   }
 `
 
-const DataTableComponent = ({ data, columns, sortedColumn }) => {
-  function setSortableColumns() {
-    if (columns.has('links')) {
-      const json = columns.get('links')
-      json.format = (row) => {
-        const links = row.links
-        return links.map((link, index) => (
-          <a key={index} href={link}>
-            <Flag size={20} />
-          </a>
-        ))
-      }
-      columns.set('links', json)
-    }
+const ResourceList = ({ url, key }) =>
+  RESOURCES.map(
+    ({ title, urlKey, icon }) =>
+      url.includes(urlKey) && (
+        <TableLinkPreview src={icon} key={key} alt={`${title} logo`} />
+      ),
+  )
+const TableLinkPreview = styled.img`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`
 
-    for (let i = 0; i < sortedColumn.length; i++) {
-      const key = sortedColumn[i].id
+const FORMATTERS = {
+  links: ({ links }) =>
+    links.map((link, index) => <ResourceList key={index} url={link} />),
+  name: ({ links }) =>
+    links.map((link, index) => (
+      <a key={index} href={link}>
+        {link}
+      </a>
+    )),
+}
+
+const DataTableComponent = ({ data, columns, sortedColumns }) => {
+  function setColumnFormat() {
+    Array.from(columns.keys()).forEach((key) => {
+      if (key in FORMATTERS) {
+        const json = columns.get(key)
+        json.format = FORMATTERS[key]
+        columns.set(key, json)
+      }
+    })
+  }
+
+  function setSortableColumns() {
+    setColumnFormat()
+    for (let i = 0; i < sortedColumns.length; i++) {
+      const key = sortedColumns[i].id
+
       if (!columns.has(key)) {
         continue
       }
       const json = columns.get(key)
       json.sortable = true
-      if (sortedColumn[i].custom_sort) {
-        json.sortFunction = sortedColumn[i].sortFunction
+      if (sortedColumns[i].customSort) {
+        json.sortFunction = sortedColumns[i].sortFunction
       }
       columns.set(key, json)
     }

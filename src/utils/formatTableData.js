@@ -24,7 +24,10 @@ export const sampleTableData = [
     id: 4,
     common_name: 'ss ff',
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
-    links: ['i  ', 'b '],
+    links: [
+      'https://fallingfruit.org/wikipedia_icon.png',
+      'https://plants.usda.gov/java/profile?symbol=GLTR  ',
+    ],
     locations: 9,
   },
   {

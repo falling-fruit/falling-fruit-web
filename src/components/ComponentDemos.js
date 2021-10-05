@@ -56,6 +56,7 @@ const ComponentDemos = () => {
     } else if (rowTwo.links.length > rowOne.links.length) {
       return -1
     }
+
     return 0
   }
 
