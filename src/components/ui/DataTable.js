@@ -35,12 +35,8 @@ const TableLinkPreview = styled.img`
 const FORMATTERS = {
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
-  name: ({ links }) =>
-    links.map((link, index) => (
-      <a key={index} href={link}>
-        {link}
-      </a>
-    )),
+  // eslint-disable-next-line react/display-name
+  name: ({ name }) => <a href={name}>{name}</a>,
 }
 
 const DataTableComponent = ({ data, columns, sortedColumns }) => {

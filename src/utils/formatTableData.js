@@ -5,6 +5,7 @@ export const sampleTableData = [
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
     links: ['https://fallingfruit.org/wikipedia_icon.png'],
     locations: 9,
+    name: 'https://www.google.com/',
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const sampleTableData = [
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
     links: ['https://fallingfruit.org/wikipedia_icon.png'],
     locations: 9,
+    name: 'https://www.google.com/',
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const sampleTableData = [
     scientific_name: "Robinia pseudoacacia 'Unifoliola",
     links: ['https://fallingfruit.org/wikipedia_icon.png'],
     locations: 5,
+    name: 'https://www.google.com/',
   },
   {
     id: 4,
@@ -29,6 +32,7 @@ export const sampleTableData = [
       'https://plants.usda.gov/java/profile?symbol=GLTR  ',
     ],
     locations: 9,
+    name: 'https://www.google.com/',
   },
   {
     id: 5,
@@ -36,6 +40,7 @@ export const sampleTableData = [
     scientific_name: " pseudoacacia 'Unifoliola",
     links: ['ashank ', 'is ', 'hot'],
     locations: 4,
+    name: 'https://www.google.com/',
   },
 ]
 
