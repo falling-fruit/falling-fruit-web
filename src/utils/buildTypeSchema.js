@@ -1,6 +1,6 @@
 const listToTree = (types) => {
   const typeMap = {}
-  typeMap.null = { name: 'All', id: null, children: [] }
+  typeMap.null = { name: 'All', children: [] }
 
   for (const type of types) {
     // Make a copy of the type, to avoid modifying arguments
@@ -61,7 +61,7 @@ const replaceRootCounts = (root, countsById) => {
   root.count = childCounts
 }
 
-const addTreeSelectFields = (root, checkedTypes, showScientificNames) => {
+const addRCTreeSelectFields = (root, checkedTypes, showScientificNames) => {
   // Add necessary fields for react-dropdown-tree-select
   const commonName = root.name ?? root.common_names.en[0]
   const scientificName = root.scientific_names?.[0]
@@ -70,19 +70,16 @@ const addTreeSelectFields = (root, checkedTypes, showScientificNames) => {
       ? `${commonName} [${scientificName}]`
       : commonName
 
+  // Title is what is displayed in the type selector
   root.title = `${name} (${root.count})`
-  // This value isn't important, as long as it's unique, because we will be using node.id
+  // Value must be the type id because RCTreeSelect's onChange handler returns an array of the selected node's values
   root.value = `${root.id}`
-  root.expanded = true
-  root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.id)
-  // Copy children for onChange to access, because TreeSelect resets children to undefined
-  root.childrenCopy = root.children
-  // Rename to typeId to prevent weird issues
-  root.typeId = root.id
-  root.id = undefined
+  // TODO: Figure out how to keep values expanded/checked in RCTreeSelect
+  // root.expanded = true
+  // root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.id)
 
   for (const child of root.children) {
-    addTreeSelectFields(child, checkedTypes, showScientificNames)
+    addRCTreeSelectFields(child, checkedTypes, showScientificNames)
   }
 }
 
@@ -101,30 +98,10 @@ const buildTypeSchema = (
 
   moveRootToOther(tree)
   replaceRootCounts(tree, countsById)
-  addTreeSelectFields(tree, checkedTypes, showScientificName)
+  addRCTreeSelectFields(tree, checkedTypes, showScientificName)
   sortChildrenByCount(tree)
 
-  return tree
+  return [tree]
 }
 
-const addTypes = (types, node) => {
-  if (node.childrenCopy.length === 0) {
-    types.push(node.typeId)
-  }
-
-  for (const child of node.childrenCopy) {
-    addTypes(types, child)
-  }
-}
-
-const getSelectedTypes = (selectedNodes) => {
-  const types = []
-
-  for (const node of selectedNodes) {
-    addTypes(types, node)
-  }
-
-  return types
-}
-
-export { buildTypeSchema, getSelectedTypes }
+export { buildTypeSchema }

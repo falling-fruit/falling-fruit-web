@@ -1,4 +1,3 @@
-//import "../../../node_modules/rc-tree/assets/index.css";
 import './rc-tree.css'
 import './rc-select.css'
 
@@ -20,7 +19,7 @@ const RCTreeSelect = ({
   }*/
   <TreeSelect
     onChange={onChange}
-    treeData={[data]}
+    treeData={data}
     placeholder={<span>Search for a type...</span>}
     style={{ width: 300 }}
     dropdownStyle={{
