@@ -1,6 +1,7 @@
 import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 const StyledHeader = styled.header`
@@ -11,7 +12,7 @@ const StyledHeader = styled.header`
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
   z-index: 1;
-  
+
   img {
     height: 60%;
     width: auto;
@@ -35,8 +36,13 @@ const StyledHeader = styled.header`
         color: ${({ theme }) => theme.text};
         cursor: pointer;
         position: relative;
-        
-        &.active {
+
+        a {
+          text-decoration: none;
+          color: ${({ theme }) => theme.text};
+        }
+
+        .active {
           background-color: ${({ theme }) => theme.secondaryBackground};
           color: ${({ theme }) => theme.orange};
           box-sizing: border-box;
@@ -50,44 +56,6 @@ const StyledHeader = styled.header`
             bottom: 0;
             left: 0;
           }
-        }
-
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
-
-        .dropbtn {
-          background-color: ${({ theme }) => theme.background};
-          color: ${({ theme }) => theme.text};
-          padding: 16px;
-          display: inline;
-          border: none;
-          height: 100%;
-          width: 100%;
-        }
-
-        .dropdown:hover .dropdown-content {
-          display: block;          
-        }
-
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          margin-top: 15px;
-          background-color: ${({ theme }) => theme.background};
-          border-radius: 0px 0px 6px 6px;
-          box-shadow: rgba(0,0,0,0.05) 0 15px 15px;
-          text-align: center; 
-          width: 100%;
-
-          a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-          }
-
         }
 
         button {
@@ -111,7 +79,52 @@ const StyledHeader = styled.header`
         &.active {
           color: ${({ theme }) => theme.orange};
         }
+      }
+    }
+  }
+`
+const Dropdown = ({ className, children, text }) => (
+  <div className={className}>
+    <div className="dropbtn">
+      {text} <CaretDown height="8px"> </CaretDown>
+    </div>
+    <div className="dropdown-content">{children}</div>
+  </div>
+)
 
+const StyledDropdown = styled(Dropdown)`
+  display: inline-block;
+
+  .dropbtn {
+    background-color: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
+    padding: 16px;
+    display: inline;
+    border: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  &:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    margin-top: 15px;
+    background-color: ${({ theme }) => theme.background};
+    border-radius: 0px 0px 6px 6px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 15px 15px;
+    text-align: center;
+    min-width: 100%;
+    left: 0;
+
+    a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
     }
   }
 `
@@ -124,19 +137,31 @@ const Header = () => {
       <img src="/logo_orange.svg" alt="Falling Fruit Logo" />
       <nav>
         <ul>
-          <li className="active">{t('Map')}</li>
-          <li>{t('Page 2')}</li>
           <li>
-            <div className="dropdown">
-              <div className="dropbtn">
-                Dropdown <CaretDown style={{ height: '8px' }} />
-              </div>
-              <div className="dropdown-content">
-                <a href="#hi">Page 1</a>
-                <a href="#hi">Page 2</a>
-                <a href="#hi">Page 3</a>
-              </div>
-            </div>
+            <NavLink to="/map" activeClassName="active">
+              {t('Map')}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/page2" activeClassName="active">
+              {t('Page 2')}
+            </NavLink>
+          </li>
+          <li>
+            <StyledDropdown text="About">
+              <NavLink to="/project" activeClassName="active">
+                The project
+              </NavLink>
+              <NavLink to="/dataset" activeClassName="active">
+                Imported datasets
+              </NavLink>
+              <NavLink to="/share" activeClassName="active">
+                Sharing the harvest
+              </NavLink>
+              <NavLink to="/press" activeClassName="active">
+                In the press
+              </NavLink>
+            </StyledDropdown>
           </li>
           <li>
             <button>
