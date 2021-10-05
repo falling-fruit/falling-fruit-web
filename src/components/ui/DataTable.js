@@ -18,6 +18,11 @@ const DataTableWrapper = styled.div`
     }
   }
 `
+const TableLinkPreview = styled.img`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`
 
 const ResourceList = ({ url, key }) =>
   RESOURCES.map(
@@ -26,11 +31,6 @@ const ResourceList = ({ url, key }) =>
         <TableLinkPreview src={icon} key={key} alt={`${title} logo`} />
       ),
   )
-const TableLinkPreview = styled.img`
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-`
 
 const FORMATTERS = {
   links: ({ links }) =>
@@ -51,7 +51,6 @@ const DataTableComponent = ({ data, columns, sortedColumns }) => {
   }
 
   function setSortableColumns() {
-    setColumnFormat()
     for (let i = 0; i < sortedColumns.length; i++) {
       const key = sortedColumns[i].id
 
@@ -68,9 +67,14 @@ const DataTableComponent = ({ data, columns, sortedColumns }) => {
     return Array.from(columns.values())
   }
 
+  function setColumnProperties() {
+    setColumnFormat()
+    return setSortableColumns()
+  }
+
   return (
     <DataTableWrapper>
-      <DataTable pagination columns={setSortableColumns()} data={data} />
+      <DataTable pagination columns={setColumnProperties()} data={data} />
     </DataTableWrapper>
   )
 }
