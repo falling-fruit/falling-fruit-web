@@ -1,7 +1,7 @@
 import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 const StyledHeader = styled.header`
@@ -40,12 +40,16 @@ const StyledHeader = styled.header`
         a {
           text-decoration: none;
           color: ${({ theme }) => theme.text};
+          text-align: center;
         }
 
         .active {
           background-color: ${({ theme }) => theme.secondaryBackground};
           color: ${({ theme }) => theme.orange};
           box-sizing: border-box;
+          padding-top: 25%;
+          height: 100%;
+          width: 100%;
 
           ::before {
             content: '';
@@ -149,18 +153,10 @@ const Header = () => {
           </li>
           <li>
             <StyledDropdown text="About">
-              <NavLink to="/project" activeClassName="active">
-                The project
-              </NavLink>
-              <NavLink to="/dataset" activeClassName="active">
-                Imported datasets
-              </NavLink>
-              <NavLink to="/share" activeClassName="active">
-                Sharing the harvest
-              </NavLink>
-              <NavLink to="/press" activeClassName="active">
-                In the press
-              </NavLink>
+              <Link to="/project">The project</Link>
+              <Link to="/dataset">Imported datasets</Link>
+              <Link to="/share">Sharing the harvest</Link>
+              <Link to="/press">In the press</Link>
             </StyledDropdown>
           </li>
           <li>
