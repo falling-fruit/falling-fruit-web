@@ -41,7 +41,8 @@ const Filter = ({ isOpen }) => {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
   const isShowingClusters = useSelector(getIsShowingClusters)
-  const { treeData, isLoading } = filters
+  const { types, treeData, isLoading } = filters
+  //console.log(types)
 
   const { t } = useTranslation()
 
@@ -57,6 +58,8 @@ const Filter = ({ isOpen }) => {
             onChange={(selectedTypes) =>
               dispatch(selectionChanged(selectedTypes))
             }
+            value={types}
+            //value={['White oak [Quercus alba] (14)']}
           />
         </div>
         <div>

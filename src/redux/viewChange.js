@@ -32,6 +32,7 @@ export const getAllLocations = createSelector(
 
 export const fetchLocations = () => (dispatch, getState) => {
   const state = getState()
+  console.log(state)
   const { zoom, bounds } = state.map.view
 
   if (bounds?.ne.lat != null && zoom > 1) {
