@@ -35,7 +35,7 @@ const RCTreeSelect = ({ data, onChange, checkedTypes }) => (
       treeDefaultExpandAll
       treeNodeFilterProp="title" // Search the tree based on node titles instead of values
       defaultOpen
-      defaultValue={checkedTypes}
+      defaultValue={checkedTypes.length === 0 ? ['all'] : checkedTypes}
       tagRender={() => null} // Prevent selected tags from showing
     />
   </TreeSelectContainer>

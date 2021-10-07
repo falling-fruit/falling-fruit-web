@@ -1,6 +1,6 @@
 const listToTree = (types) => {
   const typeMap = {}
-  typeMap.null = { name: 'All', children: [] }
+  typeMap.null = { name: 'All', id: 'all', children: [] }
 
   for (const type of types) {
     // Make a copy of the type, to avoid modifying arguments
