@@ -74,9 +74,8 @@ const addRCTreeSelectFields = (root, checkedTypes, showScientificNames) => {
   root.title = `${name} (${root.count})`
   // Value must be the type id because RCTreeSelect's onChange handler returns an array of the selected node's values
   root.value = `${root.id}`
-  // TODO: Figure out how to keep values expanded/checked in RCTreeSelect
-  // root.expanded = true
-  // root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.id)
+  // Keep track of whether this type was checked so that selected state can be preserved across re-renders of the tree
+  root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.value)
 
   for (const child of root.children) {
     addRCTreeSelectFields(child, checkedTypes, showScientificNames)

@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 const TreeSelectContainer = styled.div`
   .rc-tree-select {
     width: 100%;
+    height: 300px;
   }
   .rc-tree-select-selector {
     border-radius: 23px;
@@ -15,21 +16,27 @@ const TreeSelectContainer = styled.div`
 `
 
 const RCTreeSelect = ({ data, onChange }) => (
-  <TreeSelectContainer className="rc-tree-select-open">
+  <TreeSelectContainer>
     <TreeSelect
       onChange={onChange}
       treeData={data}
       placeholder={<span>Search for a type...</span>}
       dropdownStyle={{
-        maxHeight: 200,
+        height: 250,
+        width: 290,
         overflow: 'auto',
+        borderRadius: 7,
+        border: '1px solid #e0e1e2',
         zIndex: 1,
       }}
-      showSearch
+      dropdownMatchSelectWidth={false} // Allows for overflow-x
       treeCheckable
       showTreeIcon={false}
       treeDefaultExpandAll
-      treeNodeFilterProp="title"
+      treeNodeFilterProp="title" // Search the tree based on node titles instead of values
+      defaultOpen
+      defaultValue={data.filter((t) => t.checked)}
+      tagRender={() => null} // Prevent selected tags from showing
     />
   </TreeSelectContainer>
 )
