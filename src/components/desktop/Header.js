@@ -47,7 +47,7 @@ const StyledHeader = styled.header`
           background-color: ${({ theme }) => theme.secondaryBackground};
           color: ${({ theme }) => theme.orange};
           box-sizing: border-box;
-          padding-top: 25%;
+          padding-top: 25px;
           height: 100%;
           width: 100%;
 
@@ -89,17 +89,17 @@ const StyledHeader = styled.header`
 `
 const Dropdown = ({ className, children, text }) => (
   <div className={className}>
-    <div className="dropbtn">
+    <div className="button">
       {text} <CaretDown height="8px"> </CaretDown>
     </div>
-    <div className="dropdown-content">{children}</div>
+    <div className="content">{children}</div>
   </div>
 )
 
 const StyledDropdown = styled(Dropdown)`
   display: inline-block;
 
-  .dropbtn {
+  .button {
     background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
     padding: 16px;
@@ -109,11 +109,11 @@ const StyledDropdown = styled(Dropdown)`
     width: 100%;
   }
 
-  &:hover .dropdown-content {
+  &:hover .content {
     display: block;
   }
 
-  .dropdown-content {
+  .content {
     display: none;
     position: absolute;
     margin-top: 15px;
@@ -152,11 +152,11 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <StyledDropdown text="About">
-              <Link to="/project">The project</Link>
-              <Link to="/dataset">Imported datasets</Link>
-              <Link to="/share">Sharing the harvest</Link>
-              <Link to="/press">In the press</Link>
+            <StyledDropdown text={t('About')}>
+              <Link to="/project">{t('The project')}</Link>
+              <Link to="/dataset">{t('Imported datasets')}</Link>
+              <Link to="/share">{t('Sharing the harvest')}</Link>
+              <Link to="/press">{t('In the press')}</Link>
             </StyledDropdown>
           </li>
           <li>
