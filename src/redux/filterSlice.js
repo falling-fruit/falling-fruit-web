@@ -61,7 +61,6 @@ export const filterSlice = createSlice({
       state.treeData = buildTypeSchema(
         Object.values(typesById),
         countsById,
-        state.types,
         showScientificNames,
       )
       state.isLoading = false

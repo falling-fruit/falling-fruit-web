@@ -61,7 +61,7 @@ const replaceRootCounts = (root, countsById) => {
   root.count = childCounts
 }
 
-const addRCTreeSelectFields = (root, checkedTypes, showScientificNames) => {
+const addRCTreeSelectFields = (root, showScientificNames) => {
   // Add necessary fields for react-dropdown-tree-select
   const commonName = root.name ?? root.common_names.en[0]
   const scientificName = root.scientific_names?.[0]
@@ -72,13 +72,11 @@ const addRCTreeSelectFields = (root, checkedTypes, showScientificNames) => {
 
   // Title is what is displayed in the type selector
   root.title = `${name} (${root.count})`
-  // Value must be the type id because RCTreeSelect's onChange handler returns an array of the selected node's values
+  // Value must be the type id as a string because RCTreeSelect's onChange handler returns an array of the selected node's values
   root.value = `${root.id}`
-  // // Keep track of whether this type was checked so that selected state can be preserved across re-renders of the tree
-  // root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.value)
 
   for (const child of root.children) {
-    addRCTreeSelectFields(child, checkedTypes, showScientificNames)
+    addRCTreeSelectFields(child, showScientificNames)
   }
 }
 
@@ -87,18 +85,12 @@ const sortChildrenByCount = (node) => {
   node.children.sort((typeA, typeB) => typeB.count - typeA.count)
 }
 
-const buildTypeSchema = (
-  types,
-  countsById,
-  checkedTypes,
-  showScientificName,
-) => {
-  console.log('HERE: buildTypeSchema')
+const buildTypeSchema = (types, countsById, showScientificName) => {
   const tree = listToTree(types)
 
   moveRootToOther(tree)
   replaceRootCounts(tree, countsById)
-  addRCTreeSelectFields(tree, checkedTypes, showScientificName)
+  addRCTreeSelectFields(tree, showScientificName)
   sortChildrenByCount(tree)
 
   return [tree]
