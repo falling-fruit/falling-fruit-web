@@ -15,7 +15,7 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const RCTreeSelect = ({ data, onChange }) => (
+const RCTreeSelect = ({ data, onChange, checkedTypes }) => (
   <TreeSelectContainer>
     <TreeSelect
       onChange={onChange}
@@ -35,7 +35,7 @@ const RCTreeSelect = ({ data, onChange }) => (
       treeDefaultExpandAll
       treeNodeFilterProp="title" // Search the tree based on node titles instead of values
       defaultOpen
-      defaultValue={data.filter((t) => t.checked)}
+      defaultValue={checkedTypes}
       tagRender={() => null} // Prevent selected tags from showing
     />
   </TreeSelectContainer>

@@ -57,7 +57,7 @@ const Filter = ({ isOpen }) => {
             onChange={(selectedTypes) =>
               dispatch(selectionChanged(selectedTypes))
             }
-            value={types}
+            checkedTypes={types}
           />
         </div>
         <div>
