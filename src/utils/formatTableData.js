@@ -44,51 +44,51 @@ export const sampleTableData = [
   },
 ]
 
-export default function getTableData(data) {
-  // object initialization
-  const result = {
-    columns: new Map(),
-    data,
-  }
-  const columns = new Map()
+// export default function getTableData(data) {
+//   // object initialization
+//   const result = {
+//     columns: new Map(),
+//     data,
+//   }
+//   const columns = new Map()
 
-  // return on null case
-  if (data.length === 0) {
-    return result
-  }
+//   // return on null case
+//   if (data.length === 0) {
+//     return result
+//   }
 
-  //declare column objects
-  const json_keys = Object.keys(data[0])
-  for (var i = 0; i < json_keys.length; i++) {
-    const key = json_keys[i]
-    if (key === 'id') {
-      continue
-    }
+//   //declare column objects
+//   const json_keys = Object.keys(data[0])
+//   for (var i = 0; i < json_keys.length; i++) {
+//     const key = json_keys[i]
+//     if (key === 'id') {
+//       continue
+//     }
 
-    //default column object
-    const column = {
-      id: '',
-      name: '',
-      selector: (row) => row[key],
-      sortable: false,
-    }
+//     //default column object
+//     const column = {
+//       id: '',
+//       name: '',
+//       selector: (row) => row[key],
+//       sortable: false,
+//     }
 
-    // unique column id
-    column.id = key
+//     // unique column id
+//     column.id = key
 
-    // column title
-    const splits = key.split('_')
-    let name = ''
-    for (const split of splits) {
-      let str = split
-      let lower = str.toLowerCase()
-      name = `${name + str.charAt(0).toUpperCase() + lower.slice(1)} `
-    }
-    column.name = name
+//     // column title
+//     const splits = key.split('_')
+//     let name = ''
+//     for (const split of splits) {
+//       let str = split
+//       let lower = str.toLowerCase()
+//       name = `${name + str.charAt(0).toUpperCase() + lower.slice(1)} `
+//     }
+//     column.name = name
 
-    // append to columns object
-    columns.set(key, column)
-  }
-  result.columns = columns
-  return result
-}
+//     // append to columns object
+//     columns.set(key, column)
+//   }
+//   result.columns = columns
+//   return result
+// }

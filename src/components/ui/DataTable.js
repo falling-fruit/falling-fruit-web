@@ -24,6 +24,28 @@ const TableLinkPreview = styled.img`
   margin-right: 5px;
 `
 
+const customLinkSort = (rowOne, rowTwo) => {
+  if (rowOne.links.length > rowTwo.links.length) {
+    return 1
+  } else if (rowTwo.links.length > rowOne.links.length) {
+    return -1
+  }
+  return 0
+}
+
+const customDateSort = (rowOne, rowTwo) => {
+  const dateOne = new Date(rowOne.created_at)
+  const dateTwo = new Date(rowTwo.created_at)
+
+  if (dateOne < dateTwo) {
+    return -1
+  } else if (dateTwo > dateOne) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
 const ResourceList = ({ url, key }) =>
   RESOURCES.map(
     ({ title, urlKey, icon }) =>
@@ -37,34 +59,42 @@ const FORMATTERS = {
     links.map((link, index) => <ResourceList key={index} url={link} />),
   // eslint-disable-next-line react/display-name
   name: ({ name }) => <a href={name}>{name}</a>,
+  created_at: ({ created_at }) => {
+    const date = new Date(created_at)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    return `${year}-${month}-${day}`
+  },
 }
 
-const DataTableComponent = ({ data, columns, sortedColumns }) => {
+const SORTERS = {
+  links: customLinkSort,
+  created_at: customDateSort,
+}
+
+const DataTableComponent = ({ data, columns }) => {
   function setColumnFormat() {
-    Array.from(columns.keys()).forEach((key) => {
+    for (let i = 0; i < columns.length; i++) {
+      const column = columns[i]
+      const key = column.id
       if (key in FORMATTERS) {
-        const json = columns.get(key)
-        json.format = FORMATTERS[key]
-        columns.set(key, json)
+        column.format = FORMATTERS[key]
+        columns[i] = column
       }
-    })
+    }
   }
 
   function setSortableColumns() {
-    for (let i = 0; i < sortedColumns.length; i++) {
-      const key = sortedColumns[i].id
-
-      if (!columns.has(key)) {
-        continue
+    for (let i = 0; i < columns.length; i++) {
+      const column = columns[i]
+      const key = column.id
+      if (key in SORTERS) {
+        column.sortableFunction = SORTERS[key]
+        columns[i] = column
       }
-      const json = columns.get(key)
-      json.sortable = true
-      if (sortedColumns[i].customSort) {
-        json.sortFunction = sortedColumns[i].sortFunction
-      }
-      columns.set(key, json)
     }
-    return Array.from(columns.values())
+    return columns
   }
 
   function setColumnProperties() {

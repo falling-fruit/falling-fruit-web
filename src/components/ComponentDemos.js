@@ -4,11 +4,10 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { getTypes } from '../utils/api'
-import getTableData, { sampleTableData } from '../utils/formatTableData'
 import { ReportModal } from './form/ReportModal'
 import Button from './ui/Button'
 import CaptionInput from './ui/CaptionInput'
-import DataTableComponent from './ui/DataTable'
+import ImportsTable from './ui/ImportsTable'
 import Input from './ui/Input'
 import ListEntry from './ui/ListEntry'
 import ProgressBar from './ui/ProgressBar'
@@ -50,33 +49,6 @@ const ComponentDemos = () => {
     console.log('Selected type IDs: ', typeIds)
   }
 
-  const customLinkSort = (rowOne, rowTwo) => {
-    if (rowOne.links.length > rowTwo.links.length) {
-      return 1
-    } else if (rowTwo.links.length > rowOne.links.length) {
-      return -1
-    }
-
-    return 0
-  }
-
-  const sortedColumns = [
-    {
-      id: 'locations',
-      customSort: false,
-    },
-    {
-      id: 'links',
-      customSort: true,
-      sortFunction: customLinkSort,
-    },
-    {
-      id: 'common_name',
-      customSort: false,
-    },
-  ]
-
-  const tableData = getTableData(sampleTableData)
   return (
     <ScrollablePage>
       <p>Settings</p>
@@ -172,11 +144,7 @@ const ComponentDemos = () => {
         step={currentStep}
         onChange={setCurrentStep}
       />
-      <DataTableComponent
-        columns={tableData.columns}
-        data={tableData.data}
-        sortedColumns={sortedColumns}
-      />
+      <ImportsTable />
     </ScrollablePage>
   )
 }
