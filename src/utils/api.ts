@@ -24,7 +24,7 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
         res.data,
     )
     .catch((error) => {
-      const message = error.response.data.error
+      const message = error.response?.data.error
       if (message) {
         console.error('APIError:', message, error)
         throw new APIError({ ...error, message })
