@@ -1,8 +1,13 @@
 import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
+
+const OnAbout = () => {
+  const location = useLocation()
+  return location.pathname.includes('/about/')
+}
 
 const StyledHeader = styled.header`
   height: 56px;
@@ -102,7 +107,7 @@ const StyledHeader = styled.header`
 `
 const Dropdown = ({ className, children, text }) => (
   <div className={className}>
-    <div className="button">
+    <div className={OnAbout() ? 'active' : 'button'}>
       {text} <CaretDown height="8px" />
     </div>
     <div className="content">{children}</div>
@@ -120,6 +125,11 @@ const StyledDropdown = styled(Dropdown)`
     border: none;
     height: 100%;
     width: 100%;
+
+    .active {
+      height: 100%;
+      width: 100%;
+    }
   }
 
   &:hover .content {
@@ -142,6 +152,10 @@ const StyledDropdown = styled(Dropdown)`
       padding: 12px 16px;
       text-decoration: none;
       display: block;
+    }
+
+    .active ::before {
+      display: none;
     }
   }
 `
@@ -166,10 +180,18 @@ const Header = () => {
           </li>
           <li>
             <StyledDropdown text={t('About')}>
-              <Link to="/project">{t('The project')}</Link>
-              <Link to="/dataset">{t('Imported datasets')}</Link>
-              <Link to="/share">{t('Sharing the harvest')}</Link>
-              <Link to="/press">{t('In the press')}</Link>
+              <NavLink to="/about/project" activeClassName="active">
+                {t('The project')}
+              </NavLink>
+              <NavLink to="/about/dataset" activeClassName="active">
+                {t('Imported datasets')}
+              </NavLink>
+              <NavLink to="/about/share" activeClassName="active">
+                {t('Sharing the harvest')}
+              </NavLink>
+              <NavLink to="/about/press" activeClassName="active">
+                {t('In the press')}
+              </NavLink>
             </StyledDropdown>
           </li>
           <li>
