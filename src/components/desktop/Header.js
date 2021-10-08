@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 const StyledHeader = styled.header`
-  height: 70px;
+  height: 56px;
   background-color: ${({ theme }) => theme.background};
   display: flex;
   justify-content: space-between;
@@ -28,28 +28,41 @@ const StyledHeader = styled.header`
       height: 100%;
 
       li {
-        display: inline-grid;
-        place-items: center;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
         width: 110px;
         margin: 0;
         height: 100%;
-        color: ${({ theme }) => theme.text};
+        color: ${({ theme }) => theme.secondaryText};
         cursor: pointer;
         position: relative;
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+
+        .navbar {
+          display: block;
+          height: 100%;
+          width: 100%;
+        }
 
         a {
           text-decoration: none;
-          color: ${({ theme }) => theme.text};
+          color: ${({ theme }) => theme.secondaryText};
           text-align: center;
         }
 
         .active {
-          background-color: ${({ theme }) => theme.secondaryBackground};
+          background-color: ${({ theme }) => theme.navBackground};
           color: ${({ theme }) => theme.orange};
           box-sizing: border-box;
-          padding-top: 25px;
           height: 100%;
           width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           ::before {
             content: '';
@@ -90,7 +103,7 @@ const StyledHeader = styled.header`
 const Dropdown = ({ className, children, text }) => (
   <div className={className}>
     <div className="button">
-      {text} <CaretDown height="8px"> </CaretDown>
+      {text} <CaretDown height="8px" />
     </div>
     <div className="content">{children}</div>
   </div>
@@ -101,7 +114,7 @@ const StyledDropdown = styled(Dropdown)`
 
   .button {
     background-color: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.secondaryText};
     padding: 16px;
     display: inline;
     border: none;
@@ -125,7 +138,7 @@ const StyledDropdown = styled(Dropdown)`
     left: 0;
 
     a {
-      color: black;
+      color: ${({ theme }) => theme.secondaryText};
       padding: 12px 16px;
       text-decoration: none;
       display: block;
@@ -142,12 +155,12 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/map" activeClassName="active">
+            <NavLink to="/map" className="navbar" activeClassName="active">
               {t('Map')}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/page2" activeClassName="active">
+            <NavLink to="/page2" className="navbar" activeClassName="active">
               {t('Page 2')}
             </NavLink>
           </li>
