@@ -1,4 +1,4 @@
-import DataTable from 'react-data-table-component'
+import { DataTable } from 'react-data-table-component'
 import styled from 'styled-components/macro'
 
 import { RESOURCES } from '../entry/resources'
