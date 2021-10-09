@@ -74,7 +74,7 @@ const SORTERS = {
 }
 
 const DataTableComponent = ({ data, columns }) => {
-  function setColumnFormat() {
+  const setColumnFormat = () => {
     for (let i = 0; i < columns.length; i++) {
       const column = columns[i]
       const key = column.id
@@ -85,7 +85,7 @@ const DataTableComponent = ({ data, columns }) => {
     }
   }
 
-  function setSortableColumns() {
+  const setSortableColumns = () => {
     for (let i = 0; i < columns.length; i++) {
       const column = columns[i]
       const key = column.id
@@ -93,11 +93,12 @@ const DataTableComponent = ({ data, columns }) => {
         column.sortableFunction = SORTERS[key]
         columns[i] = column
       }
+      console.log(columns[i])
     }
     return columns
   }
 
-  function setColumnProperties() {
+  const setColumnProperties = () => {
     setColumnFormat()
     return setSortableColumns()
   }

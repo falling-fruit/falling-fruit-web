@@ -8,7 +8,6 @@ const ImportsTable = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    console.log('hit')
     async function getImportData() {
       let res = await getImports()
       console.log(res)
@@ -18,11 +17,11 @@ const ImportsTable = () => {
   }, [])
 
   const columns = [
-    // TODO: missing type response
     {
       id: 'type',
       name: 'Type',
-      selector: (row) => row.type,
+      selector: (row) => (row.muni ? 'Tree inventory' : 'Community Map'),
+      sortable: true,
     },
     {
       id: 'name',
@@ -30,10 +29,10 @@ const ImportsTable = () => {
       selector: (row) => row.name,
       sortable: true,
     },
-    // TODO: missing type response
     {
       name: 'Locations',
-      selector: (row) => row.locations,
+      selector: (row) => row.location_count,
+      sortable: true,
     },
     {
       id: 'created_at',
