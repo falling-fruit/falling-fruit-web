@@ -2,15 +2,14 @@
 import { useEffect, useState } from 'react'
 
 import { getImports } from '../../utils/api'
-import DataTableComponent from './DataTable'
+import DataTable from './DataTable'
 
 const ImportsTable = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
     async function getImportData() {
-      let res = await getImports()
-      console.log(res)
+      const res = await getImports()
       setData(res)
     }
     getImportData()
@@ -42,7 +41,7 @@ const ImportsTable = () => {
     },
   ]
 
-  return <DataTableComponent columns={columns} data={data} />
+  return <DataTable columns={columns} data={data} />
 }
 
 export default ImportsTable

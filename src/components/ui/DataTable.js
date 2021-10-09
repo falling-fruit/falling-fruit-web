@@ -1,4 +1,4 @@
-import { DataTable } from 'react-data-table-component'
+import { default as ReactDataTable } from 'react-data-table-component'
 import styled from 'styled-components/macro'
 
 import { RESOURCES } from '../entry/resources'
@@ -59,13 +59,8 @@ const FORMATTERS = {
     links.map((link, index) => <ResourceList key={index} url={link} />),
   // eslint-disable-next-line react/display-name
   name: ({ name }) => <a href={name}>{name}</a>,
-  created_at: ({ created_at }) => {
-    const date = new Date(created_at)
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    return `${year}-${month}-${day}`
-  },
+  created_at: ({ created_at }) =>
+    new Date(created_at).toISOString().split('T')[0],
 }
 
 const SORTERS = {
@@ -73,7 +68,7 @@ const SORTERS = {
   created_at: customDateSort,
 }
 
-const DataTableComponent = ({ data, columns }) => {
+const DataTable = ({ data, columns }) => {
   const setColumnFormat = () => {
     for (let i = 0; i < columns.length; i++) {
       const column = columns[i]
@@ -93,7 +88,6 @@ const DataTableComponent = ({ data, columns }) => {
         column.sortableFunction = SORTERS[key]
         columns[i] = column
       }
-      console.log(columns[i])
     }
     return columns
   }
@@ -105,9 +99,9 @@ const DataTableComponent = ({ data, columns }) => {
 
   return (
     <DataTableWrapper>
-      <DataTable pagination columns={setColumnProperties()} data={data} />
+      <ReactDataTable pagination columns={setColumnProperties()} data={data} />
     </DataTableWrapper>
   )
 }
 
-export default DataTableComponent
+export default DataTable
