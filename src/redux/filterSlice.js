@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getTypeCounts } from '../utils/api'
 import { buildTypeSchema } from '../utils/buildTypeSchema'
 import { selectParams } from './selectParams'
-import { fetchLocations, getIsShowingClusters } from './viewChange'
+import { fetchLocations } from './viewChange'
 
 export const fetchFilterCounts = createAsyncThunk(
   'map/fetchFilterCounts',
@@ -31,17 +31,10 @@ export const filterSlice = createSlice({
     types: [],
     muni: true,
     invasive: false,
-    isOpen: false,
     isLoading: false,
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),
-    openFilter: (state) => {
-      state.isOpen = true
-    },
-    closeFilter: (state) => {
-      state.isOpen = false
-    },
     updateSelection: (state, action) => {
       state.types = action.payload
     },
@@ -60,7 +53,6 @@ export const filterSlice = createSlice({
 
       state.treeData = buildTypeSchema(
         Object.values(typesById),
-        countsById,
         showScientificNames,
       )
       state.isLoading = false
@@ -68,21 +60,7 @@ export const filterSlice = createSlice({
   },
 })
 
-export const {
-  setFilters,
-  openFilter,
-  closeFilter,
-  updateSelection,
-} = filterSlice.actions
-
-export const openFilterAndFetch = () => (dispatch, getState) => {
-  const state = getState()
-  dispatch(openFilter())
-
-  if (!getIsShowingClusters(state)) {
-    dispatch(fetchFilterCounts())
-  }
-}
+export const { setFilters, updateSelection } = filterSlice.actions
 
 export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection(types))

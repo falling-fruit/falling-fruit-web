@@ -10,17 +10,14 @@ import {
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
-import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
 import { searchView } from '../../redux/searchView'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds } from '../../utils/viewportBounds'
-import Filter from '../filter/Filter'
-import FilterIconButton from '../filter/FilterIconButton'
 import TrackLocationButton from '../map/TrackLocationButton'
 import Input from '../ui/Input'
 import SearchEntry from './SearchEntry'
@@ -66,8 +63,6 @@ const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
 
-  const filterOpen = useSelector((state) => state.filter.isOpen)
-
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
@@ -88,9 +83,6 @@ const Search = (props) => {
   }, [init])
 
   const handleChange = (e) => {
-    if (filterOpen) {
-      dispatch(closeFilter())
-    }
     setValue(e.target.value)
   }
 
@@ -120,17 +112,6 @@ const Search = (props) => {
           prepend={isDesktop && <TrackLocationButton isIcon={false} />}
           placeholder="Search for a location..."
         />
-
-        <FilterIconButton
-          pressed={filterOpen}
-          onClick={() => {
-            if (filterOpen) {
-              dispatch(closeFilter())
-            } else {
-              dispatch(openFilterAndFetch())
-            }
-          }}
-        />
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
@@ -158,8 +139,6 @@ const Search = (props) => {
             })}
         </ComboboxList>
       </StyledComboboxPopover>
-
-      <Filter isOpen={filterOpen} />
     </Combobox>
   )
 }

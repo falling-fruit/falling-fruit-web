@@ -1,8 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import RCTreeSelect from '../filter/RCTreeSelect'
-import PagedList from '../list/PagedList'
+import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Button from '../ui/Button'
 import { SettingsAccordionButton } from '../ui/SettingsAccordion'
@@ -33,8 +32,7 @@ const MainPane = () => {
   return (
     <Container>
       <Search />
-      <RCTreeSelect />
-      <PagedList />
+      <Filter isOpen />
       <StyledButton
         secondary
         onClick={() =>
