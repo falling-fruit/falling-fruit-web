@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import Filter from '../filter/Filter'
 import PagedList from '../list/PagedList'
 import Search from '../search/Search'
 import Button from '../ui/Button'
@@ -32,6 +33,7 @@ const MainPane = () => {
   return (
     <Container>
       <Search />
+      <Filter isOpen />
       <PagedList />
       <StyledButton
         secondary

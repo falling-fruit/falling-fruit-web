@@ -41,6 +41,7 @@ export const fetchLocations = () => (dispatch, getState) => {
       dispatch(clearListLocations())
     } else {
       dispatch(fetchMapLocations())
+      dispatch(fetchFilterCounts())
 
       const state = getState()
       if (state.misc.isDesktop && state.list.shouldFetchNewLocations) {
@@ -98,7 +99,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
-  if (state.filter.isOpen) {
-    dispatch(fetchFilterCounts())
-  }
+  // if (state.filter.isOpen) {
+  //   dispatch(fetchFilterCounts())
+  // }
 }

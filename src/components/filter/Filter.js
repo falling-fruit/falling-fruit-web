@@ -11,10 +11,10 @@ const StyledFilter = styled.div`
   box-sizing: border-box;
 
   @media ${({ theme }) => theme.device.desktop} {
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     // TODO: order z-indexes in enum
-    z-index: 99;
+    /* z-index: 99; */
     background-color: ${({ theme }) => theme.background};
 
     box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
