@@ -70,23 +70,23 @@ const SORTERS = {
 
 const DataTable = ({ data, columns }) => {
   const setColumnFormat = () => {
-    for (let i = 0; i < columns.length; i++) {
-      const column = columns[i]
-      const key = column.id
+    for (let currColumn of columns) {
+      const formattedColumn = currColumn
+      const key = formattedColumn.id
       if (key in FORMATTERS) {
-        column.format = FORMATTERS[key]
-        columns[i] = column
+        formattedColumn.format = FORMATTERS[key]
+        currColumn = formattedColumn
       }
     }
   }
 
   const setSortableColumns = () => {
-    for (let i = 0; i < columns.length; i++) {
-      const column = columns[i]
-      const key = column.id
+    for (let currColumn of columns) {
+      const sortedColumn = currColumn
+      const key = sortedColumn.id
       if (key in SORTERS) {
-        column.sortableFunction = SORTERS[key]
-        columns[i] = column
+        sortedColumn.sortableFunction = SORTERS[key]
+        currColumn = sortedColumn
       }
     }
     return columns
