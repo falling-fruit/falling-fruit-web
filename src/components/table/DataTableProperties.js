@@ -8,14 +8,8 @@ const TableLinkPreview = styled.img`
   margin-right: 5px;
 `
 
-const customLinkSort = (rowOne, rowTwo) => {
-  if (rowOne.links.length > rowTwo.links.length) {
-    return 1
-  } else if (rowOne.links.length < rowTwo.links.length) {
-    return -1
-  }
-  return 0
-}
+const customLinkSort = (rowOne, rowTwo) =>
+  rowOne.links.length - rowTwo.links.length
 
 const ResourceList = ({ url, key }) =>
   RESOURCES.map(
@@ -25,7 +19,7 @@ const ResourceList = ({ url, key }) =>
       ),
   )
 
-let FORMATTERS = {
+const FORMATTERS = {
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
   // eslint-disable-next-line react/display-name
@@ -34,7 +28,7 @@ let FORMATTERS = {
     new Date(created_at).toISOString().split('T')[0],
 }
 
-let SORTERS = {
+const SORTERS = {
   links: customLinkSort,
 }
 
