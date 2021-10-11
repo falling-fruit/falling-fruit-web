@@ -1,14 +1,14 @@
-// import wrapper call
 import { useEffect, useState } from 'react'
 
 import { getImports } from '../../utils/api'
 import DataTable from './DataTable'
+import { FORMATTERS } from './DataTableProperties'
 
 const ImportsTable = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    async function getImportData() {
+    const getImportData = async () => {
       const res = await getImports()
       setData(res)
     }
@@ -19,7 +19,7 @@ const ImportsTable = () => {
     {
       id: 'type',
       name: 'Type',
-      selector: (row) => (row.muni ? 'Tree inventory' : 'Community Map'),
+      selector: (row) => (row.muni ? 'Tree inventory' : 'Community map'),
       sortable: true,
     },
     {
@@ -27,6 +27,7 @@ const ImportsTable = () => {
       name: 'Name',
       selector: (row) => row.name,
       sortable: true,
+      format: FORMATTERS.name,
     },
     {
       name: 'Locations',
@@ -38,6 +39,7 @@ const ImportsTable = () => {
       name: 'Date Imported',
       selector: (row) => row.created_at,
       sortable: true,
+      format: FORMATTERS.created_at,
     },
   ]
 
