@@ -1,7 +1,7 @@
 import { default as ReactDataTable } from 'react-data-table-component'
 import styled from 'styled-components/macro'
 
-const DataTableWrapper = styled.div`
+const DataTableWrapper = styled(ReactDataTable)`
   .rdt {
     &_TableHeadRow {
       font-style: normal;
@@ -18,9 +18,7 @@ const DataTableWrapper = styled.div`
 `
 
 const DataTable = ({ data, columns }) => (
-  <DataTableWrapper>
-    <ReactDataTable pagination columns={columns} data={data} />
-  </DataTableWrapper>
+  <DataTableWrapper pagination columns={columns} data={data} />
 )
 
 export default DataTable
