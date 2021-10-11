@@ -101,7 +101,7 @@ const StyledHeader = styled.header`
   }
 `
 const Dropdown = ({ className, children, text }) => {
-  let match = useRouteMatch('/about/:slug')
+  const match = useRouteMatch('/about/:slug')
 
   return (
     <div className={className}>
