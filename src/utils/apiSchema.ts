@@ -34,6 +34,12 @@ export interface paths {
   "/users/{id}": {
     /** Restricted to the same User. */
     put: {
+      parameters: {
+        path: {
+          /** User ID. */
+          id: components["parameters"]["user_id"];
+        };
+      };
       responses: {
         /** Success */
         200: {
@@ -168,6 +174,8 @@ export interface paths {
           offset?: number;
           /** Center `latitude,longitude` in WGS84 decimal degrees. If provided, Locations are returned in order of increasing distance and the distance to each Location is returned. Longitude must be in the interval [-180, 180] and latitude in the interval [-90, 90]. */
           center?: number[];
+          /** Whether to include the path to a review photo thumbnail, if available. */
+          photo?: boolean;
         };
       };
       responses: {
@@ -344,6 +352,57 @@ export interface paths {
       };
     };
   };
+  "/reports": {
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Review"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "multipart/form-data": {
+            json: components["schemas"]["EditReport"];
+            /** Photos to upload. */
+            photos?: string[] | null;
+          };
+        };
+      };
+    };
+  };
+  "/imports": {
+    get: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Import"][];
+          };
+        };
+      };
+    };
+  };
+  "/imports/{id}": {
+    get: {
+      parameters: {
+        path: {
+          /** Import ID. */
+          id: components["parameters"]["import_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Import"];
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface components {
@@ -429,6 +488,8 @@ export interface components {
         type_ids: number[];
         /** Distance in meters from provided centerpoint. */
         distance?: number;
+        /** Path to review photo thumbnail, if available. */
+        photo?: { [key: string]: any };
       };
     /** Location properties that can be edited. */
     EditLocation: components["schemas"]["LatLngFields"] & {
@@ -451,6 +512,8 @@ export interface components {
       season_start?: number;
       /** Last month in season (zero-based). */
       season_stop?: number;
+      /** Author name. Either the `author` set when the Location was created (typically in an unauthenticated session) or the current `name` of the associated User, if that user was not anonymous when adding the location. Cannot be changed once set. */
+      author?: string | null;
     };
     /** All Location properties. */
     Location: components["schemas"]["IdField"] &
@@ -466,9 +529,13 @@ export interface components {
         country: string | null;
         /** Whether imported from a municipal tree inventory. */
         muni: boolean;
+        /** Import ID. */
+        import_id: number | null;
       };
     /** Review properties that can be edited. */
     EditReview: {
+      /** Author name. Either the `author` set when the Review was created (typically in an unauthenticated session) or the current `name` of the associated User, if that user was not anonymous when adding the location. Cannot be changed once set. */
+      author?: string | null;
       /** Comment. */
       comment?: string | null;
       /** Date visited in format YYYY-MM-DD. */
@@ -507,6 +574,62 @@ export interface components {
         name: string;
         /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
         add_anonymously: boolean;
+      };
+    /** Report properties that can be edited. */
+    EditReport: {
+      /** Location ID. */
+      location_id: number;
+      /**
+       * Problem code.
+       * - 0: Location is spam
+       * - 1: Location does not exist
+       * - 2: Location is a duplicate
+       * - 3: Inappropriate review photo
+       * - 4: Inappropriate review comment
+       * - 5: Other (explain below)
+       */
+      problem_code: 0 | 1 | 2 | 3 | 4 | 5;
+      /** Comment. */
+      comment?: string | null;
+      /** Email to use for correspondence. If authenticated, defaults to the user's email. Otherwise, it is required. */
+      email?: string;
+      /** Name to use for correspondence. If authenticated, defaults to the user's author name. */
+      name?: string | null;
+    };
+    /** Report of a problem with a Location. */
+    Report: components["schemas"]["IdField"] &
+      components["schemas"]["EditReport"] &
+      components["schemas"]["DateFields"] & {
+        /** ID of reporting User (if authenticated). */
+        reporter_id?: number | null;
+        /**
+         * Resolution code.
+         * - 0: Made no changes
+         * - 1: Edited the location
+         * - 2: Deleted the location
+         * - 3: Deleted the photo
+         * - 4: Deleted the review
+         * - 5: Hid the location
+         */
+        resolution_code?: (0 | 1 | 2 | 3 | 4 | 5) | null;
+        /** Response comment. */
+        response?: string | null;
+        /** ID of responding User. */
+        responder_id?: number | null;
+      };
+    /** Imported dataset. */
+    Import: components["schemas"]["IdField"] &
+      components["schemas"]["DateFields"] & {
+        /** Name. */
+        name: string;
+        /** Path to a description of the data. */
+        url: string | null;
+        /** Description and import comments. */
+        comments: string | null;
+        /** License. */
+        license: string | null;
+        /** Whether a municipal or university tree inventory. */
+        muni: boolean;
       };
   };
   parameters: {
@@ -576,8 +699,12 @@ export interface components {
      * - 4: Excellent.
      */
     yield_rating: 0 | 1 | 2 | 3 | 4;
+    /** User ID. */
+    user_id: number;
     /** Date visited in format YYYY-MM-DD. */
     observed_on: string;
+    /** Import ID. */
+    import_id: number;
   };
 }
 

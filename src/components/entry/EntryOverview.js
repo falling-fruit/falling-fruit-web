@@ -1,6 +1,6 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -76,30 +76,10 @@ const Description = styled.section`
 
 const EntryOverview = ({ locationData, className }) => {
   const { getLocationTypes } = useTypesById()
-  const [address, setAddress] = useState('')
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
 
   const { t } = useTranslation()
-
-  useEffect(() => {
-    // TODO: stop making geocoding requests, they're expensive. Get address from API
-    /*
-    async function fetchStreetAddress() {
-      const streetAddress = await getStreetAddress(
-        locationData.lat,
-        locationData.lng,
-      )
-
-      setAddress(streetAddress)
-    }
-
-    fetchStreetAddress()
-    */
-    setAddress(
-      '201 N Goodwin Ave, Urbana, IL 61801. (reverse geocoding disabled)',
-    )
-  }, [locationData])
 
   const handleAddressClick = () => {
     history.push(`/map/entry/${locationData.id}`)
@@ -137,7 +117,12 @@ const EntryOverview = ({ locationData, className }) => {
 
             <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
               <Map color={theme.secondaryText} size={20} />
-              <LocationText>{address}</LocationText>
+              <LocationText>
+                {locationData.address ??
+                  `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(
+                    6,
+                  )}`}
+              </LocationText>
             </IconBesideText>
             {hasSeasonality(locationData) && (
               <IconBesideText>

@@ -10,7 +10,7 @@ export const fetchAllTypes = createAsyncThunk(
 export const miscSlice = createSlice({
   name: 'misc',
   initialState: {
-    typesById: null,
+    typesById: {},
     isDesktop: null,
   },
   reducers: {

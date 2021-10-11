@@ -11,7 +11,6 @@
     "@reach/checkbox": "^0.13.2",
     "@reach/combobox": "^0.13.2",
     "@reach/dialog": "^0.15.0",
-    "@reach/rect": "^0.15.0",
     "@reach/slider": "^0.15.0",
     "@reach/tabs": "^0.13.0",
     "@reach/window-size": "^0.13.2",
@@ -19,7 +18,6 @@
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/boxicons-solid": "^10.23.0",
     "axios": "^0.21.1",
-    "connected-react-router": "^6.9.1",
     "cupertino-pane": "^1.2.61",
     "debounce": "^1.2.1",
     "formik": "^2.2.6",
@@ -30,6 +28,7 @@
     "polished": "^4.1.1",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
+    "react-data-table-component": "^7.3.1",
     "react-dom": "^17.0.1",
     "react-dropdown-tree-select": "^2.5.1",
     "react-i18next": "^11.8.13",
@@ -41,6 +40,7 @@
     "react-select": "^4.3.0",
     "react-split-pane": "^0.1.92",
     "react-use": "^17.2.1",
+    "react-virtualized-auto-sizer": "^1.0.5",
     "react-window": "^1.8.6",
     "react-window-infinite-loader": "^1.0.7",
     "reaptcha": "^1.7.2",
@@ -52,7 +52,6 @@
   },
   "devDependencies": {
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
-    "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.8",
@@ -69,7 +68,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/master/spec/openapi.yml --output src/utils/apiSchema.ts"
+    "genApiSchema": "npx openapi-typescript https://fallingfruit.org/test-api/0.3/openapi.yml --output src/utils/apiSchema.ts"
   },
   "browserslist": {
     "production": [
