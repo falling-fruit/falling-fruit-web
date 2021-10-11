@@ -104,7 +104,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
     <td align="center">
       <a href="https://www.linkedin.com/in/riyajain5/">
         <img
-          src="https://uiuc.hack4impact.org/images/people/riya_jain.jpg"
+          src="https://user-images.githubusercontent.com/65252108/135514179-b2e3c92e-e9d6-4eb5-bc92-64c1d473d4e2.jpeg"
           width="500px"
         />
         <br />
