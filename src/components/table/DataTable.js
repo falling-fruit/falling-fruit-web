@@ -17,8 +17,6 @@ const DataTableWrapper = styled(ReactDataTable)`
   }
 `
 
-const DataTable = ({ data, columns }) => (
-  <DataTableWrapper pagination columns={columns} data={data} />
-)
+const DataTable = (props) => <DataTableWrapper pagination {...props} />
 
 export default DataTable
