@@ -80,7 +80,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
     <td align="center">
       <a href="https://www.linkedin.com/in/ashankbehara/">
         <img
-          src="https://uiuc.hack4impact.org/images/values/value-1.svg"
+          src="https://uiuc.hack4impact.org/images/people/ashank_behara.jpg"
           width="500px"
         />
         <br />
