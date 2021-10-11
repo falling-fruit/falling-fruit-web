@@ -66,7 +66,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
     <td align="center">
       <a href="https://www.linkedin.com/in/armanrafati/">
         <img
-          src="https://user-images.githubusercontent.com/46976119/134970401-021d8107-0340-48b5-818b-e4959cdc3c13.jpg"
+          src="https://user-images.githubusercontent.com/46976119/136822997-f65cd51a-6b39-40f4-851c-8e51273398a0.jpg"
           width="500px"
         />
         <br />
