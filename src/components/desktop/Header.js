@@ -1,13 +1,8 @@
 import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
-
-const OnAbout = () => {
-  const location = useLocation()
-  return location.pathname.includes('/about/')
-}
 
 const StyledHeader = styled.header`
   height: 56px;
@@ -105,14 +100,19 @@ const StyledHeader = styled.header`
     }
   }
 `
-const Dropdown = ({ className, children, text }) => (
-  <div className={className}>
-    <div className={OnAbout() ? 'active' : 'button'}>
-      {text} <CaretDown height="8px" />
+const Dropdown = ({ className, children, text }) => {
+  let match = useRouteMatch('/about/:slug')
+
+  return (
+    <div className={className}>
+      <div className={`button ${match && 'active'}`}>
+        {console.log(match)}
+        {text} <CaretDown height="8px" />
+      </div>
+      <div className="content">{children}</div>
     </div>
-    <div className="content">{children}</div>
-  </div>
-)
+  )
+}
 
 const StyledDropdown = styled(Dropdown)`
   display: inline-block;
@@ -121,10 +121,10 @@ const StyledDropdown = styled(Dropdown)`
     background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.secondaryText};
     padding: 16px;
-    display: inline;
     border: none;
     height: 100%;
     width: 100%;
+    padding: 19px 31px;
 
     .active {
       height: 100%;
@@ -139,7 +139,6 @@ const StyledDropdown = styled(Dropdown)`
   .content {
     display: none;
     position: absolute;
-    margin-top: 15px;
     background-color: ${({ theme }) => theme.background};
     border-radius: 0px 0px 6px 6px;
     box-shadow: rgba(0, 0, 0, 0.05) 0 15px 15px;
