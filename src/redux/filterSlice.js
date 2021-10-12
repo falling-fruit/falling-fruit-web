@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
 import { buildTypeSchema } from '../utils/buildTypeSchema'
+import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
 import { fetchLocations } from './viewChange'
 
@@ -56,6 +57,9 @@ export const filterSlice = createSlice({
         showScientificNames,
       )
       state.isLoading = false
+    },
+    [fetchAllTypes.fulfilled]: (state, action) => {
+      state.types = action.payload.map((t) => `${t.id}`)
     },
   },
 })

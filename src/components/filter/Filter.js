@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
+import { useTypesById } from '../../redux/useTypesById'
 import { getIsShowingClusters } from '../../redux/viewChange'
+import { buildTypeSchema } from '../../utils/buildTypeSchema'
 import CheckboxFilters from './CheckboxFilters'
 import RCTreeSelect from './RCTreeSelect'
 
@@ -41,7 +43,15 @@ const Filter = ({ isOpen }) => {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
   const isShowingClusters = useSelector(getIsShowingClusters)
-  const { types, treeData, isLoading } = filters
+  const showScientificNames = useSelector(
+    (state) => state.settings.showScientificNames,
+  )
+  const { types, isLoading } = filters
+  const { typesById } = useTypesById()
+  const treeData = buildTypeSchema(
+    Object.values(typesById),
+    showScientificNames,
+  )
 
   const { t } = useTranslation()
 
