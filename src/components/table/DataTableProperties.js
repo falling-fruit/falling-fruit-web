@@ -7,7 +7,10 @@ const TableLinkPreview = styled.img`
   height: 20px;
   margin-right: 5px;
 `
-
+const NameWrapper = styled.a`
+  font-size: 14px !important;
+  font-weight: normal;
+`
 const customLinkSort = (rowOne, rowTwo) =>
   rowOne.links.length - rowTwo.links.length
 
@@ -23,7 +26,7 @@ const FORMATTERS = {
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
   // eslint-disable-next-line react/display-name
-  name: ({ name }) => <a href={name}>{name}</a>,
+  name: ({ name }) => <NameWrapper href={name}>{name}</NameWrapper>,
   created_at: ({ created_at }) =>
     new Date(created_at).toISOString().split('T')[0],
 }

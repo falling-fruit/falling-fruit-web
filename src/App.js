@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components'
 
 import ComponentDemos from './components/ComponentDemos'
 import MainPage from './components/MainPage'
+import TestPage from './components/template/TestPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { store } from './redux/store'
 import { ConnectedBreakpoint } from './utils/useBreakpoint'
@@ -19,6 +20,9 @@ const App = () => (
           </Route>
           <Route exact path="/demo">
             <ComponentDemos />
+          </Route>
+          <Route exact path="/testpage">
+            <TestPage />
           </Route>
           <Route>
             <MainPage />
