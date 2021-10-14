@@ -92,7 +92,7 @@ React-based, mobile-friendly frontend for Falling Fruit's website.
     <td align="center">
       <a href="https://www.linkedin.com/in/daniel-moon1">
         <img
-          src="https://uiuc.hack4impact.org/images/people/daniel_moon.jpg"
+          src="https://user-images.githubusercontent.com/36148173/137255681-f1ea31d0-9ae8-4aa8-91d0-9f26ca7e91a3.jpg"
           width="500px"
         />
         <br />
