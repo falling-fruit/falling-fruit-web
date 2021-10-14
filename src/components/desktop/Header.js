@@ -106,7 +106,6 @@ const Dropdown = ({ className, children, text }) => {
   return (
     <div className={className}>
       <div className={`button ${match && 'active'}`}>
-        {console.log(match)}
         {text} <CaretDown height="8px" />
       </div>
       <div className="content">{children}</div>
