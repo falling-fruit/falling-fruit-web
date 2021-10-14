@@ -1,3 +1,4 @@
+import Helmet from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
@@ -36,6 +37,12 @@ const MobileLayout = () => {
 
   return (
     <PageTabs index={tabIndex} onChange={handleTabChange}>
+      <Helmet>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+        />
+      </Helmet>
       <TabPanels>
         <TopBarSwitch />
         <Switch>
