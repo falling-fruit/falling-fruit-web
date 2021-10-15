@@ -15,6 +15,11 @@ const StyledFilter = styled.div`
   @media ${({ theme }) => theme.device.desktop} {
     /* position: absolute; */
     width: 100%;
+    > *:nth-child(1) {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
     // TODO: order z-indexes in enum
     /* z-index: 99; */
     background-color: ${({ theme }) => theme.background};
@@ -23,6 +28,10 @@ const StyledFilter = styled.div`
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     padding: 0 10px 16px 10px;
+    margin-top: 3px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   @media ${({ theme }) => theme.device.mobile} {

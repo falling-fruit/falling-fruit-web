@@ -10,6 +10,39 @@ const TreeSelectContainer = styled.div`
   .rc-tree-select-selection {
     display: none;
   }
+  > *:nth-child(3) {
+    position: static !important;
+    display: flex;
+    flex-direction: column;
+    div:nth-child(1) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .rc-tree-select-dropdown {
+    //
+    width: 100%;
+    min-width: 0px;
+    max-height: 1000px;
+    right: 10px;
+    ////display: flex;
+    //flex-direction: column;
+    flex: 3;
+    position: relative;
+  }
+  /* div:nth-child(1) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  } */
+  /*:nth-child(3) {
+    background-color: red;
+  }*/
+  //height: max-content;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `
 
 const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
@@ -22,7 +55,12 @@ const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
       {treeSelectContainerRef.current && (
         <TreeSelect
           style={{ width: 300 }}
-          dropdownStyle={{ maxHeight: 200, overflow: 'auto' }}
+          dropdownStyle={{
+            flex: 1,
+            height: '100%',
+            maxHeight: 200,
+            overflow: 'auto',
+          }}
           treeData={data}
           treeLine
           value={checkedTypes}
