@@ -4,6 +4,7 @@ const PageTemplate = styled.article`
   max-width: 950px;
   width: 66%;
   overflow-y: scroll;
+  height: inherit;
   margin: 56px auto 0px;
   h1 {
     font-family: Lato;
