@@ -62,9 +62,9 @@ const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
           }}
           treeData={data}
           treeLine
-          value={checkedTypes}
+          value={checkedTypes.length === 0 ? data : checkedTypes}
           treeCheckable
-          // treeCheckStrictly
+          treeCheckStrictly
           onChange={onChange}
           treeDataSimpleMode={{
             id: 'key',

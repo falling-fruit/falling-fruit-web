@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -48,12 +49,14 @@ const Filter = ({ isOpen }) => {
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
-  const { types, isLoading } = filters
+  const { isLoading } = filters
   const { typesById } = useTypesById()
   const treeData = buildTypeSchema(
     Object.values(typesById),
     showScientificNames,
   )
+
+  const [checkedTypes, setCheckedTypes] = useState([])
 
   const { t } = useTranslation()
 
@@ -66,10 +69,11 @@ const Filter = ({ isOpen }) => {
             data={treeData}
             shouldZoomIn={isShowingClusters}
             loading={isLoading}
-            onChange={(selectedTypes) =>
-              dispatch(selectionChanged(selectedTypes))
-            }
-            checkedTypes={types}
+            onChange={(selectedTypes) => {
+              setCheckedTypes(selectedTypes)
+              dispatch(selectionChanged(selectedTypes.map((t) => t.value)))
+            }}
+            checkedTypes={checkedTypes}
           />
         </div>
         <div>
