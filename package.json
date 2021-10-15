@@ -30,6 +30,7 @@
     "ramda": "^0.27.1",
     "rc-tree-select": "2.7.0",
     "react": "^17.0.1",
+    "react-data-table-component": "^7.3.1",
     "react-dom": "^17.0.1",
     "react-dropdown-tree-select": "^2.5.1",
     "react-i18next": "^11.8.13",
@@ -70,7 +71,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/master/spec/openapi.yml --output src/utils/apiSchema.ts"
+    "genApiSchema": "npx openapi-typescript https://fallingfruit.org/test-api/0.3/openapi.yml --output src/utils/apiSchema.ts"
   },
   "browserslist": {
     "production": [
