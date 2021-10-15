@@ -7,14 +7,20 @@ import styled from 'styled-components/macro'
 import Input from '../ui/Input'
 
 const TreeSelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
   .rc-tree-select-selection {
     display: none;
   }
+
   > *:nth-child(3) {
     position: static !important;
     display: flex;
     flex-direction: column;
     flex: 1;
+
     div:nth-child(1) {
       height: 100%;
       display: flex;
@@ -22,19 +28,17 @@ const TreeSelectContainer = styled.div`
       margin-bottom: 5px;
     }
   }
+
   .rc-tree-select-dropdown {
     width: 100%;
     min-width: 0 !important;
-    max-height: 1000px;
-    right: 10px;
     position: relative;
   }
+
+  // TODO: Look into relative height of the ul element
   .rc-tree-select-tree {
-    height: 10px;
+    height: 0px;
   }
-  display: flex;
-  flex-direction: column;
-  flex: 1;
 `
 
 const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
@@ -50,7 +54,6 @@ const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
           dropdownStyle={{
             flex: 1,
             height: '100%',
-            //maxHeight: 200,
             overflow: 'auto',
           }}
           treeData={data}
