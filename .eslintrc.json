@@ -5,6 +5,7 @@
   ],
   "plugins": ["simple-import-sort", "@hack4impact-uiuc"],
   "rules": {
+    "prefer-const": "error",
     "eqeqeq": [
       "error",
       "always",
