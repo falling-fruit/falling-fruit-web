@@ -6,10 +6,10 @@ const DataTableWrapper = styled(ReactDataTable)`
     &_TableHeadRow {
       font-style: normal;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 1rem;
     }
     &_TableCell {
-      font-size: 14px;
+      font-size: 1rem;
       &[data-column-id='scientific_name'] {
         font-style: italic;
       }

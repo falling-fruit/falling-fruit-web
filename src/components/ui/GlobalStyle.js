@@ -72,7 +72,9 @@ const GlobalStyle = createGlobalStyle`
 
     @media ${({ theme }) => theme.mobile} {
       // Disable overscrolling on iOS
-      overflow: hidden;
+      position: fixed;
+      height: 100%;
+      width: 100%;
     }
   }
 
