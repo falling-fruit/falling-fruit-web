@@ -56,9 +56,8 @@ const Filter = ({ isOpen }) => {
   )
 
   const { t } = useTranslation()
-
-  return (
-    isOpen && (
+  if (isOpen) {
+    return (
       <StyledFilter>
         <div>
           <p className="edible-type-text">{t('Edible Types')}</p>
@@ -80,7 +79,8 @@ const Filter = ({ isOpen }) => {
         </div>
       </StyledFilter>
     )
-  )
+  }
+  return null
 }
 
 export default Filter

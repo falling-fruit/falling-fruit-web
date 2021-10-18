@@ -37,14 +37,13 @@ const TreeSelectContainer = styled.div`
 
   // TODO: Look into relative height of the ul element
   .rc-tree-select-tree {
-    height: 0px;
+    height: 100px;
   }
 `
 
 const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
   const [searchValue, setSearchValue] = useState('')
   const treeSelectContainerRef = useRef(null)
-
   return (
     <TreeSelectContainer ref={treeSelectContainerRef}>
       <Input onChange={(e) => setSearchValue(e.target.value)} />

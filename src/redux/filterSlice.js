@@ -39,6 +39,12 @@ export const filterSlice = createSlice({
     updateSelection: (state, action) => {
       state.types = action.payload
     },
+    openFilter: (state) => {
+      state.isOpen = true
+    },
+    closeFilter: (state) => {
+      state.isOpen = false
+    },
   },
   extraReducers: {
     [fetchFilterCounts.pending]: (state) => {
@@ -64,11 +70,21 @@ export const filterSlice = createSlice({
   },
 })
 
-export const { setFilters, updateSelection } = filterSlice.actions
+export const {
+  setFilters,
+  openFilter,
+  closeFilter,
+  updateSelection,
+} = filterSlice.actions
 
 export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection(types))
   dispatch(fetchLocations())
+}
+
+export const openFilterAndFetch = () => (dispatch) => {
+  dispatch(openFilter())
+  dispatch(fetchFilterCounts())
 }
 
 export default filterSlice.reducer

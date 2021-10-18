@@ -28,7 +28,6 @@ const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
 
 const MainPane = () => {
   const history = useHistory()
-
   return (
     <Container>
       <Search />
