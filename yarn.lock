@@ -10028,13 +10028,6 @@ react-clientside-effect@^1.2.2:
   dependencies:
     "@babel/runtime" "^7.12.13"
 
-react-data-table-component@^7.4.4:
-  version "7.4.4"
-  resolved "https://registry.yarnpkg.com/react-data-table-component/-/react-data-table-component-7.4.4.tgz#ab0ce0e491619f63e2b506e5825088e05929b659"
-  integrity sha512-u+3fGyJqHV1BxahuFjLCa70JGJkA+5FEXeq+/zvxgoN9Vzi2ZKRtBzdrQHy5uEnhW5LZANmqDtCTpYTtWlBARw==
-  dependencies:
-    deepmerge "^4.2.2"
-
 react-dev-utils@^11.0.3:
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.3.tgz#b61ed499c7d74f447d4faddcc547e5e671e97c08"
