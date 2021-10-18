@@ -6,6 +6,7 @@ const PageTemplate = styled.article`
   overflow-y: scroll;
   height: inherit;
   margin: 56px auto 0px;
+  overflow-wrap: break-word;
   h1 {
     font-family: Lato;
     font-style: normal;
@@ -42,7 +43,7 @@ const PageTemplate = styled.article`
   }
 
   a {
-    color: ${({ theme }) => theme.secondaryText};
+    color: ${({ theme }) => theme.orange};
     font-family: Lato;
     font-style: normal;
     font-weight: normal;

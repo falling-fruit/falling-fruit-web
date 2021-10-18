@@ -10,6 +10,7 @@ const TableLinkPreview = styled.img`
 const NameWrapper = styled.a`
   font-size: 14px !important;
   font-weight: normal;
+  color: ${({ theme }) => theme.secondaryText} !important;
 `
 const customLinkSort = (rowOne, rowTwo) =>
   rowOne.links.length - rowTwo.links.length
