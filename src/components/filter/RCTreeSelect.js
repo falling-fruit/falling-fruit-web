@@ -1,7 +1,7 @@
 import 'rc-tree-select/assets/index.css'
 
-import TreeSelect, { SHOW_PARENT } from 'rc-tree-select'
-import { useRef, useState } from 'react'
+import TreeSelect from 'rc-tree-select'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 
 import Input from '../ui/Input'
@@ -20,6 +20,7 @@ const TreeSelectContainer = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
+    z-index: 0;
 
     div:nth-child(1) {
       height: 100%;
@@ -43,11 +44,15 @@ const TreeSelectContainer = styled.div`
 
 const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
   const [searchValue, setSearchValue] = useState('')
-  const treeSelectContainerRef = useRef(null)
+  const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
+
   return (
-    <TreeSelectContainer ref={treeSelectContainerRef}>
-      <Input onChange={(e) => setSearchValue(e.target.value)} />
-      {treeSelectContainerRef.current && (
+    <TreeSelectContainer ref={setTreeSelectContainerRef}>
+      <Input
+        onChange={(e) => setSearchValue(e.target.value)}
+        placeholder="Search for a type..."
+      />
+      {treeSelectContainerRef && (
         <TreeSelect
           style={{ width: 300 }}
           dropdownStyle={{
@@ -57,21 +62,19 @@ const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
           }}
           treeData={data}
           treeLine
-          value={checkedTypes}
+          value={checkedTypes.length === 0 ? data : checkedTypes}
           treeCheckable
-          showCheckedStrategy={SHOW_PARENT}
+          treeCheckStrictly
           onChange={onChange}
           treeDataSimpleMode={{
             id: 'key',
             rootPId: 'null',
           }}
-          maxTagCount={0}
-          maxTagPlaceholder={null}
           treeNodeFilterProp="title"
           open
           searchValue={searchValue}
           virtual
-          getPopupContainer={() => treeSelectContainerRef.current}
+          getPopupContainer={() => treeSelectContainerRef}
         />
       )}
     </TreeSelectContainer>
