@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components'
 
 import TestPage from './components/about/TestPage'
 import ComponentDemos from './components/ComponentDemos'
+import Header from './components/desktop/Header'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { store } from './redux/store'
@@ -19,6 +20,7 @@ const App = () => (
             <Redirect to="/map" />
           </Route>
           <Route exact path="/about/project">
+            <Header />
             <TestPage />
           </Route>
           <Route exact path="/demo">

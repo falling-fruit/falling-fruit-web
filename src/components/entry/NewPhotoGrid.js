@@ -24,10 +24,12 @@ const PhotoGridTemplate = ({ photos, float }) => {
       width: 160px;
       height: 94px;
     }
+    @media ${({ theme }) => theme.device.desktop} {
+      width: 156px;
+      height: 195px;
+    }
     object-fit: cover;
     display: block;
-    width: 156px;
-    height: 195px;
   `
 
   return (
