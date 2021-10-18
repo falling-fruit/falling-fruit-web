@@ -1,22 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-  fetchAccessToken,
-  saveTokenToReduxStore,
-} from '../redux/credentialSlice'
+import { fetchAccessToken } from '../redux/credentialSlice'
 
 const LoginPage = () => {
-  const { credentials } = useSelector((state) => state.credential)
+  const { authToken } = useSelector((state) => state.credential)
 
   const dispatch = useDispatch()
 
   const getJWTToken = () => {
-    const jwtToken = fetchAccessToken({
-      email: 'email',
-      password: 'email',
-    })
-    dispatch(jwtToken)
-    dispatch(saveTokenToReduxStore(jwtToken))
+    dispatch(
+      fetchAccessToken({
+        email: '',
+        password: '',
+      }),
+    )
   }
 
   return (
@@ -24,7 +21,7 @@ const LoginPage = () => {
       <h1>Login</h1>
       <input placeholder="Enter Username"></input>
       <input placeholder="Enter Password"></input>
-      <h5>{`token ${credentials}`}</h5>
+      <h5>{`token ${authToken} `}</h5>
       <button onClick={getJWTToken}>Login</button>
     </div>
   )

@@ -10,7 +10,6 @@ export const fetchAccessToken = createAsyncThunk(
       email: userCredentials.email,
       password: userCredentials.password,
     })
-    console.log(response)
     return response
   },
 )
@@ -19,12 +18,13 @@ const initialState = { authToken: undefined }
 export const credentialSlice = createSlice({
   name: 'credentials',
   initialState,
-  reducers: {
-    saveTokenToReduxStore: (state, action) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchAccessToken.fulfilled, (state, action) => {
       state.authToken = action.payload
-    },
+    })
   },
 })
 
-export const { saveTokenToReduxStore } = credentialSlice.actions
+export const { getToken } = credentialSlice.actions
 export default credentialSlice.reducer
