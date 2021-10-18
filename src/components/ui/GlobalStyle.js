@@ -45,15 +45,14 @@ const theme = {
 // TODO: try to create more functional theme helpers
 // and maybe move all the colors into a colors object, and add a getColor theme helper
 
-const validatedColor =
-  (validThemeColor = 'secondaryBackground', invalidThemeColor = 'invalid') =>
-  ({ $invalid, theme }) =>
-    $invalid ? theme[invalidThemeColor] : theme[validThemeColor]
+const validatedColor = (
+  validThemeColor = 'secondaryBackground',
+  invalidThemeColor = 'invalid',
+) => ({ $invalid, theme }) =>
+  $invalid ? theme[invalidThemeColor] : theme[validThemeColor]
 
-const prepend =
-  (prefix = '', value) =>
-  ({ $prepend }) =>
-    `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
+const prepend = (prefix = '', value) => ({ $prepend }) =>
+  `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
 
 const GlobalStyle = createGlobalStyle`
 
