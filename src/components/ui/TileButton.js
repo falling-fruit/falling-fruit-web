@@ -13,7 +13,8 @@ const StyledResetButton = styled(ResetButton)`
     ${({ $selected, theme }) => ($selected ? theme.blue : theme.background)};
   overflow: hidden;
 
-  .mask {
+  &::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +45,6 @@ const StyledResetButton = styled(ResetButton)`
 
 const TileButton = ({ label, children, ...props }) => (
   <StyledResetButton {...props}>
-    <div className="mask" />
     <p>{label}</p>
     {children}
   </StyledResetButton>
