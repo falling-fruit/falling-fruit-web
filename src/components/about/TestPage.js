@@ -38,7 +38,7 @@ const TestPage = () => (
     <h3>Example 3</h3>
     <p>
       Lorem Ipsum is simply dummy text of the printing and example link click
-      here <a href="google.com">riya !sucks</a>. Lorem Ipsum has been the
+      here <a href="google.com">riya !sucks</a>. Lorem Ipsum Dolor has been the
       industry's standard dummy text ever since the 1500s.
     </p>
 
