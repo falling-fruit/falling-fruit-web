@@ -1,9 +1,7 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { fetchAccessToken } from '../redux/userSlice'
 import { getTypes } from '../utils/api'
 import { ReportModal } from './form/ReportModal'
 import Button from './ui/Button'
@@ -26,15 +24,6 @@ const ComponentDemos = () => {
   const [showDialog, setShowDialog] = useState(false)
   const [currentStep, setCurrentStep] = useState(2)
   const [typeOptions, setTypeOptions] = useState([])
-  const dispatch = useDispatch()
-  const getToken = () => {
-    dispatch(
-      fetchAccessToken({
-        email: 'email',
-        password: 'password',
-      }),
-    )
-  }
 
   useEffect(() => {
     async function fetchTypes() {
@@ -150,7 +139,6 @@ const ComponentDemos = () => {
       />
       <br />
       <br />
-      <button onClick={getToken}>test</button>
     </>
   )
 }
