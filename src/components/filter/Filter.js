@@ -59,32 +59,29 @@ const Filter = ({ isOpen }) => {
   const [checkedTypes, setCheckedTypes] = useState([])
 
   const { t } = useTranslation()
-  if (isOpen) {
-    return (
-      <StyledFilter>
-        <div>
-          <p className="edible-type-text">{t('Edible Types')}</p>
-          <RCTreeSelect
-            data={treeData}
-            shouldZoomIn={isShowingClusters}
-            loading={isLoading}
-            onChange={(selectedTypes) => {
-              setCheckedTypes(selectedTypes)
-              dispatch(selectionChanged(selectedTypes.map((t) => t.value)))
-            }}
-            checkedTypes={checkedTypes}
-          />
-        </div>
-        <div>
-          <CheckboxFilters
-            values={filters}
-            onChange={(values) => dispatch(setFilters(values))}
-          />
-        </div>
-      </StyledFilter>
-    )
-  }
-  return null
+  return isOpen ? (
+    <StyledFilter>
+      <div>
+        <p className="edible-type-text">{t('Edible Types')}</p>
+        <RCTreeSelect
+          data={treeData}
+          shouldZoomIn={isShowingClusters}
+          loading={isLoading}
+          onChange={(selectedTypes) => {
+            setCheckedTypes(selectedTypes)
+            dispatch(selectionChanged(selectedTypes.map((t) => t.value)))
+          }}
+          checkedTypes={checkedTypes}
+        />
+      </div>
+      <div>
+        <CheckboxFilters
+          values={filters}
+          onChange={(values) => dispatch(setFilters(values))}
+        />
+      </div>
+    </StyledFilter>
+  ) : null
 }
 
 export default Filter
