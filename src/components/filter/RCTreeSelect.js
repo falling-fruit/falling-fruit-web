@@ -7,6 +7,9 @@ import styled from 'styled-components/macro'
 import Input from '../ui/Input'
 
 const TreeSelectContainer = styled.div`
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 60vh;
+  }
   display: flex;
   flex-direction: column;
   flex: 1;

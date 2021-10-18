@@ -9,7 +9,7 @@ import { NavPane } from './NavPane'
 const SidePaneSwitch = () => (
   <Switch>
     <Route exact path={['/map', '/list', '/']}>
-      <MainPane isOpen />
+      <MainPane />
     </Route>
     <Route>
       <NavPane>
