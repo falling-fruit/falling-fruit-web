@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
-import { buildTypeSchema, getSelectedTypes } from '../utils/buildTypeSchema'
+import { buildTypeSchema } from '../utils/buildTypeSchema'
+import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
-import { fetchLocations, getIsShowingClusters } from './viewChange'
+import { fetchLocations } from './viewChange'
 
 export const fetchFilterCounts = createAsyncThunk(
   'map/fetchFilterCounts',
@@ -31,19 +32,18 @@ export const filterSlice = createSlice({
     types: [],
     muni: true,
     invasive: false,
-    isOpen: false,
     isLoading: false,
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),
+    updateSelection: (state, action) => {
+      state.types = action.payload
+    },
     openFilter: (state) => {
       state.isOpen = true
     },
     closeFilter: (state) => {
       state.isOpen = false
-    },
-    updateSelection: (state, action) => {
-      state.types = getSelectedTypes(action.payload)
     },
   },
   extraReducers: {
@@ -60,11 +60,12 @@ export const filterSlice = createSlice({
 
       state.treeData = buildTypeSchema(
         Object.values(typesById),
-        countsById,
-        state.types,
         showScientificNames,
       )
       state.isLoading = false
+    },
+    [fetchAllTypes.fulfilled]: (state, action) => {
+      state.types = action.payload.map((t) => `${t.id}`)
     },
   },
 })
@@ -76,18 +77,14 @@ export const {
   updateSelection,
 } = filterSlice.actions
 
-export const openFilterAndFetch = () => (dispatch, getState) => {
-  const state = getState()
-  dispatch(openFilter())
-
-  if (!getIsShowingClusters(state)) {
-    dispatch(fetchFilterCounts())
-  }
-}
-
 export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection(types))
   dispatch(fetchLocations())
+}
+
+export const openFilterAndFetch = () => (dispatch) => {
+  dispatch(openFilter())
+  dispatch(fetchFilterCounts())
 }
 
 export default filterSlice.reducer
