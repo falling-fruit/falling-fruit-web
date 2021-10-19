@@ -49,7 +49,8 @@ const Filter = ({ isOpen }) => {
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
-  const { isLoading } = filters
+  const { isLoading, countsById } = filters
+  console.log('HERE', countsById)
   const { typesById } = useTypesById()
   const treeData = buildTypeSchema(
     Object.values(typesById),

@@ -98,7 +98,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
-  if (state.filter.isOpen) {
+  if (state.filter.isOpen || state.misc.isDesktop) {
     dispatch(fetchFilterCounts())
   }
 }
