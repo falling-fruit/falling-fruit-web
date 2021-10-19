@@ -12,7 +12,7 @@ const StyledSelect = styled(Select)`
 
   .select__clear-indicator,
   .select__indicator-separator {
-    display: none;
+    // TODO: style these properly
   }
 
   .select__dropdown-indicator {
