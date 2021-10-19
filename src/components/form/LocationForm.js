@@ -72,7 +72,7 @@ const InlineSelects = styled.div`
   display: flex;
   align-items: center;
 
-  span {
+  > span {
     // Text
     margin: 0 10px;
   }
