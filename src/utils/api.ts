@@ -45,72 +45,34 @@ const fileToFormData = (photoData: string | Blob | undefined) => {
 
 export const getClusters = (
   params: paths['/clusters']['get']['parameters']['query'],
-) =>
-  handleResponse(
-    instance.get('/clusters', {
-      params,
-    }),
-  )
+) => handleResponse(instance.get('/clusters', { params }))
 
 export const getLocations = (
   params: paths['/locations']['get']['parameters']['query'],
-) =>
-  handleResponse(
-    instance.get('/locations', {
-      params,
-    }),
-  )
+) => handleResponse(instance.get('/locations', { params }))
 
 export const getLocationsCount = (
   params: paths['/locations/count']['get']['parameters']['query'],
-) =>
-  handleResponse(
-    instance.get('/locations/count', {
-      params,
-    }),
-  )
+) => handleResponse(instance.get('/locations/count', { params }))
 
-/* Not implemented
 export const addLocation = (
-  params: paths['/locations']['post']['parameters']['query'],
-  photoData?: File,
-) =>
-  handleResponse(
-    instance.post('/locations', fileToFormData(photoData), {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      params,
-    }),
-  )
-*/
+  data: paths['/locations']['post']['requestBody']['content']['application/json'],
+) => handleResponse(instance.post('/locations', data))
 
 export const getLocationById = (
   id: paths['/locations/{id}']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/locations/${id}`))
 
-/* Not implemented
-export const updateLocation = (
-  id: paths['/locations/{id}']['post']['parameters']['path']['id'],
-  params: paths['/locations/{id}']['post']['parameters']['query'],
-) =>
-  handleResponse(
-    instance.post(`/locations/${id}`, null, {
-      params,
-    }),
-  )
-*/
+export const editLocation = (
+  id: paths['/locations/{id}']['put']['parameters']['path']['id'],
+  data: paths['/locations/{id}']['put']['requestBody']['content']['application/json'],
+) => handleResponse(instance.post(`/locations/${id}`, data))
 
 export const getTypes = () => handleResponse(instance.get('/types'))
 
 export const getTypeCounts = (
   params: paths['/types/counts']['get']['parameters']['query'],
-) =>
-  handleResponse(
-    instance.get('/types/counts', {
-      params,
-    }),
-  )
+) => handleResponse(instance.get('/types/counts', { params }))
 
 export const getTypeById = (
   id: paths['/types/{id}']['get']['parameters']['path']['id'],
