@@ -50,11 +50,11 @@ const Filter = ({ isOpen }) => {
     (state) => state.settings.showScientificNames,
   )
   const { isLoading, countsById } = filters
-  console.log('HERE', countsById)
   const { typesById } = useTypesById()
   const treeData = buildTypeSchema(
     Object.values(typesById),
     showScientificNames,
+    countsById,
   )
 
   const [checkedTypes, setCheckedTypes] = useState([])
