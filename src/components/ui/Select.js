@@ -10,13 +10,18 @@ const LIST_ITEM_HEIGHT = 46
 const StyledSelect = styled(Select)`
   font-size: 1rem;
 
-  .select__clear-indicator,
+  .select__clear-indicator {
+    // TODO: style this properly. Needs to only be headerText on hover
+    // color: ${({ theme }) => theme.headerText};
+  }
+
   .select__indicator-separator {
-    // TODO: style these properly
+    // TODO: height is not right for some selects
   }
 
   .select__dropdown-indicator {
-    color: ${({ theme }) => theme.headerText};
+    // TODO: style this properly. Needs to only be headerText on hover
+    // color: ${({ theme }) => theme.headerText};
   }
 
   .select__control {
