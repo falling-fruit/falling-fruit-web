@@ -1,5 +1,10 @@
 import styled from 'styled-components/macro'
 
+const PageScrollWrapper = styled.div`
+  width: 100%,
+  overflow-y: auto;
+`
+
 const PageTemplate = styled.article`
   @media ${({ theme }) => theme.device.mobile} {
     width: 80%;
@@ -7,7 +12,6 @@ const PageTemplate = styled.article`
 
   max-width: 950px;
   width: 66%;
-  overflow-y: auto;
   height: inherit;
   margin: 56px auto 0px;
   overflow-wrap: break-word;
@@ -48,4 +52,4 @@ const PageTemplate = styled.article`
     line-height: 24px;
   }
 `
-export default PageTemplate
+export { PageScrollWrapper, PageTemplate }
