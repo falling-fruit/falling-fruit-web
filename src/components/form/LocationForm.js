@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
+import { addLocation } from '../../utils/api'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -95,6 +97,7 @@ const LocationStep = ({ typeOptions }) => (
       formatOptionLabel={(option) => <TypeName typeId={option.value} />}
       isVirtualized
       required
+      // TODO: fix select searching
     />
     <Textarea name="description" label="Description" />
     <Select
@@ -132,6 +135,8 @@ export const LocationForm = ({ desktop }) => {
   const { state } = useLocation()
   const { typesById } = useTypesById()
 
+  const { lat, lng } = useSelector((state) => state.map.view.center)
+
   const typeOptions = useMemo(
     () =>
       typesById
@@ -158,19 +163,42 @@ export const LocationForm = ({ desktop }) => {
   const validate = (values) => {
     const { types, season_start, season_end } = values
 
-    const errors = {
-      types: types.length === 0,
-      season_start: season_end?.value && !season_start?.value,
-      season_end:
-        (season_start?.value && !season_end?.value) ||
-        season_end?.value < season_start?.value,
+    const errors = {}
+
+    if (types.length === 0) {
+      errors.types = true
+    }
+
+    if (season_start?.value && season_end?.value) {
+      if (season_end.value < season_start.value) {
+        errors.season_end = true
+      }
+    } else if (season_start?.value) {
+      errors.season_start = true
+    } else if (season_end?.value) {
+      errors.season_end = true
     }
 
     return errors
   }
 
   const handleSubmit = (values) => {
-    console.log('submitted location form', values)
+    const finalValues = {
+      ...values,
+      type_ids: values.types.map(({ value }) => value),
+      lat,
+      lng,
+      author: null,
+      unverified: false,
+    }
+
+    delete finalValues.types
+    delete finalValues.fruiting
+    delete finalValues.quality_rating
+    delete finalValues.yield_rating
+
+    console.log('submitted location form', finalValues)
+    addLocation(finalValues).then((value) => console.log(value))
     history.push('/map')
   }
 
@@ -181,10 +209,11 @@ export const LocationForm = ({ desktop }) => {
       <StepDisplay
         validateOnChange={false}
         validate={validate}
+        validationSchema={null}
         initialValues={INITIAL_VALUES}
         onSubmit={handleSubmit}
         // For all steps only
-        renderButtons={(isSubmitting) => (
+        renderButtons={({ isValid, isSubmitting }) => (
           <ProgressButtons>
             <Button
               secondary
@@ -193,7 +222,7 @@ export const LocationForm = ({ desktop }) => {
             >
               Cancel
             </Button>
-            <Button disabled={isSubmitting} type="submit">
+            <Button disabled={!isValid || isSubmitting} type="submit">
               {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
           </ProgressButtons>

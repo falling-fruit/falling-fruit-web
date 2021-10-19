@@ -19,10 +19,10 @@ const FormikAllSteps = ({ children, renderButtons, ...props }) => (
     )}
     {...props}
   >
-    {({ isSubmitting }) => (
+    {({ dirty, isValid, isSubmitting }) => (
       <Form>
         {children}
-        {renderButtons(isSubmitting)}
+        {renderButtons({ dirty, isValid, isSubmitting })}
       </Form>
     )}
   </Formik>
