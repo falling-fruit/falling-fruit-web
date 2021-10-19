@@ -8,7 +8,7 @@ const TableLinkPreview = styled.img`
   margin-right: 5px;
 `
 const NameWrapper = styled.a`
-  font-size: 14px !important;
+  font-size: 1rem !important;
   font-weight: normal;
   color: ${({ theme }) => theme.secondaryText} !important;
 `

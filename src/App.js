@@ -3,7 +3,8 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import TestPage from './components/about/TestPage'
+import Project from './components/about/Project'
+//import TestPage from './components/about/TestPage'
 import ComponentDemos from './components/ComponentDemos'
 import Header from './components/desktop/Header'
 import MainPage from './components/MainPage'
@@ -21,13 +22,10 @@ const App = () => (
           </Route>
           <Route exact path="/about/project">
             <Header />
-            <TestPage />
+            <Project />
           </Route>
           <Route exact path="/demo">
             <ComponentDemos />
-          </Route>
-          <Route exact path="/testpage">
-            <TestPage />
           </Route>
           <Route>
             <MainPage />
