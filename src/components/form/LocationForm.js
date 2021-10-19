@@ -16,13 +16,6 @@ import {
   ReviewStep,
 } from './ReviewForm'
 
-const INITIAL_VALUES = {
-  types: [],
-  description: '',
-  access: null,
-  ...INITIAL_REVIEW_VALUES,
-}
-
 const PROPERTY_ACCESS_LABELS = [
   'Source is on my property',
   'I have permission from the owner to add the source',
@@ -56,6 +49,13 @@ const labelsToOptions = (labels) =>
 const PROPERTY_ACCESS_OPTIONS = labelsToOptions(PROPERTY_ACCESS_LABELS)
 
 const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
+
+const INITIAL_VALUES = {
+  types: [],
+  description: '',
+  access: null,
+  ...INITIAL_REVIEW_VALUES,
+}
 
 const StyledLocationForm = styled.div`
   box-sizing: border-box;
@@ -102,6 +102,7 @@ const LocationStep = ({ typeOptions }) => (
       label="Property Access"
       options={PROPERTY_ACCESS_OPTIONS}
       isSearchable={false}
+      isClearable
     />
     <Label>
       Seasonality
@@ -112,9 +113,15 @@ const LocationStep = ({ typeOptions }) => (
         name="season_start"
         options={MONTH_OPTIONS}
         isSearchable={false}
+        isClearable
       />
       <span>to</span>
-      <Select name="season_end" options={MONTH_OPTIONS} isSearchable={false} />
+      <Select
+        name="season_end"
+        options={MONTH_OPTIONS}
+        isSearchable={false}
+        isClearable
+      />
     </InlineSelects>
   </>
 )
@@ -148,6 +155,20 @@ export const LocationForm = ({ desktop }) => {
     </Step>
   ))
 
+  const validate = (values) => {
+    const { types, season_start, season_end } = values
+
+    const errors = {
+      types: types.length === 0,
+      season_start: season_end?.value && !season_start?.value,
+      season_end:
+        (season_start?.value && !season_end?.value) ||
+        season_end?.value < season_start?.value,
+    }
+
+    return errors
+  }
+
   const handleSubmit = (values) => {
     console.log('submitted location form', values)
     history.push('/map')
@@ -159,6 +180,7 @@ export const LocationForm = ({ desktop }) => {
     <StyledLocationForm>
       <StepDisplay
         validateOnChange={false}
+        validate={validate}
         initialValues={INITIAL_VALUES}
         onSubmit={handleSubmit}
         // For all steps only
