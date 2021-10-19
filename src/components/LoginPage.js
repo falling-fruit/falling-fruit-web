@@ -5,18 +5,23 @@ import {
   clearAuthCredentials,
   fetchAccessToken,
 } from '../redux/credentialSlice'
+import Button from './ui/Button'
 import Checkbox from './ui/Checkbox'
+import StyledInput from './ui/Input'
 
 const LoginPage = () => {
   const { authToken } = useSelector((state) => state.credential)
   const [isChecked, setIsChecked] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
   const dispatch = useDispatch()
 
   const getJWTToken = () => {
     dispatch(
       fetchAccessToken({
-        email: '',
-        password: '',
+        email: username,
+        password: password,
         isChecked: isChecked,
       }),
     )
@@ -31,8 +36,17 @@ const LoginPage = () => {
   return (
     <div>
       <h1>Login</h1>
-      <input placeholder="Enter Username"></input>
-      <input placeholder="Enter Password"></input>
+      <StyledInput
+        placeholder="Enter Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <br />
+      <StyledInput
+        placeholder="Enter Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <h5>{`token: ${authToken} `}</h5>
       <Checkbox
         id={'isRemember'}
@@ -41,8 +55,8 @@ const LoginPage = () => {
         onChange={() => setIsChecked(!isChecked)}
         label={<label htmlFor={'isRemember'}>Stay logged in</label>}
       />
-      <button onClick={getJWTToken}>Login</button>
-      <button onClick={logout}>Logout</button>
+      <Button onClick={getJWTToken}>Login</Button>
+      <Button onClick={logout}>Logout</Button>
     </div>
   )
 }
