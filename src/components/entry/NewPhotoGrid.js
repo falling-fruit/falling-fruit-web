@@ -12,7 +12,7 @@ const PhotoGridTemplate = ({ photos, float }) => {
     @media ${({ theme }) => theme.device.desktop} {
       margin: 16px;
       gap: 8px;
-      grid-template-columns: 156px 156px;
+      grid-template-columns: 156px auto;
     }
     color: ${({ theme }) => theme.secondaryText};
     float: ${float};
