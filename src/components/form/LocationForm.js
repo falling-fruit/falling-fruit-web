@@ -14,6 +14,7 @@ import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Select, Textarea } from './FormikWrappers'
 import {
   INITIAL_REVIEW_VALUES,
+  isValidReview,
   ReviewPhotoStep,
   ReviewStep,
 } from './ReviewForm'
@@ -207,7 +208,7 @@ export const LocationForm = ({ desktop }) => {
     const locationResp = await addLocation(locationValues)
     console.log('locationResp', locationResp)
 
-    if (review) {
+    if (isValidReview(review)) {
       const reviewValues = {
         ...review,
         author: null,

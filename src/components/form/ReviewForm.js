@@ -13,10 +13,18 @@ import FormikAllSteps from './FormikAllSteps'
 import { FileUpload, Slider, Textarea } from './FormikWrappers'
 
 export const INITIAL_REVIEW_VALUES = {
-  fruiting: 0,
-  quality_rating: 0,
-  yield_rating: 0,
+  review: {
+    fruiting: 0,
+    quality_rating: 0,
+    yield_rating: 0,
+  },
 }
+
+export const isValidReview = (review) =>
+  review.comment ||
+  review.fruiting !== 0 ||
+  review.quality_rating !== 0 ||
+  review.yield_rating !== 0
 
 const WideButton = styled(Button).attrs({
   secondary: true,
@@ -116,6 +124,9 @@ export const ReviewForm = ({ onSubmit }) => {
     <FormikAllSteps
       onSubmit={handleSubmit}
       initialValues={INITIAL_REVIEW_VALUES}
+      validate={({ review }) =>
+        isValidReview(review) ? null : { review: { comment: true } }
+      }
       renderButtons={({ isSubmitting }) => (
         <Button disabled={isSubmitting} type="submit">
           {isSubmitting ? 'Publishing' : 'Publish Review'}
