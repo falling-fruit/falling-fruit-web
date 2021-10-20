@@ -66,7 +66,7 @@ export const getLocationById = (
 export const editLocation = (
   id: paths['/locations/{id}']['put']['parameters']['path']['id'],
   data: paths['/locations/{id}']['put']['requestBody']['content']['application/json'],
-) => handleResponse(instance.post(`/locations/${id}`, data))
+) => handleResponse(instance.put(`/locations/${id}`, data))
 
 export const getTypes = () => handleResponse(instance.get('/types'))
 
@@ -82,28 +82,51 @@ export const getReviews = (
   locationId: paths['/locations/{id}/reviews']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/locations/${locationId}/reviews`))
 
+export const getReviewById = (
+  id: paths['/reviews/{id}']['get']['parameters']['path']['id'],
+) => handleResponse(instance.get(`/reviews/${id}`))
+
+export const addReview = (
+  locationId: paths['/locations/{id}/reviews']['post']['parameters']['path']['id'],
+  data: paths['/locations/{id}/reviews']['post']['requestBody']['content']['multipart/form-data']['json'],
+) => {
+  const formData = new FormData()
+  formData.append('json', JSON.stringify(data))
+
+  return handleResponse(
+    instance.post(`/locations/${locationId}/reviews`, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      formData,
+    }),
+  )
+}
+
+export const editReview = (
+  id: paths['/reviews/{id}']['put']['parameters']['path']['id'],
+  data: paths['/reviews/{id}']['put']['requestBody']['content']['multipart/form-data']['json'],
+) => {
+  const formData = new FormData()
+  formData.append('json', JSON.stringify(data))
+
+  return handleResponse(
+    instance.put(`/reviews/${id}`, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      formData,
+    }),
+  )
+}
+
+/*
+export const addReport = (data: paths['/reports']['post']['requestBody']['content']['multipart/form-data']['json']) => {
+}
+*/
+
 export const getImports = () => handleResponse(instance.get(`/imports`))
 
 export const getImportById = (
   id: paths['/imports/{id}']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/imports/${id}`))
-
-/* Not implemented
-export const addReview = (
-  locationId: paths['/locations/{id}/review']['post']['parameters']['path']['id'],
-  params: paths['/locations/{id}/review']['post']['parameters']['query'],
-  photoData?: File,
-) =>
-  handleResponse(
-    instance.post(
-      `/locations/${locationId}/review`,
-      fileToFormData(photoData),
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        params,
-      },
-    ),
-  )
-*/
