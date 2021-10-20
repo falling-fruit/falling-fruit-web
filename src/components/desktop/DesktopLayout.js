@@ -8,8 +8,9 @@ import SidePaneSwitch from './SidePaneSwitch'
 
 // Min and max pane width, in pixels
 const MIN_PANE_WIDTH = (_vw) => 310
-const MAX_PANE_WIDTH = (vw) => Math.max((21.5 * vw) / 100, MIN_PANE_WIDTH(vw))
-const DEFAULT_PANE_WIDTH = MAX_PANE_WIDTH
+const MAX_PANE_WIDTH = (vw) => Math.max((40 * vw) / 100, MIN_PANE_WIDTH(vw))
+const DEFAULT_PANE_WIDTH = (vw) =>
+  Math.max((21.5 * vw) / 100, MIN_PANE_WIDTH(vw))
 
 const DesktopContainer = styled.div`
   display: flex;
