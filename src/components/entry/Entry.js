@@ -62,8 +62,14 @@ const Entry = ({ isInDrawer }) => {
     fetchEntryData()
   }, [id])
 
+  const addSubmittedReview = (submittedReview) => {
+    setReviews((reviews) => [...reviews, submittedReview])
+  }
+
   const entryOverview = <EntryOverview locationData={locationData} />
-  const entryReviews = <EntryReviews reviews={reviews} />
+  const entryReviews = (
+    <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
+  )
 
   let content
 

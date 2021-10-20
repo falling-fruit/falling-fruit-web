@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
-import { addLocation } from '../../utils/api'
+import { addLocation, addReview } from '../../utils/api'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -55,7 +55,6 @@ const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 const INITIAL_VALUES = {
   types: [],
   description: '',
-  access: null,
   ...INITIAL_REVIEW_VALUES,
 }
 
@@ -165,7 +164,7 @@ export const LocationForm = ({ desktop }) => {
 
     const errors = {}
 
-    if (types.length === 0) {
+    if (types && types.length === 0) {
       errors.types = true
     }
 
@@ -174,31 +173,51 @@ export const LocationForm = ({ desktop }) => {
         errors.season_end = true
       }
     } else if (season_start?.value) {
-      errors.season_start = true
-    } else if (season_end?.value) {
       errors.season_end = true
+    } else if (season_end?.value) {
+      errors.season_start = true
     }
 
     return errors
   }
 
-  const handleSubmit = (values) => {
-    const finalValues = {
-      ...values,
-      type_ids: values.types.map(({ value }) => value),
+  const handleSubmit = async (values) => {
+    const {
+      types,
+      description,
+      season_start,
+      season_end,
+      access,
+      review,
+    } = values
+
+    const locationValues = {
+      type_ids: types.map(({ value }) => value),
+      description,
+      season_start: season_start?.value,
+      season_end: season_end?.value,
+      access: access?.value,
       lat,
       lng,
       author: null,
       unverified: false,
     }
 
-    delete finalValues.types
-    delete finalValues.fruiting
-    delete finalValues.quality_rating
-    delete finalValues.yield_rating
+    console.log('locationValues', locationValues)
+    const locationResp = await addLocation(locationValues)
+    console.log('locationResp', locationResp)
 
-    console.log('submitted location form', finalValues)
-    addLocation(finalValues).then((value) => console.log(value))
+    if (review) {
+      const reviewValues = {
+        ...review,
+        author: null,
+      }
+
+      console.log('reviewValues', reviewValues)
+      const reviewResp = await addReview(locationResp.id, reviewValues)
+      console.log('reviewResp', reviewResp)
+    }
+
     history.push('/map')
   }
 
@@ -209,7 +228,6 @@ export const LocationForm = ({ desktop }) => {
       <StepDisplay
         validateOnChange={false}
         validate={validate}
-        validationSchema={null}
         initialValues={INITIAL_VALUES}
         onSubmit={handleSubmit}
         // For all steps only

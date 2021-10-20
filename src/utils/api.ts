@@ -94,12 +94,7 @@ export const addReview = (
   formData.append('json', JSON.stringify(data))
 
   return handleResponse(
-    instance.post(`/locations/${locationId}/reviews`, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      formData,
-    }),
+    instance.post(`/locations/${locationId}/reviews`, formData),
   )
 }
 
@@ -110,14 +105,7 @@ export const editReview = (
   const formData = new FormData()
   formData.append('json', JSON.stringify(data))
 
-  return handleResponse(
-    instance.put(`/reviews/${id}`, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      formData,
-    }),
-  )
+  return handleResponse(instance.put(`/reviews/${id}`, formData))
 }
 
 /*
