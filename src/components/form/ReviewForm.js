@@ -14,6 +14,7 @@ import { FileUpload, Slider, Textarea } from './FormikWrappers'
 
 export const INITIAL_REVIEW_VALUES = {
   review: {
+    comment: '',
     fruiting: 0,
     quality_rating: 0,
     yield_rating: 0,
@@ -108,7 +109,7 @@ export const ReviewPhotoStep = () => {
 export const ReviewForm = ({ onSubmit }) => {
   const { id: locationId } = useParams()
 
-  const handleSubmit = async ({ review }) => {
+  const handleSubmit = async ({ review }, { resetForm }) => {
     const reviewValues = {
       ...review,
       author: null,
@@ -118,6 +119,7 @@ export const ReviewForm = ({ onSubmit }) => {
     const reviewResp = await addReview(locationId, reviewValues)
     console.log('reviewResp', reviewResp)
     onSubmit(reviewResp)
+    resetForm()
   }
 
   return (
