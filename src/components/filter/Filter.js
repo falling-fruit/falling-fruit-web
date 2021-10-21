@@ -6,6 +6,7 @@ import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import { buildTypeSchema } from '../../utils/buildTypeSchema'
+import Button from '../ui/Button'
 import CheckboxFilters from './CheckboxFilters'
 import RCTreeSelect from './RCTreeSelect'
 
@@ -41,6 +42,17 @@ const StyledFilter = styled.div`
   }
 `
 
+const TreeButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  Button {
+    flex: 1;
+    margin: 5px;
+  }
+`
+
 const Filter = ({ isOpen }) => {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
@@ -61,13 +73,35 @@ const Filter = ({ isOpen }) => {
     <StyledFilter>
       <div>
         <p className="edible-type-text">{t('Edible Types')}</p>
+        <TreeButtonContainer>
+          <Button
+            onClick={() => {
+              const treeDataValues = treeData.map((t) =>
+                t.value.substring(t.value.indexOf('-') + 1),
+              )
+              const treeDataNoDuplicates = treeDataValues.filter(
+                (value, index) => treeDataValues.indexOf(value) === index,
+              )
+              dispatch(selectionChanged(treeDataNoDuplicates))
+            }}
+          >
+            Select All
+          </Button>
+          <Button
+            onClick={() => {
+              dispatch(selectionChanged([]))
+            }}
+          >
+            Select None
+          </Button>
+        </TreeButtonContainer>
         <RCTreeSelect
           data={treeData}
           shouldZoomIn={isShowingClusters}
           loading={isLoading}
-          onChange={(selectedTypes) =>
+          onChange={(selectedTypes) => {
             dispatch(selectionChanged(selectedTypes))
-          }
+          }}
           checkedTypes={types}
         />
       </div>
