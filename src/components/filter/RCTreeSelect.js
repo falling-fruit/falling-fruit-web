@@ -12,7 +12,7 @@ const TreeSelectContainer = styled.div`
   }
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 15;
 
   .rc-tree-select-selection {
     display: none;
