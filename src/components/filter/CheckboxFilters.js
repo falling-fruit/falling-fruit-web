@@ -11,6 +11,10 @@ const CHECKBOX_FIELDS = [
     field: 'invasive',
     label: 'Invasive Species Only',
   },
+  {
+    field: 'showPositiveCounts',
+    label: 'Show Positive Counts Only',
+  },
 ]
 
 const StyledLabel = styled.label`
