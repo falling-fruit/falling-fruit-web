@@ -21,7 +21,7 @@ const PageTabs = styled(Tabs)`
 
   [data-reach-tab-list] {
     display: flex;
-    height: 65px;
+    height: 70px;
 
     background: ${({ theme }) => theme.background};
     // Moves tab buttons above home bar on iOS mobile
