@@ -1,9 +1,11 @@
 import { SearchAlt2 as Search } from '@styled-icons/boxicons-regular'
 import { Cog, Flag, Star } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
+import styled from 'styled-components/macro'
 
 import { getTypes } from '../utils/api'
 import { ReportModal } from './form/ReportModal'
+import ImportsTable from './table/ImportsTable'
 import Button from './ui/Button'
 import CaptionInput from './ui/CaptionInput'
 import Input from './ui/Input'
@@ -18,6 +20,11 @@ import {
 } from './ui/SettingsAccordion'
 import { Slider } from './ui/Slider'
 import { Tag, TagList } from './ui/Tag'
+
+const ScrollablePage = styled.div`
+  overflow-y: scroll;
+  height: inherit;
+`
 
 const ComponentDemos = () => {
   // TODO: Move form components and type select logic to separate Form page
@@ -43,7 +50,7 @@ const ComponentDemos = () => {
   }
 
   return (
-    <>
+    <ScrollablePage>
       <p>Settings</p>
       <button onClick={() => setShowDialog(true)}>Show Dialog</button>
       <ReportModal
@@ -137,9 +144,8 @@ const ComponentDemos = () => {
         step={currentStep}
         onChange={setCurrentStep}
       />
-      <br />
-      <br />
-    </>
+      <ImportsTable />
+    </ScrollablePage>
   )
 }
 

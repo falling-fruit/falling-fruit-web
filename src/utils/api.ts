@@ -24,7 +24,7 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
         res.data,
     )
     .catch((error) => {
-      const message = error.response.data.error
+      const message = error.response?.data.error
       if (message) {
         console.error('APIError:', message, error)
         throw new APIError({ ...error, message })
@@ -119,6 +119,12 @@ export const getTypeById = (
 export const getReviews = (
   locationId: paths['/locations/{id}/reviews']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/locations/${locationId}/reviews`))
+
+export const getImports = () => handleResponse(instance.get(`/imports`))
+
+export const getImportById = (
+  id: paths['/imports/{id}']['get']['parameters']['path']['id'],
+) => handleResponse(instance.get(`/imports/${id}`))
 
 /* Not implemented
 export const addReview = (

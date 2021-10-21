@@ -21,8 +21,7 @@ const Map = ({
   view,
   geolocation,
   locations,
-  selectedLocationId,
-  hoveredLocationId,
+  activeLocationId,
   clusters,
   onGeolocationClick,
   onClusterClick,
@@ -36,6 +35,9 @@ const Map = ({
     bootstrapURLKeys={bootstrapURLKeys}
     options={() => ({
       mapTypeId: mapType,
+      disableDefaultUI: true,
+      // TODO: should we disable tilt?
+      // tilt: 0,
     })}
     layerTypes={layerTypes}
     center={view.center}
@@ -43,7 +45,7 @@ const Map = ({
     onChange={onViewChange}
     resetBoundsOnResize
   >
-    {!geolocation.loading && (
+    {geolocation && !geolocation.loading && (
       <Geolocation
         onClick={onGeolocationClick}
         lat={geolocation.latitude}
@@ -72,10 +74,7 @@ const Map = ({
         }}
         lat={location.lat}
         lng={location.lng}
-        selected={
-          location.id === selectedLocationId ||
-          location.id === hoveredLocationId
-        }
+        selected={location.id === activeLocationId}
         label={showLabels ? location.typeName : undefined}
       />
     ))}

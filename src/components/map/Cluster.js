@@ -24,7 +24,7 @@ const ClusterContainer = styled(ResetButton)`
   align-items: center;
   border-radius: 100%;
   color: ${({ theme }) => theme.background};
-  background: ${({ theme }) => theme.blue};
+  background: ${({ theme }) => theme.blue}e6;
   box-shadow: 0 0 4px 1px ${({ theme }) => theme.shadow};
   transform: translate(-50%, -50%);
   line-height: 0;
