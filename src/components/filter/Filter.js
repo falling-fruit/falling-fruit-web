@@ -67,6 +67,7 @@ const Filter = ({ isOpen }) => {
     showScientificNames,
     countsById,
   )
+
   const { t } = useTranslation()
   return isOpen ? (
     <StyledFilter>
@@ -75,20 +76,20 @@ const Filter = ({ isOpen }) => {
         <TreeButtonContainer>
           <Button
             onClick={() => {
-              dispatch(
-                selectionChanged(
-                  treeData.map((t) =>
-                    t.value.substring(t.value.indexOf('-') + 1),
-                  ),
-                ),
+              const treeDataValues = treeData.map((t) =>
+                t.value.substring(t.value.indexOf('-') + 1),
               )
+              const treeDataNoDuplicates = treeDataValues.filter(
+                (value, index) => treeDataValues.indexOf(value) === index,
+              )
+              dispatch(selectionChanged(treeDataNoDuplicates))
             }}
           >
             Select All
           </Button>
           <Button
             onClick={() => {
-              dispatch(selectionChanged([null]))
+              dispatch(selectionChanged([]))
             }}
           >
             Select None
