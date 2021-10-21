@@ -60,12 +60,13 @@ const Filter = ({ isOpen }) => {
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
-  const { types, isLoading, countsById } = filters
+  const { types, isLoading, countsById, showPositiveCounts } = filters
   const { typesById } = useTypesById()
   const treeData = buildTypeSchema(
     Object.values(typesById),
     showScientificNames,
     countsById,
+    showPositiveCounts,
   )
 
   const { t } = useTranslation()
