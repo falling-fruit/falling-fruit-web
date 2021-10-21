@@ -16,6 +16,8 @@ const ana_photo = ['https://fallingfruit.org/ana_carolina_de_lima.jpg']
 const caleb_photo = ['https://fallingfruit.org/caleb_phillips.jpg']
 const cristina_photo = ['https://fallingfruit.org/cristina_rubke.jpg']
 const david_photo = ['https://fallingfruit.org/david_craft.jpg']
+const tristam_photo = ['https://fallingfruit.org/tristram_stuart.jpg']
+const colorado_logo = ['https://fallingfruit.org/bycolorado.svg']
 const Project = () => (
   <PageTemplate>
     <PhotoGridTemplate photos={foraging_photos} float={'right'} />
@@ -69,24 +71,24 @@ const Project = () => (
       foraging in your neighborhood is a journey through time and across
       cultures. Join us in celebrating hyper-local food! The map is open for
       anyone to edit, the database can be downloaded with just one click, and
-      the code is open-source. You are likewise encouraged to share the bounty
-      with your fellow humans. Our sharing page lists hundreds of local
-      organizations - planting public orchards and food forests, picking
-      otherwise-wasted fruits and vegetables from city trees and farmers'
-      fields, and sharing with neighbors and the needy.
+      the <a href="https://github.com/falling-fruit/"> code</a> is open-source.
+      You are likewise encouraged to share the bounty with your fellow humans.
+      Our sharing page lists hundreds of local organizations - planting public
+      orchards and food forests, picking otherwise-wasted fruits and vegetables
+      from city trees and farmers' fields, and sharing with neighbors and the
+      needy.
     </p>
     <h2>Staff</h2>
     <PhotoGridTemplate photos={ethan_photo} float={'left'} />
     <p>
       <em>Executive Director</em>
-    </p>
-    <p>
+      <br />
       <b>Ethan Welty</b>
-    </p>
-    <p>
+      <br />
       <a href="ethan@fallingfruit.org">ethan@fallingfruit.org</a>
+      <br />
+      Zürich, Switzerland
     </p>
-    <p>Zürich, Switzerland</p>
     <p>
       With technology and data, Ethan champions cities as sources of fresh and
       free food. He created Falling Fruit with Caleb Phillips in 2013 to promote
@@ -105,14 +107,13 @@ const Project = () => (
     <PhotoGridTemplate photos={jeff_photo} float={'left'} />
     <p>
       <em>President</em>
-    </p>
-    <p>
+      <br />
       <b>Jeff Wanner</b>
-    </p>
-    <p>
+      <br />
       <a href="jeff@fallingfruit.org">jeff@fallingfruit.org</a>
+      <br />
+      Boulder, Colorado, USA
     </p>
-    <p>Boulder, Colorado, USA</p>
     <p>
       Since harvesting black and blueberries with his family as a child and,
       more recently, noticing the wealth of public fruit trees throughout
@@ -126,8 +127,9 @@ const Project = () => (
     <PhotoGridTemplate photos={craig_photo} float={'left'} />
     <p>
       <b>Craig Durkin</b>
+      <br />
+      Atlanta, Georgia, USA
     </p>
-    <p>Atlanta, Georgia, USA</p>
     <p>
       Craig is the co-founder of
       <a href="https://www.concrete-jungle.org/"> Concrete Jungle</a>, an
@@ -141,8 +143,9 @@ const Project = () => (
     <PhotoGridTemplate photos={emily_photo} float={'left'} />
     <p>
       <b>Emily Sigman</b>
+      <br />
+      New Haven, Connecticut, USA
     </p>
-    <p>New Haven, Connecticut, USA</p>
     <p>
       Emily is a diehard agroforestry evangelist, incorrigible forager, and
       proud mother to two cats, four quails, and the world's most magnificent
@@ -163,8 +166,9 @@ const Project = () => (
     <PhotoGridTemplate photos={alan_photo} float={'left'} />
     <p>
       <b>Alan Gibson</b>
+      <br />
+      Southampton, United Kingdom
     </p>
-    <p>Southampton, United Kingdom</p>
     <p>
       Alan has always enjoyed adventures and exploring. He began foraging as a
       way to introduce his young children to the outdoors lifestyle. He writes
@@ -179,8 +183,9 @@ const Project = () => (
     <PhotoGridTemplate photos={ana_photo} float={'left'} />
     <p>
       <b>Ana Carolina de Lima</b>
+      <br />
+      Silver City, New Mexico, USA
     </p>
-    <p>Silver City, New Mexico, USA</p>
     <p>
       Ana is a postdoctoral researcher at the Federal University of Pará in
       Brazil. She is an anthropologist interested in understanding social and
@@ -195,8 +200,9 @@ const Project = () => (
     <PhotoGridTemplate photos={caleb_photo} float={'left'} />
     <p>
       <b>Caleb Phillips</b>
+      <br />
+      Boulder, Colorado, USA
     </p>
-    <p>Boulder, Colorado, USA</p>
     <p>
       Caleb is a featherless bipedal humanoid passionate about food justice and
       finding creative ways to use technology to address social issues. When
@@ -216,8 +222,9 @@ const Project = () => (
     <PhotoGridTemplate photos={cristina_photo} float={'left'} />
     <p>
       <b>Cristina Rubke</b>
+      <br />
+      San Francisco, California, USA
     </p>
-    <p>San Francisco, California, USA</p>
     <p>
       Cristina is an attorney with{' '}
       <a href="https://www.sflaw.com/attorney/cristina-n-rubke/">
@@ -242,8 +249,9 @@ const Project = () => (
     <PhotoGridTemplate photos={david_photo} float={'left'} />
     <p>
       <b>David Craft</b>
+      <br />
+      Cambridge, Massachusetts, USA
     </p>
-    <p>Cambridge, Massachusetts, USA</p>
     <p>
       David is a researcher in the Department of Radiation Oncology at the{' '}
       <a href="https://gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f">
@@ -257,6 +265,121 @@ const Project = () => (
         Urban Foraging: Finding and Eating Wild Plants in the City
       </a>{' '}
       (free download).
+    </p>
+    <PhotoGridTemplate photos={tristam_photo} float={'left'} />
+    <p>
+      <b>Tristram Stuart</b>
+      <br />
+      United Kingdom
+    </p>
+    <p>
+      As a teenager, Tristram raised pigs on surplus food that he collected from
+      his school kitchens, the local baker and village greengrocer. Noticing
+      that a lot of this food was still suitable for human consumption led him
+      to the realization that good, fresh food was being wasted on a colossal
+      scale. Tristram has since worked tirelessly to bring this issue to the
+      attention of the public, the media, and policy-makers. He founded the food
+      waste campaign organization{' '}
+      <a href="https://feedbackglobal.org/"> Feedback Global</a> and wrote{' '}
+      <a href="https://www.tristramstuart.co.uk/">
+        {' '}
+        Waste: Uncovering the Global Food Scandal
+      </a>{' '}
+      to demonstrate the extent of the problem on a global scale. In 2011,
+      Tristram was awarded{' '}
+      <a href="https://www.sofieprisen.no/Prize_Winners/2011/index.html">
+        {' '}
+        The Sophie Prize
+      </a>{' '}
+      for his fight against food waste.
+    </p>
+    <h2>Translators</h2>
+    <p>
+      <b>Amit Baum (עמית באום)</b> – עִברִית
+      <br />
+      <b>Ana Carolina de Lima</b> – Português
+      <br />
+      <b>Daniela Marini</b> – Español
+      <br />
+      <b>Ethan Welty</b> – Français, Español
+      <br />
+      <b>Heimen Stoffels</b> – Nederlands
+      <br />
+      <b>Jadalnia Warszawa</b> – Polski
+      <br />
+      <b>Karolina Hansen</b> - Polski
+      <br />
+      <b>Kira Dell</b> – Português, Español
+      <br />
+      <b>Laura Clabé</b> – Français
+      <br />
+      <b>Liana Welty</b> – Español
+      <br />
+      <b>Lola Ortiz</b> – Español
+      <br />
+      <b>Maria Noel Silvera</b> – Español
+      <br />
+      <b>Maria Rosa Puig</b> – Español
+      <br />
+      <b>Michela Pasquali</b> – Italiano
+      <br />
+      <b>Monica Breval Listán</b> – Español
+      <br />
+      <b>Mylène Jacquemart</b> – Deutsch, Italiano
+      <br />
+      <b>Parmenter Welty</b> – Español
+      <br />
+      <b>Raven Lyn</b> – Português
+      <br />
+      <b>Salomé Martin</b> – Français
+      <br />
+      <b>Sifis Diamantidis</b> - Ελληνικά
+      <br />
+      <b>Thomaz Brandão Teixeira</b> – Português
+      <br />
+      <b>Tim Conze</b> – Svenska
+      <br />
+      <b>Timna Raz</b> – עִברִית
+    </p>
+    <h2>Closing remarks</h2>
+    <PhotoGridTemplate photos={colorado_logo} float={'right'} />
+    <p>
+      Falling Fruit is a 501(c)(3) (tax-exempt) public charity based in Boulder,
+      Colorado. As a result, donations within the United States are tax
+      deductible. You may review our{' '}
+      <a href="https://fallingfruit.org/501c3.pdf"> letter of exemption</a> from
+      the IRS and verify our standing with
+      <a href="https://apps.irs.gov/app/eos/pub78Search.do?">
+        {' '}
+        IRS Publication 78
+      </a>{' '}
+      or the{' '}
+      <a href="https://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y">
+        {' '}
+        Colorado Secretary of State
+      </a>
+      . Also available are our{' '}
+      <a href="https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing">
+        {' '}
+        bylaws
+      </a>{' '}
+      and board meeting{' '}
+      <a href="https://drive.google.com/folderview?id=0B3Vxw_F2RArqaVZMUHkzMUNBNnM&usp=sharing">
+        {' '}
+        minutes
+      </a>
+      . Falling Fruit PO Box 284, Boulder, CO, 80306, USA EIN: 46-5363428
+      Harvesting food in an urban setting comes with certain practical and moral
+      considerations. For an introduction to the ethics of urban foraging, we
+      recommend the following summary. Information on Falling Fruit may be wrong
+      or out of date. For example, many of the foraging maps migrated to Falling
+      Fruit were hosted as public Google Maps on which markers were often moved
+      accidentally, and municipal tree inventories are updated only (if ever) as
+      trees are visited for maintenance. Be prepared to encounter inaccuracies
+      in the field, and please edit the map as needed based on your discoveries.
+      Ultimately, it is your responsibility to determine the identity,
+      edibility, and location of a plant, and the responsibility of all to
+      improve the quality of the map.
     </p>
   </PageTemplate>
 )
