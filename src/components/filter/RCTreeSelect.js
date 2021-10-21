@@ -45,13 +45,22 @@ const TreeSelectContainer = styled.div`
   }
 `
 
+const StyledInput = styled(Input)`
+  height: 36px;
+  margin-bottom: 10px;
+  padding: 9px 12px;
+  input {
+    height: 100%;
+  }
+`
+
 const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
   const [searchValue, setSearchValue] = useState('')
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
 
   return (
     <TreeSelectContainer ref={setTreeSelectContainerRef}>
-      <Input
+      <StyledInput
         onChange={(e) => setSearchValue(e.target.value)}
         placeholder="Search for a type..."
       />
