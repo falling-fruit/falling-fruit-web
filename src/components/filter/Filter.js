@@ -88,6 +88,7 @@ const Filter = ({ isOpen }) => {
             Select All
           </Button>
           <Button
+            secondary
             onClick={() => {
               dispatch(selectionChanged([]))
             }}
