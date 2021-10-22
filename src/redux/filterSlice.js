@@ -33,7 +33,7 @@ export const filterSlice = createSlice({
     invasive: false,
     isLoading: false,
     countsById: {},
-    showPositiveCounts: false,
+    showOnMap: false,
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),

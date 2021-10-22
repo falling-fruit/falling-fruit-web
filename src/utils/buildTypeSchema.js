@@ -67,24 +67,19 @@ const sortTypes = (types) =>
       ),
     )
 
-const buildTypeSchema = (
-  types,
-  showScientificName,
-  countsById,
-  showPositiveCounts,
-) => {
+const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
   const childrenCount = {}
   types.forEach((t) => {
     const count = getCumulativeCount(t.id, countsById, types)
     childrenCount[t.id] = count
   })
 
-  const typesWithPositiveCounts = showPositiveCounts
+  const typesOnMap = showOnMap
     ? types.filter((t) => countsById[t.id] > 0)
     : types
 
   const typesWithRootLabels = getTypesWithRootLabels(
-    typesWithPositiveCounts,
+    typesOnMap,
     countsById,
     childrenCount,
   )
