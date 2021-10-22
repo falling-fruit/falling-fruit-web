@@ -98,20 +98,28 @@ const buildTypeSchema = (
   return sortedTypes.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
-    const name =
-      scientificName && showScientificName
-        ? `${commonName} [${scientificName}]`
-        : commonName
     const count =
       childrenCount[type.id] && type.value.includes('root')
         ? childrenCount[type.id]
         : countsById[type.id]
         ? countsById[type.id]
         : 0
+    const name =
+      scientificName && showScientificName ? (
+        <span>
+          <span style={{ fontWeight: 'bold' }}>{commonName}</span>{' '}
+          <span style={{ fontStyle: 'italic' }}>{scientificName}</span> ({count}
+          )
+        </span>
+      ) : (
+        <span>
+          <span style={{ fontWeight: 'bold' }}>{commonName}</span> ({count})
+        </span>
+      )
 
     return {
       pId: type.pId,
-      title: `${name} (${count})`,
+      title: name,
       value: type.value,
     }
   })
