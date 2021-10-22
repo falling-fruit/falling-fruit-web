@@ -36,7 +36,7 @@ const PhotoGridTemplate = ({ photos, float }) => {
     <Grid floatdiv={float}>
       {photos.map((photo, index) => (
         <div key={index}>
-          <Image alt={index} src={photo} />
+          <Image alt={photo.alt} src={photo.link} />
         </div>
       ))}
     </Grid>
