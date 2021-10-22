@@ -46,6 +46,31 @@ const TreeSelectContainer = styled.div`
   .rc-tree-select-tree {
     height: 100px;
   }
+
+  .rc-tree-select-tree-checkbox {
+    border: 3px solid ${({ theme }) => theme.orange} !important;
+    border-radius: 4px !important;
+    background: ${({ theme }) => theme.transparentOrange} !important;
+    margin-right: 5px !important;
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .rc-tree-select-tree-checkbox-checked,
+  .rc-tree-select-tree-checkbox-indeterminate {
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+  }
+
+  .rc-tree-select-tree-checkbox-checked {
+    background-image: url('/checkmark/checkmark.svg') !important;
+    background-color: ${({ theme }) => theme.orange} !important;
+  }
+
+  .rc-tree-select-tree-checkbox-indeterminate {
+    background-image: url('/checkmark/mixed_checkmark.svg') !important;
+  }
 `
 
 const StyledInput = styled(Input)`
