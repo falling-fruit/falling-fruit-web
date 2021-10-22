@@ -8,7 +8,7 @@ import Input from '../ui/Input'
 
 const TreeSelectContainer = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
-    height: 60vh;
+    height: 50vh;
   }
   display: flex;
   flex-direction: column;
@@ -37,6 +37,9 @@ const TreeSelectContainer = styled.div`
     width: 100%;
     min-width: 0 !important;
     position: relative;
+    box-shadow: none;
+    border: 1px solid ${({ theme }) => theme.secondaryBackground};
+    border-radius: 7px;
   }
 
   // TODO: Look into relative height of the ul element
@@ -47,7 +50,7 @@ const TreeSelectContainer = styled.div`
 
 const StyledInput = styled(Input)`
   height: 36px;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
   padding: 9px 12px;
   input {
     height: 100%;
