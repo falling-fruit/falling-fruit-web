@@ -9,7 +9,6 @@ export const fetchAccessToken = createAsyncThunk(
       email: email,
       password: password,
     })
-    console.log('isChecked: ', isChecked)
     isChecked
       ? localStorage.setItem('authToken', response)
       : sessionStorage.setItem('authToken', response)
@@ -26,6 +25,11 @@ export const credentialSlice = createSlice({
     clearAuthCredentials: (state) => {
       state.authToken = undefined
     },
+    setAuthFromStorage: (state) => {
+      const localAuthToken = localStorage.getItem('authToken')
+      const sessionAuthToken = sessionStorage.getItem('authToken')
+      state.authToken = localAuthToken ?? sessionAuthToken
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAccessToken.fulfilled, (state, { payload }) => {
@@ -34,5 +38,8 @@ export const credentialSlice = createSlice({
   },
 })
 
-export const { clearAuthCredentials } = credentialSlice.actions
+export const {
+  clearAuthCredentials,
+  setAuthFromStorage,
+} = credentialSlice.actions
 export default credentialSlice.reducer

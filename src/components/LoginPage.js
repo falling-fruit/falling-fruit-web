@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-  clearAuthCredentials,
-  fetchAccessToken,
-} from '../redux/credentialSlice'
+import { clearAuthCredentials, fetchAccessToken } from '../redux/authSlice'
 import Button from './ui/Button'
 import Checkbox from './ui/Checkbox'
 import StyledInput from './ui/Input'

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createBrowserHistory } from 'history'
 
-import credentialReducer from './credentialSlice'
+import credentialReducer from './authSlice'
 import filterReducer from './filterSlice'
 import listReducer from './listSlice'
 import mapReducer from './mapSlice'
