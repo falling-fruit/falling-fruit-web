@@ -133,6 +133,12 @@ export const getReviews = (
   locationId: paths['/locations/{id}/reviews']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/locations/${locationId}/reviews`))
 
+export const getImports = () => handleResponse(instance.get(`/imports`))
+
+export const getImportById = (
+  id: paths['/imports/{id}']['get']['parameters']['path']['id'],
+) => handleResponse(instance.get(`/imports/${id}`))
+
 /* Not implemented
 export const addReview = (
   locationId: paths['/locations/{id}/review']['post']['parameters']['path']['id'],

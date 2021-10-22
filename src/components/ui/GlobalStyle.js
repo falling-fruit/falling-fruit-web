@@ -25,6 +25,7 @@ const theme = {
   // background
   background: '#ffffff',
   secondaryBackground: '#e0e1e2',
+  navBackground: '#f2f2f2',
   shadow: 'rgba(0, 0, 0, 0.12)',
   // palette
   orange: '#ffa41b',
@@ -71,7 +72,9 @@ const GlobalStyle = createGlobalStyle`
 
     @media ${({ theme }) => theme.mobile} {
       // Disable overscrolling on iOS
-      overflow: hidden;
+      position: fixed;
+      height: 100%;
+      width: 100%;
     }
   }
 

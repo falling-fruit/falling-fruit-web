@@ -36,6 +36,10 @@ const PageTabs = styled(Tabs)`
       border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
       border-bottom: none;
 
+      :focus {
+        outline: none;
+      }
+
       ${StyledIconBase} {
         display: block;
         margin: 0 auto 2px;
