@@ -1,3 +1,5 @@
+import { theme } from '../components/ui/GlobalStyle'
+
 const getCumulativeCount = (id, countsById, types) => {
   let count = countsById[id] ? countsById[id] : 0
   const children = types.filter((t) => t.parent_id === id && t.id !== id)
@@ -104,18 +106,31 @@ const buildTypeSchema = (
         : countsById[type.id]
         ? countsById[type.id]
         : 0
-    const name =
-      scientificName && showScientificName ? (
-        <span>
-          <span style={{ fontWeight: 'bold' }}>{commonName}</span>{' '}
-          <span style={{ fontStyle: 'italic' }}>{scientificName}</span> ({count}
-          )
+    // TODO: Change typeName to span to reuse here
+    const name = (
+      <span style={{ fontSize: '0.875rem' }}>
+        <span
+          style={{
+            fontWeight: 'bold',
+            marginRight: '5px',
+            color: theme.secondaryText,
+          }}
+        >
+          {commonName}
         </span>
-      ) : (
-        <span>
-          <span style={{ fontWeight: 'bold' }}>{commonName}</span> ({count})
-        </span>
-      )
+        {scientificName && showScientificName && (
+          <span
+            style={{
+              fontStyle: 'italic',
+              marginRight: '5px',
+            }}
+          >
+            {scientificName}
+          </span>
+        )}
+        <span style={{ fontWeight: 'bold' }}>({count})</span>
+      </span>
+    )
 
     return {
       pId: type.pId,
