@@ -3,6 +3,7 @@ import styled from 'styled-components/macro'
 const PageScrollWrapper = styled.div`
   width: 100%;
   overflow-y: auto;
+  height: 100%;
 `
 
 const PageTemplate = styled.article`
