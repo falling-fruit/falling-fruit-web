@@ -1,6 +1,6 @@
 import PhotoGridTemplate from '../entry/NewPhotoGrid'
 import ImportsTable from '../table/ImportsTable'
-import PageTemplate from './PageTemplate'
+import { PageTemplate } from './PageTemplate'
 
 const photos = [
   'https://fallingfruit.org/amittai-mulberries.jpg',
