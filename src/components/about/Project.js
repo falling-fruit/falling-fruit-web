@@ -7,17 +7,6 @@ const foraging_photos = [
   'https://fallingfruit.org/plums.jpg',
   'https://fallingfruit.org/amittai-mulberries.jpg',
 ]
-const ethan_photo = ['https://fallingfruit.org/ethan_welty.jpg']
-const jeff_photo = ['https://fallingfruit.org/jeff_wanner.jpg']
-const craig_photo = ['https://fallingfruit.org/craig_durkin.jpg']
-const emily_photo = ['https://fallingfruit.org/emily_sigman.jpg']
-const alan_photo = ['https://fallingfruit.org/alan_gibson.jpg']
-const ana_photo = ['https://fallingfruit.org/ana_carolina_de_lima.jpg']
-const caleb_photo = ['https://fallingfruit.org/caleb_phillips.jpg']
-const cristina_photo = ['https://fallingfruit.org/cristina_rubke.jpg']
-const david_photo = ['https://fallingfruit.org/david_craft.jpg']
-const tristam_photo = ['https://fallingfruit.org/tristram_stuart.jpg']
-const colorado_logo = ['https://fallingfruit.org/bycolorado.svg']
 const Project = () => (
   <PageScrollWrapper>
     <PageTemplate>
@@ -81,7 +70,7 @@ const Project = () => (
         neighbors and the needy.
       </p>
       <h2>Staff</h2>
-      <PhotoGridTemplate photos={ethan_photo} float={'left'} />
+      <img src="https://fallingfruit.org/ethan_welty.jpg" alt="" align="left" />
       <p>
         <em>Executive Director</em>
         <br />
@@ -107,7 +96,7 @@ const Project = () => (
         , and an appetite for mountainous and riverine pursuits.
       </p>
       <h2>Board of Directors</h2>
-      <PhotoGridTemplate photos={jeff_photo} float={'left'} />
+      <img src="https://fallingfruit.org/jeff_wanner.jpg" alt="" align="left" />
       <p>
         <em>President</em>
         <br />
@@ -127,7 +116,11 @@ const Project = () => (
         usually helping out in the community or moving quickly over mountains by
         foot, ski, or bicycle.
       </p>
-      <PhotoGridTemplate photos={craig_photo} float={'left'} />
+      <img
+        src="https://fallingfruit.org/craig_durkin.jpg"
+        alt=""
+        align="left"
+      />
       <p>
         <b>Craig Durkin</b>
         <br />
@@ -143,7 +136,11 @@ const Project = () => (
         technologies, and will soon be deploying his fruit-tree spotting drone
         and tweeting fruit-ripeness sensor...
       </p>
-      <PhotoGridTemplate photos={emily_photo} float={'left'} />
+      <img
+        src="https://fallingfruit.org/emily_sigman.jpg"
+        alt=""
+        align="left"
+      />
       <p>
         <b>Emily Sigman</b>
         <br />
@@ -167,7 +164,7 @@ const Project = () => (
         about anywhere right now.
       </p>
       <h2>Board of advisors</h2>
-      <PhotoGridTemplate photos={alan_photo} float={'left'} />
+      <img src="https://fallingfruit.org/alan_gibson.jpg" alt="" align="left" />
       <p>
         <b>Alan Gibson</b>
         <br />
@@ -184,7 +181,11 @@ const Project = () => (
         book. He has legitimised foraging in public parks and established a
         community orchard in his home town, Southampton UK.
       </p>
-      <PhotoGridTemplate photos={ana_photo} float={'left'} />
+      <img
+        src="https://fallingfruit.org/ana_carolina_de_lima.jpg"
+        alt=""
+        align="left"
+      />
       <p>
         <b>Ana Carolina de Lima</b>
         <br />
@@ -202,7 +203,11 @@ const Project = () => (
         moved to southern New Mexico in the United States, where she works as a
         consultant.
       </p>
-      <PhotoGridTemplate photos={caleb_photo} float={'left'} />
+      <img
+        src="https://fallingfruit.org/caleb_phillips.jpg"
+        alt=""
+        align="left"
+      />
       <p>
         <b>Caleb Phillips</b>
         <br />
@@ -224,7 +229,11 @@ const Project = () => (
         served on the Board of Directors for 6 years before taking a position on
         the Advisory Board.
       </p>
-      <PhotoGridTemplate photos={cristina_photo} float={'left'} />
+      <img
+        src="https://fallingfruit.org/cristina_rubke.jpg"
+        alt=""
+        align="left"
+      />
       <p>
         <b>Cristina Rubke</b>
         <br />
@@ -251,7 +260,7 @@ const Project = () => (
         </a>{' '}
         and competes in local and international regattas.
       </p>
-      <PhotoGridTemplate photos={david_photo} float={'left'} />
+      <img src="https://fallingfruit.org/david_craft.jpg" alt="" align="left" />
       <p>
         <b>David Craft</b>
         <br />
@@ -271,7 +280,11 @@ const Project = () => (
         </a>{' '}
         (free download).
       </p>
-      <PhotoGridTemplate photos={tristam_photo} float={'left'} />
+      <img
+        src="https://fallingfruit.org/tristram_stuart.jpg"
+        alt=""
+        align="left"
+      />
       <p>
         <b>Tristram Stuart</b>
         <br />
@@ -347,7 +360,7 @@ const Project = () => (
         <b>Timna Raz</b> – עִברִית
       </p>
       <h2>Closing remarks</h2>
-      <PhotoGridTemplate photos={colorado_logo} float={'right'} />
+      <img src="https://fallingfruit.org/bycolorado.svg" alt="" align="right" />
       <p>
         Falling Fruit is a 501(c)(3) (tax-exempt) public charity based in
         Boulder, Colorado. As a result, donations within the United States are
