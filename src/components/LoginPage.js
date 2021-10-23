@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { clearAuthCredentials, fetchAccessToken } from '../redux/authSlice'
+import { fetchAccessToken } from '../redux/authSlice'
 import Header from './desktop/Header'
 import Button from './ui/Button'
 import Checkbox from './ui/Checkbox'
@@ -40,6 +41,8 @@ const LoginContainer = styled.div`
 `
 
 const LoginPage = () => {
+  const { authToken } = useSelector((state) => state.auth)
+  const history = useHistory()
   const [isChecked, setIsChecked] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -54,13 +57,13 @@ const LoginPage = () => {
         isChecked: isChecked,
       }),
     )
-  }
 
-  // remove underscore when making changes
-  const _logout = () => {
-    localStorage.clear()
-    sessionStorage.clear()
-    dispatch(clearAuthCredentials())
+    if (authToken) {
+      history.push({
+        pathname: '/map',
+        state: { fromPage: '/login' },
+      })
+    }
   }
 
   return (
@@ -73,6 +76,7 @@ const LoginPage = () => {
         <StyledInput
           placeholder="e.g. user@example.com"
           value={username}
+          type={'email'}
           label={'Email'}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -81,6 +85,7 @@ const LoginPage = () => {
         <StyledInput
           label={'Password'}
           value={password}
+          type={'password'}
           onChange={(e) => setPassword(e.target.value)}
         />
 

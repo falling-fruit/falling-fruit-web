@@ -1,8 +1,17 @@
 import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
+
+import { clearAuthCredentials } from '../../redux/authSlice'
+
+const StyledUser = styled.span`
+  svg {
+    fill: ${({ theme }) => theme.orange};
+  }
+`
 
 const StyledHeader = styled.header`
   height: 56px;
@@ -30,7 +39,7 @@ const StyledHeader = styled.header`
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        width: 110px;
+        min-width: 110px;
         margin: 0;
         height: 100%;
         color: ${({ theme }) => theme.secondaryText};
@@ -99,24 +108,19 @@ const StyledHeader = styled.header`
     }
   }
 `
-const Dropdown = ({ className, children, text }) => {
-  const match = useRouteMatch('/about/:slug')
-
-  return (
-    <div className={className}>
-      <div className={`button ${match && 'active'}`}>
-        {text} <CaretDown height="8px" />
-      </div>
-      <div className="content">{children}</div>
+const Dropdown = ({ className, children, label, match }) => (
+  <div className={className}>
+    <div className={`button ${match && 'active'}`}>
+      {label} <CaretDown height="8px" />
     </div>
-  )
-}
+    <div className="content">{children}</div>
+  </div>
+)
 
 const StyledDropdown = styled(Dropdown)`
   display: inline-block;
 
   .button {
-    background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.secondaryText};
     padding: 16px;
     border: none;
@@ -167,6 +171,13 @@ const LogoLink = styled(Link)`
 // TODO: Clean up file structure (i.e. logo_white.svg) from ./public
 const Header = () => {
   const { t } = useTranslation()
+  const { authToken } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+  const logout = () => {
+    localStorage.clear()
+    sessionStorage.clear()
+    dispatch(clearAuthCredentials())
+  }
   return (
     <StyledHeader>
       <LogoLink to="/map">
@@ -185,7 +196,10 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <StyledDropdown text={t('About')}>
+            <StyledDropdown
+              label={t('About')}
+              match={useRouteMatch('/about/:slug')}
+            >
               <NavLink to="/about/project" activeClassName="active">
                 {t('The project')}
               </NavLink>
@@ -201,9 +215,23 @@ const Header = () => {
             </StyledDropdown>
           </li>
           <li>
-            <button>
-              <User /> {t('Login')}
-            </button>
+            {authToken ? (
+              <StyledDropdown
+                label={
+                  <StyledUser>
+                    <User height={'15px'} />{' '}
+                    {authToken ? 'Arman Rafati' : t('Login')}
+                  </StyledUser>
+                }
+                match={false}
+              >
+                <button onClick={logout}>Logout</button>
+              </StyledDropdown>
+            ) : (
+              <NavLink to="/login" className="navbar" activeClassName="active">
+                <User height={'15px'} /> {t('Login')}
+              </NavLink>
+            )}
           </li>
         </ul>
       </nav>
