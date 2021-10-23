@@ -1,7 +1,10 @@
 import WindowSize from '@reach/window-size'
+import { Route, Switch } from 'react-router-dom'
 import SplitPane from 'react-split-pane'
 import styled from 'styled-components/macro'
 
+import ImportedDatasetsPage from '../about/ImportedDatasetsPage'
+import Project from '../about/Project'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
@@ -45,21 +48,36 @@ const DesktopLayout = () => (
   // a non-numerical maxSize like "21.5vw"
   <DesktopContainer>
     <Header />
-    <WindowSize>
-      {({ width: vw }) => (
-        <StyledSplit
-          split="vertical"
-          minSize={MIN_PANE_WIDTH(vw)}
-          maxSize={MAX_PANE_WIDTH(vw)}
-          defaultSize={DEFAULT_PANE_WIDTH(vw)}
-        >
-          <SidePaneSwitch />
-          <MapPane>
-            <MapPage isDesktop />
-          </MapPane>
-        </StyledSplit>
-      )}
-    </WindowSize>
+    <Switch>
+      <Route exact path="/about/project">
+        {console.log('test')}
+        {/* <WindowSize> */}
+        <Project />
+        {/* </WindowSize> */}
+      </Route>
+      <Route exact path="/about/dataset">
+        {/* <WindowSize> */}
+        <ImportedDatasetsPage />
+        {/* </WindowSize> */}
+      </Route>
+      <Route>
+        <WindowSize>
+          {({ width: vw }) => (
+            <StyledSplit
+              split="vertical"
+              minSize={MIN_PANE_WIDTH(vw)}
+              maxSize={MAX_PANE_WIDTH(vw)}
+              defaultSize={DEFAULT_PANE_WIDTH(vw)}
+            >
+              <SidePaneSwitch />
+              <MapPane>
+                <MapPage isDesktop />
+              </MapPane>
+            </StyledSplit>
+          )}
+        </WindowSize>
+      </Route>
+    </Switch>
   </DesktopContainer>
 )
 

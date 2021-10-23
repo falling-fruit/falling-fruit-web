@@ -3,10 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import ImportedDatasetsPage from './components/about/ImportedDatasetsPage'
-import Project from './components/about/Project'
 import ComponentDemos from './components/ComponentDemos'
-import Header from './components/desktop/Header'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { store } from './redux/store'
@@ -19,14 +16,6 @@ const App = () => (
         <Switch>
           <Route exact path="/">
             <Redirect to="/map" />
-          </Route>
-          <Route exact path="/about/project">
-            <Header />
-            <Project />
-          </Route>
-          <Route exact path="/about/dataset">
-            <Header />
-            <ImportedDatasetsPage />
           </Route>
           <Route exact path="/demo">
             <ComponentDemos />

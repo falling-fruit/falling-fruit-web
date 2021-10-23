@@ -52,5 +52,23 @@ const PageTemplate = styled.article`
     font-size: 1.429rem;
     line-height: 24px;
   }
+
+  img {
+    margin-right: 16px;
+  }
+
+  .logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .content {
+    display: inline-flex;
+    align-items: flex-start;
+    margin-top: 10px;
+    p {
+      margin: 0;
+    }
+  }
 `
 export { PageScrollWrapper, PageTemplate }
