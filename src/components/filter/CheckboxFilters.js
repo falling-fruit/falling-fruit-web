@@ -1,3 +1,4 @@
+import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import Checkbox from '../ui/Checkbox'
@@ -21,16 +22,21 @@ const StyledLabel = styled.label`
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
 
-  &:last-child {
-    margin-top: 8px;
-    @media ${({ theme }) => theme.device.mobile} {
-      margin-top: 15px;
-    }
-  }
+  ${({ addMargin }) =>
+    addMargin &&
+    css`
+      &:not(:last-child) {
+        margin-bottom: ${({ addMargin }) => addMargin && '8px'};
+
+        @media ${({ theme }) => theme.device.mobile} {
+          margin-top: ${({ addMargin }) => addMargin && '15px'};
+        }
+      }
+    `}
 `
 
 const ShowOnMapFilter = ({ values, onChange }) => (
-  <StyledLabel key={'showOnMap'} htmlFor={'showOnMap'}>
+  <StyledLabel addMargin={false} key={'showOnMap'} htmlFor={'showOnMap'}>
     <Checkbox
       id={'showOnMap'}
       checked={values.showOnMap}
@@ -48,7 +54,7 @@ const ShowOnMapFilter = ({ values, onChange }) => (
 
 const MuniAndInvasiveFilters = ({ values, onChange }) =>
   CHECKBOX_FIELDS.map(({ field, label }) => (
-    <StyledLabel key={field} htmlFor={field}>
+    <StyledLabel addMargin key={field} htmlFor={field}>
       <Checkbox
         id={field}
         checked={values[field]}
