@@ -180,11 +180,6 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/page2" className="navbar" activeClassName="active">
-              {t('Page 2')}
-            </NavLink>
-          </li>
-          <li>
             <StyledDropdown text={t('About')}>
               <NavLink to="/about/project" activeClassName="active">
                 {t('The project')}
