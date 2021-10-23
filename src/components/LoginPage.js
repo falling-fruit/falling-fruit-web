@@ -104,7 +104,7 @@ const LoginPage = () => {
         <Button onClick={getJWTToken}>Login</Button>
         {/* <Button onClick={logout}>Logout</Button> */}
 
-        <a href="signup">Signup</a>
+        <a href="signup">Sign Up</a>
         <a href="reset">Reset your password</a>
         <a href="resend">Resend confirmation instructions</a>
       </LoginContainer>
