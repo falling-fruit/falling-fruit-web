@@ -1,3 +1,4 @@
+import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import Checkbox from '../ui/Checkbox'
@@ -21,18 +22,39 @@ const StyledLabel = styled.label`
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
 
-  &:not(:last-child) {
-    margin-bottom: 8px;
+  ${({ addMargin }) =>
+    addMargin &&
+    css`
+      &:not(:last-child) {
+        margin-bottom: ${({ addMargin }) => addMargin && '8px'};
 
-    @media ${({ theme }) => theme.device.mobile} {
-      margin-top: 15px;
-    }
-  }
+        @media ${({ theme }) => theme.device.mobile} {
+          margin-top: ${({ addMargin }) => addMargin && '15px'};
+        }
+      }
+    `}
 `
 
-const CheckboxFilters = ({ values, onChange }) =>
+const ShowOnMapFilter = ({ values, onChange }) => (
+  <StyledLabel addMargin={false} key={'showOnMap'} htmlFor={'showOnMap'}>
+    <Checkbox
+      id={'showOnMap'}
+      checked={values.showOnMap}
+      name={'showOnMap'}
+      onChange={(event) =>
+        onChange({
+          ...values,
+          ['showOnMap']: event.target.checked,
+        })
+      }
+    />
+    {'Show On Map'}
+  </StyledLabel>
+)
+
+const MuniAndInvasiveFilters = ({ values, onChange }) =>
   CHECKBOX_FIELDS.map(({ field, label }) => (
-    <StyledLabel key={field} htmlFor={field}>
+    <StyledLabel addMargin key={field} htmlFor={field}>
       <Checkbox
         id={field}
         checked={values[field]}
@@ -48,4 +70,4 @@ const CheckboxFilters = ({ values, onChange }) =>
     </StyledLabel>
   ))
 
-export default CheckboxFilters
+export { MuniAndInvasiveFilters, ShowOnMapFilter }

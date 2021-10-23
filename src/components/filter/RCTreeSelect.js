@@ -4,32 +4,28 @@ import TreeSelect from 'rc-tree-select'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 
-import Input from '../ui/Input'
-
 const TreeSelectContainer = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
-    height: 60vh;
-  }
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex: 15;
+  margin-bottom: 12px;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 50vh;
+  }
 
   .rc-tree-select-selection {
     display: none;
   }
 
-  > *:nth-child(3) {
-    position: static !important;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+  > *:nth-child(2) {
     z-index: 0;
+    position: static !important;
+    height: 100%;
 
     div:nth-child(1) {
+      top: 0;
+      left: 0;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 5px;
     }
   }
 
@@ -37,24 +33,48 @@ const TreeSelectContainer = styled.div`
     width: 100%;
     min-width: 0 !important;
     position: relative;
+    box-shadow: none;
+    border: 1px solid ${({ theme }) => theme.secondaryBackground};
+    border-radius: 7px;
+    top: 0 !important;
   }
 
   // TODO: Look into relative height of the ul element
   .rc-tree-select-tree {
     height: 100px;
   }
+
+  .rc-tree-select-tree-checkbox {
+    border: 3px solid ${({ theme }) => theme.orange} !important;
+    border-radius: 4px !important;
+    background: ${({ theme }) => theme.transparentOrange} !important;
+    margin-right: 5px !important;
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .rc-tree-select-tree-checkbox-checked,
+  .rc-tree-select-tree-checkbox-indeterminate {
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+  }
+
+  .rc-tree-select-tree-checkbox-checked {
+    background-image: url('/checkmark/checkmark.svg') !important;
+    background-color: ${({ theme }) => theme.orange} !important;
+  }
+
+  .rc-tree-select-tree-checkbox-indeterminate {
+    background-image: url('/checkmark/mixed_checkmark.svg') !important;
+  }
 `
 
-const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
-  const [searchValue, setSearchValue] = useState('')
+const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
 
   return (
     <TreeSelectContainer ref={setTreeSelectContainerRef}>
-      <Input
-        onChange={(e) => setSearchValue(e.target.value)}
-        placeholder="Search for a type..."
-      />
       {treeSelectContainerRef && (
         <TreeSelect
           style={{ width: 300 }}
@@ -72,7 +92,7 @@ const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
             id: 'value',
             rootPId: 'null',
           }}
-          treeNodeFilterProp="title"
+          treeNodeFilterProp="searchValue"
           open
           searchValue={searchValue}
           virtual

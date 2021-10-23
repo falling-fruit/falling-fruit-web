@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -6,8 +7,9 @@ import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import { buildTypeSchema } from '../../utils/buildTypeSchema'
-import Button from '../ui/Button'
-import CheckboxFilters from './CheckboxFilters'
+import Input from '../ui/Input'
+import { MuniAndInvasiveFilters, ShowOnMapFilter } from './CheckboxFilters'
+import FilterButtons from './FilterButtons'
 import RCTreeSelect from './RCTreeSelect'
 
 const StyledFilter = styled.div`
@@ -21,7 +23,7 @@ const StyledFilter = styled.div`
       flex: 1;
     }
     background-color: ${({ theme }) => theme.background};
-    padding: 0 10px 16px 10px;
+    padding: 0 10px 8px 10px;
     margin-top: 3px;
     height: 100%;
     display: flex;
@@ -42,14 +44,20 @@ const StyledFilter = styled.div`
   }
 `
 
-const TreeButtonContainer = styled.div`
+const TreeFiltersContainer = styled.div`
   display: flex;
   flex-direction: row;
-  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+`
 
-  Button {
-    flex: 1;
-    margin: 5px;
+const StyledInput = styled(Input)`
+  height: 36px;
+  margin-bottom: 7px;
+  padding: 9px 12px;
+  input {
+    height: 100%;
   }
 `
 
@@ -60,55 +68,73 @@ const Filter = ({ isOpen }) => {
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
-  const { types, isLoading, countsById } = filters
+  const { types, isLoading, countsById, showOnMap } = filters
   const { typesById } = useTypesById()
   const treeData = buildTypeSchema(
     Object.values(typesById),
     showScientificNames,
     countsById,
+    showOnMap,
   )
+
+  const [searchValue, setSearchValue] = useState('')
+
+  const onCheckBoxFiltersChange = (values) => dispatch(setFilters(values))
+
+  const onSelectAllClick = () => {
+    const treeDataValues = treeData.map((t) =>
+      t.value.substring(t.value.indexOf('-') + 1),
+    )
+    const treeDataNoDuplicates = treeDataValues.filter(
+      (value, index) => treeDataValues.indexOf(value) === index,
+    )
+    dispatch(selectionChanged(treeDataNoDuplicates))
+  }
+
+  const onDeselectAllClick = () => {
+    dispatch(selectionChanged([]))
+  }
 
   const { t } = useTranslation()
   return isOpen ? (
     <StyledFilter>
       <div>
         <p className="edible-type-text">{t('Edible Types')}</p>
-        <TreeButtonContainer>
-          <Button
-            onClick={() => {
-              const treeDataValues = treeData.map((t) =>
-                t.value.substring(t.value.indexOf('-') + 1),
-              )
-              const treeDataNoDuplicates = treeDataValues.filter(
-                (value, index) => treeDataValues.indexOf(value) === index,
-              )
-              dispatch(selectionChanged(treeDataNoDuplicates))
-            }}
-          >
-            Select All
-          </Button>
-          <Button
-            onClick={() => {
-              dispatch(selectionChanged([]))
-            }}
-          >
-            Select None
-          </Button>
-        </TreeButtonContainer>
+        <StyledInput
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Search for a type..."
+        />
+        <TreeFiltersContainer>
+          <ShowOnMapFilter
+            values={filters}
+            onChange={onCheckBoxFiltersChange}
+          />
+          <FilterButtons
+            onSelectAllClick={onSelectAllClick}
+            onDeselectAllClick={onDeselectAllClick}
+          />
+        </TreeFiltersContainer>
         <RCTreeSelect
           data={treeData}
           shouldZoomIn={isShowingClusters}
           loading={isLoading}
-          onChange={(selectedTypes) => {
-            dispatch(selectionChanged(selectedTypes))
-          }}
+          onChange={(selectedTypes) =>
+            dispatch(
+              selectionChanged(
+                selectedTypes.filter((t) => !t.includes('root')),
+              ),
+            )
+          }
           checkedTypes={types}
+          filters={filters}
+          onCheckBoxFiltersChange={onCheckBoxFiltersChange}
+          searchValue={searchValue}
         />
       </div>
       <div>
-        <CheckboxFilters
+        <MuniAndInvasiveFilters
           values={filters}
-          onChange={(values) => dispatch(setFilters(values))}
+          onChange={onCheckBoxFiltersChange}
         />
       </div>
     </StyledFilter>
