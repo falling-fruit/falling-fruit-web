@@ -7,9 +7,9 @@ import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import { buildTypeSchema } from '../../utils/buildTypeSchema'
-import Button from '../ui/Button'
 import Input from '../ui/Input'
 import { MuniAndInvasiveFilters, ShowOnMapFilter } from './CheckboxFilters'
+import FilterButtons from './FilterButtons'
 import RCTreeSelect from './RCTreeSelect'
 
 const StyledFilter = styled.div`
@@ -50,12 +50,6 @@ const TreeFiltersContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 7px;
-
-  Button {
-    height: 26px;
-    width: 90px;
-    padding: 0;
-  }
 `
 
 const StyledInput = styled(Input)`
@@ -87,6 +81,20 @@ const Filter = ({ isOpen }) => {
 
   const onCheckBoxFiltersChange = (values) => dispatch(setFilters(values))
 
+  const onSelectAllClick = () => {
+    const treeDataValues = treeData.map((t) =>
+      t.value.substring(t.value.indexOf('-') + 1),
+    )
+    const treeDataNoDuplicates = treeDataValues.filter(
+      (value, index) => treeDataValues.indexOf(value) === index,
+    )
+    dispatch(selectionChanged(treeDataNoDuplicates))
+  }
+
+  const onDeselectAllClick = () => {
+    dispatch(selectionChanged([]))
+  }
+
   const { t } = useTranslation()
   return isOpen ? (
     <StyledFilter>
@@ -101,27 +109,10 @@ const Filter = ({ isOpen }) => {
             values={filters}
             onChange={onCheckBoxFiltersChange}
           />
-          <Button
-            onClick={() => {
-              const treeDataValues = treeData.map((t) =>
-                t.value.substring(t.value.indexOf('-') + 1),
-              )
-              const treeDataNoDuplicates = treeDataValues.filter(
-                (value, index) => treeDataValues.indexOf(value) === index,
-              )
-              dispatch(selectionChanged(treeDataNoDuplicates))
-            }}
-          >
-            Select All
-          </Button>
-          <Button
-            secondary
-            onClick={() => {
-              dispatch(selectionChanged([]))
-            }}
-          >
-            Deselect All
-          </Button>
+          <FilterButtons
+            onSelectAllClick={onSelectAllClick}
+            onDeselectAllClick={onDeselectAllClick}
+          />
         </TreeFiltersContainer>
         <RCTreeSelect
           data={treeData}
