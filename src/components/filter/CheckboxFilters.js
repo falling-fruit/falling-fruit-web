@@ -11,10 +11,6 @@ const CHECKBOX_FIELDS = [
     field: 'invasive',
     label: 'Invasive Species Only',
   },
-  {
-    field: 'showOnMap',
-    label: 'Show On Map',
-  },
 ]
 
 const StyledLabel = styled.label`
@@ -25,16 +21,32 @@ const StyledLabel = styled.label`
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
 
-  &:not(:last-child) {
-    margin-bottom: 8px;
-
+  &:last-child {
+    margin-top: 8px;
     @media ${({ theme }) => theme.device.mobile} {
       margin-top: 15px;
     }
   }
 `
 
-const CheckboxFilters = ({ values, onChange }) =>
+const ShowOnMapFilter = ({ values, onChange }) => (
+  <StyledLabel key={'showOnMap'} htmlFor={'showOnMap'}>
+    <Checkbox
+      id={'showOnMap'}
+      checked={values.showOnMap}
+      name={'showOnMap'}
+      onChange={(event) =>
+        onChange({
+          ...values,
+          ['showOnMap']: event.target.checked,
+        })
+      }
+    />
+    {'Show On Map'}
+  </StyledLabel>
+)
+
+const MuniAndInvasiveFilters = ({ values, onChange }) =>
   CHECKBOX_FIELDS.map(({ field, label }) => (
     <StyledLabel key={field} htmlFor={field}>
       <Checkbox
@@ -52,4 +64,4 @@ const CheckboxFilters = ({ values, onChange }) =>
     </StyledLabel>
   ))
 
-export default CheckboxFilters
+export { MuniAndInvasiveFilters, ShowOnMapFilter }

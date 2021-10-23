@@ -118,12 +118,13 @@ const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
             style={{
               fontStyle: 'italic',
               marginRight: '5px',
+              color: theme.text,
             }}
           >
             {scientificName}
           </span>
         )}
-        <span style={{ fontWeight: 'bold' }}>({count})</span>
+        <span style={{ fontWeight: 'bold', color: theme.text }}>({count})</span>
       </span>
     )
 
@@ -131,6 +132,10 @@ const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
       pId: type.pId,
       title: name,
       value: type.value,
+      searchValue:
+        scientificName && showScientificName
+          ? `${commonName} ${scientificName}`
+          : `${commonName}`,
     }
   })
 }

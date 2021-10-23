@@ -4,32 +4,28 @@ import TreeSelect from 'rc-tree-select'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 
-import Input from '../ui/Input'
-
 const TreeSelectContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
   @media ${({ theme }) => theme.device.mobile} {
     height: 50vh;
   }
-  display: flex;
-  flex-direction: column;
-  flex: 15;
 
   .rc-tree-select-selection {
     display: none;
   }
 
-  > *:nth-child(3) {
-    position: static !important;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+  > *:nth-child(2) {
     z-index: 0;
+    position: static !important;
+    height: 100%;
 
     div:nth-child(1) {
+      top: 0;
+      left: 0;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 5px;
     }
   }
 
@@ -40,6 +36,7 @@ const TreeSelectContainer = styled.div`
     box-shadow: none;
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     border-radius: 7px;
+    top: 0 !important;
   }
 
   // TODO: Look into relative height of the ul element
@@ -73,25 +70,11 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const StyledInput = styled(Input)`
-  height: 36px;
-  margin-bottom: 7px;
-  padding: 9px 12px;
-  input {
-    height: 100%;
-  }
-`
-
-const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
-  const [searchValue, setSearchValue] = useState('')
+const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
 
   return (
     <TreeSelectContainer ref={setTreeSelectContainerRef}>
-      <StyledInput
-        onChange={(e) => setSearchValue(e.target.value)}
-        placeholder="Search for a type..."
-      />
       {treeSelectContainerRef && (
         <TreeSelect
           style={{ width: 300 }}
@@ -109,7 +92,7 @@ const RCTreeSelect = ({ data, onChange, checkedTypes }) => {
             id: 'value',
             rootPId: 'null',
           }}
-          treeNodeFilterProp="title"
+          treeNodeFilterProp="searchValue"
           open
           searchValue={searchValue}
           virtual

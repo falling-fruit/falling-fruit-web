@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -7,7 +8,8 @@ import { useTypesById } from '../../redux/useTypesById'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import { buildTypeSchema } from '../../utils/buildTypeSchema'
 import Button from '../ui/Button'
-import CheckboxFilters from './CheckboxFilters'
+import Input from '../ui/Input'
+import { MuniAndInvasiveFilters, ShowOnMapFilter } from './CheckboxFilters'
 import RCTreeSelect from './RCTreeSelect'
 
 const StyledFilter = styled.div`
@@ -21,7 +23,7 @@ const StyledFilter = styled.div`
       flex: 1;
     }
     background-color: ${({ theme }) => theme.background};
-    padding: 0 10px 16px 10px;
+    padding: 0 10px 8px 10px;
     margin-top: 3px;
     height: 100%;
     display: flex;
@@ -42,14 +44,26 @@ const StyledFilter = styled.div`
   }
 `
 
-const TreeButtonContainer = styled.div`
+const TreeFiltersContainer = styled.div`
   display: flex;
   flex-direction: row;
-  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
 
   Button {
-    flex: 1;
-    margin: 5px;
+    height: 26px;
+    width: 90px;
+    padding: 0;
+  }
+`
+
+const StyledInput = styled(Input)`
+  height: 36px;
+  margin-bottom: 7px;
+  padding: 9px 12px;
+  input {
+    height: 100%;
   }
 `
 
@@ -69,12 +83,24 @@ const Filter = ({ isOpen }) => {
     showOnMap,
   )
 
+  const [searchValue, setSearchValue] = useState('')
+
+  const onCheckBoxFiltersChange = (values) => dispatch(setFilters(values))
+
   const { t } = useTranslation()
   return isOpen ? (
     <StyledFilter>
       <div>
         <p className="edible-type-text">{t('Edible Types')}</p>
-        <TreeButtonContainer>
+        <StyledInput
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Search for a type..."
+        />
+        <TreeFiltersContainer>
+          <ShowOnMapFilter
+            values={filters}
+            onChange={onCheckBoxFiltersChange}
+          />
           <Button
             onClick={() => {
               const treeDataValues = treeData.map((t) =>
@@ -94,23 +120,30 @@ const Filter = ({ isOpen }) => {
               dispatch(selectionChanged([]))
             }}
           >
-            Select None
+            Deselect All
           </Button>
-        </TreeButtonContainer>
+        </TreeFiltersContainer>
         <RCTreeSelect
           data={treeData}
           shouldZoomIn={isShowingClusters}
           loading={isLoading}
-          onChange={(selectedTypes) => {
-            dispatch(selectionChanged(selectedTypes))
-          }}
+          onChange={(selectedTypes) =>
+            dispatch(
+              selectionChanged(
+                selectedTypes.filter((t) => !t.includes('root')),
+              ),
+            )
+          }
           checkedTypes={types}
+          filters={filters}
+          onCheckBoxFiltersChange={onCheckBoxFiltersChange}
+          searchValue={searchValue}
         />
       </div>
       <div>
-        <CheckboxFilters
+        <MuniAndInvasiveFilters
           values={filters}
-          onChange={(values) => dispatch(setFilters(values))}
+          onChange={onCheckBoxFiltersChange}
         />
       </div>
     </StyledFilter>
