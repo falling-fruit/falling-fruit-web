@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createBrowserHistory } from 'history'
 
+import authSlice from './authSlice'
 import filterReducer from './filterSlice'
 import listReducer from './listSlice'
 import mapReducer from './mapSlice'
@@ -15,6 +16,7 @@ export const store = configureStore({
     list: listReducer,
     filter: filterReducer,
     settings: settingsReducer,
+    auth: authSlice,
     misc: miscReducer,
   },
   middleware: (getDefaultMiddleware) =>

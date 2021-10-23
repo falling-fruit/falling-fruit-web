@@ -33,6 +33,19 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
       }
     })
 
+export const addUser = (
+  params: paths['/users']['post']['requestBody']['content']['application/json'],
+) => handleResponse(instance.post('/users', params))
+
+export const editUser = (
+  id: paths['/users/{id}']['put']['requestBody']['content']['application/json'],
+  params: paths['/users/{id}']['put']['requestBody']['content']['application/json'],
+) => handleResponse(instance.put(`/users/${id}`, params))
+
+export const getUserToken = (
+  params: paths['/users/token']['get']['parameters']['query'],
+) => handleResponse(instance.get('/users/token', { params }))
+
 /* Not used yet
 const fileToFormData = (photoData: string | Blob | undefined) => {
   if (photoData !== undefined) {
