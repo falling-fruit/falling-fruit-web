@@ -4,7 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { selectionChanged, setFilters } from '../../redux/filterSlice'
+import {
+  selectionChanged,
+  setFilters,
+  updateShowOnMap,
+} from '../../redux/filterSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
@@ -62,7 +66,6 @@ const StyledInput = styled(Input)`
 `
 
 const Filter = ({ isOpen }) => {
-  const [showOnMap, setShowOnMap] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const setSearchValueDebounced = useMemo(() => debounce(setSearchValue, 200), [
     setSearchValue,
@@ -73,7 +76,14 @@ const Filter = ({ isOpen }) => {
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
-  const { types, isLoading, countsById, treeData, childrenById } = filters
+  const {
+    types,
+    isLoading,
+    countsById,
+    treeData,
+    childrenById,
+    showOnMap,
+  } = filters
 
   const treeDataWithUpdatedCounts = useMemo(
     () =>
@@ -118,7 +128,7 @@ const Filter = ({ isOpen }) => {
         <TreeFiltersContainer>
           <ShowOnMapFilter
             showOnMap={showOnMap}
-            onChange={() => setShowOnMap(!showOnMap)}
+            onChange={() => dispatch(updateShowOnMap())}
           />
           <FilterButtons
             onSelectAllClick={onSelectAllClick}
@@ -136,8 +146,6 @@ const Filter = ({ isOpen }) => {
             )
           }
           checkedTypes={types}
-          filters={filters}
-          onCheckBoxFiltersChange={onCheckBoxFiltersChange}
           searchValue={searchValue}
         />
       </div>
