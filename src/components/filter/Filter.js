@@ -5,7 +5,6 @@ import styled from 'styled-components/macro'
 
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { getIsShowingClusters } from '../../redux/viewChange'
 import { buildTypeSchema } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import { MuniAndInvasiveFilters, ShowOnMapFilter } from './CheckboxFilters'
@@ -64,7 +63,6 @@ const StyledInput = styled(Input)`
 const Filter = ({ isOpen }) => {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
-  const isShowingClusters = useSelector(getIsShowingClusters)
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
@@ -116,7 +114,6 @@ const Filter = ({ isOpen }) => {
         </TreeFiltersContainer>
         <RCTreeSelect
           data={treeData}
-          shouldZoomIn={isShowingClusters}
           loading={isLoading}
           onChange={(selectedTypes) =>
             dispatch(

@@ -158,7 +158,7 @@ const Search = (props) => {
             })}
         </ComboboxList>
       </StyledComboboxPopover>
-      <Filter isOpen={filterOpen} />
+      {/* <Filter isOpen={filterOpen} /> */}
     </Combobox>
   )
 }

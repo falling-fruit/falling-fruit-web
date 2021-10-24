@@ -1,13 +1,13 @@
 import { theme } from '../components/ui/GlobalStyle'
 
-const getCumulativeCount = (id, countsById, types) => {
-  let count = countsById[id] ? countsById[id] : 0
-  const children = types.filter((t) => t.parent_id === id && t.id !== id)
-  children.forEach(
-    (c) => (count += getCumulativeCount(c.id, countsById, types)),
-  )
-  return count
-}
+// const getCumulativeCount = (id, countsById, types) => {
+//   let count = countsById[id] ? countsById[id] : 0
+//   const children = types.filter((t) => t.parent_id === id && t.id !== id)
+//   children.forEach(
+//     (c) => (count += getCumulativeCount(c.id, countsById, types)),
+//   )
+//   return count
+// }
 
 const getTypesWithRootLabels = (types, countsById, childrenCount) =>
   // TODO: Clean up this if statement logic
@@ -69,10 +69,10 @@ const sortTypes = (types) =>
 
 const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
   const childrenCount = {}
-  types.forEach((t) => {
-    const count = getCumulativeCount(t.id, countsById, types)
-    childrenCount[t.id] = count
-  })
+  // types.forEach((t) => {
+  //   const count = getCumulativeCount(t.id, countsById, types)
+  //   childrenCount[t.id] = count
+  // })
 
   const typesOnMap = showOnMap
     ? types.filter((t) => countsById[t.id] > 0)
