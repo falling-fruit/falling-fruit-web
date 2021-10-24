@@ -124,7 +124,6 @@ const updateTreeCounts = (
   const startTime = performance.now()
 
   const totalCount = {}
-  // TODO: Fix cumulative counts
   treeData.forEach((t) => {
     getTotalCount(totalCount, t.id, childrenById, countsById)
   })
