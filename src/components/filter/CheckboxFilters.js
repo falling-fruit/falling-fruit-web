@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
@@ -35,22 +36,15 @@ const StyledLabel = styled.label`
     `}
 `
 
-const ShowOnMapFilter = ({ values, onChange }) => (
-  <StyledLabel addMargin={false} key={'showOnMap'} htmlFor={'showOnMap'}>
-    <Checkbox
-      id={'showOnMap'}
-      checked={values.showOnMap}
-      name={'showOnMap'}
-      onChange={(event) =>
-        onChange({
-          ...values,
-          ['showOnMap']: event.target.checked,
-        })
-      }
-    />
-    {'Show On Map'}
-  </StyledLabel>
-)
+const ShowOnMapFilter = ({ showOnMap, onChange }) => {
+  const { t } = useTranslation()
+  return (
+    <StyledLabel addMargin={false}>
+      <Checkbox checked={showOnMap} onChange={onChange} />
+      {t('Show On Map')}
+    </StyledLabel>
+  )
+}
 
 const MuniAndInvasiveFilters = ({ values, onChange }) =>
   CHECKBOX_FIELDS.map(({ field, label }) => (

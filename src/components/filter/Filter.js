@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
-import { useTypesById } from '../../redux/useTypesById'
-import { buildTypeSchema } from '../../utils/buildTypeSchema'
+import { updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import { MuniAndInvasiveFilters, ShowOnMapFilter } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
@@ -61,25 +60,27 @@ const StyledInput = styled(Input)`
 `
 
 const Filter = ({ isOpen }) => {
+  const [showOnMap, setShowOnMap] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
   )
-  const { types, isLoading, countsById, showOnMap } = filters
-  const { typesById } = useTypesById()
-  const treeData = useMemo(
+  const { types, isLoading, countsById, treeData, childrenById } = filters
+
+  const treeDataWithUpdatedCounts = useMemo(
     () =>
-      buildTypeSchema(
-        Object.values(typesById),
+      updateTreeCounts(
+        treeData,
         showScientificNames,
         countsById,
         showOnMap,
+        childrenById,
       ),
-    [typesById, showScientificNames, countsById, showOnMap],
+    [treeData, showScientificNames, countsById, showOnMap, childrenById],
   )
-
-  const [searchValue, setSearchValue] = useState('')
 
   const onCheckBoxFiltersChange = (values) => dispatch(setFilters(values))
 
@@ -108,8 +109,8 @@ const Filter = ({ isOpen }) => {
         />
         <TreeFiltersContainer>
           <ShowOnMapFilter
-            values={filters}
-            onChange={onCheckBoxFiltersChange}
+            showOnMap={showOnMap}
+            onChange={() => setShowOnMap(!showOnMap)}
           />
           <FilterButtons
             onSelectAllClick={onSelectAllClick}
@@ -117,7 +118,7 @@ const Filter = ({ isOpen }) => {
           />
         </TreeFiltersContainer>
         <RCTreeSelect
-          data={treeData}
+          data={treeDataWithUpdatedCounts}
           loading={isLoading}
           onChange={(selectedTypes) =>
             dispatch(

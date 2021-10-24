@@ -1,19 +1,37 @@
 import { theme } from '../components/ui/GlobalStyle'
 
-// const getCumulativeCount = (id, countsById, types) => {
-//   let count = countsById[id] ? countsById[id] : 0
-//   const children = types.filter((t) => t.parent_id === id && t.id !== id)
-//   children.forEach(
-//     (c) => (count += getCumulativeCount(c.id, countsById, types)),
-//   )
-//   return count
-// }
+const getChildrenById = (types) => {
+  const children = {}
+  types.forEach(({ id, parent_id }) => {
+    if (id !== parent_id) {
+      if (!children[parent_id]) {
+        children[parent_id] = [id]
+      } else {
+        children[parent_id].push(id)
+      }
+    }
+  })
+  return children
+}
 
-const getTypesWithRootLabels = (types, countsById, childrenCount) =>
+const getTotalCount = (counts, id, childrenById, countsById) => {
+  if (id in counts) {
+    return counts[id]
+  }
+
+  let totalCount = countsById[id] ?? 0
+  childrenById[id]?.forEach((childId) => {
+    totalCount += getTotalCount(counts, childId, childrenById, countsById)
+  })
+  counts[id] = totalCount
+
+  return totalCount
+}
+
+const getTypesWithRootLabels = (types, childrenById) =>
   // TODO: Clean up this if statement logic
   types.map((t) => {
-    const count = countsById[t.id] ? countsById[t.id] : 0
-    const isParent = childrenCount[t.id] !== count
+    const isParent = childrenById[t.id]
     if (isParent) {
       // If the type has children, its value should contain the "root" prefix
       return {
@@ -38,11 +56,10 @@ const getTypesWithRootLabels = (types, countsById, childrenCount) =>
     }
   })
 
-const addOtherCategories = (types, countsById, childrenCount) => {
+const addOtherCategories = (types, childrenById) => {
   const typesWithOtherCategory = [...types]
   types.forEach((t) => {
-    const count = countsById[t.id] ? countsById[t.id] : 0
-    if (childrenCount[t.id] !== count) {
+    if (childrenById[t.id]) {
       typesWithOtherCategory.push({
         ...t,
         value: `${t.id}`,
@@ -67,30 +84,13 @@ const sortTypes = (types) =>
       ),
     )
 
-const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
-  console.log('rebuilding type schema')
-  const startTime = performance.now()
-
-  const childrenCount = {}
-  // types.forEach((t) => {
-  //   const count = getCumulativeCount(t.id, countsById, types)
-  //   childrenCount[t.id] = count
-  // })
-
-  const typesOnMap = showOnMap
-    ? types.filter((t) => countsById[t.id] > 0)
-    : types
-
-  const typesWithRootLabels = getTypesWithRootLabels(
-    typesOnMap,
-    countsById,
-    childrenCount,
-  )
+// Builds the type tree and sorts on page load
+const buildTypeSchema = (types, childrenById) => {
+  const typesWithRootLabels = getTypesWithRootLabels(types, childrenById)
 
   const typesWithOtherCategory = addOtherCategories(
     typesWithRootLabels,
-    countsById,
-    childrenCount,
+    childrenById,
   )
 
   const sortedTypes = sortTypes(typesWithOtherCategory)
@@ -98,12 +98,48 @@ const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
   const typeSchema = sortedTypes.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
-    const count =
-      childrenCount[type.id] && type.value.includes('root')
-        ? childrenCount[type.id]
-        : countsById[type.id]
-        ? countsById[type.id]
-        : 0
+
+    return {
+      ...type,
+      pId: type.pId,
+      value: type.value,
+      searchValue: scientificName
+        ? `${commonName} ${scientificName}`
+        : `${commonName}`,
+    }
+  })
+
+  return typeSchema
+}
+
+// Updates cumulative counts and node titles
+const updateTreeCounts = (
+  treeData,
+  showScientificName,
+  countsById,
+  showOnMap,
+  childrenById,
+) => {
+  console.log('rebuilding type schema')
+  const startTime = performance.now()
+
+  const totalCount = {}
+  // TODO: Fix cumulative counts
+  treeData.forEach((t) => {
+    getTotalCount(totalCount, t.id, childrenById, countsById)
+  })
+
+  const typesOnMap = showOnMap
+    ? treeData.filter((t) => countsById[t.id] > 0)
+    : treeData
+
+  const typeSchema = typesOnMap.map((type) => {
+    const commonName = type.name ?? type.common_names.en[0]
+    const scientificName = type.scientific_names?.[0]
+    const count = type.value.includes('root')
+      ? totalCount[type.id]
+      : countsById[type.id] ?? 0
+
     // TODO: Change typeName to span to reuse here
     const name = (
       <span style={{ fontSize: '0.875rem' }}>
@@ -132,13 +168,8 @@ const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
     )
 
     return {
-      pId: type.pId,
+      ...type,
       title: name,
-      value: type.value,
-      searchValue:
-        scientificName && showScientificName
-          ? `${commonName} ${scientificName}`
-          : `${commonName}`,
     }
   })
 
@@ -148,4 +179,4 @@ const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
   return typeSchema
 }
 
-export { buildTypeSchema }
+export { buildTypeSchema, getChildrenById, updateTreeCounts }

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
+import { buildTypeSchema, getChildrenById } from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
 import { fetchLocations } from './viewChange'
@@ -28,12 +29,13 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
     types: [],
+    treeData: [],
+    childrenById: {},
     muni: true,
     isOpen: false,
     invasive: false,
     isLoading: false,
     countsById: {},
-    showOnMap: false,
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),
@@ -63,6 +65,9 @@ export const filterSlice = createSlice({
       state.isLoading = false
     },
     [fetchAllTypes.fulfilled]: (state, action) => {
+      const childrenById = getChildrenById(action.payload)
+      state.childrenById = childrenById
+      state.treeData = buildTypeSchema(action.payload, childrenById)
       state.types = action.payload.map((t) => `${t.id}`)
     },
   },
