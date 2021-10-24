@@ -128,11 +128,7 @@ const updateTreeCounts = (
     getTotalCount(totalCount, t.id, childrenById, countsById)
   })
 
-  const typesOnMap = showOnMap
-    ? treeData.filter((t) => countsById[t.id] > 0)
-    : treeData
-
-  const typeSchema = typesOnMap.map((type) => {
+  const typeSchema = treeData.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
     const count = type.value.includes('root')
@@ -169,13 +165,17 @@ const updateTreeCounts = (
     return {
       ...type,
       title: name,
+      count,
     }
   })
+  const typesOnMap = showOnMap
+    ? typeSchema.filter((t) => t.count > 0)
+    : typeSchema
 
   const endTime = performance.now()
 
   console.log(`finished, took ${endTime - startTime}`)
-  return typeSchema
+  return typesOnMap
 }
 
 export { buildTypeSchema, getChildrenById, updateTreeCounts }
