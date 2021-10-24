@@ -1,3 +1,4 @@
+import { debounce } from 'debounce'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -62,6 +63,9 @@ const StyledInput = styled(Input)`
 const Filter = ({ isOpen }) => {
   const [showOnMap, setShowOnMap] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const setSearchValueDebounced = useMemo(() => debounce(setSearchValue, 200), [
+    setSearchValue,
+  ])
 
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
@@ -104,7 +108,7 @@ const Filter = ({ isOpen }) => {
       <div>
         <p className="edible-type-text">{t('Edible Types')}</p>
         <StyledInput
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder="Search for a type..."
         />
         <TreeFiltersContainer>
