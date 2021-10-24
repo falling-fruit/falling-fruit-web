@@ -68,6 +68,9 @@ const sortTypes = (types) =>
     )
 
 const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
+  console.log('rebuilding type schema')
+  const startTime = performance.now()
+
   const childrenCount = {}
   // types.forEach((t) => {
   //   const count = getCumulativeCount(t.id, countsById, types)
@@ -92,7 +95,7 @@ const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
 
   const sortedTypes = sortTypes(typesWithOtherCategory)
 
-  return sortedTypes.map((type) => {
+  const typeSchema = sortedTypes.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
     const count =
@@ -138,6 +141,11 @@ const buildTypeSchema = (types, showScientificName, countsById, showOnMap) => {
           : `${commonName}`,
     }
   })
+
+  const endTime = performance.now()
+
+  console.log(`finished, took ${endTime - startTime}`)
+  return typeSchema
 }
 
 export { buildTypeSchema }

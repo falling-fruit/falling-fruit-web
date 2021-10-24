@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -68,11 +68,15 @@ const Filter = ({ isOpen }) => {
   )
   const { types, isLoading, countsById, showOnMap } = filters
   const { typesById } = useTypesById()
-  const treeData = buildTypeSchema(
-    Object.values(typesById),
-    showScientificNames,
-    countsById,
-    showOnMap,
+  const treeData = useMemo(
+    () =>
+      buildTypeSchema(
+        Object.values(typesById),
+        showScientificNames,
+        countsById,
+        showOnMap,
+      ),
+    [typesById, showScientificNames, countsById, showOnMap],
   )
 
   const [searchValue, setSearchValue] = useState('')
