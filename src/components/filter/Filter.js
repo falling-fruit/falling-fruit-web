@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
+import { fetchLocations } from '../../redux/viewChange'
 import { updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import { MuniAndInvasiveFilters, ShowOnMapFilter } from './CheckboxFilters'
@@ -86,7 +87,10 @@ const Filter = ({ isOpen }) => {
     [treeData, showScientificNames, countsById, showOnMap, childrenById],
   )
 
-  const onCheckBoxFiltersChange = (values) => dispatch(setFilters(values))
+  const onCheckBoxFiltersChange = (values) => {
+    dispatch(setFilters(values))
+    dispatch(fetchLocations())
+  }
 
   const onSelectAllClick = () => {
     const treeDataValues = treeData.map((t) =>
