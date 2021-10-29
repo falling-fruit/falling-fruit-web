@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 
 import { logout } from '../../redux/authSlice'
 
-const StyledUser = styled.span`
+const StyledUser = styled(User)`
   svg {
     fill: ${({ theme }) => theme.orange};
   }
@@ -227,7 +227,7 @@ const Header = () => {
               </StyledDropdown>
             ) : (
               <NavLink to="/login" className="navbar" activeClassName="active">
-                <User height={'15px'} /> {t('Login')}
+                <StyledUser height={'15px'} /> {t('Login')}
               </NavLink>
             )}
           </li>
