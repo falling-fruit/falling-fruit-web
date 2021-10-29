@@ -1,7 +1,7 @@
 import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
-import { NavLink, useRouteMatch } from 'react-router-dom'
+import { Link, NavLink, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 const StyledHeader = styled.header`
@@ -14,9 +14,8 @@ const StyledHeader = styled.header`
   z-index: 1;
 
   img {
-    height: 60%;
+    height: 100%;
     width: auto;
-    margin: 20% 10px;
   }
 
   nav {
@@ -40,7 +39,7 @@ const StyledHeader = styled.header`
         font-family: Lato;
         font-style: normal;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 1rem;
 
         .navbar {
           display: block;
@@ -158,12 +157,21 @@ const StyledDropdown = styled(Dropdown)`
   }
 `
 
+const LogoLink = styled(Link)`
+  display: block;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+`
+
 // TODO: Clean up file structure (i.e. logo_white.svg) from ./public
 const Header = () => {
   const { t } = useTranslation()
   return (
     <StyledHeader>
-      <img src="/logo_orange.svg" alt="Falling Fruit Logo" />
+      <LogoLink to="/map">
+        <img src="/logo_orange.svg" alt="Falling Fruit Logo" />
+      </LogoLink>
       <nav>
         <ul>
           <li>

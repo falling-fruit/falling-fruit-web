@@ -28,7 +28,7 @@ export const fetchFilterCounts = createAsyncThunk(
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    types: [],
+    types: null,
     treeData: [],
     childrenById: {},
     muni: true,

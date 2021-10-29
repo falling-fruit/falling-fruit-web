@@ -13,6 +13,10 @@ const IndicatorAccordionButton = styled(AccordionButton)`
   background: ${({ theme }) => theme.background};
   text-align: left;
   font-family: ${({ theme }) => theme.fonts};
+
+  :focus {
+    outline: none;
+  }
 `
 
 export default IndicatorAccordionButton

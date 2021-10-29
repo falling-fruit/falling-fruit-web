@@ -1,3 +1,4 @@
+import { transparentize } from 'polished'
 import styled from 'styled-components/macro'
 
 import ResetButton from './ResetButton'
@@ -12,6 +13,19 @@ const StyledResetButton = styled(ResetButton)`
     ${({ $selected, theme }) => ($selected ? theme.blue : theme.background)};
   overflow: hidden;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      transparent,
+      ${({ theme }) => transparentize(0.15, theme.headerText)}
+    );
+  }
+
   p {
     position: absolute;
     left: 6px;
@@ -19,7 +33,7 @@ const StyledResetButton = styled(ResetButton)`
     margin: 0;
     font-size: 0.875rem;
     font-weight: bold;
-    color: ${({ theme }) => theme.black};
+    color: ${({ theme }) => theme.background};
   }
 
   > img {
