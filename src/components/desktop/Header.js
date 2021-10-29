@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { clearAuthCredentials } from '../../redux/authSlice'
+import { logout } from '../../redux/authSlice'
 
 const StyledUser = styled.span`
   svg {
@@ -173,10 +173,8 @@ const Header = () => {
   const { t } = useTranslation()
   const { authToken } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
-  const logout = () => {
-    localStorage.clear()
-    sessionStorage.clear()
-    dispatch(clearAuthCredentials())
+  const handleLogout = () => {
+    dispatch(logout())
   }
   return (
     <StyledHeader>
@@ -225,7 +223,7 @@ const Header = () => {
                 }
                 match={false}
               >
-                <button onClick={logout}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
               </StyledDropdown>
             ) : (
               <NavLink to="/login" className="navbar" activeClassName="active">

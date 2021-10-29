@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { setAuthFromStorage } from '../redux/authSlice'
+import { login } from '../redux/authSlice'
 
-const AuthInitializer = ({ children }) => {
+const AuthInitializer = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(setAuthFromStorage())
+    dispatch(login())
   }, [dispatch])
-  return <>{children}</>
+  return <></>
 }
 
 export default AuthInitializer

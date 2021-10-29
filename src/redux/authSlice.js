@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getUserToken } from '../utils/api'
 
+const authToken = 'authToken'
+
 export const fetchAccessToken = createAsyncThunk(
   'users/fetchToken',
   async ({ email, password, isChecked }) => {
@@ -9,24 +11,27 @@ export const fetchAccessToken = createAsyncThunk(
       email: email,
       password: password,
     })
-    isChecked
-      ? localStorage.setItem('authToken', response)
-      : sessionStorage.setItem('authToken', response)
+    if (isChecked) {
+      localStorage.setItem(authToken, response)
+    } else {
+      sessionStorage.setItem(authToken, response)
+    }
 
     return response
   },
 )
-const initialState = { authToken: undefined, isChecked: false }
+const initialState = { authToken: null, isChecked: false, failedLogin: false }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    clearAuthCredentials: (state) => {
+    logout: (state) => {
       state.authToken = null
-      state.failedLogin = false
+      localStorage.clear()
+      sessionStorage.clear()
     },
-    setAuthFromStorage: (state) => {
+    login: (state) => {
       const localAuthToken = localStorage.getItem('authToken')
       const sessionAuthToken = sessionStorage.getItem('authToken')
       state.authToken = localAuthToken ?? sessionAuthToken
@@ -42,5 +47,5 @@ export const authSlice = createSlice({
   },
 })
 
-export const { clearAuthCredentials, setAuthFromStorage } = authSlice.actions
+export const { logout, login } = authSlice.actions
 export default authSlice.reducer

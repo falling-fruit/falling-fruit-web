@@ -81,7 +81,7 @@ const LoginPage = () => {
         <StyledInput
           placeholder="e.g. user@example.com"
           value={username}
-          type={'email'}
+          type="email"
           label={'Email'}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -90,7 +90,7 @@ const LoginPage = () => {
         <StyledInput
           label={'Password'}
           value={password}
-          type={'password'}
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
 
@@ -98,9 +98,7 @@ const LoginPage = () => {
           label={<label htmlFor={'Remember Me'}>Remember Me</label>}
           left={
             <Checkbox
-              id={'isRemember'}
               checked={isChecked}
-              name={'Stay logged in'}
               onChange={() => setIsChecked(!isChecked)}
             />
           }

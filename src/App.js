@@ -13,31 +13,30 @@ import { ConnectedBreakpoint } from './utils/useBreakpoint'
 
 const App = () => (
   <Provider store={store}>
-    <AuthInitializer>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/map" />
-            </Route>
-            <Route exact path="/demo">
-              <ComponentDemos />
-            </Route>
-            <Route exact path="/login">
-              <LoginPage />
-            </Route>
+    <AuthInitializer />
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/map" />
+          </Route>
+          <Route exact path="/demo">
+            <ComponentDemos />
+          </Route>
+          <Route exact path="/login">
+            <LoginPage />
+          </Route>
 
-            <Route>
-              <MainPage />
-            </Route>
-          </Switch>
-          <WindowSize>
-            {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-          </WindowSize>
-          <ConnectedBreakpoint />
-        </ThemeProvider>
-      </BrowserRouter>
-    </AuthInitializer>
+          <Route>
+            <MainPage />
+          </Route>
+        </Switch>
+        <WindowSize>
+          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+        </WindowSize>
+        <ConnectedBreakpoint />
+      </ThemeProvider>
+    </BrowserRouter>
   </Provider>
 )
 
