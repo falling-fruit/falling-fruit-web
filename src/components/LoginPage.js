@@ -40,8 +40,11 @@ const LoginContainer = styled.div`
   }
 `
 
+const ErrorMessage = styled.p`
+  color: red;
+`
 const LoginPage = () => {
-  const { authToken } = useSelector((state) => state.auth)
+  const { authToken, failedLogin } = useSelector((state) => state.auth)
   const history = useHistory()
   const [isChecked, setIsChecked] = useState(false)
   const [username, setUsername] = useState('')
@@ -104,7 +107,8 @@ const LoginPage = () => {
         />
 
         <Button onClick={getJWTToken}>Login</Button>
-        {/* <Button onClick={logout}>Logout</Button> */}
+
+        {failedLogin && <ErrorMessage>Invalid Login</ErrorMessage>}
 
         <a href="signup">Signup</a>
         <a href="reset">Reset your password</a>

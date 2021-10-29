@@ -18,12 +18,13 @@ export const fetchAccessToken = createAsyncThunk(
 )
 const initialState = { authToken: undefined, isChecked: false }
 
-export const credentialSlice = createSlice({
-  name: 'credentials',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
     clearAuthCredentials: (state) => {
-      state.authToken = undefined
+      state.authToken = null
+      state.failedLogin = false
     },
     setAuthFromStorage: (state) => {
       const localAuthToken = localStorage.getItem('authToken')
@@ -31,15 +32,15 @@ export const credentialSlice = createSlice({
       state.authToken = localAuthToken ?? sessionAuthToken
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchAccessToken.fulfilled, (state, { payload }) => {
+  extraReducers: {
+    [fetchAccessToken.fulfilled]: (state, { payload }) => {
       state.authToken = payload
-    })
+    },
+    [fetchAccessToken.rejected]: (state) => {
+      state.failedLogin = true
+    },
   },
 })
 
-export const {
-  clearAuthCredentials,
-  setAuthFromStorage,
-} = credentialSlice.actions
-export default credentialSlice.reducer
+export const { clearAuthCredentials, setAuthFromStorage } = authSlice.actions
+export default authSlice.reducer
