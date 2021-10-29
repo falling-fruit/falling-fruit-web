@@ -19,6 +19,7 @@ import { searchView } from '../../redux/searchView'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds } from '../../utils/viewportBounds'
+import Filter from '../filter/Filter'
 import FilterIconButton from '../filter/FilterIconButton'
 import TrackLocationButton from '../map/TrackLocationButton'
 import Input from '../ui/Input'
@@ -157,7 +158,7 @@ const Search = (props) => {
             })}
         </ComboboxList>
       </StyledComboboxPopover>
-      {/* <Filter isOpen={filterOpen} /> */}
+      {!isDesktop && <Filter isOpen={filterOpen} />}
     </Combobox>
   )
 }

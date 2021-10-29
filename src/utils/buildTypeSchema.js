@@ -18,41 +18,21 @@ const getTotalCount = (counts, id, childrenById, countsById) => {
   if (id in counts) {
     return counts[id]
   }
-
   let totalCount = countsById[id] ?? 0
   childrenById[id]?.forEach((childId) => {
     totalCount += getTotalCount(counts, childId, childrenById, countsById)
   })
   counts[id] = totalCount
-
   return totalCount
 }
 
 const getTypesWithRootLabels = (types, childrenById) =>
-  // TODO: Clean up this if statement logic
   types.map((t) => {
     const isParent = childrenById[t.id]
-    if (isParent) {
-      // If the type has children, its value should contain the "root" prefix
-      return {
-        ...t,
-        value: `root-${t.id}`,
-        pId: t.parent_id ? `root-${t.parent_id}` : 'null',
-      }
-    } else if (!t.parent_id) {
-      // If the type is a root without children
-      return {
-        ...t,
-        value: `${t.id}`,
-        pId: 'null',
-      }
-    } else {
-      // If the type is a child, its pId should contain the "root" prefix
-      return {
-        ...t,
-        value: `${t.id}`,
-        pId: `root-${t.parent_id}`,
-      }
+    return {
+      ...t,
+      value: isParent ? `root-${t.id}` : `${t.id}`,
+      pId: t.parent_id ? `root-${t.parent_id}` : 'null',
     }
   })
 
@@ -84,7 +64,7 @@ const sortTypes = (types) =>
       ),
     )
 
-// Builds the type tree and sorts on page load
+// Builds and sorts the type tree on page load
 const buildTypeSchema = (types, childrenById) => {
   const typesWithRootLabels = getTypesWithRootLabels(types, childrenById)
 
@@ -95,7 +75,7 @@ const buildTypeSchema = (types, childrenById) => {
 
   const sortedTypes = sortTypes(typesWithOtherCategory)
 
-  const typeSchema = sortedTypes.map((type) => {
+  return sortedTypes.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
 
@@ -108,11 +88,9 @@ const buildTypeSchema = (types, childrenById) => {
         : `${commonName}`,
     }
   })
-
-  return typeSchema
 }
 
-// Updates cumulative counts and node titles
+// Updates cumulative counts and node titles in the type tree
 const updateTreeCounts = (
   treeData,
   showScientificName,
@@ -120,9 +98,6 @@ const updateTreeCounts = (
   showOnMap,
   childrenById,
 ) => {
-  console.log('rebuilding type schema')
-  const startTime = performance.now()
-
   const totalCount = {}
   treeData.forEach((t) => {
     getTotalCount(totalCount, t.id, childrenById, countsById)
@@ -135,7 +110,7 @@ const updateTreeCounts = (
       ? totalCount[type.id]
       : countsById[type.id] ?? 0
 
-    // TODO: Change typeName to span to reuse here
+    // TODO: Change typeName to a span to reuse here
     const name = (
       <span style={{ fontSize: '0.875rem' }}>
         <span
@@ -168,14 +143,8 @@ const updateTreeCounts = (
       count,
     }
   })
-  const typesOnMap = showOnMap
-    ? typeSchema.filter((t) => t.count > 0)
-    : typeSchema
 
-  const endTime = performance.now()
-
-  console.log(`finished, took ${endTime - startTime}`)
-  return typesOnMap
+  return showOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
 }
 
 export { buildTypeSchema, getChildrenById, updateTreeCounts }
