@@ -50,15 +50,10 @@ const DesktopLayout = () => (
     <Header />
     <Switch>
       <Route exact path="/about/project">
-        {console.log('test')}
-        {/* <WindowSize> */}
         <Project />
-        {/* </WindowSize> */}
       </Route>
       <Route exact path="/about/dataset">
-        {/* <WindowSize> */}
         <ImportedDatasetsPage />
-        {/* </WindowSize> */}
       </Route>
       <Route>
         <WindowSize>

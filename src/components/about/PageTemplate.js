@@ -42,14 +42,14 @@ const PageTemplate = styled.article`
   p {
     color: ${({ theme }) => theme.secondaryText};
     font-weight: normal;
-    font-size: 1.429rem;
+    font-size: 1rem;
     line-height: 24px;
   }
 
   a {
     color: ${({ theme }) => theme.orange};
     font-weight: normal;
-    font-size: 1.429rem;
+    font-size: 1rem;
     line-height: 24px;
   }
 
