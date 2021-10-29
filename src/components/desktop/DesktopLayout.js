@@ -3,8 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import SplitPane from 'react-split-pane'
 import styled from 'styled-components/macro'
 
-import ImportedDatasetsPage from '../about/ImportedDatasetsPage'
-import Project from '../about/Project'
+import AboutRouter from '../about/AboutRouter'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
@@ -49,12 +48,7 @@ const DesktopLayout = () => (
   <DesktopContainer>
     <Header />
     <Switch>
-      <Route exact path="/about/project">
-        <Project />
-      </Route>
-      <Route exact path="/about/dataset">
-        <ImportedDatasetsPage />
-      </Route>
+      {AboutRouter}
       <Route>
         <WindowSize>
           {({ width: vw }) => (

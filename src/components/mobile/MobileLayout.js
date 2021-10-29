@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
 import useRoutedTabs from '../../utils/useRoutedTabs'
-import ImportedDatasetsPage from '../about/ImportedDatasetsPage'
-import Project from '../about/Project'
+import AboutRouter from '../about/AboutRouter'
 import Drawer from '../entry/Drawer'
 import Entry from '../entry/Entry'
 import { LocationForm } from '../form/LocationForm'
@@ -48,12 +47,7 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
-          <Route exact path="/about/project">
-            <Project />
-          </Route>
-          <Route exact path="/about/dataset">
-            <ImportedDatasetsPage />
-          </Route>
+          {AboutRouter}
           <Route path="/map/entry/new/details">
             <LocationForm />
           </Route>
