@@ -28,7 +28,7 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
     treeData: [],
-    types: [],
+    types: null,
     muni: true,
     invasive: false,
     isOpen: false,
