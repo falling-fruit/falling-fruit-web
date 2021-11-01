@@ -32,6 +32,8 @@ const StyledButton = styled(ResetButton)`
     }
   }
 
+  // TODO: need disabled state, @Siraj
+
   svg {
     height: 1em;
     width: 1em;
