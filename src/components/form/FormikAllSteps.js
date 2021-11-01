@@ -1,8 +1,8 @@
 import { Form, Formik } from 'formik'
 
 // TODO: to be used when combining the validation schemas of individual steps
-const _mergeSchemas = (...schemas) => {
-  const [first, ...rest] = schemas
+const mergeSchemas = (...schemas) => {
+  const [first, ...rest] = schemas.filter((schema) => schema != null)
 
   const merged = rest.reduce(
     (mergedSchemas, schema) => mergedSchemas.concat(schema),
@@ -14,15 +14,15 @@ const _mergeSchemas = (...schemas) => {
 
 const FormikAllSteps = ({ children, renderButtons, ...props }) => (
   <Formik
-    /*validationSchema={mergeSchemas(
-            ...steps.map((step) => step.props.validationSchema),
-          )}*/
+    validationSchema={mergeSchemas(
+      ...children.map((step) => step.props.validationSchema),
+    )}
     {...props}
   >
-    {({ isSubmitting }) => (
+    {({ dirty, isValid, isSubmitting }) => (
       <Form>
         {children}
-        {renderButtons(isSubmitting)}
+        {renderButtons({ dirty, isValid, isSubmitting })}
       </Form>
     )}
   </Formik>

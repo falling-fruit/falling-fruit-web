@@ -78,7 +78,8 @@ const Review = ({ review }) => (
     <ReviewDescription>
       <blockquote>{review.comment}</blockquote>
       <cite>
-        Reviewed {formatISOString(review.created_at)} by {review.author}
+        Reviewed {formatISOString(review.created_at)} by{' '}
+        {review.author ?? 'Anonymous'}
       </cite>
     </ReviewDescription>
     {review.photos.map((photo) => (
