@@ -33,9 +33,10 @@ export const getAllLocations = createSelector(
 export const fetchLocations = () => (dispatch, getState) => {
   const state = getState()
   const { zoom, bounds } = state.map.view
-
+  console.log(state.map.view)
   if (bounds?.ne.lat != null && zoom > 1) {
     // Map has received real bounds
+    console.log('fetched')
     if (getIsShowingClusters(state)) {
       dispatch(fetchMapClusters())
       dispatch(clearListLocations())
@@ -84,7 +85,6 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
 
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
-
   if (
     shouldStopTrackingLocation(
       state.map.geolocation,
@@ -94,11 +94,12 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   ) {
     dispatch(stopTrackingLocation())
   }
-
   dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
   if (state.filter.isOpen || state.misc.isDesktop) {
     dispatch(fetchFilterCounts())
   }
+  const urlStr = `/map/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
+  window.history.pushState({}, '', urlStr)
 }
