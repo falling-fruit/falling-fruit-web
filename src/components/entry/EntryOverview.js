@@ -157,7 +157,7 @@ const EntryOverview = ({ locationData, className }) => {
               >
                 Report
               </Button>
-              <Button onClick={}>StreetView</Button>
+              <Button>StreetView</Button>
             </div>
           </Description>
         </TextContent>
