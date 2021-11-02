@@ -95,28 +95,32 @@ const Search = (props) => {
     setValue(e.target.value)
   }
 
-  const handleCoordinates = () => {
+  const isCoordinates = () => {
     try {
       const ans = convert(value)
-
-      console.log(ans.decimalLatitude, ans.decimalLatitude)
-
-      return (
-        <ComboboxOption
-          as={SearchEntry}
-          key={`${ans.decimalLatitude},${ans.decimalLongitude}`}
-          value={[ans.decimalLatitude, ans.decimalLongitude]}
-          isCurrent={false}
-        >
-          {[
-            `${ans.verbatimLatitude}, ${ans.verbatimLongitude}`,
-            `${ans.decimalLatitude},${ans.decimalLongitude}`,
-          ]}
-        </ComboboxOption>
-      )
+      // to test, use 40° 26.7717, -79° 56.93172
+      return ans
     } catch {
-      console.log('not valid coords')
+      return false
     }
+  }
+
+  const handleCoordinates = () => {
+    const ans = convert(value)
+    // to test, use 40° 26.7717, -79° 56.93172
+
+    return (
+      <ComboboxOption
+        as={SearchEntry}
+        key={`${ans.decimalLatitude},${ans.decimalLongitude}`}
+        value={`${ans.decimalLatitude},${ans.decimalLongitude}`}
+      >
+        {[
+          `${ans.verbatimLatitude}, ${ans.verbatimLongitude}`,
+          `${ans.decimalLatitude},${ans.decimalLongitude}`,
+        ]}
+      </ComboboxOption>
+    )
   }
 
   const handleSelect = async (description) => {
@@ -128,9 +132,10 @@ const Search = (props) => {
         ),
       )
     } else {
-      dispatch(
-        searchView(await getZoomedInView(description[0], description[1])),
-      )
+      const lat = Number(description.split(',')[0])
+      const lng = Number(description.split(',')[1])
+
+      dispatch(searchView(getZoomedInView(lat, lng)))
     }
   }
 
@@ -187,7 +192,7 @@ const Search = (props) => {
               )
             })}
 
-          {status !== 'OK' && handleCoordinates()}
+          {status !== 'OK' && isCoordinates() && handleCoordinates()}
         </ComboboxList>
       </StyledComboboxPopover>
 
