@@ -4,14 +4,14 @@ import { getUserToken } from '../utils/api'
 
 const authToken = 'authToken'
 
-export const fetchAccessToken = createAsyncThunk(
+export const fetchToken = createAsyncThunk(
   'users/fetchToken',
-  async ({ email, password, isChecked }) => {
+  async ({ email, password, rememberMe }) => {
     const response = await getUserToken({
       email: email,
-      password: password,
+      password,
     })
-    if (isChecked) {
+    if (rememberMe) {
       localStorage.setItem(authToken, response)
     } else {
       sessionStorage.setItem(authToken, response)
@@ -20,7 +20,7 @@ export const fetchAccessToken = createAsyncThunk(
     return response
   },
 )
-const initialState = { authToken: null, isChecked: false, failedLogin: false }
+const initialState = { authToken: null, rememberMe: false, failedLogin: false }
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -38,10 +38,10 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchAccessToken.fulfilled]: (state, { payload }) => {
+    [fetchToken.fulfilled]: (state, { payload }) => {
       state.authToken = payload
     },
-    [fetchAccessToken.rejected]: (state) => {
+    [fetchToken.rejected]: (state) => {
       state.failedLogin = true
     },
   },

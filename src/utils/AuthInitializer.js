@@ -8,7 +8,7 @@ const AuthInitializer = () => {
   useEffect(() => {
     dispatch(login())
   }, [dispatch])
-  return <></>
+  return null
 }
 
 export default AuthInitializer

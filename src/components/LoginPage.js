@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { fetchAccessToken } from '../redux/authSlice'
+import { fetchToken } from '../redux/authSlice'
 import Header from './desktop/Header'
 import Button from './ui/Button'
 import Checkbox from './ui/Checkbox'
@@ -19,7 +19,7 @@ const LoginContainer = styled.div`
   max-width: 350px;
 
   h1 {
-    font-size: 32px;
+    font-size: 2rem;
     margin-bottom: 10px;
   }
 
@@ -46,7 +46,7 @@ const ErrorMessage = styled.p`
 const LoginPage = () => {
   const { authToken, failedLogin } = useSelector((state) => state.auth)
   const history = useHistory()
-  const [isChecked, setIsChecked] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -54,10 +54,10 @@ const LoginPage = () => {
 
   const getJWTToken = () => {
     dispatch(
-      fetchAccessToken({
+      fetchToken({
         email: username,
         password: password,
-        isChecked: isChecked,
+        rememberMe: rememberMe,
       }),
     )
   }
@@ -98,8 +98,8 @@ const LoginPage = () => {
           label={<label htmlFor={'Remember Me'}>Remember Me</label>}
           left={
             <Checkbox
-              checked={isChecked}
-              onChange={() => setIsChecked(!isChecked)}
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)}
             />
           }
         />
@@ -108,6 +108,7 @@ const LoginPage = () => {
 
         {failedLogin && <ErrorMessage>Invalid Login</ErrorMessage>}
 
+        {/* TODO: Update links below */}
         <a href="signup">Signup</a>
         <a href="reset">Reset your password</a>
         <a href="resend">Resend confirmation instructions</a>

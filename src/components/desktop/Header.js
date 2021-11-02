@@ -218,7 +218,8 @@ const Header = () => {
                 label={
                   <StyledUser>
                     <User height={'15px'} />{' '}
-                    {authToken ? 'Arman Rafati' : t('Login')}
+                    {/* TODO: Update display name to user's name */}
+                    {authToken ? 'Ethan Appleseed' : t('Login')}
                   </StyledUser>
                 }
                 match={false}
