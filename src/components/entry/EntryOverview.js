@@ -86,6 +86,10 @@ const EntryOverview = ({ locationData, className }) => {
     // Disabling zoom in for now
   }
 
+  // const toggleStreetView = () => {
+
+  // }
+
   const tagList = locationData && (
     <TagList>
       {locationData.access && (
@@ -153,6 +157,7 @@ const EntryOverview = ({ locationData, className }) => {
               >
                 Report
               </Button>
+              <Button onClick={}>StreetView</Button>
             </div>
           </Description>
         </TextContent>
