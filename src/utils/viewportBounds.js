@@ -2,10 +2,6 @@ import { getGeocode } from 'use-places-autocomplete'
 
 export const getZoomedInView = (centerLat, centerLng) =>
   // Use fixed zoom level centered at lat and long
-  // ({
-  //   center: { lat: centerLat, lng: centerLng },
-  //   zoom: 16,
-  // })
   ({
     ne: { lat: centerLat + 0.1, lng: centerLng + 0.1 },
     sw: { lat: centerLat - 0.1, lng: centerLng - 0.1 },

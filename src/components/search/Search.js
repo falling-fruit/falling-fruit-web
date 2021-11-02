@@ -8,7 +8,7 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
-import convert from 'geo-coordinates-parser'
+import CoordinateParser from 'coordinate-parser'
 import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -95,30 +95,24 @@ const Search = (props) => {
     setValue(e.target.value)
   }
 
-  const isCoordinates = () => {
+  const isValidCoordinate = () => {
     try {
-      const ans = convert(value)
-      // to test, use 40° 26.7717, -79° 56.93172
-      return ans
+      return new CoordinateParser(value)
     } catch {
       return false
     }
   }
 
-  const handleCoordinates = () => {
-    const ans = convert(value)
-    // to test, use 40° 26.7717, -79° 56.93172
+  const handleCoordinateSearch = () => {
+    const coordinate = new CoordinateParser(value)
 
     return (
       <ComboboxOption
         as={SearchEntry}
-        key={`${ans.decimalLatitude},${ans.decimalLongitude}`}
-        value={`${ans.decimalLatitude},${ans.decimalLongitude}`}
+        key={`${coordinate.getLatitude()}, ${coordinate.getLongitude()}`}
+        value={`${coordinate.getLatitude()}, ${coordinate.getLongitude()}`}
       >
-        {[
-          `${ans.verbatimLatitude}, ${ans.verbatimLongitude}`,
-          `${ans.decimalLatitude},${ans.decimalLongitude}`,
-        ]}
+        {[`${coordinate.getLatitude()}, ${coordinate.getLongitude()}`]}
       </ComboboxOption>
     )
   }
@@ -132,10 +126,9 @@ const Search = (props) => {
         ),
       )
     } else {
-      const lat = Number(description.split(',')[0])
-      const lng = Number(description.split(',')[1])
-
-      dispatch(searchView(getZoomedInView(lat, lng)))
+      const latitude = Number(description.split(',')[0])
+      const longitude = Number(description.split(',')[1])
+      dispatch(searchView(getZoomedInView(latitude, longitude)))
     }
   }
 
@@ -192,7 +185,7 @@ const Search = (props) => {
               )
             })}
 
-          {status !== 'OK' && isCoordinates() && handleCoordinates()}
+          {status !== 'OK' && isValidCoordinate() && handleCoordinateSearch()}
         </ComboboxList>
       </StyledComboboxPopover>
 
