@@ -133,9 +133,7 @@ export const mapSlice = createSlice({
   },
   extraReducers: {
     [searchView.type]: (state, action) => {
-      console.log(action.payload, state.view.size)
       state.view = fitBounds(action.payload, state.view.size)
-      console.log(state.view)
     },
 
     [fetchMapLocations.pending]: (state) => {
