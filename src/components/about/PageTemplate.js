@@ -28,7 +28,6 @@ const PageTemplate = styled.article`
   h2 {
     font-weight: bold;
     font-size: 1.857rem;
-    line-height: 31px;
     color: ${({ theme }) => theme.secondaryText};
   }
 
@@ -36,14 +35,13 @@ const PageTemplate = styled.article`
     color: ${({ theme }) => theme.secondaryText};
     font-weight: bold;
     font-size: 1.429rem;
-    line-height: 24px;
   }
 
   p {
     color: ${({ theme }) => theme.secondaryText};
     font-weight: normal;
     font-size: 1rem;
-    line-height: 24px;
+    line-height: 1.5;
   }
 
   a {

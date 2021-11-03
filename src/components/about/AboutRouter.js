@@ -14,6 +14,6 @@ const pages = [
   },
 ]
 
-const AboutRouter = pages.map((props) => <Route key={props.path} {...props} />)
+const aboutRoutes = pages.map((props) => <Route key={props.path} {...props} />)
 
-export default AboutRouter
+export default aboutRoutes

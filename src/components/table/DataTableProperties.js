@@ -7,7 +7,7 @@ const TableLinkPreview = styled.img`
   height: 20px;
   margin-right: 5px;
 `
-const NameWrapper = styled.a`
+const NameLink = styled.a`
   font-size: 1rem !important;
   font-weight: normal;
   color: ${({ theme }) => theme.secondaryText} !important;
@@ -27,7 +27,7 @@ const FORMATTERS = {
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
   // eslint-disable-next-line react/display-name
-  name: ({ name }) => <NameWrapper href={name}>{name}</NameWrapper>,
+  name: ({ name }) => <NameLink href={name}>{name}</NameLink>,
   created_at: ({ created_at }) =>
     new Date(created_at).toISOString().split('T')[0],
 }

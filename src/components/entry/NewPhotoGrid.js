@@ -1,4 +1,4 @@
-import { Grid, Image } from './NewPhotoGridUtils'
+import { Grid, Image } from '../about/PhotoGridUtils'
 
 const PhotoGridTemplate = ({ photos, float }) => (
   <Grid float={float}>
