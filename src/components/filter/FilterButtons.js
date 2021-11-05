@@ -9,10 +9,7 @@ const FilterButtonsContainer = styled.div`
     padding: 0;
     color: ${({ theme }) => theme.tertiaryText};
     border: 2px solid ${({ theme }) => theme.tertiaryText};
-
-    &:not(:last-child) {
-      margin-right: 8px;
-    }
+    margin-left: 7px;
 
     &:hover {
       background-color: ${({ theme }) => theme.tertiaryText};

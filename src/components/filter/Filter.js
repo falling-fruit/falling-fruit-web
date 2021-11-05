@@ -50,13 +50,11 @@ const StyledFilter = styled.div`
 
 const TreeFiltersContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 7px;
+  margin: 10px 0;
 `
 
 const StyledInput = styled(Input)`
   height: 36px;
-  margin-bottom: 7px;
   padding: 9px 12px;
   input {
     height: 100%;
