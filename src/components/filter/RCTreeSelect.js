@@ -68,6 +68,35 @@ const TreeSelectContainer = styled.div`
   .rc-tree-select-tree-checkbox-indeterminate {
     background-image: url('/checkmark/mixed_checkmark.svg') !important;
   }
+
+  .tree-node-text {
+    font-size: 0.875rem;
+
+    .tree-node-common-name {
+      font-weight: bold;
+      margin-right: 5px;
+      color: ${({ theme }) => theme.secondaryText};
+    }
+
+    .tree-node-scientific-name {
+      font-style: italic;
+      margin-right: 5px;
+      color: ${({ theme }) => theme.text};
+    }
+
+    .tree-node-count {
+      font-weight: bold;
+      color: ${({ theme }) => theme.text};
+    }
+  }
+
+  li:not(.filter-node)
+    > .rc-tree-select-tree-node-content-wrapper
+    > .rc-tree-select-tree-title
+    > .tree-node-text
+    > * {
+    color: ${({ theme }) => theme.text};
+  }
 `
 
 const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {

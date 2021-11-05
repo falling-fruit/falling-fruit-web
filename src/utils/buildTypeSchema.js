@@ -1,5 +1,3 @@
-import { theme } from '../components/ui/GlobalStyle'
-
 const getChildrenById = (types) => {
   const children = {}
   types.forEach(({ id, parent_id }) => {
@@ -114,28 +112,12 @@ const updateTreeCounts = (
 
     // TODO: Change typeName to a span to reuse here
     const name = (
-      <span style={{ fontSize: '0.875rem' }}>
-        <span
-          style={{
-            fontWeight: 'bold',
-            marginRight: '5px',
-            color: theme.secondaryText,
-          }}
-        >
-          {commonName}
-        </span>
+      <span className="tree-node-text">
+        <span className="tree-node-common-name">{commonName}</span>
         {shouldIncludeScientificName && (
-          <span
-            style={{
-              fontStyle: 'italic',
-              marginRight: '5px',
-              color: theme.text,
-            }}
-          >
-            {scientificName}
-          </span>
+          <span className="tree-node-scientific-name">{scientificName}</span>
         )}
-        <span style={{ fontWeight: 'bold', color: theme.text }}>({count})</span>
+        <span className="tree-node-count">({count})</span>
       </span>
     )
 
