@@ -24,8 +24,11 @@ export const getAllLocations = createSelector(
   (state) => state.map.locations,
   (state) => state.list.locations,
   (state) => state.misc.isDesktop,
-  (mapLocations, listLocations, isDesktop) =>
-    isDesktop
+  (state) => state.map.clusters,
+  (mapLocations, listLocations, isDesktop, mapClusters) =>
+    mapClusters.length !== 0
+      ? []
+      : isDesktop
       ? unionWith(eqBy(prop('id')), mapLocations, listLocations)
       : mapLocations,
 )
@@ -41,7 +44,6 @@ export const fetchLocations = () => (dispatch, getState) => {
       dispatch(clearListLocations())
     } else {
       dispatch(fetchMapLocations())
-
       const state = getState()
       if (state.misc.isDesktop && state.list.shouldFetchNewLocations) {
         dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
