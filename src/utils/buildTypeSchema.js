@@ -106,6 +106,8 @@ const updateTreeCounts = (
   const typeSchema = treeData.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
+    const shouldIncludeScientificName =
+      scientificName && showScientificName && !type.value.includes('root')
     const count = type.value.includes('root')
       ? totalCount[type.id]
       : countsById[type.id] ?? 0
@@ -122,7 +124,7 @@ const updateTreeCounts = (
         >
           {commonName}
         </span>
-        {scientificName && showScientificName && (
+        {shouldIncludeScientificName && (
           <span
             style={{
               fontStyle: 'italic',
