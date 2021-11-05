@@ -1,11 +1,12 @@
 import { getGeocode } from 'use-places-autocomplete'
 
+const BOUND_DELTA = 0.001
+
 export const getZoomedInView = (centerLat, centerLng) =>
   // Use fixed zoom level centered at lat and long
-  // TODO: Find out how to get bounding box from latlng in cleaner way
   ({
-    ne: { lat: centerLat + 0.1, lng: centerLng + 0.1 },
-    sw: { lat: centerLat - 0.1, lng: centerLng - 0.1 },
+    ne: { lat: centerLat + BOUND_DELTA, lng: centerLng + BOUND_DELTA },
+    sw: { lat: centerLat - BOUND_DELTA, lng: centerLng - BOUND_DELTA },
   })
 
 export const getPlaceBounds = async (placeId) => {
