@@ -4116,6 +4116,11 @@ cookie@0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
+coordinate-parser@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/coordinate-parser/-/coordinate-parser-1.0.7.tgz#9350485f03146af0f377dd51a0907a0ac684363e"
+  integrity sha512-pkcjigkAEjU5JsTYnuXLkRgR6T5fF/7GXR4p9vWJesy8fKwsheN8zC5d3sSvdMmWihHB4u48xWZ5mUCcgBIEpw==
+
 copy-concurrently@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/copy-concurrently/-/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
