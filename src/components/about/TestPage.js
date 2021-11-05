@@ -1,5 +1,5 @@
-import PhotoGridTemplate from '../entry/NewPhotoGrid'
 import ImportsTable from '../table/ImportsTable'
+import PhotoGridTemplate from './AboutPhotoGrid'
 import { PageTemplate } from './PageTemplate'
 
 const photos = [

@@ -27,7 +27,7 @@ const FORMATTERS = {
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
   // eslint-disable-next-line react/display-name
-  name: ({ name }) => <NameLink href={name}>{name}</NameLink>,
+  name: ({ name, url }) => <NameLink href={url}>{name}</NameLink>,
   created_at: ({ created_at }) =>
     new Date(created_at).toISOString().split('T')[0],
 }

@@ -1,4 +1,4 @@
-import PhotoGridTemplate from '../entry/NewPhotoGrid'
+import PhotoGridTemplate from './AboutPhotoGrid'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
 const foraging_photos = [
