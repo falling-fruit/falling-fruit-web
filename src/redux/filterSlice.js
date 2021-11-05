@@ -36,7 +36,7 @@ export const filterSlice = createSlice({
     invasive: false,
     isLoading: false,
     countsById: {},
-    showOnMap: false,
+    showOnlyOnMap: false,
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),
@@ -48,9 +48,6 @@ export const filterSlice = createSlice({
     },
     closeFilter: (state) => {
       state.isOpen = false
-    },
-    updateShowOnMap: (state) => {
-      state.showOnMap = !state.showOnMap
     },
   },
   extraReducers: {
@@ -82,7 +79,6 @@ export const {
   openFilter,
   closeFilter,
   updateSelection,
-  updateShowOnMap,
 } = filterSlice.actions
 
 export const selectionChanged = (types) => (dispatch) => {

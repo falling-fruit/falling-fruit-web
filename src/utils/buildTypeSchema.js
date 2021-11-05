@@ -95,7 +95,7 @@ const updateTreeCounts = (
   treeData,
   showScientificName,
   countsById,
-  showOnMap,
+  showOnlyOnMap,
   childrenById,
 ) => {
   const totalCount = {}
@@ -144,7 +144,7 @@ const updateTreeCounts = (
     }
   })
 
-  return showOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
+  return showOnlyOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
 }
 
 export { buildTypeSchema, getChildrenById, updateTreeCounts }
