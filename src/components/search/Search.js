@@ -8,6 +8,7 @@ import {
   ComboboxPopover,
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
+import CoordinateParser from 'coordinate-parser'
 import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,7 +19,7 @@ import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
 import { searchView } from '../../redux/searchView'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { getPlaceBounds } from '../../utils/viewportBounds'
+import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
 import Filter from '../filter/Filter'
 import FilterIconButton from '../filter/FilterIconButton'
 import TrackLocationButton from '../map/TrackLocationButton'
@@ -94,14 +95,34 @@ const Search = (props) => {
     setValue(e.target.value)
   }
 
+  const getCoordinatesResult = () => {
+    try {
+      const coordinate = new CoordinateParser(value)
+      const latlng = `${coordinate.getLatitude()}, ${coordinate.getLongitude()}`
+
+      return (
+        <ComboboxOption as={SearchEntry} key={latlng} value={latlng}>
+          {[latlng]}
+        </ComboboxOption>
+      )
+    } catch {
+      return null
+    }
+  }
+
   const handleSelect = async (description) => {
     setValue(description, false)
-
-    dispatch(
-      searchView(
-        await getPlaceBounds(descriptionToPlaceId.current[description]),
-      ),
-    )
+    if (descriptionToPlaceId.current[description]) {
+      dispatch(
+        searchView(
+          await getPlaceBounds(descriptionToPlaceId.current[description]),
+        ),
+      )
+    } else {
+      const latitude = Number(description.split(',')[0])
+      const longitude = Number(description.split(',')[1])
+      dispatch(searchView(getZoomedInView(latitude, longitude)))
+    }
   }
 
   return (
@@ -156,6 +177,8 @@ const Search = (props) => {
                 </ComboboxOption>
               )
             })}
+
+          {status !== 'OK' && getCoordinatesResult()}
         </ComboboxList>
       </StyledComboboxPopover>
 
