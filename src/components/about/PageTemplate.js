@@ -48,7 +48,7 @@ const PageTemplate = styled.article`
     color: ${({ theme }) => theme.orange};
     font-weight: normal;
     font-size: 1rem;
-    line-height: 24px;
+    line-height: 1.5;
   }
 
   img {
