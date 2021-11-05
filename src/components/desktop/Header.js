@@ -216,11 +216,11 @@ const Header = () => {
             {authToken ? (
               <StyledDropdown
                 label={
-                  <StyledUser>
-                    <User height={'15px'} />{' '}
+                  <>
+                    <StyledUser height={'15px'} />
                     {/* TODO: Update display name to user's name */}
-                    {authToken ? 'Ethan Appleseed' : t('Login')}
-                  </StyledUser>
+                    {authToken ? ' Ethan Appleseed' : t('Login')}
+                  </>
                 }
                 match={false}
               >
