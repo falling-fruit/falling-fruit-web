@@ -95,26 +95,19 @@ const Search = (props) => {
     setValue(e.target.value)
   }
 
-  const isValidCoordinate = () => {
+  const getCoordinatesResult = () => {
     try {
-      return new CoordinateParser(value)
+      const coordinate = new CoordinateParser(value)
+      const latlng = `${coordinate.getLatitude()}, ${coordinate.getLongitude()}`
+
+      return (
+        <ComboboxOption as={SearchEntry} key={latlng} value={latlng}>
+          {[latlng]}
+        </ComboboxOption>
+      )
     } catch {
-      return false
+      return null
     }
-  }
-
-  const handleCoordinateSearch = () => {
-    const coordinate = new CoordinateParser(value)
-
-    return (
-      <ComboboxOption
-        as={SearchEntry}
-        key={`${coordinate.getLatitude()}, ${coordinate.getLongitude()}`}
-        value={`${coordinate.getLatitude()}, ${coordinate.getLongitude()}`}
-      >
-        {[`${coordinate.getLatitude()}, ${coordinate.getLongitude()}`]}
-      </ComboboxOption>
-    )
   }
 
   const handleSelect = async (description) => {
@@ -185,7 +178,7 @@ const Search = (props) => {
               )
             })}
 
-          {status !== 'OK' && isValidCoordinate() && handleCoordinateSearch()}
+          {status !== 'OK' && getCoordinatesResult()}
         </ComboboxList>
       </StyledComboboxPopover>
 
