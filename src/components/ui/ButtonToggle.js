@@ -26,8 +26,6 @@ const ButtonContainer = styled.div`
 `
 
 const ButtonToggle = ({ options, toggle, selectedIndex }) => {
-  console.log(selectedIndex)
-
   const renderButtons = () =>
     options.map((option, index) => (
       <Button
