@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { updateSettings } from '../../redux/settingsSlice'
+import ButtonToggle from '../ui/ButtonToggle'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import RadioTiles from '../ui/RadioTiles'
@@ -21,6 +22,11 @@ const LANGUAGE_OPTIONS = [
   { value: 'de', label: 'Deutsch' },
   { value: 'it', label: 'Italiano' },
 ]
+
+const METRICS_OPTIONS = {
+  metric: 0,
+  imperial: 1,
+}
 
 const Page = styled.div`
   box-sizing: border-box;
@@ -58,6 +64,13 @@ const SettingsPage = ({ desktop }) => {
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
 
+  const updateUnitsSetting = (index) => {
+    for (const [key, value] of Object.entries(METRICS_OPTIONS)) {
+      if (index === value) {
+        dispatch(updateSettings({ ['distanceUnit']: key }))
+      }
+    }
+  }
   return (
     <Page desktop={desktop}>
       {!desktop && <h2>{t('Settings')}</h2>}
@@ -91,6 +104,16 @@ const SettingsPage = ({ desktop }) => {
           label={<label htmlFor={field}>{label}</label>}
         />
       ))}
+      <LabeledRow
+        label={<label htmlFor="distanceUnit">{t('Units')}</label>}
+        right={
+          <ButtonToggle
+            options={['Metric', 'Imperial']}
+            toggle={updateUnitsSetting}
+            selectedIndex={METRICS_OPTIONS[settings.distanceUnit]}
+          />
+        }
+      />
 
       <h3>{t('Map Preferences')}</h3>
 

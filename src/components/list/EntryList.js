@@ -2,6 +2,7 @@ import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { darken } from 'polished'
 import { forwardRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useSelector } from 'react-redux'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
@@ -13,6 +14,7 @@ import { ReactComponent as LeafIcon } from './leaf.svg'
 
 // TODO: use settings for this
 const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
+const convertMetersToKM = (meters) => (meters / 1000.0).toFixed(3)
 
 const StyledListEntry = styled(ListEntry)`
   cursor: pointer;
@@ -35,6 +37,7 @@ const EntryList = forwardRef(
     { locations, onEntryClick, onEntryMouseEnter, onEntryMouseLeave, ...props },
     ref,
   ) => {
+    const settings = useSelector((state) => state.settings)
     const Item = ({ index, style }) => {
       const location = locations[index]
 
@@ -47,7 +50,11 @@ const EntryList = forwardRef(
             leftIcons={<EntryIcon imageSrc={location.photo?.thumb} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
-            secondaryText={`${convertMetersToMiles(location.distance)} miles`}
+            secondaryText={`${
+              settings.distanceUnit === 'imperial'
+                ? `${convertMetersToMiles(location.distance)} miles`
+                : `${convertMetersToKM(location.distance)} kilometers`
+            }`}
             onClick={(e) => onEntryClick?.(location.id, e)}
             onMouseEnter={(e) => onEntryMouseEnter?.(location.id, e)}
             onMouseLeave={(e) => onEntryMouseLeave?.(location.id, e)}
