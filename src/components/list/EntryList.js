@@ -12,9 +12,17 @@ import ListEntry from '../ui/ListEntry'
 import { TypeName } from '../ui/TypeName'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
-// TODO: use settings for this
-const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
-const convertMetersToKM = (meters) => (meters / 1000.0).toFixed(3)
+const convertDistance = (distance, setting) => {
+  if (setting === 'imperial') {
+    return `${(distance * 0.000621371192).toFixed(2)} miles`
+  } else {
+    if (distance >= 1000) {
+      return `${(distance / 1000.0).toFixed(3)} kilometers`
+    } else {
+      return `${~~distance} meters`
+    }
+  }
+}
 
 const StyledListEntry = styled(ListEntry)`
   cursor: pointer;
@@ -50,11 +58,10 @@ const EntryList = forwardRef(
             leftIcons={<EntryIcon imageSrc={location.photo?.thumb} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
-            secondaryText={`${
-              settings.distanceUnit === 'imperial'
-                ? `${convertMetersToMiles(location.distance)} miles`
-                : `${convertMetersToKM(location.distance)} kilometers`
-            }`}
+            secondaryText={`${convertDistance(
+              location.distance,
+              settings.distanceUnit,
+            )}`}
             onClick={(e) => onEntryClick?.(location.id, e)}
             onMouseEnter={(e) => onEntryMouseEnter?.(location.id, e)}
             onMouseLeave={(e) => onEntryMouseLeave?.(location.id, e)}
