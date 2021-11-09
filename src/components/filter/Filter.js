@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
+import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations } from '../../redux/viewChange'
-import { PENDING_ID, updateTreeCounts } from '../../utils/buildTypeSchema'
+import { updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import {
   CheckboxFilters,
@@ -53,7 +54,7 @@ const TreeFiltersContainer = styled.div`
   margin: 10px 0;
 `
 
-const StyledInput = styled(Input)`
+const SearchInput = styled(Input)`
   height: 36px;
   padding: 9px 12px;
   input {
@@ -77,6 +78,7 @@ const Filter = ({ isOpen }) => {
   ])
 
   const dispatch = useDispatch()
+  const { typesById } = useTypesById()
   const filters = useSelector((state) => state.filter)
   const showScientificNames = useSelector(
     (state) => state.settings.showScientificNames,
@@ -88,6 +90,7 @@ const Filter = ({ isOpen }) => {
     treeData,
     childrenById,
     showOnlyOnMap,
+    scientificNameById,
   } = filters
 
   const treeDataWithUpdatedCounts = useMemo(
@@ -98,39 +101,24 @@ const Filter = ({ isOpen }) => {
         countsById,
         showOnlyOnMap,
         childrenById,
+        scientificNameById,
       ),
-    [treeData, showScientificNames, countsById, showOnlyOnMap, childrenById],
+    [
+      treeData,
+      showScientificNames,
+      countsById,
+      showOnlyOnMap,
+      childrenById,
+      scientificNameById,
+    ],
   )
-
-  const onMuniInvasiveCheckBoxFiltersChange = (values) => {
-    dispatch(setFilters(values))
-    dispatch(fetchLocations())
-  }
-
-  const onTreeShowCheckBoxFiltersChange = (values) => {
-    dispatch(setFilters(values))
-  }
-
-  const onSelectAllClick = () => {
-    const treeDataValues = treeData.map((t) =>
-      t.value.substring(t.value.indexOf('-') + 1),
-    )
-    const treeDataNoDuplicates = treeDataValues.filter(
-      (value, index) => treeDataValues.indexOf(value) === index,
-    )
-    dispatch(selectionChanged(treeDataNoDuplicates))
-  }
-
-  const onDeselectAllClick = () => {
-    dispatch(selectionChanged([]))
-  }
 
   const { t } = useTranslation()
   return isOpen ? (
     <StyledFilter>
       <div>
         <p className="edible-type-text">{t('Edible Types')}</p>
-        <StyledInput
+        <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder="Search for a type..."
         />
@@ -138,11 +126,15 @@ const Filter = ({ isOpen }) => {
           <CheckboxFilters
             values={filters}
             fields={TREE_SHOW_CHECKBOX_FIELDS}
-            onChange={onTreeShowCheckBoxFiltersChange}
+            onChange={(values) => {
+              dispatch(setFilters(values))
+            }}
           />
           <FilterButtons
-            onSelectAllClick={onSelectAllClick}
-            onDeselectAllClick={onDeselectAllClick}
+            onSelectAllClick={() =>
+              dispatch(selectionChanged(Object.keys(typesById)))
+            }
+            onDeselectAllClick={() => dispatch(selectionChanged([]))}
           />
         </TreeFiltersContainer>
         <RCTreeSelect
@@ -151,9 +143,7 @@ const Filter = ({ isOpen }) => {
           onChange={(selectedTypes) =>
             dispatch(
               selectionChanged(
-                selectedTypes.filter(
-                  (t) => !t.includes('root') && t !== PENDING_ID,
-                ),
+                selectedTypes.filter((t) => !t.includes('root')),
               ),
             )
           }
@@ -165,7 +155,10 @@ const Filter = ({ isOpen }) => {
         <CheckboxFilters
           values={filters}
           fields={MUNI_AND_INVASIVE_CHECKBOX_FIELDS}
-          onChange={onMuniInvasiveCheckBoxFiltersChange}
+          onChange={(values) => {
+            dispatch(setFilters(values))
+            dispatch(fetchLocations())
+          }}
         />
       </MuniAndInvasiveCheckboxFilters>
     </StyledFilter>

@@ -4,7 +4,9 @@ import { getTypeCounts } from '../utils/api'
 import {
   buildTypeSchema,
   getChildrenById,
+  getScientificNameById,
   getTypesWithPendingCategory,
+  PENDING_ID,
 } from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
@@ -35,6 +37,7 @@ export const filterSlice = createSlice({
     types: [],
     treeData: [],
     childrenById: {},
+    scientificNameById: {},
     muni: true,
     isOpen: false,
     invasive: false,
@@ -70,13 +73,19 @@ export const filterSlice = createSlice({
       state.isLoading = false
     },
     [fetchAllTypes.fulfilled]: (state, action) => {
-      const typesWithPendingCategory = getTypesWithPendingCategory(
-        action.payload,
-      )
+      const typesWithPendingCategory = getTypesWithPendingCategory([
+        ...action.payload,
+        {
+          id: PENDING_ID,
+          parent_id: null,
+          name: 'Pending Review',
+        },
+      ])
       const childrenById = getChildrenById(typesWithPendingCategory)
       state.childrenById = childrenById
       state.treeData = buildTypeSchema(typesWithPendingCategory, childrenById)
-      state.types = typesWithPendingCategory.map((t) => `${t.id}`)
+      state.scientificNameById = getScientificNameById(action.payload)
+      state.types = action.payload.map((t) => `${t.id}`)
     },
   },
 })

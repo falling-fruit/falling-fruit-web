@@ -75,8 +75,8 @@ const TreeSelectContainer = styled.div`
     > .rc-tree-select-tree-title
     > .tree-node-text
     > .tree-node-common-name {
-    color: ${({ theme, searching }) =>
-      searching ? theme.text : theme.secondaryText};
+    color: ${({ theme, isSearching }) =>
+      isSearching ? theme.text : theme.secondaryText};
   }
 
   .tree-node-text {
@@ -110,6 +110,7 @@ const TreeSelectContainer = styled.div`
 `
 
 const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
+  // useState is necessary instead of useRef in order to restore the container ref whenever the tree re-renders
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
 
   const switcherIcon = (obj) =>
@@ -128,7 +129,7 @@ const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
   return (
     <TreeSelectContainer
       ref={setTreeSelectContainerRef}
-      searching={searchValue !== ''}
+      isSearching={searchValue !== ''}
     >
       {treeSelectContainerRef && (
         <TreeSelect

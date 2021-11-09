@@ -1,3 +1,5 @@
+import TreeNodeText from '../components/filter/TreeNodeText'
+
 const PENDING_ID = 'PENDING'
 
 const getChildrenById = (types) => {
@@ -14,6 +16,16 @@ const getChildrenById = (types) => {
   return children
 }
 
+const getScientificNameById = (types) => {
+  const scientificNameById = {}
+  types.forEach((t) => {
+    if (t.scientific_names) {
+      scientificNameById[t.id] = t.scientific_names[0]
+    }
+  })
+  return scientificNameById
+}
+
 const getTotalCount = (counts, id, childrenById, countsById) => {
   if (id in counts) {
     return counts[id]
@@ -26,30 +38,20 @@ const getTotalCount = (counts, id, childrenById, countsById) => {
   return totalCount
 }
 
-const getTypesWithPendingCategory = (types) => {
-  const typesWithPendingCategory = [
-    ...types,
-    {
-      id: PENDING_ID,
-      parent_id: null,
-      name: 'Pending Review',
-    },
-  ]
-  typesWithPendingCategory.forEach((t) => {
-    if (t.pending) {
-      t.parent_id = PENDING_ID
-    }
-  })
-  return typesWithPendingCategory
-}
+const getTypesWithPendingCategory = (types) =>
+  types.map((t) => ({
+    ...t,
+    parent_id: t.pending ? PENDING_ID : t.parent_id,
+  }))
 
 const getTypesWithRootLabels = (types, childrenById) =>
   types.map((t) => {
-    const isParent = childrenById[t.id]
+    const { id, parent_id } = t
+    const isParent = childrenById[id]
     return {
       ...t,
-      value: isParent ? `root-${t.id}` : `${t.id}`,
-      pId: t.parent_id ? `root-${t.parent_id}` : 'null',
+      value: isParent ? `root-${id}` : `${id}`,
+      pId: parent_id ? `root-${parent_id}` : 'null',
     }
   })
 
@@ -81,6 +83,15 @@ const sortTypes = (types) =>
       ),
     )
 
+const getNames = (type) => {
+  const commonName = type.name ?? type.common_names.en[0]
+  const scientificName = type.scientific_names?.[0]
+  return {
+    commonName,
+    scientificName,
+  }
+}
+
 // Builds and sorts the type tree on page load
 const buildTypeSchema = (types, childrenById) => {
   const typesWithRootLabels = getTypesWithRootLabels(types, childrenById)
@@ -93,8 +104,7 @@ const buildTypeSchema = (types, childrenById) => {
   const sortedTypes = sortTypes(typesWithOtherCategory)
 
   return sortedTypes.map((type) => {
-    const commonName = type.name ?? type.common_names.en[0]
-    const scientificName = type.scientific_names?.[0]
+    const { commonName, scientificName } = getNames(type)
 
     return {
       ...type,
@@ -114,6 +124,7 @@ const updateTreeCounts = (
   countsById,
   showOnlyOnMap,
   childrenById,
+  scientificNameById,
 ) => {
   const totalCount = {}
   treeData.forEach((t) => {
@@ -121,31 +132,30 @@ const updateTreeCounts = (
   })
 
   const typeSchema = treeData.map((type) => {
-    const commonName = type.name ?? type.common_names.en[0]
-    const scientificName = type.scientific_names?.[0]
-    const cultivarIndex = scientificName?.indexOf("'")
+    const { commonName, scientificName } = getNames(type)
+    const parentScientificName = scientificNameById[type.parent_id]
+    const cultivarIndex =
+      scientificName?.startsWith(parentScientificName) &&
+      scientificName?.indexOf("'")
     const shouldIncludeScientificName = scientificName && showScientificName
     const count = type.value.includes('root')
       ? totalCount[type.id]
       : countsById[type.id] ?? 0
 
-    const name = (
-      <span className="tree-node-text">
-        <span className="tree-node-common-name">{commonName}</span>
-        {shouldIncludeScientificName && (
-          <span className="tree-node-scientific-name">
-            {cultivarIndex === -1
-              ? scientificName
-              : scientificName.substring(cultivarIndex)}
-          </span>
-        )}
-        <span className="tree-node-count">({count})</span>
-      </span>
-    )
-
     return {
       ...type,
-      title: name,
+      title: (
+        <TreeNodeText
+          commonName={commonName}
+          shouldIncludeScientificName={shouldIncludeScientificName}
+          scientificName={
+            cultivarIndex === -1
+              ? scientificName
+              : scientificName?.substring(cultivarIndex)
+          }
+          count={count}
+        />
+      ),
       count,
     }
   })
@@ -156,6 +166,7 @@ const updateTreeCounts = (
 export {
   buildTypeSchema,
   getChildrenById,
+  getScientificNameById,
   getTypesWithPendingCategory,
   PENDING_ID,
   updateTreeCounts,

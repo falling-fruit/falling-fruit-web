@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 import Button from '../ui/Button'
 
 const FilterButtonsContainer = styled.div`
-  Button {
+  button {
     height: 22px;
     width: 90px;
     padding: 0;
