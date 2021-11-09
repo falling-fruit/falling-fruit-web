@@ -1,3 +1,5 @@
+import 'react-toastify/dist/ReactToastify.css'
+
 import WindowSize from '@reach/window-size'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
@@ -7,6 +9,7 @@ import ComponentDemos from './components/ComponentDemos'
 import LoginPage from './components/LoginPage'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import Toast from './components/ui/Toast'
 import { store } from './redux/store'
 import AuthInitializer from './utils/AuthInitializer'
 import { ConnectedBreakpoint } from './utils/useBreakpoint'
@@ -14,6 +17,15 @@ import { ConnectedBreakpoint } from './utils/useBreakpoint'
 const App = () => (
   <Provider store={store}>
     <AuthInitializer />
+    <Toast
+      position="top-center"
+      autoClose={20000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+    />
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Switch>
@@ -26,7 +38,6 @@ const App = () => (
           <Route exact path="/login">
             <LoginPage />
           </Route>
-
           <Route>
             <MainPage />
           </Route>

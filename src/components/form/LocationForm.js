@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
@@ -204,9 +205,14 @@ export const LocationForm = ({ desktop }) => {
       unverified: false,
     }
 
-    console.log('locationValues', locationValues)
-    const locationResp = await addLocation(locationValues)
-    console.log('locationResp', locationResp)
+    let locationResp
+    try {
+      locationResp = await addLocation(locationValues)
+    } catch {
+      toast.error('Location submission failed.')
+    }
+
+    toast.success('Location submitted successfully!')
 
     if (isValidReview(review)) {
       const reviewValues = {
