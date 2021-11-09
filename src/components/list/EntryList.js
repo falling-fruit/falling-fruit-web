@@ -46,6 +46,7 @@ const EntryList = forwardRef(
     ref,
   ) => {
     const settings = useSelector((state) => state.settings)
+    console.log(settings)
     const Item = ({ index, style }) => {
       const location = locations[index]
 

@@ -11,7 +11,7 @@ export const fetchFilterCounts = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState()
     const { typesById } = state.misc
-    const { showScientificNames, distanceUnit } = state.settings
+    const { showScientificNames } = state.settings
 
     const counts = await getTypeCounts(
       selectParams(state, { types: undefined }),
@@ -21,7 +21,6 @@ export const fetchFilterCounts = createAsyncThunk(
       counts,
       typesById,
       showScientificNames,
-      distanceUnit,
     }
   },
 )

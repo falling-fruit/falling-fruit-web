@@ -7,13 +7,17 @@ const Button = styled.button`
     props.selected ? '#ffffff' : ({ theme }) => theme.orange};
   flex-grow: 1;
   align-items: center;
-
-  border-color: ${({ theme }) => theme.orange};
-  outline: none none;
-  // border-right-style: hidden;
-  // border-bottom-style: hidden;
+  outline: none;
+  cursor: pointer;
   font-weight: bold;
   font-family: lato;
+  border: 3px ${({ theme }) => theme.orange} solid;
+  &:first-child {
+    border-radius: 3px 0 0 3px;
+  }
+  &:last-child {
+    border-radius: 0 3px 3px 0;
+  }
 `
 
 const ButtonContainer = styled.div`
@@ -21,8 +25,6 @@ const ButtonContainer = styled.div`
   flex: 1;
   align-items: stretch;
   width: 100%;
-  outline: none;
-  border: none;
 `
 
 const ButtonToggle = ({ options, toggle, selectedIndex }) => {
