@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
-import { buildTypeSchema, getChildrenById } from '../utils/buildTypeSchema'
+import {
+  buildTypeSchema,
+  getChildrenById,
+  getTypesWithPendingCategory,
+} from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
 import { fetchLocations } from './viewChange'
@@ -66,10 +70,13 @@ export const filterSlice = createSlice({
       state.isLoading = false
     },
     [fetchAllTypes.fulfilled]: (state, action) => {
-      const childrenById = getChildrenById(action.payload)
+      const typesWithPendingCategory = getTypesWithPendingCategory(
+        action.payload,
+      )
+      const childrenById = getChildrenById(typesWithPendingCategory)
       state.childrenById = childrenById
-      state.treeData = buildTypeSchema(action.payload, childrenById)
-      state.types = action.payload.map((t) => `${t.id}`)
+      state.treeData = buildTypeSchema(typesWithPendingCategory, childrenById)
+      state.types = typesWithPendingCategory.map((t) => `${t.id}`)
     },
   },
 })

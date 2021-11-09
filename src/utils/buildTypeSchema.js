@@ -1,3 +1,5 @@
+const PENDING_ID = 'PENDING'
+
 const getChildrenById = (types) => {
   const children = {}
   types.forEach(({ id, parent_id }) => {
@@ -24,6 +26,23 @@ const getTotalCount = (counts, id, childrenById, countsById) => {
   return totalCount
 }
 
+const getTypesWithPendingCategory = (types) => {
+  const typesWithPendingCategory = [
+    ...types,
+    {
+      id: PENDING_ID,
+      parent_id: null,
+      name: 'Pending Review',
+    },
+  ]
+  typesWithPendingCategory.forEach((t) => {
+    if (t.pending) {
+      t.parent_id = PENDING_ID
+    }
+  })
+  return typesWithPendingCategory
+}
+
 const getTypesWithRootLabels = (types, childrenById) =>
   types.map((t) => {
     const isParent = childrenById[t.id]
@@ -37,7 +56,7 @@ const getTypesWithRootLabels = (types, childrenById) =>
 const addOtherCategories = (types, childrenById) => {
   const typesWithOtherCategory = [...types]
   types.forEach((t) => {
-    if (childrenById[t.id]) {
+    if (childrenById[t.id] && t.id !== PENDING_ID) {
       typesWithOtherCategory.push({
         ...t,
         value: `${t.id}`,
@@ -50,7 +69,7 @@ const addOtherCategories = (types, childrenById) => {
 
 const sortTypes = (types) =>
   types
-    .filter((t) => t.scientific_names.length > 0)
+    .filter((t) => t.scientific_names?.length > 0)
     .sort(
       (a, b) =>
         a.scientific_names[0].localeCompare(b.scientific_names[0]) ||
@@ -131,4 +150,10 @@ const updateTreeCounts = (
   return showOnlyOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
 }
 
-export { buildTypeSchema, getChildrenById, updateTreeCounts }
+export {
+  buildTypeSchema,
+  getChildrenById,
+  getTypesWithPendingCategory,
+  PENDING_ID,
+  updateTreeCounts,
+}

@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 
 import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { fetchLocations } from '../../redux/viewChange'
-import { updateTreeCounts } from '../../utils/buildTypeSchema'
+import { PENDING_ID, updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import {
   CheckboxFilters,
@@ -151,7 +151,9 @@ const Filter = ({ isOpen }) => {
           onChange={(selectedTypes) =>
             dispatch(
               selectionChanged(
-                selectedTypes.filter((t) => !t.includes('root')),
+                selectedTypes.filter(
+                  (t) => !t.includes('root') && t !== PENDING_ID,
+                ),
               ),
             )
           }
