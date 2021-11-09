@@ -4,6 +4,8 @@ import TreeSelect from 'rc-tree-select'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { ReactComponent as ArrowIcon } from './arrow.svg'
+
 const TreeSelectContainer = styled.div`
   height: 100%;
   display: flex;
@@ -39,7 +41,6 @@ const TreeSelectContainer = styled.div`
     top: 0 !important;
   }
 
-  // TODO: Look into relative height of the ul element
   .rc-tree-select-tree {
     height: 100px;
   }
@@ -101,10 +102,28 @@ const TreeSelectContainer = styled.div`
       font-weight: bold;
     }
   }
+
+  .rc-tree-select-tree-switcher {
+    background-image: none !important;
+    margin-right: 0 !important;
+  }
 `
 
 const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
+
+  const switcherIcon = (obj) =>
+    !obj.isLeaf && (
+      <ArrowIcon
+        style={{
+          backgroundColor: 'white',
+          width: '1em',
+          height: '0.875em',
+          verticalAlign: '-.05em',
+          transform: `rotate(${obj.expanded ? 90 : 0}deg)`,
+        }}
+      />
+    )
 
   return (
     <TreeSelectContainer
@@ -120,7 +139,6 @@ const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
             overflow: 'auto',
           }}
           treeData={data}
-          treeLine
           value={checkedTypes}
           treeCheckable
           onChange={onChange}
@@ -133,6 +151,7 @@ const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
           searchValue={searchValue}
           virtual
           getPopupContainer={() => treeSelectContainerRef}
+          switcherIcon={switcherIcon}
         />
       )}
     </TreeSelectContainer>
