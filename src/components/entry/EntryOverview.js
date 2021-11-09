@@ -2,9 +2,11 @@ import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { enableStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { ReportModal } from '../form/ReportModal'
@@ -78,6 +80,8 @@ const EntryOverview = ({ locationData, className }) => {
   const { getLocationTypes } = useTypesById()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
+  const dispatch = useDispatch()
+  const currentStreetView = useSelector((state) => state.map.streetView)
 
   const { t } = useTranslation()
 
@@ -102,6 +106,21 @@ const EntryOverview = ({ locationData, className }) => {
       )}
     </TagList>
   )
+
+  const handleStreetView = () => {
+    console.log('test')
+    console.log(`test: ${currentStreetView.streetView}`)
+    console.log(currentStreetView)
+    dispatch(
+      enableStreetView({
+        streetView: !currentStreetView.streetView,
+        location: {
+          lat: locationData.lat,
+          lng: locationData.lng,
+        },
+      }),
+    )
+  }
 
   return (
     <div className={className}>
@@ -157,7 +176,7 @@ const EntryOverview = ({ locationData, className }) => {
               >
                 Report
               </Button>
-              <Button>StreetView</Button>
+              <Button onClick={handleStreetView}>Street View</Button>
             </div>
           </Description>
         </TextContent>

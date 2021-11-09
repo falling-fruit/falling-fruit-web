@@ -54,6 +54,7 @@ const Entry = ({ isInDrawer }) => {
       ])
 
       setLocationData(locationData)
+      console.log(locationData)
       setReviews(reviews)
 
       setIsLoading(false)
