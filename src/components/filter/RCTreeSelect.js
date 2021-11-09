@@ -68,13 +68,49 @@ const TreeSelectContainer = styled.div`
   .rc-tree-select-tree-checkbox-indeterminate {
     background-image: url('/checkmark/mixed_checkmark.svg') !important;
   }
+
+  li:not(.filter-node)
+    > .rc-tree-select-tree-node-content-wrapper
+    > .rc-tree-select-tree-title
+    > .tree-node-text
+    > .tree-node-common-name {
+    color: ${({ theme, searching }) =>
+      searching ? theme.text : theme.secondaryText};
+  }
+
+  .tree-node-text {
+    font-size: 0.875rem;
+
+    .tree-node-common-name {
+      font-weight: bold;
+      margin-right: 5px;
+      color: ${({ theme }) => theme.secondaryText};
+    }
+
+    .tree-node-scientific-name,
+    .tree-node-count {
+      color: ${({ theme }) => theme.text};
+    }
+
+    .tree-node-scientific-name {
+      font-style: italic;
+      margin-right: 5px;
+    }
+
+    .tree-node-count {
+      font-weight: bold;
+    }
+  }
 `
 
 const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
 
   return (
-    <TreeSelectContainer ref={setTreeSelectContainerRef}>
+    <TreeSelectContainer
+      ref={setTreeSelectContainerRef}
+      searching={searchValue !== ''}
+    >
       {treeSelectContainerRef && (
         <TreeSelect
           style={{ width: 300 }}

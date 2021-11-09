@@ -1,10 +1,8 @@
-import { useTranslation } from 'react-i18next'
-import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import Checkbox from '../ui/Checkbox'
 
-const CHECKBOX_FIELDS = [
+const MUNI_AND_INVASIVE_CHECKBOX_FIELDS = [
   {
     field: 'muni',
     label: 'Municipal Tree Inventories',
@@ -15,6 +13,13 @@ const CHECKBOX_FIELDS = [
   },
 ]
 
+const TREE_SHOW_CHECKBOX_FIELDS = [
+  {
+    field: 'showOnlyOnMap',
+    label: 'Only On Map',
+  },
+]
+
 const StyledLabel = styled.label`
   cursor: pointer;
   display: flex;
@@ -22,33 +27,11 @@ const StyledLabel = styled.label`
   font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
-
-  ${({ addMargin }) =>
-    addMargin &&
-    css`
-      &:not(:last-child) {
-        margin-bottom: ${({ addMargin }) => addMargin && '8px'};
-
-        @media ${({ theme }) => theme.device.mobile} {
-          margin-top: ${({ addMargin }) => addMargin && '15px'};
-        }
-      }
-    `}
 `
 
-const ShowOnMapFilter = ({ showOnMap, onChange }) => {
-  const { t } = useTranslation()
-  return (
-    <StyledLabel addMargin={false}>
-      <Checkbox checked={showOnMap} onChange={onChange} />
-      {t('Show On Map')}
-    </StyledLabel>
-  )
-}
-
-const MuniAndInvasiveFilters = ({ values, onChange }) =>
-  CHECKBOX_FIELDS.map(({ field, label }) => (
-    <StyledLabel addMargin key={field} htmlFor={field}>
+const CheckboxFilters = ({ values, onChange, fields }) =>
+  fields.map(({ field, label }) => (
+    <StyledLabel key={field} htmlFor={field}>
       <Checkbox
         id={field}
         checked={values[field]}
@@ -64,4 +47,8 @@ const MuniAndInvasiveFilters = ({ values, onChange }) =>
     </StyledLabel>
   ))
 
-export { MuniAndInvasiveFilters, ShowOnMapFilter }
+export {
+  CheckboxFilters,
+  MUNI_AND_INVASIVE_CHECKBOX_FIELDS,
+  TREE_SHOW_CHECKBOX_FIELDS,
+}

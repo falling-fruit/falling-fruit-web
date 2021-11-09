@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
-import { buildTypeSchema, getChildrenById } from '../utils/buildTypeSchema'
+import {
+  buildTypeSchema,
+  getChildrenById,
+  getTypesWithPendingCategory,
+} from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
 import { fetchLocations } from './viewChange'
@@ -36,7 +40,7 @@ export const filterSlice = createSlice({
     invasive: false,
     isLoading: false,
     countsById: {},
-    showOnMap: false,
+    showOnlyOnMap: false,
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),
@@ -48,9 +52,6 @@ export const filterSlice = createSlice({
     },
     closeFilter: (state) => {
       state.isOpen = false
-    },
-    updateShowOnMap: (state) => {
-      state.showOnMap = !state.showOnMap
     },
   },
   extraReducers: {
@@ -69,10 +70,13 @@ export const filterSlice = createSlice({
       state.isLoading = false
     },
     [fetchAllTypes.fulfilled]: (state, action) => {
-      const childrenById = getChildrenById(action.payload)
+      const typesWithPendingCategory = getTypesWithPendingCategory(
+        action.payload,
+      )
+      const childrenById = getChildrenById(typesWithPendingCategory)
       state.childrenById = childrenById
-      state.treeData = buildTypeSchema(action.payload, childrenById)
-      state.types = action.payload.map((t) => `${t.id}`)
+      state.treeData = buildTypeSchema(typesWithPendingCategory, childrenById)
+      state.types = typesWithPendingCategory.map((t) => `${t.id}`)
     },
   },
 })
@@ -82,7 +86,6 @@ export const {
   openFilter,
   closeFilter,
   updateSelection,
-  updateShowOnMap,
 } = filterSlice.actions
 
 export const selectionChanged = (types) => (dispatch) => {

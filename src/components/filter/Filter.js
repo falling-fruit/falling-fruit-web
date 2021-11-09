@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import {
-  selectionChanged,
-  setFilters,
-  updateShowOnMap,
-} from '../../redux/filterSlice'
+import { selectionChanged, setFilters } from '../../redux/filterSlice'
 import { fetchLocations } from '../../redux/viewChange'
-import { updateTreeCounts } from '../../utils/buildTypeSchema'
+import { PENDING_ID, updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
-import { MuniAndInvasiveFilters, ShowOnMapFilter } from './CheckboxFilters'
+import {
+  CheckboxFilters,
+  MUNI_AND_INVASIVE_CHECKBOX_FIELDS,
+  TREE_SHOW_CHECKBOX_FIELDS,
+} from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
 import RCTreeSelect from './RCTreeSelect'
 
@@ -50,18 +50,23 @@ const StyledFilter = styled.div`
 
 const TreeFiltersContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 7px;
+  margin: 10px 0;
 `
 
 const StyledInput = styled(Input)`
   height: 36px;
-  margin-bottom: 7px;
   padding: 9px 12px;
   input {
     height: 100%;
+  }
+`
+
+const MuniAndInvasiveCheckboxFilters = styled.div`
+  label:not(:last-child) {
+    margin-bottom: 8px;
+    @media ${({ theme }) => theme.device.mobile} {
+      margin-top: 15px;
+    }
   }
 `
 
@@ -82,7 +87,7 @@ const Filter = ({ isOpen }) => {
     countsById,
     treeData,
     childrenById,
-    showOnMap,
+    showOnlyOnMap,
   } = filters
 
   const treeDataWithUpdatedCounts = useMemo(
@@ -91,15 +96,19 @@ const Filter = ({ isOpen }) => {
         treeData,
         showScientificNames,
         countsById,
-        showOnMap,
+        showOnlyOnMap,
         childrenById,
       ),
-    [treeData, showScientificNames, countsById, showOnMap, childrenById],
+    [treeData, showScientificNames, countsById, showOnlyOnMap, childrenById],
   )
 
-  const onCheckBoxFiltersChange = (values) => {
+  const onMuniInvasiveCheckBoxFiltersChange = (values) => {
     dispatch(setFilters(values))
     dispatch(fetchLocations())
+  }
+
+  const onTreeShowCheckBoxFiltersChange = (values) => {
+    dispatch(setFilters(values))
   }
 
   const onSelectAllClick = () => {
@@ -126,9 +135,10 @@ const Filter = ({ isOpen }) => {
           placeholder="Search for a type..."
         />
         <TreeFiltersContainer>
-          <ShowOnMapFilter
-            showOnMap={showOnMap}
-            onChange={() => dispatch(updateShowOnMap())}
+          <CheckboxFilters
+            values={filters}
+            fields={TREE_SHOW_CHECKBOX_FIELDS}
+            onChange={onTreeShowCheckBoxFiltersChange}
           />
           <FilterButtons
             onSelectAllClick={onSelectAllClick}
@@ -141,7 +151,9 @@ const Filter = ({ isOpen }) => {
           onChange={(selectedTypes) =>
             dispatch(
               selectionChanged(
-                selectedTypes.filter((t) => !t.includes('root')),
+                selectedTypes.filter(
+                  (t) => !t.includes('root') && t !== PENDING_ID,
+                ),
               ),
             )
           }
@@ -149,12 +161,13 @@ const Filter = ({ isOpen }) => {
           searchValue={searchValue}
         />
       </div>
-      <div>
-        <MuniAndInvasiveFilters
+      <MuniAndInvasiveCheckboxFilters>
+        <CheckboxFilters
           values={filters}
-          onChange={onCheckBoxFiltersChange}
+          fields={MUNI_AND_INVASIVE_CHECKBOX_FIELDS}
+          onChange={onMuniInvasiveCheckBoxFiltersChange}
         />
-      </div>
+      </MuniAndInvasiveCheckboxFilters>
     </StyledFilter>
   ) : null
 }

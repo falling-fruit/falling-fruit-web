@@ -1,4 +1,4 @@
-import { theme } from '../components/ui/GlobalStyle'
+const PENDING_ID = 'PENDING'
 
 const getChildrenById = (types) => {
   const children = {}
@@ -26,6 +26,23 @@ const getTotalCount = (counts, id, childrenById, countsById) => {
   return totalCount
 }
 
+const getTypesWithPendingCategory = (types) => {
+  const typesWithPendingCategory = [
+    ...types,
+    {
+      id: PENDING_ID,
+      parent_id: null,
+      name: 'Pending Review',
+    },
+  ]
+  typesWithPendingCategory.forEach((t) => {
+    if (t.pending) {
+      t.parent_id = PENDING_ID
+    }
+  })
+  return typesWithPendingCategory
+}
+
 const getTypesWithRootLabels = (types, childrenById) =>
   types.map((t) => {
     const isParent = childrenById[t.id]
@@ -39,7 +56,7 @@ const getTypesWithRootLabels = (types, childrenById) =>
 const addOtherCategories = (types, childrenById) => {
   const typesWithOtherCategory = [...types]
   types.forEach((t) => {
-    if (childrenById[t.id]) {
+    if (childrenById[t.id] && t.id !== PENDING_ID) {
       typesWithOtherCategory.push({
         ...t,
         value: `${t.id}`,
@@ -52,7 +69,7 @@ const addOtherCategories = (types, childrenById) => {
 
 const sortTypes = (types) =>
   types
-    .filter((t) => t.scientific_names.length > 0)
+    .filter((t) => t.scientific_names?.length > 0)
     .sort(
       (a, b) =>
         a.scientific_names[0].localeCompare(b.scientific_names[0]) ||
@@ -95,7 +112,7 @@ const updateTreeCounts = (
   treeData,
   showScientificName,
   countsById,
-  showOnMap,
+  showOnlyOnMap,
   childrenById,
 ) => {
   const totalCount = {}
@@ -106,34 +123,23 @@ const updateTreeCounts = (
   const typeSchema = treeData.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
+    const cultivarIndex = scientificName?.indexOf("'")
+    const shouldIncludeScientificName = scientificName && showScientificName
     const count = type.value.includes('root')
       ? totalCount[type.id]
       : countsById[type.id] ?? 0
 
-    // TODO: Change typeName to a span to reuse here
     const name = (
-      <span style={{ fontSize: '0.875rem' }}>
-        <span
-          style={{
-            fontWeight: 'bold',
-            marginRight: '5px',
-            color: theme.secondaryText,
-          }}
-        >
-          {commonName}
-        </span>
-        {scientificName && showScientificName && (
-          <span
-            style={{
-              fontStyle: 'italic',
-              marginRight: '5px',
-              color: theme.text,
-            }}
-          >
-            {scientificName}
+      <span className="tree-node-text">
+        <span className="tree-node-common-name">{commonName}</span>
+        {shouldIncludeScientificName && (
+          <span className="tree-node-scientific-name">
+            {cultivarIndex === -1
+              ? scientificName
+              : scientificName.substring(cultivarIndex)}
           </span>
         )}
-        <span style={{ fontWeight: 'bold', color: theme.text }}>({count})</span>
+        <span className="tree-node-count">({count})</span>
       </span>
     )
 
@@ -144,7 +150,13 @@ const updateTreeCounts = (
     }
   })
 
-  return showOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
+  return showOnlyOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
 }
 
-export { buildTypeSchema, getChildrenById, updateTreeCounts }
+export {
+  buildTypeSchema,
+  getChildrenById,
+  getTypesWithPendingCategory,
+  PENDING_ID,
+  updateTreeCounts,
+}
