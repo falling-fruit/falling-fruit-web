@@ -123,18 +123,21 @@ const updateTreeCounts = (
   const typeSchema = treeData.map((type) => {
     const commonName = type.name ?? type.common_names.en[0]
     const scientificName = type.scientific_names?.[0]
-    const shouldIncludeScientificName =
-      scientificName && showScientificName && !type.value.includes('root')
+    const cultivarIndex = scientificName?.indexOf("'")
+    const shouldIncludeScientificName = scientificName && showScientificName
     const count = type.value.includes('root')
       ? totalCount[type.id]
       : countsById[type.id] ?? 0
 
-    // TODO: Change typeName to a span to reuse here
     const name = (
       <span className="tree-node-text">
         <span className="tree-node-common-name">{commonName}</span>
         {shouldIncludeScientificName && (
-          <span className="tree-node-scientific-name">{scientificName}</span>
+          <span className="tree-node-scientific-name">
+            {cultivarIndex === -1
+              ? scientificName
+              : scientificName.substring(cultivarIndex)}
+          </span>
         )}
         <span className="tree-node-count">({count})</span>
       </span>
