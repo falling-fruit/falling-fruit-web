@@ -30,12 +30,11 @@ const getTotalCount = (counts, id, childrenById, countsById) => {
   if (id in counts) {
     return counts[id]
   }
-  let totalCount = countsById[id] ?? 0
+  counts[id] = countsById[id] ?? 0
   childrenById[id]?.forEach((childId) => {
-    totalCount += getTotalCount(counts, childId, childrenById, countsById)
+    counts[id] += getTotalCount(counts, childId, childrenById, countsById)
   })
-  counts[id] = totalCount
-  return totalCount
+  return counts[id]
 }
 
 const getTypesWithPendingCategory = (types) =>
