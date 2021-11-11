@@ -134,7 +134,7 @@ const updateTreeCounts = (
     const { commonName, scientificName } = getNames(type)
     const parentScientificName = scientificNameById[type.parent_id]
     const cultivarIndex =
-      scientificName?.startsWith(parentScientificName) &&
+      scientificName?.startsWith(`${parentScientificName} '`) &&
       scientificName?.indexOf("'")
     const shouldIncludeScientificName = scientificName && showScientificName
     const count = type.value.includes('root')
