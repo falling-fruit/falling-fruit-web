@@ -1,7 +1,9 @@
 import WindowSize from '@reach/window-size'
+import { Route, Switch } from 'react-router-dom'
 import SplitPane from 'react-split-pane'
 import styled from 'styled-components/macro'
 
+import AboutRouter from '../about/AboutRouter'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
@@ -46,21 +48,26 @@ const DesktopLayout = () => (
   // a non-numerical maxSize like "21.5vw"
   <DesktopContainer>
     <Header />
-    <WindowSize>
-      {({ width: vw }) => (
-        <StyledSplit
-          split="vertical"
-          minSize={MIN_PANE_WIDTH(vw)}
-          maxSize={MAX_PANE_WIDTH(vw)}
-          defaultSize={DEFAULT_PANE_WIDTH(vw)}
-        >
-          <SidePaneSwitch />
-          <MapPane>
-            <MapPage isDesktop />
-          </MapPane>
-        </StyledSplit>
-      )}
-    </WindowSize>
+    <Switch>
+      {AboutRouter}
+      <Route>
+        <WindowSize>
+          {({ width: vw }) => (
+            <StyledSplit
+              split="vertical"
+              minSize={MIN_PANE_WIDTH(vw)}
+              maxSize={MAX_PANE_WIDTH(vw)}
+              defaultSize={DEFAULT_PANE_WIDTH(vw)}
+            >
+              <SidePaneSwitch />
+              <MapPane>
+                <MapPage isDesktop />
+              </MapPane>
+            </StyledSplit>
+          )}
+        </WindowSize>
+      </Route>
+    </Switch>
   </DesktopContainer>
 )
 
