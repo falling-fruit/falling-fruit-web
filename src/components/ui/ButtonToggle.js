@@ -7,10 +7,9 @@ const Button = styled.button`
     props.selected ? '#ffffff' : ({ theme }) => theme.orange};
   flex-grow: 1;
   align-items: center;
-  outline: none;
   cursor: pointer;
   font-weight: bold;
-  font-family: lato;
+  font-family: inherit;
   border: 3px ${({ theme }) => theme.orange} solid;
   &:first-child {
     border-radius: 3px 0 0 3px;
@@ -27,18 +26,18 @@ const ButtonContainer = styled.div`
   width: 100%;
 `
 
-const ButtonToggle = ({ options, toggle, selectedIndex }) => {
-  const renderButtons = () =>
-    options.map((option, index) => (
+const ButtonToggle = ({ options, onChange, value }) => (
+  <ButtonContainer>
+    {options.map((option) => (
       <Button
-        selected={index === selectedIndex}
-        onClick={() => toggle(index)}
-        key={option}
+        selected={option.value === value}
+        onClick={() => onChange(option)}
+        key={option.value}
       >
-        {option}
+        {option.label}
       </Button>
-    ))
-  return <ButtonContainer>{renderButtons()}</ButtonContainer>
-}
+    ))}
+  </ButtonContainer>
+)
 
 export default ButtonToggle

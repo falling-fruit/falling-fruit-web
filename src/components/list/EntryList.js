@@ -14,12 +14,18 @@ import { ReactComponent as LeafIcon } from './leaf.svg'
 
 const convertDistance = (distance, setting) => {
   if (setting === 'imperial') {
-    return `${(distance * 0.000621371192).toFixed(2)} miles`
-  } else {
-    if (distance >= 1000) {
-      return `${(distance / 1000.0).toFixed(3)} kilometers`
+    const feet = Math.round(distance / 0.3048)
+    if (feet < 1000) {
+      return `${parseFloat(feet.toPrecision(2))} feet`
     } else {
-      return `${~~distance} meters`
+      return `${parseFloat((feet / 5280).toPrecision(2))} miles`
+    }
+  } else {
+    const meters = Math.round(distance)
+    if (meters < 1000) {
+      return `${parseFloat(meters.toPrecision(2))} meters`
+    } else {
+      return `${parseFloat((meters / 1000).toPrecision(2))} kilometers`
     }
   }
 }
@@ -45,8 +51,7 @@ const EntryList = forwardRef(
     { locations, onEntryClick, onEntryMouseEnter, onEntryMouseLeave, ...props },
     ref,
   ) => {
-    const settings = useSelector((state) => state.settings)
-    console.log(settings)
+    const { distanceUnit } = useSelector((state) => state.settings)
     const Item = ({ index, style }) => {
       const location = locations[index]
 
@@ -59,10 +64,7 @@ const EntryList = forwardRef(
             leftIcons={<EntryIcon imageSrc={location.photo?.thumb} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
-            secondaryText={`${convertDistance(
-              location.distance,
-              settings.distanceUnit,
-            )}`}
+            secondaryText={convertDistance(location.distance, distanceUnit)}
             onClick={(e) => onEntryClick?.(location.id, e)}
             onMouseEnter={(e) => onEntryMouseEnter?.(location.id, e)}
             onMouseLeave={(e) => onEntryMouseLeave?.(location.id, e)}

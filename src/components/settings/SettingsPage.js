@@ -23,10 +23,10 @@ const LANGUAGE_OPTIONS = [
   { value: 'it', label: 'Italiano' },
 ]
 
-const METRICS_OPTIONS = {
-  metric: 0,
-  imperial: 1,
-}
+const DISTANCE_UNIT_OPTIONS = [
+  { value: 'metric', label: 'Metric' },
+  { value: 'imperial', label: 'Imperial' },
+]
 
 const Page = styled.div`
   box-sizing: border-box;
@@ -64,13 +64,10 @@ const SettingsPage = ({ desktop }) => {
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
 
-  const updateUnitsSetting = (index) => {
-    for (const [key, value] of Object.entries(METRICS_OPTIONS)) {
-      if (index === value) {
-        dispatch(updateSettings({ ['distanceUnit']: key }))
-      }
-    }
+  const updateUnitsSetting = (object) => {
+    dispatch(updateSettings({ ['distanceUnit']: object.value }))
   }
+
   return (
     <Page desktop={desktop}>
       {!desktop && <h2>{t('Settings')}</h2>}
@@ -108,9 +105,9 @@ const SettingsPage = ({ desktop }) => {
         label={<label htmlFor="distanceUnit">{t('Units')}</label>}
         right={
           <ButtonToggle
-            options={['Metric', 'Imperial']}
-            toggle={updateUnitsSetting}
-            selectedIndex={METRICS_OPTIONS[settings.distanceUnit]}
+            options={DISTANCE_UNIT_OPTIONS}
+            onChange={updateUnitsSetting}
+            value={settings.distanceUnit}
           />
         }
       />
