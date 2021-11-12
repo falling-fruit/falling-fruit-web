@@ -136,7 +136,6 @@ const updateTreeCounts = (
     const cultivarIndex =
       scientificName?.startsWith(`${parentScientificName} '`) &&
       scientificName?.indexOf("'")
-    const shouldIncludeScientificName = scientificName && showScientificName
     const count = type.value.includes('root')
       ? totalCount[type.id]
       : countsById[type.id] ?? 0
@@ -146,7 +145,8 @@ const updateTreeCounts = (
       title: (
         <TreeNodeText
           commonName={commonName}
-          shouldIncludeScientificName={shouldIncludeScientificName}
+          shouldIncludeScientificName={scientificName && showScientificName}
+          shouldIncludeCommonName={!cultivarIndex}
           scientificName={
             cultivarIndex === -1
               ? scientificName
