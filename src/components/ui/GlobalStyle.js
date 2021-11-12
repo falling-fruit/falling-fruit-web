@@ -62,6 +62,13 @@ const GlobalStyle = createGlobalStyle`
     @media ${({ theme }) => theme.desktop} {
       font-size: 14px;
     }
+    --toastify-icon-color-success: ${({ theme }) => theme.green};
+    --toastify-font-family: ${({ theme }) => theme.fonts};
+    --toastify-text-color-success:  ${({ theme }) => theme.green};
+    --toastify-color-progress-success:  ${({ theme }) => theme.green};
+    --toastify-color-progress-error: ${({ theme }) => theme.invalid};
+    --toastify-text-color-error: ${({ theme }) => theme.invalid};
+    --toastify-text-color-light: ${({ theme }) => theme.secondaryText};
   }
 
   body {

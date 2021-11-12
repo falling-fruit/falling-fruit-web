@@ -5,15 +5,17 @@ const Toast = styled(ToastContainer).attrs({
   // custom props
   toastClassName: 'toast',
 })`
-  .Toastify__toast-theme--colored.Toastify__toast--success {
-    background: #73cd7c;
+  .Toastify {
+    &__toast {
+      size: 16px;
+      font-weight: bold;
+    }
   }
-
-  .Toastify__toast-theme--colored.Toastify__toast--error {
-    background: #ff2633;
-  }
-  .Toastify__toast {
-    font-family: ${({ theme }) => theme.fonts};
+  @media only screen and (max-width: 480px) {
+    .Toastify__toast {
+      border-radius: 4px;
+      margin: 90px 10px 0;
+    }
   }
 `
 

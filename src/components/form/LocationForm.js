@@ -208,11 +208,10 @@ export const LocationForm = ({ desktop }) => {
     let locationResp
     try {
       locationResp = await addLocation(locationValues)
+      toast.success('Location submitted successfully!')
     } catch {
       toast.error('Location submission failed.')
     }
-
-    toast.success('Location submitted successfully!')
 
     if (isValidReview(review)) {
       const reviewValues = {

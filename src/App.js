@@ -12,19 +12,16 @@ import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Toast from './components/ui/Toast'
 import { store } from './redux/store'
 import AuthInitializer from './utils/AuthInitializer'
-import { ConnectedBreakpoint } from './utils/useBreakpoint'
+import { ConnectedBreakpoint, useIsDesktop } from './utils/useBreakpoint'
 
 const App = () => (
   <Provider store={store}>
     <AuthInitializer />
     <Toast
-      position="top-center"
-      autoClose={20000}
-      hideProgressBar={false}
-      newestOnTop={false}
+      position={useIsDesktop() ? 'bottom-right' : 'top-center'}
+      autoClose={3000}
       closeOnClick
       rtl={false}
-      pauseOnFocusLoss
     />
     <BrowserRouter>
       <ThemeProvider theme={theme}>
