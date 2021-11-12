@@ -12,20 +12,27 @@ import ListEntry from '../ui/ListEntry'
 import { TypeName } from '../ui/TypeName'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
+const METERS_TO_FEET = 0.3048
+const FEET_TO_MILES = 5280
+const CONVERSION_THRESHOLD = 1000
+const METERS_TO_KILOMETERS = 1000
+
 const convertDistance = (distance, setting) => {
   if (setting === 'imperial') {
-    const feet = Math.round(distance / 0.3048)
-    if (feet < 1000) {
+    const feet = Math.round(distance / METERS_TO_FEET)
+    if (feet < CONVERSION_THRESHOLD) {
       return `${parseFloat(feet.toPrecision(2))} feet`
     } else {
-      return `${parseFloat((feet / 5280).toPrecision(2))} miles`
+      return `${parseFloat((feet / FEET_TO_MILES).toPrecision(2))} miles`
     }
   } else {
     const meters = Math.round(distance)
-    if (meters < 1000) {
+    if (meters < CONVERSION_THRESHOLD) {
       return `${parseFloat(meters.toPrecision(2))} meters`
     } else {
-      return `${parseFloat((meters / 1000).toPrecision(2))} kilometers`
+      return `${parseFloat(
+        (meters / METERS_TO_KILOMETERS).toPrecision(2),
+      )} kilometers`
     }
   }
 }

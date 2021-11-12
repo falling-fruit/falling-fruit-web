@@ -81,7 +81,6 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
-
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
 
@@ -94,6 +93,8 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   ) {
     dispatch(stopTrackingLocation())
   }
+
+  // TODO: retrive event from viewChange and change order accordingly?
 
   dispatch(viewChange(newView))
   dispatch(fetchLocations())

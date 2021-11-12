@@ -1,6 +1,8 @@
 import styled from 'styled-components/macro'
 
-const Button = styled.button`
+import ResetButton from './ResetButton'
+
+const Button = styled(ResetButton)`
   background-color: ${(props) =>
     props.selected ? ({ theme }) => theme.orange : '#ffffff'};
   color: ${(props) =>
@@ -9,7 +11,6 @@ const Button = styled.button`
   align-items: center;
   cursor: pointer;
   font-weight: bold;
-  font-family: inherit;
   border: 3px ${({ theme }) => theme.orange} solid;
   &:first-child {
     border-radius: 3px 0 0 3px;
