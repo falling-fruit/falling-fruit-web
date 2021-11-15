@@ -11,6 +11,7 @@ const DEFAULT_SETTINGS = {
   mapType: 'roadmap',
   mapLayers: [],
   overrideDataLanguage: false,
+  showBusinesses: false,
 }
 
 export const settingsSlice = createSlice({

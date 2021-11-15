@@ -15,7 +15,9 @@ import Location from './Location'
  * @param {function} onLocationClick - The function called when a location is clicked
  * @param {function} onViewChange - The function called when the view state is changed
  * @param {boolean} showLabels - Will display labels under locations if true
+ * @param {boolean} showBusinesses - Will display businesses in the map if true
  */
+
 const Map = ({
   bootstrapURLKeys,
   view,
@@ -30,6 +32,7 @@ const Map = ({
   showLabels,
   mapType,
   layerTypes,
+  showBusinesses,
 }) => (
   <GoogleMapReact
     bootstrapURLKeys={bootstrapURLKeys}
@@ -38,6 +41,12 @@ const Map = ({
       disableDefaultUI: true,
       // TODO: should we disable tilt?
       // tilt: 0,
+      styles: [
+        {
+          featureType: 'poi.business',
+          stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
+        },
+      ],
     })}
     layerTypes={layerTypes}
     center={view.center}
@@ -94,6 +103,7 @@ Map.propTypes = {
   mapType: PropTypes.string,
   layerTypes: PropTypes.arrayOf(PropTypes.string),
   showLabels: PropTypes.bool,
+  showBusinesses: PropTypes.bool,
 }
 
 export default Map
