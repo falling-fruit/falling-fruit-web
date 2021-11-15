@@ -5,19 +5,20 @@ import { useEffect } from 'react'
 /**
  * React wrapper for CupertinoPane
  */
-export default function CupertinoPane({ id, children, config }) {
+export default function CupertinoPane({ setRef, className, children, config }) {
   useEffect(() => {
-    const drawer = new VanillaCupertinoPane(`#${id}`, config)
+    const drawer = new VanillaCupertinoPane(`.${className}`, config)
 
     /*
       HACK: Fix for race condition using setTimeout @ 0 ms to 
       push present to the end of the synchronous callstack
       */
+    setTimeout(() => setRef(drawer), 0)
     setTimeout(() => drawer.present({ animate: true }), 0)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [className])
 
-  return <div id={id}>{children}</div>
+  return <div className={className}>{children}</div>
 }
 
 CupertinoPane.propTypes = {

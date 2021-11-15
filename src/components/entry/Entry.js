@@ -1,13 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { getLocationById, getReviews } from '../../utils/api'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
-import EntryOverview from './EntryOverview'
-import EntryReviews from './EntryReviews'
-import PhotoGrid from './PhotoGrid'
 
 // Wraps the entire page and gives it a top margin if on mobile
 export const Page = styled.div`
@@ -38,39 +32,14 @@ export const TextContent = styled.article`
   }
 `
 
-const Entry = ({ isInDrawer }) => {
-  const [locationData, setLocationData] = useState()
-  const [reviews, setReviews] = useState()
-  const [isLoading, setIsLoading] = useState(true)
-  const { id } = useParams()
-
-  useEffect(() => {
-    async function fetchEntryData() {
-      setIsLoading(true)
-
-      const [locationData, reviews] = await Promise.all([
-        getLocationById(id),
-        getReviews(id),
-      ])
-
-      setLocationData(locationData)
-      setReviews(reviews)
-
-      setIsLoading(false)
-    }
-
-    fetchEntryData()
-  }, [id])
-
-  const addSubmittedReview = (submittedReview) => {
-    setReviews((reviews) => [...reviews, submittedReview])
-  }
-
-  const entryOverview = <EntryOverview locationData={locationData} />
-  const entryReviews = (
-    <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
-  )
-
+const Entry = ({
+  isInDrawer,
+  locationData,
+  reviews,
+  isLoading,
+  entryOverview,
+  entryReviews,
+}) => {
   let content
 
   if (!locationData || !reviews) {
@@ -80,8 +49,6 @@ const Entry = ({ isInDrawer }) => {
 
     content = (
       <>
-        <PhotoGrid photos={allReviewPhotos} altText={locationData.address} />
-
         {isInDrawer ? (
           <EntryTabs>
             <TabList>
@@ -96,6 +63,14 @@ const Entry = ({ isInDrawer }) => {
           </EntryTabs>
         ) : (
           <>
+            {allReviewPhotos.length > 0 && (
+              // TODO: Change to image carousel
+              <img
+                style={{ width: '100%' }}
+                src={allReviewPhotos[0].medium}
+                alt="entry"
+              />
+            )}
             {entryOverview}
             {entryReviews}
           </>
