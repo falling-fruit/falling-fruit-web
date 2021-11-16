@@ -23,6 +23,7 @@ import Filter from '../filter/Filter'
 import FilterIconButton from '../filter/FilterIconButton'
 import TrackLocationButton from '../map/TrackLocationButton'
 import Input from '../ui/Input'
+import ClearSearchButton from './ClearSearch'
 import SearchEntry from './SearchEntry'
 
 const { googleMapLoader } = GoogleMapReact
@@ -103,7 +104,6 @@ const Search = (props) => {
       ),
     )
   }
-
   return (
     <Combobox
       onSelect={handleSelect}
@@ -116,11 +116,20 @@ const Search = (props) => {
           value={value}
           onChange={handleChange}
           disabled={!ready}
-          icon={<SearchAlt2 />}
+          icon={
+            value === '' ? (
+              <SearchAlt2 />
+            ) : (
+              <ClearSearchButton
+                onClick={() => {
+                  setValue('')
+                }}
+              />
+            )
+          }
           prepend={isDesktop && <TrackLocationButton isIcon={false} />}
           placeholder="Search for a location..."
         />
-
         <FilterIconButton
           pressed={filterOpen}
           onClick={() => {
