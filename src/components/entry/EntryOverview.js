@@ -108,9 +108,6 @@ const EntryOverview = ({ locationData, className }) => {
   )
 
   const handleStreetView = () => {
-    console.log('test')
-    console.log(`test: ${currentStreetView.streetView}`)
-    console.log(currentStreetView)
     dispatch(
       enableStreetView({
         streetView: !currentStreetView.streetView,

@@ -33,35 +33,64 @@ const Map = ({
   layerTypes,
   showStreetView,
 }) => {
-  const map_state = useRef(null)
-  const maps_state = useRef(null)
+  const mapRef = useRef(null)
+  const mapsRef = useRef(null)
   const widget = useRef(null)
   const astorPlace = { lat: 40.729884, lng: -73.990988 }
   const location = useSelector((state) => state.map.location)
+
+  const setHeading = async (panoClient, markerLocation, panorama) => {
+    const pano = await panoClient.getPanorama({
+      location: markerLocation,
+      radius: 50,
+    })
+    console.log(pano)
+
+    const heading = mapsRef.current.geometry.spherical.computeHeading(
+      pano.data.location.latLng,
+      markerLocation,
+    )
+    console.log(heading)
+
+    panorama.setPov({
+      heading: heading,
+      pitch: 0,
+    })
+    // console.log('test')
+  }
+
   useEffect(() => {
-    console.log(map_state.current)
-    if (map_state.current) {
+    if (mapRef.current) {
       console.log(showStreetView)
 
-      const panorama = map_state.current.getStreetView()
-      if (location) {
-        panorama.setPosition({
-          lat: location.location.lat,
-          lng: location.location.lng,
+      const panorama = mapRef.current.getStreetView()
+
+      if (location && mapsRef) {
+        const locationMarker = new mapsRef.current.Marker({
+          position: location.location,
+          mapRef,
         })
+        const panoClient = new mapsRef.current.StreetViewService()
+        const markerLocation = locationMarker.getPosition()
+
+        setHeading(panoClient, markerLocation, panorama)
+
+        locationMarker.setMap(panorama)
+        panorama.setPosition(location.location)
       } else {
         panorama.setPosition(astorPlace)
       }
-      panorama.setMapTypeId(maps_state.current.MapTypeId.ROADMAP)
-      panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
-        widget.current,
-      )
+
+      // TODO bottom minimap
+      // panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
+      //   widget.current,
+      // )
       panorama.setVisible(showStreetView)
     }
   })
   const apiIsLoaded = (map, maps) => {
-    map_state.current = map
-    maps_state.current = maps
+    mapRef.current = map
+    mapsRef.current = maps
   }
 
   return (
