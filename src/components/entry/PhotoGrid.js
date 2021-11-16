@@ -1,3 +1,6 @@
+// TODO: Remove below
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ImageAdd } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
@@ -123,7 +126,7 @@ const ExtraImagesWrapper = styled(ResetButton)`
   }
 `
 
-const PhotoData = ({ photos, altText, onViewLightbox }) => {
+const PhotoData = ({ photos, altText, openLightbox }) => {
   const { t } = useTranslation()
   return (
     photos.length > 0 && (
@@ -133,12 +136,14 @@ const PhotoData = ({ photos, altText, onViewLightbox }) => {
       // TODO: connect to lightbox once implemented
       // TODO: this should be in the photogrid itself, shouldn't have to be handled here
       <StyledPhotoGrid>
-        <img className="main-image" src={photos[0].medium} alt={altText} />
+        <img
+          className="main-image"
+          src={photos[0].medium}
+          alt={altText}
+          onClick={() => openLightbox(photos)}
+        />
         {photos.length > 1 && (
-          <ExtraImagesWrapper
-            onClick={onViewLightbox}
-            disabled={photos.length < 3}
-          >
+          <ExtraImagesWrapper disabled={photos.length < 3}>
             {photos.length > 2 && (
               <div className="other-photos-mask">
                 <span>{photos.length - 2}</span>

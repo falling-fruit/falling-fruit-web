@@ -7,6 +7,7 @@ import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
+import Lightbox from './Lightbox'
 import PhotoGrid from './PhotoGrid'
 
 // Wraps the entire page and gives it a top margin if on mobile
@@ -42,6 +43,17 @@ const Entry = ({ isInDrawer }) => {
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
+  const [showLighbox, setShowLightbox] = useState(false)
+  const [reviewImages, setReviewImages] = useState('')
+  const [currImgIndex, setCurrImgIndex] = useState(0)
+
+  const openLightbox = (photos) => {
+    setReviewImages(photos)
+    setShowLightbox(true)
+  }
+
+  const closeLightbox = () => setShowLightbox(false)
+
   const { id } = useParams()
 
   useEffect(() => {
@@ -80,8 +92,20 @@ const Entry = ({ isInDrawer }) => {
 
     content = (
       <>
-        <PhotoGrid photos={allReviewPhotos} altText={locationData.address} />
-
+        <PhotoGrid
+          photos={allReviewPhotos}
+          altText={locationData.address}
+          openLightbox={openLightbox}
+        />
+        {showLighbox && (
+          <Lightbox
+            onDismiss={closeLightbox}
+            review={reviews[currImgIndex]}
+            reviewImages={reviewImages}
+            currImgIndex={currImgIndex}
+            setCurrImgIndex={setCurrImgIndex}
+          />
+        )}
         {isInDrawer ? (
           <EntryTabs>
             <TabList>
