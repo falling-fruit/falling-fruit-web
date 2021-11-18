@@ -8,6 +8,10 @@ const pages = [
     path: '/about/project',
     component: ProjectPage,
   },
+  /* {
+    path: '/about/dataset/{id}',
+    component = AboutDatasetPage,
+  },*/
   {
     path: '/about/dataset',
     component: ImportedDatasetsPage,

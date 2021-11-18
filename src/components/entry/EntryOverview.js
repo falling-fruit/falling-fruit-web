@@ -1,12 +1,11 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
-import { getImportById } from '../../utils/api'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
@@ -76,24 +75,6 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
-  const [importDatasetName, setImportDatasetName] = useState()
-  const [isLoading, setIsLoading] = useState(true)
-  //console.log(getImportById(locationData.import_id), 'HERE')
-  useEffect(() => {
-    async function fetchImportData() {
-      if (locationData.import_id) {
-        const importData = await getImportById(locationData.import_id)
-        console.log(importData, 'Here')
-        setImportDatasetName(importData.name)
-
-        setIsLoading(false)
-      }
-    }
-
-    fetchImportData()
-  }, [])
-
-  console.log(locationData)
   const { getLocationTypes } = useTypesById()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -167,7 +148,7 @@ const EntryOverview = ({ locationData, className }) => {
               <p className="updatedTime">
                 {t('Imported from')}{' '}
                 <a href={`/about/dataset/${locationData.import_id}`}>
-                  {importDatasetName}
+                  {locationData.author}
                 </a>
               </p>
             )}
@@ -185,7 +166,7 @@ const EntryOverview = ({ locationData, className }) => {
           </Description>
         </TextContent>
       </>
-      {(!locationData || isLoading) && <LoadingOverlay />}
+      {!locationData && <LoadingOverlay />}
     </div>
   )
 }
