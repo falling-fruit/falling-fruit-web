@@ -33,6 +33,7 @@ export const getAllLocations = createSelector(
 export const fetchLocations = () => (dispatch, getState) => {
   const state = getState()
   const { zoom, bounds } = state.map.view
+
   if (bounds?.ne.lat != null && zoom > 1) {
     // Map has received real bounds
     if (getIsShowingClusters(state)) {
@@ -89,7 +90,6 @@ export const viewChangeAndFetch = (newView, initialView) => (
   } else {
     dispatch(viewChange(newView))
   }
-  console.log('HERE', newView)
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
 

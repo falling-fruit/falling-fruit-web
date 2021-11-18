@@ -1,9 +1,12 @@
+const DEFAULT_LAT = 40.1125785
+const DEFAULT_LNG = -88.2287926
+const DEFAULT_ZOOM = 1
+
 export const parseUrl = () => {
   const url = window.location.href
-  const geocoordmatch = url.substring(url.indexOf('@'))
-  console.log('match', geocoordmatch)
+  const geocoordMatch = url.substring(url.indexOf('@'))
 
-  const getCoords = isValidCoord(geocoordmatch)
+  const getCoords = isValidCoord(geocoordMatch)
 
   if (getCoords.valid) {
     return {
@@ -11,36 +14,40 @@ export const parseUrl = () => {
       zoom: getCoords.zoom,
     }
   } else {
-    return { center: { lat: 40.1125785, lng: -88.2287926 }, zoom: 1 }
+    return {
+      center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
+      zoom: DEFAULT_ZOOM,
+    }
   }
 }
 
-const isValidCoord = (geocoordmatch) => {
-  const floatRegex = /^\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?$/
-  console.log(geocoordmatch)
-  if (!geocoordmatch) {
+const isValidCoord = (geocoordMatch) => {
+  const isFloatRegex = /^\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?$/
+  if (!geocoordMatch) {
     return false
   }
-  const param = geocoordmatch
+  const urlParamString = geocoordMatch
   //@lat,long,zoomz
 
-  const values = param.substring(1, param.length - 1).split(',')
+  const parsedUrlValues = urlParamString
+    .substring(1, urlParamString.length - 1)
+    .split(',')
   return {
     valid:
-      (param.match(/\,/g) || []).length === 2 &&
-      param.charAt(0) === '@' &&
-      param.charAt(param.length - 1) === 'z' &&
-      floatRegex.test(values[0]) &&
-      floatRegex.test(values[1]) &&
-      floatRegex.test(values[2]) &&
-      parseFloat(values[0]) >= -90 &&
-      parseFloat(values[0]) <= 90 &&
-      parseFloat(values[1]) >= -180 &&
-      parseFloat(values[1]) <= 180 &&
-      parseFloat(values[2]) > 1 &&
-      parseFloat(values[2]) <= 21,
-    lat: parseFloat(values[0]),
-    lng: parseFloat(values[1]),
-    zoom: parseFloat(values[2]),
+      (urlParamString.match(/\,/g) || []).length === 2 &&
+      urlParamString.charAt(0) === '@' &&
+      urlParamString.charAt(urlParamString.length - 1) === 'z' &&
+      isFloatRegex.test(parsedUrlValues[0]) &&
+      isFloatRegex.test(parsedUrlValues[1]) &&
+      isFloatRegex.test(parsedUrlValues[2]) &&
+      parseFloat(parsedUrlValues[0]) >= -90 &&
+      parseFloat(parsedUrlValues[0]) <= 90 &&
+      parseFloat(parsedUrlValues[1]) >= -180 &&
+      parseFloat(parsedUrlValues[1]) <= 180 &&
+      parseFloat(parsedUrlValues[2]) > 1 &&
+      parseFloat(parsedUrlValues[2]) <= 21,
+    lat: parseFloat(parsedUrlValues[0]),
+    lng: parseFloat(parsedUrlValues[1]),
+    zoom: parseFloat(parsedUrlValues[2]),
   }
 }

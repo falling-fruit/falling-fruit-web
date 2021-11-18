@@ -27,11 +27,11 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 
 const MapPage = ({ isDesktop }) => {
   const history = useHistory()
-
   const match = useRouteMatch({
     path: '/(map|list)/entry/:entryId',
     exact: true,
   })
+
   const isAddingLocation = match?.params.entryId === 'new'
   const entryId = match?.params.entryId && parseInt(match.params.entryId)
 
@@ -43,7 +43,6 @@ const MapPage = ({ isDesktop }) => {
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
   const geolocation = useSelector((state) => state.map.geolocation)
   const locationRequested = useSelector((state) => state.map.locationRequested)
-
   const view = useSelector((state) => state.map.view)
   const clusters = useSelector((state) => state.map.clusters)
 
