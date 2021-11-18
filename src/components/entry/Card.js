@@ -1,9 +1,14 @@
+import React from 'react'
+
 import CupertinoPane from '../ui/CupertinoPane'
 
-export default function Card({ setRef, className, children, config }) {
+export default React.forwardRef(function Card(
+  { className, children, config },
+  ref,
+) {
   return (
-    <CupertinoPane setRef={setRef} className={className} config={config}>
+    <CupertinoPane ref={ref} className={className} config={config}>
       {children}
     </CupertinoPane>
   )
-}
+})

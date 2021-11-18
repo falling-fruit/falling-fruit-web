@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useWindowSize } from '@reach/window-size'
+import { useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -9,30 +10,56 @@ import EntryImagesCard from './EntryImagesCard'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 
+const ENTRY_IMAGE_HEIGHT = 250
+
+const INITIAL_IMAGE_HEIGHT_SCALAR = 0.6
+
 const Container = styled.div`
   position: absolute;
   height: 100%;
   overflow: hidden;
   width: 100%;
-  bottom: 80px;
+  bottom: 70px;
   left: 0;
+
+  .pane {
+    background: none;
+  }
+
+  .draggable {
+    background: white;
+    z-index: -1;
+    padding-top: 10px;
+  }
+
+  .entry-main-card {
+    background: white;
+  }
 `
 
 const EntryImages = styled.div`
-  z-index: 1;
-`
-
-const EntryMainCard = styled.div`
-  z-index: 2;
+  width: 100%;
+  height: ${ENTRY_IMAGE_HEIGHT}px;
+  position: absolute;
+  top: ${({ heightScalar }) => -heightScalar * ENTRY_IMAGE_HEIGHT}px;
+  z-index: -10;
 `
 
 const EntryDrawer = () => {
+  const { height: windowHeight } = useWindowSize()
+  const paneHeight = windowHeight - 70
+  const initialCardHeight = paneHeight * 0.3
+  const finalCardHeight = paneHeight - ENTRY_IMAGE_HEIGHT
+  const maxDelta = finalCardHeight - initialCardHeight
+
   const history = useHistory()
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const [cardOneRef, setCardOneRef] = useState(null)
-  const [cardTwoRef, setCardTwoRef] = useState(null)
+  const [entryImageHeightMultiplier, setEntryImageHeightMultiplier] = useState(
+    INITIAL_IMAGE_HEIGHT_SCALAR,
+  )
+  const cardRef = useRef()
   const { id } = useParams()
 
   useEffect(() => {
@@ -53,6 +80,15 @@ const EntryDrawer = () => {
     fetchEntryData()
   }, [id])
 
+  // useEffect(() => {
+  //   console.log('HERE')
+  //   if (cardRef?.current?.parentNode?.style?.transform) {
+  //     const transformStyles = cardRef.current.parentNode.style.transform
+  //     const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
+  //     console.log('HERE', transformYMatch)
+  //   }
+  // }, [cardRef?.current?.parentNode?.style?.transform])
+
   const addSubmittedReview = (submittedReview) => {
     setReviews((reviews) => [...reviews, submittedReview])
   }
@@ -62,71 +98,51 @@ const EntryDrawer = () => {
     <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
   )
 
+  const onDrag = () => {
+    const transformStyles = cardRef.current.parentNode.style.transform
+    const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
+    const delta = windowHeight - transformYMatch - initialCardHeight
+    let newHeightMultiplier =
+      INITIAL_IMAGE_HEIGHT_SCALAR +
+      (1 - INITIAL_IMAGE_HEIGHT_SCALAR) * (delta / maxDelta)
+    if (delta < 0) {
+      newHeightMultiplier = INITIAL_IMAGE_HEIGHT_SCALAR + delta / maxDelta
+    }
+    setEntryImageHeightMultiplier(newHeightMultiplier)
+  }
+
   const config = {
-    initialBreak: 'top',
+    initialBreak: 'middle',
     breaks: {
-      top: { enabled: true, height: 350, bounce: true },
-      middle: { enabled: false },
+      top: { enabled: true, height: finalCardHeight, bounce: true },
+      middle: { enabled: true, height: initialCardHeight },
       bottom: { enabled: false },
     },
-    showDraggable: false,
+    onDrag,
     buttonClose: false,
     bottomClose: true,
     onDidDismiss: () => history.push('/map'),
-  }
-
-  const onDrag = (num, t) => {
-    if (t.delta > 70) {
-      // TODO: Increase height of card-1 until expanded to full height of screen
-      // Can we use refs here?
-      console.log('HERE', cardOneRef, cardTwoRef)
-    }
-    // TODO: Decrease height of card-1 if dragging down
+    cssClass: `entry-main-card`,
+    parentElement: '.entry-drawers',
   }
 
   return (
     <Container className="entry-drawers">
-      {reviews && reviews.length > 0 && (
-        <EntryImages className="entry-images-container">
-          <Card
-            setRef={setCardOneRef}
-            className="entry-images-card"
-            config={{
-              ...config,
-              cssClass: `entry-images-card`,
-              parentElement: '.entry-images-container',
-            }}
-          >
+      <Card ref={cardRef} className="entry-main-card" config={config}>
+        {reviews && reviews.length > 0 && (
+          <EntryImages heightScalar={entryImageHeightMultiplier}>
             <EntryImagesCard image={reviews?.[0]?.photos?.[0].medium} />
-          </Card>
-        </EntryImages>
-      )}
-      <EntryMainCard className="entry-main-card-container">
-        <Card
-          setRef={setCardTwoRef}
-          className="entry-main-card"
-          config={{
-            ...config,
-            breaks: {
-              ...config.breaks,
-              ...{ top: { ...config.breaks.top, height: 200 } },
-            },
-            onDrag: (e) => onDrag(2, e),
-            cssClass: `entry-main-card`,
-            showDraggable: true,
-            parentElement: '.entry-main-card-container',
-          }}
-        >
-          <Entry
-            isInDrawer
-            locationData={locationData}
-            reviews={reviews}
-            isLoading={isLoading}
-            entryOverview={entryOverview}
-            entryReviews={entryReviews}
-          />
-        </Card>
-      </EntryMainCard>
+          </EntryImages>
+        )}
+        <Entry
+          isInDrawer
+          locationData={locationData}
+          reviews={reviews}
+          isLoading={isLoading}
+          entryOverview={entryOverview}
+          entryReviews={entryReviews}
+        />
+      </Card>
     </Container>
   )
 }

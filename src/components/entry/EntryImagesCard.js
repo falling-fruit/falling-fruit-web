@@ -1,6 +1,6 @@
 const EntryImagesCard = ({ image }) => (
-  <div className="entry-images-card">
-    <img src={image} alt={'entry-background'} />
+  <div style={{ width: '100%' }} className="entry-images-card">
+    <img style={{ width: '100%' }} src={image} alt={'entry-background'} />
   </div>
 )
 
