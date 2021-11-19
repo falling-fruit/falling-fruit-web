@@ -12,13 +12,9 @@ import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
-import { Tag, TagList } from '../ui/Tag'
 import { TextContent } from './Entry'
-import {
-  ACCESS_TYPE,
-  formatISOString,
-  formatSeasonality,
-} from './textFormatters'
+import EntryTags from './EntryTags'
+import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
 const IconBesideText = styled.div`
@@ -74,7 +70,7 @@ const Description = styled.section`
   }
 `
 
-const EntryOverview = ({ locationData, className }) => {
+const EntryOverview = ({ locationData, className, showTags }) => {
   const { getLocationTypes } = useTypesById()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -85,19 +81,6 @@ const EntryOverview = ({ locationData, className }) => {
     history.push(`/map/entry/${locationData.id}`)
     // Disabling zoom in for now
   }
-
-  const tagList = locationData && (
-    <TagList>
-      {locationData.access && (
-        <Tag color={theme.tag.access}>{ACCESS_TYPE[locationData.access]}</Tag>
-      )}
-      {locationData.unverified ? (
-        <Tag color={theme.tag.unverified}>{t('Unverified')}</Tag>
-      ) : (
-        <Tag color={theme.tag.verified}>{t('Verified')}</Tag>
-      )}
-    </TagList>
-  )
 
   return (
     <div className={className}>
@@ -110,7 +93,7 @@ const EntryOverview = ({ locationData, className }) => {
           />
         )}
         <TextContent>
-          {tagList}
+          {showTags && <EntryTags locationData={locationData} />}
           <TypesHeader typeIds={locationData.type_ids} />
           <Description>
             <p>{locationData.description}</p>
