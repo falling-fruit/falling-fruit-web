@@ -9,15 +9,16 @@ import Review, { StyledImagePreview } from './Review'
 
 const StyledDialog = styled(Dialog)`
   display: flex;
-  max-width: fit-content;
   width: 80%;
+  max-width: fit-content;
 `
 const StyledReviewImage = styled.img`
-  width: calc(35vw - 32px);
-  height: 100%;
+  background-color: black;
   object-fit: contain;
   object-position: center;
-  background-color: black;
+  width: calc(35vw - 32px);
+  min-width: 300px;
+  height: 500px;
 `
 const ReviewContainer = styled.div`
   position: relative;
@@ -25,13 +26,12 @@ const ReviewContainer = styled.div`
   flex-direction: column;
   margin-left: 24px;
   padding-top: 50px;
+  max-width: 500px;
   min-width: 300px;
-  max-width: 300px;
 `
 const ThumbnailImages = styled.div`
   display: flex;
   flex-direction: row;
-  max-height: min-content;
 `
 
 const SelectedImagePreview = styled(ImagePreview)`
@@ -61,51 +61,40 @@ const ImageContainer = styled.div`
   position: relative;
 `
 
-const NavButton = styled.button`
-  background: rgba(0, 0, 0, 0.65);
+const NavButton = styled(ResetButton)`
+  color: white;
   width: 50px;
   height: 50px;
   border-radius: 14px;
   margin-right: 10px;
+  background: rgba(0, 0, 0, 0.65);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border: none;
-  cursor: pointer;
-  color: white;
 `
 
 const Lightbox = ({
   onDismiss,
   review,
-  currImgIndex,
-  subImgIndex,
-  setCurrImgIndex,
-  setSubImgIndex,
+  currReviewIndex,
+  reviewSubImgIndex,
+  setCurrReviewIndex,
+  setReviewSubImgIndex,
   reviewImages,
 }) => {
   const nextImage = () => {
-    subImgIndex + 1 < reviewImages[currImgIndex].length
-      ? setSubImgIndex(subImgIndex + 1)
-      : currImgIndex + 1 < reviewImages.length
-      ? (setCurrImgIndex(currImgIndex + 1), setSubImgIndex(0))
-      : (setCurrImgIndex(0), setSubImgIndex(0))
+    reviewSubImgIndex + 1 < reviewImages[currReviewIndex].length
+      ? setReviewSubImgIndex(reviewSubImgIndex + 1)
+      : currReviewIndex + 1 < reviewImages.length
+      ? (setCurrReviewIndex(currReviewIndex + 1), setReviewSubImgIndex(0))
+      : (setCurrReviewIndex(0), setReviewSubImgIndex(0))
   }
   return (
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
         <StyledReviewImage
-          src={reviewImages[currImgIndex][subImgIndex].medium}
+          src={reviewImages[currReviewIndex][reviewSubImgIndex].medium}
         />
         <NavButtonContainer>
-          <NavButton
-            onClick={() => console.log('left')}
-
-            //     subImgIndex + 1 > reviewImages[currImgIndex].length
-            //       ? currImgIndex + 1 > reviewImages.length
-            //         ? (setCurrImgIndex(0), setSubImgIndex(0))
-            //         : (setCurrImgIndex(currImgIndex + 1), setSubImgIndex(0))
-            //       : setSubImgIndex(subImgIndex + 1)
-            //   }
-          >
+          <NavButton onClick={() => console.log('left')}>
             <LeftArrowAlt size={30} />
           </NavButton>
 
@@ -121,8 +110,9 @@ const Lightbox = ({
         <Review review={review} includePreview={false} />
 
         <ThumbnailImages>
-          {reviewImages[currImgIndex].map((photo) =>
-            photo.thumb === reviewImages[currImgIndex][subImgIndex].thumb ? (
+          {reviewImages[currReviewIndex].map((photo) =>
+            photo.thumb ===
+            reviewImages[currReviewIndex][reviewSubImgIndex].thumb ? (
               <SelectedImagePreview $small key={photo.thumb}>
                 <img src={photo.thumb} alt={review.title} />
               </SelectedImagePreview>

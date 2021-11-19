@@ -45,8 +45,8 @@ const Entry = ({ isInDrawer }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [showLighbox, setShowLightbox] = useState(false)
   const [reviewImages, setReviewImages] = useState('')
-  const [currImgIndex, setCurrImgIndex] = useState(0)
-  const [subImgIndex, setSubImgIndex] = useState(0)
+  const [currReviewIndex, setCurrReviewIndex] = useState(0)
+  const [reviewSubImgIndex, setReviewSubImgIndex] = useState(0)
 
   const openLightbox = (photos) => {
     setReviewImages(photos)
@@ -88,7 +88,6 @@ const Entry = ({ isInDrawer }) => {
   if (!locationData || !reviews) {
     content = <LoadingIndicator cover vertical />
   } else {
-    // console.log(reviews)
     const allReviewPhotos = reviews
       .filter((review) => review.photos.length)
       .map((review) => review.photos)
@@ -103,12 +102,12 @@ const Entry = ({ isInDrawer }) => {
         {showLighbox && (
           <Lightbox
             onDismiss={closeLightbox}
-            review={reviews[currImgIndex]}
+            review={reviews[reviewSubImgIndex]}
             reviewImages={reviewImages}
-            currImgIndex={currImgIndex}
-            subImgIndex={subImgIndex}
-            setCurrImgIndex={setCurrImgIndex}
-            setSubImgIndex={setSubImgIndex}
+            currReviewIndex={currReviewIndex}
+            reviewSubImgIndex={reviewSubImgIndex}
+            setCurrReviewIndex={setCurrReviewIndex}
+            setReviewSubImgIndex={setReviewSubImgIndex}
           />
         )}
         {isInDrawer ? (
