@@ -1,130 +1,172 @@
-const listToTree = (types) => {
-  const typeMap = {}
-  typeMap.null = { name: 'All', id: null, children: [] }
+import TreeNodeText from '../components/filter/TreeNodeText'
 
-  for (const type of types) {
-    // Make a copy of the type, to avoid modifying arguments
-    // In this case, our preloaded type database in Object.values(typesById)
-    typeMap[type.id] = { ...type }
-    typeMap[type.id].children = []
-  }
+const PENDING_ID = 'PENDING'
 
-  for (const type of types) {
-    // TODO: Some parents types aren't included in API response, don't know why
-    const parent_id = type.parent_id in typeMap ? type.parent_id : null
-    typeMap[parent_id].children.push(typeMap[type.id])
-  }
-
-  return typeMap.null // sentinel root
-}
-
-const moveRootToOther = (root) => {
-  if (root.children.length === 0) {
-    return
-  }
-
-  for (const child of root.children) {
-    moveRootToOther(child)
-  }
-
-  if (root.id === null) {
-    // Skip sentinel root
-    return
-  }
-
-  if (root.count > 0) {
-    const other = {
-      id: root.id,
-      name: 'Uncategorized/Other',
-      count: root.count,
-      children: [],
-      parent_id: root.id,
+const getChildrenById = (types) => {
+  const children = {}
+  types.forEach(({ id, parent_id }) => {
+    if (id !== parent_id) {
+      if (!children[parent_id]) {
+        children[parent_id] = [id]
+      } else {
+        children[parent_id].push(id)
+      }
     }
+  })
+  return children
+}
 
-    root.children.push(other)
+const getScientificNameById = (types) => {
+  const scientificNameById = {}
+  types.forEach((t) => {
+    if (t.scientific_names) {
+      scientificNameById[t.id] = t.scientific_names[0]
+    }
+  })
+  return scientificNameById
+}
+
+const getTotalCount = (counts, id, childrenById, countsById) => {
+  if (id in counts) {
+    return counts[id]
+  }
+  counts[id] = countsById[id] ?? 0
+  childrenById[id]?.forEach((childId) => {
+    counts[id] += getTotalCount(counts, childId, childrenById, countsById)
+  })
+  return counts[id]
+}
+
+const getTypesWithPendingCategory = (types) =>
+  types.map((t) => ({
+    ...t,
+    parent_id: t.pending ? PENDING_ID : t.parent_id,
+  }))
+
+const getTypesWithRootLabels = (types, childrenById) =>
+  types.map((t) => {
+    const { id, parent_id } = t
+    const isParent = childrenById[id]
+    return {
+      ...t,
+      value: isParent ? `root-${id}` : `${id}`,
+      pId: parent_id ? `root-${parent_id}` : 'null',
+    }
+  })
+
+const addOtherCategories = (types, childrenById) => {
+  const typesWithOtherCategory = [...types]
+  types.forEach((t) => {
+    if (childrenById[t.id] && t.id !== PENDING_ID) {
+      typesWithOtherCategory.push({
+        ...t,
+        value: `${t.id}`,
+        pId: `root-${t.id}`,
+      })
+    }
+  })
+  return typesWithOtherCategory
+}
+
+const sortTypes = (types) =>
+  types
+    .filter((t) => t.scientific_names?.length > 0)
+    .sort(
+      (a, b) =>
+        a.scientific_names[0].localeCompare(b.scientific_names[0]) ||
+        a.taxonomic_rank - b.taxonomic_rank,
+    )
+    .concat(
+      types.filter(
+        (t) => !t.scientific_names || t.scientific_names.length === 0,
+      ),
+    )
+
+const getNames = (type) => {
+  const commonName = type.name ?? type.common_names.en[0]
+  const scientificName = type.scientific_names?.[0]
+  return {
+    commonName,
+    scientificName,
   }
 }
 
-const replaceRootCounts = (root, countsById) => {
-  if (root.children.length === 0) {
-    root.count = countsById[root.id] ?? 0
-    return
-  }
+// Builds and sorts the type tree on page load
+const buildTypeSchema = (types, childrenById) => {
+  const typesWithRootLabels = getTypesWithRootLabels(types, childrenById)
 
-  let childCounts = 0
+  const typesWithOtherCategory = addOtherCategories(
+    typesWithRootLabels,
+    childrenById,
+  )
 
-  for (const child of root.children) {
-    replaceRootCounts(child, countsById)
-    childCounts += child.count
-  }
+  const sortedTypes = sortTypes(typesWithOtherCategory)
 
-  root.count = childCounts
+  return sortedTypes.map((type) => {
+    const { commonName, scientificName } = getNames(type)
+
+    return {
+      ...type,
+      pId: type.pId,
+      value: type.value,
+      searchValue: scientificName
+        ? `${commonName} ${scientificName}`
+        : `${commonName}`,
+    }
+  })
 }
 
-const addTreeSelectFields = (root, checkedTypes, showScientificNames) => {
-  // Add necessary fields for react-dropdown-tree-select
-  const commonName = root.name ?? root.common_names.en[0]
-  const scientificName = root.scientific_names?.[0]
-  const name =
-    scientificName && showScientificNames
-      ? `${commonName} [${scientificName}]`
-      : commonName
-
-  root.label = `${name} (${root.count})`
-  // This value isn't important, as long as it's unique, because we will be using node.id
-  root.value = `${root.name}-${root.id}`
-  root.expanded = true
-  root.checked = checkedTypes.length === 0 || checkedTypes.includes(root.id)
-  // Copy children for onChange to access, because TreeSelect resets children to undefined
-  root.childrenCopy = root.children
-  // Rename to typeId to prevent weird issues
-  root.typeId = root.id
-  root.id = undefined
-
-  for (const child of root.children) {
-    addTreeSelectFields(child, checkedTypes, showScientificNames)
-  }
-}
-
-const sortChildrenByCount = (node) => {
-  // Sort children by descending count, so that available entries appear first
-  node.children.sort((typeA, typeB) => typeB.count - typeA.count)
-}
-
-const buildTypeSchema = (
-  types,
-  countsById,
-  checkedTypes,
+// Updates cumulative counts and node titles in the type tree
+const updateTreeCounts = (
+  treeData,
   showScientificName,
+  countsById,
+  showOnlyOnMap,
+  childrenById,
+  scientificNameById,
 ) => {
-  const tree = listToTree(types)
+  const totalCount = {}
+  treeData.forEach((t) => {
+    getTotalCount(totalCount, t.id, childrenById, countsById)
+  })
 
-  moveRootToOther(tree)
-  replaceRootCounts(tree, countsById)
-  addTreeSelectFields(tree, checkedTypes, showScientificName)
-  sortChildrenByCount(tree)
+  const typeSchema = treeData.map((type) => {
+    const { commonName, scientificName } = getNames(type)
+    const parentScientificName = scientificNameById[type.parent_id]
+    const cultivarIndex =
+      scientificName?.startsWith(`${parentScientificName} '`) &&
+      scientificName?.indexOf("'")
+    const count = type.value.includes('root')
+      ? totalCount[type.id]
+      : countsById[type.id] ?? 0
 
-  return tree
+    return {
+      ...type,
+      title: (
+        <TreeNodeText
+          commonName={commonName}
+          shouldIncludeScientificName={scientificName && showScientificName}
+          shouldIncludeCommonName={!cultivarIndex}
+          scientificName={
+            cultivarIndex === -1
+              ? scientificName
+              : scientificName?.substring(cultivarIndex)
+          }
+          count={count}
+        />
+      ),
+      count,
+    }
+  })
+
+  return showOnlyOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
 }
 
-const addTypes = (types, node) => {
-  if (node.childrenCopy.length === 0) {
-    types.push(node.typeId)
-  }
-
-  for (const child of node.childrenCopy) {
-    addTypes(types, child)
-  }
+export {
+  buildTypeSchema,
+  getChildrenById,
+  getScientificNameById,
+  getTypesWithPendingCategory,
+  PENDING_ID,
+  updateTreeCounts,
 }
-
-const getSelectedTypes = (selectedNodes) => {
-  const types = []
-
-  for (const node of selectedNodes) {
-    addTypes(types, node)
-  }
-
-  return types
-}
-
-export { buildTypeSchema, getSelectedTypes }
