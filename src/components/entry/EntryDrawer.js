@@ -14,6 +14,8 @@ const ENTRY_IMAGE_HEIGHT = 250
 
 const INITIAL_IMAGE_HEIGHT_SCALAR = 0.6
 
+const FOOTER_HEIGHT = 70
+
 const Container = styled.div`
   position: absolute;
   height: 100%;
@@ -30,6 +32,7 @@ const Container = styled.div`
     background: white;
     z-index: -1;
     padding-top: 10px;
+    ${({ showEntryImages }) => !showEntryImages && `border-radius: 13px;`}
   }
 
   .entry-main-card {
@@ -42,12 +45,13 @@ const EntryImages = styled.div`
   height: ${ENTRY_IMAGE_HEIGHT}px;
   position: absolute;
   top: ${({ heightScalar }) => -heightScalar * ENTRY_IMAGE_HEIGHT}px;
+  transition: top 0.1s ease 0s;
   z-index: -10;
 `
 
 const EntryDrawer = () => {
   const { height: windowHeight } = useWindowSize()
-  const paneHeight = windowHeight - 70
+  const paneHeight = windowHeight - FOOTER_HEIGHT
   const initialCardHeight = paneHeight * 0.3
   const finalCardHeight = paneHeight - ENTRY_IMAGE_HEIGHT
   const maxDelta = finalCardHeight - initialCardHeight
@@ -59,6 +63,9 @@ const EntryDrawer = () => {
   const [entryImageHeightMultiplier, setEntryImageHeightMultiplier] = useState(
     INITIAL_IMAGE_HEIGHT_SCALAR,
   )
+  const [drawer, setDrawer] = useState()
+  const [isFullScreen, setIsFullScreen] = useState(false)
+  const [showEntryImages, setShowEntryImages] = useState(false)
   const cardRef = useRef()
   const { id } = useParams()
 
@@ -73,6 +80,7 @@ const EntryDrawer = () => {
 
       setLocationData(locationData)
       setReviews(reviews)
+      setShowEntryImages(reviews && reviews.length > 0)
 
       setIsLoading(false)
     }
@@ -88,6 +96,13 @@ const EntryDrawer = () => {
   //     console.log('HERE', transformYMatch)
   //   }
   // }, [cardRef?.current?.parentNode?.style?.transform])
+
+  useEffect(() => {
+    if (isFullScreen && showEntryImages) {
+      drawer.disableDrag()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFullScreen])
 
   const addSubmittedReview = (submittedReview) => {
     setReviews((reviews) => [...reviews, submittedReview])
@@ -111,27 +126,51 @@ const EntryDrawer = () => {
     setEntryImageHeightMultiplier(newHeightMultiplier)
   }
 
+  const onTransitionEnd = () => {
+    if (cardRef.current) {
+      const transformStyles = cardRef.current.parentNode.style.transform
+      const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
+      if (parseFloat(transformYMatch) === windowHeight - initialCardHeight) {
+        setEntryImageHeightMultiplier(INITIAL_IMAGE_HEIGHT_SCALAR)
+        setIsFullScreen(false)
+      } else if (
+        parseFloat(transformYMatch) ===
+        ENTRY_IMAGE_HEIGHT + FOOTER_HEIGHT
+      ) {
+        setEntryImageHeightMultiplier(1)
+        setIsFullScreen(true)
+      }
+    }
+  }
+
   const config = {
     initialBreak: 'middle',
     breaks: {
-      top: { enabled: true, height: finalCardHeight, bounce: true },
+      top: { enabled: true, height: finalCardHeight },
       middle: { enabled: true, height: initialCardHeight },
       bottom: { enabled: false },
     },
     onDrag,
+    onTransitionEnd,
     buttonClose: false,
     bottomClose: true,
     onDidDismiss: () => history.push('/map'),
     cssClass: `entry-main-card`,
     parentElement: '.entry-drawers',
+    touchMoveStopPropagation: true,
   }
 
   return (
-    <Container className="entry-drawers">
-      <Card ref={cardRef} className="entry-main-card" config={config}>
-        {reviews && reviews.length > 0 && (
+    <Container className="entry-drawers" showEntryImages={showEntryImages}>
+      <Card
+        ref={cardRef}
+        setDrawer={setDrawer}
+        className="entry-main-card"
+        config={config}
+      >
+        {showEntryImages && (
           <EntryImages heightScalar={entryImageHeightMultiplier}>
-            <EntryImagesCard image={reviews?.[0]?.photos?.[0].medium} />
+            <EntryImagesCard image={reviews[0]?.photos[0].medium} />
           </EntryImages>
         )}
         <Entry
