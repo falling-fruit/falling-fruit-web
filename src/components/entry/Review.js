@@ -35,7 +35,7 @@ const ReviewDescription = styled.section`
     font-size: 0.875rem;
   }
 `
-const StyledImagePreview = styled(ImagePreview)`
+export const StyledImagePreview = styled(ImagePreview)`
   margin-right: 7px;
 `
 
@@ -57,7 +57,7 @@ const RATINGS = [
   },
 ]
 
-const Review = ({ review }) => (
+const Review = ({ review, includePreview = true }) => (
   <ReviewContainer>
     <RatingTable>
       <tbody>
@@ -82,11 +82,12 @@ const Review = ({ review }) => (
         {review.author ?? 'Anonymous'}
       </cite>
     </ReviewDescription>
-    {review.photos.map((photo) => (
-      <StyledImagePreview $small key={photo.thumb}>
-        <img src={photo.thumb} alt={review.title} />
-      </StyledImagePreview>
-    ))}
+    {includePreview &&
+      review.photos.map((photo) => (
+        <StyledImagePreview $small key={photo.thumb}>
+          <img src={photo.thumb} alt={review.title} />
+        </StyledImagePreview>
+      ))}
   </ReviewContainer>
 )
 
