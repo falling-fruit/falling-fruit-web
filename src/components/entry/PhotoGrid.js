@@ -128,31 +128,33 @@ const ExtraImagesWrapper = styled(ResetButton)`
 
 const PhotoData = ({ photos, altText, openLightbox }) => {
   const { t } = useTranslation()
+  const reviewPhotos = photos.flat()
   return (
-    photos.length > 0 && (
+    reviewPhotos.length > 0 && (
       // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
       // TODO: use alt based off of photo description or filename
 
       // TODO: connect to lightbox once implemented
       // TODO: this should be in the photogrid itself, shouldn't have to be handled here
+
       <StyledPhotoGrid>
         <img
           className="main-image"
-          src={photos[0].medium}
+          src={reviewPhotos[0].medium}
           alt={altText}
           onClick={() => openLightbox(photos)}
         />
-        {photos.length > 1 && (
-          <ExtraImagesWrapper disabled={photos.length < 3}>
-            {photos.length > 2 && (
+        {reviewPhotos.length > 1 && (
+          <ExtraImagesWrapper disabled={reviewPhotos.length < 3}>
+            {reviewPhotos.length > 2 && (
               <div className="other-photos-mask">
-                <span>{photos.length - 2}</span>
+                <span>{reviewPhotos.length - 2}</span>
                 {t('Photos')}
               </div>
             )}
             <img
               className="extra-images"
-              src={photos[1].medium}
+              src={reviewPhotos[1].medium}
               alt={altText}
             />
           </ExtraImagesWrapper>
