@@ -11,6 +11,8 @@ const StyledDialog = styled(Dialog)`
   width: 80%;
   max-width: fit-content;
 `
+//  TODO: Add media queries for mobile so that the layout of
+//  has image on top and reviews on bottom?
 const StyledReviewImage = styled.img`
   background-color: black;
   object-fit: contain;
@@ -67,7 +69,7 @@ const NavButton = styled(ResetButton)`
   border-radius: 14px;
   margin-right: 10px;
   background: rgba(0, 0, 0, 0.65);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
 `
 
 const Lightbox = ({
@@ -79,12 +81,31 @@ const Lightbox = ({
   setReviewSubImgIndex,
   reviewImages,
 }) => {
-  const nextImage = () => {
+  const incrementReviewImage = () => {
     reviewSubImgIndex + 1 < reviewImages[currReviewIndex].length
       ? setReviewSubImgIndex(reviewSubImgIndex + 1)
       : currReviewIndex + 1 < reviewImages.length
       ? (setCurrReviewIndex(currReviewIndex + 1), setReviewSubImgIndex(0))
       : (setCurrReviewIndex(0), setReviewSubImgIndex(0))
+  }
+  // TODO: Fix errors within this function (to test, spam back button)
+  //   Will convert to ternary when working
+  const decrementReviewImage = () => {
+    if (reviewSubImgIndex - 1 < 0) {
+      if (currReviewIndex - 1 < 0) {
+        setCurrReviewIndex(reviewImages.length - 1)
+        setReviewSubImgIndex(reviewImages[currReviewIndex].length)
+      } else {
+        console.log('before', currReviewIndex)
+        setCurrReviewIndex(currReviewIndex - 1)
+        // For some reason, the curr review index is the same in both cases
+        // This occurs when moving from the first landscape pic back to the foraging pic
+        console.log('after', currReviewIndex)
+        setReviewSubImgIndex(reviewImages[currReviewIndex].length)
+      }
+    } else {
+      setReviewSubImgIndex(reviewSubImgIndex - 1)
+    }
   }
   return (
     <StyledDialog onDismiss={onDismiss}>
@@ -93,11 +114,10 @@ const Lightbox = ({
           src={reviewImages[currReviewIndex][reviewSubImgIndex].medium}
         />
         <NavButtonContainer>
-          <NavButton onClick={() => console.log('left')}>
+          <NavButton onClick={decrementReviewImage}>
             <LeftArrowAlt size={30} />
           </NavButton>
-
-          <NavButton onClick={nextImage}>
+          <NavButton onClick={incrementReviewImage}>
             <RightArrowAlt size={30} />
           </NavButton>
         </NavButtonContainer>
@@ -106,7 +126,7 @@ const Lightbox = ({
         <ExitButton onClick={onDismiss}>
           <X size={30} />
         </ExitButton>
-        <Review review={review} includePreview={false} />
+        <Review review={review[currReviewIndex]} includePreview={false} />
 
         <ThumbnailImages>
           {reviewImages[currReviewIndex].map((photo) =>

@@ -102,7 +102,7 @@ const Entry = ({ isInDrawer }) => {
         {showLighbox && (
           <Lightbox
             onDismiss={closeLightbox}
-            review={reviews[reviewSubImgIndex]}
+            review={reviews}
             reviewImages={reviewImages}
             currReviewIndex={currReviewIndex}
             reviewSubImgIndex={reviewSubImgIndex}

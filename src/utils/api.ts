@@ -125,7 +125,7 @@ export const getReviews = () =>
       created_at: '2014-06-21T19:11:21.382Z',
       updated_at: '2014-06-21T19:11:21.382Z',
       observed_on: '2014-06-19',
-      comment: 'pizza is yummy',
+      comment: 'Here are some pictures I took of the location',
       fruiting: 0,
       quality_rating: 1,
       yield_rating: 2,
@@ -164,9 +164,9 @@ export const getReviews = () =>
       created_at: '2014-06-21T19:11:21.382Z',
       updated_at: '2014-06-21T19:11:21.382Z',
       observed_on: '2014-06-19',
-      comment: 'Hi i am arman',
+      comment: 'Very yummy olives. I put them on my pizza',
       fruiting: 2,
-      quality_rating: 2,
+      quality_rating: 3,
       yield_rating: 3,
       photos: [
         {
