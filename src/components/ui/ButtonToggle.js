@@ -24,7 +24,6 @@ const ButtonContainer = styled.div`
   display: flex;
   flex: 1;
   align-items: stretch;
-  width: 100%;
 `
 
 const ButtonToggle = ({ options, onChange, value }) => (

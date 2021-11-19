@@ -58,7 +58,7 @@ const EntryList = forwardRef(
     { locations, onEntryClick, onEntryMouseEnter, onEntryMouseLeave, ...props },
     ref,
   ) => {
-    const { distanceUnit } = useSelector((state) => state.settings)
+    const distanceUnit = useSelector((state) => state.settings.distanceUnit)
     const Item = ({ index, style }) => {
       const location = locations[index]
 

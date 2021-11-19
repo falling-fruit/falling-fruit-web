@@ -65,7 +65,7 @@ const SettingsPage = ({ desktop }) => {
   const { t, i18n } = useTranslation()
 
   const updateUnitsSetting = (object) => {
-    dispatch(updateSettings({ ['distanceUnit']: object.value }))
+    dispatch(updateSettings({ distanceUnit: object.value }))
   }
 
   return (

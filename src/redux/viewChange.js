@@ -94,8 +94,6 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
     dispatch(stopTrackingLocation())
   }
 
-  // TODO: retrive event from viewChange and change order accordingly?
-
   dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
