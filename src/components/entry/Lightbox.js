@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Dialog } from '@reach/dialog'
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'

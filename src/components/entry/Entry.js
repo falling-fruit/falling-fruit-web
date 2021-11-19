@@ -44,7 +44,7 @@ const Entry = ({ isInDrawer }) => {
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const [showLighbox, setShowLightbox] = useState(false)
-  const [reviewImages, setReviewImages] = useState('')
+  const [reviewImages, setReviewImages] = useState([])
   const [currReviewIndex, setCurrReviewIndex] = useState(0)
   const [reviewSubImgIndex, setReviewSubImgIndex] = useState(0)
 

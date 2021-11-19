@@ -1,6 +1,5 @@
-// TODO: Remove below
+// TODO: Fix lint error properly
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ImageAdd } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
@@ -143,6 +142,7 @@ const PhotoData = ({ photos, altText, openLightbox }) => {
           src={reviewPhotos[0].medium}
           alt={altText}
           onClick={() => openLightbox(photos)}
+          onKeyDown={() => openLightbox(photos)}
         />
         {reviewPhotos.length > 1 && (
           <ExtraImagesWrapper disabled={reviewPhotos.length < 3}>
