@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import useRoutedTabs from '../../utils/useRoutedTabs'
 import AboutRouter from '../about/AboutRouter'
 import Entry from '../entry/Entry'
-import EntryDrawer from '../entry/EntryDrawer'
+import EntryWrapper from '../entry/EntryWrapper'
 import { LocationForm } from '../form/LocationForm'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { DEFAULT_TAB, getTabs } from './tabs'
@@ -58,7 +58,7 @@ const MobileLayout = () => {
             <Switch>
               <Route path="/map/entry/new" />
               <Route path="/map/entry/:id">
-                <EntryDrawer />
+                <EntryWrapper isInDrawer />
               </Route>
             </Switch>
             {tabPanels}

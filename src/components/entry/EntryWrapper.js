@@ -44,12 +44,17 @@ const EntryImages = styled.div`
   width: 100%;
   height: ${ENTRY_IMAGE_HEIGHT}px;
   position: absolute;
-  top: ${({ heightScalar }) => -heightScalar * ENTRY_IMAGE_HEIGHT}px;
-  transition: top 0.1s ease 0s;
+  /* top: ${({ heightScalar }) => -heightScalar * ENTRY_IMAGE_HEIGHT}px;
+  transition: top 0.15s linear; */
+  top: 0;
+  transform: translateY(
+    ${({ heightScalar }) => -heightScalar * ENTRY_IMAGE_HEIGHT}px
+  );
+  transition: transform 0.15s linear;
   z-index: -10;
 `
 
-const EntryDrawer = () => {
+const EntryWrapper = ({ isInDrawer }) => {
   const { height: windowHeight } = useWindowSize()
   const paneHeight = windowHeight - FOOTER_HEIGHT
   const initialCardHeight = paneHeight * 0.3
@@ -87,15 +92,6 @@ const EntryDrawer = () => {
 
     fetchEntryData()
   }, [id])
-
-  // useEffect(() => {
-  //   console.log('HERE')
-  //   if (cardRef?.current?.parentNode?.style?.transform) {
-  //     const transformStyles = cardRef.current.parentNode.style.transform
-  //     const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
-  //     console.log('HERE', transformYMatch)
-  //   }
-  // }, [cardRef?.current?.parentNode?.style?.transform])
 
   useEffect(() => {
     if (isFullScreen && showEntryImages) {
@@ -160,7 +156,7 @@ const EntryDrawer = () => {
     touchMoveStopPropagation: true,
   }
 
-  return (
+  return isInDrawer ? (
     <Container className="entry-drawers" showEntryImages={showEntryImages}>
       <Card
         ref={cardRef}
@@ -183,7 +179,15 @@ const EntryDrawer = () => {
         />
       </Card>
     </Container>
+  ) : (
+    <Entry
+      locationData={locationData}
+      reviews={reviews}
+      isLoading={isLoading}
+      entryOverview={entryOverview}
+      entryReviews={entryReviews}
+    />
   )
 }
 
-export default EntryDrawer
+export default EntryWrapper
