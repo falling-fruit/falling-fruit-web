@@ -11,6 +11,7 @@ const DEFAULT_SETTINGS = {
   mapType: 'roadmap',
   mapLayers: [],
   overrideDataLanguage: false,
+  mapData: '',
 }
 
 export const settingsSlice = createSlice({
@@ -18,9 +19,12 @@ export const settingsSlice = createSlice({
   initialState: DEFAULT_SETTINGS,
   reducers: {
     updateSettings: (state, action) => ({ ...state, ...action.payload }),
+    updateMapData: (state, action) => {
+      state.mapData += action.payload
+    },
   },
 })
 
-export const { updateSettings } = settingsSlice.actions
+export const { updateSettings, updateMapData } = settingsSlice.actions
 
 export default settingsSlice.reducer

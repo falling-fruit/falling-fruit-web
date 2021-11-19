@@ -57,6 +57,7 @@ const SettingsPage = ({ desktop }) => {
 
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
+  console.log(settings.mapData)
 
   return (
     <Page desktop={desktop}>

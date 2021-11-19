@@ -130,6 +130,7 @@ export const mapSlice = createSlice({
       state.view = {
         center: action.payload,
         zoom: state.view.zoom + 2,
+        // insertBounds
       }
     },
 

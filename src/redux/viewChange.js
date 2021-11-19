@@ -9,6 +9,7 @@ import {
   stopTrackingLocation,
   viewChange,
 } from './mapSlice'
+import { updateMapData } from './settingsSlice'
 
 /**
  * Maximum zoom level at which clusters will be displayed. At zoom levels
@@ -94,9 +95,28 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   ) {
     dispatch(stopTrackingLocation())
   }
+  // other fields are duplicates
+  var data = [
+    newView.zoom * newView.zoom,
+    newView.size.width,
+    newView.size.height,
+    newView.center.lat,
+    newView.center.lng,
+    newView.bounds.nw.lat,
+    newView.bounds.nw.lng,
+    // newView.bounds.ne.lat,
+    newView.bounds.ne.lng,
+    newView.bounds.sw.lat,
+    // newView.bounds.sw.lng,
+    // newView.bounds.se.lat,
+    // newView.bounds.se.lng,
+  ]
+  let append_data = data.join()
+  append_data += '\n'
 
+  dispatch(updateMapData(append_data))
   dispatch(viewChange(newView))
-  dispatch(fetchLocations())
+  dispatch(fetchLocations)
 
   if (state.filter.isOpen) {
     dispatch(fetchFilterCounts())
