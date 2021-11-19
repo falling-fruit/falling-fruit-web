@@ -1,27 +1,30 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Dialog } from '@reach/dialog'
+import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
 import ImagePreview from '../ui/ImagePreview'
+import ResetButton from '../ui/ResetButton'
 import Review, { StyledImagePreview } from './Review'
 
 const StyledDialog = styled(Dialog)`
   display: flex;
-  min-height: max-content;
-  min-width: fit-content;
+  max-width: fit-content;
+  width: 80%;
 `
 const StyledReviewImage = styled.img`
-  /* max-width: 600px;
-  max-height: 500px; */
-  width: 600px;
-  height: 500px;
+  width: calc(35vw - 32px);
+  height: 100%;
   object-fit: contain;
   object-position: center;
   background-color: black;
 `
 const ReviewContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
+  margin-left: 24px;
+  padding-top: 50px;
   min-width: 300px;
   max-width: 300px;
 `
@@ -43,8 +46,15 @@ const SelectedImagePreview = styled(ImagePreview)`
 `
 const NavButtonContainer = styled.div`
   position: absolute;
-  bottom: 0px;
+  bottom: 50px;
   right: 0px;
+`
+
+const ExitButton = styled(ResetButton)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 const ImageContainer = styled.div`
@@ -53,8 +63,13 @@ const ImageContainer = styled.div`
 
 const NavButton = styled.button`
   background: rgba(0, 0, 0, 0.65);
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
   margin-right: 10px;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
   color: white;
 `
 
@@ -91,13 +106,18 @@ const Lightbox = ({
             //       : setSubImgIndex(subImgIndex + 1)
             //   }
           >
-            {'<=='}
+            <LeftArrowAlt size={30} />
           </NavButton>
 
-          <NavButton onClick={nextImage}>{'==>'}</NavButton>
+          <NavButton onClick={nextImage}>
+            <RightArrowAlt size={30} />
+          </NavButton>
         </NavButtonContainer>
       </ImageContainer>
       <ReviewContainer>
+        <ExitButton onClick={onDismiss}>
+          <X size={30} />
+        </ExitButton>
         <Review review={review} includePreview={false} />
 
         <ThumbnailImages>

@@ -126,9 +126,9 @@ export const getReviews = () =>
       updated_at: '2014-06-21T19:11:21.382Z',
       observed_on: '2014-06-19',
       comment: 'pizza is yummy',
-      fruiting: 2,
-      quality_rating: 2,
-      yield_rating: 3,
+      fruiting: 0,
+      quality_rating: 1,
+      yield_rating: 2,
       photos: [
         {
           thumb:
