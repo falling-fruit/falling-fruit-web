@@ -1,8 +1,9 @@
 import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { enableStreetView } from '../../redux/mapSlice'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
 import Location from './Location'
@@ -17,6 +18,8 @@ import Location from './Location'
  * @param {function} onViewChange - The function called when the view state is changed
  * @param {boolean} showLabels - Will display labels under locations if true
  */
+
+const placeholderPlace = { lat: 40.729884, lng: -73.990988 }
 const Map = ({
   bootstrapURLKeys,
   view,
@@ -35,9 +38,10 @@ const Map = ({
 }) => {
   const mapRef = useRef(null)
   const mapsRef = useRef(null)
-  const widget = useRef(null)
-  const astorPlace = { lat: 40.729884, lng: -73.990988 }
+  const locationMarkerRef = useRef(null)
+  const dispatch = useDispatch()
   const location = useSelector((state) => state.map.location)
+  const streetView = useSelector((state) => state.map.streetView)
 
   const setHeading = async (panoClient, markerLocation, panorama) => {
     const pano = await panoClient.getPanorama({
@@ -61,33 +65,57 @@ const Map = ({
 
   useEffect(() => {
     if (mapRef.current) {
+      const panorama = mapRef.current.getStreetView()
+      console.log(panorama.visible)
+      console.log(streetView.streetView)
+      if (panorama.visible !== streetView.streetView) {
+        console.log(panorama.visible)
+        dispatch(
+          enableStreetView({
+            streetView: false,
+          }),
+        )
+
+        if (locationMarkerRef.current) {
+          console.log('test')
+          locationMarkerRef.current.setMap(null)
+          console.log(panorama)
+        }
+      }
+    }
+  })
+
+  useEffect(() => {
+    if (mapRef.current) {
       console.log(showStreetView)
 
       const panorama = mapRef.current.getStreetView()
-
       if (location && mapsRef) {
-        const locationMarker = new mapsRef.current.Marker({
+        locationMarkerRef.current = new mapsRef.current.Marker({
           position: location.location,
           mapRef,
         })
+        locationMarkerRef.current.setMap(panorama)
+
         const panoClient = new mapsRef.current.StreetViewService()
-        const markerLocation = locationMarker.getPosition()
+
+        const markerLocation = locationMarkerRef.current.getPosition()
 
         setHeading(panoClient, markerLocation, panorama)
 
-        locationMarker.setMap(panorama)
         panorama.setPosition(location.location)
       } else {
-        panorama.setPosition(astorPlace)
+        panorama.setPosition(placeholderPlace)
       }
 
       // TODO bottom minimap
       // panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
       //   widget.current,
       // )
+
       panorama.setVisible(showStreetView)
     }
-  })
+  }, [location, showStreetView, dispatch, streetView])
   const apiIsLoaded = (map, maps) => {
     mapRef.current = map
     mapsRef.current = maps
@@ -95,18 +123,6 @@ const Map = ({
 
   return (
     <>
-      <div
-        style={{
-          position: 'absolute',
-          left: 50,
-          bottom: 0,
-          height: 100,
-          width: 100,
-          backgroundColor: 'red',
-        }}
-        ref={widget}
-        id="widget"
-      ></div>
       <GoogleMapReact
         bootstrapURLKeys={bootstrapURLKeys}
         options={() => ({
