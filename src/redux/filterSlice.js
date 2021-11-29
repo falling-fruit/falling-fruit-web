@@ -1,10 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
-import { buildTypeSchema, getSelectedTypes } from '../utils/buildTypeSchema'
+import {
+  buildTypeSchema,
+  getChildrenById,
+  getScientificNameById,
+  getTypesWithPendingCategory,
+  PENDING_ID,
+} from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
-import { fetchLocations, getIsShowingClusters } from './viewChange'
+import { fetchLocations } from './viewChange'
 
 export const fetchFilterCounts = createAsyncThunk(
   'map/fetchFilterCounts',
@@ -28,23 +34,27 @@ export const fetchFilterCounts = createAsyncThunk(
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    treeData: [],
     types: [],
+    treeData: [],
+    childrenById: {},
+    scientificNameById: {},
     muni: true,
-    invasive: false,
     isOpen: false,
+    invasive: false,
     isLoading: false,
+    countsById: {},
+    showOnlyOnMap: false,
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),
+    updateSelection: (state, action) => {
+      state.types = action.payload
+    },
     openFilter: (state) => {
       state.isOpen = true
     },
     closeFilter: (state) => {
       state.isOpen = false
-    },
-    updateSelection: (state, action) => {
-      state.types = getSelectedTypes(action.payload)
     },
   },
   extraReducers: {
@@ -52,24 +62,30 @@ export const filterSlice = createSlice({
       state.isLoading = true
     },
     [fetchFilterCounts.fulfilled]: (state, action) => {
-      const { counts, typesById, showScientificNames } = action.payload
+      const { counts } = action.payload
 
       const countsById = {}
       for (const count of counts) {
         countsById[count.id] = count.count
       }
 
-      state.treeData = buildTypeSchema(
-        Object.values(typesById),
-        countsById,
-        state.types,
-        showScientificNames,
-      )
+      state.countsById = countsById
       state.isLoading = false
     },
-
     [fetchAllTypes.fulfilled]: (state, action) => {
-      state.types = action.payload.map((type) => type.id)
+      const typesWithPendingCategory = getTypesWithPendingCategory([
+        ...action.payload,
+        {
+          id: PENDING_ID,
+          parent_id: null,
+          name: 'Pending Review',
+        },
+      ])
+      const childrenById = getChildrenById(typesWithPendingCategory)
+      state.childrenById = childrenById
+      state.treeData = buildTypeSchema(typesWithPendingCategory, childrenById)
+      state.scientificNameById = getScientificNameById(action.payload)
+      state.types = action.payload.map((t) => `${t.id}`)
     },
   },
 })
@@ -81,18 +97,14 @@ export const {
   updateSelection,
 } = filterSlice.actions
 
-export const openFilterAndFetch = () => (dispatch, getState) => {
-  const state = getState()
-  dispatch(openFilter())
-
-  if (!getIsShowingClusters(state)) {
-    dispatch(fetchFilterCounts())
-  }
-}
-
 export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection(types))
   dispatch(fetchLocations())
+}
+
+export const openFilterAndFetch = () => (dispatch) => {
+  dispatch(openFilter())
+  dispatch(fetchFilterCounts())
 }
 
 export default filterSlice.reducer

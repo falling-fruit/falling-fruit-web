@@ -66,9 +66,7 @@ const SearchBarContainer = styled.div`
 const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
-
   const filterOpen = useSelector((state) => state.filter.isOpen)
-
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
@@ -142,16 +140,18 @@ const Search = (props) => {
           placeholder="Search for a location..."
         />
 
-        <FilterIconButton
-          pressed={filterOpen}
-          onClick={() => {
-            if (filterOpen) {
-              dispatch(closeFilter())
-            } else {
-              dispatch(openFilterAndFetch())
-            }
-          }}
-        />
+        {!isDesktop && (
+          <FilterIconButton
+            pressed={filterOpen}
+            onClick={() => {
+              if (filterOpen) {
+                dispatch(closeFilter())
+              } else {
+                dispatch(openFilterAndFetch())
+              }
+            }}
+          />
+        )}
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
@@ -181,8 +181,7 @@ const Search = (props) => {
           {status !== 'OK' && getCoordinatesResult()}
         </ComboboxList>
       </StyledComboboxPopover>
-
-      <Filter isOpen={filterOpen} />
+      {!isDesktop && <Filter isOpen={filterOpen} />}
     </Combobox>
   )
 }
