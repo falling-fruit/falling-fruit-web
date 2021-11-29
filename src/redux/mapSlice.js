@@ -134,8 +134,10 @@ export const mapSlice = createSlice({
       }
     },
     enableStreetView: (state, action) => {
-      state.streetView = action.payload
-      state.location = action.payload
+      if (action.payload.location) {
+        state.location = action.payload.location
+      }
+      state.streetView = action.payload.streetView
     },
   },
   extraReducers: {

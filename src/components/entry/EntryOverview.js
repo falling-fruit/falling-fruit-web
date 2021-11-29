@@ -1,4 +1,4 @@
-import { Calendar } from '@styled-icons/boxicons-regular'
+import { Calendar, StreetView } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -110,7 +110,7 @@ const EntryOverview = ({ locationData, className }) => {
   const handleStreetView = () => {
     dispatch(
       enableStreetView({
-        streetView: !currentStreetView.streetView,
+        streetView: !currentStreetView,
         location: {
           lat: locationData.lat,
           lng: locationData.lng,
@@ -144,6 +144,10 @@ const EntryOverview = ({ locationData, className }) => {
                   )}`}
               </LocationText>
             </IconBesideText>
+            <IconBesideText bold onClick={handleStreetView}>
+              <StreetView size={20} />
+              <p> Google Street View</p>
+            </IconBesideText>
             {hasSeasonality(locationData) && (
               <IconBesideText>
                 <Calendar color={theme.secondaryText} size={20} />
@@ -173,7 +177,6 @@ const EntryOverview = ({ locationData, className }) => {
               >
                 Report
               </Button>
-              <Button onClick={handleStreetView}>Street View</Button>
             </div>
           </Description>
         </TextContent>

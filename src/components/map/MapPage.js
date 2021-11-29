@@ -102,7 +102,7 @@ const MapPage = ({ isDesktop }) => {
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
         showLabels={settings.showLabels}
-        showStreetView={streetView.streetView}
+        showStreetView={streetView}
       />
     </div>
   )

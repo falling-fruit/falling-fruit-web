@@ -1,7 +1,9 @@
+import { ArrowBack, X } from '@styled-icons/boxicons-regular'
 import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import styled from 'styled-components/macro'
 
 import { enableStreetView } from '../../redux/mapSlice'
 import Cluster from './Cluster'
@@ -18,6 +20,27 @@ import Location from './Location'
  * @param {function} onViewChange - The function called when the view state is changed
  * @param {boolean} showLabels - Will display labels under locations if true
  */
+
+const OpacityButton = styled.button`
+  background: rgba(0, 0, 0, 0.65);
+  padding: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  color: white;
+  position: absolute;
+  z-index: 2;
+  border-radius: 13.5px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  position: relative;
+`
 
 const placeholderPlace = { lat: 40.729884, lng: -73.990988 }
 const Map = ({
@@ -40,70 +63,38 @@ const Map = ({
   const mapsRef = useRef(null)
   const locationMarkerRef = useRef(null)
   const dispatch = useDispatch()
-  const location = useSelector((state) => state.map.location)
-  const streetView = useSelector((state) => state.map.streetView)
+  const mapLocation = useSelector((state) => state.map.location)
+  const mapStreetView = useSelector((state) => state.map.streetView)
 
   const setHeading = async (panoClient, markerLocation, panorama) => {
     const pano = await panoClient.getPanorama({
       location: markerLocation,
       radius: 50,
     })
-    console.log(pano)
-
     const heading = mapsRef.current.geometry.spherical.computeHeading(
       pano.data.location.latLng,
       markerLocation,
     )
-    console.log(heading)
-
     panorama.setPov({
       heading: heading,
       pitch: 0,
     })
-    // console.log('test')
   }
 
   useEffect(() => {
     if (mapRef.current) {
       const panorama = mapRef.current.getStreetView()
-      console.log(panorama.visible)
-      console.log(streetView.streetView)
-      if (panorama.visible !== streetView.streetView) {
-        console.log(panorama.visible)
-        dispatch(
-          enableStreetView({
-            streetView: false,
-          }),
-        )
-
-        if (locationMarkerRef.current) {
-          console.log('test')
-          locationMarkerRef.current.setMap(null)
-          console.log(panorama)
+      if (mapLocation && mapsRef) {
+        if (showStreetView) {
+          locationMarkerRef.current = new mapsRef.current.Marker({
+            position: mapLocation,
+            mapRef,
+          })
+          locationMarkerRef.current.setMap(panorama)
         }
-      }
-    }
-  })
-
-  useEffect(() => {
-    if (mapRef.current) {
-      console.log(showStreetView)
-
-      const panorama = mapRef.current.getStreetView()
-      if (location && mapsRef) {
-        locationMarkerRef.current = new mapsRef.current.Marker({
-          position: location.location,
-          mapRef,
-        })
-        locationMarkerRef.current.setMap(panorama)
-
         const panoClient = new mapsRef.current.StreetViewService()
-
-        const markerLocation = locationMarkerRef.current.getPosition()
-
-        setHeading(panoClient, markerLocation, panorama)
-
-        panorama.setPosition(location.location)
+        setHeading(panoClient, mapLocation, panorama)
+        panorama.setPosition(mapLocation)
       } else {
         panorama.setPosition(placeholderPlace)
       }
@@ -112,17 +103,45 @@ const Map = ({
       // panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
       //   widget.current,
       // )
-
+      if (showStreetView) {
+        panorama.setOptions({
+          disableDefaultUI: true,
+          enableCloseButton: false,
+        })
+      } else {
+        if (locationMarkerRef) {
+          locationMarkerRef.current.setMap(null)
+        }
+      }
       panorama.setVisible(showStreetView)
     }
-  }, [location, showStreetView, dispatch, streetView])
+  }, [mapLocation, showStreetView, dispatch, mapStreetView])
   const apiIsLoaded = (map, maps) => {
     mapRef.current = map
     mapsRef.current = maps
   }
 
+  const closeStreetView = () => {
+    dispatch(
+      enableStreetView({
+        streetView: false,
+      }),
+    )
+  }
+
   return (
     <>
+      {showStreetView && (
+        <div>
+          <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
+            <ArrowBack height="18px" />
+            Back to Map
+          </OpacityButton>
+          <OpacityButton onClick={closeStreetView} style={{ float: 'right' }}>
+            <X height="22.91px" />
+          </OpacityButton>
+        </div>
+      )}
       <GoogleMapReact
         bootstrapURLKeys={bootstrapURLKeys}
         options={() => ({
