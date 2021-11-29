@@ -170,5 +170,5 @@ const EntryOverview = ({ locationData, className }) => {
     </div>
   )
 }
-
+export { IconBesideText }
 export default EntryOverview

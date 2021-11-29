@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom'
 
-import ImportedDatasetsPage from '../about/ImportedDatasetsPage'
+import { AboutDatasetPage } from './AboutDatasetPage'
+import ImportedDatasetsPage from './ImportedDatasetsPage'
 import ProjectPage from './ProjectPage'
 
 const pages = [
@@ -8,10 +9,10 @@ const pages = [
     path: '/about/project',
     component: ProjectPage,
   },
-  /* {
-    path: '/about/dataset/{id}',
-    component = AboutDatasetPage,
-  },*/
+  {
+    path: '/about/dataset/:id',
+    component: AboutDatasetPage,
+  },
   {
     path: '/about/dataset',
     component: ImportedDatasetsPage,
