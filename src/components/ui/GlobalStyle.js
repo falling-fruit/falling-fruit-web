@@ -30,6 +30,7 @@ const theme = {
   // palette
   orange: '#ffa41b',
   transparentOrange: '#ffedd1',
+  transparentBlue: '#d9e6f3',
   blue: '#4183c4',
   green: '#73cd7c',
   red: '#ff8188',

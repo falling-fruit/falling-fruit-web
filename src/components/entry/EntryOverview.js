@@ -70,7 +70,12 @@ const Description = styled.section`
   }
 `
 
-const EntryOverview = ({ locationData, className, showTags }) => {
+const EntryTagsContainer = styled.div`
+  position: ${({ showTagsInOverview }) => !showTagsInOverview && 'absolute'};
+  top: ${({ showTagsInOverview }) => !showTagsInOverview && '-30px'};
+`
+
+const EntryOverview = ({ locationData, className, showTagsInOverview }) => {
   const { getLocationTypes } = useTypesById()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -93,7 +98,9 @@ const EntryOverview = ({ locationData, className, showTags }) => {
           />
         )}
         <TextContent>
-          {showTags && <EntryTags locationData={locationData} />}
+          <EntryTagsContainer showTagsInOverview={showTagsInOverview}>
+            <EntryTags locationData={locationData} />
+          </EntryTagsContainer>
           <TypesHeader typeIds={locationData.type_ids} />
           <Description>
             <p>{locationData.description}</p>

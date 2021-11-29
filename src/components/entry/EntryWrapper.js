@@ -1,9 +1,12 @@
 import { useWindowSize } from '@reach/window-size'
+import { ArrowBack as ArrowBackIcon } from '@styled-icons/boxicons-regular'
+import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
 import { useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getLocationById, getReviews } from '../../utils/api'
+import IconButton from '../ui/IconButton'
 import Card from './Card'
 import Entry from './Entry'
 import EntryImagesCard from './EntryImagesCard'
@@ -56,6 +59,25 @@ const EntryImages = styled.div`
   z-index: -10;
 `
 
+const Buttons = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 12;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+`
+
+const EntryButton = styled(IconButton)`
+  background-color: rgba(0, 0, 0, 0.45);
+  border: none;
+  svg {
+    color: white;
+  }
+`
+
 const EntryWrapper = ({ isInDrawer }) => {
   const { height: windowHeight } = useWindowSize()
   const paneHeight = windowHeight - FOOTER_HEIGHT
@@ -90,7 +112,7 @@ const EntryWrapper = ({ isInDrawer }) => {
       setLocationData(locationData)
       setReviews(reviews)
 
-      const showEntryImages = reviews && reviews.length > 0
+      const showEntryImages = reviews && reviews[0]?.photos.length > 0
       setShowEntryImages(showEntryImages)
       if (!showEntryImages) {
         setFinalCardHeight(paneHeight)
@@ -130,7 +152,7 @@ const EntryWrapper = ({ isInDrawer }) => {
 
   const entryOverview = (
     <EntryOverview
-      showTags={!isInDrawer || !showEntryImages}
+      showTagsInOverview={!isInDrawer || !showEntryImages}
       locationData={locationData}
     />
   )
@@ -187,36 +209,40 @@ const EntryWrapper = ({ isInDrawer }) => {
   }
 
   return isInDrawer ? (
-    <Container
-      className="entry-drawers"
-      showEntryImages={showEntryImages}
-      isFullScreen={isFullScreen}
-    >
-      <Card
-        ref={cardRef}
-        setDrawer={setDrawer}
-        className="entry-main-card"
-        config={config}
+    <>
+      {isFullScreen && (
+        <Buttons>
+          <EntryButton size={48} icon={<ArrowBackIcon />} label="back-button" />
+          <EntryButton size={48} icon={<PencilIcon />} label="edit-button" />
+        </Buttons>
+      )}
+      <Container
+        className="entry-drawers"
+        showEntryImages={showEntryImages}
+        isFullScreen={isFullScreen}
       >
-        {showEntryImages && (
-          <EntryImages heightScalar={entryImageHeightMultiplier}>
-            <EntryImagesCard
-              image={reviews[0]?.photos[0].medium}
-              showTags={isInDrawer && showEntryImages}
-              locationData={locationData}
-            />
-          </EntryImages>
-        )}
-        <Entry
-          isInDrawer
-          locationData={locationData}
-          reviews={reviews}
-          isLoading={isLoading}
-          entryOverview={entryOverview}
-          entryReviews={entryReviews}
-        />
-      </Card>
-    </Container>
+        <Card
+          ref={cardRef}
+          setDrawer={setDrawer}
+          className="entry-main-card"
+          config={config}
+        >
+          {showEntryImages && (
+            <EntryImages heightScalar={entryImageHeightMultiplier}>
+              <EntryImagesCard image={reviews[0]?.photos[0]?.medium} />
+            </EntryImages>
+          )}
+          <Entry
+            isInDrawer
+            locationData={locationData}
+            reviews={reviews}
+            isLoading={isLoading}
+            entryOverview={entryOverview}
+            entryReviews={entryReviews}
+          />
+        </Card>
+      </Container>
+    </>
   ) : (
     <Entry
       locationData={locationData}
