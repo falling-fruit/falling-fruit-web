@@ -239,7 +239,11 @@ const EntryWrapper = ({ isInDrawer }) => {
         >
           {showEntryImages && (
             <EntryImages heightScalar={entryImageHeightMultiplier}>
-              <EntryImagesCard image={reviews[0]?.photos[0]?.medium} />
+              <EntryImagesCard
+                src={reviews[0]?.photos[0]?.medium}
+                alt="entry-image"
+                isFullScreen={isFullScreen}
+              />
             </EntryImages>
           )}
           <Entry
