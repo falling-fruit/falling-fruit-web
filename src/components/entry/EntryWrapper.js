@@ -191,6 +191,11 @@ const EntryWrapper = ({ isInDrawer }) => {
     }
   }
 
+  const onBackButtonClick = () => {
+    setIsFullScreen(false)
+    drawer.moveToBreak('middle')
+  }
+
   const config = {
     initialBreak: 'middle',
     breaks: {
@@ -212,7 +217,12 @@ const EntryWrapper = ({ isInDrawer }) => {
     <>
       {isFullScreen && (
         <Buttons>
-          <EntryButton size={48} icon={<ArrowBackIcon />} label="back-button" />
+          <EntryButton
+            onClick={onBackButtonClick}
+            size={48}
+            icon={<ArrowBackIcon />}
+            label="back-button"
+          />
           <EntryButton size={48} icon={<PencilIcon />} label="edit-button" />
         </Buttons>
       )}
