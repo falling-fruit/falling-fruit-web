@@ -10,8 +10,8 @@ class APIError extends Error {
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  params: {
-    key: process.env.REACT_APP_API_KEY,
+  headers: {
+    'x-api-key': process.env.REACT_APP_API_KEY,
   },
 })
 
