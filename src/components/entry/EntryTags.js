@@ -14,7 +14,12 @@ const EntryTags = ({ locationData }) => {
         </Tag>
       )}
       {locationData.unverified ? (
-        <Tag color={theme.tag.unverified}>{t('Unverified')}</Tag>
+        <Tag
+          color={theme.tag.unverified}
+          backgroundColor={theme.transparentPink}
+        >
+          {t('Unverified')}
+        </Tag>
       ) : (
         <Tag color={theme.tag.verified} backgroundColor={theme.transparentBlue}>
           {t('Verified')}
