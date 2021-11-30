@@ -128,7 +128,11 @@ export const addReport = (data: paths['/reports']['post']['requestBody']['conten
 
 export const getImports = () => handleResponse(instance.get(`/imports`))
 
-export const getImportById =
+export const getImportById = (
+  id: paths['/imports/{id}']['get']['parameters']['path']['id'],
+) => handleResponse(instance.get(`/imports/${id}`))
+
+/*export const getImportById =
   //id: paths['/imports/{id}']['get']['parameters']['path']['id'],
   Promise.resolve({
     id: 42,
@@ -142,3 +146,4 @@ export const getImportById =
     muni: true,
     location_count: 1273,
   }) // => handleResponse(instance.get(`/imports/${id}`))
+*/
