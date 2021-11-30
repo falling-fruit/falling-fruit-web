@@ -13,7 +13,6 @@ import { selectParams } from './selectParams'
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-console.log('in mapSlice', window.location.href)
 const DEFAULT_VIEW_STATE = parseUrl()
 
 const TRACKING_LOCATION_ZOOM = 16
@@ -57,6 +56,7 @@ export const mapSlice = createSlice({
     isTrackingLocation: false,
     justStartedTrackingLocation: false,
     locationRequested: false,
+    streetView: false,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
@@ -128,6 +128,10 @@ export const mapSlice = createSlice({
         center: action.payload,
         zoom: state.view.zoom + 2,
       }
+    },
+
+    setStreetView: (state, action) => {
+      state.streetView = action.payload()
     },
   },
   extraReducers: {
