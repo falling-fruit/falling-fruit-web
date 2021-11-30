@@ -220,6 +220,8 @@ const EntryDrawer = ({
             </EntryImages>
           )}
           <Entry
+            showEntryImages={showEntryImages}
+            isFullScreen={isFullScreen}
             isInDrawer
             showTabs={isFullScreen}
             locationData={locationData}

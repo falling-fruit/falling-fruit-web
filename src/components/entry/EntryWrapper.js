@@ -39,12 +39,7 @@ const EntryWrapper = ({ isInDrawer }) => {
     setReviews((reviews) => [...reviews, submittedReview])
   }
 
-  const entryOverview = (
-    <EntryOverview
-      showTagsInOverview={!isInDrawer || !showEntryImages}
-      locationData={locationData}
-    />
-  )
+  const entryOverview = <EntryOverview locationData={locationData} />
   const entryReviews = (
     <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
   )
@@ -60,6 +55,7 @@ const EntryWrapper = ({ isInDrawer }) => {
     />
   ) : (
     <Entry
+      showEntryImages={showEntryImages}
       locationData={locationData}
       reviews={reviews}
       isLoading={isLoading}

@@ -13,7 +13,6 @@ import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import ResetButton from '../ui/ResetButton'
 import { TextContent } from './Entry'
-import EntryTags from './EntryTags'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
@@ -70,12 +69,7 @@ const Description = styled.section`
   }
 `
 
-const EntryTagsContainer = styled.div`
-  position: ${({ showTagsInOverview }) => !showTagsInOverview && 'absolute'};
-  top: ${({ showTagsInOverview }) => !showTagsInOverview && '-30px'};
-`
-
-const EntryOverview = ({ locationData, className, showTagsInOverview }) => {
+const EntryOverview = ({ locationData, className }) => {
   const { getLocationTypes } = useTypesById()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -98,9 +92,6 @@ const EntryOverview = ({ locationData, className, showTagsInOverview }) => {
           />
         )}
         <TextContent>
-          <EntryTagsContainer showTagsInOverview={showTagsInOverview}>
-            <EntryTags locationData={locationData} />
-          </EntryTagsContainer>
           <TypesHeader typeIds={locationData.type_ids} />
           <Description>
             <p>{locationData.description}</p>

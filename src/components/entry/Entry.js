@@ -2,6 +2,7 @@ import styled from 'styled-components/macro'
 
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
+import EntryTags from './EntryTags'
 
 // Wraps the entire page and gives it a top margin if on mobile
 export const Page = styled.div`
@@ -32,6 +33,23 @@ export const TextContent = styled.article`
   }
 `
 
+const EntryTagsContainer = styled.div`
+  @media ${({ theme }) => theme.device.desktop} {
+    padding: 0 12px 0 12px;
+    padding-top: ${({ showEntryImages }) => showEntryImages && `12px`};
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-left: 23px;
+    padding-right: 23px;
+    padding-bottom: ${({ isFullScreen, showEntryImages }) =>
+      isFullScreen && !showEntryImages && `16px`};
+    padding-top: ${({ isFullScreen }) => !isFullScreen && `20px`};
+    position: ${({ showEntryImages }) => showEntryImages && 'absolute'};
+    top: ${({ isFullScreen }) => (isFullScreen ? '-30px' : '-50px')};
+  }
+`
+
 const Entry = ({
   isInDrawer,
   locationData,
@@ -40,6 +58,8 @@ const Entry = ({
   entryOverview,
   entryReviews,
   showTabs,
+  showEntryImages,
+  isFullScreen,
 }) => {
   let content
 
@@ -52,6 +72,12 @@ const Entry = ({
       <>
         {isInDrawer ? (
           <EntryTabs>
+            <EntryTagsContainer
+              isFullScreen={isFullScreen}
+              showEntryImages={showEntryImages}
+            >
+              <EntryTags locationData={locationData} />
+            </EntryTagsContainer>
             {showTabs && (
               <TabList>
                 {/* TODO: Use Routing */}
@@ -74,6 +100,9 @@ const Entry = ({
                 alt="entry"
               />
             )}
+            <EntryTagsContainer showEntryImages={showEntryImages}>
+              <EntryTags locationData={locationData} />
+            </EntryTagsContainer>
             {entryOverview}
             {entryReviews}
           </>
