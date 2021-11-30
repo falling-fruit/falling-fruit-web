@@ -7,10 +7,7 @@ const authToken = 'authToken'
 export const fetchToken = createAsyncThunk(
   'users/fetchToken',
   async ({ email, password, rememberMe }) => {
-    const response = await getUserToken({
-      email: email,
-      password,
-    })
+    const response = await getUserToken(email, password)
     if (rememberMe) {
       localStorage.setItem(authToken, response)
     } else {
