@@ -39,6 +39,7 @@ const Entry = ({
   isLoading,
   entryOverview,
   entryReviews,
+  showTabs,
 }) => {
   let content
 
@@ -51,11 +52,13 @@ const Entry = ({
       <>
         {isInDrawer ? (
           <EntryTabs>
-            <TabList>
-              {/* TODO: Use Routing */}
-              <Tab>Overview</Tab>
-              <Tab>Reviews</Tab>
-            </TabList>
+            {showTabs && (
+              <TabList>
+                {/* TODO: Use Routing */}
+                <Tab>Overview</Tab>
+                <Tab>Reviews</Tab>
+              </TabList>
+            )}
             <TabPanels>
               <TabPanel>{entryOverview}</TabPanel>
               <TabPanel>{entryReviews}</TabPanel>

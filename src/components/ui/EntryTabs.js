@@ -12,10 +12,12 @@ const EntryTabs = styled(PageTabs)`
       font-size: 0.875rem;
       border-top: none;
 
-      border-bottom: 3px solid ${({ theme }) => theme.secondaryBackground};
+      border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
+      border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
       &[data-selected] {
         color: ${({ theme }) => theme.orange};
         border-bottom-color: ${({ theme }) => theme.orange};
+        border-top-color: ${({ theme }) => theme.secondaryBackground};
       }
     }
   }

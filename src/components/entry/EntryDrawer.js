@@ -221,6 +221,7 @@ const EntryDrawer = ({
           )}
           <Entry
             isInDrawer
+            showTabs={isFullScreen}
             locationData={locationData}
             reviews={reviews}
             isLoading={isLoading}
