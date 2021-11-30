@@ -6,9 +6,9 @@ export const parseUrl = () => {
   const url = window.location.href
   const geocoordMatch = url.substring(url.indexOf('@'))
 
-  const getCoords = isValidCoord(geocoordMatch)
+  const getCoords = getValidCoord(geocoordMatch)
 
-  if (getCoords.valid) {
+  if (getCoords) {
     return {
       center: { lat: getCoords.lat, lng: getCoords.lng },
       zoom: getCoords.zoom,
@@ -21,31 +21,29 @@ export const parseUrl = () => {
   }
 }
 
-const isValidCoord = (geocoordMatch) => {
-  const isFloatRegex = /^\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?$/
+const getValidCoord = (geocoordMatch) => {
+  //@lat,long,zoomz
+  const urlFormatMatchRegex = /^@\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,[1-9]\d*z$/
   if (!geocoordMatch) {
-    return false
+    return null
   }
   const urlParamString = geocoordMatch
-  //@lat,long,zoomz
 
+  if (!urlFormatMatchRegex.test(urlParamString)) {
+    return null
+  }
   const parsedUrlValues = urlParamString
     .substring(1, urlParamString.length - 1)
     .split(',')
+
+  const lat = parseFloat(parsedUrlValues[0])
+  const lng = parseFloat(parsedUrlValues[1])
+  const zoom = parseInt(parsedUrlValues[2])
+  if (lat < -90 || lat > 90 || lng < -180 || lng > 180 || zoom > 21) {
+    return null
+  }
+
   return {
-    valid:
-      (urlParamString.match(/\,/g) || []).length === 2 &&
-      urlParamString.charAt(0) === '@' &&
-      urlParamString.charAt(urlParamString.length - 1) === 'z' &&
-      isFloatRegex.test(parsedUrlValues[0]) &&
-      isFloatRegex.test(parsedUrlValues[1]) &&
-      isFloatRegex.test(parsedUrlValues[2]) &&
-      parseFloat(parsedUrlValues[0]) >= -90 &&
-      parseFloat(parsedUrlValues[0]) <= 90 &&
-      parseFloat(parsedUrlValues[1]) >= -180 &&
-      parseFloat(parsedUrlValues[1]) <= 180 &&
-      parseFloat(parsedUrlValues[2]) > 1 &&
-      parseFloat(parsedUrlValues[2]) <= 21,
     lat: parseFloat(parsedUrlValues[0]),
     lng: parseFloat(parsedUrlValues[1]),
     zoom: parseFloat(parsedUrlValues[2]),
