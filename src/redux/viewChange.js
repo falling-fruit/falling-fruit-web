@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
 import { fetchFilterCounts } from './filterSlice'
-import { clearListLocations, fetchListLocations } from './listSlice'
+import { clearListLocations } from './listSlice'
 import {
   fetchMapClusters,
   fetchMapLocations,
@@ -42,11 +42,6 @@ export const fetchLocations = () => (dispatch, getState) => {
       dispatch(clearListLocations())
     } else {
       dispatch(fetchMapLocations())
-
-      const state = getState()
-      if (state.misc.isDesktop && state.list.shouldFetchNewLocations) {
-        dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
-      }
     }
   }
 }
@@ -118,7 +113,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   dispatch(viewChange(newView))
   dispatch(fetchLocations)
 
-  if (state.filter.isOpen) {
+  if (state.filter.isOpen || state.misc.isDesktop) {
     dispatch(fetchFilterCounts())
   }
 }

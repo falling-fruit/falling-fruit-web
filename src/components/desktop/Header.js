@@ -189,11 +189,6 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/page2" className="navbar" activeClassName="active">
-              {t('Page 2')}
-            </NavLink>
-          </li>
-          <li>
             <StyledDropdown
               label={t('About')}
               match={useRouteMatch('/about/:slug')}
