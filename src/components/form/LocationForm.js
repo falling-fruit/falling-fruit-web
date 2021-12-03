@@ -184,14 +184,8 @@ export const LocationForm = ({ desktop }) => {
   }
 
   const handleSubmit = async (values) => {
-    const {
-      types,
-      description,
-      season_start,
-      season_end,
-      access,
-      review,
-    } = values
+    const { types, description, season_start, season_end, access, review } =
+      values
 
     const locationValues = {
       type_ids: types.map(({ value }) => value),
@@ -211,6 +205,9 @@ export const LocationForm = ({ desktop }) => {
       toast.success('Location submitted successfully!')
     } catch {
       toast.error('Location submission failed.')
+      history.push({
+        pathname: '/map',
+      })
     }
 
     if (isValidReview(review)) {

@@ -2,12 +2,11 @@ import { ToastContainer } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 const Toast = styled(ToastContainer).attrs({
-  // custom props
   toastClassName: 'toast',
 })`
   .Toastify {
     &__toast {
-      size: 16px;
+      font-size: 16px;
       font-weight: bold;
     }
   }
