@@ -36,6 +36,7 @@ export const withField = (WrappedComponent, type, bypassFormik = false) => (
     ? {
         value: meta.value,
         onChange: helpers.setValue,
+        onBlur: helpers.setTouched,
       }
     : field
 
