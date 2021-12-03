@@ -9,6 +9,7 @@ import styled from 'styled-components/macro'
 import { enableStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { hasSeasonality } from '../../utils/locationInfo'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
@@ -77,6 +78,7 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
+  const isDesktop = useIsDesktop()
   const { getLocationTypes } = useTypesById()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
@@ -108,14 +110,23 @@ const EntryOverview = ({ locationData, className }) => {
   )
 
   const handleStreetView = () => {
-    dispatch(
-      enableStreetView({
-        streetView: !currentStreetView,
-        location: {
-          lat: locationData.lat,
-          lng: locationData.lng,
-        },
-      }),
+    if (!isDesktop) {
+      history.push(`/map/entry/${locationData.id}`)
+    }
+
+    // TODO: change setTimeout to make it wait for map component to mount
+    setTimeout(
+      () =>
+        dispatch(
+          enableStreetView({
+            streetView: !currentStreetView,
+            location: {
+              lat: locationData.lat,
+              lng: locationData.lng,
+            },
+          }),
+        ),
+      200,
     )
   }
 

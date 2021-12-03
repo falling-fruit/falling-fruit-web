@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { enableStreetView } from '../../redux/mapSlice'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
 import Location from './Location'
@@ -103,16 +104,18 @@ const Map = ({
       // panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
       //   widget.current,
       // )
+
       if (showStreetView) {
         panorama.setOptions({
           disableDefaultUI: true,
           enableCloseButton: false,
         })
       } else {
-        if (locationMarkerRef) {
+        if (locationMarkerRef.current) {
           locationMarkerRef.current.setMap(null)
         }
       }
+
       panorama.setVisible(showStreetView)
     }
   }, [mapLocation, showStreetView, dispatch, mapStreetView])
@@ -128,10 +131,11 @@ const Map = ({
       }),
     )
   }
+  const isDesktop = useIsDesktop()
 
   return (
     <>
-      {showStreetView && (
+      {isDesktop && showStreetView && (
         <div>
           <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
             <ArrowBack height="18px" />
@@ -142,6 +146,13 @@ const Map = ({
           </OpacityButton>
         </div>
       )}
+
+      {!isDesktop && showStreetView && (
+        <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
+          <ArrowBack height="18px" />
+        </OpacityButton>
+      )}
+
       <GoogleMapReact
         bootstrapURLKeys={bootstrapURLKeys}
         options={() => ({

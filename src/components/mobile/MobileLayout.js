@@ -1,7 +1,10 @@
+import { useEffect } from 'react'
 import Helmet from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { Route, Switch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Route, Switch, useLocation } from 'react-router-dom'
 
+import { enableStreetView } from '../../redux/mapSlice'
 import useRoutedTabs from '../../utils/useRoutedTabs'
 import AboutRouter from '../about/AboutRouter'
 import Drawer from '../entry/Drawer'
@@ -14,7 +17,9 @@ import TopBarSwitch from './TopBarSwitch'
 const MobileLayout = () => {
   useTranslation()
   const tabs = getTabs()
-
+  const dispatch = useDispatch()
+  const streetView = useSelector((state) => state.map.streetView)
+  const location = useLocation()
   const [tabIndex, handleTabChange] = useRoutedTabs(
     tabs.map(({ path }) => path),
     DEFAULT_TAB,
@@ -35,6 +40,15 @@ const MobileLayout = () => {
       {label}
     </Tab>
   ))
+
+  useEffect(() => {
+    if (
+      location.pathname.includes('list') ||
+      location.pathname.includes('setting')
+    ) {
+      return dispatch(enableStreetView({ streetView: false }))
+    }
+  }, [dispatch, location])
 
   return (
     <PageTabs index={tabIndex} onChange={handleTabChange}>
@@ -58,9 +72,11 @@ const MobileLayout = () => {
             <Switch>
               <Route path="/map/entry/new" />
               <Route path="/map/entry/:id">
-                <Drawer>
-                  <Entry isInDrawer />
-                </Drawer>
+                {!streetView && (
+                  <Drawer>
+                    <Entry isInDrawer />
+                  </Drawer>
+                )}
               </Route>
             </Switch>
             {tabPanels}
