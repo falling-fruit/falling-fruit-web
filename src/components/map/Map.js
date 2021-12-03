@@ -66,20 +66,30 @@ const Map = ({
   const dispatch = useDispatch()
   const mapLocation = useSelector((state) => state.map.location)
   const mapStreetView = useSelector((state) => state.map.streetView)
+  const errorRef = useRef(false)
 
   const setHeading = async (panoClient, markerLocation, panorama) => {
-    const pano = await panoClient.getPanorama({
-      location: markerLocation,
-      radius: 50,
-    })
-    const heading = mapsRef.current.geometry.spherical.computeHeading(
-      pano.data.location.latLng,
-      markerLocation,
-    )
-    panorama.setPov({
-      heading: heading,
-      pitch: 0,
-    })
+    let pano
+    try {
+      pano = await panoClient.getPanorama({
+        location: markerLocation,
+        radius: 50,
+      })
+    } catch (error) {
+      console.log(error)
+      errorRef.current = true
+    }
+    if (!errorRef.current) {
+      const heading = mapsRef.current.geometry.spherical.computeHeading(
+        pano.data.location.latLng,
+        markerLocation,
+      )
+
+      panorama.setPov({
+        heading: heading,
+        pitch: 0,
+      })
+    }
   }
 
   useEffect(() => {
@@ -135,6 +145,19 @@ const Map = ({
 
   return (
     <>
+      {errorRef.current && showStreetView && (
+        <h1
+          style={{
+            color: 'white',
+            zIndex: 20,
+            position: 'absolute',
+            marginTop: '100px',
+          }}
+        >
+          Streetview for location cannot be found
+        </h1>
+      )}
+
       {isDesktop && showStreetView && (
         <div>
           <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
