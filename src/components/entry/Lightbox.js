@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Dialog } from '@reach/dialog'
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
@@ -9,7 +11,8 @@ import Review, { StyledImagePreview } from './Review'
 const StyledDialog = styled(Dialog)`
   display: flex;
   width: 80%;
-  max-width: fit-content;
+  max-width: 900px;
+  border-radius: 12.5px;
 `
 //  TODO: Add media queries for mobile so that the layout of
 //  has image on top and reviews on bottom?
@@ -17,9 +20,10 @@ const StyledReviewImage = styled.img`
   background-color: black;
   object-fit: contain;
   object-position: center;
-  width: calc(35vw - 32px);
+  width: 100%;
   min-width: 300px;
   height: 500px;
+  border-radius: 4px;
 `
 const ReviewContainer = styled.div`
   position: relative;
@@ -60,6 +64,7 @@ const ExitButton = styled(ResetButton)`
 
 const ImageContainer = styled.div`
   position: relative;
+  flex: 1;
 `
 
 const NavButton = styled(ResetButton)`
@@ -76,42 +81,48 @@ const Lightbox = ({
   onDismiss,
   review,
   currReviewIndex,
-  reviewSubImgIndex,
   setCurrReviewIndex,
-  setReviewSubImgIndex,
   reviewImages,
 }) => {
   const incrementReviewImage = () => {
-    reviewSubImgIndex + 1 < reviewImages[currReviewIndex].length
-      ? setReviewSubImgIndex(reviewSubImgIndex + 1)
-      : currReviewIndex + 1 < reviewImages.length
-      ? (setCurrReviewIndex(currReviewIndex + 1), setReviewSubImgIndex(0))
-      : (setCurrReviewIndex(0), setReviewSubImgIndex(0))
+    const i = currReviewIndex[0]
+    const j = currReviewIndex[1]
+    if (j + 1 < reviewImages[i].length) {
+      setCurrReviewIndex([i, j + 1])
+    } else {
+      if (i + 1 < reviewImages.length) {
+        setCurrReviewIndex([i + 1, 0])
+      } else {
+        setCurrReviewIndex([0, 0])
+      }
+    }
   }
   // TODO: Fix errors within this function (to test, spam back button)
-  //   Will convert to ternary when working
+  // TODO: use array to store indexes
   const decrementReviewImage = () => {
-    if (reviewSubImgIndex - 1 < 0) {
-      if (currReviewIndex - 1 < 0) {
-        setCurrReviewIndex(reviewImages.length - 1)
-        setReviewSubImgIndex(reviewImages[currReviewIndex].length)
+    const i = currReviewIndex[0]
+    const j = currReviewIndex[1]
+    if (j - 1 < 0) {
+      if (i - 1 < 0) {
+        setCurrReviewIndex([
+          reviewImages.length - 1,
+          reviewImages[reviewImages.length - 1].length - 1,
+        ])
       } else {
-        console.log('before', currReviewIndex)
-        setCurrReviewIndex(currReviewIndex - 1)
-        // For some reason, the curr review index is the same in both cases
-        // This occurs when moving from the first landscape pic back to the foraging pic
-        console.log('after', currReviewIndex)
-        setReviewSubImgIndex(reviewImages[currReviewIndex].length)
+        console.log('curr at', currReviewIndex[0], currReviewIndex[1])
+        console.log('going to', i - 1, reviewImages[i - 1].length - 1)
+        setCurrReviewIndex(i - 1, reviewImages[i - 1].length - 1)
+        console.log('after change:', currReviewIndex)
       }
     } else {
-      setReviewSubImgIndex(reviewSubImgIndex - 1)
+      setCurrReviewIndex([i, j - 1])
     }
   }
   return (
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
         <StyledReviewImage
-          src={reviewImages[currReviewIndex][reviewSubImgIndex].medium}
+          src={reviewImages[currReviewIndex[0]][currReviewIndex[1]].medium}
         />
         <NavButtonContainer>
           <NavButton onClick={decrementReviewImage}>
@@ -126,18 +137,25 @@ const Lightbox = ({
         <ExitButton onClick={onDismiss}>
           <X size={30} />
         </ExitButton>
-        <Review review={review[currReviewIndex]} includePreview={false} />
+        <Review review={review[currReviewIndex[0]]} includePreview={false} />
 
         <ThumbnailImages>
-          {reviewImages[currReviewIndex].map((photo) =>
+          {reviewImages[currReviewIndex[0]].map((photo, index) =>
             photo.thumb ===
-            reviewImages[currReviewIndex][reviewSubImgIndex].thumb ? (
+            reviewImages[currReviewIndex[0]][currReviewIndex[1]].thumb ? (
               <SelectedImagePreview $small key={photo.thumb}>
                 <img src={photo.thumb} alt={review.title} />
               </SelectedImagePreview>
             ) : (
               <StyledImagePreview $small key={photo.thumb}>
-                <img src={photo.thumb} alt={review.title} />
+                {/* TODO: Fix linting error */}
+                <img
+                  src={photo.thumb}
+                  alt={review.title}
+                  onClick={() =>
+                    setCurrReviewIndex([currReviewIndex[0], index])
+                  }
+                />
               </StyledImagePreview>
             ),
           )}

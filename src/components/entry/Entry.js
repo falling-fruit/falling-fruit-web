@@ -45,8 +45,7 @@ const Entry = ({ isInDrawer }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [showLighbox, setShowLightbox] = useState(false)
   const [reviewImages, setReviewImages] = useState([])
-  const [currReviewIndex, setCurrReviewIndex] = useState(0)
-  const [reviewSubImgIndex, setReviewSubImgIndex] = useState(0)
+  const [currReviewIndex, setCurrReviewIndex] = useState([0, 0])
 
   const openLightbox = (photos) => {
     setReviewImages(photos)
@@ -105,9 +104,7 @@ const Entry = ({ isInDrawer }) => {
             review={reviews}
             reviewImages={reviewImages}
             currReviewIndex={currReviewIndex}
-            reviewSubImgIndex={reviewSubImgIndex}
             setCurrReviewIndex={setCurrReviewIndex}
-            setReviewSubImgIndex={setReviewSubImgIndex}
           />
         )}
         {isInDrawer ? (
