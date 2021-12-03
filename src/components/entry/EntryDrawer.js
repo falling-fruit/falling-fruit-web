@@ -29,6 +29,8 @@ const Container = styled.div`
   .pane {
     background: none;
     ${({ isFullScreen }) => isFullScreen && `padding-top: 0;`}
+    ${({ showEntryImages, isFullScreen }) =>
+      !showEntryImages && isFullScreen && `box-shadow: none;`}
   }
 
   .draggable {
@@ -69,7 +71,6 @@ const Buttons = styled.div`
   padding: 16px;
   display: flex;
   justify-content: space-between;
-  ${({ showEntryImages }) => !showEntryImages && `background-color: white;`}
 `
 
 const EntryButton = styled(IconButton)`
@@ -78,6 +79,18 @@ const EntryButton = styled(IconButton)`
   svg {
     color: white;
   }
+`
+
+const Backdrop = styled.div`
+  width: 100%;
+  height: ${BUTTON_HEIGHT}px;
+  position: absolute;
+  top: 0;
+  background: white;
+  z-index: -10;
+  transform: ${({ isFullScreen }) =>
+    isFullScreen ? `translateY(${-BUTTON_HEIGHT}px);` : `translateY(10px);`};
+  transition: transform 0.15s linear;
 `
 
 const EntryDrawer = ({
@@ -210,7 +223,7 @@ const EntryDrawer = ({
           className="entry-main-card"
           config={config}
         >
-          {showEntryImages && (
+          {showEntryImages ? (
             <EntryImages heightScalar={entryImageHeightMultiplier}>
               <EntryImagesCard
                 src={reviews[0]?.photos[0]?.medium}
@@ -218,6 +231,8 @@ const EntryDrawer = ({
                 isFullScreen={isFullScreen}
               />
             </EntryImages>
+          ) : (
+            <Backdrop isFullScreen={isFullScreen} />
           )}
           <Entry
             showEntryImages={showEntryImages}
