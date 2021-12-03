@@ -93,6 +93,7 @@ export const getTypeById = (
 
 export const getReviews = () =>
   // locationId: paths['/locations/{id}/reviews']['get']['parameters']['path']['id'],
+  // TODO: Remove mock data once approved
   Promise.resolve([
     {
       id: 2745,
