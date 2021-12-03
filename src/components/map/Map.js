@@ -76,7 +76,6 @@ const Map = ({
         radius: 50,
       })
     } catch (error) {
-      console.log(error)
       errorRef.current = true
     }
     if (!errorRef.current) {
