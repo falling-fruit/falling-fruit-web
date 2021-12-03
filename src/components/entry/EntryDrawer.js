@@ -105,6 +105,7 @@ const EntryDrawer = ({
   const cardRef = useRef()
   const [drawer, setDrawer] = useState()
   const [isFullScreen, setIsFullScreen] = useState(false)
+
   const { height: windowHeight } = useWindowSize()
   const paneHeight = windowHeight - FOOTER_HEIGHT
   const initialCardHeight = paneHeight * 0.3
@@ -180,6 +181,7 @@ const EntryDrawer = ({
   const onBackButtonClick = () => {
     setIsFullScreen(false)
     drawer.moveToBreak('middle')
+    setEntryImageHeightMultiplier(INITIAL_IMAGE_HEIGHT_SCALAR)
   }
 
   const config = {
