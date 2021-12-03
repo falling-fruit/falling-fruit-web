@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 
 import ImagePreview from '../ui/ImagePreview'
 import ResetButton from '../ui/ResetButton'
-import Review, { StyledImagePreview } from './Review'
+import Review from './Review'
 
 const StyledDialog = styled(Dialog)`
   display: flex;
@@ -34,21 +34,22 @@ const ReviewContainer = styled.div`
   max-width: 500px;
   min-width: 300px;
 `
-const ThumbnailImages = styled.div`
+const ThumbnailImage = styled(ImagePreview)`
+  /* TODO Figure out how to use theme color in line below */
+  outline: ${(props) => props.selected && `5px solid #ffa41b`};
+  border-radius: 3px;
+  margin-right: 10px;
+  img {
+    border-radius: ${(props) => props.selected && '3px'};
+    border: 0;
+  }
+`
+
+const ThumbnailImageContainer = styled.div`
   display: flex;
   flex-direction: row;
 `
 
-const SelectedImagePreview = styled(ImagePreview)`
-  margin-right: 7px;
-  border: 5px solid ${({ theme }) => theme.orange};
-  border-radius: 3px;
-  img {
-    border-radius: 0;
-    border: 0;
-    padding: 0;
-  }
-`
 const NavButtonContainer = styled.div`
   position: absolute;
   bottom: 50px;
@@ -139,27 +140,24 @@ const Lightbox = ({
         </ExitButton>
         <Review review={review[currReviewIndex[0]]} includePreview={false} />
 
-        <ThumbnailImages>
-          {reviewImages[currReviewIndex[0]].map((photo, index) =>
-            photo.thumb ===
-            reviewImages[currReviewIndex[0]][currReviewIndex[1]].thumb ? (
-              <SelectedImagePreview $small key={photo.thumb}>
-                <img src={photo.thumb} alt={review.title} />
-              </SelectedImagePreview>
-            ) : (
-              <StyledImagePreview $small key={photo.thumb}>
-                {/* TODO: Fix linting error */}
-                <img
-                  src={photo.thumb}
-                  alt={review.title}
-                  onClick={() =>
-                    setCurrReviewIndex([currReviewIndex[0], index])
-                  }
-                />
-              </StyledImagePreview>
-            ),
-          )}
-        </ThumbnailImages>
+        <ThumbnailImageContainer>
+          {reviewImages[currReviewIndex[0]].map((photo, index) => (
+            <ThumbnailImage
+              $small
+              key={photo.thumb}
+              selected={
+                photo.thumb ===
+                reviewImages[currReviewIndex[0]][currReviewIndex[1]].thumb
+              }
+            >
+              <img
+                src={photo.thumb}
+                alt={review.title}
+                onClick={() => setCurrReviewIndex([currReviewIndex[0], index])}
+              />
+            </ThumbnailImage>
+          ))}
+        </ThumbnailImageContainer>
       </ReviewContainer>
     </StyledDialog>
   )
