@@ -24,8 +24,11 @@ export const getAllLocations = createSelector(
   (state) => state.map.locations,
   (state) => state.list.locations,
   (state) => state.misc.isDesktop,
-  (mapLocations, listLocations, isDesktop) =>
-    isDesktop
+  (state) => state.map.clusters,
+  (mapLocations, listLocations, isDesktop, mapClusters) =>
+    mapClusters.length !== 0
+      ? []
+      : isDesktop
       ? unionWith(eqBy(prop('id')), mapLocations, listLocations)
       : mapLocations,
 )
@@ -76,7 +79,6 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
-
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
 
