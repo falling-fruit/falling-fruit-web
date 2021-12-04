@@ -14,8 +14,7 @@ const StyledDialog = styled(Dialog)`
   max-width: 900px;
   border-radius: 12.5px;
 `
-//  TODO: Add media queries for mobile so that the layout of
-//  has image on top and reviews on bottom?
+//  TODO: Fix lightbox behavior for mobile
 const StyledReviewImage = styled.img`
   background-color: black;
   object-fit: contain;
@@ -35,8 +34,7 @@ const ReviewContainer = styled.div`
   min-width: 300px;
 `
 const ThumbnailImage = styled(ImagePreview)`
-  /* TODO Figure out how to use theme color in line below */
-  outline: ${(props) => props.selected && `5px solid #ffa41b`};
+  outline: ${(props) => props.selected && `5px solid ${props.theme.orange}`};
   border-radius: 3px;
   margin-right: 10px;
   img {
@@ -98,8 +96,6 @@ const Lightbox = ({
       }
     }
   }
-  // TODO: Fix errors within this function (to test, spam back button)
-  // TODO: use array to store indexes
   const decrementReviewImage = () => {
     const [reviewIdx, imageIdx] = currReviewIndex
     if (imageIdx <= 0) {
