@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Dialog } from '@reach/dialog'
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import ImagePreview from '../ui/ImagePreview'
@@ -83,21 +83,20 @@ const Lightbox = ({
   setCurrReviewIndex,
   reviewImages,
 }) => {
-  const onKeyDown = useCallback(
-    ({ key }) => {
-      if (key === 'ArrowRight') {
-        incrementReviewImage()
-      } else if (key === 'ArrowLeft') {
-        decrementReviewImage()
-      }
-    },
-    [incrementReviewImage, decrementReviewImage],
-  )
+  // Add useCallback in future
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const onKeyDown = ({ key }) => {
+    if (key === 'ArrowRight') {
+      incrementReviewImage()
+    } else if (key === 'ArrowLeft') {
+      decrementReviewImage()
+    }
+  }
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
-  const incrementReviewImage = useCallback(() => {
+  const incrementReviewImage = () => {
     const i = currReviewIndex[0]
     const j = currReviewIndex[1]
     if (j + 1 < reviewImages[i].length) {
@@ -109,8 +108,8 @@ const Lightbox = ({
         setCurrReviewIndex([0, 0])
       }
     }
-  }, [currReviewIndex, setCurrReviewIndex, reviewImages])
-  const decrementReviewImage = useCallback(() => {
+  }
+  const decrementReviewImage = () => {
     const [reviewIdx, imageIdx] = currReviewIndex
     if (imageIdx <= 0) {
       if (reviewIdx <= 0) {
@@ -127,7 +126,7 @@ const Lightbox = ({
     } else {
       setCurrReviewIndex([reviewIdx, imageIdx - 1])
     }
-  }, [currReviewIndex, setCurrReviewIndex, reviewImages])
+  }
   return (
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
