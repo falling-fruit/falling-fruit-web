@@ -31,7 +31,8 @@ export const getEntry = () => {
 
 const getValidCoord = (geocoordMatch) => {
   //@lat,long,zoomz
-  const urlFormatMatchRegex = /^@\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,[1-9]\d*z$/
+  const urlFormatMatchRegex =
+    /^@\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,[1-9]\d*z$/
   if (!geocoordMatch) {
     return null
   }
