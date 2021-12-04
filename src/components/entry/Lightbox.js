@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Dialog } from '@reach/dialog'
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
+import { useCallback, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import ImagePreview from '../ui/ImagePreview'
@@ -75,7 +76,6 @@ const NavButton = styled(ResetButton)`
   background: rgba(0, 0, 0, 0.65);
   box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
 `
-
 const Lightbox = ({
   onDismiss,
   review,
@@ -83,7 +83,21 @@ const Lightbox = ({
   setCurrReviewIndex,
   reviewImages,
 }) => {
-  const incrementReviewImage = () => {
+  const onKeyDown = useCallback(
+    ({ key }) => {
+      if (key === 'ArrowRight') {
+        incrementReviewImage()
+      } else if (key === 'ArrowLeft') {
+        decrementReviewImage()
+      }
+    },
+    [incrementReviewImage, decrementReviewImage],
+  )
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [onKeyDown])
+  const incrementReviewImage = useCallback(() => {
     const i = currReviewIndex[0]
     const j = currReviewIndex[1]
     if (j + 1 < reviewImages[i].length) {
@@ -95,8 +109,8 @@ const Lightbox = ({
         setCurrReviewIndex([0, 0])
       }
     }
-  }
-  const decrementReviewImage = () => {
+  }, [currReviewIndex, setCurrReviewIndex, reviewImages])
+  const decrementReviewImage = useCallback(() => {
     const [reviewIdx, imageIdx] = currReviewIndex
     if (imageIdx <= 0) {
       if (reviewIdx <= 0) {
@@ -113,7 +127,7 @@ const Lightbox = ({
     } else {
       setCurrReviewIndex([reviewIdx, imageIdx - 1])
     }
-  }
+  }, [currReviewIndex, setCurrReviewIndex, reviewImages])
   return (
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
