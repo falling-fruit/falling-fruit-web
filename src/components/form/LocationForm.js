@@ -205,11 +205,9 @@ export const LocationForm = ({ desktop }) => {
       toast.success('Location submitted successfully!')
     } catch {
       toast.error('Location submission failed.')
-      history.push({
-        pathname: '/map',
-      })
     }
 
+    // TODO: Add reviews as a part of adding a location (one request to `addLocation`)
     if (isValidReview(review)) {
       const reviewValues = {
         ...review,
