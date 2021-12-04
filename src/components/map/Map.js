@@ -1,7 +1,7 @@
 import { ArrowBack, X } from '@styled-icons/boxicons-regular'
 import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -66,19 +66,15 @@ const Map = ({
   const dispatch = useDispatch()
   const mapLocation = useSelector((state) => state.map.location)
   const mapStreetView = useSelector((state) => state.map.streetView)
-  const errorRef = useRef(false)
+  const [headingStatus, setHeadingStatus] = useState(false)
 
   const setHeading = async (panoClient, markerLocation, panorama) => {
-    let pano
     try {
-      pano = await panoClient.getPanorama({
+      const pano = await panoClient.getPanorama({
         location: markerLocation,
         radius: 50,
       })
-    } catch (error) {
-      errorRef.current = true
-    }
-    if (!errorRef.current) {
+
       const heading = mapsRef.current.geometry.spherical.computeHeading(
         pano.data.location.latLng,
         markerLocation,
@@ -88,46 +84,64 @@ const Map = ({
         heading: heading,
         pitch: 0,
       })
+    } catch (error) {
+      console.log('caught error')
+      return false
     }
+
+    return true
   }
 
   useEffect(() => {
-    if (mapRef.current) {
-      const panorama = mapRef.current.getStreetView()
-      if (mapLocation && mapsRef) {
-        if (showStreetView) {
-          locationMarkerRef.current = new mapsRef.current.Marker({
-            position: mapLocation,
-            mapRef,
-          })
-          locationMarkerRef.current.setMap(panorama)
-        }
+    const setHeadingWrapper = async () => {
+      if (mapRef.current) {
+        const panorama = mapRef.current.getStreetView()
         const panoClient = new mapsRef.current.StreetViewService()
-        setHeading(panoClient, mapLocation, panorama)
-        panorama.setPosition(mapLocation)
-      } else {
-        panorama.setPosition(placeholderPlace)
-      }
+        if (mapLocation) {
+          setHeadingStatus(await setHeading(panoClient, mapLocation, panorama))
+        }
+        console.log(headingStatus)
+        if (headingStatus) {
+          if (mapLocation) {
+            if (showStreetView) {
+              locationMarkerRef.current = new mapsRef.current.Marker({
+                position: mapLocation,
+                mapRef,
+              })
+              locationMarkerRef.current.setMap(panorama)
+            }
+            panorama.setPosition(mapLocation)
+          } else {
+            panorama.setPosition(placeholderPlace)
+          }
 
-      // TODO bottom minimap
-      // panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
-      //   widget.current,
-      // )
-
-      if (showStreetView) {
-        panorama.setOptions({
-          disableDefaultUI: true,
-          enableCloseButton: false,
-        })
-      } else {
-        if (locationMarkerRef.current) {
-          locationMarkerRef.current.setMap(null)
+          // TODO bottom minimap
+          // panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
+          //   widget.current,
+          // )
+          if (showStreetView) {
+            panorama.setOptions({
+              disableDefaultUI: true,
+              enableCloseButton: false,
+            })
+          } else {
+            if (locationMarkerRef.current) {
+              locationMarkerRef.current.setMap(null)
+            }
+          }
+        }
+        panorama.setVisible(showStreetView)
+        console.log(panorama)
+        if (panorama.visible && !headingStatus) {
+          panorama.setVisible(!showStreetView)
+          if (locationMarkerRef.current) {
+            locationMarkerRef.current.setMap(null)
+          }
         }
       }
-
-      panorama.setVisible(showStreetView)
     }
-  }, [mapLocation, showStreetView, dispatch, mapStreetView])
+    setHeadingWrapper()
+  }, [mapLocation, showStreetView, dispatch, mapStreetView, headingStatus])
   const apiIsLoaded = (map, maps) => {
     mapRef.current = map
     mapsRef.current = maps
@@ -144,20 +158,9 @@ const Map = ({
 
   return (
     <>
-      {errorRef.current && showStreetView && (
-        <h1
-          style={{
-            color: 'white',
-            zIndex: 20,
-            position: 'absolute',
-            marginTop: '100px',
-          }}
-        >
-          Streetview for location cannot be found
-        </h1>
-      )}
-
-      {isDesktop && showStreetView && (
+      {console.log(`streetview: ${showStreetView}`)}
+      {console.log(`setHeading: ${headingStatus}`)}
+      {isDesktop && showStreetView && headingStatus && (
         <div>
           <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
             <ArrowBack height="18px" />
@@ -169,7 +172,7 @@ const Map = ({
         </div>
       )}
 
-      {!isDesktop && showStreetView && (
+      {!isDesktop && showStreetView && headingStatus && (
         <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
           <ArrowBack height="18px" />
         </OpacityButton>
