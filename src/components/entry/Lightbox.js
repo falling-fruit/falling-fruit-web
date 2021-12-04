@@ -81,8 +81,11 @@ const Lightbox = ({
   review,
   currReviewIndex,
   setCurrReviewIndex,
-  reviewImages,
 }) => {
+  console.log('review', review)
+  const reviewImages = review
+    .filter((review) => review.photos.length > 0)
+    .map((review) => review.photos)
   // Add useCallback in future
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onKeyDown = ({ key }) => {

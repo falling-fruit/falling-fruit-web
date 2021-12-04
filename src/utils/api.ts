@@ -114,11 +114,11 @@ export const getReviews = () =>
       photos: [
         {
           thumb:
-            'https://s3-us-west-2.amazonaws.com/fallingfruit-production/observations/photos/000/002/745/thumb/open-uri20131213-3992-1szjh9k.jpg',
+            'https://jeffreytang.com/static/140f93166b5fbc856c4f5f4f76709503/3d164/jeffrey_hk_cow_cropped.webp',
           medium:
-            'https://s3-us-west-2.amazonaws.com/fallingfruit-production/observations/photos/000/002/745/medium/open-uri20131213-3992-1szjh9k.jpg',
+            'https://jeffreytang.com/static/140f93166b5fbc856c4f5f4f76709503/3d164/jeffrey_hk_cow_cropped.webp',
           original:
-            'https://s3-us-west-2.amazonaws.com/fallingfruit-production/observations/photos/000/002/745/original/open-uri20131213-3992-1szjh9k.jpg',
+            'https://jeffreytang.com/static/140f93166b5fbc856c4f5f4f76709503/3d164/jeffrey_hk_cow_cropped.webp',
         },
       ],
     },

@@ -128,6 +128,7 @@ const ExtraImagesWrapper = styled(ResetButton)`
 const PhotoData = ({ photos, altText, openLightbox }) => {
   const { t } = useTranslation()
   const reviewPhotos = photos.flat()
+  console.log(reviewPhotos)
   return (
     reviewPhotos.length > 0 && (
       // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
@@ -135,7 +136,6 @@ const PhotoData = ({ photos, altText, openLightbox }) => {
 
       // TODO: connect to lightbox once implemented
       // TODO: this should be in the photogrid itself, shouldn't have to be handled here
-
       <StyledPhotoGrid>
         <img
           className="main-image"
