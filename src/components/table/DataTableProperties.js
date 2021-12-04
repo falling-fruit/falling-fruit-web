@@ -1,6 +1,8 @@
+import { LinkExternal } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
 import { RESOURCES } from '../entry/resources'
+import { theme } from '../ui/GlobalStyle'
 
 const TableLinkPreview = styled.img`
   width: 20px;
@@ -8,7 +10,6 @@ const TableLinkPreview = styled.img`
   margin-right: 5px;
 `
 const NameLink = styled.a`
-  font-size: 1rem !important;
   font-weight: normal;
   color: ${({ theme }) => theme.secondaryText} !important;
 `
@@ -27,7 +28,7 @@ const FORMATTERS = {
   link: function LinkFormat({ url }) {
     return (
       <a href={url} target="_blank" rel="noreferrer">
-        Link
+        Link <LinkExternal size="14" color={theme.orange} />
       </a>
     )
   },
