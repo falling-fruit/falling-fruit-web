@@ -85,7 +85,6 @@ const Map = ({
         pitch: 0,
       })
     } catch (error) {
-      console.log('caught error')
       return false
     }
 
@@ -100,7 +99,6 @@ const Map = ({
         if (mapLocation) {
           setHeadingStatus(await setHeading(panoClient, mapLocation, panorama))
         }
-        console.log(headingStatus)
         if (headingStatus) {
           if (mapLocation) {
             if (showStreetView) {
@@ -131,7 +129,6 @@ const Map = ({
           }
         }
         panorama.setVisible(showStreetView)
-        console.log(panorama)
         if (panorama.visible && !headingStatus) {
           panorama.setVisible(!showStreetView)
           if (locationMarkerRef.current) {
@@ -158,8 +155,6 @@ const Map = ({
 
   return (
     <>
-      {console.log(`streetview: ${showStreetView}`)}
-      {console.log(`setHeading: ${headingStatus}`)}
       {isDesktop && showStreetView && headingStatus && (
         <div>
           <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
