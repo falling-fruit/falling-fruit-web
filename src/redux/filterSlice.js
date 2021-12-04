@@ -90,12 +90,8 @@ export const filterSlice = createSlice({
   },
 })
 
-export const {
-  setFilters,
-  openFilter,
-  closeFilter,
-  updateSelection,
-} = filterSlice.actions
+export const { setFilters, openFilter, closeFilter, updateSelection } =
+  filterSlice.actions
 
 export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection(types))

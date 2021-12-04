@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 
 import { enableStreetView } from '../../redux/mapSlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import ResetButton from '../ui/ResetButton'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
 import Location from './Location'
@@ -20,27 +21,28 @@ import Location from './Location'
  * @param {function} onLocationClick - The function called when a location is clicked
  * @param {function} onViewChange - The function called when the view state is changed
  * @param {boolean} showLabels - Will display labels under locations if true
+ * @param {boolean} showBusinesses - Will display businesses in the map if true
  */
 
-const OpacityButton = styled.button`
+const OpacityButton = styled(ResetButton)`
   background: rgba(0, 0, 0, 0.65);
   padding: 15px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border: none;
-  color: white;
-  position: absolute;
+  box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
+  color: #ffffff;
   z-index: 2;
   border-radius: 13.5px;
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px;
+  font-size: 1.14rem;
+  cursor: pointer;
   position: relative;
+`
+
+const StreetViewUIWrapper = styled.div`
+  width: calc(100% - 40px);
+  display: flex;
+  top: 20px;
+  left: 20px;
+  justify-content: space-between;
+  position: absolute;
 `
 
 const placeholderPlace = { lat: 40.729884, lng: -73.990988 }
@@ -58,6 +60,7 @@ const Map = ({
   showLabels,
   mapType,
   layerTypes,
+  showBusinesses,
   showStreetView,
 }) => {
   const mapRef = useRef(null)
@@ -155,22 +158,24 @@ const Map = ({
 
   return (
     <>
-      {isDesktop && showStreetView && headingStatus && (
-        <div>
-          <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
-            <ArrowBack height="18px" />
-            Back to Map
-          </OpacityButton>
-          <OpacityButton onClick={closeStreetView} style={{ float: 'right' }}>
-            <X height="22.91px" />
-          </OpacityButton>
-        </div>
-      )}
-
-      {!isDesktop && showStreetView && headingStatus && (
-        <OpacityButton onClick={closeStreetView} style={{ float: 'left' }}>
-          <ArrowBack height="18px" />
-        </OpacityButton>
+      {showStreetView && headingStatus && (
+        <StreetViewUIWrapper>
+          {isDesktop ? (
+            <>
+              <OpacityButton onClick={closeStreetView}>
+                <ArrowBack height="18px" />
+                Back to Map
+              </OpacityButton>
+              <OpacityButton onClick={closeStreetView}>
+                <X height="22.91px" />
+              </OpacityButton>
+            </>
+          ) : (
+            <OpacityButton onClick={closeStreetView}>
+              <ArrowBack height="18px" />
+            </OpacityButton>
+          )}
+        </StreetViewUIWrapper>
       )}
 
       <GoogleMapReact
@@ -180,6 +185,12 @@ const Map = ({
           disableDefaultUI: true,
           // TODO: should we disable tilt?
           // tilt: 0,
+          styles: [
+            {
+              featureType: 'poi.business',
+              stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
+            },
+          ],
         })}
         layerTypes={layerTypes}
         center={view.center}
@@ -240,6 +251,7 @@ Map.propTypes = {
   mapType: PropTypes.string,
   layerTypes: PropTypes.arrayOf(PropTypes.string),
   showLabels: PropTypes.bool,
+  showBusinesses: PropTypes.bool,
 }
 
 export default Map
