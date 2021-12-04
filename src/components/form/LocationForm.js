@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
@@ -183,14 +184,8 @@ export const LocationForm = ({ desktop }) => {
   }
 
   const handleSubmit = async (values) => {
-    const {
-      types,
-      description,
-      season_start,
-      season_end,
-      access,
-      review,
-    } = values
+    const { types, description, season_start, season_end, access, review } =
+      values
 
     const locationValues = {
       type_ids: types.map(({ value }) => value),
@@ -204,10 +199,15 @@ export const LocationForm = ({ desktop }) => {
       unverified: false,
     }
 
-    console.log('locationValues', locationValues)
-    const locationResp = await addLocation(locationValues)
-    console.log('locationResp', locationResp)
+    let locationResp
+    try {
+      locationResp = await addLocation(locationValues)
+      toast.success('Location submitted successfully!')
+    } catch {
+      toast.error('Location submission failed.')
+    }
 
+    // TODO: Add reviews as a part of adding a location (one request to `addLocation`)
     if (isValidReview(review)) {
       const reviewValues = {
         ...review,
