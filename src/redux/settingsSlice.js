@@ -8,6 +8,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const DEFAULT_SETTINGS = {
   showLabels: false,
   showScientificNames: true,
+  distanceUnit: 'metric',
   mapType: 'roadmap',
   mapLayers: [],
   overrideDataLanguage: false,
