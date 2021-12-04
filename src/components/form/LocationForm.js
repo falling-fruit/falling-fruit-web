@@ -1,8 +1,11 @@
 import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
+import { addLocation, addReview } from '../../utils/api'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -12,16 +15,10 @@ import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Select, Textarea } from './FormikWrappers'
 import {
   INITIAL_REVIEW_VALUES,
+  isValidReview,
   ReviewPhotoStep,
   ReviewStep,
 } from './ReviewForm'
-
-const INITIAL_VALUES = {
-  types: [],
-  description: '',
-  access: null,
-  ...INITIAL_REVIEW_VALUES,
-}
 
 const PROPERTY_ACCESS_LABELS = [
   'Source is on my property',
@@ -57,6 +54,12 @@ const PROPERTY_ACCESS_OPTIONS = labelsToOptions(PROPERTY_ACCESS_LABELS)
 
 const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 
+const INITIAL_VALUES = {
+  types: [],
+  description: '',
+  ...INITIAL_REVIEW_VALUES,
+}
+
 const StyledLocationForm = styled.div`
   box-sizing: border-box;
   width: 100%;
@@ -72,7 +75,7 @@ const InlineSelects = styled.div`
   display: flex;
   align-items: center;
 
-  span {
+  > span {
     // Text
     margin: 0 10px;
   }
@@ -95,6 +98,7 @@ const LocationStep = ({ typeOptions }) => (
       formatOptionLabel={(option) => <TypeName typeId={option.value} />}
       isVirtualized
       required
+      // TODO: fix select searching
     />
     <Textarea name="description" label="Description" />
     <Select
@@ -102,6 +106,7 @@ const LocationStep = ({ typeOptions }) => (
       label="Property Access"
       options={PROPERTY_ACCESS_OPTIONS}
       isSearchable={false}
+      isClearable
     />
     <Label>
       Seasonality
@@ -112,9 +117,15 @@ const LocationStep = ({ typeOptions }) => (
         name="season_start"
         options={MONTH_OPTIONS}
         isSearchable={false}
+        isClearable
       />
       <span>to</span>
-      <Select name="season_end" options={MONTH_OPTIONS} isSearchable={false} />
+      <Select
+        name="season_end"
+        options={MONTH_OPTIONS}
+        isSearchable={false}
+        isClearable
+      />
     </InlineSelects>
   </>
 )
@@ -124,6 +135,8 @@ export const LocationForm = ({ desktop }) => {
   const history = useHistory()
   const { state } = useLocation()
   const { typesById } = useTypesById()
+
+  const { lat, lng } = useSelector((state) => state.map.view.center)
 
   const typeOptions = useMemo(
     () =>
@@ -148,8 +161,64 @@ export const LocationForm = ({ desktop }) => {
     </Step>
   ))
 
-  const handleSubmit = (values) => {
-    console.log('submitted location form', values)
+  const validate = (values) => {
+    const { types, season_start, season_end } = values
+
+    const errors = {}
+
+    if (types && types.length === 0) {
+      errors.types = true
+    }
+
+    if (season_start?.value && season_end?.value) {
+      if (season_end.value < season_start.value) {
+        errors.season_end = true
+      }
+    } else if (season_start?.value) {
+      errors.season_end = true
+    } else if (season_end?.value) {
+      errors.season_start = true
+    }
+
+    return errors
+  }
+
+  const handleSubmit = async (values) => {
+    const { types, description, season_start, season_end, access, review } =
+      values
+
+    const locationValues = {
+      type_ids: types.map(({ value }) => value),
+      description,
+      season_start: season_start?.value,
+      season_end: season_end?.value,
+      access: access?.value,
+      lat,
+      lng,
+      author: null,
+      unverified: false,
+    }
+
+    let locationResp
+    try {
+      locationResp = await addLocation(locationValues)
+      toast.success('Location submitted successfully!')
+    } catch {
+      toast.error('Location submission failed.')
+    }
+
+    // TODO: Add reviews as a part of adding a location (one request to `addLocation`)
+    if (isValidReview(review)) {
+      const reviewValues = {
+        ...review,
+        author: null,
+      }
+
+      console.log('reviewValues', reviewValues)
+      const reviewResp = await addReview(locationResp.id, reviewValues)
+      console.log('reviewResp', reviewResp)
+    }
+
     history.push('/map')
   }
 
@@ -159,10 +228,11 @@ export const LocationForm = ({ desktop }) => {
     <StyledLocationForm>
       <StepDisplay
         validateOnChange={false}
+        validate={validate}
         initialValues={INITIAL_VALUES}
         onSubmit={handleSubmit}
         // For all steps only
-        renderButtons={(isSubmitting) => (
+        renderButtons={({ isValid, isSubmitting }) => (
           <ProgressButtons>
             <Button
               secondary
@@ -171,7 +241,7 @@ export const LocationForm = ({ desktop }) => {
             >
               Cancel
             </Button>
-            <Button disabled={isSubmitting} type="submit">
+            <Button disabled={!isValid || isSubmitting} type="submit">
               {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
           </ProgressButtons>

@@ -1,8 +1,9 @@
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Route, Switch } from 'react-router-dom'
 
 import useRoutedTabs from '../../utils/useRoutedTabs'
+import AboutRouter from '../about/AboutRouter'
 import Drawer from '../entry/Drawer'
 import Entry from '../entry/Entry'
 import { LocationForm } from '../form/LocationForm'
@@ -46,6 +47,7 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
+          {AboutRouter}
           <Route path="/map/entry/new/details">
             <LocationForm />
           </Route>

@@ -28,24 +28,28 @@ export const withLabel = (WrappedField) => {
   return FieldWithLabel
 }
 
-export const withField = (WrappedComponent, type, bypassFormik = false) => (
-  props,
-) => {
-  const [field, meta, helpers] = useField({ ...props, type })
-  const customProps = bypassFormik
-    ? {
-        value: meta.value,
-        onChange: helpers.setValue,
-      }
-    : field
+export const withField = (WrappedComponent, type, bypassFormik = false) => {
+  const FieldComponent = (props) => {
+    const [field, meta, helpers] = useField({ ...props, type })
+    const customProps = bypassFormik
+      ? {
+          value: meta.value,
+          onChange: helpers.setValue,
+          onBlur: helpers.setTouched,
+        }
+      : field
 
-  return (
-    <WrappedComponent
-      invalid={meta.touched && meta.error}
-      {...customProps}
-      {...props}
-    />
-  )
+    return (
+      <WrappedComponent
+        invalid={meta.touched && meta.error}
+        {...customProps}
+        {...props}
+      />
+    )
+  }
+  FieldComponent.displayName = `${WrappedComponent.displayName}WithField`
+
+  return FieldComponent
 }
 
 export const withLabeledField = (WrappedField, ...args) =>

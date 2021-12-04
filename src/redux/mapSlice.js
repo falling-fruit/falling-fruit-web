@@ -15,6 +15,7 @@ import { selectParams } from './selectParams'
 const DEFAULT_VIEW_STATE = {
   center: { lat: 40.1125785, lng: -88.2287926 },
   zoom: 1,
+  streetView: false,
 }
 
 const TRACKING_LOCATION_ZOOM = 16
@@ -58,6 +59,7 @@ export const mapSlice = createSlice({
     isTrackingLocation: false,
     justStartedTrackingLocation: false,
     locationRequested: false,
+    streetView: false,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
@@ -127,8 +129,12 @@ export const mapSlice = createSlice({
     clusterClick: (state, action) => {
       state.view = {
         center: action.payload,
-        zoom: state.view.zoom + 2,
+        zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
       }
+    },
+
+    setStreetView: (state, action) => {
+      state.streetView = action.payload()
     },
   },
   extraReducers: {

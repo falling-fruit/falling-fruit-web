@@ -2,6 +2,7 @@ import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { darken } from 'polished'
 import { forwardRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useSelector } from 'react-redux'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
@@ -11,8 +12,31 @@ import ListEntry from '../ui/ListEntry'
 import { TypeName } from '../ui/TypeName'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
-// TODO: use settings for this
-const convertMetersToMiles = (meters) => (meters * 0.000621371192).toFixed(2)
+const METERS_IN_FOOT = 0.3048
+const FEET_IN_MILE = 5280
+const CONVERSION_THRESHOLD = 1000
+const METERS_IN_KILOMETER = 1000
+const IMPERIAL = 'imperial'
+
+const convertDistance = (distance, setting) => {
+  if (setting === IMPERIAL) {
+    const feet = Math.round(distance / METERS_IN_FOOT)
+    if (feet < CONVERSION_THRESHOLD) {
+      return `${parseFloat(feet.toPrecision(2))} feet`
+    } else {
+      return `${parseFloat((feet / FEET_IN_MILE).toPrecision(2))} miles`
+    }
+  } else {
+    const meters = Math.round(distance)
+    if (meters < CONVERSION_THRESHOLD) {
+      return `${parseFloat(meters.toPrecision(2))} meters`
+    } else {
+      return `${parseFloat(
+        (meters / METERS_IN_KILOMETER).toPrecision(2),
+      )} kilometers`
+    }
+  }
+}
 
 const StyledListEntry = styled(ListEntry)`
   cursor: pointer;
@@ -35,6 +59,7 @@ const EntryList = forwardRef(
     { locations, onEntryClick, onEntryMouseEnter, onEntryMouseLeave, ...props },
     ref,
   ) => {
+    const distanceUnit = useSelector((state) => state.settings.distanceUnit)
     const Item = ({ index, style }) => {
       const location = locations[index]
 
@@ -47,7 +72,7 @@ const EntryList = forwardRef(
             leftIcons={<EntryIcon imageSrc={location.photo?.thumb} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
-            secondaryText={`${convertMetersToMiles(location.distance)} miles`}
+            secondaryText={convertDistance(location.distance, distanceUnit)}
             onClick={(e) => onEntryClick?.(location.id, e)}
             onMouseEnter={(e) => onEntryMouseEnter?.(location.id, e)}
             onMouseLeave={(e) => onEntryMouseLeave?.(location.id, e)}

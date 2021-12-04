@@ -21,7 +21,8 @@ const PageTabs = styled(Tabs)`
 
   [data-reach-tab-list] {
     display: flex;
-    height: 80px;
+    height: 70px;
+
     background: ${({ theme }) => theme.background};
     // Moves tab buttons above home bar on iOS mobile
     padding-bottom: env(safe-area-inset-bottom, 0);
@@ -32,8 +33,9 @@ const PageTabs = styled(Tabs)`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 0.625rem;
-      border-top: 8px solid ${({ theme }) => theme.secondaryBackground};
+      border-top: 4px solid ${({ theme }) => theme.secondaryBackground};
+      font-size: 0.825rem;
+
       border-bottom: none;
 
       :focus {
@@ -43,7 +45,7 @@ const PageTabs = styled(Tabs)`
       ${StyledIconBase} {
         display: block;
         margin: 0 auto 2px;
-        height: 36px;
+        height: 32px;
       }
 
       &:not([data-selected]) {
