@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fitBounds } from 'google-map-react'
 
 import { getClusters, getLocations } from '../utils/api'
+import { getEntry, parseUrl } from '../utils/getInitialURL'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 
@@ -12,12 +13,10 @@ import { selectParams } from './selectParams'
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const DEFAULT_VIEW_STATE = {
-  center: { lat: 40.1125785, lng: -88.2287926 },
-  zoom: 1,
-  streetView: false,
-}
+const DEFAULT_VIEW_STATE = parseUrl()
 
+const DEFAULT_ENTRY = getEntry()
+console.log(DEFAULT_VIEW_STATE, DEFAULT_ENTRY)
 const TRACKING_LOCATION_ZOOM = 16
 
 export const setReducer = (key) => (state, action) => ({
@@ -51,6 +50,7 @@ export const mapSlice = createSlice({
   initialState: {
     view: DEFAULT_VIEW_STATE,
     oldView: null,
+    entry: DEFAULT_ENTRY,
     isLoading: false,
     locations: [],
     clusters: [],
@@ -65,6 +65,7 @@ export const mapSlice = createSlice({
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
     // this should be called viewChange
     viewChange: setReducer('view'),
+    setEntry: setReducer('initialEntry'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
 
     startTrackingLocation: (state) => {
@@ -168,6 +169,7 @@ export const {
   zoomIn,
   clusterClick,
   viewChange,
+  setEntry,
   setHoveredLocationId,
   startTrackingLocation,
   stopTrackingLocation,

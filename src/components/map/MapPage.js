@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 import {
   clusterClick,
   restoreOldView,
+  setEntry,
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
@@ -28,7 +29,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 const MapPage = ({ isDesktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
-    path: '/(map|list)/entry/:entryId',
+    path: '/(map|list)/entry/:entryId/:geocoord',
     exact: true,
   })
 
@@ -38,13 +39,13 @@ const MapPage = ({ isDesktop }) => {
   const { getCommonName } = useTypesById()
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
-  const view = useSelector((state) => state.map.view)
   const allLocations = useSelector(getAllLocations)
-  const clusters = useSelector((state) => state.map.clusters)
   const isLoading = useSelector((state) => state.map.isLoading)
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
   const geolocation = useSelector((state) => state.map.geolocation)
   const locationRequested = useSelector((state) => state.map.locationRequested)
+  const view = useSelector((state) => state.map.view)
+  const clusters = useSelector((state) => state.map.clusters)
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -54,12 +55,13 @@ const MapPage = ({ isDesktop }) => {
     }
   }, [dispatch, isAddingLocation])
 
-  const handleLocationClick = (location) =>
+  const handleLocationClick = (location) => {
+    dispatch(setEntry(location.id))
     history.push({
-      pathname: `/map/entry/${location.id}`,
+      pathname: `/map/entry/${location.id}/@${view.center.lat},${view.center.lng},${view.zoom}z`,
       state: { fromPage: '/map' },
     })
-
+  }
   const handleAddLocationClick = () => {
     history.push('/map/entry/new')
   }
@@ -90,7 +92,9 @@ const MapPage = ({ isDesktop }) => {
               }))
         }
         activeLocationId={entryId || hoveredLocationId}
-        onViewChange={(newView) => dispatch(viewChangeAndFetch(newView))}
+        onViewChange={(newView) => {
+          dispatch(viewChangeAndFetch(newView))
+        }}
         onGeolocationClick={() => {
           dispatch(
             zoomIn({ lat: geolocation.latitude, lng: geolocation.longitude }),
