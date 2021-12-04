@@ -14,21 +14,25 @@ const StyledNavBack = styled.div`
   }
 `
 
-const NavBack = () => {
+const NavBack = ({ isEntry }) => {
   const history = useHistory()
   const { state } = useLocation()
   const { t } = useTranslation()
 
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    history.push(state?.fromPage ?? '/map')
+    if (isEntry) {
+      history.go(-1)
+    } else {
+      history.push(state?.fromPage ?? '/map')
+    }
   }
 
   return (
     <StyledNavBack>
       <BackButton onClick={handleBackButtonClick}>
         <ArrowBack />
-        {t('Back to Results')}
+        {isEntry ? t('Back to Entry') : t('Back to Results')}
       </BackButton>
     </StyledNavBack>
   )

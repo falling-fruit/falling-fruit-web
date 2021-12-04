@@ -24,7 +24,6 @@ const AboutDatasetPage = () => {
     parseInt(datasetIDMatch.params.datasetID)
   const [importData, setImportData] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  //const [muni, setMuni] = useState()
   useEffect(() => {
     async function fetchImportData() {
       setIsLoading(true)
@@ -35,12 +34,13 @@ const AboutDatasetPage = () => {
     }
 
     fetchImportData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const isMobile = useIsMobile
 
   return (
     <div style={{ marginTop: isMobile ? '10vh' : '0px' }}>
-      <NavBack></NavBack>
+      <NavBack isEntry></NavBack>
       {!isLoading && (
         <PageScrollWrapper>
           <PageTemplate>
