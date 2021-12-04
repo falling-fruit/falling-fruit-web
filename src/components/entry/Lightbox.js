@@ -101,29 +101,30 @@ const Lightbox = ({
   // TODO: Fix errors within this function (to test, spam back button)
   // TODO: use array to store indexes
   const decrementReviewImage = () => {
-    const i = currReviewIndex[0]
-    const j = currReviewIndex[1]
-    if (j - 1 < 0) {
-      if (i - 1 < 0) {
+    const [reviewIdx, imageIdx] = currReviewIndex
+    if (imageIdx <= 0) {
+      if (reviewIdx <= 0) {
         setCurrReviewIndex([
           reviewImages.length - 1,
           reviewImages[reviewImages.length - 1].length - 1,
         ])
       } else {
-        console.log('curr at', currReviewIndex[0], currReviewIndex[1])
-        console.log('going to', i - 1, reviewImages[i - 1].length - 1)
-        setCurrReviewIndex(i - 1, reviewImages[i - 1].length - 1)
-        console.log('after change:', currReviewIndex)
+        setCurrReviewIndex([
+          reviewIdx - 1,
+          reviewImages[reviewIdx - 1].length - 1,
+        ])
       }
     } else {
-      setCurrReviewIndex([i, j - 1])
+      setCurrReviewIndex([reviewIdx, imageIdx - 1])
     }
   }
   return (
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
         <StyledReviewImage
-          src={reviewImages[currReviewIndex[0]][currReviewIndex[1]].medium}
+          src={
+            reviewImages[currReviewIndex[0]]?.[currReviewIndex[1]]?.medium ?? ''
+          }
         />
         <NavButtonContainer>
           <NavButton onClick={decrementReviewImage}>
