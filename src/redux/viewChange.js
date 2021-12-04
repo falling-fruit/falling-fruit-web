@@ -24,8 +24,11 @@ export const getAllLocations = createSelector(
   (state) => state.map.locations,
   (state) => state.list.locations,
   (state) => state.misc.isDesktop,
-  (mapLocations, listLocations, isDesktop) =>
-    isDesktop
+  (state) => state.map.clusters,
+  (mapLocations, listLocations, isDesktop, mapClusters) =>
+    mapClusters.length !== 0
+      ? []
+      : isDesktop
       ? unionWith(eqBy(prop('id')), mapLocations, listLocations)
       : mapLocations,
 )
@@ -77,7 +80,7 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
-  console.log('VCAF')
+
   if (state.map.entry != null) {
     const urlStr = `/map/entry/${state.map.entry}/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
     window.history.pushState({}, '', urlStr)
@@ -85,6 +88,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
     const urlStr = `/map/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
     window.history.pushState({}, '', urlStr)
   }
+
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
 

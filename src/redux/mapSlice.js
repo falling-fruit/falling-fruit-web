@@ -130,7 +130,7 @@ export const mapSlice = createSlice({
     clusterClick: (state, action) => {
       state.view = {
         center: action.payload,
-        zoom: state.view.zoom + 2,
+        zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
       }
     },
 

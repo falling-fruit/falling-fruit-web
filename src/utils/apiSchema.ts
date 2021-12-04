@@ -4,86 +4,6 @@
  */
 
 export interface paths {
-  "/users": {
-    /** The `email` cannot match the email of an existing User. */
-    post: {
-      responses: {
-        /** Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["User"];
-          };
-        };
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /** Email. */
-            email: string;
-            /** Password. */
-            password: string;
-            /** Display name. */
-            name?: string;
-            /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
-            add_anonymously?: boolean;
-          };
-        };
-      };
-    };
-  };
-  "/users/{id}": {
-    /** Restricted to the same User. */
-    put: {
-      parameters: {
-        path: {
-          /** User ID. */
-          id: components["parameters"]["user_id"];
-        };
-      };
-      responses: {
-        /** Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["User"];
-          };
-        };
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /** Email. */
-            email: string;
-            /** Password. */
-            password: string;
-            /** Display name. */
-            name: string;
-            /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
-            add_anonymously: boolean;
-          };
-        };
-      };
-    };
-  };
-  "/users/token": {
-    get: {
-      parameters: {
-        query: {
-          /** User email. */
-          email: string;
-          /** User password. */
-          password: string;
-        };
-      };
-      responses: {
-        /** Success */
-        200: {
-          content: {
-            "application/json": string;
-          };
-        };
-      };
-    };
-  };
   "/clusters": {
     get: {
       parameters: {
@@ -94,7 +14,7 @@ export interface paths {
           zoom?: components["parameters"]["zoom"];
           /** Whether to include Locations imported from municipal tree inventories. */
           muni?: components["parameters"]["muni"];
-          /** IDs of Types to include (or all if empty). */
+          /** IDs of Types to include (all by default). */
           types?: components["parameters"]["types"];
         };
       };
@@ -108,51 +28,31 @@ export interface paths {
       };
     };
   };
-  "/types": {
+  "/imports": {
     get: {
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": components["schemas"]["Type"][];
+            "application/json": components["schemas"]["Import"][];
           };
         };
       };
     };
   };
-  "/types/{id}": {
+  "/imports/{id}": {
     get: {
       parameters: {
         path: {
-          /** Type ID. */
-          id: components["parameters"]["type_id"];
+          /** Import ID. */
+          id: components["parameters"]["import_id"];
         };
       };
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": components["schemas"]["Type"];
-          };
-        };
-      };
-    };
-  };
-  "/types/counts": {
-    get: {
-      parameters: {
-        query: {
-          /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
-          bounds: components["parameters"]["bounds"];
-          /** Whether to include Locations imported from municipal tree inventories. */
-          muni?: components["parameters"]["muni"];
-        };
-      };
-      responses: {
-        /** Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["TypeCount"][];
+            "application/json": components["schemas"]["Import"];
           };
         };
       };
@@ -166,8 +66,10 @@ export interface paths {
           bounds: components["parameters"]["bounds"];
           /** Whether to include Locations imported from municipal tree inventories. */
           muni?: components["parameters"]["muni"];
-          /** IDs of Types to include (or all if empty). */
+          /** IDs of Types to include (all by default). */
           types?: components["parameters"]["types"];
+          /** Whether to only return Locations with Types locally flagged as invasive species. Note that this parameter is not supported for filtering clusters. */
+          invasive?: components["parameters"]["invasive"];
           /** Maximum number of Locations to return. */
           limit?: number;
           /** Offset from which to apply `limit`. */
@@ -187,6 +89,7 @@ export interface paths {
         };
       };
     };
+    /** A `review` can be included, in which case the result includes the `reviews` property. */
     post: {
       responses: {
         /** Success */
@@ -198,7 +101,7 @@ export interface paths {
       };
       requestBody: {
         content: {
-          "application/json": components["schemas"]["EditLocation"];
+          "application/json": components["schemas"]["AddLocation"];
         };
       };
     };
@@ -211,8 +114,10 @@ export interface paths {
           bounds: components["parameters"]["bounds"];
           /** Whether to include Locations imported from municipal tree inventories. */
           muni?: components["parameters"]["muni"];
-          /** IDs of Types to include (or all if empty). */
+          /** IDs of Types to include (all by default). */
           types?: components["parameters"]["types"];
+          /** Whether to only return Locations with Types locally flagged as invasive species. Note that this parameter is not supported for filtering clusters. */
+          invasive?: components["parameters"]["invasive"];
         };
       };
       responses: {
@@ -231,6 +136,14 @@ export interface paths {
         path: {
           /** Location ID. */
           id: components["parameters"]["location_id"];
+        };
+        query: {
+          /**
+           * Additional information to include.
+           * - reviews: Location reviews.
+           * - import: Imported dataset.
+           */
+          embed?: ("reviews" | "import")[];
         };
       };
       responses: {
@@ -276,12 +189,11 @@ export interface paths {
         /** Success */
         200: {
           content: {
-            "application/json": components["schemas"]["Review"][];
+            "application/json": components["schemas"]["Review"];
           };
         };
       };
     };
-    /** Uploaded photos are currently ignored. */
     post: {
       parameters: {
         path: {
@@ -299,10 +211,26 @@ export interface paths {
       };
       requestBody: {
         content: {
+          "application/json": components["schemas"]["EditReview"];
+        };
+      };
+    };
+  };
+  "/photos": {
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Photo"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
           "multipart/form-data": {
-            json: components["schemas"]["EditReview"];
-            /** Photos to upload. */
-            photos?: string[] | null;
+            /** File to upload (jpeg, png, webp, gif, or svg). Images are converted to jpeg and resized as needed to a maximum dimension of 2048 pixels. */
+            file: string;
           };
         };
       };
@@ -325,7 +253,6 @@ export interface paths {
         };
       };
     };
-    /** Uploaded photos are currently ignored. */
     put: {
       parameters: {
         path: {
@@ -343,10 +270,71 @@ export interface paths {
       };
       requestBody: {
         content: {
-          "multipart/form-data": {
-            json: components["schemas"]["EditReview"];
-            /** Photos to upload. */
-            photos?: string[] | null;
+          "application/json": components["schemas"]["EditReview"];
+        };
+      };
+    };
+  };
+  "/types": {
+    get: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Type"][];
+          };
+        };
+      };
+    };
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Type"][];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["SubmitType"];
+        };
+      };
+    };
+  };
+  "/types/{id}": {
+    get: {
+      parameters: {
+        path: {
+          /** Type ID. */
+          id: components["parameters"]["type_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Type"];
+          };
+        };
+      };
+    };
+  };
+  "/types/counts": {
+    get: {
+      parameters: {
+        query: {
+          /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
+          bounds: components["parameters"]["bounds"];
+          /** Whether to include Locations imported from municipal tree inventories. */
+          muni?: components["parameters"]["muni"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["TypeCount"][];
           };
         };
       };
@@ -358,46 +346,233 @@ export interface paths {
         /** Success */
         200: {
           content: {
-            "application/json": components["schemas"]["Review"];
+            "application/json": components["schemas"]["Report"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["EditReport"];
+        };
+      };
+    };
+  };
+  "/user": {
+    get: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["User"];
+          };
+        };
+      };
+    };
+    /**
+     * - If a new email is provided, it is staged as unconfirmed (`unconfirmed_email`) and a confirmation email is sent to the new email. The previous email is replaced only once the new email is confirmed.
+     * - If a password is provided, it takes immediate effect. If it does not match the previous password, all refresh tokens not corresponding to the current access token are revoked.
+     * - In either case, the existing password is required (`password_confirmation`).
+     */
+    put: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["User"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            name: components["schemas"]["EditUser"]["name"];
+            email: components["schemas"]["User"]["email"];
+            /** Password. */
+            password?: string;
+            /** Current password. Required for email and password change. */
+            password_confirmation?: string;
+          };
+        };
+      };
+    };
+    /**
+     * When first created, the account is not confirmed and cannot be used.
+     * An email is sent with a link that must be clicked to confirm the account.
+     *
+     * `email` cannot match (case-insensitive) the email of an existing user.
+     */
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": {
+              message?: string;
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            email: components["schemas"]["User"]["email"];
+            password: paths["/user"]["put"]["requestBody"]["content"]["application/json"]["password"];
+            name?: components["schemas"]["EditUser"]["name"];
+          };
+        };
+      };
+    };
+    delete: {
+      responses: {
+        /** Success (no content) */
+        204: never;
+      };
+    };
+  };
+  "/user/confirmation": {
+    get: {
+      parameters: {
+        query: {
+          /** Email-confirmation token. */
+          token: string;
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": {
+              message?: string;
+            };
+          };
+        };
+      };
+    };
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": {
+              email: components["schemas"]["User"]["email"];
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            /** Email-confirmation token. */
+            token: string;
+          };
+        };
+      };
+    };
+  };
+  "/user/confirmation/retry": {
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": {
+              message?: string;
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            email: components["schemas"]["User"]["email"];
+          };
+        };
+      };
+    };
+  };
+  "/user/token": {
+    /** Follows the OAuth2 spec for password flow, which requires form data with `username` and `password`. */
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["Token"];
           };
         };
       };
       requestBody: {
         content: {
           "multipart/form-data": {
-            json: components["schemas"]["EditReport"];
-            /** Photos to upload. */
-            photos?: string[] | null;
+            username: components["schemas"]["User"]["email"];
+            password: paths["/user"]["put"]["requestBody"]["content"]["application/json"]["password"];
           };
         };
       };
     };
   };
-  "/imports": {
-    get: {
+  "/user/token/refresh": {
+    /** Follows the OAuth2 spec for refresh token flow, which requires form data with `grant_type: 'refresh_token'` (ignored) and `refresh_token`. */
+    post: {
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": components["schemas"]["Import"][];
+            "application/json": components["schemas"]["Token"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "multipart/form-data": {
+            /** Refresh token. */
+            refresh_token: string;
+            /** Grant type. */
+            grant_type?: "refresh_token";
           };
         };
       };
     };
   };
-  "/imports/{id}": {
-    get: {
-      parameters: {
-        path: {
-          /** Import ID. */
-          id: components["parameters"]["import_id"];
-        };
-      };
+  "/user/password": {
+    put: {
       responses: {
         /** Success */
         200: {
           content: {
-            "application/json": components["schemas"]["Import"];
+            "application/json": {
+              email?: components["schemas"]["User"]["email"];
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            /** Password-reset token. */
+            token: string;
+            password: paths["/user"]["put"]["requestBody"]["content"]["application/json"]["password"];
+          };
+        };
+      };
+    };
+  };
+  "/user/password/reset": {
+    post: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": {
+              message?: string;
+            };
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            email: components["schemas"]["User"]["email"];
           };
         };
       };
@@ -435,11 +610,11 @@ export interface components {
       /** Number of Locations with that Type ID. */
       count: number;
     };
-    /** Type properties that can be edited. Properties `scientific_names` and `common_names['en']` cannot both be empty. */
-    EditType: {
+    /** Type properties that can be edited. */
+    BaseType: {
       /** Type ID of taxonomic parent. */
       parent_id?: number | null;
-      /** Whether pending admin review. */
+      /** Whether pending admin review. This is always true unless set to false by an admin (not implemented). */
       pending?: boolean;
       /**
        * Scientific names, starting with the preferred synonym.
@@ -465,23 +640,29 @@ export interface components {
        * - 9: Subspecies
        */
       taxonomic_rank?: number | null;
-      /** Common names, starting with the preferred synonym, by language code (e.g. `en`) and optional region code (e.g. `en_us`). */
+      /** Common names, starting with the preferred synonym, by language code (e.g. `en`) and optional region code (e.g. `en_us`). Currently, only `en` can be set. */
       common_names?: { [key: string]: string[] };
-      /**
-       * Links to more information, by resource code.
-       * - wikipedia: English Wikipedia (https://en.wikipedia.org)
-       * - eat_the_weeds: Eat the Weeds (https://www.eattheweeds.com)
-       * - foraging_texas: Foraging Texas (https://www.foragingtexas.com)
-       * - urban_mushrooms: Urban Mushrooms (http://urbanmushrooms.com)
-       * - fruitipedia: Fruitipedia (http://www.fruitipedia.com)
-       * - usda: USDA Plants Database (https://plants.usda.gov)
-       */
-      urls?: { [key: string]: string };
+    };
+    /** Type properties that can be submitted. At least one name (in `common_names.en` or `scientific_names`) is required. */
+    SubmitType: components["schemas"]["BaseType"] & {
+      /** Submission notes. */
+      notes?: string | null;
     };
     /** All Type properties. */
     Type: components["schemas"]["IdField"] &
       components["schemas"]["DateFields"] &
-      components["schemas"]["EditType"] & { [key: string]: any };
+      components["schemas"]["BaseType"] & {
+        /**
+         * Links to more information, by resource code.
+         * - wikipedia: English Wikipedia (https://en.wikipedirg)
+         * - eat_the_weeds: Eat the Weeds (https://www.eattheweeds.com)
+         * - foraging_texas: Foraging Texas (https://www.foragingtexas.com)
+         * - urban_mushrooms: Urban Mushrooms (http://urbanmushrooms.com)
+         * - fruitipedia: Fruitipedia (http://www.fruitipedia.com)
+         * - usda: USDA Plants Database (https://plants.usda.gov)
+         */
+        urls: { [key: string]: string };
+      };
     ListLocation: components["schemas"]["IdField"] &
       components["schemas"]["LatLngFields"] & {
         /** Type IDs. */
@@ -512,13 +693,17 @@ export interface components {
       season_start?: number;
       /** Last month in season (zero-based). */
       season_stop?: number;
-      /** Author name. Either the `author` set when the Location was created (typically in an unauthenticated session) or the current `name` of the associated User, if that user was not anonymous when adding the location. Cannot be changed once set. */
-      author?: string | null;
+    };
+    /** Location properties that can be added. */
+    AddLocation: components["schemas"]["EditLocation"] & {
+      review?: components["schemas"]["EditReview"];
     };
     /** All Location properties. */
     Location: components["schemas"]["IdField"] &
       components["schemas"]["EditLocation"] &
       components["schemas"]["DateFields"] & {
+        /** Author name. Either a hardcoded `author` or the current `name` of the associated User. */
+        author: string | null;
         /** Address. Either provided for imported locations whose coordinates had to be geocoded from the address or reverse-geocoded from coordinates. */
         address: string | null;
         /** City (reverse-geocoded from coordinates). */
@@ -530,12 +715,12 @@ export interface components {
         /** Whether imported from a municipal tree inventory. */
         muni: boolean;
         /** Import ID. */
-        import_id: number | null;
+        import_id?: number | null;
+        import?: components["schemas"]["Import"];
+        /** Location reviews. */
+        reviews?: components["schemas"]["Review"][];
       };
-    /** Review properties that can be edited. */
-    EditReview: {
-      /** Author name. Either the `author` set when the Review was created (typically in an unauthenticated session) or the current `name` of the associated User, if that user was not anonymous when adding the location. Cannot be changed once set. */
-      author?: string | null;
+    BaseReview: {
       /** Comment. */
       comment?: string | null;
       /** Date visited in format YYYY-MM-DD. */
@@ -547,33 +732,53 @@ export interface components {
       /** Yield rating. */
       yield_rating?: (0 | 1 | 2 | 3 | 4) | null;
     };
+    /** Review properties that can be edited. */
+    EditReview: components["schemas"]["BaseReview"] & {
+      /** IDs of photos to link to the review. Previously linked photos are unlinked if their ids are omitted. Photos are ordered by the order of their ids. */
+      photo_ids?: number[];
+    };
     /** Observations of and opinions about a Location. */
     Review: components["schemas"]["IdField"] &
-      components["schemas"]["EditReview"] &
+      components["schemas"]["BaseReview"] &
       components["schemas"]["DateFields"] & {
         /** Location ID. */
         location_id: number;
         /** User ID. */
         user_id: number | null;
+        /** Author name. Either a hardcoded `author` or the current `name` of the associated User. */
+        author: string | null;
         photos: components["schemas"]["Photo"][];
       };
     /** Location photo. */
     Photo: {
-      /** Path to thumbnail. */
+      /** Photo ID. */
+      id: number;
+      /** Path to thumbnail (longest dimension <= 100 px). */
       thumb: string;
-      /** Path to medium size file. */
+      /** Path to medium size file (longest dimension <= 300 px). */
       medium: string;
-      /** Path to original file. */
+      /** Path to large size file (longest dimension <= 2048 px). */
       original: string;
     };
+    EditUser: {
+      /** Display name. */
+      name: string | null;
+    };
     User: components["schemas"]["IdField"] &
-      components["schemas"]["DateFields"] & {
+      components["schemas"]["DateFields"] &
+      components["schemas"]["EditUser"] & {
         /** Email. */
         email: string;
-        /** Display name. */
-        name: string;
-        /** Whether the display `name` should be displayed on Locations and Reviews added by this user. */
-        add_anonymously: boolean;
+        /** Date and time confirmed in format YYYY-MM-DDThh:mm:ss.sssZ. */
+        confirmed_at: string | null;
+        /**
+         * Roles.
+         * - user: Regular user.
+         * - admin: Administrator.
+         */
+        roles: ("user" | "admin")[];
+        /** Email change pending confirmation. */
+        unconfirmed_email?: string;
       };
     /** Report properties that can be edited. */
     EditReport: {
@@ -593,7 +798,7 @@ export interface components {
       comment?: string | null;
       /** Email to use for correspondence. If authenticated, defaults to the user's email. Otherwise, it is required. */
       email?: string;
-      /** Name to use for correspondence. If authenticated, defaults to the user's author name. */
+      /** Name to use for correspondence. If authenticated, defaults to the user's name. */
       name?: string | null;
     };
     /** Report of a problem with a Location. */
@@ -630,7 +835,19 @@ export interface components {
         license: string | null;
         /** Whether a municipal or university tree inventory. */
         muni: boolean;
+        /** Number of imported locations. */
+        location_count: number;
       };
+    Token: {
+      /** Access token. */
+      access_token: string;
+      /** Token type. */
+      token_type: "bearer";
+      /** Seconds until the access token expires. It may expire earlier if revoked. */
+      expires_in: number;
+      /** Refresh token. */
+      refresh_token: string;
+    };
   };
   parameters: {
     /** The southwest and northeast corners of the bounding box in WGS84 decimal degrees, in the format `swlat,swlng|nelat,nelng`. Latitude must be in the interval [-85.0511, 85.0511] and longitude must be in the interval [-180, 180]. */
@@ -639,70 +856,18 @@ export interface components {
     zoom: number;
     /** Whether to include Locations imported from municipal tree inventories. */
     muni: boolean;
-    /** Whether to include pending Types. */
-    pending: boolean;
-    /** IDs of Types to include (or all if empty). */
+    /** IDs of Types to include (all by default). */
     types: number[];
+    /** Whether to only return Locations with Types locally flagged as invasive species. Note that this parameter is not supported for filtering clusters. */
+    invasive: boolean;
     /** Location ID. */
     location_id: number;
     /** Type ID. */
     type_id: number;
     /** Review ID. */
     review_id: number;
-    /** Longitude in WGS84 decimal degrees. */
-    lng: number;
-    /** Latitude in WGS84 decimal degrees. */
-    lat: number;
-    /** Author name. If not provided, defaults to the User's name if the user has not opted to add locations anonymously. */
-    author: string;
-    /** Description. */
-    description: string;
-    /** First month in season. */
-    season_start: number;
-    /** Last month in season. */
-    season_stop: number;
-    /** Whether needs verification. */
-    unverified: boolean;
-    /**
-     * Access level.
-     * - 0: Location is on my property.
-     * - 1: I have permission from the owner to add this Location.
-     * - 2: Location is on public land.
-     * - 3: Location is on private property but overhangs public property.
-     * - 4: Location is on private property.
-     */
-    access: 0 | 1 | 2 | 3 | 4;
-    /** Review comment. */
-    comment: string;
-    /**
-     * Fruiting status.
-     * - 0: Flowers.
-     * - 1: Unripe fruit.
-     * - 2: Ripe fruit.
-     */
-    fruiting: 0 | 1 | 2;
-    /**
-     * Quality rating.
-     * - 0: Poor.
-     * - 1: Fair.
-     * - 2: Good.
-     * - 3: Very good.
-     * - 4: Excellent.
-     */
-    quality_rating: 0 | 1 | 2 | 3 | 4;
-    /**
-     * Yield rating.
-     * - 0: Poor.
-     * - 1: Fair.
-     * - 2: Good.
-     * - 3: Very good.
-     * - 4: Excellent.
-     */
-    yield_rating: 0 | 1 | 2 | 3 | 4;
     /** User ID. */
     user_id: number;
-    /** Date visited in format YYYY-MM-DD. */
-    observed_on: string;
     /** Import ID. */
     import_id: number;
   };
