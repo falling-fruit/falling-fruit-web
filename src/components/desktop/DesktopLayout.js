@@ -1,4 +1,4 @@
-import WindowSize from '@reach/window-size'
+import { WindowSize } from '@reach/window-size'
 import { Route, Switch } from 'react-router-dom'
 import SplitPane from 'react-split-pane'
 import styled from 'styled-components/macro'

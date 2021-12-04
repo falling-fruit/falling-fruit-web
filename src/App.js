@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css'
 
-import WindowSize from '@reach/window-size'
+import { WindowSize } from '@reach/window-size'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
