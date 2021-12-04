@@ -1,5 +1,3 @@
-// TODO: Remove below
-/* eslint-disable react/display-name */
 import { useField } from 'formik'
 
 import Label from '../ui/Label'
