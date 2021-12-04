@@ -59,6 +59,7 @@ const ImportsTable = () => {
     const getImportData = async () => {
       const res = await getImports()
       setData(res)
+      console.log(res)
     }
     getImportData()
   }, [])
@@ -66,7 +67,9 @@ const ImportsTable = () => {
     (item) =>
       (item.name &&
         item.name.toLowerCase().includes(filterText.toLowerCase())) ||
-      (item.type && item.type.toLowerCase().includes(filterText.toLowerCase())),
+      (item.muni && 'tree inventory'.includes(filterText.toLowerCase())) ||
+      (!item.muni && 'community map'.includes(filterText.toLowerCase())) ||
+      item.created_at.includes(filterText),
   )
 
   const subHeaderComponentMemo = React.useMemo(() => {
