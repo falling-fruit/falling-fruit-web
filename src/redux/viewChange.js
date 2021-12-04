@@ -97,7 +97,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   ) {
     dispatch(stopTrackingLocation())
   }
-  console.log('hello')
+
   dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
