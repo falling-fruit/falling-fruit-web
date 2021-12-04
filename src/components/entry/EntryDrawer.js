@@ -112,6 +112,7 @@ const EntryDrawer = ({
   const [finalCardHeight, setFinalCardHeight] = useState(
     paneHeight - ENTRY_IMAGE_HEIGHT,
   )
+  // maxDelta is the maximum amount of pixels the card can be dragged
   const maxDelta = finalCardHeight - initialCardHeight
   const [entryImageHeightMultiplier, setEntryImageHeightMultiplier] = useState(
     INITIAL_IMAGE_HEIGHT_SCALAR,
@@ -148,6 +149,8 @@ const EntryDrawer = ({
   }, [isFullScreen])
 
   const onDrag = () => {
+    // The height of cupertino pane is adjusted using transformY as it is dragged.
+    // Parse the transformY value to calculate the current height progress of the card.
     const transformStyles = cardRef.current.parentNode.style.transform
     const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
     const delta = windowHeight - transformYMatch - initialCardHeight
@@ -155,6 +158,7 @@ const EntryDrawer = ({
       INITIAL_IMAGE_HEIGHT_SCALAR +
       (1 - INITIAL_IMAGE_HEIGHT_SCALAR) * (delta / maxDelta)
     if (delta < 0) {
+      // If delta is negative, the card is being dragged downward.
       newHeightMultiplier = INITIAL_IMAGE_HEIGHT_SCALAR + delta / maxDelta
     }
     setEntryImageHeightMultiplier(newHeightMultiplier)
@@ -164,6 +168,7 @@ const EntryDrawer = ({
     if (cardRef.current) {
       const transformStyles = cardRef.current.parentNode.style.transform
       const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
+      // Parse the card's transformY value to identify the closest breakpoint.
       if (parseFloat(transformYMatch) === windowHeight - initialCardHeight) {
         setEntryImageHeightMultiplier(INITIAL_IMAGE_HEIGHT_SCALAR)
         setIsFullScreen(false)
@@ -198,7 +203,6 @@ const EntryDrawer = ({
     onDidDismiss: () => history.push('/map'),
     cssClass: `entry-main-card`,
     parentElement: '.entry-drawers',
-    touchMoveStopPropagation: true,
   }
 
   return (
