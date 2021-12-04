@@ -106,6 +106,7 @@ const EntryDrawer = ({
   const [drawer, setDrawer] = useState()
   const [isFullScreen, setIsFullScreen] = useState(false)
 
+  // TODO: Resizing the screen without refresh will break the drawer
   const { height: windowHeight } = useWindowSize()
   const paneHeight = windowHeight - FOOTER_HEIGHT
   const initialCardHeight = paneHeight * 0.3
@@ -230,6 +231,7 @@ const EntryDrawer = ({
           config={config}
         >
           {showEntryImages ? (
+            // TODO: Change to image carousel component
             <EntryImages heightScalar={entryImageHeightMultiplier}>
               <EntryImagesCard
                 src={reviews[0]?.photos[0]?.medium}
