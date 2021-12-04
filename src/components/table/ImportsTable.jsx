@@ -1,7 +1,9 @@
+import { Search as SearchIcon } from '@styled-icons/boxicons-regular'
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components/macro'
+import { useHistory } from 'react-router-dom'
 
 import { getImports } from '../../utils/api'
+import Input from '../ui/Input'
 import DataTable from './DataTable'
 import { FORMATTERS } from './DataTableProperties'
 
@@ -32,34 +34,21 @@ const columns = [
     format: FORMATTERS.created_at,
   },
   {
-    id: 'dataset_link',
+    id: 'link',
     name: 'Dataset Link',
     selector: (row) => row.link,
+    format: FORMATTERS.link,
   },
 ]
-const TextField = styled.input`
-  height: 32px;
-  width: 200px;
-  border-radius: 3px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border: 1px solid #e5e5e5;
-  padding: 0 32px 0 16px;
-  font-family: Lato;
-  &:hover {
-    cursor: pointer;
-  }
-`
+// /about/dataset/:datasetID
 const ImportsTable = () => {
   const [data, setData] = useState([])
   const [filterText, setFilterText] = React.useState('')
+  const history = useHistory()
   useEffect(() => {
     const getImportData = async () => {
       const res = await getImports()
       setData(res)
-      console.log(res)
     }
     getImportData()
   }, [])
@@ -72,6 +61,11 @@ const ImportsTable = () => {
       item.created_at.includes(filterText),
   )
 
+  const onRowClicked = (row) => {
+    history.push({
+      pathname: `/about/dataset/${row.id}`,
+    })
+  }
   const subHeaderComponentMemo = React.useMemo(() => {
     const handleClear = () => {
       if (filterText) {
@@ -95,16 +89,16 @@ const ImportsTable = () => {
       subHeader
       subHeaderComponent={subHeaderComponentMemo}
       persistTableHead
+      onRowClicked={onRowClicked}
     />
   )
 }
 
 const FilterComponent = ({ filterText, onFilter }) => (
   <>
-    <TextField
-      id="search"
-      type="text"
+    <Input
       placeholder="Search for a dataset"
+      icon={<SearchIcon />}
       value={filterText}
       onChange={onFilter}
     />

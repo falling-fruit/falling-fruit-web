@@ -24,10 +24,18 @@ const ResourceList = ({ url, key }) =>
   )
 
 const FORMATTERS = {
+  link: function LinkFormat({ url }) {
+    return (
+      <a href={url} target="_blank" rel="noreferrer">
+        Link
+      </a>
+    )
+  },
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
-  // eslint-disable-next-line react/display-name
-  name: ({ name, url }) => <NameLink href={url}>{name}</NameLink>,
+  name: function NameFormat({ name, url }) {
+    return <NameLink href={url}>{name}</NameLink>
+  },
   created_at: ({ created_at }) =>
     new Date(created_at).toISOString().split('T')[0],
 }
