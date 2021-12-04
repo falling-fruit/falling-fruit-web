@@ -173,6 +173,30 @@ const SettingsPage = ({ desktop }) => {
           )
         }
       />
+      {[
+        {
+          field: 'showBusinesses',
+          label: t('Show Businesses'),
+        },
+      ].map(({ field, label }) => (
+        <LabeledRow
+          key={field}
+          left={
+            <Checkbox
+              id={field}
+              onClick={(e) =>
+                dispatch(
+                  updateSettings({
+                    [field]: e.target.checked,
+                  }),
+                )
+              }
+              checked={settings[field]}
+            />
+          }
+          label={<label htmlFor={field}>{label}</label>}
+        />
+      ))}
 
       <h3>{t('Language Preferences')}</h3>
 

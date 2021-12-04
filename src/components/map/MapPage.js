@@ -101,6 +101,7 @@ const MapPage = ({ isDesktop }) => {
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
         showLabels={settings.showLabels}
+        showBusinesses={settings.showBusinesses}
       />
     </div>
   )
