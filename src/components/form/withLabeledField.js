@@ -30,9 +30,8 @@ export const withLabel = (WrappedField) => {
   return FieldWithLabel
 }
 
-export const withField =
-  (WrappedComponent, type, bypassFormik = false) =>
-  (props) => {
+export const withField = (WrappedComponent, type, bypassFormik = false) => {
+  const FieldComponent = (props) => {
     const [field, meta, helpers] = useField({ ...props, type })
     const customProps = bypassFormik
       ? {
@@ -50,6 +49,10 @@ export const withField =
       />
     )
   }
+  FieldComponent.displayName = `${WrappedComponent.displayName}WithField`
+
+  return FieldComponent
+}
 
 export const withLabeledField = (WrappedField, ...args) =>
   withField(withLabel(WrappedField), ...args)

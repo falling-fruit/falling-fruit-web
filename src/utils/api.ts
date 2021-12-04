@@ -34,17 +34,20 @@ const handleResponse = (request: Promise<AxiosResponse<any>>) =>
     })
 
 export const addUser = (
-  params: paths['/users']['post']['requestBody']['content']['application/json'],
-) => handleResponse(instance.post('/users', params))
+  params: paths['/user']['post']['requestBody']['content']['application/json'],
+) => handleResponse(instance.post('/user', params))
 
 export const editUser = (
-  id: paths['/users/{id}']['put']['requestBody']['content']['application/json'],
-  params: paths['/users/{id}']['put']['requestBody']['content']['application/json'],
-) => handleResponse(instance.put(`/users/${id}`, params))
+  params: paths['/user']['put']['requestBody']['content']['application/json'],
+) => handleResponse(instance.put('/user', params))
 
-export const getUserToken = (
-  params: paths['/users/token']['get']['parameters']['query'],
-) => handleResponse(instance.get('/users/token', { params }))
+export const getUserToken = (username: string, password: string) => {
+  const formData = new FormData()
+  formData.append('username', username)
+  formData.append('password', password)
+
+  return handleResponse(instance.post('/user/token', formData))
+}
 
 /* Not used yet
 const fileToFormData = (photoData: string | Blob | undefined) => {
@@ -74,7 +77,8 @@ export const addLocation = (
 
 export const getLocationById = (
   id: paths['/locations/{id}']['get']['parameters']['path']['id'],
-) => handleResponse(instance.get(`/locations/${id}`))
+  embed: paths['/locations/{id}']['get']['parameters']['query']['embed'],
+) => handleResponse(instance.get(`/locations/${id}`, { params: { embed } }))
 
 export const editLocation = (
   id: paths['/locations/{id}']['put']['parameters']['path']['id'],
@@ -226,25 +230,14 @@ export const getReviewById = (
 
 export const addReview = (
   locationId: paths['/locations/{id}/reviews']['post']['parameters']['path']['id'],
-  data: paths['/locations/{id}/reviews']['post']['requestBody']['content']['multipart/form-data']['json'],
-) => {
-  const formData = new FormData()
-  formData.append('json', JSON.stringify(data))
-
-  return handleResponse(
-    instance.post(`/locations/${locationId}/reviews`, formData),
-  )
-}
+  params: paths['/locations/{id}/reviews']['post']['requestBody']['content']['application/json'],
+) =>
+  handleResponse(instance.post(`/locations/${locationId}/reviews`, { params }))
 
 export const editReview = (
   id: paths['/reviews/{id}']['put']['parameters']['path']['id'],
-  data: paths['/reviews/{id}']['put']['requestBody']['content']['multipart/form-data']['json'],
-) => {
-  const formData = new FormData()
-  formData.append('json', JSON.stringify(data))
-
-  return handleResponse(instance.put(`/reviews/${id}`, formData))
-}
+  params: paths['/reviews/{id}']['put']['requestBody']['content']['application/json'],
+) => handleResponse(instance.put(`/reviews/${id}`, { params }))
 
 /*
 export const addReport = (data: paths['/reports']['post']['requestBody']['content']['multipart/form-data']['json']) => {
