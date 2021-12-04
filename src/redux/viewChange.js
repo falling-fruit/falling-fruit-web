@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
 import { fetchFilterCounts } from './filterSlice'
-import { clearListLocations, fetchListLocations } from './listSlice'
+import { clearListLocations } from './listSlice'
 import {
   fetchMapClusters,
   fetchMapLocations,
@@ -44,10 +44,6 @@ export const fetchLocations = () => (dispatch, getState) => {
       dispatch(clearListLocations())
     } else {
       dispatch(fetchMapLocations())
-      const state = getState()
-      if (state.misc.isDesktop && state.list.shouldFetchNewLocations) {
-        dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
-      }
     }
   }
 }
@@ -83,7 +79,6 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
-
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
 
@@ -100,7 +95,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
-  if (state.filter.isOpen) {
+  if (state.filter.isOpen || state.misc.isDesktop) {
     dispatch(fetchFilterCounts())
   }
 }
