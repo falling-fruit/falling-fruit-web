@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 import {
   clusterClick,
   restoreOldView,
+  setEntry,
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
@@ -28,7 +29,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 const MapPage = ({ isDesktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
-    path: '/(map|list)/entry/:entryId',
+    path: '/(map|list)/entry/:entryId/:geocoord',
     exact: true,
   })
 
@@ -55,8 +56,9 @@ const MapPage = ({ isDesktop }) => {
   }, [dispatch, isAddingLocation])
 
   const handleLocationClick = (location) => {
+    dispatch(setEntry(location.id))
     history.push({
-      pathname: `/map/entry/${location.id}`,
+      pathname: `/map/entry/${location.id}/@${view.center.lat},${view.center.lng},${view.zoom}z`,
       state: { fromPage: '/map' },
     })
   }
@@ -91,7 +93,7 @@ const MapPage = ({ isDesktop }) => {
         }
         activeLocationId={entryId || hoveredLocationId}
         onViewChange={(newView) => {
-          dispatch(viewChangeAndFetch(newView, false))
+          dispatch(viewChangeAndFetch(newView))
         }}
         onGeolocationClick={() => {
           dispatch(

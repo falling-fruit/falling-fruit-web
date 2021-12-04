@@ -21,6 +21,14 @@ export const parseUrl = () => {
   }
 }
 
+export const getEntry = () => {
+  const url = window.location.href
+  if (url.indexOf('/entry/') === -1) {
+    return null
+  }
+  return url.substring(url.indexOf(/entry/) + 7, url.indexOf('/@'))
+}
+
 const getValidCoord = (geocoordMatch) => {
   //@lat,long,zoomz
   const urlFormatMatchRegex = /^@\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,[1-9]\d*z$/

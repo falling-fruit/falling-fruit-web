@@ -36,6 +36,7 @@ export const fetchLocations = () => (dispatch, getState) => {
 
   if (bounds?.ne.lat != null && zoom > 1) {
     // Map has received real bounds
+
     if (getIsShowingClusters(state)) {
       dispatch(fetchMapClusters())
       dispatch(clearListLocations())
@@ -74,16 +75,15 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
   return screenDist >= threshold
 }
 
-export const viewChangeAndFetch = (newView, initialView) => (
-  dispatch,
-  getState,
-) => {
+export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
-  if (!initialView) {
-    const urlStr = `/map/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
+  console.log('VCAF')
+  if (state.map.entry != null) {
+    const urlStr = `/map/entry/${state.map.entry}/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
     window.history.pushState({}, '', urlStr)
   } else {
-    dispatch(viewChange(newView))
+    const urlStr = `/map/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
+    window.history.pushState({}, '', urlStr)
   }
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
@@ -97,7 +97,7 @@ export const viewChangeAndFetch = (newView, initialView) => (
   ) {
     dispatch(stopTrackingLocation())
   }
-
+  console.log('hello')
   dispatch(viewChange(newView))
   dispatch(fetchLocations())
 
