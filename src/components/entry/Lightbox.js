@@ -14,6 +14,7 @@ const StyledDialog = styled(Dialog)`
   width: 80%;
   max-width: 900px;
   border-radius: 12.5px;
+  padding: 16px;
 `
 //  TODO: Fix lightbox behavior for mobile
 const StyledReviewImage = styled.img`
@@ -35,7 +36,7 @@ const ReviewContainer = styled.div`
   min-width: 300px;
 `
 const ThumbnailImage = styled(ImagePreview)`
-  outline: ${(props) => props.selected && `5px solid ${props.theme.orange}`};
+  outline: ${(props) => props.selected && `3px solid ${props.theme.orange}`};
   border-radius: 3px;
   margin-right: 10px;
   img {
@@ -51,7 +52,7 @@ const ThumbnailImageContainer = styled.div`
 
 const NavButtonContainer = styled.div`
   position: absolute;
-  bottom: 50px;
+  bottom: 8px;
   right: 0px;
 `
 
@@ -94,13 +95,12 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
   const incrementReviewImage = () => {
-    const i = index[0]
-    const j = index[1]
-    if (j + 1 < reviewImages[i].length) {
-      onIndexChange([i, j + 1])
+    const [reviewIdx, imageIdx] = index
+    if (imageIdx + 1 < reviewImages[reviewIdx].length) {
+      onIndexChange([reviewIdx, imageIdx + 1])
     } else {
-      if (i + 1 < reviewImages.length) {
-        onIndexChange([i + 1, 0])
+      if (reviewIdx + 1 < reviewImages.length) {
+        onIndexChange([reviewIdx + 1, 0])
       } else {
         onIndexChange([0, 0])
       }
@@ -143,7 +143,7 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
         <Review review={reviews[index[0]]} includePreview={false} />
 
         <ThumbnailImageContainer>
-          {reviewImages[index[0]].map((photo, index) => (
+          {reviewImages[index[0]].map((photo, idx) => (
             <ThumbnailImage
               $small
               key={photo.thumb}
@@ -152,7 +152,7 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
               <img
                 src={photo.thumb}
                 alt={reviews.title}
-                onClick={() => onIndexChange([index[0], index])}
+                onClick={() => onIndexChange([index[0], idx])}
               />
             </ThumbnailImage>
           ))}
