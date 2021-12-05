@@ -60,6 +60,7 @@ export const mapSlice = createSlice({
     justStartedTrackingLocation: false,
     locationRequested: false,
     streetView: false,
+    location: null,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
@@ -133,9 +134,11 @@ export const mapSlice = createSlice({
         zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
       }
     },
-
-    setStreetView: (state, action) => {
-      state.streetView = action.payload()
+    enableStreetView: (state, action) => {
+      if (action.payload.location) {
+        state.location = action.payload.location
+      }
+      state.streetView = action.payload.streetView
     },
   },
   extraReducers: {
@@ -174,6 +177,7 @@ export const {
   startTrackingLocation,
   stopTrackingLocation,
   geolocationChange,
+  enableStreetView,
 } = mapSlice.actions
 
 export default mapSlice.reducer

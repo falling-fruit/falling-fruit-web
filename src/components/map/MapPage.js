@@ -44,6 +44,7 @@ const MapPage = ({ isDesktop }) => {
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
   const geolocation = useSelector((state) => state.map.geolocation)
   const locationRequested = useSelector((state) => state.map.locationRequested)
+  const streetView = useSelector((state) => state.map.streetView)
   const view = useSelector((state) => state.map.view)
   const clusters = useSelector((state) => state.map.clusters)
 
@@ -105,6 +106,7 @@ const MapPage = ({ isDesktop }) => {
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
         showLabels={settings.showLabels}
+        showStreetView={streetView}
         showBusinesses={settings.showBusinesses}
       />
     </div>
