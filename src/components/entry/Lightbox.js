@@ -76,6 +76,10 @@ const NavButton = styled(ResetButton)`
   margin-right: 10px;
   background: rgba(0, 0, 0, 0.65);
   box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
+
+  &:disabled {
+    color: grey;
+  }
 `
 const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
   const reviewImages = reviews
@@ -98,23 +102,14 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
     const [reviewIdx, imageIdx] = index
     if (imageIdx + 1 < reviewImages[reviewIdx].length) {
       onIndexChange([reviewIdx, imageIdx + 1])
-    } else {
-      if (reviewIdx + 1 < reviewImages.length) {
-        onIndexChange([reviewIdx + 1, 0])
-      } else {
-        onIndexChange([0, 0])
-      }
+    } else if (reviewIdx + 1 < reviewImages.length) {
+      onIndexChange([reviewIdx + 1, 0])
     }
   }
   const decrementReviewImage = () => {
     const [reviewIdx, imageIdx] = index
-    if (imageIdx <= 0) {
-      if (reviewIdx <= 0) {
-        onIndexChange([
-          reviewImages.length - 1,
-          reviewImages[reviewImages.length - 1].length - 1,
-        ])
-      } else {
+    if (imageIdx === 0) {
+      if (reviewIdx > 0) {
         onIndexChange([reviewIdx - 1, reviewImages[reviewIdx - 1].length - 1])
       }
     } else {
@@ -127,14 +122,25 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
         <StyledReviewImage
           src={reviewImages[index[0]]?.[index[1]]?.medium ?? ''}
         />
-        <NavButtonContainer>
-          <NavButton onClick={decrementReviewImage}>
-            <LeftArrowAlt size={30} />
-          </NavButton>
-          <NavButton onClick={incrementReviewImage}>
-            <RightArrowAlt size={30} />
-          </NavButton>
-        </NavButtonContainer>
+        {reviewImages.length > 1 && (
+          <NavButtonContainer>
+            <NavButton
+              disabled={index[0] === 0 && index[1] === 0}
+              onClick={decrementReviewImage}
+            >
+              <LeftArrowAlt size={30} />
+            </NavButton>
+            <NavButton
+              disabled={
+                index[0] === reviewImages.length - 1 &&
+                index[1] === reviewImages[reviewImages.length - 1].length - 1
+              }
+              onClick={incrementReviewImage}
+            >
+              <RightArrowAlt size={30} />
+            </NavButton>
+          </NavButtonContainer>
+        )}
       </ImageContainer>
       <ReviewContainer>
         <ExitButton onClick={onDismiss}>
