@@ -44,7 +44,7 @@ const Entry = ({ isInDrawer }) => {
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const [showLighbox, setShowLightbox] = useState(false)
-  const [currReviewIndex, setCurrReviewIndex] = useState([0, 0])
+  const [lightboxIndex, setLightboxIndex] = useState([0, 0])
 
   const closeLightbox = () => setShowLightbox(false)
 
@@ -96,9 +96,9 @@ const Entry = ({ isInDrawer }) => {
         {showLighbox && reviews && (
           <Lightbox
             onDismiss={closeLightbox}
-            review={reviews ?? []}
-            currReviewIndex={currReviewIndex}
-            setCurrReviewIndex={setCurrReviewIndex}
+            reviews={reviews ?? []}
+            index={lightboxIndex}
+            onIndexChange={setLightboxIndex}
           />
         )}
         {isInDrawer ? (

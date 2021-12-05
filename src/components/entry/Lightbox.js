@@ -31,7 +31,7 @@ const ReviewContainer = styled.div`
   flex-direction: column;
   margin-left: 24px;
   padding-top: 50px;
-  max-width: 500px;
+  max-width: 300px;
   min-width: 300px;
 `
 const ThumbnailImage = styled(ImagePreview)`
@@ -76,14 +76,8 @@ const NavButton = styled(ResetButton)`
   background: rgba(0, 0, 0, 0.65);
   box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
 `
-const Lightbox = ({
-  onDismiss,
-  review,
-  currReviewIndex,
-  setCurrReviewIndex,
-}) => {
-  console.log('review', review)
-  const reviewImages = review
+const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
+  const reviewImages = reviews
     .filter((review) => review.photos.length > 0)
     .map((review) => review.photos)
   // Add useCallback in future
@@ -100,43 +94,38 @@ const Lightbox = ({
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
   const incrementReviewImage = () => {
-    const i = currReviewIndex[0]
-    const j = currReviewIndex[1]
+    const i = index[0]
+    const j = index[1]
     if (j + 1 < reviewImages[i].length) {
-      setCurrReviewIndex([i, j + 1])
+      onIndexChange([i, j + 1])
     } else {
       if (i + 1 < reviewImages.length) {
-        setCurrReviewIndex([i + 1, 0])
+        onIndexChange([i + 1, 0])
       } else {
-        setCurrReviewIndex([0, 0])
+        onIndexChange([0, 0])
       }
     }
   }
   const decrementReviewImage = () => {
-    const [reviewIdx, imageIdx] = currReviewIndex
+    const [reviewIdx, imageIdx] = index
     if (imageIdx <= 0) {
       if (reviewIdx <= 0) {
-        setCurrReviewIndex([
+        onIndexChange([
           reviewImages.length - 1,
           reviewImages[reviewImages.length - 1].length - 1,
         ])
       } else {
-        setCurrReviewIndex([
-          reviewIdx - 1,
-          reviewImages[reviewIdx - 1].length - 1,
-        ])
+        onIndexChange([reviewIdx - 1, reviewImages[reviewIdx - 1].length - 1])
       }
     } else {
-      setCurrReviewIndex([reviewIdx, imageIdx - 1])
+      onIndexChange([reviewIdx, imageIdx - 1])
     }
   }
   return (
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
         <StyledReviewImage
-          src={
-            reviewImages[currReviewIndex[0]]?.[currReviewIndex[1]]?.medium ?? ''
-          }
+          src={reviewImages[index[0]]?.[index[1]]?.medium ?? ''}
         />
         <NavButtonContainer>
           <NavButton onClick={decrementReviewImage}>
@@ -151,22 +140,19 @@ const Lightbox = ({
         <ExitButton onClick={onDismiss}>
           <X size={30} />
         </ExitButton>
-        <Review review={review[currReviewIndex[0]]} includePreview={false} />
+        <Review review={reviews[index[0]]} includePreview={false} />
 
         <ThumbnailImageContainer>
-          {reviewImages[currReviewIndex[0]].map((photo, index) => (
+          {reviewImages[index[0]].map((photo, index) => (
             <ThumbnailImage
               $small
               key={photo.thumb}
-              selected={
-                photo.thumb ===
-                reviewImages[currReviewIndex[0]][currReviewIndex[1]].thumb
-              }
+              selected={photo.thumb === reviewImages[index[0]][index[1]].thumb}
             >
               <img
                 src={photo.thumb}
-                alt={review.title}
-                onClick={() => setCurrReviewIndex([currReviewIndex[0], index])}
+                alt={reviews.title}
+                onClick={() => onIndexChange([index[0], index])}
               />
             </ThumbnailImage>
           ))}
