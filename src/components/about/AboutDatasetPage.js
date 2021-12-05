@@ -1,6 +1,5 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
-import { Copyright, MapPin } from '@styled-icons/boxicons-solid'
-import { LocationPin } from '@styled-icons/entypo/'
+import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
@@ -55,7 +54,7 @@ const AboutDatasetPage = () => {
             <a href={importData.url}>Website</a>
             <p>{importData.comments}</p>
             <IconBesideText>
-              <LocationPin color={theme.secondaryText} size={20} />
+              <Pin color={theme.secondaryText} size={20} />
               <p>{importData.muni ? 'Tree Inventory' : 'Community Map'}</p>
             </IconBesideText>
             <IconBesideText>

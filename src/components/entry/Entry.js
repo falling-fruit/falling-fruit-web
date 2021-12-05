@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { getLocationById, getReviews } from '../../utils/api'
+import { getLocationById } from '../../utils/api'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
 import EntryOverview from './EntryOverview'
@@ -48,13 +48,9 @@ const Entry = ({ isInDrawer }) => {
     async function fetchEntryData() {
       setIsLoading(true)
 
-      const [locationData, reviews] = await Promise.all([
-        getLocationById(id),
-        getReviews(id),
-      ])
-
+      const locationData = await getLocationById(id, 'reviews')
       setLocationData(locationData)
-      setReviews(reviews)
+      setReviews(locationData.reviews)
 
       setIsLoading(false)
     }
