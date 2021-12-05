@@ -14,7 +14,6 @@ import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
-import ResetButton from '../ui/ResetButton'
 import { Tag, TagList } from '../ui/Tag'
 import { TextContent } from './Entry'
 import {
@@ -40,14 +39,12 @@ const IconBesideText = styled.div`
     margin: 0 0 0 4px;
     font-size: 0.875rem;
   }
-`
-const LocationText = styled(ResetButton)`
-  font-weight: bold;
-  text-align: left;
-  font-size: 0.875rem;
-  margin: 0 0 0 4px;
-  flex: 1;
-  color: ${({ theme }) => theme.secondaryText};
+
+  ${($props) =>
+    $props.onClick &&
+    `
+  cursor: pointer;
+  `};
 `
 
 // Wraps description, last updated text, and review and report buttons
@@ -148,12 +145,12 @@ const EntryOverview = ({ locationData, className }) => {
 
             <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
               <Map color={theme.secondaryText} size={20} />
-              <LocationText>
+              <p>
                 {locationData.address ??
                   `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(
                     6,
                   )}`}
-              </LocationText>
+              </p>
             </IconBesideText>
             <IconBesideText bold onClick={handleStreetView}>
               <StreetView size={20} />
