@@ -73,6 +73,11 @@ const Map = ({
 
   const setHeading = async (panoClient, markerLocation, panorama) => {
     try {
+      // TODO!
+      // Let's move all this logic to the entry page load and open a second
+      // google map iframe/instance this way the map will be ready by the
+      // time the user clicks on it and we can tell users whether or not its
+      // available
       const pano = await panoClient.getPanorama({
         location: markerLocation,
         radius: 50,
