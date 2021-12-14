@@ -40,7 +40,7 @@ const columns = [
     format: FORMATTERS.link,
   },
 ]
-// /about/dataset/:datasetID
+
 const ImportsTable = () => {
   const [data, setData] = useState([])
   const [filterText, setFilterText] = React.useState('')
