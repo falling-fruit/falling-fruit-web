@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Dialog } from '@reach/dialog'
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import ImagePreview from '../ui/ImagePreview'
@@ -85,28 +85,17 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
   const reviewImages = reviews
     .filter((review) => review.photos.length > 0)
     .map((review) => review.photos)
-  // Add useCallback in future
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const onKeyDown = ({ key }) => {
-    if (key === 'ArrowRight') {
-      incrementReviewImage()
-    } else if (key === 'ArrowLeft') {
-      decrementReviewImage()
-    }
-  }
-  useEffect(() => {
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [onKeyDown])
-  const incrementReviewImage = () => {
+
+  const incrementReviewImage = useCallback(() => {
     const [reviewIdx, imageIdx] = index
     if (imageIdx + 1 < reviewImages[reviewIdx].length) {
       onIndexChange([reviewIdx, imageIdx + 1])
     } else if (reviewIdx + 1 < reviewImages.length) {
       onIndexChange([reviewIdx + 1, 0])
     }
-  }
-  const decrementReviewImage = () => {
+  }, [index, onIndexChange, reviewImages])
+
+  const decrementReviewImage = useCallback(() => {
     const [reviewIdx, imageIdx] = index
     if (imageIdx === 0) {
       if (reviewIdx > 0) {
@@ -115,7 +104,23 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
     } else {
       onIndexChange([reviewIdx, imageIdx - 1])
     }
-  }
+  }, [index, onIndexChange, reviewImages])
+
+  const onKeyDown = useCallback(
+    ({ key }) => {
+      if (key === 'ArrowRight') {
+        incrementReviewImage()
+      } else if (key === 'ArrowLeft') {
+        decrementReviewImage()
+      }
+    },
+    [incrementReviewImage, decrementReviewImage],
+  )
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [onKeyDown])
+
   return (
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
