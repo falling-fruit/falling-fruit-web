@@ -125,7 +125,7 @@ const ExtraImagesWrapper = styled(ResetButton)`
   }
 `
 
-const PhotoData = ({ photos, altText, openLightbox }) => {
+const PhotoGrid = ({ photos, altText, onViewLightbox }) => {
   const { t } = useTranslation()
   const reviewPhotos = photos.flat()
   console.log(reviewPhotos)
@@ -141,8 +141,8 @@ const PhotoData = ({ photos, altText, openLightbox }) => {
           className="main-image"
           src={reviewPhotos[0].medium}
           alt={altText}
-          onClick={() => openLightbox(photos)}
-          onKeyDown={() => openLightbox(photos)}
+          onClick={onViewLightbox}
+          onKeyDown={onViewLightbox}
         />
         {reviewPhotos.length > 1 && (
           <ExtraImagesWrapper disabled={reviewPhotos.length < 3}>
@@ -169,4 +169,4 @@ const PhotoData = ({ photos, altText, openLightbox }) => {
   )
 }
 
-export default PhotoData
+export default PhotoGrid

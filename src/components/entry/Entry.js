@@ -43,10 +43,10 @@ const Entry = ({ isInDrawer }) => {
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const [showLighbox, setisLightboxOpen] = useState(false)
+  const [showLighbox, setIsLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState([0, 0])
 
-  const closeLightbox = () => setisLightboxOpen(false)
+  const closeLightbox = () => setIsLightboxOpen(false)
 
   const { id } = useParams()
 
@@ -87,7 +87,7 @@ const Entry = ({ isInDrawer }) => {
         <PhotoGrid
           photos={allReviewPhotos}
           altText={locationData.address}
-          openLightbox={() => setisLightboxOpen(true)}
+          onViewLightbox={() => setIsLightboxOpen(true)}
         />
         {showLighbox && reviews && (
           <Lightbox
