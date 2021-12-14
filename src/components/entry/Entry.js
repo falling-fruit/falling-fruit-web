@@ -43,7 +43,7 @@ const Entry = ({ isInDrawer }) => {
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const [showLighbox, setIsLightboxOpen] = useState(false)
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState([0, 0])
 
   const closeLightbox = () => setIsLightboxOpen(false)
@@ -89,7 +89,7 @@ const Entry = ({ isInDrawer }) => {
           altText={locationData.address}
           onViewLightbox={() => setIsLightboxOpen(true)}
         />
-        {showLighbox && reviews && (
+        {isLightboxOpen && reviews && (
           <Lightbox
             onDismiss={closeLightbox}
             reviews={reviews ?? []}
