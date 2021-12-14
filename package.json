@@ -43,6 +43,7 @@
     "react-scripts": "^4.0.3",
     "react-select": "^4.3.0",
     "react-split-pane": "^0.1.92",
+    "react-toastify": "^8.1.0",
     "react-use": "^17.2.1",
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.6",

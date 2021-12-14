@@ -73,9 +73,10 @@ const MuniAndInvasiveCheckboxFilters = styled.div`
 
 const Filter = ({ isOpen }) => {
   const [searchValue, setSearchValue] = useState('')
-  const setSearchValueDebounced = useMemo(() => debounce(setSearchValue, 200), [
-    setSearchValue,
-  ])
+  const setSearchValueDebounced = useMemo(
+    () => debounce(setSearchValue, 200),
+    [setSearchValue],
+  )
 
   const dispatch = useDispatch()
   const { typesById } = useTypesById()
