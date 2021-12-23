@@ -7,18 +7,18 @@ const AUTH_TOKEN_KEY = 'authToken'
 export const fetchToken = createAsyncThunk(
   'users/fetchToken',
   async ({ email, password, rememberMe }) => {
-    const response = await getUserToken(email, password)
+    const token = await getUserToken(email, password)
 
     if (rememberMe) {
-      localStorage.setItem(AUTH_TOKEN_KEY, response)
+      localStorage.setItem(AUTH_TOKEN_KEY, token)
     } else {
-      sessionStorage.setItem(AUTH_TOKEN_KEY, response)
+      sessionStorage.setItem(AUTH_TOKEN_KEY, token)
     }
 
-    instance.defaults.headers.common.Authorization = `Bearer ${response.access_token}`
+    instance.defaults.headers.common.Authorization = `Bearer ${token.access_token}`
     const user = await getUser()
 
-    return { token: response, user }
+    return { token, user }
   },
 )
 
@@ -33,18 +33,32 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logout: (state) => {
-      state.user = null
-      state.authToken = null
+    logout: {
+      reducer: (state) => {
+        state.user = null
+        state.authToken = null
+      },
+      prepare: () => {
+        localStorage.clear()
+        sessionStorage.clear()
 
-      localStorage.clear()
-      sessionStorage.clear()
+        return {}
+      },
     },
-    login: (state) => {
-      const localAuthToken = localStorage.getItem(AUTH_TOKEN_KEY)
-      const sessionAuthToken = sessionStorage.getItem(AUTH_TOKEN_KEY)
+    login: {
+      reducer: (state, action) => {
+        const { localAuthToken, sessionAuthToken } = action
+        state.authToken = localAuthToken ?? sessionAuthToken
+      },
+      prepare: () => {
+        const localAuthToken = localStorage.getItem(AUTH_TOKEN_KEY)
+        const sessionAuthToken = sessionStorage.getItem(AUTH_TOKEN_KEY)
 
-      state.authToken = localAuthToken ?? sessionAuthToken
+        return {
+          localAuthToken,
+          sessionAuthToken,
+        }
+      },
     },
   },
   extraReducers: {
