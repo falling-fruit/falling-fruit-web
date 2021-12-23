@@ -1,3 +1,5 @@
+// TODO: Fix lint error properly
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { ImageAdd } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
@@ -37,6 +39,7 @@ const StyledPhotoGrid = styled.figure`
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
+    cursor: pointer;
   }
 
   @media ${({ theme }) => theme.device.mobile} {
@@ -123,31 +126,35 @@ const ExtraImagesWrapper = styled(ResetButton)`
   }
 `
 
-const PhotoData = ({ photos, altText, onViewLightbox }) => {
+const PhotoGrid = ({ photos, altText, onViewLightbox }) => {
   const { t } = useTranslation()
+  const reviewPhotos = photos.flat()
   return (
-    photos.length > 0 && (
+    reviewPhotos.length > 0 && (
       // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.
       // TODO: use alt based off of photo description or filename
 
       // TODO: connect to lightbox once implemented
       // TODO: this should be in the photogrid itself, shouldn't have to be handled here
       <StyledPhotoGrid>
-        <img className="main-image" src={photos[0].medium} alt={altText} />
-        {photos.length > 1 && (
-          <ExtraImagesWrapper
-            onClick={onViewLightbox}
-            disabled={photos.length < 3}
-          >
-            {photos.length > 2 && (
+        <img
+          className="main-image"
+          src={reviewPhotos[0].medium}
+          alt={altText}
+          onClick={onViewLightbox}
+          onKeyDown={onViewLightbox}
+        />
+        {reviewPhotos.length > 1 && (
+          <ExtraImagesWrapper disabled={reviewPhotos.length < 3}>
+            {reviewPhotos.length > 2 && (
               <div className="other-photos-mask">
-                <span>{photos.length - 2}</span>
+                <span>{reviewPhotos.length - 2}</span>
                 {t('Photos')}
               </div>
             )}
             <img
               className="extra-images"
-              src={photos[1].medium}
+              src={reviewPhotos[1].medium}
               alt={altText}
             />
           </ExtraImagesWrapper>
@@ -162,4 +169,4 @@ const PhotoData = ({ photos, altText, onViewLightbox }) => {
   )
 }
 
-export default PhotoData
+export default PhotoGrid

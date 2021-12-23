@@ -35,7 +35,8 @@ const ReviewDescription = styled.section`
     font-size: 0.875rem;
   }
 `
-const StyledImagePreview = styled(ImagePreview)`
+export const StyledImagePreview = styled(ImagePreview)`
+  cursor: pointer;
   margin-right: 7px;
 `
 
@@ -57,7 +58,7 @@ const RATINGS = [
   },
 ]
 
-const Review = ({ review }) => (
+const Review = ({ review, onImageClick, includePreview = true }) => (
   <ReviewContainer>
     <RatingTable>
       <tbody>
@@ -82,11 +83,20 @@ const Review = ({ review }) => (
         {review.author ?? 'Anonymous'}
       </cite>
     </ReviewDescription>
-    {review.photos.map((photo) => (
-      <StyledImagePreview $small key={photo.thumb}>
-        <img src={photo.thumb} alt={review.title} />
-      </StyledImagePreview>
-    ))}
+    {includePreview &&
+      // TODO: review images need to link to specific
+      review.photos.map((photo, index) => (
+        <StyledImagePreview
+          $small
+          key={photo.thumb}
+          onClick={() => {
+            onImageClick(index)
+            console.log(index)
+          }}
+        >
+          <img src={photo.thumb} alt={review.title} />
+        </StyledImagePreview>
+      ))}
   </ReviewContainer>
 )
 

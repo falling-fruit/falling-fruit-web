@@ -7,6 +7,7 @@ import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
+import Lightbox from './Lightbox'
 import PhotoGrid from './PhotoGrid'
 
 // Wraps the entire page and gives it a top margin if on mobile
@@ -42,6 +43,9 @@ const Entry = ({ isInDrawer }) => {
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState([0, 0])
+
   const { id } = useParams()
 
   useEffect(() => {
@@ -64,7 +68,14 @@ const Entry = ({ isInDrawer }) => {
 
   const entryOverview = <EntryOverview locationData={locationData} />
   const entryReviews = (
-    <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
+    <EntryReviews
+      reviews={reviews}
+      onReviewSubmit={addSubmittedReview}
+      onImageClick={(reviewIndex, imageIndex) => {
+        setIsLightboxOpen(true)
+        setLightboxIndex([reviewIndex, imageIndex])
+      }}
+    />
   )
 
   let content
@@ -72,12 +83,25 @@ const Entry = ({ isInDrawer }) => {
   if (!locationData || !reviews) {
     content = <LoadingIndicator cover vertical />
   } else {
-    const allReviewPhotos = reviews.map((review) => review.photos).flat()
+    const allReviewPhotos = reviews
+      .filter((review) => review.photos.length > 0)
+      .map((review) => review.photos)
 
     content = (
       <>
-        <PhotoGrid photos={allReviewPhotos} altText={locationData.address} />
-
+        <PhotoGrid
+          photos={allReviewPhotos}
+          altText={locationData.address}
+          onViewLightbox={() => setIsLightboxOpen(true)}
+        />
+        {isLightboxOpen && reviews && (
+          <Lightbox
+            onDismiss={() => setIsLightboxOpen(false)}
+            reviews={reviews ?? []}
+            index={lightboxIndex}
+            onIndexChange={setLightboxIndex}
+          />
+        )}
         {isInDrawer ? (
           <EntryTabs>
             <TabList>
