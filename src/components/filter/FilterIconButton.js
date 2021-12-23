@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux'
 import IconButton from '../ui/IconButton'
 
 const FilterIconButton = (props) => {
-  const typesLength = useSelector((state) => state.filter.types.length)
-  const filterCount = typesLength >= 99 ? '99+' : `${typesLength}`
+  const typesLength = useSelector((state) => state.filter.types?.length)
+  const filterCount =
+    typesLength === null || typesLength >= 99 ? '99+' : `${typesLength}`
 
   return (
     <IconButton

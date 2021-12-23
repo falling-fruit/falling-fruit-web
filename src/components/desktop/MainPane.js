@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Button from '../ui/Button'
@@ -27,6 +29,11 @@ const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
 `
 
 const MainPane = () => {
+  useEffect(() => {
+    // TODO: fix slow main pane mount
+    console.log('mainpane mount')
+    return () => console.log('mainpane unmount')
+  }, [])
   const history = useHistory()
   return (
     <Container>
@@ -36,7 +43,7 @@ const MainPane = () => {
         secondary
         onClick={() =>
           history.push({
-            pathname: '/map/entry/new',
+            pathname: getPathWithMapState('/map/entry/new'),
             state: { fromPage: '/map' },
           })
         }
@@ -46,7 +53,7 @@ const MainPane = () => {
       <SettingsButton
         onClick={() =>
           history.push({
-            pathname: '/settings',
+            pathname: getPathWithMapState('/settings'),
             state: { fromPage: '/map' },
           })
         }

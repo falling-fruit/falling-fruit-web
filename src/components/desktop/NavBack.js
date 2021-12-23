@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import BackButton from '../ui/BackButton'
 
 const StyledNavBack = styled.div`
@@ -27,7 +28,7 @@ const NavBack = ({ isEntry }) => {
     if (isEntry) {
       history.go(-1)
     } else {
-      history.push(state?.fromPage ?? '/map')
+      history.push(getPathWithMapState(state?.fromPage ?? '/map'))
     }
   }
 

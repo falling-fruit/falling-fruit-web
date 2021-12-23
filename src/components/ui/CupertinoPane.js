@@ -1,27 +1,27 @@
 import { CupertinoPane as VanillaCupertinoPane } from 'cupertino-pane'
-import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 /**
  * React wrapper for CupertinoPane
  */
-export default function CupertinoPane({ id, children, config }) {
+export default React.forwardRef(function CupertinoPane(
+  { className, children, config, setDrawer },
+  ref,
+) {
   useEffect(() => {
-    const drawer = new VanillaCupertinoPane(`#${id}`, config)
-
+    const drawer = new VanillaCupertinoPane(`.${className}`, config)
+    setDrawer(drawer)
     /*
       HACK: Fix for race condition using setTimeout @ 0 ms to 
       push present to the end of the synchronous callstack
       */
     setTimeout(() => drawer.present({ animate: true }), 0)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [className])
 
-  return <div id={id}>{children}</div>
-}
-
-CupertinoPane.propTypes = {
-  id: PropTypes.string.isRequired,
-  children: PropTypes.any,
-  config: PropTypes.any,
-}
+  return (
+    <div ref={ref} className={className}>
+      {children}
+    </div>
+  )
+})
