@@ -39,8 +39,9 @@ export const authSlice = createSlice({
         state.authToken = null
       },
       prepare: () => {
-        localStorage.clear()
-        sessionStorage.clear()
+        localStorage.removeItem(AUTH_TOKEN_KEY)
+        sessionStorage.removeItem(AUTH_TOKEN_KEY)
+        delete instance.defaults.headers.common.Authorization
 
         return {}
       },
@@ -67,6 +68,7 @@ export const authSlice = createSlice({
 
       state.user = user
       state.authToken = token
+      state.failedLogin = false
     },
     [fetchToken.rejected]: (state) => {
       state.failedLogin = true
