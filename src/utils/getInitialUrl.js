@@ -25,8 +25,6 @@ export const getPathWithMapState = (path) => {
   }
 }
 
-window.a = getPathWithMapState
-
 export const parseUrl = () => {
   const url = window.location.href
   const geocoordMatch = url.substring(url.indexOf('@'))

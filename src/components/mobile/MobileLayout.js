@@ -7,8 +7,8 @@ import { Route, Switch, useLocation } from 'react-router-dom'
 import { enableStreetView } from '../../redux/mapSlice'
 import useRoutedTabs from '../../utils/useRoutedTabs'
 import AboutRouter from '../about/AboutRouter'
-import Drawer from '../entry/Drawer'
 import Entry from '../entry/Entry'
+import EntryWrapper from '../entry/EntryWrapper'
 import { LocationForm } from '../form/LocationForm'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { DEFAULT_TAB, getTabs } from './tabs'
@@ -72,11 +72,7 @@ const MobileLayout = () => {
             <Switch>
               <Route path="/map/entry/new" />
               <Route path="/map/entry/:id">
-                {!streetView && (
-                  <Drawer>
-                    <Entry isInDrawer />
-                  </Drawer>
-                )}
+                {!streetView && <EntryWrapper isInDrawer />}
               </Route>
             </Switch>
             {tabPanels}

@@ -13,7 +13,6 @@ import { theme } from './GlobalStyle'
 import IndicatorAccordionButton from './IndicatorAccordionButton'
 
 const TypesAccordionItem = styled(AccordionItem)`
-  margin-top: 15px;
   margin-bottom: 15px;
 `
 
