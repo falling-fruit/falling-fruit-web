@@ -12,6 +12,7 @@ import {
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -28,7 +29,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 const MapPage = ({ isDesktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
-    path: '/(map|list)/entry/:entryId',
+    path: '/(map|list)/entry/:entryId/:geocoord',
     exact: true,
   })
 
@@ -38,13 +39,14 @@ const MapPage = ({ isDesktop }) => {
   const { getCommonName } = useTypesById()
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
-  const view = useSelector((state) => state.map.view)
   const allLocations = useSelector(getAllLocations)
-  const clusters = useSelector((state) => state.map.clusters)
   const isLoading = useSelector((state) => state.map.isLoading)
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
   const geolocation = useSelector((state) => state.map.geolocation)
   const locationRequested = useSelector((state) => state.map.locationRequested)
+  const streetView = useSelector((state) => state.map.streetView)
+  const view = useSelector((state) => state.map.view)
+  const clusters = useSelector((state) => state.map.clusters)
 
   useEffect(() => {
     if (isAddingLocation) {
@@ -54,14 +56,15 @@ const MapPage = ({ isDesktop }) => {
     }
   }, [dispatch, isAddingLocation])
 
-  const handleLocationClick = (location) =>
+  const handleLocationClick = (location) => {
     history.push({
-      pathname: `/map/entry/${location.id}`,
+      pathname: getPathWithMapState(`/map/entry/${location.id}`),
       state: { fromPage: '/map' },
     })
+  }
 
   const handleAddLocationClick = () => {
-    history.push('/map/entry/new')
+    history.push(getPathWithMapState('/map/entry/new'))
   }
 
   return (
@@ -90,7 +93,9 @@ const MapPage = ({ isDesktop }) => {
               }))
         }
         activeLocationId={entryId || hoveredLocationId}
-        onViewChange={(newView) => dispatch(viewChangeAndFetch(newView))}
+        onViewChange={(newView) => {
+          dispatch(viewChangeAndFetch(newView))
+        }}
         onGeolocationClick={() => {
           dispatch(
             zoomIn({ lat: geolocation.latitude, lng: geolocation.longitude }),
@@ -101,6 +106,7 @@ const MapPage = ({ isDesktop }) => {
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
         showLabels={settings.showLabels}
+        showStreetView={streetView}
         showBusinesses={settings.showBusinesses}
       />
     </div>

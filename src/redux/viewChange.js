@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
+import { getBaseUrl } from '../utils/getInitialUrl'
 import { fetchFilterCounts } from './filterSlice'
 import { clearListLocations } from './listSlice'
 import {
@@ -39,6 +40,7 @@ export const fetchLocations = () => (dispatch, getState) => {
 
   if (bounds?.ne.lat != null && zoom > 1) {
     // Map has received real bounds
+
     if (getIsShowingClusters(state)) {
       dispatch(fetchMapClusters())
       dispatch(clearListLocations())
@@ -79,6 +81,12 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
+
+  const newUrl = `${getBaseUrl()}/@${newView.center.lat},${
+    newView.center.lng
+  },${newView.zoom}z`
+  window.history.pushState({}, '', newUrl)
+
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
 

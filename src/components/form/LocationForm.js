@@ -1,10 +1,12 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
 import { addLocation, addReview } from '../../utils/api'
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -183,14 +185,8 @@ export const LocationForm = ({ desktop }) => {
   }
 
   const handleSubmit = async (values) => {
-    const {
-      types,
-      description,
-      season_start,
-      season_end,
-      access,
-      review,
-    } = values
+    const { types, description, season_start, season_end, access, review } =
+      values
 
     const locationValues = {
       type_ids: types.map(({ value }) => value),
@@ -204,10 +200,15 @@ export const LocationForm = ({ desktop }) => {
       unverified: false,
     }
 
-    console.log('locationValues', locationValues)
-    const locationResp = await addLocation(locationValues)
-    console.log('locationResp', locationResp)
+    let locationResp
+    try {
+      locationResp = await addLocation(locationValues)
+      toast.success('Location submitted successfully!')
+    } catch {
+      toast.error('Location submission failed.')
+    }
 
+    // TODO: Add reviews as a part of adding a location (one request to `addLocation`)
     if (isValidReview(review)) {
       const reviewValues = {
         ...review,
@@ -219,7 +220,7 @@ export const LocationForm = ({ desktop }) => {
       console.log('reviewResp', reviewResp)
     }
 
-    history.push('/map')
+    history.push(getPathWithMapState('/map'))
   }
 
   const StepDisplay = desktop ? FormikAllSteps : FormikStepper
@@ -237,7 +238,9 @@ export const LocationForm = ({ desktop }) => {
             <Button
               secondary
               type="button"
-              onClick={() => history.push(state?.fromPage ?? '/map')}
+              onClick={() =>
+                history.push(getPathWithMapState(state?.fromPage ?? '/map'))
+              }
             >
               Cancel
             </Button>

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import BackButton from '../ui/BackButton'
 
 const StyledNavBack = styled.div`
@@ -21,7 +22,7 @@ const NavBack = () => {
 
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    history.push(state?.fromPage ?? '/map')
+    history.push(getPathWithMapState(state?.fromPage ?? '/map'))
   }
 
   return (

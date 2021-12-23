@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fitBounds } from 'google-map-react'
 
 import { getClusters, getLocations } from '../utils/api'
+import { parseUrl } from '../utils/getInitialUrl'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 
@@ -12,11 +13,7 @@ import { selectParams } from './selectParams'
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const DEFAULT_VIEW_STATE = {
-  center: { lat: 40.1125785, lng: -88.2287926 },
-  zoom: 1,
-  streetView: false,
-}
+const DEFAULT_VIEW_STATE = parseUrl()
 
 const TRACKING_LOCATION_ZOOM = 16
 
@@ -60,6 +57,7 @@ export const mapSlice = createSlice({
     justStartedTrackingLocation: false,
     locationRequested: false,
     streetView: false,
+    location: null,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
@@ -132,9 +130,11 @@ export const mapSlice = createSlice({
         zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
       }
     },
-
-    setStreetView: (state, action) => {
-      state.streetView = action.payload()
+    enableStreetView: (state, action) => {
+      if (action.payload.location) {
+        state.location = action.payload.location
+      }
+      state.streetView = action.payload.streetView
     },
   },
   extraReducers: {
@@ -172,6 +172,7 @@ export const {
   startTrackingLocation,
   stopTrackingLocation,
   geolocationChange,
+  enableStreetView,
 } = mapSlice.actions
 
 export default mapSlice.reducer

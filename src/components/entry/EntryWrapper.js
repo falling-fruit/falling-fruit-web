@@ -11,7 +11,8 @@ const EntryWrapper = ({ isInDrawer }) => {
   const [locationData, setLocationData] = useState()
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
-  const [showEntryImages, setShowEntryImages] = useState(false)
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState([0, 0])
   const { id } = useParams()
 
   useEffect(() => {
@@ -21,10 +22,6 @@ const EntryWrapper = ({ isInDrawer }) => {
       const locationData = await getLocationById(id, 'reviews')
       setLocationData(locationData)
       setReviews(locationData.reviews)
-
-      const showEntryImages =
-        locationData.reviews && locationData.reviews[0]?.photos.length > 0
-      setShowEntryImages(showEntryImages)
 
       setIsLoading(false)
     }
@@ -38,8 +35,17 @@ const EntryWrapper = ({ isInDrawer }) => {
 
   const entryOverview = <EntryOverview locationData={locationData} />
   const entryReviews = (
-    <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
+    <EntryReviews
+      reviews={reviews}
+      onReviewSubmit={addSubmittedReview}
+      onImageClick={(reviewIndex, imageIndex) => {
+        setIsLightboxOpen(true)
+        setLightboxIndex([reviewIndex, imageIndex])
+      }}
+    />
   )
+
+  const showEntryImages = reviews && reviews[0]?.photos.length > 0
 
   return isInDrawer ? (
     <EntryDrawer
@@ -53,6 +59,10 @@ const EntryWrapper = ({ isInDrawer }) => {
   ) : (
     <Entry
       showEntryImages={showEntryImages}
+      isLightboxOpen={isLightboxOpen}
+      setIsLightboxOpen={setIsLightboxOpen}
+      lightboxIndex={lightboxIndex}
+      setLightboxIndex={setLightboxIndex}
       locationData={locationData}
       reviews={reviews}
       isLoading={isLoading}

@@ -36,8 +36,8 @@ const Tile = styled.div`
   }
 `
 
-const ImagePreview = ({ children, className, onDelete, $small }) => (
-  <Tile className={className} $small={$small}>
+const ImagePreview = ({ children, className, onDelete, $small, ...props }) => (
+  <Tile className={className} $small={$small} {...props}>
     {children}
     {onDelete && (
       <DeleteButton onClick={onDelete}>

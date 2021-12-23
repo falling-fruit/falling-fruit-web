@@ -2,7 +2,9 @@ import styled from 'styled-components/macro'
 
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
+import ResetButton from '../ui/ResetButton'
 import EntryTags from './EntryTags'
+import Lightbox from './Lightbox'
 
 // Wraps the entire page and gives it a top margin if on mobile
 export const Page = styled.div`
@@ -50,6 +52,12 @@ const EntryTagsContainer = styled.div`
   }
 `
 
+const Carousel = styled(ResetButton)`
+  // TODO: to be changed to a real carousel
+  width: 100%;
+  cursor: pointer;
+`
+
 const Entry = ({
   isInDrawer,
   locationData,
@@ -59,8 +67,14 @@ const Entry = ({
   entryReviews,
   showTabs,
   showEntryImages,
+  isLightboxOpen,
+  setIsLightboxOpen,
+  lightboxIndex,
+  setLightboxIndex,
   isFullScreen,
 }) => {
+  console.log('here')
+  console.log(showEntryImages)
   let content
 
   if (!locationData || !reviews) {
@@ -70,6 +84,14 @@ const Entry = ({
 
     content = (
       <>
+        {isLightboxOpen && reviews && (
+          <Lightbox
+            onDismiss={() => setIsLightboxOpen(false)}
+            reviews={reviews ?? []}
+            index={lightboxIndex}
+            onIndexChange={setLightboxIndex}
+          />
+        )}
         {isInDrawer ? (
           <EntryTabs>
             <EntryTagsContainer
@@ -94,11 +116,13 @@ const Entry = ({
           <>
             {allReviewPhotos.length > 0 && (
               // TODO: Change to image carousel
-              <img
-                style={{ width: '100%' }}
-                src={allReviewPhotos[0].medium}
-                alt="entry"
-              />
+              <Carousel onClick={() => setIsLightboxOpen(true)}>
+                <img
+                  style={{ width: '100%' }}
+                  src={allReviewPhotos[0].medium}
+                  alt="entry"
+                />
+              </Carousel>
             )}
             <EntryTagsContainer showEntryImages={showEntryImages}>
               <EntryTags locationData={locationData} />
