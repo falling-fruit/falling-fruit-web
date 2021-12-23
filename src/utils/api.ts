@@ -8,7 +8,7 @@ class APIError extends Error {
   name = 'APIError'
 }
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {
     'x-api-key': process.env.REACT_APP_API_KEY,
@@ -40,6 +40,8 @@ export const addUser = (
 export const editUser = (
   params: paths['/user']['put']['requestBody']['content']['application/json'],
 ) => handleResponse(instance.put('/user', params))
+
+export const getUser = () => handleResponse(instance.get('/user'))
 
 export const getUserToken = (username: string, password: string) => {
   const formData = new FormData()
@@ -114,10 +116,9 @@ export const editReview = (
   params: paths['/reviews/{id}']['put']['requestBody']['content']['application/json'],
 ) => handleResponse(instance.put(`/reviews/${id}`, { params }))
 
-/*
-export const addReport = (data: paths['/reports']['post']['requestBody']['content']['multipart/form-data']['json']) => {
-}
-*/
+export const addReport = (
+  data: paths['/reports']['post']['requestBody']['content']['application/json'],
+) => handleResponse(instance.post('/reports', data))
 
 export const getImports = () => handleResponse(instance.get(`/imports`))
 

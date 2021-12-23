@@ -83,22 +83,23 @@ const LoginPage = () => {
           placeholder="e.g. user@example.com"
           value={username}
           type="email"
-          label={'Email'}
+          label="Email"
           onChange={(e) => setUsername(e.target.value)}
         />
         <Label>Password</Label>
 
         <StyledInput
-          label={'Password'}
+          label="Password"
           value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
 
         <LabeledRow
-          label={<label htmlFor={'Remember Me'}>Remember Me</label>}
+          label={<label htmlFor="remember_me">Remember Me</label>}
           left={
             <Checkbox
+              id="remember_me"
               checked={rememberMe}
               onChange={() => setRememberMe(!rememberMe)}
             />
