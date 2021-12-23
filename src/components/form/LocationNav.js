@@ -1,6 +1,6 @@
 import { Check, X } from '@styled-icons/boxicons-regular'
 import { Route, Switch, useHistory } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { theme } from '../ui/GlobalStyle'
