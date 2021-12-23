@@ -89,6 +89,7 @@ const InlineSelects = styled.div`
 
 const LocationStep = ({ typeOptions }) => (
   <>
+    {console.log(typeOptions)}
     <Select
       name="types"
       label="Types"
