@@ -20,10 +20,7 @@ const SidePaneSwitch = () => (
           <Route path="/settings">
             <SettingsPage desktop />
           </Route>
-          <Route
-            exact
-            path={['/map/entry/:id/:geocoord', '/list/entry/:id/:geocoord']}
-          >
+          <Route path={['/map/entry/:id', '/list/entry/:id']}>
             <Entry />
           </Route>
         </Switch>

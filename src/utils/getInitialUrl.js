@@ -4,8 +4,13 @@ const DEFAULT_ZOOM = 1
 
 export const getBaseUrl = () => {
   const { pathname } = new URL(window.location.href)
+  const stateIndex = pathname.indexOf('/@')
 
-  return pathname.substring(0, pathname.indexOf('/@')) || '/map'
+  if (stateIndex === -1) {
+    return pathname
+  } else {
+    return pathname.substring(0, stateIndex)
+  }
 }
 
 export const getPathWithMapState = (path) => {
