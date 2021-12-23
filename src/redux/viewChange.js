@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
+import { getBaseUrl } from '../utils/getInitialUrl'
 import { fetchFilterCounts } from './filterSlice'
 import { clearListLocations } from './listSlice'
 import {
@@ -81,13 +82,10 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
 
-  if (state.map.entry != null) {
-    const urlStr = `/map/entry/${state.map.entry}/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
-    window.history.pushState({}, '', urlStr)
-  } else {
-    const urlStr = `/map/@${newView.center.lat},${newView.center.lng},${newView.zoom}z`
-    window.history.pushState({}, '', urlStr)
-  }
+  const newUrl = `${getBaseUrl()}/@${newView.center.lat},${
+    newView.center.lng
+  },${newView.zoom}z`
+  window.history.pushState({}, '', newUrl)
 
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000

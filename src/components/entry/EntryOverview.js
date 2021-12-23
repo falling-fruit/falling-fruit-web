@@ -8,6 +8,7 @@ import styled from 'styled-components/macro'
 
 import { enableStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
@@ -85,7 +86,7 @@ const EntryOverview = ({ locationData, className }) => {
   const { t } = useTranslation()
 
   const handleAddressClick = () => {
-    history.push(`/map/entry/${locationData.id}`)
+    history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
     // Disabling zoom in for now
   }
 
@@ -108,7 +109,7 @@ const EntryOverview = ({ locationData, className }) => {
 
   const handleStreetView = () => {
     if (!isDesktop) {
-      history.push(`/map/entry/${locationData.id}`)
+      history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
     }
 
     // TODO: change setTimeout to make it wait for map component to mount

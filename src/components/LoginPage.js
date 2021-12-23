@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { fetchToken } from '../redux/authSlice'
+import { getPathWithMapState } from '../utils/getInitialUrl'
 import Header from './desktop/Header'
 import Button from './ui/Button'
 import Checkbox from './ui/Checkbox'
@@ -65,7 +66,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (authToken) {
       history.push({
-        pathname: '/map',
+        pathname: getPathWithMapState('/map'),
         state: { fromPage: '/login' },
       })
     }
