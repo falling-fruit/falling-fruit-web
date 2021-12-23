@@ -5,7 +5,7 @@ const DEFAULT_ZOOM = 1
 export const getBaseUrl = () => {
   const { pathname } = new URL(window.location.href)
 
-  return pathname.substring(0, pathname.indexOf('/@'))
+  return pathname.substring(0, pathname.indexOf('/@')) || '/map'
 }
 
 export const getPathWithMapState = (path) => {
