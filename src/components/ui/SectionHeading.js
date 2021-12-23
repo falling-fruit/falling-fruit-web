@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const SectionHeading = styled.h5`
   display: block;

@@ -1,7 +1,7 @@
 import PhotoGridTemplate from './AboutPhotoGrid'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
-const foraging_photos = [
+const foragingPhotos = [
   {
     link: 'https://fallingfruit.org/ethan-oranges.jpg',
     alt: 'ethan oranges',
@@ -19,11 +19,12 @@ const foraging_photos = [
     alt: 'amittai mulberries',
   },
 ]
+
 const Project = () => (
   <PageScrollWrapper>
     <PageTemplate>
       <div className="grid">
-        <PhotoGridTemplate photos={foraging_photos} float={'right'} />
+        <PhotoGridTemplate photos={foragingPhotos} float={'right'} />
         <p>
           <em>
             Falling Fruit is not associated with Fallen Fruit. Fallen Fruit can

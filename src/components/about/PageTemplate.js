@@ -3,7 +3,6 @@ import styled from 'styled-components/macro'
 const PageScrollWrapper = styled.div`
   width: 100%;
   overflow-y: auto;
-  height: 100%;
 `
 
 const PageTemplate = styled.article`
@@ -14,7 +13,7 @@ const PageTemplate = styled.article`
   max-width: 950px;
   width: 66%;
   height: inherit;
-  margin: 56px auto 0px;
+  margin: 56px auto;
   overflow-wrap: break-word;
   font-family: Lato;
   font-style: normal;
