@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import CupertinoPane from '../ui/CupertinoPane'
 
 const Container = styled.div`
@@ -28,7 +29,7 @@ export default function Drawer({ children }) {
           pushMinHeight: 370,
           bottomClose: true,
           buttonDestroy: false,
-          onDidDismiss: () => history.push('/map'),
+          onDidDismiss: () => history.push(getPathWithMapState('/map')),
         }}
       >
         {children}

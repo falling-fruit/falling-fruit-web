@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { matchPath, useHistory, useLocation } from 'react-router-dom'
 
+import { getPathWithMapState } from './getInitialUrl'
+
 /**
  * Hook to get and set the current tab, while updating the URL location on tab change.
  * Notice that the router/pathname "owns" the currently selected tab. When the pathname changes,
@@ -36,11 +38,15 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
         strict: false,
       })
     ) {
-      history.push(tabPaths[tabIndex])
+      history.push(getPathWithMapState(tabPaths[tabIndex]))
     } else {
       // otherwise push new shallow while keeping deep link
       const segments = pathname.split('/')
-      history.push([tabPaths[tabIndex], ...segments.splice(2)].join('/'))
+      history.push(
+        getPathWithMapState(
+          [tabPaths[tabIndex], ...segments.splice(2)].join('/'),
+        ),
+      )
     }
   }
 

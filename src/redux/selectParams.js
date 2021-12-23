@@ -29,7 +29,7 @@ export const selectParams = (state, extraParams = {}, isMap = true) => {
   const { view } = isMap ? state.map : state.list
 
   const params = {
-    types: types.join(','),
+    types: types && types.join(','),
     muni,
     ...convertBounds(view.bounds),
     ...(!isMap && convertCenter(view.center)),

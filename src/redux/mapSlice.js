@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fitBounds } from 'google-map-react'
 
 import { getClusters, getLocations } from '../utils/api'
-import { getEntry, parseUrl } from '../utils/getInitialURL'
+import { parseUrl } from '../utils/getInitialUrl'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 
@@ -15,8 +15,6 @@ import { selectParams } from './selectParams'
  */
 const DEFAULT_VIEW_STATE = parseUrl()
 
-const DEFAULT_ENTRY = getEntry()
-console.log(DEFAULT_VIEW_STATE, DEFAULT_ENTRY)
 const TRACKING_LOCATION_ZOOM = 16
 
 export const setReducer = (key) => (state, action) => ({
@@ -50,7 +48,6 @@ export const mapSlice = createSlice({
   initialState: {
     view: DEFAULT_VIEW_STATE,
     oldView: null,
-    entry: DEFAULT_ENTRY,
     isLoading: false,
     locations: [],
     clusters: [],
@@ -60,12 +57,12 @@ export const mapSlice = createSlice({
     justStartedTrackingLocation: false,
     locationRequested: false,
     streetView: false,
+    location: null,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
     // this should be called viewChange
     viewChange: setReducer('view'),
-    setEntry: setReducer('initialEntry'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
 
     startTrackingLocation: (state) => {
@@ -133,9 +130,11 @@ export const mapSlice = createSlice({
         zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
       }
     },
-
-    setStreetView: (state, action) => {
-      state.streetView = action.payload()
+    enableStreetView: (state, action) => {
+      if (action.payload.location) {
+        state.location = action.payload.location
+      }
+      state.streetView = action.payload.streetView
     },
   },
   extraReducers: {
@@ -169,11 +168,11 @@ export const {
   zoomIn,
   clusterClick,
   viewChange,
-  setEntry,
   setHoveredLocationId,
   startTrackingLocation,
   stopTrackingLocation,
   geolocationChange,
+  enableStreetView,
 } = mapSlice.actions
 
 export default mapSlice.reducer
