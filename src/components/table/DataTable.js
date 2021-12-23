@@ -21,7 +21,7 @@ const TableWrapper = styled.div`
 
 const DataTable = (props) => (
   <TableWrapper>
-    <ReactDataTable pagination style={{ backgroundColor: 'red' }} {...props} />
+    <ReactDataTable pagination {...props} />
   </TableWrapper>
 )
 
