@@ -36,7 +36,7 @@ const NavBack = ({ isEntry }) => {
     <StyledNavBack isEntry={isEntry}>
       <BackButton onClick={handleBackButtonClick}>
         <ArrowBack />
-        {isEntry ? t('Back to Entry') : t('Back to Results')}
+        {isEntry ? t('Back') : t('Back to Results')}
       </BackButton>
     </StyledNavBack>
   )
