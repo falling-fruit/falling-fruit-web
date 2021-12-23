@@ -39,6 +39,7 @@ const StyledPhotoGrid = styled.figure`
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
+    cursor: pointer;
   }
 
   @media ${({ theme }) => theme.device.mobile} {
@@ -128,7 +129,6 @@ const ExtraImagesWrapper = styled(ResetButton)`
 const PhotoGrid = ({ photos, altText, onViewLightbox }) => {
   const { t } = useTranslation()
   const reviewPhotos = photos.flat()
-  console.log(reviewPhotos)
   return (
     reviewPhotos.length > 0 && (
       // TODO: extract PhotoGrid as its own component. Take an array of photos and single alt as prop.

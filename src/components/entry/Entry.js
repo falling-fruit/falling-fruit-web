@@ -46,8 +46,6 @@ const Entry = ({ isInDrawer }) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState([0, 0])
 
-  const closeLightbox = () => setIsLightboxOpen(false)
-
   const { id } = useParams()
 
   useEffect(() => {
@@ -70,7 +68,14 @@ const Entry = ({ isInDrawer }) => {
 
   const entryOverview = <EntryOverview locationData={locationData} />
   const entryReviews = (
-    <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
+    <EntryReviews
+      reviews={reviews}
+      onReviewSubmit={addSubmittedReview}
+      onImageClick={(reviewIndex, imageIndex) => {
+        setIsLightboxOpen(true)
+        setLightboxIndex([reviewIndex, imageIndex])
+      }}
+    />
   )
 
   let content
@@ -91,7 +96,7 @@ const Entry = ({ isInDrawer }) => {
         />
         {isLightboxOpen && reviews && (
           <Lightbox
-            onDismiss={closeLightbox}
+            onDismiss={() => setIsLightboxOpen(false)}
             reviews={reviews ?? []}
             index={lightboxIndex}
             onIndexChange={setLightboxIndex}
