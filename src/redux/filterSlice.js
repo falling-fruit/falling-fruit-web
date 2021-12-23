@@ -34,7 +34,7 @@ export const fetchFilterCounts = createAsyncThunk(
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    types: [],
+    types: null,
     treeData: [],
     childrenById: {},
     scientificNameById: {},
@@ -90,12 +90,8 @@ export const filterSlice = createSlice({
   },
 })
 
-export const {
-  setFilters,
-  openFilter,
-  closeFilter,
-  updateSelection,
-} = filterSlice.actions
+export const { setFilters, openFilter, closeFilter, updateSelection } =
+  filterSlice.actions
 
 export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection(types))

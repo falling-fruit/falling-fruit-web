@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { updateSettings } from '../../redux/settingsSlice'
+import ButtonToggle from '../ui/ButtonToggle'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import RadioTiles from '../ui/RadioTiles'
@@ -20,6 +21,11 @@ const LANGUAGE_OPTIONS = [
   { value: 'es', label: 'Español' },
   { value: 'de', label: 'Deutsch' },
   { value: 'it', label: 'Italiano' },
+]
+
+const DISTANCE_UNIT_OPTIONS = [
+  { value: 'metric', label: 'Metric' },
+  { value: 'imperial', label: 'Imperial' },
 ]
 
 const Page = styled.div`
@@ -58,6 +64,10 @@ const SettingsPage = ({ desktop }) => {
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
 
+  const updateUnitsSetting = (object) => {
+    dispatch(updateSettings({ distanceUnit: object.value }))
+  }
+
   return (
     <Page desktop={desktop}>
       {!desktop && <h2>{t('Settings')}</h2>}
@@ -91,6 +101,16 @@ const SettingsPage = ({ desktop }) => {
           label={<label htmlFor={field}>{label}</label>}
         />
       ))}
+      <LabeledRow
+        label={<label htmlFor="distanceUnit">{t('Units')}</label>}
+        right={
+          <ButtonToggle
+            options={DISTANCE_UNIT_OPTIONS}
+            onChange={updateUnitsSetting}
+            value={settings.distanceUnit}
+          />
+        }
+      />
 
       <h3>{t('Map Preferences')}</h3>
 
@@ -153,6 +173,30 @@ const SettingsPage = ({ desktop }) => {
           )
         }
       />
+      {[
+        {
+          field: 'showBusinesses',
+          label: t('Show Businesses'),
+        },
+      ].map(({ field, label }) => (
+        <LabeledRow
+          key={field}
+          left={
+            <Checkbox
+              id={field}
+              onClick={(e) =>
+                dispatch(
+                  updateSettings({
+                    [field]: e.target.checked,
+                  }),
+                )
+              }
+              checked={settings[field]}
+            />
+          }
+          label={<label htmlFor={field}>{label}</label>}
+        />
+      ))}
 
       <h3>{t('Language Preferences')}</h3>
 

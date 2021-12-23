@@ -1,26 +1,25 @@
-import { Calendar } from '@styled-icons/boxicons-regular'
+import { Calendar, StreetView } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { enableStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { hasSeasonality } from '../../utils/locationInfo'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
-import ResetButton from '../ui/ResetButton'
-import { Tag, TagList } from '../ui/Tag'
 import { TextContent } from './Entry'
-import {
-  ACCESS_TYPE,
-  formatISOString,
-  formatSeasonality,
-} from './textFormatters'
+import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
+// TODO: Move to its own file
 const IconBesideText = styled.div`
   display: flex;
   color: ${({ theme }) => theme.secondaryText};
@@ -37,14 +36,12 @@ const IconBesideText = styled.div`
     margin: 0 0 0 4px;
     font-size: 0.875rem;
   }
-`
-const LocationText = styled(ResetButton)`
-  font-weight: bold;
-  text-align: left;
-  font-size: 0.875rem;
-  margin: 0 0 0 4px;
-  flex: 1;
-  color: ${({ theme }) => theme.secondaryText};
+
+  ${($props) =>
+    $props.onClick &&
+    `
+  cursor: pointer;
+  `};
 `
 
 // Wraps description, last updated text, and review and report buttons
@@ -75,29 +72,40 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
+  const isDesktop = useIsDesktop()
   const { getLocationTypes } = useTypesById()
   const history = useHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
+  const dispatch = useDispatch()
+  const currentStreetView = useSelector((state) => state.map.streetView)
 
   const { t } = useTranslation()
 
   const handleAddressClick = () => {
-    history.push(`/map/entry/${locationData.id}`)
+    history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
     // Disabling zoom in for now
   }
 
-  const tagList = locationData && (
-    <TagList>
-      {locationData.access && (
-        <Tag color={theme.tag.access}>{ACCESS_TYPE[locationData.access]}</Tag>
-      )}
-      {locationData.unverified ? (
-        <Tag color={theme.tag.unverified}>{t('Unverified')}</Tag>
-      ) : (
-        <Tag color={theme.tag.verified}>{t('Verified')}</Tag>
-      )}
-    </TagList>
-  )
+  const handleStreetView = () => {
+    if (!isDesktop) {
+      history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
+    }
+
+    // TODO: change setTimeout to make it wait for map component to mount
+    setTimeout(
+      () =>
+        dispatch(
+          enableStreetView({
+            streetView: !currentStreetView,
+            location: {
+              lat: locationData.lat,
+              lng: locationData.lng,
+            },
+          }),
+        ),
+      200,
+    )
+  }
 
   return (
     <div className={className}>
@@ -110,19 +118,22 @@ const EntryOverview = ({ locationData, className }) => {
           />
         )}
         <TextContent>
-          {tagList}
           <TypesHeader typeIds={locationData.type_ids} />
           <Description>
             <p>{locationData.description}</p>
 
             <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
               <Map color={theme.secondaryText} size={20} />
-              <LocationText>
+              <p>
                 {locationData.address ??
                   `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(
                     6,
                   )}`}
-              </LocationText>
+              </p>
+            </IconBesideText>
+            <IconBesideText bold onClick={handleStreetView}>
+              <StreetView size={20} />
+              <p> Google Street View</p>
             </IconBesideText>
             {hasSeasonality(locationData) && (
               <IconBesideText>
@@ -144,6 +155,15 @@ const EntryOverview = ({ locationData, className }) => {
               </time>
             </p>
 
+            {locationData.import_id && (
+              <p className="updatedTime">
+                {t('Imported from')}{' '}
+                <a href={`/about/dataset/${locationData.import_id}`}>
+                  {locationData.author}
+                </a>
+              </p>
+            )}
+
             <div>
               <Button leftIcon={<Star />}>Review</Button>
               <Button
@@ -161,5 +181,5 @@ const EntryOverview = ({ locationData, className }) => {
     </div>
   )
 }
-
+export { IconBesideText }
 export default EntryOverview

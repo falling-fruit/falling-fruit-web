@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { getLocationById, getReviews } from '../../utils/api'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
-import EntryOverview from './EntryOverview'
-import EntryReviews from './EntryReviews'
-import PhotoGrid from './PhotoGrid'
+import ResetButton from '../ui/ResetButton'
+import EntryTags from './EntryTags'
+import Lightbox from './Lightbox'
 
 // Wraps the entire page and gives it a top margin if on mobile
 export const Page = styled.div`
@@ -38,39 +35,44 @@ export const TextContent = styled.article`
   }
 `
 
-const Entry = ({ isInDrawer }) => {
-  const [locationData, setLocationData] = useState()
-  const [reviews, setReviews] = useState()
-  const [isLoading, setIsLoading] = useState(true)
-  const { id } = useParams()
-
-  useEffect(() => {
-    async function fetchEntryData() {
-      setIsLoading(true)
-
-      const [locationData, reviews] = await Promise.all([
-        getLocationById(id),
-        getReviews(id),
-      ])
-
-      setLocationData(locationData)
-      setReviews(reviews)
-
-      setIsLoading(false)
-    }
-
-    fetchEntryData()
-  }, [id])
-
-  const addSubmittedReview = (submittedReview) => {
-    setReviews((reviews) => [...reviews, submittedReview])
+const EntryTagsContainer = styled.div`
+  @media ${({ theme }) => theme.device.desktop} {
+    padding: 0 12px 0 12px;
+    padding-top: ${({ showEntryImages }) => showEntryImages && `12px`};
   }
 
-  const entryOverview = <EntryOverview locationData={locationData} />
-  const entryReviews = (
-    <EntryReviews reviews={reviews} onReviewSubmit={addSubmittedReview} />
-  )
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-left: 23px;
+    padding-right: 23px;
+    padding-bottom: ${({ isFullScreen, showEntryImages }) =>
+      isFullScreen && !showEntryImages && `16px`};
+    padding-top: ${({ isFullScreen }) => !isFullScreen && `20px`};
+    position: ${({ showEntryImages }) => showEntryImages && 'absolute'};
+    top: ${({ isFullScreen }) => (isFullScreen ? '-30px' : '-50px')};
+  }
+`
 
+const Carousel = styled(ResetButton)`
+  // TODO: to be changed to a real carousel
+  width: 100%;
+  cursor: pointer;
+`
+
+const Entry = ({
+  isInDrawer,
+  locationData,
+  reviews,
+  isLoading,
+  entryOverview,
+  entryReviews,
+  showTabs,
+  showEntryImages,
+  isLightboxOpen,
+  setIsLightboxOpen,
+  lightboxIndex,
+  setLightboxIndex,
+  isFullScreen,
+}) => {
   let content
 
   if (!locationData || !reviews) {
@@ -80,15 +82,29 @@ const Entry = ({ isInDrawer }) => {
 
     content = (
       <>
-        <PhotoGrid photos={allReviewPhotos} altText={locationData.address} />
-
+        {isLightboxOpen && reviews && (
+          <Lightbox
+            onDismiss={() => setIsLightboxOpen(false)}
+            reviews={reviews ?? []}
+            index={lightboxIndex}
+            onIndexChange={setLightboxIndex}
+          />
+        )}
         {isInDrawer ? (
           <EntryTabs>
-            <TabList>
-              {/* TODO: Use Routing */}
-              <Tab>Overview</Tab>
-              <Tab>Reviews</Tab>
-            </TabList>
+            <EntryTagsContainer
+              isFullScreen={isFullScreen}
+              showEntryImages={showEntryImages}
+            >
+              <EntryTags locationData={locationData} />
+            </EntryTagsContainer>
+            {showTabs && (
+              <TabList>
+                {/* TODO: Use Routing */}
+                <Tab>Overview</Tab>
+                <Tab>Reviews</Tab>
+              </TabList>
+            )}
             <TabPanels>
               <TabPanel>{entryOverview}</TabPanel>
               <TabPanel>{entryReviews}</TabPanel>
@@ -96,6 +112,19 @@ const Entry = ({ isInDrawer }) => {
           </EntryTabs>
         ) : (
           <>
+            {allReviewPhotos.length > 0 && (
+              // TODO: Change to image carousel
+              <Carousel onClick={() => setIsLightboxOpen(true)}>
+                <img
+                  style={{ width: '100%' }}
+                  src={allReviewPhotos[0].medium}
+                  alt="entry"
+                />
+              </Carousel>
+            )}
+            <EntryTagsContainer showEntryImages={showEntryImages}>
+              <EntryTags locationData={locationData} />
+            </EntryTagsContainer>
             {entryOverview}
             {entryReviews}
           </>

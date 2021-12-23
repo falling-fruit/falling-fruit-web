@@ -1,11 +1,14 @@
-import Helmet from 'react-helmet'
+import { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { Route, Switch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Route, Switch, useLocation } from 'react-router-dom'
 
+import { enableStreetView } from '../../redux/mapSlice'
 import useRoutedTabs from '../../utils/useRoutedTabs'
-import AboutRouter from '../about/AboutRouter'
-import Drawer from '../entry/Drawer'
+import aboutRoutes from '../about/aboutRoutes'
 import Entry from '../entry/Entry'
+import EntryWrapper from '../entry/EntryWrapper'
 import { LocationForm } from '../form/LocationForm'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { DEFAULT_TAB, getTabs } from './tabs'
@@ -14,7 +17,9 @@ import TopBarSwitch from './TopBarSwitch'
 const MobileLayout = () => {
   useTranslation()
   const tabs = getTabs()
-
+  const dispatch = useDispatch()
+  const streetView = useSelector((state) => state.map.streetView)
+  const location = useLocation()
   const [tabIndex, handleTabChange] = useRoutedTabs(
     tabs.map(({ path }) => path),
     DEFAULT_TAB,
@@ -36,6 +41,15 @@ const MobileLayout = () => {
     </Tab>
   ))
 
+  useEffect(() => {
+    if (
+      location.pathname.includes('list') ||
+      location.pathname.includes('setting')
+    ) {
+      return dispatch(enableStreetView({ streetView: false }))
+    }
+  }, [dispatch, location])
+
   return (
     <PageTabs index={tabIndex} onChange={handleTabChange}>
       <Helmet>
@@ -47,7 +61,7 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
-          {AboutRouter}
+          {aboutRoutes}
           <Route path="/map/entry/new/details">
             <LocationForm />
           </Route>
@@ -58,9 +72,7 @@ const MobileLayout = () => {
             <Switch>
               <Route path="/map/entry/new" />
               <Route path="/map/entry/:id">
-                <Drawer>
-                  <Entry isInDrawer />
-                </Drawer>
+                {!streetView && <EntryWrapper isInDrawer />}
               </Route>
             </Switch>
             {tabPanels}

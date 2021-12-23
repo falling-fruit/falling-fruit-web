@@ -2,6 +2,7 @@ import { transparentize } from 'polished'
 import styled from 'styled-components/macro'
 
 const TagList = styled.ul`
+  margin: 0px;
   padding: 0;
   list-style: none;
 `

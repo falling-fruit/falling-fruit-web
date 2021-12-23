@@ -1,9 +1,9 @@
-import WindowSize from '@reach/window-size'
+import { WindowSize } from '@reach/window-size'
 import { Route, Switch } from 'react-router-dom'
 import SplitPane from 'react-split-pane'
 import styled from 'styled-components/macro'
 
-import AboutRouter from '../about/AboutRouter'
+import aboutRoutes from '../about/aboutRoutes'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
@@ -49,7 +49,7 @@ const DesktopLayout = () => (
   <DesktopContainer>
     <Header />
     <Switch>
-      {AboutRouter}
+      {aboutRoutes}
       <Route>
         <WindowSize>
           {({ width: vw }) => (

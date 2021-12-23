@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 
-import Entry from '../entry/Entry'
+import EntryWrapper from '../entry/EntryWrapper'
 import { LocationForm } from '../form/LocationForm'
 import SettingsPage from '../settings/SettingsPage'
 import MainPane from './MainPane'
@@ -8,7 +8,7 @@ import { NavPane } from './NavPane'
 
 const SidePaneSwitch = () => (
   <Switch>
-    <Route exact path={['/map', '/list', '/']}>
+    <Route exact path={['/map', '/list', '/', '/map/:geocoord']}>
       <MainPane />
     </Route>
     <Route>
@@ -20,8 +20,8 @@ const SidePaneSwitch = () => (
           <Route path="/settings">
             <SettingsPage desktop />
           </Route>
-          <Route exact path={['/map/entry/:id', '/list/entry/:id']}>
-            <Entry />
+          <Route path={['/map/entry/:id', '/list/entry/:id']}>
+            <EntryWrapper isInDrawer={false} />
           </Route>
         </Switch>
       </NavPane>
