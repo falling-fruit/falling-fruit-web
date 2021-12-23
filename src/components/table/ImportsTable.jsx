@@ -11,15 +11,15 @@ const columns = [
   {
     id: 'type',
     name: 'Type',
-    selector: (row) => (row.muni ? 'Tree inventory' : 'Community map'),
+    selector: (row) => row.muni,
     sortable: true,
+    format: FORMATTERS.muni,
   },
   {
     id: 'name',
     name: 'Name',
     selector: (row) => row.name,
     sortable: true,
-    format: FORMATTERS.name,
   },
   {
     name: 'Locations',
@@ -45,64 +45,47 @@ const ImportsTable = () => {
   const [data, setData] = useState([])
   const [filterText, setFilterText] = React.useState('')
   const history = useHistory()
+
   useEffect(() => {
     const getImportData = async () => {
-      const res = await getImports()
-      setData(res)
+      setData(await getImports())
     }
     getImportData()
   }, [])
-  const filteredItems = data.filter(
-    (item) =>
-      (item.name &&
-        item.name.toLowerCase().includes(filterText.toLowerCase())) ||
-      (item.muni && 'tree inventory'.includes(filterText.toLowerCase())) ||
-      (!item.muni && 'community map'.includes(filterText.toLowerCase())) ||
-      item.created_at.includes(filterText),
-  )
 
-  const onRowClicked = (row) => {
-    history.push({
-      pathname: `/about/dataset/${row.id}`,
-    })
-  }
-  const subHeaderComponentMemo = React.useMemo(() => {
-    const handleClear = () => {
-      if (filterText) {
-        setFilterText('')
-      }
-    }
+  const filteredData = data.filter((item) => {
+    const query = filterText.toLowerCase()
+    const keywords = [
+      item.name,
+      FORMATTERS.muni(item),
+      FORMATTERS.created_at(item),
+    ]
+    return keywords.some((keyword) => keyword.toLowerCase().includes(query))
+  })
 
-    return (
-      <FilterComponent
-        onFilter={(e) => setFilterText(e.target.value)}
-        onClear={handleClear}
-        filterText={filterText}
-      />
-    )
-  }, [filterText])
   return (
     <DataTable
       columns={columns}
-      data={filteredItems}
+      data={filteredData}
       pagination
       subHeader
-      subHeaderComponent={subHeaderComponentMemo}
+      subHeaderComponent={
+        <Input
+          placeholder="Search for a dataset"
+          icon={<SearchIcon />}
+          value={filterText}
+          onChange={(e) => setFilterText(e.target.value)}
+          onClear={() => setFilterText('')}
+        />
+      }
       persistTableHead
-      onRowClicked={onRowClicked}
+      onRowClicked={(row) => {
+        history.push({
+          pathname: `/about/dataset/${row.id}`,
+        })
+      }}
     />
   )
 }
-
-const FilterComponent = ({ filterText, onFilter }) => (
-  <>
-    <Input
-      placeholder="Search for a dataset"
-      icon={<SearchIcon />}
-      value={filterText}
-      onChange={onFilter}
-    />
-  </>
-)
 
 export default ImportsTable

@@ -6,7 +6,7 @@ import { Route, Switch, useLocation } from 'react-router-dom'
 
 import { enableStreetView } from '../../redux/mapSlice'
 import useRoutedTabs from '../../utils/useRoutedTabs'
-import AboutRouter from '../about/AboutRouter'
+import aboutRoutes from '../about/aboutRoutes'
 import Drawer from '../entry/Drawer'
 import Entry from '../entry/Entry'
 import { LocationForm } from '../form/LocationForm'
@@ -61,7 +61,7 @@ const MobileLayout = () => {
       <TabPanels>
         <TopBarSwitch />
         <Switch>
-          {AboutRouter}
+          {aboutRoutes}
           <Route path="/map/entry/new/details">
             <LocationForm />
           </Route>

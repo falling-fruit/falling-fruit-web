@@ -1,22 +1,28 @@
-import { default as ReactDataTable } from 'react-data-table-component'
+import ReactDataTable from 'react-data-table-component'
 import styled from 'styled-components/macro'
 
-const DataTableWrapper = styled(ReactDataTable)`
+const TableWrapper = styled.div`
   .rdt {
     &_TableHeadRow {
-      font-style: normal;
+      font-size: 1rem;
       font-weight: bold;
-      font-size: 1rem;
     }
-    &_TableCell {
+
+    &_TableRow {
       font-size: 1rem;
-      &[data-column-id='scientific_name'] {
-        font-style: italic;
-      }
+      cursor: pointer;
+    }
+
+    &_TableRow:hover {
+      background-color: ${({ theme }) => theme.secondaryBackground};
     }
   }
 `
 
-const DataTable = (props) => <DataTableWrapper pagination {...props} />
+const DataTable = (props) => (
+  <TableWrapper>
+    <ReactDataTable pagination style={{ backgroundColor: 'red' }} {...props} />
+  </TableWrapper>
+)
 
 export default DataTable

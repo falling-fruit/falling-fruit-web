@@ -9,10 +9,7 @@ const TableLinkPreview = styled.img`
   height: 20px;
   margin-right: 5px;
 `
-const NameLink = styled.a`
-  font-weight: normal;
-  color: ${({ theme }) => theme.secondaryText} !important;
-`
+
 const customLinkSort = (rowOne, rowTwo) =>
   rowOne.links.length - rowTwo.links.length
 
@@ -25,18 +22,15 @@ const ResourceList = ({ url, key }) =>
   )
 
 const FORMATTERS = {
-  link: function LinkFormat({ url }) {
-    return (
+  muni: ({ muni }) => (muni ? 'Tree inventory' : 'Community map'),
+  link: ({ url }) =>
+    url && (
       <a href={url} target="_blank" rel="noreferrer">
         Link <LinkExternal size="14" color={theme.orange} />
       </a>
-    )
-  },
+    ),
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
-  name: function NameFormat({ name, url }) {
-    return <NameLink href={url}>{name}</NameLink>
-  },
   created_at: ({ created_at }) =>
     new Date(created_at).toISOString().split('T')[0],
 }
