@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
 import { addLocation, addReview } from '../../utils/api'
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -219,7 +220,7 @@ export const LocationForm = ({ desktop }) => {
       console.log('reviewResp', reviewResp)
     }
 
-    history.push('/map')
+    history.push(getPathWithMapState('/map'))
   }
 
   const StepDisplay = desktop ? FormikAllSteps : FormikStepper
@@ -237,7 +238,9 @@ export const LocationForm = ({ desktop }) => {
             <Button
               secondary
               type="button"
-              onClick={() => history.push(state?.fromPage ?? '/map')}
+              onClick={() =>
+                history.push(getPathWithMapState(state?.fromPage ?? '/map'))
+              }
             >
               Cancel
             </Button>

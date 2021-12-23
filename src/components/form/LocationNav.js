@@ -2,6 +2,7 @@ import { Check, X } from '@styled-icons/boxicons-regular'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import TopBarNav from '../ui/TopBarNav'
@@ -28,7 +29,7 @@ const LocationNav = () => {
                 raised
                 size={54}
                 onClick={() => {
-                  history.push('/map')
+                  history.push(getPathWithMapState('/map'))
                 }}
               />
               <IconButton
@@ -38,7 +39,7 @@ const LocationNav = () => {
                 size={54}
                 color={theme.green}
                 onClick={() => {
-                  history.push('/map/entry/new/details')
+                  history.push(getPathWithMapState('/map/entry/new/details'))
                 }}
               />
             </>
@@ -47,7 +48,7 @@ const LocationNav = () => {
       </Route>
       <Route>
         <TopBarNav
-          onBack={() => history.push('/map/entry/new')}
+          onBack={() => history.push(getPathWithMapState('/map/entry/new'))}
           title="New Location"
         />
       </Route>

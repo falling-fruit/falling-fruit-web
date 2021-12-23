@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Button from '../ui/Button'
@@ -36,7 +37,7 @@ const MainPane = () => {
         secondary
         onClick={() =>
           history.push({
-            pathname: '/map/entry/new',
+            pathname: getPathWithMapState('/map/entry/new'),
             state: { fromPage: '/map' },
           })
         }
@@ -46,7 +47,7 @@ const MainPane = () => {
       <SettingsButton
         onClick={() =>
           history.push({
-            pathname: '/settings',
+            pathname: getPathWithMapState('/settings'),
             state: { fromPage: '/map' },
           })
         }
