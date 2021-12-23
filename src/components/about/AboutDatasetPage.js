@@ -1,8 +1,8 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
-import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router-dom'
+import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
 import { useIsMobile } from '../../utils/useBreakpoint'
@@ -12,87 +12,95 @@ import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
+const DatasetName = styled.h1`
+  margin: 1rem 0;
+
+  span {
+    color: ${({ theme }) => theme.orange};
+  }
+`
+
+const getFormattedDate = (utc) => {
+  const [, ...date] = new Date(utc).toDateString().split(' ')
+  return date.join(' ')
+}
+
 const AboutDatasetPage = () => {
-  const datasetIDMatch = useRouteMatch({
+  const routeMatch = useRouteMatch({
     path: '/about/dataset/:datasetID',
     exact: true,
   })
 
-  const datasetID =
-    datasetIDMatch?.params.datasetID &&
-    parseInt(datasetIDMatch.params.datasetID)
-  const [importData, setImportData] = useState()
+  const id =
+    routeMatch?.params?.datasetID && Number(routeMatch.params.datasetID)
+
+  const isMobile = useIsMobile()
+
+  const [importData, setImportData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     async function fetchImportData() {
       setIsLoading(true)
 
-      setImportData(await getImportById(datasetID))
+      setImportData(await getImportById(id))
 
       setIsLoading(false)
     }
 
     fetchImportData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  const isMobile = useIsMobile
+  }, [id])
+
+  if (isLoading) {
+    return <LoadingOverlay />
+  }
+
+  const {
+    name,
+    url,
+    comments,
+    muni,
+    location_count,
+    created_at,
+    updated_at,
+    license,
+  } = importData
 
   return (
     <div style={{ marginTop: isMobile ? '10vh' : '0px' }}>
-      <NavBack isEntry></NavBack>
-      {!isLoading && (
-        <PageScrollWrapper>
-          <PageTemplate>
-            <h1 style={{ color: theme.orange, display: 'inline' }}>
-              #{datasetID}
-            </h1>{' '}
-            <h1 style={{ display: 'inline', padding: '10px' }}>
-              {importData.name}
-            </h1>
-            <br></br>
-            <br></br>
-            <a href={importData.url}>Website</a>
-            <p>{importData.comments}</p>
-            <IconBesideText>
-              <Pin color={theme.secondaryText} size={20} />
-              <p>{importData.muni ? 'Tree Inventory' : 'Community Map'}</p>
-            </IconBesideText>
-            <IconBesideText>
-              <MapPin color={theme.secondaryText} size={20} />
-              <p> {importData.location_count} Locations</p>
-            </IconBesideText>
-            <IconBesideText>
-              <Calendar color={theme.secondaryText} size={20} />
-              <p>
-                Created{' '}
-                {moment(
-                  importData.created_at.substring(
-                    0,
-                    importData.created_at.indexOf('T'),
-                  ),
-                ).format('MMMM Do, YYYY')}{' '}
-              </p>
-            </IconBesideText>
-            <IconBesideText>
-              <Calendar color={theme.secondaryText} size={20} />
-              <p>
-                Updated{' '}
-                {moment(
-                  importData.updated_at.substring(
-                    0,
-                    importData.updated_at.indexOf('T'),
-                  ),
-                ).format('MMMM Do, YYYY')}{' '}
-              </p>
-            </IconBesideText>
-            <IconBesideText>
-              <Copyright color={theme.secondaryText} size={20} />
-              <p> {importData.license} </p>
-            </IconBesideText>
-          </PageTemplate>
-        </PageScrollWrapper>
-      )}
-      {isLoading && <LoadingOverlay></LoadingOverlay>}
+      <PageScrollWrapper>
+        <PageTemplate>
+          <NavBack isEntry />
+          <DatasetName>
+            <span>#{id}</span> {name}
+          </DatasetName>
+          <a href={url} target="_blank" rel="noreferrer">
+            Website
+          </a>
+          <p>{comments}</p>
+          <IconBesideText>
+            <Pin color={theme.secondaryText} size={20} />
+            <p>{muni ? 'Tree Inventory' : 'Community Map'}</p>
+          </IconBesideText>
+          <IconBesideText>
+            <MapPin color={theme.secondaryText} size={20} />
+            <p>{location_count} Locations</p>
+          </IconBesideText>
+          <IconBesideText>
+            <Calendar color={theme.secondaryText} size={20} />
+            <p>Created {getFormattedDate(created_at)}</p>
+          </IconBesideText>
+          <IconBesideText>
+            <Calendar color={theme.secondaryText} size={20} />
+            <p>Updated {getFormattedDate(updated_at)}</p>
+          </IconBesideText>
+          <IconBesideText>
+            <Copyright color={theme.secondaryText} size={20} />
+            <p>{license} </p>
+          </IconBesideText>
+        </PageTemplate>
+      </PageScrollWrapper>
     </div>
   )
 }

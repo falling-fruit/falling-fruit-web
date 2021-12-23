@@ -23,6 +23,7 @@ import {
 } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
+// TODO: Move to its own file
 const IconBesideText = styled.div`
   display: flex;
   color: ${({ theme }) => theme.secondaryText};

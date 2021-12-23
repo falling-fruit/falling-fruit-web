@@ -6,7 +6,9 @@ import styled from 'styled-components/macro'
 import BackButton from '../ui/BackButton'
 
 const StyledNavBack = styled.div`
-  padding: 25px 10px 15px;
+  padding: 25px 0 15px;
+
+  ${({ isEntry }) => !isEntry && 'padding-left: 10px;'}
 
   svg {
     height: 20px;
@@ -14,6 +16,7 @@ const StyledNavBack = styled.div`
   }
 `
 
+// TODO: redefine NavBack to accept a callback and label instead of isEntry
 const NavBack = ({ isEntry }) => {
   const history = useHistory()
   const { state } = useLocation()
@@ -29,7 +32,7 @@ const NavBack = ({ isEntry }) => {
   }
 
   return (
-    <StyledNavBack>
+    <StyledNavBack isEntry={isEntry}>
       <BackButton onClick={handleBackButtonClick}>
         <ArrowBack />
         {isEntry ? t('Back to Entry') : t('Back to Results')}

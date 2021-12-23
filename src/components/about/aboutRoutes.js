@@ -20,5 +20,4 @@ const pages = [
 ]
 
 const aboutRoutes = pages.map((props) => <Route key={props.path} {...props} />)
-console.log(aboutRoutes)
 export default aboutRoutes
