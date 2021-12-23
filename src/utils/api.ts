@@ -124,16 +124,3 @@ export const getImports = () => handleResponse(instance.get(`/imports`))
 export const getImportById = (
   id: paths['/imports/{id}']['get']['parameters']['path']['id'],
 ) => handleResponse(instance.get(`/imports/${id}`))
-
-// export const getImportById = Promise.resolve({
-//   id: 42,
-//   created_at: '2014-06-19T01:02:03.456Z',
-//   updated_at: '2014-07-20T12:34:56.789Z',
-//   name: 'Les arbres de Grenoble',
-//   url: 'http://data.metropolegrenoble.fr/ckan/dataset/les-arbres-de-grenoble',
-//   comments: 'Tree inventory of Grenoble, France.',
-//   license:
-//     'Open Data Commons Open Database License (https://opendefinition.org/licenses/odc-odbl)',
-//   muni: true,
-//   location_count: 1273,
-// })
