@@ -1,7 +1,7 @@
 import ImportsTable from '../table/ImportsTable'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
-const ImportedDatasetstPage = () => (
+const ImportedDatasetsPage = () => (
   <PageScrollWrapper>
     <PageTemplate>
       <p>
@@ -45,4 +45,4 @@ const ImportedDatasetstPage = () => (
   </PageScrollWrapper>
 )
 
-export default ImportedDatasetstPage
+export default ImportedDatasetsPage

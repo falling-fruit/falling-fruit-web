@@ -19,6 +19,7 @@ import { TextContent } from './Entry'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
+// TODO: Move to its own file
 const IconBesideText = styled.div`
   display: flex;
   color: ${({ theme }) => theme.secondaryText};
@@ -154,6 +155,15 @@ const EntryOverview = ({ locationData, className }) => {
               </time>
             </p>
 
+            {locationData.import_id && (
+              <p className="updatedTime">
+                {t('Imported from')}{' '}
+                <a href={`/about/dataset/${locationData.import_id}`}>
+                  {locationData.author}
+                </a>
+              </p>
+            )}
+
             <div>
               <Button leftIcon={<Star />}>Review</Button>
               <Button
@@ -171,5 +181,5 @@ const EntryOverview = ({ locationData, className }) => {
     </div>
   )
 }
-
+export { IconBesideText }
 export default EntryOverview

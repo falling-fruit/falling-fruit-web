@@ -26,7 +26,6 @@
     "i18next": "^20.2.1",
     "i18next-browser-languagedetector": "^6.1.0",
     "i18next-http-backend": "^1.2.2",
-    "install": "^0.13.0",
     "polished": "^4.1.1",
     "ramda": "^0.27.1",
     "rc-tree-select": "2.7.0",

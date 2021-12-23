@@ -7,7 +7,9 @@ import { getPathWithMapState } from '../../utils/getInitialUrl'
 import BackButton from '../ui/BackButton'
 
 const StyledNavBack = styled.div`
-  padding: 25px 10px 15px;
+  padding: 25px 0 15px;
+
+  ${({ isEntry }) => !isEntry && 'padding-left: 10px;'}
 
   svg {
     height: 20px;
@@ -15,21 +17,26 @@ const StyledNavBack = styled.div`
   }
 `
 
-const NavBack = () => {
+// TODO: redefine NavBack to accept a callback and label instead of isEntry
+const NavBack = ({ isEntry }) => {
   const history = useHistory()
   const { state } = useLocation()
   const { t } = useTranslation()
 
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    history.push(getPathWithMapState(state?.fromPage ?? '/map'))
+    if (isEntry) {
+      history.go(-1)
+    } else {
+      history.push(getPathWithMapState(state?.fromPage ?? '/map'))
+    }
   }
 
   return (
-    <StyledNavBack>
+    <StyledNavBack isEntry={isEntry}>
       <BackButton onClick={handleBackButtonClick}>
         <ArrowBack />
-        {t('Back to Results')}
+        {isEntry ? t('Back') : t('Back to Results')}
       </BackButton>
     </StyledNavBack>
   )
