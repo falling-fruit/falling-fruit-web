@@ -91,10 +91,12 @@ const AboutDatasetPage = () => {
           <Calendar color={theme.secondaryText} size={20} />
           <p>Updated {getFormattedDate(updated_at)}</p>
         </IconBesideText>
-        <IconBesideText>
-          <Copyright color={theme.secondaryText} size={20} />
-          <p>{license} </p>
-        </IconBesideText>
+        {license && (
+          <IconBesideText>
+            <Copyright color={theme.secondaryText} size={20} />
+            <p>{license} </p>
+          </IconBesideText>
+        )}
       </PageTemplate>
     </PageScrollWrapper>
   )
