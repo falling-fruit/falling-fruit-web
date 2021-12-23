@@ -32,7 +32,7 @@ const MainPane = () => {
   useEffect(() => {
     // TODO: fix slow main pane mount
     console.log('mainpane mount')
-    return () => console.log('unmount')
+    return () => console.log('mainpane unmount')
   }, [])
   const history = useHistory()
   return (
