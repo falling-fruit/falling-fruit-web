@@ -89,6 +89,7 @@ const InlineSelects = styled.div`
 
 const LocationStep = ({ typeOptions }) => (
   <>
+    {console.log(typeOptions)}
     <Select
       name="types"
       label="Types"
@@ -139,13 +140,16 @@ export const LocationForm = ({ desktop }) => {
 
   const { lat, lng } = useSelector((state) => state.map.view.center)
 
+  // TODO: internationalize common name
   const typeOptions = useMemo(
     () =>
       typesById
-        ? Object.values(typesById).map(({ id, name, scientific_name }) => ({
-            value: id,
-            label: `${name} [${scientific_name}]`,
-          }))
+        ? Object.values(typesById).map(
+            ({ id, common_names, scientific_names }) => ({
+              value: id,
+              label: `${common_names.en[0]} [${scientific_names?.[0] ?? ''}]`,
+            }),
+          )
         : [],
     [typesById],
   )
