@@ -155,7 +155,7 @@ const StyledDropdown = styled(Dropdown)`
       display: block;
     }
 
-    .active ::before {
+    .active::before {
       display: none;
     }
   }
