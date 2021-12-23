@@ -73,16 +73,12 @@ const Entry = ({
   setLightboxIndex,
   isFullScreen,
 }) => {
-  console.log('here')
-  console.log(showEntryImages)
   let content
 
   if (!locationData || !reviews) {
     content = <LoadingIndicator cover vertical />
   } else {
-    const allReviewPhotos = reviews
-      .filter((review) => review.photos.length > 0)
-      .map((review) => review.photos)
+    const allReviewPhotos = reviews.map((review) => review.photos).flat()
 
     content = (
       <>
