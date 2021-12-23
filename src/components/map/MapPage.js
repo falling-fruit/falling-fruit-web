@@ -6,13 +6,13 @@ import styled from 'styled-components/macro'
 import {
   clusterClick,
   restoreOldView,
-  setEntry,
   zoomIn,
   zoomInAndSave,
 } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -57,14 +57,14 @@ const MapPage = ({ isDesktop }) => {
   }, [dispatch, isAddingLocation])
 
   const handleLocationClick = (location) => {
-    dispatch(setEntry(location.id))
     history.push({
-      pathname: `/map/entry/${location.id}/@${view.center.lat},${view.center.lng},${view.zoom}z`,
+      pathname: getPathWithMapState(`/map/entry/${location.id}`),
       state: { fromPage: '/map' },
     })
   }
+
   const handleAddLocationClick = () => {
-    history.push('/map/entry/new')
+    history.push(getPathWithMapState('/map/entry/new'))
   }
 
   return (

@@ -8,19 +8,15 @@ import styled from 'styled-components/macro'
 
 import { enableStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
+import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
-import { Tag, TagList } from '../ui/Tag'
 import { TextContent } from './Entry'
-import {
-  ACCESS_TYPE,
-  formatISOString,
-  formatSeasonality,
-} from './textFormatters'
+import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
 const IconBesideText = styled.div`
@@ -85,30 +81,13 @@ const EntryOverview = ({ locationData, className }) => {
   const { t } = useTranslation()
 
   const handleAddressClick = () => {
-    history.push(`/map/entry/${locationData.id}`)
+    history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
     // Disabling zoom in for now
   }
 
-  // const toggleStreetView = () => {
-
-  // }
-
-  const tagList = locationData && (
-    <TagList>
-      {locationData.access && (
-        <Tag color={theme.tag.access}>{ACCESS_TYPE[locationData.access]}</Tag>
-      )}
-      {locationData.unverified ? (
-        <Tag color={theme.tag.unverified}>{t('Unverified')}</Tag>
-      ) : (
-        <Tag color={theme.tag.verified}>{t('Verified')}</Tag>
-      )}
-    </TagList>
-  )
-
   const handleStreetView = () => {
     if (!isDesktop) {
-      history.push(`/map/entry/${locationData.id}`)
+      history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
     }
 
     // TODO: change setTimeout to make it wait for map component to mount
@@ -138,7 +117,6 @@ const EntryOverview = ({ locationData, className }) => {
           />
         )}
         <TextContent>
-          {tagList}
           <TypesHeader typeIds={locationData.type_ids} />
           <Description>
             <p>{locationData.description}</p>

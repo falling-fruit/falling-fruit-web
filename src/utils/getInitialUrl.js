@@ -2,6 +2,29 @@ const DEFAULT_LAT = 40.1125785
 const DEFAULT_LNG = -88.2287926
 const DEFAULT_ZOOM = 1
 
+export const getBaseUrl = () => {
+  const { pathname } = new URL(window.location.href)
+  const stateIndex = pathname.indexOf('/@')
+
+  if (stateIndex === -1) {
+    return pathname
+  } else {
+    return pathname.substring(0, stateIndex)
+  }
+}
+
+export const getPathWithMapState = (path) => {
+  if (path.indexOf('/@') !== -1) {
+    return path
+  } else {
+    const { pathname } = new URL(window.location.href)
+    const pathNoTrailingSlash = path.replace(/\/*$/, '')
+    const mapState = pathname.substring(pathname.indexOf('/@'))
+
+    return pathNoTrailingSlash + mapState
+  }
+}
+
 export const parseUrl = () => {
   const url = window.location.href
   const geocoordMatch = url.substring(url.indexOf('@'))
