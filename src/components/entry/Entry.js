@@ -80,7 +80,9 @@ const Entry = ({
   if (!locationData || !reviews) {
     content = <LoadingIndicator cover vertical />
   } else {
-    const allReviewPhotos = reviews.map((review) => review.photos).flat()
+    const allReviewPhotos = reviews
+      .filter((review) => review.photos.length > 0)
+      .map((review) => review.photos)
 
     content = (
       <>
