@@ -68,8 +68,7 @@ const EntryList = forwardRef(
         content = (
           <StyledListEntry
             key={location.id}
-            // TODO: locations currently don't have a photo tied to them, so never shows up
-            leftIcons={<EntryIcon imageSrc={location.photo?.thumb} />}
+            leftIcons={<EntryIcon imageSrc={location.photo} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={<TypeName typeId={location.type_ids[0]} />}
             secondaryText={convertDistance(location.distance, distanceUnit)}
