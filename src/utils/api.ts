@@ -28,7 +28,7 @@ instance.interceptors.response.use(
 
     if (
       error.response.status === 401 &&
-      error.response.data === '' &&
+      error.response.data === 'Expired refresh token' &&
       originalRequest._retry
     ) {
       const token: any = authStore.getToken()
