@@ -61,7 +61,7 @@ const SignupPage = () => (
                 Edit the map anonymously (even while logged in)
               </label>
             }
-            left={<Checkbox name="editAnonymously" />}
+            left={<Checkbox name="editAnonymously" id="editAnonymously" />}
           />
 
           <LabeledRow
@@ -71,7 +71,7 @@ const SignupPage = () => (
                 (1-2 per year)
               </label>
             }
-            left={<Checkbox name="mailingList" />}
+            left={<Checkbox name="mailingList" id="mailingList" />}
           />
         </FormCheckboxWrapper>
 

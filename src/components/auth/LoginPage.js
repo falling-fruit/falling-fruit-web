@@ -1,5 +1,5 @@
 import { Form, Formik } from 'formik'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -26,7 +26,6 @@ const Column = styled.div`
 const LoginPage = () => {
   const { user, error } = useSelector((state) => state.auth)
   const history = useHistory()
-  const [rememberMe, setRememberMe] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -65,14 +64,8 @@ const LoginPage = () => {
 
           <FormCheckboxWrapper>
             <LabeledRow
-              label={<label htmlFor="remember_me">Remember Me</label>}
-              left={
-                <Checkbox
-                  id="remember_me"
-                  checked={rememberMe}
-                  onChange={() => setRememberMe(!rememberMe)}
-                />
-              }
+              label={<label htmlFor="rememberMe">Remember Me</label>}
+              left={<Checkbox name="rememberMe" />}
             />
           </FormCheckboxWrapper>
 

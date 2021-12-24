@@ -7,13 +7,23 @@ import Input from '../ui/Input'
 import { Select } from '../ui/Select'
 import { Slider } from '../ui/Slider'
 import Textarea from '../ui/Textarea'
-import { withField, withLabeledField } from './withLabeledField'
+import { withLabeledField } from './withLabeledField'
 
 const FormikInput = withLabeledField(Input)
 const FormikTextarea = withLabeledField(Textarea)
 const FormikSlider = withLabeledField(Slider, undefined, true)
 const FormikSelect = withLabeledField(Select, undefined, true)
-const FormikCheckbox = withField(Checkbox)
+
+const FormikCheckbox = ({ name, ...props }) => {
+  const [{ value }, , helpers] = useField(name)
+  return (
+    <Checkbox
+      onClick={(e) => helpers.setValue(e.target.checked)}
+      checked={value}
+      {...props}
+    />
+  )
+}
 
 const FormikRecaptcha = ({ name, ...props }) => {
   const [, , helpers] = useField(name)
