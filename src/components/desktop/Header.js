@@ -172,7 +172,7 @@ const LogoLink = styled(Link)`
 // TODO: Clean up file structure (i.e. logo_white.svg) from ./public
 const Header = () => {
   const { t } = useTranslation()
-  const { authToken } = useSelector((state) => state.auth)
+  const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const handleLogout = () => {
     dispatch(logout())
@@ -209,13 +209,11 @@ const Header = () => {
             </StyledDropdown>
           </li>
           <li>
-            {authToken ? (
+            {user ? (
               <StyledDropdown
                 label={
                   <>
-                    <StyledUser height={'15px'} />
-                    {/* TODO: Update display name to user's name */}
-                    {authToken ? ' Ethan Appleseed' : t('Login')}
+                    <StyledUser height={15} /> {user.name}
                   </>
                 }
                 match={false}
@@ -224,7 +222,7 @@ const Header = () => {
               </StyledDropdown>
             ) : (
               <NavLink to="/login" className="navbar" activeClassName="active">
-                <StyledUser height={'15px'} /> {t('Login')}
+                <StyledUser height={15} /> {t('Login')}
               </NavLink>
             )}
           </li>

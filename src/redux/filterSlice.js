@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
 import {
@@ -31,6 +31,8 @@ export const fetchFilterCounts = createAsyncThunk(
   },
 )
 
+export const updateSelection = createAction('filter/updateSelection')
+
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
@@ -47,9 +49,7 @@ export const filterSlice = createSlice({
   },
   reducers: {
     setFilters: (state, action) => ({ ...state, ...action.payload }),
-    updateSelection: (state, action) => {
-      state.types = action.payload
-    },
+
     openFilter: (state) => {
       state.isOpen = true
     },
@@ -72,6 +72,11 @@ export const filterSlice = createSlice({
       state.countsById = countsById
       state.isLoading = false
     },
+
+    [updateSelection]: (state, action) => {
+      state.types = action.payload
+    },
+
     [fetchAllTypes.fulfilled]: (state, action) => {
       const typesWithPendingCategory = getTypesWithPendingCategory([
         ...action.payload,
@@ -90,8 +95,7 @@ export const filterSlice = createSlice({
   },
 })
 
-export const { setFilters, openFilter, closeFilter, updateSelection } =
-  filterSlice.actions
+export const { setFilters, openFilter, closeFilter } = filterSlice.actions
 
 export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection(types))
