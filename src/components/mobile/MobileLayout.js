@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { useEffect, useRef } from 'react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +18,7 @@ import TopBarSwitch from './TopBarSwitch'
 
 const MobileLayout = () => {
   useTranslation()
+  const tabsRef = useRef()
   const tabs = getTabs()
   const dispatch = useDispatch()
   const streetView = useSelector((state) => state.map.streetView)
@@ -51,8 +53,15 @@ const MobileLayout = () => {
     }
   }, [dispatch, location])
 
+  useEffect(() => {
+    const tabsRefCopy = tabsRef.current
+    disableBodyScroll(tabsRefCopy)
+
+    return () => enableBodyScroll(tabsRefCopy)
+  }, [])
+
   return (
-    <PageTabs index={tabIndex} onChange={handleTabChange}>
+    <PageTabs index={tabIndex} onChange={handleTabChange} ref={tabsRef}>
       <Helmet>
         <meta
           name="viewport"
