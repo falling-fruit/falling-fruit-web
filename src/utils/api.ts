@@ -55,16 +55,7 @@ export const editUser = (
   params: paths['/user']['put']['requestBody']['content']['application/json'],
 ) => instance.put('/user', params)
 
-// getUser takes accessToken so that it can also use a token immediately, rather than just via the Redux store
-export const getUser = (accessToken: string) =>
-  instance.get(
-    '/user',
-    accessToken
-      ? {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      : {},
-  )
+export const getUser = () => instance.get('/user')
 
 export const getUserToken = (username: string, password: string) => {
   const formData = new FormData()
