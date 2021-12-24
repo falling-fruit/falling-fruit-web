@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { fetchToken } from '../redux/authSlice'
+import { login } from '../redux/authSlice'
 import { getPathWithMapState } from '../utils/getInitialUrl'
 import Header from './desktop/Header'
 import Button from './ui/Button'
@@ -45,7 +45,7 @@ const ErrorMessage = styled.p`
   color: red;
 `
 const LoginPage = () => {
-  const { authToken, failedLogin } = useSelector((state) => state.auth)
+  const { user, error } = useSelector((state) => state.auth)
   const history = useHistory()
   const [rememberMe, setRememberMe] = useState(false)
   const [username, setUsername] = useState('')
@@ -53,9 +53,9 @@ const LoginPage = () => {
 
   const dispatch = useDispatch()
 
-  const getJWTToken = () => {
+  const handleLogin = () => {
     dispatch(
-      fetchToken({
+      login({
         email: username,
         password: password,
         rememberMe: rememberMe,
@@ -64,13 +64,10 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    if (authToken) {
-      history.push({
-        pathname: getPathWithMapState('/map'),
-        state: { fromPage: '/login' },
-      })
+    if (user) {
+      history.push(getPathWithMapState('/map'))
     }
-  }, [authToken, history])
+  }, [user, history])
 
   return (
     <>
@@ -83,31 +80,32 @@ const LoginPage = () => {
           placeholder="e.g. user@example.com"
           value={username}
           type="email"
-          label={'Email'}
+          label="Email"
           onChange={(e) => setUsername(e.target.value)}
         />
         <Label>Password</Label>
 
         <StyledInput
-          label={'Password'}
+          label="Password"
           value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
 
         <LabeledRow
-          label={<label htmlFor={'Remember Me'}>Remember Me</label>}
+          label={<label htmlFor="remember_me">Remember Me</label>}
           left={
             <Checkbox
+              id="remember_me"
               checked={rememberMe}
               onChange={() => setRememberMe(!rememberMe)}
             />
           }
         />
 
-        <Button onClick={getJWTToken}>Login</Button>
+        <Button onClick={handleLogin}>Login</Button>
 
-        {failedLogin && <ErrorMessage>Invalid Login</ErrorMessage>}
+        {error && <ErrorMessage>Invalid Login</ErrorMessage>}
 
         {/* TODO: Update links below */}
         <a href="signup">Signup</a>

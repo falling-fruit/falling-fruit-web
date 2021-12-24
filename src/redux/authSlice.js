@@ -1,48 +1,67 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getUserToken } from '../utils/api'
+import { getUser, getUserToken } from '../utils/api'
+import authStore from '../utils/authStore'
+import { setReducer } from './mapSlice'
 
-const authToken = 'authToken'
+export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
+  const token = authStore.getToken()
 
-export const fetchToken = createAsyncThunk(
-  'users/fetchToken',
+  if (token.access_token) {
+    return await getUser()
+  } else {
+    return null
+  }
+})
+
+export const login = createAsyncThunk(
+  'auth/login',
   async ({ email, password, rememberMe }) => {
-    const response = await getUserToken(email, password)
-    if (rememberMe) {
-      localStorage.setItem(authToken, response)
-    } else {
-      sessionStorage.setItem(authToken, response)
-    }
+    const token = await getUserToken(email, password)
+    authStore.setToken(token, rememberMe)
 
-    return response
+    return await getUser()
   },
 )
-const initialState = { authToken: null, rememberMe: false, failedLogin: false }
+
+export const logout = createAction('auth/logout', () => {
+  authStore.removeToken()
+  return {}
+})
+
+const initialState = {
+  user: null,
+  error: null,
+}
 
 export const authSlice = createSlice({
   name: 'auth',
-  initialState,
   reducers: {
-    logout: (state) => {
-      state.authToken = null
-      localStorage.clear()
-      sessionStorage.clear()
-    },
-    login: (state) => {
-      const localAuthToken = localStorage.getItem('authToken')
-      const sessionAuthToken = sessionStorage.getItem('authToken')
-      state.authToken = localAuthToken ?? sessionAuthToken
-    },
+    setToken: setReducer('token'),
   },
+  initialState,
   extraReducers: {
-    [fetchToken.fulfilled]: (state, { payload }) => {
-      state.authToken = payload
+    [checkAuth.fulfilled]: (state, action) => {
+      state.user = action.payload
+      state.error = null
     },
-    [fetchToken.rejected]: (state) => {
-      state.failedLogin = true
+    [checkAuth.rejected]: (state, action) => {
+      state.error = action.error
+    },
+
+    [login.fulfilled]: (state, action) => {
+      state.user = action.payload
+      state.error = null
+    },
+    [login.rejected]: (state, action) => {
+      state.error = action.error
+    },
+
+    [logout]: (state) => {
+      state.user = null
     },
   },
 })
 
-export const { logout, login } = authSlice.actions
+export const { setToken } = authSlice.actions
 export default authSlice.reducer
