@@ -65,8 +65,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      console.log('new url', getPathWithMapState('/map'))
-      history.push('/map')
+      history.push(getPathWithMapState('/map'))
     }
   }, [user, history])
 
