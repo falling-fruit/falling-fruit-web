@@ -18,7 +18,7 @@ const ListPage = () => {
   const isShowingClusters = useSelector(getIsShowingClusters)
 
   useEffect(() => {
-    if (pathname === '/list') {
+    if (pathname.startsWith('/list')) {
       dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
     }
   }, [pathname, dispatch])
