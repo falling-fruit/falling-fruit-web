@@ -35,13 +35,14 @@ const StyledHeader = styled.header`
       margin: 0 10px 0 0;
       height: 100%;
 
+      display: flex;
+
       li {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
+        display: flex;
+        justify-content: stretch;
+        align-items: stretch;
         min-width: 110px;
         margin: 0;
-        height: 100%;
         color: ${({ theme }) => theme.secondaryText};
         cursor: pointer;
         position: relative;
@@ -50,36 +51,28 @@ const StyledHeader = styled.header`
         font-weight: bold;
         font-size: 1rem;
 
-        .navbar {
-          display: block;
-          height: 100%;
-          width: 100%;
-        }
-
         a {
           text-decoration: none;
           color: ${({ theme }) => theme.secondaryText};
           text-align: center;
-        }
-
-        .active {
-          background-color: ${({ theme }) => theme.navBackground};
-          color: ${({ theme }) => theme.orange};
-          box-sizing: border-box;
-          height: 100%;
-          width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
+          flex: 1;
 
-          ::before {
-            content: '';
-            width: 100%;
-            position: absolute;
-            background-color: ${({ theme }) => theme.orange};
-            height: 3px;
-            bottom: 0;
-            left: 0;
+          &.active {
+            background-color: ${({ theme }) => theme.navBackground};
+            color: ${({ theme }) => theme.orange};
+
+            ::before {
+              content: '';
+              width: 100%;
+              position: absolute;
+              background-color: ${({ theme }) => theme.orange};
+              height: 3px;
+              bottom: 0;
+              left: 0;
+            }
           }
         }
 
@@ -110,7 +103,7 @@ const StyledHeader = styled.header`
 `
 const Dropdown = ({ className, children, label, match }) => (
   <div className={className}>
-    <div className={`button ${match && 'active'}`}>
+    <div className={`button${match ? ' active' : ''}`}>
       {label} <CaretDown height="8px" />
     </div>
     <div className="content">{children}</div>
@@ -118,24 +111,32 @@ const Dropdown = ({ className, children, label, match }) => (
 )
 
 const StyledDropdown = styled(Dropdown)`
-  display: inline-block;
+  display: flex;
 
   .button {
     color: ${({ theme }) => theme.secondaryText};
-    padding: 16px;
     border: none;
-    height: 100%;
-    width: 100%;
     padding: 19px 31px;
 
-    .active {
-      height: 100%;
-      width: 100%;
+    &.active {
+      color: ${({ theme }) => theme.orange};
+      background-color: ${({ theme }) => theme.navBackground};
+
+      ::before {
+        content: '';
+        width: 100%;
+        position: absolute;
+        background-color: ${({ theme }) => theme.orange};
+        height: 3px;
+        bottom: 0;
+        left: 0;
+      }
     }
   }
 
   &:hover .content {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .content {
@@ -146,8 +147,7 @@ const StyledDropdown = styled(Dropdown)`
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.05) 0 15px 15px;
     text-align: center;
-    min-width: 100%;
-    left: 0;
+    top: 56px;
 
     a {
       color: ${({ theme }) => theme.secondaryText};
@@ -185,7 +185,7 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/map" className="navbar" activeClassName="active">
+            <NavLink to="/map" activeClassName="active">
               {t('Map')}
             </NavLink>
           </li>
@@ -221,7 +221,7 @@ const Header = () => {
                 <button onClick={handleLogout}>Logout</button>
               </StyledDropdown>
             ) : (
-              <NavLink to="/login" className="navbar" activeClassName="active">
+              <NavLink to="/login" activeClassName="active">
                 <StyledUser height={15} /> {t('Login')}
               </NavLink>
             )}
