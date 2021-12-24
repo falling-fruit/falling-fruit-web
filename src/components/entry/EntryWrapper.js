@@ -47,17 +47,10 @@ const EntryWrapper = ({ isInDrawer }) => {
 
   const showEntryImages = reviews && reviews[0]?.photos.length > 0
 
-  return isInDrawer ? (
-    <EntryDrawer
-      showEntryImages={showEntryImages}
-      locationData={locationData}
-      reviews={reviews}
-      isLoading={isLoading}
-      entryOverview={entryOverview}
-      entryReviews={entryReviews}
-    />
-  ) : (
-    <Entry
+  const EntryComponent = isInDrawer ? EntryDrawer : Entry
+
+  return (
+    <EntryComponent
       showEntryImages={showEntryImages}
       isLightboxOpen={isLightboxOpen}
       setIsLightboxOpen={setIsLightboxOpen}

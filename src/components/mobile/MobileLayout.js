@@ -8,7 +8,6 @@ import { enableStreetView } from '../../redux/mapSlice'
 import useRoutedTabs from '../../utils/useRoutedTabs'
 import aboutRoutes from '../about/aboutRoutes'
 import authRoutes from '../auth/authRoutes'
-import Entry from '../entry/Entry'
 import EntryWrapper from '../entry/EntryWrapper'
 import { LocationForm } from '../form/LocationForm'
 import { zIndex } from '../ui/GlobalStyle'
@@ -69,7 +68,7 @@ const MobileLayout = () => {
             <LocationForm />
           </Route>
           <Route path="/list/entry/:id">
-            <Entry />
+            <EntryWrapper />
           </Route>
           <Route path={['/map', '/list', '/settings', '/map/entry/new']}>
             <Switch>
