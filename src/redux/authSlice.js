@@ -1,80 +1,67 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getUser, getUserToken, instance } from '../utils/api'
+import { getUser, getUserToken } from '../utils/api'
+import authStore from '../utils/authStore'
+import { setReducer } from './mapSlice'
 
-const AUTH_TOKEN_KEY = 'authToken'
+export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
+  const token = authStore.getToken()
 
-export const fetchToken = createAsyncThunk(
-  'users/fetchToken',
+  if (token.access_token) {
+    return await getUser()
+  } else {
+    return null
+  }
+})
+
+export const login = createAsyncThunk(
+  'auth/login',
   async ({ email, password, rememberMe }) => {
     const token = await getUserToken(email, password)
+    authStore.setToken(token, rememberMe)
 
-    if (rememberMe) {
-      localStorage.setItem(AUTH_TOKEN_KEY, token)
-    } else {
-      sessionStorage.setItem(AUTH_TOKEN_KEY, token)
-    }
-
-    instance.defaults.headers.common.Authorization = `Bearer ${token.access_token}`
-    const user = await getUser()
-
-    return { token, user }
+    return await getUser()
   },
 )
 
+export const logout = createAction('auth/logout', () => {
+  authStore.removeToken()
+  return {}
+})
+
 const initialState = {
   user: null,
-  authToken: null,
-  rememberMe: false,
-  failedLogin: false,
+  error: null,
 }
 
 export const authSlice = createSlice({
   name: 'auth',
-  initialState,
   reducers: {
-    logout: {
-      reducer: (state) => {
-        state.user = null
-        state.authToken = null
-      },
-      prepare: () => {
-        localStorage.removeItem(AUTH_TOKEN_KEY)
-        sessionStorage.removeItem(AUTH_TOKEN_KEY)
-        delete instance.defaults.headers.common.Authorization
-
-        return {}
-      },
-    },
-    login: {
-      reducer: (state, action) => {
-        const { localAuthToken, sessionAuthToken } = action
-        state.authToken = localAuthToken ?? sessionAuthToken
-      },
-      prepare: () => {
-        const localAuthToken = localStorage.getItem(AUTH_TOKEN_KEY)
-        const sessionAuthToken = sessionStorage.getItem(AUTH_TOKEN_KEY)
-
-        return {
-          localAuthToken,
-          sessionAuthToken,
-        }
-      },
-    },
+    setToken: setReducer('token'),
   },
+  initialState,
   extraReducers: {
-    [fetchToken.fulfilled]: (state, { payload }) => {
-      const { token, user } = payload
-
-      state.user = user
-      state.authToken = token
-      state.failedLogin = false
+    [checkAuth.fulfilled]: (state, action) => {
+      state.user = action.payload
+      state.error = null
     },
-    [fetchToken.rejected]: (state) => {
-      state.failedLogin = true
+    [checkAuth.rejected]: (state, action) => {
+      state.error = action.error
+    },
+
+    [login.fulfilled]: (state, action) => {
+      state.user = action.payload
+      state.error = null
+    },
+    [login.rejected]: (state, action) => {
+      state.error = action.error
+    },
+
+    [logout]: (state) => {
+      state.user = null
     },
   },
 })
 
-export const { logout, login } = authSlice.actions
+export const { setToken } = authSlice.actions
 export default authSlice.reducer

@@ -16,13 +16,18 @@ export const getBaseUrl = () => {
 export const getPathWithMapState = (path) => {
   if (path.indexOf('/@') !== -1) {
     return path
-  } else {
-    const { pathname } = new URL(window.location.href)
-    const pathNoTrailingSlash = path.replace(/\/*$/, '')
-    const mapState = pathname.substring(pathname.indexOf('/@'))
-
-    return pathNoTrailingSlash + mapState
   }
+
+  const { pathname } = new URL(window.location.href)
+  const mapStateIndex = pathname.indexOf('/@')
+  if (mapStateIndex === -1) {
+    return path
+  }
+
+  const mapState = pathname.substring(mapStateIndex)
+  const pathNoTrailingSlash = path.replace(/\/*$/, '')
+
+  return pathNoTrailingSlash + mapState
 }
 
 export const parseUrl = () => {
