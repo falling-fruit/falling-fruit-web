@@ -63,13 +63,9 @@ const zIndex = {
 }
 
 const GlobalStyle = createGlobalStyle`
-
   :root {
-    font-size: 16px;
+    font-size: 14px;
 
-    @media ${({ theme }) => theme.desktop} {
-      font-size: 14px;
-    }
     --toastify-icon-color-success: ${({ theme }) => theme.green};
     --toastify-font-family: ${({ theme }) => theme.fonts};
     --toastify-text-color-success:  ${({ theme }) => theme.green};
