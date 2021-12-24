@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fitBounds } from 'google-map-react'
+import { eqBy, prop, unionWith } from 'ramda'
 
 import { getClusters, getLocations } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
@@ -146,7 +147,21 @@ export const mapSlice = createSlice({
       state.isLoading = true
     },
     [fetchMapLocations.fulfilled]: (state, action) => {
-      state.locations = action.payload
+      const { ne, sw } = state.view.bounds
+
+      // Drop locations out of bounds
+      const locationsInBounds = state.locations.filter(
+        ({ lat, lng }) =>
+          lat <= ne.lat && lng <= ne.lng && lat >= sw.lat && lng >= sw.lng,
+      )
+
+      // Combine with new locations in bounds
+      state.locations = unionWith(
+        eqBy(prop('id')),
+        locationsInBounds,
+        action.payload,
+      )
+
       state.clusters = []
       state.isLoading = false
     },
