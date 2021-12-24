@@ -6,7 +6,6 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import ComponentDemos from './components/ComponentDemos'
-import LoginPage from './components/LoginPage'
 import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Toast from './components/ui/Toast'
@@ -31,9 +30,6 @@ const App = () => (
           </Route>
           <Route exact path="/demo">
             <ComponentDemos />
-          </Route>
-          <Route exact path="/login">
-            <LoginPage />
           </Route>
           <Route>
             <MainPage />

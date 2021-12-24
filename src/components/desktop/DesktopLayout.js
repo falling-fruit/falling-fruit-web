@@ -4,6 +4,7 @@ import SplitPane from 'react-split-pane'
 import styled from 'styled-components/macro'
 
 import aboutRoutes from '../about/aboutRoutes'
+import authRoutes from '../auth/authRoutes'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
@@ -50,6 +51,7 @@ const DesktopLayout = () => (
     <Header />
     <Switch>
       {aboutRoutes}
+      {authRoutes}
       <Route>
         <WindowSize>
           {({ width: vw }) => (
