@@ -9,7 +9,11 @@ import { selectParams } from './selectParams'
 export const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
   async ({ offset, fetchCount = false, extend = false }, { getState }) => {
-    const params = selectParams(getState(), { limit: 30, offset }, false)
+    const params = selectParams(
+      getState(),
+      { limit: 30, offset, photo: true },
+      false,
+    )
 
     return {
       offset,
