@@ -10,6 +10,7 @@ import aboutRoutes from '../about/aboutRoutes'
 import Entry from '../entry/Entry'
 import EntryWrapper from '../entry/EntryWrapper'
 import { LocationForm } from '../form/LocationForm'
+import { zIndex } from '../ui/GlobalStyle'
 import { PageTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/PageTabs'
 import { DEFAULT_TAB, getTabs } from './tabs'
 import TopBarSwitch from './TopBarSwitch'
@@ -82,10 +83,7 @@ const MobileLayout = () => {
       <Switch>
         <Route path="/map/entry/new/details" />
         <Route>
-          {
-            // TODO use z-index from enum and override in PageTabs
-          }
-          <TabList style={{ zIndex: 999 }}>{tabList}</TabList>
+          <TabList style={{ zIndex: zIndex.mobileTablist }}>{tabList}</TabList>
         </Route>
       </Switch>
     </PageTabs>

@@ -3,7 +3,7 @@ import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { enableStreetView } from '../../redux/mapSlice'
@@ -158,9 +158,9 @@ const EntryOverview = ({ locationData, className }) => {
             {locationData.import_id && (
               <p className="updatedTime">
                 {t('Imported from')}{' '}
-                <a href={`/about/dataset/${locationData.import_id}`}>
+                <Link to={`/about/dataset/${locationData.import_id}`}>
                   {locationData.author}
-                </a>
+                </Link>
               </p>
             )}
 

@@ -57,14 +57,15 @@ const prepend =
   ({ $prepend }) =>
     `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
 
+const zIndex = {
+  mobileTablist: 20,
+  modal: 30,
+}
+
 const GlobalStyle = createGlobalStyle`
-
   :root {
-    font-size: 16px;
+    font-size: 14px;
 
-    @media ${({ theme }) => theme.desktop} {
-      font-size: 14px;
-    }
     --toastify-icon-color-success: ${({ theme }) => theme.green};
     --toastify-font-family: ${({ theme }) => theme.fonts};
     --toastify-text-color-success:  ${({ theme }) => theme.green};
@@ -129,10 +130,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   [data-reach-dialog-overlay] {
-    // Should be in z-index constants
-    z-index: 99;
+    z-index: ${zIndex.modal};
   }
 `
 
 export default GlobalStyle
-export { MOBILE_MAX_WIDTH, prepend, theme, validatedColor }
+export { MOBILE_MAX_WIDTH, prepend, theme, validatedColor, zIndex }
