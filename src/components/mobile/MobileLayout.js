@@ -83,9 +83,6 @@ const MobileLayout = () => {
       <Switch>
         <Route path="/map/entry/new/details" />
         <Route>
-          {
-            // TODO use z-index from enum and override in PageTabs
-          }
           <TabList style={{ zIndex: zIndex.mobileTablist }}>{tabList}</TabList>
         </Route>
       </Switch>
