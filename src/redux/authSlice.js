@@ -7,7 +7,7 @@ import { setReducer } from './mapSlice'
 export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
   const token = authStore.getToken()
 
-  if (token.access_token) {
+  if (token?.access_token) {
     return await getUser()
   } else {
     return null
