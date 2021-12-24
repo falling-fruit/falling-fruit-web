@@ -51,7 +51,7 @@ const Buttons = styled.div`
       width: 110px;
     }
 
-    &:not(last-child) {
+    &:not(:last-child) {
       margin-right: 12px;
     }
   }
