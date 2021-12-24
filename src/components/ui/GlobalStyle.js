@@ -57,6 +57,11 @@ const prepend =
   ({ $prepend }) =>
     `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
 
+const zIndex = {
+  mobileTablist: 20,
+  modal: 30,
+}
+
 const GlobalStyle = createGlobalStyle`
 
   :root {
@@ -129,10 +134,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   [data-reach-dialog-overlay] {
-    // Should be in z-index constants
-    z-index: 99;
+    z-index: ${zIndex.modal};
   }
 `
 
 export default GlobalStyle
-export { MOBILE_MAX_WIDTH, prepend, theme, validatedColor }
+export { MOBILE_MAX_WIDTH, prepend, theme, validatedColor, zIndex }
