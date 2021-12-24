@@ -20,6 +20,8 @@ const HeaderPane = ({ nav, children, className }) => (
   </StyledHeaderPane>
 )
 
-const NavPane = (props) => <HeaderPane nav={<NavBack />} {...props} />
+const NavPane = (props) => (
+  <HeaderPane nav={<NavBack isEntry={false} />} {...props} />
+)
 
 export { HeaderPane, NavPane }

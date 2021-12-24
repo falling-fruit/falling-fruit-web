@@ -143,6 +143,7 @@ const StyledDropdown = styled(Dropdown)`
     position: absolute;
     background-color: ${({ theme }) => theme.background};
     border-radius: 0px 0px 6px 6px;
+    overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.05) 0 15px 15px;
     text-align: center;
     min-width: 100%;
@@ -155,7 +156,7 @@ const StyledDropdown = styled(Dropdown)`
       display: block;
     }
 
-    .active ::before {
+    .active::before {
       display: none;
     }
   }
