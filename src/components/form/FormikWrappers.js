@@ -2,6 +2,7 @@ import { useField } from 'formik'
 import { forwardRef } from 'react'
 import Reaptcha from 'reaptcha'
 
+import Checkbox from '../ui/Checkbox'
 import Input from '../ui/Input'
 import { Select } from '../ui/Select'
 import { Slider } from '../ui/Slider'
@@ -12,6 +13,17 @@ const FormikInput = withLabeledField(Input)
 const FormikTextarea = withLabeledField(Textarea)
 const FormikSlider = withLabeledField(Slider, undefined, true)
 const FormikSelect = withLabeledField(Select, undefined, true)
+
+const FormikCheckbox = ({ name, ...props }) => {
+  const [{ value }, , helpers] = useField(name)
+  return (
+    <Checkbox
+      onClick={(e) => helpers.setValue(e.target.checked)}
+      checked={value}
+      {...props}
+    />
+  )
+}
 
 const FormikRecaptcha = ({ name, ...props }) => {
   const [, , helpers] = useField(name)
@@ -37,6 +49,7 @@ const FormikFileUpload = forwardRef(({ name, ...props }, ref) => {
 FormikFileUpload.displayName = 'FormikFileUpload'
 
 export {
+  FormikCheckbox as Checkbox,
   FormikFileUpload as FileUpload,
   FormikInput as Input,
   FormikRecaptcha as Recaptcha,
