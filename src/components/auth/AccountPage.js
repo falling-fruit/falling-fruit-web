@@ -5,41 +5,39 @@ import * as Yup from 'yup'
 
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { PageTemplate } from '../about/PageTemplate'
-import { Input, Recaptcha, Textarea } from '../form/FormikWrappers'
+import { Input, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import { FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
 
-const SignupPage = () => {
+const AccountPage = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
 
-  if (!isLoading && user) {
+  if (!isLoading && !user) {
     return <Redirect to={getPathWithMapState('/map')} />
   }
 
   return (
     <PageTemplate>
-      <h1>Signup</h1>
+      <h1>Edit Account</h1>
       <Formik
         initialValues={{
           name: '',
           email: '',
-          password: '',
-          passwordConfirmation: '',
+          newPassword: '',
+          newPasswordConfirmation: '',
           textArea: '',
-          editAnonymously: false,
-          mailingList: true,
+          currentPassword: '',
         }}
         validationSchema={Yup.object({
-          name: Yup.string().required(),
-          email: Yup.string().email().required(),
-          password: Yup.string().required(),
-          passwordConfirmation: Yup.string().oneOf(
+          name: Yup.string(),
+          email: Yup.string().email(),
+          newPassword: Yup.string(),
+          newPasswordConfirmation: Yup.string().oneOf(
             [Yup.ref('password'), null],
             'Passwords must match',
           ),
           textArea: Yup.string().optional(),
-          editAnonymously: Yup.boolean().required(),
-          mailingList: Yup.boolean().required(),
+          currentPassword: Yup.string().required(),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -50,23 +48,30 @@ const SignupPage = () => {
       >
         <Form>
           <FormInputWrapper>
-            <Input name="name" label="Name" />
+            <Input type="text" name="name" label="Name" />
 
-            <Input name="email" label="Email" />
+            <Input type="text" name="email" label="Email" />
 
-            <Input name="password" label="Password" type="password" />
+            <Textarea name="description" label="About You " optional />
+
+            <Input name="newPassword" label="New Password" type="password" />
             <Input
-              name="passwordConfirmation"
-              label="Confirm Password"
+              name="newPasswordConfirmation"
+              label="Confirm New Password"
               type="password"
             />
 
-            <Textarea name="description" label="About You " optional />
+            <Input
+              name="currentPassword"
+              label="Current Password"
+              type="password"
+            />
           </FormInputWrapper>
-
-          <Recaptcha />
           <FormButtonWrapper>
-            <Button type="submit">Signup</Button>
+            <Button secondary type="reset">
+              Clear
+            </Button>
+            <Button type="submit">Save</Button>
           </FormButtonWrapper>
         </Form>
       </Formik>
@@ -74,4 +79,4 @@ const SignupPage = () => {
   )
 }
 
-export default SignupPage
+export default AccountPage

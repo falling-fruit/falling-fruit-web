@@ -6,6 +6,8 @@ import { Link, NavLink, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { logout } from '../../redux/authSlice'
+import Button from '../ui/Button'
+import ResetButton from '../ui/ResetButton'
 
 const StyledUser = styled(User)`
   svg {
@@ -20,7 +22,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
-  z-index: 1;
+  z-index: 2;
 
   img {
     height: 100%;
@@ -29,12 +31,15 @@ const StyledHeader = styled.header`
 
   nav {
     height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+
     ul {
       list-style: none;
       padding: 0;
       margin: 0 10px 0 0;
       height: 100%;
-
       display: flex;
 
       li {
@@ -46,12 +51,11 @@ const StyledHeader = styled.header`
         color: ${({ theme }) => theme.secondaryText};
         cursor: pointer;
         position: relative;
-        font-family: Lato;
-        font-style: normal;
         font-weight: bold;
         font-size: 1rem;
 
-        a {
+        a,
+        .content button {
           text-decoration: none;
           color: ${({ theme }) => theme.secondaryText};
           text-align: center;
@@ -59,6 +63,8 @@ const StyledHeader = styled.header`
           align-items: center;
           justify-content: center;
           flex: 1;
+          font-weight: inherit;
+          font-size: inherit;
 
           &.active {
             background-color: ${({ theme }) => theme.navBackground};
@@ -76,24 +82,6 @@ const StyledHeader = styled.header`
           }
         }
 
-        button {
-          svg {
-            width: 1em;
-          }
-
-          display: block;
-          border-radius: 4px;
-          border: none;
-          width: 90%;
-          height: 45px;
-          font-size: 100%;
-          font-family: inherit;
-          font-weight: normal;
-          cursor: pointer;
-          background-color: ${({ theme }) => theme.background};
-        }
-
-        button,
         &.active {
           color: ${({ theme }) => theme.orange};
         }
@@ -117,6 +105,7 @@ const StyledDropdown = styled(Dropdown)`
     color: ${({ theme }) => theme.secondaryText};
     border: none;
     padding: 19px 31px;
+    cursor: default;
 
     &.active {
       color: ${({ theme }) => theme.orange};
@@ -148,8 +137,10 @@ const StyledDropdown = styled(Dropdown)`
     box-shadow: rgba(0, 0, 0, 0.05) 0 15px 15px;
     text-align: center;
     top: 56px;
+    width: 100%;
 
-    a {
+    a,
+    button {
       color: ${({ theme }) => theme.secondaryText};
       padding: 12px 16px;
       text-decoration: none;
@@ -165,8 +156,23 @@ const StyledDropdown = styled(Dropdown)`
 const LogoLink = styled(Link)`
   display: block;
   height: 100%;
-  padding: 10px;
+  padding: 10px 2em 10px 10px;
   box-sizing: border-box;
+`
+
+const SignupButton = styled(Button)`
+  svg {
+    width: 1em;
+  }
+
+  display: block;
+  border-radius: 4px;
+  border: none;
+  font-size: 100%;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: ${({ theme }) => theme.orange};
+  color: ${({ theme }) => theme.background};
 `
 
 // TODO: Clean up file structure (i.e. logo_white.svg) from ./public
@@ -177,6 +183,10 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logout())
   }
+
+  const isAboutPage = useRouteMatch('/about/:slug')
+  const isAccountPage = useRouteMatch('/account')
+
   return (
     <StyledHeader>
       <LogoLink to="/map">
@@ -190,10 +200,7 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <StyledDropdown
-              label={t('About')}
-              match={useRouteMatch('/about/:slug')}
-            >
+            <StyledDropdown label={t('About')} match={isAboutPage}>
               <NavLink to="/about/project" activeClassName="active">
                 {t('The project')}
               </NavLink>
@@ -208,24 +215,38 @@ const Header = () => {
               </NavLink>
             </StyledDropdown>
           </li>
-          <li>
-            {user ? (
+        </ul>
+        <ul>
+          {user ? (
+            <li>
               <StyledDropdown
                 label={
                   <>
                     <StyledUser height={15} /> {user.name}
                   </>
                 }
-                match={false}
+                match={isAccountPage}
               >
-                <button onClick={handleLogout}>Logout</button>
+                <NavLink to="/account" activeClassName="active">
+                  {t('My Account')}
+                </NavLink>
+                <ResetButton onClick={handleLogout}>Logout</ResetButton>
               </StyledDropdown>
-            ) : (
-              <NavLink to="/login" activeClassName="active">
-                <StyledUser height={15} /> {t('Login')}
-              </NavLink>
-            )}
-          </li>
+            </li>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/login" activeClassName="active">
+                  {t('Login')}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/signup" activeClassName="active">
+                  <SignupButton>{t('Signup')}</SignupButton>
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </StyledHeader>

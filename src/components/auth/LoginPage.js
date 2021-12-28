@@ -1,7 +1,6 @@
 import { Form, Formik } from 'formik'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
@@ -11,7 +10,11 @@ import { PageTemplate } from '../about/PageTemplate'
 import { Checkbox, Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
-import { FormCheckboxWrapper, FormInputWrapper } from './AuthWrappers'
+import {
+  FormButtonWrapper,
+  FormCheckboxWrapper,
+  FormInputWrapper,
+} from './AuthWrappers'
 
 const ErrorMessage = styled.p`
   color: ${({ theme }) => theme.invalid} !important;
@@ -24,17 +27,13 @@ const Column = styled.div`
 `
 
 const LoginPage = () => {
-  const { user, error } = useSelector((state) => state.auth)
-  const history = useHistory()
+  const { user, error, isLoading } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log(user)
-    if (user) {
-      history.push(getPathWithMapState('/map'))
-    }
-  }, [user, history])
+  if (!isLoading && user) {
+    return <Redirect to={getPathWithMapState('/map')} />
+  }
 
   return (
     <PageTemplate>
@@ -57,7 +56,7 @@ const LoginPage = () => {
       >
         <Form>
           <FormInputWrapper>
-            <Input name="email" label="Email" />
+            <Input type="text" name="email" label="Email" />
             <Input name="password" label="Password" type="password" />
           </FormInputWrapper>
           {error && <ErrorMessage>Invalid Login</ErrorMessage>}
@@ -69,7 +68,9 @@ const LoginPage = () => {
             />
           </FormCheckboxWrapper>
 
-          <Button type="submit">Login</Button>
+          <FormButtonWrapper>
+            <Button type="submit">Login</Button>
+          </FormButtonWrapper>
         </Form>
       </Formik>
       <Column>

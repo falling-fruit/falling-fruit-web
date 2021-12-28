@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 
+import AccountPage from './AccountPage'
 import LoginPage from './LoginPage'
 import SignupPage from './SignupPage'
 
@@ -11,6 +12,10 @@ const pages = [
   {
     path: '/signup',
     component: SignupPage,
+  },
+  {
+    path: '/account',
+    component: AccountPage,
   },
 ]
 
