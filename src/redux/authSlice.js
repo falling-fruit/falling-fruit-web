@@ -32,6 +32,7 @@ export const logout = createAction('auth/logout', () => {
 const initialState = {
   user: null,
   error: null,
+  isLoading: true,
 }
 
 export const authSlice = createSlice({
@@ -41,12 +42,17 @@ export const authSlice = createSlice({
   },
   initialState,
   extraReducers: {
+    [checkAuth.pending]: (state) => {
+      state.isLoading = true
+    },
     [checkAuth.fulfilled]: (state, action) => {
       state.user = action.payload
       state.error = null
+      state.isLoading = false
     },
     [checkAuth.rejected]: (state, action) => {
       state.error = action.error
+      state.isLoading = false
     },
 
     [login.fulfilled]: (state, action) => {
