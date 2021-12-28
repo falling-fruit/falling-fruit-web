@@ -26,8 +26,6 @@ const SignupPage = () => {
           password: '',
           passwordConfirmation: '',
           textArea: '',
-          editAnonymously: false,
-          mailingList: true,
         }}
         validationSchema={Yup.object({
           name: Yup.string().required(),
@@ -38,8 +36,6 @@ const SignupPage = () => {
             'Passwords must match',
           ),
           textArea: Yup.string().optional(),
-          editAnonymously: Yup.boolean().required(),
-          mailingList: Yup.boolean().required(),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {

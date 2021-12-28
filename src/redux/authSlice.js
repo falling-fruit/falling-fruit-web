@@ -32,7 +32,7 @@ export const logout = createAction('auth/logout', () => {
 const initialState = {
   user: null,
   error: null,
-  isLoading: false,
+  isLoading: true,
 }
 
 export const authSlice = createSlice({

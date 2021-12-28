@@ -23,8 +23,8 @@ const AccountPage = () => {
         initialValues={{
           name: '',
           email: '',
-          newPassword: '',
-          newPasswordConfirmation: '',
+          newPassword: null,
+          newPasswordConfirmation: null,
           textArea: '',
           currentPassword: '',
         }}
@@ -33,7 +33,7 @@ const AccountPage = () => {
           email: Yup.string().email(),
           newPassword: Yup.string(),
           newPasswordConfirmation: Yup.string().oneOf(
-            [Yup.ref('password'), null],
+            [Yup.ref('newPassword'), null],
             'Passwords must match',
           ),
           textArea: Yup.string().optional(),
