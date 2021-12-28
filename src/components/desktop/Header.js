@@ -89,9 +89,9 @@ const StyledHeader = styled.header`
     }
   }
 `
-const Dropdown = ({ className, children, label, match }) => (
+const Dropdown = ({ className, children, label, isMatch }) => (
   <div className={className}>
-    <div className={`button${match ? ' active' : ''}`}>
+    <div className={`button${isMatch ? ' active' : ''}`}>
       {label} <CaretDown height="8px" />
     </div>
     <div className="content">{children}</div>
@@ -184,8 +184,8 @@ const Header = () => {
     dispatch(logout())
   }
 
-  const isAboutPage = useRouteMatch('/about/:slug')
-  const isAccountPage = useRouteMatch('/account')
+  const isAboutPage = useRouteMatch('/about/:slug') !== null
+  const isAccountPage = useRouteMatch('/account') !== null
 
   return (
     <StyledHeader>
@@ -200,7 +200,7 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <StyledDropdown label={t('About')} match={isAboutPage}>
+            <StyledDropdown label={t('About')} isMatch={isAboutPage}>
               <NavLink to="/about/project" activeClassName="active">
                 {t('The project')}
               </NavLink>
@@ -225,7 +225,7 @@ const Header = () => {
                     <StyledUser height={15} /> {user.name}
                   </>
                 }
-                match={isAccountPage}
+                isMatch={isAccountPage}
               >
                 <NavLink to="/account" activeClassName="active">
                   {t('My Account')}
