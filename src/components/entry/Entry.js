@@ -101,7 +101,7 @@ const Entry = ({
               <TabList>
                 {/* TODO: Use Routing */}
                 <Tab>Overview</Tab>
-                <Tab>Reviews</Tab>
+                <Tab>Reviews ({reviews.length})</Tab>
               </TabList>
             )}
             <TabPanels>

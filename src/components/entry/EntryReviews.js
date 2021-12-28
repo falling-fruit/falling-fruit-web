@@ -4,7 +4,6 @@ import Review from './Review'
 
 const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => (
   <TextContent>
-    <h2>Reviews{reviews && ` (${reviews.length})`}</h2>
     {reviews.map((review, index) => (
       <Review
         key={index}
