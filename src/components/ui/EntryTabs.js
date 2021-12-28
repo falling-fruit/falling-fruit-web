@@ -5,6 +5,9 @@ import { PageTabs } from '../ui/PageTabs'
 const EntryTabs = styled(PageTabs)`
   [data-reach-tab-list] {
     height: 50px;
+    position: sticky;
+    z-index: 2;
+    top: 0;
 
     [data-reach-tab] {
       display: flex;

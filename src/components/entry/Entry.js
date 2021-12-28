@@ -13,7 +13,6 @@ export const Page = styled.div`
       isInDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
   }
 
-  overflow: auto;
   width: 100%;
 `
 
