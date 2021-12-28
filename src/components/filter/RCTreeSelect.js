@@ -1,4 +1,4 @@
-import 'rc-tree-select/assets/index.css'
+import 'rc-tree-select/assets/index.less'
 
 import TreeSelect from 'rc-tree-select'
 import { useState } from 'react'
@@ -15,8 +15,8 @@ const TreeSelectContainer = styled.div`
     height: 50vh;
   }
 
-  .rc-tree-select-selection {
-    display: none;
+  .rc-tree-select-selector {
+    display: none !important;
   }
 
   > *:nth-child(2) {
