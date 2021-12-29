@@ -1,11 +1,21 @@
+import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
 import ImagePreview from '../ui/ImagePreview'
 import Rating from '../ui/Rating'
+import ResetButton from '../ui/ResetButton'
 import { formatISOString } from './textFormatters'
 
 const ReviewContainer = styled.div`
   margin-bottom: 20px;
+
+  ${({ editable, theme }) =>
+    editable &&
+    `
+    background: ${theme.navBackground};
+    padding: 0.6em;
+    border-radius: 8px;
+  `}
 `
 const Label = styled.p`
   font-size: 0.75rem;
@@ -35,6 +45,26 @@ const ReviewDescription = styled.section`
     font-size: 0.875rem;
   }
 `
+
+const EditableHeader = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.6em;
+
+  button {
+    display: flex;
+    align-items: center;
+    margin-top: 0.2em;
+    color: ${({ theme }) => theme.blue};
+    text-decoration: underline;
+
+    svg {
+      margin-right: 0.2em;
+    }
+  }
+`
+
 export const StyledImagePreview = styled(ImagePreview)`
   cursor: pointer;
   margin-right: 7px;
@@ -58,8 +88,21 @@ const RATINGS = [
   },
 ]
 
-const Review = ({ review, onImageClick, includePreview = true }) => (
-  <ReviewContainer>
+const Review = ({
+  review,
+  onImageClick,
+  includePreview = true,
+  editable = false,
+}) => (
+  <ReviewContainer editable={editable}>
+    {editable && (
+      <EditableHeader>
+        You reviewed this location on {formatISOString(review.created_at)}{' '}
+        <ResetButton>
+          <PencilIcon height={14} /> Update or delete this review.
+        </ResetButton>
+      </EditableHeader>
+    )}
     <RatingTable>
       <tbody>
         {RATINGS.map(({ title, ratingKey, total }, key) =>
@@ -78,10 +121,12 @@ const Review = ({ review, onImageClick, includePreview = true }) => (
     </RatingTable>
     <ReviewDescription>
       <blockquote>{review.comment}</blockquote>
-      <cite>
-        Reviewed {formatISOString(review.created_at)} by{' '}
-        {review.author ?? 'Anonymous'}
-      </cite>
+      {!editable && (
+        <cite>
+          Reviewed {formatISOString(review.created_at)} by{' '}
+          {review.author ?? 'Anonymous'}
+        </cite>
+      )}
     </ReviewDescription>
     {includePreview &&
       // TODO: review images need to link to specific
@@ -91,7 +136,6 @@ const Review = ({ review, onImageClick, includePreview = true }) => (
           key={photo.thumb}
           onClick={() => {
             onImageClick(index)
-            console.log(index)
           }}
         >
           <img src={photo.thumb} alt={review.title} />
