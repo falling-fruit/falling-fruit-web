@@ -7,8 +7,9 @@ import styled from 'styled-components/macro'
 
 import IconButton from '../ui/IconButton'
 import Card from './Card'
+import Carousel from './Carousel'
 import Entry from './Entry'
-import EntryImagesCard from './EntryImagesCard'
+// import EntryImagesCard from './EntryImagesCard'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
@@ -206,6 +207,10 @@ const EntryDrawer = ({
     parentElement: '.entry-drawers',
   }
 
+  const allReviewPhotos = (reviews ?? [])
+    .map((reviews) => reviews.photos)
+    .flat()
+
   return (
     <>
       {isFullScreen && (
@@ -233,11 +238,19 @@ const EntryDrawer = ({
           {showEntryImages ? (
             // TODO: Change to image carousel component
             <EntryImages heightScalar={entryImageHeightMultiplier}>
-              <EntryImagesCard
+              {/* <EntryImagesCard
                 src={reviews[0]?.photos[0]?.medium}
                 alt="entry-image"
                 isFullScreen={isFullScreen}
-              />
+              /> */}
+              <Carousel
+                showIndicators={allReviewPhotos.length > 1}
+                isFullScreen={isFullScreen}
+              >
+                {allReviewPhotos.map((photo) => (
+                  <img key={photo.id} src={photo.medium} alt="entry" />
+                ))}
+              </Carousel>
             </EntryImages>
           ) : (
             <Backdrop isFullScreen={isFullScreen} />

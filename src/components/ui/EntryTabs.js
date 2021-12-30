@@ -3,6 +3,15 @@ import styled from 'styled-components/macro'
 import { PageTabs } from '../ui/PageTabs'
 
 const EntryTabs = styled(PageTabs)`
+  // TODO: make this snippet reusable (copied from ../GlobalStyle.js)
+  @media ${({ theme }) => theme.mobile} {
+    // Disable overscrolling on iOS
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+  }
+
   [data-reach-tab-list] {
     height: 50px;
     position: sticky;

@@ -8,6 +8,7 @@ const RatingWrapper = styled.div`
 
   svg {
     width: 1.2em;
+    height: 1.2em;
     color: ${({ theme }) => theme.orange};
   }
 `

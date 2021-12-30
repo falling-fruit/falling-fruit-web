@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
-import ResetButton from '../ui/ResetButton'
+import Carousel from './Carousel'
 import EntryTags from './EntryTags'
 import Lightbox from './Lightbox'
 
@@ -49,12 +49,6 @@ const EntryTagsContainer = styled.div`
     position: ${({ showEntryImages }) => showEntryImages && 'absolute'};
     top: ${({ isFullScreen }) => (isFullScreen ? '-30px' : '-50px')};
   }
-`
-
-const Carousel = styled(ResetButton)`
-  // TODO: to be changed to a real carousel
-  width: 100%;
-  cursor: pointer;
 `
 
 const Entry = ({
@@ -112,13 +106,13 @@ const Entry = ({
         ) : (
           <>
             {allReviewPhotos.length > 0 && (
-              // TODO: Change to image carousel
-              <Carousel onClick={() => setIsLightboxOpen(true)}>
-                <img
-                  style={{ width: '100%' }}
-                  src={allReviewPhotos[0].medium}
-                  alt="entry"
-                />
+              <Carousel
+                onClickItem={() => setIsLightboxOpen(true)}
+                showIndicators={allReviewPhotos.length > 1}
+              >
+                {allReviewPhotos.map((photo) => (
+                  <img key={photo.id} src={photo.medium} alt="entry" />
+                ))}
               </Carousel>
             )}
             <EntryTagsContainer showEntryImages={showEntryImages}>
