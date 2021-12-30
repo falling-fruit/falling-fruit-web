@@ -1,6 +1,7 @@
 import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
+import { FRUITING_RATINGS, RATINGS } from '../../constants/ratings'
 import ImagePreview from '../ui/ImagePreview'
 import Rating from '../ui/Rating'
 import ResetButton from '../ui/ResetButton'
@@ -14,6 +15,7 @@ const ReviewContainer = styled.div`
     `
     background: ${theme.navBackground};
     padding: 0.6em;
+    margin-bottom: calc(20px - 0.6em);
     border-radius: 8px;
   `}
 `
@@ -26,8 +28,11 @@ const RatingTable = styled.table`
   width: 100%;
   margin-bottom: 6px;
   border-spacing: 0;
+  line-height: 1.66;
+
   td:nth-child(2) {
     width: 100%;
+    text-align: right;
   }
   td {
     padding: 0;
@@ -70,24 +75,6 @@ export const StyledImagePreview = styled(ImagePreview)`
   margin-right: 7px;
 `
 
-const RATINGS = [
-  {
-    title: 'Fruiting',
-    ratingKey: 'fruiting',
-    total: 3,
-  },
-  {
-    title: 'Quality',
-    ratingKey: 'quality_rating',
-    total: 5,
-  },
-  {
-    title: 'Yield',
-    ratingKey: 'yield_rating',
-    total: 5,
-  },
-]
-
 const Review = ({
   review,
   onImageClick,
@@ -105,18 +92,28 @@ const Review = ({
     )}
     <RatingTable>
       <tbody>
-        {RATINGS.map(({ title, ratingKey, total }, key) =>
-          review[ratingKey] ? (
+        {RATINGS.map(({ title, ratingKey, total }, key) => {
+          const score = review[ratingKey]
+
+          if (!score) {
+            return null
+          }
+
+          return (
             <tr key={key}>
               <td>
                 <Label>{title}</Label>
               </td>
               <td>
-                <Rating key={key} percentage={review[ratingKey] / total} />
+                {ratingKey !== 'fruiting' ? (
+                  <Rating key={key} score={review[ratingKey]} total={total} />
+                ) : (
+                  FRUITING_RATINGS[score]
+                )}
               </td>
             </tr>
-          ) : null,
-        )}
+          )
+        })}
       </tbody>
     </RatingTable>
     <ReviewDescription>
