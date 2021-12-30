@@ -8,6 +8,7 @@ const Carousel = styled(ResponsiveCarousel)`
   cursor: pointer;
   user-select: none;
   overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 
   img {
     width: 100%;
@@ -34,7 +35,8 @@ const Carousel = styled(ResponsiveCarousel)`
     }
   }
   @media ${({ theme }) => theme.device.mobile} {
-    ${({ isFullScreen }) => !isFullScreen && `border-radius: 13px;`}
+    ${({ isFullscreen }) =>
+      !isFullscreen && `border-radius: 13px 13px 0 0; pointer-events: none;`}
   }
 `
 

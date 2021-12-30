@@ -9,7 +9,6 @@ import IconButton from '../ui/IconButton'
 import Card from './Card'
 import Carousel from './Carousel'
 import Entry from './Entry'
-// import EntryImagesCard from './EntryImagesCard'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
@@ -236,16 +235,10 @@ const EntryDrawer = ({
           config={config}
         >
           {showEntryImages ? (
-            // TODO: Change to image carousel component
             <EntryImages heightScalar={entryImageHeightMultiplier}>
-              {/* <EntryImagesCard
-                src={reviews[0]?.photos[0]?.medium}
-                alt="entry-image"
-                isFullScreen={isFullScreen}
-              /> */}
               <Carousel
                 showIndicators={allReviewPhotos.length > 1}
-                isFullScreen={isFullScreen}
+                isFullscreen={isFullScreen}
               >
                 {allReviewPhotos.map((photo) => (
                   <img key={photo.id} src={photo.medium} alt="entry" />
