@@ -48,6 +48,7 @@ const EntryTagsContainer = styled.div`
     position: ${({ showEntryImages }) => showEntryImages && 'absolute'};
     top: ${({ isFullScreen }) => (isFullScreen ? '-30px' : '-50px')};
     position: fixed;
+    transform: translateZ(0);
   }
 `
 
