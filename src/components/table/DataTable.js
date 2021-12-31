@@ -2,6 +2,8 @@ import ReactDataTable from 'react-data-table-component'
 import Skeleton from 'react-loading-skeleton'
 import styled from 'styled-components/macro'
 
+const LOADER_ROWS = 10
+
 const LoaderWrapper = styled.div`
   width: 100%;
   pointer-events: none;
@@ -28,25 +30,15 @@ const LoaderWrapper = styled.div`
     }
   }
 `
-const TableLoader = () => (
+const TableLoader = ({ columns }) => (
   <LoaderWrapper>
-    {new Array(10).fill(
+    {new Array(LOADER_ROWS).fill(
       <div className="rdt_TableRow">
-        <div className="rdt_TableCell">
-          <Skeleton />
-        </div>
-        <div className="rdt_TableCell">
-          <Skeleton />
-        </div>
-        <div className="rdt_TableCell">
-          <Skeleton />
-        </div>
-        <div className="rdt_TableCell">
-          <Skeleton />
-        </div>
-        <div className="rdt_TableCell">
-          <Skeleton />
-        </div>
+        {new Array(columns.length).fill(
+          <div className="rdt_TableCell">
+            <Skeleton />
+          </div>,
+        )}
       </div>,
     )}
   </LoaderWrapper>
@@ -75,7 +67,11 @@ const TableWrapper = styled.div`
 
 const DataTable = ({ ...props }) => (
   <TableWrapper $onRowClicked={props.onRowClicked}>
-    <ReactDataTable progressComponent={<TableLoader />} pagination {...props} />
+    <ReactDataTable
+      progressComponent={<TableLoader columns={props.columns} />}
+      pagination
+      {...props}
+    />
   </TableWrapper>
 )
 
