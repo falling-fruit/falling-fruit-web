@@ -10,7 +10,7 @@ import Lightbox from './Lightbox'
 export const Page = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     ${({ isInDrawer }) =>
-      isInDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
+      isInDrawer ? 'padding-bottom: inherit' : 'padding-top: 87px;'}
   }
 
   width: 100%;
@@ -41,13 +41,13 @@ const EntryTagsContainer = styled.div`
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    padding-left: 23px;
-    padding-right: 23px;
+    padding-left: 10px;
     padding-bottom: ${({ isFullScreen, showEntryImages }) =>
       isFullScreen && !showEntryImages && `16px`};
     padding-top: ${({ isFullScreen }) => !isFullScreen && `20px`};
     position: ${({ showEntryImages }) => showEntryImages && 'absolute'};
     top: ${({ isFullScreen }) => (isFullScreen ? '-30px' : '-50px')};
+    position: fixed;
   }
 `
 
@@ -72,6 +72,21 @@ const Entry = ({
     content = <LoadingIndicator cover vertical />
   } else {
     const allReviewPhotos = reviews.map((review) => review.photos).flat()
+    const onClickCarousel = (idx) => {
+      const targetId = allReviewPhotos[idx].id
+      const reviewIdx = reviews.findIndex((review) =>
+        review.photos.some((photo) => photo.id === targetId),
+      )
+      if (reviewIdx < 0) {
+        return
+      }
+      const photoIdx = reviews[reviewIdx].photos.findIndex(
+        (photo) => photo.id === targetId,
+      )
+
+      setLightboxIndex([reviewIdx, photoIdx])
+      setIsLightboxOpen(true)
+    }
 
     content = (
       <>
@@ -107,7 +122,7 @@ const Entry = ({
           <>
             {allReviewPhotos.length > 0 && (
               <Carousel
-                onClickItem={() => setIsLightboxOpen(true)}
+                onClickItem={onClickCarousel}
                 showIndicators={allReviewPhotos.length > 1}
               >
                 {allReviewPhotos.map((photo) => (
