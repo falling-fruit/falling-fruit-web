@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
-import ResetButton from '../ui/ResetButton'
+import Carousel from './Carousel'
 import EntryTags from './EntryTags'
 import Lightbox from './Lightbox'
 
@@ -10,10 +10,9 @@ import Lightbox from './Lightbox'
 export const Page = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     ${({ isInDrawer }) =>
-      isInDrawer ? 'padding-bottom: 27px' : 'padding-top: 87px;'}
+      isInDrawer ? 'padding-bottom: inherit' : 'padding-top: 87px;'}
   }
 
-  overflow: auto;
   width: 100%;
 `
 
@@ -38,24 +37,23 @@ export const TextContent = styled.article`
 const EntryTagsContainer = styled.div`
   @media ${({ theme }) => theme.device.desktop} {
     padding: 0 12px 0 12px;
-    padding-top: ${({ showEntryImages }) => showEntryImages && `12px`};
+    padding-top: ${({ $isOverlay }) => ($isOverlay ? '12px' : 0)};
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    padding-left: 23px;
-    padding-right: 23px;
-    padding-bottom: ${({ isFullScreen, showEntryImages }) =>
-      isFullScreen && !showEntryImages && `16px`};
-    padding-top: ${({ isFullScreen }) => !isFullScreen && `20px`};
-    position: ${({ showEntryImages }) => showEntryImages && 'absolute'};
-    top: ${({ isFullScreen }) => (isFullScreen ? '-30px' : '-50px')};
-  }
-`
+    padding-left: 10px;
+    padding-bottom: ${({ $isFullScreen, $isOverlay }) =>
+      $isFullScreen && !$isOverlay && `16px`};
+    padding-top: ${({ $isFullScreen }) => (!$isFullScreen ? `20px` : 0)};
+    top: ${({ $isFullScreen }) => ($isFullScreen ? '-30px' : '-50px')};
 
-const Carousel = styled(ResetButton)`
-  // TODO: to be changed to a real carousel
-  width: 100%;
-  cursor: pointer;
+    ${({ $isOverlay }) =>
+      $isOverlay &&
+      `
+      position: fixed;
+      transform: translateZ(0);
+      `}
+  }
 `
 
 const Entry = ({
@@ -79,6 +77,21 @@ const Entry = ({
     content = <LoadingIndicator cover vertical />
   } else {
     const allReviewPhotos = reviews.map((review) => review.photos).flat()
+    const onClickCarousel = (idx) => {
+      const targetId = allReviewPhotos[idx].id
+      const reviewIdx = reviews.findIndex((review) =>
+        review.photos.some((photo) => photo.id === targetId),
+      )
+      if (reviewIdx < 0) {
+        return
+      }
+      const photoIdx = reviews[reviewIdx].photos.findIndex(
+        (photo) => photo.id === targetId,
+      )
+
+      setLightboxIndex([reviewIdx, photoIdx])
+      setIsLightboxOpen(true)
+    }
 
     content = (
       <>
@@ -93,8 +106,8 @@ const Entry = ({
         {isInDrawer ? (
           <EntryTabs>
             <EntryTagsContainer
-              isFullScreen={isFullScreen}
-              showEntryImages={showEntryImages}
+              $isFullScreen={isFullScreen}
+              $isOverlay={showEntryImages}
             >
               <EntryTags locationData={locationData} />
             </EntryTagsContainer>
@@ -102,7 +115,7 @@ const Entry = ({
               <TabList>
                 {/* TODO: Use Routing */}
                 <Tab>Overview</Tab>
-                <Tab>Reviews</Tab>
+                <Tab>Reviews ({reviews.length})</Tab>
               </TabList>
             )}
             <TabPanels>
@@ -113,13 +126,13 @@ const Entry = ({
         ) : (
           <>
             {allReviewPhotos.length > 0 && (
-              // TODO: Change to image carousel
-              <Carousel onClick={() => setIsLightboxOpen(true)}>
-                <img
-                  style={{ width: '100%' }}
-                  src={allReviewPhotos[0].medium}
-                  alt="entry"
-                />
+              <Carousel
+                onClickItem={onClickCarousel}
+                showIndicators={allReviewPhotos.length > 1}
+              >
+                {allReviewPhotos.map((photo) => (
+                  <img key={photo.id} src={photo.medium} alt="entry" />
+                ))}
               </Carousel>
             )}
             <EntryTagsContainer showEntryImages={showEntryImages}>

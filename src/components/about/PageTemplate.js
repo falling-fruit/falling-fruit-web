@@ -7,7 +7,8 @@ const PageScrollWrapper = styled.div`
 
 const PageTemplate = styled.article`
   @media ${({ theme }) => theme.device.mobile} {
-    width: 80%;
+    width: 100%;
+    padding: 20px 23px;
   }
 
   max-width: 950px;
@@ -15,39 +16,42 @@ const PageTemplate = styled.article`
   height: inherit;
   margin: 56px auto;
   overflow-wrap: break-word;
-  font-family: Lato;
+  font-family: ${({ theme }) => theme.fonts};
   font-style: normal;
+  box-sizing: border-box;
 
-  h1 {
-    font-weight: bold;
-    font-size: 2.286rem;
-    color: ${({ theme }) => theme.secondaryText};
-  }
-
-  h2 {
-    font-weight: bold;
-    font-size: 1.857rem;
-    color: ${({ theme }) => theme.secondaryText};
-  }
-
+  h1,
+  h2,
   h3 {
     color: ${({ theme }) => theme.secondaryText};
     font-weight: bold;
+  }
+
+  h1 {
+    font-size: 2.286rem;
+  }
+
+  h2 {
+    font-size: 1.857rem;
+  }
+
+  h3 {
     font-size: 1.429rem;
+  }
+
+  a,
+  p {
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   p {
     color: ${({ theme }) => theme.secondaryText};
-    font-weight: normal;
-    font-size: 1rem;
-    line-height: 1.5;
   }
 
   a {
     color: ${({ theme }) => theme.orange};
-    font-weight: normal;
-    font-size: 1rem;
-    line-height: 1.5;
   }
 
   img {

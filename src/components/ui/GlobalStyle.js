@@ -75,6 +75,9 @@ const GlobalStyle = createGlobalStyle`
     --toastify-text-color-light: ${({ theme }) => theme.secondaryText};
   }
 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   body {
     font-family: ${({ theme }) => theme.fonts};
     color: ${({ theme }) => theme.text};
