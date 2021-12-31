@@ -37,18 +37,22 @@ export const TextContent = styled.article`
 const EntryTagsContainer = styled.div`
   @media ${({ theme }) => theme.device.desktop} {
     padding: 0 12px 0 12px;
-    padding-top: ${({ showEntryImages }) => showEntryImages && `12px`};
+    padding-top: ${({ $isOverlay }) => ($isOverlay ? '12px' : 0)};
   }
 
   @media ${({ theme }) => theme.device.mobile} {
     padding-left: 10px;
-    padding-bottom: ${({ isFullScreen, showEntryImages }) =>
-      isFullScreen && !showEntryImages && `16px`};
-    padding-top: ${({ isFullScreen }) => !isFullScreen && `20px`};
-    position: ${({ showEntryImages }) => showEntryImages && 'absolute'};
-    top: ${({ isFullScreen }) => (isFullScreen ? '-30px' : '-50px')};
-    position: fixed;
-    transform: translateZ(0);
+    padding-bottom: ${({ $isFullScreen, $isOverlay }) =>
+      $isFullScreen && !$isOverlay && `16px`};
+    padding-top: ${({ $isFullScreen }) => (!$isFullScreen ? `20px` : 0)};
+    top: ${({ $isFullScreen }) => ($isFullScreen ? '-30px' : '-50px')};
+
+    ${({ $isOverlay }) =>
+      $isOverlay &&
+      `
+      position: fixed;
+      transform: translateZ(0);
+      `}
   }
 `
 
@@ -102,8 +106,8 @@ const Entry = ({
         {isInDrawer ? (
           <EntryTabs>
             <EntryTagsContainer
-              isFullScreen={isFullScreen}
-              showEntryImages={showEntryImages}
+              $isFullScreen={isFullScreen}
+              $isOverlay={showEntryImages}
             >
               <EntryTags locationData={locationData} />
             </EntryTagsContainer>
