@@ -10,8 +10,8 @@ import { formatISOString } from './textFormatters'
 const ReviewContainer = styled.div`
   margin-bottom: 20px;
 
-  ${({ editable, theme }) =>
-    editable &&
+  ${({ $editable, theme }) =>
+    $editable &&
     `
     background: ${theme.navBackground};
     padding: 0.6em;
@@ -81,7 +81,7 @@ const Review = ({
   includePreview = true,
   editable = false,
 }) => (
-  <ReviewContainer editable={editable}>
+  <ReviewContainer $editable={editable}>
     {editable && (
       <EditableHeader>
         You reviewed this location on {formatISOString(review.created_at)}{' '}

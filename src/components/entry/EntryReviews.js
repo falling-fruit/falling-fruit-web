@@ -6,7 +6,7 @@ import Review from './Review'
 import ReviewSummary from './ReviewSummary'
 
 const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
-  const { user } = useSelector((state) => state.auth)
+  const user = useSelector((state) => state.auth.user)
 
   const indexedReviews = reviews.map((review, index) => ({ ...review, index }))
 

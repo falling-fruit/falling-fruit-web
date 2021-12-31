@@ -16,7 +16,7 @@ const PageTemplate = styled.article`
   height: inherit;
   margin: 56px auto;
   overflow-wrap: break-word;
-  font-family: 'Lato', sans-serif;
+  font-family: ${({ theme }) => theme.fonts};
   font-style: normal;
   box-sizing: border-box;
 
