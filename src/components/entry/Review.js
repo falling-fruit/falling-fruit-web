@@ -84,15 +84,11 @@ const Review = ({ review, onImageClick, includePreview = true }) => (
       </cite>
     </ReviewDescription>
     {includePreview &&
-      // TODO: review images need to link to specific
       review.photos.map((photo, index) => (
         <StyledImagePreview
           $small
           key={photo.thumb}
-          onClick={() => {
-            onImageClick(index)
-            console.log(index)
-          }}
+          onClick={() => onImageClick(index)}
         >
           <img src={photo.thumb} alt={review.title} />
         </StyledImagePreview>
