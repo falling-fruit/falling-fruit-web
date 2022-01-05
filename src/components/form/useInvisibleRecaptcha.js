@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import Reaptcha from 'reaptcha'
 
 export const useInvisibleRecaptcha = (handleSubmit) => {
   const recaptchaRef = useRef()
@@ -18,11 +19,19 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
     )
   }
 
+  const recaptcha = (
+    <Reaptcha
+      size="invisible"
+      sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+      ref={(e) => {
+        recaptchaRef.current = e
+      }}
+      onVerify={handleVerify}
+    />
+  )
+
   return {
-    setRecaptchaRef: (e) => {
-      recaptchaRef.current = e
-    },
+    recaptcha,
     handlePresubmit,
-    handleVerify,
   }
 }

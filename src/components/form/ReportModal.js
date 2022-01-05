@@ -1,7 +1,6 @@
 import { Form, Formik } from 'formik'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
@@ -82,8 +81,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
     }
   }
 
-  const { setRecaptchaRef, handlePresubmit, handleVerify } =
-    useInvisibleRecaptcha(handleSubmit)
+  const { recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   return (
     <StyledModal aria-label="Report dialog" onDismiss={onDismiss} {...props}>
@@ -116,12 +114,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
               <>
                 <Input name="name" label="Name" />
                 <Input name="email" label="Email" />
-                <Reaptcha
-                  size="invisible"
-                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-                  ref={setRecaptchaRef}
-                  onVerify={handleVerify}
-                />
+                {recaptcha}
               </>
             )}
             <Buttons>
