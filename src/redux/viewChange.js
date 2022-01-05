@@ -30,7 +30,7 @@ export const getAllLocations = createSelector(
       ? []
       : entryLocation
       ? unionWith(eqBy(prop('id')), mapLocations, [entryLocation])
-      : [],
+      : mapLocations,
 )
 
 export const fetchLocations = () => (dispatch, getState) => {
