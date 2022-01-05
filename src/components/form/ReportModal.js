@@ -1,14 +1,15 @@
 import { Form, Formik } from 'formik'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { addReport } from '../../utils/api'
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
 import Modal from '../ui/Modal'
-import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
+import { Input, Select, Textarea } from './FormikWrappers'
 
 const PROBLEM_TYPE_OPTIONS = [
   { label: 'Location is spam', value: 0 },
@@ -30,10 +31,6 @@ const StyledModal = styled(Modal)`
   h3 {
     margin-top: 0;
   }
-`
-
-const StyledRecaptcha = styled(Recaptcha)`
-  margin-top: 20px;
 `
 
 const Buttons = styled.div`
@@ -58,11 +55,12 @@ const Buttons = styled.div`
 `
 
 const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
-  const isDesktop = useIsDesktop()
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const recaptchaRef = useRef()
+  const submitArgsRef = useRef()
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(true)
+    setSubmitting(true) // TODO: can remove this since async
 
     const reportValues = {
       ...values,
@@ -86,6 +84,20 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
     }
   }
 
+  const handlePresubmit = (values, formikBag) => {
+    submitArgsRef.current = { values, formikBag }
+    recaptchaRef.current.execute()
+  }
+
+  const handleVerify = (recaptchaResponse) => {
+    const { values, formikBag } = submitArgsRef.current
+
+    handleSubmit(
+      { ...values, 'g-recaptcha-response': recaptchaResponse },
+      formikBag,
+    )
+  }
+
   return (
     <StyledModal aria-label="Report dialog" onDismiss={onDismiss} {...props}>
       <h3>Report {name}</h3>
@@ -101,9 +113,8 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
           comment: Yup.string().required(),
           name: !isLoggedIn && Yup.string().required(),
           email: !isLoggedIn && Yup.string().email().required(),
-          'g-recaptcha-response': !isLoggedIn && Yup.string().required(),
         })}
-        onSubmit={handleSubmit}
+        onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -118,10 +129,13 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
               <>
                 <Input name="name" label="Name" />
                 <Input name="email" label="Email" />
-                <StyledRecaptcha
-                  name="g-recaptcha-response"
-                  size={isDesktop ? 'normal' : 'compact'}
+                <Reaptcha
+                  size="invisible"
                   sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                  ref={(e) => {
+                    recaptchaRef.current = e
+                  }}
+                  onVerify={handleVerify}
                 />
               </>
             )}
