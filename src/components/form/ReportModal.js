@@ -1,5 +1,4 @@
 import { Form, Formik } from 'formik'
-import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import Reaptcha from 'reaptcha'
@@ -10,6 +9,7 @@ import { addReport } from '../../utils/api'
 import Button from '../ui/Button'
 import Modal from '../ui/Modal'
 import { Input, Select, Textarea } from './FormikWrappers'
+import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 const PROBLEM_TYPE_OPTIONS = [
   { label: 'Location is spam', value: 0 },
@@ -56,8 +56,6 @@ const Buttons = styled.div`
 
 const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const recaptchaRef = useRef()
-  const submitArgsRef = useRef()
 
   const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true) // TODO: can remove this since async
@@ -84,19 +82,8 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
     }
   }
 
-  const handlePresubmit = (values, formikBag) => {
-    submitArgsRef.current = { values, formikBag }
-    recaptchaRef.current.execute()
-  }
-
-  const handleVerify = (recaptchaResponse) => {
-    const { values, formikBag } = submitArgsRef.current
-
-    handleSubmit(
-      { ...values, 'g-recaptcha-response': recaptchaResponse },
-      formikBag,
-    )
-  }
+  const { setRecaptchaRef, handlePresubmit, handleVerify } =
+    useInvisibleRecaptcha(handleSubmit)
 
   return (
     <StyledModal aria-label="Report dialog" onDismiss={onDismiss} {...props}>
@@ -132,9 +119,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
                 <Reaptcha
                   size="invisible"
                   sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-                  ref={(e) => {
-                    recaptchaRef.current = e
-                  }}
+                  ref={setRecaptchaRef}
                   onVerify={handleVerify}
                 />
               </>
