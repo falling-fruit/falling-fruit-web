@@ -38,21 +38,21 @@ const RatingInput = ({ name, score, total }) => {
   })
 
   return (
-    <RatingWrapper role="group" aria-labelledby="rating">
+    <RatingWrapper role="group" aria-labelledby={`${name}-group`}>
       {Number(score) !== 0 && (
-        <label htmlFor={name}>
-          <Field type="radio" name={name} value={0} />
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
+        <label>
+          <Field type="radio" name={name} value={'0'} />
           <X color={theme.tertiaryText} />
         </label>
       )}
       {stars.map((icon, idx) => (
         <label
-          htmlFor={name}
           key={idx}
           onMouseEnter={() => setPreviewing(idx + 1)}
           onMouseLeave={() => setPreviewing(null)}
         >
-          <Field type="radio" name={name} value={idx + 1} />
+          <Field type="radio" name={name} value={`${idx + 1}`} />
           {icon}
         </label>
       ))}

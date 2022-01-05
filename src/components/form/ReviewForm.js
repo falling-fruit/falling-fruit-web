@@ -61,13 +61,13 @@ export const ReviewStep = ({ standalone }) => (
 
     <FormRatingWrapper>
       <LabeledRow
-        label={<label htmlFor="review.quality_rating">Quality</label>}
+        label={<label htmlFor="review.quality_rating-group">Quality</label>}
         right={
           <RatingInput name="review.quality_rating" label="Quality" total={5} />
         }
       />
       <LabeledRow
-        label={<label htmlFor="review.yield_rating">Yield</label>}
+        label={<label htmlFor="review.yield_rating-group">Yield</label>}
         right={
           <RatingInput name="review.yield_rating" label="Yield" total={5} />
         }
