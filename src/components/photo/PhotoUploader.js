@@ -1,5 +1,6 @@
 import { equals } from 'ramda'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { addPhoto } from '../../utils/api'
 import { PhotoOrganizer } from './PhotoOrganizer'
@@ -32,20 +33,38 @@ export const PhotoUploader = ({ value, onChange }) => {
       organizerPhotos.map(async (photo) => {
         if (photo.file) {
           const oldId = photo.id
-          const resp = await addPhoto(photo.file)
-          const newId = resp.id
 
-          setPhotos((oldPhotos) =>
-            oldPhotos.map((photo) =>
-              photo.id === oldId
-                ? {
-                    ...photo,
-                    id: newId,
-                    isUploading: false,
-                  }
-                : photo,
-            ),
-          )
+          let resp
+
+          try {
+            resp = await addPhoto(photo.file)
+          } catch (e) {
+            console.log(e)
+            toast.error(`Photo upload failed: ${e.response?.data?.error}`)
+          }
+
+          if (resp) {
+            // Success, update id to real id and disable spinner
+            const newId = resp.id
+
+            setPhotos((oldPhotos) =>
+              oldPhotos.map((photo) =>
+                photo.id === oldId
+                  ? {
+                      ...photo,
+                      id: newId,
+                      isUploading: false,
+                    }
+                  : photo,
+              ),
+            )
+          } else {
+            // Photo upload failed, remove photo
+
+            setPhotos((oldPhotos) =>
+              oldPhotos.filter((photo) => photo.id !== oldId),
+            )
+          }
         }
       }),
     )
