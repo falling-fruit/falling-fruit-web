@@ -124,7 +124,7 @@ export const mapSlice = createSlice({
     zoomIn: (state, action) => {
       state.view = {
         center: action.payload,
-        zoom: 16,
+        zoom: Math.max(16, state.view.zoom),
       }
     },
     clusterClick: (state, action) => {

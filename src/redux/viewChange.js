@@ -1,4 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
+import { eqBy, prop, unionWith } from 'ramda'
 
 import { getBaseUrl } from '../utils/getInitialUrl'
 import { fetchFilterCounts } from './filterSlice'
@@ -27,7 +28,9 @@ export const getAllLocations = createSelector(
   (mapLocations, mapClusters, entryLocation) =>
     mapClusters.length !== 0
       ? []
-      : [...mapLocations, ...(entryLocation ? [entryLocation] : [])],
+      : entryLocation
+      ? unionWith(eqBy(prop('id')), mapLocations, [entryLocation])
+      : [],
 )
 
 export const fetchLocations = () => (dispatch, getState) => {
