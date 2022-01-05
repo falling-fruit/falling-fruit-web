@@ -8,13 +8,14 @@ import Button from '../ui/Button'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
-import { PhotoUploader, Slider, Textarea } from './FormikWrappers'
+import { DateInput, PhotoUploader, Slider, Textarea } from './FormikWrappers'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 export const INITIAL_REVIEW_VALUES = {
   review: {
     photos: [],
     comment: '',
+    observed_on: '',
     fruiting: 0,
     quality_rating: 0,
     yield_rating: 0,
@@ -57,10 +58,13 @@ export const ReviewStep = ({ standalone }) => (
       Leave a Review
       {!standalone && <Optional />}
     </SectionHeading>
+
     <Textarea
       name="review.comment"
       placeholder="Updates, access issues, plant health..."
     />
+
+    <DateInput name="review.observed_on" label="Observed On" />
 
     <Slider
       name="review.fruiting"
