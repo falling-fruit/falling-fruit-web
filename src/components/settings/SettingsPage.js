@@ -304,10 +304,9 @@ const SettingsPage = ({ desktop }) => {
         }
       />
 
-      <h3>{t('About Us')}</h3>
-
       {!desktop && (
         <>
+          <h3>{t('About Us')}</h3>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={'The Project'}
