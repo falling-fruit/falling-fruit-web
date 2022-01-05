@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { setLocation } from '../../redux/mapSlice'
+import { updateEntryLocation } from '../../redux/mapSlice'
 import { getLocationById } from '../../utils/api'
 import Entry from './Entry'
 import EntryDrawer from './EntryDrawer'
@@ -24,7 +24,7 @@ const EntryWrapper = ({ isInDrawer }) => {
       setIsLoading(true)
 
       const locationData = await getLocationById(id, 'reviews')
-      dispatch(setLocation(locationData))
+      dispatch(updateEntryLocation(locationData))
       setReviews(locationData.reviews)
 
       setIsLoading(false)

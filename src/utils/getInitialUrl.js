@@ -34,27 +34,21 @@ export const parseUrl = () => {
   const url = window.location.href
   const geocoordMatch = url.substring(url.indexOf('@'))
 
-  const getCoords = getValidCoord(geocoordMatch)
+  const coords = getValidCoord(geocoordMatch)
 
-  if (getCoords) {
+  if (coords) {
     return {
-      center: { lat: getCoords.lat, lng: getCoords.lng },
-      zoom: getCoords.zoom,
+      center: { lat: coords.lat, lng: coords.lng },
+      zoom: coords.zoom,
+      isDefaultView: false,
     }
   } else {
     return {
       center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
       zoom: DEFAULT_ZOOM,
+      isDefaultView: true,
     }
   }
-}
-
-export const getEntry = () => {
-  const url = window.location.href
-  if (url.indexOf('/entry/') === -1) {
-    return null
-  }
-  return url.substring(url.indexOf(/entry/) + 7, url.indexOf('/@'))
 }
 
 const getValidCoord = (geocoordMatch) => {

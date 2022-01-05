@@ -29,7 +29,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 const MapPage = ({ isDesktop }) => {
   const history = useHistory()
   const match = useRouteMatch({
-    path: '/(map|list)/entry/:entryId/:geocoord',
+    path: '/(map|list)/entry/:entryId/:geocoord?',
     exact: true,
   })
 
