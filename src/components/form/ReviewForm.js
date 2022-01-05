@@ -3,12 +3,20 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { addReview } from '../../utils/api'
+import { FormRatingWrapper } from '../auth/AuthWrappers'
 import { arePhotosUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
+import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
-import { DateInput, PhotoUploader, Slider, Textarea } from './FormikWrappers'
+import {
+  DateInput,
+  PhotoUploader,
+  RatingInput,
+  Select,
+  Textarea,
+} from './FormikWrappers'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 export const INITIAL_REVIEW_VALUES = {
@@ -22,12 +30,17 @@ export const INITIAL_REVIEW_VALUES = {
   },
 }
 
-export const isEmptyReview = (review) =>
-  !review.comment &&
-  review.fruiting === 0 &&
-  review.quality_rating === 0 &&
-  review.yield_rating === 0 &&
-  review.photos.length === 0
+export const isEmptyReview = (review) => {
+  const r = formatReviewValues(review)
+  return (
+    !r.comment &&
+    !r.observed_on &&
+    r.fruiting === 0 &&
+    r.quality_rating === 0 &&
+    r.yield_rating === 0 &&
+    r.photo_ids.length === 0
+  )
+}
 
 export const validateReview = (review) => {
   if (isEmptyReview(review)) {
@@ -42,14 +55,26 @@ export const validateReview = (review) => {
     }
   }
 
+  const r = formatReviewValues(review)
+  if (r.fruiting !== 0 && r.observed_on === '') {
+    return {
+      review: { observed_on: true },
+    }
+  }
+
   return null
 }
 
-export const formatReviewPhotos = (review) => {
-  const newReview = { ...review }
-  newReview.photo_ids = review.photos.map((photo) => photo.id)
-  delete newReview.photos
-  return newReview
+export const formatReviewValues = (review) => {
+  const formattedReview = {
+    ...review,
+    fruiting: review.fruiting?.value ?? 0,
+    quality_rating: Number(review.quality_rating),
+    yield_rating: Number(review.yield_rating),
+    photo_ids: review.photos.map((photo) => photo.id),
+  }
+  delete formattedReview.photos
+  return formattedReview
 }
 
 export const ReviewStep = ({ standalone }) => (
@@ -66,21 +91,31 @@ export const ReviewStep = ({ standalone }) => (
 
     <DateInput name="review.observed_on" label="Observed On" />
 
-    <Slider
-      name="review.fruiting"
+    <Select
       label="Fruiting Status"
-      labels={['Unsure', 'Flowers', 'Unripe fruit', 'Ripe fruit']}
+      name="review.fruiting"
+      /* TODO: Create a generic utility to build form options */
+      options={['Flowers', 'Unripe fruit', 'Ripe fruit'].map((name, idx) => ({
+        label: name,
+        value: idx + 1,
+      }))}
+      isClearable
     />
-    <Slider
-      name="review.quality_rating"
-      label="Quality"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-    <Slider
-      name="review.yield_rating"
-      label="Yield"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
+
+    <FormRatingWrapper>
+      <LabeledRow
+        label={<label htmlFor="review.quality_rating-group">Quality</label>}
+        right={
+          <RatingInput name="review.quality_rating" label="Quality" total={5} />
+        }
+      />
+      <LabeledRow
+        label={<label htmlFor="review.yield_rating-group">Yield</label>}
+        right={
+          <RatingInput name="review.yield_rating" label="Yield" total={5} />
+        }
+      />
+    </FormRatingWrapper>
   </>
 )
 
@@ -97,7 +132,7 @@ export const ReviewForm = ({ onSubmit }) => {
     { resetForm },
   ) => {
     const reviewValues = {
-      ...formatReviewPhotos(review),
+      ...formatReviewValues(review),
       'g-recaptcha-response': recaptcha,
     }
 
@@ -131,7 +166,7 @@ export const ReviewForm = ({ onSubmit }) => {
     >
       <ReviewStep standalone />
       <ReviewPhotoStep />
-      {isLoggedIn && recaptcha}
+      {!isLoggedIn && recaptcha}
     </FormikAllSteps>
   )
 }

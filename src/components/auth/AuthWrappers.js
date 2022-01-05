@@ -28,3 +28,11 @@ export const FormButtonWrapper = styled(FormWrapper)`
     margin-right: 0.5em;
   }
 `
+
+export const FormRatingWrapper = styled(FormButtonWrapper)`
+  flex-direction: column;
+
+  & > *:not(:last-child) {
+    margin: 0 0 0.5em;
+  }
+`

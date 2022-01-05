@@ -15,7 +15,7 @@ import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Select, Textarea } from './FormikWrappers'
 import {
-  formatReviewPhotos,
+  formatReviewValues,
   INITIAL_REVIEW_VALUES,
   isEmptyReview,
   ReviewPhotoStep,
@@ -221,7 +221,7 @@ export const LocationForm = ({ desktop }) => {
     }
 
     if (!isEmptyReview(review)) {
-      locationValues.review = formatReviewPhotos(review)
+      locationValues.review = formatReviewValues(review)
     }
 
     let response
@@ -271,7 +271,7 @@ export const LocationForm = ({ desktop }) => {
       >
         {formikSteps}
       </StepDisplay>
-      {isLoggedIn && recaptcha}
+      {!isLoggedIn && recaptcha}
     </StyledLocationForm>
   )
 }
