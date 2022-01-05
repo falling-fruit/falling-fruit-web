@@ -1,10 +1,11 @@
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
+import { fetchLocations } from '../../redux/viewChange'
 import { addLocation } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import Button from '../ui/Button'
@@ -164,12 +165,30 @@ const validateLocation = (values) => {
   return errors
 }
 
+const formatLocationValues = ({
+  types,
+  description,
+  season_start,
+  season_end,
+  access,
+}) => ({
+  type_ids: types.map(({ value }) => value),
+  description,
+  season_start: season_start?.value,
+  season_end: season_end?.value,
+  access: access?.value,
+  unverified: false,
+})
+
 export const LocationForm = ({ desktop }) => {
   // TODO: create a "going back" util
   const history = useHistory()
   const { state } = useLocation()
   const { typesById } = useTypesById()
 
+  const dispatch = useDispatch()
+
+  // TODO: center of pin is not center of location
   const { lat, lng } = useSelector((state) => state.map.view.center)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
@@ -201,23 +220,14 @@ export const LocationForm = ({ desktop }) => {
 
   const handleSubmit = async ({
     'g-recaptcha-response': recaptcha,
-    types,
-    description,
-    season_start,
-    season_end,
-    access,
     review,
+    ...location
   }) => {
     const locationValues = {
       'g-recaptcha-response': recaptcha,
-      type_ids: types.map(({ value }) => value),
-      description,
-      season_start: season_start?.value,
-      season_end: season_end?.value,
-      access: access?.value,
+      ...formatLocationValues(location),
       lat,
       lng,
-      unverified: false,
     }
 
     if (!isEmptyReview(review)) {
@@ -235,7 +245,7 @@ export const LocationForm = ({ desktop }) => {
 
     if (response && !response.error) {
       history.push(getPathWithMapState('/map'))
-      // TODO: on form submission, reload map so that new location appears
+      dispatch(fetchLocations)
     }
   }
 
