@@ -65,6 +65,8 @@ export const mapSlice = createSlice({
     // this should be called viewChange
     viewChange: setReducer('view'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
+    setLocation: setReducer('location'),
+    setStreetView: setReducer('streetView'),
 
     startTrackingLocation: (state) => {
       state.locationRequested = true
@@ -131,12 +133,6 @@ export const mapSlice = createSlice({
         zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
       }
     },
-    enableStreetView: (state, action) => {
-      if (action.payload.location) {
-        state.location = action.payload.location
-      }
-      state.streetView = action.payload.streetView
-    },
   },
   extraReducers: {
     [searchView.type]: (state, action) => {
@@ -184,10 +180,11 @@ export const {
   clusterClick,
   viewChange,
   setHoveredLocationId,
+  setLocation,
   startTrackingLocation,
   stopTrackingLocation,
   geolocationChange,
-  enableStreetView,
+  setStreetView,
 } = mapSlice.actions
 
 export default mapSlice.reducer

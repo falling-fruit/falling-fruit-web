@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Switch, useLocation } from 'react-router-dom'
 
-import { enableStreetView } from '../../redux/mapSlice'
+import { setStreetView } from '../../redux/mapSlice'
 import useRoutedTabs from '../../utils/useRoutedTabs'
 import aboutRoutes from '../about/aboutRoutes'
 import authRoutes from '../auth/authRoutes'
@@ -47,7 +47,7 @@ const MobileLayout = () => {
       location.pathname.includes('list') ||
       location.pathname.includes('setting')
     ) {
-      return dispatch(enableStreetView({ streetView: false }))
+      return dispatch(setStreetView(false))
     }
   }, [dispatch, location])
 

@@ -1,5 +1,4 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { eqBy, prop, unionWith } from 'ramda'
 
 import { getBaseUrl } from '../utils/getInitialUrl'
 import { fetchFilterCounts } from './filterSlice'
@@ -23,15 +22,12 @@ export const getIsShowingClusters = (state) =>
 
 export const getAllLocations = createSelector(
   (state) => state.map.locations,
-  (state) => state.list.locations,
-  (state) => state.misc.isDesktop,
   (state) => state.map.clusters,
-  (mapLocations, listLocations, isDesktop, mapClusters) =>
+  (state) => state.map.location,
+  (mapLocations, mapClusters, entryLocation) =>
     mapClusters.length !== 0
       ? []
-      : isDesktop
-      ? unionWith(eqBy(prop('id')), mapLocations, listLocations)
-      : mapLocations,
+      : [...mapLocations, ...(entryLocation ? [entryLocation] : [])],
 )
 
 export const fetchLocations = () => (dispatch, getState) => {

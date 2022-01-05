@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { enableStreetView } from '../../redux/mapSlice'
+import { setStreetView } from '../../redux/mapSlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import ResetButton from '../ui/ResetButton'
 import Cluster from './Cluster'
@@ -153,11 +153,7 @@ const Map = ({
   }
 
   const closeStreetView = () => {
-    dispatch(
-      enableStreetView({
-        streetView: false,
-      }),
-    )
+    dispatch(setStreetView(false))
   }
   const isDesktop = useIsDesktop()
 
