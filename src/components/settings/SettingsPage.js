@@ -306,26 +306,30 @@ const SettingsPage = ({ desktop }) => {
 
       <h3>{t('About Us')}</h3>
 
-      <StyledListEntry
-        rightIcons={<ChevronRight size="16" color={theme.blue} />}
-        primaryText={'The Project'}
-        onClick={() => history.push('/about/project')}
-      />
-      <StyledListEntry
-        rightIcons={<ChevronRight size="16" color={theme.blue} />}
-        primaryText={'Imported Datasets'}
-        onClick={() => history.push('/about/dataset')}
-      />
-      <StyledListEntry
-        rightIcons={<ChevronRight size="16" color={theme.blue} />}
-        primaryText={'Sharing the Harvest'}
-        onClick={() => history.push('/about/share')}
-      />
-      <StyledListEntry
-        rightIcons={<ChevronRight size="16" color={theme.blue} />}
-        primaryText={'In the Press'}
-        onClick={() => history.push('/about/press')}
-      />
+      {!desktop && (
+        <>
+          <StyledListEntry
+            rightIcons={<ChevronRight size="16" color={theme.blue} />}
+            primaryText={'The Project'}
+            onClick={() => history.push('/about/project')}
+          />
+          <StyledListEntry
+            rightIcons={<ChevronRight size="16" color={theme.blue} />}
+            primaryText={'Imported Datasets'}
+            onClick={() => history.push('/about/dataset')}
+          />
+          <StyledListEntry
+            rightIcons={<ChevronRight size="16" color={theme.blue} />}
+            primaryText={'Sharing the Harvest'}
+            onClick={() => history.push('/about/share')}
+          />
+          <StyledListEntry
+            rightIcons={<ChevronRight size="16" color={theme.blue} />}
+            primaryText={'In the Press'}
+            onClick={() => history.push('/about/press')}
+          />
+        </>
+      )}
     </Page>
   )
 }
