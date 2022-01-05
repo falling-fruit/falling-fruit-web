@@ -77,7 +77,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
     }
   }
 
-  const { recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
+  const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   return (
     <StyledModal aria-label="Report dialog" onDismiss={onDismiss} {...props}>
@@ -110,7 +110,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
               <>
                 <Input name="name" label="Name" />
                 <Input name="email" label="Email" />
-                {recaptcha}
+                <Recaptcha />
               </>
             )}
             <Buttons>

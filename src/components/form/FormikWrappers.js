@@ -9,7 +9,9 @@ import { Slider } from '../ui/Slider'
 import Textarea from '../ui/Textarea'
 import { withLabeledField } from './withLabeledField'
 
-const DateInput = (props) => <input type="date" {...props} />
+const DateInput = ({ $invalid: _$invalid, ...props }) => (
+  <input type="date" {...props} />
+)
 
 const FormikInput = withLabeledField(Input)
 const FormikTextarea = withLabeledField(Textarea)

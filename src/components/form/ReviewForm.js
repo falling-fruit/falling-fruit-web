@@ -151,7 +151,7 @@ export const ReviewForm = ({ onSubmit }) => {
     }
   }
 
-  const { recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
+  const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   return (
     <FormikAllSteps
@@ -166,7 +166,7 @@ export const ReviewForm = ({ onSubmit }) => {
     >
       <ReviewStep standalone />
       <ReviewPhotoStep />
-      {!isLoggedIn && recaptcha}
+      {!isLoggedIn && <Recaptcha />}
     </FormikAllSteps>
   )
 }

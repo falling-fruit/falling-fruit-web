@@ -19,7 +19,7 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
     )
   }
 
-  const recaptcha = (
+  const Recaptcha = () => (
     <Reaptcha
       size="invisible"
       sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
@@ -31,7 +31,7 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
   )
 
   return {
-    recaptcha,
+    Recaptcha,
     handlePresubmit,
   }
 }

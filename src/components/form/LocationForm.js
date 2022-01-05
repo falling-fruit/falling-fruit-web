@@ -103,7 +103,6 @@ const LocationStep = ({ typeOptions }) => (
       formatOptionLabel={(option) => <TypeName typeId={option.value} />}
       isVirtualized
       required
-      // TODO: fix select searching
     />
     <Textarea
       name="description"
@@ -188,7 +187,6 @@ export const LocationForm = ({ desktop }) => {
 
   const dispatch = useDispatch()
 
-  // TODO: center of pin is not center of location
   const { lat, lng } = useSelector((state) => state.map.view.center)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
@@ -249,7 +247,7 @@ export const LocationForm = ({ desktop }) => {
     }
   }
 
-  const { recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
+  const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   const StepDisplay = desktop ? FormikAllSteps : FormikStepper
 
@@ -281,7 +279,7 @@ export const LocationForm = ({ desktop }) => {
       >
         {formikSteps}
       </StepDisplay>
-      {!isLoggedIn && recaptcha}
+      {!isLoggedIn && <Recaptcha />}
     </StyledLocationForm>
   )
 }
