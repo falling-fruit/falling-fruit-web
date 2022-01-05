@@ -1,7 +1,8 @@
-import { X } from '@styled-icons/boxicons-regular'
+import { LoaderAlt, X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
 import ResetButton from './ResetButton'
+import Spinner from './Spinner'
 
 const DeleteButton = styled(ResetButton)`
   position: absolute;
@@ -27,18 +28,40 @@ const Tile = styled.div`
   background-color: ${({ theme }) => theme.background};
   overflow: visible;
 
+  ${Spinner} {
+    position: absolute;
+    top: calc(50% - 1.75rem / 2);
+    left: calc(50% - 1.75rem / 2);
+    color: ${({ theme }) => theme.navBackground};
+  }
+
   & > img {
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
     border-radius: 7px;
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    ${({ $isUploading }) => $isUploading && 'filter: brightness(0.8);'}
   }
 `
 
-const ImagePreview = ({ children, className, onDelete, $small, ...props }) => (
-  <Tile className={className} $small={$small} {...props}>
+const ImagePreview = ({
+  children,
+  className,
+  onDelete,
+  isUploading,
+  small,
+  ...props
+}) => (
+  <Tile
+    className={className}
+    $isUploading={isUploading}
+    $small={small}
+    {...props}
+  >
     {children}
+    {isUploading && <Spinner as={LoaderAlt} />}
     {onDelete && (
       <DeleteButton onClick={onDelete}>
         <X />

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
-import { addLocation, addReview } from '../../utils/api'
+import { addLocation } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
@@ -15,11 +15,14 @@ import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Select, Textarea } from './FormikWrappers'
 import {
+  formatReviewPhotos,
   INITIAL_REVIEW_VALUES,
-  isValidReview,
+  isEmptyReview,
   ReviewPhotoStep,
   ReviewStep,
+  validateReview,
 } from './ReviewForm'
+import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 const PROPERTY_ACCESS_LABELS = [
   'Source is on my property',
@@ -89,7 +92,6 @@ const InlineSelects = styled.div`
 
 const LocationStep = ({ typeOptions }) => (
   <>
-    {console.log(typeOptions)}
     <Select
       name="types"
       label="Types"
@@ -132,6 +134,32 @@ const LocationStep = ({ typeOptions }) => (
   </>
 )
 
+const validateLocation = (values) => {
+  const { review, types, season_start, season_end } = values
+
+  const errors = {}
+
+  if (types.length === 0) {
+    errors.types = true
+  }
+
+  if (season_start?.value && season_end?.value) {
+    if (season_end.value < season_start.value) {
+      errors.season_end = true
+    }
+  } else if (season_start?.value) {
+    errors.season_end = true
+  } else if (season_end?.value) {
+    errors.season_start = true
+  }
+
+  if (!isEmptyReview(review)) {
+    Object.assign(errors, validateReview(review))
+  }
+
+  return errors
+}
+
 export const LocationForm = ({ desktop }) => {
   // TODO: create a "going back" util
   const history = useHistory()
@@ -139,6 +167,7 @@ export const LocationForm = ({ desktop }) => {
   const { typesById } = useTypesById()
 
   const { lat, lng } = useSelector((state) => state.map.view.center)
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   // TODO: internationalize common name
   const typeOptions = useMemo(
@@ -166,33 +195,17 @@ export const LocationForm = ({ desktop }) => {
     </Step>
   ))
 
-  const validate = (values) => {
-    const { types, season_start, season_end } = values
-
-    const errors = {}
-
-    if (types && types.length === 0) {
-      errors.types = true
-    }
-
-    if (season_start?.value && season_end?.value) {
-      if (season_end.value < season_start.value) {
-        errors.season_end = true
-      }
-    } else if (season_start?.value) {
-      errors.season_end = true
-    } else if (season_end?.value) {
-      errors.season_start = true
-    }
-
-    return errors
-  }
-
-  const handleSubmit = async (values) => {
-    const { types, description, season_start, season_end, access, review } =
-      values
-
+  const handleSubmit = async ({
+    'g-recaptcha-response': recaptcha,
+    types,
+    description,
+    season_start,
+    season_end,
+    access,
+    review,
+  }) => {
     const locationValues = {
+      'g-recaptcha-response': recaptcha,
       type_ids: types.map(({ value }) => value),
       description,
       season_start: season_start?.value,
@@ -200,32 +213,29 @@ export const LocationForm = ({ desktop }) => {
       access: access?.value,
       lat,
       lng,
-      author: null,
       unverified: false,
     }
 
-    let locationResp
+    if (!isEmptyReview(review)) {
+      locationValues.review = formatReviewPhotos(review)
+    }
+
+    let response
     try {
-      locationResp = await addLocation(locationValues)
+      response = await addLocation(locationValues)
       toast.success('Location submitted successfully!')
     } catch {
       toast.error('Location submission failed.')
+      console.error(response)
     }
 
-    // TODO: Add reviews as a part of adding a location (one request to `addLocation`)
-    if (isValidReview(review)) {
-      const reviewValues = {
-        ...review,
-        author: null,
-      }
-
-      console.log('reviewValues', reviewValues)
-      const reviewResp = await addReview(locationResp.id, reviewValues)
-      console.log('reviewResp', reviewResp)
+    if (response && !response.error) {
+      history.push(getPathWithMapState('/map'))
+      // TODO: on form submission, reload map so that new location appears
     }
-
-    history.push(getPathWithMapState('/map'))
   }
+
+  const { recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   const StepDisplay = desktop ? FormikAllSteps : FormikStepper
 
@@ -233,11 +243,12 @@ export const LocationForm = ({ desktop }) => {
     <StyledLocationForm>
       <StepDisplay
         validateOnChange={false}
-        validate={validate}
+        validate={validateLocation}
         initialValues={INITIAL_VALUES}
-        onSubmit={handleSubmit}
+        validateOnMount
+        onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
         // For all steps only
-        renderButtons={({ isValid, isSubmitting }) => (
+        renderButtons={({ isSubmitting, isValid }) => (
           <ProgressButtons>
             <Button
               secondary
@@ -248,13 +259,14 @@ export const LocationForm = ({ desktop }) => {
             >
               Cancel
             </Button>
-            <Button disabled={!isValid || isSubmitting} type="submit">
+            <Button disabled={isSubmitting || !isValid} type="submit">
               {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
           </ProgressButtons>
         )}
       >
         {formikSteps}
+        {isLoggedIn && recaptcha}
       </StepDisplay>
     </StyledLocationForm>
   )

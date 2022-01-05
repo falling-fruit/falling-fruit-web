@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { addReview } from '../../utils/api'
+import { arePhotosUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
@@ -11,8 +12,8 @@ import { PhotoUploader, Slider, Textarea } from './FormikWrappers'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 export const INITIAL_REVIEW_VALUES = {
-  photos: [],
   review: {
+    photos: [],
     comment: '',
     fruiting: 0,
     quality_rating: 0,
@@ -20,11 +21,35 @@ export const INITIAL_REVIEW_VALUES = {
   },
 }
 
-export const isValidReview = (review) =>
-  review.comment ||
-  review.fruiting !== 0 ||
-  review.quality_rating !== 0 ||
-  review.yield_rating !== 0
+export const isEmptyReview = (review) =>
+  !review.comment &&
+  review.fruiting === 0 &&
+  review.quality_rating === 0 &&
+  review.yield_rating === 0 &&
+  review.photos.length === 0
+
+export const validateReview = (review) => {
+  if (isEmptyReview(review)) {
+    return {
+      review: { comment: true },
+    }
+  }
+
+  if (!arePhotosUploaded(review.photos)) {
+    return {
+      review: { photos: true },
+    }
+  }
+
+  return null
+}
+
+export const formatReviewPhotos = (review) => {
+  const newReview = { ...review }
+  newReview.photo_ids = review.photos.map((photo) => photo.id)
+  delete newReview.photos
+  return newReview
+}
 
 export const ReviewStep = ({ standalone }) => (
   <>
@@ -53,7 +78,7 @@ export const ReviewStep = ({ standalone }) => (
 )
 
 export const ReviewPhotoStep = () => (
-  <PhotoUploader name="photos" label="Upload Images" optional />
+  <PhotoUploader name="review.photos" label="Upload Images" optional />
 )
 
 export const ReviewForm = ({ onSubmit }) => {
@@ -61,16 +86,14 @@ export const ReviewForm = ({ onSubmit }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   const handleSubmit = async (
-    { 'g-recaptcha-response': recaptcha, review, photos },
+    { 'g-recaptcha-response': recaptcha, review },
     { resetForm },
   ) => {
     const reviewValues = {
-      ...review,
-      photo_ids: photos.map((photo) => photo.id),
+      ...formatReviewPhotos(review),
       'g-recaptcha-response': recaptcha,
     }
 
-    console.log('reviewValues', reviewValues)
     let response
     try {
       response = await addReview(locationId, reviewValues)
@@ -92,21 +115,16 @@ export const ReviewForm = ({ onSubmit }) => {
     <FormikAllSteps
       onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
       initialValues={INITIAL_REVIEW_VALUES}
-      validate={({ review }) => {
-        if (!isValidReview(review)) {
-          return { review: { comment: true } }
-        }
-        return null
-      }}
-      renderButtons={({ isSubmitting }) => (
-        <Button disabled={isSubmitting} type="submit">
+      validate={({ review }) => validateReview(review)}
+      renderButtons={({ isSubmitting, isValid }) => (
+        <Button disabled={isSubmitting || !isValid} type="submit">
           {isSubmitting ? 'Publishing' : 'Publish Review'}
         </Button>
       )}
     >
       <ReviewStep standalone />
       <ReviewPhotoStep />
-      {recaptcha}
+      {isLoggedIn && recaptcha}
     </FormikAllSteps>
   )
 }

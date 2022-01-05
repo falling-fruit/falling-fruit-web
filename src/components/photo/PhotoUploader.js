@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { addPhoto } from '../../utils/api'
 import { PhotoOrganizer } from './PhotoOrganizer'
 
+export const arePhotosUploaded = (photos) =>
+  photos.every((photo) => !photo.isUploading)
+
 export const PhotoUploader = ({ value, onChange }) => {
   const [photos, setPhotos] = useState(value)
 

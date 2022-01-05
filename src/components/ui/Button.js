@@ -23,7 +23,7 @@ const StyledButton = styled(ResetButton)`
   // TODO: make raised and add a location button in main pane
 
   @media ${({ theme }) => theme.device.desktop} {
-    :hover {
+    :hover:enabled {
       background: ${({ $secondary, theme }) =>
         $secondary ? theme.orange : darken(0.1, theme.orange)};
       border-color: ${({ $secondary, theme }) =>
@@ -32,7 +32,9 @@ const StyledButton = styled(ResetButton)`
     }
   }
 
-  // TODO: need disabled state, @Siraj
+  :disabled {
+    opacity: 0.6;
+  }
 
   svg {
     height: 1em;

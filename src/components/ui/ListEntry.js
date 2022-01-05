@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components/macro'
 
-const Icons = styled.div`
+export const Icons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,13 +13,13 @@ const Icons = styled.div`
   ${(props) => (props.$prepend ? 'margin-right' : 'margin-left')}: 18px;
 `
 
-const PrimaryText = styled.div`
+export const PrimaryText = styled.div`
   font-weight: bold;
   font-size: 0.875rem;
   color: ${({ theme }) => theme.headerText};
 `
 
-const SecondaryText = styled.div`
+export const SecondaryText = styled.div`
   font-weight: normal;
   font-size: 0.75rem;
   color: ${({ theme }) => theme.secondaryText};
