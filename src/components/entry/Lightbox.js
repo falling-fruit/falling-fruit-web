@@ -125,7 +125,7 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
     <StyledDialog onDismiss={onDismiss}>
       <ImageContainer>
         <StyledReviewImage
-          src={reviewImages[index[0]]?.[index[1]]?.medium ?? ''}
+          src={reviewImages[index[0]]?.[index[1]]?.original ?? ''}
         />
         {reviewImages.length > 1 && (
           <NavButtonContainer>

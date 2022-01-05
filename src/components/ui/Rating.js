@@ -1,34 +1,27 @@
+import { Star as StarEmpty } from '@styled-icons/boxicons-regular'
+import { Star } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
-// TODO: Fix title vertical centering
+const RatingWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 
-const Bar = styled.div`
-  height: 5px;
-  background: ${({ theme }) => theme.secondaryBackground};
-  margin: 0 12px;
-  border-radius: 9px;
-`
-const Score = styled.div`
-  height: 5px;
-  width: ${(props) => props.percentage * 100}%;
-  border-radius: 9px;
-  background: ${(props) => getRatingBarColor(props.percentage)};
-`
-
-const getRatingBarColor = (percentage) => {
-  if (percentage <= 0.33) {
-    return ({ theme }) => theme.red
-  } else if (percentage <= 0.66) {
-    return ({ theme }) => theme.orange
-  } else {
-    return ({ theme }) => theme.green
+  svg {
+    width: 1.2em;
+    height: 1.2em;
+    color: ${({ theme }) => theme.orange};
   }
-}
+`
 
-const Rating = ({ percentage }) => (
-  <Bar>
-    <Score percentage={percentage} />
-  </Bar>
-)
+const Rating = ({ score, total }) => {
+  const stars = new Array(total).fill(null).map((_, idx) => {
+    if (idx + 1 > score) {
+      return <StarEmpty key={idx} />
+    }
+    return <Star key={idx} />
+  })
+
+  return <RatingWrapper>{stars}</RatingWrapper>
+}
 
 export default Rating

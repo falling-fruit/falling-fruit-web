@@ -43,12 +43,15 @@ const columns = [
 
 const ImportsTable = () => {
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   const [filterText, setFilterText] = React.useState('')
   const history = useHistory()
 
   useEffect(() => {
     const getImportData = async () => {
+      setIsLoading(true)
       setData(await getImports())
+      setIsLoading(false)
     }
     getImportData()
   }, [])
@@ -68,6 +71,7 @@ const ImportsTable = () => {
       columns={columns}
       data={filteredData}
       pagination
+      progressPending={isLoading}
       subHeader
       subHeaderComponent={
         <Input
