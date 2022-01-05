@@ -1,7 +1,11 @@
 const axios = require('axios')
 const fs = require('fs')
 
-const PRESS_DATA_ROUTE = './src/constants/press_data.json'
+const [, , API_URL, OUTPUT] = process.argv
+
+if (!API_URL || !OUTPUT) {
+  process.exit(1)
+}
 
 const SUBSTITUTIONS = {
   '': null,
@@ -10,9 +14,7 @@ const SUBSTITUTIONS = {
 }
 
 async function fetchData() {
-  return await axios.get(
-    'https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg/press',
-  )
+  return await axios.get(API_URL)
 }
 
 function processRow(rawRow) {
@@ -36,11 +38,11 @@ async function main() {
   const { data } = await fetchData()
   const processed = processData(data)
   const fileData = JSON.stringify(processed)
-  fs.writeFile(PRESS_DATA_ROUTE, fileData, (e) => {
+  fs.writeFile(OUTPUT, fileData, (e) => {
     if (e) {
       throw e
     }
-    console.log(`Press data file generated and saved to ${PRESS_DATA_ROUTE}`)
+    console.log(`Press data file generated and saved to ${OUTPUT}`)
   })
 }
 
