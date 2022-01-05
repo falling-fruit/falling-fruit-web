@@ -57,7 +57,10 @@ export const ReviewStep = ({ standalone }) => (
       Leave a Review
       {!standalone && <Optional />}
     </SectionHeading>
-    <Textarea name="review.comment" placeholder="Lorem ipsum..." />
+    <Textarea
+      name="review.comment"
+      placeholder="Updates, access issues, plant health..."
+    />
 
     <Slider
       name="review.fruiting"

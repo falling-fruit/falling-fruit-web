@@ -104,7 +104,11 @@ const LocationStep = ({ typeOptions }) => (
       required
       // TODO: fix select searching
     />
-    <Textarea name="description" label="Description" />
+    <Textarea
+      name="description"
+      label="Description"
+      placeholder="Location details, access issues, plant health ..."
+    />
     <Select
       name="access"
       label="Property Access"
