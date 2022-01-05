@@ -25,15 +25,13 @@ instance.interceptors.response.use(
   (response) => response.data,
   async (error) => {
     const originalRequest = error.config
-    console.log('error', error, error.response, error.response.data)
 
     if (
       error.response.status === 401 &&
-      error.response.data.error === 'Expired refresh token' &&
-      originalRequest._retry
+      error.response.data.error === 'Expired access token' &&
+      !originalRequest._retry
     ) {
       const token: any = authStore.getToken()
-      console.log('retrying')
 
       if (token) {
         originalRequest._retry = true
