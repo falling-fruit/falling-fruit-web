@@ -1,18 +1,17 @@
-import { useFormikContext } from 'formik'
-import { useMemo, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import styled from 'styled-components/macro'
+import { toast } from 'react-toastify'
 
 import { addReview } from '../../utils/api'
 import Button from '../ui/Button'
-import ImagePreview from '../ui/ImagePreview'
-import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
-import { FileUpload, Slider, Textarea } from './FormikWrappers'
+import { PhotoUploader, Slider, Textarea } from './FormikWrappers'
+import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 export const INITIAL_REVIEW_VALUES = {
+  photos: [],
   review: {
     comment: '',
     fruiting: 0,
@@ -26,17 +25,6 @@ export const isValidReview = (review) =>
   review.fruiting !== 0 ||
   review.quality_rating !== 0 ||
   review.yield_rating !== 0
-
-const WideButton = styled(Button).attrs({
-  secondary: true,
-})`
-  width: 100%;
-  height: 46px;
-  border-width: 1px;
-  font-weight: normal;
-
-  margin-bottom: 24px;
-`
 
 export const ReviewStep = ({ standalone }) => (
   <>
@@ -64,71 +52,52 @@ export const ReviewStep = ({ standalone }) => (
   </>
 )
 
-export const ReviewPhotoStep = () => {
-  const fileUploadRef = useRef()
-  // TODO: instead of doing this... just wrap both the file upload and the caption inputs in a new Formik field
-  const {
-    values: { photo },
-    setFieldValue,
-  } = useFormikContext()
-
-  const imagePreview = useMemo(
-    () =>
-      photo && (
-        <ImagePreview
-          onDelete={() => {
-            fileUploadRef.current.value = ''
-            setFieldValue('photo', null)
-          }}
-        >
-          <img src={URL.createObjectURL(photo)} alt="Upload preview" />
-        </ImagePreview>
-      ),
-    [photo, setFieldValue],
-  )
-
-  return (
-    <>
-      <Label>
-        Upload Images
-        <Optional />
-      </Label>
-      <WideButton type="button" onClick={() => fileUploadRef.current.click()}>
-        Take or Upload Photo
-      </WideButton>
-      <FileUpload
-        name="review.photo"
-        style={{ display: 'none' }}
-        ref={fileUploadRef}
-      />
-      {imagePreview}
-    </>
-  )
-}
+export const ReviewPhotoStep = () => (
+  <PhotoUploader name="photos" label="Upload Images" optional />
+)
 
 export const ReviewForm = ({ onSubmit }) => {
   const { id: locationId } = useParams()
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
 
-  const handleSubmit = async ({ review }, { resetForm }) => {
+  const handleSubmit = async (
+    { 'g-recaptcha-response': recaptcha, review, photos },
+    { resetForm },
+  ) => {
     const reviewValues = {
       ...review,
-      author: null,
+      photo_ids: photos.map((photo) => photo.id),
+      'g-recaptcha-response': recaptcha,
     }
 
     console.log('reviewValues', reviewValues)
-    const reviewResp = await addReview(locationId, reviewValues)
-    console.log('reviewResp', reviewResp)
-    onSubmit(reviewResp)
-    resetForm()
+    let response
+    try {
+      response = await addReview(locationId, reviewValues)
+      toast.success('Review submitted successfully!')
+    } catch {
+      toast.error('Review submission failed.')
+      console.error(response)
+    }
+
+    if (response && !response.error) {
+      onSubmit(response)
+      resetForm()
+    }
   }
+
+  const { recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   return (
     <FormikAllSteps
-      onSubmit={handleSubmit}
+      onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
       initialValues={INITIAL_REVIEW_VALUES}
-      validate={({ review }) =>
-        isValidReview(review) ? null : { review: { comment: true } }
-      }
+      validate={({ review }) => {
+        if (!isValidReview(review)) {
+          return { review: { comment: true } }
+        }
+        return null
+      }}
       renderButtons={({ isSubmitting }) => (
         <Button disabled={isSubmitting} type="submit">
           {isSubmitting ? 'Publishing' : 'Publish Review'}
@@ -137,6 +106,7 @@ export const ReviewForm = ({ onSubmit }) => {
     >
       <ReviewStep standalone />
       <ReviewPhotoStep />
+      {recaptcha}
     </FormikAllSteps>
   )
 }
