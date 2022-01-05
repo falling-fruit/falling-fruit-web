@@ -38,12 +38,12 @@ export const ProgressButtons = styled.div`
 const FormikStep = ({ label: _label, children }) => <>{children}</>
 
 const FormikStepper = ({ children, onSubmit, ...props }) => {
-  const childrenArray = Children.toArray(children)
+  const steps = Children.toArray(children)
   const [step, setStep] = useState(0)
   const [completed, setCompleted] = useState(false)
 
-  const currentChild = childrenArray[step]
-  const isLastStep = step === childrenArray.length - 1
+  const currentChild = steps[step]
+  const isLastStep = step === steps.length - 1
 
   const handleSubmit = async (values, helpers) => {
     if (isLastStep) {
@@ -87,8 +87,8 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
           </ProgressButtons>
 
           <StyledProgressBar
-            labels={childrenArray.map((child) => child.props.label)}
-            step={completed ? childrenArray.length + 1 : step}
+            labels={steps.map((child) => child.props.label)}
+            step={completed ? steps.length + 1 : step}
             onChange={setStep}
           />
         </StyledForm>

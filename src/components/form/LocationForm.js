@@ -270,8 +270,8 @@ export const LocationForm = ({ desktop }) => {
         )}
       >
         {formikSteps}
-        {isLoggedIn && recaptcha}
       </StepDisplay>
+      {isLoggedIn && recaptcha}
     </StyledLocationForm>
   )
 }
