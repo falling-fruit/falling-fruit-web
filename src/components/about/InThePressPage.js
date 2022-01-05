@@ -46,6 +46,10 @@ const TimelineSection = styled.section`
       text-decoration: none;
     }
   }
+`
+
+const Embed = styled.div`
+  margin-top: 1em;
 
   @media ${({ theme }) => theme.device.mobile} {
     iframe {
@@ -81,7 +85,9 @@ const TimelineItem = ({ data }) => {
         </h3>
         <ConditionalLink href={url}>{title}</ConditionalLink>
         {author && ` by ${author}`}
-        {embed_html && <div dangerouslySetInnerHTML={{ __html: embed_html }} />}
+        {embed_html && (
+          <Embed dangerouslySetInnerHTML={{ __html: embed_html }} />
+        )}
       </div>
     </li>
   )
