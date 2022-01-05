@@ -91,8 +91,6 @@ const InThePressPage = () => {
   const years = Object.keys(pressData)
   years.sort().reverse()
 
-  console.log(pressData[2013][0])
-
   return (
     <PageScrollWrapper>
       <PageTemplate>
