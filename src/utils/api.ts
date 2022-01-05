@@ -37,7 +37,6 @@ instance.interceptors.response.use(
         originalRequest._retry = true
 
         const newToken = await refreshUserToken(token.refresh_token)
-        console.log('newToken', newToken)
         authStore.setToken(newToken, token.rememberMe)
 
         return instance(originalRequest)

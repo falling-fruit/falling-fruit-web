@@ -56,9 +56,7 @@ const Buttons = styled.div`
 const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
-  const handleSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(true) // TODO: can remove this since async
-
+  const handleSubmit = async (values) => {
     const reportValues = {
       ...values,
       problem_code: values.problem_code.value,
@@ -73,8 +71,6 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
       toast.error('Report submission failed.')
       console.error(response)
     }
-
-    setSubmitting(false)
 
     if (response && !response.error) {
       onDismiss()
