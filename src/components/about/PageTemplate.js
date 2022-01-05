@@ -88,6 +88,7 @@ const StyledBackButton = styled(BackButton)`
 `
 
 const PageTemplate = ({ children }) => {
+  // TODO: migrate to custom hook for map state
   const history = useHistory()
   const isMobile = useIsMobile()
 

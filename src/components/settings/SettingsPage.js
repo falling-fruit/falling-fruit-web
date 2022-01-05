@@ -96,6 +96,7 @@ const SettingsPage = ({ desktop }) => {
   const settings = useSelector((state) => state.settings)
   const user = useSelector((state) => state.auth.user)
 
+  // TODO: migrate to custom hook for map state
   const history = useHistory()
 
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
