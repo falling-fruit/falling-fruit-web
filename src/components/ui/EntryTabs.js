@@ -4,7 +4,7 @@ import { PageTabs } from '../ui/PageTabs'
 
 const EntryTabs = styled(PageTabs)`
   // TODO: make this snippet reusable (copied from ../GlobalStyle.js)
-  @media ${({ theme }) => theme.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     // Disable overscrolling on iOS
     overflow: hidden;
     position: fixed;

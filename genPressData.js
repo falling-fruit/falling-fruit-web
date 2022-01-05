@@ -13,7 +13,7 @@ const SUBSTITUTIONS = {
   TRUE: true,
 }
 
-function processRow(rawRow) {
+function processSubstitutions(rawRow) {
   const processedRow = {}
   Object.keys(rawRow).forEach((col) => {
     const cell = rawRow[col]
@@ -26,10 +26,27 @@ function processRow(rawRow) {
   return processedRow
 }
 
+function getDataByYear(processedRows) {
+  const dataByYear = {}
+
+  processedRows.forEach((row) => {
+    const year = new Date(row.published_on).getFullYear()
+    if (!dataByYear[year]) {
+      dataByYear[year] = []
+    }
+    dataByYear[year].push(row)
+  })
+
+  return dataByYear
+}
+
 async function main() {
   const { data } = await axios.get(API_URL)
-  const processed = data.map(processRow)
-  const fileData = JSON.stringify(processed)
+  const processed = data
+    .map(processSubstitutions)
+    .filter(({ include }) => !!include)
+  const processedByYear = getDataByYear(processed)
+  const fileData = JSON.stringify(processedByYear)
   fs.writeFile(OUTPUT, fileData, (e) => {
     if (e) {
       throw e
