@@ -1,12 +1,18 @@
+import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { logout } from '../../redux/authSlice'
 import { updateSettings } from '../../redux/settingsSlice'
+import Button from '../ui/Button'
 import ButtonToggle from '../ui/ButtonToggle'
 import Checkbox from '../ui/Checkbox'
+import { theme } from '../ui/GlobalStyle'
 import LabeledRow from '../ui/LabeledRow'
+import ListEntry from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
 import Bicycling from './mapTiles/bicycling.png'
@@ -57,9 +63,40 @@ const Page = styled.div`
   }
 `
 
+const StyledListEntry = styled(ListEntry)`
+  margin: 7px -26px;
+  width: calc(100% + 26px + 26px);
+  padding: 0 26px;
+
+  :not(:last-child) {
+    margin-bottom: 7px;
+  }
+`
+
+const UserWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > p {
+    margin: 0px;
+    color: ${({ theme }) => theme.secondaryText};
+  }
+
+  * {
+    flex-grow: 1;
+  }
+
+  > *:not(:last-child) {
+    margin-right: 0.5em;
+  }
+`
+
 const SettingsPage = ({ desktop }) => {
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
+  const user = useSelector((state) => state.auth.user)
+
+  const history = useHistory()
 
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
@@ -68,9 +105,37 @@ const SettingsPage = ({ desktop }) => {
     dispatch(updateSettings({ distanceUnit: object.value }))
   }
 
+  const handleLogout = () => {
+    dispatch(logout())
+  }
+
   return (
     <Page desktop={desktop}>
-      {!desktop && <h2>{t('Settings')}</h2>}
+      {!desktop && (
+        <>
+          <h2>{t('Settings')}</h2>
+
+          <h3>{t('Account')}</h3>
+          <UserWrapper>
+            {user ? (
+              <>
+                <p>Logged in as {user.name}</p>
+                <Button secondary onClick={handleLogout}>
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button onClick={() => history.push('/login')}>Login</Button>
+                <Button secondary onClick={() => history.push('/signup')}>
+                  Signup
+                </Button>
+              </>
+            )}
+          </UserWrapper>
+        </>
+      )}
+
       <h3>{t('Viewing Preferences')}</h3>
 
       {[
@@ -237,6 +302,29 @@ const SettingsPage = ({ desktop }) => {
             menuPlacement="top"
           />
         }
+      />
+
+      <h3>{t('About Us')}</h3>
+
+      <StyledListEntry
+        rightIcons={<ChevronRight size="16" color={theme.blue} />}
+        primaryText={'The Project'}
+        onClick={() => history.push('/about/project')}
+      />
+      <StyledListEntry
+        rightIcons={<ChevronRight size="16" color={theme.blue} />}
+        primaryText={'Imported Datasets'}
+        onClick={() => history.push('/about/dataset')}
+      />
+      <StyledListEntry
+        rightIcons={<ChevronRight size="16" color={theme.blue} />}
+        primaryText={'Sharing the Harvest'}
+        onClick={() => history.push('/about/share')}
+      />
+      <StyledListEntry
+        rightIcons={<ChevronRight size="16" color={theme.blue} />}
+        primaryText={'In the Press'}
+        onClick={() => history.push('/about/press')}
       />
     </Page>
   )
