@@ -4,13 +4,15 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { addReview } from '../../utils/api'
+import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
 import ImagePreview from '../ui/ImagePreview'
 import Label from '../ui/Label'
+import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
-import { FileUpload, Slider, Textarea } from './FormikWrappers'
+import { FileUpload, RatingInput, Select, Textarea } from './FormikWrappers'
 
 export const INITIAL_REVIEW_VALUES = {
   review: {
@@ -23,9 +25,9 @@ export const INITIAL_REVIEW_VALUES = {
 
 export const isValidReview = (review) =>
   review.comment ||
-  review.fruiting !== 0 ||
-  review.quality_rating !== 0 ||
-  review.yield_rating !== 0
+  (review.fruiting?.value ?? 0) !== 0 ||
+  Number(review.quality_rating) !== 0 ||
+  Number(review.yield_rating) !== 0
 
 const WideButton = styled(Button).attrs({
   secondary: true,
@@ -46,21 +48,31 @@ export const ReviewStep = ({ standalone }) => (
     </SectionHeading>
     <Textarea name="review.comment" placeholder="Lorem ipsum..." />
 
-    <Slider
-      name="review.fruiting"
+    <Select
       label="Fruiting Status"
-      labels={['Unsure', 'Flowers', 'Unripe fruit', 'Ripe fruit']}
+      name="review.fruiting"
+      /* TODO: Create a generic utility to build form options */
+      options={['Flowers', 'Unripe fruit', 'Ripe fruit'].map((name, idx) => ({
+        label: name,
+        value: idx + 1,
+      }))}
+      isClearable
     />
-    <Slider
-      name="review.quality_rating"
-      label="Quality"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
-    <Slider
-      name="review.yield_rating"
-      label="Yield"
-      labels={['Unsure', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent']}
-    />
+
+    <FormRatingWrapper>
+      <LabeledRow
+        label={<label htmlFor="review.quality_rating-group">Quality</label>}
+        right={
+          <RatingInput name="review.quality_rating" label="Quality" total={5} />
+        }
+      />
+      <LabeledRow
+        label={<label htmlFor="review.yield_rating-group">Yield</label>}
+        right={
+          <RatingInput name="review.yield_rating" label="Yield" total={5} />
+        }
+      />
+    </FormRatingWrapper>
   </>
 )
 
@@ -110,8 +122,13 @@ export const ReviewForm = ({ onSubmit }) => {
   const { id: locationId } = useParams()
 
   const handleSubmit = async ({ review }, { resetForm }) => {
+    const { fruiting, quality_rating, yield_rating, comment } = review
+
     const reviewValues = {
-      ...review,
+      fruiting: fruiting?.value ?? 0,
+      quality_rating: Number(quality_rating),
+      yield_rating: Number(yield_rating),
+      comment,
       author: null,
     }
 
