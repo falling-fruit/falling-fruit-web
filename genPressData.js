@@ -13,10 +13,6 @@ const SUBSTITUTIONS = {
   TRUE: true,
 }
 
-async function fetchData() {
-  return await axios.get(API_URL)
-}
-
 function processRow(rawRow) {
   const processedRow = {}
   Object.keys(rawRow).forEach((col) => {
@@ -30,13 +26,9 @@ function processRow(rawRow) {
   return processedRow
 }
 
-function processData(raw) {
-  return raw.map(processRow)
-}
-
 async function main() {
-  const { data } = await fetchData()
-  const processed = processData(data)
+  const { data } = await axios.get(API_URL)
+  const processed = data.map(processRow)
   const fileData = JSON.stringify(processed)
   fs.writeFile(OUTPUT, fileData, (e) => {
     if (e) {
