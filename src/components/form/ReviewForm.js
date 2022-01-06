@@ -101,7 +101,7 @@ export const reviewToForm = ({
   comment,
   photos: photos.map((photo) => ({
     id: photo.id,
-    name: photo.created_at,
+    name: `My Photo ${photo.created_at.split('T')[0]}`,
     image: photo.thumb,
     isNew: false,
   })),
