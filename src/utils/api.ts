@@ -28,17 +28,15 @@ instance.interceptors.response.use(
 
     if (
       error.response.status === 401 &&
-      error.response.data === 'Expired refresh token' &&
-      originalRequest._retry
+      error.response.data.error === 'Expired access token' &&
+      !originalRequest._retry
     ) {
       const token: any = authStore.getToken()
-      console.log('retrying')
 
       if (token) {
         originalRequest._retry = true
 
         const newToken = await refreshUserToken(token.refresh_token)
-        console.log('newToken', newToken)
         authStore.setToken(newToken, token.rememberMe)
 
         return instance(originalRequest)
@@ -50,12 +48,12 @@ instance.interceptors.response.use(
 )
 
 export const addUser = (
-  params: paths['/user']['post']['requestBody']['content']['application/json'],
-) => instance.post('/user', params)
+  data: paths['/user']['post']['requestBody']['content']['application/json'],
+) => instance.post('/user', data)
 
 export const editUser = (
-  params: paths['/user']['put']['requestBody']['content']['application/json'],
-) => instance.put('/user', params)
+  data: paths['/user']['put']['requestBody']['content']['application/json'],
+) => instance.put('/user', data)
 
 export const getUser = () => instance.get('/user')
 
@@ -73,16 +71,6 @@ export const refreshUserToken = (refreshToken: string) => {
 
   return instance.post('/user/token/refresh', formData)
 }
-
-/* Not used yet
-const fileToFormData = (photoData: string | Blob | undefined) => {
-  if (photoData !== undefined) {
-    const formData = new FormData()
-    return formData.append('photo_data', photoData)
-  }
-  return null
-}
-*/
 
 export const getClusters = (
   params: paths['/clusters']['get']['parameters']['query'],
@@ -130,13 +118,21 @@ export const getReviewById = (
 
 export const addReview = (
   locationId: paths['/locations/{id}/reviews']['post']['parameters']['path']['id'],
-  params: paths['/locations/{id}/reviews']['post']['requestBody']['content']['application/json'],
-) => instance.post(`/locations/${locationId}/reviews`, { params })
+  data: paths['/locations/{id}/reviews']['post']['requestBody']['content']['application/json'],
+) => instance.post(`/locations/${locationId}/reviews`, data)
 
 export const editReview = (
   id: paths['/reviews/{id}']['put']['parameters']['path']['id'],
-  params: paths['/reviews/{id}']['put']['requestBody']['content']['application/json'],
-) => instance.put(`/reviews/${id}`, { params })
+  data: paths['/reviews/{id}']['put']['requestBody']['content']['application/json'],
+) => instance.put(`/reviews/${id}`, data)
+
+export const addPhoto = (
+  file: paths['/photos']['post']['requestBody']['content']['multipart/form-data']['file'],
+) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  return instance.post('/photos', formData)
+}
 
 export const addReport = (
   data: paths['/reports']['post']['requestBody']['content']['application/json'],

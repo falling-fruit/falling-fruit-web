@@ -55,12 +55,17 @@ export const authSlice = createSlice({
       state.isLoading = false
     },
 
+    [login.pending]: (state) => {
+      state.isLoading = true
+    },
     [login.fulfilled]: (state, action) => {
       state.user = action.payload
       state.error = null
+      state.isLoading = false
     },
     [login.rejected]: (state, action) => {
       state.error = action.error
+      state.isLoading = false
     },
 
     [logout]: (state) => {

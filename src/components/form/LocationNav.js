@@ -16,7 +16,13 @@ const LocationNav = () => {
 
   return (
     <Switch>
-      <Route path="/map/entry/new" exact>
+      <Route path="/map/entry/new/details">
+        <TopBarNav
+          onBack={() => history.push(getPathWithMapState('/map/entry/new'))}
+          title="New Location"
+        />
+      </Route>
+      <Route path="/map/entry/new">
         <TopBarNav
           left={
             <Instructions>Choose a location for your new entry.</Instructions>
@@ -44,12 +50,6 @@ const LocationNav = () => {
               />
             </>
           }
-        />
-      </Route>
-      <Route>
-        <TopBarNav
-          onBack={() => history.push(getPathWithMapState('/map/entry/new'))}
-          title="New Location"
         />
       </Route>
     </Switch>

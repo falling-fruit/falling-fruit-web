@@ -8,7 +8,7 @@ const EntryTags = ({ locationData }) => {
   const { t } = useTranslation()
   return (
     <TagList>
-      {locationData.access && (
+      {locationData.access != null && (
         <Tag color={theme.tag.access} backgroundColor={theme.transparentOrange}>
           {ACCESS_TYPE[locationData.access]}
         </Tag>

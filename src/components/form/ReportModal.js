@@ -5,10 +5,10 @@ import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { addReport } from '../../utils/api'
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
 import Modal from '../ui/Modal'
-import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
+import { Input, Select, Textarea } from './FormikWrappers'
+import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 const PROBLEM_TYPE_OPTIONS = [
   { label: 'Location is spam', value: 0 },
@@ -30,10 +30,6 @@ const StyledModal = styled(Modal)`
   h3 {
     margin-top: 0;
   }
-`
-
-const StyledRecaptcha = styled(Recaptcha)`
-  margin-top: 20px;
 `
 
 const Buttons = styled.div`
@@ -58,12 +54,9 @@ const Buttons = styled.div`
 `
 
 const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
-  const isDesktop = useIsDesktop()
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
-  const handleSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(true)
-
+  const handleSubmit = async (values) => {
     const reportValues = {
       ...values,
       problem_code: values.problem_code.value,
@@ -79,12 +72,12 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
       console.error(response)
     }
 
-    setSubmitting(false)
-
     if (response && !response.error) {
       onDismiss()
     }
   }
+
+  const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   return (
     <StyledModal aria-label="Report dialog" onDismiss={onDismiss} {...props}>
@@ -101,9 +94,8 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
           comment: Yup.string().required(),
           name: !isLoggedIn && Yup.string().required(),
           email: !isLoggedIn && Yup.string().email().required(),
-          'g-recaptcha-response': !isLoggedIn && Yup.string().required(),
         })}
-        onSubmit={handleSubmit}
+        onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -118,11 +110,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
               <>
                 <Input name="name" label="Name" />
                 <Input name="email" label="Email" />
-                <StyledRecaptcha
-                  name="g-recaptcha-response"
-                  size={isDesktop ? 'normal' : 'compact'}
-                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-                />
+                <Recaptcha />
               </>
             )}
             <Buttons>
