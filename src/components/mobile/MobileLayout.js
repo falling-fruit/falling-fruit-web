@@ -28,7 +28,9 @@ const MobileLayout = () => {
 
   const tabPanels = tabs.map(({ path, panel }) => (
     <TabPanel
-      style={path === '/list' ? { paddingTop: '85px' } : { paddingTop: '0' }}
+      style={
+        path.startsWith('/list') ? { paddingTop: '85px' } : { paddingTop: '0' }
+      }
       key={path}
     >
       {panel}

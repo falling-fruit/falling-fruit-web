@@ -14,7 +14,7 @@ const ENTRY_IMAGE_HEIGHT = 250
 
 const INITIAL_IMAGE_HEIGHT_SCALAR = 0.6
 
-const FOOTER_HEIGHT = 70
+const FOOTER_HEIGHT = 50
 
 const BUTTON_HEIGHT = 80
 
@@ -23,7 +23,7 @@ const Container = styled.div`
   height: 100%;
   overflow: hidden;
   width: 100%;
-  bottom: 70px;
+  bottom: 50px;
   left: 0;
 
   .pane {
@@ -96,7 +96,6 @@ const Backdrop = styled.div`
 const EntryDrawer = ({
   locationData,
   reviews,
-  showEntryImages,
   isLoading,
   entryOverview,
   entryReviews,
@@ -105,6 +104,7 @@ const EntryDrawer = ({
   const cardRef = useRef()
   const [drawer, setDrawer] = useState()
   const [isFullScreen, setIsFullScreen] = useState(false)
+  const showEntryImages = reviews && reviews[0]?.photos.length > 0
 
   // TODO: Resizing the screen without refresh will break the drawer
   const { height: windowHeight } = useWindowSize()

@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom'
 
 import { updateEntryLocation } from '../../redux/mapSlice'
 import { getLocationById } from '../../utils/api'
-import Entry from './Entry'
+// import Entry from './Entry'
 import EntryDrawer from './EntryDrawer'
+import EntryList from './EntryList'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 
@@ -49,13 +50,10 @@ const EntryWrapper = ({ isInDrawer }) => {
     />
   )
 
-  const showEntryImages = reviews && reviews[0]?.photos.length > 0
-
-  const EntryComponent = isInDrawer ? EntryDrawer : Entry
+  const EntryComponent = isInDrawer ? EntryDrawer : EntryList
 
   return (
     <EntryComponent
-      showEntryImages={showEntryImages}
       isLightboxOpen={isLightboxOpen}
       setIsLightboxOpen={setIsLightboxOpen}
       lightboxIndex={lightboxIndex}

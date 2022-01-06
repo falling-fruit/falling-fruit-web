@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 
-import EntryNav from '../entry/EntryNav'
+// import EntryNav from '../entry/EntryNav'
 import LocationNav from '../form/LocationNav'
 import Search from '../search/Search'
 import TopBar from '../ui/TopBar'
@@ -14,9 +14,9 @@ const TopBarSwitch = () => (
       </TopBar>
     </Route>
     <Route path="/list/entry/:id">
-      <TopBar rectangular>
+      {/* <TopBar rectangular>
         <EntryNav />
-      </TopBar>
+      </TopBar> */}
     </Route>
     <Route>
       <TopBar>

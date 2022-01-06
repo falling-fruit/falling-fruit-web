@@ -54,7 +54,7 @@ const SummaryRow = ({ title, scores, total }) => {
     <tr>
       <td>{title}</td>
       <td>
-        {scores.length > 0 ? aggregateScore : <>&mdash;</>}
+        {scores.length > 0 ? aggregateScore.toFixed(1) : <>&mdash;</>}
         <small>/{total}</small>
         {icon}
       </td>
