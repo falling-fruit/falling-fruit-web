@@ -22,7 +22,7 @@ const LocationNav = () => {
           title="New Location"
         />
       </Route>
-      <Route path="/map/entry/new">
+      <Route>
         <TopBarNav
           left={
             <Instructions>Choose a location for your new entry.</Instructions>

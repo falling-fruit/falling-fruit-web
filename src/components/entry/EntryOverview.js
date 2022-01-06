@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { enableStreetView } from '../../redux/mapSlice'
+import { setStreetView, zoomIn } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { hasSeasonality } from '../../utils/locationInfo'
@@ -82,8 +82,12 @@ const EntryOverview = ({ locationData, className }) => {
   const { t } = useTranslation()
 
   const handleAddressClick = () => {
-    history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
-    // Disabling zoom in for now
+    dispatch(
+      zoomIn({
+        lat: locationData.lat,
+        lng: locationData.lng,
+      }),
+    )
   }
 
   const handleStreetView = () => {
@@ -92,19 +96,7 @@ const EntryOverview = ({ locationData, className }) => {
     }
 
     // TODO: change setTimeout to make it wait for map component to mount
-    setTimeout(
-      () =>
-        dispatch(
-          enableStreetView({
-            streetView: !currentStreetView,
-            location: {
-              lat: locationData.lat,
-              lng: locationData.lng,
-            },
-          }),
-        ),
-      200,
-    )
+    setTimeout(() => dispatch(setStreetView(!currentStreetView)), 200)
   }
 
   return (
@@ -133,7 +125,7 @@ const EntryOverview = ({ locationData, className }) => {
             </IconBesideText>
             <IconBesideText bold onClick={handleStreetView}>
               <StreetView size={20} />
-              <p> Google Street View</p>
+              <p>Google Street View</p>
             </IconBesideText>
             {hasSeasonality(locationData) && (
               <IconBesideText>

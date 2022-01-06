@@ -8,13 +8,13 @@ import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 
 /**
- * Default view state of the map.
+ * Initial view state of the map.
  * @constant {Object}
  * @property {number[]} center - The latitude and longitude of the map's center
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const DEFAULT_VIEW_STATE = parseUrl()
+const { isDefaultView, ...initialView } = parseUrl()
 
 const TRACKING_LOCATION_ZOOM = 16
 
@@ -47,7 +47,8 @@ export const fetchMapClusters = createAsyncThunk(
 export const mapSlice = createSlice({
   name: 'map',
   initialState: {
-    view: DEFAULT_VIEW_STATE,
+    view: initialView,
+    isDefaultView,
     oldView: null,
     isLoading: false,
     locations: [],
@@ -65,6 +66,24 @@ export const mapSlice = createSlice({
     // this should be called viewChange
     viewChange: setReducer('view'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
+    setStreetView: setReducer('streetView'),
+
+    updateEntryLocation: (state, action) => {
+      state.location = action.payload
+
+      if (state.isDefaultView) {
+        const { lat, lng } = state.location
+
+        state.isDefaultView = false
+        state.view = {
+          center: {
+            lat,
+            lng,
+          },
+          zoom: 16,
+        }
+      }
+    },
 
     startTrackingLocation: (state) => {
       state.locationRequested = true
@@ -122,7 +141,7 @@ export const mapSlice = createSlice({
     zoomIn: (state, action) => {
       state.view = {
         center: action.payload,
-        zoom: 16,
+        zoom: Math.max(16, state.view.zoom),
       }
     },
     clusterClick: (state, action) => {
@@ -130,12 +149,6 @@ export const mapSlice = createSlice({
         center: action.payload,
         zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
       }
-    },
-    enableStreetView: (state, action) => {
-      if (action.payload.location) {
-        state.location = action.payload.location
-      }
-      state.streetView = action.payload.streetView
     },
   },
   extraReducers: {
@@ -184,10 +197,11 @@ export const {
   clusterClick,
   viewChange,
   setHoveredLocationId,
+  updateEntryLocation,
   startTrackingLocation,
   stopTrackingLocation,
   geolocationChange,
-  enableStreetView,
+  setStreetView,
 } = mapSlice.actions
 
 export default mapSlice.reducer

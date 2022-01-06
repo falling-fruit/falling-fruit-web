@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
+import { updateEntryLocation } from '../../redux/mapSlice'
 import { getLocationById } from '../../utils/api'
 import Entry from './Entry'
 import EntryDrawer from './EntryDrawer'
@@ -8,7 +10,9 @@ import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 
 const EntryWrapper = ({ isInDrawer }) => {
-  const [locationData, setLocationData] = useState()
+  const locationData = useSelector((state) => state.map.location)
+  const dispatch = useDispatch()
+
   const [reviews, setReviews] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
@@ -20,14 +24,14 @@ const EntryWrapper = ({ isInDrawer }) => {
       setIsLoading(true)
 
       const locationData = await getLocationById(id, 'reviews')
-      setLocationData(locationData)
+      dispatch(updateEntryLocation(locationData))
       setReviews(locationData.reviews)
 
       setIsLoading(false)
     }
 
     fetchEntryData()
-  }, [id])
+  }, [id, dispatch])
 
   const addSubmittedReview = (submittedReview) => {
     setReviews((reviews) => [...reviews, submittedReview])
