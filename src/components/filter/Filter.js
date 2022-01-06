@@ -94,27 +94,25 @@ const Filter = ({ isOpen }) => {
     scientificNameById,
   } = filters
 
-  const treeDataWithUpdatedCounts = useMemo(() => {
-    console.log('updatedCounts')
-    console.time('updateTreeCounts')
-    const result = updateTreeCounts(
+  const treeDataWithUpdatedCounts = useMemo(
+    () =>
+      updateTreeCounts(
+        treeData,
+        showScientificNames,
+        countsById,
+        showOnlyOnMap,
+        childrenById,
+        scientificNameById,
+      ),
+    [
       treeData,
       showScientificNames,
       countsById,
       showOnlyOnMap,
       childrenById,
       scientificNameById,
-    )
-    console.timeEnd('updateTreeCounts')
-    return result
-  }, [
-    treeData,
-    showScientificNames,
-    countsById,
-    showOnlyOnMap,
-    childrenById,
-    scientificNameById,
-  ])
+    ],
+  )
 
   const { t } = useTranslation()
   return isOpen ? (
