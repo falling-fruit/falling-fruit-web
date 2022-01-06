@@ -1,7 +1,6 @@
 import { useField } from 'formik'
-import { forwardRef } from 'react'
-import Reaptcha from 'reaptcha'
 
+import { PhotoUploader } from '../photo/PhotoUploader'
 import Checkbox from '../ui/Checkbox'
 import Input from '../ui/Input'
 import RatingInput from '../ui/RatingInput'
@@ -10,10 +9,16 @@ import { Slider } from '../ui/Slider'
 import Textarea from '../ui/Textarea'
 import { withLabeledField } from './withLabeledField'
 
+const DateInput = ({ $invalid: _$invalid, ...props }) => (
+  <input type="date" {...props} />
+)
+
 const FormikInput = withLabeledField(Input)
 const FormikTextarea = withLabeledField(Textarea)
+const FormikDateInput = withLabeledField(DateInput)
 const FormikSlider = withLabeledField(Slider, undefined, true)
 const FormikSelect = withLabeledField(Select, undefined, true)
+const FormikPhotoUploader = withLabeledField(PhotoUploader, undefined, true)
 
 const FormikRatingInput = ({ name, ...props }) => {
   const [{ value }] = useField(name)
@@ -32,35 +37,12 @@ const FormikCheckbox = ({ name, ...props }) => {
   )
 }
 
-const FormikRecaptcha = ({ name, ...props }) => {
-  const [, , helpers] = useField(name)
-
-  return <Reaptcha onVerify={helpers.setValue} {...props} />
-}
-
-const FormikFileUpload = forwardRef(({ name, ...props }, ref) => {
-  const [, , helpers] = useField(name)
-
-  return (
-    <input
-      ref={ref}
-      name={name}
-      type="file"
-      onChange={(event) => {
-        helpers.setValue(event.currentTarget.files[0])
-      }}
-      {...props}
-    />
-  )
-})
-FormikFileUpload.displayName = 'FormikFileUpload'
-
 export {
   FormikCheckbox as Checkbox,
-  FormikFileUpload as FileUpload,
+  FormikDateInput as DateInput,
   FormikInput as Input,
+  FormikPhotoUploader as PhotoUploader,
   FormikRatingInput as RatingInput,
-  FormikRecaptcha as Recaptcha,
   FormikSelect as Select,
   FormikSlider as Slider,
   FormikTextarea as Textarea,

@@ -69,7 +69,9 @@ const LoginPage = () => {
           </FormCheckboxWrapper>
 
           <FormButtonWrapper>
-            <Button type="submit">Login</Button>
+            <Button disabled={isLoading} type="submit">
+              {isLoading ? 'Logging in' : 'Login'}
+            </Button>
           </FormButtonWrapper>
         </Form>
       </Formik>

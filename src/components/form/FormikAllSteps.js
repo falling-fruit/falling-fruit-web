@@ -15,14 +15,14 @@ const mergeSchemas = (...schemas) => {
 const FormikAllSteps = ({ children, renderButtons, ...props }) => (
   <Formik
     validationSchema={mergeSchemas(
-      ...children.map((step) => step.props.validationSchema),
+      ...children.map((step) => step.props?.validationSchema),
     )}
     {...props}
   >
-    {({ dirty, isValid, isSubmitting }) => (
+    {(formikProps) => (
       <Form>
         {children}
-        {renderButtons({ dirty, isValid, isSubmitting })}
+        {renderButtons(formikProps)}
       </Form>
     )}
   </Formik>

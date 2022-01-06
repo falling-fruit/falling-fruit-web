@@ -100,7 +100,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   }
 
   dispatch(viewChange(newView))
-  dispatch(fetchLocations())
+  dispatch(fetchLocations()) // TODO: don't fetch new locations if is adding location
 
   if (state.filter.isOpen || state.misc.isDesktop) {
     dispatch(fetchFilterCounts())

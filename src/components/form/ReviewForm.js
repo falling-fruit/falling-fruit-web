@@ -1,44 +1,81 @@
-import { useFormikContext } from 'formik'
-import { useMemo, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import styled from 'styled-components/macro'
+import { toast } from 'react-toastify'
 
 import { addReview } from '../../utils/api'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
+import { isEveryPhotoUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
-import ImagePreview from '../ui/ImagePreview'
-import Label from '../ui/Label'
 import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
-import { FileUpload, RatingInput, Select, Textarea } from './FormikWrappers'
+import {
+  DateInput,
+  PhotoUploader,
+  RatingInput,
+  Select,
+  Textarea,
+} from './FormikWrappers'
+import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 export const INITIAL_REVIEW_VALUES = {
   review: {
+    photos: [],
     comment: '',
+    observed_on: '',
     fruiting: 0,
     quality_rating: 0,
     yield_rating: 0,
   },
 }
 
-export const isValidReview = (review) =>
-  review.comment ||
-  (review.fruiting?.value ?? 0) !== 0 ||
-  Number(review.quality_rating) !== 0 ||
-  Number(review.yield_rating) !== 0
+export const isEmptyReview = (review) => {
+  const r = formatReviewValues(review)
+  return (
+    !r.comment &&
+    !r.observed_on &&
+    r.fruiting === 0 &&
+    r.quality_rating === 0 &&
+    r.yield_rating === 0 &&
+    r.photo_ids.length === 0
+  )
+}
 
-const WideButton = styled(Button).attrs({
-  secondary: true,
-})`
-  width: 100%;
-  height: 46px;
-  border-width: 1px;
-  font-weight: normal;
+export const validateReview = (review) => {
+  if (isEmptyReview(review)) {
+    return {
+      review: { comment: true },
+    }
+  }
 
-  margin-bottom: 24px;
-`
+  if (!isEveryPhotoUploaded(review.photos)) {
+    return {
+      review: { photos: true },
+    }
+  }
+
+  const r = formatReviewValues(review)
+  if (r.fruiting !== 0 && r.observed_on === '') {
+    return {
+      review: { observed_on: true },
+    }
+  }
+
+  return null
+}
+
+export const formatReviewValues = (review) => {
+  const formattedReview = {
+    ...review,
+    fruiting: review.fruiting?.value ?? 0,
+    quality_rating: Number(review.quality_rating),
+    yield_rating: Number(review.yield_rating),
+    photo_ids: review.photos.map((photo) => photo.id),
+  }
+  delete formattedReview.photos
+  return formattedReview
+}
 
 export const ReviewStep = ({ standalone }) => (
   <>
@@ -46,7 +83,13 @@ export const ReviewStep = ({ standalone }) => (
       Leave a Review
       {!standalone && <Optional />}
     </SectionHeading>
-    <Textarea name="review.comment" placeholder="Lorem ipsum..." />
+
+    <Textarea
+      name="review.comment"
+      placeholder="Updates, access issues, plant health..."
+    />
+
+    <DateInput name="review.observed_on" label="Observed On" />
 
     <Select
       label="Fruiting Status"
@@ -76,84 +119,54 @@ export const ReviewStep = ({ standalone }) => (
   </>
 )
 
-export const ReviewPhotoStep = () => {
-  const fileUploadRef = useRef()
-  // TODO: instead of doing this... just wrap both the file upload and the caption inputs in a new Formik field
-  const {
-    values: { photo },
-    setFieldValue,
-  } = useFormikContext()
-
-  const imagePreview = useMemo(
-    () =>
-      photo && (
-        <ImagePreview
-          onDelete={() => {
-            fileUploadRef.current.value = ''
-            setFieldValue('photo', null)
-          }}
-        >
-          <img src={URL.createObjectURL(photo)} alt="Upload preview" />
-        </ImagePreview>
-      ),
-    [photo, setFieldValue],
-  )
-
-  return (
-    <>
-      <Label>
-        Upload Images
-        <Optional />
-      </Label>
-      <WideButton type="button" onClick={() => fileUploadRef.current.click()}>
-        Take or Upload Photo
-      </WideButton>
-      <FileUpload
-        name="review.photo"
-        style={{ display: 'none' }}
-        ref={fileUploadRef}
-      />
-      {imagePreview}
-    </>
-  )
-}
+export const ReviewPhotoStep = () => (
+  <PhotoUploader name="review.photos" label="Upload Images" optional />
+)
 
 export const ReviewForm = ({ onSubmit }) => {
   const { id: locationId } = useParams()
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
 
-  const handleSubmit = async ({ review }, { resetForm }) => {
-    const { fruiting, quality_rating, yield_rating, comment } = review
-
+  const handleSubmit = async (
+    { 'g-recaptcha-response': recaptcha, review },
+    { resetForm },
+  ) => {
     const reviewValues = {
-      fruiting: fruiting?.value ?? 0,
-      quality_rating: Number(quality_rating),
-      yield_rating: Number(yield_rating),
-      comment,
-      author: null,
+      ...formatReviewValues(review),
+      'g-recaptcha-response': recaptcha,
     }
 
-    console.log('reviewValues', reviewValues)
-    const reviewResp = await addReview(locationId, reviewValues)
-    console.log('reviewResp', reviewResp)
-    onSubmit(reviewResp)
-    resetForm()
+    let response
+    try {
+      response = await addReview(locationId, reviewValues)
+      toast.success('Review submitted successfully!')
+    } catch {
+      toast.error('Review submission failed.')
+      console.error(response)
+    }
+
+    if (response && !response.error) {
+      onSubmit(response)
+      resetForm()
+    }
   }
+
+  const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   return (
     <FormikAllSteps
-      onSubmit={handleSubmit}
+      onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
       initialValues={INITIAL_REVIEW_VALUES}
-      validate={({ review }) =>
-        isValidReview(review) ? null : { review: { comment: true } }
-      }
-      renderButtons={({ isSubmitting }) => (
-        <Button disabled={isSubmitting} type="submit">
+      validate={({ review }) => validateReview(review)}
+      renderButtons={({ isSubmitting, isValid }) => (
+        <Button disabled={isSubmitting || !isValid} type="submit">
           {isSubmitting ? 'Publishing' : 'Publish Review'}
         </Button>
       )}
     >
       <ReviewStep standalone />
       <ReviewPhotoStep />
+      {!isLoggedIn && <Recaptcha />}
     </FormikAllSteps>
   )
 }

@@ -156,7 +156,7 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
         <ThumbnailImageContainer>
           {reviewImages[index[0]].map((photo, idx) => (
             <ThumbnailImage
-              $small
+              small
               key={photo.thumb}
               selected={photo.thumb === reviewImages[index[0]][index[1]].thumb}
             >

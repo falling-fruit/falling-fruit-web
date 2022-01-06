@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { PageTemplate } from '../about/PageTemplate'
-import { Input, Recaptcha, Textarea } from '../form/FormikWrappers'
+import { Input, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import { FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
 
@@ -15,6 +15,8 @@ const SignupPage = () => {
   if (!isLoading && user) {
     return <Redirect to={getPathWithMapState('/map')} />
   }
+
+  // TODO: add recaptcha here
 
   return (
     <PageTemplate>
@@ -60,7 +62,6 @@ const SignupPage = () => {
             <Textarea name="description" label="About You " optional />
           </FormInputWrapper>
 
-          <Recaptcha />
           <FormButtonWrapper>
             <Button type="submit">Signup</Button>
           </FormButtonWrapper>
