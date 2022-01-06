@@ -25,11 +25,7 @@ const NavBack = ({ isEntry }) => {
 
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    if (isEntry) {
-      history.go(-1)
-    } else {
-      history.push(getPathWithMapState(state?.fromPage ?? '/map'))
-    }
+    history.push(getPathWithMapState(state?.fromPage ?? '/map'))
   }
 
   return (
