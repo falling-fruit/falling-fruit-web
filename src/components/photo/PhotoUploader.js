@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { addPhoto } from '../../utils/api'
 import { PhotoOrganizer } from './PhotoOrganizer'
 
-export const arePhotosUploaded = (photos) =>
+export const isEveryPhotoUploaded = (photos) =>
   photos.every((photo) => !photo.isUploading)
 
 export const PhotoUploader = ({ value, onChange }) => {

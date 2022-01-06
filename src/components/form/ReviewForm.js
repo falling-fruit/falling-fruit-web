@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import { addReview } from '../../utils/api'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
-import { arePhotosUploaded } from '../photo/PhotoUploader'
+import { isEveryPhotoUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
@@ -49,7 +49,7 @@ export const validateReview = (review) => {
     }
   }
 
-  if (!arePhotosUploaded(review.photos)) {
+  if (!isEveryPhotoUploaded(review.photos)) {
     return {
       review: { photos: true },
     }
