@@ -7,7 +7,6 @@ import styled from 'styled-components/macro'
 import { fetchListLocations, setUpdateOnMapMove } from '../../redux/listSlice'
 import { setHoveredLocationId } from '../../redux/mapSlice'
 import { getIsShowingClusters } from '../../redux/viewChange'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
@@ -63,7 +62,7 @@ const PagedList = () => {
 
   const handleEntryClick = (id) => {
     history.push({
-      pathname: getPathWithMapState(`/list/entry/${id}`),
+      pathname: `/list/entry/${id}`,
       state: { fromPage: '/list' },
     })
     dispatch(setHoveredLocationId(null))

@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 
-import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { ReviewForm } from '../form/ReviewForm'
 import { TextContent } from './Entry'
@@ -30,7 +29,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
           onImageClick={(imageIndex) => onImageClick(review.index, imageIndex)}
           onEditClick={() =>
             history.push({
-              pathname: getPathWithMapState(`/review/${review.id}/edit`),
+              pathname: `/review/${review.id}/edit`,
               state: {
                 fromPage: history.location.pathname,
               },

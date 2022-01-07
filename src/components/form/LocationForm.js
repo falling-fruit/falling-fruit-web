@@ -7,7 +7,6 @@ import styled from 'styled-components/macro'
 import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
@@ -239,7 +238,7 @@ export const LocationForm = ({
     </Step>
   ))
 
-  onSubmit = onSubmit ?? (() => history.push(getPathWithMapState('/map')))
+  onSubmit = onSubmit ?? (() => history.push('/map'))
   const handleSubmit = async ({
     'g-recaptcha-response': recaptcha,
     review,
@@ -298,9 +297,7 @@ export const LocationForm = ({
             <Button
               secondary
               type="button"
-              onClick={() =>
-                history.push(getPathWithMapState(state?.fromPage ?? '/map'))
-              }
+              onClick={() => history.push(state?.fromPage ?? '/map')}
             >
               Cancel
             </Button>

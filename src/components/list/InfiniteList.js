@@ -1,6 +1,5 @@
 import InfiniteLoader from 'react-window-infinite-loader'
 
-import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import EntryList from './EntryList'
 
@@ -21,7 +20,7 @@ const InfiniteList = ({
 
   const handleEntryClick = (id) => {
     history.push({
-      pathname: getPathWithMapState(`/list/entry/${id}`),
+      pathname: `/list/entry/${id}`,
       state: { fromPage: '/list' },
     })
   }

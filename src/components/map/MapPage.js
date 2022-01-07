@@ -12,7 +12,6 @@ import {
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
@@ -59,13 +58,13 @@ const MapPage = ({ isDesktop }) => {
 
   const handleLocationClick = (location) => {
     history.push({
-      pathname: getPathWithMapState(`/map/entry/${location.id}`),
+      pathname: `/map/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
   }
 
   const handleAddLocationClick = () => {
-    history.push(getPathWithMapState('/map/entry/new'))
+    history.push('/map/entry/new')
   }
 
   return (

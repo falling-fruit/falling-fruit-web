@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { matchPath, useLocation } from 'react-router-dom'
 
-import { getPathWithMapState } from './getInitialUrl'
 import { useAppHistory } from './useAppHistory'
 
 /**
@@ -39,15 +38,11 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
         strict: false,
       })
     ) {
-      history.push(getPathWithMapState(tabPaths[tabIndex]))
+      history.push(tabPaths[tabIndex])
     } else {
       // otherwise push new shallow while keeping deep link
       const segments = pathname.split('/')
-      history.push(
-        getPathWithMapState(
-          [tabPaths[tabIndex], ...segments.splice(2)].join('/'),
-        ),
-      )
+      history.push([tabPaths[tabIndex], ...segments.splice(2)].join('/'))
     }
   }
 

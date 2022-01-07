@@ -8,7 +8,6 @@ import styled from 'styled-components/macro'
 
 import { setStreetView, zoomIn } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -93,7 +92,7 @@ const EntryOverview = ({ locationData, className }) => {
 
   const handleStreetView = () => {
     if (!isDesktop) {
-      history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
+      history.push(`/map/entry/${locationData.id}`)
     }
 
     // TODO: change setTimeout to make it wait for map component to mount
