@@ -1,18 +1,60 @@
 import { Search as SearchIcon } from '@styled-icons/boxicons-regular'
 import React from 'react'
+import styled from 'styled-components/macro'
 
 import harvestData from '../../constants/data/harvest.json'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
 import { FORMATTERS } from './DataTableProperties'
 
+const OrganizationLink = styled.a`
+  ${({ $isActive }) =>
+    !$isActive &&
+    `
+  text-decoration: line-through;
+`}
+`
+
+const FormattedOrganization = ({
+  name,
+  name_url,
+  subname,
+  subname_url,
+  active,
+}) => (
+  <>
+    {name_url ? (
+      <OrganizationLink
+        $isActive={active}
+        href={name_url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {name}
+      </OrganizationLink>
+    ) : (
+      name
+    )}
+    {subname &&
+      (subname_url ? (
+        <a href={subname_url} target="_blank" rel="noreferrer">
+          {' '}
+          ({subname})
+        </a>
+      ) : (
+        <> ({subname})</>
+      ))}
+  </>
+)
+
 const columns = [
   {
     id: 'name',
-    name: 'Name',
+    name: 'Organization Name',
     selector: (row) => row.name,
     sortable: true,
     grow: 2,
+    format: FormattedOrganization,
   },
   {
     id: 'country',
@@ -26,12 +68,6 @@ const columns = [
     selector: (row) => row.state + row.city,
     sortable: true,
     format: FORMATTERS.location,
-  },
-  {
-    id: 'link',
-    name: 'Organization Link',
-    selector: (row) => row.name_url,
-    format: ({ name_url: url }) => FORMATTERS.link({ url }),
   },
   {
     id: 'social',
