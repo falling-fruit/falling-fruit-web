@@ -15,6 +15,7 @@ const OrganizationLink = styled.a`
 `}
 `
 
+// TODO: Consider updating organization name formatting
 const FormattedOrganization = ({
   name,
   name_url,
