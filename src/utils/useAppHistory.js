@@ -1,3 +1,5 @@
+import { useHistory } from 'react-router-dom'
+
 import { getPathWithMapState } from './getInitialUrl'
 
 /**
@@ -5,12 +7,13 @@ import { getPathWithMapState } from './getInitialUrl'
  * map state in URL.
  */
 export const useAppHistory = () => {
-  const history = useAppHistory()
+  const history = useHistory()
 
   const pushWithMapState = (to, state) => {
+    console.log(to, state)
     let newTo
     if (typeof to === 'string') {
-      newTo = getPathWithMapState(newTo)
+      newTo = getPathWithMapState(to)
     } else {
       newTo = { ...to }
       if (to.pathname != null) {
@@ -21,9 +24,7 @@ export const useAppHistory = () => {
     history.push(newTo, state)
   }
 
-  history.push = pushWithMapState
-
-  return history
+  return { ...history, push: pushWithMapState }
 }
 
 // TODO: create a history listener/context for consistent back navigation?
