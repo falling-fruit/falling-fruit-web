@@ -55,13 +55,14 @@ async function getAndWriteData(
   formatters = [],
 ) {
   const { data } = await axios.get(url)
-  let processed = data.map(substituteBy(substitutions)).filter(isIncluded)
+  const processed = data.map(substituteBy(substitutions)).filter(isIncluded)
 
-  formatters.forEach((formatter) => {
-    processed = formatter(processed)
-  })
+  const formatted = formatters.reduce(
+    (unformatted, formatter) => formatter(unformatted),
+    processed,
+  )
 
-  const fileData = JSON.stringify(processed)
+  const fileData = JSON.stringify(formatted)
   fs.writeFile(output, fileData, (e) => {
     if (e) {
       throw e
