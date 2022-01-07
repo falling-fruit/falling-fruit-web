@@ -4,6 +4,7 @@ import { AboutDatasetPage } from './AboutDatasetPage'
 import ImportedDatasetsPage from './ImportedDatasetsPage'
 import InThePressPage from './InThePressPage'
 import ProjectPage from './ProjectPage'
+import ShareTheHarvestPage from './ShareTheHarvestPage'
 
 const pages = [
   {
@@ -21,6 +22,10 @@ const pages = [
   {
     path: '/about/press',
     component: InThePressPage,
+  },
+  {
+    path: '/about/share',
+    component: ShareTheHarvestPage,
   },
 ]
 
