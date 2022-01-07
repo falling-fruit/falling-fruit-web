@@ -7,7 +7,7 @@ if (!BASE_URL || !OUTPUT_DIR) {
   process.exit(1)
 }
 
-const GENERIC_SUBSTITIONS = {
+const GENERAL_SUBSTITUTIONS = {
   '': null,
   FALSE: false,
   TRUE: true,
@@ -19,6 +19,7 @@ const PRESS_OUTPUT = `${OUTPUT_DIR}/press.json`
 const HARVEST_URL = `${BASE_URL}/organizations`
 const HARVEST_OUTPUT = `${OUTPUT_DIR}/harvest.json`
 const HARVEST_SUBSTITUTIONS = {
+  ...GENERAL_SUBSTITUTIONS,
   '-': null,
 }
 
@@ -69,8 +70,5 @@ async function getAndWriteData(
   })
 }
 
-getAndWriteData(PRESS_URL, PRESS_OUTPUT, GENERIC_SUBSTITIONS, [getDataByYear])
-getAndWriteData(HARVEST_URL, HARVEST_OUTPUT, {
-  ...GENERIC_SUBSTITIONS,
-  ...HARVEST_SUBSTITUTIONS,
-})
+getAndWriteData(PRESS_URL, PRESS_OUTPUT, GENERAL_SUBSTITUTIONS, [getDataByYear])
+getAndWriteData(HARVEST_URL, HARVEST_OUTPUT, HARVEST_SUBSTITUTIONS)
