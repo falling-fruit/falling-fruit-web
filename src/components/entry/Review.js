@@ -78,6 +78,7 @@ export const StyledImagePreview = styled(ImagePreview)`
 const Review = ({
   review,
   onImageClick,
+  onEditClick,
   includePreview = true,
   editable = false,
 }) => (
@@ -85,7 +86,7 @@ const Review = ({
     {editable && (
       <EditableHeader>
         You reviewed this location on {formatISOString(review.created_at)}{' '}
-        <ResetButton>
+        <ResetButton onClick={onEditClick}>
           <PencilIcon height={14} /> Update or delete this review.
         </ResetButton>
       </EditableHeader>

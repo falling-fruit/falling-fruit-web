@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import pressData from '../../constants/press_data.json'
+import pressData from '../../constants/data/press.json'
 import { MONTH_LABELS } from '../form/LocationForm'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 

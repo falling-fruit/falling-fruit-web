@@ -67,7 +67,7 @@ const MobileLayout = () => {
           {aboutRoutes}
           {authRoutes}
           <Route path="/map/entry/new/details">
-            <LocationForm />
+            <LocationForm stepped />
           </Route>
           <Route path="/list/entry/:id">
             <EntryWrapper />

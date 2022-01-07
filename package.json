@@ -72,11 +72,11 @@
     "format": "yarn format:output --write",
     "format:check": "yarn format:output --check",
     "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
-    "build": "yarn genPressData && react-scripts build",
+    "build": "yarn genData && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/main/docs/openapi.yml --output src/utils/apiSchema.ts",
-    "genPressData": "node genPressData.js https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg/press src/constants/press_data.json"
+    "genData": "node scripts/data.js https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg src/constants/data"
   },
   "browserslist": {
     "production": [

@@ -22,6 +22,7 @@ const StyledProgressBar = styled(ProgressBar)`
 `
 
 export const ProgressButtons = styled.div`
+  margin-top: 16px;
   margin-bottom: 16px;
   text-align: center;
 
