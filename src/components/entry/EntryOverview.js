@@ -1,4 +1,4 @@
-import { Calendar, StreetView } from '@styled-icons/boxicons-regular'
+import { Calendar, Pencil, StreetView } from '@styled-icons/boxicons-regular'
 import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -67,7 +67,7 @@ const Description = styled.section`
   }
 
   button {
-    margin-right: 14px;
+    margin-right: 10px;
   }
 `
 
@@ -164,6 +164,13 @@ const EntryOverview = ({ locationData, className }) => {
                 onClick={() => setIsReportModalOpen(true)}
               >
                 Report
+              </Button>
+              <Button
+                leftIcon={<Pencil />}
+                secondary
+                onClick={() => history.push(`/entry/${locationData.id}/edit`)}
+              >
+                Edit
               </Button>
             </div>
           </Description>
