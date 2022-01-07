@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router-dom'
 import InfiniteLoader from 'react-window-infinite-loader'
 
 import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import EntryList from './EntryList'
 
 const InfiniteList = ({
@@ -12,7 +12,7 @@ const InfiniteList = ({
   height,
   width,
 }) => {
-  const history = useHistory()
+  const history = useAppHistory()
 
   // eslint-disable-next-line no-empty-function
   const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage

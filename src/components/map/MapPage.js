@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import {
@@ -13,6 +13,7 @@ import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
 import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -27,7 +28,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 `
 
 const MapPage = ({ isDesktop }) => {
-  const history = useHistory()
+  const history = useAppHistory()
   const match = useRouteMatch({
     path: '/(map|list)/entry/:entryId/:geocoord?',
     exact: true,

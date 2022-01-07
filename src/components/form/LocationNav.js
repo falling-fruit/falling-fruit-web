@@ -1,8 +1,9 @@
 import { Check, X } from '@styled-icons/boxicons-regular'
-import { Route, Switch, useHistory } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import TopBarNav from '../ui/TopBarNav'
@@ -12,7 +13,7 @@ const Instructions = styled.span`
 `
 
 const LocationNav = () => {
-  const history = useHistory()
+  const history = useAppHistory()
 
   return (
     <Switch>

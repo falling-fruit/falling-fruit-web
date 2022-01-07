@@ -2,9 +2,9 @@ import { useWindowSize } from '@reach/window-size'
 import { ArrowBack as ArrowBackIcon } from '@styled-icons/boxicons-regular'
 import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
 import { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { useAppHistory } from '../../utils/useAppHistory'
 import IconButton from '../ui/IconButton'
 import Card from './Card'
 import Carousel from './Carousel'
@@ -101,7 +101,7 @@ const EntryDrawer = ({
   entryOverview,
   entryReviews,
 }) => {
-  const history = useHistory()
+  const history = useAppHistory()
   const cardRef = useRef()
   const [drawer, setDrawer] = useState()
   const [isFullScreen, setIsFullScreen] = useState(false)

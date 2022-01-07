@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
@@ -8,6 +8,7 @@ import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -204,7 +205,7 @@ export const LocationForm = ({
   stepped,
 }) => {
   // TODO: create a "going back" util
-  const history = useHistory()
+  const history = useAppHistory()
   const { state } = useLocation()
   const { typesById } = useTypesById()
 

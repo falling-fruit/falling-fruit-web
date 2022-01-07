@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { matchPath, useHistory, useLocation } from 'react-router-dom'
+import { matchPath, useLocation } from 'react-router-dom'
 
 import { getPathWithMapState } from './getInitialUrl'
+import { useAppHistory } from './useAppHistory'
 
 /**
  * Hook to get and set the current tab, while updating the URL location on tab change.
@@ -11,7 +12,7 @@ import { getPathWithMapState } from './getInitialUrl'
  */
 const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
   const { pathname } = useLocation()
-  const history = useHistory()
+  const history = useAppHistory()
 
   const [tabIndex, setTabIndex] = useState(defaultTabIndex)
 

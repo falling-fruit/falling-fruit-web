@@ -1,12 +1,13 @@
 import { Map, Pencil } from '@styled-icons/boxicons-solid'
-import { useHistory, useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import IconButton from '../ui/IconButton'
 import TopBarNav from '../ui/TopBarNav'
 
 const EntryNav = () => {
-  const history = useHistory()
+  const history = useAppHistory()
   const { state } = useLocation()
   const { id } = useParams()
 
