@@ -1,14 +1,13 @@
 import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
 import { debounce } from 'debounce'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import styled from 'styled-components/macro'
 
 import { fetchListLocations, setUpdateOnMapMove } from '../../redux/listSlice'
 import { setHoveredLocationId } from '../../redux/mapSlice'
 import { getIsShowingClusters } from '../../redux/viewChange'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
@@ -47,7 +46,7 @@ const PageNav = styled.div`
 `
 
 const PagedList = () => {
-  const history = useHistory()
+  const history = useAppHistory()
 
   const dispatch = useDispatch()
   const offset = useSelector((state) => state.list.offset)
@@ -63,7 +62,7 @@ const PagedList = () => {
 
   const handleEntryClick = (id) => {
     history.push({
-      pathname: getPathWithMapState(`/list/entry/${id}`),
+      pathname: `/list/entry/${id}`,
       state: { fromPage: '/list' },
     })
     dispatch(setHoveredLocationId(null))

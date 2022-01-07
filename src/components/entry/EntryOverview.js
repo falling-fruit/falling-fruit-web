@@ -3,13 +3,13 @@ import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { setStreetView, zoomIn } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { hasSeasonality } from '../../utils/locationInfo'
+import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
@@ -74,7 +74,7 @@ const Description = styled.section`
 const EntryOverview = ({ locationData, className }) => {
   const isDesktop = useIsDesktop()
   const { getLocationTypes } = useTypesById()
-  const history = useHistory()
+  const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const dispatch = useDispatch()
   const currentStreetView = useSelector((state) => state.map.streetView)
@@ -92,7 +92,7 @@ const EntryOverview = ({ locationData, className }) => {
 
   const handleStreetView = () => {
     if (!isDesktop) {
-      history.push(getPathWithMapState(`/map/entry/${locationData.id}`))
+      history.push(`/map/entry/${locationData.id}`)
     }
 
     // TODO: change setTimeout to make it wait for map component to mount
