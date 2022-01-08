@@ -1,17 +1,14 @@
-import { Form, Formik } from 'formik'
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import * as Yup from 'yup'
 
 import { requestResetPassword } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
-import { Input, Recaptcha } from '../form/FormikWrappers'
-import Button from '../ui/Button'
-import { Column, FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
+import { Column } from './AuthWrappers'
+import { EmailForm } from './EmailForm'
 
 const PasswordResetPage = () => {
   const history = useAppHistory()
@@ -41,40 +38,7 @@ const PasswordResetPage = () => {
   return (
     <PageTemplate>
       <h1>Send password reset instructions</h1>
-      <Formik
-        initialValues={{
-          email: '',
-        }}
-        validationSchema={Yup.object({
-          email: Yup.string().email().required(),
-          'g-recaptcha-response': Yup.string().required(),
-        })}
-        onSubmit={handleSubmit}
-      >
-        {({ dirty, isValid, isSubmitting }) => (
-          <Form>
-            <FormInputWrapper>
-              <Input type="text" name="email" label="Email" />
-            </FormInputWrapper>
-
-            <Recaptcha
-              name="g-recaptcha-response"
-              ref={(e) => {
-                recaptchaRef.current = e
-              }}
-            />
-
-            <FormButtonWrapper>
-              <Button
-                disabled={!dirty || !isValid || isSubmitting}
-                type="submit"
-              >
-                {isSubmitting ? 'Sending' : 'Send'}
-              </Button>
-            </FormButtonWrapper>
-          </Form>
-        )}
-      </Formik>
+      <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign up</Link>
