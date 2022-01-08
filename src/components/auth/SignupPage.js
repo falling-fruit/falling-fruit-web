@@ -63,7 +63,7 @@ const SignupPage = () => {
         })}
         onSubmit={handleSubmit}
       >
-        {({ isValid, isSubmitting }) => (
+        {({ dirty, isValid, isSubmitting }) => (
           <Form>
             <FormInputWrapper>
               <Input type="text" name="email" label="Email" />
@@ -92,7 +92,10 @@ const SignupPage = () => {
               <Button secondary type="reset">
                 Clear
               </Button>
-              <Button type="submit" disabled={!isValid || isSubmitting}>
+              <Button
+                type="submit"
+                disabled={!dirty || !isValid || isSubmitting}
+              >
                 {isSubmitting ? 'Signing up' : 'Sign up'}
               </Button>
             </FormButtonWrapper>
