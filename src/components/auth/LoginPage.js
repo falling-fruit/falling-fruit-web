@@ -1,7 +1,6 @@
-import { Form, Formik } from 'formik'
+import { ErrorMessage, Form, Formik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
-import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
@@ -11,20 +10,11 @@ import { Checkbox, Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import {
+  Column,
   FormButtonWrapper,
   FormCheckboxWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
-
-const ErrorMessage = styled.p`
-  color: ${({ theme }) => theme.invalid} !important;
-`
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 1em;
-`
 
 const LoginPage = () => {
   const { user, error, isLoading } = useSelector((state) => state.auth)
@@ -77,8 +67,8 @@ const LoginPage = () => {
       </Formik>
       <Column>
         <Link to="/signup">Sign up</Link>
-        <a href="reset">Reset your password</a>
-        <a href="resend">Resend confirmation instructions</a>
+        <Link to="/reset">Reset your password</Link>
+        <Link to="/resend">Resend confirmation instructions</Link>
       </Column>
     </PageTemplate>
   )
