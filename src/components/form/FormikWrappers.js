@@ -28,6 +28,7 @@ const FormikRecaptcha = ({ name, ...props }) => {
     <Reaptcha
       sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
       onVerify={helpers.setValue}
+      onExpire={() => helpers.setValue(null)}
       {...props}
     />
   )
