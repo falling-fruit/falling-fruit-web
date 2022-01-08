@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 
 import { addUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsMobile } from '../../utils/useBreakpoint'
 import { PageTemplate } from '../about/PageTemplate'
 import { Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
@@ -14,6 +15,7 @@ const formToUser = (form) => ({ ...form, password_confirm: undefined })
 
 const SignupPage = () => {
   const history = useAppHistory()
+  const isMobile = useIsMobile()
 
   const isLoading = useSelector((state) => state.auth.isLoading)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
@@ -81,7 +83,10 @@ const SignupPage = () => {
               <Textarea name="bio" label="About You" optional />
             </FormInputWrapper>
 
-            <Recaptcha name="g-recaptcha-response" size="normal" />
+            <Recaptcha
+              name="g-recaptcha-response"
+              size={isMobile ? 'compact' : 'normal'}
+            />
 
             <FormButtonWrapper>
               <Button secondary type="reset">
