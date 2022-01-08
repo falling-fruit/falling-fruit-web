@@ -12,9 +12,18 @@ import { Input, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import { FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
 
-const formToUser = ({ bio, new_password, password_confirmation }) => ({
+const formToUser = ({
+  email,
+  name,
+  bio,
+  new_password,
+  password_confirmation,
+}) => ({
+  email,
+  name,
   bio: bio || null,
   password: new_password || null,
+  range: null,
   password_confirmation,
 })
 
@@ -44,13 +53,23 @@ const AccountPage = () => {
   }
 
   const handleSubmit = async (values) => {
+    const newUser = formToUser(values)
+    const isEmailChanged = newUser.email !== user.email
+
     let response
     try {
-      response = await editUser(formToUser(values))
-      toast.success('Account edited successfully!')
-    } catch {
-      toast.error('Account editing failed.')
-      console.error(response)
+      response = await editUser(newUser)
+
+      const details =
+        isEmailChanged && response.unconfirmed_email
+          ? ` A confirmation email was sent to ${response.unconfirmed_email}.`
+          : ''
+      toast.success(`Account edited successfully!${details}`)
+
+      setUser(response)
+    } catch (e) {
+      toast.error(`Account editing failed: ${e.response?.data?.error}`)
+      console.error(e.response)
     }
   }
 
@@ -59,48 +78,76 @@ const AccountPage = () => {
       <h1>Edit Account</h1>
       {user && (
         <Formik
+          enableReinitialize
           initialValues={userToForm(user)}
           validationSchema={Yup.object({
             name: Yup.string(),
             email: Yup.string().email(),
             bio: Yup.string(),
-            new_password: Yup.string(),
+            new_password: Yup.string().min(6),
             new_password_confirm: Yup.string().oneOf(
               [Yup.ref('new_password'), null],
               'Passwords must match',
             ),
-            password_confirmation: Yup.string().required(),
+            password_confirmation: Yup.string()
+              .when('new_password', (new_password, schema) =>
+                new_password
+                  ? schema.required(
+                      'Old password required when changing password',
+                    )
+                  : schema,
+              )
+              .when('email', (email, schema) =>
+                email !== user.email
+                  ? schema.required('Old password required when changing email')
+                  : schema,
+              ),
           })}
           onSubmit={handleSubmit}
         >
-          <Form>
-            <FormInputWrapper>
-              <Input type="text" name="name" label="Name" />
+          {({ dirty, isValid, isSubmitting }) => (
+            <Form>
+              <FormInputWrapper>
+                <Input type="text" name="name" label="Name" />
 
-              <Input type="text" name="email" label="Email" />
+                <Input type="text" name="email" label="Email" />
 
-              <Textarea name="bio" label="About You" optional />
+                <Textarea name="bio" label="About You" optional />
 
-              <Input name="new_password" label="New Password" type="password" />
-              <Input
-                name="new_password_confirm"
-                label="Confirm New Password"
-                type="password"
-              />
+                <p>Password must be at least 6 characters long.</p>
 
-              <Input
-                name="password_confirmation"
-                label="Current Password"
-                type="password"
-              />
-            </FormInputWrapper>
-            <FormButtonWrapper>
-              <Button secondary type="reset">
-                Clear
-              </Button>
-              <Button type="submit">Save</Button>
-            </FormButtonWrapper>
-          </Form>
+                <Input
+                  name="new_password"
+                  label="New Password"
+                  type="password"
+                />
+                <Input
+                  name="new_password_confirm"
+                  label="Confirm New Password"
+                  type="password"
+                />
+
+                <p>Current password is required to change email or password.</p>
+
+                <Input
+                  name="password_confirmation"
+                  label="Current Password"
+                  type="password"
+                />
+              </FormInputWrapper>
+              <FormButtonWrapper>
+                <Button secondary type="reset">
+                  Clear
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={!dirty || !isValid || isSubmitting}
+                >
+                  {isSubmitting ? 'Saving changes' : 'Save changes'}
+                </Button>
+              </FormButtonWrapper>
+            </Form>
+          )}
         </Formik>
       )}
     </PageTemplate>
