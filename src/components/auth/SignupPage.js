@@ -54,10 +54,9 @@ const SignupPage = () => {
         validationSchema={Yup.object({
           email: Yup.string().email().required(),
           password: Yup.string().min(6).required(),
-          password_confirm: Yup.string().oneOf(
-            [Yup.ref('password'), null],
-            'Passwords must match',
-          ),
+          password_confirm: Yup.string()
+            .oneOf([Yup.ref('password')])
+            .required('Passwords must match'),
           name: Yup.string(),
           bio: Yup.string(),
           'g-recaptcha-response': Yup.string().required(),

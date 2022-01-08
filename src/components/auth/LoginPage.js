@@ -1,6 +1,6 @@
 import { ErrorMessage, Form, Formik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
@@ -18,6 +18,7 @@ import {
 
 const LoginPage = () => {
   const { user, error, isLoading } = useSelector((state) => state.auth)
+  const { state } = useLocation()
 
   const dispatch = useDispatch()
 
@@ -30,7 +31,7 @@ const LoginPage = () => {
       <h1>Login</h1>
       <Formik
         initialValues={{
-          email: '',
+          email: state?.email ?? '',
           password: '',
           rememberMe: false,
         }}

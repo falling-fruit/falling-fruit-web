@@ -1,4 +1,4 @@
-import { ErrorMessage, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
@@ -17,7 +17,7 @@ const PasswordResetPage = () => {
   const history = useAppHistory()
   const recaptchaRef = useRef()
 
-  const { user, error, isLoading } = useSelector((state) => state.auth)
+  const { user, isLoading } = useSelector((state) => state.auth)
 
   if (!isLoading && user) {
     return <Redirect to={getPathWithMapState('/map')} />
@@ -57,7 +57,6 @@ const PasswordResetPage = () => {
             <FormInputWrapper>
               <Input type="text" name="email" label="Email" />
             </FormInputWrapper>
-            {error && <ErrorMessage>Invalid Login</ErrorMessage>}
 
             <Recaptcha
               name="g-recaptcha-response"

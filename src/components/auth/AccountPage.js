@@ -86,10 +86,9 @@ const AccountPage = () => {
             email: Yup.string().email().required(),
             bio: Yup.string(),
             new_password: Yup.string().min(6),
-            new_password_confirm: Yup.string().oneOf(
-              [Yup.ref('new_password'), null],
-              'Passwords must match',
-            ),
+            new_password_confirm: Yup.string()
+              .oneOf([Yup.ref('new_password')])
+              .required('Passwords must match'),
             password_confirmation: Yup.string()
               .when('new_password', (new_password, schema) =>
                 new_password
