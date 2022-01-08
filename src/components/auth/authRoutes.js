@@ -2,6 +2,8 @@ import { Route } from 'react-router-dom'
 
 import AccountPage from './AccountPage'
 import LoginPage from './LoginPage'
+import PasswordResetPage from './PasswordResetPage'
+import PasswordSetPage from './PasswordSetPage'
 import SignupPage from './SignupPage'
 
 const pages = [
@@ -16,6 +18,14 @@ const pages = [
   {
     path: '/account',
     component: AccountPage,
+  },
+  {
+    path: '/password/reset',
+    component: PasswordResetPage,
+  },
+  {
+    path: '/password/set',
+    component: PasswordSetPage,
   },
 ]
 

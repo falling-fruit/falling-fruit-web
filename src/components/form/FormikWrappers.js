@@ -1,6 +1,8 @@
 import { useField } from 'formik'
+import { forwardRef } from 'react'
 import Reaptcha from 'reaptcha'
 
+import { useIsMobile } from '../../utils/useBreakpoint'
 import { PhotoUploader } from '../photo/PhotoUploader'
 import Checkbox from '../ui/Checkbox'
 import Input from '../ui/Input'
@@ -21,18 +23,24 @@ const FormikSlider = withLabeledField(Slider, undefined, true)
 const FormikSelect = withLabeledField(Select, undefined, true)
 const FormikPhotoUploader = withLabeledField(PhotoUploader, undefined, true)
 
-const FormikRecaptcha = ({ name, ...props }) => {
-  const [, , helpers] = useField(name)
+const FormikRecaptcha = forwardRef(
+  ({ name, isResponsive = true, size, ...props }, ref) => {
+    const [, , helpers] = useField(name)
+    const isMobile = useIsMobile()
 
-  return (
-    <Reaptcha
-      sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-      onVerify={helpers.setValue}
-      onExpire={() => helpers.setValue(null)}
-      {...props}
-    />
-  )
-}
+    return (
+      <Reaptcha
+        ref={ref}
+        sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+        onVerify={helpers.setValue}
+        onExpire={() => helpers.setValue(null)}
+        size={isResponsive && isMobile ? 'compact' : size}
+        {...props}
+      />
+    )
+  },
+)
+FormikRecaptcha.displayName = 'FormikRecaptcha'
 
 const FormikRatingInput = ({ name, ...props }) => {
   const [{ value }] = useField(name)
