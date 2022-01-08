@@ -1,11 +1,11 @@
 import { Form, Formik } from 'formik'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 import { addUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsMobile } from '../../utils/useBreakpoint'
 import { PageTemplate } from '../about/PageTemplate'
 import { Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
@@ -15,7 +15,7 @@ const formToUser = (form) => ({ ...form, password_confirm: undefined })
 
 const SignupPage = () => {
   const history = useAppHistory()
-  const isMobile = useIsMobile()
+  const recaptchaRef = useRef()
 
   const isLoading = useSelector((state) => state.auth.isLoading)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
@@ -36,6 +36,7 @@ const SignupPage = () => {
     } catch (e) {
       toast.error(`Sign up failed: ${e.response?.data?.error}`)
       console.error(e.response)
+      recaptchaRef.current.reset()
     }
   }
 
@@ -53,10 +54,9 @@ const SignupPage = () => {
         validationSchema={Yup.object({
           email: Yup.string().email().required(),
           password: Yup.string().min(6).required(),
-          password_confirm: Yup.string().oneOf(
-            [Yup.ref('password'), null],
-            'Passwords must match',
-          ),
+          password_confirm: Yup.string()
+            .oneOf([Yup.ref('password')])
+            .required('Passwords must match'),
           name: Yup.string(),
           bio: Yup.string(),
           'g-recaptcha-response': Yup.string().required(),
@@ -85,7 +85,9 @@ const SignupPage = () => {
 
             <Recaptcha
               name="g-recaptcha-response"
-              size={isMobile ? 'compact' : 'normal'}
+              ref={(e) => {
+                recaptchaRef.current = e
+              }}
             />
 
             <FormButtonWrapper>

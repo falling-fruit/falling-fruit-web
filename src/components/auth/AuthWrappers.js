@@ -36,3 +36,14 @@ export const FormRatingWrapper = styled(FormButtonWrapper)`
     margin: 0 0 0.5em;
   }
 `
+
+export const ErrorMessage = styled.p`
+  color: ${({ theme }) => theme.invalid} !important;
+`
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1em;
+`
