@@ -15,7 +15,6 @@ const ConfirmationPage = () => {
         toast.error("Confirmation token can't be blank", { autoClose: 5000 })
         history.push('/confirmation/new')
       } else {
-        console.log('here')
         try {
           const { email } = await confirmUser(token)
           toast.success('Your email has been confirmed.')
