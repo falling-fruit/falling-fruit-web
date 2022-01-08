@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Button from '../ui/Button'
@@ -34,7 +33,7 @@ const MainPane = () => {
     console.log('mainpane mount')
     return () => console.log('mainpane unmount')
   }, [])
-  const history = useHistory()
+  const history = useAppHistory()
   return (
     <Container>
       <Search />
@@ -43,7 +42,7 @@ const MainPane = () => {
         secondary
         onClick={() =>
           history.push({
-            pathname: getPathWithMapState('/map/entry/new'),
+            pathname: '/map/entry/new',
             state: { fromPage: '/map' },
           })
         }
@@ -53,7 +52,7 @@ const MainPane = () => {
       <SettingsButton
         onClick={() =>
           history.push({
-            pathname: getPathWithMapState('/settings'),
+            pathname: '/settings',
             state: { fromPage: '/map' },
           })
         }

@@ -1,13 +1,13 @@
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations } from '../../redux/viewChange'
-import { addLocation } from '../../utils/api'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { addLocation, editLocation } from '../../utils/api'
+import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
 import { Optional } from '../ui/LabelTag'
@@ -16,7 +16,7 @@ import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Select, Textarea } from './FormikWrappers'
 import {
-  formatReviewValues,
+  formToReview,
   INITIAL_REVIEW_VALUES,
   isEmptyReview,
   ReviewPhotoStep,
@@ -59,7 +59,7 @@ const PROPERTY_ACCESS_OPTIONS = labelsToOptions(PROPERTY_ACCESS_LABELS)
 
 const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 
-const INITIAL_VALUES = {
+const INITIAL_LOCATION_VALUES = {
   types: [],
   description: '',
   ...INITIAL_REVIEW_VALUES,
@@ -129,7 +129,7 @@ const LocationStep = ({ typeOptions }) => (
       />
       <span>to</span>
       <Select
-        name="season_end"
+        name="season_stop"
         options={MONTH_OPTIONS}
         isSearchable={false}
         isClearable
@@ -138,22 +138,20 @@ const LocationStep = ({ typeOptions }) => (
   </>
 )
 
-const validateLocation = (values) => {
-  const { review, types, season_start, season_end } = values
-
+const validateLocation = ({ review, types, season_start, season_stop }) => {
   const errors = {}
 
   if (types.length === 0) {
     errors.types = true
   }
 
-  if (season_start?.value && season_end?.value) {
-    if (season_end.value < season_start.value) {
-      errors.season_end = true
+  if (season_start?.value != null && season_stop?.value != null) {
+    if (season_stop.value < season_start.value) {
+      errors.season_stop = true
     }
-  } else if (season_start?.value) {
-    errors.season_end = true
-  } else if (season_end?.value) {
+  } else if (season_start?.value != null) {
+    errors.season_stop = true
+  } else if (season_stop?.value != null) {
     errors.season_start = true
   }
 
@@ -164,24 +162,49 @@ const validateLocation = (values) => {
   return errors
 }
 
-const formatLocationValues = ({
+const formToLocation = ({
   types,
   description,
   season_start,
-  season_end,
+  season_stop,
   access,
 }) => ({
   type_ids: types.map(({ value }) => value),
   description,
-  season_start: season_start?.value,
-  season_end: season_end?.value,
+  season_start: season_start?.value ?? null,
+  season_stop: season_stop?.value ?? null,
   access: access?.value,
   unverified: false,
 })
 
-export const LocationForm = ({ desktop }) => {
+export const locationToForm = ({
+  type_ids,
+  description,
+  season_start,
+  season_stop,
+  access,
+}) => {
+  const obj = {
+    types: type_ids.map((id) => ({
+      value: id,
+    })),
+    description,
+    season_start: MONTH_OPTIONS[season_start],
+    season_stop: MONTH_OPTIONS[season_stop],
+    access: PROPERTY_ACCESS_OPTIONS[access],
+  }
+  console.log(obj)
+  return obj
+}
+
+export const LocationForm = ({
+  editingId,
+  onSubmit,
+  initialValues = INITIAL_LOCATION_VALUES,
+  stepped,
+}) => {
   // TODO: create a "going back" util
-  const history = useHistory()
+  const history = useAppHistory()
   const { state } = useLocation()
   const { typesById } = useTypesById()
 
@@ -206,8 +229,7 @@ export const LocationForm = ({ desktop }) => {
 
   const steps = [
     <LocationStep key={1} typeOptions={typeOptions} />,
-    <ReviewStep key={2} />,
-    <ReviewPhotoStep key={3} />,
+    ...(editingId ? [] : [<ReviewStep key={2} />, <ReviewPhotoStep key={3} />]),
   ]
 
   const formikSteps = steps.map((step, index) => (
@@ -216,6 +238,7 @@ export const LocationForm = ({ desktop }) => {
     </Step>
   ))
 
+  onSubmit = onSubmit ?? (() => history.push('/map'))
   const handleSubmit = async ({
     'g-recaptcha-response': recaptcha,
     review,
@@ -223,40 +246,49 @@ export const LocationForm = ({ desktop }) => {
   }) => {
     const locationValues = {
       'g-recaptcha-response': recaptcha,
-      ...formatLocationValues(location),
+      ...formToLocation(location),
       lat,
       lng,
     }
 
     if (!isEmptyReview(review)) {
-      locationValues.review = formatReviewValues(review)
+      locationValues.review = formToReview(review)
     }
 
     let response
     try {
-      response = await addLocation(locationValues)
-      toast.success('Location submitted successfully!')
+      if (editingId) {
+        response = await editLocation(editingId, locationValues)
+        toast.success('Location edited successfully!')
+      } else {
+        response = await addLocation(locationValues)
+        toast.success('Location submitted successfully!')
+      }
     } catch (e) {
-      toast.error('Location submission failed.')
+      if (editingId) {
+        toast.error('Location editing failed.')
+      } else {
+        toast.error('Location submission failed.')
+      }
       console.error(e.response)
     }
 
     if (response && !response.error) {
-      history.push(getPathWithMapState('/map'))
       dispatch(fetchLocations)
+      onSubmit()
     }
   }
 
   const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
-  const StepDisplay = desktop ? FormikAllSteps : FormikStepper
+  const StepDisplay = stepped ? FormikStepper : FormikAllSteps
 
   return (
     <StyledLocationForm>
       <StepDisplay
         validateOnChange={false}
         validate={validateLocation}
-        initialValues={INITIAL_VALUES}
+        initialValues={initialValues}
         validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
         // For all steps only
@@ -265,9 +297,7 @@ export const LocationForm = ({ desktop }) => {
             <Button
               secondary
               type="button"
-              onClick={() =>
-                history.push(getPathWithMapState(state?.fromPage ?? '/map'))
-              }
+              onClick={() => history.push(state?.fromPage ?? '/map')}
             >
               Cancel
             </Button>

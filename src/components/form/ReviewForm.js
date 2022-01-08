@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { addReview } from '../../utils/api'
+import { addReview, editReview } from '../../utils/api'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import { isEveryPhotoUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
@@ -30,13 +30,25 @@ export const INITIAL_REVIEW_VALUES = {
   },
 }
 
+/* TODO: Create a generic utility to build form options */
+export const FRUITING_OPTIONS = ['Flowers', 'Unripe fruit', 'Ripe fruit'].map(
+  (name, idx) => ({
+    label: name,
+    value: idx + 1,
+  }),
+)
+
 export const isEmptyReview = (review) => {
-  const r = formatReviewValues(review)
+  if (!review) {
+    return true
+  }
+
+  const r = formToReview(review)
   return (
     !r.comment &&
     !r.observed_on &&
-    r.fruiting === 0 &&
     r.quality_rating === 0 &&
+    r.fruiting === 0 &&
     r.yield_rating === 0 &&
     r.photo_ids.length === 0
   )
@@ -55,7 +67,7 @@ export const validateReview = (review) => {
     }
   }
 
-  const r = formatReviewValues(review)
+  const r = formToReview(review)
   if (r.fruiting !== 0 && r.observed_on === '') {
     return {
       review: { observed_on: true },
@@ -65,9 +77,10 @@ export const validateReview = (review) => {
   return null
 }
 
-export const formatReviewValues = (review) => {
+export const formToReview = (review) => {
   const formattedReview = {
     ...review,
+    observed_on: review.observed_on || null,
     fruiting: review.fruiting?.value ?? 0,
     quality_rating: Number(review.quality_rating),
     yield_rating: Number(review.yield_rating),
@@ -77,16 +90,40 @@ export const formatReviewValues = (review) => {
   return formattedReview
 }
 
-export const ReviewStep = ({ standalone }) => (
+export const reviewToForm = ({
+  comment,
+  photos,
+  observed_on,
+  fruiting,
+  yield_rating,
+  quality_rating,
+}) => ({
+  comment,
+  photos: photos.map((photo) => ({
+    id: photo.id,
+    name: `My Photo ${photo.created_at.split('T')[0]}`,
+    image: photo.thumb,
+    isNew: false,
+  })),
+  observed_on: observed_on ?? '',
+  fruiting: fruiting === 0 ? null : FRUITING_OPTIONS[fruiting - 1],
+  yield_rating,
+  quality_rating,
+})
+
+export const ReviewStep = ({ standalone, hasHeading = true }) => (
   <>
-    <SectionHeading>
-      Leave a Review
-      {!standalone && <Optional />}
-    </SectionHeading>
+    {hasHeading && (
+      <SectionHeading>
+        Leave a Review
+        {!standalone && <Optional />}
+      </SectionHeading>
+    )}
 
     <Textarea
       name="review.comment"
       placeholder="Updates, access issues, plant health..."
+      label="Comments"
     />
 
     <DateInput name="review.observed_on" label="Observed On" />
@@ -94,11 +131,7 @@ export const ReviewStep = ({ standalone }) => (
     <Select
       label="Fruiting Status"
       name="review.fruiting"
-      /* TODO: Create a generic utility to build form options */
-      options={['Flowers', 'Unripe fruit', 'Ripe fruit'].map((name, idx) => ({
-        label: name,
-        value: idx + 1,
-      }))}
+      options={FRUITING_OPTIONS}
       isClearable
     />
 
@@ -123,7 +156,11 @@ export const ReviewPhotoStep = () => (
   <PhotoUploader name="review.photos" label="Upload Images" optional />
 )
 
-export const ReviewForm = ({ onSubmit }) => {
+export const ReviewForm = ({
+  onSubmit,
+  initialValues = INITIAL_REVIEW_VALUES,
+  editingId = null,
+}) => {
   const { id: locationId } = useParams()
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
@@ -132,16 +169,25 @@ export const ReviewForm = ({ onSubmit }) => {
     { resetForm },
   ) => {
     const reviewValues = {
-      ...formatReviewValues(review),
+      ...formToReview(review),
       'g-recaptcha-response': recaptcha,
     }
 
     let response
     try {
-      response = await addReview(locationId, reviewValues)
-      toast.success('Review submitted successfully!')
+      if (editingId) {
+        response = await editReview(editingId, reviewValues)
+        toast.success('Review edited successfully!')
+      } else {
+        response = await addReview(locationId, reviewValues)
+        toast.success('Review submitted successfully!')
+      }
     } catch (e) {
-      toast.error('Review submission failed.')
+      if (editingId) {
+        toast.error('Review editing failed.')
+      } else {
+        toast.error('Review submission failed.')
+      }
       console.error(e.response)
     }
 
@@ -156,15 +202,16 @@ export const ReviewForm = ({ onSubmit }) => {
   return (
     <FormikAllSteps
       onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
-      initialValues={INITIAL_REVIEW_VALUES}
+      initialValues={initialValues}
       validate={({ review }) => validateReview(review)}
       renderButtons={({ isSubmitting, isValid }) => (
         <Button disabled={isSubmitting || !isValid} type="submit">
-          {isSubmitting ? 'Publishing' : 'Publish Review'}
+          {isSubmitting ? 'Submitting' : 'Submit'}
         </Button>
+        // TODO: delete review button
       )}
     >
-      <ReviewStep standalone />
+      <ReviewStep standalone hasHeading={editingId == null} />
       <ReviewPhotoStep />
       {!isLoggedIn && <Recaptcha />}
     </FormikAllSteps>

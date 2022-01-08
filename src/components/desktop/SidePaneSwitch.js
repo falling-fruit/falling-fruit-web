@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 
 import EntryWrapper from '../entry/EntryWrapper'
+import { EditLocation, EditReview } from '../form/EditableForm'
 import { LocationForm } from '../form/LocationForm'
 import SettingsPage from '../settings/SettingsPage'
 import MainPane from './MainPane'
@@ -14,8 +15,14 @@ const SidePaneSwitch = () => (
     <Route>
       <NavPane>
         <Switch>
+          <Route path="/entry/:id/edit">
+            <EditLocation />
+          </Route>
+          <Route path="/review/:id/edit">
+            <EditReview />
+          </Route>
           <Route path="/map/entry/new">
-            <LocationForm desktop />
+            <LocationForm />
           </Route>
           <Route path="/settings">
             <SettingsPage desktop />

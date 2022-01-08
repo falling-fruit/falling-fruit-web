@@ -1,11 +1,13 @@
 import { useSelector } from 'react-redux'
 
+import { useAppHistory } from '../../utils/useAppHistory'
 import { ReviewForm } from '../form/ReviewForm'
 import { TextContent } from './Entry'
 import Review from './Review'
 import ReviewSummary from './ReviewSummary'
 
 const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
+  const history = useAppHistory()
   const user = useSelector((state) => state.auth.user)
 
   const indexedReviews = reviews.map((review, index) => ({ ...review, index }))
@@ -25,6 +27,14 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
           key={review.id}
           review={review}
           onImageClick={(imageIndex) => onImageClick(review.index, imageIndex)}
+          onEditClick={() =>
+            history.push({
+              pathname: `/review/${review.id}/edit`,
+              state: {
+                fromPage: history.location.pathname,
+              },
+            })
+          }
           editable
         />
       ))}
