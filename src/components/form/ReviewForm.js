@@ -182,13 +182,13 @@ export const ReviewForm = ({
         response = await addReview(locationId, reviewValues)
         toast.success('Review submitted successfully!')
       }
-    } catch {
+    } catch (e) {
       if (editingId) {
         toast.error('Review editing failed.')
       } else {
         toast.error('Review submission failed.')
       }
-      console.error(response)
+      console.error(e.response)
     }
 
     if (response && !response.error) {
