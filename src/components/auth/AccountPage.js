@@ -129,6 +129,7 @@ const AccountPage = () => {
                 />
 
                 <p>Current password is required to change email or password.</p>
+                {/* TODO: need designs for this information */}
 
                 <Input
                   name="password_confirmation"
@@ -147,6 +148,8 @@ const AccountPage = () => {
                   {isSubmitting ? 'Saving changes' : 'Save changes'}
                 </Button>
               </FormButtonWrapper>
+
+              {/* TODO: allow user to delete account. Need design */}
             </Form>
           )}
         </Formik>
