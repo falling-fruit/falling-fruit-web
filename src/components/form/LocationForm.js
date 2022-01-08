@@ -264,13 +264,13 @@ export const LocationForm = ({
         response = await addLocation(locationValues)
         toast.success('Location submitted successfully!')
       }
-    } catch {
+    } catch (e) {
       if (editingId) {
         toast.error('Location editing failed.')
       } else {
         toast.error('Location submission failed.')
       }
-      console.error(response)
+      console.error(e.response)
     }
 
     if (response && !response.error) {

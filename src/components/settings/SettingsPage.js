@@ -120,7 +120,7 @@ const SettingsPage = ({ desktop }) => {
           <UserWrapper>
             {user ? (
               <>
-                <p>Logged in as {user.name}</p>
+                <p>Logged in as {user.name || user.email}</p>
                 <Button secondary onClick={handleLogout}>
                   Logout
                 </Button>

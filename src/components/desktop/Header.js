@@ -222,7 +222,7 @@ const Header = () => {
               <StyledDropdown
                 label={
                   <>
-                    <StyledUser height={15} /> {user.name}
+                    <StyledUser height={15} /> {user.name || user.email}
                   </>
                 }
                 isMatch={isAccountPage}
