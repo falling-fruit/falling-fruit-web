@@ -2,11 +2,11 @@ import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { logout } from '../../redux/authSlice'
 import { updateSettings } from '../../redux/settingsSlice'
+import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
 import ButtonToggle from '../ui/ButtonToggle'
 import Checkbox from '../ui/Checkbox'
@@ -97,7 +97,7 @@ const SettingsPage = ({ desktop }) => {
   const user = useSelector((state) => state.auth.user)
 
   // TODO: migrate to custom hook for map state
-  const history = useHistory()
+  const history = useAppHistory()
 
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
@@ -120,7 +120,7 @@ const SettingsPage = ({ desktop }) => {
           <UserWrapper>
             {user ? (
               <>
-                <p>Logged in as {user.name}</p>
+                <p>Logged in as {user.name || user.email}</p>
                 <Button secondary onClick={handleLogout}>
                   Logout
                 </Button>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom'
 
 import { getLocationById, getReviewById } from '../../utils/api'
+import { useAppHistory } from '../../utils/useAppHistory'
 import { Page } from '../entry/Entry'
 import { LocationForm, locationToForm } from './LocationForm'
 import { ReviewForm, reviewToForm } from './ReviewForm'
@@ -16,7 +17,7 @@ const EditableForm = ({
   const {
     params: { id },
   } = useRouteMatch()
-  const history = useHistory()
+  const history = useAppHistory()
 
   const [formData, setFormData] = useState(null)
 

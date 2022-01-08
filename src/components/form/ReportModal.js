@@ -67,9 +67,9 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
     try {
       response = await addReport(reportValues)
       toast.success('Report submitted successfully!')
-    } catch {
+    } catch (e) {
       toast.error('Report submission failed.')
-      console.error(response)
+      console.error(e.response)
     }
 
     if (response && !response.error) {

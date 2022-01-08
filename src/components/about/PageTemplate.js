@@ -1,7 +1,7 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsMobile } from '../../utils/useBreakpoint'
 import BackButton from '../ui/BackButton'
 
@@ -89,7 +89,7 @@ const StyledBackButton = styled(BackButton)`
 
 const PageTemplate = ({ children }) => {
   // TODO: migrate to custom hook for map state
-  const history = useHistory()
+  const history = useAppHistory()
   const isMobile = useIsMobile()
 
   const onClickBackButton = () => history.go(-1)

@@ -1,8 +1,8 @@
 import { Search as SearchIcon } from '@styled-icons/boxicons-regular'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 
 import { getImports } from '../../utils/api'
+import { useAppHistory } from '../../utils/useAppHistory'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
 import { FORMATTERS } from './DataTableProperties'
@@ -45,7 +45,7 @@ const ImportsTable = () => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [filterText, setFilterText] = React.useState('')
-  const history = useHistory()
+  const history = useAppHistory()
 
   useEffect(() => {
     const getImportData = async () => {
