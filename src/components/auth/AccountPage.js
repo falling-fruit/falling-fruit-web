@@ -83,7 +83,7 @@ const AccountPage = () => {
           initialValues={userToForm(user)}
           validationSchema={Yup.object({
             name: Yup.string(),
-            email: Yup.string().email(),
+            email: Yup.string().email().required(),
             bio: Yup.string(),
             new_password: Yup.string().min(6),
             new_password_confirm: Yup.string().oneOf(

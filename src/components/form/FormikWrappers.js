@@ -1,4 +1,5 @@
 import { useField } from 'formik'
+import Reaptcha from 'reaptcha'
 
 import { PhotoUploader } from '../photo/PhotoUploader'
 import Checkbox from '../ui/Checkbox'
@@ -19,6 +20,19 @@ const FormikDateInput = withLabeledField(DateInput)
 const FormikSlider = withLabeledField(Slider, undefined, true)
 const FormikSelect = withLabeledField(Select, undefined, true)
 const FormikPhotoUploader = withLabeledField(PhotoUploader, undefined, true)
+
+const FormikRecaptcha = ({ name, ...props }) => {
+  const [, , helpers] = useField(name)
+
+  return (
+    <Reaptcha
+      sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+      onVerify={helpers.setValue}
+      onExpire={() => helpers.setValue(null)}
+      {...props}
+    />
+  )
+}
 
 const FormikRatingInput = ({ name, ...props }) => {
   const [{ value }] = useField(name)
@@ -43,6 +57,7 @@ export {
   FormikInput as Input,
   FormikPhotoUploader as PhotoUploader,
   FormikRatingInput as RatingInput,
+  FormikRecaptcha as Recaptcha,
   FormikSelect as Select,
   FormikSlider as Slider,
   FormikTextarea as Textarea,

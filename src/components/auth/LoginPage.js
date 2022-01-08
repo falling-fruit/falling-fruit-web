@@ -76,7 +76,7 @@ const LoginPage = () => {
         </Form>
       </Formik>
       <Column>
-        <Link to="/signup">Signup</Link>
+        <Link to="/signup">Sign up</Link>
         <a href="reset">Reset your password</a>
         <a href="resend">Resend confirmation instructions</a>
       </Column>
