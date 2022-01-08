@@ -236,9 +236,9 @@ export const LocationForm = ({ desktop }) => {
     try {
       response = await addLocation(locationValues)
       toast.success('Location submitted successfully!')
-    } catch {
+    } catch (e) {
       toast.error('Location submission failed.')
-      console.error(response)
+      console.error(e.response)
     }
 
     if (response && !response.error) {
