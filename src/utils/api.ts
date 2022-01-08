@@ -60,7 +60,7 @@ export const getUser = () => instance.get('/user')
 export const deleteUser = () => instance.delete('/user')
 
 export const confirmUser = (token: string) =>
-  instance.post('/user/token', { token })
+  instance.post('/user/confirmation', { token })
 
 export const requestConfirmUser = (data: any) =>
   instance.post('/user/confirmation/retry', data)
