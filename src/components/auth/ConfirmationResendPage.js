@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
-import { requestResetPassword } from '../../utils/api'
+import { requestConfirmUser } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
@@ -13,7 +13,7 @@ import { Input, Recaptcha } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import { Column, FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
 
-const PasswordResetPage = () => {
+const ConfirmationResendPage = () => {
   const history = useAppHistory()
   const recaptchaRef = useRef()
 
@@ -25,14 +25,14 @@ const PasswordResetPage = () => {
 
   const handleSubmit = async (values) => {
     try {
-      await requestResetPassword(values)
+      await requestConfirmUser(values)
       toast.success(
-        'You will receive an email with instructions on how to reset your password in a few minutes',
+        'You will receive an email with instructions for how to confirm your email address in a few minutes',
         { autoClose: 5000 },
       )
       history.push('/login')
     } catch (e) {
-      toast.error('Email not found')
+      toast.error(e.response?.data.error)
       console.error(e.response)
       recaptchaRef.current.reset()
     }
@@ -40,7 +40,7 @@ const PasswordResetPage = () => {
 
   return (
     <PageTemplate>
-      <h1>Send password reset instructions</h1>
+      <h1>Resend confirmation instructions</h1>
       <Formik
         initialValues={{
           email: '',
@@ -84,4 +84,4 @@ const PasswordResetPage = () => {
   )
 }
 
-export default PasswordResetPage
+export default ConfirmationResendPage

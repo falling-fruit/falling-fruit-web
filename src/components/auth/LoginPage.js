@@ -69,7 +69,7 @@ const LoginPage = () => {
       <Column>
         <Link to="/signup">Sign up</Link>
         <Link to="/password/reset">Reset your password</Link>
-        <Link to="/confirmation/resend">Resend confirmation instructions</Link>
+        <Link to="/confirmation/new">Resend confirmation instructions</Link>
       </Column>
     </PageTemplate>
   )
