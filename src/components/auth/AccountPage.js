@@ -20,7 +20,7 @@ const formToUser = ({
   password_confirmation,
 }) => ({
   email,
-  name,
+  name: name || null,
   bio: bio || null,
   password: new_password || null,
   range: null,
@@ -29,6 +29,7 @@ const formToUser = ({
 
 const userToForm = (user) => ({
   ...user,
+  name: user.name ?? '',
   bio: user.bio ?? '',
   new_password: '',
   new_password_confirm: '',
@@ -108,7 +109,7 @@ const AccountPage = () => {
           {({ dirty, isValid, isSubmitting }) => (
             <Form>
               <FormInputWrapper>
-                <Input type="text" name="name" label="Name" />
+                <Input type="text" name="name" label="Name" optional />
 
                 <Input type="text" name="email" label="Email" />
 
