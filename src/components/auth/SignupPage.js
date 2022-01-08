@@ -20,7 +20,7 @@ const SignupPage = () => {
 
   return (
     <PageTemplate>
-      <h1>Signup</h1>
+      <h1>Sign up</h1>
       <Formik
         initialValues={{
           name: '',
@@ -63,7 +63,7 @@ const SignupPage = () => {
           </FormInputWrapper>
 
           <FormButtonWrapper>
-            <Button type="submit">Signup</Button>
+            <Button type="submit">Sign up</Button>
           </FormButtonWrapper>
         </Form>
       </Formik>
