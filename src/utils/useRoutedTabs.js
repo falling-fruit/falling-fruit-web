@@ -18,19 +18,18 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
   useEffect(() => {
     const matchedIndex = tabPaths.findIndex(
       (tabName) =>
-        pathname.includes(state?.fromPage) ||
         matchPath(pathname, {
           path: tabName,
           exact: false,
           strict: false,
-        }),
+        }) || tabName === state?.fromPage,
     )
 
     if (matchedIndex !== -1) {
       setTabIndex(matchedIndex)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, tabPaths, defaultTabIndex])
+  }, [pathname, tabPaths, defaultTabIndex, state?.fromPage])
 
   const handleTabChange = (tabIndex) => {
     if (

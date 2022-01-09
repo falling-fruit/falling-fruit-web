@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
 import { setStreetView } from '../../redux/mapSlice'
 import useRoutedTabs from '../../utils/useRoutedTabs'
@@ -36,7 +36,11 @@ const MobileLayout = () => {
     </Tab>
   ))
 
-  if (pathname.includes('list') || pathname.includes('setting')) {
+  if (
+    ['/list', '/settings', '/account'].some((path) =>
+      matchPath(pathname, { path, exact: false, strict: false }),
+    )
+  ) {
     dispatch(setStreetView(false))
   }
 

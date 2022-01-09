@@ -92,7 +92,7 @@ const EntryOverview = ({ locationData, className }) => {
 
   const handleStreetView = () => {
     if (!isDesktop) {
-      history.push(`/entry/${locationData.id}`)
+      history.push(`/entry/${locationData.id}`, { fromPage: '/map' })
     }
 
     // TODO: change setTimeout to make it wait for map component to mount
