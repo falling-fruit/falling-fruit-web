@@ -1,4 +1,4 @@
-import { ErrorMessage, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
@@ -11,13 +11,16 @@ import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import {
   Column,
+  ErrorMessage,
   FormButtonWrapper,
   FormCheckboxWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
 
 const LoginPage = () => {
-  const { user, error, isLoading } = useSelector((state) => state.auth)
+  const { user, isLoading } = useSelector((state) => state.auth)
+  const error = useSelector((state) => state.auth.error)
+  console.log(error)
   const { state } = useLocation()
 
   const dispatch = useDispatch()
@@ -45,26 +48,29 @@ const LoginPage = () => {
           setSubmitting(false)
         }}
       >
-        <Form>
-          <FormInputWrapper>
-            <Input type="text" name="email" label="Email" />
-            <Input name="password" label="Password" type="password" />
-          </FormInputWrapper>
-          {error && <ErrorMessage>Invalid Login</ErrorMessage>}
+        {({ isValid }) => (
+          <Form>
+            <FormInputWrapper>
+              <Input type="text" name="email" label="Email" />
+              <Input name="password" label="Password" type="password" />
+            </FormInputWrapper>
+            {error && <ErrorMessage>{error.response.data.error}</ErrorMessage>}
+            {/* TODO: missing all errors */}
 
-          <FormCheckboxWrapper>
-            <LabeledRow
-              label={<label htmlFor="rememberMe">Remember Me</label>}
-              left={<Checkbox name="rememberMe" />}
-            />
-          </FormCheckboxWrapper>
+            <FormCheckboxWrapper>
+              <LabeledRow
+                label={<label htmlFor="rememberMe">Remember Me</label>}
+                left={<Checkbox name="rememberMe" />}
+              />
+            </FormCheckboxWrapper>
 
-          <FormButtonWrapper>
-            <Button disabled={isLoading} type="submit">
-              {isLoading ? 'Logging in' : 'Login'}
-            </Button>
-          </FormButtonWrapper>
-        </Form>
+            <FormButtonWrapper>
+              <Button disabled={!isValid || isLoading} type="submit">
+                {isLoading ? 'Logging in' : 'Login'}
+              </Button>
+            </FormButtonWrapper>
+          </Form>
+        )}
       </Formik>
       <Column>
         <Link to="/signup">Sign up</Link>

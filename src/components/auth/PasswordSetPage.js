@@ -22,6 +22,7 @@ const PasswordSetPage = () => {
 
   useEffect(() => {
     if (!getResetToken()) {
+      // TODO: display this (among other toasts) on login page in permanent red error text rather than toast
       toast.error(
         "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.",
         { autoClose: 5000 },
