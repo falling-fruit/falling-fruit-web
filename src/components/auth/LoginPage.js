@@ -1,7 +1,6 @@
-import { Form, Formik } from 'formik'
+import { ErrorMessage, Form, Formik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
-import styled from 'styled-components/macro'
+import { Link, Redirect, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
@@ -11,23 +10,15 @@ import { Checkbox, Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import {
+  Column,
   FormButtonWrapper,
   FormCheckboxWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
 
-const ErrorMessage = styled.p`
-  color: ${({ theme }) => theme.invalid} !important;
-`
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 1em;
-`
-
 const LoginPage = () => {
   const { user, error, isLoading } = useSelector((state) => state.auth)
+  const { state } = useLocation()
 
   const dispatch = useDispatch()
 
@@ -40,7 +31,7 @@ const LoginPage = () => {
       <h1>Login</h1>
       <Formik
         initialValues={{
-          email: '',
+          email: state?.email ?? '',
           password: '',
           rememberMe: false,
         }}
@@ -76,9 +67,9 @@ const LoginPage = () => {
         </Form>
       </Formik>
       <Column>
-        <Link to="/signup">Signup</Link>
-        <a href="reset">Reset your password</a>
-        <a href="resend">Resend confirmation instructions</a>
+        <Link to="/signup">Sign up</Link>
+        <Link to="/password/reset">Reset your password</Link>
+        <Link to="/confirmation/resend">Resend confirmation instructions</Link>
       </Column>
     </PageTemplate>
   )

@@ -57,6 +57,19 @@ export const editUser = (
 
 export const getUser = () => instance.get('/user')
 
+export const deleteUser = () => instance.delete('/user')
+
+export const confirmUser = (token: string) =>
+  instance.post('/user/token', { token })
+
+export const requestConfirmUser = (email: string) =>
+  instance.post('/user/confirmation/token', { email })
+
+export const resetPassword = (data: any) => instance.put('/user/password', data)
+
+export const requestResetPassword = (data: any) =>
+  instance.post('/user/password/reset', data)
+
 export const getUserToken = (username: string, password: string) => {
   const formData = new FormData()
   formData.append('username', username)
