@@ -37,7 +37,8 @@ export const TextContent = styled.article`
 const EntryTagsContainer = styled.div`
   @media ${({ theme }) => theme.device.desktop} {
     padding: 0 12px 0 12px;
-    padding-top: ${({ $isOverlay }) => ($isOverlay ? '12px' : 0)};
+    padding-top: ${({ $isOverlay, $showEntryImages }) =>
+      $isOverlay || $showEntryImages ? '12px' : ''};
   }
 
   @media ${({ theme }) => theme.device.mobile} {
@@ -64,13 +65,14 @@ const Entry = ({
   entryOverview,
   entryReviews,
   showTabs,
-  showEntryImages,
   isLightboxOpen,
   setIsLightboxOpen,
   lightboxIndex,
   setLightboxIndex,
   isFullScreen,
 }) => {
+  const showEntryImages = reviews && reviews[0]?.photos.length > 0
+
   let content
 
   if (!locationData || !reviews) {
@@ -135,7 +137,7 @@ const Entry = ({
                 ))}
               </Carousel>
             )}
-            <EntryTagsContainer showEntryImages={showEntryImages}>
+            <EntryTagsContainer $showEntryImages={showEntryImages}>
               <EntryTags locationData={locationData} />
             </EntryTagsContainer>
             {entryOverview}

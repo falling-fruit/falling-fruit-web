@@ -4,13 +4,12 @@ import { useParams } from 'react-router-dom'
 
 import { updateEntryLocation } from '../../redux/mapSlice'
 import { getLocationById } from '../../utils/api'
-// import Entry from './Entry'
-import EntryDrawer from './EntryDrawer'
-import EntryList from './EntryList'
+import Entry from './Entry'
+import EntryMobile from './EntryMobile'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 
-const EntryWrapper = ({ isInDrawer }) => {
+const EntryWrapper = ({ desktop }) => {
   const locationData = useSelector((state) => state.map.location)
   const dispatch = useDispatch()
 
@@ -50,7 +49,7 @@ const EntryWrapper = ({ isInDrawer }) => {
     />
   )
 
-  const EntryComponent = isInDrawer ? EntryDrawer : EntryList
+  const EntryComponent = desktop ? Entry : EntryMobile
 
   return (
     <EntryComponent

@@ -58,13 +58,13 @@ const MapPage = ({ isDesktop }) => {
 
   const handleLocationClick = (location) => {
     history.push({
-      pathname: `/map/entry/${location.id}`,
+      pathname: `/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
   }
 
   const handleAddLocationClick = () => {
-    history.push('/map/entry/new')
+    history.push('/entry/new')
   }
 
   return (

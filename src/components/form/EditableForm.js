@@ -51,7 +51,7 @@ export const EditReview = () => (
         convertFormData={(review) => ({
           review: reviewToForm(review),
         })}
-        getRedirectLink={(review) => `/map/entry/${review.location_id}`}
+        getRedirectLink={(review) => `/entry/${review.location_id}`}
       />
     </div>
   </Page>
@@ -64,7 +64,7 @@ export const EditLocation = () => (
       Form={LocationForm}
       getFormData={getLocationById}
       convertFormData={locationToForm}
-      getRedirectLink={(location) => `/map/entry/${location.id}`}
+      getRedirectLink={(location) => `/entry/${location.id}`}
     />
   </Page>
 )

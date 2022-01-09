@@ -58,7 +58,7 @@ const prepend =
     `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
 
 const zIndex = {
-  mobileTablist: 20,
+  mobileTablist: 1,
   modal: 30,
 }
 

@@ -16,9 +16,9 @@ const LocationNav = () => {
 
   return (
     <Switch>
-      <Route path="/map/entry/new/details">
+      <Route path="/entry/new/details">
         <TopBarNav
-          onBack={() => history.push('/map/entry/new')}
+          onBack={() => history.push('/entry/new')}
           title="New Location"
         />
       </Route>
@@ -45,7 +45,7 @@ const LocationNav = () => {
                 size={54}
                 color={theme.green}
                 onClick={() => {
-                  history.push('/map/entry/new/details')
+                  history.push('/entry/new/details')
                 }}
               />
             </>
