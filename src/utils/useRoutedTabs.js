@@ -33,6 +33,7 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
 
   const handleTabChange = (tabIndex) => {
     if (
+      // TODO: remove this edge case when refactoring Reach Tabs into NavLinks
       tabIndex === 0 &&
       pathname.includes('/entry') &&
       state?.fromPage === '/list'
