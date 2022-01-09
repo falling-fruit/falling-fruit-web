@@ -3,7 +3,7 @@ import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
 const ImportedDatasetsPage = () => (
   <PageScrollWrapper>
-    <PageTemplate>
+    <PageTemplate from="Settings">
       <p>
         Falling Fruit aspires to be the most comprehensive and open geographic
         dataset of urban edibles. While our users explore, edit, and add

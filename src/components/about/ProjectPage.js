@@ -22,7 +22,7 @@ const foragingPhotos = [
 
 const Project = () => (
   <PageScrollWrapper>
-    <PageTemplate>
+    <PageTemplate from="Settings">
       <div className="grid">
         <PhotoGridTemplate photos={foragingPhotos} float={'right'} />
         <p>

@@ -16,7 +16,7 @@ const pages = [
     component: AboutDatasetPage,
   },
   {
-    path: '/about/dataset',
+    path: '/about/datasets',
     component: ImportedDatasetsPage,
   },
   {

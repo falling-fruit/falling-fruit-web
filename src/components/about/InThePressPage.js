@@ -99,7 +99,7 @@ const InThePressPage = () => {
 
   return (
     <PageScrollWrapper>
-      <PageTemplate>
+      <PageTemplate from="Settings">
         {years.map((year) => (
           <TimelineSection key={year}>
             <h2>{year}</h2>

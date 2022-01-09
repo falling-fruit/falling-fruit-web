@@ -29,17 +29,6 @@ const MobileLayout = () => {
     DEFAULT_TAB,
   )
 
-  // const tabPanels = tabs.map(({ path, panel }) => (
-  //   <TabPanel
-  //     style={
-  //       path.startsWith('/list') ? { paddingTop: '85px' } : { paddingTop: '0' }
-  //     }
-  //     key={path}
-  //   >
-  //     {panel}
-  //   </TabPanel>
-  // ))
-
   const tabList = tabs.map(({ path, icon, label }) => (
     <Tab key={path}>
       {icon}
@@ -69,15 +58,10 @@ const MobileLayout = () => {
           <Route path="/entry/new/details">
             <LocationForm stepped />
           </Route>
-          <Route path="/entry/:id">
-            <EntryWrapper />
-          </Route>
-          <Route path={['/map', '/entry', '/list', '/settings', '/entry/new']}>
+          <Route path={['/map', '/entry', '/list', '/settings']}>
             <Switch>
               <Route path="/entry/new" />
-              <Route path="/entry/:id">
-                {!streetView && <EntryWrapper isInDrawer />}
-              </Route>
+              <Route path="/entry/:id">{!streetView && <EntryWrapper />}</Route>
             </Switch>
             <Switch>
               <Route path="/list">
@@ -90,11 +74,11 @@ const MobileLayout = () => {
                 <AccountPage />
               </Route>
             </Switch>
-            {/* {tabPanels} */}
           </Route>
         </Switch>
       </TabPanels>
       <Switch>
+        <Route path="/entry/new/details" />
         <Route path={['/map', '/entry']}>
           {(pathname.includes('/map') || !isFromList) && <MapPage />}
         </Route>

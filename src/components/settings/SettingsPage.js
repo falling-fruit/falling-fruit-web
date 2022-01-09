@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { logout } from '../../redux/authSlice'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
@@ -96,7 +95,6 @@ const SettingsPage = ({ desktop }) => {
   const settings = useSelector((state) => state.settings)
   const user = useSelector((state) => state.auth.user)
 
-  // TODO: migrate to custom hook for map state
   const history = useAppHistory()
 
   const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
@@ -104,10 +102,6 @@ const SettingsPage = ({ desktop }) => {
 
   const updateUnitsSetting = (object) => {
     dispatch(updateSettings({ distanceUnit: object.value }))
-  }
-
-  const handleLogout = () => {
-    dispatch(logout())
   }
 
   return (
@@ -121,13 +115,13 @@ const SettingsPage = ({ desktop }) => {
             {user ? (
               <>
                 <p>Logged in as {user.name || user.email}</p>
-                <Button secondary onClick={handleLogout}>
-                  Logout
+                <Button secondary onClick={() => history.push('/account')}>
+                  View Account
                 </Button>
               </>
             ) : (
               <>
-                <Button onClick={() => history.push('/login')}>Login</Button>
+                <Button onClick={() => history.push('/account')}>Login</Button>
                 <Button secondary onClick={() => history.push('/signup')}>
                   Signup
                 </Button>
@@ -316,7 +310,7 @@ const SettingsPage = ({ desktop }) => {
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={'Imported Datasets'}
-            onClick={() => history.push('/about/dataset')}
+            onClick={() => history.push('/about/datasets')}
           />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}

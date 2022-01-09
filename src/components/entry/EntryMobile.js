@@ -42,7 +42,6 @@ const DrawerContainer = styled.div`
   height: 100%;
   overflow: hidden;
   width: 100%;
-  /* bottom: 50px; */
   left: 0;
 
   .pane {
@@ -124,7 +123,7 @@ const Backdrop = styled.div`
   transition: transform 0.15s linear;
 `
 
-const EntryList = ({
+const EntryMobile = ({
   locationData,
   reviews,
   isLoading,
@@ -244,13 +243,6 @@ const EntryList = ({
     .map((reviews) => reviews.photos)
     .flat()
 
-  if (!locationData) {
-    return null
-  }
-
-  console.log(isFullScreen)
-  console.log(!isInDrawer || isFullScreen)
-
   const inner = (
     <div>
       {showEntryImages ? (
@@ -335,4 +327,4 @@ const EntryList = ({
   )
 }
 
-export default EntryList
+export default EntryMobile

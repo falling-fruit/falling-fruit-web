@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-import Spinner from '../ui/Spinner'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import AccountPage from './AccountPage'
 import LoginPage from './LoginPage'
 
@@ -8,7 +8,7 @@ const AuthSwitch = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
 
   if (isLoading) {
-    return <Spinner />
+    return <LoadingIndicator cover vertical />
   }
 
   if (!isLoading && !user) {
