@@ -59,6 +59,7 @@ const prepend =
 
 const zIndex = {
   mobileTablist: 1,
+  topBar: 11,
   modal: 30,
 }
 
