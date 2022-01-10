@@ -139,6 +139,8 @@ export const editReview = (
   data: paths['/reviews/{id}']['put']['requestBody']['content']['application/json'],
 ) => instance.put(`/reviews/${id}`, data)
 
+export const deleteReview = (id: any) => instance.delete(`/reviews/${id}`)
+
 export const addPhoto = (
   file: paths['/photos']['post']['requestBody']['content']['multipart/form-data']['file'],
 ) => {

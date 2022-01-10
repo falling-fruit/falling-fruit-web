@@ -1,9 +1,10 @@
+import { darken } from 'polished'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import { addReview, editReview } from '../../utils/api'
+import { addReview, deleteReview, editReview } from '../../utils/api'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import { isEveryPhotoUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
@@ -11,7 +12,7 @@ import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
-import { FormikStepper, Step } from './FormikStepper'
+import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import {
   DateInput,
   PhotoUploader,
@@ -121,6 +122,18 @@ export const reviewToForm = ({
   yield_rating,
   quality_rating,
 })
+
+const DeleteButton = styled(Button)`
+  background-color: ${({ theme }) => theme.invalid};
+  border-color: ${({ theme }) => theme.invalid};
+
+  @media ${({ theme }) => theme.device.desktop} {
+    :hover:enabled {
+      background: ${({ theme }) => darken(0.1, theme.invalid)};
+      border-color: ${({ theme }) => darken(0.1, theme.invalid)};
+    }
+  }
+`
 
 export const ReviewStep = ({ standalone, hasHeading = true }) => (
   <>
@@ -236,6 +249,21 @@ export const ReviewForm = ({
     }
   }
 
+  const handleDelete = async () => {
+    if (!confirm('Are you sure you want to delete this review?')) {
+      return
+    }
+
+    try {
+      await deleteReview(editingId)
+      toast.success('Review deleted successfully!')
+      onSubmit()
+    } catch (e) {
+      toast.error('Review deletion failed.')
+      console.error(e)
+    }
+  }
+
   const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
   const StepDisplay = stepped ? FormikStepper : FormikAllSteps
@@ -247,10 +275,16 @@ export const ReviewForm = ({
         initialValues={initialValues}
         validate={({ review }) => validateReview(review)}
         renderButtons={({ isSubmitting, isValid }) => (
-          <Button disabled={isSubmitting || !isValid} type="submit">
-            {isSubmitting ? 'Submitting' : 'Submit'}
-          </Button>
-          // TODO: delete review button
+          <ProgressButtons style={{ textAlign: editingId ? 'center' : 'left' }}>
+            <Button disabled={isSubmitting || !isValid} type="submit">
+              {isSubmitting ? 'Submitting' : 'Submit'}
+            </Button>
+            {editingId && (
+              <DeleteButton type="button" onClick={handleDelete}>
+                Delete
+              </DeleteButton>
+            )}
+          </ProgressButtons>
         )}
       >
         <Step
