@@ -26,6 +26,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
     <TextContent>
       <ReviewSummary reviews={reviews} />
       {!isDesktop && <ReviewButton />}
+      <h3>Reviews</h3>
       {userReviews.map((review) => (
         <Review
           key={review.id}
@@ -42,7 +43,6 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
           editable
         />
       ))}
-      <h3>Reviews</h3>
       {otherReviews.map((review) => (
         <Review
           key={review.id}
