@@ -1,7 +1,7 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
@@ -25,7 +25,6 @@ const getFormattedDate = (utc) => {
 }
 
 const AboutDatasetPage = () => {
-  const { state } = useLocation()
   const { id } = useParams()
 
   const [importData, setImportData] = useState({})
@@ -62,7 +61,7 @@ const AboutDatasetPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate>
-        <NavBack isEntry={state?.fromPage === '/entry'} />
+        <NavBack />
         <DatasetName>
           <span>#{id}</span> {name}
         </DatasetName>

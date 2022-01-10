@@ -72,7 +72,11 @@ const StyledLocationForm = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     padding: 8px 27px 20px;
-    margin-top: 87px;
+    margin-top: 80px;
+
+    textarea {
+      height: 100px;
+    }
   }
 `
 
@@ -293,7 +297,13 @@ export const LocationForm = ({
             <Button
               secondary
               type="button"
-              onClick={() => history.push(state?.fromPage ?? '/map')}
+              onClick={() => {
+                if (editingId) {
+                  history.push(`/entry/${editingId}`)
+                } else {
+                  history.push(state?.fromPage ?? '/map')
+                }
+              }}
             >
               Cancel
             </Button>

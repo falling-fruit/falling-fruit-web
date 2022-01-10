@@ -9,6 +9,7 @@ import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage.js'
 import authRoutes from '../auth/authRoutes'
 import EntryWrapper from '../entry/EntryWrapper'
+import { EditLocationForm } from '../form/EditableForm'
 import { LocationForm } from '../form/LocationForm'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
@@ -59,6 +60,9 @@ const MobileLayout = () => {
         <Switch>
           {aboutRoutes}
           {authRoutes}
+          <Route path="/entry/:id/edit">
+            {({ match }) => <EditLocationForm editingId={match.params.id} />}
+          </Route>
           <Route path="/entry/new/details">
             <LocationForm stepped />
           </Route>
@@ -82,13 +86,13 @@ const MobileLayout = () => {
         </Switch>
       </TabPanels>
       <Switch>
-        <Route path="/entry/new/details" />
+        <Route path={['/entry/:id/edit', '/entry/new/details']} />
         <Route path={['/map', '/entry']}>
           {(pathname.includes('/map') || !isFromList) && <MapPage />}
         </Route>
       </Switch>
       <Switch>
-        <Route path="/entry/new/details" />
+        <Route path={['/entry/:id/edit', '/entry/new/details']} />
         <Route>
           <TabList style={{ zIndex: zIndex.mobileTablist }}>{tabList}</TabList>
         </Route>

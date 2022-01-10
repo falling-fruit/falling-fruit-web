@@ -300,7 +300,11 @@ const EntryMobile = ({
                 label="map-button"
               />
             )}
-            <EntryButton icon={<PencilIcon />} label="edit-button" />
+            <EntryButton
+              onClick={() => history.push(`/entry/${locationData.id}/edit`)}
+              icon={<PencilIcon />}
+              label="edit-button"
+            />
           </div>
         </Buttons>
       )}

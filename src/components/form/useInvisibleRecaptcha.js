@@ -1,5 +1,10 @@
 import { useRef } from 'react'
 import Reaptcha from 'reaptcha'
+import styled from 'styled-components/macro'
+
+const HiddenReaptcha = styled(Reaptcha)`
+  visibility: hidden;
+`
 
 export const useInvisibleRecaptcha = (handleSubmit) => {
   const recaptchaRef = useRef()
@@ -20,7 +25,7 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
   }
 
   const Recaptcha = () => (
-    <Reaptcha
+    <HiddenReaptcha
       size="invisible"
       sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
       ref={(e) => {

@@ -28,7 +28,7 @@ export const ProgressButtons = styled.div`
 
   button {
     // TODO: Should width be manually adjusted?
-    width: 130px;
+    width: 110px;
 
     &:not(:last-child) {
       margin-right: 12px;

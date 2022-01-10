@@ -10460,7 +10460,7 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-reaptcha@^1.7.2:
+reaptcha@^1.7.3:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/reaptcha/-/reaptcha-1.7.3.tgz#a773ce1fc5228de8a2bb28495dfc0be0bda7b30b"
   integrity sha512-j2+JvHssw8FO43aDMrL+Ylb0nlDJDRZNK2olpIMO1SQBkZO2S9c3+oTTJJFPjHznkpfN9RahKBl8NIeL4VHrWA==
