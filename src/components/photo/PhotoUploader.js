@@ -39,8 +39,8 @@ export const PhotoUploader = ({ value, onChange }) => {
           try {
             resp = await addPhoto(photo.file)
           } catch (e) {
-            console.log(e)
             toast.error(`Photo upload failed: ${e.response?.data?.error}`)
+            console.error(e)
           }
 
           if (resp) {
