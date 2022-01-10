@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
 import {
@@ -10,6 +10,7 @@ import {
 } from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
+import { updateSelection } from './updateSelection'
 import { fetchLocations } from './viewChange'
 
 export const fetchFilterCounts = createAsyncThunk(
@@ -30,8 +31,6 @@ export const fetchFilterCounts = createAsyncThunk(
     }
   },
 )
-
-export const updateSelection = createAction('filter/updateSelection')
 
 export const filterSlice = createSlice({
   name: 'filter',
