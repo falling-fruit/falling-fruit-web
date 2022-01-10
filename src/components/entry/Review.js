@@ -20,6 +20,11 @@ const ReviewContainer = styled.div`
     width: calc(100% + 46px);
     height: 1px;
     background: ${({ theme }) => theme.secondaryBackground};
+
+    @media ${({ theme }) => theme.device.desktop} {
+      left: -12px;
+      width: calc(100% + 24px);
+    }
   }
 
   ${({ $editable, theme }) =>
