@@ -10,7 +10,6 @@ export const useAppHistory = () => {
   const history = useHistory()
 
   const pushWithMapState = (to, state) => {
-    console.log(to, state)
     let newTo
     if (typeof to === 'string') {
       newTo = getPathWithMapState(to)

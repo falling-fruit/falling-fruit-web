@@ -14,7 +14,7 @@ import { selectParams } from './selectParams'
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const { isDefaultView, ...initialView } = parseUrl()
+const { isInitialEntry, ...initialView } = parseUrl()
 
 const TRACKING_LOCATION_ZOOM = 16
 
@@ -48,7 +48,7 @@ export const mapSlice = createSlice({
   name: 'map',
   initialState: {
     view: initialView,
-    isDefaultView,
+    isInitialEntry,
     oldView: null,
     isLoading: false,
     locations: [],
@@ -71,10 +71,10 @@ export const mapSlice = createSlice({
     updateEntryLocation: (state, action) => {
       state.location = action.payload
 
-      if (state.isDefaultView) {
+      if (state.isInitialEntry) {
         const { lat, lng } = state.location
 
-        state.isDefaultView = false
+        state.isInitialEntry = false
         state.view = {
           center: {
             lat,
