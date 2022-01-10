@@ -18,6 +18,7 @@ const LocationNav = () => {
     <Switch>
       <Route path="/review/:id/edit">
         {({ match }) => (
+          // TODO: fix going back to correct entry id
           <TopBarNav
             onBack={() => history.push(`/entry/${match.params.id}`)}
             title="Editing Review"
