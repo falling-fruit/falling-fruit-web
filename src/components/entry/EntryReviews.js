@@ -38,6 +38,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
           editable
         />
       ))}
+      <p>Reviews</p>
       {otherReviews.map((review) => (
         <Review
           key={review.id}
