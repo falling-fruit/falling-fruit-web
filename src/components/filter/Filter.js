@@ -1,5 +1,5 @@
 import { debounce } from 'debounce'
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -16,6 +16,7 @@ import {
 } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
 import RCTreeSelect from './RCTreeSelect'
+import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
 
 const StyledFilter = styled.div`
   box-sizing: border-box;
@@ -78,6 +79,8 @@ const Filter = ({ isOpen }) => {
     [setSearchValue],
   )
 
+  const didMount = useRef(false)
+
   const dispatch = useDispatch()
   const { typesById } = useTypesById()
   const filters = useSelector((state) => state.filter)
@@ -114,6 +117,12 @@ const Filter = ({ isOpen }) => {
     ],
   )
 
+  useLayoutEffect(() => {
+    if (didMount.current === false) {
+      didMount.current = true
+    }
+  })
+
   const { t } = useTranslation()
   return isOpen ? (
     <StyledFilter>
@@ -138,19 +147,23 @@ const Filter = ({ isOpen }) => {
             onDeselectAllClick={() => dispatch(selectionChanged([]))}
           />
         </TreeFiltersContainer>
-        <RCTreeSelect
-          data={treeDataWithUpdatedCounts}
-          loading={isLoading}
-          onChange={(selectedTypes) =>
-            dispatch(
-              selectionChanged(
-                selectedTypes.filter((t) => !t.includes('root')),
-              ),
-            )
-          }
-          checkedTypes={types}
-          searchValue={searchValue}
-        />
+        {didMount.current ? (
+          <RCTreeSelect
+            data={treeDataWithUpdatedCounts}
+            loading={isLoading}
+            onChange={(selectedTypes) =>
+              dispatch(
+                selectionChanged(
+                  selectedTypes.filter((t) => !t.includes('root')),
+                ),
+              )
+            }
+            checkedTypes={types}
+            searchValue={searchValue}
+          />
+        ) : (
+          <RCTreeSelectSkeleton />
+        )}
       </div>
       <MuniAndInvasiveCheckboxFilters>
         <CheckboxFilters
