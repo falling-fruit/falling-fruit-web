@@ -56,7 +56,7 @@ export const isEmptyReview = (review) => {
   )
 }
 
-const validateReviewStep = (review) => {
+export const validateReviewStep = (review) => {
   const r = formToReview(review)
   if (r.fruiting !== 0 && !r.observed_on) {
     return {
@@ -67,7 +67,7 @@ const validateReviewStep = (review) => {
   return null
 }
 
-const validatePhotoStep = (review) => {
+export const validatePhotoStep = (review) => {
   if (isEmptyReview(review)) {
     return {
       review: { comment: true },
@@ -83,8 +83,10 @@ const validatePhotoStep = (review) => {
   return null
 }
 
-export const validateReview = (review) =>
-  validatePhotoStep(review) || validateReviewStep(review)
+export const validateReview = (review) => ({
+  ...validatePhotoStep(review),
+  ...validateReviewStep(review),
+})
 
 export const formToReview = (review) => {
   const formattedReview = {
@@ -138,7 +140,11 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
       label="Comments"
     />
 
-    <DateInput name="review.observed_on" label="Observed On" />
+    <DateInput
+      name="review.observed_on"
+      label="Observed On"
+      invalidWhenUntouched
+    />
 
     <Select
       label="Fruiting Status"
@@ -246,10 +252,7 @@ export const ReviewForm = ({
         >
           <ReviewStep standalone hasHeading={editingId == null && !stepped} />
         </Step>
-        <Step
-          label="Step 2"
-          validate={({ review }) => validatePhotoStep(review)}
-        >
+        <Step label="Step 2" validate={({ review }) => validateReview(review)}>
           <ReviewPhotoStep />
         </Step>
         {!isLoggedIn && <Recaptcha />}

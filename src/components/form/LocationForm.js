@@ -22,6 +22,7 @@ import {
   ReviewPhotoStep,
   ReviewStep,
   validateReview,
+  validateReviewStep,
 } from './ReviewForm'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
@@ -62,6 +63,9 @@ const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 const INITIAL_LOCATION_VALUES = {
   types: [],
   description: '',
+  access: null,
+  season_start: null,
+  season_stop: null,
   ...INITIAL_REVIEW_VALUES,
 }
 
@@ -69,6 +73,7 @@ const StyledLocationForm = styled.div`
   box-sizing: border-box;
   width: 100%;
   padding: 0 10px;
+  overflow: auto;
 
   @media ${({ theme }) => theme.device.mobile} {
     padding: 8px 27px 20px;
@@ -77,7 +82,7 @@ const StyledLocationForm = styled.div`
     textarea {
       height: 100px;
 
-      @media (max-device-height: 1136px) {
+      @media (max-device-height: 600px) {
         height: 50px;
       }
     }
@@ -111,6 +116,7 @@ const LocationStep = ({ typeOptions }) => (
       formatOptionLabel={(option) => <TypeName typeId={option.value} />}
       isVirtualized
       required
+      invalidWhenUntouched
     />
     <Textarea
       name="description"
@@ -134,6 +140,7 @@ const LocationStep = ({ typeOptions }) => (
         options={MONTH_OPTIONS}
         isSearchable={false}
         isClearable
+        invalidWhenUntouched
       />
       <span>to</span>
       <Select
@@ -141,12 +148,13 @@ const LocationStep = ({ typeOptions }) => (
         options={MONTH_OPTIONS}
         isSearchable={false}
         isClearable
+        invalidWhenUntouched
       />
     </InlineSelects>
   </>
 )
 
-const validateLocation = ({ review, types, season_start, season_stop }) => {
+const validateLocationStep = ({ types, season_start, season_stop }) => {
   const errors = {}
 
   if (types.length === 0) {
@@ -162,6 +170,12 @@ const validateLocation = ({ review, types, season_start, season_stop }) => {
   } else if (season_stop?.value != null) {
     errors.season_start = true
   }
+
+  return errors
+}
+
+const validateLocation = ({ review, ...location }) => {
+  const errors = validateLocationStep(location)
 
   if (!isEmptyReview(review)) {
     Object.assign(errors, validateReview(review))
@@ -231,16 +245,25 @@ export const LocationForm = ({
     [typesById],
   )
 
-  const steps = [
-    <LocationStep key={1} typeOptions={typeOptions} />,
-    ...(editingId ? [] : [<ReviewStep key={2} />, <ReviewPhotoStep key={3} />]),
+  const formikSteps = [
+    <Step key={1} label="Step 1" validate={validateLocationStep}>
+      <LocationStep key={1} typeOptions={typeOptions} />
+    </Step>,
+    ...(editingId
+      ? []
+      : [
+          <Step
+            key={2}
+            label="Step 2"
+            validate={({ review }) => validateReviewStep(review)}
+          >
+            <ReviewStep />
+          </Step>,
+          <Step key={3} label="Step 3" validate={validateLocation}>
+            <ReviewPhotoStep />
+          </Step>,
+        ]),
   ]
-
-  const formikSteps = steps.map((step, index) => (
-    <Step key={index} label={`Step ${index + 1}`}>
-      {step}
-    </Step>
-  ))
 
   onSubmit = onSubmit ?? (() => history.push('/map'))
   const handleSubmit = async ({
@@ -318,8 +341,8 @@ export const LocationForm = ({
         )}
       >
         {formikSteps}
+        {!isLoggedIn && <Recaptcha />}
       </StepDisplay>
-      {!isLoggedIn && <Recaptcha />}
     </StyledLocationForm>
   )
 }
