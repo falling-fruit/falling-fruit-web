@@ -16,6 +16,31 @@ const LocationNav = () => {
 
   return (
     <Switch>
+      <Route path="/review/:id/edit">
+        {({ match }) => (
+          // TODO: fix going back to correct entry id
+          <TopBarNav
+            onBack={() => history.push(`/entry/${match.params.id}`)}
+            title="Editing Review"
+          />
+        )}
+      </Route>
+      <Route path="/entry/:id/review">
+        {({ match }) => (
+          <TopBarNav
+            onBack={() => history.push(`/entry/${match.params.id}`)}
+            title="Adding Review"
+          />
+        )}
+      </Route>
+      <Route path="/entry/:id/edit">
+        {({ match }) => (
+          <TopBarNav
+            onBack={() => history.push(`/entry/${match.params.id}`)}
+            title="Editing Location"
+          />
+        )}
+      </Route>
       <Route path="/entry/new/details">
         <TopBarNav
           onBack={() => history.push('/entry/new')}

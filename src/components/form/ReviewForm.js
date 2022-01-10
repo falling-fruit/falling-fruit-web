@@ -1,8 +1,10 @@
+import { darken } from 'polished'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import styled from 'styled-components/macro'
 
-import { addReview, editReview } from '../../utils/api'
+import { addReview, deleteReview, editReview } from '../../utils/api'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import { isEveryPhotoUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
@@ -10,6 +12,7 @@ import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
+import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import {
   DateInput,
   PhotoUploader,
@@ -54,7 +57,18 @@ export const isEmptyReview = (review) => {
   )
 }
 
-export const validateReview = (review) => {
+export const validateReviewStep = (review) => {
+  const r = formToReview(review)
+  if (r.fruiting !== 0 && !r.observed_on) {
+    return {
+      review: { observed_on: true },
+    }
+  }
+
+  return null
+}
+
+export const validatePhotoStep = (review) => {
   if (isEmptyReview(review)) {
     return {
       review: { comment: true },
@@ -67,15 +81,13 @@ export const validateReview = (review) => {
     }
   }
 
-  const r = formToReview(review)
-  if (r.fruiting !== 0 && r.observed_on === '') {
-    return {
-      review: { observed_on: true },
-    }
-  }
-
   return null
 }
+
+export const validateReview = (review) => ({
+  ...validatePhotoStep(review),
+  ...validateReviewStep(review),
+})
 
 export const formToReview = (review) => {
   const formattedReview = {
@@ -111,13 +123,28 @@ export const reviewToForm = ({
   quality_rating,
 })
 
+const DeleteButton = styled(Button)`
+  background-color: ${({ theme }) => theme.invalid};
+  border-color: ${({ theme }) => theme.invalid};
+
+  @media ${({ theme }) => theme.device.desktop} {
+    :hover:enabled {
+      background: ${({ theme }) => darken(0.1, theme.invalid)};
+      border-color: ${({ theme }) => darken(0.1, theme.invalid)};
+    }
+  }
+`
+
 export const ReviewStep = ({ standalone, hasHeading = true }) => (
   <>
     {hasHeading && (
-      <SectionHeading>
-        Leave a Review
-        {!standalone && <Optional />}
-      </SectionHeading>
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a id="review" style={{ textDecoration: 'none' }}>
+        <SectionHeading>
+          Leave a Review
+          {!standalone && <Optional />}
+        </SectionHeading>
+      </a>
     )}
 
     <Textarea
@@ -126,7 +153,11 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
       label="Comments"
     />
 
-    <DateInput name="review.observed_on" label="Observed On" />
+    <DateInput
+      name="review.observed_on"
+      label="Observed On"
+      invalidWhenUntouched
+    />
 
     <Select
       label="Fruiting Status"
@@ -136,13 +167,13 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
     />
 
     <FormRatingWrapper>
-      <LabeledRow
+      <RatingLabeledRow
         label={<label htmlFor="review.quality_rating-group">Quality</label>}
         right={
           <RatingInput name="review.quality_rating" label="Quality" total={5} />
         }
       />
-      <LabeledRow
+      <RatingLabeledRow
         label={<label htmlFor="review.yield_rating-group">Yield</label>}
         right={
           <RatingInput name="review.yield_rating" label="Yield" total={5} />
@@ -156,7 +187,28 @@ export const ReviewPhotoStep = () => (
   <PhotoUploader name="review.photos" label="Upload Images" optional />
 )
 
+const StyledReviewForm = styled.div`
+  @media ${({ theme }) => theme.device.mobile} {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 27px 20px;
+    margin-top: 80px;
+
+    textarea {
+      height: 90px;
+    }
+  }
+`
+
+const RatingLabeledRow = styled(LabeledRow)`
+  > div > label {
+    color: ${({ theme }) => theme.text};
+    font-weight: normal;
+  }
+`
+
 export const ReviewForm = ({
+  stepped,
   onSubmit,
   initialValues = INITIAL_REVIEW_VALUES,
   editingId = null,
@@ -197,23 +249,55 @@ export const ReviewForm = ({
     }
   }
 
+  const handleDelete = async () => {
+    if (!confirm('Are you sure you want to delete this review?')) {
+      return
+    }
+
+    try {
+      await deleteReview(editingId)
+      toast.success('Review deleted successfully!')
+      onSubmit()
+    } catch (e) {
+      toast.error('Review deletion failed.')
+      console.error(e)
+    }
+  }
+
   const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
+  const StepDisplay = stepped ? FormikStepper : FormikAllSteps
+
   return (
-    <FormikAllSteps
-      onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
-      initialValues={initialValues}
-      validate={({ review }) => validateReview(review)}
-      renderButtons={({ isSubmitting, isValid }) => (
-        <Button disabled={isSubmitting || !isValid} type="submit">
-          {isSubmitting ? 'Submitting' : 'Submit'}
-        </Button>
-        // TODO: delete review button
-      )}
-    >
-      <ReviewStep standalone hasHeading={editingId == null} />
-      <ReviewPhotoStep />
-      {!isLoggedIn && <Recaptcha />}
-    </FormikAllSteps>
+    <StyledReviewForm>
+      <StepDisplay
+        onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
+        initialValues={initialValues}
+        validate={({ review }) => validateReview(review)}
+        renderButtons={({ isSubmitting, isValid }) => (
+          <ProgressButtons style={{ textAlign: editingId ? 'center' : 'left' }}>
+            <Button disabled={isSubmitting || !isValid} type="submit">
+              {isSubmitting ? 'Submitting' : 'Submit'}
+            </Button>
+            {editingId && (
+              <DeleteButton type="button" onClick={handleDelete}>
+                Delete
+              </DeleteButton>
+            )}
+          </ProgressButtons>
+        )}
+      >
+        <Step
+          label="Step 1"
+          validate={({ review }) => validateReviewStep(review)}
+        >
+          <ReviewStep standalone hasHeading={editingId == null && !stepped} />
+        </Step>
+        <Step label="Step 2" validate={({ review }) => validateReview(review)}>
+          <ReviewPhotoStep />
+        </Step>
+        {!isLoggedIn && <Recaptcha />}
+      </StepDisplay>
+    </StyledReviewForm>
   )
 }

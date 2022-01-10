@@ -1,5 +1,5 @@
-import { Calendar, Pencil, StreetView } from '@styled-icons/boxicons-regular'
-import { Flag, Map, Star } from '@styled-icons/boxicons-solid'
+import { Calendar, StreetView } from '@styled-icons/boxicons-regular'
+import { Flag, Map } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,6 +16,7 @@ import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { TextContent } from './Entry'
+import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
@@ -162,20 +163,13 @@ const EntryOverview = ({ locationData, className }) => {
             )}
 
             <div>
-              <Button leftIcon={<Star />}>Review</Button>
+              <ReviewButton />
               <Button
                 leftIcon={<Flag />}
                 secondary
                 onClick={() => setIsReportModalOpen(true)}
               >
                 Report
-              </Button>
-              <Button
-                leftIcon={<Pencil />}
-                secondary
-                onClick={() => history.push(`/entry/${locationData.id}/edit`)}
-              >
-                Edit
               </Button>
             </div>
           </Description>

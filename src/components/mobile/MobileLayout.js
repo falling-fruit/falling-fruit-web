@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
 import { setStreetView } from '../../redux/mapSlice'
+import { useAppHistory } from '../../utils/useAppHistory'
 import useRoutedTabs from '../../utils/useRoutedTabs'
 import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage.js'
 import authRoutes from '../auth/authRoutes'
 import EntryWrapper from '../entry/EntryWrapper'
+import { EditLocationForm, EditReviewForm } from '../form/EditableForm'
 import { LocationForm } from '../form/LocationForm'
+import { ReviewForm } from '../form/ReviewForm'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
@@ -20,6 +23,7 @@ import TopBarSwitch from './TopBarSwitch'
 
 const MobileLayout = () => {
   useTranslation()
+  const history = useAppHistory()
   const tabs = getTabs()
   const dispatch = useDispatch()
   const streetView = useSelector((state) => state.map.streetView)
@@ -59,6 +63,22 @@ const MobileLayout = () => {
         <Switch>
           {aboutRoutes}
           {authRoutes}
+          <Route path="/review/:id/edit">
+            {({ match }) => (
+              <EditReviewForm stepped editingId={match.params.id} />
+            )}
+          </Route>
+          <Route path="/entry/:id/review">
+            {({ match }) => (
+              <ReviewForm
+                stepped
+                onSubmit={() => history.push(`/entry/${match.params.id}`)}
+              />
+            )}
+          </Route>
+          <Route path="/entry/:id/edit">
+            {({ match }) => <EditLocationForm editingId={match.params.id} />}
+          </Route>
           <Route path="/entry/new/details">
             <LocationForm stepped />
           </Route>
@@ -82,13 +102,27 @@ const MobileLayout = () => {
         </Switch>
       </TabPanels>
       <Switch>
-        <Route path="/entry/new/details" />
+        <Route
+          path={[
+            '/review/:id/edit',
+            '/entry/:id/review',
+            '/entry/:id/edit',
+            '/entry/new/details',
+          ]}
+        />
         <Route path={['/map', '/entry']}>
           {(pathname.includes('/map') || !isFromList) && <MapPage />}
         </Route>
       </Switch>
       <Switch>
-        <Route path="/entry/new/details" />
+        <Route
+          path={[
+            '/review/:id/edit',
+            '/entry/:id/review',
+            '/entry/:id/edit',
+            '/entry/new/details',
+          ]}
+        />
         <Route>
           <TabList style={{ zIndex: zIndex.mobileTablist }}>{tabList}</TabList>
         </Route>

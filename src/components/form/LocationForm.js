@@ -22,6 +22,7 @@ import {
   ReviewPhotoStep,
   ReviewStep,
   validateReview,
+  validateReviewStep,
 } from './ReviewForm'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
@@ -62,6 +63,9 @@ const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 const INITIAL_LOCATION_VALUES = {
   types: [],
   description: '',
+  access: null,
+  season_start: null,
+  season_stop: null,
   ...INITIAL_REVIEW_VALUES,
 }
 
@@ -69,10 +73,19 @@ const StyledLocationForm = styled.div`
   box-sizing: border-box;
   width: 100%;
   padding: 0 10px;
+  overflow: auto;
 
   @media ${({ theme }) => theme.device.mobile} {
     padding: 8px 27px 20px;
-    margin-top: 87px;
+    margin-top: 80px;
+
+    textarea {
+      height: 100px;
+
+      @media (max-device-height: 600px) {
+        height: 50px;
+      }
+    }
   }
 `
 
@@ -103,6 +116,7 @@ const LocationStep = ({ typeOptions }) => (
       formatOptionLabel={(option) => <TypeName typeId={option.value} />}
       isVirtualized
       required
+      invalidWhenUntouched
     />
     <Textarea
       name="description"
@@ -126,6 +140,7 @@ const LocationStep = ({ typeOptions }) => (
         options={MONTH_OPTIONS}
         isSearchable={false}
         isClearable
+        invalidWhenUntouched
       />
       <span>to</span>
       <Select
@@ -133,12 +148,13 @@ const LocationStep = ({ typeOptions }) => (
         options={MONTH_OPTIONS}
         isSearchable={false}
         isClearable
+        invalidWhenUntouched
       />
     </InlineSelects>
   </>
 )
 
-const validateLocation = ({ review, types, season_start, season_stop }) => {
+const validateLocationStep = ({ types, season_start, season_stop }) => {
   const errors = {}
 
   if (types.length === 0) {
@@ -154,6 +170,12 @@ const validateLocation = ({ review, types, season_start, season_stop }) => {
   } else if (season_stop?.value != null) {
     errors.season_start = true
   }
+
+  return errors
+}
+
+const validateLocation = ({ review, ...location }) => {
+  const errors = validateLocationStep(location)
 
   if (!isEmptyReview(review)) {
     Object.assign(errors, validateReview(review))
@@ -183,19 +205,15 @@ export const locationToForm = ({
   season_start,
   season_stop,
   access,
-}) => {
-  const obj = {
-    types: type_ids.map((id) => ({
-      value: id,
-    })),
-    description,
-    season_start: MONTH_OPTIONS[season_start],
-    season_stop: MONTH_OPTIONS[season_stop],
-    access: PROPERTY_ACCESS_OPTIONS[access],
-  }
-  console.log(obj)
-  return obj
-}
+}) => ({
+  types: type_ids.map((id) => ({
+    value: id,
+  })),
+  description,
+  season_start: MONTH_OPTIONS[season_start],
+  season_stop: MONTH_OPTIONS[season_stop],
+  access: PROPERTY_ACCESS_OPTIONS[access],
+})
 
 export const LocationForm = ({
   editingId,
@@ -227,18 +245,27 @@ export const LocationForm = ({
     [typesById],
   )
 
-  const steps = [
-    <LocationStep key={1} typeOptions={typeOptions} />,
-    ...(editingId ? [] : [<ReviewStep key={2} />, <ReviewPhotoStep key={3} />]),
+  const formikSteps = [
+    <Step key={1} label="Step 1" validate={validateLocationStep}>
+      <LocationStep key={1} typeOptions={typeOptions} />
+    </Step>,
+    ...(editingId
+      ? []
+      : [
+          <Step
+            key={2}
+            label="Step 2"
+            validate={({ review }) => validateReviewStep(review)}
+          >
+            <ReviewStep />
+          </Step>,
+          <Step key={3} label="Step 3" validate={validateLocation}>
+            <ReviewPhotoStep />
+          </Step>,
+        ]),
   ]
 
-  const formikSteps = steps.map((step, index) => (
-    <Step key={index} label={`Step ${index + 1}`}>
-      {step}
-    </Step>
-  ))
-
-  onSubmit = onSubmit ?? (() => history.push('/map'))
+  onSubmit = onSubmit ?? ((response) => history.push(`/entry/${response.id}`))
   const handleSubmit = async ({
     'g-recaptcha-response': recaptcha,
     review,
@@ -275,7 +302,7 @@ export const LocationForm = ({
 
     if (response && !response.error) {
       dispatch(fetchLocations)
-      onSubmit()
+      onSubmit(response)
     }
   }
 
@@ -297,7 +324,13 @@ export const LocationForm = ({
             <Button
               secondary
               type="button"
-              onClick={() => history.push(state?.fromPage ?? '/map')}
+              onClick={() => {
+                if (editingId) {
+                  history.push(`/entry/${editingId}`)
+                } else {
+                  history.push(state?.fromPage ?? '/map')
+                }
+              }}
             >
               Cancel
             </Button>
@@ -308,8 +341,8 @@ export const LocationForm = ({
         )}
       >
         {formikSteps}
+        {!isLoggedIn && <Recaptcha />}
       </StepDisplay>
-      {!isLoggedIn && <Recaptcha />}
     </StyledLocationForm>
   )
 }

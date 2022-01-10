@@ -29,19 +29,18 @@ export const withLabel = (WrappedField) => {
 }
 
 export const withField = (WrappedComponent, type, bypassFormik = false) => {
-  const FieldComponent = (props) => {
+  const FieldComponent = ({ invalidWhenUntouched, ...props }) => {
     const [field, meta, helpers] = useField({ ...props, type })
     const customProps = bypassFormik
       ? {
           value: meta.value,
           onChange: helpers.setValue,
-          onBlur: helpers.setTouched,
         }
       : field
 
     return (
       <WrappedComponent
-        invalid={meta.touched && meta.error}
+        invalid={(invalidWhenUntouched || meta.touched) && meta.error}
         {...customProps}
         {...props}
       />
