@@ -34,10 +34,8 @@ const SummaryTable = styled.table`
     text-align: right;
   }
 
-  caption {
-    text-align: left;
-    margin-bottom: 1em;
-    font-size: 1.125rem;
+  h3 {
+    margin-top: 0;
   }
 `
 
@@ -82,7 +80,7 @@ const ReviewSummary = ({ reviews }) => {
 
   return (
     <SummaryTable>
-      <caption>Summary</caption>
+      <h3>Summary</h3>
       <tbody>
         {ratingsWithScores.map((rating) => (
           <SummaryRow key={rating.ratingKey} {...rating} />

@@ -154,13 +154,13 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
     />
 
     <FormRatingWrapper>
-      <LabeledRow
+      <RatingLabeledRow
         label={<label htmlFor="review.quality_rating-group">Quality</label>}
         right={
           <RatingInput name="review.quality_rating" label="Quality" total={5} />
         }
       />
-      <LabeledRow
+      <RatingLabeledRow
         label={<label htmlFor="review.yield_rating-group">Yield</label>}
         right={
           <RatingInput name="review.yield_rating" label="Yield" total={5} />
@@ -184,6 +184,13 @@ const StyledReviewForm = styled.div`
     textarea {
       height: 90px;
     }
+  }
+`
+
+const RatingLabeledRow = styled(LabeledRow)`
+  > div > label {
+    color: ${({ theme }) => theme.text};
+    font-weight: normal;
   }
 `
 
