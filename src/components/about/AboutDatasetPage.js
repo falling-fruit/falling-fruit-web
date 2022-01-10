@@ -34,7 +34,7 @@ const AboutDatasetPage = () => {
     async function fetchImportData() {
       setIsLoading(true)
 
-      setImportData(await getImportById(Number(id)))
+      setImportData(await getImportById(id))
 
       setIsLoading(false)
     }
