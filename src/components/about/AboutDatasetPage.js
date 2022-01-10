@@ -1,7 +1,7 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useLocation, useRouteMatch } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
@@ -26,12 +26,7 @@ const getFormattedDate = (utc) => {
 
 const AboutDatasetPage = () => {
   const { state } = useLocation()
-  const routeMatch = useRouteMatch({
-    path: '/about/dataset/:datasetID',
-  })
-
-  const id =
-    routeMatch?.params?.datasetID && Number(routeMatch.params.datasetID)
+  const { id } = useParams()
 
   const [importData, setImportData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
@@ -40,7 +35,7 @@ const AboutDatasetPage = () => {
     async function fetchImportData() {
       setIsLoading(true)
 
-      setImportData(await getImportById(id))
+      setImportData(await getImportById(Number(id)))
 
       setIsLoading(false)
     }
