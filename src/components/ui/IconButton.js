@@ -72,7 +72,7 @@ IconButton.propTypes = {
   color: PropTypes.string,
   label: PropTypes.string.isRequired,
   icon: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   size: PropTypes.number.isRequired,
   pressed: PropTypes.bool,
 }
