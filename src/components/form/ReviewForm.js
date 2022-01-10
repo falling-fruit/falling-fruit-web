@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import styled from 'styled-components/macro'
 
 import { addReview, editReview } from '../../utils/api'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
@@ -10,6 +11,7 @@ import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
 import FormikAllSteps from './FormikAllSteps'
+import { FormikStepper, Step } from './FormikStepper'
 import {
   DateInput,
   PhotoUploader,
@@ -54,7 +56,18 @@ export const isEmptyReview = (review) => {
   )
 }
 
-export const validateReview = (review) => {
+const validateReviewStep = (review) => {
+  const r = formToReview(review)
+  if (r.fruiting !== 0 && !r.observed_on) {
+    return {
+      review: { observed_on: true },
+    }
+  }
+
+  return null
+}
+
+const validatePhotoStep = (review) => {
   if (isEmptyReview(review)) {
     return {
       review: { comment: true },
@@ -67,15 +80,11 @@ export const validateReview = (review) => {
     }
   }
 
-  const r = formToReview(review)
-  if (r.fruiting !== 0 && r.observed_on === '') {
-    return {
-      review: { observed_on: true },
-    }
-  }
-
   return null
 }
+
+export const validateReview = (review) =>
+  validatePhotoStep(review) || validateReviewStep(review)
 
 export const formToReview = (review) => {
   const formattedReview = {
@@ -114,10 +123,13 @@ export const reviewToForm = ({
 export const ReviewStep = ({ standalone, hasHeading = true }) => (
   <>
     {hasHeading && (
-      <SectionHeading>
-        Leave a Review
-        {!standalone && <Optional />}
-      </SectionHeading>
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a id="review" style={{ textDecoration: 'none' }}>
+        <SectionHeading>
+          Leave a Review
+          {!standalone && <Optional />}
+        </SectionHeading>
+      </a>
     )}
 
     <Textarea
@@ -156,7 +168,21 @@ export const ReviewPhotoStep = () => (
   <PhotoUploader name="review.photos" label="Upload Images" optional />
 )
 
+const StyledReviewForm = styled.div`
+  @media ${({ theme }) => theme.device.mobile} {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 27px 20px;
+    margin-top: 80px;
+
+    textarea {
+      height: 90px;
+    }
+  }
+`
+
 export const ReviewForm = ({
+  stepped,
   onSubmit,
   initialValues = INITIAL_REVIEW_VALUES,
   editingId = null,
@@ -199,21 +225,35 @@ export const ReviewForm = ({
 
   const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
 
+  const StepDisplay = stepped ? FormikStepper : FormikAllSteps
+
   return (
-    <FormikAllSteps
-      onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
-      initialValues={initialValues}
-      validate={({ review }) => validateReview(review)}
-      renderButtons={({ isSubmitting, isValid }) => (
-        <Button disabled={isSubmitting || !isValid} type="submit">
-          {isSubmitting ? 'Submitting' : 'Submit'}
-        </Button>
-        // TODO: delete review button
-      )}
-    >
-      <ReviewStep standalone hasHeading={editingId == null} />
-      <ReviewPhotoStep />
-      {!isLoggedIn && <Recaptcha />}
-    </FormikAllSteps>
+    <StyledReviewForm>
+      <StepDisplay
+        onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
+        initialValues={initialValues}
+        validate={({ review }) => validateReview(review)}
+        renderButtons={({ isSubmitting, isValid }) => (
+          <Button disabled={isSubmitting || !isValid} type="submit">
+            {isSubmitting ? 'Submitting' : 'Submit'}
+          </Button>
+          // TODO: delete review button
+        )}
+      >
+        <Step
+          label="Step 1"
+          validate={({ review }) => validateReviewStep(review)}
+        >
+          <ReviewStep standalone hasHeading={editingId == null && !stepped} />
+        </Step>
+        <Step
+          label="Step 2"
+          validate={({ review }) => validatePhotoStep(review)}
+        >
+          <ReviewPhotoStep />
+        </Step>
+        {!isLoggedIn && <Recaptcha />}
+      </StepDisplay>
+    </StyledReviewForm>
   )
 }

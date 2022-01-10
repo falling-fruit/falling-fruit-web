@@ -16,6 +16,14 @@ const LocationNav = () => {
 
   return (
     <Switch>
+      <Route path="/entry/:id/review">
+        {({ match }) => (
+          <TopBarNav
+            onBack={() => history.push(`/entry/${match.params.id}`)}
+            title="Adding Review"
+          />
+        )}
+      </Route>
       <Route path="/entry/:id/edit">
         {({ match }) => (
           <TopBarNav

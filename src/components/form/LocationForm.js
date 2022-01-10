@@ -76,6 +76,10 @@ const StyledLocationForm = styled.div`
 
     textarea {
       height: 100px;
+
+      @media (max-device-height: 1136px) {
+        height: 50px;
+      }
     }
   }
 `

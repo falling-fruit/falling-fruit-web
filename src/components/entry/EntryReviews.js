@@ -1,12 +1,15 @@
 import { useSelector } from 'react-redux'
 
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReviewForm } from '../form/ReviewForm'
 import { TextContent } from './Entry'
 import Review from './Review'
+import { ReviewButton } from './ReviewButton'
 import ReviewSummary from './ReviewSummary'
 
 const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
+  const isDesktop = useIsDesktop()
   const history = useAppHistory()
   const user = useSelector((state) => state.auth.user)
 
@@ -22,6 +25,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
   return (
     <TextContent>
       <ReviewSummary reviews={reviews} />
+      {!isDesktop && <ReviewButton />}
       {userReviews.map((review) => (
         <Review
           key={review.id}
@@ -45,7 +49,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
           onImageClick={(imageIndex) => onImageClick(review.index, imageIndex)}
         />
       ))}
-      <ReviewForm onSubmit={onReviewSubmit} />
+      {isDesktop && <ReviewForm onSubmit={onReviewSubmit} />}
     </TextContent>
   )
 }

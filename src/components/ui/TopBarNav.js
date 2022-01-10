@@ -14,7 +14,7 @@ const StyledBackButton = styled(BackButton)`
 `
 
 const StyledTopBarNav = styled.div`
-  height: 55px;
+  height: 50px;
 
   display: flex;
   justify-content: space-between;

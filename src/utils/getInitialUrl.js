@@ -16,7 +16,7 @@ export const getBaseUrl = () => {
 }
 
 export const getPathWithMapState = (path) => {
-  if (path.indexOf('/@') !== -1) {
+  if (path.startsWith('#') || path.indexOf('/@') !== -1) {
     return path
   }
 
