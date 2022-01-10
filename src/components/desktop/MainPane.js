@@ -42,7 +42,7 @@ const MainPane = () => {
         secondary
         onClick={() =>
           history.push({
-            pathname: '/map/entry/new',
+            pathname: '/entry/new',
             state: { fromPage: '/map' },
           })
         }

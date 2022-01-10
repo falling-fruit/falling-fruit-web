@@ -21,14 +21,14 @@ const SidePaneSwitch = () => (
           <Route path="/review/:id/edit">
             <EditReview />
           </Route>
-          <Route path="/map/entry/new">
+          <Route path="/entry/new">
             <LocationForm />
           </Route>
           <Route path="/settings">
             <SettingsPage desktop />
           </Route>
-          <Route path={['/map/entry/:id', '/list/entry/:id']}>
-            <EntryWrapper isInDrawer={false} />
+          <Route path={['/entry/:id', '/entry/:id']}>
+            <EntryWrapper desktop />
           </Route>
         </Switch>
       </NavPane>

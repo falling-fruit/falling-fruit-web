@@ -22,7 +22,8 @@ const PageTemplateWrapper = styled.article`
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
-    padding: 56px 23px 20px;
+    padding: 0 23px 20px;
+    margin-top: 28px;
   }
 
   h1,
@@ -87,7 +88,7 @@ const StyledBackButton = styled(BackButton)`
   }
 `
 
-const PageTemplate = ({ children }) => {
+const PageTemplate = ({ children, from }) => {
   // TODO: migrate to custom hook for map state
   const history = useAppHistory()
   const isMobile = useIsMobile()
@@ -96,10 +97,10 @@ const PageTemplate = ({ children }) => {
 
   return (
     <PageTemplateWrapper>
-      {isMobile && (
+      {from && isMobile && (
         <StyledBackButton onClick={onClickBackButton}>
           <ArrowBack />
-          Back to Settings
+          Back to {from}
         </StyledBackButton>
       )}
 

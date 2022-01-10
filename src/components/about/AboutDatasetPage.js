@@ -1,7 +1,7 @@
 import { Calendar } from '@styled-icons/boxicons-regular'
 import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useLocation, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
@@ -25,9 +25,9 @@ const getFormattedDate = (utc) => {
 }
 
 const AboutDatasetPage = () => {
+  const { state } = useLocation()
   const routeMatch = useRouteMatch({
     path: '/about/dataset/:datasetID',
-    exact: true,
   })
 
   const id =
@@ -67,7 +67,7 @@ const AboutDatasetPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate>
-        <NavBack isEntry />
+        <NavBack isEntry={state?.fromPage === '/entry'} />
         <DatasetName>
           <span>#{id}</span> {name}
         </DatasetName>

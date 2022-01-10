@@ -3,7 +3,7 @@ import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
 const ImportedDatasetsPage = () => (
   <PageScrollWrapper>
-    <PageTemplate>
+    <PageTemplate from="Settings">
       <h1>Grow &middot; Pick &middot; Distribute</h1>
       <p>
         Listed below are organizations that grow food in public spaces (food

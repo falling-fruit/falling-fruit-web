@@ -1,29 +1,29 @@
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useLocation } from 'react-router-dom'
 
-import EntryNav from '../entry/EntryNav'
 import LocationNav from '../form/LocationNav'
 import Search from '../search/Search'
 import TopBar from '../ui/TopBar'
 
-const TopBarSwitch = () => (
-  <Switch>
-    <Route path="/settings"></Route>
-    <Route path="/map/entry/new">
-      <TopBar>
-        <LocationNav />
-      </TopBar>
-    </Route>
-    <Route path="/list/entry/:id">
-      <TopBar rectangular>
-        <EntryNav />
-      </TopBar>
-    </Route>
-    <Route>
-      <TopBar>
-        <Search />
-      </TopBar>
-    </Route>
-  </Switch>
-)
+const TopBarSwitch = () => {
+  const { state } = useLocation()
+  const isFromList = state?.fromPage === '/list'
+
+  return (
+    <Switch>
+      <Route path={['/settings', '/account', '/about', '/signup']}></Route>
+      <Route path="/entry/new">
+        <TopBar>
+          <LocationNav />
+        </TopBar>
+      </Route>
+      {isFromList && <Route path="/entry/:id" />}
+      <Route>
+        <TopBar>
+          <Search />
+        </TopBar>
+      </Route>
+    </Switch>
+  )
+}
 
 export default TopBarSwitch

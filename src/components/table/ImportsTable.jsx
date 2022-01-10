@@ -86,6 +86,7 @@ const ImportsTable = () => {
       onRowClicked={(row) => {
         history.push({
           pathname: `/about/dataset/${row.id}`,
+          state: { fromPage: '/about/datasets' },
         })
       }}
     />

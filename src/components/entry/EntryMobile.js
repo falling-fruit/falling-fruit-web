@@ -1,7 +1,11 @@
 import { useWindowSize } from '@reach/window-size'
 import { ArrowBack as ArrowBackIcon } from '@styled-icons/boxicons-regular'
-import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
+import {
+  Map as MapIcon,
+  Pencil as PencilIcon,
+} from '@styled-icons/boxicons-solid'
 import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -14,16 +18,30 @@ const ENTRY_IMAGE_HEIGHT = 250
 
 const INITIAL_IMAGE_HEIGHT_SCALAR = 0.6
 
-const FOOTER_HEIGHT = 70
+const FOOTER_HEIGHT = 50
 
 const BUTTON_HEIGHT = 80
 
-const Container = styled.div`
+const PageContainer = styled.div`
+  margin-top: ${BUTTON_HEIGHT}px;
+
+  .pane {
+    background: none;
+    padding-top: 0;
+    ${({ showEntryImages }) => !showEntryImages && `box-shadow: none;`}
+  }
+
+  > div {
+    background: white;
+    height: 100% !important;
+  }
+`
+
+const DrawerContainer = styled.div`
   position: absolute;
   height: 100%;
   overflow: hidden;
   width: 100%;
-  bottom: 70px;
   left: 0;
 
   .pane {
@@ -71,6 +89,14 @@ const Buttons = styled.div`
   padding: 16px;
   display: flex;
   justify-content: space-between;
+
+  > div {
+    display: flex;
+
+    > *:not(:last-of-type) {
+      margin-right: 0.5em;
+    }
+  }
 `
 
 const EntryButton = styled(IconButton)`
@@ -80,6 +106,10 @@ const EntryButton = styled(IconButton)`
     color: white;
   }
 `
+
+EntryButton.defaultProps = {
+  size: 48,
+}
 
 const Backdrop = styled.div`
   width: 100%;
@@ -93,22 +123,25 @@ const Backdrop = styled.div`
   transition: transform 0.15s linear;
 `
 
-const EntryDrawer = ({
+const EntryMobile = ({
   locationData,
   reviews,
-  showEntryImages,
   isLoading,
   entryOverview,
   entryReviews,
 }) => {
   const history = useAppHistory()
+  const { state } = useLocation()
   const cardRef = useRef()
   const [drawer, setDrawer] = useState()
   const [isFullScreen, setIsFullScreen] = useState(false)
+  const showEntryImages = reviews && reviews[0]?.photos.length > 0
+
+  const isInDrawer = state?.fromPage !== '/list'
 
   // TODO: Resizing the screen without refresh will break the drawer
   const { height: windowHeight } = useWindowSize()
-  const paneHeight = windowHeight - FOOTER_HEIGHT
+  const paneHeight = windowHeight
   const initialCardHeight = paneHeight * 0.3
   const [finalCardHeight, setFinalCardHeight] = useState(
     paneHeight - ENTRY_IMAGE_HEIGHT,
@@ -210,59 +243,88 @@ const EntryDrawer = ({
     .map((reviews) => reviews.photos)
     .flat()
 
+  const inner = (
+    <div>
+      {showEntryImages ? (
+        <EntryImages
+          heightScalar={!isInDrawer ? 1 : entryImageHeightMultiplier}
+        >
+          <Carousel
+            showIndicators={allReviewPhotos.length > 1}
+            isFullScreen={!isInDrawer || isFullScreen}
+          >
+            {allReviewPhotos.map((photo) => (
+              <img key={photo.id} src={photo.medium} alt="entry" />
+            ))}
+          </Carousel>
+        </EntryImages>
+      ) : (
+        <Backdrop isFullScreen={!isInDrawer || isFullScreen} />
+      )}
+      <Entry
+        showEntryImages={showEntryImages}
+        isFullScreen={!isInDrawer || isFullScreen}
+        isInDrawer
+        showTabs={!isInDrawer || isFullScreen}
+        locationData={locationData}
+        reviews={reviews}
+        isLoading={isLoading}
+        entryOverview={entryOverview}
+        entryReviews={entryReviews}
+      />
+    </div>
+  )
+
   return (
     <>
-      {isFullScreen && (
+      {(!isInDrawer || isFullScreen) && (
         <Buttons showEntryImages={showEntryImages}>
           <EntryButton
-            onClick={onBackButtonClick}
-            size={48}
+            onClick={
+              !isInDrawer
+                ? () => history.push(state?.fromPage ?? '/map')
+                : onBackButtonClick
+            }
             icon={<ArrowBackIcon />}
             label="back-button"
           />
-          <EntryButton size={48} icon={<PencilIcon />} label="edit-button" />
+          <div>
+            {!isInDrawer && (
+              <EntryButton
+                onClick={() =>
+                  history.push(`/entry/${locationData.id}`, {
+                    fromPage: '/map',
+                  })
+                }
+                icon={<MapIcon />}
+                label="map-button"
+              />
+            )}
+            <EntryButton icon={<PencilIcon />} label="edit-button" />
+          </div>
         </Buttons>
       )}
-      <Container
-        className="entry-drawers"
-        showEntryImages={showEntryImages}
-        isFullScreen={isFullScreen}
-      >
-        <Card
-          ref={cardRef}
-          setDrawer={setDrawer}
-          className="entry-main-card"
-          config={config}
+
+      {isInDrawer ? (
+        <DrawerContainer
+          className="entry-drawers"
+          showEntryImages={showEntryImages}
+          isFullScreen={isFullScreen}
         >
-          {showEntryImages ? (
-            <EntryImages heightScalar={entryImageHeightMultiplier}>
-              <Carousel
-                showIndicators={allReviewPhotos.length > 1}
-                isFullscreen={isFullScreen}
-              >
-                {allReviewPhotos.map((photo) => (
-                  <img key={photo.id} src={photo.medium} alt="entry" />
-                ))}
-              </Carousel>
-            </EntryImages>
-          ) : (
-            <Backdrop isFullScreen={isFullScreen} />
-          )}
-          <Entry
-            showEntryImages={showEntryImages}
-            isFullScreen={isFullScreen}
-            isInDrawer
-            showTabs={isFullScreen}
-            locationData={locationData}
-            reviews={reviews}
-            isLoading={isLoading}
-            entryOverview={entryOverview}
-            entryReviews={entryReviews}
-          />
-        </Card>
-      </Container>
+          <Card
+            ref={cardRef}
+            setDrawer={setDrawer}
+            className="entry-main-card"
+            config={config}
+          >
+            {inner}
+          </Card>
+        </DrawerContainer>
+      ) : (
+        <PageContainer showEntryImages={showEntryImages}>{inner}</PageContainer>
+      )}
     </>
   )
 }
 
-export default EntryDrawer
+export default EntryMobile

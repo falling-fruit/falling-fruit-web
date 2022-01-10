@@ -29,7 +29,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
   const match = useRouteMatch({
-    path: '/(map|list)/entry/:entryId/:geocoord?',
+    path: '/entry/:entryId/:geocoord?',
     exact: true,
   })
 
@@ -58,13 +58,13 @@ const MapPage = ({ isDesktop }) => {
 
   const handleLocationClick = (location) => {
     history.push({
-      pathname: `/map/entry/${location.id}`,
+      pathname: `/entry/${location.id}`,
       state: { fromPage: '/map' },
     })
   }
 
   const handleAddLocationClick = () => {
-    history.push('/map/entry/new')
+    history.push('/entry/new')
   }
 
   return (

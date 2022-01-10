@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
 
-import AccountPage from './AccountPage'
+import AuthSwitch from './AuthSwitch'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
 import LoginPage from './LoginPage'
@@ -19,7 +19,8 @@ const pages = [
   },
   {
     path: '/account',
-    component: AccountPage,
+    // TODO: Change to AccountPage, and split authRoutes into mobile/desktop versions
+    component: AuthSwitch,
   },
   {
     path: '/password/reset',

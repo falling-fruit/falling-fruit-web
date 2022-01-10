@@ -41,7 +41,7 @@ const StyledProgressBarStep = styled.div`
 
   & + &::before {
     top: calc(50% - 0.6rem);
-    right: 36px;
+    right: 18px;
     height: 100%;
     position: absolute;
     align-self: center;

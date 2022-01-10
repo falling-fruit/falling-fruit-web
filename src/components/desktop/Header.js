@@ -204,7 +204,7 @@ const Header = () => {
               <NavLink to="/about/project" activeClassName="active">
                 {t('The project')}
               </NavLink>
-              <NavLink to="/about/dataset" activeClassName="active">
+              <NavLink to="/about/datasets" activeClassName="active">
                 {t('Imported datasets')}
               </NavLink>
               <NavLink to="/about/share" activeClassName="active">

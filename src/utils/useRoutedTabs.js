@@ -10,39 +10,37 @@ import { useAppHistory } from './useAppHistory'
  * current tab panel via the URL, anywhere throughout the app.
  */
 const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
-  const { pathname } = useLocation()
+  const { pathname, state } = useLocation()
   const history = useAppHistory()
 
   const [tabIndex, setTabIndex] = useState(defaultTabIndex)
 
   useEffect(() => {
-    const matchedIndex = tabPaths.findIndex((tabName) =>
-      matchPath(pathname, {
-        path: tabName,
-        exact: false,
-        strict: false,
-      }),
+    const matchedIndex = tabPaths.findIndex(
+      (tabName) =>
+        matchPath(pathname, {
+          path: tabName,
+          exact: false,
+          strict: false,
+        }) || tabName === state?.fromPage,
     )
 
     if (matchedIndex !== -1) {
       setTabIndex(matchedIndex)
     }
-  }, [pathname, tabPaths, defaultTabIndex])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, tabPaths, defaultTabIndex, state?.fromPage])
 
   const handleTabChange = (tabIndex) => {
-    // on shallow match return to shallow root
     if (
-      matchPath(pathname, {
-        path: tabPaths[tabIndex],
-        exact: false,
-        strict: false,
-      })
+      // TODO: remove this edge case when refactoring Reach Tabs into NavLinks
+      tabIndex === 0 &&
+      pathname.includes('/entry') &&
+      state?.fromPage === '/list'
     ) {
-      history.push(tabPaths[tabIndex])
+      history.push(pathname, { state: { fromPage: '/map' } })
     } else {
-      // otherwise push new shallow while keeping deep link
-      const segments = pathname.split('/')
-      history.push([tabPaths[tabIndex], ...segments.splice(2)].join('/'))
+      history.push(tabPaths[tabIndex])
     }
   }
 

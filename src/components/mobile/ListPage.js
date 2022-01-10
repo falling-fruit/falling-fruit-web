@@ -2,11 +2,16 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import styled from 'styled-components/macro'
 
 import { fetchListLocations } from '../../redux/listSlice'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import InfiniteList from '../list/InfiniteList'
 import { NoResultsFound, ShouldZoomIn } from '../list/ListLoading'
+
+const ListPageWrapper = styled.div`
+  margin-top: 85px;
+`
 
 const ListPage = () => {
   const { pathname } = useLocation()
@@ -23,12 +28,14 @@ const ListPage = () => {
     }
   }, [pathname, dispatch])
 
+  let inner
+
   if (isShowingClusters) {
-    return <ShouldZoomIn />
+    inner = <ShouldZoomIn />
   } else if (locations.length === 0 && !isNextPageLoading) {
-    return <NoResultsFound />
+    inner = <NoResultsFound />
   } else {
-    return (
+    inner = (
       <AutoSizer>
         {({ width, height }) => (
           <InfiniteList
@@ -47,6 +54,8 @@ const ListPage = () => {
       </AutoSizer>
     )
   }
+
+  return <ListPageWrapper>{inner}</ListPageWrapper>
 }
 
 export default ListPage

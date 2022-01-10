@@ -92,7 +92,7 @@ const EntryOverview = ({ locationData, className }) => {
 
   const handleStreetView = () => {
     if (!isDesktop) {
-      history.push(`/map/entry/${locationData.id}`)
+      history.push(`/entry/${locationData.id}`, { fromPage: '/map' })
     }
 
     // TODO: change setTimeout to make it wait for map component to mount
@@ -150,7 +150,12 @@ const EntryOverview = ({ locationData, className }) => {
             {locationData.import_id && (
               <p className="updatedTime">
                 {t('Imported from')}{' '}
-                <Link to={`/about/dataset/${locationData.import_id}`}>
+                <Link
+                  to={{
+                    pathname: `/about/dataset/${locationData.import_id}`,
+                    state: { fromPage: `/entry/${locationData.id}` },
+                  }}
+                >
                   {locationData.author}
                 </Link>
               </p>

@@ -10,8 +10,10 @@ const Button = styled(ResetButton)`
   flex-grow: 1;
   align-items: center;
   cursor: pointer;
+  padding: 2px 0;
+  font-size: 0.875rem;
   font-weight: bold;
-  border: 3px ${({ theme }) => theme.orange} solid;
+  border: 2px ${({ theme }) => theme.orange} solid;
   &:first-child {
     border-radius: 3px 0 0 3px;
   }
