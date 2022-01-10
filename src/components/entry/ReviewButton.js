@@ -5,7 +5,7 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
 
-export const ReviewButton = () => {
+export const ReviewButton = (props) => {
   const history = useAppHistory()
   const { id } = useParams()
   const isDesktop = useIsDesktop()
@@ -21,6 +21,7 @@ export const ReviewButton = () => {
           history.push(`/entry/${id}/review`)
         }
       }}
+      {...props}
     >
       Review
     </Button>

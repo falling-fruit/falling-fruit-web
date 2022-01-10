@@ -10,7 +10,7 @@ import { RATINGS } from '../../constants/ratings'
 const SummaryTable = styled.table`
   border-spacing: 0;
   width: 100%;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 
   svg {
     width: 1.2em;

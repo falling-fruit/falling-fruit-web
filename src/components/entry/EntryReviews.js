@@ -25,7 +25,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
   return (
     <TextContent>
       <ReviewSummary reviews={reviews} />
-      {!isDesktop && <ReviewButton />}
+      {!isDesktop && <ReviewButton style={{ marginBottom: '1em' }} />}
       {userReviews.map((review) => (
         <Review
           key={review.id}
