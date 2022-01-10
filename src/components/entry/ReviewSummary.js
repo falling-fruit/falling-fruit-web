@@ -10,8 +10,7 @@ import { RATINGS } from '../../constants/ratings'
 const SummaryTable = styled.table`
   border-spacing: 0;
   width: 100%;
-  margin-bottom: 16px;
-  font-size: 1.14rem;
+  margin-bottom: 2em;
 
   svg {
     width: 1.2em;
@@ -21,16 +20,24 @@ const SummaryTable = styled.table`
   }
 
   tbody {
-    color: ${({ theme }) => theme.secondaryText};
+    line-height: 1.14;
+  }
+
+  td:nth-child(1) {
+    font-size: 1rem;
+    color: ${({ theme }) => theme.tertiaryText};
+    margin: 3px 0;
   }
 
   td:nth-child(2) {
+    font-size: 1.14rem;
     text-align: right;
   }
 
   caption {
     text-align: left;
-    margin-bottom: 8px;
+    margin-bottom: 1em;
+    font-size: 1.125rem;
   }
 `
 
