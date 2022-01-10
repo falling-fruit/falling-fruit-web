@@ -8,19 +8,34 @@ import ResetButton from '../ui/ResetButton'
 import { formatISOString } from './textFormatters'
 
 const ReviewContainer = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  position: relative;
+
+  :after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -23px;
+    width: calc(100% + 46px);
+    height: 1px;
+    background: ${({ theme }) => theme.secondaryBackground};
+  }
 
   ${({ $editable, theme }) =>
     $editable &&
     `
     background: ${theme.navBackground};
     padding: 0.6em;
-    margin-bottom: calc(20px - 0.6em);
     border-radius: 8px;
+
+    :after {
+      display: none;
+    }
   `}
 `
 const Label = styled.p`
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: ${({ theme }) => theme.tertiaryText};
   margin: 3px 0px;
 `
@@ -28,7 +43,7 @@ const RatingTable = styled.table`
   width: 100%;
   margin-bottom: 6px;
   border-spacing: 0;
-  line-height: 1.66;
+  line-height: 1.14;
 
   td:nth-child(2) {
     width: 100%;
@@ -121,7 +136,8 @@ const Review = ({
       <blockquote>{review.comment}</blockquote>
       {!editable && (
         <cite>
-          Reviewed {formatISOString(review.created_at)} by{' '}
+          {review.observed_at ? 'Observed' : 'Reviewed'} on{' '}
+          {formatISOString(review.observed_at || review.created_at)} by{' '}
           {review.author ?? 'Anonymous'}
         </cite>
       )}

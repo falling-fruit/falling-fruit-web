@@ -27,7 +27,6 @@ const StyledProgressBarStep = styled.div`
   > div:last-child {
     // Step Label
     text-align: center;
-    width: 36px;
     margin-top: 4px;
     font-size: 0.625rem;
   }
