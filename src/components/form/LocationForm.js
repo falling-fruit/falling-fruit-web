@@ -183,19 +183,15 @@ export const locationToForm = ({
   season_start,
   season_stop,
   access,
-}) => {
-  const obj = {
-    types: type_ids.map((id) => ({
-      value: id,
-    })),
-    description,
-    season_start: MONTH_OPTIONS[season_start],
-    season_stop: MONTH_OPTIONS[season_stop],
-    access: PROPERTY_ACCESS_OPTIONS[access],
-  }
-  console.log(obj)
-  return obj
-}
+}) => ({
+  types: type_ids.map((id) => ({
+    value: id,
+  })),
+  description,
+  season_start: MONTH_OPTIONS[season_start],
+  season_stop: MONTH_OPTIONS[season_stop],
+  access: PROPERTY_ACCESS_OPTIONS[access],
+})
 
 export const LocationForm = ({
   editingId,
