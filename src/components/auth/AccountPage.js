@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
-import { logout } from '../../redux/authSlice'
+import { checkAuth, logout } from '../../redux/authSlice'
 import { editUser, getUser } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
@@ -39,10 +39,9 @@ const userToForm = (user) => ({
 })
 
 const AccountPage = () => {
+  const dispatch = useDispatch()
   const isLoading = useSelector((state) => state.auth.isLoading)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
-
-  const dispatch = useDispatch()
 
   const [user, setUser] = useState()
 
@@ -72,6 +71,7 @@ const AccountPage = () => {
       toast.success(`Account edited successfully!${details}`)
 
       setUser(response)
+      dispatch(checkAuth())
     } catch (e) {
       toast.error(`Account editing failed: ${e.response?.data?.error}`)
       console.error(e.response)
@@ -92,9 +92,13 @@ const AccountPage = () => {
                 email: Yup.string().email().required(),
                 bio: Yup.string(),
                 new_password: Yup.string().min(6),
-                new_password_confirm: Yup.string()
-                  .oneOf([Yup.ref('new_password')])
-                  .required('Passwords must match'),
+                new_password_confirm: Yup.string().test(
+                  'passwords-match',
+                  'Passwords must match',
+                  function (value) {
+                    return this.parent.new_password === value
+                  },
+                ),
                 password_confirmation: Yup.string()
                   .when('new_password', (new_password, schema) =>
                     new_password

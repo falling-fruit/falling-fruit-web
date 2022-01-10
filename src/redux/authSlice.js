@@ -4,20 +4,33 @@ import { getUser, getUserToken } from '../utils/api'
 import authStore from '../utils/authStore'
 import { setReducer } from './mapSlice'
 
-export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
-  const token = authStore.getToken()
+export const checkAuth = createAsyncThunk(
+  'auth/checkAuth',
+  async (_data, { rejectWithValue }) => {
+    let token
+    try {
+      token = authStore.getToken()
+    } catch (err) {
+      return rejectWithValue(err)
+    }
 
-  if (token?.access_token) {
-    return await getUser()
-  } else {
-    return null
-  }
-})
+    if (token?.access_token) {
+      return await getUser()
+    } else {
+      return null
+    }
+  },
+)
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ email, password, rememberMe }) => {
-    const token = await getUserToken(email, password)
+  async ({ email, password, rememberMe }, { rejectWithValue }) => {
+    let token
+    try {
+      token = await getUserToken(email, password)
+    } catch (err) {
+      return rejectWithValue(err)
+    }
     authStore.setToken(token, rememberMe)
 
     return await getUser()
@@ -51,7 +64,7 @@ export const authSlice = createSlice({
       state.isLoading = false
     },
     [checkAuth.rejected]: (state, action) => {
-      state.error = action.error
+      state.error = action.payload
       state.isLoading = false
     },
 
@@ -64,7 +77,7 @@ export const authSlice = createSlice({
       state.isLoading = false
     },
     [login.rejected]: (state, action) => {
-      state.error = action.error
+      state.error = action.payload
       state.isLoading = false
     },
 
