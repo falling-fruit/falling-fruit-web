@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -28,11 +27,6 @@ const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
 `
 
 const MainPane = () => {
-  useEffect(() => {
-    // TODO: fix slow main pane mount
-    console.log('mainpane mount')
-    return () => console.log('mainpane unmount')
-  }, [])
   const history = useAppHistory()
   return (
     <Container>

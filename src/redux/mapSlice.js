@@ -169,6 +169,7 @@ export const mapSlice = createSlice({
       const { ne, sw } = state.view.bounds
 
       if (state.isFilterUpdated) {
+        state.location = null
         state.locations = action.payload
         state.isFilterUpdated = false
       } else {

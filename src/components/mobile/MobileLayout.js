@@ -80,10 +80,7 @@ const MobileLayout = () => {
             {({ match }) => <EditLocationForm editingId={match.params.id} />}
           </Route>
           <Route path="/entry/new/details">
-            <LocationForm
-              stepped
-              onSubmit={(response) => history.push(`/entry/${response.id}`)}
-            />
+            <LocationForm stepped />
           </Route>
           <Route path={['/map', '/entry', '/list', '/settings']}>
             <Switch>

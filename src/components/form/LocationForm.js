@@ -265,7 +265,7 @@ export const LocationForm = ({
         ]),
   ]
 
-  onSubmit = onSubmit ?? (() => history.push('/map'))
+  onSubmit = onSubmit ?? ((response) => history.push(`/entry/${response.id}`))
   const handleSubmit = async ({
     'g-recaptcha-response': recaptcha,
     review,
