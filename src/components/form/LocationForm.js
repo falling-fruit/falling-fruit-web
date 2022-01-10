@@ -302,7 +302,7 @@ export const LocationForm = ({
 
     if (response && !response.error) {
       dispatch(fetchLocations)
-      onSubmit()
+      onSubmit(response)
     }
   }
 

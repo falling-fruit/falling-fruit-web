@@ -61,8 +61,8 @@ const getStreetAddress = async (lat, lng) => {
  */
 const hasSeasonality = (locationData) =>
   !!(
-    locationData.no_season ||
-    (locationData.season_start && locationData.season_stop)
+    locationData.no_season != null ||
+    (locationData.season_start != null && locationData.season_stop != null)
   )
 
 export {
