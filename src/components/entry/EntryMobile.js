@@ -71,13 +71,18 @@ const DrawerContainer = styled.div`
 const EntryImages = styled.div`
   width: 100%;
   height: ${ENTRY_IMAGE_HEIGHT}px;
-  position: absolute;
-  top: 0;
-  transform: translateY(
-    ${({ heightScalar }) => -heightScalar * ENTRY_IMAGE_HEIGHT}px
-  );
-  transition: transform 0.15s linear;
-  z-index: -10;
+
+  ${({ $isInDrawer, heightScalar }) =>
+    $isInDrawer
+      ? `position: absolute;
+    top: 0;
+    transform: translateY(
+      ${-heightScalar * ENTRY_IMAGE_HEIGHT}px
+    );
+    transition: transform 0.15s linear;
+    z-index: -10;
+  `
+      : `margin-top: -${BUTTON_HEIGHT}px;`}
 `
 
 const Buttons = styled.div`
@@ -247,6 +252,7 @@ const EntryMobile = ({
     <div>
       {showEntryImages ? (
         <EntryImages
+          $isInDrawer={isInDrawer}
           heightScalar={!isInDrawer ? 1 : entryImageHeightMultiplier}
         >
           <Carousel
