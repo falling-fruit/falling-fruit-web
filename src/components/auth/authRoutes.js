@@ -10,16 +10,16 @@ import SignupPage from './SignupPage'
 
 const pages = [
   {
+    path: '/account',
+    component: AccountPage,
+  },
+  {
     path: '/login',
     component: LoginPage,
   },
   {
     path: '/signup',
     component: SignupPage,
-  },
-  {
-    path: '/account',
-    component: AccountPage,
   },
   {
     path: '/password/reset',
