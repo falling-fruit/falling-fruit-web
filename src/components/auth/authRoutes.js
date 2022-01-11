@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
 
-import AuthSwitch from './AuthSwitch'
+import AccountPage from './AccountPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
 import LoginPage from './LoginPage'
@@ -19,8 +19,7 @@ const pages = [
   },
   {
     path: '/account',
-    // TODO: Change to AccountPage, and split authRoutes into mobile/desktop versions
-    component: AuthSwitch,
+    component: AccountPage,
   },
   {
     path: '/password/reset',
@@ -39,6 +38,9 @@ const pages = [
     component: ConfirmationPage,
   },
 ]
+
+// TODO: Delete export once tabs work off route
+export const authPages = pages
 
 const authRoutes = pages.map((props) => <Route key={props.path} {...props} />)
 export default authRoutes
