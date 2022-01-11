@@ -6,6 +6,7 @@ import { getClusters, getLocations } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
+import { updateSelection } from './updateSelection'
 
 /**
  * Initial view state of the map.
@@ -14,7 +15,7 @@ import { selectParams } from './selectParams'
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const { isDefaultView, ...initialView } = parseUrl()
+const { isInitialEntry, ...initialView } = parseUrl()
 
 const TRACKING_LOCATION_ZOOM = 16
 
@@ -48,10 +49,11 @@ export const mapSlice = createSlice({
   name: 'map',
   initialState: {
     view: initialView,
-    isDefaultView,
+    isInitialEntry,
     oldView: null,
     isLoading: false,
     locations: [],
+    isFilterUpdated: false,
     clusters: [],
     hoveredLocationId: null,
     geolocation: null,
@@ -71,10 +73,10 @@ export const mapSlice = createSlice({
     updateEntryLocation: (state, action) => {
       state.location = action.payload
 
-      if (state.isDefaultView) {
+      if (state.isInitialEntry) {
         const { lat, lng } = state.location
 
-        state.isDefaultView = false
+        state.isInitialEntry = false
         state.view = {
           center: {
             lat,
@@ -152,6 +154,10 @@ export const mapSlice = createSlice({
     },
   },
   extraReducers: {
+    [updateSelection]: (state) => {
+      state.isFilterUpdated = true
+    },
+
     [searchView.type]: (state, action) => {
       state.view = fitBounds(action.payload, state.view.size)
     },
@@ -162,18 +168,24 @@ export const mapSlice = createSlice({
     [fetchMapLocations.fulfilled]: (state, action) => {
       const { ne, sw } = state.view.bounds
 
-      // Drop locations out of bounds
-      const locationsInBounds = state.locations.filter(
-        ({ lat, lng }) =>
-          lat <= ne.lat && lng <= ne.lng && lat >= sw.lat && lng >= sw.lng,
-      )
+      if (state.isFilterUpdated) {
+        state.location = null
+        state.locations = action.payload
+        state.isFilterUpdated = false
+      } else {
+        // Drop locations out of bounds
+        const locationsInBounds = state.locations.filter(
+          ({ lat, lng }) =>
+            lat <= ne.lat && lng <= ne.lng && lat >= sw.lat && lng >= sw.lng,
+        )
 
-      // Combine with new locations in bounds
-      state.locations = unionWith(
-        eqBy(prop('id')),
-        locationsInBounds,
-        action.payload,
-      )
+        // Combine with new locations in bounds
+        state.locations = unionWith(
+          eqBy(prop('id')),
+          locationsInBounds,
+          action.payload,
+        )
+      }
 
       state.clusters = []
       state.isLoading = false

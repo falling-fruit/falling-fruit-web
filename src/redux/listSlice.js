@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
-import { updateSelection } from './filterSlice'
 import { setReducer, viewChange } from './mapSlice'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
+import { updateSelection } from './updateSelection'
 
 export const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',

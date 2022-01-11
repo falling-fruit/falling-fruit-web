@@ -28,7 +28,7 @@ export const ProgressButtons = styled.div`
 
   button {
     // TODO: Should width be manually adjusted?
-    width: 130px;
+    width: 110px;
 
     &:not(:last-child) {
       margin-right: 12px;
@@ -39,7 +39,10 @@ export const ProgressButtons = styled.div`
 const FormikStep = ({ label: _label, children }) => <>{children}</>
 
 const FormikStepper = ({ children, onSubmit, ...props }) => {
-  const steps = Children.toArray(children)
+  const childrenArr = Children.toArray(children)
+  const steps = childrenArr.filter((child) => child.type === FormikStep)
+  const otherChildren = childrenArr.filter((child) => child.type !== FormikStep)
+
   const [step, setStep] = useState(0)
   const [completed, setCompleted] = useState(false)
 
@@ -60,9 +63,10 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
     <Formik
       {...props}
       validationSchema={currentChild.props.validationSchema}
+      validate={currentChild.props.validate}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isValid, isSubmitting }) => (
         <StyledForm>
           <div>{currentChild}</div>
 
@@ -79,7 +83,7 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
               </Button>
             )}
             <Button
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid}
               type="submit"
               rightIcon={<RightArrowAlt />}
             >
@@ -92,6 +96,8 @@ const FormikStepper = ({ children, onSubmit, ...props }) => {
             step={completed ? steps.length + 1 : step}
             onChange={setStep}
           />
+
+          {otherChildren}
         </StyledForm>
       )}
     </Formik>

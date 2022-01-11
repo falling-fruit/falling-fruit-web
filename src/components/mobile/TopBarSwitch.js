@@ -21,7 +21,14 @@ const TopBarSwitch = () => {
           '/confirmation',
         ]}
       ></Route>
-      <Route path="/entry/new">
+      <Route
+        path={[
+          '/review/:id/edit',
+          '/entry/:id/review',
+          '/entry/:id/edit',
+          '/entry/new',
+        ]}
+      >
         <TopBar>
           <LocationNav />
         </TopBar>
