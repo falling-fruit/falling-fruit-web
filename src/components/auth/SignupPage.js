@@ -1,15 +1,21 @@
 import { Form, Formik } from 'formik'
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { addUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { PageTemplate } from '../about/PageTemplate'
+import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import { FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
+
+const LoginNotice = styled.p`
+  margin-top: -1.5em;
+`
 
 const formToUser = (form) => ({ ...form, password_confirm: undefined })
 
@@ -41,70 +47,76 @@ const SignupPage = () => {
   }
 
   return (
-    <PageTemplate>
-      <h1>Sign up</h1>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-          password_confirm: '',
-          name: '',
-          bio: '',
-        }}
-        validationSchema={Yup.object({
-          email: Yup.string().email().required(),
-          password: Yup.string().min(6).required(),
-          password_confirm: Yup.string()
-            .oneOf([Yup.ref('password')])
-            .required('Passwords must match'),
-          name: Yup.string(),
-          bio: Yup.string(),
-          'g-recaptcha-response': Yup.string().required(),
-        })}
-        onSubmit={handleSubmit}
-      >
-        {({ dirty, isValid, isSubmitting }) => (
-          <Form>
-            <FormInputWrapper>
-              <Input type="text" name="email" label="Email" />
+    <PageScrollWrapper>
+      <PageTemplate>
+        <h1>Sign up</h1>
+        <LoginNotice>
+          Have an account? <Link to="/login">Login</Link>
+        </LoginNotice>
 
-              {/* TODO: need designs for this information */}
-              <p>Password must be at least 6 characters long.</p>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+            password_confirm: '',
+            name: '',
+            bio: '',
+          }}
+          validationSchema={Yup.object({
+            email: Yup.string().email().required(),
+            password: Yup.string().min(6).required(),
+            password_confirm: Yup.string()
+              .oneOf([Yup.ref('password')])
+              .required('Passwords must match'),
+            name: Yup.string(),
+            bio: Yup.string(),
+            'g-recaptcha-response': Yup.string().required(),
+          })}
+          onSubmit={handleSubmit}
+        >
+          {({ dirty, isValid, isSubmitting }) => (
+            <Form>
+              <FormInputWrapper>
+                <Input type="text" name="email" label="Email" />
 
-              <Input name="password" label="Password" type="password" />
-              <Input
-                name="password_confirm"
-                label="Confirm Password"
-                type="password"
+                {/* TODO: need designs for this information */}
+                <p>Password must be at least 6 characters long.</p>
+
+                <Input name="password" label="Password" type="password" />
+                <Input
+                  name="password_confirm"
+                  label="Confirm Password"
+                  type="password"
+                />
+
+                <Input type="text" name="name" label="Name" optional />
+
+                <Textarea name="bio" label="About You" optional />
+              </FormInputWrapper>
+
+              <Recaptcha
+                name="g-recaptcha-response"
+                ref={(e) => {
+                  recaptchaRef.current = e
+                }}
               />
 
-              <Input type="text" name="name" label="Name" optional />
-
-              <Textarea name="bio" label="About You" optional />
-            </FormInputWrapper>
-
-            <Recaptcha
-              name="g-recaptcha-response"
-              ref={(e) => {
-                recaptchaRef.current = e
-              }}
-            />
-
-            <FormButtonWrapper>
-              <Button secondary type="reset">
-                Clear
-              </Button>
-              <Button
-                type="submit"
-                disabled={!dirty || !isValid || isSubmitting}
-              >
-                {isSubmitting ? 'Signing up' : 'Sign up'}
-              </Button>
-            </FormButtonWrapper>
-          </Form>
-        )}
-      </Formik>
-    </PageTemplate>
+              <FormButtonWrapper>
+                <Button secondary type="reset">
+                  Clear
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={!dirty || !isValid || isSubmitting}
+                >
+                  {isSubmitting ? 'Signing up' : 'Sign up'}
+                </Button>
+              </FormButtonWrapper>
+            </Form>
+          )}
+        </Formik>
+      </PageTemplate>
+    </PageScrollWrapper>
   )
 }
 
