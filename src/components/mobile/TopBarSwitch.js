@@ -10,7 +10,17 @@ const TopBarSwitch = () => {
 
   return (
     <Switch>
-      <Route path={['/settings', '/account', '/about', '/signup']}></Route>
+      <Route
+        path={[
+          '/settings',
+          '/account',
+          '/about',
+          '/signup',
+          '/login',
+          '/password',
+          '/confirmation',
+        ]}
+      ></Route>
       <Route path="/entry/new">
         <TopBar>
           <LocationNav />

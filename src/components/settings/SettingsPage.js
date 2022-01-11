@@ -121,7 +121,7 @@ const SettingsPage = ({ desktop }) => {
               </>
             ) : (
               <>
-                <Button onClick={() => history.push('/account')}>Login</Button>
+                <Button onClick={() => history.push('/login')}>Login</Button>
                 <Button secondary onClick={() => history.push('/signup')}>
                   Sign up
                 </Button>
