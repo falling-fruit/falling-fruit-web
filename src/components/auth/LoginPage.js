@@ -20,7 +20,7 @@ import {
 const LoginPage = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
   const error = useSelector((state) => state.auth.error)
-  console.log(error)
+  console.error(error)
   const { state } = useLocation()
 
   const dispatch = useDispatch()

@@ -25,12 +25,12 @@ const MobileLayout = () => {
   const streetView = useSelector((state) => state.map.streetView)
   const { pathname, state } = useLocation()
   const [tabIndex, handleTabChange] = useRoutedTabs(
-    tabs.map(({ path }) => path),
+    tabs.map(({ paths }) => paths),
     DEFAULT_TAB,
   )
 
-  const tabList = tabs.map(({ path, icon, label }) => (
-    <Tab key={path}>
+  const tabList = tabs.map(({ paths, icon, label }) => (
+    <Tab key={paths[0]}>
       {icon}
       {label}
     </Tab>

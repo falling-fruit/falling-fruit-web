@@ -2,28 +2,29 @@ import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt, UserCircle } from '@styled-icons/boxicons-solid'
 
 import i18n from '../../i18n.js'
+import { authPages } from '../auth/authRoutes.js'
 
 const DEFAULT_TAB = 0 // Map
 
 // Exposed as a function so that labels can be re-translated if language changes
 const getTabs = () => [
   {
-    path: '/map',
+    paths: ['/map'],
     icon: <MapAlt />,
     label: i18n.t('Map'),
   },
   {
-    path: '/list',
+    paths: ['/list'],
     icon: <ListUl />,
     label: i18n.t('List'),
   },
   {
-    path: '/settings',
+    paths: ['/settings'],
     icon: <Cog />,
     label: i18n.t('Settings'),
   },
   {
-    path: '/account',
+    paths: authPages.map((route) => route.path),
     icon: <UserCircle />,
     label: i18n.t('Account'),
   },
