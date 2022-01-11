@@ -16,13 +16,15 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
   const [tabIndex, setTabIndex] = useState(defaultTabIndex)
 
   useEffect(() => {
-    const matchedIndex = tabPaths.findIndex(
-      (tabName) =>
-        matchPath(pathname, {
-          path: tabName,
-          exact: false,
-          strict: false,
-        }) || tabName === state?.fromPage,
+    const matchedIndex = tabPaths.findIndex((tabNames) =>
+      tabNames.some(
+        (tabName) =>
+          matchPath(pathname, {
+            path: tabName,
+            exact: false,
+            strict: false,
+          }) || tabName === state?.fromPage,
+      ),
     )
 
     if (matchedIndex !== -1) {
@@ -40,7 +42,7 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
     ) {
       history.push(pathname, { state: { fromPage: '/map' } })
     } else {
-      history.push(tabPaths[tabIndex])
+      history.push(tabPaths[tabIndex]?.[0])
     }
   }
 

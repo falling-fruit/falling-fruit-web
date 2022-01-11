@@ -53,7 +53,7 @@ const AccountPage = () => {
   }, [])
 
   if (!isLoading && !isLoggedIn) {
-    return <Redirect to={getPathWithMapState('/map')} />
+    return <Redirect to={getPathWithMapState('/login')} />
   }
 
   const handleSubmit = async (values) => {
@@ -167,7 +167,13 @@ const AccountPage = () => {
               )}
             </Formik>
             <br />
-            <Button onClick={() => dispatch(logout)}>Logout</Button>
+            <Button
+              onClick={() => {
+                dispatch(logout)
+              }}
+            >
+              Logout
+            </Button>
           </>
         ) : (
           <LoadingIndicator vertical cover />
