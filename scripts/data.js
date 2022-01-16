@@ -83,12 +83,14 @@ async function getAndWriteData(
 
   // Keep only keys that are listed and have truthy values
   if (keys) {
-    processed = processed.map((row) => Object.keys(row)
+    processed = processed.map((row) =>
+      Object.keys(row)
         .filter((key) => row[key] && keys.includes(key))
         .reduce((obj, key) => {
           obj[key] = row[key]
           return obj
-        }, {}))
+        }, {}),
+    )
   }
 
   const formatted = formatters.reduce(
