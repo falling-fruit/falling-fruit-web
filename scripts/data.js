@@ -22,6 +22,29 @@ const HARVEST_SUBSTITUTIONS = {
   ...GENERAL_SUBSTITUTIONS,
   '-': null,
 }
+const PRESS_KEYS = [
+  'published_on',
+  'outlet',
+  'outlet_url',
+  'title',
+  'author',
+  'url',
+  'embed_html',
+  'photo_url',
+]
+const HARVEST_KEYS = [
+  'active',
+  'country',
+  'state',
+  'city',
+  'name',
+  'name_url',
+  'subname',
+  'subname_url',
+  'facebook',
+  'twitter',
+  'instagram',
+]
 
 const isIncluded = ({ include }) => !!include
 
@@ -53,9 +76,20 @@ async function getAndWriteData(
   output,
   substitutions = {},
   formatters = [],
+  keys = null,
 ) {
   const { data } = await axios.get(url)
-  const processed = data.map(substituteBy(substitutions)).filter(isIncluded)
+  let processed = data.map(substituteBy(substitutions)).filter(isIncluded)
+
+  // Keep only keys that are listed and have truthy values
+  if (keys) {
+    processed = processed.map((row) => Object.keys(row)
+        .filter((key) => row[key] && keys.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = row[key]
+          return obj
+        }, {}))
+  }
 
   const formatted = formatters.reduce(
     (unformatted, formatter) => formatter(unformatted),
@@ -71,5 +105,17 @@ async function getAndWriteData(
   })
 }
 
-getAndWriteData(PRESS_URL, PRESS_OUTPUT, GENERAL_SUBSTITUTIONS, [getDataByYear])
-getAndWriteData(HARVEST_URL, HARVEST_OUTPUT, HARVEST_SUBSTITUTIONS)
+getAndWriteData(
+  PRESS_URL,
+  PRESS_OUTPUT,
+  GENERAL_SUBSTITUTIONS,
+  [getDataByYear],
+  PRESS_KEYS,
+)
+getAndWriteData(
+  HARVEST_URL,
+  HARVEST_OUTPUT,
+  HARVEST_SUBSTITUTIONS,
+  [],
+  HARVEST_KEYS,
+)
