@@ -98,7 +98,8 @@ async function getAndWriteData(
     processed,
   )
 
-  const fileData = JSON.stringify(formatted)
+  // Indent and insert a new line to match autoformatting
+  const fileData = `${JSON.stringify(formatted, null, 2)}\n`
   fs.writeFile(output, fileData, (e) => {
     if (e) {
       throw e

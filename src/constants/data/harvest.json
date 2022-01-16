@@ -10,7 +10,11 @@
     "name_url": "http://www.foodnotlawns.com/",
     "facebook": "https://www.facebook.com/GrowFoodNotLawns/"
   },
-  { "active": true, "name": "Freedge", "name_url": "http://freedge.org/" },
+  {
+    "active": true,
+    "name": "Freedge",
+    "name_url": "http://freedge.org/"
+  },
   {
     "active": true,
     "name": "Fruit Tree Planting Foundation",
