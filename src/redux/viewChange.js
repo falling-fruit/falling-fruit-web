@@ -16,7 +16,7 @@ import {
  * greater than VISIBLE_CLUSTER_ZOOM_LIMIT, locations will be displayed.
  * @constant {number}
  */
-export const VISIBLE_CLUSTER_ZOOM_LIMIT = 12
+export const VISIBLE_CLUSTER_ZOOM_LIMIT = 13
 
 export const getIsShowingClusters = (state) =>
   state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
