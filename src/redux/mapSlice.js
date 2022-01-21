@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fitBounds } from 'google-map-react'
 import { eqBy, prop, unionWith } from 'ramda'
 
+import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
 import { searchView } from './searchView'
@@ -149,7 +150,10 @@ export const mapSlice = createSlice({
     clusterClick: (state, action) => {
       state.view = {
         center: action.payload,
-        zoom: action.payload.count === 1 ? 13 : state.view.zoom + 2,
+        zoom:
+          action.payload.count === 1
+            ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
+            : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, state.view.zoom + 2),
       }
     },
   },
