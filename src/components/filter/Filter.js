@@ -79,7 +79,9 @@ const Filter = ({ isOpen }) => {
     [setSearchValue],
   )
 
+  // force component re-render by calling a dummy state setter
   const forceUpdate = useState()[1].bind(null, {})
+
   const didMount = useRef(false)
 
   const dispatch = useDispatch()
@@ -121,6 +123,9 @@ const Filter = ({ isOpen }) => {
   useLayoutEffect(() => {
     if (didMount.current === false) {
       didMount.current = true
+
+      // Force component to re-render after other calls
+      // to correctly render the value of `didMount`
       setTimeout(() => forceUpdate(), 0)
     }
 
