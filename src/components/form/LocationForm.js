@@ -196,7 +196,7 @@ const formToLocation = ({
   description,
   season_start: season_start?.value ?? null,
   season_stop: season_stop?.value ?? null,
-  access: access?.value,
+  access: access?.value ?? null,
   unverified: false,
 })
 
