@@ -28,6 +28,8 @@ const NavBack = ({ isEntry }) => {
   const match = useRouteMatch('/entry/:id')
   const entryId = match?.params.id
 
+  const isEditingEntry = useRouteMatch('/entry/:id/edit')
+
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
     history.push(state?.fromPage ?? '/map')
@@ -39,7 +41,7 @@ const NavBack = ({ isEntry }) => {
         <ArrowBack />
         {t('Back')}
       </BackButton>
-      {isEntry && (
+      {isEntry && match && !isEditingEntry && (
         <BackButton onClick={() => history.push(`/entry/${entryId}/edit`)}>
           <Pencil />
           Edit
