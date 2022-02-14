@@ -1,7 +1,4 @@
-import {
-  HelpCircle as QuestionMark,
-  Star as StarEmpty,
-} from '@styled-icons/boxicons-regular'
+import { Star as StarEmpty } from '@styled-icons/boxicons-regular'
 import { Star, StarHalf } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
@@ -52,7 +49,7 @@ const SummaryRow = ({ title, scores, total }) => {
   }
 
   if (Number.isNaN(percentScore)) {
-    icon = <QuestionMark />
+    icon = null
   }
 
   return (
