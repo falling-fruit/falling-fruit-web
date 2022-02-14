@@ -161,12 +161,13 @@ const validateLocationStep = ({ types, season_start, season_stop }) => {
     errors.types = true
   }
 
-  // eslint-disable-next-line no-empty
-  if (season_start?.value != null && season_stop?.value != null) {
-  } else if (season_start?.value != null) {
-    errors.season_stop = true
-  } else if (season_stop?.value != null) {
-    errors.season_start = true
+  if ((season_start?.value != null) !== (season_stop?.value != null)) {
+    if (season_start?.value != null) {
+      errors.season_stop = true
+    }
+    if (season_stop?.value != null) {
+      errors.season_start = true
+    }
   }
 
   return errors
