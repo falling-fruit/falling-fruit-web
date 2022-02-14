@@ -47,8 +47,6 @@ export const filterSlice = createSlice({
     showOnlyOnMap: false,
   },
   reducers: {
-    setFilters: (state, action) => ({ ...state, ...action.payload }),
-
     openFilter: (state) => {
       state.isOpen = true
     },
@@ -72,9 +70,7 @@ export const filterSlice = createSlice({
       state.isLoading = false
     },
 
-    [updateSelection]: (state, action) => {
-      state.types = action.payload
-    },
+    [updateSelection]: (state, action) => ({ ...state, ...action.payload }),
 
     [fetchAllTypes.fulfilled]: (state, action) => {
       const typesWithPendingCategory = getTypesWithPendingCategory([
@@ -94,10 +90,16 @@ export const filterSlice = createSlice({
   },
 })
 
-export const { setFilters, openFilter, closeFilter } = filterSlice.actions
+export const { openFilter, closeFilter } = filterSlice.actions
+
+export const filtersChanged = (filters) => (dispatch) => {
+  dispatch(updateSelection(filters))
+  dispatch(fetchFilterCounts())
+  dispatch(fetchLocations())
+}
 
 export const selectionChanged = (types) => (dispatch) => {
-  dispatch(updateSelection(types))
+  dispatch(updateSelection({ types }))
   dispatch(fetchLocations())
 }
 

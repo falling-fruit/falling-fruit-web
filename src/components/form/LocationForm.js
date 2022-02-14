@@ -75,6 +75,10 @@ const StyledLocationForm = styled.div`
   padding: 0 10px;
   overflow: auto;
 
+  @media ${({ theme }) => theme.device.desktop} {
+    height: 100%;
+  }
+
   @media ${({ theme }) => theme.device.mobile} {
     padding: 8px 27px 20px;
     margin-top: 80px;
@@ -194,7 +198,7 @@ const formToLocation = ({
   description,
   season_start: season_start?.value ?? null,
   season_stop: season_stop?.value ?? null,
-  access: access?.value,
+  access: access?.value ?? null,
   unverified: false,
 })
 
