@@ -79,6 +79,7 @@ const Filter = ({ isOpen }) => {
     [setSearchValue],
   )
 
+  const forceUpdate = useState()[1].bind(null, {})
   const didMount = useRef(false)
 
   const dispatch = useDispatch()
@@ -120,8 +121,14 @@ const Filter = ({ isOpen }) => {
   useLayoutEffect(() => {
     if (didMount.current === false) {
       didMount.current = true
+      setTimeout(() => forceUpdate(), 0)
     }
-  })
+
+    return () => {
+      didMount.current = false
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const { t } = useTranslation()
   return isOpen ? (
