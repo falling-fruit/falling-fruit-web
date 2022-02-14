@@ -71,7 +71,8 @@ const Entry = ({
   setLightboxIndex,
   isFullScreen,
 }) => {
-  const showEntryImages = reviews && reviews[0]?.photos.length > 0
+  const showEntryImages =
+    reviews && reviews.some((review) => review.photos.length > 0)
 
   let content
 
