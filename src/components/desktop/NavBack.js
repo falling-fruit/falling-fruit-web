@@ -1,5 +1,6 @@
 import { ArrowBack, Pencil } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { useLocation, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -25,6 +26,7 @@ const NavBack = ({ isEntry }) => {
   const history = useAppHistory()
   const { state } = useLocation()
   const { t } = useTranslation()
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
   const match = useRouteMatch('/entry/:id')
   const entryId = match?.params.id
 
@@ -45,7 +47,7 @@ const NavBack = ({ isEntry }) => {
         <ArrowBack />
         {t('Back')}
       </BackButton>
-      {isEntry && match && !isEditingEntry && (
+      {isEntry && match && !isEditingEntry && isLoggedIn && (
         <BackButton onClick={() => history.push(`/entry/${entryId}/edit`)}>
           <Pencil />
           Edit
