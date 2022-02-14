@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { selectionChanged, setFilters } from '../../redux/filterSlice'
+import { filtersChanged, selectionChanged } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { fetchLocations } from '../../redux/viewChange'
 import { updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import {
@@ -137,7 +136,7 @@ const Filter = ({ isOpen }) => {
             values={filters}
             fields={TREE_SHOW_CHECKBOX_FIELDS}
             onChange={(values) => {
-              dispatch(setFilters(values))
+              dispatch(filtersChanged(values))
             }}
           />
           <FilterButtons
@@ -170,8 +169,7 @@ const Filter = ({ isOpen }) => {
           values={filters}
           fields={MUNI_AND_INVASIVE_CHECKBOX_FIELDS}
           onChange={(values) => {
-            dispatch(setFilters(values))
-            dispatch(fetchLocations())
+            dispatch(filtersChanged(values))
           }}
         />
       </MuniAndInvasiveCheckboxFilters>
