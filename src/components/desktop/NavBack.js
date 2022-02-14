@@ -32,7 +32,11 @@ const NavBack = ({ isEntry }) => {
 
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    history.push(state?.fromPage ?? '/map')
+    if (isEditingEntry) {
+      history.push(match.url)
+    } else {
+      history.push(state?.fromPage ?? '/map')
+    }
   }
 
   return (
