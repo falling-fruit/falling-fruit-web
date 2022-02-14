@@ -8,6 +8,7 @@ import * as Yup from 'yup'
 import { checkAuth, logout } from '../../redux/authSlice'
 import { editUser, getUser } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { Input, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
@@ -42,6 +43,7 @@ const AccountPage = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector((state) => state.auth.isLoading)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const history = useAppHistory()
 
   const [user, setUser] = useState()
 
@@ -169,7 +171,8 @@ const AccountPage = () => {
             <br />
             <Button
               onClick={() => {
-                dispatch(logout)
+                dispatch(logout())
+                history.push('/map')
               }}
             >
               Logout
