@@ -72,6 +72,7 @@ const INITIAL_LOCATION_VALUES = {
 const StyledLocationForm = styled.div`
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   padding: 0 10px;
   overflow: auto;
 
