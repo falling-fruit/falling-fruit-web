@@ -7,20 +7,28 @@ const TreeSelectContainer = styled.div`
   border-radius: 7px;
   padding: 0.5em;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+
   overflow: hidden;
   margin-bottom: 12px;
   @media ${({ theme }) => theme.device.mobile} {
     height: 50vh;
   }
+  position: relative;
+
+  div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 const RCTreeSelectSkeleton = () => (
   <TreeSelectContainer>
-    {new Array(32).fill(null).map((_, idx) => (
-      <Skeleton key={idx} width={Math.random() * 150 + 150} />
-    ))}
+    <div>
+      {new Array(32).fill(null).map((_, idx) => (
+        <Skeleton key={idx} width={Math.random() * 100 + 120} />
+      ))}
+    </div>
   </TreeSelectContainer>
 )
 

@@ -43,6 +43,10 @@ const StreetViewUIWrapper = styled.div`
   left: 20px;
   justify-content: space-between;
   position: absolute;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    top: 100px;
+  }
 `
 
 const placeholderPlace = { lat: 40.729884, lng: -73.990988 }
@@ -178,7 +182,6 @@ const Map = ({
           )}
         </StreetViewUIWrapper>
       )}
-
       <GoogleMapReact
         bootstrapURLKeys={bootstrapURLKeys}
         options={() => ({
