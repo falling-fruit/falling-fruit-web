@@ -20,11 +20,11 @@ const SpinningLoader = styled(LoaderAlt)`
   animation: 1s linear ${spin} infinite;
 `
 
-const getTrackLocationColor = ({ $disabled, $active }) =>
-  $active && !$disabled ? 'blue' : 'tertiaryText'
+const getTrackLocationColor = ({ disabled, $active }) =>
+  $active && !disabled ? 'blue' : 'tertiaryText'
 
-const TrackLocationIcon = ({ $disabled, $loading, ...props }) => {
-  if ($disabled) {
+const TrackLocationIcon = ({ disabled, $loading, ...props }) => {
+  if (disabled) {
     return <XCircle {...props} /> // TODO: replace this with a specific "disabled geolocation" icon, like Google Maps has
   } else if ($loading) {
     return <SpinningLoader {...props} />
@@ -76,7 +76,7 @@ const TrackLocationButton = ({ isIcon }) => {
 
   return (
     <TrackLocationBtn
-      $disabled={geolocation?.error}
+      disabled={geolocation?.error}
       $loading={geolocation?.loading}
       $active={isTrackingLocation}
       onClick={() => {
