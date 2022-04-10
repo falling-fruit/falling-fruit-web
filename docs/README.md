@@ -4,5 +4,7 @@ Welcome! We’re delighted for you to hop onboard and contribute to the frontend
 
 ## Table of Contents
 
-* [Setup](./setup.md)
-* [Styling Guidelines](./styling.md)
+- [Setup](./setup.md)
+- [Project File Structure](./file-structure.md)
+- [Map View Handler & Integration with Redux](./map-view-redux.md)
+- [Styling Guidelines](./styling.md)
