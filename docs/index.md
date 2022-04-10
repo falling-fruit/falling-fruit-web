@@ -2,30 +2,6 @@
 
 We’re delighted for you to hop onboard and contribute to the frontend of [Falling Fruit](https://fallingfruit.org/), a collaborative map of forageable food around the world.
 
-# Project file structure
+# Table of Contents
 
-# Library usage
-
-## Styled Components
-
-Styled Components makes it easy to tie CSS to an individual component. It’s also easy to write conditional styles that change based on that component’s props.
-
-Because we use styled-components, you should not write CSS in imported styledsheets, and use inline styles very sparingly (only when creating another styled component seems excessive).
-
-## Reach UI
-
-FF’s UI is designed from scratch, without relying on more opinionated UI frameworks like Material or Semantic. However, we still use a UI framework called Reach UI to provide an accessible, functional base for many of our components. Reach components are minimally styled out of the box, and can be easily styled with styled-components.
-
-When adding new components, be sure to check if Reach can provide a suitable base.
-
-## Redux
-
-See expanded section on Redux below.
-
-# Redux
-
-[test link to styling](./styling.md)
-[test link to README](./README.md)
-
-
-# Type filter
+* [Styling Guidelines](./styling.md)

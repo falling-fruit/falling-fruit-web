@@ -1,5 +1,5 @@
 ---
-title: This page has a title
+title: Styling Guidelines
 rank: 3
 ---
 ## Detecting mobile vs. desktop

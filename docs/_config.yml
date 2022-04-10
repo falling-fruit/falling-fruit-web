@@ -21,9 +21,10 @@
 title: Falling Fruit Web Docs
 description: >- # this means to ignore newlines until "baseurl:"
   Getting started with frontend development for Falling Fruit
+logo: https://camo.githubusercontent.com/b594e6af09d3f47d5ea6fda08143722e7d4ab1b4a4fd6d9812bde6fbb5283294/68747470733a2f2f66616c6c696e6766727569742e6f72672f6e65775f6c6f676f5f333030782e6a7067
 
 # Build settings
-remote_theme: armsp/minimally
+remote_theme: pages-themes/minimal@v0.2.0
 plugins:
   - jekyll-remote-theme
 
