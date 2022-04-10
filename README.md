@@ -10,10 +10,6 @@
   <br />
 </h1>
 <p align="center">
-  A <a href="https://uiuc.hack4impact.org/" target="_blank">Hack4Impact UIUC</a> project.
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/license-GPLv3-blue?style=flat-square" />
 </p>
 
