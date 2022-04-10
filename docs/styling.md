@@ -1,7 +1,5 @@
----
-title: Styling Guidelines
-rank: 3
----
+# Styling Guidelines
+
 ## Detecting mobile vs. desktop
 
 FF’s frontend is a progressive web app, which means that the same website is compatible with both desktop and mobile devices.
