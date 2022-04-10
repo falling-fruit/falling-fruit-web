@@ -1,6 +1,6 @@
-# Falling Fruit Frontend Documentation
+# Welcome!
 
-Welcome! We’re delighted for you to hop onboard and contribute to the frontend of Falling Fruit, a collaborative map of forage-able food around the world.
+We’re delighted for you to hop onboard and contribute to the frontend of [Falling Fruit](https://fallingfruit.org/), a collaborative map of forageable food around the world.
 
 # Project file structure
 
@@ -25,6 +25,7 @@ See expanded section on Redux below.
 # Redux
 
 [test link to styling](./styling.md)
+[test link to README](./README.md)
 
 
 # Type filter
