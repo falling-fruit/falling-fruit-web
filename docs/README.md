@@ -2,6 +2,8 @@
 
 Welcome! We’re delighted for you to hop onboard and contribute to the frontend of [Falling Fruit](https://fallingfruit.org/), a collaborative map of forageable food around the world.
 
+Available standalone at https://falling-fruit.github.io/falling-fruit-web/.
+
 ## Table of Contents
 
 - [Setup](./setup.md)
