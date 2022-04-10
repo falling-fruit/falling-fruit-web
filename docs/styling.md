@@ -9,6 +9,7 @@ Although most UI components are designed to be reusable across both platforms, w
 To write styles specific to a platform, use media queries. Standard media queries for each platform are exported from ``.
 
 ```
+
 ```
 
 To write platform-specific functionality, use the `useIsDesktop()` and `useIsMobile()` hooks exported from ``.
@@ -18,4 +19,5 @@ To write platform-specific functionality, use the `useIsDesktop()` and `useIsMob
 A standard set of colors is exported from ``. These are accessible through the theme when using styled components:
 
 ```
+
 ```
