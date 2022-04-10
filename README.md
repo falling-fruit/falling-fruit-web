@@ -10,10 +10,6 @@
   <br />
 </h1>
 <p align="center">
-  A <a href="https://uiuc.hack4impact.org/" target="_blank">Hack4Impact UIUC</a> project.
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/license-GPLv3-blue?style=flat-square" />
 </p>
 
@@ -21,25 +17,28 @@
 
 React-based, mobile-friendly frontend for Falling Fruit's website.
 
-For developers: more comprehensive documentation is available in [`/docs`](./docs).
+**For developers!** More comprehensive documentation is available in [`/docs`](./docs).
 
 ## Usage
 
 To run locally:
 
 1. Clone the repo: `git clone https://github.com/falling-fruit/falling-fruit-web`
-
 2. Setup environment variables: `cp example.env .env`, then edit and fill in `.env`.
-
 3. Install dependencies: `yarn`
-
 4. Run: `yarn start`
 
 You can always find the latest deployment of Falling Fruit at [falling-fruit.vercel.app](https://falling-fruit.vercel.app).
 
-## Team
+## Technologies
 
-### Fall 2021
+Built with React, Redux, Reach UI, Styled Components, and Formik. Vercel is used for automatic deployment.
+
+## Contributors
+
+Now maintained by [Falling Fruit](https://fallingfruit.org/about).
+
+Initially built by [Hack4Impact UIUC](https://uiuc.hack4impact.org/) in collaboration with Falling Fruit. Hack4Impact contributors:
 
 <table align="center">
   <tr>
@@ -68,6 +67,18 @@ You can always find the latest deployment of Falling Fruit at [falling-fruit.ver
       </a>
     </td>
     <td align="center">
+      <a href="https://www.linkedin.com/in/rebeccaxun/">
+        <img
+          src="https://uiuc.hack4impact.org/images/people/rebecca_xun.jpg"
+          width="200px"
+        />
+        <br />
+        <b>Rebecca Xun</b>
+        <br />
+        <sub>Product Manager</sub>
+      </a>
+    </td>
+    <td align="center">
       <a href="http://www.github.com/laurenho025">
         <img
           src="https://avatars.githubusercontent.com/u/42976373"
@@ -91,8 +102,6 @@ You can always find the latest deployment of Falling Fruit at [falling-fruit.ver
         <sub>Software Developer</sub>
       </a>
     </td>
-  </tr>
-  <tr>
     <td align="center">
       <a href="https://www.linkedin.com/in/ashankbehara/">
         <img
@@ -141,75 +150,6 @@ You can always find the latest deployment of Falling Fruit at [falling-fruit.ver
         <sub>Software Developer</sub>
       </a>
     </td>
-  </tr>
-</table>
-
-### Spring 2021
-
-<table align="center">
-  <tr>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/rebeccaxun/">
-        <img
-          src="https://uiuc.hack4impact.org/images/people/rebecca_xun.jpg"
-          width="200px"
-        />
-        <br />
-        <b>Rebecca Xun</b>
-        <br />
-        <sub>Product Manager</sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="http://www.linkedin.com/in/jeffrey-tang/">
-        <img
-          src="https://uiuc.hack4impact.org/images/people/jeffrey_tang.jpg"
-          width="200px"
-        />
-        <br />
-        <b>Jeffrey Tang</b>
-        <br />
-        <sub>Technical Lead</sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://linkedin.com/in/sirajchokshi">
-        <img
-          src="https://avatars.githubusercontent.com/u/19193347"
-          width="200px"
-        />
-        <br />
-        <b>Siraj Chokshi</b>
-        <br />
-        <sub>Product Designer</sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="http://www.github.com/laurenho025">
-        <img
-          src="https://uiuc.hack4impact.org/images/people/lauren_ho.jpg"
-          width="200px"
-        />
-        <br />
-        <b>Lauren Ho</b>
-        <br />
-        <sub>Software Developer</sub>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/arman-rafati-6907991b5">
-        <img
-          src="https://uiuc.hack4impact.org/images/people/arman_rafati.jpg"
-          width="200px"
-        />
-        <br />
-        <b>Arman Rafati</b>
-        <br />
-        <sub>Software Developer</sub>
-      </a>
-    </td>
     <td align="center">
       <a href="https://www.linkedin.com/in/archna-sobti">
         <img
@@ -237,10 +177,6 @@ You can always find the latest deployment of Falling Fruit at [falling-fruit.ver
   </tr>
 </table>
 
-## Technologies
-
-This application is built with React. Vercel is used for automatic deployment.
-
 <hr />
 
-[GPLv3](./LICENSE) licensed · © 2021 [Hack4Impact UIUC](https://github.com/hack4impact-uiuc)
+[GPLv3](./LICENSE) licensed · © 2022 [Falling Fruit](https://fallingfruit.org/) & [Hack4Impact UIUC](https://github.com/hack4impact-uiuc)
