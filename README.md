@@ -38,7 +38,7 @@ Built with React, Redux, Reach UI, Styled Components, and Formik. Vercel is used
 
 Now maintained by [Falling Fruit](https://fallingfruit.org/about).
 
-Initially built by [Hack4Impact UIUC](https://uiuc.hack4impact.org/) in collaboration with Falling Fruit. Hack4Impact contributors:
+Initially built by [Hack4Impact UIUC](https://uiuc.hack4impact.org/) as a two-semester project in Fall/Spring 2021. Hack4Impact contributors:
 
 <table align="center">
   <tr>
