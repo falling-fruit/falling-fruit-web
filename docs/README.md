@@ -6,5 +6,5 @@ Welcome! We’re delighted for you to hop onboard and contribute to the frontend
 
 - [Setup](./setup.md)
 - [Project File Structure](./file-structure.md)
-- [Map View Handler & Integration with Redux](./map-view-redux.md)
+- [Map View Mechanics & Integration with Redux](./map-view-redux.md)
 - [Styling Guidelines](./styling.md)
