@@ -21,7 +21,8 @@ export const fetchFilterCounts = createAsyncThunk(
     const { showScientificNames } = state.settings
 
     const counts = await getTypeCounts(
-      selectParams(state, { types: undefined }),
+      // Match zoom level used in getClusters
+      selectParams(state, { types: undefined, zoom: state.map.view.zoom + 1 }),
     )
 
     return {
