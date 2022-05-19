@@ -1,5 +1,6 @@
 import { ArrowBack, Pencil } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { useLocation, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -25,12 +26,19 @@ const NavBack = ({ isEntry }) => {
   const history = useAppHistory()
   const { state } = useLocation()
   const { t } = useTranslation()
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
   const match = useRouteMatch('/entry/:id')
   const entryId = match?.params.id
 
+  const isEditingEntry = useRouteMatch('/entry/:id/edit')
+
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
-    history.push(state?.fromPage ?? '/map')
+    if (isEditingEntry) {
+      history.push(match.url)
+    } else {
+      history.push(state?.fromPage ?? '/map')
+    }
   }
 
   return (
@@ -39,7 +47,7 @@ const NavBack = ({ isEntry }) => {
         <ArrowBack />
         {t('Back')}
       </BackButton>
-      {isEntry && (
+      {isEntry && match && !isEditingEntry && isLoggedIn && (
         <BackButton onClick={() => history.push(`/entry/${entryId}/edit`)}>
           <Pencil />
           Edit

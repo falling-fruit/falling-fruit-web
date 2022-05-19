@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { selectionChanged, setFilters } from '../../redux/filterSlice'
+import { filtersChanged, selectionChanged } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { fetchLocations } from '../../redux/viewChange'
 import { updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import {
@@ -79,6 +78,9 @@ const Filter = ({ isOpen }) => {
     [setSearchValue],
   )
 
+  // force component re-render by calling a dummy state setter
+  const forceUpdate = useState()[1].bind(null, {})
+
   const didMount = useRef(false)
 
   const dispatch = useDispatch()
@@ -120,8 +122,17 @@ const Filter = ({ isOpen }) => {
   useLayoutEffect(() => {
     if (didMount.current === false) {
       didMount.current = true
+
+      // Force component to re-render after other calls
+      // to correctly render the value of `didMount`
+      setTimeout(() => forceUpdate(), 0)
     }
-  })
+
+    return () => {
+      didMount.current = false
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const { t } = useTranslation()
   return isOpen ? (
@@ -137,7 +148,7 @@ const Filter = ({ isOpen }) => {
             values={filters}
             fields={TREE_SHOW_CHECKBOX_FIELDS}
             onChange={(values) => {
-              dispatch(setFilters(values))
+              dispatch(filtersChanged(values))
             }}
           />
           <FilterButtons
@@ -170,8 +181,7 @@ const Filter = ({ isOpen }) => {
           values={filters}
           fields={MUNI_AND_INVASIVE_CHECKBOX_FIELDS}
           onChange={(values) => {
-            dispatch(setFilters(values))
-            dispatch(fetchLocations())
+            dispatch(filtersChanged(values))
           }}
         />
       </MuniAndInvasiveCheckboxFilters>

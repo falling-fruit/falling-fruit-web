@@ -75,6 +75,10 @@ const StyledLocationForm = styled.div`
   padding: 0 10px;
   overflow: auto;
 
+  @media ${({ theme }) => theme.device.desktop} {
+    height: 100%;
+  }
+
   @media ${({ theme }) => theme.device.mobile} {
     padding: 8px 27px 20px;
     margin-top: 80px;
@@ -161,14 +165,13 @@ const validateLocationStep = ({ types, season_start, season_stop }) => {
     errors.types = true
   }
 
-  if (season_start?.value != null && season_stop?.value != null) {
-    if (season_stop.value < season_start.value) {
+  if ((season_start?.value != null) !== (season_stop?.value != null)) {
+    if (season_start?.value != null) {
       errors.season_stop = true
     }
-  } else if (season_start?.value != null) {
-    errors.season_stop = true
-  } else if (season_stop?.value != null) {
-    errors.season_start = true
+    if (season_stop?.value != null) {
+      errors.season_start = true
+    }
   }
 
   return errors
@@ -195,7 +198,7 @@ const formToLocation = ({
   description,
   season_start: season_start?.value ?? null,
   season_stop: season_stop?.value ?? null,
-  access: access?.value,
+  access: access?.value ?? null,
   unverified: false,
 })
 
