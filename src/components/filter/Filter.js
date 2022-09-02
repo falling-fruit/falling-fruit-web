@@ -86,9 +86,6 @@ const Filter = ({ isOpen }) => {
   const dispatch = useDispatch()
   const { typesById } = useTypesById()
   const filters = useSelector((state) => state.filter)
-  const showScientificNames = useSelector(
-    (state) => state.settings.showScientificNames,
-  )
   const {
     types,
     isLoading,
@@ -103,20 +100,12 @@ const Filter = ({ isOpen }) => {
     () =>
       updateTreeCounts(
         treeData,
-        showScientificNames,
         countsById,
         showOnlyOnMap,
         childrenById,
         scientificNameById,
       ),
-    [
-      treeData,
-      showScientificNames,
-      countsById,
-      showOnlyOnMap,
-      childrenById,
-      scientificNameById,
-    ],
+    [treeData, countsById, showOnlyOnMap, childrenById, scientificNameById],
   )
 
   useLayoutEffect(() => {

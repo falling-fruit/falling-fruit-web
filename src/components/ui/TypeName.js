@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { useTypesById } from '../../redux/useTypesById'
@@ -30,16 +29,11 @@ const ScientificName = styled.span`
 
 export const TypeName = ({ typeId }) => {
   const { getCommonName, getScientificName } = useTypesById()
-  const showScientificNames = useSelector(
-    (state) => state.settings.showScientificNames,
-  )
 
   return (
     <div>
       <CommonName>{getCommonName(typeId)}</CommonName>
-      {showScientificNames && (
-        <ScientificName>{getScientificName(typeId)}</ScientificName>
-      )}
+      <ScientificName>{getScientificName(typeId)}</ScientificName>
     </div>
   )
 }

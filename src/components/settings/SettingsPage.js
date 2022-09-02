@@ -138,10 +138,6 @@ const SettingsPage = ({ desktop }) => {
           field: 'showLabels',
           label: t('Show Labels'),
         },
-        {
-          field: 'showScientificNames',
-          label: t('Show Scientific Names'),
-        },
       ].map(({ field, label }) => (
         <LabeledRow
           key={field}

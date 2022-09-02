@@ -119,7 +119,6 @@ const buildTypeSchema = (types, childrenById) => {
 // Updates cumulative counts and node titles in the type tree
 const updateTreeCounts = (
   treeData,
-  showScientificName,
   countsById,
   showOnlyOnMap,
   childrenById,
@@ -145,7 +144,7 @@ const updateTreeCounts = (
       title: (
         <TreeNodeText
           commonName={commonName}
-          shouldIncludeScientificName={scientificName && showScientificName}
+          shouldIncludeScientificName={scientificName}
           shouldIncludeCommonName={!cultivarIndex}
           scientificName={
             cultivarIndex === -1

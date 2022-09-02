@@ -18,7 +18,6 @@ export const fetchFilterCounts = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState()
     const { typesById } = state.misc
-    const { showScientificNames } = state.settings
 
     const counts = await getTypeCounts(
       // Match zoom level used in getClusters
@@ -28,7 +27,6 @@ export const fetchFilterCounts = createAsyncThunk(
     return {
       counts,
       typesById,
-      showScientificNames,
     }
   },
 )
