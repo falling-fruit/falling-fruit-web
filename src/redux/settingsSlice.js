@@ -10,7 +10,6 @@ const DEFAULT_SETTINGS = {
   distanceUnit: 'metric',
   mapType: 'roadmap',
   mapLayers: [],
-  overrideDataLanguage: false,
   showBusinesses: false,
 }
 

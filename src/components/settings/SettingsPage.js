@@ -1,5 +1,4 @@
 import { ChevronRight } from '@styled-icons/boxicons-solid'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -97,7 +96,6 @@ const SettingsPage = ({ desktop }) => {
 
   const history = useAppHistory()
 
-  const [overrideDataLanguage, setOverrideDataLanguage] = useState(false)
   const { t, i18n } = useTranslation()
 
   const updateUnitsSetting = (object) => {
@@ -271,26 +269,6 @@ const SettingsPage = ({ desktop }) => {
             onChange={(option) => {
               i18n.changeLanguage(option.value)
             }}
-            isSearchable={false}
-            menuPlacement="top"
-          />
-        }
-      />
-
-      <LabeledRow
-        left={
-          <Checkbox
-            id="dataLanguage"
-            onClick={(event) => setOverrideDataLanguage(event.target.checked)}
-            checked={overrideDataLanguage}
-          />
-        }
-        label={<label htmlFor="dataLanguage">{t('Data Language')}</label>}
-        right={
-          <Select
-            options={[]}
-            isDisabled={!overrideDataLanguage}
-            placeholder={t('Select...')}
             isSearchable={false}
             menuPlacement="top"
           />
