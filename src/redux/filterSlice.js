@@ -45,7 +45,7 @@ export const filterSlice = createSlice({
     invasive: false,
     isLoading: false,
     countsById: {},
-    showOnlyOnMap: false,
+    showOnlyOnMap: true,
   },
   reducers: {
     openFilter: (state) => {
