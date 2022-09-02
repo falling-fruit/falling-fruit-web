@@ -157,16 +157,18 @@ const SettingsPage = ({ desktop }) => {
           label={<label htmlFor={field}>{label}</label>}
         />
       ))}
-      <LabeledRow
-        label={<label htmlFor="distanceUnit">{t('Units')}</label>}
-        right={
-          <ButtonToggle
-            options={DISTANCE_UNIT_OPTIONS}
-            onChange={updateUnitsSetting}
-            value={settings.distanceUnit}
-          />
-        }
-      />
+      {!desktop && (
+        <LabeledRow
+          label={<label htmlFor="distanceUnit">{t('Units')}</label>}
+          right={
+            <ButtonToggle
+              options={DISTANCE_UNIT_OPTIONS}
+              onChange={updateUnitsSetting}
+              value={settings.distanceUnit}
+            />
+          }
+        />
+      )}
 
       <h3>{t('Map Preferences')}</h3>
 
