@@ -1,7 +1,7 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import pressData from '../../constants/data/press.json'
-import { MONTH_LABELS } from '../form/LocationForm'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
 const TimelineSection = styled.section`
@@ -66,17 +66,18 @@ const TimelineItem = ({ data }) => {
   const { published_on, outlet, outlet_url, embed_html, author, title, url } =
     data
 
-  // TODO centralize date formatters
-  const [month, date, year] = new Date(published_on)
-    .toLocaleDateString()
-    .split('/')
+  const date = new Date(published_on)
+  const { i18n } = useTranslation()
+  const dateString = date.toLocaleDateString(i18n.language, {
+    day: 'numeric',
+    month: 'long',
+  })
+  const year = date.getFullYear()
 
   return (
     <li>
       <div>
-        <time dateTime={published_on}>
-          {MONTH_LABELS[month]} {date}
-        </time>
+        <time dateTime={published_on}>{dateString}</time>
         {year}
       </div>
       <div>
