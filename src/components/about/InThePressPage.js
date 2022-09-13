@@ -59,12 +59,26 @@ const Embed = styled.div`
   }
 `
 
+const Photo = styled.img`
+  display: block;
+  margin: 1em 0 0.5em;
+  border: 1px solid #eee;
+`
+
 const ConditionalLink = ({ href, children }) =>
   href ? <a href={href}>{children}</a> : <>{children}</>
 
 const TimelineItem = ({ data }) => {
-  const { published_on, outlet, outlet_url, embed_html, author, title, url } =
-    data
+  const {
+    published_on,
+    outlet,
+    outlet_url,
+    embed_html,
+    author,
+    title,
+    url,
+    photo_url,
+  } = data
 
   const date = new Date(published_on)
   const { i18n } = useTranslation()
@@ -89,6 +103,7 @@ const TimelineItem = ({ data }) => {
         {embed_html && (
           <Embed dangerouslySetInnerHTML={{ __html: embed_html }} />
         )}
+        {photo_url && <Photo src={photo_url} alt={title} />}
       </div>
     </li>
   )
