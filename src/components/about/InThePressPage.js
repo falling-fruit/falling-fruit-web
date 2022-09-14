@@ -63,6 +63,7 @@ const Photo = styled.img`
   display: block;
   margin: 1em 0 0.5em;
   border: 1px solid #eee;
+  max-width: 100%;
 `
 
 const ConditionalLink = ({ href, children }) =>
