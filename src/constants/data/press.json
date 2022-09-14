@@ -1653,6 +1653,14 @@
   ],
   "2020": [
     {
+      "published_on": "2020-10-27",
+      "outlet": "Westword",
+      "outlet_url": "https://www.westword.com",
+      "title": "Colorado's most expensive native edible can be foraged for free. Nuts!",
+      "author": "Julie Bielenberg",
+      "url": "https://www.westword.com/restaurants/pine-nuts-are-expensive-unless-you-forage-from-colorado-pinyon-pines-11832450"
+    },
+    {
       "published_on": "2020-11-12",
       "outlet": "Mashable",
       "outlet_url": "https://mashable.com",
@@ -1758,6 +1766,17 @@
       "title": "Falling Fruit – Pour redevenir cueilleur",
       "author": "Manuel Dorne",
       "url": "https://korben.info/falling-fruit-carte-comestibles.html"
+    }
+  ],
+  "2022": [
+    {
+      "published_on": "2022-02-18",
+      "outlet": "Care More Be Better",
+      "outlet_url": "https://caremorebebetter.com/",
+      "title": "How urban foraging could change cities forever",
+      "author": "Corinna Bellizzi",
+      "url": "https://caremorebebetter.com/ethan-welty-on-how-urban-foraging-could-change-cities-forever",
+      "photo_url": "https://caremorebebetter.com/wp-content/uploads/2022/01/71CMBBEthan.png"
     }
   ]
 }
