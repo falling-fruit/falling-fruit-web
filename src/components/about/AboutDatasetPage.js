@@ -2,7 +2,6 @@ import { Calendar } from '@styled-icons/boxicons-regular'
 import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
 import NavBack from '../desktop/NavBack'
@@ -10,19 +9,6 @@ import { IconBesideText } from '../entry/EntryOverview'
 import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
-
-const DatasetName = styled.h1`
-  margin: 1rem 0;
-
-  span {
-    color: ${({ theme }) => theme.orange};
-  }
-`
-
-const getFormattedDate = (utc) => {
-  const [, ...date] = new Date(utc).toDateString().split(' ')
-  return date.join(' ')
-}
 
 const AboutDatasetPage = () => {
   const { id } = useParams()
@@ -47,43 +33,31 @@ const AboutDatasetPage = () => {
     return <LoadingOverlay />
   }
 
-  const {
-    name,
-    url,
-    comments,
-    muni,
-    location_count,
-    created_at,
-    updated_at,
-    license,
-  } = importData
+  const { name, url, comments, muni, location_count, created_at, license } =
+    importData
 
   return (
     <PageScrollWrapper>
       <PageTemplate>
         <NavBack />
-        <DatasetName>
-          <span>#{id}</span> {name}
-        </DatasetName>
+        <h3>
+          #{id}: {name}
+        </h3>
         <a href={url} target="_blank" rel="noreferrer">
-          Website
+          {url}
         </a>
         <p>{comments}</p>
         <IconBesideText>
           <Pin color={theme.secondaryText} size={20} />
-          <p>{muni ? 'Tree Inventory' : 'Community Map'}</p>
+          <p>{muni ? 'Tree inventory' : 'Community map'}</p>
         </IconBesideText>
         <IconBesideText>
           <MapPin color={theme.secondaryText} size={20} />
-          <p>{location_count} Locations</p>
+          <p>{location_count} locations</p>
         </IconBesideText>
         <IconBesideText>
           <Calendar color={theme.secondaryText} size={20} />
-          <p>Created {getFormattedDate(created_at)}</p>
-        </IconBesideText>
-        <IconBesideText>
-          <Calendar color={theme.secondaryText} size={20} />
-          <p>Updated {getFormattedDate(updated_at)}</p>
+          <p>Imported {new Date(created_at).toISOString().slice(0, 10)}</p>
         </IconBesideText>
         {license && (
           <IconBesideText>
