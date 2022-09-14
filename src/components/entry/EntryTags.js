@@ -13,16 +13,12 @@ const EntryTags = ({ locationData }) => {
           {ACCESS_TYPE[locationData.access]}
         </Tag>
       )}
-      {locationData.unverified ? (
+      {locationData.unverified && (
         <Tag
           color={theme.tag.unverified}
           backgroundColor={theme.transparentPink}
         >
           {t('Unverified')}
-        </Tag>
-      ) : (
-        <Tag color={theme.tag.verified} backgroundColor={theme.transparentBlue}>
-          {t('Verified')}
         </Tag>
       )}
     </TagList>
