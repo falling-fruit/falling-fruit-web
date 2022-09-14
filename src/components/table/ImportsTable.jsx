@@ -14,30 +14,39 @@ const columns = [
     selector: (row) => row.muni,
     sortable: true,
     format: FORMATTERS.muni,
+    minWidth: '10em',
   },
   {
     id: 'name',
     name: 'Name',
     selector: (row) => row.name,
     sortable: true,
+    wrap: true,
+    grow: 3,
   },
   {
     name: 'Locations',
     selector: (row) => row.location_count,
     sortable: true,
+    right: true,
   },
   {
     id: 'created_at',
-    name: 'Date Imported',
+    name: 'Imported',
     selector: (row) => row.created_at,
     sortable: true,
     format: FORMATTERS.created_at,
+    center: true,
+    minWidth: '8em',
   },
   {
     id: 'link',
-    name: 'Dataset Link',
+    name: 'Link',
     selector: (row) => row.link,
     format: FORMATTERS.link,
+    center: true,
+    compact: true,
+    width: '50px',
   },
 ]
 
@@ -70,12 +79,13 @@ const ImportsTable = () => {
     <DataTable
       columns={columns}
       data={filteredData}
-      pagination
+      defaultSortFieldId={'created_at'}
+      defaultSortAsc={false}
       progressPending={isLoading}
       subHeader
       subHeaderComponent={
         <Input
-          placeholder="Search for a dataset"
+          placeholder="Search"
           icon={<SearchIcon />}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}

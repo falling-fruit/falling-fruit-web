@@ -69,7 +69,6 @@ const DataTable = ({ ...props }) => (
   <TableWrapper $onRowClicked={props.onRowClicked}>
     <ReactDataTable
       progressComponent={<TableLoader columns={props.columns} />}
-      pagination
       {...props}
     />
   </TableWrapper>

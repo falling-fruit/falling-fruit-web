@@ -7,11 +7,11 @@ import Input from '../ui/Input'
 import DataTable from './DataTable'
 import { FORMATTERS } from './DataTableProperties'
 
-const OrganizationLink = styled.a`
+const OrganizationName = styled.span`
   ${({ $isActive }) =>
     !$isActive &&
     `
-  text-decoration: line-through;
+  opacity: 0.5;
 `}
 `
 
@@ -23,59 +23,66 @@ const FormattedOrganization = ({
   subname_url,
   active,
 }) => (
-  <>
+  <OrganizationName $isActive={active}>
     {name_url ? (
-      <OrganizationLink
-        $isActive={active}
-        href={name_url}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={name_url} target="_blank" rel="noreferrer">
         {name}
-      </OrganizationLink>
+      </a>
     ) : (
       name
     )}
+    {subname && ' > '}
     {subname &&
       (subname_url ? (
         <a href={subname_url} target="_blank" rel="noreferrer">
-          {' '}
-          ({subname})
+          {subname}
         </a>
       ) : (
-        <> ({subname})</>
+        <>{subname}</>
       ))}
-  </>
+  </OrganizationName>
 )
 
 const columns = [
   {
-    id: 'name',
-    name: 'Organization Name',
-    selector: (row) => row.name,
-    sortable: true,
-    grow: 2,
-    format: FormattedOrganization,
-  },
-  {
     id: 'country',
     name: 'Country',
-    selector: (row) => row.country ?? 'Global',
+    selector: (row) => row.country ?? '-',
     sortable: true,
+    wrap: true,
   },
   {
-    id: 'location',
-    name: 'Location',
-    selector: (row) => row.state + row.city,
+    id: 'state',
+    name: 'State',
+    selector: (row) => row.state ?? '-',
     sortable: true,
-    format: FORMATTERS.location,
+    wrap: true,
+  },
+  {
+    id: 'city',
+    name: 'City',
+    selector: (row) => row.city ?? '-',
+    sortable: true,
+    wrap: true,
+  },
+  {
+    id: 'name',
+    name: 'Name',
+    selector: (row) => row.name,
+    sortable: true,
+    grow: 2.5,
+    format: FormattedOrganization,
+    wrap: true,
   },
   {
     id: 'social',
-    name: 'Social Media',
+    name: 'Social',
     selector: (row) => row.facebook + row.twitter,
     format: ({ facebook, twitter }) =>
       FORMATTERS.links({ links: [facebook, twitter].filter(Boolean) }),
+    compact: true,
+    width: '80px',
+    right: true,
   },
 ]
 
@@ -84,7 +91,7 @@ const ShareTheHarvestTable = () => {
 
   const filteredData = harvestData.filter((item) => {
     const query = filterText.toLowerCase()
-    const keywords = [item.name, item.country, item.location]
+    const keywords = [item.country, item.state, item.city, item.name]
     return keywords.some(
       (keyword) => keyword && keyword.toLowerCase().includes(query),
     )
@@ -94,11 +101,11 @@ const ShareTheHarvestTable = () => {
     <DataTable
       columns={columns}
       data={filteredData}
-      pagination
+      defaultSortFieldId={'country'}
       subHeader
       subHeaderComponent={
         <Input
-          placeholder="Search for an org"
+          placeholder="Search"
           icon={<SearchIcon />}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}

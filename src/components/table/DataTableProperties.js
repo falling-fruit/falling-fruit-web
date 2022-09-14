@@ -36,14 +36,13 @@ const FORMATTERS = {
   link: ({ url }) =>
     url && (
       <a href={url} target="_blank" rel="noreferrer">
-        Link <LinkExternal size="14" color={theme.orange} />
+        <LinkExternal size="14" color={theme.orange} />
       </a>
     ),
   links: ({ links }) =>
     links.map((link, index) => <ResourceList key={index} url={link} />),
   created_at: ({ created_at }) =>
-    new Date(created_at).toISOString().split('T')[0],
-  location: ({ state, city }) => [city, state].filter(Boolean).join(', '),
+    new Date(created_at).toISOString().slice(0, 10),
 }
 
 const SORTERS = {
