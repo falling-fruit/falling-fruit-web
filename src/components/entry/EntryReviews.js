@@ -1,3 +1,4 @@
+import { partition } from 'ramda'
 import { useSelector } from 'react-redux'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -13,13 +14,10 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
   const history = useAppHistory()
   const user = useSelector((state) => state.auth.user)
 
-  const indexedReviews = reviews.map((review, index) => ({ ...review, index }))
-
-  const userReviews = indexedReviews.filter(
+  const reviewsWithPhotos = reviews.filter((r) => r.photos.length > 0)
+  const [userReviews, otherReviews] = partition(
     (review) => review.user_id === user?.id,
-  )
-  const otherReviews = indexedReviews.filter(
-    (review) => review.user_id !== user?.id,
+    reviews,
   )
 
   return (
@@ -31,7 +29,12 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
         <Review
           key={review.id}
           review={review}
-          onImageClick={(imageIndex) => onImageClick(review.index, imageIndex)}
+          onImageClick={(imageIndex) =>
+            onImageClick(
+              reviewsWithPhotos.findIndex((r) => r.id === review.id),
+              imageIndex,
+            )
+          }
           onEditClick={() =>
             history.push({
               pathname: `/review/${review.id}/edit`,
@@ -47,7 +50,12 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
         <Review
           key={review.id}
           review={review}
-          onImageClick={(imageIndex) => onImageClick(review.index, imageIndex)}
+          onImageClick={(imageIndex) =>
+            onImageClick(
+              reviewsWithPhotos.findIndex((r) => r.id === review.id),
+              imageIndex,
+            )
+          }
         />
       ))}
       {isDesktop && <ReviewForm onSubmit={onReviewSubmit} />}
