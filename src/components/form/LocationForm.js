@@ -327,7 +327,8 @@ export const LocationForm = ({
             <Button
               secondary
               type="button"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation()
                 if (editingId) {
                   history.push(`/entry/${editingId}`)
                 } else {

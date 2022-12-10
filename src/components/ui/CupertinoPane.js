@@ -1,6 +1,8 @@
 import { CupertinoPane as VanillaCupertinoPane } from 'cupertino-pane'
 import React, { useEffect } from 'react'
 
+export const ANIMATION_DURATION = 300
+
 /**
  * React wrapper for CupertinoPane
  */
@@ -9,7 +11,10 @@ export default React.forwardRef(function CupertinoPane(
   ref,
 ) {
   useEffect(() => {
-    const drawer = new VanillaCupertinoPane(`.${className}`, config)
+    const drawer = new VanillaCupertinoPane(`.${className}`, {
+      ...config,
+      animationDuration: ANIMATION_DURATION,
+    })
     setDrawer(drawer)
     /*
       HACK: Fix for race condition using setTimeout @ 0 ms to 

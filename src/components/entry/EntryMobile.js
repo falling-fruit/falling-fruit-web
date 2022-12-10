@@ -222,7 +222,8 @@ const EntryMobile = ({
     }
   }
 
-  const onBackButtonClick = () => {
+  const onBackButtonClick = (e) => {
+    e.stopPropagation()
     setIsFullScreen(false)
     drawer.moveToBreak('middle')
     setEntryImageHeightMultiplier(INITIAL_IMAGE_HEIGHT_SCALAR)
@@ -324,6 +325,8 @@ const EntryMobile = ({
           <Card
             ref={cardRef}
             setDrawer={setDrawer}
+            drawer={drawer}
+            isFullScreen={isFullScreen}
             className="entry-main-card"
             config={config}
           >
