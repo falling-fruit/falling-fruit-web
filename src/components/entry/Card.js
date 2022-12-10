@@ -33,6 +33,7 @@ export default React.forwardRef(function Card(
     return () => {
       window.removeEventListener('click', onClickOutside)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [drawer, className, config, isFullScreen])
 
   return (
