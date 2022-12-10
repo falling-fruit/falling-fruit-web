@@ -37,7 +37,9 @@ const SignupPage = () => {
     let response
     try {
       response = await addUser(newUser)
-      toast.success(`Sign up successful! ${response.message}`)
+      toast.success(`Sign up successful! ${response.message}`, {
+        autoClose: 5000,
+      })
       history.push('/map')
     } catch (e) {
       toast.error(`Sign up failed: ${e.response?.data?.error}`)
