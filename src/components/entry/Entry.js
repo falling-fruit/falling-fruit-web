@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
@@ -74,6 +74,12 @@ const Entry = ({
 }) => {
   const [tabIdx, setTabIdx] = useState(0)
 
+  useEffect(() => {
+    if (!isFullScreen) {
+      setTabIdx(0)
+    }
+  }, [isFullScreen])
+
   const showEntryImages =
     reviews && reviews.some((review) => review.photos.length > 0)
 
@@ -110,7 +116,7 @@ const Entry = ({
           />
         )}
         {isInDrawer ? (
-          <EntryTabs onChange={setTabIdx} index={isFullScreen ? tabIdx : 0}>
+          <EntryTabs onChange={setTabIdx} index={tabIdx}>
             <EntryTagsContainer
               $isFullScreen={isFullScreen}
               $isOverlay={showEntryImages}
