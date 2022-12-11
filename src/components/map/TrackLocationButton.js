@@ -36,6 +36,9 @@ const TrackLocationIcon = ({ disabled, $loading, ...props }) => {
 const TrackLocationPrependButton = styled.button.attrs((props) => ({
   children: <TrackLocationIcon {...props} />,
 }))`
+  padding-left: 3px;
+  padding-right: 8px;
+
   &:enabled {
     cursor: pointer;
   }
