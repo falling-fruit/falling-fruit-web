@@ -56,7 +56,7 @@ const StyledInput = styled(Input)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0.375em;
   border: 1px solid ${validatedColor()};
   box-sizing: border-box;
   padding: 0 20px;

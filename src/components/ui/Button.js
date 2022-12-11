@@ -18,7 +18,7 @@ const StyledButton = styled(ResetButton)`
     $secondary ? theme.background : theme.orange};
   border: 2px solid ${({ theme }) => theme.orange};
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 0.375em;
   padding: 0 24px;
   // TODO: make raised and add a location button in main pane
 

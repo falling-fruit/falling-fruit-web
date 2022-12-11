@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import ResetButton from './ResetButton'
 
 const StyledResetButton = styled(ResetButton)`
-  border-radius: 10px;
+  border-radius: 0.375em;
   height: 100px;
   width: 100px;
   background-color: #c4c4c4;
