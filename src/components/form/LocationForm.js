@@ -14,7 +14,7 @@ import { Optional } from '../ui/LabelTag'
 import { TypeName } from '../ui/TypeName'
 import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
-import { Select, Textarea } from './FormikWrappers'
+import { Checkbox, Select, Textarea } from './FormikWrappers'
 import {
   formToReview,
   INITIAL_REVIEW_VALUES,
@@ -93,6 +93,15 @@ const StyledLocationForm = styled.div`
   }
 `
 
+const CheckboxLabel = styled.label`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.tertiaryText};
+  margin-top: 15px;
+`
+
 const InlineSelects = styled.div`
   display: flex;
   align-items: center;
@@ -155,6 +164,10 @@ const LocationStep = ({ typeOptions }) => (
         invalidWhenUntouched
       />
     </InlineSelects>
+    <CheckboxLabel>
+      <Checkbox name="unverified" label="Unverified" />
+      Unverified
+    </CheckboxLabel>
   </>
 )
 
@@ -193,13 +206,14 @@ const formToLocation = ({
   season_start,
   season_stop,
   access,
+  unverified,
 }) => ({
   type_ids: types.map(({ value }) => value),
   description,
   season_start: season_start?.value ?? null,
   season_stop: season_stop?.value ?? null,
   access: access?.value ?? null,
-  unverified: false,
+  unverified,
 })
 
 export const locationToForm = ({
@@ -208,6 +222,7 @@ export const locationToForm = ({
   season_start,
   season_stop,
   access,
+  unverified,
 }) => ({
   types: type_ids.map((id) => ({
     value: id,
@@ -216,6 +231,7 @@ export const locationToForm = ({
   season_start: MONTH_OPTIONS[season_start],
   season_stop: MONTH_OPTIONS[season_stop],
   access: PROPERTY_ACCESS_OPTIONS[access],
+  unverified,
 })
 
 export const LocationForm = ({

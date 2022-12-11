@@ -53,7 +53,7 @@ const FormikCheckbox = ({ name, ...props }) => {
     <Checkbox
       onClick={(e) => helpers.setValue(e.target.checked)}
       name={name}
-      checked={value}
+      checked={value ?? false}
       {...props}
     />
   )
