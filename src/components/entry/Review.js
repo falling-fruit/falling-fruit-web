@@ -141,9 +141,11 @@ const Review = ({
       <blockquote>{review.comment}</blockquote>
       {!editable && (
         <cite>
-          {review.observed_at ? 'Observed' : 'Reviewed'} on{' '}
-          {formatISOString(review.observed_at || review.created_at)} by{' '}
-          {review.author ?? 'Anonymous'}
+          Reviewed on {formatISOString(review.created_at)} by{' '}
+          {review.author ?? 'Anonymous'}{' '}
+          {review.observed_at && (
+            <>(visited {formatISOString(review.observed_at)}))</>
+          )}
         </cite>
       )}
     </ReviewDescription>
