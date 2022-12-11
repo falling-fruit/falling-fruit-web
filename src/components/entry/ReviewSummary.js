@@ -1,6 +1,6 @@
 import { Star as StarEmpty } from '@styled-icons/boxicons-regular'
 import { Star, StarHalf } from '@styled-icons/boxicons-solid'
-import { partition } from 'ramda'
+import { groupBy, prop as rProp } from 'ramda'
 import styled from 'styled-components/macro'
 
 import { FRUITING_RATINGS, RATINGS } from '../../constants/ratings'
@@ -44,6 +44,10 @@ const SummaryTable = styled.table`
 `
 
 const FruitingSummaryRow = ({ reviews }) => {
+  if (!reviews || reviews.length === 0) {
+    return null
+  }
+
   const reviewsByMonth = reviews.reduce((monthToCount, review) => {
     const month = new Date(review.observed_at || review.created_at).getMonth()
 
@@ -56,10 +60,6 @@ const FruitingSummaryRow = ({ reviews }) => {
   }, {})
 
   const reviewMonthPairs = Object.entries(reviewsByMonth)
-
-  if (!reviews || reviews.length === 0) {
-    return null
-  }
 
   return (
     <tr>
@@ -78,15 +78,11 @@ const FruitingSummaryRow = ({ reviews }) => {
 const FruitingSummary = ({ reviews }) => {
   const fruitingReviews = reviews.filter((review) => Boolean(review.fruiting))
 
-  const [flowerReviews, otherReviews] = partition(
-    (review) => review.fruiting === 1,
-    fruitingReviews,
-  )
-
-  const [unripeReviews, ripeReviews] = partition(
-    (review) => review.fruiting === 2,
-    otherReviews,
-  )
+  const {
+    1: flowerReviews,
+    2: unripeReviews,
+    3: ripeReviews,
+  } = groupBy(rProp('fruiting'), fruitingReviews)
 
   return (
     <>
