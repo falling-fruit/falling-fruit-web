@@ -45,11 +45,7 @@ const SummaryTable = styled.table`
 
 const FruitingSummaryRow = ({ reviews }) => {
   const reviewsByMonth = reviews.reduce((monthToCount, review) => {
-    const month = (
-      review.observed_at
-        ? new Date(review.observed_at)
-        : new Date(review.created_at)
-    ).getMonth()
+    const month = new Date(review.observed_at || review.created_at).getMonth()
 
     monthToCount = {
       ...monthToCount,
