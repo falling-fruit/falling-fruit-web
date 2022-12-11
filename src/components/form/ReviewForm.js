@@ -49,7 +49,6 @@ export const isEmptyReview = (review) => {
   const r = formToReview(review)
   return (
     !r.comment &&
-    !r.observed_on &&
     r.quality_rating === 0 &&
     r.fruiting === 0 &&
     r.yield_rating === 0 &&
@@ -184,7 +183,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
 )
 
 export const ReviewPhotoStep = () => (
-  <PhotoUploader name="review.photos" label="Upload Images" optional />
+  <PhotoUploader name="review.photos" label="Upload Images" />
 )
 
 const StyledReviewForm = styled.div`
