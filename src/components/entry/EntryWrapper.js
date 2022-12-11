@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { updateEntryLocation } from '../../redux/mapSlice'
 import { getLocationById } from '../../utils/api'
@@ -14,6 +15,7 @@ const EntryWrapper = ({ desktop }) => {
   const dispatch = useDispatch()
 
   const [reviews, setReviews] = useState()
+  const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState([0, 0])
@@ -23,15 +25,20 @@ const EntryWrapper = ({ desktop }) => {
     async function fetchEntryData() {
       setIsLoading(true)
 
-      const locationData = await getLocationById(id, 'reviews')
-      dispatch(updateEntryLocation(locationData))
-      setReviews(locationData.reviews)
+      try {
+        const locationData = await getLocationById(id, 'reviews')
 
-      setIsLoading(false)
+        dispatch(updateEntryLocation(locationData))
+        setReviews(locationData.reviews)
+        setIsLoading(false)
+      } catch {
+        toast.error('Error fetching entry data')
+        setIsError(true)
+      }
     }
 
     fetchEntryData()
-  }, [id, dispatch])
+  }, [id, dispatch, history])
 
   const addSubmittedReview = (submittedReview) => {
     setReviews((reviews) => [...reviews, submittedReview])
@@ -50,6 +57,10 @@ const EntryWrapper = ({ desktop }) => {
   )
 
   const EntryComponent = desktop ? Entry : EntryMobile
+
+  if (isError) {
+    return <Redirect to="/map" />
+  }
 
   return (
     <EntryComponent
