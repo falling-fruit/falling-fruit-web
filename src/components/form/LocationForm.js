@@ -10,7 +10,6 @@ import { addLocation, editLocation } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
 import Label from '../ui/Label'
-import { Optional } from '../ui/LabelTag'
 import { TypeName } from '../ui/TypeName'
 import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
@@ -143,10 +142,7 @@ const LocationStep = ({ typeOptions }) => (
       isSearchable={false}
       isClearable
     />
-    <Label>
-      Seasonality
-      <Optional />
-    </Label>
+    <Label>Seasonality</Label>
     <InlineSelects>
       <Select
         name="season_start"
