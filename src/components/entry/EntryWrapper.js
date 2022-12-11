@@ -40,7 +40,7 @@ const EntryWrapper = ({ desktop }) => {
     }
 
     fetchEntryData()
-  }, [id, dispatch, history])
+  }, [id, dispatch])
 
   const addSubmittedReview = (submittedReview) => {
     setReviews((reviews) => [...reviews, submittedReview])
