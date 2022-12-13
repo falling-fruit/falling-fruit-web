@@ -83,7 +83,8 @@ const sortTypes = (types) =>
     )
 
 const getNames = (type) => {
-  const commonName = type.name ?? type.common_names.en[0]
+  const commonName =
+    type.name ?? (type.common_names.en && type.common_names.en[0])
   const scientificName = type.scientific_names?.[0]
   return {
     commonName,
@@ -145,7 +146,7 @@ const updateTreeCounts = (
         <TreeNodeText
           commonName={commonName}
           shouldIncludeScientificName={scientificName}
-          shouldIncludeCommonName={!cultivarIndex}
+          shouldIncludeCommonName={commonName && !cultivarIndex}
           scientificName={
             cultivarIndex === -1
               ? scientificName
