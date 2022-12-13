@@ -147,6 +147,7 @@ const AccountPage = () => {
                     {/* TODO: need designs for this information */}
 
                     <Input
+                      invalidWhenUntouched
                       name="password_confirmation"
                       label="Current Password"
                       type="password"
