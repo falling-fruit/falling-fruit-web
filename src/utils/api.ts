@@ -13,8 +13,23 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use((config) => {
+  const anonymousGetUrls = [
+    '/types',
+    '/types/counts',
+    '/locations',
+    '/locations/{id}',
+    '/locations/{id}/reviews',
+    '/reviews/{id}',
+    '/clusters',
+    '/imports',
+    '/imports/{id}',
+  ]
+  const isAnonymous =
+    config.method === 'get' &&
+    config.url &&
+    anonymousGetUrls.includes(config.url.replace(/[0-9]+/, '{id}'))
   const token = authStore.getToken()
-  if (token) {
+  if (token && !isAnonymous) {
     config.headers.Authorization = `Bearer ${token.access_token}`
   }
 
