@@ -253,7 +253,7 @@ export const LocationForm = ({
         ? Object.values(typesById).map(
             ({ id, common_names, scientific_names }) => ({
               value: id,
-              label: `${common_names.en[0]} [${scientific_names?.[0] ?? ''}]`,
+              label: `${common_names.en?.[0]} [${scientific_names?.[0] ?? ''}]`,
             }),
           )
         : [],
