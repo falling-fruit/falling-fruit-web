@@ -90,9 +90,9 @@ const FruitingSummary = ({ reviews }) => {
       <tr>
         <td colSpan={2}>Fruiting</td>
       </tr>
-      <FruitingSummaryRow reviews={ripeReviews} />
-      <FruitingSummaryRow reviews={unripeReviews} />
       <FruitingSummaryRow reviews={flowerReviews} />
+      <FruitingSummaryRow reviews={unripeReviews} />
+      <FruitingSummaryRow reviews={ripeReviews} />
     </>
   )
 }
