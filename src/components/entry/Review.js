@@ -59,6 +59,9 @@ const RatingTable = styled.table`
   }
 `
 const ReviewDescription = styled.section`
+  white-space: pre-line;
+  word-break: break-all;
+
   margin-bottom: 8px;
   blockquote {
     font-size: 1rem;
@@ -138,9 +141,7 @@ const Review = ({
       </tbody>
     </RatingTable>
     <ReviewDescription>
-      <blockquote style={{ 'white-space': 'pre-line' }}>
-        {review.comment}
-      </blockquote>
+      <blockquote>{review.comment}</blockquote>
       {!editable && (
         <cite>
           Reviewed on {formatISOString(review.created_at)} by{' '}
