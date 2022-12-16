@@ -280,22 +280,22 @@ const SettingsPage = ({ desktop }) => {
           <h3>{t('About Us')}</h3>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'The Project'}
+            primaryText={'The project'}
             onClick={() => history.push('/about/project')}
           />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'Imported Datasets'}
-            onClick={() => history.push('/about/datasets')}
+            primaryText={'The data'}
+            onClick={() => history.push('/about/data')}
           />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'Sharing the Harvest'}
+            primaryText={'Sharing the harvest'}
             onClick={() => history.push('/about/share')}
           />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'In the Press'}
+            primaryText={'In the press'}
             onClick={() => history.push('/about/press')}
           />
         </>
