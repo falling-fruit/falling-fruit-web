@@ -143,8 +143,8 @@ const Review = ({
         <cite>
           Reviewed on {formatISOString(review.created_at)} by{' '}
           {review.author ?? 'Anonymous'}{' '}
-          {review.observed_at && (
-            <>(visited {formatISOString(review.observed_at)}))</>
+          {review.observed_on && (
+            <>(visited {formatISOString(review.observed_on)})</>
           )}
         </cite>
       )}
