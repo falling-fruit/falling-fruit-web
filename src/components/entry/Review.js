@@ -138,7 +138,9 @@ const Review = ({
       </tbody>
     </RatingTable>
     <ReviewDescription>
-      <blockquote>{review.comment}</blockquote>
+      <blockquote style={{ 'white-space': 'pre-line' }}>
+        {review.comment}
+      </blockquote>
       {!editable && (
         <cite>
           Reviewed on {formatISOString(review.created_at)} by{' '}

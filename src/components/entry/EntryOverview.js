@@ -113,7 +113,9 @@ const EntryOverview = ({ locationData, className }) => {
         <TextContent>
           <TypesHeader typeIds={locationData.type_ids} />
           <Description>
-            <p>{locationData.description}</p>
+            <p style={{ 'white-space': 'pre-line' }}>
+              {locationData.description}
+            </p>
 
             <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
               <Map color={theme.secondaryText} size={20} />
