@@ -22,14 +22,19 @@ import {
 } from './FormikWrappers'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
+/**
+ * Initial values of review form fields.
+ *
+ * These represent the value that each field resets to.
+ */
 export const INITIAL_REVIEW_VALUES = {
   review: {
     photos: [],
     comment: '',
     observed_on: '',
-    fruiting: 0,
-    quality_rating: 0,
-    yield_rating: 0,
+    fruiting: null,
+    quality_rating: '0',
+    yield_rating: '0',
   },
 }
 
@@ -37,7 +42,7 @@ export const INITIAL_REVIEW_VALUES = {
 export const FRUITING_OPTIONS = ['Flowers', 'Unripe fruit', 'Ripe fruit'].map(
   (name, idx) => ({
     label: name,
-    value: idx + 1,
+    value: idx,
   }),
 )
 
@@ -49,16 +54,16 @@ export const isEmptyReview = (review) => {
   const r = formToReview(review)
   return (
     !r.comment &&
-    r.quality_rating === 0 &&
-    r.fruiting === 0 &&
-    r.yield_rating === 0 &&
+    r.quality_rating === null &&
+    r.fruiting === null &&
+    r.yield_rating === null &&
     r.photo_ids.length === 0
   )
 }
 
 export const validateReviewStep = (review) => {
   const r = formToReview(review)
-  if (r.fruiting !== 0 && !r.observed_on) {
+  if (r.fruiting !== null && !r.observed_on) {
     return {
       review: { observed_on: true },
     }
@@ -91,10 +96,13 @@ export const validateReview = (review) => ({
 export const formToReview = (review) => {
   const formattedReview = {
     ...review,
+    comment: review.comment || null,
     observed_on: review.observed_on || null,
-    fruiting: review.fruiting?.value ?? 0,
-    quality_rating: Number(review.quality_rating),
-    yield_rating: Number(review.yield_rating),
+    fruiting: review.fruiting ? review.fruiting.value : null,
+    quality_rating:
+      review.quality_rating === '0' ? null : Number(review.quality_rating) - 1,
+    yield_rating:
+      review.yield_rating === '0' ? null : Number(review.yield_rating) - 1,
     photo_ids: review.photos.map((photo) => photo.id),
   }
   delete formattedReview.photos
@@ -109,7 +117,7 @@ export const reviewToForm = ({
   yield_rating,
   quality_rating,
 }) => ({
-  comment,
+  comment: comment ?? '',
   photos: photos.map((photo) => ({
     id: photo.id,
     name: `My Photo ${photo.created_at.split('T')[0]}`,
@@ -117,9 +125,9 @@ export const reviewToForm = ({
     isNew: false,
   })),
   observed_on: observed_on ?? '',
-  fruiting: fruiting === 0 ? null : FRUITING_OPTIONS[fruiting - 1],
-  yield_rating,
-  quality_rating,
+  fruiting: fruiting === null ? null : FRUITING_OPTIONS[fruiting],
+  yield_rating: yield_rating === null ? '0' : String(yield_rating + 1),
+  quality_rating: quality_rating === null ? '0' : String(quality_rating + 1),
 })
 
 const DeleteButton = styled(Button)`

@@ -76,13 +76,11 @@ const FruitingSummaryRow = ({ reviews }) => {
 }
 
 const FruitingSummary = ({ reviews }) => {
-  const fruitingReviews = reviews.filter((review) => Boolean(review.fruiting))
-
   const {
-    1: flowerReviews,
-    2: unripeReviews,
-    3: ripeReviews,
-  } = groupBy(rProp('fruiting'), fruitingReviews)
+    0: flowerReviews,
+    1: unripeReviews,
+    2: ripeReviews,
+  } = groupBy(rProp('fruiting'), reviews)
 
   return (
     <>

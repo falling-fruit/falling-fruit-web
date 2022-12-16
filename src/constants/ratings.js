@@ -17,7 +17,7 @@ export const RATINGS = [
 ]
 
 export const FRUITING_RATINGS = {
-  1: 'Flowers',
-  2: 'Unripe',
-  3: 'Ripe Fruit',
+  0: 'Flowers',
+  1: 'Unripe fruit',
+  2: 'Ripe fruit',
 }

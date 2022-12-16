@@ -116,7 +116,7 @@ const Review = ({
         {RATINGS.map(({ title, ratingKey, total }, key) => {
           const score = review[ratingKey]
 
-          if (!score) {
+          if (score === null) {
             return null
           }
 
@@ -127,7 +127,7 @@ const Review = ({
               </td>
               <td>
                 {ratingKey !== 'fruiting' ? (
-                  <Rating key={key} score={review[ratingKey]} total={total} />
+                  <Rating key={key} score={score + 1} total={total} />
                 ) : (
                   FRUITING_RATINGS[score]
                 )}
