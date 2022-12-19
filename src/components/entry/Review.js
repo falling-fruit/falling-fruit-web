@@ -59,6 +59,10 @@ const RatingTable = styled.table`
   }
 `
 const ReviewDescription = styled.section`
+  white-space: pre-line;
+  word-break: normal;
+  overflow-wrap: anywhere;
+
   margin-bottom: 8px;
   blockquote {
     font-size: 1rem;
