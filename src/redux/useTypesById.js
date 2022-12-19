@@ -4,13 +4,12 @@ import { useSelector } from 'react-redux'
 
 export const useTypesById = () => {
   const { i18n } = useTranslation()
-  const language = i18n.language === 'en-US' ? 'en' : i18n.language
 
   const typesById = useSelector((state) => state.misc.typesById)
 
   const getCommonNames = useCallback(
-    (id) => typesById[id]?.common_names[language],
-    [typesById, language],
+    (id) => typesById[id]?.common_names[i18n.language],
+    [typesById, i18n.language],
   )
 
   const getCommonName = (id) => getCommonNames(id)?.[0]
