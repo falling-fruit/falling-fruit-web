@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { LANGUAGE_OPTIONS } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
@@ -18,14 +19,6 @@ import Road from './mapTiles/road.png'
 import Satellite from './mapTiles/satellite.png'
 import Terrain from './mapTiles/terrain.png'
 import Transit from './mapTiles/transit.png'
-
-const LANGUAGE_OPTIONS = [
-  { value: 'en-US', label: 'English' },
-  { value: 'fr', label: 'Français' },
-  { value: 'es', label: 'Español' },
-  { value: 'de', label: 'Deutsch' },
-  { value: 'it', label: 'Italiano' },
-]
 
 const DISTANCE_UNIT_OPTIONS = [
   { value: 'metric', label: 'Metric' },
