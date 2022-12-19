@@ -48,7 +48,8 @@ const IconBesideText = styled.div`
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   white-space: pre-line;
-  word-break: break-all;
+  word-break: normal;
+  overflow-wrap: anywhere;
 
   p {
     font-size: 1rem;
@@ -116,9 +117,7 @@ const EntryOverview = ({ locationData, className }) => {
         <TextContent>
           <TypesHeader typeIds={locationData.type_ids} />
           <Description>
-            <p style={{ 'white-space': 'pre-line' }}>
-              {locationData.description}
-            </p>
+            <p>{locationData.description}</p>
 
             <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
               <Map color={theme.secondaryText} size={20} />
