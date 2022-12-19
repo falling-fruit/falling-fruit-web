@@ -120,7 +120,7 @@ const Review = ({
         {RATINGS.map(({ title, ratingKey, total }, key) => {
           const score = review[ratingKey]
 
-          if (!score) {
+          if (score === null) {
             return null
           }
 
@@ -131,7 +131,7 @@ const Review = ({
               </td>
               <td>
                 {ratingKey !== 'fruiting' ? (
-                  <Rating key={key} score={review[ratingKey]} total={total} />
+                  <Rating key={key} score={score + 1} total={total} />
                 ) : (
                   FRUITING_RATINGS[score]
                 )}
@@ -147,8 +147,8 @@ const Review = ({
         <cite>
           Reviewed on {formatISOString(review.created_at)} by{' '}
           {review.author ?? 'Anonymous'}{' '}
-          {review.observed_at && (
-            <>(visited {formatISOString(review.observed_at)}))</>
+          {review.observed_on && (
+            <>(visited {formatISOString(review.observed_on)})</>
           )}
         </cite>
       )}
