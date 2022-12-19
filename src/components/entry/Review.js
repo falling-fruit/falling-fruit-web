@@ -60,7 +60,8 @@ const RatingTable = styled.table`
 `
 const ReviewDescription = styled.section`
   white-space: pre-line;
-  word-break: break-all;
+  word-break: normal;
+  overflow-wrap: anywhere;
 
   margin-bottom: 8px;
   blockquote {

@@ -48,7 +48,8 @@ const IconBesideText = styled.div`
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   white-space: pre-line;
-  word-break: break-all;
+  word-break: normal;
+  overflow-wrap: anywhere;
 
   p {
     font-size: 1rem;
