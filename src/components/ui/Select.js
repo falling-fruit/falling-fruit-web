@@ -41,7 +41,7 @@ const StyledSelect = styled(Select)`
 
   .select__multi-value {
     background-color: ${({ theme }) => theme.transparentOrange};
-    border-radius: 20px;
+    border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -9,7 +9,7 @@ const SquareButton = styled(ResetButton)`
   border: 1px solid
     ${({ disabled, theme }) =>
       disabled ? theme.secondaryBackground : theme.orange};
-  border-radius: 5px;
+  border-radius: 0.375em;
 
   svg {
     color: ${({ disabled, theme }) =>

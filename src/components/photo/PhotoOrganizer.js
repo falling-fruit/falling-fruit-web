@@ -6,7 +6,7 @@ import { PhotoList } from './PhotoList'
 
 const StyledDropzone = styled.div`
   border: 2px dashed ${({ theme }) => theme.orange};
-  border-radius: 12px;
+  border-radius: 0.375em;
 
   font-size: 1.125rem;
   cursor: pointer;

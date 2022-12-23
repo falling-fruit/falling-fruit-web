@@ -15,10 +15,10 @@ const Button = styled(ResetButton)`
   font-weight: bold;
   border: 2px ${({ theme }) => theme.orange} solid;
   &:first-child {
-    border-radius: 3px 0 0 3px;
+    border-radius: 0.375em 0 0 0.375em;
   }
   &:last-child {
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 0.375em 0.375em 0;
   }
 `
 

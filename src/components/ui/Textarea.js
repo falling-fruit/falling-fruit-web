@@ -5,7 +5,7 @@ import { validatedColor } from '../ui/GlobalStyle'
 const Textarea = styled.textarea`
   border: 1px solid ${validatedColor()};
   box-sizing: border-box;
-  border-radius: 12px;
+  border-radius: 0.375em;
   padding: 0.75rem 1rem;
   resize: vertical;
   color: ${({ theme }) => theme.secondaryText};

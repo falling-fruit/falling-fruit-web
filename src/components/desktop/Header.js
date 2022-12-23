@@ -132,7 +132,7 @@ const StyledDropdown = styled(Dropdown)`
     display: none;
     position: absolute;
     background-color: ${({ theme }) => theme.background};
-    border-radius: 0px 0px 6px 6px;
+    border-radius: 0 0 0.375em 0.375em;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.05) 0 15px 15px;
     text-align: center;
@@ -166,7 +166,7 @@ const SignupButton = styled(Button)`
   }
 
   display: block;
-  border-radius: 4px;
+  border-radius: 0.375em;
   border: none;
   font-size: 100%;
   font-family: inherit;
