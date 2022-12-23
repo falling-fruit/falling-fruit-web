@@ -13,7 +13,7 @@ const StyledDialog = styled(Dialog)`
   display: flex;
   width: 80%;
   max-width: 900px;
-  border-radius: 12.5px;
+  border-radius: 0.375em;
   padding: 16px;
 `
 //  TODO: Fix lightbox behavior for mobile
@@ -24,7 +24,7 @@ const StyledReviewImage = styled.img`
   width: 100%;
   min-width: 300px;
   height: 500px;
-  border-radius: 4px;
+  border-radius: 0.375em;
 `
 const ReviewContainer = styled.div`
   position: relative;
@@ -37,10 +37,10 @@ const ReviewContainer = styled.div`
 `
 const ThumbnailImage = styled(ImagePreview)`
   outline: ${(props) => props.selected && `3px solid ${props.theme.orange}`};
-  border-radius: 3px;
+  border-radius: 0.375em;
   margin-right: 10px;
   img {
-    border-radius: ${(props) => props.selected && '3px'};
+    border-radius: ${(props) => props.selected && '0.375em'};
     border: 0;
   }
 `
@@ -72,7 +72,7 @@ const NavButton = styled(ResetButton)`
   color: white;
   width: 50px;
   height: 50px;
-  border-radius: 14px;
+  border-radius: 0.375em;
   margin-right: 10px;
   background: rgba(0, 0, 0, 0.65);
   box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};

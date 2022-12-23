@@ -38,7 +38,7 @@ const StyledPhotoGrid = styled.figure`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 0.375em;
     cursor: pointer;
   }
 
@@ -61,7 +61,7 @@ const ImageUpload = styled.label`
   font-weight: 13px;
   cursor: pointer;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 0.375em;
 
   border: 2px solid ${({ theme }) => theme.text};
   font-weight: bold;
@@ -83,7 +83,7 @@ const ImageUpload = styled.label`
 const ExtraImagesWrapper = styled(ResetButton)`
   display: block;
   position: relative;
-  border-radius: 4px;
+  border-radius: 0.375em;
   @media ${({ theme }) => theme.device.mobile} {
     border-radius: 0;
   }

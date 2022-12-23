@@ -37,7 +37,7 @@ const TreeSelectContainer = styled.div`
     position: relative;
     box-shadow: none;
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
-    border-radius: 7px;
+    border-radius: 0.375em;
     top: 0 !important;
   }
 
@@ -46,12 +46,12 @@ const TreeSelectContainer = styled.div`
   }
 
   .rc-tree-select-tree-checkbox {
-    border: 3px solid ${({ theme }) => theme.orange} !important;
-    border-radius: 4px !important;
+    border: 2px solid ${({ theme }) => theme.orange} !important;
+    border-radius: 0.225em !important;
     background: ${({ theme }) => theme.transparentOrange} !important;
     margin-right: 5px !important;
-    width: 8px !important;
-    height: 8px !important;
+    width: 9px !important;
+    height: 9px !important;
   }
 
   .rc-tree-select-tree-checkbox-checked,

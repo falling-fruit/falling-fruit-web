@@ -30,7 +30,7 @@ const OpacityButton = styled(ResetButton)`
   box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
   color: #ffffff;
   z-index: 2;
-  border-radius: 13.5px;
+  border-radius: 0.375em;
   font-size: 1.14rem;
   cursor: pointer;
   position: relative;

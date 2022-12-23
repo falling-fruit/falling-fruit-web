@@ -11,7 +11,7 @@ const TopBar = styled.div`
   background: ${({ theme }) => theme.background};
   filter: drop-shadow(0px -1px 8px ${({ theme }) => theme.shadow});
   padding: 16px;
-  border-radius: ${(props) => (props.rectangular ? '0' : '0 0 44px 44px')};
+  border-radius: ${(props) => (props.rectangular ? '0' : '0 0 1.5em 1.5em')};
   transition: border-radius 0.2s ease-out-in;
 `
 

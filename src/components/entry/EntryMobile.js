@@ -55,7 +55,7 @@ const DrawerContainer = styled.div`
     background: white;
     z-index: -1;
     padding-top: 10px;
-    ${({ showEntryImages }) => !showEntryImages && `border-radius: 13px;`}
+    ${({ showEntryImages }) => !showEntryImages && `border-radius: 0.375em;`}
   }
 
   .move {

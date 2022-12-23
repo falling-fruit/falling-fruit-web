@@ -42,7 +42,7 @@ const NewBadge = styled.div.attrs({ children: 'New Photo ' })`
   display: inline-block;
   background-color: ${({ theme }) => theme.blue};
   color: ${({ theme }) => theme.background};
-  border-radius: 4px;
+  border-radius: 0.375em;
   padding: 2px;
 `
 

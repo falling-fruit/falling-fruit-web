@@ -37,7 +37,7 @@ const Tile = styled.div`
 
   & > img {
     border: 1px solid ${({ theme }) => theme.secondaryBackground};
-    border-radius: 7px;
+    border-radius: 0.375em;
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 const TreeSelectContainer = styled.div`
   height: 100%;
   border: 1px solid ${({ theme }) => theme.secondaryBackground};
-  border-radius: 7px;
+  border-radius: 0.375em;
   padding: 0.5em;
   box-sizing: border-box;
 
