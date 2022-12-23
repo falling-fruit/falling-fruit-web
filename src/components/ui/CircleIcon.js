@@ -7,8 +7,8 @@ const CircleIcon = styled.div`
   align-items: center;
   background: ${({ backgroundColor }) => backgroundColor};
   padding: 0;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   box-sizing: border-box;
   border-radius: 50%;
   overflow: hidden;
