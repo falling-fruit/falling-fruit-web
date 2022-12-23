@@ -8,6 +8,7 @@ const Carousel = styled(ResponsiveCarousel)`
   cursor: pointer;
   user-select: none;
   overflow: hidden;
+  mask-image: radial-gradient(white, black);
   -webkit-mask-image: -webkit-radial-gradient(white, black);
 
   img {
