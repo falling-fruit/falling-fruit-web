@@ -36,7 +36,7 @@ const SettingsAccordionButton = ({
     <IndicatorAccordionButton {...props}>
       <StyledListEntry
         leftIcons={
-          <CircleIcon backgroundColor={theme.transparentOrange}>
+          <CircleIcon>
             <LeftIcon color={theme.orange} />
           </CircleIcon>
         }
