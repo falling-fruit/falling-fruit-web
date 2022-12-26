@@ -79,20 +79,17 @@ const Entry = ({
   if (!locationData || !reviews) {
     content = <LoadingIndicator cover vertical />
   } else {
-    const allReviewPhotos = reviews.map((review) => review.photos).flat()
+    const reviewsWithPhotos = reviews.filter(
+      (review) => review.photos.length > 0,
+    )
+    const lightboxIndices = reviewsWithPhotos
+      .map((review, ri) => review.photos.map((_, pi) => [ri, pi]))
+      .flat()
+    const allReviewPhotos = reviewsWithPhotos
+      .map((review) => review.photos)
+      .flat()
     const onClickCarousel = (idx) => {
-      const targetId = allReviewPhotos[idx].id
-      const reviewIdx = reviews.findIndex((review) =>
-        review.photos.some((photo) => photo.id === targetId),
-      )
-      if (reviewIdx < 0) {
-        return
-      }
-      const photoIdx = reviews[reviewIdx].photos.findIndex(
-        (photo) => photo.id === targetId,
-      )
-
-      setLightboxIndex([reviewIdx, photoIdx])
+      setLightboxIndex(lightboxIndices[idx])
       setIsLightboxOpen(true)
     }
 

@@ -1,4 +1,3 @@
-import { partition } from 'ramda'
 import { useSelector } from 'react-redux'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -15,49 +14,44 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
   const user = useSelector((state) => state.auth.user)
 
   const reviewsWithPhotos = reviews.filter((r) => r.photos.length > 0)
-  const [userReviews, otherReviews] = partition(
-    (review) => review.user_id === user?.id,
-    reviews,
-  )
-
   return (
     <TextContent>
       <ReviewSummary reviews={reviews} />
       {!isDesktop && <ReviewButton />}
       <h3>Reviews</h3>
-      {userReviews.map((review) => (
-        <Review
-          key={review.id}
-          review={review}
-          onImageClick={(imageIndex) =>
-            onImageClick(
-              reviewsWithPhotos.findIndex((r) => r.id === review.id),
-              imageIndex,
-            )
-          }
-          onEditClick={() =>
-            history.push({
-              pathname: `/review/${review.id}/edit`,
-              state: {
-                fromPage: history.location.pathname,
-              },
-            })
-          }
-          editable
-        />
-      ))}
-      {otherReviews.map((review) => (
-        <Review
-          key={review.id}
-          review={review}
-          onImageClick={(imageIndex) =>
-            onImageClick(
-              reviewsWithPhotos.findIndex((r) => r.id === review.id),
-              imageIndex,
-            )
-          }
-        />
-      ))}
+      {reviews.map((review) => {
+        const onReviewImageClick = (imageIndex) =>
+          onImageClick(
+            reviewsWithPhotos.findIndex((r) => r.id === review.id),
+            imageIndex,
+          )
+        if (review.user_id === user?.id) {
+          return (
+            <Review
+              key={review.id}
+              review={review}
+              onImageClick={onReviewImageClick}
+              onEditClick={() =>
+                history.push({
+                  pathname: `/review/${review.id}/edit`,
+                  state: {
+                    fromPage: history.location.pathname,
+                  },
+                })
+              }
+              editable
+            />
+          )
+        } else {
+          return (
+            <Review
+              key={review.id}
+              review={review}
+              onImageClick={onReviewImageClick}
+            />
+          )
+        }
+      })}
       {isDesktop && <ReviewForm onSubmit={onReviewSubmit} />}
     </TextContent>
   )
