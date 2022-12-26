@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import EntryWrapper from '../entry/EntryWrapper'
 import { EditLocationPage, EditReviewPage } from '../form/EditableForm'
@@ -29,6 +29,9 @@ const SidePaneSwitch = () => (
           </Route>
           <Route path={['/entry/:id', '/entry/:id']}>
             <EntryWrapper desktop />
+          </Route>
+          <Route>
+            <Redirect to="/map" />
           </Route>
         </Switch>
       </NavPane>

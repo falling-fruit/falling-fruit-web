@@ -26,7 +26,7 @@ const StyledSelect = styled(Select)`
 
   .select__control {
     border: 1px solid ${validatedColor()};
-    border-radius: 23px;
+    border-radius: 0.375em;
     padding: 3px 10px;
   }
 

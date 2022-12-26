@@ -1,8 +1,10 @@
 import { Star as StarEmpty } from '@styled-icons/boxicons-regular'
 import { Star, StarHalf } from '@styled-icons/boxicons-solid'
+import { groupBy, prop as rProp } from 'ramda'
 import styled from 'styled-components/macro'
 
-import { RATINGS } from '../../constants/ratings'
+import { FRUITING_RATINGS, RATINGS } from '../../constants/ratings'
+import { MONTH_LABELS } from '../form/LocationForm'
 
 const SummaryTable = styled.table`
   border-spacing: 0;
@@ -31,10 +33,69 @@ const SummaryTable = styled.table`
     text-align: right;
   }
 
+  td > p {
+    margin-top: 0.5em;
+    font-size: 1rem;
+  }
+
   h3 {
     margin-top: 0;
   }
 `
+
+const FruitingSummaryRow = ({ reviews }) => {
+  if (!reviews?.length) {
+    return null
+  }
+
+  const reviewsByMonth = reviews.reduce((monthToCount, review) => {
+    if (!review.observed_on) {
+      return monthToCount
+    }
+    const month = new Date(review.observed_on).getMonth()
+
+    monthToCount = {
+      ...monthToCount,
+      [month]: (monthToCount[month] || 0) + 1,
+    }
+
+    return monthToCount
+  }, {})
+
+  const reviewMonthPairs = Object.entries(reviewsByMonth)
+
+  return (
+    <tr>
+      <td colSpan={2}>
+        <p>
+          {FRUITING_RATINGS[reviews[0].fruiting]}:{' '}
+          {reviewMonthPairs
+            .map(([month, count]) => `${MONTH_LABELS[month]} (${count})`)
+            .join(', ')}
+        </p>
+      </td>
+    </tr>
+  )
+}
+
+const FruitingSummary = ({ reviews }) => {
+  const {
+    0: flowerReviews,
+    1: unripeReviews,
+    2: ripeReviews,
+  } = groupBy(rProp('fruiting'), reviews)
+
+  return (
+    <>
+      <tr>
+        <td colSpan={2}>Fruiting</td>
+      </tr>
+      <FruitingSummaryRow reviews={flowerReviews} />
+      <FruitingSummaryRow reviews={unripeReviews} />
+      <FruitingSummaryRow reviews={ripeReviews} />
+    </>
+  )
+}
 
 const SummaryRow = ({ title, scores, total }) => {
   const aggregateScore = scores.reduce((a, b) => a + b, 0) / scores.length
@@ -65,7 +126,7 @@ const SummaryRow = ({ title, scores, total }) => {
 }
 
 const ReviewSummary = ({ reviews }) => {
-  const ratingsWithScores = RATINGS.map((rating) => ({
+  const ratingsWithScores = RATINGS.slice(1).map((rating) => ({
     ...rating,
     scores: reviews.reduce((scores, review) => {
       if (review[rating.ratingKey]) {
@@ -79,6 +140,7 @@ const ReviewSummary = ({ reviews }) => {
     <SummaryTable>
       <h3>Summary</h3>
       <tbody>
+        <FruitingSummary reviews={reviews} />
         {ratingsWithScores.map((rating) => (
           <SummaryRow key={rating.ratingKey} {...rating} />
         ))}

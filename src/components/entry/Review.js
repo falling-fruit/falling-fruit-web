@@ -59,6 +59,10 @@ const RatingTable = styled.table`
   }
 `
 const ReviewDescription = styled.section`
+  white-space: pre-line;
+  word-break: normal;
+  overflow-wrap: anywhere;
+
   margin-bottom: 8px;
   blockquote {
     font-size: 1rem;
@@ -116,7 +120,7 @@ const Review = ({
         {RATINGS.map(({ title, ratingKey, total }, key) => {
           const score = review[ratingKey]
 
-          if (!score) {
+          if (score === null) {
             return null
           }
 
@@ -127,7 +131,7 @@ const Review = ({
               </td>
               <td>
                 {ratingKey !== 'fruiting' ? (
-                  <Rating key={key} score={review[ratingKey]} total={total} />
+                  <Rating key={key} score={score + 1} total={total} />
                 ) : (
                   FRUITING_RATINGS[score]
                 )}
@@ -141,9 +145,11 @@ const Review = ({
       <blockquote>{review.comment}</blockquote>
       {!editable && (
         <cite>
-          {review.observed_at ? 'Observed' : 'Reviewed'} on{' '}
-          {formatISOString(review.observed_at || review.created_at)} by{' '}
-          {review.author ?? 'Anonymous'}
+          Reviewed on {formatISOString(review.created_at)} by{' '}
+          {review.author ?? 'Anonymous'}{' '}
+          {review.observed_on && (
+            <>(visited {formatISOString(review.observed_on)})</>
+          )}
         </cite>
       )}
     </ReviewDescription>

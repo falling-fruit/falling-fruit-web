@@ -91,25 +91,26 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
           email: '',
         }}
         validationSchema={Yup.object({
-          comment: Yup.string().required(),
+          comment: Yup.string(),
           name: !isLoggedIn && Yup.string().required(),
           email: !isLoggedIn && Yup.string().email().required(),
         })}
         onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, isValid }) => (
           <Form>
             <Select
               name="problem_code"
               label="Problem Type"
               isSearchable={false}
               options={PROBLEM_TYPE_OPTIONS}
+              required
             />
             <Textarea name="comment" label="Description" />
             {!isLoggedIn && (
               <>
-                <Input name="name" label="Name" />
-                <Input name="email" label="Email" />
+                <Input name="name" label="Name" required />
+                <Input name="email" label="Email" required />
                 <Recaptcha />
               </>
             )}
@@ -117,7 +118,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
               <Button type="button" onClick={onDismiss} secondary>
                 Cancel
               </Button>
-              <Button disabled={isSubmitting} type="submit">
+              <Button disabled={isSubmitting || !isValid} type="submit">
                 {isSubmitting ? 'Submitting' : 'Submit'}
               </Button>
             </Buttons>
