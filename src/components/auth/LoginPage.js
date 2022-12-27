@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
@@ -21,6 +22,7 @@ const LoginPage = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
   const error = useSelector((state) => state.auth.error)
   const { state } = useLocation()
+  const { t } = useTranslation()
 
   const dispatch = useDispatch()
 
@@ -31,7 +33,7 @@ const LoginPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate>
-        <h1>Login</h1>
+        <h1>{t('users.sign_in')}</h1>
         <Formik
           initialValues={{
             email: state?.email ?? '',
@@ -48,37 +50,45 @@ const LoginPage = () => {
             setSubmitting(false)
           }}
         >
-          {({ isValid }) => (
+          {({ dirty, isValid }) => (
             <Form>
               <FormInputWrapper>
-                <Input type="text" name="email" label="Email" />
-                <Input name="password" label="Password" type="password" />
+                <Input name="email" type="text" label={t('glossary.email')} />
+                <Input
+                  name="password"
+                  type="password"
+                  label={t('glossary.password')}
+                />
               </FormInputWrapper>
-              {error && (
+              {dirty && error && (
                 <ErrorMessage>{error.response.data.error}</ErrorMessage>
               )}
-              {/* TODO: missing all errors */}
 
               <FormCheckboxWrapper>
                 <LabeledRow
-                  label={<label htmlFor="rememberMe">Remember me</label>}
+                  label={
+                    <label htmlFor="rememberMe">{t('users.remember_me')}</label>
+                  }
                   left={<Checkbox name="rememberMe" />}
                 />
               </FormCheckboxWrapper>
 
               <FormButtonWrapper>
-                <Button disabled={!isValid || isLoading} type="submit">
-                  {isLoading ? 'Logging in' : 'Login'}
+                <Button
+                  disabled={!dirty || !isValid || isLoading}
+                  type="submit"
+                >
+                  {t('glossary.login')}
                 </Button>
               </FormButtonWrapper>
             </Form>
           )}
         </Formik>
         <Column>
-          <Link to="/users/sign_up">Sign up</Link>
-          <Link to="/users/password/new">Reset your password</Link>
+          <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
+          <Link to="/users/password/new">{t('users.forgot_password')}</Link>
           <Link to="/users/confirmation/new">
-            Resend confirmation instructions
+            {t('users.resend_confirmation_instructions')}
           </Link>
         </Column>
       </PageTemplate>

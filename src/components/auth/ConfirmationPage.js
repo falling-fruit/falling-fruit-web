@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { confirmUser } from '../../utils/api'
@@ -6,18 +7,19 @@ import { useAppHistory } from '../../utils/useAppHistory'
 
 const ConfirmationPage = () => {
   const history = useAppHistory()
+  const { t } = useTranslation()
 
   useEffect(() => {
     const handleConfirmation = async () => {
       const token = new URLSearchParams(window.location.search).get('token')
 
       if (!token) {
-        toast.error("Confirmation token can't be blank", { autoClose: 5000 })
+        toast.error(t('devise.confirmations.no_token'), { autoClose: 5000 })
         history.push('/users/confirmation/new')
       } else {
         try {
           const { email } = await confirmUser(token)
-          toast.success('Your email has been confirmed.')
+          toast.success(t('devise.confirmations.confirmed'))
           history.push({ pathname: '/users/sign_in', state: { email } })
         } catch (e) {
           toast.error(e.response?.data.error, { autoClose: 5000 })
@@ -27,7 +29,7 @@ const ConfirmationPage = () => {
     }
 
     handleConfirmation()
-  }, [history])
+  }, [history, t])
 
   return null
 }

@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -13,7 +14,11 @@ import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { Input, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
+import {
+  ErrorMessage,
+  FormButtonWrapper,
+  FormInputWrapper,
+} from './AuthWrappers'
 
 const formToUser = ({
   email,
@@ -45,6 +50,7 @@ const AccountPage = () => {
   const isLoading = useSelector((state) => state.auth.isLoading)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
   const history = useAppHistory()
+  const { t } = useTranslation()
 
   const [user, setUser] = useState()
 
@@ -67,17 +73,16 @@ const AccountPage = () => {
     let response
     try {
       response = await editUser(newUser)
-
-      const details =
-        isEmailChanged && response.unconfirmed_email
-          ? ` A confirmation email was sent to ${response.unconfirmed_email}.`
-          : ''
-      toast.success(`Account edited successfully!${details}`)
+      if (isEmailChanged && response.unconfirmed_email) {
+        toast.success(t('devise.registrations.update_needs_confirmation'))
+      } else {
+        toast.success(t('devise.registrations.updated'))
+      }
 
       setUser(response)
       dispatch(checkAuth())
     } catch (e) {
-      toast.error(`Account editing failed: ${e.response?.data?.error}`)
+      toast.error(e.response?.data?.error)
       console.error(e.response)
     }
   }
@@ -85,7 +90,8 @@ const AccountPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate>
-        <h1>Edit account</h1>
+        <h1>{t('users.edit_account')}</h1>
+
         {user ? (
           <>
             <Formik
@@ -96,74 +102,90 @@ const AccountPage = () => {
                 email: Yup.string().email().required(),
                 bio: Yup.string(),
                 new_password: Yup.string().min(6),
-                new_password_confirm: Yup.string().test(
-                  'passwords-match',
-                  'Passwords must match',
-                  function (value) {
-                    return this.parent.new_password === value
-                  },
-                ),
-                password_confirmation: Yup.string()
+                new_password_confirm: Yup.string()
+                  .oneOf([Yup.ref('new_password')])
                   .when('new_password', (new_password, schema) =>
-                    new_password
-                      ? schema.required(
-                          'Old password required when changing password',
-                        )
-                      : schema,
-                  )
-                  .when('email', (email, schema) =>
-                    email !== user.email
-                      ? schema.required(
-                          'Old password required when changing email',
-                        )
-                      : schema,
+                    new_password ? schema.required() : schema,
                   ),
+                password: Yup.string().when(
+                  ['new_password', 'email'],
+                  (new_password, email, schema) =>
+                    new_password || email !== user.email
+                      ? schema.required({ key: 'form.error.missing_password' })
+                      : schema,
+                ),
               })}
               onSubmit={handleSubmit}
             >
-              {({ dirty, isValid, isSubmitting }) => (
+              {({ errors, dirty, isValid, isSubmitting }) => (
                 <Form>
                   <FormInputWrapper>
-                    <Input type="text" name="name" label="Name" optional />
+                    <Input
+                      type="text"
+                      name="name"
+                      label={t('glossary.name')}
+                      optional
+                    />
 
-                    <Input type="text" name="email" label="Email" />
+                    <Input
+                      type="text"
+                      name="email"
+                      label={t('glossary.email')}
+                    />
 
-                    <Textarea name="bio" label="About you" optional />
-
-                    <p>Password must be at least 6 characters long.</p>
+                    <Textarea name="bio" label={t('users.bio')} optional />
 
                     <Input
                       name="new_password"
-                      label="New password"
                       type="password"
+                      label={t('users.new_password')}
+                      optional
                     />
+                    {errors.new_password && (
+                      <ErrorMessage>
+                        {t(
+                          errors.new_password.key,
+                          errors.new_password.options,
+                        )}
+                      </ErrorMessage>
+                    )}
+
                     <Input
                       name="new_password_confirm"
-                      label="Confirm new password"
                       type="password"
+                      label={t('users.new_password_confirmation')}
+                      optional
                     />
-
-                    <p>
-                      Current password is required to change email or password.
-                    </p>
-                    {/* TODO: need designs for this information */}
+                    {errors.new_password_confirm && (
+                      <ErrorMessage>
+                        {t(
+                          errors.new_password_confirm.key,
+                          errors.new_password_confirm.options,
+                        )}
+                      </ErrorMessage>
+                    )}
 
                     <Input
                       invalidWhenUntouched
-                      name="password_confirmation"
-                      label="Current password"
+                      name="password"
                       type="password"
+                      label={t('users.current_password')}
                     />
+                    {errors.password && (
+                      <ErrorMessage>
+                        {t(errors.password.key, errors.password.options)}
+                      </ErrorMessage>
+                    )}
                   </FormInputWrapper>
                   <FormButtonWrapper>
                     <Button secondary type="reset">
-                      Clear
+                      {t('form.button.reset')}
                     </Button>
                     <Button
                       type="submit"
                       disabled={!dirty || !isValid || isSubmitting}
                     >
-                      {isSubmitting ? 'Saving changes' : 'Save changes'}
+                      {t('glossary.save_changes')}
                     </Button>
                   </FormButtonWrapper>
 
@@ -178,7 +200,7 @@ const AccountPage = () => {
                 history.push('/map')
               }}
             >
-              Logout
+              {t('glossary.logout')}
             </Button>
           </>
         ) : (

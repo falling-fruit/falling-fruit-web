@@ -1,9 +1,8 @@
 import { Form, Formik } from 'formik'
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { addUser } from '../../utils/api'
@@ -11,11 +10,11 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
-import { FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
-
-const LoginNotice = styled.p`
-  margin-top: -1.5em;
-`
+import {
+  ErrorMessage,
+  FormButtonWrapper,
+  FormInputWrapper,
+} from './AuthWrappers'
 
 const formToUser = (form) => ({ ...form, password_confirm: undefined })
 
@@ -25,6 +24,7 @@ const SignupPage = () => {
 
   const isLoading = useSelector((state) => state.auth.isLoading)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const { t } = useTranslation()
 
   if (!isLoading && isLoggedIn) {
     history.push('/map')
@@ -34,15 +34,19 @@ const SignupPage = () => {
   const handleSubmit = async (values) => {
     const newUser = formToUser(values)
 
-    let response
     try {
-      response = await addUser(newUser)
-      toast.success(`Sign up successful! ${response.message}`, {
-        autoClose: 5000,
-      })
+      await addUser(newUser)
+      toast.success(
+        `${t('devise.registrations.signed_up')} ${t(
+          'devise.confirmations.send_instructions',
+        )}`,
+        {
+          autoClose: 5000,
+        },
+      )
       history.push('/map')
     } catch (e) {
-      toast.error(`Sign up failed: ${e.response?.data?.error}`)
+      toast.error(e.response?.data?.error)
       console.error(e.response)
       recaptchaRef.current.reset()
     }
@@ -51,11 +55,7 @@ const SignupPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate>
-        <h1>Sign up</h1>
-        <LoginNotice>
-          Have an account? <Link to="/users/sign_in">Login</Link>
-        </LoginNotice>
-
+        <h1>{t('glossary.sign_up')}</h1>
         <Formik
           initialValues={{
             email: '',
@@ -69,31 +69,51 @@ const SignupPage = () => {
             password: Yup.string().min(6).required(),
             password_confirm: Yup.string()
               .oneOf([Yup.ref('password')])
-              .required('Passwords must match'),
+              .required(),
             name: Yup.string(),
             bio: Yup.string(),
             'g-recaptcha-response': Yup.string().required(),
           })}
           onSubmit={handleSubmit}
         >
-          {({ dirty, isValid, isSubmitting }) => (
+          {({ errors, dirty, isValid, isSubmitting }) => (
             <Form>
               <FormInputWrapper>
-                <Input type="text" name="email" label="Email" />
+                <Input type="email" name="email" label={t('glossary.email')} />
 
-                {/* TODO: need designs for this information */}
-                <p>Password must be at least 6 characters long.</p>
-
-                <Input name="password" label="Password" type="password" />
                 <Input
-                  name="password_confirm"
-                  label="Confirm password"
                   type="password"
+                  name="password"
+                  label={t('glossary.password')}
+                />
+                {errors.password && (
+                  <ErrorMessage>
+                    {t(errors.password.key, errors.password.options)}
+                  </ErrorMessage>
+                )}
+
+                <Input
+                  type="password"
+                  name="password_confirm"
+                  label={t('users.password_confirmation')}
+                />
+                {errors.password_confirm && (
+                  <ErrorMessage>
+                    {t(
+                      errors.password_confirm.key,
+                      errors.password_confirm.options,
+                    )}
+                  </ErrorMessage>
+                )}
+
+                <Input
+                  type="text"
+                  name="name"
+                  label={t('glossary.name')}
+                  optional
                 />
 
-                <Input type="text" name="name" label="Name" optional />
-
-                <Textarea name="bio" label="About you" optional />
+                <Textarea name="bio" label={t('users.bio')} optional />
               </FormInputWrapper>
 
               <Recaptcha
@@ -105,13 +125,13 @@ const SignupPage = () => {
 
               <FormButtonWrapper>
                 <Button secondary type="reset">
-                  Clear
+                  {t('form.button.reset')}
                 </Button>
                 <Button
                   type="submit"
                   disabled={!dirty || !isValid || isSubmitting}
                 >
-                  {isSubmitting ? 'Signing up' : 'Sign up'}
+                  {t('glossary.sign_up')}
                 </Button>
               </FormButtonWrapper>
             </Form>

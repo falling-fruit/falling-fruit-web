@@ -26,7 +26,7 @@ const getTabs = () => [
   {
     paths: authPages.map((route) => route.path),
     icon: <UserCircle />,
-    label: i18n.t('account'),
+    label: i18n.t('glossary.account'),
   },
 ]
 
