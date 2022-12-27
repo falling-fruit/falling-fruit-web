@@ -31,5 +31,11 @@
   "required": "requis",
   "optional": "optionnel",
   "list": "Liste",
-  "account": "Compte"
+  "account": "Compte",
+  "pages": {
+    "project": "Le projet",
+    "data": "Les données",
+    "sharing": "Partager la récolte",
+    "press": "Dans la presse"
+  }
 }
