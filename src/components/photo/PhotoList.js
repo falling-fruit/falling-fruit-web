@@ -38,7 +38,7 @@ const PhotoEntry = styled(ListEntry).attrs((props) => ({
   }
 `
 
-const NewBadge = styled.div.attrs({ children: 'New Photo ' })`
+const NewBadge = styled.div.attrs({ children: 'New photo' })`
   display: inline-block;
   background-color: ${({ theme }) => theme.blue};
   color: ${({ theme }) => theme.background};

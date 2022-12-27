@@ -85,7 +85,7 @@ const AccountPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate>
-        <h1>Edit Account</h1>
+        <h1>Edit account</h1>
         {user ? (
           <>
             <Formik
@@ -128,18 +128,18 @@ const AccountPage = () => {
 
                     <Input type="text" name="email" label="Email" />
 
-                    <Textarea name="bio" label="About You" optional />
+                    <Textarea name="bio" label="About you" optional />
 
                     <p>Password must be at least 6 characters long.</p>
 
                     <Input
                       name="new_password"
-                      label="New Password"
+                      label="New password"
                       type="password"
                     />
                     <Input
                       name="new_password_confirm"
-                      label="Confirm New Password"
+                      label="Confirm new password"
                       type="password"
                     />
 
@@ -151,7 +151,7 @@ const AccountPage = () => {
                     <Input
                       invalidWhenUntouched
                       name="password_confirmation"
-                      label="Current Password"
+                      label="Current password"
                       type="password"
                     />
                   </FormInputWrapper>

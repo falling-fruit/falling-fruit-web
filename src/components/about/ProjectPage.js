@@ -133,7 +133,7 @@ const Project = () => (
           , and an appetite for mountainous and riverine pursuits.
         </p>
       </div>
-      <h2>Board of Directors</h2>
+      <h2>Board of directors</h2>
       <div className="content">
         <img src="https://fallingfruit.org/jeff_wanner.jpg" alt="" />
         <p>
@@ -263,7 +263,7 @@ const Project = () => (
           the University of Colorado. Besides all that work stuff, he likes to
           climb rocks, run trails, ride bikes, and generally be outdoors as much
           as possible. Caleb created Falling Fruit with Ethan Welty in 2013 and
-          served on the Board of Directors for 6 years before taking a position
+          served on the board of directors for 6 years before taking a position
           on the Advisory Board.
         </p>
       </div>

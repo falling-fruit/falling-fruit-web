@@ -34,7 +34,7 @@ const LocationNav = () => {
               event.stopPropagation()
               return history.goBack()
             }}
-            title="Adding Review"
+            title="Adding review"
           />
         )}
       </Route>
@@ -45,14 +45,14 @@ const LocationNav = () => {
               event.stopPropagation()
               return history.goBack()
             }}
-            title="Editing Location"
+            title="Editing location"
           />
         )}
       </Route>
       <Route path="/locations/new/details">
         <TopBarNav
           onBack={() => history.push('/locations/new')}
-          title="New Location"
+          title="New location"
         />
       </Route>
       <Route>
