@@ -2,7 +2,7 @@ import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt, UserCircle } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 
-import { authPages } from '../auth/authRoutes.js'
+import { authPages } from '../auth/authRoutes'
 
 const DEFAULT_TAB = 1 // Map
 
