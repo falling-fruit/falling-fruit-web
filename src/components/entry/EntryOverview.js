@@ -157,7 +157,7 @@ const EntryOverview = ({ locationData, className }) => {
                 {t('Imported from')}{' '}
                 <Link
                   to={{
-                    pathname: `/about/dataset/${locationData.import_id}`,
+                    pathname: `/imports/${locationData.import_id}`,
                     state: { fromPage: `/entry/${locationData.id}` },
                   }}
                 >

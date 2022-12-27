@@ -8,26 +8,28 @@ import ShareTheHarvestPage from './ShareTheHarvestPage'
 
 const pages = [
   {
-    path: '/about/project',
+    path: ['/about'],
     component: ProjectPage,
   },
   {
-    path: '/about/dataset/:id',
+    path: ['/imports/:id'],
     component: AboutDatasetPage,
   },
   {
-    path: '/about/data',
+    path: ['/data', '/datasets'],
     component: DataPage,
   },
   {
-    path: '/about/press',
+    path: ['/press'],
     component: InThePressPage,
   },
   {
-    path: '/about/share',
+    path: ['/sharing'],
     component: ShareTheHarvestPage,
   },
 ]
 
-const aboutRoutes = pages.map((props) => <Route key={props.path} {...props} />)
+const aboutRoutes = pages.map((props) => (
+  <Route key={props.path[0]} {...props} />
+))
 export default aboutRoutes
