@@ -205,18 +205,18 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <StyledDropdown label={t('About')} isMatch={isAboutPage}>
+            <StyledDropdown label={t('about')} isMatch={isAboutPage}>
               <NavLink to="/about" activeClassName="active">
-                {t('The project')}
+                {t('pages.project')}
               </NavLink>
               <NavLink to="/data" activeClassName="active">
-                {t('The data')}
+                {t('pages.data')}
               </NavLink>
               <NavLink to="/sharing" activeClassName="active">
-                {t('Sharing the harvest')}
+                {t('pages.sharing')}
               </NavLink>
               <NavLink to="/press" activeClassName="active">
-                {t('In the press')}
+                {t('pages.press')}
               </NavLink>
             </StyledDropdown>
           </li>

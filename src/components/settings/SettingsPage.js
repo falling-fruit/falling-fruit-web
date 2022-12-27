@@ -6,9 +6,7 @@ import styled from 'styled-components/macro'
 import { LANGUAGE_OPTIONS } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
-import Button from '../ui/Button'
 import Checkbox from '../ui/Checkbox'
-import { theme } from '../ui/GlobalStyle'
 import LabeledRow from '../ui/LabeledRow'
 import ListEntry from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
@@ -58,28 +56,9 @@ const StyledListEntry = styled(ListEntry)`
   }
 `
 
-const UserWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  > p {
-    margin: 0px;
-    color: ${({ theme }) => theme.secondaryText};
-  }
-
-  * {
-    flex-grow: 1;
-  }
-
-  > *:not(:last-child) {
-    margin-right: 0.5em;
-  }
-`
-
 const SettingsPage = ({ desktop }) => {
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
-  const user = useSelector((state) => state.auth.user)
 
   const history = useAppHistory()
 
@@ -99,30 +78,6 @@ const SettingsPage = ({ desktop }) => {
       {!desktop && (
         <>
           <h2>{t('settings')}</h2>
-
-          <h3>{t('account')}</h3>
-          <UserWrapper>
-            {user ? (
-              <>
-                <p>Logged in as {user.name || user.email}</p>
-                <Button secondary onClick={() => history.push('/users/edit')}>
-                  View account
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button onClick={() => history.push('/users/sign_in')}>
-                  Login
-                </Button>
-                <Button
-                  secondary
-                  onClick={() => history.push('/users/sign_up')}
-                >
-                  Sign up
-                </Button>
-              </>
-            )}
-          </UserWrapper>
         </>
       )}
 
@@ -272,25 +227,25 @@ const SettingsPage = ({ desktop }) => {
 
       {!desktop && (
         <>
-          <h3>{t('About us')}</h3>
+          <h3>{t('about')}</h3>
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'The project'}
+            rightIcons={<ChevronRight size="16" />}
+            primaryText={t('pages.project')}
             onClick={() => history.push('/about')}
           />
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'The data'}
+            rightIcons={<ChevronRight size="16" />}
+            primaryText={t('pages.data')}
             onClick={() => history.push('/data')}
           />
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'Sharing the harvest'}
+            rightIcons={<ChevronRight size="16" />}
+            primaryText={t('pages.sharing')}
             onClick={() => history.push('/sharing')}
           />
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={'In the press'}
+            rightIcons={<ChevronRight size="16" />}
+            primaryText={t('pages.press')}
             onClick={() => history.push('/press')}
           />
         </>
