@@ -26,16 +26,68 @@
   "only_on_map": "Sur la carte",
   "add_location": "Ajouter un site",
   "last_updated": "Last updated",
-  "about": "À propos",
   "login": "Connexion",
-  "required": "requis",
-  "optional": "optionnel",
+  "required": "obligatoire",
+  "optional": "facultatif",
   "list": "Liste",
-  "account": "Compte",
+  "about": "À propos",
   "pages": {
     "project": "Le projet",
     "data": "Les données",
     "sharing": "Partager la récolte",
     "press": "Dans la presse"
+  },
+  "glossary": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "sign_up": "S'inscrire",
+    "account": "Compte",
+    "email": "Email",
+    "password": "Mot de passe",
+    "name": "Nom",
+    "send": "Envoyer",
+    "save_changes": "Enregistrer vos modifications"
+  },
+  "users": {
+    "sign_in": "Se connecter",
+    "sign_out": "Se déconnecter",
+    "remember_me": "Rester connecté",
+    "forgot_password": "Réinitialiser votre mot de passe",
+    "resend_confirmation_instructions": "Renvoyer les instructions de validation",
+    "password_confirmation": "Confirmation du mot de passe",
+    "bio": "À propos de vous",
+    "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
+    "new_password": "Nouveau mot de passe",
+    "new_password_confirmation": "Confirmation du nouveau mot de passe",
+    "change_password": "Modifier mon mot de passe",
+    "edit_account": "Modifier mon compte",
+    "current_password": "Mot de passe actuel"
+  },
+  "form": {
+    "button": {
+      "reset": "Réinitialiser"
+    },
+    "error": {
+      "confirmation": "Ne correspond pas à l'original",
+      "too_short": "Minimum de {{min}} caractères",
+      "missing_password": "Requis pour changer d'email ou de mot de passe"
+    }
+  },
+  "devise": {
+    "registrations": {
+      "signed_up": "Bienvenue ! Votre inscription a bien été enregistrée.",
+      "update_needs_confirmation": "Votre compte a bien été mis à jour mais nous devons vérifier votre nouvelle adresse e-mail. Veuillez consulter votre messagerie et cliquer sur le lien pour confirmer votre nouvelle adresse.",
+      "updated": "Votre compte a bien été mis à jour."
+    },
+    "confirmations": {
+      "confirmed": "Votre compte a été validé. Vous êtes maintenant connecté.",
+      "send_instructions": "Vous allez recevoir les instructions nécessaires à la validation de votre compte dans quelques minutes.",
+      "no_token": "Vous ne pouvez pas accéder à cette page sans passer par un e-mail de validation. Si vous venez en effet d’un tel email, assurez-vous d’utiliser l’URL complète."
+    },
+    "passwords": {
+      "send_instructions": "Vous allez recevoir un email dans quelques instants avec les instructions pour réinitialiser votre mot de passe.",
+      "no_token": "Vous ne pouvez pas accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si vous venez en effet d’un tel email, assurez-vous d’utiliser l’URL complète.",
+      "updated_not_active": "Votre mot de passe a été changé avec succès."
+    }
   }
 }

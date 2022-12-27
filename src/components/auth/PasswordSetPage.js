@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -11,7 +12,12 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
-import { Column, FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
+import {
+  Column,
+  ErrorMessage,
+  FormButtonWrapper,
+  FormInputWrapper,
+} from './AuthWrappers'
 
 const getResetToken = () =>
   new URLSearchParams(window.location.search).get('token')
@@ -19,17 +25,15 @@ const getResetToken = () =>
 const PasswordSetPage = () => {
   const history = useAppHistory()
   const { user, isLoading } = useSelector((state) => state.auth)
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (!getResetToken()) {
       // TODO: display this (among other toasts) on login page in permanent red error text rather than toast
-      toast.error(
-        "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.",
-        { autoClose: 5000 },
-      )
+      toast.error(t('devise.passwords.no_token'), { autoClose: 5000 })
       history.push('/users/sign_in')
     }
-  }, [history])
+  }, [history, t])
 
   if (!isLoading && user) {
     return <Redirect to={getPathWithMapState('/map')} />
@@ -41,12 +45,12 @@ const PasswordSetPage = () => {
         password: new_password,
         token: getResetToken(),
       })
-      toast.success('Your password has been changed successfully.', {
+      toast.success(t('devise.passwords.updated'), {
         autoClose: 5000,
       })
       history.push({ pathname: '/users/sign_in', state: { email } })
     } catch (e) {
-      toast.error('Invalid password reset link')
+      toast.error(e.response?.data.error)
       console.error(e.response)
       history.push('/users/sign_in')
     }
@@ -54,29 +58,47 @@ const PasswordSetPage = () => {
 
   return (
     <PageTemplate>
-      <h1>Change my password</h1>
+      <h1>{t('users.change_password')}</h1>
       <Formik
         initialValues={{
-          new_password: '',
-          new_password_confirm: '',
+          password: '',
+          password_confirm: '',
         }}
         validationSchema={Yup.object({
-          new_password: Yup.string().min(6).required(),
-          new_password_confirm: Yup.string()
-            .oneOf([Yup.ref('new_password')])
-            .required('Passwords must match'),
+          password: Yup.string().min(6).required(),
+          password_confirm: Yup.string()
+            .oneOf([Yup.ref('password')])
+            .required(),
         })}
         onSubmit={handleSubmit}
       >
-        {({ dirty, isValid, isSubmitting }) => (
+        {({ errors, dirty, isValid, isSubmitting }) => (
           <Form>
             <FormInputWrapper>
-              <Input name="new_password" label="New password" type="password" />
               <Input
-                name="new_password_confirm"
-                label="Confirm new password"
                 type="password"
+                name="password"
+                label={t('users.new_password')}
               />
+              {errors.password && (
+                <ErrorMessage>
+                  {t(errors.password.key, errors.password.options)}
+                </ErrorMessage>
+              )}
+
+              <Input
+                type="password"
+                name="password_confirm"
+                label={t('users.new_password_confirmation')}
+              />
+              {errors.password_confirm && (
+                <ErrorMessage>
+                  {t(
+                    errors.password_confirm.key,
+                    errors.password_confirm.options,
+                  )}
+                </ErrorMessage>
+              )}
             </FormInputWrapper>
 
             <FormButtonWrapper>
@@ -84,18 +106,14 @@ const PasswordSetPage = () => {
                 disabled={!dirty || !isValid || isSubmitting}
                 type="submit"
               >
-                {isSubmitting ? 'Changing' : 'Change my password'}
+                {t('users.change_password')}
               </Button>
             </FormButtonWrapper>
           </Form>
         )}
       </Formik>
       <Column>
-        <Link to="/users/sign_in">Login</Link>
-        <Link to="/users/sign_up">Sign up</Link>
-        <Link to="/users/confirmation/new">
-          Resend confirmation instructions
-        </Link>
+        <Link to="/users/sign_in">{t('users.sign_in')}</Link>
       </Column>
     </PageTemplate>
   )

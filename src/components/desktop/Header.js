@@ -233,21 +233,23 @@ const Header = () => {
                 isMatch={isAccountPage}
               >
                 <NavLink to="/users/edit" activeClassName="active">
-                  {t('My account')}
+                  {t('glossary.account')}
                 </NavLink>
-                <ResetButton onClick={handleLogout}>Logout</ResetButton>
+                <ResetButton onClick={handleLogout}>
+                  {t('glossary.logout')}
+                </ResetButton>
               </StyledDropdown>
             </li>
           ) : (
             <>
               <li>
                 <NavLink to="/users/sign_in" activeClassName="active">
-                  {t('login')}
+                  {t('users.sign_in')}
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/users/sign_up" activeClassName="active">
-                  <SignupButton>{t('Sign up')}</SignupButton>
+                  <SignupButton>{t('glossary.sign_up')}</SignupButton>
                 </NavLink>
               </li>
             </>

@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -12,6 +13,7 @@ import { EmailForm } from './EmailForm'
 const ConfirmationResendPage = () => {
   const history = useAppHistory()
   const recaptchaRef = useRef()
+  const { t } = useTranslation()
 
   const { user, isLoading } = useSelector((state) => state.auth)
 
@@ -23,12 +25,12 @@ const ConfirmationResendPage = () => {
   const handleSubmit = async (values) => {
     try {
       await requestConfirmUser(values)
-      toast.success(
-        'You will receive an email with instructions for how to confirm your email address in a few minutes',
-        { autoClose: 5000 },
-      )
+      toast.success(t('devise.confirmations.send_instructions'), {
+        autoClose: 5000,
+      })
       history.push('/users/sign_in')
     } catch (e) {
+      // Should not happen since API silently accepts any email
       toast.error(e.response?.data.error)
       console.error(e.response)
       recaptchaRef.current.reset()
@@ -37,14 +39,12 @@ const ConfirmationResendPage = () => {
 
   return (
     <PageTemplate>
-      <h1>Resend confirmation instructions</h1>
+      <h1>{t('users.resend_confirmation_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
-        <Link to="/users/sign_in">Login</Link>
-        <Link to="/users/sign_up">Sign up</Link>
-        <Link to="/users/confirmation/new">
-          Resend confirmation instructions
-        </Link>
+        <Link to="/users/sign_in">{t('users.sign_in')}</Link>
+        <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
+        <Link to="/users/password/new">{t('users.forgot_password')}</Link>
       </Column>
     </PageTemplate>
   )

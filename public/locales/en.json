@@ -27,15 +27,66 @@
   "add_location": "Add a location",
   "last_updated": "Last updated",
   "about": "About",
-  "login": "Login",
+  "glossary": {
+    "login": "Login",
+    "logout": "Logout",
+    "sign_up": "Sign up",
+    "account": "Account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "send": "Send",
+    "save_changes": "Save changes"
+  },
+  "users": {
+    "sign_in": "Sign in",
+    "sign_out": "Sign out",
+    "remember_me": "Remember me",
+    "forgot_password": "Reset your password",
+    "resend_confirmation_instructions": "Resend confirmation instructions",
+    "password_confirmation": "Password confirmation",
+    "bio": "About you",
+    "send_password_instructions": "Send password reset instructions",
+    "new_password": "New password",
+    "new_password_confirmation": "New password confirmation",
+    "change_password": "Change my password",
+    "edit_account": "Edit account",
+    "current_password": "Current password"
+  },
   "required": "required",
   "optional": "optional",
-  "list": "List",
-  "account": "Account",
   "pages": {
     "project": "The project",
     "data": "The data",
     "sharing": "Sharing the harvest",
     "press": "In the press"
+  },
+  "list": "List",
+  "form": {
+    "button": {
+      "reset": "Reset"
+    },
+    "error": {
+      "confirmation": "Does not match original",
+      "too_short": "Minimum of {{min}} characters",
+      "missing_password": "Required to change email or password"
+    }
+  },
+  "devise": {
+    "registrations": {
+      "signed_up": "Welcome! You have signed up successfully.",
+      "update_needs_confirmation": "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address.",
+      "updated": "Your account has been updated successfully."
+    },
+    "confirmations": {
+      "confirmed": "Your email address has been successfully confirmed.",
+      "send_instructions": "You will receive an email with instructions for how to confirm your email address in a few minutes.",
+      "no_token": "You can't access this page without coming from a confirmation email. If you do, please make sure you used the full URL provided."
+    },
+    "passwords": {
+      "send_instructions": "You will receive an email with instructions on how to reset your password in a few minutes.",
+      "no_token": "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.",
+      "updated_not_active": "Your password has been changed successfully. You are now signed in."
+    }
   }
 }
