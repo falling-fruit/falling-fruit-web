@@ -189,9 +189,17 @@ const Map = ({
           disableDefaultUI: true,
           // TODO: should we disable tilt?
           // tilt: 0,
+          // Toggle all basemap icons
+          // https://developers.google.com/maps/documentation/javascript/style-reference
           styles: [
             {
-              featureType: 'poi.business',
+              featureType: 'poi',
+              elementType: 'labels.icon',
+              stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
+            },
+            {
+              featureType: 'landscape',
+              elementType: 'labels.icon',
               stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
             },
           ],

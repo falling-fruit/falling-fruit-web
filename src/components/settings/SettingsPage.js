@@ -7,7 +7,6 @@ import { LANGUAGE_OPTIONS } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
-import ButtonToggle from '../ui/ButtonToggle'
 import Checkbox from '../ui/Checkbox'
 import { theme } from '../ui/GlobalStyle'
 import LabeledRow from '../ui/LabeledRow'
@@ -19,11 +18,6 @@ import Road from './mapTiles/road.png'
 import Satellite from './mapTiles/satellite.png'
 import Terrain from './mapTiles/terrain.png'
 import Transit from './mapTiles/transit.png'
-
-const DISTANCE_UNIT_OPTIONS = [
-  { value: 'metric', label: 'Metric' },
-  { value: 'imperial', label: 'Imperial' },
-]
 
 const Page = styled.div`
   box-sizing: border-box;
@@ -91,6 +85,11 @@ const SettingsPage = ({ desktop }) => {
 
   const { t, i18n } = useTranslation()
 
+  const DISTANCE_UNIT_OPTIONS = [
+    { value: 'metric', label: t('metric') },
+    { value: 'imperial', label: t('imperial') },
+  ]
+
   const updateUnitsSetting = (object) => {
     dispatch(updateSettings({ distanceUnit: object.value }))
   }
@@ -122,12 +121,12 @@ const SettingsPage = ({ desktop }) => {
         </>
       )}
 
-      <h3>{t('Viewing preferences')}</h3>
+      <h3>{t('data')}</h3>
 
       {[
         {
           field: 'showLabels',
-          label: t('Show labels'),
+          label: t('labels'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -148,39 +147,27 @@ const SettingsPage = ({ desktop }) => {
           label={<label htmlFor={field}>{label}</label>}
         />
       ))}
-      {!desktop && (
-        <LabeledRow
-          label={<label htmlFor="distanceUnit">{t('Units')}</label>}
-          right={
-            <ButtonToggle
-              options={DISTANCE_UNIT_OPTIONS}
-              onChange={updateUnitsSetting}
-              value={settings.distanceUnit}
-            />
-          }
-        />
-      )}
 
-      <h3>{t('Map preferences')}</h3>
+      <h3>{t('map')}</h3>
 
-      <h5>{t('Map view')}</h5>
+      <h5>{t('basemap')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: t('Default'),
+            label: t('roadmap'),
             value: 'roadmap',
             image: Road,
           },
           {
-            label: t('Satellite'),
-            value: 'hybrid',
-            image: Satellite,
-          },
-          {
-            label: t('Terrain'),
+            label: t('terrain'),
             value: 'terrain',
             image: Terrain,
+          },
+          {
+            label: t('satellite'),
+            value: 'hybrid',
+            image: Satellite,
           },
         ]}
         value={settings.mapType}
@@ -193,39 +180,37 @@ const SettingsPage = ({ desktop }) => {
         }
       />
 
-      <h5>{t('Map overlays')}</h5>
+      <h5>{t('overlay')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: t('None'),
-            value: null,
-            image: Road,
-          },
-          {
-            label: t('Biking'),
+            label: t('biking'),
             value: 'BicyclingLayer',
             image: Bicycling,
           },
           {
-            label: t('Transit'),
+            label: t('transit'),
             value: 'TransitLayer',
             image: Transit,
           },
         ]}
         value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
-        onChange={(value) =>
+        onChange={(value) => {
+          if (value === settings.mapLayers[0]) {
+            value = null
+          }
           dispatch(
             updateSettings({
               mapLayers: value ? [value] : [],
             }),
           )
-        }
+        }}
       />
       {[
         {
           field: 'showBusinesses',
-          label: t('Show businesses'),
+          label: t('poi'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -247,12 +232,10 @@ const SettingsPage = ({ desktop }) => {
         />
       ))}
 
-      <h3>{t('Language preferences')}</h3>
+      <h3>{t('regional')}</h3>
 
       <LabeledRow
-        label={
-          <label htmlFor="languagePreference">{t('Language preference')}</label>
-        }
+        label={<label htmlFor="languagePreference">{t('language')}</label>}
         right={
           <Select
             options={LANGUAGE_OPTIONS}
@@ -267,6 +250,20 @@ const SettingsPage = ({ desktop }) => {
           />
         }
       />
+      {!desktop && (
+        <LabeledRow
+          label={<label htmlFor="distanceUnit">{t('units')}</label>}
+          right={
+            <Select
+              options={DISTANCE_UNIT_OPTIONS}
+              onChange={updateUnitsSetting}
+              value={DISTANCE_UNIT_OPTIONS.find(
+                (option) => option.value === settings.distanceUnit,
+              )}
+            />
+          }
+        />
+      )}
 
       {!desktop && (
         <>
