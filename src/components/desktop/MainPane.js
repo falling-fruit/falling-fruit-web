@@ -41,7 +41,7 @@ const MainPane = () => {
           })
         }
       >
-        Add a Location
+        Add a location
       </StyledButton>
       <SettingsButton
         onClick={() =>

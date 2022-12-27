@@ -233,7 +233,7 @@ const Header = () => {
                 isMatch={isAccountPage}
               >
                 <NavLink to="/users/edit" activeClassName="active">
-                  {t('My Account')}
+                  {t('My account')}
                 </NavLink>
                 <ResetButton onClick={handleLogout}>Logout</ResetButton>
               </StyledDropdown>

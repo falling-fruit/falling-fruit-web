@@ -87,13 +87,13 @@ const SignupPage = () => {
                 <Input name="password" label="Password" type="password" />
                 <Input
                   name="password_confirm"
-                  label="Confirm Password"
+                  label="Confirm password"
                   type="password"
                 />
 
                 <Input type="text" name="name" label="Name" optional />
 
-                <Textarea name="bio" label="About You" optional />
+                <Textarea name="bio" label="About you" optional />
               </FormInputWrapper>
 
               <Recaptcha
