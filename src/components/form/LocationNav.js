@@ -20,30 +20,30 @@ const LocationNav = () => {
         {({ match }) => (
           // TODO: fix going back to correct entry id
           <TopBarNav
-            onBack={() => history.push(`/entry/${match.params.id}`)}
+            onBack={() => history.push(`/locations/${match.params.id}`)}
             title="Editing Review"
           />
         )}
       </Route>
-      <Route path="/entry/:id/review">
+      <Route path="/locations/:id/review">
         {({ match }) => (
           <TopBarNav
-            onBack={() => history.push(`/entry/${match.params.id}`)}
+            onBack={() => history.push(`/locations/${match.params.id}`)}
             title="Adding Review"
           />
         )}
       </Route>
-      <Route path="/entry/:id/edit">
+      <Route path="/locations/:id/edit">
         {({ match }) => (
           <TopBarNav
-            onBack={() => history.push(`/entry/${match.params.id}`)}
+            onBack={() => history.push(`/locations/${match.params.id}`)}
             title="Editing Location"
           />
         )}
       </Route>
-      <Route path="/entry/new/details">
+      <Route path="/locations/new/details">
         <TopBarNav
-          onBack={() => history.push('/entry/new')}
+          onBack={() => history.push('/locations/new')}
           title="New Location"
         />
       </Route>

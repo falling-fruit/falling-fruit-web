@@ -299,7 +299,7 @@ const EntryMobile = ({
             {!isInDrawer && (
               <EntryButton
                 onClick={() =>
-                  history.push(`/entry/${locationData.id}`, {
+                  history.push(`/locations/${locationData.id}`, {
                     fromPage: '/map',
                   })
                 }
@@ -308,7 +308,7 @@ const EntryMobile = ({
               />
             )}
             <EntryButton
-              onClick={() => history.push(`/entry/${locationData.id}/edit`)}
+              onClick={() => history.push(`/locations/${locationData.id}/edit`)}
               icon={<PencilIcon />}
               label="edit-button"
             />

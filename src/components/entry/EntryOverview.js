@@ -97,7 +97,7 @@ const EntryOverview = ({ locationData, className }) => {
 
   const handleStreetView = () => {
     if (!isDesktop) {
-      history.push(`/entry/${locationData.id}`, { fromPage: '/map' })
+      history.push(`/locations/${locationData.id}`, { fromPage: '/map' })
     }
 
     // TODO: change setTimeout to make it wait for map component to mount
@@ -158,7 +158,7 @@ const EntryOverview = ({ locationData, className }) => {
                 <Link
                   to={{
                     pathname: `/imports/${locationData.import_id}`,
-                    state: { fromPage: `/entry/${locationData.id}` },
+                    state: { fromPage: `/locations/${locationData.id}` },
                   }}
                 >
                   {locationData.author}

@@ -68,24 +68,26 @@ const MobileLayout = () => {
               <EditReviewForm stepped editingId={match.params.id} />
             )}
           </Route>
-          <Route path="/entry/:id/review">
+          <Route path="/locations/:id/review">
             {({ match }) => (
               <ReviewForm
                 stepped
-                onSubmit={() => history.push(`/entry/${match.params.id}`)}
+                onSubmit={() => history.push(`/locations/${match.params.id}`)}
               />
             )}
           </Route>
-          <Route path="/entry/:id/edit">
+          <Route path="/locations/:id/edit">
             {({ match }) => <EditLocationForm editingId={match.params.id} />}
           </Route>
-          <Route path="/entry/new/details">
+          <Route path="/locations/new/details">
             <LocationForm />
           </Route>
-          <Route path={['/map', '/entry', '/list', '/settings']}>
+          <Route path={['/map', '/locations', '/list', '/settings']}>
             <Switch>
-              <Route path="/entry/new" />
-              <Route path="/entry/:id">{!streetView && <EntryWrapper />}</Route>
+              <Route path="/locations/new" />
+              <Route path="/locations/:id">
+                {!streetView && <EntryWrapper />}
+              </Route>
             </Switch>
             <Switch>
               <Route path="/list">
@@ -105,12 +107,12 @@ const MobileLayout = () => {
         <Route
           path={[
             '/review/:id/edit',
-            '/entry/:id/review',
-            '/entry/:id/edit',
-            '/entry/new/details',
+            '/locations/:id/review',
+            '/locations/:id/edit',
+            '/locations/new/details',
           ]}
         />
-        <Route path={['/map', '/entry']}>
+        <Route path={['/map', '/locations']}>
           {(pathname.includes('/map') || !isFromList) && <MapPage />}
         </Route>
       </Switch>
@@ -118,9 +120,9 @@ const MobileLayout = () => {
         <Route
           path={[
             '/review/:id/edit',
-            '/entry/:id/review',
-            '/entry/:id/edit',
-            '/entry/new/details',
+            '/locations/:id/review',
+            '/locations/:id/edit',
+            '/locations/new/details',
           ]}
         />
         <Route>

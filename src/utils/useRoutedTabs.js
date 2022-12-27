@@ -37,7 +37,7 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
     if (
       // TODO: remove this edge case when refactoring Reach Tabs into NavLinks
       tabIndex === 0 &&
-      pathname.includes('/entry') &&
+      pathname.includes('/locations') &&
       state?.fromPage === '/list'
     ) {
       history.push(pathname, { state: { fromPage: '/map' } })

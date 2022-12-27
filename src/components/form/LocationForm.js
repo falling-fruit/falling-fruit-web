@@ -280,7 +280,8 @@ export const LocationForm = ({
         ]),
   ]
 
-  onSubmit = onSubmit ?? ((response) => history.push(`/entry/${response.id}`))
+  onSubmit =
+    onSubmit ?? ((response) => history.push(`/locations/${response.id}`))
   const handleSubmit = async ({
     'g-recaptcha-response': recaptcha,
     review,
@@ -342,7 +343,7 @@ export const LocationForm = ({
               onClick={(e) => {
                 e.stopPropagation()
                 if (editingId) {
-                  history.push(`/entry/${editingId}`)
+                  history.push(`/locations/${editingId}`)
                 } else {
                   history.push(state?.fromPage ?? '/map')
                 }

@@ -46,7 +46,7 @@ export const EditReviewForm = (props) => (
     convertFormData={(review) => ({
       review: reviewToForm(review),
     })}
-    getRedirectLink={(review) => `/entry/${review.location_id}`}
+    getRedirectLink={(review) => `/locations/${review.location_id}`}
     {...props}
   />
 )

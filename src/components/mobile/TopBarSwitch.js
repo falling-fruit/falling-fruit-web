@@ -24,16 +24,16 @@ const TopBarSwitch = () => {
       <Route
         path={[
           '/review/:id/edit',
-          '/entry/:id/review',
-          '/entry/:id/edit',
-          '/entry/new',
+          '/locations/:id/review',
+          '/locations/:id/edit',
+          '/locations/new',
         ]}
       >
         <TopBar>
           <LocationNav />
         </TopBar>
       </Route>
-      {isFromList && <Route path="/entry/:id" />}
+      {isFromList && <Route path="/locations/:id" />}
       <Route>
         <TopBar>
           <Search />
