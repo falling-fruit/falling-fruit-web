@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet'
-import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
@@ -18,13 +17,12 @@ import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
 import { PageTabs, Tab, TabList, TabPanels } from '../ui/PageTabs'
 import ListPage from './ListPage'
-import { DEFAULT_TAB, getTabs } from './tabs'
+import { DEFAULT_TAB, useTabs } from './tabs'
 import TopBarSwitch from './TopBarSwitch'
 
 const MobileLayout = () => {
-  useTranslation()
   const history = useAppHistory()
-  const tabs = getTabs()
+  const tabs = useTabs()
   const dispatch = useDispatch()
   const streetView = useSelector((state) => state.map.streetView)
   const { pathname, state } = useLocation()
