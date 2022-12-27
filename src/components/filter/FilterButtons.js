@@ -21,10 +21,10 @@ const FilterButtonsContainer = styled.div`
 const FilterButtons = ({ onSelectAllClick, onDeselectAllClick }) => (
   <FilterButtonsContainer>
     <Button secondary onClick={onSelectAllClick}>
-      Select All
+      Select all
     </Button>
     <Button secondary onClick={onDeselectAllClick}>
-      Deselect All
+      Deselect all
     </Button>
   </FilterButtonsContainer>
 )
