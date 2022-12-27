@@ -27,7 +27,7 @@ const ConfirmationResendPage = () => {
         'You will receive an email with instructions for how to confirm your email address in a few minutes',
         { autoClose: 5000 },
       )
-      history.push('/login')
+      history.push('/users/sign_in')
     } catch (e) {
       toast.error(e.response?.data.error)
       console.error(e.response)
@@ -40,9 +40,11 @@ const ConfirmationResendPage = () => {
       <h1>Resend confirmation instructions</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign up</Link>
-        <Link to="/confirmation/new">Resend confirmation instructions</Link>
+        <Link to="/users/sign_in">Login</Link>
+        <Link to="/users/sign_up">Sign up</Link>
+        <Link to="/users/confirmation/new">
+          Resend confirmation instructions
+        </Link>
       </Column>
     </PageTemplate>
   )

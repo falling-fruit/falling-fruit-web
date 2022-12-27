@@ -13,15 +13,15 @@ const ConfirmationPage = () => {
 
       if (!token) {
         toast.error("Confirmation token can't be blank", { autoClose: 5000 })
-        history.push('/confirmation/new')
+        history.push('/users/confirmation/new')
       } else {
         try {
           const { email } = await confirmUser(token)
           toast.success('Your email has been confirmed.')
-          history.push({ pathname: '/login', state: { email } })
+          history.push({ pathname: '/users/sign_in', state: { email } })
         } catch (e) {
           toast.error(e.response?.data.error, { autoClose: 5000 })
-          history.push('/confirmation/new')
+          history.push('/users/confirmation/new')
         }
       }
     }

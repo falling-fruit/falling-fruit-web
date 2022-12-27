@@ -190,7 +190,7 @@ const Header = () => {
     matchPath(useLocation().pathname, {
       path: aboutRoutes.map((route) => route.props.path).flat(),
     }) !== null
-  const isAccountPage = useRouteMatch('/account') !== null
+  const isAccountPage = useRouteMatch('/users/edit') !== null
 
   return (
     <StyledHeader>
@@ -232,7 +232,7 @@ const Header = () => {
                 }
                 isMatch={isAccountPage}
               >
-                <NavLink to="/account" activeClassName="active">
+                <NavLink to="/users/edit" activeClassName="active">
                   {t('My Account')}
                 </NavLink>
                 <ResetButton onClick={handleLogout}>Logout</ResetButton>
@@ -241,12 +241,12 @@ const Header = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/login" activeClassName="active">
+                <NavLink to="/users/sign_in" activeClassName="active">
                   {t('Login')}
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/signup" activeClassName="active">
+                <NavLink to="/users/sign_up" activeClassName="active">
                   <SignupButton>{t('Sign up')}</SignupButton>
                 </NavLink>
               </li>

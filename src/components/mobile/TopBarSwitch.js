@@ -13,12 +13,12 @@ const TopBarSwitch = () => {
       <Route
         path={[
           '/settings',
-          '/account',
+          '/users/edit',
           '/about',
-          '/signup',
-          '/login',
-          '/password',
-          '/confirmation',
+          '/users/sign_up',
+          '/users/sign_in',
+          '/users/password',
+          '/users/confirmation',
         ]}
       ></Route>
       <Route

@@ -41,7 +41,7 @@ const MobileLayout = () => {
   ))
 
   if (
-    ['/list', '/settings', '/account'].some((path) =>
+    ['/list', '/settings', '/users/edit'].some((path) =>
       matchPath(pathname, { path, exact: false, strict: false }),
     )
   ) {
@@ -96,7 +96,7 @@ const MobileLayout = () => {
               <Route path="/settings">
                 <SettingsPage />
               </Route>
-              <Route path="/account">
+              <Route path="/users/edit">
                 <AccountPage />
               </Route>
             </Switch>

@@ -106,14 +106,19 @@ const SettingsPage = ({ desktop }) => {
             {user ? (
               <>
                 <p>Logged in as {user.name || user.email}</p>
-                <Button secondary onClick={() => history.push('/account')}>
+                <Button secondary onClick={() => history.push('/users/edit')}>
                   View Account
                 </Button>
               </>
             ) : (
               <>
-                <Button onClick={() => history.push('/login')}>Login</Button>
-                <Button secondary onClick={() => history.push('/signup')}>
+                <Button onClick={() => history.push('/users/sign_in')}>
+                  Login
+                </Button>
+                <Button
+                  secondary
+                  onClick={() => history.push('/users/sign_up')}
+                >
                   Sign up
                 </Button>
               </>
