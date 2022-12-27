@@ -56,9 +56,9 @@ const Project = () => (
         <p>
           <em>
             Falling Fruit is built by and for foragers – we want it to be the
-            best tool available to the contemporary forager. Write us at
-            <a href="feedback@fallingfruit.org"> feedback@fallingfruit.org</a>,
-            we would love to hear from you!
+            best tool available to the contemporary forager. Write us at{' '}
+            <a href="mailto:info@fallingfruit.org">info@fallingfruit.org</a>, we
+            would love to hear from you!
           </em>
         </p>
         <h3>Translate</h3>
@@ -112,7 +112,7 @@ const Project = () => (
           <br />
           <b>Ethan Welty</b>
           <br />
-          <a href="ethan@fallingfruit.org">ethan@fallingfruit.org</a>
+          <a href="mailto:ethan@fallingfruit.org">ethan@fallingfruit.org</a>
           <br />
           Zürich, Switzerland
           <br />
@@ -141,7 +141,7 @@ const Project = () => (
           <br />
           <b>Jeff Wanner</b>
           <br />
-          <a href="jeff@fallingfruit.org">jeff@fallingfruit.org</a>
+          <a href="mailto:jeff@fallingfruit.org">jeff@fallingfruit.org</a>
           <br />
           Boulder, Colorado, USA
           <br />
