@@ -107,7 +107,7 @@ const SettingsPage = ({ desktop }) => {
               <>
                 <p>Logged in as {user.name || user.email}</p>
                 <Button secondary onClick={() => history.push('/account')}>
-                  View Account
+                  View account
                 </Button>
               </>
             ) : (
@@ -122,12 +122,12 @@ const SettingsPage = ({ desktop }) => {
         </>
       )}
 
-      <h3>{t('Viewing Preferences')}</h3>
+      <h3>{t('Viewing preferences')}</h3>
 
       {[
         {
           field: 'showLabels',
-          label: t('Show Labels'),
+          label: t('Show labels'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -161,9 +161,9 @@ const SettingsPage = ({ desktop }) => {
         />
       )}
 
-      <h3>{t('Map Preferences')}</h3>
+      <h3>{t('Map preferences')}</h3>
 
-      <h5>{t('Map View')}</h5>
+      <h5>{t('Map view')}</h5>
 
       <RadioTiles
         options={[
@@ -193,7 +193,7 @@ const SettingsPage = ({ desktop }) => {
         }
       />
 
-      <h5>{t('Map Overlays')}</h5>
+      <h5>{t('Map overlays')}</h5>
 
       <RadioTiles
         options={[
@@ -225,7 +225,7 @@ const SettingsPage = ({ desktop }) => {
       {[
         {
           field: 'showBusinesses',
-          label: t('Show Businesses'),
+          label: t('Show businesses'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -247,11 +247,11 @@ const SettingsPage = ({ desktop }) => {
         />
       ))}
 
-      <h3>{t('Language Preferences')}</h3>
+      <h3>{t('Language preferences')}</h3>
 
       <LabeledRow
         label={
-          <label htmlFor="languagePreference">{t('Language Preference')}</label>
+          <label htmlFor="languagePreference">{t('Language preference')}</label>
         }
         right={
           <Select
@@ -270,7 +270,7 @@ const SettingsPage = ({ desktop }) => {
 
       {!desktop && (
         <>
-          <h3>{t('About Us')}</h3>
+          <h3>{t('About us')}</h3>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={'The project'}

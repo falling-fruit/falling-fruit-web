@@ -148,7 +148,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a id="review" style={{ textDecoration: 'none' }}>
         <SectionHeading>
-          Leave a Review
+          Leave a review
           {!standalone && <Optional />}
         </SectionHeading>
       </a>
@@ -162,12 +162,12 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
 
     <DateInput
       name="review.observed_on"
-      label="Observed On"
+      label="Observed on"
       invalidWhenUntouched
     />
 
     <Select
-      label="Fruiting Status"
+      label="Fruiting status"
       name="review.fruiting"
       options={FRUITING_OPTIONS}
       isClearable
@@ -191,7 +191,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
 )
 
 export const ReviewPhotoStep = () => (
-  <PhotoUploader name="review.photos" label="Upload Images" />
+  <PhotoUploader name="review.photos" label="Upload images" />
 )
 
 const StyledReviewForm = styled.div`

@@ -29,7 +29,7 @@ const LocationNav = () => {
         {({ match }) => (
           <TopBarNav
             onBack={() => history.push(`/entry/${match.params.id}`)}
-            title="Adding Review"
+            title="Adding review"
           />
         )}
       </Route>
@@ -37,14 +37,14 @@ const LocationNav = () => {
         {({ match }) => (
           <TopBarNav
             onBack={() => history.push(`/entry/${match.params.id}`)}
-            title="Editing Location"
+            title="Editing location"
           />
         )}
       </Route>
       <Route path="/entry/new/details">
         <TopBarNav
           onBack={() => history.push('/entry/new')}
-          title="New Location"
+          title="New location"
         />
       </Route>
       <Route>

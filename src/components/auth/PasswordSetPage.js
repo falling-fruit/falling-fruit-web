@@ -71,10 +71,10 @@ const PasswordSetPage = () => {
         {({ dirty, isValid, isSubmitting }) => (
           <Form>
             <FormInputWrapper>
-              <Input name="new_password" label="New Password" type="password" />
+              <Input name="new_password" label="New password" type="password" />
               <Input
                 name="new_password_confirm"
-                label="Confirm New Password"
+                label="Confirm new password"
                 type="password"
               />
             </FormInputWrapper>

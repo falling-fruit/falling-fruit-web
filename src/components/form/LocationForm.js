@@ -137,7 +137,7 @@ const LocationStep = ({ typeOptions }) => (
     />
     <Select
       name="access"
-      label="Property Access"
+      label="Property access"
       options={PROPERTY_ACCESS_OPTIONS}
       isSearchable={false}
       isClearable

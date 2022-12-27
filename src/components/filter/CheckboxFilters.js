@@ -5,18 +5,18 @@ import Checkbox from '../ui/Checkbox'
 const MUNI_AND_INVASIVE_CHECKBOX_FIELDS = [
   {
     field: 'muni',
-    label: 'Municipal Tree Inventories',
+    label: 'Municipal tree inventories',
   },
   {
     field: 'invasive',
-    label: 'Invasive Species Only',
+    label: 'Invasive species only',
   },
 ]
 
 const TREE_SHOW_CHECKBOX_FIELDS = [
   {
     field: 'showOnlyOnMap',
-    label: 'Only On Map',
+    label: 'Only on map',
   },
 ]
 

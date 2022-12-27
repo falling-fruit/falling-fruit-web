@@ -61,7 +61,7 @@ const LoginPage = () => {
 
               <FormCheckboxWrapper>
                 <LabeledRow
-                  label={<label htmlFor="rememberMe">Remember Me</label>}
+                  label={<label htmlFor="rememberMe">Remember me</label>}
                   left={<Checkbox name="rememberMe" />}
                 />
               </FormCheckboxWrapper>

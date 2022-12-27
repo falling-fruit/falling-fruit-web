@@ -18,12 +18,12 @@ const LabelTag = styled.span`
 
 const Required = (props) => {
   const { t } = useTranslation()
-  return <LabelTag {...props}>{t('Required')}</LabelTag>
+  return <LabelTag {...props}>{t('required')}</LabelTag>
 }
 
 const Optional = (props) => {
   const { t } = useTranslation()
-  return <LabelTag {...props}>{t('Optional')}</LabelTag>
+  return <LabelTag {...props}>{t('optional')}</LabelTag>
 }
 
 export default LabelTag
