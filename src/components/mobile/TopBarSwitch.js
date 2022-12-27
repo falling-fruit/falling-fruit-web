@@ -23,7 +23,7 @@ const TopBarSwitch = () => {
       ></Route>
       <Route
         path={[
-          '/review/:id/edit',
+          '/reviews/:id/edit',
           '/locations/:id/review',
           '/locations/:id/edit',
           '/locations/new',

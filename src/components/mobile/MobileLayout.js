@@ -63,7 +63,7 @@ const MobileLayout = () => {
         <Switch>
           {aboutRoutes}
           {authRoutes}
-          <Route path="/review/:id/edit">
+          <Route path="/reviews/:id/edit">
             {({ match }) => (
               <EditReviewForm stepped editingId={match.params.id} />
             )}
@@ -106,7 +106,7 @@ const MobileLayout = () => {
       <Switch>
         <Route
           path={[
-            '/review/:id/edit',
+            '/reviews/:id/edit',
             '/locations/:id/review',
             '/locations/:id/edit',
             '/locations/new/details',
@@ -119,7 +119,7 @@ const MobileLayout = () => {
       <Switch>
         <Route
           path={[
-            '/review/:id/edit',
+            '/reviews/:id/edit',
             '/locations/:id/review',
             '/locations/:id/edit',
             '/locations/new/details',

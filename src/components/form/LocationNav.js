@@ -16,7 +16,7 @@ const LocationNav = () => {
 
   return (
     <Switch>
-      <Route path="/review/:id/edit">
+      <Route path="/reviews/:id/edit">
         {({ match }) => (
           // TODO: fix going back to correct entry id
           <TopBarNav
