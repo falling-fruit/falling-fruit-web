@@ -4,8 +4,8 @@ import { MONTH_LABELS } from '../form/LocationForm'
  * Helper function to convert ISO date string into "month date, year" format.
  * @param {string} dateString - The ISO date to convert
  */
-export const formatISOString = (dateString) =>
-  new Date(dateString).toLocaleDateString(undefined, {
+export const formatISOString = (dateString, language) =>
+  new Date(dateString).toLocaleDateString(language, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

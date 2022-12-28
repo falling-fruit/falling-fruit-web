@@ -16,6 +16,9 @@
   "required": "Required",
   "optional": "Optional",
   "back": "Back",
+  "added_by": "Added by {{name}}",
+  "imported_from": "Imported from {{name}}",
+  "edited_on": "Edited on {{date}}",
   "glossary": {
     "about": "About",
     "list": "List",

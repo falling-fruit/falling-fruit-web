@@ -1,4 +1,10 @@
-import { Calendar, StreetView } from '@styled-icons/boxicons-regular'
+import {
+  Calendar,
+  Data,
+  EditAlt,
+  StreetView,
+  User,
+} from '@styled-icons/boxicons-regular'
 import { Flag, Map } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -64,13 +70,6 @@ const Description = styled.section`
     margin-bottom: 14px;
   }
 
-  & > .updatedTime {
-    display: block;
-    font-style: italic;
-    font-size: 1rem;
-    color: ${({ theme }) => theme.text};
-  }
-
   button {
     margin-right: 10px;
   }
@@ -84,7 +83,7 @@ const EntryOverview = ({ locationData, className }) => {
   const dispatch = useDispatch()
   const currentStreetView = useSelector((state) => state.map.streetView)
 
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const handleAddressClick = () => {
     dispatch(
@@ -145,28 +144,47 @@ const EntryOverview = ({ locationData, className }) => {
                 </p>
               </IconBesideText>
             )}
-
-            <p className="updatedTime">
-              {t('last_updated')}{' '}
-              <time dateTime={locationData.updated_at}>
-                {formatISOString(locationData.updated_at)}
-              </time>
-            </p>
-
-            {locationData.import_id && (
-              <p className="updatedTime">
-                {t('Imported from')}{' '}
-                <Link
-                  to={{
-                    pathname: `/imports/${locationData.import_id}`,
-                    state: { fromPage: `/locations/${locationData.id}` },
-                  }}
-                >
-                  {locationData.author}
-                </Link>
-              </p>
+            {(locationData.import_id || locationData.author) && (
+              <IconBesideText>
+                {locationData.import_id ? (
+                  <Data size={20} />
+                ) : (
+                  <User size={20} />
+                )}
+                <p>
+                  {locationData.author && locationData.import_id
+                    ? t('imported_from', { name: locationData.author })
+                    : t('added_by', { name: locationData.author })}
+                  {locationData.import_id && (
+                    <>
+                      {locationData.author && ' ('}
+                      <Link
+                        to={{
+                          pathname: `/imports/${locationData.import_id}`,
+                          state: { fromPage: `/locations/${locationData.id}` },
+                        }}
+                      >
+                        #{locationData.import_id}
+                      </Link>
+                      {locationData.author && ')'}
+                    </>
+                  )}
+                </p>
+              </IconBesideText>
             )}
-
+            <IconBesideText>
+              <EditAlt size={20} />
+              <p>
+                <time dateTime={locationData.updated_at}>
+                  {t('edited_on', {
+                    date: formatISOString(
+                      locationData.updated_at,
+                      i18n.language,
+                    ),
+                  })}
+                </time>
+              </p>
+            </IconBesideText>
             <div>
               <ReviewButton />
               <Button
