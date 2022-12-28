@@ -56,9 +56,9 @@ const Project = () => (
         <p>
           <em>
             Falling Fruit is built by and for foragers – we want it to be the
-            best tool available to the contemporary forager. Write us at
-            <a href="feedback@fallingfruit.org"> feedback@fallingfruit.org</a>,
-            we would love to hear from you!
+            best tool available to the contemporary forager. Write us at{' '}
+            <a href="mailto:info@fallingfruit.org">info@fallingfruit.org</a>, we
+            would love to hear from you!
           </em>
         </p>
         <h3>Translate</h3>
@@ -84,7 +84,7 @@ const Project = () => (
           world's most comprehensive. While our users contribute locations of
           their own, we comb the internet for pre-existing knowledge, seeking to
           unite the efforts of foragers, foresters, and freegans everywhere. The{' '}
-          <a href="/about/datasets">imported datasets</a> range from small
+          <a href="/about/data">imported datasets</a> range from small
           neighborhood foraging maps to vast professionally-compiled tree
           inventories. This so far amounts to thousands of different types of
           edibles (most, but not all, plant species) distributed over millions
@@ -93,15 +93,15 @@ const Project = () => (
           in your neighborhood is a journey through time and across cultures.
         </p>
         <p>
-          Join us in celebrating hyper-local food! The <a href="/map">map</a>is
+          Join us in celebrating hyper-local food! The <a href="/map">map</a> is
           open for anyone to edit, the database can be{' '}
-          <a href="https://fallingfruit.org/data">downloaded</a> with just one
-          click, and the <a href="https://github.com/falling-fruit">code</a> is
-          open-source. You are likewise encouraged to share the bounty with your
-          fellow humans. Our <a href="/about/share">sharing page</a> lists
-          hundreds of local organizations - planting public orchards and food
-          forests, picking otherwise-wasted fruits and vegetables from city
-          trees and farmers' fields, and sharing with neighbors and the needy.
+          <a href="/about/data">downloaded</a> with just one click, and the{' '}
+          <a href="https://github.com/falling-fruit">code</a> is open-source.
+          You are likewise encouraged to share the bounty with your fellow
+          humans. Our <a href="/about/share">sharing page</a> lists hundreds of
+          local organizations - planting public orchards and food forests,
+          picking otherwise-wasted fruits and vegetables from city trees and
+          farmers' fields, and sharing with neighbors and the needy.
         </p>
       </div>
       <h2>Staff</h2>
@@ -112,7 +112,7 @@ const Project = () => (
           <br />
           <b>Ethan Welty</b>
           <br />
-          <a href="ethan@fallingfruit.org">ethan@fallingfruit.org</a>
+          <a href="mailto:ethan@fallingfruit.org">ethan@fallingfruit.org</a>
           <br />
           Zürich, Switzerland
           <br />
@@ -141,7 +141,7 @@ const Project = () => (
           <br />
           <b>Jeff Wanner</b>
           <br />
-          <a href="jeff@fallingfruit.org">jeff@fallingfruit.org</a>
+          <a href="mailto:jeff@fallingfruit.org">jeff@fallingfruit.org</a>
           <br />
           Boulder, Colorado, USA
           <br />

@@ -13,43 +13,45 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
   const history = useAppHistory()
   const user = useSelector((state) => state.auth.user)
 
-  const indexedReviews = reviews.map((review, index) => ({ ...review, index }))
-
-  const userReviews = indexedReviews.filter(
-    (review) => review.user_id === user?.id,
-  )
-  const otherReviews = indexedReviews.filter(
-    (review) => review.user_id !== user?.id,
-  )
-
+  const reviewsWithPhotos = reviews.filter((r) => r.photos.length > 0)
   return (
     <TextContent>
       <ReviewSummary reviews={reviews} />
       {!isDesktop && <ReviewButton />}
       <h3>Reviews</h3>
-      {userReviews.map((review) => (
-        <Review
-          key={review.id}
-          review={review}
-          onImageClick={(imageIndex) => onImageClick(review.index, imageIndex)}
-          onEditClick={() =>
-            history.push({
-              pathname: `/review/${review.id}/edit`,
-              state: {
-                fromPage: history.location.pathname,
-              },
-            })
-          }
-          editable
-        />
-      ))}
-      {otherReviews.map((review) => (
-        <Review
-          key={review.id}
-          review={review}
-          onImageClick={(imageIndex) => onImageClick(review.index, imageIndex)}
-        />
-      ))}
+      {reviews.map((review) => {
+        const onReviewImageClick = (imageIndex) =>
+          onImageClick(
+            reviewsWithPhotos.findIndex((r) => r.id === review.id),
+            imageIndex,
+          )
+        if (review.user_id === user?.id) {
+          return (
+            <Review
+              key={review.id}
+              review={review}
+              onImageClick={onReviewImageClick}
+              onEditClick={() =>
+                history.push({
+                  pathname: `/review/${review.id}/edit`,
+                  state: {
+                    fromPage: history.location.pathname,
+                  },
+                })
+              }
+              editable
+            />
+          )
+        } else {
+          return (
+            <Review
+              key={review.id}
+              review={review}
+              onImageClick={onReviewImageClick}
+            />
+          )
+        }
+      })}
       {isDesktop && <ReviewForm onSubmit={onReviewSubmit} />}
     </TextContent>
   )

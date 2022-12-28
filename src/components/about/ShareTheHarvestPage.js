@@ -1,7 +1,7 @@
 import ShareTheHarvestTable from '../table/ShareTheHarvestTable'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
-const ImportedDatasetsPage = () => (
+const ShareTheHarvestPage = () => (
   <PageScrollWrapper>
     <PageTemplate from="Settings">
       <h1>Grow &middot; Pick &middot; Distribute</h1>
@@ -18,4 +18,4 @@ const ImportedDatasetsPage = () => (
   </PageScrollWrapper>
 )
 
-export default ImportedDatasetsPage
+export default ShareTheHarvestPage

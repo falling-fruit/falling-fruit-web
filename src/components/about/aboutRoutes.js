@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom'
 
 import { AboutDatasetPage } from './AboutDatasetPage'
-import ImportedDatasetsPage from './ImportedDatasetsPage'
+import DataPage from './DataPage'
 import InThePressPage from './InThePressPage'
 import ProjectPage from './ProjectPage'
 import ShareTheHarvestPage from './ShareTheHarvestPage'
@@ -16,8 +16,8 @@ const pages = [
     component: AboutDatasetPage,
   },
   {
-    path: '/about/datasets',
-    component: ImportedDatasetsPage,
+    path: '/about/data',
+    component: DataPage,
   },
   {
     path: '/about/press',

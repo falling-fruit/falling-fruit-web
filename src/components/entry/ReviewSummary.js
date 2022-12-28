@@ -44,12 +44,15 @@ const SummaryTable = styled.table`
 `
 
 const FruitingSummaryRow = ({ reviews }) => {
-  if (!reviews || reviews.length === 0) {
+  if (!reviews?.length) {
     return null
   }
 
   const reviewsByMonth = reviews.reduce((monthToCount, review) => {
-    const month = new Date(review.observed_at || review.created_at).getMonth()
+    if (!review.observed_on) {
+      return monthToCount
+    }
+    const month = new Date(review.observed_on).getMonth()
 
     monthToCount = {
       ...monthToCount,
@@ -76,22 +79,20 @@ const FruitingSummaryRow = ({ reviews }) => {
 }
 
 const FruitingSummary = ({ reviews }) => {
-  const fruitingReviews = reviews.filter((review) => Boolean(review.fruiting))
-
   const {
-    1: flowerReviews,
-    2: unripeReviews,
-    3: ripeReviews,
-  } = groupBy(rProp('fruiting'), fruitingReviews)
+    0: flowerReviews,
+    1: unripeReviews,
+    2: ripeReviews,
+  } = groupBy(rProp('fruiting'), reviews)
 
   return (
     <>
       <tr>
         <td colSpan={2}>Fruiting</td>
       </tr>
-      <FruitingSummaryRow reviews={ripeReviews} />
-      <FruitingSummaryRow reviews={unripeReviews} />
       <FruitingSummaryRow reviews={flowerReviews} />
+      <FruitingSummaryRow reviews={unripeReviews} />
+      <FruitingSummaryRow reviews={ripeReviews} />
     </>
   )
 }
