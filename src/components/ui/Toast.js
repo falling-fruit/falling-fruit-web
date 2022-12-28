@@ -12,7 +12,7 @@ const Toast = styled(ToastContainer).attrs({
     &__toast {
       font-weight: bold;
 
-      border-radius: 8px;
+      border-radius: 0.375em;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
 
       @media (max-width: 767px) {

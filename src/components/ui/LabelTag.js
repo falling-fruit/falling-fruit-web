@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import { validatedColor } from './GlobalStyle'
 
 const LabelTag = styled.span`
-  border-radius: 4px;
+  border-radius: 0.375em;
   vertical-align: 0.25em;
   height: 15px;
   padding: 2px;

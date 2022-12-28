@@ -32,7 +32,7 @@ const ReviewContainer = styled.div`
     `
     background: ${theme.navBackground};
     padding: 0.6em;
-    border-radius: 8px;
+    border-radius: 0.375em;
 
     :after {
       display: none;
