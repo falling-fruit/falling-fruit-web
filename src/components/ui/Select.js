@@ -99,6 +99,7 @@ const SelectWrapper = ({ isVirtualized, ...props }) => (
     classNamePrefix="select"
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
+    placeholder=""
     {...props}
   />
 )
