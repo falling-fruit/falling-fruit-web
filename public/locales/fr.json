@@ -34,7 +34,8 @@
     "password": "Mot de passe",
     "name": "Nom",
     "send": "Envoyer",
-    "save_changes": "Enregistrer vos modifications"
+    "save_changes": "Enregistrer vos modifications",
+    "edit": "Modifier"
   },
   "side_menu": {
     "regional": "Régional",
