@@ -21,13 +21,14 @@ const formToUser = ({
   bio,
   new_password,
   password_confirmation,
+  range,
 }) => ({
   email,
   name: name || null,
   bio: bio || null,
   password: new_password || null,
-  range: null,
-  password_confirmation,
+  password_confirmation: password_confirmation || null,
+  range: range,
 })
 
 const userToForm = (user) => ({
@@ -59,7 +60,8 @@ const AccountPage = () => {
   }
 
   const handleSubmit = async (values) => {
-    const newUser = formToUser(values)
+    // Pass range unchanged
+    const newUser = formToUser({ ...values, range: user.range })
     const isEmailChanged = newUser.email !== user.email
 
     let response
