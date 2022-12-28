@@ -16,6 +16,9 @@
   "required": "Obligatoire",
   "optional": "Facultatif",
   "back": "Retour",
+  "added_by": "Ajouté par {{author}}",
+  "imported_from": "Importé de {{name}}",
+  "edited_on": "Modifié le {{date}}",
   "glossary": {
     "about": "À propos",
     "list": "Liste",
