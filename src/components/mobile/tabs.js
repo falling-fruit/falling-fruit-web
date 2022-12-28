@@ -1,8 +1,8 @@
 import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt, UserCircle } from '@styled-icons/boxicons-solid'
 
-import i18n from '../../i18n.js'
-import { authPages } from '../auth/authRoutes.js'
+import i18n from '../../i18n'
+import { authPages } from '../auth/authRoutes'
 
 const DEFAULT_TAB = 0 // Map
 
