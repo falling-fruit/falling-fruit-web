@@ -49,7 +49,7 @@ const NavBack = ({ isEntry }) => {
       {isEntry && match && !isEditingEntry && (
         <BackButton onClick={() => history.push(`/locations/${entryId}/edit`)}>
           <Pencil />
-          Edit
+          {t('glossary.edit')}
         </BackButton>
       )}
     </StyledNavBack>
