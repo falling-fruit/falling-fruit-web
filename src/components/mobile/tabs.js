@@ -17,12 +17,12 @@ const useTabs = () => {
     {
       paths: ['/map'],
       icon: <MapAlt />,
-      label: t('map'),
+      label: t('glossary.map'),
     },
     {
       paths: ['/list'],
       icon: <ListUl />,
-      label: t('list'),
+      label: t('glossary.list'),
     },
     {
       paths: authPages.map((route) => route.path),

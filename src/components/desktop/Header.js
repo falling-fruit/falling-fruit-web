@@ -201,11 +201,11 @@ const Header = () => {
         <ul>
           <li>
             <NavLink to="/map" activeClassName="active">
-              {t('map')}
+              {t('glossary.map')}
             </NavLink>
           </li>
           <li>
-            <StyledDropdown label={t('about')} isMatch={isAboutPage}>
+            <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
               <NavLink to="/about" activeClassName="active">
                 {t('pages.project')}
               </NavLink>

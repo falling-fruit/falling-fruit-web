@@ -126,7 +126,11 @@ const Search = (props) => {
   }
   const { t } = useTranslation()
   return (
-    <Combobox onSelect={handleSelect} aria-label={t('address')} {...props}>
+    <Combobox
+      onSelect={handleSelect}
+      aria-label={t('glossary.address')}
+      {...props}
+    >
       <SearchBarContainer>
         <ComboboxInput
           as={Input}
@@ -145,7 +149,7 @@ const Search = (props) => {
             )
           }
           prepend={isDesktop && <TrackLocationButton isIcon={false} />}
-          placeholder={t('address')}
+          placeholder={t('glossary.address')}
         />
 
         {!isDesktop && (
