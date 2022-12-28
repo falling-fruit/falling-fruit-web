@@ -1,4 +1,4 @@
-import { ArrowBack, X } from '@styled-icons/boxicons-regular'
+import { X } from '@styled-icons/boxicons-regular'
 import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { setStreetView } from '../../redux/mapSlice'
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import ResetButton from '../ui/ResetButton'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
@@ -160,27 +159,14 @@ const Map = ({
     event.stopPropagation()
     dispatch(setStreetView(false))
   }
-  const isDesktop = useIsDesktop()
 
   return (
     <>
       {showStreetView && headingStatus && (
         <StreetViewUIWrapper>
-          {isDesktop ? (
-            <>
-              <OpacityButton onClick={closeStreetView}>
-                <ArrowBack height="18px" />
-                Back to Map
-              </OpacityButton>
-              <OpacityButton onClick={closeStreetView}>
-                <X height="22.91px" />
-              </OpacityButton>
-            </>
-          ) : (
-            <OpacityButton onClick={closeStreetView}>
-              <ArrowBack height="18px" />
-            </OpacityButton>
-          )}
+          <OpacityButton onClick={closeStreetView}>
+            <X height="22.91px" />
+          </OpacityButton>
         </StreetViewUIWrapper>
       )}
       <GoogleMapReact
