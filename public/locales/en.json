@@ -15,6 +15,7 @@
   "only_on_map": "On the map",
   "required": "Required",
   "optional": "Optional",
+  "back": "Back",
   "glossary": {
     "about": "About",
     "list": "List",
