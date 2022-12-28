@@ -44,7 +44,7 @@ const NavBack = ({ isEntry }) => {
     <StyledNavBack $isEntry={isEntry}>
       <BackButton onClick={handleBackButtonClick}>
         <ArrowBack />
-        {t('Back')}
+        {t('back')}
       </BackButton>
       {isEntry && match && !isEditingEntry && (
         <BackButton onClick={() => history.push(`/locations/${entryId}/edit`)}>

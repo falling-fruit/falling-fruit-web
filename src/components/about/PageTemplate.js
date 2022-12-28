@@ -1,4 +1,5 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -92,6 +93,7 @@ const PageTemplate = ({ children, from }) => {
   // TODO: migrate to custom hook for map state
   const history = useAppHistory()
   const isMobile = useIsMobile()
+  const { t } = useTranslation()
 
   const onClickBackButton = () => history.go(-1)
 
@@ -100,7 +102,7 @@ const PageTemplate = ({ children, from }) => {
       {from && isMobile && (
         <StyledBackButton onClick={onClickBackButton}>
           <ArrowBack />
-          Back to {from}
+          {t('back')}
         </StyledBackButton>
       )}
 
