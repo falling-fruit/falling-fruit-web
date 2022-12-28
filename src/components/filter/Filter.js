@@ -126,7 +126,7 @@ const Filter = ({ isOpen }) => {
   return isOpen ? (
     <StyledFilter>
       <div>
-        <p className="edible-type-text">{t('types')}</p>
+        <p className="edible-type-text">{t('glossary.types')}</p>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder={t('type')}
@@ -176,7 +176,7 @@ const Filter = ({ isOpen }) => {
           fields={[
             {
               field: 'muni',
-              label: t('inventories'),
+              label: t('glossary.tree_inventory', { count: 2 }),
             },
             {
               field: 'invasive',

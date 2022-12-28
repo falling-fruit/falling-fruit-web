@@ -1,33 +1,30 @@
 {
-  "regional": "Regional",
   "language": "Language",
   "units": "Units",
   "metric": "Metric",
   "imperial": "Imperial",
   "roadmap": "Map",
-  "satellite": "Satellite",
-  "terrain": "Terrain",
-  "biking": "Biking",
-  "transit": "Transit",
   "basemap": "Base",
   "overlay": "Overlay",
   "poi": "Points of interest",
-  "labels": "Labels",
-  "data": "Data",
-  "map": "Map",
   "settings": "Settings",
-  "types": "Types",
   "type": "Type",
-  "address": "Address",
-  "inventories": "Tree inventories",
   "invasives": "Invasive species only",
   "select_all": "Select all",
   "deselect_all": "Deselect all",
   "only_on_map": "On the map",
-  "add_location": "Add a location",
-  "last_updated": "Last updated",
-  "about": "About",
+  "required": "Required",
+  "optional": "Optional",
   "glossary": {
+    "about": "About",
+    "list": "List",
+    "tree_inventory": "Tree inventory",
+    "tree_inventory_plural": "Tree inventories",
+    "address": "Address",
+    "types": "Types",
+    "data": "Data",
+    "map": "Map",
+    "labels": "Labels",
     "login": "Login",
     "logout": "Logout",
     "sign_up": "Sign up",
@@ -37,6 +34,22 @@
     "name": "Name",
     "send": "Send",
     "save_changes": "Save changes"
+  },
+  "side_menu": {
+    "regional": "Regional",
+    "satellite": "Satellite",
+    "terrain": "Terrain",
+    "bicycle": "Biking",
+    "transit": "Transit"
+  },
+  "menu": {
+    "add_location": "Add a location"
+  },
+  "pages": {
+    "project": "The project",
+    "data": "The data",
+    "sharing": "Sharing the harvest",
+    "press": "In the press"
   },
   "users": {
     "sign_in": "Sign in",
@@ -53,15 +66,6 @@
     "edit_account": "Edit account",
     "current_password": "Current password"
   },
-  "required": "required",
-  "optional": "optional",
-  "pages": {
-    "project": "The project",
-    "data": "The data",
-    "sharing": "Sharing the harvest",
-    "press": "In the press"
-  },
-  "list": "List",
   "form": {
     "button": {
       "reset": "Reset"

@@ -81,12 +81,12 @@ const SettingsPage = ({ desktop }) => {
         </>
       )}
 
-      <h3>{t('data')}</h3>
+      <h3>{t('glossary.data')}</h3>
 
       {[
         {
           field: 'showLabels',
-          label: t('labels'),
+          label: t('glossary.labels'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -108,7 +108,7 @@ const SettingsPage = ({ desktop }) => {
         />
       ))}
 
-      <h3>{t('map')}</h3>
+      <h3>{t('glossary.map')}</h3>
 
       <h5>{t('basemap')}</h5>
 
@@ -120,12 +120,12 @@ const SettingsPage = ({ desktop }) => {
             image: Road,
           },
           {
-            label: t('terrain'),
+            label: t('side_menu.terrain'),
             value: 'terrain',
             image: Terrain,
           },
           {
-            label: t('satellite'),
+            label: t('side_menu.satellite'),
             value: 'hybrid',
             image: Satellite,
           },
@@ -145,12 +145,12 @@ const SettingsPage = ({ desktop }) => {
       <RadioTiles
         options={[
           {
-            label: t('biking'),
+            label: t('side_menu.bicycle'),
             value: 'BicyclingLayer',
             image: Bicycling,
           },
           {
-            label: t('transit'),
+            label: t('side_menu.transit'),
             value: 'TransitLayer',
             image: Transit,
           },
@@ -192,7 +192,7 @@ const SettingsPage = ({ desktop }) => {
         />
       ))}
 
-      <h3>{t('regional')}</h3>
+      <h3>{t('side_menu.regional')}</h3>
 
       <LabeledRow
         label={<label htmlFor="languagePreference">{t('language')}</label>}
@@ -227,7 +227,7 @@ const SettingsPage = ({ desktop }) => {
 
       {!desktop && (
         <>
-          <h3>{t('about')}</h3>
+          <h3>{t('glossary.about')}</h3>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
             primaryText={t('pages.project')}

@@ -43,7 +43,7 @@ const MainPane = () => {
           })
         }
       >
-        {t('add_location')}
+        {t('menu.add_location')}
       </StyledButton>
       <SettingsButton
         text={t('settings')}
