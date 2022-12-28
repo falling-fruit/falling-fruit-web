@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import axios from 'axios'
+import { matchPath } from 'react-router'
 
 import { paths } from './apiSchema'
 import authStore from './authStore'
@@ -17,17 +18,17 @@ instance.interceptors.request.use((config) => {
     '/types',
     '/types/counts',
     '/locations',
-    '/locations/{id}',
-    '/locations/{id}/reviews',
-    '/reviews/{id}',
+    '/locations/:id',
+    '/locations/:id/reviews',
+    '/reviews/:id',
     '/clusters',
     '/imports',
-    '/imports/{id}',
+    '/imports/:id',
   ]
   const isAnonymous =
     config.method === 'get' &&
     config.url &&
-    anonymousGetUrls.includes(config.url.replace(/[0-9]+/, '{id}'))
+    matchPath(config.url, { path: anonymousGetUrls })
   const token = authStore.getToken()
   if (token && !isAnonymous) {
     config.headers.Authorization = `Bearer ${token.access_token}`
