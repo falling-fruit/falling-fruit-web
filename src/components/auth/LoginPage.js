@@ -75,9 +75,11 @@ const LoginPage = () => {
           )}
         </Formik>
         <Column>
-          <Link to="/signup">Sign up</Link>
-          <Link to="/password/reset">Reset your password</Link>
-          <Link to="/confirmation/new">Resend confirmation instructions</Link>
+          <Link to="/users/sign_up">Sign up</Link>
+          <Link to="/users/password/new">Reset your password</Link>
+          <Link to="/users/confirmation/new">
+            Resend confirmation instructions
+          </Link>
         </Column>
       </PageTemplate>
     </PageScrollWrapper>

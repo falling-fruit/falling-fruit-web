@@ -27,7 +27,7 @@ const PasswordResetPage = () => {
         'You will receive an email with instructions on how to reset your password in a few minutes',
         { autoClose: 5000 },
       )
-      history.push('/login')
+      history.push('/users/sign_in')
     } catch (e) {
       toast.error('Email not found')
       console.error(e.response)
@@ -40,9 +40,11 @@ const PasswordResetPage = () => {
       <h1>Send password reset instructions</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign up</Link>
-        <Link to="/confirmation/new">Resend confirmation instructions</Link>
+        <Link to="/users/sign_in">Login</Link>
+        <Link to="/users/sign_up">Sign up</Link>
+        <Link to="/users/confirmation/new">
+          Resend confirmation instructions
+        </Link>
       </Column>
     </PageTemplate>
   )

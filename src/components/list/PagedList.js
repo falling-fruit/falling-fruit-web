@@ -62,7 +62,7 @@ const PagedList = () => {
 
   const handleEntryClick = (id) => {
     history.push({
-      pathname: `/entry/${id}`,
+      pathname: `/locations/${id}`,
       state: { fromPage: '/list' },
     })
     dispatch(setHoveredLocationId(null))

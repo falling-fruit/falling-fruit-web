@@ -53,7 +53,7 @@ const SignupPage = () => {
       <PageTemplate>
         <h1>Sign up</h1>
         <LoginNotice>
-          Have an account? <Link to="/login">Login</Link>
+          Have an account? <Link to="/users/sign_in">Login</Link>
         </LoginNotice>
 
         <Formik

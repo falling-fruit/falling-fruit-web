@@ -41,7 +41,7 @@ const MobileLayout = () => {
   ))
 
   if (
-    ['/list', '/settings', '/account'].some((path) =>
+    ['/list', '/settings', '/users/edit'].some((path) =>
       matchPath(pathname, { path, exact: false, strict: false }),
     )
   ) {
@@ -63,29 +63,31 @@ const MobileLayout = () => {
         <Switch>
           {aboutRoutes}
           {authRoutes}
-          <Route path="/review/:id/edit">
+          <Route path="/reviews/:id/edit">
             {({ match }) => (
               <EditReviewForm stepped editingId={match.params.id} />
             )}
           </Route>
-          <Route path="/entry/:id/review">
+          <Route path="/locations/:id/review">
             {({ match }) => (
               <ReviewForm
                 stepped
-                onSubmit={() => history.push(`/entry/${match.params.id}`)}
+                onSubmit={() => history.push(`/locations/${match.params.id}`)}
               />
             )}
           </Route>
-          <Route path="/entry/:id/edit">
+          <Route path="/locations/:id/edit">
             {({ match }) => <EditLocationForm editingId={match.params.id} />}
           </Route>
-          <Route path="/entry/new/details">
+          <Route path="/locations/new/details">
             <LocationForm />
           </Route>
-          <Route path={['/map', '/entry', '/list', '/settings']}>
+          <Route path={['/map', '/locations', '/list', '/settings']}>
             <Switch>
-              <Route path="/entry/new" />
-              <Route path="/entry/:id">{!streetView && <EntryWrapper />}</Route>
+              <Route path="/locations/new" />
+              <Route path="/locations/:id">
+                {!streetView && <EntryWrapper />}
+              </Route>
             </Switch>
             <Switch>
               <Route path="/list">
@@ -94,7 +96,7 @@ const MobileLayout = () => {
               <Route path="/settings">
                 <SettingsPage />
               </Route>
-              <Route path="/account">
+              <Route path="/users/edit">
                 <AccountPage />
               </Route>
             </Switch>
@@ -104,23 +106,23 @@ const MobileLayout = () => {
       <Switch>
         <Route
           path={[
-            '/review/:id/edit',
-            '/entry/:id/review',
-            '/entry/:id/edit',
-            '/entry/new/details',
+            '/reviews/:id/edit',
+            '/locations/:id/review',
+            '/locations/:id/edit',
+            '/locations/new/details',
           ]}
         />
-        <Route path={['/map', '/entry']}>
+        <Route path={['/map', '/locations']}>
           {(pathname.includes('/map') || !isFromList) && <MapPage />}
         </Route>
       </Switch>
       <Switch>
         <Route
           path={[
-            '/review/:id/edit',
-            '/entry/:id/review',
-            '/entry/:id/edit',
-            '/entry/new/details',
+            '/reviews/:id/edit',
+            '/locations/:id/review',
+            '/locations/:id/edit',
+            '/locations/new/details',
           ]}
         />
         <Route>

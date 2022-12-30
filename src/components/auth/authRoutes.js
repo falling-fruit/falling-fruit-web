@@ -10,31 +10,31 @@ import SignupPage from './SignupPage'
 
 const pages = [
   {
-    path: '/account',
+    path: '/users/edit',
     component: AccountPage,
   },
   {
-    path: '/login',
+    path: '/users/sign_in',
     component: LoginPage,
   },
   {
-    path: '/signup',
+    path: '/users/sign_up',
     component: SignupPage,
   },
   {
-    path: '/password/reset',
+    path: '/users/password/new',
     component: PasswordResetPage,
   },
   {
-    path: '/password/set',
+    path: '/users/password/edit',
     component: PasswordSetPage,
   },
   {
-    path: '/confirmation/new',
+    path: '/users/confirmation/new',
     component: ConfirmationResendPage,
   },
   {
-    path: '/confirmation',
+    path: '/users/confirmation',
     component: ConfirmationPage,
   },
 ]

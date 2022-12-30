@@ -36,7 +36,7 @@ export const parseUrl = () => {
   const { pathname } = window.location
   const geocoordMatch = pathname.substring(pathname.indexOf('@'))
 
-  const isEntryPage = !!matchPath(pathname, '/entry/:id')
+  const isEntryPage = !!matchPath(pathname, '/locations/:id')
   const coords = getValidCoord(geocoordMatch)
 
   if (coords) {
