@@ -95,8 +95,8 @@ const ImportsTable = () => {
       persistTableHead
       onRowClicked={(row) => {
         history.push({
-          pathname: `/about/dataset/${row.id}`,
-          state: { fromPage: '/about/datasets' },
+          pathname: `/imports/${row.id}`,
+          state: { fromPage: '/data' },
         })
       }}
     />

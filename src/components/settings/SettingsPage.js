@@ -106,14 +106,19 @@ const SettingsPage = ({ desktop }) => {
             {user ? (
               <>
                 <p>Logged in as {user.name || user.email}</p>
-                <Button secondary onClick={() => history.push('/account')}>
+                <Button secondary onClick={() => history.push('/users/edit')}>
                   View Account
                 </Button>
               </>
             ) : (
               <>
-                <Button onClick={() => history.push('/login')}>Login</Button>
-                <Button secondary onClick={() => history.push('/signup')}>
+                <Button onClick={() => history.push('/users/sign_in')}>
+                  Login
+                </Button>
+                <Button
+                  secondary
+                  onClick={() => history.push('/users/sign_up')}
+                >
                   Sign up
                 </Button>
               </>
@@ -274,22 +279,22 @@ const SettingsPage = ({ desktop }) => {
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={'The project'}
-            onClick={() => history.push('/about/project')}
+            onClick={() => history.push('/about')}
           />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={'The data'}
-            onClick={() => history.push('/about/data')}
+            onClick={() => history.push('/data')}
           />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={'Sharing the harvest'}
-            onClick={() => history.push('/about/share')}
+            onClick={() => history.push('/sharing')}
           />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={'In the press'}
-            onClick={() => history.push('/about/press')}
+            onClick={() => history.push('/press')}
           />
         </>
       )}

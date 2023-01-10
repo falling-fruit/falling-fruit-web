@@ -18,7 +18,7 @@ export const ReviewButton = (props) => {
           window.location.hash = ''
           window.location.hash = 'review'
         } else {
-          history.push(`/entry/${id}/review`)
+          history.push(`/locations/${id}/review`)
         }
       }}
       {...props}

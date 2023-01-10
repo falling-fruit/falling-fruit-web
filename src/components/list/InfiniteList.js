@@ -20,7 +20,7 @@ const InfiniteList = ({
 
   const handleEntryClick = (id) => {
     history.push({
-      pathname: `/entry/${id}`,
+      pathname: `/locations/${id}`,
       state: { fromPage: '/list' },
     })
   }

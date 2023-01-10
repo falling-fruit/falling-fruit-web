@@ -25,13 +25,13 @@ const NavBack = ({ isEntry }) => {
   const history = useAppHistory()
   const { state } = useLocation()
   const { t } = useTranslation()
-  const match = useRouteMatch('/entry/:id')
+  const match = useRouteMatch('/locations/:id')
   const entryId = match?.params.id
 
-  const isEditingEntry = useRouteMatch('/entry/:id/edit')
+  const isEditingEntry = useRouteMatch('/locations/:id/edit')
 
   const handleBackButtonClick = () => {
-    // Default to going back to the map. This occurs when the user opens /entry/{typeId} directly
+    // Default to going back to the map. This occurs when the user opens /locations/:id directly
     if (isEditingEntry) {
       history.push(match.url)
     } else {
@@ -46,7 +46,7 @@ const NavBack = ({ isEntry }) => {
         {t('Back')}
       </BackButton>
       {isEntry && match && !isEditingEntry && (
-        <BackButton onClick={() => history.push(`/entry/${entryId}/edit`)}>
+        <BackButton onClick={() => history.push(`/locations/${entryId}/edit`)}>
           <Pencil />
           Edit
         </BackButton>

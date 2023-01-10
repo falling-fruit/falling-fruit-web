@@ -56,7 +56,7 @@ const AccountPage = () => {
   }, [])
 
   if (!isLoading && !isLoggedIn) {
-    return <Redirect to={getPathWithMapState('/login')} />
+    return <Redirect to={getPathWithMapState('/users/sign_in')} />
   }
 
   const handleSubmit = async (values) => {

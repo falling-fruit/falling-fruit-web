@@ -27,7 +27,7 @@ const PasswordSetPage = () => {
         "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.",
         { autoClose: 5000 },
       )
-      history.push('/login')
+      history.push('/users/sign_in')
     }
   }, [history])
 
@@ -44,11 +44,11 @@ const PasswordSetPage = () => {
       toast.success('Your password has been changed successfully.', {
         autoClose: 5000,
       })
-      history.push({ pathname: '/login', state: { email } })
+      history.push({ pathname: '/users/sign_in', state: { email } })
     } catch (e) {
       toast.error('Invalid password reset link')
       console.error(e.response)
-      history.push('/login')
+      history.push('/users/sign_in')
     }
   }
 
@@ -91,9 +91,11 @@ const PasswordSetPage = () => {
         )}
       </Formik>
       <Column>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign up</Link>
-        <Link to="/confirmation/new">Resend confirmation instructions</Link>
+        <Link to="/users/sign_in">Login</Link>
+        <Link to="/users/sign_up">Sign up</Link>
+        <Link to="/users/confirmation/new">
+          Resend confirmation instructions
+        </Link>
       </Column>
     </PageTemplate>
   )

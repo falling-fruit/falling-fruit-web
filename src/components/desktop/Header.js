@@ -2,10 +2,12 @@ import { CaretDown } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, NavLink, useRouteMatch } from 'react-router-dom'
+import { matchPath } from 'react-router'
+import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { logout } from '../../redux/authSlice'
+import aboutRoutes from '../about/aboutRoutes'
 import Button from '../ui/Button'
 import ResetButton from '../ui/ResetButton'
 
@@ -184,8 +186,11 @@ const Header = () => {
     dispatch(logout())
   }
 
-  const isAboutPage = useRouteMatch('/about/:slug') !== null
-  const isAccountPage = useRouteMatch('/account') !== null
+  const isAboutPage =
+    matchPath(useLocation().pathname, {
+      path: aboutRoutes.map((route) => route.props.path).flat(),
+    }) !== null
+  const isAccountPage = useRouteMatch('/users/edit') !== null
 
   return (
     <StyledHeader>
@@ -201,16 +206,16 @@ const Header = () => {
           </li>
           <li>
             <StyledDropdown label={t('About')} isMatch={isAboutPage}>
-              <NavLink to="/about/project" activeClassName="active">
+              <NavLink to="/about" activeClassName="active">
                 {t('The project')}
               </NavLink>
-              <NavLink to="/about/data" activeClassName="active">
+              <NavLink to="/data" activeClassName="active">
                 {t('The data')}
               </NavLink>
-              <NavLink to="/about/share" activeClassName="active">
+              <NavLink to="/sharing" activeClassName="active">
                 {t('Sharing the harvest')}
               </NavLink>
-              <NavLink to="/about/press" activeClassName="active">
+              <NavLink to="/press" activeClassName="active">
                 {t('In the press')}
               </NavLink>
             </StyledDropdown>
@@ -227,7 +232,7 @@ const Header = () => {
                 }
                 isMatch={isAccountPage}
               >
-                <NavLink to="/account" activeClassName="active">
+                <NavLink to="/users/edit" activeClassName="active">
                   {t('My Account')}
                 </NavLink>
                 <ResetButton onClick={handleLogout}>Logout</ResetButton>
@@ -236,12 +241,12 @@ const Header = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/login" activeClassName="active">
+                <NavLink to="/users/sign_in" activeClassName="active">
                   {t('Login')}
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/signup" activeClassName="active">
+                <NavLink to="/users/sign_up" activeClassName="active">
                   <SignupButton>{t('Sign up')}</SignupButton>
                 </NavLink>
               </li>
