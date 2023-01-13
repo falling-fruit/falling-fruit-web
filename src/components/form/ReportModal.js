@@ -85,25 +85,29 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
 
       <Formik
         initialValues={{
-          problem_code: PROBLEM_TYPE_OPTIONS[0],
+          problem_code: null,
           comment: '',
           name: '',
           email: '',
         }}
         validationSchema={Yup.object({
-          comment: Yup.string(),
+          problem_code: Yup.object().required(),
+          comment: Yup.string().when('problem_code', (problem_code, schema) =>
+            problem_code?.value === 5 ? schema.required() : schema,
+          ),
           name: !isLoggedIn && Yup.string().required(),
           email: !isLoggedIn && Yup.string().email().required(),
         })}
         onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
       >
-        {({ isSubmitting, isValid }) => (
+        {({ dirty, isSubmitting, isValid }) => (
           <Form>
             <Select
               name="problem_code"
               label="Problem Type"
               isSearchable={false}
               options={PROBLEM_TYPE_OPTIONS}
+              invalidWhenUntouched
               required
             />
             <Textarea name="comment" label="Description" />
@@ -118,7 +122,10 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
               <Button type="button" onClick={onDismiss} secondary>
                 Cancel
               </Button>
-              <Button disabled={isSubmitting || !isValid} type="submit">
+              <Button
+                disabled={!dirty || isSubmitting || !isValid}
+                type="submit"
+              >
                 {isSubmitting ? 'Submitting' : 'Submit'}
               </Button>
             </Buttons>
