@@ -95,7 +95,6 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
           comment: Yup.string().when('problem_code', (problem_code, schema) =>
             problem_code?.value === 5 ? schema.required() : schema,
           ),
-          name: !isLoggedIn && Yup.string().required(),
           email: !isLoggedIn && Yup.string().email().required(),
         })}
         onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
@@ -113,7 +112,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
             <Textarea name="comment" label="Description" />
             {!isLoggedIn && (
               <>
-                <Input name="name" label="Name" required />
+                <Input name="name" label="Name" />
                 <Input name="email" label="Email" required />
                 <Recaptcha />
               </>
