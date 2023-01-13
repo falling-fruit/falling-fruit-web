@@ -70,7 +70,7 @@ const LocationNav = () => {
                 size={54}
                 color={theme.green}
                 onClick={() => {
-                  history.push('/entry/new/details')
+                  history.push('/locations/new/details')
                 }}
               />
             </>

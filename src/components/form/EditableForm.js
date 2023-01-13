@@ -65,7 +65,7 @@ export const EditLocationForm = (props) => (
     Form={LocationForm}
     getFormData={getLocationById}
     convertFormData={locationToForm}
-    getRedirectLink={(location) => `/entry/${location.id}`}
+    getRedirectLink={(location) => `/locations/${location.id}`}
     {...props}
   />
 )
