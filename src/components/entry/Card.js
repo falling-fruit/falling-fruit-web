@@ -8,10 +8,12 @@ export default React.forwardRef(function Card(
   ref,
 ) {
   useEffect(() => {
+    let drag = false
+
     const onClickOutside = async (e) => {
       const { target } = e
 
-      if (!target) {
+      if (!target || drag) {
         return
       }
 
@@ -28,10 +30,13 @@ export default React.forwardRef(function Card(
       }
     }
 
-    window.addEventListener('click', onClickOutside)
+    // Only trigger effect on mouse click without drag
+    window.addEventListener('mousedown', () => (drag = false))
+    window.addEventListener('mousemove', () => (drag = true))
+    window.addEventListener('mouseup', onClickOutside)
 
     return () => {
-      window.removeEventListener('click', onClickOutside)
+      window.removeEventListener('mouseup', onClickOutside)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [drawer, className, config, isFullScreen])
