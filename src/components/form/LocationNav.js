@@ -20,7 +20,10 @@ const LocationNav = () => {
         {({ match }) => (
           // TODO: fix going back to correct entry id
           <TopBarNav
-            onBack={() => history.push(`/locations/${match.params.id}`)}
+            onBack={(event) => {
+              event.stopPropagation()
+              return history.push(`/locations/${match.params.id}`)
+            }}
             title="Editing Review"
           />
         )}
@@ -28,7 +31,10 @@ const LocationNav = () => {
       <Route path="/locations/:id/review">
         {({ match }) => (
           <TopBarNav
-            onBack={() => history.push(`/locations/${match.params.id}`)}
+            onBack={(event) => {
+              event.stopPropagation()
+              return history.push(`/locations/${match.params.id}`)
+            }}
             title="Adding Review"
           />
         )}
@@ -36,7 +42,10 @@ const LocationNav = () => {
       <Route path="/locations/:id/edit">
         {({ match }) => (
           <TopBarNav
-            onBack={() => history.push(`/locations/${match.params.id}`)}
+            onBack={(event) => {
+              event.stopPropagation()
+              return history.push(`/locations/${match.params.id}`)
+            }}
             title="Editing Location"
           />
         )}

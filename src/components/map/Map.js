@@ -156,7 +156,8 @@ const Map = ({
     mapsRef.current = maps
   }
 
-  const closeStreetView = () => {
+  const closeStreetView = (event) => {
+    event.stopPropagation()
     dispatch(setStreetView(false))
   }
   const isDesktop = useIsDesktop()

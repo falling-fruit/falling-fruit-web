@@ -298,11 +298,12 @@ const EntryMobile = ({
           <div>
             {!isInDrawer && (
               <EntryButton
-                onClick={() =>
+                onClick={(event) => {
+                  event.stopPropagation()
                   history.push(`/locations/${locationData.id}`, {
                     fromPage: '/map',
                   })
-                }
+                }}
                 icon={<MapIcon />}
                 label="map-button"
               />
