@@ -17,12 +17,11 @@ const LocationNav = () => {
   return (
     <Switch>
       <Route path="/reviews/:id/edit">
-        {({ match }) => (
-          // TODO: fix going back to correct entry id
+        {() => (
           <TopBarNav
             onBack={(event) => {
               event.stopPropagation()
-              return history.push(`/locations/${match.params.id}`)
+              return history.goBack()
             }}
             title="Editing Review"
           />
