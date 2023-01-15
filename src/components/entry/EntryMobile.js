@@ -49,6 +49,8 @@ const DrawerContainer = styled.div`
     ${({ isFullScreen }) => isFullScreen && `padding-top: 0;`}
     ${({ showEntryImages, isFullScreen }) =>
       !showEntryImages && isFullScreen && `box-shadow: none;`}
+    // Expand Cupertino Pane from default (500px) to full width
+    max-width: 100%;
   }
 
   .draggable {
