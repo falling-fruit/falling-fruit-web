@@ -28,22 +28,22 @@ const LocationNav = () => {
         )}
       </Route>
       <Route path="/locations/:id/review">
-        {({ match }) => (
+        {() => (
           <TopBarNav
             onBack={(event) => {
               event.stopPropagation()
-              return history.push(`/locations/${match.params.id}`)
+              return history.goBack()
             }}
             title="Adding Review"
           />
         )}
       </Route>
       <Route path="/locations/:id/edit">
-        {({ match }) => (
+        {() => (
           <TopBarNav
             onBack={(event) => {
               event.stopPropagation()
-              return history.push(`/locations/${match.params.id}`)
+              return history.goBack()
             }}
             title="Editing Location"
           />
