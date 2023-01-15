@@ -95,7 +95,8 @@ const EntryOverview = ({ locationData, className }) => {
     )
   }
 
-  const handleStreetView = () => {
+  const handleStreetView = (event) => {
+    event.stopPropagation()
     if (!isDesktop) {
       history.push(`/locations/${locationData.id}`, { fromPage: '/map' })
     }
