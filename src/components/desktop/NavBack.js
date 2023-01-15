@@ -25,7 +25,8 @@ const NavBack = ({ isEntry }) => {
   const history = useAppHistory()
   const { state } = useLocation()
   const { t } = useTranslation()
-  const match = useRouteMatch('/locations/:id')
+  // Restrict to integer :id to avoid match to e.g. /locations/new
+  const match = useRouteMatch('/locations/:id(\\d+)')
   const entryId = match?.params.id
 
   const isEditingEntry = useRouteMatch('/locations/:id/edit')
