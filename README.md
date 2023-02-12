@@ -10,14 +10,19 @@
   <br />
 </h1>
 <p align="center">
+  <img src="https://img.shields.io/badge/Status-Actively%20developed-darkgreen.svg?style=flat-square" />
   <img src="https://img.shields.io/badge/license-GPLv3-blue?style=flat-square" />
 </p>
 
 ## About
 
-React-based, mobile-friendly frontend for Falling Fruit's website.
+React-based, mobile-friendly website for Falling Fruit.
 
 **For developers!** More comprehensive documentation is available in [`/docs`](./docs).
+
+## Status
+
+Under development as the future replacement of the existing website ([falling-fruit](https://github.com/falling-fruit/falling-fruit)) and mobile app ([falling-fruit-mobile](https://github.com/falling-fruit/falling-fruit-mobile)). It is served at https://dev.fallingfruit.org (test) and https://beta.fallingfruit.org (production).
 
 ## Usage
 
