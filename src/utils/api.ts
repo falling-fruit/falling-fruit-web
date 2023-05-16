@@ -7,9 +7,9 @@ import { paths } from './apiSchema'
 import authStore from './authStore'
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.API_URL,
   params: {
-    api_key: process.env.REACT_APP_API_KEY,
+    api_key: process.env.API_KEY,
   },
 })
 
