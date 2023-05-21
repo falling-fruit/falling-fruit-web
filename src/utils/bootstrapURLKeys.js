@@ -3,7 +3,7 @@
 // @googlemaps/react-wrapper (for search) and google-map-react
 
 export const bootstrapURLKeys = {
-  apiKey: process.env.GOOGLE_MAPS_API_KEY,
+  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   version: 'beta',
   libraries: ['places'],
 }

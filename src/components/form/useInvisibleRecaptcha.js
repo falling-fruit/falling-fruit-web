@@ -27,7 +27,7 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
   const Recaptcha = () => (
     <HiddenReaptcha
       size="invisible"
-      sitekey={process.env.RECAPTCHA_SITE_KEY}
+      sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
       ref={(e) => {
         recaptchaRef.current = e
       }}

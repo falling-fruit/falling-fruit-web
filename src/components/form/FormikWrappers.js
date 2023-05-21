@@ -31,7 +31,7 @@ const FormikRecaptcha = forwardRef(
     return (
       <Reaptcha
         ref={ref}
-        sitekey={process.env.RECAPTCHA_SITE_KEY}
+        sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
         onVerify={helpers.setValue}
         onExpire={() => helpers.setValue(null)}
         size={isResponsive && isMobile ? 'compact' : size}
