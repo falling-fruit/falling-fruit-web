@@ -230,7 +230,7 @@ const SettingsPage = ({ desktop }) => {
       {[
         {
           field: 'showBusinesses',
-          label: t('Show businesses'),
+          label: t('poi'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
