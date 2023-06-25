@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { authPages } from '../auth/authRoutes.js'
 
-const DEFAULT_TAB = 0 // Map
+const DEFAULT_TAB = 1 // Map
 
 const useTabs = () => {
   const { t } = useTranslation()
