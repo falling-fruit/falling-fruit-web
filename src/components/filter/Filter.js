@@ -8,11 +8,7 @@ import { filtersChanged, selectionChanged } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { updateTreeCounts } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
-import {
-  CheckboxFilters,
-  MUNI_AND_INVASIVE_CHECKBOX_FIELDS,
-  TREE_SHOW_CHECKBOX_FIELDS,
-} from './CheckboxFilters'
+import { CheckboxFilters } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
 import RCTreeSelect from './RCTreeSelect'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
@@ -66,6 +62,8 @@ const SearchInput = styled(Input)`
 const MuniAndInvasiveCheckboxFilters = styled.div`
   label:not(:last-child) {
     margin-bottom: 8px;
+  }
+  label:first-child {
     @media ${({ theme }) => theme.device.mobile} {
       margin-top: 15px;
     }
@@ -128,15 +126,20 @@ const Filter = ({ isOpen }) => {
   return isOpen ? (
     <StyledFilter>
       <div>
-        <p className="edible-type-text">{t('Edible Types')}</p>
+        <p className="edible-type-text">{t('types')}</p>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
-          placeholder="Search for a type..."
+          placeholder={t('type')}
         />
         <TreeFiltersContainer>
           <CheckboxFilters
             values={filters}
-            fields={TREE_SHOW_CHECKBOX_FIELDS}
+            fields={[
+              {
+                field: 'showOnlyOnMap',
+                label: t('only_on_map'),
+              },
+            ]}
             onChange={(values) => {
               dispatch(filtersChanged(values))
             }}
@@ -170,7 +173,16 @@ const Filter = ({ isOpen }) => {
       <MuniAndInvasiveCheckboxFilters>
         <CheckboxFilters
           values={filters}
-          fields={MUNI_AND_INVASIVE_CHECKBOX_FIELDS}
+          fields={[
+            {
+              field: 'muni',
+              label: t('inventories'),
+            },
+            {
+              field: 'invasive',
+              label: t('invasives'),
+            },
+          ]}
           onChange={(values) => {
             dispatch(filtersChanged(values))
           }}

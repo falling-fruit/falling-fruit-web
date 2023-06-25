@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import Button from '../ui/Button'
@@ -20,15 +21,18 @@ const FilterButtonsContainer = styled.div`
   }
 `
 
-const FilterButtons = ({ onSelectAllClick, onDeselectAllClick }) => (
-  <FilterButtonsContainer>
-    <Button secondary onClick={onSelectAllClick}>
-      Select all
-    </Button>
-    <Button secondary onClick={onDeselectAllClick}>
-      Deselect all
-    </Button>
-  </FilterButtonsContainer>
-)
+const FilterButtons = ({ onSelectAllClick, onDeselectAllClick }) => {
+  const { t } = useTranslation()
+  return (
+    <FilterButtonsContainer>
+      <Button secondary onClick={onSelectAllClick}>
+        {t('select_all')}
+      </Button>
+      <Button secondary onClick={onDeselectAllClick}>
+        {t('deselect_all')}
+      </Button>
+    </FilterButtonsContainer>
+  )
+}
 
 export default FilterButtons

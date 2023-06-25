@@ -2,24 +2,6 @@ import styled from 'styled-components/macro'
 
 import Checkbox from '../ui/Checkbox'
 
-const MUNI_AND_INVASIVE_CHECKBOX_FIELDS = [
-  {
-    field: 'muni',
-    label: 'Municipal tree inventories',
-  },
-  {
-    field: 'invasive',
-    label: 'Invasive species only',
-  },
-]
-
-const TREE_SHOW_CHECKBOX_FIELDS = [
-  {
-    field: 'showOnlyOnMap',
-    label: 'Only on map',
-  },
-]
-
 const StyledLabel = styled.label`
   cursor: pointer;
   display: flex;
@@ -47,8 +29,4 @@ const CheckboxFilters = ({ values, onChange, fields, style }) =>
     </StyledLabel>
   ))
 
-export {
-  CheckboxFilters,
-  MUNI_AND_INVASIVE_CHECKBOX_FIELDS,
-  TREE_SHOW_CHECKBOX_FIELDS,
-}
+export { CheckboxFilters }
