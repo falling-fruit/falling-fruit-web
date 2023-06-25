@@ -14,8 +14,8 @@
   "poi": "Points of interest",
   "labels": "Labels",
   "data": "Data",
-  "Map": "Map",
-  "Settings": "Settings",
+  "map": "Map",
+  "settings": "Settings",
   "types": "Types",
   "type": "Type",
   "address": "Address",
@@ -25,10 +25,11 @@
   "deselect_all": "Deselect all",
   "only_on_map": "On the map",
   "add_location": "Add a location",
-  "Last updated": "Last updated",
-  "About": "About",
-  "Login": "Login",
+  "last_updated": "Last updated",
+  "about": "About",
+  "login": "Login",
   "required": "required",
   "optional": "optional",
-  "List": "List"
+  "list": "List",
+  "account": "Account"
 }

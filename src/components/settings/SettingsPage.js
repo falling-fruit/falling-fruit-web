@@ -98,9 +98,9 @@ const SettingsPage = ({ desktop }) => {
     <Page desktop={desktop}>
       {!desktop && (
         <>
-          <h2>{t('Settings')}</h2>
+          <h2>{t('settings')}</h2>
 
-          <h3>{t('Account')}</h3>
+          <h3>{t('account')}</h3>
           <UserWrapper>
             {user ? (
               <>
@@ -153,7 +153,7 @@ const SettingsPage = ({ desktop }) => {
         />
       ))}
 
-      <h3>{t('Map')}</h3>
+      <h3>{t('map')}</h3>
 
       <h5>{t('basemap')}</h5>
 

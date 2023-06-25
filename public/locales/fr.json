@@ -14,8 +14,8 @@
   "poi": "Points d'intérêt",
   "labels": "Étiquettes",
   "data": "Données",
-  "Map": "Carte",
-  "Settings": "Paramètres",
+  "map": "Carte",
+  "settings": "Paramètres",
   "types": "Types",
   "type": "Type",
   "address": "Adresse",
@@ -25,10 +25,11 @@
   "deselect_all": "Désélectionner tous",
   "only_on_map": "Sur la carte",
   "add_location": "Ajouter un site",
-  "Last updated": "Last updated",
-  "About": "À propos",
-  "Login": "Connexion",
+  "last_updated": "Last updated",
+  "about": "À propos",
+  "login": "Connexion",
   "required": "requis",
   "optional": "optionnel",
-  "List": "Liste"
+  "list": "Liste",
+  "account": "Compte"
 }
