@@ -442,7 +442,7 @@
       "title": "The collectors: Food cartographers",
       "author": "Stick Figure Studios",
       "url": "https://abcnews.go.com/fivethirtyeight/video/collectors-food-cartographers-56175042",
-      "embed_html": "<iframe src=\"https://fivethirtyeight.abcnews.go.com/video/embed/56175042\" width=\"640\" height=\"360\" scrolling=\"no\" frameborder=\"0\" allowfullscreen></iframe>"
+      "embed_html": "<iframe width=\"640\" height=\"360\" src=\"https://abcnews.go.com/video/embed?id=56175042\" allowfullscreen frameborder=\"0\"></iframe>"
     },
     {
       "published_on": "2014-11-25",
@@ -1653,6 +1653,14 @@
   ],
   "2020": [
     {
+      "published_on": "2020-11-19",
+      "outlet": "ArcGIS Storymaps",
+      "outlet_url": "storymaps.arcgis.com",
+      "title": "Feeding Birmingham, AL",
+      "author": "Jesse Ryno",
+      "url": "storymaps.arcgis.com/stories/6104e74f0b9b4e3eb02b06f1421ff90f"
+    },
+    {
       "published_on": "2020-10-27",
       "outlet": "Westword",
       "outlet_url": "https://www.westword.com",
@@ -1769,6 +1777,14 @@
     }
   ],
   "2022": [
+    {
+      "published_on": "2022-09-03",
+      "outlet": "Barking Dogs",
+      "outlet_url": "https://barkingdogs.be",
+      "title": "Zo pluk je gratis fruit bij jou in de buurt",
+      "author": "Sara Van Wesenbeeck",
+      "url": "https://barkingdogs.be/nl/2022/09/03/zo-pluk-je-gratis-fruit-bij-jou-in-de-buurt/"
+    },
     {
       "published_on": "2022-03-25",
       "outlet": "Landscape Research",

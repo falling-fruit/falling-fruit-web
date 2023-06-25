@@ -177,6 +177,29 @@
   },
   {
     "active": true,
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "name": "Goedgeplukt",
+    "name_url": "https://goedgeplukt.be/"
+  },
+  {
+    "active": true,
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "city": "Antwerp",
+    "name": "Antwerpen Plukt",
+    "name_url": "https://velt.nu/antwerpen-plukt"
+  },
+  {
+    "active": true,
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "city": "Mechelen",
+    "name": "Pluk de stad",
+    "name_url": "https://citamine.be/pluk-de-stad/"
+  },
+  {
+    "active": true,
     "country": "Canada",
     "name": "Incredible Edible Canada",
     "facebook": "https://www.facebook.com/groups/IncredibleEdibleCanada/"
@@ -3128,7 +3151,7 @@
     "state": "Maryland",
     "city": "Baltimore",
     "name": "Baltimore Orchard Project",
-    "name_url": "http://baltimoreorchardproject.civicworks.com/"
+    "name_url": "https://www.baltimoreorchardproject.org"
   },
   {
     "active": true,
@@ -4627,5 +4650,98 @@
     "name_url": "http://holefoodrescue.org/",
     "facebook": "https://www.facebook.com/HoleFoodRescue",
     "instagram": "https://www.instagram.com/holefoodrescue/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "Emergency Food Bank",
+    "name_url": "http://www.stocktonfoodbank.org/",
+    "facebook": "https://www.facebook.com/StocktonEmergencyFoodBank",
+    "twitter": "https://twitter.com/EFBFS",
+    "instagram": "https://www.instagram.com/emergencyfoodbank/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "PUENTES",
+    "name_url": "https://puentesca.org/",
+    "facebook": "https://www.facebook.com/PUENTESCA/",
+    "twitter": "https://twitter.com/PUENTESCA",
+    "instagram": "https://www.instagram.com/puentesca/?hl=en"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "Harvester Farms",
+    "name_url": "http://www.harvesterfarms.org/",
+    "facebook": "https://www.facebook.com/HarvesterFarms/?ref=bookmarks",
+    "twitter": "https://twitter.com/HarvesterFarms"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "Bread of Life",
+    "name_url": "https://www.breadoflifeca.org/",
+    "facebook": "https://www.facebook.com/breadoflifestockton/",
+    "instagram": "https://www.instagram.com/bread_of_life/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "French Camp",
+    "name": "Black Urban Farmers Association",
+    "name_url": "https://stocktonbufafarm.org/",
+    "facebook": "https://www.facebook.com/bufa7stockton",
+    "instagram": "https://www.instagram.com/bufa_stockton/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Manteca",
+    "name": "Second Harvest of the Greater Valley",
+    "name_url": "https://localfoodbank.org/",
+    "facebook": "https://www.facebook.com/localfoodbank",
+    "twitter": "https://twitter.com/fightinghunger",
+    "instagram": "https://www.instagram.com/p/B1rlg0aH_zD/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Lodi",
+    "name": "LOEL Senior Center",
+    "name_url": "http://www.loelcenter.net/",
+    "subname": "Meals on Wheels",
+    "subname_url": "http://www.loelcenter.net/programs/meals/",
+    "facebook": "https://www.facebook.com/LOELSeniorCenter"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "University of the Pacific",
+    "name_url": "https://www.pacific.edu/",
+    "subname": "Garden Program",
+    "subname_url": "https://www.pacific.edu/about/sustainability/garden-program"
+  },
+  {
+    "active": true,
+    "country": "France",
+    "state": "Bretagne",
+    "city": "Vitré",
+    "name": "Tous au verger",
+    "name_url": "https://www.tousauverger.fr/",
+    "facebook": "https://www.facebook.com/tousauverger"
   }
 ]
