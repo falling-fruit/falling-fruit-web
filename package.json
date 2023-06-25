@@ -75,7 +75,7 @@
     "format": "yarn format:output --write",
     "format:check": "yarn format:output --check",
     "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
-    "build": "yarn genData && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/main/docs/openapi.yml --output src/utils/apiSchema.ts",
