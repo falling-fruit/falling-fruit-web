@@ -188,8 +188,7 @@ const Map = ({
         options={() => ({
           mapTypeId: mapType,
           disableDefaultUI: true,
-          // TODO: should we disable tilt?
-          // tilt: 0,
+          tilt: 0,
           // Toggle all basemap icons
           // https://developers.google.com/maps/documentation/javascript/style-reference
           styles: [
