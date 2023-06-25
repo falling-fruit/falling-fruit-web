@@ -79,12 +79,18 @@ const SignupPage = () => {
           {({ errors, dirty, isValid, isSubmitting }) => (
             <Form>
               <FormInputWrapper>
-                <Input type="email" name="email" label={t('glossary.email')} />
+                <Input
+                  type="email"
+                  name="email"
+                  label={t('glossary.email')}
+                  required
+                />
 
                 <Input
                   type="password"
                   name="password"
                   label={t('glossary.password')}
+                  required
                 />
                 {errors.password && (
                   <ErrorMessage>
@@ -96,6 +102,7 @@ const SignupPage = () => {
                   type="password"
                   name="password_confirm"
                   label={t('users.password_confirmation')}
+                  required
                 />
                 {errors.password_confirm && (
                   <ErrorMessage>
@@ -106,14 +113,9 @@ const SignupPage = () => {
                   </ErrorMessage>
                 )}
 
-                <Input
-                  type="text"
-                  name="name"
-                  label={t('glossary.name')}
-                  optional
-                />
+                <Input type="text" name="name" label={t('glossary.name')} />
 
-                <Textarea name="bio" label={t('users.bio')} optional />
+                <Textarea name="bio" label={t('users.bio')} />
               </FormInputWrapper>
 
               <Recaptcha

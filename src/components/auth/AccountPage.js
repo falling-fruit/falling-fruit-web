@@ -120,26 +120,21 @@ const AccountPage = () => {
               {({ errors, dirty, isValid, isSubmitting }) => (
                 <Form>
                   <FormInputWrapper>
-                    <Input
-                      type="text"
-                      name="name"
-                      label={t('glossary.name')}
-                      optional
-                    />
+                    <Input type="text" name="name" label={t('glossary.name')} />
 
                     <Input
                       type="text"
                       name="email"
                       label={t('glossary.email')}
+                      required
                     />
 
-                    <Textarea name="bio" label={t('users.bio')} optional />
+                    <Textarea name="bio" label={t('users.bio')} />
 
                     <Input
                       name="new_password"
                       type="password"
                       label={t('users.new_password')}
-                      optional
                     />
                     {errors.new_password && (
                       <ErrorMessage>
@@ -154,7 +149,6 @@ const AccountPage = () => {
                       name="new_password_confirm"
                       type="password"
                       label={t('users.new_password_confirmation')}
-                      optional
                     />
                     {errors.new_password_confirm && (
                       <ErrorMessage>
