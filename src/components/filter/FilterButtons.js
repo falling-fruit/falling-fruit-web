@@ -3,13 +3,15 @@ import styled from 'styled-components/macro'
 import Button from '../ui/Button'
 
 const FilterButtonsContainer = styled.div`
+  display: inline-block;
   button {
     height: 22px;
-    width: 90px;
-    padding: 0;
+    padding: 2px 4px;
     color: ${({ theme }) => theme.tertiaryText};
     border: 2px solid ${({ theme }) => theme.tertiaryText};
-    margin-left: 7px;
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
 
     &:hover {
       background-color: ${({ theme }) => theme.tertiaryText};
