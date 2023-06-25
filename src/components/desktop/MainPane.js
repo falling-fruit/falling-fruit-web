@@ -46,6 +46,7 @@ const MainPane = () => {
         {t('add_location')}
       </StyledButton>
       <SettingsButton
+        text={t('Settings')}
         onClick={() =>
           history.push({
             pathname: '/settings',

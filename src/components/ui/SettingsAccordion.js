@@ -24,11 +24,7 @@ const StyledListEntry = styled(ListEntry)`
   }
 `
 
-const SettingsAccordionButton = ({
-  LeftIcon = Cog,
-  text = 'Settings',
-  ...props
-}) => {
+const SettingsAccordionButton = ({ LeftIcon = Cog, text, ...props }) => {
   const { isExpanded } = useAccordionItemContext()
   const ChevronIcon = isExpanded ? ChevronDown : ChevronRight
 
