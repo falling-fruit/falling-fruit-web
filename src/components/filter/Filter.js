@@ -50,8 +50,9 @@ const StyledFilter = styled.div`
 `
 
 const TreeFiltersContainer = styled.div`
-  display: flex;
-  margin: 10px 0;
+  margin: 8px 0;
+  /* Provide vertical space when buttons wrap over multiple lines */
+  line-height: 1.5rem;
 `
 
 const SearchInput = styled(Input)`
@@ -139,6 +140,7 @@ const Filter = ({ isOpen }) => {
             onChange={(values) => {
               dispatch(filtersChanged(values))
             }}
+            style={{ display: 'inline-block', marginRight: '5px' }}
           />
           <FilterButtons
             onSelectAllClick={() =>

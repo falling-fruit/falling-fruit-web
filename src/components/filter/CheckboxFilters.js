@@ -29,9 +29,9 @@ const StyledLabel = styled.label`
   color: ${({ theme }) => theme.secondaryText};
 `
 
-const CheckboxFilters = ({ values, onChange, fields }) =>
+const CheckboxFilters = ({ values, onChange, fields, style }) =>
   fields.map(({ field, label }) => (
-    <StyledLabel key={field} htmlFor={field}>
+    <StyledLabel key={field} htmlFor={field} style={style}>
       <Checkbox
         id={field}
         checked={values[field]}
