@@ -126,12 +126,12 @@ const SettingsPage = ({ desktop }) => {
         </>
       )}
 
-      <h3>{t('Viewing preferences')}</h3>
+      <h3>{t('data')}</h3>
 
       {[
         {
           field: 'showLabels',
-          label: t('Show labels'),
+          label: t('labels'),
         },
       ].map(({ field, label }) => (
         <LabeledRow
@@ -153,26 +153,26 @@ const SettingsPage = ({ desktop }) => {
         />
       ))}
 
-      <h3>{t('Map preferences')}</h3>
+      <h3>{t('Map')}</h3>
 
-      <h5>{t('Map view')}</h5>
+      <h5>{t('basemap')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: t('Default'),
+            label: t('roadmap'),
             value: 'roadmap',
             image: Road,
           },
           {
-            label: t('Satellite'),
-            value: 'hybrid',
-            image: Satellite,
-          },
-          {
-            label: t('Terrain'),
+            label: t('terrain'),
             value: 'terrain',
             image: Terrain,
+          },
+          {
+            label: t('satellite'),
+            value: 'hybrid',
+            image: Satellite,
           },
         ]}
         value={settings.mapType}
@@ -185,34 +185,32 @@ const SettingsPage = ({ desktop }) => {
         }
       />
 
-      <h5>{t('Map overlays')}</h5>
+      <h5>{t('overlay')}</h5>
 
       <RadioTiles
         options={[
           {
-            label: t('None'),
-            value: null,
-            image: Road,
-          },
-          {
-            label: t('Biking'),
+            label: t('biking'),
             value: 'BicyclingLayer',
             image: Bicycling,
           },
           {
-            label: t('Transit'),
+            label: t('transit'),
             value: 'TransitLayer',
             image: Transit,
           },
         ]}
         value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
-        onChange={(value) =>
+        onChange={(value) => {
+          if (value === settings.mapLayers[0]) {
+            value = null
+          }
           dispatch(
             updateSettings({
               mapLayers: value ? [value] : [],
             }),
           )
-        }
+        }}
       />
       {[
         {
@@ -239,12 +237,10 @@ const SettingsPage = ({ desktop }) => {
         />
       ))}
 
-      <h3>{t('Language preferences')}</h3>
+      <h3>{t('regional')}</h3>
 
       <LabeledRow
-        label={
-          <label htmlFor="languagePreference">{t('Language preference')}</label>
-        }
+        label={<label htmlFor="languagePreference">{t('language')}</label>}
         right={
           <Select
             options={LANGUAGE_OPTIONS}
