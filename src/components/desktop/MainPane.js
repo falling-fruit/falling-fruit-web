@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -27,6 +28,7 @@ const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
 `
 
 const MainPane = () => {
+  const { t } = useTranslation()
   const history = useAppHistory()
   return (
     <Container>
@@ -41,7 +43,7 @@ const MainPane = () => {
           })
         }
       >
-        Add a location
+        {t('add_location')}
       </StyledButton>
       <SettingsButton
         onClick={() =>
