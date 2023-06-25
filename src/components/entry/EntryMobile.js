@@ -49,6 +49,8 @@ const DrawerContainer = styled.div`
     ${({ isFullScreen }) => isFullScreen && `padding-top: 0;`}
     ${({ showEntryImages, isFullScreen }) =>
       !showEntryImages && isFullScreen && `box-shadow: none;`}
+    // Expand Cupertino Pane from default (500px) to full width
+    max-width: 100%;
   }
 
   .draggable {
@@ -298,11 +300,12 @@ const EntryMobile = ({
           <div>
             {!isInDrawer && (
               <EntryButton
-                onClick={() =>
+                onClick={(event) => {
+                  event.stopPropagation()
                   history.push(`/locations/${locationData.id}`, {
                     fromPage: '/map',
                   })
-                }
+                }}
                 icon={<MapIcon />}
                 label="map-button"
               />
