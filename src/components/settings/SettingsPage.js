@@ -7,7 +7,6 @@ import { LANGUAGE_OPTIONS } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
-import ButtonToggle from '../ui/ButtonToggle'
 import Checkbox from '../ui/Checkbox'
 import { theme } from '../ui/GlobalStyle'
 import LabeledRow from '../ui/LabeledRow'
@@ -19,11 +18,6 @@ import Road from './mapTiles/road.png'
 import Satellite from './mapTiles/satellite.png'
 import Terrain from './mapTiles/terrain.png'
 import Transit from './mapTiles/transit.png'
-
-const DISTANCE_UNIT_OPTIONS = [
-  { value: 'metric', label: 'Metric' },
-  { value: 'imperial', label: 'Imperial' },
-]
 
 const Page = styled.div`
   box-sizing: border-box;
@@ -91,6 +85,11 @@ const SettingsPage = ({ desktop }) => {
 
   const { t, i18n } = useTranslation()
 
+  const DISTANCE_UNIT_OPTIONS = [
+    { value: 'metric', label: t('metric') },
+    { value: 'imperial', label: t('imperial') },
+  ]
+
   const updateUnitsSetting = (object) => {
     dispatch(updateSettings({ distanceUnit: object.value }))
   }
@@ -153,18 +152,6 @@ const SettingsPage = ({ desktop }) => {
           label={<label htmlFor={field}>{label}</label>}
         />
       ))}
-      {!desktop && (
-        <LabeledRow
-          label={<label htmlFor="distanceUnit">{t('Units')}</label>}
-          right={
-            <ButtonToggle
-              options={DISTANCE_UNIT_OPTIONS}
-              onChange={updateUnitsSetting}
-              value={settings.distanceUnit}
-            />
-          }
-        />
-      )}
 
       <h3>{t('Map preferences')}</h3>
 
@@ -272,6 +259,20 @@ const SettingsPage = ({ desktop }) => {
           />
         }
       />
+      {!desktop && (
+        <LabeledRow
+          label={<label htmlFor="distanceUnit">{t('units')}</label>}
+          right={
+            <Select
+              options={DISTANCE_UNIT_OPTIONS}
+              onChange={updateUnitsSetting}
+              value={DISTANCE_UNIT_OPTIONS.find(
+                (option) => option.value === settings.distanceUnit,
+              )}
+            />
+          }
+        />
+      )}
 
       {!desktop && (
         <>
