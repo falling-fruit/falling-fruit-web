@@ -167,22 +167,11 @@ const LocationStep = ({ typeOptions }) => (
   </>
 )
 
-const validateLocationStep = ({ types, season_start, season_stop }) => {
+const validateLocationStep = ({ types }) => {
   const errors = {}
-
   if (types.length === 0) {
     errors.types = true
   }
-
-  if ((season_start?.value != null) !== (season_stop?.value != null)) {
-    if (season_start?.value != null) {
-      errors.season_stop = true
-    }
-    if (season_stop?.value != null) {
-      errors.season_start = true
-    }
-  }
-
   return errors
 }
 

@@ -10,35 +10,29 @@
   <br />
 </h1>
 <p align="center">
+  <img src="https://img.shields.io/badge/Status-Actively%20developed-darkgreen.svg?style=flat-square" />
   <img src="https://img.shields.io/badge/license-GPLv3-blue?style=flat-square" />
 </p>
 
 ## About
 
-React-based, mobile-friendly frontend for Falling Fruit's website.
+React-based, mobile-friendly website for Falling Fruit.
 
 **For developers!** More comprehensive documentation is available in [`/docs`](./docs).
 
-## Usage
+## Status
 
-To run locally:
-
-1. Clone the repo: `git clone https://github.com/falling-fruit/falling-fruit-web`
-2. Setup environment variables: `cp example.env .env`, then edit and fill in `.env`.
-3. Install dependencies: `yarn`
-4. Run: `yarn start`
-
-You can always find the latest deployment of Falling Fruit at [falling-fruit.vercel.app](https://falling-fruit.vercel.app).
+Under development as the future replacement of the existing website ([falling-fruit](https://github.com/falling-fruit/falling-fruit)) and mobile app ([falling-fruit-mobile](https://github.com/falling-fruit/falling-fruit-mobile)). It is live at https://beta.fallingfruit.org.
 
 ## Technologies
 
-Built with React, Redux, Reach UI, Styled Components, and Formik. Vercel is used for automatic deployment.
+Built with React, Redux, Reach UI, Styled Components, and Formik. Vercel was once used for automatic deployments.
 
 ## Contributors
 
-Now maintained by [Falling Fruit](https://fallingfruit.org/about).
+Maintained by [Falling Fruit](https://fallingfruit.org/about).
 
-Initially built by [Hack4Impact UIUC](https://uiuc.hack4impact.org/) as a two-semester project in Fall/Spring 2021. Hack4Impact contributors:
+Initially built by [Hack4Impact UIUC](https://uiuc.hack4impact.org/) as a two-semester project in 2021 by:
 
 <table align="center">
   <tr>
@@ -176,7 +170,3 @@ Initially built by [Hack4Impact UIUC](https://uiuc.hack4impact.org/) as a two-se
     </td>
   </tr>
 </table>
-
-<hr />
-
-[GPLv3](./LICENSE) licensed · © 2022 [Falling Fruit](https://fallingfruit.org/) & [Hack4Impact UIUC](https://github.com/hack4impact-uiuc)

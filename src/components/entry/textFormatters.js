@@ -23,5 +23,7 @@ export const formatSeasonality = (startMonth, endMonth, noSeason) => {
   if (noSeason || (startMonth === 0 && endMonth === 11)) {
     return 'Year Round'
   }
-  return `In season from ${MONTH_LABELS[startMonth]} to ${MONTH_LABELS[endMonth]}`
+  return `In season from ${MONTH_LABELS[startMonth] || '?'} to ${
+    MONTH_LABELS[endMonth] || '?'
+  }`
 }

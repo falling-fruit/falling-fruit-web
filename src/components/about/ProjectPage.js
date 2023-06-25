@@ -416,7 +416,7 @@ const Project = () => (
           bylaws
         </a>{' '}
         and board meeting{' '}
-        <a href="https://drive.google.com/folderview?id=0B3Vxw_F2RArqaVZMUHkzMUNBNnM&usp=sharing">
+        <a href="https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4">
           minutes
         </a>
         .
