@@ -12,6 +12,8 @@
   "basemap": "Base",
   "overlay": "Calque",
   "poi": "Points d'intérêt",
+  "labels": "Étiquettes",
+  "data": "Données",
   "Map": "Carte",
   "Settings": "Paramètres",
   "List": "Lister",

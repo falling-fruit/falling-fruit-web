@@ -4,14 +4,15 @@ import styled from 'styled-components/macro'
 import ResetButton from './ResetButton'
 
 const StyledResetButton = styled(ResetButton)`
-  border-radius: 0.375em;
   height: 100px;
   width: 100px;
   background-color: #c4c4c4;
   position: relative;
-  border: 4px solid
-    ${({ $selected, theme }) => ($selected ? theme.blue : theme.background)};
+  border-bottom: 5px solid
+    ${({ $selected, theme }) => ($selected ? theme.orange : theme.background)};
   overflow: hidden;
+  margin-right: 5px;
+  text-align: left;
 
   &::before {
     content: '';
@@ -40,6 +41,7 @@ const StyledResetButton = styled(ResetButton)`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 0.375em;
   }
 `
 

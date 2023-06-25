@@ -4,16 +4,7 @@ import TileButton from './TileButton'
 
 const TileRow = styled.div`
   display: flex;
-  justify-content: space-between;
-
-  @media ${({ theme }) => theme.device.desktop} {
-    // TODO: should buttons be skinny on smaller desktop screen widths
-    justify-content: flex-start;
-
-    button {
-      margin-right: 10px;
-    }
-  }
+  justify-content: flex-start;
 `
 
 const RadioTiles = ({ options, value: selectedValue, onChange }) => (
