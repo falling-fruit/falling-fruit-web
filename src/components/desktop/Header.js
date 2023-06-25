@@ -201,7 +201,7 @@ const Header = () => {
         <ul>
           <li>
             <NavLink to="/map" activeClassName="active">
-              {t('Map')}
+              {t('map')}
             </NavLink>
           </li>
           <li>
@@ -242,7 +242,7 @@ const Header = () => {
             <>
               <li>
                 <NavLink to="/users/sign_in" activeClassName="active">
-                  {t('Login')}
+                  {t('login')}
                 </NavLink>
               </li>
               <li>

@@ -147,7 +147,7 @@ const EntryOverview = ({ locationData, className }) => {
             )}
 
             <p className="updatedTime">
-              {t('Last Updated')}{' '}
+              {t('last_updated')}{' '}
               <time dateTime={locationData.updated_at}>
                 {formatISOString(locationData.updated_at)}
               </time>
