@@ -16,6 +16,10 @@
   "data": "Données",
   "Map": "Carte",
   "Settings": "Paramètres",
-  "List": "Lister",
-  "Select...": "Sélectionner..."
+  "Last updated": "Last updated",
+  "About": "À propos",
+  "Login": "Connexion",
+  "required": "requis",
+  "optional": "optionnel",
+  "List": "Liste"
 }
