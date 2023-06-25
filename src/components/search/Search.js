@@ -11,6 +11,7 @@ import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import CoordinateParser from 'coordinate-parser'
 import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
@@ -123,12 +124,9 @@ const Search = (props) => {
       dispatch(searchView(getZoomedInView(latitude, longitude)))
     }
   }
+  const { t } = useTranslation()
   return (
-    <Combobox
-      onSelect={handleSelect}
-      aria-label="Search for a location"
-      {...props}
-    >
+    <Combobox onSelect={handleSelect} aria-label={t('address')} {...props}>
       <SearchBarContainer>
         <ComboboxInput
           as={Input}
@@ -147,7 +145,7 @@ const Search = (props) => {
             )
           }
           prepend={isDesktop && <TrackLocationButton isIcon={false} />}
-          placeholder="Search for a location..."
+          placeholder={t('address')}
         />
 
         {!isDesktop && (
