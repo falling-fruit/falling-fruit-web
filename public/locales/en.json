@@ -1,4 +1,7 @@
 {
+  "units": "Units",
+  "metric": "Metric",
+  "imperial": "Imperial",
   "poi": "Points of interest",
   "Falling Fruit": "Falling Fruit",
   "Search for a location": "Search for a location",

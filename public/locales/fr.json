@@ -1,4 +1,7 @@
 {
+  "units": "Unités",
+  "metric": "Métriques",
+  "imperial": "Impèriales",
   "poi": "Points d'intérêt",
   "Settings": "Les paramètres",
   "Viewing preferences": "Affichage des préférences",
