@@ -18,7 +18,8 @@ import { updateSelection } from './updateSelection'
  */
 const { isInitialEntry, ...initialView } = parseUrl()
 
-const TRACKING_LOCATION_ZOOM = 16
+const MIN_TRACKING_ZOOM = 16
+const MIN_LOCATION_ZOOM = 18
 
 export const setReducer = (key) => (state, action) => ({
   ...state,
@@ -97,7 +98,7 @@ export const mapSlice = createSlice({
           lat: state.geolocation.latitude,
           lng: state.geolocation.longitude,
         }
-        state.view.zoom = TRACKING_LOCATION_ZOOM
+        state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
       } else {
         state.justStartedTrackingLocation = true
       }
@@ -119,7 +120,7 @@ export const mapSlice = createSlice({
         if (state.justStartedTrackingLocation) {
           // If user just started tracking location, then we should zoom in, too
           state.justStartedTrackingLocation = false
-          state.view.zoom = TRACKING_LOCATION_ZOOM
+          state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
         }
         // Otherwise, keep the current zoom and re-center the screen
 
@@ -134,7 +135,7 @@ export const mapSlice = createSlice({
 
     zoomInAndSave: (state) => {
       state.oldView = { ...state.view }
-      state.view.zoom = 18
+      state.view.zoom = Math.max(state.view.zoom, MIN_LOCATION_ZOOM)
     },
     restoreOldView: (state) => {
       if (state.oldView) {
@@ -144,7 +145,7 @@ export const mapSlice = createSlice({
     zoomIn: (state, action) => {
       state.view = {
         center: action.payload,
-        zoom: Math.max(16, state.view.zoom),
+        zoom: Math.max(state.view.zoom, MIN_LOCATION_ZOOM),
       }
     },
     clusterClick: (state, action) => {
