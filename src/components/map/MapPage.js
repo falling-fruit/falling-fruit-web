@@ -67,7 +67,14 @@ const MapPage = ({ isDesktop }) => {
   }
 
   return (
-    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+    <div
+      // TODO: Use constants for mobile top and bottom position
+      style={
+        isDesktop
+          ? { width: '100%', height: '100%', position: 'relative' }
+          : { width: '100%', position: 'fixed', bottom: '50px', top: '63px' }
+      }
+    >
       {isLoading && <BottomLeftLoadingIndicator />}
       {isAddingLocation ? (
         <AddLocationPin />

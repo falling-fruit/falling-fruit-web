@@ -124,7 +124,16 @@ const MobileLayout = () => {
           ]}
         />
         <Route>
-          <TabList style={{ zIndex: zIndex.mobileTablist }}>{tabList}</TabList>
+          <TabList
+            style={{
+              zIndex: zIndex.mobileTablist,
+              position: 'fixed',
+              width: '100%',
+              bottom: 0,
+            }}
+          >
+            {tabList}
+          </TabList>
         </Route>
       </Switch>
     </PageTabs>
