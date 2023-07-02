@@ -86,14 +86,8 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
-
-    @media ${({ theme }) => theme.device.mobile} {
-      // Disable overscrolling on iOS
-      overflow: hidden;
-      position: fixed;
-      height: 100%;
-      width: 100%;
-    }
+    height: 100%;
+    width: 100%;
   }
 
   #root {
@@ -113,12 +107,12 @@ const GlobalStyle = createGlobalStyle`
   h1 { font-size: 1.625rem; }
   h2 { font-size: 1.375rem; }
   h3 { font-size: 1.125rem; }
-  h4 { 
+  h4 {
     font-weight: normal;
     font-size: 1.125rem;
   }
   h5 { font-size: 0.875rem; }
-  h6 { 
+  h6 {
     font-size: 0.625rem;
     text-transform: uppercase;
   }

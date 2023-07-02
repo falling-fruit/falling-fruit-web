@@ -23,17 +23,17 @@ const FOOTER_HEIGHT = 50
 const BUTTON_HEIGHT = 80
 
 const PageContainer = styled.div`
-  margin-top: ${BUTTON_HEIGHT}px;
+  position: absolute;
+  top: ${({ showEntryImages }) => (showEntryImages ? 0 : BUTTON_HEIGHT)}px;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  z-index: 2;
 
   .pane {
     background: none;
     padding-top: 0;
     ${({ showEntryImages }) => !showEntryImages && `box-shadow: none;`}
-  }
-
-  > div {
-    background: white;
-    height: 100% !important;
   }
 `
 
@@ -75,16 +75,15 @@ const EntryImages = styled.div`
   height: ${ENTRY_IMAGE_HEIGHT}px;
 
   ${({ $isInDrawer, heightScalar }) =>
-    $isInDrawer
-      ? `position: absolute;
+    $isInDrawer &&
+    `position: absolute;
     top: 0;
     transform: translateY(
       ${-heightScalar * ENTRY_IMAGE_HEIGHT}px
     );
     transition: transform 0.15s linear;
     z-index: -10;
-  `
-      : `margin-top: -${BUTTON_HEIGHT}px;`}
+  `}
 `
 
 const Buttons = styled.div`

@@ -22,6 +22,7 @@ import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { TextContent } from './Entry'
+import EntryTags from './EntryTags'
 import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
@@ -116,6 +117,7 @@ const EntryOverview = ({ locationData, className }) => {
         )}
         <TextContent>
           <TypesHeader typeIds={locationData.type_ids} />
+          <EntryTags locationData={locationData} />
           <Description>
             <p>{locationData.description}</p>
 

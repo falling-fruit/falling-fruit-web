@@ -4,7 +4,6 @@ import styled from 'styled-components/macro'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
 import Carousel from './Carousel'
-import EntryTags from './EntryTags'
 import Lightbox from './Lightbox'
 
 // Wraps the entire page and gives it a top margin if on mobile
@@ -35,29 +34,6 @@ export const TextContent = styled.article`
   }
 `
 
-const EntryTagsContainer = styled.div`
-  @media ${({ theme }) => theme.device.desktop} {
-    padding: 0 12px 0 12px;
-    padding-top: ${({ $isOverlay, $showEntryImages }) =>
-      $isOverlay || $showEntryImages ? '12px' : ''};
-  }
-
-  @media ${({ theme }) => theme.device.mobile} {
-    padding-left: 10px;
-    padding-bottom: ${({ $isFullScreen, $isOverlay }) =>
-      $isFullScreen && !$isOverlay && `16px`};
-    padding-top: ${({ $isFullScreen }) => (!$isFullScreen ? `20px` : 0)};
-    top: ${({ $isFullScreen }) => ($isFullScreen ? '-30px' : '-50px')};
-
-    ${({ $isOverlay }) =>
-      $isOverlay &&
-      `
-      position: fixed;
-      transform: translateZ(0);
-      `}
-  }
-`
-
 const Entry = ({
   isInDrawer,
   locationData,
@@ -79,9 +55,6 @@ const Entry = ({
       setTabIdx(0)
     }
   }, [isFullScreen])
-
-  const showEntryImages =
-    reviews && reviews.some((review) => review.photos.length > 0)
 
   let content
 
@@ -114,12 +87,6 @@ const Entry = ({
         )}
         {isInDrawer ? (
           <EntryTabs onChange={setTabIdx} index={tabIdx}>
-            <EntryTagsContainer
-              $isFullScreen={isFullScreen}
-              $isOverlay={showEntryImages}
-            >
-              <EntryTags locationData={locationData} />
-            </EntryTagsContainer>
             {showTabs && (
               <TabList>
                 {/* TODO: Use Routing */}
@@ -144,9 +111,6 @@ const Entry = ({
                 ))}
               </Carousel>
             )}
-            <EntryTagsContainer $showEntryImages={showEntryImages}>
-              <EntryTags locationData={locationData} />
-            </EntryTagsContainer>
             {entryOverview}
             {entryReviews}
           </>
