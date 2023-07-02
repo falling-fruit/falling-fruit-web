@@ -18,8 +18,6 @@ const ENTRY_IMAGE_HEIGHT = 250
 
 const INITIAL_IMAGE_HEIGHT_SCALAR = 0.6
 
-const FOOTER_HEIGHT = 50
-
 const BUTTON_HEIGHT = 80
 
 const PageContainer = styled.div`
@@ -141,8 +139,10 @@ const EntryMobile = ({
   const cardRef = useRef()
   const [drawer, setDrawer] = useState()
   const [isFullScreen, setIsFullScreen] = useState(false)
-  const showEntryImages = reviews && reviews[0]?.photos.length > 0
-
+  const showEntryImages =
+    reviews &&
+    reviews.filter((review) => review.photos && review.photos.length > 0)
+      .length > 0
   const isInDrawer = state?.fromPage !== '/list'
 
   // TODO: Resizing the screen without refresh will break the drawer
@@ -193,7 +193,8 @@ const EntryMobile = ({
     // Parse the transformY value to calculate the current height progress of the card.
     const transformStyles = cardRef.current.parentNode.style.transform
     const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
-    const delta = windowHeight - transformYMatch - initialCardHeight
+    const transformY = parseFloat(transformYMatch)
+    const delta = windowHeight - transformY - initialCardHeight
     let newHeightMultiplier =
       INITIAL_IMAGE_HEIGHT_SCALAR +
       (1 - INITIAL_IMAGE_HEIGHT_SCALAR) * (delta / maxDelta)
@@ -208,15 +209,12 @@ const EntryMobile = ({
     if (cardRef.current) {
       const transformStyles = cardRef.current.parentNode.style.transform
       const [, transformYMatch] = /translateY\((.*?)px\)/g.exec(transformStyles)
+      const transformY = parseFloat(transformYMatch)
       // Parse the card's transformY value to identify the closest breakpoint.
-      if (parseFloat(transformYMatch) === windowHeight - initialCardHeight) {
+      if (transformY === windowHeight - initialCardHeight) {
         setEntryImageHeightMultiplier(INITIAL_IMAGE_HEIGHT_SCALAR)
         setIsFullScreen(false)
-      } else if (
-        parseFloat(transformYMatch) === showEntryImages
-          ? ENTRY_IMAGE_HEIGHT + FOOTER_HEIGHT
-          : FOOTER_HEIGHT
-      ) {
+      } else if (transformY <= ENTRY_IMAGE_HEIGHT) {
         setEntryImageHeightMultiplier(1)
         setIsFullScreen(true)
       }
