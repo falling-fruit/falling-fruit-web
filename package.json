@@ -19,7 +19,7 @@
     "@styled-icons/boxicons-solid": "^10.23.0",
     "axios": "^0.21.1",
     "coordinate-parser": "^1.0.7",
-    "cupertino-pane": "^1.2.61",
+    "cupertino-pane": "=1.2.61",
     "debounce": "^1.2.1",
     "formik": "^2.2.6",
     "google-map-react": "^2.1.9",

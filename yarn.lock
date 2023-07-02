@@ -4514,7 +4514,7 @@ csstype@^3.0.2, csstype@^3.0.6:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.10.tgz#2ad3a7bed70f35b965707c092e5f30b327c290e5"
   integrity sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==
 
-cupertino-pane@^1.2.61:
+cupertino-pane@=1.2.61:
   version "1.2.61"
   resolved "https://registry.yarnpkg.com/cupertino-pane/-/cupertino-pane-1.2.61.tgz#f505513380f9448becf3a1d00348c4f5a9bdee28"
   integrity sha512-A+x28n5YEkLWDtHOXiKlIZo1sOpWI4J+vHGPNevDw6PbHISwJXXiIq3uO7U+Sj1KsRkTuiJbiZjaYC0fVzP3lg==
