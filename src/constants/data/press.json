@@ -1802,5 +1802,23 @@
       "url": "https://caremorebebetter.com/ethan-welty-on-how-urban-foraging-could-change-cities-forever",
       "photo_url": "https://caremorebebetter.com/wp-content/uploads/2022/01/71CMBBEthan.png"
     }
+  ],
+  "2023": [
+    {
+      "published_on": "2023-06-01",
+      "outlet": "Sierra Magazine",
+      "outlet_url": "https://www.sierraclub.org/sierra",
+      "title": "Found objects",
+      "author": "Lauren Colella",
+      "url": "https://digital.sierramagazine.org/publication/?i=793341&article_id=4591115&view=articleBrowser"
+    },
+    {
+      "published_on": "2023-04-05",
+      "outlet": "Atlas Obscura",
+      "outlet_url": "https://www.atlasobscura.com",
+      "title": "This website reimagines cities as foraging utopias",
+      "author": "Liz Susman Karp",
+      "url": "https://www.atlasobscura.com/articles/falling-fruit-urban-foraging-map"
+    }
   ]
 }
