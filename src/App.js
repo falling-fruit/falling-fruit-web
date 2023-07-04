@@ -7,6 +7,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import MainPage from './components/MainPage'
+import RouteTracker from './components/tracking/RouteTracker'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Toast from './components/ui/Toast'
 import { store } from './redux/store'
@@ -27,6 +28,7 @@ const App = () => (
       rtl={false}
     />
     <BrowserRouter>
+      <RouteTracker />
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/">
