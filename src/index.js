@@ -2,6 +2,7 @@ import './i18n'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { setLocale } from 'yup'
 
 import App from './App'
@@ -22,7 +23,9 @@ setLocale({
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 )
