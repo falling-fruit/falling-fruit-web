@@ -11,7 +11,7 @@ export const fetchListLocations = createAsyncThunk(
   async ({ offset, fetchCount = false, extend = false }, { getState }) => {
     const params = selectParams(
       getState(),
-      { limit: 30, offset, photo: true },
+      { limit: 100, offset, photo: true },
       false,
     )
 
