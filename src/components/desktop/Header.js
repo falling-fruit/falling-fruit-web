@@ -10,6 +10,7 @@ import { logout } from '../../redux/authSlice'
 import aboutRoutes from '../about/aboutRoutes'
 import Button from '../ui/Button'
 import ResetButton from '../ui/ResetButton'
+import SocialButtons from '../ui/SocialButtons'
 
 const StyledUser = styled(User)`
   svg {
@@ -40,7 +41,7 @@ const StyledHeader = styled.header`
     ul {
       list-style: none;
       padding: 0;
-      margin: 0 10px 0 0;
+      margin: 0 0 0 0;
       height: 100%;
       display: flex;
 
@@ -177,6 +178,32 @@ const SignupButton = styled(Button)`
   color: ${({ theme }) => theme.background};
 `
 
+const StyledSocialButtons = styled(SocialButtons)`
+  margin: 0 5px;
+
+  a {
+    color: ${({ theme }) => theme.text};
+    position: relative;
+    display: inline-block;
+    padding: 12px 0;
+
+    &:hover::before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      background-color: #ffa41b;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  svg {
+    height: 32px;
+    margin: 0 2px;
+  }
+`
+
 // TODO: Clean up file structure (i.e. logo_white.svg) from ./public
 const Header = () => {
   const { t } = useTranslation()
@@ -195,66 +222,71 @@ const Header = () => {
   return (
     <StyledHeader>
       <LogoLink to="/map">
-        <img src="/logo_orange.svg" alt="Falling Fruit Logo" />
+        <img src="/logo_orange.svg" alt="Falling Fruit logo" />
       </LogoLink>
       <nav>
-        <ul>
-          <li>
-            <NavLink to="/map" activeClassName="active">
-              {t('glossary.map')}
-            </NavLink>
-          </li>
-          <li>
-            <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
-              <NavLink to="/about" activeClassName="active">
-                {t('pages.project')}
-              </NavLink>
-              <NavLink to="/data" activeClassName="active">
-                {t('pages.data')}
-              </NavLink>
-              <NavLink to="/sharing" activeClassName="active">
-                {t('pages.sharing')}
-              </NavLink>
-              <NavLink to="/press" activeClassName="active">
-                {t('pages.press')}
-              </NavLink>
-            </StyledDropdown>
-          </li>
-        </ul>
-        <ul>
-          {user ? (
+        <div style={{ marginRight: 'auto' }}>
+          <ul>
             <li>
-              <StyledDropdown
-                label={
-                  <>
-                    <StyledUser height={15} /> {user.name || user.email}
-                  </>
-                }
-                isMatch={isAccountPage}
-              >
-                <NavLink to="/users/edit" activeClassName="active">
-                  {t('glossary.account')}
+              <NavLink to="/map" activeClassName="active">
+                {t('glossary.map')}
+              </NavLink>
+            </li>
+            <li>
+              <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
+                <NavLink to="/about" activeClassName="active">
+                  {t('pages.project')}
                 </NavLink>
-                <ResetButton onClick={handleLogout}>
-                  {t('glossary.logout')}
-                </ResetButton>
+                <NavLink to="/data" activeClassName="active">
+                  {t('pages.data')}
+                </NavLink>
+                <NavLink to="/sharing" activeClassName="active">
+                  {t('pages.sharing')}
+                </NavLink>
+                <NavLink to="/press" activeClassName="active">
+                  {t('pages.press')}
+                </NavLink>
               </StyledDropdown>
             </li>
-          ) : (
-            <>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            {user ? (
               <li>
-                <NavLink to="/users/sign_in" activeClassName="active">
-                  {t('users.sign_in')}
-                </NavLink>
+                <StyledDropdown
+                  label={
+                    <>
+                      <StyledUser height={15} /> {user.name || user.email}
+                    </>
+                  }
+                  isMatch={isAccountPage}
+                >
+                  <NavLink to="/users/edit" activeClassName="active">
+                    {t('glossary.account')}
+                  </NavLink>
+                  <ResetButton onClick={handleLogout}>
+                    {t('glossary.logout')}
+                  </ResetButton>
+                </StyledDropdown>
               </li>
-              <li>
-                <NavLink to="/users/sign_up" activeClassName="active">
-                  <SignupButton>{t('glossary.sign_up')}</SignupButton>
-                </NavLink>
-              </li>
-            </>
-          )}
-        </ul>
+            ) : (
+              <>
+                <li>
+                  <NavLink to="/users/sign_in" activeClassName="active">
+                    {t('users.sign_in')}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/users/sign_up" activeClassName="active">
+                    <SignupButton>{t('glossary.sign_up')}</SignupButton>
+                  </NavLink>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+        <StyledSocialButtons />
       </nav>
     </StyledHeader>
   )

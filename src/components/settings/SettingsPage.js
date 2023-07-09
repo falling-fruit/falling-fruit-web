@@ -11,6 +11,7 @@ import LabeledRow from '../ui/LabeledRow'
 import ListEntry from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
+import SocialButtons from '../ui/SocialButtons'
 import Bicycling from './mapTiles/bicycling.png'
 import Road from './mapTiles/road.png'
 import Satellite from './mapTiles/satellite.png'
@@ -53,6 +54,20 @@ const StyledListEntry = styled(ListEntry)`
 
   :not(:last-child) {
     margin-bottom: 7px;
+  }
+`
+
+const StyledSocialButtons = styled(SocialButtons)`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    color: ${({ theme }) => theme.text};
+  }
+
+  svg {
+    height: 32px;
   }
 `
 
@@ -228,6 +243,7 @@ const SettingsPage = ({ desktop }) => {
       {!desktop && (
         <>
           <h3>{t('glossary.about')}</h3>
+          <StyledSocialButtons />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
             primaryText={t('pages.project')}
