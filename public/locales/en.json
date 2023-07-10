@@ -69,7 +69,10 @@
     "new_password_confirmation": "New password confirmation",
     "change_password": "Change my password",
     "edit_account": "Edit account",
-    "current_password": "Current password"
+    "current_password": "Current password",
+    "options": {
+      "announcements_email": "Receive emails with important announcements and opportunities (1-2 per year)"
+    }
   },
   "form": {
     "button": {

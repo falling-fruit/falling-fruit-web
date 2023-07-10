@@ -11,8 +11,9 @@ import { editUser, getUser } from '../../utils/api'
 import { getPathWithMapState } from '../../utils/getInitialUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
-import { Input, Textarea } from '../form/FormikWrappers'
+import { Checkbox, Input, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
+import LabeledRow from '../ui/LabeledRow'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import {
   ErrorMessage,
@@ -26,6 +27,7 @@ const formToUser = ({
   bio,
   new_password,
   password_confirmation,
+  announcements_email,
   range,
 }) => ({
   email,
@@ -33,6 +35,7 @@ const formToUser = ({
   bio: bio || null,
   password: new_password || null,
   password_confirmation: password_confirmation || null,
+  announcements_email: announcements_email,
   range: range,
 })
 
@@ -43,6 +46,7 @@ const userToForm = (user) => ({
   new_password: '',
   new_password_confirm: '',
   password_confirmation: '',
+  announcements_email: user.announcements_email,
 })
 
 const AccountPage = () => {
@@ -130,7 +134,17 @@ const AccountPage = () => {
                     />
 
                     <Textarea name="bio" label={t('users.bio')} />
-
+                  </FormInputWrapper>
+                  <LabeledRow
+                    label={
+                      <label htmlFor="announcements_email">
+                        {t('users.options.announcements_email')}
+                      </label>
+                    }
+                    left={<Checkbox name="announcements_email" />}
+                    style={{ margin: '16px 0 8px 0' }}
+                  />
+                  <FormInputWrapper>
                     <Input
                       name="new_password"
                       type="password"

@@ -8,8 +8,9 @@ import * as Yup from 'yup'
 import { addUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
-import { Input, Recaptcha, Textarea } from '../form/FormikWrappers'
+import { Checkbox, Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
+import LabeledRow from '../ui/LabeledRow'
 import {
   ErrorMessage,
   FormButtonWrapper,
@@ -63,6 +64,7 @@ const SignupPage = () => {
             password_confirm: '',
             name: '',
             bio: '',
+            announcements_email: true,
           }}
           validationSchema={Yup.object({
             email: Yup.string().email().required(),
@@ -117,6 +119,15 @@ const SignupPage = () => {
 
                 <Textarea name="bio" label={t('users.bio')} />
               </FormInputWrapper>
+              <LabeledRow
+                label={
+                  <label htmlFor="announcements_email">
+                    {t('users.options.announcements_email')}
+                  </label>
+                }
+                left={<Checkbox name="announcements_email" />}
+                style={{ margin: '16px 0' }}
+              />
 
               <Recaptcha
                 name="g-recaptcha-response"

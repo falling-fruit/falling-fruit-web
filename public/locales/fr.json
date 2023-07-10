@@ -69,7 +69,10 @@
     "new_password_confirmation": "Confirmation du nouveau mot de passe",
     "change_password": "Modifier mon mot de passe",
     "edit_account": "Modifier mon compte",
-    "current_password": "Mot de passe actuel"
+    "current_password": "Mot de passe actuel",
+    "options": {
+      "announcements_email": "Recevoir des e-mails pour des annonces importantes ou des opportunités (1 ou 2 fois par an)"
+    }
   },
   "form": {
     "button": {
