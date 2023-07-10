@@ -14,7 +14,7 @@ i18n
   .use(LanguageDetector)
   .init({
     react: {
-      useSuspense: false,
+      useSuspense: true,
     },
     supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
     fallbackLng: 'en', // default language if no language is detected by LanguageDetector
