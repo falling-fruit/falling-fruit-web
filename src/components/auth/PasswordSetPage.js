@@ -39,13 +39,13 @@ const PasswordSetPage = () => {
     return <Redirect to={getPathWithMapState('/map')} />
   }
 
-  const handleSubmit = async ({ new_password }) => {
+  const handleSubmit = async ({ password }) => {
     try {
       const { email } = await resetPassword({
-        password: new_password,
+        password: password,
         token: getResetToken(),
       })
-      toast.success(t('devise.passwords.updated'), {
+      toast.success(t('devise.passwords.updated_not_active'), {
         autoClose: 5000,
       })
       history.push({ pathname: '/users/sign_in', state: { email } })
