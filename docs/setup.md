@@ -1,19 +1,49 @@
 # Setup
 
-To run locally:
+- Clone the repo and change into the new directory.
 
-1. Clone the repo: `git clone https://github.com/falling-fruit/falling-fruit-web`
+  ```sh
+  git clone https://github.com/falling-fruit/falling-fruit-web
+  cd falling-fruit-web
+  ```
 
-2. Setup environment variables: `cp example.env .env`, then edit and fill in `.env`.
+- Install [`node`](https://nodejs.org). The version must be compatible with the `engines.node` requirement in `package.json`. We recommend installing and managing `node` versions using [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
 
-   - `REACT_APP_API_URL`: URL for [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api). Use https://fallingfruit.org/api/0.3 for the production API or http://localhost:3300/api/0.3 (by default) if running locally.
+  ```sh
+  nvm install 16.20.2
+  nvm use 16.20.2
+  ```
 
-   - `REACT_APP_API_KEY`: API key for [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api). Use `AKDJGHSD` for the production API or any value in column `api_keys.api_key` if running [falling-fruit](https://github.com/falling-fruit/falling-fruit) locally (see [database seeds](https://github.com/falling-fruit/falling-fruit/blob/main/db/seeds.rb)).
+- Install [`yarn`](https://classic.yarnpkg.com/en/docs/install). This is best done using `npm` (bundled with `node`):
 
-   - `REACT_APP_RECAPTCHA_SITE_KEY`: Site key for [reCAPTCHA v3](https://developers.google.com/recaptcha/intro). Use `6Ld99kUdAAAAAAB5nCofKrQB6Vp-e5wR42u5TNZZ` for the production API or the site key matching the secret key if running [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api) locally. reCAPTCHA is only required for adding and editing content as an anonymous (unauthenticated) user.
+  ```sh
+  npm install --global yarn
+  ```
 
-   - `REACT_APP_GOOGLE_MAPS_API_KEY`: Your own API key for [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key).
+- Install dependencies.
 
-3. Install dependencies: `yarn`
+  ```sh
+  yarn
+  ```
 
-4. Run: `yarn start`
+- Initialize your private `.env` file.
+
+  ```sh
+  cp example.env .env
+  ```
+
+- Set environment variables in `.env`.
+
+  - `REACT_APP_API_URL`: URL for [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api). Use https://fallingfruit.org/api/0.3 for the production API or http://localhost:3300/api/0.3 (by default) if running locally.
+
+  - `REACT_APP_API_KEY`: API key for [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api). Use `AKDJGHSD` for the production API or any value in column `api_keys.api_key` if running [falling-fruit](https://github.com/falling-fruit/falling-fruit) locally (see [database seeds](https://github.com/falling-fruit/falling-fruit/blob/main/db/seeds.rb)).
+
+  - `REACT_APP_RECAPTCHA_SITE_KEY`: Site key for [reCAPTCHA v3](https://developers.google.com/recaptcha/intro). Use `6Ld99kUdAAAAAAB5nCofKrQB6Vp-e5wR42u5TNZZ` for the production API or the site key matching the secret key if running [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api) locally. reCAPTCHA is only required for adding and editing content as an anonymous (unauthenticated) user.
+
+  - `REACT_APP_GOOGLE_MAPS_API_KEY`: Your own API key for [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key).
+
+- Start the application.
+
+  ```sh
+  yarn start
+  ```
