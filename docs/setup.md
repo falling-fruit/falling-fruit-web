@@ -7,14 +7,16 @@
   cd falling-fruit-web
   ```
 
-- Install [`node`](https://nodejs.org). The version must be compatible with the `engines.node` requirement in `package.json`. We recommend installing and managing `node` versions using [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
+- Install the [`node`](https://nodejs.org) version specified in the `.nvmrc` file. This is easiest using [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
 
   ```sh
-  nvm install 16.20.2
-  nvm use 16.20.2
+  # Install node version specified in .nvmrc
+  nvm install
+  # Use node version specified in .nvmrc
+  nvm use
   ```
 
-- Install [`yarn`](https://classic.yarnpkg.com/en/docs/install). This is best done using `npm` (bundled with `node`):
+- Install [`yarn`](https://classic.yarnpkg.com/en/docs/install). This is best done using `npm` (bundled with `node`).
 
   ```sh
   npm install --global yarn
