@@ -23,8 +23,8 @@ export const getAllLocations = createSelector(
     mapClusters.length !== 0
       ? []
       : entryLocation
-      ? unionWith(eqBy(prop('id')), mapLocations, [entryLocation])
-      : mapLocations,
+        ? unionWith(eqBy(prop('id')), mapLocations, [entryLocation])
+        : mapLocations,
 )
 
 export const fetchLocations = () => (dispatch, getState) => {

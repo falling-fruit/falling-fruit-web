@@ -53,7 +53,8 @@ const Label = styled.div`
   white-space: nowrap;
   z-index: 1;
 
-  text-shadow: -1px -1px 0 ${({ theme }) => theme.background},
+  text-shadow:
+    -1px -1px 0 ${({ theme }) => theme.background},
     1px -1px 0 ${({ theme }) => theme.background},
     -1px 1px 0 ${({ theme }) => theme.background},
     1px 1px 0 ${({ theme }) => theme.background};
