@@ -4,6 +4,7 @@ import TreeSelect from 'rc-tree-select'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { sortTypes } from '../../utils/buildTypeSchema'
 import { ReactComponent as ArrowIcon } from './arrow.svg'
 
 const TreeSelectContainer = styled.div`
@@ -139,7 +140,7 @@ const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
             height: '100%',
             overflow: 'auto',
           }}
-          treeData={data}
+          treeData={sortTypes(data)}
           value={checkedTypes}
           treeCheckable
           onChange={onChange}

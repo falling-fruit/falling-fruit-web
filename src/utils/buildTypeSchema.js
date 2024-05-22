@@ -167,5 +167,6 @@ export {
   getScientificNameById,
   getTypesWithPendingCategory,
   PENDING_ID,
+  sortTypes,
   updateTreeCounts,
 }
