@@ -28,6 +28,18 @@ Under development as the future replacement of the existing website ([falling-fr
 
 Built with React, Redux, Reach UI, Styled Components, and Formik. Vercel was once used for automatic deployments.
 
+## Local development
+
+We use `yarn` pinned to a specific Node version, which you can manage with `nvm`. An `.env` file provides variables expected by the app.
+
+```
+nvm install 16
+nvm use 16
+yarn install
+cp example.env .env
+yarn start
+```
+
 ## Contributors
 
 Maintained by [Falling Fruit](https://fallingfruit.org/about).
