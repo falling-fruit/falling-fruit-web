@@ -2,11 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
 import {
-  buildTypeSchema,
   getChildrenById,
   getScientificNameById,
-  getTypesWithPendingCategory,
-  PENDING_ID,
 } from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
@@ -34,8 +31,8 @@ export const fetchFilterCounts = createAsyncThunk(
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
+    allTypes: [],
     types: null,
-    treeData: [],
     childrenById: {},
     scientificNameById: {},
     muni: true,
@@ -72,19 +69,10 @@ export const filterSlice = createSlice({
     [updateSelection]: (state, action) => ({ ...state, ...action.payload }),
 
     [fetchAllTypes.fulfilled]: (state, action) => {
-      const typesWithPendingCategory = getTypesWithPendingCategory([
-        ...action.payload,
-        {
-          id: PENDING_ID,
-          parent_id: null,
-          name: 'Pending Review',
-        },
-      ])
-      const childrenById = getChildrenById(typesWithPendingCategory)
-      state.childrenById = childrenById
-      state.treeData = buildTypeSchema(typesWithPendingCategory, childrenById)
-      state.scientificNameById = getScientificNameById(action.payload)
+      state.allTypes = action.payload
       state.types = action.payload.map((t) => `${t.id}`)
+      state.childrenById = getChildrenById(action.payload)
+      state.scientificNameById = getScientificNameById(action.payload)
     },
   },
 })

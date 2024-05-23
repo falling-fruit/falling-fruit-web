@@ -4,6 +4,7 @@ import TreeSelect from 'rc-tree-select'
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 
+import { RC_ROOT_ID } from '../../utils/buildTypeSchema'
 import { ReactComponent as ArrowIcon } from './arrow.svg'
 
 const TreeSelectContainer = styled.div`
@@ -109,7 +110,7 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
+const RCTreeSelect = ({ data, onChange, types, searchValue }) => {
   // useState is necessary instead of useRef in order to restore the container ref whenever the tree re-renders
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
 
@@ -140,12 +141,13 @@ const RCTreeSelect = ({ data, onChange, checkedTypes, searchValue }) => {
             overflow: 'auto',
           }}
           treeData={data}
-          value={checkedTypes}
+          value={types}
           treeCheckable
           onChange={onChange}
           treeDataSimpleMode={{
-            id: 'value',
-            rootPId: 'null',
+            id: 'rcId',
+            pId: 'rcParentId',
+            rootPId: RC_ROOT_ID,
           }}
           treeNodeFilterProp="searchValue"
           open
