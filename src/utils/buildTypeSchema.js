@@ -111,17 +111,14 @@ const constructTypesTreeForSelection = (
 
   typesForSelection.forEach((t) => {
     const { id, parent_id } = t
-    const isParentInSelection = idsOfParents[id]
+    const isParentInSelectionWithOwnValue = idsOfParents[id] && countsById[id]
     const hasParentInSelection = allIdsForSelection[parent_id]
-    const hasOwnCount = countsById[id]
-    if (isParentInSelection && hasOwnCount) {
-      // Add an extra checkbox
-      // (so the user can select just the less specifically annotated
-      // types as well as the whole selection)
+    if (isParentInSelectionWithOwnValue) {
+      // Allow the user to select just the less specifically annotated type
       typesAndParentsForSelection.push({
         ...t,
         count: countsById[id],
-        rcId: `extra-${id}`,
+        rcId: `extra-child-id-${id}`,
         value: `${id}`,
         rcParentId: `${id}`,
       })
@@ -130,7 +127,12 @@ const constructTypesTreeForSelection = (
       ...t,
       count: totalCountsById[id],
       rcId: `${id}`,
-      value: `${id}`,
+      value: isParentInSelectionWithOwnValue
+        ? // Use bogus value to avoid conflict warning
+          // the checkbox still affects the correct value, `${id}`,
+          // because it is the parent of child with that value
+          `extra-group-value-${id}`
+        : `${id}`,
       // The parent is the "Pending Review" if applicable,
       // or parent_id if we decided to display it,
       // or else a special "null" pId that makes it show up at top level
