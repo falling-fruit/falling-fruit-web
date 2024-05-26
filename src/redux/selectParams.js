@@ -32,7 +32,7 @@ export const selectParams = (state, extraParams = {}, isMap = true) => {
     types: types && types.join(','),
     muni,
     invasive,
-    ...convertBounds(view.bounds),
+    ...(view.bounds && convertBounds(view.bounds)),
     ...(!isMap && convertCenter(view.center)),
     ...extraParams,
   }

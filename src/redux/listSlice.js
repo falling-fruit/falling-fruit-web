@@ -1,10 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
+import { parseUrl } from '../utils/getInitialUrl'
 import { setReducer, viewChange } from './mapSlice'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
+
+const { _, ...initialView } = parseUrl()
 
 export const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
@@ -30,7 +33,7 @@ export const listSlice = createSlice({
     isLoading: false,
     totalCount: null,
     offset: 0,
-    view: null, // Represents what view is used for the list
+    view: initialView,
     isViewSearched: false,
     shouldFetchNewLocations: false,
     updateOnMapMove: true,
@@ -59,6 +62,10 @@ export const listSlice = createSlice({
     [fetchListLocations.pending]: (state) => {
       state.shouldFetchNewLocations = false
       state.isLoading = true
+    },
+    [fetchListLocations.rejected]: (state) => {
+      // temporary aid for #347
+      console.log('fetchListLocations.rejected', state)
     },
     [fetchListLocations.fulfilled]: (state, action) => {
       const { extend, offset, locations, count } = action.payload
