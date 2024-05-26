@@ -1,5 +1,4 @@
 import { CurrentLocation, LoaderAlt } from '@styled-icons/boxicons-regular'
-import { XCircle } from '@styled-icons/boxicons-solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { keyframes } from 'styled-components'
 import styled from 'styled-components/macro'
@@ -25,7 +24,7 @@ const getTrackLocationColor = ({ disabled, $active }) =>
 
 const TrackLocationIcon = ({ disabled, $loading, ...props }) => {
   if (disabled) {
-    return <XCircle {...props} /> // TODO: replace this with a specific "disabled geolocation" icon, like Google Maps has
+    return <CurrentLocation opacity="0.5" {...props} />
   } else if ($loading) {
     return <SpinningLoader {...props} />
   } else {
@@ -72,6 +71,9 @@ const TrackLocationButton = ({ isIcon }) => {
   const isTrackingLocation = useSelector(
     (state) => state.map.isTrackingLocation,
   )
+  const userDeniedLocation = useSelector(
+    (state) => state.map.userDeniedLocation,
+  )
 
   const TrackLocationBtn = isIcon
     ? TrackLocationIconButton
@@ -79,7 +81,7 @@ const TrackLocationButton = ({ isIcon }) => {
 
   return (
     <TrackLocationBtn
-      disabled={geolocation?.error}
+      disabled={userDeniedLocation}
       $loading={geolocation?.loading}
       $active={isTrackingLocation}
       onClick={() => {
