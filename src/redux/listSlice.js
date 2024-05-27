@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
-import { setReducer, viewChange } from './mapSlice'
-import { searchView } from './searchView'
+import { viewChange } from './mapSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
@@ -34,29 +33,19 @@ export const listSlice = createSlice({
     totalCount: null,
     offset: 0,
     view: initialView,
-    isViewSearched: false,
     shouldFetchNewLocations: false,
-    updateOnMapMove: true,
     locations: [],
   },
   reducers: {
-    setUpdateOnMapMove: setReducer('updateOnMapMove'),
     clearListLocations: (state) => {
       state.locations = []
     },
   },
   extraReducers: {
     [viewChange.type]: (state, action) => {
-      if (state.updateOnMapMove || state.isViewSearched) {
-        // If updateOnMapMove flag/checkbox is unchecked, then the list view is only updated when a new location is "searched"
-        state.view = action.payload
-        state.shouldFetchNewLocations = true
-      }
-      state.isViewSearched = false
-    },
-
-    [searchView.type]: (state) => {
-      state.isViewSearched = true
+      // When the map changes, sync the center+zoom+bounds setup
+      // so the list view corresponds to what the user just saw
+      state.view = action.payload
     },
 
     [fetchListLocations.pending]: (state) => {
@@ -90,6 +79,6 @@ export const listSlice = createSlice({
   },
 })
 
-export const { setUpdateOnMapMove, clearListLocations } = listSlice.actions
+export const { clearListLocations } = listSlice.actions
 
 export default listSlice.reducer
