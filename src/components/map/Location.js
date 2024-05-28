@@ -62,7 +62,6 @@ const Label = styled.div`
 
 const Location = memo(({ label, selected, ...props }) => (
   <>
-    {/* "selected" will be used in a future PR which will put a pin on the location when it's clicked */}
     {selected && <MapPin />}
     <LocationButton {...props} />
     <Label>{label}</Label>

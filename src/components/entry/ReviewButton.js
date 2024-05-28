@@ -7,7 +7,7 @@ import Button from '../ui/Button'
 
 export const ReviewButton = (props) => {
   const history = useAppHistory()
-  const { id } = useParams()
+  const { locationId } = useParams()
   const isDesktop = useIsDesktop()
 
   return (
@@ -18,7 +18,7 @@ export const ReviewButton = (props) => {
           window.location.hash = ''
           window.location.hash = 'review'
         } else {
-          history.push(`/locations/${id}/review`)
+          history.push(`/locations/${locationId}/review`)
         }
       }}
       {...props}

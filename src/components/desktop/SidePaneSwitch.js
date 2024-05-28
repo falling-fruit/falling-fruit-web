@@ -15,10 +15,10 @@ const SidePaneSwitch = () => (
     <Route>
       <NavPane>
         <Switch>
-          <Route path="/locations/:id/edit">
+          <Route path="/locations/:locationId/edit">
             <EditLocationPage />
           </Route>
-          <Route path="/reviews/:id/edit">
+          <Route path="/locations/:locationId/edit-review/:reviewId">
             <EditReviewPage />
           </Route>
           <Route path="/locations/new">
@@ -27,7 +27,7 @@ const SidePaneSwitch = () => (
           <Route path="/settings">
             <SettingsPage desktop />
           </Route>
-          <Route path={['/locations/:id', '/locations/:id']}>
+          <Route path="/locations/:locationId">
             <EntryWrapper desktop />
           </Route>
           <Route>

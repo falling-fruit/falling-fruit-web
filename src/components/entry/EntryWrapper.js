@@ -19,20 +19,20 @@ const EntryWrapper = ({ desktop }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState([0, 0])
-  const { id } = useParams()
+  const { locationId } = useParams()
 
   useEffect(() => {
     async function fetchEntryData() {
       setIsLoading(true)
 
       try {
-        const locationData = await getLocationById(id, 'reviews')
+        const locationData = await getLocationById(locationId, 'reviews')
 
         dispatch(updateEntryLocation(locationData))
         setReviews(locationData.reviews)
         setIsLoading(false)
       } catch {
-        toast.error(`Entry #${id} not found`, {
+        toast.error(`Entry #${locationId} not found`, {
           autoClose: 5000,
         })
         setIsError(true)
@@ -40,7 +40,7 @@ const EntryWrapper = ({ desktop }) => {
     }
 
     fetchEntryData()
-  }, [id, dispatch])
+  }, [locationId, dispatch])
 
   const addSubmittedReview = (submittedReview) => {
     setReviews((reviews) => [...reviews, submittedReview])

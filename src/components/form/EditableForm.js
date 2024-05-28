@@ -9,29 +9,29 @@ import { ReviewForm, reviewToForm } from './ReviewForm'
 
 const EditableForm = ({
   Form,
+  editingId,
   getFormData,
   convertFormData,
   getRedirectLink,
   ...props
 }) => {
-  const { id } = useParams()
   const history = useAppHistory()
 
   const [formData, setFormData] = useState(null)
 
   useEffect(() => {
     const loadReview = async () => {
-      setFormData(await getFormData(id))
+      setFormData(await getFormData(editingId))
     }
 
     loadReview()
-  }, [id, getFormData])
+  }, [editingId, getFormData])
 
   return (
     formData && (
       <Form
         initialValues={convertFormData(formData)}
-        editingId={id}
+        editingId={editingId}
         onSubmit={() => history.push(getRedirectLink(formData))}
         {...props}
       />
@@ -39,17 +39,21 @@ const EditableForm = ({
   )
 }
 
-export const EditReviewForm = (props) => (
-  <EditableForm
-    Form={ReviewForm}
-    getFormData={getReviewById}
-    convertFormData={(review) => ({
-      review: reviewToForm(review),
-    })}
-    getRedirectLink={(review) => `/locations/${review.location_id}`}
-    {...props}
-  />
-)
+export const EditReviewForm = (props) => {
+  const { reviewId } = useParams()
+  return (
+    <EditableForm
+      Form={ReviewForm}
+      editingId={reviewId}
+      getFormData={getReviewById}
+      convertFormData={(review) => ({
+        review: reviewToForm(review),
+      })}
+      getRedirectLink={(review) => `/locations/${review.location_id}`}
+      {...props}
+    />
+  )
+}
 
 export const EditReviewPage = () => (
   <Page>
@@ -60,15 +64,19 @@ export const EditReviewPage = () => (
   </Page>
 )
 
-export const EditLocationForm = (props) => (
-  <EditableForm
-    Form={LocationForm}
-    getFormData={getLocationById}
-    convertFormData={locationToForm}
-    getRedirectLink={(location) => `/locations/${location.id}`}
-    {...props}
-  />
-)
+export const EditLocationForm = (props) => {
+  const { locationId } = useParams()
+  return (
+    <EditableForm
+      Form={LocationForm}
+      editingId={locationId}
+      getFormData={getLocationById}
+      convertFormData={locationToForm}
+      getRedirectLink={(location) => `/locations/${location.id}`}
+      {...props}
+    />
+  )
+}
 
 export const EditLocationPage = () => (
   <Page>

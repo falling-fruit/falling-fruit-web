@@ -29,14 +29,14 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
   const match = useRouteMatch({
-    path: ['/locations/:entryId/:nextSegment', '/locations/:entryId'],
+    path: ['/locations/:locationId/:nextSegment', '/locations/:locationId'],
   })
 
-  const isAddingLocation = match?.params.entryId === 'new'
-  const entryId = match?.params.entryId && parseInt(match.params.entryId)
+  const isAddingLocation = match?.params.locationId === 'new'
+  const locationId = match?.params.locationId && parseInt(match.params.locationId)
   // distinguish viewing a location from having it displayed during e.g. editing or review
   const isViewingLocation =
-    entryId && match.params.nextSegment?.indexOf('@') === 0
+    locationId && match.params.nextSegment?.indexOf('@') === 0
 
   const { getCommonName } = useTypesById()
   const dispatch = useDispatch()
@@ -106,7 +106,7 @@ const MapPage = ({ isDesktop }) => {
                 typeName: getCommonName(location.type_ids[0]),
               }))
         }
-        activeLocationId={entryId || hoveredLocationId}
+        activeLocationId={locationId || hoveredLocationId}
         onViewChange={(newView) => {
           dispatch(viewChangeAndFetch(newView))
         }}

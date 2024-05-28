@@ -33,7 +33,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
               onImageClick={onReviewImageClick}
               onEditClick={() =>
                 history.push({
-                  pathname: `/reviews/${review.id}/edit`,
+                  pathname: `/locations/${review.location_id}/edit-review/${review.id}`,
                   state: {
                     fromPage: history.location.pathname,
                   },

@@ -61,21 +61,25 @@ const MobileLayout = () => {
         <Switch>
           {aboutRoutes}
           {authRoutes}
-          <Route path="/reviews/:id/edit">
+          <Route path="/locations/:locationId/edit-review/:reviewId">
             {({ match }) => (
-              <EditReviewForm stepped editingId={match.params.id} />
+              <EditReviewForm stepped editingId={match.params.reviewId} />
             )}
           </Route>
-          <Route path="/locations/:id/review">
+          <Route path="/locations/:locationId/review">
             {({ match }) => (
               <ReviewForm
                 stepped
-                onSubmit={() => history.push(`/locations/${match.params.id}`)}
+                onSubmit={() =>
+                  history.push(`/locations/${match.params.locationId}`)
+                }
               />
             )}
           </Route>
-          <Route path="/locations/:id/edit">
-            {({ match }) => <EditLocationForm editingId={match.params.id} />}
+          <Route path="/locations/:locationId/edit">
+            {({ match }) => (
+              <EditLocationForm editingId={match.params.locationId} />
+            )}
           </Route>
           <Route path="/locations/new/details">
             <LocationForm />
@@ -83,7 +87,7 @@ const MobileLayout = () => {
           <Route path={['/map', '/locations', '/list', '/settings']}>
             <Switch>
               <Route path="/locations/new" />
-              <Route path="/locations/:id">
+              <Route path="/locations/:locationId">
                 {!streetView && <EntryWrapper />}
               </Route>
             </Switch>
@@ -104,9 +108,9 @@ const MobileLayout = () => {
       <Switch>
         <Route
           path={[
-            '/reviews/:id/edit',
-            '/locations/:id/review',
-            '/locations/:id/edit',
+            '/locations/:locationId/edit-review/:reviewId',
+            '/locations/:locationId/review',
+            '/locations/:locationId/edit',
             '/locations/new/details',
           ]}
         />
@@ -117,9 +121,9 @@ const MobileLayout = () => {
       <Switch>
         <Route
           path={[
-            '/reviews/:id/edit',
-            '/locations/:id/review',
-            '/locations/:id/edit',
+            '/locations/:locationId/edit-review/:reviewId',
+            '/locations/:locationId/review',
+            '/locations/:locationId/edit',
             '/locations/new/details',
           ]}
         />
