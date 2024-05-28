@@ -29,11 +29,14 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
   const match = useRouteMatch({
-    path: '/locations/:entryId',
+    path: ['/locations/:entryId/:nextSegment', '/locations/:entryId'],
   })
 
   const isAddingLocation = match?.params.entryId === 'new'
   const entryId = match?.params.entryId && parseInt(match.params.entryId)
+  // distinguish viewing a location from having it displayed during e.g. editing or review
+  const isViewingLocation =
+    entryId && match.params.nextSegment?.indexOf('@') === 0
 
   const { getCommonName } = useTypesById()
   const dispatch = useDispatch()
@@ -60,6 +63,11 @@ const MapPage = ({ isDesktop }) => {
       pathname: `/locations/${location.id}`,
       state: { fromPage: '/map' },
     })
+  }
+  const stopViewingLocation = () => {
+    if (isViewingLocation) {
+      history.push('/map')
+    }
   }
 
   const handleAddLocationClick = () => {
@@ -109,6 +117,7 @@ const MapPage = ({ isDesktop }) => {
         }}
         onLocationClick={handleLocationClick}
         onClusterClick={(cluster) => dispatch(clusterClick(cluster))}
+        onNonspecificClick={() => dispatch(stopViewingLocation)}
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
         showLabels={settings.showLabels}

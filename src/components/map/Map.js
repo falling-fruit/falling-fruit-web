@@ -59,6 +59,7 @@ const Map = ({
   onGeolocationClick,
   onClusterClick,
   onLocationClick,
+  onNonspecificClick,
   onViewChange,
   showLabels,
   mapType,
@@ -170,6 +171,10 @@ const Map = ({
         </StreetViewUIWrapper>
       )}
       <GoogleMapReact
+        onClick={({ event }) => {
+          onNonspecificClick()
+          event.stopPropagation()
+        }}
         bootstrapURLKeys={bootstrapURLKeys}
         options={() => ({
           mapTypeId: mapType,
