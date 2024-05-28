@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { getLocationById, getReviewById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -9,6 +10,7 @@ import { ReviewForm, reviewToForm } from './ReviewForm'
 
 const EditableForm = ({
   Form,
+  entityName,
   editingId,
   getFormData,
   convertFormData,
@@ -21,11 +23,17 @@ const EditableForm = ({
 
   useEffect(() => {
     const loadReview = async () => {
+      try {
+        const formData = await getFormData(editingId)
+        setFormData(formData)
+      } catch (error) {
+        toast.error(`${entityName} #${editingId} not found`)
+      }
       setFormData(await getFormData(editingId))
     }
 
     loadReview()
-  }, [editingId, getFormData])
+  }, [entityName, editingId, getFormData])
 
   return (
     formData && (
@@ -44,6 +52,7 @@ export const EditReviewForm = (props) => {
   return (
     <EditableForm
       Form={ReviewForm}
+      entityName="Review"
       editingId={reviewId}
       getFormData={getReviewById}
       convertFormData={(review) => ({
@@ -69,6 +78,7 @@ export const EditLocationForm = (props) => {
   return (
     <EditableForm
       Form={LocationForm}
+      entityName="Location"
       editingId={locationId}
       getFormData={getLocationById}
       convertFormData={locationToForm}

@@ -32,7 +32,7 @@ const EntryWrapper = ({ desktop }) => {
         setReviews(locationData.reviews)
         setIsLoading(false)
       } catch {
-        toast.error(`Entry #${locationId} not found`, {
+        toast.error(`Location #${locationId} not found`, {
           autoClose: 5000,
         })
         setIsError(true)
