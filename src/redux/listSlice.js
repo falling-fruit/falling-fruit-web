@@ -2,11 +2,20 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
+import { getZoomedOutView } from '../utils/viewportBounds'
 import { viewChange } from './mapSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
+// We usually show a list corresponding to a previously seen map view
+// but we want to be able to show a list on first load if e.g. a page is refreshed
+// so approximate a view
 const { _, ...initialView } = parseUrl()
+// TODO not correct, because the zoom level is actually specified in the URL :)
+initialView.bounds = getZoomedOutView(
+  initialView.center.lat,
+  initialView.center.lng,
+)
 
 export const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
