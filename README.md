@@ -28,7 +28,6 @@ Under development as the future replacement of the existing website ([falling-fr
 
 Built with React, Redux, Reach UI, Styled Components, and Formik. Vercel was once used for automatic deployments.
 
-
 ## Contributors
 
 Maintained by [Falling Fruit](https://fallingfruit.org/about).
