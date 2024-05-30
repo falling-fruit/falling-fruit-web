@@ -71,6 +71,7 @@ const Search = (props) => {
   const filterOpen = useSelector((state) => state.filter.isOpen)
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
+
   const descriptionToPlaceId = useRef({})
 
   const {
@@ -113,15 +114,17 @@ const Search = (props) => {
   const handleSelect = async (description) => {
     setValue(description, false)
     if (descriptionToPlaceId.current[description]) {
-      dispatch(
-        searchView(
-          await getPlaceBounds(descriptionToPlaceId.current[description]),
-        ),
+      // e.g. search for "Parliament Square"
+      const placeBounds = await getPlaceBounds(
+        descriptionToPlaceId.current[description],
       )
+      dispatch(searchView(placeBounds))
     } else {
+      // e.g. search for "51.5074, -0.1278"
       const latitude = Number(description.split(',')[0])
       const longitude = Number(description.split(',')[1])
-      dispatch(searchView(getZoomedInView(latitude, longitude)))
+      const zoomedInView = getZoomedInView(latitude, longitude)
+      dispatch(searchView(zoomedInView))
     }
   }
   const { t } = useTranslation()

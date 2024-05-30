@@ -164,7 +164,11 @@ export const mapSlice = createSlice({
     },
 
     [searchView.type]: (state, action) => {
-      state.view = fitBounds(action.payload, state.view.size)
+      if (state.view.size) {
+        state.view = fitBounds(action.payload, state.view.size)
+      } else {
+        console.log('Map is not available yet - discarding: ', action.payload)
+      }
     },
 
     [fetchMapLocations.pending]: (state) => {
