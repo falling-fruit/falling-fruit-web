@@ -113,7 +113,8 @@ export const mapSlice = createSlice({
         // Loading
       } else if (action.payload.error) {
         if (action.payload.error.code === 1) {
-          // code 1 of GeolocationPositionError means user denied location
+          // code 1 of GeolocationPositionError means user denied location request
+          // browsers will block subsequent requests so disable the setting
           state.userDeniedLocation = true
         } else {
           // Treat code 2, internal error, as fatal
@@ -125,6 +126,8 @@ export const mapSlice = createSlice({
             toast.error(
               `Geolocation failed: ${action.payload.error.message}. Please refresh the page and retry`,
             )
+          } else {
+            // We already toasted
           }
         }
         state.isTrackingLocation = false
