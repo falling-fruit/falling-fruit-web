@@ -6,21 +6,16 @@ import { matchPath } from 'react-router'
 import { paths } from './apiSchema'
 import authStore from './authStore'
 
-const apiUrl = process.env.REACT_APP_API_URL
-const apiKey = process.env.REACT_APP_API_KEY
-
-if (!apiUrl) {
-  throw new Error('Missing environment variable: REACT_APP_API_URL')
-}
-
-if (!apiKey) {
-  throw new Error('Missing environment variable: REACT_APP_API_KEY')
+for (const key of ['REACT_APP_API_URL', 'REACT_APP_API_KEY']) {
+  if (!process.env[key]) {
+    throw new Error(`Missing environment variable: ${key}`)
+  }
 }
 
 const instance = axios.create({
-  baseURL: apiUrl,
+  baseURL: process.env.REACT_APP_API_URL,
   params: {
-    api_key: apiKey,
+    api_key: process.env.REACT_APP_API_KEY,
   },
 })
 
