@@ -86,12 +86,15 @@ const TrackLocationButton = ({ isIcon }) => {
       userDeniedLocation={userDeniedLocation}
       $loading={geolocation?.loading}
       $active={isTrackingLocation}
-      onClick={() => {
-        userDeniedLocation
-          ? toast.info(
-              'Permission to access location was denied. To enable geolocation, check browser settings.',
-            )
-          : dispatch(startTrackingLocation())
+      onClick={(event) => {
+        if (userDeniedLocation) {
+          toast.info(
+            'Permission to access location was denied. To enable geolocation, check browser settings.',
+          )
+        } else {
+          dispatch(startTrackingLocation())
+        }
+        event.stopPropagation()
       }}
     />
   )
