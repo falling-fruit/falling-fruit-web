@@ -16,7 +16,7 @@ const LocationNav = () => {
 
   return (
     <Switch>
-      <Route path="/locations/:locationId/edit-review/:reviewId">
+      <Route path="/reviews/:reviewId/edit">
         {() => (
           <TopBarNav
             onBack={(event) => {

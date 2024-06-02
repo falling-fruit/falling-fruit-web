@@ -19,7 +19,7 @@ const SidePaneSwitch = () => (
           <Route path="/locations/:locationId/edit">
             <EditLocationPage />
           </Route>
-          <Route path="/locations/:locationId/edit-review/:reviewId">
+          <Route path="/reviews/:reviewId/edit">
             <EditReviewPage />
           </Route>
           <Route path="/locations/new">

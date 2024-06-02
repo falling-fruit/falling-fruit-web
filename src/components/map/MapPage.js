@@ -28,15 +28,27 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 
 const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
-  const match = useRouteMatch({
+  const locationRouteMatch = useRouteMatch({
     path: ['/locations/:locationId/:nextSegment', '/locations/:locationId'],
   })
-
-  const isAddingLocation = match?.params.locationId === 'new'
-  const locationId = match?.params.locationId && parseInt(match.params.locationId)
-  // distinguish viewing a location from having it displayed during e.g. editing or review
-  const isViewingLocation =
-    locationId && match.params.nextSegment?.indexOf('@') === 0
+  const reviewRouteMatch = useRouteMatch({
+    path: '/reviews/:reviewId/edit',
+  })
+  const locationIdsByReviewId = useSelector(
+    (state) => state.misc.locationIdsByReviewId,
+  )
+  let locationId, isAddingLocation, isViewingLocation
+  if (locationRouteMatch) {
+    locationId = parseInt(locationRouteMatch.params.locationId)
+    isAddingLocation = locationRouteMatch.params.locationId === 'new'
+    isViewingLocation =
+      locationRouteMatch.params.nextSegment?.indexOf('@') === 0
+  } else if (reviewRouteMatch) {
+    const reviewId = parseInt(reviewRouteMatch.params.reviewId)
+    locationId = locationIdsByReviewId[reviewId]
+    isAddingLocation = false
+    isViewingLocation = true
+  }
 
   const { getCommonName } = useTypesById()
   const dispatch = useDispatch()
