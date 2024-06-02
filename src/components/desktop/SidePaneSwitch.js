@@ -1,7 +1,8 @@
 import { Redirect, Route, Switch } from 'react-router-dom'
 
 import EntryWrapper from '../entry/EntryWrapper'
-import { EditLocationPage, EditReviewPage } from '../form/EditableForm'
+import { EditLocationPage } from '../form/EditLocation'
+import { EditReviewPage } from '../form/EditReview'
 import { LocationForm } from '../form/LocationForm'
 import SettingsPage from '../settings/SettingsPage'
 import MainPane from './MainPane'
