@@ -26,10 +26,10 @@ const NavBack = ({ isEntry }) => {
   const { state } = useLocation()
   const { t } = useTranslation()
   // Restrict to integer :id to avoid match to e.g. /locations/new
-  const match = useRouteMatch('/locations/:id(\\d+)')
-  const entryId = match?.params.id
+  const match = useRouteMatch('/locations/:locationId(\\d+)')
+  const entryId = match?.params.locationId
 
-  const isEditingEntry = useRouteMatch('/locations/:id/edit')
+  const isEditingEntry = useRouteMatch('/locations/:locationId/edit')
 
   const handleBackButtonClick = () => {
     // Default to going back to the map. This occurs when the user opens /locations/:id directly

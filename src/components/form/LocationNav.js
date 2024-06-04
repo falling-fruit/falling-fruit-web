@@ -16,7 +16,7 @@ const LocationNav = () => {
 
   return (
     <Switch>
-      <Route path="/reviews/:id/edit">
+      <Route path="/reviews/:reviewId/edit">
         {() => (
           <TopBarNav
             onBack={(event) => {
@@ -27,7 +27,7 @@ const LocationNav = () => {
           />
         )}
       </Route>
-      <Route path="/locations/:id/review">
+      <Route path="/locations/:locationId/review">
         {() => (
           <TopBarNav
             onBack={(event) => {
@@ -38,7 +38,7 @@ const LocationNav = () => {
           />
         )}
       </Route>
-      <Route path="/locations/:id/edit">
+      <Route path="/locations/:locationId/edit">
         {() => (
           <TopBarNav
             onBack={(event) => {

@@ -220,7 +220,7 @@ export const ReviewForm = ({
   initialValues = INITIAL_REVIEW_VALUES,
   editingId = null,
 }) => {
-  const { id: locationId } = useParams()
+  const { locationId } = useParams()
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   const handleSubmit = async (
