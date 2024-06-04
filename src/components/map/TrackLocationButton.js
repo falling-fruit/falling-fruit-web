@@ -89,7 +89,7 @@ const TrackLocationButton = ({ isIcon }) => {
       onClick={(event) => {
         if (userDeniedLocation) {
           toast.info(
-            'Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.'
+            'Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.',
           )
         } else {
           dispatch(startTrackingLocation())
