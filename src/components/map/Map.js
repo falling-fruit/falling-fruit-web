@@ -203,7 +203,7 @@ const Map = ({
         onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
         yesIWantToUseGoogleMapApiInternals
       >
-        {geolocation && !geolocation.loading && (
+        {geolocation && !geolocation.loading && !geolocation.error && (
           <Geolocation
             onClick={onGeolocationClick}
             lat={geolocation.latitude}

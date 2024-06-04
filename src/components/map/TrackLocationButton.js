@@ -1,6 +1,6 @@
 import { CurrentLocation, LoaderAlt } from '@styled-icons/boxicons-regular'
-import { XCircle } from '@styled-icons/boxicons-solid'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { keyframes } from 'styled-components'
 import styled from 'styled-components/macro'
 
@@ -20,12 +20,12 @@ const SpinningLoader = styled(LoaderAlt)`
   animation: 1s linear ${spin} infinite;
 `
 
-const getTrackLocationColor = ({ disabled, $active }) =>
-  $active && !disabled ? 'blue' : 'tertiaryText'
+const getTrackLocationColor = ({ userDeniedLocation, $active }) =>
+  $active && !userDeniedLocation ? 'blue' : 'tertiaryText'
 
-const TrackLocationIcon = ({ disabled, $loading, ...props }) => {
-  if (disabled) {
-    return <XCircle {...props} /> // TODO: replace this with a specific "disabled geolocation" icon, like Google Maps has
+const TrackLocationIcon = ({ userDeniedLocation, $loading, ...props }) => {
+  if (userDeniedLocation) {
+    return <CurrentLocation opacity="0.5" {...props} />
   } else if ($loading) {
     return <SpinningLoader {...props} />
   } else {
@@ -39,9 +39,8 @@ const TrackLocationPrependButton = styled.button.attrs((props) => ({
   padding-left: 3px;
   padding-right: 8px;
 
-  &:enabled {
-    cursor: pointer;
-  }
+  cursor: ${({ userDeniedLocation }) =>
+    userDeniedLocation ? 'help' : 'pointer'};
 
   svg {
     color: ${({ theme, ...props }) => theme[getTrackLocationColor(props)]};
@@ -59,6 +58,8 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
   svg {
     padding: 10px;
   }
+  cursor: ${({ userDeniedLocation }) =>
+    userDeniedLocation ? 'help' : 'pointer'};
 
   position: absolute;
   bottom: 84px;
@@ -72,6 +73,9 @@ const TrackLocationButton = ({ isIcon }) => {
   const isTrackingLocation = useSelector(
     (state) => state.map.isTrackingLocation,
   )
+  const userDeniedLocation = useSelector(
+    (state) => state.map.userDeniedLocation,
+  )
 
   const TrackLocationBtn = isIcon
     ? TrackLocationIconButton
@@ -79,11 +83,18 @@ const TrackLocationButton = ({ isIcon }) => {
 
   return (
     <TrackLocationBtn
-      disabled={geolocation?.error}
+      userDeniedLocation={userDeniedLocation}
       $loading={geolocation?.loading}
       $active={isTrackingLocation}
-      onClick={() => {
-        dispatch(startTrackingLocation())
+      onClick={(event) => {
+        if (userDeniedLocation) {
+          toast.info(
+            'Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.'
+          )
+        } else {
+          dispatch(startTrackingLocation())
+        }
+        event.stopPropagation()
       }}
     />
   )

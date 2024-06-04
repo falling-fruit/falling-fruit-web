@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fitBounds } from 'google-map-react'
 import { eqBy, prop, unionWith } from 'ramda'
+import { toast } from 'react-toastify'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
@@ -8,7 +9,6 @@ import { parseUrl } from '../utils/getInitialUrl'
 import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
-
 /**
  * Initial view state of the map.
  * @constant {Object}
@@ -61,6 +61,7 @@ export const mapSlice = createSlice({
     geolocation: null,
     isTrackingLocation: false,
     justStartedTrackingLocation: false,
+    userDeniedLocation: false,
     locationRequested: false,
     streetView: false,
     location: null,
@@ -111,7 +112,24 @@ export const mapSlice = createSlice({
       if (action.payload.loading) {
         // Loading
       } else if (action.payload.error) {
-        // TODO: send a toast that geolocation isn't working
+        if (action.payload.error.code === 1) {
+          // code 1 of GeolocationPositionError means user denied location request
+          // browsers will block subsequent requests so disable the setting
+          state.userDeniedLocation = true
+        } else {
+          // Treat code 2, internal error, as fatal
+          // Toast the message and suggest a retry
+          //
+          // The last value is code 3, timeout, is unreachable as we use the default of no timeout
+          // @see src/components/map/ConnectedGeolocation.js
+          if (!state.geolocation.error) {
+            toast.error(
+              `Geolocation failed: ${action.payload.error.message}. Please refresh the page and retry`,
+            )
+          } else {
+            // We already toasted
+          }
+        }
         state.isTrackingLocation = false
         state.justStartedTrackingLocation = false
       } else if (state.isTrackingLocation) {
