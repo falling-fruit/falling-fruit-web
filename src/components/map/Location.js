@@ -73,7 +73,7 @@ const Location = memo(({ label, selected, onClick, ...props }) => (
 Location.displayName = 'Location'
 
 Location.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   // TODO: Correct the instance in MapPage
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 }

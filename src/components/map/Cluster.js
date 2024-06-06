@@ -70,7 +70,7 @@ const Cluster = memo(({ onClick, count }) => (
 Cluster.displayName = 'Cluster'
 
 Cluster.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   count: PropTypes.number.isRequired,
 }
 
