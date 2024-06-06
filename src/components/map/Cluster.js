@@ -32,6 +32,7 @@ const ClusterContainer = styled(ResetButton)`
   &:focus {
     outline: none;
   }
+  cursor: ${({ onClick }) => (onClick ? 'pointer' : 'unset')};
 `
 
 /**

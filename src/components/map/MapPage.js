@@ -71,13 +71,16 @@ const MapPage = ({ isDesktop }) => {
   }, [dispatch, isAddingLocation])
 
   const handleLocationClick = isAddingLocation
-    ? null
+    ? undefined
     : (location) => {
         history.push({
           pathname: `/locations/${location.id}`,
           state: { fromPage: '/map' },
         })
       }
+  const handleClusterClick = isAddingLocation
+    ? undefined
+    : (cluster) => dispatch(clusterClick(cluster))
   const stopViewingLocation = () => {
     if (isViewingLocation) {
       history.push('/map')
@@ -126,7 +129,7 @@ const MapPage = ({ isDesktop }) => {
           )
         }}
         onLocationClick={handleLocationClick}
-        onClusterClick={(cluster) => dispatch(clusterClick(cluster))}
+        onClusterClick={handleClusterClick}
         onNonspecificClick={() => dispatch(stopViewingLocation)}
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
