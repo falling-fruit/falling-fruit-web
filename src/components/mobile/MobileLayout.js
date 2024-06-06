@@ -21,12 +21,31 @@ import ListPage from './ListPage'
 import { DEFAULT_TAB, useTabs } from './tabs'
 import TopBarSwitch from './TopBarSwitch'
 
+const shouldDisplayMapPage = (pathname) => {
+  // display the map for map endpoints
+  if (matchPath(pathname, { path: '/map', exact: false, strict: false })) {
+    return true
+  }
+
+  // additionally, also display in the background for some location pages
+  const match = matchPath(pathname, {
+    path: ['/locations/:entryId/:nextSegment', '/locations/:entryId'],
+    exact: false,
+    strict: false,
+  })
+  const isAddingLocation = match?.params.entryId === 'new'
+  const entryId = match?.params.entryId && parseInt(match.params.entryId)
+  // distinguish viewing a location from having it displayed during e.g. editing or review
+  const isViewingLocation =
+    entryId && match.params.nextSegment?.indexOf('@') === 0
+  return isAddingLocation || isViewingLocation
+}
 const MobileLayout = () => {
   const history = useAppHistory()
   const tabs = useTabs()
   const dispatch = useDispatch()
   const streetView = useSelector((state) => state.map.streetView)
-  const { pathname, state } = useLocation()
+  const { pathname } = useLocation()
   const [tabIndex, handleTabChange] = useRoutedTabs(
     tabs.map(({ paths }) => paths),
     DEFAULT_TAB,
@@ -47,8 +66,6 @@ const MobileLayout = () => {
     dispatch(setStreetView(false))
   }
 
-  const isFromList = state?.fromPage === '/list'
-
   return (
     <PageTabs index={tabIndex} onChange={handleTabChange}>
       <Helmet>
@@ -57,6 +74,13 @@ const MobileLayout = () => {
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
         />
       </Helmet>
+      <div
+        style={{
+          display: shouldDisplayMapPage(pathname) ? 'initial' : 'none',
+        }}
+      >
+        <MapPage />
+      </div>
       <TabPanels>
         <TopBarSwitch />
         <Switch>
@@ -106,19 +130,6 @@ const MobileLayout = () => {
           </Route>
         </Switch>
       </TabPanels>
-      <Switch>
-        <Route
-          path={[
-            '/reviews/:reviewId/edit',
-            '/locations/:locationId/review',
-            '/locations/:locationId/edit',
-            '/locations/new/details',
-          ]}
-        />
-        <Route path={['/map', '/locations']}>
-          {(pathname.includes('/map') || !isFromList) && <MapPage />}
-        </Route>
-      </Switch>
       <Switch>
         <Route
           path={[
