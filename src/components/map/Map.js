@@ -226,10 +226,14 @@ const Map = ({
         {locations.map((location) => (
           <Location
             key={location.id}
-            onClick={(event) => {
-              onLocationClick(location)
-              event.stopPropagation()
-            }}
+            onClick={
+              onLocationClick
+                ? (event) => {
+                    onLocationClick(location)
+                    event.stopPropagation()
+                  }
+                : undefined
+            }
             lat={location.lat}
             lng={location.lng}
             selected={location.id === activeLocationId}
