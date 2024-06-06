@@ -85,17 +85,7 @@ const constructTypesTreeForSelection = (
   })
 
   const typesForSelection = showOnlyOnMap
-    ? allTypes.filter((t) => {
-        const { id } = t
-        const numChildrenForSelection = (childrenById[id] || []).filter(
-          (child_id) => totalCountsById[child_id],
-        ).length
-        const hasOwnCount = countsById[id]
-        const hasTotalCount = totalCountsById[id]
-
-        // If the type is on the map, or more than one of its descendants is on the map, keep it
-        return hasOwnCount || (hasTotalCount && numChildrenForSelection > 1)
-      })
+    ? allTypes.filter((t) => totalCountsById[t.id])
     : [...allTypes]
 
   const allIdsForSelection = {}
