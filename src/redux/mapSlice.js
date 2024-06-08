@@ -157,6 +157,14 @@ export const mapSlice = createSlice({
       state.view.zoom = Math.max(state.view.zoom, MIN_LOCATION_ZOOM)
       state.place = null
     },
+    zoomOnLocationAndSave: (state, action) => {
+      console.log(state, action)
+      state.oldView = { ...state.view }
+      state.view = {
+        center: action.payload,
+        zoom: Math.max(state.view.zoom, MIN_LOCATION_ZOOM),
+      }
+    },
     restoreOldView: (state) => {
       if (state.oldView) {
         state.view = { ...state.oldView }
@@ -233,6 +241,7 @@ export const mapSlice = createSlice({
 
 export const {
   zoomInAndSave,
+  zoomOnLocationAndSave,
   restoreOldView,
   zoomIn,
   clusterClick,

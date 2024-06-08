@@ -245,7 +245,7 @@ const Map = ({
             }
             lat={location.lat}
             lng={location.lng}
-            selected={location.id === activeLocationId}
+            selected={location.id === selectedLocationId}
             label={showLabels ? location.typeName : undefined}
           />
         ))}

@@ -8,6 +8,7 @@ import {
   restoreOldView,
   zoomIn,
   zoomInAndSave,
+  zoomOnLocationAndSave,
 } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
@@ -37,17 +38,19 @@ const MapPage = ({ isDesktop }) => {
   const locationIdsByReviewId = useSelector(
     (state) => state.misc.locationIdsByReviewId,
   )
-  let locationId, isAddingLocation, isViewingLocation
+  let locationId, isAddingLocation, isViewingLocation, isEditingLocation
   if (locationRouteMatch) {
     locationId = parseInt(locationRouteMatch.params.locationId)
     isAddingLocation = locationRouteMatch.params.locationId === 'new'
     isViewingLocation =
       locationRouteMatch.params.nextSegment?.indexOf('@') === 0
+    isEditingLocation = locationRouteMatch.params.nextSegment === 'edit'
   } else if (reviewRouteMatch) {
     const reviewId = parseInt(reviewRouteMatch.params.reviewId)
     locationId = locationIdsByReviewId[reviewId]
     isAddingLocation = false
     isViewingLocation = true
+    isEditingLocation = false
   }
 
   const { getCommonName } = useTypesById()
@@ -63,13 +66,21 @@ const MapPage = ({ isDesktop }) => {
   const view = useSelector((state) => state.map.view)
   const clusters = useSelector((state) => state.map.clusters)
 
+  const selectedLocations = allLocations.filter((x) => x.id === locationId)
+  const locationBeingEdited =
+    isEditingLocation && selectedLocations.length
+      ? selectedLocations[0]
+      : undefined
   useEffect(() => {
     if (isAddingLocation) {
       dispatch(zoomInAndSave())
+    } else if (locationBeingEdited) {
+      const { lat, lng } = locationBeingEdited
+      dispatch(zoomOnLocationAndSave({ lat, lng }))
     } else {
       dispatch(restoreOldView())
     }
-  }, [dispatch, isAddingLocation])
+  }, [dispatch, isAddingLocation, locationBeingEdited])
 
   const handleLocationClick = isAddingLocation
     ? undefined
@@ -107,6 +118,7 @@ const MapPage = ({ isDesktop }) => {
       ) : (
         !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
+      {locationBeingEdited && <AddLocationPin />}
       {!isDesktop && <TrackLocationButton isIcon />}
 
       {locationRequested && <ConnectedGeolocation />}
