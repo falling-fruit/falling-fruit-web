@@ -1,3 +1,4 @@
+import { Map } from '@styled-icons/boxicons-solid'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
@@ -9,6 +10,7 @@ import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
+import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import { TypeName } from '../ui/TypeName'
 import FormikAllSteps from './FormikAllSteps'
@@ -116,19 +118,16 @@ const InlineSelects = styled.div`
   }
 `
 
-const PositionWrapper = styled.div`
-  .coordinates {
-    columns: 2;
-  }
-`
-
 const PositionField = ({ lat, lng }) => (
-  <PositionWrapper>
-    <Label>Latitude</Label>
-    <pre>{lat}</pre>
-    <Label>Longitude</Label>
-    <pre>{lng}</pre>
-  </PositionWrapper>
+  <>
+    <Label>Position</Label>
+    <IconBesideText tabIndex={0}>
+      <Map size={20} />
+      <p className="small">
+        {lat.toFixed(6)}, {lng.toFixed(6)}
+      </p>
+    </IconBesideText>
+  </>
 )
 
 const LocationStep = ({ typeOptions, lat, lng }) => (
