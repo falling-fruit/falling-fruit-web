@@ -124,11 +124,10 @@ const PositionWrapper = styled.div`
 
 const PositionField = ({ lat, lng }) => (
   <PositionWrapper>
-    <Label>Position</Label>
-    <pre className="coordinates">
-      <span>{lat}, </span>
-      <span>{lng}</span>
-    </pre>
+    <Label>Latitude</Label>
+    <pre>{lat}</pre>
+    <Label>Longitude</Label>
+    <pre>{lng}</pre>
   </PositionWrapper>
 )
 
