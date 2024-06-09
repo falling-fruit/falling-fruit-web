@@ -214,10 +214,14 @@ const Map = ({
         {clusters.map((cluster) => (
           <Cluster
             key={JSON.stringify(cluster)}
-            onClick={(event) => {
-              onClusterClick(cluster)
-              event.stopPropagation()
-            }}
+            onClick={
+              onClusterClick
+                ? (event) => {
+                    onClusterClick(cluster)
+                    event.stopPropagation()
+                  }
+                : undefined
+            }
             count={cluster.count}
             lat={cluster.lat}
             lng={cluster.lng}
@@ -226,10 +230,14 @@ const Map = ({
         {locations.map((location) => (
           <Location
             key={location.id}
-            onClick={(event) => {
-              onLocationClick(location)
-              event.stopPropagation()
-            }}
+            onClick={
+              onLocationClick
+                ? (event) => {
+                    onLocationClick(location)
+                    event.stopPropagation()
+                  }
+                : undefined
+            }
             lat={location.lat}
             lng={location.lng}
             selected={location.id === activeLocationId}

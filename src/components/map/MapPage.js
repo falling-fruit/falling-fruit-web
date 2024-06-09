@@ -70,12 +70,17 @@ const MapPage = ({ isDesktop }) => {
     }
   }, [dispatch, isAddingLocation])
 
-  const handleLocationClick = (location) => {
-    history.push({
-      pathname: `/locations/${location.id}`,
-      state: { fromPage: '/map' },
-    })
-  }
+  const handleLocationClick = isAddingLocation
+    ? undefined
+    : (location) => {
+        history.push({
+          pathname: `/locations/${location.id}`,
+          state: { fromPage: '/map' },
+        })
+      }
+  const handleClusterClick = isAddingLocation
+    ? undefined
+    : (cluster) => dispatch(clusterClick(cluster))
   const stopViewingLocation = () => {
     if (isViewingLocation) {
       history.push('/map')
@@ -109,15 +114,11 @@ const MapPage = ({ isDesktop }) => {
         bootstrapURLKeys={bootstrapURLKeys}
         view={view}
         geolocation={geolocation}
-        clusters={isAddingLocation ? [] : clusters}
-        locations={
-          isAddingLocation
-            ? []
-            : allLocations.map((location) => ({
-                ...location,
-                typeName: getCommonName(location.type_ids[0]),
-              }))
-        }
+        clusters={clusters}
+        locations={allLocations.map((location) => ({
+          ...location,
+          typeName: getCommonName(location.type_ids[0]),
+        }))}
         activeLocationId={locationId || hoveredLocationId}
         onViewChange={(newView) => {
           dispatch(viewChangeAndFetch(newView))
@@ -128,11 +129,11 @@ const MapPage = ({ isDesktop }) => {
           )
         }}
         onLocationClick={handleLocationClick}
-        onClusterClick={(cluster) => dispatch(clusterClick(cluster))}
+        onClusterClick={handleClusterClick}
         onNonspecificClick={() => dispatch(stopViewingLocation)}
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
-        showLabels={settings.showLabels}
+        showLabels={settings.showLabels || isAddingLocation}
         showStreetView={streetView}
         showBusinesses={settings.showBusinesses}
       />

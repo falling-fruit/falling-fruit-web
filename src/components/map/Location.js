@@ -37,6 +37,8 @@ const LocationButton = styled(ResetButton)`
   &:focus {
     outline: none;
   }
+
+  cursor: ${({ onClick }) => (onClick ? 'pointer' : 'unset')};
 `
 
 const Label = styled.div`
@@ -60,10 +62,10 @@ const Label = styled.div`
     1px 1px 0 ${({ theme }) => theme.background};
 `
 
-const Location = memo(({ label, selected, ...props }) => (
+const Location = memo(({ label, selected, onClick, ...props }) => (
   <>
     {selected && <MapPin />}
-    <LocationButton {...props} />
+    <LocationButton onClick={onClick} {...props} />
     <Label>{label}</Label>
   </>
 ))
@@ -71,7 +73,7 @@ const Location = memo(({ label, selected, ...props }) => (
 Location.displayName = 'Location'
 
 Location.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   // TODO: Correct the instance in MapPage
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 }
