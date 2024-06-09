@@ -116,7 +116,23 @@ const InlineSelects = styled.div`
   }
 `
 
-const LocationStep = ({ typeOptions }) => (
+const PositionWrapper = styled.div`
+  .coordinates {
+    columns: 2;
+  }
+`
+
+const PositionField = ({ lat, lng }) => (
+  <PositionWrapper>
+    <Label>Position</Label>
+    <div className="coordinates">
+      <i>{lat}, </i>
+      <i>{lng}</i>
+    </div>
+  </PositionWrapper>
+)
+
+const LocationStep = ({ typeOptions, lat, lng }) => (
   <>
     <Select
       name="types"
@@ -130,6 +146,7 @@ const LocationStep = ({ typeOptions }) => (
       required
       invalidWhenUntouched
     />
+    <PositionField lat={lat} lng={lng} />
     <Textarea
       name="description"
       label="Description"
@@ -251,7 +268,7 @@ export const LocationForm = ({
 
   const formikSteps = [
     <Step key={1} label="Step 1" validate={validateLocationStep}>
-      <LocationStep key={1} typeOptions={typeOptions} />
+      <LocationStep key={1} typeOptions={typeOptions} lat={lat} lng={lng} />
     </Step>,
     ...(editingId
       ? []
