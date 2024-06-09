@@ -33,12 +33,14 @@ const shouldDisplayMapPage = (pathname) => {
     exact: false,
     strict: false,
   })
-  const isAddingLocation = match?.params.entryId === 'new'
+  const isPlacingNewLocationMarker =
+    match?.params.entryId === 'new' && match?.params.nextSegment !== 'details'
+
   const entryId = match?.params.entryId && parseInt(match.params.entryId)
   // distinguish viewing a location from having it displayed during e.g. editing or review
   const isViewingLocation =
     entryId && match.params.nextSegment?.indexOf('@') === 0
-  return isAddingLocation || isViewingLocation
+  return isPlacingNewLocationMarker || isViewingLocation
 }
 const MobileLayout = () => {
   const history = useAppHistory()
