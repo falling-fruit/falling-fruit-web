@@ -169,7 +169,9 @@ const MapPage = ({ isDesktop }) => {
         onNonspecificClick={() => dispatch(stopViewingLocation)}
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
-        showLabels={settings.showLabels || isAddingLocation}
+        showLabels={
+          settings.showLabels || isAddingLocation || isEditingLocation
+        }
         showStreetView={streetView}
         showBusinesses={settings.showBusinesses}
       />
