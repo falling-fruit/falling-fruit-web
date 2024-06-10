@@ -5,12 +5,13 @@ const RC_ROOT_ID = 'RC_ROOT'
 
 const getChildrenById = (types) => {
   const children = {}
-  types.forEach(({ id, parent_id }) => {
-    if (parent_id && id !== parent_id) {
-      if (!children[parent_id]) {
-        children[parent_id] = [id]
+  types.forEach(({ id, parent_id, pending }) => {
+    const pendingOrParentId = pending ? PENDING_ID : parent_id
+    if (pendingOrParentId && id !== pendingOrParentId) {
+      if (!children[pendingOrParentId]) {
+        children[pendingOrParentId] = [id]
       } else {
-        children[parent_id].push(id)
+        children[pendingOrParentId].push(id)
       }
     }
   })
@@ -83,6 +84,7 @@ const constructTypesTreeForSelection = (
   allTypes.forEach((t) => {
     getTotalCount(totalCountsById, t.id, childrenById, countsById)
   })
+  getTotalCount(totalCountsById, PENDING_ID, childrenById, countsById)
 
   const typesForSelection = showOnlyOnMap
     ? allTypes.filter((t) => totalCountsById[t.id])
@@ -100,9 +102,11 @@ const constructTypesTreeForSelection = (
   const typesAndParentsForSelection = []
 
   typesForSelection.forEach((t) => {
-    const { id, parent_id } = t
+    const { id, parent_id, pending } = t
+    const pendingOrParentId = pending ? PENDING_ID : parent_id
     const isParentInSelectionWithOwnValue = idsOfParents[id] && countsById[id]
-    const hasParentInSelection = allIdsForSelection[parent_id]
+    const hasParentInSelectionOrPending =
+      allIdsForSelection[pendingOrParentId] || pending
     if (isParentInSelectionWithOwnValue) {
       // Allow the user to select just the less specifically annotated type
       typesAndParentsForSelection.push({
@@ -126,11 +130,9 @@ const constructTypesTreeForSelection = (
       // The parent is the "Pending Review" if applicable,
       // or parent_id if we decided to display it,
       // or else a special "null" pId that makes it show up at top level
-      rcParentId: t.pending
-        ? PENDING_ID
-        : hasParentInSelection
-          ? `${parent_id}`
-          : RC_ROOT_ID,
+      rcParentId: hasParentInSelectionOrPending
+        ? pendingOrParentId
+        : RC_ROOT_ID,
     })
   })
   // Include the special "Pending Review" parent if needed
@@ -142,15 +144,12 @@ const constructTypesTreeForSelection = (
       rcId: PENDING_ID,
       rcParentId: RC_ROOT_ID,
       name: 'Pending Review',
-      count: typesForSelection
-        .filter((t) => t.pending)
-        .map((t) => countsById[t.id])
-        .reduce((a, b) => a + b, 0),
+      count: totalCountsById[PENDING_ID],
     })
   }
   return sortTypes(typesAndParentsForSelection).map((type) => {
     const { commonName, scientificName } = getNames(type)
-    const parentScientificName = scientificNameById[type.parent_id]
+    const parentScientificName = scientificNameById[type.rcParentId]
     const cultivarIndex = scientificName?.startsWith(
       `${parentScientificName} '`,
     )
