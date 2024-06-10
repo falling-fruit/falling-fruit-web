@@ -29,7 +29,11 @@ const shouldDisplayMapPage = (pathname) => {
 
   // additionally, also display in the background for some location pages
   const match = matchPath(pathname, {
-    path: ['/locations/:entryId/:nextSegment', '/locations/:entryId'],
+    path: [
+      '/locations/:entryId/:nextSegment/:nextNextSegment',
+      '/locations/:entryId/:nextSegment',
+      '/locations/:entryId',
+    ],
     exact: false,
     strict: false,
   })
@@ -40,7 +44,14 @@ const shouldDisplayMapPage = (pathname) => {
   // distinguish viewing a location from having it displayed during e.g. editing or review
   const isViewingLocation =
     entryId && match.params.nextSegment?.indexOf('@') === 0
-  return isPlacingNewLocationMarker || isViewingLocation
+
+  const isEditingLocationMarker =
+    entryId &&
+    match?.params.nextSegment === 'edit' &&
+    match?.params.nextNextSegment !== 'details'
+  return (
+    isPlacingNewLocationMarker || isEditingLocationMarker || isViewingLocation
+  )
 }
 const MobileLayout = () => {
   const history = useAppHistory()
@@ -104,7 +115,7 @@ const MobileLayout = () => {
               />
             )}
           </Route>
-          <Route path="/locations/:locationId/edit">
+          <Route path="/locations/:locationId/edit/details">
             {({ match }) => (
               <EditLocationForm editingId={match.params.locationId} />
             )}
@@ -115,6 +126,7 @@ const MobileLayout = () => {
           <Route path={['/map', '/locations', '/list', '/settings']}>
             <Switch>
               <Route path="/locations/new" />
+              <Route path="/locations/:locationId/edit" />
               <Route path="/locations/:locationId">
                 {!streetView && <EntryWrapper />}
               </Route>

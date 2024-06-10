@@ -11,6 +11,25 @@ const Instructions = styled.span`
   margin-left: 15px;
 `
 
+const xAndCheckIcons = (history, xLabel, xUrl, checkLabel, checkUrl) => (
+  <>
+    <IconButton
+      label={xLabel}
+      icon={<X />}
+      raised
+      size={54}
+      onClick={() => history.push(xUrl)}
+    />
+    <IconButton
+      label={checkLabel}
+      icon={<Check />}
+      raised
+      size={54}
+      color={theme.green}
+      onClick={() => history.push(checkUrl)}
+    />
+  </>
+)
 const LocationNav = () => {
   const history = useAppHistory()
 
@@ -38,7 +57,7 @@ const LocationNav = () => {
           />
         )}
       </Route>
-      <Route path="/locations/:locationId/edit">
+      <Route path="/locations/:locationId/edit/details">
         {() => (
           <TopBarNav
             onBack={(event) => {
@@ -49,40 +68,40 @@ const LocationNav = () => {
           />
         )}
       </Route>
+      <Route path="/locations/:locationId/edit">
+        {({ match }) => (
+          <TopBarNav
+            left={
+              <Instructions>Adjust location for the edited entry.</Instructions>
+            }
+            rightIcons={xAndCheckIcons(
+              history,
+              'Cancel adjust location',
+              '/map',
+              'Confirm adjust location',
+              `/locations/${match.params.locationId}/edit/details`,
+            )}
+          />
+        )}
+      </Route>
       <Route path="/locations/new/details">
         <TopBarNav
           onBack={() => history.push('/locations/new')}
           title="New location"
         />
       </Route>
-      <Route>
+      <Route path="/locations/new">
         <TopBarNav
           left={
             <Instructions>Choose a location for your new entry.</Instructions>
           }
-          rightIcons={
-            <>
-              <IconButton
-                label="Cancel choose location"
-                icon={<X />}
-                raised
-                size={54}
-                onClick={() => {
-                  history.push('/map')
-                }}
-              />
-              <IconButton
-                label="Confirm choose location"
-                icon={<Check />}
-                raised
-                size={54}
-                color={theme.green}
-                onClick={() => {
-                  history.push('/locations/new/details')
-                }}
-              />
-            </>
-          }
+          rightIcons={xAndCheckIcons(
+            history,
+            'Cancel choose location',
+            '/map',
+            'Confirm choose location',
+            '/locations/new/details',
+          )}
         />
       </Route>
     </Switch>
