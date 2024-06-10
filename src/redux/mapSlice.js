@@ -158,7 +158,6 @@ export const mapSlice = createSlice({
       state.place = null
     },
     zoomOnLocationAndSave: (state, action) => {
-      console.log(state, action)
       state.oldView = { ...state.view }
       state.view = {
         center: action.payload,

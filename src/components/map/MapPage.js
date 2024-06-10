@@ -71,16 +71,40 @@ const MapPage = ({ isDesktop }) => {
     isEditingLocation && selectedLocations.length
       ? selectedLocations[0]
       : undefined
+  const latOfLocationBeingEdited = locationBeingEdited?.lat
+  const lngOfLocationBeingEdited = locationBeingEdited?.lng
   useEffect(() => {
     if (isAddingLocation) {
       dispatch(zoomInAndSave())
-    } else if (locationBeingEdited) {
-      const { lat, lng } = locationBeingEdited
-      dispatch(zoomOnLocationAndSave({ lat, lng }))
     } else {
       dispatch(restoreOldView())
     }
-  }, [dispatch, isAddingLocation, locationBeingEdited])
+  }, [dispatch, isAddingLocation])
+  // Unpack lat and lng so useEffect can compare on value equality
+  // ( after moving the map, locationBeingEdited might be an equivalent but different object)
+  // These are only available if the location being edited is on the screen
+  // Adding the if(lat...) makes the jump not happen once we scroll off the map
+  // but there is still a small problem: loading the map away from the center and then scrolling in produces a jump
+  // Ideally we would only like to zoom on location after clicking "edit location"
+  useEffect(() => {
+    if (isEditingLocation) {
+      if (latOfLocationBeingEdited && lngOfLocationBeingEdited) {
+        dispatch(
+          zoomOnLocationAndSave({
+            lat: latOfLocationBeingEdited,
+            lng: lngOfLocationBeingEdited,
+          }),
+        )
+      }
+    } else {
+      dispatch(restoreOldView())
+    }
+  }, [
+    dispatch,
+    isEditingLocation,
+    latOfLocationBeingEdited,
+    lngOfLocationBeingEdited,
+  ])
 
   const handleLocationClick = isAddingLocation
     ? undefined
@@ -118,7 +142,7 @@ const MapPage = ({ isDesktop }) => {
       ) : (
         !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
-      {locationBeingEdited && <AddLocationPin />}
+      {isEditingLocation && <AddLocationPin />}
       {!isDesktop && <TrackLocationButton isIcon />}
 
       {locationRequested && <ConnectedGeolocation />}
