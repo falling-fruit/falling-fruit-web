@@ -216,10 +216,12 @@ export const mapSlice = createSlice({
         )
 
         // Combine with new locations in bounds
+        // If IDs are equal, prioritise the payload
+        // to e.g. correctly display a just-updated position
         state.locations = unionWith(
           eqBy(prop('id')),
-          locationsInBounds,
           action.payload,
+          locationsInBounds,
         )
       }
 
