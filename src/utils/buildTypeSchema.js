@@ -1,15 +1,17 @@
 import TreeNodeText from '../components/filter/TreeNodeText'
 
 const PENDING_ID = 'PENDING'
+const RC_ROOT_ID = 'RC_ROOT'
 
 const getChildrenById = (types) => {
   const children = {}
-  types.forEach(({ id, parent_id }) => {
-    if (id !== parent_id) {
-      if (!children[parent_id]) {
-        children[parent_id] = [id]
+  types.forEach(({ id, parent_id, pending }) => {
+    const pendingOrParentId = pending ? PENDING_ID : parent_id
+    if (pendingOrParentId && id !== pendingOrParentId) {
+      if (!children[pendingOrParentId]) {
+        children[pendingOrParentId] = [id]
       } else {
-        children[parent_id].push(id)
+        children[pendingOrParentId].push(id)
       }
     }
   })
@@ -37,37 +39,6 @@ const getTotalCount = (counts, id, childrenById, countsById) => {
   return counts[id]
 }
 
-const getTypesWithPendingCategory = (types) =>
-  types.map((t) => ({
-    ...t,
-    parent_id: t.pending ? PENDING_ID : t.parent_id,
-  }))
-
-const getTypesWithRootLabels = (types, childrenById) =>
-  types.map((t) => {
-    const { id, parent_id } = t
-    const isParent = childrenById[id]
-    return {
-      ...t,
-      value: isParent ? `root-${id}` : `${id}`,
-      pId: parent_id ? `root-${parent_id}` : 'null',
-    }
-  })
-
-const addOtherCategories = (types, childrenById) => {
-  const typesWithOtherCategory = [...types]
-  types.forEach((t) => {
-    if (childrenById[t.id] && t.id !== PENDING_ID) {
-      typesWithOtherCategory.push({
-        ...t,
-        value: `${t.id}`,
-        pId: `root-${t.id}`,
-      })
-    }
-  })
-  return typesWithOtherCategory
-}
-
 const sortTypes = (types) =>
   types
     .filter((t) => t.scientific_names?.length > 0)
@@ -91,81 +62,128 @@ const getNames = (type) => {
   }
 }
 
-// Builds and sorts the type tree on page load
-const buildTypeSchema = (types, childrenById) => {
-  const typesWithRootLabels = getTypesWithRootLabels(types, childrenById)
-
-  const typesWithOtherCategory = addOtherCategories(
-    typesWithRootLabels,
-    childrenById,
-  )
-
-  const sortedTypes = sortTypes(typesWithOtherCategory)
-
-  return sortedTypes.map((type) => {
-    const { commonName, scientificName } = getNames(type)
-
-    return {
-      ...type,
-      pId: type.pId,
-      value: type.value,
-      searchValue: scientificName
-        ? `${commonName} ${scientificName}`
-        : `${commonName}`,
-    }
-  })
-}
-
-// Updates cumulative counts and node titles in the type tree
-const updateTreeCounts = (
-  treeData,
+/*
+ * Construct a tree corresponding to current selection on map
+ * - if showOnlyOnMap selected, only keep types with nonzero counts, which flattens the tree
+ * - add parent types that group multiple types belonging together where necessary
+ * - add id, parent_id, title props
+ *
+ * Special cases:
+ * - some types serve as grouping but also correspond to markers annotated to higher level
+ * - 'pending review' nodes always have a Pending Review parent
+ * - cultivar level types display with cultivar name only, if there is a parent species level type
+ */
+const constructTypesTreeForSelection = (
+  allTypes,
   countsById,
   showOnlyOnMap,
   childrenById,
   scientificNameById,
 ) => {
-  const totalCount = {}
-  treeData.forEach((t) => {
-    getTotalCount(totalCount, t.id, childrenById, countsById)
+  const totalCountsById = {}
+  allTypes.forEach((t) => {
+    getTotalCount(totalCountsById, t.id, childrenById, countsById)
+  })
+  getTotalCount(totalCountsById, PENDING_ID, childrenById, countsById)
+
+  const typesForSelection = showOnlyOnMap
+    ? allTypes.filter((t) => totalCountsById[t.id])
+    : [...allTypes]
+
+  const allIdsForSelection = {}
+  typesForSelection.forEach((t) => {
+    allIdsForSelection[t.id] = 1
   })
 
-  const typeSchema = treeData.map((type) => {
-    const { commonName, scientificName } = getNames(type)
-    const parentScientificName = scientificNameById[type.parent_id]
-    const cultivarIndex =
-      scientificName?.startsWith(`${parentScientificName} '`) &&
-      scientificName?.indexOf("'")
-    const count = type.value.includes('root')
-      ? totalCount[type.id]
-      : countsById[type.id] ?? 0
+  const idsOfParents = showOnlyOnMap
+    ? getChildrenById(typesForSelection)
+    : childrenById
 
+  const typesAndParentsForSelection = []
+
+  typesForSelection.forEach((t) => {
+    const { id, parent_id, pending } = t
+    const pendingOrParentId = pending ? PENDING_ID : parent_id
+    const isParentInSelectionWithOwnValue = idsOfParents[id] && countsById[id]
+    const hasParentInSelectionOrPending =
+      allIdsForSelection[pendingOrParentId] || pending
+    if (isParentInSelectionWithOwnValue) {
+      // Allow the user to select just the less specifically annotated type
+      typesAndParentsForSelection.push({
+        ...t,
+        count: countsById[id],
+        rcId: `extra-child-id-${id}`,
+        value: `${id}`,
+        rcParentId: `${id}`,
+      })
+    }
+    typesAndParentsForSelection.push({
+      ...t,
+      count: totalCountsById[id],
+      rcId: `${id}`,
+      value: isParentInSelectionWithOwnValue
+        ? // Use bogus value to avoid conflict warning
+          // the checkbox still affects the correct value, `${id}`,
+          // because it is the parent of child with that value
+          `extra-group-value-${id}`
+        : `${id}`,
+      // The parent is the "Pending Review" if applicable,
+      // or parent_id if we decided to display it,
+      // or else a special "null" pId that makes it show up at top level
+      rcParentId: hasParentInSelectionOrPending
+        ? pendingOrParentId
+        : RC_ROOT_ID,
+    })
+  })
+  // Include the special "Pending Review" parent if needed
+  if (typesForSelection.some((t) => t.pending)) {
+    typesAndParentsForSelection.push({
+      id: null,
+      parent_id: null,
+      value: PENDING_ID,
+      rcId: PENDING_ID,
+      rcParentId: RC_ROOT_ID,
+      name: 'Pending Review',
+      count: totalCountsById[PENDING_ID],
+    })
+  }
+  return sortTypes(typesAndParentsForSelection).map((type) => {
+    const { commonName, scientificName } = getNames(type)
+    const parentScientificName = scientificNameById[type.rcParentId]
+    const cultivarIndex = scientificName?.startsWith(
+      `${parentScientificName} '`,
+    )
+      ? scientificName?.indexOf("'")
+      : -1
+    const isCultivarWithParentInSelection =
+      cultivarIndex !== -1 && type.rcParentId !== RC_ROOT_ID
     return {
       ...type,
+      searchValue: scientificName
+        ? `${commonName} ${scientificName}`
+        : `${commonName}`,
       title: (
         <TreeNodeText
           commonName={commonName}
           shouldIncludeScientificName={scientificName}
-          shouldIncludeCommonName={commonName && !cultivarIndex}
-          scientificName={
-            cultivarIndex === -1
-              ? scientificName
-              : scientificName?.substring(cultivarIndex)
+          shouldIncludeCommonName={
+            commonName && !isCultivarWithParentInSelection
           }
-          count={count}
+          scientificName={
+            isCultivarWithParentInSelection
+              ? scientificName?.substring(cultivarIndex)
+              : scientificName
+          }
+          count={type.count}
         />
       ),
-      count,
     }
   })
-
-  return showOnlyOnMap ? typeSchema.filter((t) => t.count > 0) : typeSchema
 }
 
 export {
-  buildTypeSchema,
+  constructTypesTreeForSelection,
   getChildrenById,
   getScientificNameById,
-  getTypesWithPendingCategory,
-  PENDING_ID,
-  updateTreeCounts,
+  RC_ROOT_ID,
 }

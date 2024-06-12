@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 
 import { filtersChanged, selectionChanged } from '../../redux/filterSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { updateTreeCounts } from '../../utils/buildTypeSchema'
+import { constructTypesTreeForSelection } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import { CheckboxFilters } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
@@ -86,25 +86,25 @@ const Filter = ({ isOpen }) => {
   const { typesById } = useTypesById()
   const filters = useSelector((state) => state.filter)
   const {
-    types,
     isLoading,
     countsById,
-    treeData,
+    allTypes,
+    types,
     childrenById,
     showOnlyOnMap,
     scientificNameById,
   } = filters
 
-  const treeDataWithUpdatedCounts = useMemo(
+  const typesTreeForSelection = useMemo(
     () =>
-      updateTreeCounts(
-        treeData,
+      constructTypesTreeForSelection(
+        allTypes,
         countsById,
         showOnlyOnMap,
         childrenById,
         scientificNameById,
       ),
-    [treeData, countsById, showOnlyOnMap, childrenById, scientificNameById],
+    [allTypes, countsById, showOnlyOnMap, childrenById, scientificNameById],
   )
 
   useLayoutEffect(() => {
@@ -154,16 +154,12 @@ const Filter = ({ isOpen }) => {
         </TreeFiltersContainer>
         {didMount.current ? (
           <RCTreeSelect
-            data={treeDataWithUpdatedCounts}
+            data={typesTreeForSelection}
             loading={isLoading}
             onChange={(selectedTypes) =>
-              dispatch(
-                selectionChanged(
-                  selectedTypes.filter((t) => !t.includes('root')),
-                ),
-              )
+              dispatch(selectionChanged(selectedTypes))
             }
-            checkedTypes={types}
+            types={types}
             searchValue={searchValue}
           />
         ) : (
