@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
-import { searchView } from './searchView'
+import { selectPlace } from './placesSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 /**
@@ -181,7 +181,7 @@ export const mapSlice = createSlice({
       state.isFilterUpdated = true
     },
 
-    [searchView.type]: (state, action) => {
+    [selectPlace.pending]: (state, action) => {
       state.view = fitBounds(action.payload, state.view.size)
     },
 
