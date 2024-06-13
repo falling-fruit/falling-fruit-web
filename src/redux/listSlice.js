@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
-import { setReducer, viewChange } from './mapSlice'
-import { selectPlace } from './placesSlice'
+import { selectPlace,setReducer, viewChange } from './mapSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
@@ -52,7 +51,7 @@ export const listSlice = createSlice({
       state.isViewSearched = false
     },
 
-    [selectPlace.pending]: (state) => {
+    [selectPlace]: (state) => {
       state.isViewSearched = true
     },
 

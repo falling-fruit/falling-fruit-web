@@ -17,7 +17,7 @@ import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
-import { clearSelectedPlace, selectPlace } from '../../redux/placesSlice'
+import { clearSelectedPlace, selectPlace } from '../../redux/mapSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
@@ -69,7 +69,7 @@ const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const filterOpen = useSelector((state) => state.filter.isOpen)
-  const selectedPlace = useSelector((state) => state.places.selectedPlace)
+  const selectedPlace = useSelector((state) => state.map.place)
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
@@ -93,11 +93,13 @@ const Search = (props) => {
     () => {
       // Allow clearing the state from outside
       if (!selectedPlace) {
-        console.log('Clear selected place')
         setValue('')
       }
     },
-    //setValue is a different function object each time, but they behave the same
+    // setValue is a different function object each time
+    // and including it in the dependency array would cause an infinite loop
+    // but it doesn't actually change
+    // (see definition at https://github.com/wellyshen/use-places-autocomplete/blob/master/src/usePlacesAutocomplete.ts)
     [selectedPlace], // eslint-disable-line react-hooks/exhaustive-deps
   )
 

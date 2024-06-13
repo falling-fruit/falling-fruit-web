@@ -10,6 +10,7 @@ import ResetButton from '../ui/ResetButton'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
 import Location from './Location'
+import Place from './Place'
 /**
  * Wrapper component around google-map-react.
  * @param {string} apiKey - The google maps API key
@@ -53,6 +54,7 @@ const Map = ({
   bootstrapURLKeys,
   view,
   geolocation,
+  place,
   locations,
   activeLocationId,
   clusters,
@@ -211,6 +213,9 @@ const Map = ({
             heading={geolocation.heading}
           />
         )}
+        {place && (
+          <Place lat={place.lat} lng={place.lng} label={place.description} />
+        )}
         {clusters.map((cluster) => (
           <Cluster
             key={JSON.stringify(cluster)}
@@ -254,6 +259,7 @@ Map.propTypes = {
   view: PropTypes.object.isRequired,
   geolocation: PropTypes.object,
   locations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  place: PropTypes.object,
   selectedLocationId: PropTypes.number,
   clusters: PropTypes.arrayOf(PropTypes.object).isRequired,
   onViewChange: PropTypes.func.isRequired,

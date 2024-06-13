@@ -6,7 +6,6 @@ import filterReducer from './filterSlice'
 import listReducer from './listSlice'
 import mapReducer from './mapSlice'
 import miscReducer, { fetchAllTypes } from './miscSlice'
-import placesReducer from './placesSlice'
 import settingsReducer from './settingsSlice'
 
 export const history = createBrowserHistory()
@@ -19,7 +18,6 @@ export const store = configureStore({
     settings: settingsReducer,
     auth: authReducer,
     misc: miscReducer,
-    places: placesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
