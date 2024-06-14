@@ -131,7 +131,10 @@ const Search = (props) => {
     if (descriptionToPlaceId.current[description]) {
       dispatch(
         selectPlace(
-          await getPlaceBounds(descriptionToPlaceId.current[description]),
+          await getPlaceBounds(
+            description,
+            descriptionToPlaceId.current[description],
+          ),
         ),
       )
     } else {

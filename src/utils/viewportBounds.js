@@ -16,10 +16,9 @@ export const getZoomedInView = (locationLat, locationLng) =>
     },
   })
 
-export const getPlaceBounds = async (placeId) => {
+export const getPlaceBounds = async (description, placeId) => {
   const results = await getGeocode({ placeId })
   const {
-    formatted_address,
     geometry: { viewport, location },
   } = results[0]
 
@@ -28,7 +27,7 @@ export const getPlaceBounds = async (placeId) => {
     location: {
       lat: location.lat(),
       lng: location.lng(),
-      description: formatted_address,
+      description,
     },
     viewport: {
       ne: { lat: ne.lat(), lng: ne.lng() },
