@@ -88,7 +88,6 @@ export const mapSlice = createSlice({
           zoom: 16,
         }
       }
-      state.place = null
     },
 
     startTrackingLocation: (state) => {

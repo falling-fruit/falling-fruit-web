@@ -91,15 +91,16 @@ const Search = (props) => {
 
   useEffect(
     () => {
-      // Allow clearing the state from outside
-      if (!selectedPlace) {
+      // Allow clearing the state by setting state.map.place to null
+      if (!selectedPlace && value) {
         setValue('')
       }
+      //Allow restoring the search box after rerender
+      if (selectedPlace && !value) {
+        setValue(selectedPlace.description)
+      }
     },
-    // setValue is a different function object each time
-    // and including it in the dependency array would cause an infinite loop
-    // but it doesn't actually change
-    // (see definition at https://github.com/wellyshen/use-places-autocomplete/blob/master/src/usePlacesAutocomplete.ts)
+    // The effect should run after first render and each time we clear selectedPlace
     [selectedPlace], // eslint-disable-line react-hooks/exhaustive-deps
   )
 
