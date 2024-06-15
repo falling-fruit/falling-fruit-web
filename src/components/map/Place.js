@@ -1,28 +1,27 @@
-import { Cross } from '@styled-icons/boxicons-regular'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-import { theme } from '../ui/GlobalStyle'
+import { ReactComponent as CrosshairIcon } from './crosshair-medium-green.svg'
 import Label from './Label'
 
-// based on AddLocationPin
-const PlaceCross = styled(Cross)`
-  width: 3rem;
-  height: 3rem;
+const PlaceLabel = styled(Label)`
+  font-size: 1rem;
+`
+
+const PlaceCrosshair = styled(CrosshairIcon)`
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -75%);
   z-index: 2;
   pointer-events: none;
   touch-action: none;
-  color: ${theme.green};
 `
 
 const Place = ({ label, ...props }) => (
   <>
-    <PlaceCross {...props} />
-    <Label>{label}</Label>
+    <PlaceCrosshair {...props} />
+    <PlaceLabel>{label}</PlaceLabel>
   </>
 )
 
