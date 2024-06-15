@@ -1,7 +1,7 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
@@ -9,6 +9,7 @@ import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
@@ -118,7 +119,21 @@ const InlineSelects = styled.div`
   }
 `
 
-const PositionField = ({ lat, lng }) => (
+const PositionFieldButton = ({ lat, lng, editingId }) => (
+  <>
+    <Label>Position</Label>
+    <Button
+      as={Link}
+      to={`/locations/${editingId}/edit/position`}
+      leftIcon={<Map />}
+      secondary
+    >
+      {lat.toFixed(6)}, {lng.toFixed(6)}
+    </Button>
+  </>
+)
+
+const PositionFieldReadOnly = ({ lat, lng }) => (
   <>
     <Label>Position</Label>
     <IconBesideText tabIndex={0}>
@@ -130,7 +145,7 @@ const PositionField = ({ lat, lng }) => (
   </>
 )
 
-const LocationStep = ({ typeOptions, lat, lng }) => (
+const LocationStep = ({ typeOptions, lat, lng, isDesktop, editingId }) => (
   <>
     <Select
       name="types"
@@ -144,7 +159,11 @@ const LocationStep = ({ typeOptions, lat, lng }) => (
       required
       invalidWhenUntouched
     />
-    <PositionField lat={lat} lng={lng} />
+    {isDesktop ? (
+      <PositionFieldReadOnly lat={lat} lng={lng} />
+    ) : (
+      <PositionFieldButton lat={lat} lng={lng} editingId={editingId} />
+    )}
     <Textarea
       name="description"
       label="Description"
@@ -244,6 +263,7 @@ export const LocationForm = ({
   const history = useAppHistory()
   const { state } = useLocation()
   const { typesById } = useTypesById()
+  const isDesktop = useIsDesktop()
 
   const dispatch = useDispatch()
 
@@ -266,7 +286,14 @@ export const LocationForm = ({
 
   const formikSteps = [
     <Step key={1} label="Step 1" validate={validateLocationStep}>
-      <LocationStep key={1} typeOptions={typeOptions} lat={lat} lng={lng} />
+      <LocationStep
+        key={1}
+        typeOptions={typeOptions}
+        lat={lat}
+        lng={lng}
+        isDesktop={isDesktop}
+        editingId={editingId}
+      />
     </Step>,
     ...(editingId
       ? []

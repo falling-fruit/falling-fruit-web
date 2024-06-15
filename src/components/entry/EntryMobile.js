@@ -308,7 +308,9 @@ const EntryMobile = ({
               />
             )}
             <EntryButton
-              onClick={() => history.push(`/locations/${locationData.id}/edit`)}
+              onClick={() =>
+                history.push(`/locations/${locationData.id}/edit/details`)
+              }
               icon={<PencilIcon />}
               label="edit-button"
             />

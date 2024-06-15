@@ -11,14 +11,14 @@ const Instructions = styled.span`
   margin-left: 15px;
 `
 
-const xAndCheckIcons = (history, xLabel, xUrl, checkLabel, checkUrl) => (
+const xAndCheckIcons = (xLabel, xCallback, checkLabel, checkCallback) => (
   <>
     <IconButton
       label={xLabel}
       icon={<X />}
       raised
       size={54}
-      onClick={() => history.push(xUrl)}
+      onClick={xCallback}
     />
     <IconButton
       label={checkLabel}
@@ -26,7 +26,7 @@ const xAndCheckIcons = (history, xLabel, xUrl, checkLabel, checkUrl) => (
       raised
       size={54}
       color={theme.green}
-      onClick={() => history.push(checkUrl)}
+      onClick={checkCallback}
     />
   </>
 )
@@ -57,7 +57,7 @@ const LocationNav = () => {
           />
         )}
       </Route>
-      <Route path="/locations/:locationId/edit">
+      <Route path="/locations/:locationId/edit/details">
         {() => (
           <TopBarNav
             onBack={(event) => {
@@ -75,11 +75,13 @@ const LocationNav = () => {
               <Instructions>Adjust location for the edited entry.</Instructions>
             }
             rightIcons={xAndCheckIcons(
-              history,
               'Cancel adjust location',
-              `/locations/${match.params.locationId}/edit`,
+              () => history.goBack(),
               'Confirm adjust location',
-              `/locations/${match.params.locationId}/edit`,
+              () =>
+                history.push(
+                  `/locations/${match.params.locationId}/edit/details`,
+                ),
             )}
           />
         )}
@@ -96,11 +98,10 @@ const LocationNav = () => {
             <Instructions>Choose a location for your new entry.</Instructions>
           }
           rightIcons={xAndCheckIcons(
-            history,
             'Cancel choose location',
-            '/map',
+            () => history.push('/map'),
             'Confirm choose location',
-            '/locations/new/details',
+            () => history.push('/locations/new/details'),
           )}
         />
       </Route>

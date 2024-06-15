@@ -47,8 +47,9 @@ const shouldDisplayMapPage = (pathname) => {
 
   const isEditingLocationMarker =
     entryId &&
-    match?.params.nextSegment === 'edit' &&
-    match?.params.nextNextSegment !== 'details'
+    match.params.nextSegment === 'edit' &&
+    match.params.nextNextSegment === 'position'
+
   return (
     isPlacingNewLocationMarker || isEditingLocationMarker || isViewingLocation
   )
@@ -125,7 +126,7 @@ const MobileLayout = () => {
           <Route path={['/map', '/locations', '/list', '/settings']}>
             <Switch>
               <Route path="/locations/new" />
-              <Route path="/locations/:locationId/edit" />
+              <Route path="/locations/:locationId/edit/position" />
               <Route path="/locations/:locationId">
                 {!streetView && <EntryWrapper />}
               </Route>
