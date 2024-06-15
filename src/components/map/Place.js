@@ -6,13 +6,14 @@ import Label from './Label'
 
 const PlaceLabel = styled(Label)`
   font-size: 1rem;
+  margin-top: 20px;
 `
 
 const PlaceCrosshair = styled(CrosshairIcon)`
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -75%);
+  transform: translate(-50%, -50%);
   z-index: 2;
   pointer-events: none;
   touch-action: none;
