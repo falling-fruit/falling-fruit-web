@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
-import { selectPlace,setReducer, viewChange } from './mapSlice'
+import { selectPlace, setReducer, viewChange } from './mapSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
