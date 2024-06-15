@@ -49,12 +49,6 @@ const PageTabs = styled(Tabs)`
         height: 24px;
       }
 
-      &:not([data-selected]) {
-        ${StyledIconBase} {
-          color: ${({ theme }) => theme.secondaryBackground};
-        }
-      }
-
       &[data-selected] {
         color: ${({ theme }) => theme.orange};
         border-top-color: ${({ theme }) => theme.orange};
