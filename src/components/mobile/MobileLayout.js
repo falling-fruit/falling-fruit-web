@@ -79,6 +79,7 @@ const MobileLayout = () => {
       <div
         style={{
           display: shouldDisplayMapPage(pathname) ? 'initial' : 'none',
+          zIndex: 1,
         }}
       >
         <MapPage />
