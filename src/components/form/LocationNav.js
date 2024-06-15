@@ -57,7 +57,7 @@ const LocationNav = () => {
           />
         )}
       </Route>
-      <Route path="/locations/:locationId/edit/details">
+      <Route path="/locations/:locationId/edit">
         {() => (
           <TopBarNav
             onBack={(event) => {
@@ -68,7 +68,7 @@ const LocationNav = () => {
           />
         )}
       </Route>
-      <Route path="/locations/:locationId/edit">
+      <Route path="/locations/:locationId/edit/position">
         {({ match }) => (
           <TopBarNav
             left={
@@ -77,9 +77,9 @@ const LocationNav = () => {
             rightIcons={xAndCheckIcons(
               history,
               'Cancel adjust location',
-              '/map',
+              `/locations/${match.params.locationId}/edit`,
               'Confirm adjust location',
-              `/locations/${match.params.locationId}/edit/details`,
+              `/locations/${match.params.locationId}/edit`,
             )}
           />
         )}
