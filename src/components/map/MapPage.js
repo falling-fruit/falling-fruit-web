@@ -15,10 +15,10 @@ import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
-import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { ConnectedGeolocation } from './ConnectedGeolocation'
 import Map from './Map'
+import { AddLocationPin, EditLocationPin } from './Pins'
 import TrackLocationButton from './TrackLocationButton'
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
@@ -142,7 +142,7 @@ const MapPage = ({ isDesktop }) => {
       ) : (
         !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
       )}
-      {isEditingLocation && <AddLocationPin />}
+      {isEditingLocation && <EditLocationPin />}
       {!isDesktop && <TrackLocationButton isIcon />}
 
       {locationRequested && <ConnectedGeolocation />}
@@ -158,6 +158,7 @@ const MapPage = ({ isDesktop }) => {
         }))}
         place={place}
         activeLocationId={locationId || hoveredLocationId}
+        editingLocationId={isEditingLocation ? locationId : null}
         onViewChange={(newView) => {
           dispatch(viewChangeAndFetch(newView))
         }}
