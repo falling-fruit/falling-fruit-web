@@ -69,22 +69,32 @@ const LocationNav = () => {
         )}
       </Route>
       <Route path="/locations/:locationId/edit/position">
-        {({ match }) => (
-          <TopBarNav
-            left={
-              <Instructions>Adjust location for the edited entry.</Instructions>
-            }
-            rightIcons={xAndCheckIcons(
-              'Cancel adjust location',
-              () => history.goBack(),
-              'Confirm adjust location',
-              () =>
-                history.push(
-                  `/locations/${match.params.locationId}/edit/details`,
-                ),
-            )}
-          />
-        )}
+        {({ match }) => {
+          const { pathname } = window.location
+          const geocoordMatch = pathname.substring(pathname.indexOf('@'))
+
+          return (
+            <TopBarNav
+              left={
+                <Instructions>
+                  Adjust location for the edited entry.
+                </Instructions>
+              }
+              rightIcons={xAndCheckIcons(
+                'Cancel adjust location',
+                () =>
+                  history.push(
+                    `/locations/${match.params.locationId}/edit/details/${geocoordMatch}`,
+                  ),
+                'Confirm adjust location',
+                () =>
+                  history.push(
+                    `/locations/${match.params.locationId}/edit/details`,
+                  ),
+              )}
+            />
+          )
+        }}
       </Route>
       <Route path="/locations/new/details">
         <TopBarNav
