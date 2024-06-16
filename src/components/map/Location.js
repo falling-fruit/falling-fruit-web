@@ -1,22 +1,9 @@
-import { Map } from '@styled-icons/boxicons-solid'
 import PropTypes from 'prop-types'
 import { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import ResetButton from '../ui/ResetButton'
-
-const MapPin = styled(Map)`
-  // TODO: adjust intrusiveness of pin
-  height: 48px;
-  z-index: 3;
-  color: ${({ theme }) => theme.orange};
-
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: -20px;
-  filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.45));
-  color: ${({ theme }) => theme.orange};
-`
+import { BackgroundMapPin, MapPin } from './Pins'
 
 /**
  * Component for a location displayed on the map.
@@ -62,9 +49,10 @@ const Label = styled.div`
     1px 1px 0 ${({ theme }) => theme.background};
 `
 
-const Location = memo(({ label, selected, onClick, ...props }) => (
+const Location = memo(({ label, selected, editing, onClick, ...props }) => (
   <>
-    {selected && <MapPin />}
+    {selected && !editing && <MapPin />}
+    {editing && <BackgroundMapPin />}
     <LocationButton onClick={onClick} {...props} />
     <Label>{label}</Label>
   </>
