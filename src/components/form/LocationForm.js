@@ -120,29 +120,18 @@ const InlineSelects = styled.div`
 `
 
 const PositionFieldButton = ({ lat, lng, editingId }) => (
-  <>
-    <Label>Position</Label>
-    <Button
-      as={Link}
-      to={`/locations/${editingId}/edit/position`}
-      leftIcon={<Map />}
-      secondary
-    >
-      {lat.toFixed(6)}, {lng.toFixed(6)}
-    </Button>
-  </>
+  <Link to={`/locations/${editingId}/edit/position`}>
+    <PositionFieldReadOnly lat={lat} lng={lng} />
+  </Link>
 )
 
 const PositionFieldReadOnly = ({ lat, lng }) => (
-  <>
-    <Label>Position</Label>
-    <IconBesideText tabIndex={0}>
-      <Map size={20} />
-      <p className="small">
-        {lat.toFixed(6)}, {lng.toFixed(6)}
-      </p>
-    </IconBesideText>
-  </>
+  <IconBesideText tabIndex={0}>
+    <Map size={20} />
+    <p className="small">
+      {lat.toFixed(6)}, {lng.toFixed(6)}
+    </p>
+  </IconBesideText>
 )
 
 const LocationStep = ({ typeOptions, lat, lng, isDesktop, editingId }) => (
@@ -159,6 +148,7 @@ const LocationStep = ({ typeOptions, lat, lng, isDesktop, editingId }) => (
       required
       invalidWhenUntouched
     />
+    <Label>Position</Label>
     {isDesktop ? (
       <PositionFieldReadOnly lat={lat} lng={lng} />
     ) : (
