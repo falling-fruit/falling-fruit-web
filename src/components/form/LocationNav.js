@@ -18,7 +18,10 @@ const xAndCheckIcons = (history, xLabel, xUrl, checkLabel, checkUrl) => (
       icon={<X />}
       raised
       size={54}
-      onClick={() => history.push(xUrl)}
+      onClick={(event) => {
+        event.stopPropagation()
+        history.push(xUrl)
+      }}
     />
     <IconButton
       label={checkLabel}
@@ -26,7 +29,10 @@ const xAndCheckIcons = (history, xLabel, xUrl, checkLabel, checkUrl) => (
       raised
       size={54}
       color={theme.green}
-      onClick={() => history.push(checkUrl)}
+      onClick={(event) => {
+        event.stopPropagation()
+        history.push(checkUrl)
+      }}
     />
   </>
 )
@@ -69,20 +75,28 @@ const LocationNav = () => {
         )}
       </Route>
       <Route path="/locations/:locationId/edit">
-        {({ match }) => (
-          <TopBarNav
-            left={
-              <Instructions>Adjust location for the edited entry.</Instructions>
-            }
-            rightIcons={xAndCheckIcons(
-              history,
-              'Cancel adjust location',
-              '/map',
-              'Confirm adjust location',
-              `/locations/${match.params.locationId}/edit/details`,
-            )}
-          />
-        )}
+        {({ match }) => {
+          // we explicitly put geocoordMatch into the link
+          // so that we can still go back after map has moved
+          const { pathname } = window.location
+          const geocoordMatch = pathname.substring(pathname.indexOf('@'))
+          return (
+            <TopBarNav
+              left={
+                <Instructions>
+                  Adjust location for the edited entry.
+                </Instructions>
+              }
+              rightIcons={xAndCheckIcons(
+                history,
+                'Cancel adjust location',
+                `/locations/${match.params.locationId}/${geocoordMatch}`,
+                'Confirm adjust location',
+                `/locations/${match.params.locationId}/edit/details`,
+              )}
+            />
+          )
+        }}
       </Route>
       <Route path="/locations/new/details">
         <TopBarNav
