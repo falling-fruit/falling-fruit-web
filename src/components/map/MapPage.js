@@ -157,7 +157,7 @@ const MapPage = ({ isDesktop }) => {
           typeName: getCommonName(location.type_ids[0]),
         }))}
         place={place}
-        activeLocationId={locationId || hoveredLocationId}
+        selectedLocationId={locationId || hoveredLocationId}
         editingLocationId={isEditingLocation ? locationId : null}
         onViewChange={(newView) => {
           dispatch(viewChangeAndFetch(newView))

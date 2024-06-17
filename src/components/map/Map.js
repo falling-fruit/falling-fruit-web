@@ -56,7 +56,7 @@ const Map = ({
   geolocation,
   place,
   locations,
-  activeLocationId,
+  selectedLocationId,
   editingLocationId,
   clusters,
   onGeolocationClick,
