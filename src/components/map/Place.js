@@ -8,6 +8,8 @@ const PlaceLabel = styled(Label)`
   font-size: 1rem;
   margin-top: 20px;
   z-index: 3;
+  pointer-events: none;
+  touch-action: none;
 `
 
 const PlaceCrosshair = styled(CrosshairIcon)`
