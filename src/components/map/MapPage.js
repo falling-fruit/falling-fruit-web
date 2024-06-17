@@ -58,6 +58,7 @@ const MapPage = ({ isDesktop }) => {
   const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
   const geolocation = useSelector((state) => state.map.geolocation)
   const locationRequested = useSelector((state) => state.map.locationRequested)
+  const place = useSelector((state) => state.map.place)
   const streetView = useSelector((state) => state.map.streetView)
   const view = useSelector((state) => state.map.view)
   const clusters = useSelector((state) => state.map.clusters)
@@ -119,6 +120,7 @@ const MapPage = ({ isDesktop }) => {
           ...location,
           typeName: getCommonName(location.type_ids[0]),
         }))}
+        place={place}
         activeLocationId={locationId || hoveredLocationId}
         onViewChange={(newView) => {
           dispatch(viewChangeAndFetch(newView))

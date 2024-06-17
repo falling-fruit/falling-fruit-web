@@ -17,7 +17,7 @@ import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
-import { searchView } from '../../redux/searchView'
+import { clearSelectedPlace, selectPlace } from '../../redux/mapSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
@@ -69,6 +69,7 @@ const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const filterOpen = useSelector((state) => state.filter.isOpen)
+  const selectedPlace = useSelector((state) => state.map.place)
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
@@ -87,6 +88,21 @@ const Search = (props) => {
   useEffect(() => {
     googleMapLoader(bootstrapURLKeys).then(init)
   }, [init])
+
+  useEffect(
+    () => {
+      // Allow clearing the state by setting state.map.place to null
+      if (!selectedPlace && value) {
+        setValue('')
+      }
+      //Allow restoring the search box after rerender
+      if (selectedPlace && !value) {
+        setValue(selectedPlace.description)
+      }
+    },
+    // The effect should run after first render and each time we clear selectedPlace
+    [selectedPlace], // eslint-disable-line react-hooks/exhaustive-deps
+  )
 
   const handleChange = (e) => {
     if (filterOpen) {
@@ -114,14 +130,17 @@ const Search = (props) => {
     setValue(description, false)
     if (descriptionToPlaceId.current[description]) {
       dispatch(
-        searchView(
-          await getPlaceBounds(descriptionToPlaceId.current[description]),
+        selectPlace(
+          await getPlaceBounds(
+            description,
+            descriptionToPlaceId.current[description],
+          ),
         ),
       )
     } else {
       const latitude = Number(description.split(',')[0])
       const longitude = Number(description.split(',')[1])
-      dispatch(searchView(getZoomedInView(latitude, longitude)))
+      dispatch(selectPlace(getZoomedInView(latitude, longitude)))
     }
   }
   const { t } = useTranslation()
@@ -144,6 +163,7 @@ const Search = (props) => {
               <ClearSearchButton
                 onClick={() => {
                   setValue('')
+                  dispatch(clearSelectedPlace())
                 }}
               />
             )

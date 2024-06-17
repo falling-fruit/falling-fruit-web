@@ -6,7 +6,6 @@ import { toast } from 'react-toastify'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
-import { searchView } from './searchView'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 /**
@@ -65,6 +64,7 @@ export const mapSlice = createSlice({
     locationRequested: false,
     streetView: false,
     location: null,
+    place: null,
   },
   reducers: {
     // important: only dispatch viewChange in the handler of onViewChange in MapPage
@@ -103,6 +103,7 @@ export const mapSlice = createSlice({
       } else {
         state.justStartedTrackingLocation = true
       }
+      state.place = null
     },
     stopTrackingLocation: (state) => {
       state.isTrackingLocation = false
@@ -154,6 +155,7 @@ export const mapSlice = createSlice({
     zoomInAndSave: (state) => {
       state.oldView = { ...state.view }
       state.view.zoom = Math.max(state.view.zoom, MIN_LOCATION_ZOOM)
+      state.place = null
     },
     restoreOldView: (state) => {
       if (state.oldView) {
@@ -174,15 +176,19 @@ export const mapSlice = createSlice({
             ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
             : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, state.view.zoom + 2),
       }
+      state.place = null
+    },
+    selectPlace: (state, action) => {
+      state.place = action.payload.location
+      state.view = fitBounds(action.payload.viewport, state.view.size)
+    },
+    clearSelectedPlace: (state) => {
+      state.place = null
     },
   },
   extraReducers: {
     [updateSelection]: (state) => {
       state.isFilterUpdated = true
-    },
-
-    [searchView.type]: (state, action) => {
-      state.view = fitBounds(action.payload, state.view.size)
     },
 
     [fetchMapLocations.pending]: (state) => {
@@ -237,6 +243,8 @@ export const {
   stopTrackingLocation,
   geolocationChange,
   setStreetView,
+  selectPlace,
+  clearSelectedPlace,
 } = mapSlice.actions
 
 export default mapSlice.reducer
