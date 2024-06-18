@@ -8,7 +8,7 @@ import {
   restoreOldView,
   zoomIn,
   zoomInAndSave,
-  zoomOnLocationAndSave,
+  zoomOnLocation,
 } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
@@ -90,14 +90,12 @@ const MapPage = ({ isDesktop }) => {
     if (isEditingLocation) {
       if (latOfLocationBeingEdited && lngOfLocationBeingEdited) {
         dispatch(
-          zoomOnLocationAndSave({
+          zoomOnLocation({
             lat: latOfLocationBeingEdited,
             lng: lngOfLocationBeingEdited,
           }),
         )
       }
-    } else {
-      dispatch(restoreOldView())
     }
   }, [
     dispatch,
