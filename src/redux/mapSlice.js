@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
 import { parseUrl } from '../utils/getInitialUrl'
+import { fetchLocationData } from './locationSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 /**
@@ -72,23 +73,6 @@ export const mapSlice = createSlice({
     viewChange: setReducer('view'),
     setHoveredLocationId: setReducer('hoveredLocationId'),
     setStreetView: setReducer('streetView'),
-
-    updateEntryLocation: (state, action) => {
-      state.location = action.payload
-
-      if (state.isInitialEntry) {
-        const { lat, lng } = state.location
-
-        state.isInitialEntry = false
-        state.view = {
-          center: {
-            lat,
-            lng,
-          },
-          zoom: 16,
-        }
-      }
-    },
 
     startTrackingLocation: (state) => {
       state.locationRequested = true
@@ -227,6 +211,22 @@ export const mapSlice = createSlice({
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
+    },
+    [fetchLocationData.fulfilled]: (state, action) => {
+      state.location = action.payload
+
+      if (state.isInitialEntry) {
+        const { lat, lng } = state.location
+
+        state.isInitialEntry = false
+        state.view = {
+          center: {
+            lat,
+            lng,
+          },
+          zoom: 16,
+        }
+      }
     },
   },
 })
