@@ -8,6 +8,7 @@ import useRoutedTabs from '../../utils/useRoutedTabs'
 import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage'
 import authRoutes from '../auth/authRoutes'
+import connectRoutes from '../connect/connectRoutes'
 import EntryWrapper from '../entry/EntryWrapper'
 import { EditLocationForm } from '../form/EditLocation'
 import { EditReviewForm } from '../form/EditReview'
@@ -84,6 +85,7 @@ const MobileLayout = () => {
       >
         <MapPage />
       </div>
+      {connectRoutes}
       <TabPanels>
         <TopBarSwitch />
         <Switch>

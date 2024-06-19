@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 
 import aboutRoutes from '../about/aboutRoutes'
 import authRoutes from '../auth/authRoutes'
+import connectRoutes from '../connect/connectRoutes'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePaneSwitch from './SidePaneSwitch'
@@ -52,6 +53,7 @@ const DesktopLayout = () => (
       {aboutRoutes}
       {authRoutes}
       <Route>
+        {connectRoutes}
         <WindowSize>
           {({ width: vw }) => (
             <StyledSplit
