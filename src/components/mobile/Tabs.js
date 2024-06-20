@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { matchPath, useLocation } from 'react-router-dom'
 
 import { useAppHistory } from '../../utils/useAppHistory'
-import { authPages } from '../auth/authRoutes'
 import aboutRoutes from '../about/aboutRoutes'
+import { authPages } from '../auth/authRoutes'
 import { Tab } from '../ui/PageTabs'
 
 const Tabs = () => {
@@ -16,12 +16,15 @@ const Tabs = () => {
 
   const tabs = [
     {
-      paths: ['/settings', ...aboutRoutes.map(route => route.props.path).flat()],
+      paths: [
+        '/settings',
+        ...aboutRoutes.map((route) => route.props.path).flat(),
+      ],
       icon: <Cog />,
       label: t('settings'),
     },
     {
-      paths: ['/map'],
+      paths: ['/map', '/locations'],
       icon: <MapAlt />,
       label: t('glossary.map'),
     },
