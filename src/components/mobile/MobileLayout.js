@@ -4,7 +4,6 @@ import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
 import { setStreetView } from '../../redux/mapSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
-import useRoutedTabs from '../../utils/useRoutedTabs'
 import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage'
 import authRoutes from '../auth/authRoutes'
@@ -17,9 +16,9 @@ import { ReviewForm } from '../form/ReviewForm'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
-import { PageTabs, Tab, TabList, TabPanels } from '../ui/PageTabs'
+import { PageTabs, TabList, TabPanels } from '../ui/PageTabs'
 import ListPage from './ListPage'
-import { DEFAULT_TAB, useTabs } from './tabs'
+import Tabs from './Tabs'
 import TopBarSwitch from './TopBarSwitch'
 
 const shouldDisplayMapPage = (pathname) => {
@@ -45,21 +44,10 @@ const shouldDisplayMapPage = (pathname) => {
 }
 const MobileLayout = () => {
   const history = useAppHistory()
-  const tabs = useTabs()
   const dispatch = useDispatch()
   const streetView = useSelector((state) => state.map.streetView)
   const { pathname } = useLocation()
-  const [tabIndex, handleTabChange] = useRoutedTabs(
-    tabs.map(({ paths }) => paths),
-    DEFAULT_TAB,
-  )
-
-  const tabList = tabs.map(({ paths, icon, label }) => (
-    <Tab key={paths[0]}>
-      {icon}
-      {label}
-    </Tab>
-  ))
+  const { tabIndex, handleTabChange, tabContent } = Tabs()
 
   if (
     ['/list', '/settings', '/users/edit'].some((path) =>
@@ -153,7 +141,7 @@ const MobileLayout = () => {
               bottom: 0,
             }}
           >
-            {tabList}
+            {tabContent}
           </TabList>
         </Route>
       </Switch>
