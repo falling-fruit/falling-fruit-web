@@ -34,18 +34,16 @@ const MapPage = ({ isDesktop }) => {
   const reviewRouteMatch = useRouteMatch({
     path: '/reviews/:reviewId/edit',
   })
-  const locationIdsByReviewId = useSelector(
-    (state) => state.misc.locationIdsByReviewId,
-  )
+  const { review } = useSelector((state) => state.review)
+
   let locationId, isAddingLocation, isViewingLocation
   if (locationRouteMatch) {
     locationId = parseInt(locationRouteMatch.params.locationId)
     isAddingLocation = locationRouteMatch.params.locationId === 'new'
     isViewingLocation =
       locationRouteMatch.params.nextSegment?.indexOf('@') === 0
-  } else if (reviewRouteMatch) {
-    const reviewId = parseInt(reviewRouteMatch.params.reviewId)
-    locationId = locationIdsByReviewId[reviewId]
+  } else if (reviewRouteMatch && review) {
+    locationId = review.location_id
     isAddingLocation = false
     isViewingLocation = true
   }
