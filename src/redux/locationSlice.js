@@ -1,4 +1,4 @@
-import { createAsyncThunk,createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
 import { getLocationById } from '../utils/api'
@@ -24,6 +24,11 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.location = null
     },
+    clearLocation: (state) => {
+      state.locationId = null
+      state.isLoading = false
+      state.location = null
+    },
   },
   extraReducers: {
     [fetchLocationData.pending]: (state) => {
@@ -40,6 +45,6 @@ const locationSlice = createSlice({
   },
 })
 
-export const { setNewLocation } = locationSlice.actions
+export const { setNewLocation, clearLocation } = locationSlice.actions
 
 export default locationSlice.reducer

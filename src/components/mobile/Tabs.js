@@ -2,6 +2,7 @@ import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt, UserCircle } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { matchPath, useLocation } from 'react-router-dom'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -13,6 +14,7 @@ const Tabs = () => {
   const { t } = useTranslation()
   const { pathname, state } = useLocation()
   const history = useAppHistory()
+  const { locationId } = useSelector((state) => state.location)
 
   const tabs = [
     {
@@ -66,13 +68,18 @@ const Tabs = () => {
   }, [pathname, state?.fromPage])
 
   const handleTabChange = (newTabIndex) => {
-    if (
+    if (newTabIndex === 1 && locationId === 'new') {
+      // If switching to the Map tab and we've set the location in Redux to new, open the view
+      // to allow e.g. switching satellite view on
+      history.push(`/locations/new`)
+    } else if (
       newTabIndex === 0 &&
       pathname.includes('/locations') &&
       state?.fromPage === '/list'
     ) {
-      // TODO: unreachable branch
+      // TODO: this might be an unreachable branch
       // (you can't go from a location page to the settings tab)
+      // but hard to understand intention or what fromPage is set to throughout the app
       history.push(pathname, { state: { fromPage: '/map' } })
     } else {
       history.push(tabs[newTabIndex]?.paths[0])

@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import {
-  clusterClick,
-  restoreOldView,
-  zoomIn,
-  zoomInAndSave,
-} from '../../redux/mapSlice'
+import { clusterClick, zoomIn, zoomInAndSave } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -64,8 +59,6 @@ const MapPage = ({ isDesktop }) => {
   useEffect(() => {
     if (isAddingLocation) {
       dispatch(zoomInAndSave())
-    } else {
-      dispatch(restoreOldView())
     }
   }, [dispatch, isAddingLocation])
 
