@@ -6,6 +6,7 @@ import { matchPath, useLocation } from 'react-router-dom'
 
 import { useAppHistory } from '../../utils/useAppHistory'
 import { authPages } from '../auth/authRoutes'
+import aboutRoutes from '../about/aboutRoutes'
 import { Tab } from '../ui/PageTabs'
 
 const Tabs = () => {
@@ -15,7 +16,7 @@ const Tabs = () => {
 
   const tabs = [
     {
-      paths: ['/settings'],
+      paths: ['/settings', ...aboutRoutes.map(route => route.props.path).flat()],
       icon: <Cog />,
       label: t('settings'),
     },
