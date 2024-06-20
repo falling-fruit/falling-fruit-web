@@ -56,7 +56,8 @@ const Map = ({
   geolocation,
   place,
   locations,
-  activeLocationId,
+  selectedLocationId,
+  editingLocationId,
   clusters,
   onGeolocationClick,
   onClusterClick,
@@ -245,7 +246,8 @@ const Map = ({
             }
             lat={location.lat}
             lng={location.lng}
-            selected={location.id === activeLocationId}
+            selected={location.id === selectedLocationId}
+            editing={location.id === editingLocationId}
             label={showLabels ? location.typeName : undefined}
           />
         ))}

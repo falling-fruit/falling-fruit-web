@@ -1,3 +1,4 @@
+import { Map } from '@styled-icons/boxicons-solid'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
@@ -9,6 +10,7 @@ import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Button from '../ui/Button'
+import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import { TypeName } from '../ui/TypeName'
 import FormikAllSteps from './FormikAllSteps'
@@ -116,7 +118,19 @@ const InlineSelects = styled.div`
   }
 `
 
-const LocationStep = ({ typeOptions }) => (
+const PositionField = ({ lat, lng }) => (
+  <>
+    <Label>Position</Label>
+    <IconBesideText tabIndex={0}>
+      <Map size={20} />
+      <p className="small">
+        {lat.toFixed(6)}, {lng.toFixed(6)}
+      </p>
+    </IconBesideText>
+  </>
+)
+
+const LocationStep = ({ typeOptions, lat, lng }) => (
   <>
     <Select
       name="types"
@@ -130,6 +144,7 @@ const LocationStep = ({ typeOptions }) => (
       required
       invalidWhenUntouched
     />
+    <PositionField lat={lat} lng={lng} />
     <Textarea
       name="description"
       label="Description"
@@ -251,7 +266,7 @@ export const LocationForm = ({
 
   const formikSteps = [
     <Step key={1} label="Step 1" validate={validateLocationStep}>
-      <LocationStep key={1} typeOptions={typeOptions} />
+      <LocationStep key={1} typeOptions={typeOptions} lat={lat} lng={lng} />
     </Step>,
     ...(editingId
       ? []
@@ -332,7 +347,7 @@ export const LocationForm = ({
               onClick={(e) => {
                 e.stopPropagation()
                 if (editingId) {
-                  history.goBack()
+                  history.push(state?.fromPage ?? `/locations/${editingId}`)
                 } else {
                   history.push(state?.fromPage ?? '/map')
                 }

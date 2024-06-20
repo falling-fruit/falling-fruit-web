@@ -30,6 +30,7 @@ const useRoutedTabs = (tabPaths, defaultTabIndex = 0) => {
     if (matchedIndex !== -1) {
       setTabIndex(matchedIndex)
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, tabPaths, defaultTabIndex, state?.fromPage])
 

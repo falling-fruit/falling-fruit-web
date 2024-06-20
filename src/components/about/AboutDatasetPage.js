@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom'
 
 import { getImportById } from '../../utils/api'
 import NavBack from '../desktop/NavBack'
-import { IconBesideText } from '../entry/EntryOverview'
 import { theme } from '../ui/GlobalStyle'
+import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 

@@ -20,6 +20,7 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
+import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { TextContent } from './Entry'
 import EntryTags from './EntryTags'
@@ -27,36 +28,12 @@ import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
-// TODO: Move to its own file
-const IconBesideText = styled.div`
-  display: flex;
-  color: ${({ theme }) => theme.secondaryText};
-  font-style: normal;
-  font-weight: ${($props) => ($props.bold ? 'bold' : 'normal')};
-  align-items: center;
-
-  ${'' /* TODO: Add another wrapper */}
-  & + & {
-    margin-top: 4px !important;
-  }
-
-  p {
-    margin: 0 0 0 4px;
-    font-size: 0.875rem;
-  }
-
-  ${($props) =>
-    $props.onClick &&
-    `
-  cursor: pointer;
-  `};
-`
-
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   white-space: pre-line;
   word-break: normal;
   overflow-wrap: anywhere;
+  color: ${({ theme }) => theme.secondaryText};
 
   p {
     font-size: 1rem;
@@ -67,7 +44,6 @@ const Description = styled.section`
   }
 
   & > p:first-child {
-    color: ${({ theme }) => theme.secondaryText};
     margin-bottom: 14px;
   }
 
@@ -204,5 +180,4 @@ const EntryOverview = ({ locationData, className }) => {
     </div>
   )
 }
-export { IconBesideText }
 export default EntryOverview
