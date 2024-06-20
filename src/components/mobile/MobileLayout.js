@@ -150,7 +150,7 @@ const MobileLayout = () => {
           path={[
             '/reviews/:reviewId/edit',
             '/locations/:locationId/review',
-            '/locations/:locationId/edit',
+            '/locations/:locationId/edit/details',
             '/locations/new/details',
           ]}
         />
