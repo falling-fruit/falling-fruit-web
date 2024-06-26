@@ -13,7 +13,7 @@ const connectRoutes = [
   <Route key="connect-review" path="/reviews/:reviewId/edit">
     {({ match }) => match && <ConnectReview reviewId={match.params.reviewId} />}
   </Route>,
-  <Route key="disconnect-location" path={["/map", "/list"]}>
+  <Route key="disconnect-location" path={['/map', '/list']}>
     {({ match }) => match && <DisconnectLocation />}
   </Route>,
 ]

@@ -12,7 +12,7 @@ export const fetchReviewData = createAsyncThunk(
 )
 
 const reviewSlice = createSlice({
-  name: 'review', 
+  name: 'review',
   initialState: {
     reviewId: null,
     isLoading: false,
@@ -27,7 +27,7 @@ const reviewSlice = createSlice({
       state.review = action.payload
     },
     [fetchReviewData.rejected]: (state, action) => {
-      state.isLoading = false 
+      state.isLoading = false
       toast.error(`Error fetching review data: ${action.payload}`)
     },
   },

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
 import { getLocationById } from '../utils/api'
+import { fetchReviewData } from './reviewSlice'
 
 export const fetchLocationData = createAsyncThunk(
   'locations/fetchLocationData',
@@ -14,34 +15,47 @@ export const fetchLocationData = createAsyncThunk(
 const locationSlice = createSlice({
   name: 'location',
   initialState: {
-    locationId: null,
     isLoading: false,
     location: null,
+    locationId: null,
   },
   reducers: {
-    setNewLocation: (state) => {
-      state.locationId = 'new'
-      state.isLoading = false
-      state.location = null
-    },
     clearLocation: (state) => {
-      state.locationId = null
       state.isLoading = false
       state.location = null
+      state.locationId = null
+    },
+    setNewLocation: (state) => {
+      state.isLoading = false
+      state.location = null
+      state.locationId = 'new'
     },
   },
   extraReducers: {
-    [fetchLocationData.pending]: (state) => {
+    [fetchLocationData.pending]: (state, action) => {
+      state.location = null
+      state.locationId = `pending-${action.meta.arg}`
       state.isLoading = true
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
-      state.location = action.payload
+      // Accept the latest initiated fetch
+      if (state.locationId === `pending-${action.payload.id}`) {
+        state.location = action.payload
+        state.locationId = parseInt(action.payload.id)
+      }
     },
     [fetchLocationData.rejected]: (state, action) => {
       state.isLoading = false
-      toast.error(`Error fetching location data: ${action.payload}`)
+      state.location = null
+      state.locationId = null
+      toast.error(`Error fetching location data: ${action.meta.arg}`)
     },
+    [fetchReviewData.fulfilled]: (state, action) => {
+      state.isLoading = false
+      state.location = null
+      state.locationId = parseInt(action.payload.location_id)
+    }
   },
 })
 

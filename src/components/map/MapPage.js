@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { clusterClick, zoomIn, zoomInAndSave } from '../../redux/mapSlice'
@@ -23,28 +22,13 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 
 const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
-  const locationRouteMatch = useRouteMatch({
-    path: ['/locations/:locationId/:nextSegment', '/locations/:locationId'],
-  })
-  const reviewRouteMatch = useRouteMatch({
-    path: '/reviews/:reviewId/edit',
-  })
-  const { review } = useSelector((state) => state.review)
+  const dispatch = useDispatch()
 
-  let locationId, isAddingLocation, isViewingLocation
-  if (locationRouteMatch) {
-    locationId = parseInt(locationRouteMatch.params.locationId)
-    isAddingLocation = locationRouteMatch.params.locationId === 'new'
-    isViewingLocation =
-      locationRouteMatch.params.nextSegment?.indexOf('@') === 0
-  } else if (reviewRouteMatch && review) {
-    locationId = review.location_id
-    isAddingLocation = false
-    isViewingLocation = true
-  }
+  const { locationId } = useSelector((state) => state.location)
+  const isAddingLocation = locationId === 'new'
+  const isViewingLocation = locationId !== null && locationId !== 'new'
 
   const { getCommonName } = useTypesById()
-  const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
   const allLocations = useSelector(getAllLocations)
   const isLoading = useSelector((state) => state.map.isLoading)
