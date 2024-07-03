@@ -21,7 +21,6 @@ const AddLocationPin = styled(Map)`
 `
 
 const MapPin = styled(Map)`
-  // TODO: adjust intrusiveness of pin
   height: 48px;
   z-index: 4;
 
@@ -41,8 +40,6 @@ const EditLocationPin = styled(Map)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -92%);
-  // Display on top of map
-  z-index: 1;
   // Allow clicking/dragging through the pin
   pointer-events: none;
   touch-action: none;
