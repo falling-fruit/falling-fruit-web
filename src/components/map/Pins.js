@@ -1,11 +1,9 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
-import PinSvg from './AddLocationPin.svg'
-
-const AddLocationPin = styled.img.attrs({
-  src: PinSvg,
-})`
+const AddLocationPin = styled(Map)`
+  height: 57px;
+  color: ${({ theme }) => theme.blue};
   position: absolute;
   top: 50%;
   left: 50%;
