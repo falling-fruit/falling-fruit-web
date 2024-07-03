@@ -12,7 +12,6 @@ const AddLocationPin = styled(Map)`
   position: absolute;
   top: 50%;
   left: 50%;
-  // How to do this without transform/should I?
   transform: translate(-50%, -92%);
   // Display on top of map
   z-index: 1;
@@ -41,7 +40,6 @@ const EditLocationPin = styled(Map)`
   color: ${({ theme }) => theme.orange};
   top: 50%;
   left: 50%;
-  // How to do this without transform/should I?
   transform: translate(-50%, -92%);
   // Display on top of map
   z-index: 1;
