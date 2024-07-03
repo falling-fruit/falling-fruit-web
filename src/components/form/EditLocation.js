@@ -1,42 +1,21 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { useSelector } from 'react-redux'
 
-import { getLocationById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { Page } from '../entry/Entry'
 import { LocationForm, locationToForm } from './LocationForm'
 
 export const EditLocationForm = (props) => {
-  const { locationId } = useParams()
   const history = useAppHistory()
-  const [location, setLocation] = useState(null)
+  const { location, isLoading } = useSelector((state) => state.location)
 
-  useEffect(() => {
-    const loadFormData = async () => {
-      try {
-        const location = await getLocationById(locationId)
-        setLocation(location)
-      } catch (error) {
-        toast.error(`Location #${locationId} not found`)
-      }
-    }
-
-    loadFormData()
-  }, [locationId])
-
-  const handleSubmit = () => {
-    if (location) {
-      history.push(`/locations/${location.id}`)
-    }
-  }
-
-  return (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     location && (
       <LocationForm
         initialValues={locationToForm(location)}
-        editingId={locationId}
-        onSubmit={handleSubmit}
+        editingId={location.id}
+        onSubmit={() => history.push(`/locations/${location.id}`)}
         {...props}
       />
     )

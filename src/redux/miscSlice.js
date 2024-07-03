@@ -12,15 +12,10 @@ export const miscSlice = createSlice({
   initialState: {
     typesById: {},
     isDesktop: null,
-    locationIdsByReviewId: {},
   },
   reducers: {
     layoutChange: (state, action) => {
       state.isDesktop = action.payload.isDesktop
-    },
-    rememberLocationIdForReviewId: (state, action) => {
-      const { reviewId, locationId } = action.payload
-      state.locationIdsByReviewId[reviewId] = locationId
     },
   },
   extraReducers: {
@@ -35,6 +30,6 @@ export const miscSlice = createSlice({
   },
 })
 
-export const { layoutChange, rememberLocationIdForReviewId } = miscSlice.actions
+export const { layoutChange } = miscSlice.actions
 
 export default miscSlice.reducer

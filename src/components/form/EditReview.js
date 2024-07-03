@@ -1,50 +1,21 @@
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { useSelector } from 'react-redux'
 
-import { rememberLocationIdForReviewId } from '../../redux/miscSlice'
-import { getReviewById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { Page } from '../entry/Entry'
 import { ReviewForm, reviewToForm } from './ReviewForm'
 
 export const EditReviewForm = (props) => {
-  const { reviewId } = useParams()
   const history = useAppHistory()
-  const dispatch = useDispatch()
-  const [review, setReview] = useState(null)
+  const { review, isLoading } = useSelector((state) => state.review)
 
-  useEffect(() => {
-    const loadFormData = async () => {
-      try {
-        const review = await getReviewById(reviewId)
-        dispatch(
-          rememberLocationIdForReviewId({
-            reviewId,
-            locationId: review.location_id,
-          }),
-        )
-        setReview(review)
-      } catch (error) {
-        toast.error(`Review #${reviewId} not found`)
-      }
-    }
-
-    loadFormData()
-  }, [reviewId, dispatch])
-
-  const afterSubmit = () => {
-    if (review) {
-      history.push(`/locations/${review.location_id}`)
-    }
-  }
-  return (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     review && (
       <ReviewForm
         initialValues={{ review: reviewToForm(review) }}
-        editingId={reviewId}
-        onSubmit={afterSubmit}
+        editingId={review.id}
+        onSubmit={() => history.push(`/locations/${review.location_id}`)}
         {...props}
       />
     )

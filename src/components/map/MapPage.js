@@ -1,14 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import {
-  clusterClick,
-  restoreOldView,
-  zoomIn,
-  zoomInAndSave,
-} from '../../redux/mapSlice'
+import { clusterClick, zoomIn, zoomInAndSave } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -28,30 +22,13 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 
 const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
-  const locationRouteMatch = useRouteMatch({
-    path: ['/locations/:locationId/:nextSegment', '/locations/:locationId'],
-  })
-  const reviewRouteMatch = useRouteMatch({
-    path: '/reviews/:reviewId/edit',
-  })
-  const locationIdsByReviewId = useSelector(
-    (state) => state.misc.locationIdsByReviewId,
-  )
-  let locationId, isAddingLocation, isViewingLocation
-  if (locationRouteMatch) {
-    locationId = parseInt(locationRouteMatch.params.locationId)
-    isAddingLocation = locationRouteMatch.params.locationId === 'new'
-    isViewingLocation =
-      locationRouteMatch.params.nextSegment?.indexOf('@') === 0
-  } else if (reviewRouteMatch) {
-    const reviewId = parseInt(reviewRouteMatch.params.reviewId)
-    locationId = locationIdsByReviewId[reviewId]
-    isAddingLocation = false
-    isViewingLocation = true
-  }
+  const dispatch = useDispatch()
+
+  const { locationId } = useSelector((state) => state.location)
+  const isAddingLocation = locationId === 'new'
+  const isViewingLocation = locationId !== null && locationId !== 'new'
 
   const { getCommonName } = useTypesById()
-  const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
   const allLocations = useSelector(getAllLocations)
   const isLoading = useSelector((state) => state.map.isLoading)
@@ -66,8 +43,6 @@ const MapPage = ({ isDesktop }) => {
   useEffect(() => {
     if (isAddingLocation) {
       dispatch(zoomInAndSave())
-    } else {
-      dispatch(restoreOldView())
     }
   }, [dispatch, isAddingLocation])
 
