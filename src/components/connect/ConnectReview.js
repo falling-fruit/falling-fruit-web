@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { fetchReviewData } from '../../redux/reviewSlice'
 
-const ConnectReview = ({reviewId}) => {
+const ConnectReview = ({ reviewId }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchReviewData(reviewId))
