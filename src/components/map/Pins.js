@@ -29,7 +29,6 @@ const MapPin = styled(Map)`
   position: absolute;
   transform: translate(-50%, -50%);
   top: -20.16px;
-  filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.45));
   color: ${({ theme }) => theme.orange};
 `
 
@@ -39,7 +38,6 @@ const EditLocationPin = styled(Map)`
 
   position: absolute;
   transform: translate(-50%, -50%);
-  filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.45));
   color: ${({ theme }) => theme.orange};
   top: 50%;
   left: 50%;
