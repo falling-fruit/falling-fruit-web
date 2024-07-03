@@ -2,16 +2,25 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { clusterClick, zoomIn, zoomInAndSave } from '../../redux/mapSlice'
+import {
+  clusterClick,
+  restoreOldView,
+  zoomIn,
+  zoomInAndSave,
+  zoomOnLocationAndSave,
+} from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
-import AddLocationPin from '../ui/AddLocationPin'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { ConnectedGeolocation } from './ConnectedGeolocation'
 import Map from './Map'
+import {
+  AddLocationCentralUnmovablePin,
+  EditLocationCentralUnmovablePin,
+} from './Pins'
 import TrackLocationButton from './TrackLocationButton'
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
@@ -24,7 +33,12 @@ const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
   const dispatch = useDispatch()
 
-  const { locationId } = useSelector((state) => state.location)
+  const {
+    locationId,
+    position,
+    isLoading: locationIsLoading,
+    isBeingEdited: isEditingLocation,
+  } = useSelector((state) => state.location)
   const isAddingLocation = locationId === 'new'
   const isViewingLocation = locationId !== null && locationId !== 'new'
 
@@ -40,11 +54,27 @@ const MapPage = ({ isDesktop }) => {
   const view = useSelector((state) => state.map.view)
   const clusters = useSelector((state) => state.map.clusters)
 
+  const latOfLocationBeingEdited = position?.lat
+  const lngOfLocationBeingEdited = position?.lng
   useEffect(() => {
     if (isAddingLocation) {
       dispatch(zoomInAndSave())
     }
   }, [dispatch, isAddingLocation])
+  useEffect(() => {
+    if (isEditingLocation) {
+      if (latOfLocationBeingEdited && lngOfLocationBeingEdited) {
+        dispatch(
+          zoomOnLocationAndSave({
+            lat: latOfLocationBeingEdited,
+            lng: lngOfLocationBeingEdited,
+          }),
+        )
+      }
+    } else {
+      dispatch(restoreOldView())
+    }
+  }, [dispatch, isEditingLocation]) // eslint-disable-line
 
   const handleLocationClick = isAddingLocation
     ? undefined
@@ -77,10 +107,12 @@ const MapPage = ({ isDesktop }) => {
       }
     >
       {isLoading && <BottomLeftLoadingIndicator />}
-      {isAddingLocation ? (
-        <AddLocationPin />
-      ) : (
-        !isDesktop && <AddLocationButton onClick={handleAddLocationClick} />
+      {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
+      {!locationId && !isDesktop && (
+        <AddLocationButton onClick={handleAddLocationClick} />
+      )}
+      {isEditingLocation && !isAddingLocation && !isDesktop && (
+        <EditLocationCentralUnmovablePin />
       )}
       {!isDesktop && <TrackLocationButton isIcon />}
 
@@ -96,7 +128,11 @@ const MapPage = ({ isDesktop }) => {
           typeName: getCommonName(location.type_ids[0]),
         }))}
         place={place}
+        position={isEditingLocation && isDesktop ? position : null}
         activeLocationId={locationId || hoveredLocationId}
+        editingLocationId={
+          isEditingLocation && !locationIsLoading ? locationId : null
+        }
         onViewChange={(newView) => {
           dispatch(viewChangeAndFetch(newView))
         }}
@@ -110,7 +146,7 @@ const MapPage = ({ isDesktop }) => {
         onNonspecificClick={() => dispatch(stopViewingLocation)}
         mapType={settings.mapType}
         layerTypes={settings.mapLayers}
-        showLabels={settings.showLabels || isAddingLocation}
+        showLabels={settings.showLabels || isEditingLocation}
         showStreetView={streetView}
         showBusinesses={settings.showBusinesses}
       />

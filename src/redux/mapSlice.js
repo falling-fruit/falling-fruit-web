@@ -141,6 +141,19 @@ export const mapSlice = createSlice({
       state.view.zoom = Math.max(state.view.zoom, MIN_LOCATION_ZOOM)
       state.place = null
     },
+    zoomOnLocationAndSave: (state, action) => {
+      state.oldView = { ...state.view }
+      state.view = {
+        center: action.payload,
+        zoom: Math.max(state.view.zoom, MIN_LOCATION_ZOOM),
+      }
+      state.place = null
+    },
+    restoreOldView: (state) => {
+      if (state.oldView) {
+        state.view = { ...state.oldView }
+      }
+    },
     zoomIn: (state, action) => {
       state.view = {
         center: action.payload,
@@ -188,10 +201,12 @@ export const mapSlice = createSlice({
         )
 
         // Combine with new locations in bounds
+        // If IDs are equal, prioritise the payload
+        // to e.g. correctly display a just-updated position
         state.locations = unionWith(
           eqBy(prop('id')),
-          locationsInBounds,
           action.payload,
+          locationsInBounds,
         )
       }
 
@@ -234,6 +249,8 @@ export const mapSlice = createSlice({
 
 export const {
   zoomInAndSave,
+  zoomOnLocationAndSave,
+  restoreOldView,
   zoomIn,
   clusterClick,
   viewChange,

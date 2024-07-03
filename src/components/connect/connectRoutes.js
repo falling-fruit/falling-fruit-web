@@ -5,9 +5,17 @@ import ConnectReview from './ConnectReview'
 import DisconnectLocation from './DisconnectLocation'
 
 const connectRoutes = [
-  <Route key="connect-location" path="/locations/:locationId">
+  <Route
+    key="connect-location"
+    path={['/locations/:locationId/:nextSegment', '/locations/:locationId']}
+  >
     {({ match }) =>
-      match && <ConnectLocation locationId={match.params.locationId} />
+      match && (
+        <ConnectLocation
+          locationId={match.params.locationId}
+          isBeingEdited={match.params.nextSegment === 'edit'}
+        />
+      )
     }
   </Route>,
   <Route key="connect-review" path="/reviews/:reviewId/edit">
