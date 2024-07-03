@@ -1,6 +1,11 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
+/**
+ * Map icon has an 8% border at the top and the bottom.
+ * Bottom of pin is thus 92% from the top and 42% from the center.
+ */
+
 const AddLocationPin = styled(Map)`
   height: 57px;
   color: ${({ theme }) => theme.blue};
@@ -8,7 +13,7 @@ const AddLocationPin = styled(Map)`
   top: 50%;
   left: 50%;
   // How to do this without transform/should I?
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -92%);
   // Display on top of map
   z-index: 1;
   // Allow clicking/dragging through the pin
@@ -23,7 +28,7 @@ const MapPin = styled(Map)`
 
   position: absolute;
   transform: translate(-50%, -50%);
-  top: -20px;
+  top: -20.16px;
   filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.45));
   color: ${({ theme }) => theme.orange};
 `
@@ -34,14 +39,12 @@ const EditLocationPin = styled(Map)`
 
   position: absolute;
   transform: translate(-50%, -50%);
-  top: -20px;
   filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.45));
   color: ${({ theme }) => theme.orange};
-  position: absolute;
   top: 50%;
   left: 50%;
   // How to do this without transform/should I?
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -92%);
   // Display on top of map
   z-index: 1;
   // Allow clicking/dragging through the pin
@@ -53,7 +56,7 @@ const BackgroundMapPin = styled(Map)`
   z-index: 3;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: -20px;
+  top: -20.16px;
   color: ${({ theme }) => theme.transparentOrange};
 `
 
