@@ -6,7 +6,7 @@ import { fetchReviewData } from './reviewSlice'
 
 export const fetchLocationData = createAsyncThunk(
   'locations/fetchLocationData',
-  async (locationId) => {
+  async ({ locationId }) => {
     const locationData = await getLocationById(locationId, 'reviews')
     return locationData
   },
@@ -34,15 +34,14 @@ const locationSlice = createSlice({
   extraReducers: {
     [fetchLocationData.pending]: (state, action) => {
       state.location = null
-      state.locationId = `pending-${action.meta.arg}`
+      state.locationId = parseInt(action.meta.arg.locationId)
       state.isLoading = true
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
-      // Accept the latest initiated fetch
-      if (state.locationId === `pending-${action.payload.id}`) {
+      // Accept the fetch if it's the most recent 'pending' one
+      if (state.locationId === parseInt(action.payload.id)) {
         state.location = action.payload
-        state.locationId = parseInt(action.payload.id)
       }
     },
     [fetchLocationData.rejected]: (state, action) => {
@@ -55,7 +54,7 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.location = null
       state.locationId = parseInt(action.payload.location_id)
-    }
+    },
   },
 })
 
