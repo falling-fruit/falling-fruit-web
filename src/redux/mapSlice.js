@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
-import { parseUrl } from '../utils/getInitialUrl'
 import { clearLocation, fetchLocationData } from './locationSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
@@ -16,8 +15,6 @@ import { updateSelection } from './updateSelection'
  * @property {number} zoom - The map's zoom level
  * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
  */
-const { isInitialEntry, ...initialView } = parseUrl()
-
 const MIN_TRACKING_ZOOM = 16
 const MIN_LOCATION_ZOOM = 18
 
@@ -42,7 +39,9 @@ export const fetchMapClusters = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState()
     return await getClusters(
-      selectParams(state, { zoom: state.map.view.zoom + 1 }),
+      selectParams(state, {
+        zoom: state.map.view?.zoom ? state.map.view.zoom + 1 : null,
+      }),
     )
   },
 )
@@ -50,9 +49,7 @@ export const fetchMapClusters = createAsyncThunk(
 export const mapSlice = createSlice({
   name: 'map',
   initialState: {
-    view: initialView,
-    isInitialEntry,
-    oldView: null,
+    view: null,
     isLoading: false,
     locations: [],
     isFilterUpdated: false,
@@ -68,9 +65,9 @@ export const mapSlice = createSlice({
     place: null,
   },
   reducers: {
-    // important: only dispatch viewChange in the handler of onViewChange in MapPage
-    // this should be called viewChange
-    viewChange: setReducer('view'),
+    setView: (state, action) => {
+      state.view = action.payload
+    },
     setHoveredLocationId: setReducer('hoveredLocationId'),
     setStreetView: setReducer('streetView'),
 
@@ -136,24 +133,6 @@ export const mapSlice = createSlice({
       state.geolocation = action.payload
     },
 
-    zoomInAndSave: (state) => {
-      state.oldView = { ...state.view }
-      state.view.zoom = Math.max(state.view.zoom, MIN_LOCATION_ZOOM)
-      state.place = null
-    },
-    zoomOnLocationAndSave: (state, action) => {
-      state.oldView = { ...state.view }
-      state.view = {
-        center: action.payload,
-        zoom: Math.max(state.view.zoom, MIN_LOCATION_ZOOM),
-      }
-      state.place = null
-    },
-    restoreOldView: (state) => {
-      if (state.oldView) {
-        state.view = { ...state.oldView }
-      }
-    },
     zoomIn: (state, action) => {
       state.view = {
         center: action.payload,
@@ -224,19 +203,6 @@ export const mapSlice = createSlice({
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.location = action.payload
-
-      if (state.isInitialEntry) {
-        const { lat, lng } = state.location
-
-        state.isInitialEntry = false
-        state.view = {
-          center: {
-            lat,
-            lng,
-          },
-          zoom: 16,
-        }
-      }
     },
     [clearLocation]: (state) => {
       if (state.oldView) {
@@ -248,12 +214,9 @@ export const mapSlice = createSlice({
 })
 
 export const {
-  zoomInAndSave,
-  zoomOnLocationAndSave,
-  restoreOldView,
   zoomIn,
   clusterClick,
-  viewChange,
+  setView,
   setHoveredLocationId,
   updateEntryLocation,
   startTrackingLocation,

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
-import { viewChange } from '../../redux/mapSlice'
+import { setView } from '../../redux/mapSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
@@ -24,7 +24,7 @@ const LocationPositionNav = () => {
 
   const handleCancel = () => {
     if (storedPosition) {
-      dispatch(viewChange({ center: storedPosition }))
+      dispatch(setView({ center: storedPosition }))
     }
     history.push(`/locations/${locationId}/edit/details`)
   }

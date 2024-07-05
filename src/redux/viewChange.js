@@ -8,8 +8,8 @@ import { clearListLocations } from './listSlice'
 import {
   fetchMapClusters,
   fetchMapLocations,
+  setView,
   stopTrackingLocation,
-  viewChange,
 } from './mapSlice'
 
 export const getIsShowingClusters = (state) =>
@@ -93,7 +93,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
     dispatch(stopTrackingLocation())
   }
 
-  dispatch(viewChange(newView))
+  dispatch(setView(newView))
   dispatch(fetchLocations()) // TODO: don't fetch new locations if is adding location
 
   if (state.filter.isOpen || state.misc.isDesktop) {

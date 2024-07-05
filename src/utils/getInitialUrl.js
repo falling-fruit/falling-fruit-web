@@ -1,5 +1,3 @@
-import { matchPath } from 'react-router-dom'
-
 const DEFAULT_LAT = 40.1125785
 const DEFAULT_LNG = -88.2287926
 const DEFAULT_ZOOM = 1
@@ -36,20 +34,17 @@ export const parseUrl = () => {
   const { pathname } = window.location
   const geocoordMatch = pathname.substring(pathname.indexOf('@'))
 
-  const isEntryPage = !!matchPath(pathname, '/locations/:id')
   const coords = getValidCoord(geocoordMatch)
 
   if (coords) {
     return {
       center: { lat: coords.lat, lng: coords.lng },
       zoom: coords.zoom,
-      isInitialEntry: false,
     }
   } else {
     return {
       center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
       zoom: DEFAULT_ZOOM,
-      isInitialEntry: isEntryPage,
     }
   }
 }

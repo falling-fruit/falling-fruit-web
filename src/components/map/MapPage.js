@@ -1,14 +1,10 @@
-import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import {
-  clusterClick,
-  restoreOldView,
-  zoomIn,
-  zoomInAndSave,
-  zoomOnLocationAndSave,
-} from '../../redux/mapSlice'
+import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
+import { clusterClick, zoomIn } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -30,6 +26,7 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
 `
 
 const MapPage = ({ isDesktop }) => {
+  const { t } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
 
@@ -54,28 +51,6 @@ const MapPage = ({ isDesktop }) => {
   const view = useSelector((state) => state.map.view)
   const clusters = useSelector((state) => state.map.clusters)
 
-  const latOfLocationBeingEdited = position?.lat
-  const lngOfLocationBeingEdited = position?.lng
-  useEffect(() => {
-    if (isAddingLocation) {
-      dispatch(zoomInAndSave())
-    }
-  }, [dispatch, isAddingLocation])
-  useEffect(() => {
-    if (isEditingLocation) {
-      if (latOfLocationBeingEdited && lngOfLocationBeingEdited) {
-        dispatch(
-          zoomOnLocationAndSave({
-            lat: latOfLocationBeingEdited,
-            lng: lngOfLocationBeingEdited,
-          }),
-        )
-      }
-    } else {
-      dispatch(restoreOldView())
-    }
-  }, [dispatch, isEditingLocation]) // eslint-disable-line
-
   const handleLocationClick = isAddingLocation
     ? undefined
     : (location) => {
@@ -94,7 +69,14 @@ const MapPage = ({ isDesktop }) => {
   }
 
   const handleAddLocationClick = () => {
-    history.push('/locations/new')
+    if (view.zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+      history.push({
+        pathname: '/locations/new',
+        state: { fromPage: '/map' },
+      })
+    } else {
+      toast.info(t('menu.zoom_in_to_add_location'))
+    }
   }
 
   return (
@@ -118,38 +100,40 @@ const MapPage = ({ isDesktop }) => {
 
       {locationRequested && <ConnectedGeolocation />}
 
-      <Map
-        bootstrapURLKeys={bootstrapURLKeys}
-        view={view}
-        geolocation={geolocation}
-        clusters={clusters}
-        locations={allLocations.map((location) => ({
-          ...location,
-          typeName: getCommonName(location.type_ids[0]),
-        }))}
-        place={place}
-        position={isEditingLocation && isDesktop ? position : null}
-        activeLocationId={locationId || hoveredLocationId}
-        editingLocationId={
-          isEditingLocation && !locationIsLoading ? locationId : null
-        }
-        onViewChange={(newView) => {
-          dispatch(viewChangeAndFetch(newView))
-        }}
-        onGeolocationClick={() => {
-          dispatch(
-            zoomIn({ lat: geolocation.latitude, lng: geolocation.longitude }),
-          )
-        }}
-        onLocationClick={handleLocationClick}
-        onClusterClick={handleClusterClick}
-        onNonspecificClick={() => dispatch(stopViewingLocation)}
-        mapType={settings.mapType}
-        layerTypes={settings.mapLayers}
-        showLabels={settings.showLabels || isEditingLocation}
-        showStreetView={streetView}
-        showBusinesses={settings.showBusinesses}
-      />
+      {view && (
+        <Map
+          bootstrapURLKeys={bootstrapURLKeys}
+          view={view}
+          geolocation={geolocation}
+          clusters={clusters}
+          locations={allLocations.map((location) => ({
+            ...location,
+            typeName: getCommonName(location.type_ids[0]),
+          }))}
+          place={place}
+          position={isEditingLocation && isDesktop ? position : null}
+          activeLocationId={locationId || hoveredLocationId}
+          editingLocationId={
+            isEditingLocation && !locationIsLoading ? locationId : null
+          }
+          onViewChange={(newView) => {
+            dispatch(viewChangeAndFetch(newView))
+          }}
+          onGeolocationClick={() => {
+            dispatch(
+              zoomIn({ lat: geolocation.latitude, lng: geolocation.longitude }),
+            )
+          }}
+          onLocationClick={handleLocationClick}
+          onClusterClick={handleClusterClick}
+          onNonspecificClick={() => dispatch(stopViewingLocation)}
+          mapType={settings.mapType}
+          layerTypes={settings.mapLayers}
+          showLabels={settings.showLabels || isEditingLocation}
+          showStreetView={streetView}
+          showBusinesses={settings.showBusinesses}
+        />
+      )}
     </div>
   )
 }
