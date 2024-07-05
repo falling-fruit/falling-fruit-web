@@ -2,9 +2,16 @@ import { Route } from 'react-router-dom'
 
 import ConnectLocation from './ConnectLocation'
 import ConnectReview from './ConnectReview'
+import ConnectView from './ConnectView'
 import DisconnectLocation from './DisconnectLocation'
 
 const connectRoutes = [
+  <Route
+    key="connect-view"
+    path={['/map', '/list', '/settings', '/locations/new']}
+  >
+    <ConnectView />
+  </Route>,
   <Route
     key="connect-location"
     path={['/locations/:locationId/:nextSegment', '/locations/:locationId']}

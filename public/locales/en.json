@@ -48,7 +48,8 @@
     "transit": "Transit"
   },
   "menu": {
-    "add_location": "Add a location"
+    "add_location": "Add a location",
+    "zoom_in_to_add_location": "Please zoom in closer to add a location"
   },
   "pages": {
     "project": "The project",
