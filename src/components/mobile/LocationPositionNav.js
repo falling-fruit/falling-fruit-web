@@ -19,7 +19,7 @@ const LocationPositionNav = () => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const { locationId } = useParams()
-  const center = useSelector((state) => state.map.view.center)
+  const center = useSelector((state) => state.map.view?.center)
   const storedPosition = useSelector((state) => state.location.position)
 
   const handleCancel = () => {

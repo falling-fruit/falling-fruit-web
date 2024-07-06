@@ -47,6 +47,9 @@ const locationSlice = createSlice({
     saveFormValues: (state, action) => {
       state.form = action.payload
     },
+    setIsBeingEdited: (state, action) => {
+      state.isBeingEdited = action.payload
+    },
   },
   extraReducers: {
     [fetchLocationData.pending]: (state, action) => {
@@ -88,6 +91,7 @@ export const {
   clearLocation,
   updatePosition,
   saveFormValues,
+  setIsBeingEdited,
 } = locationSlice.actions
 
 export default locationSlice.reducer
