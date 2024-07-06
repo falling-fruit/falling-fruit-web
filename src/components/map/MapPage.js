@@ -78,7 +78,6 @@ const MapPage = ({ isDesktop }) => {
       toast.info(t('menu.zoom_in_to_add_location'))
     }
   }
-
   return (
     <div
       // TODO: Use constants for mobile top and bottom position
