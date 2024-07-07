@@ -36,18 +36,18 @@ const LocationPositionNav = () => {
 
   return (
     <TopBarNav
-      left={<Instructions>Adjust location for the edited entry.</Instructions>}
+      left={<Instructions>Edit location position.</Instructions>}
       rightIcons={
         <>
           <IconButton
-            label="Cancel adjust location"
+            label="Cancel edit position"
             icon={<X />}
             raised
             size={54}
             onClick={handleCancel}
           />
           <IconButton
-            label="Confirm adjust location"
+            label="Confirm edit position"
             icon={<Check />}
             raised
             size={54}
