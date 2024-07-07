@@ -47,8 +47,11 @@ const locationSlice = createSlice({
     saveFormValues: (state, action) => {
       state.form = action.payload
     },
-    setIsBeingEdited: (state, action) => {
+    setIsBeingEditedAndResetPosition: (state, action) => {
       state.isBeingEdited = action.payload
+      if (state.location) {
+        state.position = { lat: state.location.lat, lng: state.location.lng }
+      }
     },
   },
   extraReducers: {
@@ -91,7 +94,7 @@ export const {
   clearLocation,
   updatePosition,
   saveFormValues,
-  setIsBeingEdited,
+  setIsBeingEditedAndResetPosition,
 } = locationSlice.actions
 
 export default locationSlice.reducer

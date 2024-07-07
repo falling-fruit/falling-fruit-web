@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchLocationData,
   initNewLocation,
-  setIsBeingEdited,
+  setIsBeingEditedAndResetPosition,
 } from '../../redux/locationSlice'
 import { setView } from '../../redux/mapSlice'
 import { parseUrl } from '../../utils/getInitialUrl'
@@ -41,7 +41,7 @@ const ConnectLocation = ({ locationId, isBeingEdited }) => {
   }, [dispatch, locationId]) //eslint-disable-line
 
   useEffect(() => {
-    dispatch(setIsBeingEdited(isBeingEdited))
+    dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
   }, [dispatch, isBeingEdited])
 
   useEffect(() => {
