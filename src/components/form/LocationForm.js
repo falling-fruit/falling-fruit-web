@@ -31,6 +31,11 @@ import {
 } from './ReviewForm'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
+const StyledPositionFieldLink = styled(Link)`
+  color: ${({ theme }) => theme.orange};
+  text-decoration: none;
+`
+
 const PROPERTY_ACCESS_LABELS = [
   'Source is on my property',
   'I have permission from the owner to add the source',
@@ -122,18 +127,18 @@ const InlineSelects = styled.div`
   }
 `
 
-const PositionFieldButton = ({ lat, lng, editingId }) => {
+const PositionFieldLink = ({ lat, lng, editingId }) => {
   const { values } = useFormikContext()
   const dispatch = useDispatch()
   return (
-    <Link
+    <StyledPositionFieldLink
       onClick={() => {
         dispatch(saveFormValues(values))
       }}
       to={`/locations/${editingId}/edit/position`}
     >
       <PositionFieldReadOnly lat={lat} lng={lng} />
-    </Link>
+    </StyledPositionFieldLink>
   )
 }
 
@@ -173,7 +178,7 @@ const LocationStep = ({
     ) : isDesktop || !editingId ? (
       <PositionFieldReadOnly lat={lat} lng={lng} />
     ) : (
-      <PositionFieldButton lat={lat} lng={lng} editingId={editingId} />
+      <PositionFieldLink lat={lat} lng={lng} editingId={editingId} />
     )}
     <Textarea
       name="description"
