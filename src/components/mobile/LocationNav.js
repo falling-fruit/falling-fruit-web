@@ -52,7 +52,9 @@ const LocationNav = () => {
       <Route path="/locations/new">
         <TopBarNav
           left={
-            <Instructions>Choose a location for your new entry.</Instructions>
+            <Instructions>
+              Choose a position for your new location.
+            </Instructions>
           }
           rightIcons={
             <>
