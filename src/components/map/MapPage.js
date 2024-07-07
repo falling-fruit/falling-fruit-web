@@ -92,9 +92,7 @@ const MapPage = ({ isDesktop }) => {
       {!locationId && !isDesktop && (
         <AddLocationButton onClick={handleAddLocationClick} />
       )}
-      {isEditingLocation && !isAddingLocation && !isDesktop && (
-        <EditLocationCentralUnmovablePin />
-      )}
+      {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
       {!isDesktop && <TrackLocationButton isIcon />}
 
       {locationRequested && <ConnectedGeolocation />}
@@ -110,10 +108,16 @@ const MapPage = ({ isDesktop }) => {
             typeName: getCommonName(location.type_ids[0]),
           }))}
           place={place}
-          position={isEditingLocation && isDesktop ? position : null}
+          position={
+            (isEditingLocation || isAddingLocation) && isDesktop
+              ? position
+              : null
+          }
           activeLocationId={locationId || hoveredLocationId}
           editingLocationId={
-            isEditingLocation && !locationIsLoading ? locationId : null
+            (isEditingLocation || isAddingLocation) && !locationIsLoading
+              ? locationId
+              : null
           }
           onViewChange={(newView) => {
             dispatch(viewChangeAndFetch(newView))
@@ -128,7 +132,9 @@ const MapPage = ({ isDesktop }) => {
           onNonspecificClick={() => dispatch(stopViewingLocation)}
           mapType={settings.mapType}
           layerTypes={settings.mapLayers}
-          showLabels={settings.showLabels || isEditingLocation}
+          showLabels={
+            settings.showLabels || isEditingLocation || isAddingLocation
+          }
           showStreetView={streetView}
           showBusinesses={settings.showBusinesses}
         />

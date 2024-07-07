@@ -34,7 +34,7 @@ const locationSlice = createSlice({
     initNewLocation: (state, action) => {
       state.isLoading = false
       state.location = null
-      state.isBeingEdited = true
+      state.isBeingEdited = false
       if (state.locationId !== 'new') {
         state.locationId = 'new'
         state.position = action.payload
