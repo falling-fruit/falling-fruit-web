@@ -7,12 +7,14 @@ import {
   setIsBeingEditedAndResetPosition,
 } from '../../redux/locationSlice'
 import { setView } from '../../redux/mapSlice'
-import { parseUrl } from '../../utils/getInitialUrl'
+import { getBaseUrl, parseUrl } from '../../utils/getInitialUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 
 const ConnectLocation = ({ locationId, isBeingEdited }) => {
   const dispatch = useDispatch()
   const view = useSelector((state) => state.map.view)
   const position = useSelector((state) => state.location.position)
+  const history = useAppHistory()
 
   useEffect(() => {
     if (locationId === 'new') {
@@ -25,6 +27,9 @@ const ConnectLocation = ({ locationId, isBeingEdited }) => {
       dispatch(fetchLocationData({ locationId, isBeingEdited })).then(
         (action) => {
           if (action.payload && !view) {
+            // If the view is null
+            // (e.g. we navigated to /locations/:locationId in the browser)
+            // set it to the centre of the retrieved location
             dispatch(
               setView({
                 center: {
@@ -34,6 +39,12 @@ const ConnectLocation = ({ locationId, isBeingEdited }) => {
                 zoom: 16,
               }),
             )
+            // and navigate to the page with the new URL
+            // to trigger component reload
+            const newUrl = `${getBaseUrl()}/@${action.payload.lat},${
+              action.payload.lng
+            },16z`
+            history.push(newUrl)
           }
         },
       )
