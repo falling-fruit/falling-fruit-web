@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types'
 import { memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { dismissEditingTooltip } from '../../redux/locationSlice'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import ResetButton from '../ui/ResetButton'
 import Label from './Label'
+import Tooltip from './LocationTooltip'
 import { BackgroundMapPin, MapPin } from './Pins'
 
 /**
@@ -29,14 +33,25 @@ const LocationButton = styled(ResetButton)`
   cursor: ${({ onClick }) => (onClick ? 'pointer' : 'unset')};
 `
 
-const Location = memo(({ label, selected, editing, onClick, ...props }) => (
-  <>
-    {selected && !editing && <MapPin />}
-    {editing && <BackgroundMapPin />}
-    <LocationButton onClick={onClick} {...props} />
-    <Label>{label}</Label>
-  </>
-))
+const Location = memo(({ label, selected, editing, onClick, ...props }) => {
+  const dispatch = useDispatch()
+  const editingTooltipOpen = useSelector(
+    (state) => state.location.editingTooltipOpen,
+  )
+  const isDesktop = useIsDesktop()
+
+  return (
+    <>
+      {selected && !editing && <MapPin />}
+      {editing && <BackgroundMapPin />}
+      <LocationButton onClick={onClick} {...props} />
+      <Label>{label}</Label>
+      {editing && editingTooltipOpen && isDesktop && (
+        <Tooltip onClose={() => dispatch(dismissEditingTooltip())} />
+      )}
+    </>
+  )
+})
 
 Location.displayName = 'Location'
 
