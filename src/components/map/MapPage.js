@@ -51,17 +51,19 @@ const MapPage = ({ isDesktop }) => {
   const view = useSelector((state) => state.map.view)
   const clusters = useSelector((state) => state.map.clusters)
 
-  const handleLocationClick = isAddingLocation
-    ? undefined
-    : (location) => {
-        history.push({
-          pathname: `/locations/${location.id}`,
-          state: { fromPage: '/map' },
-        })
-      }
-  const handleClusterClick = isAddingLocation
-    ? undefined
-    : (cluster) => dispatch(clusterClick(cluster))
+  const handleLocationClick =
+    isAddingLocation || isEditingLocation
+      ? undefined
+      : (location) => {
+          history.push({
+            pathname: `/locations/${location.id}`,
+            state: { fromPage: '/map' },
+          })
+        }
+  const handleClusterClick =
+    isAddingLocation || isEditingLocation
+      ? undefined
+      : (cluster) => dispatch(clusterClick(cluster))
   const stopViewingLocation = () => {
     if (isViewingLocation) {
       history.push('/map')
