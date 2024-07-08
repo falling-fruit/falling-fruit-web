@@ -69,9 +69,12 @@ const Tabs = () => {
 
   const handleTabChange = (newTabIndex) => {
     if (newTabIndex === 1 && locationId === 'new') {
-      // If switching to the Map tab and we've set the location in Redux to new, open the view
+      // If switching to the Map tab and adding the location, reopen that view
       // to allow e.g. switching satellite view on
       history.push(`/locations/new`)
+    } else if (newTabIndex === 1 && locationId) {
+      // We could also be editing position of the location
+      history.push(`/locations/${locationId}/edit/position`)
     } else if (
       newTabIndex === 0 &&
       pathname.includes('/locations') &&
