@@ -1,4 +1,5 @@
 import { Check, X } from '@styled-icons/boxicons-regular'
+import { useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -14,6 +15,7 @@ const Instructions = styled.span`
 
 const LocationNav = () => {
   const history = useAppHistory()
+  const { review } = useSelector((state) => state.review)
 
   const handleGoBack = (event) => {
     event.stopPropagation()
@@ -23,7 +25,15 @@ const LocationNav = () => {
   return (
     <Switch>
       <Route path="/reviews/:reviewId/edit">
-        {() => <TopBarNav onBack={handleGoBack} title="Editing Review" />}
+        {() => (
+          <TopBarNav
+            onBack={(event) => {
+              event.stopPropagation()
+              history.push(`/locations/${review?.location_id}`)
+            }}
+            title="Editing Review"
+          />
+        )}
       </Route>
       <Route path="/locations/:locationId/review">
         {() => <TopBarNav onBack={handleGoBack} title="Adding review" />}
