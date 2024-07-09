@@ -1,23 +1,25 @@
 import { Route } from 'react-router-dom'
 
 import ConnectLocation from './ConnectLocation'
+import ConnectNewLocation from './ConnectNewLocation'
 import ConnectReview from './ConnectReview'
 import ConnectView from './ConnectView'
 import DisconnectLocation from './DisconnectLocation'
 
 const connectRoutes = [
-  <Route
-    key="connect-view"
-    path={['/map', '/list', '/settings', '/locations/new']}
-  >
+  <Route key="connect-view" path={['/map', '/list', '/settings']}>
     <ConnectView />
+  </Route>,
+  <Route key="connect-new-location" path="/locations/new">
+    <ConnectNewLocation />
   </Route>,
   <Route
     key="connect-location"
     path={['/locations/:locationId/:nextSegment', '/locations/:locationId']}
   >
     {({ match }) =>
-      match && (
+      match &&
+      match.params.locationId !== 'new' && (
         <ConnectLocation
           locationId={match.params.locationId}
           isBeingEdited={match.params.nextSegment === 'edit'}

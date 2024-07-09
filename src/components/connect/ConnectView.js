@@ -3,15 +3,15 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 import { setView } from '../../redux/mapSlice'
-import { parseUrl } from '../../utils/getInitialUrl'
+import { getViewCoordsFromUrl } from '../../utils/getInitialUrl'
 
 const ConnectView = () => {
   const dispatch = useDispatch()
   const location = useLocation()
 
   useEffect(() => {
-    const { center, zoom } = parseUrl()
-    dispatch(setView({ center, zoom }))
+    const [_isValid, viewCoords] = getViewCoordsFromUrl()
+    dispatch(setView(viewCoords))
   }, [dispatch, location.pathname])
 
   return null
