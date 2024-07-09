@@ -30,12 +30,12 @@ const StreetViewUIWrapper = styled.div`
 `
 
 const CloseStreetView = ({ onClick }) => (
-    <StreetViewUIWrapper>
-      <OpacityButton onClick={onClick}>
-        <X height="22.91px" />
-      </OpacityButton>
-    </StreetViewUIWrapper>
-  )
+  <StreetViewUIWrapper>
+    <OpacityButton onClick={onClick}>
+      <X height="22.91px" />
+    </OpacityButton>
+  </StreetViewUIWrapper>
+)
 
 CloseStreetView.propTypes = {
   onClick: PropTypes.func.isRequired,
