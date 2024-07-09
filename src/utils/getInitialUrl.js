@@ -30,22 +30,28 @@ export const getPathWithMapState = (path) => {
   return pathNoTrailingSlash + mapState
 }
 
-export const parseUrl = () => {
+export const getViewCoordsFromUrl = () => {
   const { pathname } = window.location
   const geocoordMatch = pathname.substring(pathname.indexOf('@'))
 
   const coords = getValidCoord(geocoordMatch)
 
   if (coords) {
-    return {
-      center: { lat: coords.lat, lng: coords.lng },
-      zoom: coords.zoom,
-    }
+    return [
+      true,
+      {
+        center: { lat: coords.lat, lng: coords.lng },
+        zoom: coords.zoom,
+      },
+    ]
   } else {
-    return {
-      center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
-      zoom: DEFAULT_ZOOM,
-    }
+    return [
+      false,
+      {
+        center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
+        zoom: DEFAULT_ZOOM,
+      },
+    ]
   }
 }
 
