@@ -1,6 +1,3 @@
-import { createSelector } from '@reduxjs/toolkit'
-import { eqBy, prop, unionWith } from 'ramda'
-
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getBaseUrl } from '../utils/getInitialUrl'
 import { fetchFilterCounts } from './filterSlice'
@@ -14,18 +11,6 @@ import {
 
 export const getIsShowingClusters = (state) =>
   state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
-
-export const getAllLocations = createSelector(
-  (state) => state.map.locations,
-  (state) => state.map.clusters,
-  (state) => state.map.location,
-  (mapLocations, mapClusters, entryLocation) =>
-    mapClusters.length !== 0
-      ? []
-      : entryLocation
-        ? unionWith(eqBy(prop('id')), mapLocations, [entryLocation])
-        : mapLocations,
-)
 
 export const fetchLocations = () => (dispatch, getState) => {
   const state = getState()

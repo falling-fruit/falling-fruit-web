@@ -6,7 +6,7 @@ const placeholderPlace = { lat: 40.729884, lng: -73.990988 }
 const PanoramaHandler = ({ mapRef, mapsRef, showStreetView }) => {
   const [headingStatus, setHeadingStatus] = useState(false)
   const locationMarkerRef = useRef(null)
-  const mapLocation = useSelector((state) => state.map.location)
+  const mapLocation = useSelector((state) => state.location.location)
   const dispatch = useDispatch()
 
   const setHeading = async (panoClient, markerLocation, panorama) => {

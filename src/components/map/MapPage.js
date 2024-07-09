@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { clusterClick, zoomIn } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { getAllLocations, viewChangeAndFetch } from '../../redux/viewChange'
+import { viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
@@ -35,21 +35,34 @@ const MapPage = ({ isDesktop }) => {
     position,
     isLoading: locationIsLoading,
     isBeingEdited: isEditingLocation,
+    location: selectedLocation,
   } = useSelector((state) => state.location)
   const isAddingLocation = locationId === 'new'
   const isViewingLocation = locationId !== null && locationId !== 'new'
 
   const { getCommonName } = useTypesById()
   const settings = useSelector((state) => state.settings)
-  const allLocations = useSelector(getAllLocations)
-  const isLoading = useSelector((state) => state.map.isLoading)
-  const hoveredLocationId = useSelector((state) => state.map.hoveredLocationId)
-  const geolocation = useSelector((state) => state.map.geolocation)
-  const locationRequested = useSelector((state) => state.map.locationRequested)
-  const place = useSelector((state) => state.map.place)
-  const streetView = useSelector((state) => state.map.streetView)
-  const view = useSelector((state) => state.map.view)
-  const clusters = useSelector((state) => state.map.clusters)
+  const {
+    locations,
+    hoveredLocationId,
+    geolocation,
+    locationRequested,
+    place,
+    streetView,
+    view,
+    clusters,
+  } = useSelector((state) => state.map)
+
+  // TODO: find a way to update position after edit
+  const allLocations =
+    clusters.length !== 0
+      ? []
+      : selectedLocation
+        ? [...locations, selectedLocation].filter(
+            (loc, index, self) =>
+              index === self.findIndex((t) => t.id === loc.id),
+          )
+        : locations
 
   const handleLocationClick =
     isAddingLocation || isEditingLocation
@@ -89,7 +102,7 @@ const MapPage = ({ isDesktop }) => {
           : { width: '100%', position: 'fixed', bottom: '50px', top: '63px' }
       }
     >
-      {isLoading && <BottomLeftLoadingIndicator />}
+      {locationIsLoading && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
       {!locationId && !isDesktop && (
         <AddLocationButton onClick={handleAddLocationClick} />
