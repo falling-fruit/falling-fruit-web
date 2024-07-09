@@ -2,7 +2,7 @@ import { X } from '@styled-icons/boxicons-regular'
 import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
@@ -11,6 +11,7 @@ import ResetButton from '../ui/ResetButton'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
 import Location from './Location'
+import PanoramaHandler from './PanoramaHandler'
 import { DraggableMapPin } from './Pins'
 import Place from './Place'
 
@@ -52,7 +53,6 @@ const StreetViewUIWrapper = styled.div`
   }
 `
 
-const placeholderPlace = { lat: 40.729884, lng: -73.990988 }
 const Map = ({
   bootstrapURLKeys,
   view,
@@ -76,92 +76,12 @@ const Map = ({
 }) => {
   const mapRef = useRef(null)
   const mapsRef = useRef(null)
-  const locationMarkerRef = useRef(null)
-  const mapLocation = useSelector((state) => state.map.location)
-  const mapStreetView = useSelector((state) => state.map.streetView)
-  const [headingStatus, setHeadingStatus] = useState(false)
   const [draggedPosition, setDraggedPosition] = useState(null)
   useEffect(() => {
     setDraggedPosition(position)
   }, [position])
   const dispatch = useDispatch()
 
-  const setHeading = async (panoClient, markerLocation, panorama) => {
-    try {
-      // TODO!
-      // Let's move all this logic to the entry page load and open a second
-      // google map iframe/instance this way the map will be ready by the
-      // time the user clicks on it and we can tell users whether or not its
-      // available
-      const pano = await panoClient.getPanorama({
-        location: markerLocation,
-        radius: 50,
-      })
-
-      const heading = mapsRef.current.geometry.spherical.computeHeading(
-        pano.data.location.latLng,
-        markerLocation,
-      )
-
-      panorama.setPov({
-        heading: heading,
-        pitch: 0,
-      })
-    } catch (error) {
-      return false
-    }
-
-    return true
-  }
-
-  useEffect(() => {
-    const setHeadingWrapper = async () => {
-      if (mapRef.current) {
-        const panorama = mapRef.current.getStreetView()
-        const panoClient = new mapsRef.current.StreetViewService()
-        if (mapLocation) {
-          setHeadingStatus(await setHeading(panoClient, mapLocation, panorama))
-        }
-        if (headingStatus) {
-          if (mapLocation) {
-            if (showStreetView) {
-              locationMarkerRef.current = new mapsRef.current.Marker({
-                position: mapLocation,
-                mapRef,
-              })
-              locationMarkerRef.current.setMap(panorama)
-            }
-            panorama.setPosition(mapLocation)
-          } else {
-            panorama.setPosition(placeholderPlace)
-          }
-
-          // TODO bottom minimap
-          // panorama.controls[maps_state.current.ControlPosition.LEFT_BOTTOM].push(
-          //   widget.current,
-          // )
-          if (showStreetView) {
-            panorama.setOptions({
-              disableDefaultUI: true,
-              enableCloseButton: false,
-            })
-          } else {
-            if (locationMarkerRef.current) {
-              locationMarkerRef.current.setMap(null)
-            }
-          }
-        }
-        panorama.setVisible(showStreetView)
-        if (panorama.visible && !headingStatus) {
-          panorama.setVisible(!showStreetView)
-          if (locationMarkerRef.current) {
-            locationMarkerRef.current.setMap(null)
-          }
-        }
-      }
-    }
-    setHeadingWrapper()
-  }, [mapLocation, showStreetView, dispatch, mapStreetView, headingStatus])
   const apiIsLoaded = (map, maps) => {
     mapRef.current = map
     mapsRef.current = maps
@@ -174,7 +94,12 @@ const Map = ({
 
   return (
     <>
-      {showStreetView && headingStatus && (
+      <PanoramaHandler
+        mapRef={mapRef}
+        mapsRef={mapsRef}
+        showStreetView={showStreetView}
+      />
+      {showStreetView && (
         <StreetViewUIWrapper>
           <OpacityButton onClick={closeStreetView}>
             <X height="22.91px" />
