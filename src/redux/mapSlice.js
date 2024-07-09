@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
-import { clearLocation, fetchLocationData } from './locationSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 /**
@@ -61,7 +60,6 @@ export const mapSlice = createSlice({
     userDeniedLocation: false,
     locationRequested: false,
     streetView: false,
-    location: null,
     place: null,
   },
   reducers: {
@@ -169,7 +167,6 @@ export const mapSlice = createSlice({
       const { ne, sw } = state.view.bounds
 
       if (state.isFilterUpdated) {
-        state.location = null
         state.locations = action.payload
         state.isFilterUpdated = false
       } else {
@@ -200,15 +197,6 @@ export const mapSlice = createSlice({
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
-    },
-    [fetchLocationData.fulfilled]: (state, action) => {
-      state.location = action.payload
-    },
-    [clearLocation]: (state) => {
-      if (state.oldView) {
-        state.view = { ...state.oldView }
-        state.oldView = null
-      }
     },
   },
 })
