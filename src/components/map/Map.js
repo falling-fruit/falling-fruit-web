@@ -1,13 +1,11 @@
-import { X } from '@styled-icons/boxicons-regular'
 import GoogleMapReact from 'google-map-react'
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
 import { setStreetView } from '../../redux/mapSlice'
-import ResetButton from '../ui/ResetButton'
+import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
 import Location from './Location'
@@ -27,31 +25,6 @@ import Place from './Place'
  * @param {boolean} showLabels - Will display labels under locations if true
  * @param {boolean} showBusinesses - Will display businesses in the map if true
  */
-
-const OpacityButton = styled(ResetButton)`
-  background: rgba(0, 0, 0, 0.65);
-  padding: 15px;
-  box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
-  color: #ffffff;
-  z-index: 2;
-  border-radius: 0.375em;
-  font-size: 1.14rem;
-  cursor: pointer;
-  position: relative;
-`
-
-const StreetViewUIWrapper = styled.div`
-  width: calc(100% - 40px);
-  display: flex;
-  top: 20px;
-  left: 20px;
-  justify-content: space-between;
-  position: absolute;
-
-  @media ${({ theme }) => theme.device.mobile} {
-    top: 100px;
-  }
-`
 
 const Map = ({
   bootstrapURLKeys,
@@ -99,13 +72,7 @@ const Map = ({
         mapsRef={mapsRef}
         showStreetView={showStreetView}
       />
-      {showStreetView && (
-        <StreetViewUIWrapper>
-          <OpacityButton onClick={closeStreetView}>
-            <X height="22.91px" />
-          </OpacityButton>
-        </StreetViewUIWrapper>
-      )}
+      {showStreetView && <CloseStreetView onClick={closeStreetView} />}
       <GoogleMapReact
         onClick={({ event }) => {
           onNonspecificClick()
