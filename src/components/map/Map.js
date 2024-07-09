@@ -1,10 +1,14 @@
 import GoogleMapReact from 'google-map-react'
-import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { updatePosition } from '../../redux/locationSlice'
 import { setStreetView } from '../../redux/mapSlice'
+import { useTypesById } from '../../redux/useTypesById'
+import { viewChangeAndFetch } from '../../redux/viewChange'
+import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
+import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
 import Geolocation from './Geolocation'
@@ -13,48 +17,55 @@ import PanoramaHandler from './PanoramaHandler'
 import { DraggableMapPin } from './Pins'
 import Place from './Place'
 
-/**
- * Wrapper component around google-map-react.
- * @param {string} apiKey - The google maps API key
- * @param {Object} view - The current view state
- * @param {Object[]} locations - The locations to display
- * @param {Object[]} clusters - The clusters to display
- * @param {function} onClusterClick - The function called when a cluster is clicked
- * @param {function} onLocationClick - The function called when a location is clicked
- * @param {function} onViewChange - The function called when the view state is changed
- * @param {boolean} showLabels - Will display labels under locations if true
- * @param {boolean} showBusinesses - Will display businesses in the map if true
- */
+const Map = () => {
+  const dispatch = useDispatch()
+  const { getCommonName } = useTypesById()
 
-const Map = ({
-  bootstrapURLKeys,
-  view,
-  geolocation,
-  place,
-  locations,
-  activeLocationId,
-  editingLocationId,
-  clusters,
-  onGeolocationClick,
-  onClusterClick,
-  onLocationClick,
-  onNonspecificClick,
-  onViewChange,
-  showLabels,
-  mapType,
-  layerTypes,
-  showBusinesses,
-  showStreetView,
-  position,
-}) => {
+  const {
+    view,
+    geolocation,
+    place,
+    locations,
+    hoveredLocationId,
+    clusters,
+    streetView: showStreetView,
+  } = useSelector((state) => state.map)
+  const {
+    locationId,
+    position,
+    isBeingEdited: isEditingLocation,
+    location: selectedLocation,
+  } = useSelector((state) => state.location)
+  const {
+    mapType,
+    mapLayers: layerTypes,
+    showLabels,
+    showBusinesses,
+  } = useSelector((state) => state.settings)
+
+  //TODO not sure if selectedLocation is ever not in locations
+  const allLocations =
+    clusters.length !== 0
+      ? []
+      : selectedLocation
+        ? [...locations, selectedLocation].filter(
+            (loc, index, self) =>
+              index === self.findIndex((t) => t.id === loc.id),
+          )
+        : locations
+
+  const history = useAppHistory()
+  const activeLocationId = locationId || hoveredLocationId
+  const editingLocationId = isEditingLocation ? locationId : null
+  const isAddingLocation = locationId === 'new'
   const mapRef = useRef(null)
+  const isViewingLocation = locationId !== null && locationId !== 'new'
   const mapsRef = useRef(null)
   const [draggedPosition, setDraggedPosition] = useState(null)
+  const isDesktop = useIsDesktop()
   useEffect(() => {
-    setDraggedPosition(position)
-  }, [position])
-  const dispatch = useDispatch()
-
+    setDraggedPosition(isDesktop ? position : null)
+  }, [position, isDesktop])
   const apiIsLoaded = (map, maps) => {
     mapRef.current = map
     mapsRef.current = maps
@@ -65,6 +76,38 @@ const Map = ({
     dispatch(setStreetView(false))
   }
 
+  const handleGeolocationClick = () => {
+    dispatch(
+      viewChangeAndFetch({
+        center: { lat: geolocation.latitude, lng: geolocation.longitude },
+        zoom: Math.max(view.zoom, 15),
+      }),
+    )
+  }
+
+  const handleClusterClick = (cluster) => {
+    dispatch(
+      viewChangeAndFetch({
+        center: { lat: cluster.lat, lng: cluster.lng },
+        zoom: view.zoom + 1,
+      }),
+    )
+  }
+
+  const handleLocationClick = (location) => {
+    if (!isAddingLocation && !isEditingLocation) {
+      history.push({
+        pathname: `/locations/${location.id}`,
+        state: { fromPage: '/map' },
+      })
+    }
+  }
+
+  const handleNonspecificClick = () => {
+    if (isViewingLocation) {
+      history.push('/map')
+    }
+  }
   return (
     <>
       <PanoramaHandler
@@ -75,7 +118,7 @@ const Map = ({
       {showStreetView && <CloseStreetView onClick={closeStreetView} />}
       <GoogleMapReact
         onClick={({ event }) => {
-          onNonspecificClick()
+          handleNonspecificClick()
           event.stopPropagation()
         }}
         bootstrapURLKeys={bootstrapURLKeys}
@@ -101,14 +144,14 @@ const Map = ({
         layerTypes={layerTypes}
         center={view.center}
         zoom={view.zoom}
-        onChange={onViewChange}
+        onChange={(newView) => dispatch(viewChangeAndFetch(newView))}
         resetBoundsOnResize
         onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
         yesIWantToUseGoogleMapApiInternals
       >
         {geolocation && !geolocation.loading && !geolocation.error && (
           <Geolocation
-            onClick={onGeolocationClick}
+            onClick={handleGeolocationClick}
             lat={geolocation.latitude}
             lng={geolocation.longitude}
             heading={geolocation.heading}
@@ -120,26 +163,22 @@ const Map = ({
         {clusters.map((cluster) => (
           <Cluster
             key={JSON.stringify(cluster)}
-            onClick={
-              onClusterClick
-                ? (event) => {
-                    onClusterClick(cluster)
-                    event.stopPropagation()
-                  }
-                : undefined
-            }
+            onClick={(event) => {
+              handleClusterClick(cluster)
+              event.stopPropagation()
+            }}
             count={cluster.count}
             lat={cluster.lat}
             lng={cluster.lng}
           />
         ))}
-        {locations.map((location) => (
+        {allLocations.map((location) => (
           <Location
             key={location.id}
             onClick={
-              onLocationClick
+              handleLocationClick
                 ? (event) => {
-                    onLocationClick(location)
+                    handleLocationClick(location)
                     event.stopPropagation()
                   }
                 : undefined
@@ -148,7 +187,7 @@ const Map = ({
             lng={location.lng}
             selected={location.id === activeLocationId}
             editing={location.id === editingLocationId}
-            label={showLabels ? location.typeName : undefined}
+            label={showLabels ? getCommonName(location.type_ids[0]) : undefined}
           />
         ))}
         {draggedPosition && (
@@ -164,27 +203,6 @@ const Map = ({
       </GoogleMapReact>
     </>
   )
-}
-
-Map.propTypes = {
-  bootstrapURLKeys: PropTypes.object.isRequired,
-  view: PropTypes.object.isRequired,
-  geolocation: PropTypes.object,
-  locations: PropTypes.arrayOf(PropTypes.object).isRequired,
-  place: PropTypes.object,
-  activeLocationId: PropTypes.number,
-  clusters: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onViewChange: PropTypes.func.isRequired,
-  onClusterClick: PropTypes.func,
-  onLocationClick: PropTypes.func,
-  mapType: PropTypes.string,
-  layerTypes: PropTypes.arrayOf(PropTypes.string),
-  showLabels: PropTypes.bool,
-  showBusinesses: PropTypes.bool,
-  position: PropTypes.shape({
-    lat: PropTypes.number,
-    lng: PropTypes.number,
-  }),
 }
 
 export default Map
