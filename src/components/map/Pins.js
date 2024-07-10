@@ -1,10 +1,15 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
+
+import { dismissLocationTooltip } from '../../redux/locationSlice'
+import Tooltip from './LocationTooltip'
 
 const AddLocationPin = styled(Map)`
   height: 57px;
   z-index: 4;
+  position: absolute;
   transform: translate(-50%, -50%);
   top: -23.94px;
   color: ${({ theme }) => theme.blue};
@@ -53,14 +58,9 @@ EditLocationCentralUnmovablePin.defaultProps = {
   as: Map,
 }
 
-const DraggableMapPin = ({
-  onDragEnd,
-  onChange,
-  $geoService,
-  lat,
-  lng,
-  isNewLocation,
-}) => {
+const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
+  const dispatch = useDispatch()
+  const { locationId, tooltipOpen } = useSelector((state) => state.location)
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
 
@@ -106,18 +106,22 @@ const DraggableMapPin = ({
     }
   }, [isDragging, dragOffset]) //eslint-disable-line
 
-  const LocationPin = isNewLocation ? AddLocationPin : EditLocationPin
+  const LocationPin = locationId === 'new' ? AddLocationPin : EditLocationPin
 
   return (
-    <LocationPin
-      lat={lat}
-      lng={lng}
-      onMouseDown={handleMouseDown}
-      style={{
-        cursor: isDragging ? 'grabbing' : 'pointer', // 'grab' taken for panning
-      }}
-      isNewLocation
-    />
+    <>
+      <LocationPin
+        lat={lat}
+        lng={lng}
+        onMouseDown={handleMouseDown}
+        style={{
+          cursor: isDragging ? 'grabbing' : 'pointer', // 'grab' taken for panning
+        }}
+      />
+      {tooltipOpen && (
+        <Tooltip onClose={() => dispatch(dismissLocationTooltip())} />
+      )}
+    </>
   )
 }
 

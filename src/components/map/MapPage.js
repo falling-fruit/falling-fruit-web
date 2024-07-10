@@ -239,14 +239,13 @@ const MapPage = ({ isDesktop }) => {
               }
             />
           ))}
-          {draggedPosition && (
+          {(isEditingLocation || isAddingLocation) && draggedPosition && (
             <DraggableMapPin
               lat={draggedPosition.lat}
               lng={draggedPosition.lng}
               $geoService={mapsRef.current?.Geocoder}
               onChange={setDraggedPosition}
               onDragEnd={(newPosition) => dispatch(updatePosition(newPosition))}
-              isNewLocation={editingLocationId === 'new'}
             />
           )}
         </GoogleMapReact>

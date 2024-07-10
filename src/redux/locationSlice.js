@@ -21,7 +21,7 @@ const locationSlice = createSlice({
     locationId: null,
     isBeingEdited: false,
     form: null,
-    editingTooltipOpen: false,
+    tooltipOpen: false,
   },
   reducers: {
     clearLocation: (state) => {
@@ -31,7 +31,7 @@ const locationSlice = createSlice({
       state.position = null
       state.isBeingEdited = false
       state.form = null
-      state.editingTooltipOpen = false
+      state.tooltipOpen = false
     },
     initNewLocation: (state, action) => {
       state.isLoading = false
@@ -42,7 +42,7 @@ const locationSlice = createSlice({
         state.position = action.payload
       }
       state.form = null
-      state.editingTooltipOpen = false
+      state.tooltipOpen = true
     },
     updatePosition: (state, action) => {
       state.position = action.payload
@@ -55,10 +55,10 @@ const locationSlice = createSlice({
       if (state.location) {
         state.position = { lat: state.location.lat, lng: state.location.lng }
       }
-      state.editingTooltipOpen = action.payload ? true : false
+      state.tooltipOpen = action.payload ? true : false
     },
-    dismissEditingTooltip: (state) => {
-      state.editingTooltipOpen = false
+    dismissLocationTooltip: (state) => {
+      state.tooltipOpen = false
     },
   },
   extraReducers: {
@@ -69,7 +69,7 @@ const locationSlice = createSlice({
       state.position = null
       state.isBeingEdited = action.meta.arg.isBeingEdited
       state.form = null
-      state.editingTooltipOpen = action.meta.arg.isBeingEdited
+      state.tooltipOpen = action.meta.arg.isBeingEdited
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -85,7 +85,7 @@ const locationSlice = createSlice({
       state.locationId = null
       state.position = null
       state.isBeingEdited = false
-      state.editingTooltipOpen = false
+      state.tooltipOpen = false
       toast.error(`Error fetching location data: ${action.meta.arg}`)
     },
     [fetchReviewData.fulfilled]: (state, action) => {
@@ -104,7 +104,7 @@ export const {
   updatePosition,
   saveFormValues,
   setIsBeingEditedAndResetPosition,
-  dismissEditingTooltip,
+  dismissLocationTooltip,
 } = locationSlice.actions
 
 export default locationSlice.reducer
