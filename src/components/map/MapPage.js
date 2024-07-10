@@ -64,7 +64,7 @@ const MapPage = ({ isDesktop }) => {
   const {
     mapType,
     mapLayers: layerTypes,
-    showLabels,
+    showLabels: settingsShowLabels,
     showBusinesses,
   } = useSelector((state) => state.settings)
 
@@ -82,6 +82,7 @@ const MapPage = ({ isDesktop }) => {
   const editingLocationId = isEditingLocation ? locationId : null
   const isAddingLocation = locationId === 'new'
   const isViewingLocation = locationId !== null && locationId !== 'new'
+  const showLabels = settingsShowLabels || isAddingLocation || isEditingLocation
 
   useEffect(() => {
     setDraggedPosition(isDesktop ? position : null)
@@ -223,12 +224,12 @@ const MapPage = ({ isDesktop }) => {
             <Location
               key={location.id}
               onClick={
-                handleLocationClick
-                  ? (event) => {
+                isEditingLocation || isAddingLocation
+                  ? null
+                  : (event) => {
                       handleLocationClick(location)
                       event.stopPropagation()
                     }
-                  : undefined
               }
               lat={location.lat}
               lng={location.lng}

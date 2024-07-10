@@ -372,7 +372,7 @@ export const LocationForm = ({
     }
 
     if (response && !response.error) {
-      dispatch(fetchLocations)
+      dispatch(fetchLocations())
       onSubmit(response)
     }
   }
