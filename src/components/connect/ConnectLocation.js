@@ -6,7 +6,7 @@ import {
   setIsBeingEditedAndResetPosition,
 } from '../../redux/locationSlice'
 import { setView } from '../../redux/mapSlice'
-import { getBaseUrl } from '../../utils/getInitialUrl'
+import { currentPathWithView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
@@ -21,23 +21,23 @@ const ConnectLocation = ({ locationId, isBeingEdited }) => {
     dispatch(fetchLocationData({ locationId, isBeingEdited })).then(
       (action) => {
         if (action.payload && !view) {
+          // TODO: the view could be null because it wasn't set yet but present in coords
+          // use parseCurrentUrl instead
+          // old comment:
           // If the view is null
           // (e.g. we navigated to /locations/:locationId in the browser)
           // set it to the centre of the retrieved location
-          dispatch(
-            setView({
-              center: {
-                lat: action.payload.lat,
-                lng: action.payload.lng,
-              },
-              zoom: 16,
-            }),
-          )
+          const newView = {
+            center: {
+              lat: action.payload.lat,
+              lng: action.payload.lng,
+            },
+            zoom: 16,
+          }
+          dispatch(setView(newView))
           // and navigate to the page with the new URL
           // to trigger component reload
-          const newUrl = `${getBaseUrl()}/@${action.payload.lat},${
-            action.payload.lng
-          },16z`
+          const newUrl = currentPathWithView(newView)
           history.push(newUrl)
         }
       },

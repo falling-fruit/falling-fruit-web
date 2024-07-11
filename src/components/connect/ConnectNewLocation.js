@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 import { initNewLocation } from '../../redux/locationSlice'
 import { setView } from '../../redux/mapSlice'
-import { getViewCoordsFromUrl } from '../../utils/getInitialUrl'
+import { parseCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
@@ -16,12 +16,16 @@ const ConnectNewLocation = () => {
   const isDesktop = useIsDesktop()
 
   useEffect(() => {
-    const [isValid, { center, zoom: currentZoom }] = getViewCoordsFromUrl()
-    if (isValid) {
+    const { view } = parseCurrentUrl()
+
+    if (view) {
       dispatch(
-        setView({ center, zoom: Math.max(currentZoom, isDesktop ? 0 : 16) }),
+        setView({
+          center: view.center,
+          zoom: Math.max(view.zoom, isDesktop ? 0 : 16),
+        }),
       )
-      dispatch(initNewLocation(center))
+      dispatch(initNewLocation(view.center))
     } else {
       toast.error(`Could not initialize new location at: ${location.pathname}`)
       history.push('/map')
