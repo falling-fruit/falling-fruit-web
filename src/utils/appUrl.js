@@ -23,7 +23,7 @@ export const parseCurrentUrl = () => {
     return { path, view: null }
   }
 
-  if (lat < -90 || lat > 90 || lng < -180 || lng > 180 || zoom > 21) {
+  if (lat < -90 || lat > 90 || lng < -180 || lng > 180 || zoom > 22) {
     return { path, view: null }
   }
 
