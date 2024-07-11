@@ -30,13 +30,13 @@ const LocationButton = styled(ResetButton)`
 `
 
 const Location = memo(({ label, selected, editing, onClick, ...props }) => (
-    <>
-      {selected && !editing && <MapPin />}
-      {editing && <BackgroundMapPin />}
-      <LocationButton onClick={onClick} {...props} />
-      <Label>{label}</Label>
-    </>
-  ))
+  <>
+    {selected && !editing && <MapPin />}
+    {editing && <BackgroundMapPin />}
+    <LocationButton onClick={onClick} {...props} />
+    <Label>{label}</Label>
+  </>
+))
 
 Location.displayName = 'Location'
 
