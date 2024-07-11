@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 import { resetPassword } from '../../utils/api'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Input } from '../form/FormikWrappers'
@@ -36,7 +36,7 @@ const PasswordSetPage = () => {
   }, [history, t])
 
   if (!isLoading && user) {
-    return <Redirect to={getPathWithMapState('/map')} />
+    return <Redirect to={pathWithCurrentView('/map')} />
   }
 
   const handleSubmit = async ({ password }) => {

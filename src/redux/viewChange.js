@@ -1,5 +1,5 @@
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
-import { getBaseUrl } from '../utils/getInitialUrl'
+import { currentPathWithView } from '../utils/appUrl'
 import { fetchFilterCounts } from './filterSlice'
 import { clearListLocations } from './listSlice'
 import {
@@ -59,10 +59,8 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
+  const newUrl = currentPathWithView(newView)
 
-  const newUrl = `${getBaseUrl()}/@${newView.center.lat},${
-    newView.center.lng
-  },${newView.zoom}z`
   window.history.pushState({}, '', newUrl)
 
   // TODO: fine-tune this constant

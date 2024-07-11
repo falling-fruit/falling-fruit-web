@@ -5,7 +5,7 @@ import { Link, Redirect, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { Checkbox, Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
@@ -27,7 +27,7 @@ const LoginPage = () => {
   const dispatch = useDispatch()
 
   if (!isLoading && user) {
-    return <Redirect to={getPathWithMapState('/map')} />
+    return <Redirect to={pathWithCurrentView('/map')} />
   }
 
   return (

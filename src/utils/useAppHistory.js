@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 
-import { getPathWithMapState } from './getInitialUrl'
+import { pathWithCurrentView } from './appUrl'
 
 /**
  * Wraps useAppHistory from react-router-dom to automatically preserve
@@ -12,11 +12,11 @@ export const useAppHistory = () => {
   const pushWithMapState = (to, state) => {
     let newTo
     if (typeof to === 'string') {
-      newTo = getPathWithMapState(to)
+      newTo = pathWithCurrentView(to)
     } else {
       newTo = { ...to }
       if (to.pathname != null) {
-        newTo.pathname = getPathWithMapState(to.pathname)
+        newTo.pathname = pathWithCurrentView(to.pathname)
       }
     }
 

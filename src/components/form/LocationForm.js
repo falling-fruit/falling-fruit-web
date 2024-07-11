@@ -10,7 +10,7 @@ import { saveFormValues } from '../../redux/locationSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
@@ -136,7 +136,7 @@ const PositionFieldLink = ({ lat, lng, editingId }) => {
       onClick={() => {
         dispatch(saveFormValues(values))
       }}
-      to={getPathWithMapState(`/locations/${editingId}/edit/position`)}
+      to={pathWithCurrentView(`/locations/${editingId}/edit/position`)}
     >
       <PositionFieldReadOnly lat={lat} lng={lng} />
     </StyledPositionFieldLink>
