@@ -81,7 +81,8 @@ const MapPage = ({ isDesktop }) => {
   const activeLocationId = locationId || hoveredLocationId
   const editingLocationId = isEditingLocation ? locationId : null
   const isAddingLocation = locationId === 'new'
-  const isViewingLocation = locationId !== null && locationId !== 'new'
+  const isViewingLocation =
+    locationId !== null && !isEditingLocation && !isAddingLocation
   const showLabels = settingsShowLabels || isAddingLocation || isEditingLocation
 
   useEffect(() => {
