@@ -10,7 +10,11 @@ import { currentPathWithView, parseCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
-const ConnectLocation = ({ locationId, isBeingEdited }) => {
+const ConnectLocation = ({
+  locationId,
+  isBeingEdited,
+  isBeingEditedDetails,
+}) => {
   const dispatch = useDispatch()
   const viewRedux = useSelector((state) => state.map.view)
   const position = useSelector((state) => state.location.position)
@@ -44,10 +48,12 @@ const ConnectLocation = ({ locationId, isBeingEdited }) => {
   }, [dispatch, isBeingEdited])
 
   useEffect(() => {
-    if (isBeingEdited && position && !isDesktop) {
+    if (isBeingEdited && isBeingEditedDetails && position && !isDesktop) {
       // On mobile, we need to center the map on the edited location
       // because the UX involves panning the map under a central pin
-      // Todo how to allow roundtrip to settings?:w
+      //
+      // do this after navigating to the form, since when we're editing position
+      // we might want to roundtrip to settings
       dispatch(
         setView({
           center: {
@@ -58,7 +64,7 @@ const ConnectLocation = ({ locationId, isBeingEdited }) => {
         }),
       )
     }
-  }, [dispatch, isBeingEdited, locationId, isDesktop]) //eslint-disable-line
+  }, [dispatch, isBeingEdited, isBeingEditedDetails, locationId, isDesktop]) //eslint-disable-line
 
   return null
 }

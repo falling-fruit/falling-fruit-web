@@ -15,7 +15,11 @@ const connectRoutes = [
   </Route>,
   <Route
     key="connect-location"
-    path={['/locations/:locationId/:nextSegment', '/locations/:locationId']}
+    path={[
+      '/locations/:locationId/:nextSegment/:nextNextSegment',
+      '/locations/:locationId/:nextSegment',
+      '/locations/:locationId',
+    ]}
   >
     {({ match }) =>
       match &&
@@ -23,6 +27,7 @@ const connectRoutes = [
         <ConnectLocation
           locationId={match.params.locationId}
           isBeingEdited={match.params.nextSegment === 'edit'}
+          isBeingEditedDetails={match.params.nextNextSegment === 'details'}
         />
       )
     }
