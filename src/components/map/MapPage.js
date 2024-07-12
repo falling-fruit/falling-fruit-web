@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { updatePosition } from '../../redux/locationSlice'
-import { setStreetView } from '../../redux/mapSlice'
+import { decreaseZoom, increaseZoom, setStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -32,6 +32,30 @@ const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
   left: 10px;
   bottom: 10px;
+`
+
+const ZoomButton = styled.button`
+  position: absolute;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+`
+
+const ZoomInButton = styled(ZoomButton)`
+  top: calc(50% - 45px);
+`
+
+const ZoomOutButton = styled(ZoomButton)`
+  top: calc(50% + 5px);
 `
 
 const MapPage = ({ isDesktop }) => {
@@ -155,6 +179,9 @@ const MapPage = ({ isDesktop }) => {
       )}
       {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
       {!isDesktop && <TrackLocationButton isIcon />}
+
+      <ZoomInButton onClick={() => dispatch(increaseZoom())}>+</ZoomInButton>
+      <ZoomOutButton onClick={() => dispatch(decreaseZoom())}>-</ZoomOutButton>
 
       {locationRequested && <ConnectedGeolocation />}
 
