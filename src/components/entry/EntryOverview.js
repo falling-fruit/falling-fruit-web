@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { setStreetView, zoomIn } from '../../redux/mapSlice'
+import { setCenterOnLocation, setStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -64,7 +64,7 @@ const EntryOverview = ({ locationData, className }) => {
 
   const handleAddressClick = () => {
     dispatch(
-      zoomIn({
+      setCenterOnLocation({
         lat: locationData.lat,
         lng: locationData.lng,
       }),
