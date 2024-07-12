@@ -77,6 +77,7 @@ const MapPage = ({ isDesktop }) => {
     clusters,
     streetView: showStreetView,
     locationRequested,
+    isLoading: mapIsLoading,
   } = useSelector((state) => state.map)
   const {
     locationId,
@@ -180,7 +181,7 @@ const MapPage = ({ isDesktop }) => {
           : { width: '100%', position: 'fixed', bottom: '50px', top: '63px' }
       }
     >
-      {locationIsLoading && <BottomLeftLoadingIndicator />}
+      {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
       {!locationId && !isDesktop && (
         <AddLocationButton onClick={handleAddLocationClick} />
