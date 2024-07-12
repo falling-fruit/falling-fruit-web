@@ -66,7 +66,6 @@ export const mapSlice = createSlice({
     setView: (state, action) => {
       state.view = action.payload
     },
-    setHoveredLocationId: setReducer('hoveredLocationId'),
     setStreetView: setReducer('streetView'),
 
     startTrackingLocation: (state) => {
@@ -205,7 +204,6 @@ export const {
   zoomIn,
   clusterClick,
   setView,
-  setHoveredLocationId,
   updateEntryLocation,
   startTrackingLocation,
   stopTrackingLocation,

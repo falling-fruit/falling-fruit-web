@@ -49,7 +49,6 @@ const MapPage = ({ isDesktop }) => {
     geolocation,
     place,
     locations,
-    hoveredLocationId,
     clusters,
     streetView: showStreetView,
     locationRequested,
@@ -78,8 +77,6 @@ const MapPage = ({ isDesktop }) => {
           )
         : locations
 
-  const activeLocationId = locationId || hoveredLocationId
-  const editingLocationId = isEditingLocation ? locationId : null
   const isAddingLocation = locationId === 'new'
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
@@ -234,8 +231,8 @@ const MapPage = ({ isDesktop }) => {
               }
               lat={location.lat}
               lng={location.lng}
-              selected={location.id === activeLocationId}
-              editing={location.id === editingLocationId}
+              selected={location.id === locationId}
+              editing={isEditingLocation}
               label={
                 showLabels ? getCommonName(location.type_ids[0]) : undefined
               }
