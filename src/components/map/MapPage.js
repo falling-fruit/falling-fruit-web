@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { updatePosition } from '../../redux/locationSlice'
-import { decreaseZoom, increaseZoom, setStreetView } from '../../redux/mapSlice'
+import { setStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -46,7 +46,8 @@ const ZoomButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   z-index: 1;
 `
 
@@ -164,6 +165,13 @@ const MapPage = ({ isDesktop }) => {
       toast.info(t('menu.zoom_in_to_add_location'))
     }
   }
+
+  const zoomIn = () => {
+    mapRef.current?.setZoom(view.zoom + 1)
+  }
+  const zoomOut = () => {
+    mapRef.current?.setZoom(view.zoom - 1)
+  }
   return (
     <div
       style={
@@ -180,8 +188,12 @@ const MapPage = ({ isDesktop }) => {
       {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
       {!isDesktop && <TrackLocationButton isIcon />}
 
-      <ZoomInButton onClick={() => dispatch(increaseZoom())}>+</ZoomInButton>
-      <ZoomOutButton onClick={() => dispatch(decreaseZoom())}>-</ZoomOutButton>
+      <ZoomInButton onClick={zoomIn} disabled={!view || view.zoom >= 22}>
+        +
+      </ZoomInButton>
+      <ZoomOutButton onClick={zoomOut} disabled={!view || view.zoom <= 4}>
+        -
+      </ZoomOutButton>
 
       {locationRequested && <ConnectedGeolocation />}
 

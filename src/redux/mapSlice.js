@@ -130,24 +130,6 @@ export const mapSlice = createSlice({
       state.geolocation = action.payload
     },
 
-    increaseZoom: (state) => {
-      if (state.view.zoom < 22) {
-        state.view = {
-          center: state.view.center,
-          zoom: state.view.zoom + 1,
-        }
-      }
-    },
-
-    decreaseZoom: (state) => {
-      if (state.view.zoom > 4) {
-        state.view = {
-          center: state.view.center,
-          zoom: state.view.zoom - 1,
-        }
-      }
-    },
-
     setCenterOnLocation: (state, action) => {
       state.view = {
         center: action.payload,
@@ -219,8 +201,6 @@ export const mapSlice = createSlice({
 })
 
 export const {
-  increaseZoom,
-  decreaseZoom,
   setCenterOnLocation,
   clusterClick,
   setView,
