@@ -117,6 +117,11 @@ const MapPage = ({ isDesktop }) => {
     mapsRef.current = maps
   }
 
+  const handleClusterClick = (cluster) => {
+    mapRef.current?.panTo({ lat: cluster.lat, lng: cluster.lng })
+    mapRef.current?.setZoom(view.zoom + 1)
+  }
+
   const closeStreetView = (event) => {
     event.stopPropagation()
     dispatch(setStreetView(false))
@@ -127,15 +132,6 @@ const MapPage = ({ isDesktop }) => {
       viewChangeAndFetch({
         center: { lat: geolocation.latitude, lng: geolocation.longitude },
         zoom: Math.max(view.zoom, 15),
-      }),
-    )
-  }
-
-  const handleClusterClick = (cluster) => {
-    dispatch(
-      viewChangeAndFetch({
-        center: { lat: cluster.lat, lng: cluster.lng },
-        zoom: view.zoom + 1,
       }),
     )
   }
