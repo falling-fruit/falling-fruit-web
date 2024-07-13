@@ -119,7 +119,11 @@ const MapPage = ({ isDesktop }) => {
 
   const handleClusterClick = (cluster) => {
     mapRef.current?.panTo({ lat: cluster.lat, lng: cluster.lng })
-    mapRef.current?.setZoom(view.zoom + 1)
+    mapRef.current?.setZoom(
+      cluster.count === 1
+        ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
+        : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, view.zoom + 3),
+    )
   }
 
   const closeStreetView = (event) => {
