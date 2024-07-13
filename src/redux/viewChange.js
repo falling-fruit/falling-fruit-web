@@ -1,13 +1,9 @@
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { currentPathWithView } from '../utils/appUrl'
 import { fetchFilterCounts } from './filterSlice'
+import { disableGeolocation } from './geolocationSlice'
 import { clearListLocations } from './listSlice'
-import {
-  fetchMapClusters,
-  fetchMapLocations,
-  setView,
-  stopTrackingLocation,
-} from './mapSlice'
+import { fetchMapClusters, fetchMapLocations, setView } from './mapSlice'
 
 export const getIsShowingClusters = (state) =>
   state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
@@ -68,12 +64,12 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
 
   if (
     shouldStopTrackingLocation(
-      state.map.geolocation,
+      state.geolocation.geolocation,
       newView,
       stopTrackingLocationThreshold,
     )
   ) {
-    dispatch(stopTrackingLocation())
+    dispatch(disableGeolocation())
   }
 
   dispatch(setView(newView))

@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history'
 
 import authReducer from './authSlice'
 import filterReducer from './filterSlice'
+import geolocationReducer from './geolocationSlice'
 import listReducer from './listSlice'
 import locationReducer from './locationSlice'
 import mapReducer from './mapSlice'
@@ -22,6 +23,7 @@ export const store = configureStore({
     misc: miscReducer,
     location: locationReducer,
     review: reviewReducer,
+    geolocation: geolocationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

@@ -1,19 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fitBounds } from 'google-map-react'
 import { eqBy, prop, unionWith } from 'ramda'
-import { toast } from 'react-toastify'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
+import { geolocationReceived, GeolocationState } from './geolocationSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
-/**
- * Initial view state of the map.
- * @constant {Object}
- * @property {number[]} center - The latitude and longitude of the map's center
- * @property {number} zoom - The map's zoom level
- * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
- */
+
 const MIN_TRACKING_ZOOM = 16
 const MIN_LOCATION_ZOOM = 18
 
@@ -53,12 +47,6 @@ export const mapSlice = createSlice({
     locations: [],
     isFilterUpdated: false,
     clusters: [],
-    hoveredLocationId: null,
-    geolocation: null,
-    isTrackingLocation: false,
-    justStartedTrackingLocation: false,
-    userDeniedLocation: false,
-    locationRequested: false,
     streetView: false,
     place: null,
   },
@@ -67,69 +55,6 @@ export const mapSlice = createSlice({
       state.view = action.payload
     },
     setStreetView: setReducer('streetView'),
-
-    startTrackingLocation: (state) => {
-      state.locationRequested = true
-      state.isTrackingLocation = true
-
-      if (state.geolocation) {
-        state.view.center = {
-          lat: state.geolocation.latitude,
-          lng: state.geolocation.longitude,
-        }
-        state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
-      } else {
-        state.justStartedTrackingLocation = true
-      }
-      state.place = null
-    },
-    stopTrackingLocation: (state) => {
-      state.isTrackingLocation = false
-    },
-
-    geolocationChange: (state, action) => {
-      if (action.payload.loading) {
-        // Loading
-      } else if (action.payload.error) {
-        if (action.payload.error.code === 1) {
-          // code 1 of GeolocationPositionError means user denied location request
-          // browsers will block subsequent requests so disable the setting
-          state.userDeniedLocation = true
-        } else {
-          // Treat code 2, internal error, as fatal
-          // Toast the message and suggest a retry
-          //
-          // The last value is code 3, timeout, is unreachable as we use the default of no timeout
-          // @see src/components/map/ConnectedGeolocation.js
-          if (!state.geolocation.error) {
-            toast.error(
-              `Geolocation failed: ${action.payload.error.message}. Please refresh the page and retry`,
-            )
-          } else {
-            // We already toasted
-          }
-        }
-        state.isTrackingLocation = false
-        state.justStartedTrackingLocation = false
-      } else if (state.isTrackingLocation) {
-        // If user is tracking location, then center screen continually on geolocation
-
-        if (state.justStartedTrackingLocation) {
-          // If user just started tracking location, then we should zoom in, too
-          state.justStartedTrackingLocation = false
-          state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
-        }
-        // Otherwise, keep the current zoom and re-center the screen
-
-        state.view.center = {
-          lat: action.payload.latitude,
-          lng: action.payload.longitude,
-        }
-      }
-
-      state.geolocation = action.payload
-    },
-
     setCenterOnLocation: (state, action) => {
       state.view = {
         center: action.payload,
@@ -158,7 +83,6 @@ export const mapSlice = createSlice({
     [updateSelection]: (state) => {
       state.isFilterUpdated = true
     },
-
     [fetchMapLocations.pending]: (state) => {
       state.isLoading = true
     },
@@ -174,7 +98,6 @@ export const mapSlice = createSlice({
           ({ lat, lng }) =>
             lat <= ne.lat && lng <= ne.lng && lat >= sw.lat && lng >= sw.lng,
         )
-
         // Combine with new locations in bounds
         // If IDs are equal, prioritise the payload
         // to e.g. correctly display a just-updated position
@@ -188,7 +111,6 @@ export const mapSlice = createSlice({
       state.clusters = []
       state.isLoading = false
     },
-
     [fetchMapClusters.pending]: (state) => {
       state.isLoading = true
     },
@@ -197,6 +119,19 @@ export const mapSlice = createSlice({
       state.locations = []
       state.isLoading = false
     },
+    [geolocationReceived]: (state, action) => {
+      state.view = {
+        ...state.view,
+        center: {
+          lat: action.payload.latitude,
+          lng: action.payload.longitude,
+        },
+      }
+      if (action.payload.geolocationState === GeolocationState.FIRST_LOCATION) {
+        state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
+      }
+      state.place = null
+    },
   },
 })
 
@@ -204,10 +139,6 @@ export const {
   setCenterOnLocation,
   clusterClick,
   setView,
-  updateEntryLocation,
-  startTrackingLocation,
-  stopTrackingLocation,
-  geolocationChange,
   setStreetView,
   selectPlace,
   clearSelectedPlace,

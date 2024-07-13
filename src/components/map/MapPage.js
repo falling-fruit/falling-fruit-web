@@ -16,7 +16,7 @@ import AddLocationButton from '../ui/AddLocationButton'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
-import { ConnectedGeolocation } from './ConnectedGeolocation'
+import { ConnectGeolocation, isGeolocationOpen } from './ConnectGeolocation'
 import Geolocation from './Geolocation'
 import Location from './Location'
 import PanoramaHandler from './PanoramaHandler'
@@ -71,14 +71,16 @@ const MapPage = ({ isDesktop }) => {
 
   const {
     view,
-    geolocation,
     place,
     locations,
     clusters,
     streetView: showStreetView,
-    locationRequested,
     isLoading: mapIsLoading,
   } = useSelector((state) => state.map)
+
+  const { geolocation, geolocationState } = useSelector(
+    (state) => state.geolocation,
+  )
   const {
     locationId,
     position,
@@ -195,7 +197,7 @@ const MapPage = ({ isDesktop }) => {
         -
       </ZoomOutButton>
 
-      {locationRequested && <ConnectedGeolocation />}
+      {isGeolocationOpen(geolocationState) && <ConnectGeolocation />}
 
       <PanoramaHandler
         mapRef={mapRef}
