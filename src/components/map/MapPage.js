@@ -71,12 +71,13 @@ const MapPage = ({ isDesktop }) => {
 
   const {
     view,
-    place,
     locations,
     clusters,
     streetView: showStreetView,
     isLoading: mapIsLoading,
   } = useSelector((state) => state.map)
+
+  const place = useSelector((state) => state.place.selectedPlace?.location)
 
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,

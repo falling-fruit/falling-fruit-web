@@ -5,6 +5,7 @@ import { eqBy, prop, unionWith } from 'ramda'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
 import { geolocationReceived, GeolocationState } from './geolocationSlice'
+import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
@@ -48,7 +49,6 @@ export const mapSlice = createSlice({
     isFilterUpdated: false,
     clusters: [],
     streetView: false,
-    place: null,
   },
   reducers: {
     setView: (state, action) => {
@@ -69,14 +69,6 @@ export const mapSlice = createSlice({
             ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
             : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, state.view.zoom + 2),
       }
-      state.place = null
-    },
-    selectPlace: (state, action) => {
-      state.place = action.payload.location
-      state.view = fitBounds(action.payload.viewport, state.view.size)
-    },
-    clearSelectedPlace: (state) => {
-      state.place = null
     },
   },
   extraReducers: {
@@ -130,18 +122,14 @@ export const mapSlice = createSlice({
       if (action.payload.geolocationState === GeolocationState.FIRST_LOCATION) {
         state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
       }
-      state.place = null
+    },
+    [selectPlace]: (state, action) => {
+      state.view = fitBounds(action.payload.place.viewport, state.view.size)
     },
   },
 })
 
-export const {
-  setCenterOnLocation,
-  clusterClick,
-  setView,
-  setStreetView,
-  selectPlace,
-  clearSelectedPlace,
-} = mapSlice.actions
+export const { setCenterOnLocation, clusterClick, setView, setStreetView } =
+  mapSlice.actions
 
 export default mapSlice.reducer

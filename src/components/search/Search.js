@@ -10,14 +10,14 @@ import {
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import CoordinateParser from 'coordinate-parser'
 import GoogleMapReact from 'google-map-react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
-import { clearSelectedPlace, selectPlace } from '../../redux/mapSlice'
+import { clearSelectedPlace, selectPlace } from '../../redux/placeSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
@@ -64,26 +64,59 @@ const SearchBarContainer = styled.div`
     margin-left: 10px;
   }
 `
+const getCoordinatesResult = (value) => {
+  try {
+    const coordinate = new CoordinateParser(value)
+    const latitude = coordinate.getLatitude()
+    const longitude = coordinate.getLongitude()
+    const latlng = `${latitude}, ${longitude}`
+
+    return {
+      place_id: `coordinate-${latlng}`,
+      description: latlng,
+      structured_formatting: {
+        main_text: latlng,
+        secondary_text: 'Coordinates',
+      },
+    }
+  } catch {
+    return null
+  }
+}
 
 const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const filterOpen = useSelector((state) => state.filter.isOpen)
-  const selectedPlace = useSelector((state) => state.map.place)
+  const selectedPlace = useSelector((state) => state.place.selectedPlace)
+  const placeSuggestionsRedux = useSelector(
+    (state) => state.place.placeSuggestions,
+  )
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
+
+  // using placeSuggestionsRedux renders an open dropdown after re-render
+  // but instead, we want it to open on focus
+  const [storedSuggestions, setStoredSuggestions] = useState([])
 
   const {
     init,
     ready,
     value,
-    suggestions: { status, data },
+    suggestions: { data },
     setValue,
   } = usePlacesAutocomplete({
     initOnMount: false,
     debounce: 200,
   })
+
+  const coordinatesResultOrNull = getCoordinatesResult(value)
+  const suggestionsList = coordinatesResultOrNull
+    ? [coordinatesResultOrNull]
+    : data.length
+      ? data
+      : storedSuggestions
 
   useEffect(() => {
     googleMapLoader(bootstrapURLKeys).then(init)
@@ -111,43 +144,38 @@ const Search = (props) => {
     setValue(e.target.value)
   }
 
-  const getCoordinatesResult = () => {
-    try {
-      const coordinate = new CoordinateParser(value)
-      const latlng = `${coordinate.getLatitude()}, ${coordinate.getLongitude()}`
-
-      return (
-        <ComboboxOption as={SearchEntry} key={latlng} value={latlng}>
-          {[latlng]}
-        </ComboboxOption>
-      )
-    } catch {
-      return null
-    }
-  }
-
   const handleSelect = async (description) => {
     setValue(description, false)
-    if (descriptionToPlaceId.current[description]) {
-      dispatch(
-        selectPlace(
-          await getPlaceBounds(
-            description,
-            descriptionToPlaceId.current[description],
-          ),
-        ),
-      )
-    } else {
+    const placeId = descriptionToPlaceId.current[description]
+    if (placeId.startsWith('coordinate-')) {
       const latitude = Number(description.split(',')[0])
       const longitude = Number(description.split(',')[1])
-      dispatch(selectPlace(getZoomedInView(latitude, longitude)))
+      dispatch(
+        selectPlace({
+          place: getZoomedInView(latitude, longitude),
+          suggestionsData: data,
+        }),
+      )
+    } else {
+      const placeBounds = await getPlaceBounds(
+        description,
+        descriptionToPlaceId.current[description],
+      )
+      dispatch(selectPlace({ place: placeBounds, suggestionsData: data }))
     }
   }
+  const handleFocus = () => {
+    if (!storedSuggestions.length && placeSuggestionsRedux) {
+      setStoredSuggestions(placeSuggestionsRedux)
+    }
+  }
+
   const { t } = useTranslation()
   return (
     <Combobox
       onSelect={handleSelect}
       aria-label={t('glossary.address')}
+      openOnFocus
       {...props}
     >
       <SearchBarContainer>
@@ -155,6 +183,7 @@ const Search = (props) => {
           as={Input}
           value={value}
           onChange={handleChange}
+          onFocus={handleFocus}
           disabled={!ready}
           icon={
             value === '' ? (
@@ -187,30 +216,29 @@ const Search = (props) => {
       </SearchBarContainer>
       <StyledComboboxPopover portal={false}>
         <ComboboxList>
-          {status === 'OK' &&
-            data.map((suggestion) => {
-              const {
-                place_id,
-                description,
-                structured_formatting: { main_text, secondary_text },
-              } = suggestion
+          {suggestionsList.map((suggestion) => {
+            const {
+              place_id,
+              description,
+              structured_formatting: { main_text, secondary_text },
+            } = suggestion
 
-              // Allow handleSelect to access the place id (see useRef above)
-              descriptionToPlaceId.current[description] = place_id
+            // Allow handleSelect to access the place id (see useRef above)
+            descriptionToPlaceId.current[description] = place_id
 
-              return (
-                <ComboboxOption
-                  as={SearchEntry}
-                  key={place_id}
-                  value={description}
-                  isCurrent={place_id === null}
-                >
-                  {[main_text, secondary_text]}
-                </ComboboxOption>
-              )
-            })}
-
-          {status !== 'OK' && getCoordinatesResult()}
+            return (
+              <ComboboxOption
+                as={SearchEntry}
+                key={place_id}
+                value={description}
+                isCurrentLocation={
+                  description === selectedPlace.location.description
+                }
+              >
+                {[main_text, secondary_text]}
+              </ComboboxOption>
+            )
+          })}
         </ComboboxList>
       </StyledComboboxPopover>
       {!isDesktop && <Filter isOpen={filterOpen} />}
