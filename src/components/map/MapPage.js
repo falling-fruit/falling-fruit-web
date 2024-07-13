@@ -132,12 +132,11 @@ const MapPage = ({ isDesktop }) => {
   }
 
   const handleGeolocationClick = () => {
-    dispatch(
-      viewChangeAndFetch({
-        center: { lat: geolocation.latitude, lng: geolocation.longitude },
-        zoom: Math.max(view.zoom, 15),
-      }),
-    )
+    mapRef.current?.panTo({
+      lat: geolocation.latitude,
+      lng: geolocation.longitude,
+    })
+    mapRef.current?.setZoom(Math.max(view.zoom, 15))
   }
 
   const handleLocationClick = (location) => {
