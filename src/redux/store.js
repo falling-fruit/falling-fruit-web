@@ -8,6 +8,7 @@ import listReducer from './listSlice'
 import locationReducer from './locationSlice'
 import mapReducer from './mapSlice'
 import miscReducer, { fetchAllTypes } from './miscSlice'
+import placeReducer from './placeSlice'
 import reviewReducer from './reviewSlice'
 import settingsReducer from './settingsSlice'
 
@@ -24,6 +25,7 @@ export const store = configureStore({
     location: locationReducer,
     review: reviewReducer,
     geolocation: geolocationReducer,
+    place: placeReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
