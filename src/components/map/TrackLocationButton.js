@@ -4,7 +4,11 @@ import { toast } from 'react-toastify'
 import { keyframes } from 'styled-components'
 import styled from 'styled-components/macro'
 
-import { startTrackingLocation } from '../../redux/mapSlice'
+import {
+  disableGeolocation,
+  GeolocationState,
+  requestGeolocation,
+} from '../../redux/geolocationSlice'
 import IconButton from '../ui/IconButton'
 
 const spin = keyframes`
@@ -20,13 +24,23 @@ const SpinningLoader = styled(LoaderAlt)`
   animation: 1s linear ${spin} infinite;
 `
 
-const getTrackLocationColor = ({ userDeniedLocation, $active }) =>
-  $active && !userDeniedLocation ? 'blue' : 'tertiaryText'
+const getTrackLocationColor = (geolocationState) =>
+  geolocationState === GeolocationState.TRACKING ? 'blue' : 'tertiaryText'
 
-const TrackLocationIcon = ({ userDeniedLocation, $loading, ...props }) => {
-  if (userDeniedLocation) {
+const getCursorStyle = (geolocationState) => {
+  if (geolocationState === GeolocationState.DENIED) {
+    return 'help'
+  }
+  if (geolocationState === GeolocationState.LOADING) {
+    return 'wait'
+  }
+  return 'pointer'
+}
+
+const TrackLocationIcon = ({ geolocationState, ...props }) => {
+  if (geolocationState === GeolocationState.DENIED) {
     return <CurrentLocation opacity="0.5" {...props} />
-  } else if ($loading) {
+  } else if (geolocationState === GeolocationState.LOADING) {
     return <SpinningLoader {...props} />
   } else {
     return <CurrentLocation {...props} />
@@ -39,11 +53,11 @@ const TrackLocationPrependButton = styled.button.attrs((props) => ({
   padding-left: 3px;
   padding-right: 8px;
 
-  cursor: ${({ userDeniedLocation }) =>
-    userDeniedLocation ? 'help' : 'pointer'};
+  cursor: ${({ geolocationState }) => getCursorStyle(geolocationState)};
 
   svg {
-    color: ${({ theme, ...props }) => theme[getTrackLocationColor(props)]};
+    color: ${({ theme, geolocationState }) =>
+      theme[getTrackLocationColor(geolocationState)]};
   }
 `
 
@@ -51,15 +65,14 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
   label: 'Track location',
   size: 68,
   icon: <TrackLocationIcon {...props} />,
-  color: props.theme[getTrackLocationColor(props)],
+  color: props.theme[getTrackLocationColor(props.geolocationState)],
   raised: true,
   ...props,
 }))`
   svg {
     padding: 10px;
   }
-  cursor: ${({ userDeniedLocation }) =>
-    userDeniedLocation ? 'help' : 'pointer'};
+  cursor: ${({ geolocationState }) => getCursorStyle(geolocationState)};
 
   position: absolute;
   bottom: 84px;
@@ -69,12 +82,8 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
 
 const TrackLocationButton = ({ isIcon }) => {
   const dispatch = useDispatch()
-  const geolocation = useSelector((state) => state.map.geolocation)
-  const isTrackingLocation = useSelector(
-    (state) => state.map.isTrackingLocation,
-  )
-  const userDeniedLocation = useSelector(
-    (state) => state.map.userDeniedLocation,
+  const geolocationState = useSelector(
+    (state) => state.geolocation.geolocationState,
   )
 
   const TrackLocationBtn = isIcon
@@ -83,19 +92,23 @@ const TrackLocationButton = ({ isIcon }) => {
 
   return (
     <TrackLocationBtn
-      userDeniedLocation={userDeniedLocation}
-      $loading={geolocation?.loading}
-      $active={isTrackingLocation}
+      geolocationState={geolocationState}
       onClick={(event) => {
-        if (userDeniedLocation) {
+        if (geolocationState === GeolocationState.DENIED) {
           toast.info(
             'Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.',
           )
-        } else {
-          dispatch(startTrackingLocation())
+        } else if (geolocationState === GeolocationState.INITIAL) {
+          dispatch(requestGeolocation())
+        } else if (
+          geolocationState === GeolocationState.TRACKING ||
+          geolocationState === GeolocationState.FIRST_LOCATION
+        ) {
+          dispatch(disableGeolocation())
         }
         event.stopPropagation()
       }}
+      disabled={geolocationState === GeolocationState.LOADING}
     />
   )
 }
