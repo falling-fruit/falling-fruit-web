@@ -61,6 +61,7 @@ EditLocationCentralUnmovablePin.defaultProps = {
 const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
   const dispatch = useDispatch()
   const { locationId, tooltipOpen } = useSelector((state) => state.location)
+
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
 

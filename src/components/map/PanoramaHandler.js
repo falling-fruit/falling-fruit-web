@@ -1,81 +1,91 @@
-import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 
-const placeholderPlace = { lat: 40.729884, lng: -73.990988 }
+const DEFAULT_LOCATION = { lat: 40.729884, lng: -73.990988 }
 
-const PanoramaHandler = ({ mapRef, mapsRef, showStreetView }) => {
-  const [headingStatus, setHeadingStatus] = useState(false)
+const PanoramaHandler = () => {
   const locationMarkerRef = useRef(null)
+  const panoramaRef = useRef(null)
+
+  const {
+    streetView: showStreetView,
+    googleMap,
+    getGoogleMaps,
+  } = useSelector((state) => state.map)
+  const googleMaps = getGoogleMaps ? getGoogleMaps() : null
   const mapLocation = useSelector((state) => state.location.location)
-  const dispatch = useDispatch()
-
-  const setHeading = async (panoClient, markerLocation, panorama) => {
-    try {
-      const pano = await panoClient.getPanorama({
-        location: markerLocation,
-        radius: 50,
-      })
-
-      const heading = mapsRef.current.geometry.spherical.computeHeading(
-        pano.data.location.latLng,
-        markerLocation,
-      )
-
-      panorama.setPov({
-        heading: heading,
-        pitch: 0,
-      })
-    } catch (error) {
-      return false
-    }
-
-    return true
-  }
 
   useEffect(() => {
-    const setHeadingWrapper = async () => {
-      if (mapRef.current) {
-        const panorama = mapRef.current.getStreetView()
-        const panoClient = new mapsRef.current.StreetViewService()
-        if (mapLocation) {
-          setHeadingStatus(await setHeading(panoClient, mapLocation, panorama))
-        }
-        if (headingStatus) {
-          if (mapLocation) {
-            if (showStreetView) {
-              locationMarkerRef.current = new mapsRef.current.Marker({
-                position: mapLocation,
-                mapRef,
-              })
-              locationMarkerRef.current.setMap(panorama)
-            }
-            panorama.setPosition(mapLocation)
-          } else {
-            panorama.setPosition(placeholderPlace)
-          }
+    if (!googleMap || !googleMaps) {
+      return
+    }
 
-          if (showStreetView) {
-            panorama.setOptions({
-              disableDefaultUI: true,
-              enableCloseButton: false,
-            })
-          } else {
-            if (locationMarkerRef.current) {
-              locationMarkerRef.current.setMap(null)
-            }
-          }
-        }
+    const initializePanorama = () => {
+      panoramaRef.current = googleMap.getStreetView()
+      panoramaRef.current.setOptions({
+        disableDefaultUI: true,
+        enableCloseButton: false,
+      })
+    }
+
+    const updatePanorama = async () => {
+      if (!panoramaRef.current) {
+        initializePanorama()
+      }
+
+      const panorama = panoramaRef.current
+      const location = mapLocation || DEFAULT_LOCATION
+
+      try {
+        const panoClient = new googleMaps.StreetViewService()
+        const panoData = await panoClient.getPanorama({
+          location: location,
+          radius: 50,
+        })
+
+        const panoLocation = panoData.data.location.latLng
+        const heading = googleMaps.geometry.spherical.computeHeading(
+          panoLocation,
+          location,
+        )
+
+        panorama.setPosition(panoLocation)
+        panorama.setPov({ heading, pitch: 0 })
         panorama.setVisible(showStreetView)
-        if (panorama.visible && !headingStatus) {
-          panorama.setVisible(!showStreetView)
-          if (locationMarkerRef.current) {
-            locationMarkerRef.current.setMap(null)
-          }
+
+        updateMarker(panorama, location)
+      } catch (error) {
+        console.error('Street View data not found for this location.', error)
+        panorama.setVisible(false)
+        if (locationMarkerRef.current) {
+          locationMarkerRef.current.setMap(null)
         }
       }
     }
-    setHeadingWrapper()
-  }, [mapLocation, showStreetView, dispatch, headingStatus, mapRef, mapsRef]) //eslint-disable-line
+
+    const updateMarker = (panorama, location) => {
+      if (showStreetView) {
+        if (!locationMarkerRef.current) {
+          locationMarkerRef.current = new googleMaps.Marker({
+            position: location,
+          })
+        } else {
+          locationMarkerRef.current.setPosition(location)
+        }
+        locationMarkerRef.current.setMap(panorama)
+      } else if (locationMarkerRef.current) {
+        locationMarkerRef.current.setMap(null)
+      }
+    }
+
+    updatePanorama()
+
+    return () => {
+      if (locationMarkerRef.current) {
+        locationMarkerRef.current.setMap(null)
+      }
+    }
+  }, [mapLocation, showStreetView, googleMap, googleMaps])
 
   return null
 }

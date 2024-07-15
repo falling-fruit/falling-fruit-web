@@ -1,5 +1,5 @@
 import GoogleMapReact from 'google-map-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { updatePosition } from '../../redux/locationSlice'
-import { setStreetView } from '../../redux/mapSlice'
+import { setGoogle } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -65,8 +65,6 @@ const MapPage = ({ isDesktop }) => {
   const dispatch = useDispatch()
   const { getCommonName } = useTypesById()
 
-  const mapRef = useRef(null)
-  const mapsRef = useRef(null)
   const [draggedPosition, setDraggedPosition] = useState(null)
 
   const {
@@ -75,6 +73,8 @@ const MapPage = ({ isDesktop }) => {
     clusters,
     streetView: showStreetView,
     isLoading: mapIsLoading,
+    googleMap,
+    getGoogleMaps,
   } = useSelector((state) => state.map)
 
   const place = useSelector((state) => state.place.selectedPlace?.location)
@@ -116,30 +116,27 @@ const MapPage = ({ isDesktop }) => {
   }, [position, isDesktop])
 
   const apiIsLoaded = (map, maps) => {
-    mapRef.current = map
-    mapsRef.current = maps
+    /*
+     * Something breaks when storing maps in redux so pass a reference to it
+     */
+    dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
   }
 
   const handleClusterClick = (cluster) => {
-    mapRef.current?.panTo({ lat: cluster.lat, lng: cluster.lng })
-    mapRef.current?.setZoom(
+    googleMap?.panTo({ lat: cluster.lat, lng: cluster.lng })
+    googleMap?.setZoom(
       cluster.count === 1
         ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
         : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, view.zoom + 3),
     )
   }
 
-  const closeStreetView = (event) => {
-    event.stopPropagation()
-    dispatch(setStreetView(false))
-  }
-
   const handleGeolocationClick = () => {
-    mapRef.current?.panTo({
+    googleMap?.panTo({
       lat: geolocation.latitude,
       lng: geolocation.longitude,
     })
-    mapRef.current?.setZoom(Math.max(view.zoom, 15))
+    googleMap?.setZoom(Math.max(view.zoom, 15))
   }
 
   const handleLocationClick = (location) => {
@@ -170,10 +167,10 @@ const MapPage = ({ isDesktop }) => {
   }
 
   const zoomIn = () => {
-    mapRef.current?.setZoom(view.zoom + 1)
+    googleMap?.setZoom(view.zoom + 1)
   }
   const zoomOut = () => {
-    mapRef.current?.setZoom(view.zoom - 1)
+    googleMap?.setZoom(view.zoom - 1)
   }
   return (
     <div
@@ -200,12 +197,8 @@ const MapPage = ({ isDesktop }) => {
 
       {isGeolocationOpen(geolocationState) && <ConnectGeolocation />}
 
-      <PanoramaHandler
-        mapRef={mapRef}
-        mapsRef={mapsRef}
-        showStreetView={showStreetView}
-      />
-      {showStreetView && <CloseStreetView onClick={closeStreetView} />}
+      <PanoramaHandler />
+      {showStreetView && <CloseStreetView />}
       {view && (
         <GoogleMapReact
           onClick={handleNonspecificClick}
@@ -284,7 +277,8 @@ const MapPage = ({ isDesktop }) => {
             <DraggableMapPin
               lat={draggedPosition.lat}
               lng={draggedPosition.lng}
-              $geoService={mapsRef.current?.Geocoder}
+              // confusingly it doesn't work from inside the component
+              $geoService={getGoogleMaps && getGoogleMaps().Geocoder}
               onChange={setDraggedPosition}
               onDragEnd={(newPosition) => dispatch(updatePosition(newPosition))}
             />
