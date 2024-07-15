@@ -49,8 +49,14 @@ export const mapSlice = createSlice({
     isFilterUpdated: false,
     clusters: [],
     streetView: false,
+    googleMap: null,
+    getGoogleMaps: null,
   },
   reducers: {
+    setGoogle: (state, action) => {
+      state.googleMap = action.payload.googleMap
+      state.getGoogleMaps = action.payload.getGoogleMaps
+    },
     setView: (state, action) => {
       state.view = action.payload
     },
@@ -129,7 +135,12 @@ export const mapSlice = createSlice({
   },
 })
 
-export const { setCenterOnLocation, clusterClick, setView, setStreetView } =
-  mapSlice.actions
+export const {
+  setGoogle,
+  setCenterOnLocation,
+  clusterClick,
+  setView,
+  setStreetView,
+} = mapSlice.actions
 
 export default mapSlice.reducer

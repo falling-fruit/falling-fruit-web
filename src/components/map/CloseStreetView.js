@@ -1,7 +1,8 @@
 import { X } from '@styled-icons/boxicons-regular'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { setStreetView } from '../../redux/mapSlice'
 import ResetButton from '../ui/ResetButton'
 
 const OpacityButton = styled(ResetButton)`
@@ -29,16 +30,21 @@ const StreetViewUIWrapper = styled.div`
   }
 `
 
-const CloseStreetView = ({ onClick }) => (
-  <StreetViewUIWrapper>
-    <OpacityButton onClick={onClick}>
-      <X height="22.91px" />
-    </OpacityButton>
-  </StreetViewUIWrapper>
-)
+const CloseStreetView = () => {
+  const dispatch = useDispatch()
 
-CloseStreetView.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  const handleClose = (event) => {
+    event.stopPropagation()
+    dispatch(setStreetView(false))
+  }
+
+  return (
+    <StreetViewUIWrapper>
+      <OpacityButton onClick={handleClose}>
+        <X height="22.91px" />
+      </OpacityButton>
+    </StreetViewUIWrapper>
+  )
 }
 
 export default CloseStreetView
