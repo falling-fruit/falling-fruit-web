@@ -273,7 +273,7 @@ const MapPage = ({ isDesktop }) => {
               lat={location.lat}
               lng={location.lng}
               selected={location.id === locationId}
-              editing={isEditingLocation}
+              editing={isEditingLocation && location.id === locationId}
               label={
                 showLabels ? getCommonName(location.type_ids[0]) : undefined
               }
