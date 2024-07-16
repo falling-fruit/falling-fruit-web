@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { fitBounds } from 'google-map-react'
 import { eqBy, prop, unionWith } from 'ramda'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
@@ -130,7 +129,13 @@ export const mapSlice = createSlice({
       }
     },
     [selectPlace]: (state, action) => {
-      state.view = fitBounds(action.payload.place.viewport, state.view.size)
+      const { ne, sw } = action.payload.place.viewport
+      const maps = state.getGoogleMaps()
+      const bounds = new maps.LatLngBounds(
+        { lat: sw.lat, lng: sw.lng },
+        { lat: ne.lat, lng: ne.lng },
+      )
+      state.googleMap.fitBounds(bounds)
     },
   },
 })
