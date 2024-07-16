@@ -232,7 +232,7 @@ const Search = (props) => {
                 key={place_id}
                 value={description}
                 isCurrentLocation={
-                  description === selectedPlace.location.description
+                  description === selectedPlace?.location.description
                 }
               >
                 {[main_text, secondary_text]}
