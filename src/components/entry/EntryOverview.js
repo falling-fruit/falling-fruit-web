@@ -12,7 +12,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { setCenterOnLocation, setStreetView } from '../../redux/mapSlice'
+import { MIN_LOCATION_ZOOM } from '../../constants/map'
+import { setStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -58,17 +59,22 @@ const EntryOverview = ({ locationData, className }) => {
   const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const dispatch = useDispatch()
-  const currentStreetView = useSelector((state) => state.map.streetView)
+  const {
+    streetView: currentStreetView,
+    googleMap,
+    view,
+  } = useSelector((state) => state.map)
 
   const { t, i18n } = useTranslation()
 
   const handleAddressClick = () => {
-    dispatch(
-      setCenterOnLocation({
-        lat: locationData.lat,
-        lng: locationData.lng,
-      }),
-    )
+    googleMap?.panTo({
+      lat: locationData.lat,
+      lng: locationData.lng,
+    })
+    if (view.zoom < MIN_LOCATION_ZOOM) {
+      googleMap?.setZoom(MIN_LOCATION_ZOOM)
+    }
   }
 
   const handleStreetView = (event) => {

@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
+import {
+  MIN_GEOLOCATION_ZOOM,
+  VISIBLE_CLUSTER_ZOOM_LIMIT,
+} from '../../constants/map'
 import { updatePosition } from '../../redux/locationSlice'
 import { setGoogle } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
@@ -136,7 +139,9 @@ const MapPage = ({ isDesktop }) => {
       lat: geolocation.latitude,
       lng: geolocation.longitude,
     })
-    googleMap?.setZoom(Math.max(view.zoom, 15))
+    if (view.zoom < MIN_GEOLOCATION_ZOOM) {
+      googleMap?.setZoom(MIN_GEOLOCATION_ZOOM)
+    }
   }
 
   const handleLocationClick = (location) => {
