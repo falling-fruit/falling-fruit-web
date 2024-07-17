@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
 import { geolocationReceived, GeolocationState } from './geolocationSlice'
 import { selectPlace } from './placeSlice'
@@ -9,12 +8,6 @@ import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
 const MIN_TRACKING_ZOOM = 16
-const MIN_LOCATION_ZOOM = 18
-
-export const setReducer = (key) => (state, action) => ({
-  ...state,
-  [key]: action.payload,
-})
 
 export const updateReducer = (key) => (state, action) => ({
   ...state,
@@ -59,21 +52,8 @@ export const mapSlice = createSlice({
     setView: (state, action) => {
       state.view = action.payload
     },
-    setStreetView: setReducer('streetView'),
-    setCenterOnLocation: (state, action) => {
-      state.view = {
-        center: action.payload,
-        zoom: Math.max(state.view.zoom, MIN_LOCATION_ZOOM),
-      }
-    },
-    clusterClick: (state, action) => {
-      state.view = {
-        center: action.payload,
-        zoom:
-          action.payload.count === 1
-            ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
-            : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, state.view.zoom + 2),
-      }
+    setStreetView: (state, action) => {
+      state.streetView = action.payload
     },
   },
   extraReducers: {
@@ -141,12 +121,6 @@ export const mapSlice = createSlice({
   },
 })
 
-export const {
-  setGoogle,
-  setCenterOnLocation,
-  clusterClick,
-  setView,
-  setStreetView,
-} = mapSlice.actions
+export const { setGoogle, setView, setStreetView } = mapSlice.actions
 
 export default mapSlice.reducer

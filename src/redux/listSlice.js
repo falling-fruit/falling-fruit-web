@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
-import { setReducer, setView } from './mapSlice'
+import { setView } from './mapSlice'
 import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
@@ -37,7 +37,9 @@ export const listSlice = createSlice({
     locations: [],
   },
   reducers: {
-    setUpdateOnMapMove: setReducer('updateOnMapMove'),
+    setUpdateOnMapMove: (state, action) => {
+      state.updateOnMapMove = action.payload
+    },
     clearListLocations: (state) => {
       state.locations = []
     },

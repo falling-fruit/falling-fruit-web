@@ -4,3 +4,6 @@
  * @constant {number}
  */
 export const VISIBLE_CLUSTER_ZOOM_LIMIT = 13
+
+export const MIN_GEOLOCATION_ZOOM = 15
+export const MIN_LOCATION_ZOOM = 18
