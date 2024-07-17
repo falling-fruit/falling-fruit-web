@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
-import { setView } from '../../redux/mapSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
@@ -20,11 +19,12 @@ const LocationPositionNav = () => {
   const dispatch = useDispatch()
   const { locationId } = useParams()
   const center = useSelector((state) => state.map.view?.center)
+  const googleMap = useSelector((state) => state.map.googleMap)
   const storedPosition = useSelector((state) => state.location.position)
 
   const handleCancel = () => {
     if (storedPosition) {
-      dispatch(setView({ center: storedPosition }))
+      googleMap?.setCenter(storedPosition)
     }
     history.push(`/locations/${locationId}/edit/details`)
   }
