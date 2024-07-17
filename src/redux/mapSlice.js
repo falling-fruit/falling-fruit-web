@@ -117,15 +117,16 @@ export const mapSlice = createSlice({
       state.isLoading = false
     },
     [geolocationReceived]: (state, action) => {
-      state.view = {
-        ...state.view,
-        center: {
-          lat: action.payload.latitude,
-          lng: action.payload.longitude,
-        },
-      }
+      const maps = state.getGoogleMaps()
+      const newPosition = new maps.LatLng(
+        action.payload.latitude,
+        action.payload.longitude,
+      )
       if (action.payload.geolocationState === GeolocationState.FIRST_LOCATION) {
-        state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
+        state.googleMap.panTo(newPosition)
+        state.googleMap.setZoom(Math.max(state.view.zoom, MIN_TRACKING_ZOOM))
+      } else {
+        state.googleMap.panTo(newPosition)
       }
     },
     [selectPlace]: (state, action) => {
