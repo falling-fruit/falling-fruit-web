@@ -9,10 +9,11 @@ import {
   MIN_GEOLOCATION_ZOOM,
   VISIBLE_CLUSTER_ZOOM_LIMIT,
 } from '../../constants/map'
+import { fetchFilterCounts } from '../../redux/filterSlice'
 import { updatePosition } from '../../redux/locationSlice'
 import { setGoogle } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
-import { viewChangeAndFetch } from '../../redux/viewChange'
+import { fetchLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
@@ -123,6 +124,8 @@ const MapPage = ({ isDesktop }) => {
      * Something breaks when storing maps in redux so pass a reference to it
      */
     dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
+    dispatch(fetchLocations())
+    dispatch(fetchFilterCounts())
   }
 
   const handleClusterClick = (cluster) => {

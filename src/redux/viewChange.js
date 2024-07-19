@@ -2,25 +2,23 @@ import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { currentPathWithView } from '../utils/appUrl'
 import { fetchFilterCounts } from './filterSlice'
 import { disableGeolocation } from './geolocationSlice'
-import { clearListLocations } from './listSlice'
 import { fetchMapClusters, fetchMapLocations, setView } from './mapSlice'
 
-export const getIsShowingClusters = (state) =>
-  state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
+export const getIsShowingClusters = (state) => {
+  const map = state.map.googleMap
+  if (map) {
+    return map.getZoom() <= VISIBLE_CLUSTER_ZOOM_LIMIT
+  } else {
+    return false
+  }
+}
 
 export const fetchLocations = () => (dispatch, getState) => {
   const state = getState()
-  const { zoom, bounds } = state.map.view
-
-  if (bounds?.ne.lat != null && zoom > 1) {
-    // Map has received real bounds
-
-    if (getIsShowingClusters(state)) {
-      dispatch(fetchMapClusters())
-      dispatch(clearListLocations())
-    } else {
-      dispatch(fetchMapLocations())
-    }
+  if (getIsShowingClusters(state)) {
+    dispatch(fetchMapClusters())
+  } else {
+    dispatch(fetchMapLocations())
   }
 }
 
@@ -73,7 +71,8 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   }
 
   dispatch(setView(newView))
-  dispatch(fetchLocations()) // TODO: don't fetch new locations if is adding location
+
+  dispatch(fetchLocations())
 
   if (state.filter.isOpen || state.misc.isDesktop) {
     dispatch(fetchFilterCounts())
