@@ -16,19 +16,31 @@ export const updateReducer = (key) => (state, action) => ({
 
 export const fetchMapLocations = createAsyncThunk(
   'map/fetchMapLocations',
-  async (_, { getState }) =>
-    await getLocations(selectParams(getState(), { limit: 250 })),
+  async (_, { getState }) => {
+    const state = getState()
+    const googleMap = state.map.googleMap
+    if (googleMap) {
+      return await getLocations(selectParams(getState(), { limit: 250 }))
+    } else {
+      return []
+    }
+  },
 )
 
 export const fetchMapClusters = createAsyncThunk(
   'map/fetchMapClusters',
   async (_, { getState }) => {
     const state = getState()
-    return await getClusters(
-      selectParams(state, {
-        zoom: state.map.view?.zoom ? state.map.view.zoom + 1 : null,
-      }),
-    )
+    const googleMap = state.map.googleMap
+    if (googleMap) {
+      return await getClusters(
+        selectParams(state, {
+          zoom: googleMap.getZoom() + 1,
+        }),
+      )
+    } else {
+      return []
+    }
   },
 )
 
@@ -64,7 +76,10 @@ export const mapSlice = createSlice({
       state.isLoading = true
     },
     [fetchMapLocations.fulfilled]: (state, action) => {
-      const { ne, sw } = state.view.bounds
+      if (!state.googleMap) {
+        return
+      }
+      const { north, east, south, west } = state.googleMap.getBounds().toJSON()
 
       if (state.isFilterUpdated) {
         state.locations = action.payload
@@ -73,7 +88,7 @@ export const mapSlice = createSlice({
         // Drop locations out of bounds
         const locationsInBounds = state.locations.filter(
           ({ lat, lng }) =>
-            lat <= ne.lat && lng <= ne.lng && lat >= sw.lat && lng >= sw.lng,
+            lat <= north && lng <= east && lat >= south && lng >= west,
         )
         // Combine with new locations in bounds
         // If IDs are equal, prioritise the payload
