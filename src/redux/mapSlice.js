@@ -119,7 +119,9 @@ export const mapSlice = createSlice({
       )
       if (action.payload.geolocationState === GeolocationState.FIRST_LOCATION) {
         state.googleMap.panTo(newPosition)
-        state.googleMap.setZoom(Math.max(state.view.zoom, MIN_TRACKING_ZOOM))
+        state.googleMap.setZoom(
+          Math.max(state.googleMap.getZoom(), MIN_TRACKING_ZOOM),
+        )
       } else {
         state.googleMap.panTo(newPosition)
       }
