@@ -59,11 +59,9 @@ const EntryOverview = ({ locationData, className }) => {
   const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const dispatch = useDispatch()
-  const {
-    streetView: currentStreetView,
-    googleMap,
-    view,
-  } = useSelector((state) => state.map)
+  const { streetView: currentStreetView, googleMap } = useSelector(
+    (state) => state.map,
+  )
 
   const { t, i18n } = useTranslation()
 
@@ -72,7 +70,7 @@ const EntryOverview = ({ locationData, className }) => {
       lat: locationData.lat,
       lng: locationData.lng,
     })
-    if (view.zoom < MIN_LOCATION_ZOOM) {
+    if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
       googleMap?.setZoom(MIN_LOCATION_ZOOM)
     }
   }
