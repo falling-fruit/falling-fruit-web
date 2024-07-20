@@ -12,10 +12,10 @@ const DEFAULT_ZOOM = 4
 const ConnectView = () => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const viewRedux = useSelector((state) => state.map.view)
+  const { googleMap } = useSelector((state) => state.map)
 
   useEffect(() => {
-    if (!viewRedux) {
+    if (!googleMap) {
       const { view } = parseCurrentUrl()
       dispatch(
         setView(
