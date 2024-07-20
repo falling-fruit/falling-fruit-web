@@ -15,15 +15,25 @@ export const fetchFilterCounts = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState()
     const { typesById } = state.misc
+    const { googleMap } = state.map
+    if (googleMap) {
+      const counts = await getTypeCounts(
+        // Match zoom level used in getClusters
+        selectParams(state, {
+          types: undefined,
+          zoom: googleMap.getZoom() + 1,
+        }),
+      )
 
-    const counts = await getTypeCounts(
-      // Match zoom level used in getClusters
-      selectParams(state, { types: undefined, zoom: state.map.view.zoom + 1 }),
-    )
-
-    return {
-      counts,
-      typesById,
+      return {
+        counts,
+        typesById,
+      }
+    } else {
+      return {
+        counts: [],
+        typesById,
+      }
     }
   },
 )
