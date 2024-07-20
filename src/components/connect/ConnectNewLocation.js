@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { initNewLocation } from '../../redux/locationSlice'
-import { setView } from '../../redux/mapSlice'
+import { setInitialView } from '../../redux/mapSlice'
 import { parseCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -20,7 +20,7 @@ const ConnectNewLocation = () => {
 
     if (view) {
       dispatch(
-        setView({
+        setInitialView({
           center: view.center,
           zoom: Math.max(view.zoom, isDesktop ? 0 : 16),
         }),

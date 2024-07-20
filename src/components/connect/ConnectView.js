@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-import { setView } from '../../redux/mapSlice'
+import { setInitialView } from '../../redux/mapSlice'
 import { parseCurrentUrl } from '../../utils/appUrl'
 
 const DEFAULT_LAT = 40.1125785
@@ -18,7 +18,7 @@ const ConnectView = () => {
     if (!googleMap) {
       const { view } = parseCurrentUrl()
       dispatch(
-        setView(
+        setInitialView(
           view || {
             center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
             zoom: DEFAULT_ZOOM,

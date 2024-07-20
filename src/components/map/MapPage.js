@@ -72,7 +72,7 @@ const MapPage = ({ isDesktop }) => {
   const [draggedPosition, setDraggedPosition] = useState(null)
 
   const {
-    view,
+    initialView,
     locations,
     clusters,
     streetView: showStreetView,
@@ -80,6 +80,8 @@ const MapPage = ({ isDesktop }) => {
     googleMap,
     getGoogleMaps,
   } = useSelector((state) => state.map)
+
+  const currentZoom = googleMap?.getZoom()
 
   const place = useSelector((state) => state.place.selectedPlace?.location)
 
@@ -133,7 +135,7 @@ const MapPage = ({ isDesktop }) => {
     googleMap?.setZoom(
       cluster.count === 1
         ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
-        : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, view.zoom + 3),
+        : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, currentZoom + 3),
     )
   }
 
@@ -142,7 +144,7 @@ const MapPage = ({ isDesktop }) => {
       lat: geolocation.latitude,
       lng: geolocation.longitude,
     })
-    if (view.zoom < MIN_GEOLOCATION_ZOOM) {
+    if (currentZoom < MIN_GEOLOCATION_ZOOM) {
       googleMap?.setZoom(MIN_GEOLOCATION_ZOOM)
     }
   }
@@ -164,7 +166,7 @@ const MapPage = ({ isDesktop }) => {
   }
 
   const handleAddLocationClick = () => {
-    if (view.zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+    if (currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT) {
       history.push({
         pathname: '/locations/new',
         state: { fromPage: '/map' },
@@ -175,10 +177,10 @@ const MapPage = ({ isDesktop }) => {
   }
 
   const zoomIn = () => {
-    googleMap?.setZoom(view.zoom + 1)
+    googleMap?.setZoom(currentZoom + 1)
   }
   const zoomOut = () => {
-    googleMap?.setZoom(view.zoom - 1)
+    googleMap?.setZoom(currentZoom - 1)
   }
   return (
     <div
@@ -196,10 +198,16 @@ const MapPage = ({ isDesktop }) => {
       {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
       {!isDesktop && <TrackLocationButton isIcon />}
 
-      <ZoomInButton onClick={zoomIn} disabled={!view || view.zoom >= 22}>
+      <ZoomInButton
+        onClick={zoomIn}
+        disabled={!currentZoom || currentZoom >= 22}
+      >
         +
       </ZoomInButton>
-      <ZoomOutButton onClick={zoomOut} disabled={!view || view.zoom <= 4}>
+      <ZoomOutButton
+        onClick={zoomOut}
+        disabled={!currentZoom || currentZoom <= 4}
+      >
         -
       </ZoomOutButton>
 
@@ -207,7 +215,7 @@ const MapPage = ({ isDesktop }) => {
 
       <PanoramaHandler />
       {showStreetView && <CloseStreetView />}
-      {view && (
+      {initialView && (
         <GoogleMapReact
           onClick={handleNonspecificClick}
           bootstrapURLKeys={bootstrapURLKeys}
@@ -231,8 +239,8 @@ const MapPage = ({ isDesktop }) => {
             ],
           })}
           layerTypes={layerTypes}
-          center={view.center}
-          zoom={view.zoom}
+          center={initialView.center}
+          zoom={initialView.zoom}
           onChange={(newView) => dispatch(viewChangeAndFetch(newView))}
           resetBoundsOnResize
           onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}

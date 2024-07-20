@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { fetchLocationData } from '../../redux/locationSlice'
-import { setView } from '../../redux/mapSlice'
+import { setInitialView } from '../../redux/mapSlice'
 import { fetchReviewData } from '../../redux/reviewSlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
@@ -19,7 +19,7 @@ const ConnectReview = ({ reviewId }) => {
           (locationAction) => {
             if (locationAction.payload) {
               dispatch(
-                setView({
+                setInitialView({
                   center: {
                     lat: locationAction.payload.lat,
                     lng: locationAction.payload.lng,

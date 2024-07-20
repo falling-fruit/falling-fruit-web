@@ -2,7 +2,8 @@ import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { currentPathWithView } from '../utils/appUrl'
 import { fetchFilterCounts } from './filterSlice'
 import { disableGeolocation } from './geolocationSlice'
-import { fetchMapClusters, fetchMapLocations, setView } from './mapSlice'
+import { invalidateListLocations } from './listSlice'
+import { fetchMapClusters, fetchMapLocations } from './mapSlice'
 
 export const getIsShowingClusters = (state) => {
   const map = state.map.googleMap
@@ -70,7 +71,7 @@ export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
     dispatch(disableGeolocation())
   }
 
-  dispatch(setView(newView))
+  dispatch(invalidateListLocations())
 
   dispatch(fetchLocations())
 
