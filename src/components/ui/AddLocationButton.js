@@ -16,8 +16,9 @@ const StyledAddLocationButton = styled(IconButton)`
 `
 
 const AddLocationButton = ({ onClick }) => {
-  const zoom = useSelector((state) => state.map.view?.zoom)
-  const isZoomSufficient = zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT
+  const { googleMap } = useSelector((state) => state.map)
+  const isZoomSufficient =
+    !googleMap || googleMap.getZoom() >= VISIBLE_CLUSTER_ZOOM_LIMIT
 
   return (
     <StyledAddLocationButton

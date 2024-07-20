@@ -35,8 +35,9 @@ const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
 const MainPane = () => {
   const { t } = useTranslation()
   const history = useAppHistory()
-  const zoom = useSelector((state) => state.map.view?.zoom)
-  const isZoomSufficient = zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT
+  const { googleMap } = useSelector((state) => state.map)
+  const isZoomSufficient =
+    !googleMap || googleMap.getZoom() >= VISIBLE_CLUSTER_ZOOM_LIMIT
 
   const handleAddLocation = () => {
     if (isZoomSufficient) {

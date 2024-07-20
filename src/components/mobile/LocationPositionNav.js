@@ -18,7 +18,6 @@ const LocationPositionNav = () => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const { locationId } = useParams()
-  const center = useSelector((state) => state.map.view?.center)
   const googleMap = useSelector((state) => state.map.googleMap)
   const storedPosition = useSelector((state) => state.location.position)
 
@@ -30,7 +29,7 @@ const LocationPositionNav = () => {
   }
 
   const handleConfirm = () => {
-    dispatch(updatePosition(center))
+    dispatch(updatePosition(googleMap?.getCenter().toJSON()))
     history.push(`/locations/${locationId}/edit/details`)
   }
 
