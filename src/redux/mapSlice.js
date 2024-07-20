@@ -47,7 +47,7 @@ export const fetchMapClusters = createAsyncThunk(
 export const mapSlice = createSlice({
   name: 'map',
   initialState: {
-    view: null,
+    initialView: null,
     isLoading: false,
     locations: [],
     isFilterUpdated: false,
@@ -61,8 +61,8 @@ export const mapSlice = createSlice({
       state.googleMap = action.payload.googleMap
       state.getGoogleMaps = action.payload.getGoogleMaps
     },
-    setView: (state, action) => {
-      state.view = action.payload
+    setInitialView: (state, action) => {
+      state.initialView = action.payload
     },
     setStreetView: (state, action) => {
       state.streetView = action.payload
@@ -136,6 +136,6 @@ export const mapSlice = createSlice({
   },
 })
 
-export const { setGoogle, setView, setStreetView } = mapSlice.actions
+export const { setGoogle, setInitialView, setStreetView } = mapSlice.actions
 
 export default mapSlice.reducer

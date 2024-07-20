@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
-import { setView } from './mapSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
@@ -32,11 +31,12 @@ export const listSlice = createSlice({
     shouldFetchNewLocations: true,
     locations: [],
   },
-  extraReducers: {
-    [setView.type]: (state) => {
+  reducers: {
+    invalidateListLocations: (state) => {
       state.shouldFetchNewLocations = true
     },
-
+  },
+  extraReducers: {
     [fetchListLocations.pending]: (state) => {
       state.shouldFetchNewLocations = false
       state.isLoading = true
@@ -64,4 +64,5 @@ export const listSlice = createSlice({
   },
 })
 
+export const { invalidateListLocations } = listSlice.actions
 export default listSlice.reducer

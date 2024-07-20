@@ -5,7 +5,7 @@ import {
   fetchLocationData,
   setIsBeingEditedAndResetPosition,
 } from '../../redux/locationSlice'
-import { setView } from '../../redux/mapSlice'
+import { setInitialView } from '../../redux/mapSlice'
 import { currentPathWithView, parseCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -33,7 +33,7 @@ const ConnectLocation = ({
             },
             zoom: 16,
           }
-          dispatch(setView(view))
+          dispatch(setInitialView(view))
           // navigate to the page with the new URL
           // to trigger component reload
           const newUrl = currentPathWithView(view)
@@ -55,7 +55,7 @@ const ConnectLocation = ({
       // do this after navigating to the form, since when we're editing position
       // we might want to roundtrip to settings
       dispatch(
-        setView({
+        setInitialView({
           center: {
             lat: position.lat,
             lng: position.lng,
