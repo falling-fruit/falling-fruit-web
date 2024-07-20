@@ -8,12 +8,12 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 
 const ConnectReview = ({ reviewId }) => {
   const dispatch = useDispatch()
-  const view = useSelector((state) => state.map.view)
+  const { googleMap } = useSelector((state) => state.map)
   const isDesktop = useIsDesktop()
 
   useEffect(() => {
     dispatch(fetchReviewData(reviewId)).then((action) => {
-      if (action.payload && !view && isDesktop) {
+      if (action.payload && !googleMap && isDesktop) {
         const locationId = action.payload.location_id
         dispatch(fetchLocationData({ locationId, isBeingEdited: false })).then(
           (locationAction) => {

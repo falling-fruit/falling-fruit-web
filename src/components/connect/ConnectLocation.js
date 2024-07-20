@@ -16,7 +16,7 @@ const ConnectLocation = ({
   isBeingEditedDetails,
 }) => {
   const dispatch = useDispatch()
-  const viewRedux = useSelector((state) => state.map.view)
+  const { googleMap } = useSelector((state) => state.map)
   const position = useSelector((state) => state.location.position)
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
@@ -24,7 +24,7 @@ const ConnectLocation = ({
   useEffect(() => {
     dispatch(fetchLocationData({ locationId, isBeingEdited })).then(
       (action) => {
-        if (action.payload && !viewRedux) {
+        if (action.payload && !googleMap) {
           const { view: viewUrl } = parseCurrentUrl()
           const view = viewUrl || {
             center: {
@@ -60,7 +60,7 @@ const ConnectLocation = ({
             lat: position.lat,
             lng: position.lng,
           },
-          zoom: Math.max(viewRedux ? viewRedux.zoom : 0, 16),
+          zoom: Math.max(googleMap ? googleMap.getZoom() : 0, 16),
         }),
       )
     }
