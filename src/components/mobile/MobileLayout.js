@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
-import { setStreetView } from '../../redux/mapSlice'
+import { setStreetView } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage'
@@ -57,7 +57,7 @@ const shouldDisplayMapPage = (pathname) => {
 const MobileLayout = () => {
   const history = useAppHistory()
   const dispatch = useDispatch()
-  const streetView = useSelector((state) => state.map.streetView)
+  const streetView = useSelector((state) => state.location.streetViewOpen)
   const { pathname } = useLocation()
   const { tabIndex, handleTabChange, tabContent } = Tabs()
 

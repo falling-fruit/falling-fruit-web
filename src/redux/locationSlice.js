@@ -6,7 +6,7 @@ import { fetchReviewData } from './reviewSlice'
 
 export const fetchLocationData = createAsyncThunk(
   'locations/fetchLocationData',
-  async ({ locationId, isBeingEdited: _ }) => {
+  async ({ locationId, isBeingEdited: _, isStreetView: __ }) => {
     const locationData = await getLocationById(locationId, 'reviews')
     return locationData
   },
@@ -22,6 +22,7 @@ const locationSlice = createSlice({
     isBeingEdited: false,
     form: null,
     tooltipOpen: false,
+    streetViewOpen: false,
   },
   reducers: {
     clearLocation: (state) => {
@@ -32,6 +33,7 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.form = null
       state.tooltipOpen = false
+      state.streetViewOpen = false
     },
     initNewLocation: (state, action) => {
       state.isLoading = false
@@ -43,6 +45,7 @@ const locationSlice = createSlice({
       }
       state.form = null
       state.tooltipOpen = true
+      state.streetViewOpen = false
     },
     updatePosition: (state, action) => {
       state.position = action.payload
@@ -60,6 +63,9 @@ const locationSlice = createSlice({
     dismissLocationTooltip: (state) => {
       state.tooltipOpen = false
     },
+    setStreetView: (state, action) => {
+      state.streetViewOpen = action.payload
+    },
   },
   extraReducers: {
     [fetchLocationData.pending]: (state, action) => {
@@ -70,6 +76,7 @@ const locationSlice = createSlice({
       state.isBeingEdited = action.meta.arg.isBeingEdited
       state.form = null
       state.tooltipOpen = action.meta.arg.isBeingEdited
+      state.streetViewOpen = action.meta.arg.isStreetView
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -105,6 +112,7 @@ export const {
   saveFormValues,
   setIsBeingEditedAndResetPosition,
   dismissLocationTooltip,
+  setStreetView,
 } = locationSlice.actions
 
 export default locationSlice.reducer

@@ -52,7 +52,6 @@ export const mapSlice = createSlice({
     locations: [],
     isFilterUpdated: false,
     clusters: [],
-    streetView: false,
     googleMap: null,
     getGoogleMaps: null,
   },
@@ -63,9 +62,6 @@ export const mapSlice = createSlice({
     },
     setInitialView: (state, action) => {
       state.initialView = action.payload
-    },
-    setStreetView: (state, action) => {
-      state.streetView = action.payload
     },
   },
   extraReducers: {
@@ -138,6 +134,6 @@ export const mapSlice = createSlice({
   },
 })
 
-export const { setGoogle, setInitialView, setStreetView } = mapSlice.actions
+export const { setGoogle, setInitialView } = mapSlice.actions
 
 export default mapSlice.reducer

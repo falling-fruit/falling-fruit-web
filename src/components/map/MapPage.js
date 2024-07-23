@@ -75,7 +75,6 @@ const MapPage = ({ isDesktop }) => {
     initialView,
     locations,
     clusters,
-    streetView: showStreetView,
     isLoading: mapIsLoading,
     googleMap,
     getGoogleMaps,
@@ -94,6 +93,7 @@ const MapPage = ({ isDesktop }) => {
     isBeingEdited: isEditingLocation,
     location: selectedLocation,
     isLoading: locationIsLoading,
+    streetViewOpen: showStreetView,
   } = useSelector((state) => state.location)
   const {
     mapType,
@@ -213,7 +213,7 @@ const MapPage = ({ isDesktop }) => {
 
       {isGeolocationOpen(geolocationState) && <ConnectGeolocation />}
 
-      <PanoramaHandler />
+      {googleMap && <PanoramaHandler />}
       {showStreetView && <CloseStreetView />}
       {initialView && (
         <GoogleMapReact

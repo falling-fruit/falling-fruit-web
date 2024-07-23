@@ -28,6 +28,7 @@ const connectRoutes = [
           locationId={match.params.locationId}
           isBeingEdited={match.params.nextSegment === 'edit'}
           isBeingEditedDetails={match.params.nextNextSegment === 'details'}
+          isStreetView={match.params.nextSegment === 'panorama'}
         />
       )
     }
