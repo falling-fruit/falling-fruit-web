@@ -8,16 +8,14 @@ import {
 import { Flag, Map } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
-import { setStreetView } from '../../redux/mapSlice'
 import { useTypesById } from '../../redux/useTypesById'
 import { hasSeasonality } from '../../utils/locationInfo'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
@@ -54,14 +52,11 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
-  const isDesktop = useIsDesktop()
   const { getLocationTypes } = useTypesById()
   const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
-  const dispatch = useDispatch()
-  const { streetView: currentStreetView, googleMap } = useSelector(
-    (state) => state.map,
-  )
+  const { googleMap } = useSelector((state) => state.map)
+  const { streetViewOpen, locationId } = useSelector((state) => state.location)
 
   const { t, i18n } = useTranslation()
 
@@ -75,14 +70,13 @@ const EntryOverview = ({ locationData, className }) => {
     }
   }
 
-  const handleStreetView = (event) => {
+  const openStreetView = (event) => {
     event.stopPropagation()
-    if (!isDesktop) {
-      history.push(`/locations/${locationData.id}`, { fromPage: '/map' })
-    }
-
-    // TODO: change setTimeout to make it wait for map component to mount
-    setTimeout(() => dispatch(setStreetView(!currentStreetView)), 200)
+    history.push(`/locations/${locationId}/panorama`, { fromPage: '/map' })
+  }
+  const closeStreetView = (event) => {
+    event.stopPropagation()
+    history.push(`/locations/${locationId}`, { fromPage: '/map' })
   }
 
   return (
@@ -110,10 +104,17 @@ const EntryOverview = ({ locationData, className }) => {
                   )}`}
               </p>
             </IconBesideText>
-            <IconBesideText bold onClick={handleStreetView}>
-              <StreetView size={20} />
-              <p>Google Street View</p>
-            </IconBesideText>
+            {streetViewOpen ? (
+              <IconBesideText bold onClick={closeStreetView}>
+                <Map size={20} />
+                <p>Google Maps</p>
+              </IconBesideText>
+            ) : (
+              <IconBesideText bold onClick={openStreetView}>
+                <StreetView size={20} />
+                <p>Google Street View</p>
+              </IconBesideText>
+            )}
             {hasSeasonality(locationData) && (
               <IconBesideText>
                 <Calendar color={theme.secondaryText} size={20} />
