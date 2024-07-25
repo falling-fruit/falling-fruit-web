@@ -1,8 +1,7 @@
 import { Helmet } from 'react-helmet'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
-import { setStreetView } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage'
@@ -30,44 +29,43 @@ const shouldDisplayMapPage = (pathname) => {
   // additionally, also display in the background for some location pages
   const match = matchPath(pathname, {
     path: [
-      '/locations/:entryId/:nextSegment/:nextNextSegment',
-      '/locations/:entryId/:nextSegment',
-      '/locations/:entryId',
+      '/locations/:locationId/:nextSegment/:nextNextSegment',
+      '/locations/:locationId/:nextSegment',
+      '/locations/:locationId',
     ],
     exact: false,
     strict: false,
   })
   const isPlacingNewLocationMarker =
-    match?.params.entryId === 'new' && match?.params.nextSegment !== 'details'
+    match?.params.locationId === 'new' &&
+    match?.params.nextSegment !== 'details'
 
-  const entryId = match?.params.entryId && parseInt(match.params.entryId)
+  const locationId =
+    match?.params.locationId && parseInt(match.params.locationId)
   // distinguish viewing a location from having it displayed during e.g. editing or review
   const isViewingLocation =
-    entryId && match.params.nextSegment?.indexOf('@') === 0
+    locationId && match.params.nextSegment?.indexOf('@') === 0
 
   const isEditingLocationMarker =
-    entryId &&
+    locationId &&
     match.params.nextSegment === 'edit' &&
     match.params.nextNextSegment === 'position'
 
+  const isViewingPanorama =
+    locationId && match.params.nextSegment === 'panorama'
+
   return (
-    isPlacingNewLocationMarker || isEditingLocationMarker || isViewingLocation
+    isPlacingNewLocationMarker ||
+    isEditingLocationMarker ||
+    isViewingLocation ||
+    isViewingPanorama
   )
 }
 const MobileLayout = () => {
   const history = useAppHistory()
-  const dispatch = useDispatch()
   const streetView = useSelector((state) => state.location.streetViewOpen)
   const { pathname } = useLocation()
   const { tabIndex, handleTabChange, tabContent } = Tabs()
-
-  if (
-    ['/list', '/settings', '/users/edit'].some((path) =>
-      matchPath(pathname, { path, exact: false, strict: false }),
-    )
-  ) {
-    dispatch(setStreetView(false))
-  }
 
   return (
     <PageTabs index={tabIndex} onChange={handleTabChange}>
