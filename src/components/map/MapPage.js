@@ -239,9 +239,21 @@ const MapPage = ({ isDesktop }) => {
             ],
           })}
           layerTypes={layerTypes}
-          center={initialView.center}
-          zoom={initialView.zoom}
-          onChange={(newView) => dispatch(viewChangeAndFetch(newView))}
+          defaultCenter={initialView.center}
+          defaultZoom={initialView.zoom}
+          onChange={(_) => {
+            // the argument is supposed to be a view
+            // but does not reliably work when bounds change
+            if (googleMap) {
+              const center = googleMap.getCenter()
+              const newView = {
+                center: { lat: center.lat(), lng: center.lng() },
+                zoom: googleMap.getZoom(),
+                bounds: googleMap.getBounds().toJSON(),
+              }
+              dispatch(viewChangeAndFetch(newView))
+            }
+          }}
           resetBoundsOnResize
           onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
           yesIWantToUseGoogleMapApiInternals
