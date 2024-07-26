@@ -17,12 +17,15 @@ export const fetchFilterCounts = createAsyncThunk(
     const { typesById } = state.misc
     const { googleMap } = state.map
     if (googleMap) {
+      const { muni, invasive } = state.filter
       const counts = await getTypeCounts(
         // Match zoom level used in getClusters
-        selectParams(state, {
-          types: undefined,
-          zoom: googleMap.getZoom() + 1,
-        }),
+        selectParams(
+          { types: undefined, muni, invasive, googleMap },
+          {
+            zoom: googleMap.getZoom() + 1,
+          },
+        ),
       )
 
       return {

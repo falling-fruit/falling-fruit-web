@@ -7,10 +7,15 @@ import { updateSelection } from './updateSelection'
 export const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
   async ({ offset, fetchCount = false, extend = false }, { getState }) => {
+    const state = getState()
+    const { types, muni, invasive } = state.filter
+    const { googleMap } = state.map
+    if (!googleMap) {
+      return { offset, extend, locations: [] }
+    }
     const params = selectParams(
-      getState(),
+      { types, muni, invasive, googleMap },
       { limit: 100, offset, photo: true },
-      false,
     )
 
     return {
@@ -57,7 +62,6 @@ export const listSlice = createSlice({
 
       state.isLoading = false
     },
-
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true
     },
