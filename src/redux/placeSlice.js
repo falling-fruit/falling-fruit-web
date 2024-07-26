@@ -4,16 +4,13 @@ export const placeSlice = createSlice({
   name: 'place',
   initialState: {
     selectedPlace: null,
-    placeSuggestions: null,
   },
   reducers: {
     selectPlace: (state, action) => {
       state.selectedPlace = action.payload.place
-      state.placeSuggestions = action.payload.suggestionsData
     },
     clearSelectedPlace: (state) => {
       state.selectedPlace = null
-      state.placeSuggestions = null
     },
   },
 })

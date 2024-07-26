@@ -9,7 +9,6 @@ import {
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import CoordinateParser from 'coordinate-parser'
-import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,7 +17,6 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
 import { clearSelectedPlace, selectPlace } from '../../redux/placeSlice'
-import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
 import Filter from '../filter/Filter'
@@ -27,8 +25,6 @@ import TrackLocationButton from '../map/TrackLocationButton'
 import Input from '../ui/Input'
 import ClearSearchButton from './ClearSearch'
 import SearchEntry from './SearchEntry'
-
-const { googleMapLoader } = GoogleMapReact
 
 // TODO: ask Siraj how highlighting should look
 // TODO: for long option descriptions, scroll to beginning of input
@@ -89,16 +85,14 @@ const Search = (props) => {
   const isDesktop = useIsDesktop()
   const filterOpen = useSelector((state) => state.filter.isOpen)
   const selectedPlace = useSelector((state) => state.place.selectedPlace)
-  const placeSuggestionsRedux = useSelector(
-    (state) => state.place.placeSuggestions,
-  )
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
 
-  // using placeSuggestionsRedux renders an open dropdown after re-render
-  // but instead, we want it to open on focus
-  const [storedSuggestions, setStoredSuggestions] = useState([])
+  // handle component re-render
+  // after we sync value from redux, we get suggestions so the menu can open
+  // but we want it to open on focus and not on load
+  const [hasFocus, setHasFocus] = useState(false)
 
   const {
     init,
@@ -111,16 +105,20 @@ const Search = (props) => {
     debounce: 200,
   })
 
+  const { googleMap } = useSelector((state) => state.map)
+
   const coordinatesResultOrNull = getCoordinatesResult(value)
   const suggestionsList = coordinatesResultOrNull
     ? [coordinatesResultOrNull]
-    : data.length
+    : hasFocus
       ? data
-      : storedSuggestions
+      : []
 
   useEffect(() => {
-    googleMapLoader(bootstrapURLKeys).then(init)
-  }, [init])
+    if (googleMap) {
+      init()
+    }
+  }, [init, googleMap])
 
   useEffect(
     () => {
@@ -130,7 +128,7 @@ const Search = (props) => {
       }
       //Allow restoring the search box after rerender
       if (selectedPlace && !value) {
-        setValue(selectedPlace.description)
+        setValue(selectedPlace.location.description)
       }
     },
     // The effect should run after first render and each time we clear selectedPlace
@@ -153,7 +151,6 @@ const Search = (props) => {
       dispatch(
         selectPlace({
           place: getZoomedInView(latitude, longitude),
-          suggestionsData: data,
         }),
       )
     } else {
@@ -161,13 +158,11 @@ const Search = (props) => {
         description,
         descriptionToPlaceId.current[description],
       )
-      dispatch(selectPlace({ place: placeBounds, suggestionsData: data }))
+      dispatch(selectPlace({ place: placeBounds }))
     }
   }
   const handleFocus = () => {
-    if (!storedSuggestions.length && placeSuggestionsRedux) {
-      setStoredSuggestions(placeSuggestionsRedux)
-    }
+    setHasFocus(true)
   }
 
   const { t } = useTranslation()
