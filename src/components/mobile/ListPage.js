@@ -17,9 +17,11 @@ const ListPage = () => {
   const { pathname } = useLocation()
 
   const dispatch = useDispatch()
-  const totalLocations = useSelector((state) => state.list.totalCount)
-  const locations = useSelector((state) => state.list.locations)
-  const isNextPageLoading = useSelector((state) => state.list.isLoading)
+  const {
+    totalCount: totalLocations,
+    locations,
+    isLoading: isNextPageLoading,
+  } = useSelector((state) => state.list)
   const isShowingClusters = useSelector(getIsShowingClusters)
 
   useEffect(() => {
