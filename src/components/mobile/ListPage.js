@@ -4,7 +4,10 @@ import { useLocation } from 'react-router-dom'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import styled from 'styled-components/macro'
 
-import { fetchListLocations } from '../../redux/listSlice'
+import {
+  fetchListLocationsExtend,
+  fetchListLocationsStart,
+} from '../../redux/listSlice'
 import { getIsShowingClusters } from '../../redux/viewChange'
 import InfiniteList from '../list/InfiniteList'
 import { NoResultsFound, ShouldZoomIn } from '../list/ListLoading'
@@ -21,20 +24,26 @@ const ListPage = () => {
     totalCount: totalLocations,
     locations,
     isLoading: isNextPageLoading,
+    shouldFetchNewLocations: locationsInvalid,
   } = useSelector((state) => state.list)
+  const { googleMap } = useSelector((state) => state.map)
   const isShowingClusters = useSelector(getIsShowingClusters)
 
   useEffect(() => {
-    if (pathname.startsWith('/list')) {
-      dispatch(fetchListLocations({ fetchCount: true, offset: 0 }))
+    if (pathname.startsWith('/list') && googleMap && locationsInvalid) {
+      dispatch(fetchListLocationsStart())
     }
-  }, [pathname, dispatch])
+  }, [pathname]) //eslint-disable-line
 
   let inner
 
   if (isShowingClusters) {
     inner = <ShouldZoomIn />
-  } else if (locations.length === 0 && !isNextPageLoading) {
+  } else if (
+    locations.length === 0 &&
+    !isNextPageLoading &&
+    !locationsInvalid
+  ) {
     inner = <NoResultsFound />
   } else {
     inner = (
@@ -45,11 +54,9 @@ const ListPage = () => {
             width={width}
             height={height}
             locations={locations}
-            loadNextPage={() =>
-              dispatch(
-                fetchListLocations({ offset: locations.length, extend: true }),
-              )
-            }
+            loadNextPage={() => {
+              dispatch(fetchListLocationsExtend(locations))
+            }}
             isNextPageLoading={isNextPageLoading}
           />
         )}
