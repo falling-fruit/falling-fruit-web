@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -14,17 +14,20 @@ const ConnectNewLocation = () => {
   const location = useLocation()
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
+  const { initialView } = useSelector((state) => state.map)
 
   useEffect(() => {
     const { view } = parseCurrentUrl()
 
     if (view) {
-      dispatch(
-        setInitialView({
-          center: view.center,
-          zoom: Math.max(view.zoom, isDesktop ? 0 : 16),
-        }),
-      )
+      if (!initialView) {
+        dispatch(
+          setInitialView({
+            center: view.center,
+            zoom: Math.max(view.zoom, isDesktop ? 0 : 16),
+          }),
+        )
+      }
       dispatch(initNewLocation(view.center))
     } else {
       toast.error(`Could not initialize new location at: ${location.pathname}`)

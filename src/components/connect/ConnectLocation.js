@@ -18,7 +18,7 @@ const ConnectLocation = ({
   isStreetView,
 }) => {
   const dispatch = useDispatch()
-  const { googleMap } = useSelector((state) => state.map)
+  const { initialView, googleMap } = useSelector((state) => state.map)
   const { position } = useSelector((state) => state.location)
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
@@ -27,7 +27,7 @@ const ConnectLocation = ({
     dispatch(
       fetchLocationData({ locationId, isBeingEdited, isStreetView }),
     ).then((action) => {
-      if (action.payload && !googleMap) {
+      if (action.payload && !initialView) {
         const { view: viewUrl } = parseCurrentUrl()
         const view = viewUrl || {
           center: {
@@ -53,24 +53,36 @@ const ConnectLocation = ({
     dispatch(setStreetView(isStreetView))
   }, [dispatch, isStreetView])
 
-  useEffect(() => {
-    if (isBeingEdited && isBeingEditedDetails && position && !isDesktop) {
-      // On mobile, we need to center the map on the edited location
-      // because the UX involves panning the map under a central pin
-      //
-      // do this after navigating to the form, since when we're editing position
-      // we might want to roundtrip to settings
-      dispatch(
-        setInitialView({
-          center: {
-            lat: position.lat,
-            lng: position.lng,
-          },
-          zoom: Math.max(googleMap ? googleMap.getZoom() : 0, 16),
-        }),
-      )
-    }
-  }, [dispatch, isBeingEdited, isBeingEditedDetails, locationId, isDesktop]) //eslint-disable-line
+  useEffect(
+    () => {
+      if (
+        isBeingEdited &&
+        isBeingEditedDetails &&
+        position &&
+        !isDesktop &&
+        googleMap
+      ) {
+        // On mobile, we need to center the map on the edited location
+        // because the UX involves panning the map under a central pin
+        //
+        // do this when navigating to /locations/:locationId/edit/details
+        // (necessarily visited before /locations/:locationId/edit/position)
+        googleMap.setCenter(position)
+        if (googleMap.getZoom() < 16) {
+          googleMap.setZoom(16)
+        }
+      }
+    },
+    //eslint-disable-next-line
+    [
+      dispatch,
+      isBeingEdited,
+      isBeingEditedDetails,
+      locationId,
+      isDesktop,
+      googleMap,
+    ],
+  )
 
   return null
 }

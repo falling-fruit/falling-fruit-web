@@ -18,8 +18,8 @@ const LocationPositionNav = () => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const { locationId } = useParams()
-  const googleMap = useSelector((state) => state.map.googleMap)
-  const storedPosition = useSelector((state) => state.location.position)
+  const { googleMap } = useSelector((state) => state.map)
+  const { position: storedPosition } = useSelector((state) => state.location)
 
   const handleCancel = () => {
     if (storedPosition) {
