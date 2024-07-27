@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { eqBy, prop, unionWith } from 'ramda'
 
 import { getClusters, getLocations } from '../utils/api'
+import { currentPathWithView } from '../utils/appUrl'
 import { geolocationReceived, GeolocationState } from './geolocationSlice'
 import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
@@ -69,6 +70,10 @@ export const mapSlice = createSlice({
     },
     setInitialView: (state, action) => {
       state.initialView = action.payload
+
+      const newUrl = currentPathWithView(state.initialView)
+
+      window.history.pushState({}, '', newUrl)
     },
   },
   extraReducers: {
