@@ -4,7 +4,7 @@ import { getLocations, getLocationsCount } from '../utils/api'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
-export const fetchListLocations = createAsyncThunk(
+const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
   async ({ offset, fetchCount = false, extend = false }, { getState }) => {
     const state = getState()
@@ -26,6 +26,11 @@ export const fetchListLocations = createAsyncThunk(
     }
   },
 )
+
+export const fetchListLocationsStart = () =>
+  fetchListLocations({ fetchCount: true, offset: 0 })
+export const fetchListLocationsExtend = (locations) =>
+  fetchListLocations({ offset: locations.length, extend: true })
 
 export const listSlice = createSlice({
   name: 'list',
@@ -61,6 +66,7 @@ export const listSlice = createSlice({
       }
 
       state.isLoading = false
+      state.shouldFetchNewLocations = false
     },
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true
