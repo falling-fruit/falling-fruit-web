@@ -23,10 +23,14 @@ const connectRoutes = [
 
   /*
    * ConnectMap
-   * why: the map needs an initial view in Redux to do a first render
+   * why:
+   * - the map needs an initial view in Redux to do a first render
+   * - if something else changed the URL, the map needs to get back in sync
    *
-   * action: get the view from URL or set a default
-   * then dispatch an update
+   * action:
+   * - get the view from URL or default to our chosen location centred on U of Illinois
+   * - if this is the first render, dispatch a Redux update
+   * - if the map is present but not in sync with the URL, navigate to the URL's view
    */
   <Route key="connect-view" path={['/map']}>
     <ConnectMap />

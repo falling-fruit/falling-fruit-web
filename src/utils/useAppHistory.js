@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 
-import { pathWithCurrentView } from './appUrl'
+import { currentPathWithView, pathWithCurrentView } from './appUrl'
 
 /**
  * Wraps useAppHistory from react-router-dom to automatically preserve
@@ -22,9 +22,10 @@ export const useAppHistory = () => {
 
     history.push(newTo, state)
   }
+  const changeView = (newView, state) => {
+    const newUrl = currentPathWithView(newView)
+    history.push(newUrl, state)
+  }
 
-  return { ...history, push: pushWithMapState }
+  return { ...history, push: pushWithMapState, changeView }
 }
-
-// TODO: create a history listener/context for consistent back navigation?
-// https://stackoverflow.com/a/67477708/2411756

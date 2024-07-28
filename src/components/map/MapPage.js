@@ -252,6 +252,7 @@ const MapPage = ({ isDesktop }) => {
                 bounds: googleMap.getBounds().toJSON(),
               }
               dispatch(viewChangeAndFetch(newView))
+              history.changeView(newView)
             }
           }}
           resetBoundsOnResize
