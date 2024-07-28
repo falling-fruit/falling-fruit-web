@@ -1,5 +1,4 @@
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
-import { currentPathWithView } from '../utils/appUrl'
 import { fetchFilterCounts } from './filterSlice'
 import { disableGeolocation } from './geolocationSlice'
 import { invalidateListLocations } from './listSlice'
@@ -54,9 +53,6 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
-  const newUrl = currentPathWithView(newView)
-
-  window.history.pushState({}, '', newUrl)
 
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
