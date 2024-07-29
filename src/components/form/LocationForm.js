@@ -1,5 +1,6 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import { useFormikContext } from 'formik'
+import { sortBy } from 'lodash'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
@@ -152,6 +153,21 @@ const PositionFieldReadOnly = ({ lat, lng }) => (
   </IconBesideText>
 )
 
+const TypesSelect = ({ typeOptions }) => (
+  <Select
+    name="types"
+    label="Types"
+    options={typeOptions}
+    isMulti
+    closeMenuOnSelect={false}
+    blurInputOnSelect={false}
+    formatOptionLabel={(option) => <TypeName typeId={option.value} />}
+    isVirtualized
+    required
+    invalidWhenUntouched
+  />
+)
+
 const LocationStep = ({
   typeOptions,
   lat,
@@ -161,18 +177,7 @@ const LocationStep = ({
   isLoading,
 }) => (
   <>
-    <Select
-      name="types"
-      label="Types"
-      options={typeOptions}
-      isMulti
-      closeMenuOnSelect={false}
-      blurInputOnSelect={false}
-      formatOptionLabel={(option) => <TypeName typeId={option.value} />}
-      isVirtualized
-      required
-      invalidWhenUntouched
-    />
+    <TypesSelect typeOptions={typeOptions} />
     <Label>Position</Label>
     {isLoading ? (
       <LoadingIndicator />
@@ -294,18 +299,26 @@ export const LocationForm = ({
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   // TODO: internationalize common name
-  const typeOptions = useMemo(
-    () =>
-      typesById
-        ? Object.values(typesById).map(
-            ({ id, common_names, scientific_names }) => ({
-              value: id,
-              label: `${common_names.en?.[0]} [${scientific_names?.[0] ?? ''}]`,
-            }),
-          )
-        : [],
-    [typesById],
-  )
+  const typeOptions = useMemo(() => {
+    if (!typesById) {
+      return []
+    }
+
+    const options = Object.values(typesById).map(
+      ({ id, common_names, scientific_names, taxonomic_rank }) => ({
+        value: id,
+        label: `${scientific_names?.[0] ?? ''} (${common_names.en?.[0] ?? ''})`,
+        scientificName: scientific_names?.[0] ?? '',
+        taxonomicRank: taxonomic_rank ?? 0,
+      }),
+    )
+
+    return sortBy(options, [
+      (o) => !o.scientificName,
+      'scientificName',
+      (o) => -o.taxonomicRank,
+    ])
+  }, [typesById])
 
   const formikSteps = [
     <Step key={1} label="Step 1" validate={validateLocationStep}>
