@@ -297,9 +297,8 @@ const MapPage = ({ isDesktop }) => {
               lng={location.lng}
               selected={location.id === locationId}
               editing={isEditingLocation && location.id === locationId}
-              label={
-                showLabels ? getCommonName(location.type_ids[0]) : undefined
-              }
+              showLabel={showLabels}
+              label={getCommonName(location.type_ids[0])}
             />
           ))}
           {(isEditingLocation || isAddingLocation) && draggedPosition && (

@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 
 import { theme } from '../ui/GlobalStyle'
 
-const Label = styled.div`
+const MapLabel = styled.div`
   font-size: 0.875rem;
   color: ${theme.headerText};
   margin-top: -5px;
@@ -23,4 +23,4 @@ const Label = styled.div`
     1px 1px 0 ${theme.background};
 `
 
-export default Label
+export default MapLabel
