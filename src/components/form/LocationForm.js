@@ -1,14 +1,11 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import { useFormikContext } from 'formik'
-import { sortBy } from 'lodash'
-import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { saveFormValues } from '../../redux/locationSlice'
-import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
 import { pathWithCurrentView } from '../../utils/appUrl'
@@ -18,7 +15,6 @@ import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { TypeName } from '../ui/TypeName'
 import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Checkbox, Select, Textarea } from './FormikWrappers'
@@ -31,6 +27,7 @@ import {
   validateReview,
   validateReviewStep,
 } from './ReviewForm'
+import TypesSelect from './TypesSelect'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 const StyledPositionFieldLink = styled(Link)`
@@ -153,31 +150,9 @@ const PositionFieldReadOnly = ({ lat, lng }) => (
   </IconBesideText>
 )
 
-const TypesSelect = ({ typeOptions }) => (
-  <Select
-    name="types"
-    label="Types"
-    options={typeOptions}
-    isMulti
-    closeMenuOnSelect={false}
-    blurInputOnSelect={false}
-    formatOptionLabel={(option) => <TypeName typeId={option.value} />}
-    isVirtualized
-    required
-    invalidWhenUntouched
-  />
-)
-
-const LocationStep = ({
-  typeOptions,
-  lat,
-  lng,
-  isDesktop,
-  editingId,
-  isLoading,
-}) => (
+const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => (
   <>
-    <TypesSelect typeOptions={typeOptions} />
+    <TypesSelect />
     <Label>Position</Label>
     {isLoading ? (
       <LoadingIndicator />
@@ -290,7 +265,6 @@ export const LocationForm = ({
   // TODO: create a "going back" util
   const history = useAppHistory()
   const { state } = useLocation()
-  const { typesById } = useTypesById()
   const isDesktop = useIsDesktop()
 
   const dispatch = useDispatch()
@@ -298,33 +272,10 @@ export const LocationForm = ({
   const { position, isLoading } = useSelector((state) => state.location)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
-  // TODO: internationalize common name
-  const typeOptions = useMemo(() => {
-    if (!typesById) {
-      return []
-    }
-
-    const options = Object.values(typesById).map(
-      ({ id, common_names, scientific_names, taxonomic_rank }) => ({
-        value: id,
-        label: `${scientific_names?.[0] ?? ''} (${common_names.en?.[0] ?? ''})`,
-        scientificName: scientific_names?.[0] ?? '',
-        taxonomicRank: taxonomic_rank ?? 0,
-      }),
-    )
-
-    return sortBy(options, [
-      (o) => !o.scientificName,
-      'scientificName',
-      (o) => -o.taxonomicRank,
-    ])
-  }, [typesById])
-
   const formikSteps = [
     <Step key={1} label="Step 1" validate={validateLocationStep}>
       <LocationStep
         key={1}
-        typeOptions={typeOptions}
         lat={position?.lat}
         lng={position?.lng}
         isDesktop={isDesktop}
