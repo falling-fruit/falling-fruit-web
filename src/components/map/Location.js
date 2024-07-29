@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types'
 import { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import ResetButton from '../ui/ResetButton'
-import Label from './Label'
+import MapLabel from './MapLabel'
 import { BackgroundMapPin, MapPin } from './Pins'
 
 /**
@@ -29,21 +28,30 @@ const LocationButton = styled(ResetButton)`
   cursor: ${({ onClick }) => (onClick ? 'pointer' : 'unset')};
 `
 
-const Location = memo(({ label, selected, editing, onClick, ...props }) => (
-  <>
-    {selected && !editing && <MapPin />}
-    {editing && <BackgroundMapPin />}
-    <LocationButton onClick={onClick} {...props} />
-    <Label>{label}</Label>
-  </>
-))
+const TooltipLabel = styled(MapLabel)`
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  top: 21px; // offset by LocationButton's width + MapLabel's margin-top
+
+  ${LocationButton}:hover & {
+    opacity: 1;
+  }
+`
+
+const Location = memo(
+  ({ showLabel, label, selected, editing, onClick, ...props }) => (
+    <>
+      {selected && !editing && <MapPin />}
+      {editing && <BackgroundMapPin />}
+      <LocationButton onClick={onClick} {...props}>
+        {!showLabel && <TooltipLabel>{label}</TooltipLabel>}
+      </LocationButton>
+      {showLabel && <MapLabel>{label}</MapLabel>}
+    </>
+  ),
+)
 
 Location.displayName = 'Location'
-
-Location.propTypes = {
-  onClick: PropTypes.func,
-  // TODO: Correct the instance in MapPage
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-}
 
 export default Location
