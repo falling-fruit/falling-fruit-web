@@ -14,7 +14,6 @@ import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import { useTypesById } from '../../redux/useTypesById'
-import { hasSeasonality } from '../../utils/locationInfo'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
@@ -27,6 +26,12 @@ import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
+const hasSeasonality = (locationData) =>
+  !!(
+    locationData.no_season != null ||
+    locationData.season_start != null ||
+    locationData.season_stop != null
+  )
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   white-space: pre-line;
