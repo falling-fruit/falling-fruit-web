@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
-import { useTypesById } from '../../redux/useTypesById'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
@@ -57,13 +56,17 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
-  const { getLocationTypes } = useTypesById()
+  const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const { googleMap } = useSelector((state) => state.map)
   const { streetViewOpen, locationId } = useSelector((state) => state.location)
 
   const { t, i18n } = useTranslation()
+
+  const types = locationData.type_ids
+    .map((id) => typesAccess.getType(id))
+    .filter(Boolean)
 
   const handleAddressClick = () => {
     googleMap?.panTo({
@@ -90,12 +93,15 @@ const EntryOverview = ({ locationData, className }) => {
         {isReportModalOpen && (
           <ReportModal
             locationId={locationData.id}
-            name={getLocationTypes(locationData)}
+            name={locationData.type_ids
+              .map((id) => typesAccess?.getType(id)?.commonName)
+              .filter(Boolean)
+              .join(', ')}
             onDismiss={() => setIsReportModalOpen(false)}
           />
         )}
         <TextContent>
-          <TypesHeader typeIds={locationData.type_ids} />
+          <TypesHeader types={types} />
           <EntryTags locationData={locationData} />
           <Description>
             <p>{locationData.description}</p>

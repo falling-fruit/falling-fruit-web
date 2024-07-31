@@ -232,17 +232,17 @@ const formToLocation = ({
   unverified,
 })
 
-export const locationToForm = ({
-  type_ids,
-  description,
-  season_start,
-  season_stop,
-  access,
-  unverified,
-}) => ({
-  types: type_ids.map((id) => ({
-    value: id,
-  })),
+export const locationToForm = (
+  { type_ids, description, season_start, season_stop, access, unverified },
+  typesAccess,
+) => ({
+  types: type_ids?.map((id) => {
+    const type = typesAccess.getType(id)
+    return {
+      ...type,
+      value: id,
+    }
+  }),
   description,
   season_start: MONTH_OPTIONS[season_start],
   season_stop: MONTH_OPTIONS[season_stop],

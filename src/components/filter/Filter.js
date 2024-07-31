@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { filtersChanged, selectionChanged } from '../../redux/filterSlice'
-import { useTypesById } from '../../redux/useTypesById'
 import { constructTypesTreeForSelection } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import { CheckboxFilters } from './CheckboxFilters'
@@ -83,28 +82,22 @@ const Filter = ({ isOpen }) => {
   const didMount = useRef(false)
 
   const dispatch = useDispatch()
-  const { typesById } = useTypesById()
   const filters = useSelector((state) => state.filter)
   const {
-    isLoading,
+    isLoading: isLoadingCounts,
     countsById,
-    allTypes,
     types,
-    childrenById,
     showOnlyOnMap,
-    scientificNameById,
   } = filters
+  const { isLoading: isLoadingTypes, typesAccess } = useSelector(
+    (state) => state.type,
+  )
+  const isLoading = isLoadingCounts || isLoadingTypes
 
   const typesTreeForSelection = useMemo(
     () =>
-      constructTypesTreeForSelection(
-        allTypes,
-        countsById,
-        showOnlyOnMap,
-        childrenById,
-        scientificNameById,
-      ),
-    [allTypes, countsById, showOnlyOnMap, childrenById, scientificNameById],
+      constructTypesTreeForSelection(typesAccess, countsById, showOnlyOnMap),
+    [typesAccess, countsById, showOnlyOnMap],
   )
 
   useLayoutEffect(() => {
@@ -147,7 +140,11 @@ const Filter = ({ isOpen }) => {
           />
           <FilterButtons
             onSelectAllClick={() =>
-              dispatch(selectionChanged(Object.keys(typesById)))
+              dispatch(
+                selectionChanged(
+                  typesAccess.localizedTypes.map((type) => type.id),
+                ),
+              )
             }
             onDeselectAllClick={() => dispatch(selectionChanged([]))}
           />

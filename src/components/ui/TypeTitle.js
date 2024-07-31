@@ -2,27 +2,27 @@ import styled from 'styled-components/macro'
 
 const StyledTypeTitle = styled.div`
   font-family: ${({ theme }) => theme.fonts};
-
-  h2 {
-    font-size: 1.125rem;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-
-  h3 {
-    font-size: 0.875rem;
-    font-style: italic;
-    color: ${({ theme }) => theme.text};
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-weight: normal;
-  }
 `
 
-const TypeTitle = ({ primaryText, secondaryText }) => (
+const CommonName = styled.h2`
+  font-size: 1.125rem;
+  margin-top: 0px;
+  margin-bottom: 0px;
+`
+
+const ScientificName = styled.h3`
+  font-size: ${(props) => (props.standalone ? '1.125rem' : '0.875rem')};
+  font-style: italic;
+  color: ${({ theme }) => theme.text};
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: ${(props) => (props.standalone ? 'bold' : 'normal')};
+`
+
+const TypeTitle = ({ commonName, scientificName }) => (
   <StyledTypeTitle>
-    <h2>{primaryText}</h2>
-    <h3>{secondaryText}</h3>
+    {commonName && <CommonName>{commonName}</CommonName>}
+    <ScientificName standalone={!commonName}>{scientificName}</ScientificName>
   </StyledTypeTitle>
 )
 

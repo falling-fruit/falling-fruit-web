@@ -12,7 +12,6 @@ import {
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { updatePosition } from '../../redux/locationSlice'
 import { setGoogle } from '../../redux/mapSlice'
-import { useTypesById } from '../../redux/useTypesById'
 import { fetchLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -67,7 +66,7 @@ const MapPage = ({ isDesktop }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
-  const { getCommonName } = useTypesById()
+  const typesAccess = useSelector((state) => state.type.typesAccess)
 
   const [draggedPosition, setDraggedPosition] = useState(null)
 
@@ -298,7 +297,10 @@ const MapPage = ({ isDesktop }) => {
               selected={location.id === locationId}
               editing={isEditingLocation && location.id === locationId}
               showLabel={showLabels}
-              label={getCommonName(location.type_ids[0])}
+              commonName={typesAccess.getCommonName(location.type_ids[0])}
+              scientificName={typesAccess.getScientificName(
+                location.type_ids[0],
+              )}
             />
           ))}
           {(isEditingLocation || isAddingLocation) && draggedPosition && (
