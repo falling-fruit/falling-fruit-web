@@ -11,6 +11,7 @@ import miscReducer, { fetchAllTypes } from './miscSlice'
 import placeReducer from './placeSlice'
 import reviewReducer from './reviewSlice'
 import settingsReducer from './settingsSlice'
+import typeReducer from './typeSlice'
 
 export const history = createBrowserHistory()
 
@@ -26,6 +27,7 @@ export const store = configureStore({
     review: reviewReducer,
     geolocation: geolocationReducer,
     place: placeReducer,
+    type: typeReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

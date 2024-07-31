@@ -1,55 +1,25 @@
-import { sortBy } from 'lodash'
 import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 
-import { useTypesById } from '../../redux/useTypesById'
 import { TypeName } from '../ui/TypeName'
 import { Select } from './FormikWrappers'
 
-const customFilterOption = (option, inputValue) => {
-  const { data } = option
-  const { scientificName, label } = data
-  const lowerInput = inputValue.toLowerCase()
-
-  // First priority: prefix match on scientific name
-  if (scientificName.toLowerCase().startsWith(lowerInput)) {
-    return true
-  }
-
-  // Second priority: prefix match on label
-  if (label.toLowerCase().startsWith(lowerInput)) {
-    return true
-  }
-
-  // Third priority: includes match on either scientific name or label
-  return (
-    scientificName.toLowerCase().includes(lowerInput) ||
-    label.toLowerCase().includes(lowerInput)
-  )
-}
-
 const TypesSelect = () => {
-  const { typesById } = useTypesById()
+  const { typesAccess } = useSelector((state) => state.type)
 
   const typeOptions = useMemo(() => {
-    if (!typesById) {
-      return []
-    }
-
-    const options = Object.values(typesById).map(
-      ({ id, common_names, scientific_names, taxonomic_rank }) => ({
+    const options = typesAccess.localizedTypes.map(
+      ({ id, commonName, scientificName, taxonomicRank }) => ({
         value: id,
-        label: `${scientific_names?.[0] ?? ''} (${common_names.en?.[0] ?? ''})`,
-        scientificName: scientific_names?.[0] ?? '',
-        taxonomicRank: taxonomic_rank ?? 0,
+        label: `${scientificName} (${commonName})`,
+        commonName,
+        scientificName,
+        taxonomicRank,
       }),
     )
 
-    return sortBy(options, [
-      (o) => !o.scientificName,
-      'scientificName',
-      (o) => -o.taxonomicRank,
-    ])
-  }, [typesById])
+    return options
+  }, [typesAccess])
 
   return (
     <Select
@@ -59,11 +29,15 @@ const TypesSelect = () => {
       isMulti
       closeMenuOnSelect={false}
       blurInputOnSelect={false}
-      formatOptionLabel={(option) => <TypeName typeId={option.value} />}
+      formatOptionLabel={(option) => (
+        <TypeName
+          commonName={option.commonName}
+          scientificName={option.scientificName}
+        />
+      )}
       isVirtualized
       required
       invalidWhenUntouched
-      filterOption={customFilterOption}
     />
   )
 }

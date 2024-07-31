@@ -60,17 +60,24 @@ const EntryList = forwardRef(
     ref,
   ) => {
     const distanceUnit = useSelector((state) => state.settings.distanceUnit)
+    const { typesAccess } = useSelector((state) => state.type)
     const Item = ({ index, style }) => {
       const location = locations[index]
 
       let content
       if (location) {
+        const type = typesAccess.getType(location.type_ids[0])
         content = (
           <StyledListEntry
             key={location.id}
             leftIcons={<EntryIcon imageSrc={location.photo} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={<TypeName typeId={location.type_ids[0]} />}
+            primaryText={
+              <TypeName
+                commonName={type.commonName}
+                scientificName={type.scientificName}
+              />
+            }
             secondaryText={convertDistance(location.distance, distanceUnit)}
             onClick={(e) => onEntryClick?.(location.id, e)}
             onMouseEnter={(e) => onEntryMouseEnter?.(location.id, e)}

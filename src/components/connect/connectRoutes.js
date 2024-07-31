@@ -5,6 +5,7 @@ import ConnectLocation from './ConnectLocation'
 import ConnectMap from './ConnectMap'
 import ConnectNewLocation from './ConnectNewLocation'
 import ConnectReview from './ConnectReview'
+import ConnectTypes from './ConnectTypes'
 import DisconnectLocation from './DisconnectLocation'
 
 const connectRoutes = [
@@ -91,6 +92,17 @@ const connectRoutes = [
    */
   <Route key="connect-review" path="/reviews/:reviewId/edit">
     {({ match }) => match && <ConnectReview reviewId={match.params.reviewId} />}
+  </Route>,
+  /*
+   * ConnectTypes
+   * why: app needs reference of known types in the database
+   *
+   * actions:
+   * - fetch data from backend
+   * - simplify to keep just the currently selected language
+   */
+  <Route key="connect-types" path={['/map', '/list', '/locations', '/reviews']}>
+    <ConnectTypes />
   </Route>,
   /*
    * DisconnectLocation

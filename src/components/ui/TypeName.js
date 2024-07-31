@@ -1,7 +1,5 @@
 import styled from 'styled-components/macro'
 
-import { useTypesById } from '../../redux/useTypesById'
-
 const CommonName = styled.span`
   .select__option & {
     // Two lines. Has line break between common and scientific name
@@ -14,26 +12,23 @@ const CommonName = styled.span`
 `
 
 const ScientificName = styled.span`
-  margin-left: 5px;
+  margin-left: ${(props) => (props.standalone ? '0' : '5px')};
   .select__option & {
     // Two lines. Has line break between common and scientific name
     display: block;
     margin-left: 0;
   }
 
-  font-size: 0.875rem;
+  font-size: ${(props) => (props.standalone ? '0.975rem' : '0.875rem')};
   font-weight: normal;
   font-style: italic;
-  color: ${({ theme }) => theme.secondaryText};
+  color: ${({ theme, standalone }) =>
+    standalone ? theme.headerText : theme.secondaryText};
 `
 
-export const TypeName = ({ typeId }) => {
-  const { getCommonName, getScientificName } = useTypesById()
-
-  return (
-    <div>
-      <CommonName>{getCommonName(typeId)}</CommonName>
-      <ScientificName>{getScientificName(typeId)}</ScientificName>
-    </div>
-  )
-}
+export const TypeName = ({ commonName, scientificName }) => (
+  <div>
+    {commonName && <CommonName>{commonName}</CommonName>}
+    <ScientificName standalone={!commonName}>{scientificName}</ScientificName>
+  </div>
+)

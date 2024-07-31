@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
-import {
-  getChildrenById,
-  getScientificNameById,
-} from '../utils/buildTypeSchema'
 import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
@@ -46,8 +42,6 @@ export const filterSlice = createSlice({
   initialState: {
     allTypes: [],
     types: null,
-    childrenById: {},
-    scientificNameById: {},
     muni: true,
     isOpen: false,
     invasive: false,
@@ -84,8 +78,6 @@ export const filterSlice = createSlice({
     [fetchAllTypes.fulfilled]: (state, action) => {
       state.allTypes = action.payload
       state.types = action.payload.map((t) => `${t.id}`)
-      state.childrenById = getChildrenById(action.payload)
-      state.scientificNameById = getScientificNameById(action.payload)
     },
   },
 })
