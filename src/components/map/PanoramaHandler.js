@@ -64,16 +64,15 @@ const PanoramaHandler = () => {
   const history = useAppHistory()
   const panoramaWithMarkerRef = useRef(null)
 
-  const connect = () => {
+  const connect = async () => {
     if (showStreetView && googleMap && googleMaps && location) {
       panoramaWithMarkerRef.current = new PanoramaWithMarker(
         googleMap,
         googleMaps,
         location,
       )
-      const { error } = panoramaWithMarkerRef.current.initPanorama()
+      const { error } = await panoramaWithMarkerRef.current.initPanorama()
       if (error) {
-        console.error(error)
         toast.error(`Street View not available for location ${location.id}`)
         history.push(`/locations/${location.id}`)
       }
@@ -88,11 +87,15 @@ const PanoramaHandler = () => {
   }
 
   useEffect(() => {
-    if (showStreetView) {
-      connect()
-    } else {
-      disconnect()
+    const handleConnection = async () => {
+      if (showStreetView) {
+        await connect()
+      } else {
+        disconnect()
+      }
     }
+
+    handleConnection()
 
     return () => {
       disconnect()
