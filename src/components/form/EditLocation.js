@@ -8,8 +8,9 @@ export const EditLocationForm = (props) => {
   const history = useAppHistory()
   const { location, isLoading } = useSelector((state) => state.location)
   const { typesAccess } = useSelector((state) => state.type)
+  console.log(typesAccess)
 
-  return isLoading || !typesAccess.localizedTypes ? (
+  return isLoading || !typesAccess.localizedTypes.length ? (
     <div>Loading...</div>
   ) : (
     location && (

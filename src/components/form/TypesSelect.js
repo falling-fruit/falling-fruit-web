@@ -21,6 +21,21 @@ const TypesSelect = () => {
     return options
   }, [typesAccess])
 
+  const handleCreateOption = (inputValue) => {
+    // Handle the creation of a new option
+    const newOption = {
+      id: inputValue,
+      value: inputValue,
+      label: inputValue,
+      commonName: inputValue,
+      scientificName: inputValue,
+      taxonomicRank: 'custom',
+    }
+    console.log(inputValue)
+    // You might want to dispatch an action here to add the new option to your state
+    return newOption
+  }
+
   return (
     <Select
       name="types"
@@ -38,6 +53,7 @@ const TypesSelect = () => {
       isVirtualized
       required
       invalidWhenUntouched
+      onCreateOption={handleCreateOption}
     />
   )
 }
