@@ -1,5 +1,6 @@
 import { transparentize } from 'polished'
 import Select, { createFilter } from 'react-select'
+import Creatable from 'react-select/creatable'
 import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
@@ -93,15 +94,19 @@ const MenuList = ({ children, maxHeight }) => (
   </FixedSizeList>
 )
 
-const SelectWrapper = ({ isVirtualized, ...props }) => (
-  <StyledSelect
-    components={isVirtualized ? { MenuList } : {}}
-    classNamePrefix="select"
-    // Reduces typing lag
-    filterOption={createFilter({ ignoreAccents: false })}
-    placeholder=""
-    {...props}
-  />
-)
+const SelectWrapper = ({ isVirtualized, onCreateOption, ...props }) => {
+  const SelectComponent = onCreateOption ? Creatable : Select
+  return (
+    <StyledSelect
+      as={SelectComponent}
+      components={isVirtualized ? { MenuList } : {}}
+      classNamePrefix="select"
+      // Reduces typing lag
+      filterOption={createFilter({ ignoreAccents: false })}
+      placeholder=""
+      {...props}
+    />
+  )
+}
 
 export { SelectWrapper as Select }

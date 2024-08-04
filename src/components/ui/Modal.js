@@ -1,16 +1,94 @@
 import '@reach/dialog/styles.css'
 
 import { Dialog } from '@reach/dialog'
+import { Form, Formik } from 'formik'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-// TODO: fix vertical centering
+import { useInvisibleRecaptcha } from '../form/useInvisibleRecaptcha'
+import Button from './Button'
 
-const Modal = styled(Dialog)`
+const StyledModal = styled(Dialog)`
   border-radius: 0.375em;
   padding: 23px 17px;
   width: 80%;
-  // TODO: other elements look very strange on desktop
-  // TODO: min-width for smaller devices (width < 300px)
+  max-width: 800px;
+  margin: 15vh auto;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 8vh auto;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
 `
+
+const Buttons = styled.div`
+  margin-top: 20px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    text-align: center;
+  }
+
+  button {
+    width: 130px;
+
+    @media ${({ theme }) => theme.device.mobile} {
+      width: 110px;
+    }
+
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+  }
+`
+
+const Modal = ({
+  title,
+  onDismiss,
+  initialValues,
+  validationSchema,
+  onSubmit,
+  children,
+  ...props
+}) => {
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(onSubmit)
+
+  return (
+    <StyledModal
+      aria-label={`${title} dialog`}
+      onDismiss={onDismiss}
+      {...props}
+    >
+      <h3>{title}</h3>
+
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={isLoggedIn ? onSubmit : handlePresubmit}
+      >
+        {({ dirty, isSubmitting, isValid }) => (
+          <Form>
+            {children}
+            {!isLoggedIn && <Recaptcha />}
+            <Buttons>
+              <Button type="button" onClick={onDismiss} secondary>
+                Cancel
+              </Button>
+              <Button
+                disabled={!dirty || isSubmitting || !isValid}
+                type="submit"
+              >
+                {isSubmitting ? 'Submitting' : 'Submit'}
+              </Button>
+            </Buttons>
+          </Form>
+        )}
+      </Formik>
+    </StyledModal>
+  )
+}
 
 export default Modal
