@@ -2,7 +2,6 @@ import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getUser, getUserToken } from '../utils/api'
 import authStore from '../utils/authStore'
-import { setReducer } from './mapSlice'
 
 export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
@@ -46,12 +45,15 @@ const initialState = {
   user: null,
   error: null,
   isLoading: true,
+  token: null,
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   reducers: {
-    setToken: setReducer('token'),
+    setToken: (state, action) => {
+      state.token = action.payload
+    },
   },
   initialState,
   extraReducers: {

@@ -1,45 +1,24 @@
-import { createSelector } from '@reduxjs/toolkit'
-import { eqBy, prop, unionWith } from 'ramda'
-
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
-import { getBaseUrl } from '../utils/getInitialUrl'
 import { fetchFilterCounts } from './filterSlice'
-import { clearListLocations } from './listSlice'
-import {
-  fetchMapClusters,
-  fetchMapLocations,
-  stopTrackingLocation,
-  viewChange,
-} from './mapSlice'
+import { disableGeolocation } from './geolocationSlice'
+import { invalidateListLocations } from './listSlice'
+import { fetchMapClusters, fetchMapLocations } from './mapSlice'
 
-export const getIsShowingClusters = (state) =>
-  state.map.view.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT
-
-export const getAllLocations = createSelector(
-  (state) => state.map.locations,
-  (state) => state.map.clusters,
-  (state) => state.map.location,
-  (mapLocations, mapClusters, entryLocation) =>
-    mapClusters.length !== 0
-      ? []
-      : entryLocation
-        ? unionWith(eqBy(prop('id')), mapLocations, [entryLocation])
-        : mapLocations,
-)
+export const getIsShowingClusters = (state) => {
+  const map = state.map.googleMap
+  if (map) {
+    return map.getZoom() <= VISIBLE_CLUSTER_ZOOM_LIMIT
+  } else {
+    return false
+  }
+}
 
 export const fetchLocations = () => (dispatch, getState) => {
   const state = getState()
-  const { zoom, bounds } = state.map.view
-
-  if (bounds?.ne.lat != null && zoom > 1) {
-    // Map has received real bounds
-
-    if (getIsShowingClusters(state)) {
-      dispatch(fetchMapClusters())
-      dispatch(clearListLocations())
-    } else {
-      dispatch(fetchMapLocations())
-    }
+  if (getIsShowingClusters(state)) {
+    dispatch(fetchMapClusters())
+  } else {
+    dispatch(fetchMapLocations())
   }
 }
 
@@ -75,26 +54,22 @@ const shouldStopTrackingLocation = (geolocation, newView, threshold) => {
 export const viewChangeAndFetch = (newView) => (dispatch, getState) => {
   const state = getState()
 
-  const newUrl = `${getBaseUrl()}/@${newView.center.lat},${
-    newView.center.lng
-  },${newView.zoom}z`
-  window.history.pushState({}, '', newUrl)
-
   // TODO: fine-tune this constant
   const stopTrackingLocationThreshold = state.misc.isDesktop ? 5000 : 2000
 
   if (
     shouldStopTrackingLocation(
-      state.map.geolocation,
+      state.geolocation.geolocation,
       newView,
       stopTrackingLocationThreshold,
     )
   ) {
-    dispatch(stopTrackingLocation())
+    dispatch(disableGeolocation())
   }
 
-  dispatch(viewChange(newView))
-  dispatch(fetchLocations()) // TODO: don't fetch new locations if is adding location
+  dispatch(invalidateListLocations())
+
+  dispatch(fetchLocations())
 
   if (state.filter.isOpen || state.misc.isDesktop) {
     dispatch(fetchFilterCounts())

@@ -8,18 +8,16 @@ import {
 import { Flag, Map } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { setStreetView, zoomIn } from '../../redux/mapSlice'
-import { useTypesById } from '../../redux/useTypesById'
-import { hasSeasonality } from '../../utils/locationInfo'
+import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
+import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { TextContent } from './Entry'
 import EntryTags from './EntryTags'
@@ -27,36 +25,18 @@ import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
 
-// TODO: Move to its own file
-const IconBesideText = styled.div`
-  display: flex;
-  color: ${({ theme }) => theme.secondaryText};
-  font-style: normal;
-  font-weight: ${($props) => ($props.bold ? 'bold' : 'normal')};
-  align-items: center;
-
-  ${'' /* TODO: Add another wrapper */}
-  & + & {
-    margin-top: 4px !important;
-  }
-
-  p {
-    margin: 0 0 0 4px;
-    font-size: 0.875rem;
-  }
-
-  ${($props) =>
-    $props.onClick &&
-    `
-  cursor: pointer;
-  `};
-`
-
+const hasSeasonality = (locationData) =>
+  !!(
+    locationData.no_season != null ||
+    locationData.season_start != null ||
+    locationData.season_stop != null
+  )
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   white-space: pre-line;
   word-break: normal;
   overflow-wrap: anywhere;
+  color: ${({ theme }) => theme.secondaryText};
 
   p {
     font-size: 1rem;
@@ -67,7 +47,6 @@ const Description = styled.section`
   }
 
   & > p:first-child {
-    color: ${({ theme }) => theme.secondaryText};
     margin-bottom: 14px;
   }
 
@@ -77,32 +56,35 @@ const Description = styled.section`
 `
 
 const EntryOverview = ({ locationData, className }) => {
-  const isDesktop = useIsDesktop()
-  const { getLocationTypes } = useTypesById()
+  const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
-  const dispatch = useDispatch()
-  const currentStreetView = useSelector((state) => state.map.streetView)
+  const { googleMap } = useSelector((state) => state.map)
+  const { streetViewOpen, locationId } = useSelector((state) => state.location)
 
   const { t, i18n } = useTranslation()
 
+  const types = locationData.type_ids
+    .map((id) => typesAccess.getType(id))
+    .filter(Boolean)
+
   const handleAddressClick = () => {
-    dispatch(
-      zoomIn({
-        lat: locationData.lat,
-        lng: locationData.lng,
-      }),
-    )
+    googleMap?.panTo({
+      lat: locationData.lat,
+      lng: locationData.lng,
+    })
+    if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
+      googleMap?.setZoom(MIN_LOCATION_ZOOM)
+    }
   }
 
-  const handleStreetView = (event) => {
+  const openStreetView = (event) => {
     event.stopPropagation()
-    if (!isDesktop) {
-      history.push(`/locations/${locationData.id}`, { fromPage: '/map' })
-    }
-
-    // TODO: change setTimeout to make it wait for map component to mount
-    setTimeout(() => dispatch(setStreetView(!currentStreetView)), 200)
+    history.push(`/locations/${locationId}/panorama`, { fromPage: '/map' })
+  }
+  const closeStreetView = (event) => {
+    event.stopPropagation()
+    history.push(`/locations/${locationId}`, { fromPage: '/map' })
   }
 
   return (
@@ -111,12 +93,15 @@ const EntryOverview = ({ locationData, className }) => {
         {isReportModalOpen && (
           <ReportModal
             locationId={locationData.id}
-            name={getLocationTypes(locationData)}
+            name={locationData.type_ids
+              .map((id) => typesAccess?.getType(id)?.commonName)
+              .filter(Boolean)
+              .join(', ')}
             onDismiss={() => setIsReportModalOpen(false)}
           />
         )}
         <TextContent>
-          <TypesHeader typeIds={locationData.type_ids} />
+          <TypesHeader types={types} />
           <EntryTags locationData={locationData} />
           <Description>
             <p>{locationData.description}</p>
@@ -130,10 +115,17 @@ const EntryOverview = ({ locationData, className }) => {
                   )}`}
               </p>
             </IconBesideText>
-            <IconBesideText bold onClick={handleStreetView}>
-              <StreetView size={20} />
-              <p>Google Street View</p>
-            </IconBesideText>
+            {streetViewOpen ? (
+              <IconBesideText bold onClick={closeStreetView}>
+                <Map size={20} />
+                <p>Google Maps</p>
+              </IconBesideText>
+            ) : (
+              <IconBesideText bold onClick={openStreetView}>
+                <StreetView size={20} />
+                <p>Google Street View</p>
+              </IconBesideText>
+            )}
             {hasSeasonality(locationData) && (
               <IconBesideText>
                 <Calendar color={theme.secondaryText} size={20} />
@@ -204,5 +196,4 @@ const EntryOverview = ({ locationData, className }) => {
     </div>
   )
 }
-export { IconBesideText }
 export default EntryOverview

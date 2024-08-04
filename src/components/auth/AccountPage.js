@@ -8,7 +8,7 @@ import * as Yup from 'yup'
 
 import { checkAuth, logout } from '../../redux/authSlice'
 import { editUser, getUser } from '../../utils/api'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { Checkbox, Input, Textarea } from '../form/FormikWrappers'
@@ -66,7 +66,7 @@ const AccountPage = () => {
   }, [])
 
   if (!isLoading && !isLoggedIn) {
-    return <Redirect to={getPathWithMapState('/users/sign_in')} />
+    return <Redirect to={pathWithCurrentView('/users/sign_in')} />
   }
 
   const handleSubmit = async (values) => {

@@ -1,17 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getLocations, getLocationsCount } from '../utils/api'
-import { selectPlace, setReducer, viewChange } from './mapSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
-export const fetchListLocations = createAsyncThunk(
+const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
   async ({ offset, fetchCount = false, extend = false }, { getState }) => {
+    const state = getState()
+    const { types, muni, invasive } = state.filter
+    const { googleMap } = state.map
+    if (!googleMap) {
+      return { offset, extend, locations: [] }
+    }
     const params = selectParams(
-      getState(),
+      { types, muni, invasive, googleMap },
       { limit: 100, offset, photo: true },
-      false,
     )
 
     return {
@@ -23,38 +27,26 @@ export const fetchListLocations = createAsyncThunk(
   },
 )
 
+export const fetchListLocationsStart = () =>
+  fetchListLocations({ fetchCount: true, offset: 0 })
+export const fetchListLocationsExtend = (locations) =>
+  fetchListLocations({ offset: locations.length, extend: true })
+
 export const listSlice = createSlice({
   name: 'list',
   initialState: {
     isLoading: false,
     totalCount: null,
     offset: 0,
-    view: null, // Represents what view is used for the list
-    isViewSearched: false,
-    shouldFetchNewLocations: false,
-    updateOnMapMove: true,
+    shouldFetchNewLocations: true,
     locations: [],
   },
   reducers: {
-    setUpdateOnMapMove: setReducer('updateOnMapMove'),
-    clearListLocations: (state) => {
-      state.locations = []
+    invalidateListLocations: (state) => {
+      state.shouldFetchNewLocations = true
     },
   },
   extraReducers: {
-    [viewChange.type]: (state, action) => {
-      if (state.updateOnMapMove || state.isViewSearched) {
-        // If updateOnMapMove flag/checkbox is unchecked, then the list view is only updated when a new location is "searched"
-        state.view = action.payload
-        state.shouldFetchNewLocations = true
-      }
-      state.isViewSearched = false
-    },
-
-    [selectPlace]: (state) => {
-      state.isViewSearched = true
-    },
-
     [fetchListLocations.pending]: (state) => {
       state.shouldFetchNewLocations = false
       state.isLoading = true
@@ -74,14 +66,13 @@ export const listSlice = createSlice({
       }
 
       state.isLoading = false
+      state.shouldFetchNewLocations = false
     },
-
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true
     },
   },
 })
 
-export const { setUpdateOnMapMove, clearListLocations } = listSlice.actions
-
+export const { invalidateListLocations } = listSlice.actions
 export default listSlice.reducer

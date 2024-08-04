@@ -1,4 +1,3 @@
-import { useTypesById } from '../../redux/useTypesById'
 import {
   TypesAccordion,
   TypesAccordionButton,
@@ -8,38 +7,32 @@ import {
 import TypeTitle from '../ui/TypeTitle'
 import ResourceList from './ResourceList'
 
-const TypesHeader = ({ typeIds }) => {
-  const { typesById, getCommonName, getScientificName } = useTypesById()
+const TypesHeader = ({ types }) => (
+  <TypesAccordion>
+    {types.map((type) => {
+      const typeTitle = (
+        <TypeTitle
+          key={type.id}
+          commonName={type.commonName}
+          scientificName={type.scientificName}
+        />
+      )
 
-  return (
-    <TypesAccordion>
-      {typeIds
-        .filter((id) => typesById?.[id])
-        .map((id) => {
-          const typeTitle = (
-            <TypeTitle
-              key={id}
-              primaryText={getCommonName(id)}
-              secondaryText={getScientificName(id)}
-            />
-          )
-
-          if (Object.keys(typesById[id].urls).length > 0) {
-            // At least 1 URL
-            return (
-              <TypesAccordionItem key={id}>
-                <TypesAccordionButton>{typeTitle}</TypesAccordionButton>
-                <TypesAccordionPanel>
-                  <ResourceList urls={typesById[id].urls} />
-                </TypesAccordionPanel>
-              </TypesAccordionItem>
-            )
-          } else {
-            return typeTitle
-          }
-        })}
-    </TypesAccordion>
-  )
-}
+      if (Object.keys(type.urls).length > 0) {
+        // At least 1 URL
+        return (
+          <TypesAccordionItem key={type.id}>
+            <TypesAccordionButton>{typeTitle}</TypesAccordionButton>
+            <TypesAccordionPanel>
+              <ResourceList urls={type.urls} />
+            </TypesAccordionPanel>
+          </TypesAccordionItem>
+        )
+      } else {
+        return typeTitle
+      }
+    })}
+  </TypesAccordion>
+)
 
 export default TypesHeader

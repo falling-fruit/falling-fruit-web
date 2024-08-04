@@ -1,4 +1,5 @@
 import { Check, X } from '@styled-icons/boxicons-regular'
+import { useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -6,6 +7,7 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import TopBarNav from '../ui/TopBarNav'
+import LocationPositionNav from './LocationPositionNav'
 
 const Instructions = styled.span`
   margin-left: 15px;
@@ -13,6 +15,12 @@ const Instructions = styled.span`
 
 const LocationNav = () => {
   const history = useAppHistory()
+  const { review } = useSelector((state) => state.review)
+
+  const handleGoBack = (event) => {
+    event.stopPropagation()
+    history.goBack()
+  }
 
   return (
     <Switch>
@@ -21,44 +29,42 @@ const LocationNav = () => {
           <TopBarNav
             onBack={(event) => {
               event.stopPropagation()
-              return history.goBack()
+              history.push(`/locations/${review?.location_id}`)
             }}
             title="Editing Review"
           />
         )}
       </Route>
       <Route path="/locations/:locationId/review">
-        {() => (
-          <TopBarNav
-            onBack={(event) => {
-              event.stopPropagation()
-              return history.goBack()
-            }}
-            title="Adding review"
-          />
-        )}
+        {() => <TopBarNav onBack={handleGoBack} title="Adding review" />}
       </Route>
-      <Route path="/locations/:locationId/edit">
-        {() => (
+      <Route path="/locations/:locationId/edit/details">
+        {({ match }) => (
           <TopBarNav
-            onBack={(event) => {
+            onBack={() => {
               event.stopPropagation()
-              return history.goBack()
+              return history.push(`/locations/${match.params.locationId}`)
             }}
             title="Editing location"
           />
         )}
       </Route>
+      <Route
+        path="/locations/:locationId/edit/position"
+        component={LocationPositionNav}
+      />
       <Route path="/locations/new/details">
         <TopBarNav
           onBack={() => history.push('/locations/new')}
           title="New location"
         />
       </Route>
-      <Route>
+      <Route path="/locations/new">
         <TopBarNav
           left={
-            <Instructions>Choose a location for your new entry.</Instructions>
+            <Instructions>
+              Choose a position for your new location.
+            </Instructions>
           }
           rightIcons={
             <>
@@ -67,9 +73,7 @@ const LocationNav = () => {
                 icon={<X />}
                 raised
                 size={54}
-                onClick={() => {
-                  history.push('/map')
-                }}
+                onClick={() => history.push('/map')}
               />
               <IconButton
                 label="Confirm choose location"
@@ -77,9 +81,7 @@ const LocationNav = () => {
                 raised
                 size={54}
                 color={theme.green}
-                onClick={() => {
-                  history.push('/locations/new/details')
-                }}
+                onClick={() => history.push('/locations/new/details')}
               />
             </>
           }

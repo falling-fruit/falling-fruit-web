@@ -1,16 +1,20 @@
-import { useMemo } from 'react'
+import { Map } from '@styled-icons/boxicons-solid'
+import { useFormikContext } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import { useTypesById } from '../../redux/useTypesById'
+import { saveFormValues } from '../../redux/locationSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { addLocation, editLocation } from '../../utils/api'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
+import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
-import { TypeName } from '../ui/TypeName'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import FormikAllSteps from './FormikAllSteps'
 import { FormikStepper, ProgressButtons, Step } from './FormikStepper'
 import { Checkbox, Select, Textarea } from './FormikWrappers'
@@ -23,7 +27,13 @@ import {
   validateReview,
   validateReviewStep,
 } from './ReviewForm'
+import TypesSelect from './TypesSelect'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
+
+const StyledPositionFieldLink = styled(Link)`
+  color: ${({ theme }) => theme.orange};
+  text-decoration: none;
+`
 
 const PROPERTY_ACCESS_LABELS = [
   'Source is on my property',
@@ -116,20 +126,41 @@ const InlineSelects = styled.div`
   }
 `
 
-const LocationStep = ({ typeOptions }) => (
+const PositionFieldLink = ({ lat, lng, editingId }) => {
+  const { values } = useFormikContext()
+  const dispatch = useDispatch()
+  return (
+    <StyledPositionFieldLink
+      onClick={() => {
+        dispatch(saveFormValues(values))
+      }}
+      to={pathWithCurrentView(`/locations/${editingId}/edit/position`)}
+    >
+      <PositionFieldReadOnly lat={lat} lng={lng} />
+    </StyledPositionFieldLink>
+  )
+}
+
+const PositionFieldReadOnly = ({ lat, lng }) => (
+  <IconBesideText tabIndex={0}>
+    <Map size={20} />
+    <p className="small">
+      {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
+    </p>
+  </IconBesideText>
+)
+
+const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => (
   <>
-    <Select
-      name="types"
-      label="Types"
-      options={typeOptions}
-      isMulti
-      closeMenuOnSelect={false}
-      blurInputOnSelect={false}
-      formatOptionLabel={(option) => <TypeName typeId={option.value} />}
-      isVirtualized
-      required
-      invalidWhenUntouched
-    />
+    <TypesSelect />
+    <Label>Position</Label>
+    {isLoading ? (
+      <LoadingIndicator />
+    ) : isDesktop || !editingId ? (
+      <PositionFieldReadOnly lat={lat} lng={lng} />
+    ) : (
+      <PositionFieldLink lat={lat} lng={lng} editingId={editingId} />
+    )}
     <Textarea
       name="description"
       label="Description"
@@ -201,17 +232,17 @@ const formToLocation = ({
   unverified,
 })
 
-export const locationToForm = ({
-  type_ids,
-  description,
-  season_start,
-  season_stop,
-  access,
-  unverified,
-}) => ({
-  types: type_ids.map((id) => ({
-    value: id,
-  })),
+export const locationToForm = (
+  { type_ids, description, season_start, season_stop, access, unverified },
+  typesAccess,
+) => ({
+  types: type_ids?.map((id) => {
+    const type = typesAccess.getType(id)
+    return {
+      ...type,
+      value: id,
+    }
+  }),
   description,
   season_start: MONTH_OPTIONS[season_start],
   season_stop: MONTH_OPTIONS[season_stop],
@@ -222,36 +253,35 @@ export const locationToForm = ({
 export const LocationForm = ({
   editingId,
   onSubmit,
-  initialValues = INITIAL_LOCATION_VALUES,
+  initialValues,
   stepped,
 }) => {
+  const reduxFormValues = useSelector((state) => state.location.form)
+  const mergedInitialValues = {
+    ...INITIAL_LOCATION_VALUES,
+    ...initialValues,
+    ...reduxFormValues,
+  }
   // TODO: create a "going back" util
   const history = useAppHistory()
   const { state } = useLocation()
-  const { typesById } = useTypesById()
+  const isDesktop = useIsDesktop()
 
   const dispatch = useDispatch()
 
-  const { lat, lng } = useSelector((state) => state.map.view.center)
+  const { position, isLoading } = useSelector((state) => state.location)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
-
-  // TODO: internationalize common name
-  const typeOptions = useMemo(
-    () =>
-      typesById
-        ? Object.values(typesById).map(
-            ({ id, common_names, scientific_names }) => ({
-              value: id,
-              label: `${common_names.en?.[0]} [${scientific_names?.[0] ?? ''}]`,
-            }),
-          )
-        : [],
-    [typesById],
-  )
 
   const formikSteps = [
     <Step key={1} label="Step 1" validate={validateLocationStep}>
-      <LocationStep key={1} typeOptions={typeOptions} />
+      <LocationStep
+        key={1}
+        lat={position?.lat}
+        lng={position?.lng}
+        isDesktop={isDesktop}
+        editingId={editingId}
+        isLoading={isLoading}
+      />
     </Step>,
     ...(editingId
       ? []
@@ -278,9 +308,9 @@ export const LocationForm = ({
   }) => {
     const locationValues = {
       'g-recaptcha-response': recaptcha,
+      lat: position?.lat,
+      lng: position?.lng,
       ...formToLocation(location),
-      lat,
-      lng,
     }
 
     if (!isEmptyReview(review)) {
@@ -306,7 +336,7 @@ export const LocationForm = ({
     }
 
     if (response && !response.error) {
-      dispatch(fetchLocations)
+      dispatch(fetchLocations())
       onSubmit(response)
     }
   }
@@ -320,7 +350,7 @@ export const LocationForm = ({
       <StepDisplay
         validateOnChange={false}
         validate={validateLocation}
-        initialValues={initialValues}
+        initialValues={mergedInitialValues}
         validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
         // For all steps only
@@ -332,7 +362,7 @@ export const LocationForm = ({
               onClick={(e) => {
                 e.stopPropagation()
                 if (editingId) {
-                  history.goBack()
+                  history.push(`/locations/${editingId}`)
                 } else {
                   history.push(state?.fromPage ?? '/map')
                 }

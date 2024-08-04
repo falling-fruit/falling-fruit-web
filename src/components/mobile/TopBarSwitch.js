@@ -1,8 +1,8 @@
 import { Route, Switch, useLocation } from 'react-router-dom'
 
-import LocationNav from '../form/LocationNav'
 import Search from '../search/Search'
 import TopBar from '../ui/TopBar'
+import LocationNav from './LocationNav'
 
 const TopBarSwitch = () => {
   const { state } = useLocation()

@@ -1,30 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { fitBounds } from 'google-map-react'
 import { eqBy, prop, unionWith } from 'ramda'
-import { toast } from 'react-toastify'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
-import { parseUrl } from '../utils/getInitialUrl'
-import { clearLocation, fetchLocationData } from './locationSlice'
+import { currentPathWithView } from '../utils/appUrl'
+import { geolocationReceived, GeolocationState } from './geolocationSlice'
+import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
-/**
- * Initial view state of the map.
- * @constant {Object}
- * @property {number[]} center - The latitude and longitude of the map's center
- * @property {number} zoom - The map's zoom level
- * @property {Object} bounds - The latitude and longitude of the map's NE, NW, SE, and SW corners
- */
-const { isInitialEntry, ...initialView } = parseUrl()
 
 const MIN_TRACKING_ZOOM = 16
-const MIN_LOCATION_ZOOM = 18
-
-export const setReducer = (key) => (state, action) => ({
-  ...state,
-  [key]: action.payload,
-})
 
 export const updateReducer = (key) => (state, action) => ({
   ...state,
@@ -33,172 +17,100 @@ export const updateReducer = (key) => (state, action) => ({
 
 export const fetchMapLocations = createAsyncThunk(
   'map/fetchMapLocations',
-  async (_, { getState }) =>
-    await getLocations(selectParams(getState(), { limit: 250 })),
+  async (_, { getState }) => {
+    const state = getState()
+    const { types, muni, invasive } = state.filter
+    const { googleMap } = state.map
+    if (googleMap) {
+      return await getLocations(
+        selectParams({ types, muni, invasive, googleMap }, { limit: 250 }),
+      )
+    } else {
+      return []
+    }
+  },
 )
 
 export const fetchMapClusters = createAsyncThunk(
   'map/fetchMapClusters',
   async (_, { getState }) => {
     const state = getState()
-    return await getClusters(
-      selectParams(state, { zoom: state.map.view.zoom + 1 }),
-    )
+    const { types, muni, invasive } = state.filter
+    const { googleMap } = state.map
+    if (googleMap) {
+      return await getClusters(
+        selectParams(
+          { types, muni, invasive, googleMap },
+          {
+            zoom: googleMap.getZoom() + 1,
+          },
+        ),
+      )
+    } else {
+      return []
+    }
   },
 )
 
 export const mapSlice = createSlice({
   name: 'map',
   initialState: {
-    view: initialView,
-    isInitialEntry,
-    oldView: null,
+    initialView: null,
     isLoading: false,
     locations: [],
     isFilterUpdated: false,
     clusters: [],
-    hoveredLocationId: null,
-    geolocation: null,
-    isTrackingLocation: false,
-    justStartedTrackingLocation: false,
-    userDeniedLocation: false,
-    locationRequested: false,
-    streetView: false,
-    location: null,
-    place: null,
+    googleMap: null,
+    getGoogleMaps: null,
   },
   reducers: {
-    // important: only dispatch viewChange in the handler of onViewChange in MapPage
-    // this should be called viewChange
-    viewChange: setReducer('view'),
-    setHoveredLocationId: setReducer('hoveredLocationId'),
-    setStreetView: setReducer('streetView'),
-
-    startTrackingLocation: (state) => {
-      state.locationRequested = true
-      state.isTrackingLocation = true
-
-      if (state.geolocation) {
-        state.view.center = {
-          lat: state.geolocation.latitude,
-          lng: state.geolocation.longitude,
-        }
-        state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
-      } else {
-        state.justStartedTrackingLocation = true
-      }
-      state.place = null
+    setGoogle: (state, action) => {
+      state.googleMap = action.payload.googleMap
+      state.getGoogleMaps = action.payload.getGoogleMaps
     },
-    stopTrackingLocation: (state) => {
-      state.isTrackingLocation = false
-    },
+    setInitialView: (state, action) => {
+      state.initialView = action.payload
 
-    geolocationChange: (state, action) => {
-      if (action.payload.loading) {
-        // Loading
-      } else if (action.payload.error) {
-        if (action.payload.error.code === 1) {
-          // code 1 of GeolocationPositionError means user denied location request
-          // browsers will block subsequent requests so disable the setting
-          state.userDeniedLocation = true
-        } else {
-          // Treat code 2, internal error, as fatal
-          // Toast the message and suggest a retry
-          //
-          // The last value is code 3, timeout, is unreachable as we use the default of no timeout
-          // @see src/components/map/ConnectedGeolocation.js
-          if (!state.geolocation.error) {
-            toast.error(
-              `Geolocation failed: ${action.payload.error.message}. Please refresh the page and retry`,
-            )
-          } else {
-            // We already toasted
-          }
-        }
-        state.isTrackingLocation = false
-        state.justStartedTrackingLocation = false
-      } else if (state.isTrackingLocation) {
-        // If user is tracking location, then center screen continually on geolocation
+      const newUrl = currentPathWithView(state.initialView)
 
-        if (state.justStartedTrackingLocation) {
-          // If user just started tracking location, then we should zoom in, too
-          state.justStartedTrackingLocation = false
-          state.view.zoom = Math.max(state.view.zoom, MIN_TRACKING_ZOOM)
-        }
-        // Otherwise, keep the current zoom and re-center the screen
-
-        state.view.center = {
-          lat: action.payload.latitude,
-          lng: action.payload.longitude,
-        }
-      }
-
-      state.geolocation = action.payload
-    },
-
-    zoomInAndSave: (state) => {
-      state.oldView = { ...state.view }
-      state.view.zoom = Math.max(state.view.zoom, MIN_LOCATION_ZOOM)
-      state.place = null
-    },
-    zoomIn: (state, action) => {
-      state.view = {
-        center: action.payload,
-        zoom: Math.max(state.view.zoom, MIN_LOCATION_ZOOM),
-      }
-    },
-    clusterClick: (state, action) => {
-      state.view = {
-        center: action.payload,
-        zoom:
-          action.payload.count === 1
-            ? VISIBLE_CLUSTER_ZOOM_LIMIT + 1
-            : Math.min(VISIBLE_CLUSTER_ZOOM_LIMIT + 1, state.view.zoom + 2),
-      }
-      state.place = null
-    },
-    selectPlace: (state, action) => {
-      state.place = action.payload.location
-      state.view = fitBounds(action.payload.viewport, state.view.size)
-    },
-    clearSelectedPlace: (state) => {
-      state.place = null
+      window.history.pushState({}, '', newUrl)
     },
   },
   extraReducers: {
     [updateSelection]: (state) => {
       state.isFilterUpdated = true
     },
-
     [fetchMapLocations.pending]: (state) => {
       state.isLoading = true
     },
     [fetchMapLocations.fulfilled]: (state, action) => {
-      const { ne, sw } = state.view.bounds
+      if (!state.googleMap) {
+        return
+      }
+      const { north, east, south, west } = state.googleMap.getBounds().toJSON()
 
       if (state.isFilterUpdated) {
-        state.location = null
         state.locations = action.payload
         state.isFilterUpdated = false
       } else {
         // Drop locations out of bounds
         const locationsInBounds = state.locations.filter(
           ({ lat, lng }) =>
-            lat <= ne.lat && lng <= ne.lng && lat >= sw.lat && lng >= sw.lng,
+            lat <= north && lng <= east && lat >= south && lng >= west,
         )
-
         // Combine with new locations in bounds
+        // If IDs are equal, prioritise the payload
+        // to e.g. correctly display a just-updated position
         state.locations = unionWith(
           eqBy(prop('id')),
-          locationsInBounds,
           action.payload,
+          locationsInBounds,
         )
       }
 
       state.clusters = []
       state.isLoading = false
     },
-
     [fetchMapClusters.pending]: (state) => {
       state.isLoading = true
     },
@@ -207,44 +119,33 @@ export const mapSlice = createSlice({
       state.locations = []
       state.isLoading = false
     },
-    [fetchLocationData.fulfilled]: (state, action) => {
-      state.location = action.payload
-
-      if (state.isInitialEntry) {
-        const { lat, lng } = state.location
-
-        state.isInitialEntry = false
-        state.view = {
-          center: {
-            lat,
-            lng,
-          },
-          zoom: 16,
-        }
+    [geolocationReceived]: (state, action) => {
+      const maps = state.getGoogleMaps()
+      const newPosition = new maps.LatLng(
+        action.payload.latitude,
+        action.payload.longitude,
+      )
+      if (action.payload.geolocationState === GeolocationState.FIRST_LOCATION) {
+        state.googleMap.panTo(newPosition)
+        state.googleMap.setZoom(
+          Math.max(state.googleMap.getZoom(), MIN_TRACKING_ZOOM),
+        )
+      } else {
+        state.googleMap.panTo(newPosition)
       }
     },
-    [clearLocation]: (state) => {
-      if (state.oldView) {
-        state.view = { ...state.oldView }
-        state.oldView = null
-      }
+    [selectPlace]: (state, action) => {
+      const { ne, sw } = action.payload.place.viewport
+      const maps = state.getGoogleMaps()
+      const bounds = new maps.LatLngBounds(
+        { lat: sw.lat, lng: sw.lng },
+        { lat: ne.lat, lng: ne.lng },
+      )
+      state.googleMap.fitBounds(bounds)
     },
   },
 })
 
-export const {
-  zoomInAndSave,
-  zoomIn,
-  clusterClick,
-  viewChange,
-  setHoveredLocationId,
-  updateEntryLocation,
-  startTrackingLocation,
-  stopTrackingLocation,
-  geolocationChange,
-  setStreetView,
-  selectPlace,
-  clearSelectedPlace,
-} = mapSlice.actions
+export const { setGoogle, setInitialView } = mapSlice.actions
 
 export default mapSlice.reducer

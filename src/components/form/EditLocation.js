@@ -7,13 +7,14 @@ import { LocationForm, locationToForm } from './LocationForm'
 export const EditLocationForm = (props) => {
   const history = useAppHistory()
   const { location, isLoading } = useSelector((state) => state.location)
+  const { typesAccess } = useSelector((state) => state.type)
 
-  return isLoading ? (
+  return isLoading || !typesAccess.localizedTypes ? (
     <div>Loading...</div>
   ) : (
     location && (
       <LocationForm
-        initialValues={locationToForm(location)}
+        initialValues={locationToForm(location, typesAccess)}
         editingId={location.id}
         onSubmit={() => history.push(`/locations/${location.id}`)}
         {...props}

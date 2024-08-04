@@ -15,27 +15,30 @@ const normalizeLongitude = (longitude) => {
 }
 
 const convertBounds = (bounds) => ({
-  bounds: `${bounds.sw.lat},${normalizeLongitude(bounds.sw.lng)}|${
-    bounds.ne.lat
-  },${normalizeLongitude(bounds.ne.lng)}`,
+  bounds: `${bounds.south},${normalizeLongitude(bounds.west)}|${
+    bounds.north
+  },${normalizeLongitude(bounds.east)}`,
 })
 
 const convertCenter = (center) => ({
   center: `${center.lat},${center.lng}`,
 })
 
-export const selectParams = (state, extraParams = {}, isMap = true) => {
-  const { types, muni, invasive } = state.filter
-  const { view } = isMap ? state.map : state.list
+export const selectParams = (
+  { types, muni, invasive, googleMap },
+  extraParams = {},
+) => {
+  const bounds = googleMap.getBounds().toJSON()
+  const zoom = googleMap.getZoom()
+  const center = googleMap.getCenter().toJSON()
 
-  const params = {
+  return {
     types: types && types.join(','),
     muni,
     invasive,
-    ...convertBounds(view.bounds),
-    ...(!isMap && convertCenter(view.center)),
+    zoom,
+    ...convertBounds(bounds),
+    ...convertCenter(center),
     ...extraParams,
   }
-
-  return params
 }

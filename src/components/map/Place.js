@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 import { ReactComponent as CrosshairIcon } from './crosshair-medium-green.svg'
-import Label from './Label'
+import MapLabel from './MapLabel'
 
-const PlaceLabel = styled(Label)`
+const PlaceLabel = styled(MapLabel)`
   font-size: 1rem;
   margin-top: 20px;
   z-index: 3;

@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { requestResetPassword } from '../../utils/api'
-import { getPathWithMapState } from '../../utils/getInitialUrl'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Column } from './AuthWrappers'
@@ -18,7 +18,7 @@ const PasswordResetPage = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
 
   if (!isLoading && user) {
-    return <Redirect to={getPathWithMapState('/map')} />
+    return <Redirect to={pathWithCurrentView('/map')} />
   }
 
   const handleSubmit = async (values) => {
