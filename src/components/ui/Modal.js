@@ -69,23 +69,26 @@ const Modal = ({
         validationSchema={validationSchema}
         onSubmit={isLoggedIn ? onSubmit : handlePresubmit}
       >
-        {({ dirty, isSubmitting, isValid }) => (
-          <Form>
-            {children}
-            {!isLoggedIn && <Recaptcha />}
-            <Buttons>
-              <Button type="button" onClick={onDismiss} secondary>
-                Cancel
-              </Button>
-              <Button
-                disabled={!dirty || isSubmitting || !isValid}
-                type="submit"
-              >
-                {isSubmitting ? 'Submitting' : 'Submit'}
-              </Button>
-            </Buttons>
-          </Form>
-        )}
+        {(props) => {
+          const { dirty, isSubmitting, isValid } = props
+          return (
+            <Form>
+              {children}
+              {!isLoggedIn && <Recaptcha />}
+              <Buttons>
+                <Button type="button" onClick={onDismiss} secondary>
+                  Cancel
+                </Button>
+                <Button
+                  disabled={!dirty || isSubmitting || !isValid}
+                  type="submit"
+                >
+                  {isSubmitting ? 'Submitting' : 'Submit'}
+                </Button>
+              </Buttons>
+            </Form>
+          )
+        }}
       </Formik>
     </StyledModal>
   )

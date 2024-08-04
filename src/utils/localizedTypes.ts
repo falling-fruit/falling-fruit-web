@@ -20,6 +20,14 @@ type LocalizedType = {
   urls: { [url: string]: string }
 }
 
+type TypeSelectMenuEntry = {
+  value: Id
+  label: string
+  scientificName: string
+  commonName: string
+  taxonomicRank: number
+}
+
 const localize = (type: SchemaType, language: string): LocalizedType => {
   const scientificName = type.scientific_names?.[0] || ''
   let commonName = type.common_names?.[language]?.[0] || ''
@@ -51,6 +59,24 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
   })
   return new TypesAccess(localizedTypes, idIndex, childrenById)
 }
+
+const toMenuEntry = (localizedType: LocalizedType) => {
+  const { id, commonName, scientificName, taxonomicRank } = localizedType
+  const label =
+    scientificName && commonName
+      ? `${scientificName} (${commonName})`
+      : scientificName
+        ? scientificName
+        : `"${commonName}"`
+  return {
+    value: id,
+    label: label,
+    commonName,
+    scientificName,
+    taxonomicRank,
+  }
+}
+
 class TypesAccess {
   localizedTypes: LocalizedType[]
   idIndex: IdDict<number>
@@ -75,6 +101,42 @@ class TypesAccess {
   getScientificName(id: Id): string {
     const t = this.localizedTypes[this.idIndex[id]]
     return t ? t.scientificName : ''
+  }
+  asMenuEntries(): TypeSelectMenuEntry[] {
+    return this.localizedTypes.map(toMenuEntry)
+  }
+  getMenuEntry(id: Id): TypeSelectMenuEntry | null {
+    const t = this.localizedTypes[this.idIndex[id]]
+    return t ? toMenuEntry(t) : null
+  }
+
+  filter(predicate: (_type: LocalizedType) => boolean): TypesAccess {
+    const filteredTypes = this.localizedTypes.filter(predicate)
+    const newIdIndex: IdDict<number> = {}
+    const newChildrenById: IdDict<Id[]> = {}
+
+    filteredTypes.forEach((type, index) => {
+      newIdIndex[type.id] = index
+      if (!newChildrenById[type.parentId]) {
+        newChildrenById[type.parentId] = []
+      }
+      newChildrenById[type.parentId].push(type.id)
+    })
+
+    return new TypesAccess(filteredTypes, newIdIndex, newChildrenById)
+  }
+
+  onlyAllowedParents(): TypesAccess {
+    return this.filter(
+      ({ taxonomicRank, id }) => taxonomicRank !== 9 && id !== PENDING_ID,
+    )
+  }
+
+  addType(newType: SchemaType, language: string): TypesAccess {
+    return createTypesAccess([
+      ...this.localizedTypes,
+      localize(newType, language),
+    ])
   }
 }
 
@@ -139,29 +201,32 @@ class TypesFrequency extends TypesAccess {
     return this.aggregatedCountsById[id] || 0
   }
 
-  dropZeroCounts(): TypesFrequency {
-    const nonZeroTypes = this.localizedTypes.filter(
-      (localizedType) => this.getAggregatedCount(localizedType.id) > 0,
-    )
+  filter(predicate: (_type: LocalizedType) => boolean): TypesFrequency {
+    const filteredTypes = this.localizedTypes.filter(predicate)
     const newIdIndex: IdDict<number> = {}
     const newChildrenById: IdDict<Id[]> = {}
     const newCountsById: IdDict<number> = {}
 
-    nonZeroTypes.forEach((localizedType, index) => {
-      newIdIndex[localizedType.id] = index
-      newCountsById[localizedType.id] = this.countsById[localizedType.id]
-
-      if (!newChildrenById[localizedType.parentId]) {
-        newChildrenById[localizedType.parentId] = []
+    filteredTypes.forEach((type, index) => {
+      newIdIndex[type.id] = index
+      newCountsById[type.id] = this.countsById[type.id]
+      if (!newChildrenById[type.parentId]) {
+        newChildrenById[type.parentId] = []
       }
-      newChildrenById[localizedType.parentId].push(localizedType.id)
+      newChildrenById[type.parentId].push(type.id)
     })
 
     return new TypesFrequency(
-      nonZeroTypes,
+      filteredTypes,
       newIdIndex,
       newChildrenById,
       newCountsById,
+    )
+  }
+
+  dropZeroCounts(): TypesFrequency {
+    return this.filter(
+      (localizedType) => this.getAggregatedCount(localizedType.id) > 0,
     )
   }
 }
@@ -171,17 +236,15 @@ const toDisplayOrder = (localizedTypes: LocalizedType[]) =>
     (o) => !o.scientificName,
     'scientificName',
     (o) => -o.taxonomicRank,
+    'commonName',
   ])
-
-const hasPendingType = (types: SchemaType[]): boolean =>
-  types.some((type) => type.pending === true)
 
 export const typesAccessInLanguage = (
   types: SchemaType[],
   language: string,
 ) => {
   const localizedTypes = types.map((t: SchemaType) => localize(t, language))
-  if (hasPendingType(types)) {
+  if (types.some((type) => type.pending)) {
     localizedTypes.push({
       id: PENDING_ID,
       parentId: 0,

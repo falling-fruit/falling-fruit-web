@@ -29,14 +29,26 @@ export const withLabel = (WrappedField) => {
 }
 
 export const withField = (WrappedComponent, type, bypassFormik = false) => {
-  const FieldComponent = ({ invalidWhenUntouched, ...props }) => {
+  const FieldComponent = ({
+    invalidWhenUntouched,
+    toFormikValue,
+    fromFormikValue,
+    ...props
+  }) => {
     const [field, meta, helpers] = useField({ ...props, type })
     const customProps = bypassFormik
       ? {
-          value: meta.value,
-          onChange: helpers.setValue,
+          value: fromFormikValue ? fromFormikValue(meta.value) : meta.value,
+          onChange: toFormikValue
+            ? (v) => helpers.setValue(toFormikValue(v))
+            : helpers.setValue,
         }
       : field
+
+    // workaround: error was found to be {} when adding fields to AddTypeModal
+    if (JSON.stringify(meta.error) === '{}') {
+      meta.error = false
+    }
 
     return (
       <WrappedComponent

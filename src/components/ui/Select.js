@@ -8,7 +8,7 @@ import { validatedColor } from './GlobalStyle'
 
 const LIST_ITEM_HEIGHT = 46
 
-const StyledSelect = styled(Select)`
+const StyledSelect = (component) => styled(component)`
   font-size: 1rem;
 
   .select__clear-indicator {
@@ -95,15 +95,15 @@ const MenuList = ({ children, maxHeight }) => (
 )
 
 const SelectWrapper = ({ isVirtualized, onCreateOption, ...props }) => {
-  const SelectComponent = onCreateOption ? Creatable : Select
+  const SelectComponent = StyledSelect(onCreateOption ? Creatable : Select)
   return (
-    <StyledSelect
-      as={SelectComponent}
+    <SelectComponent
       components={isVirtualized ? { MenuList } : {}}
       classNamePrefix="select"
       // Reduces typing lag
       filterOption={createFilter({ ignoreAccents: false })}
       placeholder=""
+      onCreateOption={onCreateOption}
       {...props}
     />
   )

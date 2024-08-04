@@ -1,60 +1,75 @@
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useFormikContext } from 'formik'
+import { uniqBy } from 'lodash'
+import { useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { openAddTypeModal } from '../../redux/typeSlice'
 import { TypeName } from '../ui/TypeName'
+import { AddTypeModal } from './AddTypeModal'
 import { Select } from './FormikWrappers'
 
 const TypesSelect = () => {
-  const { typesAccess } = useSelector((state) => state.type)
+  const { typesAccess, recentlyAddedTypesByLocation } = useSelector(
+    (state) => state.type,
+  )
+  const { locationId } = useSelector((state) => state.location)
+  const { values, setFieldValue } = useFormikContext()
+  const dispatch = useDispatch()
 
-  const typeOptions = useMemo(() => {
-    const options = typesAccess.localizedTypes.map(
-      ({ id, commonName, scientificName, taxonomicRank }) => ({
-        value: id,
-        label: `${scientificName} (${commonName})`,
-        commonName,
-        scientificName,
-        taxonomicRank,
-      }),
-    )
+  const typeOptions = useMemo(() => typesAccess.asMenuEntries(), [typesAccess])
 
-    return options
-  }, [typesAccess])
+  const [newTypeInput, setNewTypeInput] = useState('')
+
+  const recentlyAddedTypes = useMemo(
+    () =>
+      (recentlyAddedTypesByLocation[locationId] || [])
+        .map((typeId) => typesAccess.getMenuEntry(typeId))
+        .filter(Boolean),
+    [recentlyAddedTypesByLocation, locationId, typesAccess],
+  )
+
+  useEffect(() => {
+    if (recentlyAddedTypes.length > 0) {
+      const updatedTypes = uniqBy(
+        [...(values.types || []), ...recentlyAddedTypes],
+        'value',
+      )
+      setFieldValue('types', updatedTypes)
+    }
+  }, [recentlyAddedTypes.join(', ')]) //eslint-disable-line
 
   const handleCreateOption = (inputValue) => {
-    // Handle the creation of a new option
-    const newOption = {
-      id: inputValue,
-      value: inputValue,
-      label: inputValue,
-      commonName: inputValue,
-      scientificName: inputValue,
-      taxonomicRank: 'custom',
-    }
-    console.log(inputValue)
-    // You might want to dispatch an action here to add the new option to your state
-    return newOption
+    setNewTypeInput(inputValue)
+    dispatch(openAddTypeModal())
   }
 
   return (
-    <Select
-      name="types"
-      label="Types"
-      options={typeOptions}
-      isMulti
-      closeMenuOnSelect={false}
-      blurInputOnSelect={false}
-      formatOptionLabel={(option) => (
-        <TypeName
-          commonName={option.commonName}
-          scientificName={option.scientificName}
-        />
-      )}
-      isVirtualized
-      required
-      invalidWhenUntouched
-      onCreateOption={handleCreateOption}
-    />
+    <>
+      <Select
+        name="types"
+        label="Types"
+        options={typeOptions}
+        isMulti
+        closeMenuOnSelect={false}
+        blurInputOnSelect={false}
+        formatOptionLabel={(option) =>
+          option.__isNew__ ? (
+            <div>
+              <b> Add Type: </b>
+              {option.label}
+            </div>
+          ) : (
+            <TypeName {...option} />
+          )
+        }
+        isVirtualized
+        required
+        invalidWhenUntouched
+        onCreateOption={handleCreateOption}
+        formatCreateLabel={(inputValue) => inputValue}
+      />
+      <AddTypeModal initialCommonName={newTypeInput} />
+    </>
   )
 }
 
