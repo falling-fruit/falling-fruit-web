@@ -143,6 +143,10 @@ export const getTypeById = (
   id: paths['/types/{id}']['get']['parameters']['path']['id'],
 ) => instance.get(`/types/${id}`)
 
+export const addType = (
+  data: paths['/types']['post']['requestBody']['content']['application/json'],
+) => instance.post('/types', data)
+
 export const getReviews = (
   locationId: paths['/locations/{id}/reviews']['get']['parameters']['path']['id'],
 ) => instance.get(`/locations/${locationId}/reviews`)
