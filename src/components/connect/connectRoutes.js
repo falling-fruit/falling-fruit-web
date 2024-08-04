@@ -4,6 +4,7 @@ import ConnectList from './ConnectList'
 import ConnectLocation from './ConnectLocation'
 import ConnectMap from './ConnectMap'
 import ConnectNewLocation from './ConnectNewLocation'
+import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectTypes from './ConnectTypes'
 import DisconnectLocation from './DisconnectLocation'
@@ -31,10 +32,23 @@ const connectRoutes = [
    * action:
    * - get the view from URL or default to our chosen location centred on U of Illinois
    * - if this is the first render, dispatch a Redux update
+   */
+  <Route key="connect-view" path={['/map', '/settings']}>
+    <ConnectMap />
+  </Route>,
+  /*
+   * ConnectPath
+   * why:
+   * - if something else changed the URL, e.g. the back button, the map needs to get back in sync
+   *
+   * action:
    * - if the map is present but not in sync with the URL, navigate to the URL's view
    */
-  <Route key="connect-view" path={['/map']}>
-    <ConnectMap />
+  <Route
+    key="connect-path"
+    path={['/map', '/settings', '/locations', '/reviews']}
+  >
+    <ConnectPath />
   </Route>,
   /*
    * ConnectNewLocation
