@@ -173,18 +173,23 @@ const toDisplayOrder = (localizedTypes: LocalizedType[]) =>
     (o) => -o.taxonomicRank,
   ])
 
+const hasPendingType = (types: SchemaType[]): boolean =>
+  types.some((type) => type.pending === true)
+
 export const typesAccessInLanguage = (
   types: SchemaType[],
   language: string,
 ) => {
   const localizedTypes = types.map((t: SchemaType) => localize(t, language))
-  localizedTypes.push({
-    id: PENDING_ID,
-    parentId: 0,
-    scientificName: '',
-    commonName: 'Pending Review',
-    taxonomicRank: 0,
-    urls: {},
-  })
+  if (hasPendingType(types)) {
+    localizedTypes.push({
+      id: PENDING_ID,
+      parentId: 0,
+      scientificName: '',
+      commonName: 'Pending Review',
+      taxonomicRank: 0,
+      urls: {},
+    })
+  }
   return createTypesAccess(toDisplayOrder(localizedTypes))
 }
