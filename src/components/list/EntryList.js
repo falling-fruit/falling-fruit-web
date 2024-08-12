@@ -74,8 +74,8 @@ const EntryList = forwardRef(
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
             primaryText={
               <TypeName
-                commonName={type.commonName}
-                scientificName={type.scientificName}
+                commonName={type?.commonName}
+                scientificName={type?.scientificName}
               />
             }
             secondaryText={convertDistance(location.distance, distanceUnit)}
