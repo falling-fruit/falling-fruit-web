@@ -202,7 +202,9 @@ const MapPage = ({ isDesktop }) => {
 
       <ZoomInButton
         onClick={zoomIn}
-        disabled={!currentZoom || currentZoom >= 22}
+        disabled={
+          !currentZoom || currentZoom >= (mapType === 'roadmap' ? 22 : 21)
+        }
       >
         +
       </ZoomInButton>
