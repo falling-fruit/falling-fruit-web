@@ -43,6 +43,9 @@ const ZoomButton = styled.button`
   width: 40px;
   height: 40px;
   background-color: white;
+  &:hover {
+    background-color: #f0f0f0;
+  }
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 20px;
