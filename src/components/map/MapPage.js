@@ -31,6 +31,8 @@ import {
 import Place from './Place'
 import TrackLocationButton from './TrackLocationButton'
 
+const MIN_ZOOM = 1
+
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
   left: 10px;
@@ -210,7 +212,7 @@ const MapPage = ({ isDesktop }) => {
       </ZoomInButton>
       <ZoomOutButton
         onClick={zoomOut}
-        disabled={!currentZoom || currentZoom <= 4}
+        disabled={!currentZoom || currentZoom <= MIN_ZOOM}
       >
         -
       </ZoomOutButton>
@@ -226,6 +228,7 @@ const MapPage = ({ isDesktop }) => {
           options={() => ({
             mapTypeId: mapType,
             disableDefaultUI: true,
+            minZoom: MIN_ZOOM,
             tilt: 0,
             // Toggle all basemap icons
             // https://developers.google.com/maps/documentation/javascript/style-reference
