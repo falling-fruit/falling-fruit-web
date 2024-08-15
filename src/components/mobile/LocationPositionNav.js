@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
+import { distanceInMeters } from '../../utils/mapDistance'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
@@ -22,10 +23,24 @@ const LocationPositionNav = () => {
   const { position: storedPosition } = useSelector((state) => state.location)
 
   const handleCancel = () => {
-    if (storedPosition) {
-      googleMap?.setCenter(storedPosition)
+    if (storedPosition && googleMap) {
+      const currentCenter = googleMap.getCenter().toJSON()
+      const distance = distanceInMeters(currentCenter, storedPosition)
+
+      googleMap.setCenter(storedPosition)
+
+      if (distance > 1) {
+        // Wait half a second to let the user observe the edited position being undone
+        setTimeout(
+          () => history.push(`/locations/${locationId}/edit/details`),
+          500,
+        )
+      } else {
+        history.push(`/locations/${locationId}/edit/details`)
+      }
+    } else {
+      history.push(`/locations/${locationId}/edit/details`)
     }
-    history.push(`/locations/${locationId}/edit/details`)
   }
 
   const handleConfirm = () => {
