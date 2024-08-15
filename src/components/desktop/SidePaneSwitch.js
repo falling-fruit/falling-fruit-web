@@ -1,9 +1,8 @@
 import { Redirect, Route, Switch } from 'react-router-dom'
 
 import EntryWrapper from '../entry/EntryWrapper'
-import { EditLocationPage } from '../form/EditLocation'
+import { EditLocationPage, NewLocationPage } from '../form/EditLocation'
 import { EditReviewPage } from '../form/EditReview'
-import { LocationForm } from '../form/LocationForm'
 import SettingsPage from '../settings/SettingsPage'
 import MainPane from './MainPane'
 import { NavPane } from './NavPane'
@@ -23,7 +22,7 @@ const SidePaneSwitch = () => (
             <EditReviewPage />
           </Route>
           <Route path="/locations/new">
-            <LocationForm />
+            <NewLocationPage />
           </Route>
           <Route path="/settings">
             <SettingsPage desktop />
