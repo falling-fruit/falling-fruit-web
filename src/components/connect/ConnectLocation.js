@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -14,7 +14,7 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 const ConnectLocation = ({
   locationId,
   isBeingEdited,
-  isBeingEditedDetails,
+  isBeingEditedPosition,
   isStreetView,
 }) => {
   const dispatch = useDispatch()
@@ -22,6 +22,7 @@ const ConnectLocation = ({
   const { position } = useSelector((state) => state.location)
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
+  const [hasCentered, setHasCentered] = useState(false)
 
   useEffect(() => {
     dispatch(
@@ -53,36 +54,36 @@ const ConnectLocation = ({
     dispatch(setStreetView(isStreetView))
   }, [dispatch, isStreetView])
 
-  useEffect(
-    () => {
-      if (
-        isBeingEdited &&
-        isBeingEditedDetails &&
-        position &&
-        !isDesktop &&
-        googleMap
-      ) {
-        // On mobile, we need to center the map on the edited location
-        // because the UX involves panning the map under a central pin
-        //
-        // do this when navigating to /locations/:locationId/edit/details
-        // (necessarily visited before /locations/:locationId/edit/position)
-        googleMap.setCenter(position)
-        if (googleMap.getZoom() < 16) {
-          googleMap.setZoom(16)
-        }
+  useEffect(() => {
+    if (
+      isBeingEdited &&
+      isBeingEditedPosition &&
+      position &&
+      !isDesktop &&
+      googleMap &&
+      !hasCentered
+    ) {
+      // On mobile, we need to center the map on the edited location
+      // because the UX involves panning the map under a central pin
+      googleMap.setCenter(position)
+      if (googleMap.getZoom() < 16) {
+        googleMap.setZoom(16)
       }
-    },
-    //eslint-disable-next-line
-    [
-      dispatch,
-      isBeingEdited,
-      isBeingEditedDetails,
-      locationId,
-      isDesktop,
-      googleMap,
-    ],
-  )
+      setHasCentered(true)
+    }
+  }, [
+    isBeingEdited,
+    isBeingEditedPosition,
+    position,
+    isDesktop,
+    googleMap,
+    hasCentered,
+  ])
+
+  useEffect(() => {
+    // Reset hasCentered when locationId changes
+    setHasCentered(false)
+  }, [locationId])
 
   return null
 }

@@ -41,9 +41,9 @@ const LocationNav = () => {
       <Route path="/locations/:locationId/edit/details">
         {({ match }) => (
           <TopBarNav
-            onBack={() => {
+            onBack={(event) => {
               event.stopPropagation()
-              return history.push(`/locations/${match.params.locationId}`)
+              history.push(`/locations/${match.params.locationId}`)
             }}
             title="Editing location"
           />

@@ -90,7 +90,7 @@ const connectRoutes = [
         <ConnectLocation
           locationId={match.params.locationId}
           isBeingEdited={match.params.nextSegment === 'edit'}
-          isBeingEditedDetails={match.params.nextNextSegment === 'details'}
+          isBeingEditedPosition={match.params.nextNextSegment === 'position'}
           isStreetView={match.params.nextSegment === 'panorama'}
         />
       )
