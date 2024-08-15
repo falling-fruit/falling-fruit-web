@@ -229,7 +229,6 @@ const MapPage = ({ isDesktop }) => {
             mapTypeId: mapType,
             disableDefaultUI: true,
             minZoom: MIN_ZOOM,
-            tilt: 0,
             // Toggle all basemap icons
             // https://developers.google.com/maps/documentation/javascript/style-reference
             styles: [
