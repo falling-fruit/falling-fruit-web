@@ -63,6 +63,9 @@ const locationSlice = createSlice({
     dismissLocationTooltip: (state) => {
       state.tooltipOpen = false
     },
+    reopenLocationTooltip: (state) => {
+      state.tooltipOpen = true
+    },
     setStreetView: (state, action) => {
       state.streetViewOpen = action.payload
     },
@@ -112,6 +115,7 @@ export const {
   saveFormValues,
   setIsBeingEditedAndResetPosition,
   dismissLocationTooltip,
+  reopenLocationTooltip,
   setStreetView,
 } = locationSlice.actions
 

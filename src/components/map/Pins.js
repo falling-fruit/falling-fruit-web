@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { dismissLocationTooltip } from '../../redux/locationSlice'
+import {
+  dismissLocationTooltip,
+  reopenLocationTooltip,
+} from '../../redux/locationSlice'
 import Tooltip from './LocationTooltip'
 
 const AddLocationPin = styled(Map)`
@@ -63,18 +66,23 @@ const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
   const { locationId, tooltipOpen } = useSelector((state) => state.location)
 
   const [isDragging, setIsDragging] = useState(false)
+  const [isClicking, setIsClicking] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
 
   const handleMouseDown = (e) => {
     e.stopPropagation()
     const { x, y } = $geoService.fromLatLngToContainerPixel({ lat, lng })
     setDragOffset({ x: e.clientX - x, y: e.clientY - y })
-    setIsDragging(true)
+    setIsClicking(true)
   }
 
   const handleMouseUp = (e) => {
     e.stopPropagation()
+    if (isClicking && !isDragging) {
+      dispatch(reopenLocationTooltip())
+    }
     setIsDragging(false)
+    setIsClicking(false)
     const { lat: newLat, lng: newLng } = $geoService.fromContainerPixelToLatLng(
       {
         x: e.clientX - dragOffset.x,
@@ -85,6 +93,10 @@ const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
   }
 
   const handleMouseMove = (e) => {
+    if (isClicking) {
+      setIsDragging(true)
+      setIsClicking(false)
+    }
     if (isDragging) {
       e.stopPropagation()
       const { lat: newLat, lng: newLng } =
@@ -97,7 +109,7 @@ const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
   }
 
   useEffect(() => {
-    if (isDragging) {
+    if (isClicking || isDragging) {
       document.addEventListener('mousemove', handleMouseMove)
       document.addEventListener('mouseup', handleMouseUp)
     }
@@ -105,7 +117,7 @@ const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [isDragging, dragOffset]) //eslint-disable-line
+  }, [isClicking, isDragging, dragOffset]) //eslint-disable-line
 
   const LocationPin = locationId === 'new' ? AddLocationPin : EditLocationPin
 
