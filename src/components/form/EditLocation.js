@@ -29,3 +29,10 @@ export const EditLocationPage = () => (
     <EditLocationForm />
   </Page>
 )
+
+export const NewLocationPage = () => (
+  <Page>
+    <h3 style={{ marginLeft: 10 }}>Adding Location</h3>
+    <LocationForm />
+  </Page>
+)
