@@ -21,6 +21,8 @@ const MapLabel = styled.div`
     1px -1px 0 ${theme.background},
     -1px 1px 0 ${theme.background},
     1px 1px 0 ${theme.background};
+
+  user-select: none;
 `
 
 export default MapLabel
