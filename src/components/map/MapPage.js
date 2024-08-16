@@ -82,31 +82,27 @@ const clusterBounds = ({ lat, lng, zoom }) => {
   const cell = {
     x: Math.floor((mercator.x + EARTH_CIRCUMFERENCE / 2) / cell_size),
     y: Math.floor((mercator.y + EARTH_CIRCUMFERENCE / 2) / cell_size),
-    zoom: zoom,
   }
 
-  // Convert grid cell indices to Web Mercator for southwest corner
-  const sw = {
-    x: cell.x * cell_size - EARTH_CIRCUMFERENCE / 2,
-    y: cell.y * cell_size - EARTH_CIRCUMFERENCE / 2,
+  // Convert grid cell indices to Web Mercator bounds
+  // (cell.x, cell.y) is the bottom-left (south-west) corner of the cell
+  const bounds = {
+    south: cell.y * cell_size - EARTH_CIRCUMFERENCE / 2,
+    west: cell.x * cell_size - EARTH_CIRCUMFERENCE / 2,
+    north: (cell.y + 1) * cell_size - EARTH_CIRCUMFERENCE / 2,
+    east: (cell.x + 1) * cell_size - EARTH_CIRCUMFERENCE / 2,
   }
 
-  // Convert grid cell indices to Web Mercator for northeast corner
-  const ne = {
-    x: (cell.x + 1) * cell_size - EARTH_CIRCUMFERENCE / 2,
-    y: (cell.y + 1) * cell_size - EARTH_CIRCUMFERENCE / 2,
-  }
-
-  // Convert Web Mercator corners back to WGS84
+  // Convert Web Mercator bounds to WGS84
   return {
-    sw: {
-      x: sw.x * (360 / EARTH_CIRCUMFERENCE),
-      y: 90 - (Math.atan2(1, Math.exp(sw.y / EARTH_RADIUS)) * 360) / Math.PI,
-    },
-    ne: {
-      x: ne.x * (360 / EARTH_CIRCUMFERENCE),
-      y: 90 - (Math.atan2(1, Math.exp(ne.y / EARTH_RADIUS)) * 360) / Math.PI,
-    },
+    south:
+      90 -
+      (Math.atan2(1, Math.exp(bounds.south / EARTH_RADIUS)) * 360) / Math.PI,
+    west: bounds.west * (360 / EARTH_CIRCUMFERENCE),
+    north:
+      90 -
+      (Math.atan2(1, Math.exp(bounds.north / EARTH_RADIUS)) * 360) / Math.PI,
+    east: bounds.east * (360 / EARTH_CIRCUMFERENCE),
   }
 }
 
@@ -183,12 +179,7 @@ const MapPage = ({ isDesktop }) => {
       lng: cluster.lng,
       zoom: currentZoom + 1,
     })
-    googleMap?.fitBounds({
-      south: bounds.sw.y,
-      west: bounds.sw.x,
-      north: bounds.ne.y,
-      east: bounds.ne.x,
-    })
+    googleMap?.fitBounds(bounds)
   }
 
   const handleGeolocationClick = () => {
