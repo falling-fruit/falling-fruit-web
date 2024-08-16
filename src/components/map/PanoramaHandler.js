@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
+import { addLocationWithoutPanorama } from '../../redux/miscSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 
 class PanoramaWithMarker {
@@ -62,6 +63,7 @@ const PanoramaHandler = () => {
     (state) => state.location,
   )
   const history = useAppHistory()
+  const dispatch = useDispatch()
   const panoramaWithMarkerRef = useRef(null)
 
   const connect = async () => {
@@ -74,6 +76,7 @@ const PanoramaHandler = () => {
       const { error } = await panoramaWithMarkerRef.current.initPanorama()
       if (error) {
         toast.error(`Street View not available for location ${location.id}`)
+        dispatch(addLocationWithoutPanorama(location.id))
         history.push(`/locations/${location.id}`)
       }
     }

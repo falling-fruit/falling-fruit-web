@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
@@ -55,12 +56,22 @@ const Description = styled.section`
   }
 `
 
+const DisabledIconBesideText = styled(IconBesideText)`
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `}
+`
+
 const EntryOverview = ({ locationData, className }) => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const { googleMap } = useSelector((state) => state.map)
   const { streetViewOpen, locationId } = useSelector((state) => state.location)
+  const { locationsWithoutPanorama } = useSelector((state) => state.misc)
 
   const { t, i18n } = useTranslation()
 
@@ -121,10 +132,18 @@ const EntryOverview = ({ locationData, className }) => {
                 <p>Google Maps</p>
               </IconBesideText>
             ) : (
-              <IconBesideText bold onClick={openStreetView}>
+              <DisabledIconBesideText
+                bold
+                onClick={
+                  locationsWithoutPanorama[locationData.id]
+                    ? undefined
+                    : openStreetView
+                }
+                disabled={locationsWithoutPanorama[locationData.id]}
+              >
                 <StreetView size={20} />
                 <p>Google Street View</p>
-              </IconBesideText>
+              </DisabledIconBesideText>
             )}
             {hasSeasonality(locationData) && (
               <IconBesideText>
