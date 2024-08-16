@@ -45,9 +45,13 @@ const ZoomButton = styled.button`
   width: 40px;
   height: 40px;
   background-color: white;
-  &:hover {
-    background-color: #f0f0f0;
-  }
+  ${({ isDesktop }) =>
+    isDesktop &&
+    `
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  `}
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 20px;
@@ -246,12 +250,14 @@ const MapPage = ({ isDesktop }) => {
         disabled={
           !currentZoom || currentZoom >= (mapType === 'roadmap' ? 22 : 21)
         }
+        isDesktop={isDesktop}
       >
         +
       </ZoomInButton>
       <ZoomOutButton
         onClick={zoomOut}
         disabled={!currentZoom || currentZoom <= MIN_ZOOM}
+        isDesktop={isDesktop}
       >
         -
       </ZoomOutButton>

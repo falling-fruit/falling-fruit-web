@@ -12,10 +12,14 @@ export const miscSlice = createSlice({
   initialState: {
     typesById: {},
     isDesktop: null,
+    locationsWithoutPanorama: {},
   },
   reducers: {
     layoutChange: (state, action) => {
       state.isDesktop = action.payload.isDesktop
+    },
+    addLocationWithoutPanorama: (state, action) => {
+      state.locationsWithoutPanorama[action.payload] = true
     },
   },
   extraReducers: {
@@ -30,6 +34,6 @@ export const miscSlice = createSlice({
   },
 })
 
-export const { layoutChange } = miscSlice.actions
+export const { addLocationWithoutPanorama, layoutChange } = miscSlice.actions
 
 export default miscSlice.reducer
