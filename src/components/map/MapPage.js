@@ -318,7 +318,7 @@ const MapPage = ({ isDesktop }) => {
               heading={geolocation.heading}
             />
           )}
-          {place && (
+          {place && currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT && (
             <Place lat={place.lat} lng={place.lng} label={place.description} />
           )}
           {clusters.map((cluster) => (
