@@ -1,4 +1,3 @@
-import { CurrentLocation } from '@styled-icons/boxicons-regular/CurrentLocation'
 import { Map, Navigation } from '@styled-icons/boxicons-solid'
 import React from 'react'
 
@@ -10,12 +9,10 @@ const SearchEntry = React.forwardRef(
   ({ children, isCurrentLocation, ...props }, ref) => {
     const [primaryText, secondaryText] = children
 
-    const leftIcon = isCurrentLocation ? (
-      <CircleIcon backgroundColor={theme.blue}>
-        <CurrentLocation color={theme.background} />
-      </CircleIcon>
-    ) : (
-      <CircleIcon backgroundColor={theme.secondaryText}>
+    const leftIcon = (
+      <CircleIcon
+        backgroundColor={isCurrentLocation ? theme.blue : theme.secondaryText}
+      >
         <Map color={theme.background} />
       </CircleIcon>
     )
