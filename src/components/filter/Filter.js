@@ -9,8 +9,8 @@ import { constructTypesTreeForSelection } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import { CheckboxFilters } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
-import RCTreeSelect from './RCTreeSelect'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
+import TreeSelect from './TreeSelect'
 
 const StyledFilter = styled.div`
   box-sizing: border-box;
@@ -150,7 +150,7 @@ const Filter = ({ isOpen }) => {
           />
         </TreeFiltersContainer>
         {didMount.current ? (
-          <RCTreeSelect
+          <TreeSelect
             data={typesTreeForSelection}
             loading={isLoading}
             onChange={(selectedTypes) =>
