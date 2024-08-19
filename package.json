@@ -32,7 +32,6 @@
     "i18next-http-backend": "^1.2.2",
     "polished": "^4.1.1",
     "ramda": "^0.27.1",
-    "rc-tree-select": "2.7.0",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",
     "react-data-table-component": "^7.3.1",
