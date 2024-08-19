@@ -1,7 +1,7 @@
 import 'rc-tree-select/assets/index.css'
 
 import TreeSelect from 'rc-tree-select'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 
 import { RC_ROOT_ID } from '../../utils/buildTypeSchema'
@@ -114,53 +114,51 @@ const RCTreeSelect = ({ data, onChange, types, searchValue }) => {
   // useState is necessary instead of useRef in order to restore the container ref whenever the tree re-renders
   const [treeSelectContainerRef, setTreeSelectContainerRef] = useState(null)
 
-  return useMemo(() => {
-    const switcherIcon = (obj) =>
-      !obj.isLeaf && (
-        <ArrowIcon
-          style={{
-            backgroundColor: 'white',
-            width: '1em',
-            height: '0.875em',
-            verticalAlign: '-.05em',
-            transform: `rotate(${obj.expanded ? 90 : 0}deg)`,
-          }}
-        />
-      )
-
-    return (
-      <TreeSelectContainer
-        ref={setTreeSelectContainerRef}
-        isSearching={searchValue !== ''}
-      >
-        {treeSelectContainerRef && (
-          <TreeSelect
-            style={{ width: 300 }}
-            dropdownStyle={{
-              flex: 1,
-              height: '100%',
-              overflow: 'auto',
-            }}
-            treeData={data}
-            value={types}
-            treeCheckable
-            onChange={onChange}
-            treeDataSimpleMode={{
-              id: 'rcId',
-              pId: 'rcParentId',
-              rootPId: RC_ROOT_ID,
-            }}
-            treeNodeFilterProp="searchValue"
-            open
-            searchValue={searchValue}
-            virtual
-            getPopupContainer={() => treeSelectContainerRef}
-            switcherIcon={switcherIcon}
-          />
-        )}
-      </TreeSelectContainer>
+  const switcherIcon = (obj) =>
+    !obj.isLeaf && (
+      <ArrowIcon
+        style={{
+          backgroundColor: 'white',
+          width: '1em',
+          height: '0.875em',
+          verticalAlign: '-.05em',
+          transform: `rotate(${obj.expanded ? 90 : 0}deg)`,
+        }}
+      />
     )
-  }, [data, searchValue]) //eslint-disable-line
+
+  return (
+    <TreeSelectContainer
+      ref={setTreeSelectContainerRef}
+      isSearching={searchValue !== ''}
+    >
+      {treeSelectContainerRef && (
+        <TreeSelect
+          style={{ width: 300 }}
+          dropdownStyle={{
+            flex: 1,
+            height: '100%',
+            overflow: 'auto',
+          }}
+          treeData={data}
+          value={types}
+          treeCheckable
+          onChange={onChange}
+          treeDataSimpleMode={{
+            id: 'rcId',
+            pId: 'rcParentId',
+            rootPId: RC_ROOT_ID,
+          }}
+          treeNodeFilterProp="searchValue"
+          open
+          searchValue={searchValue}
+          virtual
+          getPopupContainer={() => treeSelectContainerRef}
+          switcherIcon={switcherIcon}
+        />
+      )}
+    </TreeSelectContainer>
+  )
 }
 
 export default RCTreeSelect
