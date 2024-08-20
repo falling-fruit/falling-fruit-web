@@ -9,7 +9,7 @@ export const EditLocationForm = (props) => {
   const { location, isLoading } = useSelector((state) => state.location)
   const { typesAccess } = useSelector((state) => state.type)
 
-  return isLoading || !typesAccess.localizedTypes.length ? (
+  return isLoading || typesAccess.isEmpty ? (
     <div>Loading...</div>
   ) : (
     location && (
