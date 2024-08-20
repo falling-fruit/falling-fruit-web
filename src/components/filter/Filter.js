@@ -69,7 +69,7 @@ const MuniAndInvasiveCheckboxFilters = styled.div`
   }
 `
 
-const Filter = ({ isOpen }) => {
+const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
   const setSearchValueDebounced = useMemo(
     () => debounce(setSearchValue, 200),
@@ -96,7 +96,7 @@ const Filter = ({ isOpen }) => {
   )
 
   const { t } = useTranslation()
-  return isOpen ? (
+  return (
     <StyledFilter>
       <div>
         <p className="edible-type-text">{t('glossary.types')}</p>
@@ -162,7 +162,7 @@ const Filter = ({ isOpen }) => {
         />
       </MuniAndInvasiveCheckboxFilters>
     </StyledFilter>
-  ) : null
+  )
 }
 
 export default Filter

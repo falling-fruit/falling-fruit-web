@@ -53,7 +53,7 @@ const MainPane = () => {
   return (
     <Container>
       <Search />
-      <Filter isOpen />
+      <Filter />
       <StyledButton
         secondary
         greyedOut={!isZoomSufficient}
