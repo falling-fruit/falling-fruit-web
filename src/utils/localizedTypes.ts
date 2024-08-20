@@ -93,6 +93,10 @@ class TypesAccess {
     this.isEmpty = localizedTypes.length === 0
   }
 
+  selectableTypes(): LocalizedType[] {
+    return this.localizedTypes.filter((t) => t.id !== PENDING_ID)
+  }
+
   getType(id: Id): LocalizedType {
     return this.localizedTypes[this.idIndex[id]]
   }
