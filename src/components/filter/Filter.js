@@ -122,7 +122,7 @@ const Filter = () => {
             onSelectAllClick={() =>
               dispatch(
                 selectionChanged(
-                  typesAccess.localizedTypes.map((type) => type.id),
+                  typesAccess.selectableTypes().map((type) => type.id),
                 ),
               )
             }

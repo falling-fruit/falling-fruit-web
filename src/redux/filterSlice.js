@@ -46,6 +46,7 @@ export const filterSlice = createSlice({
     isOpen: false,
     invasive: false,
     isLoading: false,
+    isDirty: false,
     countsById: {},
     showOnlyOnMap: true,
   },
@@ -73,7 +74,11 @@ export const filterSlice = createSlice({
       state.isLoading = false
     },
 
-    [updateSelection]: (state, action) => ({ ...state, ...action.payload }),
+    [updateSelection]: (state, action) => ({
+      ...state,
+      isDirty: true,
+      ...action.payload,
+    }),
 
     [fetchAllTypes.fulfilled]: (state, action) => {
       state.allTypes = action.payload
