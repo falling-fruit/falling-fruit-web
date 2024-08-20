@@ -81,6 +81,7 @@ class TypesAccess {
   localizedTypes: LocalizedType[]
   idIndex: IdDict<number>
   childrenById: IdDict<Id[]>
+  isEmpty: boolean
   constructor(
     localizedTypes: LocalizedType[],
     idIndex: IdDict<number>,
@@ -89,7 +90,9 @@ class TypesAccess {
     this.localizedTypes = localizedTypes
     this.idIndex = idIndex
     this.childrenById = childrenById
+    this.isEmpty = localizedTypes.length === 0
   }
+
   getType(id: Id): LocalizedType {
     return this.localizedTypes[this.idIndex[id]]
   }

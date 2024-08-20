@@ -129,7 +129,9 @@ const Filter = () => {
             onDeselectAllClick={() => dispatch(selectionChanged([]))}
           />
         </TreeFiltersContainer>
-        {typesAccess.localizedTypes.length ? (
+        {typesAccess.isEmpty ? (
+          <RCTreeSelectSkeleton />
+        ) : (
           <TreeSelect
             data={typesTreeForSelection}
             loading={isLoading}
@@ -139,8 +141,6 @@ const Filter = () => {
             types={types}
             searchValue={searchValue}
           />
-        ) : (
-          <RCTreeSelectSkeleton />
         )}
       </div>
       <MuniAndInvasiveCheckboxFilters>
