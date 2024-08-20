@@ -12,6 +12,7 @@ import CoordinateParser from 'coordinate-parser'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
@@ -236,9 +237,21 @@ const Search = (props) => {
           })}
         </ComboboxList>
       </StyledComboboxPopover>
-      {!isDesktop && <Filter isOpen={filterOpen} />}
+      {!isDesktop && (
+        <FilterWrapper isOpen={filterOpen}>
+          <Filter />
+        </FilterWrapper>
+      )}
     </Combobox>
   )
 }
+
+const FilterWrapper = styled.div`
+  ${({ isOpen }) =>
+    !isOpen &&
+    css`
+      display: none;
+    `}
+`
 
 export default Search
