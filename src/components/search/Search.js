@@ -84,7 +84,7 @@ const getCoordinatesResult = (value) => {
 const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
-  const filterOpen = useSelector((state) => state.filter.isOpen)
+  const filterOpen = useSelector((state) => state.filter.isOpenInMobileLayout)
   const { typesAccess } = useSelector((state) => state.type)
   const selectedPlace = useSelector((state) => state.place.selectedPlace)
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
