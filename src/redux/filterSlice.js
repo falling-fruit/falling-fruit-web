@@ -11,7 +11,8 @@ export const fetchFilterCounts = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState()
     const { googleMap } = state.map
-    if (googleMap) {
+    const isOpen = state.filter.isOpenInMobileLayout || state.misc.isDesktop
+    if (isOpen && googleMap) {
       const { muni, invasive } = state.filter
       const counts = await getTypeCounts(
         // Match zoom level used in getClusters
