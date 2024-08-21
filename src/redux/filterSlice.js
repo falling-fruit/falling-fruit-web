@@ -39,7 +39,7 @@ export const filterSlice = createSlice({
   initialState: {
     types: null,
     muni: true,
-    isOpen: false,
+    isOpenInMobileLayout: false,
     invasive: false,
     isLoading: false,
     isDirty: false,
@@ -48,10 +48,10 @@ export const filterSlice = createSlice({
   },
   reducers: {
     openFilter: (state) => {
-      state.isOpen = true
+      state.isOpenInMobileLayout = true
     },
     closeFilter: (state) => {
-      state.isOpen = false
+      state.isOpenInMobileLayout = false
     },
   },
   extraReducers: {
