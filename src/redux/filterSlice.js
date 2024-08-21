@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { getTypeCounts } from '../utils/api'
-import { fetchAllTypes } from './miscSlice'
 import { selectParams } from './selectParams'
+import { fetchAndLocalizeTypes } from './typeSlice'
 import { updateSelection } from './updateSelection'
 import { fetchLocations } from './viewChange'
 
@@ -10,7 +10,6 @@ export const fetchFilterCounts = createAsyncThunk(
   'map/fetchFilterCounts',
   async (_, { getState }) => {
     const state = getState()
-    const { typesById } = state.misc
     const { googleMap } = state.map
     if (googleMap) {
       const { muni, invasive } = state.filter
@@ -26,12 +25,10 @@ export const fetchFilterCounts = createAsyncThunk(
 
       return {
         counts,
-        typesById,
       }
     } else {
       return {
         counts: [],
-        typesById,
       }
     }
   },
@@ -40,7 +37,6 @@ export const fetchFilterCounts = createAsyncThunk(
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    allTypes: [],
     types: null,
     muni: true,
     isOpen: false,
@@ -80,9 +76,9 @@ export const filterSlice = createSlice({
       ...action.payload,
     }),
 
-    [fetchAllTypes.fulfilled]: (state, action) => {
-      state.allTypes = action.payload
-      state.types = action.payload.map((t) => `${t.id}`)
+    [fetchAndLocalizeTypes.fulfilled]: (state, action) => {
+      const typesAccess = action.payload
+      state.types = typesAccess.selectableTypes().map((t) => `${t.id}`)
     },
   },
 })
