@@ -11,7 +11,7 @@ const PENDING_ID: Id = -1
  * and not type as programming concept
  */
 type SchemaType = components['schemas']['Type']
-type LocalizedType = {
+export type LocalizedType = {
   id: Id
   parentId: Id
   scientificName: string
@@ -77,7 +77,7 @@ const toMenuEntry = (localizedType: LocalizedType) => {
   }
 }
 
-class TypesAccess {
+export class TypesAccess {
   localizedTypes: LocalizedType[]
   idIndex: IdDict<number>
   childrenById: IdDict<Id[]>
@@ -144,97 +144,6 @@ class TypesAccess {
       ...this.localizedTypes,
       localize(newType, language),
     ])
-  }
-}
-
-const _getTotalCount = (
-  result: IdDict<number>,
-  id: Id,
-  childrenById: IdDict<Id[]>,
-  countsById: IdDict<number>,
-) => {
-  if (id in result) {
-    return result[id]
-  }
-  result[id] = countsById[id] ?? 0
-  childrenById[id]?.forEach((childId) => {
-    result[id] += _getTotalCount(result, childId, childrenById, countsById)
-  })
-  return result[id]
-}
-
-const calculateAggregatedCounts = (
-  childrenById: IdDict<Id[]>,
-  countsById: IdDict<number>,
-) => {
-  const result: IdDict<number> = {}
-  for (const id in childrenById) {
-    _getTotalCount(result, Number(id), childrenById, countsById)
-  }
-  return result
-}
-
-export const createTypesFrequency = (
-  typesAccess: TypesAccess,
-  countsById: IdDict<number>,
-) =>
-  new TypesFrequency(
-    typesAccess.localizedTypes,
-    typesAccess.idIndex,
-    typesAccess.childrenById,
-    countsById,
-  )
-
-class TypesFrequency extends TypesAccess {
-  countsById: IdDict<number>
-  aggregatedCountsById: IdDict<number>
-  constructor(
-    localizedTypes: LocalizedType[],
-    idIndex: IdDict<number>,
-    childrenById: IdDict<Id[]>,
-    countsById: IdDict<number>,
-  ) {
-    super(localizedTypes, idIndex, childrenById)
-    this.countsById = countsById
-    this.aggregatedCountsById = calculateAggregatedCounts(
-      childrenById,
-      countsById,
-    )
-  }
-  getCount(id: Id): number {
-    return this.countsById[id] || 0
-  }
-  getAggregatedCount(id: Id): number {
-    return this.aggregatedCountsById[id] || 0
-  }
-
-  filter(predicate: (_type: LocalizedType) => boolean): TypesFrequency {
-    const filteredTypes = this.localizedTypes.filter(predicate)
-    const newIdIndex: IdDict<number> = {}
-    const newChildrenById: IdDict<Id[]> = {}
-    const newCountsById: IdDict<number> = {}
-
-    filteredTypes.forEach((type, index) => {
-      newIdIndex[type.id] = index
-      newCountsById[type.id] = this.countsById[type.id]
-      if (!newChildrenById[type.parentId]) {
-        newChildrenById[type.parentId] = []
-      }
-      newChildrenById[type.parentId].push(type.id)
-    })
-
-    return new TypesFrequency(
-      filteredTypes,
-      newIdIndex,
-      newChildrenById,
-      newCountsById,
-    )
-  }
-
-  dropZeroCounts(): TypesFrequency {
-    return this.filter(
-      (localizedType) => this.getAggregatedCount(localizedType.id) > 0,
-    )
   }
 }
 
