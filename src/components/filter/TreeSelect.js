@@ -1,6 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { constructTypesTreeForSelection } from '../../utils/buildTypeSchema'
 import {
   createRenderTree,
   filterTree,
@@ -86,13 +88,24 @@ const ToggleButton = styled.button`
   height: 0.875em;
 `
 
-const TreeSelect = ({ data, onChange, types, searchValue }) => {
+const TreeSelect = ({ onChange, searchValue }) => {
   const [expandedNodes, setExpandedNodes] = useState(new Set())
 
+  const { types, showOnlyOnMap, countsById } = useSelector(
+    (state) => state.filter,
+  )
+  const { typesAccess } = useSelector((state) => state.type)
+
+  const typesTreeForSelection = useMemo(
+    () =>
+      constructTypesTreeForSelection(typesAccess, countsById, showOnlyOnMap),
+    [typesAccess, countsById, showOnlyOnMap],
+  )
+
   const renderTree = useMemo(() => {
-    const tree = createRenderTree(data, types)
+    const tree = createRenderTree(typesTreeForSelection, types)
     return searchValue ? filterTree(tree, searchValue) : tree
-  }, [data, types, searchValue])
+  }, [typesTreeForSelection, types, searchValue])
 
   const handleToggle = (nodeId) => {
     setExpandedNodes((prev) => {

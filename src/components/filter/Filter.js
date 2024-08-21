@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { filtersChanged, selectionChanged } from '../../redux/filterSlice'
-import { constructTypesTreeForSelection } from '../../utils/buildTypeSchema'
 import Input from '../ui/Input'
 import { CheckboxFilters } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
@@ -78,22 +77,7 @@ const Filter = () => {
 
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
-  const {
-    isLoading: isLoadingCounts,
-    countsById,
-    types,
-    showOnlyOnMap,
-  } = filters
-  const { isLoading: isLoadingTypes, typesAccess } = useSelector(
-    (state) => state.type,
-  )
-  const isLoading = isLoadingCounts || isLoadingTypes
-
-  const typesTreeForSelection = useMemo(
-    () =>
-      constructTypesTreeForSelection(typesAccess, countsById, showOnlyOnMap),
-    [typesAccess, countsById, showOnlyOnMap],
-  )
+  const { typesAccess } = useSelector((state) => state.type)
 
   const { t } = useTranslation()
   return (
@@ -133,12 +117,9 @@ const Filter = () => {
           <RCTreeSelectSkeleton />
         ) : (
           <TreeSelect
-            data={typesTreeForSelection}
-            loading={isLoading}
             onChange={(selectedTypes) =>
               dispatch(selectionChanged(selectedTypes))
             }
-            types={types}
             searchValue={searchValue}
           />
         )}
