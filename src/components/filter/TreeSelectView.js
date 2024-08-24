@@ -12,7 +12,7 @@ const ControlsContainer = styled.div`
 
 const TreeSelectContainer = styled.div`
   padding: 5px 5px 12px 5px;
-  height: 400px; //TODO
+  height: 55vh;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
