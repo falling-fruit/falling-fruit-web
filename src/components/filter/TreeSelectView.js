@@ -9,9 +9,9 @@ const ControlsContainer = styled.div`
 `
 
 const TreeSelectContainer = styled.ul`
-  margin: 0;
+  margin-top: 0;
   padding: 0;
-  height: 55vh;
+  flex: 1 1 0;
   overflow-y: auto;
   border: 1px solid ${({ theme }) => theme.secondaryBackground};
   border-radius: 0.375em;
