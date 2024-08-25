@@ -43,7 +43,6 @@ export const filterSlice = createSlice({
     isOpenInMobileLayout: false,
     invasive: false,
     isLoading: false,
-    isDirty: false,
     countsById: {},
     showOnlyOnMap: true,
   },
@@ -73,7 +72,6 @@ export const filterSlice = createSlice({
 
     [updateSelection]: (state, action) => ({
       ...state,
-      isDirty: true,
       ...action.payload,
     }),
 

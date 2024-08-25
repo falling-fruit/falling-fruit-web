@@ -4,43 +4,22 @@ import { useSelector } from 'react-redux'
 import IconButton from '../ui/IconButton'
 
 const FilterIconButton = (props) => {
-  const {
-    isLoading: isLoadingCounts,
-    types,
-    isDirty,
-  } = useSelector((state) => state.filter)
+  const { types, muni, invasive } = useSelector((state) => state.filter)
 
-  const { isLoading: isLoadingTypes, typesAccess } = useSelector(
-    (state) => state.type,
-  )
+  const { typesAccess } = useSelector((state) => state.type)
 
   const isInitialized = !typesAccess.isEmpty && types !== null
-  const isLoaded = !isLoadingTypes && !isLoadingCounts
-
-  let subscript
-  if (isInitialized && isLoaded) {
-    const numSelectedTypes = types.length
-    const numAllTypes = typesAccess.selectableTypes().length
-    if (numSelectedTypes !== numAllTypes) {
-      if (numSelectedTypes >= 99) {
-        subscript = '99+'
-      } else {
-        subscript = `${numSelectedTypes}`
-      }
-    } else {
-      subscript = null
-    }
-  } else if (isInitialized && isDirty) {
-    subscript = '...'
-  } else {
-    subscript = null
-  }
+  const isDefaultChoice =
+    types?.length === typesAccess.selectableTypes().length &&
+    muni === true &&
+    invasive === false
 
   return (
     <IconButton
       size={45}
       icon={<FilterIcon />}
-      subscript={subscript}
+      subscript={isInitialized && !isDefaultChoice ? ' ' : null}
+      subscriptSize={16}
       label="filter-button"
       {...props}
     />
