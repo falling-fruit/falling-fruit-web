@@ -35,6 +35,25 @@ class SelectTreeBuilder {
     this.selectedTypes = selectedTypes
   }
 
+  private isCultivarWithParentInSelection(
+    type: LocalizedType,
+    parentId: number | null,
+  ): boolean {
+    if (!parentId) {
+      return false
+    }
+    const parentType = this.typesAccess.getType(parentId)
+    if (!parentType) {
+      return false
+    }
+
+    const cultivarIndex = type.scientificName?.indexOf("'")
+    return (
+      cultivarIndex !== -1 &&
+      type.scientificName?.startsWith(`${parentType.scientificName} '`)
+    )
+  }
+
   buildRenderTree(): RenderTreeNode[] {
     const rootNodes = this.typesAccess.localizedTypes.filter(
       (type) => type.parentId === 0,
@@ -57,16 +76,6 @@ class SelectTreeBuilder {
     const matchesSearch =
       !this.searchValue || searchLabel.toLowerCase().includes(this.searchValue)
 
-    const children = (this.typesAccess.childrenById[type.id] || [])
-      .map((childId) =>
-        this.buildNode(this.typesAccess.getType(childId), null, matchesSearch),
-      )
-      .filter((child): child is RenderTreeNode => child !== null)
-
-    if (!matchesSearch && !parentMatchesSearch && children.length === 0) {
-      return null
-    }
-
     const node: RenderTreeNode = {
       id: type.id,
       parent,
@@ -74,17 +83,34 @@ class SelectTreeBuilder {
       scientificName: type.scientificName,
       count,
       searchLabel,
-      children,
+      children: [],
       isSelected: this.selectedTypes.includes(type.id),
       isIndeterminate: false,
       isDisabled:
         this.searchValue !== '' && !matchesSearch && !parentMatchesSearch,
     }
 
-    // Set parent for all children
-    children.forEach((child) => {
-      child.parent = node
-    })
+    const children = (this.typesAccess.childrenById[type.id] || [])
+      .map((childId) =>
+        this.buildNode(this.typesAccess.getType(childId), node, matchesSearch),
+      )
+      .filter((child): child is RenderTreeNode => child !== null)
+
+    if (!matchesSearch && !parentMatchesSearch && children.length === 0) {
+      return null
+    }
+
+    const isCultivar = this.isCultivarWithParentInSelection(
+      type,
+      parent?.id ?? null,
+    )
+    const cultivarIndex = isCultivar ? type.scientificName?.indexOf("'") : -1
+
+    node.children = children
+    node.commonName = isCultivar ? '' : type.commonName
+    node.scientificName = isCultivar
+      ? type.scientificName?.substring(cultivarIndex ?? -1)
+      : type.scientificName
 
     const ownCount = this.getCount(type.id)
     if (children.length && ownCount > 0 && matchesSearch) {
@@ -99,7 +125,6 @@ class SelectTreeBuilder {
         isIndeterminate: false,
         isDisabled: !matchesSearch,
       }
-      node.value = type.id
       node.children.unshift(childNode)
     } else if (children.length === 0) {
       node.value = type.id
@@ -116,7 +141,6 @@ class SelectTreeBuilder {
       node.isSelected = allChildrenSelected
       node.isIndeterminate = !allChildrenSelected && someChildrenSelected
     }
-
     return node
   }
 
