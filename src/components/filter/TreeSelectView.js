@@ -12,7 +12,7 @@ const TreeSelectContainer = styled.ul`
   margin: 0;
   padding: 0;
   height: 55vh;
-  overflow-y: hidden;
+  overflow-y: auto;
   border: 1px solid ${({ theme }) => theme.secondaryBackground};
   border-radius: 0.375em;
 
