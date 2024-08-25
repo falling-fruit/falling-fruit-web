@@ -50,20 +50,26 @@ const Subscript = styled.div`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.orange};
   color: ${({ theme }) => theme.background};
-  width: 20px;
-  height: 20px;
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
   font-family: ${({ theme }) => theme.fonts};
-  font-size: 0.625rem;
+  font-size: ${({ size }) => size * 0.5}px;
   position: absolute;
   bottom: 0;
   right: 0;
   z-index: 1;
 `
 
-const IconButton = ({ icon, label, subscript, ...props }) => (
+const IconButton = ({
+  icon,
+  label,
+  subscript,
+  subscriptSize = 20,
+  ...props
+}) => (
   <StyledIconButton aria-label={label} {...props}>
     {icon}
-    {subscript && <Subscript>{subscript}</Subscript>}
+    {subscript && <Subscript size={subscriptSize}>{subscript}</Subscript>}
   </StyledIconButton>
 )
 
@@ -75,6 +81,8 @@ IconButton.propTypes = {
   onClick: PropTypes.func,
   size: PropTypes.number.isRequired,
   pressed: PropTypes.bool,
+  subscript: PropTypes.node,
+  subscriptSize: PropTypes.number,
 }
 
 export default IconButton
