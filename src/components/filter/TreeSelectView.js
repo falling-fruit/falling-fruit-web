@@ -6,16 +6,13 @@ import { ReactComponent as ArrowIcon } from './arrow.svg'
 const ControlsContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 44px; // 20px for toggle + 16px for checkbox + 8px for margin
-  justify-content: flex-end;
 `
 
-const TreeSelectContainer = styled.div`
-  padding: 5px 5px 12px 5px;
+const TreeSelectContainer = styled.ul`
+  margin: 0;
+  padding: 0;
   height: 55vh;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
+  overflow-y: hidden;
   border: 1px solid ${({ theme }) => theme.secondaryBackground};
   border-radius: 0.375em;
 
@@ -24,11 +21,12 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const TreeNode = styled.div`
+const TreeNode = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
   white-space: nowrap;
+  margin-left: 0.5em;
 `
 
 const Checkbox = styled.input`
@@ -37,10 +35,8 @@ const Checkbox = styled.input`
   border-radius: 0.225em;
   background: ${({ theme, disabled }) =>
     disabled ? theme.secondaryBackground : theme.transparentOrange};
-  min-width: 16px;
-  width: 16px;
-  min-height: 16px;
-  height: 16px;
+  width: 1em;
+  height: 1em;
   appearance: none;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -63,19 +59,20 @@ const Checkbox = styled.input`
 `
 
 const NodeContent = styled.span`
+  margin-left: 0.25em;
   font-size: 0.875rem;
 `
 
 const CommonName = styled.span`
   font-weight: bold;
-  margin-right: 5px;
+  margin-right: 0.5em;
   color: ${({ theme, isDisabled }) =>
     isDisabled ? theme.text : theme.secondaryText};
 `
 
 const ScientificName = styled.span`
   font-style: italic;
-  margin-right: 5px;
+  margin-right: 0.5em;
   color: ${({ theme }) => theme.text};
 `
 
@@ -89,15 +86,15 @@ const ToggleButton = styled.button`
   border: none;
   cursor: pointer;
   padding: 0;
-  width: 20px;
-  height: 20px;
+  width: 1em;
+  height: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
 `
 
 const ChevronSpace = styled.span`
-  width: 20px;
+  width: 1em;
   display: inline-block;
 `
 
@@ -113,7 +110,7 @@ const TreeSelectView = ({
 
     return (
       <React.Fragment key={node.id}>
-        <TreeNode style={{ paddingLeft: `${level * 20}px` }}>
+        <TreeNode style={{ paddingLeft: `${level * 1.25}em` }}>
           <ControlsContainer>
             {node.children.length > 0 ? (
               <ToggleButton
