@@ -12,13 +12,17 @@ const TreeSelect = ({ onChange, searchValue }) => {
   )
   const { typesAccess } = useSelector((state) => state.type)
 
-  const renderTree = useMemo(() => buildSelectTree(
-      typesAccess,
-      countsById,
-      showOnlyOnMap,
-      searchValue,
-      types,
-    ), [typesAccess, countsById, showOnlyOnMap, searchValue, types])
+  const renderTree = useMemo(
+    () =>
+      buildSelectTree(
+        typesAccess,
+        countsById,
+        showOnlyOnMap,
+        searchValue,
+        types,
+      ),
+    [typesAccess, countsById, showOnlyOnMap, searchValue, types],
+  )
 
   const handleToggle = (nodeId) => {
     setExpandedNodes((prev) => {
