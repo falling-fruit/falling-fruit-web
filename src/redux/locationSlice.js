@@ -1,14 +1,36 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
-import { getLocationById } from '../utils/api'
+import { addLocation, editLocation, getLocationById } from '../utils/api'
 import { fetchReviewData } from './reviewSlice'
 
 export const fetchLocationData = createAsyncThunk(
-  'locations/fetchLocationData',
+  'location/fetchLocationData',
   async ({ locationId, isBeingEdited: _, isStreetView: __ }) => {
     const locationData = await getLocationById(locationId, 'reviews')
     return locationData
+  },
+)
+
+export const submitLocation = createAsyncThunk(
+  'location/submitLocation',
+  async ({ editingId, locationValues }) => {
+    let response
+    try {
+      if (editingId) {
+        response = await editLocation(editingId, locationValues)
+        toast.success('Location edited successfully!')
+      } else {
+        response = await addLocation(locationValues)
+        toast.success('Location submitted successfully!')
+      }
+      return response
+    } catch (error) {
+      toast.error(
+        editingId ? 'Location editing failed.' : 'Location submission failed.',
+      )
+      throw error
+    }
   },
 )
 
@@ -104,6 +126,28 @@ const locationSlice = createSlice({
       state.locationId = parseInt(action.payload.location_id)
       state.position = null
       state.isBeingEdited = false
+    },
+    [submitLocation.fulfilled]: (state, action) => {
+      if (action.meta.arg.editingId) {
+        console.log(action, state.location.reviews)
+        /*
+         * submitLocation does not return the reviews for efficiency
+         * but they don't change when editing location
+         * so keep the known reviews
+         */
+        const reviews = state.location.reviews
+        state.location = action.payload
+        state.location.reviews = reviews
+      } else {
+        /*
+         * New location added
+         */
+        state.location = action.payload
+        state.locationId = parseInt(action.payload.id)
+      }
+      state.isLoading = false
+      state.isBeingEdited = false
+      state.position = { lat: action.payload.lat, lng: action.payload.lng }
     },
   },
 })
