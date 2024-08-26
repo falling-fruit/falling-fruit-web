@@ -2,12 +2,9 @@ import { Map } from '@styled-icons/boxicons-solid'
 import { useFormikContext } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import { saveFormValues } from '../../redux/locationSlice'
-import { fetchLocations } from '../../redux/viewChange'
-import { addLocation, editLocation } from '../../utils/api'
+import { saveFormValues, submitLocation } from '../../redux/locationSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -250,19 +247,13 @@ export const locationToForm = (
   unverified,
 })
 
-export const LocationForm = ({
-  editingId,
-  onSubmit,
-  initialValues,
-  stepped,
-}) => {
+export const LocationForm = ({ editingId, initialValues, stepped }) => {
   const reduxFormValues = useSelector((state) => state.location.form)
   const mergedInitialValues = {
     ...INITIAL_LOCATION_VALUES,
     ...initialValues,
     ...reduxFormValues,
   }
-  // TODO: create a "going back" util
   const history = useAppHistory()
   const { state } = useLocation()
   const isDesktop = useIsDesktop()
@@ -299,9 +290,7 @@ export const LocationForm = ({
         ]),
   ]
 
-  onSubmit =
-    onSubmit ?? ((response) => history.push(`/locations/${response.id}`))
-  const handleSubmit = async ({
+  const handleSubmit = ({
     'g-recaptcha-response': recaptcha,
     review,
     ...location
@@ -317,28 +306,11 @@ export const LocationForm = ({
       locationValues.review = formToReview(review)
     }
 
-    let response
-    try {
-      if (editingId) {
-        response = await editLocation(editingId, locationValues)
-        toast.success('Location edited successfully!')
-      } else {
-        response = await addLocation(locationValues)
-        toast.success('Location submitted successfully!')
+    dispatch(submitLocation({ editingId, locationValues })).then((action) => {
+      if (action.payload) {
+        history.push(`/locations/${action.payload.id}`)
       }
-    } catch (e) {
-      if (editingId) {
-        toast.error('Location editing failed.')
-      } else {
-        toast.error('Location submission failed.')
-      }
-      console.error(e.response)
-    }
-
-    if (response && !response.error) {
-      dispatch(fetchLocations())
-      onSubmit(response)
-    }
+    })
   }
 
   const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(handleSubmit)
@@ -353,7 +325,6 @@ export const LocationForm = ({
         initialValues={mergedInitialValues}
         validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : handlePresubmit}
-        // For all steps only
         renderButtons={({ isSubmitting, isValid }) => (
           <ProgressButtons>
             <Button

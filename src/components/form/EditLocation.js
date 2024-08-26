@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux'
 
-import { useAppHistory } from '../../utils/useAppHistory'
 import { Page } from '../entry/Entry'
 import { LocationForm, locationToForm } from './LocationForm'
 
 export const EditLocationForm = (props) => {
-  const history = useAppHistory()
   const { location, isLoading } = useSelector((state) => state.location)
   const { typesAccess } = useSelector((state) => state.type)
 
@@ -16,7 +14,6 @@ export const EditLocationForm = (props) => {
       <LocationForm
         initialValues={locationToForm(location, typesAccess)}
         editingId={location.id}
-        onSubmit={() => history.push(`/locations/${location.id}`)}
         {...props}
       />
     )
