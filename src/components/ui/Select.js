@@ -8,7 +8,7 @@ import { validatedColor } from './GlobalStyle'
 
 const LIST_ITEM_HEIGHT = 46
 
-const StyledSelect = (component) => styled(component)`
+const SelectParent = styled.div`
   font-size: 1rem;
 
   .select__clear-indicator {
@@ -80,6 +80,8 @@ const StyledSelect = (component) => styled(component)`
     align-items: center;
   }
 `
+const StyledSelect = SelectParent.withComponent(Select)
+const StyledCreatableSelect = SelectParent.withComponent(Creatable)
 
 /**
  * Wrapper around react-window. This is used to replace the menu list component of react-select.
@@ -94,19 +96,31 @@ const MenuList = ({ children, maxHeight }) => (
   </FixedSizeList>
 )
 
-const SelectWrapper = ({ isVirtualized, onCreateOption, ...props }) => {
-  const SelectComponent = StyledSelect(onCreateOption ? Creatable : Select)
-  return (
-    <SelectComponent
-      components={isVirtualized ? { MenuList } : {}}
-      classNamePrefix="select"
-      // Reduces typing lag
-      filterOption={createFilter({ ignoreAccents: false })}
-      placeholder=""
-      onCreateOption={onCreateOption}
-      {...props}
-    />
-  )
-}
+const SelectWrapper = ({ isVirtualized, ...props }) => (
+  <StyledSelect
+    components={isVirtualized ? { MenuList } : {}}
+    classNamePrefix="select"
+    // Reduces typing lag
+    filterOption={createFilter({ ignoreAccents: false })}
+    placeholder=""
+    {...props}
+  />
+)
 
-export { SelectWrapper as Select }
+const CreatableSelectWrapper = ({
+  isVirtualized,
+  onCreateOption,
+  ...props
+}) => (
+  <StyledCreatableSelect
+    components={isVirtualized ? { MenuList } : {}}
+    classNamePrefix="select"
+    // Reduces typing lag
+    filterOption={createFilter({ ignoreAccents: false })}
+    placeholder=""
+    onCreateOption={onCreateOption}
+    {...props}
+  />
+)
+
+export { CreatableSelectWrapper as CreatableSelect, SelectWrapper as Select }
