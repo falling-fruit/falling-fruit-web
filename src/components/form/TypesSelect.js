@@ -1,12 +1,12 @@
 import { useFormikContext } from 'formik'
 import { uniqBy } from 'lodash'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { openAddTypeModal } from '../../redux/typeSlice'
 import { TypeName } from '../ui/TypeName'
 import { AddTypeModal } from './AddTypeModal'
-import { Select } from './FormikWrappers'
+import { CreatableSelect } from './FormikWrappers'
 
 const TypesSelect = () => {
   const { typesAccess, recentlyAddedTypesByLocation } = useSelector(
@@ -38,14 +38,17 @@ const TypesSelect = () => {
     }
   }, [recentlyAddedTypes.join(', ')]) //eslint-disable-line
 
-  const handleCreateOption = (inputValue) => {
-    setNewTypeInput(inputValue)
-    dispatch(openAddTypeModal())
-  }
+  const handleCreateOption = useCallback(
+    (inputValue) => {
+      setNewTypeInput(inputValue)
+      dispatch(openAddTypeModal())
+    },
+    [dispatch],
+  )
 
   return (
     <>
-      <Select
+      <CreatableSelect
         name="types"
         label="Types"
         options={typeOptions}

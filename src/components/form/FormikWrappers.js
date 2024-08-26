@@ -7,7 +7,7 @@ import { PhotoUploader } from '../photo/PhotoUploader'
 import Checkbox from '../ui/Checkbox'
 import Input from '../ui/Input'
 import RatingInput from '../ui/RatingInput'
-import { Select } from '../ui/Select'
+import { CreatableSelect, Select } from '../ui/Select'
 import { Slider } from '../ui/Slider'
 import Textarea from '../ui/Textarea'
 import { withLabeledField } from './withLabeledField'
@@ -21,6 +21,7 @@ const FormikTextarea = withLabeledField(Textarea)
 const FormikDateInput = withLabeledField(DateInput)
 const FormikSlider = withLabeledField(Slider, undefined, true)
 const FormikSelect = withLabeledField(Select, undefined, true)
+const FormikCreatableSelect = withLabeledField(CreatableSelect, undefined, true)
 const FormikPhotoUploader = withLabeledField(PhotoUploader, undefined, true)
 
 const FormikRecaptcha = forwardRef(
@@ -61,6 +62,7 @@ const FormikCheckbox = ({ name, ...props }) => {
 
 export {
   FormikCheckbox as Checkbox,
+  FormikCreatableSelect as CreatableSelect,
   FormikDateInput as DateInput,
   FormikInput as Input,
   FormikPhotoUploader as PhotoUploader,
