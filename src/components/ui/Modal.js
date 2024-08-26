@@ -51,6 +51,7 @@ const Modal = ({
   validationSchema,
   onSubmit,
   children,
+  initialDirty = false,
   ...props
 }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
@@ -68,9 +69,11 @@ const Modal = ({
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={isLoggedIn ? onSubmit : handlePresubmit}
+        initialStatus={{ dirty: initialDirty }}
       >
         {(props) => {
-          const { dirty, isSubmitting, isValid } = props
+          const { dirty, isSubmitting, isValid, status } = props
+          const isDirty = dirty || status.dirty
           return (
             <Form>
               {children}
@@ -80,7 +83,7 @@ const Modal = ({
                   Cancel
                 </Button>
                 <Button
-                  disabled={!dirty || isSubmitting || !isValid}
+                  disabled={!isDirty || isSubmitting || !isValid}
                   type="submit"
                 >
                   {isSubmitting ? 'Submitting' : 'Submit'}

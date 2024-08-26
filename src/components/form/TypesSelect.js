@@ -71,7 +71,7 @@ const TypesSelect = () => {
         onCreateOption={handleCreateOption}
         formatCreateLabel={(inputValue) => inputValue}
       />
-      <AddTypeModal initialCommonName={newTypeInput} />
+      <AddTypeModal initialName={newTypeInput} />
     </>
   )
 }
