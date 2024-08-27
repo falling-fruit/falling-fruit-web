@@ -1,7 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
-import { addLocation, editLocation, getLocationById } from '../utils/api'
+import {
+  addLocation,
+  addReview,
+  deleteReview,
+  editLocation,
+  editReview,
+  getLocationById,
+} from '../utils/api'
 import { fetchReviewData } from './reviewSlice'
 
 export const fetchLocationData = createAsyncThunk(
@@ -34,11 +41,48 @@ export const submitLocation = createAsyncThunk(
   },
 )
 
+export const submitLocationReview = createAsyncThunk(
+  'location/submitLocationReview',
+  async ({ locationId, reviewValues, editingId }) => {
+    let response
+    try {
+      if (editingId) {
+        response = await editReview(editingId, reviewValues)
+        toast.success('Review edited successfully!')
+      } else {
+        response = await addReview(locationId, reviewValues)
+        toast.success('Review submitted successfully!')
+      }
+      return response
+    } catch (error) {
+      toast.error(
+        editingId ? 'Review editing failed.' : 'Review submission failed.',
+      )
+      throw error
+    }
+  },
+)
+
+export const deleteLocationReview = createAsyncThunk(
+  'location/deleteReview',
+  async (reviewId) => {
+    try {
+      await deleteReview(reviewId)
+      toast.success('Review deleted successfully!')
+      return reviewId
+    } catch (error) {
+      toast.error('Review deletion failed.')
+      throw error
+    }
+  },
+)
+
 const locationSlice = createSlice({
   name: 'location',
   initialState: {
     isLoading: false,
     location: null,
+    reviews: [],
     position: null, // {lat: number, lng: number}
     locationId: null,
     isBeingEdited: false,
@@ -107,7 +151,9 @@ const locationSlice = createSlice({
       state.isLoading = false
       // Accept the fetch if it's the most recent 'pending' one
       if (state.locationId === parseInt(action.payload.id)) {
-        state.location = action.payload
+        const { reviews, ...locationData } = action.payload
+        state.location = locationData
+        state.reviews = reviews
         state.position = { lat: action.payload.lat, lng: action.payload.lng }
       }
     },
@@ -118,7 +164,9 @@ const locationSlice = createSlice({
       state.position = null
       state.isBeingEdited = false
       state.tooltipOpen = false
-      toast.error(`Error fetching location data: ${action.meta.arg}`)
+      toast.error(
+        `Error fetching location ${action.meta.arg.locationId}: ${action.error.message}`,
+      )
     },
     [fetchReviewData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -129,25 +177,40 @@ const locationSlice = createSlice({
     },
     [submitLocation.fulfilled]: (state, action) => {
       if (action.meta.arg.editingId) {
-        console.log(action, state.location.reviews)
         /*
          * submitLocation does not return the reviews for efficiency
          * but they don't change when editing location
          * so keep the known reviews
          */
-        const reviews = state.location.reviews
         state.location = action.payload
-        state.location.reviews = reviews
       } else {
         /*
          * New location added
          */
         state.location = action.payload
+        state.reviews = []
         state.locationId = parseInt(action.payload.id)
       }
       state.isLoading = false
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
+    },
+    [submitLocationReview.fulfilled]: (state, action) => {
+      if (action.meta.arg.editingId) {
+        const reviewIndex = state.reviews.findIndex(
+          (review) => review.id === action.meta.arg.editingId,
+        )
+        if (reviewIndex !== -1) {
+          state.reviews[reviewIndex] = action.payload
+        }
+      } else {
+        state.reviews.push(action.payload)
+      }
+    },
+    [deleteLocationReview.fulfilled]: (state, action) => {
+      state.reviews = state.reviews.filter(
+        (review) => review.id !== action.payload,
+      )
     },
   },
 })

@@ -28,7 +28,9 @@ const reviewSlice = createSlice({
     },
     [fetchReviewData.rejected]: (state, action) => {
       state.isLoading = false
-      toast.error(`Error fetching review data: ${action.payload}`)
+      toast.error(
+        `Error fetching review ${action.meta.arg}: ${action.error.message}`,
+      )
     },
   },
 })
