@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux'
 
-import { useAppHistory } from '../../utils/useAppHistory'
 import { Page } from '../entry/Entry'
 import { ReviewForm, reviewToForm } from './ReviewForm'
 
 export const EditReviewForm = (props) => {
-  const history = useAppHistory()
   const { review, isLoading } = useSelector((state) => state.review)
 
   return isLoading ? (
@@ -15,7 +13,6 @@ export const EditReviewForm = (props) => {
       <ReviewForm
         initialValues={{ review: reviewToForm(review) }}
         editingId={review.id}
-        onSubmit={() => history.push(`/locations/${review.location_id}`)}
         {...props}
       />
     )

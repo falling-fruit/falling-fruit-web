@@ -1,10 +1,12 @@
 import { darken } from 'polished'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { addReview, deleteReview, editReview } from '../../utils/api'
+import {
+  deleteLocationReview,
+  submitLocationReview,
+} from '../../redux/locationSlice'
+import { useAppHistory } from '../../utils/useAppHistory'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import { isEveryPhotoUploaded } from '../photo/PhotoUploader'
 import Button from '../ui/Button'
@@ -216,14 +218,15 @@ const RatingLabeledRow = styled(LabeledRow)`
 
 export const ReviewForm = ({
   stepped,
-  onSubmit,
   initialValues = INITIAL_REVIEW_VALUES,
   editingId = null,
 }) => {
-  const { locationId } = useParams()
+  const { locationId } = useSelector((state) => state.location)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const dispatch = useDispatch()
+  const history = useAppHistory()
 
-  const handleSubmit = async (
+  const handleSubmit = (
     { 'g-recaptcha-response': recaptcha, review },
     { resetForm },
   ) => {
@@ -232,42 +235,23 @@ export const ReviewForm = ({
       'g-recaptcha-response': recaptcha,
     }
 
-    let response
-    try {
-      if (editingId) {
-        response = await editReview(editingId, reviewValues)
-        toast.success('Review edited successfully!')
-      } else {
-        response = await addReview(locationId, reviewValues)
-        toast.success('Review submitted successfully!')
+    dispatch(
+      submitLocationReview({ locationId, reviewValues, editingId }),
+    ).then((action) => {
+      if (action.payload) {
+        resetForm()
+        history.push(`/locations/${locationId}`)
       }
-    } catch (e) {
-      if (editingId) {
-        toast.error('Review editing failed.')
-      } else {
-        toast.error('Review submission failed.')
-      }
-      console.error(e.response)
-    }
-
-    if (response && !response.error) {
-      onSubmit(response)
-      resetForm()
-    }
+    })
   }
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!confirm('Are you sure you want to delete this review?')) {
       return
-    }
-
-    try {
-      await deleteReview(editingId)
-      toast.success('Review deleted successfully!')
-      onSubmit()
-    } catch (e) {
-      toast.error('Review deletion failed.')
-      console.error(e)
+    } else {
+      dispatch(deleteLocationReview(editingId)).then(() => {
+        history.push(`/locations/${locationId}`)
+      })
     }
   }
 

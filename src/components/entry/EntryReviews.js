@@ -8,7 +8,7 @@ import Review from './Review'
 import { ReviewButton } from './ReviewButton'
 import ReviewSummary from './ReviewSummary'
 
-const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
+const EntryReviews = ({ reviews, onImageClick }) => {
   const isDesktop = useIsDesktop()
   const history = useAppHistory()
   const user = useSelector((state) => state.auth.user)
@@ -52,7 +52,7 @@ const EntryReviews = ({ reviews, onImageClick, onReviewSubmit }) => {
           )
         }
       })}
-      {isDesktop && <ReviewForm onSubmit={onReviewSubmit} />}
+      {isDesktop && <ReviewForm />}
     </TextContent>
   )
 }

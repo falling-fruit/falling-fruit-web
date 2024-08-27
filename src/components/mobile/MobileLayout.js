@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
-import { useAppHistory } from '../../utils/useAppHistory'
 import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage'
 import authRoutes from '../auth/authRoutes'
@@ -62,7 +61,6 @@ const shouldDisplayMapPage = (pathname) => {
   )
 }
 const MobileLayout = () => {
-  const history = useAppHistory()
   const streetView = useSelector((state) => state.location.streetViewOpen)
   const { pathname } = useLocation()
   const { tabIndex, handleTabChange, tabContent } = Tabs()
@@ -95,14 +93,7 @@ const MobileLayout = () => {
             )}
           </Route>
           <Route path="/locations/:locationId/review">
-            {({ match }) => (
-              <ReviewForm
-                stepped
-                onSubmit={() =>
-                  history.push(`/locations/${match.params.locationId}`)
-                }
-              />
-            )}
+            <ReviewForm stepped />
           </Route>
           <Route path="/locations/:locationId/edit/details">
             {({ match }) => (
