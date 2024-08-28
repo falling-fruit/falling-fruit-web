@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux'
 
+import { locationToForm } from '../../utils/form'
 import { Page } from '../entry/Entry'
-import { LocationForm, locationToForm } from './LocationForm'
+import { LocationForm } from './LocationForm'
 
 export const EditLocationForm = (props) => {
   const { location, isLoading } = useSelector((state) => state.location)

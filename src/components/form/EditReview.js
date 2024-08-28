@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux'
 
+import { reviewToForm } from '../../utils/form'
 import { Page } from '../entry/Entry'
-import { ReviewForm, reviewToForm } from './ReviewForm'
+import { ReviewForm } from './ReviewForm'
 
 export const EditReviewForm = (props) => {
   const { review, isLoading } = useSelector((state) => state.review)

@@ -9,6 +9,11 @@ import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
+export const updateMapLocation = (location) => ({
+  type: 'map/updateLocation',
+  payload: location,
+})
+
 const MIN_TRACKING_ZOOM = 16
 
 export const updateReducer = (key) => (state, action) => ({
