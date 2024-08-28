@@ -1,4 +1,4 @@
-import { MONTH_LABELS } from '../form/LocationForm'
+import { MONTH_LABELS } from '../../constants/form'
 
 /**
  * Helper function to convert ISO date string into "month date, year" format.

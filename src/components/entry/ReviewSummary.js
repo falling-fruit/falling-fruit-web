@@ -3,8 +3,8 @@ import { Star, StarHalf } from '@styled-icons/boxicons-solid'
 import { groupBy, prop as rProp } from 'ramda'
 import styled from 'styled-components/macro'
 
+import { MONTH_LABELS } from '../../constants/form'
 import { FRUITING_RATINGS, RATINGS } from '../../constants/ratings'
-import { MONTH_LABELS } from '../form/LocationForm'
 
 const SummaryTable = styled.table`
   border-spacing: 0;
