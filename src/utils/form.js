@@ -30,13 +30,7 @@ export const validateReviewStep = (review) => {
   return null
 }
 
-export const validatePhotoStep = (review) => {
-  if (isEmptyReview(review)) {
-    return {
-      review: { comment: true },
-    }
-  }
-
+const validatePhotosUploaded = (review) => {
   if (!isEveryPhotoUploaded(review.photos)) {
     return {
       review: { photos: true },
@@ -46,8 +40,18 @@ export const validatePhotoStep = (review) => {
   return null
 }
 
+export const validatePhotoStep = (review) => {
+  if (isEmptyReview(review)) {
+    return {
+      review: { comment: true },
+    }
+  } else {
+    return validatePhotosUploaded(review)
+  }
+}
+
 export const validateReview = (review) => ({
-  ...validatePhotoStep(review),
+  ...validatePhotosUploaded(review),
   ...validateReviewStep(review),
 })
 
@@ -88,7 +92,8 @@ export const reviewToForm = ({
   quality_rating: quality_rating === null ? '0' : String(quality_rating + 1),
 })
 
-export const isEveryPhotoUploaded = (photos) => photos.every((photo) => !photo.isNew || photo.uploaded)
+export const isEveryPhotoUploaded = (photos) =>
+  photos.every((photo) => !photo.isNew || photo.uploaded)
 
 export const validateLocationStep = ({ types }) => {
   const errors = {}
