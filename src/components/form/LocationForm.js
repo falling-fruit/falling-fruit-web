@@ -211,16 +211,19 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
       initialValues={mergedInitialValues}
       onSubmit={handleSubmit}
       stepped={stepped}
-      renderButtons={({ isSubmitting, isValid }) => (
-        <ProgressButtons>
-          <Button secondary type="button" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button disabled={isSubmitting || !isValid} type="submit">
-            {isSubmitting ? 'Submitting' : 'Submit'}
-          </Button>
-        </ProgressButtons>
-      )}
+      renderButtons={(formikProps) => {
+        const { isSubmitting, isValid, dirty } = formikProps
+        return (
+          <ProgressButtons>
+            <Button secondary type="button" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button disabled={isSubmitting || !isValid || !dirty} type="submit">
+              {isSubmitting ? 'Submitting' : 'Submit'}
+            </Button>
+          </ProgressButtons>
+        )
+      }}
     >
       {formikSteps}
     </FormWrapper>
