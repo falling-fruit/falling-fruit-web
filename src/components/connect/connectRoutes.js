@@ -68,6 +68,7 @@ const connectRoutes = [
    * - keep track of starting to edit a location
    * - keep track of whether user wants street view
    * - on mobile, we need to center the map on the edited location because the UX involves panning the map on central pin
+   * - on mobile, we need to disable the drawer when arriving from list view
    *
    * actions:
    * - fetch data from backend
@@ -75,6 +76,7 @@ const connectRoutes = [
    * - sync property of being edited from URL routes to Redux
    * - sync property of being viewed in street view from URL routes to Redux
    * - on mobile, center and zoom on edited location
+   * - on mobile, keep track of whether we arrived via list-locations URL
    */
   <Route
     key="connect-location"
@@ -82,6 +84,7 @@ const connectRoutes = [
       '/locations/:locationId/:nextSegment/:nextNextSegment',
       '/locations/:locationId/:nextSegment',
       '/locations/:locationId',
+      '/list-locations/:locationId',
     ]}
   >
     {({ match }) =>
@@ -92,6 +95,7 @@ const connectRoutes = [
           isBeingEdited={match.params.nextSegment === 'edit'}
           isBeingEditedPosition={match.params.nextNextSegment === 'position'}
           isStreetView={match.params.nextSegment === 'panorama'}
+          paneDrawerDisabled={match.path.startsWith('/list-locations/')}
         />
       )
     }

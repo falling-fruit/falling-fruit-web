@@ -90,12 +90,7 @@ const SettingsPage = ({ desktop }) => {
 
   return (
     <Page desktop={desktop}>
-      {!desktop && (
-        <>
-          <h2>{t('settings')}</h2>
-        </>
-      )}
-
+      {!desktop && <h2>{t('settings')}</h2>}
       <h3>{t('glossary.data')}</h3>
 
       {[

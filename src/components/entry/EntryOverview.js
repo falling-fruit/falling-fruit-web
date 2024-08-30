@@ -19,7 +19,6 @@ import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
-import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { TextContent } from './Entry'
 import EntryTags from './EntryTags'
 import { ReviewButton } from './ReviewButton'
@@ -65,15 +64,23 @@ const DisabledIconBesideText = styled(IconBesideText)`
     `}
 `
 
-const EntryOverview = ({ locationData, className }) => {
+const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const { googleMap } = useSelector((state) => state.map)
-  const { streetViewOpen, locationId } = useSelector((state) => state.location)
+  const {
+    streetViewOpen,
+    locationId,
+    location: locationData,
+  } = useSelector((state) => state.location)
   const { locationsWithoutPanorama } = useSelector((state) => state.misc)
 
   const { t, i18n } = useTranslation()
+
+  if (!locationData) {
+    return null
+  }
 
   const types = locationData.type_ids
     .map((id) => typesAccess.getType(id))
@@ -99,7 +106,7 @@ const EntryOverview = ({ locationData, className }) => {
   }
 
   return (
-    <div className={className}>
+    <div>
       <>
         {isReportModalOpen && (
           <ReportModal
@@ -211,7 +218,6 @@ const EntryOverview = ({ locationData, className }) => {
           </Description>
         </TextContent>
       </>
-      {!locationData && <LoadingOverlay />}
     </div>
   )
 }

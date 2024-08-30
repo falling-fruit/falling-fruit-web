@@ -16,6 +16,7 @@ const ConnectLocation = ({
   isBeingEdited,
   isBeingEditedPosition,
   isStreetView,
+  paneDrawerDisabled,
 }) => {
   const dispatch = useDispatch()
   const { initialView, googleMap } = useSelector((state) => state.map)
@@ -26,7 +27,12 @@ const ConnectLocation = ({
 
   useEffect(() => {
     dispatch(
-      fetchLocationData({ locationId, isBeingEdited, isStreetView }),
+      fetchLocationData({
+        locationId,
+        isBeingEdited,
+        isStreetView,
+        paneDrawerDisabled,
+      }),
     ).then((action) => {
       if (action.payload && !initialView) {
         const { view: viewUrl } = parseCurrentUrl()
