@@ -20,9 +20,12 @@ export default React.forwardRef(function CupertinoPane(
       HACK: Fix for race condition using setTimeout @ 0 ms to 
       push present to the end of the synchronous callstack
       */
-    setTimeout(() => drawer.present({ animate: true }), 0)
+    setTimeout(() => {
+      const animate = config.initialBreak !== 'top'
+      drawer.present({ animate })
+    }, 0)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [className])
+  }, [className, config.initialBreak])
 
   return (
     <div ref={ref} className={className}>

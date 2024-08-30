@@ -8,7 +8,7 @@ import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import MapPage from '../map/MapPage'
 import Header from './Header'
-import SidePaneSwitch from './SidePaneSwitch'
+import SidePane from './SidePane'
 
 // Min and max pane width, in pixels
 const MIN_PANE_WIDTH = (_vw) => 200
@@ -62,7 +62,7 @@ const DesktopLayout = () => (
               maxSize={MAX_PANE_WIDTH(vw)}
               defaultSize={DEFAULT_PANE_WIDTH(vw)}
             >
-              <SidePaneSwitch />
+              <SidePane />
               <MapPane>
                 <MapPage isDesktop />
               </MapPane>

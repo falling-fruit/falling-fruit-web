@@ -3,8 +3,10 @@
 import { Dialog } from '@reach/dialog'
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
 import { useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { closeLightbox, setLightboxIndices } from '../../redux/locationSlice'
 import ImagePreview from '../ui/ImagePreview'
 import ResetButton from '../ui/ResetButton'
 import Review from './Review'
@@ -81,30 +83,39 @@ const NavButton = styled(ResetButton)`
     color: grey;
   }
 `
-const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
+const Lightbox = () => {
+  const dispatch = useDispatch()
+  const { reviews, lightbox } = useSelector((state) => state.location)
+  const { isOpen, reviewIndex, photoIndex } = lightbox
+
   const reviewImages = reviews
     .filter((review) => review.photos.length > 0)
     .map((review) => review.photos)
 
   const incrementReviewImage = useCallback(() => {
-    const [reviewIdx, imageIdx] = index
-    if (imageIdx + 1 < reviewImages[reviewIdx].length) {
-      onIndexChange([reviewIdx, imageIdx + 1])
-    } else if (reviewIdx + 1 < reviewImages.length) {
-      onIndexChange([reviewIdx + 1, 0])
+    if (photoIndex + 1 < reviewImages[reviewIndex].length) {
+      dispatch(setLightboxIndices({ reviewIndex, photoIndex: photoIndex + 1 }))
+    } else if (reviewIndex + 1 < reviewImages.length) {
+      dispatch(
+        setLightboxIndices({ reviewIndex: reviewIndex + 1, photoIndex: 0 }),
+      )
     }
-  }, [index, onIndexChange, reviewImages])
+  }, [reviewIndex, photoIndex, dispatch, reviewImages])
 
   const decrementReviewImage = useCallback(() => {
-    const [reviewIdx, imageIdx] = index
-    if (imageIdx === 0) {
-      if (reviewIdx > 0) {
-        onIndexChange([reviewIdx - 1, reviewImages[reviewIdx - 1].length - 1])
+    if (photoIndex === 0) {
+      if (reviewIndex > 0) {
+        dispatch(
+          setLightboxIndices({
+            reviewIndex: reviewIndex - 1,
+            photoIndex: reviewImages[reviewIndex - 1].length - 1,
+          }),
+        )
       }
     } else {
-      onIndexChange([reviewIdx, imageIdx - 1])
+      dispatch(setLightboxIndices({ reviewIndex, photoIndex: photoIndex - 1 }))
     }
-  }, [index, onIndexChange, reviewImages])
+  }, [reviewIndex, photoIndex, dispatch, reviewImages])
 
   const onKeyDown = useCallback(
     ({ key }) => {
@@ -117,28 +128,35 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
     [incrementReviewImage, decrementReviewImage],
   )
   useEffect(() => {
+    if (!isOpen) {
+      return
+    }
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
-  }, [onKeyDown])
+  }, [onKeyDown, isOpen])
+
+  if (!isOpen) {
+    return null
+  }
 
   return (
-    <StyledDialog onDismiss={onDismiss}>
+    <StyledDialog onDismiss={() => dispatch(closeLightbox())}>
       <ImageContainer>
         <StyledReviewImage
-          src={reviewImages[index[0]]?.[index[1]]?.original ?? ''}
+          src={reviewImages[reviewIndex]?.[photoIndex]?.original ?? ''}
         />
         {reviewImages.length > 1 && (
           <NavButtonContainer>
             <NavButton
-              disabled={index[0] === 0 && index[1] === 0}
+              disabled={reviewIndex === 0 && photoIndex === 0}
               onClick={decrementReviewImage}
             >
               <LeftArrowAlt size={30} />
             </NavButton>
             <NavButton
               disabled={
-                index[0] === reviewImages.length - 1 &&
-                index[1] === reviewImages[reviewImages.length - 1].length - 1
+                reviewIndex === reviewImages.length - 1 &&
+                photoIndex === reviewImages[reviewImages.length - 1].length - 1
               }
               onClick={incrementReviewImage}
             >
@@ -148,22 +166,26 @@ const Lightbox = ({ onDismiss, reviews, index, onIndexChange }) => {
         )}
       </ImageContainer>
       <ReviewContainer>
-        <ExitButton onClick={onDismiss}>
+        <ExitButton onClick={() => dispatch(closeLightbox())}>
           <X size={30} />
         </ExitButton>
-        <Review review={reviews[index[0]]} includePreview={false} />
+        <Review review={reviews[reviewIndex]} includePreview={false} />
 
         <ThumbnailImageContainer>
-          {reviewImages[index[0]].map((photo, idx) => (
+          {reviewImages[reviewIndex].map((photo, idx) => (
             <ThumbnailImage
               small
               key={photo.thumb}
-              selected={photo.thumb === reviewImages[index[0]][index[1]].thumb}
+              selected={
+                photo.thumb === reviewImages[reviewIndex][photoIndex].thumb
+              }
             >
               <img
                 src={photo.thumb}
                 alt={reviews.title}
-                onClick={() => onIndexChange([index[0], idx])}
+                onClick={() =>
+                  dispatch(setLightboxIndices({ reviewIndex, photoIndex: idx }))
+                }
               />
             </ThumbnailImage>
           ))}

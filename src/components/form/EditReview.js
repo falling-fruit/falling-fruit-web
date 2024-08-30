@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 
 import { reviewToForm } from '../../utils/form'
-import { Page } from '../entry/Entry'
 import { ReviewForm } from './ReviewForm'
 
 export const EditReviewForm = (props) => {
@@ -19,12 +18,3 @@ export const EditReviewForm = (props) => {
     )
   )
 }
-
-export const EditReviewPage = () => (
-  <Page>
-    <div style={{ paddingLeft: 10, paddingRight: 10 }}>
-      <h3>Editing My Review</h3>
-      <EditReviewForm />
-    </div>
-  </Page>
-)

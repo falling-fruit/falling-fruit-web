@@ -8,28 +8,14 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Button from '../ui/Button'
-import { SettingsAccordionButton } from '../ui/SettingsAccordion'
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`
-
-const StyledButton = styled(Button)`
+const AddLocationButton = styled(Button)`
   margin: 10px 10px;
   padding: 15px 0;
   opacity: ${({ greyedOut }) => (greyedOut ? '0.5' : '1')};
   cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
-  // TODO: Siraj add box shadow and extra white border. What's the best way to add another white border? ("raised" prop)
-`
-
-const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
-  ...props,
-  forwardedAs: 'button',
-}))`
-  padding: 5px 0;
-  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
 `
 
 const MainPane = () => {
@@ -51,26 +37,17 @@ const MainPane = () => {
   }
 
   return (
-    <Container>
+    <>
       <Search />
       <Filter />
-      <StyledButton
+      <AddLocationButton
         secondary
         greyedOut={!isZoomSufficient}
         onClick={handleAddLocation}
       >
         {t('menu.add_location')}
-      </StyledButton>
-      <SettingsButton
-        text={t('settings')}
-        onClick={() =>
-          history.push({
-            pathname: '/settings',
-            state: { fromPage: '/map' },
-          })
-        }
-      />
-    </Container>
+      </AddLocationButton>
+    </>
   )
 }
 

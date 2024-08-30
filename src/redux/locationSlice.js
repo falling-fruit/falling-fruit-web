@@ -13,7 +13,12 @@ import { fetchReviewData } from './reviewSlice'
 
 export const fetchLocationData = createAsyncThunk(
   'location/fetchLocationData',
-  async ({ locationId, isBeingEdited: _, isStreetView: __ }) => {
+  async ({
+    locationId,
+    isBeingEdited: _,
+    isStreetView: __,
+    paneDrawerDisabled: ___,
+  }) => {
     const locationData = await getLocationById(locationId, 'reviews')
     return locationData
   },
@@ -89,6 +94,16 @@ const locationSlice = createSlice({
     form: null,
     tooltipOpen: false,
     streetViewOpen: false,
+    lightbox: {
+      isOpen: false,
+      reviewIndex: null,
+      photoIndex: null,
+    },
+    pane: {
+      drawerFullyOpen: false,
+      drawerDisabled: false,
+      tabIndex: 0,
+    },
   },
   reducers: {
     clearLocation: (state) => {
@@ -100,6 +115,12 @@ const locationSlice = createSlice({
       state.form = null
       state.tooltipOpen = false
       state.streetViewOpen = false
+      state.lightbox.isOpen = false
+      state.lightbox.reviewIndex = null
+      state.lightbox.photoIndex = null
+      state.pane.drawerFullyOpen = false
+      state.pane.drawerDisabled = false
+      state.pane.tabIndex = 0
     },
     initNewLocation: (state, action) => {
       state.isLoading = false
@@ -135,6 +156,33 @@ const locationSlice = createSlice({
     setStreetView: (state, action) => {
       state.streetViewOpen = action.payload
     },
+    openLightbox: (state, action) => {
+      state.lightbox.isOpen = true
+      state.lightbox.reviewIndex = action.payload.reviewIndex
+      state.lightbox.photoIndex = action.payload.photoIndex
+    },
+    closeLightbox: (state) => {
+      state.lightbox.isOpen = false
+      state.lightbox.reviewIndex = null
+      state.lightbox.photoIndex = null
+    },
+    setLightboxIndices: (state, action) => {
+      state.lightbox.reviewIndex = action.payload.reviewIndex
+      state.lightbox.photoIndex = action.payload.photoIndex
+    },
+    reenableAndPartiallyClosePaneDrawer: (state) => {
+      state.pane.drawerDisabled = false
+      state.pane.drawerFullyOpen = false
+    },
+    fullyOpenPaneDrawer: (state) => {
+      state.pane.drawerFullyOpen = true
+    },
+    partiallyClosePaneDrawer: (state) => {
+      state.pane.drawerFullyOpen = false
+    },
+    setTabIndex: (state, action) => {
+      state.pane.tabIndex = action.payload
+    },
   },
   extraReducers: {
     [fetchLocationData.pending]: (state, action) => {
@@ -146,6 +194,9 @@ const locationSlice = createSlice({
       state.form = null
       state.tooltipOpen = action.meta.arg.isBeingEdited
       state.streetViewOpen = action.meta.arg.isStreetView
+      state.pane.drawerDisabled = action.meta.arg.paneDrawerDisabled
+      state.pane.drawerFullyOpen = false
+      console.log('fetchLocationData.pending')
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -224,6 +275,13 @@ export const {
   dismissLocationTooltip,
   reopenLocationTooltip,
   setStreetView,
+  openLightbox,
+  closeLightbox,
+  setLightboxIndices,
+  reenableAndPartiallyClosePaneDrawer,
+  setTabIndex,
+  fullyOpenPaneDrawer,
+  partiallyClosePaneDrawer,
 } = locationSlice.actions
 
 export default locationSlice.reducer

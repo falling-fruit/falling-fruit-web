@@ -4,36 +4,30 @@ import {
   Map as MapIcon,
   Pencil as PencilIcon,
 } from '@styled-icons/boxicons-solid'
-import { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import {
+  fullyOpenPaneDrawer,
+  partiallyClosePaneDrawer,
+  reenableAndPartiallyClosePaneDrawer,
+  setTabIndex,
+} from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import IconButton from '../ui/IconButton'
 import Card from './Card'
 import Carousel from './Carousel'
-import Entry from './Entry'
+import EntryOverview from './EntryOverview'
+import EntryReviews from './EntryReviews'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
 const INITIAL_IMAGE_HEIGHT_SCALAR = 0.6
 
-const BUTTON_HEIGHT = 80
-
-const PageContainer = styled.div`
-  position: absolute;
-  top: ${({ showEntryImages }) => (showEntryImages ? 0 : BUTTON_HEIGHT)}px;
-  height: 100%;
-  width: 100%;
-  background-color: white;
-  z-index: 2;
-
-  .pane {
-    background: none;
-    padding-top: 0;
-    ${({ showEntryImages }) => !showEntryImages && `box-shadow: none;`}
-  }
-`
+const TOP_BAR_HEIGHT = 80
+const ENTRY_TABS_HEIGHT = 50
 
 const DrawerContainer = styled.div`
   position: absolute;
@@ -44,9 +38,6 @@ const DrawerContainer = styled.div`
 
   .pane {
     background: none;
-    ${({ isFullScreen }) => isFullScreen && `padding-top: 0;`}
-    ${({ showEntryImages, isFullScreen }) =>
-      !showEntryImages && isFullScreen && `box-shadow: none;`}
     // Expand Cupertino Pane from default (500px) to full width
     max-width: 100%;
   }
@@ -54,12 +45,10 @@ const DrawerContainer = styled.div`
   .draggable {
     background: white;
     z-index: -1;
-    padding-top: 10px;
-    ${({ showEntryImages }) => !showEntryImages && `border-radius: 0.375em;`}
+    ${({ hasImages }) => !hasImages && `padding-top: 10px`}
   }
-
   .move {
-    ${({ isFullScreen }) => isFullScreen && `visibility: hidden;`}
+    ${({ showMoveElement }) => !showMoveElement && `visibility: hidden; `}
   }
 
   .entry-main-card {
@@ -68,20 +57,29 @@ const DrawerContainer = styled.div`
   }
 `
 
-const EntryImages = styled.div`
+const RevealedFromUnderneath = styled.div`
   width: 100%;
-  height: ${ENTRY_IMAGE_HEIGHT}px;
-
-  ${({ $isInDrawer, heightScalar }) =>
-    $isInDrawer &&
-    `position: absolute;
-    top: 0;
+  position: absolute;
+  top: 0;
+  ${({ targetHeight, progress }) =>
+    `
+    height: ${targetHeight}px;
     transform: translateY(
-      ${-heightScalar * ENTRY_IMAGE_HEIGHT}px
+      ${-progress * targetHeight}px
     );
     transition: transform 0.15s linear;
     z-index: -10;
   `}
+`
+const WhitespacePlaceholder = styled.div`
+  width: 100%;
+  background: white;
+  ${({ targetHeight, progress }) =>
+    `
+  height: ${progress * targetHeight}px;
+
+    `}
+  ${({ hidden }) => hidden && `display: none;`}
 `
 
 const Buttons = styled.div`
@@ -93,6 +91,7 @@ const Buttons = styled.div`
   padding: 16px;
   display: flex;
   justify-content: space-between;
+  ${({ whiteBackground }) => whiteBackground && `background: white;`}
 
   > div {
     display: flex;
@@ -115,78 +114,34 @@ EntryButton.defaultProps = {
   size: 48,
 }
 
-const Backdrop = styled.div`
-  width: 100%;
-  height: ${BUTTON_HEIGHT}px;
-  position: absolute;
-  top: 0;
-  background: white;
-  z-index: -10;
-  transform: ${({ isFullScreen }) =>
-    isFullScreen ? `translateY(${-BUTTON_HEIGHT}px);` : `translateY(10px);`};
-  transition: transform 0.15s linear;
-`
-
-const EntryMobile = ({
-  locationData,
-  reviews,
-  isLoading,
-  entryOverview,
-  entryReviews,
-}) => {
+const EntryMobile = () => {
+  const dispatch = useDispatch()
   const history = useAppHistory()
-  const { state } = useLocation()
   const cardRef = useRef()
+  const {
+    locationId,
+    reviews,
+    isLoading,
+    pane: { drawerFullyOpen, tabIndex, drawerDisabled },
+  } = useSelector((state) => state.location)
   const [drawer, setDrawer] = useState()
-  const [isFullScreen, setIsFullScreen] = useState(false)
-  const showEntryImages =
+  const hasImages =
     reviews &&
     reviews.filter((review) => review.photos && review.photos.length > 0)
       .length > 0
-  const isInDrawer = state?.fromPage !== '/list'
+
+  const bufferHeight = hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT
 
   // TODO: Resizing the screen without refresh will break the drawer
   const { height: windowHeight } = useWindowSize()
   const paneHeight = windowHeight
   const initialCardHeight = paneHeight * 0.3
-  const [finalCardHeight, setFinalCardHeight] = useState(
-    paneHeight - ENTRY_IMAGE_HEIGHT,
-  )
+  const finalCardHeight = paneHeight - bufferHeight
   // maxDelta is the maximum amount of pixels the card can be dragged
   const maxDelta = finalCardHeight - initialCardHeight
   const [entryImageHeightMultiplier, setEntryImageHeightMultiplier] = useState(
     INITIAL_IMAGE_HEIGHT_SCALAR,
   )
-
-  useEffect(() => {
-    if (!showEntryImages) {
-      setFinalCardHeight(paneHeight - BUTTON_HEIGHT)
-    } else {
-      setFinalCardHeight(paneHeight - ENTRY_IMAGE_HEIGHT)
-    }
-  }, [showEntryImages, paneHeight])
-
-  useEffect(() => {
-    if (drawer) {
-      drawer.setBreakpoints({
-        top: {
-          enabled: true,
-          height: finalCardHeight,
-        },
-      })
-    }
-  }, [drawer, finalCardHeight])
-
-  useEffect(() => {
-    if (drawer) {
-      if (isFullScreen) {
-        drawer.disableDrag()
-      } else {
-        drawer.enableDrag()
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFullScreen])
 
   const onDrag = () => {
     // The height of cupertino pane is adjusted using transformY as it is dragged.
@@ -213,23 +168,21 @@ const EntryMobile = ({
       // Parse the card's transformY value to identify the closest breakpoint.
       if (transformY === windowHeight - initialCardHeight) {
         setEntryImageHeightMultiplier(INITIAL_IMAGE_HEIGHT_SCALAR)
-        setIsFullScreen(false)
+        dispatch(partiallyClosePaneDrawer())
       } else if (transformY <= ENTRY_IMAGE_HEIGHT) {
         setEntryImageHeightMultiplier(1)
-        setIsFullScreen(true)
+        dispatch(fullyOpenPaneDrawer())
       }
     }
   }
 
   const onBackButtonClick = (e) => {
     e.stopPropagation()
-    setIsFullScreen(false)
     drawer.moveToBreak('middle')
-    setEntryImageHeightMultiplier(INITIAL_IMAGE_HEIGHT_SCALAR)
   }
 
   const config = {
-    initialBreak: 'middle',
+    initialBreak: drawerFullyOpen ? 'top' : 'middle',
     breaks: {
       top: { enabled: true, height: finalCardHeight },
       middle: { enabled: true, height: initialCardHeight },
@@ -244,64 +197,72 @@ const EntryMobile = ({
     parentElement: '.entry-drawers',
   }
 
-  const allReviewPhotos = (reviews ?? [])
-    .map((reviews) => reviews.photos)
-    .flat()
-
-  const inner = (
-    <div>
-      {showEntryImages ? (
-        <EntryImages
-          $isInDrawer={isInDrawer}
-          heightScalar={!isInDrawer ? 1 : entryImageHeightMultiplier}
-        >
-          <Carousel
-            showIndicators={allReviewPhotos.length > 1}
-            isFullScreen={!isInDrawer || isFullScreen}
-          >
-            {allReviewPhotos.map((photo) => (
-              <img key={photo.id} src={photo.medium} alt="entry" />
-            ))}
-          </Carousel>
-        </EntryImages>
-      ) : (
-        <Backdrop isFullScreen={!isInDrawer || isFullScreen} />
-      )}
-      <Entry
-        showEntryImages={showEntryImages}
-        isFullScreen={!isInDrawer || isFullScreen}
-        isInDrawer
-        showTabs={!isInDrawer || isFullScreen}
-        locationData={locationData}
-        reviews={reviews}
-        isLoading={isLoading}
-        entryOverview={entryOverview}
-        entryReviews={entryReviews}
-      />
-    </div>
-  )
+  if (isLoading) {
+    return null
+  }
 
   return (
-    <>
-      {(!isInDrawer || isFullScreen) && (
-        <Buttons showEntryImages={showEntryImages}>
+    <DrawerContainer
+      className="entry-drawers"
+      hasImages={hasImages}
+      showMoveElement={!drawerFullyOpen}
+    >
+      <Card
+        ref={cardRef}
+        setDrawer={setDrawer}
+        drawer={drawer}
+        drawerFullyOpen={drawerFullyOpen}
+        className="entry-main-card"
+        config={config}
+      >
+        {hasImages && (
+          <RevealedFromUnderneath
+            targetHeight={ENTRY_IMAGE_HEIGHT}
+            progress={entryImageHeightMultiplier}
+          >
+            <Carousel />
+          </RevealedFromUnderneath>
+        )}
+        <WhitespacePlaceholder
+          progress={entryImageHeightMultiplier}
+          hidden={drawerFullyOpen}
+          targetHeight={ENTRY_TABS_HEIGHT}
+        />
+        <EntryTabs
+          onChange={(index) => dispatch(setTabIndex(index))}
+          index={tabIndex}
+        >
+          {drawerFullyOpen && (
+            <TabList>
+              <Tab>Overview</Tab>
+              <Tab>Reviews ({reviews.length})</Tab>
+            </TabList>
+          )}
+          <TabPanels>
+            <TabPanel>
+              <EntryOverview />
+            </TabPanel>
+            <TabPanel>
+              <EntryReviews />
+            </TabPanel>
+          </TabPanels>
+        </EntryTabs>
+      </Card>
+      {drawerFullyOpen && (
+        <Buttons whiteBackground={!hasImages}>
           <EntryButton
             onClick={
-              !isInDrawer
-                ? () => history.push(state?.fromPage ?? '/map')
-                : onBackButtonClick
+              drawerDisabled ? () => history.push('/list') : onBackButtonClick
             }
             icon={<ArrowBackIcon />}
             label="back-button"
           />
           <div>
-            {!isInDrawer && (
+            {drawerDisabled && (
               <EntryButton
                 onClick={(event) => {
                   event.stopPropagation()
-                  history.push(`/locations/${locationData.id}`, {
-                    fromPage: '/map',
-                  })
+                  dispatch(reenableAndPartiallyClosePaneDrawer())
                 }}
                 icon={<MapIcon />}
                 label="map-button"
@@ -309,7 +270,7 @@ const EntryMobile = ({
             )}
             <EntryButton
               onClick={() =>
-                history.push(`/locations/${locationData.id}/edit/details`)
+                history.push(`/locations/${locationId}/edit/details`)
               }
               icon={<PencilIcon />}
               label="edit-button"
@@ -317,28 +278,7 @@ const EntryMobile = ({
           </div>
         </Buttons>
       )}
-
-      {isInDrawer ? (
-        <DrawerContainer
-          className="entry-drawers"
-          showEntryImages={showEntryImages}
-          isFullScreen={isFullScreen}
-        >
-          <Card
-            ref={cardRef}
-            setDrawer={setDrawer}
-            drawer={drawer}
-            isFullScreen={isFullScreen}
-            className="entry-main-card"
-            config={config}
-          >
-            {inner}
-          </Card>
-        </DrawerContainer>
-      ) : (
-        <PageContainer showEntryImages={showEntryImages}>{inner}</PageContainer>
-      )}
-    </>
+    </DrawerContainer>
   )
 }
 

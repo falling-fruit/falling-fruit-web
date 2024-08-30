@@ -6,7 +6,7 @@ import aboutRoutes from '../about/aboutRoutes'
 import AccountPage from '../auth/AccountPage'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
-import EntryWrapper from '../entry/EntryWrapper'
+import EntryMobile from '../entry/EntryMobile'
 import { EditLocationForm } from '../form/EditLocation'
 import { EditReviewForm } from '../form/EditReview'
 import { LocationForm } from '../form/LocationForm'
@@ -108,7 +108,7 @@ const MobileLayout = () => {
               <Route path="/locations/new" />
               <Route path="/locations/:locationId/edit/position" />
               <Route path="/locations/:locationId">
-                {!streetView && <EntryWrapper />}
+                {!streetView && <EntryMobile />}
               </Route>
             </Switch>
             <Switch>
