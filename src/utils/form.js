@@ -93,7 +93,7 @@ export const reviewToForm = ({
 })
 
 export const isEveryPhotoUploaded = (photos) =>
-  photos.every((photo) => !photo.isNew || photo.uploaded)
+  photos.every((photo) => !photo.isUploading)
 
 export const validateLocationStep = ({ types }) => {
   const errors = {}
