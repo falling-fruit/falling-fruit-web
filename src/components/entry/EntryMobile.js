@@ -161,11 +161,7 @@ const EntryMobile = () => {
           {drawerFullyOpen && (
             <TabList>
               <Tab>Overview</Tab>
-              <Tab greyedOut={reviews.length === 0}>
-                <span style={{ opacity: reviews.length ? 1 : 0.5 }}>
-                  Reviews ({reviews.length})
-                </span>
-              </Tab>
+              <Tab>Reviews ({reviews.length})</Tab>
             </TabList>
           )}
           <TabPanels>
