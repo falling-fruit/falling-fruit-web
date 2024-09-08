@@ -1,3 +1,4 @@
+import { Tab as BaseTab } from '@reach/tabs'
 import styled from 'styled-components/macro'
 
 import { PageTabs } from '../ui/PageTabs'
@@ -34,6 +35,14 @@ const EntryTabs = styled(PageTabs)`
     overflow: auto;
   }
 `
+const Tab = styled(BaseTab)`
+  ${({ greyedOut }) =>
+    greyedOut &&
+    `
+          pointer-events: none;
+          cursor: default;
+        `}
+`
 
-export { Tab, TabList, TabPanel, TabPanels } from '@reach/tabs'
-export { EntryTabs }
+export { TabList, TabPanel, TabPanels } from '@reach/tabs'
+export { EntryTabs, Tab }
