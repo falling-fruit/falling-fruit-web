@@ -118,6 +118,8 @@ const EntryMobile = () => {
     return null
   }
 
+  const hasReviews = reviews && reviews.length > 0
+
   return (
     <>
       <DraggablePane
@@ -148,17 +150,19 @@ const EntryMobile = () => {
             <Carousel />
           </RevealedFromUnderneath>
         )}
-        <WhitespacePlaceholder
-          progress={progress}
-          hidden={drawerFullyOpen}
-          targetHeight={ENTRY_TABS_HEIGHT}
-        />
+        {hasReviews && (
+          <WhitespacePlaceholder
+            progress={progress}
+            hidden={drawerFullyOpen}
+            targetHeight={ENTRY_TABS_HEIGHT}
+          />
+        )}
         <EntryTabs
           style={{ transition: 'none' }}
           onChange={(index) => dispatch(setTabIndex(index))}
           index={tabIndex}
         >
-          {drawerFullyOpen && (
+          {drawerFullyOpen && hasReviews && (
             <TabList>
               <Tab>Overview</Tab>
               <Tab>Reviews ({reviews.length})</Tab>
