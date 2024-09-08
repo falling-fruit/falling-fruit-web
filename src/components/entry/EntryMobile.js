@@ -140,7 +140,7 @@ const EntryMobile = () => {
         drawerDisabled={drawerDisabled || drawerFullyOpen}
         updateProgress={setProgress}
         hasImages={hasImages}
-        showMoveElement={!drawerFullyOpen}
+        showMoveElement={!(drawerFullyOpen || drawerDisabled)}
       >
         {hasImages && (
           <RevealedFromUnderneath
@@ -184,7 +184,7 @@ const EntryMobile = () => {
           </TabPanels>
         </EntryTabs>
       </DraggablePane>
-      {drawerFullyOpen && (
+      {(drawerFullyOpen || drawerDisabled) && (
         <Buttons whiteBackground={!hasImages}>
           <EntryButton
             onClick={
