@@ -196,6 +196,7 @@ const locationSlice = createSlice({
       state.streetViewOpen = action.meta.arg.isStreetView
       state.pane.drawerDisabled = action.meta.arg.paneDrawerDisabled
       state.pane.drawerFullyOpen = false
+      state.pane.tabIndex = 0
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false

@@ -52,6 +52,14 @@ const WhitespacePlaceholder = styled.div`
   ${({ hidden }) => hidden && `display: none;`}
 `
 
+/*
+ * ScrollablePane layout has a translateY property, which can hide some of the content in e.g. the reviews tab
+ * as a workaround, add an element with that same height
+ */
+const DummyElementFixingScrollbarInsideTabPanel = styled.div`
+  height: ${(props) => props.height}px;
+`
+
 const Buttons = styled.div`
   position: absolute;
   left: 0;
@@ -159,9 +167,15 @@ const EntryMobile = () => {
           <TabPanels>
             <TabPanel>
               <EntryOverview />
+              <DummyElementFixingScrollbarInsideTabPanel
+                height={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
+              />
             </TabPanel>
             <TabPanel>
               <EntryReviews />
+              <DummyElementFixingScrollbarInsideTabPanel
+                height={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
+              />
             </TabPanel>
           </TabPanels>
         </EntryTabs>
