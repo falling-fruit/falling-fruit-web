@@ -95,7 +95,7 @@ const connectRoutes = [
           isBeingEdited={match.params.nextSegment === 'edit'}
           isBeingEditedPosition={match.params.nextNextSegment === 'position'}
           isStreetView={match.params.nextSegment === 'panorama'}
-          paneDrawerDisabled={match.path.startsWith('/list-locations/')}
+          isFromListLocations={match.path.startsWith('/list-locations/')}
         />
       )
     }

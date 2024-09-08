@@ -16,7 +16,7 @@ const ConnectLocation = ({
   isBeingEdited,
   isBeingEditedPosition,
   isStreetView,
-  paneDrawerDisabled,
+  isFromListLocations,
 }) => {
   const dispatch = useDispatch()
   const { initialView, googleMap } = useSelector((state) => state.map)
@@ -31,7 +31,7 @@ const ConnectLocation = ({
         locationId,
         isBeingEdited,
         isStreetView,
-        paneDrawerDisabled,
+        paneDrawerDisabled: isFromListLocations,
       }),
     ).then((action) => {
       if (action.payload && !initialView) {
@@ -48,6 +48,10 @@ const ConnectLocation = ({
         // to trigger component reload
         const newUrl = currentPathWithView(view)
         history.push(newUrl)
+      }
+
+      if (isFromListLocations) {
+        history.push(`/locations/${locationId}`)
       }
     })
   }, [dispatch, locationId]) //eslint-disable-line
