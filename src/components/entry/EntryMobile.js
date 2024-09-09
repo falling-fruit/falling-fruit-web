@@ -20,6 +20,7 @@ import IconButton from '../ui/IconButton'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
+import Lightbox from './LightboxMobile'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
@@ -30,6 +31,15 @@ const RevealedFromUnderneath = styled.div`
   width: 100%;
   position: absolute;
   top: 0;
+  ${({ isDrawerFullyOpen }) =>
+    isDrawerFullyOpen &&
+    `pointer-events: none;
+    
+  > * {
+    pointer-events: auto;
+  }
+    
+    `}
   ${({ targetHeight, progress }) =>
     `
     height: ${targetHeight}px;
@@ -146,7 +156,9 @@ const EntryMobile = () => {
           <RevealedFromUnderneath
             targetHeight={ENTRY_IMAGE_HEIGHT}
             progress={progress}
+            isDrawerFullyOpen={drawerFullyOpen}
           >
+            <Lightbox />
             <Carousel />
           </RevealedFromUnderneath>
         )}

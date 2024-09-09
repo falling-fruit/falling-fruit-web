@@ -13,8 +13,11 @@ import Review from './Review'
 
 const StyledDialog = styled(Dialog)`
   display: flex;
-  width: 80%;
-  max-width: 900px;
+  flex-direction: column;
+  margin-top: 10vh;
+  margin-bottom: 0;
+  width: 90%;
+  height: 80vh;
   border-radius: 0.375em;
   padding: 16px;
 `
@@ -24,23 +27,23 @@ const StyledReviewImage = styled.img`
   object-fit: contain;
   object-position: center;
   width: 100%;
-  min-width: 300px;
-  height: 500px;
+  height: 50vh;
   border-radius: 0.375em;
 `
+
 const ReviewContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-left: 24px;
+  margin-top: 24px;
   padding-top: 50px;
-  max-width: 300px;
-  min-width: 300px;
 `
+
 const ThumbnailImage = styled(ImagePreview)`
   outline: ${(props) => props.selected && `3px solid ${props.theme.orange}`};
   border-radius: 0.375em;
   margin-right: 10px;
+  margin-bottom: 10px;
   img {
     border-radius: ${(props) => props.selected && '0.375em'};
     border: 0;
@@ -49,7 +52,8 @@ const ThumbnailImage = styled(ImagePreview)`
 
 const ThumbnailImageContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
 `
 
 const NavButtonContainer = styled.div`
@@ -58,16 +62,19 @@ const NavButtonContainer = styled.div`
   right: 0px;
 `
 
-const ExitButton = styled(ResetButton)`
+const ExitButtonMobile = styled(ResetButton)`
   position: absolute;
-  top: 5px;
-  right: 5px;
-  color: ${({ theme }) => theme.secondaryText};
+  top: 10px;
+  right: 10px;
+  color: white;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 50%;
+  padding: 5px;
+  z-index: 10;
 `
 
 const ImageContainer = styled.div`
   position: relative;
-  flex: 1;
 `
 
 const NavButton = styled(ResetButton)`
@@ -142,6 +149,9 @@ const Lightbox = () => {
   return (
     <StyledDialog onDismiss={() => dispatch(closeLightbox())}>
       <ImageContainer>
+        <ExitButtonMobile onClick={() => dispatch(closeLightbox())}>
+          <X size={30} />
+        </ExitButtonMobile>
         <StyledReviewImage
           src={reviewImages[reviewIndex]?.[photoIndex]?.original ?? ''}
         />
@@ -166,9 +176,6 @@ const Lightbox = () => {
         )}
       </ImageContainer>
       <ReviewContainer>
-        <ExitButton onClick={() => dispatch(closeLightbox())}>
-          <X size={30} />
-        </ExitButton>
         <Review review={reviews[reviewIndex]} includePreview={false} />
 
         <ThumbnailImageContainer>
