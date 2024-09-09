@@ -14,7 +14,7 @@ const PaneContainer = styled.div`
   bottom: 0;
   background-color: white;
   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
-  touch-action: none;
+  touch-action: ${(props) => (props.isMiddlePosition ? 'none' : 'auto')};
   max-width: 100%;
   height: 100%;
   z-index: 11;
@@ -49,6 +49,7 @@ const DraggablePane = ({
   hasImages,
   showMoveElement,
 }) => {
+  const isMiddlePosition = position === POSITIONS.MIDDLE
   const paneRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
   const [startY, setStartY] = useState(0)
@@ -224,12 +225,13 @@ const DraggablePane = ({
   return (
     <PaneContainer
       ref={paneRef}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
+      onTouchStart={isMiddlePosition ? handleTouchStart : undefined}
+      onTouchMove={isMiddlePosition ? handleTouchMove : undefined}
+      onTouchEnd={isMiddlePosition ? handleTouchEnd : undefined}
+      onMouseDown={isMiddlePosition ? handleMouseDown : undefined}
       hasImages={hasImages}
       showMoveElement={showMoveElement}
+      isMiddlePosition={isMiddlePosition}
     >
       <DragHandle showMoveElement={showMoveElement} />
       {children}
