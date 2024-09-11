@@ -13,6 +13,7 @@ import { fetchFilterCounts } from '../../redux/filterSlice'
 import { updatePosition } from '../../redux/locationSlice'
 import { setGoogle } from '../../redux/mapSlice'
 import { fetchLocations, viewChangeAndFetch } from '../../redux/viewChange'
+import { updateLastMapView } from '../../redux/viewportSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
@@ -175,6 +176,15 @@ const MapPage = ({ isDesktop }) => {
     dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
     dispatch(fetchLocations())
     dispatch(fetchFilterCounts())
+
+    // Set initial view in lastMapView
+    const center = map.getCenter()
+    const initialView = {
+      center: { lat: center.lat(), lng: center.lng() },
+      zoom: map.getZoom(),
+      bounds: map.getBounds().toJSON(),
+    }
+    dispatch(updateLastMapView(initialView))
   }
 
   const handleClusterClick = (cluster) => {
@@ -303,6 +313,7 @@ const MapPage = ({ isDesktop }) => {
                 bounds: googleMap.getBounds().toJSON(),
               }
               dispatch(viewChangeAndFetch(newView))
+              dispatch(updateLastMapView(newView))
               history.changeView(newView)
             }
           }}

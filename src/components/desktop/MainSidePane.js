@@ -5,9 +5,9 @@ import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { useAppHistory } from '../../utils/useAppHistory'
-import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Button from '../ui/Button'
+import FilterWrapper from './FilterWrapper'
 
 const AddLocationButton = styled(Button)`
   margin: 10px 10px;
@@ -39,7 +39,7 @@ const MainPane = () => {
   return (
     <>
       <Search />
-      <Filter />
+      <FilterWrapper />
       <AddLocationButton
         secondary
         greyedOut={!isZoomSufficient}

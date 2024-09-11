@@ -4,43 +4,19 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { filtersChanged, selectionChanged } from '../../redux/filterSlice'
+import { filtersChanged, selectionChanged } from '../../redux/viewChange'
 import Input from '../ui/Input'
 import { CheckboxFilters } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
 import TreeSelect from './TreeSelect'
 
-const StyledFilter = styled.div`
-  box-sizing: border-box;
-
-  @media ${({ theme }) => theme.device.desktop} {
-    width: 100%;
-    > *:nth-child(1) {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    background-color: ${({ theme }) => theme.background};
-    padding: 0 10px 8px 10px;
-    margin-top: 3px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  @media ${({ theme }) => theme.device.mobile} {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  .edible-type-text {
-    font-size: 0.875rem;
-    font-weight: bold;
-    color: ${({ theme }) => theme.secondaryText};
-    margin-top: 18px;
-    margin-bottom: 7px;
-  }
+const EdibleTypeText = styled.p`
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.secondaryText};
+  margin-top: 18px;
+  margin-bottom: 7px;
 `
 
 const TreeFiltersContainer = styled.div`
@@ -81,9 +57,9 @@ const Filter = () => {
 
   const { t } = useTranslation()
   return (
-    <StyledFilter>
+    <>
       <div>
-        <p className="edible-type-text">{t('glossary.types')}</p>
+        <EdibleTypeText>{t('glossary.types')}</EdibleTypeText>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder={t('type')}
@@ -142,7 +118,7 @@ const Filter = () => {
           }}
         />
       </MuniAndInvasiveCheckboxFilters>
-    </StyledFilter>
+    </>
   )
 }
 
