@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useAppHistory } from '../../utils/useAppHistory'
 
 const ConnectList = ({ isListRoute }) => {
-  const { googleMap } = useSelector((state) => state.map)
+  const { googleMap, isLoading } = useSelector((state) => state.map)
   const history = useAppHistory()
   const [wantedList, setWantedList] = useState(false)
 
@@ -13,11 +13,11 @@ const ConnectList = ({ isListRoute }) => {
       setWantedList(true)
       history.push('/map')
     }
-    if (googleMap && wantedList) {
+    if (googleMap && wantedList && !isLoading) {
       setWantedList(false)
       history.push('/list')
     }
-  }, [googleMap, history, isListRoute, wantedList])
+  }, [googleMap, history, isListRoute, wantedList, isLoading])
 
   return null
 }

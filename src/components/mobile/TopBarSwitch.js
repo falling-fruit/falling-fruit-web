@@ -2,6 +2,7 @@ import { Route, Switch, useLocation } from 'react-router-dom'
 
 import Search from '../search/Search'
 import TopBar from '../ui/TopBar'
+import FilterWrapper from './FilterWrapper'
 import LocationNav from './LocationNav'
 
 const TopBarSwitch = () => {
@@ -37,6 +38,7 @@ const TopBarSwitch = () => {
       <Route>
         <TopBar>
           <Search />
+          <FilterWrapper />
         </TopBar>
       </Route>
     </Switch>

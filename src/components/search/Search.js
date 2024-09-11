@@ -12,15 +12,17 @@ import CoordinateParser from 'coordinate-parser'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
-import { closeFilter, openFilterAndFetch } from '../../redux/filterSlice'
+import {
+  closeFilter,
+  fetchFilterCounts,
+  openFilter,
+} from '../../redux/filterSlice'
 import { clearSelectedPlace, selectPlace } from '../../redux/placeSlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
-import Filter from '../filter/Filter'
 import FilterIconButton from '../filter/FilterIconButton'
 import TrackLocationButton from '../map/TrackLocationButton'
 import Input from '../ui/Input'
@@ -85,7 +87,6 @@ const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const filterOpen = useSelector((state) => state.filter.isOpenInMobileLayout)
-  const { typesAccess } = useSelector((state) => state.type)
   const selectedPlace = useSelector((state) => state.place.selectedPlace)
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
@@ -205,7 +206,8 @@ const Search = (props) => {
               if (filterOpen) {
                 dispatch(closeFilter())
               } else {
-                dispatch(openFilterAndFetch())
+                dispatch(openFilter())
+                dispatch(fetchFilterCounts())
               }
             }}
           />
@@ -238,21 +240,8 @@ const Search = (props) => {
           })}
         </ComboboxList>
       </StyledComboboxPopover>
-      {!isDesktop && !typesAccess.isEmpty && (
-        <FilterWrapper isOpen={filterOpen}>
-          <Filter />
-        </FilterWrapper>
-      )}
     </Combobox>
   )
 }
-
-const FilterWrapper = styled.div`
-  ${({ isOpen }) =>
-    !isOpen &&
-    css`
-      display: none;
-    `}
-`
 
 export default Search

@@ -195,7 +195,7 @@ const locationSlice = createSlice({
       state.tooltipOpen = action.meta.arg.isBeingEdited
       state.streetViewOpen = action.meta.arg.isStreetView
       state.pane.drawerDisabled = action.meta.arg.paneDrawerDisabled
-      state.pane.drawerFullyOpen = false
+      state.pane.drawerFullyOpen = action.meta.arg.paneDrawerDisabled
       state.pane.tabIndex = 0
     },
     [fetchLocationData.fulfilled]: (state, action) => {

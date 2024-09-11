@@ -3,18 +3,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getLocations, getLocationsCount } from '../utils/api'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
+import { updateLastMapView } from './viewportSlice'
 
 const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
   async ({ offset, fetchCount = false, extend = false }, { getState }) => {
     const state = getState()
     const { types, muni, invasive } = state.filter
-    const { googleMap } = state.map
-    if (!googleMap) {
-      return { offset, extend, locations: [] }
-    }
+    const { lastMapView } = state.viewport
+    const { bounds, zoom, center } = lastMapView
     const params = selectParams(
-      { types, muni, invasive, googleMap },
+      { types, muni, invasive, bounds, zoom, center },
       { limit: 100, offset, photo: true },
     )
 
@@ -40,12 +39,9 @@ export const listSlice = createSlice({
     offset: 0,
     shouldFetchNewLocations: true,
     locations: [],
+    lastMapView: null,
   },
-  reducers: {
-    invalidateListLocations: (state) => {
-      state.shouldFetchNewLocations = true
-    },
-  },
+  reducers: {},
   extraReducers: {
     [fetchListLocations.pending]: (state) => {
       state.shouldFetchNewLocations = false
@@ -71,8 +67,10 @@ export const listSlice = createSlice({
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true
     },
+    [updateLastMapView]: (state) => {
+      state.shouldFetchNewLocations = true
+    },
   },
 })
 
-export const { invalidateListLocations } = listSlice.actions
 export default listSlice.reducer

@@ -9,17 +9,7 @@ import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
-export const updateMapLocation = (location) => ({
-  type: 'map/updateLocation',
-  payload: location,
-})
-
 const MIN_TRACKING_ZOOM = 16
-
-export const updateReducer = (key) => (state, action) => ({
-  ...state,
-  [key]: { ...state[key], ...action.payload },
-})
 
 export const fetchMapLocations = createAsyncThunk(
   'map/fetchMapLocations',
@@ -28,8 +18,14 @@ export const fetchMapLocations = createAsyncThunk(
     const { types, muni, invasive } = state.filter
     const { googleMap } = state.map
     if (googleMap) {
+      const bounds = googleMap.getBounds().toJSON()
+      const zoom = googleMap.getZoom()
+      const center = googleMap.getCenter().toJSON()
       return await getLocations(
-        selectParams({ types, muni, invasive, googleMap }, { limit: 250 }),
+        selectParams(
+          { types, muni, invasive, bounds, zoom, center },
+          { limit: 250 },
+        ),
       )
     } else {
       return []
@@ -44,13 +40,11 @@ export const fetchMapClusters = createAsyncThunk(
     const { types, muni, invasive } = state.filter
     const { googleMap } = state.map
     if (googleMap) {
+      const bounds = googleMap.getBounds().toJSON()
+      const zoom = googleMap.getZoom()
+      const center = googleMap.getCenter().toJSON()
       return await getClusters(
-        selectParams(
-          { types, muni, invasive, googleMap },
-          {
-            zoom: googleMap.getZoom() + 1,
-          },
-        ),
+        selectParams({ types, muni, invasive, bounds, zoom: zoom + 1, center }),
       )
     } else {
       return []
@@ -62,7 +56,7 @@ export const mapSlice = createSlice({
   name: 'map',
   initialState: {
     initialView: null,
-    isLoading: false,
+    isLoading: true,
     locations: [],
     isFilterUpdated: false,
     clusters: [],

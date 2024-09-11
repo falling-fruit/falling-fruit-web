@@ -12,6 +12,7 @@ import placeReducer from './placeSlice'
 import reviewReducer from './reviewSlice'
 import settingsReducer from './settingsSlice'
 import typeReducer from './typeSlice'
+import viewportReducer from './viewportSlice'
 
 export const history = createBrowserHistory()
 
@@ -28,6 +29,7 @@ export const store = configureStore({
     geolocation: geolocationReducer,
     place: placeReducer,
     type: typeReducer,
+    viewport: viewportReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

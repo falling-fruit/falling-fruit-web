@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
+import { updateLastMapView } from './viewportSlice'
+
 export const GeolocationState = {
   INITIAL: 'INITIAL',
   REQUESTED: 'REQUESTED',
@@ -15,6 +17,7 @@ export const geolocationSlice = createSlice({
   initialState: {
     geolocationState: GeolocationState.INITIAL,
     geolocation: null,
+    stopTrackingLocationThreshold: 5000,
   },
   reducers: {
     requestGeolocation: (state) => {
@@ -54,6 +57,32 @@ export const geolocationSlice = createSlice({
           `Geolocation failed: ${action.payload.message}. Please refresh the page and retry`,
         )
       }
+    },
+  },
+  extraReducers: {
+    [updateLastMapView]: (state, action) => {
+      const {
+        center: { lat, lng },
+        zoom,
+      } = action.payload
+      if (!state.geolocation || state.geolocation.loading) {
+        return
+      }
+
+      const { latitude, longitude } = state.geolocation
+
+      const dist = Math.pow(lat - latitude, 2) + Math.pow(longitude - lng, 2)
+      const screenDist = dist * Math.pow(Math.pow(2, zoom), 2)
+
+      if (screenDist >= state.stopTrackingLocationThreshold) {
+        state.geolocationState = GeolocationState.INITIAL
+        state.geolocation = null
+      }
+    },
+    layoutChange: (state, action) => {
+      state.stopTrackingLocationThreshold = action.payload.isDesktop
+        ? 5000
+        : 2000
     },
   },
 })

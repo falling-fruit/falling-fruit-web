@@ -4,24 +4,27 @@ import { getTypeCounts } from '../utils/api'
 import { selectParams } from './selectParams'
 import { fetchAndLocalizeTypes } from './typeSlice'
 import { updateSelection } from './updateSelection'
-import { fetchLocations } from './viewChange'
 
 export const fetchFilterCounts = createAsyncThunk(
   'map/fetchFilterCounts',
   async (_, { getState }) => {
     const state = getState()
-    const { googleMap } = state.map
+    const { lastMapView } = state.viewport
     const isOpen = state.filter.isOpenInMobileLayout || state.misc.isDesktop
-    if (isOpen && googleMap) {
+    if (isOpen && lastMapView) {
       const { muni, invasive } = state.filter
+      const { bounds, zoom, center } = lastMapView
       const counts = await getTypeCounts(
         // Match zoom level used in getClusters
-        selectParams(
-          { types: undefined, muni, invasive, googleMap },
-          {
-            zoom: googleMap.getZoom() + 1,
-          },
-        ),
+        // Wojtek: not sure why?
+        selectParams({
+          types: undefined,
+          muni,
+          invasive,
+          bounds,
+          zoom: zoom + 1,
+          center,
+        }),
       )
 
       return {
@@ -83,21 +86,5 @@ export const filterSlice = createSlice({
 })
 
 export const { openFilter, closeFilter } = filterSlice.actions
-
-export const filtersChanged = (filters) => (dispatch) => {
-  dispatch(updateSelection(filters))
-  dispatch(fetchFilterCounts())
-  dispatch(fetchLocations())
-}
-
-export const selectionChanged = (types) => (dispatch) => {
-  dispatch(updateSelection({ types }))
-  dispatch(fetchLocations())
-}
-
-export const openFilterAndFetch = () => (dispatch) => {
-  dispatch(openFilter())
-  dispatch(fetchFilterCounts())
-}
 
 export default filterSlice.reducer

@@ -25,14 +25,9 @@ const convertCenter = (center) => ({
 })
 
 export const selectParams = (
-  { types, muni, invasive, googleMap },
+  { types, muni, invasive, bounds, zoom, center },
   extraParams = {},
-) => {
-  const bounds = googleMap.getBounds().toJSON()
-  const zoom = googleMap.getZoom()
-  const center = googleMap.getCenter().toJSON()
-
-  return {
+) => ({
     types: types && types.join(','),
     muni,
     invasive,
@@ -40,5 +35,4 @@ export const selectParams = (
     ...convertBounds(bounds),
     ...convertCenter(center),
     ...extraParams,
-  }
-}
+  })
