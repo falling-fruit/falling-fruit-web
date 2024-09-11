@@ -149,8 +149,8 @@ const DraggablePane = ({
     movePane('none', newTranslateY)
   }
 
-  const handleEnd = (clientY) => {
-    if (drawerDisabled) {
+  const handleEnd = () => {
+    if (!isDragging || drawerDisabled) {
       return
     }
     setIsDragging(false)
@@ -164,15 +164,8 @@ const DraggablePane = ({
     }
 
     movePane('transform 0.3s linear', positionToTranslateY[newPosition])
-
-    if (onPositionChange) {
-      const displacement = Math.abs(clientY - startY)
-      const isAboveTopBar = clientY < topPositionHeight
-      const isSignificantMove = displacement > 10 // Adjust this threshold as needed
-
-      if (isSignificantMove && !isAboveTopBar) {
-        onPositionChange(newPosition)
-      }
+    if (position !== newPosition) {
+      onPositionChange(newPosition)
     }
   }
 
