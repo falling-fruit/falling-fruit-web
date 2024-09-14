@@ -28,11 +28,11 @@ export const selectParams = (
   { types, muni, invasive, bounds, zoom, center },
   extraParams = {},
 ) => ({
-    types: types && types.join(','),
-    muni,
-    invasive,
-    zoom,
-    ...convertBounds(bounds),
-    ...convertCenter(center),
-    ...extraParams,
-  })
+  types: types && types.join(','),
+  muni,
+  invasive,
+  zoom,
+  ...convertBounds(bounds),
+  ...convertCenter(center),
+  ...extraParams,
+})
