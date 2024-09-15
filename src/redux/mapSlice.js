@@ -16,11 +16,9 @@ export const fetchMapLocations = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState()
     const { types, muni, invasive } = state.filter
-    const { googleMap } = state.map
-    if (googleMap) {
-      const bounds = googleMap.getBounds().toJSON()
-      const zoom = googleMap.getZoom()
-      const center = googleMap.getCenter().toJSON()
+    const { lastMapView } = state.viewport
+    if (lastMapView) {
+      const { bounds, zoom, center } = lastMapView
       return await getLocations(
         selectParams(
           { types, muni, invasive, bounds, zoom, center },
@@ -38,11 +36,9 @@ export const fetchMapClusters = createAsyncThunk(
   async (_, { getState }) => {
     const state = getState()
     const { types, muni, invasive } = state.filter
-    const { googleMap } = state.map
-    if (googleMap) {
-      const bounds = googleMap.getBounds().toJSON()
-      const zoom = googleMap.getZoom()
-      const center = googleMap.getCenter().toJSON()
+    const { lastMapView } = state.viewport
+    if (lastMapView) {
+      const { bounds, zoom, center } = lastMapView
       return await getClusters(
         selectParams({ types, muni, invasive, bounds, zoom: zoom + 1, center }),
       )
