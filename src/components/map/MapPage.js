@@ -174,8 +174,6 @@ const MapPage = ({ isDesktop }) => {
      * Something breaks when storing maps in redux so pass a reference to it
      */
     dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
-    dispatch(fetchLocations())
-    dispatch(fetchFilterCounts())
 
     // Set initial view in lastMapView
     const center = map.getCenter()
@@ -185,6 +183,8 @@ const MapPage = ({ isDesktop }) => {
       bounds: map.getBounds().toJSON(),
     }
     dispatch(updateLastMapView(initialView))
+    dispatch(fetchLocations())
+    dispatch(fetchFilterCounts())
   }
 
   const handleClusterClick = (cluster) => {
