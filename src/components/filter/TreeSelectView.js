@@ -17,7 +17,8 @@ const TreeSelectContainer = styled.ul`
   border-radius: 0.375em;
 
   @media ${({ theme }) => theme.device.mobile} {
-    height: 50vh;
+    min-height: 5vh;
+    max-height: 65vh;
   }
 `
 
