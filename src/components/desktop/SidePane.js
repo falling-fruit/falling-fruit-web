@@ -165,12 +165,7 @@ const SidePane = () => {
         <Route>
           <SettingsButton
             text={t('settings')}
-            onClick={() =>
-              history.push({
-                pathname: '/settings',
-                state: { fromPage: '/map' },
-              })
-            }
+            onClick={() => history.push('/settings')}
           />
         </Route>
       </Switch>

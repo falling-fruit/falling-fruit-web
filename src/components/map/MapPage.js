@@ -208,10 +208,7 @@ const MapPage = ({ isDesktop }) => {
 
   const handleLocationClick = (location) => {
     if (!isAddingLocation && !isEditingLocation) {
-      history.push({
-        pathname: `/locations/${location.id}`,
-        state: { fromPage: '/map' },
-      })
+      history.push(`/locations/${location.id}`)
     }
   }
 
@@ -224,10 +221,7 @@ const MapPage = ({ isDesktop }) => {
 
   const handleAddLocationClick = () => {
     if (currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-      history.push({
-        pathname: '/locations/new',
-        state: { fromPage: '/map' },
-      })
+      history.push('/locations/new')
     } else {
       toast.info(t('menu.zoom_in_to_add_location'))
     }

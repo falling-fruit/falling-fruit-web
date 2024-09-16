@@ -12,7 +12,7 @@ import { Tab } from '../ui/PageTabs'
 
 const Tabs = () => {
   const { t } = useTranslation()
-  const { pathname, state } = useLocation()
+  const { pathname } = useLocation()
   const history = useAppHistory()
   const { locationId, isBeingEdited, streetViewOpen } = useSelector(
     (state) => state.location,
@@ -44,30 +44,29 @@ const Tabs = () => {
     },
   ]
 
-  const findMatchingTabIndex = (currentPathname, fromPage) =>
+  const findMatchingTabIndex = (currentPathname) =>
     tabs.findIndex((tab) =>
-      tab.paths.some(
-        (tabPath) =>
-          matchPath(currentPathname, {
-            path: tabPath,
-            exact: false,
-            strict: false,
-          }) || tabPath === fromPage,
+      tab.paths.some((tabPath) =>
+        matchPath(currentPathname, {
+          path: tabPath,
+          exact: false,
+          strict: false,
+        }),
       ),
     )
 
   const [tabIndex, setTabIndex] = useState(() => {
-    const matchedIndex = findMatchingTabIndex(pathname, state?.fromPage)
+    const matchedIndex = findMatchingTabIndex(pathname)
     return matchedIndex !== -1 ? matchedIndex : DEFAULT_TAB
   })
 
   useEffect(() => {
-    const matchedIndex = findMatchingTabIndex(pathname, state?.fromPage)
+    const matchedIndex = findMatchingTabIndex(pathname)
     if (matchedIndex !== -1) {
       setTabIndex(matchedIndex)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, state?.fromPage])
+  }, [pathname])
 
   const handleTabChange = (newTabIndex) => {
     if (newTabIndex === 1 && locationId === 'new') {
@@ -80,15 +79,6 @@ const Tabs = () => {
     } else if (newTabIndex === 1 && locationId && streetViewOpen) {
       // We could also be viewing the panorama
       history.push(`/locations/${locationId}/panorama`)
-    } else if (
-      newTabIndex === 0 &&
-      pathname.includes('/locations') &&
-      state?.fromPage === '/list'
-    ) {
-      // TODO: this might be an unreachable branch
-      // (you can't go from a location page to the settings tab)
-      // but hard to understand intention or what fromPage is set to throughout the app
-      history.push(pathname, { state: { fromPage: '/map' } })
     } else {
       history.push(tabs[newTabIndex]?.paths[0])
     }
