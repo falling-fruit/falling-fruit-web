@@ -98,11 +98,11 @@ const EntryOverview = () => {
 
   const openStreetView = (event) => {
     event.stopPropagation()
-    history.push(`/locations/${locationId}/panorama`, { fromPage: '/map' })
+    history.push(`/locations/${locationId}/panorama`)
   }
   const closeStreetView = (event) => {
     event.stopPropagation()
-    history.push(`/locations/${locationId}`, { fromPage: '/map' })
+    history.push(`/locations/${locationId}`)
   }
 
   return (
@@ -178,12 +178,7 @@ const EntryOverview = () => {
                   {locationData.import_id && (
                     <>
                       {locationData.author && ' ('}
-                      <Link
-                        to={{
-                          pathname: `/imports/${locationData.import_id}`,
-                          state: { fromPage: `/locations/${locationData.id}` },
-                        }}
-                      >
+                      <Link to={`/imports/${locationData.import_id}`}>
                         #{locationData.import_id}
                       </Link>
                       {locationData.author && ')'}

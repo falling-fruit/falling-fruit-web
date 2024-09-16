@@ -38,14 +38,7 @@ const EntryReviews = () => {
               key={review.id}
               review={review}
               onImageClick={onReviewImageClick}
-              onEditClick={() =>
-                history.push({
-                  pathname: `/reviews/${review.id}/edit`,
-                  state: {
-                    fromPage: history.location.pathname,
-                  },
-                })
-              }
+              onEditClick={() => history.push(`/reviews/${review.id}/edit`)}
               editable
             />
           )

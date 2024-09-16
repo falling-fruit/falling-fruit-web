@@ -1,7 +1,7 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import { useFormikContext } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import {
@@ -140,7 +140,6 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
     ...reduxFormValues,
   }
   const history = useAppHistory()
-  const { state } = useLocation()
   const isDesktop = useIsDesktop()
 
   const dispatch = useDispatch()
@@ -201,7 +200,7 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
     if (editingId) {
       history.push(`/locations/${editingId}`)
     } else {
-      history.push(state?.fromPage ?? '/map')
+      history.push('/map')
     }
   }
 

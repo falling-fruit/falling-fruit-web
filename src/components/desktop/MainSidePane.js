@@ -27,10 +27,7 @@ const MainPane = () => {
 
   const handleAddLocation = () => {
     if (isZoomSufficient) {
-      history.push({
-        pathname: '/locations/new',
-        state: { fromPage: '/map' },
-      })
+      history.push('/locations/new')
     } else {
       toast.info(t('menu.zoom_in_to_add_location'))
     }
