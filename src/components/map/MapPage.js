@@ -1,5 +1,5 @@
 import GoogleMapReact from 'google-map-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -15,6 +15,7 @@ import { setGoogle } from '../../redux/mapSlice'
 import { fetchLocations, viewChangeAndFetch } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
+import throttle from '../../utils/throttle'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -110,11 +111,23 @@ const clusterBounds = ({ lat, lng, zoom }) => {
     east: bounds.east * (360 / EARTH_CIRCUMFERENCE),
   }
 }
+const makeHandleViewChange = (dispatch, googleMap, history) => (_) => {
+  const center = googleMap.getCenter()
+  const newView = {
+    center: { lat: center.lat(), lng: center.lng() },
+    zoom: googleMap.getZoom(),
+    bounds: googleMap.getBounds().toJSON(),
+  }
+  dispatch(viewChangeAndFetch(newView))
+  dispatch(updateLastMapView(newView))
+  history.changeView(newView)
+}
 
 const MapPage = ({ isDesktop }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
+  const handleViewChangeRef = useRef(() => void 0)
   const typesAccess = useSelector((state) => state.type.typesAccess)
 
   const [draggedPosition, setDraggedPosition] = useState(null)
@@ -170,6 +183,13 @@ const MapPage = ({ isDesktop }) => {
   }, [position, isDesktop])
 
   const apiIsLoaded = (map, maps) => {
+    /*
+     * Install the handler as we now have all variables
+     */
+    handleViewChangeRef.current = throttle(
+      makeHandleViewChange(dispatch, map, history),
+      1000,
+    )
     /*
      * Something breaks when storing maps in redux so pass a reference to it
      */
@@ -296,22 +316,7 @@ const MapPage = ({ isDesktop }) => {
           layerTypes={layerTypes}
           defaultCenter={initialView.center}
           defaultZoom={initialView.zoom}
-          onChange={(_) => {
-            // the argument is supposed to be a view
-            // but does not reliably work when bounds change
-            if (googleMap) {
-              const center = googleMap.getCenter()
-              const newView = {
-                center: { lat: center.lat(), lng: center.lng() },
-                zoom: googleMap.getZoom(),
-                bounds: googleMap.getBounds().toJSON(),
-              }
-              dispatch(viewChangeAndFetch(newView))
-              dispatch(updateLastMapView(newView))
-              history.changeView(newView)
-            }
-          }}
-          resetBoundsOnResize
+          onChange={handleViewChangeRef.current}
           onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
           yesIWantToUseGoogleMapApiInternals
         >
