@@ -55,7 +55,8 @@ const Modal = ({
   ...props
 }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const { Recaptcha, handlePresubmit } = useInvisibleRecaptcha(onSubmit)
+  const { Recaptcha, handlePresubmit: onPresubmit } =
+    useInvisibleRecaptcha(onSubmit)
 
   return (
     <StyledModal
@@ -68,7 +69,7 @@ const Modal = ({
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={isLoggedIn ? onSubmit : handlePresubmit}
+        onSubmit={isLoggedIn ? onSubmit : onPresubmit}
         initialStatus={{ dirty: initialDirty }}
       >
         {(props) => {
