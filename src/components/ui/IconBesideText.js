@@ -15,6 +15,11 @@ export default styled.div`
     margin: 0 0 0 4px;
   }
 
+  svg {
+    flex-shrink: 0;
+    align-self: center;
+  }
+
   ${($props) =>
     $props.onClick &&
     `
