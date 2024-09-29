@@ -70,7 +70,6 @@ const ExitButtonMobile = styled(ResetButton)`
   background: rgba(0, 0, 0, 0.65);
   border-radius: 50%;
   padding: 5px;
-  z-index: 10;
 `
 
 const ImageContainer = styled.div`
