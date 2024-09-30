@@ -82,7 +82,7 @@ const MobileLayout = () => {
         <MapPage />
       </div>
       {connectRoutes}
-      <TabPanels>
+      <TabPanels style={{ paddingBottom: '50px' }}>
         <TopBarSwitch />
         <Switch>
           {aboutRoutes}
@@ -141,6 +141,7 @@ const MobileLayout = () => {
               position: 'fixed',
               width: '100%',
               bottom: 0,
+              height: '50px',
             }}
           >
             {tabContent}
