@@ -7,6 +7,7 @@ import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { logout } from '../../redux/authSlice'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import aboutRoutes from '../about/aboutRoutes'
 import Button from '../ui/Button'
 import ResetButton from '../ui/ResetButton'
@@ -221,14 +222,17 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <LogoLink to="/map">
+      <LogoLink to={pathWithCurrentView('/map')}>
         <img src="/logo_orange.svg" alt="Falling Fruit logo" />
       </LogoLink>
       <nav>
         <div style={{ marginRight: 'auto' }}>
           <ul>
             <li>
-              <NavLink to="/map" activeClassName="active">
+              <NavLink
+                to={pathWithCurrentView('/map')}
+                activeClassName="active"
+              >
                 {t('glossary.map')}
               </NavLink>
             </li>
