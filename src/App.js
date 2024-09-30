@@ -9,6 +9,7 @@ import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Toast from './components/ui/Toast'
 import { store } from './redux/store'
+import { pathWithCurrentView } from './utils/appUrl'
 import AuthInitializer from './utils/AuthInitializer'
 import { ConnectedBreakpoint, useIsDesktop } from './utils/useBreakpoint'
 import { useGoogleAnalytics } from './utils/useGoogleAnalytics'
@@ -27,7 +28,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/map" />
+            <Redirect to={pathWithCurrentView('/map')} />
           </Route>
           <Route>
             <MainPage />
