@@ -29,7 +29,9 @@ const TypesHeader = ({ types }) => (
           </TypesAccordionItem>
         )
       } else {
-        return typeTitle
+        return (
+          <TypesAccordionItem key={type.id}>{typeTitle}</TypesAccordionItem>
+        )
       }
     })}
   </TypesAccordion>
