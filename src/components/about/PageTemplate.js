@@ -15,7 +15,7 @@ const PageTemplateWrapper = styled.article`
   max-width: 950px;
   width: 66%;
   height: inherit;
-  margin: 56px auto;
+  margin: 28px auto;
   overflow-wrap: break-word;
   font-family: ${({ theme }) => theme.fonts};
   font-style: normal;
@@ -24,7 +24,7 @@ const PageTemplateWrapper = styled.article`
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
     padding: 0 23px 20px;
-    margin-top: 28px;
+    margin: 28px auto 0 auto;
   }
 
   h1,

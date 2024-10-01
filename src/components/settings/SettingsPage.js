@@ -21,7 +21,9 @@ import Transit from './mapTiles/transit.png'
 const Page = styled.div`
   box-sizing: border-box;
   height: 100%;
-  padding: 26px;
+  padding-top: 26px;
+  padding-left: 26px;
+  padding-right: 26px;
   overflow: auto;
   ${({ desktop }) =>
     desktop && 'padding-top: 0; h3:first-child { margin-top: 8px; }'}
