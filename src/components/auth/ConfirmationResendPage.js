@@ -5,6 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { requestConfirmUser } from '../../utils/api'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Column } from './AuthWrappers'
@@ -19,7 +20,7 @@ const ConfirmationResendPage = () => {
 
   if (!isLoading && user) {
     toast.info('You are already signed in.')
-    return <Redirect to="/map" />
+    return <Redirect to={pathWithCurrentView('/map')} />
   }
 
   const handleSubmit = async (values) => {

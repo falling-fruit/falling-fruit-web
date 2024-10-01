@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Entry from '../entry/Entry'
 import { EditLocationForm } from '../form/EditLocation'
@@ -155,7 +156,7 @@ const SidePane = () => {
               }
             </Route>
             <Route>
-              <Redirect to="/map" />
+              <Redirect to={pathWithCurrentView('/map')} />
             </Route>
           </Switch>
         </Route>
