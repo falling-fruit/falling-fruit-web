@@ -144,7 +144,14 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
 
   const dispatch = useDispatch()
 
-  const { position, isLoading } = useSelector((state) => state.location)
+  const { position, isLoading, location } = useSelector(
+    (state) => state.location,
+  )
+  const positionDirty =
+    !editingId ||
+    (position &&
+      location &&
+      !(position.lat === location.lat && position.lng === location.lng))
 
   const formikSteps = [
     <Step key={1} label="Step 1" validate={validateLocationStep}>
@@ -212,12 +219,16 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
       stepped={stepped}
       renderButtons={(formikProps) => {
         const { isSubmitting, isValid, dirty } = formikProps
+        const formDirty = dirty || positionDirty
         return (
           <ProgressButtons>
             <Button secondary type="button" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button disabled={isSubmitting || !isValid || !dirty} type="submit">
+            <Button
+              disabled={isSubmitting || !isValid || !formDirty}
+              type="submit"
+            >
               {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
           </ProgressButtons>

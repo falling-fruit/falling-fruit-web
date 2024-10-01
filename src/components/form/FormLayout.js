@@ -39,7 +39,8 @@ export const FormWrapper = ({
 }) => {
   const StepDisplay = stepped ? FormikStepper : FormikAllSteps
   const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const { Recaptcha, onPresubmit } = useInvisibleRecaptcha(onSubmit)
+  const { Recaptcha, handlePresubmit: onPresubmit } =
+    useInvisibleRecaptcha(onSubmit)
 
   return (
     <StyledForm>
