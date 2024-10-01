@@ -16,6 +16,7 @@ import {
 import { useAppHistory } from '../../utils/useAppHistory'
 import DraggablePane from '../ui/DraggablePane'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
+import { zIndex } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
@@ -47,7 +48,7 @@ const RevealedFromUnderneath = styled.div`
       ${-progress * targetHeight}px
     );
     transition: transform 0.15s linear;
-    z-index: -10;
+    z-index: -1;
   `}
 `
 const WhitespacePlaceholder = styled.div`
@@ -75,7 +76,7 @@ const Buttons = styled.div`
   left: 0;
   right: 0;
   top: 0;
-  z-index: 12;
+  z-index: ${zIndex.topBar + 1};
   padding: 16px;
   display: flex;
   justify-content: space-between;
@@ -111,6 +112,9 @@ const EntryMobile = () => {
     isLoading,
     pane: { drawerFullyOpen, tabIndex, drawerDisabled },
   } = useSelector((state) => state.location)
+  const { isOpenInMobileLayout: filterOpen } = useSelector(
+    (state) => state.filter,
+  )
   const hasImages =
     reviews &&
     reviews.filter((review) => review.photos && review.photos.length > 0)
@@ -133,6 +137,7 @@ const EntryMobile = () => {
   return (
     <>
       <DraggablePane
+        displayOverTopBar={!filterOpen || drawerFullyOpen}
         topPositionHeight={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
         middlePositionScreenRatio={0.7}
         position={drawerFullyOpen || drawerDisabled ? 'top' : 'middle'}

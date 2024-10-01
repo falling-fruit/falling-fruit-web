@@ -7,6 +7,8 @@ import React, {
 } from 'react'
 import styled from 'styled-components/macro'
 
+import { zIndex } from '../ui/GlobalStyle'
+
 const PaneContainer = styled.div`
   position: fixed;
   left: 0;
@@ -17,7 +19,8 @@ const PaneContainer = styled.div`
   touch-action: ${(props) => (props.isMiddlePosition ? 'none' : 'auto')};
   max-width: 100%;
   height: 100%;
-  z-index: 11;
+  z-index: ${(props) =>
+    props.displayOverTopBar ? zIndex.topBar + 1 : zIndex.topBar - 1};
   transition: transform 0.3s linear;
   background: ${(props) => (props.hasImages ? 'white' : 'none')};
   padding-top: ${(props) => (props.hasImages ? '0' : '10px')};
@@ -48,6 +51,7 @@ const DraggablePane = ({
   updateProgress,
   hasImages,
   showMoveElement,
+  displayOverTopBar,
 }) => {
   const isMiddlePosition = position === POSITIONS.MIDDLE
   const paneRef = useRef(null)
@@ -225,6 +229,7 @@ const DraggablePane = ({
       hasImages={hasImages}
       showMoveElement={showMoveElement}
       isMiddlePosition={isMiddlePosition}
+      displayOverTopBar={displayOverTopBar}
     >
       <DragHandle showMoveElement={showMoveElement} />
       {children}
