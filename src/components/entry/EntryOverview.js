@@ -33,7 +33,6 @@ const hasSeasonality = (locationData) =>
   )
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
-  white-space: pre-line;
   word-break: normal;
   overflow-wrap: anywhere;
   color: ${({ theme }) => theme.secondaryText};
