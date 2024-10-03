@@ -33,6 +33,6 @@ export const selectParams = (
   invasive,
   zoom,
   ...convertBounds(bounds),
-  ...convertCenter(center),
+  ...(center && convertCenter(center)), //If provided, the API will sort the locations returned by distance from center
   ...extraParams,
 })
