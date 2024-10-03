@@ -13,7 +13,7 @@ export const fetchFilterCounts = createAsyncThunk(
     const isOpen = state.filter.isOpenInMobileLayout || state.misc.isDesktop
     if (isOpen && lastMapView) {
       const { muni, invasive } = state.filter
-      const { bounds, zoom, center } = lastMapView
+      const { bounds, zoom, center: _ } = lastMapView
       const counts = await getTypeCounts(
         // Match zoom level used in getClusters
         // Wojtek: not sure why?
@@ -23,7 +23,7 @@ export const fetchFilterCounts = createAsyncThunk(
           invasive,
           bounds,
           zoom: zoom + 1,
-          center,
+          center: undefined,
         }),
       )
 
