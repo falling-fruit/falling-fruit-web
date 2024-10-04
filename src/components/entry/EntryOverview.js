@@ -8,12 +8,13 @@ import {
 import { Flag, Map } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
+import { partiallyClosePaneDrawer } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
@@ -72,8 +73,10 @@ const EntryOverview = () => {
     streetViewOpen,
     locationId,
     location: locationData,
+    pane,
   } = useSelector((state) => state.location)
   const { locationsWithoutPanorama } = useSelector((state) => state.misc)
+  const dispatch = useDispatch()
 
   const { t, i18n } = useTranslation()
 
@@ -92,6 +95,9 @@ const EntryOverview = () => {
     })
     if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
       googleMap?.setZoom(MIN_LOCATION_ZOOM)
+    }
+    if (pane.drawerFullyOpen) {
+      dispatch(partiallyClosePaneDrawer())
     }
   }
 
