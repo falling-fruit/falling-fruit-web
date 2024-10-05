@@ -13,9 +13,11 @@ import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
 import SocialButtons from '../ui/SocialButtons'
 import Bicycling from './mapTiles/bicycling.png'
+import OSM from './mapTiles/osm.png'
 import Road from './mapTiles/road.png'
 import Satellite from './mapTiles/satellite.png'
 import Terrain from './mapTiles/terrain.png'
+import TonerLite from './mapTiles/toner-lite.png'
 import Transit from './mapTiles/transit.png'
 
 const Page = styled.div`
@@ -48,6 +50,8 @@ const Page = styled.div`
     color: ${({ theme }) => theme.secondaryText};
   }
 `
+
+const GoogleMapTypes = ['roadmap', 'terrain', 'hybrid']
 
 const StyledListEntry = styled(ListEntry)`
   margin: 7px -26px;
@@ -152,57 +156,86 @@ const SettingsPage = ({ desktop }) => {
         }
       />
 
-      <h5>{t('overlay')}</h5>
-
       <RadioTiles
         options={[
           {
-            label: t('side_menu.bicycle'),
-            value: 'BicyclingLayer',
-            image: Bicycling,
+            label: 'OSM',
+            value: 'osm',
+            image: OSM,
           },
           {
-            label: t('side_menu.transit'),
-            value: 'TransitLayer',
-            image: Transit,
+            label: 'B+W',
+            value: 'toner-lite',
+            image: TonerLite,
           },
         ]}
-        value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
-        onChange={(value) => {
-          if (value === settings.mapLayers[0]) {
-            value = null
-          }
+        value={settings.mapType}
+        onChange={(value) =>
           dispatch(
             updateSettings({
-              mapLayers: value ? [value] : [],
+              mapType: value,
             }),
           )
-        }}
+        }
       />
-      {[
-        {
-          field: 'showBusinesses',
-          label: t('poi'),
-        },
-      ].map(({ field, label }) => (
-        <LabeledRow
-          key={field}
-          left={
-            <Checkbox
-              id={field}
-              onClick={(e) =>
-                dispatch(
-                  updateSettings({
-                    [field]: e.target.checked,
-                  }),
-                )
+
+      {/* Display only if Google Map Type selected */}
+      {GoogleMapTypes.includes(settings.mapType) && (
+        <>
+          <h5>{t('overlay')}</h5>
+          <RadioTiles
+            options={[
+              {
+                label: t('side_menu.bicycle'),
+                value: 'BicyclingLayer',
+                image: Bicycling,
+              },
+              {
+                label: t('side_menu.transit'),
+                value: 'TransitLayer',
+                image: Transit,
+              },
+            ]}
+            value={
+              settings.mapLayers.length === 0 ? null : settings.mapLayers[0]
+            }
+            onChange={(value) => {
+              if (value === settings.mapLayers[0]) {
+                value = null
               }
-              checked={settings[field]}
+              dispatch(
+                updateSettings({
+                  mapLayers: value ? [value] : [],
+                }),
+              )
+            }}
+          />
+          {[
+            {
+              field: 'showBusinesses',
+              label: t('poi'),
+            },
+          ].map(({ field, label }) => (
+            <LabeledRow
+              key={field}
+              left={
+                <Checkbox
+                  id={field}
+                  onClick={(e) =>
+                    dispatch(
+                      updateSettings({
+                        [field]: e.target.checked,
+                      }),
+                    )
+                  }
+                  checked={settings[field]}
+                />
+              }
+              label={<label htmlFor={field}>{label}</label>}
             />
-          }
-          label={<label htmlFor={field}>{label}</label>}
-        />
-      ))}
+          ))}
+        </>
+      )}
 
       <h3>{t('side_menu.regional')}</h3>
 
