@@ -67,7 +67,7 @@ const AboutDatasetPage = () => {
         <a href={url} target="_blank" rel="noreferrer">
           {url}
         </a>
-        <p>{comments}</p>
+        <p style={{ whiteSpace: 'pre-line' }}>{comments}</p>
         <IconBesideText>
           <Pin color={theme.secondaryText} size={20} />
           <p>{muni ? 'Tree inventory' : 'Community map'}</p>
