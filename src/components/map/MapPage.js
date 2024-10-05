@@ -208,12 +208,20 @@ const MapPage = ({ isDesktop }) => {
   }
 
   const handleClusterClick = (cluster) => {
-    const bounds = clusterBounds({
-      lat: cluster.lat,
-      lng: cluster.lng,
-      zoom: currentZoom + 1,
-    })
-    googleMap?.fitBounds(bounds)
+    if (cluster.count === 1) {
+      googleMap?.panTo({
+        lat: cluster.lat,
+        lng: cluster.lng,
+      })
+      googleMap?.setZoom(VISIBLE_CLUSTER_ZOOM_LIMIT + 1)
+    } else {
+      const bounds = clusterBounds({
+        lat: cluster.lat,
+        lng: cluster.lng,
+        zoom: currentZoom + 1,
+      })
+      googleMap?.fitBounds(bounds)
+    }
   }
 
   const handleGeolocationClick = () => {
