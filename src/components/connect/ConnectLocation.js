@@ -20,12 +20,21 @@ const ConnectLocation = ({
 }) => {
   const dispatch = useDispatch()
   const { initialView, googleMap } = useSelector((state) => state.map)
-  const { position } = useSelector((state) => state.location)
+  const { position, location } = useSelector((state) => state.location)
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
   const [hasCentered, setHasCentered] = useState(false)
 
   useEffect(() => {
+    if (location && `${locationId}` === `${location.id}`) {
+      /*
+       * We redo this effect each time locationId changes
+       * but the component itself could be getting rerendered
+       * (e.g. location to settings and back)
+       * so if data is present in redux, don't fetch
+       * */
+      return
+    }
     dispatch(
       fetchLocationData({
         locationId,
