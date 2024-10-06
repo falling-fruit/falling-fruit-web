@@ -145,10 +145,15 @@ const Review = ({
       <blockquote>{review.comment}</blockquote>
       {!editable && (
         <cite>
-          Reviewed on {formatISOString(review.created_at)} by{' '}
-          {review.author ?? 'Anonymous'}{' '}
-          {review.observed_on && (
-            <>(visited {formatISOString(review.observed_on)})</>
+          Reviewed on {formatISOString(review.created_at)}
+          {review.author && (
+            <>
+              {' '}
+              by {review.author}
+              {review.observed_on && (
+                <> (visited {formatISOString(review.observed_on)})</>
+              )}
+            </>
           )}
         </cite>
       )}
