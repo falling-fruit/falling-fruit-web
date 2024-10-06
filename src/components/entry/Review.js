@@ -146,14 +146,9 @@ const Review = ({
       {!editable && (
         <cite>
           Reviewed on {formatISOString(review.created_at)}
-          {review.author && (
-            <>
-              {' '}
-              by {review.author}
-              {review.observed_on && (
-                <> (visited {formatISOString(review.observed_on)})</>
-              )}
-            </>
+          {review.author && <> by {review.author}</>}
+          {review.observed_on && (
+            <> (visited {formatISOString(review.observed_on)})</>
           )}
         </cite>
       )}
