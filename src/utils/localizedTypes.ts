@@ -147,6 +147,14 @@ export class TypesAccess {
       localize(newType, language),
     ])
   }
+
+  selectableTypesWithCategories(...categories: string[]): LocalizedType[] {
+    return this.localizedTypes.filter(
+      (t) =>
+        t.id !== PENDING_ID &&
+        t.categories.some((category) => categories.includes(category)),
+    )
+  }
 }
 
 const toDisplayOrder = (localizedTypes: LocalizedType[]) =>
