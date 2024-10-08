@@ -325,9 +325,11 @@ const MapPage = ({ isDesktop }) => {
         -
       </ZoomOutButton>
 
-      <Attribution enabled={mapType === 'osm' || mapType === 'toner-lite'}>
-        {mapType === 'osm' && '© OpenStreetMap contributors'}
-        {mapType === 'toner-lite' &&
+      <Attribution
+        enabled={mapType === 'osm-standard' || mapType === 'osm-toner-lite'}
+      >
+        {mapType === 'osm-standard' && '© OpenStreetMap contributors'}
+        {mapType === 'osm-toner-lite' &&
           '© Stadia Maps © Stamen Design © OpenMapTiles © OpenStreetMap contributors'}
       </Attribution>
       {isGeolocationOpen(geolocationState) && <ConnectGeolocation />}
@@ -366,7 +368,7 @@ const MapPage = ({ isDesktop }) => {
           onChange={handleViewChangeRef.current}
           onGoogleApiLoaded={({ map, maps }) => {
             map.mapTypes.set(
-              'osm',
+              'osm-standard',
               new maps.ImageMapType({
                 getTileUrl: (coord, zoom) => {
                   const { x, y, z } = getTileCoordinates(coord, zoom)
@@ -377,7 +379,7 @@ const MapPage = ({ isDesktop }) => {
               }),
             )
             map.mapTypes.set(
-              'toner-lite',
+              'osm-toner-lite',
               new maps.ImageMapType({
                 getTileUrl: (coord, zoom) => {
                   const { x, y, z } = getTileCoordinates(coord, zoom)
