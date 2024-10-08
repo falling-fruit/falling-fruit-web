@@ -302,9 +302,12 @@ const MapPage = ({ isDesktop }) => {
         <GoogleMapReact
           onClick={handleNonspecificClick}
           bootstrapURLKeys={bootstrapURLKeys}
-          options={() => ({
+          options={(googleMaps) => ({
             mapTypeId: mapType,
             disableDefaultUI: true,
+            rotateControlOptions: {
+              position: googleMaps.ControlPosition.INLINE_START_BLOCK_END,
+            },
             minZoom: MIN_ZOOM,
             // Toggle all basemap icons
             // https://developers.google.com/maps/documentation/javascript/style-reference
