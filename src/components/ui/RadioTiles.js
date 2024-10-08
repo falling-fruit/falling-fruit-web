@@ -4,7 +4,10 @@ import TileButton from './TileButton'
 
 const TileRow = styled.div`
   display: flex;
-  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 5px;
+  /* HACK: Override > *:not(:last-child) in SettingsPage */
+  margin-bottom: 10px !important;
 `
 
 const RadioTiles = ({ options, value: selectedValue, onChange }) => (

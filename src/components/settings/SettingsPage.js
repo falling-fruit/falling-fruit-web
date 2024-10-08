@@ -23,12 +23,22 @@ import OSMTonerLite from './mapTiles/osm-toner-lite.png'
 const Page = styled.div`
   box-sizing: border-box;
   height: 100%;
-  padding-top: 26px;
-  padding-left: 26px;
-  padding-right: 26px;
   overflow: auto;
-  ${({ desktop }) =>
-    desktop && 'padding-top: 0; h3:first-child { margin-top: 8px; }'}
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-top: 26px;
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+
+  @media ${({ theme }) => theme.device.desktop} {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    h3:first-child {
+      margin-top: 8px;
+    }
+  }
 
   > h2 {
     margin-top: 0;
