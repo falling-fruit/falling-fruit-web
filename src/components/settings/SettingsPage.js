@@ -12,13 +12,13 @@ import ListEntry from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
 import SocialButtons from '../ui/SocialButtons'
-import Bicycling from './mapTiles/bicycling.png'
-import OSM from './mapTiles/osm.png'
-import Road from './mapTiles/road.png'
-import Satellite from './mapTiles/satellite.png'
-import Terrain from './mapTiles/terrain.png'
-import TonerLite from './mapTiles/toner-lite.png'
-import Transit from './mapTiles/transit.png'
+import GoogleBicycling from './mapTiles/google-bicycling.png'
+import GoogleRoadmap from './mapTiles/google-roadmap.png'
+import GoogleSatellite from './mapTiles/google-satellite.png'
+import GoogleTerrain from './mapTiles/google-terrain.png'
+import GoogleTransit from './mapTiles/google-transit.png'
+import OSMStandard from './mapTiles/osm-standard.png'
+import OSMTonerLite from './mapTiles/osm-toner-lite.png'
 
 const Page = styled.div`
   box-sizing: border-box;
@@ -126,24 +126,24 @@ const SettingsPage = ({ desktop }) => {
 
       <h3>{t('glossary.map')}</h3>
 
-      <h5>{t('basemap')}</h5>
+      <h5>Google</h5>
 
       <RadioTiles
         options={[
           {
             label: t('roadmap'),
             value: 'roadmap',
-            image: Road,
+            image: GoogleRoadmap,
           },
           {
             label: t('side_menu.terrain'),
             value: 'terrain',
-            image: Terrain,
+            image: GoogleTerrain,
           },
           {
             label: t('side_menu.satellite'),
             value: 'hybrid',
-            image: Satellite,
+            image: GoogleSatellite,
           },
         ]}
         value={settings.mapType}
@@ -155,18 +155,81 @@ const SettingsPage = ({ desktop }) => {
           )
         }
       />
+
+      <div
+        style={
+          GoogleMapTypes.includes(settings.mapType)
+            ? {}
+            : {
+                opacity: '50%',
+                pointerEvents: 'none',
+              }
+        }
+      >
+        <RadioTiles
+          options={[
+            {
+              label: t('side_menu.bicycle'),
+              value: 'BicyclingLayer',
+              image: GoogleBicycling,
+            },
+            {
+              label: t('side_menu.transit'),
+              value: 'TransitLayer',
+              image: GoogleTransit,
+            },
+          ]}
+          value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
+          onChange={(value) => {
+            if (value === settings.mapLayers[0]) {
+              value = null
+            }
+            dispatch(
+              updateSettings({
+                mapLayers: value ? [value] : [],
+              }),
+            )
+          }}
+        />
+        {[
+          {
+            field: 'showBusinesses',
+            label: t('poi'),
+          },
+        ].map(({ field, label }) => (
+          <LabeledRow
+            key={field}
+            left={
+              <Checkbox
+                id={field}
+                onClick={(e) =>
+                  dispatch(
+                    updateSettings({
+                      [field]: e.target.checked,
+                    }),
+                  )
+                }
+                checked={settings[field]}
+              />
+            }
+            label={<label htmlFor={field}>{label}</label>}
+          />
+        ))}
+      </div>
+
+      <h5>OpenStreetMap</h5>
 
       <RadioTiles
         options={[
           {
-            label: 'OSM',
-            value: 'osm',
-            image: OSM,
+            label: 'Standard',
+            value: 'osm-standard',
+            image: OSMStandard,
           },
           {
-            label: 'B+W',
-            value: 'toner-lite',
-            image: TonerLite,
+            label: 'Toner Lite',
+            value: 'osm-toner-lite',
+            image: OSMTonerLite,
           },
         ]}
         value={settings.mapType}
@@ -178,64 +241,6 @@ const SettingsPage = ({ desktop }) => {
           )
         }
       />
-
-      {/* Display only if Google Map Type selected */}
-      {GoogleMapTypes.includes(settings.mapType) && (
-        <>
-          <h5>{t('overlay')}</h5>
-          <RadioTiles
-            options={[
-              {
-                label: t('side_menu.bicycle'),
-                value: 'BicyclingLayer',
-                image: Bicycling,
-              },
-              {
-                label: t('side_menu.transit'),
-                value: 'TransitLayer',
-                image: Transit,
-              },
-            ]}
-            value={
-              settings.mapLayers.length === 0 ? null : settings.mapLayers[0]
-            }
-            onChange={(value) => {
-              if (value === settings.mapLayers[0]) {
-                value = null
-              }
-              dispatch(
-                updateSettings({
-                  mapLayers: value ? [value] : [],
-                }),
-              )
-            }}
-          />
-          {[
-            {
-              field: 'showBusinesses',
-              label: t('poi'),
-            },
-          ].map(({ field, label }) => (
-            <LabeledRow
-              key={field}
-              left={
-                <Checkbox
-                  id={field}
-                  onClick={(e) =>
-                    dispatch(
-                      updateSettings({
-                        [field]: e.target.checked,
-                      }),
-                    )
-                  }
-                  checked={settings[field]}
-                />
-              }
-              label={<label htmlFor={field}>{label}</label>}
-            />
-          ))}
-        </>
-      )}
 
       <h3>{t('side_menu.regional')}</h3>
 
