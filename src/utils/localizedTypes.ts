@@ -18,6 +18,7 @@ export type LocalizedType = {
   commonName: string
   taxonomicRank: number
   urls: { [url: string]: string }
+  categories: string[]
 }
 
 type TypeSelectMenuEntry = {
@@ -44,6 +45,7 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
     commonName,
     taxonomicRank: type.taxonomic_rank || 0,
     urls: type.urls || {},
+    categories: type.categories || [],
   }
 }
 
@@ -168,6 +170,7 @@ export const typesAccessInLanguage = (
       commonName: 'Pending Review',
       taxonomicRank: 0,
       urls: {},
+      categories: [],
     })
   }
   return createTypesAccess(toDisplayOrder(localizedTypes))
