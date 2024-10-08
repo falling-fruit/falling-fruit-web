@@ -142,16 +142,20 @@ const makeHandleViewChange = (dispatch, googleMap, history) => (_) => {
  *
  * @param {Object} coord - Google Maps world coordinates.
  * @param {number} zoom - Google Maps zoom level.
- * @returns {Object} XYZ tile coordinates.
+ * @returns {Object} XYZ tile coordinates. `y` is `null` if out of bounds.
  */
 function getTileCoordinates(coord, zoom) {
   // Wrap x (longitude) at 180th meridian properly
-  var tilesPerGlobe = 1 << zoom
-  var x = coord.x % tilesPerGlobe
+  const tilesPerGlobe = 1 << zoom
+  let x = coord.x % tilesPerGlobe
   if (x < 0) {
     x = tilesPerGlobe + x
   }
-  return { x: x, y: coord.y, z: zoom }
+  let y = coord.y
+  if (coord.y < 0 || coord.y >= tilesPerGlobe) {
+    y = null
+  }
+  return { x, y, z: zoom }
 }
 
 const MapPage = ({ isDesktop }) => {
@@ -369,7 +373,9 @@ const MapPage = ({ isDesktop }) => {
               new maps.ImageMapType({
                 getTileUrl: (coord, zoom) => {
                   const { x, y, z } = getTileCoordinates(coord, zoom)
-                  return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
+                  if (y !== null) {
+                    return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
+                  }
                 },
                 tileSize: new maps.Size(256, 256),
                 maxZoom: 19,
@@ -380,7 +386,9 @@ const MapPage = ({ isDesktop }) => {
               new maps.ImageMapType({
                 getTileUrl: (coord, zoom) => {
                   const { x, y, z } = getTileCoordinates(coord, zoom)
-                  return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
+                  if (y !== null) {
+                    return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
+                  }
                 },
                 tileSize: new maps.Size(256, 256),
                 maxZoom: 20,
