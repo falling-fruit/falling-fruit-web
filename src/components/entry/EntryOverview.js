@@ -40,6 +40,8 @@ const Description = styled.section`
 
   p {
     font-size: 1rem;
+    /* Display line breaks in description */
+    white-space: pre-line;
   }
 
   & > *:not(:first-child) {
