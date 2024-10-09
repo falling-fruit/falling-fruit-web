@@ -85,6 +85,8 @@ const Attribution = styled.div`
   margin: 0;
   z-index: 100;
   display: ${(props) => (props.enabled ? 'block' : 'none')};
+  min-width: 240px;
+  text-align: center;
 `
 
 const EARTH_RADIUS = 6378137 // meters
