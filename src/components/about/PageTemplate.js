@@ -71,11 +71,33 @@ const PageTemplateWrapper = styled.article`
   }
 
   .content {
-    display: inline-flex;
-    align-items: flex-start;
     margin-top: 10px;
+
     p {
       margin: 0;
+    }
+
+    @media ${({ theme }) => theme.device.desktop} {
+      display: inline-flex;
+      align-items: flex-start;
+    }
+
+    @media ${({ theme }) => theme.device.mobile} {
+      overflow: hidden;
+      margin-top: 20px;
+
+      img {
+        max-width: 100%;
+        height: 100%;
+        float: left;
+        clear: left;
+      }
+    }
+
+    .div-aux {
+      float: left;
+      width: 0px;
+      height: 170px;
     }
   }
 `
