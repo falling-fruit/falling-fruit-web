@@ -88,16 +88,17 @@ const PageTemplateWrapper = styled.article`
 
       img {
         max-width: 100%;
-        height: 100%;
+        height: auto;
         float: left;
         clear: left;
+        margin-bottom: 10px;
       }
     }
 
-    .div-aux {
-      float: left;
-      width: 0px;
-      height: 170px;
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
     }
   }
 `

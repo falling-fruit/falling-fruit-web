@@ -107,7 +107,6 @@ const Project = () => (
       <h2>Staff</h2>
       <div className="content">
         <img src="https://fallingfruit.org/ethan_welty.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <em>Executive Director</em>
           <br />
@@ -137,7 +136,6 @@ const Project = () => (
       <h2>Board of directors</h2>
       <div className="content">
         <img src="https://fallingfruit.org/jeff_wanner.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <em>President</em>
           <br />
@@ -160,7 +158,6 @@ const Project = () => (
       </div>
       <div className="content">
         <img src="https://fallingfruit.org/craig_durkin.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>Craig Durkin</b>
           <br />
@@ -179,7 +176,6 @@ const Project = () => (
       </div>
       <div className="content">
         <img src="https://fallingfruit.org/emily_sigman.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>Emily Sigman</b>
           <br />
@@ -208,7 +204,6 @@ const Project = () => (
       <h2>Board of advisors</h2>
       <div className="content">
         <img src="https://fallingfruit.org/alan_gibson.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>Alan Gibson</b>
           <br />
@@ -231,7 +226,6 @@ const Project = () => (
       </div>
       <div className="content">
         <img src="https://fallingfruit.org/ana_carolina_de_lima.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>Ana Carolina de Lima</b>
           <br />
@@ -252,7 +246,6 @@ const Project = () => (
       </div>
       <div className="content">
         <img src="https://fallingfruit.org/caleb_phillips.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>Caleb Phillips</b>
           <br />
@@ -276,7 +269,6 @@ const Project = () => (
       </div>
       <div className="content">
         <img src="https://fallingfruit.org/cristina_rubke.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>Cristina Rubke</b>
           <br />
@@ -303,7 +295,6 @@ const Project = () => (
       </div>
       <div className="content">
         <img src="https://fallingfruit.org/david_craft.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>David Craft</b>
           <br />
@@ -324,7 +315,6 @@ const Project = () => (
       </div>
       <div className="content">
         <img src="https://fallingfruit.org/tristram_stuart.jpg" alt="" />
-        <div className="div-aux"></div>
         <p>
           <b>Tristram Stuart</b>
           <br />
