@@ -9,9 +9,18 @@ const FilterIconButton = (props) => {
   const { typesAccess } = useSelector((state) => state.type)
 
   const isInitialized = !typesAccess.isEmpty && types !== null
+
+  const defaultSelectionSet = new Set(
+    typesAccess
+      .selectableTypesWithCategories('forager', 'freegan')
+      .map((t) => t.id),
+  )
+
+  const currentSelectionSet = new Set(types)
+
   const isDefaultChoice =
-    types?.length ===
-      typesAccess.selectableTypesWithCategories('forager', 'freegan').length &&
+    defaultSelectionSet.size === currentSelectionSet.size &&
+    [...defaultSelectionSet].every((id) => currentSelectionSet.has(id)) &&
     muni === true &&
     invasive === false
 
