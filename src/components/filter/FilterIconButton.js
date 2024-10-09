@@ -10,7 +10,8 @@ const FilterIconButton = (props) => {
 
   const isInitialized = !typesAccess.isEmpty && types !== null
   const isDefaultChoice =
-    types?.length === typesAccess.selectableTypes().length &&
+    types?.length ===
+      typesAccess.selectableTypesWithCategories('forager', 'freegan').length &&
     muni === true &&
     invasive === false
 
