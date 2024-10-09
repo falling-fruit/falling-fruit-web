@@ -31,7 +31,6 @@ class PanoramaWithMarker {
         radius: 50,
       })
 
-      this.marker.setMap(this.panorama)
       const panoLocation = panoData.data.location.latLng
       const heading = this.googleMaps.geometry.spherical.computeHeading(
         panoLocation,
@@ -39,7 +38,24 @@ class PanoramaWithMarker {
       )
       this.panorama.setPosition(panoLocation)
       this.panorama.setPov({ heading, pitch: 0 })
+
       this.panorama.setVisible(true)
+      this.marker.setMap(this.panorama)
+
+      // bug: the marker does not immediately appear
+      // until the user interacts with the screen
+      // programatically jiggle the screen slightly as a workaround
+      setTimeout(() => {
+        const currentPov = this.panorama.getPov()
+        this.panorama.setPov({
+          ...currentPov,
+          heading: currentPov.heading + 0.1,
+        })
+        setTimeout(() => {
+          this.panorama.setPov(currentPov)
+        }, 50)
+      }, 100)
+
       return {}
     } catch (error) {
       return { error }
