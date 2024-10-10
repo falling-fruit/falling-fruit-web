@@ -642,6 +642,8 @@ export interface components {
       taxonomic_rank?: number | null;
       /** Common names, starting with the preferred synonym, by language code (e.g. `en`) and optional region code (e.g. `en_us`). Currently, only `en` can be set. */
       common_names?: { [key: string]: string[] };
+      /**Categories associated with the type */
+      categories?: string[];
     };
     /** Type properties that can be submitted. At least one name (in `common_names.en` or `scientific_names`) is required. */
     SubmitType: components["schemas"]["BaseType"] & {
