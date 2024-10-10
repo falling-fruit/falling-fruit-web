@@ -9,6 +9,21 @@ import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
+// Helper function to calculate distance between two points
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371 // Radius of the Earth in kilometers
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLon = ((lon2 - lon1) * Math.PI) / 180
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  return R * c // Distance in kilometers
+}
+
 const MIN_TRACKING_ZOOM = 16
 
 export const fetchMapLocations = createAsyncThunk(
@@ -159,7 +174,78 @@ export const mapSlice = createSlice({
         { lat: sw.lat, lng: sw.lng },
         { lat: ne.lat, lng: ne.lng },
       )
+
+      // 1. Remember the initial view
+      const initialView = {
+        center: state.googleMap.getCenter().toJSON(),
+        zoom: state.googleMap.getZoom(),
+      }
+
+      // 2. Test newFallback
+      const newFallback = action.payload.place.newFallback.view
+      state.googleMap.setCenter(newFallback.center)
+      state.googleMap.setZoom(newFallback.zoom)
+      const newFallbackResult = {
+        center: state.googleMap.getCenter().toJSON(),
+        zoom: state.googleMap.getZoom(),
+      }
+
+      // Reset to initial view
+      state.googleMap.setCenter(initialView.center)
+      state.googleMap.setZoom(initialView.zoom)
+
+      // 3. Test oldFallback
+      const oldFallback = action.payload.place.oldFallback.view
+      state.googleMap.setCenter(oldFallback.center)
+      state.googleMap.setZoom(oldFallback.zoom)
+      const oldFallbackResult = {
+        center: state.googleMap.getCenter().toJSON(),
+        zoom: state.googleMap.getZoom(),
+      }
+
+      // Reset to initial view
+      state.googleMap.setCenter(initialView.center)
+      state.googleMap.setZoom(initialView.zoom)
+
+      // 4. Test fitBounds
       state.googleMap.fitBounds(bounds)
+      const fitBoundsResult = {
+        center: state.googleMap.getCenter().toJSON(),
+        zoom: state.googleMap.getZoom(),
+      }
+
+      // 5. Calculate distances between centers and log results
+      const newToOldDistance = calculateDistance(
+        newFallbackResult.center.lat,
+        newFallbackResult.center.lng,
+        oldFallbackResult.center.lat,
+        oldFallbackResult.center.lng,
+      )
+      const newToFitBoundsDistance = calculateDistance(
+        newFallbackResult.center.lat,
+        newFallbackResult.center.lng,
+        fitBoundsResult.center.lat,
+        fitBoundsResult.center.lng,
+      )
+      const oldToFitBoundsDistance = calculateDistance(
+        oldFallbackResult.center.lat,
+        oldFallbackResult.center.lng,
+        fitBoundsResult.center.lat,
+        fitBoundsResult.center.lng,
+      )
+
+      console.log({
+        ...newFallbackResult,
+        distanceToOldFallback: `${newToOldDistance.toFixed(6)} km`,
+        distanceToFitBounds: `${newToFitBoundsDistance.toFixed(6)} km`,
+        zoomDiffOldFallback: newFallbackResult.zoom - oldFallbackResult.zoom,
+        zoomDiffFitBounds: newFallbackResult.zoom - fitBoundsResult.zoom,
+        oldFallbackResult,
+        oldToFitBoundsDistance,
+        fitBoundsResult,
+      })
+
+      // Keep the fitBounds result as the final view
     },
   },
 })

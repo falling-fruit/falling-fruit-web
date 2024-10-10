@@ -117,6 +117,8 @@ const makeHandleViewChange = (dispatch, googleMap, history) => (_) => {
     center: { lat: center.lat(), lng: center.lng() },
     zoom: googleMap.getZoom(),
     bounds: googleMap.getBounds().toJSON(),
+    width: googleMap.getDiv().offsetWidth,
+    height: googleMap.getDiv().offsetHeight,
   }
   dispatch(viewChangeAndFetch(newView))
   dispatch(updateLastMapView(newView))
@@ -222,6 +224,8 @@ const MapPage = ({ isDesktop }) => {
       center: { lat: center.lat(), lng: center.lng() },
       zoom: map.getZoom(),
       bounds: map.getBounds().toJSON(),
+      width: map.getDiv().offsetWidth,
+      height: map.getDiv().offsetHeight,
     }
     dispatch(updateLastMapView(initialView))
     dispatch(fetchLocations())

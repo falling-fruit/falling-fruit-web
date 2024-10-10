@@ -109,6 +109,7 @@ const Search = (props) => {
   })
 
   const { googleMap } = useSelector((state) => state.map)
+  const { lastMapView } = useSelector((state) => state.viewport)
 
   const coordinatesResultOrNull = getCoordinatesResult(value)
   const suggestionsList = coordinatesResultOrNull
@@ -160,6 +161,7 @@ const Search = (props) => {
       const placeBounds = await getPlaceBounds(
         description,
         descriptionToPlaceId.current[description],
+        lastMapView,
       )
       dispatch(selectPlace({ place: placeBounds }))
     }
