@@ -82,9 +82,7 @@ const Filter = () => {
             onSelectAllClick={() =>
               dispatch(
                 selectionChanged(
-                  typesAccess
-                    .selectableTypesWithCategories('forager', 'freegan')
-                    .map((type) => type.id),
+                  typesAccess.selectableTypes().map((type) => type.id),
                 ),
               )
             }
