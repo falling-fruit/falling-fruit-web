@@ -63,7 +63,7 @@ const SidePane = () => {
     event.stopPropagation()
     history.push('/map')
   }
-  const goBack = (event) => {
+  const _goBack = (event) => {
     event.stopPropagation()
     history.goBack()
   }
@@ -122,7 +122,7 @@ const SidePane = () => {
             </Route>
             <Route path="/settings">
               <StyledNavBack>
-                <BackButton onClick={goBack}>
+                <BackButton onClick={goToMap}>
                   <ArrowBack />
                   {t('back')}
                 </BackButton>
