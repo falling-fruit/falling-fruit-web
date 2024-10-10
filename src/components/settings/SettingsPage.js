@@ -63,6 +63,55 @@ const Page = styled.div`
 
 const GoogleMapTypes = ['roadmap', 'terrain', 'hybrid']
 
+const Attributions = {
+  'osm-standard': (
+    <>
+      ©{' '}
+      <a
+        href="https://openstreetmap.org/copyright"
+        target="_blank"
+        rel="noreferrer"
+      >
+        OpenStreetMap
+      </a>{' '}
+      contributors
+    </>
+  ),
+  'osm-toner-lite': (
+    <>
+      ©{' '}
+      <a href="https://stadiamaps.com" target="_blank" rel="noreferrer">
+        Stadia Maps
+      </a>{' '}
+      ©{' '}
+      <a href="https://stamen.com" target="_blank" rel="noreferrer">
+        Stamen Design
+      </a>{' '}
+      ©{' '}
+      <a href="https://openmaptiles.org" target="_blank" rel="noreferrer">
+        OpenMapTiles
+      </a>{' '}
+      ©{' '}
+      <a
+        href="https://www.openstreetmap.org/copyright"
+        target="_blank"
+        rel="noreferrer"
+      >
+        OpenStreetMap contributors
+      </a>
+    </>
+  ),
+}
+
+const Attribution = styled.p`
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.tertiaryText};
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+`
+
 const StyledListEntry = styled(ListEntry)`
   margin: 7px -26px;
   width: calc(100% + 26px + 26px);
@@ -251,6 +300,9 @@ const SettingsPage = ({ desktop }) => {
           )
         }
       />
+      {settings.mapType in Attributions && (
+        <Attribution>{Attributions[settings.mapType]}</Attribution>
+      )}
 
       <h3>{t('side_menu.regional')}</h3>
 
