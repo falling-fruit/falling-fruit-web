@@ -123,6 +123,27 @@ const makeHandleViewChange = (dispatch, googleMap, history) => (_) => {
   history.changeView(newView)
 }
 
+/**
+ * Calculate XYZ tile coordinates.
+ *
+ * @param {Object} coord - Google Maps world coordinates.
+ * @param {number} zoom - Google Maps zoom level.
+ * @returns {Object} XYZ tile coordinates. `y` is `null` if out of bounds.
+ */
+function getTileCoordinates(coord, zoom) {
+  // Wrap x (longitude) at 180th meridian properly
+  const tilesPerGlobe = 1 << zoom
+  let x = coord.x % tilesPerGlobe
+  if (x < 0) {
+    x = tilesPerGlobe + x
+  }
+  let y = coord.y
+  if (coord.y < 0 || coord.y >= tilesPerGlobe) {
+    y = null
+  }
+  return { x, y, z: zoom }
+}
+
 const MapPage = ({ isDesktop }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
@@ -328,7 +349,35 @@ const MapPage = ({ isDesktop }) => {
           defaultCenter={initialView.center}
           defaultZoom={initialView.zoom}
           onChange={handleViewChangeRef.current}
-          onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
+          onGoogleApiLoaded={({ map, maps }) => {
+            map.mapTypes.set(
+              'osm-standard',
+              new maps.ImageMapType({
+                getTileUrl: (coord, zoom) => {
+                  const { x, y, z } = getTileCoordinates(coord, zoom)
+                  if (y !== null) {
+                    return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
+                  }
+                },
+                tileSize: new maps.Size(256, 256),
+                maxZoom: 19,
+              }),
+            )
+            map.mapTypes.set(
+              'osm-toner-lite',
+              new maps.ImageMapType({
+                getTileUrl: (coord, zoom) => {
+                  const { x, y, z } = getTileCoordinates(coord, zoom)
+                  if (y !== null) {
+                    return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
+                  }
+                },
+                tileSize: new maps.Size(256, 256),
+                maxZoom: 20,
+              }),
+            )
+            apiIsLoaded(map, maps)
+          }}
           yesIWantToUseGoogleMapApiInternals
         >
           {geolocation && !geolocation.loading && !geolocation.error && (
