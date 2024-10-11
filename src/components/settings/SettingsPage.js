@@ -12,21 +12,33 @@ import ListEntry from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
 import SocialButtons from '../ui/SocialButtons'
-import Bicycling from './mapTiles/bicycling.png'
-import Road from './mapTiles/road.png'
-import Satellite from './mapTiles/satellite.png'
-import Terrain from './mapTiles/terrain.png'
-import Transit from './mapTiles/transit.png'
+import GoogleBicycling from './mapTiles/google-bicycling.png'
+import GoogleRoadmap from './mapTiles/google-roadmap.png'
+import GoogleSatellite from './mapTiles/google-satellite.png'
+import GoogleTerrain from './mapTiles/google-terrain.png'
+import GoogleTransit from './mapTiles/google-transit.png'
+import OSMStandard from './mapTiles/osm-standard.png'
+import OSMTonerLite from './mapTiles/osm-toner-lite.png'
 
 const Page = styled.div`
   box-sizing: border-box;
   height: 100%;
-  padding-top: 26px;
-  padding-left: 26px;
-  padding-right: 26px;
   overflow: auto;
-  ${({ desktop }) =>
-    desktop && 'padding-top: 0; h3:first-child { margin-top: 8px; }'}
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-top: 26px;
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+
+  @media ${({ theme }) => theme.device.desktop} {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    h3:first-child {
+      margin-top: 8px;
+    }
+  }
 
   > h2 {
     margin-top: 0;
@@ -46,6 +58,52 @@ const Page = styled.div`
   > h5 {
     margin: 0px;
     color: ${({ theme }) => theme.secondaryText};
+  }
+`
+
+const GoogleMapTypes = ['roadmap', 'terrain', 'hybrid']
+
+const Attributions = {
+  'osm-standard': (
+    <>
+      <a
+        href="https://openstreetmap.org/copyright"
+        target="_blank"
+        rel="noreferrer"
+      >
+        © OpenStreetMap contributors
+      </a>
+    </>
+  ),
+  'osm-toner-lite': (
+    <>
+      <a href="https://stadiamaps.com" target="_blank" rel="noreferrer">
+        © Stadia Maps
+      </a>{' '}
+      <a href="https://stamen.com" target="_blank" rel="noreferrer">
+        © Stamen Design
+      </a>{' '}
+      <a href="https://openmaptiles.org" target="_blank" rel="noreferrer">
+        © OpenMapTiles
+      </a>{' '}
+      <a
+        href="https://www.openstreetmap.org/copyright"
+        target="_blank"
+        rel="noreferrer"
+      >
+        © OpenStreetMap contributors
+      </a>
+    </>
+  ),
+}
+
+const Attribution = styled.p`
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.tertiaryText};
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    white-space: nowrap;
   }
 `
 
@@ -122,24 +180,24 @@ const SettingsPage = ({ desktop }) => {
 
       <h3>{t('glossary.map')}</h3>
 
-      <h5>{t('basemap')}</h5>
+      <h5>Google</h5>
 
       <RadioTiles
         options={[
           {
             label: t('roadmap'),
             value: 'roadmap',
-            image: Road,
+            image: GoogleRoadmap,
           },
           {
             label: t('side_menu.terrain'),
             value: 'terrain',
-            image: Terrain,
+            image: GoogleTerrain,
           },
           {
             label: t('side_menu.satellite'),
             value: 'hybrid',
-            image: Satellite,
+            image: GoogleSatellite,
           },
         ]}
         value={settings.mapType}
@@ -152,57 +210,95 @@ const SettingsPage = ({ desktop }) => {
         }
       />
 
-      <h5>{t('overlay')}</h5>
+      <div
+        style={
+          GoogleMapTypes.includes(settings.mapType)
+            ? {}
+            : {
+                opacity: '50%',
+                filter: 'grayscale(50%)',
+                pointerEvents: 'none',
+              }
+        }
+      >
+        <RadioTiles
+          options={[
+            {
+              label: t('side_menu.bicycle'),
+              value: 'BicyclingLayer',
+              image: GoogleBicycling,
+            },
+            {
+              label: t('side_menu.transit'),
+              value: 'TransitLayer',
+              image: GoogleTransit,
+            },
+          ]}
+          value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
+          onChange={(value) => {
+            if (value === settings.mapLayers[0]) {
+              value = null
+            }
+            dispatch(
+              updateSettings({
+                mapLayers: value ? [value] : [],
+              }),
+            )
+          }}
+        />
+        {[
+          {
+            field: 'showBusinesses',
+            label: t('poi'),
+          },
+        ].map(({ field, label }) => (
+          <LabeledRow
+            key={field}
+            left={
+              <Checkbox
+                id={field}
+                onClick={(e) =>
+                  dispatch(
+                    updateSettings({
+                      [field]: e.target.checked,
+                    }),
+                  )
+                }
+                checked={settings[field]}
+              />
+            }
+            label={<label htmlFor={field}>{label}</label>}
+          />
+        ))}
+      </div>
+
+      <h5>OpenStreetMap</h5>
 
       <RadioTiles
         options={[
           {
-            label: t('side_menu.bicycle'),
-            value: 'BicyclingLayer',
-            image: Bicycling,
+            label: 'Standard',
+            value: 'osm-standard',
+            image: OSMStandard,
           },
           {
-            label: t('side_menu.transit'),
-            value: 'TransitLayer',
-            image: Transit,
+            label: 'Toner Lite',
+            value: 'osm-toner-lite',
+            image: OSMTonerLite,
           },
         ]}
-        value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
-        onChange={(value) => {
-          if (value === settings.mapLayers[0]) {
-            value = null
-          }
+        value={settings.mapType}
+        onChange={(value) =>
           dispatch(
             updateSettings({
-              mapLayers: value ? [value] : [],
+              mapType: value,
             }),
           )
-        }}
+        }
       />
-      {[
-        {
-          field: 'showBusinesses',
-          label: t('poi'),
-        },
-      ].map(({ field, label }) => (
-        <LabeledRow
-          key={field}
-          left={
-            <Checkbox
-              id={field}
-              onClick={(e) =>
-                dispatch(
-                  updateSettings({
-                    [field]: e.target.checked,
-                  }),
-                )
-              }
-              checked={settings[field]}
-            />
-          }
-          label={<label htmlFor={field}>{label}</label>}
-        />
-      ))}
+      {settings.mapType in Attributions && (
+        <Attribution>{Attributions[settings.mapType]}</Attribution>
+      )}
 
       <h3>{t('side_menu.regional')}</h3>
 

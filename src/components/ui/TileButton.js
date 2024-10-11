@@ -11,7 +11,6 @@ const StyledResetButton = styled(ResetButton)`
   border-bottom: 5px solid
     ${({ $selected, theme }) => ($selected ? theme.orange : theme.background)};
   overflow: hidden;
-  margin-right: 5px;
   text-align: left;
 
   &::before {
