@@ -296,12 +296,8 @@ const SettingsPage = ({ desktop }) => {
           )
         }
       />
-      {settings.mapType in Attributions ? (
+      {settings.mapType in Attributions && (
         <Attribution>{Attributions[settings.mapType]}</Attribution>
-      ) : (
-        <Attribution>
-          <br />
-        </Attribution>
       )}
 
       <h3>{t('side_menu.regional')}</h3>
