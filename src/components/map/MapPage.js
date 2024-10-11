@@ -287,7 +287,14 @@ const MapPage = ({ isDesktop }) => {
       style={
         isDesktop
           ? { width: '100%', height: '100%', position: 'relative' }
-          : { width: '100%', position: 'fixed', bottom: '50px', top: '63px' }
+          : {
+              width: '100%',
+              position: 'absolute',
+              top: '48px',
+              bottom: '50px',
+              left: 0,
+              right: 0,
+            }
       }
     >
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}

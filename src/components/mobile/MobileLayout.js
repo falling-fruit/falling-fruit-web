@@ -20,12 +20,10 @@ import Tabs from './Tabs'
 import TopBarSwitch from './TopBarSwitch'
 
 const shouldDisplayMapPage = (pathname) => {
-  // display the map for map endpoints
   if (matchPath(pathname, { path: '/map', exact: false, strict: false })) {
     return true
   }
 
-  // additionally, also display in the background for some location pages
   const match = matchPath(pathname, {
     path: [
       '/locations/:locationId/:nextSegment/:nextNextSegment',
@@ -35,13 +33,13 @@ const shouldDisplayMapPage = (pathname) => {
     exact: false,
     strict: false,
   })
+
   const isPlacingNewLocationMarker =
     match?.params.locationId === 'new' &&
     match?.params.nextSegment !== 'details'
 
   const locationId =
     match?.params.locationId && parseInt(match.params.locationId)
-  // distinguish viewing a location from having it displayed during e.g. editing or review
   const isViewingLocation =
     locationId && match.params.nextSegment?.indexOf('@') === 0
 
@@ -60,6 +58,7 @@ const shouldDisplayMapPage = (pathname) => {
     isViewingPanorama
   )
 }
+
 const MobileLayout = () => {
   const streetView = useSelector((state) => state.location.streetViewOpen)
   const { pathname } = useLocation()
@@ -73,9 +72,15 @@ const MobileLayout = () => {
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
         />
       </Helmet>
+      <TopBarSwitch />
       <div
         style={{
-          display: shouldDisplayMapPage(pathname) ? 'initial' : 'none',
+          display: shouldDisplayMapPage(pathname) ? 'block' : 'none',
+          position: 'absolute',
+          top: '30px',
+          bottom: '0px',
+          left: 0,
+          right: 0,
           zIndex: 1,
         }}
       >
@@ -83,7 +88,6 @@ const MobileLayout = () => {
       </div>
       {connectRoutes}
       <TabPanels style={{ paddingBottom: '50px' }}>
-        <TopBarSwitch />
         <Switch>
           {aboutRoutes}
           {authRoutes}
