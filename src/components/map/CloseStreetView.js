@@ -26,7 +26,7 @@ const StreetViewUIWrapper = styled.div`
   position: absolute;
 
   @media ${({ theme }) => theme.device.mobile} {
-    top: 100px;
+    top: 40px;
   }
 `
 
