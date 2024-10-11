@@ -220,60 +220,72 @@ const SettingsPage = ({ desktop }) => {
           GoogleMapTypes.includes(settings.mapType)
             ? {}
             : {
-                opacity: '50%',
                 pointerEvents: 'none',
               }
         }
       >
-        <RadioTiles
-          options={[
-            {
-              label: t('side_menu.bicycle'),
-              value: 'BicyclingLayer',
-              image: GoogleBicycling,
-            },
-            {
-              label: t('side_menu.transit'),
-              value: 'TransitLayer',
-              image: GoogleTransit,
-            },
-          ]}
-          value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
-          onChange={(value) => {
-            if (value === settings.mapLayers[0]) {
-              value = null
-            }
-            dispatch(
-              updateSettings({
-                mapLayers: value ? [value] : [],
-              }),
-            )
-          }}
-        />
-        {[
-          {
-            field: 'showBusinesses',
-            label: t('poi'),
-          },
-        ].map(({ field, label }) => (
-          <LabeledRow
-            key={field}
-            left={
-              <Checkbox
-                id={field}
-                onClick={(e) =>
-                  dispatch(
-                    updateSettings({
-                      [field]: e.target.checked,
-                    }),
-                  )
+        <div
+          style={
+            GoogleMapTypes.includes(settings.mapType)
+              ? {}
+              : {
+                  opacity: '50%',
+                  filter: 'grayscale(50%)',
                 }
-                checked={settings[field]}
-              />
+          }
+        >
+          <RadioTiles
+            options={[
+              {
+                label: t('side_menu.bicycle'),
+                value: 'BicyclingLayer',
+                image: GoogleBicycling,
+              },
+              {
+                label: t('side_menu.transit'),
+                value: 'TransitLayer',
+                image: GoogleTransit,
+              },
+            ]}
+            value={
+              settings.mapLayers.length === 0 ? null : settings.mapLayers[0]
             }
-            label={<label htmlFor={field}>{label}</label>}
+            onChange={(value) => {
+              if (value === settings.mapLayers[0]) {
+                value = null
+              }
+              dispatch(
+                updateSettings({
+                  mapLayers: value ? [value] : [],
+                }),
+              )
+            }}
           />
-        ))}
+          {[
+            {
+              field: 'showBusinesses',
+              label: t('poi'),
+            },
+          ].map(({ field, label }) => (
+            <LabeledRow
+              key={field}
+              left={
+                <Checkbox
+                  id={field}
+                  onClick={(e) =>
+                    dispatch(
+                      updateSettings({
+                        [field]: e.target.checked,
+                      }),
+                    )
+                  }
+                  checked={settings[field]}
+                />
+              }
+              label={<label htmlFor={field}>{label}</label>}
+            />
+          ))}
+        </div>
       </div>
 
       <h5>OpenStreetMap</h5>
