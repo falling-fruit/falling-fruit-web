@@ -2,7 +2,6 @@ import styled from 'styled-components/macro'
 
 import { zIndex } from './GlobalStyle'
 
-// 80px height unless menu selections are visible
 const TopBar = styled.div`
   position: absolute;
   left: 0;
@@ -13,7 +12,7 @@ const TopBar = styled.div`
   filter: drop-shadow(0px -1px 8px ${({ theme }) => theme.shadow});
   padding: 16px;
   min-height: 48px;
-  border-radius: ${(props) => (props.rectangular ? '0' : '0 0 1.5em 1.5em')};
+  border-radius: 0;
   transition: border-radius 0.2s ease-out-in;
 `
 

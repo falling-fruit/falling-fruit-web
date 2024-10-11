@@ -24,10 +24,6 @@ const StreetViewUIWrapper = styled.div`
   left: 20px;
   justify-content: space-between;
   position: absolute;
-
-  @media ${({ theme }) => theme.device.mobile} {
-    top: 40px;
-  }
 `
 
 const CloseStreetView = () => {
