@@ -86,6 +86,7 @@ const ToggleButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+  font-size: inherit;
   padding: 0;
   width: 1em;
   height: 1em;
@@ -95,6 +96,7 @@ const ToggleButton = styled.button`
 `
 
 const ChevronSpace = styled.span`
+  font-size: inherit;
   width: 1em;
   display: inline-block;
 `
