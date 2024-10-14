@@ -66,38 +66,32 @@ const GoogleMapTypes = ['roadmap', 'terrain', 'hybrid']
 const Attributions = {
   'osm-standard': (
     <>
-      ©{' '}
       <a
         href="https://openstreetmap.org/copyright"
         target="_blank"
         rel="noreferrer"
       >
-        OpenStreetMap
-      </a>{' '}
-      contributors
+        © OpenStreetMap contributors
+      </a>
     </>
   ),
   'osm-toner-lite': (
     <>
-      ©{' '}
       <a href="https://stadiamaps.com" target="_blank" rel="noreferrer">
-        Stadia Maps
+        © Stadia Maps
       </a>{' '}
-      ©{' '}
       <a href="https://stamen.com" target="_blank" rel="noreferrer">
-        Stamen Design
+        © Stamen Design
       </a>{' '}
-      ©{' '}
       <a href="https://openmaptiles.org" target="_blank" rel="noreferrer">
-        OpenMapTiles
+        © OpenMapTiles
       </a>{' '}
-      ©{' '}
       <a
         href="https://www.openstreetmap.org/copyright"
         target="_blank"
         rel="noreferrer"
       >
-        OpenStreetMap contributors
+        © OpenStreetMap contributors
       </a>
     </>
   ),
@@ -109,6 +103,7 @@ const Attribution = styled.p`
   a {
     color: inherit;
     text-decoration: inherit;
+    white-space: nowrap;
   }
 `
 
@@ -221,6 +216,7 @@ const SettingsPage = ({ desktop }) => {
             ? {}
             : {
                 opacity: '50%',
+                filter: 'grayscale(50%)',
                 pointerEvents: 'none',
               }
         }
