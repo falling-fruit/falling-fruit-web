@@ -213,33 +213,35 @@ const Search = (props) => {
           />
         )}
       </SearchBarContainer>
-      <StyledComboboxPopover portal={false}>
-        <ComboboxList>
-          {suggestionsList.map((suggestion) => {
-            const {
-              place_id,
-              description,
-              structured_formatting: { main_text, secondary_text },
-            } = suggestion
+      {suggestionsList.length > 0 && (
+        <StyledComboboxPopover portal={false}>
+          <ComboboxList>
+            {suggestionsList.map((suggestion) => {
+              const {
+                place_id,
+                description,
+                structured_formatting: { main_text, secondary_text },
+              } = suggestion
 
-            // Allow handleSelect to access the place id (see useRef above)
-            descriptionToPlaceId.current[description] = place_id
+              // Allow handleSelect to access the place id (see useRef above)
+              descriptionToPlaceId.current[description] = place_id
 
-            return (
-              <ComboboxOption
-                as={SearchEntry}
-                key={place_id}
-                value={description}
-                isCurrentLocation={
-                  description === selectedPlace?.location.description
-                }
-              >
-                {[main_text, secondary_text]}
-              </ComboboxOption>
-            )
-          })}
-        </ComboboxList>
-      </StyledComboboxPopover>
+              return (
+                <ComboboxOption
+                  as={SearchEntry}
+                  key={place_id}
+                  value={description}
+                  isCurrentLocation={
+                    description === selectedPlace?.location.description
+                  }
+                >
+                  {[main_text, secondary_text]}
+                </ComboboxOption>
+              )
+            })}
+          </ComboboxList>
+        </StyledComboboxPopover>
+      )}
     </Combobox>
   )
 }
