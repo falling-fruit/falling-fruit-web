@@ -12,20 +12,8 @@ import { EditReviewForm } from '../form/EditReview'
 import { LocationForm } from '../form/LocationForm'
 import SettingsPage from '../settings/SettingsPage'
 import BackButton from '../ui/BackButton'
-import { SettingsAccordionButton } from '../ui/SettingsAccordion'
 import MainSidePane from './MainSidePane'
-
-const SettingsButton = styled(SettingsAccordionButton).attrs((props) => ({
-  ...props,
-  forwardedAs: 'button',
-}))`
-  padding: 5px 0;
-  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  right: 0;
-`
+import SettingsButton from './SettingsButton'
 
 const FullHeightPane = styled.div`
   display: flex;
