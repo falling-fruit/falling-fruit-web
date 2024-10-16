@@ -3,7 +3,7 @@ import React from 'react'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
-import ListEntry from '../ui/ListEntry'
+import ListEntry, { PrimaryText, SecondaryText } from '../ui/ListEntry'
 
 const SearchEntry = React.forwardRef(
   ({ children, isCurrentLocation, ...props }, ref) => {
@@ -20,12 +20,13 @@ const SearchEntry = React.forwardRef(
     return (
       <ListEntry
         leftIcons={leftIcon}
-        primaryText={primaryText}
-        secondaryText={secondaryText}
         rightIcons={<Navigation size={20} color={theme.blue} />}
         ref={ref}
         {...props}
-      />
+      >
+        <PrimaryText>{primaryText}</PrimaryText>
+        <SecondaryText>{secondaryText}</SecondaryText>
+      </ListEntry>
     )
   },
 )
