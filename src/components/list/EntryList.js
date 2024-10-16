@@ -8,7 +8,7 @@ import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
-import ListEntry from '../ui/ListEntry'
+import ListEntry, { PrimaryText, SecondaryText } from '../ui/ListEntry'
 import { TypeName } from '../ui/TypeName'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
@@ -72,18 +72,21 @@ const EntryList = forwardRef(
             key={location.id}
             leftIcons={<EntryIcon imageSrc={location.photo} />}
             rightIcons={<ChevronRight size="16" color={theme.blue} />}
-            primaryText={
-              <TypeName
-                commonName={type?.commonName}
-                scientificName={type?.scientificName}
-              />
-            }
-            secondaryText={convertDistance(location.distance, distanceUnit)}
             onClick={(e) => onEntryClick?.(location.id, e)}
             onMouseEnter={(e) => onEntryMouseEnter?.(location.id, e)}
             onMouseLeave={(e) => onEntryMouseLeave?.(location.id, e)}
             style={style}
-          />
+          >
+            <PrimaryText>
+              <TypeName
+                commonName={type?.commonName}
+                scientificName={type?.scientificName}
+              />
+            </PrimaryText>
+            <SecondaryText>
+              {convertDistance(location.distance, distanceUnit)}
+            </SecondaryText>
+          </StyledListEntry>
         )
       } else {
         // Row not yet loaded
@@ -91,10 +94,15 @@ const EntryList = forwardRef(
           <StyledListEntry
             leftIcons={<Skeleton circle width="1.75rem" height="1.75rem" />}
             rightIcons={<ChevronRight size="16" color={theme.tertiaryText} />}
-            primaryText={<Skeleton width={150} />}
-            secondaryText={<Skeleton width={50} />}
             style={style}
-          />
+          >
+            <PrimaryText>
+              <Skeleton width={150} />
+            </PrimaryText>
+            <SecondaryText>
+              <Skeleton width={50} />
+            </SecondaryText>
+          </StyledListEntry>
         )
       }
 
