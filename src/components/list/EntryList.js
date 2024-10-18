@@ -4,7 +4,6 @@ import { forwardRef, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
 import { VariableSizeList } from 'react-window'
-import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
@@ -19,11 +18,7 @@ const TypeNameTagWrapper = styled.span`
   padding: 5px 10px;
   margin-right: 4px;
   margin-bottom: 4px;
-  ${({ isSelected }) =>
-    !isSelected &&
-    css`
-      opacity: 0.5;
-    `}
+  opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
 `
 
 const METERS_IN_FOOT = 0.3048
