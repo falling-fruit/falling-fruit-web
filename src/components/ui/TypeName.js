@@ -28,6 +28,8 @@ const ScientificName = styled.span`
 export const TypeName = ({ commonName, scientificName }) => (
   <div>
     {commonName && <CommonName>{commonName}</CommonName>}
-    <ScientificName standalone={!commonName}>{scientificName}</ScientificName>
+    {scientificName && (
+      <ScientificName standalone={!commonName}>{scientificName}</ScientificName>
+    )}
   </div>
 )
