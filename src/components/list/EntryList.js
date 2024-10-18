@@ -4,6 +4,7 @@ import { forwardRef, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
 import { VariableSizeList } from 'react-window'
+import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
@@ -18,6 +19,11 @@ const TypeNameTagWrapper = styled.span`
   padding: 5px 10px;
   margin-right: 4px;
   margin-bottom: 4px;
+  ${({ isSelected }) =>
+    !isSelected &&
+    css`
+      opacity: 0.5;
+    `}
 `
 
 const METERS_IN_FOOT = 0.3048
@@ -145,6 +151,7 @@ const EntryList = forwardRef(({ locations, onEntryClick, ...props }, ref) => {
   }, [locations])
   const distanceUnit = useSelector((state) => state.settings.distanceUnit)
   const { typesAccess } = useSelector((state) => state.type)
+  const { types: selectedTypes } = useSelector((state) => state.filter)
   const { width: windowWidth } = useWindowSize()
 
   const getItemSize = (index) => {
@@ -201,8 +208,9 @@ const EntryList = forwardRef(({ locations, onEntryClick, ...props }, ref) => {
             <TagsWrapper>
               {location.type_ids.map((typeId) => {
                 const type = typesAccess.getType(typeId)
+                const isSelected = selectedTypes.includes(typeId)
                 return (
-                  <TypeNameTagWrapper key={typeId}>
+                  <TypeNameTagWrapper key={typeId} isSelected={isSelected}>
                     <TypeName
                       commonName={type?.commonName}
                       scientificName={type?.scientificName}
