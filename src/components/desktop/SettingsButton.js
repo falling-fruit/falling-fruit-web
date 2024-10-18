@@ -31,7 +31,7 @@ const PrimaryText = styled.div`
 const SettingsCircleIcon = styled(Cog)`
   margin-left: 1.5em;
   margin-right: 1em;
-  width: 1.5em;
+  width: 1.75em;
 `
 
 export const ChevronIcon = styled.div`
@@ -47,7 +47,7 @@ const SettingsButton = ({ text, onClick }) => (
     <SettingsCircleIcon color={theme.orange} />
     <PrimaryText>{text}</PrimaryText>
     <ChevronIcon>
-      <ChevronRight width="1.5em" color={theme.orange} />
+      <ChevronRight width="1.75em" color={theme.orange} />
     </ChevronIcon>
   </StyledSettingsButton>
 )
