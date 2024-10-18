@@ -22,8 +22,7 @@ const ScientificName = styled.span`
   font-size: ${(props) => (props.standalone ? '0.975rem' : '0.875rem')};
   font-weight: normal;
   font-style: italic;
-  color: ${({ theme, standalone }) =>
-    standalone ? theme.headerText : theme.secondaryText};
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 export const TypeName = ({ commonName, scientificName }) => (
