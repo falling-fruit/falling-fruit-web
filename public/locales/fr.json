@@ -36,19 +36,17 @@
     "name": "Nom",
     "send": "Envoyer",
     "save_changes": "Enregistrer vos modifications",
-    "edit": "Modifier",
-    "donate": "Donner"
+    "edit": "Modifier"
   },
   "side_menu": {
     "regional": "Régional",
     "satellite": "Satellite",
-    "terrain": "Terrain",
-    "bicycle": "Vélo",
-    "transit": "Transport"
+    "terrain": "Relief",
+    "bicycle": "À vélo",
+    "transit": "Transports en commun"
   },
   "menu": {
-    "add_location": "Ajouter une source",
-    "zoom_in_to_add_location": "Zoomer pour ajouter une source"
+    "add_location": "Ajouter un site"
   },
   "pages": {
     "project": "Le projet",
