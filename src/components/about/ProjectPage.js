@@ -165,6 +165,8 @@ const Project = () => {
           <br />
           <b>Timna Raz</b> – עִברִית
           <br />
+          <b dir="ltr">Tống Thái Vương</b> - Tiếng Việt
+          <br />
         </p>
 
         <h2>{t('pages.about.closing_remarks')}</h2>
