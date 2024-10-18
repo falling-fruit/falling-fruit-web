@@ -46,6 +46,8 @@ const ListPage = () => {
     !locationsInvalid
   ) {
     inner = <NoResultsFound />
+  } else if (locations.length === 0) {
+    inner = <div />
   } else {
     inner = (
       <AutoSizer>
