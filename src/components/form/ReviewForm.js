@@ -64,6 +64,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
       label="Fruiting status"
       name="review.fruiting"
       options={FRUITING_OPTIONS}
+      isSearchable={false}
       isClearable
     />
 
