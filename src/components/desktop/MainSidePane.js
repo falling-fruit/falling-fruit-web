@@ -38,7 +38,6 @@ const MainPane = () => {
       <Search />
       <FilterWrapper />
       <AddLocationButton
-        secondary
         greyedOut={!isZoomSufficient}
         onClick={handleAddLocation}
       >
