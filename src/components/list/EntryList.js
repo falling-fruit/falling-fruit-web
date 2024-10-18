@@ -35,12 +35,13 @@ const IMPERIAL = 'imperial'
 // Constants for layout calculations
 const LEFT_PADDING = 14
 const RIGHT_PADDING = 14
-const LEFT_ICON_WIDTH = 18
+const LEFT_ICON_WIDTH = 35
 const RIGHT_ICON_WIDTH = 18
 const TAG_HEIGHT = 28
 const TAG_MARGIN_RIGHT = 4
 const TAG_MARGIN_BOTTOM = 8
-const TAG_PADDING_HORIZONTAL = 20
+const TAG_PADDING_HORIZONTAL = 10
+const FONT_WIDTH = 6
 const BASE_ITEM_HEIGHT = 57
 
 const convertDistance = (distance, setting) => {
@@ -175,7 +176,7 @@ const EntryList = forwardRef(({ locations, onEntryClick, ...props }, ref) => {
       const tagContent = `${type?.commonName || ''} ${
         type?.scientificName || ''
       }`.trim()
-      const tagWidth = tagContent.length * 6 + TAG_PADDING_HORIZONTAL
+      const tagWidth = tagContent.length * FONT_WIDTH + TAG_PADDING_HORIZONTAL
 
       if (currentLineWidth + tagWidth > availableWidth) {
         linesCount++
