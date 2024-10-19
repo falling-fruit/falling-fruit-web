@@ -36,7 +36,7 @@ const TAG_HEIGHT = 28
 const TAG_MARGIN_RIGHT = 4
 const TAG_MARGIN_BOTTOM = 8
 const TAG_PADDING_HORIZONTAL = 10
-const FONT_WIDTH = 6
+const FONT_WIDTH = 6.5
 const BASE_ITEM_HEIGHT = 57
 
 const convertDistance = (distance, setting) => {
@@ -64,8 +64,7 @@ const StyledListEntry = styled.li`
   display: flex;
   flex-direction: row;
   padding: 0 14px;
-  height: 42px;
-  align-items: center;
+  align-items: start;
   cursor: pointer;
   &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
@@ -122,6 +121,7 @@ const LeftIcon = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 18px;
+  margin-top: 11px;
 `
 
 const RightIcon = styled.div`
@@ -129,6 +129,7 @@ const RightIcon = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: 18px;
+  margin-top: 22px;
 `
 
 const EntryIcon = ({ imageSrc }) => (
