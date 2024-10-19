@@ -2,34 +2,36 @@ import styled from 'styled-components/macro'
 
 const CommonName = styled.span`
   .select__option & {
-    // Two lines. Has line break between common and scientific name
     display: block;
   }
 
-  font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.headerText};
 `
 
 const ScientificName = styled.span`
-  margin-left: ${(props) => (props.standalone ? '0' : '5px')};
   .select__option & {
-    // Two lines. Has line break between common and scientific name
     display: block;
-    margin-left: 0;
   }
 
-  font-size: ${(props) => (props.standalone ? '0.975rem' : '0.875rem')};
   font-weight: normal;
   font-style: italic;
   color: ${({ theme }) => theme.secondaryText};
 `
 
+const TypeNameWrapper = styled.div`
+  display: flex;
+  gap: 5px;
+  font-size: 0.875rem;
+
+  .select__option & {
+    display: block;
+  }
+`
+
 export const TypeName = ({ commonName, scientificName }) => (
-  <div>
+  <TypeNameWrapper>
     {commonName && <CommonName>{commonName}</CommonName>}
-    {scientificName && (
-      <ScientificName standalone={!commonName}>{scientificName}</ScientificName>
-    )}
-  </div>
+    {scientificName && <ScientificName>{scientificName}</ScientificName>}
+  </TypeNameWrapper>
 )
