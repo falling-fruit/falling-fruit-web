@@ -29,12 +29,13 @@ const IMPERIAL = 'imperial'
 
 // Constants for layout calculations
 const LEFT_PADDING = 14
-const RIGHT_PADDING = 14
+const RIGHT_PADDING = 16
 const LEFT_ICON_WIDTH = 35
 const RIGHT_ICON_WIDTH = 18
 const TAG_HEIGHT = 28
+const FAT_TAG_EXTRA_HEIGHT = 20
 const TAG_MARGIN_RIGHT = 4
-const TAG_MARGIN_BOTTOM = 8
+const TAG_MARGIN_BOTTOM = 2
 const TAG_PADDING_HORIZONTAL = 10
 const FONT_WIDTH = 6.5
 const BASE_ITEM_HEIGHT = 57
@@ -166,13 +167,19 @@ const EntryList = forwardRef(({ locations, onEntryClick, ...props }, ref) => {
 
     let currentLineWidth = 0
     let linesCount = 1
+    let numFatLines = 0
 
     location.type_ids.forEach((typeId) => {
       const type = typesAccess.getType(typeId)
       const tagContent = `${type?.commonName || ''} ${
         type?.scientificName || ''
       }`.trim()
-      const tagWidth = tagContent.length * FONT_WIDTH + TAG_PADDING_HORIZONTAL
+      let tagWidth = tagContent.length * FONT_WIDTH + TAG_PADDING_HORIZONTAL
+
+      if (tagWidth > availableWidth - 30) {
+        tagWidth = Math.ceil(tagWidth / 2)
+        numFatLines++
+      }
 
       if (currentLineWidth + tagWidth > availableWidth) {
         linesCount++
@@ -183,7 +190,9 @@ const EntryList = forwardRef(({ locations, onEntryClick, ...props }, ref) => {
     })
 
     return (
-      BASE_ITEM_HEIGHT + (linesCount - 1) * (TAG_HEIGHT + TAG_MARGIN_BOTTOM)
+      BASE_ITEM_HEIGHT +
+      (linesCount - 1) * (TAG_HEIGHT + TAG_MARGIN_BOTTOM) +
+      numFatLines * FAT_TAG_EXTRA_HEIGHT
     )
   }
 
