@@ -278,7 +278,7 @@ const Header = () => {
               <>
                 <li>
                   <NavLink to="/users/sign_in" activeClassName="active">
-                    {t('users.sign_in')}
+                    <Button secondary>{t('users.sign_in')}</Button>
                   </NavLink>
                 </li>
                 <li>
