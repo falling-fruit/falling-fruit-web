@@ -102,7 +102,7 @@ const TagsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  overflow: hidden;
+  overflow: scroll;
 `
 
 const PrimaryText = styled.div`
