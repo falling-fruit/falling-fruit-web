@@ -141,16 +141,23 @@ const EntryIcon = ({ imageSrc }) => (
 
 const EntryList = forwardRef(({ locations, onEntryClick, ...props }, ref) => {
   const listRef = useRef(null)
+  const { width: windowWidth } = useWindowSize()
 
   useEffect(() => {
     if (listRef.current) {
       listRef.current.resetAfterIndex(0)
     }
   }, [locations])
+
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.resetAfterIndex(0)
+    }
+  }, [windowWidth])
+
   const distanceUnit = useSelector((state) => state.settings.distanceUnit)
   const { typesAccess } = useSelector((state) => state.type)
   const { types: selectedTypes } = useSelector((state) => state.filter)
-  const { width: windowWidth } = useWindowSize()
 
   const getItemSize = (index) => {
     const location = locations[index]
