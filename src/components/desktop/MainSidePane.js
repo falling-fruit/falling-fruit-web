@@ -14,7 +14,6 @@ const AddLocationButton = styled(Button)`
   padding: 15px 0;
   opacity: ${({ greyedOut }) => (greyedOut ? '0.5' : '1')};
   cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `
 
 const MainPane = () => {
