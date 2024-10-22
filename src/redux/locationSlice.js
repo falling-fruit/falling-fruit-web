@@ -239,7 +239,7 @@ const locationSlice = createSlice({
          * New location added
          */
         state.location = action.payload
-        state.reviews = []
+        state.reviews = action.payload.reviews || []
         state.locationId = parseInt(action.payload.id)
       }
       state.isLoading = false
