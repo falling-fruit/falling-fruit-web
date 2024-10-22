@@ -64,51 +64,129 @@ const Project = () => {
           </p>
           <h2>{t('pages.about.about_the_site')}</h2>
           <p>{t('pages.about.celebration')}</p>
-          <p>{t('pages.about.edible_map')}</p>
+          <p>{renderHTML(t('pages.about.more_about_html'))}</p>
           <p>{renderHTML(t('pages.about.join_us_html'))}</p>
         </div>
         <h2>{t('pages.about.staff')}</h2>
         <div className="content">
           <img src="https://fallingfruit.org/ethan_welty.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.ethan_welty_bio_html'))}</p>
+          <p>
+            <em>Executive Director</em>
+            <br />
+            <b>Ethan Welty</b>
+            <br />
+            <a href="mailto:ethan@fallingfruit.org">ethan@fallingfruit.org</a>
+            <br />
+            Zürich, Switzerland
+            <br />
+            <br />
+            {renderHTML(t('pages.about.ethan_welty_bio_html'))}
+          </p>
         </div>
         <h2>{t('pages.about.directors')}</h2>
         <div className="content">
           <img src="https://fallingfruit.org/jeff_wanner.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.jeff_wanner_bio_html'))}</p>
+          <p>
+            <em>President</em>
+            <br />
+            <b>Jeff Wanner</b>
+            <br />
+            <a href="mailto:jeff@fallingfruit.org">jeff@fallingfruit.org</a>
+            <br />
+            Boulder, Colorado, USA
+            <br />
+            <br />
+            {renderHTML(t('pages.about.jeff_wanner_bio_html'))}
+          </p>
         </div>
         <div className="content">
           <img src="https://fallingfruit.org/craig_durkin.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.craig_durkin_bio_html'))}</p>
+          <p>
+            <b>Craig Durkin</b>
+            <br />
+            Atlanta, Georgia, USA
+            <br />
+            <br />
+            {renderHTML(t('pages.about.craig_durkin_bio_html'))}
+          </p>
         </div>
         <div className="content">
           <img src="https://fallingfruit.org/emily_sigman.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.emily_sigman_bio_html'))}</p>
+          <p>
+            <b>Emily Sigman</b>
+            <br />
+            New Haven, Connecticut, USA
+            <br />
+            <br />
+            {renderHTML(t('pages.about.emily_sigman_bio_html'))}
+          </p>
         </div>
         <h2>{t('pages.about.advisors')}</h2>
         <div className="content">
           <img src="https://fallingfruit.org/alan_gibson.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.alan_gibson_bio_html'))}</p>
+          <p>
+            <b>Alan Gibson</b>
+            <br />
+            Southampton, United Kingdom
+            <br />
+            <br />
+            {renderHTML(t('pages.about.alan_gibson_bio_html'))}
+          </p>
         </div>
         <div className="content">
           <img src="https://fallingfruit.org/ana_carolina_de_lima.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.ana_carolina_bio_html'))}</p>
+          <p>
+            <b>Ana Carolina de Lima</b>
+            <br />
+            Silver City, New Mexico, USA
+            <br />
+            <br />
+            {renderHTML(t('pages.about.ana_carolina_bio_html'))}
+          </p>
         </div>
         <div className="content">
           <img src="https://fallingfruit.org/caleb_phillips.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.caleb_phillips_bio_html'))}</p>
+          <p>
+            <b>Caleb Phillips</b>
+            <br />
+            Boulder, Colorado, USA
+            <br />
+            <br />
+            {renderHTML(t('pages.about.caleb_phillips_bio_html'))}
+          </p>
         </div>
         <div className="content">
           <img src="https://fallingfruit.org/cristina_rubke.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.cristina_rubke_bio_html'))}</p>
+          <p>
+            <b>Cristina Rubke</b>
+            <br />
+            San Francisco, California, USA
+            <br />
+            <br />
+            {renderHTML(t('pages.about.cristina_rubke_bio_html'))}
+          </p>
         </div>
         <div className="content">
           <img src="https://fallingfruit.org/david_craft.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.david_craft_bio_html'))}</p>
+          <p>
+            <b>David Craft</b>
+            <br />
+            Cambridge, Massachusetts, USA
+            <br />
+            <br />
+            {renderHTML(t('pages.about.david_craft_bio_html'))}
+          </p>
         </div>
         <div className="content">
           <img src="https://fallingfruit.org/tristram_stuart.jpg" alt="" />
-          <p>{renderHTML(t('pages.about.tristram_stuart_bio_html'))}</p>
+          <p>
+            <b>Tristram Stuart</b>
+            <br />
+            United Kingdom
+            <br />
+            <br />
+            {renderHTML(t('pages.about.tristram_stuart_bio_html'))}
+          </p>
         </div>
 
         <h2>{t('pages.about.translators')}</h2>
