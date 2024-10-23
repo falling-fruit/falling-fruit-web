@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import { PLACEHOLDER_COUNTS } from '../../constants/placeholders'
 import PhotoGridTemplate from './AboutPhotoGrid'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
@@ -28,12 +29,17 @@ const PointerButton = styled.button`
 `
 
 const Project = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   // Function to safely render HTML content
   const renderHTML = (html) => (
     <span dangerouslySetInnerHTML={{ __html: html }} />
   )
+
+  // TODO: Replace these placeholder values with actual data from the API in the future
+  const currentLanguage = i18n.language
+  const { types: typesCount, locations: locationsCount } =
+    PLACEHOLDER_COUNTS[currentLanguage] || PLACEHOLDER_COUNTS.en
 
   return (
     <PageScrollWrapper>
@@ -64,7 +70,14 @@ const Project = () => {
           </p>
           <h2>{t('pages.about.about_the_site')}</h2>
           <p>{t('pages.about.celebration')}</p>
-          <p>{renderHTML(t('pages.about.more_about_html'))}</p>
+          <p>
+            {renderHTML(
+              t('pages.about.more_about_html', {
+                types: typesCount,
+                locations: locationsCount,
+              }),
+            )}
+          </p>
           <p>{renderHTML(t('pages.about.join_us_html'))}</p>
         </div>
         <h2>{t('pages.about.staff')}</h2>
