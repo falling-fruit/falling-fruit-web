@@ -26,6 +26,7 @@ instance.interceptors.request.use((config) => {
     '/locations',
     '/locations/:id',
     '/locations/:id/reviews',
+    '/locations/changes',
     '/reviews/:id',
     '/clusters',
     '/imports',
@@ -132,6 +133,10 @@ export const editLocation = (
   id: paths['/locations/{id}']['put']['parameters']['path']['id'],
   data: paths['/locations/{id}']['put']['requestBody']['content']['application/json'],
 ) => instance.put(`/locations/${id}`, data)
+
+export const getLocationsChanges = (
+  params: paths['/locations/changes']['get']['parameters']['query'],
+) => instance.get('/locations/changes', { params })
 
 export const getTypes = () => instance.get('/types')
 

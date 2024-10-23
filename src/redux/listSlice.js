@@ -16,13 +16,31 @@ const fetchListLocations = createAsyncThunk(
       { types, muni, invasive, bounds, zoom, center },
       { limit: 100, offset, photo: true },
     )
-
     return {
       offset,
       extend,
       locations: await getLocations(params),
       ...(fetchCount && (await getLocationsCount(params))),
     }
+  },
+)
+
+export const fetchListLocationsByIds = createAsyncThunk(
+  'list/fetchListLocationsByIds',
+  async (locationIds, { getState }) => {
+    const state = getState()
+    const { muni, invasive } = state.filter
+    const ids = locationIds.join(',')
+
+    const params = {
+      ids,
+      muni,
+      invasive,
+      photo: false,
+      count: false,
+    }
+
+    return await getLocations(params)
   },
 )
 
@@ -39,6 +57,7 @@ export const listSlice = createSlice({
     offset: 0,
     shouldFetchNewLocations: true,
     locations: [],
+    locationsByIds: [],
     lastMapView: null,
   },
   reducers: {},
@@ -63,6 +82,16 @@ export const listSlice = createSlice({
 
       state.isLoading = false
       state.shouldFetchNewLocations = false
+    },
+    [fetchListLocationsByIds.pending]: (state) => {
+      state.isLoading = true
+    },
+    [fetchListLocationsByIds.fulfilled]: (state, action) => {
+      state.locationsByIds = action.payload // Заменяем старые локации новыми
+      state.isLoading = false
+    },
+    [fetchListLocationsByIds.rejected]: (state) => {
+      state.isLoading = false
     },
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true

@@ -18,6 +18,7 @@
   "imported_from": "Imported from {{name}}",
   "edited_on": "Edited on {{date}}",
   "glossary": {
+    "activity": "Activity",
     "about": "About",
     "list": "List",
     "tree_inventory": "Tree inventory",
@@ -53,7 +54,8 @@
     "project": "The project",
     "data": "The data",
     "sharing": "Sharing the harvest",
-    "press": "In the press"
+    "press": "In the press",
+    "last_activity": "Last activity"
   },
   "users": {
     "sign_in": "Sign in",

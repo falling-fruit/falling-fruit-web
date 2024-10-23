@@ -237,6 +237,14 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink
+                to={pathWithCurrentView('/activity')}
+                activeClassName="active"
+              >
+                {t('glossary.activity')}
+              </NavLink>
+            </li>
+            <li>
               <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
                 <NavLink to="/about" activeClassName="active">
                   {t('pages.project')}
