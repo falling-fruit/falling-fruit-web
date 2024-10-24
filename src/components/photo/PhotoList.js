@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components/macro'
 
 import ImagePreview from '../ui/ImagePreview'
-import ListEntry, { Icons } from '../ui/ListEntry'
+import ListEntry, { Icons, PrimaryText } from '../ui/ListEntry'
 
 const remove = (list, startIndex, deleteCount) => {
   const result = Array.from(list)
@@ -72,15 +72,12 @@ export const PhotoList = ({ photos, onChange }) => {
             style={provided.draggableProps.style}
             src={image}
             alt={name}
-            primaryText={
-              <>
-                {isNew && <NewBadge />}
-                <div>{name}</div>
-              </>
-            }
             isUploading={isUploading}
             $onDelete={() => onChange(remove(photos, index, 1))}
-          />
+          >
+            <PrimaryText>{isNew && <NewBadge />}</PrimaryText>
+            <PrimaryText>{name}</PrimaryText>
+          </PhotoEntry>
         )}
       </Draggable>
     ))

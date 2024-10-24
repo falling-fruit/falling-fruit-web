@@ -8,7 +8,7 @@ import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
-import ListEntry from '../ui/ListEntry'
+import ListEntry, { PrimaryText } from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
 import SocialButtons from '../ui/SocialButtons'
@@ -339,24 +339,28 @@ const SettingsPage = ({ desktop }) => {
           <StyledSocialButtons />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
-            primaryText={t('pages.project')}
             onClick={() => history.push('/about')}
-          />
+          >
+            <PrimaryText>{t('pages.project')}</PrimaryText>
+          </StyledListEntry>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
-            primaryText={t('pages.data')}
             onClick={() => history.push('/data')}
-          />
+          >
+            <PrimaryText>{t('pages.data')}</PrimaryText>
+          </StyledListEntry>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
-            primaryText={t('pages.sharing')}
             onClick={() => history.push('/sharing')}
-          />
+          >
+            <PrimaryText>{t('pages.sharing')}</PrimaryText>
+          </StyledListEntry>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
-            primaryText={t('pages.press')}
             onClick={() => history.push('/press')}
-          />
+          >
+            <PrimaryText>{t('pages.press')}</PrimaryText>
+          </StyledListEntry>
         </>
       )}
     </Page>
