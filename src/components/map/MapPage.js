@@ -426,10 +426,7 @@ const MapPage = ({ isDesktop }) => {
               selected={location.id === locationId}
               editing={isEditingLocation && location.id === locationId}
               showLabel={showLabels}
-              commonName={typesAccess.getCommonName(location.type_ids[0])}
-              scientificName={typesAccess.getScientificName(
-                location.type_ids[0],
-              )}
+              types={location.type_ids.map((id) => typesAccess.getType(id))}
             />
           ))}
           {(isEditingLocation || isAddingLocation) && draggedPosition && (
