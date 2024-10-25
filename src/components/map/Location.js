@@ -42,20 +42,20 @@ const TooltipLabel = styled(MapLabel)`
 `
 
 const Location = memo(
-  ({ showLabel, types, selected, editing, onClick, ...props }) => (
+  ({ showLabel, typeIds, selected, editing, onClick, ...props }) => (
     <>
       {selected && !editing && <MapPin />}
       {editing && <BackgroundMapPin />}
       <LocationButton onClick={onClick} {...props}>
         {!showLabel && (
           <TooltipLabel>
-            <TypeLabels types={types} />
+            <TypeLabels typeIds={typeIds} />
           </TooltipLabel>
         )}
       </LocationButton>
       {showLabel && (
         <MapLabel>
-          <TypeLabels types={types} />
+          <TypeLabels typeIds={typeIds} />
         </MapLabel>
       )}
     </>

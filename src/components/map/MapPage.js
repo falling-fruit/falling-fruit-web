@@ -149,7 +149,6 @@ const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const handleViewChangeRef = useRef(() => void 0)
-  const typesAccess = useSelector((state) => state.type.typesAccess)
 
   const [draggedPosition, setDraggedPosition] = useState(null)
 
@@ -426,7 +425,7 @@ const MapPage = ({ isDesktop }) => {
               selected={location.id === locationId}
               editing={isEditingLocation && location.id === locationId}
               showLabel={showLabels}
-              types={location.type_ids.map((id) => typesAccess.getType(id))}
+              typeIds={location.type_ids}
             />
           ))}
           {(isEditingLocation || isAddingLocation) && draggedPosition && (

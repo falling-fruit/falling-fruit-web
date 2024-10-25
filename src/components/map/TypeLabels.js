@@ -15,31 +15,27 @@ const ScientificName = styled(TypeItem)`
   font-style: italic;
 `
 
-const TypeLabels = ({ types }) => {
+const TypeLabels = ({ typeIds }) => {
   const { types: selectedTypes } = useSelector((state) => state.filter)
-
-  const typeLabels =
-    types && types.length > 0
-      ? types.map((type) => ({
-          label: type.commonName || type.scientificName,
-          isScientific: !type.commonName && type.scientificName,
-          isSelected: selectedTypes.includes(type.id),
-        }))
-      : []
+  const typesAccess = useSelector((state) => state.type.typesAccess)
 
   return (
     <TypeList>
-      {typeLabels.map((item, index) =>
-        item.isScientific ? (
-          <ScientificName key={index} isSelected={item.isSelected}>
-            {item.label}
+      {(typeIds || []).map((id, index) => {
+        const type = typesAccess.getType(id)
+        return !type ? null : !type.commonName && type.scientificName ? (
+          <ScientificName
+            key={index}
+            isSelected={selectedTypes.includes(type.id)}
+          >
+            {type.scientificName}
           </ScientificName>
         ) : (
-          <TypeItem key={index} isSelected={item.isSelected}>
-            {item.label}
+          <TypeItem key={index} isSelected={selectedTypes.includes(type.id)}>
+            {type.commonName || type.scientificName}
           </TypeItem>
-        ),
-      )}
+        )
+      })}
     </TypeList>
   )
 }
