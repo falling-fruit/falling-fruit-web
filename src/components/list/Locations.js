@@ -1,10 +1,7 @@
-import { useWindowSize } from '@reach/window-size'
 import { ChevronRight } from '@styled-icons/boxicons-solid'
-import { forwardRef, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
-import { VariableSizeList } from 'react-window'
-import InfiniteLoader from 'react-window-infinite-loader'
 import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
@@ -23,24 +20,13 @@ const TypeNameTagWrapper = styled.span`
   opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
 `
 
-// Constants for layout calculations
-const LEFT_PADDING = 14
-const RIGHT_PADDING = 16
-const LEFT_ICON_WIDTH = 35
-const RIGHT_ICON_WIDTH = 18
-const TAG_HEIGHT = 28
-const FAT_TAG_EXTRA_HEIGHT = 20
-const TAG_MARGIN_RIGHT = 4
-const TAG_MARGIN_BOTTOM = 2
-const TAG_PADDING_HORIZONTAL = 10
-const FONT_WIDTH = 6.5
-const BASE_ITEM_HEIGHT = 57
-
 const LocationItem = styled.li`
-  box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  padding: 0 14px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.75em;
+  padding-bottom: 0.25em;
   align-items: start;
   cursor: pointer;
   &:not(:last-child) {
@@ -97,16 +83,15 @@ const LeftIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 18px;
-  margin-top: 11px;
+  margin-right: 1.5em;
 `
 
 const RightIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 18px;
-  margin-top: 22px;
+  margin-left: 1.5em;
+  margin-top: 1em;
 `
 
 const ImageIcon = ({ imageSrc }) => (
@@ -115,120 +100,69 @@ const ImageIcon = ({ imageSrc }) => (
   </CircleIcon>
 )
 
-const Locations = forwardRef(
-  (
-    {
-      locations,
-      itemCount,
-      loadNextPage,
-      isNextPageLoading,
-      onLocationClick,
-      ...props
-    },
-    ref,
-  ) => {
-    const listRef = useRef(null)
-    const { width: windowWidth } = useWindowSize()
+const Locations = ({
+  locations = [],
+  itemCount,
+  loadNextPage,
+  onLocationClick,
+}) => {
+  const { typesAccess } = useSelector((state) => state.type)
+  const { types: selectedTypes } = useSelector((state) => state.filter)
 
-    useEffect(() => {
-      if (listRef.current) {
-        listRef.current.resetAfterIndex(0)
-      }
-    }, [locations])
+  const observerTarget = useRef(null)
 
-    useEffect(() => {
-      if (listRef.current) {
-        listRef.current.resetAfterIndex(0)
-      }
-    }, [windowWidth])
-
-    const { typesAccess } = useSelector((state) => state.type)
-    const { types: selectedTypes } = useSelector((state) => state.filter)
-
-    const getItemSize = (index) => {
-      const location = locations[index]
-      if (!location) {
-        return BASE_ITEM_HEIGHT
-      }
-
-      const availableWidth =
-        windowWidth -
-        LEFT_PADDING -
-        RIGHT_PADDING -
-        LEFT_ICON_WIDTH -
-        RIGHT_ICON_WIDTH
-
-      let currentLineWidth = 0
-      let linesCount = 1
-      let numFatLines = 0
-
-      location.type_ids.forEach((typeId) => {
-        const type = typesAccess.getType(typeId)
-        const tagContent = `${type?.commonName || ''} ${
-          type?.scientificName || ''
-        }`.trim()
-        let tagWidth = tagContent.length * FONT_WIDTH + TAG_PADDING_HORIZONTAL
-
-        if (tagWidth > availableWidth - 30) {
-          tagWidth = Math.ceil(tagWidth / 2)
-          numFatLines++
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && locations.length < itemCount) {
+          loadNextPage?.()
         }
+      },
+      { rootMargin: '300px 0px 0px 0px' },
+    )
 
-        if (currentLineWidth + tagWidth > availableWidth) {
-          linesCount++
-          currentLineWidth = tagWidth + TAG_MARGIN_RIGHT
-        } else {
-          currentLineWidth += tagWidth + TAG_MARGIN_RIGHT
-        }
-      })
-
-      return (
-        BASE_ITEM_HEIGHT +
-        (linesCount - 1) * (TAG_HEIGHT + TAG_MARGIN_BOTTOM) +
-        numFatLines * FAT_TAG_EXTRA_HEIGHT
-      )
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current)
     }
 
-    const Item = ({ index, style }) => {
-      const location = locations[index]
+    return () => observer.disconnect()
+  }, [itemCount, loadNextPage]) //eslint-disable-line
 
-      let content
-      if (location) {
-        content = (
-          <LocationItem
-            key={location.id}
-            onClick={(e) => onLocationClick?.(location.id, e)}
-            style={style}
-          >
-            <LeftIcon>
-              <ImageIcon imageSrc={location.photo} />
-            </LeftIcon>
-            <ContentWrapper>
-              <TagsWrapper>
-                {location.type_ids.map((typeId) => {
-                  const type = typesAccess.getType(typeId)
-                  const isSelected = selectedTypes.includes(typeId)
-                  return (
-                    <TypeNameTagWrapper key={typeId} isSelected={isSelected}>
-                      <TypeName
-                        commonName={type?.commonName}
-                        scientificName={type?.scientificName}
-                      />
-                    </TypeNameTagWrapper>
-                  )
-                })}
-              </TagsWrapper>
-              <DistanceText distance={location.distance} />
-            </ContentWrapper>
-            <RightIcon>
-              <ChevronRight size="16" color={theme.blue} />
-            </RightIcon>
-          </LocationItem>
-        )
-      } else {
-        // Row not yet loaded
-        content = (
-          <LocationItem style={style}>
+  return (
+    <>
+      {locations.map((location, index) => (
+        <LocationItem
+          key={index}
+          onClick={(e) => onLocationClick?.(location.id, e)}
+        >
+          <LeftIcon>
+            <ImageIcon imageSrc={location.photo} />
+          </LeftIcon>
+          <ContentWrapper>
+            <TagsWrapper>
+              {location.type_ids.map((typeId) => {
+                const type = typesAccess.getType(typeId)
+                const isSelected = selectedTypes.includes(typeId)
+                return (
+                  <TypeNameTagWrapper key={typeId} isSelected={isSelected}>
+                    <TypeName
+                      commonName={type?.commonName}
+                      scientificName={type?.scientificName}
+                    />
+                  </TypeNameTagWrapper>
+                )
+              })}
+            </TagsWrapper>
+            <DistanceText distance={location.distance} />
+          </ContentWrapper>
+          <RightIcon>
+            <ChevronRight size="16" color={theme.blue} />
+          </RightIcon>
+        </LocationItem>
+      ))}
+      {locations.length < itemCount && (
+        <>
+          <LocationItem ref={observerTarget}>
             <LeftIcon>
               <Skeleton circle width="1.75rem" height="1.75rem" />
             </LeftIcon>
@@ -244,44 +178,33 @@ const Locations = forwardRef(
               <ChevronRight size="16" color={theme.tertiaryText} />
             </RightIcon>
           </LocationItem>
-        )
-      }
-
-      return content
-    }
-
-    const loadMoreItems = isNextPageLoading ? () => void 0 : loadNextPage
-    const isItemLoaded = (index) => index < locations.length
-
-    return (
-      <InfiniteLoader
-        isItemLoaded={isItemLoaded}
-        itemCount={itemCount}
-        loadMoreItems={loadMoreItems}
-      >
-        {({ onItemsRendered, ref: infiniteLoaderRef }) => (
-          <VariableSizeList
-            ref={(list) => {
-              listRef.current = list
-              if (typeof ref === 'function') {
-                ref(list)
-              } else if (ref) {
-                ref.current = list
-              }
-              infiniteLoaderRef(list)
-            }}
-            onItemsRendered={onItemsRendered}
-            {...props}
-            itemCount={itemCount}
-            itemSize={getItemSize}
-          >
-            {Item}
-          </VariableSizeList>
-        )}
-      </InfiniteLoader>
-    )
-  },
-)
+          {[
+            ...Array(
+              Math.min(Math.max(0, itemCount - locations.length - 1), 4),
+            ),
+          ].map((_, i) => (
+            <LocationItem key={`skeleton-${i}`}>
+              <LeftIcon>
+                <Skeleton circle width="1.75rem" height="1.75rem" />
+              </LeftIcon>
+              <TextContainer>
+                <PrimaryText>
+                  <Skeleton width={150} />
+                </PrimaryText>
+                <SecondaryText>
+                  <Skeleton width={50} />
+                </SecondaryText>
+              </TextContainer>
+              <RightIcon>
+                <ChevronRight size="16" color={theme.tertiaryText} />
+              </RightIcon>
+            </LocationItem>
+          ))}
+        </>
+      )}
+    </>
+  )
+}
 Locations.displayName = 'Locations'
 
 export default Locations
