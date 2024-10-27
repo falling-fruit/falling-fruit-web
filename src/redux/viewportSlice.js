@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { selectPlace } from './placeSlice'
+
 export const viewportSlice = createSlice({
   name: 'viewport',
   initialState: {
@@ -7,7 +9,18 @@ export const viewportSlice = createSlice({
   },
   reducers: {
     updateLastMapView: (state, action) => {
-      state.lastMapView = action.payload
+      if (action.payload.width > 0 && action.payload.height > 0) {
+        state.lastMapView = action.payload
+      }
+    },
+  },
+  extraReducers: {
+    [selectPlace]: (state, action) => {
+      state.lastMapView = {
+        height: state.lastMapView.height,
+        width: state.lastMapView.width,
+        ...action.payload.place.view,
+      }
     },
   },
 })

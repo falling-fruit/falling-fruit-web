@@ -12,7 +12,7 @@ import {
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { updatePosition } from '../../redux/locationSlice'
 import { setGoogle } from '../../redux/mapSlice'
-import { fetchLocations, viewChangeAndFetch } from '../../redux/viewChange'
+import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import throttle from '../../utils/throttle'
@@ -120,8 +120,9 @@ const makeHandleViewChange = (dispatch, googleMap, history) => (_) => {
     width: googleMap.getDiv().offsetWidth,
     height: googleMap.getDiv().offsetHeight,
   }
-  dispatch(viewChangeAndFetch(newView))
   dispatch(updateLastMapView(newView))
+  dispatch(fetchLocations())
+  dispatch(fetchFilterCounts())
   history.changeView(newView)
 }
 

@@ -11,60 +11,12 @@ export const getZoomedInView = (locationLat, locationLng) =>
       description: `${locationLat}, ${locationLng}`,
     },
     viewport: {
-      ne: { lat: locationLat + BOUND_DELTA, lng: locationLng + BOUND_DELTA },
-      sw: { lat: locationLat - BOUND_DELTA, lng: locationLng - BOUND_DELTA },
+      north: locationLat + BOUND_DELTA,
+      south: locationLat - BOUND_DELTA,
+      east: locationLng + BOUND_DELTA,
+      west: locationLng - BOUND_DELTA,
     },
   })
-
-export const getPlaceBoundsOld = async (description, placeId, lastMapView) => {
-  const results = await getGeocode({ placeId })
-  const {
-    geometry: { viewport, location },
-  } = results[0]
-
-  const [ne, sw] = [viewport.getNorthEast(), viewport.getSouthWest()]
-
-  const proposedZoom = getZoom(
-    ne.lat(),
-    ne.lng(),
-    sw.lat(),
-    sw.lng(),
-    lastMapView.height,
-    lastMapView.width,
-  )
-  const proposedCenter = {
-    lat: (ne.lat() + sw.lat()) / 2,
-    lng: (ne.lng() + sw.lng()) / 2,
-  }
-
-  const proposedBounds = getProposedBounds(
-    proposedCenter,
-    proposedZoom,
-    lastMapView.width,
-    lastMapView.height,
-  )
-
-  console.log({ proposedZoom, proposedCenter, proposedBounds })
-
-  return {
-    location: {
-      lat: location.lat(),
-      lng: location.lng(),
-      description,
-    },
-    viewport: {
-      ne: { lat: ne.lat(), lng: ne.lng() },
-      sw: { lat: sw.lat(), lng: sw.lng() },
-    },
-    fallbackView: {
-      zoom: proposedZoom,
-      center: proposedCenter,
-      bounds: proposedBounds,
-      width: lastMapView.width,
-      height: lastMapView.height,
-    },
-  }
-}
 
 // AI generated
 const WORLD_DIM = { height: 256, width: 256 } // tile size
@@ -76,36 +28,25 @@ const latRad = (lat) => {
   return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2
 }
 
-const getZoom = (neLat, neLng, swLat, swLng, height, width) => {
-  console.log('getZoom inputs:', { neLat, neLng, swLat, swLng, height, width })
-
-  // Ensure inputs are numbers and not undefined
+const getZoom = (north, east, south, west, height, width) => {
   if (
-    [neLat, neLng, swLat, swLng, height, width].some(
+    [north, east, south, west, height, width].some(
       (val) => typeof val !== 'number' || isNaN(val),
     )
   ) {
-    console.error('Invalid inputs to getZoom')
     return 12 // Default zoom level
   }
 
-  // Calculate latitude fraction
-  const neLatRad = latRad(neLat)
-  const swLatRad = latRad(swLat)
-  const latFraction = Math.abs(neLatRad - swLatRad) / Math.PI
-  console.log('Lat calculations:', { neLatRad, swLatRad, latFraction })
+  const northRad = latRad(north)
+  const southRad = latRad(south)
+  const latFraction = Math.abs(northRad - southRad) / Math.PI
 
-  // Calculate longitude fraction
-  let lngDiff = neLng - swLng
-  // Normalize longitude difference
+  let lngDiff = east - west
   if (lngDiff < -180) {lngDiff += 360}
   if (lngDiff > 180) {lngDiff -= 360}
   const lngFraction = Math.abs(lngDiff) / 360
-  console.log('Lng calculations:', { lngDiff, lngFraction })
 
-  // Prevent division by zero
   if (latFraction === 0 || lngFraction === 0) {
-    console.warn('Zero fraction detected')
     return 12 // Default zoom level
   }
 
@@ -116,57 +57,7 @@ const getZoom = (neLat, neLng, swLat, swLng, height, width) => {
     Math.log(width / WORLD_DIM.width / lngFraction) / Math.LN2,
   )
 
-  console.log('Zoom calculations:', { latZoom, lngZoom })
-
-  const finalZoom = Math.min(Math.max(1, Math.min(latZoom, lngZoom)), ZOOM_MAX)
-  console.log('Final zoom:', finalZoom)
-
-  return finalZoom
-}
-
-const getProposedBounds = (center, zoom, width, height) => {
-  const scale = Math.pow(2, zoom)
-  const worldCoordinateCenter = project(center)
-
-  const pixelCoordinate = {
-    x: worldCoordinateCenter.x * scale,
-    y: worldCoordinateCenter.y * scale,
-  }
-
-  const halfWidthInPixels = width / 2
-  const halfHeightInPixels = height / 2
-
-  const newNorthEast = unproject({
-    x: (pixelCoordinate.x + halfWidthInPixels) / scale,
-    y: (pixelCoordinate.y - halfHeightInPixels) / scale,
-  })
-
-  const newSouthWest = unproject({
-    x: (pixelCoordinate.x - halfWidthInPixels) / scale,
-    y: (pixelCoordinate.y + halfHeightInPixels) / scale,
-  })
-
-  return {
-    ne: { lat: newNorthEast.lat, lng: newNorthEast.lng },
-    sw: { lat: newSouthWest.lat, lng: newSouthWest.lng },
-  }
-}
-
-const project = ({ lat, lng }) => {
-  const TILE_SIZE = 256
-  const siny = Math.sin((lat * Math.PI) / 180)
-  const x = TILE_SIZE * (0.5 + lng / 360)
-  const y =
-    TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI))
-  return { x, y }
-}
-
-const unproject = ({ x, y }) => {
-  const TILE_SIZE = 256
-  const lng = (x / TILE_SIZE - 0.5) * 360
-  const latRadians = Math.atan(Math.sinh(Math.PI * (1 - (2 * y) / TILE_SIZE)))
-  const lat = latRadians * (180 / Math.PI)
-  return { lat, lng }
+  return Math.min(Math.max(1, Math.min(latZoom, lngZoom)), ZOOM_MAX)
 }
 
 const EARTH_RADIUS = 6378137
@@ -223,12 +114,18 @@ export const getPlaceBounds = async (description, placeId, lastMapView) => {
   )
   const center = mercatorToLatLng(mercatorCenter.x, mercatorCenter.y)
 
-  // New implementation
-  const newFallback = {
+  return {
+    location: {
+      lat: location.lat(),
+      lng: location.lng(),
+      description,
+    },
     view: {
       bounds: {
-        ne: { lat: adjustedNE.lat, lng: adjustedNE.lng },
-        sw: { lat: adjustedSW.lat, lng: adjustedSW.lng },
+        north: adjustedNE.lat,
+        south: adjustedSW.lat,
+        east: adjustedNE.lng,
+        west: adjustedSW.lng,
       },
       center: { lat: center.lat, lng: center.lng },
       zoom: getZoom(
@@ -240,44 +137,6 @@ export const getPlaceBounds = async (description, placeId, lastMapView) => {
         lastMapView.width,
       ),
     },
-  }
-
-  const proposedZoom = getZoom(ne, sw, lastMapView.height, lastMapView.width)
-  const proposedCenter = {
-    lat: (ne.lat() + sw.lat()) / 2,
-    lng: (ne.lng() + sw.lng()) / 2,
-  }
-
-  const proposedBounds = getProposedBounds(
-    proposedCenter,
-    proposedZoom,
-    lastMapView.width,
-    lastMapView.height,
-  )
-
-  const oldFallback = {
-    view: {
-      zoom: proposedZoom,
-      center: proposedCenter,
-      bounds: proposedBounds,
-      width: lastMapView.width,
-      height: lastMapView.height,
-    },
-  }
-
-  return {
-    location: {
-      lat: location.lat(),
-      lng: location.lng(),
-      description,
-    },
-    viewport: {
-      ne: { lat: ne.lat(), lng: ne.lng() },
-      sw: { lat: sw.lat(), lng: sw.lng() },
-    },
-    ...oldFallback,
-    newFallback,
-    oldFallback,
   }
 }
 
