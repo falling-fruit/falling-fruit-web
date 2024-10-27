@@ -20,7 +20,7 @@ export const getZoomedInView = (locationLat, locationLng, lastMapView) => {
   }
 }
 
-const WORLD_DIM = { height: 256, width: 256 } // tile size
+const TILE_SIZE = 256
 const ZOOM_MAX = 21 // max zoom level in Google Maps
 
 const latRad = (lat) => {
@@ -48,10 +48,10 @@ const getZoom = (north, east, south, west, height, width) => {
   }
 
   const latZoom = Math.floor(
-    Math.log(height / WORLD_DIM.height / latFraction) / Math.LN2,
+    Math.log(height / TILE_SIZE / latFraction) / Math.LN2,
   )
   const lngZoom = Math.floor(
-    Math.log(width / WORLD_DIM.width / lngFraction) / Math.LN2,
+    Math.log(width / TILE_SIZE / lngFraction) / Math.LN2,
   )
 
   return Math.min(Math.max(1, Math.min(latZoom, lngZoom)), ZOOM_MAX)
@@ -149,7 +149,6 @@ const getBoundsForScreenSize = (center, zoom, width, height) => {
 }
 
 const project = ({ lat, lng }) => {
-  const TILE_SIZE = 256
   const siny = Math.sin((lat * Math.PI) / 180)
   const x = TILE_SIZE * (0.5 + lng / 360)
   const y =
@@ -158,7 +157,6 @@ const project = ({ lat, lng }) => {
 }
 
 const unproject = ({ x, y }) => {
-  const TILE_SIZE = 256
   const lng = (x / TILE_SIZE - 0.5) * 360
   const latRadians = Math.atan(Math.sinh(Math.PI * (1 - (2 * y) / TILE_SIZE)))
   const lat = latRadians * (180 / Math.PI)
