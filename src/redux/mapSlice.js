@@ -19,7 +19,6 @@ export const fetchMapLocations = createAsyncThunk(
     const { lastMapView } = state.viewport
     if (lastMapView) {
       const { bounds, zoom, center: _ } = lastMapView
-      console.log(zoom, bounds)
       return await getLocations(
         selectParams(
           { types, muni, invasive, bounds, zoom, center: undefined },
