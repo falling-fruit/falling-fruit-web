@@ -9,6 +9,7 @@ import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectTypes from './ConnectTypes'
 import DisconnectLocation from './DisconnectLocation'
+import DisconnectReview from './DisconnectReview'
 
 const connectRoutes = [
   /*
@@ -160,6 +161,15 @@ const connectRoutes = [
         match.params.nextSegment === 'panorama' ||
         match.params.nextNextSegment === 'position') && <ConnectOverscroll />
     }
+
+  /*
+   * DisconnectReview
+   * why: if we start editing the review and then go back to location or to the map, and then open settings, the back button should not take us to the abandoned review
+   *
+   * action: clear review in Redux
+   */
+  <Route key="disconnect-review" path={['/map', '/locations']}>
+    {({ match }) => match && <DisconnectReview />}
   </Route>,
 ]
 
