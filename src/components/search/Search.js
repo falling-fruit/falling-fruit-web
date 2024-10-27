@@ -154,7 +154,7 @@ const Search = (props) => {
       const longitude = Number(description.split(',')[1])
       dispatch(
         selectPlace({
-          place: getZoomedInView(latitude, longitude),
+          place: getZoomedInView(latitude, longitude, lastMapView),
         }),
       )
     } else {

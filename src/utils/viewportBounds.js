@@ -1,22 +1,24 @@
 import { getGeocode } from 'use-places-autocomplete'
 
-const BOUND_DELTA = 0.001
+export const getZoomedInView = (locationLat, locationLng, lastMapView) => {
+  const center = { lat: locationLat, lng: locationLng }
+  const zoom = 17
+  const bounds = getBoundsForScreenSize(
+    center,
+    zoom,
+    lastMapView.width,
+    lastMapView.height,
+  )
 
-export const getZoomedInView = (locationLat, locationLng) =>
-  // Use fixed zoom level locationed at lat and long
-  ({
+  return {
     location: {
       lat: locationLat,
       lng: locationLng,
       description: `${locationLat}, ${locationLng}`,
     },
-    viewport: {
-      south: locationLat - BOUND_DELTA,
-      west: locationLng - BOUND_DELTA,
-      north: locationLat + BOUND_DELTA,
-      east: locationLng + BOUND_DELTA,
-    },
-  })
+    view: { bounds, center, zoom },
+  }
+}
 
 const WORLD_DIM = { height: 256, width: 256 } // tile size
 const ZOOM_MAX = 21 // max zoom level in Google Maps
