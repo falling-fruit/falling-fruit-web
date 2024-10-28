@@ -1,19 +1,11 @@
-export const timePeriods = [
-  { name: 'Today', condition: (daysAgo) => daysAgo === 0 },
-  { name: 'Yesterday', condition: (daysAgo) => daysAgo === 1 },
-  { name: '2 Days Ago', condition: (daysAgo) => daysAgo === 2 },
-  { name: '3 Days Ago', condition: (daysAgo) => daysAgo === 3 },
-  { name: 'This Week', condition: (daysAgo) => daysAgo <= 7 },
-  { name: 'Last Week', condition: (daysAgo) => daysAgo <= 14 },
-  { name: '2 Weeks Ago', condition: (daysAgo) => daysAgo <= 21 },
-  { name: '3 Weeks Ago', condition: (daysAgo) => daysAgo <= 28 },
-  { name: 'This Month', condition: (daysAgo) => daysAgo <= 30 },
-  { name: 'Last Month', condition: (daysAgo) => daysAgo <= 60 },
-  { name: 'Three Months Ago', condition: (daysAgo) => daysAgo <= 90 },
-  { name: 'Six Months Ago', condition: (daysAgo) => daysAgo <= 180 },
-  { name: 'One Year Ago', condition: (daysAgo) => daysAgo <= 365 },
-  { name: 'More Than a Year', condition: (daysAgo) => daysAgo > 365 },
-]
+const formatDate = (date) => {
+  const parsedDate = new Date(date)
+  const day = String(parsedDate.getDate()).padStart(2, '0')
+  const month = String(parsedDate.getMonth() + 1).padStart(2, '0')
+  const year = parsedDate.getFullYear()
+
+  return `${day}-${month}-${year}`
+}
 
 const getDaysDifference = (date1, date2) => {
   const day1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())
@@ -25,19 +17,25 @@ const getDaysDifference = (date1, date2) => {
 export const groupChangesByDate = (changes) => {
   const today = new Date()
 
-  const groups = timePeriods.reduce((acc, period) => {
-    acc[period.name] = []
-    return acc
-  }, {})
+  const groups = {}
 
   changes.forEach((change) => {
     const changeDate = new Date(change.created_at)
     const daysAgo = getDaysDifference(today, changeDate)
 
-    const period = timePeriods.find((period) => period.condition(daysAgo))
-    if (period) {
-      groups[period.name].push(change)
+    let periodName
+    if (daysAgo === 0) {
+      periodName = 'Today'
+    } else if (daysAgo === 1) {
+      periodName = 'Yesterday'
+    } else {
+      periodName = formatDate(changeDate)
     }
+
+    if (!groups[periodName]) {
+      groups[periodName] = []
+    }
+    groups[periodName].push(change)
   })
 
   return groups

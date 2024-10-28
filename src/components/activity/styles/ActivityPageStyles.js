@@ -30,7 +30,15 @@ export const List = styled.ul`
 `
 
 export const ListItem = styled.li`
-  margin-bottom: 1rem;
+  p {
+    margin: 0 0 0.5rem;
+  }
+
+  @media (max-width: 767px) {
+    p {
+      margin: 0 0 1rem;
+    }
+  }
 `
 
 export const LazyLoaderWrapper = styled.div`

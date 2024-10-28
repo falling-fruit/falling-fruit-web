@@ -8,9 +8,7 @@ import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import InfinityList from './InfinityList'
 import LazyLoader from './LazyLoader'
 import { LazyLoaderWrapper } from './styles/ActivityPageStyles'
-import { groupChangesByDate, timePeriods } from './utils/listSortUtils'
-
-const MAX_RECORDS = 1000
+import { groupChangesByDate } from './utils/listSortUtils'
 
 const ActivityPage = () => {
   const dispatch = useDispatch()
@@ -29,7 +27,7 @@ const ActivityPage = () => {
   }))
 
   const loadMoreChanges = useCallback(async () => {
-    if (isLoading || locationChanges.length >= MAX_RECORDS) {
+    if (isLoading) {
       return
     }
 
@@ -47,7 +45,7 @@ const ActivityPage = () => {
     } finally {
       setIsLoading(false)
     }
-  }, [dispatch, isLoading, offset, locationChanges.length])
+  }, [dispatch, isLoading, offset])
 
   useEffect(() => {
     dispatch(fetchAndLocalizeTypes(language))
@@ -100,25 +98,11 @@ const ActivityPage = () => {
 
   return (
     <PageScrollWrapper>
-      {/* eslint-disable-next-line react/style-prop-object */}
       <PageTemplate from="Settings">
         <h1>Recent Activity</h1>
         <p>
           Explore the latest contributions from our community as they document
-          fruit-bearing trees and plants across different regions. Your input
-          helps make foraging and sustainable living accessible to everyone!
-        </p>
-
-        <p>
-          Join the growing community of foragers and urban explorers by adding
-          your own findings or discovering what’s nearby. Together, we can map
-          the world’s!
-        </p>
-
-        <p>
-          Browse through the latest additions to find trees near you, or sign up
-          to add your own. Click on a tree name for more details about the
-          location and type of fruit.
+          fruit-bearing trees and plants across different regions.
         </p>
 
         {error && (
@@ -130,7 +114,6 @@ const ActivityPage = () => {
         {locationChanges.length > 0 && (
           <InfinityList
             groupedChanges={groupedChanges}
-            timePeriods={timePeriods}
             getPlantName={getPlantName}
           />
         )}
@@ -140,11 +123,6 @@ const ActivityPage = () => {
         {isLoading && (
           <LazyLoaderWrapper>
             <LazyLoader />
-          </LazyLoaderWrapper>
-        )}
-        {locationChanges.length >= MAX_RECORDS && (
-          <LazyLoaderWrapper>
-            You have only viewed the first {MAX_RECORDS} activities!
           </LazyLoaderWrapper>
         )}
       </PageTemplate>

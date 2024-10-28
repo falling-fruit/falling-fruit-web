@@ -747,25 +747,25 @@ export interface components {
         reviews?: components["schemas"]["Review"][];
       };
     LocationChange: {
-      /** Время создания изменения */
+      /** Time of the change creation */
       created_at: string;
-      /** Описание изменения (например, добавлено, обновлено, удалено) */
+      /** Description of the change (e.g., added, updated, deleted) */
       description: string;
-      /** ID локации */
+      /** Location ID */
       location_id: number;
-      /** Массив ID типов */
+      /** Array of type IDs */
       type_ids: number[];
-      /** ID отзыва */
+      /** Review ID */
       review_id: number;
-      /** ID пользователя */
+      /** User ID */
       user_id: number;
-      /** Имя автора */
+      /** Author's name */
       author: string;
-      /** Город */
+      /** City */
       city: string;
-      /** Штат */
+      /** State */
       state: string;
-      /** Страна */
+      /** Country */
       country: string;
     };
     BaseReview: {

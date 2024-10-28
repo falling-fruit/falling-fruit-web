@@ -10,7 +10,6 @@ import {
   getLocationById,
   getLocationsChanges,
 } from '../utils/api'
-import { fetchListLocationsByIds } from './listSlice'
 import { fetchReviewData } from './reviewSlice'
 
 export const fetchLocationData = createAsyncThunk(
@@ -28,10 +27,7 @@ export const fetchLocationData = createAsyncThunk(
 
 export const fetchLocationChanges = createAsyncThunk(
   'location/fetchLocationChanges',
-  async (
-    { limit = 100, offset = 0, userId },
-    { rejectWithValue, dispatch },
-  ) => {
+  async ({ limit = 100, offset = 0, userId }, { rejectWithValue }) => {
     try {
       const locationChanges = await getLocationsChanges({
         limit,
@@ -39,34 +35,7 @@ export const fetchLocationChanges = createAsyncThunk(
         userId,
       })
 
-      const locationIds = locationChanges.map((change) => change.location_id)
-      const locationsByIdsResult = await dispatch(
-        fetchListLocationsByIds(locationIds),
-      )
-      const locationsByIds = locationsByIdsResult.payload
-
-      if (!Array.isArray(locationsByIds)) {
-        throw new Error('Expected locationsByIds to be an array')
-      }
-
-      const locationsMap = {}
-      locationsByIds.forEach((location) => {
-        locationsMap[location.id] = location
-      })
-
       return locationChanges
-        .map((change) => {
-          const location = locationsMap[change.location_id]
-          if (location) {
-            return {
-              ...change,
-              lat: location.lat,
-              lng: location.lng,
-            }
-          }
-          return null
-        })
-        .filter((item) => item !== null)
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message)
     }

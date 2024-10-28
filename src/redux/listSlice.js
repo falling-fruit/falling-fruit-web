@@ -25,25 +25,6 @@ const fetchListLocations = createAsyncThunk(
   },
 )
 
-export const fetchListLocationsByIds = createAsyncThunk(
-  'list/fetchListLocationsByIds',
-  async (locationIds, { getState }) => {
-    const state = getState()
-    const { muni, invasive } = state.filter
-    const ids = locationIds.join(',')
-
-    const params = {
-      ids,
-      muni,
-      invasive,
-      photo: false,
-      count: false,
-    }
-
-    return await getLocations(params)
-  },
-)
-
 export const fetchListLocationsStart = () =>
   fetchListLocations({ fetchCount: true, offset: 0 })
 export const fetchListLocationsExtend = (locations) =>
@@ -82,16 +63,6 @@ export const listSlice = createSlice({
 
       state.isLoading = false
       state.shouldFetchNewLocations = false
-    },
-    [fetchListLocationsByIds.pending]: (state) => {
-      state.isLoading = true
-    },
-    [fetchListLocationsByIds.fulfilled]: (state, action) => {
-      state.locationsByIds = action.payload // Заменяем старые локации новыми
-      state.isLoading = false
-    },
-    [fetchListLocationsByIds.rejected]: (state) => {
-      state.isLoading = false
     },
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true
