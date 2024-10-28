@@ -104,6 +104,16 @@ const ConnectLocation = ({
     setHasCentered(false)
   }, [locationId])
 
+  useEffect(() => {
+    // If in a location drawer, contain the overscroll
+    if (!isDesktop && !isBeingEdited) {
+      document.body.style.overscrollBehaviorY = 'contain'
+      return () => {
+        document.body.style.overscrollBehaviorY = ''
+      }
+    }
+  }, [isDesktop, isBeingEdited])
+
   return null
 }
 
