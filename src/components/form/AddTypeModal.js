@@ -116,10 +116,9 @@ const validationSchema = Yup.object().shape({
   notes: Yup.string(),
 })
 
-const AddTypeModal = ({ initialName }) => {
+const AddTypeModal = ({ initialName, onTypeAdded }) => {
   const { i18n } = useTranslation()
   const dispatch = useDispatch()
-  const { locationId } = useSelector((state) => state.location)
   const { isAddTypeModalOpen } = useSelector((state) => state.type)
 
   // Initialize state
@@ -164,9 +163,10 @@ const AddTypeModal = ({ initialName }) => {
       addTypeAndUpdate({
         submitData,
         language: i18n.language,
-        locationId,
       }),
-    )
+    ).then((action) => {
+      onTypeAdded(action.payload.newMenuEntry)
+    })
     setSubmitting(false)
   }
 

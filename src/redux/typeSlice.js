@@ -14,9 +14,17 @@ export const fetchAndLocalizeTypes = createAsyncThunk(
 
 export const addTypeAndUpdate = createAsyncThunk(
   'type/addTypeAndUpdate',
-  async ({ submitData, language, locationId }) => {
+  async ({ submitData, language }, { getState }) => {
     const response = await addType(submitData)
-    return { ...response, language, locationId }
+    const state = getState()
+    const updatedTypesAccess = state.type.typesAccess.addType(
+      response,
+      language,
+    )
+    return {
+      newMenuEntry: updatedTypesAccess.getMenuEntry(response.id),
+      updatedTypesAccess,
+    }
   },
 )
 
@@ -25,7 +33,6 @@ const typeSlice = createSlice({
   initialState: {
     isLoading: false,
     typesAccess: typesAccessInLanguage([], ''),
-    recentlyAddedTypesByLocation: {},
     isAddTypeModalOpen: false,
   },
   reducers: {
@@ -45,13 +52,8 @@ const typeSlice = createSlice({
       state.isLoading = false
     },
     [addTypeAndUpdate.fulfilled]: (state, action) => {
-      const { id, language, locationId } = action.payload
-      state.typesAccess = state.typesAccess.addType(action.payload, language)
+      state.typesAccess = action.payload.updatedTypesAccess
       toast.success('New type added successfully!')
-      if (!state.recentlyAddedTypesByLocation[locationId]) {
-        state.recentlyAddedTypesByLocation[locationId] = []
-      }
-      state.recentlyAddedTypesByLocation[locationId].push(id)
       state.isAddTypeModalOpen = false
     },
     [addTypeAndUpdate.rejected]: () => {
