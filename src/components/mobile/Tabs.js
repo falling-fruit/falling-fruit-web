@@ -1,5 +1,5 @@
 import { ListUl } from '@styled-icons/boxicons-regular'
-import { Cog, MapAlt, UserCircle } from '@styled-icons/boxicons-solid'
+import { Cog, MapAlt, User, UserCircle } from '@styled-icons/boxicons-solid'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -17,6 +17,7 @@ const Tabs = () => {
   const { locationId, isBeingEdited, streetViewOpen } = useSelector(
     (state) => state.location,
   )
+  const user = useSelector((state) => state.auth.user)
 
   const tabs = [
     {
@@ -39,8 +40,8 @@ const Tabs = () => {
     },
     {
       paths: authPages.map((route) => route.path),
-      icon: <UserCircle />,
-      label: t('glossary.account'),
+      icon: user ? <UserCircle /> : <User />,
+      label: user ? t('glossary.account') : t('users.sign_in'),
     },
   ]
 
