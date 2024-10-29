@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { matchPath, useLocation } from 'react-router-dom'
 
+import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import aboutRoutes from '../about/aboutRoutes'
 import { authPages } from '../auth/authRoutes'
@@ -17,7 +18,7 @@ const Tabs = () => {
   const { locationId, isBeingEdited, streetViewOpen } = useSelector(
     (state) => state.location,
   )
-  const user = useSelector((state) => state.auth.user)
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   const tabs = [
     {
@@ -40,8 +41,8 @@ const Tabs = () => {
     },
     {
       paths: authPages.map((route) => route.path),
-      icon: user ? <UserCircle /> : <User />,
-      label: user ? t('glossary.account') : t('users.sign_in'),
+      icon: isLoggedIn ? <UserCircle /> : <User />,
+      label: isLoggedIn ? t('glossary.account') : t('users.sign_in'),
     },
   ]
 
@@ -80,6 +81,14 @@ const Tabs = () => {
     } else if (newTabIndex === 1 && locationId && streetViewOpen) {
       // We could also be viewing the panorama
       history.push(`/locations/${locationId}/panorama`)
+    } else if (newTabIndex === 3) {
+      // Logged in users go to account page
+      if (isLoggedIn) {
+        history.push('/users/edit')
+      } else {
+        // Otherwise sign in
+        history.push(withFromPage('/users/sign_in'))
+      }
     } else {
       history.push(tabs[newTabIndex]?.paths[0])
     }

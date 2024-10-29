@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 import { resetPassword } from '../../utils/api'
-import { pathWithCurrentView } from '../../utils/appUrl'
+import { pathWithCurrentView, withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Input } from '../form/FormikWrappers'
@@ -113,7 +113,7 @@ const PasswordSetPage = () => {
         )}
       </Formik>
       <Column>
-        <Link to="/users/sign_in">{t('users.sign_in')}</Link>
+        <Link to={withFromPage('/users/sign_in')}>{t('users.sign_in')}</Link>
       </Column>
     </PageTemplate>
   )

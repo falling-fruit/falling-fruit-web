@@ -47,6 +47,11 @@ export const pathWithCurrentView = (path) => {
   return pathNoTrailingSlash + mapState
 }
 
+export const withFromPage = (path) => {
+  const currentPath = window.location.pathname
+  return `${path}?fromPage=${encodeURIComponent(currentPath)}`
+}
+
 export const currentPathWithView = (view) => {
   const { pathname } = new URL(window.location.href)
   const stateIndex = pathname.indexOf('/@')
