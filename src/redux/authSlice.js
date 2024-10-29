@@ -1,6 +1,8 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
+import { toast } from 'react-toastify'
 
-import { getUser, getUserToken } from '../utils/api'
+import { editUser, getUser, getUserToken } from '../utils/api'
 import authStore from '../utils/authStore'
 
 export const checkAuth = createAsyncThunk(
@@ -33,6 +35,20 @@ export const login = createAsyncThunk(
     authStore.setToken(token, rememberMe)
 
     return await getUser()
+  },
+)
+
+export const editProfile = createAsyncThunk(
+  'auth/editProfile',
+  async (userData, { rejectWithValue, getState }) => {
+    try {
+      const currentUser = getState().auth.user
+      const isEmailChanged = userData.email !== currentUser.email
+      const response = await editUser({ ...userData, range: currentUser.range })
+      return { response, isEmailChanged }
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.error || err.message)
+    }
   },
 )
 
@@ -85,6 +101,28 @@ export const authSlice = createSlice({
 
     [logout]: (state) => {
       state.user = null
+    },
+
+    [editProfile.pending]: (state) => {
+      state.isLoading = true
+    },
+    [editProfile.fulfilled]: (state, action) => {
+      const { response, isEmailChanged } = action.payload
+      state.user = response
+      state.error = null
+      state.isLoading = false
+
+      if (isEmailChanged && response.unconfirmed_email) {
+        toast.success(
+          i18next.t('devise.registrations.update_needs_confirmation'),
+        )
+      } else {
+        toast.success(i18next.t('devise.registrations.updated'))
+      }
+    },
+    [editProfile.rejected]: (state, action) => {
+      state.error = action.payload
+      state.isLoading = false
     },
   },
 })
