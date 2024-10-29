@@ -119,7 +119,10 @@ const connectRoutes = [
    * - fetch data from backend
    * - simplify to keep just the currently selected language
    */
-  <Route key="connect-types" path={['/map', '/list', '/locations', '/reviews']}>
+  <Route
+    key="connect-types"
+    path={['/map', '/list', '/locations', '/reviews', '/settings']}
+  >
     <ConnectTypes />
   </Route>,
   /*
