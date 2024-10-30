@@ -4,6 +4,7 @@ import ConnectList from './ConnectList'
 import ConnectLocation from './ConnectLocation'
 import ConnectMap from './ConnectMap'
 import ConnectNewLocation from './ConnectNewLocation'
+import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectTypes from './ConnectTypes'
@@ -132,6 +133,29 @@ const connectRoutes = [
    */
   <Route key="disconnect-location" path={['/map']}>
     {({ match }) => match && <DisconnectLocation />}
+  </Route>,
+  /*
+   * ConnectOverscroll
+   * why: when we ask the user to pan on mobile or scroll a lot, sometimes they accidentally overscroll
+   *
+   * action: set a style property disabling the default 'refresh page on vertical overscroll' for list, location drawer, and pages with map on it
+   */
+  <Route
+    key="connect-overscroll"
+    path={[
+      '/locations/:locationId/:nextSegment/:nextNextSegment',
+      '/locations/:locationId/:nextSegment',
+      '/locations/:locationId',
+      '/list-locations/:locationId',
+      '/map',
+      '/list',
+    ]}
+  >
+    {({ match }) =>
+      match &&
+      (!match.params.nextNextSegment ||
+        match.params.nextNextSegment === 'position') && <ConnectOverscroll />
+    }
   </Route>,
 ]
 
