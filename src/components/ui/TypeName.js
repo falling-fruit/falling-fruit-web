@@ -21,6 +21,7 @@ const ScientificName = styled.span`
 
 const TypeNameWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
   font-size: 0.875rem;
 
