@@ -1,4 +1,3 @@
-import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
@@ -25,8 +24,6 @@ const LocationItem = styled.li`
   flex-direction: row;
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: 0.75em;
-  padding-bottom: 0.25em;
   align-items: start;
   cursor: pointer;
   &:not(:last-child) {
@@ -52,19 +49,9 @@ const TextContainer = styled.div`
 `
 
 const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   flex: 1;
-  overflow: hidden;
-  height: 100%;
-`
-
-const TagsWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  overflow: scroll;
+  margin-top: 0.5em;
+  margin-bottom: 0.375em;
 `
 
 const PrimaryText = styled.div`
@@ -83,15 +70,8 @@ const LeftIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 1.5em;
-`
-
-const RightIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 1.5em;
-  margin-top: 1em;
+  margin-right: 1em;
+  margin-top: 0.75em;
 `
 
 const ImageIcon = ({ imageSrc }) => (
@@ -139,25 +119,20 @@ const Locations = ({
             <ImageIcon imageSrc={location.photo} />
           </LeftIcon>
           <ContentWrapper>
-            <TagsWrapper>
-              {location.type_ids.map((typeId) => {
-                const type = typesAccess.getType(typeId)
-                const isSelected = selectedTypes.includes(typeId)
-                return (
-                  <TypeNameTagWrapper key={typeId} isSelected={isSelected}>
-                    <TypeName
-                      commonName={type?.commonName}
-                      scientificName={type?.scientificName}
-                    />
-                  </TypeNameTagWrapper>
-                )
-              })}
-            </TagsWrapper>
+            {location.type_ids.map((typeId) => {
+              const type = typesAccess.getType(typeId)
+              const isSelected = selectedTypes.includes(typeId)
+              return (
+                <TypeNameTagWrapper key={typeId} isSelected={isSelected}>
+                  <TypeName
+                    commonName={type?.commonName}
+                    scientificName={type?.scientificName}
+                  />
+                </TypeNameTagWrapper>
+              )
+            })}
             <DistanceText distance={location.distance} />
           </ContentWrapper>
-          <RightIcon>
-            <ChevronRight size="16" color={theme.blue} />
-          </RightIcon>
         </LocationItem>
       ))}
       {locations.length < itemCount && (
@@ -174,9 +149,6 @@ const Locations = ({
                 <Skeleton width={50} />
               </SecondaryText>
             </TextContainer>
-            <RightIcon>
-              <ChevronRight size="16" color={theme.tertiaryText} />
-            </RightIcon>
           </LocationItem>
           {[
             ...Array(
@@ -195,9 +167,6 @@ const Locations = ({
                   <Skeleton width={50} />
                 </SecondaryText>
               </TextContainer>
-              <RightIcon>
-                <ChevronRight size="16" color={theme.tertiaryText} />
-              </RightIcon>
             </LocationItem>
           ))}
         </>
