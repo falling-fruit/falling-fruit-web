@@ -46,13 +46,20 @@ const SidePane = () => {
   const history = useAppHistory()
   const { t } = useTranslation()
   const { review } = useSelector((state) => state.review)
-  const { locationId, isBeingEdited: isEditingLocation } = useSelector(
-    (state) => state.location,
-  )
+  const {
+    locationId,
+    isBeingEdited: isEditingLocation,
+    fromSettings,
+  } = useSelector((state) => state.location)
 
   const goToMap = (event) => {
     event.stopPropagation()
     history.push('/map')
+  }
+
+  const goToSettings = (event) => {
+    event.stopPropagation()
+    history.push('/settings')
   }
 
   return (
@@ -137,7 +144,9 @@ const SidePane = () => {
                 match && (
                   <>
                     <StyledNavBack>
-                      <BackButton onClick={goToMap}>
+                      <BackButton
+                        onClick={fromSettings ? goToSettings : goToMap}
+                      >
                         <ArrowBack />
                         {t('back')}
                       </BackButton>

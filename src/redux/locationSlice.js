@@ -92,6 +92,7 @@ const locationSlice = createSlice({
     position: null, // {lat: number, lng: number}
     locationId: null,
     isBeingEdited: false,
+    fromSettings: false,
     form: null,
     tooltipOpen: false,
     streetViewOpen: false,
@@ -183,6 +184,9 @@ const locationSlice = createSlice({
     },
     setTabIndex: (state, action) => {
       state.pane.tabIndex = action.payload
+    },
+    setFromSettings: (state, action) => {
+      state.fromSettings = action.payload
     },
   },
   extraReducers: {
@@ -288,6 +292,7 @@ export const {
   setTabIndex,
   fullyOpenPaneDrawer,
   partiallyClosePaneDrawer,
+  setFromSettings,
 } = locationSlice.actions
 
 export default locationSlice.reducer

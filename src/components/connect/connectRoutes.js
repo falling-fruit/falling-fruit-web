@@ -7,6 +7,7 @@ import ConnectNewLocation from './ConnectNewLocation'
 import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
+import ConnectSettingsLocation from './ConnectSettingsLocation'
 import ConnectTypes from './ConnectTypes'
 import DisconnectLocation from './DisconnectLocation'
 import DisconnectReview from './DisconnectReview'
@@ -161,6 +162,7 @@ const connectRoutes = [
         match.params.nextSegment === 'panorama' ||
         match.params.nextNextSegment === 'position') && <ConnectOverscroll />
     }
+  </Route>,
 
   /*
    * DisconnectReview
@@ -170,6 +172,24 @@ const connectRoutes = [
    */
   <Route key="disconnect-review" path={['/map', '/locations']}>
     {({ match }) => match && <DisconnectReview />}
+  </Route>,
+  /*
+   * ConnectSettingsLocation
+   * why: we can access location page from either map or settings on desktop and want the back button to work
+   *
+   * action: if on settings page set a flag in Redux. If away from map or settings, remove the flag
+   */
+  <Route
+    key="connect-settings-location"
+    path={['/settings', '/locations/:locationId']}
+  >
+    {({ match }) =>
+      match && (
+        <ConnectSettingsLocation
+          isSettings={match && !match.params.locationId}
+        />
+      )
+    }
   </Route>,
 ]
 
