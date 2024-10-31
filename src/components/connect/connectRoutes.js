@@ -154,6 +154,7 @@ const connectRoutes = [
     {({ match }) =>
       match &&
       (!match.params.nextNextSegment ||
+        match.params.nextSegment === 'panorama' ||
         match.params.nextNextSegment === 'position') && <ConnectOverscroll />
     }
   </Route>,
