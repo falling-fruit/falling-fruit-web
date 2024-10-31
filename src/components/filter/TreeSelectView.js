@@ -74,6 +74,7 @@ const CommonName = styled.span`
 const ScientificName = styled.span`
   font-style: italic;
   margin-right: 0.5em;
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.7 : 1)};
   color: ${({ theme }) => theme.text};
 `
 
@@ -146,9 +147,13 @@ const TreeSelectView = ({
             />
           </ControlsContainer>
           <NodeContent>
-            <CommonName isDisabled={isDisabled}>{node.commonName}</CommonName>
+            {node.commonName && (
+              <CommonName isDisabled={isDisabled}>{node.commonName}</CommonName>
+            )}
             {node.scientificName && (
-              <ScientificName>{node.scientificName}</ScientificName>
+              <ScientificName isDisabled={isDisabled}>
+                {node.scientificName}
+              </ScientificName>
             )}
             <Count>({node.count})</Count>
           </NodeContent>
