@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik'
 import { uniqBy } from 'lodash'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { openAddTypeModal } from '../../redux/typeSlice'
@@ -9,34 +9,23 @@ import { AddTypeModal } from './AddTypeModal'
 import { CreatableSelect } from './FormikWrappers'
 
 const TypesSelect = () => {
-  const { typesAccess, recentlyAddedTypesByLocation } = useSelector(
-    (state) => state.type,
-  )
-  const { locationId } = useSelector((state) => state.location)
+  const { typesAccess } = useSelector((state) => state.type)
   const { values, setFieldValue } = useFormikContext()
   const dispatch = useDispatch()
 
   const typeOptions = useMemo(() => typesAccess.asMenuEntries(), [typesAccess])
-
   const [newTypeInput, setNewTypeInput] = useState('')
 
-  const recentlyAddedTypes = useMemo(
-    () =>
-      (recentlyAddedTypesByLocation[locationId] || [])
-        .map((typeId) => typesAccess.getMenuEntry(typeId))
-        .filter(Boolean),
-    [recentlyAddedTypesByLocation, locationId, typesAccess],
-  )
-
-  useEffect(() => {
-    if (recentlyAddedTypes.length > 0) {
+  const handleNewType = useCallback(
+    (newTypeOption) => {
       const updatedTypes = uniqBy(
-        [...(values.types || []), ...recentlyAddedTypes],
+        [...(values.types || []), newTypeOption],
         'value',
       )
       setFieldValue('types', updatedTypes)
-    }
-  }, [recentlyAddedTypes.join(', ')]) //eslint-disable-line
+    },
+    [values.types, setFieldValue],
+  )
 
   const handleCreateOption = useCallback(
     (inputValue) => {
@@ -71,7 +60,7 @@ const TypesSelect = () => {
         onCreateOption={handleCreateOption}
         formatCreateLabel={(inputValue) => inputValue}
       />
-      <AddTypeModal initialName={newTypeInput} />
+      <AddTypeModal initialName={newTypeInput} onTypeAdded={handleNewType} />
     </>
   )
 }
