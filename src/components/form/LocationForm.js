@@ -219,6 +219,9 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
       stepped={stepped}
       renderButtons={(formikProps) => {
         const { isSubmitting, isValid, dirty } = formikProps
+        const isUploadingPhotos = formikProps.values.review.photos.some(
+          (p) => p.isUploading,
+        )
         const formDirty = dirty || positionDirty
         return (
           <ProgressButtons>
@@ -226,7 +229,9 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
               Cancel
             </Button>
             <Button
-              disabled={isSubmitting || !isValid || !formDirty}
+              disabled={
+                isSubmitting || !isValid || !formDirty || isUploadingPhotos
+              }
               type="submit"
             >
               {isSubmitting ? 'Submitting' : 'Submit'}
