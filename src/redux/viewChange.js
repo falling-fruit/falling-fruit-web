@@ -2,7 +2,6 @@ import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../constants/map'
 import { fetchFilterCounts } from './filterSlice'
 import { fetchMapClusters, fetchMapLocations } from './mapSlice'
 import { updateSelection } from './updateSelection'
-import { updateLastMapView } from './viewportSlice'
 
 const getIsShowingClusters = (state) => {
   const map = state.map.googleMap
@@ -22,11 +21,6 @@ export const fetchLocations = () => (dispatch, getState) => {
   }
 }
 
-export const viewChangeAndFetch = (newView) => (dispatch) => {
-  dispatch(updateLastMapView(newView))
-  dispatch(fetchLocations())
-  dispatch(fetchFilterCounts())
-}
 export const filtersChanged = (filters) => (dispatch) => {
   dispatch(updateSelection(filters))
   dispatch(fetchFilterCounts())

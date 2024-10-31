@@ -153,13 +153,8 @@ export const mapSlice = createSlice({
       }
     },
     [selectPlace]: (state, action) => {
-      const { ne, sw } = action.payload.place.viewport
-      const maps = state.getGoogleMaps()
-      const bounds = new maps.LatLngBounds(
-        { lat: sw.lat, lng: sw.lng },
-        { lat: ne.lat, lng: ne.lng },
-      )
-      state.googleMap.fitBounds(bounds)
+      state.googleMap.setCenter(action.payload.place.view.center)
+      state.googleMap.setZoom(action.payload.place.view.zoom)
     },
   },
 })

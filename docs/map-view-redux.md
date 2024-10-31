@@ -41,7 +41,7 @@ Usage:
 1. **Page Loads**
    1. Default or URL-parsed center and zoom are passed.
    2. `GoogleMapReact` calls `onChange` to provide map bounds.
-   3. `MapPage` dispatches `viewChangeAndFetch` with the new view:
+   3. `MapPage` dispatches actions with the new view:
       - Updates URL.
       - Stops tracking geolocation if the user moved too far.
       - Fetches filter counts if the filter is open.
