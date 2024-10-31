@@ -18,11 +18,11 @@ const TypesSelect = () => {
 
   const handleNewType = useCallback(
     (newTypeOption) => {
-      const updatedTypes = uniqBy(
-        [...(values.types || []), newTypeOption],
-        'value',
-      )
-      setFieldValue('types', updatedTypes)
+      const currentTypes = values.types || []
+      if (!currentTypes.some((type) => type.value === newTypeOption.value)) {
+        const updatedTypes = [...currentTypes, newTypeOption]
+        setFieldValue('types', updatedTypes)
+      }
     },
     [values.types, setFieldValue],
   )
