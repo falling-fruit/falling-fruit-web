@@ -21,13 +21,15 @@ import {
 const LoginPage = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
   const error = useSelector((state) => state.auth.error)
-  const { state } = useLocation()
+  const { state, search } = useLocation()
   const { t } = useTranslation()
+  const params = new URLSearchParams(search)
+  const fromPage = params.get('fromPage')
 
   const dispatch = useDispatch()
 
   if (!isLoading && user) {
-    return <Redirect to={pathWithCurrentView('/map')} />
+    return <Redirect to={fromPage || pathWithCurrentView('/map')} />
   }
 
   return (

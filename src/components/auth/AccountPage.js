@@ -1,13 +1,10 @@
 import { Form, Formik } from 'formik'
-import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
-import { checkAuth, logout } from '../../redux/authSlice'
-import { editUser, getUser } from '../../utils/api'
+import { editProfile, logout } from '../../redux/authSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
@@ -51,44 +48,17 @@ const userToForm = (user) => ({
 
 const AccountPage = () => {
   const dispatch = useDispatch()
-  const isLoading = useSelector((state) => state.auth.isLoading)
-  const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const { user, isLoading } = useSelector((state) => state.auth)
+  const isLoggedIn = !!user
   const history = useAppHistory()
   const { t } = useTranslation()
 
-  const [user, setUser] = useState()
-
-  useEffect(() => {
-    const loadUser = async () => {
-      setUser(await getUser())
-    }
-    loadUser()
-  }, [])
-
-  if (!isLoading && !isLoggedIn) {
+  if (!isLoggedIn && !isLoading) {
     return <Redirect to={pathWithCurrentView('/users/sign_in')} />
   }
 
-  const handleSubmit = async (values) => {
-    // Pass range unchanged
-    const newUser = formToUser({ ...values, range: user.range })
-    const isEmailChanged = newUser.email !== user.email
-
-    let response
-    try {
-      response = await editUser(newUser)
-      if (isEmailChanged && response.unconfirmed_email) {
-        toast.success(t('devise.registrations.update_needs_confirmation'))
-      } else {
-        toast.success(t('devise.registrations.updated'))
-      }
-
-      setUser(response)
-      dispatch(checkAuth())
-    } catch (e) {
-      toast.error(e.response?.data?.error)
-      console.error(e.response)
-    }
+  const handleSubmit = (values) => {
+    dispatch(editProfile(formToUser(values)))
   }
 
   return (
@@ -196,7 +166,6 @@ const AccountPage = () => {
                       {t('glossary.save_changes')}
                     </Button>
                   </FormButtonWrapper>
-
                   {/* TODO: allow user to delete account. Need design */}
                 </Form>
               )}
