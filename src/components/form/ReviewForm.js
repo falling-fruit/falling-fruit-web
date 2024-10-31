@@ -140,11 +140,16 @@ export const ReviewForm = ({
       validate={({ review }) => validateReview(review)}
       renderButtons={(formikProps) => {
         const { isSubmitting, isValid, dirty } = formikProps
+        const isUploadingPhotos = formikProps.values.review.photos.some(
+          (p) => p.isUploading,
+        )
         return (
           <ProgressButtons>
             <div style={{ textAlign: editingId ? 'center' : 'left' }}>
               <Button
-                disabled={isSubmitting || !isValid || !dirty}
+                disabled={
+                  isSubmitting || !isValid || !dirty || isUploadingPhotos
+                }
                 type="submit"
               >
                 {isSubmitting ? 'Submitting' : 'Submit'}
