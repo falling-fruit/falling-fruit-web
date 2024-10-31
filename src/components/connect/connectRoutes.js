@@ -4,6 +4,7 @@ import ConnectList from './ConnectList'
 import ConnectLocation from './ConnectLocation'
 import ConnectMap from './ConnectMap'
 import ConnectNewLocation from './ConnectNewLocation'
+import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectTypes from './ConnectTypes'
@@ -69,6 +70,7 @@ const connectRoutes = [
    * - keep track of whether user wants street view
    * - on mobile, we need to center the map on the edited location because the UX involves panning the map on central pin
    * - on mobile, we need to disable the drawer when arriving from list view
+   * - on mobile, the drawer needs the user scrolling up and down
    *
    * actions:
    * - fetch data from backend
@@ -77,6 +79,7 @@ const connectRoutes = [
    * - sync property of being viewed in street view from URL routes to Redux
    * - on mobile, center and zoom on edited location
    * - on mobile, keep track of whether we arrived via list-locations URL
+   * - on mobile, disable default overscroll (e.g. a refresh on scroll down in Chrome)
    */
   <Route
     key="connect-location"
@@ -133,6 +136,30 @@ const connectRoutes = [
    */
   <Route key="disconnect-location" path={['/map']}>
     {({ match }) => match && <DisconnectLocation />}
+  </Route>,
+  /*
+   * ConnectOverscroll
+   * why: when we ask the user to pan on mobile or scroll a lot, sometimes they accidentally overscroll
+   *
+   * action: set a style property disabling the default 'refresh page on vertical overscroll' for list, location drawer, and pages with map on it
+   */
+  <Route
+    key="connect-overscroll"
+    path={[
+      '/locations/:locationId/:nextSegment/:nextNextSegment',
+      '/locations/:locationId/:nextSegment',
+      '/locations/:locationId',
+      '/list-locations/:locationId',
+      '/map',
+      '/list',
+    ]}
+  >
+    {({ match }) =>
+      match &&
+      (!match.params.nextNextSegment ||
+        match.params.nextSegment === 'panorama' ||
+        match.params.nextNextSegment === 'position') && <ConnectOverscroll />
+    }
   </Route>,
 ]
 
