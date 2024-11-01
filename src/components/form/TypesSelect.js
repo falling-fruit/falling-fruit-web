@@ -10,7 +10,7 @@ import { CreatableSelect } from './FormikWrappers'
 
 const TypesSelect = () => {
   const { typesAccess } = useSelector((state) => state.type)
-  const { values, setFieldValue } = useFormikContext()
+  const { values, validateForm, setFieldValue } = useFormikContext()
   const dispatch = useDispatch()
 
   const typeOptions = useMemo(() => typesAccess.asMenuEntries(), [typesAccess])
@@ -23,8 +23,9 @@ const TypesSelect = () => {
         'value',
       )
       setFieldValue('types', updatedTypes)
+      validateForm()
     },
-    [values.types, setFieldValue],
+    [values.types, setFieldValue, validateForm],
   )
 
   const handleCreateOption = useCallback(
