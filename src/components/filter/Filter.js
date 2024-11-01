@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { filtersChanged, selectionChanged } from '../../redux/viewChange'
+import { setShowOnlyOnMap } from '../../redux/filterSlice'
 import Input from '../ui/Input'
 import { CheckboxFilters } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
@@ -74,7 +75,7 @@ const Filter = () => {
               },
             ]}
             onChange={(values) => {
-              dispatch(filtersChanged(values))
+              dispatch(setShowOnlyOnMap(values.showOnlyOnMap))
             }}
             style={{ display: 'inline-block', marginRight: '5px' }}
           />

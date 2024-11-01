@@ -56,6 +56,9 @@ export const filterSlice = createSlice({
     closeFilter: (state) => {
       state.isOpenInMobileLayout = false
     },
+    setShowOnlyOnMap: (state, action) => {
+      state.showOnlyOnMap = action.payload
+    },
   },
   extraReducers: {
     [fetchFilterCounts.pending]: (state) => {
@@ -87,6 +90,6 @@ export const filterSlice = createSlice({
   },
 })
 
-export const { openFilter, closeFilter } = filterSlice.actions
+export const { openFilter, closeFilter, setShowOnlyOnMap } = filterSlice.actions
 
 export default filterSlice.reducer
