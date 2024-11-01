@@ -335,12 +335,6 @@ const SettingsPage = ({ desktop }) => {
 
       {!desktop && (
         <>
-          <h3>{t('glossary.activity')}</h3>
-          <StyledListEntry
-            rightIcons={<ChevronRight size="16" />}
-            primaryText={t('pages.last_activity')}
-            onClick={() => history.push('/activity')}
-          />
           <h3>{t('glossary.about')}</h3>
           <StyledSocialButtons />
           <StyledListEntry
@@ -362,6 +356,11 @@ const SettingsPage = ({ desktop }) => {
             rightIcons={<ChevronRight size="16" />}
             primaryText={t('pages.press')}
             onClick={() => history.push('/press')}
+          />
+          <StyledListEntry
+            rightIcons={<ChevronRight size="16" />}
+            primaryText={t('pages.last_activity')}
+            onClick={() => history.push('/changes')}
           />
         </>
       )}

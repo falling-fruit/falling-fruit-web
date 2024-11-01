@@ -3,10 +3,10 @@ import React from 'react'
 import {
   ActivityText,
   AuthorName,
-  List,
+  ListChanges,
   ListItem,
   PlantLink,
-} from './styles/ActivityPageStyles'
+} from './ActivityPageStyles'
 
 const InfinityList = ({ groupedChanges, getPlantName }) => {
   const renderGroup = (groupName, changes) => {
@@ -14,7 +14,29 @@ const InfinityList = ({ groupedChanges, getPlantName }) => {
       return null
     }
 
-    const groupedByUserAndLocation = changes.reduce((acc, change) => {
+    const filteredChanges = []
+    const seenChanges = new Map()
+
+    changes.forEach((change) => {
+      const key = `${change.author}-${change.city}-${change.state}-${
+        change.country
+      }-${change.location_id}-${change.type_ids.join(',')}-${
+        change.description
+      }`
+      const date = change.created_at.split('T')[0]
+
+      if (!seenChanges.has(key)) {
+        seenChanges.set(key, date)
+        filteredChanges.push(change)
+      } else if (seenChanges.get(key) === date) {
+        return
+      } else {
+        seenChanges.set(key, date)
+        filteredChanges.push(change)
+      }
+    })
+
+    const groupedByUserAndLocation = filteredChanges.reduce((acc, change) => {
       const groupKey = `${change.author}-${change.city}-${change.state}-${
         change.country
       }-${change.created_at.split('T')[0]}`
@@ -27,81 +49,82 @@ const InfinityList = ({ groupedChanges, getPlantName }) => {
       return acc
     }, {})
 
-    const countAndLimitTypes = (changes) => {
-      const typeCounts = {}
+    const getTypeLinks = (changes) => {
+      const typeLinks = []
 
       changes.forEach((change) => {
         change.type_ids.forEach((typeId) => {
           const plantName = getPlantName(typeId)
-          if (typeCounts[plantName]) {
-            typeCounts[plantName] += 1
-          } else {
-            typeCounts[plantName] = 1
-          }
+          typeLinks.push(
+            <PlantLink
+              key={`${change.location_id}-${typeId}-${plantName}`}
+              href={`/locations/${change.location_id}`}
+            >
+              {plantName}
+            </PlantLink>,
+          )
         })
       })
 
-      const plantEntries = Object.entries(typeCounts).map(([name, count]) =>
-        count > 1 ? `${name} x${count}` : name,
-      )
-
-      if (plantEntries.length > 7) {
-        return `${plantEntries.slice(0, 7).join(', ')}, ...`
-      }
-
-      return plantEntries.join(', ')
+      return typeLinks
     }
 
     return (
       <div key={groupName}>
         <h3>{groupName}</h3>
-        <List>
+        <ListChanges>
           {Object.entries(groupedByUserAndLocation).map(
             ([_, userChanges], index) => {
               const { author, city, state, country } = userChanges[0]
 
-              const typesAdded = countAndLimitTypes(
+              const addedTypeLinks = getTypeLinks(
                 userChanges.filter((change) => change.description === 'added'),
               )
 
-              const typesEdited = countAndLimitTypes(
+              const editedTypeLinks = getTypeLinks(
                 userChanges.filter((change) => change.description === 'edited'),
               )
 
               return (
                 <ListItem key={index}>
-                  {typesAdded && (
+                  {addedTypeLinks.length > 0 && (
                     <p>
-                      <PlantLink
-                        href={`/locations/${userChanges[0].location_id}`}
-                      >
-                        {typesAdded}
-                      </PlantLink>
+                      {addedTypeLinks.map((link, idx) => (
+                        <React.Fragment key={idx}>
+                          {link}
+                          {idx < addedTypeLinks.length - 1 && ', '}
+                        </React.Fragment>
+                      ))}
                       <ActivityText>
-                        , added in {city}, {state}, {country} —{' '}
+                        {' '}
+                        added in {city}, {state}, {country}
+                        {author && ' — '}
                       </ActivityText>
-                      <AuthorName>{author}</AuthorName>
+                      {author && <AuthorName>{author}</AuthorName>}
                     </p>
                   )}
 
-                  {typesEdited && (
+                  {editedTypeLinks.length > 0 && (
                     <p>
-                      <PlantLink
-                        href={`/locations/${userChanges[0].location_id}`}
-                      >
-                        {typesEdited}
-                      </PlantLink>
+                      {editedTypeLinks.map((link, idx) => (
+                        <React.Fragment key={idx}>
+                          {link}
+                          {idx < editedTypeLinks.length - 1 && ', '}
+                        </React.Fragment>
+                      ))}
                       <ActivityText>
-                        , edited in {city}, {state}, {country} —{' '}
+                        {' '}
+                        edited in {city}, {state}, {country}
+                        {author && ' — '}
                       </ActivityText>
-                      <AuthorName>{author}</AuthorName>
+                      {author && <AuthorName>{author}</AuthorName>}
                     </p>
                   )}
                 </ListItem>
               )
             },
           )}
-        </List>
+        </ListChanges>
       </div>
     )
   }

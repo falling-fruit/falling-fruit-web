@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { fetchLocationChanges } from '../../redux/locationSlice'
 import { fetchAndLocalizeTypes } from '../../redux/typeSlice'
+import { debounce } from '../../utils/debounce'
+import { groupChangesByDate } from '../../utils/groupChangesByDate'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
+import SkeletonLoader from '../ui/SkeletonLoader'
 import InfinityList from './InfinityList'
-import LazyLoader from './LazyLoader'
-import { LazyLoaderWrapper } from './styles/ActivityPageStyles'
-import { groupChangesByDate } from './utils/listSortUtils'
+
+const MAX_RECORDS = 500
 
 const ActivityPage = () => {
   const dispatch = useDispatch()
@@ -20,6 +22,7 @@ const ActivityPage = () => {
   const [offset, setOffset] = useState(0)
 
   const loadMoreRef = useRef()
+  const scrollPositionRef = useRef(0)
 
   const { type, error } = useSelector((state) => ({
     type: state.type.typesAccess.localizedTypes,
@@ -32,6 +35,7 @@ const ActivityPage = () => {
     }
 
     setIsLoading(true)
+    scrollPositionRef.current = window.scrollY
 
     try {
       const newChanges = await dispatch(
@@ -39,13 +43,27 @@ const ActivityPage = () => {
       ).unwrap()
 
       if (newChanges.length > 0) {
-        setLocationChanges((prevChanges) => [...prevChanges, ...newChanges])
+        setLocationChanges((prevChanges) => {
+          const updatedChanges = [...prevChanges, ...newChanges]
+          return updatedChanges.length > MAX_RECORDS
+            ? updatedChanges.slice(-MAX_RECORDS)
+            : updatedChanges
+        })
         setOffset((prevOffset) => prevOffset + newChanges.length)
       }
     } finally {
       setIsLoading(false)
+      window.scrollTo({
+        top: scrollPositionRef.current,
+        behavior: 'smooth',
+      })
     }
   }, [dispatch, isLoading, offset])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedLoadMoreChanges = useCallback(debounce(loadMoreChanges, 300), [
+    loadMoreChanges,
+  ])
 
   useEffect(() => {
     dispatch(fetchAndLocalizeTypes(language))
@@ -58,19 +76,21 @@ const ActivityPage = () => {
         loadMoreRef.current &&
         loadMoreRef.current.getBoundingClientRect().bottom <= window.innerHeight
       ) {
-        loadMoreChanges()
+        setIsLoading(true)
+        debouncedLoadMoreChanges()
       }
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [isLoading, loadMoreChanges])
+  }, [isLoading, debouncedLoadMoreChanges])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !isLoading) {
-          loadMoreChanges()
+          setIsLoading(true)
+          debouncedLoadMoreChanges()
         }
       },
       { threshold: 1.0 },
@@ -87,7 +107,7 @@ const ActivityPage = () => {
         observer.unobserve(currentRef)
       }
     }
-  }, [isLoading, loadMoreChanges])
+  }, [isLoading, debouncedLoadMoreChanges])
 
   const getPlantName = (typeId) => {
     const plant = type.find((t) => t.id === typeId)
@@ -99,12 +119,11 @@ const ActivityPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate from="Settings">
-        <h1>Recent Activity</h1>
+        <h1>Recent Changes</h1>
         <p>
           Explore the latest contributions from our community as they document
           fruit-bearing trees and plants across different regions.
         </p>
-
         {error && (
           <p>
             Error fetching changes: {error.message || JSON.stringify(error)}
@@ -120,11 +139,7 @@ const ActivityPage = () => {
 
         <div ref={loadMoreRef}></div>
 
-        {isLoading && (
-          <LazyLoaderWrapper>
-            <LazyLoader />
-          </LazyLoaderWrapper>
-        )}
+        {isLoading && <SkeletonLoader count={1} />}
       </PageTemplate>
     </PageScrollWrapper>
   )

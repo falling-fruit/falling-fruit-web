@@ -23,7 +23,7 @@ export const ActivityText = styled.span`
   color: grey;
 `
 
-export const List = styled.ul`
+export const ListChanges = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0;

@@ -4,7 +4,7 @@ import ActivityPage from './ActivityPage'
 
 const pages = [
   {
-    path: ['/activity'],
+    path: ['/changes'],
     component: ActivityPage,
   },
 ]
