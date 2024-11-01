@@ -21,8 +21,14 @@ export const fetchLocations = () => (dispatch, getState) => {
   }
 }
 
-export const filtersChanged = (filters) => (dispatch) => {
-  dispatch(updateSelection(filters))
+export const invasiveChanged = (checked) => (dispatch) => {
+  dispatch(updateSelection({ invasive: checked }))
+  dispatch(fetchFilterCounts())
+  dispatch(fetchLocations())
+}
+
+export const muniChanged = (checked) => (dispatch) => {
+  dispatch(updateSelection({ muni: checked }))
   dispatch(fetchFilterCounts())
   dispatch(fetchLocations())
 }

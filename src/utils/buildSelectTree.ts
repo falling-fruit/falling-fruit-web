@@ -20,6 +20,7 @@ class SelectTreeBuilder {
   private showOnlyOnMap: boolean
   private searchValue: string
   private selectedTypes: number[]
+  private visibleTypeIds: Set<number>
 
   constructor(
     typesAccess: TypesAccess,
@@ -33,6 +34,7 @@ class SelectTreeBuilder {
     this.showOnlyOnMap = showOnlyOnMap
     this.searchValue = searchValue.toLowerCase()
     this.selectedTypes = selectedTypes
+    this.visibleTypeIds = new Set()
   }
 
   private isCultivarWithParentInSelection(
@@ -100,6 +102,10 @@ class SelectTreeBuilder {
       return null
     }
 
+    if (!node.isDisabled) {
+      this.visibleTypeIds.add(type.id)
+    }
+
     const isCultivar = this.isCultivarWithParentInSelection(
       type,
       parent?.id ?? null,
@@ -156,6 +162,15 @@ class SelectTreeBuilder {
     }
     return count
   }
+
+  getVisibleTypes(): number[] {
+    return Array.from(this.visibleTypeIds)
+  }
+}
+
+interface SelectTreeResult {
+  tree: RenderTreeNode[]
+  visibleTypeIds: number[]
 }
 
 function buildSelectTree(
@@ -164,7 +179,7 @@ function buildSelectTree(
   showOnlyOnMap: boolean,
   searchValue: string,
   selectedTypes: number[],
-): RenderTreeNode[] {
+): SelectTreeResult {
   const builder = new SelectTreeBuilder(
     typesAccess,
     countsById,
@@ -172,7 +187,9 @@ function buildSelectTree(
     searchValue,
     selectedTypes,
   )
-  return builder.buildRenderTree()
+  const tree = builder.buildRenderTree()
+  const visibleTypeIds = builder.getVisibleTypes()
+  return { tree, visibleTypeIds }
 }
 
 export default buildSelectTree
