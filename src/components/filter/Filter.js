@@ -33,7 +33,7 @@ const SearchInput = styled(Input)`
   }
 `
 
-const MuniAndInvasiveCheckboxFilters = styled.div`
+const MuniCheckboxFilters = styled.div`
   label:not(:last-child) {
     margin-bottom: 8px;
   }
@@ -100,7 +100,7 @@ const Filter = () => {
           />
         )}
       </div>
-      <MuniAndInvasiveCheckboxFilters>
+      <MuniCheckboxFilters>
         <CheckboxFilters
           values={filters}
           fields={[
@@ -108,16 +108,12 @@ const Filter = () => {
               field: 'muni',
               label: t('glossary.tree_inventory', { count: 2 }),
             },
-            {
-              field: 'invasive',
-              label: t('invasives'),
-            },
           ]}
           onChange={(values) => {
             dispatch(filtersChanged(values))
           }}
         />
-      </MuniAndInvasiveCheckboxFilters>
+      </MuniCheckboxFilters>
     </>
   )
 }
