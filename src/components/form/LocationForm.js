@@ -9,7 +9,11 @@ import {
   MONTH_OPTIONS,
   PROPERTY_ACCESS_OPTIONS,
 } from '../../constants/form'
-import { saveFormValues, submitLocation } from '../../redux/locationSlice'
+import {
+  addNewLocation,
+  editExistingLocation,
+  saveFormValues,
+} from '../../redux/locationSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import {
   formToLocation,
@@ -180,11 +184,10 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
         ]),
   ]
 
-  const handleSubmit = ({
-    'g-recaptcha-response': recaptcha,
-    review,
-    ...location
-  }) => {
+  const handleSubmit = (
+    { 'g-recaptcha-response': recaptcha, review, ...location },
+    formikProps,
+  ) => {
     const locationValues = {
       'g-recaptcha-response': recaptcha,
       lat: position?.lat,
@@ -196,11 +199,25 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
       locationValues.review = formToReview(review)
     }
 
-    dispatch(submitLocation({ editingId, locationValues })).then((action) => {
-      if (action.payload) {
-        history.push(`/locations/${action.payload.id}`)
-      }
-    })
+    if (editingId) {
+      dispatch(editExistingLocation(editingId, locationValues)).then(
+        (action) => {
+          if (action.error) {
+            formikProps.setSubmitting(false)
+          } else {
+            history.push(`/locations/${action.payload.id}`)
+          }
+        },
+      )
+    } else {
+      dispatch(addNewLocation(locationValues)).then((action) => {
+        if (action.error) {
+          formikProps.setSubmitting(false)
+        } else {
+          history.push(`/locations/${action.payload.id}`)
+        }
+      })
+    }
   }
   const handleCancel = (e) => {
     e.stopPropagation()

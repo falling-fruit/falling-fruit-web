@@ -25,62 +25,29 @@ export const fetchLocationData = createAsyncThunk(
   },
 )
 
-export const submitLocation = createAsyncThunk(
-  'location/submitLocation',
-  async ({ editingId, locationValues }) => {
-    let response
-    try {
-      if (editingId) {
-        response = await editLocation(editingId, locationValues)
-        toast.success('Location edited successfully!')
-      } else {
-        response = await addLocation(locationValues)
-        toast.success('Location submitted successfully!')
-      }
-      return response
-    } catch (error) {
-      toast.error(
-        editingId ? 'Location editing failed.' : 'Location submission failed.',
-      )
-      throw error
-    }
-  },
+export const addNewLocation = createAsyncThunk(
+  'location/addNewLocation',
+  addLocation,
 )
 
-export const submitLocationReview = createAsyncThunk(
-  'location/submitLocationReview',
-  async ({ locationId, reviewValues, editingId }) => {
-    let response
-    try {
-      if (editingId) {
-        response = await editReview(editingId, reviewValues)
-        toast.success('Review edited successfully!')
-      } else {
-        response = await addReview(locationId, reviewValues)
-        toast.success('Review submitted successfully!')
-      }
-      return response
-    } catch (error) {
-      toast.error(
-        editingId ? 'Review editing failed.' : 'Review submission failed.',
-      )
-      throw error
-    }
-  },
+export const editExistingLocation = createAsyncThunk(
+  'location/editExistingLocation',
+  editLocation,
+)
+
+export const addNewReview = createAsyncThunk(
+  'location/addNewReview',
+  ({ locationId, reviewValues }) => addReview(locationId, reviewValues),
+)
+
+export const editExistingReview = createAsyncThunk(
+  'location/editExistingReview',
+  ({ reviewId, reviewValues }) => editReview(reviewId, reviewValues),
 )
 
 export const deleteLocationReview = createAsyncThunk(
   'location/deleteReview',
-  async (reviewId) => {
-    try {
-      await deleteReview(reviewId)
-      toast.success('Review deleted successfully!')
-      return reviewId
-    } catch (error) {
-      toast.error('Review deletion failed.')
-      throw error
-    }
-  },
+  (reviewId) => deleteReview(reviewId).then(() => reviewId),
 )
 
 const locationSlice = createSlice({
@@ -232,42 +199,58 @@ const locationSlice = createSlice({
       state.position = null
       state.isBeingEdited = false
     },
-    [submitLocation.fulfilled]: (state, action) => {
-      if (action.meta.arg.editingId) {
-        /*
-         * submitLocation does not return the reviews for efficiency
-         * but they don't change when editing location
-         * so keep the known reviews
-         */
-        state.location = action.payload
-      } else {
-        /*
-         * New location added
-         */
-        state.location = action.payload
-        state.reviews = action.payload.reviews || []
-        state.locationId = parseInt(action.payload.id)
-      }
+    [addNewLocation.fulfilled]: (state, action) => {
+      state.location = action.payload
+      state.reviews = action.payload.reviews || []
+      state.locationId = parseInt(action.payload.id)
       state.isLoading = false
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
+      toast.success('Location submitted successfully!')
     },
-    [submitLocationReview.fulfilled]: (state, action) => {
-      if (action.meta.arg.editingId) {
-        const reviewIndex = state.reviews.findIndex(
-          (review) => review.id === action.meta.arg.editingId,
-        )
-        if (reviewIndex !== -1) {
-          state.reviews[reviewIndex] = action.payload
-        }
-      } else {
-        state.reviews.push(action.payload)
+    [addNewLocation.rejected]: (state, action) => {
+      state.isLoading = false
+      toast.error(`Location submission failed: ${action.error.message}`)
+    },
+    [editExistingLocation.fulfilled]: (state, action) => {
+      // Keep existing reviews as they don't change when editing location
+      state.location = action.payload
+      state.isLoading = false
+      state.isBeingEdited = false
+      state.position = { lat: action.payload.lat, lng: action.payload.lng }
+      toast.success('Location edited successfully!')
+    },
+    [editExistingLocation.rejected]: (state, action) => {
+      state.isLoading = false
+      toast.error(`Location editing failed: ${action.error.message}`)
+    },
+    [addNewReview.fulfilled]: (state, action) => {
+      state.reviews.push(action.payload)
+      toast.success('Review submitted successfully!')
+    },
+    [addNewReview.rejected]: (_, action) => {
+      toast.error(`Review submission failed: ${action.error.message}`)
+    },
+    [editExistingReview.fulfilled]: (state, action) => {
+      const reviewIndex = state.reviews.findIndex(
+        (review) => review.id === action.meta.arg.reviewId,
+      )
+      if (reviewIndex !== -1) {
+        state.reviews[reviewIndex] = action.payload
       }
+      toast.success('Review edited successfully!')
+    },
+    [editExistingReview.rejected]: (_, action) => {
+      toast.error(`Review editing failed: ${action.error.message}`)
     },
     [deleteLocationReview.fulfilled]: (state, action) => {
       state.reviews = state.reviews.filter(
         (review) => review.id !== action.payload,
       )
+      toast.success('Review deleted successfully!')
+    },
+    [deleteLocationReview.rejected]: (_, action) => {
+      toast.error(`Review deletion failed: ${action.error.message}`)
     },
   },
 })

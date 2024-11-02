@@ -4,11 +4,13 @@ import styled from 'styled-components/macro'
 
 import { FRUITING_OPTIONS, INITIAL_REVIEW_VALUES } from '../../constants/form'
 import {
+  addNewReview,
   deleteLocationReview,
-  submitLocationReview,
+  editExistingReview,
 } from '../../redux/locationSlice'
 import { formToReview, validateReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
@@ -103,32 +105,54 @@ export const ReviewForm = ({
   const { locationId } = useSelector((state) => state.location)
   const dispatch = useDispatch()
   const history = useAppHistory()
+  const isDesktop = useIsDesktop()
 
   const handleSubmit = (
     { 'g-recaptcha-response': recaptcha, review },
-    { resetForm },
+    formikProps,
   ) => {
     const reviewValues = {
       ...formToReview(review),
       'g-recaptcha-response': recaptcha,
     }
 
-    dispatch(
-      submitLocationReview({ locationId, reviewValues, editingId }),
-    ).then((action) => {
-      if (action.payload) {
-        resetForm()
-        history.push(`/locations/${locationId}`)
-      }
-    })
+    if (editingId) {
+      dispatch(editExistingReview({ reviewId: editingId, reviewValues })).then(
+        (action) => {
+          if (action.error) {
+            formikProps.setSubmitting(false)
+          } else {
+            history.push(`/locations/${locationId}`)
+          }
+        },
+      )
+    } else {
+      dispatch(addNewReview({ locationId, reviewValues })).then((action) => {
+        if (action.error) {
+          formikProps.setSubmitting(false)
+        } else {
+          if (isDesktop) {
+            //form inline under location page
+            formikProps.resetForm()
+          } else {
+            //form on its own page - go back to location page
+            history.push(`/locations/${locationId}`)
+          }
+        }
+      })
+    }
   }
 
-  const handleDelete = () => {
+  const handleDelete = (formikProps) => {
     if (!confirm('Are you sure you want to delete this review?')) {
       return
     } else {
-      dispatch(deleteLocationReview(editingId)).then(() => {
-        history.push(`/locations/${locationId}`)
+      dispatch(deleteLocationReview(editingId)).then((action) => {
+        if (action.error) {
+          formikProps.setSubmitting(false)
+        } else {
+          history.push(`/locations/${locationId}`)
+        }
       })
     }
   }
@@ -150,7 +174,10 @@ export const ReviewForm = ({
                 {isSubmitting ? 'Submitting' : 'Submit'}
               </Button>
               {editingId && (
-                <DeleteButton type="button" onClick={handleDelete}>
+                <DeleteButton
+                  type="button"
+                  onClick={() => handleDelete(formikProps)}
+                >
                   Delete
                 </DeleteButton>
               )}
