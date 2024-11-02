@@ -50,20 +50,30 @@ const InfinityList = ({ groupedChanges, getPlantName }) => {
     }, {})
 
     const getTypeLinks = (changes) => {
+      const plantLocations = changes.map((change) => ({
+        locationId: change.location_id,
+        typeIds: change.type_ids,
+      }))
+
       const typeLinks = []
 
-      changes.forEach((change) => {
-        change.type_ids.forEach((typeId) => {
-          const plantName = getPlantName(typeId)
-          typeLinks.push(
-            <PlantLink
-              key={`${change.location_id}-${typeId}-${plantName}`}
-              href={`/locations/${change.location_id}`}
-            >
-              {plantName}
-            </PlantLink>,
-          )
-        })
+      plantLocations.forEach(({ locationId, typeIds }, idx) => {
+        // eslint-disable-next-line @hack4impact-uiuc/no-redundant-functions
+        const plantNames = typeIds.map((typeId) => getPlantName(typeId))
+
+        typeLinks.push(
+          <React.Fragment key={`group-${locationId}-${idx}`}>
+            <PlantLink href={`/locations/${locationId}`}>
+              {plantNames.join(', ')}
+            </PlantLink>
+            {idx < plantLocations.length - 1 &&
+              (plantLocations[idx + 1].locationId === locationId ? (
+                <span>, </span>
+              ) : (
+                <span>, </span>
+              ))}
+          </React.Fragment>,
+        )
       })
 
       return typeLinks
@@ -92,7 +102,7 @@ const InfinityList = ({ groupedChanges, getPlantName }) => {
                       {addedTypeLinks.map((link, idx) => (
                         <React.Fragment key={idx}>
                           {link}
-                          {idx < addedTypeLinks.length - 1 && ', '}
+                          {idx < addedTypeLinks.length - 1 && ' '}
                         </React.Fragment>
                       ))}
                       <ActivityText>
@@ -109,7 +119,7 @@ const InfinityList = ({ groupedChanges, getPlantName }) => {
                       {editedTypeLinks.map((link, idx) => (
                         <React.Fragment key={idx}>
                           {link}
-                          {idx < editedTypeLinks.length - 1 && ', '}
+                          {idx < editedTypeLinks.length - 1 && ' '}
                         </React.Fragment>
                       ))}
                       <ActivityText>

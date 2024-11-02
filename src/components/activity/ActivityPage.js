@@ -10,7 +10,7 @@ import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import SkeletonLoader from '../ui/SkeletonLoader'
 import InfinityList from './InfinityList'
 
-const MAX_RECORDS = 500
+const MAX_RECORDS = 1000
 
 const ActivityPage = () => {
   const dispatch = useDispatch()
@@ -20,6 +20,7 @@ const ActivityPage = () => {
   const [locationChanges, setLocationChanges] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [offset, setOffset] = useState(0)
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
 
   const loadMoreRef = useRef()
   const scrollPositionRef = useRef(0)
@@ -53,6 +54,7 @@ const ActivityPage = () => {
       }
     } finally {
       setIsLoading(false)
+      setIsInitialLoad(false)
       window.scrollTo({
         top: scrollPositionRef.current,
         behavior: 'smooth',
@@ -68,22 +70,6 @@ const ActivityPage = () => {
   useEffect(() => {
     dispatch(fetchAndLocalizeTypes(language))
   }, [dispatch, language])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        !isLoading &&
-        loadMoreRef.current &&
-        loadMoreRef.current.getBoundingClientRect().bottom <= window.innerHeight
-      ) {
-        setIsLoading(true)
-        debouncedLoadMoreChanges()
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isLoading, debouncedLoadMoreChanges])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,17 +115,15 @@ const ActivityPage = () => {
             Error fetching changes: {error.message || JSON.stringify(error)}
           </p>
         )}
-
         {locationChanges.length > 0 && (
           <InfinityList
             groupedChanges={groupedChanges}
             getPlantName={getPlantName}
           />
         )}
-
         <div ref={loadMoreRef}></div>
-
-        {isLoading && <SkeletonLoader count={1} />}
+        {isLoading && <SkeletonLoader count={isInitialLoad ? 5 : 1} />}{' '}
+        {/* Render 3 skeletons on initial load */}
       </PageTemplate>
     </PageScrollWrapper>
   )

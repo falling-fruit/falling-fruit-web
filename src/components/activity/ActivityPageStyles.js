@@ -40,11 +40,3 @@ export const ListItem = styled.li`
     }
   }
 `
-
-export const LazyLoaderWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 5rem;
-`
