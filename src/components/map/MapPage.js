@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import {
-  MIN_GEOLOCATION_ZOOM,
-  VISIBLE_CLUSTER_ZOOM_LIMIT,
-} from '../../constants/map'
+import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { updatePosition } from '../../redux/locationSlice'
 import { setGoogle } from '../../redux/mapSlice'
@@ -22,7 +19,7 @@ import LoadingIndicator from '../ui/LoadingIndicator'
 import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
 import { ConnectGeolocation, isGeolocationOpen } from './ConnectGeolocation'
-import Geolocation from './Geolocation'
+import GeolocationDot from './GeolocationDot'
 import Location from './Location'
 import PanoramaHandler from './PanoramaHandler'
 import {
@@ -249,16 +246,6 @@ const MapPage = ({ isDesktop }) => {
     }
   }
 
-  const handleGeolocationClick = () => {
-    googleMap?.panTo({
-      lat: geolocation.latitude,
-      lng: geolocation.longitude,
-    })
-    if (currentZoom < MIN_GEOLOCATION_ZOOM) {
-      googleMap?.setZoom(MIN_GEOLOCATION_ZOOM)
-    }
-  }
-
   const handleLocationClick = (location) => {
     if (!isAddingLocation && !isEditingLocation) {
       history.push(`/locations/${location.id}`)
@@ -392,11 +379,9 @@ const MapPage = ({ isDesktop }) => {
           yesIWantToUseGoogleMapApiInternals
         >
           {geolocation && !geolocation.loading && !geolocation.error && (
-            <Geolocation
-              onClick={handleGeolocationClick}
+            <GeolocationDot
               lat={geolocation.latitude}
               lng={geolocation.longitude}
-              heading={geolocation.heading}
             />
           )}
           {place && currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT && (

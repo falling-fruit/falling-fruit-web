@@ -25,11 +25,16 @@ const LocationPositionNav = () => {
   const handleCancel = () => {
     if (storedPosition && googleMap) {
       const currentCenter = googleMap.getCenter().toJSON()
-      const distance = distanceInMeters(currentCenter, storedPosition)
+      const distanceMeters = distanceInMeters(
+        currentCenter.lat,
+        currentCenter.lng,
+        storedPosition.lat,
+        storedPosition.lng,
+      )
 
       googleMap.setCenter(storedPosition)
 
-      if (distance > 1) {
+      if (distanceMeters > 1) {
         // Wait half a second to let the user observe the edited position being undone
         setTimeout(
           () => history.push(`/locations/${locationId}/edit/details`),

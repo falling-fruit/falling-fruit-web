@@ -25,7 +25,11 @@ const SpinningLoader = styled(LoaderAlt)`
 `
 
 const getTrackLocationColor = (geolocationState) =>
-  geolocationState === GeolocationState.TRACKING ? 'blue' : 'tertiaryText'
+  geolocationState === GeolocationState.CENTERING ||
+  geolocationState === GeolocationState.TRACKING ||
+  geolocationState === GeolocationState.DOT_ON
+    ? 'blue'
+    : 'tertiaryText'
 
 const getCursorStyle = (geolocationState) => {
   if (geolocationState === GeolocationState.DENIED) {
@@ -42,6 +46,8 @@ const TrackLocationIcon = ({ geolocationState, ...props }) => {
     return <CurrentLocation opacity="0.5" {...props} />
   } else if (geolocationState === GeolocationState.LOADING) {
     return <SpinningLoader {...props} />
+  } else if (geolocationState === GeolocationState.DOT_ON) {
+    return <CurrentLocation opacity="0.8" {...props} />
   } else {
     return <CurrentLocation {...props} />
   }
@@ -100,10 +106,7 @@ const TrackLocationButton = ({ isIcon }) => {
           )
         } else if (geolocationState === GeolocationState.INITIAL) {
           dispatch(requestGeolocation())
-        } else if (
-          geolocationState === GeolocationState.TRACKING ||
-          geolocationState === GeolocationState.FIRST_LOCATION
-        ) {
+        } else {
           dispatch(disableGeolocation())
         }
         event.stopPropagation()
