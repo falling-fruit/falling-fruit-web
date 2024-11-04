@@ -191,6 +191,15 @@ const EntryOverview = () => {
                       {locationData.author && ')'}
                     </>
                   )}
+                  <br />
+                  {locationData.user_id ? locationData.user_id : 'No user id'}
+
+                  {locationData.author && (
+                    <>
+                      {' '}
+                      | <Link to={`/users/${42}`}>{locationData.author}</Link>
+                    </>
+                  )}
                 </p>
               </IconBesideText>
             )}
