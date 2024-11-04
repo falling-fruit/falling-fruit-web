@@ -1,6 +1,13 @@
 import { rgba } from 'polished'
+import { useDispatch, useSelector } from 'react-redux'
 import { css } from 'styled-components'
 import styled from 'styled-components/macro'
+
+import { MIN_GEOLOCATION_ZOOM } from '../../constants/map'
+import {
+  geolocationCentering,
+  GeolocationState,
+} from '../../redux/geolocationSlice'
 
 const Heading = styled.div`
   position: absolute;
@@ -21,7 +28,6 @@ const Heading = styled.div`
 `
 
 const Pin = styled.div`
-  cursor: pointer;
   position: absolute;
   z-index: 1;
 
@@ -35,6 +41,7 @@ const Pin = styled.div`
 `
 
 const GeolocationWrapper = styled.div`
+  ${({ isClickable }) => isClickable && 'cursor: pointer;'};
   position: relative;
   z-index: 3;
 
@@ -51,8 +58,9 @@ const GeolocationWrapper = styled.div`
     border-radius: 50%;
   }
 
-  ${({ heading }) =>
-    !heading &&
+  ${({ hasHeading, isPulsing }) =>
+    !hasHeading &&
+    isPulsing &&
     css`
       &::before {
         z-index: 1;
@@ -95,11 +103,34 @@ const GeolocationWrapper = styled.div`
   }
 `
 
-const Geolocation = ({ heading, onClick, ...props }) => (
-  <GeolocationWrapper {...props}>
-    <Pin onClick={onClick} />
-    {heading && <Heading heading={heading} />}
-  </GeolocationWrapper>
-)
+const GeolocationDot = () => {
+  const { googleMap } = useSelector((state) => state.map)
+  const { geolocation, geolocationState } = useSelector(
+    (state) => state.geolocation,
+  )
+  const dispatch = useDispatch()
 
-export default Geolocation
+  const handleClick = () => {
+    if (geolocationState === GeolocationState.DOT_ON) {
+      dispatch(geolocationCentering(geolocation))
+      googleMap.panTo({ lat: geolocation.latitude, lng: geolocation.longitude })
+      if (googleMap.getZoom() < MIN_GEOLOCATION_ZOOM) {
+        googleMap.setZoom(MIN_GEOLOCATION_ZOOM)
+      }
+    }
+  }
+
+  return (
+    <GeolocationWrapper
+      onClick={handleClick}
+      hasHeading={!!geolocation?.heading}
+      isPulsing={geolocationState !== GeolocationState.DOT_ON}
+      isClickable={geolocationState === GeolocationState.DOT_ON}
+    >
+      <Pin />
+      {geolocation?.heading && <Heading heading={geolocation.heading} />}
+    </GeolocationWrapper>
+  )
+}
+
+export default GeolocationDot
