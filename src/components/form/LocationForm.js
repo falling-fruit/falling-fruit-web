@@ -114,7 +114,6 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => (
         options={MONTH_OPTIONS}
         isSearchable={false}
         isClearable
-        invalidWhenUntouched
       />
       <span>to</span>
       <Select
@@ -122,7 +121,6 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => (
         options={MONTH_OPTIONS}
         isSearchable={false}
         isClearable
-        invalidWhenUntouched
       />
     </InlineSelects>
     <CheckboxLabel>

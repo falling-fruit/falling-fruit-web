@@ -119,6 +119,7 @@ const AccountPage = () => {
                       name="new_password"
                       type="password"
                       label={t('users.new_password')}
+                      autocomplete="new-password"
                     />
                     {errors.new_password && (
                       <ErrorMessage>
@@ -133,6 +134,7 @@ const AccountPage = () => {
                       name="new_password_confirm"
                       type="password"
                       label={t('users.new_password_confirmation')}
+                      autocomplete="new-password"
                     />
                     {errors.new_password_confirm && (
                       <ErrorMessage>

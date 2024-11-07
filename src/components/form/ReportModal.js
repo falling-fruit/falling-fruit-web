@@ -64,7 +64,6 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
         label="Problem Type"
         isSearchable={false}
         options={PROBLEM_TYPE_OPTIONS}
-        invalidWhenUntouched
         required
       />
       <Textarea name="comment" label="Description" />
