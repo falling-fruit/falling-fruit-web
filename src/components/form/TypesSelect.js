@@ -57,7 +57,6 @@ const TypesSelect = () => {
         }
         isVirtualized
         required
-        invalidWhenUntouched
         onCreateOption={handleCreateOption}
         formatCreateLabel={(inputValue) => inputValue}
       />

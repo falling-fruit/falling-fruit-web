@@ -54,11 +54,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => (
       label="Comments"
     />
 
-    <DateInput
-      name="review.observed_on"
-      label="Observed on"
-      invalidWhenUntouched
-    />
+    <DateInput name="review.observed_on" label="Observed on" />
 
     <Select
       label="Fruiting status"
