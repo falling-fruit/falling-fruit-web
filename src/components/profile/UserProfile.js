@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useHistory,useParams } from 'react-router-dom'
 
 const UserProfile = () => {
   const { id } = useParams()
@@ -7,14 +7,14 @@ const UserProfile = () => {
   const [userData, setUserData] = useState(null)
 
   useEffect(() => {
-    console.log("Inside useEffect...");
+    console.log('Inside useEffect...')
     fetch(`https://fallingfruit.org/api/0.3/users/${id}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Fetched user data:', data); 
-        setUserData(data);
-        })
-      .catch(error => console.error('Error fetching user data:', error))
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Fetched user data:', data)
+        setUserData(data)
+      })
+      .catch((error) => console.error('Error fetching user data:', error))
   }, [id])
 
   return (

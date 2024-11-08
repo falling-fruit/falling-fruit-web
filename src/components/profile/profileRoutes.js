@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
 
-import UserProfile from './UserProfile'
+import UserProfile from './UserProfile.js'
 
 const pages = [
   {
@@ -12,4 +12,5 @@ const pages = [
 const profileRoutes = pages.map((props) => (
   <Route key={props.path[0]} {...props} />
 ))
+console.log(profileRoutes)
 export default profileRoutes
