@@ -11,8 +11,7 @@ const StyledDropzone = styled.div`
   border-radius: 0.375em;
   cursor: pointer;
   height: 3em;
-  color: ${({ isDragActive, theme }) =>
-    isDragActive ? theme.text : theme.orange};
+  color: ${({ theme }) => theme.orange};
   transition: color 0.3s ease;
   padding: 0.5em;
 `
