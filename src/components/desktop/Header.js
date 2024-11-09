@@ -19,6 +19,15 @@ const StyledUser = styled(User)`
   }
 `
 
+const AuthLinksList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  gap: 12px;
+`
+
 const StyledHeader = styled.header`
   height: 56px;
   background-color: ${({ theme }) => theme.background};
@@ -90,7 +99,11 @@ const StyledHeader = styled.header`
           color: ${({ theme }) => theme.orange};
         }
       }
-    }
+      
+      .signin,
+      .signup {
+        min-width: auto;
+      }
   }
 `
 const Dropdown = ({ className, children, label, isMatch }) => (
@@ -275,8 +288,8 @@ const Header = () => {
                 </StyledDropdown>
               </li>
             ) : (
-              <>
-                <li>
+              <AuthLinksList>
+                <li className="signin">
                   <NavLink
                     to={withFromPage('/users/sign_in')}
                     activeClassName="active"
@@ -284,12 +297,12 @@ const Header = () => {
                     <Button secondary>{t('users.sign_in')}</Button>
                   </NavLink>
                 </li>
-                <li>
+                <li className="signup">
                   <NavLink to="/users/sign_up" activeClassName="active">
                     <SignupButton>{t('glossary.sign_up')}</SignupButton>
                   </NavLink>
                 </li>
-              </>
+              </AuthLinksList>
             )}
           </ul>
         </div>
