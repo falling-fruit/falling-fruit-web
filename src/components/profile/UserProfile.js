@@ -1,32 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory,useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+
+import { getUserById } from '../../utils/api'
 
 const UserProfile = () => {
   const { id } = useParams()
-  const history = useHistory()
-  const [userData, setUserData] = useState(null)
+  //const history = useAppHistory()
+  //const { t } = useTranslation()
+  const [userData, setUserData] = useState({})
+  //const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     console.log('Inside useEffect...')
-    fetch(`https://fallingfruit.org/api/0.3/users/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Fetched user data:', data)
-        setUserData(data)
-      })
-      .catch((error) => console.error('Error fetching user data:', error))
+
+    async function fetchUserData() {
+      //setIsLoading(true)
+      const data = await getUserById(id)
+      setUserData(data)
+
+      // Log the fetched data
+      console.log('Fetched User Data:', data)
+
+      //setIsLoading(false)
+    }
+
+    fetchUserData()
   }, [id])
+
+  //const { name, url, comments, muni, location_count, created_at, license } = userData;
+  //const ud = userData;
+  //console.log(userData);
 
   return (
     <div>
-      <button onClick={() => history.goBack()}>Back</button>
-      {userData ? (
-        <div>
-          <h1>{userData.name}</h1>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <p>User ID: {userData.id}</p>
+      <p>User Name: {userData.name}</p>
     </div>
   )
 }

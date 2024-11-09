@@ -58,6 +58,24 @@ export interface paths {
       };
     };
   };
+  "/users/{id}": {
+    get: {
+      parameters: {
+        path: {
+          /** User ID. */
+          id: components["parameters"]["user_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["User"];
+          };
+        };
+      };
+    };
+  };
   "/locations": {
     get: {
       parameters: {
