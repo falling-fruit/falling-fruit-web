@@ -179,9 +179,16 @@ const EntryOverview = () => {
                   <User size={20} />
                 )}
                 <p>
-                  {locationData.author && locationData.import_id
-                    ? t('imported_from', { name: locationData.author })
-                    : t('added_by', { name: locationData.author })}
+                  {locationData.author && locationData.import_id ? (
+                    t('imported_from', { name: locationData.author })
+                  ) : (
+                    <>
+                      {t('added_by', { name: '' })}{' '}
+                      <Link to={`/users/${locationData.user_id}`}>
+                        {locationData.author}
+                      </Link>
+                    </>
+                  )}
                   {locationData.import_id && (
                     <>
                       {locationData.author && ' ('}
@@ -189,15 +196,6 @@ const EntryOverview = () => {
                         #{locationData.import_id}
                       </Link>
                       {locationData.author && ')'}
-                    </>
-                  )}
-                  <br />
-                  {locationData.user_id ? locationData.user_id : 'No user id'}
-
-                  {locationData.author && (
-                    <>
-                      {' '}
-                      | <Link to={`/users/${42}`}>{locationData.author}</Link>
                     </>
                   )}
                 </p>
