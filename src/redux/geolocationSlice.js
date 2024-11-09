@@ -53,9 +53,7 @@ export const geolocationSlice = createSlice({
         // The last value is code 3, timeout, is unreachable as we use the default of no timeout
         // @see src/components/map/ConnectedGeolocation.js
         state.geolocationState = GeolocationState.INITIAL
-        toast.error(
-          `Geolocation failed: ${action.payload.message}. Please refresh the page and retry`,
-        )
+        toast.error(`Geolocation failed: ${action.payload.message}`)
       }
     },
   },

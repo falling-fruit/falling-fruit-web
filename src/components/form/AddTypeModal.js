@@ -165,9 +165,11 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
         language: i18n.language,
       }),
     ).then((action) => {
-      onTypeAdded(action.payload.newMenuEntry)
+      if (action.payload) {
+        onTypeAdded(action.payload.newMenuEntry)
+      }
+      setSubmitting(false)
     })
-    setSubmitting(false)
   }
 
   if (!isAddTypeModalOpen) {

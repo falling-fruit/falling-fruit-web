@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import { initNewLocation } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
@@ -30,7 +29,7 @@ const ConnectNewLocation = () => {
       }
       dispatch(initNewLocation(view.center))
     } else {
-      toast.error(`Could not initialize new location at: ${location.pathname}`)
+      // Should only happen for an artificially constructed URL
       history.push('/map')
     }
   }, [dispatch, location.pathname]) //eslint-disable-line

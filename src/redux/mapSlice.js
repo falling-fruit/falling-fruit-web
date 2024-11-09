@@ -4,7 +4,7 @@ import { eqBy, prop, unionWith } from 'ramda'
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
 import { geolocationReceived, GeolocationState } from './geolocationSlice'
-import { submitLocation } from './locationSlice'
+import { addNewLocation, editExistingLocation } from './locationSlice'
 import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
@@ -86,7 +86,7 @@ export const mapSlice = createSlice({
     [fetchMapLocations.pending]: (state) => {
       state.isLoading = true
     },
-    [submitLocation.fulfilled]: (state, action) => {
+    [editExistingLocation.fulfilled]: (state, action) => {
       if (state.clusters.length) {
         return
       }
@@ -94,12 +94,14 @@ export const mapSlice = createSlice({
         (loc) => loc.id === action.payload.id,
       )
       if (index !== -1) {
-        // Update existing location
         state.locations[index] = action.payload
-      } else {
-        // Add new location
-        state.locations.push(action.payload)
       }
+    },
+    [addNewLocation.fulfilled]: (state, action) => {
+      if (state.clusters.length) {
+        return
+      }
+      state.locations.push(action.payload)
     },
     [fetchMapLocations.fulfilled]: (state, action) => {
       if (!state.googleMap) {

@@ -56,8 +56,8 @@ const typeSlice = createSlice({
       toast.success('New type added successfully!')
       state.isAddTypeModalOpen = false
     },
-    [addTypeAndUpdate.rejected]: () => {
-      toast.error('Failed to add new type. Please try again.')
+    [addTypeAndUpdate.rejected]: (_state, action) => {
+      toast.error(`Adding new type failed: ${action.error.message}`)
     },
   },
 })

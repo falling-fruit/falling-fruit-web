@@ -44,11 +44,11 @@ instance.interceptors.request.use((config) => {
 })
 
 instance.interceptors.response.use(
-  (response) => response.data,
+  (response) => response?.data,
   async (error) => {
     const originalRequest = error.config
-
     if (
+      error.response &&
       error.response.status === 401 &&
       error.response.data.error === 'Expired access token' &&
       !originalRequest._retry
