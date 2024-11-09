@@ -4,10 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { filtersChanged, selectionChanged } from '../../redux/viewChange'
+import {
+  invasiveChanged,
+  muniChanged,
+  selectionChanged,
+} from '../../redux/viewChange'
+import buildSelectTree from '../../utils/buildSelectTree'
 import Input from '../ui/Input'
-import { CheckboxFilters } from './CheckboxFilters'
 import FilterButtons from './FilterButtons'
+import LabeledCheckbox from './LabeledCheckbox'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
 import TreeSelect from './TreeSelect'
 
@@ -46,14 +51,29 @@ const MuniAndInvasiveCheckboxFilters = styled.div`
 
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
+  const [showOnlyOnMap, setShowOnlyOnMap] = useState(true)
   const setSearchValueDebounced = useMemo(
     () => debounce(setSearchValue, 200),
     [setSearchValue],
   )
 
   const dispatch = useDispatch()
-  const filters = useSelector((state) => state.filter)
+  const { countsById, types, muni, invasive } = useSelector(
+    (state) => state.filter,
+  )
+
   const { typesAccess } = useSelector((state) => state.type)
+  const { tree: selectTree, visibleTypeIds } = useMemo(
+    () =>
+      buildSelectTree(
+        typesAccess,
+        countsById,
+        showOnlyOnMap,
+        searchValue,
+        types,
+      ),
+    [typesAccess, countsById, showOnlyOnMap, searchValue, types],
+  )
 
   const { t } = useTranslation()
   return (
@@ -65,57 +85,50 @@ const Filter = () => {
           placeholder={t('type')}
         />
         <TreeFiltersContainer>
-          <CheckboxFilters
-            values={filters}
-            fields={[
-              {
-                field: 'showOnlyOnMap',
-                label: t('only_on_map'),
-              },
-            ]}
-            onChange={(values) => {
-              dispatch(filtersChanged(values))
-            }}
+          <LabeledCheckbox
+            field="showOnlyOnMap"
+            value={showOnlyOnMap}
+            label={t('only_on_map')}
+            onChange={setShowOnlyOnMap}
             style={{ display: 'inline-block', marginRight: '5px' }}
           />
           <FilterButtons
-            onSelectAllClick={() =>
-              dispatch(
-                selectionChanged(
-                  typesAccess.selectableTypes().map((type) => type.id),
-                ),
+            onSelectAllClick={() => {
+              const newSelection = [...new Set([...types, ...visibleTypeIds])]
+              dispatch(selectionChanged(newSelection))
+            }}
+            onDeselectAllClick={() => {
+              const remainingSelection = types.filter(
+                (typeId) => !visibleTypeIds.some((t) => t === typeId),
               )
-            }
-            onDeselectAllClick={() => dispatch(selectionChanged([]))}
+              dispatch(selectionChanged(remainingSelection))
+            }}
           />
         </TreeFiltersContainer>
         {typesAccess.isEmpty ? (
           <RCTreeSelectSkeleton />
         ) : (
           <TreeSelect
+            types={types}
             onChange={(selectedTypes) =>
               dispatch(selectionChanged(selectedTypes))
             }
-            searchValue={searchValue}
+            selectTree={selectTree}
           />
         )}
       </div>
       <MuniAndInvasiveCheckboxFilters>
-        <CheckboxFilters
-          values={filters}
-          fields={[
-            {
-              field: 'muni',
-              label: t('glossary.tree_inventory', { count: 2 }),
-            },
-            {
-              field: 'invasive',
-              label: t('invasives'),
-            },
-          ]}
-          onChange={(values) => {
-            dispatch(filtersChanged(values))
-          }}
+        <LabeledCheckbox
+          field="muni"
+          value={muni}
+          label={t('glossary.tree_inventory', { count: 2 })}
+          onChange={(checked) => dispatch(muniChanged(checked))}
+        />
+        <LabeledCheckbox
+          field="invasive"
+          value={invasive}
+          label={t('invasives')}
+          onChange={(checked) => dispatch(invasiveChanged(checked))}
         />
       </MuniAndInvasiveCheckboxFilters>
     </>

@@ -1,28 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useCallback, useState } from 'react'
 
-import buildSelectTree from '../../utils/buildSelectTree'
 import TreeSelectView from './TreeSelectView'
 
-const TreeSelect = ({ onChange, searchValue }) => {
+const TreeSelect = ({ types, onChange, selectTree }) => {
   const [expandedNodes, setExpandedNodes] = useState(new Set())
-
-  const { types, showOnlyOnMap, countsById } = useSelector(
-    (state) => state.filter,
-  )
-  const { typesAccess } = useSelector((state) => state.type)
-
-  const renderTree = useMemo(
-    () =>
-      buildSelectTree(
-        typesAccess,
-        countsById,
-        showOnlyOnMap,
-        searchValue,
-        types,
-      ),
-    [typesAccess, countsById, showOnlyOnMap, searchValue, types],
-  )
 
   const handleToggle = (nodeId) => {
     setExpandedNodes((prev) => {
@@ -86,7 +67,7 @@ const TreeSelect = ({ onChange, searchValue }) => {
 
   return (
     <TreeSelectView
-      renderTree={renderTree}
+      renderTree={selectTree}
       expandedNodes={expandedNodes}
       handleToggle={handleToggle}
       handleCheckboxChange={handleCheckboxChange}
