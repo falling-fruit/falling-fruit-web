@@ -7,7 +7,6 @@ import ConnectNewLocation from './ConnectNewLocation'
 import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
-import ConnectSettingsLocation from './ConnectSettingsLocation'
 import ConnectTypes from './ConnectTypes'
 import DisconnectLocation from './DisconnectLocation'
 import DisconnectReview from './DisconnectReview'
@@ -73,6 +72,7 @@ const connectRoutes = [
    * - on mobile, we need to center the map on the edited location because the UX involves panning the map on central pin
    * - on mobile, we need to disable the drawer when arriving from list view
    * - on mobile, the drawer needs the user scrolling up and down
+   * - on desktop, clicking location from a settings page should make 'back' go to settings instead if map
    *
    * actions:
    * - fetch data from backend
@@ -82,6 +82,7 @@ const connectRoutes = [
    * - on mobile, center and zoom on edited location
    * - on mobile, keep track of whether we arrived via list-locations URL
    * - on mobile, disable default overscroll (e.g. a refresh on scroll down in Chrome)
+   * - on desktop, reset the isFromSettings flag when leaving location
    */
   <Route
     key="connect-location"
@@ -172,24 +173,6 @@ const connectRoutes = [
    */
   <Route key="disconnect-review" path={['/map', '/locations']}>
     {({ match }) => match && <DisconnectReview />}
-  </Route>,
-  /*
-   * ConnectSettingsLocation
-   * why: we can access location page from either map or settings on desktop and want the back button to work
-   *
-   * action: if on settings page set a flag in Redux. If away from map or settings, remove the flag
-   */
-  <Route
-    key="connect-settings-location"
-    path={['/settings', '/locations/:locationId']}
-  >
-    {({ match }) =>
-      match && (
-        <ConnectSettingsLocation
-          isSettings={match && !match.params.locationId}
-        />
-      )
-    }
   </Route>,
 ]
 
