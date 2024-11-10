@@ -2,12 +2,13 @@ import GoogleMapReact from 'google-map-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { fetchFilterCounts } from '../../redux/filterSlice'
-import { updatePosition } from '../../redux/locationSlice'
+import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { setGoogle } from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
@@ -168,6 +169,7 @@ const MapPage = ({ isDesktop }) => {
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
   )
+  const { pathname } = useLocation()
   const {
     locationId,
     position,
@@ -247,9 +249,10 @@ const MapPage = ({ isDesktop }) => {
   }
 
   const handleLocationClick = (location) => {
-    if (!isAddingLocation && !isEditingLocation) {
-      history.push(`/locations/${location.id}`)
+    if (isDesktop && pathname.includes('/settings')) {
+      dispatch(setFromSettings(true))
     }
+    history.push(`/locations/${location.id}`)
   }
 
   const handleNonspecificClick = ({ event }) => {

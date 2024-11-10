@@ -14,9 +14,14 @@ export const fetchReviewData = createAsyncThunk(
 const reviewSlice = createSlice({
   name: 'review',
   initialState: {
-    reviewId: null,
     isLoading: false,
     review: null,
+  },
+  reducers: {
+    clearReview: (state) => {
+      state.isLoading = false
+      state.review = null
+    },
   },
   extraReducers: {
     [fetchReviewData.pending]: (state) => {
@@ -34,5 +39,7 @@ const reviewSlice = createSlice({
     },
   },
 })
+
+export const { clearReview } = reviewSlice.actions
 
 export default reviewSlice.reducer

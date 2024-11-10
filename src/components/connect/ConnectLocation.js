@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
   fetchLocationData,
+  setFromSettings,
   setIsBeingEditedAndResetPosition,
   setStreetView,
 } from '../../redux/locationSlice'
@@ -72,6 +73,13 @@ const ConnectLocation = ({
   useEffect(() => {
     dispatch(setStreetView(isStreetView))
   }, [dispatch, isStreetView])
+
+  useEffect(
+    () => () => {
+      dispatch(setFromSettings(false))
+    },
+    [dispatch, locationId],
+  )
 
   useEffect(() => {
     if (
