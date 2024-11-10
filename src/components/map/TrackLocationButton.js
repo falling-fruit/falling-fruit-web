@@ -4,8 +4,10 @@ import { toast } from 'react-toastify'
 import { keyframes } from 'styled-components'
 import styled from 'styled-components/macro'
 
+import { MIN_GEOLOCATION_ZOOM } from '../../constants/map'
 import {
   disableGeolocation,
+  geolocationCentering,
   GeolocationState,
   requestGeolocation,
 } from '../../redux/geolocationSlice'
@@ -88,13 +90,15 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
 
 const TrackLocationButton = ({ isIcon }) => {
   const dispatch = useDispatch()
-  const geolocationState = useSelector(
-    (state) => state.geolocation.geolocationState,
+  const { geolocation, geolocationState } = useSelector(
+    (state) => state.geolocation,
   )
 
   const TrackLocationBtn = isIcon
     ? TrackLocationIconButton
     : TrackLocationPrependButton
+
+  const { googleMap } = useSelector((state) => state.map)
 
   return (
     <TrackLocationBtn
@@ -104,6 +108,15 @@ const TrackLocationButton = ({ isIcon }) => {
           toast.info(
             'Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.',
           )
+        } else if (geolocationState === GeolocationState.DOT_ON) {
+          dispatch(geolocationCentering(geolocation))
+          googleMap.panTo({
+            lat: geolocation.latitude,
+            lng: geolocation.longitude,
+          })
+          if (googleMap.getZoom() < MIN_GEOLOCATION_ZOOM) {
+            googleMap.setZoom(MIN_GEOLOCATION_ZOOM)
+          }
         } else if (geolocationState === GeolocationState.INITIAL) {
           dispatch(requestGeolocation())
         } else {
