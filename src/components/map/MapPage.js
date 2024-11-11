@@ -177,6 +177,7 @@ const MapPage = ({ isDesktop }) => {
     location: selectedLocation,
     isLoading: locationIsLoading,
     streetViewOpen: showStreetView,
+    isBeingInitializedMobile,
   } = useSelector((state) => state.location)
   const {
     mapType,
@@ -195,7 +196,7 @@ const MapPage = ({ isDesktop }) => {
           )
         : locations
 
-  const isAddingLocation = locationId === 'new'
+  const isAddingLocation = locationId === 'new' || isBeingInitializedMobile
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
   const showLabels = settingsShowLabels || isAddingLocation || isEditingLocation
@@ -264,7 +265,7 @@ const MapPage = ({ isDesktop }) => {
 
   const handleAddLocationClick = () => {
     if (currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-      history.push('/locations/new')
+      history.push('/locations/init')
     } else {
       toast.info(t('menu.zoom_in_to_add_location'))
     }
@@ -293,7 +294,7 @@ const MapPage = ({ isDesktop }) => {
     >
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
-      {!locationId && !isDesktop && (
+      {!isAddingLocation && !isEditingLocation && !isDesktop && (
         <AddLocationButton onClick={handleAddLocationClick} />
       )}
       {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
@@ -428,7 +429,9 @@ const MapPage = ({ isDesktop }) => {
               // confusingly it doesn't work from inside the component
               $geoService={getGoogleMaps && getGoogleMaps().Geocoder}
               onChange={setDraggedPosition}
-              onDragEnd={(newPosition) => dispatch(updatePosition(newPosition))}
+              onDragEnd={(newPosition) => {
+                dispatch(updatePosition(newPosition))
+              }}
             />
           )}
         </GoogleMapReact>
