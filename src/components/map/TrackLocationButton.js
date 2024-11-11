@@ -4,8 +4,10 @@ import { toast } from 'react-toastify'
 import { keyframes } from 'styled-components'
 import styled from 'styled-components/macro'
 
+import { MIN_GEOLOCATION_ZOOM } from '../../constants/map'
 import {
   disableGeolocation,
+  geolocationCentering,
   GeolocationState,
   requestGeolocation,
 } from '../../redux/geolocationSlice'
@@ -25,7 +27,11 @@ const SpinningLoader = styled(LoaderAlt)`
 `
 
 const getTrackLocationColor = (geolocationState) =>
-  geolocationState === GeolocationState.TRACKING ? 'blue' : 'tertiaryText'
+  geolocationState === GeolocationState.CENTERING ||
+  geolocationState === GeolocationState.TRACKING ||
+  geolocationState === GeolocationState.DOT_ON
+    ? 'blue'
+    : 'tertiaryText'
 
 const getCursorStyle = (geolocationState) => {
   if (geolocationState === GeolocationState.DENIED) {
@@ -42,6 +48,8 @@ const TrackLocationIcon = ({ geolocationState, ...props }) => {
     return <CurrentLocation opacity="0.5" {...props} />
   } else if (geolocationState === GeolocationState.LOADING) {
     return <SpinningLoader {...props} />
+  } else if (geolocationState === GeolocationState.DOT_ON) {
+    return <CurrentLocation opacity="0.8" {...props} />
   } else {
     return <CurrentLocation {...props} />
   }
@@ -82,13 +90,15 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
 
 const TrackLocationButton = ({ isIcon }) => {
   const dispatch = useDispatch()
-  const geolocationState = useSelector(
-    (state) => state.geolocation.geolocationState,
+  const { geolocation, geolocationState } = useSelector(
+    (state) => state.geolocation,
   )
 
   const TrackLocationBtn = isIcon
     ? TrackLocationIconButton
     : TrackLocationPrependButton
+
+  const { googleMap } = useSelector((state) => state.map)
 
   return (
     <TrackLocationBtn
@@ -98,12 +108,18 @@ const TrackLocationButton = ({ isIcon }) => {
           toast.info(
             'Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.',
           )
+        } else if (geolocationState === GeolocationState.DOT_ON) {
+          dispatch(geolocationCentering(geolocation))
+          googleMap.panTo({
+            lat: geolocation.latitude,
+            lng: geolocation.longitude,
+          })
+          if (googleMap.getZoom() < MIN_GEOLOCATION_ZOOM) {
+            googleMap.setZoom(MIN_GEOLOCATION_ZOOM)
+          }
         } else if (geolocationState === GeolocationState.INITIAL) {
           dispatch(requestGeolocation())
-        } else if (
-          geolocationState === GeolocationState.TRACKING ||
-          geolocationState === GeolocationState.FIRST_LOCATION
-        ) {
+        } else {
           dispatch(disableGeolocation())
         }
         event.stopPropagation()

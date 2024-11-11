@@ -3,13 +3,10 @@ import { eqBy, prop, unionWith } from 'ramda'
 
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
-import { geolocationReceived, GeolocationState } from './geolocationSlice'
 import { addNewLocation, editExistingLocation } from './locationSlice'
 import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
-
-const MIN_TRACKING_ZOOM = 16
 
 export const fetchMapLocations = createAsyncThunk(
   'map/fetchMapLocations',
@@ -138,21 +135,6 @@ export const mapSlice = createSlice({
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
-    },
-    [geolocationReceived]: (state, action) => {
-      const maps = state.getGoogleMaps()
-      const newPosition = new maps.LatLng(
-        action.payload.latitude,
-        action.payload.longitude,
-      )
-      if (action.payload.geolocationState === GeolocationState.FIRST_LOCATION) {
-        state.googleMap.panTo(newPosition)
-        state.googleMap.setZoom(
-          Math.max(state.googleMap.getZoom(), MIN_TRACKING_ZOOM),
-        )
-      } else {
-        state.googleMap.panTo(newPosition)
-      }
     },
     [selectPlace]: (state, action) => {
       state.googleMap.setCenter(action.payload.place.view.center)

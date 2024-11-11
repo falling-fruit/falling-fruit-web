@@ -16,7 +16,7 @@ const ScientificName = styled.h3`
   color: ${({ theme }) => theme.text};
   margin-top: 0px;
   margin-bottom: 0px;
-  font-weight: ${(props) => (props.standalone ? 'bold' : 'normal')};
+  font-weight: normal;
 `
 
 const TypeTitle = ({ commonName, scientificName }) => (

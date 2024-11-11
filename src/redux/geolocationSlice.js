@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
+import { distanceInMeters } from '../utils/mapDistance'
 import { updateLastMapView } from './viewportSlice'
 
 export const GeolocationState = {
@@ -9,7 +10,9 @@ export const GeolocationState = {
   DENIED: 'DENIED',
   LOADING: 'LOADING',
   FIRST_LOCATION: 'FIRST_LOCATION',
+  CENTERING: 'CENTERING',
   TRACKING: 'TRACKING',
+  DOT_ON: 'DOT_ON',
 }
 
 export const geolocationSlice = createSlice({
@@ -17,7 +20,6 @@ export const geolocationSlice = createSlice({
   initialState: {
     geolocationState: GeolocationState.INITIAL,
     geolocation: null,
-    stopTrackingLocationThreshold: 5000,
   },
   reducers: {
     requestGeolocation: (state) => {
@@ -33,54 +35,66 @@ export const geolocationSlice = createSlice({
     geolocationLoading: (state) => {
       state.geolocationState = GeolocationState.LOADING
     },
-    geolocationReceived: (state, action) => {
-      if (state.geolocationState === GeolocationState.LOADING) {
-        state.geolocationState = GeolocationState.FIRST_LOCATION
-      } else {
-        state.geolocationState = GeolocationState.TRACKING
-      }
+    geolocationCentering: (state, action) => {
+      state.geolocationState = GeolocationState.CENTERING
+      state.geolocation = action.payload
+    },
+    geolocationFollowing: (state, action) => {
+      state.geolocationState = GeolocationState.DOT_ON
+      state.geolocation = action.payload
+    },
+    geolocationTracking: (state, action) => {
+      state.geolocationState = GeolocationState.TRACKING
       state.geolocation = action.payload
     },
     geolocationError: (state, action) => {
-      if (action.payload.code === 1) {
-        // code 1 of GeolocationPositionError means user denied location request
-        // browsers will block subsequent requests so disable the setting
-        state.geolocationState = GeolocationState.DENIED
-      } else {
-        // Treat code 2, internal error, as fatal
-        // Toast the message and suggest a retry
-        //
-        // The last value is code 3, timeout, is unreachable as we use the default of no timeout
-        // @see src/components/map/ConnectedGeolocation.js
-        state.geolocationState = GeolocationState.INITIAL
-        toast.error(`Geolocation failed: ${action.payload.message}`)
+      switch (action.payload.code) {
+        case 1:
+          // code 1 of GeolocationPositionError means user denied location request
+          // browsers will block subsequent requests so disable the setting
+          state.geolocationState = GeolocationState.DENIED
+          break
+        case 3:
+          // code 3, timeout
+          // Toast the message and suggest a retry
+          //
+          // @see src/components/map/ConnectedGeolocation.js
+          state.geolocationState = GeolocationState.INITIAL
+          toast.error(`Geolocation timeout`)
+          break
+        case 2:
+        default:
+          // code 2, internal error, or missing code
+          // Toast the message and suggest a retry
+          //
+          // @see src/components/map/ConnectedGeolocation.js
+          state.geolocationState = GeolocationState.INITIAL
+          toast.error(
+            `Geolocation failed: ${action.payload.message || 'Unknown Error'}`,
+          )
+          break
       }
     },
   },
   extraReducers: {
     [updateLastMapView]: (state, action) => {
-      const {
-        center: { lat, lng },
-        zoom,
-      } = action.payload
       if (!state.geolocation || state.geolocation.loading) {
-        return
+        // Still loading - do nothing
+      } else if (state.geolocationState === GeolocationState.CENTERING) {
+        // The view changed because we centered on the geolocation dot - update state
+        state.geolocationState = GeolocationState.TRACKING
+      } else {
+        const {
+          center: { lat, lng },
+        } = action.payload
+        const { latitude, longitude } = state.geolocation
+
+        // We allow zoom in/out or a tiny movement but panning the map should disable the centering
+        const distanceMeters = distanceInMeters(latitude, longitude, lat, lng)
+        if (distanceMeters > 1) {
+          state.geolocationState = GeolocationState.DOT_ON
+        }
       }
-
-      const { latitude, longitude } = state.geolocation
-
-      const dist = Math.pow(lat - latitude, 2) + Math.pow(longitude - lng, 2)
-      const screenDist = dist * Math.pow(Math.pow(2, zoom), 2)
-
-      if (screenDist >= state.stopTrackingLocationThreshold) {
-        state.geolocationState = GeolocationState.INITIAL
-        state.geolocation = null
-      }
-    },
-    layoutChange: (state, action) => {
-      state.stopTrackingLocationThreshold = action.payload.isDesktop
-        ? 5000
-        : 2000
     },
   },
 })
@@ -89,9 +103,11 @@ export const {
   requestGeolocation,
   geolocationDenied,
   geolocationLoading,
-  geolocationReceived,
+  geolocationCentering,
+  geolocationFollowing,
   geolocationError,
   disableGeolocation,
+  geolocationTracking,
 } = geolocationSlice.actions
 
 export default geolocationSlice.reducer

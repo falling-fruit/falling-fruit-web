@@ -18,7 +18,7 @@ const ListState = ({ image, text, ...props }) => (
 const ShouldZoomIn = (props) => (
   <ListState
     image="/magnify_map.svg"
-    text="Zoom into a location to see Entry Data"
+    text="Zoom into the map to see location data"
     {...props}
   />
 )

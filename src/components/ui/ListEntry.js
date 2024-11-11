@@ -56,13 +56,10 @@ const TextContainer = styled.div`
 
 // Forwarding ref here seems necessary for Combobox highlighting to work
 const ListEntry = React.forwardRef(
-  ({ leftIcons, primaryText, secondaryText, rightIcons, ...props }, ref) => (
+  ({ leftIcons, children, rightIcons, ...props }, ref) => (
     <ListContainer ref={ref} {...props}>
       {leftIcons && <Icons $prepend>{leftIcons}</Icons>}
-      <TextContainer>
-        <PrimaryText className="primaryText">{primaryText}</PrimaryText>
-        <SecondaryText className="secondaryText">{secondaryText}</SecondaryText>
-      </TextContainer>
+      <TextContainer>{children}</TextContainer>
       {rightIcons && <Icons>{rightIcons}</Icons>}
     </ListContainer>
   ),
@@ -72,8 +69,7 @@ ListEntry.displayName = 'ListEntry'
 
 ListEntry.propTypes = {
   leftIcons: PropTypes.node,
-  primaryText: PropTypes.node,
-  secondaryText: PropTypes.node,
+  children: PropTypes.node,
   rightIcons: PropTypes.node,
 }
 

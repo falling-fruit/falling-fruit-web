@@ -59,7 +59,9 @@ export const currentPathWithView = (view) => {
   const path = stateIndex === -1 ? pathname : pathname.substring(0, stateIndex)
 
   // 7 decimal places gives precision to 1 cm
-  return `${path}/@${view.center.lat.toFixed(7)},${view.center.lng.toFixed(
-    7,
-  )},${view.zoom}z`
+  // Normalize longitude to -180 to 180 range
+  const normalizedLng = ((view.center.lng + 540) % 360) - 180
+  return `${path}/@${view.center.lat.toFixed(7)},${normalizedLng.toFixed(7)},${
+    view.zoom
+  }z`
 }
