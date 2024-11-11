@@ -7,7 +7,6 @@ import aboutRoutes from '../about/aboutRoutes'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import MapPage from '../map/MapPage'
-import profileRoutes from '../profile/profileRoutes'
 import Header from './Header'
 import SidePane from './SidePane'
 
@@ -53,7 +52,6 @@ const DesktopLayout = () => (
     <Switch>
       {aboutRoutes}
       {authRoutes}
-      {profileRoutes}
       <Route>
         {connectRoutes}
         <WindowSize>

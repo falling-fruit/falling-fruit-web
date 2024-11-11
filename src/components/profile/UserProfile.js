@@ -26,11 +26,9 @@ const UserProfile = () => {
   useEffect(() => {
     async function fetchUserData() {
       setIsLoading(true)
+
       const data = await getUserById(id)
       setUserData(data)
-
-      // Log the fetched data
-      console.log('Fetched User Data:', data)
 
       setIsLoading(false)
     }

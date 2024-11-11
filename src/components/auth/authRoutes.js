@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 
+import UserProfile from '../profile/UserProfile'
 import AccountPage from './AccountPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
@@ -36,6 +37,10 @@ const pages = [
   {
     path: '/users/confirmation',
     component: ConfirmationPage,
+  },
+  {
+    path: ['/users/:id'],
+    component: UserProfile,
   },
 ]
 
