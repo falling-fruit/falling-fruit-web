@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 import { setIsBeingInitializedMobile } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -9,18 +10,19 @@ const ConnectInitLocation = () => {
   const isDesktop = useIsDesktop()
   const history = useAppHistory()
   const dispatch = useDispatch()
+  const location = useLocation()
+  const isSettingsPage = location.pathname.startsWith('/settings')
 
   useEffect(() => {
-    if (isDesktop) {
-      history.push('/locations/new')
-      return
-    }
+    if (!isSettingsPage) {
+      if (isDesktop) {
+        history.push('/locations/new')
+        return
+      }
 
-    dispatch(setIsBeingInitializedMobile(true))
-    return () => {
-      dispatch(setIsBeingInitializedMobile(false))
+      dispatch(setIsBeingInitializedMobile(true))
     }
-  }, [history, isDesktop, dispatch])
+  }, [history, isDesktop, dispatch, isSettingsPage])
 
   return null
 }

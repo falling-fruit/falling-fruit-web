@@ -9,6 +9,7 @@ import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectTypes from './ConnectTypes'
+import DisconnectInitLocation from './DisconnectInitLocation'
 import DisconnectLocation from './DisconnectLocation'
 import DisconnectReview from './DisconnectReview'
 
@@ -75,7 +76,7 @@ const connectRoutes = [
    * - if on desktop because of screen resize, go to /locations/new
    * - set a flag in redux
    */
-  <Route key="connect-init-location" path="/locations/init">
+  <Route key="connect-init-location" path={['/locations/init', '/settings']}>
     <ConnectInitLocation />
   </Route>,
   /*
@@ -189,6 +190,16 @@ const connectRoutes = [
    */
   <Route key="disconnect-review" path={['/map', '/locations']}>
     {({ match }) => match && <DisconnectReview />}
+  </Route>,
+
+  /*
+   * DisconnectInitLocation
+   * why: need to clear the mobile initialization state when navigating to main views
+   *
+   * action: clear isBeingInitializedMobile in Redux when on /map or /list
+   */
+  <Route key="disconnect-init-location" path={['/map', '/list']}>
+    <DisconnectInitLocation />
   </Route>,
 ]
 
