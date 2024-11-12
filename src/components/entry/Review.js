@@ -100,6 +100,15 @@ export const StyledImagePreview = styled(ImagePreview)`
   margin-right: 7px;
 `
 
+const StyledLink = styled(Link)`
+  color: ${({ theme }) => theme.orange};
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 const Review = ({
   review,
   onImageClick,
@@ -151,7 +160,9 @@ const Review = ({
             <>
               {' by '}
               {review.user_id ? (
-                <Link to={`/users/${review.user_id}`}>{review.author}</Link>
+                <StyledLink to={`/users/${review.user_id}`}>
+                  {review.author}
+                </StyledLink>
               ) : (
                 review.author
               )}

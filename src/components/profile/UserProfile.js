@@ -1,4 +1,4 @@
-import { ArrowBack } from '@styled-icons/boxicons-regular'
+import { ArrowBack, User } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { getUserById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import BackButton from '../ui/BackButton'
+import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 
 const StyledNavBack = styled.div`
@@ -56,10 +57,14 @@ const UserProfile = () => {
             {t('back')}
           </BackButton>
         </StyledNavBack>
-
-        <h1>Name: {name}</h1>
-        <h3>Joined: {new Date(created_at).toISOString().slice(0, 10)}</h3>
-        <h3>Bio: {bio}</h3>
+        <IconBesideText>
+          <User size={40} />
+          <h2>{name}</h2>
+        </IconBesideText>
+        <p>
+          <i>Joined on {new Date(created_at).toISOString().slice(0, 10)}</i>
+        </p>
+        <p>{bio}</p>
       </PageTemplate>
     </PageScrollWrapper>
   )
