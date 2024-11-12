@@ -47,6 +47,12 @@ export const filterSlice = createSlice({
     invasive: false,
     isLoading: false,
     countsById: {},
+    categories: {
+      forager: true,
+      freegan: true,
+      grafter: false,
+      honeybee: false,
+    },
   },
   reducers: {
     openFilter: (state) => {
@@ -54,6 +60,10 @@ export const filterSlice = createSlice({
     },
     closeFilter: (state) => {
       state.isOpenInMobileLayout = false
+    },
+    categoryChanged: (state, action) => {
+      const [category, value] = action.payload
+      state.categories[category] = value
     },
   },
   extraReducers: {
@@ -86,6 +96,6 @@ export const filterSlice = createSlice({
   },
 })
 
-export const { openFilter, closeFilter } = filterSlice.actions
+export const { openFilter, closeFilter, categoryChanged } = filterSlice.actions
 
 export default filterSlice.reducer

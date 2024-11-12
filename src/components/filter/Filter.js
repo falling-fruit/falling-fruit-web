@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { categoryChanged } from '../../redux/filterSlice'
 import {
   invasiveChanged,
   muniChanged,
@@ -118,6 +119,30 @@ const Filter = () => {
         )}
       </div>
       <MuniAndInvasiveCheckboxFilters>
+        <LabeledCheckbox
+          field="forager"
+          value={useSelector((state) => state.filter.categories.forager)}
+          label="Forager"
+          onChange={(checked) => dispatch(categoryChanged('forager', checked))}
+        />
+        <LabeledCheckbox
+          field="freegan"
+          value={useSelector((state) => state.filter.categories.freegan)}
+          label="Freegan"
+          onChange={(checked) => dispatch(categoryChanged('freegan', checked))}
+        />
+        <LabeledCheckbox
+          field="grafter"
+          value={useSelector((state) => state.filter.categories.grafter)}
+          label="Grafter"
+          onChange={(checked) => dispatch(categoryChanged('grafter', checked))}
+        />
+        <LabeledCheckbox
+          field="honeybee"
+          value={useSelector((state) => state.filter.categories.honeybee)}
+          label="Honeybee"
+          onChange={(checked) => dispatch(categoryChanged('honeybee', checked))}
+        />
         <LabeledCheckbox
           field="muni"
           value={muni}
