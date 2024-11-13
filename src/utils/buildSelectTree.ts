@@ -82,9 +82,10 @@ class SelectTreeBuilder {
     const matchesSearch =
       !this.searchValue || searchLabel.toLowerCase().includes(this.searchValue)
 
-    const matchesCategories = type.categories.some((cat) =>
-      this.enabledCategories.includes(cat),
-    )
+    const matchesCategories =
+      type.categories.length === 0
+        ? this.enabledCategories.includes('noCategory')
+        : type.categories.some((cat) => this.enabledCategories.includes(cat))
 
     const node: RenderTreeNode = {
       id: type.id,

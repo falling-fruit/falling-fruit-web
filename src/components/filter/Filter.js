@@ -166,6 +166,16 @@ const Filter = () => {
           label={t('invasives')}
           onChange={(checked) => dispatch(invasiveChanged(checked))}
         />
+        <LabeledCheckbox
+          field="noCategory"
+          value={categories.noCategory}
+          label="No Category"
+          onChange={(checked) =>
+            dispatch(
+              categoryChanged({ category: 'noCategory', value: checked }),
+            )
+          }
+        />
       </MuniAndInvasiveCheckboxFilters>
     </>
   )

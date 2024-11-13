@@ -52,6 +52,7 @@ export const filterSlice = createSlice({
       freegan: true,
       grafter: false,
       honeybee: false,
+      noCategory: true,
     },
   },
   reducers: {
