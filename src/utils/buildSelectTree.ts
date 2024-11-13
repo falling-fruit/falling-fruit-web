@@ -88,6 +88,13 @@ class SelectTreeBuilder {
         ? this.enabledCategories.includes('noCategory')
         : type.categories.some((cat) => this.enabledCategories.includes(cat))
 
+    console.log(`Node ${type.commonName} (${type.id}):`, {
+      categories: type.categories,
+      matchesCategories,
+      parentMatchesCategories,
+      enabledCategories: this.enabledCategories,
+    })
+
     const node: RenderTreeNode = {
       id: type.id,
       parent,
@@ -120,6 +127,11 @@ class SelectTreeBuilder {
       !parentMatchesCategories &&
       !matchesCategories
     ) {
+      console.log(`Filtering out leaf node ${type.commonName} (${type.id}):`, {
+        reason: 'No children and neither parent nor self matches categories',
+        parentMatchesCategories,
+        matchesCategories,
+      })
       return null
     }
 
