@@ -72,6 +72,7 @@ class SelectTreeBuilder {
     type: LocalizedType,
     parent: RenderTreeNode | null = null,
     parentMatchesSearch: boolean = false,
+    parentMatchesCategories: boolean = false,
   ): RenderTreeNode | null {
     const count = this.getAggregatedCount(type.id)
     if (this.showOnlyOnMap && count === 0) {
@@ -97,12 +98,17 @@ class SelectTreeBuilder {
       isIndeterminate: false,
       isDisabled:
         (this.searchValue !== '' && !matchesSearch && !parentMatchesSearch) ||
-        (!matchesCategories && !parentMatchesSearch),
+        (!matchesCategories && !parentMatchesCategories),
     }
 
     const children = (this.typesAccess.childrenById[type.id] || [])
       .map((childId) =>
-        this.buildNode(this.typesAccess.getType(childId), node, matchesSearch),
+        this.buildNode(
+          this.typesAccess.getType(childId),
+          node,
+          matchesSearch,
+          matchesCategories,
+        ),
       )
       .filter((child): child is RenderTreeNode => child !== null)
 
