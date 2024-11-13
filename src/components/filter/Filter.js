@@ -62,6 +62,7 @@ const Filter = () => {
   const { countsById, types, muni, invasive, categories } = useSelector(
     (state) => state.filter,
   )
+  console.log(categories)
 
   const { typesAccess } = useSelector((state) => state.type)
   const { tree: selectTree, visibleTypeIds } = useMemo(
