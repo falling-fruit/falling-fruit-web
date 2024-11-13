@@ -112,7 +112,11 @@ class SelectTreeBuilder {
       )
       .filter((child): child is RenderTreeNode => child !== null)
 
-    if (children.length === 0 && !matchesCategories) {
+    if (
+      children.length === 0 &&
+      !parentMatchesCategories &&
+      !matchesCategories
+    ) {
       return null
     }
 
