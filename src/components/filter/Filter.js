@@ -76,7 +76,7 @@ const Filter = () => {
           .filter(([_, enabled]) => enabled)
           .map(([category]) => category),
       ),
-    [typesAccess, countsById, showOnlyOnMap, searchValue, types],
+    [typesAccess, countsById, showOnlyOnMap, searchValue, types, categories],
   )
 
   const { t } = useTranslation()
