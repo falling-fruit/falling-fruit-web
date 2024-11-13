@@ -81,9 +81,15 @@ class SelectTreeBuilder {
     const matchesSearch =
       !this.searchValue || searchLabel.toLowerCase().includes(this.searchValue)
 
+    console.log(`Processing node ${type.id} (${type.commonName}):`)
+    console.log(`- Enabled categories:`, this.enabledCategories)
+    console.log(`- Node categories:`, type.categories)
+
     const matchesCategories =
       this.enabledCategories.length === 0 ||
       type.categories.some((cat) => this.enabledCategories.includes(cat))
+
+    console.log(`- Matches categories: ${matchesCategories}`)
 
     const node: RenderTreeNode = {
       id: type.id,
@@ -108,6 +114,7 @@ class SelectTreeBuilder {
 
     // Don't show leaf nodes that don't match categories
     if (children.length === 0 && !matchesCategories) {
+      console.log(`- Skipping leaf node ${type.id} - doesn't match categories`)
       return null
     }
 
