@@ -62,7 +62,6 @@ export const filterSlice = createSlice({
       state.isOpenInMobileLayout = false
     },
     categoryChanged: (state, action) => {
-      console.log(action.payload)
       const { category, value } = action.payload
       state.categories[category] = value
     },

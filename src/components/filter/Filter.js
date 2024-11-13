@@ -124,25 +124,33 @@ const Filter = () => {
           field="forager"
           value={categories.forager}
           label="Forager"
-          onChange={(checked) => dispatch(categoryChanged('forager', checked))}
+          onChange={(checked) =>
+            dispatch(categoryChanged({ category: 'forager', value: checked }))
+          }
         />
         <LabeledCheckbox
           field="freegan"
           value={categories.freegan}
           label="Freegan"
-          onChange={(checked) => dispatch(categoryChanged('freegan', checked))}
+          onChange={(checked) =>
+            dispatch(categoryChanged({ category: 'freegan', value: checked }))
+          }
         />
         <LabeledCheckbox
           field="grafter"
           value={categories.grafter}
           label="Grafter"
-          onChange={(checked) => dispatch(categoryChanged('grafter', checked))}
+          onChange={(checked) =>
+            dispatch(categoryChanged({ category: 'grafter', value: checked }))
+          }
         />
         <LabeledCheckbox
           field="honeybee"
           value={categories.honeybee}
           label="Honeybee"
-          onChange={(checked) => dispatch(categoryChanged('honeybee', checked))}
+          onChange={(checked) =>
+            dispatch(categoryChanged({ category: 'honeybee', value: checked }))
+          }
         />
         <LabeledCheckbox
           field="muni"
