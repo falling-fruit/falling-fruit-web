@@ -88,13 +88,6 @@ class SelectTreeBuilder {
         ? this.enabledCategories.includes('noCategory')
         : type.categories.some((cat) => this.enabledCategories.includes(cat))
 
-    console.log(`Node ${type.commonName} (${type.id}):`, {
-      categories: type.categories,
-      matchesCategories,
-      parentMatchesCategories,
-      enabledCategories: this.enabledCategories,
-    })
-
     const node: RenderTreeNode = {
       id: type.id,
       parent,
@@ -127,11 +120,6 @@ class SelectTreeBuilder {
       !parentMatchesCategories &&
       !matchesCategories
     ) {
-      console.log(`Filtering out leaf node ${type.commonName} (${type.id}):`, {
-        reason: 'No children and neither parent nor self matches categories',
-        parentMatchesCategories,
-        matchesCategories,
-      })
       return null
     }
 
@@ -156,7 +144,7 @@ class SelectTreeBuilder {
       : type.scientificName
 
     const ownCount = this.getCount(type.id)
-    if (children.length && ownCount > 0 && matchesSearch) {
+    if (children.length && ownCount > 0 && matchesSearch && matchesCategories) {
       const childNode: RenderTreeNode = {
         ...node,
         id: -type.id, // Use negative ID to ensure uniqueness
@@ -166,7 +154,7 @@ class SelectTreeBuilder {
         children: [],
         isSelected: this.selectedTypes.includes(type.id),
         isIndeterminate: false,
-        isDisabled: !matchesSearch,
+        isDisabled: false,
       }
       node.children.unshift(childNode)
     } else if (children.length === 0) {
