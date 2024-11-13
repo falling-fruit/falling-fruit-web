@@ -59,7 +59,7 @@ const Filter = () => {
   )
 
   const dispatch = useDispatch()
-  const { countsById, types, muni, invasive } = useSelector(
+  const { countsById, types, muni, invasive, categories } = useSelector(
     (state) => state.filter,
   )
 
@@ -121,25 +121,25 @@ const Filter = () => {
       <MuniAndInvasiveCheckboxFilters>
         <LabeledCheckbox
           field="forager"
-          value={useSelector((state) => state.filter.categories.forager)}
+          value={categories.forager}
           label="Forager"
           onChange={(checked) => dispatch(categoryChanged('forager', checked))}
         />
         <LabeledCheckbox
           field="freegan"
-          value={useSelector((state) => state.filter.categories.freegan)}
+          value={categories.freegan}
           label="Freegan"
           onChange={(checked) => dispatch(categoryChanged('freegan', checked))}
         />
         <LabeledCheckbox
           field="grafter"
-          value={useSelector((state) => state.filter.categories.grafter)}
+          value={categories.grafter}
           label="Grafter"
           onChange={(checked) => dispatch(categoryChanged('grafter', checked))}
         />
         <LabeledCheckbox
           field="honeybee"
-          value={useSelector((state) => state.filter.categories.honeybee)}
+          value={categories.honeybee}
           label="Honeybee"
           onChange={(checked) => dispatch(categoryChanged('honeybee', checked))}
         />
