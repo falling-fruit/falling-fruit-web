@@ -72,6 +72,9 @@ const Filter = () => {
         showOnlyOnMap,
         searchValue,
         types,
+        Object.entries(categories)
+          .filter(([_, enabled]) => enabled)
+          .map(([category]) => category),
       ),
     [typesAccess, countsById, showOnlyOnMap, searchValue, types],
   )

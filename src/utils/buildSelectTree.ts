@@ -21,6 +21,7 @@ class SelectTreeBuilder {
   private searchValue: string
   private selectedTypes: number[]
   private visibleTypeIds: Set<number>
+  private enabledCategories: string[]
 
   constructor(
     typesAccess: TypesAccess,
@@ -28,6 +29,7 @@ class SelectTreeBuilder {
     showOnlyOnMap: boolean,
     searchValue: string,
     selectedTypes: number[],
+    enabledCategories: string[],
   ) {
     this.typesAccess = typesAccess
     this.countsById = countsById
@@ -35,6 +37,7 @@ class SelectTreeBuilder {
     this.searchValue = searchValue.toLowerCase()
     this.selectedTypes = selectedTypes
     this.visibleTypeIds = new Set()
+    this.enabledCategories = enabledCategories
   }
 
   private isCultivarWithParentInSelection(
@@ -78,6 +81,10 @@ class SelectTreeBuilder {
     const matchesSearch =
       !this.searchValue || searchLabel.toLowerCase().includes(this.searchValue)
 
+    const matchesCategories =
+      this.enabledCategories.length === 0 ||
+      type.categories.some((cat) => this.enabledCategories.includes(cat))
+
     const node: RenderTreeNode = {
       id: type.id,
       parent,
@@ -89,7 +96,8 @@ class SelectTreeBuilder {
       isSelected: this.selectedTypes.includes(type.id),
       isIndeterminate: false,
       isDisabled:
-        this.searchValue !== '' && !matchesSearch && !parentMatchesSearch,
+        (this.searchValue !== '' && !matchesSearch && !parentMatchesSearch) ||
+        (!matchesCategories && !parentMatchesSearch),
     }
 
     const children = (this.typesAccess.childrenById[type.id] || [])
@@ -179,6 +187,7 @@ function buildSelectTree(
   showOnlyOnMap: boolean,
   searchValue: string,
   selectedTypes: number[],
+  enabledCategories: string[] = [],
 ): SelectTreeResult {
   const builder = new SelectTreeBuilder(
     typesAccess,
@@ -186,6 +195,7 @@ function buildSelectTree(
     showOnlyOnMap,
     searchValue,
     selectedTypes,
+    enabledCategories,
   )
   const tree = builder.buildRenderTree()
   const visibleTypeIds = builder.getVisibleTypes()
