@@ -9,6 +9,7 @@ interface RenderTreeNode {
   count: number
   searchLabel: string
   children: RenderTreeNode[]
+  categories: string[]
   isSelected: boolean
   isIndeterminate: boolean
   isDisabled: boolean
@@ -95,6 +96,7 @@ class SelectTreeBuilder {
       count,
       searchLabel,
       children: [],
+      categories: type.categories,
       isSelected: this.selectedTypes.includes(type.id),
       isIndeterminate: false,
       isDisabled:
