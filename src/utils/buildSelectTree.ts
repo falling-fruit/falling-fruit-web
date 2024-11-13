@@ -106,6 +106,12 @@ class SelectTreeBuilder {
       )
       .filter((child): child is RenderTreeNode => child !== null)
 
+    // Don't show leaf nodes that don't match categories
+    if (children.length === 0 && !matchesCategories) {
+      return null
+    }
+
+    // Don't show nodes that don't match search
     if (!matchesSearch && !parentMatchesSearch && children.length === 0) {
       return null
     }
