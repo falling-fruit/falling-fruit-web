@@ -50,6 +50,12 @@ const MuniAndInvasiveCheckboxFilters = styled.div`
   }
 `
 
+const CategoryCheckboxes = styled.div`
+  margin-bottom: 0.5em;
+  display: flex;
+  gap: 5px;
+`
+
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
   const [showOnlyOnMap, setShowOnlyOnMap] = useState(true)
@@ -85,6 +91,52 @@ const Filter = () => {
     <>
       <div>
         <EdibleTypeText>{t('glossary.types')}</EdibleTypeText>
+        <CategoryCheckboxes>
+          <LabeledCheckbox
+            field="forager"
+            value={categories.forager}
+            label="Forager"
+            onChange={(checked) =>
+              dispatch(categoryChanged({ category: 'forager', value: checked }))
+            }
+          />
+          <LabeledCheckbox
+            field="freegan"
+            value={categories.freegan}
+            label="Freegan"
+            onChange={(checked) =>
+              dispatch(categoryChanged({ category: 'freegan', value: checked }))
+            }
+          />
+          <LabeledCheckbox
+            field="grafter"
+            value={categories.grafter}
+            label="Grafter"
+            onChange={(checked) =>
+              dispatch(categoryChanged({ category: 'grafter', value: checked }))
+            }
+          />
+          <LabeledCheckbox
+            field="honeybee"
+            value={categories.honeybee}
+            label="Honeybee"
+            onChange={(checked) =>
+              dispatch(
+                categoryChanged({ category: 'honeybee', value: checked }),
+              )
+            }
+          />
+          <LabeledCheckbox
+            field="noCategory"
+            value={categories.noCategory}
+            label="No Category"
+            onChange={(checked) =>
+              dispatch(
+                categoryChanged({ category: 'noCategory', value: checked }),
+              )
+            }
+          />
+        </CategoryCheckboxes>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder={t('type')}
@@ -124,38 +176,6 @@ const Filter = () => {
       </div>
       <MuniAndInvasiveCheckboxFilters>
         <LabeledCheckbox
-          field="forager"
-          value={categories.forager}
-          label="Forager"
-          onChange={(checked) =>
-            dispatch(categoryChanged({ category: 'forager', value: checked }))
-          }
-        />
-        <LabeledCheckbox
-          field="freegan"
-          value={categories.freegan}
-          label="Freegan"
-          onChange={(checked) =>
-            dispatch(categoryChanged({ category: 'freegan', value: checked }))
-          }
-        />
-        <LabeledCheckbox
-          field="grafter"
-          value={categories.grafter}
-          label="Grafter"
-          onChange={(checked) =>
-            dispatch(categoryChanged({ category: 'grafter', value: checked }))
-          }
-        />
-        <LabeledCheckbox
-          field="honeybee"
-          value={categories.honeybee}
-          label="Honeybee"
-          onChange={(checked) =>
-            dispatch(categoryChanged({ category: 'honeybee', value: checked }))
-          }
-        />
-        <LabeledCheckbox
           field="muni"
           value={muni}
           label={t('glossary.tree_inventory', { count: 2 })}
@@ -166,16 +186,6 @@ const Filter = () => {
           value={invasive}
           label={t('invasives')}
           onChange={(checked) => dispatch(invasiveChanged(checked))}
-        />
-        <LabeledCheckbox
-          field="noCategory"
-          value={categories.noCategory}
-          label="No Category"
-          onChange={(checked) =>
-            dispatch(
-              categoryChanged({ category: 'noCategory', value: checked }),
-            )
-          }
         />
       </MuniAndInvasiveCheckboxFilters>
     </>

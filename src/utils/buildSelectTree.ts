@@ -79,17 +79,26 @@ class SelectTreeBuilder {
     type: LocalizedType,
     parent: RenderTreeNode | null = null,
     parentMatchesSearch: boolean = false,
-    parentMatchesCategories: boolean = false,
   ): RenderTreeNode | null {
-    const count = this.getAggregatedCount(type.id)
-    if (this.showOnlyOnMap && count === 0) {
-      return null
+    const countInEnabledCategories = this.getAggregatedCountInEnabledCategories(
+      type.id,
+    )
+    const matchesCategories = this.matchesEnabledCategories(type)
+
+    if (this.showOnlyOnMap) {
+      if (countInEnabledCategories === 0) {
+        return null
+      }
+    } else {
+      if (!matchesCategories) {
+        return null
+      }
     }
+    const count = this.getAggregatedCount(type.id)
+
     const searchLabel = `${type.commonName} ${type.scientificName}`.trim()
     const matchesSearch =
       !this.searchValue || searchLabel.toLowerCase().includes(this.searchValue)
-
-    const matchesCategories = this.matchesEnabledCategories(type)
 
     const node: RenderTreeNode = {
       id: type.id,
@@ -104,27 +113,14 @@ class SelectTreeBuilder {
       isIndeterminate: false,
       isDisabled:
         (this.searchValue !== '' && !matchesSearch && !parentMatchesSearch) ||
-        (!matchesCategories && !parentMatchesCategories),
+        countInEnabledCategories < count,
     }
 
     const children = (this.typesAccess.childrenById[type.id] || [])
       .map((childId) =>
-        this.buildNode(
-          this.typesAccess.getType(childId),
-          node,
-          matchesSearch,
-          matchesCategories,
-        ),
+        this.buildNode(this.typesAccess.getType(childId), node, matchesSearch),
       )
       .filter((child): child is RenderTreeNode => child !== null)
-
-    if (
-      children.length === 0 &&
-      !parentMatchesCategories &&
-      !matchesCategories
-    ) {
-      return null
-    }
 
     if (!matchesSearch && !parentMatchesSearch && children.length === 0) {
       return null
@@ -150,7 +146,7 @@ class SelectTreeBuilder {
     if (children.length && ownCount > 0 && matchesSearch && matchesCategories) {
       const childNode: RenderTreeNode = {
         ...node,
-        id: -type.id, // Use negative ID to ensure uniqueness
+        id: -type.id,
         parent: node,
         count: ownCount,
         value: type.id,
@@ -164,7 +160,6 @@ class SelectTreeBuilder {
       node.value = type.id
     }
 
-    // Calculate isSelected and isIndeterminate
     if (node.children.length > 0) {
       const allChildrenSelected = node.children.every(
         (child) => child.isSelected,
@@ -237,19 +232,6 @@ function buildSelectTree(
   )
   const tree = builder.buildRenderTree()
   const visibleTypeIds = builder.getVisibleTypes()
-
-  // Log aggregated counts for root nodes
-  const rootNodes = typesAccess.localizedTypes.filter(
-    (type) => type.parentId === 0,
-  )
-  rootNodes.forEach((node) => {
-    console.log(
-      `Aggregated count for ${
-        node.scientificName || node.commonName
-      } in enabled categories:`,
-      builder.getAggregatedCountInEnabledCategories(node.id),
-    )
-  })
 
   return { tree, visibleTypeIds }
 }
