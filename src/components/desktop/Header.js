@@ -194,6 +194,7 @@ const SignupButton = styled(Button)`
 
 const StyledSocialButtons = styled(SocialButtons)`
   margin: 0 5px;
+  display: flex;
 
   a {
     color: ${({ theme }) => theme.text};
