@@ -52,8 +52,11 @@ const MuniAndInvasiveCheckboxFilters = styled.div`
 
 const CategoryCheckboxes = styled.div`
   margin-bottom: 0.5em;
-  display: flex;
-  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 8px;
+  width: 100%;
 `
 
 const Filter = () => {
