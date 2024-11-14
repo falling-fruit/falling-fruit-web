@@ -194,6 +194,24 @@ class SelectTreeBuilder {
   getVisibleTypes(): number[] {
     return Array.from(this.visibleTypeIds)
   }
+
+  private getAggregatedCountInEnabledCategories(id: number): number {
+    const type = this.typesAccess.getType(id)
+    let count = 0
+
+    // Only include count if type matches enabled categories
+    if (this.matchesEnabledCategories(type)) {
+      count = this.getCount(id)
+    }
+
+    // Recursively add counts from children
+    const children = this.typesAccess.childrenById[id] || []
+    for (const childId of children) {
+      count += this.getAggregatedCountInEnabledCategories(childId)
+    }
+
+    return count
+  }
 }
 
 interface SelectTreeResult {
@@ -219,6 +237,20 @@ function buildSelectTree(
   )
   const tree = builder.buildRenderTree()
   const visibleTypeIds = builder.getVisibleTypes()
+
+  // Log aggregated counts for root nodes
+  const rootNodes = typesAccess.localizedTypes.filter(
+    (type) => type.parentId === 0,
+  )
+  rootNodes.forEach((node) => {
+    console.log(
+      `Aggregated count for ${
+        node.scientificName || node.commonName
+      } in enabled categories:`,
+      builder.getAggregatedCountInEnabledCategories(node.id),
+    )
+  })
+
   return { tree, visibleTypeIds }
 }
 
