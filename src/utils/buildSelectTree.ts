@@ -60,6 +60,12 @@ class SelectTreeBuilder {
     )
   }
 
+  private matchesEnabledCategories(type: LocalizedType): boolean {
+    return type.categories.length === 0
+      ? this.enabledCategories.includes('noCategory')
+      : type.categories.some((cat) => this.enabledCategories.includes(cat))
+  }
+
   buildRenderTree(): RenderTreeNode[] {
     const rootNodes = this.typesAccess.localizedTypes.filter(
       (type) => type.parentId === 0,
@@ -83,10 +89,7 @@ class SelectTreeBuilder {
     const matchesSearch =
       !this.searchValue || searchLabel.toLowerCase().includes(this.searchValue)
 
-    const matchesCategories =
-      type.categories.length === 0
-        ? this.enabledCategories.includes('noCategory')
-        : type.categories.some((cat) => this.enabledCategories.includes(cat))
+    const matchesCategories = this.matchesEnabledCategories(type)
 
     const node: RenderTreeNode = {
       id: type.id,
