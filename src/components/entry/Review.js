@@ -101,12 +101,7 @@ export const StyledImagePreview = styled(ImagePreview)`
 `
 
 const StyledLink = styled(Link)`
-  color: ${({ theme }) => theme.orange};
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  color: ${({ theme }) => theme.tertiaryText};
 `
 
 const Review = ({

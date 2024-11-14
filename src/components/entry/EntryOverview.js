@@ -65,14 +65,6 @@ const DisabledIconBesideText = styled(IconBesideText)`
       cursor: not-allowed;
     `}
 `
-const StyledLink = styled(Link)`
-  color: ${({ theme }) => theme.orange};
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`
 
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
@@ -192,9 +184,13 @@ const EntryOverview = () => {
                   ) : (
                     <>
                       {t('added_by', { name: '' })}{' '}
-                      <StyledLink to={`/users/${locationData.user_id}`}>
-                        {locationData.author}
-                      </StyledLink>
+                      {locationData.user_id ? (
+                        <Link to={`/users/${locationData.user_id}`}>
+                          {locationData.author}
+                        </Link>
+                      ) : (
+                        locationData.author
+                      )}
                     </>
                   )}
                   {locationData.import_id && (

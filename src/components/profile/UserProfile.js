@@ -1,4 +1,4 @@
-import { ArrowBack, User } from '@styled-icons/boxicons-regular'
+import { ArrowBack, Calendar, User } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -7,7 +7,9 @@ import styled from 'styled-components/macro'
 import { getUserById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
+import { formatISOString } from '../entry/textFormatters'
 import BackButton from '../ui/BackButton'
+import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 
@@ -20,7 +22,7 @@ const StyledNavBack = styled.div`
 const UserProfile = () => {
   const { id } = useParams()
   const history = useAppHistory()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
 
@@ -59,12 +61,19 @@ const UserProfile = () => {
         </StyledNavBack>
         <IconBesideText>
           <User size={40} />
-          <h2>{name}</h2>
+          <h3>User: {name}</h3>
         </IconBesideText>
         <p>
-          <i>Joined on {new Date(created_at).toISOString().slice(0, 10)}</i>
+          <i>{bio}</i>
         </p>
-        <p>{bio}</p>
+        <IconBesideText>
+          <Calendar color={theme.secondaryText} size={20} />
+          <p>
+            <time dateTime={created_at}>
+              {`Joined on ${formatISOString(created_at, i18n.language)}`}
+            </time>
+          </p>
+        </IconBesideText>
       </PageTemplate>
     </PageScrollWrapper>
   )
