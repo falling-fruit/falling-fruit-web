@@ -51,12 +51,10 @@ const MuniAndInvasiveCheckboxFilters = styled.div`
 `
 
 const CategoryCheckboxes = styled.div`
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 8px;
-  width: 100%;
+  gap: 0.25em;
 `
 
 const Filter = () => {
@@ -129,17 +127,18 @@ const Filter = () => {
               )
             }
           />
-          <LabeledCheckbox
-            field="noCategory"
-            value={categories.noCategory}
-            label="No Category"
-            onChange={(checked) =>
-              dispatch(
-                categoryChanged({ category: 'noCategory', value: checked }),
-              )
-            }
-          />
         </CategoryCheckboxes>
+        <LabeledCheckbox
+          style={{ marginBottom: '0.5em' }}
+          field="noCategory"
+          value={categories.noCategory}
+          label="Pending"
+          onChange={(checked) =>
+            dispatch(
+              categoryChanged({ category: 'noCategory', value: checked }),
+            )
+          }
+        />
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder={t('type')}

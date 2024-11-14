@@ -14,6 +14,12 @@ export const fetchMapLocations = createAsyncThunk(
     const state = getState()
     const { types, muni, invasive } = state.filter
     const { lastMapView } = state.viewport
+    /*
+     * TODO: types are null on first load
+     *
+     * this is then getting us locations which are not meant to be selected by default
+     *
+     */
     if (lastMapView) {
       const { bounds, zoom, center: _ } = lastMapView
       return await getLocations(
