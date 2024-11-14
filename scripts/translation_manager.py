@@ -56,7 +56,7 @@ class TranslationManager:
     def __init__(self, component_path, yaml_folder, json_folder):
         self.component = Component(component_path) if component_path else None
         self.yaml_folder = Path(yaml_folder) if yaml_folder else None
-        self.json_folder = Path(json_folder)
+        self.json_folder = Path(json_folder) if json_folder else None
 
     def migrate_translations(self):
         if not self.component:
@@ -77,53 +77,44 @@ class TranslationManager:
         for yaml_file in yaml_files:
             yaml_locale = YamlLocaleFile(yaml_file)
             json_file = self.json_folder / f"{yaml_locale.lang_code}.json"
-            json_locale = JsonLocaleFile(json_file)
+            if json_file.exists():
+                json_locale = JsonLocaleFile(json_file)
 
-            for key in self.component.keys:
-                value = self.get_nested_value(yaml_locale.data.get(yaml_locale.lang_code, {}), key.split('.'))
-                if value is not None:
-                    self.set_nested_value(json_locale.data, key.split('.'), value)
+                added_keys = 0
+                edited_keys = 0
+                
+                for key in self.component.keys:
+                    value = self.get_nested_value(yaml_locale.data.get(yaml_locale.lang_code, {}), key.split('.'))
+                    if value is not None:
+                        # Clean up the value before setting
+                        if isinstance(value, str):
+                            # Remove locale parameters
+                            value = re.sub(r'\?locale=[a-z]{2}', '', value)
+                            # Replace %{...} with {{...}}
+                            value = re.sub(r'%\{(\w+)\}', r'{{\1}}', value)
+                            
+                        existing_value = self.get_nested_value(json_locale.data, key.split('.'))
+                        if existing_value is None:
+                            added_keys += 1
+                        elif existing_value != value:
+                            edited_keys += 1
+                        self.set_nested_value(json_locale.data, key.split('.'), value)
 
-            json_locale.save_data()
-            print(f"Migrated translations for {yaml_locale.lang_code}")
-
-    def remove_locale_params(self):
-        json_files = list(self.json_folder.glob('*.json'))
-        for json_file in json_files:
-            json_locale = JsonLocaleFile(json_file)
-            self.remove_locale_params_recursive(json_locale.data)
-            json_locale.save_data()
-            print(f"Removed locale parameters from {json_locale.lang_code}")
-
-    def remove_locale_params_recursive(self, data):
-        if isinstance(data, dict):
-            for key, value in data.items():
-                if isinstance(value, str):
-                    data[key] = re.sub(r'\?locale=[a-z]{2}', '', value)
-                else:
-                    self.remove_locale_params_recursive(value)
-        elif isinstance(data, list):
-            for i, item in enumerate(data):
-                if isinstance(item, str):
-                    data[i] = re.sub(r'\?locale=[a-z]{2}', '', item)
-                else:
-                    self.remove_locale_params_recursive(item)
-
-    def replace_placeholders(self):
-        json_files = list(self.json_folder.glob('*.json'))
-        for json_file in json_files:
-            with open(json_file, 'r', encoding='utf-8') as file:
-                content = file.read()
-
-            # Replace %{...} with {{...}}
-            updated_content = re.sub(r'%\{(\w+)\}', r'{{\1}}', content)
-
-            if content != updated_content:
-                with open(json_file, 'w', encoding='utf-8') as file:
-                    file.write(updated_content)
-                print(f"Updated: {json_file.name}")
+                json_locale.save_data()
+                print(f"{yaml_file} -> {json_file} added {added_keys} keys, edited {edited_keys} keys")
             else:
-                print(f"No changes needed: {json_file.name}")
+                print(f"{yaml_file} skipped: no {json_file}")
+
+
+    def list_component_keys(self):
+        if not self.component:
+            print("Error: No component file provided.")
+            return
+        if not self.component.keys:
+            print("No translation keys found in component.")
+            return
+        for key in sorted(self.component.keys):
+            print(f"{key}")
 
     @staticmethod
     def get_nested_value(dictionary, keys):
@@ -146,8 +137,7 @@ def main():
     parser.add_argument("--yaml_folder", help="Path to the folder containing YAML locale files")
     parser.add_argument("--json_folder", help="Path to the folder for output JSON locale files")
     parser.add_argument("--migrate", action="store_true", help="Migrate translations from YAML to JSON")
-    parser.add_argument("--remove-params", action="store_true", help="Remove locale parameters from all JSON files")
-    parser.add_argument("--replace-placeholders", action="store_true", help="Replace %{...} with {{...}}")
+    parser.add_argument("--list-in-component", action="store_true", help="List all translation keys in the component file")
     
     args = parser.parse_args()
 
@@ -156,8 +146,9 @@ def main():
         parser.print_help()
         return
 
-    if not args.json_folder:
-        print("Error: --json_folder must be specified.")
+
+    if args.list_in_component and not args.component_path:
+        print("Error: --component_path must be specified for --list-in-component")
         parser.print_help()
         return
 
@@ -166,14 +157,10 @@ def main():
     if args.migrate:
         manager.migrate_translations()
 
-    if args.remove_params:
-        manager.remove_locale_params()
-
-    if args.replace_placeholders:
-        manager.replace_placeholders()
-
-    if not any([args.migrate, args.remove_params, args.replace_placeholders]):
-        print("No action specified. Use --migrate, --remove-params, or --replace-placeholders.")
+    if args.list_in_component:
+        manager.list_component_keys()
+    elif not args.migrate:
+        print("No action specified. Use --migrate or --list-in-component.")
         parser.print_help()
 
 if __name__ == "__main__":
