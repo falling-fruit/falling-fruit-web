@@ -99,13 +99,15 @@ const StyledHeader = styled.header`
           color: ${({ theme }) => theme.orange};
         }
       }
-      
+
       .signin,
       .signup {
         min-width: auto;
       }
+    }
   }
 `
+
 const Dropdown = ({ className, children, label, isMatch }) => (
   <div className={className}>
     <div className={`button${isMatch ? ' active' : ''}`}>

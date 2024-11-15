@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 
+import ConnectInitLocation from './ConnectInitLocation'
 import ConnectList from './ConnectList'
 import ConnectLocation from './ConnectLocation'
 import ConnectMap from './ConnectMap'
@@ -8,6 +9,7 @@ import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectTypes from './ConnectTypes'
+import DisconnectInitLocation from './DisconnectInitLocation'
 import DisconnectLocation from './DisconnectLocation'
 import DisconnectReview from './DisconnectReview'
 
@@ -35,7 +37,7 @@ const connectRoutes = [
    * - get the view from URL or default to our chosen location centred on U of Illinois
    * - if this is the first render, dispatch a Redux update
    */
-  <Route key="connect-view" path={['/map', '/settings']}>
+  <Route key="connect-view" path={['/map', '/settings', '/locations/init']}>
     <ConnectMap />
   </Route>,
   /*
@@ -62,6 +64,20 @@ const connectRoutes = [
    */
   <Route key="connect-new-location" path="/locations/new">
     <ConnectNewLocation />
+  </Route>,
+  /*
+   * ConnectInitLocation
+   * why:
+   * - mobile only URL
+   * - map needs to know we're in this state rather than generic map state
+   *
+   *
+   * actions:
+   * - if on desktop because of screen resize, go to /locations/new
+   * - set a flag in redux
+   */
+  <Route key="connect-init-location" path={['/locations/init', '/settings']}>
+    <ConnectInitLocation />
   </Route>,
   /*
    * ConnectLocation
@@ -95,7 +111,8 @@ const connectRoutes = [
   >
     {({ match }) =>
       match &&
-      match.params.locationId !== 'new' && (
+      match.params.locationId !== 'new' &&
+      match.params.locationId !== 'init' && (
         <ConnectLocation
           locationId={match.params.locationId}
           isBeingEdited={match.params.nextSegment === 'edit'}
@@ -137,7 +154,7 @@ const connectRoutes = [
    *
    * action: clear location in Redux
    */
-  <Route key="disconnect-location" path={['/map']}>
+  <Route key="disconnect-location" path={['/map', '/locations/init']}>
     {({ match }) => match && <DisconnectLocation />}
   </Route>,
   /*
@@ -173,6 +190,16 @@ const connectRoutes = [
    */
   <Route key="disconnect-review" path={['/map', '/locations']}>
     {({ match }) => match && <DisconnectReview />}
+  </Route>,
+
+  /*
+   * DisconnectInitLocation
+   * why: need to clear the mobile initialization state when navigating to main views
+   *
+   * action: clear isBeingInitializedMobile in Redux when on /map or /list
+   */
+  <Route key="disconnect-init-location" path={['/map', '/list']}>
+    <DisconnectInitLocation />
   </Route>,
 ]
 

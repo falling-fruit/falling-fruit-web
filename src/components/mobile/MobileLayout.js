@@ -34,9 +34,7 @@ const shouldDisplayMapPage = (pathname) => {
     strict: false,
   })
 
-  const isPlacingNewLocationMarker =
-    match?.params.locationId === 'new' &&
-    match?.params.nextSegment !== 'details'
+  const isPlacingNewLocationMarker = match?.params.locationId === 'init'
 
   const locationId =
     match?.params.locationId && parseInt(match.params.locationId)
@@ -104,12 +102,12 @@ const MobileLayout = () => {
               <EditLocationForm editingId={match.params.locationId} />
             )}
           </Route>
-          <Route path="/locations/new/details">
+          <Route path="/locations/new">
             <LocationForm />
           </Route>
           <Route path={['/map', '/locations', '/list', '/settings']}>
             <Switch>
-              <Route path="/locations/new" />
+              <Route path="/locations/init" />
               <Route path="/locations/:locationId/edit/position" />
               <Route path="/locations/:locationId">
                 {!streetView && <EntryMobile />}
@@ -135,7 +133,7 @@ const MobileLayout = () => {
             '/reviews/:reviewId/edit',
             '/locations/:locationId/review',
             '/locations/:locationId/edit/details',
-            '/locations/new/details',
+            '/locations/new',
           ]}
         />
         <Route>

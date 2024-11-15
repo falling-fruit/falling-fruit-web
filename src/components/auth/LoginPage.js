@@ -49,6 +49,19 @@ const LoginPage = () => {
           })}
           onSubmit={(values, { setSubmitting }) => {
             dispatch(login(values))
+              .unwrap()
+              .catch((error) => {
+                // Here, set the error message based on the error received
+                setStatus(
+                  'general',
+                  `Sign in failed: ${
+                    error.message || 'Unexpected error occurred'
+                  }`,
+                )
+              })
+              .finally(() => {
+                setSubmitting(false)
+              })
             setSubmitting(false)
           }}
         >

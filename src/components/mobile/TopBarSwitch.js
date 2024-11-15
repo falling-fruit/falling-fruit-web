@@ -13,6 +13,7 @@ const TopBarSwitch = () => (
         '/locations/:locationId/review',
         '/locations/:locationId/edit',
         '/locations/new',
+        '/locations/init',
       ]}
     >
       <TopBar>
