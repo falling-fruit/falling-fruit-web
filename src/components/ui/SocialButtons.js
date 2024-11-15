@@ -5,7 +5,7 @@ import {
   Slack,
 } from '@styled-icons/boxicons-logos'
 
-import { ReactComponent as XLogo } from '../../components/entry/icons/X-Twitter.svg'
+import { ReactComponent as X } from '../../components/entry/icons/X.svg'
 
 const SocialButtons = ({ ...props }) => (
   <div {...props}>
@@ -29,8 +29,8 @@ const SocialButtons = ({ ...props }) => (
     >
       <Instagram />
     </a>
-    <a href="https://x.com/Falling_Fruit" alt="Twitter" title="Twitter">
-      <XLogo />
+    <a href="https://x.com/Falling_Fruit" alt="X" title="X">
+      <X />
     </a>
   </div>
 )
