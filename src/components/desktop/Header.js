@@ -68,7 +68,7 @@ const StyledHeader = styled.header`
         font-weight: bold;
         font-size: 1rem;
 
-        @media (min-width: 770px) and (max-width: 820px) {
+        @media (min-width: 767px) and (max-width: 820px) {
           min-width: unset;
         }
 
