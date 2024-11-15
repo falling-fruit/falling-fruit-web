@@ -59,13 +59,15 @@ const UserProfile = () => {
             {t('back')}
           </BackButton>
         </StyledNavBack>
-        <IconBesideText>
-          <User size={40} />
-          <h3>User: {name}</h3>
-        </IconBesideText>
-        <p>
-          <i>{bio}</i>
-        </p>
+        <h3>User: {name}</h3>
+        {bio && (
+          <IconBesideText>
+            <User size={20} />
+            <p>
+              <i>{bio}</i>
+            </p>
+          </IconBesideText>
+        )}
         <IconBesideText>
           <Calendar color={theme.secondaryText} size={20} />
           <p>
