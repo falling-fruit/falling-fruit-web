@@ -47,7 +47,7 @@ const LoginPage = () => {
             password: Yup.string().required(),
             rememberMe: Yup.boolean().required(),
           })}
-       onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting }) => {
             dispatch(login(values))
             setSubmitting(false)
           }}
