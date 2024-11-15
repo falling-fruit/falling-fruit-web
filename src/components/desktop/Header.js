@@ -51,9 +51,10 @@ const StyledHeader = styled.header`
     ul {
       list-style: none;
       padding: 0;
-      margin: 0 0 0 0;
+      margin: 0;
       height: 100%;
       display: flex;
+      align-items: center;
 
       li {
         display: flex;
@@ -66,6 +67,10 @@ const StyledHeader = styled.header`
         position: relative;
         font-weight: bold;
         font-size: 1rem;
+
+        @media (min-width: 770px) and (max-width: 820px) {
+          min-width: unset;
+        }
 
         a,
         .content button {
