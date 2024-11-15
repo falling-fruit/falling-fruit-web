@@ -53,13 +53,13 @@ const LocationNav = () => {
         path="/locations/:locationId/edit/position"
         component={LocationPositionNav}
       />
-      <Route path="/locations/new/details">
+      <Route path="/locations/new">
         <TopBarNav
-          onBack={() => history.push('/locations/new')}
+          onBack={() => history.push('/locations/init')}
           title="New location"
         />
       </Route>
-      <Route path="/locations/new">
+      <Route path="/locations/init">
         <TopBarNav
           left={
             <Instructions>
@@ -81,7 +81,7 @@ const LocationNav = () => {
                 raised
                 size={54}
                 color={theme.green}
-                onClick={() => history.push('/locations/new/details')}
+                onClick={() => history.push('/locations/new')}
               />
             </>
           }

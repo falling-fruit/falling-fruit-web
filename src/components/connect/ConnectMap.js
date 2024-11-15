@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { setInitialView } from '../../redux/mapSlice'
 import { parseCurrentUrl } from '../../utils/appUrl'
-import ConnectPath from './ConnectPath'
 
 const DEFAULT_LAT = 40.1125785
 const DEFAULT_LNG = -88.2287926
@@ -25,7 +24,7 @@ const ConnectMap = () => {
     }
   }, [dispatch, hasInitialView]) //eslint-disable-line
 
-  return <ConnectPath />
+  return null
 }
 
 export default ConnectMap

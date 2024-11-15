@@ -15,9 +15,12 @@ const Tabs = () => {
   const { t } = useTranslation()
   const { pathname } = useLocation()
   const history = useAppHistory()
-  const { locationId, isBeingEdited, streetViewOpen } = useSelector(
-    (state) => state.location,
-  )
+  const {
+    isBeingInitializedMobile,
+    locationId,
+    isBeingEdited,
+    streetViewOpen,
+  } = useSelector((state) => state.location)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   const tabs = [
@@ -71,10 +74,10 @@ const Tabs = () => {
   }, [pathname])
 
   const handleTabChange = (newTabIndex) => {
-    if (newTabIndex === 1 && locationId === 'new') {
+    if (newTabIndex === 1 && isBeingInitializedMobile) {
       // If switching to the Map tab and adding the location, reopen that view
       // to allow e.g. switching satellite view on
-      history.push(`/locations/new`)
+      history.push(`/locations/init`)
     } else if (newTabIndex === 1 && locationId && isBeingEdited) {
       // We could also be editing position of the location
       history.push(`/locations/${locationId}/edit/position`)

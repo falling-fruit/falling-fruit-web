@@ -10,9 +10,14 @@ import { ReactComponent as LeafIcon } from './leaf.svg'
 
 const TypeNameTagWrapper = styled.span`
   display: inline-block;
-  margin-right: 1em;
   margin-bottom: 0.5em;
   opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
+  font-size: 0.875rem;
+  &:not(:nth-last-child(2))::after {
+    content: '·';
+    margin: 0 0.5em;
+    color: ${({ theme }) => theme.secondaryText};
+  }
 `
 const CommonName = styled.span`
   font-weight: bold;
@@ -25,16 +30,12 @@ const ScientificName = styled.span`
   color: ${({ theme }) => theme.secondaryText};
 `
 
-const TypeNameWrapper = styled.div`
-  font-size: 0.875rem;
-`
-
 const TypeName = ({ commonName, scientificName }) => (
-  <TypeNameWrapper>
+  <span>
     {commonName && <CommonName>{commonName}</CommonName>}
     {commonName && scientificName && <span style={{ margin: '0 0.25em' }} />}
     {scientificName && <ScientificName>{scientificName}</ScientificName>}
-  </TypeNameWrapper>
+  </span>
 )
 
 const LocationItem = styled.li`

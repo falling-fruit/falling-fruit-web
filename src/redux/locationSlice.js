@@ -10,7 +10,6 @@ import {
   getLocationById,
 } from '../utils/api'
 import { fetchReviewData } from './reviewSlice'
-import { updateLastMapView } from './viewportSlice'
 
 export const fetchLocationData = createAsyncThunk(
   'location/fetchLocationData',
@@ -73,6 +72,7 @@ const locationSlice = createSlice({
       drawerDisabled: false,
       tabIndex: 0,
     },
+    isBeingInitializedMobile: false,
   },
   reducers: {
     clearLocation: (state) => {
@@ -155,13 +155,11 @@ const locationSlice = createSlice({
     setFromSettings: (state, action) => {
       state.fromSettings = action.payload
     },
+    setIsBeingInitializedMobile: (state, action) => {
+      state.isBeingInitializedMobile = action.payload
+    },
   },
   extraReducers: {
-    [updateLastMapView]: (state, action) => {
-      if (state.locationId === 'new') {
-        state.position = action.payload.center
-      }
-    },
     [fetchLocationData.pending]: (state, action) => {
       state.location = null
       state.locationId = parseInt(action.meta.arg.locationId)
@@ -276,6 +274,7 @@ export const {
   fullyOpenPaneDrawer,
   partiallyClosePaneDrawer,
   setFromSettings,
+  setIsBeingInitializedMobile,
 } = locationSlice.actions
 
 export default locationSlice.reducer
