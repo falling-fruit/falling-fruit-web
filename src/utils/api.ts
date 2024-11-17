@@ -30,6 +30,7 @@ instance.interceptors.request.use((config) => {
     '/clusters',
     '/imports',
     '/imports/:id',
+    '/users/:id',
   ]
   const isAnonymous =
     config.method === 'get' &&
@@ -184,3 +185,7 @@ export const getImports = () => instance.get(`/imports`)
 export const getImportById = (
   id: paths['/imports/{id}']['get']['parameters']['path']['id'],
 ) => instance.get(`/imports/${id}`)
+
+export const getUserById = (
+  id: paths['/users/{id}']['get']['parameters']['path']['id'],
+) => instance.get(`/users/${id}`)

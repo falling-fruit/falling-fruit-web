@@ -1,4 +1,5 @@
 import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { FRUITING_RATINGS, RATINGS } from '../../constants/ratings'
@@ -99,6 +100,10 @@ export const StyledImagePreview = styled(ImagePreview)`
   margin-right: 7px;
 `
 
+const StyledLink = styled(Link)`
+  color: ${({ theme }) => theme.tertiaryText};
+`
+
 const Review = ({
   review,
   onImageClick,
@@ -146,7 +151,18 @@ const Review = ({
       {!editable && (
         <cite>
           Reviewed on {formatISOString(review.created_at)}
-          {review.author && <> by {review.author}</>}
+          {review.author && (
+            <>
+              {' by '}
+              {review.user_id ? (
+                <StyledLink to={`/users/${review.user_id}`}>
+                  {review.author}
+                </StyledLink>
+              ) : (
+                review.author
+              )}
+            </>
+          )}
           {review.observed_on && (
             <> (visited {formatISOString(review.observed_on)})</>
           )}

@@ -179,9 +179,20 @@ const EntryOverview = () => {
                   <User size={20} />
                 )}
                 <p>
-                  {locationData.author && locationData.import_id
-                    ? t('imported_from', { name: locationData.author })
-                    : t('added_by', { name: locationData.author })}
+                  {locationData.author && locationData.import_id ? (
+                    t('imported_from', { name: locationData.author })
+                  ) : (
+                    <>
+                      {t('added_by', { name: '' })}{' '}
+                      {locationData.user_id ? (
+                        <Link to={`/users/${locationData.user_id}`}>
+                          {locationData.author}
+                        </Link>
+                      ) : (
+                        locationData.author
+                      )}
+                    </>
+                  )}
                   {locationData.import_id && (
                     <>
                       {locationData.author && ' ('}

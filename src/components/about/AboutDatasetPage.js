@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { formatISOString } from '../entry/textFormatters'
 import BackButton from '../ui/BackButton'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
@@ -21,7 +22,7 @@ const StyledNavBack = styled.div`
 `
 const AboutDatasetPage = () => {
   const { id } = useParams()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const history = useAppHistory()
 
   const [importData, setImportData] = useState({})
@@ -62,7 +63,7 @@ const AboutDatasetPage = () => {
           </BackButton>
         </StyledNavBack>
         <h3>
-          #{id}: {name}
+          Import #{id}: {name}
         </h3>
         <a href={url} target="_blank" rel="noreferrer">
           {url}
@@ -78,7 +79,11 @@ const AboutDatasetPage = () => {
         </IconBesideText>
         <IconBesideText>
           <Calendar color={theme.secondaryText} size={20} />
-          <p>Imported {new Date(created_at).toISOString().slice(0, 10)}</p>
+          <p>
+            <time dateTime={created_at}>
+              {`Imported on ${formatISOString(created_at, i18n.language)}`}
+            </time>
+          </p>
         </IconBesideText>
         {license && (
           <IconBesideText>
