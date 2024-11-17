@@ -3,8 +3,9 @@ import {
   Github,
   Instagram,
   Slack,
-  Twitter,
 } from '@styled-icons/boxicons-logos'
+
+import { ReactComponent as X } from '../../components/entry/icons/X.svg'
 
 const SocialButtons = ({ ...props }) => (
   <div {...props}>
@@ -28,8 +29,8 @@ const SocialButtons = ({ ...props }) => (
     >
       <Instagram />
     </a>
-    <a href="https://twitter.com/Falling_Fruit" alt="Twitter" title="Twitter">
-      <Twitter />
+    <a href="https://x.com/Falling_Fruit" alt="X" title="X">
+      <X />
     </a>
   </div>
 )
