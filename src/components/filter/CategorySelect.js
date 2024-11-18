@@ -12,14 +12,13 @@ const Tag = styled.div`
   align-items: center;
   padding: 6px 12px;
   background: ${({ theme, selected }) =>
-    selected ? theme.primary : theme.background};
-  color: ${({ theme, selected }) => (selected ? theme.white : theme.text)};
-  border: 1px solid
-    ${({ theme, selected }) => (selected ? theme.primary : theme.border)};
+    selected ? theme.transparentOrange : ''};
+  border: 1px solid;
+  color: ${({ theme, selected }) =>
+    selected ? theme.secondaryText : theme.text};
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s;
-  font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
 
   &:hover {
     background: ${({ theme }) => theme.primaryLight};
@@ -43,7 +42,9 @@ const CategorySelect = ({ categories, onChange }) => {
           selected={enabled}
           onClick={() => toggleCategory(category)}
         >
-          {category.charAt(0).toUpperCase() + category.slice(1)}
+          {category === 'noCategory'
+            ? 'No Category'
+            : category.charAt(0).toUpperCase() + category.slice(1)}
         </Tag>
       ))}
     </TagContainer>
