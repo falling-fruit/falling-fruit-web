@@ -85,7 +85,7 @@ const MobileLayout = () => {
         <MapPage />
       </div>
       {connectRoutes}
-      <TabPanels}>
+      <TabPanels>
         <Switch>
           {aboutRoutes}
           {authRoutes}
