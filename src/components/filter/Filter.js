@@ -85,7 +85,6 @@ const Filter = () => {
       ),
     [typesAccess, countsById, showOnlyOnMap, searchValue, types, categories],
   )
-  console.log({ selectTree, visibleTypeIds })
 
   const { t } = useTranslation()
   return (

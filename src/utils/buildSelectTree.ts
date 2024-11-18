@@ -80,7 +80,7 @@ class SelectTreeBuilder {
     type: LocalizedType,
     parent: RenderTreeNode | null = null,
     parentMatchesSearch: boolean = false,
-  ): RenderTreeNode | null {
+  ): RenderTreeNode {
     const countInEnabledCategories = this.getAggregatedCountInEnabledCategories(
       type.id,
     )
@@ -114,11 +114,10 @@ class SelectTreeBuilder {
           countInEnabledCategories < count),
     }
 
-    const children = (this.typesAccess.childrenById[type.id] || [])
-      .map((childId) =>
+    const children = (this.typesAccess.childrenById[type.id] || []).map(
+      (childId) =>
         this.buildNode(this.typesAccess.getType(childId), node, matchesSearch),
-      )
-      .filter((child) => child.isVisible)
+    )
 
     if (!matchesSearch && !parentMatchesSearch && children.length === 0) {
       node.isVisible = false
@@ -160,10 +159,11 @@ class SelectTreeBuilder {
 
     if (node.children.length > 0) {
       const allChildrenSelected = node.children.every(
-        (child) => child.isSelected,
+        (child) => !child.isVisible || child.isSelected,
       )
       const someChildrenSelected = node.children.some(
-        (child) => child.isSelected || child.isIndeterminate,
+        (child) =>
+          !child.isVisible || child.isSelected || child.isIndeterminate,
       )
       node.isSelected = allChildrenSelected
       node.isIndeterminate = !allChildrenSelected && someChildrenSelected
