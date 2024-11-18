@@ -117,7 +117,7 @@ const TreeSelectView = ({
         <React.Fragment key={node.id}>
           <TreeNode style={{ paddingLeft: `${level * 1.25}em` }}>
             <ControlsContainer>
-              {node.children.length > 0 ? (
+              {node.children.some((c) => c.isVisible) ? (
                 <ToggleButton
                   onClick={() => handleToggle(node.id)}
                   disabled={isDisabled}

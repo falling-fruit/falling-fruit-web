@@ -110,8 +110,7 @@ class SelectTreeBuilder {
       isIndeterminate: false,
       isDisabled:
         (this.searchValue !== '' && !matchesSearch && !parentMatchesSearch) ||
-        (ownCount < countInEnabledCategories &&
-          countInEnabledCategories < count),
+        (ownCount < count && countInEnabledCategories < count),
     }
 
     const children = (this.typesAccess.childrenById[type.id] || []).map(
@@ -119,12 +118,16 @@ class SelectTreeBuilder {
         this.buildNode(this.typesAccess.getType(childId), node, matchesSearch),
     )
 
-    if (!matchesSearch && !parentMatchesSearch && children.length === 0) {
+    if (
+      !matchesSearch &&
+      !parentMatchesSearch &&
+      children.every((c) => !c.isVisible)
+    ) {
       node.isVisible = false
       return node
     }
 
-    if (!node.isDisabled) {
+    if (!node.isDisabled && node.isVisible) {
       this.visibleTypeIds.add(type.id)
     }
 
@@ -140,7 +143,12 @@ class SelectTreeBuilder {
       ? type.scientificName?.substring(cultivarIndex ?? -1)
       : type.scientificName
 
-    if (children.length && ownCount > 0 && matchesSearch && matchesCategories) {
+    if (
+      children.some((c) => c.isVisible) &&
+      ownCount > 0 &&
+      matchesSearch &&
+      matchesCategories
+    ) {
       const childNode: RenderTreeNode = {
         ...node,
         id: -type.id,
@@ -153,17 +161,19 @@ class SelectTreeBuilder {
         isDisabled: false,
       }
       node.children.unshift(childNode)
-    } else if (children.length === 0) {
+      this.visibleTypeIds.add(type.id)
+    } else if (!children.some((c) => c.isVisible)) {
       node.value = type.id
     }
 
-    if (node.children.length > 0) {
-      const allChildrenSelected = node.children.every(
-        (child) => !child.isVisible || child.isSelected,
+    const visibleChildren = node.children.filter((c) => c.isVisible)
+
+    if (visibleChildren.length > 0) {
+      const allChildrenSelected = visibleChildren.every(
+        (child) => child.isSelected,
       )
-      const someChildrenSelected = node.children.some(
-        (child) =>
-          !child.isVisible || child.isSelected || child.isIndeterminate,
+      const someChildrenSelected = visibleChildren.some(
+        (child) => child.isSelected || child.isIndeterminate,
       )
       node.isSelected = allChildrenSelected
       node.isIndeterminate = !allChildrenSelected && someChildrenSelected
