@@ -13,6 +13,7 @@ interface RenderTreeNode {
   isSelected: boolean
   isIndeterminate: boolean
   isDisabled: boolean
+  isVisible: boolean
 }
 
 class SelectTreeBuilder {
@@ -72,7 +73,7 @@ class SelectTreeBuilder {
     )
     return rootNodes
       .map((node) => this.buildNode(node, null, false))
-      .filter((node): node is RenderTreeNode => node !== null)
+      .filter((node) => node.isVisible)
   }
 
   private buildNode(
@@ -85,15 +86,9 @@ class SelectTreeBuilder {
     )
     const matchesCategories = this.matchesEnabledCategories(type)
 
-    if (this.showOnlyOnMap) {
-      if (countInEnabledCategories === 0) {
-        return null
-      }
-    } else {
-      if (!matchesCategories) {
-        return null
-      }
-    }
+    const isVisible = this.showOnlyOnMap
+      ? countInEnabledCategories > 0
+      : matchesCategories
     const count = this.getAggregatedCount(type.id)
     const ownCount = this.getCount(type.id)
 
@@ -105,6 +100,7 @@ class SelectTreeBuilder {
       id: type.id,
       parent,
       commonName: type.commonName,
+      isVisible,
       scientificName: type.scientificName,
       count,
       searchLabel,
@@ -122,10 +118,11 @@ class SelectTreeBuilder {
       .map((childId) =>
         this.buildNode(this.typesAccess.getType(childId), node, matchesSearch),
       )
-      .filter((child): child is RenderTreeNode => child !== null)
+      .filter((child) => child.isVisible)
 
     if (!matchesSearch && !parentMatchesSearch && children.length === 0) {
-      return null
+      node.isVisible = false
+      return node
     }
 
     if (!node.isDisabled) {
