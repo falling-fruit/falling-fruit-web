@@ -38,7 +38,15 @@ export const selectionChanged = (types) => (dispatch) => {
   dispatch(fetchLocations())
 }
 
-export const categoryChanged = (category, value) => (dispatch) => {
-  dispatch(updateSelection({ categories: { [category]: value } }))
+export const categoryChanged = (category, value) => (dispatch, getState) => {
+  const currentCategories = getState().filter.categories
+  dispatch(
+    updateSelection({
+      categories: {
+        ...currentCategories,
+        [category]: value,
+      },
+    }),
+  )
   dispatch(fetchLocations())
 }
