@@ -132,7 +132,7 @@ const Filter = () => {
           style={{ marginBottom: '0.5em' }}
           field="noCategory"
           value={categories.noCategory}
-          label="Pending"
+          label="Other"
           onChange={(checked) =>
             dispatch(
               categoryChanged({ category: 'noCategory', value: checked }),

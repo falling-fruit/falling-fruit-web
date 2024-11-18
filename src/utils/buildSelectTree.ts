@@ -95,6 +95,7 @@ class SelectTreeBuilder {
       }
     }
     const count = this.getAggregatedCount(type.id)
+    const ownCount = this.getCount(type.id)
 
     const searchLabel = `${type.commonName} ${type.scientificName}`.trim()
     const matchesSearch =
@@ -113,7 +114,8 @@ class SelectTreeBuilder {
       isIndeterminate: false,
       isDisabled:
         (this.searchValue !== '' && !matchesSearch && !parentMatchesSearch) ||
-        countInEnabledCategories < count,
+        (ownCount < countInEnabledCategories &&
+          countInEnabledCategories < count),
     }
 
     const children = (this.typesAccess.childrenById[type.id] || [])
@@ -142,7 +144,6 @@ class SelectTreeBuilder {
       ? type.scientificName?.substring(cultivarIndex ?? -1)
       : type.scientificName
 
-    const ownCount = this.getCount(type.id)
     if (children.length && ownCount > 0 && matchesSearch && matchesCategories) {
       const childNode: RenderTreeNode = {
         ...node,
