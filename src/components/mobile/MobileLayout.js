@@ -85,7 +85,7 @@ const MobileLayout = () => {
         <MapPage />
       </div>
       {connectRoutes}
-      <TabPanels style={{ paddingBottom: '50px' }}>
+      <TabPanels}>
         <Switch>
           {aboutRoutes}
           {authRoutes}
