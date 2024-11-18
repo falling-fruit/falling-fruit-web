@@ -113,54 +113,58 @@ const TreeSelectView = ({
     const isExpanded = Boolean(expandedNodes.has(node.id) | isDisabled)
 
     return (
-      <React.Fragment key={node.id}>
-        <TreeNode style={{ paddingLeft: `${level * 1.25}em` }}>
-          <ControlsContainer>
-            {node.children.length > 0 ? (
-              <ToggleButton
-                onClick={() => handleToggle(node.id)}
+      node.isVisible && (
+        <React.Fragment key={node.id}>
+          <TreeNode style={{ paddingLeft: `${level * 1.25}em` }}>
+            <ControlsContainer>
+              {node.children.length > 0 ? (
+                <ToggleButton
+                  onClick={() => handleToggle(node.id)}
+                  disabled={isDisabled}
+                >
+                  <ArrowIcon
+                    style={{
+                      transform: `rotate(${isExpanded ? 90 : 0}deg)`,
+                      transition: 'transform 0.2s',
+                      width: '12px',
+                      height: '12px',
+                      opacity: isDisabled ? 0.5 : 1,
+                    }}
+                  />
+                </ToggleButton>
+              ) : (
+                <ChevronSpace />
+              )}
+              <Checkbox
+                type="checkbox"
+                checked={node.isSelected}
+                ref={(el) => {
+                  if (el) {
+                    el.indeterminate = node.isIndeterminate
+                  }
+                }}
+                onChange={() => !isDisabled && handleCheckboxChange(node)}
                 disabled={isDisabled}
-              >
-                <ArrowIcon
-                  style={{
-                    transform: `rotate(${isExpanded ? 90 : 0}deg)`,
-                    transition: 'transform 0.2s',
-                    width: '12px',
-                    height: '12px',
-                    opacity: isDisabled ? 0.5 : 1,
-                  }}
-                />
-              </ToggleButton>
-            ) : (
-              <ChevronSpace />
-            )}
-            <Checkbox
-              type="checkbox"
-              checked={node.isSelected}
-              ref={(el) => {
-                if (el) {
-                  el.indeterminate = node.isIndeterminate
-                }
-              }}
-              onChange={() => !isDisabled && handleCheckboxChange(node)}
-              disabled={isDisabled}
-            />
-          </ControlsContainer>
-          <NodeContent>
-            {node.commonName && (
-              <CommonName isDisabled={isDisabled}>{node.commonName}</CommonName>
-            )}
-            {node.scientificName && (
-              <ScientificName isDisabled={isDisabled}>
-                {node.scientificName}
-              </ScientificName>
-            )}
-            <Count>({node.count})</Count>
-          </NodeContent>
-        </TreeNode>
-        {isExpanded &&
-          node.children.map((child) => renderNode(child, level + 1))}
-      </React.Fragment>
+              />
+            </ControlsContainer>
+            <NodeContent>
+              {node.commonName && (
+                <CommonName isDisabled={isDisabled}>
+                  {node.commonName}
+                </CommonName>
+              )}
+              {node.scientificName && (
+                <ScientificName isDisabled={isDisabled}>
+                  {node.scientificName}
+                </ScientificName>
+              )}
+              <Count>({node.count})</Count>
+            </NodeContent>
+          </TreeNode>
+          {isExpanded &&
+            node.children.map((child) => renderNode(child, level + 1))}
+        </React.Fragment>
+      )
     )
   }
 
