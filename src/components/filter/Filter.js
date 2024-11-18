@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { categoryChanged } from '../../redux/filterSlice'
 import {
+  categoryChanged,
   invasiveChanged,
   muniChanged,
   selectionChanged,
@@ -85,7 +85,6 @@ const Filter = () => {
       ),
     [typesAccess, countsById, showOnlyOnMap, searchValue, types, categories],
   )
-  console.log({ selectTree, visibleTypeIds })
 
   const { t } = useTranslation()
   return (
