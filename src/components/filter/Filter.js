@@ -12,6 +12,7 @@ import {
 } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
 import Input from '../ui/Input'
+import CategorySelect from './CategorySelect'
 import FilterButtons from './FilterButtons'
 import LabeledCheckbox from './LabeledCheckbox'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
@@ -50,20 +51,6 @@ const MuniAndInvasiveCheckboxFilters = styled.div`
   }
 `
 
-const CategorySelect = styled.select`
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 0.5em;
-  border: 1px solid ${({ theme }) => theme.border};
-  border-radius: 4px;
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
-
-  option {
-    padding: 8px;
-  }
-`
-
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
   const [showOnlyOnMap, setShowOnlyOnMap] = useState(true)
@@ -99,28 +86,15 @@ const Filter = () => {
       <div>
         <EdibleTypeText>{t('glossary.types')}</EdibleTypeText>
         <CategorySelect
-          multiple
-          value={Object.entries(categories)
-            .filter(([_, enabled]) => enabled)
-            .map(([category]) => category)}
-          onChange={(e) => {
-            const selectedOptions = Array.from(
-              e.target.selectedOptions,
-              (option) => option.value,
-            )
-            Object.keys(categories).forEach((category) => {
-              dispatch(
-                categoryChanged(category, selectedOptions.includes(category)),
-              )
+          categories={categories}
+          onChange={(newCategories) => {
+            Object.entries(newCategories).forEach(([category, enabled]) => {
+              if (categories[category] !== enabled) {
+                dispatch(categoryChanged(category, enabled))
+              }
             })
           }}
-        >
-          <option value="forager">Forager</option>
-          <option value="freegan">Freegan</option>
-          <option value="grafter">Grafter</option>
-          <option value="honeybee">Honeybee</option>
-          <option value="noCategory">Other</option>
-        </CategorySelect>
+        />
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder={t('type')}
