@@ -37,3 +37,8 @@ export const selectionChanged = (types) => (dispatch) => {
   dispatch(updateSelection({ types }))
   dispatch(fetchLocations())
 }
+
+export const categoryChanged = (category, value) => (dispatch) => {
+  dispatch(updateSelection({ categories: { [category]: value } }))
+  dispatch(fetchLocations())
+}

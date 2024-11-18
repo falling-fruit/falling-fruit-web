@@ -97,35 +97,33 @@ const Filter = () => {
             field="forager"
             value={categories.forager}
             label="Forager"
-            onChange={(checked) =>
-              dispatch(categoryChanged({ category: 'forager', value: checked }))
-            }
+            onChange={(checked) => {
+              dispatch(categoryChanged('forager', checked))
+            }}
           />
           <LabeledCheckbox
             field="freegan"
             value={categories.freegan}
             label="Freegan"
-            onChange={(checked) =>
-              dispatch(categoryChanged({ category: 'freegan', value: checked }))
-            }
+            onChange={(checked) => {
+              dispatch(categoryChanged('freegan', checked))
+            }}
           />
           <LabeledCheckbox
             field="grafter"
             value={categories.grafter}
             label="Grafter"
-            onChange={(checked) =>
-              dispatch(categoryChanged({ category: 'grafter', value: checked }))
-            }
+            onChange={(checked) => {
+              dispatch(categoryChanged('grafter', checked))
+            }}
           />
           <LabeledCheckbox
             field="honeybee"
             value={categories.honeybee}
             label="Honeybee"
-            onChange={(checked) =>
-              dispatch(
-                categoryChanged({ category: 'honeybee', value: checked }),
-              )
-            }
+            onChange={(checked) => {
+              dispatch(categoryChanged('honeybee', checked))
+            }}
           />
         </CategoryCheckboxes>
         <LabeledCheckbox
@@ -133,11 +131,9 @@ const Filter = () => {
           field="noCategory"
           value={categories.noCategory}
           label="Other"
-          onChange={(checked) =>
-            dispatch(
-              categoryChanged({ category: 'noCategory', value: checked }),
-            )
-          }
+          onChange={(checked) => {
+            dispatch(categoryChanged('noCategory', checked))
+          }}
         />
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
