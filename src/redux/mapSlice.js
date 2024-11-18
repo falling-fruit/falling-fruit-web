@@ -12,13 +12,30 @@ export const fetchMapLocations = createAsyncThunk(
   'map/fetchMapLocations',
   async (_, { getState }) => {
     const state = getState()
-    const { types, muni, invasive } = state.filter
+    const { types, muni, invasive, categories } = state.filter
     const { lastMapView } = state.viewport
+    const { typesAccess } = state.type
+
     if (lastMapView) {
       const { bounds, zoom, center: _ } = lastMapView
+
+      const filteredTypes = types?.filter((typeId) => {
+        const type = typesAccess.getType(typeId)
+        return type.categories.length === 0
+          ? categories.noCategory
+          : type.categories.some((cat) => categories[cat])
+      })
+
       return await getLocations(
         selectParams(
-          { types, muni, invasive, bounds, zoom, center: undefined },
+          {
+            types: filteredTypes,
+            muni,
+            invasive,
+            bounds,
+            zoom,
+            center: undefined,
+          },
           { limit: 250 },
         ),
       )
@@ -32,13 +49,21 @@ export const fetchMapClusters = createAsyncThunk(
   'map/fetchMapClusters',
   async (_, { getState }) => {
     const state = getState()
-    const { types, muni, invasive } = state.filter
+    const { types, muni, invasive, categories } = state.filter
     const { lastMapView } = state.viewport
+    const { typesAccess } = state.type
     if (lastMapView) {
       const { bounds, zoom, center: _ } = lastMapView
+
+      const filteredTypes = types?.filter((typeId) => {
+        const type = typesAccess.getType(typeId)
+        return type.categories.length === 0
+          ? categories.noCategory
+          : type.categories.some((cat) => categories[cat])
+      })
       return await getClusters(
         selectParams({
-          types,
+          types: filteredTypes,
           muni,
           invasive,
           bounds,
