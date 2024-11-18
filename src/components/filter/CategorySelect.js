@@ -14,14 +14,17 @@ const Tag = styled.div`
   background: ${({ theme, selected }) =>
     selected ? theme.primary : theme.background};
   color: ${({ theme, selected }) => (selected ? theme.white : theme.text)};
-  border: 1px solid ${({ theme }) => theme.border};
+  border: 1px solid
+    ${({ theme, selected }) => (selected ? theme.primary : theme.border)};
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s;
+  font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
 
   &:hover {
     background: ${({ theme }) => theme.primaryLight};
     color: ${({ theme }) => theme.white};
+    border-color: ${({ theme }) => theme.primaryLight};
   }
 `
 
