@@ -109,20 +109,23 @@ const clusterBounds = ({ lat, lng, zoom }) => {
     east: bounds.east * (360 / EARTH_CIRCUMFERENCE),
   }
 }
-const makeHandleViewChange = (dispatch, googleMap, history) => (_) => {
-  const center = googleMap.getCenter()
-  const newView = {
-    center: { lat: center.lat(), lng: center.lng() },
-    zoom: googleMap.getZoom(),
-    bounds: googleMap.getBounds().toJSON(),
-    width: googleMap.getDiv().offsetWidth,
-    height: googleMap.getDiv().offsetHeight,
+const makeHandleViewChange =
+  (dispatch, googleMap, history) => (googleMapReactCallbackArg) => {
+    const center = googleMap.getCenter()
+    const newView = {
+      center: { lat: center.lat(), lng: center.lng() },
+      zoom: googleMap.getZoom(),
+      bounds: googleMap.getBounds().toJSON(),
+      width: googleMap.getDiv().offsetWidth,
+      height: googleMap.getDiv().offsetHeight,
+    }
+    dispatch(updateLastMapView(newView))
+    dispatch(fetchLocations())
+    dispatch(fetchFilterCounts())
+    if (googleMapReactCallbackArg) {
+      history.changeView(newView)
+    }
   }
-  dispatch(updateLastMapView(newView))
-  dispatch(fetchLocations())
-  dispatch(fetchFilterCounts())
-  history.changeView(newView)
-}
 
 /**
  * Calculate XYZ tile coordinates.
@@ -186,6 +189,15 @@ const MapPage = ({ isDesktop }) => {
     showBusinesses,
   } = useSelector((state) => state.settings)
 
+  const { typesAccess } = useSelector((state) => state.type)
+
+  const ready = !typesAccess.isEmpty && !!googleMap
+  useEffect(() => {
+    if (ready) {
+      handleViewChangeRef.current(false)
+    }
+  }, [ready])
+
   const allLocations =
     clusters.length !== 0
       ? []
@@ -217,19 +229,6 @@ const MapPage = ({ isDesktop }) => {
      * Something breaks when storing maps in redux so pass a reference to it
      */
     dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
-
-    // Set initial view in lastMapView
-    const center = map.getCenter()
-    const initialView = {
-      center: { lat: center.lat(), lng: center.lng() },
-      zoom: map.getZoom(),
-      bounds: map.getBounds().toJSON(),
-      width: map.getDiv().offsetWidth,
-      height: map.getDiv().offsetHeight,
-    }
-    dispatch(updateLastMapView(initialView))
-    dispatch(fetchLocations())
-    dispatch(fetchFilterCounts())
   }
 
   const handleClusterClick = (cluster) => {
