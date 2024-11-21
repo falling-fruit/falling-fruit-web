@@ -22,7 +22,7 @@ React-based, mobile-friendly website for Falling Fruit.
 
 ## Status
 
-Under development as the future replacement of the existing website ([falling-fruit](https://github.com/falling-fruit/falling-fruit)) and mobile app ([falling-fruit-mobile](https://github.com/falling-fruit/falling-fruit-mobile)). It is live at https://beta.fallingfruit.org.
+Under development as the future replacement of the existing website ([falling-fruit](https://github.com/falling-fruit/falling-fruit)) and mobile app ([falling-fruit-mobile](https://github.com/falling-fruit/falling-fruit-mobile)). It is live at https://beta.fallingfruit.org. The highest-priority issues are those assigned to the [Beta release](https://github.com/falling-fruit/falling-fruit-web/milestone/5) milestone.
 
 ## Technologies
 
