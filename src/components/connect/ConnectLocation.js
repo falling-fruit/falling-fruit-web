@@ -34,6 +34,9 @@ const ConnectLocation = ({
        * (e.g. location to settings and back)
        * so if data is present in redux, don't fetch
        * */
+      if (isFromListLocations) {
+        history.push(`/locations/${locationId}`)
+      }
       return
     }
     dispatch(
