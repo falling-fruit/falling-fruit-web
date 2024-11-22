@@ -3,9 +3,11 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 import harvestData from '../../constants/data/harvest.json'
+import Facebook from '../entry/icons/Facebook.svg'
+import X from '../entry/icons/X-square.svg'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
-import { FORMATTERS } from './DataTableProperties'
+import { TablePreviewLink } from './DataTableProperties'
 
 const OrganizationName = styled.span`
   ${({ $isActive }) =>
@@ -43,6 +45,26 @@ const FormattedOrganization = ({
   </OrganizationName>
 )
 
+const FormattedSocials = ({ facebook, x }) => {
+  if (!facebook && !x) {
+    return null
+  }
+  return (
+    <>
+      {facebook && (
+        <TablePreviewLink href={facebook} target="_blank" rel="noreferrer">
+          <img src={Facebook} alt={'Facebook logo'} />
+        </TablePreviewLink>
+      )}
+      {x && (
+        <TablePreviewLink href={x} target="_blank" rel="noreferrer">
+          <img src={X} alt={`X logo`} />
+        </TablePreviewLink>
+      )}
+    </>
+  )
+}
+
 const columns = [
   {
     id: 'country',
@@ -77,9 +99,8 @@ const columns = [
   {
     id: 'social',
     name: 'Social',
-    selector: (row) => row.facebook + row.x,
-    format: ({ facebook, x }) =>
-      FORMATTERS.links({ links: [facebook, x].filter(Boolean) }),
+    selector: (row) => row.facebook || row.x,
+    format: FormattedSocials,
     compact: true,
     width: '80px',
     right: true,

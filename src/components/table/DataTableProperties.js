@@ -1,7 +1,6 @@
 import { LinkExternal } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
-import { RESOURCES } from '../entry/resources'
 import { theme } from '../ui/GlobalStyle'
 
 const TablePreviewLink = styled.a`
@@ -21,16 +20,6 @@ const TablePreviewLink = styled.a`
 const customLinkSort = (rowOne, rowTwo) =>
   rowOne.links.length - rowTwo.links.length
 
-const ResourceList = ({ url, key }) =>
-  RESOURCES.map(
-    ({ title, urlKey, icon }) =>
-      url.includes(urlKey) && (
-        <TablePreviewLink href={url} target="_blank" rel="noreferrer">
-          <img src={icon} key={key} alt={`${title} logo`} />
-        </TablePreviewLink>
-      ),
-  )
-
 const FORMATTERS = {
   muni: ({ muni }) => (muni ? 'Tree inventory' : 'Community map'),
   link: ({ url }) =>
@@ -39,8 +28,6 @@ const FORMATTERS = {
         <LinkExternal size="14" color={theme.orange} />
       </a>
     ),
-  links: ({ links }) =>
-    links.map((link, index) => <ResourceList key={index} url={link} />),
   created_at: ({ created_at }) =>
     new Date(created_at).toISOString().slice(0, 10),
 }
@@ -49,4 +36,4 @@ const SORTERS = {
   links: customLinkSort,
 }
 
-export { FORMATTERS, SORTERS }
+export { FORMATTERS, SORTERS, TablePreviewLink }

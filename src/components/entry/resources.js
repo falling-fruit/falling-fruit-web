@@ -1,11 +1,9 @@
 import EatTheWeedsLogo from './icons/EatTheWeeds.png'
-import FacebookLogo from './icons/Facebook.svg'
 import ForagingTexasLogo from './icons/ForagingTexas.png'
 import FruitipediaLogo from './icons/Fruitipedia.png'
 import UrbanMushroomsLogo from './icons/UrbanMushrooms.png'
 import USDALogo from './icons/USDA.svg'
 import WikipediaLogo from './icons/Wikipedia.svg'
-import X from './icons/X-square.svg'
 
 /**
  * Resource information for Entry Details. Includes the resource title,
@@ -42,16 +40,6 @@ const RESOURCES = [
     title: 'Wikipedia',
     urlKey: 'wikipedia',
     icon: WikipediaLogo,
-  },
-  {
-    title: 'Facebook',
-    urlKey: 'facebook',
-    icon: FacebookLogo,
-  },
-  {
-    title: 'X',
-    urlKey: 'x',
-    icon: X,
   },
 ]
 
