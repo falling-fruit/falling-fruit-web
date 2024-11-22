@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 import harvestData from '../../constants/data/harvest.json'
-import X from '../entry/icons/X.svg'
+import X from '../../constants/X.svg'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
