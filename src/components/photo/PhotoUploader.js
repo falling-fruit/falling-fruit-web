@@ -1,9 +1,16 @@
 import { equals } from 'ramda'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
+import styled from 'styled-components/macro'
 
 import { addPhoto } from '../../utils/api'
 import { PhotoOrganizer } from './PhotoOrganizer'
+
+const ScrollAnchor = styled.div`
+  height: 100px;
+  margin-top: -100px;
+  pointer-events: none;
+`
 
 export const PhotoUploader = ({ value, onChange }) => {
   const [photos, setPhotos] = useState(value)
@@ -23,8 +30,11 @@ export const PhotoUploader = ({ value, onChange }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [photos])
 
+  const scrollAnchorRef = useRef(null)
+
   const onOrganizerChange = async (organizerPhotos) => {
     setPhotos(organizerPhotos.map((photo) => ({ ...photo, file: null })))
+    scrollAnchorRef.current?.scrollIntoView()
 
     await Promise.all(
       organizerPhotos.map(async (photo) => {
@@ -66,5 +76,10 @@ export const PhotoUploader = ({ value, onChange }) => {
     )
   }
 
-  return <PhotoOrganizer photos={photos} onChange={onOrganizerChange} />
+  return (
+    <>
+      <PhotoOrganizer photos={photos} onChange={onOrganizerChange} />
+      <ScrollAnchor ref={scrollAnchorRef} />
+    </>
+  )
 }
