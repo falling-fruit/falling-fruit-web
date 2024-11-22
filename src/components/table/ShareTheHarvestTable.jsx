@@ -1,4 +1,4 @@
-import { Facebook } from '@styled-icons/boxicons-logos'
+import { Facebook, Instagram } from '@styled-icons/boxicons-logos'
 import { Search as SearchIcon } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components/macro'
@@ -46,8 +46,8 @@ const FormattedOrganization = ({
   </OrganizationName>
 )
 
-const FormattedSocials = ({ facebook, x }) => {
-  if (!facebook && !x) {
+const FormattedSocials = ({ facebook, instagram, x }) => {
+  if (!facebook && !instagram && !x) {
     return null
   }
   return (
@@ -55,6 +55,11 @@ const FormattedSocials = ({ facebook, x }) => {
       {facebook && (
         <TablePreviewLink href={facebook} target="_blank" rel="noreferrer">
           <Facebook color={theme.text} />
+        </TablePreviewLink>
+      )}
+      {instagram && (
+        <TablePreviewLink href={instagram} target="_blank" rel="noreferrer">
+          <Instagram color={theme.text} />
         </TablePreviewLink>
       )}
       {x && (
@@ -100,7 +105,7 @@ const columns = [
   {
     id: 'social',
     name: 'Social',
-    selector: (row) => row.facebook || row.x,
+    selector: (row) => row.facebook || row.instagram || row.x,
     format: FormattedSocials,
     compact: true,
     width: '80px',
