@@ -1,10 +1,11 @@
+import { Facebook } from '@styled-icons/boxicons-logos'
 import { Search as SearchIcon } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components/macro'
 
 import harvestData from '../../constants/data/harvest.json'
-import Facebook from '../entry/icons/Facebook.svg'
-import X from '../entry/icons/X-square.svg'
+import X from '../entry/icons/X.svg'
+import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
 import { TablePreviewLink } from './DataTableProperties'
@@ -53,7 +54,7 @@ const FormattedSocials = ({ facebook, x }) => {
     <>
       {facebook && (
         <TablePreviewLink href={facebook} target="_blank" rel="noreferrer">
-          <img src={Facebook} alt={'Facebook logo'} />
+          <Facebook color={theme.text} />
         </TablePreviewLink>
       )}
       {x && (
