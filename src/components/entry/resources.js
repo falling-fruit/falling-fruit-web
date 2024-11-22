@@ -49,7 +49,7 @@ const RESOURCES = [
     icon: FacebookLogo,
   },
   {
-    title: 'x',
+    title: 'X',
     urlKey: 'x',
     icon: X,
   },
