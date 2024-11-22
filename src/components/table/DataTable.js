@@ -62,16 +62,6 @@ const TableWrapper = styled.div`
       }
       `}
     }
-
-    &_TableCell {
-      &[data-column-id='social'] {
-        div {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      }
-    }
   }
 `
 
