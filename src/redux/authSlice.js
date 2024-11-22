@@ -1,88 +1,91 @@
-import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
-import { editUser, getUser, getUserToken } from '../utils/api'
+import { editUser, getUser, getUserToken, refreshUserToken } from '../utils/api'
 import authStore from '../utils/authStore'
 
-export const checkAuth = createAsyncThunk(
-  'auth/checkAuth',
-  async (_data, { rejectWithValue }) => {
-    let token
-    try {
-      token = authStore.getToken()
-    } catch (err) {
-      return rejectWithValue(err)
-    }
+export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
+  const token = authStore.initFromStorage()
 
-    if (token?.access_token) {
-      return await getUser()
-    } else {
-      return null
+  if (!token?.access_token || !token?.refresh_token) {
+    return null
+  }
+
+  try {
+    const user = await getUser(token.access_token)
+    authStore.setToken(token)
+    return user
+  } catch (error) {
+    if (
+      error.response?.status === 401 &&
+      error.response?.data?.error === 'Expired access token'
+    ) {
+      let newToken
+      try {
+        newToken = await refreshUserToken(token.refresh_token)
+      } catch (refreshError) {
+        authStore.removeToken()
+        throw refreshError
+      }
+      const user = await getUser(newToken.access_token)
+      authStore.setToken(newToken)
+      return user
+    } else if (error.response?.status === 401) {
+      // We failed to log in with our token but can't fix the error based on response
+      authStore.removeToken()
     }
-  },
-)
+    throw error
+  }
+})
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ email, password, rememberMe }, { rejectWithValue }) => {
-    let token
-    try {
-      token = await getUserToken(email, password)
-    } catch (err) {
-      return rejectWithValue(err)
-    }
-    authStore.setToken(token, rememberMe)
-
-    return await getUser()
+  async ({ email, password, rememberMe }) => {
+    const token = await getUserToken(email, password)
+    const user = await getUser(token.access_token)
+    authStore.setRememberMe(rememberMe)
+    authStore.setToken(token)
+    return user
   },
 )
 
 export const editProfile = createAsyncThunk(
   'auth/editProfile',
-  async (userData, { rejectWithValue, getState }) => {
-    try {
-      const currentUser = getState().auth.user
-      const isEmailChanged = userData.email !== currentUser.email
-      const response = await editUser({ ...userData, range: currentUser.range })
-      return { response, isEmailChanged }
-    } catch (err) {
-      return rejectWithValue(err.response?.data?.error || err.message)
-    }
+  async (userData, { getState }) => {
+    const currentUser = getState().auth.user
+    const isEmailChanged = userData.email !== currentUser.email
+    const response = await editUser({ ...userData, range: currentUser.range })
+    return { response, isEmailChanged }
   },
 )
 
-export const logout = createAction('auth/logout', () => {
-  authStore.removeToken()
-  return {}
-})
-
-const initialState = {
-  user: null,
-  error: null,
-  isLoading: true,
-  token: null,
-}
-
 export const authSlice = createSlice({
   name: 'auth',
+  initialState: {
+    user: null,
+    isLoading: true,
+  },
   reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload
+    logout: (state) => {
+      authStore.removeToken()
+      state.user = null
     },
   },
-  initialState,
   extraReducers: {
     [checkAuth.pending]: (state) => {
       state.isLoading = true
     },
     [checkAuth.fulfilled]: (state, action) => {
       state.user = action.payload
-      state.error = null
       state.isLoading = false
     },
     [checkAuth.rejected]: (state, action) => {
-      state.error = action.payload
+      toast.error(
+        `Authentication check failed: ${
+          action.error.message || 'Unknown error'
+        }`,
+      )
       state.isLoading = false
     },
 
@@ -91,16 +94,14 @@ export const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.user = action.payload
-      state.error = null
       state.isLoading = false
     },
     [login.rejected]: (state, action) => {
-      state.error = action.payload
+      toast.error(
+        `Sign in failed: ${action.error.message || 'Unknown error'}`,
+        { autoClose: 5000 },
+      )
       state.isLoading = false
-    },
-
-    [logout]: (state) => {
-      state.user = null
     },
 
     [editProfile.pending]: (state) => {
@@ -109,7 +110,6 @@ export const authSlice = createSlice({
     [editProfile.fulfilled]: (state, action) => {
       const { response, isEmailChanged } = action.payload
       state.user = response
-      state.error = null
       state.isLoading = false
 
       if (isEmailChanged && response.unconfirmed_email) {
@@ -121,11 +121,13 @@ export const authSlice = createSlice({
       }
     },
     [editProfile.rejected]: (state, action) => {
-      state.error = action.payload
+      toast.error(
+        `Profile update failed: ${action.error.message || 'Unknown error'}`,
+      )
       state.isLoading = false
     },
   },
 })
 
-export const { setToken } = authSlice.actions
+export const { logout } = authSlice.actions
 export default authSlice.reducer

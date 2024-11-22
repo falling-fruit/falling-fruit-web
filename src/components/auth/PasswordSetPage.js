@@ -29,7 +29,6 @@ const PasswordSetPage = () => {
 
   useEffect(() => {
     if (!getResetToken()) {
-      // TODO: display this (among other toasts) on login page in permanent red error text rather than toast
       toast.error(t('devise.passwords.no_token'), { autoClose: 5000 })
       history.push('/users/sign_in')
     }
@@ -49,9 +48,10 @@ const PasswordSetPage = () => {
         autoClose: 5000,
       })
       history.push({ pathname: '/users/sign_in', state: { email } })
-    } catch (e) {
-      toast.error(e.response?.data.error)
-      console.error(e.response)
+    } catch (error) {
+      toast.error(
+        `Setting new password failed: ${error.message || 'Unknown error'}`,
+      )
       history.push('/users/sign_in')
     }
   }

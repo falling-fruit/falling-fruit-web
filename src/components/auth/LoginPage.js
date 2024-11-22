@@ -12,7 +12,6 @@ import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import {
   Column,
-  ErrorMessage,
   FormButtonWrapper,
   FormCheckboxWrapper,
   FormInputWrapper,
@@ -20,7 +19,6 @@ import {
 
 const LoginPage = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
-  const error = useSelector((state) => state.auth.error)
   const { state, search } = useLocation()
   const { t } = useTranslation()
   const params = new URLSearchParams(search)
@@ -62,9 +60,6 @@ const LoginPage = () => {
                   label={t('glossary.password')}
                 />
               </FormInputWrapper>
-              {dirty && error && (
-                <ErrorMessage>{error.response.data.error}</ErrorMessage>
-              )}
 
               <FormCheckboxWrapper>
                 <LabeledRow
