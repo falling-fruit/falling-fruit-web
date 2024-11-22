@@ -73,7 +73,7 @@ export const ConnectGeolocation = () => {
         } else if (geolocation.error) {
           dispatch(geolocationError(geolocation.error))
         } else if (!geolocation.latitude || !geolocation.longitude) {
-          dispatch(geolocationError({ message: 'Unknown Error' }))
+          dispatch(geolocationError({ message: 'Unknown error' }))
         } else if (isMapMoving) {
           // Do nothing
         } else {

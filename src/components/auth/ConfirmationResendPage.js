@@ -30,10 +30,10 @@ const ConfirmationResendPage = () => {
         autoClose: 5000,
       })
       history.push('/users/sign_in')
-    } catch (e) {
-      // Should not happen since API silently accepts any email
-      toast.error(e.response?.data.error)
-      console.error(e.response)
+    } catch (error) {
+      toast.error(
+        `Resending confirmation failed: ${error.message || 'Unknown error'}`,
+      )
       recaptchaRef.current.reset()
     }
   }

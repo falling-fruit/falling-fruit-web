@@ -70,7 +70,7 @@ export const geolocationSlice = createSlice({
           // @see src/components/map/ConnectedGeolocation.js
           state.geolocationState = GeolocationState.INITIAL
           toast.error(
-            `Geolocation failed: ${action.payload.message || 'Unknown Error'}`,
+            `Geolocation failed: ${action.payload.message || 'Unknown error'}`,
           )
           break
       }

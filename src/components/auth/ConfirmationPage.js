@@ -21,8 +21,11 @@ const ConfirmationPage = () => {
           const { email } = await confirmUser(token)
           toast.success(t('devise.confirmations.confirmed'))
           history.push({ pathname: '/users/sign_in', state: { email } })
-        } catch (e) {
-          toast.error(e.response?.data.error, { autoClose: 5000 })
+        } catch (error) {
+          toast.error(
+            `Account confirmation failed: ${error.message || 'Unknown error'}`,
+            { autoClose: 5000 },
+          )
           history.push('/users/confirmation/new')
         }
       }

@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import axios from 'axios'
 import { matchPath } from 'react-router'
 
@@ -36,9 +34,11 @@ instance.interceptors.request.use((config) => {
     config.method === 'get' &&
     config.url &&
     matchPath(config.url, { path: anonymousGetUrls })
-  const token = authStore.getToken()
-  if (token && !isAnonymous) {
-    config.headers.Authorization = `Bearer ${token.access_token}`
+
+  const accessToken = authStore.getAccessToken()
+
+  if (accessToken && !isAnonymous) {
+    config.headers.Authorization = `Bearer ${accessToken}`
   }
 
   return config
@@ -54,19 +54,22 @@ instance.interceptors.response.use(
       error.response.data.error === 'Expired access token' &&
       !originalRequest._retry
     ) {
-      const token: any = authStore.getToken()
+      const refreshToken = authStore.getRefreshToken()
 
-      if (token) {
+      if (refreshToken) {
         originalRequest._retry = true
 
-        const newToken = await refreshUserToken(token.refresh_token)
-        authStore.setToken(newToken, token.rememberMe)
+        const newToken = await refreshUserToken(refreshToken)
+        authStore.setToken(newToken)
 
         return instance(originalRequest)
       }
     }
-
-    throw error
+    if (error?.response?.data?.error) {
+      throw { ...error, message: error.response.data.error }
+    } else {
+      throw error
+    }
   },
 )
 
@@ -78,7 +81,10 @@ export const editUser = (
   data: paths['/user']['put']['requestBody']['content']['application/json'],
 ) => instance.put('/user', data)
 
-export const getUser = () => instance.get('/user')
+export const getUser = (accessToken: string) =>
+  instance.get('/user', {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
 
 export const deleteUser = () => instance.delete('/user')
 
@@ -104,7 +110,6 @@ export const getUserToken = (username: string, password: string) => {
 export const refreshUserToken = (refreshToken: string) => {
   const formData = new FormData()
   formData.append('refresh_token', refreshToken)
-
   return instance.post('/user/token/refresh', formData)
 }
 

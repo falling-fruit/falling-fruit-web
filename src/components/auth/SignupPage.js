@@ -46,9 +46,8 @@ const SignupPage = () => {
         },
       )
       history.push('/map')
-    } catch (e) {
-      toast.error(e.response?.data?.error)
-      console.error(e.response)
+    } catch (error) {
+      toast.error(`Sign up failed: ${error.message || 'Unknown error'}`)
       recaptchaRef.current.reset()
     }
   }
