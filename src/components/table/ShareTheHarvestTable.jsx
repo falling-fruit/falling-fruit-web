@@ -77,9 +77,9 @@ const columns = [
   {
     id: 'social',
     name: 'Social',
-    selector: (row) => row.facebook + row.twitter,
-    format: ({ facebook, twitter }) =>
-      FORMATTERS.links({ links: [facebook, twitter].filter(Boolean) }),
+    selector: (row) => row.facebook + row.x,
+    format: ({ facebook, x }) =>
+      FORMATTERS.links({ links: [facebook, x].filter(Boolean) }),
     compact: true,
     width: '80px',
     right: true,

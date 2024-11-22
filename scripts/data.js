@@ -42,7 +42,7 @@ const HARVEST_KEYS = [
   'subname',
   'subname_url',
   'facebook',
-  'twitter',
+  'x',
   'instagram',
 ]
 
