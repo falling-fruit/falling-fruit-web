@@ -5,7 +5,7 @@ import {
   Slack,
 } from '@styled-icons/boxicons-logos'
 
-import { ReactComponent as X } from '../../components/entry/icons/X.svg'
+import { ReactComponent as X } from '../../constants/X.svg'
 
 const SocialButtons = ({ ...props }) => (
   <div {...props}>

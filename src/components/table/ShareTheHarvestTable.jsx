@@ -1,11 +1,14 @@
+import { Facebook, Instagram } from '@styled-icons/boxicons-logos'
 import { Search as SearchIcon } from '@styled-icons/boxicons-regular'
 import React from 'react'
 import styled from 'styled-components/macro'
 
 import harvestData from '../../constants/data/harvest.json'
+import X from '../../constants/X.svg'
+import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
-import { FORMATTERS } from './DataTableProperties'
+import { TablePreviewLink } from './DataTableProperties'
 
 const OrganizationName = styled.span`
   ${({ $isActive }) =>
@@ -43,6 +46,31 @@ const FormattedOrganization = ({
   </OrganizationName>
 )
 
+const FormattedSocials = ({ facebook, instagram, x }) => {
+  if (!facebook && !instagram && !x) {
+    return null
+  }
+  return (
+    <>
+      {facebook && (
+        <TablePreviewLink href={facebook} target="_blank" rel="noreferrer">
+          <Facebook color={theme.text} />
+        </TablePreviewLink>
+      )}
+      {instagram && (
+        <TablePreviewLink href={instagram} target="_blank" rel="noreferrer">
+          <Instagram color={theme.text} />
+        </TablePreviewLink>
+      )}
+      {x && (
+        <TablePreviewLink href={x} target="_blank" rel="noreferrer">
+          <img src={X} alt={`X logo`} />
+        </TablePreviewLink>
+      )}
+    </>
+  )
+}
+
 const columns = [
   {
     id: 'country',
@@ -77,9 +105,8 @@ const columns = [
   {
     id: 'social',
     name: 'Social',
-    selector: (row) => row.facebook + row.twitter,
-    format: ({ facebook, twitter }) =>
-      FORMATTERS.links({ links: [facebook, twitter].filter(Boolean) }),
+    selector: (row) => row.facebook || row.instagram || row.x,
+    format: FormattedSocials,
     compact: true,
     width: '80px',
     right: true,
