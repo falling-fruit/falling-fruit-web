@@ -341,31 +341,37 @@ const SettingsPage = ({ desktop }) => {
             rightIcons={<ChevronRight size="16" />}
             onClick={() => history.push('/about')}
           >
-            <PrimaryText>{t('pages.project')}</PrimaryText>
+            <PrimaryText>
+              {t('layouts.application.menu.the_project')}
+            </PrimaryText>
           </StyledListEntry>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
             onClick={() => history.push('/data')}
           >
-            <PrimaryText>{t('pages.data')}</PrimaryText>
+            <PrimaryText>{t('layouts.application.menu.the_data')}</PrimaryText>
           </StyledListEntry>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
             onClick={() => history.push('/sharing')}
           >
-            <PrimaryText>{t('pages.sharing')}</PrimaryText>
+            <PrimaryText>
+              {t('layouts.application.menu.sharing_the_harvest')}
+            </PrimaryText>
           </StyledListEntry>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
             onClick={() => history.push('/press')}
           >
-            <PrimaryText>{t('pages.press')}</PrimaryText>
+            <PrimaryText>
+              {t('layouts.application.menu.in_the_press')}
+            </PrimaryText>
           </StyledListEntry>
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
             onClick={() => history.push('/changes')}
           >
-            <PrimaryText>{t('pages.activity')}</PrimaryText>
+            <PrimaryText>{t('glossary.activity')}</PrimaryText>
           </StyledListEntry>
         </>
       )}

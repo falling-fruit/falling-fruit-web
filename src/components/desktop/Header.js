@@ -263,16 +263,16 @@ const Header = () => {
             <li>
               <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
                 <NavLink to="/about" activeClassName="active">
-                  {t('pages.project')}
+                  {t('layouts.application.menu.the_project')}
                 </NavLink>
                 <NavLink to="/data" activeClassName="active">
-                  {t('pages.data')}
+                  {t('layouts.application.menu.the_data')}
                 </NavLink>
                 <NavLink to="/sharing" activeClassName="active">
-                  {t('pages.sharing')}
+                  {t('layouts.application.menu.sharing_the_harvest')}
                 </NavLink>
                 <NavLink to="/press" activeClassName="active">
-                  {t('pages.press')}
+                  {t('layouts.application.menu.in_the_press')}
                 </NavLink>
               </StyledDropdown>
             </li>

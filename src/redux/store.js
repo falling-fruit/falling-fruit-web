@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createBrowserHistory } from 'history'
 
+import activityReducer from './activitySlice'
 import authReducer from './authSlice'
 import filterReducer from './filterSlice'
 import geolocationReducer from './geolocationSlice'
@@ -30,6 +31,7 @@ export const store = configureStore({
     place: placeReducer,
     type: typeReducer,
     viewport: viewportReducer,
+    activity: activityReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

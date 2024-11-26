@@ -7,7 +7,7 @@ import { updateLastMapView } from './viewportSlice'
 
 const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
-  async ({ offset, fetchCount = false, extend = false }, { getState }) => {
+  async ({ offset, fetchCount }, { getState }) => {
     const state = getState()
     const { types, muni, invasive } = state.filter
     const { lastMapView } = state.viewport
@@ -18,7 +18,6 @@ const fetchListLocations = createAsyncThunk(
     )
     return {
       offset,
-      extend,
       locations: await getLocations(params),
       ...(fetchCount && (await getLocationsCount(params))),
     }
@@ -28,17 +27,15 @@ const fetchListLocations = createAsyncThunk(
 export const fetchListLocationsStart = () =>
   fetchListLocations({ fetchCount: true, offset: 0 })
 export const fetchListLocationsExtend = (locations) =>
-  fetchListLocations({ offset: locations.length, extend: true })
+  fetchListLocations({ fetchCount: false, offset: locations.length })
 
 export const listSlice = createSlice({
   name: 'list',
   initialState: {
     isLoading: false,
     totalCount: null,
-    offset: 0,
     shouldFetchNewLocations: true,
     locations: [],
-    locationsByIds: [],
     lastMapView: null,
   },
   reducers: {},
@@ -48,15 +45,14 @@ export const listSlice = createSlice({
       state.isLoading = true
     },
     [fetchListLocations.fulfilled]: (state, action) => {
-      const { extend, offset, locations, count } = action.payload
+      const { offset, locations, count } = action.payload
 
-      if (extend) {
+      if (offset > 0) {
         state.locations.push(...locations)
       } else {
         state.locations = locations
       }
 
-      state.offset = offset
       if (count !== undefined) {
         state.totalCount = count
       }

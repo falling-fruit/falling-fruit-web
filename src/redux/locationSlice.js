@@ -8,7 +8,6 @@ import {
   editLocation,
   editReview,
   getLocationById,
-  getLocationsChanges,
 } from '../utils/api'
 import { fetchReviewData } from './reviewSlice'
 
@@ -27,23 +26,6 @@ export const fetchLocationData = createAsyncThunk(
 export const addNewLocation = createAsyncThunk(
   'location/addNewLocation',
   addLocation,
-)
-
-export const fetchLocationChanges = createAsyncThunk(
-  'location/fetchLocationChanges',
-  async ({ limit = 100, offset = 0, userId }, { rejectWithValue }) => {
-    try {
-      const locationChanges = await getLocationsChanges({
-        limit,
-        offset,
-        userId,
-      })
-
-      return locationChanges
-    } catch (error) {
-      return rejectWithValue(error.response?.data || error.message)
-    }
-  },
 )
 
 export const editExistingLocation = createAsyncThunk(
@@ -74,13 +56,11 @@ const locationSlice = createSlice({
     reviews: [],
     position: null, // {lat: number, lng: number}
     locationId: null,
-    locationChanges: [],
     isBeingEdited: false,
     fromSettings: false,
     form: null,
     tooltipOpen: false,
     streetViewOpen: false,
-    error: null,
     lightbox: {
       isOpen: false,
       reviewIndex: null,
@@ -240,19 +220,6 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
       toast.success('Location edited successfully!')
-    },
-    [fetchLocationChanges.pending]: (state) => {
-      state.isLoading = true
-      state.error = null
-    },
-    [fetchLocationChanges.fulfilled]: (state, action) => {
-      state.isLoading = false
-      state.locationChanges = action.payload
-    },
-    [fetchLocationChanges.rejected]: (state, action) => {
-      state.isLoading = false
-      state.error = action.payload || 'Failed to fetch location changes'
-      toast.error(`Error fetching location changes: ${action.error.message}`)
     },
     [editExistingLocation.rejected]: (state, action) => {
       state.isLoading = false
