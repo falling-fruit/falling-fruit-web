@@ -18,6 +18,7 @@
   "imported_from": "Imported from {{name}}",
   "edited_on": "Edited on {{date}}",
   "glossary": {
+    "activity": "Activity",
     "about": "About",
     "list": "List",
     "tree_inventory": "Tree inventory",

@@ -16,7 +16,6 @@ const fetchListLocations = createAsyncThunk(
       { types, muni, invasive, bounds, zoom, center },
       { limit: 100, offset, photo: true },
     )
-
     return {
       offset,
       extend,
@@ -39,6 +38,7 @@ export const listSlice = createSlice({
     offset: 0,
     shouldFetchNewLocations: true,
     locations: [],
+    locationsByIds: [],
     lastMapView: null,
   },
   reducers: {},
