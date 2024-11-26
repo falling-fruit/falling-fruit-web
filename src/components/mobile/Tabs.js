@@ -8,6 +8,7 @@ import { matchPath, useLocation } from 'react-router-dom'
 import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import aboutRoutes from '../about/aboutRoutes'
+import activityRoutes from '../activity/activityRoutes'
 import { authPages } from '../auth/authRoutes'
 import { Tab } from '../ui/PageTabs'
 
@@ -28,6 +29,7 @@ const Tabs = () => {
       paths: [
         '/settings',
         ...aboutRoutes.map((route) => route.props.path).flat(),
+        ...activityRoutes.map((route) => route.props.path).flat(),
       ],
       icon: <Cog />,
       label: t('settings'),

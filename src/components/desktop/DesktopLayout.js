@@ -50,12 +50,12 @@ const DesktopLayout = () => (
   // a non-numerical maxSize like "21.5vw"
   <DesktopContainer>
     <Header />
+    {connectRoutes}
     <Switch>
       {aboutRoutes}
       {activityRoutes}
       {authRoutes}
       <Route>
-        {connectRoutes}
         <WindowSize>
           {({ width: vw }) => (
             <StyledSplit

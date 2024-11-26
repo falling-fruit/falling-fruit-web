@@ -51,6 +51,7 @@ const SidePane = () => {
     isBeingEdited: isEditingLocation,
     fromSettings,
   } = useSelector((state) => state.location)
+  const { anchorElementId } = useSelector((state) => state.activity)
 
   const goToMap = (event) => {
     event.stopPropagation()
@@ -145,7 +146,13 @@ const SidePane = () => {
                   <>
                     <StyledNavBack>
                       <BackButton
-                        onClick={fromSettings ? goToSettings : goToMap}
+                        onClick={
+                          fromSettings
+                            ? goToSettings
+                            : anchorElementId
+                              ? () => history.push('/changes')
+                              : goToMap
+                        }
                       >
                         <ArrowBack />
                         {t('back')}

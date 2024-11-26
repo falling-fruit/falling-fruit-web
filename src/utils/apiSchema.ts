@@ -238,13 +238,20 @@ export interface paths {
     get: {
       parameters: {
         query: {
-          /** Максимальное количество изменений */
-          limit?: number;
-          /** Смещение для пагинации */
-          offset?: number;
-          /** ID пользователя для фильтрации изменений */
+          /**
+           * Earliest UTC datetime of change (inclusive).
+           * @example 2024-11-09T00:00:00Z
+           */
+          earliest?: string;
+          /**
+           * Latest UTC datetime of change (exclusive).
+           */
+          latest?: string;
+          /** @description User ID of changes to return. */
           user_id?: number;
-          /** Фильтрация изменений в пределах зоны поиска */
+          /**
+           * Whether to filter changes within the foraging range of the user with `user_id`, rather than by the user.
+           */
           range?: boolean;
         };
       };
@@ -771,6 +778,10 @@ export interface components {
       description: string;
       /** Location ID */
       location_id: number;
+      /** Latitude */
+      lat: number;
+      /**Longitude*/
+      lng: number;
       /** Array of type IDs */
       type_ids: number[];
       /** Review ID */

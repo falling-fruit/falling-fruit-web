@@ -1,6 +1,7 @@
 import { ArrowBack, Calendar, User } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -25,6 +26,7 @@ const UserProfile = () => {
   const { t, i18n } = useTranslation()
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const { anchorElementId } = useSelector((state) => state.activity)
 
   useEffect(() => {
     async function fetchUserData() {
@@ -52,7 +54,7 @@ const UserProfile = () => {
           <BackButton
             onClick={(event) => {
               event.stopPropagation()
-              history.goBack()
+              anchorElementId ? history.push('/changes') : history.goBack()
             }}
           >
             <ArrowBack />

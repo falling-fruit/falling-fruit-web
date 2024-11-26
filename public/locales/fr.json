@@ -37,7 +37,8 @@
     "send": "Envoyer",
     "save_changes": "Enregistrer vos modifications",
     "edit": "Modifier",
-    "donate": "Contribuer"
+    "donate": "Contribuer",
+    "activity": "Activité"
   },
   "side_menu": {
     "regional": "Régional",
@@ -50,10 +51,6 @@
     "add_location": "Ajouter un site"
   },
   "pages": {
-    "project": "Le projet",
-    "data": "Les données",
-    "sharing": "Partager la récolte",
-    "press": "Dans la presse",
     "about": {
       "ff_disclaimer_html": "Falling Fruit n'est pas lié à Fallen Fruit. Fallen Fruit peut être consulté à <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
       "give_us_money": "Nous sommes un organisme caritatif à but non lucratif 501(c)(3) basé à Boulder (Colorado, États-Unis). Les dons réalisés depuis les États-Unis sont donc déductibles des impôts.",
@@ -129,6 +126,16 @@
       "send_instructions": "Vous allez recevoir un email dans quelques instants avec les instructions pour réinitialiser votre mot de passe.",
       "no_token": "Vous ne pouvez pas accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si vous venez en effet d’un tel email, assurez-vous d’utiliser l’URL complète.",
       "updated_not_active": "Votre mot de passe a été changé avec succès."
+    }
+  },
+  "layouts": {
+    "application": {
+      "menu": {
+        "the_project": "Le projet",
+        "the_data": "Les données",
+        "sharing_the_harvest": "Partager la récolte",
+        "in_the_press": "Dans la presse"
+      }
     }
   }
 }

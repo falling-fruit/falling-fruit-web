@@ -98,7 +98,7 @@ const connectRoutes = [
    * - on mobile, center and zoom on edited location
    * - on mobile, keep track of whether we arrived via list-locations URL
    * - on mobile, disable default overscroll (e.g. a refresh on scroll down in Chrome)
-   * - on desktop, reset the isFromSettings flag when leaving location
+   * - on desktop, reset the fromSettings flag when leaving location
    */
   <Route
     key="connect-location"
@@ -144,7 +144,7 @@ const connectRoutes = [
    */
   <Route
     key="connect-types"
-    path={['/map', '/list', '/locations', '/reviews', '/settings']}
+    path={['/map', '/list', '/locations', '/reviews', '/settings', '/changes']}
   >
     <ConnectTypes />
   </Route>,
