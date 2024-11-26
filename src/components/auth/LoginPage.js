@@ -1,7 +1,11 @@
+import 'react-toastify/dist/ReactToastify.css'
+
 import { Form, Formik } from 'formik'
+import { useEffect} from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
@@ -12,7 +16,6 @@ import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import {
   Column,
-  ErrorMessage,
   FormButtonWrapper,
   FormCheckboxWrapper,
   FormInputWrapper,
@@ -25,8 +28,20 @@ const LoginPage = () => {
   const { t } = useTranslation()
   const params = new URLSearchParams(search)
   const fromPage = params.get('fromPage')
+  
+
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (error) {
+      // Show error toast only if there is an error
+      toast.error(error.response?.data?.error || t('users.login_error'), {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 5000,
+      })
+    }
+  }, [error, t])
 
   if (!isLoading && user) {
     return <Redirect to={fromPage || pathWithCurrentView('/map')} />
@@ -62,9 +77,7 @@ const LoginPage = () => {
                   label={t('glossary.password')}
                 />
               </FormInputWrapper>
-              {dirty && error && (
-                <ErrorMessage>{error.response.data.error}</ErrorMessage>
-              )}
+
 
               <FormCheckboxWrapper>
                 <LabeledRow
