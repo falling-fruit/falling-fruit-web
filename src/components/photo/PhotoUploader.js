@@ -7,8 +7,7 @@ import { addPhoto } from '../../utils/api'
 import { PhotoOrganizer } from './PhotoOrganizer'
 
 const ScrollAnchor = styled.div`
-  height: 100px;
-  margin-top: -100px;
+  height: 0px;
   pointer-events: none;
 `
 
