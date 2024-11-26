@@ -234,6 +234,30 @@ export interface paths {
       };
     };
   };
+  "/locations/changes": {
+    get: {
+      parameters: {
+        query: {
+          /** Максимальное количество изменений */
+          limit?: number;
+          /** Смещение для пагинации */
+          offset?: number;
+          /** ID пользователя для фильтрации изменений */
+          user_id?: number;
+          /** Фильтрация изменений в пределах зоны поиска */
+          range?: boolean;
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["LocationChange"][];
+          };
+        };
+      };
+    };
+  };
   "/photos": {
     post: {
       responses: {
@@ -740,6 +764,28 @@ export interface components {
         /** Location reviews. */
         reviews?: components["schemas"]["Review"][];
       };
+    LocationChange: {
+      /** Time of the change creation */
+      created_at: string;
+      /** Description of the change (e.g., added, updated, deleted) */
+      description: string;
+      /** Location ID */
+      location_id: number;
+      /** Array of type IDs */
+      type_ids: number[];
+      /** Review ID */
+      review_id: number;
+      /** User ID */
+      user_id: number;
+      /** Author's name */
+      author: string;
+      /** City */
+      city: string;
+      /** State */
+      state: string;
+      /** Country */
+      country: string;
+    };
     BaseReview: {
       /** Comment. */
       comment?: string | null;

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
 import aboutRoutes from '../about/aboutRoutes'
+import activityRoutes from '../activity/activityRoutes'
 import AccountPage from '../auth/AccountPage'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
@@ -87,6 +88,7 @@ const MobileLayout = () => {
       {connectRoutes}
       <TabPanels style={{ paddingBottom: '50px' }}>
         <Switch>
+          {activityRoutes}
           {aboutRoutes}
           {authRoutes}
           <Route path="/reviews/:reviewId/edit">

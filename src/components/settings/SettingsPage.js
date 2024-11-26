@@ -361,6 +361,12 @@ const SettingsPage = ({ desktop }) => {
           >
             <PrimaryText>{t('pages.press')}</PrimaryText>
           </StyledListEntry>
+          <StyledListEntry
+            rightIcons={<ChevronRight size="16" />}
+            onClick={() => history.push('/changes')}
+          >
+            <PrimaryText>{t('pages.activity')}</PrimaryText>
+          </StyledListEntry>
         </>
       )}
     </Page>
