@@ -112,7 +112,6 @@ export const ConnectGeolocation = () => {
       case GeolocationState.INITIAL:
       case GeolocationState.DENIED:
         // Should not happen
-        // @see
         break
 
       default:

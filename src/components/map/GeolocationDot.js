@@ -14,7 +14,7 @@ const Heading = styled.div`
   top: 0;
   left: -35px;
   transform-origin: top center;
-  transform: rotate(${({ heading }) => heading}deg);
+  transform: rotate(${({ heading }) => -heading}deg);
 
   height: 55px;
   width: 70px;
