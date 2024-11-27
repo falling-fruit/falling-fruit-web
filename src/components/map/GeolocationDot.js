@@ -128,7 +128,9 @@ const GeolocationDot = () => {
       isClickable={geolocationState === GeolocationState.DOT_ON}
     >
       <Pin />
-      {geolocation?.heading && <Heading heading={geolocation.heading} />}
+      {geolocation?.heading !== null && (
+        <Heading heading={geolocation.heading} />
+      )}
     </GeolocationWrapper>
   )
 }
