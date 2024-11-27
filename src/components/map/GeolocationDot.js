@@ -11,17 +11,17 @@ import {
 
 const Heading = styled.div`
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: -35px;
-  transform-origin: top center;
-  transform: rotate(${({ heading }) => -heading}deg);
+  transform-origin: bottom center;
+  transform: rotate(${({ heading }) => heading}deg);
 
   height: 55px;
   width: 70px;
-  clip-path: polygon(35% 0%, 65% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(35% 100%, 65% 100%, 100% 0%, 0% 0%);
   // Fix gradient in Safari: https://css-tricks.com/thing-know-gradients-transparent-black/
   background: linear-gradient(
-    to bottom,
+    to top,
     ${({ theme }) => theme.orange},
     ${({ theme }) => rgba(theme.orange, 0)}
   );
