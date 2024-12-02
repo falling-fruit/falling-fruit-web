@@ -103,6 +103,21 @@ EntryButton.defaultProps = {
   size: 48,
 }
 
+const TextContent = styled.article`
+  padding: 20px 23px;
+
+  h2 {
+    margin-top: 0;
+    font-size: 1rem;
+  }
+
+  box-sizing: border-box;
+
+  ul {
+    margin: 0 0 12px 0;
+  }
+`
+
 const EntryMobile = () => {
   const dispatch = useDispatch()
   const history = useAppHistory()
@@ -185,15 +200,19 @@ const EntryMobile = () => {
               <Tab>Reviews ({reviews.length})</Tab>
             </TabList>
           )}
-          <TabPanels>
+          <TabPanels style={{ background: 'white' }}>
             <TabPanel>
-              <EntryOverview />
+              <TextContent>
+                <EntryOverview />
+              </TextContent>
               <DummyElementFixingScrollbarInsideTabPanel
                 height={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
               />
             </TabPanel>
             <TabPanel>
-              <EntryReviews />
+              <TextContent>
+                <EntryReviews />
+              </TextContent>
               <DummyElementFixingScrollbarInsideTabPanel
                 height={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
               />
