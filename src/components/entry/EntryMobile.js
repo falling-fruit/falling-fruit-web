@@ -71,7 +71,45 @@ const DummyElementFixingScrollbarInsideTabPanel = styled.div`
   height: ${(props) => props.height}px;
 `
 
-const Buttons = styled.div`
+const TopRibbonButtons = ({ hasImages, drawerDisabled, onBackButtonClick }) => {
+  const history = useAppHistory()
+  const dispatch = useDispatch()
+  const { locationId } = useSelector((state) => state.location)
+
+  return (
+    <StyledButtons whiteBackground={!hasImages}>
+      <EntryButton
+        onClick={
+          drawerDisabled ? () => history.push('/list') : onBackButtonClick
+        }
+        icon={<ArrowBackIcon />}
+        label="back-button"
+      />
+      <div>
+        {drawerDisabled && (
+          <EntryButton
+            onClick={(event) => {
+              event.stopPropagation()
+              dispatch(reenableAndPartiallyClosePaneDrawer())
+            }}
+            icon={<MapIcon />}
+            label="map-button"
+          />
+        )}
+        <EntryButton
+          onClick={(event) => {
+            event.stopPropagation()
+            history.push(`/locations/${locationId}/edit/details`)
+          }}
+          icon={<PencilIcon />}
+          label="edit-button"
+        />
+      </div>
+    </StyledButtons>
+  )
+}
+
+const StyledButtons = styled.div`
   position: absolute;
   left: 0;
   right: 0;
@@ -127,7 +165,6 @@ const EntryMobile = () => {
   const dispatch = useDispatch()
   const history = useAppHistory()
   const {
-    locationId,
     reviews,
     isLoading,
     pane: { drawerFullyOpen, tabIndex, drawerDisabled },
@@ -226,35 +263,11 @@ const EntryMobile = () => {
         </EntryTabs>
       </DraggablePane>
       {(drawerFullyOpen || drawerDisabled) && (
-        <Buttons whiteBackground={!hasImages}>
-          <EntryButton
-            onClick={
-              drawerDisabled ? () => history.push('/list') : onBackButtonClick
-            }
-            icon={<ArrowBackIcon />}
-            label="back-button"
-          />
-          <div>
-            {drawerDisabled && (
-              <EntryButton
-                onClick={(event) => {
-                  event.stopPropagation()
-                  dispatch(reenableAndPartiallyClosePaneDrawer())
-                }}
-                icon={<MapIcon />}
-                label="map-button"
-              />
-            )}
-            <EntryButton
-              onClick={(event) => {
-                event.stopPropagation()
-                history.push(`/locations/${locationId}/edit/details`)
-              }}
-              icon={<PencilIcon />}
-              label="edit-button"
-            />
-          </div>
-        </Buttons>
+        <TopRibbonButtons
+          hasImages={hasImages}
+          drawerDisabled={drawerDisabled}
+          onBackButtonClick={onBackButtonClick}
+        />
       )}
     </>
   )
