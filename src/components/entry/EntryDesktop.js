@@ -8,12 +8,9 @@ import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 import Lightbox from './Lightbox'
 
-export const TextContent = styled.article`
-  padding: 20px 23px;
+const TextContent = styled.article`
+  padding: 12px;
 
-  @media ${({ theme }) => theme.device.desktop} {
-    padding: 12px;
-  }
   h2 {
     margin-top: 0;
     font-size: 1rem;
@@ -41,8 +38,12 @@ const EntryDesktop = () => {
     <div>
       <Lightbox />
       <Carousel />
-      <EntryOverview />
-      <EntryReviews />
+      <TextContent>
+        <EntryOverview />
+      </TextContent>
+      <TextContent>
+        <EntryReviews />
+      </TextContent>
       {isLoading && <LoadingOverlay />}
     </div>
   )

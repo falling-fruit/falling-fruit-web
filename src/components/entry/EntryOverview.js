@@ -20,7 +20,6 @@ import { ReportModal } from '../form/ReportModal'
 import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
-import { TextContent } from './EntryDesktop'
 import EntryTags from './EntryTags'
 import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
@@ -125,111 +124,102 @@ const EntryOverview = () => {
             onDismiss={() => setIsReportModalOpen(false)}
           />
         )}
-        <TextContent>
-          <TypesHeader types={types} />
-          <EntryTags locationData={locationData} />
-          <Description>
-            <p>{locationData.description}</p>
+        <TypesHeader types={types} />
+        <EntryTags locationData={locationData} />
+        <Description>
+          <p>{locationData.description}</p>
 
-            <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
-              <Map color={theme.secondaryText} size={20} />
-              <p>
-                {locationData.address ??
-                  `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(
-                    6,
-                  )}`}
-              </p>
+          <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
+            <Map color={theme.secondaryText} size={20} />
+            <p>
+              {locationData.address ??
+                `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(
+                  6,
+                )}`}
+            </p>
+          </IconBesideText>
+          {streetViewOpen ? (
+            <IconBesideText bold onClick={closeStreetView}>
+              <Map size={20} />
+              <p>Google Maps</p>
             </IconBesideText>
-            {streetViewOpen ? (
-              <IconBesideText bold onClick={closeStreetView}>
-                <Map size={20} />
-                <p>Google Maps</p>
-              </IconBesideText>
-            ) : (
-              <DisabledIconBesideText
-                bold
-                onClick={
-                  locationsWithoutPanorama[locationData.id]
-                    ? undefined
-                    : openStreetView
-                }
-                disabled={locationsWithoutPanorama[locationData.id]}
-              >
-                <StreetView size={20} />
-                <p>Google Street View</p>
-              </DisabledIconBesideText>
-            )}
-            {hasSeasonality(locationData) && (
-              <IconBesideText>
-                <Calendar color={theme.secondaryText} size={20} />
-                <p>
-                  {formatSeasonality(
-                    locationData.season_start,
-                    locationData.season_stop,
-                    locationData.no_season,
-                  )}
-                </p>
-              </IconBesideText>
-            )}
-            {(locationData.import_id || locationData.author) && (
-              <IconBesideText>
-                {locationData.import_id ? (
-                  <Data size={20} />
-                ) : (
-                  <User size={20} />
-                )}
-                <p>
-                  {locationData.author && locationData.import_id ? (
-                    t('imported_from', { name: locationData.author })
-                  ) : (
-                    <>
-                      {t('added_by', { name: '' })}{' '}
-                      {locationData.user_id ? (
-                        <Link to={`/users/${locationData.user_id}`}>
-                          {locationData.author}
-                        </Link>
-                      ) : (
-                        locationData.author
-                      )}
-                    </>
-                  )}
-                  {locationData.import_id && (
-                    <>
-                      {locationData.author && ' ('}
-                      <Link to={`/imports/${locationData.import_id}`}>
-                        #{locationData.import_id}
-                      </Link>
-                      {locationData.author && ')'}
-                    </>
-                  )}
-                </p>
-              </IconBesideText>
-            )}
+          ) : (
+            <DisabledIconBesideText
+              bold
+              onClick={
+                locationsWithoutPanorama[locationData.id]
+                  ? undefined
+                  : openStreetView
+              }
+              disabled={locationsWithoutPanorama[locationData.id]}
+            >
+              <StreetView size={20} />
+              <p>Google Street View</p>
+            </DisabledIconBesideText>
+          )}
+          {hasSeasonality(locationData) && (
             <IconBesideText>
-              <EditAlt size={20} />
+              <Calendar color={theme.secondaryText} size={20} />
               <p>
-                <time dateTime={locationData.updated_at}>
-                  {t('edited_on', {
-                    date: formatISOString(
-                      locationData.updated_at,
-                      i18n.language,
-                    ),
-                  })}
-                </time>
+                {formatSeasonality(
+                  locationData.season_start,
+                  locationData.season_stop,
+                  locationData.no_season,
+                )}
               </p>
             </IconBesideText>
-            <div>
-              <ReviewButton />
-              <Button
-                leftIcon={<Flag />}
-                secondary
-                onClick={() => setIsReportModalOpen(true)}
-              >
-                Report
-              </Button>
-            </div>
-          </Description>
-        </TextContent>
+          )}
+          {(locationData.import_id || locationData.author) && (
+            <IconBesideText>
+              {locationData.import_id ? <Data size={20} /> : <User size={20} />}
+              <p>
+                {locationData.author && locationData.import_id ? (
+                  t('imported_from', { name: locationData.author })
+                ) : (
+                  <>
+                    {t('added_by', { name: '' })}{' '}
+                    {locationData.user_id ? (
+                      <Link to={`/users/${locationData.user_id}`}>
+                        {locationData.author}
+                      </Link>
+                    ) : (
+                      locationData.author
+                    )}
+                  </>
+                )}
+                {locationData.import_id && (
+                  <>
+                    {locationData.author && ' ('}
+                    <Link to={`/imports/${locationData.import_id}`}>
+                      #{locationData.import_id}
+                    </Link>
+                    {locationData.author && ')'}
+                  </>
+                )}
+              </p>
+            </IconBesideText>
+          )}
+          <IconBesideText>
+            <EditAlt size={20} />
+            <p>
+              <time dateTime={locationData.updated_at}>
+                {t('edited_on', {
+                  date: formatISOString(locationData.updated_at, i18n.language),
+                })}
+              </time>
+            </p>
+          </IconBesideText>
+          <div>
+            <ReviewButton />
+            <Button
+              leftIcon={<Flag />}
+              secondary
+              onClick={() => setIsReportModalOpen(true)}
+            >
+              Report
+            </Button>
+          </div>
+        </Description>
       </>
     </div>
   )

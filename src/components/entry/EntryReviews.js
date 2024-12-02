@@ -4,7 +4,6 @@ import { openLightbox } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReviewForm } from '../form/ReviewForm'
-import { TextContent } from './EntryDesktop'
 import Review from './Review'
 import { ReviewButton } from './ReviewButton'
 import ReviewSummary from './ReviewSummary'
@@ -22,7 +21,7 @@ const EntryReviews = () => {
     dispatch(openLightbox({ reviewIndex, photoIndex }))
   }
   return (
-    <TextContent>
+    <>
       <ReviewSummary reviews={reviews} />
       {!isDesktop && <ReviewButton />}
       <h3>Reviews</h3>
@@ -53,7 +52,7 @@ const EntryReviews = () => {
         }
       })}
       {isDesktop && <ReviewForm />}
-    </TextContent>
+    </>
   )
 }
 
