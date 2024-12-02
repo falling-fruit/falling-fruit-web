@@ -26,7 +26,7 @@ export const TextContent = styled.article`
   }
 `
 
-const Entry = () => {
+const EntryDesktop = () => {
   const {
     location: locationData,
     reviews,
@@ -48,4 +48,4 @@ const Entry = () => {
   )
 }
 
-export default Entry
+export default EntryDesktop
