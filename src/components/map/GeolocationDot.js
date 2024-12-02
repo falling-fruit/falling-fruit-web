@@ -111,7 +111,7 @@ const GeolocationDot = () => {
   const dispatch = useDispatch()
 
   const handleClick = () => {
-    if (geolocationState === GeolocationState.DOT_ON) {
+    if (geolocation && geolocationState === GeolocationState.DOT_ON) {
       dispatch(geolocationCentering(geolocation))
       googleMap.panTo({ lat: geolocation.latitude, lng: geolocation.longitude })
       if (googleMap.getZoom() < MIN_GEOLOCATION_ZOOM) {
@@ -128,7 +128,7 @@ const GeolocationDot = () => {
       isClickable={geolocationState === GeolocationState.DOT_ON}
     >
       <Pin />
-      {geolocation?.heading !== null && (
+      {geolocation && geolocation.heading !== null && (
         <Heading heading={geolocation.heading} />
       )}
     </GeolocationWrapper>
