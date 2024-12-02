@@ -6,7 +6,6 @@ import {
   geolocationCentering,
   geolocationError,
   geolocationFollowing,
-  geolocationLoading,
   GeolocationState,
   geolocationTracking,
 } from '../../redux/geolocationSlice'
@@ -59,62 +58,45 @@ export const ConnectGeolocation = () => {
   })
 
   useEffect(() => {
-    switch (geolocationState) {
-      case GeolocationState.REQUESTED:
-        dispatch(geolocationLoading())
-        break
+    if (geolocation.loading) {
+      // Still loading, do nothing
+    } else if (geolocation.error) {
+      dispatch(geolocationError(geolocation.error))
+    } else if (!geolocation.latitude || !geolocation.longitude) {
+      dispatch(geolocationError({ message: 'Unknown error' }))
+    } else if (isMapMoving) {
+      // Do nothing
+    } else {
+      const newPosition = new maps.LatLng(
+        geolocation.latitude,
+        geolocation.longitude,
+      )
+      const currentCenter = googleMap.getCenter()
+      const distanceFromCenter = distanceInMeters(
+        currentCenter.lat(),
+        currentCenter.lng(),
+        geolocation.latitude,
+        geolocation.longitude,
+      )
 
-      case GeolocationState.LOADING:
-      case GeolocationState.CENTERING:
-      case GeolocationState.TRACKING:
-      case GeolocationState.DOT_ON:
-        if (geolocation.loading) {
-          // Still loading, do nothing
-        } else if (geolocation.error) {
-          dispatch(geolocationError(geolocation.error))
-        } else if (!geolocation.latitude || !geolocation.longitude) {
-          dispatch(geolocationError({ message: 'Unknown error' }))
-        } else if (isMapMoving) {
-          // Do nothing
-        } else {
-          const newPosition = new maps.LatLng(
-            geolocation.latitude,
-            geolocation.longitude,
-          )
-          const currentCenter = googleMap.getCenter()
-          const distanceFromCenter = distanceInMeters(
-            currentCenter.lat(),
-            currentCenter.lng(),
-            geolocation.latitude,
-            geolocation.longitude,
-          )
-
-          if (
-            geolocationState === GeolocationState.LOADING &&
-            distanceFromCenter > 1
-          ) {
-            dispatch(geolocationCentering(geolocation))
-            googleMap.setZoom(Math.max(googleMap.getZoom(), MIN_TRACKING_ZOOM))
-            googleMap.panTo(newPosition)
-          } else if (
-            geolocationState === GeolocationState.TRACKING &&
-            distanceFromCenter > 1
-          ) {
-            dispatch(geolocationCentering(geolocation))
-            googleMap.panTo(newPosition)
-          } else if (geolocationState === GeolocationState.DOT_ON) {
-            dispatch(geolocationFollowing(geolocation))
-          } else {
-            dispatch(geolocationTracking(geolocation))
-          }
-        }
-        break
-      case GeolocationState.INITIAL:
-      case GeolocationState.DENIED:
-        // Should not happen
-        break
-
-      default:
+      if (
+        geolocationState === GeolocationState.LOADING &&
+        distanceFromCenter > 1
+      ) {
+        dispatch(geolocationCentering(geolocation))
+        googleMap.setZoom(Math.max(googleMap.getZoom(), MIN_TRACKING_ZOOM))
+        googleMap.panTo(newPosition)
+      } else if (
+        geolocationState === GeolocationState.TRACKING &&
+        distanceFromCenter > 1
+      ) {
+        dispatch(geolocationCentering(geolocation))
+        googleMap.panTo(newPosition)
+      } else if (geolocationState === GeolocationState.DOT_ON) {
+        dispatch(geolocationFollowing(geolocation))
+      } else {
+        dispatch(geolocationTracking(geolocation))
+      }
     }
   }, [geolocation.loading, Math.round(geolocation.timestamp / 5000), dispatch]) //eslint-disable-line
 
