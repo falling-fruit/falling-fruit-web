@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
-import Entry from '../entry/Entry'
+import EntryDesktop from '../entry/EntryDesktop'
 import { EditLocationForm } from '../form/EditLocation'
 import { EditReviewForm } from '../form/EditReview'
 import { LocationForm } from '../form/LocationForm'
@@ -168,7 +168,7 @@ const SidePane = () => {
                         {t('glossary.edit')}
                       </BackButton>
                     </StyledNavBack>
-                    <Entry />
+                    <EntryDesktop />
                   </>
                 )
               }
