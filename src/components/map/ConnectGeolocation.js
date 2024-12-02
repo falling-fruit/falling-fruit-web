@@ -20,7 +20,7 @@ const MIN_TRACKING_ZOOM = 16
 
 export const ConnectGeolocation = () => {
   const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
-  const maps = getGoogleMaps()
+  const maps = getGoogleMaps ? getGoogleMaps() : null
   const dispatch = useDispatch()
   const [isMapMoving, setIsMapMoving] = useState(false)
 
