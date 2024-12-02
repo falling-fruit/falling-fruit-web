@@ -40,8 +40,7 @@ const Carousel = styled(ResponsiveCarousel)`
   }
   @media ${({ theme }) => theme.device.mobile} {
     ${({ isFullScreen }) =>
-      !isFullScreen &&
-      `border-radius: 0.375em 0.375em 0 0; pointer-events: none;`}
+      !isFullScreen && `border-radius: 0 0; pointer-events: none;`}
   }
 `
 
