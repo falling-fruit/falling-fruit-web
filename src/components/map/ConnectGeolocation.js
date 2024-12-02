@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGeolocation } from 'react-use'
 
 import {
   geolocationCentering,
@@ -16,6 +15,72 @@ export const isGeolocationOpen = (geolocationState) =>
   geolocationState !== GeolocationState.DENIED
 
 const MIN_TRACKING_ZOOM = 16
+
+const useGeolocation = () => {
+  const [state, setState] = useState({
+    loading: true,
+    heading: null,
+    latitude: null,
+    longitude: null,
+    error: null,
+  })
+
+  const watchId = useRef(null)
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setState((s) => ({
+        ...s,
+        loading: false,
+        error: {
+          code: 0,
+          message: 'Geolocation not supported',
+        },
+      }))
+      return
+    }
+
+    const onSuccess = (position) => {
+      const { heading, latitude, longitude } = position.coords
+
+      setState({
+        loading: false,
+        heading,
+        latitude,
+        longitude,
+        error: null,
+      })
+    }
+
+    const onError = (error) => {
+      setState((s) => ({
+        ...s,
+        loading: false,
+        error,
+      }))
+    }
+
+    const options = {
+      enableHighAccuracy: true,
+      maximumAge: 5000,
+      timeout: 60000,
+    }
+
+    watchId.current = navigator.geolocation.watchPosition(
+      onSuccess,
+      onError,
+      options,
+    )
+
+    return () => {
+      if (watchId.current) {
+        navigator.geolocation.clearWatch(watchId.current)
+      }
+    }
+  }, [])
+
+  return state
+}
 
 export const ConnectGeolocation = () => {
   const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
@@ -51,11 +116,7 @@ export const ConnectGeolocation = () => {
     (state) => state.geolocation.geolocationState,
   )
 
-  const geolocation = useGeolocation({
-    enableHighAccuracy: true,
-    maximumAge: 5000,
-    timeout: 60000,
-  })
+  const geolocation = useGeolocation()
 
   useEffect(() => {
     if (geolocation.loading) {
