@@ -5,8 +5,7 @@ import {
   StreetView,
   User,
 } from '@styled-icons/boxicons-regular'
-import { Flag, Map } from '@styled-icons/boxicons-solid'
-import { useState } from 'react'
+import { Map } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -16,11 +15,10 @@ import styled from 'styled-components/macro'
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import { partiallyClosePaneDrawer } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { ReportModal } from '../form/ReportModal'
-import Button from '../ui/Button'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import EntryTags from './EntryTags'
+import { ReportButton } from './ReportButton'
 import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
 import TypesHeader from './TypesHeader'
@@ -68,7 +66,6 @@ const DisabledIconBesideText = styled(IconBesideText)`
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const { googleMap } = useSelector((state) => state.map)
   const {
     streetViewOpen,
@@ -114,16 +111,6 @@ const EntryOverview = () => {
   return (
     <div>
       <>
-        {isReportModalOpen && (
-          <ReportModal
-            locationId={locationData.id}
-            name={locationData.type_ids
-              .map((id) => typesAccess?.getType(id)?.commonName)
-              .filter(Boolean)
-              .join(', ')}
-            onDismiss={() => setIsReportModalOpen(false)}
-          />
-        )}
         <TypesHeader types={types} />
         <EntryTags locationData={locationData} />
         <Description>
@@ -211,13 +198,7 @@ const EntryOverview = () => {
           </IconBesideText>
           <div>
             <ReviewButton />
-            <Button
-              leftIcon={<Flag />}
-              secondary
-              onClick={() => setIsReportModalOpen(true)}
-            >
-              Report
-            </Button>
+            <ReportButton />
           </div>
         </Description>
       </>
