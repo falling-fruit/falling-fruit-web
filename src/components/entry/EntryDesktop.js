@@ -11,11 +11,6 @@ import LightboxDesktop from './LightboxDesktop'
 const TextContent = styled.article`
   padding: 12px;
 
-  h2 {
-    margin-top: 0;
-    font-size: 1rem;
-  }
-
   box-sizing: border-box;
 
   ul {
