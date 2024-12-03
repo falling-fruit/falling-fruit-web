@@ -144,11 +144,6 @@ EntryButton.defaultProps = {
 const TextContent = styled.article`
   padding: 20px 23px;
 
-  h2 {
-    margin-top: 0;
-    font-size: 1rem;
-  }
-
   box-sizing: border-box;
 
   ul {

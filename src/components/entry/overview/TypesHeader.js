@@ -6,13 +6,40 @@ import {
   TypesAccordionItem,
   TypesAccordionPanel,
 } from '../../ui/TypesAccordion'
-import TypeTitle from '../../ui/TypeTitle'
 import EatTheWeedsLogo from './icons/EatTheWeeds.png'
 import ForagingTexasLogo from './icons/ForagingTexas.png'
 import FruitipediaLogo from './icons/Fruitipedia.png'
 import UrbanMushroomsLogo from './icons/UrbanMushrooms.png'
 import USDALogo from './icons/USDA.svg'
 import WikipediaLogo from './icons/Wikipedia.svg'
+
+const StyledTypeTitle = styled.div`
+  font-family: ${({ theme }) => theme.fonts};
+`
+
+const CommonName = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.headerText};
+  margin-top: 0px;
+  margin-bottom: 0px;
+`
+
+const ScientificName = styled.div`
+  font-size: ${(props) => (props.standalone ? '1.125rem' : '0.875rem')};
+  font-style: italic;
+  color: ${({ theme }) => theme.text};
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: normal;
+`
+
+const TypeTitle = ({ commonName, scientificName }) => (
+  <StyledTypeTitle>
+    {commonName && <CommonName>{commonName}</CommonName>}
+    <ScientificName standalone={!commonName}>{scientificName}</ScientificName>
+  </StyledTypeTitle>
+)
 
 const RESOURCES = [
   {
