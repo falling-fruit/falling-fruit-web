@@ -2,8 +2,8 @@ import { Flag } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { ReportModal } from '../form/ReportModal'
-import Button from '../ui/Button'
+import { ReportModal } from '../../form/ReportModal'
+import Button from '../../ui/Button'
 
 export const ReportButton = () => {
   const { location: locationData } = useSelector((state) => state.location)

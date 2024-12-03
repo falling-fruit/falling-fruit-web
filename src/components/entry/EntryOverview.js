@@ -17,11 +17,11 @@ import { partiallyClosePaneDrawer } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
-import EntryTags from './EntryTags'
-import { ReportButton } from './ReportButton'
+import { ReportButton } from './overview/ReportButton'
+import Tags from './overview/Tags'
+import TypesHeader from './overview/TypesHeader'
 import { ReviewButton } from './ReviewButton'
 import { formatISOString, formatSeasonality } from './textFormatters'
-import TypesHeader from './TypesHeader'
 
 const hasSeasonality = (locationData) =>
   !!(
@@ -112,7 +112,7 @@ const EntryOverview = () => {
     <div>
       <>
         <TypesHeader types={types} />
-        <EntryTags locationData={locationData} />
+        <Tags locationData={locationData} />
         <Description>
           <p>{locationData.description}</p>
 
