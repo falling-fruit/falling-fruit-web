@@ -21,7 +21,7 @@ import IconButton from '../ui/IconButton'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
-import Lightbox from './LightboxMobile'
+import LightboxMobile from './LightboxMobile'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
@@ -220,7 +220,7 @@ const EntryMobile = () => {
             progress={progress}
             isDrawerFullyOpen={drawerFullyOpen}
           >
-            <Lightbox />
+            <LightboxMobile />
             <Carousel />
           </RevealedFromUnderneath>
         )}
