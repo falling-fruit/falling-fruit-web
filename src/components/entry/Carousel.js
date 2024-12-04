@@ -38,10 +38,6 @@ const Carousel = styled(ResponsiveCarousel)`
       }
     }
   }
-  @media ${({ theme }) => theme.device.mobile} {
-    ${({ isFullScreen }) =>
-      !isFullScreen && `border-radius: 0 0; pointer-events: none;`}
-  }
 `
 
 Carousel.defaultProps = {
