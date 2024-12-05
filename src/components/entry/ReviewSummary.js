@@ -4,8 +4,6 @@ import { groupBy, prop as rProp } from 'ramda'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
-import { MONTH_LABELS } from '../../constants/form'
-
 const SummaryTable = styled.table`
   border-spacing: 0;
   width: 100%;
@@ -44,7 +42,7 @@ const SummaryTable = styled.table`
 `
 
 const FruitingSummaryRow = ({ reviews }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   if (!reviews?.length) {
     return null
   }
@@ -71,7 +69,10 @@ const FruitingSummaryRow = ({ reviews }) => {
         <p>
           {t(`locations.infowindow.fruiting.${reviews[0].fruiting}`)}:{' '}
           {reviewMonthPairs
-            .map(([month, count]) => `${MONTH_LABELS[month]} (${count})`)
+            .map(
+              ([month, count]) =>
+                `${new Date(1, month, 1).toLocaleDateString(i18n.language, { month: 'long' }).replace(/^\w/, (c) => c.toUpperCase())} (${count})`,
+            )
             .join(', ')}
         </p>
       </td>
