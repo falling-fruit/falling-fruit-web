@@ -2,7 +2,7 @@ import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { FRUITING_RATINGS, RATINGS } from '../../constants/ratings'
+import { FRUITING_RATINGS } from '../../constants/ratings'
 import ImagePreview from '../ui/ImagePreview'
 import Rating from '../ui/Rating'
 import ResetButton from '../ui/ResetButton'
@@ -122,28 +122,34 @@ const Review = ({
     )}
     <RatingTable>
       <tbody>
-        {RATINGS.map(({ title, ratingKey, total }, key) => {
-          const score = review[ratingKey]
-
-          if (score === null) {
-            return null
-          }
-
-          return (
-            <tr key={key}>
-              <td>
-                <Label>{title}</Label>
-              </td>
-              <td>
-                {ratingKey !== 'fruiting' ? (
-                  <Rating key={key} score={score + 1} total={total} />
-                ) : (
-                  FRUITING_RATINGS[score]
-                )}
-              </td>
-            </tr>
-          )
-        })}
+        {review.fruiting !== null && (
+          <tr>
+            <td>
+              <Label>Fruiting</Label>
+            </td>
+            <td>{FRUITING_RATINGS[review.fruiting]}</td>
+          </tr>
+        )}
+        {review.quality_rating !== null && (
+          <tr>
+            <td>
+              <Label>Quality</Label>
+            </td>
+            <td>
+              <Rating score={review.quality_rating + 1} total={5} />
+            </td>
+          </tr>
+        )}
+        {review.yield_rating !== null && (
+          <tr>
+            <td>
+              <Label>Yield</Label>
+            </td>
+            <td>
+              <Rating score={review.yield_rating + 1} total={5} />
+            </td>
+          </tr>
+        )}
       </tbody>
     </RatingTable>
     <ReviewDescription>
