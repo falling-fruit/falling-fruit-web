@@ -1,8 +1,9 @@
 import { darken } from 'polished'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { FRUITING_OPTIONS, INITIAL_REVIEW_VALUES } from '../../constants/form'
+import { INITIAL_REVIEW_VALUES } from '../../constants/form'
 import {
   addNewReview,
   deleteLocationReview,
@@ -38,54 +39,68 @@ const DeleteButton = styled(Button)`
   }
 `
 
-export const ReviewStep = ({ standalone, hasHeading = true }) => (
-  <>
-    {hasHeading && (
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a id="review" style={{ textDecoration: 'none' }}>
-        <SectionHeading>
-          Leave a review
-          {!standalone && <Optional />}
-        </SectionHeading>
-      </a>
-    )}
+export const ReviewStep = ({ standalone, hasHeading = true }) => {
+  const { t } = useTranslation()
+  const FRUITING_OPTIONS = [0, 1, 2].map((value) => ({
+    label: t(`locations.infowindow.fruiting.${value}`),
+    value,
+  }))
 
-    <Textarea
-      name="review.comment"
-      placeholder="Updates, access issues, plant health..."
-      label="Comments"
-    />
+  return (
+    <>
+      {hasHeading && (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <a id="review" style={{ textDecoration: 'none' }}>
+          <SectionHeading>
+            Leave a review
+            {!standalone && <Optional />}
+          </SectionHeading>
+        </a>
+      )}
 
-    <DateInput
-      name="review.observed_on"
-      label="Observed on"
-      invalidWhenUntouched
-    />
-
-    <Select
-      label="Fruiting status"
-      name="review.fruiting"
-      options={FRUITING_OPTIONS}
-      isSearchable={false}
-      isClearable
-    />
-
-    <FormRatingWrapper>
-      <RatingLabeledRow
-        label={<label htmlFor="review.quality_rating-group">Quality</label>}
-        right={
-          <RatingInput name="review.quality_rating" label="Quality" total={5} />
-        }
+      <Textarea
+        name="review.comment"
+        placeholder="Updates, access issues, plant health..."
+        label="Comments"
       />
-      <RatingLabeledRow
-        label={<label htmlFor="review.yield_rating-group">Yield</label>}
-        right={
-          <RatingInput name="review.yield_rating" label="Yield" total={5} />
-        }
+
+      <DateInput
+        name="review.observed_on"
+        label="Observed on"
+        invalidWhenUntouched
       />
-    </FormRatingWrapper>
-  </>
-)
+
+      <Select
+        label="Fruiting status"
+        name="review.fruiting"
+        options={FRUITING_OPTIONS}
+        isSearchable={false}
+        toFormikValue={(x) => x?.value}
+        fromFormikValue={(x) => FRUITING_OPTIONS.find((o) => o.value === x)}
+        isClearable
+      />
+
+      <FormRatingWrapper>
+        <RatingLabeledRow
+          label={<label htmlFor="review.quality_rating-group">Quality</label>}
+          right={
+            <RatingInput
+              name="review.quality_rating"
+              label="Quality"
+              total={5}
+            />
+          }
+        />
+        <RatingLabeledRow
+          label={<label htmlFor="review.yield_rating-group">Yield</label>}
+          right={
+            <RatingInput name="review.yield_rating" label="Yield" total={5} />
+          }
+        />
+      </FormRatingWrapper>
+    </>
+  )
+}
 
 export const ReviewPhotoStep = () => (
   <PhotoUploader name="review.photos" label="Upload images" />
