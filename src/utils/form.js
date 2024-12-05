@@ -1,4 +1,4 @@
-import { MONTH_OPTIONS, PROPERTY_ACCESS_OPTIONS } from '../constants/form'
+import { PROPERTY_ACCESS_OPTIONS } from '../constants/form'
 
 export const isEmptyReview = (review) => {
   if (!review) {
@@ -137,8 +137,8 @@ export const locationToForm = (
     }
   }),
   description,
-  season_start: MONTH_OPTIONS[season_start],
-  season_stop: MONTH_OPTIONS[season_stop],
+  season_start,
+  season_stop,
   access: PROPERTY_ACCESS_OPTIONS[access],
   unverified,
 })
