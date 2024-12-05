@@ -138,5 +138,10 @@
         "in_the_press": "In the press"
       }
     }
+  },
+  "locations": {
+    "infowindow": {
+      "fruiting": ["Flowers", "Unripe fruit", "Ripe fruit"]
+    }
   }
 }

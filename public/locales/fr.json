@@ -137,5 +137,10 @@
         "in_the_press": "Dans la presse"
       }
     }
+  },
+  "locations": {
+    "infowindow": {
+      "fruiting": ["Fleurs", "Fruits pas mûrs", "Fruits mûrs"]
+    }
   }
 }
