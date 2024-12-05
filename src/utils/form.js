@@ -1,8 +1,4 @@
-import {
-  FRUITING_OPTIONS,
-  MONTH_OPTIONS,
-  PROPERTY_ACCESS_OPTIONS,
-} from '../constants/form'
+import { MONTH_OPTIONS, PROPERTY_ACCESS_OPTIONS } from '../constants/form'
 
 export const isEmptyReview = (review) => {
   if (!review) {
@@ -60,7 +56,7 @@ export const formToReview = (review) => {
     ...review,
     comment: review.comment || null,
     observed_on: review.observed_on || null,
-    fruiting: review.fruiting ? review.fruiting.value : null,
+    fruiting: review.fruiting || null,
     quality_rating:
       review.quality_rating === '0' ? null : Number(review.quality_rating) - 1,
     yield_rating:
@@ -87,7 +83,7 @@ export const reviewToForm = ({
     isNew: false,
   })),
   observed_on: observed_on ?? '',
-  fruiting: fruiting === null ? null : FRUITING_OPTIONS[fruiting],
+  fruiting: fruiting,
   yield_rating: yield_rating === null ? '0' : String(yield_rating + 1),
   quality_rating: quality_rating === null ? '0' : String(quality_rating + 1),
 })

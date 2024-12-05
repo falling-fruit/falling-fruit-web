@@ -9,12 +9,6 @@ export const INITIAL_REVIEW_VALUES = {
   },
 }
 
-export const FRUITING_OPTIONS = ['Flowers', 'Unripe fruit', 'Ripe fruit'].map(
-  (name, idx) => ({
-    label: name,
-    value: idx,
-  }),
-)
 const PROPERTY_ACCESS_LABELS = [
   'Source is on my property',
   'I have permission from the owner to add the source',
