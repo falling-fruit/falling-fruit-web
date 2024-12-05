@@ -1,12 +1,12 @@
 import { Map } from '@styled-icons/boxicons-solid'
 import { useFormikContext } from 'formik'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import {
   INITIAL_LOCATION_VALUES,
-  MONTH_OPTIONS,
   PROPERTY_ACCESS_OPTIONS,
 } from '../../constants/form'
 import {
@@ -25,6 +25,7 @@ import {
 } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import { formatMonth } from '../entry/textFormatters'
 import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
@@ -88,51 +89,62 @@ const PositionFieldReadOnly = ({ lat, lng }) => (
   </IconBesideText>
 )
 
-const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => (
-  <>
-    <TypesSelect />
-    <Label>Position</Label>
-    {isLoading ? (
-      <LoadingIndicator />
-    ) : isDesktop || !editingId ? (
-      <PositionFieldReadOnly lat={lat} lng={lng} />
-    ) : (
-      <PositionFieldLink lat={lat} lng={lng} editingId={editingId} />
-    )}
-    <Textarea
-      name="description"
-      label="Description"
-      placeholder="Location details, access issues, plant health ..."
-    />
-    <Select
-      name="access"
-      label="Property access"
-      options={PROPERTY_ACCESS_OPTIONS}
-      isSearchable={false}
-      isClearable
-    />
-    <Label>Seasonality</Label>
-    <InlineSelects>
+const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
+  const { i18n } = useTranslation()
+  const monthOptions = Array.from({ length: 12 }, (_, i) => ({
+    label: formatMonth(i, i18n.language),
+    value: i,
+  }))
+  return (
+    <>
+      <TypesSelect />
+      <Label>Position</Label>
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : isDesktop || !editingId ? (
+        <PositionFieldReadOnly lat={lat} lng={lng} />
+      ) : (
+        <PositionFieldLink lat={lat} lng={lng} editingId={editingId} />
+      )}
+      <Textarea
+        name="description"
+        label="Description"
+        placeholder="Location details, access issues, plant health ..."
+      />
       <Select
-        name="season_start"
-        options={MONTH_OPTIONS}
+        name="access"
+        label="Property access"
+        options={PROPERTY_ACCESS_OPTIONS}
         isSearchable={false}
         isClearable
       />
-      <span>to</span>
-      <Select
-        name="season_stop"
-        options={MONTH_OPTIONS}
-        isSearchable={false}
-        isClearable
-      />
-    </InlineSelects>
-    <CheckboxLabel>
-      <Checkbox name="unverified" label="Unverified" />
-      Unverified
-    </CheckboxLabel>
-  </>
-)
+      <Label>Seasonality</Label>
+      <InlineSelects>
+        <Select
+          name="season_start"
+          options={monthOptions}
+          isSearchable={false}
+          toFormikValue={(x) => x?.value}
+          fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
+          isClearable
+        />
+        <span>to</span>
+        <Select
+          name="season_stop"
+          options={monthOptions}
+          isSearchable={false}
+          toFormikValue={(x) => x?.value}
+          fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
+          isClearable
+        />
+      </InlineSelects>
+      <CheckboxLabel>
+        <Checkbox name="unverified" label="Unverified" />
+        Unverified
+      </CheckboxLabel>
+    </>
+  )
+}
 
 export const LocationForm = ({ editingId, initialValues, stepped }) => {
   const reduxFormValues = useSelector((state) => state.location.form)
@@ -188,8 +200,8 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
   ) => {
     const locationValues = {
       'g-recaptcha-response': recaptcha,
-      lat: position?.lat,
-      lng: position?.lng,
+      lat: position?.lat || null,
+      lng: position?.lng || null,
       ...formToLocation(location),
     }
 

@@ -17,21 +17,6 @@ const PROPERTY_ACCESS_LABELS = [
   'Source is on private property (ask before you pick)',
 ]
 
-export const MONTH_LABELS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
-
 const labelsToOptions = (labels) =>
   labels.map((label, index) => ({
     label,
@@ -39,8 +24,6 @@ const labelsToOptions = (labels) =>
   }))
 
 export const PROPERTY_ACCESS_OPTIONS = labelsToOptions(PROPERTY_ACCESS_LABELS)
-
-export const MONTH_OPTIONS = labelsToOptions(MONTH_LABELS)
 
 export const INITIAL_LOCATION_VALUES = {
   types: [],

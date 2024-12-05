@@ -4,6 +4,8 @@ import { groupBy, prop as rProp } from 'ramda'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import { formatMonth } from './textFormatters'
+
 const SummaryTable = styled.table`
   border-spacing: 0;
   width: 100%;
@@ -71,7 +73,7 @@ const FruitingSummaryRow = ({ reviews }) => {
           {reviewMonthPairs
             .map(
               ([month, count]) =>
-                `${new Date(1, month, 1).toLocaleDateString(i18n.language, { month: 'long' }).replace(/^\w/, (c) => c.toUpperCase())} (${count})`,
+                `${formatMonth(month, i18n.language)} (${count})`,
             )
             .join(', ')}
         </p>

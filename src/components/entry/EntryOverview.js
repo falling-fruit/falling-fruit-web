@@ -21,7 +21,7 @@ import { ReportButton } from './overview/ReportButton'
 import Tags from './overview/Tags'
 import TypesHeader from './overview/TypesHeader'
 import { ReviewButton } from './ReviewButton'
-import { formatISOString, formatSeasonality } from './textFormatters'
+import { formatISOString, formatMonth } from './textFormatters'
 
 const hasSeasonality = (locationData) =>
   !!(
@@ -148,11 +148,15 @@ const EntryOverview = () => {
             <IconBesideText>
               <Calendar color={theme.secondaryText} size={20} />
               <p>
-                {formatSeasonality(
-                  locationData.season_start,
-                  locationData.season_stop,
-                  locationData.no_season,
-                )}
+                {locationData.no_season ||
+                (locationData.season_start === 0 &&
+                  locationData.season_stop === 11)
+                  ? 'Year Round'
+                  : `In season from ${locationData.season_start != null ? formatMonth(locationData.season_start, i18n.language) : '?'} to ${
+                      locationData.season_stop != null
+                        ? formatMonth(locationData.season_stop, i18n.language)
+                        : '?'
+                    }`}
               </p>
             </IconBesideText>
           )}
