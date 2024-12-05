@@ -1,8 +1,8 @@
 import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { FRUITING_RATINGS } from '../../constants/ratings'
 import ImagePreview from '../ui/ImagePreview'
 import Rating from '../ui/Rating'
 import ResetButton from '../ui/ResetButton'
@@ -110,82 +110,85 @@ const Review = ({
   onEditClick,
   includePreview = true,
   editable = false,
-}) => (
-  <ReviewContainer $editable={editable}>
-    {editable && (
-      <EditableHeader>
-        You reviewed this location on {formatISOString(review.created_at)}{' '}
-        <ResetButton onClick={onEditClick}>
-          <PencilIcon height={14} /> Update or delete this review.
-        </ResetButton>
-      </EditableHeader>
-    )}
-    <RatingTable>
-      <tbody>
-        {review.fruiting !== null && (
-          <tr>
-            <td>
-              <Label>Fruiting</Label>
-            </td>
-            <td>{FRUITING_RATINGS[review.fruiting]}</td>
-          </tr>
-        )}
-        {review.quality_rating !== null && (
-          <tr>
-            <td>
-              <Label>Quality</Label>
-            </td>
-            <td>
-              <Rating score={review.quality_rating + 1} total={5} />
-            </td>
-          </tr>
-        )}
-        {review.yield_rating !== null && (
-          <tr>
-            <td>
-              <Label>Yield</Label>
-            </td>
-            <td>
-              <Rating score={review.yield_rating + 1} total={5} />
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </RatingTable>
-    <ReviewDescription>
-      <blockquote>{review.comment}</blockquote>
-      {!editable && (
-        <cite>
-          Reviewed on {formatISOString(review.created_at)}
-          {review.author && (
-            <>
-              {' by '}
-              {review.user_id ? (
-                <StyledLink to={`/users/${review.user_id}`}>
-                  {review.author}
-                </StyledLink>
-              ) : (
-                review.author
-              )}
-            </>
-          )}
-          {review.observed_on && (
-            <> (visited {formatISOString(review.observed_on)})</>
-          )}
-        </cite>
+}) => {
+  const { t } = useTranslation()
+  return (
+    <ReviewContainer $editable={editable}>
+      {editable && (
+        <EditableHeader>
+          You reviewed this location on {formatISOString(review.created_at)}{' '}
+          <ResetButton onClick={onEditClick}>
+            <PencilIcon height={14} /> Update or delete this review.
+          </ResetButton>
+        </EditableHeader>
       )}
-    </ReviewDescription>
-    {includePreview &&
-      review.photos.map((photo, index) => (
-        <StyledImagePreview
-          $small
-          key={photo.thumb}
-          onClick={() => onImageClick(index)}
-        >
-          <img src={photo.thumb} alt={review.title} />
-        </StyledImagePreview>
-      ))}
-  </ReviewContainer>
-)
+      <RatingTable>
+        <tbody>
+          {review.fruiting !== null && (
+            <tr>
+              <td>
+                <Label>Fruiting</Label>
+              </td>
+              <td>{t(`locations.infowindow.fruiting.${review.fruiting}`)}</td>
+            </tr>
+          )}
+          {review.quality_rating !== null && (
+            <tr>
+              <td>
+                <Label>Quality</Label>
+              </td>
+              <td>
+                <Rating score={review.quality_rating + 1} total={5} />
+              </td>
+            </tr>
+          )}
+          {review.yield_rating !== null && (
+            <tr>
+              <td>
+                <Label>Yield</Label>
+              </td>
+              <td>
+                <Rating score={review.yield_rating + 1} total={5} />
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </RatingTable>
+      <ReviewDescription>
+        <blockquote>{review.comment}</blockquote>
+        {!editable && (
+          <cite>
+            Reviewed on {formatISOString(review.created_at)}
+            {review.author && (
+              <>
+                {' by '}
+                {review.user_id ? (
+                  <StyledLink to={`/users/${review.user_id}`}>
+                    {review.author}
+                  </StyledLink>
+                ) : (
+                  review.author
+                )}
+              </>
+            )}
+            {review.observed_on && (
+              <> (visited {formatISOString(review.observed_on)})</>
+            )}
+          </cite>
+        )}
+      </ReviewDescription>
+      {includePreview &&
+        review.photos.map((photo, index) => (
+          <StyledImagePreview
+            $small
+            key={photo.thumb}
+            onClick={() => onImageClick(index)}
+          >
+            <img src={photo.thumb} alt={review.title} />
+          </StyledImagePreview>
+        ))}
+    </ReviewContainer>
+  )
+}
 
 export default Review

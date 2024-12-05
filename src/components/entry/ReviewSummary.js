@@ -1,10 +1,10 @@
 import { Star as StarEmpty } from '@styled-icons/boxicons-regular'
 import { Star, StarHalf } from '@styled-icons/boxicons-solid'
 import { groupBy, prop as rProp } from 'ramda'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { MONTH_LABELS } from '../../constants/form'
-import { FRUITING_RATINGS } from '../../constants/ratings'
 
 const SummaryTable = styled.table`
   border-spacing: 0;
@@ -44,6 +44,7 @@ const SummaryTable = styled.table`
 `
 
 const FruitingSummaryRow = ({ reviews }) => {
+  const { t } = useTranslation()
   if (!reviews?.length) {
     return null
   }
@@ -68,7 +69,7 @@ const FruitingSummaryRow = ({ reviews }) => {
     <tr>
       <td colSpan={2}>
         <p>
-          {FRUITING_RATINGS[reviews[0].fruiting]}:{' '}
+          {t(`locations.infowindow.fruiting.${reviews[0].fruiting}`)}:{' '}
           {reviewMonthPairs
             .map(([month, count]) => `${MONTH_LABELS[month]} (${count})`)
             .join(', ')}
