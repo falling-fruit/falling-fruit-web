@@ -4,7 +4,7 @@ import { groupBy, prop as rProp } from 'ramda'
 import styled from 'styled-components/macro'
 
 import { MONTH_LABELS } from '../../constants/form'
-import { FRUITING_RATINGS, RATINGS } from '../../constants/ratings'
+import { FRUITING_RATINGS } from '../../constants/ratings'
 
 const SummaryTable = styled.table`
   border-spacing: 0;
@@ -126,24 +126,27 @@ const SummaryRow = ({ title, scores, total }) => {
 }
 
 const ReviewSummary = ({ reviews }) => {
-  const ratingsWithScores = RATINGS.slice(1).map((rating) => ({
-    ...rating,
-    scores: reviews.reduce((scores, review) => {
-      if (review[rating.ratingKey]) {
-        return [...scores, review[rating.ratingKey]]
-      }
-      return scores
-    }, []),
-  }))
+  const qualityScores = reviews.reduce((scores, review) => {
+    if (review.quality_rating) {
+      return [...scores, review.quality_rating]
+    }
+    return scores
+  }, [])
+
+  const yieldScores = reviews.reduce((scores, review) => {
+    if (review.yield_rating) {
+      return [...scores, review.yield_rating]
+    }
+    return scores
+  }, [])
 
   return (
     <SummaryTable>
       <h3>Summary</h3>
       <tbody>
         <FruitingSummary reviews={reviews} />
-        {ratingsWithScores.map((rating) => (
-          <SummaryRow key={rating.ratingKey} {...rating} />
-        ))}
+        <SummaryRow title="Quality" scores={qualityScores} total={5} />
+        <SummaryRow title="Yield" scores={yieldScores} total={5} />
       </tbody>
     </SummaryTable>
   )
