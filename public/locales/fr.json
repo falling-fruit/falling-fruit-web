@@ -168,6 +168,9 @@
       "comments_subtext": "Nouveaux développements, problèmes d'accès, condition des plantes ...",
       "comments": "Commentaires",
       "fruiting_status": "État des fruits"
+    },
+    "index": {
+      "editmarker_html": "<b>Déplacez à la position de la source.</b><br><br>Vérifiez la vue satellite - la source pourrait être visible depuis l'espace !"
     }
   },
   "problems": {

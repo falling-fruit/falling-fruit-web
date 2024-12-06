@@ -169,6 +169,9 @@
       "comments_subtext": "Updates, access issues, plant health...",
       "comments": "Comments",
       "fruiting_status": "Fruiting status"
+    },
+    "index": {
+      "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!"
     }
   },
   "problems": {
