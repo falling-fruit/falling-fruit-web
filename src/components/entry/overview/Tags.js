@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { theme } from '../../ui/GlobalStyle'
-import { ACCESS_TYPE } from '../textFormatters'
 
 const TagList = styled.ul`
   margin: 0px;
@@ -38,7 +37,7 @@ const EntryTags = ({ locationData }) => {
     <TagList>
       {locationData.access != null && (
         <Tag color={theme.tag.access} backgroundColor={theme.transparentOrange}>
-          {ACCESS_TYPE[locationData.access]}
+          {t(`locations.infowindow.access_short.${locationData.access}`)}
         </Tag>
       )}
       {locationData.unverified && (

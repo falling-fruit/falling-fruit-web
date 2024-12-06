@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import {
-  INITIAL_LOCATION_VALUES,
-  PROPERTY_ACCESS_OPTIONS,
-} from '../../constants/form'
+import { INITIAL_LOCATION_VALUES } from '../../constants/form'
 import {
   addNewLocation,
   editExistingLocation,
@@ -90,9 +87,13 @@ const PositionFieldReadOnly = ({ lat, lng }) => (
 )
 
 const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const monthOptions = Array.from({ length: 12 }, (_, i) => ({
     label: formatMonth(i, i18n.language),
+    value: i,
+  }))
+  const propertyAccessOptions = Array.from({ length: 5 }).map((_, i) => ({
+    label: t(`locations.infowindow.access_mode.${i}`),
     value: i,
   }))
   return (
@@ -114,8 +115,12 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       <Select
         name="access"
         label="Property access"
-        options={PROPERTY_ACCESS_OPTIONS}
+        options={propertyAccessOptions}
         isSearchable={false}
+        toFormikValue={(x) => x?.value}
+        fromFormikValue={(x) =>
+          propertyAccessOptions.find((o) => o.value === x)
+        }
         isClearable
       />
       <Label>Seasonality</Label>

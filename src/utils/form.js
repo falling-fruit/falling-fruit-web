@@ -1,5 +1,3 @@
-import { PROPERTY_ACCESS_OPTIONS } from '../constants/form'
-
 export const isEmptyReview = (review) => {
   if (!review) {
     return true
@@ -119,9 +117,9 @@ export const formToLocation = ({
 }) => ({
   type_ids: types.map(({ value }) => value),
   description,
-  season_start: season_start?.value ?? null,
-  season_stop: season_stop?.value ?? null,
-  access: access?.value ?? null,
+  season_start: season_start ?? null,
+  season_stop: season_stop ?? null,
+  access: access ?? null,
   unverified,
 })
 
@@ -139,6 +137,6 @@ export const locationToForm = (
   description,
   season_start,
   season_stop,
-  access: PROPERTY_ACCESS_OPTIONS[access],
+  access,
   unverified,
 })
