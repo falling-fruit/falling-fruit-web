@@ -1,21 +1,21 @@
+import { useTranslation } from 'react-i18next'
+
 import ShareTheHarvestTable from '../table/ShareTheHarvestTable'
 import { PageScrollWrapper, PageTemplate } from './PageTemplate'
 
-const ShareTheHarvestPage = () => (
-  <PageScrollWrapper>
-    <PageTemplate from="Settings">
-      <h1>Grow &middot; Pick &middot; Distribute</h1>
-      <p>
-        Listed below are organizations that grow food in public spaces (food
-        forests, public orchards), pick food (urban foraging, farm gleaning), or
-        distribute food (exchanges, donations). Organizations are listed by
-        country, state (if applicable), and city. Those with crossed-out names
-        are believed to be inactive. If you know of others that should be on
-        this list, <a href="mailto:info@fallingfruit.org">contact us</a>!
-      </p>
-      <ShareTheHarvestTable />
-    </PageTemplate>
-  </PageScrollWrapper>
-)
+const ShareTheHarvestPage = () => {
+  const { t } = useTranslation()
+  return (
+    <PageScrollWrapper>
+      <PageTemplate from="Settings">
+        <h1>{t('pages.sharing.grow_pick_and_distribute')}</h1>
+        <p
+          dangerouslySetInnerHTML={{ __html: t('pages.sharing.intro_html') }}
+        ></p>
+        <ShareTheHarvestTable />
+      </PageTemplate>
+    </PageScrollWrapper>
+  )
+}
 
 export default ShareTheHarvestPage

@@ -58,6 +58,16 @@
   "menu": {
     "add_location": "Ajouter un site"
   },
+  "layouts": {
+    "application": {
+      "menu": {
+        "project": "Le projet",
+        "data": "Les données",
+        "sharing": "Partager la récolte",
+        "press": "Dans la presse"
+      }
+    }
+  },
   "pages": {
     "about": {
       "ff_disclaimer_html": "Falling Fruit n'est pas lié à Fallen Fruit. Fallen Fruit peut être consulté à <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
@@ -89,6 +99,10 @@
       "closing_remarks_para1_html": "Falling Fruit est un organisme caritatif à but non lucratif 501(c)(3) basé à Boulder (Colorado, États-Unis). Les dons réalisés depuis les États-Unis sont donc déductibles des impôts. Vous pouvez consulter notre <a href=\"/501c3.pdf\">certificat d’exemption</a> délivré par l’IRS et vérifier notre  conformité avec la loi avec <a href=\"http://apps.irs.gov/app/eos/pub78Search.do?\">la publication 78 de l’IRS</a> ou le <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Secrétaire d’État au Colorado</a>. Nos <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">règlementations</a> et nos <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">procès-verbaux de conseil d’administration</a> sont également disponibles.",
       "closing_remarks_para2_html": "Le glanage urbain a ses propres considérations pratiques et morales. Découvrez l’éthique du glanage urbain avec l’excellent résumé de notre site jumeau de Portland (Oregon, États-Unis),<a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a>.",
       "closing_remarks_para3_html": "Les informations de Falling Fruit peuvent être incorrectes ou ne plus être valables. Par exemple : beaucoup des cartes de glanage ayant migré vers Falling Fruit étaient à l’origine des Google Maps dont les marqueurs étaient souvent déplacés par accident. Quant aux inventaires d’arbres municipaux, si mis à jour, ils le sont uniquement lorsque l’on procède à leur entretien. Les données peuvent s’avérer incorrectes une fois sur place, éditez alors la carte en fonction de vos découvertes. Il est de votre responsabilité à tous de déterminer la nature, la comestibilité et le site d’une plante, ainsi que d’améliorer la qualité de la carte."
+    },
+    "sharing": {
+      "grow_pick_and_distribute": "Cultiver · Récolter · Distribuer",
+      "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l’espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d’autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
     }
   },
   "users": {
