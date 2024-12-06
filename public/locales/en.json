@@ -38,7 +38,9 @@
     "send": "Send",
     "save_changes": "Save changes",
     "edit": "Edit",
-    "donate": "Donate"
+    "donate": "Donate",
+    "quality": "Quality",
+    "yield": "Yield"
   },
   "side_menu": {
     "regional": "Regional",

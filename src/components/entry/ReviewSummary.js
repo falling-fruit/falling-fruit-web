@@ -130,6 +130,7 @@ const SummaryRow = ({ title, scores, total }) => {
 }
 
 const ReviewSummary = ({ reviews }) => {
+  const { t } = useTranslation()
   const qualityScores = reviews.reduce((scores, review) => {
     if (review.quality_rating) {
       return [...scores, review.quality_rating]
@@ -149,8 +150,16 @@ const ReviewSummary = ({ reviews }) => {
       <h3>Summary</h3>
       <tbody>
         <FruitingSummary reviews={reviews} />
-        <SummaryRow title="Quality" scores={qualityScores} total={5} />
-        <SummaryRow title="Yield" scores={yieldScores} total={5} />
+        <SummaryRow
+          title={t('glossary.quality')}
+          scores={qualityScores}
+          total={5}
+        />
+        <SummaryRow
+          title={t('glossary.yield')}
+          scores={yieldScores}
+          total={5}
+        />
       </tbody>
     </SummaryTable>
   )
