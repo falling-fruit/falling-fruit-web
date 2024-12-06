@@ -2,6 +2,7 @@ import '@reach/dialog/styles.css'
 
 import { Dialog } from '@reach/dialog'
 import { Form, Formik } from 'formik'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -55,6 +56,7 @@ const Modal = ({
   ...props
 }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const { t } = useTranslation()
   const { Recaptcha, handlePresubmit: onPresubmit } =
     useInvisibleRecaptcha(onSubmit)
 
@@ -87,7 +89,7 @@ const Modal = ({
                   disabled={!isDirty || isSubmitting || !isValid}
                   type="submit"
                 >
-                  {isSubmitting ? 'Submitting' : 'Submit'}
+                  {isSubmitting ? 'Submitting' : t('glossary.submit')}
                 </Button>
               </Buttons>
             </Form>

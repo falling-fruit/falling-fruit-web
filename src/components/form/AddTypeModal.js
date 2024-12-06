@@ -20,6 +20,7 @@ const languageOptionsDropdown = [
 ]
 const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
   const isDesktop = useIsDesktop()
+  const { t } = useTranslation()
 
   return (
     <div
@@ -57,7 +58,7 @@ const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
         <div style={{ flex: 1 }}>
           <Input
             name={`name_pairs.${index}.name`}
-            label="Name"
+            label={t('glossary.name')}
             placeholder="name"
             required={index === 0}
           />

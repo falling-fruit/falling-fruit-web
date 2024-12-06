@@ -60,8 +60,8 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
 
       <Textarea
         name="review.comment"
-        placeholder="Updates, access issues, plant health..."
-        label="Comments"
+        placeholder={t('locations.form.comments_subtext')}
+        label={t('locations.form.comments')}
       />
 
       <DateInput
@@ -71,7 +71,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
       />
 
       <Select
-        label="Fruiting status"
+        label={t('locations.form.fruiting_status')}
         name="review.fruiting"
         options={fruitingOptions}
         isSearchable={false}
@@ -84,7 +84,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
         <RatingLabeledRow
           label={
             <label htmlFor="review.quality_rating-group">
-              t('glossary.quality')
+              {t('glossary.quality')}
             </label>
           }
           right={
@@ -98,7 +98,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
         <RatingLabeledRow
           label={
             <label htmlFor="review.yield_rating-group">
-              t('glossary.yield')
+              {t('glossary.yield')}
             </label>
           }
           right={
@@ -130,6 +130,7 @@ export const ReviewForm = ({
   editingId = null,
 }) => {
   const { locationId } = useSelector((state) => state.location)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
@@ -203,14 +204,14 @@ export const ReviewForm = ({
                 }
                 type="submit"
               >
-                {isSubmitting ? 'Submitting' : 'Submit'}
+                {isSubmitting ? 'Submitting' : t('glossary.submit')}
               </Button>
               {editingId && (
                 <DeleteButton
                   type="button"
                   onClick={() => handleDelete(formikProps)}
                 >
-                  Delete
+                  {t('glossary.delete')}
                 </DeleteButton>
               )}
             </div>

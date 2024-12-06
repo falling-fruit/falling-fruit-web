@@ -99,7 +99,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   return (
     <>
       <TypesSelect />
-      <Label>Position</Label>
+      <Label>{t('glossary.position')}</Label>
       {isLoading ? (
         <LoadingIndicator />
       ) : isDesktop || !editingId ? (
@@ -109,8 +109,8 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       )}
       <Textarea
         name="description"
-        label="Description"
-        placeholder="Location details, access issues, plant health ..."
+        label={t('glossary.description')}
+        placeholder={t('glossary.locations.form.description_subtext')}
       />
       <Select
         name="access"
@@ -144,8 +144,8 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
         />
       </InlineSelects>
       <CheckboxLabel>
-        <Checkbox name="unverified" label="Unverified" />
-        Unverified
+        <Checkbox name="unverified" label={t('glossary.unverified')} />
+        {t('glossary.unverified')}
       </CheckboxLabel>
     </>
   )
@@ -162,6 +162,7 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
   const isDesktop = useIsDesktop()
 
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const { position, isLoading, location } = useSelector(
     (state) => state.location,
@@ -266,7 +267,7 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
               }
               type="submit"
             >
-              {isSubmitting ? 'Submitting' : 'Submit'}
+              {isSubmitting ? 'Submitting' : t('glossary.submit')}
             </Button>
           </ProgressButtons>
         )

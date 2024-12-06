@@ -41,7 +41,12 @@
     "activity": "Activité",
     "quality": "Qualité",
     "yield": "Production",
-    "report": "Signaler"
+    "report": "Signaler",
+    "position": "Position",
+    "description": "Description",
+    "unverified": "Non vérifié",
+    "submit": "Soumettre",
+    "delete": "Supprimer"
   },
   "side_menu": {
     "regional": "Régional",
@@ -158,6 +163,15 @@
         "Privé mais en surplomb",
         "Privé"
       ]
+    },
+    "form": {
+      "comments_subtext": "Nouveaux développements, problèmes d'accès, condition des plantes ...",
+      "comments": "Commentaires",
+      "fruiting_status": "État des fruits"
     }
+  },
+  "problems": {
+    "problem_type": "Type de problème",
+    "description_subtext": "Toute information pouvant nous aider à évaluer le problème"
   }
 }
