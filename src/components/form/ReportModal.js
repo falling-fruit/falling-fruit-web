@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
@@ -17,6 +18,7 @@ const PROBLEM_TYPE_OPTIONS = [
 
 const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const { t } = useTranslation()
 
   const handleSubmit = async (values) => {
     const reportValues = {
@@ -60,12 +62,16 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
     >
       <Select
         name="problem_code"
-        label="Problem Type"
+        label={t('problems.problem_type')}
         isSearchable={false}
         options={PROBLEM_TYPE_OPTIONS}
         required
       />
-      <Textarea name="comment" label="Description" />
+      <Textarea
+        name="comment"
+        label={t('glossary.description')}
+        placeholder={t('problems.description_subtext')}
+      />
       {!isLoggedIn && (
         <>
           <Input name="name" label="Name" />

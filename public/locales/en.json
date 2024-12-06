@@ -41,7 +41,12 @@
     "donate": "Donate",
     "quality": "Quality",
     "yield": "Yield",
-    "report": "Report"
+    "report": "Report",
+    "position": "Position",
+    "description": "Description",
+    "unverified": "Unverified",
+    "submit": "Submit",
+    "delete": "Delete"
   },
   "side_menu": {
     "regional": "Regional",
@@ -159,6 +164,15 @@
         "Private but overhanging",
         "Private"
       ]
+    },
+    "form": {
+      "comments_subtext": "Updates, access issues, plant health...",
+      "comments": "Comments",
+      "fruiting_status": "Fruiting status"
     }
+  },
+  "problems": {
+    "problem_type": "Problem type",
+    "description_subtext": "Any information that might help us evaluate the problem"
   }
 }

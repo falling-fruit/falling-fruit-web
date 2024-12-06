@@ -1,6 +1,7 @@
 import { useFormikContext } from 'formik'
 import { uniqBy } from 'lodash'
 import React, { useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { openAddTypeModal } from '../../redux/typeSlice'
@@ -11,6 +12,7 @@ import { CreatableSelect } from './FormikWrappers'
 const TypesSelect = () => {
   const { typesAccess } = useSelector((state) => state.type)
   const { values, validateForm, setFieldValue } = useFormikContext()
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const typeOptions = useMemo(() => typesAccess.asMenuEntries(), [typesAccess])
@@ -40,7 +42,7 @@ const TypesSelect = () => {
     <>
       <CreatableSelect
         name="types"
-        label="Types"
+        label={t('glossary.types')}
         options={typeOptions}
         isMulti
         closeMenuOnSelect={false}
