@@ -141,7 +141,21 @@
   },
   "locations": {
     "infowindow": {
-      "fruiting": ["Flowers", "Unripe fruit", "Ripe fruit"]
+      "fruiting": ["Flowers", "Unripe fruit", "Ripe fruit"],
+      "access_mode": [
+        "Source is on my property",
+        "I have permission from the owner to add the source",
+        "Source is on public land",
+        "Source is on private property but overhangs public land",
+        "Source is on private property (ask before you pick)"
+      ],
+      "access_short": [
+        "Added by owner",
+        "Permitted by owner",
+        "Public",
+        "Private but overhanging",
+        "Private"
+      ]
     }
   }
 }

@@ -140,7 +140,21 @@
   },
   "locations": {
     "infowindow": {
-      "fruiting": ["Fleurs", "Fruits pas mûrs", "Fruits mûrs"]
+      "fruiting": ["Fleurs", "Fruits pas mûrs", "Fruits mûrs"],
+      "access_mode": [
+        "La source m'appartient",
+        "J'ai la permission du propriétaire d'ajouté la source",
+        "La source est sur le domaine public",
+        "La source est sur une propriété privée mais surplombe le domaine public",
+        "La source est sur une propriété privée (poser avant de choisir)"
+      ],
+      "access_short": [
+        "Ajouté par le propriétaire",
+        "Autorisé par le propriétaire",
+        "Public",
+        "Privé mais en surplomb",
+        "Privé"
+      ]
     }
   }
 }

@@ -41,7 +41,7 @@ const DeleteButton = styled(Button)`
 
 export const ReviewStep = ({ standalone, hasHeading = true }) => {
   const { t } = useTranslation()
-  const FRUITING_OPTIONS = [0, 1, 2].map((value) => ({
+  const fruitingOptions = [0, 1, 2].map((value) => ({
     label: t(`locations.infowindow.fruiting.${value}`),
     value,
   }))
@@ -73,10 +73,10 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
       <Select
         label="Fruiting status"
         name="review.fruiting"
-        options={FRUITING_OPTIONS}
+        options={fruitingOptions}
         isSearchable={false}
         toFormikValue={(x) => x?.value}
-        fromFormikValue={(x) => FRUITING_OPTIONS.find((o) => o.value === x)}
+        fromFormikValue={(x) => fruitingOptions.find((o) => o.value === x)}
         isClearable
       />
 
