@@ -1,4 +1,5 @@
 import { X } from '@styled-icons/boxicons-regular'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 const TooltipContainer = styled.div`
@@ -43,25 +44,25 @@ const CloseButton = styled.button`
   top: 4px;
 `
 
-const Tooltip = ({ onClose }) => (
-  <TooltipContainer>
-    <CloseButton
-      onClick={(e) => {
-        e.stopPropagation()
-        onClose()
-      }}
-    >
-      <X size={20} />
-    </CloseButton>
-    <TooltipContent>
-      <b>Move to the position of the source.</b>
-      <br />
-      <br />
-      Check the satellite view - the source may be visible from space!
-      <br />
-      <br />
-    </TooltipContent>
-  </TooltipContainer>
-)
+const Tooltip = ({ onClose }) => {
+  const { t } = useTranslation()
+  return (
+    <TooltipContainer>
+      <CloseButton
+        onClick={(e) => {
+          e.stopPropagation()
+          onClose()
+        }}
+      >
+        <X size={20} />
+      </CloseButton>
+      <TooltipContent
+        dangerouslySetInnerHTML={{
+          __html: t('locations.index.editmarker_html'),
+        }}
+      />
+    </TooltipContainer>
+  )
+}
 
 export default Tooltip
