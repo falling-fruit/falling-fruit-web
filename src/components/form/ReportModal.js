@@ -15,7 +15,7 @@ const PROBLEM_TYPE_OPTIONS = [
   { label: 'Other (explain below)', value: 5 },
 ]
 
-const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
+const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   const handleSubmit = async (values) => {
@@ -40,7 +40,7 @@ const ReportModal = ({ locationId, name, onDismiss, ...props }) => {
 
   return (
     <Modal
-      title={`Report ${name}`}
+      title={title}
       onDismiss={onDismiss}
       initialValues={{
         problem_code: null,
