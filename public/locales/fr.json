@@ -38,7 +38,9 @@
     "save_changes": "Enregistrer vos modifications",
     "edit": "Modifier",
     "donate": "Contribuer",
-    "activity": "Activité"
+    "activity": "Activité",
+    "quality": "Qualité",
+    "yield": "Production"
   },
   "side_menu": {
     "regional": "Régional",

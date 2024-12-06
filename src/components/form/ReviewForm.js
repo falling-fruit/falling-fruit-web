@@ -82,19 +82,31 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
 
       <FormRatingWrapper>
         <RatingLabeledRow
-          label={<label htmlFor="review.quality_rating-group">Quality</label>}
+          label={
+            <label htmlFor="review.quality_rating-group">
+              t('glossary.quality')
+            </label>
+          }
           right={
             <RatingInput
               name="review.quality_rating"
-              label="Quality"
+              label={t('glossary.quality')}
               total={5}
             />
           }
         />
         <RatingLabeledRow
-          label={<label htmlFor="review.yield_rating-group">Yield</label>}
+          label={
+            <label htmlFor="review.yield_rating-group">
+              t('glossary.yield')
+            </label>
+          }
           right={
-            <RatingInput name="review.yield_rating" label="Yield" total={5} />
+            <RatingInput
+              name="review.yield_rating"
+              label={t('glossary.yield')}
+              total={5}
+            />
           }
         />
       </FormRatingWrapper>

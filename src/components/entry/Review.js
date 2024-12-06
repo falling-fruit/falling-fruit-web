@@ -135,7 +135,7 @@ const Review = ({
           {review.quality_rating !== null && (
             <tr>
               <td>
-                <Label>Quality</Label>
+                <Label>{t('glossary.quality')}</Label>
               </td>
               <td>
                 <Rating score={review.quality_rating + 1} total={5} />
@@ -145,7 +145,7 @@ const Review = ({
           {review.yield_rating !== null && (
             <tr>
               <td>
-                <Label>Yield</Label>
+                <Label>{t('glossary.yield')}</Label>
               </td>
               <td>
                 <Rating score={review.yield_rating + 1} total={5} />
