@@ -59,6 +59,16 @@
     "add_location": "Add a location",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
+  "layouts": {
+    "application": {
+      "menu": {
+        "project": "The project",
+        "data": "The data",
+        "sharing": "Sharing the harvest",
+        "press": "In the press"
+      }
+    }
+  },
   "pages": {
     "about": {
       "ff_disclaimer_html": "Falling Fruit is not associated with Fallen Fruit. Fallen Fruit can be found at <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
@@ -90,6 +100,10 @@
       "closing_remarks_para1_html": "Falling Fruit is a 501(c)(3) (tax-exempt) public charity based in Boulder, Colorado. As a result, donations within the United States are tax deductible. You may review our <a href=\"/501c3.pdf\">letter of exemption</a> from the IRS and verify our standing with <a href=\"http://apps.irs.gov/app/eos/pub78Search.do?\">IRS Publication 78</a> or the <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Colorado Secretary of State</a>. Also available are our <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">bylaws</a> and board meeting <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">minutes</a>.",
       "closing_remarks_para2_html": "Harvesting food in an urban setting comes with certain practical and moral considerations. For an introduction to the ethics of urban foraging, we recommend the following <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">summary</a>.",
       "closing_remarks_para3_html": "Information on Falling Fruit may be wrong or out of date. For example, many of the foraging maps migrated to Falling Fruit were hosted as public Google Maps on which markers were often moved accidentally, and municipal tree inventories are updated only (if ever) as trees are visited for maintenance. Be prepared to encounter inaccuracies in the field, and please edit the map as needed based on your discoveries. Ultimately, it is your responsibility to determine the identity, edibility, and location of a plant, and the responsibility of all to improve the quality of the map."
+    },
+    "sharing": {
+      "grow_pick_and_distribute": "Grow · Pick · Distribute",
+      "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     }
   },
   "users": {

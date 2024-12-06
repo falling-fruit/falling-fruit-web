@@ -339,6 +339,12 @@ const SettingsPage = ({ desktop }) => {
           <StyledSocialButtons />
           <StyledListEntry
             rightIcons={<ChevronRight size="16" />}
+            onClick={() => history.push('/changes')}
+          >
+            <PrimaryText>{t('glossary.activity')}</PrimaryText>
+          </StyledListEntry>
+          <StyledListEntry
+            rightIcons={<ChevronRight size="16" />}
             onClick={() => history.push('/about')}
           >
             <PrimaryText>
@@ -366,12 +372,6 @@ const SettingsPage = ({ desktop }) => {
             <PrimaryText>
               {t('layouts.application.menu.in_the_press')}
             </PrimaryText>
-          </StyledListEntry>
-          <StyledListEntry
-            rightIcons={<ChevronRight size="16" />}
-            onClick={() => history.push('/changes')}
-          >
-            <PrimaryText>{t('glossary.activity')}</PrimaryText>
           </StyledListEntry>
         </>
       )}
