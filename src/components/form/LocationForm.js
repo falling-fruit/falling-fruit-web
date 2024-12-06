@@ -198,15 +198,15 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
     }
 
     if (editingId) {
-      dispatch(editExistingLocation(editingId, locationValues)).then(
-        (action) => {
-          if (action.error) {
-            formikProps.setSubmitting(false)
-          } else {
-            history.push(`/locations/${action.payload.id}`)
-          }
-        },
-      )
+      dispatch(
+        editExistingLocation({ locationId: editingId, locationValues }),
+      ).then((action) => {
+        if (action.error) {
+          formikProps.setSubmitting(false)
+        } else {
+          history.push(`/locations/${action.payload.id}`)
+        }
+      })
     } else {
       dispatch(addNewLocation(locationValues)).then((action) => {
         if (action.error) {

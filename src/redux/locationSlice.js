@@ -31,7 +31,7 @@ export const addNewLocation = createAsyncThunk(
 
 export const editExistingLocation = createAsyncThunk(
   'location/editExistingLocation',
-  editLocation,
+  ({ locationId, locationValues }) => editLocation(locationId, locationValues),
 )
 
 export const addNewReview = createAsyncThunk(
