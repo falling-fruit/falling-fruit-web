@@ -21,8 +21,6 @@
     "activity": "Activity",
     "about": "About",
     "list": "List",
-    "tree_inventory": "Tree inventory",
-    "tree_inventory_plural": "Tree inventories",
     "address": "Address",
     "types": "Types",
     "data": "Data",
@@ -47,6 +45,16 @@
     "unverified": "Unverified",
     "submit": "Submit",
     "delete": "Delete",
+    "imported_datasets": "Imported datasets",
+    "tree_inventory": {
+      "one": "Tree inventory"
+    },
+    "locations": {
+      "other": "Locations"
+    },
+    "links": {
+      "one": "Link"
+    },
     "australia": "Australia",
     "belgium": "Belgium",
     "brazil": "Brazil",
@@ -124,6 +132,20 @@
     "sharing": {
       "grow_pick_and_distribute": "Grow · Pick · Distribute",
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
+    },
+    "data": {
+      "intro": "Falling Fruit is built on public data and the generosity of our users. We want urban foraging to reach as many people as possible, and we believe that everyone should have equal access to the fruits of our collective labor. In the spirit of openness, behold! The entire database",
+      "beware_html": "But beware! Once uncompressed, the database is a huge file that will crush most spreadsheet software. If you only need data for a small region, first try retrieving them using the download tool integrated into the <a href=\"/\">map</a>.",
+      "license_html": "If you are interested in using the data in your project, especially a commercial project, we suggest you contact us (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Unless otherwise specified, data are licensed as <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons – Attribution, Non-commercial, Share-alike). This means that you are free to use and distribute the data so long as you preserve the original author/source attributions and do not use it (without permission) for commercial applications. The source code for Falling Fruit is also open, and available on <a href=\"https://github.com/falling-fruit/\">GitHub</a>.",
+      "caveat_emptor_html": "We take no responsibility for the accuracy of the data - it is provided as is, <i>caveat emptor</i>. If you do something cool with the data, please <a href=\"mailto:feedback@fallingfruit.org\">let us know</a>!"
+    },
+    "datasets": {
+      "intro_html": "Falling Fruit aspires to be the most comprehensive and open geographic dataset of urban edibles. While our users explore, edit, and add locations using our <a href=\"/\">map</a>, we comb the known universe for pre-existing datasets and import them directly into the <a href=\"/data\">database</a>, uniting the efforts of foragers, foresters, and freegans everywhere. If you know of a dataset we've missed, please <a href=\"mailto:info@fallingfruit.org\">let us know</a>! You can also help us with the import process by formatting the data using the <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">import template</a>. Note that since imports must be performed manually, all changes to the original data made after the import are not reflected on Falling Fruit.",
+      "types_of_data": "Datasets imported into Falling Fruit fall into two main categories. \"Community maps\" are built by foragers and freegans as they peruse their communities for things to eat. We are indebted to the hardworking citizen-cartographers who have compiled this data. \"Tree inventories\" are compiled by cities, universities, and other institutions wishing to better document and care for their trees. We mine these vast datasets for food-producing species and add them to the map. To help us map your neighborhood fruit trees, contact your school or city urging them to share their tree inventory with us.",
+      "table_info": "Each dataset is listed by name, number of locations, and date imported. Expanding each row reveals further details about the data, the import process, and the license governing how the data may be used.",
+      "community_map": "Community map",
+      "type": "Type",
+      "date_imported": "Date imported"
     }
   },
   "users": {
