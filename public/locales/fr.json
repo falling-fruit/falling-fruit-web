@@ -20,8 +20,6 @@
   "glossary": {
     "about": "À propos",
     "list": "Liste",
-    "tree_inventory": "Inventaire d'arbres",
-    "tree_inventory_plural": "Inventaires d'arbres",
     "address": "Adresse",
     "types": "Types",
     "data": "Données",
@@ -47,6 +45,16 @@
     "unverified": "Non vérifié",
     "submit": "Soumettre",
     "delete": "Supprimer",
+    "imported_datasets": "Données importées",
+    "tree_inventory": {
+      "one": "Inventaire d'arbres"
+    },
+    "locations": {
+      "other": "Endroits"
+    },
+    "links": {
+      "one": "Lien"
+    },
     "australia": "Australie",
     "belgium": "Belgique",
     "canada": "Canada",
@@ -121,6 +129,20 @@
     "sharing": {
       "grow_pick_and_distribute": "Cultiver · Récolter · Distribuer",
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l’espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d’autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
+    },
+    "data": {
+      "intro": "C’est grâce à des bases de données publiques et à la générosité de nos utilisateurs que Falling Fruit existe. Nous voulons que le plus grand nombre de personnes possible découvre le glanage, et nous pensons que tout le monde doit avoir le même accès aux fruits de notre travail collectif. Dans cet esprit, voici notre base de données complète !",
+      "beware_html": "Attention! Une fois décompressées, les données deviennent un fichier énorme qui écrase la plupart des logiciels de tableur. Si vous recherchez seulement les données d'une zone limitée, essayez d'abord de récupérer les points d'intérêts avec l'outil de téléchargement intégré à la <a href=\"/\">carte</a>.",
+      "license_html": "Si vous souhaitez utiliser ces données dans le cadre d’un de vos projets, notamment un projet commercial, nous vous conseillons de nous contacter (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Sauf indication contraire, les données sont sous licence <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons – Attribution, Pas d’utilisation commerciale, Partage dans les mêmes conditions). Cela signifie que vous être libre d’utiliser ou de distribuer ces données tant que vous créditez l’auteur/la source et que vous ne l’utilisez pas (sans permission) pour des projets commerciaux. Le code source de Falling Fruit est également ouvert et disponible à <a href=\"https://github.com/falling-fruit/\">GitHub</a>.",
+      "caveat_emptor_html": "Nous ne sommes pas responsables de la précision des données - elles sont fournies telles quelles, <i>caveat emptor</i>. Si vous faites quelque chose de cool avec ces données, <a href=\"mailto:feedback@fallingfruit.org\">faites-le nous savoir</a>!"
+    },
+    "datasets": {
+      "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l’univers au peigne fin, à la recherche d’autres informations que nous ajoutons à notre <a href=\"/data\">base de données</a>, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu’il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n’hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d’importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d’importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d’origine après importation ne seront pas reportés sur Falling Fruit.",
+      "types_of_data": "Il y a deux catégories d’ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d’arbres» sont compilés par des villes, des universités et d’autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s’en occuper. Nous parcourons ces larges bases de données à la recherche d’espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d’arbres avec nous.",
+      "table_info": "Chaque ensemble de données est listé par nom, nombre de sites et date d’importation. En élargissant chaque ligne de données, vous verrez d’autres détails concernant les données, l’importation et la licence relative aux conditions d’utilisation de ces données.",
+      "community_map": "Cartes communautaires",
+      "type": "Type",
+      "date_imported": "Date d'importation"
     }
   },
   "users": {

@@ -121,7 +121,7 @@ const Filter = () => {
         <LabeledCheckbox
           field="muni"
           value={muni}
-          label={t('glossary.tree_inventory', { count: 2 })}
+          label={t('glossary.tree_inventory.one', { count: 2 })}
           onChange={(checked) => dispatch(muniChanged(checked))}
         />
         <LabeledCheckbox

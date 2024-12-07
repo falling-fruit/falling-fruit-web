@@ -9,7 +9,20 @@ import X from '../../constants/X.svg'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
-import { TablePreviewLink } from './DataTableProperties'
+
+const TablePreviewLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+
+  img {
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+`
 
 const OrganizationName = styled.span`
   ${({ $isActive }) =>
