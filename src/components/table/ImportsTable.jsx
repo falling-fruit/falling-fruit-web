@@ -26,24 +26,6 @@ const ImportsTable = () => {
     }
     getImportData()
   }, [])
-  const FORMATTERS = {
-    muni: ({ muni }) =>
-      muni
-        ? t('glossary.tree_inventory.one')
-        : t('pages.datasets.community_map'),
-    link: ({ url }) =>
-      url && (
-        <a href={url} target="_blank" rel="noreferrer">
-          <LinkExternal size="14" color={theme.orange} />
-        </a>
-      ),
-    created_at: ({ created_at }) =>
-      new Date(created_at).toLocaleDateString(i18n.language, {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-      }),
-  }
 
   const columns = [
     {
@@ -51,7 +33,10 @@ const ImportsTable = () => {
       name: t('pages.datasets.type'),
       selector: (row) => row.muni,
       sortable: true,
-      format: FORMATTERS.muni,
+      format: ({ muni }) =>
+        muni
+          ? t('glossary.tree_inventory.one')
+          : t('pages.datasets.community_map'),
       minWidth: '10em',
     },
     {
@@ -73,7 +58,12 @@ const ImportsTable = () => {
       name: t('pages.datasets.date_imported'),
       selector: (row) => row.created_at,
       sortable: true,
-      format: FORMATTERS.created_at,
+      format: ({ created_at }) =>
+        new Date(created_at).toLocaleDateString(i18n.language, {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+        }),
       center: true,
       minWidth: '8em',
     },
@@ -81,7 +71,12 @@ const ImportsTable = () => {
       id: 'link',
       name: t('glossary.links.one'),
       selector: (row) => row.link,
-      format: FORMATTERS.link,
+      format: ({ url }) =>
+        url && (
+          <a href={url} target="_blank" rel="noreferrer">
+            <LinkExternal size="14" color={theme.orange} />
+          </a>
+        ),
       center: true,
       compact: true,
       width: '50px',
@@ -92,8 +87,14 @@ const ImportsTable = () => {
     const query = filterText.toLowerCase()
     const keywords = [
       item.name,
-      FORMATTERS.muni(item),
-      FORMATTERS.created_at(item),
+      item.muni
+        ? t('glossary.tree_inventory.one')
+        : t('pages.datasets.community_map'),
+      new Date(item.created_at).toLocaleDateString(i18n.language, {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+      }),
     ]
     return keywords.some((keyword) => keyword.toLowerCase().includes(query))
   })
