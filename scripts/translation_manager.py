@@ -10,14 +10,22 @@ import yaml
 class Component:
     def __init__(self, file_path):
         self.file_path = Path(file_path)
-        self.keys = self.extract_translation_keys()
+        self.keys = []
+        self.key_locations = {}  # Maps keys to their source files
+        if self.is_source_file():
+            self.extract_translation_keys()
+
+    def is_source_file(self):
+        return self.file_path.suffix.lower() in ['.js', '.jsx', '.ts', '.tsx']
 
     def extract_translation_keys(self):
         with open(self.file_path, 'r') as file:
             content = file.read()
-        pattern = r"t\(['\"](.+?)['\"]\)"
-        keys = re.findall(pattern, content)
-        return keys
+        pattern = r"\bt\(['\"](.+?)['\"]\)"
+        self.keys = re.findall(pattern, content)
+        for key in self.keys:
+            self.key_locations[key] = str(self.file_path)
+        return self.keys
 
 class LocaleFile:
     def __init__(self, file_path):
@@ -53,14 +61,27 @@ class JsonLocaleFile(LocaleFile):
             json.dump(self.data, file, indent=2, ensure_ascii=False)
 
 class TranslationManager:
-    def __init__(self, component_path, yaml_folder, json_folder):
-        self.component = Component(component_path) if component_path else None
+    def __init__(self, source_path, yaml_folder, json_folder):
+        self.source_path = Path(source_path) if source_path else None
+        self.components = []
+        if self.source_path:
+            if self.source_path.is_file():
+                self.components.append(Component(self.source_path))
+            else:
+                self.scan_source_files()
         self.yaml_folder = Path(yaml_folder) if yaml_folder else None
         self.json_folder = Path(json_folder) if json_folder else None
 
+    def scan_source_files(self):
+        for file_path in self.source_path.rglob('*'):
+            if file_path.is_file():
+                component = Component(file_path)
+                if component.keys:  # Only add components that have translation keys
+                    self.components.append(component)
+
     def migrate_translations(self):
-        if not self.component:
-            print("Error: No component file provided. Skipping migration.")
+        if not self.components:
+            print("Error: No source files with translations found. Skipping migration.")
             return
         if not self.yaml_folder.exists():
             print(f"Error: YAML folder '{self.yaml_folder}' does not exist.")
@@ -83,7 +104,11 @@ class TranslationManager:
                 added_keys = 0
                 edited_keys = 0
                 
-                for key in self.component.keys:
+                all_keys = set()
+                for component in self.components:
+                    all_keys.update(component.keys)
+        
+                for key in all_keys:
                     value = self.get_nested_value(yaml_locale.data.get(yaml_locale.lang_code, {}), key.split('.'))
                     if value is not None:
                         # Clean up the value before setting
@@ -107,14 +132,22 @@ class TranslationManager:
 
 
     def list_component_keys(self):
-        if not self.component:
-            print("Error: No component file provided.")
+        if not self.components:
+            print("Error: No source files with translations found.")
             return
-        if not self.component.keys:
-            print("No translation keys found in component.")
+
+        all_keys = []
+        for component in self.components:
+            for key in component.keys:
+                all_keys.append((component.key_locations[key], key))
+        
+        if not all_keys:
+            print("No translation keys found in any components.")
             return
-        for key in sorted(self.component.keys):
-            print(f"{key}")
+
+        # Sort by file path and then by key
+        for file_path, key in sorted(all_keys):
+            print(f"{file_path}\t{key}")
 
     @staticmethod
     def get_nested_value(dictionary, keys):
@@ -133,7 +166,8 @@ class TranslationManager:
 
 def main():
     parser = argparse.ArgumentParser(description="Manage translations")
-    parser.add_argument("--component_path", help="Path to the React component file")
+    parser.add_argument("--source_path", help="Path to source file or directory to scan for translations")
+    parser.add_argument("--component_path", help="Alias for --source_path (deprecated)", dest="source_path")
     parser.add_argument("--yaml_folder", help="Path to the folder containing YAML locale files")
     parser.add_argument("--json_folder", help="Path to the folder for output JSON locale files")
     parser.add_argument("--migrate", action="store_true", help="Migrate translations from YAML to JSON")
@@ -141,18 +175,18 @@ def main():
     
     args = parser.parse_args()
 
-    if args.migrate and (not args.yaml_folder or not args.json_folder or not args.component_path):
-        print("Error: --component_path, --yaml_folder, and --json_folder must be specified for migration.")
+    if args.migrate and (not args.yaml_folder or not args.json_folder or not args.source_path):
+        print("Error: --source_path, --yaml_folder, and --json_folder must be specified for migration.")
         parser.print_help()
         return
 
 
-    if args.list_in_component and not args.component_path:
-        print("Error: --component_path must be specified for --list-in-component")
+    if args.list_in_component and not args.source_path:
+        print("Error: --source_path must be specified for --list-in-component")
         parser.print_help()
         return
 
-    manager = TranslationManager(args.component_path, args.yaml_folder, args.json_folder)
+    manager = TranslationManager(args.source_path, args.yaml_folder, args.json_folder)
 
     if args.migrate:
         manager.migrate_translations()
