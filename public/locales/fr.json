@@ -87,10 +87,10 @@
   "layouts": {
     "application": {
       "menu": {
-        "project": "Le projet",
         "data": "Les données",
-        "sharing": "Partager la récolte",
-        "press": "Dans la presse"
+        "in_the_press": "Dans la presse",
+        "the_project": "Le projet",
+        "sharing_the_harvest": "Partager la récolte"
       }
     }
   },
