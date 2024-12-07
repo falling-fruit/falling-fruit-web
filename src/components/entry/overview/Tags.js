@@ -45,7 +45,7 @@ const EntryTags = ({ locationData }) => {
           color={theme.tag.unverified}
           backgroundColor={theme.transparentPink}
         >
-          {t('Unverified')}
+          {t('glossary.unverified')}
         </Tag>
       )}
     </TagList>
