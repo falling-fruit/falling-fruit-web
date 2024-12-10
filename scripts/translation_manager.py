@@ -21,8 +21,10 @@ class Component:
     def extract_translation_keys(self):
         with open(self.file_path, 'r') as file:
             content = file.read()
-        pattern = r"\bt\(['\"](.+?)['\"]\)"
-        self.keys = re.findall(pattern, content)
+        pattern = r"\bt\(['\"`](.+?)['\"`]\)"
+
+        # Strip dynamic parts like ${i} from translation keys
+        self.keys = [ re.sub(r'\.\${[^}]+}$', '', key) for key in re.findall(pattern, content)]
         for key in self.keys:
             self.key_locations[key] = str(self.file_path)
         return self.keys
@@ -47,6 +49,16 @@ class YamlLocaleFile(LocaleFile):
     def save_data(self):
         with open(self.file_path, 'w') as file:
             yaml.dump(self.data, file, allow_unicode=True)
+            
+    def remove_key(self, keys):
+        """Remove a nested key from the YAML data"""
+        current = self.data
+        for key in keys[:-1]:
+            if key not in current:
+                return
+            current = current[key]
+        if keys[-1] in current:
+            del current[keys[-1]]
 
 class JsonLocaleFile(LocaleFile):
     def load_data(self):
@@ -78,6 +90,38 @@ class TranslationManager:
                 component = Component(file_path)
                 if component.keys:  # Only add components that have translation keys
                     self.components.append(component)
+
+    def clean_yaml_translations(self):
+        if not self.components:
+            print("Error: No source files with translations found. Skipping cleanup.")
+            return
+        if not self.yaml_folder.exists():
+            print(f"Error: YAML folder '{self.yaml_folder}' does not exist.")
+            return
+
+        yaml_files = list(self.yaml_folder.glob('*.yml')) + list(self.yaml_folder.glob('*.yaml'))
+        if not yaml_files:
+            print(f"No YAML files found in {self.yaml_folder}")
+            return
+
+        for yaml_file in yaml_files:
+            yaml_locale = YamlLocaleFile(yaml_file)
+            removed_keys = 0
+            
+            all_keys = set()
+            for component in self.components:
+                all_keys.update(component.keys)
+            
+            for key in all_keys:
+                if self.get_nested_value(yaml_locale.data.get(yaml_locale.lang_code, {}), key.split('.')):
+                    yaml_locale.remove_key([yaml_locale.lang_code] + key.split('.'))
+                    removed_keys += 1
+            
+            if removed_keys > 0:
+                yaml_locale.save_data()
+                print(f"Removed {removed_keys} keys from {yaml_file}")
+            else:
+                print(f"No keys to remove from {yaml_file}")
 
     def migrate_translations(self):
         if not self.components:
@@ -172,6 +216,7 @@ def main():
     parser.add_argument("--json_folder", help="Path to the folder for output JSON locale files")
     parser.add_argument("--migrate", action="store_true", help="Migrate translations from YAML to JSON")
     parser.add_argument("--list-in-component", action="store_true", help="List all translation keys in the component file")
+    parser.add_argument("--clean-yaml", action="store_true", help="Remove keys found in components from YAML files")
     
     args = parser.parse_args()
 
@@ -187,6 +232,13 @@ def main():
         return
 
     manager = TranslationManager(args.source_path, args.yaml_folder, args.json_folder)
+
+    if args.clean_yaml:
+        if not args.yaml_folder or not args.source_path:
+            print("Error: --source_path and --yaml_folder must be specified for cleaning YAML files.")
+            parser.print_help()
+            return
+        manager.clean_yaml_translations()
 
     if args.migrate:
         manager.migrate_translations()
