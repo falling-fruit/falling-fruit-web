@@ -35,11 +35,11 @@ const RevealedFromUnderneath = styled.div`
   ${({ isDrawerFullyOpen }) =>
     isDrawerFullyOpen &&
     `pointer-events: none;
-    
+
   > * {
     pointer-events: auto;
   }
-    
+
     `}
   ${({ targetHeight, progress }) =>
     `
@@ -81,6 +81,11 @@ const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
   ${({ whiteBackground }) => whiteBackground && `background: white;`}
+  pointer-events: none;
+
+  button {
+    pointer-events: auto;
+  }
 
   > div {
     display: flex;
