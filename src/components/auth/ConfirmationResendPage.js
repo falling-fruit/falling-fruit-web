@@ -19,7 +19,7 @@ const ConfirmationResendPage = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
 
   if (!isLoading && user) {
-    toast.info('You are already signed in.')
+    toast.info(t('devise.failure.already_authenticated'))
     return <Redirect to={pathWithCurrentView('/map')} />
   }
 

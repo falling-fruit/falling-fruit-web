@@ -39,7 +39,7 @@ const MainPane = () => {
         greyedOut={!isZoomSufficient}
         onClick={handleAddLocation}
       >
-        {t('menu.add_location')}
+        {t('glossary.add_source')}
       </AddLocationButton>
     </>
   )
