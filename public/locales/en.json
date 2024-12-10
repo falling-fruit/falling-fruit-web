@@ -74,7 +74,10 @@
     "sweden": "Sweden",
     "switzerland": "Switzerland",
     "united_kingdom": "United Kingdom",
-    "united_states": "United States"
+    "united_states": "United States",
+    "season": "Season",
+    "access": "Access",
+    "add_source": "Add location"
   },
   "side_menu": {
     "regional": "Regional",
@@ -84,7 +87,6 @@
     "transit": "Transit"
   },
   "menu": {
-    "add_location": "Add a location",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
   "layouts": {
@@ -191,6 +193,9 @@
       "send_instructions": "You will receive an email with instructions on how to reset your password in a few minutes.",
       "no_token": "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.",
       "updated_not_active": "Your password has been changed successfully."
+    },
+    "failure": {
+      "already_authenticated": "You are already signed in."
     }
   },
   "layouts": {
@@ -224,7 +229,8 @@
     "form": {
       "comments_subtext": "Updates, access issues, plant health...",
       "comments": "Comments",
-      "fruiting_status": "Fruiting status"
+      "fruiting_status": "Fruiting status",
+      "description_subtext": "Location details, access issues, plant health ..."
     },
     "index": {
       "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!"

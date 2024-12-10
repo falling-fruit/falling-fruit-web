@@ -110,11 +110,11 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       <Textarea
         name="description"
         label={t('glossary.description')}
-        placeholder={t('glossary.locations.form.description_subtext')}
+        placeholder={t('locations.form.description_subtext')}
       />
       <Select
         name="access"
-        label="Property access"
+        label={t('glossary.access')}
         options={propertyAccessOptions}
         isSearchable={false}
         toFormikValue={(x) => x?.value}
@@ -123,7 +123,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
         }
         isClearable
       />
-      <Label>Seasonality</Label>
+      <Label>{t('glossary.season')}</Label>
       <InlineSelects>
         <Select
           name="season_start"
