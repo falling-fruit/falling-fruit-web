@@ -6,7 +6,6 @@ import { updateLastMapView } from './viewportSlice'
 
 export const GeolocationState = {
   INITIAL: 'INITIAL',
-  REQUESTED: 'REQUESTED',
   DENIED: 'DENIED',
   LOADING: 'LOADING',
   FIRST_LOCATION: 'FIRST_LOCATION',
@@ -23,7 +22,7 @@ export const geolocationSlice = createSlice({
   },
   reducers: {
     requestGeolocation: (state) => {
-      state.geolocationState = GeolocationState.REQUESTED
+      state.geolocationState = GeolocationState.LOADING
     },
     geolocationDenied: (state) => {
       state.geolocationState = GeolocationState.DENIED
@@ -31,9 +30,6 @@ export const geolocationSlice = createSlice({
     disableGeolocation: (state) => {
       state.geolocationState = GeolocationState.INITIAL
       state.geolocation = null
-    },
-    geolocationLoading: (state) => {
-      state.geolocationState = GeolocationState.LOADING
     },
     geolocationCentering: (state, action) => {
       state.geolocationState = GeolocationState.CENTERING
