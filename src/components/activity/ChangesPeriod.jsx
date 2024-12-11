@@ -1,10 +1,13 @@
 import { Map } from '@styled-icons/boxicons-regular'
 import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import { setAnchorElementId } from '../../redux/activitySlice'
+import { viewToString } from '../../utils/appUrl'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
 const AuthorLink = styled(Link)`
@@ -65,11 +68,14 @@ const LocationTypesList = ({ locations, onClickLink }) => (
         }
         return [curr]
       }, [])
-
       return (
         <React.Fragment key={`${loc.locationId}-${idx}`}>
           <LocationLink
-            to={`/locations/${loc.locationId}`}
+            to={`/locations/${loc.locationId}/${viewToString(
+              loc.coordinates.latitude,
+              loc.coordinates.longitude,
+              MIN_LOCATION_ZOOM,
+            )}`}
             onClick={onClickLink}
           >
             {typesWithSeparators}
@@ -87,29 +93,29 @@ const ActivityText = styled.span`
 
 const ActivityTextComponent = ({
   location,
-  coordinates,
   author,
   userId,
-  type,
+  interactionType,
   onClickLink,
 }) => {
   const locationParts = [location.city, location.state, location.country]
   const hasLocationInfo = locationParts.filter(Boolean).length > 0
-  const hasCoordinates = coordinates.latitude && coordinates.longitude
+  const { t } = useTranslation()
 
   return (
     <ActivityText>
-      {type} in{' '}
-      {hasLocationInfo
-        ? locationParts.filter(Boolean).join(', ')
-        : hasCoordinates && (
-            <>
-              <Map size="1em" />
-              {` ${coordinates.latitude.toFixed(4)}, ${coordinates.longitude.toFixed(
-                4,
-              )}`}
-            </>
-          )}
+      {t('changes.change_in_city', {
+        type: t(`changes.type.${interactionType}`),
+        city: '',
+      })}
+      {hasLocationInfo ? (
+        locationParts.filter(Boolean).join(', ')
+      ) : (
+        <>
+          <Map style={{ verticalAlign: 'text-top' }} size="1em" />
+          {location.coordinatesGrid}
+        </>
+      )}
       {author && ' — '}
       {author && (
         <>
@@ -126,23 +132,37 @@ const ActivityTextComponent = ({
   )
 }
 
+const formatPeriodName = (daysAgo, t) => {
+  if (daysAgo === 0) {
+    return t('time.last_24_hours')
+  } else if (daysAgo === 1) {
+    const time = t('time.days.one', { count: daysAgo })
+    return t('time.time_ago', { time })
+  } else {
+    const time = t('time.days.other', { count: daysAgo })
+    return t('time.time_ago', { time })
+  }
+}
+
 const ChangesPeriod = ({ period }) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const onClickLink = useCallback(
-    () => dispatch(setAnchorElementId(period.periodName)),
-    [dispatch, period.periodName],
+    () => dispatch(setAnchorElementId(period.daysAgo.toString())),
+    [dispatch, period.daysAgo],
   )
+  const { t } = useTranslation()
+
   return (
-    <div id={period.periodName}>
-      <h3>{period.periodName}</h3>
+    <div id={period.daysAgo}>
+      <h3>{formatPeriodName(period.daysAgo, t)}</h3>
       <ListChanges>
         {period.activities.map((activity, index) => (
           <ListItem key={index} isDesktop={isDesktop}>
-            {['added', 'edited', 'visited'].map((type) => {
-              const locations = activity[type]
+            {['added', 'edited', 'visited'].map((interactionType) => {
+              const locations = activity[interactionType]
               return locations.length > 0 ? (
-                <p key={type}>
+                <p key={interactionType}>
                   <LocationTypesList
                     locations={locations}
                     onClickLink={onClickLink}
@@ -152,7 +172,7 @@ const ChangesPeriod = ({ period }) => {
                     coordinates={activity.coordinates}
                     author={activity.author}
                     userId={activity.userId}
-                    type={type}
+                    interactionType={interactionType}
                     onClickLink={onClickLink}
                   />
                 </p>

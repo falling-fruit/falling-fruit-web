@@ -92,10 +92,10 @@
   "layouts": {
     "application": {
       "menu": {
-        "data": "The data",
-        "in_the_press": "In the press",
         "the_project": "The project",
-        "sharing_the_harvest": "Sharing the harvest"
+        "the_data": "The data",
+        "sharing_the_harvest": "Sharing the harvest",
+        "in_the_press": "In the press"
       }
     }
   },
@@ -198,16 +198,6 @@
       "already_authenticated": "You are already signed in."
     }
   },
-  "layouts": {
-    "application": {
-      "menu": {
-        "the_project": "The project",
-        "the_data": "The data",
-        "sharing_the_harvest": "Sharing the harvest",
-        "in_the_press": "In the press"
-      }
-    }
-  },
   "locations": {
     "infowindow": {
       "fruiting": ["Flowers", "Unripe fruit", "Ripe fruit"],
@@ -239,5 +229,23 @@
   "problems": {
     "problem_type": "Problem type",
     "description_subtext": "Any information that might help us evaluate the problem"
+  },
+  "changes": {
+    "type": {
+      "added": "added",
+      "edited": "edited",
+      "grafted": "grafted",
+      "visited": "visited"
+    },
+    "change_in_city": "{{type}} in {{city}}",
+    "recent_changes": "Recent changes"
+  },
+  "time": {
+    "last_24_hours": "Last 24 hours",
+    "days": {
+      "other": "{{count}} days",
+      "one": "{{count}} day"
+    },
+    "time_ago": "{{time}} ago"
   }
 }

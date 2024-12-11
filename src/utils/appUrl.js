@@ -1,3 +1,10 @@
+export const viewToString = (lat, lng, zoom) => {
+  // 7 decimal places gives precision to 1 cm
+  // Normalize longitude to -180 to 180 range
+  const normalizedLng = ((lng + 540) % 360) - 180
+  return `@${lat.toFixed(7)},${normalizedLng.toFixed(7)},${zoom}z`
+}
+
 export const parseCurrentUrl = () => {
   const { pathname } = new URL(window.location.href)
   const stateIndex = pathname.indexOf('/@')
@@ -58,10 +65,5 @@ export const currentPathWithView = (view) => {
 
   const path = stateIndex === -1 ? pathname : pathname.substring(0, stateIndex)
 
-  // 7 decimal places gives precision to 1 cm
-  // Normalize longitude to -180 to 180 range
-  const normalizedLng = ((view.center.lng + 540) % 360) - 180
-  return `${path}/@${view.center.lat.toFixed(7)},${normalizedLng.toFixed(7)},${
-    view.zoom
-  }z`
+  return `${path}/${viewToString(view.center.lat, view.center.lng, view.zoom)}`
 }

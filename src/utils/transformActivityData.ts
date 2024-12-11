@@ -5,6 +5,10 @@ interface LocationTypes {
   locationId: number
   typeIds: number[]
   types: Array<{ commonName?: string; scientificName?: string }>
+  coordinates: {
+    latitude: number
+    longitude: number
+  }
 }
 
 interface ActivityGroup {
@@ -14,10 +18,7 @@ interface ActivityGroup {
     city: string
     state: string
     country: string
-  }
-  coordinates: {
-    latitude: number
-    longitude: number
+    coordinatesGrid: string
   }
   date: string
   added: LocationTypes[]
@@ -26,21 +27,14 @@ interface ActivityGroup {
 }
 
 interface TimePeriodGroup {
-  periodName: string
+  daysAgo: number
   activities: ActivityGroup[]
 }
 
-function getTimePeriod(date: Date): string {
+function getDaysAgo(date: Date): number {
   const now = new Date()
   const hoursAgo = Math.floor((now.getTime() - date.getTime()) / (1000 * 3600))
-
-  if (hoursAgo < 24) {
-    return 'Last 24 Hours'
-  }
-  if (hoursAgo < 48) {
-    return '1 Day Ago'
-  }
-  return `${Math.floor(hoursAgo / 24)} Days Ago`
+  return Math.floor(hoursAgo / 24)
 }
 
 export function transformActivityData(
@@ -53,35 +47,35 @@ export function transformActivityData(
       groups: Record<string, components['schemas']['LocationChange'][]>,
       change,
     ) => {
-      const periodName = getTimePeriod(new Date(change.created_at))
-      groups[periodName] = groups[periodName] || []
-      groups[periodName].push(change)
+      const daysAgo = getDaysAgo(new Date(change.created_at))
+      groups[daysAgo] = groups[daysAgo] || []
+      groups[daysAgo].push(change)
       return groups
     },
     {},
   )
 
   // Transform each time period
-  return Object.entries(changesByDate).map(([periodName, periodChanges]) => {
+  return Object.entries(changesByDate).map(([daysAgo, periodChanges]) => {
     // Group changes by unique user+location+date combination
     const groupedActivities = new Map<string, ActivityGroup>()
 
     periodChanges.forEach((change) => {
       const date = change.created_at.split('T')[0]
-      const groupKey = `${change.author}-${change.city}-${date}`
+      const locationKey = change.city
+        ? `${change.city},${change.state},${change.country}`
+        : `${change.lat.toFixed(4)},${change.lng.toFixed(4)}`
+      const groupKey = `${change.author}-${locationKey}-${date}`
 
       if (!groupedActivities.has(groupKey)) {
         groupedActivities.set(groupKey, {
           author: change.author,
           userId: change.user_id,
-          coordinates: {
-            latitude: change.lat,
-            longitude: change.lng,
-          },
           location: {
             city: change.city,
             state: change.state,
             country: change.country,
+            coordinatesGrid: `${change.lat.toFixed(4)},${change.lng.toFixed(4)}`,
           },
           date,
           added: [],
@@ -103,6 +97,10 @@ export function transformActivityData(
         locationId: change.location_id,
         typeIds: change.type_ids,
         types,
+        coordinates: {
+          latitude: change.lat,
+          longitude: change.lng,
+        },
       }
       switch (change.description) {
         case 'added':
@@ -141,7 +139,7 @@ export function transformActivityData(
     })
 
     return {
-      periodName,
+      daysAgo: parseInt(daysAgo),
       activities: Array.from(groupedActivities.values()),
     }
   })
