@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -36,6 +37,7 @@ const ActivityPage = () => {
   const dispatch = useDispatch()
 
   const loadMoreRef = useRef()
+  const { t } = useTranslation()
 
   const { typesAccess } = useSelector((state) => state.type)
   const { locationChanges, isLoading } = useSelector((state) => state.activity)
@@ -83,10 +85,10 @@ const ActivityPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate from="Settings">
-        <h1>Recent Changes</h1>
+        <h1>{t('changes.recent_changes')}</h1>
         {locationChanges.length > 0 &&
           groupedData.map((period) => (
-            <ChangesPeriod key={period.periodName} period={period} />
+            <ChangesPeriod key={period.daysAgo} period={period} />
           ))}
         <div ref={loadMoreRef}></div>
         {isLoading && (

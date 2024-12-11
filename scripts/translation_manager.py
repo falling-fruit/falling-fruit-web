@@ -21,7 +21,7 @@ class Component:
     def extract_translation_keys(self):
         with open(self.file_path, 'r') as file:
             content = file.read()
-        pattern = r"\bt\(['\"`](.+?)['\"`]\)"
+        pattern = r"\bt\(['\"`](.+?)['\"`]"
 
         # Strip dynamic parts like ${i} from translation keys
         self.keys = [ re.sub(r'\.\${[^}]+}$', '', key) for key in re.findall(pattern, content)]
