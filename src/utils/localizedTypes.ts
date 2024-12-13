@@ -19,6 +19,7 @@ export type LocalizedType = {
   taxonomicRank: number
   urls: { [url: string]: string }
   categories: string[]
+  synonyms: string[]
 }
 
 type TypeSelectMenuEntry = {
@@ -26,6 +27,7 @@ type TypeSelectMenuEntry = {
   label: string
   scientificName: string
   commonName: string
+  synonyms: string[]
   taxonomicRank: number
 }
 
@@ -38,6 +40,8 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
     commonName = type.common_names?.en?.[0] || ''
   }
 
+  const synonyms = type.common_names?.[language]?.slice(1) || []
+
   return {
     id: type.id,
     parentId: type.pending ? PENDING_ID : type.parent_id || 0,
@@ -46,6 +50,7 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
     taxonomicRank: type.taxonomic_rank || 0,
     urls: type.urls || {},
     categories: type.categories || [],
+    synonyms,
   }
 }
 
@@ -63,7 +68,8 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
 }
 
 const toMenuEntry = (localizedType: LocalizedType) => {
-  const { id, commonName, scientificName, taxonomicRank } = localizedType
+  const { id, commonName, scientificName, taxonomicRank, synonyms } =
+    localizedType
   const label =
     scientificName && commonName
       ? `${scientificName} (${commonName})`
@@ -76,6 +82,7 @@ const toMenuEntry = (localizedType: LocalizedType) => {
     commonName,
     scientificName,
     taxonomicRank,
+    synonyms,
   }
 }
 
@@ -179,6 +186,7 @@ export const typesAccessInLanguage = (
       taxonomicRank: 0,
       urls: {},
       categories: [],
+      synonyms: [],
     })
   }
   return createTypesAccess(toDisplayOrder(localizedTypes))
