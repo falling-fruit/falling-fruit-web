@@ -67,18 +67,16 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
   return new TypesAccess(localizedTypes, idIndex, childrenById)
 }
 
+export const TOKEN_START = '^'
+
 const toMenuEntry = (localizedType: LocalizedType) => {
   const { id, commonName, scientificName, taxonomicRank, synonyms } =
     localizedType
-  const label =
-    scientificName && commonName
-      ? `${scientificName} (${commonName})`
-      : scientificName
-        ? scientificName
-        : `"${commonName}"`
   return {
     value: id,
-    label: label,
+    label: [commonName, scientificName, ...synonyms]
+      .map((x) => `${TOKEN_START}${x}`)
+      .join(''),
     commonName,
     scientificName,
     taxonomicRank,
