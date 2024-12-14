@@ -118,6 +118,8 @@ const Search = (props) => {
       ? data
       : []
 
+  const inputRef = useRef()
+
   useEffect(() => {
     if (googleMap) {
       init()
@@ -165,6 +167,7 @@ const Search = (props) => {
       )
       dispatch(selectPlace({ place: placeBounds }))
     }
+    inputRef.current?.blur()
   }
   const handleFocus = () => {
     setHasFocus(true)
@@ -185,6 +188,20 @@ const Search = (props) => {
           onChange={handleChange}
           onFocus={handleFocus}
           disabled={!ready}
+          ref={inputRef}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && suggestionsList.length > 0) {
+              // Expand choosing with Enter to include first suggestion
+              // (but don't clash with arrow down + enter)
+              const highlightedIndex =
+                document.querySelector('[data-highlighted]')
+              if (!highlightedIndex) {
+                e.preventDefault()
+                const firstSuggestion = suggestionsList[0]
+                handleSelect(firstSuggestion.description)
+              }
+            }
+          }}
           icon={
             value === '' ? (
               <SearchAlt2 />
