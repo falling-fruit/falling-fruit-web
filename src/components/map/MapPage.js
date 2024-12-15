@@ -167,7 +167,7 @@ const MapPage = ({ isDesktop }) => {
 
   const currentZoom = googleMap?.getZoom()
 
-  const place = useSelector((state) => state.place.selectedPlace?.location)
+  const place = useSelector((state) => state.place.selectedPlace)
 
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
@@ -387,9 +387,16 @@ const MapPage = ({ isDesktop }) => {
               lng={geolocation.longitude}
             />
           )}
-          {place && currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT && (
-            <Place lat={place.lat} lng={place.lng} label={place.description} />
-          )}
+          {place &&
+            place.location &&
+            place.view &&
+            place.view.zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT && (
+              <Place
+                lat={place.location.lat}
+                lng={place.location.lng}
+                label={place.location.description}
+              />
+            )}
           {clusters.map((cluster) => (
             <Cluster
               key={JSON.stringify(cluster)}
