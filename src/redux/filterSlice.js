@@ -12,7 +12,7 @@ export const fetchFilterCounts = createAsyncThunk(
     const { lastMapView } = state.viewport
     const isOpen = state.filter.isOpenInMobileLayout || state.misc.isDesktop
     if (isOpen && lastMapView) {
-      const { muni, invasive } = state.filter
+      const { muni } = state.filter
       const { bounds, zoom, center: _ } = lastMapView
       const counts = await getTypeCounts(
         // Match zoom level used in getClusters
@@ -20,7 +20,6 @@ export const fetchFilterCounts = createAsyncThunk(
         selectParams({
           types: undefined,
           muni,
-          invasive,
           bounds,
           zoom: zoom + 1,
           center: undefined,
@@ -44,7 +43,6 @@ export const filterSlice = createSlice({
     types: null,
     muni: true,
     isOpenInMobileLayout: false,
-    invasive: false,
     isLoading: false,
     countsById: {},
   },

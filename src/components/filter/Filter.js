@@ -4,11 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import {
-  invasiveChanged,
-  muniChanged,
-  selectionChanged,
-} from '../../redux/viewChange'
+import { muniChanged, selectionChanged } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
 import Input from '../ui/Input'
 import FilterButtons from './FilterButtons'
@@ -20,33 +16,35 @@ const EdibleTypeText = styled.p`
   font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
-  margin-top: 18px;
-  margin-bottom: 7px;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 0em;
+  }
 `
 
 const TreeFiltersContainer = styled.div`
-  margin: 8px 0;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   /* Provide vertical space when buttons wrap over multiple lines */
   line-height: 1.5rem;
 `
 
 const SearchInput = styled(Input)`
-  height: 36px;
-  padding: 9px 12px;
+  height: 2.5em;
+  padding: 0;
+  flex: 0;
   input {
+    margin-top: 1em;
+    margin-left: 0.75em;
+    margin-bottom: 1em;
+    margin-right: 0.75em;
     height: 100%;
   }
 `
-
-const MuniAndInvasiveCheckboxFilters = styled.div`
-  label:not(:last-child) {
-    margin-bottom: 8px;
-  }
-  label:first-child {
-    @media ${({ theme }) => theme.device.mobile} {
-      margin-top: 15px;
-    }
-  }
+const MuniCheckbox = styled.div`
+  margin-top: 1em;
+  margin-bottom: 1em;
 `
 
 const Filter = () => {
@@ -58,9 +56,7 @@ const Filter = () => {
   )
 
   const dispatch = useDispatch()
-  const { countsById, types, muni, invasive } = useSelector(
-    (state) => state.filter,
-  )
+  const { countsById, types, muni } = useSelector((state) => state.filter)
 
   const { typesAccess } = useSelector((state) => state.type)
   const { tree: selectTree, visibleTypeIds } = useMemo(
@@ -117,20 +113,15 @@ const Filter = () => {
           />
         )}
       </div>
-      <MuniAndInvasiveCheckboxFilters>
+
+      <MuniCheckbox>
         <LabeledCheckbox
           field="muni"
           value={muni}
           label={t('glossary.tree_inventory', { count: 2 })}
           onChange={(checked) => dispatch(muniChanged(checked))}
         />
-        <LabeledCheckbox
-          field="invasive"
-          value={invasive}
-          label={t('invasives')}
-          onChange={(checked) => dispatch(invasiveChanged(checked))}
-        />
-      </MuniAndInvasiveCheckboxFilters>
+      </MuniCheckbox>
     </>
   )
 }

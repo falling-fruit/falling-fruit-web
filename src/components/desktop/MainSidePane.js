@@ -10,8 +10,14 @@ import Button from '../ui/Button'
 import FilterWrapper from './FilterWrapper'
 
 const AddLocationButton = styled(Button)`
-  margin: 10px 10px;
-  padding: 15px 0;
+  margin-left: 0.75em;
+  margin-right: 0.75em;
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 0;
+  padding-right: 0;
   opacity: ${({ greyedOut }) => (greyedOut ? '0.5' : '1')};
   cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
 `

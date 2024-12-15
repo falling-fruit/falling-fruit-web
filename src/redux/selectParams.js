@@ -25,12 +25,11 @@ const convertCenter = (center) => ({
 })
 
 export const selectParams = (
-  { types, muni, invasive, bounds, zoom, center },
+  { types, muni, bounds, zoom, center },
   extraParams = {},
 ) => ({
   types: types && types.join(','),
   muni,
-  invasive,
   zoom,
   ...convertBounds(bounds),
   ...(center && convertCenter(center)), //If provided, the API will sort the locations returned by distance from center
