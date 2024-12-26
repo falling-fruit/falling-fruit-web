@@ -1,11 +1,20 @@
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import FormikAllSteps from './FormikAllSteps'
-import { FormikStepper } from './FormikStepper'
-import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
+export const ProgressButtons = styled.div`
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
 
-const StyledForm = styled.div`
+  button {
+    width: 110px;
+
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+  }
+`
+
+export const StyledForm = styled.div`
   box-sizing: border-box;
   width: 100%;
   padding: 0 10px;
@@ -28,33 +37,3 @@ const StyledForm = styled.div`
     }
   }
 `
-
-export const FormWrapper = ({
-  children,
-  onSubmit,
-  validate,
-  initialValues,
-  stepped = false,
-  renderButtons,
-}) => {
-  const StepDisplay = stepped ? FormikStepper : FormikAllSteps
-  const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const { Recaptcha, handlePresubmit: onPresubmit } =
-    useInvisibleRecaptcha(onSubmit)
-
-  return (
-    <StyledForm>
-      <StepDisplay
-        validateOnChange={false}
-        validate={validate}
-        initialValues={initialValues}
-        validateOnMount
-        onSubmit={isLoggedIn ? onSubmit : onPresubmit}
-        renderButtons={renderButtons}
-      >
-        {children}
-        {!isLoggedIn && <Recaptcha />}
-      </StepDisplay>
-    </StyledForm>
-  )
-}

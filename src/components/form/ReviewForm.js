@@ -1,3 +1,4 @@
+import { Form, Formik } from 'formik'
 import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +18,6 @@ import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
-import { ProgressButtons } from './FormikStepper'
 import {
   DateInput,
   PhotoUploader,
@@ -25,7 +25,8 @@ import {
   Select,
   Textarea,
 } from './FormikWrappers'
-import { FormWrapper } from './FormLayout'
+import { ProgressButtons, StyledForm } from './FormLayout'
+import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 const DeleteButton = styled(Button)`
   background-color: ${({ theme }) => theme.invalid};
@@ -185,42 +186,54 @@ export const ReviewForm = ({
     }
   }
 
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const { Recaptcha, handlePresubmit: onPresubmit } =
+    useInvisibleRecaptcha(handleSubmit)
+
   return (
-    <FormWrapper
-      onSubmit={handleSubmit}
-      initialValues={initialValues}
-      validate={({ review }) => validateReview(review)}
-      renderButtons={(formikProps) => {
-        const { isSubmitting, isValid, dirty } = formikProps
-        const isUploadingPhotos = formikProps.values.review.photos.some(
-          (p) => p.isUploading,
-        )
-        return (
-          <ProgressButtons>
-            <div style={{ textAlign: editingId ? 'center' : 'left' }}>
-              <Button
-                disabled={
-                  isSubmitting || !isValid || !dirty || isUploadingPhotos
-                }
-                type="submit"
-              >
-                {isSubmitting ? 'Submitting' : t('glossary.submit')}
-              </Button>
-              {editingId && (
-                <DeleteButton
-                  type="button"
-                  onClick={() => handleDelete(formikProps)}
-                >
-                  {t('glossary.delete')}
-                </DeleteButton>
-              )}
-            </div>
-          </ProgressButtons>
-        )
-      }}
-    >
-      <ReviewStep standalone hasHeading={editingId == null} />
-      <ReviewPhotoStep />
-    </FormWrapper>
+    <StyledForm>
+      <Formik
+        validate={({ review }) => validateReview(review)}
+        validateOnChange={false}
+        initialValues={initialValues}
+        validateOnMount
+        onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
+      >
+        {(formikProps) => {
+          const { isSubmitting, isValid, dirty } = formikProps
+          const isUploadingPhotos = formikProps.values.review.photos.some(
+            (p) => p.isUploading,
+          )
+
+          return (
+            <Form>
+              <ReviewStep standalone hasHeading={editingId == null} />
+              <ReviewPhotoStep />
+              <ProgressButtons>
+                <div style={{ textAlign: editingId ? 'center' : 'left' }}>
+                  <Button
+                    disabled={
+                      isSubmitting || !isValid || !dirty || isUploadingPhotos
+                    }
+                    type="submit"
+                  >
+                    {isSubmitting ? 'Submitting' : t('glossary.submit')}
+                  </Button>
+                  {editingId && (
+                    <DeleteButton
+                      type="button"
+                      onClick={() => handleDelete(formikProps)}
+                    >
+                      {t('glossary.delete')}
+                    </DeleteButton>
+                  )}
+                </div>
+              </ProgressButtons>
+              {!isLoggedIn && <Recaptcha />}
+            </Form>
+          )
+        }}
+      </Formik>
+    </StyledForm>
   )
 }

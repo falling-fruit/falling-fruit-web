@@ -1,5 +1,5 @@
 import { Map } from '@styled-icons/boxicons-solid'
-import { useFormikContext } from 'formik'
+import { Form, Formik, useFormikContext } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -27,11 +27,11 @@ import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { ProgressButtons, Step } from './FormikStepper'
 import { Checkbox, Select, Textarea } from './FormikWrappers'
-import { FormWrapper } from './FormLayout'
+import { ProgressButtons, StyledForm } from './FormLayout'
 import { ReviewPhotoStep, ReviewStep } from './ReviewForm'
 import TypesSelect from './TypesSelect'
+import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 const StyledPositionFieldLink = styled(Link)`
   color: ${({ theme }) => theme.orange};
@@ -151,7 +151,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   )
 }
 
-export const LocationForm = ({ editingId, initialValues, stepped }) => {
+export const LocationForm = ({ editingId, initialValues }) => {
   const reduxFormValues = useSelector((state) => state.location.form)
   const mergedInitialValues = {
     ...INITIAL_LOCATION_VALUES,
@@ -172,33 +172,6 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
     (position &&
       location &&
       !(position.lat === location.lat && position.lng === location.lng))
-
-  const formikSteps = [
-    <Step key={1} label="Step 1" validate={validateLocationStep}>
-      <LocationStep
-        key={1}
-        lat={position?.lat}
-        lng={position?.lng}
-        isDesktop={isDesktop}
-        editingId={editingId}
-        isLoading={isLoading}
-      />
-    </Step>,
-    ...(editingId
-      ? []
-      : [
-          <Step
-            key={2}
-            label="Step 2"
-            validate={({ review }) => validateReviewStep(review)}
-          >
-            <ReviewStep />
-          </Step>,
-          <Step key={3} label="Step 3" validate={validateLocation}>
-            <ReviewPhotoStep />
-          </Step>,
-        ]),
-  ]
 
   const handleSubmit = (
     { 'g-recaptcha-response': recaptcha, review, ...location },
@@ -244,36 +217,62 @@ export const LocationForm = ({ editingId, initialValues, stepped }) => {
     }
   }
 
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const { Recaptcha, handlePresubmit: onPresubmit } =
+    useInvisibleRecaptcha(handleSubmit)
+
   return (
-    <FormWrapper
-      validate={validateLocation}
-      initialValues={mergedInitialValues}
-      onSubmit={handleSubmit}
-      stepped={stepped}
-      renderButtons={(formikProps) => {
-        const { isSubmitting, isValid, dirty } = formikProps
-        const isUploadingPhotos = formikProps.values.review.photos.some(
-          (p) => p.isUploading,
-        )
-        const formDirty = dirty || positionDirty
-        return (
-          <ProgressButtons>
-            <Button secondary type="button" onClick={handleCancel}>
-              Cancel
-            </Button>
-            <Button
-              disabled={
-                isSubmitting || !isValid || !formDirty || isUploadingPhotos
-              }
-              type="submit"
-            >
-              {isSubmitting ? 'Submitting' : t('glossary.submit')}
-            </Button>
-          </ProgressButtons>
-        )
-      }}
-    >
-      {formikSteps}
-    </FormWrapper>
+    <StyledForm>
+      <Formik
+        validate={validateLocation}
+        validateOnChange={false}
+        initialValues={mergedInitialValues}
+        validateOnMount
+        onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
+      >
+        {(formikProps) => {
+          const { isSubmitting, isValid, dirty } = formikProps
+          const isUploadingPhotos = formikProps.values.review.photos.some(
+            (p) => p.isUploading,
+          )
+          const formDirty = dirty || positionDirty
+
+          return (
+            <Form>
+              <LocationStep
+                lat={position?.lat}
+                lng={position?.lng}
+                isDesktop={isDesktop}
+                editingId={editingId}
+                isLoading={isLoading}
+                validate={validateLocationStep}
+              />
+              {!editingId && (
+                <>
+                  <ReviewStep
+                    validate={({ review }) => validateReviewStep(review)}
+                  />
+                  <ReviewPhotoStep validate={validateLocation} />
+                </>
+              )}
+              <ProgressButtons>
+                <Button secondary type="button" onClick={handleCancel}>
+                  Cancel
+                </Button>
+                <Button
+                  disabled={
+                    isSubmitting || !isValid || !formDirty || isUploadingPhotos
+                  }
+                  type="submit"
+                >
+                  {isSubmitting ? 'Submitting' : t('glossary.submit')}
+                </Button>
+              </ProgressButtons>
+              {!isLoggedIn && <Recaptcha />}
+            </Form>
+          )
+        }}
+      </Formik>
+    </StyledForm>
   )
 }

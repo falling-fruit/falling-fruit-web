@@ -93,11 +93,11 @@ const MobileLayout = () => {
           {authRoutes}
           <Route path="/reviews/:reviewId/edit">
             {({ match }) => (
-              <EditReviewForm stepped editingId={match.params.reviewId} />
+              <EditReviewForm editingId={match.params.reviewId} />
             )}
           </Route>
           <Route path="/locations/:locationId/review">
-            <ReviewForm stepped />
+            <ReviewForm />
           </Route>
           <Route path="/locations/:locationId/edit/details">
             {({ match }) => (
