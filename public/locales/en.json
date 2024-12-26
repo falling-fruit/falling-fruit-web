@@ -90,6 +90,12 @@
     "zoom_in_to_add_location": "Zoom in to add location"
   },
   "layouts": {
+    "page_title": {
+      "editing_location": "Editing Location",
+      "adding_location": "Adding Location",
+      "adding_review": "Adding Review",
+      "editing_review": "Editing Review"
+    },
     "application": {
       "menu": {
         "the_project": "The project",

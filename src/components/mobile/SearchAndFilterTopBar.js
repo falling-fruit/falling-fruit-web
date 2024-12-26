@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 
 import Filter from '../filter/Filter'
+import Search from '../search/Search'
+import TopBar from '../ui/TopBar'
 
 const StyledFilter = styled.div`
   box-sizing: border-box;
@@ -15,7 +17,7 @@ const StyledFilter = styled.div`
     `}
 `
 
-const FilterWrapper = () => {
+const SearchAndFilterTopBar = () => {
   const filterOpen = useSelector((state) => state.filter.isOpenInMobileLayout)
   const { typesAccess } = useSelector((state) => state.type)
 
@@ -24,10 +26,13 @@ const FilterWrapper = () => {
   }
 
   return (
-    <StyledFilter isOpen={filterOpen}>
-      <Filter />
-    </StyledFilter>
+    <TopBar>
+      <Search />
+      <StyledFilter isOpen={filterOpen}>
+        <Filter />
+      </StyledFilter>
+    </TopBar>
   )
 }
 
-export default FilterWrapper
+export default SearchAndFilterTopBar

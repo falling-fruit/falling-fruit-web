@@ -7,9 +7,7 @@ import styled from 'styled-components/macro'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import EntryDesktop from '../entry/EntryDesktop'
-import { EditLocationForm } from '../form/EditLocation'
-import { EditReviewForm } from '../form/EditReview'
-import { LocationForm } from '../form/LocationForm'
+import { formRoutesDesktop } from '../form/formRoutes'
 import SettingsPage from '../settings/SettingsPage'
 import BackButton from '../ui/BackButton'
 import MainSidePane from './MainSidePane'
@@ -71,50 +69,7 @@ const SidePane = () => {
         </Route>
         <Route>
           <Switch>
-            <Route path="/reviews/:reviewId/edit">
-              <StyledNavBack>
-                <BackButton
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    history.push(`/locations/${review?.location_id}`)
-                  }}
-                >
-                  <ArrowBack />
-                  {t('back')}
-                </BackButton>
-              </StyledNavBack>
-              <Header>Editing My Review</Header>
-              <EditReviewForm />
-            </Route>
-            <Route path="/locations/:locationId/edit">
-              {({ match }) => (
-                <>
-                  <StyledNavBack>
-                    <BackButton
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        history.push(`/locations/${match.params.locationId}`)
-                      }}
-                    >
-                      <ArrowBack />
-                      {t('back')}
-                    </BackButton>
-                  </StyledNavBack>
-                  <Header>Editing Location</Header>
-                  <EditLocationForm />
-                </>
-              )}
-            </Route>
-            <Route path="/locations/new">
-              <StyledNavBack>
-                <BackButton onClick={goToMap}>
-                  <ArrowBack />
-                  {t('back')}
-                </BackButton>
-              </StyledNavBack>
-              <Header>Adding Location</Header>
-              <LocationForm />
-            </Route>
+            {formRoutesDesktop}
             <Route path="/settings">
               <StyledNavBack>
                 <BackButton
@@ -160,7 +115,7 @@ const SidePane = () => {
                       <BackButton
                         onClick={() =>
                           history.push(
-                            `/locations/${match.params.locationId}/edit`,
+                            `/locations/${match.params.locationId}/edit/details`,
                           )
                         }
                       >

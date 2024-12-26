@@ -94,12 +94,10 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.location = null
       state.isBeingEdited = false
-      if (state.locationId !== 'new') {
-        state.locationId = 'new'
-        state.position = action.payload
-        state.tooltipOpen = true
-      }
+      state.locationId = 'new'
+      state.tooltipOpen = true
       state.form = null
+      state.position = action.payload
       state.streetViewOpen = false
     },
     updatePosition: (state, action) => {
