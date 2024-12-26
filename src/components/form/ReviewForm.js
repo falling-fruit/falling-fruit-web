@@ -111,13 +111,11 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
           }
         />
       </FormRatingWrapper>
+
+      <PhotoUploader name="review.photos" label="Upload images" />
     </>
   )
 }
-
-export const ReviewPhotoStep = () => (
-  <PhotoUploader name="review.photos" label="Upload images" />
-)
 
 const RatingLabeledRow = styled(LabeledRow)`
   > div > label {
@@ -208,7 +206,6 @@ export const ReviewForm = ({
           return (
             <Form>
               <ReviewStep standalone hasHeading={editingId == null} />
-              <ReviewPhotoStep />
               <ProgressButtons>
                 <div style={{ textAlign: editingId ? 'center' : 'left' }}>
                   <Button

@@ -27,7 +27,7 @@ import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Checkbox, Select, Textarea } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
-import { ReviewPhotoStep, ReviewStep } from './ReviewForm'
+import { ReviewStep } from './ReviewForm'
 import TypesSelect from './TypesSelect'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
@@ -247,7 +247,6 @@ export const LocationForm = ({ editingId, initialValues }) => {
               {!editingId && (
                 <>
                   <ReviewStep />
-                  <ReviewPhotoStep />
                 </>
               )}
               <ProgressButtons>
