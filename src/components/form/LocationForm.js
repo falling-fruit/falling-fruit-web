@@ -17,8 +17,6 @@ import {
   formToReview,
   isEmptyReview,
   validateLocation,
-  validateLocationStep,
-  validateReviewStep,
 } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -245,14 +243,11 @@ export const LocationForm = ({ editingId, initialValues }) => {
                 isDesktop={isDesktop}
                 editingId={editingId}
                 isLoading={isLoading}
-                validate={validateLocationStep}
               />
               {!editingId && (
                 <>
-                  <ReviewStep
-                    validate={({ review }) => validateReviewStep(review)}
-                  />
-                  <ReviewPhotoStep validate={validateLocation} />
+                  <ReviewStep />
+                  <ReviewPhotoStep />
                 </>
               )}
               <ProgressButtons>

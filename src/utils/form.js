@@ -13,7 +13,7 @@ export const isEmptyReview = (review) => {
   )
 }
 
-export const validateReviewStep = (review) => {
+const validateReviewStep = (review) => {
   const r = formToReview(review)
   if (r.fruiting !== null && !r.observed_on) {
     return {
@@ -32,16 +32,6 @@ const validatePhotosUploaded = (review) => {
   }
 
   return null
-}
-
-export const validatePhotoStep = (review) => {
-  if (isEmptyReview(review)) {
-    return {
-      review: { comment: true },
-    }
-  } else {
-    return validatePhotosUploaded(review)
-  }
 }
 
 export const validateReview = (review) => ({
@@ -86,10 +76,10 @@ export const reviewToForm = ({
   quality_rating: quality_rating === null ? '0' : String(quality_rating + 1),
 })
 
-export const isEveryPhotoUploaded = (photos) =>
+const isEveryPhotoUploaded = (photos) =>
   photos.every((photo) => !photo.isUploading)
 
-export const validateLocationStep = ({ types }) => {
+const validateLocationStep = ({ types }) => {
   const errors = {}
   if (types.length === 0) {
     errors.types = true
