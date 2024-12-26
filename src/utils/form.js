@@ -79,16 +79,11 @@ export const reviewToForm = ({
 const isEveryPhotoUploaded = (photos) =>
   photos.every((photo) => !photo.isUploading)
 
-const validateLocationStep = ({ types }) => {
+export const validateLocation = ({ review, ...location }) => {
   const errors = {}
-  if (types.length === 0) {
+  if (location.types.length === 0) {
     errors.types = true
   }
-  return errors
-}
-
-export const validateLocation = ({ review, ...location }) => {
-  const errors = validateLocationStep(location)
 
   if (!isEmptyReview(review)) {
     Object.assign(errors, validateReview(review))
