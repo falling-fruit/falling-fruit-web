@@ -8,17 +8,17 @@ import AccountPage from '../auth/AccountPage'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import EntryMobile from '../entry/EntryMobile'
-import { EditLocationForm } from '../form/EditLocation'
-import { EditReviewForm } from '../form/EditReview'
-import { LocationForm } from '../form/LocationForm'
-import { ReviewForm } from '../form/ReviewForm'
+import { formRoutesMobile } from '../form/formRoutes'
 import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
 import { PageTabs, TabList, TabPanels } from '../ui/PageTabs'
+import TopBar from '../ui/TopBar'
+import EditLocationPositionNav from './EditLocationPositionNav'
+import InitLocationNav from './InitLocationNav'
+import SearchAndFilterTopBar from './SearchAndFilterTopBar'
 import Tabs from './Tabs'
-import TopBarSwitch from './TopBarSwitch'
 
 const shouldDisplayMapPage = (pathname) => {
   if (matchPath(pathname, { path: '/map', exact: false, strict: false })) {
@@ -64,95 +64,101 @@ const MobileLayout = () => {
   const { tabIndex, handleTabChange, tabContent } = Tabs()
 
   return (
-    <PageTabs index={tabIndex} onChange={handleTabChange}>
+    <>
       <Helmet>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
         />
       </Helmet>
-      <TopBarSwitch />
-      <div
-        style={{
-          display: shouldDisplayMapPage(pathname) ? 'block' : 'none',
-          position: 'absolute',
-          top: '30px',
-          bottom: '0px',
-          left: 0,
-          right: 0,
-          zIndex: 1,
-        }}
-      >
-        <MapPage />
-      </div>
-      {connectRoutes}
-      <TabPanels style={{ paddingBottom: '50px' }}>
+      <PageTabs index={tabIndex} onChange={handleTabChange}>
+        <Switch>{formRoutesMobile}</Switch>
+        <div
+          style={{
+            display: shouldDisplayMapPage(pathname) ? 'block' : 'none',
+            position: 'absolute',
+            top: '30px',
+            bottom: '0px',
+            left: 0,
+            right: 0,
+            zIndex: 1,
+          }}
+        >
+          <MapPage />
+        </div>
+        {connectRoutes}
         <Switch>
-          {activityRoutes}
-          {aboutRoutes}
-          {authRoutes}
-          <Route path="/reviews/:reviewId/edit">
-            {({ match }) => (
-              <EditReviewForm editingId={match.params.reviewId} />
-            )}
-          </Route>
-          <Route path="/locations/:locationId/review">
-            <ReviewForm />
-          </Route>
-          <Route path="/locations/:locationId/edit/details">
-            {({ match }) => (
-              <EditLocationForm editingId={match.params.locationId} />
-            )}
-          </Route>
-          <Route path="/locations/new">
-            <LocationForm />
-          </Route>
-          <Route path={['/map', '/locations', '/list', '/settings']}>
+          <Route
+            path={[
+              '/reviews/:reviewId/edit',
+              '/locations/:locationId/review',
+              '/locations/:locationId/edit/details',
+              '/locations/new',
+            ]}
+          />
+          <Route>
             <Switch>
-              <Route path="/locations/init" />
-              <Route path="/locations/:locationId/edit/position" />
-              <Route path="/locations/:locationId">
-                {!streetView && <EntryMobile />}
+              <Route path="/locations/init">
+                <TopBar>
+                  <InitLocationNav />
+                </TopBar>
               </Route>
+              <Route path="/locations/:locationId/edit/position">
+                <TopBar>
+                  <EditLocationPositionNav />
+                </TopBar>
+              </Route>
+              <Route
+                path={['/map', '/list', '/locations/:locationId']}
+                component={SearchAndFilterTopBar}
+              />
             </Switch>
+            <TabPanels style={{ paddingBottom: '50px' }}>
+              <Switch>
+                {activityRoutes}
+                {aboutRoutes}
+                {authRoutes}
+                <Route path={['/map', '/locations', '/list', '/settings']}>
+                  <Switch>
+                    <Route path="/locations/init" />
+                    <Route path="/locations/:locationId/edit/position" />
+                    <Route path="/locations/:locationId">
+                      {!streetView && <EntryMobile />}
+                    </Route>
+                  </Switch>
+                  <Switch>
+                    <Route path="/list">
+                      <ListPage />
+                    </Route>
+                    <Route path="/settings">
+                      <SettingsPage />
+                    </Route>
+                    <Route path="/users/edit">
+                      <AccountPage />
+                    </Route>
+                  </Switch>
+                </Route>
+              </Switch>
+            </TabPanels>
             <Switch>
-              <Route path="/list">
-                <ListPage />
-              </Route>
-              <Route path="/settings">
-                <SettingsPage />
-              </Route>
-              <Route path="/users/edit">
-                <AccountPage />
+              <Route>
+                <TabList
+                  style={{
+                    zIndex: zIndex.mobileTablist,
+                    position: 'fixed',
+                    width: '100%',
+                    bottom: 0,
+                    height: '50px',
+                  }}
+                >
+                  {tabContent}
+                </TabList>
               </Route>
             </Switch>
           </Route>
         </Switch>
-      </TabPanels>
-      <Switch>
-        <Route
-          path={[
-            '/reviews/:reviewId/edit',
-            '/locations/:locationId/review',
-            '/locations/:locationId/edit/details',
-            '/locations/new',
-          ]}
-        />
-        <Route>
-          <TabList
-            style={{
-              zIndex: zIndex.mobileTablist,
-              position: 'fixed',
-              width: '100%',
-              bottom: 0,
-              height: '50px',
-            }}
-          >
-            {tabContent}
-          </TabList>
-        </Route>
-      </Switch>
-    </PageTabs>
+      </PageTabs>
+    </>
   )
 }
 

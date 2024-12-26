@@ -149,7 +149,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   )
 }
 
-export const LocationForm = ({ editingId, initialValues }) => {
+export const LocationForm = ({ editingId, initialValues, innerRef }) => {
   const reduxFormValues = useSelector((state) => state.location.form)
   const mergedInitialValues = {
     ...INITIAL_LOCATION_VALUES,
@@ -226,6 +226,7 @@ export const LocationForm = ({ editingId, initialValues }) => {
         initialValues={mergedInitialValues}
         validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
+        innerRef={innerRef}
       >
         {(formikProps) => {
           const { isSubmitting, isValid, dirty } = formikProps

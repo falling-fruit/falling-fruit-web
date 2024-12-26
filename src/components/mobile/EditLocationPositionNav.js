@@ -15,7 +15,7 @@ const Instructions = styled.span`
   margin-left: 15px;
 `
 
-const LocationPositionNav = () => {
+const EditLocationPositionNav = () => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const { locationId } = useParams()
@@ -79,4 +79,4 @@ const LocationPositionNav = () => {
   )
 }
 
-export default LocationPositionNav
+export default EditLocationPositionNav

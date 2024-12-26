@@ -154,7 +154,7 @@ const connectRoutes = [
    *
    * action: clear location in Redux
    */
-  <Route key="disconnect-location" path={['/map', '/locations/init']}>
+  <Route key="disconnect-location" path={['/map']}>
     {({ match }) => match && <DisconnectLocation />}
   </Route>,
   /*
