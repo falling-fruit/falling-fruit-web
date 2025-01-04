@@ -21,6 +21,7 @@ import { ReportButton } from './overview/ReportButton'
 import Tags from './overview/Tags'
 import TypesHeader from './overview/TypesHeader'
 import { ReviewButton } from './ReviewButton'
+import ReviewSummary from './ReviewSummary'
 import { formatISOString, formatMonth } from './textFormatters'
 
 const hasSeasonality = (locationData) =>
@@ -72,6 +73,7 @@ const EntryOverview = () => {
     locationId,
     location: locationData,
     pane,
+    reviews,
   } = useSelector((state) => state.location)
   const { locationsWithoutPanorama } = useSelector((state) => state.misc)
   const dispatch = useDispatch()
@@ -200,6 +202,7 @@ const EntryOverview = () => {
               </time>
             </p>
           </IconBesideText>
+          <ReviewSummary reviews={reviews} />
           <div>
             <ReviewButton />
             <ReportButton />
