@@ -6,7 +6,6 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReviewForm } from '../form/ReviewForm'
 import Review from './Review'
 import { ReviewButton } from './ReviewButton'
-import ReviewSummary from './ReviewSummary'
 
 const EntryReviews = () => {
   const isDesktop = useIsDesktop()
@@ -22,7 +21,6 @@ const EntryReviews = () => {
   }
   return (
     <>
-      <ReviewSummary reviews={reviews} />
       {!isDesktop && <ReviewButton />}
       <h3>Reviews</h3>
       {reviews.map((review) => {

@@ -1,167 +1,154 @@
 import { Star as StarEmpty } from '@styled-icons/boxicons-regular'
 import { Star, StarHalf } from '@styled-icons/boxicons-solid'
-import { groupBy, prop as rProp } from 'ramda'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
-import { formatMonth } from './textFormatters'
+import { createReviewSummary } from '../../utils/createReviewSummary'
 
-const SummaryTable = styled.table`
-  border-spacing: 0;
-  width: 100%;
+const StatsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${({ theme }) => theme.secondaryText};
   margin-bottom: 1em;
+  gap: 4px;
 
   svg {
-    width: 1.2em;
-    height: 1.2em;
-    margin: -0.3em 0 0 0.3em;
+    width: 1em;
+    height: 1em;
     color: ${({ theme }) => theme.orange};
-  }
-
-  tbody {
-    line-height: 1.14;
-  }
-
-  td:nth-child(1) {
-    font-size: 1rem;
-    color: ${({ theme }) => theme.tertiaryText};
-    margin: 3px 0;
-  }
-
-  td:nth-child(2) {
-    font-size: 1.14rem;
-    text-align: right;
-  }
-
-  td > p {
-    margin-top: 0.5em;
-    font-size: 1rem;
-  }
-
-  h3 {
-    margin-top: 0;
   }
 `
 
-const FruitingSummaryRow = ({ reviews }) => {
-  const { t, i18n } = useTranslation()
-  if (!reviews?.length) {
+const StatsRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const Separator = styled.span`
+  margin: 0 0.5em;
+  &::before {
+    content: '·';
+  }
+`
+
+const formatMonthList = (months) => {
+  if (!months.length) {
     return null
   }
 
-  const reviewsByMonth = reviews.reduce((monthToCount, review) => {
-    if (!review.observed_on) {
-      return monthToCount
-    }
-    const month = new Date(review.observed_on).getMonth()
-
-    monthToCount = {
-      ...monthToCount,
-      [month]: (monthToCount[month] || 0) + 1,
-    }
-
-    return monthToCount
+  const monthCounts = months.reduce((acc, month) => {
+    acc[month] = (acc[month] || 0) + 1
+    return acc
   }, {})
 
-  const reviewMonthPairs = Object.entries(reviewsByMonth)
+  const monthsStr = Object.entries(monthCounts)
+    .map(([month, count]) => {
+      const date = new Date(1, parseInt(month))
+      const monthStr = date.toLocaleDateString(undefined, {
+        month: 'long',
+      })
+      return `${monthStr} (${count})`
+    })
+    .join(', ')
 
-  return (
-    <tr>
-      <td colSpan={2}>
-        <p>
-          {t(`locations.infowindow.fruiting.${reviews[0].fruiting}`)}:{' '}
-          {reviewMonthPairs
-            .map(
-              ([month, count]) =>
-                `${formatMonth(month, i18n.language)} (${count})`,
-            )
-            .join(', ')}
-        </p>
-      </td>
-    </tr>
-  )
+  return monthsStr
 }
 
-const FruitingSummary = ({ reviews }) => {
-  const {
-    0: flowerReviews,
-    1: unripeReviews,
-    2: ripeReviews,
-  } = groupBy(rProp('fruiting'), reviews)
-
-  return (
-    <>
-      <tr>
-        <td colSpan={2}>Fruiting</td>
-      </tr>
-      <FruitingSummaryRow reviews={flowerReviews} />
-      <FruitingSummaryRow reviews={unripeReviews} />
-      <FruitingSummaryRow reviews={ripeReviews} />
-    </>
-  )
-}
-
-const SummaryRow = ({ title, scores, total }) => {
-  const aggregateScore = scores.reduce((a, b) => a + b, 0) / scores.length
-  const percentScore = aggregateScore / total
-
-  let icon = <Star />
-
-  if (percentScore <= 0.25) {
-    icon = <StarEmpty />
-  } else if (percentScore <= 0.5) {
-    icon = <StarHalf />
+const getStarRating = (score) => {
+  if (!score) {
+    return null
   }
 
-  if (Number.isNaN(percentScore)) {
-    icon = null
+  const stars = []
+  const remainder = score % 1
+  const fullStars = Math.floor(score) + 1
+
+  for (let i = 0; i < 5; i++) {
+    if (i < fullStars) {
+      stars.push(<Star key={i} />)
+    } else if (i === fullStars && remainder >= 0.25 && remainder <= 0.75) {
+      stars.push(<StarHalf key={i} />)
+    } else {
+      stars.push(<StarEmpty key={i} />)
+    }
   }
 
-  return (
-    <tr>
-      <td>{title}</td>
-      <td>
-        {scores.length > 0 ? aggregateScore.toFixed(1) : <>&mdash;</>}
-        <small>/{total}</small>
-        {icon}
-      </td>
-    </tr>
-  )
+  return stars
 }
 
 const ReviewSummary = ({ reviews }) => {
   const { t } = useTranslation()
-  const qualityScores = reviews.reduce((scores, review) => {
-    if (review.quality_rating) {
-      return [...scores, review.quality_rating]
-    }
-    return scores
-  }, [])
+  const summary = createReviewSummary(reviews)
+  const stats = []
 
-  const yieldScores = reviews.reduce((scores, review) => {
-    if (review.yield_rating) {
-      return [...scores, review.yield_rating]
-    }
-    return scores
-  }, [])
+  if (summary.quality.average !== null) {
+    stats.push(
+      <span key="quality">
+        {t('glossary.quality')} {getStarRating(summary.quality.average)} (
+        {summary.quality.count})
+      </span>,
+    )
+  }
+
+  if (summary.yield.average !== null) {
+    stats.push(
+      <span key="yield">
+        {t('glossary.yield')} {getStarRating(summary.yield.average)} (
+        {summary.yield.count})
+      </span>,
+    )
+  }
+
+  const flowers = formatMonthList(summary.fruiting.flowers)
+  if (flowers) {
+    stats.push(
+      <span key="flowers">
+        {t('locations.infowindow.fruiting.0')} – {flowers}
+      </span>,
+    )
+  }
+
+  const unripe = formatMonthList(summary.fruiting.unripe)
+  if (unripe) {
+    stats.push(
+      <span key="unripe">
+        {t('locations.infowindow.fruiting.1')} – {unripe}
+      </span>,
+    )
+  }
+
+  const ripe = formatMonthList(summary.fruiting.ripe)
+  if (ripe) {
+    stats.push(
+      <span key="ripe">
+        {t('locations.infowindow.fruiting.2')} – {ripe}
+      </span>,
+    )
+  }
+
+  if (stats.length === 0) {
+    return null
+  }
 
   return (
-    <SummaryTable>
-      <h3>Summary</h3>
-      <tbody>
-        <FruitingSummary reviews={reviews} />
-        <SummaryRow
-          title={t('glossary.quality')}
-          scores={qualityScores}
-          total={5}
-        />
-        <SummaryRow
-          title={t('glossary.yield')}
-          scores={yieldScores}
-          total={5}
-        />
-      </tbody>
-    </SummaryTable>
+    <StatsContainer>
+      <StatsRow>
+        {[stats[0], stats[1]].filter(Boolean).map((stat, i) => (
+          <>
+            {i > 0 && <Separator />}
+            {stat}
+          </>
+        ))}
+      </StatsRow>
+      <StatsRow>
+        {stats.slice(2).map((stat, i) => (
+          <>
+            {i > 0 && <Separator />}
+            {stat}
+          </>
+        ))}
+      </StatsRow>
+    </StatsContainer>
   )
 }
 
