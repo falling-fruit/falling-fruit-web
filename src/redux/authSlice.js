@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
+import { LANGUAGE_CACHE_KEY } from '../i18n'
 import { editUser, getUser, getUserToken, refreshUserToken } from '../utils/api'
 import authStore from '../utils/authStore'
 
@@ -70,6 +71,7 @@ export const authSlice = createSlice({
     logout: (state) => {
       authStore.removeToken()
       state.user = null
+      localStorage.removeItem(LANGUAGE_CACHE_KEY)
     },
   },
   extraReducers: {
@@ -95,6 +97,7 @@ export const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.user = action.payload
       state.isLoading = false
+      localStorage.setItem(LANGUAGE_CACHE_KEY, i18next.language)
     },
     [login.rejected]: (state, action) => {
       toast.error(
