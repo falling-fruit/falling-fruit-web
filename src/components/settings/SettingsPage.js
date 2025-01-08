@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { LANGUAGE_OPTIONS } from '../../i18n'
+import { LANGUAGE_CACHE_KEY, LANGUAGE_OPTIONS } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
@@ -311,7 +311,9 @@ const SettingsPage = ({ desktop }) => {
               (option) => option.value === i18n.language,
             )}
             onChange={(option) => {
-              i18n.changeLanguage(option.value)
+              i18n.changeLanguage(option.value, () => {
+                localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
+              })
             }}
             isSearchable={false}
             menuPlacement="top"

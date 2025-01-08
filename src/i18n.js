@@ -3,16 +3,22 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 
+export const LANGUAGE_CACHE_KEY = 'language'
 export const LANGUAGE_OPTIONS = [
   { value: 'en', label: 'English' },
   { value: 'fr', label: 'Français' },
 ]
 
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .use(Backend)
   .use(LanguageDetector)
   .init({
+    detection: {
+      order: ['localStorage', 'navigator'],
+      lookupLocalStorage: LANGUAGE_CACHE_KEY,
+      caches: false,
+    },
     react: {
       useSuspense: true,
     },
