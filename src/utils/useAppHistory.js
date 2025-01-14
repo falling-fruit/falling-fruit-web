@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { currentPathWithView, pathWithCurrentView } from './appUrl'
 
@@ -8,6 +8,7 @@ import { currentPathWithView, pathWithCurrentView } from './appUrl'
  */
 export const useAppHistory = () => {
   const history = useHistory()
+  const location = useLocation()
 
   const pushWithMapState = (to, state) => {
     let newTo
@@ -27,5 +28,13 @@ export const useAppHistory = () => {
     history.push(newUrl, state)
   }
 
-  return { ...history, push: pushWithMapState, changeView }
+  const removeParam = (paramName) => {
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.delete(paramName)
+    const newSearch = searchParams.toString()
+    const newPath = `${location.pathname}${newSearch ? `?${newSearch}` : ''}`
+    history.replace(newPath)
+  }
+
+  return { ...history, push: pushWithMapState, changeView, removeParam }
 }
