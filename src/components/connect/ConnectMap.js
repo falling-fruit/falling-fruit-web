@@ -11,12 +11,14 @@ const DEFAULT_ZOOM = 4
 const ConnectMap = () => {
   const dispatch = useDispatch()
   const { initialView } = useSelector((state) => state.map)
+  const { lastMapView } = useSelector((state) => state.viewport)
   const hasInitialView = !!initialView
   const parsedUrl = parseCurrentUrl()
-  const view = parsedUrl.view || {
-    center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
-    zoom: DEFAULT_ZOOM,
-  }
+  const view = parsedUrl.view ||
+    lastMapView || {
+      center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
+      zoom: DEFAULT_ZOOM,
+    }
 
   useEffect(() => {
     if (!hasInitialView) {

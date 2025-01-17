@@ -68,6 +68,9 @@ export const mapSlice = createSlice({
       state.googleMap = action.payload.googleMap
       state.getGoogleMaps = action.payload.getGoogleMaps
     },
+    clearInitialView: (state) => {
+      state.initialView = null
+    },
     setInitialView: (state, action) => {
       state.initialView = action.payload
 
@@ -143,6 +146,6 @@ export const mapSlice = createSlice({
   },
 })
 
-export const { setGoogle, setInitialView } = mapSlice.actions
+export const { clearInitialView, setGoogle, setInitialView } = mapSlice.actions
 
 export default mapSlice.reducer

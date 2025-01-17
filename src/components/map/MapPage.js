@@ -9,7 +9,7 @@ import styled from 'styled-components/macro'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings, updatePosition } from '../../redux/locationSlice'
-import { setGoogle } from '../../redux/mapSlice'
+import { clearInitialView, setGoogle } from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
@@ -146,6 +146,12 @@ function getTileCoordinates(coord, zoom) {
     y = null
   }
   return { x, y, z: zoom }
+}
+
+const GoogleMapWrapper = ({ onUnmount, ...props }) => {
+  useEffect(() => onUnmount, []) //eslint-disable-line
+
+  return <GoogleMapReact {...props} />
 }
 
 const MapPage = ({ isDesktop }) => {
@@ -321,7 +327,7 @@ const MapPage = ({ isDesktop }) => {
       {googleMap && <PanoramaHandler />}
       {showStreetView && <CloseStreetView />}
       {initialView && (
-        <GoogleMapReact
+        <GoogleMapWrapper
           onClick={handleNonspecificClick}
           bootstrapURLKeys={bootstrapURLKeys}
           options={(googleMaps) => ({
@@ -380,6 +386,9 @@ const MapPage = ({ isDesktop }) => {
             apiIsLoaded(map, maps)
           }}
           yesIWantToUseGoogleMapApiInternals
+          onUnmount={() => {
+            dispatch(clearInitialView())
+          }}
         >
           {geolocation && !geolocation.loading && !geolocation.error && (
             <GeolocationDot
@@ -433,7 +442,7 @@ const MapPage = ({ isDesktop }) => {
               }}
             />
           )}
-        </GoogleMapReact>
+        </GoogleMapWrapper>
       )}
     </div>
   )
