@@ -253,10 +253,7 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to={pathWithCurrentView('/changes')}
-                activeClassName="active"
-              >
+              <NavLink to="/changes" activeClassName="active">
                 {t('glossary.activity')}
               </NavLink>
             </li>
