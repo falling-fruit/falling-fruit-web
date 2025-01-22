@@ -26,10 +26,10 @@ const LoadingIndicatorWrapper = styled.div`
  * - vertical {boolean} - arranged vertically when true
  */
 const LoadingIndicator = (props) => (
-    <LoadingIndicatorWrapper {...props}>
-      <Spinner /> Loading...
-    </LoadingIndicatorWrapper>
-  )
+  <LoadingIndicatorWrapper {...props}>
+    <Spinner /> Loading...
+  </LoadingIndicatorWrapper>
+)
 
 /**
  * LoadingOverlay - masked loading indicator
