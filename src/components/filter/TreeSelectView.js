@@ -9,7 +9,7 @@ const ControlsContainer = styled.div`
 `
 
 const TreeSelectContainer = styled.ul`
-  margin-top: 0;
+  margin: 0;
   padding: 0;
   flex: 1 1 0;
   overflow-y: auto;

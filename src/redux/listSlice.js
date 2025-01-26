@@ -9,11 +9,11 @@ const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
   async ({ offset, fetchCount }, { getState }) => {
     const state = getState()
-    const { types, muni, invasive } = state.filter
+    const { types, muni } = state.filter
     const { lastMapView } = state.viewport
     const { bounds, zoom, center } = lastMapView
     const params = selectParams(
-      { types, muni, invasive, bounds, zoom, center },
+      { types, muni, bounds, zoom, center },
       { limit: 100, offset, photo: true },
     )
     return {
