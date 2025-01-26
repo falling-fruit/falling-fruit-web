@@ -323,10 +323,7 @@ const MainMenu = ({ className }) => {
           </NavLink>
         </NavLi>
         <NavLi>
-          <NavLink
-            to={pathWithCurrentView('/changes')}
-            activeClassName="active"
-          >
+          <NavLink to="/changes" activeClassName="active">
             {t('glossary.activity')}
           </NavLink>
         </NavLi>
