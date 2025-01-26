@@ -1,5 +1,6 @@
-import { CaretDown } from '@styled-icons/boxicons-regular'
+import { CaretDown, Menu, X } from '@styled-icons/boxicons-regular'
 import { User } from '@styled-icons/boxicons-solid'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { matchPath } from 'react-router'
@@ -25,8 +26,11 @@ const AuthLinksList = styled.ul`
   margin: 0;
   height: 100%;
   display: flex;
+  align-items: center;
   gap: 12px;
 `
+
+const TIGHT_LAYOUT_MAX_WIDTH = 940
 
 const StyledHeader = styled.header`
   height: 56px;
@@ -42,76 +46,106 @@ const StyledHeader = styled.header`
     width: auto;
   }
 
+  .hamburger {
+    display: ${({ user }) =>
+      !user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH ? 'flex' : 'none'};
+    margin-right: 1rem;
+    cursor: pointer;
+    color: ${({ theme }) => theme.secondaryText};
+    align-self: center;
+    align-items: center;
+  }
+
   nav {
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex: 1;
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 0 0;
-      height: 100%;
-      display: flex;
+    .main-menu {
+      display: ${({ user }) =>
+        user || window.innerWidth > TIGHT_LAYOUT_MAX_WIDTH ? 'block' : 'none'};
 
-      li {
-        display: flex;
-        justify-content: stretch;
-        align-items: stretch;
-        min-width: 110px;
-        margin: 0;
-        color: ${({ theme }) => theme.secondaryText};
-        cursor: pointer;
-        position: relative;
-        font-weight: bold;
-        font-size: 1rem;
-
-        a,
-        .content button {
-          text-decoration: none;
-          color: ${({ theme }) => theme.secondaryText};
-          text-align: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex: 1;
-          font-weight: inherit;
-          font-size: inherit;
-
-          &.active {
-            background-color: ${({ theme }) => theme.navBackground};
-            color: ${({ theme }) => theme.orange};
-
-            ::before {
-              content: '';
-              width: 100%;
-              position: absolute;
-              background-color: ${({ theme }) => theme.orange};
-              height: 3px;
-              bottom: 0;
-              left: 0;
-            }
-          }
-        }
-
-        &.active {
-          color: ${({ theme }) => theme.orange};
-        }
+      &.mobile-visible {
+        display: block;
       }
+    }
 
-      .signin,
-      .signup {
-        min-width: auto;
+    .auth-social {
+      display: flex;
+    }
+
+    .auth-buttons {
+      &.mobile-hidden {
+        display: none;
       }
     }
   }
 `
 
+const NavLi = styled.li`
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  min-width: ${() =>
+    window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH ? '80px' : '110px'};
+  margin: 0;
+  color: ${({ theme }) => theme.secondaryText};
+  cursor: pointer;
+  position: relative;
+  font-weight: bold;
+  font-size: 1rem;
+
+  &.signin,
+  &.signup {
+    min-width: auto;
+  }
+
+  a,
+  .content button {
+    text-decoration: none;
+    color: ${({ theme }) => theme.secondaryText};
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-weight: inherit;
+    font-size: inherit;
+
+    &.active {
+      background-color: ${({ theme }) => theme.navBackground};
+      color: ${({ theme }) => theme.orange};
+
+      ::before {
+        content: '';
+        width: 100%;
+        position: absolute;
+        background-color: ${({ theme }) => theme.orange};
+        height: 3px;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+
+  &.active {
+    color: ${({ theme }) => theme.orange};
+  }
+`
+
+const NavList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 0;
+  height: 100%;
+  display: flex;
+`
+
 const Dropdown = ({ className, children, label, isMatch }) => (
   <div className={className}>
     <div className={`button${isMatch ? ' active' : ''}`}>
-      {label} <CaretDown height="8px" />
+      {label} <CaretDown size={10} />
     </div>
     <div className="content">{children}</div>
   </div>
@@ -221,100 +255,132 @@ const StyledSocialButtons = styled(SocialButtons)`
   }
 `
 
-// TODO: Clean up file structure (i.e. logo_white.svg) from ./public
-const Header = () => {
+const UserMenu = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const handleLogout = () => {
     dispatch(logout())
   }
+  const isAccountPage = useRouteMatch('/users/edit') !== null
 
+  return (
+    <div>
+      <NavList>
+        {user ? (
+          <NavLi>
+            <StyledDropdown
+              label={
+                <>
+                  <StyledUser height={15} /> {user.name || user.email}
+                </>
+              }
+              isMatch={isAccountPage}
+            >
+              <NavLink to="/users/edit" activeClassName="active">
+                {t('glossary.account')}
+              </NavLink>
+              <ResetButton onClick={handleLogout}>
+                {t('glossary.logout')}
+              </ResetButton>
+            </StyledDropdown>
+          </NavLi>
+        ) : (
+          <AuthLinksList>
+            <NavLi className="signin">
+              <NavLink
+                to={withFromPage('/users/sign_in')}
+                activeClassName="active"
+              >
+                <Button secondary>{t('users.sign_in')}</Button>
+              </NavLink>
+            </NavLi>
+            <NavLi className="signup">
+              <NavLink to="/users/sign_up" activeClassName="active">
+                <SignupButton>{t('glossary.sign_up')}</SignupButton>
+              </NavLink>
+            </NavLi>
+          </AuthLinksList>
+        )}
+      </NavList>
+    </div>
+  )
+}
+
+const MainMenu = ({ className }) => {
+  const { t } = useTranslation()
   const isAboutPage =
     matchPath(useLocation().pathname, {
       path: aboutRoutes.map((route) => route.props.path).flat(),
     }) !== null
-  const isAccountPage = useRouteMatch('/users/edit') !== null
 
   return (
-    <StyledHeader>
+    <div className={className} style={{ marginRight: 'auto' }}>
+      <NavList>
+        <NavLi>
+          <NavLink to={pathWithCurrentView('/map')} activeClassName="active">
+            {t('glossary.map')}
+          </NavLink>
+        </NavLi>
+        <NavLi>
+          <NavLink to="/changes" activeClassName="active">
+            {t('glossary.activity')}
+          </NavLink>
+        </NavLi>
+        <NavLi>
+          <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
+            <NavLink to="/about" activeClassName="active">
+              {t('layouts.application.menu.the_project')}
+            </NavLink>
+            <NavLink to="/data" activeClassName="active">
+              {t('layouts.application.menu.the_data')}
+            </NavLink>
+            <NavLink to="/sharing" activeClassName="active">
+              {t('layouts.application.menu.sharing_the_harvest')}
+            </NavLink>
+            <NavLink to="/press" activeClassName="active">
+              {t('layouts.application.menu.in_the_press')}
+            </NavLink>
+          </StyledDropdown>
+        </NavLi>
+      </NavList>
+    </div>
+  )
+}
+
+// TODO: Clean up file structure (i.e. logo_white.svg) from ./public
+const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const user = useSelector((state) => state.auth.user)
+
+  return (
+    <StyledHeader user={user}>
       <LogoLink to={pathWithCurrentView('/map')}>
         <img src="/logo_orange.svg" alt="Falling Fruit logo" />
       </LogoLink>
+      <ResetButton
+        secondary
+        className="hamburger"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            setIsMobileMenuOpen(!isMobileMenuOpen)
+          }
+        }}
+        aria-label="Toggle menu"
+        aria-expanded={isMobileMenuOpen}
+      >
+        {isMobileMenuOpen ? <X size={18} /> : <Menu size={24} />}
+      </ResetButton>
       <nav>
-        <div style={{ marginRight: 'auto' }}>
-          <ul>
-            <li>
-              <NavLink
-                to={pathWithCurrentView('/map')}
-                activeClassName="active"
-              >
-                {t('glossary.map')}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/changes" activeClassName="active">
-                {t('glossary.activity')}
-              </NavLink>
-            </li>
-            <li>
-              <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
-                <NavLink to="/about" activeClassName="active">
-                  {t('layouts.application.menu.the_project')}
-                </NavLink>
-                <NavLink to="/data" activeClassName="active">
-                  {t('layouts.application.menu.the_data')}
-                </NavLink>
-                <NavLink to="/sharing" activeClassName="active">
-                  {t('layouts.application.menu.sharing_the_harvest')}
-                </NavLink>
-                <NavLink to="/press" activeClassName="active">
-                  {t('layouts.application.menu.in_the_press')}
-                </NavLink>
-              </StyledDropdown>
-            </li>
-          </ul>
+        <MainMenu
+          className={`main-menu${isMobileMenuOpen ? ' mobile-visible' : ''}`}
+          isMobileMenuOpen={isMobileMenuOpen}
+        />
+        <div className="auth-social">
+          {!isMobileMenuOpen && <UserMenu />}
+          <StyledSocialButtons />
         </div>
-        <div>
-          <ul>
-            {user ? (
-              <li>
-                <StyledDropdown
-                  label={
-                    <>
-                      <StyledUser height={15} /> {user.name || user.email}
-                    </>
-                  }
-                  isMatch={isAccountPage}
-                >
-                  <NavLink to="/users/edit" activeClassName="active">
-                    {t('glossary.account')}
-                  </NavLink>
-                  <ResetButton onClick={handleLogout}>
-                    {t('glossary.logout')}
-                  </ResetButton>
-                </StyledDropdown>
-              </li>
-            ) : (
-              <AuthLinksList>
-                <li className="signin">
-                  <NavLink
-                    to={withFromPage('/users/sign_in')}
-                    activeClassName="active"
-                  >
-                    <Button secondary>{t('users.sign_in')}</Button>
-                  </NavLink>
-                </li>
-                <li className="signup">
-                  <NavLink to="/users/sign_up" activeClassName="active">
-                    <SignupButton>{t('glossary.sign_up')}</SignupButton>
-                  </NavLink>
-                </li>
-              </AuthLinksList>
-            )}
-          </ul>
-        </div>
-        <StyledSocialButtons />
       </nav>
     </StyledHeader>
   )

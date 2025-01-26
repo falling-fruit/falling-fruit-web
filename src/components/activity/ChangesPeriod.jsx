@@ -10,6 +10,19 @@ import { setAnchorElementId } from '../../redux/activitySlice'
 import { viewToString } from '../../utils/appUrl'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
+const formatChangeType = (type, t) => {
+  switch (type) {
+    case 'added':
+      return t('changes.type.added')
+    case 'edited':
+      return t('changes.type.edited')
+    case 'visited':
+      return t('changes.type.visited')
+    default:
+      return `changes.type.${type}`
+  }
+}
+
 const AuthorLink = styled(Link)`
   color: ${({ theme }) => theme.blue} !important;
 `
@@ -105,7 +118,7 @@ const ActivityTextComponent = ({
   return (
     <ActivityText>
       {t('changes.change_in_city', {
-        type: t(`changes.type.${interactionType}`),
+        type: formatChangeType(interactionType, t),
         city: '',
       })}
       {hasLocationInfo ? (

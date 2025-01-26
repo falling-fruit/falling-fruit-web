@@ -9,7 +9,7 @@ const TreeSelectContainer = styled.div`
   box-sizing: border-box;
 
   overflow: hidden;
-  margin-bottom: 12px;
+  margin 0;
   @media ${({ theme }) => theme.device.mobile} {
     height: 50vh;
   }

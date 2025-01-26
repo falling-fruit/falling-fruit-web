@@ -15,8 +15,10 @@ const StyledFilter = styled.div`
     flex: 1;
   }
   background-color: ${({ theme }) => theme.background};
-  padding: 0 10px 8px 10px;
-  margin-top: 3px;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  padding-top: 0;
+  padding-bottom: 0;
   height: 100%;
   display: flex;
   flex-direction: column;

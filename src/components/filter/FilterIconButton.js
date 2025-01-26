@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import IconButton from '../ui/IconButton'
 
 const FilterIconButton = (props) => {
-  const { types, muni, invasive } = useSelector((state) => state.filter)
+  const { types, muni } = useSelector((state) => state.filter)
 
   const { typesAccess } = useSelector((state) => state.type)
 
@@ -21,8 +21,7 @@ const FilterIconButton = (props) => {
   const isDefaultChoice =
     defaultSelectionSet.size === currentSelectionSet.size &&
     [...defaultSelectionSet].every((id) => currentSelectionSet.has(id)) &&
-    muni === true &&
-    invasive === false
+    muni === true
 
   return (
     <IconButton
