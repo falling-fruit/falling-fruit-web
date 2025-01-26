@@ -223,16 +223,12 @@ export const LocationForm = ({ editingId, initialValues }) => {
     <StyledForm>
       <Formik
         validate={validateLocation}
-        validateOnChange={false}
         initialValues={mergedInitialValues}
         validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
       >
         {(formikProps) => {
           const { isSubmitting, isValid, dirty } = formikProps
-          const isUploadingPhotos = formikProps.values.review.photos.some(
-            (p) => p.isUploading,
-          )
           const formDirty = dirty || positionDirty
 
           return (
@@ -254,9 +250,7 @@ export const LocationForm = ({ editingId, initialValues }) => {
                   Cancel
                 </Button>
                 <Button
-                  disabled={
-                    isSubmitting || !isValid || !formDirty || isUploadingPhotos
-                  }
+                  disabled={isSubmitting || !isValid || !formDirty}
                   type="submit"
                 >
                   {isSubmitting ? 'Submitting' : t('glossary.submit')}

@@ -192,16 +192,12 @@ export const ReviewForm = ({
     <StyledForm>
       <Formik
         validate={({ review }) => validateReview(review)}
-        validateOnChange={false}
         initialValues={initialValues}
         validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
       >
         {(formikProps) => {
           const { isSubmitting, isValid, dirty } = formikProps
-          const isUploadingPhotos = formikProps.values.review.photos.some(
-            (p) => p.isUploading,
-          )
 
           return (
             <Form>
@@ -209,9 +205,7 @@ export const ReviewForm = ({
               <ProgressButtons>
                 <div style={{ textAlign: editingId ? 'center' : 'left' }}>
                   <Button
-                    disabled={
-                      isSubmitting || !isValid || !dirty || isUploadingPhotos
-                    }
+                    disabled={isSubmitting || !isValid || !dirty}
                     type="submit"
                   >
                     {isSubmitting ? 'Submitting' : t('glossary.submit')}
