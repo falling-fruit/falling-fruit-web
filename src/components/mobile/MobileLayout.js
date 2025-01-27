@@ -92,7 +92,6 @@ const MobileLayout = () => {
             path={[
               '/reviews/:reviewId/edit',
               '/locations/:locationId/review',
-              '/locations/:locationId/edit/details',
               '/locations/new',
             ]}
           />
@@ -108,6 +107,7 @@ const MobileLayout = () => {
                   <EditLocationPositionNav />
                 </TopBar>
               </Route>
+              <Route path="/locations/:locationId/edit" />
               <Route
                 path={['/map', '/list', '/locations/:locationId']}
                 component={SearchAndFilterTopBar}
@@ -121,7 +121,7 @@ const MobileLayout = () => {
                 <Route path={['/map', '/locations', '/list', '/settings']}>
                   <Switch>
                     <Route path="/locations/init" />
-                    <Route path="/locations/:locationId/edit/position" />
+                    <Route path="/locations/:locationId/edit" />
                     <Route path="/locations/:locationId">
                       {!streetView && <EntryMobile />}
                     </Route>
