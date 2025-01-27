@@ -99,7 +99,7 @@ const TopRibbonButtons = ({ hasImages, drawerDisabled, onBackButtonClick }) => {
         <EntryButton
           onClick={(event) => {
             event.stopPropagation()
-            history.push(`/locations/${locationId}/edit/details`)
+            history.push(`/locations/${locationId}/edit`)
           }}
           icon={<PencilIcon />}
           label="edit-button"

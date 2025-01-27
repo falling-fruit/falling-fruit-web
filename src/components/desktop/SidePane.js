@@ -115,7 +115,7 @@ const SidePane = () => {
                       <BackButton
                         onClick={() =>
                           history.push(
-                            `/locations/${match.params.locationId}/edit/details`,
+                            `/locations/${match.params.locationId}/edit`,
                           )
                         }
                       >

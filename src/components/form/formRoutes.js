@@ -132,7 +132,7 @@ const EditReview = ({ NavComponent }) => {
 }
 
 export const formRoutesMobile = [
-  <Route key="edit-location" path="/locations/:locationId/edit/details">
+  <Route key="edit-location" path="/locations/:locationId/edit">
     <EditLocation NavComponent={MobileNav} />
   </Route>,
   <Route key="add-location" path="/locations/new">
@@ -147,7 +147,7 @@ export const formRoutesMobile = [
 ]
 
 export const formRoutesDesktop = [
-  <Route key="edit-location" path="/locations/:locationId/edit/details">
+  <Route key="edit-location" path="/locations/:locationId/edit">
     <EditLocation NavComponent={DesktopNav} />
   </Route>,
   <Route key="add-location" path="/locations/new">

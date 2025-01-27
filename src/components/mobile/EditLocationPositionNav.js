@@ -36,21 +36,18 @@ const EditLocationPositionNav = () => {
 
       if (distanceMeters > 1) {
         // Wait half a second to let the user observe the edited position being undone
-        setTimeout(
-          () => history.push(`/locations/${locationId}/edit/details`),
-          500,
-        )
+        setTimeout(() => history.push(`/locations/${locationId}/edit`), 500)
       } else {
-        history.push(`/locations/${locationId}/edit/details`)
+        history.push(`/locations/${locationId}/edit`)
       }
     } else {
-      history.push(`/locations/${locationId}/edit/details`)
+      history.push(`/locations/${locationId}/edit`)
     }
   }
 
   const handleConfirm = () => {
     dispatch(updatePosition(googleMap?.getCenter().toJSON()))
-    history.push(`/locations/${locationId}/edit/details`)
+    history.push(`/locations/${locationId}/edit`)
   }
 
   return (
