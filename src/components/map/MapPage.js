@@ -390,7 +390,8 @@ const MapPage = ({ isDesktop }) => {
           {place &&
             place.location &&
             place.view &&
-            place.view.zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT && (
+            place.view.zoom >= VISIBLE_CLUSTER_ZOOM_LIMIT &&
+            currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT && (
               <Place
                 lat={place.location.lat}
                 lng={place.location.lng}
