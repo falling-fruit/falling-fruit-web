@@ -57,6 +57,6 @@ export const TypeName = ({ commonName, scientificName, synonyms }) => (
       {commonName && <CommonName>{commonName}</CommonName>}
       {scientificName && <ScientificName>{scientificName}</ScientificName>}
     </NamesBlock>
-    {synonyms?.length > 0 && <Synonyms> {synonyms.join(', ')}</Synonyms>}
+    {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
   </TypeNameWrapper>
 )
