@@ -1,12 +1,10 @@
 import { transparentize } from 'polished'
+import { useEffect, useRef, useState } from 'react'
 import Select, { createFilter } from 'react-select'
 import Creatable from 'react-select/creatable'
-import { FixedSizeList } from 'react-window'
 import styled from 'styled-components/macro'
 
 import { validatedColor } from './GlobalStyle'
-
-const LIST_ITEM_HEIGHT = 46
 
 const SelectParent = styled.div`
   font-size: 1rem;
@@ -75,7 +73,6 @@ const SelectParent = styled.div`
   }
 
   .select__option {
-    height: ${LIST_ITEM_HEIGHT}px;
     display: flex;
     align-items: center;
   }
@@ -83,22 +80,48 @@ const SelectParent = styled.div`
 const StyledSelect = SelectParent.withComponent(Select)
 const StyledCreatableSelect = SelectParent.withComponent(Creatable)
 
-/**
- * Wrapper around react-window. This is used to replace the menu list component of react-select.
- */
-const MenuList = ({ children, maxHeight }) => (
-  <FixedSizeList
-    height={maxHeight ? maxHeight : '0px'}
-    itemCount={children.length}
-    itemSize={LIST_ITEM_HEIGHT}
-  >
-    {({ index, style }) => <div style={style}>{children[index]}</div>}
-  </FixedSizeList>
-)
+const INITIAL_VISIBLE_COUNT = 20
+const INCREMENT = 10
+
+const InfiniteMenuList = ({ children }) => {
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
+  const loadMoreRef = useRef()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && visibleCount < children.length) {
+          setVisibleCount((prev) => Math.min(prev + INCREMENT, children.length))
+        }
+      },
+      { threshold: 0.1 },
+    )
+
+    const currentRef = loadMoreRef.current
+    if (currentRef) {
+      observer.observe(currentRef)
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef)
+      }
+    }
+  }, [children.length, visibleCount])
+
+  return (
+    <div style={{ overflowY: 'auto' }}>
+      {children.slice(0, visibleCount)}
+      {visibleCount < children.length && (
+        <div ref={loadMoreRef} style={{ height: 1 }} />
+      )}
+    </div>
+  )
+}
 
 const SelectWrapper = ({ isVirtualized, ...props }) => (
   <StyledSelect
-    components={isVirtualized ? { MenuList } : {}}
+    components={isVirtualized ? { MenuList: InfiniteMenuList } : {}}
     classNamePrefix="select"
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
@@ -113,7 +136,7 @@ const CreatableSelectWrapper = ({
   ...props
 }) => (
   <StyledCreatableSelect
-    components={isVirtualized ? { MenuList } : {}}
+    components={isVirtualized ? { MenuList: InfiniteMenuList } : {}}
     classNamePrefix="select"
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
