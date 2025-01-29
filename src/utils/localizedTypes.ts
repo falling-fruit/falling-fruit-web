@@ -1,6 +1,7 @@
 import { sortBy } from 'lodash'
 
 import { components } from './apiSchema'
+import { tokenizeReference } from './tokenize'
 
 type Id = number
 type IdDict<T> = { [key: Id]: T }
@@ -24,9 +25,10 @@ export type LocalizedType = {
 
 type TypeSelectMenuEntry = {
   value: Id
-  label: string
+  searchReference: string
   scientificName: string
   commonName: string
+  label: string
   synonyms: string[]
   taxonomicRank: number
 }
@@ -67,18 +69,46 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
   return new TypesAccess(localizedTypes, idIndex, childrenById)
 }
 
-export const TOKEN_START = '^'
-
-const toMenuEntry = (localizedType: LocalizedType) => {
-  const { id, commonName, scientificName, taxonomicRank, synonyms } =
+const toMenuEntry = (
+  localizedType: LocalizedType,
+  parentCommonName: string,
+) => {
+  const { id, parentId, commonName, scientificName, taxonomicRank, synonyms } =
     localizedType
+
+  const referenceStrings = [commonName, scientificName, ...synonyms]
+
+  // If common name starts with 'common ' or 'Common ', add version without that prefix
+  if (commonName.toLowerCase().startsWith('common ')) {
+    referenceStrings.push(commonName.replace(/^[Cc]ommon\s+/, ''))
+  }
+
+  // Add parent name to references if it appears within common name but not at start
+  if (
+    parentCommonName &&
+    commonName.includes(parentCommonName.toLowerCase()) &&
+    !commonName.startsWith(parentCommonName)
+  ) {
+    referenceStrings.push(parentCommonName)
+  }
+
+  const cultivarIndex = scientificName?.indexOf("'")
+  if (cultivarIndex !== -1) {
+    const cultivarName = scientificName
+      .substring(cultivarIndex)
+      .replaceAll("'", '')
+    referenceStrings.push(cultivarName)
+  }
+
+  const commonNameLabel =
+    parentId === PENDING_ID ? `${commonName} (Pending Review)` : commonName
+
   return {
     value: id,
-    label: [commonName, scientificName, ...synonyms]
-      .map((x) => `${TOKEN_START}${x}`)
-      .join(''),
-    commonName,
-    scientificName,
+    searchReference: tokenizeReference(referenceStrings),
+    commonName: commonNameLabel,
+    label: commonNameLabel,
+    scientificName: scientificName,
     taxonomicRank,
     synonyms,
   }
@@ -117,11 +147,13 @@ export class TypesAccess {
     return t ? t.scientificName : ''
   }
   asMenuEntries(): TypeSelectMenuEntry[] {
-    return this.localizedTypes.map(toMenuEntry)
+    return this.localizedTypes.map((t) =>
+      toMenuEntry(t, this.getCommonName(t.parentId)),
+    )
   }
   getMenuEntry(id: Id): TypeSelectMenuEntry | null {
     const t = this.localizedTypes[this.idIndex[id]]
-    return t ? toMenuEntry(t) : null
+    return t ? toMenuEntry(t, this.getCommonName(t.parentId)) : null
   }
 
   filter(predicate: (_type: LocalizedType) => boolean): TypesAccess {

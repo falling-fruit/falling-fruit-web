@@ -2,21 +2,18 @@ import { useFormikContext } from 'formik'
 import { uniqBy } from 'lodash'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createFilter } from 'react-select'
 
 import { openAddTypeModal } from '../../redux/typeSlice'
-import { TOKEN_START } from '../../utils/localizedTypes'
+import { tokenizeQuery } from '../../utils/tokenize'
 import { TypeName } from '../ui/TypeName'
 import { AddTypeModal } from './AddTypeModal'
 import { CreatableSelect } from './FormikWrappers'
-
-const baseFilter = createFilter()
 
 export const matchFromTokenStart = (candidate, input) => {
   if (!input || candidate.data.__isNew__) {
     return true
   } else {
-    return baseFilter(candidate, `${TOKEN_START}${input}`)
+    return candidate.data.searchReference.indexOf(tokenizeQuery(input)) > -1
   }
 }
 
