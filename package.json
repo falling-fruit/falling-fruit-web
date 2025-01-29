@@ -48,7 +48,6 @@
     "react-split-pane": "^0.1.92",
     "react-toastify": "^8.1.0",
     "react-virtualized-auto-sizer": "^1.0.6",
-    "react-window": "^1.8.6",
     "react-window-infinite-loader": "^1.0.7",
     "reaptcha": "^1.7.3",
     "styled-components": "^5.2.1",
