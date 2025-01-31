@@ -80,8 +80,8 @@ const SelectParent = styled.div`
 const StyledSelect = SelectParent.withComponent(Select)
 const StyledCreatableSelect = SelectParent.withComponent(Creatable)
 
-const INITIAL_VISIBLE_COUNT = 20
-const INCREMENT = 10
+const INITIAL_VISIBLE_COUNT = 100
+const INCREMENT = 100
 
 const InfiniteMenuList = ({ children }) => {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
