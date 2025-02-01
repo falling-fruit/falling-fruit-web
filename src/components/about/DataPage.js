@@ -29,14 +29,8 @@ const DataPage = () => {
         <p
           dangerouslySetInnerHTML={{ __html: t('pages.datasets.intro_html') }}
         />
-        <p
-          dangerouslySetInnerHTML={{
-            __html: t('pages.datasets.types_of_data'),
-          }}
-        />
-        <p
-          dangerouslySetInnerHTML={{ __html: t('pages.datasets.table_info') }}
-        />
+        <p>{t('pages.datasets.types_of_data')}</p>
+        <p>{t('pages.datasets.table_info')}</p>
         <ImportsTable />
       </PageTemplate>
     </PageScrollWrapper>
