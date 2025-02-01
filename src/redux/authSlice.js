@@ -97,7 +97,6 @@ export const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.user = action.payload
       state.isLoading = false
-      localStorage.setItem(LANGUAGE_CACHE_KEY, i18next.language)
     },
     [login.rejected]: (state, action) => {
       toast.error(
