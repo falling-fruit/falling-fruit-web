@@ -55,7 +55,7 @@ const formatMonthList = (months) => {
 }
 
 const getStarRating = (score) => {
-  if (!score) {
+  if (score === null) {
     return null
   }
 
