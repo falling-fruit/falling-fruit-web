@@ -12,7 +12,8 @@ const ConnectSearchParams = () => {
   const searchParams = new URLSearchParams(location.search)
 
   const escapeHtml = useMemo(
-    () => (unsafe) => unsafe
+    () => (unsafe) =>
+      unsafe
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
