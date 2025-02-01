@@ -49,6 +49,7 @@ const useGeolocation = () => {
         latitude,
         longitude,
         error: null,
+        timestamp: position.timestamp,
       })
     }
 
