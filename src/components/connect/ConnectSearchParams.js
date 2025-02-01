@@ -16,6 +16,14 @@ const ConnectSearchParams = () => {
     if (i18nViz) {
       const originalT = i18n.t.bind(i18n)
       i18n.t = (key, options) => {
+        // Convert any option values that are objects with props.title to strings
+        if (options) {
+          Object.entries(options).forEach(([k, v]) => {
+            if (v && typeof v === 'object' && v.props?.title) {
+              options[k] = v.props.title
+            }
+          })
+        }
         let translation = originalT(key, options)
         if (
           [
@@ -44,6 +52,7 @@ const ConnectSearchParams = () => {
             }}
             title={key}
             onClick={() => {
+              console.log({ i18nViz, translation, key, options })
               navigator.clipboard.writeText(key)
               toast.info(`Copied to clipboard: ${key}`)
             }}
