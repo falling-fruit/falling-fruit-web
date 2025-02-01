@@ -81,9 +81,11 @@ export const filterSlice = createSlice({
 
     [fetchAndLocalizeTypes.fulfilled]: (state, action) => {
       const typesAccess = action.payload
-      state.types = typesAccess
-        .selectableTypesWithCategories('forager', 'freegan')
-        .map((t) => t.id)
+      if (state.types === null) {
+        state.types = typesAccess
+          .selectableTypesWithCategories('forager', 'freegan')
+          .map((t) => t.id)
+      }
     },
   },
 })
