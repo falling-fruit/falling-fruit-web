@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { setShowOnlyOnMap } from '../../redux/filterSlice'
 import { muniChanged, selectionChanged } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
 import Input from '../ui/Input'
@@ -49,14 +50,15 @@ const MuniCheckbox = styled.div`
 
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
-  const [showOnlyOnMap, setShowOnlyOnMap] = useState(true)
   const setSearchValueDebounced = useMemo(
     () => debounce(setSearchValue, 200),
     [setSearchValue],
   )
 
   const dispatch = useDispatch()
-  const { countsById, types, muni } = useSelector((state) => state.filter)
+  const { countsById, types, muni, showOnlyOnMap } = useSelector(
+    (state) => state.filter,
+  )
 
   const { typesAccess } = useSelector((state) => state.type)
   const { tree: selectTree, visibleTypeIds } = useMemo(
@@ -85,7 +87,7 @@ const Filter = () => {
             field="showOnlyOnMap"
             value={showOnlyOnMap}
             label={t('only_on_map')}
-            onChange={setShowOnlyOnMap}
+            onChange={(checked) => dispatch(setShowOnlyOnMap(checked))}
             style={{ display: 'inline-block', marginRight: '5px' }}
           />
           <FilterButtons
