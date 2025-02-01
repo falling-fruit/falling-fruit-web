@@ -159,7 +159,8 @@ const ShareTheHarvestTable = () => {
     const translatedCountry = translatedCountries[item.country] || item.country
     const keywords = [translatedCountry, item.state, item.city, item.name]
     return keywords.some(
-      (keyword) => keyword && keyword.toLowerCase().includes(query),
+      (keyword) =>
+        keyword && keyword.toLowerCase && keyword.toLowerCase().includes(query),
     )
   })
 
