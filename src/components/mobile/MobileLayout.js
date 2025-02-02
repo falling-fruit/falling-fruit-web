@@ -141,18 +141,23 @@ const MobileLayout = () => {
               </Switch>
             </TabPanels>
             <Switch>
-              <Route>
-                <TabList
-                  style={{
-                    zIndex: zIndex.mobileTablist,
-                    position: 'fixed',
-                    width: '100%',
-                    bottom: 0,
-                    height: '50px',
-                  }}
-                >
-                  {tabContent}
-                </TabList>
+              <Route path={['/locations/:locationId/edit/:postfix', '*']}>
+                {({ match }) =>
+                  (!match.params.postfix ||
+                    match.params.postfix === 'position') && (
+                    <TabList
+                      style={{
+                        zIndex: zIndex.mobileTablist,
+                        position: 'fixed',
+                        width: '100%',
+                        bottom: 0,
+                        height: '50px',
+                      }}
+                    >
+                      {tabContent}
+                    </TabList>
+                  )
+                }
               </Route>
             </Switch>
           </Route>
