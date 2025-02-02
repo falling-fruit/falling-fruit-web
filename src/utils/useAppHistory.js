@@ -1,6 +1,10 @@
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { currentPathWithView, pathWithCurrentView } from './appUrl'
+import {
+  currentPathWithView,
+  pathWithCurrentView,
+  withFromPage,
+} from './appUrl'
 
 /**
  * Wraps useAppHistory from react-router-dom to automatically preserve
@@ -36,5 +40,15 @@ export const useAppHistory = () => {
     history.replace(newPath)
   }
 
-  return { ...history, push: pushWithMapState, changeView, removeParam }
+  const pushWithFromPage = (path) => {
+    history.push(withFromPage(path))
+  }
+
+  return {
+    ...history,
+    push: pushWithMapState,
+    changeView,
+    removeParam,
+    pushWithFromPage,
+  }
 }

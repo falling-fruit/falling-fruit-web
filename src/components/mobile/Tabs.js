@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { matchPath, useLocation } from 'react-router-dom'
 
-import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import aboutRoutes from '../about/aboutRoutes'
 import activityRoutes from '../activity/activityRoutes'
@@ -92,7 +91,7 @@ const Tabs = () => {
         history.push('/users/edit')
       } else {
         // Otherwise sign in
-        history.push(withFromPage('/users/sign_in'))
+        history.pushWithFromPage('/users/sign_in')
       }
     } else {
       history.push(tabs[newTabIndex]?.paths[0])
