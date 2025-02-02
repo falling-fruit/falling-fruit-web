@@ -89,6 +89,7 @@ const locationSlice = createSlice({
       state.pane.drawerFullyOpen = false
       state.pane.drawerDisabled = false
       state.pane.tabIndex = 0
+      state.isBeingInitializedMobile = false
     },
     initNewLocation: (state, action) => {
       state.isLoading = false
@@ -204,6 +205,7 @@ const locationSlice = createSlice({
       state.locationId = parseInt(action.payload.id)
       state.isLoading = false
       state.isBeingEdited = false
+      state.isBeingInitializedMobile = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
       toast.success('Location submitted successfully!')
     },
