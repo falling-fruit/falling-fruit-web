@@ -66,7 +66,13 @@ class Translation:
             current = result
             for k in keys[:-1]:
                 current = current.setdefault(k, {})
-            current[keys[-1]] = value
+            if type(current) not in (type({}), type([])):
+                raise ValueError(key, value, current, type(current))
+            if type(current) == type([]):
+                last_key = int(keys[-1])
+            else:
+                last_key = keys[-1]
+            current[last_key] = value
         return result
 
     def save_as_json(self, file_path, encoder):
@@ -99,10 +105,15 @@ class LocaleFile:
                 if isinstance(value, dict):
                     flatten_dict(value, full_key)
                 else:
-                    renamed_key = self.rename_key_if_needed(full_key)
-                    translation.set(renamed_key, self.clean_value(value))
+                    translation.set(full_key, self.clean_value(value))
                     
         flatten_dict(self.data)
+        if hasattr(self, 'manager') and self.manager.key_renames:
+            for key, new_key in self.manager.key_renames.items():
+                v = translation.get(key)
+                del translation.entries[key]
+                translation.set(new_key, v)
+
         return translation
 
 class YamlLocaleFile(LocaleFile):
@@ -121,20 +132,22 @@ class YamlLocaleFile(LocaleFile):
             value = re.sub(r'%\{(\w+)\}', r'{{\1}}', value)
         return value
 
-    def rename_key_if_needed(self, key):
-        """Apply any configured key renames"""
-        if hasattr(self, 'manager') and self.manager.key_renames:
-            return self.manager.key_renames.get(key, key)
-        return key
-
 def print_colored_dict(d, indent=0):
     """Print a nested dictionary with proper indentation"""
     for key, value in sorted(d.items()):
         indent_str = "  " * indent
-        if isinstance(value, dict):
+        if type(value) == type({}):
             print(f'{indent_str}"{key}": {{')
             print_colored_dict(value, indent + 1)
             print(f'{indent_str}}}{"," if indent > 0 else ""}')
+        elif type(value) == type([]):
+            print(f'{indent_str}"{key}": [')
+            for i in range(0, len(value)):
+                v = value[i]
+                indent_str_1 = "  " * (indent + 1)
+                print(f'{indent_str_1}"{v}"{"," if i < len(value) else ""}')
+
+            print(f'{indent_str}]{"," if indent > 0 else ""}')
         else:
             is_last = key == list(sorted(d.keys()))[-1] and indent > 0
             print(f'{indent_str}"{key}": "{value}"{"" if is_last else ","}')
@@ -176,7 +189,7 @@ class JsonLocaleFile(LocaleFile):
 
 
 class TranslationManager:
-    def __init__(self, source_path, yaml_folder_path, json_folder_path, yaml_key_renames_path=None):
+    def __init__(self, source_path, yaml_folder_path, json_folder_path, yaml_key_renames_path=None, mobile_json_folder_path=None):
         self.source_path = Path(source_path) if source_path else None
         self.components = []
         if self.source_path:
@@ -186,6 +199,7 @@ class TranslationManager:
                 self.scan_source_files()
         self.yaml_folder_path = Path(yaml_folder_path) if yaml_folder_path else None
         self.json_folder_path = Path(json_folder_path) if json_folder_path else None
+        self.mobile_json_folder_path = Path(mobile_json_folder_path) if mobile_json_folder_path else None
         self.yaml_key_renames_path = Path(yaml_key_renames_path) if yaml_key_renames_path else None
         self.key_renames = self.load_key_renames()
 
@@ -234,11 +248,13 @@ class TranslationManager:
 
         for yaml_file in yaml_files:
             yaml_locale = YamlLocaleFile(yaml_file)
+            yaml_locale.manager = self
             json_file = self.json_folder_path / f"{yaml_locale.lang_code}.json"
             if json_file.exists():
                 json_locale = JsonLocaleFile(json_file)
 
-                added_keys = 0
+                yaml_added = 0
+                mobile_added = 0
                 edited_keys = 0
                 missing_keys = 0
                 
@@ -249,24 +265,31 @@ class TranslationManager:
                 # Convert YAML to Translation
                 yaml_translation = yaml_locale.to_translation()
                 json_translation = json_locale.to_translation()
+                
+                # Load mobile translations if available
+                mobile_json_file = self.mobile_json_folder_path / f"{yaml_locale.lang_code}.json" if self.mobile_json_folder_path else None
+                mobile_translation = JsonLocaleFile(mobile_json_file).to_translation() if mobile_json_file and mobile_json_file.exists() else None
 
                 for key in all_keys:
                     value = yaml_translation.get(key)
                     if value is not None:
                         existing_value = json_translation.get(key)
                         if existing_value is None:
-                            added_keys += 1
+                            yaml_added += 1
                         elif existing_value != value:
                             edited_keys += 1
                         json_translation.set(key, value)
                     elif json_translation.get(key) is None:
-                        # decide later:
-                        # we could instead seed the translation with key as value
-                        # json_translation.set(key, key)
-                        missing_keys += 1
+                        # Try to get value from mobile translations
+                        mobile_value = mobile_translation.get(key) if mobile_translation else None
+                        if mobile_value is not None:
+                            json_translation.set(key, mobile_value)
+                            mobile_added += 1
+                        else:
+                            missing_keys += 1
 
                 json_translation.save_as_json(json_file, SortedJsonEncoder(indent=2))
-                print(f"{yaml_file} -> {json_file} added {added_keys} keys, edited {edited_keys} keys, missing {missing_keys} keys. Checked: {len(all_keys)} keys")
+                print(f"{yaml_file} -> {json_file} added {yaml_added} from YAML, {mobile_added} from mobile, edited {edited_keys} keys, missing {missing_keys} keys. Checked: {len(all_keys)} keys")
             else:
                 print(f"{yaml_file} skipped: no {json_file}")
 
@@ -305,6 +328,9 @@ class TranslationManager:
         if not self.yaml_folder_path.exists():
             print(f"Error: YAML folder '{self.yaml_folder_path}' does not exist.", file=sys.stderr)
             return
+        if not self.mobile_json_folder_path:
+            print("Error: Mobile JSON folder path is required for preview", file=sys.stderr)
+            return
 
         yaml_file = next((f for f in self.yaml_folder_path.glob(f'{language}.*') 
                          if f.suffix in ['.yml', '.yaml']), None)
@@ -313,10 +339,14 @@ class TranslationManager:
             return
 
         yaml_locale = YamlLocaleFile(yaml_file)
+        yaml_locale.manager = self
         yaml_translation = yaml_locale.to_translation()
         
         json_file = self.json_folder_path / f"{yaml_locale.lang_code}.json"
+        mobile_json_file = self.mobile_json_folder_path / f"{yaml_locale.lang_code}.json" if self.mobile_json_folder_path else None
+        
         json_translation = JsonLocaleFile(json_file).to_translation() if json_file.exists() else Translation()
+        mobile_translation = JsonLocaleFile(mobile_json_file).to_translation() if mobile_json_file and mobile_json_file.exists() else Translation()
 
         # Get all keys from components and existing JSON
         component_keys = set()
@@ -328,11 +358,26 @@ class TranslationManager:
             value = yaml_translation.get(key)
             existing_value = json_translation.get(key)
             if value is not None:
-                # Color existing translations green
-                colored_value = f"{Fore.dark_blue}{value}{Style.reset}"
+                # Color existing translations dark blue
+                if isinstance(value, list):
+                    colored_value = [f"{Fore.dark_blue}{v}{Style.reset}" for v in value]
+                else:
+                    colored_value = f"{Fore.dark_blue}{value}{Style.reset}"
                 json_translation.set(key, colored_value)
             elif existing_value is not None:
-                colored_value = f"{Fore.green}{existing_value}{Style.reset}"
+                # Color existing values green
+                if isinstance(existing_value, list):
+                    colored_value = [f"{Fore.green}{v}{Style.reset}" for v in existing_value]
+                else:
+                    colored_value = f"{Fore.green}{existing_value}{Style.reset}"
+                json_translation.set(key, colored_value)
+            elif mobile_translation.get(key) is not None:
+                # Color mobile translations cyan
+                mobile_value = mobile_translation.get(key)
+                if isinstance(mobile_value, list):
+                    colored_value = [f"{Fore.cyan}{v}{Style.reset}" for v in mobile_value]
+                else:
+                    colored_value = f"{Fore.cyan}{mobile_value}{Style.reset}"
                 json_translation.set(key, colored_value)
             else:
                 # Color seeded translations red
@@ -403,6 +448,7 @@ class TranslationManager:
             yaml_files = list(self.yaml_folder_path.glob('*.yml')) + list(self.yaml_folder_path.glob('*.yaml'))
             for yaml_file in yaml_files:
                 yaml_locale = YamlLocaleFile(yaml_file)
+                yaml_locale.manager = self
                 if yaml_locale.to_translation().get(old_key) is not None:
                     print(f"Info: '{old_key}' exists in YAML file {yaml_file}")
 
@@ -467,9 +513,10 @@ class TranslationManager:
 def main():
     parser = argparse.ArgumentParser(description="Manage translations")
     parser.add_argument("--source_path", help="Path to source file or directory to scan for translations")
-    parser.add_argument("--yaml_folder_path", help="Path to the folder containing YAML locale files")
-    parser.add_argument("--json_folder_path", help="Path to the folder for output JSON locale files")
-    parser.add_argument("--yaml-key-renames-path", help="Path to TSV file mapping original YAML keys to new keys")
+    parser.add_argument("--original_site_yaml_folder_path", help="Path to the folder containing YAML locale files")
+    parser.add_argument("--new_site_json_folder_path", help="Path to the folder for output JSON locale files")
+    parser.add_argument("--mobile-site-json-folder-path", help="Path to the folder containing mobile site JSON locale files")
+    parser.add_argument("--original-site-yaml-key-renames-path", help="Path to TSV file mapping original YAML keys to new keys")
     parser.add_argument("--migrate", action="store_true", help="Migrate translations from YAML to JSON")
     parser.add_argument("--list-in-source", action="store_true", help="List all translation keys in the component file")
     parser.add_argument("--list-in-json", action="store_true", help="List all translation keys and values from JSON files")
@@ -480,8 +527,8 @@ def main():
     
     args = parser.parse_args()
 
-    if args.migrate and (not args.yaml_folder_path or not args.json_folder_path or not args.source_path):
-        print("Error: --source_path, --yaml_folder_path, and --json_folder_path must be specified for migration.")
+    if args.migrate and (not args.original_site_yaml_folder_path or not args.new_site_json_folder_path or not args.source_path):
+        print("Error: --source_path, --original_site_yaml_folder_path, and --new_site_json_folder_path must be specified for migration.")
         parser.print_help()
         return
 
@@ -491,24 +538,25 @@ def main():
         parser.print_help()
         return
 
-    if args.list_in_json and not args.json_folder_path:
-        print("Error: --json_folder_path must be specified for --list-in-json")
+    if args.list_in_json and not args.new_site_json_folder_path:
+        print("Error: --new_site_json_folder_path must be specified for --list-in-json")
         parser.print_help()
         return
 
-    manager = TranslationManager(args.source_path, args.yaml_folder_path, args.json_folder_path, args.yaml_key_renames_path)
+    manager = TranslationManager(args.source_path, args.original_site_yaml_folder_path, args.new_site_json_folder_path, 
+                               args.original_site_yaml_key_renames_path, args.mobile_site_json_folder_path)
 
 
     if args.rename_key:
-        if not args.source_path or not args.json_folder_path:
-            print("Error: --source_path and --json_folder_path must be specified for --rename-key")
+        if not args.source_path or not args.new_site_json_folder_path:
+            print("Error: --source_path and --new_site_json_folder_path must be specified for --rename-key")
             parser.print_help()
             return
         old_key, new_key = args.rename_key
         manager.rename_key(old_key, new_key)
     elif args.preview_migrate:
-        if not args.yaml_folder_path or not args.source_path:
-            print("Error: --source_path and --yaml_folder_path must be specified for --preview-migrate")
+        if not args.original_site_yaml_folder_path or not args.source_path or not args.mobile_site_json_folder_path:
+            print("Error: --source_path, --original_site_yaml_folder_path, and --mobile-site-json-folder-path must be specified for --preview-migrate")
             parser.print_help()
             return
         manager.preview_migration(args.preview_migrate)
