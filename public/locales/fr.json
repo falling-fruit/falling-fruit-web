@@ -144,6 +144,11 @@
       "fruiting": ["Fleurs", "Fruits pas mûrs", "Fruits mûrs"]
     }
   },
+  "menu": {
+    "add_location": "Ajouter un site",
+    "add_review": "Ajouter un avis",
+    "edit_location": "Éditer un site"
+  },
   "metric": "Métriques",
   "only_on_map": "Sur la carte",
   "optional": "Facultatif",
