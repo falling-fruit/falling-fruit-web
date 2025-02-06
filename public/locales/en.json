@@ -116,12 +116,6 @@
         "the_data": "The data",
         "the_project": "The project"
       }
-    },
-    "page_title": {
-      "adding_location": "Adding Location",
-      "adding_review": "Adding Review",
-      "editing_location": "Editing Location",
-      "editing_review": "Editing Review"
     }
   },
   "locations": {
@@ -153,6 +147,10 @@
     }
   },
   "menu": {
+    "add_location": "Add location",
+    "add_review": "Add review",
+    "edit_location": "Edit location",
+    "edit_review": "Edit review",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
   "metric": "Metric",

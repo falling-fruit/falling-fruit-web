@@ -30,17 +30,13 @@ const Header = styled.h3`
   margin-left: 10px;
 `
 
-const MobileNav = ({ titleKey, onBack }) => {
-  const { t } = useTranslation()
+const MobileNav = ({ title, onBack }) => (
+  <TopBar>
+    <TopBarNav onBack={onBack} title={title} />
+  </TopBar>
+)
 
-  return (
-    <TopBar>
-      <TopBarNav onBack={onBack} title={t(titleKey)} />
-    </TopBar>
-  )
-}
-
-const DesktopNav = ({ titleKey, onBack }) => {
+const DesktopNav = ({ title, onBack }) => {
   const { t } = useTranslation()
   return (
     <>
@@ -50,7 +46,7 @@ const DesktopNav = ({ titleKey, onBack }) => {
           {t('back')}
         </BackButton>
       </StyledNavBack>
-      <Header>{t(titleKey)}</Header>
+      <Header>{title}</Header>
     </>
   )
 }
@@ -58,11 +54,12 @@ const DesktopNav = ({ titleKey, onBack }) => {
 const EditLocation = ({ NavComponent }) => {
   const history = useAppHistory()
   const { locationId } = useParams()
+  const { t } = useTranslation()
 
   return (
     <>
       <NavComponent
-        titleKey="layouts.page_title.editing_location"
+        title={t('menu.edit_location')}
         onBack={(event) => {
           event.stopPropagation()
           history.push(`/locations/${locationId}`)
@@ -77,11 +74,12 @@ const AddLocation = ({ NavComponent, backUrl }) => {
   const history = useAppHistory()
   const formRef = useRef()
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   return (
     <>
       <NavComponent
-        titleKey="layouts.page_title.adding_location"
+        title={t('menu.add_location')}
         onBack={(event) => {
           event.stopPropagation()
           if (formRef.current) {
@@ -98,11 +96,12 @@ const AddLocation = ({ NavComponent, backUrl }) => {
 const AddReview = ({ NavComponent }) => {
   const history = useAppHistory()
   const { locationId } = useParams()
+  const { t } = useTranslation()
 
   return (
     <>
       <NavComponent
-        titleKey="layouts.page_title.adding_review"
+        title={t('menu.add_review')}
         onBack={(event) => {
           event.stopPropagation()
           history.push(`/locations/${locationId}`)
@@ -116,11 +115,12 @@ const AddReview = ({ NavComponent }) => {
 const EditReview = ({ NavComponent }) => {
   const history = useAppHistory()
   const { review } = useSelector((state) => state.review)
+  const { t } = useTranslation()
 
   return (
     <>
       <NavComponent
-        titleKey="layouts.page_title.editing_review"
+        title={t('menu.edit_review')}
         onBack={(event) => {
           event.stopPropagation()
           history.push(`/locations/${review?.location_id}`)
