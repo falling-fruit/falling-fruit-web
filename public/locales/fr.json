@@ -32,7 +32,6 @@
       "updated": "Votre compte a bien été mis à jour."
     }
   },
-  "edited_on": "Modifié le {{date}}",
   "form": {
     "button": {
       "reset": "Réinitialiser"
@@ -53,6 +52,7 @@
     "australia": "Australie",
     "belgium": "Belgique",
     "canada": "Canada",
+    "cancel": "Annuler",
     "chile": "Chili",
     "data": "Données",
     "delete": "Supprimer",
@@ -246,5 +246,8 @@
     "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
     "sign_in": "Se connecter",
     "sign_out": "Se déconnecter"
+  },
+  "view_location": {
+    "date_edited": "Modifié le {{date}}"
   }
 }

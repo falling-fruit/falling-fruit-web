@@ -32,7 +32,6 @@
       "updated": "Your account has been updated successfully."
     }
   },
-  "edited_on": "Edited on {{date}}",
   "form": {
     "button": {
       "reset": "Reset"
@@ -54,6 +53,7 @@
     "belgium": "Belgium",
     "brazil": "Brazil",
     "canada": "Canada",
+    "cancel": "Cancel",
     "chile": "Chile",
     "czechia": "Czechia",
     "data": "Data",
@@ -217,7 +217,7 @@
   "select_all": "Select all",
   "settings": "Settings",
   "side_menu": {
-    "bicycle": "Biking",
+    "bicycle": "Bicycle",
     "regional": "Regional",
     "satellite": "Satellite",
     "terrain": "Terrain",
@@ -250,5 +250,8 @@
     "send_password_instructions": "Send password reset instructions",
     "sign_in": "Sign in",
     "sign_out": "Sign out"
+  },
+  "view_location": {
+    "date_edited": "Updated {{date}}"
   }
 }
