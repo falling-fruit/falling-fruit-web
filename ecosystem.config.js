@@ -1,7 +1,7 @@
 module.exports = {
   name: 'web',
   script: 'serve',
-  watch: true,
+  watch: false,
   env: {
     NODE_ENV: 'production',
     PM2_SERVE_PATH: 'build',
@@ -9,4 +9,7 @@ module.exports = {
     PM2_SERVE_SPA: 'true',
     PM2_SERVE_HOMEPAGE: '/index.html',
   },
+  exec_mode: 'cluster',
+  instances: 4,
+  merge_logs: true,
 }
