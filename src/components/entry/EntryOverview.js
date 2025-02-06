@@ -196,7 +196,7 @@ const EntryOverview = () => {
             <EditAlt size={20} />
             <p>
               <time dateTime={locationData.updated_at}>
-                {t('edited_on', {
+                {t('view_location.date_edited', {
                   date: formatISOString(locationData.updated_at, i18n.language),
                 })}
               </time>

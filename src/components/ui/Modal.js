@@ -83,7 +83,7 @@ const Modal = ({
               {!isLoggedIn && <Recaptcha />}
               <Buttons>
                 <Button type="button" onClick={onDismiss} secondary>
-                  Cancel
+                  {t('glossary.cancel')}
                 </Button>
                 <Button
                   disabled={!isDirty || isSubmitting || !isValid}

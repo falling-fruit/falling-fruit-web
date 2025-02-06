@@ -370,6 +370,7 @@ class TranslationManager:
                     colored_value = [f"{Fore.green}{v}{Style.reset}" for v in existing_value]
                 else:
                     colored_value = f"{Fore.green}{existing_value}{Style.reset}"
+                print(key, colored_value)
                 json_translation.set(key, colored_value)
             elif mobile_translation.get(key) is not None:
                 # Color mobile translations cyan
@@ -389,7 +390,6 @@ class TranslationManager:
             if key not in component_keys:
                 # Color orphaned keys magenta
                 colored_value = f"{Fore.magenta}{value}{Style.reset}"
-                print(key, colored_value)
                 json_translation.set(key, colored_value)
 
         # Print the colored nested dictionary
