@@ -1,5 +1,4 @@
 {
-  "added_by": "Ajouté par {{name}}",
   "back": "Retour",
   "deselect_all": "Désélectionner tous",
   "devise": {
@@ -69,7 +68,6 @@
     "unverified": "Non vérifié",
     "yield": "Production"
   },
-  "imported_from": "Importé de {{name}}",
   "layouts": {
     "application": {
       "menu": {
@@ -106,6 +104,11 @@
         "Privé"
       ],
       "fruiting": ["Fleurs", "Fruits pas mûrs", "Fruits mûrs"]
+    },
+    "overview": {
+      "added_by": "Ajouté par {{name}}",
+      "date_edited": "Modifié le {{date}}",
+      "imported_from": "Importé de {{name}}"
     }
   },
   "menu": {
@@ -242,8 +245,5 @@
     "resend_confirmation_instructions": "Renvoyer les instructions de validation",
     "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
     "sign_in": "Se connecter"
-  },
-  "view_location": {
-    "date_edited": "Modifié le {{date}}"
   }
 }
