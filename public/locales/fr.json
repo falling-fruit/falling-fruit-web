@@ -28,6 +28,7 @@
   "form": {
     "button": {
       "cancel": "Annuler",
+      "delete": "Supprimer",
       "reset": "Réinitialiser"
     },
     "optional": "Facultatif",
@@ -40,7 +41,6 @@
     "activity": "Activité",
     "address": "Adresse",
     "data": "Données",
-    "delete": "Supprimer",
     "description": "Description",
     "donate": "Contribuer",
     "edit": "Modifier",

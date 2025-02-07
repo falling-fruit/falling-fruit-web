@@ -215,7 +215,7 @@ export const ReviewForm = ({
                       type="button"
                       onClick={() => handleDelete(formikProps)}
                     >
-                      {t('glossary.delete')}
+                      {t('form.button.delete')}
                     </DeleteButton>
                   )}
                 </div>
