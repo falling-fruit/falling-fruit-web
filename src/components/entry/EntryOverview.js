@@ -167,10 +167,12 @@ const EntryOverview = () => {
               {locationData.import_id ? <Data size={20} /> : <User size={20} />}
               <p>
                 {locationData.author && locationData.import_id ? (
-                  t('imported_from', { name: locationData.author })
+                  t('locations.overview.imported_from', {
+                    name: locationData.author,
+                  })
                 ) : (
                   <>
-                    {t('added_by', { name: '' })}{' '}
+                    {t('locations.overview.added_by', { name: '' })}{' '}
                     {locationData.user_id ? (
                       <Link to={`/users/${locationData.user_id}`}>
                         {locationData.author}
@@ -196,7 +198,7 @@ const EntryOverview = () => {
             <EditAlt size={20} />
             <p>
               <time dateTime={locationData.updated_at}>
-                {t('view_location.date_edited', {
+                {t('locations.overview.date_edited', {
                   date: formatISOString(locationData.updated_at, i18n.language),
                 })}
               </time>

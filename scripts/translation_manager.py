@@ -39,8 +39,8 @@ class Component:
         
         # Replace the key in t() calls, being careful with quote types
         for quote in ['"', "'", '`']:
-            content = content.replace(f't({quote}{old_key}{quote})', 
-                                    f't({quote}{new_key}{quote})')
+            content = content.replace(f't({quote}{old_key}', 
+                                    f't({quote}{new_key}')
         
         with open(self.file_path, 'w') as file:
             file.write(content)

@@ -68,7 +68,6 @@
     "unverified": "Unverified",
     "yield": "Yield"
   },
-  "imported_from": "Imported from {{name}}",
   "layouts": {
     "application": {
       "menu": {
@@ -105,6 +104,11 @@
         "Private"
       ],
       "fruiting": ["Flowers", "Unripe fruit", "Ripe fruit"]
+    },
+    "overview": {
+      "added_by": "Added by {{name}}",
+      "date_edited": "Updated {{date}}",
+      "imported_from": "Imported from {{name}}"
     }
   },
   "menu": {
@@ -245,8 +249,5 @@
     "resend_confirmation_instructions": "Resend confirmation instructions",
     "send_password_instructions": "Send password reset instructions",
     "sign_in": "Sign in"
-  },
-  "view_location": {
-    "date_edited": "Updated {{date}}"
   }
 }

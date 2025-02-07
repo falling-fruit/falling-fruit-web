@@ -18,3 +18,9 @@ glossary.sweden	pages.sharing.countries.sweden
 glossary.switzerland	pages.sharing.countries.switzerland
 glossary.united_kingdom	pages.sharing.countries.united_kingdom
 glossary.united_states	pages.sharing.countries.united_states
+changes.recent_changes	pages.changes.recent_changes
+changes.change_in_city	pages.changes.change_in_city
+changes.type.added	pages.changes.type.added
+changes.type.edited	pages.changes.type.edited
+changes.type.visited	pages.changes.type.visited
+glossary.add_source	menu.add_new_location
