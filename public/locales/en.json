@@ -1,6 +1,5 @@
 {
   "back": "Back",
-  "deselect_all": "Deselect all",
   "devise": {
     "confirmations": {
       "confirmed": "Your email address has been successfully confirmed.",
@@ -20,6 +19,12 @@
       "update_needs_confirmation": "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address.",
       "updated": "Your account has been updated successfully."
     }
+  },
+  "filter": {
+    "deselect_all": "Deselect all",
+    "only_on_map": "On the map",
+    "select_all": "Select all",
+    "type": "Type"
   },
   "form": {
     "button": {
@@ -119,7 +124,6 @@
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
-  "only_on_map": "On the map",
   "optional": "Optional",
   "pages": {
     "about": {
@@ -223,7 +227,6 @@
     "problem_type": "Problem type"
   },
   "required": "Required",
-  "select_all": "Select all",
   "time": {
     "days": {
       "one": "{{count}} day",
@@ -232,7 +235,6 @@
     "last_24_hours": "Last 24 hours",
     "time_ago": "{{time}} ago"
   },
-  "type": "Type",
   "users": {
     "bio": "About you",
     "change_password": "Change my password",

@@ -1,6 +1,5 @@
 {
   "back": "Retour",
-  "deselect_all": "Désélectionner tous",
   "devise": {
     "confirmations": {
       "confirmed": "Votre compte a été validé. Vous êtes maintenant connecté.",
@@ -20,6 +19,12 @@
       "update_needs_confirmation": "Votre compte a bien été mis à jour mais nous devons vérifier votre nouvelle adresse e-mail. Veuillez consulter votre messagerie et cliquer sur le lien pour confirmer votre nouvelle adresse.",
       "updated": "Votre compte a bien été mis à jour."
     }
+  },
+  "filter": {
+    "deselect_all": "Désélectionner tous",
+    "only_on_map": "Sur la carte",
+    "select_all": "Sélectionner tous",
+    "type": "Type"
   },
   "form": {
     "button": {
@@ -117,7 +122,6 @@
     "edit_location": "Éditer un site",
     "settings": "Paramètres"
   },
-  "only_on_map": "Sur la carte",
   "optional": "Facultatif",
   "pages": {
     "about": {
@@ -219,7 +223,6 @@
     "problem_type": "Type de problème"
   },
   "required": "Obligatoire",
-  "select_all": "Sélectionner tous",
   "time": {
     "days": {
       "one": "{{count}} jour",
@@ -228,7 +231,6 @@
     "last_24_hours": "Dernières 24 heures",
     "time_ago": "Il y a {{time}}"
   },
-  "type": "Type",
   "users": {
     "bio": "Parlez-nous de vous",
     "change_password": "Modifier mon mot de passe",

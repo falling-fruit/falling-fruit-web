@@ -80,13 +80,13 @@ const Filter = () => {
         <EdibleTypeText>{t('glossary.types')}</EdibleTypeText>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
-          placeholder={t('type')}
+          placeholder={t('filter.type')}
         />
         <TreeFiltersContainer>
           <LabeledCheckbox
             field="showOnlyOnMap"
             value={showOnlyOnMap}
-            label={t('only_on_map')}
+            label={t('filter.only_on_map')}
             onChange={(checked) => dispatch(setShowOnlyOnMap(checked))}
             style={{ display: 'inline-block', marginRight: '5px' }}
           />
