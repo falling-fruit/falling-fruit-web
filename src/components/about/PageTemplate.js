@@ -125,7 +125,7 @@ const PageTemplate = ({ children, from }) => {
       {from && isMobile && (
         <StyledBackButton onClick={onClickBackButton}>
           <ArrowBack />
-          {t('back')}
+          {t('layouts.back')}
         </StyledBackButton>
       )}
 

@@ -248,7 +248,7 @@ export const LocationForm = ({ editingId, initialValues, innerRef }) => {
               )}
               <ProgressButtons>
                 <Button secondary type="button" onClick={handleCancel}>
-                  {t('glossary.cancel')}
+                  {t('form.button.cancel')}
                 </Button>
                 <Button
                   disabled={isSubmitting || !isValid || !formDirty}

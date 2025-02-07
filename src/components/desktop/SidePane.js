@@ -89,7 +89,7 @@ const SidePane = () => {
                   }}
                 >
                   <ArrowBack />
-                  {t('back')}
+                  {t('layouts.back')}
                 </BackButton>
               </StyledNavBack>
               <Header>{t('menu.settings')}</Header>
@@ -110,7 +110,7 @@ const SidePane = () => {
                         }
                       >
                         <ArrowBack />
-                        {t('back')}
+                        {t('layouts.back')}
                       </BackButton>
                       <BackButton
                         onClick={() =>

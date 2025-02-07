@@ -1,5 +1,4 @@
 {
-  "back": "Retour",
   "devise": {
     "confirmations": {
       "confirmed": "Votre compte a été validé. Vous êtes maintenant connecté.",
@@ -28,8 +27,11 @@
   },
   "form": {
     "button": {
+      "cancel": "Annuler",
       "reset": "Réinitialiser"
-    }
+    },
+    "optional": "Facultatif",
+    "required": "Obligatoire"
   },
   "glossary": {
     "about": "À propos",
@@ -37,7 +39,6 @@
     "account": "Compte",
     "activity": "Activité",
     "address": "Adresse",
-    "cancel": "Annuler",
     "data": "Données",
     "delete": "Supprimer",
     "description": "Description",
@@ -81,7 +82,8 @@
         "the_data": "Les données",
         "the_project": "Le projet"
       }
-    }
+    },
+    "back": "Retour"
   },
   "locations": {
     "form": {
@@ -122,7 +124,6 @@
     "edit_location": "Éditer un site",
     "settings": "Paramètres"
   },
-  "optional": "Facultatif",
   "pages": {
     "about": {
       "about_the_site": "À propos du projet",
@@ -222,7 +223,6 @@
     "description_subtext": "Toute information pouvant nous aider à évaluer le problème",
     "problem_type": "Type de problème"
   },
-  "required": "Obligatoire",
   "time": {
     "days": {
       "one": "{{count}} jour",

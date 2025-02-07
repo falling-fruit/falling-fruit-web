@@ -58,7 +58,7 @@ const UserProfile = () => {
             }}
           >
             <ArrowBack />
-            {t('back')}
+            {t('layouts.back')}
           </BackButton>
         </StyledNavBack>
         <h3>User: {name}</h3>

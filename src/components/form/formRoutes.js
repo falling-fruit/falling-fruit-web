@@ -43,7 +43,7 @@ const DesktopNav = ({ title, onBack }) => {
       <StyledNavBack>
         <BackButton onClick={onBack}>
           <ArrowBack />
-          {t('back')}
+          {t('layouts.back')}
         </BackButton>
       </StyledNavBack>
       <Header>{title}</Header>
