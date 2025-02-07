@@ -190,12 +190,12 @@ const SettingsPage = ({ desktop }) => {
             image: GoogleRoadmap,
           },
           {
-            label: t('side_menu.terrain'),
+            label: t('pages.settings.terrain'),
             value: 'terrain',
             image: GoogleTerrain,
           },
           {
-            label: t('side_menu.satellite'),
+            label: t('pages.settings.satellite'),
             value: 'hybrid',
             image: GoogleSatellite,
           },
@@ -224,12 +224,12 @@ const SettingsPage = ({ desktop }) => {
         <RadioTiles
           options={[
             {
-              label: t('side_menu.bicycle'),
+              label: t('pages.settings.side_menu'),
               value: 'BicyclingLayer',
               image: GoogleBicycling,
             },
             {
-              label: t('side_menu.transit'),
+              label: t('pages.settings.transit'),
               value: 'TransitLayer',
               image: GoogleTransit,
             },
@@ -300,7 +300,7 @@ const SettingsPage = ({ desktop }) => {
         <Attribution>{Attributions[settings.mapType]}</Attribution>
       )}
 
-      <h3>{t('side_menu.regional')}</h3>
+      <h3>{t('pages.settings.regional')}</h3>
 
       <LabeledRow
         label={<label htmlFor="languagePreference">{t('language')}</label>}

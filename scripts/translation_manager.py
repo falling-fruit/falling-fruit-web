@@ -108,8 +108,8 @@ class LocaleFile:
                     translation.set(full_key, self.clean_value(value))
                     
         flatten_dict(self.data)
-        if hasattr(self, 'manager') and self.manager.key_renames:
-            for key, new_key in self.manager.key_renames.items():
+        if hasattr(self, 'key_renames'):
+            for key, new_key in self.key_renames.items():
                 v = translation.entries.pop(key, None)
                 translation.set(new_key, v)
 
@@ -188,7 +188,7 @@ class JsonLocaleFile(LocaleFile):
 
 
 class TranslationManager:
-    def __init__(self, source_path, yaml_folder_path, json_folder_path, yaml_key_renames_path=None, mobile_json_folder_path=None):
+    def __init__(self, source_path, yaml_folder_path, json_folder_path, yaml_key_renames_path=None, mobile_json_folder_path=None, mobile_key_renames_path=None):
         self.source_path = Path(source_path) if source_path else None
         self.components = []
         if self.source_path:
@@ -200,26 +200,31 @@ class TranslationManager:
         self.json_folder_path = Path(json_folder_path) if json_folder_path else None
         self.mobile_json_folder_path = Path(mobile_json_folder_path) if mobile_json_folder_path else None
         self.yaml_key_renames_path = Path(yaml_key_renames_path) if yaml_key_renames_path else None
-        self.key_renames = self.load_key_renames()
+        self.mobile_key_renames_path = Path(mobile_key_renames_path) if mobile_key_renames_path else None
+        self.yaml_key_renames = self.load_key_renames(self.yaml_key_renames_path)
+        self.mobile_key_renames = self.load_key_renames(self.mobile_key_renames_path)
 
-    def load_key_renames(self):
+    def load_key_renames(self, renames_path):
         """Load key renames from TSV file"""
         renames = {}
-        if self.yaml_key_renames_path and self.yaml_key_renames_path.exists():
-            with open(self.yaml_key_renames_path, 'r') as f:
+        if renames_path and renames_path.exists():
+            with open(renames_path, 'r') as f:
                 for line in f:
                     old_key, new_key = line.strip().split('\t')
                     renames[old_key] = new_key
         return renames
 
-    def append_key_rename(self, old_key: str, new_key: str):
+    def append_key_rename(self, old_key: str, new_key: str, is_mobile=False):
         """Append a key rename to the TSV file"""
-        if not self.yaml_key_renames_path:
+        renames_path = self.mobile_key_renames_path if is_mobile else self.yaml_key_renames_path
+        renames_dict = self.mobile_key_renames if is_mobile else self.yaml_key_renames
+        
+        if not renames_path:
             return
         
-        with open(self.yaml_key_renames_path, 'a') as f:
+        with open(renames_path, 'a') as f:
             f.write(f"{old_key}\t{new_key}\n")
-        self.key_renames[old_key] = new_key
+        renames_dict[old_key] = new_key
 
     def scan_source_files(self):
         for file_path in self.source_path.rglob('*'):
@@ -267,7 +272,12 @@ class TranslationManager:
                 
                 # Load mobile translations if available
                 mobile_json_file = self.mobile_json_folder_path / f"{yaml_locale.lang_code}.json" if self.mobile_json_folder_path else None
-                mobile_translation = JsonLocaleFile(mobile_json_file).to_translation() if mobile_json_file and mobile_json_file.exists() else None
+                if mobile_json_file and mobile_json_file.exists():
+                    mobile_locale = JsonLocaleFile(mobile_json_file)
+                    mobile_locale.key_renames = self.mobile_key_renames
+                    mobile_translation = mobile_locale.to_translation()
+                else:
+                    mobile_translation = Translation()
 
                 for key in all_keys:
                     value = yaml_translation.get(key)
@@ -338,14 +348,21 @@ class TranslationManager:
             return
 
         yaml_locale = YamlLocaleFile(yaml_file)
-        yaml_locale.manager = self
+        yaml_locale.key_renames = self.yaml_key_renames
         yaml_translation = yaml_locale.to_translation()
         
         json_file = self.json_folder_path / f"{yaml_locale.lang_code}.json"
         mobile_json_file = self.mobile_json_folder_path / f"{yaml_locale.lang_code}.json" if self.mobile_json_folder_path else None
         
         json_translation = JsonLocaleFile(json_file).to_translation() if json_file.exists() else Translation()
-        mobile_translation = JsonLocaleFile(mobile_json_file).to_translation() if mobile_json_file and mobile_json_file.exists() else Translation()
+
+        
+        if mobile_json_file and mobile_json_file.exists():
+            mobile_locale = JsonLocaleFile(mobile_json_file)
+            mobile_locale.key_renames = self.mobile_key_renames
+            mobile_translation = mobile_locale.to_translation()
+        else:
+            mobile_translation = Translation()
 
         # Get all keys from components and existing JSON
         component_keys = set()
@@ -422,13 +439,13 @@ class TranslationManager:
             print(f"Error: Key '{old_key}' not found in English JSON")
             return False
 
-        # If key exists in YAML, add to renames file
+        # Check if key exists in YAML and add to renames if needed
         yaml_has_key = False
         if self.yaml_folder_path and self.yaml_folder_path.exists():
             yaml_files = list(self.yaml_folder_path.glob('*.yml')) + list(self.yaml_folder_path.glob('*.yaml'))
             for yaml_file in yaml_files:
                 yaml_locale = YamlLocaleFile(yaml_file)
-                yaml_locale.manager = self  # Allow access to renames
+                yaml_locale.key_renames = self.yaml_key_renames
                 if yaml_locale.to_translation().get(old_key) is not None:
                     yaml_has_key = True
                     break
@@ -439,6 +456,23 @@ class TranslationManager:
                 print(f"Info: '{old_key}' exists in YAML file {yaml_file}")
             else:
                 print(f"Error: '{old_key}' exists in YAML file {yaml_file} but no renames file. Aborting")
+                return False
+
+        # Check if key exists in mobile JSON and add to renames if needed
+        mobile_has_key = False
+        if self.mobile_json_folder_path and self.mobile_json_folder_path.exists():
+            for json_file in self.mobile_json_folder_path.glob('*.json'):
+                mobile_locale = JsonLocaleFile(json_file)
+                if mobile_locale.to_translation().get(old_key) is not None:
+                    mobile_has_key = True
+                    break
+
+        if mobile_has_key:
+            if self.mobile_key_renames_path:
+                self.append_key_rename(old_key, new_key, is_mobile=True)
+                print(f"Info: '{old_key}' exists in mobile JSON file {json_file}")
+            else:
+                print(f"Error: '{old_key}' exists in mobile JSON file {json_file} but no renames file. Aborting")
                 return False
 
         # Rename in source files
@@ -506,6 +540,7 @@ def main():
     parser.add_argument("--new_site_json_folder_path", help="Path to the folder for output JSON locale files")
     parser.add_argument("--mobile-site-json-folder-path", help="Path to the folder containing mobile site JSON locale files")
     parser.add_argument("--original-site-yaml-key-renames-path", help="Path to TSV file mapping original YAML keys to new keys")
+    parser.add_argument("--mobile-site-key-renames-path", help="Path to TSV file mapping mobile site JSON keys to new keys")
     parser.add_argument("--migrate", action="store_true", help="Migrate translations from YAML to JSON")
     parser.add_argument("--list-in-source", action="store_true", help="List all translation keys in the component file")
     parser.add_argument("--list-in-json", action="store_true", help="List all translation keys and values from JSON files")
@@ -532,8 +567,9 @@ def main():
         parser.print_help()
         return
 
-    manager = TranslationManager(args.source_path, args.original_site_yaml_folder_path, args.new_site_json_folder_path, 
-                               args.original_site_yaml_key_renames_path, args.mobile_site_json_folder_path)
+    manager = TranslationManager(args.source_path, args.original_site_yaml_folder_path, args.new_site_json_folder_path,
+                               args.original_site_yaml_key_renames_path, args.mobile_site_json_folder_path,
+                               args.mobile_site_key_renames_path)
 
 
     if args.rename_key:
