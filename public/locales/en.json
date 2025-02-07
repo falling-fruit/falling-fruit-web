@@ -1,5 +1,4 @@
 {
-  "back": "Back",
   "devise": {
     "confirmations": {
       "confirmed": "Your email address has been successfully confirmed.",
@@ -28,8 +27,11 @@
   },
   "form": {
     "button": {
+      "cancel": "Cancel",
       "reset": "Reset"
-    }
+    },
+    "optional": "Optional",
+    "required": "Required"
   },
   "glossary": {
     "about": "About",
@@ -37,7 +39,6 @@
     "account": "Account",
     "activity": "Activity",
     "address": "Address",
-    "cancel": "Cancel",
     "data": "Data",
     "delete": "Delete",
     "description": "Description",
@@ -81,7 +82,8 @@
         "the_data": "The data",
         "the_project": "The project"
       }
-    }
+    },
+    "back": "Back"
   },
   "locations": {
     "form": {
@@ -124,7 +126,6 @@
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
-  "optional": "Optional",
   "pages": {
     "about": {
       "about_the_site": "About the project",
@@ -226,7 +227,6 @@
     "description_subtext": "Any information that might help us evaluate the problem",
     "problem_type": "Problem type"
   },
-  "required": "Required",
   "time": {
     "days": {
       "one": "{{count}} day",

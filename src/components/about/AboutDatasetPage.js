@@ -59,7 +59,7 @@ const AboutDatasetPage = () => {
             }}
           >
             <ArrowBack />
-            {t('back')}
+            {t('layouts.back')}
           </BackButton>
         </StyledNavBack>
         <h3>
