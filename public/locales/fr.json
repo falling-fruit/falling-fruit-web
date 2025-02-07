@@ -7,7 +7,6 @@
     "type": {
       "added": "ajouté",
       "edited": "modifié",
-      "grafted": "greffé",
       "visited": "visité"
     }
   },
@@ -36,11 +35,7 @@
     "button": {
       "reset": "Réinitialiser"
     },
-    "error": {
-      "confirmation": "Ne correspond pas à l'original",
-      "missing_password": "Requis pour changer d'email ou de mot de passe",
-      "too_short": "Minimum de {{min}} caractères"
-    }
+    "error": {}
   },
   "glossary": {
     "about": "À propos",
@@ -246,8 +241,7 @@
     "remember_me": "Rester connecté",
     "resend_confirmation_instructions": "Renvoyer les instructions de validation",
     "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
-    "sign_in": "Se connecter",
-    "sign_out": "Se déconnecter"
+    "sign_in": "Se connecter"
   },
   "view_location": {
     "date_edited": "Modifié le {{date}}"
