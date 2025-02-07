@@ -34,8 +34,7 @@
   "form": {
     "button": {
       "reset": "Reset"
-    },
-    "error": {}
+    }
   },
   "glossary": {
     "about": "About",
@@ -177,6 +176,13 @@
       "type": "Type",
       "types_of_data": "Datasets imported into Falling Fruit fall into two main categories. \"Community maps\" are built by foragers and freegans as they peruse their communities for things to eat. We are indebted to the hardworking citizen-cartographers who have compiled this data. \"Tree inventories\" are compiled by cities, universities, and other institutions wishing to better document and care for their trees. We mine these vast datasets for food-producing species and add them to the map. To help us map your neighborhood fruit trees, contact your school or city urging them to share their tree inventory with us."
     },
+    "settings": {
+      "regional": "Regional",
+      "satellite": "Satellite",
+      "side_menu": "Bicycle",
+      "terrain": "Terrain",
+      "transit": "Transit"
+    },
     "sharing": {
       "countries": {
         "australia": "Australia",
@@ -213,13 +219,6 @@
   "roadmap": "Map",
   "select_all": "Select all",
   "settings": "Settings",
-  "side_menu": {
-    "bicycle": "Bicycle",
-    "regional": "Regional",
-    "satellite": "Satellite",
-    "terrain": "Terrain",
-    "transit": "Transit"
-  },
   "time": {
     "days": {
       "one": "{{count}} day",
