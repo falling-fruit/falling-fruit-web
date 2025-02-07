@@ -1,5 +1,4 @@
 {
-  "added_by": "Added by {{name}}",
   "back": "Back",
   "deselect_all": "Deselect all",
   "devise": {
@@ -32,7 +31,6 @@
     "access": "Access",
     "account": "Account",
     "activity": "Activity",
-    "add_source": "Add location",
     "address": "Address",
     "cancel": "Cancel",
     "data": "Data",
@@ -110,7 +108,7 @@
     }
   },
   "menu": {
-    "add_location": "Add location",
+    "add_new_location": "Add location",
     "add_review": "Add review",
     "edit_location": "Edit location",
     "edit_review": "Edit review",
