@@ -110,8 +110,7 @@ class LocaleFile:
         flatten_dict(self.data)
         if hasattr(self, 'manager') and self.manager.key_renames:
             for key, new_key in self.manager.key_renames.items():
-                v = translation.get(key)
-                del translation.entries[key]
+                v = translation.entries.pop(key, None)
                 translation.set(new_key, v)
 
         return translation
@@ -364,14 +363,6 @@ class TranslationManager:
                 else:
                     colored_value = f"{Fore.dark_blue}{value}{Style.reset}"
                 json_translation.set(key, colored_value)
-            elif existing_value is not None:
-                # Color existing values green
-                if isinstance(existing_value, list):
-                    colored_value = [f"{Fore.green}{v}{Style.reset}" for v in existing_value]
-                else:
-                    colored_value = f"{Fore.green}{existing_value}{Style.reset}"
-                print(key, colored_value)
-                json_translation.set(key, colored_value)
             elif mobile_translation.get(key) is not None:
                 # Color mobile translations cyan
                 mobile_value = mobile_translation.get(key)
@@ -379,6 +370,14 @@ class TranslationManager:
                     colored_value = [f"{Fore.cyan}{v}{Style.reset}" for v in mobile_value]
                 else:
                     colored_value = f"{Fore.cyan}{mobile_value}{Style.reset}"
+                json_translation.set(key, colored_value)
+            elif existing_value is not None:
+                # Color existing values green
+                if isinstance(existing_value, list):
+                    colored_value = [f"{Fore.green}{v}{Style.reset}" for v in existing_value]
+                else:
+                    colored_value = f"{Fore.green}{existing_value}{Style.reset}"
+                print(key, colored_value)
                 json_translation.set(key, colored_value)
             else:
                 # Color seeded translations red
@@ -441,16 +440,6 @@ class TranslationManager:
             else:
                 print(f"Error: '{old_key}' exists in YAML file {yaml_file} but no renames file. Aborting")
                 return False
-
-
-        # Check if the key exists in YAML files (which we don't want to modify)
-        if self.yaml_folder_path and self.yaml_folder_path.exists():
-            yaml_files = list(self.yaml_folder_path.glob('*.yml')) + list(self.yaml_folder_path.glob('*.yaml'))
-            for yaml_file in yaml_files:
-                yaml_locale = YamlLocaleFile(yaml_file)
-                yaml_locale.manager = self
-                if yaml_locale.to_translation().get(old_key) is not None:
-                    print(f"Info: '{old_key}' exists in YAML file {yaml_file}")
 
         # Rename in source files
         source_files_changed = 0
