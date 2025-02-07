@@ -1,15 +1,6 @@
 {
   "added_by": "Ajouté par {{name}}",
   "back": "Retour",
-  "changes": {
-    "change_in_city": "{{type}} à {{city}}",
-    "recent_changes": "Modifications récentes",
-    "type": {
-      "added": "ajouté",
-      "edited": "modifié",
-      "visited": "visité"
-    }
-  },
   "deselect_all": "Désélectionner tous",
   "devise": {
     "confirmations": {
@@ -157,6 +148,15 @@
       "translators": "Traducteurs",
       "tristram_stuart_bio_html": "Pendant son adolescence, Tristam élevait des cochons grâce au surplus alimentaire qu’il récupérait auprès des cuisines de son lycée, de la boulangerie du quartier et du marchand de légumes. C’est en remarquant que la majorité de ce surplus était propre à la consommation humaine qu’il a réalisé en quelle quantité était gâchée la nourriture, pourtant encore fraiche et bonne. Depuis, Tristam ne ménage pas ses efforts pour en informer le public, les médias et les décideurs politiques. C’est pour montrer l’envergure du problème qu’il a créé l’organisme de campagne contre le gaspillage alimentaire, <a href=\"//feedbackglobal.org\">Feedback Global</a> , et qu’il a écrit <a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a>. En 2011, Tristam a reçu le <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">prix Sophie</a> pour honorer son combat contre le gaspillage alimentaire.",
       "write": "Écrire"
+    },
+    "changes": {
+      "change_in_city": "{{type}} à {{city}}",
+      "recent_changes": "Modifications récentes",
+      "type": {
+        "added": "ajouté",
+        "edited": "modifié",
+        "visited": "visité"
+      }
     },
     "data": {
       "beware_html": "Attention! Une fois décompressées, les données deviennent un fichier énorme qui écrase la plupart des logiciels de tableur. Si vous recherchez seulement les données d'une zone limitée, essayez d'abord de récupérer les points d'intérêts avec l'outil de téléchargement intégré à la <a href=\"/\">carte</a>.",

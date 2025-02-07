@@ -1,15 +1,6 @@
 {
   "added_by": "Added by {{name}}",
   "back": "Back",
-  "changes": {
-    "change_in_city": "{{type}} in {{city}}",
-    "recent_changes": "Recent changes",
-    "type": {
-      "added": "added",
-      "edited": "edited",
-      "visited": "visited"
-    }
-  },
   "deselect_all": "Deselect all",
   "devise": {
     "confirmations": {
@@ -159,6 +150,15 @@
       "translators": "Translators",
       "tristram_stuart_bio_html": "As a teenager, Tristram raised pigs on surplus food that he collected from his school kitchens, the local baker and village greengrocer. Noticing that a lot of this food was still suitable for human consumption led him to the realization that good, fresh food was being wasted on a colossal scale. Tristram has since worked tirelessly to bring this issue to the attention of the public, the media, and policy-makers. He founded the food waste campaign organization <a href=\"//feedbackglobal.org\">Feedback Global</a> and wrote <a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a> to demonstrate the extent of the problem on a global scale. In 2011, Tristram was awarded <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">The Sophie Prize</a> for his fight against food waste.",
       "write": "Write"
+    },
+    "changes": {
+      "change_in_city": "{{type}} in {{city}}",
+      "recent_changes": "Recent changes",
+      "type": {
+        "added": "added",
+        "edited": "edited",
+        "visited": "visited"
+      }
     },
     "data": {
       "beware_html": "But beware! Once uncompressed, the database is a huge file that will crush most spreadsheet software. If you only need data for a small region, first try retrieving them using the download tool integrated into the <a href=\"/\">map</a>.",

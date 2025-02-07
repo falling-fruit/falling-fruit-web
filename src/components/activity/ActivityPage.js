@@ -85,7 +85,7 @@ const ActivityPage = () => {
   return (
     <PageScrollWrapper>
       <PageTemplate from="Settings">
-        <h1>{t('changes.recent_changes')}</h1>
+        <h1>{t('pages.changes.recent_changes')}</h1>
         {locationChanges.length > 0 &&
           groupedData.map((period) => (
             <ChangesPeriod key={period.daysAgo} period={period} />

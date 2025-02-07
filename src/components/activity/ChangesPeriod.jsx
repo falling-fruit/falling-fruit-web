@@ -13,11 +13,11 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 const formatChangeType = (type, t) => {
   switch (type) {
     case 'added':
-      return t('changes.type.added')
+      return t('pages.changes.type.added')
     case 'edited':
-      return t('changes.type.edited')
+      return t('pages.changes.type.edited')
     case 'visited':
-      return t('changes.type.visited')
+      return t('pages.changes.type.visited')
     default:
       return `changes.type.${type}`
   }
@@ -117,7 +117,7 @@ const ActivityTextComponent = ({
 
   return (
     <ActivityText>
-      {t('changes.change_in_city', {
+      {t('pages.changes.change_in_city', {
         type: formatChangeType(interactionType, t),
         city: '',
       })}
