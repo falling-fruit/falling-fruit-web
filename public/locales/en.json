@@ -79,9 +79,7 @@
     "unverified": "Unverified",
     "yield": "Yield"
   },
-  "imperial": "Imperial",
   "imported_from": "Imported from {{name}}",
-  "language": "Language",
   "layouts": {
     "application": {
       "menu": {
@@ -125,9 +123,9 @@
     "add_review": "Add review",
     "edit_location": "Edit location",
     "edit_review": "Edit review",
+    "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
-  "metric": "Metric",
   "only_on_map": "On the map",
   "optional": "Optional",
   "pages": {
@@ -177,11 +175,19 @@
       "types_of_data": "Datasets imported into Falling Fruit fall into two main categories. \"Community maps\" are built by foragers and freegans as they peruse their communities for things to eat. We are indebted to the hardworking citizen-cartographers who have compiled this data. \"Tree inventories\" are compiled by cities, universities, and other institutions wishing to better document and care for their trees. We mine these vast datasets for food-producing species and add them to the map. To help us map your neighborhood fruit trees, contact your school or city urging them to share their tree inventory with us."
     },
     "settings": {
+      "language": "Language",
+      "points_of_interest": "Points of interest",
       "regional": "Regional",
+      "roadmap": "Map",
       "satellite": "Satellite",
       "side_menu": "Bicycle",
       "terrain": "Terrain",
-      "transit": "Transit"
+      "transit": "Transit",
+      "units": {
+        "imperial": "Imperial",
+        "metric": "Metric",
+        "units": "Units"
+      }
     },
     "sharing": {
       "countries": {
@@ -210,15 +216,12 @@
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     }
   },
-  "poi": "Points of interest",
   "problems": {
     "description_subtext": "Any information that might help us evaluate the problem",
     "problem_type": "Problem type"
   },
   "required": "Required",
-  "roadmap": "Map",
   "select_all": "Select all",
-  "settings": "Settings",
   "time": {
     "days": {
       "one": "{{count}} day",
@@ -228,7 +231,6 @@
     "time_ago": "{{time}} ago"
   },
   "type": "Type",
-  "units": "Units",
   "users": {
     "bio": "About you",
     "change_password": "Change my password",

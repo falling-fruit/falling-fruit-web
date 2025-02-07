@@ -140,8 +140,8 @@ const SettingsPage = ({ desktop }) => {
   const { t, i18n } = useTranslation()
 
   const DISTANCE_UNIT_OPTIONS = [
-    { value: 'metric', label: t('metric') },
-    { value: 'imperial', label: t('imperial') },
+    { value: 'metric', label: t('pages.settings.units.metric') },
+    { value: 'imperial', label: t('pages.settings.units.imperial') },
   ]
 
   const updateUnitsSetting = (object) => {
@@ -150,7 +150,7 @@ const SettingsPage = ({ desktop }) => {
 
   return (
     <Page desktop={desktop}>
-      {!desktop && <h2>{t('settings')}</h2>}
+      {!desktop && <h2>{t('menu.settings')}</h2>}
       <h3>{t('glossary.data')}</h3>
 
       {[
@@ -185,7 +185,7 @@ const SettingsPage = ({ desktop }) => {
       <RadioTiles
         options={[
           {
-            label: t('roadmap'),
+            label: t('pages.settings.roadmap'),
             value: 'roadmap',
             image: GoogleRoadmap,
           },
@@ -249,7 +249,7 @@ const SettingsPage = ({ desktop }) => {
         {[
           {
             field: 'showBusinesses',
-            label: t('poi'),
+            label: t('pages.settings.points_of_interest'),
           },
         ].map(({ field, label }) => (
           <LabeledRow
@@ -303,7 +303,11 @@ const SettingsPage = ({ desktop }) => {
       <h3>{t('pages.settings.regional')}</h3>
 
       <LabeledRow
-        label={<label htmlFor="languagePreference">{t('language')}</label>}
+        label={
+          <label htmlFor="languagePreference">
+            {t('pages.settings.language')}
+          </label>
+        }
         right={
           <Select
             options={LANGUAGE_OPTIONS}
@@ -322,7 +326,11 @@ const SettingsPage = ({ desktop }) => {
       />
       {!desktop && (
         <LabeledRow
-          label={<label htmlFor="distanceUnit">{t('units')}</label>}
+          label={
+            <label htmlFor="distanceUnit">
+              {t('pages.settings.units.units')}
+            </label>
+          }
           right={
             <Select
               options={DISTANCE_UNIT_OPTIONS}
