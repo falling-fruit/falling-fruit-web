@@ -32,7 +32,6 @@
     "access": "Accès",
     "account": "Compte",
     "activity": "Activité",
-    "add_source": "Ajouter un site",
     "address": "Adresse",
     "cancel": "Annuler",
     "data": "Données",
@@ -110,7 +109,7 @@
     }
   },
   "menu": {
-    "add_location": "Ajouter un site",
+    "add_new_location": "Ajouter un site",
     "add_review": "Ajouter un avis",
     "edit_location": "Éditer un site",
     "settings": "Paramètres"

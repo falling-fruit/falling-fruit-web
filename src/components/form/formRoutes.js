@@ -79,7 +79,7 @@ const AddLocation = ({ NavComponent, backUrl }) => {
   return (
     <>
       <NavComponent
-        title={t('menu.add_location')}
+        title={t('menu.add_new_location')}
         onBack={(event) => {
           event.stopPropagation()
           if (formRef.current) {
