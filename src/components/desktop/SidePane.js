@@ -92,7 +92,7 @@ const SidePane = () => {
                   {t('back')}
                 </BackButton>
               </StyledNavBack>
-              <Header>{t('settings')}</Header>
+              <Header>{t('menu.settings')}</Header>
               <SettingsPage desktop />
             </Route>
             <Route path="/locations/:locationId">
@@ -138,7 +138,7 @@ const SidePane = () => {
         <Route path="/settings"></Route>
         <Route>
           <SettingsButton
-            text={t('settings')}
+            text={t('menu.settings')}
             onClick={() => history.push('/settings')}
           />
         </Route>

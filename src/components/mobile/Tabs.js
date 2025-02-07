@@ -31,7 +31,7 @@ const Tabs = () => {
         ...activityRoutes.map((route) => route.props.path).flat(),
       ],
       icon: <Cog />,
-      label: t('settings'),
+      label: t('menu.settings'),
     },
     {
       paths: ['/map', '/locations'],
