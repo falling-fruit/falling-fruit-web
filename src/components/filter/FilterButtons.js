@@ -26,10 +26,10 @@ const FilterButtons = ({ onSelectAllClick, onDeselectAllClick }) => {
   return (
     <FilterButtonsContainer>
       <Button secondary onClick={onSelectAllClick}>
-        {t('select_all')}
+        {t('filter.select_all')}
       </Button>
       <Button secondary onClick={onDeselectAllClick}>
-        {t('deselect_all')}
+        {t('filter.deselect_all')}
       </Button>
     </FilterButtonsContainer>
   )
