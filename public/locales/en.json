@@ -28,6 +28,7 @@
   "form": {
     "button": {
       "cancel": "Cancel",
+      "delete": "Delete",
       "reset": "Reset"
     },
     "optional": "Optional",
@@ -40,7 +41,6 @@
     "activity": "Activity",
     "address": "Address",
     "data": "Data",
-    "delete": "Delete",
     "description": "Description",
     "donate": "Donate",
     "edit": "Edit",
