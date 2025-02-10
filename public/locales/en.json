@@ -188,6 +188,24 @@
       "terrain": "Terrain",
       "transit": "Transit",
       "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} foot",
+            "other": "{{count}} feet"
+          },
+          "kilometer": {
+            "one": "{{count}} kilometer",
+            "other": "{{count}} kilometers"
+          },
+          "meter": {
+            "one": "{{count}} meter",
+            "other": "{{count}} meters"
+          },
+          "mile": {
+            "one": "{{count}} mile",
+            "other": "{{count}} miles"
+          }
+        },
         "imperial": "Imperial",
         "metric": "Metric",
         "units": "Units"
