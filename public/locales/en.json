@@ -29,6 +29,7 @@
     "button": {
       "cancel": "Cancel",
       "delete": "Delete",
+      "edit": "Edit",
       "reset": "Reset"
     },
     "optional": "Optional",
@@ -36,35 +37,17 @@
   },
   "glossary": {
     "about": "About",
-    "access": "Access",
     "account": "Account",
     "activity": "Activity",
     "address": "Address",
-    "data": "Data",
     "description": "Description",
-    "donate": "Donate",
-    "edit": "Edit",
     "email": "Email",
-    "imported_datasets": "Imported datasets",
-    "labels": "Labels",
-    "links": {
-      "one": "Link"
-    },
-    "list": "List",
-    "locations": {
-      "other": "Locations"
-    },
-    "login": "Login",
     "logout": "Logout",
     "map": "Map",
     "name": "Name",
     "password": "Password",
-    "position": "Position",
     "quality": "Quality",
     "report": "Report",
-    "save_changes": "Save changes",
-    "season": "Season",
-    "send": "Send",
     "sign_up": "Sign up",
     "submit": "Submit",
     "tree_inventory": {
@@ -85,12 +68,19 @@
     },
     "back": "Back"
   },
+  "location": {
+    "form": {
+      "access": "Access",
+      "position": "Position"
+    }
+  },
   "locations": {
     "form": {
       "comments": "Comments",
       "comments_subtext": "Updates, access issues, plant health...",
       "description_subtext": "Location details, access issues, plant health ...",
-      "fruiting_status": "Fruiting status"
+      "fruiting_status": "Fruiting status",
+      "season": "Season"
     },
     "index": {
       "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!"
@@ -123,6 +113,7 @@
     "add_review": "Add review",
     "edit_location": "Edit location",
     "edit_review": "Edit review",
+    "list": "List",
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
@@ -143,6 +134,7 @@
       "cristina_rubke_bio_html": "Cristina is an attorney with <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> in San Francisco, California, where she focuses on trademark prosecution and counseling. She is also a board member of the <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>, which oversees public transportation, traffic and parking in San Francisco. In her spare time, Cristina sails the San Francisco Bay with the <a href=\"//www.baads.org/\">Bay Area Association of Disabled Sailors</a> and competes in local and international regattas.",
       "david_craft_bio_html": "David is a researcher in the Department of Radiation Oncology at the <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Harvard Medical School</a> in Boston, Massachusetts. He is also an avid forager and author of the book <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and Eating Wild Plants in the City</a> (<a href=\"/docs/David Craft - Urban Foraging.pdf\">free download</a>).",
       "directors": "Board of directors",
+      "donate": "Donate",
       "emily_sigman_bio_html": "Emily is a diehard agroforestry evangelist, incorrigible forager, and proud mother to two cats, four quails, and the world's most magnificent canine. Her roots stretch deep into the Rocky Mountains, but these days her aboveground biomass is proud to call New Haven, Connecticut her home. She can often be found tending public food forests, reading enraptured in some cozy library corner, or waxing poetic about the magic of mycelium (and, supposedly, completing joint graduate degrees at the Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> and <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily harbors a devastating addiction to travel, and could be just about anywhere right now.",
       "ethan_welty_bio_html": "With technology and data, Ethan champions cities as sources of fresh and free food. He created Falling Fruit with Caleb Phillips in 2013 to promote urban foraging worldwide, and co-founded <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> in 2014 to harvest and distribute surplus fruit growing around him in Boulder, Colorado. Beyond fruit, he juggles a <a href=\"https://www.weltyphotography.com\">photography career</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">research on glaciers</a>, and an appetite for mountainous and riverine pursuits.",
       "ff_disclaimer_html": "Falling Fruit is not associated with Fallen Fruit. Fallen Fruit can be found at <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
@@ -176,12 +168,17 @@
     "datasets": {
       "community_map": "Community map",
       "date_imported": "Date imported",
+      "imported_datasets": "Imported datasets",
       "intro_html": "Falling Fruit aspires to be the most comprehensive and open geographic dataset of urban edibles. While our users explore, edit, and add locations using our <a href=\"/\">map</a>, we comb the known universe for pre-existing datasets and import them directly into the <a href=\"/data\">database</a>, uniting the efforts of foragers, foresters, and freegans everywhere. If you know of a dataset we've missed, please <a href=\"mailto:info@fallingfruit.org\">let us know</a>! You can also help us with the import process by formatting the data using the <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">import template</a>. Note that since imports must be performed manually, all changes to the original data made after the import are not reflected on Falling Fruit.",
+      "link": "Link",
+      "locations": "Locations",
       "table_info": "Each dataset is listed by name, number of locations, and date imported. Expanding each row reveals further details about the data, the import process, and the license governing how the data may be used.",
       "type": "Type",
       "types_of_data": "Datasets imported into Falling Fruit fall into two main categories. \"Community maps\" are built by foragers and freegans as they peruse their communities for things to eat. We are indebted to the hardworking citizen-cartographers who have compiled this data. \"Tree inventories\" are compiled by cities, universities, and other institutions wishing to better document and care for their trees. We mine these vast datasets for food-producing species and add them to the map. To help us map your neighborhood fruit trees, contact your school or city urging them to share their tree inventory with us."
     },
     "settings": {
+      "data": "Data",
+      "labels": "Labels",
       "language": "Language",
       "points_of_interest": "Points of interest",
       "regional": "Regional",
@@ -241,6 +238,7 @@
     "current_password": "Current password",
     "edit_account": "Edit account",
     "forgot_password": "Reset your password",
+    "login": "Login",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
     "options": {
@@ -249,6 +247,8 @@
     "password_confirmation": "Password confirmation",
     "remember_me": "Remember me",
     "resend_confirmation_instructions": "Resend confirmation instructions",
+    "save_changes": "Save changes",
+    "send": "Send",
     "send_password_instructions": "Send password reset instructions",
     "sign_in": "Sign in"
   }

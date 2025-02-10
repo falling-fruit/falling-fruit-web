@@ -29,6 +29,7 @@
     "button": {
       "cancel": "Annuler",
       "delete": "Supprimer",
+      "edit": "Modifier",
       "reset": "Réinitialiser"
     },
     "optional": "Facultatif",
@@ -36,35 +37,17 @@
   },
   "glossary": {
     "about": "À propos",
-    "access": "Accès",
     "account": "Compte",
     "activity": "Activité",
     "address": "Adresse",
-    "data": "Données",
     "description": "Description",
-    "donate": "Contribuer",
-    "edit": "Modifier",
     "email": "Email",
-    "imported_datasets": "Données importées",
-    "labels": "Étiquettes",
-    "links": {
-      "one": "Lien"
-    },
-    "list": "Liste",
-    "locations": {
-      "other": "Endroits"
-    },
-    "login": "Connexion",
     "logout": "Déconnexion",
     "map": "Carte",
     "name": "Nom",
     "password": "Mot de passe",
-    "position": "Position",
     "quality": "Qualité",
     "report": "Signaler",
-    "save_changes": "Enregistrer vos modifications",
-    "season": "Saison",
-    "send": "Envoyer",
     "sign_up": "S'inscrire",
     "submit": "Soumettre",
     "tree_inventory": {
@@ -85,12 +68,19 @@
     },
     "back": "Retour"
   },
+  "location": {
+    "form": {
+      "access": "Accès",
+      "position": "Position"
+    }
+  },
   "locations": {
     "form": {
       "comments": "Commentaires",
       "comments_subtext": "Nouveaux développements, problèmes d'accès, condition des plantes ...",
       "description_subtext": "Détails, problèmes d'accès, condition des plantes ...",
-      "fruiting_status": "État des fruits"
+      "fruiting_status": "État des fruits",
+      "season": "Saison"
     },
     "index": {
       "editmarker_html": "<b>Déplacez à la position de la source.</b><br><br>Vérifiez la vue satellite - la source pourrait être visible depuis l'espace !"
@@ -122,6 +112,7 @@
     "add_new_location": "Ajouter un site",
     "add_review": "Ajouter un avis",
     "edit_location": "Éditer un site",
+    "list": "Liste",
     "settings": "Paramètres"
   },
   "pages": {
@@ -141,6 +132,7 @@
       "cristina_rubke_bio_html": "Cristina est avocate chez <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a>, à San Francisco (Californie, États-Unis), où elle travaille dans le domaine du droit des marques et de la consultance juridique. Elle est aussi membre du conseil d’administration de la <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>(Agence des transports urbains de San Francisco), qui s’occupe des transports publics, de la circulation et du stationnement à San Francisco. Cristina profite de son temps libre pour naviguer sur la baie de San Francisco avec la <a href=\"//www.baads.org/\">Bay Area Association of Disabled Sailors</a> (Association des Navigateurs Handicapés de la Baie) et participe à des régates locales et internationales.",
       "david_craft_bio_html": "David est chercheur au Département de Radiothérapie de <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">la Harvard Medical School</a> à Boston (Massachusetts, États-Unis). Il est aussi adepte du glanage et auteur du livre <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging:Finding and Eating Wild Plants in the City</a> (<a href=”/docs/David Craft - Urban Foraging.pdf”>free download</a>).  ",
       "directors": "Comité d'administration",
+      "donate": "Contribuer",
       "emily_sigman_bio_html": "Emily est une ardente évangéliste de l'agroforesterie, une incorrigible butineuse et une fière mère de deux chats, quatre cailles et le plus magnifique des chiens du monde. Ses racines s'étendent profondément dans les montagnes Rocheuses, mais de nos jours, sa biomasse aérienne est fière d'appeler New Haven, Connecticut, sa maison. On peut souvent la trouver en train de s'occuper de forêts alimentaires publiques, de lire avec ravissement dans un coin de bibliothèque confortable, ou de faire de la poésie sur la magie du mycélium (et, soi-disant, de faire des études supérieures communes à la Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> et <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily souffre d'une terrible dépendance aux voyages et pourrait être n'importe où en ce moment.",
       "ethan_welty_bio_html": "Grâce à la technologie et aux données, Ethan défend les villes comme sources de nourriture fraîche et gratuite. Il a créé Falling Fruit avec Caleb Phillips en 2013 pour promouvoir la recherche de nourriture en milieu urbain dans le monde entier, et a cofondé <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> en 2014 pour récolter et distribuer les fruits excédentaires qui poussent autour de lui à Boulder, au Colorado. Au-delà des fruits, il jongle avec une <a href=\"https://www.weltyphotography.com\">carrière de photographe</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">recherche sur les glaciers</a>, et un appétit pour les activités en montagne et sur les rivières.",
       "ff_disclaimer_html": "Falling Fruit n'est pas lié à Fallen Fruit. Fallen Fruit peut être consulté à <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
@@ -174,12 +166,17 @@
     "datasets": {
       "community_map": "Cartes communautaires",
       "date_imported": "Date d'importation",
+      "imported_datasets": "Données importées",
       "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l’univers au peigne fin, à la recherche d’autres informations que nous ajoutons à notre <a href=\"/data\">base de données</a>, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu’il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n’hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d’importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d’importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d’origine après importation ne seront pas reportés sur Falling Fruit.",
+      "link": "Lien",
+      "locations": "Endroits",
       "table_info": "Chaque ensemble de données est listé par nom, nombre de sites et date d’importation. En élargissant chaque ligne de données, vous verrez d’autres détails concernant les données, l’importation et la licence relative aux conditions d’utilisation de ces données.",
       "type": "Type",
       "types_of_data": "Il y a deux catégories d’ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d’arbres» sont compilés par des villes, des universités et d’autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s’en occuper. Nous parcourons ces larges bases de données à la recherche d’espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d’arbres avec nous."
     },
     "settings": {
+      "data": "Données",
+      "labels": "Étiquettes",
       "language": "Langue",
       "points_of_interest": "Points d'intérêt",
       "regional": "Régional",
@@ -237,6 +234,7 @@
     "current_password": "Mot de passe actuel",
     "edit_account": "Modifier mon compte",
     "forgot_password": "Réinitialiser votre mot de passe",
+    "login": "Connexion",
     "new_password": "Nouveau mot de passe",
     "new_password_confirmation": "Confirmation du nouveau mot de passe",
     "options": {
@@ -245,6 +243,8 @@
     "password_confirmation": "Confirmation du mot de passe",
     "remember_me": "Rester connecté",
     "resend_confirmation_instructions": "Renvoyer les instructions de validation",
+    "save_changes": "Enregistrer vos modifications",
+    "send": "Envoyer",
     "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
     "sign_in": "Se connecter"
   }

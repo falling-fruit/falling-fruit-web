@@ -25,7 +25,7 @@ const DataPage = () => {
             __html: t('pages.data.caveat_emptor_html'),
           }}
         />
-        <h2>{t('glossary.imported_datasets')}</h2>
+        <h2>{t('pages.datasets.imported_datasets')}</h2>
         <p
           dangerouslySetInnerHTML={{ __html: t('pages.datasets.intro_html') }}
         />

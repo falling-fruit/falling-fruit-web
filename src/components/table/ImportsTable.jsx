@@ -48,7 +48,7 @@ const ImportsTable = () => {
       grow: 3,
     },
     {
-      name: t('glossary.locations.other'),
+      name: t('pages.datasets.locations'),
       selector: (row) => row.location_count,
       sortable: true,
       right: true,
@@ -69,7 +69,7 @@ const ImportsTable = () => {
     },
     {
       id: 'link',
-      name: t('glossary.links.one'),
+      name: t('pages.datasets.link'),
       selector: (row) => row.link,
       format: ({ url }) =>
         url && (

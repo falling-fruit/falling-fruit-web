@@ -151,12 +151,12 @@ const SettingsPage = ({ desktop }) => {
   return (
     <Page desktop={desktop}>
       {!desktop && <h2>{t('menu.settings')}</h2>}
-      <h3>{t('glossary.data')}</h3>
+      <h3>{t('pages.settings.data')}</h3>
 
       {[
         {
           field: 'showLabels',
-          label: t('glossary.labels'),
+          label: t('pages.settings.labels'),
         },
       ].map(({ field, label }) => (
         <LabeledRow

@@ -49,7 +49,7 @@ const Project = () => {
           <p>
             <em>{renderHTML(t('pages.about.ff_disclaimer_html'))}</em>
           </p>
-          <h3>{t('glossary.donate')}</h3>
+          <h3>{t('pages.about.donate')}</h3>
           <p>
             <em>{t('pages.about.give_us_money')}</em>
             <br />

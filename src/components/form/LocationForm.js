@@ -97,7 +97,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   return (
     <>
       <TypesSelect />
-      <Label>{t('glossary.position')}</Label>
+      <Label>{t('location.form.position')}</Label>
       {isLoading ? (
         <LoadingIndicator />
       ) : isDesktop || !editingId ? (
@@ -112,7 +112,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       />
       <Select
         name="access"
-        label={t('glossary.access')}
+        label={t('location.form.access')}
         options={propertyAccessOptions}
         isSearchable={false}
         toFormikValue={(x) => x?.value}
@@ -121,7 +121,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
         }
         isClearable
       />
-      <Label>{t('glossary.season')}</Label>
+      <Label>{t('locations.form.season')}</Label>
       <InlineSelects>
         <Select
           name="season_start"
