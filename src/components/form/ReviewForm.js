@@ -42,10 +42,11 @@ const DeleteButton = styled(Button)`
 
 export const ReviewStep = ({ standalone, hasHeading = true }) => {
   const { t } = useTranslation()
-  const fruitingOptions = [0, 1, 2].map((value) => ({
-    label: t(`locations.infowindow.fruiting.${value}`),
-    value,
-  }))
+  const fruitingOptions = [
+    { label: t('locations.infowindow.fruiting.0'), value: 0 },
+    { label: t('locations.infowindow.fruiting.1'), value: 1 },
+    { label: t('locations.infowindow.fruiting.2'), value: 2 },
+  ]
 
   return (
     <>

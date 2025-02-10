@@ -129,7 +129,11 @@ const Review = ({
               <td>
                 <Label>Fruiting</Label>
               </td>
-              <td>{t(`locations.infowindow.fruiting.${review.fruiting}`)}</td>
+              <td>
+                {review.fruiting === 0 && t('locations.infowindow.fruiting.0')}
+                {review.fruiting === 1 && t('locations.infowindow.fruiting.1')}
+                {review.fruiting === 2 && t('locations.infowindow.fruiting.2')}
+              </td>
             </tr>
           )}
           {review.quality_rating !== null && (
