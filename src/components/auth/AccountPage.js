@@ -165,7 +165,7 @@ const AccountPage = () => {
                       type="submit"
                       disabled={!dirty || !isValid || isSubmitting}
                     >
-                      {t('glossary.save_changes')}
+                      {t('users.save_changes')}
                     </Button>
                   </FormButtonWrapper>
                   {/* TODO: allow user to delete account. Need design */}

@@ -25,3 +25,16 @@ changes.type.edited	pages.changes.type.edited
 changes.type.visited	pages.changes.type.visited
 glossary.add_source	menu.add_new_location
 glossary.delete	form.button.delete
+glossary.season	locations.form.season
+glossary.send	users.send
+glossary.save_changes	users.save_changes
+glossary.position	location.form.position
+glossary.access	location.form.access
+glossary.login	users.login
+glossary.labels	pages.settings.labels
+glossary.locations.other	pages.datasets.locations
+glossary.links.one	pages.datasets.link
+glossary.imported_datasets	pages.datasets.imported_datasets
+glossary.edit	form.button.edit
+glossary.data	pages.settings.data
+glossary.donate	pages.about.donate

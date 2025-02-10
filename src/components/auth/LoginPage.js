@@ -75,7 +75,7 @@ const LoginPage = () => {
                   disabled={!dirty || !isValid || isLoading}
                   type="submit"
                 >
-                  {t('glossary.login')}
+                  {t('users.login')}
                 </Button>
               </FormButtonWrapper>
             </Form>

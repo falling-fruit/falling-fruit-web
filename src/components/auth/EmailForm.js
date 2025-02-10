@@ -34,7 +34,7 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
 
           <FormButtonWrapper>
             <Button disabled={!dirty || !isValid || isSubmitting} type="submit">
-              {t('glossary.send')}
+              {t('users.send')}
             </Button>
           </FormButtonWrapper>
         </Form>

@@ -120,7 +120,7 @@ const SidePane = () => {
                         }
                       >
                         <Pencil />
-                        {t('glossary.edit')}
+                        {t('form.button.edit')}
                       </BackButton>
                     </StyledNavBack>
                     <EntryDesktop />

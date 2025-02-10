@@ -41,7 +41,7 @@ const Tabs = () => {
     {
       paths: ['/list'],
       icon: <ListUl />,
-      label: t('glossary.list'),
+      label: t('menu.list'),
     },
     {
       paths: authPages.map((route) => route.path),
