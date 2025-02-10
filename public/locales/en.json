@@ -253,6 +253,10 @@
   "users": {
     "bio": "About you",
     "change_password": "Change my password",
+    "joined_on": "Joined on {{date}}",
+    "profile": {
+      "title": "User: {{name}}"
+    },
     "current_password": "Current password",
     "edit_account": "Edit account",
     "forgot_password": "Reset your password",
