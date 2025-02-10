@@ -1,11 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
+
+import { IMPERIAL } from '../../constants/list'
 
 const METERS_IN_FOOT = 0.3048
 const FEET_IN_MILE = 5280
 const CONVERSION_THRESHOLD = 1000
 const METERS_IN_KILOMETER = 1000
-const IMPERIAL = 'imperial'
 
 const SecondaryText = styled.div`
   font-weight: normal;
@@ -13,31 +15,42 @@ const SecondaryText = styled.div`
   color: ${({ theme }) => theme.secondaryText};
 `
 
-const convertDistance = (distance, setting) => {
+const convertDistance = (distance, setting, t) => {
   if (setting === IMPERIAL) {
     const feet = Math.round(distance / METERS_IN_FOOT)
     if (feet < CONVERSION_THRESHOLD) {
-      return `${parseFloat(feet.toPrecision(2))} feet`
+      const count = parseFloat(feet.toPrecision(2))
+      return count === 1
+        ? t('pages.settings.units.distance.foot.one', { count })
+        : t('pages.settings.units.distance.foot.other', { count })
     } else {
-      return `${parseFloat((feet / FEET_IN_MILE).toPrecision(2))} miles`
+      const count = parseFloat((feet / FEET_IN_MILE).toPrecision(2))
+      return count === 1
+        ? t('pages.settings.units.distance.mile.one', { count })
+        : t('pages.settings.units.distance.mile.other', { count })
     }
   } else {
     const meters = Math.round(distance)
     if (meters < CONVERSION_THRESHOLD) {
-      return `${parseFloat(meters.toPrecision(2))} meters`
+      const count = parseFloat(meters.toPrecision(2))
+      return count === 1
+        ? t('pages.settings.units.distance.meter.one', { count })
+        : t('pages.settings.units.distance.meter.other', { count })
     } else {
-      return `${parseFloat(
-        (meters / METERS_IN_KILOMETER).toPrecision(2),
-      )} kilometers`
+      const count = parseFloat((meters / METERS_IN_KILOMETER).toPrecision(2))
+      return count === 1
+        ? t('pages.settings.units.distance.kilometer.one', { count })
+        : t('pages.settings.units.distance.kilometer.other', { count })
     }
   }
 }
 
 const DistanceText = ({ distance }) => {
+  const { t } = useTranslation()
   const distanceUnit = useSelector((state) => state.settings.distanceUnit)
 
   return (
-    <SecondaryText>{convertDistance(distance, distanceUnit)}</SecondaryText>
+    <SecondaryText>{convertDistance(distance, distanceUnit, t)}</SecondaryText>
   )
 }
 
