@@ -169,6 +169,7 @@
       "community_map": "Community map",
       "date_imported": "Date imported",
       "imported_datasets": "Imported datasets",
+      "imported_on": "Imported on {{date}}",
       "intro_html": "Falling Fruit aspires to be the most comprehensive and open geographic dataset of urban edibles. While our users explore, edit, and add locations using our <a href=\"/\">map</a>, we comb the known universe for pre-existing datasets and import them directly into the <a href=\"/data\">database</a>, uniting the efforts of foragers, foresters, and freegans everywhere. If you know of a dataset we've missed, please <a href=\"mailto:info@fallingfruit.org\">let us know</a>! You can also help us with the import process by formatting the data using the <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">import template</a>. Note that since imports must be performed manually, all changes to the original data made after the import are not reflected on Falling Fruit.",
       "link": "Link",
       "locations": "Locations",
@@ -235,6 +236,12 @@
         "united_states": "United States"
       },
       "grow_pick_and_distribute": "Grow · Pick · Distribute",
+      "heading": {
+        "city": "City",
+        "country": "Country",
+        "social": "Social",
+        "state": "State"
+      },
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     }
   },
@@ -253,13 +260,10 @@
   "users": {
     "bio": "About you",
     "change_password": "Change my password",
-    "joined_on": "Joined on {{date}}",
-    "profile": {
-      "title": "User: {{name}}"
-    },
     "current_password": "Current password",
     "edit_account": "Edit account",
     "forgot_password": "Reset your password",
+    "joined_on": "Joined on {{date}}",
     "login": "Login",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
@@ -267,6 +271,9 @@
       "announcements_email": "Receive emails with important announcements and opportunities (1-2 per year)"
     },
     "password_confirmation": "Password confirmation",
+    "profile": {
+      "title": "User: {{name}}"
+    },
     "remember_me": "Remember me",
     "resend_confirmation_instructions": "Resend confirmation instructions",
     "save_changes": "Save changes",

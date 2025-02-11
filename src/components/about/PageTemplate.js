@@ -112,18 +112,15 @@ const StyledBackButton = styled(BackButton)`
   }
 `
 
-const PageTemplate = ({ children, from }) => {
-  // TODO: migrate to custom hook for map state
+const PageTemplate = ({ children, backToSettingsOnMobile }) => {
   const history = useAppHistory()
   const isMobile = useIsMobile()
   const { t } = useTranslation()
 
-  const onClickBackButton = () => history.go(-1)
-
   return (
     <PageTemplateWrapper>
-      {from && isMobile && (
-        <StyledBackButton onClick={onClickBackButton}>
+      {backToSettingsOnMobile && isMobile && (
+        <StyledBackButton onClick={() => history.push('/settings')}>
           <ArrowBack />
           {t('layouts.back')}
         </StyledBackButton>

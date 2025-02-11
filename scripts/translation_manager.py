@@ -73,7 +73,32 @@ class Translation:
             else:
                 last_key = keys[-1]
             current[last_key] = value
-        return result
+
+        # Convert dict to array if all keys are sequential integers as strings
+        def convert_sequential_dict(d):
+            if isinstance(d, dict):
+                # Check if all values are strings or all values are dicts
+                all_strings = all(isinstance(v, str) for v in d.values())
+                all_dicts = all(isinstance(v, dict) for v in d.values())
+                
+                # Check if keys are sequential integers starting from 0
+                try:
+                    keys = sorted(int(k) for k in d.keys())
+                    is_sequential = keys == list(range(len(keys)))
+                except ValueError:
+                    is_sequential = False
+
+                if is_sequential and all_strings:
+                    # Convert to array
+                    return [d[str(i)] for i in range(len(d))]
+                elif all_dicts:
+                    # Recursively process nested dicts
+                    return {k: convert_sequential_dict(v) for k, v in d.items()}
+                else:
+                    return d
+            return d
+
+        return convert_sequential_dict(result)
 
     def save_as_json(self, file_path, encoder):
         """Save translation data as JSON file"""
@@ -104,6 +129,9 @@ class LocaleFile:
                 full_key = f"{prefix}.{key}" if prefix else key
                 if isinstance(value, dict):
                     flatten_dict(value, full_key)
+                elif isinstance(value, list):
+                    for i in range(0, len(value)):
+                        translation.set(f"{full_key}.{i}", self.clean_value(value[i]))
                 else:
                     translation.set(full_key, self.clean_value(value))
                     

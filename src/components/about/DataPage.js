@@ -7,7 +7,7 @@ const DataPage = () => {
   const { t } = useTranslation()
   return (
     <PageScrollWrapper>
-      <PageTemplate from="Settings">
+      <PageTemplate backToSettingsOnMobile>
         <p>{t('pages.data.intro')}</p>
         <blockquote>
           <a href="https://fallingfruit.org/locations.csv.bz2" dir="ltr">
