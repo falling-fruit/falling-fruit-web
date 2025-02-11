@@ -115,7 +115,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   return (
     <>
       <TypesSelect />
-      <Label>{t('location.form.position')}</Label>
+      <Label>{t('locations.form.position')}</Label>
       {isLoading ? (
         <LoadingIndicator />
       ) : isDesktop || !editingId ? (
@@ -130,7 +130,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       />
       <Select
         name="access"
-        label={t('location.form.access')}
+        label={t('locations.form.access')}
         options={propertyAccessOptions}
         isSearchable={false}
         toFormikValue={(x) => x?.value}
@@ -272,7 +272,9 @@ export const LocationForm = ({ editingId, initialValues, innerRef }) => {
                   disabled={isSubmitting || !isValid || !formDirty}
                   type="submit"
                 >
-                  {isSubmitting ? 'Submitting' : t('glossary.submit')}
+                  {isSubmitting
+                    ? t('form.button.submitting')
+                    : t('form.button.submit')}
                 </Button>
               </ProgressButtons>
               {!isLoggedIn && <Recaptcha />}

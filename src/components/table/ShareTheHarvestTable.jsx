@@ -172,7 +172,7 @@ const ShareTheHarvestTable = () => {
       subHeader
       subHeaderComponent={
         <Input
-          placeholder="Search"
+          placeholder={t('form.search')}
           icon={<SearchIcon />}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}

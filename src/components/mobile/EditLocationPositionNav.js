@@ -1,5 +1,6 @@
 import { Check, X } from '@styled-icons/boxicons-regular'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -16,6 +17,7 @@ const Instructions = styled.span`
 `
 
 const EditLocationPositionNav = () => {
+  const { t } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
   const { locationId } = useParams()
@@ -52,18 +54,20 @@ const EditLocationPositionNav = () => {
 
   return (
     <TopBarNav
-      left={<Instructions>Edit location position.</Instructions>}
+      left={
+        <Instructions>{t('locations.edit_position.instructions')}</Instructions>
+      }
       rightIcons={
         <>
           <IconButton
-            label="Cancel edit position"
+            label={t('locations.edit_position.cancel')}
             icon={<X />}
             raised
             size={54}
             onClick={handleCancel}
           />
           <IconButton
-            label="Confirm edit position"
+            label={t('locations.edit_position.confirm')}
             icon={<Check />}
             raised
             size={54}

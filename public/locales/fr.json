@@ -30,7 +30,8 @@
       "cancel": "Annuler",
       "delete": "Supprimer",
       "edit": "Modifier",
-      "reset": "Réinitialiser"
+      "reset": "Réinitialiser",
+      "submit": "Soumettre"
     },
     "optional": "Facultatif",
     "required": "Obligatoire"
@@ -49,7 +50,6 @@
     "quality": "Qualité",
     "report": "Signaler",
     "sign_up": "S'inscrire",
-    "submit": "Soumettre",
     "tree_inventory": {
       "one": "Inventaire d'arbres"
     },
@@ -68,18 +68,14 @@
     },
     "back": "Retour"
   },
-  "location": {
-    "form": {
-      "access": "Accès",
-      "position": "Position"
-    }
-  },
   "locations": {
     "form": {
+      "access": "Accès",
       "comments": "Commentaires",
       "comments_subtext": "Nouveaux développements, problèmes d'accès, condition des plantes ...",
       "description_subtext": "Détails, problèmes d'accès, condition des plantes ...",
       "fruiting_status": "État des fruits",
+      "position": "Position",
       "season": "Saison"
     },
     "index": {
