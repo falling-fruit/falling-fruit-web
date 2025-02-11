@@ -212,7 +212,9 @@ export const ReviewForm = ({
                     disabled={isSubmitting || !isValid || !dirty}
                     type="submit"
                   >
-                    {isSubmitting ? 'Submitting' : t('glossary.submit')}
+                    {isSubmitting
+                      ? t('form.button.submitting')
+                      : t('form.button.submit')}
                   </Button>
                   {editingId && (
                     <DeleteButton

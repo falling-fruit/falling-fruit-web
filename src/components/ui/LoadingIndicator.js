@@ -1,4 +1,5 @@
 import { transparentize } from 'polished'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import Spinner from './Spinner'
@@ -25,11 +26,14 @@ const LoadingIndicatorWrapper = styled.div`
  * - cover {boolean} - covers container with loading state when true
  * - vertical {boolean} - arranged vertically when true
  */
-const LoadingIndicator = (props) => (
-  <LoadingIndicatorWrapper {...props}>
-    <Spinner /> Loading...
-  </LoadingIndicatorWrapper>
-)
+const LoadingIndicator = (props) => {
+  const { t } = useTranslation()
+  return (
+    <LoadingIndicatorWrapper {...props}>
+      <Spinner /> {t('layouts.loading')}
+    </LoadingIndicatorWrapper>
+  )
+}
 
 /**
  * LoadingOverlay - masked loading indicator

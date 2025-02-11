@@ -89,7 +89,9 @@ const Modal = ({
                   disabled={!isDirty || isSubmitting || !isValid}
                   type="submit"
                 >
-                  {isSubmitting ? 'Submitting' : t('glossary.submit')}
+                  {isSubmitting
+                    ? t('form.button.submitting')
+                    : t('form.button.submit')}
                 </Button>
               </Buttons>
             </Form>

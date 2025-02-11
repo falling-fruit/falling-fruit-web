@@ -30,10 +30,13 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "edit": "Edit",
-      "reset": "Reset"
+      "reset": "Reset",
+      "submit": "Submit",
+      "submitting": "Submitting"
     },
     "optional": "Optional",
-    "required": "Required"
+    "required": "Required",
+    "search": "Search"
   },
   "glossary": {
     "about": "About",
@@ -49,7 +52,6 @@
     "quality": "Quality",
     "report": "Report",
     "sign_up": "Sign up",
-    "submit": "Submit",
     "tree_inventory": {
       "one": "Tree inventory"
     },
@@ -66,20 +68,22 @@
         "the_project": "The project"
       }
     },
-    "back": "Back"
-  },
-  "location": {
-    "form": {
-      "access": "Access",
-      "position": "Position"
-    }
+    "back": "Back",
+    "loading": "Loading..."
   },
   "locations": {
+    "edit_position": {
+      "cancel": "Cancel edit position",
+      "confirm": "Confirm edit position",
+      "instructions": "Edit location position."
+    },
     "form": {
+      "access": "Access",
       "comments": "Comments",
       "comments_subtext": "Updates, access issues, plant health...",
       "description_subtext": "Location details, access issues, plant health ...",
       "fruiting_status": "Fruiting status",
+      "position": "Position",
       "season": "Season"
     },
     "index": {

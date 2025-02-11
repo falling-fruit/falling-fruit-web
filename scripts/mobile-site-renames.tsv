@@ -5,5 +5,4 @@ side_menu.terrain	pages.settings.terrain
 side_menu.transit	pages.settings.transit
 view_location.date_edited	locations.overview.date_edited
 glossary.cancel	form.button.cancel
-glossary.access	location.form.access
 glossary.list	menu.list
