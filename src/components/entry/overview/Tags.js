@@ -37,7 +37,16 @@ const EntryTags = ({ locationData }) => {
     <TagList>
       {locationData.access != null && (
         <Tag color={theme.tag.access} backgroundColor={theme.transparentOrange}>
-          {t(`locations.infowindow.access_short.${locationData.access}`)}
+          {locationData.access === 0 &&
+            t('locations.infowindow.access_short.0')}
+          {locationData.access === 1 &&
+            t('locations.infowindow.access_short.1')}
+          {locationData.access === 2 &&
+            t('locations.infowindow.access_short.2')}
+          {locationData.access === 3 &&
+            t('locations.infowindow.access_short.3')}
+          {locationData.access === 4 &&
+            t('locations.infowindow.access_short.4')}
         </Tag>
       )}
       {locationData.unverified && (

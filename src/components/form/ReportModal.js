@@ -74,8 +74,8 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
       />
       {!isLoggedIn && (
         <>
-          <Input name="name" label="Name" />
-          <Input name="email" label="Email" required />
+          <Input name="name" label={t('glossary.name')} />
+          <Input name="email" label={t('glossary.email')} required />
         </>
       )}
     </Modal>

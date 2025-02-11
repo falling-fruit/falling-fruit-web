@@ -84,7 +84,7 @@ const ActivityPage = () => {
 
   return (
     <PageScrollWrapper>
-      <PageTemplate from="Settings">
+      <PageTemplate backToSettingsOnMobile>
         <h1>{t('pages.changes.recent_changes')}</h1>
         {locationChanges.length > 0 &&
           groupedData.map((period) => (

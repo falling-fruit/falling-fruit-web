@@ -90,10 +90,28 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
     label: formatMonth(i, i18n.language),
     value: i,
   }))
-  const propertyAccessOptions = Array.from({ length: 5 }).map((_, i) => ({
-    label: t(`locations.infowindow.access_mode.${i}`),
-    value: i,
-  }))
+  const propertyAccessOptions = [
+    {
+      label: t('locations.infowindow.access_mode.0'),
+      value: 0,
+    },
+    {
+      label: t('locations.infowindow.access_mode.1'),
+      value: 1,
+    },
+    {
+      label: t('locations.infowindow.access_mode.2'),
+      value: 2,
+    },
+    {
+      label: t('locations.infowindow.access_mode.3'),
+      value: 3,
+    },
+    {
+      label: t('locations.infowindow.access_mode.4'),
+      value: 4,
+    },
+  ]
   return (
     <>
       <TypesSelect />

@@ -59,7 +59,7 @@ const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
           <Input
             name={`name_pairs.${index}.name`}
             label={t('glossary.name')}
-            placeholder="name"
+            placeholder={t('glossary.name').toLowerCase()}
             required={index === 0}
           />
           <ErrorMessage name={`name_pairs.${index}.name`} />

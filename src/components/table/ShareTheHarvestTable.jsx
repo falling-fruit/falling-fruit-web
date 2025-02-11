@@ -115,28 +115,28 @@ const ShareTheHarvestTable = () => {
   const columns = [
     {
       id: 'country',
-      name: 'Country',
+      name: t('pages.sharing.heading.country'),
       selector: (row) => translatedCountries[row.country] || row.country || '-',
       sortable: true,
       wrap: true,
     },
     {
       id: 'state',
-      name: 'State',
+      name: t('pages.sharing.heading.state'),
       selector: (row) => row.state ?? '-',
       sortable: true,
       wrap: true,
     },
     {
       id: 'city',
-      name: 'City',
+      name: t('pages.sharing.heading.city'),
       selector: (row) => row.city ?? '-',
       sortable: true,
       wrap: true,
     },
     {
       id: 'name',
-      name: 'Name',
+      name: t('glossary.name'),
       selector: (row) => row.name,
       sortable: true,
       grow: 2.5,
@@ -145,7 +145,7 @@ const ShareTheHarvestTable = () => {
     },
     {
       id: 'social',
-      name: 'Social',
+      name: t('pages.sharing.heading.social'),
       selector: (row) => row.facebook || row.instagram || row.x,
       format: FormattedSocials,
       compact: true,

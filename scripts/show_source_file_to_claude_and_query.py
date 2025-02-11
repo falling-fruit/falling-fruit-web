@@ -29,33 +29,29 @@ def get_claude_response(client, file_content, question, mode="yes_no"):
 
     try:
         message = client.messages.create(
-            model="claude-3-5-haiku-latest",
+            model="claude-3-5-sonnet-latest",
             max_tokens=100,
             temperature=0,
             messages=[
                 {"role": "user", "content": prompt}
             ]
         )
-        return message.content
+        return message
     except Exception as e:
         print(f"Error querying Claude: {e}")
         sys.exit(1)
 
 def interpret_response(response, mode="yes_no"):
     """Interpret Claude's response based on mode."""
-    try:
-        if mode == "yes_no":
-            response_text = response.strip().lower()
-            if response_text in ['yes', 'no']:
-                return [response_text]
-            else:
-                print(f"Not a yes/no response: {response}")
-                sys.exit(1)
-        else:  # list mode
-            return [line.strip() for line in response.strip().split('\n') if line.strip()]
-    except Exception as e:
-        print(f"Could not interpret {response}: {e}")
-        sys.exit(1)
+    if mode == "yes_no":
+        response_text = response[0].text.strip().lower()
+        if response_text in ['yes', 'no']:
+            return [response_text]
+        else:
+            print(f"Not a yes/no response: {response}")
+            sys.exit(1)
+    else:  # list mode
+        return [line.strip() for line in response.content[0].text.strip().split('\n') if line.strip()]
 
 def query(filepath, question, mode="yes_no", api_key=None):
     """
