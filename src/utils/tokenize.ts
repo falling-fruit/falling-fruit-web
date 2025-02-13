@@ -106,8 +106,7 @@ const pipe =
   (x) =>
     fns.reduce((v, f) => f(v), x)
 
-const removeIgnoredChars: Transform = (s) =>
-  s.replace(/\s+/g, ' ').replace(/^ |[-']/g, '')
+const removeIgnoredChars: Transform = (s) => s.replace(/[\s-']/g, '')
 
 const convertLatinToAscii: Transform = (s) =>
   s
@@ -119,23 +118,13 @@ const addTokenStart: Transform = (s) => `${TOKEN_START}${s}`
 
 const addTokenStartEnd: Transform = (s) => `${TOKEN_START}${s}${WORD_END}`
 
+const rightTrimWithWordEnd: Transform = (s) => s.replace(/\s+$/, WORD_END)
+
 const tokenize = pipe(convertLatinToAscii, removeIgnoredChars, (x) =>
   x.toLowerCase(),
 )
 
-export const tokenizeReference = (strings: string[]): string => {
-  const tokens = strings.map(pipe(tokenize, (x) => x.replace(/ $/g, '')))
-  // Add tokens with spaces to the list with spaces removed
-  tokens.forEach((x) => {
-    if (x.includes(' ')) {
-      tokens.push(x.replace(/ /g, ''))
-    }
-  })
-  return tokens.map(addTokenStartEnd).join('')
-}
+export const tokenizeReference = (strings: string[]): string =>
+  strings.map(pipe(tokenize, addTokenStartEnd)).join('')
 
-export const tokenizeQuery = pipe(
-  tokenize,
-  (x) => x.replace(/([^ ]) ([^ ])/g, '$1$2'),
-  addTokenStart,
-)
+export const tokenizeQuery = pipe(tokenize, addTokenStart, rightTrimWithWordEnd)
