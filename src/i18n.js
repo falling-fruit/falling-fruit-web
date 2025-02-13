@@ -16,7 +16,6 @@ const LanguageSelect = () => {
   // Style the select component with width: 10em
   return (
     <Select
-      style={{ width: '10em', margin: 'auto 0' }}
       options={LANGUAGE_OPTIONS}
       value={LANGUAGE_OPTIONS.find((option) => option.value === i18n.language)}
       onChange={(option) => {
