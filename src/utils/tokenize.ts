@@ -106,7 +106,8 @@ const pipe =
   (x) =>
     fns.reduce((v, f) => f(v), x)
 
-const removeIgnoredChars: Transform = (s) => s.replace(/[\s-']/g, '')
+const removeIgnoredChars: Transform = (s) =>
+  s.replace(/\s+/g, ' ').replace(/^ |[-']/g, '')
 
 const convertLatinToAscii: Transform = (s) =>
   s
