@@ -26,7 +26,6 @@ const SelectParent = styled.div`
   .select__control {
     border: 1px solid ${validatedColor()};
     border-radius: 0.375em;
-    padding: 3px 10px;
   }
 
   .select__input {
@@ -36,6 +35,10 @@ const SelectParent = styled.div`
 
   .select__placeholder {
     color: ${({ theme }) => theme.text};
+  }
+
+  .select__single-value {
+    color: ${({ theme }) => theme.secondaryText};
   }
 
   .select__multi-value {
