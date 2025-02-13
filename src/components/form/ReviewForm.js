@@ -202,7 +202,10 @@ export const ReviewForm = ({
 
           return (
             <Form>
-              <ReviewStep standalone hasHeading={editingId == null} />
+              <ReviewStep
+                standalone
+                hasHeading={isDesktop && editingId == null}
+              />
               <ProgressButtons>
                 <div style={{ textAlign: editingId ? 'center' : 'left' }}>
                   <Button
