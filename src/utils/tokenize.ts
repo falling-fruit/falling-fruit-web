@@ -134,4 +134,8 @@ export const tokenizeReference = (strings: string[]): string => {
   return tokens.map(addTokenStartEnd).join('')
 }
 
-export const tokenizeQuery = pipe(tokenize, addTokenStart)
+export const tokenizeQuery = pipe(
+  tokenize,
+  (x) => x.replace(/([^ ]) ([^ ])/g, '$1$2'),
+  addTokenStart,
+)
