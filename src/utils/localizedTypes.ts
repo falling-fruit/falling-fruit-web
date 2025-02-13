@@ -101,7 +101,7 @@ const toMenuEntry = (
   }
 
   const commonNameLabel =
-    parentId === PENDING_ID ? `${commonName} (Pending Review)` : commonName
+    parentId === PENDING_ID ? `${commonName} (Pending review)` : commonName
 
   return {
     value: id,
