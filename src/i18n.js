@@ -1,13 +1,34 @@
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
-import { initReactI18next } from 'react-i18next'
+import { initReactI18next, useTranslation } from 'react-i18next'
+
+import { Select } from './components/ui/Select'
 
 export const LANGUAGE_CACHE_KEY = 'language'
 export const LANGUAGE_OPTIONS = [
   { value: 'en', label: 'English' },
   { value: 'fr', label: 'Français' },
 ]
+
+const LanguageSelect = () => {
+  const { i18n } = useTranslation()
+  // Style the select component with width: 10em
+  return (
+    <Select
+      style={{ width: '10em', margin: 'auto 0' }}
+      options={LANGUAGE_OPTIONS}
+      value={LANGUAGE_OPTIONS.find((option) => option.value === i18n.language)}
+      onChange={(option) => {
+        i18n.changeLanguage(option.value, () => {
+          localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
+        })
+      }}
+      isSearchable={false}
+      menuPlacement="top"
+    />
+  )
+}
 
 i18n
   .use(initReactI18next)
@@ -32,4 +53,5 @@ i18n
     },
   })
 
+export { LanguageSelect }
 export default i18n

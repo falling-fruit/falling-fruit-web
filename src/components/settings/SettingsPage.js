@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { LANGUAGE_CACHE_KEY, LANGUAGE_OPTIONS } from '../../i18n'
+import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
@@ -137,7 +137,7 @@ const SettingsPage = ({ desktop }) => {
 
   const history = useAppHistory()
 
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const DISTANCE_UNIT_OPTIONS = [
     { value: 'metric', label: t('pages.settings.units.metric') },
@@ -300,47 +300,35 @@ const SettingsPage = ({ desktop }) => {
         <Attribution>{Attributions[settings.mapType]}</Attribution>
       )}
 
-      <h3>{t('pages.settings.regional')}</h3>
-
-      <LabeledRow
-        label={
-          <label htmlFor="languagePreference">
-            {t('pages.settings.language')}
-          </label>
-        }
-        right={
-          <Select
-            options={LANGUAGE_OPTIONS}
-            value={LANGUAGE_OPTIONS.find(
-              (option) => option.value === i18n.language,
-            )}
-            onChange={(option) => {
-              i18n.changeLanguage(option.value, () => {
-                localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
-              })
-            }}
-            isSearchable={false}
-            menuPlacement="top"
-          />
-        }
-      />
       {!desktop && (
-        <LabeledRow
-          label={
-            <label htmlFor="distanceUnit">
-              {t('pages.settings.units.units')}
-            </label>
-          }
-          right={
-            <Select
-              options={DISTANCE_UNIT_OPTIONS}
-              onChange={updateUnitsSetting}
-              value={DISTANCE_UNIT_OPTIONS.find(
-                (option) => option.value === settings.distanceUnit,
-              )}
-            />
-          }
-        />
+        <>
+          <h3>{t('pages.settings.regional')}</h3>
+
+          <LabeledRow
+            label={
+              <label htmlFor="languagePreference">
+                {t('pages.settings.language')}
+              </label>
+            }
+            right={<LanguageSelect></LanguageSelect>}
+          />
+          <LabeledRow
+            label={
+              <label htmlFor="distanceUnit">
+                {t('pages.settings.units.units')}
+              </label>
+            }
+            right={
+              <Select
+                options={DISTANCE_UNIT_OPTIONS}
+                onChange={updateUnitsSetting}
+                value={DISTANCE_UNIT_OPTIONS.find(
+                  (option) => option.value === settings.distanceUnit,
+                )}
+              />
+            }
+          />
+        </>
       )}
 
       {!desktop && (

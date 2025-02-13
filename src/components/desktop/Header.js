@@ -7,6 +7,7 @@ import { matchPath } from 'react-router'
 import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { LanguageSelect } from '../../i18n'
 import { logout } from '../../redux/authSlice'
 import { pathWithCurrentView, withFromPage } from '../../utils/appUrl'
 import aboutRoutes from '../about/aboutRoutes'
@@ -30,7 +31,15 @@ const AuthLinksList = styled.ul`
   gap: 12px;
 `
 
-const TIGHT_LAYOUT_MAX_WIDTH = 940
+const TIGHT_LAYOUT_MAX_WIDTH = 1080
+const TIGHT_LAYOUT_MAX_WIDTH_USER = 980
+
+function layoutIstight(user) {
+  return (
+    (user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH_USER) ||
+    (!user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH)
+  )
+}
 
 const StyledHeader = styled.header`
   height: 56px;
@@ -47,8 +56,7 @@ const StyledHeader = styled.header`
   }
 
   .hamburger {
-    display: ${({ user }) =>
-      !user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH ? 'flex' : 'none'};
+    display: ${({ user }) => (layoutIstight(user) ? 'flex' : 'none')};
     margin-right: 1rem;
     cursor: pointer;
     color: ${({ theme }) => theme.secondaryText};
@@ -63,8 +71,7 @@ const StyledHeader = styled.header`
     flex: 1;
 
     .main-menu {
-      display: ${({ user }) =>
-        user || window.innerWidth > TIGHT_LAYOUT_MAX_WIDTH ? 'block' : 'none'};
+      display: ${({ user }) => (layoutIstight(user) ? 'none' : 'block')};
 
       &.mobile-visible {
         display: block;
@@ -342,6 +349,11 @@ const MainMenu = ({ className }) => {
               {t('layouts.application.menu.in_the_press')}
             </NavLink>
           </StyledDropdown>
+        </NavLi>
+        <NavLi>
+          <div style={{ width: '10em', margin: 'auto 0' }}>
+            <LanguageSelect></LanguageSelect>
+          </div>
         </NavLi>
       </NavList>
     </div>
