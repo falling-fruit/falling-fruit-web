@@ -17,7 +17,7 @@ const EdibleTypeText = styled.p`
   font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
-  margin-top: 1.5em;
+  margin-top: 1.25em;
   margin-bottom: 0.5em;
   @media ${({ theme }) => theme.device.mobile} {
     margin-top: 0em;
