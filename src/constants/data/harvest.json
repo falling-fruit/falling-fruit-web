@@ -50,7 +50,6 @@
     "facebook": "https://www.facebook.com/groups/incredibleedibleaustralia/"
   },
   {
-    "active": true,
     "country": "Australia",
     "state": "Tasmania",
     "name": "Urban Farming Tasmania",
@@ -145,6 +144,29 @@
   {
     "active": true,
     "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "name": "Goedgeplukt",
+    "name_url": "https://goedgeplukt.be/"
+  },
+  {
+    "active": true,
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "city": "Antwerp",
+    "name": "Antwerpen Plukt",
+    "name_url": "https://velt.nu/antwerpen-plukt"
+  },
+  {
+    "active": true,
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "city": "Mechelen",
+    "name": "Pluk de stad",
+    "name_url": "https://citamine.be/pluk-de-stad/"
+  },
+  {
+    "active": true,
+    "country": "Belgium",
     "state": "Wallonie",
     "city": "Charleroi",
     "name": "Co une rawette",
@@ -177,26 +199,13 @@
   },
   {
     "active": true,
-    "country": "Belgium",
-    "state": "Vlaanderen (Flandre)",
-    "name": "Goedgeplukt",
-    "name_url": "https://goedgeplukt.be/"
-  },
-  {
-    "active": true,
-    "country": "Belgium",
-    "state": "Vlaanderen (Flandre)",
-    "city": "Antwerp",
-    "name": "Antwerpen Plukt",
-    "name_url": "https://velt.nu/antwerpen-plukt"
-  },
-  {
-    "active": true,
-    "country": "Belgium",
-    "state": "Vlaanderen (Flandre)",
-    "city": "Mechelen",
-    "name": "Pluk de stad",
-    "name_url": "https://citamine.be/pluk-de-stad/"
+    "country": "Brazil",
+    "state": "Espírito Santo",
+    "name": "Piatan Lube",
+    "name_url": "https://piatanlube.wixsite.com",
+    "subname": "Cidades Comestíveis",
+    "subname_url": "https://www.seculodiario.com.br/cidades/cidades-comestiveis-propoe-olhar-as-cidades-sob-a-perspectiva-dos-passarinhos",
+    "instagram": "https://www.instagram.com/cidades.comestiveis/"
   },
   {
     "active": true,
@@ -608,7 +617,7 @@
     "name": "RecuperaLab",
     "name_url": "http://www.recuperalab.com/",
     "facebook": "https://www.facebook.com/RecuperaLab/",
-    "x": "http://www.x.com/recuperalab"
+    "x": "https://x.com/recuperalab"
   },
   {
     "active": true,
@@ -657,6 +666,14 @@
     "active": true,
     "country": "France",
     "state": "Bretagne",
+    "city": "Brest",
+    "name": "Incroyables Comestibles Brest",
+    "name_url": "www.incroyables.infini.fr"
+  },
+  {
+    "active": true,
+    "country": "France",
+    "state": "Bretagne",
     "city": "Quimper",
     "name": "Courgettes et Compagnie",
     "name_url": "http://www.courgettes.org/"
@@ -665,9 +682,10 @@
     "active": true,
     "country": "France",
     "state": "Bretagne",
-    "city": "Brest",
-    "name": "Incroyables Comestibles Brest",
-    "name_url": "www.incroyables.infini.fr"
+    "city": "Vitré",
+    "name": "Tous au verger",
+    "name_url": "https://www.tousauverger.fr/",
+    "facebook": "https://www.facebook.com/tousauverger"
   },
   {
     "active": true,
@@ -677,6 +695,13 @@
     "name": "Arcueil Comestible",
     "name_url": "http://arcueilcomestible.fr/",
     "facebook": "https://www.facebook.com/arcueilvillecomestible/"
+  },
+  {
+    "country": "France",
+    "state": "Île-de-France",
+    "city": "Massy",
+    "name": "Massyculteurs",
+    "name_url": "http://massyculteurs.en-utopia.org/"
   },
   {
     "active": true,
@@ -694,6 +719,16 @@
     "city": "Caen",
     "name": "La Caentine",
     "facebook": "https://www.facebook.com/caentine/"
+  },
+  {
+    "active": true,
+    "country": "France",
+    "state": "Nouvelle-Aquitaine",
+    "city": "Aytré",
+    "name": "Ville d'Aytré",
+    "name_url": "http://aytre.fr/",
+    "subname": "Paysage à croquer",
+    "subname_url": "http://aytre.fr/infos-pratiques-et-demarches/espaces-verts-dechets-et-proprete/espaces-verts/"
   },
   {
     "active": true,
@@ -732,21 +767,6 @@
     "subname": "La cueillette solidaire",
     "subname_url": "https://www.renouer.com/autres-activites/la-cueillette-solidaire/",
     "facebook": "https://www.facebook.com/RenouerGRASSE"
-  },
-  {
-    "country": "France",
-    "state": "Île-de-France",
-    "city": "Massy",
-    "name": "Massyculteurs",
-    "name_url": "http://massyculteurs.en-utopia.org/"
-  },
-  {
-    "active": true,
-    "country": "France",
-    "state": "Bretagne",
-    "city": "Vitré",
-    "name": "Tous Au Verger",
-    "facebook": "https://www.facebook.com/Tous-Au-Verger-106680710873061/"
   },
   {
     "active": true,
@@ -1071,6 +1091,14 @@
   {
     "active": true,
     "country": "Switzerland",
+    "name": "Association Free Go",
+    "name_url": "http://association-freego.ch/",
+    "facebook": "https://www.facebook.com/Assocationfreego",
+    "instagram": "https://www.instagram.com/association_freego/"
+  },
+  {
+    "active": true,
+    "country": "Switzerland",
     "name": "RestEssBar",
     "name_url": "http://restessbar.ch/",
     "facebook": "http://facebook.com/restessbar"
@@ -1168,6 +1196,14 @@
     "name": "Abundance Network",
     "name_url": "http://www.abundancenetwork.org.uk/",
     "x": "https://x.com/Abundance_UK"
+  },
+  {
+    "active": true,
+    "country": "United Kingdom",
+    "name": "Book-Cycle",
+    "name_url": "http://www.book-cycle.org/",
+    "subname": "Tree-Cycle",
+    "subname_url": "http://www.book-cycle.org/projects/tree-cycle/"
   },
   {
     "active": true,
@@ -1623,6 +1659,15 @@
     "active": true,
     "country": "United Kingdom",
     "state": "Wales",
+    "city": "Bangor",
+    "name": "Bangor Forest Garden",
+    "name_url": "http://www.thebfg.org.uk",
+    "facebook": "https://www.facebook.com/Bangorforestgarden"
+  },
+  {
+    "active": true,
+    "country": "United Kingdom",
+    "state": "Wales",
     "city": "Cardiff",
     "name": "Orchard Cardiff",
     "name_url": "http://www.orchardcardiff.org.uk/",
@@ -1710,6 +1755,17 @@
     "facebook": "https://www.facebook.com/RescuingLeftoverCuisine",
     "x": "https://x.com/rescuingcuisine",
     "instagram": "https://www.instagram.com/rescuingleftovercuisine/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "name": "Robin Greenfield",
+    "name_url": "https://www.robingreenfield.org/communityfruittrees/",
+    "subname": "Community Fruit Trees",
+    "subname_url": "https://www.robingreenfield.org/communityfruittrees/",
+    "facebook": "https://www.facebook.com/RobGreenfield/",
+    "x": "https://x.com/robjgreenfield",
+    "instagram": "https://www.instagram.com/robjgreenfield/"
   },
   {
     "active": true,
@@ -1852,6 +1908,13 @@
     "active": true,
     "country": "United States",
     "state": "California",
+    "name": "Mongol Tribe",
+    "name_url": "http://www.mongoltribe.org/food-and-medicine-sovereignty.html"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
     "city": "Alameda",
     "name": "Alameda Backyard Growers",
     "name_url": "http://alamedabackyardgrowers.org/",
@@ -1961,6 +2024,16 @@
     "active": true,
     "country": "United States",
     "state": "California",
+    "city": "French Camp",
+    "name": "Black Urban Farmers Association",
+    "name_url": "https://stocktonbufafarm.org/",
+    "facebook": "https://www.facebook.com/bufa7stockton",
+    "instagram": "https://www.instagram.com/bufa_stockton/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
     "city": "Humboldt County",
     "name": "Food for People",
     "name_url": "http://www.foodforpeople.org/",
@@ -1986,6 +2059,17 @@
     "city": "Irvine",
     "name": "Second Harvest Food Bank",
     "name_url": "http://feedoc.org/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Lodi",
+    "name": "LOEL Senior Center",
+    "name_url": "http://www.loelcenter.net/",
+    "subname": "Meals on Wheels",
+    "subname_url": "http://www.loelcenter.net/programs/meals/",
+    "facebook": "https://www.facebook.com/LOELSeniorCenter"
   },
   {
     "country": "United States",
@@ -2030,6 +2114,15 @@
     "country": "United States",
     "state": "California",
     "city": "Los Angeles",
+    "name": "L.A. Community Fridges",
+    "name_url": "http://lacommunityfridge.com",
+    "instagram": "https://www.instagram.com/lacommunityfridges"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Los Angeles",
     "name": "L.A. Kitchen",
     "name_url": "http://www.lakitchen.org/",
     "subname": "Impact L.A.",
@@ -2045,6 +2138,17 @@
     "city": "Los Angeles",
     "name": "Mamadonnas",
     "facebook": "https://www.facebook.com/Momadonnas"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Manteca",
+    "name": "Second Harvest of the Greater Valley",
+    "name_url": "https://localfoodbank.org/",
+    "facebook": "https://www.facebook.com/localfoodbank",
+    "x": "https://x.com/fightinghunger",
+    "instagram": "https://www.instagram.com/p/B1rlg0aH_zD/"
   },
   {
     "active": true,
@@ -2233,7 +2337,7 @@
     "subname": "Gleaning Program",
     "subname_url": "http://www.agagainsthunger.org/gleaning",
     "facebook": "https://www.facebook.com/AgAgainstHunger/?ref=aymt_homepage_panel",
-    "x": "http://www.x.com/wix",
+    "x": "https://x.com/wix",
     "instagram": "https://www.instagram.com/agagainsthunger/"
   },
   {
@@ -2462,6 +2566,58 @@
     "city": "Stanford University",
     "name": "Stanford Gleaning Project",
     "name_url": "http://stanfordglean.blogspot.com/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "Bread of Life",
+    "name_url": "https://www.breadoflifeca.org/",
+    "facebook": "https://www.facebook.com/breadoflifestockton/",
+    "instagram": "https://www.instagram.com/bread_of_life/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "Emergency Food Bank",
+    "name_url": "http://www.stocktonfoodbank.org/",
+    "facebook": "https://www.facebook.com/StocktonEmergencyFoodBank",
+    "x": "https://x.com/EFBFS",
+    "instagram": "https://www.instagram.com/emergencyfoodbank/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "Harvester Farms",
+    "name_url": "http://www.harvesterfarms.org/",
+    "facebook": "https://www.facebook.com/HarvesterFarms/?ref=bookmarks",
+    "x": "https://x.com/HarvesterFarms"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "PUENTES",
+    "name_url": "https://puentesca.org/",
+    "facebook": "https://www.facebook.com/PUENTESCA/",
+    "x": "https://x.com/PUENTESCA",
+    "instagram": "https://www.instagram.com/puentesca/?hl=en"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Stockton",
+    "name": "University of the Pacific",
+    "name_url": "https://www.pacific.edu/",
+    "subname": "Garden Program",
+    "subname_url": "https://www.pacific.edu/about/sustainability/garden-program"
   },
   {
     "active": true,
@@ -3355,8 +3511,10 @@
     "country": "United States",
     "state": "Montana",
     "city": "Billings",
-    "name": "Parkland Gleaning Project",
-    "name_url": "http://www.billingsparks.org/parkland-gleaning/"
+    "name": "City of Billings Parks and Recreation",
+    "name_url": "https://www.billingsparks.org/",
+    "subname": "Parkland Gleaning Project",
+    "subname_url": "http://www.billingsparks.org/parkland-gleaning/"
   },
   {
     "active": true,
@@ -4654,94 +4812,59 @@
   {
     "active": true,
     "country": "United States",
-    "state": "California",
-    "city": "Stockton",
-    "name": "Emergency Food Bank",
-    "name_url": "http://www.stocktonfoodbank.org/",
-    "facebook": "https://www.facebook.com/StocktonEmergencyFoodBank",
-    "x": "https://x.com/EFBFS",
-    "instagram": "https://www.instagram.com/emergencyfoodbank/"
+    "state": "New York",
+    "city": "Syracuse",
+    "name": "Syracuse Urban Food Forest Project",
+    "name_url": "https://www.esf.edu/suffp",
+    "facebook": "https://www.facebook.com/syrfoodforest",
+    "instagram": "https://www.instagram.com/syracuseurbanfoodforest"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "Virginia",
+    "city": "Richmond",
+    "name": "Happily Natural Festival",
+    "name_url": "https://thenaturalfestival.com/",
+    "facebook": "https://www.facebook.com/happilynaturalfestival/",
+    "instagram": "https://www.instagram.com/happilynaturalfestival/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "Virginia",
+    "city": "Richmond",
+    "name": "Verdant Richmond",
+    "name_url": "https://verdantrichmond.org/",
+    "instagram": "https://www.instagram.com/verdantrichmond/"
   },
   {
     "active": true,
     "country": "United States",
     "state": "California",
-    "city": "Stockton",
-    "name": "PUENTES",
-    "name_url": "https://puentesca.org/",
-    "facebook": "https://www.facebook.com/PUENTESCA/",
-    "x": "https://x.com/PUENTESCA",
-    "instagram": "https://www.instagram.com/puentesca/?hl=en"
+    "city": "Los Angeles",
+    "name": "FoodCycle LA",
+    "name_url": "https://www.foodcyclela.org/",
+    "facebook": "https://facebook.com/foodcyclelosangeles",
+    "x": "https://x.com/Foodcycle_LA",
+    "instagram": "https://instagram.com/foodcycle_la"
   },
   {
     "active": true,
     "country": "United States",
     "state": "California",
-    "city": "Stockton",
-    "name": "Harvester Farms",
-    "name_url": "http://www.harvesterfarms.org/",
-    "facebook": "https://www.facebook.com/HarvesterFarms/?ref=bookmarks",
-    "x": "https://x.com/HarvesterFarms"
+    "name": "Food Finders",
+    "name_url": "https://foodfinders.org/",
+    "facebook": "https://www.facebook.com/foodfindersinc",
+    "x": "https://x.com/FoodFindersinc",
+    "instagram": "https://www.instagram.com/foodfindersinc/"
   },
   {
     "active": true,
-    "country": "United States",
-    "state": "California",
-    "city": "Stockton",
-    "name": "Bread of Life",
-    "name_url": "https://www.breadoflifeca.org/",
-    "facebook": "https://www.facebook.com/breadoflifestockton/",
-    "instagram": "https://www.instagram.com/bread_of_life/"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "California",
-    "city": "French Camp",
-    "name": "Black Urban Farmers Association",
-    "name_url": "https://stocktonbufafarm.org/",
-    "facebook": "https://www.facebook.com/bufa7stockton",
-    "instagram": "https://www.instagram.com/bufa_stockton/"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "California",
-    "city": "Manteca",
-    "name": "Second Harvest of the Greater Valley",
-    "name_url": "https://localfoodbank.org/",
-    "facebook": "https://www.facebook.com/localfoodbank",
-    "x": "https://x.com/fightinghunger",
-    "instagram": "https://www.instagram.com/p/B1rlg0aH_zD/"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "California",
-    "city": "Lodi",
-    "name": "LOEL Senior Center",
-    "name_url": "http://www.loelcenter.net/",
-    "subname": "Meals on Wheels",
-    "subname_url": "http://www.loelcenter.net/programs/meals/",
-    "facebook": "https://www.facebook.com/LOELSeniorCenter"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "California",
-    "city": "Stockton",
-    "name": "University of the Pacific",
-    "name_url": "https://www.pacific.edu/",
-    "subname": "Garden Program",
-    "subname_url": "https://www.pacific.edu/about/sustainability/garden-program"
-  },
-  {
-    "active": true,
-    "country": "France",
-    "state": "Bretagne",
-    "city": "Vitré",
-    "name": "Tous au verger",
-    "name_url": "https://www.tousauverger.fr/",
-    "facebook": "https://www.facebook.com/tousauverger"
+    "country": "Poland",
+    "state": "Województwo dolnośląskie",
+    "city": "Wrocław",
+    "name": "Jadalne Miasto Wrocław",
+    "facebook": "https://www.facebook.com/groups/1112525382459140"
   }
 ]
