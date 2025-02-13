@@ -52,7 +52,7 @@ const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
   @media ${({ theme }) => theme.device.desktop} {
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 2px 10px;
   }
 
   & > div {
