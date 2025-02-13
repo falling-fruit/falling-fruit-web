@@ -106,9 +106,9 @@ const pipe =
   (x) =>
     fns.reduce((v, f) => f(v), x)
 
-const removeNonWordChars: Transform = (s) => s.replace(/[^\s\w]/g, '')
+const removeIgnoredChars: Transform = (s) => s.replace(/[\s-']/g, '')
 
-const convertToAscii: Transform = (s) =>
+const convertLatinToAscii: Transform = (s) =>
   s
     .split('')
     .map((c) => ASCII_MAP[c] || c)
@@ -120,10 +120,8 @@ const addTokenStartEnd: Transform = (s) => `${TOKEN_START}${s}${WORD_END}`
 
 const rightTrimWithWordEnd: Transform = (s) => s.replace(/\s+$/, WORD_END)
 
-const tokenize = pipe(
-  removeNonWordChars,
-  (x) => x.toLowerCase(),
-  convertToAscii,
+const tokenize = pipe(convertLatinToAscii, removeIgnoredChars, (x) =>
+  x.toLowerCase(),
 )
 
 export const tokenizeReference = (strings: string[]): string =>
