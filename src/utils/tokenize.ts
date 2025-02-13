@@ -119,13 +119,19 @@ const addTokenStart: Transform = (s) => `${TOKEN_START}${s}`
 
 const addTokenStartEnd: Transform = (s) => `${TOKEN_START}${s}${WORD_END}`
 
-const rightTrimWithWordEnd: Transform = (s) => s.replace(/\s+$/, WORD_END)
-
 const tokenize = pipe(convertLatinToAscii, removeIgnoredChars, (x) =>
   x.toLowerCase(),
 )
 
-export const tokenizeReference = (strings: string[]): string =>
-  strings.map(pipe(tokenize, addTokenStartEnd)).join('')
+export const tokenizeReference = (strings: string[]): string => {
+  const tokens = strings.map(pipe(tokenize, (x) => x.replace(/ $/g, '')))
+  // Add tokens with spaces to the list with spaces removed
+  tokens.forEach((x) => {
+    if (x.includes(' ')) {
+      tokens.push(x.replace(/ /g, ''))
+    }
+  })
+  return tokens.map(addTokenStartEnd).join('')
+}
 
-export const tokenizeQuery = pipe(tokenize, addTokenStart, rightTrimWithWordEnd)
+export const tokenizeQuery = pipe(tokenize, addTokenStart)
