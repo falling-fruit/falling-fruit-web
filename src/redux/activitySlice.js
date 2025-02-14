@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { getLocationsChanges } from '../utils/api'
@@ -48,7 +49,12 @@ const activitySlice = createSlice({
     },
     [fetchLocationChanges.rejected]: (state, action) => {
       state.isLoading = false
-      toast.error(`Fetching location changes failed: ${action.error.message}`)
+      toast.error(
+        i18next.t('error_message.api.fetch_location_changes_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
   },
 })

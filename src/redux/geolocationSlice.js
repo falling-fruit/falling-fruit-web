@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { distanceInMeters } from '../utils/mapDistance'
@@ -56,7 +57,10 @@ export const geolocationSlice = createSlice({
           //
           // @see src/components/map/ConnectedGeolocation.js
           state.geolocationState = GeolocationState.INITIAL
-          toast.error(`Geolocation timeout`)
+          toast.error(
+            i18next.t('error_message.geolocation.code_3') ||
+              i18next.t('error_message.unknown_error'),
+          )
           break
         case 2:
         default:
@@ -65,9 +69,11 @@ export const geolocationSlice = createSlice({
           //
           // @see src/components/map/ConnectedGeolocation.js
           state.geolocationState = GeolocationState.INITIAL
-          toast.error(
-            `Geolocation failed: ${action.payload.message || 'Unknown error'}`,
-          )
+          toast.error(i18next.t('error_message.geolocation.code_2'), {
+            message:
+              action.payload.message ||
+              i18next.t('error_message.unknown_error'),
+          })
           break
       }
     },

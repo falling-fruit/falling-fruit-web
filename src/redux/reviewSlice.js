@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { getReviewById } from '../utils/api'
@@ -34,7 +35,11 @@ const reviewSlice = createSlice({
     [fetchReviewData.rejected]: (state, action) => {
       state.isLoading = false
       toast.error(
-        `Error fetching review ${action.meta.arg}: ${action.error.message}`,
+        i18next.t('error_message.api.fetch_review_failed', {
+          id: action.meta.arg,
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
       )
     },
   },

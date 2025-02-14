@@ -1,4 +1,5 @@
 import { CurrentLocation, LoaderAlt } from '@styled-icons/boxicons-regular'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { keyframes } from 'styled-components'
@@ -89,6 +90,7 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
 `
 
 const TrackLocationButton = ({ isIcon }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
@@ -105,9 +107,7 @@ const TrackLocationButton = ({ isIcon }) => {
       geolocationState={geolocationState}
       onClick={(event) => {
         if (geolocationState === GeolocationState.DENIED) {
-          toast.info(
-            'Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.',
-          )
+          toast.info(t('error_message.geolocation.denied'))
         } else if (geolocationState === GeolocationState.DOT_ON) {
           dispatch(geolocationCentering(geolocation))
           googleMap.panTo({

@@ -50,7 +50,9 @@ const PasswordSetPage = () => {
       history.push({ pathname: '/users/sign_in', state: { email } })
     } catch (error) {
       toast.error(
-        `Setting new password failed: ${error.message || 'Unknown error'}`,
+        t('error_message.auth.password_set_failed', {
+          message: error.message || t('error_message.unknown_error'),
+        }),
       )
       history.push('/users/sign_in')
     }
