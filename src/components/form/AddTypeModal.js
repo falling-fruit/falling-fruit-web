@@ -43,7 +43,7 @@ const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
         <div style={{ width: isDesktop ? '200px' : '100%' }}>
           <Select
             name={`name_pairs.${index}.language`}
-            label="Language"
+            label={t('new_type.form.language')}
             options={languageOptionsDropdown}
             isSearchable={false}
             placeholder="Select language"
@@ -68,7 +68,7 @@ const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
       {showRemoveButton && index !== 0 && (
         <div>
           <Button type="button" onClick={() => remove(index)} secondary>
-            Remove
+            {t('new_type.form.remove')}
           </Button>
         </div>
       )}
@@ -76,29 +76,32 @@ const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
   )
 }
 
-const NamesFieldArray = () => (
-  <FieldArray name="name_pairs">
-    {({ push, remove, form }) => (
-      <>
-        {form.values.name_pairs.map((value, index) => (
-          <LanguageNamePair
-            key={index}
-            index={index}
-            showRemoveButton={form.values.name_pairs.length > 1}
-            remove={remove}
-          />
-        ))}
-        <Button
-          type="button"
-          onClick={() => push({ language: null, name: '' })}
-          style={{ marginBottom: '10px', marginRight: '10px' }}
-        >
-          Add Name
-        </Button>
-      </>
-    )}
-  </FieldArray>
-)
+const NamesFieldArray = () => {
+  const { t } = useTranslation()
+  return (
+    <FieldArray name="name_pairs">
+      {({ push, remove, form }) => (
+        <>
+          {form.values.name_pairs.map((value, index) => (
+            <LanguageNamePair
+              key={index}
+              index={index}
+              showRemoveButton={form.values.name_pairs.length > 1}
+              remove={remove}
+            />
+          ))}
+          <Button
+            type="button"
+            onClick={() => push({ language: null, name: '' })}
+            style={{ marginBottom: '10px', marginRight: '10px' }}
+          >
+            {t('new_type.form.add_name')}
+          </Button>
+        </>
+      )}
+    </FieldArray>
+  )
+}
 
 // follows submission schema: https://petstore.swagger.io/?url=https://raw.githubusercontent.com/falling-fruit/api/main/docs/openapi.yml#/Types/post_types
 const validationSchema = Yup.object().shape({
@@ -118,7 +121,7 @@ const validationSchema = Yup.object().shape({
 })
 
 const AddTypeModal = ({ initialName, onTypeAdded }) => {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const dispatch = useDispatch()
   const { isAddTypeModalOpen } = useSelector((state) => state.type)
 
@@ -179,7 +182,7 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
 
   return (
     <Modal
-      title="Add New Type"
+      title={t('new_type.title')}
       onDismiss={() => dispatch(closeAddTypeModal())}
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -189,15 +192,14 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
       <NamesFieldArray />
 
       <Textarea
-        placeholder="Description, Wikipedia link, taxonomic information ..."
+        placeholder={t('new_type.form.notes_placeholder')}
         name="notes"
-        label="Notes"
+        label={t('new_type.form.notes')}
         rows={4}
       />
       <div>
         <p style={{ fontSize: '0.9em', color: '#666', marginTop: '5px' }}>
-          Note: All new types are set to pending by default. Only administrators
-          can add non-pending types.
+          {t('new_type.form.pending_notice')}
         </p>
       </div>
     </Modal>

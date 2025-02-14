@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 const LoadingContainer = styled.div`
@@ -15,16 +16,22 @@ const ListState = ({ image, text, ...props }) => (
   </LoadingContainer>
 )
 
-const ShouldZoomIn = (props) => (
-  <ListState
-    image="/magnify_map.svg"
-    text="Zoom into the map to see location data"
-    {...props}
-  />
-)
+const ShouldZoomIn = (props) => {
+  const { t } = useTranslation()
+  return (
+    <ListState image="/magnify_map.svg" text={t('list.zoom_in')} {...props} />
+  )
+}
 
-const NoResultsFound = (props) => (
-  <ListState image="/no_results_icon.svg" text="No Results Found" {...props} />
-)
+const NoResultsFound = (props) => {
+  const { t } = useTranslation()
+  return (
+    <ListState
+      image="/no_results_icon.svg"
+      text={t('list.no_results')}
+      {...props}
+    />
+  )
+}
 
 export { NoResultsFound, ShouldZoomIn }

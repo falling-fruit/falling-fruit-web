@@ -116,9 +116,11 @@ const Review = ({
     <ReviewContainer $editable={editable}>
       {editable && (
         <EditableHeader>
-          You reviewed this location on {formatISOString(review.created_at)}{' '}
+          {t('review.you_reviewed', {
+            date: formatISOString(review.created_at),
+          })}{' '}
           <ResetButton onClick={onEditClick}>
-            <PencilIcon height={14} /> Update or delete this review.
+            <PencilIcon height={14} /> {t('review.update_delete')}
           </ResetButton>
         </EditableHeader>
       )}
@@ -162,10 +164,13 @@ const Review = ({
         <blockquote>{review.comment}</blockquote>
         {!editable && (
           <cite>
-            Reviewed on {formatISOString(review.created_at)}
+            {t('review.reviewed_on', {
+              date: formatISOString(review.created_at),
+            })}
             {review.author && (
               <>
-                {' by '}
+                {' '}
+                {t('review.reviewed_by')}{' '}
                 {review.user_id ? (
                   <StyledLink to={`/users/${review.user_id}`}>
                     {review.author}
@@ -176,7 +181,14 @@ const Review = ({
               </>
             )}
             {review.observed_on && (
-              <> (visited {formatISOString(review.observed_on)})</>
+              <>
+                {' '}
+                (
+                {t('review.visited_on', {
+                  date: formatISOString(review.observed_on),
+                })}
+                )
+              </>
             )}
           </cite>
         )}

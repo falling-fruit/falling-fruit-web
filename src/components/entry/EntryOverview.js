@@ -153,12 +153,20 @@ const EntryOverview = () => {
                 {locationData.no_season ||
                 (locationData.season_start === 0 &&
                   locationData.season_stop === 11)
-                  ? 'Year Round'
-                  : `In season from ${locationData.season_start != null ? formatMonth(locationData.season_start, i18n.language) : '?'} to ${
-                      locationData.season_stop != null
-                        ? formatMonth(locationData.season_stop, i18n.language)
-                        : '?'
-                    }`}
+                  ? t('locations.overview.season.year_round')
+                  : t('locations.overview.season.in_season', {
+                      start:
+                        locationData.season_start != null
+                          ? formatMonth(
+                              locationData.season_start,
+                              i18n.language,
+                            )
+                          : '?',
+                      stop:
+                        locationData.season_stop != null
+                          ? formatMonth(locationData.season_stop, i18n.language)
+                          : '?',
+                    })}
               </p>
             </IconBesideText>
           )}

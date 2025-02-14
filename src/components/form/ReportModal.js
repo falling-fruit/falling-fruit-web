@@ -7,18 +7,18 @@ import { addReport } from '../../utils/api'
 import Modal from '../ui/Modal'
 import { Input, Select, Textarea } from './FormikWrappers'
 
-const PROBLEM_TYPE_OPTIONS = [
-  { label: 'Location is spam', value: 0 },
-  { label: 'Location does not exist', value: 1 },
-  { label: 'Location is a duplicate', value: 2 },
-  { label: 'Inappropriate review photo', value: 3 },
-  { label: 'Inappropriate review comment', value: 4 },
-  { label: 'Other (explain below)', value: 5 },
-]
-
 const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
   const { t } = useTranslation()
+
+  const PROBLEM_TYPE_OPTIONS = [
+    { label: t('problems.problem_types.0'), value: 0 },
+    { label: t('problems.problem_types.1'), value: 1 },
+    { label: t('problems.problem_types.2'), value: 2 },
+    { label: t('problems.problem_types.3'), value: 3 },
+    { label: t('problems.problem_types.4'), value: 4 },
+    { label: t('problems.problem_types.5'), value: 5 },
+  ]
 
   const handleSubmit = async (values) => {
     const reportValues = {
@@ -30,7 +30,7 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
     let response
     try {
       response = await addReport(reportValues)
-      toast.success('Report submitted successfully!')
+      toast.success(t('problems.report_submitted'))
     } catch (error) {
       toast.error(
         t('error_message.api.report_submission_failed', {
