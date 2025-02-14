@@ -1,4 +1,5 @@
 import { Check, X } from '@styled-icons/boxicons-regular'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -12,6 +13,7 @@ const Instructions = styled.span`
 `
 
 const InitLocationNav = () => {
+  const { t } = useTranslation()
   const history = useAppHistory()
   const { form } = useSelector((state) => state.location)
 
@@ -20,21 +22,21 @@ const InitLocationNav = () => {
       left={
         <Instructions>
           {form
-            ? 'Edit position for your new location.'
-            : 'Choose a position for your new location.'}
+            ? t('locations.init.edit_instructions')
+            : t('locations.init.choose_instructions')}
         </Instructions>
       }
       rightIcons={
         <>
           <IconButton
-            label="Cancel choose location"
+            label={t('locations.init.cancel')}
             icon={<X />}
             raised
             size={54}
             onClick={() => history.push('/map')}
           />
           <IconButton
-            label="Confirm choose location"
+            label={t('locations.init.confirm')}
             icon={<Check />}
             raised
             size={54}

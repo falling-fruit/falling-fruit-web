@@ -59,7 +59,7 @@ const TypesSelect = () => {
         formatOptionLabel={(option) =>
           option.__isNew__ ? (
             <div>
-              <b> Add Type: </b>
+              <b>{t('new_type.add_type_label')} </b>
               {option.label}
             </div>
           ) : (

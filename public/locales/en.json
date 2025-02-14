@@ -20,18 +20,9 @@
     }
   },
   "error_message": {
-    "geolocation": {
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported",
-      "timeout": "Geolocation timeout",
-      "unknown": "Unknown error",
-      "code_1": "Permission denied - please enable location sharing in browser settings",
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Request timeout"
-    },
     "api": {
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
       "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
+      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
       "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
       "location_edit_failed": "Location editing failed: {{message}}",
       "location_submission_failed": "Location submission failed: {{message}}",
@@ -40,18 +31,27 @@
       "review_deletion_failed": "Review deletion failed: {{message}}",
       "review_edit_failed": "Review editing failed: {{message}}",
       "review_submission_failed": "Review submission failed: {{message}}",
-      "type_add_failed": "Adding new type failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}"
+      "street_view_unavailable": "Street View not available for location {{id}}",
+      "type_add_failed": "Adding new type failed: {{message}}"
     },
     "auth": {
+      "check_failed": "Authentication check failed: {{message}}",
       "confirmation_failed": "Account confirmation failed: {{message}}",
+      "password_set_failed": "Setting new password failed: {{message}}",
+      "profile_update_failed": "Profile update failed: {{message}}",
       "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
       "reset_password_failed": "Resetting password failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}",
-      "check_failed": "Authentication check failed: {{message}}",
       "signin_failed": "Sign in failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}"
+      "signup_failed": "Sign up failed: {{message}}"
+    },
+    "geolocation": {
+      "code_1": "Permission denied - please enable location sharing in browser settings",
+      "code_2": "Position unavailable: {{message}}",
+      "code_3": "Request timeout",
+      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
+      "not_supported": "Geolocation not supported",
+      "timeout": "Geolocation timeout",
+      "unknown": "Unknown error"
     },
     "unknown_error": "Unknown error"
   },
@@ -87,6 +87,10 @@
     "password": "Password",
     "quality": "Quality",
     "report": "Report",
+    "review": {
+      "one": "Review",
+      "other": "Reviews"
+    },
     "sign_up": "Sign up",
     "tree_inventory": {
       "one": "Tree inventory"
@@ -106,6 +110,10 @@
     },
     "back": "Back",
     "loading": "Loading..."
+  },
+  "list": {
+    "no_results": "No Results Found",
+    "zoom_in": "Zoom into the map to see location data"
   },
   "locations": {
     "edit_position": {
@@ -142,10 +150,20 @@
       ],
       "fruiting": ["Flowers", "Unripe fruit", "Ripe fruit"]
     },
+    "init": {
+      "cancel": "Cancel choose location",
+      "choose_instructions": "Choose a position for your new location.",
+      "confirm": "Confirm choose location",
+      "edit_instructions": "Edit position for your new location."
+    },
     "overview": {
       "added_by": "Added by {{name}}",
       "date_edited": "Updated {{date}}",
-      "imported_from": "Imported from {{name}}"
+      "imported_from": "Imported from {{name}}",
+      "season": {
+        "in_season": "In season from {{start}} to {{stop}}",
+        "year_round": "Year Round"
+      }
     }
   },
   "menu": {
@@ -156,6 +174,23 @@
     "list": "List",
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
+  },
+  "mobile": {
+    "overview": "Overview",
+    "reviews": "Reviews",
+    "reviews_count": "Reviews ({{count}})"
+  },
+  "new_type": {
+    "add_type_label": "Add Type:",
+    "form": {
+      "add_name": "Add Name",
+      "language": "Language",
+      "notes": "Notes",
+      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
+      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
+      "remove": "Remove"
+    },
+    "title": "Add New Type"
   },
   "pages": {
     "about": {
@@ -287,7 +322,23 @@
   },
   "problems": {
     "description_subtext": "Any information that might help us evaluate the problem",
-    "problem_type": "Problem type"
+    "problem_type": "Problem type",
+    "problem_types": [
+      "Location is spam",
+      "Location does not exist",
+      "Location is a duplicate",
+      "Inappropriate review photo",
+      "Inappropriate review comment",
+      "Other (explain below)"
+    ],
+    "report_submitted": "Report submitted successfully!"
+  },
+  "review": {
+    "reviewed_by": "by",
+    "reviewed_on": "Reviewed on {{date}}",
+    "update_delete": "Update or delete this review.",
+    "visited_on": "visited {{date}}",
+    "you_reviewed": "You reviewed this location on {{date}}"
   },
   "time": {
     "days": {
