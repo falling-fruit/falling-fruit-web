@@ -23,7 +23,9 @@ const ConfirmationPage = () => {
           history.push({ pathname: '/users/sign_in', state: { email } })
         } catch (error) {
           toast.error(
-            `Account confirmation failed: ${error.message || 'Unknown error'}`,
+            t('error_message.auth.confirmation_failed', {
+              message: error.message || t('error_message.unknown_error'),
+            }),
             { autoClose: 5000 },
           )
           history.push('/users/confirmation/new')

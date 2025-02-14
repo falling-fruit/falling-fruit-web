@@ -1,5 +1,6 @@
 import { equals } from 'ramda'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
@@ -13,6 +14,8 @@ const ScrollAnchor = styled.div`
 
 export const PhotoUploader = ({ value, onChange }) => {
   const [photos, setPhotos] = useState(value)
+
+  const { t } = useTranslation()
 
   // Sync changes from value into state
   useEffect(() => {
@@ -45,7 +48,11 @@ export const PhotoUploader = ({ value, onChange }) => {
           try {
             resp = await addPhoto(photo.file)
           } catch (error) {
-            toast.error(`Photo upload failed: ${error.message}`)
+            toast.error(
+              t('error_message.api.photo_upload_failed', {
+                message: error.message || t('error_message.unknown_error'),
+              }),
+            )
           }
 
           if (resp) {
