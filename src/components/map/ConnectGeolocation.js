@@ -89,6 +89,7 @@ export const ConnectGeolocation = () => {
   const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
   const maps = getGoogleMaps ? getGoogleMaps() : null
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [isMapMoving, setIsMapMoving] = useState(false)
 
   useEffect(() => {
@@ -127,7 +128,7 @@ export const ConnectGeolocation = () => {
     } else if (geolocation.error) {
       dispatch(geolocationError(geolocation.error))
     } else if (!geolocation.latitude || !geolocation.longitude) {
-      dispatch(geolocationError({ message: 'Unknown error' }))
+      dispatch(geolocationError({ message: t('error_message.unknown_error') }))
     } else if (isMapMoving) {
       // Do nothing
     } else {

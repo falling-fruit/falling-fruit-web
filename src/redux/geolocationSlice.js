@@ -57,10 +57,11 @@ export const geolocationSlice = createSlice({
           //
           // @see src/components/map/ConnectedGeolocation.js
           state.geolocationState = GeolocationState.INITIAL
-          toast.error(
-            i18next.t('error_message.geolocation.code_3') ||
+          toast.error(i18next.t('error_message.geolocation.code_3'), {
+            message:
+              action.payload.message ||
               i18next.t('error_message.unknown_error'),
-          )
+          })
           break
         case 2:
         default:

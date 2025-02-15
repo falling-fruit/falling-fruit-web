@@ -54,7 +54,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a id="review" style={{ textDecoration: 'none' }}>
           <SectionHeading>
-            Leave a review
+            {t('review.form.leave_a_review')}
             {!standalone && <Optional />}
           </SectionHeading>
         </a>
@@ -68,7 +68,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
 
       <DateInput
         name="review.observed_on"
-        label="Observed on"
+        label={t('review.form.observed_on')}
         invalidWhenUntouched
       />
 
@@ -113,7 +113,10 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
         />
       </FormRatingWrapper>
 
-      <PhotoUploader name="review.photos" label="Upload images" />
+      <PhotoUploader
+        name="review.photos"
+        label={t('review.form.upload_images')}
+      />
     </>
   )
 }
