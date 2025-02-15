@@ -235,7 +235,7 @@ const EntryMobile = () => {
         >
           {drawerFullyOpen && hasReviews && (
             <TabList>
-              <Tab>{t('locations.mobile.overview')}</Tab>
+              <Tab>{t('locations.overview.title')}</Tab>
               <Tab>{`{t('glossary.review.other')} ({ reviews.length })`}</Tab>
             </TabList>
           )}

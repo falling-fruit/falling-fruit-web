@@ -45,13 +45,10 @@
       "signup_failed": "Sign up failed: {{message}}"
     },
     "geolocation": {
-      "code_1": "Permission denied - please enable location sharing in browser settings",
       "code_2": "Position unavailable: {{message}}",
-      "code_3": "Request timeout",
+      "code_3": "Geolocation timeout: {{message}}",
       "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported",
-      "timeout": "Geolocation timeout",
-      "unknown": "Unknown error"
+      "not_supported": "Geolocation not supported"
     },
     "unknown_error": "Unknown error"
   },
@@ -128,7 +125,8 @@
       "description_subtext": "Location details, access issues, plant health ...",
       "fruiting_status": "Fruiting status",
       "position": "Position",
-      "season": "Season"
+      "season": "Season",
+      "season_start_to_stop_short": "to"
     },
     "index": {
       "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!"
@@ -163,7 +161,8 @@
       "season": {
         "in_season": "In season from {{start}} to {{stop}}",
         "year_round": "Year Round"
-      }
+      },
+      "title": "Overview"
     }
   },
   "menu": {
@@ -174,11 +173,6 @@
     "list": "List",
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
-  },
-  "mobile": {
-    "overview": "Overview",
-    "reviews": "Reviews",
-    "reviews_count": "Reviews ({{count}})"
   },
   "new_type": {
     "add_type_label": "Add Type:",
@@ -323,17 +317,22 @@
   "problems": {
     "description_subtext": "Any information that might help us evaluate the problem",
     "problem_type": "Problem type",
-    "problem_types": [
-      "Location is spam",
-      "Location does not exist",
-      "Location is a duplicate",
-      "Inappropriate review photo",
-      "Inappropriate review comment",
-      "Other (explain below)"
-    ],
+    "problem_types": {
+      "0": "Location is spam",
+      "1": "Location does not exist",
+      "2": "Location is a duplicate",
+      "3": "Inappropriate review photo",
+      "4": "Inappropriate review comment",
+      "5": "Other (explain below)"
+    },
     "report_submitted": "Report submitted successfully!"
   },
   "review": {
+    "form": {
+      "leave_a_review": "Leave a review",
+      "observed_on": "Observed on",
+      "upload_images": "Upload images"
+    },
     "reviewed_by": "by",
     "reviewed_on": "Reviewed on {{date}}",
     "update_delete": "Update or delete this review.",
@@ -347,6 +346,9 @@
     },
     "last_24_hours": "Last 24 hours",
     "time_ago": "{{time}} ago"
+  },
+  "type": {
+    "pending_review": "Pending review"
   },
   "users": {
     "bio": "About you",

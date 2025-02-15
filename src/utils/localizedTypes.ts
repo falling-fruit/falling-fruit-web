@@ -1,3 +1,4 @@
+import i18next from 'i18next'
 import { sortBy } from 'lodash'
 
 import { components } from './apiSchema'
@@ -101,7 +102,9 @@ const toMenuEntry = (
   }
 
   const commonNameLabel =
-    parentId === PENDING_ID ? `${commonName} (Pending review)` : commonName
+    parentId === PENDING_ID
+      ? `${commonName} (${i18next.t('type.pending_review')})`
+      : commonName
 
   return {
     value: id,

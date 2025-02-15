@@ -149,7 +149,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
           fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
           isClearable
         />
-        <span>to</span>
+        <span>{t('locations.form.season_start_to_stop_short')}</span>
         <Select
           name="season_stop"
           options={monthOptions}
