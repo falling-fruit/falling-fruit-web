@@ -1,0 +1,157 @@
+{
+  "devise": {
+    "confirmations": {
+      "confirmed": "Konto zostało poprawnie aktywowane.",
+      "send_instructions": "Instrukcja jak aktywować konto zostanie niezwłocznie wysłana na podany adres e-mail."
+    },
+    "failure": {
+      "already_authenticated": "Jesteś już zalogowany."
+    },
+    "passwords": {
+      "no_token": "Do tej strony możesz dostać się tylko poprzez wiadomość e-mail resetującą hasło. Jeśli to z niej tu trafiłeś, upewnij się, że użyłeś pełnego adresu.",
+      "send_instructions": "Instrukcja zmiany hasła zostanie niezwłocznie wysłana na podany adres e-mail.",
+      "updated_not_active": "Hasło zmienione poprawnie."
+    },
+    "registrations": {
+      "signed_up": "Witaj! Rejestracja zakończyła się sukcesem.",
+      "update_needs_confirmation": "Konto zostało zaktualizowane, musimy jednak potwierdzić nowy adres e-mail. Sprawdź swoją skrzynkę pocztową i otwórz link aktywacyjny, aby ukończyć zmianę adresu.",
+      "updated": "Konto zostało pomyślnie zaktualizowane."
+    }
+  },
+  "glossary": {
+    "about": "O nas",
+    "account": "Konto",
+    "activity": "Aktywność",
+    "address": "Adres",
+    "description": "Opis",
+    "email": "Email",
+    "logout": "Wyloguj",
+    "map": "Mapa",
+    "name": "Login",
+    "password": "Hasło",
+    "quality": "Jakość",
+    "report": "Raport",
+    "sign_up": "Zarejestruj się",
+    "tree_inventory": {
+      "one": "Spis drzew"
+    },
+    "types": "Rodzaj",
+    "unverified": "Niezweryfikowane",
+    "yield": "Wydajność"
+  },
+  "layouts": {
+    "application": {
+      "menu": {
+        "in_the_press": "Media o nas",
+        "sharing_the_harvest": "Udostępnianie plonów",
+        "the_project": "Projekt"
+      }
+    }
+  },
+  "locations": {
+    "form": {
+      "comments": "Komentarze",
+      "comments_subtext": "Aktualizacje, kwestie dostępu, stan zdrowotny rośliny ...",
+      "description_subtext": "Usytuowanie, kwestie dostępu, stan zdrowotny rośliny ...",
+      "fruiting_status": "Stan owocowania"
+    },
+    "index": {
+      "editmarker_html": "<b>Przesuń do pozycji źródła.</b><br><br>Sprawdź widok satelitarny - źródło może być widoczne z powietrza!"
+    },
+    "infowindow": {
+      "access_mode": [
+        "Jestem właścicielem tego źródła",
+        "Mam pozwolenie od właściciela, aby dodać źródło",
+        "Źródło znajduje się na terenie publicznym",
+        "Źródło znajduje się na terenie prywatnym, ale wystaje na teren publiczny",
+        "Źródło znajduje się na terenie prywatnym (zapytaj o pozwolenie)"
+      ],
+      "access_short": [
+        "Dodane przez właściciela",
+        "Dozwolone przez właściciela",
+        "Publiczne",
+        "Prywatne, ale wystające",
+        "Prywatne"
+      ],
+      "fruiting": ["Kwitnie", "Niedojrzałe owoce", "Dojrzałe owoce"]
+    }
+  },
+  "pages": {
+    "about": {
+      "about_the_site": "O stronie",
+      "advisors": "O nas (doradcy)",
+      "alan_gibson_bio_html": "Alan zawsze lubił przygody i odkrywanie. Zaczął żerować jako sposób na wprowadzenie swoich małych dzieci w styl życia na świeżym powietrzu. Pisze <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> blog i publikuje <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Fruit and Nuts For Free</a> book. Uprawnił żerowanie w parkach publicznych i założył gminny sad w swoim rodzinnym mieście, Southampton UK.",
+      "ana_carolina_bio_html": "Ana jest podoktorantką na Federalnym Uniwersytecie Para w Brazylii. Jest antropologiem zainteresowanym zrozumieniem społecznych i kulturowych nawyków żywieniowych. Ana pracowała głównie w brazylijskiej Amazonii. W Acre (zachodnia Amazonia) studiowała regionalną konsumpcję owoców. Następnie pracowała w środkowym regionie Solimões, badając zmiany w diecie w odległych społecznościach. Między 2017 i 2018, Ana mieszkała w małych i średnich miastach w Delcie Amazonki, patrząc na wpływ zmian klimatu na bezpieczeństwo żywnościowe ludzi mieszkających w nieformalnych osiedlach. Niedawno przeprowadziła się do południowego Nowego Meksyku w Stanach Zjednoczonych, gdzie pracuje jako konsultant.",
+      "caleb_phillips_bio_html": "Caleb jest bezpiórkowym, dwunożnym humanoidalnym pasjonatem sprawiedliwości żywieniowej i znajdowania kreatywnych sposobów na wykorzystanie technologii do rozwiązywania problemów społecznych. Kiedy nie jeździ na rowerze po drzewach, balansuje pomiędzy swoją codzienną pracą jako naukowiec zajmujący się danymi w <a href=\"https://www.nrel.gov/research/caleb-phillips.html\">National Renewable Energy Laboratory</a> w Golden, Colorado oraz jako adiunkt w dziedzinie informatyki w <a href=\"https://www.colorado.edu/cs/caleb-phillips\">University of Colorado</a>. Poza tym wszystkim, co robi, lubi wspinać się po skałach, biegać po szlakach, jeździć na rowerach i ogólnie rzecz biorąc być na zewnątrz, jak to tylko możliwe. Caleb stworzył Falling Fruit z Ethanem Welty'm w 2013 roku i służył w Radzie Dyrektorów przez 6 lat, zanim objął stanowisko w Radzie Doradczej.",
+      "celebration": "Falling Fruit cieszy się kulinarnymi darami natury na ulicach naszych miast. Przez pokazanie tych zasobów na mapie, mamy nadzieję, że ułatwimy bezpośredni kontakt i związek między ludźmi, żywnością i naturalnymi organizmami rosnącymi w naszej okolicy. To nie tylko darmowe jedzenie! Zbieractwo w 21 wieku jest okazją do eksploracji miast, szansą na walkę z plagą betonu i na ponowne odkrycie roślin i ich natury jako źródeł naszej żywności.",
+      "closing_remarks": "Uwagi końcowe",
+      "closing_remarks_para1_html": "Falling Fruit to organizacja non-profit, zarejestrowana w Boulder, Colorado. Darowizny pochodzące ze Stanów Zjednoczonych można odpisać od podatku.",
+      "closing_remarks_para2_html": "Zbieranie żywności w mieście wiąże się z pewnymi względami praktycznymi i moralnymi. Jako wprowadzenie do etyki zbieractwa miejskiego, polecamy wspaniałe podsumowanie tych tematów na bliźniaczej nam stronie z Portland, Oregon <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a>.",
+      "closing_remarks_para3_html": "Informacje na stronie Falling Fruit mogą nie być zgodne z prawdą albo być nieaktualne. Na przykład wiele z map, które zaimportowano do Falling Fruit było na publicznych stronach Google Maps, na których znaczniki mogły być niedokładne albo marker mógł zostać przypadkowo przesunięty. Podobnie, spisy drzew w mieście są aktualizowane rzadko. Proszę, bądźcie przygotowani na pojawiające się czasem niezgodności i poprawiajcie mapę zgodnie z waszymi odkryciami w terenie. Od nas wszystkich zależy czy rośliny na mapie będą dobrze zidentyfikowane i opisane. Dzięki wysiłkowi nas wszystkich mapa ta będzie coraz lepsza.",
+      "contact_us_html": "Ta strona internetowa została stworzona przez i dla zbieraczy - chcemy, aby była najlepszym dostępnym narzędziem dla współczesnych zbieraczy. Napisz do nas na <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>. Chętnie usłyszymy Twoje komentarze!",
+      "craig_durkin_bio_html": "Craig jest współzałożycielem <a href=\"http://www.concrete-jungle.org/\">Concrete Jungle</a>, organizacji w Atlancie w Georgii, która zajmuje się uprawą żywności i zbieraniem owoców w całym mieście w celu przekazania ich lokalnym schroniskom dla bezdomnych i bankom żywności. Jako <a href=\"http://www.gatech.edu/\">Georgia Tech</a> absolwent, zawsze szuka sposobów, aby połączyć zbieranie owoców z nowymi technologiami, a wkrótce będzie rozmieszczenie jego drona plamistego drzewa owocowego i tweetting owoców czujnik dojrzałości...",
+      "cristina_rubke_bio_html": "Cristina jest prawnikiem z <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> w San Francisco w Kalifornii, gdzie koncentruje się na ściganiu znaków towarowych i doradztwie. Jest również członkiem zarządu <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>, która nadzoruje transport publiczny, ruch i parkowanie w San Francisco. W wolnym czasie Cristina pływa w Zatoce San Francisco z <a href=\"//www.baads.org/\">Zrzeszenie Niepełnosprawnych Żeglarzy Zatoki</a> i bierze udział w lokalnych i międzynarodowych regatach.",
+      "david_craft_bio_html": "David jest pracownikiem naukowym w Zakładzie Onkologii Radiacyjnej w <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Harvard Medical School</a> w Bostonie, Massachusetts. Jest on również zapalonym poszukiwaczem i autorem książki <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and eating Wild Plants in the City</a> (<a href=\"/docs/David Craft - Urban Foraging.pdf\">free download</a>).",
+      "directors": "O nas (zarząd)",
+      "emily_sigman_bio_html": "Emily jest zagorzałą ewangelistką agroleśnictwa, niepoprawną żarliwą i dumną matką dwóch kotów, czterech przepiórek i najwspanialszego psa świata. Jej korzenie sięgają głęboko w Góry Skaliste, ale obecnie jej naziemna biomasa z dumą nazywa New Haven, Connecticut jej dom. Często można ją znaleźć opiekującą się publicznymi lasami żywieniowymi, zachwyconą czytaniem w jakimś przytulnym kąciku bibliotecznym lub poetycznie nawijającą o magii grzybni (i rzekomo kończącą połączone studia magisterskie na Yale <a href=\"https://environment.yale.edu/\">Szkoła Leśnictwa</a> i <a href=\"https://jackson.yale.edu/person/emily-sigman/\">Szkoła Spraw Globalnych</a>). Emily jest niszczycielsko uzależniona od podróżowania i może być teraz wszędzie.",
+      "ethan_welty_bio_html": "Dzięki technologii i danym, Ethan jest mistrzem miast jako źródła świeżej i darmowej żywności. W 2013 roku wraz z Calebem Phillipsem stworzył Falling Fruit, aby promować miejskie żerowanie na całym świecie, a w 2014 roku założył <a href=\"https://fruitrescue.org\"> Community Fruit Rescue</a>, aby zbierać i rozprowadzać nadwyżki owoców rosnących wokół niego w Boulder w Kolorado. Poza owocami, żongluje <a href=\"https://www.weltyphotography.com\">karierą fotograficzną</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">badaniem na lodowcach</a> i apetytem na górskie i rzeczne wyprawy.",
+      "ff_disclaimer_html": "Falling Fruit nie jest zrzeszone z Fallen Fruit. Fallen Fruit można znaleźć pod <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
+      "give_paypal": "Wesprzyj nas przez Paypal Giving Fund",
+      "give_us_money": "Jesteśmy organizacją non-profit opartą na wolontariacie. Nasze funkcjonowanie zależy od datków. Jeśli możesz, rozważ przekazanie nam darowizny. Darowizny (przynajmniej w obrębie Stanów Zjednoczonych) można odpisać od podatku.",
+      "jeff_wanner_bio_html": "Od czasu zbioru czarnych i borówek z rodziną w dzieciństwie, a ostatnio, zauważając bogactwo publicznych drzew owocowych w całym Kolorado, Jeff rozwinął głębokie uznanie dla obfitości upraw owoców w naszych miastach. Jego pierwszą misją dla Falling Fruit było przeczesywanie Boulder i Salt Lake City, papierowe mapy w ręku, aby nagrywać owocujące drzewa. Kiedy nie pracuje nad poprawą efektywności energetycznej budynków, zazwyczaj pomaga w społeczności lub szybko przemieszcza się po górach pieszo, na nartach lub na rowerze.",
+      "join_us_html": "Dołącz do nas w świętowaniu lokalnego jedzenia! <a href=\"/\">Mapa</a> jest otwarta na każdego, bazę danych można <a href=\"/data\">pobrać</a> za pomocą jednego kliknięcia, a jej <a href=\"https://github.com/falling-fruit/falling-fruit\">kod</a> jest  dostępny dla każdego (open-source). Zachęcamy, dziel się tą mapą z innymi! Na naszej <a href=\"/sharing\">stronie udostępniania</a> znajdziesz setki lokalnych organizacji które zakładają publiczne sady i ogrody, zbierają owoce i warzywa z drzew i ogrodów w mieście, odbierają od rolników produkty, które inaczej by się zmarnowały i wreszcie dzielą się tym wszystkim z sąsiadami i osobami potrzebującymi.",
+      "more_about_html": "Nasza mapa nie jest pierwszą tego rodzaju mapą, ale mamy nadzieję, że będzie ona najbardziej wyczerpującą taką mapą na świecie. Podczas gdy nasi użytkownicy dodają własne miejsca na mapie, my przeczesujemy Internet szukając już istniejących informacji i staramy się połączyć siły zbieraczy, botaników, leśników i freegan na całym świecie. Zbieramy też bazy danych o roślinności w mieście. Importowane przez nas <a href=\"/datasets\"> bazy danych</a> mają zakres od lokalnych map sąsiedztwa do profesjonalnie opracowanych spisów drzew. W ten sposób zebraliśmy {{types}} typów różnych rodzajów roślin jadalnych w {{locations}} miejscach. Poza roślinami uprawnymi i powszechnymi są też na mapie rośliny egzotyczne, ale też dawno zapomniane rośliny rodzime. Zbieractwo w Twojej okolicy to podróż w czasie i poznawanie różnych kultur.",
+      "staff": "Personel",
+      "translate": "Przetłumacz",
+      "translate_for_us_html": "Chcesz pomóc w tłumaczeniach? Napisz do nas a zaprosimy Cię do dołączenia do <a href=\"https://phrase.com\">Phrase</a>, gdzie zarządzamy tłumaczeniami.",
+      "translators": "Tłumaczenia",
+      "tristram_stuart_bio_html": "Jako nastolatek, Tristram hodował świnie na nadmiarze jedzenia, które zbierał w swoich szkolnych kuchniach, u lokalnego piekarza i wiejskiego greengrocera. Zauważenie, że wiele z tej żywności nadal nadaje się do spożycia przez ludzi, doprowadziło go do uświadomienia sobie, że dobre, świeże jedzenie marnuje się na kolosalną skalę. Od tego czasu Tristram niestrudzenie pracował, aby zwrócić uwagę społeczeństwa, mediów i decydentów politycznych na tę kwestię. Założył organizację kampanii na rzecz marnowania żywności <a href=\"//feedbackglobal.org\">Feedback Global</a> i napisał <a href=\"//tristramstuart.co.uk/\">Śmieci: Odkrycie Globalnego Skandalu Żywieniowego</a> w celu pokazania skali problemu na skalę globalną. W 2011 roku Tristram otrzymał <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">Sophie Prize</a> za walkę z odpadami żywnościowymi.",
+      "write": "Napisz"
+    },
+    "data": {
+      "beware_html": "Ale uwaga. Po kompresji, dane stają się ogromny plik, który powoduje większość programów arkusza kalkulacyjnego do implozji. Tylko zainteresowanych manipulacji danych w nim całości, trzeba iść tą drogą. Dla większości, lepszą alternatywą jest do selektywnego pobierania ciekawostki z wykorzystaniem zintegrowanego narzędzia do pobierania <a href=\"/\">mapie</a>.",
+      "caveat_emptor_html": "Nie bierzemy odpowiedzialności za dokładność danych, nie edytujemy ich, są takie, jakie zostały wstawione, <i>caveat emptor</i>. Jeśli zrobisz z nimi coś fajnego, <a href=\"mailto:feedback@fallingfruit.org\">daj nam znać</a> !",
+      "intro": "Falling Owoc zbudowany jest na danych publicznych i hojności paszowe miejskich chętnych do dzielenia się znaleziska z innymi. Chcemy miejskie źródła żywności, aby osiągnąć jak najwięcej ludzi, jak to możliwe, i wierzymy, że każdy powinien mieć równy dostęp do owoców naszej wspólnej pracy. W duchu otwartych danych, oto! Cała baza danych",
+      "license_html": "Jeśli jesteś zainteresowany wykorzystaniem danych w swoim własnym projektem, szczególnie dla zastosowań komercyjnych, sugerujemy nas (kontakt <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Gdy nie podano inaczej, dane są dostępne na licencji <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">Creative Commons (uznanie autorstwa, niekomercyjnych, Share-Alike)</a> licencji. Oznacza to, że można w nich używać i rozpowszechniać dane tak długo, jak zachować oryginalny autor / źródło wpisu i go nie używać (bez zezwolenia) do zastosowań komercyjnych. Kod źródłowy Falling Fruit jest również otwarty. Więcej informacji na ten temat można znaleźć w <a href=\"https://github.com/falling-fruit/falling-fruit\">naszym repozytorium github</a>."
+    },
+    "datasets": {
+      "community_map": "Mapa społeczności",
+      "date_imported": "Data importu",
+      "intro_html": "Falling Fruit chce być światowym najbardziej kompleksowy i otwarty zbiór danych geograficznych z spożywczymi miejskich. Podczas gdy nasi użytkownicy zbadać, edytować i dodawać lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, możemy przeczesać znanego wszechświata dla wcześniej istniejących zbiorów danych i zaimportować je bezpośrednio do <a href=\"/data\">bazy danych</a>, jednocząc wysiłki paszowe, leśników i freegans wszędzie. Jeśli wiesz, że w zbiorze danych we've brakowało, proszę <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a> ! Możesz też pomóc nam w procesie importu przez formatowania danych przy użyciu <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Należy pamiętać, że od importu muszą być wykonywane ręcznie, dalsze zmiany oryginalnych danych nie są widoczne na Falling Fruit.",
+      "table_info": "Każdy zestaw danych jest wymienione z nazwy, liczby miejsc, i data importu. Rozszerzanie każdy wiersz ujawnia dalsze szczegóły na temat oryginalnych danych, procesu importu i licencji rządzącej, jak można wykorzystać dane.",
+      "type": "Typ",
+      "types_of_data": "Zestawów danych importowanych do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy w portalu dla\" są budowane przez paszowe i freegans jak czytać swoje otoczenie za rzeczy do jedzenia. Jesteśmy zobowiązani do pracowitych obywateli-kartografów, którzy zebranych te dane. \"Zapasy drzewa\" są opracowywane przez miasta, uczelni wyższych i innych instytucji, które chcą lepiej dokumentu i opieki dla swoich drzew. My te ogromne zbiory danych, wydobywać gatunków produkujących żywność i dodaj je do mapy. Aby pomóc nam swoją okolicę na mapie, należy skontaktować się ze szkołą lub miasto wzywając ich do dzielenia się z nami drzewo inwentarza."
+    },
+    "sharing": {
+      "grow_pick_and_distribute": "Zasadź · Zbieraj · Dziel się",
+      "intro_html": "Poniżej wymienione są lokalne organizacje, które rosną żywności (żywność i sady lasy publiczne), odebrać jedzenie (miejskiego żerowania i gleaning rolniczy), lub w inny sposób rozpowszechniać żywności (swapy i darowizn). Organizacje wymienione są kraje, państwa i miasta. Te z nazwami wyblakłych out są uważane za nieaktywne. Jeśli znasz inne, które powinny być na tej liście, <a href=\"mailto:info@fallingfruit.org\">skontaktuj się z nami</a> !"
+    }
+  },
+  "problems": {
+    "description_subtext": "Wszelkie informacje, które mogą pomóc nam w ocenie problemu",
+    "problem_type": "Typ problemu"
+  },
+  "time": {
+    "days": {
+      "one": "{{count}} dzień",
+      "other": "{{count}} dni"
+    },
+    "last_24_hours": "Ostatnie 24 godziny",
+    "time_ago": "{{time}} temu"
+  },
+  "users": {
+    "bio": "O Tobie",
+    "change_password": "Zmień hasło",
+    "current_password": "Aktualne hasło",
+    "edit_account": "Edytuj konto",
+    "forgot_password": "Zresetuj hasło",
+    "new_password": "Nowe hasło",
+    "options": {
+      "announcements_email": "Otrzymywanie e-maili z ważnymi ogłoszeniami i możliwościami (1-2 razy w roku)"
+    },
+    "remember_me": "Zapamiętaj mnie",
+    "resend_confirmation_instructions": "Ponowne wysłanie instrukcji potwierdzających",
+    "send_password_instructions": "Wysyłanie instrukcji resetowania hasła",
+    "sign_in": "Zarejestruj się"
+  }
+}
