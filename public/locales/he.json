@@ -2,6 +2,7 @@
   "devise": {
     "confirmations": {
       "confirmed": "חשבונך אושר בהצלחה. כעת הנך מחובר/ת.",
+      "no_token": "אינך יכול/ה לגשת לעמוד זה אם לא הופנת מאימייל אישור. אם את/ה כן מגיע משם, אנא ודא/י שהשתמשת בכתובת אינטרנט המלאה.",
       "send_instructions": "בדקות הקרובות יגיע אליך אימייל עם הנחיות כיצד לאשר את הרשמתך."
     },
     "failure": {
@@ -18,10 +19,57 @@
       "updated": "עדכנת בהצלחה את חשבונך."
     }
   },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
+      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
+      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
+      "location_edit_failed": "Location editing failed: {{message}}",
+      "location_submission_failed": "Location submission failed: {{message}}",
+      "photo_upload_failed": "Photo upload failed: {{message}}",
+      "report_submission_failed": "Report submission failed: {{message}}",
+      "review_deletion_failed": "Review deletion failed: {{message}}",
+      "review_edit_failed": "Review editing failed: {{message}}",
+      "review_submission_failed": "Review submission failed: {{message}}",
+      "street_view_unavailable": "Street View not available for location {{id}}",
+      "type_add_failed": "Adding new type failed: {{message}}"
+    },
+    "auth": {
+      "check_failed": "Authentication check failed: {{message}}",
+      "confirmation_failed": "Account confirmation failed: {{message}}",
+      "password_set_failed": "Setting new password failed: {{message}}",
+      "profile_update_failed": "Profile update failed: {{message}}",
+      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
+      "reset_password_failed": "Resetting password failed: {{message}}",
+      "signin_failed": "Sign in failed: {{message}}",
+      "signup_failed": "Sign up failed: {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Position unavailable: {{message}}",
+      "code_3": "Geolocation timeout: {{message}}",
+      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
+      "not_supported": "Geolocation not supported"
+    },
+    "unknown_error": "Unknown error"
+  },
+  "filter": {
+    "deselect_all": "Deselect all",
+    "only_on_map": "On the map",
+    "select_all": "Select all",
+    "type": "Type"
+  },
   "form": {
     "button": {
-      "cancel": "לבטל"
-    }
+      "cancel": "לבטל",
+      "delete": "Delete",
+      "edit": "Edit",
+      "reset": "Reset",
+      "submit": "Submit",
+      "submitting": "Submitting"
+    },
+    "optional": "Optional",
+    "required": "Required",
+    "search": "Search"
   },
   "glossary": {
     "about": "אודות",
@@ -36,6 +84,10 @@
     "password": "סיסמה",
     "quality": "איכות",
     "report": "דיווח תקלה",
+    "review": {
+      "one": "ביקורת",
+      "other": "ביקורות"
+    },
     "sign_up": "הרשמה",
     "tree_inventory": {
       "one": "רשימת עצים"
@@ -49,16 +101,32 @@
       "menu": {
         "in_the_press": "בעיתונות",
         "sharing_the_harvest": "שיתוף הקציר",
+        "the_data": "The data",
         "the_project": "המיזם"
       }
-    }
+    },
+    "back": "Back",
+    "loading": "Loading..."
+  },
+  "list": {
+    "no_results": "No Results Found",
+    "zoom_in": "Zoom into the map to see location data"
   },
   "locations": {
+    "edit_position": {
+      "cancel": "בטל עריכת מיקום",
+      "confirm": "אשר עריכת מיקום",
+      "instructions": "ערוך מיקום."
+    },
     "form": {
+      "access": "גישה",
       "comments": "הערות",
       "comments_subtext": "עדכונים, נגישות, מצב הצמח...",
       "description_subtext": "פרטי מיקום, נגישות, מצב הצמח...",
-      "fruiting_status": "מצב הפרי"
+      "fruiting_status": "מצב הפרי",
+      "position": "מיקום",
+      "season": "עונה",
+      "season_start_to_stop_short": "עד"
     },
     "index": {
       "editmarker_html": "<b>עבור למיקום המקור.<br><br></b>בדוק את תצוגת הלוויין - ייתכן שהמקור נראה מהחלל!"
@@ -80,14 +148,43 @@
       ],
       "fruiting": ["פריחה", "פרי", "בשלים"]
     },
+    "init": {
+      "cancel": "בטל בחירת מיקום",
+      "choose_instructions": "בחר מיקום למקור החדש שלך.",
+      "confirm": "אשר בחירת מיקום",
+      "edit_instructions": "ערוך מיקום למקור החדש שלך."
+    },
     "overview": {
-      "date_edited": "עודכן"
+      "added_by": "נוסף על ידי {{name}}",
+      "date_edited": "עודכן {{date}}",
+      "imported_from": "יובא מ {{name}}",
+      "season": {
+        "in_season": "בעונה מ {{start}} עד {{stop}}",
+        "year_round": "כל השנה"
+      },
+      "title": "סקירה"
     }
   },
   "menu": {
+    "add_new_location": "הוסף מיקום",
     "add_review": "הוסף ביקורת",
     "edit_location": "ערוך מיקום",
-    "list": "רשימה"
+    "edit_review": "ערוך ביקורת",
+    "list": "רשימה",
+    "settings": "הגדרות",
+    "zoom_in_to_add_location": "הגדל תצוגה כדי להוסיף מיקום"
+  },
+  "new_type": {
+    "add_type_label": "Add Type:",
+    "form": {
+      "add_name": "Add Name",
+      "language": "Language",
+      "notes": "Notes",
+      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
+      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
+      "remove": "Remove"
+    },
+    "title": "Add New Type"
   },
   "pages": {
     "about": {
@@ -106,6 +203,7 @@
       "cristina_rubke_bio_html": "כריסטינה היא עורכת דין עם <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> בסן פרנסיסקו, קליפורניה, שם היא מתמקדת בהעמדה לדין וייעוץ בנושא סימנים מסחריים. היא גם חברת הנהלה <a href=\"//www.sfmta.com/\">בסוכנות התחבורה העירונית</a> של <a href=\"//www.sfmta.com/\">סן פרנסיסקו</a> , המפקחת על תחבורה ציבורית, תנועה וחניה בסן פרנסיסקו. בזמנה הפנוי, כריסטינה מפליגה במפרץ סן פרנסיסקו עם <a href=\"//www.baads.org/\">איגוד</a> מפרשי <a href=\"//www.baads.org/\">הימאים המוגבלים במפרץ</a> ומתחרה ברגטות מקומיות ובינלאומיות.",
       "david_craft_bio_html": "דייוויד הוא חוקר במחלקה לקרינה אונקולוגית בבית <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">הספר לרפואה של הרווארד</a> בבוסטון, מסצ'וסטס. כמו כן, הוא חוטף נלהב ומחבר הספר <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and אכילה של צמחי בר בעיר</a> ( <a href=\"/docs/David Craft - Urban Foraging.pdf\">הורדה בחינם</a> ).",
       "directors": "הועד המנהל",
+      "donate": "תרומה",
       "emily_sigman_bio_html": "אמילי היא אוונגליסטית ' , ' , ואמא גאה לשני חתולים, ארבעה ' , ' המרהיבים ביותר בעולם ' . שורשיה נמתחים עמוק אל תוך הרי הרוקי, אך בימים אלה הביומסה מעל הקרקע שלה גאה לקרוא לניו הייבן, קונטיקט, ביתה. לעתים קרובות ניתן למצוא אותה מטפלת ביערות אוכל ציבורי, קוראת מעוגנת באיזו פינת ספרייה נעימה, או שואעת בשירה על קסם התפטיר (וכביכול, השלמת תארים מתקדמים משותפים בבית <a href=\"https://environment.yale.edu/\">הספר</a> ייל ייל <a href=\"https://environment.yale.edu/\">ובית</a> <a href=\"https://jackson.yale.edu/person/emily-sigman/\">הספר לעניינים גלובליים</a> ). אמילי טומנת בהתמכרות הרסנית לטיולים ויכולה להיות כמעט בכל מקום כרגע.",
       "ethan_welty_bio_html": "בעזרת טכנולוגיה ונתונים, אית'ן נושא בגאון את הגישה אל ערים כמקורות של אוכל טרי וחינמי. הוא יצר את Falling Fruit ביחד עם כלב פיליפס בשנת 2013 כדי לקדם מזון עירוני ברחבי העולם, ובשנת 2014 היה בין המקימים של <a href=\"https://fruitrescue.org\">Community Rescue Rescue</a>, אשר נועדה לקטוף ולהפיץ עודפי פרי הגדלים בבולדר, קולורדו. מעבר לפירות, הוא עוסק ב<a href=\"https://www.weltyphotography.com\">צילום</a> , <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">מחקר על קרחונים</a> ושאר עיסוקים שבין ההר לנהר.",
       "ff_disclaimer_html": "Falling Fruit אינו קשור לאתר Fallen Fruit. את האתר Fallen Fruit ניתן למצוא ב-<a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
@@ -121,6 +219,15 @@
       "tristram_stuart_bio_html": "כנער, טריסטרם גידל חזירים על אוכל עודף שאסף ממטבחי בית הספר שלו, האופה המקומי וירק הכפר. הבחין כי הרבה מאוכל זה עדיין מתאים למאכל אדם הוביל אותו להבנה כי מזון טוב וטרי מתבזבז בקנה מידה עצום. טריסטרם פעל מאז ללא לאות להביא את הנושא הזה לידיעת הציבור, התקשורת וקובעי המדיניות. הוא הקים את ארגון קמפיין פסולת המזון <a href=\"//feedbackglobal.org\">Feedback Global</a> וכתב את <a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Food Food Scandal</a> כדי להדגים את היקף הבעיה בקנה מידה עולמי. בשנת 2011 הוענק <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">לטריסטרם פרס סופי</a> על מאבקו בבזבוז מזון.",
       "write": "כתיבה"
     },
+    "changes": {
+      "change_in_city": "{{type}} in {{city}}",
+      "recent_changes": "Recent changes",
+      "type": {
+        "added": "added",
+        "edited": "edited",
+        "visited": "visited"
+      }
+    },
     "data": {
       "beware_html": "אבל צריך להיזהר. ברגע שלא דחוס, הנתונים הופכים קובץ ענק שגורם לתוכנת הגיליון האלקטרוני ביותר לקרוס. רק מי שמתעניין במניפולציה של נתונים בו שלמות צריך ללכת בדרך זו. עבור רוב, חלופה טובה יותר היא כדי לאחזר באופן סלקטיבי נקודות עניין שימוש באפשרות להורדה שולבה <a href=\"/\">במפה</a>.",
       "caveat_emptor_html": "זה צריך ללכת בלי לומר כי אנו לא לוקחים אחריות על דיוקם של הנתונים - זה מסופק כהוא, <i>ייזהר קונה.</i> אם אתה עושה משהו מגניב עם נתונים, אנא <a href=\"mailto:feedback@fallingfruit.org\">יידעו אותנו</a>!",
@@ -130,26 +237,107 @@
     "datasets": {
       "community_map": "מפת קהילתית",
       "date_imported": "תאריך מיובא",
+      "imported_datasets": "מערכי נתונים מיובאים",
+      "imported_on": "יובא בתאריך {{date}}",
       "intro_html": "פירות נופלים שואפים להיות בסיס הנתונים גיאוגרפיים המקיף ופתוחים ביותר בעולם \"של דברי מאכל עירוניים. בעוד המשתמשים שלנו לחקור, לערוך, ולהוסיף מיקומים באמצעותנו <a href=\"/\">המפה</a>, אנחנו סורקים את היקום הידוע מראש קיימים מערכי נתונים ולייבא אותם ישירות לתוך <a href=\"/data\">מסד הנתונים</a>, המאחדים את המאמצים של מלקטי מזון, יערנים, ו freegans בכל מקום. אם ידוע לכם על בסיס נתוני we've החמיץ, אנא <a href=\"mailto:info@fallingfruit.org\">יידעו אותנו</a>! גם אתה יכול לעזור לנו עם תהליך היבוא על ידי עיצוב נתונים באמצעות <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">תבנית היבוא</a>. שים לב כי מאז יבוא חייב להתבצע באופן ידני, שינויים נוספים בנתונים המקוריים אינם באים לידי ביטוי בנפילת פירות.",
+      "link": "קישור",
+      "locations": "מיקומים",
       "table_info": "כל מערך נתונים מופיעים בשמו, מספר מקומות, ותאריך מיובא. הרחבת כל שורה מגלה פרטים נוספים על הנתונים המקוריים, תהליך היבוא, והרישיון המסדירים כיצד ניתן להשתמש בנתונים.",
       "type": "סוג",
       "types_of_data": "מערכי נתונים מיובאים לפירות נופלים מתחלקים לשתי קטגוריות עיקריות. \"מפות קהילה\" בנויות על ידי מלקטי מזון ו freegans כפי שהם לעיין סביבתם לדברים לאכול. אנו חייבים תודה לאזרח הקרטוגרפים החרוצים שיש הידור נתונים זה. \"מלאי עץ\" מופקים על ידי ערים, אוניברסיטאות, ומוסדות אחרים המבקשים מסמך טוב יותר ולדאוג לעצים שלהם. אנו כורים מערכי נתונים עצומים אלה למיני ייצור מזון ולהוסיף אותם למפה. כדי לעזור לנו לקבל בשכונה שלך על המפה, פנה לבית הספר או העיר שלך ועודד אותם לשתף מלאי העץ שלהם איתנו."
     },
     "settings": {
+      "data": "נתונים",
+      "labels": "תוויות",
+      "language": "שפה",
+      "points_of_interest": "נקודות עניין",
       "regional": "אזורית",
+      "roadmap": "מפה",
       "satellite": "לוויין",
       "side_menu": "אופניים",
       "terrain": "שטח",
-      "transit": "מעבר"
+      "transit": "מעבר",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} רגל",
+            "other": "{{count}} רגל"
+          },
+          "kilometer": {
+            "one": "{{count}} קילומטר",
+            "other": "{{count}} קילומטרים"
+          },
+          "meter": {
+            "one": "{{count}} מטר",
+            "other": "{{count}} מטרים"
+          },
+          "mile": {
+            "one": "{{count}} מייל",
+            "other": "{{count}} מייל"
+          }
+        },
+        "imperial": "אימפריאלי",
+        "metric": "מטרי",
+        "units": "יחידות"
+      }
     },
     "sharing": {
+      "countries": {
+        "australia": "אוסטרליה",
+        "belgium": "בלגיה",
+        "brazil": "ברזיל",
+        "canada": "קנדה",
+        "chile": "צ'ילה",
+        "czechia": "צ'כיה",
+        "fiji": "פיג'י",
+        "finland": "פינלנד",
+        "france": "צרפת",
+        "germany": "גרמניה",
+        "greece": "יוון",
+        "ireland": "אירלנד",
+        "italy": "איטליה",
+        "new_zealand": "ניו זילנד",
+        "portugal": "פורטוגל",
+        "spain": "ספרד",
+        "sweden": "שוודיה",
+        "switzerland": "שוויץ",
+        "united_kingdom": "בריטניה",
+        "united_states": "ארצות הברית"
+      },
       "grow_pick_and_distribute": "גדלו · לקטו · הפיצו",
+      "heading": {
+        "city": "עיר",
+        "country": "מדינה",
+        "social": "חברתי",
+        "state": "מחוז"
+      },
       "intro_html": "המפורטים להלן הם ארגונים מקומיים הגדלים מזון (יערות מזון ומטעי ציבור), לאסוף מזון (ליקוט עירוני ולקט החווה), או בדרך אחרת להפיץ מזון (עסקות החלף ותרומות). ארגונים רשומים לפי מדינה, מדינה, ועיר. אלה עם שמות דהויים ועזיבה הם האמינו להיות לא פעילים. אם ידוע לכם על אחרים שצריכה להיות ברשימה זו, <a href=\"mailto:info@fallingfruit.org\">צור איתנו קשר</a>!"
     }
   },
   "problems": {
     "description_subtext": "כל מידע שעשוי לעזור לנו להעריך את הבעיה",
-    "problem_type": "סוג הבעיה"
+    "problem_type": "סוג הבעיה",
+    "problem_types": {
+      "0": "המיקום הוא ספאם",
+      "1": "המיקום אינו קיים",
+      "2": "המיקום הוא כפול",
+      "3": "תמונת ביקורת לא הולמת",
+      "4": "תגובת ביקורת לא הולמת",
+      "5": "אחר (הסבר למטה)"
+    },
+    "report_submitted": "הדיווח נשלח בהצלחה!"
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Leave a review",
+      "observed_on": "Observed on",
+      "upload_images": "Upload images"
+    },
+    "reviewed_by": "by",
+    "reviewed_on": "Reviewed on {{date}}",
+    "update_delete": "Update or delete this review.",
+    "visited_on": "visited {{date}}",
+    "you_reviewed": "You reviewed this location on {{date}}"
   },
   "time": {
     "days": {
@@ -159,18 +347,30 @@
     "last_24_hours": "24 השעות האחרונות",
     "time_ago": "לפני {{time}}"
   },
+  "type": {
+    "pending_review": "Pending review"
+  },
   "users": {
     "bio": "אודותיך",
     "change_password": "החלף את הסיסמה שלי",
     "current_password": "סיסמה נוכחית",
     "edit_account": "עריכת החשבון",
     "forgot_password": "איפוס סיסמה",
+    "joined_on": "הצטרף ב-{{date}}",
+    "login": "התחברות",
     "new_password": "סיסמה חדשה",
+    "new_password_confirmation": "אימות סיסמה חדשה",
     "options": {
       "announcements_email": "קבל הודעות דוא\"ל עם הודעות והזדמנויות חשובות (1-2 בשנה)"
     },
+    "password_confirmation": "אימות סיסמה",
+    "profile": {
+      "title": "משתמש: {{name}}"
+    },
     "remember_me": "זכור אותי",
     "resend_confirmation_instructions": "שלח שוב הוראות לאישור",
+    "save_changes": "שמור שינויים",
+    "send": "שלח",
     "send_password_instructions": "שלח הנחיות איפוס סיסמה",
     "sign_in": "התחברות לחשבון"
   }

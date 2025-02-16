@@ -2,6 +2,7 @@
   "devise": {
     "confirmations": {
       "confirmed": "Uw e-mailadres is succesvol bevestigd.",
+      "no_token": "U kunt deze pagina niet openen als u deze niet hebt geopend vanuit een bevestigingse-mail. Als u hem niet vanuit daar heeft geopend, zorg er dan voor dat u de volledige opgegeven URL gebruikt.",
       "send_instructions": "U ontvangt binnen een paar minuten een e-mail met instructies om uw e-mailadres te bevestigen."
     },
     "failure": {
@@ -18,6 +19,58 @@
       "updated": "Uw account is succesvol bijgewerkt."
     }
   },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
+      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
+      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
+      "location_edit_failed": "Location editing failed: {{message}}",
+      "location_submission_failed": "Location submission failed: {{message}}",
+      "photo_upload_failed": "Photo upload failed: {{message}}",
+      "report_submission_failed": "Report submission failed: {{message}}",
+      "review_deletion_failed": "Review deletion failed: {{message}}",
+      "review_edit_failed": "Review editing failed: {{message}}",
+      "review_submission_failed": "Review submission failed: {{message}}",
+      "street_view_unavailable": "Street View not available for location {{id}}",
+      "type_add_failed": "Adding new type failed: {{message}}"
+    },
+    "auth": {
+      "check_failed": "Authentication check failed: {{message}}",
+      "confirmation_failed": "Account confirmation failed: {{message}}",
+      "password_set_failed": "Setting new password failed: {{message}}",
+      "profile_update_failed": "Profile update failed: {{message}}",
+      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
+      "reset_password_failed": "Resetting password failed: {{message}}",
+      "signin_failed": "Sign in failed: {{message}}",
+      "signup_failed": "Sign up failed: {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Position unavailable: {{message}}",
+      "code_3": "Geolocation timeout: {{message}}",
+      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
+      "not_supported": "Geolocation not supported"
+    },
+    "unknown_error": "Unknown error"
+  },
+  "filter": {
+    "deselect_all": "Deselect all",
+    "only_on_map": "On the map",
+    "select_all": "Select all",
+    "type": "Type"
+  },
+  "form": {
+    "button": {
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "reset": "Reset",
+      "submit": "Submit",
+      "submitting": "Submitting"
+    },
+    "optional": "Optional",
+    "required": "Required",
+    "search": "Search"
+  },
   "glossary": {
     "about": "Over",
     "account": "Account",
@@ -31,6 +84,10 @@
     "password": "Wachtwoord",
     "quality": "Kwaliteit",
     "report": "Rapporteren",
+    "review": {
+      "one": "Recensie",
+      "other": "Recensies"
+    },
     "sign_up": "Registreren",
     "tree_inventory": {
       "one": "Boominventarisatie"
@@ -44,16 +101,32 @@
       "menu": {
         "in_the_press": "In de pers",
         "sharing_the_harvest": "Opbrengst delen",
+        "the_data": "The data",
         "the_project": "Het project"
       }
-    }
+    },
+    "back": "Back",
+    "loading": "Loading..."
+  },
+  "list": {
+    "no_results": "No Results Found",
+    "zoom_in": "Zoom into the map to see location data"
   },
   "locations": {
+    "edit_position": {
+      "cancel": "Annuleer positie bewerken",
+      "confirm": "Bevestig positie bewerken",
+      "instructions": "Bewerk locatiepositie."
+    },
     "form": {
+      "access": "Toegang",
       "comments": "Opmerkingen",
       "comments_subtext": "Updates, toegangsproblemen, plantgezondheid...",
       "description_subtext": "Locatiedetails, toegangsproblemen, plantgezondheid ...",
-      "fruiting_status": "Vruchtbaarheidsstatus"
+      "fruiting_status": "Vruchtbaarheidsstatus",
+      "position": "Positie",
+      "season": "Seizoen",
+      "season_start_to_stop_short": "tot"
     },
     "index": {
       "editmarker_html": "<b>Verplaats naar de bronlocatie.</b><br><br>Gebruik de satellietweergave - er bestaat een kans dat de bron zichtbaar is vanuit de ruimte!"
@@ -74,7 +147,44 @@
         "Privé"
       ],
       "fruiting": ["Bloemen", "Onrijp fruit", "Rijp fruit"]
+    },
+    "init": {
+      "cancel": "Annuleer locatie kiezen",
+      "choose_instructions": "Kies een positie voor uw nieuwe locatie.",
+      "confirm": "Bevestig locatie kiezen",
+      "edit_instructions": "Bewerk positie voor uw nieuwe locatie."
+    },
+    "overview": {
+      "added_by": "Toegevoegd door {{name}}",
+      "date_edited": "Bijgewerkt {{date}}",
+      "imported_from": "Geïmporteerd van {{name}}",
+      "season": {
+        "in_season": "In seizoen van {{start}} tot {{stop}}",
+        "year_round": "Het hele jaar door"
+      },
+      "title": "Overzicht"
     }
+  },
+  "menu": {
+    "add_new_location": "Add location",
+    "add_review": "Add review",
+    "edit_location": "Edit location",
+    "edit_review": "Edit review",
+    "list": "List",
+    "settings": "Settings",
+    "zoom_in_to_add_location": "Zoom in to add location"
+  },
+  "new_type": {
+    "add_type_label": "Add Type:",
+    "form": {
+      "add_name": "Add Name",
+      "language": "Language",
+      "notes": "Notes",
+      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
+      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
+      "remove": "Remove"
+    },
+    "title": "Add New Type"
   },
   "pages": {
     "about": {
@@ -93,6 +203,7 @@
       "cristina_rubke_bio_html": "Christina is een advocaat bij <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> in San Francisco, California, waar ze focust op handelsrechtvervolging en begeleiding. Ze is ook lid van het bestuur van de <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a> waar ze zich buigt over openbaar vervoer, verkeer en parkeren in San Francisco. In haar vrije tijd zeilt ze over de San Francisco Bay, samen met de <a href=\"//www.baads.org/\">Bay Area Association of Disabled Sailors</a> en neemt ze deel aan lokale en internationale regatta's.",
       "david_craft_bio_html": "David is een onderzoeker op de Afdeling Radiologie-Oncologie aan de <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Harvard Medical School</a> in Boston, Massachusetts. Hij is een gretige voedselverzamelaar en auteur van het boek a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and Eating Wild Plants in the City</a> (<a href=\"/docs/David Craft - Urban Foraging.pdf\">gratis download</a>).",
       "directors": "Raad van bestuur",
+      "donate": "Doneren",
       "emily_sigman_bio_html": "Emily is een diehard agroforestry evangelist, onverbeterlijke vraatzuchtige en trotse moeder van twee katten, vier kwartels en 's werelds mooiste hoektanden. Haar wortels strekken zich uit tot diep in de Rocky Mountains, maar tegenwoordig is haar bovengrondse biomassa trots om New Haven, Connecticut haar thuis te noemen. Ze is vaak te vinden in de openbare voedselbossen, leest verrukt in een of andere gezellige bibliotheekhoek of is poëtisch over de magie van het mycelium (en, zogezegd, voltooit ze gezamenlijke diploma's aan de Yale <a href=\"https://environment.yale.edu/\">School voor Bosbouw</a> en <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School voor Globale Zaken</a>). Emily herbergt een verwoestende reisverslaving, en kan nu zowat overal zijn.",
       "ethan_welty_bio_html": "Met technologie en data, Ethan kampioensteden als bron van vers en gratis voedsel. Hij creëerde Falling Fruit met Caleb Phillips in 2013 om het stedelijk foerageren wereldwijd te promoten, en was mede-oprichter van <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> in 2014 om het overtollige fruit dat om hem heen groeit in Boulder, Colorado, te oogsten en te distribueren. Naast fruit jongleert hij met een <a href=\"https://www.weltyphotography.com\">fotografiecarrière</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">onderzoek naar gletsjers</a>, en een honger naar bergachtige en rivierachtige bezigheden.",
       "ff_disclaimer_html": "Falling Fruit is niet geassocieerd met Fallen Fruit. Fallen Fruit is te vinden op <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
@@ -108,6 +219,15 @@
       "tristram_stuart_bio_html": "Als tiener heeft Tristram flinke hoeveelheden overtollig voedsel verzameld in schoolkeukens, de lokale bakker en lokale groenteboer. Hij zag meteen dat een hoop voedsel nog steeds geschikt was om op te eten. Hierdoor realiseerde hij zich dat goed, vers voedsel op enorme schaal verspild werd. Tristram heeft sindsdien eindeloos gewerkt om mensen, de media en beleidsmakers op de hoogte te brengen van dit probleem. Hij is de oprichter van de voedselverspillingscampagne-organisatie <a href=\"//feedbackglobal.org\">Feedback Global</a> en heeft het boek <a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a> geschreven om aan te tonen hoe groot dit probleem wereldwijd is. In 2011 heeft Tristram <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">The Sophie Prize</a> gekregen voor zijn strijd tegen voedselverspilling.",
       "write": "Schrijven"
     },
+    "changes": {
+      "change_in_city": "{{type}} in {{city}}",
+      "recent_changes": "Recente wijzigingen",
+      "type": {
+        "added": "toegevoegd",
+        "edited": "bewerkt",
+        "visited": "bezocht"
+      }
+    },
     "data": {
       "beware_html": "Maar let op! Eenmaal uitgepakt is onze database een enorm bestand dat de meeste rekenbladsoftware zal vernietigen. Als u alleen gegevens nodig hebt voor een kleine regio, probeer dan eerst om deze te downloaden via het geïntegreerde downloadhulpmiddel op de <a href=\"/\">kaart</a>.",
       "caveat_emptor_html": "We nemen geen verantwoordelijkheid voor de juistheid van de gegevens. Ze worden verstrekt zoals ze zijn, <i>caveat emptor</i>. Als u iets cools doet met onze gegevens, <a href=\"mailto:feedback@fallingfruit.org\">laat het ons dan weten</a>!",
@@ -117,19 +237,107 @@
     "datasets": {
       "community_map": "Gemeenschapsmap",
       "date_imported": "Datum geïmporteerd",
+      "imported_datasets": "Geïmporteerde datasets",
+      "imported_on": "Geïmporteerd op {{date}}",
       "intro_html": "Falling Fruit heeft als doel om 's werelds meest uitgebreide en open aardrijkskunde gegevensset van stadsvoedsel te worden. Terwijl onze gebruikers verkennen, bewerken en locaties bijdragen via onze <a href=\"/\">kaart</a>, kammen wij het universum uit op zoek naar reeds bestaande kennis en importeren deze direct in onze <a href=\"/data\">database</a>, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. Als u ziet dat er een gegevensset ontbreekt, <a href=\"mailto:info@fallingfruit.org\">laat het ons dan weten</a>! U kunt ons helpen bij het importteringsproces door de gegevens op te maken m.b.v. het <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importsjabloon</a>. Let op: importteringen moeten handmatig worden uitgevoerd; alle wijzigingen aan de originele gevens na de importtering worden niet weergegeven op Falling Fruit.",
+      "link": "Link",
+      "locations": "Locaties",
       "table_info": "Elke gegevensset wordt opgesomd op naam, aantal locaties en importeringsdatum. Het uitklappen van elke rij weergeeft meer informatie over de gegevens, het importteringsproces en de licentie waarin staat hoe u de gegevens mag gebruiken.",
       "type": "Soort",
       "types_of_data": "Geïmporteerde gegevenssets vallen onder twee hoofdcategorieën. \"Gemeenschapskaarten\" worden gebouwd door voedselverzamelaars en freegans terwijl ze hun gemeenschap afspeuren op zoek naar eetbaar voedsel. Dit wordt gedaan door hardwerkende inwoners met verstand van cartografie; onze dank is dan ook zeer groot. \"Boominventarissen\" worden samengesteld door steden, universiteiten en andere instituten die bomen beter willen documenteren en beter voor ze willen zorgen. We kammen deze gegevenssets uit en selecteren voedselproducerende soorten en voegen deze toe aan de kaart. Als u wilt helpen bij het in kaart brengen van fruitbomen in uw buurt, neem dan contact op met uw school of stad en overtuig ze ervan hun boominventaris met ons te delen."
     },
+    "settings": {
+      "data": "Gegevens",
+      "labels": "Labels",
+      "language": "Taal",
+      "points_of_interest": "Interessante punten",
+      "regional": "Regionaal",
+      "roadmap": "Kaart",
+      "satellite": "Satelliet",
+      "side_menu": "Fiets",
+      "terrain": "Terrein",
+      "transit": "Transit",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} voet",
+            "other": "{{count}} voet"
+          },
+          "kilometer": {
+            "one": "{{count}} kilometer",
+            "other": "{{count}} kilometer"
+          },
+          "meter": {
+            "one": "{{count}} meter",
+            "other": "{{count}} meter"
+          },
+          "mile": {
+            "one": "{{count}} mijl",
+            "other": "{{count}} mijl"
+          }
+        },
+        "imperial": "Imperiaal",
+        "metric": "Metrisch",
+        "units": "Eenheden"
+      }
+    },
     "sharing": {
+      "countries": {
+        "australia": "Australië",
+        "belgium": "België",
+        "brazil": "Brazilië",
+        "canada": "Canada",
+        "chile": "Chili",
+        "czechia": "Tsjechië",
+        "fiji": "Fiji",
+        "finland": "Finland",
+        "france": "Frankrijk",
+        "germany": "Duitsland",
+        "greece": "Griekenland",
+        "ireland": "Ierland",
+        "italy": "Italië",
+        "new_zealand": "Nieuw-Zeeland",
+        "portugal": "Portugal",
+        "spain": "Spanje",
+        "sweden": "Zweden",
+        "switzerland": "Zwitserland",
+        "united_kingdom": "Verenigd Koninkrijk",
+        "united_states": "Verenigde Staten"
+      },
       "grow_pick_and_distribute": "Groei · Pluk · Verspreid",
+      "heading": {
+        "city": "Stad",
+        "country": "Land",
+        "social": "Sociaal",
+        "state": "Staat"
+      },
       "intro_html": "Hieronder is een lijst te vinden met organisaties die voedsel produceren in openbare ruimten (voedselbossen, openbare boomgaarden), voedsel plukken (stadsvoedselverzameling, boerderijvoedselverzameling) of voedsel verspreiden (uitwisselingen, donaties). Organisaties worden gesorteerd op land, staat (indien van toepassing) en stad. Organisaties met doorgehaalde naam zijn waarschijnlijk inactief. Als u organisaties kent die op deze lijst thuishoren, neem dan <a href=\"mailto:info@fallingfruit.org\">contact met ons</a> op!"
     }
   },
   "problems": {
     "description_subtext": "Informatie die ons kan helpen bij het onderzoeken van het probleem",
-    "problem_type": "Probleemsoort"
+    "problem_type": "Probleemsoort",
+    "problem_types": {
+      "0": "Locatie is spam",
+      "1": "Locatie bestaat niet",
+      "2": "Locatie is een duplicaat",
+      "3": "Ongepaste recensiefoto",
+      "4": "Ongepaste recensietekst",
+      "5": "Anders (hieronder toelichten)"
+    },
+    "report_submitted": "Melding succesvol ingediend!"
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Leave a review",
+      "observed_on": "Observed on",
+      "upload_images": "Upload images"
+    },
+    "reviewed_by": "by",
+    "reviewed_on": "Reviewed on {{date}}",
+    "update_delete": "Update or delete this review.",
+    "visited_on": "visited {{date}}",
+    "you_reviewed": "You reviewed this location on {{date}}"
   },
   "time": {
     "days": {
@@ -139,18 +347,30 @@
     "last_24_hours": "Laatste 24 uur",
     "time_ago": "{{time}} geleden"
   },
+  "type": {
+    "pending_review": "Pending review"
+  },
   "users": {
     "bio": "Over u",
     "change_password": "Mijn wachtwoord wijzigen",
     "current_password": "Huidig wachtwoord",
     "edit_account": "Account bewerken",
     "forgot_password": "Wachtwoord herstellen",
+    "joined_on": "Lid sinds {{date}}",
+    "login": "Inloggen",
     "new_password": "Nieuw wachtwoord",
+    "new_password_confirmation": "Nieuw wachtwoord bevestiging",
     "options": {
       "announcements_email": "E-mails ontvangen met belangrijke aankondigingen en uitdagingen (1-2 per jaar)"
     },
+    "password_confirmation": "Wachtwoord bevestiging",
+    "profile": {
+      "title": "Gebruiker: {{name}}"
+    },
     "remember_me": "Onthoudt me",
     "resend_confirmation_instructions": "Bevestigingsinstructies opnieuw versturen",
+    "save_changes": "Wijzigingen opslaan",
+    "send": "Versturen",
     "send_password_instructions": "Wachtwoordherstelinstructies versturen",
     "sign_in": "Inloggen"
   }
