@@ -2,6 +2,7 @@
   "devise": {
     "confirmations": {
       "confirmed": "تم تأكيد عنوان بريدك الإلكتروني بنجاح.",
+      "no_token": "لا يمكنك الوصول إلى هذه الصفحة دون القدوم من بريد تأكيد. إذا كنت كذلك، يرجى التأكد من استخدام عنوان URL الكامل المقدم.",
       "send_instructions": "ستتلقى بريدًا إلكترونيًا يحتوي على تعليمات حول كيفية تأكيد عنوان بريدك الإلكتروني في بضع دقائق."
     },
     "failure": {
@@ -18,10 +19,57 @@
       "updated": "تم تحديث حسابك بنجاح."
     }
   },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
+      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
+      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
+      "location_edit_failed": "Location editing failed: {{message}}",
+      "location_submission_failed": "Location submission failed: {{message}}",
+      "photo_upload_failed": "Photo upload failed: {{message}}",
+      "report_submission_failed": "Report submission failed: {{message}}",
+      "review_deletion_failed": "Review deletion failed: {{message}}",
+      "review_edit_failed": "Review editing failed: {{message}}",
+      "review_submission_failed": "Review submission failed: {{message}}",
+      "street_view_unavailable": "Street View not available for location {{id}}",
+      "type_add_failed": "Adding new type failed: {{message}}"
+    },
+    "auth": {
+      "check_failed": "Authentication check failed: {{message}}",
+      "confirmation_failed": "Account confirmation failed: {{message}}",
+      "password_set_failed": "Setting new password failed: {{message}}",
+      "profile_update_failed": "Profile update failed: {{message}}",
+      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
+      "reset_password_failed": "Resetting password failed: {{message}}",
+      "signin_failed": "Sign in failed: {{message}}",
+      "signup_failed": "Sign up failed: {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Position unavailable: {{message}}",
+      "code_3": "Geolocation timeout: {{message}}",
+      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
+      "not_supported": "Geolocation not supported"
+    },
+    "unknown_error": "Unknown error"
+  },
+  "filter": {
+    "deselect_all": "Deselect all",
+    "only_on_map": "On the map",
+    "select_all": "Select all",
+    "type": "Type"
+  },
   "form": {
     "button": {
-      "cancel": "إلغاء"
-    }
+      "cancel": "إلغاء",
+      "delete": "حذف",
+      "edit": "تعديل",
+      "reset": "إعادة تعيين",
+      "submit": "إرسال",
+      "submitting": "جاري الإرسال"
+    },
+    "optional": "اختياري",
+    "required": "مطلوب",
+    "search": "بحث"
   },
   "glossary": {
     "about": "حول",
@@ -36,6 +84,10 @@
     "password": "كلمة السر",
     "quality": "جودة",
     "report": "أبلغ عن",
+    "review": {
+      "one": "مراجعة",
+      "other": "مراجعات"
+    },
     "sign_up": "سجل",
     "tree_inventory": {
       "one": "جرد الشجرة"
@@ -49,16 +101,32 @@
       "menu": {
         "in_the_press": "في الصحافة",
         "sharing_the_harvest": "تقاسم الحصاد",
+        "the_data": "The data",
         "the_project": "المشروع"
       }
-    }
+    },
+    "back": "Back",
+    "loading": "Loading..."
+  },
+  "list": {
+    "no_results": "No Results Found",
+    "zoom_in": "Zoom into the map to see location data"
   },
   "locations": {
+    "edit_position": {
+      "cancel": "إلغاء تعديل الموقع",
+      "confirm": "تأكيد تعديل الموقع",
+      "instructions": "تعديل موقع المكان."
+    },
     "form": {
+      "access": "الوصول",
       "comments": "تعليقات",
       "comments_subtext": "التحديثات ومشكلات الوصول وصحة النبات ...",
       "description_subtext": "تفاصيل الموقع ، مشاكل الوصول ، صحة النبات ...",
-      "fruiting_status": "حالة الاثمار"
+      "fruiting_status": "حالة الاثمار",
+      "position": "الموقع",
+      "season": "الموسم",
+      "season_start_to_stop_short": "إلى"
     },
     "index": {
       "editmarker_html": "<b>انتقل إلى موضع المصدر.</b>\n\nتحقق من عرض القمر الصناعي - قد يكون المصدر مرئيًا من الفضاء!"
@@ -71,25 +139,52 @@
         "المصدر موجود في ملكية خاصة ولكنه يتفوق على الأراضي العامة",
         "المصدر موجود في ملكية خاصة (اسأل قبل أن تختار)"
       ],
-      "access_short": {
-        "1": "أضيفت من قبل المالك",
-        "2": "بإذن من المالك",
-        "3": "عامة",
-        "4": "خاص لكن متدلي"
-      },
-      "fruiting": {
-        "1": "زهور",
-        "2": "فاكهة غير ناضجة"
-      }
+      "access_short": [
+        "أضيفت من قبل المالك",
+        "أضيفت من قبل المالك",
+        "بإذن من المالك",
+        "عامة",
+        "خاص لكن متدلي"
+      ],
+      "fruiting": ["زهور", "زهور", "فاكهة غير ناضجة"]
+    },
+    "init": {
+      "cancel": "إلغاء اختيار الموقع",
+      "choose_instructions": "اختر موقعًا لمكانك الجديد.",
+      "confirm": "تأكيد اختيار الموقع",
+      "edit_instructions": "تعديل موقع مكانك الجديد."
     },
     "overview": {
-      "date_edited": "تم التحديث في {{date}}"
+      "added_by": "أضيف بواسطة {{name}}",
+      "date_edited": "تم التحديث في {{date}}",
+      "imported_from": "تم الاستيراد من {{name}}",
+      "season": {
+        "in_season": "في الموسم من {{start}} إلى {{stop}}",
+        "year_round": "على مدار السنة"
+      },
+      "title": "نظرة عامة"
     }
   },
   "menu": {
+    "add_new_location": "إضافة وجهة",
     "add_review": "إضافة مراجعة",
     "edit_location": "تحرير الوجهة",
-    "list": "قائمة"
+    "edit_review": "تحرير المراجعة",
+    "list": "قائمة",
+    "settings": "الإعدادات",
+    "zoom_in_to_add_location": "قرّب لإضافة وجهة"
+  },
+  "new_type": {
+    "add_type_label": "Add Type:",
+    "form": {
+      "add_name": "Add Name",
+      "language": "Language",
+      "notes": "Notes",
+      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
+      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
+      "remove": "Remove"
+    },
+    "title": "Add New Type"
   },
   "pages": {
     "about": {
@@ -108,6 +203,7 @@
       "cristina_rubke_bio_html": "كريستينا محامية في شركة <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> في سان فرانسيسكو ، كاليفورنيا ، حيث تركز على مقاضاة العلامات التجارية وتقديم المشورة. وهي أيضًا عضو مجلس إدارة في <a href=\"//www.sfmta.com/\">وكالة النقل البلدية</a> في <a href=\"//www.sfmta.com/\">سان فرانسيسكو</a> ، التي تشرف على النقل العام والمرور ومواقف السيارات في سان فرانسيسكو. في أوقات فراغها ، تبحر كريستينا في خليج سان فرانسيسكو مع <a href=\"//www.baads.org/\">جمعية منطقة الخليج للبحارة المعوقين</a> وتتنافس في سباقات القوارب المحلية والدولية.",
       "david_craft_bio_html": "ديفيد هو باحث في قسم علاج الأورام بالإشعاع في <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">كلية الطب بجامعة هارفارد</a> في بوسطن ، ماساتشوستس. وهو أيضًا باحث نهم ومؤلف كتاب <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and Eating Wild Plants in the City</a> ( <a href=\"/docs/David Craft - Urban Foraging.pdf\">تنزيل مجاني</a> ).",
       "directors": "مجموعة مخرجين",
+      "donate": "تبرع",
       "emily_sigman_bio_html": "إميلي هي مبشرة متشددة في مجال الزراعة الحرجية ، علفية لا يمكن إصلاحها ، وأم فخورة ' ، وأربعة طيور السمان ، وأكثر الكلاب روعة في العالم ' . تمتد جذورها في أعماق جبال روكي ، ولكن هذه الأيام تفخر كتلتها الحيوية الموجودة فوق سطح الأرض بالاتصال بمدينة نيو هافن بولاية كونيتيكت. غالبًا ما يمكن العثور عليها وهي ترعى غابات الطعام العامة ، أو تقرأ مبتهجًا في زاوية مكتبة مريحة ، أو تشمع شعريًا حول سحر الفطريات (ومن المفترض أنها تكمل شهادات الدراسات العليا المشتركة في <a href=\"https://environment.yale.edu/\">كلية</a> ييل <a href=\"https://environment.yale.edu/\">للغابات</a> <a href=\"https://jackson.yale.edu/person/emily-sigman/\">وكلية الشؤون العالمية</a> ). إيميلي لديها إدمان مدمر للسفر ، ويمكن أن تكون في أي مكان في الوقت الحالي.",
       "ethan_welty_bio_html": "بفضل التكنولوجيا والبيانات ، يناصر إيثان المدن كمصادر للأغذية الطازجة والمجانية. أنشأ شركة Falling Fruit مع Caleb Phillips في عام 2013 لتشجيع البحث عن الطعام في المناطق الحضرية في جميع أنحاء العالم ، وشارك في تأسيس <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> في عام 2014 لحصاد الفاكهة الفائضة التي تنمو حوله وتوزيعها في بولدر ، كولورادو. بعيدًا عن الفاكهة ، يعمل في <a href=\"https://www.weltyphotography.com\">مهنة التصوير الفوتوغرافي</a> ، <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">والبحث عن الأنهار الجليدية</a> ، والشهية للمغامرات الجبلية والنهرية.",
       "ff_disclaimer_html": "لا ترتبط الفاكهة المتساقطة بالفاكهة الساقطة. يمكن العثور على Fallen Fruit على موقع <a href=\"http://fallenfruit.org\">Fallenfruit.org</a> .",
@@ -123,6 +219,15 @@
       "tristram_stuart_bio_html": "عندما كان مراهقًا ، قام تريسترام بتربية الخنازير على الطعام الفائض الذي جمعه من مطابخ مدرسته ، والخباز المحلي وبائع الخضار في القرية. لاحظ أن الكثير من هذا الطعام كان لا يزال مناسبًا للاستهلاك البشري قادته إلى إدراك أن الطعام الطازج الجيد يضيع على نطاق هائل. منذ ذلك الحين ، عمل تريسترام بلا كلل لجذب انتباه الجمهور ووسائل الإعلام وصانعي السياسات إلى هذه القضية. أسس منظمة حملة مخلفات الطعام <a href=\"//feedbackglobal.org\">Feedback Global</a> وكتب <a href=\"//tristramstuart.co.uk/\">النفايات: الكشف عن فضيحة الغذاء العالمية</a> لإثبات مدى المشكلة على نطاق عالمي. في عام 2011 ، حصل Tristram على جائزة <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">Sophie</a> عن كفاحه ضد هدر الطعام.",
       "write": "كتابة"
     },
+    "changes": {
+      "change_in_city": "{{type}} في {{city}}",
+      "recent_changes": "التغييرات الأخيرة",
+      "type": {
+        "added": "مضاف",
+        "edited": "محرر",
+        "visited": "تمت زيارته"
+      }
+    },
     "data": {
       "beware_html": "ولكن حذار! بمجرد فك ضغط قاعدة البيانات ، تصبح ملفًا ضخمًا من شأنه سحق معظم برامج جداول البيانات. إذا كنت بحاجة إلى بيانات لمنطقة صغيرة فقط ، فحاول أولاً استردادها باستخدام أداة التنزيل المدمجة في <a href=\"/\">الخريطة</a> .",
       "caveat_emptor_html": "نحن لا نتحمل أي مسؤولية عن دقة البيانات - يتم توفيرها كما هي ، <i>محاذير</i> . إذا فعلت شيئًا رائعًا باستخدام البيانات ، فيرجى <a href=\"mailto:feedback@fallingfruit.org\">إخبارنا</a> !",
@@ -132,26 +237,107 @@
     "datasets": {
       "community_map": "خريطة المجتمع",
       "date_imported": "تاريخ الاستيراد",
+      "imported_datasets": "مجموعات البيانات المستوردة",
+      "imported_on": "تم الاستيراد في {{date}}",
       "intro_html": "تطمح Falling Fruit إلى أن تكون مجموعة البيانات الجغرافية الأكثر شمولاً وانفتاحًا للأطعمة الحضرية. أثناء قيام مستخدمينا باستكشاف المواقع وتعديلها وإضافتها باستخدام <a href=\"/\">الخريطة</a> ، نقوم بتمشيط الكون المعروف لمجموعات البيانات الموجودة مسبقًا واستيرادها مباشرة إلى <a href=\"/data\">قاعدة البيانات</a> ، وتوحيد جهود الباحثين عن الطعام والغابات والحرفيين في كل مكان. إذا كنت تعرف مجموعة بيانات ' ، فيرجى <a href=\"mailto:info@fallingfruit.org\">إخبارنا بذلك</a> ! يمكنك أيضًا مساعدتنا في عملية الاستيراد عن طريق تنسيق البيانات باستخدام <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">نموذج الاستيراد</a> . لاحظ أنه نظرًا لأنه يجب إجراء عمليات الاستيراد يدويًا ، فإن جميع التغييرات التي تم إجراؤها على البيانات الأصلية بعد الاستيراد لا تنعكس على Falling Fruit.",
+      "link": "رابط",
+      "locations": "المواقع",
       "table_info": "يتم سرد كل مجموعة بيانات حسب الاسم وعدد المواقع وتاريخ الاستيراد. يؤدي توسيع كل صف إلى الكشف عن مزيد من التفاصيل حول البيانات وعملية الاستيراد والترخيص الذي يحكم كيفية استخدام البيانات.",
       "type": "نوع",
       "types_of_data": "تنقسم مجموعات البيانات التي يتم استيرادها إلى Falling Fruit إلى فئتين رئيسيتين. تم تصميم \"خرائط المجتمع\" بواسطة الباحثين عن الطعام والفريغان أثناء قيامهم بفحص مجتمعاتهم المحلية بحثًا عن أشياء يمكنهم تناولها. نحن مدينون لمواطن رسامي الخرائط المجتهد الذين جمعوا هذه البيانات. يتم تجميع \"قوائم جرد الأشجار\" من قبل المدن والجامعات والمؤسسات الأخرى التي ترغب في توثيق ورعاية أشجارها بشكل أفضل. نقوم بالتنقيب في مجموعات البيانات الضخمة عن الأنواع المنتجة للغذاء وإضافتها إلى الخريطة. لمساعدتنا على رسم خريطة لأشجار الفاكهة في منطقتك ، اتصل بمدرستك أو مدينتك وحثهم على مشاركة مخزون الأشجار الخاص بهم معنا."
     },
     "settings": {
+      "data": "البيانات",
+      "labels": "التسميات",
+      "language": "اللغة",
+      "points_of_interest": "نقاط الاهتمام",
       "regional": "إقليمي",
+      "roadmap": "خريطة",
       "satellite": "القمر الصناعي",
       "side_menu": "دراجة",
       "terrain": "تضاريس",
-      "transit": "النقل العام"
+      "transit": "النقل العام",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} قدم",
+            "other": "{{count}} قدم"
+          },
+          "kilometer": {
+            "one": "{{count}} كيلومتر",
+            "other": "{{count}} كيلومتر"
+          },
+          "meter": {
+            "one": "{{count}} متر",
+            "other": "{{count}} متر"
+          },
+          "mile": {
+            "one": "{{count}} ميل",
+            "other": "{{count}} ميل"
+          }
+        },
+        "imperial": "النظام الإمبراطوري",
+        "metric": "متري",
+        "units": "وحدات"
+      }
     },
     "sharing": {
+      "countries": {
+        "australia": "أستراليا",
+        "belgium": "بلجيكا",
+        "brazil": "البرازيل",
+        "canada": "كندا",
+        "chile": "تشيلي",
+        "czechia": "تشيكيا",
+        "fiji": "فيجي",
+        "finland": "فنلندا",
+        "france": "فرنسا",
+        "germany": "ألمانيا",
+        "greece": "اليونان",
+        "ireland": "أيرلندا",
+        "italy": "إيطاليا",
+        "new_zealand": "نيوزيلندا",
+        "portugal": "البرتغال",
+        "spain": "إسبانيا",
+        "sweden": "السويد",
+        "switzerland": "سويسرا",
+        "united_kingdom": "المملكة المتحدة",
+        "united_states": "الولايات المتحدة"
+      },
       "grow_pick_and_distribute": "تنمو · انتقاء · توزيع",
+      "heading": {
+        "city": "مدينة",
+        "country": "بلد",
+        "social": "اجتماعي",
+        "state": "ولاية"
+      },
       "intro_html": "المدرجة أدناه هي المنظمات التي تزرع الغذاء في الأماكن العامة (غابات الطعام ، البساتين العامة) ، تختار الطعام (البحث عن الطعام في المناطق الحضرية ، جمع المزارع) ، أو توزيع الطعام (التبادلات ، التبرعات). يتم سرد المنظمات حسب البلد والولاية (إن أمكن) والمدينة. يُعتقد أن الأشخاص ذوي الأسماء المشطوبة غير نشطين. إذا كنت تعرف الآخرين الموجودين في هذه القائمة ، <a href=\"mailto:info@fallingfruit.org\">فاتصل بنا</a> !"
     }
   },
   "problems": {
     "description_subtext": "أي معلومات قد تساعدنا في تقييم المشكلة",
-    "problem_type": "نوع المشكلة"
+    "problem_type": "نوع المشكلة",
+    "problem_types": {
+      "0": "الموقع مزيف",
+      "1": "الموقع غير موجود",
+      "2": "الموقع مكرر",
+      "3": "صورة المراجعة غير لائقة",
+      "4": "تعليق المراجعة غير لائق",
+      "5": "أخرى (اشرح أدناه)"
+    },
+    "report_submitted": "تم إرسال التقرير بنجاح!"
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Leave a review",
+      "observed_on": "Observed on",
+      "upload_images": "Upload images"
+    },
+    "reviewed_by": "by",
+    "reviewed_on": "Reviewed on {{date}}",
+    "update_delete": "Update or delete this review.",
+    "visited_on": "visited {{date}}",
+    "you_reviewed": "You reviewed this location on {{date}}"
   },
   "time": {
     "days": {
@@ -161,18 +347,30 @@
     "last_24_hours": "أخر 24 ساعه",
     "time_ago": "{{time}}"
   },
+  "type": {
+    "pending_review": "Pending review"
+  },
   "users": {
     "bio": "حولك",
     "change_password": "تغيير كلمة السر",
     "current_password": "كلمة المرور الحالي",
     "edit_account": "تحرير الحساب",
     "forgot_password": "اعد ضبط كلمه السر",
+    "joined_on": "انضم في {{date}}",
+    "login": "تسجيل الدخول",
     "new_password": "كلمة مرور جديدة",
+    "new_password_confirmation": "تأكيد كلمة المرور الجديدة",
     "options": {
       "announcements_email": "تلقي رسائل البريد الإلكتروني مع الإعلانات والفرص الهامة (1-2 في السنة)"
     },
+    "password_confirmation": "تأكيد كلمة المرور",
+    "profile": {
+      "title": "المستخدم: {{name}}"
+    },
     "remember_me": "تذكرنى",
     "resend_confirmation_instructions": "إعادة إرسال تعليمات التأكيد",
+    "save_changes": "حفظ التغييرات",
+    "send": "إرسال",
     "send_password_instructions": "إرسال تعليمات إعادة تعيين كلمة المرور",
     "sign_in": "تسجيل الدخول"
   }
