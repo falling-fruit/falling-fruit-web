@@ -224,7 +224,7 @@ const SettingsPage = ({ desktop }) => {
         <RadioTiles
           options={[
             {
-              label: t('pages.settings.side_menu'),
+              label: t('pages.settings.bicycle'),
               value: 'BicyclingLayer',
               image: GoogleBicycling,
             },

@@ -248,6 +248,7 @@
       "types_of_data": "Il y a deux catégories d’ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d’arbres» sont compilés par des villes, des universités et d’autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s’en occuper. Nous parcourons ces larges bases de données à la recherche d’espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d’arbres avec nous."
     },
     "settings": {
+      "bicycle": "À vélo",
       "data": "Données",
       "labels": "Étiquettes",
       "language": "Langue",
@@ -255,7 +256,6 @@
       "regional": "Régional",
       "roadmap": "Carte",
       "satellite": "Satellite",
-      "side_menu": "À vélo",
       "terrain": "Relief",
       "transit": "Transports en commun",
       "units": {

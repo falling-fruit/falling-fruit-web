@@ -248,6 +248,7 @@
       "types_of_data": "Geïmporteerde gegevenssets vallen onder twee hoofdcategorieën. \"Gemeenschapskaarten\" worden gebouwd door voedselverzamelaars en freegans terwijl ze hun gemeenschap afspeuren op zoek naar eetbaar voedsel. Dit wordt gedaan door hardwerkende inwoners met verstand van cartografie; onze dank is dan ook zeer groot. \"Boominventarissen\" worden samengesteld door steden, universiteiten en andere instituten die bomen beter willen documenteren en beter voor ze willen zorgen. We kammen deze gegevenssets uit en selecteren voedselproducerende soorten en voegen deze toe aan de kaart. Als u wilt helpen bij het in kaart brengen van fruitbomen in uw buurt, neem dan contact op met uw school of stad en overtuig ze ervan hun boominventaris met ons te delen."
     },
     "settings": {
+      "bicycle": "Fiets",
       "data": "Gegevens",
       "labels": "Labels",
       "language": "Taal",
@@ -255,7 +256,6 @@
       "regional": "Regionaal",
       "roadmap": "Kaart",
       "satellite": "Satelliet",
-      "side_menu": "Zijmenu",
       "terrain": "Terrein",
       "transit": "Transit",
       "units": {
