@@ -77,10 +77,10 @@ const Filter = () => {
   return (
     <>
       <div>
-        <EdibleTypeText>{t('glossary.types')}</EdibleTypeText>
+        <EdibleTypeText>{t('glossary.type.other')}</EdibleTypeText>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
-          placeholder={t('filter.type')}
+          placeholder={t('glossary.type.one')}
         />
         <TreeFiltersContainer>
           <LabeledCheckbox

@@ -55,8 +55,7 @@
   "filter": {
     "deselect_all": "Odznacz wszystko",
     "only_on_map": "Na mapie",
-    "select_all": "Zaznacz wszystko",
-    "type": "Typ"
+    "select_all": "Zaznacz wszystko"
   },
   "form": {
     "button": {
@@ -92,7 +91,10 @@
     "tree_inventory": {
       "one": "Spis drzew"
     },
-    "types": "Rodzaj",
+    "type": {
+      "one": "Rodzaj",
+      "other": "Rodzaje"
+    },
     "unverified": "Niezweryfikowane",
     "yield": "Wydajność"
   },

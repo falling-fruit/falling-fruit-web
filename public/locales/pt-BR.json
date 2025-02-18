@@ -55,8 +55,7 @@
   "filter": {
     "deselect_all": "Desmarcar todos",
     "only_on_map": "No mapa",
-    "select_all": "Selecionar todos",
-    "type": "Tipo"
+    "select_all": "Selecionar todos"
   },
   "form": {
     "button": {
@@ -92,7 +91,10 @@
     "tree_inventory": {
       "one": "Inventário de árvores"
     },
-    "types": "Tipos",
+    "type": {
+      "one": "Tipo",
+      "other": "Tipos"
+    },
     "unverified": "Não verificado",
     "yield": "Produção"
   },

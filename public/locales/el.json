@@ -55,8 +55,7 @@
   "filter": {
     "deselect_all": "Αποεπιλογή όλων",
     "only_on_map": "Στον χάρτη",
-    "select_all": "Επιλογή όλων",
-    "type": "Τύπος"
+    "select_all": "Επιλογή όλων"
   },
   "form": {
     "button": {
@@ -92,7 +91,10 @@
     "tree_inventory": {
       "one": "Κατάλογος δέντρων"
     },
-    "types": "Είδη",
+    "type": {
+      "one": "Είδος",
+      "other": "Είδη"
+    },
     "unverified": "Ανεπιβεβαίωτο",
     "yield": "Σοδειά"
   },

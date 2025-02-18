@@ -55,8 +55,7 @@
   "filter": {
     "deselect_all": "Deselect all",
     "only_on_map": "On the map",
-    "select_all": "Select all",
-    "type": "Type"
+    "select_all": "Select all"
   },
   "form": {
     "button": {
@@ -93,7 +92,10 @@
       "one": "Boominventarisatie",
       "other": "Boominventarisaties"
     },
-    "types": "Soorten",
+    "type": {
+      "one": "Soort",
+      "other": "Soorten"
+    },
     "unverified": "Niet-bevestigd",
     "yield": "Opbrengst"
   },

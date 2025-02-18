@@ -55,8 +55,7 @@
   "filter": {
     "deselect_all": "Deselect all",
     "only_on_map": "On the map",
-    "select_all": "Select all",
-    "type": "Type"
+    "select_all": "Select all"
   },
   "form": {
     "button": {
@@ -92,7 +91,10 @@
     "tree_inventory": {
       "one": "Bauminventar"
     },
-    "types": "Arten",
+    "type": {
+      "one": "Art",
+      "other": "Arten"
+    },
     "unverified": "Ungeprüft",
     "yield": "Ausbeute"
   },
