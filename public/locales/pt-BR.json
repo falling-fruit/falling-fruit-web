@@ -81,7 +81,8 @@
     "email": "Email",
     "logout": "Sair",
     "map": "Mapa",
-    "name": "Nome",
+    "name_of_user": "Nome de usuário",
+    "name_of_entity": "Nome",
     "password": "Senha",
     "quality": "Qualidade",
     "review": {

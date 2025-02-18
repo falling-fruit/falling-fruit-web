@@ -81,7 +81,8 @@
     "email": "Email",
     "logout": "Αποσύνδεση",
     "map": "Χάρτης",
-    "name": "Όνομα",
+    "name_of_user": "Όνομα χρήστη",
+    "name_of_entity": "Όνομα",
     "password": "Κωδικός",
     "quality": "Ποιότητα",
     "review": {

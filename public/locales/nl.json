@@ -81,7 +81,8 @@
     "email": "E-mail",
     "logout": "Uitloggen",
     "map": "Kaart",
-    "name": "Naam",
+    "name_of_user": "Gebruikersnaam",
+    "name_of_entity": "Naam",
     "password": "Wachtwoord",
     "quality": "Kwaliteit",
     "review": {

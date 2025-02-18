@@ -118,7 +118,11 @@ const SignupPage = () => {
                   </ErrorMessage>
                 )}
 
-                <Input type="text" name="name" label={t('glossary.name')} />
+                <Input
+                  type="text"
+                  name="name"
+                  label={t('glossary.name_of_user')}
+                />
 
                 <Textarea name="bio" label={t('users.bio')} />
               </FormInputWrapper>
