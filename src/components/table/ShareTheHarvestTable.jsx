@@ -136,7 +136,7 @@ const ShareTheHarvestTable = () => {
     },
     {
       id: 'name',
-      name: t('glossary.name'),
+      name: t('glossary.name_of_entity'),
       selector: (row) => row.name,
       sortable: true,
       grow: 2.5,

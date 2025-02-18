@@ -81,7 +81,8 @@
     "email": "Email",
     "logout": "Déconnexion",
     "map": "Carte",
-    "name": "Nom",
+    "name_of_user": "Pseudo",
+    "name_of_entity": "Nom",
     "password": "Mot de passe",
     "quality": "Qualité",
     "review": {

@@ -81,7 +81,8 @@
     "email": "Email",
     "logout": "Salir",
     "map": "Mapa",
-    "name": "Nombre",
+    "name_of_user": "Nombre de usuario",
+    "name_of_entity": "Nombre",
     "password": "Contraseña",
     "quality": "Calidad",
     "review": {

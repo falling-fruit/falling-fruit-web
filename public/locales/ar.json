@@ -81,7 +81,8 @@
     "email": "البريد الإلكتروني",
     "logout": "خروج",
     "map": "خريطة",
-    "name": "الاسم",
+    "name_of_user": "اسم المستخدم",
+    "name_of_entity": "الاسم",
     "password": "كلمة السر",
     "quality": "جودة",
     "review": {

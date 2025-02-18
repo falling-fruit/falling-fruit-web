@@ -81,7 +81,8 @@
     "email": "כתובת דוא\"ל",
     "logout": "התנתקות",
     "map": "מפה",
-    "name": "שם",
+    "name_of_user": "שם משתמש",
+    "name_of_entity": "שם",
     "password": "סיסמה",
     "quality": "איכות",
     "review": {

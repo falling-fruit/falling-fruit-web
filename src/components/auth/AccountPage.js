@@ -94,7 +94,11 @@ const AccountPage = () => {
               {({ errors, dirty, isValid, isSubmitting }) => (
                 <Form>
                   <FormInputWrapper>
-                    <Input type="text" name="name" label={t('glossary.name')} />
+                    <Input
+                      type="text"
+                      name="name"
+                      label={t('glossary.name_of_user')}
+                    />
 
                     <Input
                       type="text"
