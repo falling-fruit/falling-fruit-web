@@ -61,15 +61,15 @@
   "form": {
     "button": {
       "cancel": "Cancelar",
-      "delete": "Delete",
-      "edit": "Edit",
-      "reset": "Reset",
-      "submit": "Submit",
-      "submitting": "Submitting"
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "reset": "Restablecer",
+      "submit": "Enviar",
+      "submitting": "Enviando"
     },
-    "optional": "Optional",
-    "required": "Required",
-    "search": "Search"
+    "optional": "Opcional",
+    "required": "Requerido",
+    "search": "Buscar"
   },
   "glossary": {
     "about": "Acerca de",
@@ -90,7 +90,8 @@
     },
     "sign_up": "Registrarse",
     "tree_inventory": {
-      "one": "Inventario de árboles"
+      "one": "Inventario de árboles",
+      "other": "Inventarios de árboles"
     },
     "types": "Tipos",
     "unverified": "No verificado",
@@ -109,8 +110,8 @@
     "loading": "Cargando..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "No se encontraron resultados",
+    "zoom_in": "Acerca el mapa para ver los datos de ubicación"
   },
   "locations": {
     "edit_position": {
@@ -175,16 +176,16 @@
     "zoom_in_to_add_location": "Acercar para agregar ubicación"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Agregar tipo:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "Agregar nombre",
+      "language": "Idioma",
+      "notes": "Notas",
+      "notes_placeholder": "Descripción, enlace de Wikipedia, información taxonómica...",
+      "pending_notice": "Nota: Todos los nuevos tipos se establecen como pendientes por defecto. Solo los administradores pueden agregar tipos no pendientes.",
+      "remove": "Eliminar"
     },
-    "title": "Add New Type"
+    "title": "Agregar nuevo tipo"
   },
   "pages": {
     "about": {
@@ -242,7 +243,7 @@
       "intro_html": "Falling Fruit aspira a ser el banco de datos geográficos sobre comestibles urbanos lo más amplio y accesible posible.  Mientras nuestros usuarios siguen explorando, editando y añadiendo ubicaciones con la ayuda de nuestro <a href=\"/\">mapa</a>, nosotros peinamos el universo conocido de datos pre-existentes para incorporarlos a nuestro <a href=\"/data\">base des datos</a>, uniendo los esfuerzos de recolectores, silvicultores y freegans de todas partes. Si conocéis datos que nos hayamos saltado, os pedimos que <a href=\"mailto:info@fallingfruit.org\">nos informéis</a>. También nos podríais ayudar en el proceso de introducción de datos con nuestro <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">formulario de importación de datos</a>. Pero tened en cuenta que como la importación se debe realizar manualmente, todo los cambios de los datos originales después de la importación no se reflejarán en la web Falling Fruit.",
       "link": "Enlace",
       "locations": "Ubicaciones",
-      "table_info": "Cada conjunto de datos está en la lista por nombre, número de lugares, y la fecha de importación. Ampliando cada fila revela más detalles sobre los datos originales, el proceso de importación, y la licencia que rige cómo se pueden utilizar los datos.",
+      "table_info": "Cada conjunto de datos está listado por nombre, número de ubicaciones y fecha de importación. Al expandir cada fila se revelan más detalles sobre los datos originales, el proceso de importación y la licencia que rige cómo se pueden usar los datos.",
       "type": "Tipo",
       "types_of_data": "Los conjuntos de datos importados a Falling Fruit se dividen en dos categorías principales. Los \"mapas comunitarios\" son construídos por cazadores-recolectores y freegans que buscan en su entorno cosas de comer. Estamos en deuda con los diligentes ciudadanos-cartógrafos que han compilado los datos. Los \"inventarios de árboles\" son compilados por ciudades, universidades y otras instituciones que deseen documentar mejor y cuidar de sus árboles. Extraemos estos grandes conjuntos de datos para las especies productoras de alimentos y agregarlos al mapa. Para ayudarnos a cartografiar tu vecindario en el mapa, contacta con escuela o ciudad instándolos a compartir su inventario de árboles con nosotros."
     },
@@ -254,7 +255,7 @@
       "regional": "Regional",
       "roadmap": "Mapa",
       "satellite": "Satélite",
-      "side_menu": "Bicicleta",
+      "side_menu": "Menú lateral",
       "terrain": "Terreno",
       "transit": "Transporte público",
       "units": {
@@ -304,14 +305,14 @@
         "united_kingdom": "Reino Unido",
         "united_states": "Estados Unidos"
       },
-      "grow_pick_and_distribute": "Crecer · Pick · Distribuir",
+      "grow_pick_and_distribute": "Cultivar · Recolectar · Distribuir",
       "heading": {
         "city": "Ciudad",
         "country": "País",
-        "social": "Social",
-        "state": "Estado"
+        "social": "Redes sociales",
+        "state": "Estado/Provincia"
       },
-      "intro_html": "A continuación se enumeran las organizaciones que cultivan alimentos en los espacios públicos (bosques de alimentos, huertas públicas), recogen alimentos (forrajeo urbana, espigueo de campo), o distribuyen alimentos (intercambios, donaciones). Las organizaciones están listadas por país, estado (si procede), y ciudad. Ellas con nombres tachados se cree que son inactivos. Si tu sabes de otros que deberían estar en esta lista, <a href=\"mailto:info@fallingfruit.org\">contáctenos</a>!"
+      "intro_html": "A continuación se enumeran las organizaciones que cultivan alimentos en los espacios públicos (bosques de alimentos, huertas públicas), recogen alimentos (forrajeo urbano, espigueo de campo), o distribuyen alimentos (intercambios, donaciones). Las organizaciones están listadas por país, estado (si procede), y ciudad. Las organizaciones con nombres tachados se consideran inactivas. Si conoces otras que deberían estar en esta lista, ¡<a href=\"mailto:info@fallingfruit.org\">contáctanos</a>!"
     }
   },
   "problems": {
@@ -329,15 +330,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Dejar una reseña",
+      "observed_on": "Observado el",
+      "upload_images": "Subir imágenes"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "por",
+    "reviewed_on": "Revisado el {{date}}",
+    "update_delete": "Actualizar o eliminar esta reseña.",
+    "visited_on": "visitado el {{date}}",
+    "you_reviewed": "Reseñaste esta ubicación el {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +349,7 @@
     "time_ago": "Hace {{time}}"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "Pendiente de revisión"
   },
   "users": {
     "bio": "Acerca de ti",

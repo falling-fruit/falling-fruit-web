@@ -60,16 +60,16 @@
   },
   "form": {
     "button": {
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "reset": "Reset",
-      "submit": "Submit",
-      "submitting": "Submitting"
+      "cancel": "Annulla",
+      "delete": "Elimina",
+      "edit": "Modifica",
+      "reset": "Reimposta",
+      "submit": "Invia",
+      "submitting": "Invio in corso"
     },
-    "optional": "Optional",
-    "required": "Required",
-    "search": "Search"
+    "optional": "Facoltativo",
+    "required": "Obbligatorio",
+    "search": "Cerca"
   },
   "glossary": {
     "about": "Chi siamo",
@@ -109,8 +109,8 @@
     "loading": "Caricamento..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "Nessun risultato trovato",
+    "zoom_in": "Ingrandisci la mappa per vedere i dati sulla posizione"
   },
   "locations": {
     "edit_position": {
@@ -166,25 +166,25 @@
     }
   },
   "menu": {
-    "add_new_location": "Add location",
-    "add_review": "Add review",
-    "edit_location": "Edit location",
-    "edit_review": "Edit review",
-    "list": "List",
-    "settings": "Settings",
-    "zoom_in_to_add_location": "Zoom in to add location"
+    "add_new_location": "Aggiungi posizione",
+    "add_review": "Aggiungi recensione",
+    "edit_location": "Modifica posizione",
+    "edit_review": "Modifica recensione",
+    "list": "Lista",
+    "settings": "Impostazioni",
+    "zoom_in_to_add_location": "Ingrandisci per aggiungere una posizione"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Aggiungi tipo:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "Aggiungi nome",
+      "language": "Lingua",
+      "notes": "Note",
+      "notes_placeholder": "Descrizione, link Wikipedia, informazioni tassonomiche ...",
+      "pending_notice": "Nota: Tutti i nuovi tipi sono impostati come in attesa per impostazione predefinita. Solo gli amministratori possono aggiungere tipi non in attesa.",
+      "remove": "Rimuovi"
     },
-    "title": "Add New Type"
+    "title": "Aggiungi nuovo tipo"
   },
   "pages": {
     "about": {
@@ -254,7 +254,7 @@
       "regional": "Regionale",
       "roadmap": "Mappa",
       "satellite": "Satellite",
-      "side_menu": "Bicicletta",
+      "side_menu": "Menu laterale",
       "terrain": "Terreno",
       "transit": "Transito",
       "units": {
@@ -304,11 +304,11 @@
         "united_kingdom": "Regno Unito",
         "united_states": "Stati Uniti"
       },
-      "grow_pick_and_distribute": "Crescere · Raccogliere · Distribuire",
+      "grow_pick_and_distribute": "Coltivare · Raccogliere · Distribuire",
       "heading": {
         "city": "Città",
         "country": "Paese",
-        "social": "Social",
+        "social": "Sociale",
         "state": "Stato"
       },
       "intro_html": "Di seguito sono elencate le organizzazioni che si occupano di agricoltura urbana negli spazi pubblici (orti urbani, frutteti pubblici), o raccolgono frutta, erbe e ortaggi (raccolta urbana, orti urbani) o distribuiscono prodotti alimentari (donazioni). Le organizzazioni sono suddivise per paese, stato (se applicabile) e città. Quelli con nomi sbarrati si pensa che siano inattivi. Se siete a conoscenza di altri dati che dovrebbero essere in questa lista, <a href=\"mailto:info@fallingfruit.org\">contattaci</a> !"
@@ -329,15 +329,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Lascia una recensione",
+      "observed_on": "Osservato il",
+      "upload_images": "Carica immagini"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "da",
+    "reviewed_on": "Recensito il {{date}}",
+    "update_delete": "Aggiorna o elimina questa recensione.",
+    "visited_on": "visitato il {{date}}",
+    "you_reviewed": "Hai recensito questa posizione il {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +348,7 @@
     "time_ago": "{{time}} fa"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "In attesa di revisione"
   },
   "users": {
     "bio": "Su di te",

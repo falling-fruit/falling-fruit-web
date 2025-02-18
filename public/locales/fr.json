@@ -21,36 +21,36 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
+      "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
+      "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
+      "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
+      "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
+      "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
+      "report_submission_failed": "Échec de l'envoi du rapport : {{message}}",
+      "review_deletion_failed": "Échec de la suppression de l'avis : {{message}}",
+      "review_edit_failed": "Échec de la modification de l'avis : {{message}}",
+      "review_submission_failed": "Échec de l'envoi de l'avis : {{message}}",
+      "street_view_unavailable": "Street View n'est pas disponible pour l'emplacement {{id}}",
+      "type_add_failed": "Échec de l'ajout du nouveau type : {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Échec de la vérification d'authentification : {{message}}",
+      "confirmation_failed": "Échec de la confirmation du compte : {{message}}",
+      "password_set_failed": "Échec de la définition du nouveau mot de passe : {{message}}",
+      "profile_update_failed": "Échec de la mise à jour du profil : {{message}}",
+      "resend_confirmation_failed": "Échec du renvoi de la confirmation : {{message}}",
+      "reset_password_failed": "Échec de la réinitialisation du mot de passe : {{message}}",
+      "signin_failed": "Échec de la connexion : {{message}}",
+      "signup_failed": "Échec de l'inscription : {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Position non disponible : {{message}}",
+      "code_3": "Délai d'attente de la géolocalisation dépassé : {{message}}",
+      "denied": "L'autorisation d'utiliser votre position a été refusée. Pour activer la géolocalisation, veuillez autoriser le partage de position dans les paramètres de votre navigateur et actualiser la page.",
+      "not_supported": "Géolocalisation non prise en charge"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Erreur inconnue"
   },
   "filter": {
     "deselect_all": "Désélectionner tous",
@@ -90,7 +90,8 @@
     },
     "sign_up": "S'inscrire",
     "tree_inventory": {
-      "one": "Inventaire d'arbres"
+      "one": "Inventaire d'arbres",
+      "other": "Inventaires d'arbres"
     },
     "types": "Types",
     "unverified": "Non vérifié",
@@ -109,8 +110,8 @@
     "loading": "Chargement..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "Aucun résultat trouvé",
+    "zoom_in": "Zoomez sur la carte pour voir les emplacements"
   },
   "locations": {
     "edit_position": {
@@ -175,16 +176,16 @@
     "zoom_in_to_add_location": "Zoomer pour ajouter un site"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Ajouter un type :",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
+      "add_name": "Ajouter un nom",
+      "language": "Langue",
       "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "notes_placeholder": "Description, lien Wikipedia, information taxonomique ...",
+      "pending_notice": "Note : Tous les nouveaux types sont en attente par défaut. Seuls les administrateurs peuvent ajouter des types non-en attente.",
+      "remove": "Supprimer"
     },
-    "title": "Add New Type"
+    "title": "Ajouter un nouveau type"
   },
   "pages": {
     "about": {
@@ -220,12 +221,12 @@
       "write": "Écrire"
     },
     "changes": {
-      "change_in_city": "{{type}} in {{city}}",
-      "recent_changes": "Recent changes",
+      "change_in_city": "{{type}} à {{city}}",
+      "recent_changes": "Changements récents",
       "type": {
-        "added": "added",
-        "edited": "edited",
-        "visited": "visited"
+        "added": "ajouté",
+        "edited": "modifié",
+        "visited": "visité"
       }
     },
     "data": {
@@ -308,8 +309,8 @@
       "heading": {
         "city": "Ville",
         "country": "Pays",
-        "social": "Social",
-        "state": "État"
+        "social": "Réseaux sociaux",
+        "état": "État"
       },
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l’espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d’autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
     }
@@ -329,15 +330,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Laisser un avis",
+      "observed_on": "Observé le",
+      "upload_images": "Télécharger des images"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "par",
+    "reviewed_on": "Évalué le {{date}}",
+    "update_delete": "Modifier ou supprimer cet avis.",
+    "visited_on": "visité le {{date}}",
+    "you_reviewed": "Vous avez évalué cet emplacement le {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +349,7 @@
     "time_ago": "Il y a {{time}}"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "En attente de validation"
   },
   "users": {
     "bio": "Parlez-nous de vous",

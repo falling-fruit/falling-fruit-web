@@ -220,12 +220,12 @@
       "write": "Napisz"
     },
     "changes": {
-      "change_in_city": "{{type}} in {{city}}",
-      "recent_changes": "Recent changes",
+      "change_in_city": "{{type}} w {{city}}",
+      "recent_changes": "Ostatnie zmiany",
       "type": {
-        "added": "added",
-        "edited": "edited",
-        "visited": "visited"
+        "added": "dodano",
+        "edited": "edytowano",
+        "visited": "odwiedzono"
       }
     },
     "data": {
@@ -239,46 +239,46 @@
       "date_imported": "Data importu",
       "imported_datasets": "Zaimportowane zbiory danych",
       "imported_on": "Zaimportowano {{date}}",
-      "intro_html": "Falling Fruit chce być światowym najbardziej kompleksowy i otwarty zbiór danych geograficznych z spożywczymi miejskich. Podczas gdy nasi użytkownicy zbadać, edytować i dodawać lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, możemy przeczesać znanego wszechświata dla wcześniej istniejących zbiorów danych i zaimportować je bezpośrednio do <a href=\"/data\">bazy danych</a>, jednocząc wysiłki paszowe, leśników i freegans wszędzie. Jeśli wiesz, że w zbiorze danych we've brakowało, proszę <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a> ! Możesz też pomóc nam w procesie importu przez formatowania danych przy użyciu <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Należy pamiętać, że od importu muszą być wykonywane ręcznie, dalsze zmiany oryginalnych danych nie są widoczne na Falling Fruit.",
+      "intro_html": "Falling Fruit chce być najbardziej kompleksowym i otwartym światowym zbiorem danych geograficznych o miejskich roślinach jadalnych. Podczas gdy nasi użytkownicy badają, edytują i dodają lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, my przeczesujemy znany wszechświat w poszukiwaniu istniejących zbiorów danych i importujemy je bezpośrednio do naszej <a href=\"/data\">bazy danych</a>, jednocząc wysiłki zbieraczy, leśników i freegan na całym świecie. Jeśli wiesz o zbiorze danych, którego nam brakuje, prosimy <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a>! Możesz też pomóc nam w procesie importu formatując dane przy użyciu naszego <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Pamiętaj, że ponieważ import musi być wykonywany ręcznie, późniejsze zmiany w oryginalnych danych nie będą widoczne na Falling Fruit.",
       "link": "Link",
       "locations": "Lokalizacje",
-      "table_info": "Każdy zestaw danych jest wymienione z nazwy, liczby miejsc, i data importu. Rozszerzanie każdy wiersz ujawnia dalsze szczegóły na temat oryginalnych danych, procesu importu i licencji rządzącej, jak można wykorzystać dane.",
+      "table_info": "Każdy zestaw danych jest wymieniony z nazwą, liczbą lokalizacji i datą importu. Rozwinięcie każdego wiersza ujawnia dalsze szczegóły na temat oryginalnych danych, procesu importu i licencji określającej, jak można wykorzystać dane.",
       "type": "Typ",
-      "types_of_data": "Zestawów danych importowanych do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy w portalu dla\" są budowane przez paszowe i freegans jak czytać swoje otoczenie za rzeczy do jedzenia. Jesteśmy zobowiązani do pracowitych obywateli-kartografów, którzy zebranych te dane. \"Zapasy drzewa\" są opracowywane przez miasta, uczelni wyższych i innych instytucji, które chcą lepiej dokumentu i opieki dla swoich drzew. My te ogromne zbiory danych, wydobywać gatunków produkujących żywność i dodaj je do mapy. Aby pomóc nam swoją okolicę na mapie, należy skontaktować się ze szkołą lub miasto wzywając ich do dzielenia się z nami drzewo inwentarza."
+      "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Spisy drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich spisu drzew."
     },
     "settings": {
-      "data": "Data",
-      "labels": "Labels",
-      "language": "Language",
-      "points_of_interest": "Points of interest",
-      "regional": "Regional",
-      "roadmap": "Map",
-      "satellite": "Satellite",
-      "side_menu": "Bicycle",
-      "terrain": "Terrain",
-      "transit": "Transit",
+      "data": "Dane",
+      "labels": "Etykiety",
+      "language": "Język",
+      "points_of_interest": "Punkty zainteresowania",
+      "regional": "Regionalne",
+      "roadmap": "Mapa",
+      "satellite": "Satelita",
+      "side_menu": "Rower",
+      "terrain": "Teren",
+      "transit": "Transport",
       "units": {
         "distance": {
           "foot": {
-            "one": "{{count}} foot",
-            "other": "{{count}} feet"
+            "one": "{{count}} stopa",
+            "other": "{{count}} stóp"
           },
           "kilometer": {
-            "one": "{{count}} kilometer",
-            "other": "{{count}} kilometers"
+            "one": "{{count}} kilometr",
+            "other": "{{count}} kilometrów"
           },
           "meter": {
-            "one": "{{count}} meter",
-            "other": "{{count}} meters"
+            "one": "{{count}} metr",
+            "other": "{{count}} metrów"
           },
           "mile": {
-            "one": "{{count}} mile",
-            "other": "{{count}} miles"
+            "one": "{{count}} mila",
+            "other": "{{count}} mil"
           }
         },
-        "imperial": "Imperial",
-        "metric": "Metric",
-        "units": "Units"
+        "imperial": "Imperialne",
+        "metric": "Metryczne",
+        "units": "Jednostki"
       }
     },
     "sharing": {
@@ -308,7 +308,7 @@
       "heading": {
         "city": "Miasto",
         "country": "Kraj",
-        "social": "Social",
+        "social": "Media społecznościowe",
         "state": "Stan"
       },
       "intro_html": "Poniżej wymienione są lokalne organizacje, które rosną żywności (żywność i sady lasy publiczne), odebrać jedzenie (miejskiego żerowania i gleaning rolniczy), lub w inny sposób rozpowszechniać żywności (swapy i darowizn). Organizacje wymienione są kraje, państwa i miasta. Te z nazwami wyblakłych out są uważane za nieaktywne. Jeśli znasz inne, które powinny być na tej liście, <a href=\"mailto:info@fallingfruit.org\">skontaktuj się z nami</a> !"

@@ -21,42 +21,42 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "فشل في جلب تغييرات الموقع: {{message}}",
+      "fetch_location_failed": "خطأ في جلب الموقع {{id}}: {{message}}",
+      "fetch_review_failed": "خطأ في جلب المراجعة {{id}}: {{message}}",
+      "location_edit_failed": "فشل تحرير الموقع: {{message}}",
+      "location_submission_failed": "فشل تقديم الموقع: {{message}}",
+      "photo_upload_failed": "فشل تحميل الصورة: {{message}}",
+      "report_submission_failed": "فشل تقديم التقرير: {{message}}",
+      "review_deletion_failed": "فشل حذف المراجعة: {{message}}",
+      "review_edit_failed": "فشل تحرير المراجعة: {{message}}",
+      "review_submission_failed": "فشل تقديم المراجعة: {{message}}",
+      "street_view_unavailable": "خدمة Street View غير متوفرة للموقع {{id}}",
+      "type_add_failed": "فشل إضافة نوع جديد: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "فشل التحقق من المصادقة: {{message}}",
+      "confirmation_failed": "فشل تأكيد الحساب: {{message}}",
+      "password_set_failed": "فشل تعيين كلمة المرور الجديدة: {{message}}",
+      "profile_update_failed": "فشل تحديث الملف الشخصي: {{message}}",
+      "resend_confirmation_failed": "فشل إعادة إرسال التأكيد: {{message}}",
+      "reset_password_failed": "فشل إعادة تعيين كلمة المرور: {{message}}",
+      "signin_failed": "فشل تسجيل الدخول: {{message}}",
+      "signup_failed": "فشل التسجيل: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "الموقع غير متوفر: {{message}}",
+      "code_3": "انتهت مهلة تحديد الموقع: {{message}}",
+      "denied": "تم رفض إذن استخدام موقعك. لتمكين تحديد الموقع الجغرافي، يرجى السماح بمشاركة الموقع في إعدادات المتصفح وتحديث الصفحة.",
+      "not_supported": "تحديد الموقع الجغرافي غير مدعوم"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "خطأ غير معروف"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all",
-    "type": "Type"
+    "deselect_all": "إلغاء تحديد الكل",
+    "only_on_map": "على الخريطة",
+    "select_all": "تحديد الكل",
+    "type": "النوع"
   },
   "form": {
     "button": {
@@ -90,7 +90,8 @@
     },
     "sign_up": "سجل",
     "tree_inventory": {
-      "one": "جرد الشجرة"
+      "one": "جرد الشجرة",
+      "other": "جرد الأشجار"
     },
     "types": "أنواع",
     "unverified": "لم يتم التحقق",
@@ -101,16 +102,16 @@
       "menu": {
         "in_the_press": "في الصحافة",
         "sharing_the_harvest": "تقاسم الحصاد",
-        "the_data": "The data",
+        "the_data": "البيانات",
         "the_project": "المشروع"
       }
     },
-    "back": "Back",
-    "loading": "Loading..."
+    "back": "رجوع",
+    "loading": "جاري التحميل..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "لم يتم العثور على نتائج",
+    "zoom_in": "قرّب الخريطة لرؤية بيانات الموقع"
   },
   "locations": {
     "edit_position": {
@@ -175,16 +176,16 @@
     "zoom_in_to_add_location": "قرّب لإضافة وجهة"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "إضافة نوع:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "إضافة اسم",
+      "language": "اللغة",
+      "notes": "ملاحظات",
+      "notes_placeholder": "الوصف، رابط ويكيبيديا، المعلومات التصنيفية ...",
+      "pending_notice": "ملاحظة: يتم تعيين جميع الأنواع الجديدة كمعلقة افتراضيًا. يمكن للمسؤولين فقط إضافة أنواع غير معلقة.",
+      "remove": "إزالة"
     },
-    "title": "Add New Type"
+    "title": "إضافة نوع جديد"
   },
   "pages": {
     "about": {
@@ -308,7 +309,7 @@
       "heading": {
         "city": "مدينة",
         "country": "بلد",
-        "social": "اجتماعي",
+        "social": "وسائل التواصل الاجتماعي",
         "state": "ولاية"
       },
       "intro_html": "المدرجة أدناه هي المنظمات التي تزرع الغذاء في الأماكن العامة (غابات الطعام ، البساتين العامة) ، تختار الطعام (البحث عن الطعام في المناطق الحضرية ، جمع المزارع) ، أو توزيع الطعام (التبادلات ، التبرعات). يتم سرد المنظمات حسب البلد والولاية (إن أمكن) والمدينة. يُعتقد أن الأشخاص ذوي الأسماء المشطوبة غير نشطين. إذا كنت تعرف الآخرين الموجودين في هذه القائمة ، <a href=\"mailto:info@fallingfruit.org\">فاتصل بنا</a> !"
@@ -329,15 +330,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "اترك مراجعة",
+      "observed_on": "تمت الملاحظة في",
+      "upload_images": "تحميل الصور"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "بواسطة",
+    "reviewed_on": "تمت المراجعة في {{date}}",
+    "update_delete": "تحديث أو حذف هذه المراجعة.",
+    "visited_on": "تمت الزيارة في {{date}}",
+    "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
   "time": {
     "days": {
@@ -345,10 +346,10 @@
       "other": "{{count}} أيام"
     },
     "last_24_hours": "أخر 24 ساعه",
-    "time_ago": "{{time}}"
+    "time_ago": "منذ {{time}}"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "في انتظار المراجعة"
   },
   "users": {
     "bio": "حولك",
