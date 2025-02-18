@@ -247,6 +247,7 @@
       "types_of_data": "Os conjuntos de dados importados no Falling Fruit entram em duas categorias principais. \"Mapas comunitários\" são construídas por coletores e freegans enquanto procuram alimentos em suas comunidades. Estamos em dívida com os cidadãos-cartógrafos que compilaram os dados. \"Inventários de árvores\" são compilados por munícipios, universidades e outras instituições que desejam documentar melhor e cuidar de suas árvores. Nós garimpamos esses vastos conjuntos de dados para espécies produtoras de alimentos e os adicionamos ao mapa. Para nos ajudar a mapear sua comunidade, entre em contato com sua escola ou cidade instando-os a partilhar o seu inventário de árvores com a gente."
     },
     "settings": {
+      "bicycle": "Bicicleta",
       "data": "Dados",
       "labels": "Rótulos",
       "language": "Idioma",
@@ -254,7 +255,6 @@
       "regional": "Regional",
       "roadmap": "Mapa",
       "satellite": "Satélite",
-      "side_menu": "Menu lateral",
       "terrain": "Terreno",
       "transit": "Trânsito",
       "units": {

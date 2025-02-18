@@ -247,6 +247,7 @@
       "types_of_data": "Datensätze die von Falling Fruit importiert werden, fallen in zwei Hauptkategorien. \"Gemeinschaftskarten\" werden von Sammlerinnen und Freeganern erstellt, indem sie in ihrem Umfeld öffentliche Nahrungsmittel-Quellen suchen und kartieren. Ein Riesiges Dankeschön geht an alle, die tagtäglich auf der Suche sind und uns ihre Daten übermitteln. \"Bauminventare\" werden durch Städte, Universitäten oder andere Institutionen zusammengestellt, die ihren Baumbestand überblicken und erhalten möchten. Wir filtern aus diesen riesigen Datenmengen die essbaren Arten heraus und fügen sie unserer Karte hinzu. Wenn in deiner Ecke der Welt noch Daten fehlen, dann kontaktiere deine Stadt oder deine Gemeinde und fordere sie auf, allfällig vorhandene Daten mit uns zu teilen! Wir sind für jede Hilfe dankbar!"
     },
     "settings": {
+      "bicycle": "Fahrrad",
       "data": "Daten",
       "labels": "Beschriftungen",
       "language": "Sprache",
@@ -254,7 +255,6 @@
       "regional": "Regional",
       "roadmap": "Karte",
       "satellite": "Satellit",
-      "side_menu": "Seitenmenü",
       "terrain": "Gelände",
       "transit": "Transit",
       "units": {

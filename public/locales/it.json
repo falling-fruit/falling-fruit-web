@@ -247,6 +247,7 @@
       "types_of_data": "I dati importati in Falling Fruit rientrano in due categorie principali: le \"mappe condivise\" che  sono create da raccoglitori e volontari mentre indagano attivamente le loro comunità alla ricerca di cibo e siamo grati ai laboriosi cittadini-cartografi che hanno elaborato tutte queste informazioni; gli \"inventari arborei\" che sono stati redatti dai Comuni, dalle università e da altre istituzioni che vogliono documentare e curare il loro patrimonio arboreo. Noi estraiamo da questi inventari le specie produttive e le aggiungiamo alla mappa. Per aiutarci a mappare gli alberi da frutto del vostro quartiere, contattate la vostra scuola o il Comune per invitarli a condividere con noi le loro informazioni e i loro inventari sugli alberi."
     },
     "settings": {
+      "bicycle": "Bicicletta",
       "data": "Dati",
       "labels": "Etichette",
       "language": "Lingua",
@@ -254,7 +255,6 @@
       "regional": "Regionale",
       "roadmap": "Mappa",
       "satellite": "Satellite",
-      "side_menu": "Menu laterale",
       "terrain": "Terreno",
       "transit": "Transito",
       "units": {

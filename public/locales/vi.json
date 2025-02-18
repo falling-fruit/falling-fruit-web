@@ -248,6 +248,7 @@
       "types_of_data": "Các bộ dữ liệu được nhập vào Falling Fruit thuộc hai loại chính. \"Bản đồ cộng đồng\" được xây dựng bởi những người kiếm ăn và những người sống tự do khi họ nghiên cứu cộng đồng của mình để tìm đồ ăn. Chúng tôi mang ơn những người vẽ bản đồ công dân chăm chỉ đã biên soạn dữ liệu này. \"Kiểm kê cây\" được biên soạn bởi các thành phố, trường đại học và các tổ chức khác mong muốn ghi chép và chăm sóc cây của họ tốt hơn. Chúng tôi khai thác những bộ dữ liệu khổng lồ này về các loài sản xuất thực phẩm và thêm chúng vào bản đồ. Để giúp chúng tôi lập bản đồ cây ăn quả ở khu vực lân cận của bạn, hãy liên hệ với trường học hoặc thành phố của bạn để thúc giục họ chia sẻ kho cây của họ với chúng tôi."
     },
     "settings": {
+      "bicycle": "Xe đạp",
       "data": "Dữ liệu",
       "labels": "Nhãn",
       "language": "Ngôn ngữ",
@@ -255,7 +256,6 @@
       "regional": "Khu vực",
       "roadmap": "Bản đồ",
       "satellite": "Vệ tinh",
-      "side_menu": "Menu bên",
       "terrain": "Địa hình",
       "transit": "Giao thông",
       "units": {

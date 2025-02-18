@@ -247,6 +247,7 @@
       "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Spisy drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich spisu drzew."
     },
     "settings": {
+      "bicycle": "Rowerowa",
       "data": "Dane",
       "labels": "Etykiety",
       "language": "Język",
@@ -254,7 +255,6 @@
       "regional": "Regionalne",
       "roadmap": "Mapa",
       "satellite": "Satelita",
-      "side_menu": "Rower",
       "terrain": "Teren",
       "transit": "Transport",
       "units": {
