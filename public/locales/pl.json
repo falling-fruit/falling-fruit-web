@@ -63,7 +63,7 @@
       "delete": "Usuń",
       "edit": "Edytuj",
       "report": "Zgłoś",
-      "reset": "Reset",
+      "reset": "Resetuj",
       "review": "Recenzuj",
       "submit": "Wyślij",
       "submitting": "Wysyłanie"
@@ -162,7 +162,7 @@
       "date_edited": "Zaktualizowano {{date}}",
       "imported_from": "Zaimportowane z {{name}}",
       "season": {
-        "in_season": "W sezonie od {{start}} do {{stop}}",
+        "in_season": "W sezonie {{start}} - {{stop}}",
         "year_round": "Całoroczne"
       },
       "title": "Przegląd"
