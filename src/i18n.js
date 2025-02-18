@@ -22,8 +22,18 @@ export const LANGUAGE_CACHE_KEY = 'language'
       <option value="vi" <%= (I18n.locale == :"vi") ? "selected" : "" %>>Tiếng Việt</option>
 */
 export const LANGUAGE_OPTIONS = [
+  { value: 'ar', label: 'ﺎﻠﻋﺮﺒﻳﺓ' },
+  { value: 'de', label: 'Deutsch' },
   { value: 'en', label: 'English' },
+  { value: 'el', label: 'Ελληνικά' },
+  { value: 'es', label: 'Español' },
   { value: 'fr', label: 'Français' },
+  { value: 'he', label: 'עברית' },
+  { value: 'it', label: 'Italiano' },
+  { value: 'nl', label: 'Nederlands' },
+  { value: 'pl', label: 'Polski' },
+  { value: 'pt-br', label: 'Português' },
+  { value: 'vi', label: 'Tiếng Việt' },
 ]
 
 const LanguageSelect = () => {
