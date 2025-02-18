@@ -51,7 +51,7 @@ const TypesSelect = () => {
     <>
       <CreatableSelect
         name="types"
-        label={t('glossary.types')}
+        label={t('glossary.type.other')}
         options={typeOptions}
         isMulti
         closeMenuOnSelect={false}

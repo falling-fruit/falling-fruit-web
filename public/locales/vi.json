@@ -55,8 +55,7 @@
   "filter": {
     "deselect_all": "Bỏ chọn tất cả",
     "only_on_map": "Trên bản đồ",
-    "select_all": "Chọn tất cả",
-    "type": "Loại"
+    "select_all": "Chọn tất cả"
   },
   "form": {
     "button": {
@@ -93,7 +92,10 @@
       "one": "Kiểm kê cây",
       "other": "Kiểm kê cây"
     },
-    "types": "Các loại",
+    "type": {
+      "one": "Loại",
+      "other": "Các loại"
+    },
     "unverified": "Chưa được xác minh",
     "yield": "Lợi nhuận"
   },

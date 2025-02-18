@@ -55,8 +55,7 @@
   "filter": {
     "deselect_all": "בטל בחירת הכל",
     "only_on_map": "על המפה",
-    "select_all": "בחר הכל",
-    "type": "Type"
+    "select_all": "בחר הכל"
   },
   "form": {
     "button": {
@@ -92,7 +91,10 @@
     "tree_inventory": {
       "one": "רשימת עצים"
     },
-    "types": "סוגים",
+    "type": {
+      "one": "סוג",
+      "other": "סוגים"
+    },
     "unverified": "לא מאומת",
     "yield": "תנובה"
   },
