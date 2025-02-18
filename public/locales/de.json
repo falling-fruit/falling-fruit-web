@@ -62,7 +62,9 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "edit": "Edit",
+      "report": "Melden",
       "reset": "Reset",
+      "review": "Bewerten",
       "submit": "Submit",
       "submitting": "Submitting"
     },
@@ -82,9 +84,7 @@
     "name": "Name",
     "password": "Passwort",
     "quality": "Qualität",
-    "report": "Bericht",
     "review": {
-      "one": "Bewertung",
       "other": "Bewertungen"
     },
     "sign_up": "Anmelden",

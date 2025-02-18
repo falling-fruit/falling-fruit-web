@@ -62,7 +62,9 @@
       "cancel": "إلغاء",
       "delete": "حذف",
       "edit": "تعديل",
+      "report": "أبلغ",
       "reset": "إعادة تعيين",
+      "review": "راجع",
       "submit": "إرسال",
       "submitting": "جاري الإرسال"
     },
@@ -82,9 +84,7 @@
     "name": "الاسم",
     "password": "كلمة السر",
     "quality": "جودة",
-    "report": "أبلغ عن",
     "review": {
-      "one": "مراجعة",
       "other": "مراجعات"
     },
     "sign_up": "سجل",

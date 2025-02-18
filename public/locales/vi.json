@@ -62,7 +62,9 @@
       "cancel": "Hủy",
       "delete": "Xóa",
       "edit": "Chỉnh sửa",
+      "report": "Báo vi phạm",
       "reset": "Đặt lại",
+      "review": "Đánh giá",
       "submit": "Gửi",
       "submitting": "Đang gửi"
     },
@@ -82,9 +84,7 @@
     "name": "Tên",
     "password": "Mật khẩu",
     "quality": "Chất lượng",
-    "report": "Báo vi phạm",
     "review": {
-      "one": "Đánh giá",
       "other": "Đánh giá"
     },
     "sign_up": "Đăng ký",

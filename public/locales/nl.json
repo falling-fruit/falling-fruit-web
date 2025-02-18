@@ -62,7 +62,9 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "edit": "Edit",
+      "report": "Meld",
       "reset": "Reset",
+      "review": "Recenseer",
       "submit": "Submit",
       "submitting": "Submitting"
     },
@@ -82,9 +84,7 @@
     "name": "Naam",
     "password": "Wachtwoord",
     "quality": "Kwaliteit",
-    "report": "Rapporteren",
     "review": {
-      "one": "Recensie",
       "other": "Recensies"
     },
     "sign_up": "Registreren",
