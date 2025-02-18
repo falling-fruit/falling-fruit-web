@@ -229,10 +229,10 @@
       }
     },
     "data": {
-      "beware_html": "Ale uwaga. Po kompresji, dane stają się ogromny plik, który powoduje większość programów arkusza kalkulacyjnego do implozji. Tylko zainteresowanych manipulacji danych w nim całości, trzeba iść tą drogą. Dla większości, lepszą alternatywą jest do selektywnego pobierania ciekawostki z wykorzystaniem zintegrowanego narzędzia do pobierania <a href=\"/\">mapie</a>.",
+      "beware_html": "Uwaga! Po rozpakowaniu baza danych jest ogromnym plikiem, który przytłoczy większość arkuszy kalkulacyjnych. Jeśli potrzebujesz tylko danych dla małego regionu, najpierw spróbuj pobrać je za pomocą narzędzia do pobierania zintegrowanego z <a href=\"/\">mapą</a>.",
       "caveat_emptor_html": "Nie bierzemy odpowiedzialności za dokładność danych, nie edytujemy ich, są takie, jakie zostały wstawione, <i>caveat emptor</i>. Jeśli zrobisz z nimi coś fajnego, <a href=\"mailto:feedback@fallingfruit.org\">daj nam znać</a> !",
       "intro": "Falling Fruit jest zbudowany na danych publicznych i hojności naszych użytkowników. Chcemy, aby miejskie zbieractwo dotarło do jak największej liczby osób i wierzymy, że każdy powinien mieć równy dostęp do owoców naszej wspólnej pracy. W duchu otwartości, oto cała baza danych",
-      "license_html": "Jeśli jesteś zainteresowany wykorzystaniem danych w swoim własnym projektem, szczególnie dla zastosowań komercyjnych, sugerujemy nas (kontakt <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Gdy nie podano inaczej, dane są dostępne na licencji <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">Creative Commons (uznanie autorstwa, niekomercyjnych, Share-Alike)</a> licencji. Oznacza to, że można w nich używać i rozpowszechniać dane tak długo, jak zachować oryginalny autor / źródło wpisu i go nie używać (bez zezwolenia) do zastosowań komercyjnych. Kod źródłowy Falling Fruit jest również otwarty. Więcej informacji na ten temat można znaleźć w <a href=\"https://github.com/falling-fruit/falling-fruit\">naszym repozytorium github</a>."
+      "license_html": "Jeśli jesteś zainteresowany wykorzystaniem danych w swoim projekcie, szczególnie komercyjnym, sugerujemy kontakt z nami (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). O ile nie określono inaczej, dane są licencjonowane jako <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons – Uznanie autorstwa, Użycie niekomercyjne, Na tych samych warunkach). Oznacza to, że możesz swobodnie wykorzystywać i rozpowszechniać dane, o ile zachowasz oryginalne informacje o autorze/źródle i nie wykorzystasz ich (bez pozwolenia) do zastosowań komercyjnych. Kod źródłowy Falling Fruit jest również otwarty i dostępny na <a href=\"https://github.com/falling-fruit/\">GitHubie</a>."
     },
     "datasets": {
       "community_map": "Mapa społeczności",
@@ -311,7 +311,7 @@
         "social": "Media społecznościowe",
         "state": "Stan"
       },
-      "intro_html": "Poniżej wymienione są lokalne organizacje, które rosną żywności (żywność i sady lasy publiczne), odebrać jedzenie (miejskiego żerowania i gleaning rolniczy), lub w inny sposób rozpowszechniać żywności (swapy i darowizn). Organizacje wymienione są kraje, państwa i miasta. Te z nazwami wyblakłych out są uważane za nieaktywne. Jeśli znasz inne, które powinny być na tej liście, <a href=\"mailto:info@fallingfruit.org\">skontaktuj się z nami</a> !"
+      "intro_html": "Poniżej wymienione są organizacje, które uprawiają żywność w przestrzeniach publicznych (lasy żywnościowe, publiczne sady), zbierają żywność (zbieractwo miejskie, zbieranie plonów z gospodarstw) lub dystrybuują żywność (wymiany, darowizny). Organizacje są wymienione według kraju, stanu (jeśli dotyczy) i miasta. Te z przekreślonymi nazwami są prawdopodobnie nieaktywne. Jeśli znasz inne, które powinny znaleźć się na tej liście, <a href=\"mailto:info@fallingfruit.org\">skontaktuj się z nami</a>!"
     }
   },
   "problems": {
