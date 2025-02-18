@@ -62,7 +62,9 @@
       "cancel": "לבטל",
       "delete": "מחק",
       "edit": "ערוך",
+      "report": "דיווח תקלה",
       "reset": "אפס",
+      "review": "ביקורת",
       "submit": "שלח",
       "submitting": "שולח"
     },
@@ -82,9 +84,7 @@
     "name": "שם",
     "password": "סיסמה",
     "quality": "איכות",
-    "report": "דיווח תקלה",
     "review": {
-      "one": "ביקורת",
       "other": "ביקורות"
     },
     "sign_up": "הרשמה",

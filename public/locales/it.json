@@ -62,7 +62,9 @@
       "cancel": "Annulla",
       "delete": "Elimina",
       "edit": "Modifica",
+      "report": "Relazione",
       "reset": "Reimposta",
+      "review": "Recensione",
       "submit": "Invia",
       "submitting": "Invio in corso"
     },
@@ -82,9 +84,7 @@
     "name": "Nome",
     "password": "Password",
     "quality": "Qualità",
-    "report": "Relazione",
     "review": {
-      "one": "Recensione",
       "other": "Recensioni"
     },
     "sign_up": "Iscriviti",

@@ -25,7 +25,7 @@ export const ReviewButton = (props) => {
       }}
       {...props}
     >
-      {t('glossary.review.one')}
+      {t('form.button.review')}
     </Button>
   )
 }

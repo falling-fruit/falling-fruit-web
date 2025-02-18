@@ -27,7 +27,7 @@
       "location_edit_failed": "Edycja lokalizacji nie powiodła się: {{message}}",
       "location_submission_failed": "Przesyłanie lokalizacji nie powiodło się: {{message}}",
       "photo_upload_failed": "Przesyłanie zdjęcia nie powiodło się: {{message}}",
-      "report_submission_failed": "Przesyłanie raportu nie powiodło się: {{message}}",
+      "report_submission_failed": "Przesyłanie zgłoszenia nie powiodło się: {{message}}",
       "review_deletion_failed": "Usuwanie recenzji nie powiodło się: {{message}}",
       "review_edit_failed": "Edycja recenzji nie powiodła się: {{message}}",
       "review_submission_failed": "Przesyłanie recenzji nie powiodło się: {{message}}",
@@ -62,7 +62,9 @@
       "cancel": "Anuluj",
       "delete": "Usuń",
       "edit": "Edytuj",
+      "report": "Zgłoś",
       "reset": "Reset",
+      "review": "Recenzuj",
       "submit": "Wyślij",
       "submitting": "Wysyłanie"
     },
@@ -82,9 +84,7 @@
     "name": "Login",
     "password": "Hasło",
     "quality": "Jakość",
-    "report": "Raport",
     "review": {
-      "one": "Recenzja",
       "other": "Recenzje"
     },
     "sign_up": "Zarejestruj się",

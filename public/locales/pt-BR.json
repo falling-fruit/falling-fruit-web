@@ -62,7 +62,9 @@
       "cancel": "Cancelar",
       "delete": "Excluir",
       "edit": "Editar",
+      "report": "Relatar",
       "reset": "Redefinir",
+      "review": "Avaliar",
       "submit": "Enviar",
       "submitting": "Enviando"
     },
@@ -82,9 +84,7 @@
     "name": "Nome",
     "password": "Senha",
     "quality": "Qualidade",
-    "report": "Relatório",
     "review": {
-      "one": "Avaliação",
       "other": "Avaliações"
     },
     "sign_up": "Inscreva-se",
