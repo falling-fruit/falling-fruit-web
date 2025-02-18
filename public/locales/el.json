@@ -21,55 +21,55 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "Αποτυχία λήψης αλλαγών τοποθεσίας: {{message}}",
+      "fetch_location_failed": "Σφάλμα λήψης τοποθεσίας {{id}}: {{message}}",
+      "fetch_review_failed": "Σφάλμα λήψης αξιολόγησης {{id}}: {{message}}",
+      "location_edit_failed": "Αποτυχία επεξεργασίας τοποθεσίας: {{message}}",
+      "location_submission_failed": "Αποτυχία υποβολής τοποθεσίας: {{message}}",
+      "photo_upload_failed": "Αποτυχία μεταφόρτωσης φωτογραφίας: {{message}}",
+      "report_submission_failed": "Αποτυχία υποβολής αναφοράς: {{message}}",
+      "review_deletion_failed": "Αποτυχία διαγραφής αξιολόγησης: {{message}}",
+      "review_edit_failed": "Αποτυχία επεξεργασίας αξιολόγησης: {{message}}",
+      "review_submission_failed": "Αποτυχία υποβολής αξιολόγησης: {{message}}",
+      "street_view_unavailable": "Το Street View δεν είναι διαθέσιμο για την τοποθεσία {{id}}",
+      "type_add_failed": "Αποτυχία προσθήκης νέου τύπου: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Ο έλεγχος ταυτοποίησης απέτυχε: {{message}}",
+      "confirmation_failed": "Η επιβεβαίωση λογαριασμού απέτυχε: {{message}}",
+      "password_set_failed": "Η ρύθμιση νέου κωδικού απέτυχε: {{message}}",
+      "profile_update_failed": "Η ενημέρωση προφίλ απέτυχε: {{message}}",
+      "resend_confirmation_failed": "Η επαναποστολή επιβεβαίωσης απέτυχε: {{message}}",
+      "reset_password_failed": "Η επαναφορά κωδικού απέτυχε: {{message}}",
+      "signin_failed": "Η σύνδεση απέτυχε: {{message}}",
+      "signup_failed": "Η εγγραφή απέτυχε: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Η θέση δεν είναι διαθέσιμη: {{message}}",
+      "code_3": "Λήξη χρόνου εντοπισμού θέσης: {{message}}",
+      "denied": "Η άδεια χρήσης της τοποθεσίας σας απορρίφθηκε. Για να ενεργοποιήσετε τον εντοπισμό τοποθεσίας, επιτρέψτε την κοινή χρήση τοποθεσίας στις ρυθμίσεις του προγράμματος περιήγησής σας και ανανεώστε τη σελίδα.",
+      "not_supported": "Ο εντοπισμός τοποθεσίας δεν υποστηρίζεται"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Άγνωστο σφάλμα"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all",
-    "type": "Type"
+    "deselect_all": "Αποεπιλογή όλων",
+    "only_on_map": "Στον χάρτη",
+    "select_all": "Επιλογή όλων",
+    "type": "Τύπος"
   },
   "form": {
     "button": {
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "reset": "Reset",
-      "submit": "Submit",
-      "submitting": "Submitting"
+      "cancel": "Ακύρωση",
+      "delete": "Διαγραφή",
+      "edit": "Επεξεργασία",
+      "reset": "Επαναφορά",
+      "submit": "Υποβολή",
+      "submitting": "Υποβολή"
     },
-    "optional": "Optional",
-    "required": "Required",
-    "search": "Search"
+    "optional": "Προαιρετικό",
+    "required": "Απαιτείται",
+    "search": "Αναζήτηση"
   },
   "glossary": {
     "about": "Σχετικά",
@@ -101,16 +101,16 @@
       "menu": {
         "in_the_press": "Στον τύπο",
         "sharing_the_harvest": "Μοιράζοντας τη συγκομιδή",
-        "the_data": "The data",
-        "the_project": "To project"
+        "the_data": "Τα δεδομένα",
+        "the_project": "Το έργο"
       }
     },
-    "back": "Back",
-    "loading": "Loading..."
+    "back": "Πίσω",
+    "loading": "Φόρτωση..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "Δεν βρέθηκαν αποτελέσματα",
+    "zoom_in": "Μεγεθύνετε τον χάρτη για να δείτε δεδομένα τοποθεσίας"
   },
   "locations": {
     "edit_position": {
@@ -166,25 +166,25 @@
     }
   },
   "menu": {
-    "add_new_location": "Add location",
-    "add_review": "Add review",
-    "edit_location": "Edit location",
-    "edit_review": "Edit review",
-    "list": "List",
-    "settings": "Settings",
-    "zoom_in_to_add_location": "Zoom in to add location"
+    "add_new_location": "Προσθήκη τοποθεσίας",
+    "add_review": "Προσθήκη αξιολόγησης",
+    "edit_location": "Επεξεργασία τοποθεσίας",
+    "edit_review": "Επεξεργασία αξιολόγησης",
+    "list": "Λίστα",
+    "settings": "Ρυθμίσεις",
+    "zoom_in_to_add_location": "Μεγέθυνση για προσθήκη τοποθεσίας"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Προσθήκη τύπου:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "Προσθήκη ονόματος",
+      "language": "Γλώσσα",
+      "notes": "Σημειώσεις",
+      "notes_placeholder": "Περιγραφή, σύνδεσμος Wikipedia, ταξινομικές πληροφορίες ...",
+      "pending_notice": "Σημείωση: Όλοι οι νέοι τύποι ορίζονται ως εκκρεμείς από προεπιλογή. Μόνο οι διαχειριστές μπορούν να προσθέσουν μη εκκρεμείς τύπους.",
+      "remove": "Αφαίρεση"
     },
-    "title": "Add New Type"
+    "title": "Προσθήκη νέου τύπου"
   },
   "pages": {
     "about": {
@@ -221,11 +221,11 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "recent_changes": "Recent changes",
+      "recent_changes": "Πρόσφατες αλλαγές",
       "type": {
-        "added": "added",
-        "edited": "edited",
-        "visited": "visited"
+        "added": "προστέθηκε",
+        "edited": "επεξεργάστηκε",
+        "visited": "επισκέφθηκε"
       }
     },
     "data": {
@@ -247,16 +247,16 @@
       "types_of_data": "Τα δεδομένα που εισάγονται στο Falling Fruit εμπίπτουν σε δύο κύριες κατηγορίες. «Χάρτες κοινοτήτων» που είναι φτιαγμένοι από συλλέκτες τροφής. Είμαστε υπόχρεοι στους εργατικούς χαρτογράφους πόλεων που έχουν συλλέξει και ταξινομίσει αυτά τα δεδομένα. \"Κατάλογοι δέντρων\" που καταρτίζονται από τις πόλεις, τα πανεπιστήμια και άλλα ιδρύματα που επιθυμούν την καλύτερη καταλογογράφηση και φροντίδα για τα δέντρα τους. Εμείς ορυχείο αυτά τα τεράστια σύνολα δεδομένων για εδώδιμα είδη και τα προσθέτουμε στο χάρτη. Για να μας βοηθήσετε χαρτογραφήστε τα οπωροφόρα δέντρα της γειτονιάς σας, επικοινωνήστε με το σχολείο ή και τον Δήμο σας ζητώντας τους να μοιραστούν τους καταλόγους δέντρων τους μαζί μας."
     },
     "settings": {
-      "data": "Data",
-      "labels": "Labels",
-      "language": "Language",
-      "points_of_interest": "Points of interest",
-      "regional": "Regional",
-      "roadmap": "Map",
-      "satellite": "Satellite",
-      "side_menu": "Bicycle",
-      "terrain": "Terrain",
-      "transit": "Transit",
+      "data": "Δεδομένα",
+      "labels": "Ετικέτες",
+      "language": "Γλώσσα",
+      "points_of_interest": "Σημεία ενδιαφέροντος",
+      "regional": "Τοπικά",
+      "roadmap": "Χάρτης",
+      "satellite": "Δορυφόρος",
+      "side_menu": "Πλαϊνό μενού",
+      "terrain": "Έδαφος",
+      "transit": "Συγκοινωνίες",
       "units": {
         "distance": {
           "foot": {
@@ -329,15 +329,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Γράψτε αξιολόγηση",
+      "observed_on": "Παρατηρήθηκε στις",
+      "upload_images": "Ανέβασμα εικόνων"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "από",
+    "reviewed_on": "Αξιολογήθηκε στις {{date}}",
+    "update_delete": "Ενημέρωση ή διαγραφή αυτής της αξιολόγησης.",
+    "visited_on": "επισκέφθηκε στις {{date}}",
+    "you_reviewed": "Αξιολογήσατε αυτή την τοποθεσία στις {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +348,7 @@
     "time_ago": "{{time}} πριν"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "Εκκρεμεί έλεγχος"
   },
   "users": {
     "bio": "Σχετικά με εσάς",

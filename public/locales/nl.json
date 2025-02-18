@@ -90,7 +90,8 @@
     },
     "sign_up": "Registreren",
     "tree_inventory": {
-      "one": "Boominventarisatie"
+      "one": "Boominventarisatie",
+      "other": "Boominventarisaties"
     },
     "types": "Soorten",
     "unverified": "Niet-bevestigd",
@@ -101,16 +102,16 @@
       "menu": {
         "in_the_press": "In de pers",
         "sharing_the_harvest": "Opbrengst delen",
-        "the_data": "The data",
+        "the_data": "De gegevens",
         "the_project": "Het project"
       }
     },
-    "back": "Back",
-    "loading": "Loading..."
+    "back": "Terug",
+    "loading": "Laden..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "Geen resultaten gevonden",
+    "zoom_in": "Zoom in op de kaart om locatiegegevens te zien"
   },
   "locations": {
     "edit_position": {
@@ -166,25 +167,25 @@
     }
   },
   "menu": {
-    "add_new_location": "Add location",
-    "add_review": "Add review",
-    "edit_location": "Edit location",
-    "edit_review": "Edit review",
-    "list": "List",
-    "settings": "Settings",
-    "zoom_in_to_add_location": "Zoom in to add location"
+    "add_new_location": "Locatie toevoegen",
+    "add_review": "Recensie toevoegen",
+    "edit_location": "Locatie bewerken",
+    "edit_review": "Recensie bewerken",
+    "list": "Lijst",
+    "settings": "Instellingen",
+    "zoom_in_to_add_location": "Zoom in om locatie toe te voegen"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Type toevoegen:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "Naam toevoegen",
+      "language": "Taal",
+      "notes": "Notities",
+      "notes_placeholder": "Beschrijving, Wikipedia-link, taxonomische informatie ...",
+      "pending_notice": "Let op: Alle nieuwe soorten worden standaard op 'in afwachting' gezet. Alleen beheerders kunnen niet-afwachtende soorten toevoegen.",
+      "remove": "Verwijderen"
     },
-    "title": "Add New Type"
+    "title": "Nieuwe soort toevoegen"
   },
   "pages": {
     "about": {
@@ -254,7 +255,7 @@
       "regional": "Regionaal",
       "roadmap": "Kaart",
       "satellite": "Satelliet",
-      "side_menu": "Fiets",
+      "side_menu": "Zijmenu",
       "terrain": "Terrein",
       "transit": "Transit",
       "units": {
@@ -329,15 +330,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Schrijf een recensie",
+      "observed_on": "Waargenomen op",
+      "upload_images": "Afbeeldingen uploaden"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "door",
+    "reviewed_on": "Beoordeeld op {{date}}",
+    "update_delete": "Deze recensie bijwerken of verwijderen.",
+    "visited_on": "bezocht op {{date}}",
+    "you_reviewed": "U heeft deze locatie beoordeeld op {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +349,7 @@
     "time_ago": "{{time}} geleden"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "In afwachting van beoordeling"
   },
   "users": {
     "bio": "Over u",

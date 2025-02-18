@@ -21,55 +21,55 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "נכשלה משיכת שינויי מיקום: {{message}}",
+      "fetch_location_failed": "שגיאה במשיכת מיקום {{id}}: {{message}}",
+      "fetch_review_failed": "שגיאה במשיכת ביקורת {{id}}: {{message}}",
+      "location_edit_failed": "עריכת מיקום נכשלה: {{message}}",
+      "location_submission_failed": "שליחת מיקום נכשלה: {{message}}",
+      "photo_upload_failed": "העלאת תמונה נכשלה: {{message}}",
+      "report_submission_failed": "שליחת דיווח נכשלה: {{message}}",
+      "review_deletion_failed": "מחיקת ביקורת נכשלה: {{message}}",
+      "review_edit_failed": "עריכת ביקורת נכשלה: {{message}}",
+      "review_submission_failed": "שליחת ביקורת נכשלה: {{message}}",
+      "street_view_unavailable": "תצוגת רחוב אינה זמינה למיקום {{id}}",
+      "type_add_failed": "הוספת סוג חדש נכשלה: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "בדיקת אימות נכשלה: {{message}}",
+      "confirmation_failed": "אישור החשבון נכשל: {{message}}",
+      "password_set_failed": "הגדרת סיסמה חדשה נכשלה: {{message}}",
+      "profile_update_failed": "עדכון הפרופיל נכשל: {{message}}",
+      "resend_confirmation_failed": "שליחה חוזרת של אישור נכשלה: {{message}}",
+      "reset_password_failed": "איפוס הסיסמה נכשל: {{message}}",
+      "signin_failed": "ההתחברות נכשלה: {{message}}",
+      "signup_failed": "ההרשמה נכשלה: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "מיקום לא זמין: {{message}}",
+      "code_3": "תם הזמן הקצוב לאיתור מיקום: {{message}}",
+      "denied": "ההרשאה להשתמש במיקום שלך נדחתה. כדי לאפשר איתור מיקום, אנא אפשר שיתוף מיקום בהגדרות הדפדפן ורענן את הדף.",
+      "not_supported": "איתור מיקום אינו נתמך"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "שגיאה לא ידועה"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all",
+    "deselect_all": "בטל בחירת הכל",
+    "only_on_map": "על המפה",
+    "select_all": "בחר הכל",
     "type": "Type"
   },
   "form": {
     "button": {
       "cancel": "לבטל",
-      "delete": "Delete",
-      "edit": "Edit",
-      "reset": "Reset",
-      "submit": "Submit",
-      "submitting": "Submitting"
+      "delete": "מחק",
+      "edit": "ערוך",
+      "reset": "אפס",
+      "submit": "שלח",
+      "submitting": "שולח"
     },
-    "optional": "Optional",
-    "required": "Required",
-    "search": "Search"
+    "optional": "אופציונלי",
+    "required": "חובה",
+    "search": "חיפוש"
   },
   "glossary": {
     "about": "אודות",
@@ -101,16 +101,16 @@
       "menu": {
         "in_the_press": "בעיתונות",
         "sharing_the_harvest": "שיתוף הקציר",
-        "the_data": "The data",
+        "the_data": "הנתונים",
         "the_project": "המיזם"
       }
     },
     "back": "Back",
-    "loading": "Loading..."
+    "loading": "טוען..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "לא נמצאו תוצאות",
+    "zoom_in": "הגדל את המפה כדי לראות נתוני מיקום"
   },
   "locations": {
     "edit_position": {
@@ -175,16 +175,16 @@
     "zoom_in_to_add_location": "הגדל תצוגה כדי להוסיף מיקום"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "הוסף סוג:",
     "form": {
-      "add_name": "Add Name",
+      "add_name": "הוסף שם",
       "language": "Language",
       "notes": "Notes",
       "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
       "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
       "remove": "Remove"
     },
-    "title": "Add New Type"
+    "title": "הוסף סוג חדש"
   },
   "pages": {
     "about": {
@@ -220,12 +220,12 @@
       "write": "כתיבה"
     },
     "changes": {
-      "change_in_city": "{{type}} in {{city}}",
-      "recent_changes": "Recent changes",
+      "change_in_city": "{{type}} ב{{city}}",
+      "recent_changes": "שינויים אחרונים",
       "type": {
-        "added": "added",
-        "edited": "edited",
-        "visited": "visited"
+        "added": "נוסף",
+        "edited": "נערך",
+        "visited": "בוקר"
       }
     },
     "data": {
@@ -329,15 +329,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "כתוב ביקורת",
+      "observed_on": "נצפה בתאריך",
+      "upload_images": "העלה תמונות"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "מאת",
+    "reviewed_on": "נכתב בתאריך {{date}}",
+    "update_delete": "עדכן או מחק ביקורת זו.",
+    "visited_on": "ביקר בתאריך {{date}}",
+    "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +348,7 @@
     "time_ago": "לפני {{time}}"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "ממתין לבדיקה"
   },
   "users": {
     "bio": "אודותיך",

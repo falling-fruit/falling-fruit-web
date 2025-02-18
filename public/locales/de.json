@@ -109,8 +109,8 @@
     "loading": "Wird geladen..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "Keine Ergebnisse gefunden",
+    "zoom_in": "Zoomen Sie in die Karte, um Standortdaten zu sehen"
   },
   "locations": {
     "edit_position": {
@@ -166,25 +166,25 @@
     }
   },
   "menu": {
-    "add_new_location": "Add location",
-    "add_review": "Add review",
-    "edit_location": "Edit location",
-    "edit_review": "Edit review",
-    "list": "List",
-    "settings": "Settings",
-    "zoom_in_to_add_location": "Zoom in to add location"
+    "add_new_location": "Standort hinzufügen",
+    "add_review": "Bewertung hinzufügen",
+    "edit_location": "Standort bearbeiten",
+    "edit_review": "Bewertung bearbeiten",
+    "list": "Liste",
+    "settings": "Einstellungen",
+    "zoom_in_to_add_location": "Zoomen Sie hinein, um einen Standort hinzuzufügen"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Typ hinzufügen:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "Name hinzufügen",
+      "language": "Sprache",
+      "notes": "Notizen",
+      "notes_placeholder": "Beschreibung, Wikipedia-Link, taxonomische Informationen ...",
+      "pending_notice": "Hinweis: Alle neuen Typen werden standardmäßig als ausstehend markiert. Nur Administratoren können nicht-ausstehende Typen hinzufügen.",
+      "remove": "Entfernen"
     },
-    "title": "Add New Type"
+    "title": "Neuen Typ hinzufügen"
   },
   "pages": {
     "about": {
@@ -216,7 +216,7 @@
       "translate": "Übersetzen",
       "translate_for_us_html": "Günstiger als Übersetzer in freiwilliges Engagement? Mailen Sie uns und wir laden Sie zu uns auf <a href=\"https://phrase.com\">Phrase</a>, wo unsere Übersetzungen verwaltet werden.",
       "translators": "Übersetzern",
-      "tristram_stuart_bio_html": "Autor von <a href=\"//tristramstuart.co.uk\">Waste: Uncovering the Global Food Scandal</a> &middot; Gründer der internationalen food-waste Kampagne <a href=\"//feedbackglobal.org\">Feedback Global</a> &middot; National Geographic <a href=\"//www.nationalgeographic.com/explorers/bios/tristram-stuart/\">Emerging Explorer</a>",
+      "tristram_stuart_bio_html": "Autor von <a href=\"//tristramstuart.co.uk\">Waste: Uncovering the Global Food Scandal</a> &middot; Gründer der internationalen Lebensmittelverschwendungs-Kampagne <a href=\"//feedbackglobal.org\">Feedback Global</a> &middot; National Geographic <a href=\"//www.nationalgeographic.com/explorers/bios/tristram-stuart/\">Emerging Explorer</a>",
       "write": "Schreiben"
     },
     "changes": {
@@ -254,7 +254,7 @@
       "regional": "Regional",
       "roadmap": "Karte",
       "satellite": "Satellit",
-      "side_menu": "Fahrrad",
+      "side_menu": "Seitenmenü",
       "terrain": "Gelände",
       "transit": "Transit",
       "units": {
@@ -308,7 +308,7 @@
       "heading": {
         "city": "Stadt",
         "country": "Land",
-        "social": "Sozial",
+        "social": "Soziales",
         "state": "Bundesland"
       },
       "intro_html": "Im Folgenden sind lokale Organisationen aufgeführt, die Lebensmittel anpflanzen (z.B. in Gemeinschaftsgärten), ernten (z.B. 'urban gardening'), oder auf andere Art und Weise verteilen und teilen. Organisationen werden nach Land, Bundesland/Kanton und Stadt aufgeführt. Organisationen mit durchgestrichenem Namen sind zur Zeit vermutlich inaktiv. Wenn du Organisationen kennst, die auf dieser Liste auftauchen müssten, dann <a href=\"mailto:info@fallingfruit.org\">sag uns Bescheid</a>!"
@@ -329,15 +329,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Bewertung abgeben",
+      "observed_on": "Beobachtet am",
+      "upload_images": "Bilder hochladen"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "von",
+    "reviewed_on": "Bewertet am {{date}}",
+    "update_delete": "Diese Bewertung aktualisieren oder löschen.",
+    "visited_on": "besucht am {{date}}",
+    "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
   },
   "time": {
     "days": {
@@ -348,7 +348,7 @@
     "time_ago": "Vor {{time}}"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "Überprüfung ausstehend"
   },
   "users": {
     "bio": "Über dich",

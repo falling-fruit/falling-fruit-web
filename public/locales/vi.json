@@ -21,55 +21,55 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
+      "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
+      "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
+      "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
+      "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
+      "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
+      "report_submission_failed": "Gửi báo cáo thất bại: {{message}}",
+      "review_deletion_failed": "Xóa đánh giá thất bại: {{message}}",
+      "review_edit_failed": "Chỉnh sửa đánh giá thất bại: {{message}}",
+      "review_submission_failed": "Gửi đánh giá thất bại: {{message}}",
+      "street_view_unavailable": "Street View không khả dụng cho vị trí {{id}}",
+      "type_add_failed": "Thêm loại mới thất bại: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Xác thực thất bại: {{message}}",
+      "confirmation_failed": "Xác nhận tài khoản thất bại: {{message}}",
+      "password_set_failed": "Đặt mật khẩu mới thất bại: {{message}}",
+      "profile_update_failed": "Cập nhật hồ sơ thất bại: {{message}}",
+      "resend_confirmation_failed": "Gửi lại xác nhận thất bại: {{message}}",
+      "reset_password_failed": "Đặt lại mật khẩu thất bại: {{message}}",
+      "signin_failed": "Đăng nhập thất bại: {{message}}",
+      "signup_failed": "Đăng ký thất bại: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Không thể xác định vị trí: {{message}}",
+      "code_3": "Hết thời gian xác định vị trí: {{message}}",
+      "denied": "Quyền sử dụng vị trí của bạn đã bị từ chối. Để bật định vị, vui lòng cho phép chia sẻ vị trí trong cài đặt trình duyệt và làm mới trang.",
+      "not_supported": "Không hỗ trợ định vị"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Lỗi không xác định"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all",
-    "type": "Type"
+    "deselect_all": "Bỏ chọn tất cả",
+    "only_on_map": "Trên bản đồ",
+    "select_all": "Chọn tất cả",
+    "type": "Loại"
   },
   "form": {
     "button": {
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "reset": "Reset",
-      "submit": "Submit",
-      "submitting": "Submitting"
+      "cancel": "Hủy",
+      "delete": "Xóa",
+      "edit": "Chỉnh sửa",
+      "reset": "Đặt lại",
+      "submit": "Gửi",
+      "submitting": "Đang gửi"
     },
-    "optional": "Optional",
-    "required": "Required",
-    "search": "Search"
+    "optional": "Tùy chọn",
+    "required": "Bắt buộc",
+    "search": "Tìm kiếm"
   },
   "glossary": {
     "about": "Về",
@@ -90,7 +90,8 @@
     },
     "sign_up": "Đăng ký",
     "tree_inventory": {
-      "one": "Kiểm kê cây"
+      "one": "Kiểm kê cây",
+      "other": "Kiểm kê cây"
     },
     "types": "Các loại",
     "unverified": "Chưa được xác minh",
@@ -109,8 +110,8 @@
     "loading": "Đang tải..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "Không tìm thấy kết quả",
+    "zoom_in": "Phóng to bản đồ để xem dữ liệu vị trí"
   },
   "locations": {
     "edit_position": {
@@ -166,25 +167,25 @@
     }
   },
   "menu": {
-    "add_new_location": "Add location",
-    "add_review": "Add review",
-    "edit_location": "Edit location",
-    "edit_review": "Edit review",
-    "list": "List",
-    "settings": "Settings",
-    "zoom_in_to_add_location": "Zoom in to add location"
+    "add_new_location": "Thêm địa điểm",
+    "add_review": "Thêm đánh giá",
+    "edit_location": "Chỉnh sửa địa điểm",
+    "edit_review": "Chỉnh sửa đánh giá",
+    "list": "Danh sách",
+    "settings": "Cài đặt",
+    "zoom_in_to_add_location": "Phóng to để thêm địa điểm"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Thêm loại:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "Thêm tên",
+      "language": "Ngôn ngữ",
+      "notes": "Ghi chú",
+      "notes_placeholder": "Mô tả, liên kết Wikipedia, thông tin phân loại ...",
+      "pending_notice": "Lưu ý: Tất cả các loại mới đều được đặt ở trạng thái chờ xét duyệt theo mặc định. Chỉ quản trị viên mới có thể thêm loại không cần xét duyệt.",
+      "remove": "Xóa"
     },
-    "title": "Add New Type"
+    "title": "Thêm loại mới"
   },
   "pages": {
     "about": {
@@ -220,12 +221,12 @@
       "write": "Viết"
     },
     "changes": {
-      "change_in_city": "{{type}} in {{city}}",
-      "recent_changes": "Recent changes",
+      "change_in_city": "{{type}} tại {{city}}",
+      "recent_changes": "Thay đổi gần đây",
       "type": {
-        "added": "added",
-        "edited": "edited",
-        "visited": "visited"
+        "added": "đã thêm",
+        "edited": "đã chỉnh sửa",
+        "visited": "đã ghé thăm"
       }
     },
     "data": {
@@ -247,21 +248,21 @@
       "types_of_data": "Các bộ dữ liệu được nhập vào Falling Fruit thuộc hai loại chính. \"Bản đồ cộng đồng\" được xây dựng bởi những người kiếm ăn và những người sống tự do khi họ nghiên cứu cộng đồng của mình để tìm đồ ăn. Chúng tôi mang ơn những người vẽ bản đồ công dân chăm chỉ đã biên soạn dữ liệu này. \"Kiểm kê cây\" được biên soạn bởi các thành phố, trường đại học và các tổ chức khác mong muốn ghi chép và chăm sóc cây của họ tốt hơn. Chúng tôi khai thác những bộ dữ liệu khổng lồ này về các loài sản xuất thực phẩm và thêm chúng vào bản đồ. Để giúp chúng tôi lập bản đồ cây ăn quả ở khu vực lân cận của bạn, hãy liên hệ với trường học hoặc thành phố của bạn để thúc giục họ chia sẻ kho cây của họ với chúng tôi."
     },
     "settings": {
-      "data": "Data",
-      "labels": "Labels",
-      "language": "Language",
-      "points_of_interest": "Points of interest",
-      "regional": "Regional",
-      "roadmap": "Map",
-      "satellite": "Satellite",
-      "side_menu": "Bicycle",
-      "terrain": "Terrain",
-      "transit": "Transit",
+      "data": "Dữ liệu",
+      "labels": "Nhãn",
+      "language": "Ngôn ngữ",
+      "points_of_interest": "Điểm đánh dấu",
+      "regional": "Khu vực",
+      "roadmap": "Bản đồ",
+      "satellite": "Vệ tinh",
+      "side_menu": "Menu bên",
+      "terrain": "Địa hình",
+      "transit": "Giao thông",
       "units": {
         "distance": {
           "foot": {
-            "one": "{{count}} foot",
-            "other": "{{count}} feet"
+            "one": "{{count}} bộ",
+            "other": "{{count}} bộ"
           },
           "kilometer": {
             "one": "{{count}} kilometer",
@@ -272,44 +273,44 @@
             "other": "{{count}} meters"
           },
           "mile": {
-            "one": "{{count}} mile",
-            "other": "{{count}} miles"
+            "one": "{{count}} dặm",
+            "other": "{{count}} dặm"
           }
         },
-        "imperial": "Imperial",
-        "metric": "Metric",
-        "units": "Units"
+        "imperial": "Hệ đo lường Anh",
+        "metric": "Hệ mét",
+        "units": "Đơn vị"
       }
     },
     "sharing": {
       "countries": {
-        "australia": "Australia",
-        "belgium": "Belgium",
+        "australia": "Úc",
+        "belgium": "Bỉ",
         "brazil": "Brazil",
         "canada": "Canada",
         "chile": "Chile",
-        "czechia": "Czechia",
+        "czechia": "Cộng hòa Séc",
         "fiji": "Fiji",
-        "finland": "Finland",
-        "france": "France",
-        "germany": "Germany",
-        "greece": "Greece",
+        "finland": "Phần Lan",
+        "france": "Pháp",
+        "germany": "Đức",
+        "greece": "Hy Lạp",
         "ireland": "Ireland",
-        "italy": "Italy",
+        "italy": "Ý",
         "new_zealand": "New Zealand",
-        "portugal": "Portugal",
-        "spain": "Spain",
-        "sweden": "Sweden",
-        "switzerland": "Switzerland",
-        "united_kingdom": "United Kingdom",
-        "united_states": "United States"
+        "portugal": "Bồ Đào Nha",
+        "spain": "Tây Ban Nha",
+        "sweden": "Thụy Điển",
+        "switzerland": "Thụy Sĩ",
+        "united_kingdom": "Vương quốc Anh",
+        "united_states": "Hoa Kỳ"
       },
       "grow_pick_and_distribute": "Trồng · Hái · Phát",
       "heading": {
-        "city": "City",
-        "country": "Country",
-        "social": "Social",
-        "state": "State"
+        "city": "Thành phố",
+        "country": "Quốc gia",
+        "social": "Mạng xã hội",
+        "state": "Tiểu bang"
       },
       "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Những người có tên bị gạch bỏ được cho là không hoạt động. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!"
     }
@@ -329,15 +330,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Viết đánh giá",
+      "observed_on": "Quan sát vào",
+      "upload_images": "Tải ảnh lên"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "bởi",
+    "reviewed_on": "Đã đánh giá vào {{date}}",
+    "update_delete": "Cập nhật hoặc xóa đánh giá này.",
+    "visited_on": "đã ghé thăm vào {{date}}",
+    "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +349,7 @@
     "time_ago": "{{time}} trước"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "Đang chờ xét duyệt"
   },
   "users": {
     "bio": "Thông tin về bạn",

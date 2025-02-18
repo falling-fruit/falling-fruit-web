@@ -21,55 +21,55 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "Falha ao buscar alterações de localização: {{message}}",
+      "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
+      "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
+      "location_edit_failed": "Falha na edição da localização: {{message}}",
+      "location_submission_failed": "Falha no envio da localização: {{message}}",
+      "photo_upload_failed": "Falha no upload da foto: {{message}}",
+      "report_submission_failed": "Falha no envio do relatório: {{message}}",
+      "review_deletion_failed": "Falha na exclusão da avaliação: {{message}}",
+      "review_edit_failed": "Falha na edição da avaliação: {{message}}",
+      "review_submission_failed": "Falha no envio da avaliação: {{message}}",
+      "street_view_unavailable": "Street View não disponível para localização {{id}}",
+      "type_add_failed": "Falha ao adicionar novo tipo: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Falha na verificação de autenticação: {{message}}",
+      "confirmation_failed": "Falha na confirmação da conta: {{message}}",
+      "password_set_failed": "Falha ao definir nova senha: {{message}}",
+      "profile_update_failed": "Falha na atualização do perfil: {{message}}",
+      "resend_confirmation_failed": "Falha no reenvio da confirmação: {{message}}",
+      "reset_password_failed": "Falha na redefinição da senha: {{message}}",
+      "signin_failed": "Falha no login: {{message}}",
+      "signup_failed": "Falha no cadastro: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Posição indisponível: {{message}}",
+      "code_3": "Tempo limite de geolocalização: {{message}}",
+      "denied": "Permissão para usar sua localização foi negada. Para ativar a geolocalização, permita o compartilhamento de localização nas configurações do seu navegador e atualize a página.",
+      "not_supported": "Geolocalização não suportada"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Erro desconhecido"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all",
-    "type": "Type"
+    "deselect_all": "Desmarcar todos",
+    "only_on_map": "No mapa",
+    "select_all": "Selecionar todos",
+    "type": "Tipo"
   },
   "form": {
     "button": {
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "reset": "Reset",
-      "submit": "Submit",
-      "submitting": "Submitting"
+      "cancel": "Cancelar",
+      "delete": "Excluir",
+      "edit": "Editar",
+      "reset": "Redefinir",
+      "submit": "Enviar",
+      "submitting": "Enviando"
     },
-    "optional": "Optional",
-    "required": "Required",
-    "search": "Search"
+    "optional": "Opcional",
+    "required": "Obrigatório",
+    "search": "Buscar"
   },
   "glossary": {
     "about": "Sobre",
@@ -109,8 +109,8 @@
     "loading": "Carregando..."
   },
   "list": {
-    "no_results": "No Results Found",
-    "zoom_in": "Zoom into the map to see location data"
+    "no_results": "Nenhum Resultado Encontrado",
+    "zoom_in": "Amplie o mapa para ver dados de localização"
   },
   "locations": {
     "edit_position": {
@@ -166,25 +166,25 @@
     }
   },
   "menu": {
-    "add_new_location": "Add location",
-    "add_review": "Add review",
-    "edit_location": "Edit location",
-    "edit_review": "Edit review",
-    "list": "List",
-    "settings": "Settings",
-    "zoom_in_to_add_location": "Zoom in to add location"
+    "add_new_location": "Adicionar localização",
+    "add_review": "Adicionar avaliação",
+    "edit_location": "Editar localização",
+    "edit_review": "Editar avaliação",
+    "list": "Lista",
+    "settings": "Configurações",
+    "zoom_in_to_add_location": "Amplie para adicionar localização"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Adicionar Tipo:",
     "form": {
-      "add_name": "Add Name",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "add_name": "Adicionar Nome",
+      "language": "Idioma",
+      "notes": "Notas",
+      "notes_placeholder": "Descrição, link da Wikipédia, informação taxonômica ...",
+      "pending_notice": "Nota: Todos os novos tipos são definidos como pendentes por padrão. Apenas administradores podem adicionar tipos não pendentes.",
+      "remove": "Remover"
     },
-    "title": "Add New Type"
+    "title": "Adicionar Novo Tipo"
   },
   "pages": {
     "about": {
@@ -221,11 +221,11 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "recent_changes": "Recent changes",
+      "recent_changes": "Mudanças recentes",
       "type": {
-        "added": "added",
-        "edited": "edited",
-        "visited": "visited"
+        "added": "adicionado",
+        "edited": "editado",
+        "visited": "visitado"
       }
     },
     "data": {
@@ -247,38 +247,38 @@
       "types_of_data": "Os conjuntos de dados importados no Falling Fruit entram em duas categorias principais. \"Mapas comunitários\" são construídas por coletores e freegans enquanto procuram alimentos em suas comunidades. Estamos em dívida com os cidadãos-cartógrafos que compilaram os dados. \"Inventários de árvores\" são compilados por munícipios, universidades e outras instituições que desejam documentar melhor e cuidar de suas árvores. Nós garimpamos esses vastos conjuntos de dados para espécies produtoras de alimentos e os adicionamos ao mapa. Para nos ajudar a mapear sua comunidade, entre em contato com sua escola ou cidade instando-os a partilhar o seu inventário de árvores com a gente."
     },
     "settings": {
-      "data": "Data",
-      "labels": "Labels",
-      "language": "Language",
-      "points_of_interest": "Points of interest",
+      "data": "Dados",
+      "labels": "Rótulos",
+      "language": "Idioma",
+      "points_of_interest": "Pontos de interesse",
       "regional": "Regional",
-      "roadmap": "Map",
-      "satellite": "Satellite",
-      "side_menu": "Bicycle",
-      "terrain": "Terrain",
-      "transit": "Transit",
+      "roadmap": "Mapa",
+      "satellite": "Satélite",
+      "side_menu": "Menu lateral",
+      "terrain": "Terreno",
+      "transit": "Trânsito",
       "units": {
         "distance": {
           "foot": {
-            "one": "{{count}} foot",
-            "other": "{{count}} feet"
+            "one": "{{count}} pé",
+            "other": "{{count}} pés"
           },
           "kilometer": {
-            "one": "{{count}} kilometer",
-            "other": "{{count}} kilometers"
+            "one": "{{count}} quilômetro",
+            "other": "{{count}} quilômetros"
           },
           "meter": {
-            "one": "{{count}} meter",
-            "other": "{{count}} meters"
+            "one": "{{count}} metro",
+            "other": "{{count}} metros"
           },
           "mile": {
-            "one": "{{count}} mile",
-            "other": "{{count}} miles"
+            "one": "{{count}} milha",
+            "other": "{{count}} milhas"
           }
         },
         "imperial": "Imperial",
         "metric": "Metric",
-        "units": "Units"
+        "units": "Unidades"
       }
     },
     "sharing": {
@@ -329,15 +329,15 @@
   },
   "review": {
     "form": {
-      "leave_a_review": "Leave a review",
-      "observed_on": "Observed on",
-      "upload_images": "Upload images"
+      "leave_a_review": "Deixe uma avaliação",
+      "observed_on": "Observado em",
+      "upload_images": "Enviar imagens"
     },
-    "reviewed_by": "by",
-    "reviewed_on": "Reviewed on {{date}}",
-    "update_delete": "Update or delete this review.",
-    "visited_on": "visited {{date}}",
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "reviewed_by": "por",
+    "reviewed_on": "Avaliado em {{date}}",
+    "update_delete": "Atualizar ou excluir esta avaliação.",
+    "visited_on": "visitado em {{date}}",
+    "you_reviewed": "Você avaliou esta localização em {{date}}"
   },
   "time": {
     "days": {
@@ -348,7 +348,7 @@
     "time_ago": "{{time}} atrás"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review": "Aguardando revisão"
   },
   "users": {
     "bio": "Sobre você",
