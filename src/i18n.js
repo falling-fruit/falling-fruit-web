@@ -5,22 +5,12 @@ import { initReactI18next, useTranslation } from 'react-i18next'
 
 import { Select } from './components/ui/Select'
 
+const setDocumentDir = (language) => {
+  document.dir = ['ar', 'he'].includes(language) ? 'rtl' : 'ltr'
+}
+
 export const LANGUAGE_CACHE_KEY = 'language'
-/*
- *
- *       <option value="ar" <%= (I18n.locale == :ar) ? "selected" : "" %>>ﺎﻠﻋﺮﺒﻳﺓ</option>
-      <option value="de" <%= (I18n.locale == :de) ? "selected" : "" %>>Deutsch</option>
-      <option value="en" <%= (I18n.locale == :en) ? "selected" : "" %>>English</option>
-      <option value="el" <%= (I18n.locale == :el) ? "selected" : "" %>>Ελληνικά</option>
-      <option value="es" <%= (I18n.locale == :es) ? "selected" : "" %>>Español</option>
-      <option value="fr" <%= (I18n.locale == :fr) ? "selected" : "" %>>Français</option>
-      <option value="he" <%= (I18n.locale == :he) ? "selected" : "" %>>עברית</option>
-      <option value="it" <%= (I18n.locale == :it) ? "selected" : "" %>>Italiano</option>
-      <option value="nl" <%= (I18n.locale == :nl) ? "selected" : "" %>>Nederlands</option>
-      <option value="pl" <%= (I18n.locale == :pl) ? "selected" : "" %>>Polski</option>
-      <option value="pt-br" <%= (I18n.locale == :"pt-BR") ? "selected" : "" %>>Português</option>
-      <option value="vi" <%= (I18n.locale == :"vi") ? "selected" : "" %>>Tiếng Việt</option>
-*/
+
 export const LANGUAGE_OPTIONS = [
   { value: 'ar', label: 'ﺎﻠﻋﺮﺒﻳﺓ' },
   { value: 'de', label: 'Deutsch' },
@@ -38,7 +28,6 @@ export const LANGUAGE_OPTIONS = [
 
 const LanguageSelect = () => {
   const { i18n } = useTranslation()
-  // Style the select component with width: 10em
   return (
     <Select
       options={LANGUAGE_OPTIONS}
@@ -46,6 +35,7 @@ const LanguageSelect = () => {
       onChange={(option) => {
         i18n.changeLanguage(option.value, () => {
           localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
+          setDocumentDir(option.value)
         })
       }}
       isSearchable={false}
@@ -58,24 +48,27 @@ i18n
   .use(initReactI18next)
   .use(Backend)
   .use(LanguageDetector)
-  .init({
-    detection: {
-      order: ['localStorage', 'navigator'],
-      lookupLocalStorage: LANGUAGE_CACHE_KEY,
-      caches: false,
+  .init(
+    {
+      detection: {
+        order: ['localStorage', 'navigator'],
+        lookupLocalStorage: LANGUAGE_CACHE_KEY,
+        caches: false,
+      },
+      react: {
+        useSuspense: true,
+      },
+      supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
+      fallbackLng: 'en',
+      interpolation: {
+        escapeValue: false,
+      },
+      backend: {
+        loadPath: '/locales/{{lng}}.json',
+      },
     },
-    react: {
-      useSuspense: true,
-    },
-    supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
-    fallbackLng: 'en', // default language if no language is detected by LanguageDetector
-    interpolation: {
-      escapeValue: false,
-    },
-    backend: {
-      loadPath: '/locales/{{lng}}.json',
-    },
-  })
+    () => setDocumentDir(i18n.language),
+  )
 
 export { LanguageSelect }
 export default i18n
