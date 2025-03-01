@@ -58,8 +58,8 @@ const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
         <div style={{ flex: 1 }}>
           <Input
             name={`name_pairs.${index}.name`}
-            label={t('glossary.name_of_entity')}
-            placeholder={t('glossary.name_of_entity').toLowerCase()}
+            label={t('glossary.name')}
+            placeholder={t('glossary.name').toLowerCase()}
             required={index === 0}
           />
           <ErrorMessage name={`name_pairs.${index}.name`} />

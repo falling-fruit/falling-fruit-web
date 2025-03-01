@@ -41,7 +41,7 @@ const ImportsTable = () => {
     },
     {
       id: 'name',
-      name: t('glossary.name_of_entity'),
+      name: t('glossary.name'),
       selector: (row) => row.name,
       sortable: true,
       wrap: true,
