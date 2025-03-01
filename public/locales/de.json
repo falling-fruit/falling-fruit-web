@@ -27,50 +27,55 @@
       "location_edit_failed": "Location editing failed: {{message}}",
       "location_submission_failed": "Location submission failed: {{message}}",
       "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
+      "report_submission_failed": "Meldungsübermittlung fehlgeschlagen: {{message}}",
       "review_deletion_failed": "Review deletion failed: {{message}}",
       "review_edit_failed": "Review editing failed: {{message}}",
       "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "street_view_unavailable": "Street View nicht verfügbar für Standort {{id}}",
+      "type_add_failed": "Hinzufügen eines neuen Typs fehlgeschlagen: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Authentifizierungsprüfung fehlgeschlagen: {{message}}",
+      "confirmation_failed": "Kontobestätigung fehlgeschlagen: {{message}}",
+      "password_set_failed": "Festlegen des neuen Passworts fehlgeschlagen: {{message}}",
+      "profile_update_failed": "Profilaktualisierung fehlgeschlagen: {{message}}",
+      "resend_confirmation_failed": "Erneutes Senden der Bestätigung fehlgeschlagen: {{message}}",
+      "reset_password_failed": "Zurücksetzen des Passworts fehlgeschlagen: {{message}}",
+      "signin_failed": "Anmeldung fehlgeschlagen: {{message}}",
+      "signup_failed": "Registrierung fehlgeschlagen: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Position nicht verfügbar: {{message}}",
+      "code_3": "Geolokalisierungs-Timeout: {{message}}",
+      "denied": "Die Erlaubnis zur Nutzung Ihres Standorts wurde verweigert. Um die Geolokalisierung zu aktivieren, erlauben Sie bitte die Standortfreigabe in Ihren Browsereinstellungen und aktualisieren Sie die Seite.",
+      "not_supported": "Geolokalisierung wird nicht unterstützt"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Unbekannter Fehler"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all"
+    "deselect_all": "Alle abwählen",
+    "only_on_map": "Auf der Karte",
+    "select_all": "Alle auswählen"
   },
   "form": {
     "button": {
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "edit": "Bearbeiten",
       "report": "Melden",
-      "reset": "Reset",
+      "reset": "Zurücksetzen",
       "review": "Bewerten",
-      "submit": "Submit",
-      "submitting": "Submitting"
+      "submit": "Absenden",
+      "submitting": "Wird gesendet"
+    },
+    "error": {
+      "confirmation": "Stimmt nicht mit Original überein",
+      "missing_password": "Erforderlich, um E-Mail oder Passwort zu ändern",
+      "too_short": "Mindestens {{min}} Zeichen"
     },
     "optional": "Optional",
-    "required": "Required",
-    "search": "Search"
+    "required": "Erforderlich",
+    "search": "Suchen"
   },
   "glossary": {
     "about": "Über uns",
@@ -299,6 +304,7 @@
         "ireland": "Irland",
         "italy": "Italien",
         "new_zealand": "Neuseeland",
+        "poland": "Polen",
         "portugal": "Portugal",
         "spain": "Spanien",
         "sweden": "Schweden",

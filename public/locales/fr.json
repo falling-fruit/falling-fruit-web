@@ -68,6 +68,11 @@
       "submit": "Soumettre",
       "submitting": "Soumission en cours"
     },
+    "error": {
+      "confirmation": "Ne correspond pas à l'original",
+      "missing_password": "Requis pour modifier l'email ou le mot de passe",
+      "too_short": "Minimum de {{min}} caractères"
+    },
     "optional": "Facultatif",
     "required": "Obligatoire",
     "search": "Rechercher"
@@ -300,6 +305,7 @@
         "ireland": "Irlande",
         "italy": "Italie",
         "new_zealand": "Nouvelle-Zélande",
+        "poland": "Pologne",
         "portugal": "Portugal",
         "spain": "Espagne",
         "sweden": "Suède",
@@ -312,9 +318,9 @@
         "city": "Ville",
         "country": "Pays",
         "social": "Réseaux sociaux",
-        "\u00e9tat": "État"
+        "state": "État"
       },
-      "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l’espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d’autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
+      "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
     }
   },
   "problems": {

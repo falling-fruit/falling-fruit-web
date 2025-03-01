@@ -68,6 +68,11 @@
       "submit": "Υποβολή",
       "submitting": "Υποβολή"
     },
+    "error": {
+      "confirmation": "Δεν ταιριάζει με το πρωτότυπο",
+      "missing_password": "Απαιτείται για αλλαγή email ή κωδικού",
+      "too_short": "Ελάχιστο {{min}} χαρακτήρων"
+    },
     "optional": "Προαιρετικό",
     "required": "Απαιτείται",
     "search": "Αναζήτηση"
@@ -299,6 +304,7 @@
         "ireland": "Ιρλανδία",
         "italy": "Ιταλία",
         "new_zealand": "Νέα Ζηλανδία",
+        "poland": "Πολωνία",
         "portugal": "Πορτογαλία",
         "spain": "Ισπανία",
         "sweden": "Σουηδία",

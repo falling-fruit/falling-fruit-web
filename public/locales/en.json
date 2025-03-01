@@ -68,6 +68,11 @@
       "submit": "Submit",
       "submitting": "Submitting"
     },
+    "error": {
+      "confirmation": "Does not match original",
+      "missing_password": "Required to change email or password",
+      "too_short": "Minimum of {{min}} characters"
+    },
     "optional": "Optional",
     "required": "Required",
     "search": "Search"
@@ -299,6 +304,7 @@
         "ireland": "Ireland",
         "italy": "Italy",
         "new_zealand": "New Zealand",
+        "poland": "Poland",
         "portugal": "Portugal",
         "spain": "Spain",
         "sweden": "Sweden",
