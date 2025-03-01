@@ -68,6 +68,11 @@
       "submit": "Wyślij",
       "submitting": "Wysyłanie"
     },
+    "error": {
+      "confirmation": "Nie pasuje do oryginału",
+      "missing_password": "Wymagane do zmiany emaila lub hasła",
+      "too_short": "Minimum {{min}} znaków"
+    },
     "optional": "Opcjonalne",
     "required": "Wymagane",
     "search": "Szukaj"
@@ -299,6 +304,7 @@
         "ireland": "Irlandia",
         "italy": "Włochy",
         "new_zealand": "Nowa Zelandia",
+        "poland": "Polska",
         "portugal": "Portugalia",
         "spain": "Hiszpania",
         "sweden": "Szwecja",

@@ -1,0 +1,385 @@
+{
+  "devise": {
+    "confirmations": {
+      "confirmed": "您的电子邮件地址已成功确认。",
+      "no_token": "如果没有确认电子邮件，您将无法访问此页面。如果您确实来自确认电子邮件，请确保您使用了提供的完整 URL。",
+      "send_instructions": "您将在几分钟内收到一封电子邮件，其中包含有关如何确认您的电子邮件地址的说明。"
+    },
+    "failure": {
+      "already_authenticated": "您已经登录。"
+    },
+    "passwords": {
+      "no_token": "如果没有密码重置电子邮件，您将无法访问此页面。如果您确实来自密码重置电子邮件，请确保您使用了提供的完整 URL。",
+      "send_instructions": "您将在几分钟内收到一封电子邮件，其中包含有关如何重置密码的说明。",
+      "updated_not_active": "你已经成功更改密码。"
+    },
+    "registrations": {
+      "signed_up": "欢迎！您已注册成功。",
+      "update_needs_confirmation": "您已成功更新您的帐户，但我们需要验证您的新电子邮件地址。请检查您的电子邮件并按照确认链接确认您的新电子邮件地址。",
+      "updated": "您的帐户已成功更新。"
+    }
+  },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "获取位置变更失败：{{message}}",
+      "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
+      "fetch_review_failed": "获取评论 {{id}} 失败：{{message}}",
+      "location_edit_failed": "编辑位置失败：{{message}}",
+      "location_submission_failed": "提交位置失败：{{message}}",
+      "photo_upload_failed": "照片上传失败：{{message}}",
+      "report_submission_failed": "提交报告失败：{{message}}",
+      "review_deletion_failed": "删除评论失败：{{message}}",
+      "review_edit_failed": "编辑评论失败：{{message}}",
+      "review_submission_failed": "提交评论失败：{{message}}",
+      "street_view_unavailable": "位置 {{id}} 的街景视图不可用",
+      "type_add_failed": "添加新类型失败：{{message}}"
+    },
+    "auth": {
+      "check_failed": "身份验证检查失败：{{message}}",
+      "confirmation_failed": "账户确认失败：{{message}}",
+      "password_set_failed": "设置新密码失败：{{message}}",
+      "profile_update_failed": "更新个人资料失败：{{message}}",
+      "resend_confirmation_failed": "重新发送确认失败：{{message}}",
+      "reset_password_failed": "重置密码失败：{{message}}",
+      "signin_failed": "登录失败：{{message}}",
+      "signup_failed": "注册失败：{{message}}"
+    },
+    "geolocation": {
+      "code_2": "位置不可用：{{message}}",
+      "code_3": "地理位置超时：{{message}}",
+      "denied": "获取您的位置权限被拒绝。要启用地理位置，请在浏览器设置中允许位置共享并刷新页面。",
+      "not_supported": "不支持地理位置"
+    },
+    "unknown_error": "未知错误"
+  },
+  "filter": {
+    "deselect_all": "取消全选",
+    "only_on_map": "在地图上",
+    "select_all": "全选"
+  },
+  "form": {
+    "button": {
+      "cancel": "取消",
+      "delete": "删除",
+      "edit": "编辑",
+      "report": "举报",
+      "reset": "重置",
+      "review": "审核",
+      "submit": "提交",
+      "submitting": "提交中"
+    },
+    "error": {
+      "confirmation": "与原始内容不符",
+      "missing_password": "更改邮箱或密码时必填",
+      "too_short": "最少需要{{min}}个字符"
+    },
+    "optional": "选填",
+    "required": "必填",
+    "search": "搜索"
+  },
+  "glossary": {
+    "about": "关于",
+    "account": "帐户",
+    "activity": "活动",
+    "address": "地址",
+    "description": "描述",
+    "email": "电子邮件",
+    "logout": "登出",
+    "map": "地图",
+    "name": "名称",
+    "password": "密码",
+    "quality": "质量",
+    "review": {
+      "other": "评论"
+    },
+    "sign_up": "报名",
+    "tree_inventory": {
+      "one": "树木清单"
+    },
+    "type": {
+      "one": "类型",
+      "other": "类型"
+    },
+    "unverified": "未经证实",
+    "yield": "屈服"
+  },
+  "layouts": {
+    "application": {
+      "menu": {
+        "in_the_press": "在新闻界",
+        "sharing_the_harvest": "分享收获",
+        "the_data": "数据",
+        "the_project": "该项目"
+      }
+    },
+    "back": "返回",
+    "loading": "加载中..."
+  },
+  "list": {
+    "no_results": "未找到结果",
+    "zoom_in": "放大地图以查看位置数据"
+  },
+  "locations": {
+    "edit_position": {
+      "cancel": "取消编辑位置",
+      "confirm": "确认编辑位置",
+      "instructions": "编辑位置。"
+    },
+    "form": {
+      "access": "访问",
+      "comments": "注释",
+      "comments_subtext": "更新、访问问题、植物健康......",
+      "description_subtext": "位置详细信息、访问问题、植物健康...",
+      "fruiting_status": "果实状态",
+      "position": "位置",
+      "season": "季节",
+      "season_start_to_stop_short": "至"
+    },
+    "index": {
+      "editmarker_html": "<b>移动到源的位置。</b>\n\n检查卫星视图 - 从太空中可以看到源！"
+    },
+    "infowindow": {
+      "access_mode": [
+        "来源在我的财产上",
+        "我已获得所有者的许可，可以添加来源",
+        "来源在公共土地上",
+        "来源在私人财产上，但悬在公共土地上",
+        "来源是私人财产（在你选择之前询问）"
+      ],
+      "access_short": [
+        "由所有者添加",
+        "业主允许",
+        "民众",
+        "私人但悬而未决",
+        "私人的"
+      ],
+      "fruiting": ["花蕾", "未成熟的水果", "熟了的果实"]
+    },
+    "init": {
+      "cancel": "取消选择位置",
+      "choose_instructions": "为您的新位置选择一个位置。",
+      "confirm": "确认选择位置",
+      "edit_instructions": "编辑您的新位置的位置。"
+    },
+    "overview": {
+      "added_by": "由{{name}}添加",
+      "date_edited": "更新于{{date}}",
+      "imported_from": "从{{name}}导入",
+      "season": {
+        "in_season": "从{{start}}到{{stop}}的季节",
+        "year_round": "全年"
+      },
+      "title": "概览"
+    }
+  },
+  "menu": {
+    "add_new_location": "添加位置",
+    "add_review": "添加评论",
+    "edit_location": "编辑位置",
+    "edit_review": "编辑评论",
+    "list": "列表",
+    "settings": "设置",
+    "zoom_in_to_add_location": "放大以添加位置"
+  },
+  "new_type": {
+    "add_type_label": "添加类型：",
+    "form": {
+      "add_name": "添加名称",
+      "language": "语言",
+      "notes": "备注",
+      "notes_placeholder": "描述、维基百科链接、分类信息...",
+      "pending_notice": "注意：所有新类型默认设置为待审核状态。只有管理员可以添加非待审核类型。",
+      "remove": "删除"
+    },
+    "title": "添加新类型"
+  },
+  "pages": {
+    "about": {
+      "about_the_site": "关于该项目",
+      "advisors": "顾问委员会",
+      "alan_gibson_bio_html": "艾伦一直喜欢冒险和探索。他开始觅食，以此向年幼的孩子介绍户外生活方式。他撰写了<a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a>博客并出版了<a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager：免费的水果和坚果</a>一书。他使在公园觅食合法化，并在他的家乡英国南安普顿建立了一个社区果园。",
+      "ana_carolina_bio_html": "Ana 是巴西帕拉联邦大学的博士后研究员。她是一位对了解社会和文化饮食习惯感兴趣的人类学家。安娜主要在巴西亚马逊地区工作。在 Acre（亚马逊西部），她研究了区域水果消费。然后，她在中索利梅斯地区工作，调查偏远社区的饮食变化。 2017 年至 2018 年间，安娜住在亚马逊三角洲的中小城镇，研究气候变化对非正规住区人们粮食安全的影响。她最近搬到了美国新墨西哥州南部，在那里担任顾问。",
+      "caleb_phillips_bio_html": "Caleb 是一个没有羽毛的双足类人动物，热衷于食物正义，并寻找使用技术解决社会问题的创造性方法。当他不骑自行车四处瞅着树木时，他会在科罗拉多州戈尔登<a href=\"https://www.nrel.gov/research/caleb-phillips.html\">国家可再生能源实验室</a>的数据科学家和<a href=\"https://www.colorado.edu/cs/caleb-phillips\">科罗拉多大学</a>计算机科学副教授的日常工作之间平衡自己的努力。除了所有工作之外，他还喜欢攀岩、跑步、骑自行车，并且通常尽可能多地到户外。 Caleb 于 2013 年与 Ethan Welty 一起创建了 Falling Fruit，并在担任顾问委员会职务之前在董事会任职 6 年。",
+      "celebration": "Falling Fruit 庆祝我们城市街道上被忽视的美食。通过在交互式地图上量化此资源，我们希望促进人、食物和我们社区中生长的自然生物之间的密切联系。不只是免费的午餐！ 21 世纪的觅食是城市探索、对抗污迹斑斑的人行道的祸害以及与食物的植物起源重新联系的机会。",
+      "closing_remarks": "闭幕致辞",
+      "closing_remarks_para1_html": "Falling Fruit 是一家位于科罗拉多州博尔德的 501(c)(3)（免税）公共慈善机构。因此，美国境内的捐赠可以免税。您可以查看我们<a href=\"/501c3.pdf\">的 IRS 豁免函，</a><a href=\"http://apps.irs.gov/app/eos/pub78Search.do?\">并在 IRS 出版物 78</a>或<a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">科罗拉多州国务卿处</a>核实我们的地位。还提供我们的<a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">章程</a>和董事会会议<a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">记录</a>。",
+      "closing_remarks_para2_html": "在城市环境中收获食物需要考虑某些实际和道德因素。对于城市觅食伦理的介绍，我们推荐以下<a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">总结</a>。",
+      "closing_remarks_para3_html": "关于落果的信息可能是错误的或过时的。例如，迁移到 Falling Fruit 的许多觅食地图都作为公共 Google 地图托管，这些地图上的标记经常被意外移动，并且市政树木库存仅在（如果有的话）在访问树木进行维护时更新。准备好在现场遇到不准确的地方，请根据您的发现根据需要编辑地图。最终，您有责任确定植物的身份、可食用性和位置，并有责任提高地图的质量。",
+      "contact_us_html": "Falling Fruit 是为觅食者打造的，我们希望它成为当代觅食者可用的最佳工具。给我们写信<a href=\"mailto:feedback@fallingfruit.org\">反馈@fallingfruit.org</a> ，我们很乐意收到您的来信！",
+      "craig_durkin_bio_html": "<a href=\"http://www.concrete-jungle.org/\">Craig 是 Concrete Jungle</a>的联合创始人，该组织位于佐治亚州亚特兰大，该组织在整个城市种植食物并采摘水果，以捐赠给当地的无家可归者收容所和食品银行。作为<a href=\"http://www.gatech.edu/\">佐治亚理工学院的</a>毕业生，他一直在寻找将水果采摘与新技术相结合的方法，并且很快将部署他的果树定位无人机并在推特上发布水果成熟度传感器......",
+      "cristina_rubke_bio_html": "Cristina 是<a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">位于加利福尼亚州旧金山的 Shartsis Friese LLP 的律师</a>，她专注于商标起诉和咨询。<a href=\"//www.sfmta.com/\">她还是旧金山市交通局</a>的董事会成员，负责监督旧金山的公共交通、交通和停车。在业余时间，克里斯蒂娜与<a href=\"//www.baads.org/\">湾区残疾水手协会</a>一起在旧金山湾航行，并参加当地和国际帆船赛。",
+      "david_craft_bio_html": "David 是马萨诸塞州波士顿<a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">哈佛医学院</a>放射肿瘤学系的研究员。他还是一位狂热的觅食者，并着有《<a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">城市觅食：在城市中寻找和食用野生植物》</a> （<a href=\"/docs/David Craft - Urban Foraging.pdf\">免费下载</a>）一书。",
+      "directors": "董事会",
+      "donate": "捐赠",
+      "emily_sigman_bio_html": "艾米丽是一位顽固的农林业布道者，不可救药的觅食者，是两只猫、四只鹌鹑和世界上最壮观的犬科动物的骄傲母亲。她的根深入落基山脉，但如今，她的地上生物量自豪地将康涅狄格州的纽黑文称为她的家。她经常被发现照料公共食物林，在某个舒适的图书馆角落沉迷于阅读，或者对菌丝体的魔力充满诗意（并且，据说，在耶鲁<a href=\"https://environment.yale.edu/\">大学林业</a><a href=\"https://jackson.yale.edu/person/emily-sigman/\">学院和全球事务</a>学院完成联合研究生学位）。艾米丽对旅行有着毁灭性的嗜好，现在几乎可以在任何地方。",
+      "ethan_welty_bio_html": "凭借技术和数据，Ethan 支持将城市作为新鲜和免费食物的来源。他于 2013 年与 Caleb Phillips 创建了 Falling Fruit，以促进全球城市觅食，并<a href=\"https://fruitrescue.org\">于 2014 年共同创立了 Community Fruit Rescue</a> ，以收获和分发他在科罗拉多州博尔德周围生长的剩余水果。除了水果，他还要兼顾<a href=\"https://www.weltyphotography.com\">摄影事业</a>、<a href=\"https://instaar.colorado.edu/people/ethan-welty/\">冰川研究</a>以及对山区和河流的追求。",
+      "ff_disclaimer_html": "落果与落果无关。 Fallen Fruit 可以在<a href=\"http://fallenfruit.org\">fallfruit.org</a>上找到。",
+      "give_paypal": "通过贝宝捐赠基金捐赠",
+      "give_us_money": "我们是一家 501(c)(3) 非营利组织，依靠捐款运营。如果您愿意并且有能力，请考虑做出经济贡献。在美国境内的捐款可以免税。",
+      "jeff_wanner_bio_html": "自从小时候与家人一起收获黑莓和蓝莓，以及最近注意到科罗拉多州各地公共果树的财富以来，杰夫对我们城市种植的丰富水果产生了深刻的认识。他在《落果》中的第一个任务是梳理博尔德和盐湖城，手里拿着纸质地图，记录果树。当不致力于提高建筑能源效率时，他通常会在社区中帮忙或步行、滑雪或骑自行车快速翻山越岭。",
+      "join_us_html": "与我们一起庆祝超级本地美食！<a href=\"/\">地图</a>开放给任何人编辑，数据库一键<a href=\"/data\">下载</a><a href=\"https://github.com/falling-fruit/\">，代码</a>开源。您也被鼓励与您的人类同胞分享赏金。我们的<a href=\"/sharing\">分享页面</a>列出了数百个当地组织 - 种植公共果园和食用林，从城市树木和农民的田地中采摘原本浪费的水果和蔬菜，并与邻居和有需要的人分享。",
+      "more_about_html": "我们的可食用地图并非同类地图中的首创，但它渴望成为世界上最全面的地图。当我们的用户贡献他们自己的位置时，我们会在互联网上梳理已有的知识，力求将各地的觅食者、林务员和自由主义者的努力联合起来。<a href=\"/datasets\">导入的数据集</a>范围从小型社区觅食地图到大量专业编制的树木清单。到目前为止，这相当于{{locations}}位置的{{types}}种不同类型的食物（大多数，但不是全部，植物物种）。除了外来植物和被遗忘已久的本地植物的异国风味的栽培和常见之外，在您的社区觅食是一次穿越时间和跨文化的旅程。",
+      "staff": "职员",
+      "translate": "翻译",
+      "translate_for_us_html": "有兴趣志愿担任翻译吗？给我们发电子邮件，我们会邀请您加入我们的<a href=\"https://phrase.com\">Phrase</a> ，我们的翻译在那里管理。",
+      "translators": "翻译员",
+      "tristram_stuart_bio_html": "十几岁的时候，崔斯特瑞姆靠从学校厨房、当地面包师和乡村蔬菜水果商那里收集的剩余食物养猪。注意到这些食物中有很多仍然适合人类食用，这让他意识到优质的新鲜食物正在被大规模浪费。自那以后，崔斯特瑞姆一直在不知疲倦地工作，以引起公众、媒体和政策制定者的注意。他创立了食物浪费运动组织“<a href=\"//feedbackglobal.org\">反馈全球”，</a>并撰写了《<a href=\"//tristramstuart.co.uk/\">浪费：揭开全球食物丑闻》</a>以在全球范围内展示问题的严重程度。 2011 年，崔斯特瑞姆因与食物浪费作斗争<a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">而获得苏菲奖。</a>",
+      "write": "写"
+    },
+    "changes": {
+      "change_in_city": "在{{city}}{{type}}",
+      "recent_changes": "最近更改",
+      "type": {
+        "added": "添加",
+        "edited": "编辑",
+        "visited": "访问"
+      }
+    },
+    "data": {
+      "beware_html": "但要小心！解压缩后，数据库是一个巨大的文件，它会粉碎大多数电子表格软件。如果您只需要一个小区域的数据，首先尝试使用集成到<a href=\"/\">地图中</a>的下载工具检索它们。",
+      "caveat_emptor_html": "我们对数据的准确性不承担任何责任 - 它按原样提供，请<i>注意</i>。如果您对数据做了一些很酷的事情，请<a href=\"mailto:feedback@fallingfruit.org\">告诉我们</a>！",
+      "intro": "Falling Fruit 建立在公共数据和我们用户的慷慨之上。我们希望城市觅食能够惠及尽可能多的人，我们相信每个人都应该平等地获得我们集体劳动的成果。本着开放的精神，看！整个数据库",
+      "license_html": "如果您有兴趣在您的项目中使用这些数据，尤其是商业项目，我们建议您联系我们（ <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> ）。除非另有说明，否则数据许可为<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> （知识共享 - 署名、非商业性、相同方式共享）。这意味着您可以自由使用和分发数据，只要您保留原始作者/来源署名，并且不（未经许可）将其用于商业应用。 Falling Fruit 的源代码也已开放，可在<a href=\"https://github.com/falling-fruit/\">GitHub 上获得</a>。"
+    },
+    "datasets": {
+      "community_map": "社区地图",
+      "date_imported": "导入日期",
+      "imported_datasets": "已导入的数据集",
+      "imported_on": "导入于 {{date}}",
+      "intro_html": "Falling Fruit 立志成为最全面、最开放的城市食品地理数据集。当我们的用户使用我们的<a href=\"/\">地图</a>探索、编辑和添加位置时，我们将已知的宇宙梳理为预先存在的数据集并将它们直接导入<a href=\"/data\">数据库</a>，联合各地的觅食者、林务员和自由主义者的努力。如果您知道我们遗漏的数据集，请<a href=\"mailto:info@fallingfruit.org\">告诉我们</a>！您还可以通过使用<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">导入模板</a>格式化数据来帮助我们完成导入过程。请注意，由于必须手动执行导入，因此导入后对原始数据所做的所有更改都不会反映在 Falling Fruit 上。",
+      "link": "链接",
+      "locations": "位置",
+      "table_info": "每个数据集都按名称、位置数量和导入日期列出。展开每一行会显示有关数据、导入过程和管理数据使用方式的许可证的更多详细信息。",
+      "type": "类型",
+      "types_of_data": "导入到 Falling Fruit 中的数据集分为两大类。 “社区地图”是由觅食者和自由主义者在他们仔细研究社区寻找食物时建立的。我们感谢辛勤工作的公民制图员，他们编制了这些数据。 “树木清单”由希望更好地记录和照顾树木的城市、大学和其他机构编制。我们为生产食物的物种挖掘这些庞大的数据集，并将它们添加到地图中。为了帮助我们绘制您附近的果树地图，请联系您的学校或城市，敦促他们与我们分享他们的树木清单。"
+    },
+    "settings": {
+      "bicycle": "自行车",
+      "data": "数据",
+      "labels": "标签",
+      "language": "语言",
+      "points_of_interest": "兴趣点",
+      "regional": "区域",
+      "roadmap": "地图",
+      "satellite": "卫星",
+      "terrain": "地形",
+      "transit": "交通",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} 英尺",
+            "other": "{{count}} 英尺"
+          },
+          "kilometer": {
+            "one": "{{count}} 公里",
+            "other": "{{count}} 公里"
+          },
+          "meter": {
+            "one": "{{count}} 米",
+            "other": "{{count}} 米"
+          },
+          "mile": {
+            "one": "{{count}} 英里",
+            "other": "{{count}} 英里"
+          }
+        },
+        "imperial": "英制",
+        "metric": "公制",
+        "units": "单位"
+      }
+    },
+    "sharing": {
+      "countries": {
+        "australia": "澳大利亚",
+        "belgium": "比利时",
+        "brazil": "巴西",
+        "canada": "加拿大",
+        "chile": "智利",
+        "czechia": "捷克",
+        "fiji": "斐济",
+        "finland": "芬兰",
+        "france": "法国",
+        "germany": "德国",
+        "greece": "希腊",
+        "ireland": "爱尔兰",
+        "italy": "意大利",
+        "new_zealand": "新西兰",
+        "poland": "波兰",
+        "portugal": "葡萄牙",
+        "spain": "西班牙",
+        "sweden": "瑞典",
+        "switzerland": "瑞士",
+        "united_kingdom": "英国",
+        "united_states": "美国"
+      },
+      "grow_pick_and_distribute": "成长·挑选·分发",
+      "heading": {
+        "city": "城市",
+        "country": "国家",
+        "social": "社交",
+        "state": "州/省"
+      },
+      "intro_html": "下面列出的是在公共场所种植食物（食物林、公共果园）、采摘食物（城市觅食、农场拾荒）或分发食物（交换、捐赠）的组织。组织按国家/地区、州（如果适用）和城市列出。那些名字被划掉的人被认为是不活跃的。如果您知道应该在此列表中的其他人，请<a href=\"mailto:info@fallingfruit.org\">与我们联系</a>！"
+    }
+  },
+  "problems": {
+    "description_subtext": "任何可能帮助我们评估问题的信息",
+    "problem_type": "问题类型",
+    "problem_types": {
+      "0": "地点是垃圾信息",
+      "1": "地点不存在",
+      "2": "地点是重复的",
+      "3": "不当的评论照片",
+      "4": "不当的评论内容",
+      "5": "其他（请在下方说明）"
+    },
+    "report_submitted": "报告提交成功！"
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "发表评论",
+      "observed_on": "观察于",
+      "upload_images": "上传图片"
+    },
+    "reviewed_by": "评论者",
+    "reviewed_on": "评论于 {{date}}",
+    "update_delete": "更新或删除此评论",
+    "visited_on": "访问于 {{date}}",
+    "you_reviewed": "您于 {{date}} 评论了此地点"
+  },
+  "time": {
+    "days": {
+      "one": "{{count}} 天",
+      "other": "{{count}} 天"
+    },
+    "last_24_hours": "最近24小时",
+    "time_ago": "{{time}}前"
+  },
+  "type": {
+    "pending_review": "等待审核"
+  },
+  "users": {
+    "bio": "关于你",
+    "change_password": "修改密码",
+    "current_password": "当前密码",
+    "edit_account": "编辑账户",
+    "forgot_password": "重置密码",
+    "joined_on": "加入于 {{date}}",
+    "login": "登录",
+    "new_password": "新密码",
+    "new_password_confirmation": "确认新密码",
+    "options": {
+      "announcements_email": "接收包含重要公告和机会的电子邮件（每年1-2次）"
+    },
+    "password_confirmation": "确认密码",
+    "profile": {
+      "title": "用户：{{name}}"
+    },
+    "remember_me": "记住我",
+    "resend_confirmation_instructions": "重新发送确认说明",
+    "save_changes": "保存更改",
+    "send": "发送",
+    "send_password_instructions": "发送密码重置说明",
+    "sign_in": "登录"
+  }
+}

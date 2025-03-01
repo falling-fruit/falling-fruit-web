@@ -7,6 +7,20 @@ WORK_DIR="work"
 # Ensure work directory exists
 mkdir -p "${WORK_DIR}"
 
+# Function to check if we need to process a file
+need_processing() {
+  local source_file=$1
+  local target_file=$2
+  
+  # If updated file doesn't exist or source is newer, we need processing
+  if [ ! -f "$target_file" ] || [ "$source_file" -nt "$target_file" ]; then
+    return 0  # true in bash
+  else
+    echo "Skipping $target_file (already exists and up to date)"
+    return 1  # false in bash
+  fi
+}
+
 # Extract English translations
 jq -r '. |keys[]' "${SOURCE}" | while read -r key; do 
     jq ".[\"$key\"]" "${SOURCE}" > "${WORK_DIR}/en-${key}.json"
@@ -17,9 +31,11 @@ jq -r '. |keys[]' "$WORK_DIR/en-pages.json" | while read -r key2; do
     jq ".[\"$key2\"]" "$WORK_DIR/en-pages.json" > "${WORK_DIR}/en-pages-${key2}.json"
 done 
 
-for TARGET_LANG in ar de el es he it nl pt vi pl fr; do
+for TARGET_LANG in ar de el es he it nl pt vi pl fr zh sv tr; do
   if [ "$TARGET_LANG" == 'pt' ]; then
     cp public/locales/pt-BR.json public/locales/pt.json
+  elif [ "$TARGET_LANG" == 'zh' ]; then
+    cp public/locales/zh-CN.json public/locales/zh.json
   fi
   jq -r '. |keys[]' "public/locales/en.json" | while read -r key; do
       EN_LINES=$(wc -l < "${WORK_DIR}/en-${key}.json")
@@ -43,16 +59,20 @@ for TARGET_LANG in ar de el es he it nl pt vi pl fr; do
             echo {} > "$TARGET_SUBKEY_FILE"
           fi
           
-          TARGET_SUBLINES=$(wc -l < "$TARGET_SUBKEY_FILE")
-          if [ "$TARGET_SUBLINES" -lt "$EN_SUBLINES" ]; then
-            # Translate subkey section
-            scripts/show_translations_and_request_changes.py \
-              "${WORK_DIR}/en-pages-${subkey}.json" \
-              "$TARGET_SUBKEY_FILE" \
-              "Read the source translation and fill out the gaps in the target translation" \
-              > "${WORK_DIR}/${TARGET_LANG}-pages-${subkey}-updated.json"
-          else
-            cp $TARGET_SUBKEY_FILE "${WORK_DIR}/${TARGET_LANG}-pages-${subkey}-updated.json"
+          UPDATED_SUBKEY_FILE="${WORK_DIR}/${TARGET_LANG}-pages-${subkey}-updated.json"
+          
+          if need_processing "${WORK_DIR}/en-pages-${subkey}.json" "$UPDATED_SUBKEY_FILE"; then
+            TARGET_SUBLINES=$(wc -l < "$TARGET_SUBKEY_FILE")
+            if [ "$TARGET_SUBLINES" -lt "$EN_SUBLINES" ]; then
+              # Translate subkey section
+              scripts/show_translations_and_request_changes.py \
+                "${WORK_DIR}/en-pages-${subkey}.json" \
+                "$TARGET_SUBKEY_FILE" \
+                "Read the source translation and fill out the gaps in the target translation by translating from source into target language, $TARGET_LANG. Be very careful to reply with complete file" \
+                > "$UPDATED_SUBKEY_FILE"
+            else
+              cp $TARGET_SUBKEY_FILE "$UPDATED_SUBKEY_FILE"
+            fi
           fi
         done
         
@@ -60,16 +80,18 @@ for TARGET_LANG in ar de el es he it nl pt vi pl fr; do
         jq -n 'reduce (inputs | {(input_filename | split("-")[-2]): .}) as $item ({}; . + $item)' \
             "${WORK_DIR}/${TARGET_LANG}-pages-"*-updated.json > "$UPDATED_FILE"
       else
-        # Check if target has fewer lines than source
-        TARGET_LINES=$(wc -l < "$TARGET_KEY_FILE")
-        if [ "$TARGET_LINES" -lt "$EN_LINES" ]; then
-            scripts/show_translations_and_request_changes.py \
-              "${WORK_DIR}/en-${key}.json" \
-              "$TARGET_KEY_FILE" \
-              "Read the source translation and fill out the gaps in the target translation" \
-              > "$UPDATED_FILE"
-        else
-          cp $TARGET_KEY_FILE $UPDATED_FILE
+        if need_processing "${WORK_DIR}/en-${key}.json" "$UPDATED_FILE"; then
+          # Check if target has fewer lines than source
+          TARGET_LINES=$(wc -l < "$TARGET_KEY_FILE")
+          if [ "$TARGET_LINES" -lt "$EN_LINES" ]; then
+              scripts/show_translations_and_request_changes.py \
+                "${WORK_DIR}/en-${key}.json" \
+                "$TARGET_KEY_FILE" \
+                "Read the source translation and fill out the gaps in the target translation by translating from source into target language, $TARGET_LANG. Be very careful to reply with complete file" \
+                > "$UPDATED_FILE"
+          else
+            cp $TARGET_KEY_FILE $UPDATED_FILE
+          fi
         fi
       fi
   done
@@ -81,6 +103,8 @@ for TARGET_LANG in ar de el es he it nl pt vi pl fr; do
   mv -v "${WORK_DIR}/${TARGET_LANG}.json" "public/locales/${TARGET_LANG}.json"
   if [ "$TARGET_LANG" == 'pt' ]; then
     mv public/locales/pt.json public/locales/pt-BR.json
+  elif [ "$TARGET_LANG" == 'zh' ]; then
+    mv public/locales/zh.json public/locales/zh-CN.json
   fi
 done
 

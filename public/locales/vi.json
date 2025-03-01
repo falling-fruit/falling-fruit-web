@@ -68,6 +68,11 @@
       "submit": "Gửi",
       "submitting": "Đang gửi"
     },
+    "error": {
+      "confirmation": "Không khớp với bản gốc",
+      "missing_password": "Yêu cầu thay đổi email hoặc mật khẩu",
+      "too_short": "Tối thiểu {{min}} ký tự"
+    },
     "optional": "Tùy chọn",
     "required": "Bắt buộc",
     "search": "Tìm kiếm"
@@ -300,6 +305,7 @@
         "ireland": "Ireland",
         "italy": "Ý",
         "new_zealand": "New Zealand",
+        "poland": "Ba Lan",
         "portugal": "Bồ Đào Nha",
         "spain": "Tây Ban Nha",
         "sweden": "Thụy Điển",

@@ -68,6 +68,11 @@
       "submit": "Enviar",
       "submitting": "Enviando"
     },
+    "error": {
+      "confirmation": "Não corresponde ao original",
+      "missing_password": "Obrigatório para alterar email ou senha",
+      "too_short": "Mínimo de {{min}} caracteres"
+    },
     "optional": "Opcional",
     "required": "Obrigatório",
     "search": "Buscar"
@@ -299,6 +304,7 @@
         "ireland": "Irlanda",
         "italy": "Itália",
         "new_zealand": "Nova Zelândia",
+        "poland": "Polônia",
         "portugal": "Portugal",
         "spain": "Espanha",
         "sweden": "Suécia",

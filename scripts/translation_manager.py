@@ -66,6 +66,15 @@ class TranslationManager:
         if not yaml_files:
             print(f"No YAML files found in {self.yaml_folder_path}")
             return
+            
+        # Load English translations to use as fallbacks
+        english_json_file = self.json_folder_path / "en.json"
+        english_translation = None
+        if english_json_file.exists():
+            english_translation = Translation.from_json_file(english_json_file)
+            print(f"Loaded English translations as fallback for missing keys")
+        else:
+            print(f"Warning: No English translations found at {english_json_file}")
 
         for yaml_file in yaml_files:
             lang_code = Path(yaml_file).stem
@@ -73,6 +82,7 @@ class TranslationManager:
             if json_file.exists():
                 yaml_added = 0
                 mobile_added = 0
+                english_added = 0
                 edited_keys = 0
                 missing_keys = 0
                 
@@ -108,10 +118,19 @@ class TranslationManager:
                             json_translation.set(key, mobile_value)
                             mobile_added += 1
                         else:
-                            missing_keys += 1
+                            # If still missing and we have English translations, use those
+                            if english_translation and lang_code != "en":
+                                english_value = english_translation.get(key)
+                                if english_value is not None:
+                                    json_translation.set(key, english_value)
+                                    english_added += 1
+                                else:
+                                    missing_keys += 1
+                            else:
+                                missing_keys += 1
 
                 json_translation.save_as_json(json_file)
-                print(f"{yaml_file} -> {json_file} added {yaml_added} from YAML, {mobile_added} from mobile, edited {edited_keys} keys, missing {missing_keys} keys. Checked: {len(all_keys)} keys")
+                print(f"{yaml_file} -> {json_file} added {yaml_added} from YAML, {mobile_added} from mobile, {english_added} from English, edited {edited_keys} keys, missing {missing_keys} keys. Checked: {len(all_keys)} keys")
             else:
                 print(f"{yaml_file} skipped: no {json_file}")
 

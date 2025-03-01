@@ -68,6 +68,11 @@
       "submit": "إرسال",
       "submitting": "جاري الإرسال"
     },
+    "error": {
+      "confirmation": "لا يتطابق مع الأصل",
+      "missing_password": "مطلوب لتغيير البريد الإلكتروني أو كلمة المرور",
+      "too_short": "الحد الأدنى {{min}} حروف"
+    },
     "optional": "اختياري",
     "required": "مطلوب",
     "search": "بحث"
@@ -300,6 +305,7 @@
         "ireland": "أيرلندا",
         "italy": "إيطاليا",
         "new_zealand": "نيوزيلندا",
+        "poland": "بولندا",
         "portugal": "البرتغال",
         "spain": "إسبانيا",
         "sweden": "السويد",

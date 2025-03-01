@@ -68,6 +68,11 @@
       "submit": "שלח",
       "submitting": "שולח"
     },
+    "error": {
+      "confirmation": "לא תואם למקור",
+      "missing_password": "נדרש לשינוי דוא\"ל או סיסמה",
+      "too_short": "מינימום של {{min}} תווים"
+    },
     "optional": "אופציונלי",
     "required": "חובה",
     "search": "חיפוש"
@@ -299,6 +304,7 @@
         "ireland": "אירלנד",
         "italy": "איטליה",
         "new_zealand": "ניו זילנד",
+        "poland": "פולין",
         "portugal": "פורטוגל",
         "spain": "ספרד",
         "sweden": "שוודיה",

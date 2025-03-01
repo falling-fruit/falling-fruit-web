@@ -105,6 +105,7 @@ const ShareTheHarvestTable = () => {
     Italy: t('pages.sharing.countries.italy'),
     'New Zealand': t('pages.sharing.countries.new_zealand'),
     Portugal: t('pages.sharing.countries.portugal'),
+    Poland: t('pages.sharing.countries.poland'),
     Spain: t('pages.sharing.countries.spain'),
     Sweden: t('pages.sharing.countries.sweden'),
     Switzerland: t('pages.sharing.countries.switzerland'),

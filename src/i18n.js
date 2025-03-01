@@ -23,7 +23,10 @@ export const LANGUAGE_OPTIONS = [
   { value: 'nl', label: 'Nederlands' },
   { value: 'pl', label: 'Polski' },
   { value: 'pt-br', label: 'Português' },
+  { value: 'sv', label: 'Svenska' },
+  { value: 'tr', label: 'Türkçe' },
   { value: 'vi', label: 'Tiếng Việt' },
+  { value: 'zh-CN', label: '中文' },
 ]
 
 const LanguageSelect = () => {
