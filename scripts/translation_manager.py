@@ -90,16 +90,19 @@ class TranslationManager:
                     mobile_translation = Translation()
 
                 for key in all_keys:
+                    # First check if the key already exists in the JSON file
+                    existing_value = json_translation.get(key)
+                    if existing_value is not None:
+                        # Keep existing translations in the new site
+                        continue
+                        
+                    # If not in JSON, try to get from YAML
                     value = yaml_translation.get(key)
                     if value is not None:
-                        existing_value = json_translation.get(key)
-                        if existing_value is None:
-                            yaml_added += 1
-                        elif existing_value != value:
-                            edited_keys += 1
                         json_translation.set(key, value)
-                    elif json_translation.get(key) is None:
-                        # Try to get value from mobile translations
+                        yaml_added += 1
+                    else:
+                        # If not in YAML, try to get from mobile
                         mobile_value = mobile_translation.get(key)
                         if mobile_value is not None:
                             json_translation.set(key, mobile_value)
