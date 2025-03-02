@@ -31,11 +31,13 @@ jq -r '. |keys[]' "$WORK_DIR/en-pages.json" | while read -r key2; do
     jq ".[\"$key2\"]" "$WORK_DIR/en-pages.json" > "${WORK_DIR}/en-pages-${key2}.json"
 done 
 
-for TARGET_LANG in ar de el es he it nl pt vi pl fr zh sv tr; do
+for TARGET_LANG in ar de el es he it nl pt vi pl fr zh sv tr uk; do
   if [ "$TARGET_LANG" == 'pt' ]; then
     cp public/locales/pt-BR.json public/locales/pt.json
   elif [ "$TARGET_LANG" == 'zh' ]; then
     cp public/locales/zh-CN.json public/locales/zh.json
+  elif [ "$TARGET_LANG" == 'uk' ]; then
+    cp public/locales/uk-UA.json public/locales/uk.json
   fi
   jq -r '. |keys[]' "public/locales/en.json" | while read -r key; do
       EN_LINES=$(wc -l < "${WORK_DIR}/en-${key}.json")
@@ -105,6 +107,8 @@ for TARGET_LANG in ar de el es he it nl pt vi pl fr zh sv tr; do
     mv public/locales/pt.json public/locales/pt-BR.json
   elif [ "$TARGET_LANG" == 'zh' ]; then
     mv public/locales/zh.json public/locales/zh-CN.json
+  elif [ "$TARGET_LANG" == 'uk' ]; then
+    mv public/locales/uk.json public/locales/uk-UA.json
   fi
 done
 

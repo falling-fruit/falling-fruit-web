@@ -1,6 +1,12 @@
-import '@fontsource/lato/400.css'
-import '@fontsource/lato/400-italic.css'
-import '@fontsource/lato/700.css'
+import '@fontsource/noto-sans/400.css'
+import '@fontsource/noto-sans/400-italic.css'
+import '@fontsource/noto-sans/700.css'
+import '@fontsource/noto-sans-arabic/400.css'
+import '@fontsource/noto-sans-arabic/700.css'
+import '@fontsource/noto-sans-hebrew/400.css'
+import '@fontsource/noto-sans-hebrew/700.css'
+import '@fontsource/noto-sans-sc/400.css'
+import '@fontsource/noto-sans-sc/700.css'
 
 import { createGlobalStyle } from 'styled-components'
 
@@ -16,7 +22,8 @@ const theme = {
     mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
     desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
   },
-  fonts: '"Lato", sans-serif',
+  fonts:
+    '"Noto Sans", "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans SC", sans-serif',
   // text colors
   text: '#9b9b9b',
   secondaryText: '#5a5a5a',
