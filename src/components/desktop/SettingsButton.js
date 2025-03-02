@@ -24,7 +24,7 @@ const StyledSettingsButton = styled.button`
 
 const PrimaryText = styled.div`
   font-weight: bold;
-  font-family: 'Lato', sans-serif;
+  font-family: ${({ theme }) => theme.fonts};
   color: ${({ theme }) => theme.headerText};
 `
 

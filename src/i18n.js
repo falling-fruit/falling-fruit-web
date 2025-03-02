@@ -25,6 +25,7 @@ export const LANGUAGE_OPTIONS = [
   { value: 'pt-br', label: 'Português' },
   { value: 'sv', label: 'Svenska' },
   { value: 'tr', label: 'Türkçe' },
+  { value: 'uk-UA', label: 'Українська' },
   { value: 'vi', label: 'Tiếng Việt' },
   { value: 'zh-CN', label: '中文' },
 ]
