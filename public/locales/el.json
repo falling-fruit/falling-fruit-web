@@ -267,25 +267,25 @@
       "units": {
         "distance": {
           "foot": {
-            "one": "{{count}} foot",
-            "other": "{{count}} feet"
+            "one": "{{count}} πόδι",
+            "other": "{{count}} πόδια"
           },
           "kilometer": {
-            "one": "{{count}} kilometer",
-            "other": "{{count}} kilometers"
+            "one": "{{count}} χιλιόμετρο",
+            "other": "{{count}} χιλιόμετρα"
           },
           "meter": {
-            "one": "{{count}} meter",
-            "other": "{{count}} meters"
+            "one": "{{count}} μέτρο",
+            "other": "{{count}} μέτρα"
           },
           "mile": {
-            "one": "{{count}} mile",
-            "other": "{{count}} miles"
+            "one": "{{count}} μίλι",
+            "other": "{{count}} μίλια"
           }
         },
-        "imperial": "Imperial",
-        "metric": "Metric",
-        "units": "Units"
+        "imperial": "Αγγλοσαξονικό",
+        "metric": "Μετρικό",
+        "units": "Μονάδες"
       }
     },
     "sharing": {

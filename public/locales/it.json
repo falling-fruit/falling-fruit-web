@@ -21,36 +21,36 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "Recupero modifiche posizione fallito: {{message}}",
+      "fetch_location_failed": "Errore nel recupero della posizione {{id}}: {{message}}",
+      "fetch_review_failed": "Errore nel recupero della recensione {{id}}: {{message}}",
+      "location_edit_failed": "Modifica della posizione fallita: {{message}}",
+      "location_submission_failed": "Invio della posizione fallito: {{message}}",
+      "photo_upload_failed": "Caricamento foto fallito: {{message}}",
+      "report_submission_failed": "Invio segnalazione fallito: {{message}}",
+      "review_deletion_failed": "Eliminazione recensione fallita: {{message}}",
+      "review_edit_failed": "Modifica recensione fallita: {{message}}",
+      "review_submission_failed": "Invio recensione fallito: {{message}}",
+      "street_view_unavailable": "Street View non disponibile per la posizione {{id}}",
+      "type_add_failed": "Aggiunta nuovo tipo fallita: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Verifica autenticazione fallita: {{message}}",
+      "confirmation_failed": "Conferma account fallita: {{message}}",
+      "password_set_failed": "Impostazione nuova password fallita: {{message}}",
+      "profile_update_failed": "Aggiornamento profilo fallito: {{message}}",
+      "resend_confirmation_failed": "Reinvio conferma fallito: {{message}}",
+      "reset_password_failed": "Reimpostazione password fallita: {{message}}",
+      "signin_failed": "Accesso fallito: {{message}}",
+      "signup_failed": "Registrazione fallita: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Posizione non disponibile: {{message}}",
+      "code_3": "Timeout geolocalizzazione: {{message}}",
+      "denied": "Permesso di utilizzare la tua posizione negato. Per abilitare la geolocalizzazione, consenti la condivisione della posizione nelle impostazioni del browser e aggiorna la pagina.",
+      "not_supported": "Geolocalizzazione non supportata"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Errore sconosciuto"
   },
   "filter": {
     "deselect_all": "Deselect all",

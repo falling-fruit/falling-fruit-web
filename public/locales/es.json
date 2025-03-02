@@ -21,36 +21,36 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "Error al obtener cambios de ubicación: {{message}}",
+      "fetch_location_failed": "Error al obtener ubicación {{id}}: {{message}}",
+      "fetch_review_failed": "Error al obtener reseña {{id}}: {{message}}",
+      "location_edit_failed": "Error al editar ubicación: {{message}}",
+      "location_submission_failed": "Error al enviar ubicación: {{message}}",
+      "photo_upload_failed": "Error al subir foto: {{message}}",
+      "report_submission_failed": "Error al enviar informe: {{message}}",
+      "review_deletion_failed": "Error al eliminar reseña: {{message}}",
+      "review_edit_failed": "Error al editar reseña: {{message}}",
+      "review_submission_failed": "Error al enviar reseña: {{message}}",
+      "street_view_unavailable": "Street View no disponible para ubicación {{id}}",
+      "type_add_failed": "Error al agregar nuevo tipo: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Error en la verificación de autenticación: {{message}}",
+      "confirmation_failed": "Error en la confirmación de cuenta: {{message}}",
+      "password_set_failed": "Error al establecer nueva contraseña: {{message}}",
+      "profile_update_failed": "Error al actualizar perfil: {{message}}",
+      "resend_confirmation_failed": "Error al reenviar confirmación: {{message}}",
+      "reset_password_failed": "Error al restablecer contraseña: {{message}}",
+      "signin_failed": "Error al iniciar sesión: {{message}}",
+      "signup_failed": "Error al registrarse: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Posición no disponible: {{message}}",
+      "code_3": "Tiempo de espera de geolocalización agotado: {{message}}",
+      "denied": "Permiso para usar tu ubicación denegado. Para habilitar la geolocalización, permite compartir ubicación en la configuración de tu navegador y actualiza la página.",
+      "not_supported": "Geolocalización no compatible"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Error desconocido"
   },
   "filter": {
     "deselect_all": "Deselect all",
