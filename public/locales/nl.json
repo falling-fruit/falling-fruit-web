@@ -21,36 +21,36 @@
   },
   "error_message": {
     "api": {
-      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
-      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "location_edit_failed": "Location editing failed: {{message}}",
-      "location_submission_failed": "Location submission failed: {{message}}",
-      "photo_upload_failed": "Photo upload failed: {{message}}",
-      "report_submission_failed": "Report submission failed: {{message}}",
-      "review_deletion_failed": "Review deletion failed: {{message}}",
-      "review_edit_failed": "Review editing failed: {{message}}",
-      "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
-      "type_add_failed": "Adding new type failed: {{message}}"
+      "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
+      "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
+      "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
+      "location_edit_failed": "Bewerken van locatie mislukt: {{message}}",
+      "location_submission_failed": "Indienen van locatie mislukt: {{message}}",
+      "photo_upload_failed": "Uploaden van foto mislukt: {{message}}",
+      "report_submission_failed": "Indienen van melding mislukt: {{message}}",
+      "review_deletion_failed": "Verwijderen van recensie mislukt: {{message}}",
+      "review_edit_failed": "Bewerken van recensie mislukt: {{message}}",
+      "review_submission_failed": "Indienen van recensie mislukt: {{message}}",
+      "street_view_unavailable": "Street View niet beschikbaar voor locatie {{id}}",
+      "type_add_failed": "Toevoegen van nieuw type mislukt: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
-      "confirmation_failed": "Account confirmation failed: {{message}}",
-      "password_set_failed": "Setting new password failed: {{message}}",
-      "profile_update_failed": "Profile update failed: {{message}}",
-      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
-      "reset_password_failed": "Resetting password failed: {{message}}",
-      "signin_failed": "Sign in failed: {{message}}",
-      "signup_failed": "Sign up failed: {{message}}"
+      "check_failed": "Authenticatiecontrole mislukt: {{message}}",
+      "confirmation_failed": "Accountbevestiging mislukt: {{message}}",
+      "password_set_failed": "Instellen nieuw wachtwoord mislukt: {{message}}",
+      "profile_update_failed": "Profielupdate mislukt: {{message}}",
+      "resend_confirmation_failed": "Opnieuw verzenden bevestiging mislukt: {{message}}",
+      "reset_password_failed": "Wachtwoord herstellen mislukt: {{message}}",
+      "signin_failed": "Inloggen mislukt: {{message}}",
+      "signup_failed": "Registreren mislukt: {{message}}"
     },
     "geolocation": {
-      "code_2": "Position unavailable: {{message}}",
-      "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "code_2": "Positie niet beschikbaar: {{message}}",
+      "code_3": "Geolocatie timeout: {{message}}",
+      "denied": "Toestemming om uw locatie te gebruiken is geweigerd. Om geolocatie in te schakelen, sta locatiedeling toe in uw browserinstellingen en vernieuw de pagina.",
+      "not_supported": "Geolocatie wordt niet ondersteund"
     },
-    "unknown_error": "Unknown error"
+    "unknown_error": "Onbekende fout"
   },
   "filter": {
     "deselect_all": "Deselect all",
