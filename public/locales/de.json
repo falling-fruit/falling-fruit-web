@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "Bewertung abgeben",
-      "observed_on": "Beobachtet am",
+      "observed_on": "Beobachtet am {{date}}",
       "upload_images": "Bilder hochladen"
     },
-    "reviewed_on": "Bewertet am {{date}}",
     "update_delete": "Diese Bewertung aktualisieren oder löschen.",
-    "visited_on": "besucht am {{date}}",
     "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
   },
   "time": {

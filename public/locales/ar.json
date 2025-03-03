@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "اترك مراجعة",
-      "observed_on": "تمت الملاحظة في",
+      "observed_on": "تمت الملاحظة في {{date}}",
       "upload_images": "تحميل الصور"
     },
-    "reviewed_on": "تمت المراجعة في {{date}}",
     "update_delete": "تحديث أو حذف هذه المراجعة.",
-    "visited_on": "تمت الزيارة في {{date}}",
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
   "time": {

@@ -82,7 +82,7 @@
     "account": "Konto",
     "activity": "Aktywność",
     "address": "Adres",
-    "by_author": "według {{author}}",
+    "by_author": "przez {{author}}",
     "description": "Opis",
     "email": "Email",
     "logout": "Wyloguj",
@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "Zostaw recenzję",
-      "observed_on": "Zaobserwowano dnia",
+      "observed_on": "Zaobserwowano dnia {{date}}",
       "upload_images": "Prześlij zdjęcia"
     },
-    "reviewed_on": "Zrecenzowano {{date}}",
     "update_delete": "Zaktualizuj lub usuń tę recenzję.",
-    "visited_on": "odwiedzono {{date}}",
     "you_reviewed": "Zrecenzowałeś tę lokalizację {{date}}"
   },
   "time": {

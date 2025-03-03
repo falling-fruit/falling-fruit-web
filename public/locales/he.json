@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "כתוב ביקורת",
-      "observed_on": "נצפה בתאריך",
+      "observed_on": "נצפה בתאריך {{date}}",
       "upload_images": "העלה תמונות"
     },
-    "reviewed_on": "נכתב בתאריך {{date}}",
     "update_delete": "עדכן או מחק ביקורת זו.",
-    "visited_on": "ביקר בתאריך {{date}}",
     "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
   },
   "time": {

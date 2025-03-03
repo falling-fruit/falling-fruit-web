@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "Lämna en recension",
-      "observed_on": "Observerad den",
+      "observed_on": "Observerad den {{date}}",
       "upload_images": "Ladda upp bilder"
     },
-    "reviewed_on": "Granskad den {{date}}",
     "update_delete": "Uppdatera eller ta bort denna recension.",
-    "visited_on": "besökt {{date}}",
     "you_reviewed": "Du recenserade denna plats den {{date}}"
   },
   "time": {

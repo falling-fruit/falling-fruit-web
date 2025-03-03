@@ -25,32 +25,34 @@ const EntryReviews = () => {
     <>
       {!isDesktop && <ReviewButton />}
       <h3>{t('glossary.review.other')}</h3>
-      {reviews.map((review) => {
-        const onReviewImageClick = (imageIndex) =>
-          onImageClick(
-            reviewsWithPhotos.findIndex((r) => r.id === review.id),
-            imageIndex,
-          )
-        if (review.user_id === user?.id) {
-          return (
-            <Review
-              key={review.id}
-              review={review}
-              onImageClick={onReviewImageClick}
-              onEditClick={() => history.push(`/reviews/${review.id}/edit`)}
-              editable
-            />
-          )
-        } else {
-          return (
-            <Review
-              key={review.id}
-              review={review}
-              onImageClick={onReviewImageClick}
-            />
-          )
-        }
-      })}
+      <div>
+        {reviews.map((review) => {
+          const onReviewImageClick = (imageIndex) =>
+            onImageClick(
+              reviewsWithPhotos.findIndex((r) => r.id === review.id),
+              imageIndex,
+            )
+          if (review.user_id === user?.id) {
+            return (
+              <Review
+                key={review.id}
+                review={review}
+                onImageClick={onReviewImageClick}
+                onEditClick={() => history.push(`/reviews/${review.id}/edit`)}
+                editable
+              />
+            )
+          } else {
+            return (
+              <Review
+                key={review.id}
+                review={review}
+                onImageClick={onReviewImageClick}
+              />
+            )
+          }
+        })}
+      </div>
       {isDesktop && <ReviewForm />}
     </>
   )
