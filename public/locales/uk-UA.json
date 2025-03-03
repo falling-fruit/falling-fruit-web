@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "Залишити відгук",
-      "observed_on": "Помічено",
+      "observed_on": "Помічено {{date}}",
       "upload_images": "Завантажити зображення"
     },
-    "reviewed_on": "Переглянуто {{date}}",
     "update_delete": "Оновити або видалити цей відгук.",
-    "visited_on": "відвідано {{date}}",
     "you_reviewed": "Ви залишили відгук про це місце {{date}}"
   },
   "time": {

@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "Değerlendirme yap",
-      "observed_on": "Gözlemlenme tarihi",
+      "observed_on": "Gözlemlenme tarihi {{date}}",
       "upload_images": "Fotoğraf yükle"
     },
-    "reviewed_on": "{{date}} tarihinde değerlendirildi",
     "update_delete": "Bu değerlendirmeyi güncelle veya sil.",
-    "visited_on": "{{date}} tarihinde ziyaret edildi",
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
   },
   "time": {

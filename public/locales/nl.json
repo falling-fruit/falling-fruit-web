@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "Schrijf een recensie",
-      "observed_on": "Waargenomen op",
+      "observed_on": "Waargenomen op {{date}}",
       "upload_images": "Afbeeldingen uploaden"
     },
-    "reviewed_on": "Beoordeeld op {{date}}",
     "update_delete": "Deze recensie bijwerken of verwijderen.",
-    "visited_on": "bezocht op {{date}}",
     "you_reviewed": "U heeft deze locatie beoordeeld op {{date}}"
   },
   "time": {

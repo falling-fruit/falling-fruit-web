@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "Lascia una recensione",
-      "observed_on": "Osservato il",
+      "observed_on": "Osservato il {{date}}",
       "upload_images": "Carica immagini"
     },
-    "reviewed_on": "Recensito il {{date}}",
     "update_delete": "Aggiorna o elimina questa recensione.",
-    "visited_on": "visitato il {{date}}",
     "you_reviewed": "Hai recensito questa posizione il {{date}}"
   },
   "time": {

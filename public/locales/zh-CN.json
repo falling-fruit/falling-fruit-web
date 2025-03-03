@@ -339,12 +339,10 @@
   "review": {
     "form": {
       "leave_a_review": "发表评论",
-      "observed_on": "观察于",
+      "observed_on": "观察于 {{date}}",
       "upload_images": "上传图片"
     },
-    "reviewed_on": "评论于 {{date}}",
     "update_delete": "更新或删除此评论",
-    "visited_on": "访问于 {{date}}",
     "you_reviewed": "您于 {{date}} 评论了此地点"
   },
   "time": {
