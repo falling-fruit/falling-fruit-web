@@ -358,6 +358,23 @@ class TranslationManager:
             else:
                 print(f"{json_file.name}: No orphan keys found")
     
+    def extract_template_vars(self, text):
+        """Extract template variables like {{ var_name }} from text"""
+        if not text:
+            return set()
+        
+        # Handle both string and list values
+        if isinstance(text, list):
+            vars_set = set()
+            for item in text:
+                if isinstance(item, str):
+                    vars_set.update(self.extract_template_vars(item))
+            return vars_set
+        
+        # Extract variables using regex
+        template_vars = re.findall(r'{{\s*([^}]*?)\s*}}', text)
+        return set(template_vars)
+
     def check_translations(self):
         """Check if all translation keys exist in all language files (TAP format)"""
         if not self.source_directory or not self.source_directory.components:
@@ -406,28 +423,57 @@ class TranslationManager:
             
             # Count missing translations for this key
             missing_count = 0
+            template_var_issues = False
+            
+            # Get English template variables for comparison
+            en_translation = translations.get('en')
+            en_value = en_translation.get(key) if en_translation else None
+            en_template_vars = self.extract_template_vars(en_value) if en_value else set()
+            
             for lang in sorted(languages):
+                if lang == 'en':  # Skip English for missing check
+                    continue
+                    
                 translation = translations[lang]
                 value = translation.get(key)
                 
                 if value is None:
                     missing_count += 1
+                elif en_template_vars:  # Only check if English has template vars
+                    lang_template_vars = self.extract_template_vars(value)
+                    if lang_template_vars != en_template_vars:
+                        template_var_issues = True
             
             source_files_str = ", ".join(source_files)
-            if missing_count == 0:
+            if missing_count == 0 and not template_var_issues:
                 print(f"ok {test_number} - '{key}' # {source_files_str}")
             else:
                 print(f"not ok {test_number} - '{key}' # {source_files_str}")
+                if en_template_vars:
+                    print(f"    # English vars: {', '.join(en_template_vars)}")
             
             # Print subtests for each language
             for subtest_number, lang in enumerate(sorted(languages), 1):
                 translation = translations[lang]
                 value = translation.get(key)
                 
-                if value is not None:
-                    print(f"    ok {subtest_number} - {lang}")
+                if value is None:
+                    print(f"    not ok {subtest_number} - {lang} # missing translation")
+                elif lang != 'en' and en_template_vars:
+                    lang_template_vars = self.extract_template_vars(value)
+                    if lang_template_vars != en_template_vars:
+                        missing_vars = en_template_vars - lang_template_vars
+                        extra_vars = lang_template_vars - en_template_vars
+                        error_msg = []
+                        if missing_vars:
+                            error_msg.append(f"missing vars: {', '.join(missing_vars)}")
+                        if extra_vars:
+                            error_msg.append(f"extra vars: {', '.join(extra_vars)}")
+                        print(f"    not ok {subtest_number} - {lang} # {'; '.join(error_msg)}")
+                    else:
+                        print(f"    ok {subtest_number} - {lang}")
                 else:
-                    print(f"    not ok {subtest_number} - {lang}")
+                    print(f"    ok {subtest_number} - {lang}")
         
         # Check for orphan keys (keys in translation files not in source)
         test_number = len(all_keys) + 1
@@ -460,6 +506,7 @@ class TranslationManager:
                 print(f"    ok {subtest_number} - {lang}")
             else:
                 print(f"    not ok {subtest_number} - {lang} #{', '.join(orphan_keys)}")
+        
 
 
 def main():
@@ -477,7 +524,7 @@ def main():
     parser.add_argument("--rename-key", nargs=2, metavar=('OLD_KEY', 'NEW_KEY'), 
                         help="Rename a translation key in source and JSON files")
     parser.add_argument("--check-translations", action="store_true", 
-                        help="Check if all translation keys exist in all language files (TAP format)")
+                        help="Check if all translation keys exist in all language files and template variables match (TAP format)")
     parser.add_argument("--remove-orphan-keys", action="store_true",
                         help="Remove keys from JSON files that don't exist in source files")
     

@@ -82,7 +82,7 @@
     "account": "Hesap",
     "activity": "Aktivite",
     "address": "Adres",
-    "by_author": "Yazar tarafından",
+    "by_author": "Yazar {{author}}",
     "description": "Açıklama",
     "email": "E-posta",
     "logout": "Çıkış Yap",
