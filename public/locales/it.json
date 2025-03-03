@@ -82,6 +82,7 @@
     "account": "Conto",
     "activity": "Attività",
     "address": "Indirizzo",
+    "by_author": "da {{author}}",
     "description": "Descrizione",
     "email": "Email",
     "logout": "Logout",
@@ -341,7 +342,6 @@
       "observed_on": "Osservato il",
       "upload_images": "Carica immagini"
     },
-    "reviewed_by": "da",
     "reviewed_on": "Recensito il {{date}}",
     "update_delete": "Aggiorna o elimina questa recensione.",
     "visited_on": "visitato il {{date}}",

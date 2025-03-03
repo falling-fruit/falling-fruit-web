@@ -82,6 +82,7 @@
     "account": "חשבון",
     "activity": "פעילות",
     "address": "כתובת",
+    "by_author": "ע\"י {{author}}",
     "description": "תיאור",
     "email": "כתובת דוא\"ל",
     "logout": "התנתקות",
@@ -341,7 +342,6 @@
       "observed_on": "נצפה בתאריך",
       "upload_images": "העלה תמונות"
     },
-    "reviewed_by": "מאת",
     "reviewed_on": "נכתב בתאריך {{date}}",
     "update_delete": "עדכן או מחק ביקורת זו.",
     "visited_on": "ביקר בתאריך {{date}}",

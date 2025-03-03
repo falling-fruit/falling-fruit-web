@@ -20,12 +20,18 @@ def get_claude_response(client, source_content, target_content, query, keys_to_k
     # Create copies to avoid modifying the originals
     source_copy = source_content.copy()
     target_copy = target_content.copy()
+
+    # Calculate missing keys
+    source_copy_keys = set(source_copy.keys())
+    target_copy_keys = set(target_copy.keys())
+    missing_keys_list = list(source_copy_keys - target_copy_keys)
     
     # If keys_to_keep is provided, only keep those keys
     if keys_to_keep:
         # Create new dictionaries with only the keys to keep
         source_copy = {k: source_copy[k] for k in keys_to_keep if k in source_copy}
         target_copy = {k: target_copy[k] for k in keys_to_keep if k in target_copy}
+    
     
     prompt = f"""Here are two JSON files:
 
@@ -34,6 +40,9 @@ Source (original language):
 
 Target (translations):
 {json.dumps(target_copy, indent=2)}
+
+Missing keys that need translation:
+{json.dumps(missing_keys_list, indent=2)}
 
 Query about the translations:
 {query}

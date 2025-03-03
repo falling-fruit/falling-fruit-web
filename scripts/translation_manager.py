@@ -67,14 +67,7 @@ class TranslationManager:
             print(f"No YAML files found in {self.yaml_folder_path}")
             return
             
-        # Load English translations to use as fallbacks
-        english_json_file = self.json_folder_path / "en.json"
-        english_translation = None
-        if english_json_file.exists():
-            english_translation = Translation.from_json_file(english_json_file)
-            print(f"Loaded English translations as fallback for missing keys")
-        else:
-            print(f"Warning: No English translations found at {english_json_file}")
+        # No longer using English translations as fallbacks
 
         for yaml_file in yaml_files:
             lang_code = Path(yaml_file).stem
@@ -82,7 +75,6 @@ class TranslationManager:
             if json_file.exists():
                 yaml_added = 0
                 mobile_added = 0
-                english_added = 0
                 edited_keys = 0
                 missing_keys = 0
                 
@@ -118,19 +110,10 @@ class TranslationManager:
                             json_translation.set(key, mobile_value)
                             mobile_added += 1
                         else:
-                            # If still missing and we have English translations, use those
-                            if english_translation and lang_code != "en":
-                                english_value = english_translation.get(key)
-                                if english_value is not None:
-                                    json_translation.set(key, english_value)
-                                    english_added += 1
-                                else:
-                                    missing_keys += 1
-                            else:
-                                missing_keys += 1
+                            missing_keys += 1
 
                 json_translation.save_as_json(json_file)
-                print(f"{yaml_file} -> {json_file} added {yaml_added} from YAML, {mobile_added} from mobile, {english_added} from English, edited {edited_keys} keys, missing {missing_keys} keys. Checked: {len(all_keys)} keys")
+                print(f"{yaml_file} -> {json_file} added {yaml_added} from YAML, {mobile_added} from mobile, edited {edited_keys} keys, missing {missing_keys} keys. Checked: {len(all_keys)} keys")
             else:
                 print(f"{yaml_file} skipped: no {json_file}")
 
@@ -339,6 +322,42 @@ class TranslationManager:
                 value = value.replace('\n', ' ').replace('\r', '')
                 print(f"{json_file}\t{key}\t{value}")
                 
+    def remove_orphan_keys(self):
+        """Remove keys from JSON files that don't exist in source files"""
+        if not self.source_directory or not self.source_directory.components:
+            print("Error: No source files with translations found.")
+            return
+            
+        if not self.json_folder_path or not self.json_folder_path.exists():
+            print("Error: JSON folder does not exist.")
+            return
+            
+        json_files = list(self.json_folder_path.glob('*.json'))
+        if not json_files:
+            print(f"No JSON files found in {self.json_folder_path}")
+            return
+            
+        # Get all keys from source files
+        all_keys = self.source_directory.get_all_keys()
+        
+        # Process each JSON file
+        for json_file in json_files:
+            translation = Translation.from_json_file(json_file)
+            orphan_keys = []
+            
+            # Find orphan keys
+            for key in list(translation.entries.keys()):
+                if key not in all_keys:
+                    orphan_keys.append(key)
+                    translation.entries.pop(key)
+            
+            # Save the file if orphan keys were removed
+            if orphan_keys:
+                translation.save_as_json(json_file)
+                print(f"{json_file.name}: Removed {len(orphan_keys)} orphan keys: {', '.join(orphan_keys)}")
+            else:
+                print(f"{json_file.name}: No orphan keys found")
+    
     def check_translations(self):
         """Check if all translation keys exist in all language files (TAP format)"""
         if not self.source_directory or not self.source_directory.components:
@@ -366,8 +385,11 @@ class TranslationManager:
             json_file = self.json_folder_path / f"{lang}.json"
             translations[lang] = Translation.from_json_file(json_file)
         
-        # Print TAP header - one test per key, with subtests for each language
-        print(f"1..{len(all_keys)}")
+        # Count total tests: one for each key in source + one for orphan keys test
+        total_tests = len(all_keys) + 1
+        
+        # Print TAP header
+        print(f"1..{total_tests}")
         
         # Group keys by source file for better organization
         key_to_files = {}
@@ -406,6 +428,38 @@ class TranslationManager:
                     print(f"    ok {subtest_number} - {lang}")
                 else:
                     print(f"    not ok {subtest_number} - {lang}")
+        
+        # Check for orphan keys (keys in translation files not in source)
+        test_number = len(all_keys) + 1
+        orphan_keys_found = False
+        
+        # Collect orphan keys for each language
+        orphan_keys_by_lang = {}
+        for lang in sorted(languages):
+            translation = translations[lang]
+            orphan_keys = []
+            
+            for key in translation.entries.keys():
+                if key not in all_keys:
+                    orphan_keys.append(key)
+                    orphan_keys_found = True
+            
+            orphan_keys_by_lang[lang] = orphan_keys
+        
+        # Print orphan keys test result
+        if orphan_keys_found:
+            print(f"not ok {test_number} - orphan keys")
+        else:
+            print(f"ok {test_number} - orphan keys")
+        
+        # Print subtests for each language
+        for subtest_number, lang in enumerate(sorted(languages), 1):
+            orphan_keys = orphan_keys_by_lang[lang]
+            
+            if not orphan_keys:
+                print(f"    ok {subtest_number} - {lang}")
+            else:
+                print(f"    not ok {subtest_number} - {lang} #{', '.join(orphan_keys)}")
 
 
 def main():
@@ -424,6 +478,8 @@ def main():
                         help="Rename a translation key in source and JSON files")
     parser.add_argument("--check-translations", action="store_true", 
                         help="Check if all translation keys exist in all language files (TAP format)")
+    parser.add_argument("--remove-orphan-keys", action="store_true",
+                        help="Remove keys from JSON files that don't exist in source files")
     
     args = parser.parse_args()
 
@@ -445,6 +501,11 @@ def main():
         
     if args.check_translations and (not args.source_path or not args.new_site_json_folder_path):
         print("Error: --source_path and --new_site_json_folder_path must be specified for --check-translations")
+        parser.print_help()
+        return
+        
+    if args.remove_orphan_keys and (not args.source_path or not args.new_site_json_folder_path):
+        print("Error: --source_path and --new_site_json_folder_path must be specified for --remove-orphan-keys")
         parser.print_help()
         return
 
@@ -477,9 +538,13 @@ def main():
         
     if args.check_translations:
         manager.check_translations()
+        
+    if args.remove_orphan_keys:
+        manager.remove_orphan_keys()
 
-    if not (args.rename_key or args.preview_migrate or args.migrate or args.list_in_source or args.list_in_json or args.check_translations):
-        print("No action specified. Use --rename_key {old_key} {new_key} --preview-migrate {language}, --migrate, --list-in-source, --list-in-json, --check-translations.")
+    if not (args.rename_key or args.preview_migrate or args.migrate or args.list_in_source or 
+            args.list_in_json or args.check_translations or args.remove_orphan_keys):
+        print("No action specified. Use --rename_key {old_key} {new_key} --preview-migrate {language}, --migrate, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys.")
         parser.print_help()
 
 if __name__ == "__main__":
