@@ -82,6 +82,7 @@
     "account": "Tài khoản",
     "activity": "Hoạt động",
     "address": "Địa chỉ",
+    "by_author": "bởi {{author}}",
     "description": "Miêu tả",
     "email": "Email",
     "logout": "Đăng xuất",
@@ -94,8 +95,7 @@
     },
     "sign_up": "Đăng ký",
     "tree_inventory": {
-      "one": "Kiểm kê cây",
-      "other": "Kiểm kê cây"
+      "one": "Kiểm kê cây"
     },
     "type": {
       "one": "Loại",
@@ -342,7 +342,6 @@
       "observed_on": "Quan sát vào",
       "upload_images": "Tải ảnh lên"
     },
-    "reviewed_by": "bởi",
     "reviewed_on": "Đã đánh giá vào {{date}}",
     "update_delete": "Cập nhật hoặc xóa đánh giá này.",
     "visited_on": "đã ghé thăm vào {{date}}",

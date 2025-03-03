@@ -82,6 +82,7 @@
     "account": "Hesap",
     "activity": "Aktivite",
     "address": "Adres",
+    "by_author": "Yazar tarafından",
     "description": "Açıklama",
     "email": "E-posta",
     "logout": "Çıkış Yap",
@@ -341,7 +342,6 @@
       "observed_on": "Gözlemlenme tarihi",
       "upload_images": "Fotoğraf yükle"
     },
-    "reviewed_by": "yazan",
     "reviewed_on": "{{date}} tarihinde değerlendirildi",
     "update_delete": "Bu değerlendirmeyi güncelle veya sil.",
     "visited_on": "{{date}} tarihinde ziyaret edildi",

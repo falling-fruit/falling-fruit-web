@@ -82,6 +82,7 @@
     "account": "Compte",
     "activity": "Activité",
     "address": "Adresse",
+    "by_author": "par {{author}}",
     "description": "Description",
     "email": "Email",
     "logout": "Déconnexion",
@@ -94,8 +95,7 @@
     },
     "sign_up": "S'inscrire",
     "tree_inventory": {
-      "one": "Inventaire d'arbres",
-      "other": "Inventaires d'arbres"
+      "one": "Inventaire d'arbres"
     },
     "type": {
       "one": "Type",
@@ -342,7 +342,6 @@
       "observed_on": "Observé le",
       "upload_images": "Télécharger des images"
     },
-    "reviewed_by": "par",
     "reviewed_on": "Évalué le {{date}}",
     "update_delete": "Modifier ou supprimer cet avis.",
     "visited_on": "visité le {{date}}",

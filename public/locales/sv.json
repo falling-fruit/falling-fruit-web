@@ -82,6 +82,7 @@
     "account": "Konto",
     "activity": "Aktivitet",
     "address": "Adress",
+    "by_author": "av författare",
     "description": "Beskrivning",
     "email": "Email",
     "logout": "Utloggning",
@@ -94,8 +95,7 @@
     },
     "sign_up": "Registrera dig",
     "tree_inventory": {
-      "one": "Trädinventering",
-      "other": "Trädinventeringar"
+      "one": "Trädinventering"
     },
     "type": {
       "one": "Typ",
@@ -342,7 +342,6 @@
       "observed_on": "Observerad den",
       "upload_images": "Ladda upp bilder"
     },
-    "reviewed_by": "av",
     "reviewed_on": "Granskad den {{date}}",
     "update_delete": "Uppdatera eller ta bort denna recension.",
     "visited_on": "besökt {{date}}",

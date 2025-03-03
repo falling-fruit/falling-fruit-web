@@ -82,7 +82,7 @@ const TimelineItem = ({ data }) => {
   } = data
 
   const date = new Date(published_on)
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const dateString = date.toLocaleDateString(i18n.language, {
     day: 'numeric',
     month: 'long',
@@ -100,7 +100,7 @@ const TimelineItem = ({ data }) => {
           <ConditionalLink href={outlet_url}>{outlet}</ConditionalLink>
         </h3>
         <ConditionalLink href={url}>{title}</ConditionalLink>
-        {author && ` by ${author}`}
+        {author && <> {t('glossary.by_author', { author: author })}</>}
         {embed_html && (
           <Embed dangerouslySetInnerHTML={{ __html: embed_html }} />
         )}

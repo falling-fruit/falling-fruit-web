@@ -82,6 +82,7 @@
     "account": "帐户",
     "activity": "活动",
     "address": "地址",
+    "by_author": "作者： {{author}}",
     "description": "描述",
     "email": "电子邮件",
     "logout": "登出",
@@ -341,7 +342,6 @@
       "observed_on": "观察于",
       "upload_images": "上传图片"
     },
-    "reviewed_by": "评论者",
     "reviewed_on": "评论于 {{date}}",
     "update_delete": "更新或删除此评论",
     "visited_on": "访问于 {{date}}",

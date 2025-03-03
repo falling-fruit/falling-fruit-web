@@ -82,6 +82,7 @@
     "account": "Λογαριασμός",
     "activity": "Δραστηριότητα",
     "address": "Διεύθυνση",
+    "by_author": "από {{author}}",
     "description": "Περιγραφή",
     "email": "Email",
     "logout": "Αποσύνδεση",
@@ -341,7 +342,6 @@
       "observed_on": "Παρατηρήθηκε στις",
       "upload_images": "Ανέβασμα εικόνων"
     },
-    "reviewed_by": "από",
     "reviewed_on": "Αξιολογήθηκε στις {{date}}",
     "update_delete": "Ενημέρωση ή διαγραφή αυτής της αξιολόγησης.",
     "visited_on": "επισκέφθηκε στις {{date}}",

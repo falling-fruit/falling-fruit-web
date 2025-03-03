@@ -170,7 +170,7 @@ const Review = ({
             {review.author && (
               <>
                 {' '}
-                {t('review.reviewed_by')}{' '}
+                {t('glossary.by_author')}
                 {review.user_id ? (
                   <StyledLink to={`/users/${review.user_id}`}>
                     {review.author}

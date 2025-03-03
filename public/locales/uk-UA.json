@@ -82,6 +82,7 @@
     "account": "Обліковий запис",
     "activity": "Активність",
     "address": "Адреса",
+    "by_author": "Автор",
     "description": "Опис",
     "email": "Електронна пошта",
     "logout": "Вийти",
@@ -341,7 +342,6 @@
       "observed_on": "Помічено",
       "upload_images": "Завантажити зображення"
     },
-    "reviewed_by": "від",
     "reviewed_on": "Переглянуто {{date}}",
     "update_delete": "Оновити або видалити цей відгук.",
     "visited_on": "відвідано {{date}}",

@@ -82,6 +82,7 @@
     "account": "Account",
     "activity": "Activity",
     "address": "Address",
+    "by_author": "by {{author}}",
     "description": "Description",
     "email": "Email",
     "logout": "Logout",
@@ -341,7 +342,6 @@
       "observed_on": "Observed on",
       "upload_images": "Upload images"
     },
-    "reviewed_by": "by",
     "reviewed_on": "Reviewed on {{date}}",
     "update_delete": "Update or delete this review.",
     "visited_on": "visited {{date}}",

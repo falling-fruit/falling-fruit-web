@@ -82,6 +82,7 @@
     "account": "Conta",
     "activity": "Atividade",
     "address": "Endereço",
+    "by_author": "por {{author}}",
     "description": "Descrição",
     "email": "Email",
     "logout": "Sair",
@@ -341,7 +342,6 @@
       "observed_on": "Observado em",
       "upload_images": "Enviar imagens"
     },
-    "reviewed_by": "por",
     "reviewed_on": "Avaliado em {{date}}",
     "update_delete": "Atualizar ou excluir esta avaliação.",
     "visited_on": "visitado em {{date}}",

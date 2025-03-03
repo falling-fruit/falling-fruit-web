@@ -82,6 +82,7 @@
     "account": "Konto",
     "activity": "Aktivität",
     "address": "Adresse",
+    "by_author": "von {{author}}",
     "description": "Beschreibung",
     "email": "Email",
     "logout": "Abmelden",
@@ -341,7 +342,6 @@
       "observed_on": "Beobachtet am",
       "upload_images": "Bilder hochladen"
     },
-    "reviewed_by": "von",
     "reviewed_on": "Bewertet am {{date}}",
     "update_delete": "Diese Bewertung aktualisieren oder löschen.",
     "visited_on": "besucht am {{date}}",

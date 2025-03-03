@@ -82,6 +82,7 @@
     "account": "حساب",
     "activity": "نشاط",
     "address": "عنوان",
+    "by_author": "بواسطة {{author}}",
     "description": "وصف",
     "email": "البريد الإلكتروني",
     "logout": "خروج",
@@ -94,8 +95,7 @@
     },
     "sign_up": "سجل",
     "tree_inventory": {
-      "one": "جرد الشجرة",
-      "other": "جرد الأشجار"
+      "one": "جرد الشجرة"
     },
     "type": {
       "one": "نوع",
@@ -342,7 +342,6 @@
       "observed_on": "تمت الملاحظة في",
       "upload_images": "تحميل الصور"
     },
-    "reviewed_by": "بواسطة",
     "reviewed_on": "تمت المراجعة في {{date}}",
     "update_delete": "تحديث أو حذف هذه المراجعة.",
     "visited_on": "تمت الزيارة في {{date}}",

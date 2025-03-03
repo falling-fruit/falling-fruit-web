@@ -82,6 +82,7 @@
     "account": "Account",
     "activity": "Activiteit",
     "address": "Adres",
+    "by_author": "door {{author}}",
     "description": "Omschrijving",
     "email": "E-mail",
     "logout": "Uitloggen",
@@ -94,8 +95,7 @@
     },
     "sign_up": "Registreren",
     "tree_inventory": {
-      "one": "Boominventarisatie",
-      "other": "Boominventarisaties"
+      "one": "Boominventarisatie"
     },
     "type": {
       "one": "Soort",
@@ -342,7 +342,6 @@
       "observed_on": "Waargenomen op",
       "upload_images": "Afbeeldingen uploaden"
     },
-    "reviewed_by": "door",
     "reviewed_on": "Beoordeeld op {{date}}",
     "update_delete": "Deze recensie bijwerken of verwijderen.",
     "visited_on": "bezocht op {{date}}",
