@@ -82,7 +82,7 @@
     "account": "Konto",
     "activity": "Aktivitet",
     "address": "Adress",
-    "by_author": "av författare",
+    "by_author": "av {{author}}",
     "description": "Beskrivning",
     "email": "Email",
     "logout": "Utloggning",

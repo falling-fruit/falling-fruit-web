@@ -82,7 +82,7 @@
     "account": "Обліковий запис",
     "activity": "Активність",
     "address": "Адреса",
-    "by_author": "Автор",
+    "by_author": "за {{author}}",
     "description": "Опис",
     "email": "Електронна пошта",
     "logout": "Вийти",
