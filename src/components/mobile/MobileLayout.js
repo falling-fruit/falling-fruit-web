@@ -50,11 +50,15 @@ const shouldDisplayMapPage = (pathname) => {
   const isViewingPanorama =
     locationId && match.params.nextSegment === 'panorama'
 
+  const isSuccessfullyAdded =
+    locationId && match.params.nextSegment === 'success'
+
   return (
     isPlacingNewLocationMarker ||
     isEditingLocationMarker ||
     isViewingLocation ||
-    isViewingPanorama
+    isViewingPanorama ||
+    isSuccessfullyAdded
   )
 }
 

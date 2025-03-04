@@ -122,6 +122,7 @@
     "zoom_in": "Zoom into the map to see location data"
   },
   "locations": {
+    "add_another": "Add another",
     "edit_position": {
       "cancel": "Cancel edit position",
       "confirm": "Confirm edit position",

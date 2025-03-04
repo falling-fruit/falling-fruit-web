@@ -122,6 +122,7 @@
     "zoom_in": "Przybliż mapę, aby zobaczyć dane lokalizacji"
   },
   "locations": {
+    "add_another": "Dodaj kolejne",
     "edit_position": {
       "cancel": "Anuluj edycję pozycji",
       "confirm": "Potwierdź edycję pozycji",

@@ -122,6 +122,7 @@
     "zoom_in": "הגדל את המפה כדי לראות נתוני מיקום"
   },
   "locations": {
+    "add_another": "הוסף עוד",
     "edit_position": {
       "cancel": "בטל עריכת מיקום",
       "confirm": "אשר עריכת מיקום",

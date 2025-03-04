@@ -122,6 +122,7 @@
     "zoom_in": "放大地图以查看位置数据"
   },
   "locations": {
+    "add_another": "添加另一个",
     "edit_position": {
       "cancel": "取消编辑位置",
       "confirm": "确认编辑位置",
