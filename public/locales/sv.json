@@ -50,6 +50,7 @@
       "denied": "Tillstånd att använda din plats nekades. För att aktivera platsinformation, tillåt platsdelning i dina webbläsarinställningar och uppdatera sidan.",
       "not_supported": "Platsinformation stöds inte"
     },
+    "language_changed_refresh_to_reload_map": "Språk ändrat, uppdatera sidan för att ladda om kartan",
     "unknown_error": "Okänt fel"
   },
   "filter": {

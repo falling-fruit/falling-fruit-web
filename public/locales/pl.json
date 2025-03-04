@@ -50,6 +50,7 @@
       "denied": "Odmówiono dostępu do lokalizacji. Aby włączyć geolokalizację, zezwól na udostępnianie lokalizacji w ustawieniach przeglądarki i odśwież stronę.",
       "not_supported": "Geolokalizacja nie jest obsługiwana"
     },
+    "language_changed_refresh_to_reload_map": "Język został zmieniony. Odśwież stronę, aby przeładować mapę",
     "unknown_error": "Nieznany błąd"
   },
   "filter": {

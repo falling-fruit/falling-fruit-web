@@ -50,6 +50,7 @@
       "denied": "Permiso para usar tu ubicación denegado. Para habilitar la geolocalización, permite compartir ubicación en la configuración de tu navegador y actualiza la página.",
       "not_supported": "Geolocalización no compatible"
     },
+    "language_changed_refresh_to_reload_map": "El idioma ha cambiado. Actualiza la página para recargar el mapa",
     "unknown_error": "Error desconocido"
   },
   "filter": {
