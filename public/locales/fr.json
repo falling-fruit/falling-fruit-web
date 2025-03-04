@@ -50,6 +50,7 @@
       "denied": "L'autorisation d'utiliser votre position a été refusée. Pour activer la géolocalisation, veuillez autoriser le partage de position dans les paramètres de votre navigateur et actualiser la page.",
       "not_supported": "Géolocalisation non prise en charge"
     },
+    "language_changed_refresh_to_reload_map": "La langue a été modifiée. Actualisez la page pour recharger la carte.",
     "unknown_error": "Erreur inconnue"
   },
   "filter": {

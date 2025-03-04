@@ -50,6 +50,7 @@
       "denied": "Toestemming om uw locatie te gebruiken is geweigerd. Om geolocatie in te schakelen, sta locatiedeling toe in uw browserinstellingen en vernieuw de pagina.",
       "not_supported": "Geolocatie wordt niet ondersteund"
     },
+    "language_changed_refresh_to_reload_map": "Taal gewijzigd, vernieuw de pagina om de kaart opnieuw te laden",
     "unknown_error": "Onbekende fout"
   },
   "filter": {

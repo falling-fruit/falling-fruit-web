@@ -50,6 +50,7 @@
       "denied": "Die Erlaubnis zur Nutzung Ihres Standorts wurde verweigert. Um die Geolokalisierung zu aktivieren, erlauben Sie bitte die Standortfreigabe in Ihren Browsereinstellungen und aktualisieren Sie die Seite.",
       "not_supported": "Geolokalisierung wird nicht unterstützt"
     },
+    "language_changed_refresh_to_reload_map": "Sprache geändert. Bitte Seite neu laden, um die Karte zu aktualisieren",
     "unknown_error": "Unbekannter Fehler"
   },
   "filter": {

@@ -50,6 +50,7 @@
       "denied": "Quyền sử dụng vị trí của bạn đã bị từ chối. Để bật định vị, vui lòng cho phép chia sẻ vị trí trong cài đặt trình duyệt và làm mới trang.",
       "not_supported": "Không hỗ trợ định vị"
     },
+    "language_changed_refresh_to_reload_map": "Ngôn ngữ đã thay đổi, làm mới trang để tải lại bản đồ",
     "unknown_error": "Lỗi không xác định"
   },
   "filter": {

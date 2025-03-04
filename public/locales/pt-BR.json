@@ -50,6 +50,7 @@
       "denied": "Permissão para usar sua localização foi negada. Para ativar a geolocalização, permita o compartilhamento de localização nas configurações do seu navegador e atualize a página.",
       "not_supported": "Geolocalização não suportada"
     },
+    "language_changed_refresh_to_reload_map": "Idioma alterado. Atualize a página para recarregar o mapa",
     "unknown_error": "Erro desconhecido"
   },
   "filter": {

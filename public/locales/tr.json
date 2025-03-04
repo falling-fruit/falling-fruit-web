@@ -50,6 +50,7 @@
       "denied": "Konumunuzu kullanma izni reddedildi. Konum özelliğini etkinleştirmek için lütfen tarayıcı ayarlarınızdan konum paylaşımına izin verin ve sayfayı yenileyin.",
       "not_supported": "Konum özelliği desteklenmiyor"
     },
+    "language_changed_refresh_to_reload_map": "Dil değiştirildi, haritayı yenilemek için sayfayı yenileyin",
     "unknown_error": "Bilinmeyen hata"
   },
   "filter": {

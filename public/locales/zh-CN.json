@@ -50,6 +50,7 @@
       "denied": "获取您的位置权限被拒绝。要启用地理位置，请在浏览器设置中允许位置共享并刷新页面。",
       "not_supported": "不支持地理位置"
     },
+    "language_changed_refresh_to_reload_map": "语言已更改，请刷新页面以重新加载地图",
     "unknown_error": "未知错误"
   },
   "filter": {
