@@ -1,3 +1,4 @@
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { createReviewSummary } from '../../utils/createReviewSummary'
@@ -84,18 +85,18 @@ const ReviewSummary = ({ reviews }) => {
     <ReviewStats>
       <StatsRow>
         {[stats[0], stats[1]].filter(Boolean).map((stat, i) => (
-          <>
+          <React.Fragment key={`top-stat-${i}`}>
             {i > 0 && <Separator />}
             {stat}
-          </>
+          </React.Fragment>
         ))}
       </StatsRow>
       <StatsRow>
         {stats.slice(2).map((stat, i) => (
-          <>
+          <React.Fragment key={`bottom-stat-${i}`}>
             {i > 0 && <Separator />}
             {stat}
-          </>
+          </React.Fragment>
         ))}
       </StatsRow>
     </ReviewStats>
