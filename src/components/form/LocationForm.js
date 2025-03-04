@@ -219,7 +219,7 @@ export const LocationForm = ({ editingId, initialValues, innerRef }) => {
         if (action.error) {
           formikProps.setSubmitting(false)
         } else {
-          history.push(`/locations/${action.payload.id}`)
+          history.push(`/locations/${action.payload.id}/success`)
         }
       })
     }

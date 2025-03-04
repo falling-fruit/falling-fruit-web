@@ -122,6 +122,7 @@
     "zoom_in": "Konum verilerini görmek için haritayı yakınlaştırın"
   },
   "locations": {
+    "add_another": "Başka ekle",
     "edit_position": {
       "cancel": "Konum düzenlemeyi iptal et",
       "confirm": "Konum düzenlemeyi onayla",
