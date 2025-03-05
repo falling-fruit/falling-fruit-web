@@ -334,8 +334,7 @@
       "3": "Ongepaste recensiefoto",
       "4": "Ongepaste recensietekst",
       "5": "Anders (hieronder toelichten)"
-    },
-    "report_submitted": "Melding succesvol ingediend!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Deze recensie bijwerken of verwijderen.",
     "you_reviewed": "U heeft deze locatie beoordeeld op {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Locatie succesvol bewerkt!",
+    "location_submitted": "Locatie succesvol ingediend!",
+    "report_submitted": "Melding succesvol ingediend!",
+    "review_deleted": "Beoordeling succesvol verwijderd!",
+    "review_edited": "Beoordeling succesvol bewerkt!",
+    "review_submitted": "Beoordeling succesvol ingediend!",
+    "type_added": "Type succesvol toegevoegd!"
   },
   "time": {
     "days": {

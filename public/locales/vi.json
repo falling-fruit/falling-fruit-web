@@ -334,8 +334,7 @@
       "3": "Ảnh đánh giá không phù hợp",
       "4": "Bình luận đánh giá không phù hợp",
       "5": "Khác (giải thích bên dưới)"
-    },
-    "report_submitted": "Báo cáo đã được gửi thành công!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Cập nhật hoặc xóa đánh giá này.",
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Địa điểm đã được chỉnh sửa thành công!",
+    "location_submitted": "Địa điểm đã được gửi thành công!",
+    "report_submitted": "Báo cáo đã được gửi thành công!",
+    "review_deleted": "Đánh giá đã được xóa thành công!",
+    "review_edited": "Đánh giá đã được chỉnh sửa thành công!",
+    "review_submitted": "Đánh giá đã được gửi thành công!",
+    "type_added": "Loại đã được thêm thành công!"
   },
   "time": {
     "days": {

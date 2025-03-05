@@ -334,8 +334,7 @@
       "3": "Foto da avaliação inadequada",
       "4": "Comentário da avaliação inadequado",
       "5": "Outro (explique abaixo)"
-    },
-    "report_submitted": "Relatório enviado com sucesso!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Atualizar ou excluir esta avaliação.",
     "you_reviewed": "Você avaliou esta localização em {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Local editado",
+    "location_submitted": "Local enviado",
+    "report_submitted": "Relatório enviado com sucesso!",
+    "review_deleted": "Avaliação excluída",
+    "review_edited": "Avaliação editada",
+    "review_submitted": "Avaliação enviada",
+    "type_added": "Tipo adicionado"
   },
   "time": {
     "days": {

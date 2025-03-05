@@ -334,8 +334,7 @@
       "3": "Nieodpowiednie zdjęcie w recenzji",
       "4": "Nieodpowiedni komentarz w recenzji",
       "5": "Inne (wyjaśnij poniżej)"
-    },
-    "report_submitted": "Raport został pomyślnie przesłany!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Zaktualizuj lub usuń tę recenzję.",
     "you_reviewed": "Zrecenzowałeś tę lokalizację {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Lokalizacja została edytowana!",
+    "location_submitted": "Lokalizacja została przesłana!",
+    "report_submitted": "Raport został pomyślnie przesłany!",
+    "review_deleted": "Recenzja została usunięta!",
+    "review_edited": "Recenzja została edytowana!",
+    "review_submitted": "Recenzja została przesłana!",
+    "type_added": "Typ został dodany!"
   },
   "time": {
     "days": {

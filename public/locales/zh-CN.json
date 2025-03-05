@@ -334,8 +334,7 @@
       "3": "不当的评论照片",
       "4": "不当的评论内容",
       "5": "其他（请在下方说明）"
-    },
-    "report_submitted": "报告提交成功！"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "更新或删除此评论",
     "you_reviewed": "您于 {{date}} 评论了此地点"
+  },
+  "success_message": {
+    "location_edited": "位置已编辑",
+    "location_submitted": "位置已提交",
+    "report_submitted": "报告提交成功！",
+    "review_deleted": "评论已删除",
+    "review_edited": "评论已编辑",
+    "review_submitted": "评论已提交",
+    "type_added": "类型已添加"
   },
   "time": {
     "days": {

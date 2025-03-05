@@ -334,8 +334,7 @@
       "3": "Foto della recensione inappropriata",
       "4": "Commento della recensione inappropriato",
       "5": "Altro (spiegare sotto)"
-    },
-    "report_submitted": "Segnalazione inviata con successo!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Aggiorna o elimina questa recensione.",
     "you_reviewed": "Hai recensito questa posizione il {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Posizione modificata",
+    "location_submitted": "Posizione inviata",
+    "report_submitted": "Segnalazione inviata con successo!",
+    "review_deleted": "Recensione eliminata",
+    "review_edited": "Recensione modificata",
+    "review_submitted": "Recensione inviata",
+    "type_added": "Tipo aggiunto"
   },
   "time": {
     "days": {

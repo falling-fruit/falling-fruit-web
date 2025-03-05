@@ -334,8 +334,7 @@
       "3": "Uygunsuz inceleme fotoğrafı",
       "4": "Uygunsuz inceleme yorumu",
       "5": "Diğer (aşağıda açıklayın)"
-    },
-    "report_submitted": "Rapor başarıyla gönderildi!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Bu değerlendirmeyi güncelle veya sil.",
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
+  },
+  "success_message": {
+    "location_edited": "Konum başarıyla düzenlendi!",
+    "location_submitted": "Konum başarıyla gönderildi!",
+    "report_submitted": "Rapor başarıyla gönderildi!",
+    "review_deleted": "Değerlendirme başarıyla silindi!",
+    "review_edited": "Değerlendirme başarıyla düzenlendi!",
+    "review_submitted": "Değerlendirme başarıyla gönderildi!",
+    "type_added": "Tür başarıyla eklendi!"
   },
   "time": {
     "days": {

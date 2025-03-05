@@ -54,7 +54,7 @@ const typeSlice = createSlice({
     },
     [addTypeAndUpdate.fulfilled]: (state, action) => {
       state.typesAccess = action.payload.updatedTypesAccess
-      toast.success('New type added successfully!')
+      toast.success(i18next.t('success_message.type_added'))
       state.isAddTypeModalOpen = false
     },
     [addTypeAndUpdate.rejected]: (_state, action) => {

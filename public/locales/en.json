@@ -334,8 +334,7 @@
       "3": "Inappropriate review photo",
       "4": "Inappropriate review comment",
       "5": "Other (explain below)"
-    },
-    "report_submitted": "Report submitted successfully!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Update or delete this review.",
     "you_reviewed": "You reviewed this location on {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Location edited successfully!",
+    "location_submitted": "Location submitted successfully!",
+    "report_submitted": "Report submitted successfully!",
+    "review_deleted": "Review deleted successfully!",
+    "review_edited": "Review edited successfully!",
+    "review_submitted": "Review submitted successfully!",
+    "type_added": "New type added successfully!"
   },
   "time": {
     "days": {

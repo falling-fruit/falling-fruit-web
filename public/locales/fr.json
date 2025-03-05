@@ -334,8 +334,7 @@
       "3": "Photo d'avis inappropriée",
       "4": "Commentaire d'avis inapproprié",
       "5": "Autre (expliquez ci-dessous)"
-    },
-    "report_submitted": "Rapport soumis avec succès !"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Modifier ou supprimer cet avis.",
     "you_reviewed": "Vous avez évalué cet emplacement le {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Emplacement modifié",
+    "location_submitted": "Emplacement soumis",
+    "report_submitted": "Rapport soumis avec succès !",
+    "review_deleted": "Avis supprimé",
+    "review_edited": "Avis modifié",
+    "review_submitted": "Avis soumis",
+    "type_added": "Type ajouté"
   },
   "time": {
     "days": {
