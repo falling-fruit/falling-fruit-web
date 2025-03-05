@@ -334,8 +334,7 @@
       "3": "صورة المراجعة غير لائقة",
       "4": "تعليق المراجعة غير لائق",
       "5": "أخرى (اشرح أدناه)"
-    },
-    "report_submitted": "تم إرسال التقرير بنجاح!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "تحديث أو حذف هذه المراجعة.",
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
+  },
+  "success_message": {
+    "location_edited": "تم تعديل الموقع!",
+    "location_submitted": "تم إرسال الموقع!",
+    "report_submitted": "تم إرسال التقرير بنجاح!",
+    "review_deleted": "تم حذف المراجعة!",
+    "review_edited": "تم تعديل المراجعة!",
+    "review_submitted": "تم إرسال المراجعة!",
+    "type_added": "تمت إضافة النوع!"
   },
   "time": {
     "days": {

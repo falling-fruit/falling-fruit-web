@@ -334,8 +334,7 @@
       "3": "Foto de reseña inapropiada",
       "4": "Comentario de reseña inapropiado",
       "5": "Otro (explique abajo)"
-    },
-    "report_submitted": "¡Informe enviado con éxito!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Actualizar o eliminar esta reseña.",
     "you_reviewed": "Reseñaste esta ubicación el {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Ubicación editada",
+    "location_submitted": "Ubicación enviada",
+    "report_submitted": "¡Informe enviado con éxito!",
+    "review_deleted": "Reseña eliminada",
+    "review_edited": "Reseña editada",
+    "review_submitted": "Reseña enviada",
+    "type_added": "Tipo añadido"
   },
   "time": {
     "days": {

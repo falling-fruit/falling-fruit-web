@@ -212,7 +212,7 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.isBeingInitializedMobile = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      toast.success('Location submitted successfully!')
+      toast.success(i18next.t('success_message.location_submitted'))
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false
@@ -229,7 +229,7 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      toast.success('Location edited successfully!')
+      toast.success(i18next.t('success_message.location_edited'))
     },
     [editExistingLocation.rejected]: (state, action) => {
       state.isLoading = false
@@ -242,7 +242,7 @@ const locationSlice = createSlice({
     },
     [addNewReview.fulfilled]: (state, action) => {
       state.reviews.push(action.payload)
-      toast.success('Review submitted successfully!')
+      toast.success(i18next.t('success_message.review_submitted'))
     },
     [addNewReview.rejected]: (_, action) => {
       toast.error(
@@ -259,7 +259,7 @@ const locationSlice = createSlice({
       if (reviewIndex !== -1) {
         state.reviews[reviewIndex] = action.payload
       }
-      toast.success('Review edited successfully!')
+      toast.success(i18next.t('success_message.review_edited'))
     },
     [editExistingReview.rejected]: (_, action) => {
       toast.error(
@@ -273,7 +273,7 @@ const locationSlice = createSlice({
       state.reviews = state.reviews.filter(
         (review) => review.id !== action.payload,
       )
-      toast.success('Review deleted successfully!')
+      toast.success(i18next.t('success_message.review_deleted'))
     },
     [deleteLocationReview.rejected]: (_, action) => {
       toast.error(

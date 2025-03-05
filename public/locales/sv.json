@@ -334,8 +334,7 @@
       "3": "Olämpligt recensionsfoto",
       "4": "Olämplig recensionskommentar",
       "5": "Annat (förklara nedan)"
-    },
-    "report_submitted": "Rapport skickad!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Uppdatera eller ta bort denna recension.",
     "you_reviewed": "Du recenserade denna plats den {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Plats redigerad",
+    "location_submitted": "Plats skickad",
+    "report_submitted": "Rapport skickad!",
+    "review_deleted": "Recension borttagen",
+    "review_edited": "Recension redigerad",
+    "review_submitted": "Recension skickad",
+    "type_added": "Typ tillagd"
   },
   "time": {
     "days": {

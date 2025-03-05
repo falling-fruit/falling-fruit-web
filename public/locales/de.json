@@ -334,8 +334,7 @@
       "3": "Unangemessenes Foto in Bewertung",
       "4": "Unangemessener Bewertungskommentar",
       "5": "Sonstiges (bitte unten erläutern)"
-    },
-    "report_submitted": "Meldung erfolgreich übermittelt!"
+    }
   },
   "review": {
     "form": {
@@ -345,6 +344,15 @@
     },
     "update_delete": "Diese Bewertung aktualisieren oder löschen.",
     "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
+  },
+  "success_message": {
+    "location_edited": "Standort erfolgreich bearbeitet!",
+    "location_submitted": "Standort erfolgreich übermittelt!",
+    "report_submitted": "Meldung erfolgreich übermittelt!",
+    "review_deleted": "Bewertung erfolgreich gelöscht!",
+    "review_edited": "Bewertung erfolgreich bearbeitet!",
+    "review_submitted": "Bewertung erfolgreich übermittelt!",
+    "type_added": "Typ erfolgreich hinzugefügt!"
   },
   "time": {
     "days": {
