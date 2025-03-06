@@ -1,17 +1,17 @@
 {
   "devise": {
     "confirmations": {
-      "confirmed": "Sua conta foi confirmada com sucesso. Você está conectado. ",
+      "confirmed": "Sua conta foi confirmada com sucesso. Você está conectado.",
       "no_token": "Você não pode acessar essa página sem entrar do email de confirmação. Se viesse do email de confirmação, por favor, certifique-se de usar a URL completa fornecida.",
       "send_instructions": "Você receberá um email em breve com instruções sobre como confirmar a sua conta."
     },
     "failure": {
-      "already_authenticated": "Você já está conectado. "
+      "already_authenticated": "Você já está conectado."
     },
     "passwords": {
-      "no_token": "Você não pode acessar essa página sem entrar do email de redefinição de senha. Se viesse do email de redefinição de senha, por favor, certifique-se de copiar e colar a URL (endereço da Web) do link que você recebeu no e-mail no navegador. ",
+      "no_token": "Você não pode acessar essa página sem entrar do email de redefinição de senha. Se viesse do email de redefinição de senha, por favor, certifique-se de copiar e colar a URL (endereço da Web) do link que você recebeu no e-mail no navegador.",
       "send_instructions": "Você receberá um email com as instruções de como redefinir a sua senha em poucos minutos.",
-      "updated_not_active": "A sua senha foi alterada com sucesso. "
+      "updated_not_active": "A sua senha foi alterada com sucesso."
     },
     "registrations": {
       "signed_up": "Bem vindos! Você se inscreveu com sucesso.",

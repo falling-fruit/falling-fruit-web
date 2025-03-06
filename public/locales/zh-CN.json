@@ -241,7 +241,7 @@
       "beware_html": "但要小心！解压缩后，数据库是一个巨大的文件，它会粉碎大多数电子表格软件。如果您只需要一个小区域的数据，首先尝试使用集成到<a href=\"/\">地图中</a>的下载工具检索它们。",
       "caveat_emptor_html": "我们对数据的准确性不承担任何责任 - 它按原样提供，请<i>注意</i>。如果您对数据做了一些很酷的事情，请<a href=\"mailto:feedback@fallingfruit.org\">告诉我们</a>！",
       "intro": "Falling Fruit 建立在公共数据和我们用户的慷慨之上。我们希望城市觅食能够惠及尽可能多的人，我们相信每个人都应该平等地获得我们集体劳动的成果。本着开放的精神，看！整个数据库",
-      "license_html": "如果您有兴趣在您的项目中使用这些数据，尤其是商业项目，我们建议您联系我们（ <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> ）。除非另有说明，否则数据许可为<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> （知识共享 - 署名、非商业性、相同方式共享）。这意味着您可以自由使用和分发数据，只要您保留原始作者/来源署名，并且不（未经许可）将其用于商业应用。 Falling Fruit 的源代码也已开放，可在<a href=\"https://github.com/falling-fruit/\">GitHub 上获得</a>。"
+      "license_html": "如果您有兴趣在您的项目中使用这些数据，尤其是商业项目，我们建议您联系我们（<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>）。除非另有说明，否则数据许可为<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a>（知识共享 - 署名、非商业性、相同方式共享）。这意味着您可以自由使用和分发数据，只要您保留原始作者/来源署名，并且不（未经许可）将其用于商业应用。Falling Fruit 的源代码也已开放，可在<a href=\"https://github.com/falling-fruit/\">GitHub 上获得</a>。"
     },
     "datasets": {
       "community_map": "社区地图",
