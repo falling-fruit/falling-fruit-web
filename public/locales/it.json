@@ -2,14 +2,14 @@
   "devise": {
     "confirmations": {
       "confirmed": "Il tuo account è stato confermato. Ora sei collegato.",
-      "no_token": "Non è possibile accedere a questa pagina se non proveni da una e-mail di conferma. Se provieni da una e-mail di conferma, assicurarti di utilizzare l'URL completa.",
+      "no_token": "Non è possibile accedere a questa pagina se non provieni da una e-mail di conferma. Se provieni da una e-mail di conferma, assicurarti di utilizzare l'URL completa.",
       "send_instructions": "Entro qualche minuto riceverai un messaggio email con le istruzioni per confermare il tuo account."
     },
     "failure": {
       "already_authenticated": "Hai già effettuato l'accesso."
     },
     "passwords": {
-      "no_token": "Non è possibile accedere a questa pagina se non proveni da una e-mail di ripristino della password. Se provieni da una e-mail di ripristino della password, assicurarti di utilizzare l'URL completa.",
+      "no_token": "Non è possibile accedere a questa pagina se non provieni da una e-mail di ripristino della password. Se provieni da una e-mail di ripristino della password, assicurarti di utilizzare l'URL completa.",
       "send_instructions": "Entro qualche minuto riceverai un messaggio email con le istruzioni per reimpostare la tua password.",
       "updated_not_active": "La tua password è stata cambiata."
     },
@@ -108,7 +108,7 @@
   "layouts": {
     "application": {
       "menu": {
-        "in_the_press": "Nelle medie",
+        "in_the_press": "Nei media",
         "sharing_the_harvest": "Condivisione del raccolto",
         "the_data": "I dati",
         "the_project": "Il progetto"
@@ -138,14 +138,14 @@
       "season_start_to_stop_short": "a"
     },
     "index": {
-      "editmarker_html": "<b>Mi Sposta la posizione della sorgente.</b> <br><br> Controllare l'immagine satellitare - la fonte può essere visibile dallo spazio!"
+      "editmarker_html": "<b>Sposta la posizione della sorgente.</b> <br><br> Controllare l'immagine satellitare - la fonte può essere visibile dallo spazio!"
     },
     "infowindow": {
       "access_mode": [
         "La fonte è sulla mia proprietà",
         "Ho il permesso del proprietario per aggiungere la fonte",
         "La fonte è su suolo pubblico",
-        "La fonte è una proprietà privata, ma è sospeso su suolo pubblico",
+        "La fonte è una proprietà privata, ma è sospesa su suolo pubblico",
         "La fonte è una proprietà privata (chiedere prima di raccolgiere)"
       ],
       "access_short": [
@@ -199,7 +199,7 @@
     "about": {
       "about_the_site": "Informazioni sul progetto",
       "advisors": "Consiglio di consulenti",
-      "alan_gibson_bio_html": "Alan ha sempre amato l'avventura e l'esplorazione. Ha iniziato a cercare un modo per far conoscere ai suoi figli piccoli lo stile di vita all'aria aperta. Scrive il <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> blog e pubblica il <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Frutta e noci gratis</a> libro. Ha legittimato il foraggiamento nei parchi pubblici e ha creato un frutteto comunitario nella sua città natale, Southampton UK.",
+      "alan_gibson_bio_html": "Alan ha sempre amato l'avventura e l'esplorazione. Ha iniziato a cercare un modo per far conoscere ai suoi figli piccoli lo stile di vita all'aria aperta. Scrive il blog <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> e pubblica il libro <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Frutta e noci gratis</a>. Ha legittimato il foraggiamento nei parchi pubblici e ha creato un frutteto comunitario nella sua città natale, Southampton UK.",
       "ana_carolina_bio_html": "Ana è ricercatrice post-dottorato presso l'Università Federale del Pará in Brasile. È un'antropologa interessata a comprendere le abitudini alimentari sociali e culturali. Ana ha lavorato soprattutto nell'Amazzonia brasiliana. Ad Acri (Amazzonia occidentale) ha studiato il consumo di frutta regionale. Poi ha lavorato nella regione di Middle Solimões, indagando sul cambiamento della dieta in comunità remote. Tra il 2017 e il 2018, Ana ha vissuto in piccole e medie città del delta dell'Amazzonia, osservando gli effetti del cambiamento climatico sulla sicurezza alimentare delle persone che vivono in insediamenti informali. Recentemente si è trasferita nel sud del New Mexico, negli Stati Uniti, dove lavora come consulente.",
       "caleb_phillips_bio_html": "Caleb è un bipede umanoide e implume appassionato alla giustizia alimentare e alla ricerca <a href=\"http://smallwhitecube.com\"> di modi creativi per utilizzare la tecnologia</a> al fine di risolvere i problemi sociali. Quando non è in bicicletta a guardare gli alberi, egli concentra i suoi sforzi tra il suo lavoro di giorno come scienziato di dati presso il <a href=\"http://nrel.gov\">National Renewable Energy Laboratory</a> a Golden, in Colorado, come professore a contratto di informatica presso l' <a href=\"http://cs.colorado.edu\">University of Colorado</a> , e come volontario per un certo numero di organizzazioni no-profit ( <a href=\"http://www.foodrescuealliance.org/\">Food Rescue Alliance</a> a Denver e <a href=\"http://boulderfoodrescue.org\">Boulder Food Rescue</a> a Boulder, Colorado). Oltre a tutto questa mole di lavoro, ama scalare le rocce, correre per sentieri, andare in bicicletta e, generalmente, stare all'aperto il più possibile. Caleb ha creato Falling Fruit con Ethan Welty nel 2013 e ha fatto parte del Consiglio di Amministrazione per 6 anni prima di assumere una posizione nell'Advisory Board.",
       "celebration": "Falling Fruit è la celebrazione della bontà culinaria negletta delle nostre strade urbane. Quantificando questa risorsa su una mappa interattiva, speriamo di facilitare le connessioni profonde tra le persone, il cibo e i prodotti naturali che crescono nei nostri quartieri. Ma non è solo un pranzo gratis! La raccolta urbana nel XXI secolo è un'opportunità per l'esplorazione urbana, per combattere la piaga dei marciapiedi sporchi e maleodoranti e per riconnettersi con le origini botaniche del cibo.",
@@ -225,7 +225,7 @@
       "translate": "Tradurre",
       "translate_for_us_html": "Siete interessati a lavorare come traduttori? Scrivici una mail e partecipa a <a href=\"https://phrase.com\">Phrase</a>, dove si elaborano le nostre traduzioni.",
       "translators": "Traduttori",
-      "tristram_stuart_bio_html": "Da ragazzo, Tristam Autore di <a href=\"//tristramstuart.co.uk\">rifiuti: Scoprire la Scandalo Global Food</a> · Fondatore internazionale rifiuti alimentari organizzazione della campagna <a href=\"//feedbackglobal.org\">di feedback globale</a> · National Geographic <a href=\"//www.nationalgeographic.com/explorers/bios/tristram-stuart/\">Emerging Explorer</a>",
+      "tristram_stuart_bio_html": "Tristram è autore di <a href=\"//tristramstuart.co.uk\">Waste: Uncovering the Global Food Scandal</a> · Fondatore dell'organizzazione internazionale contro lo spreco alimentare <a href=\"//feedbackglobal.org\">Feedback Global</a> · National Geographic <a href=\"//www.nationalgeographic.com/explorers/bios/tristram-stuart/\">Emerging Explorer</a>",
       "write": "Scrivi"
     },
     "changes": {
