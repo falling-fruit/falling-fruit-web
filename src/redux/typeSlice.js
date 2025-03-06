@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { addType, getTypes } from '../utils/api'
@@ -53,11 +54,16 @@ const typeSlice = createSlice({
     },
     [addTypeAndUpdate.fulfilled]: (state, action) => {
       state.typesAccess = action.payload.updatedTypesAccess
-      toast.success('New type added successfully!')
+      toast.success(i18next.t('success_message.type_added'))
       state.isAddTypeModalOpen = false
     },
     [addTypeAndUpdate.rejected]: (_state, action) => {
-      toast.error(`Adding new type failed: ${action.error.message}`)
+      toast.error(
+        i18next.t('error_message.api.type_add_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
   },
 })

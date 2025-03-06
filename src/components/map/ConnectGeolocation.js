@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -17,6 +18,7 @@ export const isGeolocationOpen = (geolocationState) =>
 const MIN_TRACKING_ZOOM = 16
 
 const useGeolocation = () => {
+  const { t } = useTranslation()
   const [state, setState] = useState({
     loading: true,
     heading: null,
@@ -34,7 +36,7 @@ const useGeolocation = () => {
         loading: false,
         error: {
           code: 0,
-          message: 'Geolocation not supported',
+          message: t('error_message.geolocation.not_supported'),
         },
       }))
       return
@@ -78,7 +80,7 @@ const useGeolocation = () => {
         navigator.geolocation.clearWatch(watchId.current)
       }
     }
-  }, [])
+  }, []) //eslint-disable-line
 
   return state
 }
@@ -87,6 +89,7 @@ export const ConnectGeolocation = () => {
   const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
   const maps = getGoogleMaps ? getGoogleMaps() : null
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [isMapMoving, setIsMapMoving] = useState(false)
 
   useEffect(() => {
@@ -125,7 +128,7 @@ export const ConnectGeolocation = () => {
     } else if (geolocation.error) {
       dispatch(geolocationError(geolocation.error))
     } else if (!geolocation.latitude || !geolocation.longitude) {
-      dispatch(geolocationError({ message: 'Unknown error' }))
+      dispatch(geolocationError({ message: t('error_message.unknown_error') }))
     } else if (isMapMoving) {
       // Do nothing
     } else {

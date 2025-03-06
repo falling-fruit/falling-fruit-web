@@ -61,7 +61,7 @@ const UserProfile = () => {
             {t('layouts.back')}
           </BackButton>
         </StyledNavBack>
-        <h3>User: {name}</h3>
+        <h3>{t('users.profile.title', { name })}</h3>
         {bio && (
           <IconBesideText>
             <User size={20} />
@@ -74,7 +74,9 @@ const UserProfile = () => {
           <Calendar color={theme.secondaryText} size={20} />
           <p>
             <time dateTime={created_at}>
-              {`Joined on ${formatISOString(created_at, i18n.language)}`}
+              {t('users.joined_on', {
+                date: formatISOString(created_at, i18n.language),
+              })}
             </time>
           </p>
         </IconBesideText>

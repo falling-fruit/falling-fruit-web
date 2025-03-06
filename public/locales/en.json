@@ -19,27 +19,71 @@
       "updated": "Your account has been updated successfully."
     }
   },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
+      "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
+      "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
+      "location_edit_failed": "Location editing failed: {{message}}",
+      "location_submission_failed": "Location submission failed: {{message}}",
+      "photo_upload_failed": "Photo upload failed: {{message}}",
+      "report_submission_failed": "Report submission failed: {{message}}",
+      "review_deletion_failed": "Review deletion failed: {{message}}",
+      "review_edit_failed": "Review editing failed: {{message}}",
+      "review_submission_failed": "Review submission failed: {{message}}",
+      "street_view_unavailable": "Street View not available for location {{id}}",
+      "type_add_failed": "Adding new type failed: {{message}}"
+    },
+    "auth": {
+      "check_failed": "Authentication check failed: {{message}}",
+      "confirmation_failed": "Account confirmation failed: {{message}}",
+      "password_set_failed": "Setting new password failed: {{message}}",
+      "profile_update_failed": "Profile update failed: {{message}}",
+      "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
+      "reset_password_failed": "Resetting password failed: {{message}}",
+      "signin_failed": "Sign in failed: {{message}}",
+      "signup_failed": "Sign up failed: {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Position unavailable: {{message}}",
+      "code_3": "Geolocation timeout: {{message}}",
+      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
+      "not_supported": "Geolocation not supported"
+    },
+    "language_changed_refresh_to_reload_map": "Language changed. Refresh page to reload map",
+    "unknown_error": "Unknown error"
+  },
   "filter": {
     "deselect_all": "Deselect all",
     "only_on_map": "On the map",
-    "select_all": "Select all",
-    "type": "Type"
+    "select_all": "Select all"
   },
   "form": {
     "button": {
       "cancel": "Cancel",
       "delete": "Delete",
       "edit": "Edit",
-      "reset": "Reset"
+      "report": "Report",
+      "reset": "Reset",
+      "review": "Review",
+      "submit": "Submit",
+      "submitting": "Submitting"
+    },
+    "error": {
+      "confirmation": "Does not match original",
+      "missing_password": "Required to change email or password",
+      "too_short": "Minimum of {{min}} characters"
     },
     "optional": "Optional",
-    "required": "Required"
+    "required": "Required",
+    "search": "Search"
   },
   "glossary": {
     "about": "About",
     "account": "Account",
     "activity": "Activity",
     "address": "Address",
+    "by_author": "by {{author}}",
     "description": "Description",
     "email": "Email",
     "logout": "Logout",
@@ -47,13 +91,17 @@
     "name": "Name",
     "password": "Password",
     "quality": "Quality",
-    "report": "Report",
+    "review": {
+      "other": "Reviews"
+    },
     "sign_up": "Sign up",
-    "submit": "Submit",
     "tree_inventory": {
       "one": "Tree inventory"
     },
-    "types": "Types",
+    "type": {
+      "one": "Type",
+      "other": "Types"
+    },
     "unverified": "Unverified",
     "yield": "Yield"
   },
@@ -66,21 +114,28 @@
         "the_project": "The project"
       }
     },
-    "back": "Back"
+    "back": "Back",
+    "loading": "Loading..."
   },
-  "location": {
-    "form": {
-      "access": "Access",
-      "position": "Position"
-    }
+  "list": {
+    "no_results": "No Results Found",
+    "zoom_in": "Zoom into the map to see location data"
   },
   "locations": {
+    "edit_position": {
+      "cancel": "Cancel edit position",
+      "confirm": "Confirm edit position",
+      "instructions": "Edit location position."
+    },
     "form": {
+      "access": "Access",
       "comments": "Comments",
       "comments_subtext": "Updates, access issues, plant health...",
       "description_subtext": "Location details, access issues, plant health ...",
       "fruiting_status": "Fruiting status",
-      "season": "Season"
+      "position": "Position",
+      "season": "Season",
+      "season_start_to_stop_short": "to"
     },
     "index": {
       "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!"
@@ -102,10 +157,21 @@
       ],
       "fruiting": ["Flowers", "Unripe fruit", "Ripe fruit"]
     },
+    "init": {
+      "cancel": "Cancel choose location",
+      "choose_instructions": "Choose a position for your new location.",
+      "confirm": "Confirm choose location",
+      "edit_instructions": "Edit position for your new location."
+    },
     "overview": {
       "added_by": "Added by {{name}}",
       "date_edited": "Updated {{date}}",
-      "imported_from": "Imported from {{name}}"
+      "imported_from": "Imported from {{name}}",
+      "season": {
+        "in_season": "In season from {{start}} to {{stop}}",
+        "year_round": "Year Round"
+      },
+      "title": "Overview"
     }
   },
   "menu": {
@@ -117,6 +183,18 @@
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
+  "new_type": {
+    "add_type_label": "Add Type:",
+    "form": {
+      "add_name": "Add Name",
+      "language": "Language",
+      "notes": "Notes",
+      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
+      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
+      "remove": "Remove"
+    },
+    "title": "Add New Type"
+  },
   "pages": {
     "about": {
       "about_the_site": "About the project",
@@ -126,7 +204,7 @@
       "caleb_phillips_bio_html": "Caleb is a featherless bipedal humanoid passionate about food justice and finding creative ways to use technology to address social issues. When he's not biking around gawking at trees, he balances his efforts between his day job as a data scientist at the <a href=\"https://www.nrel.gov/research/caleb-phillips.html\">National Renewable Energy Laboratory</a> in Golden, Colorado and as an adjunct professor of computer science at the <a href=\"https://www.colorado.edu/cs/caleb-phillips\">University of Colorado</a>. Besides all that work stuff, he likes to climb rocks, run trails, ride bikes, and generally be outdoors as much as possible. Caleb created Falling Fruit with Ethan Welty in 2013 and served on the Board of Directors for 6 years before taking a position on the Advisory Board.",
       "celebration": "Falling Fruit is a celebration of the overlooked culinary bounty of our city streets. By quantifying this resource on an interactive map, we hope to facilitate intimate connections between people, food, and the natural organisms growing in our neighborhoods. Not just a free lunch! Foraging in the 21st century is an opportunity for urban exploration, to fight the scourge of stained sidewalks, and to reconnect with the botanical origins of food.",
       "closing_remarks": "Closing remarks",
-      "closing_remarks_para1_html": "Falling Fruit is a 501(c)(3) (tax-exempt) public charity based in Boulder, Colorado. As a result, donations within the United States are tax deductible. You may review our <a href=\"/501c3.pdf\">letter of exemption</a> from the IRS and verify our standing with <a href=\"http://apps.irs.gov/app/eos/pub78Search.do?\">IRS Publication 78</a> or the <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Colorado Secretary of State</a>. Also available are our <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">bylaws</a> and board meeting <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">minutes</a>.",
+      "closing_remarks_para1_html": "Falling Fruit is a 501(c)(3) (tax-exempt) public charity based in Boulder, Colorado. As a result, donations within the United States are tax deductible. You may review our <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">letter of exemption</a> from the IRS and verify our standing with <a href=\"https://apps.irs.gov/app/eos/\">IRS Publication 78</a> or the <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Colorado Secretary of State</a>. Also available are our <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">bylaws</a> and board meeting <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">minutes</a>.",
       "closing_remarks_para2_html": "Harvesting food in an urban setting comes with certain practical and moral considerations. For an introduction to the ethics of urban foraging, we recommend the following <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">summary</a>.",
       "closing_remarks_para3_html": "Information on Falling Fruit may be wrong or out of date. For example, many of the foraging maps migrated to Falling Fruit were hosted as public Google Maps on which markers were often moved accidentally, and municipal tree inventories are updated only (if ever) as trees are visited for maintenance. Be prepared to encounter inaccuracies in the field, and please edit the map as needed based on your discoveries. Ultimately, it is your responsibility to determine the identity, edibility, and location of a plant, and the responsibility of all to improve the quality of the map.",
       "contact_us_html": "Falling Fruit is built by and for foragers – we want it to be the best tool available to the contemporary forager. Write us at <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, we would love to hear from you!",
@@ -169,6 +247,7 @@
       "community_map": "Community map",
       "date_imported": "Date imported",
       "imported_datasets": "Imported datasets",
+      "imported_on": "Imported on {{date}}",
       "intro_html": "Falling Fruit aspires to be the most comprehensive and open geographic dataset of urban edibles. While our users explore, edit, and add locations using our <a href=\"/\">map</a>, we comb the known universe for pre-existing datasets and import them directly into the <a href=\"/data\">database</a>, uniting the efforts of foragers, foresters, and freegans everywhere. If you know of a dataset we've missed, please <a href=\"mailto:info@fallingfruit.org\">let us know</a>! You can also help us with the import process by formatting the data using the <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">import template</a>. Note that since imports must be performed manually, all changes to the original data made after the import are not reflected on Falling Fruit.",
       "link": "Link",
       "locations": "Locations",
@@ -177,6 +256,7 @@
       "types_of_data": "Datasets imported into Falling Fruit fall into two main categories. \"Community maps\" are built by foragers and freegans as they peruse their communities for things to eat. We are indebted to the hardworking citizen-cartographers who have compiled this data. \"Tree inventories\" are compiled by cities, universities, and other institutions wishing to better document and care for their trees. We mine these vast datasets for food-producing species and add them to the map. To help us map your neighborhood fruit trees, contact your school or city urging them to share their tree inventory with us."
     },
     "settings": {
+      "bicycle": "Bicycle",
       "data": "Data",
       "labels": "Labels",
       "language": "Language",
@@ -184,7 +264,6 @@
       "regional": "Regional",
       "roadmap": "Map",
       "satellite": "Satellite",
-      "side_menu": "Bicycle",
       "terrain": "Terrain",
       "transit": "Transit",
       "units": {
@@ -227,6 +306,7 @@
         "ireland": "Ireland",
         "italy": "Italy",
         "new_zealand": "New Zealand",
+        "poland": "Poland",
         "portugal": "Portugal",
         "spain": "Spain",
         "sweden": "Sweden",
@@ -235,12 +315,44 @@
         "united_states": "United States"
       },
       "grow_pick_and_distribute": "Grow · Pick · Distribute",
+      "heading": {
+        "city": "City",
+        "country": "Country",
+        "social": "Social",
+        "state": "State"
+      },
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     }
   },
   "problems": {
     "description_subtext": "Any information that might help us evaluate the problem",
-    "problem_type": "Problem type"
+    "problem_type": "Problem type",
+    "problem_types": {
+      "0": "Location is spam",
+      "1": "Location does not exist",
+      "2": "Location is a duplicate",
+      "3": "Inappropriate review photo",
+      "4": "Inappropriate review comment",
+      "5": "Other (explain below)"
+    }
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Leave a review",
+      "observed_on": "Observed on {{date}}",
+      "upload_images": "Upload images"
+    },
+    "update_delete": "Update or delete this review.",
+    "you_reviewed": "You reviewed this location on {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Location edited successfully!",
+    "location_submitted": "Location submitted successfully!",
+    "report_submitted": "Report submitted successfully!",
+    "review_deleted": "Review deleted successfully!",
+    "review_edited": "Review edited successfully!",
+    "review_submitted": "Review submitted successfully!",
+    "type_added": "New type added successfully!"
   },
   "time": {
     "days": {
@@ -250,12 +362,16 @@
     "last_24_hours": "Last 24 hours",
     "time_ago": "{{time}} ago"
   },
+  "type": {
+    "pending_review": "Pending review"
+  },
   "users": {
     "bio": "About you",
     "change_password": "Change my password",
     "current_password": "Current password",
     "edit_account": "Edit account",
     "forgot_password": "Reset your password",
+    "joined_on": "Joined on {{date}}",
     "login": "Login",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
@@ -263,6 +379,9 @@
       "announcements_email": "Receive emails with important announcements and opportunities (1-2 per year)"
     },
     "password_confirmation": "Password confirmation",
+    "profile": {
+      "title": "User: {{name}}"
+    },
     "remember_me": "Remember me",
     "resend_confirmation_instructions": "Resend confirmation instructions",
     "save_changes": "Save changes",

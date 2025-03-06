@@ -412,6 +412,14 @@
   ],
   "2014": [
     {
+      "published_on": "2014-12-31",
+      "outlet": "Plants in Urban Areas and Landscape",
+      "outlet_url": "http://fzki.uniag.sk/pual/",
+      "title": "Fruitmap and Falling fruit – tools for mapping urban fruit trees in the city of Nitra,",
+      "author": "Ladislav Bakay",
+      "url": "http://www.slpk.sk/eldo/2015/dl/9788055212623/files/bakay.pdf"
+    },
+    {
       "published_on": "2014-12-16",
       "outlet": "Five Thirty Eight",
       "outlet_url": "https://fivethirtyeight.com",
@@ -1042,6 +1050,14 @@
   ],
   "2016": [
     {
+      "published_on": "2016-10-02",
+      "outlet": "Urban Conversion",
+      "outlet_url": "https://www.urbanconversion.com/",
+      "title": "Freegan Awesome",
+      "author": "Colin Hartin",
+      "url": "https://www.amazon.com/Zero-Waste-Home-and-Office/dp/B077V5TPXM"
+    },
+    {
       "published_on": "2016-10-18",
       "outlet": "The Modern Domestique",
       "outlet_url": "http://www.themoderndomestique.com/",
@@ -1595,6 +1611,14 @@
   ],
   "2019": [
     {
+      "published_on": "2019-05-31",
+      "outlet": "102.7 The Peak",
+      "outlet_url": "https://www.thepeak.fm/",
+      "title": "Frugal Fridays: Free fruit for life",
+      "author": "Brett Forte",
+      "url": "https://www.instagram.com/tv/ByItDb9BCgb/?id=2056091378160773147_274986261"
+    },
+    {
       "published_on": "2019-11-04",
       "outlet": "The Conversation",
       "outlet_url": "https://theconversation.com/",
@@ -1661,20 +1685,20 @@
       "url": "storymaps.arcgis.com/stories/6104e74f0b9b4e3eb02b06f1421ff90f"
     },
     {
-      "published_on": "2020-10-27",
-      "outlet": "Westword",
-      "outlet_url": "https://www.westword.com",
-      "title": "Colorado's most expensive native edible can be foraged for free. Nuts!",
-      "author": "Julie Bielenberg",
-      "url": "https://www.westword.com/restaurants/pine-nuts-are-expensive-unless-you-forage-from-colorado-pinyon-pines-11832450"
-    },
-    {
       "published_on": "2020-11-12",
       "outlet": "Mashable",
       "outlet_url": "https://mashable.com",
       "title": "A beginner's guide to urban foraging",
       "author": "Chase DiBenedetto",
       "url": "https://mashable.com/article/how-to-start-urban-foraging"
+    },
+    {
+      "published_on": "2020-10-27",
+      "outlet": "Westword",
+      "outlet_url": "https://www.westword.com",
+      "title": "Colorado's most expensive native edible can be foraged for free. Nuts!",
+      "author": "Julie Bielenberg",
+      "url": "https://www.westword.com/restaurants/pine-nuts-are-expensive-unless-you-forage-from-colorado-pinyon-pines-11832450"
     },
     {
       "published_on": "2020-10-20",
@@ -1719,6 +1743,13 @@
     }
   ],
   "2021": [
+    {
+      "published_on": "2021-09-01",
+      "outlet": "CleantechAlps",
+      "outlet_url": "https://www.cleantech-alps.com/",
+      "title": "Agritech in Switzerland",
+      "url": "https://issuu.com/cimark/docs/etude-agritech-2021-en-web1/34"
+    },
     {
       "published_on": "2021-11-02",
       "outlet": "elDiarioAR",
@@ -1805,6 +1836,54 @@
   ],
   "2023": [
     {
+      "published_on": "2023-08-30",
+      "outlet": "VPM News",
+      "outlet_url": "https://www.vpm.org/",
+      "title": "Can I forage for figs hanging on trees?",
+      "author": "Whittney Evans",
+      "url": "https://www.vpm.org/news/2023-08-30/curious-commonwealth-fruit-trees-foraging-legality-virginia"
+    },
+    {
+      "published_on": "2023-08-20",
+      "outlet": "Abakcus",
+      "outlet_url": "https://abakcus.com/",
+      "title": "Falling Fruit: Map the Urban Harvest",
+      "author": "Ali Kaya",
+      "url": "https://abakcus.com/tool/falling-fruit-map-the-urban-harvest/"
+    },
+    {
+      "published_on": "2023-12-15",
+      "outlet": "Peggada",
+      "outlet_url": "https://peggada.com",
+      "title": "Falling Fruit. This website tells you where the fruit trees are — and Portugal is there",
+      "author": "Marta Cerqueira",
+      "url": "https://peggada.com/en/falling-fruit-this-website-tells-you-where-the-fruit-trees-are-and-portugal-is-there/"
+    },
+    {
+      "published_on": "2023-08-01",
+      "outlet": "The Red Bulletin",
+      "outlet_url": "https://www.redbull.com/us-en/theredbulletin",
+      "title": "Urban bounty",
+      "author": "Lou Boyd",
+      "url": "https://issuu.com/redbulletin.com/docs/0823_uk_lowres/20"
+    },
+    {
+      "published_on": "2023-09-27",
+      "outlet": "Ambrook Research",
+      "outlet_url": "https://ambrook.com/research",
+      "title": "A Decade In, FallingFruit Has Kicked Open the Door for Urban Foragers",
+      "author": "Sara Ventiera",
+      "url": "https://ambrook.com/research/technology/food-insecurity-urban-foraging-fallingfruit"
+    },
+    {
+      "published_on": "2023-01-30",
+      "outlet": "ABC Northern Tasmania",
+      "outlet_url": "https://www.abc.net.au/northtas",
+      "title": "Northern Tasmania Drive",
+      "author": "Kim Napier",
+      "url": "https://www.abc.net.au/listen/programs/northtas-drive/northern-tasmania-drive/14139892"
+    },
+    {
       "published_on": "2023-06-01",
       "outlet": "Sierra Magazine",
       "outlet_url": "https://www.sierraclub.org/sierra",
@@ -1819,6 +1898,71 @@
       "title": "This website reimagines cities as foraging utopias",
       "author": "Liz Susman Karp",
       "url": "https://www.atlasobscura.com/articles/falling-fruit-urban-foraging-map"
+    }
+  ],
+  "2024": [
+    {
+      "published_on": "2024-09-11",
+      "outlet": "LAist",
+      "outlet_url": "https://laist.com/",
+      "title": "I went gleaning for fruit to try and reduce my carbon footprint. Was it enough?",
+      "author": "Cato Hernández",
+      "url": "https://laist.com/news/climate-environment/la-foraging-gleaning-carbon-footprint-emissions-falling-fruit"
+    },
+    {
+      "published_on": "2024-07-07",
+      "outlet": "Zielony Wrocław",
+      "outlet_url": "https://www.wroclaw.pl/",
+      "title": "Smaczne i zdrowe owoce za darmo. Zobacz, gdzie rosną dzikie drzewa owocowe we Wrocławiu",
+      "author": "Tomasz Wysocki",
+      "url": "https://www.wroclaw.pl/zielony-wroclaw/owoce-za-darmo-drzewa-owocowe-we-wroclawiu-mapa"
+    },
+    {
+      "published_on": "2024-11-04",
+      "outlet": "Sortir à Paris",
+      "outlet_url": "https://www.sortiraparis.com/",
+      "title": "Le saviez-vous ? On peut glaner gratuitement des fruits et légumes en Île-de-France",
+      "author": "My",
+      "url": "https://www.sortiraparis.com/bons-plans/sorties-gratuites/articles/321249-le-saviez-vous-on-peut-glaner-gratuitement-des-fruits-et-legumes-en-ile-de-france"
+    },
+    {
+      "published_on": "2024-09-21",
+      "outlet": "Yorkshire Evening Post",
+      "outlet_url": "https://www.yorkshireeveningpost.co.uk",
+      "title": "Going Green: Shop seasonally and support local farmers this harvest time",
+      "author": "Angela Terry",
+      "url": "https://www.yorkshireeveningpost.co.uk/news/environment/going-green-shop-seasonally-and-support-local-farmers-this-harvest-time-4783938"
+    },
+    {
+      "published_on": "2024-11-01",
+      "outlet": "piauí",
+      "outlet_url": "https://piaui.folha.uol.com.br/",
+      "title": "Cidade de comer",
+      "author": "Bernardo Esteves ",
+      "url": "https://piaui.folha.uol.com.br/materia/cidade-de-comer/"
+    },
+    {
+      "published_on": "2024-07-31",
+      "outlet": "KUER 90.1",
+      "outlet_url": "https://www.kuer.org/",
+      "title": "There’s a harvest hiding in Salt Lake City. Just ask the Sugar House fruit guy",
+      "author": "Caroline Ballard",
+      "url": "https://www.kuer.org/science-environment/2024-07-31/theres-a-harvest-hiding-in-salt-lake-city-just-ask-the-sugar-house-fruit-guy"
+    },
+    {
+      "published_on": "2024-07-05",
+      "outlet": "Publico",
+      "outlet_url": "https://www.publico.pt/",
+      "title": "Falling Fruit: vamos respigar nos jardins das cidades?",
+      "author": "Mara Gonçalves · Nuno Ferreira Santos",
+      "url": "https://www.publico.pt/2024/07/05/fugas/reportagem/falling-fruit-vamos-respigar-jardins-cidades-2095899"
+    },
+    {
+      "published_on": "2024-05-16",
+      "outlet": "Mensagem",
+      "outlet_url": "https://amensagem.pt/",
+      "title": "Conhece uma árvore de fruta em Lisboa? Participe neste mapa da Falling Fruit e alimente a cidade",
+      "url": "https://amensagem.pt/2024/05/16/faling-fruit-arvore-de-fruta-lisboa-google/"
     }
   ]
 }

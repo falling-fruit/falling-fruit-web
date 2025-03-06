@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import {
@@ -189,7 +190,11 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.tooltipOpen = false
       toast.error(
-        `Error fetching location ${action.meta.arg.locationId}: ${action.error.message}`,
+        i18next.t('error_message.api.fetch_location_failed', {
+          id: action.meta.arg.locationId,
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
       )
     },
     [fetchReviewData.fulfilled]: (state, action) => {
@@ -207,11 +212,16 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.isBeingInitializedMobile = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      toast.success('Location submitted successfully!')
+      toast.success(i18next.t('success_message.location_submitted'))
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false
-      toast.error(`Location submission failed: ${action.error.message}`)
+      toast.error(
+        i18next.t('error_message.api.location_submission_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
     [editExistingLocation.fulfilled]: (state, action) => {
       // Keep existing reviews as they don't change when editing location
@@ -219,18 +229,28 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      toast.success('Location edited successfully!')
+      toast.success(i18next.t('success_message.location_edited'))
     },
     [editExistingLocation.rejected]: (state, action) => {
       state.isLoading = false
-      toast.error(`Location editing failed: ${action.error.message}`)
+      toast.error(
+        i18next.t('error_message.api.location_edit_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
     [addNewReview.fulfilled]: (state, action) => {
       state.reviews.push(action.payload)
-      toast.success('Review submitted successfully!')
+      toast.success(i18next.t('success_message.review_submitted'))
     },
     [addNewReview.rejected]: (_, action) => {
-      toast.error(`Review submission failed: ${action.error.message}`)
+      toast.error(
+        i18next.t('error_message.api.review_submission_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
     [editExistingReview.fulfilled]: (state, action) => {
       const reviewIndex = state.reviews.findIndex(
@@ -239,19 +259,29 @@ const locationSlice = createSlice({
       if (reviewIndex !== -1) {
         state.reviews[reviewIndex] = action.payload
       }
-      toast.success('Review edited successfully!')
+      toast.success(i18next.t('success_message.review_edited'))
     },
     [editExistingReview.rejected]: (_, action) => {
-      toast.error(`Review editing failed: ${action.error.message}`)
+      toast.error(
+        i18next.t('error_message.api.review_edit_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
     [deleteLocationReview.fulfilled]: (state, action) => {
       state.reviews = state.reviews.filter(
         (review) => review.id !== action.payload,
       )
-      toast.success('Review deleted successfully!')
+      toast.success(i18next.t('success_message.review_deleted'))
     },
     [deleteLocationReview.rejected]: (_, action) => {
-      toast.error(`Review deletion failed: ${action.error.message}`)
+      toast.error(
+        i18next.t('error_message.api.review_deletion_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
   },
 })

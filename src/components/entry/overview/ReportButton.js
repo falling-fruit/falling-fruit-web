@@ -22,7 +22,7 @@ export const ReportButton = () => {
       {isReportModalOpen && (
         <ReportModal
           locationId={locationData.id}
-          title={`${t('glossary.report')} ${locationName}`}
+          title={`${t('form.button.report')} ${locationName}`}
           name={locationName}
           onDismiss={() => setIsReportModalOpen(false)}
         />
@@ -32,7 +32,7 @@ export const ReportButton = () => {
         secondary
         onClick={() => setIsReportModalOpen(true)}
       >
-        {t('glossary.report')}
+        {t('form.button.report')}
       </Button>
     </>
   )

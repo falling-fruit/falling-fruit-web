@@ -43,7 +43,7 @@ const Project = () => {
 
   return (
     <PageScrollWrapper>
-      <PageTemplate from="Settings">
+      <PageTemplate backToSettingsOnMobile>
         <div className="grid">
           <PhotoGridTemplate photos={foragingPhotos} float={'right'} />
           <p>

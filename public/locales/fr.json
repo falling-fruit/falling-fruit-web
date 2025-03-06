@@ -19,27 +19,71 @@
       "updated": "Votre compte a bien été mis à jour."
     }
   },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
+      "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
+      "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
+      "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
+      "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
+      "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
+      "report_submission_failed": "Échec de l'envoi du rapport : {{message}}",
+      "review_deletion_failed": "Échec de la suppression de l'avis : {{message}}",
+      "review_edit_failed": "Échec de la modification de l'avis : {{message}}",
+      "review_submission_failed": "Échec de l'envoi de l'avis : {{message}}",
+      "street_view_unavailable": "Street View n'est pas disponible pour l'emplacement {{id}}",
+      "type_add_failed": "Échec de l'ajout du nouveau type : {{message}}"
+    },
+    "auth": {
+      "check_failed": "Échec de la vérification d'authentification : {{message}}",
+      "confirmation_failed": "Échec de la confirmation du compte : {{message}}",
+      "password_set_failed": "Échec de la définition du nouveau mot de passe : {{message}}",
+      "profile_update_failed": "Échec de la mise à jour du profil : {{message}}",
+      "resend_confirmation_failed": "Échec du renvoi de la confirmation : {{message}}",
+      "reset_password_failed": "Échec de la réinitialisation du mot de passe : {{message}}",
+      "signin_failed": "Échec de la connexion : {{message}}",
+      "signup_failed": "Échec de l'inscription : {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Position non disponible : {{message}}",
+      "code_3": "Délai d'attente de la géolocalisation dépassé : {{message}}",
+      "denied": "L'autorisation d'utiliser votre position a été refusée. Pour activer la géolocalisation, veuillez autoriser le partage de position dans les paramètres de votre navigateur et actualiser la page.",
+      "not_supported": "Géolocalisation non prise en charge"
+    },
+    "language_changed_refresh_to_reload_map": "La langue a été modifiée. Actualisez la page pour recharger la carte.",
+    "unknown_error": "Erreur inconnue"
+  },
   "filter": {
     "deselect_all": "Désélectionner tous",
     "only_on_map": "Sur la carte",
-    "select_all": "Sélectionner tous",
-    "type": "Type"
+    "select_all": "Sélectionner tous"
   },
   "form": {
     "button": {
       "cancel": "Annuler",
       "delete": "Supprimer",
       "edit": "Modifier",
-      "reset": "Réinitialiser"
+      "report": "Signaler",
+      "reset": "Réinitialiser",
+      "review": "Évaluer",
+      "submit": "Soumettre",
+      "submitting": "Soumission en cours"
+    },
+    "error": {
+      "confirmation": "Ne correspond pas à l'original",
+      "missing_password": "Requis pour modifier l'email ou le mot de passe",
+      "too_short": "Minimum de {{min}} caractères"
     },
     "optional": "Facultatif",
-    "required": "Obligatoire"
+    "required": "Obligatoire",
+    "search": "Rechercher"
   },
   "glossary": {
     "about": "À propos",
     "account": "Compte",
     "activity": "Activité",
     "address": "Adresse",
+    "by_author": "par {{author}}",
     "description": "Description",
     "email": "Email",
     "logout": "Déconnexion",
@@ -47,13 +91,17 @@
     "name": "Nom",
     "password": "Mot de passe",
     "quality": "Qualité",
-    "report": "Signaler",
+    "review": {
+      "other": "Avis"
+    },
     "sign_up": "S'inscrire",
-    "submit": "Soumettre",
     "tree_inventory": {
       "one": "Inventaire d'arbres"
     },
-    "types": "Types",
+    "type": {
+      "one": "Type",
+      "other": "Types"
+    },
     "unverified": "Non vérifié",
     "yield": "Production"
   },
@@ -66,21 +114,28 @@
         "the_project": "Le projet"
       }
     },
-    "back": "Retour"
+    "back": "Retour",
+    "loading": "Chargement..."
   },
-  "location": {
-    "form": {
-      "access": "Accès",
-      "position": "Position"
-    }
+  "list": {
+    "no_results": "Aucun résultat trouvé",
+    "zoom_in": "Zoomez sur la carte pour voir les emplacements"
   },
   "locations": {
+    "edit_position": {
+      "cancel": "Annuler la modification de position",
+      "confirm": "Confirmer la modification de position",
+      "instructions": "Modifier la position de l'emplacement."
+    },
     "form": {
+      "access": "Accès",
       "comments": "Commentaires",
       "comments_subtext": "Nouveaux développements, problèmes d'accès, condition des plantes ...",
       "description_subtext": "Détails, problèmes d'accès, condition des plantes ...",
       "fruiting_status": "État des fruits",
-      "season": "Saison"
+      "position": "Position",
+      "season": "Saison",
+      "season_start_to_stop_short": "à"
     },
     "index": {
       "editmarker_html": "<b>Déplacez à la position de la source.</b><br><br>Vérifiez la vue satellite - la source pourrait être visible depuis l'espace !"
@@ -102,18 +157,43 @@
       ],
       "fruiting": ["Fleurs", "Fruits pas mûrs", "Fruits mûrs"]
     },
+    "init": {
+      "cancel": "Annuler le choix de l'emplacement",
+      "choose_instructions": "Choisissez une position pour votre nouvel emplacement.",
+      "confirm": "Confirmer le choix de l'emplacement",
+      "edit_instructions": "Modifier la position de votre nouvel emplacement."
+    },
     "overview": {
       "added_by": "Ajouté par {{name}}",
       "date_edited": "Modifié le {{date}}",
-      "imported_from": "Importé de {{name}}"
+      "imported_from": "Importé de {{name}}",
+      "season": {
+        "in_season": "En saison du {{start}} au {{stop}}",
+        "year_round": "Toute l'année"
+      },
+      "title": "Aperçu"
     }
   },
   "menu": {
     "add_new_location": "Ajouter un site",
     "add_review": "Ajouter un avis",
     "edit_location": "Éditer un site",
+    "edit_review": "Éditer un avis",
     "list": "Liste",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "zoom_in_to_add_location": "Zoomer pour ajouter un site"
+  },
+  "new_type": {
+    "add_type_label": "Ajouter un type :",
+    "form": {
+      "add_name": "Ajouter un nom",
+      "language": "Langue",
+      "notes": "Notes",
+      "notes_placeholder": "Description, lien Wikipedia, information taxonomique ...",
+      "pending_notice": "Note : Tous les nouveaux types sont en attente par défaut. Seuls les administrateurs peuvent ajouter des types non-en attente.",
+      "remove": "Supprimer"
+    },
+    "title": "Ajouter un nouveau type"
   },
   "pages": {
     "about": {
@@ -124,15 +204,15 @@
       "caleb_phillips_bio_html": "Caleb est un humanoïde bipède déplumé, passionné de justice alimentaire. Il adore aussi utiliser la technologie de manière créative pour résoudre les problèmes sociaux. Quand il ne fait pas des tours à vélo pour admirer les arbres fruitiers, Caleb travaille comme scientifique des données au <a href=\"http://nrel.gov\">National Renewable Energy Laboratory</a> à Golden, dans le Colorado(États-Unis), comme professeur adjoint en informatique à <a href=\"http://cs.colorado.edu\">l'Université du Colorado</a>, et comme abeille ouvrière pour plusieurs association à but non lucratif (<a href=\"http://www.foodrescuealliance.org/\">Food Rescue Alliance</a> à Denver et <a href=\"http://boulderfoodrescue.org\">Boulder Food Rescue</a> à Boulder, Colorado). Son temps libre, il le passe aussi à faire de l'escalade, de la course à pied, du vélo : il essaye de passer le plus de temps possible dans la nature.",
       "celebration": "Falling Fruit célèbre la richesse culinaire de nos rues, trop souvent oubliée.\nC'est en quantifiant cette ressource sur une carte interactive que nous espérons faciliter les liens entre les gens, la nourriture, et les organismes naturels qui poussent dans nos quartiers. Ce n'est pas qu'un repas gratuit ! Le glanage du XXIe siècle est une opportunité d'explorer la ville, d'affronter les horreurs des trottoirs souillés et de renouer avec les origines botaniques de la nourriture.",
       "closing_remarks": "Dernières remarques",
-      "closing_remarks_para1_html": "Falling Fruit est un organisme caritatif à but non lucratif 501(c)(3) basé à Boulder (Colorado, États-Unis). Les dons réalisés depuis les États-Unis sont donc déductibles des impôts. Vous pouvez consulter notre <a href=\"/501c3.pdf\">certificat d'exemption</a> délivré par l'IRS et vérifier notre  conformité avec la loi avec <a href=\"http://apps.irs.gov/app/eos/pub78Search.do?\">la publication 78 de l'IRS</a> ou le <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Secrétaire d'État au Colorado</a>. Nos <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">règlementations</a> et nos <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">procès-verbaux de conseil d'administration</a> sont également disponibles.",
-      "closing_remarks_para2_html": "Le glanage urbain a ses propres considérations pratiques et morales. Découvrez l'éthique du glanage urbain avec l'excellent résumé de notre site jumeau de Portland (Oregon, États-Unis),<a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a>.",
-      "closing_remarks_para3_html": "Les informations de Falling Fruit peuvent être incorrectes ou ne plus être valables. Par exemple : beaucoup des cartes de glanage ayant migré vers Falling Fruit étaient à l'origine des Google Maps dont les marqueurs étaient souvent déplacés par accident. Quant aux inventaires d'arbres municipaux, si mis à jour, ils le sont uniquement lorsque l'on procède à leur entretien. Les données peuvent s'avérer incorrectes une fois sur place, éditez alors la carte en fonction de vos découvertes. Il est de votre responsabilité à tous de déterminer la nature, la comestibilité et le site d'une plante, ainsi que d'améliorer la qualité de la carte.",
-      "contact_us_html": "Falling Fruit a été créé par et pour des glaneurs – nous voulons en faire le meilleur outil disponible pour les glaneurs modernes. Écrivez-nous à <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, nous aimerions beaucoup avoir votre avis !",
-      "craig_durkin_bio_html": "Craig est le cofondateur de <a href=\"http://www.concrete-jungle.org/\">Concrete Jungle</a>, une organisation d'Atlanta (Géorgie, États-Unis) qui fait pousser de la nourriture et cueille des fruits à travers la ville pour en faire don à des foyers d'hébergement d'urgence et à des banques alimentaires. En tant que diplômé de <a href=\"http://www.gatech.edu/\">Georgia Tech</a>il est toujours à la recherche de nouvelles manières d'associer le glanage aux nouvelles technologies. Il va d'ailleurs bientôt lancer son drone chercheur d'arbres fruitiers et son détecteur de fruits mûrs...",
-      "cristina_rubke_bio_html": "Cristina est avocate chez <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a>, à San Francisco (Californie, États-Unis), où elle travaille dans le domaine du droit des marques et de la consultance juridique. Elle est aussi membre du conseil d'administration de la <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>(Agence des transports urbains de San Francisco), qui s'occupe des transports publics, de la circulation et du stationnement à San Francisco. Cristina profite de son temps libre pour naviguer sur la baie de San Francisco avec la <a href=\"//www.baads.org/\">Bay Area Association of Disabled Sailors</a> (Association des Navigateurs Handicapés de la Baie) et participe à des régates locales et internationales.",
-      "david_craft_bio_html": "David est chercheur au Département de Radiothérapie de <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">la Harvard Medical School</a> à Boston (Massachusetts, États-Unis). Il est aussi adepte du glanage et auteur du livre <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging:Finding and Eating Wild Plants in the City</a> (<a href=”/docs/David Craft - Urban Foraging.pdf”>free download</a>).",
+      "closing_remarks_para1_html": "Falling Fruit est un organisme caritatif à but non lucratif 501(c)(3) basé à Boulder (Colorado, États-Unis). Les dons réalisés depuis les États-Unis sont donc déductibles des impôts. Vous pouvez consulter notre <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">certificat d’exemption</a> délivré par l’IRS et vérifier notre  conformité avec la loi avec <a href=\"https://apps.irs.gov/app/eos/\">la publication 78 de l’IRS</a> ou le <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Secrétaire d’État au Colorado</a>. Nos <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">règlementations</a> et nos <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">procès-verbaux de conseil d’administration</a> sont également disponibles.",
+      "closing_remarks_para2_html": "Le glanage urbain a ses propres considérations pratiques et morales. Découvrez l’éthique du glanage urbain avec l’excellent résumé de notre site jumeau de Portland (Oregon, États-Unis),<a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a>.",
+      "closing_remarks_para3_html": "Les informations de Falling Fruit peuvent être incorrectes ou ne plus être valables. Par exemple : beaucoup des cartes de glanage ayant migré vers Falling Fruit étaient à l’origine des Google Maps dont les marqueurs étaient souvent déplacés par accident. Quant aux inventaires d’arbres municipaux, si mis à jour, ils le sont uniquement lorsque l’on procède à leur entretien. Les données peuvent s’avérer incorrectes une fois sur place, éditez alors la carte en fonction de vos découvertes. Il est de votre responsabilité à tous de déterminer la nature, la comestibilité et le site d’une plante, ainsi que d’améliorer la qualité de la carte.",
+      "contact_us_html": "Falling Fruit a été créé par et pour des glaneurs – nous voulons en faire le meilleur outil disponible pour les glaneurs modernes. Écrivez-nous à <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, nous aimerions beaucoup avoir votre avis !",
+      "craig_durkin_bio_html": "Craig est le cofondateur de <a href=\"http://www.concrete-jungle.org/\">Concrete Jungle</a>, une organisation d’Atlanta (Géorgie, États-Unis) qui fait pousser de la nourriture et cueille des fruits à travers la ville pour en faire don à des foyers d’hébergement d’urgence et à des banques alimentaires. En tant que diplômé de <a href=\"http://www.gatech.edu/\">Georgia Tech</a>il est toujours à la recherche de nouvelles manières d’associer le glanage aux nouvelles technologies. Il va d’ailleurs bientôt lancer son drone chercheur d’arbres fruitiers et son détecteur de fruits mûrs...",
+      "cristina_rubke_bio_html": "Cristina est avocate chez <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a>, à San Francisco (Californie, États-Unis), où elle travaille dans le domaine du droit des marques et de la consultance juridique. Elle est aussi membre du conseil d’administration de la <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>(Agence des transports urbains de San Francisco), qui s’occupe des transports publics, de la circulation et du stationnement à San Francisco. Cristina profite de son temps libre pour naviguer sur la baie de San Francisco avec la <a href=\"//www.baads.org/\">Bay Area Association of Disabled Sailors</a> (Association des Navigateurs Handicapés de la Baie) et participe à des régates locales et internationales.",
+      "david_craft_bio_html": "David est chercheur au Département de Radiothérapie de <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">la Harvard Medical School</a> à Boston (Massachusetts, États-Unis). Il est aussi adepte du glanage et auteur du livre <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging:Finding and Eating Wild Plants in the City</a> (<a href=”/docs/David Craft - Urban Foraging.pdf”>free download</a>).  ",
       "directors": "Comité d'administration",
-      "donate": "Contribuer",
+      "donate": "Faire un don",
       "emily_sigman_bio_html": "Emily est une ardente évangéliste de l'agroforesterie, une incorrigible butineuse et une fière mère de deux chats, quatre cailles et le plus magnifique des chiens du monde. Ses racines s'étendent profondément dans les montagnes Rocheuses, mais de nos jours, sa biomasse aérienne est fière d'appeler New Haven, Connecticut, sa maison. On peut souvent la trouver en train de s'occuper de forêts alimentaires publiques, de lire avec ravissement dans un coin de bibliothèque confortable, ou de faire de la poésie sur la magie du mycélium (et, soi-disant, de faire des études supérieures communes à la Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> et <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily souffre d'une terrible dépendance aux voyages et pourrait être n'importe où en ce moment.",
       "ethan_welty_bio_html": "Grâce à la technologie et aux données, Ethan défend les villes comme sources de nourriture fraîche et gratuite. Il a créé Falling Fruit avec Caleb Phillips en 2013 pour promouvoir la recherche de nourriture en milieu urbain dans le monde entier, et a cofondé <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> en 2014 pour récolter et distribuer les fruits excédentaires qui poussent autour de lui à Boulder, au Colorado. Au-delà des fruits, il jongle avec une <a href=\"https://www.weltyphotography.com\">carrière de photographe</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">recherche sur les glaciers</a>, et un appétit pour les activités en montagne et sur les rivières.",
       "ff_disclaimer_html": "Falling Fruit n'est pas lié à Fallen Fruit. Fallen Fruit peut être consulté à <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
@@ -150,7 +230,7 @@
     },
     "changes": {
       "change_in_city": "{{type}} à {{city}}",
-      "recent_changes": "Modifications récentes",
+      "recent_changes": "Changements récents",
       "type": {
         "added": "ajouté",
         "edited": "modifié",
@@ -166,28 +246,47 @@
     "datasets": {
       "community_map": "Cartes communautaires",
       "date_imported": "Date d'importation",
-      "imported_datasets": "Données importées",
-      "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l'univers au peigne fin, à la recherche d'autres informations que nous ajoutons à notre <a href=\"/data\">base de données</a>, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu'il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n'hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d'importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d'importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d'origine après importation ne seront pas reportés sur Falling Fruit.",
+      "imported_datasets": "Ensembles de données importés",
+      "imported_on": "Importé le {{date}}",
+      "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l’univers au peigne fin, à la recherche d’autres informations que nous ajoutons à notre <a href=\"/data\">base de données</a>, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu’il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n’hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d’importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d’importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d’origine après importation ne seront pas reportés sur Falling Fruit.",
       "link": "Lien",
-      "locations": "Endroits",
-      "table_info": "Chaque ensemble de données est listé par nom, nombre de sites et date d'importation. En élargissant chaque ligne de données, vous verrez d'autres détails concernant les données, l'importation et la licence relative aux conditions d'utilisation de ces données.",
+      "locations": "Emplacements",
+      "table_info": "Chaque ensemble de données est listé par nom, nombre de sites et date d’importation. En élargissant chaque ligne de données, vous verrez d’autres détails concernant les données, l’importation et la licence relative aux conditions d’utilisation de ces données.",
       "type": "Type",
       "types_of_data": "Il y a deux catégories d'ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d'arbres» sont compilés par des villes, des universités et d'autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s'en occuper. Nous parcourons ces larges bases de données à la recherche d'espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d'arbres avec nous."
     },
     "settings": {
+      "bicycle": "Vélo",
       "data": "Données",
       "labels": "Étiquettes",
       "language": "Langue",
       "points_of_interest": "Points d'intérêt",
       "regional": "Régional",
-      "roadmap": "Plan",
+      "roadmap": "Carte",
       "satellite": "Satellite",
-      "side_menu": "À vélo",
       "terrain": "Relief",
       "transit": "Transports en commun",
       "units": {
-        "imperial": "Impériales",
-        "metric": "Métriques",
+        "distance": {
+          "foot": {
+            "one": "{{count}} pied",
+            "other": "{{count}} pieds"
+          },
+          "kilometer": {
+            "one": "{{count}} kilomètre",
+            "other": "{{count}} kilomètres"
+          },
+          "meter": {
+            "one": "{{count}} mètre",
+            "other": "{{count}} mètres"
+          },
+          "mile": {
+            "one": "{{count}} mile",
+            "other": "{{count}} miles"
+          }
+        },
+        "imperial": "Impérial",
+        "metric": "Métrique",
         "units": "Unités"
       }
     },
@@ -195,8 +294,10 @@
       "countries": {
         "australia": "Australie",
         "belgium": "Belgique",
+        "brazil": "Brésil",
         "canada": "Canada",
         "chile": "Chili",
+        "czechia": "Tchéquie",
         "fiji": "Fidji",
         "finland": "Finlande",
         "france": "France",
@@ -204,7 +305,8 @@
         "greece": "Grèce",
         "ireland": "Irlande",
         "italy": "Italie",
-        "new_zealand": "Nouvelle Zélande",
+        "new_zealand": "Nouvelle-Zélande",
+        "poland": "Pologne",
         "portugal": "Portugal",
         "spain": "Espagne",
         "sweden": "Suède",
@@ -213,12 +315,44 @@
         "united_states": "États-Unis"
       },
       "grow_pick_and_distribute": "Cultiver · Récolter · Distribuer",
+      "heading": {
+        "city": "Ville",
+        "country": "Pays",
+        "social": "Réseaux sociaux",
+        "state": "État"
+      },
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
     }
   },
   "problems": {
     "description_subtext": "Toute information pouvant nous aider à évaluer le problème",
-    "problem_type": "Type de problème"
+    "problem_type": "Type de problème",
+    "problem_types": {
+      "0": "L'emplacement est du spam",
+      "1": "L'emplacement n'existe pas",
+      "2": "L'emplacement est un doublon",
+      "3": "Photo d'avis inappropriée",
+      "4": "Commentaire d'avis inapproprié",
+      "5": "Autre (expliquez ci-dessous)"
+    }
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Laisser un avis",
+      "observed_on": "Observé le {{date}}",
+      "upload_images": "Télécharger des images"
+    },
+    "update_delete": "Modifier ou supprimer cet avis.",
+    "you_reviewed": "Vous avez évalué cet emplacement le {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Emplacement modifié",
+    "location_submitted": "Emplacement soumis",
+    "report_submitted": "Rapport soumis avec succès !",
+    "review_deleted": "Avis supprimé",
+    "review_edited": "Avis modifié",
+    "review_submitted": "Avis soumis",
+    "type_added": "Type ajouté"
   },
   "time": {
     "days": {
@@ -228,12 +362,16 @@
     "last_24_hours": "Dernières 24 heures",
     "time_ago": "Il y a {{time}}"
   },
+  "type": {
+    "pending_review": "En attente de validation"
+  },
   "users": {
     "bio": "Parlez-nous de vous",
     "change_password": "Modifier mon mot de passe",
     "current_password": "Mot de passe actuel",
     "edit_account": "Modifier mon compte",
     "forgot_password": "Réinitialiser votre mot de passe",
+    "joined_on": "Inscrit le {{date}}",
     "login": "Connexion",
     "new_password": "Nouveau mot de passe",
     "new_password_confirmation": "Confirmation du nouveau mot de passe",
@@ -241,6 +379,9 @@
       "announcements_email": "Recevoir des e-mails pour des annonces importantes ou des opportunités (1 ou 2 fois par an)"
     },
     "password_confirmation": "Confirmation du mot de passe",
+    "profile": {
+      "title": "Utilisateur : {{name}}"
+    },
     "remember_me": "Rester connecté",
     "resend_confirmation_instructions": "Renvoyer les instructions de validation",
     "save_changes": "Enregistrer vos modifications",

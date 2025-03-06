@@ -90,14 +90,32 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
     label: formatMonth(i, i18n.language),
     value: i,
   }))
-  const propertyAccessOptions = Array.from({ length: 5 }).map((_, i) => ({
-    label: t(`locations.infowindow.access_mode.${i}`),
-    value: i,
-  }))
+  const propertyAccessOptions = [
+    {
+      label: t('locations.infowindow.access_mode.0'),
+      value: 0,
+    },
+    {
+      label: t('locations.infowindow.access_mode.1'),
+      value: 1,
+    },
+    {
+      label: t('locations.infowindow.access_mode.2'),
+      value: 2,
+    },
+    {
+      label: t('locations.infowindow.access_mode.3'),
+      value: 3,
+    },
+    {
+      label: t('locations.infowindow.access_mode.4'),
+      value: 4,
+    },
+  ]
   return (
     <>
       <TypesSelect />
-      <Label>{t('location.form.position')}</Label>
+      <Label>{t('locations.form.position')}</Label>
       {isLoading ? (
         <LoadingIndicator />
       ) : isDesktop || !editingId ? (
@@ -112,7 +130,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       />
       <Select
         name="access"
-        label={t('location.form.access')}
+        label={t('locations.form.access')}
         options={propertyAccessOptions}
         isSearchable={false}
         toFormikValue={(x) => x?.value}
@@ -131,7 +149,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
           fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
           isClearable
         />
-        <span>to</span>
+        <span>{t('locations.form.season_start_to_stop_short')}</span>
         <Select
           name="season_stop"
           options={monthOptions}
@@ -254,7 +272,9 @@ export const LocationForm = ({ editingId, initialValues, innerRef }) => {
                   disabled={isSubmitting || !isValid || !formDirty}
                   type="submit"
                 >
-                  {isSubmitting ? 'Submitting' : t('glossary.submit')}
+                  {isSubmitting
+                    ? t('form.button.submitting')
+                    : t('form.button.submit')}
                 </Button>
               </ProgressButtons>
               {!isLoggedIn && <Recaptcha />}

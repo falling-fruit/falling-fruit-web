@@ -30,7 +30,9 @@ const PasswordResetPage = () => {
       history.push('/users/sign_in')
     } catch (error) {
       toast.error(
-        `Resetting password failed: ${error.message || 'Unknown error'}`,
+        t('error_message.auth.reset_password_failed', {
+          message: error.message || t('error_message.unknown_error'),
+        }),
       )
       recaptchaRef.current.reset()
     }

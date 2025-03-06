@@ -1,0 +1,392 @@
+{
+  "devise": {
+    "confirmations": {
+      "confirmed": "Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.",
+      "no_token": "Bu sayfaya onay e-postasındaki linke tıklayarak gelmeniz gerekmektedir. Eğer geliyorsanız, lütfen size sağlanan tam URL'yi kullandığınızdan emin olun.",
+      "send_instructions": "Birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız."
+    },
+    "failure": {
+      "already_authenticated": "Zaten giriş yaptınız."
+    },
+    "passwords": {
+      "no_token": "Bu sayfaya şifre sıfırlama e-postasındaki linke tıklayarak gelmeniz gerekmektedir. Linke tıklamak yerine kopyaladıysanız, hata yapmış olabilirsiniz. Lütfen şifre sıfırlama e-postasındaki linke tıklayın.",
+      "send_instructions": "Birkaç dakika içinde şifrenizi nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız.",
+      "updated_not_active": "Şifreniz başarıyla güncellendi."
+    },
+    "registrations": {
+      "signed_up": "Başarıyla giriş yaptınız. Hoşgeldiniz!",
+      "update_needs_confirmation": "Hesabınızı başarıyla güncellediniz, fakat yeni e-posta adresinizin onaylanması gerek. Yeni e-posta hesabınızın onaylanması için lütfen size gönderdiğimiz e-postada bulunan onay linkini açın.",
+      "updated": "Hesabınız başarıyla güncellendi."
+    }
+  },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Konum değişikliklerini alma başarısız: {{message}}",
+      "fetch_location_failed": "{{id}} konumunu alma hatası: {{message}}",
+      "fetch_review_failed": "{{id}} değerlendirmesini alma hatası: {{message}}",
+      "location_edit_failed": "Konum düzenleme başarısız: {{message}}",
+      "location_submission_failed": "Konum gönderimi başarısız: {{message}}",
+      "photo_upload_failed": "Fotoğraf yükleme başarısız: {{message}}",
+      "report_submission_failed": "Rapor gönderimi başarısız: {{message}}",
+      "review_deletion_failed": "Değerlendirme silme başarısız: {{message}}",
+      "review_edit_failed": "Değerlendirme düzenleme başarısız: {{message}}",
+      "review_submission_failed": "Değerlendirme gönderimi başarısız: {{message}}",
+      "street_view_unavailable": "{{id}} konumu için Sokak Görünümü mevcut değil",
+      "type_add_failed": "Yeni tür ekleme başarısız: {{message}}"
+    },
+    "auth": {
+      "check_failed": "Kimlik doğrulama kontrolü başarısız: {{message}}",
+      "confirmation_failed": "Hesap onayı başarısız: {{message}}",
+      "password_set_failed": "Yeni şifre belirleme başarısız: {{message}}",
+      "profile_update_failed": "Profil güncelleme başarısız: {{message}}",
+      "resend_confirmation_failed": "Onay tekrar gönderimi başarısız: {{message}}",
+      "reset_password_failed": "Şifre sıfırlama başarısız: {{message}}",
+      "signin_failed": "Giriş başarısız: {{message}}",
+      "signup_failed": "Kayıt başarısız: {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Konum kullanılamıyor: {{message}}",
+      "code_3": "Konum zaman aşımı: {{message}}",
+      "denied": "Konumunuzu kullanma izni reddedildi. Konum özelliğini etkinleştirmek için lütfen tarayıcı ayarlarınızdan konum paylaşımına izin verin ve sayfayı yenileyin.",
+      "not_supported": "Konum özelliği desteklenmiyor"
+    },
+    "language_changed_refresh_to_reload_map": "Dil değiştirildi, haritayı yenilemek için sayfayı yenileyin",
+    "unknown_error": "Bilinmeyen hata"
+  },
+  "filter": {
+    "deselect_all": "Tümünü kaldır",
+    "only_on_map": "Haritada",
+    "select_all": "Tümünü seç"
+  },
+  "form": {
+    "button": {
+      "cancel": "İptal",
+      "delete": "Sil",
+      "edit": "Düzenle",
+      "report": "Bildir",
+      "reset": "Sıfırla",
+      "review": "İncele",
+      "submit": "Gönder",
+      "submitting": "Gönderiliyor"
+    },
+    "error": {
+      "confirmation": "Orijinal ile eşleşmiyor",
+      "missing_password": "E-posta veya şifreyi değiştirmek için gerekli",
+      "too_short": "En az {{min}} karakter"
+    },
+    "optional": "İsteğe bağlı",
+    "required": "Gerekli",
+    "search": "Ara"
+  },
+  "glossary": {
+    "about": "Hakkında",
+    "account": "Hesap",
+    "activity": "Aktivite",
+    "address": "Adres",
+    "by_author": "Yazar {{author}}",
+    "description": "Açıklama",
+    "email": "E-posta",
+    "logout": "Çıkış Yap",
+    "map": "Harita",
+    "name": "İsim",
+    "password": "Şifre",
+    "quality": "Kalite",
+    "review": {
+      "other": "Değerlendirmeler"
+    },
+    "sign_up": "Kayıt Ol",
+    "tree_inventory": {
+      "one": "Ağaç envanteri"
+    },
+    "type": {
+      "one": "Tür",
+      "other": "Türler"
+    },
+    "unverified": "Doğrulanmamış",
+    "yield": "Verim"
+  },
+  "layouts": {
+    "application": {
+      "menu": {
+        "in_the_press": "Basında",
+        "sharing_the_harvest": "Hasadı paylaşmak",
+        "the_data": "Veriler",
+        "the_project": "Proje"
+      }
+    },
+    "back": "Geri",
+    "loading": "Yükleniyor..."
+  },
+  "list": {
+    "no_results": "Sonuç Bulunamadı",
+    "zoom_in": "Konum verilerini görmek için haritayı yakınlaştırın"
+  },
+  "locations": {
+    "edit_position": {
+      "cancel": "Konum düzenlemeyi iptal et",
+      "confirm": "Konum düzenlemeyi onayla",
+      "instructions": "Konum pozisyonunu düzenle."
+    },
+    "form": {
+      "access": "Erişim",
+      "comments": "Yorumlar",
+      "comments_subtext": "Güncellemeler, erişim sorunları, bitki sağlığı...",
+      "description_subtext": "Konum detayları, erişim sorunları, bitki sağlığı ...",
+      "fruiting_status": "Meyve durumu",
+      "position": "Pozisyon",
+      "season": "Sezon",
+      "season_start_to_stop_short": "ile"
+    },
+    "index": {
+      "editmarker_html": "<b>Kaynağın konumuna taşıyın.</b><br><br>Uydu görünümünü kontrol edin - kaynak uzaydan görünür olabilir!"
+    },
+    "infowindow": {
+      "access_mode": [
+        "Kaynak benim mülkümde",
+        "Kaynağı eklemek için sahibinden iznim var",
+        "Kaynak kamu arazisinde",
+        "Kaynak özel mülkte ama kamu arazisine taşıyor",
+        "Kaynak özel mülkte (toplamadan önce sorun)"
+      ],
+      "access_short": [
+        "Sahibi tarafından eklendi",
+        "Sahibi tarafından izin verildi",
+        "Kamu",
+        "Özel ama taşan",
+        "Özel"
+      ],
+      "fruiting": ["Çiçekler", "Olgunlaşmamış meyve", "Olgun meyve"]
+    },
+    "init": {
+      "cancel": "Konum seçimini iptal et",
+      "choose_instructions": "Yeni konumunuz için bir pozisyon seçin.",
+      "confirm": "Konum seçimini onayla",
+      "edit_instructions": "Yeni konumunuz için pozisyonu düzenleyin."
+    },
+    "overview": {
+      "added_by": "{{name}} tarafından eklendi",
+      "date_edited": "{{date}} tarihinde güncellendi",
+      "imported_from": "{{name}} kaynağından içe aktarıldı",
+      "season": {
+        "in_season": "{{start}} ile {{stop}} arasında mevsiminde",
+        "year_round": "Yıl Boyu"
+      },
+      "title": "Genel Bakış"
+    }
+  },
+  "menu": {
+    "add_new_location": "Konum ekle",
+    "add_review": "Değerlendirme ekle",
+    "edit_location": "Konumu düzenle",
+    "edit_review": "Değerlendirmeyi düzenle",
+    "list": "Liste",
+    "settings": "Ayarlar",
+    "zoom_in_to_add_location": "Konum eklemek için yakınlaştırın"
+  },
+  "new_type": {
+    "add_type_label": "Tür Ekle:",
+    "form": {
+      "add_name": "İsim Ekle",
+      "language": "Dil",
+      "notes": "Notlar",
+      "notes_placeholder": "Açıklama, Wikipedia bağlantısı, taksonomik bilgi ...",
+      "pending_notice": "Not: Tüm yeni türler varsayılan olarak beklemede olarak ayarlanır. Sadece yöneticiler beklemede olmayan türler ekleyebilir.",
+      "remove": "Kaldır"
+    },
+    "title": "Yeni Tür Ekle"
+  },
+  "pages": {
+    "about": {
+      "about_the_site": "Proje hakkında",
+      "advisors": "Danışma kurulu",
+      "alan_gibson_bio_html": "Alan her zaman maceralardan ve keşiften keyif almıştır. Küçük çocuklarını doğa yaşamıyla tanıştırmanın bir yolu olarak yiyecek toplamaya başladı. <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> blogunu yazıyor ve <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Bedava Meyve ve Kuruyemiş</a> kitabını yayınladı. Halka açık parklarda yiyecek toplamanın meşrulaştırılmasına öncülük etti ve yaşadığı şehir olan Southampton, İngiltere'de bir topluluk meyve bahçesi kurdu.",
+      "ana_carolina_bio_html": "Ana, Brezilya'daki Federal University of Pará'da doktora sonrası araştırmacıdır. Sosyal ve kültürel beslenme alışkanlıklarını anlamaya ilgi duyan bir antropologdur. Ana çoğunlukla Brezilya Amazon'unda çalıştı. Acre'de (batı Amazon) bölgesel meyve tüketimini inceledi. Ardından, Orta Solimões bölgesinde uzak topluluklardaki beslenme değişikliklerini araştırdı. 2017-2018 yılları arasında, Amazon Deltası'ndaki küçük ve orta ölçekli kasabalarda yaşadı ve iklim değişikliğinin gayri resmi yerleşimlerde yaşayan insanların gıda güvenliği üzerindeki etkilerini inceledi. Yakın zamanda Amerika Birleşik Devletleri'nin güney New Mexico bölgesine taşındı ve danışman olarak çalışıyor.",
+      "caleb_phillips_bio_html": "Caleb, gıda adaleti ve teknolojinin sosyal sorunları çözmek için yaratıcı yollarla kullanılması konusunda tutkulu, tüysüz iki ayaklı bir insansıdır. Ağaçlara bakarak bisiklet sürmediği zamanlarda, Colorado, Golden'daki <a href=\"https://www.nrel.gov/research/caleb-phillips.html\">Ulusal Yenilenebilir Enerji Laboratuvarı</a>'ndaki veri bilimcisi işi ile <a href=\"https://www.colorado.edu/cs/caleb-phillips\">Colorado Üniversitesi</a>'nde bilgisayar bilimi yardımcı profesörlüğü arasında dengeyi kuruyor. Tüm bu iş dışında, kaya tırmanışı yapmayı, patikalarda koşmayı, bisiklet sürmeyi ve genel olarak mümkün olduğunca açık havada olmayı seviyor. Caleb, 2013'te Ethan Welty ile birlikte Falling Fruit'i kurdu ve Danışma Kurulu'nda görev almadan önce 6 yıl boyunca Yönetim Kurulu'nda görev yaptı.",
+      "celebration": "Falling Fruit, şehir sokaklarımızdaki göz ardı edilmiş yemek zenginliğinin bir kutlamasıdır. Bu kaynağı interaktif bir haritada sayısallaştırarak, insanlar, yiyecekler ve mahallelerimizde yetişen doğal organizmalar arasında samimi bağlantılar kurmayı umuyoruz. Sadece bedava yemek değil! 21. yüzyılda yiyecek toplamak, kentsel keşif için bir fırsat, lekeli kaldırımların belasıyla savaşmak ve yiyeceğin botanik kökenleriyle yeniden bağlantı kurmak için bir fırsattır.",
+      "closing_remarks": "Kapanış sözleri",
+      "closing_remarks_para1_html": "Falling Fruit, Colorado, Boulder'da kurulu bir 501(c)(3) (vergiden muaf) kamu yardım kuruluşudur. Sonuç olarak, Amerika Birleşik Devletleri'ndeki bağışlar vergiden düşülebilir. IRS'den aldığımız <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">muafiyet mektubunu</a> inceleyebilir ve durumumuzu <a href=\"https://apps.irs.gov/app/eos/\">IRS Yayını 78</a> veya <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Colorado Eyalet Sekreteri</a> üzerinden doğrulayabilirsiniz. Ayrıca <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">tüzüğümüz</a> ve yönetim kurulu toplantı <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">tutanakları</a> da mevcuttur.",
+      "closing_remarks_para2_html": "Kentsel ortamda yiyecek toplamak bazı pratik ve ahlaki hususları beraberinde getirir. Kentsel yiyecek toplama etiğine giriş için şu <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">özeti</a> öneririz.",
+      "closing_remarks_para3_html": "Falling Fruit'teki bilgiler yanlış veya güncel olmayabilir. Örneğin, Falling Fruit'e aktarılan yiyecek toplama haritalarının çoğu, işaretleyicilerin genellikle yanlışlıkla taşındığı halka açık Google Haritalar olarak barındırılıyordu ve belediye ağaç envanterleri sadece bakım için ağaçlar ziyaret edildiğinde (eğer edilirse) güncellenir. Sahada tutarsızlıklarla karşılaşmaya hazırlıklı olun ve keşiflerinize dayanarak haritayı gerektiği gibi düzenleyin. Sonuç olarak, bir bitkinin kimliğini, yenilebilirliğini ve konumunu belirleme sorumluluğu size aittir ve haritanın kalitesini iyileştirme sorumluluğu hepimize aittir.",
+      "contact_us_html": "Falling Fruit, yiyecek toplayanlar tarafından yiyecek toplayanlar için inşa edilmiştir - çağdaş yiyecek toplayıcılar için mevcut en iyi araç olmasını istiyoruz. Bize <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a> adresinden yazın, sizden haber almaktan mutluluk duyarız!",
+      "craig_durkin_bio_html": "Craig, Atlanta, Georgia'da şehir genelinde yerel evsizler barınağı ve gıda bankalarına bağışlanmak üzere yiyecek yetiştiren ve meyve toplayan bir organizasyon olan <a href=\"http://www.concrete-jungle.org/\">Concrete Jungle</a>'ın kurucu ortağıdır. Bir <a href=\"http://www.gatech.edu/\">Georgia Tech</a> mezunu olarak, meyve toplamayı yeni teknolojilerle birleştirmenin yollarını arıyor ve yakında meyve ağacı tespit dronu ve meyve olgunluğu sensörü tweet'lerini paylaşmaya başlayacak...",
+      "cristina_rubke_bio_html": "Cristina, San Francisco, California'daki <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a>'de marka tescili ve danışmanlığı üzerine odaklanan bir avukattır. Aynı zamanda San Francisco'daki toplu taşıma, trafik ve park hizmetlerini denetleyen <a href=\"//www.sfmta.com/\">San Francisco Belediye Ulaşım Ajansı</a>'nın yönetim kurulu üyesidir. Boş zamanlarında, Cristina <a href=\"//www.baads.org/\">Bay Area Engelli Denizciler Derneği</a> ile San Francisco Körfezi'nde yelken yapar ve yerel ve uluslararası yarışlara katılır.",
+      "david_craft_bio_html": "David, Boston, Massachusetts'teki <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Harvard Tıp Okulu</a> Radyasyon Onkolojisi Bölümü'nde araştırmacıdır. Aynı zamanda tutkulu bir yiyecek toplayıcısı ve <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Kentsel Yiyecek Toplama: Şehirde Yabani Bitkileri Bulma ve Yeme</a> (<a href=\"/docs/David Craft - Urban Foraging.pdf\">ücretsiz indirme</a>) kitabının yazarıdır.",
+      "directors": "Yönetim kurulu",
+      "donate": "Bağış yap",
+      "emily_sigman_bio_html": "Emily, koyu bir tarım ormancılığı savunucusu, düzeltilemez bir yiyecek toplayıcısı ve iki kedi, dört bıldırcın ve dünyanın en muhteşem köpeğinin gururlu annesidir. Kökleri Rocky Dağları'na uzanır, ancak bu günlerde toprak üstü biyokütlesi New Haven, Connecticut'ı evi olarak kabul etmekten gurur duyar. Genellikle halka açık gıda ormanlarına bakarken, kütüphanenin rahat bir köşesinde kendinden geçmiş okurken veya misel sihri hakkında şiirsel konuşurken (ve sözde Yale <a href=\"https://environment.yale.edu/\">Ormancılık Okulu</a> ve <a href=\"https://jackson.yale.edu/person/emily-sigman/\">Küresel İlişkiler Okulu</a>'nda ortak yüksek lisans derecelerini tamamlarken) bulunabilir. Emily'nin seyahate karşı yıkıcı bir bağımlılığı var ve şu anda neredeyse her yerde olabilir.",
+      "ethan_welty_bio_html": "Ethan, teknoloji ve veriyi kullanarak şehirleri taze ve ücretsiz gıda kaynakları olarak destekliyor. Kentsel yiyecek toplamayı dünya çapında teşvik etmek için 2013'te Caleb Phillips ile birlikte Falling Fruit'i kurdu ve 2014'te Colorado, Boulder'daki fazla meyveleri toplamak ve dağıtmak için <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a>'yu kurdu. Meyvelerin ötesinde, bir <a href=\"https://www.weltyphotography.com\">fotoğrafçılık kariyeri</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">buzullar üzerine araştırmalar</a> ve dağcılık ve nehir sporları tutkusu arasında mekik dokuyor.",
+      "ff_disclaimer_html": "Falling Fruit, Fallen Fruit ile ilişkili değildir. Fallen Fruit'e <a href=\"http://fallenfruit.org\">fallenfruit.org</a> adresinden ulaşılabilir.",
+      "give_paypal": "Paypal Giving Fund üzerinden bağış yapın",
+      "give_us_money": "Biz bir 501(c)(3) kar amacı gütmeyen kuruluşuz ve faaliyetlerimizi sürdürmek için bağışlara güveniyoruz. İstekli ve imkanınız varsa, lütfen mali katkıda bulunmayı düşünün. Amerika Birleşik Devletleri'ndeki bağışlar vergiden düşülebilir.",
+      "jeff_wanner_bio_html": "Jeff, çocukken ailesiyle böğürtlen ve yaban mersini topladığından ve daha yakın zamanda Colorado genelinde halka açık meyve ağaçlarının bolluğunu fark ettiğinden beri, şehirlerimizde yetişen meyvelerin bolluğuna derin bir takdir geliştirdi. Falling Fruit için ilk görevi, Boulder ve Salt Lake City'yi elinde kağıt haritalarla tarayarak meyve veren ağaçları kaydetmekti. Bina enerji verimliliğini iyileştirmek için çalışmadığı zamanlarda, genellikle topluma yardım ediyor veya yaya, kayak veya bisikletle dağlar üzerinde hızla hareket ediyor.",
+      "join_us_html": "Yerel gıdayı kutlamada bize katılın! <a href=\"/\">Harita</a> herkesin düzenlemesine açıktır, veritabanı tek bir tıklamayla <a href=\"/data\">indirilebilir</a> ve <a href=\"https://github.com/falling-fruit/\">kod</a> açık kaynaklıdır. Aynı şekilde bolluğu diğer insanlarla paylaşmanız teşvik edilir. <a href=\"/sharing\">Paylaşım sayfamız</a> yüzlerce yerel organizasyonu listeliyor - halka açık meyve bahçeleri ve gıda ormanları dikme, şehir ağaçlarından ve çiftçilerin tarlalarından başka türlü israf olacak meyve ve sebzeleri toplama ve komşular ve ihtiyaç sahipleriyle paylaşma.",
+      "more_about_html": "Yenilebilir haritamız türünün ilki değil, ancak dünyanın en kapsamlısı olmayı hedefliyor. Kullanıcılarımız kendi konumlarını eklerken, biz de mevcut bilgileri internette tarıyor, her yerdeki toplayıcıların, ormancıların ve bedavacıların çabalarını birleştirmeye çalışıyoruz. <a href=\"/datasets\">İçe aktarılan veri setleri</a> küçük mahalle yiyecek toplama haritalarından geniş profesyonel ağaç envanterlerine kadar uzanıyor. Bu şimdiye kadar {{locations}} konuma dağılmış {{types}} farklı yenilebilir türe (çoğu, ancak tümü değil, bitki türleri) ulaştı. Yetiştirilmiş ve yaygın olanlardan yabancı bitkilerin egzotik tatlarına ve uzun zamandır unutulmuş yerli bitkilere kadar, mahallenizde yiyecek toplamak, zaman içinde ve kültürler arasında bir yolculuktur.",
+      "staff": "Personel",
+      "translate": "Çevir",
+      "translate_for_us_html": "Gönüllü çevirmen olarak katkıda bulunmak ister misiniz? Bize e-posta gönderin ve sizi çevirilerimizin yönetildiği <a href=\"https://phrase.com\">Phrase</a>'e davet edelim.",
+      "translators": "Çevirmenler",
+      "tristram_stuart_bio_html": "Tristram bir gençken, okul mutfaklarından, yerel fırıncıdan ve köy bakkalından topladığı fazla yiyeceklerle domuz yetiştirdi. Bu yiyeceklerin çoğunun hala insan tüketimine uygun olduğunu fark etmesi, iyi, taze yiyeceklerin çok büyük ölçekte israf edildiği gerçeğini görmesini sağladı. O zamandan beri Tristram, bu konuyu kamuoyunun, medyanın ve politika yapıcıların dikkatine getirmek için yorulmadan çalıştı. Gıda israfı kampanya organizasyonu <a href=\"//feedbackglobal.org\">Feedback Global</a>'i kurdu ve sorunun küresel ölçekteki boyutunu göstermek için <a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a>'ı yazdı. 2011'de gıda israfına karşı mücadelesi nedeniyle <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">Sophie Ödülü</a>'ne layık görüldü.",
+      "write": "Yaz"
+    },
+    "changes": {
+      "change_in_city": "{{city}} şehrinde {{type}}",
+      "recent_changes": "Son değişiklikler",
+      "type": {
+        "added": "eklendi",
+        "edited": "düzenlendi",
+        "visited": "ziyaret edildi"
+      }
+    },
+    "data": {
+      "beware_html": "Ama dikkat! Sıkıştırılmış dosya açıldığında, veritabanı çoğu elektronik tablo yazılımını çökertecek kadar büyük bir dosya haline gelir. Eğer sadece küçük bir bölge için veriye ihtiyacınız varsa, önce <a href=\"/\">harita</a>'ya entegre edilmiş indirme aracını kullanarak verileri almayı deneyin.",
+      "caveat_emptor_html": "Verilerin doğruluğu konusunda hiçbir sorumluluk kabul etmiyoruz - veriler olduğu gibi sunulmaktadır, <i>caveat emptor</i>. Eğer verilerle harika bir şey yaparsanız, lütfen <a href=\"mailto:feedback@fallingfruit.org\">bize bildirin</a>!",
+      "intro": "Falling Fruit, kamuya açık veriler ve kullanıcılarımızın cömertliği üzerine kurulmuştur. Kentsel yiyecek toplamanın mümkün olduğunca çok insana ulaşmasını istiyoruz ve herkesin ortak emeğimizin meyvelerinden eşit şekilde yararlanması gerektiğine inanıyoruz. Açıklık ruhuyla, işte karşınızda! Tüm veritabanı",
+      "license_html": "Eğer verileri projenizde, özellikle ticari bir projede kullanmak istiyorsanız, bizimle iletişime geçmenizi öneririz (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Aksi belirtilmedikçe, veriler <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons – Atıf, Gayri-ticari, Aynı Lisansla Paylaş) lisansı altında lisanslanmıştır. Bu, orijinal yazar/kaynak atıflarını koruduğunuz ve (izin almadan) ticari uygulamalar için kullanmadığınız sürece verileri kullanmakta ve dağıtmakta özgür olduğunuz anlamına gelir. Falling Fruit'in kaynak kodu da açıktır ve <a href=\"https://github.com/falling-fruit/\">GitHub</a>'da mevcuttur."
+    },
+    "datasets": {
+      "community_map": "Topluluk haritası",
+      "date_imported": "İçe aktarma tarihi",
+      "imported_datasets": "İçe aktarılan veri setleri",
+      "imported_on": "{{date}} tarihinde içe aktarıldı",
+      "intro_html": "Falling Fruit, kentsel yenilebilir ürünlerin en kapsamlı ve açık coğrafi veri seti olmayı hedefliyor. Kullanıcılarımız <a href=\"/\">harita</a> üzerinde keşfeder, düzenler ve yeni konumlar eklerken, biz de mevcut veri setlerini tarıyor ve doğrudan <a href=\"/data\">veritabanına</a> aktararak, dünyanın her yerindeki toplayıcıların, ormancıların ve freegan'ların çabalarını birleştiriyoruz. Gözden kaçırdığımız bir veri seti biliyorsanız, lütfen <a href=\"mailto:info@fallingfruit.org\">bize bildirin</a>! Ayrıca <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">içe aktarma şablonunu</a> kullanarak verileri biçimlendirerek içe aktarma sürecine yardımcı olabilirsiniz. İçe aktarmaların manuel olarak yapılması gerektiğinden, içe aktarma sonrasında orijinal verilerde yapılan tüm değişiklikler Falling Fruit'te yansıtılmaz.",
+      "link": "Bağlantı",
+      "locations": "Konumlar",
+      "table_info": "Her veri seti isim, konum sayısı ve içe aktarma tarihi ile listelenir. Her satırı genişletmek, veriler, içe aktarma süreci ve verilerin nasıl kullanılabileceğini düzenleyen lisans hakkında daha fazla ayrıntı gösterir.",
+      "type": "Tür",
+      "types_of_data": "Falling Fruit'e aktarılan veri setleri iki ana kategoriye ayrılır. \"Topluluk haritaları\", toplayıcılar ve freegan'lar tarafından toplulukları içinde yiyecek ararken oluşturulur. Bu verileri derleyen özverili vatandaş-kartograflarına minnettarız. \"Ağaç envanterleri\", şehirler, üniversiteler ve diğer kurumlar tarafından ağaçlarını daha iyi belgelemek ve bakımını yapmak için derlenir. Bu geniş veri setlerini gıda üreten türler için tarayıp haritaya ekliyoruz. Mahallenizin meyve ağaçlarını haritalamamıza yardımcı olmak için, okulunuz veya şehrinizle iletişime geçerek ağaç envanterlerini bizimle paylaşmaları için teşvik edin."
+    },
+    "settings": {
+      "bicycle": "Bisiklet",
+      "data": "Veri",
+      "labels": "Etiketler",
+      "language": "Dil",
+      "points_of_interest": "İlgi noktaları",
+      "regional": "Bölgesel",
+      "roadmap": "Harita",
+      "satellite": "Uydu",
+      "terrain": "Arazi",
+      "transit": "Toplu taşıma",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} fit",
+            "other": "{{count}} fit"
+          },
+          "kilometer": {
+            "one": "{{count}} kilometre",
+            "other": "{{count}} kilometre"
+          },
+          "meter": {
+            "one": "{{count}} metre",
+            "other": "{{count}} metre"
+          },
+          "mile": {
+            "one": "{{count}} mil",
+            "other": "{{count}} mil"
+          }
+        },
+        "imperial": "İngiliz",
+        "metric": "Metrik",
+        "units": "Birimler"
+      }
+    },
+    "sharing": {
+      "countries": {
+        "australia": "Avustralya",
+        "belgium": "Belçika",
+        "brazil": "Brezilya",
+        "canada": "Kanada",
+        "chile": "Şili",
+        "czechia": "Çekya",
+        "fiji": "Fiji",
+        "finland": "Finlandiya",
+        "france": "Fransa",
+        "germany": "Almanya",
+        "greece": "Yunanistan",
+        "ireland": "İrlanda",
+        "italy": "İtalya",
+        "new_zealand": "Yeni Zelanda",
+        "poland": "Polonya",
+        "portugal": "Portekiz",
+        "spain": "İspanya",
+        "sweden": "İsveç",
+        "switzerland": "İsviçre",
+        "united_kingdom": "Birleşik Krallık",
+        "united_states": "Amerika Birleşik Devletleri"
+      },
+      "grow_pick_and_distribute": "Yetiştir · Topla · Dağıt",
+      "heading": {
+        "city": "Şehir",
+        "country": "Ülke",
+        "social": "Sosyal",
+        "state": "Eyalet"
+      },
+      "intro_html": "Aşağıda kamusal alanlarda gıda yetiştiren (gıda ormanları, halka açık meyve bahçeleri), gıda toplayan (kent içi yiyecek toplama, tarla artığı toplama) veya gıda dağıtan (takaslar, bağışlar) kuruluşlar listelenmiştir. Kuruluşlar ülke, eyalet (varsa) ve şehre göre listelenmiştir. Üstü çizili olanların artık aktif olmadığı düşünülmektedir. Listede olması gereken başkalarını biliyorsanız, <a href=\"mailto:info@fallingfruit.org\">bizimle iletişime geçin</a>!"
+    }
+  },
+  "problems": {
+    "description_subtext": "Sorunu değerlendirmemize yardımcı olabilecek her türlü bilgi",
+    "problem_type": "Sorun türü",
+    "problem_types": {
+      "0": "Konum spam içeriyor",
+      "1": "Konum mevcut değil",
+      "2": "Konum tekrar ediyor",
+      "3": "Uygunsuz inceleme fotoğrafı",
+      "4": "Uygunsuz inceleme yorumu",
+      "5": "Diğer (aşağıda açıklayın)"
+    }
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Değerlendirme yap",
+      "observed_on": "Gözlemlenme tarihi {{date}}",
+      "upload_images": "Fotoğraf yükle"
+    },
+    "update_delete": "Bu değerlendirmeyi güncelle veya sil.",
+    "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
+  },
+  "success_message": {
+    "location_edited": "Konum başarıyla düzenlendi!",
+    "location_submitted": "Konum başarıyla gönderildi!",
+    "report_submitted": "Rapor başarıyla gönderildi!",
+    "review_deleted": "Değerlendirme başarıyla silindi!",
+    "review_edited": "Değerlendirme başarıyla düzenlendi!",
+    "review_submitted": "Değerlendirme başarıyla gönderildi!",
+    "type_added": "Tür başarıyla eklendi!"
+  },
+  "time": {
+    "days": {
+      "one": "{{count}} gün",
+      "other": "{{count}} gün"
+    },
+    "last_24_hours": "Son 24 saat",
+    "time_ago": "{{time}} önce"
+  },
+  "type": {
+    "pending_review": "İnceleme bekliyor"
+  },
+  "users": {
+    "bio": "Hakkınızda",
+    "change_password": "Şifremi değiştir",
+    "current_password": "Mevcut şifre",
+    "edit_account": "Hesabı düzenle",
+    "forgot_password": "Şifreni sıfırla",
+    "joined_on": "Katılma tarihi: {{date}}",
+    "login": "Giriş",
+    "new_password": "Yeni şifre",
+    "new_password_confirmation": "Yeni şifre onayı",
+    "options": {
+      "announcements_email": "Önemli duyurular ve fırsatlar içeren e-postalar al (yılda 1-2)"
+    },
+    "password_confirmation": "Şifre onayı",
+    "profile": {
+      "title": "Kullanıcı: {{name}}"
+    },
+    "remember_me": "Beni hatırla",
+    "resend_confirmation_instructions": "Onay talimatlarını tekrar gönder",
+    "save_changes": "Değişiklikleri kaydet",
+    "send": "Gönder",
+    "send_password_instructions": "Şifre sıfırlama talimatlarını gönder",
+    "sign_in": "Oturum aç"
+  }
+}

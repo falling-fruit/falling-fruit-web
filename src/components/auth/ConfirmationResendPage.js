@@ -32,7 +32,9 @@ const ConfirmationResendPage = () => {
       history.push('/users/sign_in')
     } catch (error) {
       toast.error(
-        `Resending confirmation failed: ${error.message || 'Unknown error'}`,
+        t('error_message.auth.resend_confirmation_failed', {
+          message: error.message || t('error_message.unknown_error'),
+        }),
       )
       recaptchaRef.current.reset()
     }

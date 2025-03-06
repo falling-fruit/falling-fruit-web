@@ -71,17 +71,23 @@ const AboutDatasetPage = () => {
         <p style={{ whiteSpace: 'pre-line' }}>{comments}</p>
         <IconBesideText>
           <Pin color={theme.secondaryText} size={20} />
-          <p>{muni ? 'Tree inventory' : 'Community map'}</p>
+          <p>
+            {muni
+              ? t('glossary.tree_inventory.one')
+              : t('pages.datasets.community_map')}
+          </p>
         </IconBesideText>
         <IconBesideText>
           <MapPin color={theme.secondaryText} size={20} />
-          <p>{location_count} locations</p>
+          <p>{`${location_count} ${t('pages.datasets.locations')}`}</p>
         </IconBesideText>
         <IconBesideText>
           <Calendar color={theme.secondaryText} size={20} />
           <p>
             <time dateTime={created_at}>
-              {`Imported on ${formatISOString(created_at, i18n.language)}`}
+              {t('pages.datasets.imported_on', {
+                date: formatISOString(created_at, i18n.language),
+              })}
             </time>
           </p>
         </IconBesideText>

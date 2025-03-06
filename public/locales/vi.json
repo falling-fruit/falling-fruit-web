@@ -1,0 +1,392 @@
+{
+  "devise": {
+    "confirmations": {
+      "confirmed": "Địa chỉ email của bạn đã được xác nhận thành công.",
+      "no_token": "Bạn không thể truy cập trang này nếu không nhận được email xác nhận. Nếu bạn nhận được, vui lòng đảm bảo rằng bạn đã sử dụng URL đầy đủ được cung cấp.",
+      "send_instructions": "Bạn sẽ nhận được email có hướng dẫn cách xác nhận địa chỉ email của mình sau vài phút."
+    },
+    "failure": {
+      "already_authenticated": "Bạn đã đăng nhập."
+    },
+    "passwords": {
+      "no_token": "Bạn không thể truy cập trang này nếu không nhận được email đặt lại mật khẩu. Nếu bạn nhận được email đặt lại mật khẩu, vui lòng đảm bảo rằng bạn đã sử dụng URL đầy đủ được cung cấp.",
+      "send_instructions": "Bạn sẽ nhận được email có hướng dẫn về cách đặt lại mật khẩu sau vài phút.",
+      "updated_not_active": "Mật khẩu của bạn đã hoàn thành chỉnh sửa."
+    },
+    "registrations": {
+      "signed_up": "Chào mừng bạn! Bạn đã đăng ký thành công.",
+      "update_needs_confirmation": "Bạn đã cập nhật tài khoản của bạn thành công, nhưng chúng mình cần chứng minh địa chỉ email mới của bạn. Xin vui lòng kiểm tra email của bạn và theo đường link để chứng minh địa chỉ email mới của bạn.",
+      "updated": "Tài khoản của bạn đã được cập nhật thành công."
+    }
+  },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
+      "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
+      "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
+      "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
+      "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
+      "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
+      "report_submission_failed": "Gửi báo cáo thất bại: {{message}}",
+      "review_deletion_failed": "Xóa đánh giá thất bại: {{message}}",
+      "review_edit_failed": "Chỉnh sửa đánh giá thất bại: {{message}}",
+      "review_submission_failed": "Gửi đánh giá thất bại: {{message}}",
+      "street_view_unavailable": "Street View không khả dụng cho vị trí {{id}}",
+      "type_add_failed": "Thêm loại mới thất bại: {{message}}"
+    },
+    "auth": {
+      "check_failed": "Xác thực thất bại: {{message}}",
+      "confirmation_failed": "Xác nhận tài khoản thất bại: {{message}}",
+      "password_set_failed": "Đặt mật khẩu mới thất bại: {{message}}",
+      "profile_update_failed": "Cập nhật hồ sơ thất bại: {{message}}",
+      "resend_confirmation_failed": "Gửi lại xác nhận thất bại: {{message}}",
+      "reset_password_failed": "Đặt lại mật khẩu thất bại: {{message}}",
+      "signin_failed": "Đăng nhập thất bại: {{message}}",
+      "signup_failed": "Đăng ký thất bại: {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Không thể xác định vị trí: {{message}}",
+      "code_3": "Hết thời gian xác định vị trí: {{message}}",
+      "denied": "Quyền sử dụng vị trí của bạn đã bị từ chối. Để bật định vị, vui lòng cho phép chia sẻ vị trí trong cài đặt trình duyệt và làm mới trang.",
+      "not_supported": "Không hỗ trợ định vị"
+    },
+    "language_changed_refresh_to_reload_map": "Ngôn ngữ đã thay đổi, làm mới trang để tải lại bản đồ",
+    "unknown_error": "Lỗi không xác định"
+  },
+  "filter": {
+    "deselect_all": "Bỏ chọn tất cả",
+    "only_on_map": "Trên bản đồ",
+    "select_all": "Chọn tất cả"
+  },
+  "form": {
+    "button": {
+      "cancel": "Hủy",
+      "delete": "Xóa",
+      "edit": "Chỉnh sửa",
+      "report": "Báo vi phạm",
+      "reset": "Đặt lại",
+      "review": "Đánh giá",
+      "submit": "Gửi",
+      "submitting": "Đang gửi"
+    },
+    "error": {
+      "confirmation": "Không khớp với bản gốc",
+      "missing_password": "Yêu cầu thay đổi email hoặc mật khẩu",
+      "too_short": "Tối thiểu {{min}} ký tự"
+    },
+    "optional": "Tùy chọn",
+    "required": "Bắt buộc",
+    "search": "Tìm kiếm"
+  },
+  "glossary": {
+    "about": "Về",
+    "account": "Tài khoản",
+    "activity": "Hoạt động",
+    "address": "Địa chỉ",
+    "by_author": "bởi {{author}}",
+    "description": "Miêu tả",
+    "email": "Email",
+    "logout": "Đăng xuất",
+    "map": "Bản đồ",
+    "name": "Tên",
+    "password": "Mật khẩu",
+    "quality": "Chất lượng",
+    "review": {
+      "other": "Đánh giá"
+    },
+    "sign_up": "Đăng ký",
+    "tree_inventory": {
+      "one": "Kiểm kê cây"
+    },
+    "type": {
+      "one": "Loại",
+      "other": "Các loại"
+    },
+    "unverified": "Chưa được xác minh",
+    "yield": "Lợi nhuận"
+  },
+  "layouts": {
+    "application": {
+      "menu": {
+        "in_the_press": "Trên báo chí",
+        "sharing_the_harvest": "Chia sẻ thu hoạch",
+        "the_data": "Dữ liệu",
+        "the_project": "Dự án"
+      }
+    },
+    "back": "Quay lại",
+    "loading": "Đang tải..."
+  },
+  "list": {
+    "no_results": "Không tìm thấy kết quả",
+    "zoom_in": "Phóng to bản đồ để xem dữ liệu vị trí"
+  },
+  "locations": {
+    "edit_position": {
+      "cancel": "Hủy chỉnh sửa vị trí",
+      "confirm": "Xác nhận chỉnh sửa vị trí",
+      "instructions": "Chỉnh sửa vị trí địa điểm."
+    },
+    "form": {
+      "access": "Truy cập",
+      "comments": "Bình luận",
+      "comments_subtext": "Cập nhật, vấn đề hái lượm, sức khỏe thực vật...",
+      "description_subtext": "Chi tiết địa chỉ, vấn đề thu hoạch, sức khỏe thực vật...",
+      "fruiting_status": "Tình trạng đậu quả",
+      "position": "Vị trí",
+      "season": "Mùa",
+      "season_start_to_stop_short": "đến"
+    },
+    "index": {
+      "editmarker_html": "<b>Di chuyển đến vị trí của nguồn.</b><br><br>Kiểm tra chế độ xem vệ tinh - nguồn có thể được nhìn thấy từ không gian!"
+    },
+    "infowindow": {
+      "access_mode": [
+        "Nguồn là tài sản của tôi",
+        "Mình đã được sự cho phép của chủ sở hữu để thêm nguồn",
+        "Nguồn nằm trên đất công cộng",
+        "Nguồn nằm trên đất tư nhân nhưng nhô ra đất công cộng",
+        "Nguồn là tài sản riêng (hãy hỏi chủ trước khi hái)"
+      ],
+      "access_short": [
+        "Được thêm bởi chủ sở hữu",
+        "Được sự cho phép của chủ sở hữu",
+        "Công cộng",
+        "Riêng tư nhưng nhô ra",
+        "Riêng tư"
+      ],
+      "fruiting": ["Nở hoa", "Quả chưa chín", "Quả chín"]
+    },
+    "init": {
+      "cancel": "Hủy chọn vị trí",
+      "choose_instructions": "Chọn vị trí cho địa điểm mới của bạn.",
+      "confirm": "Xác nhận chọn vị trí",
+      "edit_instructions": "Chỉnh sửa vị trí cho địa điểm mới của bạn."
+    },
+    "overview": {
+      "added_by": "Được thêm bởi {{name}}",
+      "date_edited": "Cập nhật {{date}}",
+      "imported_from": "Được nhập từ {{name}}",
+      "season": {
+        "in_season": "Trong mùa từ {{start}} đến {{stop}}",
+        "year_round": "Quanh năm"
+      },
+      "title": "Tổng quan"
+    }
+  },
+  "menu": {
+    "add_new_location": "Thêm địa điểm",
+    "add_review": "Thêm đánh giá",
+    "edit_location": "Chỉnh sửa địa điểm",
+    "edit_review": "Chỉnh sửa đánh giá",
+    "list": "Danh sách",
+    "settings": "Cài đặt",
+    "zoom_in_to_add_location": "Phóng to để thêm địa điểm"
+  },
+  "new_type": {
+    "add_type_label": "Thêm loại:",
+    "form": {
+      "add_name": "Thêm tên",
+      "language": "Ngôn ngữ",
+      "notes": "Ghi chú",
+      "notes_placeholder": "Mô tả, liên kết Wikipedia, thông tin phân loại ...",
+      "pending_notice": "Lưu ý: Tất cả các loại mới đều được đặt ở trạng thái chờ xét duyệt theo mặc định. Chỉ quản trị viên mới có thể thêm loại không cần xét duyệt.",
+      "remove": "Xóa"
+    },
+    "title": "Thêm loại mới"
+  },
+  "pages": {
+    "about": {
+      "about_the_site": "Về dự án",
+      "advisors": "Hội đồng cố vấn",
+      "alan_gibson_bio_html": "Alan luôn thích phiêu lưu và khám phá. Anh bắt đầu tìm kiếm thức ăn như một cách để giới thiệu cho các con nhỏ của mình về lối sống ngoài trời. Ông viết blog <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> và xuất bản cuốn sách <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Fruit and Nuts For Free</a>. Anh ấy đã hợp pháp hóa việc tìm kiếm thức ăn trong các công viên công cộng và thành lập một vườn cây ăn quả cộng đồng ở quê nhà, Southampton Vương quốc Anh.",
+      "ana_carolina_bio_html": "Ana là nhà nghiên cứu sau tiến sĩ tại Đại học Liên bang Pará ở Brazil. Cô là một nhà nhân chủng học quan tâm đến việc tìm hiểu thói quen ăn uống văn hóa và xã hội. Ana làm việc chủ yếu ở Amazon của Brazil. Ở Acre (tây Amazon), cô đã nghiên cứu việc tiêu thụ trái cây trong vùng. Sau đó, cô làm việc ở vùng Middle Solimões, điều tra sự thay đổi chế độ ăn uống ở các cộng đồng vùng sâu vùng xa. Từ năm 2017 đến năm 2018, Ana sống ở các thị trấn vừa và nhỏ ở Đồng bằng sông Amazon, xem xét tác động của biến đổi khí hậu đối với an ninh lương thực của những người sống ở các khu định cư không chính thức. Gần đây cô đã chuyển đến miền nam New Mexico ở Hoa Kỳ, nơi cô làm việc với tư cách là nhà tư vấn.",
+      "caleb_phillips_bio_html": "Caleb là một người máy hai chân không có lông đam mê công bằng thực phẩm và tìm ra những cách sáng tạo để sử dụng công nghệ để giải quyết các vấn đề xã hội. Khi không đạp xe quanh ngắm cây, anh ấy cân bằng nỗ lực giữa công việc hàng ngày với tư cách là nhà khoa học dữ liệu tại <a href=\"https://www.nrel.gov/research/caleb-phillips.html\">Phòng thí nghiệm năng lượng tái tạo quốc gia</a> ở Golden, Colorado và là giáo sư phụ trợ về khoa học máy tính tại <a href=\"https://www.colorado.edu/cs/caleb-phillips\">Đại học Colorado</a>. Ngoài tất cả những công việc đó, anh ấy thích leo núi, chạy đường mòn, đi xe đạp và nói chung là ở ngoài trời nhiều nhất có thể. Caleb đã thành lập Falling Fruit cùng với Ethan Welty vào năm 2013 và phục vụ trong Hội đồng quản trị trong 6 năm trước khi đảm nhận vị trí trong Ban cố vấn.",
+      "celebration": "Falling Fruit là một lễ kỷ niệm về nguồn tài nguyên ẩm thực bị bỏ qua trên các đường phố trong thành phố của chúng ta. Bằng cách định lượng tài nguyên này trên bản đồ tương tác, chúng tôi hy vọng sẽ tạo điều kiện kết nối mật thiết giữa con người, thực phẩm và các sinh vật tự nhiên phát triển trong khu vực lân cận của chúng ta. Không chỉ là một bữa trưa miễn phí! Tìm kiếm thức ăn trong thế kỷ 21 là cơ hội để khám phá đô thị, chống lại tai họa vỉa hè bị ố vàng và kết nối lại với nguồn gốc thực vật của thực phẩm.",
+      "closing_remarks": "Đóng nhận xét",
+      "closing_remarks_para1_html": "Falling Fruit là một tổ chức từ thiện công cộng 501(c)(3) (miễn thuế) có trụ sở tại Boulder, Colorado. Do đó, các khoản quyên góp ở Hoa Kỳ được khấu trừ thuế. Bạn có thể xem lại <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">thư miễn trừ</a> của chúng tôi với IRS và xác minh vị thế của chúng tôi với <a href=\"https://apps.irs.gov/app/eos/\">IRS Publication 78</a> hoặc <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Bộ trưởng Ngoại giao Colorado</a> . Ngoài ra còn có <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">các quy định</a> và <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">biên bản</a> họp hội đồng quản trị của chúng tôi.",
+      "closing_remarks_para2_html": "Thu hoạch thực phẩm trong môi trường đô thị đi kèm với những cân nhắc thực tế và đạo đức nhất định. Để giới thiệu về đạo đức của việc kiếm ăn ở đô thị, chúng tôi khuyên bạn nên <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">tóm tắt</a> sau.",
+      "closing_remarks_para3_html": "Thông tin về Trái Cây Rơi có thể sai hoặc đã lỗi thời. Ví dụ: nhiều bản đồ tìm kiếm thức ăn được di chuyển đến Falling Fruit được lưu trữ dưới dạng Google Maps công cộng, trên đó các điểm đánh dấu thường bị vô tình di chuyển và việc kiểm kê cây của thành phố chỉ được cập nhật (nếu có) khi cây được đến thăm để bảo trì. Hãy sẵn sàng đối mặt với những thông tin không chính xác trên thực địa và vui lòng chỉnh sửa bản đồ nếu cần dựa trên những khám phá của bạn. Cuối cùng, trách nhiệm của bạn là xác định danh tính, khả năng ăn được và vị trí của thực vật cũng như trách nhiệm của tất cả mọi người trong việc cải thiện chất lượng của bản đồ.",
+      "contact_us_html": "Falling Fruit được xây dựng bởi và dành cho những người hái lượm - chúng tôi muốn nó trở thành công cụ tốt nhất dành cho những người hái lượm hiện đại. Hãy viết thư cho chúng tôi theo địa chỉ <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, chúng tôi rất mong nhận được phản hồi từ bạn!",
+      "craig_durkin_bio_html": "Craig là người đồng sáng lập của <a href=\"http://www.concrete-jungle.org/\">Concrete Jungle</a>, một tổ chức ở Atlanta, Georgia chuyên trồng thực phẩm và hái trái cây khắp thành phố để quyên góp cho các nhà tạm trú cho người vô gia cư ở địa phương và ngân hàng thực phẩm. Là một sinh viên tốt nghiệp <a href=\"http://www.gatech.edu/\">Georgia Tech</a>, anh ấy luôn tìm cách kết hợp việc hái trái cây với các công nghệ mới và sẽ sớm triển khai máy bay không người lái phát hiện cây ăn quả và cảm biến độ chín của trái cây trên Twitter...",
+      "cristina_rubke_bio_html": "Cristina là luật sư của <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> ở San Francisco, California, nơi cô tập trung vào việc truy tố và tư vấn nhãn hiệu. Cô cũng là thành viên hội đồng quản trị của <a href=\"//www.sfmta.com/\">Cơ quan Giao thông Thành phố San Francisco</a> , cơ quan giám sát giao thông công cộng, giao thông và bãi đậu xe ở San Francisco. Trong thời gian rảnh rỗi, Cristina chèo thuyền đến Vịnh San Francisco cùng với <a href=\"//www.baads.org/\">Hiệp hội Thủy thủ Khuyết tật Vùng Vịnh</a> và thi đấu trong các cuộc đua thuyền địa phương và quốc tế.",
+      "david_craft_bio_html": "David là nhà nghiên cứu tại Khoa Ung thư Bức xạ tại <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Trường Y Harvard</a> ở Boston, Massachusetts. Ông cũng là một người ham mê hái lượm và là tác giả của cuốn sách <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Tìm kiếm thức ăn trong đô thị: Tìm và ăn thực vật hoang dã trong thành phố</a> (<a href=\"/docs/David Craft - Urban Foraging.pdf\">tải xuống miễn phí</a>).",
+      "directors": "Ban giám đốc",
+      "donate": "Quyên góp",
+      "emily_sigman_bio_html": "Emily là một nhà truyền giáo nhiệt huyết về nông lâm kết hợp, người kiếm ăn không thể sửa chữa và là người mẹ kiêu hãnh của hai con mèo, bốn con chim cút và chú chó đẹp nhất thế giới. Rễ của cô trải dài sâu vào dãy núi Rocky, nhưng ngày nay sinh khối trên mặt đất của cô tự hào gọi New Haven, Connecticut là quê hương của mình. Người ta thường thấy cô ấy đang chăm sóc các khu rừng thực phẩm công cộng, đọc sách say mê trong một góc thư viện ấm cúng nào đó hoặc viết thơ về sự kỳ diệu của sợi nấm (và được cho là đang hoàn thành bằng tốt nghiệp chung tại <a href=\"https://environment.yale.edu/\">Trường Lâm nghiệp</a> Yale và <a href=\"https://jackson.yale.edu/person/emily-sigman/\">Trường Quan hệ Toàn cầu</a>). Emily có một niềm đam mê du lịch khủng khiếp và có thể ở bất cứ đâu vào lúc này.",
+      "ethan_welty_bio_html": "Với công nghệ và dữ liệu, Ethan coi các thành phố là nguồn cung cấp thực phẩm tươi sống và miễn phí. Anh ấy đã tạo ra Falling Fruit cùng với Caleb Phillips vào năm 2013 để thúc đẩy hoạt động tìm kiếm thức ăn ở đô thị trên toàn thế giới và đồng sáng lập <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> vào năm 2014 để thu hoạch và phân phối trái cây dư thừa trồng xung quanh anh ấy ở Boulder, Colorado. Ngoài trái cây, anh còn theo đuổi <a href=\"https://www.weltyphotography.com\">sự nghiệp nhiếp ảnh</a> , <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">nghiên cứu về sông băng</a> và đam mê theo đuổi các hoạt động miền núi và sông nước.",
+      "ff_disclaimer_html": "Quả Rơi không liên quan đến Quả Rơi. Fallen Fruit có thể được tìm thấy tại <a href=\"http://fallenfruit.org\">Fallenfruit.org</a> .",
+      "give_paypal": "Quyên góp qua Quỹ từ thiện Paypal",
+      "give_us_money": "Chúng mình là tổ chức phi lợi nhuận theo mục 501(c)(3) và hoạt động dựa vào sự quyên góp. Nếu bạn sẵn sàng và có khả năng, vui lòng cân nhắc đóng góp tài chính. Các khoản quyên góp ở Hoa Kỳ được khấu trừ thuế.",
+      "jeff_wanner_bio_html": "Kể từ khi cùng gia đình thu hoạch quả mâm xôi đen và quả việt quất khi còn nhỏ và gần đây hơn là nhận thấy sự phong phú của các loại cây ăn quả công cộng trên khắp Colorado, Jeff đã đánh giá cao sự phong phú của các loại trái cây mọc ở các thành phố của chúng ta. Nhiệm vụ đầu tiên của anh trong Falling Fruit là rà soát Boulder và Thành phố Salt Lake, cầm trên tay bản đồ giấy để ghi lại những cây ăn quả. Khi không làm việc để cải thiện hiệu quả sử dụng năng lượng của tòa nhà, anh ấy thường giúp đỡ cộng đồng hoặc di chuyển nhanh qua núi bằng cách đi bộ, trượt tuyết hoặc xe đạp.",
+      "join_us_html": "Hãy cùng chúng tôi tôn vinh những món ăn siêu địa phương! <a href=\"/\">Bản đồ</a> mở cho mọi người chỉnh sửa, cơ sở dữ liệu có thể được <a href=\"/data\">tải xuống</a> chỉ bằng một cú nhấp chuột và <a href=\"https://github.com/falling-fruit/\">mã</a> là nguồn mở. Bạn cũng được khuyến khích chia sẻ tiền thưởng với đồng loại của mình. <a href=\"/sharing\">Trang chia sẻ</a> của chúng tôi liệt kê hàng trăm tổ chức địa phương - trồng vườn cây ăn quả công cộng và rừng thực phẩm, hái trái cây và rau quả bị lãng phí từ cây thành phố và cánh đồng của nông dân, đồng thời chia sẻ với hàng xóm và người nghèo.",
+      "more_about_html": "Bản đồ hái lượm của chúng mình không phải là bản đồ đầu tiên thuộc loại này, nhưng nó mong muốn trở thành bản đồ toàn diện nhất thế giới. Trong khi người dùng của chúng tôi đóng góp các địa điểm của riêng họ, chúng tôi tìm kiếm trên Internet những kiến thức có sẵn, tìm cách hợp nhất nỗ lực của những người kiếm ăn, người đi rừng và những người sống tự do ở khắp mọi nơi. <a href=\"/datasets\">Các bộ dữ liệu được nhập</a> bao gồm từ các bản đồ tìm kiếm khu dân cư nhỏ cho đến kho cây khổng lồ được biên soạn chuyên nghiệp. Cho đến nay, con số này lên tới {{types}} loại thực phẩm khác nhau (hầu hết, nhưng không phải tất cả, các loài thực vật) được phân bổ trên {{locations}} vị trí. Ngoài việc trồng trọt và phổ biến đối với hương vị kỳ lạ của các loài thực vật ngoại lai và thực vật bản địa đã bị lãng quên từ lâu, việc tìm kiếm thức ăn trong khu phố của bạn là một cuộc hành trình xuyên thời gian và xuyên suốt các nền văn hóa.",
+      "staff": "Nhân viên",
+      "translate": "Dịch",
+      "translate_for_us_html": "Bạn có muốn làm việc tình nguyện làm phiên dịch viên không? Gửi email cho chúng tôi và chúng tôi sẽ mời bạn tham gia cùng chúng tôi trên <a href=\"https://phrase.com\">Phrase</a> , nơi các bản dịch của chúng tôi được quản lý.",
+      "translators": "Người dịch",
+      "tristram_stuart_bio_html": "Khi còn là một thiếu niên, Tristram nuôi lợn bằng thức ăn dư thừa mà anh thu thập được từ bếp ăn của trường, thợ làm bánh địa phương và người bán rau trong làng. Nhận thấy rằng phần lớn thực phẩm này vẫn phù hợp cho con người tiêu dùng, ông nhận ra rằng thực phẩm tươi, ngon đang bị lãng phí trên quy mô khổng lồ. Tristram kể từ đó đã làm việc không mệt mỏi để thu hút sự chú ý của công chúng, giới truyền thông và các nhà hoạch định chính sách về vấn đề này. Ông thành lập tổ chức chiến dịch lãng phí thực phẩm <a href=\"//feedbackglobal.org\">Phản hồi toàn cầu</a> và viết <a href=\"//tristramstuart.co.uk/\">Lãng phí: Khám phá vụ bê bối thực phẩm toàn cầu</a> để chứng minh mức độ của vấn đề trên quy mô toàn cầu. Năm 2011, Tristram được trao <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">Giải thưởng Sophie</a> vì nỗ lực chống lãng phí thực phẩm.",
+      "write": "Viết"
+    },
+    "changes": {
+      "change_in_city": "{{type}} tại {{city}}",
+      "recent_changes": "Thay đổi gần đây",
+      "type": {
+        "added": "đã thêm",
+        "edited": "đã chỉnh sửa",
+        "visited": "đã ghé thăm"
+      }
+    },
+    "data": {
+      "beware_html": "Nhưng hãy cẩn thận! Sau khi được giải nén, cơ sở dữ liệu là một tệp lớn có thể nghiền nát hầu hết các phần mềm bảng tính. Nếu bạn chỉ cần dữ liệu cho một khu vực nhỏ, trước tiên hãy thử truy xuất chúng bằng công cụ tải xuống được tích hợp vào <a href=\"/\">bản đồ</a>.",
+      "caveat_emptor_html": "Chúng tôi không chịu trách nhiệm về tính chính xác của dữ liệu - dữ liệu được cung cấp nguyên trạng, <i>báo trước</i>. Nếu bạn làm điều gì đó thú vị với dữ liệu, vui lòng <a href=\"mailto:feedback@fallingfruit.org\">cho chúng tôi biết</a>!",
+      "intro": "Falling Fruit được xây dựng trên dữ liệu công khai và sự hào phóng của người dùng. Chúng tôi muốn việc tìm kiếm thức ăn trong đô thị tiếp cận được càng nhiều người càng tốt và chúng tôi tin rằng mọi người đều phải có quyền tiếp cận như nhau đối với thành quả lao động tập thể của chúng tôi. Trên tinh thần cởi mở, kìa! Toàn bộ cơ sở dữ liệu",
+      "license_html": "Nếu bạn quan tâm đến việc sử dụng dữ liệu trong dự án của mình, đặc biệt là dự án thương mại, chúng tôi khuyên bạn nên liên hệ với chúng tôi ( <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> ). Trừ khi có quy định khác, dữ liệu được cấp phép dưới dạng <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons – Ghi công, Phi thương mại, Chia sẻ tương tự). Điều này có nghĩa là bạn được tự do sử dụng và phân phối dữ liệu miễn là bạn giữ nguyên quyền tác giả/nguồn ban đầu và không sử dụng dữ liệu đó (khi chưa được phép) cho các ứng dụng thương mại. Mã nguồn của Falling Fruit cũng mở và có sẵn trên <a href=\"https://github.com/falling-fruit/\">GitHub</a> ."
+    },
+    "datasets": {
+      "community_map": "Bản đồ cộng đồng",
+      "date_imported": "Ngày nhập",
+      "imported_datasets": "Bộ dữ liệu đã nhập",
+      "imported_on": "Đã nhập vào {{date}}",
+      "intro_html": "Falling Fruit mong muốn trở thành bộ dữ liệu địa lý mở và toàn diện nhất về thực phẩm đô thị. Trong khi người dùng khám phá, chỉnh sửa và thêm vị trí bằng <a href=\"/\">bản đồ</a> của chúng tôi, chúng tôi tìm kiếm khắp vũ trụ đã biết để tìm các bộ dữ liệu có sẵn và nhập chúng trực tiếp vào <a href=\"/data\">cơ sở dữ liệu</a> , hợp nhất nỗ lực của những người kiếm ăn, người đi rừng và những người tự do ở khắp mọi nơi. Nếu bạn biết về tập dữ liệu mà chúng tôi đã bỏ lỡ, vui lòng <a href=\"mailto:info@fallingfruit.org\">cho chúng tôi biết</a> ! Bạn cũng có thể giúp chúng tôi trong quá trình nhập bằng cách định dạng dữ liệu bằng <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">mẫu nhập</a>. Lưu ý rằng vì quá trình nhập phải được thực hiện thủ công nên tất cả các thay đổi đối với dữ liệu gốc được thực hiện sau khi nhập sẽ không được phản ánh trên Falling Fruit.",
+      "link": "Liên kết",
+      "locations": "Vị trí",
+      "table_info": "Mỗi tập dữ liệu được liệt kê theo tên, số lượng vị trí và ngày được nhập. Việc mở rộng từng hàng sẽ hiển thị thêm thông tin chi tiết về dữ liệu, quy trình nhập và giấy phép quản lý cách sử dụng dữ liệu.",
+      "type": "Loại",
+      "types_of_data": "Các bộ dữ liệu được nhập vào Falling Fruit thuộc hai loại chính. \"Bản đồ cộng đồng\" được xây dựng bởi những người kiếm ăn và những người sống tự do khi họ nghiên cứu cộng đồng của mình để tìm đồ ăn. Chúng tôi mang ơn những người vẽ bản đồ công dân chăm chỉ đã biên soạn dữ liệu này. \"Kiểm kê cây\" được biên soạn bởi các thành phố, trường đại học và các tổ chức khác mong muốn ghi chép và chăm sóc cây của họ tốt hơn. Chúng tôi khai thác những bộ dữ liệu khổng lồ này về các loài sản xuất thực phẩm và thêm chúng vào bản đồ. Để giúp chúng tôi lập bản đồ cây ăn quả ở khu vực lân cận của bạn, hãy liên hệ với trường học hoặc thành phố của bạn để thúc giục họ chia sẻ kho cây của họ với chúng tôi."
+    },
+    "settings": {
+      "bicycle": "Xe đạp",
+      "data": "Dữ liệu",
+      "labels": "Nhãn",
+      "language": "Ngôn ngữ",
+      "points_of_interest": "Điểm đánh dấu",
+      "regional": "Khu vực",
+      "roadmap": "Bản đồ",
+      "satellite": "Vệ tinh",
+      "terrain": "Địa hình",
+      "transit": "Giao thông",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} bộ",
+            "other": "{{count}} bộ"
+          },
+          "kilometer": {
+            "one": "{{count}} kilometer",
+            "other": "{{count}} kilometers"
+          },
+          "meter": {
+            "one": "{{count}} meter",
+            "other": "{{count}} meters"
+          },
+          "mile": {
+            "one": "{{count}} dặm",
+            "other": "{{count}} dặm"
+          }
+        },
+        "imperial": "Hệ đo lường Anh",
+        "metric": "Hệ mét",
+        "units": "Đơn vị"
+      }
+    },
+    "sharing": {
+      "countries": {
+        "australia": "Úc",
+        "belgium": "Bỉ",
+        "brazil": "Brazil",
+        "canada": "Canada",
+        "chile": "Chile",
+        "czechia": "Cộng hòa Séc",
+        "fiji": "Fiji",
+        "finland": "Phần Lan",
+        "france": "Pháp",
+        "germany": "Đức",
+        "greece": "Hy Lạp",
+        "ireland": "Ireland",
+        "italy": "Ý",
+        "new_zealand": "New Zealand",
+        "poland": "Ba Lan",
+        "portugal": "Bồ Đào Nha",
+        "spain": "Tây Ban Nha",
+        "sweden": "Thụy Điển",
+        "switzerland": "Thụy Sĩ",
+        "united_kingdom": "Vương quốc Anh",
+        "united_states": "Hoa Kỳ"
+      },
+      "grow_pick_and_distribute": "Trồng · Hái · Phát",
+      "heading": {
+        "city": "Thành phố",
+        "country": "Quốc gia",
+        "social": "Mạng xã hội",
+        "state": "Tiểu bang"
+      },
+      "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Những người có tên bị gạch bỏ được cho là không hoạt động. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!"
+    }
+  },
+  "problems": {
+    "description_subtext": "Bất kỳ thông tin nào có thể giúp chúng tôi đánh giá vấn đề",
+    "problem_type": "Loại sự cố",
+    "problem_types": {
+      "0": "Địa điểm là spam",
+      "1": "Địa điểm không tồn tại",
+      "2": "Địa điểm bị trùng lặp",
+      "3": "Ảnh đánh giá không phù hợp",
+      "4": "Bình luận đánh giá không phù hợp",
+      "5": "Khác (giải thích bên dưới)"
+    }
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Viết đánh giá",
+      "observed_on": "Quan sát vào {{date}}",
+      "upload_images": "Tải ảnh lên"
+    },
+    "update_delete": "Cập nhật hoặc xóa đánh giá này.",
+    "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Địa điểm đã được chỉnh sửa thành công!",
+    "location_submitted": "Địa điểm đã được gửi thành công!",
+    "report_submitted": "Báo cáo đã được gửi thành công!",
+    "review_deleted": "Đánh giá đã được xóa thành công!",
+    "review_edited": "Đánh giá đã được chỉnh sửa thành công!",
+    "review_submitted": "Đánh giá đã được gửi thành công!",
+    "type_added": "Loại đã được thêm thành công!"
+  },
+  "time": {
+    "days": {
+      "one": "{{count}} ngày",
+      "other": "{{count}} ngày"
+    },
+    "last_24_hours": "24 giờ qua",
+    "time_ago": "{{time}} trước"
+  },
+  "type": {
+    "pending_review": "Đang chờ xét duyệt"
+  },
+  "users": {
+    "bio": "Thông tin về bạn",
+    "change_password": "Thay đổi mật khẩu của tôi",
+    "current_password": "Mật khẩu hiện tại",
+    "edit_account": "Chỉnh sửa tài khoản",
+    "forgot_password": "Đặt lại mật khẩu của bạn",
+    "joined_on": "Tham gia vào {{date}}",
+    "login": "Đăng nhập",
+    "new_password": "Mật khẩu mới",
+    "new_password_confirmation": "Xác nhận mật khẩu mới",
+    "options": {
+      "announcements_email": "Nhận email với các thông báo và cơ hội quan trọng (1-2 mỗi năm)"
+    },
+    "password_confirmation": "Xác nhận mật khẩu",
+    "profile": {
+      "title": "Người dùng: {{name}}"
+    },
+    "remember_me": "Nhớ tôi",
+    "resend_confirmation_instructions": "Gửi lại hướng dẫn xác nhận",
+    "save_changes": "Lưu thay đổi",
+    "send": "Gửi",
+    "send_password_instructions": "Gửi hướng dẫn đặt lại mật khẩu",
+    "sign_in": "Đăng nhập"
+  }
+}

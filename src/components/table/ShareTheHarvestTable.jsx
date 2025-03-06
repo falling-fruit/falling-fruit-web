@@ -105,6 +105,7 @@ const ShareTheHarvestTable = () => {
     Italy: t('pages.sharing.countries.italy'),
     'New Zealand': t('pages.sharing.countries.new_zealand'),
     Portugal: t('pages.sharing.countries.portugal'),
+    Poland: t('pages.sharing.countries.poland'),
     Spain: t('pages.sharing.countries.spain'),
     Sweden: t('pages.sharing.countries.sweden'),
     Switzerland: t('pages.sharing.countries.switzerland'),
@@ -115,28 +116,28 @@ const ShareTheHarvestTable = () => {
   const columns = [
     {
       id: 'country',
-      name: 'Country',
+      name: t('pages.sharing.heading.country'),
       selector: (row) => translatedCountries[row.country] || row.country || '-',
       sortable: true,
       wrap: true,
     },
     {
       id: 'state',
-      name: 'State',
+      name: t('pages.sharing.heading.state'),
       selector: (row) => row.state ?? '-',
       sortable: true,
       wrap: true,
     },
     {
       id: 'city',
-      name: 'City',
+      name: t('pages.sharing.heading.city'),
       selector: (row) => row.city ?? '-',
       sortable: true,
       wrap: true,
     },
     {
       id: 'name',
-      name: 'Name',
+      name: t('glossary.name'),
       selector: (row) => row.name,
       sortable: true,
       grow: 2.5,
@@ -145,7 +146,7 @@ const ShareTheHarvestTable = () => {
     },
     {
       id: 'social',
-      name: 'Social',
+      name: t('pages.sharing.heading.social'),
       selector: (row) => row.facebook || row.instagram || row.x,
       format: FormattedSocials,
       compact: true,
@@ -172,7 +173,7 @@ const ShareTheHarvestTable = () => {
       subHeader
       subHeaderComponent={
         <Input
-          placeholder="Search"
+          placeholder={t('form.search')}
           icon={<SearchIcon />}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}

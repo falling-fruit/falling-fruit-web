@@ -1,35 +1,8 @@
-import { Star as StarEmpty } from '@styled-icons/boxicons-regular'
-import { Star, StarHalf } from '@styled-icons/boxicons-solid'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import styled from 'styled-components/macro'
 
 import { createReviewSummary } from '../../utils/createReviewSummary'
-
-const StatsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: ${({ theme }) => theme.secondaryText};
-  margin-bottom: 1em;
-  gap: 4px;
-
-  svg {
-    width: 1em;
-    height: 1em;
-    color: ${({ theme }) => theme.orange};
-  }
-`
-
-const StatsRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`
-
-const Separator = styled.span`
-  margin: 0 0.5em;
-  &::before {
-    content: '·';
-  }
-`
+import ReviewStats, { getStarRating, Separator, StatsRow } from './ReviewStats'
 
 const formatMonthList = (months) => {
   if (!months.length) {
@@ -49,31 +22,9 @@ const formatMonthList = (months) => {
       })
       return `${monthStr} (${count})`
     })
-    .join(', ')
+    .join(' | ')
 
   return monthsStr
-}
-
-const getStarRating = (score) => {
-  if (score === null) {
-    return null
-  }
-
-  const stars = []
-  const remainder = score % 1
-  const fullStars = Math.floor(score) + 1
-
-  for (let i = 0; i < 5; i++) {
-    if (i < fullStars) {
-      stars.push(<Star key={i} />)
-    } else if (i === fullStars && remainder >= 0.25 && remainder <= 0.75) {
-      stars.push(<StarHalf key={i} />)
-    } else {
-      stars.push(<StarEmpty key={i} />)
-    }
-  }
-
-  return stars
 }
 
 const ReviewSummary = ({ reviews }) => {
@@ -131,24 +82,24 @@ const ReviewSummary = ({ reviews }) => {
   }
 
   return (
-    <StatsContainer>
+    <ReviewStats>
       <StatsRow>
         {[stats[0], stats[1]].filter(Boolean).map((stat, i) => (
-          <>
+          <React.Fragment key={`top-stat-${i}`}>
             {i > 0 && <Separator />}
             {stat}
-          </>
+          </React.Fragment>
         ))}
       </StatsRow>
       <StatsRow>
         {stats.slice(2).map((stat, i) => (
-          <>
+          <React.Fragment key={`bottom-stat-${i}`}>
             {i > 0 && <Separator />}
             {stat}
-          </>
+          </React.Fragment>
         ))}
       </StatsRow>
-    </StatsContainer>
+    </ReviewStats>
   )
 }
 

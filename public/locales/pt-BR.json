@@ -1,0 +1,392 @@
+{
+  "devise": {
+    "confirmations": {
+      "confirmed": "Sua conta foi confirmada com sucesso. Você está conectado. ",
+      "no_token": "Você não pode acessar essa página sem entrar do email de confirmação. Se viesse do email de confirmação, por favor, certifique-se de usar a URL completa fornecida.",
+      "send_instructions": "Você receberá um email em breve com instruções sobre como confirmar a sua conta."
+    },
+    "failure": {
+      "already_authenticated": "Você já está conectado. "
+    },
+    "passwords": {
+      "no_token": "Você não pode acessar essa página sem entrar do email de redefinição de senha. Se viesse do email de redefinição de senha, por favor, certifique-se de copiar e colar a URL (endereço da Web) do link que você recebeu no e-mail no navegador. ",
+      "send_instructions": "Você receberá um email com as instruções de como redefinir a sua senha em poucos minutos.",
+      "updated_not_active": "A sua senha foi alterada com sucesso. "
+    },
+    "registrations": {
+      "signed_up": "Bem vindos! Você se inscreveu com sucesso.",
+      "update_needs_confirmation": "Você atualizou sua conta com sucesso, mas nós precisamos verificar seu endereço de e-mail. Por favor, verifique seus e-mails e clique no link de confirmação para finalizar a criação da sua conta.",
+      "updated": "Você atualizou sua conta com sucesso."
+    }
+  },
+  "error_message": {
+    "api": {
+      "fetch_location_changes_failed": "Falha ao buscar alterações de localização: {{message}}",
+      "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
+      "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
+      "location_edit_failed": "Falha na edição da localização: {{message}}",
+      "location_submission_failed": "Falha no envio da localização: {{message}}",
+      "photo_upload_failed": "Falha no upload da foto: {{message}}",
+      "report_submission_failed": "Falha no envio do relatório: {{message}}",
+      "review_deletion_failed": "Falha na exclusão da avaliação: {{message}}",
+      "review_edit_failed": "Falha na edição da avaliação: {{message}}",
+      "review_submission_failed": "Falha no envio da avaliação: {{message}}",
+      "street_view_unavailable": "Street View não disponível para localização {{id}}",
+      "type_add_failed": "Falha ao adicionar novo tipo: {{message}}"
+    },
+    "auth": {
+      "check_failed": "Falha na verificação de autenticação: {{message}}",
+      "confirmation_failed": "Falha na confirmação da conta: {{message}}",
+      "password_set_failed": "Falha ao definir nova senha: {{message}}",
+      "profile_update_failed": "Falha na atualização do perfil: {{message}}",
+      "resend_confirmation_failed": "Falha no reenvio da confirmação: {{message}}",
+      "reset_password_failed": "Falha na redefinição da senha: {{message}}",
+      "signin_failed": "Falha no login: {{message}}",
+      "signup_failed": "Falha no cadastro: {{message}}"
+    },
+    "geolocation": {
+      "code_2": "Posição indisponível: {{message}}",
+      "code_3": "Tempo limite de geolocalização: {{message}}",
+      "denied": "Permissão para usar sua localização foi negada. Para ativar a geolocalização, permita o compartilhamento de localização nas configurações do seu navegador e atualize a página.",
+      "not_supported": "Geolocalização não suportada"
+    },
+    "language_changed_refresh_to_reload_map": "Idioma alterado. Atualize a página para recarregar o mapa",
+    "unknown_error": "Erro desconhecido"
+  },
+  "filter": {
+    "deselect_all": "Desmarcar todos",
+    "only_on_map": "No mapa",
+    "select_all": "Selecionar todos"
+  },
+  "form": {
+    "button": {
+      "cancel": "Cancelar",
+      "delete": "Excluir",
+      "edit": "Editar",
+      "report": "Relatar",
+      "reset": "Redefinir",
+      "review": "Avaliar",
+      "submit": "Enviar",
+      "submitting": "Enviando"
+    },
+    "error": {
+      "confirmation": "Não corresponde ao original",
+      "missing_password": "Obrigatório para alterar email ou senha",
+      "too_short": "Mínimo de {{min}} caracteres"
+    },
+    "optional": "Opcional",
+    "required": "Obrigatório",
+    "search": "Buscar"
+  },
+  "glossary": {
+    "about": "Sobre",
+    "account": "Conta",
+    "activity": "Atividade",
+    "address": "Endereço",
+    "by_author": "por {{author}}",
+    "description": "Descrição",
+    "email": "Email",
+    "logout": "Sair",
+    "map": "Mapa",
+    "name": "Nome",
+    "password": "Senha",
+    "quality": "Qualidade",
+    "review": {
+      "other": "Avaliações"
+    },
+    "sign_up": "Inscreva-se",
+    "tree_inventory": {
+      "one": "Inventário de árvores"
+    },
+    "type": {
+      "one": "Tipo",
+      "other": "Tipos"
+    },
+    "unverified": "Não verificado",
+    "yield": "Produção"
+  },
+  "layouts": {
+    "application": {
+      "menu": {
+        "in_the_press": "Na imprensa",
+        "sharing_the_harvest": "Compartilhando a Colheita",
+        "the_data": "Os dados",
+        "the_project": "O Projeto"
+      }
+    },
+    "back": "Voltar",
+    "loading": "Carregando..."
+  },
+  "list": {
+    "no_results": "Nenhum Resultado Encontrado",
+    "zoom_in": "Amplie o mapa para ver dados de localização"
+  },
+  "locations": {
+    "edit_position": {
+      "cancel": "Cancelar edição de posição",
+      "confirm": "Confirmar edição de posição",
+      "instructions": "Editar posição da localização."
+    },
+    "form": {
+      "access": "Acesso",
+      "comments": "Comentários",
+      "comments_subtext": "Atualizações, problemas de acesso, fitossanidade ...",
+      "description_subtext": "Detalhes da localização, problemas de acesso, estado fitossanitário ...",
+      "fruiting_status": "Estado de frutificação",
+      "position": "Posição",
+      "season": "Estação",
+      "season_start_to_stop_short": "até"
+    },
+    "index": {
+      "editmarker_html": "<b>Mover para a código da fonte </b><br><br>Verifique a visão por satélite - a fonte pode ser visível do espaço!"
+    },
+    "infowindow": {
+      "access_mode": [
+        "A fonte está em minha propriedade",
+        "Possuo permissão do proprietário para adicionar esta fonte",
+        "A fonte está em terras públicas",
+        "A fonte está em propriedade privada, mas pende sobre terras públicas",
+        "Fonte está em propriedade privada (pergunte antes de colher)"
+      ],
+      "access_short": [
+        "Adicionado pelo proprietário",
+        "Permitido pelo proprietário",
+        "Público",
+        "Privado, mas sobressaindo até área pública",
+        "Privado"
+      ],
+      "fruiting": ["Flores", "Fruto em processo", "Fruto maduro"]
+    },
+    "init": {
+      "cancel": "Cancelar escolha de localização",
+      "choose_instructions": "Escolha uma posição para sua nova localização.",
+      "confirm": "Confirmar escolha de localização",
+      "edit_instructions": "Editar posição para sua nova localização."
+    },
+    "overview": {
+      "added_by": "Adicionado por {{name}}",
+      "date_edited": "Atualizado {{date}}",
+      "imported_from": "Importado de {{name}}",
+      "season": {
+        "in_season": "Na estação de {{start}} até {{stop}}",
+        "year_round": "Todo o Ano"
+      },
+      "title": "Visão Geral"
+    }
+  },
+  "menu": {
+    "add_new_location": "Adicionar localização",
+    "add_review": "Adicionar avaliação",
+    "edit_location": "Editar localização",
+    "edit_review": "Editar avaliação",
+    "list": "Lista",
+    "settings": "Configurações",
+    "zoom_in_to_add_location": "Amplie para adicionar localização"
+  },
+  "new_type": {
+    "add_type_label": "Adicionar Tipo:",
+    "form": {
+      "add_name": "Adicionar Nome",
+      "language": "Idioma",
+      "notes": "Notas",
+      "notes_placeholder": "Descrição, link da Wikipédia, informação taxonômica ...",
+      "pending_notice": "Nota: Todos os novos tipos são definidos como pendentes por padrão. Apenas administradores podem adicionar tipos não pendentes.",
+      "remove": "Remover"
+    },
+    "title": "Adicionar Novo Tipo"
+  },
+  "pages": {
+    "about": {
+      "about_the_site": "Sobre o projeto",
+      "advisors": "Conselho de assessores",
+      "alan_gibson_bio_html": "Alan sempre gostou de aventuras e explorações. Ele começou a forragear como uma forma de introduzir os seus filhos pequenos ao estilo de vida ao ar livre. Ele escreve o blog <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> e publica o blog <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Fruta e Nozes de Graça</a> livro. Ele legitimou a forragem em parques públicos e estabeleceu um pomar comunitário na sua cidade natal, Southampton UK.",
+      "ana_carolina_bio_html": "Ana é pesquisadora de pós-doutorado na Universidade Federal do Pará, no Brasil. Ela é antropóloga interessada em entender os hábitos alimentares sociais e culturais. Ana trabalhou principalmente na Amazônia brasileira. No Acre (Amazônia ocidental) ela estudou o consumo regional de frutas. Depois, ela trabalhou na região do Solimões Médio, investigando mudanças na dieta em comunidades remotas. Entre 2017 e 2018, Ana viveu em pequenas e médias cidades do Delta do Amazonas, observando os efeitos das mudanças climáticas sobre a segurança alimentar das pessoas que vivem em assentamentos informais. Ela se mudou recentemente para o sul do Novo México, nos Estados Unidos, onde trabalha como consultora.",
+      "caleb_phillips_bio_html": "Caleb é um humanóide bípede apaixonado por promover justiça alimentar e encontrar <a href=\"http://smallwhitecube.com\">formas criativas de usar a tecnologia</a> para resolver problemas sociais. Quando ele não está andando de bicibleta, boquiaberto frente às árvores, ele equilibra seus esforços entre o seu trabalho do dia-a-dia como cientista da computação no <a href://nrel.gov\">Laboratório Nacional de Energias Renováveis</a>, em Golden, Colorado, como professor adjunto de ciência da computação na <a href=\"http://cs.colorado.edu\">Universidade do Colorado</a>, e como abelha operária em diversas organizações sem fins lucrativos (<a href=\"http://www.foodrescuealliance.org/\">Food Rescue Alliance</a> em Denver e <a href=\"http://boulderfoodrescue.org\">Boulder Food Rescue</a> em Boulder, Colorado). Além dessas coisas de trabalho, ele gosta de escalar montanhas, correr em trilhas, andar de bicicleta, e, geralmente, estar ao ar livre, tanto quanto possível.",
+      "celebration": "Falling Fruit é uma celebração da negligenciada culinária oferecida pelas ruas da cidade. Ao quantificar este recurso em um mapa, esperamos facilitar as conexões íntimas entre pessoas, alimentos e organismos que crescem e se desenvolvem em nossos bairros. Não é apenas um almoço grátis! A coleta de alimentos no século 21 é uma oportunidade para a pesquisa e o conhecimento urbano, para combater o flagelo das calçadas manchadas, e de se reconectar às origens botânicas dos alimentos.",
+      "closing_remarks": "Considerações finais",
+      "closing_remarks_para1_html": "Falling Fruit é uma organização sem fins lucrativos 501(c)3 (isenta de impostos) sediada em Boulder, Colorado. Como resultado, as doações dentro dos Estados Unidos são dedutíveis. Examine a nossa <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">carta de isenção</a> de IRS e verifique a nossa categoria com a <a href=\"https://apps.irs.gov/app/eos/\">Publicação IRS 78</a> ou a <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Secretário de Estado do Colorado</a>. Também estão disponíveis o nosso <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">by-laws</a> e reunião dos conselhos <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">atas</a>.",
+      "closing_remarks_para2_html": "Colher alimentos em um cenário urbano vem com algumas considerações práticas e morais. Para uma introdução à ética de coleta urbana, recomenda-se o excelente resumo em nosso site irmão - <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a> - de Portland, Oregon.",
+      "closing_remarks_para3_html": "A Informação do Falling Fruit podde estar incorreta ou desatualizada. Por exemplo, diversos mapas de coleta foram hospedados em páginas públicas do Google Maps em que marcadores eram frequentemente movidos acidentalmente, e inventários de árvores atualizados apenas (se alguma vez) a medida que árvores sao visitadas para manutenção.  Prepare-se para encontrar imprecisoes no campo, e por favor edite o mapa conforme necessario baseado em suas descobertas.  Em última análise, é sua responsabilidade determinar a identidade, se comestível, e a localização da planta, e responsabilidade de todos aprimorar a qualidade do mapa.",
+      "contact_us_html": "Este site foi construído por e para coletores - nós queremos que seja a melhor ferramenta disponível para o coletor contemporâneo. Escreva-nos em <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, nós gostaríamos de ouvir de você!",
+      "craig_durkin_bio_html": "Craig é o cofundador da <a href=\"http://www.concrete-jungle.org/\">Concrete Jungle</a>, uma organização em Atlanta, Georgia que produz alimentos e coleta frutas por toda a cidade para doação a albergues destinados a moradores de ruas e bancos de alimentos. Como estudante de pós graduação da <a href=\"http://www.gatech.edu/\">Georgia Tech</a>, ele está sempre procurando maneiras de combinar a coleta de frutas e novas tecnologias, e em breve estará exibindo seu drone para localização de árvores frutíferas e tweetando seu sensor de amadurecimento de frutas...",
+      "cristina_rubke_bio_html": "Cristina é advogada na <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> em São Francisco, Califórnia, onde ela se especializa no trabalho com uso de registro de marcas e advocacia. Ela é também membro do conselho administrativo da <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>, agência encarregada do transporte público, tráfego e estacionamento em São Francisco. Em seu tempo livre, Cristina veleja na baía de São Francisco com a <a href=\"//wwwbaads.org/\">Associação dos Navegantes Deficientes Físicos da Area da Baía</a> competindo em regatas locais e internacionais.",
+      "david_craft_bio_html": "David é pesquisador do departamento de Oncologia da Radiação na <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Escola de Medicina de Harvard</a> em Boston, Massachusetts. Ele também é um ávido coletor e autor do livro <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and Eatng Wild Plants in the City</a> (<a href=\"/docs/david Craft - Urban Foraging.pdf\">free download</a>).",
+      "directors": "Conselho administrativo",
+      "donate": "Doar",
+      "emily_sigman_bio_html": "Emily é uma evangelista da agroflorestação, incorrigível e mãe orgulhosa de dois gatos, quatro codornizes e a mais magnífica canina do mundo. Suas raízes se estendem profundamente nas Montanhas Rochosas, mas hoje em dia sua biomassa acima do solo tem orgulho de chamar New Haven, Connecticut de sua casa. Ela pode muitas vezes ser encontrada cuidando de florestas públicas de alimentos, lendo maravilhada em algum canto aconchegante da biblioteca, ou encerando poéticas sobre a magia do micélio (e, supostamente, completando diplomas conjuntos de pós-graduação na Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> e <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily abriga um vício devastador de viajar, e pode estar em qualquer lugar neste momento.",
+      "ethan_welty_bio_html": "Com tecnologia e dados, Ethan defende as cidades como fontes de alimentos frescos e gratuitos. Ele criou Falling Fruit com Caleb Phillips em 2013 para promover a forragem urbana em todo o mundo, e co-fundou <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> em 2014 para colher e distribuir os excedentes de frutas que crescem ao seu redor em Boulder, Colorado. Além da fruta, ele faz malabarismos com <a href=\"https://www.weltyphotography.com\">carreira fotográfica</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">pesquisa sobre glaciares</a>, e um apetite por atividades montanhosas e ribeirinhas.",
+      "ff_disclaimer_html": "A Falling Fruit não está associada à Fallen Fruit. Fallen Fruit pode ser encontrado em <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
+      "give_paypal": "Doe através do Paypal Giving Fund",
+      "give_us_money": "Somos mantidos de forma voluntária, sem fins lucrativos e dependemos de doações para operar. Se você está disposto e capaz, por favor considere fazer uma contribuição financeira. Doações dentro dos Estados Unidos são dedutíveis de impostos.",
+      "jeff_wanner_bio_html": "Desde que colhia framboesas e blueberries com a família quando criança e, mais recentemente, percebendo a riqueza de árvores frutíferas públicas em todo Colorado, Jeff desenvolveu um profundo apreço pela abundância de fruticultura em nossas cidades. Sua primeira missão para a Falling Fruit foi de fazer um pente-fino em Boulder e Salt Lake City, com mapas em papel em mãos, para registrar árvores frutíferas. Quando não está trabalhando para melhorar a eficiência energética, ele geralmente esta ajudando a comunidade ou movendo-se rapidamente sobre as montanhas a pé, ski, ou de bicicleta.",
+      "join_us_html": "Junte-se a nós na celebração do alimento hiper-local! O <a href=\"/\">mapa</a> é aberto para qualquer um editar, o banco de dados pode ser <a href=\"/data\">baixado</a> com apenas um clique, e <a href=\"https://github.com/falling-fruit/falling-fruit\">o código</a> é aberto. Você igualmente é incentivado a compartilhar a abundancia com seus companheiros seres humanos. Nossa <a href=\"/sharing\">página de compartilhamento</a> lista centenas de organizações locais - que plantam florestas de alimentos e pomares públicos, colhendo frutos que de outra forma seriam desperdiçados e legumes de árvores da cidade e nos campos de cultivo, e dividindo com vizinhos e aos necessitados.",
+      "more_about_html": "Nosso mapa de plantas comestíveis não é o primeiro do gênero, mas aspira ser o mais abrangente. Enquanto nossos usuários contribuem com locais próprios, nós vasculhamos internet em busca do conhecimento que já está registrado, buscando unir os esforços de forrageiras, florestais e freegans em todos os lugares. Os <a href=\"/datasets-br\">conjuntos de dados importados</a> variam de pequenos mapas bairro de forrageamento para vastos estoques de árvores profissionalmente compilados. Isso equivale até agora para {{types}} diferentes tipos de comestíveis (a maioria, mas não todas, as espécies de plantas) distribuídos ao longo {{locations}} locais. Além do cultivo e comum para os sabores exóticos de plantas estrangeiras e os usos culinários há muito esquecidas de plantas nativas, caçando no seu bairro é uma viagem através do tempo e entre culturas.",
+      "staff": "Funcionários",
+      "translate": "Traduzir",
+      "translate_for_us_html": "Interessado em se voluntariar como tradutor? Nos envie um email e o convidaremos a juntar-se a nos em <a href=\"https://phrase.com\">Phrase</a>, onde gerenciamos nossas traduções.",
+      "translators": "Tradutores",
+      "tristram_stuart_bio_html": "Enquanto adolescente, Tristam criava porcos com sobras de alimentos da cozinha de sua escola, a padaria local e horticultores de sua cidade.  Reparando que bastante desse aliment ainda era apropriado para consumo humano o levou a perceber que alimentos bons e frescos eram desperdicados em escala colossal.  Tristam desde entao trabalha incansavelmente para trazer chamar atencao do publico, da media e dos politicos a esse assunto.  Ele fundou a organizacao para capanha contra o desperdicio de alimentos <a href=\"//feedbackglobal.org\">Feedback Global</a> e escreveu <a href=\"tristamstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a> para mostrar a extensao do problema em escala global.  Em 2011, Tristam recebeu o premio <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">The Sophie Prize</a> por sua luta contra o desperdicio de alimentos.",
+      "write": "Escreva"
+    },
+    "changes": {
+      "change_in_city": "{{type}} in {{city}}",
+      "recent_changes": "Mudanças recentes",
+      "type": {
+        "added": "adicionado",
+        "edited": "editado",
+        "visited": "visitado"
+      }
+    },
+    "data": {
+      "beware_html": "Mas cuidado! Uma vez descompactado, os dados se tornam um enorme arquivo que faz com que a maioria dos softwares de planilha travem. Se voce precisa de dados apenas para uma regiao especifica, tente primeiro recuperar os pontos de interesse usando a ferramenta de download integrado em  <a href=\"/\">mapa</a>.",
+      "caveat_emptor_html": "Não assumimos qualquer responsabilidade pela precisão dos dados - que é fornecido como está, <i>caveat emptor.</i> Se você fizer algo legal com os dados, por favor, <a href=\"mailto:feedback@fallingfruit.org\">avise-nos</a> !",
+      "intro": "Falling Fruit é construído sobre dados públicos e da generosidade de coletores urbanos dispostos a compartilhar suas descobertas com outras pessoas. Queremos que a coleta urbana alcance tantas pessoas quanto possível, e acreditamos que todos devem ter acesso igual aos frutos do nosso trabalho coletivo. No espírito de dados abertos, eis! A base de dados inteira",
+      "license_html": "Se você está interessado em usar os dados em seu próprio projeto, especialmente para aplicações comerciais, sugerimos que você entre em contato conosco (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Exceto quando não especificado de outra forma, os dados são licenciados sob <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">Creative Commons (Atribution,Non-commercial, Share-alike),</a>. Isso significa que você é livre para usar e distribuir os dados, desde que você preserve a atribuição do autor / fonte original e não usá-lo (sem permissão) para aplicações comerciais. O código fonte para Falling Fruit também está aberto, e pode ser encontrado em <a href=\"https://github.com/falling-fruit/falling-fruit\">nosso repositório github</a>."
+    },
+    "datasets": {
+      "community_map": "Mapa da comunidade",
+      "date_imported": "Dados importados",
+      "imported_datasets": "Conjuntos de dados importados",
+      "imported_on": "Importado em {{date}}",
+      "intro_html": "Falling Fruit aspira a ser o mais abrangente conjunto aberto de dados geográficos  de alimentos urbanos. Enquanto nossos usuários explorarem, editarem e adicionarem locais, usando o nosso <a href=\"/\">mapa</a>, nós procuramos o universo conhecido de conjuntos de dados pré-existentes e os importamos diretamente no <a href=\"/data\">banco de dados</a>, unindo os esforços de coletores, povos da floresta e freegans em todos os lugares. Se você souber de um conjunto de dados que nao encontramos, por favor, <a href=\"mailto:info@fallingfruit.org\">avise-nos</a> ! Você também pode nos ajudar com o processo de importação, formatando os dados usando <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modelo de importação</a>. Note que desde que as importações devem ser executadas manualmente, as alterações aos dados originais não estão refletidos na Falling Fruit.",
+      "link": "Link",
+      "locations": "Locais",
+      "table_info": "Cada conjunto de dados é listado por nome, número de locais, e data de importação. Expandindo cada linha revela mais detalhes sobre os dados originais, o processo de importação, e a licença que rege como podem ser utilizados os dados.",
+      "type": "Tipo",
+      "types_of_data": "Os conjuntos de dados importados no Falling Fruit entram em duas categorias principais. \"Mapas comunitários\" são construídas por coletores e freegans enquanto procuram alimentos em suas comunidades. Estamos em dívida com os cidadãos-cartógrafos que compilaram os dados. \"Inventários de árvores\" são compilados por munícipios, universidades e outras instituições que desejam documentar melhor e cuidar de suas árvores. Nós garimpamos esses vastos conjuntos de dados para espécies produtoras de alimentos e os adicionamos ao mapa. Para nos ajudar a mapear sua comunidade, entre em contato com sua escola ou cidade instando-os a partilhar o seu inventário de árvores com a gente."
+    },
+    "settings": {
+      "bicycle": "Bicicleta",
+      "data": "Dados",
+      "labels": "Rótulos",
+      "language": "Idioma",
+      "points_of_interest": "Pontos de interesse",
+      "regional": "Regional",
+      "roadmap": "Mapa",
+      "satellite": "Satélite",
+      "terrain": "Terreno",
+      "transit": "Trânsito",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}} pé",
+            "other": "{{count}} pés"
+          },
+          "kilometer": {
+            "one": "{{count}} quilômetro",
+            "other": "{{count}} quilômetros"
+          },
+          "meter": {
+            "one": "{{count}} metro",
+            "other": "{{count}} metros"
+          },
+          "mile": {
+            "one": "{{count}} milha",
+            "other": "{{count}} milhas"
+          }
+        },
+        "imperial": "Imperial",
+        "metric": "Metric",
+        "units": "Unidades"
+      }
+    },
+    "sharing": {
+      "countries": {
+        "australia": "Austrália",
+        "belgium": "Bélgica",
+        "brazil": "Brasil",
+        "canada": "Canadá",
+        "chile": "Chile",
+        "czechia": "República Tcheca",
+        "fiji": "Fiji",
+        "finland": "Finlândia",
+        "france": "França",
+        "germany": "Alemanha",
+        "greece": "Grécia",
+        "ireland": "Irlanda",
+        "italy": "Itália",
+        "new_zealand": "Nova Zelândia",
+        "poland": "Polônia",
+        "portugal": "Portugal",
+        "spain": "Espanha",
+        "sweden": "Suécia",
+        "switzerland": "Suíça",
+        "united_kingdom": "Reino Unido",
+        "united_states": "Estados Unidos"
+      },
+      "grow_pick_and_distribute": "Crescer · Colher · Distribuir",
+      "heading": {
+        "city": "Cidade",
+        "country": "País",
+        "social": "Social",
+        "state": "Estado"
+      },
+      "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Aqueles com nomes riscados são inativos. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!"
+    }
+  },
+  "problems": {
+    "description_subtext": "Informações que poderiam nos ajudar a avaliar o problema",
+    "problem_type": "Tipo de problema",
+    "problem_types": {
+      "0": "Localização é spam",
+      "1": "Localização não existe",
+      "2": "Localização é duplicada",
+      "3": "Foto da avaliação inadequada",
+      "4": "Comentário da avaliação inadequado",
+      "5": "Outro (explique abaixo)"
+    }
+  },
+  "review": {
+    "form": {
+      "leave_a_review": "Deixe uma avaliação",
+      "observed_on": "Observado em {{date}}",
+      "upload_images": "Enviar imagens"
+    },
+    "update_delete": "Atualizar ou excluir esta avaliação.",
+    "you_reviewed": "Você avaliou esta localização em {{date}}"
+  },
+  "success_message": {
+    "location_edited": "Local editado",
+    "location_submitted": "Local enviado",
+    "report_submitted": "Relatório enviado com sucesso!",
+    "review_deleted": "Avaliação excluída",
+    "review_edited": "Avaliação editada",
+    "review_submitted": "Avaliação enviada",
+    "type_added": "Tipo adicionado"
+  },
+  "time": {
+    "days": {
+      "one": "{{count}} dia",
+      "other": "{{count}} dias"
+    },
+    "last_24_hours": "Últimas 24 horas",
+    "time_ago": "{{time}} atrás"
+  },
+  "type": {
+    "pending_review": "Aguardando revisão"
+  },
+  "users": {
+    "bio": "Sobre você",
+    "change_password": "Mudar a minha senha",
+    "current_password": "Senha atual",
+    "edit_account": "Editar a conta",
+    "forgot_password": "Redefina a sua senha",
+    "joined_on": "Entrou em {{date}}",
+    "login": "Login",
+    "new_password": "Senha nova",
+    "new_password_confirmation": "Confirmação da senha nova",
+    "options": {
+      "announcements_email": "Receber e-mails com anúncios e oportunidades importantes (1-2 por ano)"
+    },
+    "password_confirmation": "Confirmação da senha",
+    "profile": {
+      "title": "Usuário: {{name}}"
+    },
+    "remember_me": "Lembrar usuário",
+    "resend_confirmation_instructions": "Reenviar as instruções de confirmação",
+    "save_changes": "Salvar alterações",
+    "send": "Enviar",
+    "send_password_instructions": "Enviar as instruções para redefinir a minha senha",
+    "sign_in": "Entrar"
+  }
+}

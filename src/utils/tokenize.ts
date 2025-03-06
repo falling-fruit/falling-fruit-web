@@ -97,7 +97,6 @@ for (const key in ASCII) {
 }
 
 const TOKEN_START = '^'
-const WORD_END = ' '
 
 type Transform = (_input: string) => string
 
@@ -106,9 +105,9 @@ const pipe =
   (x) =>
     fns.reduce((v, f) => f(v), x)
 
-const removeNonWordChars: Transform = (s) => s.replace(/[^\s\w]/g, '')
+const removeIgnoredChars: Transform = (s) => s.replace(/[\s-']/g, '')
 
-const convertToAscii: Transform = (s) =>
+const convertLatinToAscii: Transform = (s) =>
   s
     .split('')
     .map((c) => ASCII_MAP[c] || c)
@@ -116,17 +115,14 @@ const convertToAscii: Transform = (s) =>
 
 const addTokenStart: Transform = (s) => `${TOKEN_START}${s}`
 
-const addTokenStartEnd: Transform = (s) => `${TOKEN_START}${s}${WORD_END}`
-
-const rightTrimWithWordEnd: Transform = (s) => s.replace(/\s+$/, WORD_END)
-
 const tokenize = pipe(
-  removeNonWordChars,
+  convertLatinToAscii,
+  removeIgnoredChars,
   (x) => x.toLowerCase(),
-  convertToAscii,
+  addTokenStart,
 )
 
 export const tokenizeReference = (strings: string[]): string =>
-  strings.map(pipe(tokenize, addTokenStartEnd)).join('')
+  strings.map(tokenize).join('')
 
-export const tokenizeQuery = pipe(tokenize, addTokenStart, rightTrimWithWordEnd)
+export const tokenizeQuery = tokenize

@@ -1,4 +1,5 @@
 import { Star } from '@styled-icons/boxicons-solid'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -6,6 +7,7 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
 
 export const ReviewButton = (props) => {
+  const { t } = useTranslation()
   const history = useAppHistory()
   const { locationId } = useParams()
   const isDesktop = useIsDesktop()
@@ -23,7 +25,7 @@ export const ReviewButton = (props) => {
       }}
       {...props}
     >
-      Review
+      {t('form.button.review')}
     </Button>
   )
 }

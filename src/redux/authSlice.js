@@ -84,9 +84,10 @@ export const authSlice = createSlice({
     },
     [checkAuth.rejected]: (state, action) => {
       toast.error(
-        `Authentication check failed: ${
-          action.error.message || 'Unknown error'
-        }`,
+        i18next.t('error_message.auth.check_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
       )
       state.isLoading = false
     },
@@ -100,7 +101,10 @@ export const authSlice = createSlice({
     },
     [login.rejected]: (state, action) => {
       toast.error(
-        `Sign in failed: ${action.error.message || 'Unknown error'}`,
+        i18next.t('error_message.auth.signin_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
         { autoClose: 5000 },
       )
       state.isLoading = false
@@ -124,7 +128,10 @@ export const authSlice = createSlice({
     },
     [editProfile.rejected]: (state, action) => {
       toast.error(
-        `Profile update failed: ${action.error.message || 'Unknown error'}`,
+        i18next.t('error_message.auth.profile_update_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
       )
       state.isLoading = false
     },

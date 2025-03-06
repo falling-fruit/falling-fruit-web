@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
@@ -73,6 +74,7 @@ class PanoramaWithMarker {
 }
 
 const PanoramaHandler = () => {
+  const { t } = useTranslation()
   const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
   const googleMaps = getGoogleMaps ? getGoogleMaps() : null
   const { location, streetViewOpen: showStreetView } = useSelector(
@@ -91,7 +93,9 @@ const PanoramaHandler = () => {
       )
       const { error } = await panoramaWithMarkerRef.current.initPanorama()
       if (error) {
-        toast.error(`Street View not available for location ${location.id}`)
+        toast.error(
+          t('error_message.api.street_view_unavailable', { id: location.id }),
+        )
         dispatch(addLocationWithoutPanorama(location.id))
         history.push(`/locations/${location.id}`)
       }

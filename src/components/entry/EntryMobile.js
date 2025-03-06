@@ -4,6 +4,7 @@ import {
   Pencil as PencilIcon,
 } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -157,6 +158,7 @@ const TextContent = styled.article`
 `
 
 const EntryMobile = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
   const {
@@ -233,8 +235,8 @@ const EntryMobile = () => {
         >
           {drawerFullyOpen && hasReviews && (
             <TabList>
-              <Tab>Overview</Tab>
-              <Tab>Reviews ({reviews.length})</Tab>
+              <Tab>{t('locations.overview.title')}</Tab>
+              <Tab>{`${t('glossary.review.other')} (${reviews.length})`}</Tab>
             </TabList>
           )}
           <TabPanels style={{ background: 'white' }}>

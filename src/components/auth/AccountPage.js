@@ -123,10 +123,16 @@ const AccountPage = () => {
                     />
                     {errors.new_password && (
                       <ErrorMessage>
-                        {t(
-                          errors.new_password.key,
-                          errors.new_password.options,
-                        )}
+                        {errors.new_password.key ===
+                          'form.error.confirmation' &&
+                          t('form.error.confirmation')}
+                        {errors.new_password.key === 'form.error.too_short' &&
+                          t('form.error.too_short', {
+                            min: errors.new_password.options.min,
+                          })}
+                        {errors.new_password.key ===
+                          'form.error.missing_password' &&
+                          t('form.error.missing_password')}
                       </ErrorMessage>
                     )}
 

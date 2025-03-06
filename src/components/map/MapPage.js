@@ -12,7 +12,6 @@ import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { clearInitialView, setGoogle } from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
-import { bootstrapURLKeys } from '../../utils/bootstrapURLKeys'
 import throttle from '../../utils/throttle'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AddLocationButton from '../ui/AddLocationButton'
@@ -155,7 +154,7 @@ const GoogleMapWrapper = ({ onUnmount, ...props }) => {
 }
 
 const MapPage = ({ isDesktop }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
   const handleViewChangeRef = useRef(() => void 0)
@@ -329,7 +328,12 @@ const MapPage = ({ isDesktop }) => {
       {initialView && (
         <GoogleMapWrapper
           onClick={handleNonspecificClick}
-          bootstrapURLKeys={bootstrapURLKeys}
+          bootstrapURLKeys={{
+            apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+            version: 'beta',
+            libraries: ['places'],
+            language: i18n.language,
+          }}
           options={(googleMaps) => ({
             mapTypeId: mapType,
             disableDefaultUI: true,
