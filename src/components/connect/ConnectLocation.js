@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import styled from 'styled-components/macro'
 
 import {
+  duplicateIntoNewLocation,
   fetchLocationData,
+  initNewLocation,
   setFromSettings,
   setIsBeingEditedAndResetPosition,
   setStreetView,
@@ -13,6 +16,62 @@ import { setInitialView } from '../../redux/mapSlice'
 import { currentPathWithView, parseCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import Button from '../ui/Button'
+
+const LessPaddingButton = styled(Button)`
+  padding: 0 10px;
+`
+
+const ToastContent = () => {
+  const { t } = useTranslation()
+  const history = useAppHistory()
+  const dispatch = useDispatch()
+  const { view } = parseCurrentUrl()
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '10px',
+        width: '100%',
+      }}
+    >
+      {t('success_message.location_submitted')}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
+          width: '100%',
+          flexWrap: 'wrap',
+        }}
+      >
+        <LessPaddingButton
+          type="button"
+          onClick={() => {
+            dispatch(duplicateIntoNewLocation())
+            history.push(`/locations/init`)
+          }}
+        >
+          {t('locations.add_similar')}
+        </LessPaddingButton>
+        <LessPaddingButton
+          type="button"
+          secondary
+          onClick={() => {
+            dispatch(initNewLocation(view))
+            history.push(`/locations/init`)
+          }}
+        >
+          {t('locations.add_new')}
+        </LessPaddingButton>
+      </div>
+    </div>
+  )
+}
 
 const ConnectLocation = ({
   locationId,
@@ -35,7 +94,6 @@ const ConnectLocation = ({
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
   const [hasCentered, setHasCentered] = useState(false)
-  const { t } = useTranslation()
 
   useEffect(() => {
     if (location && `${locationId}` === `${location.id}`) {
@@ -141,17 +199,10 @@ const ConnectLocation = ({
       // Opening drawer or filter dismisses any toasts
       toast.dismiss()
     } else if (isSuccessfullyAdded) {
-      toast.success(
-        <>
-          {t('success_message.location_submitted')}
-          <a href={`/locations/${locationId}/duplicate`}>
-            {t('locations.add_another')}
-          </a>
-        </>,
-        {
-          autoClose: false,
-        },
-      )
+      toast.success(<ToastContent locationId={locationId} />, {
+        autoClose: false,
+        style: { width: '100%' },
+      })
       /*
        * We don't want to toast again after user presses back in the browser
        * so remove 'success' from URL

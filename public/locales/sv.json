@@ -122,7 +122,8 @@
     "zoom_in": "Zooma in på kartan för att se platsdata"
   },
   "locations": {
-    "add_another": "Lägg till en till",
+    "add_new": "Lägg till ny",
+    "add_similar": "Lägg till liknande",
     "edit_position": {
       "cancel": "Avbryt redigering av position",
       "confirm": "Bekräfta redigering av position",

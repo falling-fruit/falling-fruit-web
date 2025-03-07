@@ -122,7 +122,8 @@
     "zoom_in": "Amplie o mapa para ver dados de localização"
   },
   "locations": {
-    "add_another": "Adicionar outro",
+    "add_new": "Adicionar novo",
+    "add_similar": "Adicionar similar",
     "edit_position": {
       "cancel": "Cancelar edição de posição",
       "confirm": "Confirmar edição de posição",

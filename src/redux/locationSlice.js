@@ -92,6 +92,14 @@ const locationSlice = createSlice({
       state.pane.tabIndex = 0
       state.isBeingInitializedMobile = false
     },
+    duplicateIntoNewLocation: (state) => {
+      state.isLoading = false
+      state.isBeingEdited = false
+      state.locationId = 'new'
+      state.tooltipOpen = true
+      state.form = null
+      state.streetViewOpen = false
+    },
     initNewLocation: (state, action) => {
       state.isLoading = false
       state.location = null
@@ -288,6 +296,7 @@ const locationSlice = createSlice({
 
 export const {
   initNewLocation,
+  duplicateIntoNewLocation,
   clearLocation,
   updatePosition,
   saveLocationFormValues,
