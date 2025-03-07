@@ -70,7 +70,6 @@ for TARGET_LANG in ar de el es he it nl pt vi pl fr zh sv tr uk; do
               scripts/show_translations_and_request_changes.py \
                 "${WORK_DIR}/en-pages-${subkey}.json" \
                 "$TARGET_SUBKEY_FILE" \
-                "Read the source translation and fill out the gaps in the target translation by translating from source into target language, $TARGET_LANG. Be very careful to reply with complete file" \
                 > "$UPDATED_SUBKEY_FILE"
             else
               cp $TARGET_SUBKEY_FILE "$UPDATED_SUBKEY_FILE"
@@ -89,7 +88,6 @@ for TARGET_LANG in ar de el es he it nl pt vi pl fr zh sv tr uk; do
               scripts/show_translations_and_request_changes.py \
                 "${WORK_DIR}/en-${key}.json" \
                 "$TARGET_KEY_FILE" \
-                "Read the source translation and fill out the gaps in the target translation by translating from source into target language, $TARGET_LANG. Be very careful to reply with complete file" \
                 > "$UPDATED_FILE"
           else
             cp $TARGET_KEY_FILE $UPDATED_FILE
