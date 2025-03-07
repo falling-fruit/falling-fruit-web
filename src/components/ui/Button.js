@@ -1,7 +1,7 @@
 import { darken } from 'polished'
 import styled from 'styled-components/macro'
 
-import { prepend } from './GlobalStyle'
+import { prepend, theme } from './GlobalStyle'
 import ResetButton from './ResetButton'
 
 const StyledButton = styled(ResetButton)`
@@ -11,24 +11,23 @@ const StyledButton = styled(ResetButton)`
   height: 36px;
   line-height: 0.375rem;
   font-size: 0.875rem;
-  color: ${({ $secondary, theme }) =>
-    $secondary ? theme.orange : theme.background};
+  color: ${({ $secondary }) => ($secondary ? theme.orange : theme.background)};
   font-weight: bold;
-  background-color: ${({ $secondary, theme }) =>
+  background-color: ${({ $secondary }) =>
     $secondary ? theme.background : theme.orange};
-  border: 2px solid ${({ theme }) => theme.orange};
+  border: 2px solid ${theme.orange};
   box-sizing: border-box;
   border-radius: 0.375em;
-  padding: 0 24px;
+  padding: 0 10px;
   // TODO: make raised and add a location button in main pane
 
-  @media ${({ theme }) => theme.device.desktop} {
+  @media ${theme.device.desktop} {
     :hover:enabled {
-      background: ${({ $secondary, theme }) =>
+      background: ${({ $secondary }) =>
         $secondary ? theme.orange : darken(0.1, theme.orange)};
-      border-color: ${({ $secondary, theme }) =>
+      border-color: ${({ $secondary }) =>
         $secondary ? theme.orange : darken(0.1, theme.orange)};
-      color: ${({ theme }) => theme.background};
+      color: ${theme.background};
     }
   }
 

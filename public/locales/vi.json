@@ -122,7 +122,8 @@
     "zoom_in": "Phóng to bản đồ để xem dữ liệu vị trí"
   },
   "locations": {
-    "add_another": "Thêm một cái khác",
+    "add_new": "Thêm mới",
+    "add_similar": "Thêm tương tự",
     "edit_position": {
       "cancel": "Hủy chỉnh sửa vị trí",
       "confirm": "Xác nhận chỉnh sửa vị trí",

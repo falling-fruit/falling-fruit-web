@@ -122,7 +122,8 @@
     "zoom_in": "Zoom in op de kaart om locatiegegevens te zien"
   },
   "locations": {
-    "add_another": "Voeg nog een toe",
+    "add_new": "Voeg nieuwe toe",
+    "add_similar": "Voeg vergelijkbare toe",
     "edit_position": {
       "cancel": "Annuleer positie bewerken",
       "confirm": "Bevestig positie bewerken",

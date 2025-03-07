@@ -10,7 +10,6 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import BackButton from '../ui/BackButton'
 import TopBar from '../ui/TopBar'
 import TopBarNav from '../ui/TopBarNav'
-import { EditLocationForm } from './EditLocation'
 import { EditReviewForm } from './EditReview'
 import { LocationForm } from './LocationForm'
 import { ReviewForm } from './ReviewForm'
@@ -65,7 +64,7 @@ const EditLocation = ({ NavComponent }) => {
           history.push(`/locations/${locationId}`)
         }}
       />
-      <EditLocationForm />
+      <LocationForm editingId={location.id} />
     </>
   )
 }

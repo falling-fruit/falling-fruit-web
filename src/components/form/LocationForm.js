@@ -16,6 +16,7 @@ import {
   formToLocation,
   formToReview,
   isEmptyReview,
+  locationToForm,
   validateLocation,
 } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -167,22 +168,33 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   )
 }
 
-export const LocationForm = ({ editingId, initialValues, innerRef }) => {
-  const reduxFormValues = useSelector((state) => state.location.form)
-  const mergedInitialValues = {
-    ...INITIAL_LOCATION_VALUES,
-    ...initialValues,
-    ...reduxFormValues,
-  }
+export const LocationForm = ({ editingId, innerRef }) => {
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
 
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const { position, isLoading, location } = useSelector(
-    (state) => state.location,
-  )
+  const {
+    position,
+    isLoading,
+    location,
+    form: reduxFormValues,
+  } = useSelector((state) => state.location)
+
+  const { typesAccess } = useSelector((state) => state.type)
+
+  const initialValues =
+    !location || typesAccess.isEmpty
+      ? {}
+      : locationToForm(location, typesAccess)
+
+  const mergedInitialValues = {
+    ...INITIAL_LOCATION_VALUES,
+    ...initialValues,
+    ...reduxFormValues,
+  }
+
   const positionDirty =
     !editingId ||
     (position &&
@@ -237,7 +249,9 @@ export const LocationForm = ({ editingId, initialValues, innerRef }) => {
   const { Recaptcha, handlePresubmit: onPresubmit } =
     useInvisibleRecaptcha(handleSubmit)
 
-  return (
+  return isLoading || typesAccess.isEmpty ? (
+    <div>{t('layouts.loading')}</div>
+  ) : (
     <StyledForm>
       <Formik
         validate={validateLocation}
