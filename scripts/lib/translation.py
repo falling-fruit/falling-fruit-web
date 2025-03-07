@@ -165,6 +165,29 @@ class SortedJsonEncoder(json.JSONEncoder):
         next_indent = "  " * (level + 1)
         
         if isinstance(obj, dict):
+            # Check if all keys are consecutive integers starting from 0
+            try:
+                keys = [k for k in obj.keys()]
+                if all(isinstance(k, (int, str)) for k in keys):
+                    # Try to convert string keys to integers
+                    numeric_keys = []
+                    for k in keys:
+                        if isinstance(k, str) and k.isdigit():
+                            numeric_keys.append(int(k))
+                        elif isinstance(k, int):
+                            numeric_keys.append(k)
+                    
+                    # Check if all keys are numeric and consecutive starting from 0
+                    if (len(numeric_keys) == len(keys) and 
+                        sorted(numeric_keys) == list(range(len(numeric_keys)))):
+                        # Convert to list
+                        sorted_items = sorted([(int(k) if isinstance(k, str) else k, v) 
+                                              for k, v in obj.items()], key=lambda x: x[0])
+                        items = [v for _, v in sorted_items]
+                        return self.encode(items, level)
+            except (ValueError, TypeError):
+                pass
+                
             # Sort dictionary keys
             items = sorted(obj.items(), key=lambda x: x[0])
             if not items:
