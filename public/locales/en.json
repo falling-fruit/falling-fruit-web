@@ -163,7 +163,8 @@
       "cancel": "Cancel choose location",
       "choose_instructions": "Choose a position for your new location.",
       "confirm": "Confirm choose location",
-      "edit_instructions": "Edit position for your new location."
+      "edit_instructions": "Edit position for your new location.",
+      "position_too_close": "Choose position different from positions of existing locations"
     },
     "overview": {
       "added_by": "Added by {{name}}",

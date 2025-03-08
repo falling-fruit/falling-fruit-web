@@ -163,7 +163,8 @@
       "cancel": "Standort wählen abbrechen",
       "choose_instructions": "Wähle eine Position für deinen neuen Standort.",
       "confirm": "Standort wählen bestätigen",
-      "edit_instructions": "Position für deinen neuen Standort bearbeiten."
+      "edit_instructions": "Position für deinen neuen Standort bearbeiten.",
+      "position_too_close": "Wähle eine Position, die sich von den Positionen bestehender Standorte unterscheidet"
     },
     "overview": {
       "added_by": "Hinzugefügt von {{name}}",
@@ -329,14 +330,14 @@
   "problems": {
     "description_subtext": "Jeglicher Hinweis kann uns helfen, das Problem zu lösen.",
     "problem_type": "Problem Art",
-    "problem_types": {
-      "0": "Standort ist Spam",
-      "1": "Standort existiert nicht",
-      "2": "Standort ist ein Duplikat",
-      "3": "Unangemessenes Foto in Bewertung",
-      "4": "Unangemessener Bewertungskommentar",
-      "5": "Sonstiges (bitte unten erläutern)"
-    }
+    "problem_types": [
+      "Standort ist Spam",
+      "Standort existiert nicht",
+      "Standort ist ein Duplikat",
+      "Unangemessenes Foto in Bewertung",
+      "Unangemessener Bewertungskommentar",
+      "Sonstiges (bitte unten erläutern)"
+    ]
   },
   "review": {
     "form": {

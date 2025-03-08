@@ -99,6 +99,7 @@ export const formToLocation = ({
   season_stop,
   access,
   unverified,
+  position: { lat, lng },
 }) => ({
   type_ids: types.map(({ value }) => value),
   description,
@@ -106,6 +107,8 @@ export const formToLocation = ({
   season_stop: season_stop ?? null,
   access: access ?? null,
   unverified,
+  lat,
+  lng,
 })
 
 export const locationToForm = (
@@ -125,3 +128,19 @@ export const locationToForm = (
   access,
   unverified,
 })
+
+export const isTooClose = (location, existingLocations, editingId) => {
+  if (!location || !existingLocations || existingLocations.length === 0) {
+    return false
+  }
+
+  return existingLocations.some((existingLocation) => {
+    if (editingId && editingId === existingLocation.id) {
+      return false
+    } else {
+      const latDiff = Math.abs(existingLocation.lat - location.lat)
+      const lngDiff = Math.abs(existingLocation.lng - location.lng)
+      return latDiff + lngDiff < 1e-5
+    }
+  })
+}

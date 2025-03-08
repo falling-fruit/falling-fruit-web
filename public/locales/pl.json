@@ -163,7 +163,8 @@
       "cancel": "Anuluj wybór lokalizacji",
       "choose_instructions": "Wybierz pozycję dla nowej lokalizacji.",
       "confirm": "Potwierdź wybór lokalizacji",
-      "edit_instructions": "Edytuj pozycję dla nowej lokalizacji."
+      "edit_instructions": "Edytuj pozycję dla nowej lokalizacji.",
+      "position_too_close": "Wybierz pozycję inną niż pozycje istniejących lokalizacji"
     },
     "overview": {
       "added_by": "Dodane przez {{name}}",
@@ -329,14 +330,14 @@
   "problems": {
     "description_subtext": "Wszelkie informacje, które mogą pomóc nam w ocenie problemu",
     "problem_type": "Typ problemu",
-    "problem_types": {
-      "0": "Lokalizacja jest spamem",
-      "1": "Lokalizacja nie istnieje",
-      "2": "Lokalizacja jest duplikatem",
-      "3": "Nieodpowiednie zdjęcie w recenzji",
-      "4": "Nieodpowiedni komentarz w recenzji",
-      "5": "Inne (wyjaśnij poniżej)"
-    }
+    "problem_types": [
+      "Lokalizacja jest spamem",
+      "Lokalizacja nie istnieje",
+      "Lokalizacja jest duplikatem",
+      "Nieodpowiednie zdjęcie w recenzji",
+      "Nieodpowiedni komentarz w recenzji",
+      "Inne (wyjaśnij poniżej)"
+    ]
   },
   "review": {
     "form": {
