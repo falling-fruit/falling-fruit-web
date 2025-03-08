@@ -163,7 +163,8 @@
       "cancel": "Annuler le choix de l'emplacement",
       "choose_instructions": "Choisissez une position pour votre nouvel emplacement.",
       "confirm": "Confirmer le choix de l'emplacement",
-      "edit_instructions": "Modifier la position de votre nouvel emplacement."
+      "edit_instructions": "Modifier la position de votre nouvel emplacement.",
+      "position_too_close": "Choisissez une position différente des positions des lieux existants"
     },
     "overview": {
       "added_by": "Ajouté par {{name}}",
@@ -329,14 +330,14 @@
   "problems": {
     "description_subtext": "Toute information pouvant nous aider à évaluer le problème",
     "problem_type": "Type de problème",
-    "problem_types": {
-      "0": "L'emplacement est du spam",
-      "1": "L'emplacement n'existe pas",
-      "2": "L'emplacement est un doublon",
-      "3": "Photo d'avis inappropriée",
-      "4": "Commentaire d'avis inapproprié",
-      "5": "Autre (expliquez ci-dessous)"
-    }
+    "problem_types": [
+      "L'emplacement est du spam",
+      "L'emplacement n'existe pas",
+      "L'emplacement est un doublon",
+      "Photo d'avis inappropriée",
+      "Commentaire d'avis inapproprié",
+      "Autre (expliquez ci-dessous)"
+    ]
   },
   "review": {
     "form": {

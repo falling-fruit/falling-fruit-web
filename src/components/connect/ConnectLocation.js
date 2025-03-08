@@ -62,7 +62,7 @@ const ToastContent = () => {
           type="button"
           secondary
           onClick={() => {
-            dispatch(initNewLocation(view))
+            dispatch(initNewLocation(view.center))
             history.push(`/locations/init`)
           }}
         >

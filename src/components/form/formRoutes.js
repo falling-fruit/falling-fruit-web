@@ -64,7 +64,7 @@ const EditLocation = ({ NavComponent }) => {
           history.push(`/locations/${locationId}`)
         }}
       />
-      <LocationForm editingId={location.id} />
+      <LocationForm editingId={Number(locationId)} />
     </>
   )
 }

@@ -120,6 +120,8 @@ def fill_up_translation(source_translation, target_translation):
     narrowed_source, narrowed_target, missing_keys_list = narrow_down_source_and_target(
         source_content, target_content 
     )
+    if not missing_keys_list:
+        return target_translation
     
     # Fill up translations using Claude
     partial_json = fill_up_gaps_in_content(narrowed_source, narrowed_target, missing_keys_list)

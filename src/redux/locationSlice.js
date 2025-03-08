@@ -220,7 +220,6 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.isBeingInitializedMobile = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      toast.success(i18next.t('success_message.location_submitted'))
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false

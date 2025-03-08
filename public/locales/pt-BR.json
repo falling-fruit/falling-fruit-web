@@ -163,7 +163,8 @@
       "cancel": "Cancelar escolha de localização",
       "choose_instructions": "Escolha uma posição para sua nova localização.",
       "confirm": "Confirmar escolha de localização",
-      "edit_instructions": "Editar posição para sua nova localização."
+      "edit_instructions": "Editar posição para sua nova localização.",
+      "position_too_close": "Escolha uma posição diferente das posições das localizações existentes"
     },
     "overview": {
       "added_by": "Adicionado por {{name}}",
@@ -329,14 +330,14 @@
   "problems": {
     "description_subtext": "Informações que poderiam nos ajudar a avaliar o problema",
     "problem_type": "Tipo de problema",
-    "problem_types": {
-      "0": "Localização é spam",
-      "1": "Localização não existe",
-      "2": "Localização é duplicada",
-      "3": "Foto da avaliação inadequada",
-      "4": "Comentário da avaliação inadequado",
-      "5": "Outro (explique abaixo)"
-    }
+    "problem_types": [
+      "Localização é spam",
+      "Localização não existe",
+      "Localização é duplicada",
+      "Foto da avaliação inadequada",
+      "Comentário da avaliação inadequado",
+      "Outro (explique abaixo)"
+    ]
   },
   "review": {
     "form": {

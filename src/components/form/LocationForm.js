@@ -1,5 +1,6 @@
 import { Map } from '@styled-icons/boxicons-solid'
-import { Form, Formik, useFormikContext } from 'formik'
+import { ErrorMessage, Form, Formik, useFormikContext } from 'formik'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -16,6 +17,7 @@ import {
   formToLocation,
   formToReview,
   isEmptyReview,
+  isTooClose,
   locationToForm,
   validateLocation,
 } from '../../utils/form'
@@ -46,6 +48,11 @@ const CheckboxLabel = styled.label`
   margin-top: 15px;
 `
 
+const ErrorText = styled.p`
+  color: ${({ theme }) => theme.red};
+  font-size: 0.85rem;
+`
+
 const InlineSelects = styled.div`
   display: flex;
   align-items: center;
@@ -71,19 +78,63 @@ const PositionFieldLink = ({ lat, lng, editingId }) => {
       }}
       to={pathWithCurrentView(`/locations/${editingId}/edit/position`)}
     >
-      <PositionFieldReadOnly lat={lat} lng={lng} />
+      <PositionFieldReadOnly lat={lat} lng={lng} editingId={editingId} />
     </StyledPositionFieldLink>
   )
 }
 
-const PositionFieldReadOnly = ({ lat, lng }) => (
-  <IconBesideText tabIndex={0}>
-    <Map size={20} />
-    <p className="small">
-      {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
-    </p>
-  </IconBesideText>
-)
+const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
+  const { locations } = useSelector((state) => state.map)
+  const { position } = useSelector((state) => state.location)
+  const { t } = useTranslation()
+  const tooClose = lat && lng && isTooClose({ lat, lng }, locations, editingId)
+  const { setFieldError, setTouched, setFieldValue, errors, touched } =
+    useFormikContext()
+  const positionTouched = !!touched.position
+
+  // Set position as touched on mount
+  useEffect(() => {
+    setTouched({ position: true })
+  }, [setTouched])
+
+  // Update formik value when position changes in Redux
+  useEffect(() => {
+    if (position?.lat && position?.lng) {
+      setFieldValue('position', { lat: position.lat, lng: position.lng })
+    }
+  }, [position, setFieldValue])
+
+  // Handle validation for position
+  useEffect(() => {
+    if (tooClose) {
+      setFieldError('position', t('locations.init.position_too_close'))
+    } else {
+      setFieldError('position', undefined)
+    }
+  }, [
+    positionTouched,
+    tooClose,
+    lat,
+    lng,
+    errors.position,
+    touched.position,
+    setFieldError,
+    t,
+  ])
+
+  return (
+    <>
+      <IconBesideText tabIndex={0}>
+        <Map size={20} />
+        <p className="small">
+          {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
+        </p>
+      </IconBesideText>
+
+      <ErrorMessage name="position" component={ErrorText} />
+    </>
+  )
+}
 
 const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   const { i18n, t } = useTranslation()
@@ -120,7 +171,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       {isLoading ? (
         <LoadingIndicator />
       ) : isDesktop || !editingId ? (
-        <PositionFieldReadOnly lat={lat} lng={lng} />
+        <PositionFieldReadOnly lat={lat} lng={lng} editingId={editingId} />
       ) : (
         <PositionFieldLink lat={lat} lng={lng} editingId={editingId} />
       )}
@@ -193,13 +244,8 @@ export const LocationForm = ({ editingId, innerRef }) => {
     ...INITIAL_LOCATION_VALUES,
     ...initialValues,
     ...reduxFormValues,
+    position,
   }
-
-  const positionDirty =
-    !editingId ||
-    (position &&
-      location &&
-      !(position.lat === location.lat && position.lng === location.lng))
 
   const handleSubmit = (
     { 'g-recaptcha-response': recaptcha, review, ...location },
@@ -207,8 +253,6 @@ export const LocationForm = ({ editingId, innerRef }) => {
   ) => {
     const locationValues = {
       'g-recaptcha-response': recaptcha,
-      lat: position?.lat || null,
-      lng: position?.lng || null,
       ...formToLocation(location),
     }
 
@@ -262,7 +306,6 @@ export const LocationForm = ({ editingId, innerRef }) => {
       >
         {(formikProps) => {
           const { isSubmitting, isValid, dirty } = formikProps
-          const formDirty = dirty || positionDirty
 
           return (
             <Form>
@@ -283,7 +326,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
                   {t('form.button.cancel')}
                 </Button>
                 <Button
-                  disabled={isSubmitting || !isValid || !formDirty}
+                  disabled={isSubmitting || !isValid || !dirty}
                   type="submit"
                 >
                   {isSubmitting

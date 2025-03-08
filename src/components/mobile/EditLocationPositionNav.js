@@ -3,9 +3,11 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
+import { isTooClose } from '../../utils/form'
 import { distanceInMeters } from '../../utils/mapDistance'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
@@ -21,8 +23,13 @@ const EditLocationPositionNav = () => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const { locationId } = useParams()
-  const { googleMap } = useSelector((state) => state.map)
+  const { googleMap, locations } = useSelector((state) => state.map)
   const { position: storedPosition } = useSelector((state) => state.location)
+
+  const editingId = Number(locationId)
+  const tooClose =
+    googleMap &&
+    isTooClose(googleMap.getCenter().toJSON(), locations, editingId)
 
   const handleCancel = () => {
     if (storedPosition && googleMap) {
@@ -48,8 +55,12 @@ const EditLocationPositionNav = () => {
   }
 
   const handleConfirm = () => {
-    dispatch(updatePosition(googleMap?.getCenter().toJSON()))
-    history.push(`/locations/${locationId}/edit`)
+    if (tooClose) {
+      toast.warning(t('locations.init.position_too_close'))
+    } else {
+      dispatch(updatePosition(googleMap?.getCenter().toJSON()))
+      history.push(`/locations/${locationId}/edit`)
+    }
   }
 
   return (
@@ -73,6 +84,10 @@ const EditLocationPositionNav = () => {
             size={54}
             color={theme.green}
             onClick={handleConfirm}
+            style={{
+              opacity: tooClose ? 0.5 : 1,
+              cursor: tooClose ? 'help' : 'pointer',
+            }}
           />
         </>
       }

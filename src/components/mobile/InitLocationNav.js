@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { parseCurrentUrl } from '../../utils/appUrl'
+import { isTooClose } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
@@ -18,29 +19,19 @@ const InitLocationNav = () => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const { locations } = useSelector((state) => state.map)
-  const { form } = useSelector((state) => state.location)
+  const { form, locationId } = useSelector((state) => state.location)
   const { view } = parseCurrentUrl()
 
-  const isTooCloseToExistingLocation = () => {
-    if (!view.center || !locations || locations.length === 0) {
-      return false
-    }
+  const editingId = locationId === 'new' ? undefined : locationId
 
-    return locations.some((location) => {
-      const latDiff = Math.abs(location.lat - view.center.lat)
-      const lngDiff = Math.abs(location.lng - view.center.lng)
-      return latDiff + lngDiff < 1e-5
-    })
-  }
-
-  const tooClose = isTooCloseToExistingLocation()
+  const tooClose = isTooClose(view.center, locations, editingId)
 
   const handleConfirmClick = () => {
     if (tooClose) {
       toast.warning(t('locations.init.position_too_close'))
-      return
+    } else {
+      history.push('/locations/new')
     }
-    history.push('/locations/new')
   }
 
   return (
