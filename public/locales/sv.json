@@ -122,6 +122,8 @@
     "zoom_in": "Zooma in på kartan för att se platsdata"
   },
   "locations": {
+    "add_new": "Lägg till ny",
+    "add_similar": "Lägg till liknande",
     "edit_position": {
       "cancel": "Avbryt redigering av position",
       "confirm": "Bekräfta redigering av position",
@@ -161,7 +163,8 @@
       "cancel": "Avbryt val av plats",
       "choose_instructions": "Välj en position för din nya plats.",
       "confirm": "Bekräfta val av plats",
-      "edit_instructions": "Redigera position för din nya plats."
+      "edit_instructions": "Redigera position för din nya plats.",
+      "position_too_close": "Välj en position som skiljer sig från befintliga platsers positioner"
     },
     "overview": {
       "added_by": "Tillagd av {{name}}",
@@ -327,14 +330,14 @@
   "problems": {
     "description_subtext": "All information som kan hjälpa oss utvärdera problemet",
     "problem_type": "Problemtyp",
-    "problem_types": {
-      "0": "Platsen är spam",
-      "1": "Platsen existerar inte",
-      "2": "Platsen är en dubblett",
-      "3": "Olämpligt recensionsfoto",
-      "4": "Olämplig recensionskommentar",
-      "5": "Annat (förklara nedan)"
-    }
+    "problem_types": [
+      "Platsen är spam",
+      "Platsen existerar inte",
+      "Platsen är en dubblett",
+      "Olämpligt recensionsfoto",
+      "Olämplig recensionskommentar",
+      "Annat (förklara nedan)"
+    ]
   },
   "review": {
     "form": {

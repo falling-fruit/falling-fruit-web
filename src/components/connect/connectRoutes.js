@@ -119,6 +119,7 @@ const connectRoutes = [
           isBeingEdited={match.params.nextSegment === 'edit'}
           isBeingEditedPosition={match.params.nextNextSegment === 'position'}
           isStreetView={match.params.nextSegment === 'panorama'}
+          isSuccessfullyAdded={match.params.nextSegment === 'success'}
           isFromListLocations={match.path.startsWith('/list-locations/')}
         />
       )

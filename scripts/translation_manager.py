@@ -13,9 +13,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent / 'lib'))
 from source_dir import SourceDirectory
 from translation import (
-    Translation, LocaleFile, YamlLocaleFile, JsonLocaleFile, 
-    SortedJsonEncoder, print_colored_dict
+    Translation, print_colored_dict
 )
+from tap_stream import TapStream
+from translation_filler import fill_up_translation
 
 
 class TranslationManager:
@@ -358,22 +359,6 @@ class TranslationManager:
             else:
                 print(f"{json_file.name}: No orphan keys found")
     
-    def extract_template_vars(self, text):
-        """Extract template variables like {{ var_name }} from text"""
-        if not text:
-            return set()
-        
-        # Handle both string and list values
-        if isinstance(text, list):
-            vars_set = set()
-            for item in text:
-                if isinstance(item, str):
-                    vars_set.update(self.extract_template_vars(item))
-            return vars_set
-        
-        # Extract variables using regex
-        template_vars = re.findall(r'{{\s*([^}]*?)\s*}}', text)
-        return set(template_vars)
 
     def check_translations(self):
         """Check if all translation keys exist in all language files (TAP format)"""
@@ -402,12 +387,6 @@ class TranslationManager:
             json_file = self.json_folder_path / f"{lang}.json"
             translations[lang] = Translation.from_json_file(json_file)
         
-        # Count total tests: one for each key in source + one for orphan keys test
-        total_tests = len(all_keys) + 1
-        
-        # Print TAP header
-        print(f"1..{total_tests}")
-        
         # Group keys by source file for better organization
         key_to_files = {}
         for component in self.source_directory.components:
@@ -416,97 +395,43 @@ class TranslationManager:
                     key_to_files[key] = []
                 key_to_files[key].append(str(component.file_path))
         
-        # Check each key in each language using subtests
-        for test_number, key in enumerate(sorted(all_keys), 1):
-            # Print key and source files as comments
-            source_files = key_to_files.get(key, ["unknown"])
+        # Create TAP stream and run checks
+        tap = TapStream()
+        tap.check_translations_tap(all_keys, key_to_files, translations, languages)
+        
+    def fill_up_translations(self):
+        """Fill up missing translations in all language files using English as source"""
+        if not self.json_folder_path or not self.json_folder_path.exists():
+            print("Error: JSON folder does not exist.")
+            return
             
-            # Count missing translations for this key
-            missing_count = 0
-            template_var_issues = False
+        json_files = list(self.json_folder_path.glob('*.json'))
+        if not json_files:
+            print(f"No JSON files found in {self.json_folder_path}")
+            return
             
-            # Get English template variables for comparison
-            en_translation = translations.get('en')
-            en_value = en_translation.get(key) if en_translation else None
-            en_template_vars = self.extract_template_vars(en_value) if en_value else set()
+        # Get English translation as source
+        en_json_path = self.json_folder_path / "en.json"
+        if not en_json_path.exists():
+            print("Error: English translation file (en.json) not found.")
+            return
             
-            for lang in sorted(languages):
-                if lang == 'en':  # Skip English for missing check
-                    continue
-                    
-                translation = translations[lang]
-                value = translation.get(key)
+        source_translation = Translation.from_json_file(en_json_path)
+        
+        # Process each non-English JSON file
+        for json_file in json_files:
+            if json_file.stem == "en":
+                continue
                 
-                if value is None:
-                    missing_count += 1
-                elif en_template_vars:  # Only check if English has template vars
-                    lang_template_vars = self.extract_template_vars(value)
-                    if lang_template_vars != en_template_vars:
-                        template_var_issues = True
+            print(f"Processing {json_file.name}...")
+            target_translation = Translation.from_json_file(json_file)
             
-            source_files_str = ", ".join(source_files)
-            if missing_count == 0 and not template_var_issues:
-                print(f"ok {test_number} - '{key}' # {source_files_str}")
-            else:
-                print(f"not ok {test_number} - '{key}' # {source_files_str}")
-                if en_template_vars:
-                    print(f"    # English vars: {', '.join(en_template_vars)}")
+            # Fill up translations
+            result_translation = fill_up_translation(source_translation, target_translation)
             
-            # Print subtests for each language
-            for subtest_number, lang in enumerate(sorted(languages), 1):
-                translation = translations[lang]
-                value = translation.get(key)
-                
-                if value is None:
-                    print(f"    not ok {subtest_number} - {lang} # missing translation")
-                elif lang != 'en' and en_template_vars:
-                    lang_template_vars = self.extract_template_vars(value)
-                    if lang_template_vars != en_template_vars:
-                        missing_vars = en_template_vars - lang_template_vars
-                        extra_vars = lang_template_vars - en_template_vars
-                        error_msg = []
-                        if missing_vars:
-                            error_msg.append(f"missing vars: {', '.join(missing_vars)}")
-                        if extra_vars:
-                            error_msg.append(f"extra vars: {', '.join(extra_vars)}")
-                        print(f"    not ok {subtest_number} - {lang} # {'; '.join(error_msg)}")
-                    else:
-                        print(f"    ok {subtest_number} - {lang}")
-                else:
-                    print(f"    ok {subtest_number} - {lang}")
-        
-        # Check for orphan keys (keys in translation files not in source)
-        test_number = len(all_keys) + 1
-        orphan_keys_found = False
-        
-        # Collect orphan keys for each language
-        orphan_keys_by_lang = {}
-        for lang in sorted(languages):
-            translation = translations[lang]
-            orphan_keys = []
-            
-            for key in translation.entries.keys():
-                if key not in all_keys:
-                    orphan_keys.append(key)
-                    orphan_keys_found = True
-            
-            orphan_keys_by_lang[lang] = orphan_keys
-        
-        # Print orphan keys test result
-        if orphan_keys_found:
-            print(f"not ok {test_number} - orphan keys")
-        else:
-            print(f"ok {test_number} - orphan keys")
-        
-        # Print subtests for each language
-        for subtest_number, lang in enumerate(sorted(languages), 1):
-            orphan_keys = orphan_keys_by_lang[lang]
-            
-            if not orphan_keys:
-                print(f"    ok {subtest_number} - {lang}")
-            else:
-                print(f"    not ok {subtest_number} - {lang} #{', '.join(orphan_keys)}")
-        
+            # Save the result
+            result_translation.save_as_json(json_file)
+            print(f"Updated {json_file.name}")
 
 
 def main():
@@ -527,6 +452,8 @@ def main():
                         help="Check if all translation keys exist in all language files and template variables match (TAP format)")
     parser.add_argument("--remove-orphan-keys", action="store_true",
                         help="Remove keys from JSON files that don't exist in source files")
+    parser.add_argument("--fill-up-translations", action="store_true",
+                        help="Fill up missing translations in all language files using English as source")
     
     args = parser.parse_args()
 
@@ -553,6 +480,11 @@ def main():
         
     if args.remove_orphan_keys and (not args.source_path or not args.new_site_json_folder_path):
         print("Error: --source_path and --new_site_json_folder_path must be specified for --remove-orphan-keys")
+        parser.print_help()
+        return
+        
+    if args.fill_up_translations and not args.new_site_json_folder_path:
+        print("Error: --new_site_json_folder_path must be specified for --fill-up-translations")
         parser.print_help()
         return
 
@@ -588,10 +520,13 @@ def main():
         
     if args.remove_orphan_keys:
         manager.remove_orphan_keys()
+        
+    if args.fill_up_translations:
+        manager.fill_up_translations()
 
     if not (args.rename_key or args.preview_migrate or args.migrate or args.list_in_source or 
-            args.list_in_json or args.check_translations or args.remove_orphan_keys):
-        print("No action specified. Use --rename_key {old_key} {new_key} --preview-migrate {language}, --migrate, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys.")
+            args.list_in_json or args.check_translations or args.remove_orphan_keys or args.fill_up_translations):
+        print("No action specified. Use --rename_key {old_key} {new_key} --preview-migrate {language}, --migrate, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys, --fill-up-translations.")
         parser.print_help()
 
 if __name__ == "__main__":

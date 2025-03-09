@@ -122,6 +122,8 @@
     "zoom_in": "放大地图以查看位置数据"
   },
   "locations": {
+    "add_new": "添加新的",
+    "add_similar": "添加类似的",
     "edit_position": {
       "cancel": "取消编辑位置",
       "confirm": "确认编辑位置",
@@ -161,7 +163,8 @@
       "cancel": "取消选择位置",
       "choose_instructions": "为您的新位置选择一个位置。",
       "confirm": "确认选择位置",
-      "edit_instructions": "编辑您的新位置的位置。"
+      "edit_instructions": "编辑您的新位置的位置。",
+      "position_too_close": "请选择与现有位置不同的位置"
     },
     "overview": {
       "added_by": "由{{name}}添加",
@@ -327,14 +330,14 @@
   "problems": {
     "description_subtext": "任何可能帮助我们评估问题的信息",
     "problem_type": "问题类型",
-    "problem_types": {
-      "0": "地点是垃圾信息",
-      "1": "地点不存在",
-      "2": "地点是重复的",
-      "3": "不当的评论照片",
-      "4": "不当的评论内容",
-      "5": "其他（请在下方说明）"
-    }
+    "problem_types": [
+      "地点是垃圾信息",
+      "地点不存在",
+      "地点是重复的",
+      "不当的评论照片",
+      "不当的评论内容",
+      "其他（请在下方说明）"
+    ]
   },
   "review": {
     "form": {
