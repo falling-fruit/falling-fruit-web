@@ -70,6 +70,15 @@ const ConnectLocation = ({
   }, [dispatch, locationId]) //eslint-disable-line
 
   useEffect(() => {
+    if (location && !initialView) {
+      const { view } = parseCurrentUrl()
+      if (view) {
+        dispatch(setInitialView(view))
+      }
+    }
+  }, [!!location, !!initialView]) //eslint-disable-line
+
+  useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
   }, [dispatch, isBeingEdited])
 
