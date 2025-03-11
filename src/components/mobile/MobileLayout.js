@@ -5,7 +5,7 @@ import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 import aboutRoutes from '../about/aboutRoutes'
 import activityRoutes from '../activity/activityRoutes'
 import AccountPage from '../auth/AccountPage'
-import authRoutes from '../auth/authRoutes'
+import authRoutes, { isTabPath } from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import EntryMobile from '../entry/EntryMobile'
 import { formRoutesMobile } from '../form/formRoutes'
@@ -141,10 +141,17 @@ const MobileLayout = () => {
               </Switch>
             </TabPanels>
             <Switch>
-              <Route path={['/locations/:locationId/edit/:postfix', '*']}>
+              <Route
+                path={[
+                  '/locations/:locationId/edit/:postfix',
+                  '/users/:userId',
+                  '*',
+                ]}
+              >
                 {({ match }) =>
                   (!match.params.postfix ||
-                    match.params.postfix === 'position') && (
+                    match.params.postfix === 'position') &&
+                  (!match.params.userId || isTabPath(match.params.userId)) && (
                     <TabList
                       style={{
                         zIndex: zIndex.mobileTablist,
