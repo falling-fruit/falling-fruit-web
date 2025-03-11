@@ -44,8 +44,13 @@ const pages = [
   },
 ]
 
-// TODO: Delete export once tabs work off route
 export const authPages = pages
+
+const authTabPaths = ['edit', 'sign_in', 'sign_up', 'password', 'confirmation']
+
+export const isTabPath = (path) => authTabPaths.some(
+    (tabPath) => path === tabPath || path?.startsWith(`${tabPath}/`),
+  )
 
 const authRoutes = pages.map((props) => <Route key={props.path} {...props} />)
 export default authRoutes
