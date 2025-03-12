@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import {
   currentPathWithView,
   pathWithCurrentView,
+  pathWithView,
   withFromPage,
 } from './appUrl'
 
@@ -44,11 +45,17 @@ export const useAppHistory = () => {
     history.push(withFromPage(path))
   }
 
+  const pushAndChangeView = (path, view, state) => {
+    const newUrl = pathWithView(path, view)
+    history.push(newUrl, state)
+  }
+
   return {
     ...history,
     push: pushWithMapState,
     changeView,
     removeParam,
     pushWithFromPage,
+    pushAndChangeView,
   }
 }

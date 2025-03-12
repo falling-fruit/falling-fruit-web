@@ -67,3 +67,11 @@ export const currentPathWithView = (view) => {
 
   return `${path}/${viewToString(view.center.lat, view.center.lng, view.zoom)}`
 }
+
+export const pathWithView = (path, view) => {
+  const stateIndex = path.indexOf('/@')
+  const cleanPath = stateIndex === -1 ? path : path.substring(0, stateIndex)
+  const pathNoTrailingSlash = cleanPath.replace(/\/*$/, '')
+
+  return `${pathNoTrailingSlash}/${viewToString(view.center.lat, view.center.lng, view.zoom)}`
+}
