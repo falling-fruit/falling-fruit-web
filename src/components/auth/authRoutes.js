@@ -48,7 +48,8 @@ export const authPages = pages
 
 const authTabPaths = ['edit', 'sign_in', 'sign_up', 'password', 'confirmation']
 
-export const isTabPath = (path) => authTabPaths.some(
+export const isTabPath = (path) =>
+  authTabPaths.some(
     (tabPath) => path === tabPath || path?.startsWith(`${tabPath}/`),
   )
 
