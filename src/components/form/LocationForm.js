@@ -9,7 +9,7 @@ import { INITIAL_LOCATION_VALUES } from '../../constants/form'
 import {
   addNewLocation,
   editExistingLocation,
-  saveFormValues,
+  saveLocationFormValues,
 } from '../../redux/locationSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import {
@@ -66,7 +66,7 @@ const PositionFieldLink = ({ lat, lng, editingId }) => {
   return (
     <StyledPositionFieldLink
       onClick={() => {
-        dispatch(saveFormValues(values))
+        dispatch(saveLocationFormValues(values))
       }}
       to={pathWithCurrentView(`/locations/${editingId}/edit/position`)}
     >

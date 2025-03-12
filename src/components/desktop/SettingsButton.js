@@ -1,5 +1,6 @@
 import { ChevronRight } from '@styled-icons/boxicons-regular'
 import { Cog } from '@styled-icons/boxicons-solid'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { theme } from '../ui/GlobalStyle'
@@ -42,14 +43,17 @@ export const ChevronIcon = styled.div`
   margin-right: 1em;
 `
 
-const SettingsButton = ({ text, onClick }) => (
-  <StyledSettingsButton onClick={onClick}>
-    <SettingsCircleIcon color={theme.orange} />
-    <PrimaryText>{text}</PrimaryText>
-    <ChevronIcon>
-      <ChevronRight width="1.75em" color={theme.orange} />
-    </ChevronIcon>
-  </StyledSettingsButton>
-)
+const SettingsButton = ({ onClick }) => {
+  const { t } = useTranslation()
+  return (
+    <StyledSettingsButton onClick={onClick}>
+      <SettingsCircleIcon color={theme.orange} />
+      <PrimaryText>{t('menu.settings')}</PrimaryText>
+      <ChevronIcon>
+        <ChevronRight width="1.75em" color={theme.orange} />
+      </ChevronIcon>
+    </StyledSettingsButton>
+  )
+}
 
 export default SettingsButton

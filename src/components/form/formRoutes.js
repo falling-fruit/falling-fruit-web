@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Route, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { saveFormValues } from '../../redux/locationSlice'
+import { saveLocationFormValues } from '../../redux/locationSlice'
+import { saveReviewFormValues } from '../../redux/reviewSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
+import SettingsButton from '../desktop/SettingsButton'
 import BackButton from '../ui/BackButton'
 import TopBar from '../ui/TopBar'
 import TopBarNav from '../ui/TopBarNav'
@@ -51,8 +53,23 @@ const DesktopNav = ({ title, onBack }) => {
   )
 }
 
-const EditLocation = ({ NavComponent }) => {
+const DesktopButtonUnderForm = ({ formRef, saveFormValues }) => {
+  const dispatch = useDispatch()
   const history = useAppHistory()
+
+  const handleClick = () => {
+    if (formRef.current) {
+      dispatch(saveFormValues(formRef.current.values))
+    }
+    history.push('/settings')
+  }
+
+  return <SettingsButton onClick={handleClick} />
+}
+
+const EditLocation = ({ NavComponent, withSettingsButton }) => {
+  const history = useAppHistory()
+  const formRef = useRef()
   const { locationId } = useParams()
   const { t } = useTranslation()
 
@@ -65,12 +82,18 @@ const EditLocation = ({ NavComponent }) => {
           history.push(`/locations/${locationId}`)
         }}
       />
-      <EditLocationForm />
+      <EditLocationForm innerRef={formRef} />
+      {withSettingsButton && (
+        <DesktopButtonUnderForm
+          formRef={formRef}
+          saveFormValues={saveLocationFormValues}
+        />
+      )}
     </>
   )
 }
 
-const AddLocation = ({ NavComponent, backUrl }) => {
+const AddLocation = ({ NavComponent, backUrl, withSettingsButton }) => {
   const history = useAppHistory()
   const formRef = useRef()
   const dispatch = useDispatch()
@@ -83,12 +106,18 @@ const AddLocation = ({ NavComponent, backUrl }) => {
         onBack={(event) => {
           event.stopPropagation()
           if (formRef.current) {
-            dispatch(saveFormValues(formRef.current.values))
+            dispatch(saveLocationFormValues(formRef.current.values))
           }
           history.push(backUrl)
         }}
       />
       <LocationForm innerRef={formRef} />
+      {withSettingsButton && (
+        <DesktopButtonUnderForm
+          formRef={formRef}
+          saveFormValues={saveLocationFormValues}
+        />
+      )}
     </>
   )
 }
@@ -112,8 +141,9 @@ const AddReview = ({ NavComponent }) => {
   )
 }
 
-const EditReview = ({ NavComponent }) => {
+const EditReview = ({ NavComponent, withSettingsButton }) => {
   const history = useAppHistory()
+  const formRef = useRef()
   const { review } = useSelector((state) => state.review)
   const { t } = useTranslation()
 
@@ -126,7 +156,13 @@ const EditReview = ({ NavComponent }) => {
           history.push(`/locations/${review?.location_id}`)
         }}
       />
-      <EditReviewForm />
+      <EditReviewForm innerRef={formRef} />
+      {withSettingsButton && (
+        <DesktopButtonUnderForm
+          formRef={formRef}
+          saveFormValues={saveReviewFormValues}
+        />
+      )}
     </>
   )
 }
@@ -148,12 +184,12 @@ export const formRoutesMobile = [
 
 export const formRoutesDesktop = [
   <Route key="edit-location" path="/locations/:locationId/edit">
-    <EditLocation NavComponent={DesktopNav} />
+    <EditLocation NavComponent={DesktopNav} withSettingsButton />
   </Route>,
   <Route key="add-location" path="/locations/new">
-    <AddLocation NavComponent={DesktopNav} backUrl="/map" />
+    <AddLocation NavComponent={DesktopNav} backUrl="/map" withSettingsButton />
   </Route>,
   <Route key="edit-review" path="/reviews/:reviewId/edit">
-    <EditReview NavComponent={DesktopNav} />
+    <EditReview NavComponent={DesktopNav} withSettingsButton />
   </Route>,
 ]
