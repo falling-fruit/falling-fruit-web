@@ -105,7 +105,7 @@ const locationSlice = createSlice({
     updatePosition: (state, action) => {
       state.position = action.payload
     },
-    saveFormValues: (state, action) => {
+    saveLocationFormValues: (state, action) => {
       state.form = action.payload
     },
     setIsBeingEditedAndResetPosition: (state, action) => {
@@ -290,7 +290,7 @@ export const {
   initNewLocation,
   clearLocation,
   updatePosition,
-  saveFormValues,
+  saveLocationFormValues,
   setIsBeingEditedAndResetPosition,
   dismissLocationTooltip,
   reopenLocationTooltip,

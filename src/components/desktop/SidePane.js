@@ -135,12 +135,12 @@ const SidePane = () => {
         </Route>
       </Switch>
       <Switch>
+        <Route path="/locations/:locationId/edit"></Route>
+        <Route path="/locations/new"></Route>
+        <Route path="/reviews/:reviewId/edit"></Route>
         <Route path="/settings"></Route>
         <Route>
-          <SettingsButton
-            text={t('menu.settings')}
-            onClick={() => history.push('/settings')}
-          />
+          <SettingsButton onClick={() => history.push('/settings')} />
         </Route>
       </Switch>
     </FullHeightPane>

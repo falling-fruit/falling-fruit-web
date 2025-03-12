@@ -128,11 +128,14 @@ const RatingLabeledRow = styled(LabeledRow)`
   }
 `
 
-export const ReviewForm = ({
-  initialValues = INITIAL_REVIEW_VALUES,
-  editingId = null,
-}) => {
+export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
   const { locationId } = useSelector((state) => state.location)
+  const reduxFormValues = useSelector((state) => state.review.form)
+  const mergedInitialValues = {
+    ...INITIAL_REVIEW_VALUES,
+    ...initialValues,
+    ...reduxFormValues,
+  }
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
@@ -196,9 +199,10 @@ export const ReviewForm = ({
     <StyledForm>
       <Formik
         validate={({ review }) => validateReview(review)}
-        initialValues={initialValues}
+        initialValues={mergedInitialValues}
         validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
+        innerRef={innerRef}
       >
         {(formikProps) => {
           const { isSubmitting, isValid, dirty } = formikProps
