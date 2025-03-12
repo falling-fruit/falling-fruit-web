@@ -21,6 +21,7 @@ import {
   openFilter,
 } from '../../redux/filterSlice'
 import { clearSelectedPlace, selectPlace } from '../../redux/placeSlice'
+import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
 import FilterIconButton from '../filter/FilterIconButton'
@@ -91,6 +92,7 @@ const Search = (props) => {
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
   const descriptionToPlaceId = useRef({})
+  const history = useAppHistory()
 
   // handle component re-render
   // after we sync value from redux, we get suggestions so the menu can open
@@ -151,22 +153,20 @@ const Search = (props) => {
   const handleSelect = async (description) => {
     setValue(description, false)
     const placeId = descriptionToPlaceId.current[description]
+    let place
     if (placeId.startsWith('coordinate-')) {
       const latitude = Number(description.split(',')[0])
       const longitude = Number(description.split(',')[1])
-      dispatch(
-        selectPlace({
-          place: getZoomedInView(latitude, longitude, lastMapView),
-        }),
-      )
+      place = getZoomedInView(latitude, longitude, lastMapView)
     } else {
-      const placeBounds = await getPlaceBounds(
+      place = await getPlaceBounds(
         description,
         descriptionToPlaceId.current[description],
         lastMapView,
       )
-      dispatch(selectPlace({ place: placeBounds }))
     }
+    dispatch(selectPlace({ place }))
+    history.pushAndChangeView('/map', place.view)
     inputRef.current?.blur()
   }
   const handleFocus = () => {

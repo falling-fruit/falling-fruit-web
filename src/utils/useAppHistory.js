@@ -4,6 +4,7 @@ import {
   currentPathWithView,
   pathToSignInPage,
   pathWithCurrentView,
+  pathWithView,
 } from './appUrl'
 
 /**
@@ -53,6 +54,11 @@ export const useAppHistory = () => {
     history.push(pathToSignInPage())
   }
 
+  const pushAndChangeView = (path, view, state) => {
+    const newUrl = pathWithView(path, view)
+    history.push(newUrl, state)
+  }
+
   return {
     ...history,
     push: pushWithMapState,
@@ -61,5 +67,6 @@ export const useAppHistory = () => {
     replaceView,
     removeParam,
     pushToSignInPage,
+    pushAndChangeView,
   }
 }
