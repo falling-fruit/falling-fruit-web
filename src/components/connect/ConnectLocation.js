@@ -91,7 +91,6 @@ const ConnectLocation = ({
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
-  const { selectedPlace } = useSelector((state) => state.place)
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
   const [hasCentered, setHasCentered] = useState(false)
@@ -194,8 +193,7 @@ const ConnectLocation = ({
     setHasCentered(false)
   }, [locationId])
 
-  const initialUIState =
-    !drawerFullyOpen && !filterOpen && !isBeingEdited && !selectedPlace
+  const initialUIState = !drawerFullyOpen && !filterOpen && !isBeingEdited
   useEffect(() => {
     if (!initialUIState) {
       // Opening drawer or filter dismisses any toasts
