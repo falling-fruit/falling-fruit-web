@@ -14,7 +14,7 @@ const StyledSettingsButton = styled.button`
   left: 0;
   right: 0;
   width: 100%;
-  height: 60px;
+  min-height: 3.5em;
   background: ${({ theme }) => theme.background};
   display: flex;
   flex-direction: row;
