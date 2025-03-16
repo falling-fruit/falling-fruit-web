@@ -1,13 +1,12 @@
 import { Form, Formik } from 'formik'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 import { resetPassword } from '../../utils/api'
-import { pathWithCurrentView, withFromPage } from '../../utils/appUrl'
+import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Input } from '../form/FormikWrappers'
@@ -18,13 +17,13 @@ import {
   FormButtonWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
+import { withAuthRedirect } from './withAuthRedirect'
 
 const getResetToken = () =>
   new URLSearchParams(window.location.search).get('token')
 
 const PasswordSetPage = () => {
   const history = useAppHistory()
-  const { user, isLoading } = useSelector((state) => state.auth)
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -33,10 +32,6 @@ const PasswordSetPage = () => {
       history.push('/users/sign_in')
     }
   }, [history, t])
-
-  if (!isLoading && user) {
-    return <Redirect to={pathWithCurrentView('/map')} />
-  }
 
   const handleSubmit = async ({ password }) => {
     try {
@@ -121,4 +116,4 @@ const PasswordSetPage = () => {
   )
 }
 
-export default PasswordSetPage
+export default withAuthRedirect(PasswordSetPage)

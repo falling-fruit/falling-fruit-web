@@ -1,7 +1,6 @@
 import { Form, Formik } from 'formik'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
@@ -16,21 +15,14 @@ import {
   FormButtonWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
+import { withAuthRedirect } from './withAuthRedirect'
 
 const formToUser = (form) => ({ ...form, password_confirm: undefined })
 
 const SignupPage = () => {
   const history = useAppHistory()
   const recaptchaRef = useRef()
-
-  const isLoading = useSelector((state) => state.auth.isLoading)
-  const isLoggedIn = useSelector((state) => !!state.auth.user)
   const { t } = useTranslation()
-
-  if (!isLoading && isLoggedIn) {
-    history.push('/map')
-    return
-  }
 
   const handleSubmit = async (values) => {
     const newUser = formToUser(values)
@@ -158,4 +150,4 @@ const SignupPage = () => {
   )
 }
 
-export default SignupPage
+export default withAuthRedirect(SignupPage)
