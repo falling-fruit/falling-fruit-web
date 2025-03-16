@@ -1,25 +1,20 @@
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { requestResetPassword } from '../../utils/api'
-import { pathWithCurrentView, withFromPage } from '../../utils/appUrl'
+import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Column } from './AuthWrappers'
 import { EmailForm } from './EmailForm'
+import { withAuthRedirect } from './withAuthRedirect'
 
 const PasswordResetPage = () => {
   const history = useAppHistory()
   const recaptchaRef = useRef()
   const { t } = useTranslation()
-  const { user, isLoading } = useSelector((state) => state.auth)
-
-  if (!isLoading && user) {
-    return <Redirect to={pathWithCurrentView('/map')} />
-  }
 
   const handleSubmit = async (values) => {
     try {
@@ -53,4 +48,4 @@ const PasswordResetPage = () => {
   )
 }
 
-export default PasswordResetPage
+export default withAuthRedirect(PasswordResetPage)

@@ -1,11 +1,10 @@
 import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Redirect, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
-import { pathWithCurrentView } from '../../utils/appUrl'
 import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { Checkbox, Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
@@ -16,19 +15,14 @@ import {
   FormCheckboxWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
+import { withAuthRedirect } from './withAuthRedirect'
 
 const LoginPage = () => {
-  const { user, isLoading } = useSelector((state) => state.auth)
-  const { state, search } = useLocation()
+  const { isLoading } = useSelector((state) => state.auth)
+  const { state } = useLocation()
   const { t } = useTranslation()
-  const params = new URLSearchParams(search)
-  const fromPage = params.get('fromPage')
 
   const dispatch = useDispatch()
-
-  if (!isLoading && user) {
-    return <Redirect to={fromPage || pathWithCurrentView('/map')} />
-  }
 
   return (
     <PageScrollWrapper>
@@ -93,4 +87,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default withAuthRedirect(LoginPage, false)

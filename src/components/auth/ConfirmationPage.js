@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import { confirmUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { withAuthRedirect } from './withAuthRedirect'
 
 const ConfirmationPage = () => {
   const history = useAppHistory()
@@ -39,4 +40,4 @@ const ConfirmationPage = () => {
   return null
 }
 
-export default ConfirmationPage
+export default withAuthRedirect(ConfirmationPage)
