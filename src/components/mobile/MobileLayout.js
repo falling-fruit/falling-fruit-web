@@ -4,7 +4,6 @@ import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 
 import aboutRoutes from '../about/aboutRoutes'
 import activityRoutes from '../activity/activityRoutes'
-import AccountPage from '../auth/AccountPage'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import EntryMobile from '../entry/EntryMobile'
@@ -134,9 +133,6 @@ const MobileLayout = () => {
                     </Route>
                     <Route path="/settings">
                       <SettingsPage />
-                    </Route>
-                    <Route path="/users/edit">
-                      <AccountPage />
                     </Route>
                   </Switch>
                 </Route>
