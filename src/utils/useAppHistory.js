@@ -32,6 +32,11 @@ export const useAppHistory = () => {
     history.push(newUrl, state)
   }
 
+  const replaceView = (newView, state) => {
+    const newUrl = currentPathWithView(newView)
+    history.replace(newUrl, state)
+  }
+
   const removeParam = (paramName) => {
     const searchParams = new URLSearchParams(location.search)
     searchParams.delete(paramName)
@@ -48,6 +53,7 @@ export const useAppHistory = () => {
     ...history,
     push: pushWithMapState,
     changeView,
+    replaceView,
     removeParam,
     pushToSignInPage,
   }
