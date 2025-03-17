@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { requestConfirmUser } from '../../utils/api'
-import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Column } from './AuthWrappers'
 import { EmailForm } from './EmailForm'
+import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const ConfirmationResendPage = () => {
@@ -38,7 +38,7 @@ const ConfirmationResendPage = () => {
       <h1>{t('users.resend_confirmation_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
-        <Link to={withFromPage('/users/sign_in')}>{t('users.sign_in')}</Link>
+        <SignInLink />
         <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
         <Link to="/users/password/new">{t('users.forgot_password')}</Link>
       </Column>

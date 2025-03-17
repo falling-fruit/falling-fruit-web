@@ -9,8 +9,9 @@ import styled from 'styled-components/macro'
 
 import { LanguageSelect } from '../../i18n'
 import { logout } from '../../redux/authSlice'
-import { pathWithCurrentView, withFromPage } from '../../utils/appUrl'
+import { pathWithCurrentView } from '../../utils/appUrl'
 import aboutRoutes from '../about/aboutRoutes'
+import SignInLink from '../auth/SignInLink'
 import Button from '../ui/Button'
 import ResetButton from '../ui/ResetButton'
 import SocialButtons from '../ui/SocialButtons'
@@ -295,10 +296,7 @@ const UserMenu = () => {
         ) : (
           <AuthLinksList>
             <NavLi className="signin">
-              <NavLink
-                to={withFromPage('/users/sign_in')}
-                activeClassName="active"
-              >
+              <NavLink to={SignInLink().props.to} activeClassName="active">
                 <Button secondary>{t('users.sign_in')}</Button>
               </NavLink>
             </NavLi>

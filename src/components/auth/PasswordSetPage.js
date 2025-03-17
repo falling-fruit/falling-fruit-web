@@ -1,12 +1,10 @@
 import { Form, Formik } from 'formik'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 import { resetPassword } from '../../utils/api'
-import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Input } from '../form/FormikWrappers'
@@ -17,6 +15,7 @@ import {
   FormButtonWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
+import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const getResetToken = () =>
@@ -110,7 +109,7 @@ const PasswordSetPage = () => {
         )}
       </Formik>
       <Column>
-        <Link to={withFromPage('/users/sign_in')}>{t('users.sign_in')}</Link>
+        <SignInLink />
       </Column>
     </PageTemplate>
   )

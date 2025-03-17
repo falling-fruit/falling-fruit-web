@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { requestResetPassword } from '../../utils/api'
-import { withFromPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PageTemplate } from '../about/PageTemplate'
 import { Column } from './AuthWrappers'
 import { EmailForm } from './EmailForm'
+import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const PasswordResetPage = () => {
@@ -38,7 +38,7 @@ const PasswordResetPage = () => {
       <h1>{t('users.send_password_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
-        <Link to={withFromPage('/users/sign_in')}>{t('users.sign_in')}</Link>
+        <SignInLink />
         <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
         <Link to="/users/confirmation/new">
           {t('users.resend_confirmation_instructions')}
