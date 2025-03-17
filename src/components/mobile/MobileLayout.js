@@ -5,12 +5,13 @@ import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 import aboutRoutes from '../about/aboutRoutes'
 import activityRoutes from '../activity/activityRoutes'
 import AccountPage from '../auth/AccountPage'
-import authRoutes, { isTabPath } from '../auth/authRoutes'
+import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import EntryMobile from '../entry/EntryMobile'
 import { formRoutesMobile } from '../form/formRoutes'
 import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
+import profileRoutes from '../profile/profileRoutes'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
 import { PageTabs, TabList, TabPanels } from '../ui/PageTabs'
@@ -118,6 +119,7 @@ const MobileLayout = () => {
                 {activityRoutes}
                 {aboutRoutes}
                 {authRoutes}
+                {profileRoutes}
                 <Route path={['/map', '/locations', '/list', '/settings']}>
                   <Switch>
                     <Route path="/locations/init" />
@@ -141,17 +143,11 @@ const MobileLayout = () => {
               </Switch>
             </TabPanels>
             <Switch>
-              <Route
-                path={[
-                  '/locations/:locationId/edit/:postfix',
-                  '/users/:userId',
-                  '*',
-                ]}
-              >
+              <Route path={'/profiles'} />
+              <Route path={['/locations/:locationId/edit/:postfix', '*']}>
                 {({ match }) =>
                   (!match.params.postfix ||
-                    match.params.postfix === 'position') &&
-                  (!match.params.userId || isTabPath(match.params.userId)) && (
+                    match.params.postfix === 'position') && (
                     <TabList
                       style={{
                         zIndex: zIndex.mobileTablist,
