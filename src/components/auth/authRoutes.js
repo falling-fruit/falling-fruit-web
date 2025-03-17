@@ -1,6 +1,5 @@
 import { Route } from 'react-router-dom'
 
-import UserProfile from '../profile/UserProfile'
 import AccountPage from './AccountPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
@@ -38,20 +37,9 @@ const pages = [
     path: '/users/confirmation',
     component: ConfirmationPage,
   },
-  {
-    path: ['/users/:id'],
-    component: UserProfile,
-  },
 ]
 
 export const authPages = pages
-
-const authTabPaths = ['edit', 'sign_in', 'sign_up', 'password', 'confirmation']
-
-export const isTabPath = (path) =>
-  authTabPaths.some(
-    (tabPath) => path === tabPath || path?.startsWith(`${tabPath}/`),
-  )
 
 const authRoutes = pages.map((props) => <Route key={props.path} {...props} />)
 export default authRoutes

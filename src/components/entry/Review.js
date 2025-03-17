@@ -93,7 +93,7 @@ const Review = ({
           {review.author && (
             <>
               {review.user_id ? (
-                <Link to={`/users/${review.user_id}`}>{review.author}</Link>
+                <Link to={`/profiles/${review.user_id}`}>{review.author}</Link>
               ) : (
                 review.author
               )}

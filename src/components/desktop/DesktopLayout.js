@@ -8,6 +8,7 @@ import activityRoutes from '../activity/activityRoutes'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import MapPage from '../map/MapPage'
+import profileRoutes from '../profile/profileRoutes'
 import Header from './Header'
 import SidePane from './SidePane'
 
@@ -55,6 +56,7 @@ const DesktopLayout = () => (
       {aboutRoutes}
       {activityRoutes}
       {authRoutes}
+      {profileRoutes}
       <Route>
         <WindowSize>
           {({ width: vw }) => (
