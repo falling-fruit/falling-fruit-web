@@ -81,7 +81,7 @@ const EditLocation = ({ NavComponent, withSettingsButton }) => {
           history.push(`/locations/${locationId}`)
         }}
       />
-      <LocationForm editingId={Number(location.id)} innerRef={formRef}/>
+      <LocationForm editingId={Number(locationId)} innerRef={formRef} />
       {withSettingsButton && (
         <DesktopButtonUnderForm
           formRef={formRef}
