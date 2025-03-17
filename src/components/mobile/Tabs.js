@@ -91,7 +91,7 @@ const Tabs = () => {
         history.push('/users/edit')
       } else {
         // Otherwise sign in
-        history.pushWithFromPage('/users/sign_in')
+        history.pushToSignInPage()
       }
     } else {
       history.push(tabs[newTabIndex]?.paths[0])

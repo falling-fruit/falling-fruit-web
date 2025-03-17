@@ -37,6 +37,15 @@ export const parseCurrentUrl = () => {
   return { path, view: { center: { lat, lng }, zoom } }
 }
 
+export const pathToSignInPage = () => {
+  const currentPath = window.location.pathname
+  if (currentPath.startsWith('/users')) {
+    return '/users/sign_in'
+  } else {
+    return `/users/sign_in?fromPage=${encodeURIComponent(currentPath)}`
+  }
+}
+
 export const pathWithCurrentView = (path) => {
   if (path.startsWith('#') || path.indexOf('/@') !== -1) {
     return path
@@ -52,11 +61,6 @@ export const pathWithCurrentView = (path) => {
   const pathNoTrailingSlash = path.replace(/\/*$/, '')
 
   return pathNoTrailingSlash + mapState
-}
-
-export const withFromPage = (path) => {
-  const currentPath = window.location.pathname
-  return `${path}?fromPage=${encodeURIComponent(currentPath)}`
 }
 
 export const currentPathWithView = (view) => {

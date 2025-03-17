@@ -2,8 +2,8 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import {
   currentPathWithView,
+  pathToSignInPage,
   pathWithCurrentView,
-  withFromPage,
 } from './appUrl'
 
 /**
@@ -40,8 +40,8 @@ export const useAppHistory = () => {
     history.replace(newPath)
   }
 
-  const pushWithFromPage = (path) => {
-    history.push(withFromPage(path))
+  const pushToSignInPage = () => {
+    history.push(pathToSignInPage())
   }
 
   return {
@@ -49,6 +49,6 @@ export const useAppHistory = () => {
     push: pushWithMapState,
     changeView,
     removeParam,
-    pushWithFromPage,
+    pushToSignInPage,
   }
 }
