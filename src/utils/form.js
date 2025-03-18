@@ -130,6 +130,13 @@ export const locationToForm = (
 })
 
 export const isTooClose = (location, existingLocations, editingId) => {
+  /*
+   * display-based threshold where a dot half-overlaps another at the max zoom level
+   * Given the (2 x pi x Earth radius) / (256 pixels x 2^zoom) = 0.0373 meters / pixel ratio of the Web Mercator projection at zoom level 22,
+   * and a pixel half-width of 8 pixels, that is a threshold of 0.3 m
+   * i.e. xDiff < 0.3 && yDiff < 0.3 (for Web Mercator x, y coordinates)
+   * or roughly latDiff < 0.27e-5 && lngDiff < 0.27e-5
+   */
   if (!location || !existingLocations || existingLocations.length === 0) {
     return false
   }
@@ -140,7 +147,7 @@ export const isTooClose = (location, existingLocations, editingId) => {
     } else {
       const latDiff = Math.abs(existingLocation.lat - location.lat)
       const lngDiff = Math.abs(existingLocation.lng - location.lng)
-      return latDiff + lngDiff < 1e-5
+      return latDiff < 0.27e-5 && lngDiff < 0.27e-5
     }
   })
 }
