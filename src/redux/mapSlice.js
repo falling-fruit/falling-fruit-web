@@ -4,7 +4,6 @@ import { eqBy, prop, unionWith } from 'ramda'
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
 import { addNewLocation, editExistingLocation } from './locationSlice'
-import { selectPlace } from './placeSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
@@ -137,10 +136,6 @@ export const mapSlice = createSlice({
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
-    },
-    [selectPlace]: (state, action) => {
-      state.googleMap.setCenter(action.payload.place.view.center)
-      state.googleMap.setZoom(action.payload.place.view.zoom)
     },
   },
 })

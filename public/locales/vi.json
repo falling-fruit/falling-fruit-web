@@ -122,6 +122,8 @@
     "zoom_in": "Phóng to bản đồ để xem dữ liệu vị trí"
   },
   "locations": {
+    "add_new": "Thêm mới",
+    "add_similar": "Thêm tương tự",
     "edit_position": {
       "cancel": "Hủy chỉnh sửa vị trí",
       "confirm": "Xác nhận chỉnh sửa vị trí",
@@ -161,7 +163,8 @@
       "cancel": "Hủy chọn vị trí",
       "choose_instructions": "Chọn vị trí cho địa điểm mới của bạn.",
       "confirm": "Xác nhận chọn vị trí",
-      "edit_instructions": "Chỉnh sửa vị trí cho địa điểm mới của bạn."
+      "edit_instructions": "Chỉnh sửa vị trí cho địa điểm mới của bạn.",
+      "position_too_close": "Chọn vị trí khác với vị trí của các địa điểm hiện có"
     },
     "overview": {
       "added_by": "Được thêm bởi {{name}}",
@@ -327,14 +330,14 @@
   "problems": {
     "description_subtext": "Bất kỳ thông tin nào có thể giúp chúng tôi đánh giá vấn đề",
     "problem_type": "Loại sự cố",
-    "problem_types": {
-      "0": "Địa điểm là spam",
-      "1": "Địa điểm không tồn tại",
-      "2": "Địa điểm bị trùng lặp",
-      "3": "Ảnh đánh giá không phù hợp",
-      "4": "Bình luận đánh giá không phù hợp",
-      "5": "Khác (giải thích bên dưới)"
-    }
+    "problem_types": [
+      "Địa điểm là spam",
+      "Địa điểm không tồn tại",
+      "Địa điểm bị trùng lặp",
+      "Ảnh đánh giá không phù hợp",
+      "Bình luận đánh giá không phù hợp",
+      "Khác (giải thích bên dưới)"
+    ]
   },
   "review": {
     "form": {

@@ -122,6 +122,8 @@
     "zoom_in": "Zoom in op de kaart om locatiegegevens te zien"
   },
   "locations": {
+    "add_new": "Voeg nieuwe toe",
+    "add_similar": "Voeg vergelijkbare toe",
     "edit_position": {
       "cancel": "Annuleer positie bewerken",
       "confirm": "Bevestig positie bewerken",
@@ -161,7 +163,8 @@
       "cancel": "Annuleer locatie kiezen",
       "choose_instructions": "Kies een positie voor uw nieuwe locatie.",
       "confirm": "Bevestig locatie kiezen",
-      "edit_instructions": "Bewerk positie voor uw nieuwe locatie."
+      "edit_instructions": "Bewerk positie voor uw nieuwe locatie.",
+      "position_too_close": "Kies een positie die verschilt van de posities van bestaande locaties"
     },
     "overview": {
       "added_by": "Toegevoegd door {{name}}",
@@ -327,14 +330,14 @@
   "problems": {
     "description_subtext": "Informatie die ons kan helpen bij het onderzoeken van het probleem",
     "problem_type": "Probleemsoort",
-    "problem_types": {
-      "0": "Locatie is spam",
-      "1": "Locatie bestaat niet",
-      "2": "Locatie is een duplicaat",
-      "3": "Ongepaste recensiefoto",
-      "4": "Ongepaste recensietekst",
-      "5": "Anders (hieronder toelichten)"
-    }
+    "problem_types": [
+      "Locatie is spam",
+      "Locatie bestaat niet",
+      "Locatie is een duplicaat",
+      "Ongepaste recensiefoto",
+      "Ongepaste recensietekst",
+      "Anders (hieronder toelichten)"
+    ]
   },
   "review": {
     "form": {

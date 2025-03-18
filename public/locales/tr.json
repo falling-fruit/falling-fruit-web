@@ -122,6 +122,8 @@
     "zoom_in": "Konum verilerini görmek için haritayı yakınlaştırın"
   },
   "locations": {
+    "add_new": "Yeni ekle",
+    "add_similar": "Benzer ekle",
     "edit_position": {
       "cancel": "Konum düzenlemeyi iptal et",
       "confirm": "Konum düzenlemeyi onayla",
@@ -161,7 +163,8 @@
       "cancel": "Konum seçimini iptal et",
       "choose_instructions": "Yeni konumunuz için bir pozisyon seçin.",
       "confirm": "Konum seçimini onayla",
-      "edit_instructions": "Yeni konumunuz için pozisyonu düzenleyin."
+      "edit_instructions": "Yeni konumunuz için pozisyonu düzenleyin.",
+      "position_too_close": "Mevcut konumların pozisyonlarından farklı bir pozisyon seçin"
     },
     "overview": {
       "added_by": "{{name}} tarafından eklendi",
@@ -327,14 +330,14 @@
   "problems": {
     "description_subtext": "Sorunu değerlendirmemize yardımcı olabilecek her türlü bilgi",
     "problem_type": "Sorun türü",
-    "problem_types": {
-      "0": "Konum spam içeriyor",
-      "1": "Konum mevcut değil",
-      "2": "Konum tekrar ediyor",
-      "3": "Uygunsuz inceleme fotoğrafı",
-      "4": "Uygunsuz inceleme yorumu",
-      "5": "Diğer (aşağıda açıklayın)"
-    }
+    "problem_types": [
+      "Konum spam içeriyor",
+      "Konum mevcut değil",
+      "Konum tekrar ediyor",
+      "Uygunsuz inceleme fotoğrafı",
+      "Uygunsuz inceleme yorumu",
+      "Diğer (aşağıda açıklayın)"
+    ]
   },
   "review": {
     "form": {

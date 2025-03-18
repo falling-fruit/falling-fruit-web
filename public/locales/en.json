@@ -122,6 +122,8 @@
     "zoom_in": "Zoom into the map to see location data"
   },
   "locations": {
+    "add_new": "Add new",
+    "add_similar": "Add similar",
     "edit_position": {
       "cancel": "Cancel edit position",
       "confirm": "Confirm edit position",
@@ -161,7 +163,8 @@
       "cancel": "Cancel choose location",
       "choose_instructions": "Choose a position for your new location.",
       "confirm": "Confirm choose location",
-      "edit_instructions": "Edit position for your new location."
+      "edit_instructions": "Edit position for your new location.",
+      "position_too_close": "Choose position different from positions of existing locations"
     },
     "overview": {
       "added_by": "Added by {{name}}",

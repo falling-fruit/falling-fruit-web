@@ -122,6 +122,8 @@
     "zoom_in": "Acerca el mapa para ver los datos de ubicación"
   },
   "locations": {
+    "add_new": "Añadir nuevo",
+    "add_similar": "Añadir similar",
     "edit_position": {
       "cancel": "Cancelar edición de posición",
       "confirm": "Confirmar edición de posición",
@@ -161,7 +163,8 @@
       "cancel": "Cancelar selección de ubicación",
       "choose_instructions": "Elija una posición para su nueva ubicación.",
       "confirm": "Confirmar selección de ubicación",
-      "edit_instructions": "Editar posición para su nueva ubicación."
+      "edit_instructions": "Editar posición para su nueva ubicación.",
+      "position_too_close": "Elija una posición diferente a las posiciones de ubicaciones existentes"
     },
     "overview": {
       "added_by": "Añadido por {{name}}",
@@ -327,14 +330,14 @@
   "problems": {
     "description_subtext": "Cualquier información que pueda ayudarnos a evaluar el problema",
     "problem_type": "Tipo de problema",
-    "problem_types": {
-      "0": "La ubicación es spam",
-      "1": "La ubicación no existe",
-      "2": "La ubicación está duplicada",
-      "3": "Foto de reseña inapropiada",
-      "4": "Comentario de reseña inapropiado",
-      "5": "Otro (explique abajo)"
-    }
+    "problem_types": [
+      "La ubicación es spam",
+      "La ubicación no existe",
+      "La ubicación está duplicada",
+      "Foto de reseña inapropiada",
+      "Comentario de reseña inapropiado",
+      "Otro (explique abajo)"
+    ]
   },
   "review": {
     "form": {

@@ -12,7 +12,6 @@ import SettingsButton from '../desktop/SettingsButton'
 import BackButton from '../ui/BackButton'
 import TopBar from '../ui/TopBar'
 import TopBarNav from '../ui/TopBarNav'
-import { EditLocationForm } from './EditLocation'
 import { EditReviewForm } from './EditReview'
 import { LocationForm } from './LocationForm'
 import { ReviewForm } from './ReviewForm'
@@ -82,7 +81,7 @@ const EditLocation = ({ NavComponent, withSettingsButton }) => {
           history.push(`/locations/${locationId}`)
         }}
       />
-      <EditLocationForm innerRef={formRef} />
+      <LocationForm editingId={Number(locationId)} innerRef={formRef} />
       {withSettingsButton && (
         <DesktopButtonUnderForm
           formRef={formRef}

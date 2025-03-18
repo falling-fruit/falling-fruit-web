@@ -92,6 +92,14 @@ const locationSlice = createSlice({
       state.pane.tabIndex = 0
       state.isBeingInitializedMobile = false
     },
+    duplicateIntoNewLocation: (state) => {
+      state.isLoading = false
+      state.isBeingEdited = false
+      state.locationId = 'new'
+      state.tooltipOpen = true
+      state.form = null
+      state.streetViewOpen = false
+    },
     initNewLocation: (state, action) => {
       state.isLoading = false
       state.location = null
@@ -212,7 +220,6 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.isBeingInitializedMobile = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      toast.success(i18next.t('success_message.location_submitted'))
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false
@@ -288,6 +295,7 @@ const locationSlice = createSlice({
 
 export const {
   initNewLocation,
+  duplicateIntoNewLocation,
   clearLocation,
   updatePosition,
   saveLocationFormValues,
