@@ -1,5 +1,5 @@
 import GoogleMapReact from 'google-map-react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
@@ -14,6 +14,8 @@ import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import throttle from '../../utils/throttle'
 import { useAppHistory } from '../../utils/useAppHistory'
+import Share from '../share/Share'
+import ShareIconButton from '../share/ShareIconButton'
 import AddLocationButton from '../ui/AddLocationButton'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import CloseStreetView from './CloseStreetView'
@@ -62,12 +64,40 @@ const ZoomButton = styled.button`
   z-index: 1;
 `
 
+const StyledIconButton = styled(ShareIconButton)`
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  ${({ isDesktop }) =>
+    isDesktop &&
+    `
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  `}
+  svg {
+    color: black;
+  }
+`
+
 const ZoomInButton = styled(ZoomButton)`
   top: calc(50% - 45px);
 `
 
 const ZoomOutButton = styled(ZoomButton)`
   top: calc(50% + 5px);
+`
+
+const ShareContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  width: 300px;
 `
 
 const EARTH_RADIUS = 6378137 // meters
@@ -160,6 +190,7 @@ const MapPage = ({ isDesktop }) => {
   const handleViewChangeRef = useRef(() => void 0)
 
   const [draggedPosition, setDraggedPosition] = useState(null)
+  const [shareOpen, setShareOpen] = useState(false)
 
   const {
     initialView,
@@ -281,6 +312,10 @@ const MapPage = ({ isDesktop }) => {
   const zoomOut = () => {
     googleMap?.setZoom(currentZoom - 1)
   }
+
+  const toggleShare = useCallback(() => {
+    setShareOpen((prev) => !prev)
+  }, [])
   return (
     <div
       style={
@@ -320,6 +355,27 @@ const MapPage = ({ isDesktop }) => {
       >
         -
       </ZoomOutButton>
+
+      {isDesktop && (
+        <>
+          {shareOpen ? (
+            <ShareContainer>
+              <Share onClose={() => setShareOpen(false)} />
+            </ShareContainer>
+          ) : (
+            <div
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                zIndex: 1,
+              }}
+            >
+              <StyledIconButton size={40} onClick={toggleShare} />
+            </div>
+          )}
+        </>
+      )}
 
       {isGeolocationOpen(geolocationState) && <ConnectGeolocation />}
 

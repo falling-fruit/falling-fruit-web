@@ -17,7 +17,7 @@ import { PageTabs, TabList, TabPanels } from '../ui/PageTabs'
 import TopBar from '../ui/TopBar'
 import EditLocationPositionNav from './EditLocationPositionNav'
 import InitLocationNav from './InitLocationNav'
-import SearchAndFilterTopBar from './SearchAndFilterTopBar'
+import NavigationBar from './NavigationBar'
 import Tabs from './Tabs'
 
 const shouldDisplayMapPage = (pathname) => {
@@ -114,7 +114,7 @@ const MobileLayout = () => {
               <Route path="/locations/:locationId/edit" />
               <Route
                 path={['/map', '/list', '/locations/:locationId']}
-                component={SearchAndFilterTopBar}
+                component={NavigationBar}
               />
             </Switch>
             <TabPanels style={{ paddingBottom: '50px' }}>

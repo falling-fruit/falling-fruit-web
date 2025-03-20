@@ -2,6 +2,8 @@ import { X } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import CloseButton from '../ui/CloseButton'
+
 const TooltipContainer = styled.div`
   position: absolute;
   background-color: ${({ theme }) => theme.background};
@@ -31,17 +33,6 @@ const TooltipContainer = styled.div`
 
 const TooltipContent = styled.div`
   padding: 8px;
-`
-
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.text};
-  cursor: pointer;
-  padding: 0;
-  position: absolute;
-  right: 4px;
-  top: 4px;
 `
 
 const Tooltip = ({ onClose }) => {
