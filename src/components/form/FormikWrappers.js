@@ -12,9 +12,35 @@ import { Slider } from '../ui/Slider'
 import Textarea from '../ui/Textarea'
 import { withLabeledField } from './withLabeledField'
 
-const DateInput = ({ $invalid: _$invalid, ...props }) => (
-  <input type="date" {...props} />
-)
+const DateInput = ({ $invalid: _$invalid, name, ...props }) => {
+  const [field, _meta, helpers] = useField(name)
+
+  const clearDate = () => {
+    helpers.setValue('')
+  }
+
+  return (
+    <div>
+      <input type="date" {...field} {...props} style={{ flexGrow: 1 }} />
+      {field.value && (
+        <button
+          type="button"
+          onClick={clearDate}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: '0 8px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}
+          aria-label="Clear date"
+        >
+          ✕
+        </button>
+      )}
+    </div>
+  )
+}
 
 const FormikInput = withLabeledField(Input)
 const FormikTextarea = withLabeledField(Textarea)

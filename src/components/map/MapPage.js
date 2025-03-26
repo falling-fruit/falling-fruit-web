@@ -44,6 +44,7 @@ const ZoomButton = styled.button`
   width: 40px;
   height: 40px;
   background-color: white;
+  color: ${({ theme }) => theme.headerText};
   ${({ isDesktop }) =>
     isDesktop &&
     `
