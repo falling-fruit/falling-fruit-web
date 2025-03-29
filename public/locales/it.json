@@ -348,6 +348,11 @@
     "update_delete": "Aggiorna o elimina questa recensione.",
     "you_reviewed": "Hai recensito questa posizione il {{date}}"
   },
+  "share": {
+    "title": "Condividi questa vista",
+    "url_copied": "URL copiato negli appunti!",
+    "url_copy_failed": "Impossibile copiare l'URL negli appunti"
+  },
   "success_message": {
     "location_edited": "Posizione modificata",
     "location_submitted": "Posizione inviata",

@@ -220,10 +220,19 @@ const MapPage = ({ isDesktop }) => {
   } = useSelector((state) => state.location)
   const {
     mapType,
-    mapLayers: layerTypes,
+    overlay,
     showLabels: settingsShowLabels,
     showBusinesses,
   } = useSelector((state) => state.settings)
+
+  // Convert overlay setting to mapLayers format expected by the map
+  const getLayerType = (overlayType) => {
+    if (overlayType === 'bicycle') {return 'BicycleLayer'}
+    if (overlayType === 'transit') {return 'TransitLayer'}
+    return overlayType
+  }
+
+  const layerTypes = overlay ? [getLayerType(overlay)] : []
 
   const { typesAccess } = useSelector((state) => state.type)
 

@@ -348,6 +348,11 @@
     "update_delete": "Actualizar o eliminar esta reseña.",
     "you_reviewed": "Reseñaste esta ubicación el {{date}}"
   },
+  "share": {
+    "title": "Compartir esta vista",
+    "url_copied": "¡URL copiada al portapapeles!",
+    "url_copy_failed": "¡Error al copiar la URL al portapapeles!"
+  },
   "success_message": {
     "location_edited": "Ubicación editada",
     "location_submitted": "Ubicación enviada",

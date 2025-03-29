@@ -348,6 +348,11 @@
     "update_delete": "تحديث أو حذف هذه المراجعة.",
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
+  "share": {
+    "title": "مشاركة هذا المنظر",
+    "url_copied": "تم نسخ الرابط إلى الحافظة!",
+    "url_copy_failed": "فشل نسخ الرابط إلى الحافظة"
+  },
   "success_message": {
     "location_edited": "تم تعديل الموقع!",
     "location_submitted": "تم إرسال الموقع!",

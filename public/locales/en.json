@@ -370,8 +370,8 @@
   },
   "share": {
     "title": "Share this view",
-    "url_copied": "URL copied to clipboard",
-    "url_copy_failed": "Failed to copy URL"
+    "url_copied": "URL copied to clipboard!",
+    "url_copy_failed": "Failed to copy URL to clipboard"
   },
   "users": {
     "bio": "About you",

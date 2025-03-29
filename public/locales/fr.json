@@ -348,6 +348,11 @@
     "update_delete": "Modifier ou supprimer cet avis.",
     "you_reviewed": "Vous avez évalué cet emplacement le {{date}}"
   },
+  "share": {
+    "title": "Partager cette vue",
+    "url_copied": "URL copiée dans le presse-papiers !",
+    "url_copy_failed": "Échec de la copie de l'URL dans le presse-papiers"
+  },
   "success_message": {
     "location_edited": "Emplacement modifié",
     "location_submitted": "Emplacement soumis",

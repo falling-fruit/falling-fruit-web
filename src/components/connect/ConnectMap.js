@@ -29,13 +29,13 @@ const ConnectMap = () => {
   }, [dispatch, hasInitialView]) //eslint-disable-line
 
   useEffect(() => {
-    if (hasInitialView && !parsedUrl.view) {
+    if (hasInitialView && !parsedUrl.view && googleMap) {
       history.replaceView({
         center: googleMap.getCenter().toJSON(),
         zoom: googleMap.getZoom(),
       })
     }
-  }, [dispatch, hasInitialView, !!parsedUrl.view]) //eslint-disable-line
+  }, [dispatch, hasInitialView, !!parsedUrl.view, !!googleMap]) //eslint-disable-line
 
   return null
 }

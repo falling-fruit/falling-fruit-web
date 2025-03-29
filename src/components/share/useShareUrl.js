@@ -1,15 +1,32 @@
 import { useSelector } from 'react-redux'
 
-/**
- * Custom hook to generate a shareable URL with the current map type
- * @returns {string} The shareable URL
- */
 const useShareUrl = () => {
-  const mapType = useSelector((state) => state.settings.mapType)
+  const { mapType, showLabels, overlay, showBusinesses } = useSelector(
+    (state) => state.settings,
+  )
+  const { muni, types } = useSelector((state) => state.filter)
+  const typeEncoder = useSelector((state) => state.type.typeEncoder)
 
-  // Create URL with mapType parameter
   const url = new URL(window.location.href)
-  url.searchParams.set('mapType', mapType)
+  if (mapType !== 'roadmap') {
+    url.searchParams.set('map', mapType)
+  }
+  if (showLabels) {
+    url.searchParams.set('labels', 'true')
+  }
+  if (overlay) {
+    url.searchParams.set('overlay', overlay)
+  }
+  if (!muni) {
+    url.searchParams.set('muni', 'false')
+  }
+  if (showBusinesses) {
+    url.searchParams.set('poi', 'true')
+  }
+  const encodedTypes = typeEncoder.encode(types)
+  if (encodedTypes !== 'default') {
+    url.searchParams.set('types', encodedTypes)
+  }
   return url.toString()
 }
 
