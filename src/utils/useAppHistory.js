@@ -29,7 +29,8 @@ export const useAppHistory = () => {
     history.push(newTo, state)
   }
   const replaceWithMapState = (to) => {
-    history.replace(pathWithCurrentView(to))
+    const newTo = pathWithCurrentView(to)
+    history.replace(newTo)
   }
 
   const changeView = (newView, state) => {
@@ -51,7 +52,8 @@ export const useAppHistory = () => {
   }
 
   const pushToSignInPage = () => {
-    history.push(pathToSignInPage())
+    const signInPath = pathToSignInPage()
+    history.push(signInPath)
   }
 
   const pushAndChangeView = (path, view, state) => {

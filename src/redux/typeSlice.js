@@ -4,12 +4,15 @@ import { toast } from 'react-toastify'
 
 import { addType, getTypes } from '../utils/api'
 import { typesAccessInLanguage } from '../utils/localizedTypes'
+import TypeShareEncoder from '../utils/typeShareEncoder'
 
 export const fetchAndLocalizeTypes = createAsyncThunk(
   'type/fetchAndLocalizeTypes',
   async (language) => {
     const types = await getTypes()
-    return typesAccessInLanguage(types, language)
+    const typesAccess = typesAccessInLanguage(types, language)
+    const typeEncoder = new TypeShareEncoder(typesAccess)
+    return { typesAccess, typeEncoder }
   },
 )
 
@@ -22,9 +25,11 @@ export const addTypeAndUpdate = createAsyncThunk(
       response,
       language,
     )
+    const typeEncoder = new TypeShareEncoder(updatedTypesAccess)
     return {
       newMenuEntry: updatedTypesAccess.getMenuEntry(response.id),
       updatedTypesAccess,
+      typeEncoder,
     }
   },
 )
@@ -34,6 +39,7 @@ const typeSlice = createSlice({
   initialState: {
     isLoading: false,
     typesAccess: typesAccessInLanguage([], ''),
+    typeEncoder: null,
     isAddTypeModalOpen: false,
   },
   reducers: {
@@ -49,11 +55,13 @@ const typeSlice = createSlice({
       state.isLoading = true
     },
     [fetchAndLocalizeTypes.fulfilled]: (state, action) => {
-      state.typesAccess = action.payload
+      state.typesAccess = action.payload.typesAccess
+      state.typeEncoder = action.payload.typeEncoder
       state.isLoading = false
     },
     [addTypeAndUpdate.fulfilled]: (state, action) => {
       state.typesAccess = action.payload.updatedTypesAccess
+      state.typeEncoder = action.payload.typeEncoder
       toast.success(i18next.t('success_message.type_added'))
       state.isAddTypeModalOpen = false
     },

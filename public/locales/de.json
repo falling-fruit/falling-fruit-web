@@ -348,6 +348,11 @@
     "update_delete": "Diese Bewertung aktualisieren oder löschen.",
     "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
   },
+  "share": {
+    "title": "Diese Ansicht teilen",
+    "url_copied": "URL in die Zwischenablage kopiert!",
+    "url_copy_failed": "URL konnte nicht in die Zwischenablage kopiert werden"
+  },
   "success_message": {
     "location_edited": "Standort erfolgreich bearbeitet!",
     "location_submitted": "Standort erfolgreich übermittelt!",

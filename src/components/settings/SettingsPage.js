@@ -225,23 +225,23 @@ const SettingsPage = ({ desktop }) => {
           options={[
             {
               label: t('pages.settings.bicycle'),
-              value: 'BicyclingLayer',
+              value: 'bicycle',
               image: GoogleBicycling,
             },
             {
               label: t('pages.settings.transit'),
-              value: 'TransitLayer',
+              value: 'transit',
               image: GoogleTransit,
             },
           ]}
-          value={settings.mapLayers.length === 0 ? null : settings.mapLayers[0]}
+          value={settings.overlay}
           onChange={(value) => {
-            if (value === settings.mapLayers[0]) {
+            if (value === settings.overlay) {
               value = null
             }
             dispatch(
               updateSettings({
-                mapLayers: value ? [value] : [],
+                overlay: value,
               }),
             )
           }}

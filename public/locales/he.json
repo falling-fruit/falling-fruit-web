@@ -348,6 +348,11 @@
     "update_delete": "עדכן או מחק ביקורת זו.",
     "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
   },
+  "share": {
+    "title": "שתף תצוגה זו",
+    "url_copied": "הכתובת הועתקה ללוח!",
+    "url_copy_failed": "העתקת הכתובת ללוח נכשלה"
+  },
   "success_message": {
     "location_edited": "המיקום נערך בהצלחה!",
     "location_submitted": "המיקום נשלח בהצלחה!",

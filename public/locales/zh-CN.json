@@ -348,6 +348,11 @@
     "update_delete": "更新或删除此评论",
     "you_reviewed": "您于 {{date}} 评论了此地点"
   },
+  "share": {
+    "title": "分享此视图",
+    "url_copied": "网址已复制到剪贴板！",
+    "url_copy_failed": "复制网址到剪贴板失败"
+  },
   "success_message": {
     "location_edited": "位置已编辑",
     "location_submitted": "位置已提交",
