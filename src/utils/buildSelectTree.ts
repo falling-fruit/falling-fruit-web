@@ -119,7 +119,12 @@ class SelectTreeBuilder {
       : type.scientificName
 
     const ownCount = this.getCount(type.id)
-    if (children.length && ownCount > 0 && matchesSearch) {
+    if (
+      children.length &&
+      (ownCount > 0 ||
+        (!this.showOnlyOnMap && this.typesAccess.isSelectable(type.id))) &&
+      matchesSearch
+    ) {
       const childNode: RenderTreeNode = {
         ...node,
         id: -type.id, // Use negative ID to ensure uniqueness
