@@ -137,6 +137,10 @@ export class TypesAccess {
     return this.localizedTypes.filter((t) => t.id !== PENDING_ID)
   }
 
+  isSelectable(id: Id): boolean {
+    return id !== PENDING_ID
+  }
+
   getType(id: Id): LocalizedType {
     return this.localizedTypes[this.idIndex[id]]
   }
