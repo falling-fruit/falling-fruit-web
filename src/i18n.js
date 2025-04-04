@@ -24,7 +24,7 @@ export const LANGUAGE_OPTIONS = [
   { value: 'it', label: 'Italiano' },
   { value: 'nl', label: 'Nederlands' },
   { value: 'pl', label: 'Polski' },
-  { value: 'pt-br', label: 'Português' },
+  { value: 'pt-BR', label: 'Português' },
   { value: 'sv', label: 'Svenska' },
   { value: 'tr', label: 'Türkçe' },
   { value: 'uk-UA', label: 'Українська' },
