@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "Lämna en recension",
       "observed_on": "Observerad den {{date}}",
-      "upload_images": "Ladda upp bilder"
+      "photos": "Foton"
     },
     "update_delete": "Uppdatera eller ta bort denna recension.",
     "you_reviewed": "Du recenserade denna plats den {{date}}"
