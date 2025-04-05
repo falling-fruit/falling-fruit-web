@@ -101,6 +101,12 @@ const Filter = () => {
               )
               dispatch(selectionChanged(remainingSelection))
             }}
+            isSelectAllDisabled={visibleTypeIds.every((typeId) =>
+              types.includes(typeId),
+            )}
+            isDeselectAllDisabled={visibleTypeIds.every(
+              (typeId) => !types.includes(typeId),
+            )}
           />
         </TreeFiltersContainer>
         {typesAccess.isEmpty ? (

@@ -14,21 +14,34 @@ const FilterButtonsContainer = styled.div`
       margin-right: 5px;
     }
 
-    &:hover {
+    &:not(:disabled):hover {
       background-color: ${({ theme }) => theme.tertiaryText};
       border-color: ${({ theme }) => theme.tertiaryText};
     }
   }
 `
 
-const FilterButtons = ({ onSelectAllClick, onDeselectAllClick }) => {
+const FilterButtons = ({
+  onSelectAllClick,
+  onDeselectAllClick,
+  isSelectAllDisabled,
+  isDeselectAllDisabled,
+}) => {
   const { t } = useTranslation()
   return (
     <FilterButtonsContainer>
-      <Button secondary onClick={onSelectAllClick}>
+      <Button
+        secondary
+        onClick={onSelectAllClick}
+        disabled={isSelectAllDisabled}
+      >
         {t('filter.select_all')}
       </Button>
-      <Button secondary onClick={onDeselectAllClick}>
+      <Button
+        secondary
+        onClick={onDeselectAllClick}
+        disabled={isDeselectAllDisabled}
+      >
         {t('filter.deselect_all')}
       </Button>
     </FilterButtonsContainer>
