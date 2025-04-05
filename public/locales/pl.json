@@ -348,6 +348,11 @@
     "update_delete": "Zaktualizuj lub usuń tę recenzję.",
     "you_reviewed": "Zrecenzowałeś tę lokalizację {{date}}"
   },
+  "share": {
+    "title": "Udostępnij ten widok",
+    "url_copied": "URL skopiowany do schowka!",
+    "url_copy_failed": "Nie udało się skopiować URL do schowka"
+  },
   "success_message": {
     "location_edited": "Lokalizacja została edytowana!",
     "location_submitted": "Lokalizacja została przesłana!",

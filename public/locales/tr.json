@@ -348,6 +348,11 @@
     "update_delete": "Bu değerlendirmeyi güncelle veya sil.",
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
   },
+  "share": {
+    "title": "Bu görünümü paylaş",
+    "url_copied": "URL panoya kopyalandı!",
+    "url_copy_failed": "URL panoya kopyalanamadı"
+  },
   "success_message": {
     "location_edited": "Konum başarıyla düzenlendi!",
     "location_submitted": "Konum başarıyla gönderildi!",

@@ -21,11 +21,13 @@ import {
   openFilter,
 } from '../../redux/filterSlice'
 import { clearSelectedPlace, selectPlace } from '../../redux/placeSlice'
+import { closeShare, openShare } from '../../redux/shareSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { getPlaceBounds, getZoomedInView } from '../../utils/viewportBounds'
 import FilterIconButton from '../filter/FilterIconButton'
 import TrackLocationButton from '../map/TrackLocationButton'
+import ShareIconButton from '../share/ShareIconButton'
 import Input from '../ui/Input'
 import ClearSearchButton from './ClearSearch'
 import SearchEntry from './SearchEntry'
@@ -88,6 +90,7 @@ const Search = (props) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const filterOpen = useSelector((state) => state.filter.isOpenInMobileLayout)
+  const shareOpen = useSelector((state) => state.share.isOpenInMobileLayout)
   const selectedPlace = useSelector((state) => state.place.selectedPlace)
   // Reach's Combobox only passes the ComboboxOption's value to handleSelect, so we will
   // keep a map of the value to the place id, which handleSelect also needs
@@ -219,17 +222,36 @@ const Search = (props) => {
         />
 
         {!isDesktop && (
-          <FilterIconButton
-            pressed={filterOpen}
-            onClick={() => {
-              if (filterOpen) {
-                dispatch(closeFilter())
-              } else {
-                dispatch(openFilter())
-                dispatch(fetchFilterCounts())
-              }
-            }}
-          />
+          <>
+            <FilterIconButton
+              pressed={filterOpen}
+              onClick={() => {
+                if (filterOpen) {
+                  dispatch(closeFilter())
+                } else {
+                  dispatch(openFilter())
+                  dispatch(fetchFilterCounts())
+                  if (shareOpen) {
+                    dispatch(closeShare())
+                  }
+                }
+              }}
+            />
+            <ShareIconButton
+              size={45}
+              pressed={shareOpen}
+              onClick={() => {
+                if (shareOpen) {
+                  dispatch(closeShare())
+                } else {
+                  dispatch(openShare())
+                  if (filterOpen) {
+                    dispatch(closeFilter())
+                  }
+                }
+              }}
+            />
+          </>
         )}
       </SearchBarContainer>
       {suggestionsList.length > 0 && (

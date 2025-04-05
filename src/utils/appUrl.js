@@ -51,16 +51,39 @@ export const pathWithCurrentView = (path) => {
     return path
   }
 
-  const { pathname } = new URL(window.location.href)
+  // Check for current URL path state
+  const { pathname, search } = new URL(window.location.href)
   const mapStateIndex = pathname.indexOf('/@')
+
+  // Check for legacy x,y,z parameters in the URL
+  const searchParams = new URLSearchParams(search)
+  const legacyLat = searchParams.get('x')
+  const legacyLng = searchParams.get('y')
+  const legacyZoom = searchParams.get('z')
+
+  // If we have legacy coordinates, use them
+  if (legacyLat && legacyLng && legacyZoom) {
+    const lat = parseFloat(legacyLat)
+    const lng = parseFloat(legacyLng)
+    const zoom = parseInt(legacyZoom, 10)
+
+    if (!isNaN(lat) && !isNaN(lng) && !isNaN(zoom)) {
+      const pathNoTrailingSlash = path.replace(/\/*$/, '')
+      return `${pathNoTrailingSlash}/${viewToString(lat, lng, zoom)}${search}`
+    }
+  }
+
+  // Otherwise use the path state if it exists
   if (mapStateIndex === -1) {
-    return path
+    // Preserve search parameters
+    return search ? `${path}${search}` : path
   }
 
   const mapState = pathname.substring(mapStateIndex)
   const pathNoTrailingSlash = path.replace(/\/*$/, '')
 
-  return pathNoTrailingSlash + mapState
+  // Preserve search parameters
+  return `${pathNoTrailingSlash}${mapState}${search}`
 }
 
 export const currentPathWithView = (view) => {

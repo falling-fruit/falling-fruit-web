@@ -348,6 +348,11 @@
     "update_delete": "Atualizar ou excluir esta avaliação.",
     "you_reviewed": "Você avaliou esta localização em {{date}}"
   },
+  "share": {
+    "title": "Compartilhar esta visualização",
+    "url_copied": "URL copiada para a área de transferência!",
+    "url_copy_failed": "Falha ao copiar URL para a área de transferência"
+  },
   "success_message": {
     "location_edited": "Local editado",
     "location_submitted": "Local enviado",
