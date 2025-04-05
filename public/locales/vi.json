@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "Viết đánh giá",
       "observed_on": "Quan sát vào {{date}}",
-      "upload_images": "Tải ảnh lên"
+      "photos": "Hình ảnh"
     },
     "update_delete": "Cập nhật hoặc xóa đánh giá này.",
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"

@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "Değerlendirme yap",
       "observed_on": "Gözlemlenme tarihi {{date}}",
-      "upload_images": "Fotoğraf yükle"
+      "photos": "Fotoğraflar"
     },
     "update_delete": "Bu değerlendirmeyi güncelle veya sil.",
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"

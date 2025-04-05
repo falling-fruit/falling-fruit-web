@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "Schrijf een recensie",
       "observed_on": "Waargenomen op {{date}}",
-      "upload_images": "Afbeeldingen uploaden"
+      "photos": "Foto's"
     },
     "update_delete": "Deze recensie bijwerken of verwijderen.",
     "you_reviewed": "U heeft deze locatie beoordeeld op {{date}}"

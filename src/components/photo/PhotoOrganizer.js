@@ -1,5 +1,5 @@
-import { CloudUpload } from '@styled-icons/boxicons-regular'
-import { CloudUpload as CloudUploadSolid } from '@styled-icons/boxicons-solid'
+import { Camera } from '@styled-icons/boxicons-regular'
+import { PlusCircle } from '@styled-icons/boxicons-solid'
 import { useRef } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components/macro'
@@ -15,12 +15,12 @@ const StyledDropzone = styled.div`
   transition: color 0.3s ease;
   padding: 0.5em;
 `
-const IconUploadStyled = styled(CloudUpload)`
+const CameraIconStyled = styled(Camera)`
   width: 100%;
   height: 100%;
 `
 
-const IconUploadSolidStyled = styled(CloudUploadSolid)`
+const PlusIconStyled = styled(PlusCircle)`
   width: 100%;
   height: 100%;
 `
@@ -56,7 +56,7 @@ export const PhotoOrganizer = ({ photos, onChange }) => {
       <StyledDropzone {...getRootProps()} isDragActive={isDragActive}>
         <input {...getInputProps()} />
 
-        {isDragActive ? <IconUploadSolidStyled /> : <IconUploadStyled />}
+        {isDragActive ? <PlusIconStyled /> : <CameraIconStyled />}
       </StyledDropzone>
       <PhotoList photos={photos} onChange={onChange} />
     </>

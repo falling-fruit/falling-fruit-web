@@ -113,10 +113,7 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
         />
       </FormRatingWrapper>
 
-      <PhotoUploader
-        name="review.photos"
-        label={t('review.form.upload_images')}
-      />
+      <PhotoUploader name="review.photos" label={t('review.form.photos')} />
     </>
   )
 }

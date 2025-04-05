@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "Lascia una recensione",
       "observed_on": "Osservato il {{date}}",
-      "upload_images": "Carica immagini"
+      "photos": "Foto"
     },
     "update_delete": "Aggiorna o elimina questa recensione.",
     "you_reviewed": "Hai recensito questa posizione il {{date}}"

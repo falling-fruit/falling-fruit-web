@@ -330,20 +330,20 @@
   "problems": {
     "description_subtext": "Any information that might help us evaluate the problem",
     "problem_type": "Problem type",
-    "problem_types": {
-      "0": "Location is spam",
-      "1": "Location does not exist",
-      "2": "Location is a duplicate",
-      "3": "Inappropriate review photo",
-      "4": "Inappropriate review comment",
-      "5": "Other (explain below)"
-    }
+    "problem_types": [
+      "Location is spam",
+      "Location does not exist",
+      "Location is a duplicate",
+      "Inappropriate review photo",
+      "Inappropriate review comment",
+      "Other (explain below)"
+    ]
   },
   "review": {
     "form": {
       "leave_a_review": "Leave a review",
       "observed_on": "Observed on {{date}}",
-      "upload_images": "Upload images"
+      "photos": "Photos"
     },
     "update_delete": "Update or delete this review.",
     "you_reviewed": "You reviewed this location on {{date}}"

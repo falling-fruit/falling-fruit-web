@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "כתוב ביקורת",
       "observed_on": "נצפה בתאריך {{date}}",
-      "upload_images": "העלה תמונות"
+      "photos": "תמונות"
     },
     "update_delete": "עדכן או מחק ביקורת זו.",
     "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
