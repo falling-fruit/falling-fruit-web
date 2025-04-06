@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
@@ -304,14 +303,6 @@ const SettingsPage = ({ desktop }) => {
         <>
           <h3>{t('pages.settings.regional')}</h3>
 
-          <LabeledRow
-            label={
-              <label htmlFor="languagePreference">
-                {t('pages.settings.language')}
-              </label>
-            }
-            right={<LanguageSelect></LanguageSelect>}
-          />
           <LabeledRow
             label={
               <label htmlFor="distanceUnit">

@@ -3,6 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
 import { useState } from 'react'
 import { initReactI18next, useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import { Select } from './components/ui/Select'
@@ -34,6 +35,7 @@ export const LANGUAGE_OPTIONS = [
 
 const LanguageSelect = () => {
   const { t, i18n } = useTranslation()
+  const { googleMap } = useSelector((state) => state.map)
   const [hasToasted, setHasToasted] = useState(false)
   return (
     <Select
@@ -43,7 +45,7 @@ const LanguageSelect = () => {
         i18n.changeLanguage(option.value, () => {
           localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
           setDocumentDir(option.value)
-          if (!hasToasted) {
+          if (!hasToasted && googleMap) {
             toast.info(
               t('error_message.language_changed_refresh_to_reload_map'),
             )

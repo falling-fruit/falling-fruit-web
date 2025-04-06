@@ -2,16 +2,33 @@ import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import { LanguageSelect } from '../../i18n'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsMobile } from '../../utils/useBreakpoint'
 import BackButton from '../ui/BackButton'
+
+const MobileHeader = styled.div`
+  width: 100%;
+  text-align: center;
+
+  img {
+    height: 10vh;
+    width: auto;
+  }
+`
+
+const LanguageContainer = styled.div`
+  margin: 0 0 0 auto;
+  max-width: 120px;
+  text-align: right;
+`
 
 const PageScrollWrapper = styled.div`
   width: 100%;
   overflow-y: auto;
 `
 
-const PageTemplateWrapper = styled.article`
+const PageWrapper = styled.article`
   max-width: 950px;
   width: 66%;
   height: inherit;
@@ -35,6 +52,7 @@ const PageTemplateWrapper = styled.article`
   }
 
   h1 {
+    margin-top: 0.5em;
     font-size: 2.286rem;
   }
 
@@ -112,23 +130,47 @@ const StyledBackButton = styled(BackButton)`
   }
 `
 
-const PageTemplate = ({ children, backToSettingsOnMobile }) => {
+const InfoPage = ({ children }) => {
   const history = useAppHistory()
   const isMobile = useIsMobile()
   const { t } = useTranslation()
 
   return (
-    <PageTemplateWrapper>
-      {backToSettingsOnMobile && isMobile && (
-        <StyledBackButton onClick={() => history.push('/settings')}>
-          <ArrowBack />
-          {t('layouts.back')}
-        </StyledBackButton>
-      )}
+    <PageScrollWrapper>
+      <PageWrapper>
+        {isMobile && (
+          <StyledBackButton onClick={() => history.push('/settings')}>
+            <ArrowBack />
+            {t('layouts.back')}
+          </StyledBackButton>
+        )}
 
-      {children}
-    </PageTemplateWrapper>
+        {children}
+      </PageWrapper>
+    </PageScrollWrapper>
   )
 }
 
-export { PageScrollWrapper, PageTemplate }
+const AuthPage = ({ children }) => {
+  const isMobile = useIsMobile()
+
+  return (
+    <PageScrollWrapper>
+      <PageWrapper>
+        {isMobile && (
+          <MobileHeader>
+            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+          </MobileHeader>
+        )}
+        {isMobile && (
+          <LanguageContainer>
+            <LanguageSelect />
+          </LanguageContainer>
+        )}
+        {children}
+      </PageWrapper>
+    </PageScrollWrapper>
+  )
+}
+
+export { AuthPage, InfoPage }

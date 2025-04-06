@@ -6,9 +6,9 @@ import * as Yup from 'yup'
 
 import { resetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { PageTemplate } from '../about/PageTemplate'
 import { Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
+import { AuthPage } from '../ui/PageTemplate'
 import {
   Column,
   ErrorMessage,
@@ -53,7 +53,7 @@ const PasswordSetPage = () => {
   }
 
   return (
-    <PageTemplate>
+    <AuthPage>
       <h1>{t('users.change_password')}</h1>
       <Formik
         initialValues={{
@@ -111,7 +111,7 @@ const PasswordSetPage = () => {
       <Column>
         <SignInLink />
       </Column>
-    </PageTemplate>
+    </AuthPage>
   )
 }
 

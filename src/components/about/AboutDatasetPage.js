@@ -12,7 +12,7 @@ import BackButton from '../ui/BackButton'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
-import { PageScrollWrapper, PageTemplate } from './PageTemplate'
+import { InfoPage } from '../ui/PageTemplate'
 
 const StyledNavBack = styled.div`
   svg {
@@ -49,56 +49,54 @@ const AboutDatasetPage = () => {
     importData
 
   return (
-    <PageScrollWrapper>
-      <PageTemplate>
-        <StyledNavBack>
-          <BackButton
-            onClick={(event) => {
-              event.stopPropagation()
-              history.goBack()
-            }}
-          >
-            <ArrowBack />
-            {t('layouts.back')}
-          </BackButton>
-        </StyledNavBack>
-        <h3>
-          Import #{id}: {name}
-        </h3>
-        <a href={url} target="_blank" rel="noreferrer">
-          {url}
-        </a>
-        <p style={{ whiteSpace: 'pre-line' }}>{comments}</p>
+    <InfoPage>
+      <StyledNavBack>
+        <BackButton
+          onClick={(event) => {
+            event.stopPropagation()
+            history.goBack()
+          }}
+        >
+          <ArrowBack />
+          {t('layouts.back')}
+        </BackButton>
+      </StyledNavBack>
+      <h3>
+        Import #{id}: {name}
+      </h3>
+      <a href={url} target="_blank" rel="noreferrer">
+        {url}
+      </a>
+      <p style={{ whiteSpace: 'pre-line' }}>{comments}</p>
+      <IconBesideText>
+        <Pin color={theme.secondaryText} size={20} />
+        <p>
+          {muni
+            ? t('glossary.tree_inventory.one')
+            : t('pages.datasets.community_map')}
+        </p>
+      </IconBesideText>
+      <IconBesideText>
+        <MapPin color={theme.secondaryText} size={20} />
+        <p>{`${location_count} ${t('pages.datasets.locations')}`}</p>
+      </IconBesideText>
+      <IconBesideText>
+        <Calendar color={theme.secondaryText} size={20} />
+        <p>
+          <time dateTime={created_at}>
+            {t('pages.datasets.imported_on', {
+              date: formatISOString(created_at, i18n.language),
+            })}
+          </time>
+        </p>
+      </IconBesideText>
+      {license && (
         <IconBesideText>
-          <Pin color={theme.secondaryText} size={20} />
-          <p>
-            {muni
-              ? t('glossary.tree_inventory.one')
-              : t('pages.datasets.community_map')}
-          </p>
+          <Copyright color={theme.secondaryText} size={20} />
+          <p>{license} </p>
         </IconBesideText>
-        <IconBesideText>
-          <MapPin color={theme.secondaryText} size={20} />
-          <p>{`${location_count} ${t('pages.datasets.locations')}`}</p>
-        </IconBesideText>
-        <IconBesideText>
-          <Calendar color={theme.secondaryText} size={20} />
-          <p>
-            <time dateTime={created_at}>
-              {t('pages.datasets.imported_on', {
-                date: formatISOString(created_at, i18n.language),
-              })}
-            </time>
-          </p>
-        </IconBesideText>
-        {license && (
-          <IconBesideText>
-            <Copyright color={theme.secondaryText} size={20} />
-            <p>{license} </p>
-          </IconBesideText>
-        )}
-      </PageTemplate>
-    </PageScrollWrapper>
+      )}
+    </InfoPage>
   )
 }
 

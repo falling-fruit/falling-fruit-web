@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import pressData from '../../constants/data/press.json'
-import { PageScrollWrapper, PageTemplate } from './PageTemplate'
+import { InfoPage } from '../ui/PageTemplate'
 
 const TimelineSection = styled.section`
   ol {
@@ -115,23 +115,18 @@ const InThePressPage = () => {
   years.sort().reverse()
 
   return (
-    <PageScrollWrapper>
-      <PageTemplate backToSettingsOnMobile>
-        {years.map((year) => (
-          <TimelineSection key={year}>
-            <h2>{year}</h2>
-            <ol>
-              {pressData[year].map((data) => (
-                <TimelineItem
-                  key={data.title + data.published_on}
-                  data={data}
-                />
-              ))}
-            </ol>
-          </TimelineSection>
-        ))}
-      </PageTemplate>
-    </PageScrollWrapper>
+    <InfoPage>
+      {years.map((year) => (
+        <TimelineSection key={year}>
+          <h2>{year}</h2>
+          <ol>
+            {pressData[year].map((data) => (
+              <TimelineItem key={data.title + data.published_on} data={data} />
+            ))}
+          </ol>
+        </TimelineSection>
+      ))}
+    </InfoPage>
   )
 }
 

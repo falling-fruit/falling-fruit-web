@@ -9,7 +9,7 @@ import {
   setAnchorElementId,
 } from '../../redux/activitySlice'
 import { transformActivityData } from '../../utils/transformActivityData'
-import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
+import { InfoPage } from '../ui/PageTemplate'
 import ChangesPeriod from './ChangesPeriod'
 
 const SkeletonWrapper = styled.div`
@@ -83,19 +83,17 @@ const ActivityPage = () => {
   const groupedData = transformActivityData(locationChanges, typesAccess)
 
   return (
-    <PageScrollWrapper>
-      <PageTemplate backToSettingsOnMobile>
-        <h1>{t('pages.changes.recent_changes')}</h1>
-        {locationChanges.length > 0 &&
-          groupedData.map((period) => (
-            <ChangesPeriod key={period.daysAgo} period={period} />
-          ))}
-        <div ref={loadMoreRef}></div>
-        {isLoading && (
-          <SkeletonLoader count={locationChanges.length === 0 ? 5 : 1} />
-        )}
-      </PageTemplate>
-    </PageScrollWrapper>
+    <InfoPage>
+      <h1>{t('pages.changes.recent_changes')}</h1>
+      {locationChanges.length > 0 &&
+        groupedData.map((period) => (
+          <ChangesPeriod key={period.daysAgo} period={period} />
+        ))}
+      <div ref={loadMoreRef}></div>
+      {isLoading && (
+        <SkeletonLoader count={locationChanges.length === 0 ? 5 : 1} />
+      )}
+    </InfoPage>
   )
 }
 
