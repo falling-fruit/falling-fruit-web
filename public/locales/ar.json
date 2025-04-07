@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "اترك مراجعة",
       "observed_on": "تمت الملاحظة في {{date}}",
-      "upload_images": "تحميل الصور"
+      "photos": "صور"
     },
     "update_delete": "تحديث أو حذف هذه المراجعة.",
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
