@@ -11,7 +11,7 @@ import { Checkbox, Input, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { AuthPage } from '../ui/PageTemplate'
+import { Page } from '../ui/PageTemplate'
 import {
   ErrorMessage,
   FormButtonWrapper,
@@ -62,7 +62,7 @@ const AccountPage = () => {
   }
 
   return (
-    <AuthPage>
+    <Page>
       <h1>{t('users.edit_account')}</h1>
 
       {user ? (
@@ -189,7 +189,7 @@ const AccountPage = () => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </AuthPage>
+    </Page>
   )
 }
 
