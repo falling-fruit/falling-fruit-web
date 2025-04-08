@@ -12,7 +12,7 @@ import BackButton from '../ui/BackButton'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
-import { InfoPage } from '../ui/PageTemplate'
+import { Page } from '../ui/PageTemplate'
 
 const StyledNavBack = styled.div`
   svg {
@@ -49,7 +49,7 @@ const AboutDatasetPage = () => {
     importData
 
   return (
-    <InfoPage>
+    <Page>
       <StyledNavBack>
         <BackButton
           onClick={(event) => {
@@ -96,7 +96,7 @@ const AboutDatasetPage = () => {
           <p>{license} </p>
         </IconBesideText>
       )}
-    </InfoPage>
+    </Page>
   )
 }
 
