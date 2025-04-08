@@ -7,12 +7,12 @@ import styled from 'styled-components/macro'
 
 import { getUserById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { PageScrollWrapper, PageTemplate } from '../about/PageTemplate'
 import { formatISOString } from '../entry/textFormatters'
 import BackButton from '../ui/BackButton'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
+import { Page } from '../ui/PageTemplate'
 
 const StyledNavBack = styled.div`
   svg {
@@ -48,40 +48,38 @@ const UserProfile = () => {
   const { created_at, name, bio } = userData
 
   return (
-    <PageScrollWrapper>
-      <PageTemplate>
-        <StyledNavBack>
-          <BackButton
-            onClick={(event) => {
-              event.stopPropagation()
-              anchorElementId ? history.push('/changes') : history.goBack()
-            }}
-          >
-            <ArrowBack />
-            {t('layouts.back')}
-          </BackButton>
-        </StyledNavBack>
-        <h3>{t('users.profile.title', { name })}</h3>
-        {bio && (
-          <IconBesideText>
-            <User size={20} />
-            <p>
-              <i>{bio}</i>
-            </p>
-          </IconBesideText>
-        )}
+    <Page>
+      <StyledNavBack>
+        <BackButton
+          onClick={(event) => {
+            event.stopPropagation()
+            anchorElementId ? history.push('/changes') : history.goBack()
+          }}
+        >
+          <ArrowBack />
+          {t('layouts.back')}
+        </BackButton>
+      </StyledNavBack>
+      <h3>{t('users.profile.title', { name })}</h3>
+      {bio && (
         <IconBesideText>
-          <Calendar color={theme.secondaryText} size={20} />
+          <User size={20} />
           <p>
-            <time dateTime={created_at}>
-              {t('users.joined_on', {
-                date: formatISOString(created_at, i18n.language),
-              })}
-            </time>
+            <i>{bio}</i>
           </p>
         </IconBesideText>
-      </PageTemplate>
-    </PageScrollWrapper>
+      )}
+      <IconBesideText>
+        <Calendar color={theme.secondaryText} size={20} />
+        <p>
+          <time dateTime={created_at}>
+            {t('users.joined_on', {
+              date: formatISOString(created_at, i18n.language),
+            })}
+          </time>
+        </p>
+      </IconBesideText>
+    </Page>
   )
 }
 

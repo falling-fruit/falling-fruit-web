@@ -1,7 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css'
 
 import { WindowSize } from '@reach/window-size'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
@@ -14,13 +14,25 @@ import AuthInitializer from './utils/AuthInitializer'
 import { ConnectedBreakpoint, useIsDesktop } from './utils/useBreakpoint'
 import { useGoogleAnalytics } from './utils/useGoogleAnalytics'
 
-const App = () => {
-  useGoogleAnalytics()
+const HomeRedirect = () => {
+  const { user, isLoading } = useSelector((state) => state.auth)
+  if (isLoading) {
+    return null
+  } else if (user) {
+    return <Redirect to={pathWithCurrentView('/map')} />
+  } else {
+    return <Redirect to="/users/sign_in" />
+  }
+}
+
+const AppContent = () => {
+  const isDesktop = useIsDesktop()
+
   return (
-    <Provider store={store}>
+    <>
       <AuthInitializer />
       <Toast
-        position={useIsDesktop() ? 'bottom-right' : 'top-center'}
+        position={isDesktop ? 'bottom-right' : 'top-center'}
         autoClose={3000}
         closeOnClick
         rtl={false}
@@ -28,7 +40,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/">
-            <Redirect to={pathWithCurrentView('/map')} />
+            <HomeRedirect />
           </Route>
           <Route>
             <MainPage />
@@ -39,6 +51,16 @@ const App = () => {
         </WindowSize>
         <ConnectedBreakpoint />
       </ThemeProvider>
+    </>
+  )
+}
+
+const App = () => {
+  useGoogleAnalytics()
+
+  return (
+    <Provider store={store}>
+      <AppContent />
     </Provider>
   )
 }

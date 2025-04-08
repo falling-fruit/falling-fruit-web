@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 import { requestConfirmUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { PageTemplate } from '../about/PageTemplate'
+import { AuthPage } from '../ui/PageTemplate'
 import { Column } from './AuthWrappers'
 import { EmailForm } from './EmailForm'
 import SignInLink from './SignInLink'
@@ -34,7 +34,7 @@ const ConfirmationResendPage = () => {
   }
 
   return (
-    <PageTemplate>
+    <AuthPage>
       <h1>{t('users.resend_confirmation_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
@@ -42,7 +42,7 @@ const ConfirmationResendPage = () => {
         <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
         <Link to="/users/password/new">{t('users.forgot_password')}</Link>
       </Column>
-    </PageTemplate>
+    </AuthPage>
   )
 }
 
