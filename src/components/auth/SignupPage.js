@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
@@ -11,6 +12,7 @@ import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
 import {
+  Column,
   ErrorMessage,
   FormButtonWrapper,
   FormInputWrapper,
@@ -144,6 +146,13 @@ const SignupPage = () => {
           </Form>
         )}
       </Formik>
+      <Column>
+        <Link to="/users/sign_in">{t('users.sign_in')}</Link>
+        <Link to="/users/password/new">{t('users.forgot_password')}</Link>
+        <Link to="/users/confirmation/new">
+          {t('users.resend_confirmation_instructions')}
+        </Link>
+      </Column>
     </AuthPage>
   )
 }
