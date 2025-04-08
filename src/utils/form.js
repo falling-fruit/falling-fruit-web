@@ -44,7 +44,7 @@ export const formToReview = (review) => {
     ...review,
     comment: review.comment || null,
     observed_on: review.observed_on || null,
-    fruiting: review.fruiting || null,
+    fruiting: review.fruiting !== undefined ? review.fruiting : null,
     quality_rating:
       review.quality_rating === '0' ? null : Number(review.quality_rating) - 1,
     yield_rating:
