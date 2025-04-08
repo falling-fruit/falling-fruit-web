@@ -130,6 +130,12 @@ const StyledBackButton = styled(BackButton)`
   }
 `
 
+const Page = ({ children }) => (
+  <PageScrollWrapper>
+    <PageWrapper>{children}</PageWrapper>
+  </PageScrollWrapper>
+)
+
 const InfoPage = ({ children }) => {
   const history = useAppHistory()
   const isMobile = useIsMobile()
@@ -173,4 +179,4 @@ const AuthPage = ({ children }) => {
   )
 }
 
-export { AuthPage, InfoPage }
+export { AuthPage, InfoPage, Page }

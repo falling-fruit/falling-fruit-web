@@ -12,7 +12,7 @@ import BackButton from '../ui/BackButton'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
-import { InfoPage } from '../ui/PageTemplate'
+import { Page } from '../ui/PageTemplate'
 
 const StyledNavBack = styled.div`
   svg {
@@ -48,7 +48,7 @@ const UserProfile = () => {
   const { created_at, name, bio } = userData
 
   return (
-    <InfoPage>
+    <Page>
       <StyledNavBack>
         <BackButton
           onClick={(event) => {
@@ -79,7 +79,7 @@ const UserProfile = () => {
           </time>
         </p>
       </IconBesideText>
-    </InfoPage>
+    </Page>
   )
 }
 
