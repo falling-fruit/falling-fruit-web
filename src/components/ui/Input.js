@@ -52,7 +52,7 @@ const Input = React.forwardRef(
 Input.displayName = 'Input'
 
 const StyledInput = styled(Input)`
-  height: 46px;
+  height: ${(props) => props.height || '46px'};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,7 +71,7 @@ const StyledInput = styled(Input)`
     display: block;
     width: 100%;
     outline: none;
-    height: 44px;
+    height: calc(100% - 2px);
     padding-left: ${(props) => (props.prepend ? '10px' : '0')};
 
     &::placeholder {

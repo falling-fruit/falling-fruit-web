@@ -33,6 +33,7 @@ const ShareInput = styled(Input)`
   padding: 0 0.5rem 0 0.5rem;
   margin-right: 0.5rem;
   vertical-align: middle;
+  min-height: 2.7rem;
 `
 
 const CopyButton = styled(Button)`
@@ -78,6 +79,7 @@ const Share = ({ onClose }) => {
           value={currentUrl}
           readOnly
           onClick={(e) => e.target.select()}
+          height="30px"
         />
         <CopyButton onClick={handleCopy}>
           <CopyIcon />
