@@ -228,7 +228,7 @@ const MapPage = ({ isDesktop }) => {
   // Convert overlay setting to mapLayers format expected by the map
   const getLayerType = (overlayType) => {
     if (overlayType === 'bicycle') {
-      return 'BicycleLayer'
+      return 'BicyclingLayer'
     }
     if (overlayType === 'transit') {
       return 'TransitLayer'
