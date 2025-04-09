@@ -1,3 +1,7 @@
+const DEFAULT_LAT = 40.1125785
+const DEFAULT_LNG = -88.2287926
+const DEFAULT_ZOOM = 4
+
 export const viewToString = (lat, lng, zoom) => {
   // 7 decimal places gives precision to 1 cm
   // Normalize longitude to -180 to 180 range
@@ -57,15 +61,15 @@ export const pathWithCurrentView = (path) => {
 
   // Check for legacy x,y,z parameters in the URL
   const searchParams = new URLSearchParams(search)
-  const legacyLat = searchParams.get('x')
-  const legacyLng = searchParams.get('y')
+  const legacyLng = searchParams.get('x')
+  const legacyLat = searchParams.get('y')
   const legacyZoom = searchParams.get('z')
 
-  // If we have legacy coordinates, use them
-  if (legacyLat && legacyLng && legacyZoom) {
-    const lat = parseFloat(legacyLat)
-    const lng = parseFloat(legacyLng)
-    const zoom = parseInt(legacyZoom, 10)
+  // If we have any legacy coordinates, use them with defaults for missing ones
+  if (legacyLat || legacyLng || legacyZoom) {
+    const lng = legacyLng ? parseFloat(legacyLng) : DEFAULT_LNG
+    const lat = legacyLat ? parseFloat(legacyLat) : DEFAULT_LAT
+    const zoom = legacyZoom ? parseInt(legacyZoom, 10) : DEFAULT_ZOOM
 
     if (!isNaN(lat) && !isNaN(lng) && !isNaN(zoom)) {
       const pathNoTrailingSlash = path.replace(/\/*$/, '')
