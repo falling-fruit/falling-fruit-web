@@ -91,13 +91,28 @@ class TypeShareEncoder {
       let defaultPlusMinus = 'default'
 
       if (additionalTypeIds.length > 0) {
-        const optimizedAdditional = this.optimizeWithFamilies(additionalTypeIds)
+        // When optimizing additional types, we can include default types that are still selected
+        // as "allowed" since they're already part of the default set
+        const allowedTypeIdsAdd = defaultTypeIds.filter(
+          (id) => !removedDefaultTypeIds.includes(id),
+        )
+        const optimizedAdditional = this.optimizeWithFamilies(
+          additionalTypeIds,
+          allowedTypeIdsAdd,
+        )
         defaultPlusMinus += `.${optimizedAdditional}`
       }
 
       if (removedDefaultTypeIds.length > 0) {
+        // When optimizing removed default types, we can include non-default types that aren't
+        // in the additional set as "allowed" since they're not part of our selection
+        const allowedTypeIdsRemove = this.allTypeIds.filter(
+          (id) =>
+            !defaultTypeIds.includes(id) && !additionalTypeIds.includes(id),
+        )
         const optimizedRemoved = this.optimizeWithFamilies(
           removedDefaultTypeIds,
+          allowedTypeIdsRemove,
         )
         defaultPlusMinus += `-${optimizedRemoved}`
       }
@@ -276,9 +291,10 @@ class TypeShareEncoder {
   /**
    * Optimizes a list of type IDs by replacing complete families with their head IDs
    * @param {number[]} typeIds - Array of type IDs to optimize
+   * @param {number[]} [allowedTypeIds=[]] - Array of type IDs that can be included in the match but don't need to be encoded
    * @returns {string} Optimized string representation with families represented by head IDs
    */
-  optimizeWithFamilies(typeIds) {
+  optimizeWithFamilies(typeIds, allowedTypeIds = []) {
     // Make a copy of the type IDs to work with
     let remainingTypeIds = [...typeIds]
     const parts = []
@@ -302,18 +318,27 @@ class TypeShareEncoder {
         continue
       }
 
-      // Check if all family members are in the selection
-      if (familyIds.every((id) => typeIds.includes(id))) {
+      // Check if all family members are either in the selection or in allowedTypeIds
+      if (
+        familyIds.every(
+          (id) => typeIds.includes(id) || allowedTypeIds.includes(id),
+        )
+      ) {
+        // Get only the family members that are in our typeIds (not in allowedTypeIds)
+        const familyMembersToEncode = familyIds.filter((id) =>
+          typeIds.includes(id),
+        )
+
         // Check if any family member is already removed from remainingTypeIds
         // (which would mean it's part of a larger family we've already included)
-        const allMembersRemaining = familyIds.every((id) =>
+        const allMembersRemaining = familyMembersToEncode.every((id) =>
           remainingTypeIds.includes(id),
         )
 
-        if (allMembersRemaining) {
+        if (allMembersRemaining && familyMembersToEncode.length > 0) {
           // Remove family members from remaining IDs
           remainingTypeIds = remainingTypeIds.filter(
-            (id) => !familyIds.includes(id),
+            (id) => !familyMembersToEncode.includes(id),
           )
 
           // Add the family head notation
