@@ -7,18 +7,21 @@ class TypeShareEncoder {
 
   /**
    * Builds a map of head type IDs to their complete family (descendants)
-   * Only includes ultimate heads (types without parents)
+   * Includes all types that have children, not just root types
    * @returns {Object} Map of head ID to array of descendant IDs
    */
   buildFamiliesByHeadId() {
     const familiesByHeadId = {}
-    const rootTypes = this.typesAccess
-      .selectableTypes()
-      .filter((type) => type.parentId === 0)
 
-    for (const rootType of rootTypes) {
-      const familyIds = this.getCompleteFamily(rootType.id)
-      familiesByHeadId[rootType.id] = familyIds
+    // Get all types that have children
+    const typesWithChildren = new Set(
+      Object.keys(this.typesAccess.childrenById).map(Number),
+    )
+
+    // Build families for all types with children
+    for (const typeId of typesWithChildren) {
+      const familyIds = this.getCompleteFamily(typeId)
+      familiesByHeadId[typeId] = familyIds
     }
 
     return familiesByHeadId
@@ -280,26 +283,45 @@ class TypeShareEncoder {
     let remainingTypeIds = [...typeIds]
     const parts = []
 
+    // Sort families by size (largest first) to prioritize larger families
+    const sortedFamilyEntries = Object.entries(this.familiesByHeadId)
+      .map(([headId, familyIds]) => ({
+        headId: Number(headId),
+        familyIds,
+        size: familyIds.length,
+      }))
+      .sort((a, b) => b.size - a.size)
+
+    // Track which families we've already included
+    const includedFamilyHeadIds = new Set()
+
     // Find complete families in the selection
-    const completeFamilies = []
-    for (const [headId, familyIds] of Object.entries(this.familiesByHeadId)) {
-      // Convert headId to number for comparison
-      const headIdNum = Number(headId)
+    for (const { headId, familyIds } of sortedFamilyEntries) {
+      // Skip if this family's head is already part of an included family
+      if (includedFamilyHeadIds.has(headId)) {
+        continue
+      }
 
       // Check if all family members are in the selection
       if (familyIds.every((id) => typeIds.includes(id))) {
-        completeFamilies.push({
-          headId: headIdNum,
-          familyIds: familyIds,
-        })
-
-        // Remove family members from remaining IDs
-        remainingTypeIds = remainingTypeIds.filter(
-          (id) => !familyIds.includes(id),
+        // Check if any family member is already removed from remainingTypeIds
+        // (which would mean it's part of a larger family we've already included)
+        const allMembersRemaining = familyIds.every((id) =>
+          remainingTypeIds.includes(id),
         )
 
-        // Add the family head notation
-        parts.push(`h${headIdNum}`)
+        if (allMembersRemaining) {
+          // Remove family members from remaining IDs
+          remainingTypeIds = remainingTypeIds.filter(
+            (id) => !familyIds.includes(id),
+          )
+
+          // Add the family head notation
+          parts.push(`h${headId}`)
+
+          // Mark all family members as included
+          familyIds.forEach((id) => includedFamilyHeadIds.add(id))
+        }
       }
     }
 
