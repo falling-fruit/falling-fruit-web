@@ -348,6 +348,11 @@
     "update_delete": "Deze recensie bijwerken of verwijderen.",
     "you_reviewed": "U heeft deze locatie beoordeeld op {{date}}"
   },
+  "share": {
+    "title": "Deel deze weergave",
+    "url_copied": "URL gekopieerd naar klembord!",
+    "url_copy_failed": "URL kopiëren naar klembord mislukt"
+  },
   "success_message": {
     "location_edited": "Locatie succesvol bewerkt!",
     "location_submitted": "Locatie succesvol ingediend!",

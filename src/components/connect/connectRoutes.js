@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 
+import ConnectI18nViz from './ConnectI18nViz'
 import ConnectInitLocation from './ConnectInitLocation'
 import ConnectList from './ConnectList'
 import ConnectLocation from './ConnectLocation'
@@ -8,7 +9,7 @@ import ConnectNewLocation from './ConnectNewLocation'
 import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
-import ConnectSearchParams from './ConnectSearchParams'
+import ConnectShare from './ConnectShare'
 import ConnectTypes from './ConnectTypes'
 import DisconnectInitLocation from './DisconnectInitLocation'
 import DisconnectLocation from './DisconnectLocation'
@@ -205,13 +206,23 @@ const connectRoutes = [
   </Route>,
 
   /*
-   * ConnectSearchParams
+   * ConnectI18nViz
    * why: ?i18n_viz=keys and ?i18n_viz=values should trigger translation mode
    *
    * action: monkeypatch the i18n function to add background, title, and click handler
    */
-  <Route key="connect-search-params" path="*">
-    <ConnectSearchParams />
+  <Route key="connect-i18n-viz" path="*">
+    <ConnectI18nViz />
+  </Route>,
+
+  /*
+   * ConnectShare
+   * why: ?mapType=xyz should update the map type in Redux state
+   *
+   * action: recognize mapType parameter, update Redux state, and remove parameter from URL
+   */
+  <Route key="connect-share" path="*">
+    <ConnectShare />
   </Route>,
 ]
 

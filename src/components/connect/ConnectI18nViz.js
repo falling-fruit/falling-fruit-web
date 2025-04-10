@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { useAppHistory } from '../../utils/useAppHistory'
 
-const ConnectSearchParams = () => {
+const ConnectI18nViz = () => {
   const location = useLocation()
   const history = useAppHistory()
   const searchParams = new URLSearchParams(location.search)
@@ -83,4 +83,4 @@ const ConnectSearchParams = () => {
   return null
 }
 
-export default ConnectSearchParams
+export default ConnectI18nViz

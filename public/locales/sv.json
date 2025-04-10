@@ -348,6 +348,11 @@
     "update_delete": "Uppdatera eller ta bort denna recension.",
     "you_reviewed": "Du recenserade denna plats den {{date}}"
   },
+  "share": {
+    "title": "Dela denna vy",
+    "url_copied": "URL kopierad till urklipp!",
+    "url_copy_failed": "Misslyckades att kopiera URL till urklipp"
+  },
   "success_message": {
     "location_edited": "Plats redigerad",
     "location_submitted": "Plats skickad",

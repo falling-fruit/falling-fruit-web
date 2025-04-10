@@ -4,9 +4,10 @@ import styled, { css } from 'styled-components'
 
 import Filter from '../filter/Filter'
 import Search from '../search/Search'
+import Share from '../share/Share'
 import TopBar from '../ui/TopBar'
 
-const StyledFilter = styled.div`
+const StyledOverlay = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column-reverse;
@@ -17,8 +18,9 @@ const StyledFilter = styled.div`
     `}
 `
 
-const SearchAndFilterTopBar = () => {
+const NavigationBar = () => {
   const filterOpen = useSelector((state) => state.filter.isOpenInMobileLayout)
+  const shareOpen = useSelector((state) => state.share.isOpenInMobileLayout)
   const { typesAccess } = useSelector((state) => state.type)
 
   if (typesAccess.isEmpty) {
@@ -28,11 +30,14 @@ const SearchAndFilterTopBar = () => {
   return (
     <TopBar>
       <Search />
-      <StyledFilter isOpen={filterOpen}>
+      <StyledOverlay isOpen={filterOpen}>
         <Filter />
-      </StyledFilter>
+      </StyledOverlay>
+      <StyledOverlay isOpen={shareOpen}>
+        <Share />
+      </StyledOverlay>
     </TopBar>
   )
 }
 
-export default SearchAndFilterTopBar
+export default NavigationBar

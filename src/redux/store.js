@@ -12,6 +12,7 @@ import miscReducer from './miscSlice'
 import placeReducer from './placeSlice'
 import reviewReducer from './reviewSlice'
 import settingsReducer from './settingsSlice'
+import shareReducer from './shareSlice'
 import typeReducer from './typeSlice'
 import viewportReducer from './viewportSlice'
 
@@ -27,6 +28,7 @@ export const store = configureStore({
     misc: miscReducer,
     location: locationReducer,
     review: reviewReducer,
+    share: shareReducer,
     geolocation: geolocationReducer,
     place: placeReducer,
     type: typeReducer,

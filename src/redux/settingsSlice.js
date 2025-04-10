@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS = {
   showLabels: false,
   distanceUnit: 'metric',
   mapType: 'roadmap',
-  mapLayers: [],
+  overlay: null,
   showBusinesses: false,
 }
 
