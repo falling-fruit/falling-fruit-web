@@ -7,11 +7,11 @@ const TypeList = styled.div`
   flex-direction: column;
 `
 
-const TypeItem = styled.span`
+const DisplayName = styled.span`
   opacity: ${(props) => (props.isSelected ? 1.0 : 0.5)};
 `
 
-const ScientificName = styled(TypeItem)`
+const ScientificDisplayName = styled(DisplayName)`
   font-style: italic;
 `
 
@@ -22,18 +22,23 @@ const TypeLabels = ({ typeIds }) => {
   return (
     <TypeList>
       {(typeIds || []).map((id, index) => {
-        const type = typesAccess.getType(id)
-        return !type ? null : !type.commonName && type.scientificName ? (
-          <ScientificName
+        const [displayName, displayScientificName] =
+          typesAccess.getDisplayNames(id)
+        if (!displayName && !displayScientificName) {
+          return null
+        }
+
+        return !displayName ? (
+          <ScientificDisplayName
             key={index}
-            isSelected={selectedTypes.includes(type.id)}
+            isSelected={selectedTypes.includes(id)}
           >
-            {type.scientificName}
-          </ScientificName>
+            {displayScientificName}
+          </ScientificDisplayName>
         ) : (
-          <TypeItem key={index} isSelected={selectedTypes.includes(type.id)}>
-            {type.commonName || type.scientificName}
-          </TypeItem>
+          <DisplayName key={index} isSelected={selectedTypes.includes(id)}>
+            {displayName}
+          </DisplayName>
         )
       })}
     </TypeList>

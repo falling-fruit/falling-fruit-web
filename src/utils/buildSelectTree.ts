@@ -37,25 +37,6 @@ class SelectTreeBuilder {
     this.visibleTypeIds = new Set()
   }
 
-  private isCultivarWithParentInSelection(
-    type: LocalizedType,
-    parentId: number | null,
-  ): boolean {
-    if (!parentId) {
-      return false
-    }
-    const parentType = this.typesAccess.getType(parentId)
-    if (!parentType) {
-      return false
-    }
-
-    const cultivarIndex = type.scientificName?.indexOf("'")
-    return (
-      cultivarIndex !== -1 &&
-      type.scientificName?.startsWith(`${parentType.scientificName} '`)
-    )
-  }
-
   buildRenderTree(): RenderTreeNode[] {
     const rootNodes = this.typesAccess.localizedTypes.filter(
       (type) => type.parentId === 0,
@@ -106,17 +87,9 @@ class SelectTreeBuilder {
       this.visibleTypeIds.add(type.id)
     }
 
-    const isCultivar = this.isCultivarWithParentInSelection(
-      type,
-      parent?.id ?? null,
-    )
-    const cultivarIndex = isCultivar ? type.scientificName?.indexOf("'") : -1
-
     node.children = children
-    node.commonName = isCultivar ? '' : type.commonName
-    node.scientificName = isCultivar
-      ? type.scientificName?.substring(cultivarIndex ?? -1)
-      : type.scientificName
+    node.commonName = type.cultivar ? '' : type.commonName
+    node.scientificName = type.cultivar || type.scientificName
 
     const ownCount = this.getCount(type.id)
     if (
