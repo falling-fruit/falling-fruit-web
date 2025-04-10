@@ -1,3 +1,7 @@
+const DEFAULT_LAT = 40.1125785
+const DEFAULT_LNG = -88.2287926
+const DEFAULT_ZOOM = 4
+
 export const viewToString = (lat, lng, zoom) => {
   // 7 decimal places gives precision to 1 cm
   // Normalize longitude to -180 to 180 range
@@ -51,16 +55,39 @@ export const pathWithCurrentView = (path) => {
     return path
   }
 
-  const { pathname } = new URL(window.location.href)
+  // Check for current URL path state
+  const { pathname, search } = new URL(window.location.href)
   const mapStateIndex = pathname.indexOf('/@')
+
+  // Check for legacy x,y,z parameters in the URL
+  const searchParams = new URLSearchParams(search)
+  const legacyLng = searchParams.get('x')
+  const legacyLat = searchParams.get('y')
+  const legacyZoom = searchParams.get('z')
+
+  // If we have any legacy coordinates, use them with defaults for missing ones
+  if (legacyLat || legacyLng || legacyZoom) {
+    const lng = legacyLng ? parseFloat(legacyLng) : DEFAULT_LNG
+    const lat = legacyLat ? parseFloat(legacyLat) : DEFAULT_LAT
+    const zoom = legacyZoom ? parseInt(legacyZoom, 10) : DEFAULT_ZOOM
+
+    if (!isNaN(lat) && !isNaN(lng) && !isNaN(zoom)) {
+      const pathNoTrailingSlash = path.replace(/\/*$/, '')
+      return `${pathNoTrailingSlash}/${viewToString(lat, lng, zoom)}${search}`
+    }
+  }
+
+  // Otherwise use the path state if it exists
   if (mapStateIndex === -1) {
-    return path
+    // Preserve search parameters
+    return search ? `${path}${search}` : path
   }
 
   const mapState = pathname.substring(mapStateIndex)
   const pathNoTrailingSlash = path.replace(/\/*$/, '')
 
-  return pathNoTrailingSlash + mapState
+  // Preserve search parameters
+  return `${pathNoTrailingSlash}${mapState}${search}`
 }
 
 export const currentPathWithView = (view) => {

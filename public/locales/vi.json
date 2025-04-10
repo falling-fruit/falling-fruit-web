@@ -348,6 +348,11 @@
     "update_delete": "Cập nhật hoặc xóa đánh giá này.",
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
+  "share": {
+    "title": "Chia sẻ góc nhìn này",
+    "url_copied": "Đã sao chép URL vào bộ nhớ tạm!",
+    "url_copy_failed": "Không thể sao chép URL vào bộ nhớ tạm"
+  },
   "success_message": {
     "location_edited": "Địa điểm đã được chỉnh sửa thành công!",
     "location_submitted": "Địa điểm đã được gửi thành công!",

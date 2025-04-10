@@ -80,7 +80,7 @@ export const filterSlice = createSlice({
     }),
 
     [fetchAndLocalizeTypes.fulfilled]: (state, action) => {
-      const typesAccess = action.payload
+      const { typesAccess } = action.payload
       if (state.types === null) {
         state.types = typesAccess
           .selectableTypesWithCategories('forager', 'freegan')
