@@ -1574,7 +1574,7 @@
       "title": "Online map helps city dwellers find wild produce growing in their neighborhoods",
       "author": "Savannah Christiansen",
       "url": "https://theworld.org/stories/2018-10-16/online-map-helps-city-dwellers-find-wild-produce-growing-their-neighborhoods",
-      "embed_html": "<iframe frameborder=\"0\" src=\"https://www.pri.org/node/180510/embedded\" height=\"50px\" width=\"100%\"></iframe>"
+      "embed_html": "<iframe title=\"TheWorld.org Embedded Audio Player - Online map helps city dwellers find wild produce growing in their neighborhoods\" src=\"https://theworld.org/embed/audio/cG9zdDo1NTI2MzA=\" frameborder=\"0\" height=\"50\" width=\"100%\" style=\"margin-block: 1rem\"></iframe>"
     },
     {
       "published_on": "2018-08-24",
@@ -1963,6 +1963,16 @@
       "outlet_url": "https://amensagem.pt/",
       "title": "Conhece uma árvore de fruta em Lisboa? Participe neste mapa da Falling Fruit e alimente a cidade",
       "url": "https://amensagem.pt/2024/05/16/faling-fruit-arvore-de-fruta-lisboa-google/"
+    }
+  ],
+  "2025": [
+    {
+      "published_on": "2025-03-27",
+      "outlet": "Reasons to be Cheerful",
+      "outlet_url": "https://reasonstobecheerful.world",
+      "title": "For modern foragers, this map reveals urban abundance",
+      "author": "Natasha Khullar Relph",
+      "url": "https://reasonstobecheerful.world/falling-fruit-urban-foraging/"
     }
   ]
 }
