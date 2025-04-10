@@ -25,12 +25,13 @@ export const LANGUAGE_OPTIONS = [
   { value: 'it', label: 'Italiano' },
   { value: 'nl', label: 'Nederlands' },
   { value: 'pl', label: 'Polski' },
-  { value: 'pt-BR', label: 'Português' },
+  { value: 'pt', label: 'Português' },
   { value: 'sv', label: 'Svenska' },
   { value: 'tr', label: 'Türkçe' },
-  { value: 'uk-UA', label: 'Українська' },
+  { value: 'uk', label: 'Українська' },
   { value: 'vi', label: 'Tiếng Việt' },
-  { value: 'zh-CN', label: '中文' },
+  { value: 'zh-hans', label: '简体中文' },
+  { value: 'zh-hant', label: '繁体中文' },
 ]
 
 const LanguageSelect = () => {
