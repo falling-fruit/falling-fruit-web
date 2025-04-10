@@ -366,7 +366,8 @@
     "time_ago": "{{time}} önce"
   },
   "type": {
-    "pending_review": "İnceleme bekliyor"
+    "pending_review_category": "İnceleme Bekliyor",
+    "pending_review_item": "{{name}} (inceleme bekliyor)"
   },
   "users": {
     "bio": "Hakkınızda",

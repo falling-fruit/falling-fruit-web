@@ -366,7 +366,8 @@
     "time_ago": "{{time}}前"
   },
   "type": {
-    "pending_review": "等待审核"
+    "pending_review_category": "待审核",
+    "pending_review_item": "{{name}} (待审核)"
   },
   "users": {
     "bio": "关于你",

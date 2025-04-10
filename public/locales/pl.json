@@ -366,7 +366,8 @@
     "time_ago": "{{time}} temu"
   },
   "type": {
-    "pending_review": "Oczekuje na przegląd"
+    "pending_review_category": "Oczekuje na przegląd",
+    "pending_review_item": "{{name}} (oczekuje na przegląd)"
   },
   "users": {
     "bio": "O Tobie",

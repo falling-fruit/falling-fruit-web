@@ -366,7 +366,8 @@
     "time_ago": "{{time}} πριν"
   },
   "type": {
-    "pending_review": "Εκκρεμεί έλεγχος"
+    "pending_review_category": "Σε αναμονή αξιολόγησης",
+    "pending_review_item": "{{name}} (σε αναμονή αξιολόγησης)"
   },
   "users": {
     "bio": "Σχετικά με εσάς",

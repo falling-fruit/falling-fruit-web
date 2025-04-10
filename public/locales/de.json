@@ -366,7 +366,8 @@
     "time_ago": "Vor {{time}}"
   },
   "type": {
-    "pending_review": "Überprüfung ausstehend"
+    "pending_review_category": "Ausstehende Prüfung",
+    "pending_review_item": "{{name}} (ausstehende Prüfung)"
   },
   "users": {
     "bio": "Über dich",

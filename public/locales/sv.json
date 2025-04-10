@@ -366,7 +366,8 @@
     "time_ago": "för {{time}} sedan"
   },
   "type": {
-    "pending_review": "Väntar på granskning"
+    "pending_review_category": "Väntar på granskning",
+    "pending_review_item": "{{name}} (väntar på granskning)"
   },
   "users": {
     "bio": "Om dig",

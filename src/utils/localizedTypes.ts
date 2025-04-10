@@ -103,7 +103,7 @@ const toMenuEntry = (
 
   const commonNameLabel =
     parentId === PENDING_ID
-      ? `${commonName} (${i18next.t('type.pending_review')})`
+      ? i18next.t('type.pending_review_item', { name: commonName })
       : commonName
 
   return {
@@ -219,7 +219,7 @@ export const typesAccessInLanguage = (
       id: PENDING_ID,
       parentId: 0,
       scientificName: '',
-      commonName: 'Pending Review',
+      commonName: i18next.t('type.pending_review_category'),
       taxonomicRank: 0,
       urls: {},
       categories: [],

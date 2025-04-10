@@ -343,7 +343,7 @@
     "form": {
       "leave_a_review": "發表評論",
       "observed_on": "觀察於 {{date}}",
-      "upload_images": "上傳圖片"
+      "photos": "照片"
     },
     "update_delete": "更新或刪除此評論",
     "you_reviewed": "您於 {{date}} 評論了此地點"
@@ -366,7 +366,8 @@
     "time_ago": "{{time}}前"
   },
   "type": {
-    "pending_review": "等待審覈"
+    "pending_review_category": "待審核",
+    "pending_review_item": "{{name}} (待審核)"
   },
   "users": {
     "bio": "關於你",

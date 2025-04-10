@@ -366,7 +366,8 @@
     "time_ago": "{{time}} geleden"
   },
   "type": {
-    "pending_review": "In afwachting van beoordeling"
+    "pending_review_category": "In afwachting van beoordeling",
+    "pending_review_item": "{{name}} (in afwachting van beoordeling)"
   },
   "users": {
     "bio": "Over u",

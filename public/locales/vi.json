@@ -366,7 +366,8 @@
     "time_ago": "{{time}} trước"
   },
   "type": {
-    "pending_review": "Đang chờ xét duyệt"
+    "pending_review_category": "Đang chờ duyệt",
+    "pending_review_item": "{{name}} (đang chờ duyệt)"
   },
   "users": {
     "bio": "Thông tin về bạn",
