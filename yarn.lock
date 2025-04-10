@@ -1414,10 +1414,25 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/lato@^4.3.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-4.5.0.tgz#c248b083be330daafade76995fed9088d5b76c04"
-  integrity sha512-Y1qluoF+5b2U6MWcEz70+euZwl4TEV+9v7nZCmuRgNHb5McYc3VmbNmYNEiLsnb1HHwlAHA70P/LktP9EJ61ag==
+"@fontsource/noto-sans-arabic@^5.2.5":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-arabic/-/noto-sans-arabic-5.2.6.tgz#ab95b2deeef829b5ab5ee4af7654db7d43e69105"
+  integrity sha512-cAlMirNKXN9JGnNyUNPKJz8XTjcZhNEzUk12U3yb9OiSLKebKPZ87LhgHoTt11y66lvKeJPGRyal+cV82PK5RA==
+
+"@fontsource/noto-sans-hebrew@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-hebrew/-/noto-sans-hebrew-5.2.5.tgz#637ca260fc694ad4455cefd6224fe90cdda13287"
+  integrity sha512-6+AW0mkEsImheMXmP3SAbKifvSU18eBdpWSDy9iVdTMBwx5ICWMbraHuvGwzJkH6BWO0Mmdc/O53CmII2MOkTQ==
+
+"@fontsource/noto-sans-sc@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-sc/-/noto-sans-sc-5.2.5.tgz#4f8fd492b15c0f507c1a1bc779f9cfd3de2f8114"
+  integrity sha512-rYAl3Alcjo2PnI0sqzRfnA022H8yWePNrjYalApQwYE+fFlaXmD6Mm3E9wmJCpmJM8clwhQWq/E8IlPl1bmZHQ==
+
+"@fontsource/noto-sans@^5.2.5":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans/-/noto-sans-5.2.6.tgz#701e3e2a190dea8c15d776ea9ec70e72e362edf3"
+  integrity sha512-46D39T1/QJ16LSbCTaNjjrGS6Y69FMLS9FeHKsrXSQg15Z2MFqmlnNMpURx2l6Sr3x9t9EVdr3CAkHnZyvea+w==
 
 "@gar/promisify@^1.0.1":
   version "1.1.2"
