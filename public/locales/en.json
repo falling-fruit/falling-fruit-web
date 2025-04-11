@@ -366,7 +366,7 @@
     "time_ago": "{{time}} ago"
   },
   "type": {
-    "pending_review_category": "Pending Review",
+    "pending_review_category": "Pending review",
     "pending_review_item": "{{name}} (pending review)"
   },
   "users": {

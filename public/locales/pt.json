@@ -366,7 +366,7 @@
     "time_ago": "{{time}} atrás"
   },
   "type": {
-    "pending_review_category": "Pendente de Avaliação",
+    "pending_review_category": "Pendente de avaliação",
     "pending_review_item": "{{name}} (pendente de avaliação)"
   },
   "users": {
