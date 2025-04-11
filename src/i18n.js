@@ -1,3 +1,4 @@
+import { LocaleMatcher } from '@phensley/locale-matcher'
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
@@ -33,6 +34,35 @@ export const LANGUAGE_OPTIONS = [
   { value: 'zh-hans', label: '简体中文' },
   { value: 'zh-hant', label: '繁体中文' },
 ]
+
+export const FALLBACK_LANGUAGE = 'en'
+
+/**
+ * The list of supported languages.
+ *
+ * Fallback language must be first to ensure it is returned when no other language is
+ * a better match.
+ */
+export const SUPPORTED_LANGUAGES = [FALLBACK_LANGUAGE].concat(
+  LANGUAGE_OPTIONS.map((option) => option.value).filter(
+    (language) => language !== FALLBACK_LANGUAGE,
+  ),
+)
+
+const localeMatcher = new LocaleMatcher(SUPPORTED_LANGUAGES)
+
+/**
+ * Find the closest supported language to the given one(s).
+ *
+ * More robust than i18next fallback behavior.
+ * See https://github.com/falling-fruit/falling-fruit-web/pull/754.
+ *
+ * @param {string|string[]} language
+ * @returns {string}
+ */
+function closestSupportedLanguage(language) {
+  return localeMatcher.match(language).locale.id
+}
 
 const LanguageSelect = () => {
   const { t, i18n } = useTranslation()
@@ -72,21 +102,14 @@ i18n
         order: ['localStorage', 'navigator'],
         lookupLocalStorage: LANGUAGE_CACHE_KEY,
         caches: false,
+        convertDetectedLanguage: closestSupportedLanguage,
       },
       react: {
         useSuspense: true,
       },
-      supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
+      supportedLngs: SUPPORTED_LANGUAGES,
       lowerCaseLng: true,
-      fallbackLng: {
-        'zh-cn': ['zh-hans', 'en'],
-        'zh-my': ['zh-hans', 'en'],
-        'zh-sg': ['zh-hans', 'en'],
-        'zh-hk': ['zh-hant', 'en'],
-        'zh-mo': ['zh-hant', 'en'],
-        'zh-tw': ['zh-hant', 'en'],
-        default: ['en'],
-      },
+      fallbackLng: FALLBACK_LANGUAGE,
       interpolation: {
         escapeValue: false,
       },
@@ -96,16 +119,6 @@ i18n
     },
     () => setDocumentDir(i18n.language),
   )
-
-i18n.on('initialized', () => {
-  // HACK: Pass single language to changeLanguage to avoid wrong fallback behavior
-  // 'zh-TW' -> ['zh-hant', 'en'] instead of ['zh-TW', ...] -> ['zh-hans', 'en']
-  let language = i18n.services.languageDetector.detect()
-  if (Array.isArray(language)) {
-    language = language[0]
-  }
-  i18n.changeLanguage(language)
-})
 
 export { LanguageSelect }
 export default i18n
