@@ -371,7 +371,8 @@
     "time_ago": "منذ {{time}}"
   },
   "type": {
-    "pending_review": "في انتظار المراجعة"
+    "pending_review_category": "قيد المراجعة",
+    "pending_review_item": "{{name}} (قيد المراجعة)"
   },
   "users": {
     "bio": "حولك",

@@ -366,7 +366,8 @@
     "time_ago": "{{time}} ago"
   },
   "type": {
-    "pending_review": "Pending review"
+    "pending_review_category": "Pending review",
+    "pending_review_item": "{{name}} (pending review)"
   },
   "share": {
     "title": "Share this view",

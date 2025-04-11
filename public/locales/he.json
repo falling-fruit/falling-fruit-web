@@ -371,7 +371,8 @@
     "time_ago": "לפני {{time}}"
   },
   "type": {
-    "pending_review": "ממתין לבדיקה"
+    "pending_review_category": "ממתין לביקורת",
+    "pending_review_item": "{{name}} (ממתין לביקורת)"
   },
   "users": {
     "bio": "אודותיך",

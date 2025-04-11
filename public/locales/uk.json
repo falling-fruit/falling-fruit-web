@@ -371,7 +371,8 @@
     "time_ago": "{{time}} тому"
   },
   "type": {
-    "pending_review": "Очікує перевірки"
+    "pending_review_category": "Очікує перевірки",
+    "pending_review_item": "{{name}} (очікує перевірки)"
   },
   "users": {
     "bio": "Про вас",

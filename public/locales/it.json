@@ -371,7 +371,8 @@
     "time_ago": "{{time}} fa"
   },
   "type": {
-    "pending_review": "In attesa di revisione"
+    "pending_review_category": "In attesa di revisione",
+    "pending_review_item": "{{name}} (in attesa di revisione)"
   },
   "users": {
     "bio": "Su di te",

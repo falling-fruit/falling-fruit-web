@@ -371,7 +371,8 @@
     "time_ago": "Il y a {{time}}"
   },
   "type": {
-    "pending_review": "En attente de validation"
+    "pending_review_category": "En attente d'examen",
+    "pending_review_item": "{{name}} (en attente d'examen)"
   },
   "users": {
     "bio": "Parlez-nous de vous",
