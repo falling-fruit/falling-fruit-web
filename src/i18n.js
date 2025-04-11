@@ -75,6 +75,7 @@ i18n
         useSuspense: true,
       },
       supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
+      lowerCaseLng: true,
       fallbackLng: 'en',
       interpolation: {
         escapeValue: false,
