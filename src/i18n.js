@@ -41,7 +41,9 @@ const LanguageSelect = () => {
   return (
     <Select
       options={LANGUAGE_OPTIONS}
-      value={LANGUAGE_OPTIONS.find((option) => option.value === i18n.language)}
+      value={LANGUAGE_OPTIONS.find(
+        (option) => option.value === i18n.languages[0],
+      )}
       onChange={(option) => {
         i18n.changeLanguage(option.value, () => {
           localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
@@ -76,7 +78,15 @@ i18n
       },
       supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
       lowerCaseLng: true,
-      fallbackLng: 'en',
+      fallbackLng: {
+        'zh-cn': ['zh-hans', 'en'],
+        'zh-my': ['zh-hans', 'en'],
+        'zh-sg': ['zh-hans', 'en'],
+        'zh-hk': ['zh-hant', 'en'],
+        'zh-mo': ['zh-hant', 'en'],
+        'zh-tw': ['zh-hant', 'en'],
+        default: ['en'],
+      },
       interpolation: {
         escapeValue: false,
       },
@@ -86,6 +96,16 @@ i18n
     },
     () => setDocumentDir(i18n.language),
   )
+
+i18n.on('initialized', () => {
+  // HACK: Pass single language to changeLanguage to avoid wrong fallback behavior
+  // 'zh-TW' -> ['zh-hant', 'en'] instead of ['zh-TW', ...] -> ['zh-hans', 'en']
+  let language = i18n.services.languageDetector.detect()
+  if (Array.isArray(language)) {
+    language = language[0]
+  }
+  i18n.changeLanguage(language)
+})
 
 export { LanguageSelect }
 export default i18n
