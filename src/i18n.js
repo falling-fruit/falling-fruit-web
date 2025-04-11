@@ -1,3 +1,4 @@
+import { LocaleMatcher } from '@phensley/locale-matcher'
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
@@ -34,6 +35,35 @@ export const LANGUAGE_OPTIONS = [
   { value: 'zh-hant', label: '繁体中文' },
 ]
 
+export const FALLBACK_LANGUAGE = 'en'
+
+/**
+ * The list of supported languages.
+ *
+ * Fallback language must be first to ensure it is returned when no other language is
+ * a better match.
+ */
+export const SUPPORTED_LANGUAGES = [FALLBACK_LANGUAGE].concat(
+  LANGUAGE_OPTIONS.map((option) => option.value).filter(
+    (language) => language !== FALLBACK_LANGUAGE,
+  ),
+)
+
+const localeMatcher = new LocaleMatcher(SUPPORTED_LANGUAGES)
+
+/**
+ * Find the closest supported language to the given one(s).
+ *
+ * More robust than i18next fallback behavior.
+ * See https://github.com/falling-fruit/falling-fruit-web/pull/754.
+ *
+ * @param {string|string[]} language
+ * @returns {string}
+ */
+function closestSupportedLanguage(language) {
+  return localeMatcher.match(language).locale.id
+}
+
 const LanguageSelect = () => {
   const { t, i18n } = useTranslation()
   const { googleMap } = useSelector((state) => state.map)
@@ -41,7 +71,9 @@ const LanguageSelect = () => {
   return (
     <Select
       options={LANGUAGE_OPTIONS}
-      value={LANGUAGE_OPTIONS.find((option) => option.value === i18n.language)}
+      value={LANGUAGE_OPTIONS.find(
+        (option) => option.value === i18n.languages[0],
+      )}
       onChange={(option) => {
         i18n.changeLanguage(option.value, () => {
           localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
@@ -70,13 +102,14 @@ i18n
         order: ['localStorage', 'navigator'],
         lookupLocalStorage: LANGUAGE_CACHE_KEY,
         caches: false,
+        convertDetectedLanguage: closestSupportedLanguage,
       },
       react: {
         useSuspense: true,
       },
-      supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
+      supportedLngs: SUPPORTED_LANGUAGES,
       lowerCaseLng: true,
-      fallbackLng: 'en',
+      fallbackLng: FALLBACK_LANGUAGE,
       interpolation: {
         escapeValue: false,
       },
