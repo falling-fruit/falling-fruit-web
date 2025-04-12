@@ -20,9 +20,8 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
     authStore.setToken(token)
   } catch (err) {
     if (
-      token.access_token === 'test' ||
-      (err.response?.status === 401 &&
-        err.response?.data?.error === 'Expired access token')
+      err.response?.status === 401 &&
+      err.response?.data?.error === 'Expired access token'
     ) {
       try {
         const newToken = await refreshUserToken(token.refresh_token)

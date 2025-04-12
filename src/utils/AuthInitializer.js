@@ -15,7 +15,6 @@ const AuthInitializer = () => {
     dispatch(checkAuth())
       .unwrap()
       .then(([_user, error]) => {
-        console.log(_user, error)
         if (error) {
           if (error.message === 'Invalid refresh token') {
             history.push(pathToSignInPage())
@@ -29,7 +28,7 @@ const AuthInitializer = () => {
           }
         }
       })
-  }, [dispatch, history])
+  }, [dispatch]) // eslint-disable-line
 
   return null
 }
