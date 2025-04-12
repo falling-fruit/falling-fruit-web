@@ -4,6 +4,21 @@ import { sortBy } from 'lodash'
 import { components } from './apiSchema'
 import { tokenizeReference } from './tokenize'
 
+const extractCultivar = (scientificName: string): string | null => {
+  const cultivarIndex = scientificName.indexOf("'")
+  if (cultivarIndex === -1) {
+    return null
+  }
+  const m = scientificName.substring(cultivarIndex)
+
+  if (m.includes(' x ')) {
+    // probably a hybrid of two cultivars - don't attempt to parse
+    return null
+  } else {
+    return m
+  }
+}
+
 type Id = number
 type IdDict<T> = { [key: Id]: T }
 const PENDING_ID: Id = -1
@@ -46,13 +61,8 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
 
   const synonyms = type.common_names?.[language]?.slice(1) || []
 
-  // Extract cultivar if present, but skip for hybrid names containing ' x '
-  const cultivarIndex = scientificName.indexOf("'")
-  const isHybrid = scientificName.includes(' x ')
-  const cultivar =
-    cultivarIndex !== -1 && !isHybrid
-      ? scientificName.substring(cultivarIndex)
-      : null
+  // Extract cultivar if present
+  const cultivar = extractCultivar(scientificName)
 
   return {
     id: type.id,
@@ -103,11 +113,9 @@ const toMenuEntry = (
     referenceStrings.push(parentCommonName)
   }
 
-  const cultivarIndex = scientificName?.indexOf("'")
-  if (cultivarIndex !== -1) {
-    const cultivarName = scientificName
-      .substring(cultivarIndex)
-      .replaceAll("'", '')
+  const cultivar = extractCultivar(scientificName)
+  if (cultivar) {
+    const cultivarName = cultivar.replaceAll("'", '')
     referenceStrings.push(cultivarName)
   }
 
