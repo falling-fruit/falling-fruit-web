@@ -88,8 +88,19 @@ class SelectTreeBuilder {
     }
 
     node.children = children
-    node.commonName = type.cultivar ? '' : type.commonName
-    node.scientificName = type.cultivar || type.scientificName
+    if (
+      type.cultivar &&
+      parent?.scientificName &&
+      type.scientificName
+        .toLowerCase()
+        .startsWith(parent.scientificName.toLowerCase())
+    ) {
+      node.commonName = ''
+      node.scientificName = type.cultivar
+    } else {
+      node.commonName = type.commonName
+      node.scientificName = type.scientificName
+    }
 
     const ownCount = this.getCount(type.id)
     if (
