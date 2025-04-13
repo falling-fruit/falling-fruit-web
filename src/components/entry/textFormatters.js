@@ -1,6 +1,7 @@
 /**
  * Helper function to convert ISO date string into "month date, year" format.
  * @param {string} dateString - The ISO date to convert
+ * @param {string} language - The language code to use for formatting
  */
 export const formatISOString = (dateString, language) =>
   new Date(dateString).toLocaleDateString(language, {

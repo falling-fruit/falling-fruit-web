@@ -75,13 +75,13 @@ const Review = ({
   includePreview = true,
   editable = false,
 }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   return (
     <ReviewContainer $editable={editable}>
       {editable && (
         <EditableHeader>
           {t('review.you_reviewed', {
-            date: formatISOString(review.created_at),
+            date: formatISOString(review.created_at, i18n.language),
           })}{' '}
           <ResetButton onClick={onEditClick}>
             <PencilIcon height={14} /> {t('review.update_delete')}
@@ -102,12 +102,12 @@ const Review = ({
           )}
           {review.observed_on
             ? t('review.form.observed_on', {
-                date: formatISOString(review.observed_on),
+                date: formatISOString(review.observed_on, i18n.language),
               })
             : review.updated_at &&
                 new Date(review.updated_at) > new Date(review.created_at)
-              ? formatISOString(review.updated_at)
-              : formatISOString(review.created_at)}
+              ? formatISOString(review.updated_at, i18n.language)
+              : formatISOString(review.created_at, i18n.language)}
         </AuthorAndDateRow>
       )}
       <ReviewStats>
