@@ -348,6 +348,11 @@
     "update_delete": "Update or delete this review.",
     "you_reviewed": "You reviewed this location on {{date}}"
   },
+  "share": {
+    "title": "Share this view",
+    "url_copied": "URL copied to clipboard!",
+    "url_copy_failed": "Failed to copy URL to clipboard"
+  },
   "success_message": {
     "location_edited": "Location edited successfully!",
     "location_submitted": "Location submitted successfully!",
@@ -368,11 +373,6 @@
   "type": {
     "pending_review_category": "Pending review",
     "pending_review_item": "{{name}} (pending review)"
-  },
-  "share": {
-    "title": "Share this view",
-    "url_copied": "URL copied to clipboard!",
-    "url_copy_failed": "Failed to copy URL to clipboard"
   },
   "users": {
     "bio": "About you",

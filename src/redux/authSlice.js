@@ -8,36 +8,39 @@ import authStore from '../utils/authStore'
 
 export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
   const token = authStore.initFromStorage()
+  let user = null
+  let error = null
 
   if (!token?.access_token || !token?.refresh_token) {
-    return null
+    return [null, null]
   }
 
   try {
-    const user = await getUser(token.access_token)
+    user = await getUser(token.access_token)
     authStore.setToken(token)
-    return user
-  } catch (error) {
+  } catch (err) {
     if (
-      error.response?.status === 401 &&
-      error.response?.data?.error === 'Expired access token'
+      err.response?.status === 401 &&
+      err.response?.data?.error === 'Expired access token'
     ) {
-      let newToken
       try {
-        newToken = await refreshUserToken(token.refresh_token)
+        const newToken = await refreshUserToken(token.refresh_token)
+        user = await getUser(newToken.access_token)
+        authStore.setToken(newToken)
       } catch (refreshError) {
         authStore.removeToken()
-        throw refreshError
+        error = refreshError
       }
-      const user = await getUser(newToken.access_token)
-      authStore.setToken(newToken)
-      return user
-    } else if (error.response?.status === 401) {
+    } else if (err.response?.status === 401) {
       // We failed to log in with our token but can't fix the error based on response
       authStore.removeToken()
+      error = err
+    } else {
+      error = err
     }
-    throw error
   }
+
+  return [user, error]
 })
 
 export const login = createAsyncThunk(
@@ -79,16 +82,10 @@ export const authSlice = createSlice({
       state.isLoading = true
     },
     [checkAuth.fulfilled]: (state, action) => {
-      state.user = action.payload
-      state.isLoading = false
-    },
-    [checkAuth.rejected]: (state, action) => {
-      toast.error(
-        i18next.t('error_message.auth.check_failed', {
-          message:
-            action.error.message || i18next.t('error_message.unknown_error'),
-        }),
-      )
+      const [user, _error] = action.payload
+      if (user) {
+        state.user = user
+      }
       state.isLoading = false
     },
 
