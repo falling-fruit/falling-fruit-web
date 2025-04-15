@@ -1,4 +1,3 @@
-import { LocaleMatcher } from '@phensley/locale-matcher'
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
@@ -35,33 +34,29 @@ export const LANGUAGE_OPTIONS = [
   { value: 'zh-hant', label: '繁体中文' },
 ]
 
-export const FALLBACK_LANGUAGE = 'en'
+/**
+ * Language used when the requested key is not found in the selected language
+ */
+const FALLBACK_LANGUAGE = 'en'
 
 /**
- * The list of supported languages.
- *
- * Fallback language must be first to ensure it is returned when no other language is
- * a better match.
+ * Language fallbacks that deviate from the i18next default behavior
+ * (i.e. strip to base language before mapping with fallbackLng).
  */
-export const SUPPORTED_LANGUAGES = [FALLBACK_LANGUAGE].concat(
-  LANGUAGE_OPTIONS.map((option) => option.value).filter(
-    (language) => language !== FALLBACK_LANGUAGE,
-  ),
-)
-
-const localeMatcher = new LocaleMatcher(SUPPORTED_LANGUAGES)
-
-/**
- * Find the closest supported language to the given one(s).
- *
- * More robust than i18next fallback behavior.
- * See https://github.com/falling-fruit/falling-fruit-web/pull/754.
- *
- * @param {string|string[]} language
- * @returns {string}
- */
-function closestSupportedLanguage(language) {
-  return localeMatcher.match(language).locale.id
+const CUSTOM_FALLBACKS = {
+  'zh-cn': 'zh-hans',
+  'zh-my': 'zh-hans',
+  'zh-sg': 'zh-hans',
+  'zh-hk': 'zh-hant',
+  'zh-mo': 'zh-hant',
+  'zh-tw': 'zh-hant',
+  // Theoretically not needed for i18next 25.0+ but version throws module parsing error
+  'zh-hans-cn': 'zh-hans',
+  'zh-hans-my': 'zh-hans',
+  'zh-hans-sg': 'zh-hans',
+  'zh-hant-hk': 'zh-hant',
+  'zh-hant-mo': 'zh-hant',
+  'zh-hant-tw': 'zh-hant',
 }
 
 const LanguageSelect = () => {
@@ -102,12 +97,15 @@ i18n
         order: ['localStorage', 'navigator'],
         lookupLocalStorage: LANGUAGE_CACHE_KEY,
         caches: false,
-        convertDetectedLanguage: closestSupportedLanguage,
+        convertDetectedLanguage: (language) => {
+          language = language.toLowerCase()
+          return CUSTOM_FALLBACKS[language] || language
+        },
       },
       react: {
         useSuspense: true,
       },
-      supportedLngs: SUPPORTED_LANGUAGES,
+      supportedLngs: LANGUAGE_OPTIONS.map((option) => option.value),
       lowerCaseLng: true,
       fallbackLng: FALLBACK_LANGUAGE,
       interpolation: {
