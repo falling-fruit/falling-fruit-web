@@ -13,7 +13,6 @@
     "@fontsource/noto-sans-arabic": "^5.2.5",
     "@fontsource/noto-sans-hebrew": "^5.2.5",
     "@fontsource/noto-sans-sc": "^5.2.5",
-    "@phensley/locale-matcher": "^1.10.2",
     "@reach/accordion": "^0.13.2",
     "@reach/checkbox": "^0.13.2",
     "@reach/combobox": "^0.13.2",

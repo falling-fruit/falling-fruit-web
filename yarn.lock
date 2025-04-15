@@ -1742,30 +1742,6 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@phensley/language-tag@~1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@phensley/language-tag/-/language-tag-1.10.2.tgz#fdced18c57ccd21555ecfb360c228f081168c157"
-  integrity sha512-Xdui/GVDztdYb9oGzysHRRnakD9FKJIRIRTYvq5SoeGmglAgtDXOLEAm+yTMl8sqMr6AdVCz3/kH7F9wNeGnSQ==
-  dependencies:
-    tslib "^2.8.1"
-
-"@phensley/locale-matcher@^1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@phensley/locale-matcher/-/locale-matcher-1.10.2.tgz#f29282d4e7482d068bd5178f8d7da80277fc8beb"
-  integrity sha512-6ZlWXRC+0g6MSN/BYxaaDVNCelyed2zYDT2ynTpkMbb2bbpjhFXOAweA0MdEkNtnMaFOZPSTyYnA5znUvOnh2Q==
-  dependencies:
-    "@phensley/language-tag" "~1.10.2"
-    "@phensley/locale" "~1.10.2"
-    tslib "^2.8.1"
-
-"@phensley/locale@~1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@phensley/locale/-/locale-1.10.2.tgz#88e204b8c06fa75371deb9fde879b48b7d66248e"
-  integrity sha512-5mLF7Tr6M/qnRdDTZ+h15hyTiektvJzqbP1NX5hc9cu/OcN/fT3CLZTRHH2xMl43VPb06psnOsdTiliBydoPpw==
-  dependencies:
-    "@phensley/language-tag" "~1.10.2"
-    tslib "^2.8.1"
-
 "@pmmmwh/react-refresh-webpack-plugin@0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.4.3.tgz#1eec460596d200c0236bf195b078a5d1df89b766"
@@ -11887,11 +11863,6 @@ tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
-
-tslib@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
-  integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
 tslib@~2.1.0:
   version "2.1.0"
