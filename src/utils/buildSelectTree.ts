@@ -96,7 +96,7 @@ class SelectTreeBuilder {
         .startsWith(parent.scientificName.toLowerCase())
     ) {
       node.commonName = ''
-      node.scientificName = type.cultivar
+      node.scientificName = `'${type.cultivar}'`
     } else {
       node.commonName = type.commonName
       node.scientificName = type.scientificName

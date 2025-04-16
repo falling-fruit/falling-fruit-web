@@ -11,9 +11,30 @@ const DisplayName = styled.span`
   opacity: ${(props) => (props.isSelected ? 1.0 : 0.5)};
 `
 
-const ScientificDisplayName = styled(DisplayName)`
-  font-style: italic;
-`
+const getDisplayLabel = (typesAccess, id) => {
+  const type = typesAccess.getType(id)
+  if (!type) {
+    return ''
+  }
+
+  if (type.cultivar) {
+    const parentType = typesAccess.getParentType(id)
+    if (
+      parentType &&
+      parentType.scientificName &&
+      (!type.commonName ||
+        type.commonName.toLowerCase() === parentType.commonName.toLowerCase())
+    ) {
+      return (
+        <>
+          {parentType.commonName} <i>'{type.cultivar}'</i>
+        </>
+      )
+    }
+  }
+
+  return type.commonName || <i>{type.scientificName}</i>
+}
 
 const TypeLabels = ({ typeIds }) => {
   const { types: selectedTypes } = useSelector((state) => state.filter)
@@ -22,23 +43,14 @@ const TypeLabels = ({ typeIds }) => {
   return (
     <TypeList>
       {(typeIds || []).map((id, index) => {
-        const [displayName, displayScientificName] =
-          typesAccess.getDisplayNames(id)
-        if (!displayName && !displayScientificName) {
-          return null
-        }
+        const displayLabel = getDisplayLabel(typesAccess, id)
 
-        return !displayName ? (
-          <ScientificDisplayName
-            key={index}
-            isSelected={selectedTypes.includes(id)}
-          >
-            {displayScientificName}
-          </ScientificDisplayName>
-        ) : (
-          <DisplayName key={index} isSelected={selectedTypes.includes(id)}>
-            {displayName}
-          </DisplayName>
+        return (
+          displayLabel && (
+            <DisplayName key={index} isSelected={selectedTypes.includes(id)}>
+              {displayLabel}
+            </DisplayName>
+          )
         )
       })}
     </TypeList>

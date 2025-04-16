@@ -132,8 +132,8 @@
     "form": {
       "access": "Dostęp",
       "comments": "Komentarze",
-      "comments_subtext": "Aktualizacje, kwestie dostępu, stan zdrowotny rośliny ...",
-      "description_subtext": "Usytuowanie, kwestie dostępu, stan zdrowotny rośliny ...",
+      "comments_subtext": "Aktualizacje, kwestie dostępu, stan rośliny ...",
+      "description_subtext": "Usytuowanie, kwestie dostępu, stan rośliny ...",
       "fruiting_status": "Stan owocowania",
       "position": "Pozycja",
       "season": "Sezon",
