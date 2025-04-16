@@ -66,9 +66,7 @@ const LanguageSelect = () => {
   return (
     <Select
       options={LANGUAGE_OPTIONS}
-      value={LANGUAGE_OPTIONS.find(
-        (option) => option.value === i18n.languages[0],
-      )}
+      value={LANGUAGE_OPTIONS.find((option) => option.value === i18n.language)}
       onChange={(option) => {
         i18n.changeLanguage(option.value, () => {
           localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
