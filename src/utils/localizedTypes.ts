@@ -5,17 +5,25 @@ import { components } from './apiSchema'
 import { tokenizeReference } from './tokenize'
 
 const extractCultivar = (scientificName: string): string | null => {
-  const cultivarIndex = scientificName.indexOf("'")
-  if (cultivarIndex === -1) {
+  const startIndex = scientificName.indexOf("'")
+  if (startIndex === -1) {
     return null
   }
-  const m = scientificName.substring(cultivarIndex)
+
+  const endIndex = scientificName.lastIndexOf("'")
+  if (endIndex === -1 || endIndex === startIndex) {
+    // Missing closing quote
+    return null
+  }
+
+  const m = scientificName.substring(startIndex, endIndex + 1)
 
   if (m.includes(' x ')) {
     // probably a hybrid of two cultivars - don't attempt to parse
     return null
   } else {
-    return m
+    // Return the cultivar name with quotes stripped
+    return m.replace(/^'|'$/g, '')
   }
 }
 
@@ -115,8 +123,7 @@ const toMenuEntry = (
 
   const cultivar = extractCultivar(scientificName)
   if (cultivar) {
-    const cultivarName = cultivar.replaceAll("'", '')
-    referenceStrings.push(cultivarName)
+    referenceStrings.push(cultivar)
   }
 
   const commonNameLabel =
@@ -162,6 +169,12 @@ export class TypesAccess {
   getType(id: Id): LocalizedType {
     return this.localizedTypes[this.idIndex[id]]
   }
+
+  getParentType(id: Id): LocalizedType | null {
+    const type = this.getType(id)
+    return type ? this.getType(type.parentId) : null
+  }
+
   getCommonName(id: Id): string {
     const t = this.localizedTypes[this.idIndex[id]]
     return t ? t.commonName : ''
@@ -179,29 +192,6 @@ export class TypesAccess {
   getMenuEntry(id: Id): TypeSelectMenuEntry | null {
     const t = this.localizedTypes[this.idIndex[id]]
     return t ? toMenuEntry(t, this.getCommonName(t.parentId)) : null
-  }
-
-  getDisplayNames(id: Id): [string, string] {
-    const type = this.getType(id)
-    if (!type) {
-      return ['', '']
-    }
-
-    if (type.cultivar) {
-      const parentType = this.getType(type.parentId)
-      if (
-        parentType &&
-        (!type.commonName ||
-          type.commonName.toLowerCase() === parentType.commonName.toLowerCase())
-      ) {
-        return [
-          `${parentType.commonName} ${type.cultivar}`,
-          type.scientificName,
-        ]
-      }
-    }
-
-    return [type.commonName, type.scientificName]
   }
 
   filter(predicate: (_type: LocalizedType) => boolean): TypesAccess {
