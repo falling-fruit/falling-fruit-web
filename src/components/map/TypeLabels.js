@@ -25,11 +25,7 @@ const getDisplayLabel = (typesAccess, id) => {
       (!type.commonName ||
         type.commonName.toLowerCase() === parentType.commonName.toLowerCase())
     ) {
-      return (
-        <>
-          {parentType.commonName} <i>'{type.cultivar}'</i>
-        </>
-      )
+      return `${parentType.commonName} '${type.cultivar}'`
     }
   }
 
