@@ -241,12 +241,20 @@ const MapPage = ({ isDesktop }) => {
 
   const { typesAccess } = useSelector((state) => state.type)
 
-  const ready = !typesAccess.isEmpty && !!googleMap
   useEffect(() => {
+    const ready =
+      !typesAccess.isEmpty && !!googleMap && !!initialView && !!dispatch
     if (ready) {
+      /*
+       * Install the handler as we now have all variables
+       */
+      handleViewChangeRef.current = throttle(
+        makeHandleViewChange(dispatch, googleMap, history),
+        1000,
+      )
       handleViewChangeRef.current(false)
     }
-  }, [ready])
+  }, [!typesAccess.isEmpty, !!googleMap, !!initialView, !!dispatch]) //eslint-disable-line
 
   const allLocations =
     clusters.length !== 0
@@ -268,13 +276,6 @@ const MapPage = ({ isDesktop }) => {
   }, [position, isDesktop])
 
   const apiIsLoaded = (map, maps) => {
-    /*
-     * Install the handler as we now have all variables
-     */
-    handleViewChangeRef.current = throttle(
-      makeHandleViewChange(dispatch, map, history),
-      1000,
-    )
     /*
      * Something breaks when storing maps in redux so pass a reference to it
      */

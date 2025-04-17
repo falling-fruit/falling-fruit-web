@@ -9,8 +9,15 @@ export const viewportSlice = createSlice({
   },
   reducers: {
     updateLastMapView: (state, action) => {
-      if (action.payload.width > 0 && action.payload.height > 0) {
-        state.lastMapView = action.payload
+      /*
+       * height and width are set to zero when coming back from list or activity page
+       * (if the API was previously loaded but map went off screen)
+       */
+      // Hold on to the viewport dimensions so we can use it
+      state.lastMapView = {
+        ...action.payload,
+        height: action.payload.height || state.lastMapView?.height,
+        width: action.payload.width || state.lastMapView?.width,
       }
     },
   },
