@@ -4,27 +4,29 @@ import { sortBy } from 'lodash'
 import { components } from './apiSchema'
 import { tokenizeReference } from './tokenize'
 
+const CULTIVAR_REGEX = new RegExp("'(.*)'")
+
+/**
+ * Extracts the cultivar from a scientific name.
+ *
+ * The cultivar is expected to be between the first and last single quotes,
+ * and not contain ' x ' (which suggests a hybrid of two cultivars).
+ *
+ * @param {string} scientificName - Scientific name.
+ * @returns {string | null} - Cultivar if found.
+ * @examples
+ * extractCultivar("")  // null
+ * extractCultivar("Malus")  // null
+ * extractCultivar("Malus 'Gala'")  // 'Gala'
+ * extractCultivar("Malus 'Gala' TM")  // 'Gala'
+ * extractCultivar("Malus 'Gala' x Malus 'Gaga")  // null
+ */
 const extractCultivar = (scientificName: string): string | null => {
-  const startIndex = scientificName.indexOf("'")
-  if (startIndex === -1) {
+  const cultivar = scientificName.match(CULTIVAR_REGEX)
+  if (!cultivar || cultivar[1].includes(' x ')) {
     return null
   }
-
-  const endIndex = scientificName.lastIndexOf("'")
-  if (endIndex === -1 || endIndex === startIndex) {
-    // Missing closing quote
-    return null
-  }
-
-  const m = scientificName.substring(startIndex, endIndex + 1)
-
-  if (m.includes(' x ')) {
-    // probably a hybrid of two cultivars - don't attempt to parse
-    return null
-  } else {
-    // Return the cultivar name with quotes stripped
-    return m.replace(/^'|'$/g, '')
-  }
+  return cultivar[1]
 }
 
 type Id = number
