@@ -2,14 +2,14 @@
   "devise": {
     "confirmations": {
       "confirmed": "Konto zostało poprawnie aktywowane.",
-      "no_token": "Nie możesz uzyskać dostępu do tej strony bez otrzymania e-maila z potwierdzeniem. Jeśli przyszedłeś z e-maila potwierdzającego, upewnij się, że użyłeś pełnego adresu URL.",
+      "no_token": "Nie możesz uzyskać dostępu do tej strony bez otrzymania e-maila z potwierdzeniem. Jeśli przyszedłeś/aś z e-maila potwierdzającego, upewnij się, że użyłeś/aś pełnego adresu URL.",
       "send_instructions": "Instrukcja jak aktywować konto zostanie niezwłocznie wysłana na podany adres e-mail."
     },
     "failure": {
       "already_authenticated": "Jesteś już zalogowany."
     },
     "passwords": {
-      "no_token": "Do tej strony możesz dostać się tylko poprzez wiadomość e-mail resetującą hasło. Jeśli to z niej tu trafiłeś, upewnij się, że użyłeś pełnego adresu.",
+      "no_token": "Do tej strony możesz dostać się tylko poprzez wiadomość e-mail resetującą hasło. Jeśli to z niej tu trafiłeś/aś, upewnij się, że użyłeś/aś pełnego adresu.",
       "send_instructions": "Instrukcja zmiany hasła zostanie niezwłocznie wysłana na podany adres e-mail.",
       "updated_not_active": "Hasło zmienione poprawnie."
     },
@@ -86,6 +86,9 @@
     "by_author": "przez {{author}}",
     "description": "Opis",
     "email": "Email",
+    "locations": {
+      "other": "Lokalizacje"
+    },
     "logout": "Wyloguj",
     "map": "Mapa",
     "name": "Nazwa",
@@ -233,12 +236,15 @@
     },
     "changes": {
       "change_in_city": "{{type}} w {{city}}",
+      "my_activity_empty": "Nie dodałeś/aś, nie edytowałeś/aś ani nie zrecenzowałeś/aś jeszcze żadnych lokalizacji",
+      "places": "Miejsca",
       "recent_changes": "Ostatnie zmiany",
       "type": {
         "added": "dodano",
         "edited": "edytowano",
         "visited": "odwiedzono"
-      }
+      },
+      "user_activity_empty": "Ten użytkownik nie dodał, nie edytował ani nie zrecenzował jeszcze żadnych lokalizacji"
     },
     "data": {
       "beware_html": "Uwaga! Po rozpakowaniu baza danych jest ogromnym plikiem, który przytłoczy większość arkuszy kalkulacyjnych. Jeśli potrzebujesz tylko danych dla małego regionu, najpierw spróbuj pobrać je za pomocą narzędzia do pobierania zintegrowanego z <a href=\"/\">mapą</a>.",
@@ -254,7 +260,6 @@
       "imported_on": "Zaimportowano {{date}}",
       "intro_html": "Falling Fruit chce być najbardziej kompleksowym i otwartym światowym zbiorem danych geograficznych o miejskich roślinach jadalnych. Podczas gdy nasi użytkownicy badają, edytują i dodają lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, my przeczesujemy znany wszechświat w poszukiwaniu istniejących zbiorów danych i importujemy je bezpośrednio do naszej <a href=\"/data\">bazy danych</a>, jednocząc wysiłki zbieraczy, leśników i freegan na całym świecie. Jeśli wiesz o zbiorze danych, którego nam brakuje, prosimy <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a>! Możesz też pomóc nam w procesie importu formatując dane przy użyciu naszego <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Pamiętaj, że ponieważ import musi być wykonywany ręcznie, późniejsze zmiany w oryginalnych danych nie będą widoczne na Falling Fruit.",
       "link": "Link",
-      "locations": "Lokalizacje",
       "table_info": "Każdy zestaw danych jest wymieniony z nazwą, liczbą lokalizacji i datą importu. Rozwinięcie każdego wiersza ujawnia dalsze szczegóły na temat oryginalnych danych, procesu importu i licencji określającej, jak można wykorzystać dane.",
       "type": "Typ",
       "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Spisy drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich spisu drzew."
@@ -347,7 +352,7 @@
       "photos": "Zdjęcia"
     },
     "update_delete": "Zaktualizuj lub usuń tę recenzję.",
-    "you_reviewed": "Zrecenzowałeś tę lokalizację {{date}}"
+    "you_reviewed": "Zrecenzowałeś/aś tę lokalizację {{date}}"
   },
   "share": {
     "title": "Udostępnij ten widok",
@@ -380,15 +385,18 @@
     "change_password": "Zmień hasło",
     "current_password": "Aktualne hasło",
     "edit_account": "Edytuj konto",
+    "email_settings": "Ustawienia e-mail",
     "forgot_password": "Zresetuj hasło",
     "joined_on": "Dołączył(a) {{date}}",
     "login": "Zaloguj się",
+    "my_activity": "Moja aktywność",
     "new_password": "Nowe hasło",
     "new_password_confirmation": "Potwierdzenie nowego hasła",
     "options": {
       "announcements_email": "Otrzymywanie e-maili z ważnymi ogłoszeniami i możliwościami (1-2 razy w roku)"
     },
     "password_confirmation": "Potwierdzenie hasła",
+    "password_settings": "Ustawienia hasła",
     "profile": {
       "title": "Użytkownik: {{name}}"
     },

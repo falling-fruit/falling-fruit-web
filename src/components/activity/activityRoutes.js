@@ -1,15 +1,20 @@
 import { Route } from 'react-router-dom'
 
-import ActivityPage from './ActivityPage'
+import RecentChangesPage from './RecentChangesPage'
+import UserActivityPage from './UserActivityPage'
 
 const pages = [
   {
-    path: ['/changes'],
-    component: ActivityPage,
+    path: '/changes/:userId',
+    component: UserActivityPage,
+  },
+  {
+    path: '/changes',
+    component: RecentChangesPage,
   },
 ]
 
 const activityRoutes = pages.map((props) => (
-  <Route key={props.path[0]} {...props} />
+  <Route key={props.path} {...props} />
 ))
 export default activityRoutes

@@ -1,4 +1,4 @@
-import { Calendar } from '@styled-icons/boxicons-regular'
+import { ArrowBack, Book, Calendar, User } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -27,7 +27,7 @@ const UserProfile = () => {
   const { t, i18n } = useTranslation()
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-  const { anchorElementId } = useSelector((state) => state.activity)
+  const { lastBrowsedSection } = useSelector((state) => state.activity)
 
   useEffect(() => {
     async function fetchUserData() {
@@ -54,7 +54,11 @@ const UserProfile = () => {
         <BackButton
           onClick={(event) => {
             event.stopPropagation()
-            anchorElementId ? history.push('/changes') : history.goBack()
+            if (lastBrowsedSection.id && !lastBrowsedSection.userId) {
+              history.push('/changes')
+            } else {
+              history.goBack()
+            }
           }}
         >
           <ReturnIcon />
@@ -75,6 +79,12 @@ const UserProfile = () => {
               date: formatISOString(created_at, i18n.language),
             })}
           </time>
+        </p>
+      </IconBesideText>
+      <IconBesideText>
+        <Book color={theme.secondaryText} size={20} />
+        <p>
+          <a href={`/changes/${id}`}>{t('glossary.activity')}</a>
         </p>
       </IconBesideText>
     </Page>

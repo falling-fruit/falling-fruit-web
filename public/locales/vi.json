@@ -86,6 +86,9 @@
     "by_author": "bởi {{author}}",
     "description": "Miêu tả",
     "email": "Email",
+    "locations": {
+      "other": "Vị trí"
+    },
     "logout": "Đăng xuất",
     "map": "Bản đồ",
     "name": "Tên",
@@ -233,12 +236,15 @@
     },
     "changes": {
       "change_in_city": "{{type}} tại {{city}}",
+      "my_activity_empty": "Bạn chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào",
+      "places": "Địa điểm",
       "recent_changes": "Thay đổi gần đây",
       "type": {
         "added": "đã thêm",
         "edited": "đã chỉnh sửa",
         "visited": "đã ghé thăm"
-      }
+      },
+      "user_activity_empty": "Người dùng này chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào"
     },
     "data": {
       "beware_html": "Nhưng hãy cẩn thận! Sau khi được giải nén, cơ sở dữ liệu là một tệp lớn có thể nghiền nát hầu hết các phần mềm bảng tính. Nếu bạn chỉ cần dữ liệu cho một khu vực nhỏ, trước tiên hãy thử truy xuất chúng bằng công cụ tải xuống được tích hợp vào <a href=\"/\">bản đồ</a>.",
@@ -254,7 +260,6 @@
       "imported_on": "Đã nhập vào {{date}}",
       "intro_html": "Falling Fruit mong muốn trở thành bộ dữ liệu địa lý mở và toàn diện nhất về thực phẩm đô thị. Trong khi người dùng khám phá, chỉnh sửa và thêm vị trí bằng <a href=\"/\">bản đồ</a> của chúng tôi, chúng tôi tìm kiếm khắp vũ trụ đã biết để tìm các bộ dữ liệu có sẵn và nhập chúng trực tiếp vào <a href=\"/data\">cơ sở dữ liệu</a> , hợp nhất nỗ lực của những người kiếm ăn, người đi rừng và những người tự do ở khắp mọi nơi. Nếu bạn biết về tập dữ liệu mà chúng tôi đã bỏ lỡ, vui lòng <a href=\"mailto:info@fallingfruit.org\">cho chúng tôi biết</a> ! Bạn cũng có thể giúp chúng tôi trong quá trình nhập bằng cách định dạng dữ liệu bằng <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">mẫu nhập</a>. Lưu ý rằng vì quá trình nhập phải được thực hiện thủ công nên tất cả các thay đổi đối với dữ liệu gốc được thực hiện sau khi nhập sẽ không được phản ánh trên Falling Fruit.",
       "link": "Liên kết",
-      "locations": "Vị trí",
       "table_info": "Mỗi tập dữ liệu được liệt kê theo tên, số lượng vị trí và ngày được nhập. Việc mở rộng từng hàng sẽ hiển thị thêm thông tin chi tiết về dữ liệu, quy trình nhập và giấy phép quản lý cách sử dụng dữ liệu.",
       "type": "Loại",
       "types_of_data": "Các bộ dữ liệu được nhập vào Falling Fruit thuộc hai loại chính. \"Bản đồ cộng đồng\" được xây dựng bởi những người kiếm ăn và những người sống tự do khi họ nghiên cứu cộng đồng của mình để tìm đồ ăn. Chúng tôi mang ơn những người vẽ bản đồ công dân chăm chỉ đã biên soạn dữ liệu này. \"Kiểm kê cây\" được biên soạn bởi các thành phố, trường đại học và các tổ chức khác mong muốn ghi chép và chăm sóc cây của họ tốt hơn. Chúng tôi khai thác những bộ dữ liệu khổng lồ này về các loài sản xuất thực phẩm và thêm chúng vào bản đồ. Để giúp chúng tôi lập bản đồ cây ăn quả ở khu vực lân cận của bạn, hãy liên hệ với trường học hoặc thành phố của bạn để thúc giục họ chia sẻ kho cây của họ với chúng tôi."
@@ -380,15 +385,18 @@
     "change_password": "Thay đổi mật khẩu của tôi",
     "current_password": "Mật khẩu hiện tại",
     "edit_account": "Chỉnh sửa tài khoản",
+    "email_settings": "Cài đặt email",
     "forgot_password": "Đặt lại mật khẩu của bạn",
     "joined_on": "Tham gia vào {{date}}",
     "login": "Đăng nhập",
+    "my_activity": "Hoạt động của tôi",
     "new_password": "Mật khẩu mới",
     "new_password_confirmation": "Xác nhận mật khẩu mới",
     "options": {
       "announcements_email": "Nhận email với các thông báo và cơ hội quan trọng (1-2 mỗi năm)"
     },
     "password_confirmation": "Xác nhận mật khẩu",
+    "password_settings": "Cài đặt mật khẩu",
     "profile": {
       "title": "Người dùng: {{name}}"
     },

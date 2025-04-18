@@ -30,7 +30,6 @@ glossary.send	users.send
 glossary.save_changes	users.save_changes
 glossary.login	users.login
 glossary.labels	pages.settings.labels
-glossary.locations.other	pages.datasets.locations
 glossary.links.one	pages.datasets.link
 glossary.imported_datasets	pages.datasets.imported_datasets
 glossary.edit	form.button.edit

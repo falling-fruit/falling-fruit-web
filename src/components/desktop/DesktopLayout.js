@@ -4,6 +4,7 @@ import SplitPane from 'react-split-pane'
 import styled from 'styled-components/macro'
 
 import aboutRoutes from '../about/aboutRoutes'
+import accountRoutes from '../account/accountRoutes'
 import activityRoutes from '../activity/activityRoutes'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
@@ -56,6 +57,7 @@ const DesktopLayout = () => (
       {aboutRoutes}
       {activityRoutes}
       {authRoutes}
+      {accountRoutes}
       {profileRoutes}
       <Route>
         <WindowSize>

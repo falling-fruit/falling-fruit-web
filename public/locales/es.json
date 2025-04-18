@@ -86,6 +86,9 @@
     "by_author": "por {{author}}",
     "description": "Descripción",
     "email": "Email",
+    "locations": {
+      "other": "Ubicaciones"
+    },
     "logout": "Salir",
     "map": "Mapa",
     "name": "Nombre",
@@ -233,12 +236,15 @@
     },
     "changes": {
       "change_in_city": "{{type}} en {{city}}",
+      "my_activity_empty": "Aún no has añadido, editado o revisado ninguna ubicación",
+      "places": "Lugares",
       "recent_changes": "Cambios recientes",
       "type": {
         "added": "añadido",
         "edited": "editado",
         "visited": "visitado"
-      }
+      },
+      "user_activity_empty": "Este usuario aún no ha añadido, editado o revisado ninguna ubicación"
     },
     "data": {
       "beware_html": "¡Pero cuidado! Una vez descomprimido, la base de datos es un archivo enorme que aplastará la mayoría del software de hoja de cálculo. Si sólo necesita los datos para una pequeña región, probar primero recuperarlos utilizando la herramienta de descarga integrada en el <a href=\"/\">mapa</a>.",
@@ -254,7 +260,6 @@
       "imported_on": "Importado el {{date}}",
       "intro_html": "Falling Fruit aspira a ser el banco de datos geográficos sobre comestibles urbanos lo más amplio y accesible posible.  Mientras nuestros usuarios siguen explorando, editando y añadiendo ubicaciones con la ayuda de nuestro <a href=\"/\">mapa</a>, nosotros peinamos el universo conocido de datos pre-existentes para incorporarlos a nuestro <a href=\"/data\">base des datos</a>, uniendo los esfuerzos de recolectores, silvicultores y freegans de todas partes. Si conocéis datos que nos hayamos saltado, os pedimos que <a href=\"mailto:info@fallingfruit.org\">nos informéis</a>. También nos podríais ayudar en el proceso de introducción de datos con nuestro <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">formulario de importación de datos</a>. Pero tened en cuenta que como la importación se debe realizar manualmente, todo los cambios de los datos originales después de la importación no se reflejarán en la web Falling Fruit.",
       "link": "Enlace",
-      "locations": "Ubicaciones",
       "table_info": "Cada conjunto de datos está listado por nombre, número de ubicaciones y fecha de importación. Al expandir cada fila se revelan más detalles sobre los datos originales, el proceso de importación y la licencia que rige cómo se pueden usar los datos.",
       "type": "Tipo",
       "types_of_data": "Los conjuntos de datos importados a Falling Fruit se dividen en dos categorías principales. Los \"mapas comunitarios\" son construídos por cazadores-recolectores y freegans que buscan en su entorno cosas de comer. Estamos en deuda con los diligentes ciudadanos-cartógrafos que han compilado los datos. Los \"inventarios de árboles\" son compilados por ciudades, universidades y otras instituciones que deseen documentar mejor y cuidar de sus árboles. Extraemos estos grandes conjuntos de datos para las especies productoras de alimentos y agregarlos al mapa. Para ayudarnos a cartografiar tu vecindario en el mapa, contacta con escuela o ciudad instándolos a compartir su inventario de árboles con nosotros."
@@ -380,15 +385,18 @@
     "change_password": "Cambiar mi contraseña",
     "current_password": "Contraseña actual",
     "edit_account": "Editar cuenta",
+    "email_settings": "Configuración de correo electrónico",
     "forgot_password": "Restablecer su contraseña",
     "joined_on": "Se unió el {{date}}",
     "login": "Iniciar sesión",
+    "my_activity": "Mi actividad",
     "new_password": "Nueva contraseña",
     "new_password_confirmation": "Confirmación de nueva contraseña",
     "options": {
       "announcements_email": "Recibir correos electrónicos con anuncios y oportunidades importantes (1-2 por año)"
     },
     "password_confirmation": "Confirmación de contraseña",
+    "password_settings": "Configuración de contraseña",
     "profile": {
       "title": "Usuario: {{name}}"
     },

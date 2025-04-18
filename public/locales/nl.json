@@ -86,6 +86,9 @@
     "by_author": "door {{author}}",
     "description": "Omschrijving",
     "email": "E-mail",
+    "locations": {
+      "other": "Locaties"
+    },
     "logout": "Uitloggen",
     "map": "Kaart",
     "name": "Naam",
@@ -233,12 +236,15 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
+      "my_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld",
+      "places": "Plaatsen",
       "recent_changes": "Recente wijzigingen",
       "type": {
         "added": "toegevoegd",
         "edited": "bewerkt",
         "visited": "bezocht"
-      }
+      },
+      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld"
     },
     "data": {
       "beware_html": "Maar let op! Eenmaal uitgepakt is onze database een enorm bestand dat de meeste rekenbladsoftware zal vernietigen. Als u alleen gegevens nodig hebt voor een kleine regio, probeer dan eerst om deze te downloaden via het geïntegreerde downloadhulpmiddel op de <a href=\"/\">kaart</a>.",
@@ -254,7 +260,6 @@
       "imported_on": "Geïmporteerd op {{date}}",
       "intro_html": "Falling Fruit heeft als doel om 's werelds meest uitgebreide en open aardrijkskunde gegevensset van stadsvoedsel te worden. Terwijl onze gebruikers verkennen, bewerken en locaties bijdragen via onze <a href=\"/\">kaart</a>, kammen wij het universum uit op zoek naar reeds bestaande kennis en importeren deze direct in onze <a href=\"/data\">database</a>, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. Als u ziet dat er een gegevensset ontbreekt, <a href=\"mailto:info@fallingfruit.org\">laat het ons dan weten</a>! U kunt ons helpen bij het importteringsproces door de gegevens op te maken m.b.v. het <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importsjabloon</a>. Let op: importteringen moeten handmatig worden uitgevoerd; alle wijzigingen aan de originele gevens na de importtering worden niet weergegeven op Falling Fruit.",
       "link": "Link",
-      "locations": "Locaties",
       "table_info": "Elke gegevensset wordt opgesomd op naam, aantal locaties en importeringsdatum. Het uitklappen van elke rij weergeeft meer informatie over de gegevens, het importteringsproces en de licentie waarin staat hoe u de gegevens mag gebruiken.",
       "type": "Soort",
       "types_of_data": "Geïmporteerde gegevenssets vallen onder twee hoofdcategorieën. \"Gemeenschapskaarten\" worden gebouwd door voedselverzamelaars en freegans terwijl ze hun gemeenschap afspeuren op zoek naar eetbaar voedsel. Dit wordt gedaan door hardwerkende inwoners met verstand van cartografie; onze dank is dan ook zeer groot. \"Boominventarissen\" worden samengesteld door steden, universiteiten en andere instituten die bomen beter willen documenteren en beter voor ze willen zorgen. We kammen deze gegevenssets uit en selecteren voedselproducerende soorten en voegen deze toe aan de kaart. Als u wilt helpen bij het in kaart brengen van fruitbomen in uw buurt, neem dan contact op met uw school of stad en overtuig ze ervan hun boominventaris met ons te delen."
@@ -380,15 +385,18 @@
     "change_password": "Mijn wachtwoord wijzigen",
     "current_password": "Huidig wachtwoord",
     "edit_account": "Account bewerken",
+    "email_settings": "E-mailinstellingen",
     "forgot_password": "Wachtwoord herstellen",
     "joined_on": "Lid sinds {{date}}",
     "login": "Inloggen",
+    "my_activity": "Mijn activiteit",
     "new_password": "Nieuw wachtwoord",
     "new_password_confirmation": "Nieuw wachtwoord bevestiging",
     "options": {
       "announcements_email": "E-mails ontvangen met belangrijke aankondigingen en uitdagingen (1-2 per jaar)"
     },
     "password_confirmation": "Wachtwoord bevestiging",
+    "password_settings": "Wachtwoordinstellingen",
     "profile": {
       "title": "Gebruiker: {{name}}"
     },
