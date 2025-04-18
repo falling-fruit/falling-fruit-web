@@ -54,7 +54,7 @@ const TypesSelect = () => {
         label={t('glossary.type.other')}
         options={typeOptions}
         isMulti
-        closeMenuOnSelect={false}
+        closeMenuOnSelect
         blurInputOnSelect={false}
         formatOptionLabel={(option) =>
           option.__isNew__ ? (
