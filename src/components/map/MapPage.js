@@ -9,7 +9,7 @@ import styled from 'styled-components/macro'
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings, updatePosition } from '../../redux/locationSlice'
-import { clearInitialView, setGoogle } from '../../redux/mapSlice'
+import { disconnectMap, setGoogle } from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import throttle from '../../utils/throttle'
@@ -241,20 +241,30 @@ const MapPage = ({ isDesktop }) => {
 
   const { typesAccess } = useSelector((state) => state.type)
 
+  const apiIsLoaded = (map, maps) => {
+    /*
+     * Something breaks when storing maps in redux so pass a reference to it
+     */
+    dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
+  }
+
   useEffect(() => {
-    const ready =
-      !typesAccess.isEmpty && !!googleMap && !!initialView && !!dispatch
+    const ready = dispatch && !typesAccess.isEmpty && googleMap
     if (ready) {
       /*
-       * Install the handler as we now have all variables
+       * This usually happens after apiIsLoaded puts googleMap in redux
+       * but on first render, types might not have been fetched yet so only install the handler when both happened
        */
       handleViewChangeRef.current = throttle(
         makeHandleViewChange(dispatch, googleMap, history),
         1000,
       )
+      /*
+       * Call the handler for the first time since map (re)opened
+       */
       handleViewChangeRef.current(false)
     }
-  }, [!typesAccess.isEmpty, !!googleMap, !!initialView, !!dispatch]) //eslint-disable-line
+  }, [!typesAccess.isEmpty, googleMap, !!dispatch]) //eslint-disable-line
 
   const allLocations =
     clusters.length !== 0
@@ -274,13 +284,6 @@ const MapPage = ({ isDesktop }) => {
   useEffect(() => {
     setDraggedPosition(isDesktop ? position : null)
   }, [position, isDesktop])
-
-  const apiIsLoaded = (map, maps) => {
-    /*
-     * Something breaks when storing maps in redux so pass a reference to it
-     */
-    dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
-  }
 
   const handleClusterClick = (cluster) => {
     if (cluster.count === 1) {
@@ -462,7 +465,7 @@ const MapPage = ({ isDesktop }) => {
           }}
           yesIWantToUseGoogleMapApiInternals
           onUnmount={() => {
-            dispatch(clearInitialView())
+            dispatch(disconnectMap())
           }}
         >
           {geolocation && !geolocation.loading && !geolocation.error && (
