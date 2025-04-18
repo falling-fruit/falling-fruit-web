@@ -7,6 +7,7 @@ import { matchPath, useLocation } from 'react-router-dom'
 
 import { useAppHistory } from '../../utils/useAppHistory'
 import aboutRoutes from '../about/aboutRoutes'
+import { accountPages } from '../account/accountRoutes'
 import activityRoutes from '../activity/activityRoutes'
 import { authPages } from '../auth/authRoutes'
 import { Tab } from '../ui/PageTabs'
@@ -44,7 +45,10 @@ const Tabs = () => {
       label: t('menu.list'),
     },
     {
-      paths: authPages.map((route) => route.path),
+      paths: [
+        ...authPages.map((route) => route.path),
+        ...accountPages.map((route) => route.path),
+      ],
       icon: isLoggedIn ? <UserCircle /> : <User />,
       label: isLoggedIn ? t('glossary.account') : t('users.sign_in'),
     },

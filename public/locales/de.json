@@ -86,6 +86,9 @@
     "by_author": "von {{author}}",
     "description": "Beschreibung",
     "email": "Email",
+    "locations": {
+      "other": "Standorte"
+    },
     "logout": "Abmelden",
     "map": "Karte",
     "name": "Name",
@@ -233,12 +236,15 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
+      "my_activity_empty": "Sie haben noch keine Orte hinzugefügt, bearbeitet oder überprüft",
+      "places": "Orte",
       "recent_changes": "Aktuelle Änderungen",
       "type": {
         "added": "hinzugefügt",
         "edited": "bearbeitet",
         "visited": "besucht"
-      }
+      },
+      "user_activity_empty": "Dieser Benutzer hat noch keine Orte hinzugefügt, bearbeitet oder überprüft"
     },
     "data": {
       "beware_html": "Aber Vorsicht! Sobald die Daten nicht mehr komprimiert sind, implodiert fast jede Tabellen-Software ab der Datenunmenge! Nur wer daran interessiert ist, mit der gesamten Datenmenge zu arbeiten, sollte diesen Weg gehen. Für alle Anderen ist es die bessere Lösung, selektiv die gewünschten Daten herunterzuladen. Das Download-Tool ist direkt in die <a href=\"/\">Karte</a> integriert.",
@@ -254,7 +260,6 @@
       "imported_on": "Importiert am {{date}}",
       "intro_html": "Es ist unser erklärtes Ziel, den weltweit umfassendsten Datensatz frei zugänglicher Geodaten der urbanen Ernte zu bieten. Während unsere Nutzer unserer <a href=\"/\">Karte</a> täglich eigene Standorte hinzufügen, durchsuchen wir das Internet nach bereits bestehenden Datenquellen. Nur so können wir das Wissen Aller vereinen! Wenn du von einem Datensatz weisst, den wir verpasst haben, dann <a href=\"mailto:info@fallingfruit.org\">schreib uns</a>! Falls du selber Zugriff auf nützliche Daten hast, kannst du unsere <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">Import-Vorlage</a> benützen, um uns das Hinzufügen deines Datensatzes zu erleichtern. Beachte, dass alle Imports manuell durchgeführt werden müssen. Spätere Änderungen am Original-Datensatz werden daher nicht auf der Hompage wiedergegeben.",
       "link": "Link",
-      "locations": "Standorte",
       "table_info": "Jeder Datensatz wird mit Namen, Anzahl der Standorte und Import-Datum aufgelistet. Wenn du die Zeile expandierst, sind zudem weitere Details über die Original-Daten, den Import oder Lizenz-Informationen aufgeführt.",
       "type": "Art",
       "types_of_data": "Datensätze die von Falling Fruit importiert werden, fallen in zwei Hauptkategorien. \"Gemeinschaftskarten\" werden von Sammlerinnen und Freeganern erstellt, indem sie in ihrem Umfeld öffentliche Nahrungsmittel-Quellen suchen und kartieren. Ein Riesiges Dankeschön geht an alle, die tagtäglich auf der Suche sind und uns ihre Daten übermitteln. \"Bauminventare\" werden durch Städte, Universitäten oder andere Institutionen zusammengestellt, die ihren Baumbestand überblicken und erhalten möchten. Wir filtern aus diesen riesigen Datenmengen die essbaren Arten heraus und fügen sie unserer Karte hinzu. Wenn in deiner Ecke der Welt noch Daten fehlen, dann kontaktiere deine Stadt oder deine Gemeinde und fordere sie auf, allfällig vorhandene Daten mit uns zu teilen! Wir sind für jede Hilfe dankbar!"
@@ -380,15 +385,18 @@
     "change_password": "Ändere mein Passwort",
     "current_password": "Aktuelles Passwort",
     "edit_account": "Konto bearbeiten",
+    "email_settings": "E-Mail-Einstellungen",
     "forgot_password": "Passwort zurücksetzen",
     "joined_on": "Beigetreten am {{date}}",
     "login": "Login",
+    "my_activity": "Meine Aktivitäten",
     "new_password": "Neues Passwort",
     "new_password_confirmation": "Neues Passwort bestätigen",
     "options": {
       "announcements_email": "Empfange Emails mit wichtigen Bekanntmachungen und Gelegenheiten (1-2 pro Jahr)"
     },
     "password_confirmation": "Passwort bestätigen",
+    "password_settings": "Passwort-Einstellungen",
     "profile": {
       "title": "Benutzer: {{name}}"
     },

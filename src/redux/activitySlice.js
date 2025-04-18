@@ -4,51 +4,92 @@ import { toast } from 'react-toastify'
 
 import { getLocationsChanges } from '../utils/api'
 
-const fetchLocationChanges = createAsyncThunk(
-  'activity/fetchLocationChanges',
+const fetchLocationChangesUser = createAsyncThunk(
+  'activity/fetchLocationChangesUser',
   getLocationsChanges,
 )
 
+const fetchLocationChangesAll = createAsyncThunk(
+  'activity/fetchLocationChangesAll',
+  getLocationsChanges,
+)
+
+export const getUserActivity = (userId) => (dispatch, getState) => {
+  const state = getState()
+  const { changesByUser } = state.activity
+
+  if (changesByUser[userId]) {
+    return Promise.resolve(changesByUser[userId])
+  } else {
+    return dispatch(fetchLocationChangesUser({ user_id: userId }))
+  }
+}
+
 export const fetchMoreLocationChanges = () => (dispatch, getState) => {
   const state = getState()
-  const latest = state.activity.fetchedUntilDate || new Date().toISOString()
+  const latest =
+    state.activity.recentChanges.fetchedUntilDate || new Date().toISOString()
   const earliest = new Date(
     new Date(latest).getTime() - 7 * 24 * 60 * 60 * 1000,
   ).toISOString()
-  return dispatch(fetchLocationChanges({ earliest, latest, offset: 0 }))
+
+  return dispatch(fetchLocationChangesAll({ earliest, latest }))
 }
 
 const activitySlice = createSlice({
   name: 'activity',
   initialState: {
-    isLoading: false,
-    locationChanges: [],
-    fetchedUntilDate: null,
-    anchorElementId: null,
+    recentChanges: {
+      data: [],
+      isLoading: true,
+      fetchedUntilDate: null,
+    },
+    changesByUser: {},
+    lastBrowsedSection: {
+      id: null,
+      userId: null,
+    },
   },
   reducers: {
-    setAnchorElementId: (state, action) => {
-      state.anchorElementId = action.payload
+    setLastBrowsedSection: (state, action) => {
+      state.lastBrowsedSection = action.payload
     },
   },
   extraReducers: {
-    [fetchLocationChanges.pending]: (state) => {
-      state.isLoading = true
+    [fetchLocationChangesUser.fulfilled]: (state, action) => {
+      const userId = action.meta.arg.user_id
+      state.changesByUser[userId] = action.payload
     },
-    [fetchLocationChanges.fulfilled]: (state, action) => {
+    [fetchLocationChangesUser.rejected]: (state, action) => {
+      toast.error(
+        i18next.t('error_message.api.fetch_location_changes_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
+    },
+    [fetchLocationChangesAll.pending]: (state) => {
+      state.recentChanges.isLoading = true
+    },
+    [fetchLocationChangesAll.fulfilled]: (state, action) => {
       const { earliest } = action.meta.arg
 
-      state.locationChanges.push(...action.payload)
-      state.fetchedUntilDate = state.fetchedUntilDate
+      state.recentChanges.data.push(...action.payload)
+      state.recentChanges.fetchedUntilDate = state.recentChanges
+        .fetchedUntilDate
         ? new Date(
-            Math.min(new Date(state.fetchedUntilDate), new Date(earliest)),
+            Math.min(
+              new Date(state.recentChanges.fetchedUntilDate),
+              new Date(earliest),
+            ),
           ).toISOString()
         : earliest
 
-      state.isLoading = false
+      state.recentChanges.isLoading = false
     },
-    [fetchLocationChanges.rejected]: (state, action) => {
-      state.isLoading = false
+    [fetchLocationChangesAll.rejected]: (state, action) => {
+      state.recentChanges.isLoading = false
+
       toast.error(
         i18next.t('error_message.api.fetch_location_changes_failed', {
           message:
@@ -59,6 +100,6 @@ const activitySlice = createSlice({
   },
 })
 
-export const { setAnchorElementId } = activitySlice.actions
+export const { setLastBrowsedSection } = activitySlice.actions
 
 export default activitySlice.reducer

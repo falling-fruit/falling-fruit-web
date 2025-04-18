@@ -48,7 +48,7 @@ const ImportsTable = () => {
       grow: 3,
     },
     {
-      name: t('pages.datasets.locations'),
+      name: t('glossary.locations.other'),
       selector: (row) => row.location_count,
       sortable: true,
       right: true,

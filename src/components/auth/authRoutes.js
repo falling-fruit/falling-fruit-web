@@ -1,6 +1,5 @@
 import { Route } from 'react-router-dom'
 
-import AccountPage from './AccountPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
 import LoginPage from './LoginPage'
@@ -9,10 +8,6 @@ import PasswordSetPage from './PasswordSetPage'
 import SignupPage from './SignupPage'
 
 const pages = [
-  {
-    path: '/users/edit',
-    component: AccountPage,
-  },
   {
     path: '/users/sign_in',
     component: LoginPage,

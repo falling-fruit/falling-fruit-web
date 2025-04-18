@@ -1,4 +1,4 @@
-import { Map } from '@styled-icons/boxicons-regular'
+import { MapAlt as Map } from '@styled-icons/boxicons-regular'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
-import { setAnchorElementId } from '../../redux/activitySlice'
+import { setLastBrowsedSection } from '../../redux/activitySlice'
 import { viewToString } from '../../utils/appUrl'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
@@ -23,7 +23,7 @@ const formatChangeType = (type, t) => {
   }
 }
 
-const AuthorLink = styled(Link)`
+export const AuthorLink = styled(Link)`
   color: ${({ theme }) => theme.blue} !important;
 `
 
@@ -111,6 +111,7 @@ const ActivityTextComponent = ({
   userId,
   interactionType,
   onClickLink,
+  hideAuthor,
 }) => {
   const locationParts = [location.city, location.state, location.country]
   const hasLocationInfo = locationParts.filter(Boolean).length > 0
@@ -126,12 +127,15 @@ const ActivityTextComponent = ({
         locationParts.filter(Boolean).join(', ')
       ) : (
         <>
-          <Map style={{ verticalAlign: 'text-top' }} size="1em" />
+          <Map
+            style={{ verticalAlign: 'sub', marginRight: '0.1em' }}
+            size="1em"
+          />
           {location.coordinatesGrid}
         </>
       )}
-      {author && ' — '}
-      {author && (
+      {!hideAuthor && author && ' — '}
+      {!hideAuthor && author && (
         <>
           {userId ? (
             <AuthorLink to={`/profiles/${userId}`} onClick={onClickLink}>
@@ -146,30 +150,26 @@ const ActivityTextComponent = ({
   )
 }
 
-const formatPeriodName = (daysAgo, t) => {
-  if (daysAgo === 0) {
-    return t('time.last_24_hours')
-  } else if (daysAgo === 1) {
-    const time = t('time.days.one', { count: daysAgo })
-    return t('time.time_ago', { time })
-  } else {
-    const time = t('time.days.other', { count: daysAgo })
-    return t('time.time_ago', { time })
-  }
-}
-
-const ChangesPeriod = ({ period }) => {
+const ChangesPeriod = ({ period, userId }) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const onClickLink = useCallback(
-    () => dispatch(setAnchorElementId(period.daysAgo.toString())),
-    [dispatch, period.daysAgo],
+    () =>
+      dispatch(
+        setLastBrowsedSection({
+          id: period.formattedDate.toString(),
+          userId: userId,
+        }),
+      ),
+    [dispatch, period.formattedDate, userId],
   )
-  const { t } = useTranslation()
+
+  // If userId is provided, we should hide the author in activity text
+  const hideAuthor = !!userId
 
   return (
-    <div id={period.daysAgo}>
-      <h3>{formatPeriodName(period.daysAgo, t)}</h3>
+    <div id={period.formattedDate}>
+      <h3>{period.formattedDate}</h3>
       <ListChanges>
         {period.activities.map((activity, index) => (
           <ListItem key={index} isDesktop={isDesktop}>
@@ -188,6 +188,7 @@ const ChangesPeriod = ({ period }) => {
                     userId={activity.userId}
                     interactionType={interactionType}
                     onClickLink={onClickLink}
+                    hideAuthor={hideAuthor}
                   />
                 </p>
               ) : null

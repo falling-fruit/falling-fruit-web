@@ -86,6 +86,9 @@
     "by_author": "par {{author}}",
     "description": "Description",
     "email": "Email",
+    "locations": {
+      "other": "Emplacements"
+    },
     "logout": "Déconnexion",
     "map": "Carte",
     "name": "Nom",
@@ -233,12 +236,15 @@
     },
     "changes": {
       "change_in_city": "{{type}} à {{city}}",
+      "my_activity_empty": "Vous n'avez pas encore ajouté, modifié ou évalué d'emplacements",
+      "places": "Lieux",
       "recent_changes": "Changements récents",
       "type": {
         "added": "ajouté",
         "edited": "modifié",
         "visited": "visité"
-      }
+      },
+      "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué d'emplacements"
     },
     "data": {
       "beware_html": "Attention! Une fois décompressées, les données deviennent un fichier énorme qui écrase la plupart des logiciels de tableur. Si vous recherchez seulement les données d'une zone limitée, essayez d'abord de récupérer les points d'intérêts avec l'outil de téléchargement intégré à la <a href=\"/\">carte</a>.",
@@ -254,7 +260,6 @@
       "imported_on": "Importé le {{date}}",
       "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l'univers au peigne fin, à la recherche d'autres informations que nous ajoutons à notre <a href=\"/data\">base de données</a>, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu'il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n'hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d'importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d'importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d'origine après importation ne seront pas reportés sur Falling Fruit.",
       "link": "Lien",
-      "locations": "Emplacements",
       "table_info": "Chaque ensemble de données est listé par nom, nombre de sites et date d'importation. En élargissant chaque ligne de données, vous verrez d'autres détails concernant les données, l'importation et la licence relative aux conditions d'utilisation de ces données.",
       "type": "Type",
       "types_of_data": "Il y a deux catégories d'ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d'arbres» sont compilés par des villes, des universités et d'autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s'en occuper. Nous parcourons ces larges bases de données à la recherche d'espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d'arbres avec nous."
@@ -380,15 +385,18 @@
     "change_password": "Modifier mon mot de passe",
     "current_password": "Mot de passe actuel",
     "edit_account": "Modifier mon compte",
+    "email_settings": "Paramètres de messagerie",
     "forgot_password": "Réinitialiser votre mot de passe",
     "joined_on": "Inscrit le {{date}}",
     "login": "Connexion",
+    "my_activity": "Mon activité",
     "new_password": "Nouveau mot de passe",
     "new_password_confirmation": "Confirmation du nouveau mot de passe",
     "options": {
       "announcements_email": "Recevoir des e-mails pour des annonces importantes ou des opportunités (1 ou 2 fois par an)"
     },
     "password_confirmation": "Confirmation du mot de passe",
+    "password_settings": "Paramètres du mot de passe",
     "profile": {
       "title": "Utilisateur : {{name}}"
     },
