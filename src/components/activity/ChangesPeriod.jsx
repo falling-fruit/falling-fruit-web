@@ -158,14 +158,11 @@ const ActivityTextComponent = ({
 }) => {
   const locationParts = [location.city, location.state, location.country]
   const hasLocationInfo = locationParts.filter(Boolean).length > 0
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
 
-  return (
-    <ActivityText>
-      {t('pages.changes.change_in_city', {
-        type: formatChangeType(interactionType, t),
-        city: '',
-      })}
+  const LocationDisplay = () => (
+    <>
       {hasLocationInfo ? (
         locationParts.filter(Boolean).join(', ')
       ) : (
@@ -177,7 +174,11 @@ const ActivityTextComponent = ({
           {location.coordinatesGrid}
         </>
       )}
-      {!hideAuthor && author && ' — '}
+    </>
+  )
+
+  const AuthorDisplay = () => (
+    <>
       {!hideAuthor && author && (
         <>
           {userId ? (
@@ -187,6 +188,28 @@ const ActivityTextComponent = ({
           ) : (
             author
           )}
+        </>
+      )}
+    </>
+  )
+
+  return (
+    <ActivityText>
+      {t('pages.changes.change_in_city', {
+        type: formatChangeType(interactionType, t),
+        city: '',
+      })}
+      {isRTL ? (
+        <>
+          {!hideAuthor && author && <AuthorDisplay />}
+          {!hideAuthor && author && ' — '}
+          <LocationDisplay />
+        </>
+      ) : (
+        <>
+          <LocationDisplay />
+          {!hideAuthor && author && ' — '}
+          {!hideAuthor && author && <AuthorDisplay />}
         </>
       )}
     </ActivityText>
