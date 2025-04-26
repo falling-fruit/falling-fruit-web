@@ -18,8 +18,12 @@ class SearchTerm {
   }
 
   matches(text) {
-    if (!this.term) {return true}
-    if (!text) {return false}
+    if (!this.term) {
+      return true
+    }
+    if (!text) {
+      return false
+    }
     return tokenize(text).includes(this.tokenized)
   }
 
@@ -239,7 +243,7 @@ const ListItemInteraction = ({
   )
 }
 
-const ChangesPeriod = ({ period, userId, searchTerm }) => {
+const ChangesPeriod = ({ period, userId, searchTerm, displayLimit }) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const onClickLink = useCallback(
@@ -248,9 +252,11 @@ const ChangesPeriod = ({ period, userId, searchTerm }) => {
         setLastBrowsedSection({
           id: period.formattedDate.toString(),
           userId: userId,
+          searchTerm: searchTerm,
+          displayLimit,
         }),
       ),
-    [dispatch, period.formattedDate, userId],
+    [dispatch, period.formattedDate, userId, searchTerm, displayLimit],
   )
 
   // If userId is provided, we should hide the author in activity text

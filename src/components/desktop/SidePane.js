@@ -110,7 +110,7 @@ const SidePane = () => {
                               ? () =>
                                   history.push(
                                     lastBrowsedSection.userId
-                                      ? `/changes/${lastBrowsedSection.userId}`
+                                      ? `/activity/${lastBrowsedSection.userId}`
                                       : '/changes',
                                   )
                               : goToMap

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
   fetchMoreLocationChanges,
-  setLastBrowsedSection,
+  resetLastBrowsedSection,
 } from '../../redux/activitySlice'
 import { transformActivityData } from '../../utils/transformActivityData'
 import { InfoPage } from '../ui/PageTemplate'
@@ -29,10 +29,10 @@ const RecentChangesPage = () => {
   useEffect(() => {
     if (lastBrowsedSection.id) {
       const periodElement = document.getElementById(`${lastBrowsedSection.id}`)
-      if (periodElement && lastBrowsedSection.userId === null) {
+      if (periodElement && !lastBrowsedSection.userId) {
         periodElement.scrollIntoView()
       }
-      dispatch(setLastBrowsedSection({ id: null, userId: null }))
+      dispatch(resetLastBrowsedSection())
     }
   }, [lastBrowsedSection, dispatch])
 

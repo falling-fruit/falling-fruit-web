@@ -84,7 +84,7 @@ const UserProfile = () => {
       <IconBesideText>
         <Book color={theme.secondaryText} size={20} />
         <p>
-          <a href={`/changes/${id}`}>{t('glossary.activity')}</a>
+          <a href={`/activity/${id}`}>{t('glossary.activity')}</a>
         </p>
       </IconBesideText>
     </Page>
