@@ -48,6 +48,8 @@ const activitySlice = createSlice({
     lastBrowsedSection: {
       id: null,
       userId: null,
+      searchTerm: null,
+      displayLimit: null,
     },
   },
   reducers: {
@@ -99,6 +101,14 @@ const activitySlice = createSlice({
     },
   },
 })
+
+export const resetLastBrowsedSection = () =>
+  setLastBrowsedSection({
+    id: null,
+    userId: null,
+    searchTerm: null,
+    displayLimit: null,
+  })
 
 export const { setLastBrowsedSection } = activitySlice.actions
 

@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 
 import {
   getUserActivity,
-  setLastBrowsedSection,
+  resetLastBrowsedSection,
 } from '../../redux/activitySlice'
 import {
   calculateCityCountsFromChanges,
@@ -23,9 +23,14 @@ import SkeletonLoader from './SkeletonLoader'
 
 const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
   const { t, i18n } = useTranslation()
-  const [searchTerm, setSearchTerm] = useState('')
+  const { lastBrowsedSection } = useSelector((state) => state.activity)
+  const [searchTerm, setSearchTerm] = useState(
+    lastBrowsedSection.searchTerm || '',
+  )
   const loadMoreRef = useRef()
-  const [displayLimit, setDisplayLimit] = useState(20)
+  const [displayLimit, setDisplayLimit] = useState(
+    lastBrowsedSection.displayLimit || 100,
+  )
 
   const needsLoadMore = changes?.length > displayLimit
 
@@ -78,7 +83,7 @@ const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
           period={period}
           userId={userId}
           searchTerm={searchTerm}
-          typesAccess={typesAccess}
+          displayLimit={displayLimit}
         />
       ))}
 
@@ -113,6 +118,7 @@ const UserActivityPage = () => {
   const { typesAccess } = useSelector((state) => state.type)
 
   const changesReady = !typesAccess.isEmpty
+
   const isCurrentUser = userId === user?.id
 
   useEffect(() => {
@@ -121,7 +127,7 @@ const UserActivityPage = () => {
       if (periodElement && lastBrowsedSection.userId === userId) {
         periodElement.scrollIntoView()
       }
-      dispatch(setLastBrowsedSection({ id: null, userId: null }))
+      dispatch(resetLastBrowsedSection())
     }
   }, [lastBrowsedSection, dispatch, userId])
 

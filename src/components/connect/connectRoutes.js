@@ -147,7 +147,15 @@ const connectRoutes = [
    */
   <Route
     key="connect-types"
-    path={['/map', '/list', '/locations', '/reviews', '/settings', '/changes']}
+    path={[
+      '/map',
+      '/list',
+      '/locations',
+      '/reviews',
+      '/settings',
+      '/changes',
+      '/activity',
+    ]}
   >
     <ConnectTypes />
   </Route>,
