@@ -8,7 +8,25 @@ import styled from 'styled-components'
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import { setLastBrowsedSection } from '../../redux/activitySlice'
 import { viewToString } from '../../utils/appUrl'
+import { tokenizeQuery as tokenize } from '../../utils/tokenize'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+
+class SearchTerm {
+  constructor(term) {
+    this.term = term || ''
+    this.tokenized = term ? tokenize(term) : ''
+  }
+
+  matches(text) {
+    if (!this.term) {return true}
+    if (!text) {return false}
+    return tokenize(text).includes(this.tokenized)
+  }
+
+  matchesType(type) {
+    return this.matches(type.commonName) || this.matches(type.scientificName)
+  }
+}
 
 const formatChangeType = (type, t) => {
   switch (type) {
@@ -56,50 +74,71 @@ const ListItem = styled.li`
   }
 `
 
-const LocationTypesList = ({ locations, onClickLink }) => (
-  <>
-    {locations.map((loc, idx) => {
-      const typeElements = loc.types.map((type, typeIdx) => {
-        if (type.commonName) {
-          return (
-            <CommonName key={`common-${typeIdx}`}>{type.commonName}</CommonName>
-          )
-        }
-        if (type.scientificName) {
-          return (
-            <ScientificName key={`scientific-${typeIdx}`}>
-              {type.scientificName}
-            </ScientificName>
-          )
-        }
-        return null
-      })
+const LocationTypesList = ({ locations, onClickLink, searchTerm }) => {
+  const search = new SearchTerm(searchTerm)
 
-      const filteredTypes = typeElements.filter(Boolean)
-      const typesWithSeparators = filteredTypes.reduce((prev, curr, idx) => {
-        if (prev.length) {
-          return [...prev, <span key={`separator-${idx}`}>, </span>, curr]
-        }
-        return [curr]
-      }, [])
-      return (
-        <React.Fragment key={`${loc.locationId}-${idx}`}>
-          <LocationLink
-            to={`/locations/${loc.locationId}/${viewToString(
-              loc.coordinates.latitude,
-              loc.coordinates.longitude,
-              MIN_LOCATION_ZOOM,
-            )}`}
-            onClick={onClickLink}
-          >
-            {typesWithSeparators}
-          </LocationLink>
-          {idx < locations.length - 1 && <span> · </span>}
-        </React.Fragment>
-      )
-    })}
-  </>
-)
+  return (
+    <>
+      {locations.map((loc, idx) => {
+        // Check if the city matches the search term
+        const cityMatchesSearch =
+          searchTerm &&
+          loc.coordinates &&
+          loc.coordinates.city &&
+          search.matches(loc.coordinates.city)
+
+        // If city matches, all types should have high opacity
+        const locationMatchesSearch = cityMatchesSearch
+
+        const typeElements = loc.types.map((type, typeIdx) => {
+          const typeMatchesSearch =
+            !searchTerm || locationMatchesSearch || search.matchesType(type)
+
+          const opacity = typeMatchesSearch ? 1 : 0.5
+
+          if (type.commonName) {
+            return (
+              <CommonName key={`common-${typeIdx}`} style={{ opacity }}>
+                {type.commonName}
+              </CommonName>
+            )
+          }
+          if (type.scientificName) {
+            return (
+              <ScientificName key={`scientific-${typeIdx}`} style={{ opacity }}>
+                {type.scientificName}
+              </ScientificName>
+            )
+          }
+          return null
+        })
+
+        const filteredTypes = typeElements.filter(Boolean)
+        const typesWithSeparators = filteredTypes.reduce((prev, curr, idx) => {
+          if (prev.length) {
+            return [...prev, <span key={`separator-${idx}`}>, </span>, curr]
+          }
+          return [curr]
+        }, [])
+        return (
+          <React.Fragment key={`${loc.locationId}-${idx}`}>
+            <LocationLink
+              to={`/locations/${loc.locationId}/${viewToString(
+                loc.coordinates.latitude,
+                loc.coordinates.longitude,
+                MIN_LOCATION_ZOOM,
+              )}`}
+              onClick={onClickLink}
+            >
+              {typesWithSeparators}
+            </LocationLink>
+            {idx < locations.length - 1 && <span> · </span>}
+          </React.Fragment>
+        )
+      })}
+    </>
+  )
+}
 
 const ActivityText = styled.span`
   color: ${({ theme }) => theme.secondaryText};
@@ -150,6 +189,56 @@ const ActivityTextComponent = ({
   )
 }
 
+const ListItemInteraction = ({
+  interactionType,
+  locations,
+  activity,
+  onClickLink,
+  hideAuthor,
+  searchTerm,
+}) => {
+  if (locations.length === 0) {
+    return null
+  }
+
+  const search = new SearchTerm(searchTerm)
+
+  // Check if city matches search term
+  const locationParts = [
+    activity.location.city || '',
+    activity.location.state || '',
+    activity.location.country || '',
+  ]
+  const fullLocationName = locationParts.filter(Boolean).join(', ')
+
+  const cityMatchesSearch = search.matches(fullLocationName)
+
+  // Check if any location type matches search term
+  const hasMatchingTypes =
+    !searchTerm ||
+    cityMatchesSearch ||
+    locations.some((loc) => loc.types.some((type) => search.matchesType(type)))
+
+  return (
+    <p style={searchTerm && !hasMatchingTypes ? { opacity: 0.5 } : {}}>
+      <LocationTypesList
+        locations={locations}
+        onClickLink={onClickLink}
+        searchTerm={!hasMatchingTypes || cityMatchesSearch ? '' : searchTerm}
+      />{' '}
+      <ActivityTextComponent
+        location={activity.location}
+        coordinates={activity.coordinates}
+        author={activity.author}
+        userId={activity.userId}
+        interactionType={interactionType}
+        onClickLink={onClickLink}
+        hideAuthor={hideAuthor}
+      />
+    </p>
+  )
+}
+
 const ChangesPeriod = ({ period, userId, searchTerm }) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
@@ -167,69 +256,34 @@ const ChangesPeriod = ({ period, userId, searchTerm }) => {
   // If userId is provided, we should hide the author in activity text
   const hideAuthor = !!userId
 
-  // Filter activities based on searchTerm
-  const filteredActivities = period.activities
-    .map((activity) => {
-      if (!searchTerm) {
-        return activity
-      }
+  // Check if any activity matches the search term
+  const search = new SearchTerm(searchTerm)
 
-      const searchLower = searchTerm.toLowerCase()
-
+  const hasMatchingActivities =
+    !searchTerm ||
+    period.activities.some((activity) => {
       // Check if location matches search term
       const locationParts = [
         activity.location.city || '',
         activity.location.state || '',
         activity.location.country || '',
       ]
-      const fullLocationName = locationParts
-        .filter(Boolean)
-        .join(', ')
-        .toLowerCase()
-      const locationMatches = fullLocationName.includes(searchLower)
+      const fullLocationName = locationParts.filter(Boolean).join(', ')
 
-      // Filter locations in each interaction type
-      const filteredActivity = {
-        ...activity,
-        added: filterLocations(activity.added, searchLower),
-        edited: filterLocations(activity.edited, searchLower),
-        visited: filterLocations(activity.visited, searchLower),
+      if (search.matches(fullLocationName)) {
+        return true
       }
 
-      // If location matches, keep all locations
-      if (locationMatches) {
-        return activity
-      }
-
-      // If any locations remain after filtering, return the filtered activity
-      if (
-        filteredActivity.added.length > 0 ||
-        filteredActivity.edited.length > 0 ||
-        filteredActivity.visited.length > 0
-      ) {
-        return filteredActivity
-      }
-
-      // No matches, return null to filter out this activity
-      return null
+      // Check if any location type matches search term
+      return ['added', 'edited', 'visited'].some((interactionType) =>
+        activity[interactionType].some((loc) =>
+          loc.types.some((type) => search.matchesType(type)),
+        ),
+      )
     })
-    .filter(Boolean)
-
-  // Helper function to filter locations based on search term
-  function filterLocations(locations, searchLower) {
-    if (!searchLower) {
-      return locations
-    }
-
-    return locations.filter((loc) => loc.types.some((type) =>
-        (type.commonName || type.scientificName || '')
-          .toLowerCase()
-          .includes(searchLower),
-      ))
-  }
 
   // If no activities match the search term, don't render this period
-  if (filteredActivities.length === 0) {
+  if (searchTerm && !hasMatchingActivities) {
     return null
   }
 
@@ -237,28 +291,19 @@ const ChangesPeriod = ({ period, userId, searchTerm }) => {
     <div id={period.formattedDate}>
       <h3>{period.formattedDate}</h3>
       <ListChanges>
-        {filteredActivities.map((activity, index) => (
+        {period.activities.map((activity, index) => (
           <ListItem key={index} isDesktop={isDesktop}>
-            {['added', 'edited', 'visited'].map((interactionType) => {
-              const locations = activity[interactionType]
-              return locations.length > 0 ? (
-                <p key={interactionType}>
-                  <LocationTypesList
-                    locations={locations}
-                    onClickLink={onClickLink}
-                  />{' '}
-                  <ActivityTextComponent
-                    location={activity.location}
-                    coordinates={activity.coordinates}
-                    author={activity.author}
-                    userId={activity.userId}
-                    interactionType={interactionType}
-                    onClickLink={onClickLink}
-                    hideAuthor={hideAuthor}
-                  />
-                </p>
-              ) : null
-            })}
+            {['added', 'edited', 'visited'].map((interactionType) => (
+              <ListItemInteraction
+                key={interactionType}
+                interactionType={interactionType}
+                locations={activity[interactionType]}
+                activity={activity}
+                onClickLink={onClickLink}
+                hideAuthor={hideAuthor}
+                searchTerm={searchTerm}
+              />
+            ))}
           </ListItem>
         ))}
       </ListChanges>
