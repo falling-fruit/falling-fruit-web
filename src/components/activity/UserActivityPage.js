@@ -1,5 +1,5 @@
 import { ArrowBack } from '@styled-icons/boxicons-regular'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -27,43 +27,7 @@ const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
   const loadMoreRef = useRef()
   const [displayLimit, setDisplayLimit] = useState(20)
 
-  const filteredChanges = changes.filter((change) => {
-    if (!searchTerm) {
-      return true
-    }
-
-    const searchLower = searchTerm.toLowerCase()
-
-    const fullLocationName = [
-      change.city || '',
-      change.state || '',
-      change.country || '',
-    ]
-      .filter(Boolean)
-      .join(', ')
-      .toLowerCase()
-
-    const locationMatches =
-      fullLocationName.includes(searchLower) ||
-      (change.city && change.city.toLowerCase().includes(searchLower)) ||
-      (change.state && change.state.toLowerCase().includes(searchLower)) ||
-      (change.country && change.country.toLowerCase().includes(searchLower))
-
-    const typeMatches = change.type_ids.some((typeId) => {
-      const type = typesAccess.getType(typeId)
-      if (!type) {
-        return false
-      }
-
-      const typeName =
-        type.commonName || type.scientificName || `Type ${typeId}`
-      return typeName.toLowerCase().includes(searchLower)
-    })
-
-    return locationMatches || typeMatches
-  })
-
-  const needsLoadMore = filteredChanges.length > displayLimit
+  const needsLoadMore = changes?.length > displayLimit
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -93,6 +57,10 @@ const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
     : []
 
   const cityCounts = changes ? calculateCityCountsFromChanges(changes) : []
+  const transformedData = useMemo(
+    () => transformActivityData(changes || [], typesAccess, t, i18n.language),
+    [changes, typesAccess, t, i18n.language],
+  )
 
   return (
     <>
@@ -104,28 +72,17 @@ const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
         typeCountsById={typeCountsById}
         cityCounts={cityCounts}
       />
-      {(() => {
-        const transformedData = transformActivityData(
-          filteredChanges,
-          typesAccess,
-          t,
-          i18n.language,
-        )
+      {transformedData.slice(0, displayLimit).map((period) => (
+        <ChangesPeriod
+          key={period.formattedDate}
+          period={period}
+          userId={userId}
+          searchTerm={searchTerm}
+          typesAccess={typesAccess}
+        />
+      ))}
 
-        return (
-          <>
-            {transformedData.slice(0, displayLimit).map((period) => (
-              <ChangesPeriod
-                key={period.formattedDate}
-                period={period}
-                userId={userId}
-              />
-            ))}
-
-            {needsLoadMore && <div ref={loadMoreRef}></div>}
-          </>
-        )
-      })()}
+      {needsLoadMore && <div ref={loadMoreRef}></div>}
     </>
   )
 }

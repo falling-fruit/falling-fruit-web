@@ -150,7 +150,7 @@ const ActivityTextComponent = ({
   )
 }
 
-const ChangesPeriod = ({ period, userId }) => {
+const ChangesPeriod = ({ period, userId, searchTerm }) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const onClickLink = useCallback(
@@ -167,11 +167,77 @@ const ChangesPeriod = ({ period, userId }) => {
   // If userId is provided, we should hide the author in activity text
   const hideAuthor = !!userId
 
+  // Filter activities based on searchTerm
+  const filteredActivities = period.activities
+    .map((activity) => {
+      if (!searchTerm) {
+        return activity
+      }
+
+      const searchLower = searchTerm.toLowerCase()
+
+      // Check if location matches search term
+      const locationParts = [
+        activity.location.city || '',
+        activity.location.state || '',
+        activity.location.country || '',
+      ]
+      const fullLocationName = locationParts
+        .filter(Boolean)
+        .join(', ')
+        .toLowerCase()
+      const locationMatches = fullLocationName.includes(searchLower)
+
+      // Filter locations in each interaction type
+      const filteredActivity = {
+        ...activity,
+        added: filterLocations(activity.added, searchLower),
+        edited: filterLocations(activity.edited, searchLower),
+        visited: filterLocations(activity.visited, searchLower),
+      }
+
+      // If location matches, keep all locations
+      if (locationMatches) {
+        return activity
+      }
+
+      // If any locations remain after filtering, return the filtered activity
+      if (
+        filteredActivity.added.length > 0 ||
+        filteredActivity.edited.length > 0 ||
+        filteredActivity.visited.length > 0
+      ) {
+        return filteredActivity
+      }
+
+      // No matches, return null to filter out this activity
+      return null
+    })
+    .filter(Boolean)
+
+  // Helper function to filter locations based on search term
+  function filterLocations(locations, searchLower) {
+    if (!searchLower) {
+      return locations
+    }
+
+    return locations.filter((loc) => loc.types.some((type) =>
+        (type.commonName || type.scientificName || '')
+          .toLowerCase()
+          .includes(searchLower),
+      ))
+  }
+
+  // If no activities match the search term, don't render this period
+  if (filteredActivities.length === 0) {
+    return null
+  }
+
   return (
     <div id={period.formattedDate}>
       <h3>{period.formattedDate}</h3>
       <ListChanges>
-        {period.activities.map((activity, index) => (
+        {filteredActivities.map((activity, index) => (
           <ListItem key={index} isDesktop={isDesktop}>
             {['added', 'edited', 'visited'].map((interactionType) => {
               const locations = activity[interactionType]
