@@ -1,4 +1,4 @@
-import { ChevronRight } from '@styled-icons/boxicons-regular'
+import { ChevronLeft, ChevronRight } from '@styled-icons/boxicons-regular'
 import { Cog } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
@@ -29,29 +29,56 @@ const PrimaryText = styled.div`
   color: ${({ theme }) => theme.headerText};
 `
 
-const SettingsCircleIcon = styled(Cog)`
-  margin-left: 1.5em;
-  margin-right: 1em;
+const BaseSettingsCircleIcon = styled(Cog)`
   width: 1.75em;
 `
 
-export const ChevronIcon = styled.div`
-  flex: 1 1 0;
-  display: flex;
-  justify-content: right;
-  align-items: right;
+const LTRSettingsCircleIcon = styled(BaseSettingsCircleIcon)`
+  margin-left: 1.5em;
   margin-right: 1em;
 `
 
+const RTLSettingsCircleIcon = styled(BaseSettingsCircleIcon)`
+  margin-left: 1em;
+  margin-right: 1.5em;
+`
+
+const BaseChevronIcon = styled.div`
+  flex: 1 1 0;
+  display: flex;
+`
+
+export const LTRChevronIcon = styled(BaseChevronIcon)`
+  justify-content: right;
+  align-items: right;
+  margin-right: 1em;
+  margin-left: 0;
+`
+
+export const RTLChevronIcon = styled(BaseChevronIcon)`
+  justify-content: left;
+  align-items: left;
+  margin-right: 0;
+  margin-left: 1em;
+`
+
 const SettingsButton = ({ onClick }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
+
+  const SettingsCircleIcon = isRTL
+    ? RTLSettingsCircleIcon
+    : LTRSettingsCircleIcon
+  const DirectionalChevronIcon = isRTL ? RTLChevronIcon : LTRChevronIcon
+  const ChevronComponent = isRTL ? ChevronLeft : ChevronRight
+
   return (
     <StyledSettingsButton onClick={onClick}>
       <SettingsCircleIcon color={theme.orange} />
       <PrimaryText>{t('menu.settings')}</PrimaryText>
-      <ChevronIcon>
-        <ChevronRight width="1.75em" color={theme.orange} />
-      </ChevronIcon>
+      <DirectionalChevronIcon>
+        <ChevronComponent width="1.75em" color={theme.orange} />
+      </DirectionalChevronIcon>
     </StyledSettingsButton>
   )
 }
