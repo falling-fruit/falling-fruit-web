@@ -126,6 +126,7 @@ const GeolocationDot = () => {
       hasHeading={!!geolocation?.heading}
       isPulsing={geolocationState !== GeolocationState.DOT_ON}
       isClickable={geolocationState === GeolocationState.DOT_ON}
+      dir="ltr"
     >
       <Pin />
       {geolocation && geolocation.heading !== null && (
