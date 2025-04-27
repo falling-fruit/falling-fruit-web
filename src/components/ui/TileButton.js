@@ -1,4 +1,5 @@
 import { transparentize } from 'polished'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import ResetButton from './ResetButton'
@@ -28,7 +29,7 @@ const StyledResetButton = styled(ResetButton)`
 
   p {
     position: absolute;
-    left: 6px;
+    ${({ $isRTL }) => ($isRTL ? 'right: 6px;' : 'left: 6px;')}
     bottom: 5px;
     margin: 0;
     font-size: 0.875rem;
@@ -44,11 +45,16 @@ const StyledResetButton = styled(ResetButton)`
   }
 `
 
-const TileButton = ({ label, children, ...props }) => (
-  <StyledResetButton {...props}>
-    <p>{label}</p>
-    {children}
-  </StyledResetButton>
-)
+const TileButton = ({ label, children, ...props }) => {
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
+
+  return (
+    <StyledResetButton $isRTL={isRTL} {...props}>
+      <p>{label}</p>
+      {children}
+    </StyledResetButton>
+  )
+}
 
 export default TileButton
