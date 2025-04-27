@@ -82,6 +82,7 @@ const ScientificName = styled.span`
 const Count = styled.span`
   font-weight: bold;
   color: ${({ theme }) => theme.text};
+  margin-right: 0.25em;
 `
 
 const ToggleButton = styled.button`
@@ -117,7 +118,13 @@ const TreeSelectView = ({
 
     return (
       <React.Fragment key={node.id}>
-        <TreeNode style={{ paddingLeft: `${level * 1.25}em` }}>
+        <TreeNode
+          style={
+            isRTL
+              ? { paddingRight: `${level * 1.25}em` }
+              : { paddingLeft: `${level * 1.25}em` }
+          }
+        >
           <ControlsContainer>
             {node.children.length > 0 ? (
               <ToggleButton
@@ -126,7 +133,7 @@ const TreeSelectView = ({
               >
                 <ArrowIcon
                   style={{
-                    transform: `rotate(${isExpanded ? (isRTL ? -90 : 90) : 0}deg)`,
+                    transform: `rotate(${isExpanded ? 90 : isRTL ? 180 : 0}deg)`,
                     transition: 'transform 0.2s',
                     width: '12px',
                     height: '12px',
@@ -158,7 +165,7 @@ const TreeSelectView = ({
                 {node.scientificName}
               </ScientificName>
             )}
-            <Count>({node.count})</Count>
+            <Count dir="auto">({node.count})</Count>
           </NodeContent>
         </TreeNode>
         {isExpanded &&
