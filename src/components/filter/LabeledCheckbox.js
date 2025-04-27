@@ -22,8 +22,9 @@ const LabeledCheckbox = ({ field, value, onChange, label, style }) => {
         checked={value}
         name={field}
         onChange={(event) => onChange(event.target.checked)}
+        style={isRTL ? { marginLeft: '0.75ex', marginRight: '0' } : {}}
       />
-      <span style={isRTL ? { marginRight: '0.25em' } : {}}>{label}</span>
+      {label}
     </StyledLabel>
   )
 }
