@@ -261,7 +261,7 @@ const Project = () => {
 
       <h2>{t('pages.about.closing_remarks')}</h2>
       <p>{renderHTML(t('pages.about.closing_remarks_para1_html'))}</p>
-      <blockquote>
+      <blockquote dir="ltr">
         Falling Fruit
         <br />
         535 S 44th St, Boulder, CO 80305, USA
