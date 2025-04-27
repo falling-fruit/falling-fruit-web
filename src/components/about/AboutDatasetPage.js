@@ -1,4 +1,4 @@
-import { ArrowBack, Calendar } from '@styled-icons/boxicons-regular'
+import { Calendar } from '@styled-icons/boxicons-regular'
 import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +13,7 @@ import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
+import ReturnIcon from '../ui/ReturnIcon'
 
 const StyledNavBack = styled.div`
   svg {
@@ -57,7 +58,7 @@ const AboutDatasetPage = () => {
             history.goBack()
           }}
         >
-          <ArrowBack />
+          <ReturnIcon />
           {t('layouts.back')}
         </BackButton>
       </StyledNavBack>

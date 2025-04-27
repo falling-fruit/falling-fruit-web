@@ -1,10 +1,10 @@
-import { ArrowBack } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
 import ResetButton from './ResetButton'
+import ReturnIcon from './ReturnIcon'
 
 const BackButton = styled(ResetButton).attrs((props) => ({
-  children: <ArrowBack />,
+  children: <ReturnIcon />,
   ...props,
 }))`
   display: flex;

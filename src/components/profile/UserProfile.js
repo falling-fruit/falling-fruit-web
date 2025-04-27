@@ -1,4 +1,4 @@
-import { ArrowBack, Calendar, User } from '@styled-icons/boxicons-regular'
+import { Calendar, User } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -13,6 +13,7 @@ import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
+import ReturnIcon from '../ui/ReturnIcon'
 
 const StyledNavBack = styled.div`
   svg {
@@ -56,7 +57,7 @@ const UserProfile = () => {
             anchorElementId ? history.push('/changes') : history.goBack()
           }}
         >
-          <ArrowBack />
+          <ReturnIcon />
           {t('layouts.back')}
         </BackButton>
       </StyledNavBack>

@@ -1,4 +1,3 @@
-import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
@@ -6,6 +5,7 @@ import { LanguageSelect } from '../../i18n'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsMobile } from '../../utils/useBreakpoint'
 import BackButton from '../ui/BackButton'
+import ReturnIcon from './ReturnIcon'
 
 const MobileHeader = styled.div`
   width: 100%;
@@ -146,7 +146,7 @@ const InfoPage = ({ children }) => {
       <PageWrapper>
         {isMobile && (
           <StyledBackButton onClick={() => history.push('/settings')}>
-            <ArrowBack />
+            <ReturnIcon />
             {t('layouts.back')}
           </StyledBackButton>
         )}

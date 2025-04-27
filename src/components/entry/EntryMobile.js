@@ -1,4 +1,3 @@
-import { ArrowBack as ArrowBackIcon } from '@styled-icons/boxicons-regular'
 import {
   Map as MapIcon,
   Pencil as PencilIcon,
@@ -19,6 +18,7 @@ import DraggablePane from '../ui/DraggablePane'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
 import { zIndex } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
+import ReturnIcon from '../ui/ReturnIcon'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
@@ -83,7 +83,7 @@ const TopRibbonButtons = ({ hasImages, drawerDisabled, onBackButtonClick }) => {
         onClick={
           drawerDisabled ? () => history.push('/list') : onBackButtonClick
         }
-        icon={<ArrowBackIcon />}
+        icon={<ReturnIcon />}
         label="back-button"
       />
       <div>

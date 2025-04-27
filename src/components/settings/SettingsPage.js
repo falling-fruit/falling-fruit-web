@@ -1,4 +1,3 @@
-import { ChevronRight } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -7,6 +6,7 @@ import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
+import ForwardChevronIcon from '../ui/ForwardChevronIcon'
 import LabeledRow from '../ui/LabeledRow'
 import ListEntry, { PrimaryText } from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
@@ -336,13 +336,13 @@ const SettingsPage = ({ desktop }) => {
           <h3>{t('glossary.about')}</h3>
           <StyledSocialButtons />
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" />}
+            rightIcons={<ForwardChevronIcon size="16" />}
             onClick={() => history.push('/changes')}
           >
             <PrimaryText>{t('glossary.activity')}</PrimaryText>
           </StyledListEntry>
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" />}
+            rightIcons={<ForwardChevronIcon size="16" />}
             onClick={() => history.push('/about')}
           >
             <PrimaryText>
@@ -350,13 +350,13 @@ const SettingsPage = ({ desktop }) => {
             </PrimaryText>
           </StyledListEntry>
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" />}
+            rightIcons={<ForwardChevronIcon size="16" />}
             onClick={() => history.push('/data')}
           >
             <PrimaryText>{t('layouts.application.menu.the_data')}</PrimaryText>
           </StyledListEntry>
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" />}
+            rightIcons={<ForwardChevronIcon size="16" />}
             onClick={() => history.push('/sharing')}
           >
             <PrimaryText>
@@ -364,7 +364,7 @@ const SettingsPage = ({ desktop }) => {
             </PrimaryText>
           </StyledListEntry>
           <StyledListEntry
-            rightIcons={<ChevronRight size="16" />}
+            rightIcons={<ForwardChevronIcon size="16" />}
             onClick={() => history.push('/press')}
           >
             <PrimaryText>
