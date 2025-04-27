@@ -25,6 +25,8 @@ export const withLabel = (WrappedField) => {
     </>
   )
 
+  FieldWithLabel.displayName = `${WrappedField.displayName || WrappedField.name || 'Component'}WithLabel`
+
   return FieldWithLabel
 }
 
