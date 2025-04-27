@@ -48,6 +48,7 @@ const Tooltip = ({ onClose }) => {
         <X size={20} />
       </CloseButton>
       <TooltipContent
+        dir="auto"
         dangerouslySetInnerHTML={{
           __html: t('locations.index.editmarker_html'),
         }}
