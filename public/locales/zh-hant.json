@@ -140,7 +140,7 @@
       "season_start_to_stop_short": "至"
     },
     "index": {
-      "editmarker_html": "<b>移動到源的位置。</b>\n\n檢查衛星視圖 - 從太空中可以看到源！"
+      "editmarker_html": "<b>移動到源的位置。</b><br><br>檢查衛星視圖 - 從太空中可以看到源！"
     },
     "infowindow": {
       "access_mode": [

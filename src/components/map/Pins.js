@@ -122,7 +122,7 @@ const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
   const LocationPin = locationId === 'new' ? AddLocationPin : EditLocationPin
 
   return (
-    <>
+    <div dir="ltr">
       <LocationPin
         lat={lat}
         lng={lng}
@@ -134,7 +134,7 @@ const DraggableMapPin = ({ onDragEnd, onChange, $geoService, lat, lng }) => {
       {tooltipOpen && (
         <Tooltip onClose={() => dispatch(dismissLocationTooltip())} />
       )}
-    </>
+    </div>
   )
 }
 
