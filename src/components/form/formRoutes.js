@@ -1,4 +1,3 @@
-import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +9,7 @@ import { saveReviewFormValues } from '../../redux/reviewSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import SettingsButton from '../desktop/SettingsButton'
 import BackButton from '../ui/BackButton'
+import ReturnIcon from '../ui/ReturnIcon'
 import TopBar from '../ui/TopBar'
 import TopBarNav from '../ui/TopBarNav'
 import { EditReviewForm } from './EditReview'
@@ -43,7 +43,7 @@ const DesktopNav = ({ title, onBack }) => {
     <>
       <StyledNavBack>
         <BackButton onClick={onBack}>
-          <ArrowBack />
+          <ReturnIcon />
           {t('layouts.back')}
         </BackButton>
       </StyledNavBack>

@@ -1,4 +1,4 @@
-import { ArrowBack, Pencil } from '@styled-icons/boxicons-regular'
+import { Pencil } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom'
@@ -10,6 +10,7 @@ import EntryDesktop from '../entry/EntryDesktop'
 import { formRoutesDesktop } from '../form/formRoutes'
 import SettingsPage from '../settings/SettingsPage'
 import BackButton from '../ui/BackButton'
+import ReturnIcon from '../ui/ReturnIcon'
 import MainSidePane from './MainSidePane'
 import SettingsButton from './SettingsButton'
 
@@ -88,7 +89,7 @@ const SidePane = () => {
                     }
                   }}
                 >
-                  <ArrowBack />
+                  <ReturnIcon />
                   {t('layouts.back')}
                 </BackButton>
               </StyledNavBack>
@@ -109,7 +110,7 @@ const SidePane = () => {
                               : goToMap
                         }
                       >
-                        <ArrowBack />
+                        <ReturnIcon />
                         {t('layouts.back')}
                       </BackButton>
                       <BackButton
