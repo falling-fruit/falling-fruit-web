@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { ReactComponent as ArrowIcon } from './arrow.svg'
@@ -108,6 +109,8 @@ const TreeSelectView = ({
   handleToggle,
   handleCheckboxChange,
 }) => {
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
   const renderNode = (node, level) => {
     const isDisabled = node.isDisabled
     const isExpanded = Boolean(expandedNodes.has(node.id) | isDisabled)
@@ -123,7 +126,7 @@ const TreeSelectView = ({
               >
                 <ArrowIcon
                   style={{
-                    transform: `rotate(${isExpanded ? 90 : 0}deg)`,
+                    transform: `rotate(${isExpanded ? (isRTL ? -90 : 90) : 0}deg)`,
                     transition: 'transform 0.2s',
                     width: '12px',
                     height: '12px',
