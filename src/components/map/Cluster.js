@@ -62,9 +62,11 @@ const calculateDiameter = (count) =>
  * @param {number} count - The total number of locations within this cluster
  */
 const Cluster = memo(({ onClick, count }) => (
-  <ClusterContainer diameter={calculateDiameter(count)} onClick={onClick}>
-    <p>{formatClusterLabel(count)}</p>
-  </ClusterContainer>
+  <div dir="ltr">
+    <ClusterContainer diameter={calculateDiameter(count)} onClick={onClick}>
+      <p>{formatClusterLabel(count)}</p>
+    </ClusterContainer>
+  </div>
 ))
 
 Cluster.displayName = 'Cluster'
