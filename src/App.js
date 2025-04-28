@@ -35,7 +35,9 @@ const AppContent = () => {
     <>
       <AuthInitializer />
       <Toast
-        position={isDesktop ? 'bottom-right' : 'top-center'}
+        position={
+          isDesktop ? (isRTL ? 'bottom-left' : 'bottom-right') : 'top-center'
+        }
         autoClose={3000}
         closeOnClick
         rtl={isRTL}
