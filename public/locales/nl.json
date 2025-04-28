@@ -171,7 +171,7 @@
       "date_edited": "Bijgewerkt {{date}}",
       "imported_from": "Geïmporteerd van {{name}}",
       "season": {
-        "in_season": "In seizoen van {{start}} tot {{stop}}",
+        "in_season": "In seizoen van {{start_month}} tot {{stop_month}}",
         "year_round": "Het hele jaar door"
       },
       "title": "Overzicht"

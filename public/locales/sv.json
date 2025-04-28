@@ -171,7 +171,7 @@
       "date_edited": "Uppdaterad {{date}}",
       "imported_from": "Importerad från {{name}}",
       "season": {
-        "in_season": "I säsong från {{start}} till {{stop}}",
+        "in_season": "I säsong från {{start_month}} till {{stop_month}}",
         "year_round": "Året runt"
       },
       "title": "Översikt"

@@ -171,7 +171,7 @@
       "date_edited": "تم التحديث في {{date}}",
       "imported_from": "تم الاستيراد من {{name}}",
       "season": {
-        "in_season": "في الموسم من {{start}} إلى {{stop}}",
+        "in_season": "في الموسم من {{start_month}} إلى {{stop_month}}",
         "year_round": "على مدار السنة"
       },
       "title": "نظرة عامة"

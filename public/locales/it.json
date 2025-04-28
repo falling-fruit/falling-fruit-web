@@ -171,7 +171,7 @@
       "date_edited": "Aggiornato {{date}}",
       "imported_from": "Importato da {{name}}",
       "season": {
-        "in_season": "In stagione da {{start}} a {{stop}}",
+        "in_season": "In stagione da {{start_month}} a {{stop_month}}",
         "year_round": "Tutto l'anno"
       },
       "title": "Panoramica"
