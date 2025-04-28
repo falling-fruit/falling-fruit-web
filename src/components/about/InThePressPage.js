@@ -12,7 +12,7 @@ const TimelineSection = styled.section`
 
   li {
     display: flex;
-    align-items: top;
+    align-items: start;
 
     :not(:last-of-type) {
       margin-block-end: 2em;

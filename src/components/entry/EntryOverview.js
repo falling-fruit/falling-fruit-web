@@ -116,7 +116,7 @@ const EntryOverview = () => {
         <TypesHeader types={types} />
         <Tags locationData={locationData} />
         <Description>
-          <p>{locationData.description}</p>
+          <p dir="auto">{locationData.description}</p>
 
           <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
             <Map color={theme.secondaryText} size={20} />

@@ -34,7 +34,7 @@ const StyledProgressBarStep = styled.div`
   & + & {
     flex-grow: 1;
     display: flex;
-    align-items: flex-end;
+    align-items: end;
     flex-direction: column;
   }
 

@@ -1,4 +1,4 @@
-import { Calendar, User } from '@styled-icons/boxicons-regular'
+import { Calendar } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -63,12 +63,9 @@ const UserProfile = () => {
       </StyledNavBack>
       <h3>{t('users.profile.title', { name })}</h3>
       {bio && (
-        <IconBesideText>
-          <User size={20} />
-          <p>
-            <i>{bio}</i>
-          </p>
-        </IconBesideText>
+        <p dir="auto" style={{ whiteSpace: 'pre-line' }}>
+          {bio}
+        </p>
       )}
       <IconBesideText>
         <Calendar color={theme.secondaryText} size={20} />
