@@ -30,5 +30,5 @@ export const formatMonthList = (months, language) => {
       const monthStr = formatMonth(parseInt(month), language)
       return `${monthStr} (${count})`
     })
-    .join(' | ')
+    .join(' · ')
 }
