@@ -21,6 +21,7 @@ const getDisplayLabel = (typesAccess, id) => {
     const parentType = typesAccess.getParentType(id)
     if (
       parentType &&
+      parentType.commonName &&
       parentType.scientificName &&
       (!type.commonName ||
         type.commonName.toLowerCase() === parentType.commonName.toLowerCase())
