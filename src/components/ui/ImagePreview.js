@@ -8,8 +8,8 @@ const DeleteButton = styled(ResetButton)`
   position: absolute;
   height: 24px;
   width: 24px;
-  top: -12px;
-  right: -12px;
+  inset-block-start: -12px;
+  inset-inline-end: -12px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.orange};
   z-index: 1;

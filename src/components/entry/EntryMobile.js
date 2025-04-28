@@ -112,9 +112,8 @@ const TopRibbonButtons = ({ hasImages, drawerDisabled, onBackButtonClick }) => {
 
 const StyledButtons = styled.div`
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+  inset-inline: 0;
+  inset-block-start: 0;
   z-index: ${zIndex.topBar + 1};
   padding: 16px;
   display: flex;
@@ -130,7 +129,7 @@ const StyledButtons = styled.div`
     display: flex;
 
     > *:not(:last-of-type) {
-      margin-right: 0.5em;
+      margin-inline-end: 0.5em;
     }
   }
 `
@@ -153,7 +152,8 @@ const TextContent = styled.article`
   box-sizing: border-box;
 
   ul {
-    margin: 0 0 12px 0;
+    margin-block: 0 12px;
+    margin-inline: 0;
   }
 `
 

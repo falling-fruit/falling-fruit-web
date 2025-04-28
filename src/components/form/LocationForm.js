@@ -45,7 +45,7 @@ const CheckboxLabel = styled.label`
   align-items: center;
   font-size: 0.875rem;
   color: ${({ theme }) => theme.tertiaryText};
-  margin-top: 15px;
+  margin-block-start: 15px;
 `
 
 const ErrorText = styled.p`

@@ -6,7 +6,7 @@ const StyledBackButton = styled(BackButton)`
   /* Make the touch target bigger */
   width: 75px;
   height: 100%;
-  margin-left: 10px;
+  margin-inline-start: 10px;
 
   svg {
     height: 25px;

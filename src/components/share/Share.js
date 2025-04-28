@@ -20,7 +20,7 @@ const ShareTitle = styled.h3`
   font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
-  margin-right: 20px;
+  margin-inline-end: 20px;
 `
 
 const ShareUrlContainer = styled.div`
@@ -30,8 +30,8 @@ const ShareUrlContainer = styled.div`
 
 const ShareInput = styled(Input)`
   flex: 1;
-  padding: 0 0.5rem 0 0.5rem;
-  margin-right: 0.5rem;
+  padding: 0 0.5rem;
+  margin-inline-end: 0.5rem;
   vertical-align: middle;
   min-height: 2.7rem;
 `

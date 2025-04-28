@@ -10,7 +10,8 @@ import styled from 'styled-components/macro'
 
 const StyledSliderInput = styled(SliderInput)`
   // Extra padding to account for space above handle and text under each marker
-  padding: 7px 20px 24px;
+  padding-block: 7px 24px;
+  padding-inline: 20px;
 
   [data-reach-slider-track] {
     height: 6px;
@@ -36,10 +37,10 @@ const StyledSliderInput = styled(SliderInput)`
 
     div {
       font-size: 0.75rem;
-      margin-top: 20px;
+      margin-block-start: 20px;
       /* Centers labels under each marker */
       position: absolute;
-      left: 50%;
+      inset-inline-start: 50%;
       transform: translateX(-50%);
       /* Centers text inside the label */
       text-align: center;

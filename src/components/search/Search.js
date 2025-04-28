@@ -37,12 +37,12 @@ import SearchEntry from './SearchEntry'
 const StyledComboboxPopover = styled(ComboboxPopover)`
   border: none;
   background: none;
-  margin-top: 8px;
+  margin-block-start: 8px;
 
   @media ${({ theme }) => theme.device.desktop} {
     box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-end-start-radius: 30px;
+    border-end-end-radius: 30px;
 
     position: absolute;
     width: 100%;
@@ -55,7 +55,8 @@ const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
   @media ${({ theme }) => theme.device.desktop} {
-    padding: 10px 10px 2px 10px;
+    padding-block: 10px 2px;
+    padding-inline: 10px;
   }
 
   & > div {
@@ -63,7 +64,7 @@ const SearchBarContainer = styled.div`
   }
 
   & > button {
-    margin-left: 10px;
+    margin-inline-start: 10px;
   }
 `
 const getCoordinatesResult = (value) => {

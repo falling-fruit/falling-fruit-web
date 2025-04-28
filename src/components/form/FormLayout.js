@@ -1,15 +1,15 @@
 import styled from 'styled-components/macro'
 
 export const ProgressButtons = styled.div`
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-block-start: 16px;
+  margin-block-end: 16px;
   text-align: center;
 
   button {
     width: 110px;
 
     &:not(:last-child) {
-      margin-right: 12px;
+      margin-inline-end: 12px;
     }
   }
 `
@@ -25,8 +25,9 @@ export const StyledForm = styled.div`
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    padding: 8px 27px 20px;
-    margin-top: 80px;
+    padding-block: 8px 20px;
+    padding-inline: 27px;
+    margin-block-start: 80px;
 
     textarea {
       height: 100px;

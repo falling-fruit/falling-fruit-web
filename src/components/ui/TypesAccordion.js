@@ -13,11 +13,11 @@ import { theme } from './GlobalStyle'
 import IndicatorAccordionButton from './IndicatorAccordionButton'
 
 const TypesAccordionItem = styled(AccordionItem)`
-  margin-bottom: 15px;
+  margin-block-end: 15px;
 `
 
 const TypesAccordionPanel = styled(AccordionPanel)`
-  padding-top: 12px;
+  padding-block-start: 12px;
 `
 
 const TypesAccordionButton = ({ children, ...props }) => {

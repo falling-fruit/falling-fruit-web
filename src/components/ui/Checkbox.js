@@ -1,6 +1,7 @@
 import '@reach/checkbox/styles.css'
 
 import { CustomCheckboxContainer, CustomCheckboxInput } from '@reach/checkbox'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 const StyledCheckmark = styled.div`
@@ -33,15 +34,21 @@ const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
   }
 `
 
-const Checkbox = ({ checked, name, onChange, id, ...props }) => (
-  <StyledCustomCheckboxContainer
-    checked={checked}
-    onChange={onChange}
-    {...props}
-  >
-    <CustomCheckboxInput id={id} name={name} />
-    {checked === 'mixed' ? <span /> : <StyledCheckmark $checked={checked} />}
-  </StyledCustomCheckboxContainer>
-)
+const Checkbox = ({ checked, name, onChange, id, ...props }) => {
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
+
+  return (
+    <StyledCustomCheckboxContainer
+      checked={checked}
+      onChange={onChange}
+      style={isRTL ? { marginLeft: '0.75ex', marginRight: '0' } : {}}
+      {...props}
+    >
+      <CustomCheckboxInput id={id} name={name} />
+      {checked === 'mixed' ? <span /> : <StyledCheckmark $checked={checked} />}
+    </StyledCustomCheckboxContainer>
+  )
+}
 
 export default Checkbox

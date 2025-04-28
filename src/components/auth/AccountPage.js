@@ -111,7 +111,7 @@ const AccountPage = () => {
                     </label>
                   }
                   left={<Checkbox name="announcements_email" />}
-                  style={{ margin: '16px 0 8px 0' }}
+                  style={{ marginBlock: '16px 8px' }}
                 />
                 <FormInputWrapper>
                   <Input

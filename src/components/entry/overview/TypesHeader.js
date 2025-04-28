@@ -15,22 +15,21 @@ import WikipediaLogo from './icons/Wikipedia.svg'
 
 const StyledTypeTitle = styled.div`
   font-family: ${({ theme }) => theme.fonts};
+  text-align: start;
 `
 
 const CommonName = styled.div`
   font-size: 1rem;
   font-weight: bold;
   color: ${({ theme }) => theme.headerText};
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-block: 0px;
 `
 
 const ScientificName = styled.div`
   font-size: ${(props) => (props.standalone ? '1.125rem' : '0.875rem')};
   font-style: italic;
   color: ${({ theme }) => theme.text};
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-block: 0px;
   font-weight: normal;
 `
 
@@ -77,11 +76,11 @@ const Resource = styled.a`
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin-bottom: 5px;
+  margin-block-end: 5px;
 
   img {
     width: 25px;
-    margin-right: 11px;
+    margin-inline-end: 11px;
   }
 `
 

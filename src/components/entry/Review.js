@@ -9,10 +9,10 @@ import ReviewStats, { getStarRating, Separator, StatsRow } from './ReviewStats'
 import { formatISOString } from './textFormatters'
 
 const ReviewContainer = styled.div`
-  padding-bottom: 15px;
+  padding-block-end: 15px;
 
   &:not(:last-child) {
-    margin-bottom: 15px;
+    margin-block-end: 15px;
   }
 
   ${({ $editable, theme }) =>
@@ -31,12 +31,13 @@ const ReviewDescription = styled.section`
   word-break: normal;
   overflow-wrap: anywhere;
 
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
   blockquote {
     font-size: 1rem;
     color: ${({ theme }) => theme.secondaryText};
-    margin: 0 0 4px 0;
+    margin-block: 0 4px;
+    margin-inline: 0;
   }
 `
 
@@ -44,28 +45,28 @@ const EditableHeader = styled.header`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 0.6em;
+  margin-block-end: 0.6em;
 
   button {
     display: flex;
     align-items: center;
-    margin-top: 0.2em;
+    margin-block-start: 0.2em;
     color: ${({ theme }) => theme.blue};
     text-decoration: underline;
 
     svg {
-      margin-right: 0.2em;
+      margin-inline-end: 0.2em;
     }
   }
 `
 
 export const StyledImagePreview = styled(ImagePreview)`
   cursor: pointer;
-  margin-right: 7px;
+  margin-inline-end: 7px;
 `
 
 const AuthorAndDateRow = styled.div`
-  margin-bottom: 0.5em;
+  margin-block-end: 0.5em;
 `
 
 const Review = ({

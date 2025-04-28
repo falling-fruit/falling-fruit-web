@@ -44,7 +44,7 @@ const Project = () => {
   return (
     <InfoPage>
       <div className="grid">
-        <PhotoGridTemplate photos={foragingPhotos} float={'right'} />
+        <PhotoGridTemplate photos={foragingPhotos} float={'inline-end'} />
         <p>
           <em>{renderHTML(t('pages.about.ff_disclaimer_html'))}</em>
         </p>

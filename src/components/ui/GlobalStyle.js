@@ -62,7 +62,7 @@ const validatedColor =
 const prepend =
   (prefix = '', value) =>
   ({ $prepend }) =>
-    `${prefix}${$prepend ? '-right' : '-left'}${value && `: ${value};`}`
+    `${prefix}${$prepend ? '-end' : '-start'}${value && `: ${value};`}`
 
 const zIndex = {
   mobileTablist: 1,

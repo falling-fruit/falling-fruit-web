@@ -8,9 +8,10 @@ export const Icons = styled.div`
   align-items: center;
   max-height: 36px;
   & > *:not(:last-child) {
-    margin: 0 8px;
+    margin-inline: 8px;
   }
-  ${(props) => (props.$prepend ? 'margin-right' : 'margin-left')}: 18px;
+  ${(props) =>
+    props.$prepend ? `margin-inline-end: 18px` : `margin-inline-start: 18px`}
 `
 
 export const PrimaryText = styled.div`
@@ -33,7 +34,7 @@ const ListContainer = styled.li`
   height: 42px;
   align-items: center;
   &:not(:last-child) {
-    border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+    border-block-end: 1px solid ${({ theme }) => theme.secondaryBackground};
   }
 `
 

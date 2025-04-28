@@ -27,7 +27,7 @@ const StyledProgressBarStep = styled.div`
   > div:last-child {
     // Step Label
     text-align: center;
-    margin-top: 4px;
+    margin-block-start: 4px;
     font-size: 0.625rem;
   }
 
@@ -39,13 +39,13 @@ const StyledProgressBarStep = styled.div`
   }
 
   & + &::before {
-    top: calc(50% - 0.6rem);
-    right: 18px;
+    inset-block-start: calc(50% - 0.6rem);
+    inset-inline-end: 18px;
     height: 100%;
     position: absolute;
     align-self: center;
     content: '';
-    border-top: ${({ theme }) => theme.secondaryText} 2.5px solid;
+    border-block-start: ${({ theme }) => theme.secondaryText} 2.5px solid;
     width: 100%;
     z-index: -1;
   }

@@ -20,8 +20,8 @@ const OpacityButton = styled(ResetButton)`
 const StreetViewUIWrapper = styled.div`
   width: calc(100% - 40px);
   display: flex;
-  top: 20px;
-  left: 20px;
+  inset-block-start: 20px;
+  inset-inline-start: 20px;
   justify-content: space-between;
   position: absolute;
 `

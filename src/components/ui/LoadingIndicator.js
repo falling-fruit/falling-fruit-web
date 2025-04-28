@@ -16,7 +16,7 @@ const LoadingIndicatorWrapper = styled.div`
   color: ${({ theme }) => theme.secondaryText};
 
   & > svg {
-    ${(props) => !props.vertical && 'margin-right: 5px'};
+    ${(props) => !props.vertical && 'margin-inline-end: 5px'};
   }
 `
 /**

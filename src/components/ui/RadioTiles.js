@@ -7,7 +7,7 @@ const TileRow = styled.div`
   flex-wrap: wrap;
   gap: 5px;
   /* HACK: Override > *:not(:last-child) in SettingsPage */
-  margin-bottom: 10px !important;
+  margin-block-end: 10px !important;
 `
 
 const RadioTiles = ({ options, value: selectedValue, onChange }) => (

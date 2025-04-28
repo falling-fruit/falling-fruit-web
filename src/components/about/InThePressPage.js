@@ -15,13 +15,13 @@ const TimelineSection = styled.section`
     align-items: top;
 
     :not(:last-of-type) {
-      margin-bottom: 2em;
+      margin-block-end: 2em;
     }
 
     > div:first-of-type {
       width: 11ch;
-      margin-right: 1em;
-      text-align: right;
+      margin-inline-end: 1em;
+      text-align: end;
       color: ${({ theme }) => theme.tertiaryText};
     }
 
@@ -49,7 +49,7 @@ const TimelineSection = styled.section`
 `
 
 const Embed = styled.div`
-  margin-top: 1em;
+  margin-block-start: 1em;
 
   @media ${({ theme }) => theme.device.mobile} {
     iframe {
@@ -61,7 +61,8 @@ const Embed = styled.div`
 
 const Photo = styled.img`
   display: block;
-  margin: 1em 0 0.5em;
+  margin-inline: 0;
+  margin-block: 1em 0.5em;
   border: 1px solid #eee;
   max-width: 100%;
 `

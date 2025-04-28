@@ -12,7 +12,7 @@ import IconButton from '../ui/IconButton'
 import TopBarNav from '../ui/TopBarNav'
 
 const Instructions = styled.span`
-  margin-left: 15px;
+  margin-inline-start: 15px;
 `
 
 const InitLocationNav = () => {

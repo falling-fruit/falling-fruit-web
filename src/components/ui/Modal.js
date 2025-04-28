@@ -21,12 +21,12 @@ const StyledModal = styled(Dialog)`
   }
 
   h3 {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 `
 
 const Buttons = styled.div`
-  margin-top: 20px;
+  margin-block-start: 20px;
 
   @media ${({ theme }) => theme.device.mobile} {
     text-align: center;
@@ -40,7 +40,7 @@ const Buttons = styled.div`
     }
 
     &:not(:last-child) {
-      margin-right: 12px;
+      margin-inline-end: 12px;
     }
   }
 `

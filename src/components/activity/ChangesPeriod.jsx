@@ -51,7 +51,8 @@ const ListChanges = styled.ul`
 
 const ListItem = styled.li`
   p {
-    margin: 0 0 ${(props) => (props.isDesktop ? '0.5rem' : '1rem')};
+    margin-block: 0 ${(props) => (props.isDesktop ? '0.5rem' : '1rem')};
+    margin-inline: 0;
   }
 `
 

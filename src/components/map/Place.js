@@ -6,7 +6,7 @@ import MapLabel from './MapLabel'
 
 const PlaceLabel = styled(MapLabel)`
   font-size: 1rem;
-  margin-top: 20px;
+  margin-block-start: 20px;
   z-index: 3;
   pointer-events: none;
   touch-action: none;

@@ -14,8 +14,8 @@ import Review from './Review'
 const StyledDialog = styled(Dialog)`
   display: flex;
   flex-direction: column;
-  margin-top: 10vh;
-  margin-bottom: 0;
+  margin-block-start: 10vh;
+  margin-block-end: 0;
   width: 90%;
   height: 80vh;
   border-radius: 0.375em;
@@ -35,15 +35,15 @@ const ReviewContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
-  padding-top: 50px;
+  margin-block-start: 24px;
+  padding-block-start: 50px;
 `
 
 const ThumbnailImage = styled(ImagePreview)`
   outline: ${(props) => props.selected && `3px solid ${props.theme.orange}`};
   border-radius: 0.375em;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-inline-end: 10px;
+  margin-block-end: 10px;
   img {
     border-radius: ${(props) => props.selected && '0.375em'};
     border: 0;
@@ -58,14 +58,14 @@ const ThumbnailImageContainer = styled.div`
 
 const NavButtonContainer = styled.div`
   position: absolute;
-  bottom: 8px;
-  right: 0px;
+  inset-block-end: 8px;
+  inset-inline-end: 0px;
 `
 
 const ExitButtonMobile = styled(ResetButton)`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  inset-block-start: 10px;
+  inset-inline-end: 10px;
   color: white;
   background: rgba(0, 0, 0, 0.65);
   border-radius: 50%;
@@ -81,7 +81,7 @@ const NavButton = styled(ResetButton)`
   width: 50px;
   height: 50px;
   border-radius: 0.375em;
-  margin-right: 10px;
+  margin-inline-end: 10px;
   background: rgba(0, 0, 0, 0.65);
   box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
 

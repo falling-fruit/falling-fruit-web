@@ -21,7 +21,7 @@ const LoaderWrapper = styled.div`
     &_TableRow {
       display: flex;
       padding: 16px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      border-block-end: 1px solid rgba(0, 0, 0, 0.12);
     }
 
     &_TableCell {

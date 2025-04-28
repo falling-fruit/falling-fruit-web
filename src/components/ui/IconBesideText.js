@@ -8,11 +8,12 @@ export default styled.div`
 
   ${'' /* TODO: Add another wrapper */}
   & + & {
-    margin-top: 4px !important;
+    margin-block-start: 4px !important;
   }
 
   p {
-    margin: 0 0 0 4px;
+    margin-block: 0;
+    margin-inline: 4px 0;
   }
 
   svg {
