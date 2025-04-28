@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
 
@@ -7,6 +8,7 @@ const HiddenReaptcha = styled(Reaptcha)`
 `
 
 export const useInvisibleRecaptcha = (handleSubmit) => {
+  const { i18n } = useTranslation()
   const recaptchaRef = useRef()
   const submitArgsRef = useRef()
 
@@ -32,6 +34,7 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
         recaptchaRef.current = e
       }}
       onVerify={handleVerify}
+      hl={i18n.language}
     />
   )
 
