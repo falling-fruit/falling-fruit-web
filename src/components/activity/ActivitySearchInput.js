@@ -42,7 +42,7 @@ const Tag = styled.button`
   }
 
   .count {
-    margin-left: 6px;
+    margin-inline-start: 6px;
     font-size: 0.8rem;
     background: ${({ theme }) => theme.secondaryBackground};
     border-radius: 10px;
@@ -58,7 +58,7 @@ const CategoryLabel = styled.div`
 `
 
 const ShowMoreTag = styled(Tag)`
-  margin-left: 5px;
+  margin-inline-start: 5px;
 `
 
 const getFullCityName = (city) => {

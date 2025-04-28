@@ -1,4 +1,3 @@
-import { ArrowBack } from '@styled-icons/boxicons-regular'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +16,7 @@ import { transformActivityData } from '../../utils/transformActivityData'
 import { useAppHistory } from '../../utils/useAppHistory'
 import BackButton from '../ui/BackButton'
 import { Page } from '../ui/PageTemplate'
+import ReturnIcon from '../ui/ReturnIcon'
 import ActivitySearchInput from './ActivitySearchInput'
 import ChangesPeriod from './ChangesPeriod'
 import SkeletonLoader from './SkeletonLoader'
@@ -145,7 +145,7 @@ const UserActivityPage = () => {
           history.push(isCurrentUser ? '/users/edit' : `/profiles/${userId}`)
         }
       >
-        <ArrowBack />
+        <ReturnIcon />
         {t('layouts.back')}
       </StyledBackButton>
 
