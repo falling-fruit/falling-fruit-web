@@ -249,6 +249,7 @@
     "datasets": {
       "community_map": "Gemeinschaftskarte",
       "date_imported": "Zeitpunkt eingeführt",
+      "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Importierte Datensätze",
       "imported_on": "Importiert am {{date}}",
       "intro_html": "Es ist unser erklärtes Ziel, den weltweit umfassendsten Datensatz frei zugänglicher Geodaten der urbanen Ernte zu bieten. Während unsere Nutzer unserer <a href=\"/\">Karte</a> täglich eigene Standorte hinzufügen, durchsuchen wir das Internet nach bereits bestehenden Datenquellen. Nur so können wir das Wissen Aller vereinen! Wenn du von einem Datensatz weisst, den wir verpasst haben, dann <a href=\"mailto:info@fallingfruit.org\">schreib uns</a>! Falls du selber Zugriff auf nützliche Daten hast, kannst du unsere <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">Import-Vorlage</a> benützen, um uns das Hinzufügen deines Datensatzes zu erleichtern. Beachte, dass alle Imports manuell durchgeführt werden müssen. Spätere Änderungen am Original-Datensatz werden daher nicht auf der Hompage wiedergegeben.",

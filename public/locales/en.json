@@ -247,6 +247,7 @@
       "license_html": "If you are interested in using the data in your project, especially a commercial project, we suggest you contact us (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Unless otherwise specified, data are licensed as <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons - Attribution, Non-commercial, Share-alike). This means that you are free to use and distribute the data so long as you preserve the original author/source attributions and do not use it (without permission) for commercial applications. The source code for Falling Fruit is also open, and available on <a href=\"https://github.com/falling-fruit/\">GitHub</a>."
     },
     "datasets": {
+      "import_id_and_name": "Import #{{id}}: {{name}}",
       "community_map": "Community map",
       "date_imported": "Date imported",
       "imported_datasets": "Imported datasets",

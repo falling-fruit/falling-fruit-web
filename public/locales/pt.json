@@ -249,6 +249,7 @@
     "datasets": {
       "community_map": "Mapa da comunidade",
       "date_imported": "Dados importados",
+      "import_id_and_name": "Importação #{{id}}: {{name}}",
       "imported_datasets": "Conjuntos de dados importados",
       "imported_on": "Importado em {{date}}",
       "intro_html": "Falling Fruit aspira a ser o mais abrangente conjunto aberto de dados geográficos  de alimentos urbanos. Enquanto nossos usuários explorarem, editarem e adicionarem locais, usando o nosso <a href=\"/\">mapa</a>, nós procuramos o universo conhecido de conjuntos de dados pré-existentes e os importamos diretamente no <a href=\"/data\">banco de dados</a>, unindo os esforços de coletores, povos da floresta e freegans em todos os lugares. Se você souber de um conjunto de dados que nao encontramos, por favor, <a href=\"mailto:info@fallingfruit.org\">avise-nos</a> ! Você também pode nos ajudar com o processo de importação, formatando os dados usando <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modelo de importação</a>. Note que desde que as importações devem ser executadas manualmente, as alterações aos dados originais não estão refletidos na Falling Fruit.",

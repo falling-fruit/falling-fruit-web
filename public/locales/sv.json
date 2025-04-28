@@ -249,6 +249,7 @@
     "datasets": {
       "community_map": "Gemenskapskarta",
       "date_imported": "Importdatum",
+      "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Importerade dataset",
       "imported_on": "Importerad den {{date}}",
       "intro_html": "Falling Fruit strävar efter att vara den mest omfattande och öppna geografiska databasen över ätbara växter i stadsmiljö. Medan våra användare utforskar, redigerar och lägger till platser med hjälp av vår <a href=\"/\">karta</a>, genomsöker vi den kända världen efter befintliga dataset och importerar dem direkt till <a href=\"/data\">databasen</a>, och förenar därmed insatserna från matletare, skogsbrukare och freeganare överallt. Om du känner till ett dataset som vi har missat, vänligen <a href=\"mailto:info@fallingfruit.org\">meddela oss</a>! Du kan också hjälpa oss med importprocessen genom att formatera data med hjälp av vår <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importmall</a>. Observera att eftersom importer måste utföras manuellt kommer alla ändringar i originaldata som görs efter importen inte att återspeglas på Falling Fruit.",

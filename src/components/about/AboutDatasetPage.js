@@ -62,9 +62,7 @@ const AboutDatasetPage = () => {
           {t('layouts.back')}
         </BackButton>
       </StyledNavBack>
-      <h3>
-        Import #{id}: {name}
-      </h3>
+      <h3>{t('pages.datasets.import_id_and_name', { id, name })}</h3>
       <a href={url} target="_blank" rel="noreferrer">
         {url}
       </a>
