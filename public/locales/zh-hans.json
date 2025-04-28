@@ -171,7 +171,7 @@
       "date_edited": "更新于{{date}}",
       "imported_from": "从{{name}}导入",
       "season": {
-        "in_season": "从{{start}}到{{stop}}的季节",
+        "in_season": "从{{start_month}}到{{stop_month}}的季节",
         "year_round": "全年"
       },
       "title": "概览"

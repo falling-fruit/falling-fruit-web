@@ -155,14 +155,14 @@ const EntryOverview = () => {
                   locationData.season_stop === 11)
                   ? t('locations.overview.season.year_round')
                   : t('locations.overview.season.in_season', {
-                      start:
+                      start_month:
                         locationData.season_start != null
                           ? formatMonth(
                               locationData.season_start,
                               i18n.language,
                             )
                           : '?',
-                      stop:
+                      stop_month:
                         locationData.season_stop != null
                           ? formatMonth(locationData.season_stop, i18n.language)
                           : '?',

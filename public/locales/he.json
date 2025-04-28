@@ -171,7 +171,7 @@
       "date_edited": "עודכן {{date}}",
       "imported_from": "יובא מ {{name}}",
       "season": {
-        "in_season": "בעונה מ {{start}} עד {{stop}}",
+        "in_season": "בעונה מ {{start_month}} עד {{stop_month}}",
         "year_round": "כל השנה"
       },
       "title": "סקירה"
