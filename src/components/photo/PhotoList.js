@@ -34,7 +34,7 @@ const PhotoEntry = styled(ListEntry).attrs((props) => ({
   background-color: ${({ theme }) => theme.background};
 
   ${Icons} {
-    margin-right: 10px;
+    margin-inline-end: 10px;
   }
 `
 
@@ -47,7 +47,7 @@ const NewBadge = styled.div.attrs({ children: 'New photo' })`
 `
 
 const PhotoListContainer = styled.div`
-  margin-bottom: 16px;
+  margin-block-end: 16px;
 `
 
 export const PhotoList = ({ photos, onChange }) => {

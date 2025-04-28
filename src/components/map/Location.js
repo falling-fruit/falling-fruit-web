@@ -34,7 +34,7 @@ const TooltipLabel = styled(MapLabel)`
   opacity: 0;
   transition: opacity 0.2s;
   pointer-events: none;
-  top: 21px; // offset by LocationButton's width + MapLabel's margin-top
+  top: 21px; // offset by LocationButton's width + MapLabel's margin-block-start
 
   ${LocationButton}:hover & {
     opacity: 1;

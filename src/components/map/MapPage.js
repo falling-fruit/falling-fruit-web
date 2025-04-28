@@ -36,13 +36,13 @@ const MIN_ZOOM = 1
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
-  left: 10px;
-  bottom: 10px;
+  inset-inline-start: 10px;
+  inset-block-end: 10px;
 `
 
 const ZoomButton = styled.button`
   position: absolute;
-  left: 10px;
+  inset-inline-start: 10px;
   width: 40px;
   height: 40px;
   background-color: white;
@@ -82,17 +82,17 @@ const StyledIconButton = styled(ShareIconButton)`
 `
 
 const ZoomInButton = styled(ZoomButton)`
-  top: calc(50% - 45px);
+  inset-block-start: calc(50% - 45px);
 `
 
 const ZoomOutButton = styled(ZoomButton)`
-  top: calc(50% + 5px);
+  inset-block-start: calc(50% + 5px);
 `
 
 const ShareContainer = styled.div`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  inset-block-start: 10px;
+  inset-inline-end: 10px;
   background-color: white;
   border-radius: 4px;
   padding: 10px;
@@ -342,10 +342,9 @@ const MapPage = ({ isDesktop }) => {
           : {
               width: '100%',
               position: 'absolute',
-              top: '48px',
-              bottom: '50px',
-              left: 0,
-              right: 0,
+              insetBlockStart: '48px',
+              insetBlockEnd: '50px',
+              insetInline: 0,
             }
       }
     >
@@ -384,8 +383,8 @@ const MapPage = ({ isDesktop }) => {
             <div
               style={{
                 position: 'absolute',
-                top: '10px',
-                right: '10px',
+                insetBlockStart: '10px',
+                insetInlineEnd: '10px',
                 zIndex: 1,
               }}
             >

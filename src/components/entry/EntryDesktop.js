@@ -14,7 +14,8 @@ const TextContent = styled.article`
   box-sizing: border-box;
 
   ul {
-    margin: 0 0 12px 0;
+    margin-block: 0 12px;
+    margin-inline: 0;
   }
 `
 

@@ -11,9 +11,8 @@ import { zIndex } from '../ui/GlobalStyle'
 
 const PaneContainer = styled.div`
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset-inline: 0;
+  inset-block-end: 0;
   background-color: white;
   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
   touch-action: ${(props) => (props.isMiddlePosition ? 'none' : 'auto')};
@@ -23,7 +22,7 @@ const PaneContainer = styled.div`
     props.displayOverTopBar ? zIndex.topBar + 1 : zIndex.topBar - 1};
   transition: transform 0.3s linear;
   background: ${(props) => (props.hasImages ? 'white' : 'none')};
-  padding-top: ${(props) => (props.hasImages ? '0' : '10px')};
+  padding-block-start: ${(props) => (props.hasImages ? '0' : '10px')};
 `
 
 const DragHandle = styled.div`

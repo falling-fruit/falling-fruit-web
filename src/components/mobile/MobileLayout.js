@@ -81,10 +81,9 @@ const MobileLayout = () => {
           style={{
             display: shouldDisplayMapPage(pathname) ? 'block' : 'none',
             position: 'absolute',
-            top: '30px',
-            bottom: '0px',
-            left: 0,
-            right: 0,
+            insetBlockStart: '30px',
+            insetBlockEnd: '0px',
+            insetInline: 0,
             zIndex: 1,
           }}
         >
@@ -117,7 +116,7 @@ const MobileLayout = () => {
                 component={NavigationBar}
               />
             </Switch>
-            <TabPanels style={{ paddingBottom: '50px' }}>
+            <TabPanels style={{ paddingBlockEnd: '50px' }}>
               <Switch>
                 {activityRoutes}
                 {aboutRoutes}
@@ -153,7 +152,7 @@ const MobileLayout = () => {
                         zIndex: zIndex.mobileTablist,
                         position: 'fixed',
                         width: '100%',
-                        bottom: 0,
+                        insetBlockEnd: 0,
                         height: '50px',
                       }}
                     >

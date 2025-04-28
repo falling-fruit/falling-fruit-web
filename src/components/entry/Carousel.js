@@ -23,13 +23,14 @@ const Carousel = styled(ResponsiveCarousel)`
   .control-dots {
     display: flex;
     width: auto;
-    right: 0;
+    inset-inline-end: 0;
 
     .dot {
       height: 10px;
       width: 10px;
       opacity: 1;
-      margin: 0 10px 0 0;
+      margin-block: 0;
+      margin-inline: 0 10px;
       box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
       background: ${({ theme }) => theme.secondaryBackground};
 

@@ -11,7 +11,7 @@ const FilterButtonsContainer = styled.div`
     color: ${({ theme }) => theme.tertiaryText};
     border: 2px solid ${({ theme }) => theme.tertiaryText};
     &:not(:last-child) {
-      margin-right: 5px;
+      margin-inline-end: 5px;
     }
 
     &:not(:disabled):hover {

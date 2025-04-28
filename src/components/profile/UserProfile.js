@@ -18,7 +18,7 @@ import ReturnIcon from '../ui/ReturnIcon'
 const StyledNavBack = styled.div`
   svg {
     height: 20px;
-    margin-right: 5px;
+    margin-inline-end: 5px;
   }
 `
 const UserProfile = () => {

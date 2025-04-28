@@ -3,6 +3,7 @@
 import { Dialog } from '@reach/dialog'
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
 import { useCallback, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -32,15 +33,15 @@ const ReviewContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-left: 24px;
-  padding-top: 50px;
+  margin-inline-start: 24px;
+  padding-block-start: 50px;
   max-width: 300px;
   min-width: 300px;
 `
 const ThumbnailImage = styled(ImagePreview)`
   outline: ${(props) => props.selected && `3px solid ${props.theme.orange}`};
   border-radius: 0.375em;
-  margin-right: 10px;
+  margin-inline-end: 10px;
   img {
     border-radius: ${(props) => props.selected && '0.375em'};
     border: 0;
@@ -54,14 +55,14 @@ const ThumbnailImageContainer = styled.div`
 
 const NavButtonContainer = styled.div`
   position: absolute;
-  bottom: 8px;
-  right: 0px;
+  inset-block-end: 8px;
+  inset-inline-end: 0px;
 `
 
 const ExitButton = styled(ResetButton)`
   position: absolute;
-  top: 5px;
-  right: 5px;
+  inset-block-start: 5px;
+  inset-inline-end: 5px;
   color: ${({ theme }) => theme.secondaryText};
 `
 
@@ -75,7 +76,7 @@ const NavButton = styled(ResetButton)`
   width: 50px;
   height: 50px;
   border-radius: 0.375em;
-  margin-right: 10px;
+  margin-inline-end: 10px;
   background: rgba(0, 0, 0, 0.65);
   box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
 
@@ -84,6 +85,9 @@ const NavButton = styled(ResetButton)`
   }
 `
 const Lightbox = () => {
+  // Use i18n to determine if the language is RTL
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
   const dispatch = useDispatch()
   const { reviews, lightbox } = useSelector((state) => state.location)
   const { isOpen, reviewIndex, photoIndex } = lightbox
@@ -151,7 +155,7 @@ const Lightbox = () => {
               disabled={reviewIndex === 0 && photoIndex === 0}
               onClick={decrementReviewImage}
             >
-              <LeftArrowAlt size={30} />
+              {isRTL ? <RightArrowAlt size={30} /> : <LeftArrowAlt size={30} />}
             </NavButton>
             <NavButton
               disabled={
@@ -160,7 +164,7 @@ const Lightbox = () => {
               }
               onClick={incrementReviewImage}
             >
-              <RightArrowAlt size={30} />
+              {isRTL ? <LeftArrowAlt size={30} /> : <RightArrowAlt size={30} />}
             </NavButton>
           </NavButtonContainer>
         )}

@@ -25,7 +25,7 @@ const Tag = styled.li`
   color: ${({ theme, color }) => color ?? theme.orange};
 
   &:not(:last-child) {
-    margin-right: 6px;
+    margin-inline-end: 6px;
   }
 `
 

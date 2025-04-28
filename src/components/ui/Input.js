@@ -10,9 +10,10 @@ const AddOn = styled.div`
     color: inherit;
     border: none;
     height: 100%;
-    border-radius: ${(props) => (props.prepend ? '50% 0 0 50%' : 'none')};
-    border-right: ${(props) => (props.prepend ? '1px solid #e0e1e2' : 'none')};
-    border-left: ${(props) => (!props.prepend ? '1px solid #e0e1e2' : 'none')};
+    border-inline-end: ${(props) =>
+      props.prepend ? '1px solid #e0e1e2' : 'none'};
+    border-inline-start: ${(props) =>
+      !props.prepend ? '1px solid #e0e1e2' : 'none'};
   }
 `
 
@@ -60,7 +61,7 @@ const StyledInput = styled(Input)`
   border: 1px solid ${validatedColor()};
   box-sizing: border-box;
   padding: 0 20px;
-  padding-left: ${(props) => (props.prepend ? '5px' : 'default')};
+  padding-inline-start: ${(props) => (props.prepend ? '5px' : 'default')};
 
   input {
     color: ${({ theme }) => theme.secondaryText};
@@ -72,7 +73,7 @@ const StyledInput = styled(Input)`
     width: 100%;
     outline: none;
     height: calc(100% - 2px);
-    padding-left: ${(props) => (props.prepend ? '10px' : '0')};
+    padding-inline-start: ${(props) => (props.prepend ? '10px' : '0')};
 
     &::placeholder {
       color: ${({ theme }) => theme.tertiaryText};

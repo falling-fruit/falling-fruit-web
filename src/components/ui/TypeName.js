@@ -14,7 +14,7 @@ const CommonName = styled.span`
   font-weight: bold;
   color: ${({ theme }) => theme.headerText};
   .select__control & {
-    margin-right: 0.5em;
+    margin-inline-end: 0.5em;
   }
 `
 
@@ -37,7 +37,7 @@ const Synonyms = styled.span`
   .select__option & {
     display: block;
     flex: 1;
-    text-align: right;
+    text-align: end;
   }
 `
 

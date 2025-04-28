@@ -57,7 +57,7 @@ const StyledHeader = styled.header`
 
   .hamburger {
     display: ${({ user }) => (layoutIstight(user) ? 'flex' : 'none')};
-    margin-right: 1rem;
+    margin-inline-end: 1rem;
     cursor: pointer;
     color: ${({ theme }) => theme.secondaryText};
     align-self: center;
@@ -130,8 +130,8 @@ const NavLi = styled.li`
         position: absolute;
         background-color: ${({ theme }) => theme.orange};
         height: 3px;
-        bottom: 0;
-        left: 0;
+        inset-block-end: 0;
+        inset-inline-start: 0;
       }
     }
   }
@@ -144,7 +144,7 @@ const NavLi = styled.li`
 const NavList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0 0 0 0;
+  margin: 0;
   height: 100%;
   display: flex;
 `
@@ -177,8 +177,8 @@ const StyledDropdown = styled(Dropdown)`
         position: absolute;
         background-color: ${({ theme }) => theme.orange};
         height: 3px;
-        bottom: 0;
-        left: 0;
+        inset-block-end: 0;
+        inset-inline-start: 0;
       }
     }
   }
@@ -216,7 +216,8 @@ const StyledDropdown = styled(Dropdown)`
 const LogoLink = styled(Link)`
   display: block;
   height: 100%;
-  padding: 10px 2em 10px 10px;
+  padding-block: 10px;
+  padding-inline: 10px 2em;
   box-sizing: border-box;
 `
 
@@ -251,8 +252,8 @@ const StyledSocialButtons = styled(SocialButtons)`
       position: absolute;
       background-color: #ffa41b;
       height: 3px;
-      bottom: 0;
-      left: 0;
+      inset-block-end: 0;
+      inset-inline-start: 0;
     }
   }
 
@@ -319,7 +320,7 @@ const MainMenu = ({ className }) => {
     }) !== null
 
   return (
-    <div className={className} style={{ marginRight: 'auto' }}>
+    <div className={className} style={{ marginInlineEnd: 'auto' }}>
       <NavList>
         <NavLi>
           <NavLink to={pathWithCurrentView('/map')} activeClassName="active">
@@ -348,7 +349,13 @@ const MainMenu = ({ className }) => {
           </StyledDropdown>
         </NavLi>
         <NavLi>
-          <div style={{ width: '10em', margin: 'auto 0' }}>
+          <div
+            style={{
+              width: '10em',
+              margin: 'auto 0',
+              paddingInlineStart: '0.75em',
+            }}
+          >
             <LanguageSelect></LanguageSelect>
           </div>
         </NavLi>

@@ -211,7 +211,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
                 hasHeading={isDesktop && editingId == null}
               />
               <ProgressButtons>
-                <div style={{ textAlign: editingId ? 'center' : 'left' }}>
+                <div style={{ textAlign: editingId ? 'center' : 'start' }}>
                   <Button
                     disabled={isSubmitting || !isValid || !dirty}
                     type="submit"

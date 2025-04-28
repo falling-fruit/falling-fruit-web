@@ -56,10 +56,10 @@ const SelectParent = styled.div`
 
     &__remove {
       padding: 0;
-      margin-left: 0.25rem;
+      margin-inline-start: 0.25rem;
       border-radius: 50%;
       cursor: pointer;
-      margin-bottom: -1px;
+      margin-block-end: -1px;
       color: ${({ theme }) => theme.secondaryText};
 
       :hover {
@@ -71,7 +71,7 @@ const SelectParent = styled.div`
 
   .select__menu {
     div:not(:last-child) {
-      border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+      border-block-end: 1px solid ${({ theme }) => theme.secondaryBackground};
     }
   }
 

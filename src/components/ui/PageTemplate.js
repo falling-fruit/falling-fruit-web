@@ -18,9 +18,9 @@ const MobileHeader = styled.div`
 `
 
 const LanguageContainer = styled.div`
-  margin: 0 0 0 auto;
+  margin-inline-start: auto;
   max-width: 120px;
-  text-align: right;
+  text-align: start;
 `
 
 const PageScrollWrapper = styled.div`
@@ -40,8 +40,10 @@ const PageWrapper = styled.article`
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
-    padding: 0 23px 20px;
-    margin: 28px auto 0 auto;
+    padding-block: 0 20px;
+    padding-inline: 23px;
+    margin-block: 28px 0;
+    margin-inline: auto;
   }
 
   h1,
@@ -52,7 +54,7 @@ const PageWrapper = styled.article`
   }
 
   h1 {
-    margin-top: 0.5em;
+    margin-block-start: 0.5em;
     font-size: 2.286rem;
   }
 
@@ -80,7 +82,7 @@ const PageWrapper = styled.article`
   }
 
   img {
-    margin-right: 16px;
+    margin-inline-end: 16px;
   }
 
   .logo {
@@ -89,7 +91,7 @@ const PageWrapper = styled.article`
   }
 
   .content {
-    margin-top: 10px;
+    margin-block-start: 10px;
 
     p {
       margin: 0;
@@ -102,14 +104,14 @@ const PageWrapper = styled.article`
 
     @media ${({ theme }) => theme.device.mobile} {
       overflow: hidden;
-      margin-top: 20px;
+      margin-block-start: 20px;
 
       img {
         max-width: 100%;
         height: auto;
         float: left;
         clear: left;
-        margin-bottom: 10px;
+        margin-block-end: 10px;
       }
     }
 
@@ -122,11 +124,11 @@ const PageWrapper = styled.article`
 `
 
 const StyledBackButton = styled(BackButton)`
-  margin-bottom: 23px;
+  margin-block-end: 23px;
   svg {
     width: 1.2em;
     height: 1.2em;
-    margin-right: 0.6em;
+    margin-inline-end: 0.6em;
   }
 `
 

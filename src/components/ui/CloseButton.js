@@ -8,8 +8,8 @@ const TopRightButton = styled.button`
   cursor: pointer;
   padding: 0;
   position: absolute;
-  right: 4px;
-  top: 4px;
+  inset-inline-end: 4px;
+  inset-block-start: 4px;
 `
 
 const CloseButton = (props) => (

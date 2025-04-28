@@ -11,8 +11,8 @@ const TooltipContainer = styled.div`
   padding: 16px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  top: -170px;
-  left: 50%;
+  inset-block-start: -170px;
+  inset-inline-start: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
   z-index: 4;
@@ -21,8 +21,8 @@ const TooltipContainer = styled.div`
   &::after {
     content: '';
     position: absolute;
-    bottom: -10px;
-    left: 50%;
+    inset-block-end: -10px;
+    inset-inline-start: 50%;
     transform: translateX(-50%);
     border-width: 10px 10px 0;
     border-style: solid;

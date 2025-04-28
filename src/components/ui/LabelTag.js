@@ -8,7 +8,7 @@ const LabelTag = styled.span`
   vertical-align: 0.25em;
   height: 15px;
   padding: 2px;
-  margin-left: 5px;
+  margin-inline-start: 5px;
   font-size: 0.5625rem;
   font-weight: bold;
   color: ${validatedColor('text', 'background')};

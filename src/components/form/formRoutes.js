@@ -17,18 +17,19 @@ import { LocationForm } from './LocationForm'
 import { ReviewForm } from './ReviewForm'
 
 const StyledNavBack = styled.div`
-  padding: 25px 15px 15px 10px;
+  padding-block: 25px 15px;
+  padding-inline: 10px 15px;
   display: flex;
   justify-content: space-between;
 
   svg {
     height: 20px;
-    margin-right: 5px;
+    margin-inline-end: 5px;
   }
 `
 
 const Header = styled.h3`
-  margin-left: 10px;
+  margin-inline-start: 10px;
 `
 
 const MobileNav = ({ title, onBack }) => (

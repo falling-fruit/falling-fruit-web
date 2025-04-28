@@ -11,9 +11,9 @@ import {
 
 const Heading = styled.div`
   position: absolute;
-  bottom: 0;
-  left: -35px;
-  transform-origin: bottom center;
+  inset-block-end: 0;
+  inset-inline-start: -35px;
+  transform-origin: block-end center;
   transform: rotate(${({ heading }) => heading}deg);
 
   height: 55px;

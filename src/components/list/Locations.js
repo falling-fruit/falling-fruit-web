@@ -10,7 +10,7 @@ import { ReactComponent as LeafIcon } from './leaf.svg'
 
 const TypeNameTagWrapper = styled.span`
   display: inline-block;
-  margin-bottom: 0.5em;
+  margin-block-end: 0.5em;
   opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
   font-size: 0.875rem;
   &:not(:nth-last-child(2))::after {
@@ -41,11 +41,11 @@ const TypeName = ({ commonName, scientificName }) => (
 const LocationItem = styled.li`
   display: flex;
   flex-direction: row;
-  padding-left: 1em;
+  padding-inline-start: 1em;
   align-items: start;
   cursor: pointer;
   &:not(:last-child) {
-    border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
+    border-block-end: 1px solid ${({ theme }) => theme.secondaryBackground};
   }
 `
 
@@ -68,8 +68,8 @@ const TextContainer = styled.div`
 
 const ContentWrapper = styled.div`
   flex: 1;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 `
 
 const PrimaryText = styled.div`
@@ -88,8 +88,8 @@ const LeftIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 1em;
-  margin-top: 0.5em;
+  margin-inline-end: 1em;
+  margin-block-start: 0.5em;
 `
 
 const ImageIcon = ({ imageSrc }) => (

@@ -15,7 +15,7 @@ const TablePreviewLink = styled.a`
   align-items: center;
   height: 20px;
   width: 20px;
-  margin-right: 5px;
+  margin-inline-end: 5px;
 
   img {
     width: 100%;

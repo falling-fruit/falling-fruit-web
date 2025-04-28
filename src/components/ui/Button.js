@@ -43,7 +43,7 @@ const StyledButton = styled(ResetButton)`
 `
 
 const Icon = styled.span`
-  ${prepend('margin', '0.25em')}
+  ${prepend('margin-inline', '0.25em')}
 `
 
 // TODO: forward ref and remaining props in all UI components, rather than taking specific props

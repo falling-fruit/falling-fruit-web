@@ -14,7 +14,7 @@ import Locations from './Locations'
 
 // Allow space for 80px search bar and 8px border
 const ListPageWrapper = styled.div`
-  margin-top: 88px;
+  margin-block-start: 88px;
   overflow: scroll;
 `
 

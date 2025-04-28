@@ -59,8 +59,7 @@ const TrackLocationIcon = ({ geolocationState, ...props }) => {
 const TrackLocationPrependButton = styled.button.attrs((props) => ({
   children: <TrackLocationIcon {...props} />,
 }))`
-  padding-left: 3px;
-  padding-right: 8px;
+  padding-inline: 3px 8px;
 
   cursor: ${({ geolocationState }) => getCursorStyle(geolocationState)};
 
@@ -84,8 +83,8 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
   cursor: ${({ geolocationState }) => getCursorStyle(geolocationState)};
 
   position: absolute;
-  bottom: 84px;
-  right: 10px;
+  inset-block-end: 84px;
+  inset-inline-end: 10px;
   z-index: 1;
 `
 

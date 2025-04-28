@@ -26,26 +26,24 @@ const Page = styled.div`
   overflow: auto;
 
   @media ${({ theme }) => theme.device.mobile} {
-    padding-top: 26px;
-    padding-left: 26px;
-    padding-right: 26px;
+    padding-block-start: 26px;
+    padding-inline: 26px;
   }
 
   @media ${({ theme }) => theme.device.desktop} {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-inline: 15px;
 
     h3:first-child {
-      margin-top: 8px;
+      margin-block-start: 8px;
     }
   }
 
   > h2 {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   > *:not(:last-child) {
-    margin-bottom: 14px;
+    margin-block-end: 14px;
   }
 
   > h3 {
@@ -113,7 +111,7 @@ const StyledListEntry = styled(ListEntry)`
   padding: 0 26px;
 
   :not(:last-child) {
-    margin-bottom: 7px;
+    margin-block-end: 7px;
   }
 `
 

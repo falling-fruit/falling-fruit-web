@@ -43,15 +43,15 @@ const Description = styled.section`
   }
 
   & > *:not(:first-child) {
-    margin-top: 14px;
+    margin-block-start: 14px;
   }
 
   & > p:first-child {
-    margin-bottom: 14px;
+    margin-block-end: 14px;
   }
 
   button {
-    margin-right: 10px;
+    margin-inline-end: 10px;
   }
 `
 

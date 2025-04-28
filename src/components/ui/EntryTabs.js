@@ -21,12 +21,12 @@ const EntryTabs = styled(PageTabs)`
       font-size: 0.875rem;
       color: ${({ theme }) => theme.secondaryText};
 
-      border-top: 2px solid ${({ theme }) => theme.secondaryBackground};
-      border-bottom: 2px solid ${({ theme }) => theme.secondaryBackground};
+      border-block-start: 2px solid ${({ theme }) => theme.secondaryBackground};
+      border-block-end: 2px solid ${({ theme }) => theme.secondaryBackground};
       &[data-selected] {
         color: ${({ theme }) => theme.orange};
-        border-bottom-color: ${({ theme }) => theme.orange};
-        border-top-color: ${({ theme }) => theme.secondaryBackground};
+        border-block-end-color: ${({ theme }) => theme.orange};
+        border-block-start-color: ${({ theme }) => theme.secondaryBackground};
       }
     }
   }

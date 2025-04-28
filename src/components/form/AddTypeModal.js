@@ -28,7 +28,7 @@ const LanguageNamePair = ({ index, showRemoveButton, remove }) => {
         display: 'flex',
         flexDirection: isDesktop ? 'row' : 'column',
         gap: '10px',
-        marginBottom: '10px',
+        marginBlockEnd: '10px',
         alignItems: isDesktop ? 'flex-end' : 'stretch',
       }}
     >
@@ -93,7 +93,7 @@ const NamesFieldArray = () => {
           <Button
             type="button"
             onClick={() => push({ language: null, name: '' })}
-            style={{ marginBottom: '10px', marginRight: '10px' }}
+            style={{ marginBlockEnd: '10px', marginInlineEnd: '10px' }}
           >
             {t('new_type.form.add_name')}
           </Button>

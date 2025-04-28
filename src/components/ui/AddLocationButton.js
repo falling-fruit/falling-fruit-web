@@ -9,8 +9,8 @@ import IconButton from './IconButton'
 
 const StyledAddLocationButton = styled(IconButton)`
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  inset-block-end: 10px;
+  inset-inline-end: 10px;
   z-index: 1;
   opacity: ${({ greyedOut }) => (greyedOut ? '0.5' : '1')};
   cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
