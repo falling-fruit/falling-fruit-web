@@ -36,7 +36,9 @@ const ScientificName = styled.div`
 const TypeTitle = ({ commonName, scientificName }) => (
   <StyledTypeTitle>
     {commonName && <CommonName>{commonName}</CommonName>}
-    <ScientificName standalone={!commonName}>{scientificName}</ScientificName>
+    <ScientificName dir="ltr" standalone={!commonName}>
+      {scientificName}
+    </ScientificName>
   </StyledTypeTitle>
 )
 

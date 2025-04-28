@@ -55,7 +55,9 @@ export const TypeName = ({ commonName, scientificName, synonyms }) => (
   <TypeNameWrapper>
     <NamesBlock>
       {commonName && <CommonName>{commonName}</CommonName>}
-      {scientificName && <ScientificName>{scientificName}</ScientificName>}
+      {scientificName && (
+        <ScientificName dir="ltr">{scientificName}</ScientificName>
+      )}
     </NamesBlock>
     {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
   </TypeNameWrapper>
