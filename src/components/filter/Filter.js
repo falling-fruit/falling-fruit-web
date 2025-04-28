@@ -17,16 +17,15 @@ const EdibleTypeText = styled.p`
   font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
-  margin-top: 1.25em;
-  margin-bottom: 0.5em;
+  margin-block-start: 1.25em;
+  margin-block-end: 0.5em;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 0em;
+    margin-block-start: 0em;
   }
 `
 
 const TreeFiltersContainer = styled.div`
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-block: 0.5em;
   /* Provide vertical space when buttons wrap over multiple lines */
   line-height: 1.5rem;
 `
@@ -36,16 +35,13 @@ const SearchInput = styled(Input)`
   padding: 0;
   flex: 0;
   input {
-    margin-top: 1em;
-    margin-left: 0.75em;
-    margin-bottom: 1em;
-    margin-right: 0.75em;
+    margin-block: 1em;
+    margin-inline: 0.75em;
     height: 100%;
   }
 `
 const MuniCheckbox = styled.div`
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-block: 1em;
 `
 
 const Filter = () => {
@@ -88,7 +84,7 @@ const Filter = () => {
             value={showOnlyOnMap}
             label={t('filter.only_on_map')}
             onChange={(checked) => dispatch(setShowOnlyOnMap(checked))}
-            style={{ display: 'inline-block', marginRight: '5px' }}
+            style={{ display: 'inline-block', marginInlineEnd: '5px' }}
           />
           <FilterButtons
             onSelectAllClick={() => {

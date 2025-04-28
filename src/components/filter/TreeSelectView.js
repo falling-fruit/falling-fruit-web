@@ -28,7 +28,7 @@ const TreeNode = styled.li`
   align-items: center;
   cursor: pointer;
   white-space: nowrap;
-  margin-left: 0.5em;
+  margin-inline-start: 0.5em;
 `
 
 const Checkbox = styled.input`
@@ -61,20 +61,20 @@ const Checkbox = styled.input`
 `
 
 const NodeContent = styled.span`
-  margin-left: 0.25em;
+  margin-inline-start: 0.25em;
   font-size: 0.875rem;
 `
 
 const CommonName = styled.span`
   font-weight: bold;
-  margin-right: 0.5em;
+  margin-inline-end: 0.5em;
   color: ${({ theme, isDisabled }) =>
     isDisabled ? theme.text : theme.secondaryText};
 `
 
 const ScientificName = styled.span`
   font-style: italic;
-  margin-right: 0.5em;
+  margin-inline-end: 0.5em;
   opacity: ${({ isDisabled }) => (isDisabled ? 0.7 : 1)};
   color: ${({ theme }) => theme.text};
 `
@@ -82,7 +82,6 @@ const ScientificName = styled.span`
 const Count = styled.span`
   font-weight: bold;
   color: ${({ theme }) => theme.text};
-  margin-right: 0.25em;
 `
 
 const ToggleButton = styled.button`
@@ -118,13 +117,7 @@ const TreeSelectView = ({
 
     return (
       <React.Fragment key={node.id}>
-        <TreeNode
-          style={
-            isRTL
-              ? { paddingRight: `${level * 1.25}em` }
-              : { paddingLeft: `${level * 1.25}em` }
-          }
-        >
+        <TreeNode style={{ paddingInlineStart: `${level * 1.25}em` }}>
           <ControlsContainer>
             {node.children.length > 0 ? (
               <ToggleButton
