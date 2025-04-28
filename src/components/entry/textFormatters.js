@@ -11,6 +11,24 @@ export const formatISOString = (dateString, language) =>
   })
 
 export const formatMonth = (month, language) =>
-  new Date(1, month, 1).toLocaleDateString(language, {
+  new Date(1, month).toLocaleDateString(language, {
     month: 'long',
   })
+
+export const formatMonthList = (months, language) => {
+  if (!months.length) {
+    return null
+  }
+
+  const monthCounts = months.reduce((acc, month) => {
+    acc[month] = (acc[month] || 0) + 1
+    return acc
+  }, {})
+
+  return Object.entries(monthCounts)
+    .map(([month, count]) => {
+      const monthStr = formatMonth(parseInt(month), language)
+      return `${monthStr} (${count})`
+    })
+    .join(' | ')
+}
