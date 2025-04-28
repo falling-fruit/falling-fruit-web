@@ -3,32 +3,10 @@ import { useTranslation } from 'react-i18next'
 
 import { createReviewSummary } from '../../utils/createReviewSummary'
 import ReviewStats, { getStarRating, Separator, StatsRow } from './ReviewStats'
-
-const formatMonthList = (months) => {
-  if (!months.length) {
-    return null
-  }
-
-  const monthCounts = months.reduce((acc, month) => {
-    acc[month] = (acc[month] || 0) + 1
-    return acc
-  }, {})
-
-  const monthsStr = Object.entries(monthCounts)
-    .map(([month, count]) => {
-      const date = new Date(1, parseInt(month))
-      const monthStr = date.toLocaleDateString(undefined, {
-        month: 'long',
-      })
-      return `${monthStr} (${count})`
-    })
-    .join(' | ')
-
-  return monthsStr
-}
+import { formatMonthList } from './textFormatters'
 
 const ReviewSummary = ({ reviews }) => {
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
   const summary = createReviewSummary(reviews)
   const stats = []
 
@@ -50,7 +28,7 @@ const ReviewSummary = ({ reviews }) => {
     )
   }
 
-  const flowers = formatMonthList(summary.fruiting.flowers)
+  const flowers = formatMonthList(summary.fruiting.flowers, i18n.language)
   if (flowers) {
     stats.push(
       <span key="flowers">
@@ -59,7 +37,7 @@ const ReviewSummary = ({ reviews }) => {
     )
   }
 
-  const unripe = formatMonthList(summary.fruiting.unripe)
+  const unripe = formatMonthList(summary.fruiting.unripe, i18n.language)
   if (unripe) {
     stats.push(
       <span key="unripe">
@@ -68,7 +46,7 @@ const ReviewSummary = ({ reviews }) => {
     )
   }
 
-  const ripe = formatMonthList(summary.fruiting.ripe)
+  const ripe = formatMonthList(summary.fruiting.ripe, i18n.language)
   if (ripe) {
     stats.push(
       <span key="ripe">
