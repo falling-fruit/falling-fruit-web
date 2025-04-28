@@ -249,6 +249,7 @@
     "datasets": {
       "community_map": "Cartes communautaires",
       "date_imported": "Date d'importation",
+      "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Ensembles de données importés",
       "imported_on": "Importé le {{date}}",
       "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l'univers au peigne fin, à la recherche d'autres informations que nous ajoutons à notre <a href=\"/data\">base de données</a>, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu'il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n'hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d'importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d'importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d'origine après importation ne seront pas reportés sur Falling Fruit.",

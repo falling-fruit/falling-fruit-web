@@ -249,6 +249,7 @@
     "datasets": {
       "community_map": "社区地图",
       "date_imported": "导入日期",
+      "import_id_and_name": "导入 #{{id}}: {{name}}",
       "imported_datasets": "已导入的数据集",
       "imported_on": "导入于 {{date}}",
       "intro_html": "Falling Fruit 立志成为最全面、最开放的城市食品地理数据集。当我们的用户使用我们的<a href=\"/\">地图</a>探索、编辑和添加位置时，我们将已知的宇宙梳理为预先存在的数据集并将它们直接导入<a href=\"/data\">数据库</a>，联合各地的觅食者、林务员和自由主义者的努力。如果您知道我们遗漏的数据集，请<a href=\"mailto:info@fallingfruit.org\">告诉我们</a>！您还可以通过使用<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">导入模板</a>格式化数据来帮助我们完成导入过程。请注意，由于必须手动执行导入，因此导入后对原始数据所做的所有更改都不会反映在 Falling Fruit 上。",

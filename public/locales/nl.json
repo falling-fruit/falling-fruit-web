@@ -249,6 +249,7 @@
     "datasets": {
       "community_map": "Gemeenschapsmap",
       "date_imported": "Datum geïmporteerd",
+      "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Geïmporteerde datasets",
       "imported_on": "Geïmporteerd op {{date}}",
       "intro_html": "Falling Fruit heeft als doel om 's werelds meest uitgebreide en open aardrijkskunde gegevensset van stadsvoedsel te worden. Terwijl onze gebruikers verkennen, bewerken en locaties bijdragen via onze <a href=\"/\">kaart</a>, kammen wij het universum uit op zoek naar reeds bestaande kennis en importeren deze direct in onze <a href=\"/data\">database</a>, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. Als u ziet dat er een gegevensset ontbreekt, <a href=\"mailto:info@fallingfruit.org\">laat het ons dan weten</a>! U kunt ons helpen bij het importteringsproces door de gegevens op te maken m.b.v. het <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importsjabloon</a>. Let op: importteringen moeten handmatig worden uitgevoerd; alle wijzigingen aan de originele gevens na de importtering worden niet weergegeven op Falling Fruit.",
