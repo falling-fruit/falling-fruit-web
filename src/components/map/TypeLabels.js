@@ -43,7 +43,11 @@ const TypeLabels = ({ typeIds }) => {
 
         return (
           displayLabel && (
-            <DisplayName key={index} isSelected={selectedTypes.includes(id)}>
+            <DisplayName
+              dir="auto"
+              key={index}
+              isSelected={selectedTypes.includes(id)}
+            >
               {displayLabel}
             </DisplayName>
           )

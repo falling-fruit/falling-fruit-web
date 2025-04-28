@@ -34,7 +34,9 @@ const TypeName = ({ commonName, scientificName }) => (
   <span>
     {commonName && <CommonName>{commonName}</CommonName>}
     {commonName && scientificName && <span style={{ margin: '0 0.25em' }} />}
-    {scientificName && <ScientificName>{scientificName}</ScientificName>}
+    {scientificName && (
+      <ScientificName dir="ltr">{scientificName}</ScientificName>
+    )}
   </span>
 )
 
