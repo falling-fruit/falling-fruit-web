@@ -48,6 +48,6 @@ export const ErrorMessage = styled.p`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: start;
   margin-block-start: 1em;
 `

@@ -68,7 +68,9 @@ const AboutDatasetPage = () => {
       <a href={url} target="_blank" rel="noreferrer">
         {url}
       </a>
-      <p style={{ whiteSpace: 'pre-line' }}>{comments}</p>
+      <p dir="auto" style={{ whiteSpace: 'pre-line' }}>
+        {comments}
+      </p>
       <IconBesideText>
         <Pin color={theme.secondaryText} size={20} />
         <p>

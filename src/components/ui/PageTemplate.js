@@ -99,7 +99,7 @@ const PageWrapper = styled.article`
 
     @media ${({ theme }) => theme.device.desktop} {
       display: inline-flex;
-      align-items: flex-start;
+      align-items: start;
     }
 
     @media ${({ theme }) => theme.device.mobile} {

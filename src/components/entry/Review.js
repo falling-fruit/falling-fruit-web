@@ -33,7 +33,7 @@ const ReviewDescription = styled.section`
 
   margin-block-end: 1em;
   margin-block-start: 1em;
-  blockquote {
+  p {
     font-size: 1rem;
     color: ${({ theme }) => theme.secondaryText};
     margin-block: 0 4px;
@@ -44,7 +44,7 @@ const ReviewDescription = styled.section`
 const EditableHeader = styled.header`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: start;
   margin-block-end: 0.6em;
 
   button {
@@ -142,7 +142,7 @@ const Review = ({
         )}
       </ReviewStats>
       <ReviewDescription>
-        <blockquote>{review.comment}</blockquote>
+        <p dir="auto">{review.comment}</p>
       </ReviewDescription>
       {includePreview &&
         review.photos.map((photo, index) => (
