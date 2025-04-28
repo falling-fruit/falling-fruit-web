@@ -160,6 +160,7 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
       ...values,
       common_names: common_names,
       scientific_names: scientific_names,
+      categories: ['forager', 'freegan'],
     }
     delete submitData.name_pairs
 

@@ -172,7 +172,7 @@
       "imported_from": "Imported from {{name}}",
       "season": {
         "in_season": "In season from {{start_month}} to {{stop_month}}",
-        "year_round": "Year Round"
+        "year_round": "Year-round"
       },
       "title": "Overview"
     }
@@ -187,16 +187,16 @@
     "zoom_in_to_add_location": "Zoom in to add location"
   },
   "new_type": {
-    "add_type_label": "Add Type:",
+    "add_type_label": "Add type:",
     "form": {
-      "add_name": "Add Name",
+      "add_name": "Add name",
       "language": "Language",
       "notes": "Notes",
       "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
       "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
       "remove": "Remove"
     },
-    "title": "Add New Type"
+    "title": "Add new type"
   },
   "pages": {
     "about": {
