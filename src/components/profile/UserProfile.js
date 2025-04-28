@@ -1,4 +1,4 @@
-import { ArrowBack, Book, Calendar, User } from '@styled-icons/boxicons-regular'
+import { Book, Calendar } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
