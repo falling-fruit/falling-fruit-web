@@ -93,22 +93,28 @@ const Review = ({
         <AuthorAndDateRow>
           {review.author && (
             <>
-              {review.user_id ? (
-                <Link to={`/profiles/${review.user_id}`}>{review.author}</Link>
-              ) : (
-                review.author
-              )}
+              <span dir="auto">
+                {review.user_id ? (
+                  <Link to={`/profiles/${review.user_id}`}>
+                    {review.author}
+                  </Link>
+                ) : (
+                  review.author
+                )}
+              </span>
               {' · '}
             </>
           )}
-          {review.observed_on
-            ? t('review.form.observed_on', {
-                date: formatISOString(review.observed_on, i18n.language),
-              })
-            : review.updated_at &&
-                new Date(review.updated_at) > new Date(review.created_at)
-              ? formatISOString(review.updated_at, i18n.language)
-              : formatISOString(review.created_at, i18n.language)}
+          <span>
+            {review.observed_on
+              ? t('review.form.observed_on', {
+                  date: formatISOString(review.observed_on, i18n.language),
+                })
+              : review.updated_at &&
+                  new Date(review.updated_at) > new Date(review.created_at)
+                ? formatISOString(review.updated_at, i18n.language)
+                : formatISOString(review.created_at, i18n.language)}
+          </span>
         </AuthorAndDateRow>
       )}
       <ReviewStats>
