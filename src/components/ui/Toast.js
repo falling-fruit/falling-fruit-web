@@ -19,7 +19,7 @@ const Toast = styled(ToastContainer).attrs({
       border-radius: 0.375em;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
       @media (max-width: 480px) {
-        margin-top: 0.5em;
+        margin-block-start: 0.5em;
       }
     }
   }
