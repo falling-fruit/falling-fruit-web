@@ -80,6 +80,7 @@ const Share = ({ onClose }) => {
           readOnly
           onClick={(e) => e.target.select()}
           height="30px"
+          dir="ltr"
         />
         <CopyButton onClick={handleCopy}>
           <CopyIcon />
