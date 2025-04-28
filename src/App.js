@@ -1,6 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css'
 
 import { WindowSize } from '@reach/window-size'
+import { useTranslation } from 'react-i18next'
 import { Provider, useSelector } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
@@ -27,6 +28,8 @@ const HomeRedirect = () => {
 
 const AppContent = () => {
   const isDesktop = useIsDesktop()
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
 
   return (
     <>
@@ -35,7 +38,7 @@ const AppContent = () => {
         position={isDesktop ? 'bottom-right' : 'top-center'}
         autoClose={3000}
         closeOnClick
-        rtl={false}
+        rtl={isRTL}
       />
       <ThemeProvider theme={theme}>
         <Switch>
