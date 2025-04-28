@@ -30,7 +30,7 @@ const getDisplayLabel = (typesAccess, id) => {
     }
   }
 
-  return type.commonName || <i>{type.scientificName}</i>
+  return type.commonName || <i dir="ltr">{type.scientificName}</i>
 }
 
 const TypeLabels = ({ typeIds }) => {
