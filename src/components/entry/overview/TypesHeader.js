@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import {
@@ -33,14 +34,22 @@ const ScientificName = styled.div`
   font-weight: normal;
 `
 
-const TypeTitle = ({ commonName, scientificName }) => (
-  <StyledTypeTitle>
-    {commonName && <CommonName>{commonName}</CommonName>}
-    <ScientificName dir="ltr" standalone={!commonName}>
-      {scientificName}
-    </ScientificName>
-  </StyledTypeTitle>
-)
+const TypeTitle = ({ commonName, scientificName }) => {
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
+  return (
+    <StyledTypeTitle>
+      {commonName && <CommonName>{commonName}</CommonName>}
+      <ScientificName
+        dir="ltr"
+        style={{ textAlign: isRTL ? 'right' : 'left' }}
+        standalone={!commonName}
+      >
+        {scientificName}
+      </ScientificName>
+    </StyledTypeTitle>
+  )
+}
 
 const RESOURCES = [
   {

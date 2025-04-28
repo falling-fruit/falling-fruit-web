@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 const NamesBlock = styled.span`
@@ -51,14 +52,23 @@ const TypeNameWrapper = styled.div`
   }
 `
 
-export const TypeName = ({ commonName, scientificName, synonyms }) => (
-  <TypeNameWrapper>
-    <NamesBlock>
-      {commonName && <CommonName>{commonName}</CommonName>}
-      {scientificName && (
-        <ScientificName dir="ltr">{scientificName}</ScientificName>
-      )}
-    </NamesBlock>
-    {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
-  </TypeNameWrapper>
-)
+export const TypeName = ({ commonName, scientificName, synonyms }) => {
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
+  return (
+    <TypeNameWrapper>
+      <NamesBlock>
+        {commonName && <CommonName>{commonName}</CommonName>}
+        {scientificName && (
+          <ScientificName
+            dir="ltr"
+            style={{ textAlign: isRTL ? 'right' : 'left' }}
+          >
+            {scientificName}
+          </ScientificName>
+        )}
+      </NamesBlock>
+      {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
+    </TypeNameWrapper>
+  )
+}
