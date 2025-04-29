@@ -7,14 +7,15 @@ import { formatMonthList } from './textFormatters'
 
 const ReviewSummary = ({ reviews }) => {
   const { i18n, t } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
   const summary = createReviewSummary(reviews)
   const stats = []
 
   if (summary.quality.average !== null) {
     stats.push(
       <span key="quality">
-        {t('glossary.quality')} {getStarRating(summary.quality.average)} (
-        {summary.quality.count})
+        {t('glossary.quality')} {getStarRating(summary.quality.average, isRTL)}{' '}
+        ({summary.quality.count})
       </span>,
     )
   }
@@ -22,7 +23,7 @@ const ReviewSummary = ({ reviews }) => {
   if (summary.yield.average !== null) {
     stats.push(
       <span key="yield">
-        {t('glossary.yield')} {getStarRating(summary.yield.average)} (
+        {t('glossary.yield')} {getStarRating(summary.yield.average, isRTL)} (
         {summary.yield.count})
       </span>,
     )
