@@ -126,7 +126,7 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
     <>
       <IconBesideText tabIndex={0}>
         <Map size={20} />
-        <p className="small">
+        <p className="small" dir="ltr">
           {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
         </p>
       </IconBesideText>
