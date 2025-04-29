@@ -120,7 +120,7 @@ const EntryOverview = () => {
 
           <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
             <Map color={theme.secondaryText} size={20} />
-            <p>
+            <p dir="ltr">
               {locationData.address ??
                 `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(
                   6,
