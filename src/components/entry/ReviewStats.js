@@ -27,7 +27,7 @@ const Separator = styled.span`
   }
 `
 
-export const getStarRating = (score) => {
+export const getStarRating = (score, isRTL) => {
   if (score === null) {
     return null
   }
@@ -40,7 +40,15 @@ export const getStarRating = (score) => {
     if (i < fullStars) {
       stars.push(<Star key={i} />)
     } else if (i === fullStars && remainder >= 0.25 && remainder <= 0.75) {
-      stars.push(<StarHalf key={i} />)
+      // Flip half-star horizontally for RTL
+      stars.push(
+        <StarHalf
+          key={i}
+          style={{
+            transform: isRTL ? 'scaleX(-1)' : 'none',
+          }}
+        />,
+      )
     } else {
       stars.push(<StarEmpty key={i} />)
     }
