@@ -235,10 +235,13 @@
       "write": "Escreva"
     },
     "changes": {
+      "activity_recent_changes": "Atividade: mudanças recentes",
       "change_in_city": "{{type}} in {{city}}",
       "my_activity_empty": "Você ainda não adicionou, editou ou revisou nenhum local",
-      "places": "Lugares",
-      "recent_changes": "Mudanças recentes",
+      "place": {
+        "one": "Local",
+        "other": "Lugares"
+      },
       "type": {
         "added": "adicionado",
         "edited": "editado",

@@ -235,10 +235,13 @@
       "write": "Написати"
     },
     "changes": {
+      "activity_recent_changes": "Активність: останні зміни",
       "change_in_city": "{{type}} в {{city}}",
       "my_activity_empty": "Ви ще не додали, не редагували та не переглядали жодних локацій",
-      "places": "Місця",
-      "recent_changes": "Останні зміни",
+      "place": {
+        "one": "Місце",
+        "other": "Місця"
+      },
       "type": {
         "added": "додано",
         "edited": "відредаговано",

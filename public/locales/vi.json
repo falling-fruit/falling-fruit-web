@@ -235,10 +235,13 @@
       "write": "Viết"
     },
     "changes": {
+      "activity_recent_changes": "Hoạt động: thay đổi gần đây",
       "change_in_city": "{{type}} tại {{city}}",
       "my_activity_empty": "Bạn chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào",
-      "places": "Địa điểm",
-      "recent_changes": "Thay đổi gần đây",
+      "place": {
+        "one": "Địa điểm",
+        "other": "Địa điểm"
+      },
       "type": {
         "added": "đã thêm",
         "edited": "đã chỉnh sửa",

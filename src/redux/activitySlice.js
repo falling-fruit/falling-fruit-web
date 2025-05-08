@@ -43,18 +43,23 @@ const activitySlice = createSlice({
       data: [],
       isLoading: true,
       fetchedUntilDate: null,
+      lastBrowsedSection: {
+        id: null,
+      },
     },
     changesByUser: {},
-    lastBrowsedSection: {
+    userActivityLastBrowsedSection: {
       id: null,
       userId: null,
-      searchTerm: null,
       displayLimit: null,
     },
   },
   reducers: {
-    setLastBrowsedSection: (state, action) => {
-      state.lastBrowsedSection = action.payload
+    setRecentChangesLastBrowsedSection: (state, action) => {
+      state.recentChanges.lastBrowsedSection = action.payload
+    },
+    setUserActivityLastBrowsedSection: (state, action) => {
+      state.userActivityLastBrowsedSection = action.payload
     },
   },
   extraReducers: {
@@ -102,14 +107,21 @@ const activitySlice = createSlice({
   },
 })
 
-export const resetLastBrowsedSection = () =>
-  setLastBrowsedSection({
+export const resetRecentChangesLastBrowsedSection = () =>
+  setRecentChangesLastBrowsedSection({
+    id: null,
+  })
+
+export const resetUserActivityLastBrowsedSection = () =>
+  setUserActivityLastBrowsedSection({
     id: null,
     userId: null,
-    searchTerm: null,
     displayLimit: null,
   })
 
-export const { setLastBrowsedSection } = activitySlice.actions
+export const {
+  setRecentChangesLastBrowsedSection,
+  setUserActivityLastBrowsedSection,
+} = activitySlice.actions
 
 export default activitySlice.reducer

@@ -235,10 +235,13 @@
       "write": "Skriv"
     },
     "changes": {
+      "activity_recent_changes": "Aktivitet: senaste ändringar",
       "change_in_city": "{{type}} i {{city}}",
       "my_activity_empty": "Du har inte lagt till, redigerat eller granskat några platser än",
-      "places": "Platser",
-      "recent_changes": "Senaste ändringar",
+      "place": {
+        "one": "Plats",
+        "other": "Platser"
+      },
       "type": {
         "added": "tillagd",
         "edited": "redigerad",
