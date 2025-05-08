@@ -235,10 +235,13 @@
       "write": "Scrivi"
     },
     "changes": {
+      "activity_recent_changes": "Attività: modifiche recenti",
       "change_in_city": "{{type}} in {{city}}",
       "my_activity_empty": "Non hai ancora aggiunto, modificato o recensito alcuna località",
-      "places": "Luoghi",
-      "recent_changes": "Modifiche recenti",
+      "place": {
+        "one": "Luogo",
+        "other": "Luoghi"
+      },
       "type": {
         "added": "aggiunto",
         "edited": "modificato",

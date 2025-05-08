@@ -234,13 +234,15 @@ export class TypesAccess {
   }
 }
 
+export const displayOrderProperties = [
+  (o: LocalizedType) => !o.scientificName,
+  'scientificName',
+  (o: LocalizedType) => -o.taxonomicRank,
+  'commonName',
+]
+
 const toDisplayOrder = (localizedTypes: LocalizedType[]) =>
-  sortBy(localizedTypes, [
-    (o) => !o.scientificName,
-    'scientificName',
-    (o) => -o.taxonomicRank,
-    'commonName',
-  ])
+  sortBy(localizedTypes, displayOrderProperties)
 
 export const typesAccessInLanguage = (
   types: SchemaType[],

@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
   fetchMoreLocationChanges,
-  resetLastBrowsedSection,
+  resetRecentChangesLastBrowsedSection,
 } from '../../redux/activitySlice'
-import { transformActivityData } from '../../utils/transformActivityData'
 import { InfoPage } from '../ui/PageTemplate'
-import ChangesPeriod from './ChangesPeriod'
+import { createActivityDiary } from './ActivityDiary'
+import DiaryEntry from './DiaryEntry'
 import SkeletonLoader from './SkeletonLoader'
 
 const RecentChangesPage = () => {
@@ -22,17 +22,18 @@ const RecentChangesPage = () => {
   )
 
   const { typesAccess } = useSelector((state) => state.type)
-  const { lastBrowsedSection } = useSelector((state) => state.activity)
+  const { recentChanges } = useSelector((state) => state.activity)
+  const { lastBrowsedSection } = recentChanges
 
   const changesReady = !typesAccess.isEmpty
 
   useEffect(() => {
     if (lastBrowsedSection.id) {
       const periodElement = document.getElementById(`${lastBrowsedSection.id}`)
-      if (periodElement && !lastBrowsedSection.userId) {
+      if (periodElement) {
         periodElement.scrollIntoView()
       }
-      dispatch(resetLastBrowsedSection())
+      dispatch(resetRecentChangesLastBrowsedSection())
     }
   }, [lastBrowsedSection, dispatch])
 
@@ -69,7 +70,7 @@ const RecentChangesPage = () => {
   }, [dispatch, changesReady])
 
   const { i18n } = useTranslation()
-  const groupedData = transformActivityData(
+  const activityDiary = createActivityDiary(
     changes,
     typesAccess,
     t,
@@ -78,14 +79,10 @@ const RecentChangesPage = () => {
 
   return (
     <InfoPage>
-      <h1>{t('pages.changes.recent_changes')}</h1>
-      {changes.length > 0 &&
-        groupedData.map((period) => (
-          <ChangesPeriod
-            key={period.formattedDate}
-            period={period}
-            typesAccess={typesAccess}
-          />
+      <h1>{t('pages.changes.activity_recent_changes')}</h1>
+      {activityDiary.entries.length > 0 &&
+        activityDiary.entries.map((entry) => (
+          <DiaryEntry key={entry.formattedDate} entry={entry} />
         ))}
       <div ref={loadMoreRef}></div>
       {isLoading && <SkeletonLoader count={changes.length === 0 ? 5 : 1} />}

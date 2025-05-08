@@ -2,7 +2,7 @@ import { Book, Calendar } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { getUserById } from '../../utils/api'
@@ -27,7 +27,7 @@ const UserProfile = () => {
   const { t, i18n } = useTranslation()
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-  const { lastBrowsedSection } = useSelector((state) => state.activity)
+  const { locationId } = useSelector((state) => state.location)
 
   useEffect(() => {
     async function fetchUserData() {
@@ -54,10 +54,10 @@ const UserProfile = () => {
         <BackButton
           onClick={(event) => {
             event.stopPropagation()
-            if (lastBrowsedSection.id && !lastBrowsedSection.userId) {
-              history.push('/changes')
+            if (locationId) {
+              history.push(`/locations/${locationId}`)
             } else {
-              history.goBack()
+              history.push('/changes')
             }
           }}
         >
@@ -84,7 +84,7 @@ const UserProfile = () => {
       <IconBesideText>
         <Book color={theme.secondaryText} size={20} />
         <p>
-          <a href={`/activity/${id}`}>{t('glossary.activity')}</a>
+          <Link to={`/activity/${id}`}>{t('glossary.activity')}</Link>
         </p>
       </IconBesideText>
     </Page>

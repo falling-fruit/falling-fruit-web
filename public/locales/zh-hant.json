@@ -235,10 +235,13 @@
       "write": "寫"
     },
     "changes": {
+      "activity_recent_changes": "活動：最近更改",
       "change_in_city": "在{{city}}{{type}}",
       "my_activity_empty": "您尚未添加、編輯或審查任何地點",
-      "places": "地點",
-      "recent_changes": "最近更改",
+      "place": {
+        "one": "地點",
+        "other": "地點"
+      },
       "type": {
         "added": "添加",
         "edited": "編輯",

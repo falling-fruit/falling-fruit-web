@@ -235,10 +235,13 @@
       "write": "Write"
     },
     "changes": {
+      "activity_recent_changes": "Activity: recent changes",
       "change_in_city": "{{type}} in {{city}}",
       "my_activity_empty": "You have not yet added, edited, or reviewed any locations",
-      "places": "Places",
-      "recent_changes": "Recent changes",
+      "place": {
+        "one": "Place",
+        "other": "Places"
+      },
       "type": {
         "added": "added",
         "edited": "edited",
@@ -253,9 +256,9 @@
       "license_html": "If you are interested in using the data in your project, especially a commercial project, we suggest you contact us (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Unless otherwise specified, data are licensed as <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons - Attribution, Non-commercial, Share-alike). This means that you are free to use and distribute the data so long as you preserve the original author/source attributions and do not use it (without permission) for commercial applications. The source code for Falling Fruit is also open, and available on <a href=\"https://github.com/falling-fruit/\">GitHub</a>."
     },
     "datasets": {
-      "import_id_and_name": "Import #{{id}}: {{name}}",
       "community_map": "Community map",
       "date_imported": "Date imported",
+      "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Imported datasets",
       "imported_on": "Imported on {{date}}",
       "intro_html": "Falling Fruit aspires to be the most comprehensive and open geographic dataset of urban edibles. While our users explore, edit, and add locations using our <a href=\"/\">map</a>, we comb the known universe for pre-existing datasets and import them directly into the <a href=\"/data\">database</a>, uniting the efforts of foragers, foresters, and freegans everywhere. If you know of a dataset we've missed, please <a href=\"mailto:info@fallingfruit.org\">let us know</a>! You can also help us with the import process by formatting the data using the <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">import template</a>. Note that since imports must be performed manually, all changes to the original data made after the import are not reflected on Falling Fruit.",

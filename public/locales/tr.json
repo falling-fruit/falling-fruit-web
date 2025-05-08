@@ -235,10 +235,13 @@
       "write": "Yaz"
     },
     "changes": {
+      "activity_recent_changes": "Aktivite: son değişiklikler",
       "change_in_city": "{{city}} şehrinde {{type}}",
       "my_activity_empty": "Henüz hiç mekan eklemediniz, düzenlemediniz veya incelemediniz",
-      "places": "Mekanlar",
-      "recent_changes": "Son değişiklikler",
+      "place": {
+        "one": "Mekan",
+        "other": "Mekanlar"
+      },
       "type": {
         "added": "eklendi",
         "edited": "düzenlendi",

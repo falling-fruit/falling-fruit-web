@@ -6,30 +6,31 @@ import styled from 'styled-components/macro'
 
 import {
   getUserActivity,
-  resetLastBrowsedSection,
+  resetUserActivityLastBrowsedSection,
 } from '../../redux/activitySlice'
-import {
-  calculateCityCountsFromChanges,
-  calculateTypeCountsFromChanges,
-} from '../../utils/activityTypeCounts'
-import { transformActivityData } from '../../utils/transformActivityData'
 import { useAppHistory } from '../../utils/useAppHistory'
 import BackButton from '../ui/BackButton'
 import { Page } from '../ui/PageTemplate'
 import ReturnIcon from '../ui/ReturnIcon'
-import ActivitySearchInput from './ActivitySearchInput'
-import ChangesPeriod from './ChangesPeriod'
+import { createActivityDiary } from './ActivityDiary'
+import DiaryEntry from './DiaryEntry'
 import SkeletonLoader from './SkeletonLoader'
+import TypesAndPlaces from './TypesAndPlaces'
+
+const AtLeastAsLongAsSelectMenu = styled.div`
+  min-height: 300px;
+`
 
 const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
   const { t, i18n } = useTranslation()
-  const { lastBrowsedSection } = useSelector((state) => state.activity)
-  const [searchTerm, setSearchTerm] = useState(
-    lastBrowsedSection.searchTerm || '',
+  const { userActivityLastBrowsedSection } = useSelector(
+    (state) => state.activity,
   )
+  const [selectedTypes, setSelectedTypes] = useState([])
+  const [selectedPlaces, setSelectedPlaces] = useState([])
   const loadMoreRef = useRef()
   const [displayLimit, setDisplayLimit] = useState(
-    lastBrowsedSection.displayLimit || 100,
+    userActivityLastBrowsedSection.displayLimit || 100,
   )
 
   const needsLoadMore = changes?.length > displayLimit
@@ -57,35 +58,37 @@ const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
     }
   }, [needsLoadMore, displayLimit])
 
-  const typeCountsById = changes
-    ? calculateTypeCountsFromChanges(changes, typesAccess)
-    : []
-
-  const cityCounts = changes ? calculateCityCountsFromChanges(changes) : []
-  const transformedData = useMemo(
-    () => transformActivityData(changes || [], typesAccess, t, i18n.language),
+  const activityDiary = useMemo(
+    () => createActivityDiary(changes || [], typesAccess, t, i18n.language),
     [changes, typesAccess, t, i18n.language],
+  )
+
+  // Get filtered entries from the activity diary
+  const filteredEntries = useMemo(
+    () => activityDiary.getFilteredEntries(selectedTypes, selectedPlaces),
+    [activityDiary, selectedTypes, selectedPlaces],
   )
 
   return (
     <>
-      <ActivitySearchInput
-        value={searchTerm}
-        onChange={setSearchTerm}
-        onClear={() => setSearchTerm('')}
-        typesAccess={typesAccess}
-        typeCountsById={typeCountsById}
-        cityCounts={cityCounts}
+      <TypesAndPlaces
+        typeCounts={activityDiary.calculateTypeCounts(selectedPlaces)}
+        cityCounts={activityDiary.calculateCityCounts(selectedTypes)}
+        selectedTypes={selectedTypes}
+        selectedPlaces={selectedPlaces}
+        onTypeChange={setSelectedTypes}
+        onPlaceChange={setSelectedPlaces}
       />
-      {transformedData.slice(0, displayLimit).map((period) => (
-        <ChangesPeriod
-          key={period.formattedDate}
-          period={period}
-          userId={userId}
-          searchTerm={searchTerm}
-          displayLimit={displayLimit}
-        />
-      ))}
+      <AtLeastAsLongAsSelectMenu>
+        {filteredEntries.slice(0, displayLimit).map((entry) => (
+          <DiaryEntry
+            key={entry.formattedDate}
+            entry={entry}
+            userId={userId}
+            displayLimit={displayLimit}
+          />
+        ))}
+      </AtLeastAsLongAsSelectMenu>
 
       {needsLoadMore && <div ref={loadMoreRef}></div>}
     </>
@@ -108,7 +111,7 @@ const UserActivityPage = () => {
   userId = parseInt(userId)
   const history = useAppHistory()
 
-  const { changesByUser, lastBrowsedSection } = useSelector(
+  const { changesByUser, userActivityLastBrowsedSection } = useSelector(
     (state) => state.activity,
   )
   const changes = changesByUser[userId]
@@ -122,14 +125,16 @@ const UserActivityPage = () => {
   const isCurrentUser = userId === user?.id
 
   useEffect(() => {
-    if (lastBrowsedSection.id) {
-      const periodElement = document.getElementById(`${lastBrowsedSection.id}`)
-      if (periodElement && lastBrowsedSection.userId === userId) {
+    if (userActivityLastBrowsedSection.id) {
+      const periodElement = document.getElementById(
+        `${userActivityLastBrowsedSection.id}`,
+      )
+      if (periodElement && userActivityLastBrowsedSection.userId === userId) {
         periodElement.scrollIntoView()
       }
-      dispatch(resetLastBrowsedSection())
+      dispatch(resetUserActivityLastBrowsedSection())
     }
-  }, [lastBrowsedSection, dispatch, userId])
+  }, [userActivityLastBrowsedSection, dispatch, userId])
 
   useEffect(() => {
     if (changesReady) {
