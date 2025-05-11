@@ -528,7 +528,7 @@ export class ActivityDiary {
             return false
           }
 
-          // Process each interaction type (added/edited/visited)
+          //TODO unroll this
           ['added', 'edited', 'visited'].forEach((interactionType) => {
             const locations =
               activity[
