@@ -71,16 +71,6 @@ const Synonyms = styled.span`
   }
 `
 
-const TypeNameWrapper = styled.div`
-  font-size: 0.875rem;
-
-  .select__option & {
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
-`
-
 export const TypeName = ({ commonName, scientificName, synonyms, count }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
@@ -88,14 +78,14 @@ export const TypeName = ({ commonName, scientificName, synonyms, count }) => {
     <ItemWrapper>
       <DetailsBlock>
         {commonName && <PrimaryName>{commonName}</PrimaryName>}
-          {scientificName && (
-            <ScientificName
-              dir="ltr"
-              style={{ textAlign: isRTL ? 'right' : 'left' }}
-            >
-              {scientificName}
-            </ScientificName>
-          )}
+        {scientificName && (
+          <ScientificName
+            dir="ltr"
+            style={{ textAlign: isRTL ? 'right' : 'left' }}
+          >
+            {scientificName}
+          </ScientificName>
+        )}
       </DetailsBlock>
       {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
       {count !== undefined && <CountBadge>{count}</CountBadge>}
