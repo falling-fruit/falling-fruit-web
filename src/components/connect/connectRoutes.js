@@ -11,6 +11,7 @@ import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectShare from './ConnectShare'
 import ConnectTypes from './ConnectTypes'
+import DisconnectActivity from './DisconnectActivity'
 import DisconnectInitLocation from './DisconnectInitLocation'
 import DisconnectLocation from './DisconnectLocation'
 import DisconnectReview from './DisconnectReview'
@@ -91,6 +92,7 @@ const connectRoutes = [
    * - on mobile, we need to disable the drawer when arriving from list view
    * - on mobile, the drawer needs the user scrolling up and down
    * - on desktop, clicking location from a settings page should make 'back' go to settings instead if map
+   * - location-specific context should reset when going from one location to another
    *
    * actions:
    * - fetch data from backend
@@ -101,6 +103,7 @@ const connectRoutes = [
    * - on mobile, keep track of whether we arrived via list-locations URL
    * - on mobile, disable default overscroll (e.g. a refresh on scroll down in Chrome)
    * - on desktop, reset the fromSettings flag when leaving location
+   * - when location id changes, drop fromSettings and userActivity state
    */
   <Route
     key="connect-location"
@@ -231,6 +234,17 @@ const connectRoutes = [
    */
   <Route key="connect-share" path="*">
     <ConnectShare />
+  </Route>,
+
+  /*
+   * DisconnectActivity
+   * why: limit the influence of having browsed activity on the back button
+   * we want to go activity -> location -> [back] to activity page, but not with activity -> location -> another location -> [back] or activity -> location -> map -> location -> [back]
+   *
+   * action: clear when dismounting from activity or locations
+   */
+  <Route key="disconnect-activity" path={['/activity', '/locations']}>
+    <DisconnectActivity />
   </Route>,
 ]
 
