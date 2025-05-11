@@ -5,6 +5,10 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import {
+  resetRecentChangesLastBrowsedSection,
+  resetUserActivityLastBrowsedSection,
+} from '../../redux/activitySlice'
+import {
   duplicateIntoNewLocation,
   fetchLocationData,
   initNewLocation,
@@ -158,6 +162,8 @@ const ConnectLocation = ({
   useEffect(
     () => () => {
       dispatch(setFromSettings(false))
+      dispatch(resetRecentChangesLastBrowsedSection())
+      dispatch(resetUserActivityLastBrowsedSection())
     },
     [dispatch, locationId],
   )
