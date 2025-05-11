@@ -8,14 +8,15 @@ const DisconnectActivity = () => {
   const { userActivityLastBrowsedSection } = useSelector(
     (state) => state.activity,
   )
+  const hasSectionId = !!userActivityLastBrowsedSection.id
 
   useEffect(
     () => () => {
-      if (userActivityLastBrowsedSection.id) {
+      if (hasSectionId) {
         dispatch(resetUserActivityLastBrowsedSection())
       }
     },
-    [dispatch],
+    [dispatch, hasSectionId],
   )
 
   return null
