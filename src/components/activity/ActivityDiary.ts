@@ -528,35 +528,34 @@ export class ActivityDiary {
             return false
           }
 
-          //TODO unroll this
-          ['added', 'edited', 'visited'].forEach((interactionType) => {
-            const locations =
-              activity[
-                interactionType as keyof Pick<
-                  ActivityGroup,
-                  'added' | 'edited' | 'visited'
-                >
-              ]
-
-            // Update isSelected for each location
-            locations.forEach((loc) => {
-              loc.isSelected =
-                selectedTypes.length === 0 ||
-                loc.types.some((type) => selectedTypes.includes(type.id))
-            })
+          activity.added.forEach((loc) => {
+            loc.isSelected =
+              selectedTypes.length === 0 ||
+              loc.types.some((type) => selectedTypes.includes(type.id))
+          })
+          activity.edited.forEach((loc) => {
+            loc.isSelected =
+              selectedTypes.length === 0 ||
+              loc.types.some((type) => selectedTypes.includes(type.id))
+          })
+          activity.visited.forEach((loc) => {
+            loc.isSelected =
+              selectedTypes.length === 0 ||
+              loc.types.some((type) => selectedTypes.includes(type.id))
           })
 
           // If type filter is applied, check if any location has matching types
           if (selectedTypes.length > 0) {
-            return ['added', 'edited', 'visited'].some((interactionType) =>
-              activity[
-                interactionType as keyof Pick<
-                  ActivityGroup,
-                  'added' | 'edited' | 'visited'
-                >
-              ].some((loc) =>
+            return (
+              activity.added.some((loc) =>
                 loc.types.some((type) => selectedTypes.includes(type.id)),
-              ),
+              ) ||
+              activity.edited.some((loc) =>
+                loc.types.some((type) => selectedTypes.includes(type.id)),
+              ) ||
+              activity.visited.some((loc) =>
+                loc.types.some((type) => selectedTypes.includes(type.id)),
+              )
             )
           }
 
