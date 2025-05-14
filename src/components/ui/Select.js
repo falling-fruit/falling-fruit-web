@@ -114,8 +114,8 @@ const InfiniteMenuList = ({ children }) => {
 
   return (
     <div style={{ overflowY: 'auto' }}>
-      {children.slice(0, visibleCount)}
-      {visibleCount < children.length && (
+      {Array.isArray(children) ? children.slice(0, visibleCount) : children}
+      {Array.isArray(children) && visibleCount < children.length && (
         <div ref={loadMoreRef} style={{ height: 1 }} />
       )}
     </div>
