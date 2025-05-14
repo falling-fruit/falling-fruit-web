@@ -79,6 +79,10 @@ const SelectParent = styled.div`
     display: flex;
     align-items: center;
   }
+  .select__option--is-selected {
+    background-color: ${({ theme }) =>
+      transparentize(0.5, theme.transparentOrange)};
+  }
 `
 const StyledSelect = SelectParent.withComponent(Select)
 const StyledCreatableSelect = SelectParent.withComponent(Creatable)

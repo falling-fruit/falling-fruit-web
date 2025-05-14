@@ -68,6 +68,7 @@ const TypesSelect = () => {
         }
         isVirtualized
         required
+        hideSelectedOptions={false}
         onCreateOption={handleCreateOption}
         formatCreateLabel={(inputValue) => inputValue}
         filterOption={matchFromTokenStart}
