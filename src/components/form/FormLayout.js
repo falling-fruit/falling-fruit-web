@@ -17,15 +17,12 @@ export const ProgressButtons = styled.div`
 export const StyledForm = styled.div`
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   padding: 0 10px;
   overflow: auto;
 
-  @media ${({ theme }) => theme.device.desktop} {
-    height: 100%;
-  }
-
   @media ${({ theme }) => theme.device.mobile} {
-    padding-block: 8px 20px;
+    padding-block-start: 8px;
     padding-inline: 27px;
     margin-block-start: 80px;
 
