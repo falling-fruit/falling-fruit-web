@@ -1,15 +1,10 @@
 import { Form, Formik } from 'formik'
-import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { INITIAL_REVIEW_VALUES } from '../../constants/form'
-import {
-  addNewReview,
-  deleteLocationReview,
-  editExistingReview,
-} from '../../redux/locationSlice'
+import { addNewReview, editExistingReview } from '../../redux/locationSlice'
 import { formToReview, validateReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -27,18 +22,6 @@ import {
 } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
-
-const DeleteButton = styled(Button)`
-  background-color: ${({ theme }) => theme.invalid};
-  border-color: ${({ theme }) => theme.invalid};
-
-  @media ${({ theme }) => theme.device.desktop} {
-    :hover:enabled {
-      background: ${({ theme }) => darken(0.1, theme.invalid)};
-      border-color: ${({ theme }) => darken(0.1, theme.invalid)};
-    }
-  }
-`
 
 export const ReviewStep = ({ standalone, hasHeading = true }) => {
   const { t } = useTranslation()
@@ -174,18 +157,9 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
     }
   }
 
-  const handleDelete = (formikProps) => {
-    if (!confirm('Are you sure you want to delete this review?')) {
-      return
-    } else {
-      dispatch(deleteLocationReview(editingId)).then((action) => {
-        if (action.error) {
-          formikProps.setSubmitting(false)
-        } else {
-          history.push(`/locations/${locationId}`)
-        }
-      })
-    }
+  const handleCancel = (e) => {
+    e.stopPropagation()
+    history.push(`/locations/${locationId}`)
   }
 
   const isLoggedIn = useSelector((state) => !!state.auth.user)
@@ -211,24 +185,17 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
                 hasHeading={isDesktop && editingId == null}
               />
               <ProgressButtons>
-                <div style={{ textAlign: editingId ? 'center' : 'start' }}>
-                  <Button
-                    disabled={isSubmitting || !isValid || !dirty}
-                    type="submit"
-                  >
-                    {isSubmitting
-                      ? t('form.button.submitting')
-                      : t('form.button.submit')}
-                  </Button>
-                  {editingId && (
-                    <DeleteButton
-                      type="button"
-                      onClick={() => handleDelete(formikProps)}
-                    >
-                      {t('form.button.delete')}
-                    </DeleteButton>
-                  )}
-                </div>
+                <Button secondary type="button" onClick={handleCancel}>
+                  {t('form.button.cancel')}
+                </Button>
+                <Button
+                  disabled={isSubmitting || !isValid || !dirty}
+                  type="submit"
+                >
+                  {isSubmitting
+                    ? t('form.button.submitting')
+                    : t('form.button.submit')}
+                </Button>
               </ProgressButtons>
               {!isLoggedIn && <Recaptcha />}
             </Form>

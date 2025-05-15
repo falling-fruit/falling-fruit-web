@@ -28,6 +28,10 @@ const reviewSlice = createSlice({
     saveReviewFormValues: (state, action) => {
       state.form = action.payload
     },
+    setReviewData: (state, action) => {
+      state.review = action.payload
+      state.isLoading = false
+    },
   },
   extraReducers: {
     [fetchReviewData.pending]: (state) => {
@@ -50,6 +54,7 @@ const reviewSlice = createSlice({
   },
 })
 
-export const { clearReview, saveReviewFormValues } = reviewSlice.actions
+export const { clearReview, saveReviewFormValues, setReviewData } =
+  reviewSlice.actions
 
 export default reviewSlice.reducer

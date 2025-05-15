@@ -13,7 +13,13 @@ const ConnectReview = ({ reviewId }) => {
   const isDesktop = useIsDesktop()
   const { location } = useSelector((state) => state.location)
 
+  const { review } = useSelector((state) => state.review)
+
   useEffect(() => {
+    if (review && review.id === reviewId && initialView) {
+      return
+    }
+
     dispatch(fetchReviewData(reviewId)).then((action) => {
       if (action.payload && !initialView && isDesktop) {
         const locationId = action.payload.location_id

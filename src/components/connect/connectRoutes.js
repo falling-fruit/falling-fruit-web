@@ -138,7 +138,9 @@ const connectRoutes = [
    * - if needed, set initial view to reviewed location as centre
    */
   <Route key="connect-review" path="/reviews/:reviewId/edit">
-    {({ match }) => match && <ConnectReview reviewId={match.params.reviewId} />}
+    {({ match }) =>
+      match && <ConnectReview reviewId={Number(match.params.reviewId)} />
+    }
   </Route>,
   /*
    * ConnectTypes

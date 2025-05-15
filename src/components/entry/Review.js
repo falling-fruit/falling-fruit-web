@@ -1,18 +1,23 @@
-import { Pencil as PencilIcon } from '@styled-icons/boxicons-solid'
+import { Pencil, Trash } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { deleteLocationReview } from '../../redux/locationSlice'
 import ImagePreview from '../ui/ImagePreview'
 import ResetButton from '../ui/ResetButton'
 import ReviewStats, { getStarRating, Separator, StatsRow } from './ReviewStats'
 import { formatISOString } from './textFormatters'
 
 const ReviewContainer = styled.div`
-  padding-block-end: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding-block-end: 0.5em;
 
   &:not(:last-child) {
-    margin-block-end: 15px;
+    margin-block-end: 0.5em;
   }
 
   ${({ $editable, theme }) =>
@@ -31,8 +36,6 @@ const ReviewDescription = styled.section`
   word-break: normal;
   overflow-wrap: anywhere;
 
-  margin-block-end: 1em;
-  margin-block-start: 1em;
   p {
     font-size: 1rem;
     color: ${({ theme }) => theme.secondaryText};
@@ -45,14 +48,19 @@ const EditableHeader = styled.header`
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin-block-end: 0.6em;
+  width: 100%;
+`
+
+const ButtonsRow = styled.div`
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  margin-block-start: 0.5em;
 
   button {
     display: flex;
     align-items: center;
-    margin-block-start: 0.2em;
     color: ${({ theme }) => theme.blue};
-    text-decoration: underline;
 
     svg {
       margin-inline-end: 0.2em;
@@ -65,9 +73,7 @@ export const StyledImagePreview = styled(ImagePreview)`
   margin-inline-end: 7px;
 `
 
-const AuthorAndDateRow = styled.div`
-  margin-block-end: 0.5em;
-`
+const AuthorAndDateRow = styled.div``
 
 const Review = ({
   review,
@@ -77,6 +83,7 @@ const Review = ({
   editable = false,
 }) => {
   const { t, i18n } = useTranslation()
+  const dispatch = useDispatch()
   return (
     <ReviewContainer $editable={editable}>
       {editable && (
@@ -84,9 +91,20 @@ const Review = ({
           {t('review.you_reviewed', {
             date: formatISOString(review.created_at, i18n.language),
           })}{' '}
-          <ResetButton onClick={onEditClick}>
-            <PencilIcon height={14} /> {t('review.update_delete')}
-          </ResetButton>
+          <ButtonsRow>
+            <ResetButton
+              onClick={() => {
+                if (confirm('Are you sure you want to delete this review?')) {
+                  dispatch(deleteLocationReview(review.id))
+                }
+              }}
+            >
+              <Trash height={14} /> {t('form.button.delete')}
+            </ResetButton>
+            <ResetButton onClick={onEditClick}>
+              <Pencil height={14} /> {t('form.button.edit')}
+            </ResetButton>
+          </ButtonsRow>
         </EditableHeader>
       )}
       {!editable && (
@@ -117,36 +135,41 @@ const Review = ({
           </span>
         </AuthorAndDateRow>
       )}
-      <ReviewStats>
-        <StatsRow>
-          {review.quality_rating !== null && (
-            <span>
-              <Label>{t('glossary.quality')}</Label>{' '}
-              {getStarRating(review.quality_rating)}
-            </span>
+      {(review.quality_rating !== null ||
+        review.yield_rating !== null ||
+        review.fruiting !== null) && (
+        <ReviewStats>
+          {(review.quality_rating !== null || review.yield_rating !== null) && (
+            <StatsRow>
+              {review.quality_rating !== null && (
+                <span>
+                  <Label>{t('glossary.quality')}</Label>{' '}
+                  {getStarRating(review.quality_rating)}
+                </span>
+              )}
+              {review.quality_rating !== null &&
+                review.yield_rating !== null && <Separator />}
+              {review.yield_rating !== null && (
+                <span>
+                  <Label>{t('glossary.yield')}</Label>{' '}
+                  {getStarRating(review.yield_rating)}
+                </span>
+              )}
+            </StatsRow>
           )}
-          {review.quality_rating !== null && review.yield_rating !== null && (
-            <Separator />
+          {review.fruiting !== null && (
+            <StatsRow>
+              <Label>
+                {t('locations.form.fruiting_status')}
+                {': '}
+                {review.fruiting === 0 && t('locations.infowindow.fruiting.0')}
+                {review.fruiting === 1 && t('locations.infowindow.fruiting.1')}
+                {review.fruiting === 2 && t('locations.infowindow.fruiting.2')}
+              </Label>
+            </StatsRow>
           )}
-          {review.yield_rating !== null && (
-            <span>
-              <Label>{t('glossary.yield')}</Label>{' '}
-              {getStarRating(review.yield_rating)}
-            </span>
-          )}
-        </StatsRow>
-        {review.fruiting !== null && (
-          <StatsRow>
-            <Label>
-              {t('locations.form.fruiting_status')}
-              {': '}
-              {review.fruiting === 0 && t('locations.infowindow.fruiting.0')}
-              {review.fruiting === 1 && t('locations.infowindow.fruiting.1')}
-              {review.fruiting === 2 && t('locations.infowindow.fruiting.2')}
-            </Label>
-          </StatsRow>
-        )}
-      </ReviewStats>
+        </ReviewStats>
+      )}
       <ReviewDescription>
         <p dir="auto">{review.comment}</p>
       </ReviewDescription>
