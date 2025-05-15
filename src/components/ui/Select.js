@@ -4,6 +4,7 @@ import Select, { createFilter } from 'react-select'
 import Creatable from 'react-select/creatable'
 import styled from 'styled-components/macro'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { validatedColor } from './GlobalStyle'
 
 const SelectParent = styled.div`
@@ -93,6 +94,7 @@ const INCREMENT = 100
 const InfiniteMenuList = ({ children }) => {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
   const loadMoreRef = useRef()
+  const isDesktop = useIsDesktop()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -117,7 +119,12 @@ const InfiniteMenuList = ({ children }) => {
   }, [children.length, visibleCount])
 
   return (
-    <div style={{ overflowY: 'auto' }}>
+    <div
+      style={{
+        overflowY: 'auto',
+        maxHeight: isDesktop ? 'calc(100vh - 305px)' : '300px',
+      }}
+    >
       {Array.isArray(children) ? children.slice(0, visibleCount) : children}
       {Array.isArray(children) && visibleCount < children.length && (
         <div ref={loadMoreRef} style={{ height: 1 }} />
