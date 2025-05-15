@@ -84,6 +84,9 @@ export const validateLocation = ({ review, ...location }) => {
   if (location.types.length === 0) {
     errors.types = true
   }
+  if (!location.position) {
+    errors.position = true
+  }
 
   if (!isEmptyReview(review)) {
     Object.assign(errors, validateReview(review))

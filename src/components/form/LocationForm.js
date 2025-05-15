@@ -300,7 +300,6 @@ export const LocationForm = ({ editingId, innerRef }) => {
       <Formik
         validate={validateLocation}
         initialValues={mergedInitialValues}
-        validateOnMount
         onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
         innerRef={innerRef}
       >
