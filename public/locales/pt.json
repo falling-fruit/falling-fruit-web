@@ -168,6 +168,7 @@
     },
     "overview": {
       "added_by": "Adicionado por {{name}}",
+      "added_by_you": "Adicionado por você",
       "date_edited": "Atualizado {{date}}",
       "imported_from": "Importado de {{name}}",
       "season": {
