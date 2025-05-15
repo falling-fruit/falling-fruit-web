@@ -117,7 +117,7 @@ const MobileLayout = () => {
                 component={NavigationBar}
               />
             </Switch>
-            <TabPanels style={{ paddingBlockEnd: '50px' }}>
+            <TabPanels>
               <Switch>
                 {activityRoutes}
                 {aboutRoutes}
@@ -149,17 +149,20 @@ const MobileLayout = () => {
                 {({ match }) =>
                   (!match.params.postfix ||
                     match.params.postfix === 'position') && (
-                    <TabList
-                      style={{
-                        zIndex: zIndex.mobileTablist,
-                        position: 'fixed',
-                        width: '100%',
-                        insetBlockEnd: 0,
-                        height: '50px',
-                      }}
-                    >
-                      {tabContent}
-                    </TabList>
+                    <>
+                      <div style={{ paddingBlockEnd: '50px' }} />
+                      <TabList
+                        style={{
+                          zIndex: zIndex.mobileTablist,
+                          position: 'fixed',
+                          width: '100%',
+                          insetBlockEnd: 0,
+                          height: '50px',
+                        }}
+                      >
+                        {tabContent}
+                      </TabList>
+                    </>
                   )
                 }
               </Route>
