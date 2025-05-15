@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "Додано користувачем {{name}}",
+      "added_by_you": "Додано вами",
       "date_edited": "Оновлено {{date}}",
       "imported_from": "Імпортовано з {{name}}",
       "season": {

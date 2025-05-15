@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "Added by {{name}}",
+      "added_by_you": "Added by you",
       "date_edited": "Updated {{date}}",
       "imported_from": "Imported from {{name}}",
       "season": {
