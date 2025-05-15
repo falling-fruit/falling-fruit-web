@@ -22,8 +22,8 @@ export const StyledForm = styled.div`
   overflow: auto;
 
   @media ${({ theme }) => theme.device.mobile} {
-    padding-block-start: 8px;
-    padding-inline: 27px;
+    padding-inline: 1em;
+
     margin-block-start: 80px;
 
     textarea {
