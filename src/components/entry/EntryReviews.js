@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { openLightbox } from '../../redux/locationSlice'
+import { deleteLocationReview, openLightbox } from '../../redux/locationSlice'
+import { setReviewData } from '../../redux/reviewSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReviewForm } from '../form/ReviewForm'
@@ -38,7 +39,11 @@ const EntryReviews = () => {
                 key={review.id}
                 review={review}
                 onImageClick={onReviewImageClick}
-                onEditClick={() => history.push(`/reviews/${review.id}/edit`)}
+                onEditClick={() => {
+                  dispatch(setReviewData(review))
+                  history.push(`/reviews/${review.id}/edit`)
+                }}
+                onDeleteClick={() => dispatch(deleteLocationReview(review.id))}
                 editable
               />
             )
