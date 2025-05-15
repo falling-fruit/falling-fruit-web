@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "由{{name}}添加",
+      "added_by_you": "由您添加",
       "date_edited": "更新于{{date}}",
       "imported_from": "从{{name}}导入",
       "season": {

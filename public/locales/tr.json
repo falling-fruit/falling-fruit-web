@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "{{name}} tarafından eklendi",
+      "added_by_you": "Sizin tarafınızdan eklendi",
       "date_edited": "{{date}} tarihinde güncellendi",
       "imported_from": "{{name}} kaynağından içe aktarıldı",
       "season": {

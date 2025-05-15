@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "Tillagd av {{name}}",
+      "added_by_you": "Tillagd av dig",
       "date_edited": "Uppdaterad {{date}}",
       "imported_from": "Importerad från {{name}}",
       "season": {
