@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Xác thực thất bại: {{message}}",
       "confirmation_failed": "Xác nhận tài khoản thất bại: {{message}}",
+      "expired_refresh_token": "Chúng tôi đã đăng xuất bạn sau một thời gian không hoạt động. Vui lòng đăng nhập lại.",
       "password_set_failed": "Đặt mật khẩu mới thất bại: {{message}}",
       "profile_update_failed": "Cập nhật hồ sơ thất bại: {{message}}",
       "resend_confirmation_failed": "Gửi lại xác nhận thất bại: {{message}}",

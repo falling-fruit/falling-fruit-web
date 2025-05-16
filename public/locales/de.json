@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Authentifizierungsprüfung fehlgeschlagen: {{message}}",
       "confirmation_failed": "Kontobestätigung fehlgeschlagen: {{message}}",
+      "expired_refresh_token": "Wir haben Sie nach einer Zeit der Inaktivität abgemeldet. Bitte melden Sie sich erneut an.",
       "password_set_failed": "Festlegen des neuen Passworts fehlgeschlagen: {{message}}",
       "profile_update_failed": "Profilaktualisierung fehlgeschlagen: {{message}}",
       "resend_confirmation_failed": "Erneutes Senden der Bestätigung fehlgeschlagen: {{message}}",

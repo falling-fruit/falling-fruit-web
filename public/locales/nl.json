@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Authenticatiecontrole mislukt: {{message}}",
       "confirmation_failed": "Accountbevestiging mislukt: {{message}}",
+      "expired_refresh_token": "We hebben je uitgelogd na een periode van inactiviteit. Log opnieuw in.",
       "password_set_failed": "Instellen nieuw wachtwoord mislukt: {{message}}",
       "profile_update_failed": "Profielupdate mislukt: {{message}}",
       "resend_confirmation_failed": "Opnieuw verzenden bevestiging mislukt: {{message}}",
