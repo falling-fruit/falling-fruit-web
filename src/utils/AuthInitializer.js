@@ -18,6 +18,9 @@ const AuthInitializer = () => {
         if (error) {
           if (error.message === 'Invalid refresh token') {
             history.push(pathToSignInPage())
+          } else if (error.message === 'Expired refresh token') {
+            toast.info(i18next.t('error_message.auth.expired_refresh_token'))
+            history.push(pathToSignInPage())
           } else {
             toast.error(
               i18next.t('error_message.auth.check_failed', {

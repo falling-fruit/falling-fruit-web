@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "בדיקת אימות נכשלה: {{message}}",
       "confirmation_failed": "אישור החשבון נכשל: {{message}}",
+      "expired_refresh_token": "נותקת מהמערכת לאחר תקופה של חוסר פעילות. אנא התחבר מחדש.",
       "password_set_failed": "הגדרת סיסמה חדשה נכשלה: {{message}}",
       "profile_update_failed": "עדכון הפרופיל נכשל: {{message}}",
       "resend_confirmation_failed": "שליחה חוזרת של אישור נכשלה: {{message}}",
