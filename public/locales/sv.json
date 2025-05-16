@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Autentiseringskontroll misslyckades: {{message}}",
       "confirmation_failed": "Kontobekräftelse misslyckades: {{message}}",
+      "expired_refresh_token": "Vi har loggat ut dig efter en period av inaktivitet. Vänligen logga in igen.",
       "password_set_failed": "Inställning av nytt lösenord misslyckades: {{message}}",
       "profile_update_failed": "Profiluppdatering misslyckades: {{message}}",
       "resend_confirmation_failed": "Återutskick av bekräftelse misslyckades: {{message}}",

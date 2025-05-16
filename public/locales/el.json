@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Ο έλεγχος ταυτοποίησης απέτυχε: {{message}}",
       "confirmation_failed": "Η επιβεβαίωση λογαριασμού απέτυχε: {{message}}",
+      "expired_refresh_token": "Σας αποσυνδέσαμε μετά από μια περίοδο αδράνειας. Παρακαλώ συνδεθείτε ξανά.",
       "password_set_failed": "Η ρύθμιση νέου κωδικού απέτυχε: {{message}}",
       "profile_update_failed": "Η ενημέρωση προφίλ απέτυχε: {{message}}",
       "resend_confirmation_failed": "Η επαναποστολή επιβεβαίωσης απέτυχε: {{message}}",

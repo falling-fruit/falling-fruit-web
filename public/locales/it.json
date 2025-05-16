@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Verifica autenticazione fallita: {{message}}",
       "confirmation_failed": "Conferma account fallita: {{message}}",
+      "expired_refresh_token": "Ti abbiamo disconnesso dopo un periodo di inattività. Per favore accedi di nuovo.",
       "password_set_failed": "Impostazione nuova password fallita: {{message}}",
       "profile_update_failed": "Aggiornamento profilo fallito: {{message}}",
       "resend_confirmation_failed": "Reinvio conferma fallito: {{message}}",
