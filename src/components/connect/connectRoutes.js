@@ -10,6 +10,7 @@ import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
 import ConnectShare from './ConnectShare'
+import ConnectTopPanel from './ConnectTopPanel'
 import ConnectTypes from './ConnectTypes'
 import DisconnectActivity from './DisconnectActivity'
 import DisconnectInitLocation from './DisconnectInitLocation'
@@ -245,6 +246,19 @@ const connectRoutes = [
    */
   <Route key="disconnect-activity" path={['/activity', '/locations']}>
     <DisconnectActivity />
+  </Route>,
+
+  /*
+   * ConnectTopPanel
+   * why: limit the context for filter and share state
+   *
+   * action:
+   * - when navigating away from map, list, or locations, close the filter and share panels
+   * - when going from map to one of location pages, close the panels
+   * - when drawer fully opens, close the panels
+   */
+  <Route key="connect-top-panel" path={['/map', '/list', '/locations']}>
+    <ConnectTopPanel />
   </Route>,
 ]
 
