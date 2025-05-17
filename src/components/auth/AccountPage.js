@@ -105,7 +105,7 @@ const AccountPage = () => {
                     name="email"
                     label={t('glossary.email')}
                     required
-                    autoComplete="off"
+                    autoComplete="email"
                   />
 
                   <Textarea name="bio" label={t('users.bio')} />
