@@ -110,7 +110,7 @@ const AccountPage = () => {
                       {t('users.options.announcements_email')}
                     </label>
                   }
-                  left={<Checkbox name="announcements_email" />}
+                  left={<Checkbox id="announcements_email" />}
                   style={{ marginBlock: '16px 8px' }}
                 />
                 <FormInputWrapper>

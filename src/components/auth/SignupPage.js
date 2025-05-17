@@ -127,7 +127,7 @@ const SignupPage = () => {
                   {t('users.options.announcements_email')}
                 </label>
               }
-              left={<Checkbox name="announcements_email" />}
+              left={<Checkbox id="announcements_email" />}
               style={{ margin: '16px 0' }}
             />
 

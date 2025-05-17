@@ -77,12 +77,12 @@ const FormikRatingInput = ({ name, ...props }) => {
   return <RatingInput name={name} score={value} {...props} />
 }
 
-const FormikCheckbox = ({ name, ...props }) => {
-  const [{ value }, , helpers] = useField(name)
+const FormikCheckbox = ({ id, ...props }) => {
+  const [{ value }, , helpers] = useField(id)
   return (
     <Checkbox
       onClick={(e) => helpers.setValue(e.target.checked)}
-      name={name}
+      id={id}
       checked={value ?? false}
       {...props}
     />
