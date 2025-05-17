@@ -177,6 +177,7 @@ const ShareTheHarvestTable = () => {
           icon={<SearchIcon />}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
+          name="search"
         />
       }
       persistTableHead
