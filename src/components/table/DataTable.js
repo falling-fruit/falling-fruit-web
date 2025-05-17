@@ -30,17 +30,18 @@ const LoaderWrapper = styled.div`
     }
   }
 `
+
 const TableLoader = ({ columns }) => (
   <LoaderWrapper>
-    {new Array(LOADER_ROWS).fill(
-      <div className="rdt_TableRow">
-        {new Array(columns.length).fill(
-          <div className="rdt_TableCell">
+    {Array.from(Array(LOADER_ROWS), (_, i) => (
+      <div className="rdt_TableRow" key={i}>
+        {Array.from(Array(columns.length), (_, j) => (
+          <div className="rdt_TableCell" key={j}>
             <Skeleton />
-          </div>,
-        )}
-      </div>,
-    )}
+          </div>
+        ))}
+      </div>
+    ))}
   </LoaderWrapper>
 )
 
