@@ -22,7 +22,12 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
       {({ dirty, isValid, isSubmitting }) => (
         <Form>
           <FormInputWrapper>
-            <Input type="text" name="email" label={t('glossary.email')} />
+            <Input
+              type="text"
+              name="email"
+              label={t('glossary.email')}
+              autoComplete="off"
+            />
           </FormInputWrapper>
 
           <Recaptcha
