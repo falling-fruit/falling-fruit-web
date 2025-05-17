@@ -46,7 +46,12 @@ const LoginPage = () => {
         {({ dirty, isValid }) => (
           <Form>
             <FormInputWrapper>
-              <Input name="email" type="text" label={t('glossary.email')} />
+              <Input
+                name="email"
+                type="text"
+                label={t('glossary.email')}
+                autoComplete="off"
+              />
               <Input
                 name="password"
                 type="password"

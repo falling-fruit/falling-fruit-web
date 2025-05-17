@@ -82,6 +82,7 @@ const SignupPage = () => {
                 name="email"
                 label={t('glossary.email')}
                 required
+                autoComplete="off"
               />
 
               <Input
@@ -111,7 +112,12 @@ const SignupPage = () => {
                 </ErrorMessage>
               )}
 
-              <Input type="text" name="name" label={t('glossary.name')} />
+              <Input
+                type="text"
+                name="name"
+                label={t('glossary.name')}
+                autoComplete="off"
+              />
 
               <Textarea name="bio" label={t('users.bio')} />
             </FormInputWrapper>
