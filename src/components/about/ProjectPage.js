@@ -51,14 +51,12 @@ const Project = () => {
         <h3>{t('pages.about.donate')}</h3>
         <p>
           <em>{t('pages.about.give_us_money')}</em>
-          <br />
-          <br />
-          <form action="https://www.paypal.com/us/fundraiser/charity/1387793">
-            <PointerButton type="submit">
-              {t('pages.about.give_paypal')}
-            </PointerButton>
-          </form>
         </p>
+        <form action="https://www.paypal.com/us/fundraiser/charity/1387793">
+          <PointerButton type="submit">
+            {t('pages.about.give_paypal')}
+          </PointerButton>
+        </form>
         <h3>{t('pages.about.write')}</h3>
         <p>
           <em>{renderHTML(t('pages.about.contact_us_html'))}</em>
