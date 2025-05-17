@@ -87,7 +87,7 @@ const ChangeEmailPage = () => {
                       name="email"
                       type="email"
                       label={t('glossary.email')}
-                      autocomplete="email"
+                      autoComplete="email"
                     />
                     {errors.email && (
                       <ErrorMessage>
@@ -99,7 +99,7 @@ const ChangeEmailPage = () => {
                       name="password"
                       type="password"
                       label={t('glossary.password')}
-                      autocomplete="current-password"
+                      autoComplete="current-password"
                     />
                     {errors.password && (
                       <ErrorMessage>
@@ -113,7 +113,7 @@ const ChangeEmailPage = () => {
                         {t('users.options.announcements_email')}
                       </label>
                     }
-                    left={<Checkbox name="announcements_email" />}
+                    left={<Checkbox id="announcements_email" />}
                     style={{ margin: '16px 0 8px 0' }}
                   />
                   <FormButtonWrapper>
