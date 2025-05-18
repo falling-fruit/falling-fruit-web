@@ -9,11 +9,11 @@ import {
   GeolocationState,
 } from '../../redux/geolocationSlice'
 
-const Heading = styled.div`
+const HeadingLtr = styled.div`
   position: absolute;
-  inset-block-end: 0;
-  inset-inline-start: -35px;
-  transform-origin: block-end center;
+  bottom: 0;
+  left: -35px;
+  transform-origin: bottom center;
   transform: rotate(${({ heading }) => heading}deg);
 
   height: 55px;
@@ -27,7 +27,7 @@ const Heading = styled.div`
   );
 `
 
-const Pin = styled.div`
+const PinLtr = styled.div`
   position: absolute;
   z-index: 1;
 
@@ -58,8 +58,8 @@ const GeolocationWrapper = styled.div`
     border-radius: 50%;
   }
 
-  ${({ hasHeading, isPulsing }) =>
-    !hasHeading &&
+  ${({ hasHeadingLtr, isPulsing }) =>
+    !hasHeadingLtr &&
     isPulsing &&
     css`
       &::before {
@@ -123,14 +123,14 @@ const GeolocationDot = () => {
   return (
     <GeolocationWrapper
       onClick={handleClick}
-      hasHeading={!!geolocation?.heading}
+      hasHeadingLtr={!!geolocation?.heading}
       isPulsing={geolocationState !== GeolocationState.DOT_ON}
       isClickable={geolocationState === GeolocationState.DOT_ON}
       dir="ltr"
     >
-      <Pin />
+      <PinLtr />
       {geolocation && geolocation.heading !== null && (
-        <Heading heading={geolocation.heading} />
+        <HeadingLtr heading={geolocation.heading} />
       )}
     </GeolocationWrapper>
   )
