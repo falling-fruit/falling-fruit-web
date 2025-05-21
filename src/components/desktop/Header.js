@@ -48,7 +48,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
-  z-index: 2;
+  z-index: 3;
 
   img {
     height: 100%;
