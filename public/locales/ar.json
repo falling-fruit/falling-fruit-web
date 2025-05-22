@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "فشل التحقق من المصادقة: {{message}}",
       "confirmation_failed": "فشل تأكيد الحساب: {{message}}",
+      "expired_refresh_token": "لقد قمنا بتسجيل خروجك بعد فترة من عدم النشاط. يرجى تسجيل الدخول مرة أخرى.",
       "password_set_failed": "فشل تعيين كلمة المرور الجديدة: {{message}}",
       "profile_update_failed": "فشل تحديث الملف الشخصي: {{message}}",
       "resend_confirmation_failed": "فشل إعادة إرسال التأكيد: {{message}}",

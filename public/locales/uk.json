@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Помилка перевірки автентифікації: {{message}}",
       "confirmation_failed": "Не вдалося підтвердити обліковий запис: {{message}}",
+      "expired_refresh_token": "Ми вийшли з системи після періоду неактивності. Будь ласка, увійдіть знову.",
       "password_set_failed": "Не вдалося встановити новий пароль: {{message}}",
       "profile_update_failed": "Не вдалося оновити профіль: {{message}}",
       "resend_confirmation_failed": "Не вдалося повторно надіслати підтвердження: {{message}}",

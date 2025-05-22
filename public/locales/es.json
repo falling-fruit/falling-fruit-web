@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Error en la verificación de autenticación: {{message}}",
       "confirmation_failed": "Error en la confirmación de cuenta: {{message}}",
+      "expired_refresh_token": "Te hemos desconectado después de un período de inactividad. Por favor, vuelve a iniciar sesión.",
       "password_set_failed": "Error al establecer nueva contraseña: {{message}}",
       "profile_update_failed": "Error al actualizar perfil: {{message}}",
       "resend_confirmation_failed": "Error al reenviar confirmación: {{message}}",

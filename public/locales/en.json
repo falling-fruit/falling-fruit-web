@@ -35,6 +35,7 @@
       "type_add_failed": "Adding new type failed: {{message}}"
     },
     "auth": {
+      "expired_refresh_token": "We've signed you out after a period of inactivity. Please log back in.",
       "check_failed": "Authentication check failed: {{message}}",
       "confirmation_failed": "Account confirmation failed: {{message}}",
       "password_set_failed": "Setting new password failed: {{message}}",

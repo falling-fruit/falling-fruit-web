@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Sprawdzanie uwierzytelnienia nie powiodło się: {{message}}",
       "confirmation_failed": "Potwierdzenie konta nie powiodło się: {{message}}",
+      "expired_refresh_token": "Wylogowaliśmy Cię po okresie nieaktywności. Prosimy o ponowne zalogowanie.",
       "password_set_failed": "Ustawianie nowego hasła nie powiodło się: {{message}}",
       "profile_update_failed": "Aktualizacja profilu nie powiodła się: {{message}}",
       "resend_confirmation_failed": "Ponowne wysyłanie potwierdzenia nie powiodło się: {{message}}",

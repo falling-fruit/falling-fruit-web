@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "身份验证检查失败：{{message}}",
       "confirmation_failed": "账户确认失败：{{message}}",
+      "expired_refresh_token": "由于长时间未操作，我们已将您登出。请重新登录。",
       "password_set_failed": "设置新密码失败：{{message}}",
       "profile_update_failed": "更新个人资料失败：{{message}}",
       "resend_confirmation_failed": "重新发送确认失败：{{message}}",

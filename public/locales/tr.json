@@ -37,6 +37,7 @@
     "auth": {
       "check_failed": "Kimlik doğrulama kontrolü başarısız: {{message}}",
       "confirmation_failed": "Hesap onayı başarısız: {{message}}",
+      "expired_refresh_token": "Uzun süreli hareketsizlik nedeniyle oturumunuz sonlandırıldı. Lütfen tekrar giriş yapın.",
       "password_set_failed": "Yeni şifre belirleme başarısız: {{message}}",
       "profile_update_failed": "Profil güncelleme başarısız: {{message}}",
       "resend_confirmation_failed": "Onay tekrar gönderimi başarısız: {{message}}",
