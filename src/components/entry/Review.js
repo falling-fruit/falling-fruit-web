@@ -14,18 +14,14 @@ const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  padding-block-end: 0.5em;
-
+  padding-inline: 0.65em;
+  padding-block: 0.65em 0.75em;
+  border-radius: 0.375em;
+  background: ${({ $editable, theme }) =>
+    $editable ? theme.navBackground : theme.navBackground};
   &:not(:last-child) {
-    margin-block-end: 0.5em;
+    margin-block-end: 0.65em;
   }
-
-  ${({ $editable, theme }) =>
-    `
-    background: ${$editable ? theme.navBackground : theme.navBackground};
-    padding: 0.6em;
-    border-radius: 0.375em;
-  `}
 `
 
 const Label = styled.span`
@@ -39,7 +35,7 @@ const ReviewDescription = styled.section`
   p {
     font-size: 1rem;
     color: ${({ theme }) => theme.secondaryText};
-    margin-block: 0 4px;
+    margin-block: 0;
     margin-inline: 0;
   }
 `
@@ -170,9 +166,11 @@ const Review = ({
           )}
         </ReviewStats>
       )}
-      <ReviewDescription>
-        <p dir="auto">{review.comment}</p>
-      </ReviewDescription>
+      {review.comment && (
+        <ReviewDescription>
+          <p dir="auto">{review.comment}</p>
+        </ReviewDescription>
+      )}
       {includePreview &&
         review.photos.map((photo, index) => (
           <StyledImagePreview
