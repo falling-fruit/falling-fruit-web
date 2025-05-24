@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "Được thêm bởi {{name}}",
+      "added_by_you": "Được thêm bởi bạn",
       "date_edited": "Cập nhật {{date}}",
       "imported_from": "Được nhập từ {{name}}",
       "season": {

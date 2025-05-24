@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "Toegevoegd door {{name}}",
+      "added_by_you": "Door jou toegevoegd",
       "date_edited": "Bijgewerkt {{date}}",
       "imported_from": "Geïmporteerd van {{name}}",
       "season": {

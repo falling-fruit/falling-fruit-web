@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "נוסף על ידי {{name}}",
+      "added_by_you": "נוסף על ידך",
       "date_edited": "עודכן {{date}}",
       "imported_from": "יובא מ {{name}}",
       "season": {

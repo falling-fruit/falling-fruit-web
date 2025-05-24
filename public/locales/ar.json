@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "أضيف بواسطة {{name}}",
+      "added_by_you": "أضيف بواسطتك",
       "date_edited": "تم التحديث في {{date}}",
       "imported_from": "تم الاستيراد من {{name}}",
       "season": {

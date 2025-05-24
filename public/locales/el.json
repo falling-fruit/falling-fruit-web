@@ -171,6 +171,7 @@
     },
     "overview": {
       "added_by": "Προστέθηκε από {{name}}",
+      "added_by_you": "Προστέθηκε από εσάς",
       "date_edited": "Ενημερώθηκε {{date}}",
       "imported_from": "Εισήχθη από {{name}}",
       "season": {

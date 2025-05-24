@@ -5,7 +5,7 @@ import {
   StreetView,
   User,
 } from '@styled-icons/boxicons-regular'
-import { Map } from '@styled-icons/boxicons-solid'
+import { Map, User as UserYou } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -76,6 +76,7 @@ const EntryOverview = () => {
     reviews,
   } = useSelector((state) => state.location)
   const { locationsWithoutPanorama } = useSelector((state) => state.misc)
+  const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
 
   const { t, i18n } = useTranslation()
@@ -172,7 +173,13 @@ const EntryOverview = () => {
           )}
           {(locationData.import_id || locationData.author) && (
             <IconBesideText>
-              {locationData.import_id ? <Data size={20} /> : <User size={20} />}
+              {locationData.import_id ? (
+                <Data size={20} />
+              ) : locationData.user_id === user?.id ? (
+                <UserYou size={20} />
+              ) : (
+                <User size={20} />
+              )}
               <p>
                 {locationData.author && locationData.import_id ? (
                   t('locations.overview.imported_from', {
@@ -180,13 +187,19 @@ const EntryOverview = () => {
                   })
                 ) : (
                   <>
-                    {t('locations.overview.added_by', { name: '' })}{' '}
-                    {locationData.user_id ? (
-                      <Link to={`/profiles/${locationData.user_id}`}>
-                        {locationData.author}
-                      </Link>
+                    {locationData.user_id === user?.id ? (
+                      t('locations.overview.added_by_you')
                     ) : (
-                      locationData.author
+                      <>
+                        {t('locations.overview.added_by', { name: '' })}{' '}
+                        {locationData.user_id ? (
+                          <Link to={`/profiles/${locationData.user_id}`}>
+                            {locationData.author}
+                          </Link>
+                        ) : (
+                          locationData.author
+                        )}
+                      </>
                     )}
                   </>
                 )}
