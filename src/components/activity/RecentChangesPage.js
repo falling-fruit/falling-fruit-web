@@ -79,7 +79,7 @@ const RecentChangesPage = () => {
 
   return (
     <InfoPage>
-      <h1>{t('pages.changes.activity_recent_changes')}</h1>
+      <h1>{t('glossary.activity')}</h1>
       {activityDiary.entries.length > 0 &&
         activityDiary.entries.map((entry) => (
           <DiaryEntry key={entry.formattedDate} entry={entry} />

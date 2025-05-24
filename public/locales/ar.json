@@ -235,7 +235,6 @@
       "write": "كتابة"
     },
     "changes": {
-      "activity_recent_changes": "النشاط: التغييرات الأخيرة",
       "change_in_city": "{{type}} في {{city}}",
       "my_activity_empty": "لم تقم بإضافة أو تحرير أو مراجعة أي مواقع بعد",
       "place": {

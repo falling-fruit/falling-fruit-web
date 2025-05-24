@@ -235,7 +235,6 @@
       "write": "Написати"
     },
     "changes": {
-      "activity_recent_changes": "Активність: останні зміни",
       "change_in_city": "{{type}} в {{city}}",
       "my_activity_empty": "Ви ще не додали, не редагували та не переглядали жодних локацій",
       "place": {
