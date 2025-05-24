@@ -171,7 +171,7 @@
     },
     "overview": {
       "added_by": "Được thêm bởi {{name}}",
-      "added_by_you": "Được thêm bởi bạn",
+      "added_by_you": "Thêm bởi bạn",
       "date_edited": "Cập nhật {{date}}",
       "imported_from": "Được nhập từ {{name}}",
       "season": {
@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "đã thêm",
+        "added_by_you": "đã được thêm bởi bạn",
         "edited": "đã chỉnh sửa",
-        "visited": "đã ghé thăm"
+        "edited_by_you": "đã được chỉnh sửa bởi bạn",
+        "visited": "đã ghé thăm",
+        "visited_by_you": "đã được ghé thăm bởi bạn"
       },
       "user_activity_empty": "Người dùng này chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào"
     },

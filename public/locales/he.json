@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "נוסף",
+        "added_by_you": "נוסף על ידך",
         "edited": "נערך",
-        "visited": "בוקר"
+        "edited_by_you": "נערך על ידך",
+        "visited": "בוקר",
+        "visited_by_you": "בוקר על ידך"
       },
       "user_activity_empty": "משתמש זה לא הוסיף, ערך או ביקר במיקומים עדיין"
     },

@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "toegevoegd",
+        "added_by_you": "door jou toegevoegd",
         "edited": "bewerkt",
-        "visited": "bezocht"
+        "edited_by_you": "door jou bewerkt",
+        "visited": "bezocht",
+        "visited_by_you": "door jou bezocht"
       },
       "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld"
     },

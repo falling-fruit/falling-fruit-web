@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "ajouté",
+        "added_by_you": "ajouté par vous",
         "edited": "modifié",
-        "visited": "visité"
+        "edited_by_you": "modifié par vous",
+        "visited": "visité",
+        "visited_by_you": "visité par vous"
       },
       "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué d'emplacements"
     },

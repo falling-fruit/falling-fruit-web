@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "tillagd",
+        "added_by_you": "tillagd av dig",
         "edited": "redigerad",
-        "visited": "besökt"
+        "edited_by_you": "redigerad av dig",
+        "visited": "besökt",
+        "visited_by_you": "besökt av dig"
       },
       "user_activity_empty": "Denna användare har inte lagt till, redigerat eller granskat några platser än"
     },

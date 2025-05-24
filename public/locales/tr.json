@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "eklendi",
+        "added_by_you": "sizin tarafınızdan eklendi",
         "edited": "düzenlendi",
-        "visited": "ziyaret edildi"
+        "edited_by_you": "sizin tarafınızdan düzenlendi",
+        "visited": "ziyaret edildi",
+        "visited_by_you": "sizin tarafınızdan ziyaret edildi"
       },
       "user_activity_empty": "Bu kullanıcı henüz hiç mekan eklemedi, düzenlemedi veya incelemedi"
     },
