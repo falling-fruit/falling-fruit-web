@@ -4,7 +4,6 @@ import Select, { createFilter } from 'react-select'
 import Creatable from 'react-select/creatable'
 import styled from 'styled-components/macro'
 
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import { validatedColor } from './GlobalStyle'
 
 const SelectParent = styled.div`
@@ -91,10 +90,9 @@ const StyledCreatableSelect = SelectParent.withComponent(Creatable)
 const INITIAL_VISIBLE_COUNT = 100
 const INCREMENT = 100
 
-const InfiniteMenuList = ({ children }) => {
+const InfiniteMenuList = ({ children, maxHeight = '300px' }) => {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
   const loadMoreRef = useRef()
-  const isDesktop = useIsDesktop()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -122,7 +120,7 @@ const InfiniteMenuList = ({ children }) => {
     <div
       style={{
         overflowY: 'auto',
-        maxHeight: isDesktop ? 'calc(100vh - 305px)' : '300px',
+        maxHeight,
       }}
     >
       {Array.isArray(children) ? children.slice(0, visibleCount) : children}
@@ -133,9 +131,17 @@ const InfiniteMenuList = ({ children }) => {
   )
 }
 
-const SelectWrapper = ({ isVirtualized, ...props }) => (
+const SelectWrapper = ({ isVirtualized, menuMaxHeight, ...props }) => (
   <StyledSelect
-    components={isVirtualized ? { MenuList: InfiniteMenuList } : {}}
+    components={
+      isVirtualized
+        ? {
+            MenuList: (listProps) => (
+              <InfiniteMenuList {...listProps} maxHeight={menuMaxHeight} />
+            ),
+          }
+        : {}
+    }
     classNamePrefix="select"
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
@@ -146,11 +152,20 @@ const SelectWrapper = ({ isVirtualized, ...props }) => (
 
 const CreatableSelectWrapper = ({
   isVirtualized,
+  menuMaxHeight,
   onCreateOption,
   ...props
 }) => (
   <StyledCreatableSelect
-    components={isVirtualized ? { MenuList: InfiniteMenuList } : {}}
+    components={
+      isVirtualized
+        ? {
+            MenuList: (listProps) => (
+              <InfiniteMenuList {...listProps} maxHeight={menuMaxHeight} />
+            ),
+          }
+        : {}
+    }
     classNamePrefix="select"
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
