@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "aggiunto",
+        "added_by_you": "aggiunto da te",
         "edited": "modificato",
-        "visited": "visitato"
+        "edited_by_you": "modificato da te",
+        "visited": "visitato",
+        "visited_by_you": "visitato da te"
       },
       "user_activity_empty": "Questo utente non ha ancora aggiunto, modificato o recensito alcuna località"
     },

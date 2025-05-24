@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "added",
+        "added_by_you": "added by you",
         "edited": "edited",
-        "visited": "visited"
+        "edited_by_you": "edited by you",
+        "visited": "visited",
+        "visited_by_you": "visited by you"
       },
       "user_activity_empty": "This user has not yet added, edited, or reviewed any locations"
     },

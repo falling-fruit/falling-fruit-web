@@ -171,7 +171,7 @@
     },
     "overview": {
       "added_by": "Hinzugefügt von {{name}}",
-      "added_by_you": "Von dir hinzugefügt",
+      "added_by_you": "Von Ihnen hinzugefügt",
       "date_edited": "Aktualisiert am {{date}}",
       "imported_from": "Importiert von {{name}}",
       "season": {
@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "hinzugefügt",
+        "added_by_you": "von Ihnen hinzugefügt",
         "edited": "bearbeitet",
-        "visited": "besucht"
+        "edited_by_you": "von Ihnen bearbeitet",
+        "visited": "besucht",
+        "visited_by_you": "von Ihnen besucht"
       },
       "user_activity_empty": "Dieser Benutzer hat noch keine Orte hinzugefügt, bearbeitet oder überprüft"
     },

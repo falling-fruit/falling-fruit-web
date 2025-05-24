@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "adicionado",
+        "added_by_you": "adicionado por você",
         "edited": "editado",
-        "visited": "visitado"
+        "edited_by_you": "editado por você",
+        "visited": "visitado",
+        "visited_by_you": "visitado por você"
       },
       "user_activity_empty": "Este usuário ainda não adicionou, editou ou revisou nenhum local"
     },

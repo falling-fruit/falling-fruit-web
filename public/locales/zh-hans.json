@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "添加",
+        "added_by_you": "由您添加",
         "edited": "编辑",
-        "visited": "访问"
+        "edited_by_you": "由您编辑",
+        "visited": "访问",
+        "visited_by_you": "由您访问"
       },
       "user_activity_empty": "该用户还没有添加、编辑或审核任何地点"
     },

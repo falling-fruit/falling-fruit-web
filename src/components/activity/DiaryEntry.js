@@ -1,7 +1,7 @@
 import { MapAlt as Map } from '@styled-icons/boxicons-regular'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -11,16 +11,25 @@ import {
 } from '../../redux/activitySlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
-const formatChangeType = (type, t) => {
-  switch (type) {
-    case 'added':
+const formatChangeType = (type, t, isCurrentUser = false) => {
+  // Create a composite key for the switch statement
+  const key = `${type}+${isCurrentUser}`
+
+  switch (key) {
+    case 'added+true':
+      return t('pages.changes.type.added_by_you')
+    case 'edited+true':
+      return t('pages.changes.type.edited_by_you')
+    case 'visited+true':
+      return t('pages.changes.type.visited_by_you')
+    case 'added+false':
       return t('pages.changes.type.added')
-    case 'edited':
+    case 'edited+false':
       return t('pages.changes.type.edited')
-    case 'visited':
+    case 'visited+false':
       return t('pages.changes.type.visited')
     default:
-      return `changes.type.${type}`
+      return `changes.type.${type}_${isCurrentUser}`
   }
 }
 
@@ -110,11 +119,13 @@ const ActivityTextComponent = ({
   authorUserId,
   interactionType,
   onClickLink,
+  currentUserId,
 }) => {
   const locationParts = [place.city, place.state, place.country]
   const hasLocationInfo = locationParts.filter(Boolean).length > 0
   const { t, i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
+  const isCurrentUser = currentUserId && authorUserId === currentUserId
 
   const LocationDisplay = () => (
     <>
@@ -132,39 +143,41 @@ const ActivityTextComponent = ({
     </>
   )
 
-  const AuthorDisplay = () => (
-    <>
-      {author && (
-        <>
-          {authorUserId ? (
-            <AuthorLink to={`/profiles/${authorUserId}`} onClick={onClickLink}>
-              {author}
-            </AuthorLink>
-          ) : (
-            author
-          )}
-        </>
-      )}
-    </>
-  )
-
   return (
     <ActivityText>
       {t('pages.changes.change_in_city', {
-        type: formatChangeType(interactionType, t),
+        type: formatChangeType(interactionType, t, isCurrentUser),
         city: '',
       })}
       {isRTL ? (
         <>
-          {author && <AuthorDisplay />}
-          {author && ' — '}
+          {author && !isCurrentUser && (
+            <>
+              <AuthorLink
+                to={`/profiles/${authorUserId}`}
+                onClick={onClickLink}
+              >
+                {author}
+              </AuthorLink>
+              {' — '}
+            </>
+          )}
           <LocationDisplay />
         </>
       ) : (
         <>
           <LocationDisplay />
-          {author && ' — '}
-          {author && <AuthorDisplay />}
+          {author && !isCurrentUser && (
+            <>
+              {' — '}
+              <AuthorLink
+                to={`/profiles/${authorUserId}`}
+                onClick={onClickLink}
+              >
+                {author}
+              </AuthorLink>
+            </>
+          )}
         </>
       )}
     </ActivityText>
@@ -177,6 +190,7 @@ const ListItemInteraction = ({
   activity,
   onClickLink,
   hideAuthor,
+  currentUserId,
 }) => {
   if (locations.length === 0) {
     return null
@@ -191,6 +205,7 @@ const ListItemInteraction = ({
         authorUserId={hideAuthor ? null : activity.userId}
         interactionType={interactionType}
         onClickLink={onClickLink}
+        currentUserId={currentUserId}
       />
     </p>
   )
@@ -199,6 +214,9 @@ const ListItemInteraction = ({
 const DiaryEntry = ({ entry, userId, displayLimit }) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
+  const { user } = useSelector((state) => state.auth)
+  const currentUserId = user?.id
+
   const onClickLink = useCallback(() => {
     if (userId) {
       dispatch(
@@ -231,6 +249,7 @@ const DiaryEntry = ({ entry, userId, displayLimit }) => {
                 activity={activity}
                 hideAuthor={!!userId}
                 onClickLink={onClickLink}
+                currentUserId={currentUserId}
               />
             ))}
           </ListItem>

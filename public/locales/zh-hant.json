@@ -171,7 +171,7 @@
     },
     "overview": {
       "added_by": "由{{name}}添加",
-      "added_by_you": "由你添加",
+      "added_by_you": "由您添加",
       "date_edited": "更新於{{date}}",
       "imported_from": "從{{name}}導入",
       "season": {
@@ -244,8 +244,11 @@
       },
       "type": {
         "added": "添加",
+        "added_by_you": "由您添加",
         "edited": "編輯",
-        "visited": "訪問"
+        "edited_by_you": "由您編輯",
+        "visited": "訪問",
+        "visited_by_you": "由您訪問"
       },
       "user_activity_empty": "此用戶尚未添加、編輯或審查任何地點"
     },
