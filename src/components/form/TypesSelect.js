@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { openAddTypeModal } from '../../redux/typeSlice'
 import { tokenizeQuery } from '../../utils/tokenize'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { TypeName } from '../ui/TypeName'
 import { AddTypeModal } from './AddTypeModal'
 import { CreatableSelect } from './FormikWrappers'
@@ -23,8 +24,12 @@ const TypesSelect = () => {
   const { values, validateForm, setFieldValue } = useFormikContext()
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const isDesktop = useIsDesktop()
 
   const typeOptions = useMemo(() => typesAccess.asMenuEntries(), [typesAccess])
+  const menuMaxHeight = isDesktop
+    ? `max(300px, calc(100vh - ${305 + (values.types?.length > 0 ? values.types.length * 30 : 0)}px))`
+    : '300px'
   const [newTypeInput, setNewTypeInput] = useState('')
 
   const handleNewType = useCallback(
@@ -72,6 +77,7 @@ const TypesSelect = () => {
         onCreateOption={handleCreateOption}
         formatCreateLabel={(inputValue) => inputValue}
         filterOption={matchFromTokenStart}
+        menuMaxHeight={menuMaxHeight}
       />
       <AddTypeModal initialName={newTypeInput} onTypeAdded={handleNewType} />
     </>
