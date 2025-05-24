@@ -235,7 +235,6 @@
       "write": "Schrijven"
     },
     "changes": {
-      "activity_recent_changes": "Activiteit: recente wijzigingen",
       "change_in_city": "{{type}} in {{city}}",
       "my_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld",
       "place": {

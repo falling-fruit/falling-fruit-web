@@ -235,7 +235,6 @@
       "write": "כתיבה"
     },
     "changes": {
-      "activity_recent_changes": "פעילות: שינויים אחרונים",
       "change_in_city": "{{type}} ב{{city}}",
       "my_activity_empty": "לא הוספת, ערכת או ביקרת במיקומים עדיין",
       "place": {

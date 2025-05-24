@@ -235,7 +235,6 @@
       "write": "寫"
     },
     "changes": {
-      "activity_recent_changes": "活動：最近更改",
       "change_in_city": "在{{city}}{{type}}",
       "my_activity_empty": "您尚未添加、編輯或審查任何地點",
       "place": {

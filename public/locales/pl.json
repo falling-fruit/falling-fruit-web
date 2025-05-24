@@ -235,7 +235,6 @@
       "write": "Napisz"
     },
     "changes": {
-      "activity_recent_changes": "Aktywność: ostatnie zmiany",
       "change_in_city": "{{type}} w {{city}}",
       "my_activity_empty": "Nie dodałeś/aś, nie edytowałeś/aś ani nie zrecenzowałeś/aś jeszcze żadnych lokalizacji",
       "place": {
