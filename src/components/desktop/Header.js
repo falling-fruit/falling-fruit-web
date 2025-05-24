@@ -286,7 +286,10 @@ const UserMenu = () => {
               isMatch={isAccountPage}
             >
               <NavLink to="/users/edit" activeClassName="active">
-                {t('glossary.account')}
+                {t('users.edit_account')}
+              </NavLink>
+              <NavLink to={`/activity/${user.id}`} activeClassName="active">
+                {t('users.my_activity')}
               </NavLink>
               <ResetButton onClick={handleLogout}>
                 {t('glossary.logout')}
