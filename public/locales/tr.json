@@ -409,6 +409,7 @@
     "save_changes": "Değişiklikleri kaydet",
     "send": "Gönder",
     "send_password_instructions": "Şifre sıfırlama talimatlarını gönder",
-    "sign_in": "Oturum aç"
+    "sign_in": "Oturum aç",
+    "sign_out": "Oturumu kapat"
   }
 }

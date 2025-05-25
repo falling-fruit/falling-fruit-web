@@ -409,6 +409,7 @@
     "save_changes": "Lưu thay đổi",
     "send": "Gửi",
     "send_password_instructions": "Gửi hướng dẫn đặt lại mật khẩu",
-    "sign_in": "Đăng nhập"
+    "sign_in": "Đăng nhập",
+    "sign_out": "Đăng xuất"
   }
 }

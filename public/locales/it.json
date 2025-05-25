@@ -409,6 +409,7 @@
     "save_changes": "Salva modifiche",
     "send": "Invia",
     "send_password_instructions": "Invia istruzioni di reimpostazione della password",
-    "sign_in": "Accedi"
+    "sign_in": "Accedi",
+    "sign_out": "Esci"
   }
 }

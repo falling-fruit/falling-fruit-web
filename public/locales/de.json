@@ -409,6 +409,7 @@
     "save_changes": "Änderungen speichern",
     "send": "Senden",
     "send_password_instructions": "Anleitung zur Passwort Erneuerung senden",
-    "sign_in": "Anmelden"
+    "sign_in": "Anmelden",
+    "sign_out": "Abmelden"
   }
 }

@@ -409,6 +409,7 @@
     "save_changes": "Guardar cambios",
     "send": "Enviar",
     "send_password_instructions": "Enviar instrucciones de recuperación de contraseña",
-    "sign_in": "Acceder"
+    "sign_in": "Acceder",
+    "sign_out": "Cerrar sesión"
   }
 }

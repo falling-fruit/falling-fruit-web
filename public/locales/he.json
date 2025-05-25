@@ -409,6 +409,7 @@
     "save_changes": "שמור שינויים",
     "send": "שלח",
     "send_password_instructions": "שלח הנחיות איפוס סיסמה",
-    "sign_in": "התחברות לחשבון"
+    "sign_in": "התחברות לחשבון",
+    "sign_out": "התנתק"
   }
 }

@@ -409,6 +409,7 @@
     "save_changes": "Enregistrer vos modifications",
     "send": "Envoyer",
     "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
-    "sign_in": "Se connecter"
+    "sign_in": "Se connecter",
+    "sign_out": "Se déconnecter"
   }
 }

@@ -409,6 +409,7 @@
     "save_changes": "Salvar alterações",
     "send": "Enviar",
     "send_password_instructions": "Enviar as instruções para redefinir a minha senha",
-    "sign_in": "Entrar"
+    "sign_in": "Entrar",
+    "sign_out": "Sair"
   }
 }

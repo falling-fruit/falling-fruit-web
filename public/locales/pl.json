@@ -409,6 +409,7 @@
     "save_changes": "Zapisz zmiany",
     "send": "Wyślij",
     "send_password_instructions": "Wysyłanie instrukcji resetowania hasła",
-    "sign_in": "Zaloguj się"
+    "sign_in": "Zaloguj się",
+    "sign_out": "Wyloguj się"
   }
 }
