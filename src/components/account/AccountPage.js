@@ -98,7 +98,7 @@ const AccountPage = () => {
               history.push('/map')
             }}
           >
-            {t('glossary.logout')}
+            {t('users.sign_out')}
           </Button>
         </>
       ) : (

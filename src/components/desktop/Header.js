@@ -292,7 +292,7 @@ const UserMenu = () => {
                 {t('users.my_activity')}
               </NavLink>
               <ResetButton onClick={handleLogout}>
-                {t('glossary.logout')}
+                {t('users.sign_out')}
               </ResetButton>
             </StyledDropdown>
           </NavLi>

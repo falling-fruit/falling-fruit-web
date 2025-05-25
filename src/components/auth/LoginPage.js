@@ -70,7 +70,7 @@ const LoginPage = () => {
 
             <FormButtonWrapper>
               <Button disabled={!dirty || !isValid || isLoading} type="submit">
-                {t('users.login')}
+                {t('users.sign_in')}
               </Button>
             </FormButtonWrapper>
           </Form>
