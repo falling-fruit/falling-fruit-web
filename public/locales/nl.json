@@ -409,6 +409,7 @@
     "save_changes": "Wijzigingen opslaan",
     "send": "Versturen",
     "send_password_instructions": "Wachtwoordherstelinstructies versturen",
-    "sign_in": "Inloggen"
+    "sign_in": "Inloggen",
+    "sign_out": "Uitloggen"
   }
 }

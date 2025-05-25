@@ -409,6 +409,7 @@
     "save_changes": "保存更改",
     "send": "发送",
     "send_password_instructions": "发送密码重置说明",
-    "sign_in": "登录"
+    "sign_in": "登录",
+    "sign_out": "退出"
   }
 }

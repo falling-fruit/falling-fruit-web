@@ -409,6 +409,7 @@
     "save_changes": "Spara ändringar",
     "send": "Skicka",
     "send_password_instructions": "Skicka instruktioner för lösenordsåterställning",
-    "sign_in": "Logga in"
+    "sign_in": "Logga in",
+    "sign_out": "Logga ut"
   }
 }

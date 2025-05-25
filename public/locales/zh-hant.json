@@ -409,6 +409,7 @@
     "save_changes": "保存更改",
     "send": "發送",
     "send_password_instructions": "發送密碼重置說明",
-    "sign_in": "登錄"
+    "sign_in": "登錄",
+    "sign_out": "登出"
   }
 }
