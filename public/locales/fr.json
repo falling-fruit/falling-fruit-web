@@ -90,7 +90,6 @@
     "locations": {
       "other": "Emplacements"
     },
-    "logout": "Déconnexion",
     "map": "Carte",
     "name": "Nom",
     "password": "Mot de passe",
@@ -358,7 +357,6 @@
       "observed_on": "Observé le {{date}}",
       "photos": "Photos"
     },
-    "update_delete": "Modifier ou supprimer cet avis.",
     "you_reviewed": "Vous avez évalué cet emplacement le {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Paramètres de messagerie",
     "forgot_password": "Réinitialiser votre mot de passe",
     "joined_on": "Inscrit le {{date}}",
-    "login": "Connexion",
     "my_activity": "Mon activité",
     "new_password": "Nouveau mot de passe",
     "new_password_confirmation": "Confirmation du nouveau mot de passe",

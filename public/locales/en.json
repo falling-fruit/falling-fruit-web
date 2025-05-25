@@ -35,9 +35,9 @@
       "type_add_failed": "Adding new type failed: {{message}}"
     },
     "auth": {
-      "expired_refresh_token": "We've signed you out after a period of inactivity. Please sign back in.",
       "check_failed": "Authentication check failed: {{message}}",
       "confirmation_failed": "Account confirmation failed: {{message}}",
+      "expired_refresh_token": "We've signed you out after a period of inactivity. Please sign back in.",
       "password_set_failed": "Setting new password failed: {{message}}",
       "profile_update_failed": "Profile update failed: {{message}}",
       "resend_confirmation_failed": "Resending confirmation failed: {{message}}",
@@ -90,7 +90,6 @@
     "locations": {
       "other": "Locations"
     },
-    "logout": "Logout",
     "map": "Map",
     "name": "Name",
     "password": "Password",
@@ -358,7 +357,6 @@
       "observed_on": "Observed on {{date}}",
       "photos": "Photos"
     },
-    "update_delete": "Update or delete this review.",
     "you_reviewed": "You reviewed this location on {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Email settings",
     "forgot_password": "Reset your password",
     "joined_on": "Joined on {{date}}",
-    "login": "Login",
     "my_activity": "My activity",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
@@ -412,6 +409,7 @@
     "save_changes": "Save changes",
     "send": "Send",
     "send_password_instructions": "Send password reset instructions",
-    "sign_in": "Sign in"
+    "sign_in": "Sign in",
+    "sign_out": "Sign out"
   }
 }

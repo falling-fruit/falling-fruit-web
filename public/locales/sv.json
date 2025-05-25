@@ -90,7 +90,6 @@
     "locations": {
       "other": "Platser"
     },
-    "logout": "Utloggning",
     "map": "Karta",
     "name": "Namn",
     "password": "Lösenord",
@@ -358,7 +357,6 @@
       "observed_on": "Observerad den {{date}}",
       "photos": "Foton"
     },
-    "update_delete": "Uppdatera eller ta bort denna recension.",
     "you_reviewed": "Du recenserade denna plats den {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "E-postinställningar",
     "forgot_password": "Återställ ditt lösenord",
     "joined_on": "Gick med {{date}}",
-    "login": "Logga in",
     "my_activity": "Min aktivitet",
     "new_password": "Nytt lösenord",
     "new_password_confirmation": "Bekräfta nytt lösenord",

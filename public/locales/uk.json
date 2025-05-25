@@ -90,7 +90,6 @@
     "locations": {
       "other": "Локації"
     },
-    "logout": "Вийти",
     "map": "Карта",
     "name": "Ім'я",
     "password": "Пароль",
@@ -358,7 +357,6 @@
       "observed_on": "Помічено {{date}}",
       "photos": "Фото"
     },
-    "update_delete": "Оновити або видалити цей відгук.",
     "you_reviewed": "Ви залишили відгук про це місце {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Налаштування електронної пошти",
     "forgot_password": "Скинути пароль",
     "joined_on": "Приєднався {{date}}",
-    "login": "Увійти",
     "my_activity": "Моя активність",
     "new_password": "Новий пароль",
     "new_password_confirmation": "Підтвердження нового пароля",

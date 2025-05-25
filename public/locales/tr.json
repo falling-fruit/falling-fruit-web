@@ -90,7 +90,6 @@
     "locations": {
       "other": "Konumlar"
     },
-    "logout": "Çıkış Yap",
     "map": "Harita",
     "name": "İsim",
     "password": "Şifre",
@@ -358,7 +357,6 @@
       "observed_on": "Gözlemlenme tarihi {{date}}",
       "photos": "Fotoğraflar"
     },
-    "update_delete": "Bu değerlendirmeyi güncelle veya sil.",
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "E-posta ayarları",
     "forgot_password": "Şifreni sıfırla",
     "joined_on": "Katılma tarihi: {{date}}",
-    "login": "Giriş",
     "my_activity": "Aktivitelerim",
     "new_password": "Yeni şifre",
     "new_password_confirmation": "Yeni şifre onayı",

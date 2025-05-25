@@ -90,7 +90,6 @@
     "locations": {
       "other": "Vị trí"
     },
-    "logout": "Đăng xuất",
     "map": "Bản đồ",
     "name": "Tên",
     "password": "Mật khẩu",
@@ -358,7 +357,6 @@
       "observed_on": "Quan sát vào {{date}}",
       "photos": "Hình ảnh"
     },
-    "update_delete": "Cập nhật hoặc xóa đánh giá này.",
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Cài đặt email",
     "forgot_password": "Đặt lại mật khẩu của bạn",
     "joined_on": "Tham gia vào {{date}}",
-    "login": "Đăng nhập",
     "my_activity": "Hoạt động của tôi",
     "new_password": "Mật khẩu mới",
     "new_password_confirmation": "Xác nhận mật khẩu mới",

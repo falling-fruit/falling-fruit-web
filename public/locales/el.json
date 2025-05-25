@@ -90,7 +90,6 @@
     "locations": {
       "other": "Τοποθεσίες"
     },
-    "logout": "Αποσύνδεση",
     "map": "Χάρτης",
     "name": "Όνομα",
     "password": "Κωδικός",
@@ -358,7 +357,6 @@
       "observed_on": "Παρατηρήθηκε στις {{date}}",
       "photos": "Φωτογραφίες"
     },
-    "update_delete": "Ενημέρωση ή διαγραφή αυτής της αξιολόγησης.",
     "you_reviewed": "Αξιολογήσατε αυτή την τοποθεσία στις {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Ρυθμίσεις email",
     "forgot_password": "Επαναφορά κωδικού",
     "joined_on": "Εγγραφή στις {{date}}",
-    "login": "Σύνδεση",
     "my_activity": "Η δραστηριότητά μου",
     "new_password": "Νέος κωδικός",
     "new_password_confirmation": "Επιβεβαίωση νέου κωδικού",
