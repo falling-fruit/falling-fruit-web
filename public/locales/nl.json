@@ -90,7 +90,6 @@
     "locations": {
       "other": "Locaties"
     },
-    "logout": "Uitloggen",
     "map": "Kaart",
     "name": "Naam",
     "password": "Wachtwoord",
@@ -358,7 +357,6 @@
       "observed_on": "Waargenomen op {{date}}",
       "photos": "Foto's"
     },
-    "update_delete": "Deze recensie bijwerken of verwijderen.",
     "you_reviewed": "U heeft deze locatie beoordeeld op {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "E-mailinstellingen",
     "forgot_password": "Wachtwoord herstellen",
     "joined_on": "Lid sinds {{date}}",
-    "login": "Inloggen",
     "my_activity": "Mijn activiteit",
     "new_password": "Nieuw wachtwoord",
     "new_password_confirmation": "Nieuw wachtwoord bevestiging",

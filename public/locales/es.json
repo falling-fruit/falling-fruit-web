@@ -90,7 +90,6 @@
     "locations": {
       "other": "Ubicaciones"
     },
-    "logout": "Salir",
     "map": "Mapa",
     "name": "Nombre",
     "password": "Contraseña",
@@ -358,7 +357,6 @@
       "observed_on": "Observado el {{date}}",
       "photos": "Fotos"
     },
-    "update_delete": "Actualizar o eliminar esta reseña.",
     "you_reviewed": "Reseñaste esta ubicación el {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Configuración de correo electrónico",
     "forgot_password": "Restablecer su contraseña",
     "joined_on": "Se unió el {{date}}",
-    "login": "Iniciar sesión",
     "my_activity": "Mi actividad",
     "new_password": "Nueva contraseña",
     "new_password_confirmation": "Confirmación de nueva contraseña",

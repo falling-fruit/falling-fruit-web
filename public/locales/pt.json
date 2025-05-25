@@ -90,7 +90,6 @@
     "locations": {
       "other": "Locais"
     },
-    "logout": "Sair",
     "map": "Mapa",
     "name": "Nome",
     "password": "Senha",
@@ -358,7 +357,6 @@
       "observed_on": "Observado em {{date}}",
       "photos": "Fotos"
     },
-    "update_delete": "Atualizar ou excluir esta avaliação.",
     "you_reviewed": "Você avaliou esta localização em {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Configurações de email",
     "forgot_password": "Redefina a sua senha",
     "joined_on": "Entrou em {{date}}",
-    "login": "Login",
     "my_activity": "Minha atividade",
     "new_password": "Senha nova",
     "new_password_confirmation": "Confirmação da senha nova",

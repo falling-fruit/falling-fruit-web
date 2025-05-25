@@ -90,7 +90,6 @@
     "locations": {
       "other": "位置"
     },
-    "logout": "登出",
     "map": "地图",
     "name": "名称",
     "password": "密码",
@@ -358,7 +357,6 @@
       "observed_on": "观察于 {{date}}",
       "photos": "照片"
     },
-    "update_delete": "更新或删除此评论",
     "you_reviewed": "您于 {{date}} 评论了此地点"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "邮箱设置",
     "forgot_password": "重置密码",
     "joined_on": "加入于 {{date}}",
-    "login": "登录",
     "my_activity": "我的活动",
     "new_password": "新密码",
     "new_password_confirmation": "确认新密码",

@@ -90,7 +90,6 @@
     "locations": {
       "other": "מיקומים"
     },
-    "logout": "התנתקות",
     "map": "מפה",
     "name": "שם",
     "password": "סיסמה",
@@ -358,7 +357,6 @@
       "observed_on": "נצפה בתאריך {{date}}",
       "photos": "תמונות"
     },
-    "update_delete": "עדכן או מחק ביקורת זו.",
     "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "הגדרות אימייל",
     "forgot_password": "איפוס סיסמה",
     "joined_on": "הצטרף ב-{{date}}",
-    "login": "התחברות",
     "my_activity": "הפעילות שלי",
     "new_password": "סיסמה חדשה",
     "new_password_confirmation": "אימות סיסמה חדשה",

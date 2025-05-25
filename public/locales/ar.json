@@ -90,7 +90,6 @@
     "locations": {
       "other": "المواقع"
     },
-    "logout": "خروج",
     "map": "خريطة",
     "name": "الاسم",
     "password": "كلمة السر",
@@ -358,7 +357,6 @@
       "observed_on": "تمت الملاحظة في {{date}}",
       "photos": "صور"
     },
-    "update_delete": "تحديث أو حذف هذه المراجعة.",
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "إعدادات البريد الإلكتروني",
     "forgot_password": "اعد ضبط كلمه السر",
     "joined_on": "انضم في {{date}}",
-    "login": "تسجيل الدخول",
     "my_activity": "نشاطي",
     "new_password": "كلمة مرور جديدة",
     "new_password_confirmation": "تأكيد كلمة المرور الجديدة",

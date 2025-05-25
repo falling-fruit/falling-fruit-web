@@ -90,7 +90,6 @@
     "locations": {
       "other": "Lokalizacje"
     },
-    "logout": "Wyloguj",
     "map": "Mapa",
     "name": "Nazwa",
     "password": "Hasło",
@@ -358,7 +357,6 @@
       "observed_on": "Zaobserwowano dnia {{date}}",
       "photos": "Zdjęcia"
     },
-    "update_delete": "Zaktualizuj lub usuń tę recenzję.",
     "you_reviewed": "Zrecenzowałeś/aś tę lokalizację {{date}}"
   },
   "share": {
@@ -395,7 +393,6 @@
     "email_settings": "Ustawienia e-mail",
     "forgot_password": "Zresetuj hasło",
     "joined_on": "Dołączył(a) {{date}}",
-    "login": "Zaloguj się",
     "my_activity": "Moja aktywność",
     "new_password": "Nowe hasło",
     "new_password_confirmation": "Potwierdzenie nowego hasła",
