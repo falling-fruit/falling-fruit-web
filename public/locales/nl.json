@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "my_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld",
       "place": {
         "one": "Plaats",
         "other": "Plaatsen"
@@ -250,7 +249,8 @@
         "visited": "bezocht",
         "visited_by_you": "door jou bezocht"
       },
-      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld"
+      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld",
+      "your_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld"
     },
     "data": {
       "beware_html": "Maar let op! Eenmaal uitgepakt is onze database een enorm bestand dat de meeste rekenbladsoftware zal vernietigen. Als u alleen gegevens nodig hebt voor een kleine regio, probeer dan eerst om deze te downloaden via het geïntegreerde downloadhulpmiddel op de <a href=\"/\">kaart</a>.",

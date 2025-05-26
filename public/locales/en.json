@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "my_activity_empty": "You have not yet added, edited, or reviewed any locations",
       "place": {
         "one": "Place",
         "other": "Places"
@@ -250,7 +249,8 @@
         "visited": "visited",
         "visited_by_you": "visited by you"
       },
-      "user_activity_empty": "This user has not yet added, edited, or reviewed any locations"
+      "user_activity_empty": "This user has not yet added, edited, or reviewed any locations",
+      "your_activity_empty": "You have not yet added, edited, or reviewed any locations"
     },
     "data": {
       "beware_html": "But beware! Once uncompressed, the database is a huge file that will crush most spreadsheet software. If you only need data for a small region, first try retrieving them using the download tool integrated into the <a href=\"/\">map</a>.",

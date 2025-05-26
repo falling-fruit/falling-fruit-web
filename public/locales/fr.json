@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} à {{city}}",
-      "my_activity_empty": "Vous n'avez pas encore ajouté, modifié ou évalué d'emplacements",
       "place": {
         "one": "Lieu",
         "other": "Lieux"
@@ -250,7 +249,8 @@
         "visited": "visité",
         "visited_by_you": "visité par vous"
       },
-      "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué d'emplacements"
+      "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué d'emplacements",
+      "your_activity_empty": "Vous n'avez pas encore ajouté, modifié ou évalué d'emplacements"
     },
     "data": {
       "beware_html": "Attention! Une fois décompressées, les données deviennent un fichier énorme qui écrase la plupart des logiciels de tableur. Si vous recherchez seulement les données d'une zone limitée, essayez d'abord de récupérer les points d'intérêts avec l'outil de téléchargement intégré à la <a href=\"/\">carte</a>.",

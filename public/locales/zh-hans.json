@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "在{{city}}{{type}}",
-      "my_activity_empty": "您还没有添加、编辑或审核任何地点",
       "place": {
         "one": "地点",
         "other": "地点"
@@ -250,7 +249,8 @@
         "visited": "访问",
         "visited_by_you": "由您访问"
       },
-      "user_activity_empty": "该用户还没有添加、编辑或审核任何地点"
+      "user_activity_empty": "该用户还没有添加、编辑或审核任何地点",
+      "your_activity_empty": "您还没有添加、编辑或审核任何地点"
     },
     "data": {
       "beware_html": "但要小心！解压缩后，数据库是一个巨大的文件，它会粉碎大多数电子表格软件。如果您只需要一个小区域的数据，首先尝试使用集成到<a href=\"/\">地图中</a>的下载工具检索它们。",

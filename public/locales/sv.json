@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} i {{city}}",
-      "my_activity_empty": "Du har inte lagt till, redigerat eller granskat några platser än",
       "place": {
         "one": "Plats",
         "other": "Platser"
@@ -250,7 +249,8 @@
         "visited": "besökt",
         "visited_by_you": "besökt av dig"
       },
-      "user_activity_empty": "Denna användare har inte lagt till, redigerat eller granskat några platser än"
+      "user_activity_empty": "Denna användare har inte lagt till, redigerat eller granskat några platser än",
+      "your_activity_empty": "Du har inte lagt till, redigerat eller granskat några platser än"
     },
     "data": {
       "beware_html": "Men se upp! När databasen är okomprimerad är den en enorm fil som kommer att krossa de flesta kalkylprogram. Om du bara behöver data för ett litet område, försök först att hämta dem med hjälp av nedladdningsverktyget som är integrerat i <a href=\"/\">kartan</a>.",

@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} en {{city}}",
-      "my_activity_empty": "Aún no has añadido, editado o revisado ninguna ubicación",
       "place": {
         "one": "Lugar",
         "other": "Lugares"
@@ -250,7 +249,8 @@
         "visited": "visitado",
         "visited_by_you": "visitado por ti"
       },
-      "user_activity_empty": "Este usuario aún no ha añadido, editado o revisado ninguna ubicación"
+      "user_activity_empty": "Este usuario aún no ha añadido, editado o revisado ninguna ubicación",
+      "your_activity_empty": "Aún no has añadido, editado o revisado ninguna ubicación"
     },
     "data": {
       "beware_html": "¡Pero cuidado! Una vez descomprimido, la base de datos es un archivo enorme que aplastará la mayoría del software de hoja de cálculo. Si sólo necesita los datos para una pequeña región, probar primero recuperarlos utilizando la herramienta de descarga integrada en el <a href=\"/\">mapa</a>.",

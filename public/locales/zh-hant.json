@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "在{{city}}{{type}}",
-      "my_activity_empty": "您尚未添加、編輯或審查任何地點",
       "place": {
         "one": "地點",
         "other": "地點"
@@ -250,7 +249,8 @@
         "visited": "訪問",
         "visited_by_you": "由您訪問"
       },
-      "user_activity_empty": "此用戶尚未添加、編輯或審查任何地點"
+      "user_activity_empty": "此用戶尚未添加、編輯或審查任何地點",
+      "your_activity_empty": "您尚未添加、編輯或審查任何地點"
     },
     "data": {
       "beware_html": "但要小心！解壓縮後，數據庫是一個巨大的文件，它會粉碎大多數電子表格軟件。如果您只需要一個小區域的數據，首先嚐試使用集成到<a href=\"/\">地圖中</a>的下載工具檢索它們。",

@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "my_activity_empty": "Non hai ancora aggiunto, modificato o recensito alcuna località",
       "place": {
         "one": "Luogo",
         "other": "Luoghi"
@@ -250,7 +249,8 @@
         "visited": "visitato",
         "visited_by_you": "visitato da te"
       },
-      "user_activity_empty": "Questo utente non ha ancora aggiunto, modificato o recensito alcuna località"
+      "user_activity_empty": "Questo utente non ha ancora aggiunto, modificato o recensito alcuna località",
+      "your_activity_empty": "Non hai ancora aggiunto, modificato o recensito alcuna località"
     },
     "data": {
       "beware_html": "Ma attenzione! Una volta decompresso, il documento è un file enorme che utilizzerà più fogli di calcolo. Se avete bisogno solo dei dati di una piccola regione geografica, provate inizialmente a recuperare i luoghi di interesse utilizzando lo strumento di download integrato nel <a href=\"/\">mappa</a> .",

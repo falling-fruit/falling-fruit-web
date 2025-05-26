@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "my_activity_empty": "Sie haben noch keine Orte hinzugefügt, bearbeitet oder überprüft",
       "place": {
         "one": "Ort",
         "other": "Orte"
@@ -250,7 +249,8 @@
         "visited": "besucht",
         "visited_by_you": "von Ihnen besucht"
       },
-      "user_activity_empty": "Dieser Benutzer hat noch keine Orte hinzugefügt, bearbeitet oder überprüft"
+      "user_activity_empty": "Dieser Benutzer hat noch keine Orte hinzugefügt, bearbeitet oder überprüft",
+      "your_activity_empty": "Sie haben noch keine Orte hinzugefügt, bearbeitet oder überprüft"
     },
     "data": {
       "beware_html": "Aber Vorsicht! Sobald die Daten nicht mehr komprimiert sind, implodiert fast jede Tabellen-Software ab der Datenunmenge! Nur wer daran interessiert ist, mit der gesamten Datenmenge zu arbeiten, sollte diesen Weg gehen. Für alle Anderen ist es die bessere Lösung, selektiv die gewünschten Daten herunterzuladen. Das Download-Tool ist direkt in die <a href=\"/\">Karte</a> integriert.",

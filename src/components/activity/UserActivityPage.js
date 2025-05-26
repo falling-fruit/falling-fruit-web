@@ -175,7 +175,7 @@ const UserActivityPage = () => {
         ) : (
           <p>
             {isCurrentUser
-              ? t('pages.changes.my_activity_empty')
+              ? t('pages.changes.your_activity_empty')
               : t('pages.changes.user_activity_empty')}
           </p>
         ))}

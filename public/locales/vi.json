@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} tại {{city}}",
-      "my_activity_empty": "Bạn chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào",
       "place": {
         "one": "Địa điểm",
         "other": "Địa điểm"
@@ -250,7 +249,8 @@
         "visited": "đã ghé thăm",
         "visited_by_you": "đã được ghé thăm bởi bạn"
       },
-      "user_activity_empty": "Người dùng này chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào"
+      "user_activity_empty": "Người dùng này chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào",
+      "your_activity_empty": "Bạn chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào"
     },
     "data": {
       "beware_html": "Nhưng hãy cẩn thận! Sau khi được giải nén, cơ sở dữ liệu là một tệp lớn có thể nghiền nát hầu hết các phần mềm bảng tính. Nếu bạn chỉ cần dữ liệu cho một khu vực nhỏ, trước tiên hãy thử truy xuất chúng bằng công cụ tải xuống được tích hợp vào <a href=\"/\">bản đồ</a>.",

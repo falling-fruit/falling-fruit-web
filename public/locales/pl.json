@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} w {{city}}",
-      "my_activity_empty": "Nie dodałeś/aś, nie edytowałeś/aś ani nie zrecenzowałeś/aś jeszcze żadnych lokalizacji",
       "place": {
         "one": "Miejsce",
         "other": "Miejsca"
@@ -250,7 +249,8 @@
         "visited": "odwiedzono",
         "visited_by_you": "odwiedzono przez Ciebie"
       },
-      "user_activity_empty": "Ten użytkownik nie dodał, nie edytował ani nie zrecenzował jeszcze żadnych lokalizacji"
+      "user_activity_empty": "Ten użytkownik nie dodał, nie edytował ani nie zrecenzował jeszcze żadnych lokalizacji",
+      "your_activity_empty": "Nie dodałeś/aś, nie edytowałeś/aś ani nie zrecenzowałeś/aś jeszcze żadnych lokalizacji"
     },
     "data": {
       "beware_html": "Uwaga! Po rozpakowaniu baza danych jest ogromnym plikiem, który przytłoczy większość arkuszy kalkulacyjnych. Jeśli potrzebujesz tylko danych dla małego regionu, najpierw spróbuj pobrać je za pomocą narzędzia do pobierania zintegrowanego z <a href=\"/\">mapą</a>.",

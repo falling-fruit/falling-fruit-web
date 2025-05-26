@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "my_activity_empty": "Você ainda não adicionou, editou ou revisou nenhum local",
       "place": {
         "one": "Local",
         "other": "Lugares"
@@ -250,7 +249,8 @@
         "visited": "visitado",
         "visited_by_you": "visitado por você"
       },
-      "user_activity_empty": "Este usuário ainda não adicionou, editou ou revisou nenhum local"
+      "user_activity_empty": "Este usuário ainda não adicionou, editou ou revisou nenhum local",
+      "your_activity_empty": "Você ainda não adicionou, editou ou revisou nenhum local"
     },
     "data": {
       "beware_html": "Mas cuidado! Uma vez descompactado, os dados se tornam um enorme arquivo que faz com que a maioria dos softwares de planilha travem. Se voce precisa de dados apenas para uma regiao especifica, tente primeiro recuperar os pontos de interesse usando a ferramenta de download integrado em  <a href=\"/\">mapa</a>.",
