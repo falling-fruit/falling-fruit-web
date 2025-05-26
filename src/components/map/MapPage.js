@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
@@ -16,7 +15,7 @@ import throttle from '../../utils/throttle'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Share from '../share/Share'
 import ShareIconButton from '../share/ShareIconButton'
-import AddLocationButton from '../ui/AddLocationButton'
+import { AddLocationMobile } from '../ui/AddLocation'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
@@ -185,7 +184,7 @@ const GoogleMapWrapper = ({ onUnmount, ...props }) => {
 }
 
 const MapPage = ({ isDesktop }) => {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
   const handleViewChangeRef = useRef(() => void 0)
@@ -316,14 +315,6 @@ const MapPage = ({ isDesktop }) => {
     }
   }
 
-  const handleAddLocationClick = () => {
-    if (currentZoom >= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-      history.push('/locations/init')
-    } else {
-      toast.info(t('menu.zoom_in_to_add_location'))
-    }
-  }
-
   const zoomIn = () => {
     googleMap?.setZoom(currentZoom + 1)
   }
@@ -351,7 +342,7 @@ const MapPage = ({ isDesktop }) => {
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
       {!isAddingLocation && !isEditingLocation && !isDesktop && (
-        <AddLocationButton onClick={handleAddLocationClick} />
+        <AddLocationMobile />
       )}
       {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
       {!isDesktop && <TrackLocationButton isIcon />}
