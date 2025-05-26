@@ -38,7 +38,7 @@ const useAddLocation = () => {
   const { googleMap } = useSelector((state) => state.map)
 
   const isZoomSufficient =
-    !googleMap || googleMap.getZoom() >= VISIBLE_CLUSTER_ZOOM_LIMIT
+    !googleMap || googleMap.getZoom() > VISIBLE_CLUSTER_ZOOM_LIMIT
 
   const handleAddLocation = () => {
     if (isZoomSufficient) {
