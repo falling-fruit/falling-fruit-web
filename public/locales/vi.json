@@ -393,7 +393,6 @@
     "email_settings": "Cài đặt email",
     "forgot_password": "Đặt lại mật khẩu của bạn",
     "joined_on": "Tham gia vào {{date}}",
-    "my_activity": "Hoạt động của tôi",
     "new_password": "Mật khẩu mới",
     "new_password_confirmation": "Xác nhận mật khẩu mới",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Gửi",
     "send_password_instructions": "Gửi hướng dẫn đặt lại mật khẩu",
     "sign_in": "Đăng nhập",
-    "sign_out": "Đăng xuất"
+    "sign_out": "Đăng xuất",
+    "your_activity": "Hoạt động của bạn"
   }
 }

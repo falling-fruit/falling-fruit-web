@@ -393,7 +393,6 @@
     "email_settings": "Ρυθμίσεις email",
     "forgot_password": "Επαναφορά κωδικού",
     "joined_on": "Εγγραφή στις {{date}}",
-    "my_activity": "Η δραστηριότητά μου",
     "new_password": "Νέος κωδικός",
     "new_password_confirmation": "Επιβεβαίωση νέου κωδικού",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Αποστολή",
     "send_password_instructions": "Αποστολή οδηγιών επαναφοράς κωδικού",
     "sign_in": "Σύνδεση",
-    "sign_out": "Αποσύνδεση"
+    "sign_out": "Αποσύνδεση",
+    "your_activity": "Η δραστηριότητά σας"
   }
 }

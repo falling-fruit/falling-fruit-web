@@ -393,7 +393,6 @@
     "email_settings": "E-posta ayarları",
     "forgot_password": "Şifreni sıfırla",
     "joined_on": "Katılma tarihi: {{date}}",
-    "my_activity": "Aktivitelerim",
     "new_password": "Yeni şifre",
     "new_password_confirmation": "Yeni şifre onayı",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Gönder",
     "send_password_instructions": "Şifre sıfırlama talimatlarını gönder",
     "sign_in": "Oturum aç",
-    "sign_out": "Oturumu kapat"
+    "sign_out": "Oturumu kapat",
+    "your_activity": "Aktiviteleriniz"
   }
 }

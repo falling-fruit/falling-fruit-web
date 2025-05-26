@@ -393,7 +393,6 @@
     "email_settings": "Configurações de email",
     "forgot_password": "Redefina a sua senha",
     "joined_on": "Entrou em {{date}}",
-    "my_activity": "Minha atividade",
     "new_password": "Senha nova",
     "new_password_confirmation": "Confirmação da senha nova",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Enviar",
     "send_password_instructions": "Enviar as instruções para redefinir a minha senha",
     "sign_in": "Entrar",
-    "sign_out": "Sair"
+    "sign_out": "Sair",
+    "your_activity": "Sua atividade"
   }
 }

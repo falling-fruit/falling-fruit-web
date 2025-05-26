@@ -393,7 +393,6 @@
     "email_settings": "邮箱设置",
     "forgot_password": "重置密码",
     "joined_on": "加入于 {{date}}",
-    "my_activity": "我的活动",
     "new_password": "新密码",
     "new_password_confirmation": "确认新密码",
     "options": {
@@ -410,6 +409,7 @@
     "send": "发送",
     "send_password_instructions": "发送密码重置说明",
     "sign_in": "登录",
-    "sign_out": "退出"
+    "sign_out": "退出",
+    "your_activity": "您的活动"
   }
 }

@@ -393,7 +393,6 @@
     "email_settings": "إعدادات البريد الإلكتروني",
     "forgot_password": "اعد ضبط كلمه السر",
     "joined_on": "انضم في {{date}}",
-    "my_activity": "نشاطي",
     "new_password": "كلمة مرور جديدة",
     "new_password_confirmation": "تأكيد كلمة المرور الجديدة",
     "options": {
@@ -410,6 +409,7 @@
     "send": "إرسال",
     "send_password_instructions": "إرسال تعليمات إعادة تعيين كلمة المرور",
     "sign_in": "تسجيل الدخول",
-    "sign_out": "تسجيل الخروج"
+    "sign_out": "تسجيل الخروج",
+    "your_activity": "نشاطك"
   }
 }

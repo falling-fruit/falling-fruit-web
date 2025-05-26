@@ -393,7 +393,6 @@
     "email_settings": "電郵設置",
     "forgot_password": "重置密碼",
     "joined_on": "加入於 {{date}}",
-    "my_activity": "我的活動",
     "new_password": "新密碼",
     "new_password_confirmation": "確認新密碼",
     "options": {
@@ -410,6 +409,7 @@
     "send": "發送",
     "send_password_instructions": "發送密碼重置說明",
     "sign_in": "登錄",
-    "sign_out": "登出"
+    "sign_out": "登出",
+    "your_activity": "您的活動"
   }
 }

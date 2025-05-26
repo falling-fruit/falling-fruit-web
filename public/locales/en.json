@@ -393,7 +393,7 @@
     "email_settings": "Email settings",
     "forgot_password": "Reset your password",
     "joined_on": "Joined on {{date}}",
-    "my_activity": "My activity",
+    "your_activity": "Your activity",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
     "options": {

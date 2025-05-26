@@ -393,7 +393,6 @@
     "email_settings": "הגדרות אימייל",
     "forgot_password": "איפוס סיסמה",
     "joined_on": "הצטרף ב-{{date}}",
-    "my_activity": "הפעילות שלי",
     "new_password": "סיסמה חדשה",
     "new_password_confirmation": "אימות סיסמה חדשה",
     "options": {
@@ -410,6 +409,7 @@
     "send": "שלח",
     "send_password_instructions": "שלח הנחיות איפוס סיסמה",
     "sign_in": "התחברות לחשבון",
-    "sign_out": "התנתק"
+    "sign_out": "התנתק",
+    "your_activity": "הפעילות שלך"
   }
 }

@@ -393,7 +393,6 @@
     "email_settings": "E-postinställningar",
     "forgot_password": "Återställ ditt lösenord",
     "joined_on": "Gick med {{date}}",
-    "my_activity": "Min aktivitet",
     "new_password": "Nytt lösenord",
     "new_password_confirmation": "Bekräfta nytt lösenord",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Skicka",
     "send_password_instructions": "Skicka instruktioner för lösenordsåterställning",
     "sign_in": "Logga in",
-    "sign_out": "Logga ut"
+    "sign_out": "Logga ut",
+    "your_activity": "Din aktivitet"
   }
 }

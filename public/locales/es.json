@@ -393,7 +393,6 @@
     "email_settings": "Configuración de correo electrónico",
     "forgot_password": "Restablecer su contraseña",
     "joined_on": "Se unió el {{date}}",
-    "my_activity": "Mi actividad",
     "new_password": "Nueva contraseña",
     "new_password_confirmation": "Confirmación de nueva contraseña",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Enviar",
     "send_password_instructions": "Enviar instrucciones de recuperación de contraseña",
     "sign_in": "Acceder",
-    "sign_out": "Cerrar sesión"
+    "sign_out": "Cerrar sesión",
+    "your_activity": "Tu actividad"
   }
 }

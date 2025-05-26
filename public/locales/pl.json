@@ -393,7 +393,6 @@
     "email_settings": "Ustawienia e-mail",
     "forgot_password": "Zresetuj hasło",
     "joined_on": "Dołączył(a) {{date}}",
-    "my_activity": "Moja aktywność",
     "new_password": "Nowe hasło",
     "new_password_confirmation": "Potwierdzenie nowego hasła",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Wyślij",
     "send_password_instructions": "Wysyłanie instrukcji resetowania hasła",
     "sign_in": "Zaloguj się",
-    "sign_out": "Wyloguj się"
+    "sign_out": "Wyloguj się",
+    "your_activity": "Twoja aktywność"
   }
 }

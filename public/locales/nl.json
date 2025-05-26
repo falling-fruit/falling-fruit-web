@@ -393,7 +393,6 @@
     "email_settings": "E-mailinstellingen",
     "forgot_password": "Wachtwoord herstellen",
     "joined_on": "Lid sinds {{date}}",
-    "my_activity": "Mijn activiteit",
     "new_password": "Nieuw wachtwoord",
     "new_password_confirmation": "Nieuw wachtwoord bevestiging",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Versturen",
     "send_password_instructions": "Wachtwoordherstelinstructies versturen",
     "sign_in": "Inloggen",
-    "sign_out": "Uitloggen"
+    "sign_out": "Uitloggen",
+    "your_activity": "Jouw activiteit"
   }
 }

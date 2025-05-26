@@ -393,7 +393,6 @@
     "email_settings": "Paramètres de messagerie",
     "forgot_password": "Réinitialiser votre mot de passe",
     "joined_on": "Inscrit le {{date}}",
-    "my_activity": "Mon activité",
     "new_password": "Nouveau mot de passe",
     "new_password_confirmation": "Confirmation du nouveau mot de passe",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Envoyer",
     "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
     "sign_in": "Se connecter",
-    "sign_out": "Se déconnecter"
+    "sign_out": "Se déconnecter",
+    "your_activity": "Votre activité"
   }
 }
