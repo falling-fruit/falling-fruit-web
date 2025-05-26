@@ -50,7 +50,7 @@ const ChangePasswordPage = () => {
 
   return (
     <Page>
-      <h1>{t('users.change_password')}</h1>
+      <h1>{t('users.change_your_password')}</h1>
 
       {user ? (
         <>

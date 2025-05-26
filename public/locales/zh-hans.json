@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "关于你",
-    "change_password": "修改密码",
+    "change_your_password": "更改密码",
     "current_password": "当前密码",
     "edit_account": "编辑账户",
     "email_settings": "邮箱设置",

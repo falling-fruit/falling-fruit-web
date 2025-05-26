@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "Parle-nous de toi",
-    "change_password": "Modifier ton mot de passe",
+    "change_your_password": "Modifier votre mot de passe",
     "current_password": "Mot de passe actuel",
     "edit_account": "Modifier ton compte",
     "email_settings": "Paramètres de messagerie",

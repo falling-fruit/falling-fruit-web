@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "אודותיך",
-    "change_password": "החלף את הסיסמה שלי",
+    "change_your_password": "שנה את הסיסמה שלך",
     "current_password": "סיסמה נוכחית",
     "edit_account": "עריכת החשבון",
     "email_settings": "הגדרות אימייל",

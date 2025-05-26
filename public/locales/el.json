@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "Σχετικά με εσάς",
-    "change_password": "Αλλαγή κωδικού",
+    "change_your_password": "Αλλαγή του κωδικού σας",
     "current_password": "Τρέχων κωδικός",
     "edit_account": "Διόρθωση λογαριασμού",
     "email_settings": "Ρυθμίσεις email",

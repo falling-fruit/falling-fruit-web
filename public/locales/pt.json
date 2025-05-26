@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "Sobre você",
-    "change_password": "Mudar a minha senha",
+    "change_your_password": "Alterar sua senha",
     "current_password": "Senha atual",
     "edit_account": "Editar a conta",
     "email_settings": "Configurações de email",

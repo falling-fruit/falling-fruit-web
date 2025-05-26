@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "Про вас",
-    "change_password": "Змінити мій пароль",
+    "change_your_password": "Змінити ваш пароль",
     "current_password": "Поточний пароль",
     "edit_account": "Редагувати обліковий запис",
     "email_settings": "Налаштування електронної пошти",

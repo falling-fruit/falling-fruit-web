@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "Thông tin về bạn",
-    "change_password": "Thay đổi mật khẩu của tôi",
+    "change_your_password": "Thay đổi mật khẩu của bạn",
     "current_password": "Mật khẩu hiện tại",
     "edit_account": "Chỉnh sửa tài khoản",
     "email_settings": "Cài đặt email",

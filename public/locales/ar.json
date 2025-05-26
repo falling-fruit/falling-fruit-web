@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "حولك",
-    "change_password": "تغيير كلمة السر",
+    "change_your_password": "تغيير كلمة المرور",
     "current_password": "كلمة المرور الحالي",
     "edit_account": "تحرير الحساب",
     "email_settings": "إعدادات البريد الإلكتروني",

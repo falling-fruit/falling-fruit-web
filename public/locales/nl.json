@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "Over u",
-    "change_password": "Mijn wachtwoord wijzigen",
+    "change_your_password": "Wijzig je wachtwoord",
     "current_password": "Huidig wachtwoord",
     "edit_account": "Account bewerken",
     "email_settings": "E-mailinstellingen",

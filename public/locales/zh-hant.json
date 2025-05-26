@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "關於你",
-    "change_password": "修改密碼",
+    "change_your_password": "更改密碼",
     "current_password": "當前密碼",
     "edit_account": "編輯賬戶",
     "email_settings": "電郵設置",

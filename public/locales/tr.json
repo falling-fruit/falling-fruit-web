@@ -387,7 +387,7 @@
   },
   "users": {
     "bio": "Hakkınızda",
-    "change_password": "Şifremi değiştir",
+    "change_your_password": "Şifrenizi değiştirin",
     "current_password": "Mevcut şifre",
     "edit_account": "Hesabı düzenle",
     "email_settings": "E-posta ayarları",
