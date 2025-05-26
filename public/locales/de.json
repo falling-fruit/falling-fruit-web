@@ -3,7 +3,7 @@
     "confirmations": {
       "confirmed": "Dein Konto wurde erfolgreich eröffnet. Du bist jetzt angemeldet.",
       "no_token": "Du kannst diese Seite nicht ohne einen Bestätigungslink aus einer Email aufrufen. Falls du von einer Email kommst, stelle bitte sicher, dass du die vollständige URL verwendest.",
-      "send_instructions": "In wenigen Minuten erhälst du per Mail eine Anleitung, wie du die Eröffnung deines Kontos aktivieren kannst."
+      "send_instructions": "In wenigen Minuten erhältst du per Mail eine Anleitung, wie du die Eröffnung deines Kontos aktivieren kannst."
     },
     "failure": {
       "already_authenticated": "Du bist bereits angemeldet."
@@ -37,7 +37,7 @@
     "auth": {
       "check_failed": "Authentifizierungsprüfung fehlgeschlagen: {{message}}",
       "confirmation_failed": "Kontobestätigung fehlgeschlagen: {{message}}",
-      "expired_refresh_token": "Wir haben Sie nach einer Zeit der Inaktivität abgemeldet. Bitte melden Sie sich erneut an.",
+      "expired_refresh_token": "Wir haben dich nach einer Zeit der Inaktivität abgemeldet. Bitte melde dich erneut an.",
       "password_set_failed": "Festlegen des neuen Passworts fehlgeschlagen: {{message}}",
       "profile_update_failed": "Profilaktualisierung fehlgeschlagen: {{message}}",
       "resend_confirmation_failed": "Erneutes Senden der Bestätigung fehlgeschlagen: {{message}}",
@@ -48,10 +48,10 @@
     "geolocation": {
       "code_2": "Position nicht verfügbar: {{message}}",
       "code_3": "Geolokalisierungs-Timeout: {{message}}",
-      "denied": "Die Erlaubnis zur Nutzung Ihres Standorts wurde verweigert. Um die Geolokalisierung zu aktivieren, erlauben Sie bitte die Standortfreigabe in Ihren Browsereinstellungen und aktualisieren Sie die Seite.",
+      "denied": "Die Erlaubnis zur Nutzung deines Standorts wurde verweigert. Um die Geolokalisierung zu aktivieren, erlaube bitte die Standortfreigabe in deinen Browsereinstellungen und aktualisiere die Seite.",
       "not_supported": "Geolokalisierung wird nicht unterstützt"
     },
-    "language_changed_refresh_to_reload_map": "Sprache geändert. Bitte Seite neu laden, um die Karte zu aktualisieren",
+    "language_changed_refresh_to_reload_map": "Sprache geändert. Bitte lade die Seite neu, um die Karte zu aktualisieren",
     "unknown_error": "Unbekannter Fehler"
   },
   "filter": {
@@ -122,7 +122,7 @@
   },
   "list": {
     "no_results": "Keine Ergebnisse gefunden",
-    "zoom_in": "Zoomen Sie in die Karte, um Standortdaten zu sehen"
+    "zoom_in": "Zoome in die Karte, um Standortdaten zu sehen"
   },
   "locations": {
     "add_new": "Neu hinzufügen",
@@ -171,7 +171,7 @@
     },
     "overview": {
       "added_by": "Hinzugefügt von {{name}}",
-      "added_by_you": "Von Ihnen hinzugefügt",
+      "added_by_you": "Von dir hinzugefügt",
       "date_edited": "Aktualisiert am {{date}}",
       "imported_from": "Importiert von {{name}}",
       "season": {
@@ -188,7 +188,7 @@
     "edit_review": "Bewertung bearbeiten",
     "list": "Liste",
     "settings": "Einstellungen",
-    "zoom_in_to_add_location": "Zoomen Sie hinein, um einen Standort hinzuzufügen"
+    "zoom_in_to_add_location": "Zoome hinein, um einen Standort hinzuzufügen"
   },
   "new_type": {
     "add_type_label": "Typ hinzufügen:",
@@ -230,7 +230,7 @@
       "more_about_html": "Unsere Karte der urbanen Ernte ist nicht die Erste ihrer Art, aber wir haben uns zum Ziel gesetzt, die weltweit umfassenste Datenbank zu bieten. Während unsere Nutzer täglich eigene Standorte hinzufügen, durchsuchen wir das Internet nach bereits bestehenden Datenquellen. Nur so können wir das Wissen Aller vereinen! Die <a href=\"/datasets\">importierten Datensätze</a> reichen von kleinen Quartier-Datensätzen bis zu riesigen Zusammenstellungen von Bauminventaren ganzer Städte. Bis heute sind so {{types}} verschiedene essbare Arten (die meisten - aber nicht alle - pflanzlich) an über {{locations}} Standorten zusammengekommen. Vom Kultivierten und Alltäglichen, zu exotisch Fremdem oder längst vergessenem Einheimischen - die Suche nach Nahrungsmitteln in unseren urbanen Lebensräumen ist nicht selten auch einfach eine ganz spannende Reise durch verschiedene Kulturen und Zeiten.",
       "staff": "Mitarbeiter",
       "translate": "Übersetzen",
-      "translate_for_us_html": "Günstiger als Übersetzer in freiwilliges Engagement? Mailen Sie uns und wir laden Sie zu uns auf <a href=\"https://phrase.com\">Phrase</a>, wo unsere Übersetzungen verwaltet werden.",
+      "translate_for_us_html": "Günstiger als Übersetzer in freiwilliges Engagement? Maile uns und wir laden dich zu uns auf <a href=\"https://phrase.com\">Phrase</a>, wo unsere Übersetzungen verwaltet werden.",
       "translators": "Übersetzern",
       "tristram_stuart_bio_html": "Autor von <a href=\"//tristramstuart.co.uk\">Waste: Uncovering the Global Food Scandal</a> &middot; Gründer der internationalen food-waste Kampagne <a href=\"//feedbackglobal.org\">Feedback Global</a> &middot; National Geographic <a href=\"//www.nationalgeographic.com/explorers/bios/tristram-stuart/\">Emerging Explorer</a>",
       "write": "Schreiben"
@@ -250,7 +250,7 @@
         "visited_by_you": "von Ihnen besucht"
       },
       "user_activity_empty": "Dieser Benutzer hat noch keine Orte hinzugefügt, bearbeitet oder überprüft",
-      "your_activity_empty": "Sie haben noch keine Orte hinzugefügt, bearbeitet oder überprüft"
+      "your_activity_empty": "Du hast noch keine Orte hinzugefügt, bearbeitet oder überprüft"
     },
     "data": {
       "beware_html": "Aber Vorsicht! Sobald die Daten nicht mehr komprimiert sind, implodiert fast jede Tabellen-Software ab der Datenunmenge! Nur wer daran interessiert ist, mit der gesamten Datenmenge zu arbeiten, sollte diesen Weg gehen. Für alle Anderen ist es die bessere Lösung, selektiv die gewünschten Daten herunterzuladen. Das Download-Tool ist direkt in die <a href=\"/\">Karte</a> integriert.",
@@ -410,6 +410,6 @@
     "send_password_instructions": "Anleitung zur Passwort Erneuerung senden",
     "sign_in": "Anmelden",
     "sign_out": "Abmelden",
-    "your_activity": "Ihre Aktivitäten"
+    "your_activity": "Deine Aktivitäten"
   }
 }
