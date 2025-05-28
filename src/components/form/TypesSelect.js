@@ -1,15 +1,24 @@
 import { useFormikContext } from 'formik'
 import { uniqBy } from 'lodash'
+import { transparentize } from 'polished'
 import React, { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import styled from 'styled-components/macro'
 
 import { openAddTypeModal } from '../../redux/typeSlice'
 import { tokenizeQuery } from '../../utils/tokenize'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { TypeName } from '../ui/TypeName'
 import { AddTypeModal } from './AddTypeModal'
-import { CreatableSelect } from './FormikWrappers'
+import { CreatableSelect as BaseCreatableSelect } from './FormikWrappers'
+
+const StyledCreatableSelect = styled(BaseCreatableSelect)`
+  .select__option--is-selected {
+    background-color: ${({ theme }) =>
+      transparentize(0.5, theme.transparentOrange)};
+  }
+`
 
 export const matchFromTokenStart = (candidate, input) => {
   if (!input || candidate.data.__isNew__) {
@@ -54,7 +63,7 @@ const TypesSelect = () => {
 
   return (
     <>
-      <CreatableSelect
+      <StyledCreatableSelect
         name="types"
         label={t('glossary.type.other')}
         options={typeOptions}
