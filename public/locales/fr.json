@@ -2,21 +2,21 @@
   "devise": {
     "confirmations": {
       "confirmed": "Votre compte a été validé. Vous êtes maintenant connecté.",
-      "no_token": "Vous ne pouvez pas accéder à cette page sans passer par un e-mail de validation. Si vous venez en effet d'un tel email, assurez-vous d'utiliser l'URL complète.",
-      "send_instructions": "Vous allez recevoir les instructions nécessaires à la validation de votre compte dans quelques minutes."
+      "no_token": "Tu ne peux pas accéder à cette page sans passer par un e-mail de validation. Si tu viens en effet d'un tel email, assure-toi d'utiliser l'URL complète.",
+      "send_instructions": "Tu vas recevoir les instructions nécessaires à la validation de ton compte dans quelques minutes."
     },
     "failure": {
-      "already_authenticated": "Vous êtes déjà connecté."
+      "already_authenticated": "Tu es déjà connecté."
     },
     "passwords": {
-      "no_token": "Vous ne pouvez pas accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si ce mail ne fonctionne pas, assurez-vous d'utiliser l'URL complète.",
-      "send_instructions": "Vous allez recevoir un email dans quelques instants avec les instructions pour réinitialiser votre mot de passe.",
-      "updated_not_active": "Votre mot de passe a été changé avec succès."
+      "no_token": "Tu ne peux pas accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si ce mail ne fonctionne pas, assure-toi d'utiliser l'URL complète.",
+      "send_instructions": "Tu vas recevoir un email dans quelques instants avec les instructions pour réinitialiser ton mot de passe.",
+      "updated_not_active": "Ton mot de passe a été changé avec succès."
     },
     "registrations": {
-      "signed_up": "Bienvenue ! Votre inscription a bien été enregistrée.",
-      "update_needs_confirmation": "Votre compte a bien été mis à jour mais nous devons vérifier votre nouvelle adresse e-mail. Veuillez consulter votre messagerie et cliquer sur le lien pour confirmer votre nouvelle adresse.",
-      "updated": "Votre compte a bien été mis à jour."
+      "signed_up": "Bienvenue ! Ton inscription a bien été enregistrée.",
+      "update_needs_confirmation": "Ton compte a bien été mis à jour mais nous devons vérifier ta nouvelle adresse e-mail. Merci de consulter ta messagerie et de cliquer sur le lien pour confirmer ta nouvelle adresse.",
+      "updated": "Ton compte a bien été mis à jour."
     }
   },
   "error_message": {
@@ -37,7 +37,7 @@
     "auth": {
       "check_failed": "Échec de la vérification d'authentification : {{message}}",
       "confirmation_failed": "Échec de la confirmation du compte : {{message}}",
-      "expired_refresh_token": "Nous vous avons déconnecté après une période d'inactivité. Veuillez vous reconnecter.",
+      "expired_refresh_token": "Nous t'avons déconnecté après une période d'inactivité. Merci de te reconnecter.",
       "password_set_failed": "Échec de la définition du nouveau mot de passe : {{message}}",
       "profile_update_failed": "Échec de la mise à jour du profil : {{message}}",
       "resend_confirmation_failed": "Échec du renvoi de la confirmation : {{message}}",
@@ -48,10 +48,10 @@
     "geolocation": {
       "code_2": "Position non disponible : {{message}}",
       "code_3": "Délai d'attente de la géolocalisation dépassé : {{message}}",
-      "denied": "L'autorisation d'utiliser votre position a été refusée. Pour activer la géolocalisation, veuillez autoriser le partage de position dans les paramètres de votre navigateur et actualiser la page.",
+      "denied": "L'autorisation d'utiliser ta position a été refusée. Pour activer la géolocalisation, merci d'autoriser le partage de position dans les paramètres de ton navigateur et d'actualiser la page.",
       "not_supported": "Géolocalisation non prise en charge"
     },
-    "language_changed_refresh_to_reload_map": "La langue a été modifiée. Actualisez la page pour recharger la carte.",
+    "language_changed_refresh_to_reload_map": "La langue a été modifiée. Actualise la page pour recharger la carte.",
     "unknown_error": "Erreur inconnue"
   },
   "filter": {
@@ -171,7 +171,7 @@
     },
     "overview": {
       "added_by": "Ajouté par {{name}}",
-      "added_by_you": "Ajouté par vous",
+      "added_by_you": "Ajouté par toi",
       "date_edited": "Modifié le {{date}}",
       "imported_from": "Importé de {{name}}",
       "season": {
@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} à {{city}}",
-      "my_activity_empty": "Vous n'avez pas encore ajouté, modifié ou évalué d'emplacements",
       "place": {
         "one": "Lieu",
         "other": "Lieux"
@@ -246,11 +245,12 @@
         "added": "ajouté",
         "added_by_you": "ajouté par vous",
         "edited": "modifié",
-        "edited_by_you": "modifié par vous",
+        "edited_by_you": "modifié par toi",
         "visited": "visité",
-        "visited_by_you": "visité par vous"
+        "visited_by_you": "visité par toi"
       },
-      "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué d'emplacements"
+      "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué d'emplacements",
+      "your_activity_empty": "Tu n'as pas encore ajouté, modifié ou évalué d'emplacements"
     },
     "data": {
       "beware_html": "Attention! Une fois décompressées, les données deviennent un fichier énorme qui écrase la plupart des logiciels de tableur. Si vous recherchez seulement les données d'une zone limitée, essayez d'abord de récupérer les points d'intérêts avec l'outil de téléchargement intégré à la <a href=\"/\">carte</a>.",
@@ -357,12 +357,12 @@
       "observed_on": "Observé le {{date}}",
       "photos": "Photos"
     },
-    "you_reviewed": "Vous avez évalué cet emplacement le {{date}}"
+    "you_reviewed": "Tu as évalué cet emplacement le {{date}}"
   },
   "share": {
     "title": "Partager cette vue",
-    "url_copied": "URL copiée dans le presse-papiers !",
-    "url_copy_failed": "Échec de la copie de l'URL dans le presse-papiers"
+    "url_copied": "URL copiée dans ton presse-papiers !",
+    "url_copy_failed": "Échec de la copie de l'URL dans ton presse-papiers"
   },
   "success_message": {
     "location_edited": "Emplacement modifié",
@@ -386,14 +386,13 @@
     "pending_review_item": "{{name}} (en attente d'examen)"
   },
   "users": {
-    "bio": "Parlez-nous de vous",
-    "change_password": "Modifier mon mot de passe",
+    "bio": "Parle-nous de toi",
+    "change_your_password": "Modifier votre mot de passe",
     "current_password": "Mot de passe actuel",
-    "edit_account": "Modifier mon compte",
+    "edit_account": "Modifier ton compte",
     "email_settings": "Paramètres de messagerie",
-    "forgot_password": "Réinitialiser votre mot de passe",
+    "forgot_password": "Réinitialiser ton mot de passe",
     "joined_on": "Inscrit le {{date}}",
-    "my_activity": "Mon activité",
     "new_password": "Nouveau mot de passe",
     "new_password_confirmation": "Confirmation du nouveau mot de passe",
     "options": {
@@ -406,10 +405,11 @@
     },
     "remember_me": "Rester connecté",
     "resend_confirmation_instructions": "Renvoyer les instructions de validation",
-    "save_changes": "Enregistrer vos modifications",
+    "save_changes": "Enregistrer tes modifications",
     "send": "Envoyer",
     "send_password_instructions": "Envoyer les instructions de réinitialisation de mot de passe",
     "sign_in": "Se connecter",
-    "sign_out": "Se déconnecter"
+    "sign_out": "Se déconnecter",
+    "your_activity": "Ton activité"
   }
 }

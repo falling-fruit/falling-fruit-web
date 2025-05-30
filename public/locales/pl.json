@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} w {{city}}",
-      "my_activity_empty": "Nie dodałeś/aś, nie edytowałeś/aś ani nie zrecenzowałeś/aś jeszcze żadnych lokalizacji",
       "place": {
         "one": "Miejsce",
         "other": "Miejsca"
@@ -250,7 +249,8 @@
         "visited": "odwiedzono",
         "visited_by_you": "odwiedzono przez Ciebie"
       },
-      "user_activity_empty": "Ten użytkownik nie dodał, nie edytował ani nie zrecenzował jeszcze żadnych lokalizacji"
+      "user_activity_empty": "Ten użytkownik nie dodał, nie edytował ani nie zrecenzował jeszcze żadnych lokalizacji",
+      "your_activity_empty": "Nie dodałeś/aś, nie edytowałeś/aś ani nie zrecenzowałeś/aś jeszcze żadnych lokalizacji"
     },
     "data": {
       "beware_html": "Uwaga! Po rozpakowaniu baza danych jest ogromnym plikiem, który przytłoczy większość arkuszy kalkulacyjnych. Jeśli potrzebujesz tylko danych dla małego regionu, najpierw spróbuj pobrać je za pomocą narzędzia do pobierania zintegrowanego z <a href=\"/\">mapą</a>.",
@@ -387,13 +387,12 @@
   },
   "users": {
     "bio": "O Tobie",
-    "change_password": "Zmień hasło",
+    "change_your_password": "Zmień hasło",
     "current_password": "Aktualne hasło",
     "edit_account": "Edytuj konto",
     "email_settings": "Ustawienia e-mail",
     "forgot_password": "Zresetuj hasło",
     "joined_on": "Dołączył(a) {{date}}",
-    "my_activity": "Moja aktywność",
     "new_password": "Nowe hasło",
     "new_password_confirmation": "Potwierdzenie nowego hasła",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Wyślij",
     "send_password_instructions": "Wysyłanie instrukcji resetowania hasła",
     "sign_in": "Zaloguj się",
-    "sign_out": "Wyloguj się"
+    "sign_out": "Wyloguj się",
+    "your_activity": "Twoja aktywność"
   }
 }

@@ -1,22 +1,22 @@
 {
   "devise": {
     "confirmations": {
-      "confirmed": "Uw e-mailadres is succesvol bevestigd.",
-      "no_token": "U kunt deze pagina niet openen als u deze niet hebt geopend vanuit een bevestigingse-mail. Als u hem niet vanuit daar heeft geopend, zorg er dan voor dat u de volledige opgegeven URL gebruikt.",
-      "send_instructions": "U ontvangt binnen een paar minuten een e-mail met instructies om uw e-mailadres te bevestigen."
+      "confirmed": "Je e-mailadres is succesvol bevestigd.",
+      "no_token": "Je kunt deze pagina niet openen als je deze niet hebt geopend vanuit een bevestigingse-mail. Als je hem niet vanuit daar heeft geopend, zorg er dan voor dat je de volledige opgegeven URL gebruikt.",
+      "send_instructions": "Je ontvangt binnen een paar minuten een e-mail met instructies om je e-mailadres te bevestigen."
     },
     "failure": {
-      "already_authenticated": "U bent al ingelogd."
+      "already_authenticated": "Je bent al ingelogd."
     },
     "passwords": {
-      "no_token": "U kunt deze pagina niet openen als u deze niet hebt geopend vanuit een wachtwoordherstele-mail. Als u hem niet vanuit daar heeft geopend, zorg er dan voor dat u de volledige opgegeven URL gebruikt.",
-      "send_instructions": "U ontvangt binnen een paar minuten een e-mail met instructies om uw wachtwoord te herstellen.",
-      "updated_not_active": "Uw wachtwoord is succesvol gewijzigd."
+      "no_token": "Je kunt deze pagina niet openen als je deze niet hebt geopend vanuit een wachtwoordherstele-mail. Als je hem niet vanuit daar heeft geopend, zorg er dan voor dat je de volledige opgegeven URL gebruikt.",
+      "send_instructions": "Je ontvangt binnen een paar minuten een e-mail met instructies om je wachtwoord te herstellen.",
+      "updated_not_active": "Je wachtwoord is succesvol gewijzigd."
     },
     "registrations": {
-      "signed_up": "Welkom! U heeft uzelf succesvol geregistreerd.",
-      "update_needs_confirmation": "Uw account is succesvol bijgewerkt, maar uw nieuwe e-mailadres moet nog bevestigd worden. Controleer uw e-mail en klik op de bevestigingslink om uw nieuwe e-mailadres te bevestigen.",
-      "updated": "Uw account is succesvol bijgewerkt."
+      "signed_up": "Welkom! Je hebt jezelf succesvol geregistreerd.",
+      "update_needs_confirmation": "Je account is succesvol bijgewerkt, maar je nieuwe e-mailadres moet nog bevestigd worden. Controleer je e-mail en klik op de bevestigingslink om je nieuwe e-mailadres te bevestigen.",
+      "updated": "Je account is succesvol bijgewerkt."
     }
   },
   "error_message": {
@@ -48,7 +48,7 @@
     "geolocation": {
       "code_2": "Positie niet beschikbaar: {{message}}",
       "code_3": "Geolocatie timeout: {{message}}",
-      "denied": "Toestemming om uw locatie te gebruiken is geweigerd. Om geolocatie in te schakelen, sta locatiedeling toe in uw browserinstellingen en vernieuw de pagina.",
+      "denied": "Toestemming om je locatie te gebruiken is geweigerd. Om geolocatie in te schakelen, sta locatiedeling toe in je browserinstellingen en vernieuw de pagina.",
       "not_supported": "Geolocatie wordt niet ondersteund"
     },
     "language_changed_refresh_to_reload_map": "Taal gewijzigd, vernieuw de pagina om de kaart opnieuw te laden",
@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "my_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld",
       "place": {
         "one": "Plaats",
         "other": "Plaatsen"
@@ -250,7 +249,8 @@
         "visited": "bezocht",
         "visited_by_you": "door jou bezocht"
       },
-      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld"
+      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld",
+      "your_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld"
     },
     "data": {
       "beware_html": "Maar let op! Eenmaal uitgepakt is onze database een enorm bestand dat de meeste rekenbladsoftware zal vernietigen. Als u alleen gegevens nodig hebt voor een kleine regio, probeer dan eerst om deze te downloaden via het geïntegreerde downloadhulpmiddel op de <a href=\"/\">kaart</a>.",
@@ -357,7 +357,7 @@
       "observed_on": "Waargenomen op {{date}}",
       "photos": "Foto's"
     },
-    "you_reviewed": "U heeft deze locatie beoordeeld op {{date}}"
+    "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
   },
   "share": {
     "title": "Deel deze weergave",
@@ -386,14 +386,13 @@
     "pending_review_item": "{{name}} (in afwachting van beoordeling)"
   },
   "users": {
-    "bio": "Over u",
-    "change_password": "Mijn wachtwoord wijzigen",
+    "bio": "Over jou",
+    "change_your_password": "Wijzig je wachtwoord",
     "current_password": "Huidig wachtwoord",
     "edit_account": "Account bewerken",
     "email_settings": "E-mailinstellingen",
     "forgot_password": "Wachtwoord herstellen",
     "joined_on": "Lid sinds {{date}}",
-    "my_activity": "Mijn activiteit",
     "new_password": "Nieuw wachtwoord",
     "new_password_confirmation": "Nieuw wachtwoord bevestiging",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Versturen",
     "send_password_instructions": "Wachtwoordherstelinstructies versturen",
     "sign_in": "Inloggen",
-    "sign_out": "Uitloggen"
+    "sign_out": "Uitloggen",
+    "your_activity": "Jouw activiteit"
   }
 }

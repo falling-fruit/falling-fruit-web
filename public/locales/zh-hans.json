@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "在{{city}}{{type}}",
-      "my_activity_empty": "您还没有添加、编辑或审核任何地点",
       "place": {
         "one": "地点",
         "other": "地点"
@@ -250,7 +249,8 @@
         "visited": "访问",
         "visited_by_you": "由您访问"
       },
-      "user_activity_empty": "该用户还没有添加、编辑或审核任何地点"
+      "user_activity_empty": "该用户还没有添加、编辑或审核任何地点",
+      "your_activity_empty": "您还没有添加、编辑或审核任何地点"
     },
     "data": {
       "beware_html": "但要小心！解压缩后，数据库是一个巨大的文件，它会粉碎大多数电子表格软件。如果您只需要一个小区域的数据，首先尝试使用集成到<a href=\"/\">地图中</a>的下载工具检索它们。",
@@ -387,13 +387,12 @@
   },
   "users": {
     "bio": "关于你",
-    "change_password": "修改密码",
+    "change_your_password": "更改密码",
     "current_password": "当前密码",
     "edit_account": "编辑账户",
     "email_settings": "邮箱设置",
     "forgot_password": "重置密码",
     "joined_on": "加入于 {{date}}",
-    "my_activity": "我的活动",
     "new_password": "新密码",
     "new_password_confirmation": "确认新密码",
     "options": {
@@ -410,6 +409,7 @@
     "send": "发送",
     "send_password_instructions": "发送密码重置说明",
     "sign_in": "登录",
-    "sign_out": "退出"
+    "sign_out": "退出",
+    "your_activity": "您的活动"
   }
 }

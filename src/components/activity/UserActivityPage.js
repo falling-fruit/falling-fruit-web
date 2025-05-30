@@ -157,7 +157,7 @@ const UserActivityPage = () => {
       {changes !== undefined && changes.length > 0 && (
         <h2>
           {isCurrentUser ? (
-            t('users.my_activity')
+            t('users.your_activity')
           ) : (
             <>
               {t('glossary.activity')}: {userName}
@@ -175,7 +175,7 @@ const UserActivityPage = () => {
         ) : (
           <p>
             {isCurrentUser
-              ? t('pages.changes.my_activity_empty')
+              ? t('pages.changes.your_activity_empty')
               : t('pages.changes.user_activity_empty')}
           </p>
         ))}

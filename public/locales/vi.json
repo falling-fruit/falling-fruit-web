@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} tại {{city}}",
-      "my_activity_empty": "Bạn chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào",
       "place": {
         "one": "Địa điểm",
         "other": "Địa điểm"
@@ -250,7 +249,8 @@
         "visited": "đã ghé thăm",
         "visited_by_you": "đã được ghé thăm bởi bạn"
       },
-      "user_activity_empty": "Người dùng này chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào"
+      "user_activity_empty": "Người dùng này chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào",
+      "your_activity_empty": "Bạn chưa thêm, chỉnh sửa hoặc đánh giá địa điểm nào"
     },
     "data": {
       "beware_html": "Nhưng hãy cẩn thận! Sau khi được giải nén, cơ sở dữ liệu là một tệp lớn có thể nghiền nát hầu hết các phần mềm bảng tính. Nếu bạn chỉ cần dữ liệu cho một khu vực nhỏ, trước tiên hãy thử truy xuất chúng bằng công cụ tải xuống được tích hợp vào <a href=\"/\">bản đồ</a>.",
@@ -387,13 +387,12 @@
   },
   "users": {
     "bio": "Thông tin về bạn",
-    "change_password": "Thay đổi mật khẩu của tôi",
+    "change_your_password": "Thay đổi mật khẩu của bạn",
     "current_password": "Mật khẩu hiện tại",
     "edit_account": "Chỉnh sửa tài khoản",
     "email_settings": "Cài đặt email",
     "forgot_password": "Đặt lại mật khẩu của bạn",
     "joined_on": "Tham gia vào {{date}}",
-    "my_activity": "Hoạt động của tôi",
     "new_password": "Mật khẩu mới",
     "new_password_confirmation": "Xác nhận mật khẩu mới",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Gửi",
     "send_password_instructions": "Gửi hướng dẫn đặt lại mật khẩu",
     "sign_in": "Đăng nhập",
-    "sign_out": "Đăng xuất"
+    "sign_out": "Đăng xuất",
+    "your_activity": "Hoạt động của bạn"
   }
 }

@@ -2,14 +2,14 @@
   "devise": {
     "confirmations": {
       "confirmed": "Sua conta foi confirmada com sucesso. Você está conectado.",
-      "no_token": "Você não pode acessar essa página sem entrar do email de confirmação. Se viesse do email de confirmação, por favor, certifique-se de usar a URL completa fornecida.",
+      "no_token": "Você não pode acessar essa página sem entrar do email de confirmação. Se você veio do email de confirmação, por favor, certifique-se de usar a URL completa fornecida.",
       "send_instructions": "Você receberá um email em breve com instruções sobre como confirmar a sua conta."
     },
     "failure": {
       "already_authenticated": "Você já está conectado."
     },
     "passwords": {
-      "no_token": "Você não pode acessar essa página sem entrar do email de redefinição de senha. Se viesse do email de redefinição de senha, por favor, certifique-se de copiar e colar a URL (endereço da Web) do link que você recebeu no e-mail no navegador.",
+      "no_token": "Você não pode acessar essa página sem entrar do email de redefinição de senha. Se você veio do email de redefinição de senha, por favor, certifique-se de copiar e colar a URL (endereço da Web) do link que você recebeu no e-mail no navegador.",
       "send_instructions": "Você receberá um email com as instruções de como redefinir a sua senha em poucos minutos.",
       "updated_not_active": "A sua senha foi alterada com sucesso."
     },
@@ -213,7 +213,7 @@
       "closing_remarks": "Considerações finais",
       "closing_remarks_para1_html": "Falling Fruit é uma organização sem fins lucrativos 501(c)3 (isenta de impostos) sediada em Boulder, Colorado. Como resultado, as doações dentro dos Estados Unidos são dedutíveis. Examine a nossa <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">carta de isenção</a> de IRS e verifique a nossa categoria com a <a href=\"https://apps.irs.gov/app/eos/\">Publicação IRS 78</a> ou a <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Secretário de Estado do Colorado</a>. Também estão disponíveis o nosso <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">by-laws</a> e reunião dos conselhos <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">atas</a>.",
       "closing_remarks_para2_html": "Colher alimentos em um cenário urbano vem com algumas considerações práticas e morais. Para uma introdução à ética de coleta urbana, recomenda-se o excelente resumo em nosso site irmão - <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a> - de Portland, Oregon.",
-      "closing_remarks_para3_html": "A Informação do Falling Fruit podde estar incorreta ou desatualizada. Por exemplo, diversos mapas de coleta foram hospedados em páginas públicas do Google Maps em que marcadores eram frequentemente movidos acidentalmente, e inventários de árvores atualizados apenas (se alguma vez) a medida que árvores sao visitadas para manutenção.  Prepare-se para encontrar imprecisoes no campo, e por favor edite o mapa conforme necessario baseado em suas descobertas.  Em última análise, é sua responsabilidade determinar a identidade, se comestível, e a localização da planta, e responsabilidade de todos aprimorar a qualidade do mapa.",
+      "closing_remarks_para3_html": "A Informação do Falling Fruit pode estar incorreta ou desatualizada. Por exemplo, diversos mapas de coleta foram hospedados em páginas públicas do Google Maps em que marcadores eram frequentemente movidos acidentalmente, e inventários de árvores atualizados apenas (se alguma vez) a medida que árvores são visitadas para manutenção. Prepare-se para encontrar imprecisões no campo, e por favor edite o mapa conforme necessário baseado em suas descobertas. Em última análise, é sua responsabilidade determinar a identidade, se comestível, e a localização da planta, e responsabilidade de todos aprimorar a qualidade do mapa.",
       "contact_us_html": "Este site foi construído por e para coletores - nós queremos que seja a melhor ferramenta disponível para o coletor contemporâneo. Escreva-nos em <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, nós gostaríamos de ouvir de você!",
       "craig_durkin_bio_html": "Craig é o cofundador da <a href=\"http://www.concrete-jungle.org/\">Concrete Jungle</a>, uma organização em Atlanta, Georgia que produz alimentos e coleta frutas por toda a cidade para doação a albergues destinados a moradores de ruas e bancos de alimentos. Como estudante de pós graduação da <a href=\"http://www.gatech.edu/\">Georgia Tech</a>, ele está sempre procurando maneiras de combinar a coleta de frutas e novas tecnologias, e em breve estará exibindo seu drone para localização de árvores frutíferas e tweetando seu sensor de amadurecimento de frutas...",
       "cristina_rubke_bio_html": "Cristina é advogada na <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> em São Francisco, Califórnia, onde ela se especializa no trabalho com uso de registro de marcas e advocacia. Ela é também membro do conselho administrativo da <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>, agência encarregada do transporte público, tráfego e estacionamento em São Francisco. Em seu tempo livre, Cristina veleja na baía de São Francisco com a <a href=\"//wwwbaads.org/\">Associação dos Navegantes Deficientes Físicos da Area da Baía</a> competindo em regatas locais e internacionais.",
@@ -237,7 +237,6 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "my_activity_empty": "Você ainda não adicionou, editou ou revisou nenhum local",
       "place": {
         "one": "Local",
         "other": "Lugares"
@@ -250,7 +249,8 @@
         "visited": "visitado",
         "visited_by_you": "visitado por você"
       },
-      "user_activity_empty": "Este usuário ainda não adicionou, editou ou revisou nenhum local"
+      "user_activity_empty": "Este usuário ainda não adicionou, editou ou revisou nenhum local",
+      "your_activity_empty": "Você ainda não adicionou, editou ou revisou nenhum local"
     },
     "data": {
       "beware_html": "Mas cuidado! Uma vez descompactado, os dados se tornam um enorme arquivo que faz com que a maioria dos softwares de planilha travem. Se voce precisa de dados apenas para uma regiao especifica, tente primeiro recuperar os pontos de interesse usando a ferramenta de download integrado em  <a href=\"/\">mapa</a>.",
@@ -387,13 +387,12 @@
   },
   "users": {
     "bio": "Sobre você",
-    "change_password": "Mudar a minha senha",
+    "change_your_password": "Alterar sua senha",
     "current_password": "Senha atual",
     "edit_account": "Editar a conta",
     "email_settings": "Configurações de email",
     "forgot_password": "Redefina a sua senha",
     "joined_on": "Entrou em {{date}}",
-    "my_activity": "Minha atividade",
     "new_password": "Senha nova",
     "new_password_confirmation": "Confirmação da senha nova",
     "options": {
@@ -410,6 +409,7 @@
     "send": "Enviar",
     "send_password_instructions": "Enviar as instruções para redefinir a minha senha",
     "sign_in": "Entrar",
-    "sign_out": "Sair"
+    "sign_out": "Sair",
+    "your_activity": "Sua atividade"
   }
 }
