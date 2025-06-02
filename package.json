@@ -32,6 +32,7 @@
     "i18next": "^20.2.1",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^1.2.2",
+    "lucide-react": "^0.511.0",
     "polished": "^4.1.1",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
@@ -72,7 +73,7 @@
     "prettier": "^3.4.1"
   },
   "scripts": {
-    "start": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "start": "react-scripts start",
     "lint": "yarn lint:check --fix",
     "lint:check": "eslint src --ext js,jsx,ts,tsx",
     "format": "yarn format:output --write",
