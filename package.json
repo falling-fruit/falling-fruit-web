@@ -25,6 +25,7 @@
     "@styled-icons/boxicons-regular": "^10.47.0",
     "@styled-icons/boxicons-solid": "^10.23.0",
     "axios": "^0.21.1",
+    "boxicons": "^2.1.4",
     "coordinate-parser": "^1.0.7",
     "debounce": "^1.2.1",
     "formik": "^2.2.6",

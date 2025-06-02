@@ -1,6 +1,5 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel'
@@ -56,7 +55,7 @@ Carousel.defaultProps = {
   useKeyboardArrows: true,
 }
 
-// Styled arrows using lucide-react icons
+// Styled arrows using boxicons
 const ArrowButton = styled.button`
   position: absolute;
   top: 50%;
@@ -80,9 +79,10 @@ const ArrowButton = styled.button`
     background: ${theme.blue};
   }
 
-  svg {
+  i {
     display: block;
-    stroke: ${theme.secondaryText};
+    font-size: 20px;
+    color: ${theme.secondaryText};
   }
 `
 
@@ -144,10 +144,10 @@ const EntryCarousel = () => {
       {allReviewPhotos.length > 1 && (
         <>
           <LeftArrow onClick={handlePrev}>
-            <ChevronLeft size={20} />
+            <i className="bx bx-chevron-left" />
           </LeftArrow>
           <RightArrow onClick={handleNext}>
-            <ChevronRight size={20} />
+            <i className="bx bx-chevron-right" />
           </RightArrow>
         </>
       )}
