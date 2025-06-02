@@ -8,7 +8,6 @@ import styled from 'styled-components/macro'
 import { theme } from '../../components/ui/GlobalStyle'
 import { openLightbox } from '../../redux/locationSlice'
 
-// Styled Carousel
 const Carousel = styled(ResponsiveCarousel)`
   width: 100%;
   cursor: pointer;
@@ -29,7 +28,7 @@ const Carousel = styled(ResponsiveCarousel)`
     inset-inline-end: 0;
 
     @media (max-width: ${theme.device.mobile}) {
-      display: none; /* Hide bottom dots on mobile */
+      display: none;
     }
 
     .dot {
@@ -55,22 +54,20 @@ Carousel.defaultProps = {
   useKeyboardArrows: true,
 }
 
-// Styled arrows using boxicons
 const ArrowButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px; /* Larger click target */
-  height: 32px; /* Larger click target */
+  width: 32px;
+  height: 32px;
   background: ${theme.secondaryBackground};
   border: none;
   border-radius: 50%;
-  padding: 6px; /* Padding for centering icon */
-  z-index: 20; /* Increased to avoid potential overlap */
+  padding: 6px;
+  z-index: 20;
   cursor: pointer;
   transition: background 0.3s;
 
-  /* Show arrows only on mobile */
   @media (min-width: ${theme.device.desktop}) {
     display: none;
   }
@@ -86,14 +83,12 @@ const ArrowButton = styled.button`
   }
 `
 
-const LeftArrow = styled(ArrowButton)`
-  left: 10px;
-  aria-label="Previous photo"; /* Accessibility */
+const BackArrow = styled(ArrowButton)`
+  inset-inline-start: 10px;
 `
 
-const RightArrow = styled(ArrowButton)`
-  right: 10px;
-  aria-label="Next photo"; /* Accessibility */
+const ForwardArrow = styled(ArrowButton)`
+  inset-inline-end: 10px;
 `
 
 const EntryCarousel = () => {
@@ -143,12 +138,16 @@ const EntryCarousel = () => {
 
       {allReviewPhotos.length > 1 && (
         <>
-          <LeftArrow onClick={handlePrev}>
-            <i className="bx bx-chevron-left" />
-          </LeftArrow>
-          <RightArrow onClick={handleNext}>
-            <i className="bx bx-chevron-right" />
-          </RightArrow>
+          {currentSlide > 0 && (
+            <BackArrow onClick={handlePrev} aria-label="Previous photo">
+              <i className="bx bx-chevron-left" />
+            </BackArrow>
+          )}
+          {currentSlide < allReviewPhotos.length - 1 && (
+            <ForwardArrow onClick={handleNext} aria-label="Next photo">
+              <i className="bx bx-chevron-right" />
+            </ForwardArrow>
+          )}
         </>
       )}
     </div>
