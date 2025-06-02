@@ -1,37 +1,15 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel'
 import styled from 'styled-components/macro'
 
+import { theme } from '../../components/ui/GlobalStyle'
 import { openLightbox } from '../../redux/locationSlice'
 
-// Styled component for side dots
-const SideDot = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  z-index: 10;
-  transition: background 0.3s;
-  &:hover {
-    background: #fff;
-  }
-`
-
-const LeftDot = styled(SideDot)`
-  left: 10px;
-`
-
-const RightDot = styled(SideDot)`
-  right: 10px;
-`
-
+// Styled Carousel
 const Carousel = styled(ResponsiveCarousel)`
   width: 100%;
   cursor: pointer;
@@ -51,7 +29,7 @@ const Carousel = styled(ResponsiveCarousel)`
     width: auto;
     inset-inline-end: 0;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${theme.device.mobile}) {
       display: none; /* Hide bottom dots on mobile */
     }
 
@@ -59,13 +37,12 @@ const Carousel = styled(ResponsiveCarousel)`
       height: 10px;
       width: 10px;
       opacity: 1;
-      margin-block: 0;
       margin-inline: 0 10px;
-      box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
-      background: ${({ theme }) => theme.secondaryBackground};
+      box-shadow: 0px 4px 4px ${theme.shadow};
+      background: ${theme.secondaryBackground};
 
       &.selected {
-        background: ${({ theme }) => theme.orange};
+        background: ${theme.orange};
       }
     }
   }
@@ -78,6 +55,46 @@ Carousel.defaultProps = {
   emulateTouch: true,
   useKeyboardArrows: true,
 }
+
+// Styled arrows using lucide-react icons
+const ArrowButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px; /* Larger click target */
+  height: 32px; /* Larger click target */
+  background: ${theme.secondaryBackground};
+  border: none;
+  border-radius: 50%;
+  padding: 6px; /* Padding for centering icon */
+  z-index: 20; /* Increased to avoid potential overlap */
+  cursor: pointer;
+  transition: background 0.3s;
+
+  /* Show arrows only on mobile */
+  @media (min-width: ${theme.device.desktop}) {
+    display: none;
+  }
+
+  &:hover {
+    background: ${theme.blue};
+  }
+
+  svg {
+    display: block;
+    stroke: ${theme.secondaryText};
+  }
+`
+
+const LeftArrow = styled(ArrowButton)`
+  left: 10px;
+  aria-label="Previous photo"; /* Accessibility */
+`
+
+const RightArrow = styled(ArrowButton)`
+  right: 10px;
+  aria-label="Next photo"; /* Accessibility */
+`
 
 const EntryCarousel = () => {
   const dispatch = useDispatch()
@@ -93,15 +110,15 @@ const EntryCarousel = () => {
     .flat()
 
   const handlePrev = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? allReviewPhotos.length - 1 : prev - 1,
-    )
+    if (currentSlide > 0) {
+      setCurrentSlide((prev) => prev - 1)
+    }
   }
 
   const handleNext = () => {
-    setCurrentSlide((prev) =>
-      prev === allReviewPhotos.length - 1 ? 0 : prev + 1,
-    )
+    if (currentSlide < allReviewPhotos.length - 1) {
+      setCurrentSlide((prev) => prev + 1)
+    }
   }
 
   if (allReviewPhotos.length === 0) {
@@ -123,10 +140,15 @@ const EntryCarousel = () => {
           <img key={photo.id} src={photo.medium} alt="entry" />
         ))}
       </Carousel>
+
       {allReviewPhotos.length > 1 && (
         <>
-          <LeftDot onClick={handlePrev} />
-          <RightDot onClick={handleNext} />
+          <LeftArrow onClick={handlePrev}>
+            <ChevronLeft size={20} />
+          </LeftArrow>
+          <RightArrow onClick={handleNext}>
+            <ChevronRight size={20} />
+          </RightArrow>
         </>
       )}
     </div>
