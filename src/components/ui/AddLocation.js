@@ -10,7 +10,6 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import Button from './Button'
 import IconButton from './IconButton'
 
-// Mobile version
 const StyledAddLocationButton = styled(IconButton)`
   position: absolute;
   inset-block-end: 10px;
@@ -20,7 +19,6 @@ const StyledAddLocationButton = styled(IconButton)`
   cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
 `
 
-// Desktop version
 const AddLocationDesktopButton = styled(Button)`
   margin-inline: 0.75em;
   margin-block-start: 0;
@@ -31,8 +29,7 @@ const AddLocationDesktopButton = styled(Button)`
   cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
 `
 
-// Shared logic for adding a location
-const useAddLocation = () => {
+const useAddLocation = (addLocationPath) => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const { googleMap } = useSelector((state) => state.map)
@@ -42,7 +39,7 @@ const useAddLocation = () => {
 
   const handleAddLocation = () => {
     if (isZoomSufficient) {
-      history.push('/locations/new')
+      history.push(addLocationPath)
     } else {
       toast.info(t('menu.zoom_in_to_add_location'))
     }
@@ -56,7 +53,8 @@ const useAddLocation = () => {
 
 export const AddLocationMobile = () => {
   const { t } = useTranslation()
-  const { handleAddLocation, isZoomSufficient } = useAddLocation()
+  const { handleAddLocation, isZoomSufficient } =
+    useAddLocation('/locations/init')
 
   return (
     <StyledAddLocationButton
@@ -72,7 +70,8 @@ export const AddLocationMobile = () => {
 
 export const AddLocationDesktop = () => {
   const { t } = useTranslation()
-  const { handleAddLocation, isZoomSufficient } = useAddLocation()
+  const { handleAddLocation, isZoomSufficient } =
+    useAddLocation('/locations/new')
 
   return (
     <AddLocationDesktopButton
