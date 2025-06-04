@@ -326,19 +326,7 @@ const MapPage = ({ isDesktop }) => {
     setShareOpen((prev) => !prev)
   }, [])
   return (
-    <div
-      style={
-        isDesktop
-          ? { width: '100%', height: '100%', position: 'relative' }
-          : {
-              width: '100%',
-              position: 'absolute',
-              insetBlockStart: '48px',
-              insetBlockEnd: '50px',
-              insetInline: 0,
-            }
-      }
-    >
+    <>
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
       {!isAddingLocation && !isEditingLocation && !isDesktop && (
@@ -523,7 +511,7 @@ const MapPage = ({ isDesktop }) => {
           )}
         </GoogleMapWrapper>
       )}
-    </div>
+    </>
   )
 }
 

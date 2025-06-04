@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import {
@@ -11,12 +10,6 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import Spinner from '../ui/Spinner'
 import { NoResultsFound, ShouldZoomIn } from './ListLoading'
 import Locations from './Locations'
-
-// Allow space for 80px search bar and 8px border
-const ListPageWrapper = styled.div`
-  margin-block-start: 88px;
-  overflow: scroll;
-`
 
 const ListPage = () => {
   const dispatch = useDispatch()
@@ -37,39 +30,36 @@ const ListPage = () => {
     }
   }, [dispatch, locationsAvailable, locationsInvalid])
 
-  let inner
-
   if (!locationsAvailable) {
-    inner = <Spinner />
-  } else if (lastMapView.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
-    inner = <ShouldZoomIn />
-  } else if (
-    locations.length === 0 &&
-    !isNextPageLoading &&
-    !locationsInvalid
-  ) {
-    inner = <NoResultsFound />
-  } else if (locations.length === 0) {
-    inner = <div />
-  } else {
-    inner = (
-      <Locations
-        itemCount={totalLocations}
-        locations={locations}
-        loadNextPage={() => {
-          if (!isNextPageLoading) {
-            dispatch(fetchListLocationsExtend(locations))
-          }
-        }}
-        isNextPageLoading={isNextPageLoading}
-        onLocationClick={(locationId) => {
-          history.push(`/list-locations/${locationId}`)
-        }}
-      />
-    )
+    return <Spinner />
   }
 
-  return <ListPageWrapper>{inner}</ListPageWrapper>
+  if (lastMapView.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
+    return <ShouldZoomIn />
+  }
+
+  if (locations.length === 0 && !isNextPageLoading && !locationsInvalid) {
+    return <NoResultsFound />
+  }
+
+  if (locations.length === 0) {
+    return <div />
+  }
+  return (
+    <Locations
+      itemCount={totalLocations}
+      locations={locations}
+      loadNextPage={() => {
+        if (!isNextPageLoading) {
+          dispatch(fetchListLocationsExtend(locations))
+        }
+      }}
+      isNextPageLoading={isNextPageLoading}
+      onLocationClick={(locationId) => {
+        history.push(`/list-locations/${locationId}`)
+      }}
+    />
+  )
 }
 
 export default ListPage

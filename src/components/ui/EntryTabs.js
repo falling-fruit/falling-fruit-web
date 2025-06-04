@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 
+import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
 import { PageTabs } from '../ui/PageTabs'
 
 const EntryTabs = styled(PageTabs)`
@@ -10,7 +11,7 @@ const EntryTabs = styled(PageTabs)`
   }
 
   [data-reach-tab-list] {
-    height: 50px;
+    height: ${TABS_HEIGHT_PX}px;
     position: sticky;
     z-index: 2;
     top: 0;

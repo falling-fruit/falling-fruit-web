@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 
+import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
 import BackButton from './BackButton'
 
 const StyledBackButton = styled(BackButton)`
@@ -14,7 +15,7 @@ const StyledBackButton = styled(BackButton)`
 `
 
 const StyledTopBarNav = styled.div`
-  height: 50px;
+  height: ${TABS_HEIGHT_PX}px;
 
   display: flex;
   justify-content: space-between;
