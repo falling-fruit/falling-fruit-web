@@ -1,7 +1,12 @@
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
+import styled from 'styled-components/macro'
 
+import {
+  NAVIGATION_BAR_HEIGHT_PX,
+  TABS_HEIGHT_PX,
+} from '../../constants/mobileLayout'
 import aboutRoutes from '../about/aboutRoutes'
 import accountRoutes from '../account/accountRoutes'
 import activityRoutes from '../activity/activityRoutes'
@@ -20,6 +25,21 @@ import EditLocationPositionNav from './EditLocationPositionNav'
 import InitLocationNav from './InitLocationNav'
 import NavigationBar from './NavigationBar'
 import Tabs from './Tabs'
+
+const MapContainer = styled.div`
+  display: ${(props) => (props.show ? 'block' : 'none')};
+  position: absolute;
+  inset-block-start: ${NAVIGATION_BAR_HEIGHT_PX}px;
+  inset-block-end: ${TABS_HEIGHT_PX}px;
+  inset-inline: 0;
+`
+
+const ListPageWrapper = styled.div`
+  height: 100%;
+  overflow: scroll;
+  margin-block-start: ${NAVIGATION_BAR_HEIGHT_PX}px;
+  padding-top: 4px;
+`
 
 const shouldDisplayMapPage = (pathname) => {
   if (matchPath(pathname, { path: '/map', exact: false, strict: false })) {
@@ -78,18 +98,9 @@ const MobileLayout = () => {
       </Helmet>
       <PageTabs index={tabIndex} onChange={handleTabChange}>
         <Switch>{formRoutesMobile}</Switch>
-        <div
-          style={{
-            display: shouldDisplayMapPage(pathname) ? 'block' : 'none',
-            position: 'absolute',
-            insetBlockStart: '30px',
-            insetBlockEnd: '0px',
-            insetInline: 0,
-            zIndex: 1,
-          }}
-        >
+        <MapContainer show={shouldDisplayMapPage(pathname)}>
           <MapPage />
-        </div>
+        </MapContainer>
         {connectRoutes}
         <Switch>
           <Route
@@ -134,7 +145,9 @@ const MobileLayout = () => {
                   </Switch>
                   <Switch>
                     <Route path="/list">
-                      <ListPage />
+                      <ListPageWrapper>
+                        <ListPage />
+                      </ListPageWrapper>
                     </Route>
                     <Route path="/settings">
                       <SettingsPage />
@@ -150,14 +163,14 @@ const MobileLayout = () => {
                   (!match.params.postfix ||
                     match.params.postfix === 'position') && (
                     <>
-                      <div style={{ paddingBlockEnd: '50px' }} />
+                      <div style={{ paddingBlockEnd: `${TABS_HEIGHT_PX}px` }} />
                       <TabList
                         style={{
                           zIndex: zIndex.mobileTablist,
                           position: 'fixed',
                           width: '100%',
                           insetBlockEnd: 0,
-                          height: '50px',
+                          height: `${TABS_HEIGHT_PX}px`,
                         }}
                       >
                         {tabContent}

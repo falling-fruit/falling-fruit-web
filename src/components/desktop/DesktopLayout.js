@@ -42,11 +42,6 @@ const StyledSplit = styled(SplitPane)`
   }
 `
 
-const MapPane = styled.div`
-  width: 100%;
-  height: 100%;
-`
-
 const DesktopLayout = () => (
   // Hack: must use WindowSize here because react-split-pane doesn't allow for
   // a non-numerical maxSize like "21.5vw"
@@ -69,9 +64,7 @@ const DesktopLayout = () => (
               defaultSize={DEFAULT_PANE_WIDTH(vw)}
             >
               <SidePane />
-              <MapPane>
-                <MapPage isDesktop />
-              </MapPane>
+              <MapPage isDesktop />
             </StyledSplit>
           )}
         </WindowSize>

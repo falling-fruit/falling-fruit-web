@@ -4,6 +4,8 @@ import { Tabs } from '@reach/tabs'
 import { StyledIconBase } from '@styled-icons/styled-icon'
 import styled from 'styled-components/macro'
 
+import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
+
 const PageTabs = styled(Tabs)`
   display: flex;
   flex-direction: column;
@@ -22,7 +24,7 @@ const PageTabs = styled(Tabs)`
 
   [data-reach-tab-list] {
     display: flex;
-    height: 50px;
+    height: ${TABS_HEIGHT_PX}px;
 
     background: ${({ theme }) => theme.background};
     // Moves tab buttons above home bar on iOS mobile
