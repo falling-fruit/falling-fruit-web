@@ -362,6 +362,8 @@
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Trang web đầy đủ",
+    "simplified_controls_only": "Chỉ hiển thị điều khiển đơn giản",
     "title": "Chia sẻ góc nhìn này",
     "url_copied": "Đã sao chép URL vào bộ nhớ tạm!",
     "url_copy_failed": "Không thể sao chép URL vào bộ nhớ tạm"

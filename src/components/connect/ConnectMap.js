@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setInitialView } from '../../redux/mapSlice'
-import { parseCurrentUrl } from '../../utils/appUrl'
+import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 
 const DEFAULT_LAT = 40.1125785
@@ -15,8 +15,7 @@ const ConnectMap = () => {
   const { lastMapView } = useSelector((state) => state.viewport)
   const hasInitialView = !!initialView
   const history = useAppHistory()
-  const parsedUrl = parseCurrentUrl()
-  const view = parsedUrl.view ||
+  const view = viewFromCurrentUrl() ||
     lastMapView || {
       center: { lat: DEFAULT_LAT, lng: DEFAULT_LNG },
       zoom: DEFAULT_ZOOM,
@@ -29,13 +28,13 @@ const ConnectMap = () => {
   }, [dispatch, hasInitialView]) //eslint-disable-line
 
   useEffect(() => {
-    if (hasInitialView && !parsedUrl.view && googleMap) {
+    if (hasInitialView && !viewFromCurrentUrl() && googleMap) {
       history.replaceView({
         center: googleMap.getCenter().toJSON(),
         zoom: googleMap.getZoom(),
       })
     }
-  }, [dispatch, hasInitialView, !!parsedUrl.view, !!googleMap]) //eslint-disable-line
+  }, [dispatch, hasInitialView, !!viewFromCurrentUrl(), !!googleMap]) //eslint-disable-line
 
   return null
 }

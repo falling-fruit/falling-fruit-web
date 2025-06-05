@@ -10,10 +10,48 @@ import MainPage from './components/MainPage'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Toast from './components/ui/Toast'
 import { store } from './redux/store'
-import { pathWithCurrentView } from './utils/appUrl'
+import { addParam, pathWithCurrentView, pathWithView } from './utils/appUrl'
 import AuthInitializer from './utils/AuthInitializer'
 import { ConnectedBreakpoint, useIsDesktop } from './utils/useBreakpoint'
 import { useGoogleAnalytics } from './utils/useGoogleAnalytics'
+
+const EmbedRedirect = () => {
+  const mapPath = pathWithCurrentView('/map')
+  const pathWithEmbed = addParam(mapPath, 'embed', 'true')
+  return <Redirect to={pathWithEmbed} />
+}
+
+const DumpstersRedirect = () => {
+  const mapPath = pathWithCurrentView('/map')
+  const pathWithCategory = addParam(mapPath, 'c', 'freegan')
+  return <Redirect to={pathWithCategory} />
+}
+
+const GrafterRedirect = () => {
+  const mapPath = pathWithCurrentView('/map')
+  const pathWithCategory = addParam(mapPath, 'c', 'grafter')
+  return <Redirect to={pathWithCategory} />
+}
+
+const CommunityFruitTreesRedirect = () => {
+  const view = {
+    center: { lat: 38.48128, lng: -99.09492 },
+    zoom: 5,
+  }
+  let mapPath = pathWithView('/map', view)
+  mapPath = addParam(mapPath, 'f', '4628')
+  return <Redirect to={mapPath} />
+}
+
+const SeedLibraryRedirect = () => {
+  const view = {
+    center: { lat: 38.48128, lng: -99.09492 },
+    zoom: 5,
+  }
+  let mapPath = pathWithView('/map', view)
+  mapPath = addParam(mapPath, 'f', '3082')
+  return <Redirect to={mapPath} />
+}
 
 const HomeRedirect = () => {
   const { user, isLoading } = useSelector((state) => state.auth)
@@ -46,6 +84,26 @@ const AppContent = () => {
         <Switch>
           <Route exact path="/">
             <HomeRedirect />
+          </Route>
+          <Route path="/locations/embed">
+            <EmbedRedirect />
+          </Route>
+          <Route path={['/dumpsters', '/freegan']}>
+            <DumpstersRedirect />
+          </Route>
+          <Route path="/grafter">
+            <GrafterRedirect />
+          </Route>
+          <Route path="/communityfruittrees">
+            <CommunityFruitTreesRedirect />
+          </Route>
+          <Route path={['/seedlibrary', '/seedlibraries']}>
+            <SeedLibraryRedirect />
+          </Route>
+          <Route
+            path={['/home', '/locations/home', '/routes', '/routes/:routeId']}
+          >
+            <Redirect to={pathWithCurrentView('/map')} />
           </Route>
           <Route>
             <MainPage />

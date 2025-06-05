@@ -362,6 +362,8 @@
     "you_reviewed": "您于 {{date}} 评论了此地点"
   },
   "share": {
+    "leave_embed_view_for_full_site": "完整网站",
+    "simplified_controls_only": "仅显示简化控件",
     "title": "分享此视图",
     "url_copied": "网址已复制到剪贴板！",
     "url_copy_failed": "复制网址到剪贴板失败"

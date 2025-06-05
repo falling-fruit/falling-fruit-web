@@ -362,6 +362,8 @@
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Tam site",
+    "simplified_controls_only": "Sadece basitleştirilmiş kontroller",
     "title": "Bu görünümü paylaş",
     "url_copied": "URL panoya kopyalandı!",
     "url_copy_failed": "URL panoya kopyalanamadı"

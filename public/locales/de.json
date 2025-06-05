@@ -362,6 +362,8 @@
     "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Vollständige Website",
+    "simplified_controls_only": "Nur vereinfachte Steuerung",
     "title": "Diese Ansicht teilen",
     "url_copied": "URL in die Zwischenablage kopiert!",
     "url_copy_failed": "URL konnte nicht in die Zwischenablage kopiert werden"

@@ -72,44 +72,6 @@ const DummyElementFixingScrollbarInsideTabPanel = styled.div`
   height: ${(props) => props.height}px;
 `
 
-const TopRibbonButtons = ({ hasImages, drawerDisabled, onBackButtonClick }) => {
-  const history = useAppHistory()
-  const dispatch = useDispatch()
-  const { locationId } = useSelector((state) => state.location)
-
-  return (
-    <StyledButtons whiteBackground={!hasImages}>
-      <EntryButton
-        onClick={
-          drawerDisabled ? () => history.push('/list') : onBackButtonClick
-        }
-        icon={<ReturnIcon />}
-        label="back-button"
-      />
-      <div>
-        {drawerDisabled && (
-          <EntryButton
-            onClick={(event) => {
-              event.stopPropagation()
-              dispatch(reenableAndPartiallyClosePaneDrawer())
-            }}
-            icon={<MapIcon />}
-            label="map-button"
-          />
-        )}
-        <EntryButton
-          onClick={(event) => {
-            event.stopPropagation()
-            history.push(`/locations/${locationId}/edit`)
-          }}
-          icon={<PencilIcon />}
-          label="edit-button"
-        />
-      </div>
-    </StyledButtons>
-  )
-}
-
 const StyledButtons = styled.div`
   position: absolute;
   inset-inline: 0;
@@ -162,10 +124,18 @@ const EntryMobile = () => {
   const dispatch = useDispatch()
   const history = useAppHistory()
   const {
+    locationId,
     reviews,
     isLoading,
-    pane: { drawerFullyOpen, tabIndex, drawerDisabled },
+    pane: {
+      drawerFullyOpen,
+      tabIndex,
+      isFromListLocations,
+      isFromEmbedViewMap,
+    },
   } = useSelector((state) => state.location)
+
+  const drawerDisabled = isFromEmbedViewMap || isFromListLocations
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
@@ -177,11 +147,6 @@ const EntryMobile = () => {
   const [progress, setProgress] = useState(
     drawerFullyOpen || drawerDisabled ? 1 : 0.3,
   )
-  const onBackButtonClick = (e) => {
-    e.stopPropagation()
-    dispatch(partiallyClosePaneDrawer())
-  }
-
   if (isLoading) {
     return null
   }
@@ -259,12 +224,43 @@ const EntryMobile = () => {
           </TabPanels>
         </EntryTabs>
       </DraggablePane>
-      {(drawerFullyOpen || drawerDisabled) && (
-        <TopRibbonButtons
-          hasImages={hasImages}
-          drawerDisabled={drawerDisabled}
-          onBackButtonClick={onBackButtonClick}
-        />
+      {drawerFullyOpen && (
+        <StyledButtons whiteBackground={!hasImages}>
+          <EntryButton
+            onClick={
+              isFromEmbedViewMap
+                ? () => history.push('/map')
+                : isFromListLocations
+                  ? () => history.push('/list')
+                  : (e) => {
+                      e.stopPropagation()
+                      dispatch(partiallyClosePaneDrawer())
+                    }
+            }
+            icon={<ReturnIcon />}
+            label="back-button"
+          />
+          <div>
+            {isFromListLocations && (
+              <EntryButton
+                onClick={(event) => {
+                  event.stopPropagation()
+                  dispatch(reenableAndPartiallyClosePaneDrawer())
+                }}
+                icon={<MapIcon />}
+                label="map-button"
+              />
+            )}
+            <EntryButton
+              onClick={(event) => {
+                event.stopPropagation()
+                history.push(`/locations/${locationId}/edit`)
+              }}
+              icon={<PencilIcon />}
+              label="edit-button"
+            />
+          </div>
+        </StyledButtons>
       )}
     </>
   )

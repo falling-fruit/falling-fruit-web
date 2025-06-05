@@ -362,6 +362,8 @@
     "you_reviewed": "Reseñaste esta ubicación el {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Sitio completo",
+    "simplified_controls_only": "Solo controles simplificados",
     "title": "Compartir esta vista",
     "url_copied": "¡URL copiada al portapapeles!",
     "url_copy_failed": "¡Error al copiar la URL al portapapeles!"

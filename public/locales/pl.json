@@ -362,6 +362,8 @@
     "you_reviewed": "Zrecenzowałeś/aś tę lokalizację {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Pełna strona",
+    "simplified_controls_only": "Tylko uproszczone sterowanie",
     "title": "Udostępnij ten widok",
     "url_copied": "URL skopiowany do schowka!",
     "url_copy_failed": "Nie udało się skopiować URL do schowka"
