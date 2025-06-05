@@ -14,11 +14,12 @@ const MobileHeader = styled.div`
   img {
     height: 10vh;
     width: auto;
+    max-width: 150px;
   }
 `
 
 const LanguageContainer = styled.div`
-  margin-inline-start: auto;
+  margin-left: auto;
   max-width: 120px;
   text-align: start;
 `
@@ -26,51 +27,52 @@ const LanguageContainer = styled.div`
 const PageScrollWrapper = styled.div`
   width: 100%;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `
 
 const PageWrapper = styled.article`
   max-width: 950px;
   width: 66%;
-  height: inherit;
+  min-height: 100vh;
   margin: 28px auto;
   overflow-wrap: break-word;
   font-family: ${({ theme }) => theme.fonts};
   font-style: normal;
   box-sizing: border-box;
+  padding-bottom: 50px;
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
-    padding-block: 0 20px;
-    padding-inline: 23px;
-    margin-block: 28px 0;
-    margin-inline: auto;
+    padding: 0 20px 40px 20px;
+    margin: 28px 0 0 0;
   }
 
   h1,
   h2,
   h3 {
     color: ${({ theme }) => theme.secondaryText};
-    font-weight: bold;
+    font-weight: 700;
+    margin-top: 1em;
   }
 
   h1 {
-    margin-block-start: 0.5em;
-    font-size: 2.286rem;
+    font-size: 2.3rem;
   }
 
   h2 {
-    font-size: 1.857rem;
+    font-size: 1.85rem;
   }
 
   h3 {
-    font-size: 1.429rem;
+    font-size: 1.45rem;
   }
 
-  a,
-  p {
-    font-weight: normal;
+  p,
+  a {
+    font-weight: 400;
     font-size: 1rem;
     line-height: 1.5;
+    margin: 0.5em 0;
   }
 
   p {
@@ -79,10 +81,20 @@ const PageWrapper = styled.article`
 
   a {
     color: ${({ theme }) => theme.orange};
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.orangeDark};
+      text-decoration: underline;
+    }
   }
 
   img {
-    margin-inline-end: 16px;
+    margin-right: 16px;
+    max-width: 100%;
+    height: auto;
   }
 
   .logo {
@@ -91,27 +103,28 @@ const PageWrapper = styled.article`
   }
 
   .content {
-    margin-block-start: 10px;
+    margin-top: 10px;
 
     p {
       margin: 0;
     }
 
     @media ${({ theme }) => theme.device.desktop} {
-      display: inline-flex;
-      align-items: start;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
     }
 
     @media ${({ theme }) => theme.device.mobile} {
       overflow: hidden;
-      margin-block-start: 20px;
+      margin-top: 20px;
 
       img {
         max-width: 100%;
         height: auto;
         float: left;
         clear: left;
-        margin-block-end: 10px;
+        margin-bottom: 10px;
       }
     }
 
@@ -124,11 +137,22 @@ const PageWrapper = styled.article`
 `
 
 const StyledBackButton = styled(BackButton)`
-  margin-block-end: 23px;
+  margin-bottom: 23px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.secondaryText};
+
   svg {
-    width: 1.2em;
-    height: 1.2em;
-    margin-inline-end: 0.6em;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 0.6em;
+  }
+
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.orange};
   }
 `
 
@@ -152,7 +176,6 @@ const InfoPage = ({ children }) => {
             {t('layouts.back')}
           </StyledBackButton>
         )}
-
         {children}
       </PageWrapper>
     </PageScrollWrapper>
@@ -166,14 +189,14 @@ const AuthPage = ({ children }) => {
     <PageScrollWrapper>
       <PageWrapper>
         {isMobile && (
-          <MobileHeader>
-            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
-          </MobileHeader>
-        )}
-        {isMobile && (
-          <LanguageContainer>
-            <LanguageSelect />
-          </LanguageContainer>
+          <>
+            <MobileHeader>
+              <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+            </MobileHeader>
+            <LanguageContainer>
+              <LanguageSelect />
+            </LanguageContainer>
+          </>
         )}
         {children}
       </PageWrapper>
