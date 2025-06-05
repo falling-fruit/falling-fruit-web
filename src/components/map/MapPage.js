@@ -13,6 +13,7 @@ import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import throttle from '../../utils/throttle'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsEmbed } from '../../utils/useBreakpoint'
 import Share from '../share/Share'
 import ShareIconButton from '../share/ShareIconButton'
 import { AddLocationMobile } from '../ui/AddLocation'
@@ -209,7 +210,7 @@ const MapPage = ({ isDesktop }) => {
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
   )
-  const { pathname } = useLocation()
+  const { pathname, search } = useLocation()
   const {
     locationId,
     position,
@@ -248,8 +249,13 @@ const MapPage = ({ isDesktop }) => {
     dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
   }
 
+  const searchParams = new URLSearchParams(search)
+  const hasTypesParams =
+    searchParams.has('types') || searchParams.has('f') || searchParams.has('c')
+
   useEffect(() => {
-    const ready = dispatch && !typesAccess.isEmpty && googleMap
+    const ready =
+      dispatch && !typesAccess.isEmpty && googleMap && !hasTypesParams
     if (ready) {
       /*
        * This usually happens after apiIsLoaded puts googleMap in redux
@@ -264,7 +270,7 @@ const MapPage = ({ isDesktop }) => {
        */
       handleViewChangeRef.current(false)
     }
-  }, [!typesAccess.isEmpty, googleMap, !!dispatch]) //eslint-disable-line
+  }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
 
   const allLocations =
     clusters.length !== 0
@@ -280,6 +286,7 @@ const MapPage = ({ isDesktop }) => {
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
   const showLabels = settingsShowLabels || isAddingLocation || isEditingLocation
+  const isEmbed = useIsEmbed()
 
   useEffect(() => {
     setDraggedPosition(isDesktop ? position : null)
@@ -330,11 +337,11 @@ const MapPage = ({ isDesktop }) => {
     <>
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
-      {!isAddingLocation && !isEditingLocation && !isDesktop && (
+      {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (
         <AddLocationMobile />
       )}
       {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
-      {!isDesktop && <TrackLocationButton isIcon />}
+      {!isDesktop && !isEmbed && <TrackLocationButton isIcon />}
 
       <ZoomInButton
         onClick={zoomIn}

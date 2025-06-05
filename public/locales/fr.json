@@ -362,6 +362,8 @@
     "you_reviewed": "Tu as évalué cet emplacement le {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Site complet",
+    "simplified_controls_only": "Commandes simplifiées uniquement",
     "title": "Partager cette vue",
     "url_copied": "URL copiée dans ton presse-papiers !",
     "url_copy_failed": "Échec de la copie de l'URL dans ton presse-papiers"

@@ -362,6 +362,8 @@
     "you_reviewed": "Αξιολογήσατε αυτή την τοποθεσία στις {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Πλήρης ιστότοπος",
+    "simplified_controls_only": "Μόνο απλοποιημένα στοιχεία ελέγχου",
     "title": "Μοιραστείτε αυτή την προβολή",
     "url_copied": "Το URL αντιγράφηκε στο πρόχειρο!",
     "url_copy_failed": "Αποτυχία αντιγραφής URL στο πρόχειρο"

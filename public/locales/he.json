@@ -362,6 +362,8 @@
     "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "אתר מלא",
+    "simplified_controls_only": "פקדים מפושטים בלבד",
     "title": "שתף תצוגה זו",
     "url_copied": "הכתובת הועתקה ללוח!",
     "url_copy_failed": "העתקת הכתובת ללוח נכשלה"

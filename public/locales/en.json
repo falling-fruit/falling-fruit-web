@@ -363,6 +363,8 @@
   },
   "share": {
     "title": "Share this view",
+    "simplified_controls_only": "Simplified controls only",
+    "leave_embed_view_for_full_site": "Full site",
     "url_copied": "URL copied to clipboard!",
     "url_copy_failed": "Failed to copy URL to clipboard"
   },

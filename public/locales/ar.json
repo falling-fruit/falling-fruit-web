@@ -362,6 +362,8 @@
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "الموقع الكامل",
+    "simplified_controls_only": "عناصر التحكم المبسطة فقط",
     "title": "مشاركة هذا المنظر",
     "url_copied": "تم نسخ الرابط إلى الحافظة!",
     "url_copy_failed": "فشل نسخ الرابط إلى الحافظة"
