@@ -69,7 +69,8 @@ const locationSlice = createSlice({
     },
     pane: {
       drawerFullyOpen: false,
-      drawerDisabled: false,
+      isFromListLocations: false,
+      isFromEmbedViewMap: false,
       tabIndex: 0,
     },
     isBeingInitializedMobile: false,
@@ -88,7 +89,7 @@ const locationSlice = createSlice({
       state.lightbox.reviewIndex = null
       state.lightbox.photoIndex = null
       state.pane.drawerFullyOpen = false
-      state.pane.drawerDisabled = false
+      state.pane.isFromListLocations = false
       state.pane.tabIndex = 0
       state.isBeingInitializedMobile = false
     },
@@ -147,7 +148,7 @@ const locationSlice = createSlice({
       state.lightbox.photoIndex = action.payload.photoIndex
     },
     reenableAndPartiallyClosePaneDrawer: (state) => {
-      state.pane.drawerDisabled = false
+      state.pane.isFromListLocations = false
       state.pane.drawerFullyOpen = false
     },
     fullyOpenPaneDrawer: (state) => {
@@ -176,8 +177,11 @@ const locationSlice = createSlice({
       state.form = null
       state.tooltipOpen = action.meta.arg.isBeingEdited
       state.streetViewOpen = action.meta.arg.isStreetView
-      state.pane.drawerDisabled = action.meta.arg.paneDrawerDisabled
-      state.pane.drawerFullyOpen = action.meta.arg.paneDrawerDisabled
+      state.pane.isFromListLocations = action.meta.arg.isFromListLocations
+      state.pane.isFromEmbedViewMap = action.meta.arg.isFromEmbedViewMap
+      state.pane.drawerFullyOpen =
+        action.meta.arg.isFromListLocations ||
+        action.meta.arg.isFromEmbedViewMap
       state.pane.tabIndex = 0
     },
     [fetchLocationData.fulfilled]: (state, action) => {
