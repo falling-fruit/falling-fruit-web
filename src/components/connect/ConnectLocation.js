@@ -17,9 +17,9 @@ import {
   setStreetView,
 } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
-import { currentPathWithView, parseCurrentUrl } from '../../utils/appUrl'
+import { currentPathWithView, viewFromCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsDesktop } from '../../utils/useBreakpoint'
+import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
 
 const LessPaddingButton = styled(Button)`
@@ -30,7 +30,7 @@ const ToastContent = () => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
-  const { view } = parseCurrentUrl()
+  const view = viewFromCurrentUrl()
   return (
     <div
       style={{
@@ -97,6 +97,7 @@ const ConnectLocation = ({
   )
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
+  const isEmbed = useIsEmbed()
   const [hasCentered, setHasCentered] = useState(false)
 
   useEffect(() => {
@@ -117,11 +118,12 @@ const ConnectLocation = ({
         locationId,
         isBeingEdited,
         isStreetView,
-        paneDrawerDisabled: isFromListLocations,
+        isFromListLocations,
+        isFromEmbedViewMap: isEmbed,
       }),
     ).then((action) => {
       if (action.payload && !initialView) {
-        const { view: viewUrl } = parseCurrentUrl()
+        const viewUrl = viewFromCurrentUrl()
         const view = viewUrl || {
           center: {
             lat: action.payload.lat,
@@ -144,7 +146,7 @@ const ConnectLocation = ({
 
   useEffect(() => {
     if (location && !initialView) {
-      const { view } = parseCurrentUrl()
+      const view = viewFromCurrentUrl()
       if (view) {
         dispatch(setInitialView(view))
       }
