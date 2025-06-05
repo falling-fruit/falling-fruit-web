@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { initNewLocation, updatePosition } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
-import { parseCurrentUrl } from '../../utils/appUrl'
+import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
@@ -16,7 +16,7 @@ const ConnectNewLocation = () => {
 
   const hasInitialView = !!initialView
   useEffect(() => {
-    const { view } = parseCurrentUrl()
+    const view = viewFromCurrentUrl()
 
     if (view) {
       if (!hasInitialView) {
