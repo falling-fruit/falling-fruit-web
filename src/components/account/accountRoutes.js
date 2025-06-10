@@ -6,15 +6,15 @@ import ChangePasswordPage from './ChangePasswordPage'
 
 const pages = [
   {
-    path: '/users/edit',
+    path: '/account/edit',
     component: AccountPage,
   },
   {
-    path: '/users/change-password',
+    path: '/account/change-password',
     component: ChangePasswordPage,
   },
   {
-    path: '/users/change-email',
+    path: '/account/change-email',
     component: ChangeEmailPage,
   },
 ]
