@@ -22,7 +22,7 @@ const PasswordResetPage = () => {
       toast.success(t('devise.passwords.send_instructions'), {
         autoClose: 5000,
       })
-      history.push('/users/sign_in')
+      history.push('/auth/sign_in')
     } catch (error) {
       toast.error(
         t('error_message.auth.reset_password_failed', {
@@ -39,8 +39,8 @@ const PasswordResetPage = () => {
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
         <SignInLink />
-        <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
-        <Link to="/users/confirmation/new">
+        <Link to="/auth/sign_up">{t('glossary.sign_up')}</Link>
+        <Link to="/auth/confirmation/new">
           {t('users.resend_confirmation_instructions')}
         </Link>
       </Column>

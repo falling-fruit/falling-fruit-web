@@ -36,7 +36,7 @@ const AccountPage = () => {
   const { t } = useTranslation()
 
   if (!isLoggedIn && !isLoading) {
-    return <Redirect to={pathWithCurrentView('/users/sign_in')} />
+    return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
   }
 
   const handleSubmit = (values) => {
@@ -82,12 +82,12 @@ const AccountPage = () => {
             )}
           </Formik>
           <div style={{ margin: '16px 0' }}>
-            <Link to="/users/change-password">
+            <Link to="/account/change-password">
               {t('users.password_settings')}
             </Link>
           </div>
           <div style={{ margin: '16px 0' }}>
-            <Link to="/users/change-email">{t('users.email_settings')}</Link>
+            <Link to="/account/change-email">{t('users.email_settings')}</Link>
           </div>
           <div style={{ margin: '16px 0' }}>
             <Link to={`/activity/${user.id}`}>{t('users.your_activity')}</Link>

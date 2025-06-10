@@ -35,7 +35,7 @@ const ChangePasswordPage = () => {
   const history = useAppHistory()
 
   if (!isLoggedIn && !isLoading) {
-    return <Redirect to={pathWithCurrentView('/users/sign_in')} />
+    return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
   }
 
   const handleSubmit = (values, formikProps) => {
@@ -43,7 +43,7 @@ const ChangePasswordPage = () => {
       if (action.error) {
         formikProps.setSubmitting(false)
       } else {
-        history.push('/users/edit')
+        history.push('/account/edit')
       }
     })
   }
@@ -124,7 +124,7 @@ const ChangePasswordPage = () => {
                   <Button
                     secondary
                     type="button"
-                    onClick={() => history.push('/users/edit')}
+                    onClick={() => history.push('/account/edit')}
                   >
                     {t('form.button.cancel')}
                   </Button>
