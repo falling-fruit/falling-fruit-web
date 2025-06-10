@@ -121,6 +121,17 @@ function formatPeriodName(
   }
 }
 
+function deduplicateByLocationId(locations: LocationTypes[]): LocationTypes[] {
+  const seen = new Set<number>()
+  return locations.filter((location) => {
+    if (seen.has(location.locationId)) {
+      return false
+    }
+    seen.add(location.locationId)
+    return true
+  })
+}
+
 export function createActivityDiary(
   changes: components['schemas']['LocationChange'][],
   typesAccess: TypesAccess,
@@ -238,12 +249,13 @@ function transformActivityData(
           (l) => !addedIds.has(l.locationId) && !editedIds.has(l.locationId),
         )
 
-        // Filter out edited locations that were also added and deduplicate edits
-        const uniqueEdits = new Map<number, LocationTypes>()
-        group.edited
-          .filter((l) => !addedIds.has(l.locationId))
-          .forEach((edit) => uniqueEdits.set(edit.locationId, edit))
-        group.edited = Array.from(uniqueEdits.values())
+        //Filter out edited locations that were also added
+        group.edited = group.edited.filter((l) => !addedIds.has(l.locationId))
+
+        // Apply final deduplication to all three arrays based on location ID
+        group.added = deduplicateByLocationId(group.added)
+        group.edited = deduplicateByLocationId(group.edited)
+        group.visited = deduplicateByLocationId(group.visited)
       })
 
       return {
@@ -585,16 +597,5 @@ export class ActivityDiary {
       .join(', ')
 
     return selectedPlaces.includes(fullLocationName)
-  }
-
-  filter(selectedTypes: number[], selectedPlaces: string[]) {
-    // For backward compatibility
-    const filteredDiary = Object.create(Object.getPrototypeOf(this))
-    Object.assign(filteredDiary, this)
-    filteredDiary.entries = this.getFilteredEntries(
-      selectedTypes,
-      selectedPlaces,
-    )
-    return filteredDiary
   }
 }
