@@ -90,10 +90,10 @@ const parseViewFromCurrentUrl = () => {
 
 export const pathToSignInPage = () => {
   const currentPath = window.location.pathname
-  if (currentPath.startsWith('/users')) {
-    return '/users/sign_in'
+  if (currentPath.startsWith('/auth')) {
+    return '/auth/sign_in'
   } else {
-    return `/users/sign_in?fromPage=${encodeURIComponent(currentPath)}`
+    return `/auth/sign_in?fromPage=${encodeURIComponent(currentPath)}`
   }
 }
 
