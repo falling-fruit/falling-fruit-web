@@ -157,7 +157,7 @@ const UserActivityPage = () => {
     <Page>
       <StyledBackButton
         onClick={() =>
-          history.push(isCurrentUser ? '/account/edit' : `/profiles/${userId}`)
+          history.push(isCurrentUser ? '/account/edit' : `/users/${userId}`)
         }
       >
         <ReturnIcon />

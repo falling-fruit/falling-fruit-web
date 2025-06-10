@@ -4,7 +4,7 @@ import UserProfile from './UserProfile'
 
 const pages = [
   {
-    path: ['/profiles/:id'],
+    path: ['/users/:id'],
     component: UserProfile,
   },
 ]
