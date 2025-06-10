@@ -25,7 +25,8 @@ const RecentChangesPage = () => {
   const { recentChanges } = useSelector((state) => state.activity)
   const { lastBrowsedSection } = recentChanges
 
-  const changesReady = !typesAccess.isEmpty
+  const changesReadyStart = !typesAccess.isEmpty
+  const changesReadyExtend = changes.length > 0
 
   useEffect(() => {
     if (lastBrowsedSection.id) {
@@ -38,13 +39,13 @@ const RecentChangesPage = () => {
   }, [lastBrowsedSection, dispatch])
 
   useEffect(() => {
-    if (changesReady) {
+    if (changesReadyStart) {
       dispatch(fetchMoreLocationChanges())
     }
-  }, [dispatch, changesReady])
+  }, [dispatch, changesReadyStart])
 
   useEffect(() => {
-    if (changesReady) {
+    if (changesReadyExtend) {
       // Store the necessary state values in refs to avoid using hooks in callbacks
       const observer = new IntersectionObserver(
         (entries) => {
@@ -67,7 +68,7 @@ const RecentChangesPage = () => {
         }
       }
     }
-  }, [dispatch, changesReady])
+  }, [dispatch, changesReadyExtend])
 
   const { i18n } = useTranslation()
   const activityDiary = createActivityDiary(
@@ -85,7 +86,9 @@ const RecentChangesPage = () => {
           <DiaryEntry key={entry.formattedDate} entry={entry} />
         ))}
       <div ref={loadMoreRef}></div>
-      {isLoading && <SkeletonLoader count={changes.length === 0 ? 5 : 1} />}
+      {(changes.length === 0 || isLoading) && (
+        <SkeletonLoader count={changes.length === 0 ? 5 : 1} />
+      )}
     </InfoPage>
   )
 }

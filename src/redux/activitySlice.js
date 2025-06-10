@@ -41,7 +41,7 @@ const activitySlice = createSlice({
   initialState: {
     recentChanges: {
       data: [],
-      isLoading: true,
+      isLoading: false,
       fetchedUntilDate: null,
       lastBrowsedSection: {
         id: null,
