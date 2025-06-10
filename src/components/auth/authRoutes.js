@@ -10,32 +10,32 @@ import SignupPage from './SignupPage'
 
 const pages = [
   {
-    path: '/auth/confirmation/check-email',
-    component: CheckEmailConfirmationPage,
-  },
-  {
-    path: '/users/sign_in',
+    path: '/auth/sign_in',
     component: LoginPage,
   },
   {
-    path: '/users/sign_up',
+    path: '/auth/sign_up',
     component: SignupPage,
   },
   {
-    path: '/users/password/new',
+    path: '/auth/password/new',
     component: PasswordResetPage,
   },
   {
-    path: '/users/password/edit',
+    path: '/auth/password/edit',
     component: PasswordSetPage,
   },
   {
-    path: '/users/confirmation/new',
+    path: '/auth/confirmation/new',
     component: ConfirmationResendPage,
   },
   {
-    path: '/users/confirmation',
+    path: '/auth/confirmation',
     component: ConfirmationPage,
+  },
+  {
+    path: '/auth/confirmation/check-email',
+    component: CheckEmailConfirmationPage,
   },
 ]
 
