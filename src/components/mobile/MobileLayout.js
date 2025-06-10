@@ -168,7 +168,7 @@ const MobileLayout = () => {
               </Switch>
             </TabPanels>
             <Switch>
-              <Route path={'/profiles'} />
+              <Route path={'/users'} />
               <Route path={['/locations/:locationId/edit/:postfix', '*']}>
                 {({ match }) =>
                   !isEmbed &&
