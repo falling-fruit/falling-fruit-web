@@ -16,12 +16,12 @@ const ConfirmationPage = () => {
 
       if (!token) {
         toast.error(t('devise.confirmations.no_token'), { autoClose: 5000 })
-        history.push('/users/confirmation/new')
+        history.push('/auth/confirmation/new')
       } else {
         try {
           const { email } = await confirmUser(token)
           toast.success(t('devise.confirmations.confirmed'))
-          history.push({ pathname: '/users/sign_in', state: { email } })
+          history.push({ pathname: '/auth/sign_in', state: { email } })
         } catch (error) {
           toast.error(
             t('error_message.auth.confirmation_failed', {
@@ -29,7 +29,7 @@ const ConfirmationPage = () => {
             }),
             { autoClose: 5000 },
           )
-          history.push('/users/confirmation/new')
+          history.push('/auth/confirmation/new')
         }
       }
     }
