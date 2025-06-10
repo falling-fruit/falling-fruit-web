@@ -145,9 +145,9 @@ const SignupPage = () => {
         )}
       </Formik>
       <Column>
-        <Link to="/users/sign_in">{t('users.sign_in')}</Link>
-        <Link to="/users/password/new">{t('users.forgot_password')}</Link>
-        <Link to="/users/confirmation/new">
+        <Link to="/auth/sign_in">{t('users.sign_in')}</Link>
+        <Link to="/auth/password/new">{t('users.forgot_password')}</Link>
+        <Link to="/auth/confirmation/new">
           {t('users.resend_confirmation_instructions')}
         </Link>
       </Column>

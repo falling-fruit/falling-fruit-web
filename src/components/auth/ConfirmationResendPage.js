@@ -22,7 +22,7 @@ const ConfirmationResendPage = () => {
       toast.success(t('devise.confirmations.send_instructions'), {
         autoClose: 5000,
       })
-      history.push('/users/sign_in')
+      history.push('/auth/sign_in')
     } catch (error) {
       toast.error(
         t('error_message.auth.resend_confirmation_failed', {
@@ -39,8 +39,8 @@ const ConfirmationResendPage = () => {
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
         <SignInLink />
-        <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
-        <Link to="/users/password/new">{t('users.forgot_password')}</Link>
+        <Link to="/auth/sign_up">{t('glossary.sign_up')}</Link>
+        <Link to="/auth/password/new">{t('users.forgot_password')}</Link>
       </Column>
     </AuthPage>
   )
