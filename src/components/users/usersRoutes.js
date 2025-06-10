@@ -9,7 +9,5 @@ const pages = [
   },
 ]
 
-const profileRoutes = pages.map((props) => (
-  <Route key={props.path} {...props} />
-))
-export default profileRoutes
+const usersRoutes = pages.map((props) => <Route key={props.path} {...props} />)
+export default usersRoutes
