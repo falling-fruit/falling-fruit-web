@@ -60,7 +60,7 @@ const HomeRedirect = () => {
   } else if (user) {
     return <Redirect to={pathWithCurrentView('/map')} />
   } else {
-    return <Redirect to="/users/sign_in" />
+    return <Redirect to="/auth/sign_in" />
   }
 }
 
@@ -99,6 +99,33 @@ const AppContent = () => {
           </Route>
           <Route path={['/seedlibrary', '/seedlibraries']}>
             <SeedLibraryRedirect />
+          </Route>
+          <Route path="/users/sign_in">
+            <Redirect to={pathWithCurrentView('/auth/sign_in')} />
+          </Route>
+          <Route path="/users/sign_up">
+            <Redirect to={pathWithCurrentView('/auth/sign_up')} />
+          </Route>
+          <Route path="/users/password/new">
+            <Redirect to={pathWithCurrentView('/auth/password/new')} />
+          </Route>
+          <Route path="/users/password/edit">
+            <Redirect to={pathWithCurrentView('/auth/password/edit')} />
+          </Route>
+          <Route path="/users/confirmation/new">
+            <Redirect to={pathWithCurrentView('/auth/confirmation/new')} />
+          </Route>
+          <Route path="/users/confirmation">
+            <Redirect to={pathWithCurrentView('/auth/confirmation')} />
+          </Route>
+          <Route path="/users/edit">
+            <Redirect to={pathWithCurrentView('/account/edit')} />
+          </Route>
+          <Route path="/users/change-password">
+            <Redirect to={pathWithCurrentView('/account/change-password')} />
+          </Route>
+          <Route path="/users/change-email">
+            <Redirect to={pathWithCurrentView('/account/change-email')} />
           </Route>
           <Route
             path={['/home', '/locations/home', '/routes', '/routes/:routeId']}
