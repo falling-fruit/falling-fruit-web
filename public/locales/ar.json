@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "فشل في جلب تغييرات الموقع: {{message}}",
       "fetch_location_failed": "خطأ في جلب الموقع {{id}}: {{message}}",
       "fetch_review_failed": "خطأ في جلب المراجعة {{id}}: {{message}}",
+      "fetch_user_failed": "خطأ في جلب المستخدم {{id}}: {{message}}",
       "location_edit_failed": "فشل تحرير الموقع: {{message}}",
       "location_submission_failed": "فشل تقديم الموقع: {{message}}",
       "photo_upload_failed": "فشل تحميل الصورة: {{message}}",

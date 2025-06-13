@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
       "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
+      "fetch_user_failed": "Fout bij ophalen gebruiker {{id}}: {{message}}",
       "location_edit_failed": "Bewerken van locatie mislukt: {{message}}",
       "location_submission_failed": "Indienen van locatie mislukt: {{message}}",
       "photo_upload_failed": "Uploaden van foto mislukt: {{message}}",

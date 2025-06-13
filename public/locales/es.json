@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Error al obtener cambios de ubicación: {{message}}",
       "fetch_location_failed": "Error al obtener ubicación {{id}}: {{message}}",
       "fetch_review_failed": "Error al obtener reseña {{id}}: {{message}}",
+      "fetch_user_failed": "Error al obtener usuario {{id}}: {{message}}",
       "location_edit_failed": "Error al editar ubicación: {{message}}",
       "location_submission_failed": "Error al enviar ubicación: {{message}}",
       "photo_upload_failed": "Error al subir foto: {{message}}",

@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Не вдалося отримати зміни локації: {{message}}",
       "fetch_location_failed": "Помилка отримання локації {{id}}: {{message}}",
       "fetch_review_failed": "Помилка отримання відгуку {{id}}: {{message}}",
+      "fetch_user_failed": "Помилка отримання користувача {{id}}: {{message}}",
       "location_edit_failed": "Не вдалося відредагувати локацію: {{message}}",
       "location_submission_failed": "Не вдалося надіслати локацію: {{message}}",
       "photo_upload_failed": "Не вдалося завантажити фото: {{message}}",
