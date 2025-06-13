@@ -31,12 +31,12 @@ const LoginPage = () => {
         initialValues={{
           email: state?.email ?? '',
           password: '',
-          rememberMe: false,
+          remember_me: false,
         }}
         validationSchema={Yup.object({
           email: Yup.string().email().required(),
           password: Yup.string().required(),
-          rememberMe: Yup.boolean().required(),
+          remember_me: Yup.boolean().required(),
         })}
         onSubmit={(values, { setSubmitting }) => {
           dispatch(login(values))
