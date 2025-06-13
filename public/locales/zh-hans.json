@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "获取数据集{{id}}失败：{{message}}",
       "fetch_location_changes_failed": "获取位置变更失败：{{message}}",
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
       "fetch_review_failed": "获取评论 {{id}} 失败：{{message}}",

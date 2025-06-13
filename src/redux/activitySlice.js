@@ -67,14 +67,6 @@ const activitySlice = createSlice({
       const userId = action.meta.arg.user_id
       state.changesByUser[userId] = action.payload
     },
-    [fetchLocationChangesUser.rejected]: (state, action) => {
-      toast.error(
-        i18next.t('error_message.api.fetch_location_changes_failed', {
-          message:
-            action.error.message || i18next.t('error_message.unknown_error'),
-        }),
-      )
-    },
     [fetchLocationChangesAll.pending]: (state) => {
       state.recentChanges.isLoading = true
     },
