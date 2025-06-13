@@ -43,16 +43,14 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
   return [user, error]
 })
 
-export const login = createAsyncThunk(
-  'auth/login',
-  async ({ email, password, rememberMe }) => {
-    const token = await getUserToken(email, password)
-    const user = await getUser(token.access_token)
-    authStore.setRememberMe(rememberMe)
-    authStore.setToken(token)
-    return user
-  },
-)
+export const login = createAsyncThunk('auth/login', async (props) => {
+  const { email, password, remember_me: rememberMe } = props
+  const token = await getUserToken(email, password)
+  const user = await getUser(token.access_token)
+  authStore.setRememberMe(rememberMe)
+  authStore.setToken(token)
+  return user
+})
 
 export const editProfile = createAsyncThunk(
   'auth/editProfile',
