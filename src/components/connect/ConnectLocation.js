@@ -98,6 +98,7 @@ const ConnectLocation = ({
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
   const [hasCentered, setHasCentered] = useState(false)
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (location && `${locationId}` === `${location.id}`) {
@@ -120,6 +121,16 @@ const ConnectLocation = ({
         paneDrawerDisabled: isFromListLocations,
       }),
     ).then((action) => {
+      if (fetchLocationData.rejected.match(action)) {
+        history.push('/map')
+        toast.error(
+          t('error_message.api.fetch_location_failed', {
+            id: locationId,
+            message: action.error.message || t('error_message.unknown_error'),
+          }),
+        )
+      }
+
       if (action.payload && !initialView) {
         const { view: viewUrl } = parseCurrentUrl()
         const view = viewUrl || {

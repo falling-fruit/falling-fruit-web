@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "Errore nel recupero del dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Recupero modifiche posizione fallito: {{message}}",
       "fetch_location_failed": "Errore nel recupero della posizione {{id}}: {{message}}",
       "fetch_review_failed": "Errore nel recupero della recensione {{id}}: {{message}}",

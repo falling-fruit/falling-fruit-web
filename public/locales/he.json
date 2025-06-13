@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "שגיאה במשיכת מאגר נתונים {{id}}: {{message}}",
       "fetch_location_changes_failed": "נכשלה משיכת שינויי מיקום: {{message}}",
       "fetch_location_failed": "שגיאה במשיכת מיקום {{id}}: {{message}}",
       "fetch_review_failed": "שגיאה במשיכת ביקורת {{id}}: {{message}}",

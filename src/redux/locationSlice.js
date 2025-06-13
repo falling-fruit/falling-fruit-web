@@ -190,20 +190,13 @@ const locationSlice = createSlice({
         state.position = { lat: action.payload.lat, lng: action.payload.lng }
       }
     },
-    [fetchLocationData.rejected]: (state, action) => {
+    [fetchLocationData.rejected]: (state) => {
       state.isLoading = false
       state.location = null
       state.locationId = null
       state.position = null
       state.isBeingEdited = false
       state.tooltipOpen = false
-      toast.error(
-        i18next.t('error_message.api.fetch_location_failed', {
-          id: action.meta.arg.locationId,
-          message:
-            action.error.message || i18next.t('error_message.unknown_error'),
-        }),
-      )
     },
     [fetchReviewData.fulfilled]: (state, action) => {
       state.isLoading = false

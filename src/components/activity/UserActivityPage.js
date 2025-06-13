@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import {
@@ -138,9 +139,18 @@ const UserActivityPage = () => {
 
   useEffect(() => {
     if (changesReady) {
-      dispatch(getUserActivity(userId))
+      dispatch(getUserActivity(userId)).then((action) => {
+        if (action.error) {
+          history.push('/map')
+          toast.error(
+            t('error_message.api.fetch_location_changes_failed', {
+              message: action.error.message || t('error_message.unknown_error'),
+            }),
+          )
+        }
+      })
     }
-  }, [dispatch, changesReady, userId])
+  }, [dispatch, changesReady, userId]) //eslint-disable-line
 
   const userName = changes?.length > 0 ? changes[0].author : ''
   return (

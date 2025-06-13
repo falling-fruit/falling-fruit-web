@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "Σφάλμα λήψης συνόλου δεδομένων {{id}}: {{message}}",
       "fetch_location_changes_failed": "Αποτυχία λήψης αλλαγών τοποθεσίας: {{message}}",
       "fetch_location_failed": "Σφάλμα λήψης τοποθεσίας {{id}}: {{message}}",
       "fetch_review_failed": "Σφάλμα λήψης αξιολόγησης {{id}}: {{message}}",

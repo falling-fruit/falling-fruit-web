@@ -3,6 +3,7 @@ import { Copyright, MapPin, Pin } from '@styled-icons/boxicons-solid'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
@@ -33,7 +34,18 @@ const AboutDatasetPage = () => {
     async function fetchImportData() {
       setIsLoading(true)
 
-      setImportData(await getImportById(id))
+      try {
+        setImportData(await getImportById(id))
+      } catch (error) {
+        history.push('/map')
+        toast.error(
+          t('error_message.api.fetch_import_failed', {
+            id,
+            message: error.message || t('error_message.unknown_error'),
+          }),
+        )
+        return
+      }
 
       setIsLoading(false)
     }

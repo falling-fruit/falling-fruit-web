@@ -24,6 +24,7 @@
       "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
       "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
       "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
+      "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
       "location_edit_failed": "Location editing failed: {{message}}",
       "location_submission_failed": "Location submission failed: {{message}}",
       "photo_upload_failed": "Photo upload failed: {{message}}",

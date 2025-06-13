@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "Помилка отримання набору даних {{id}}: {{message}}",
       "fetch_location_changes_failed": "Не вдалося отримати зміни локації: {{message}}",
       "fetch_location_failed": "Помилка отримання локації {{id}}: {{message}}",
       "fetch_review_failed": "Помилка отримання відгуку {{id}}: {{message}}",
