@@ -381,9 +381,8 @@ const MapPage = ({ isDesktop }) => {
         <GoogleMapWrapper
           onClick={handleNonspecificClick}
           bootstrapURLKeys={{
-            // Maintain compatibility with older browsers
-            // https://issuetracker.google.com/issues/375937548?pli=1
-            version: '3.57',
+            apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+            version: 'quarterly',
             libraries: ['places'],
             language: i18n.language,
           }}
