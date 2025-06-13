@@ -4,6 +4,7 @@ import {
 } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -28,6 +29,25 @@ const ENTRY_IMAGE_HEIGHT = 250
 
 const TOP_BAR_HEIGHT = 80
 const ENTRY_TABS_HEIGHT = 50
+
+const EntryLoading = () => (
+  <>
+    <Skeleton
+      height={14}
+      width="70%"
+      style={{ marginTop: '0.5em', marginBottom: '0.5em' }}
+    />
+
+    <Skeleton height={16} width="40%" style={{ marginBottom: '1.5em' }} />
+
+    <Skeleton height={16} style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} width="80%" style={{ marginBottom: '2em' }} />
+
+    <Skeleton height={16} width="60%" style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} width="50%" style={{ marginBottom: '0.5em' }} />
+  </>
+)
 
 const RevealedFromUnderneath = styled.div`
   width: 100%;
@@ -147,9 +167,6 @@ const EntryMobile = () => {
   const [progress, setProgress] = useState(
     drawerFullyOpen || drawerDisabled ? 1 : 0.3,
   )
-  if (isLoading) {
-    return null
-  }
 
   const hasReviews = reviews && reviews.length > 0
 
@@ -173,10 +190,10 @@ const EntryMobile = () => {
         }}
         drawerDisabled={drawerDisabled || drawerFullyOpen}
         updateProgress={setProgress}
-        hasImages={hasImages}
+        hasWhiteBackground={!isLoading && hasImages}
         showMoveElement={!(drawerFullyOpen || drawerDisabled)}
       >
-        {hasImages && (
+        {!isLoading && hasImages && (
           <RevealedFromUnderneath
             targetHeight={ENTRY_IMAGE_HEIGHT}
             progress={progress}
@@ -206,6 +223,7 @@ const EntryMobile = () => {
           )}
           <TabPanels style={{ background: 'white' }}>
             <TabPanel>
+              {isLoading && <EntryLoading />}
               <TextContent>
                 <EntryOverview />
               </TextContent>

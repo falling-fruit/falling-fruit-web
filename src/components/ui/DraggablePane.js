@@ -21,8 +21,8 @@ const PaneContainer = styled.div`
   z-index: ${(props) =>
     props.displayOverTopBar ? zIndex.topBar + 1 : zIndex.topBar - 1};
   transition: transform 0.3s linear;
-  background: ${(props) => (props.hasImages ? 'white' : 'none')};
-  padding-block-start: ${(props) => (props.hasImages ? '0' : '10px')};
+  background: ${(props) => (props.hasWhiteBackground ? 'white' : 'none')};
+  padding-block-start: ${(props) => (props.hasWhiteBackground ? '0' : '10px')};
 `
 
 const DragHandle = styled.div`
@@ -48,7 +48,7 @@ const DraggablePane = ({
   middlePositionScreenRatio,
   drawerDisabled,
   updateProgress,
-  hasImages,
+  hasWhiteBackground,
   showMoveElement,
   displayOverTopBar,
 }) => {
@@ -225,7 +225,7 @@ const DraggablePane = ({
       onTouchMove={isMiddlePosition ? handleTouchMove : undefined}
       onTouchEnd={isMiddlePosition ? handleTouchEnd : undefined}
       onMouseDown={isMiddlePosition ? handleMouseDown : undefined}
-      hasImages={hasImages}
+      hasWhiteBackground={hasWhiteBackground}
       showMoveElement={showMoveElement}
       isMiddlePosition={isMiddlePosition}
       displayOverTopBar={displayOverTopBar}
