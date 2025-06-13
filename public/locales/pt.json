@@ -24,6 +24,7 @@
       "fetch_location_changes_failed": "Falha ao buscar alterações de localização: {{message}}",
       "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
       "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
+      "fetch_user_failed": "Erro ao buscar usuário {{id}}: {{message}}",
       "location_edit_failed": "Falha na edição da localização: {{message}}",
       "location_submission_failed": "Falha no envio da localização: {{message}}",
       "photo_upload_failed": "Falha no upload da foto: {{message}}",
@@ -360,6 +361,8 @@
     "you_reviewed": "Você avaliou esta localização em {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Site completo",
+    "simplified_controls_only": "Apenas controles simplificados",
     "title": "Compartilhar esta visualização",
     "url_copied": "URL copiada para a área de transferência!",
     "url_copy_failed": "Falha ao copiar URL para a área de transferência"

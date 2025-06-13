@@ -39,7 +39,7 @@ const typeSlice = createSlice({
   initialState: {
     isLoading: false,
     typesAccess: typesAccessInLanguage([], ''),
-    typeEncoder: null,
+    typeEncoder: new TypeShareEncoder(typesAccessInLanguage([], '')),
     isAddTypeModalOpen: false,
   },
   reducers: {

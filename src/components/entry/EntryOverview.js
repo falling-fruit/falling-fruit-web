@@ -193,7 +193,7 @@ const EntryOverview = () => {
                       <>
                         {t('locations.overview.added_by', { name: '' })}{' '}
                         {locationData.user_id ? (
-                          <Link to={`/profiles/${locationData.user_id}`}>
+                          <Link to={`/users/${locationData.user_id}`}>
                             {locationData.author}
                           </Link>
                         ) : (

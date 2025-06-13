@@ -4,6 +4,7 @@ import {
 } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -28,6 +29,25 @@ const ENTRY_IMAGE_HEIGHT = 250
 
 const TOP_BAR_HEIGHT = 80
 const ENTRY_TABS_HEIGHT = 50
+
+const EntryLoading = () => (
+  <>
+    <Skeleton
+      height={14}
+      width="70%"
+      style={{ marginTop: '0.5em', marginBottom: '0.5em' }}
+    />
+
+    <Skeleton height={16} width="40%" style={{ marginBottom: '1.5em' }} />
+
+    <Skeleton height={16} style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} width="80%" style={{ marginBottom: '2em' }} />
+
+    <Skeleton height={16} width="60%" style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} width="50%" style={{ marginBottom: '0.5em' }} />
+  </>
+)
 
 const RevealedFromUnderneath = styled.div`
   width: 100%;
@@ -71,44 +91,6 @@ const WhitespacePlaceholder = styled.div`
 const DummyElementFixingScrollbarInsideTabPanel = styled.div`
   height: ${(props) => props.height}px;
 `
-
-const TopRibbonButtons = ({ hasImages, drawerDisabled, onBackButtonClick }) => {
-  const history = useAppHistory()
-  const dispatch = useDispatch()
-  const { locationId } = useSelector((state) => state.location)
-
-  return (
-    <StyledButtons whiteBackground={!hasImages}>
-      <EntryButton
-        onClick={
-          drawerDisabled ? () => history.push('/list') : onBackButtonClick
-        }
-        icon={<ReturnIcon />}
-        label="back-button"
-      />
-      <div>
-        {drawerDisabled && (
-          <EntryButton
-            onClick={(event) => {
-              event.stopPropagation()
-              dispatch(reenableAndPartiallyClosePaneDrawer())
-            }}
-            icon={<MapIcon />}
-            label="map-button"
-          />
-        )}
-        <EntryButton
-          onClick={(event) => {
-            event.stopPropagation()
-            history.push(`/locations/${locationId}/edit`)
-          }}
-          icon={<PencilIcon />}
-          label="edit-button"
-        />
-      </div>
-    </StyledButtons>
-  )
-}
 
 const StyledButtons = styled.div`
   position: absolute;
@@ -162,10 +144,18 @@ const EntryMobile = () => {
   const dispatch = useDispatch()
   const history = useAppHistory()
   const {
+    locationId,
     reviews,
     isLoading,
-    pane: { drawerFullyOpen, tabIndex, drawerDisabled },
+    pane: {
+      drawerFullyOpen,
+      tabIndex,
+      isFromListLocations,
+      isFromEmbedViewMap,
+    },
   } = useSelector((state) => state.location)
+
+  const drawerDisabled = isFromEmbedViewMap || isFromListLocations
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
@@ -177,14 +167,6 @@ const EntryMobile = () => {
   const [progress, setProgress] = useState(
     drawerFullyOpen || drawerDisabled ? 1 : 0.3,
   )
-  const onBackButtonClick = (e) => {
-    e.stopPropagation()
-    dispatch(partiallyClosePaneDrawer())
-  }
-
-  if (isLoading) {
-    return null
-  }
 
   const hasReviews = reviews && reviews.length > 0
 
@@ -208,10 +190,10 @@ const EntryMobile = () => {
         }}
         drawerDisabled={drawerDisabled || drawerFullyOpen}
         updateProgress={setProgress}
-        hasImages={hasImages}
+        hasWhiteBackground={!isLoading && hasImages}
         showMoveElement={!(drawerFullyOpen || drawerDisabled)}
       >
-        {hasImages && (
+        {!isLoading && hasImages && (
           <RevealedFromUnderneath
             targetHeight={ENTRY_IMAGE_HEIGHT}
             progress={progress}
@@ -241,6 +223,7 @@ const EntryMobile = () => {
           )}
           <TabPanels style={{ background: 'white' }}>
             <TabPanel>
+              {isLoading && <EntryLoading />}
               <TextContent>
                 <EntryOverview />
               </TextContent>
@@ -259,12 +242,43 @@ const EntryMobile = () => {
           </TabPanels>
         </EntryTabs>
       </DraggablePane>
-      {(drawerFullyOpen || drawerDisabled) && (
-        <TopRibbonButtons
-          hasImages={hasImages}
-          drawerDisabled={drawerDisabled}
-          onBackButtonClick={onBackButtonClick}
-        />
+      {drawerFullyOpen && (
+        <StyledButtons whiteBackground={!hasImages}>
+          <EntryButton
+            onClick={
+              isFromEmbedViewMap
+                ? () => history.push('/map')
+                : isFromListLocations
+                  ? () => history.push('/list')
+                  : (e) => {
+                      e.stopPropagation()
+                      dispatch(partiallyClosePaneDrawer())
+                    }
+            }
+            icon={<ReturnIcon />}
+            label="back-button"
+          />
+          <div>
+            {isFromListLocations && (
+              <EntryButton
+                onClick={(event) => {
+                  event.stopPropagation()
+                  dispatch(reenableAndPartiallyClosePaneDrawer())
+                }}
+                icon={<MapIcon />}
+                label="map-button"
+              />
+            )}
+            <EntryButton
+              onClick={(event) => {
+                event.stopPropagation()
+                history.push(`/locations/${locationId}/edit`)
+              }}
+              icon={<PencilIcon />}
+              label="edit-button"
+            />
+          </div>
+        </StyledButtons>
       )}
     </>
   )

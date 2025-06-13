@@ -1,4 +1,5 @@
 import { Copy as CopyIcon } from '@styled-icons/boxicons-regular'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -26,6 +27,24 @@ const ShareTitle = styled.h3`
 const ShareUrlContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-block-end: 0.75rem;
+`
+
+const EmbedToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-block-end: 0.5rem;
+`
+
+const ToggleLabel = styled.label`
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.secondaryText};
+  margin-inline-start: 0.5rem;
+  cursor: pointer;
+`
+
+const ToggleSwitch = styled.input`
+  cursor: pointer;
 `
 
 const ShareInput = styled(Input)`
@@ -52,7 +71,24 @@ const CopyButton = styled(Button)`
 const Share = ({ onClose }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const currentUrl = useShareUrl()
+  const [embedMode, setEmbedMode] = useState(false)
+  const [displayUrl, setDisplayUrl] = useState('')
+  const currentUrl = useShareUrl(embedMode)
+  const displayUrlIsInitialValue = displayUrl === ''
+  const displayUrlIsUpToDate = displayUrl === currentUrl
+
+  // If changing after 'simplified_controls_only' checkbox interaction, animate for feedback
+  useEffect(() => {
+    if (displayUrlIsInitialValue) {
+      setDisplayUrl(currentUrl)
+    } else if (!displayUrlIsUpToDate) {
+      setDisplayUrl('...')
+      const timer = setTimeout(() => {
+        setDisplayUrl(currentUrl)
+      }, 200)
+      return () => clearTimeout(timer)
+    }
+  }, [displayUrlIsInitialValue, displayUrlIsUpToDate, currentUrl])
 
   const handleCopy = async () => {
     try {
@@ -73,10 +109,21 @@ const Share = ({ onClose }) => {
     <ShareContainer>
       <ShareTitle>{t('share.title')}</ShareTitle>
       {onClose && <CloseButton onClick={onClose} />}
+      <EmbedToggleContainer>
+        <ToggleSwitch
+          type="checkbox"
+          id="embed-toggle"
+          checked={embedMode}
+          onChange={() => setEmbedMode(!embedMode)}
+        />
+        <ToggleLabel htmlFor="embed-toggle">
+          {t('share.simplified_controls_only')}
+        </ToggleLabel>
+      </EmbedToggleContainer>
       <ShareUrlContainer>
         <ShareInput
           type="text"
-          value={currentUrl}
+          value={displayUrl}
           readOnly
           onClick={(e) => e.target.select()}
           height="30px"
