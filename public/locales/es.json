@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "Error al obtener conjunto de datos {{id}}: {{message}}",
       "fetch_location_changes_failed": "Error al obtener cambios de ubicación: {{message}}",
       "fetch_location_failed": "Error al obtener ubicación {{id}}: {{message}}",
       "fetch_review_failed": "Error al obtener reseña {{id}}: {{message}}",

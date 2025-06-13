@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "Erreur lors de la récupération du jeu de données {{id}} : {{message}}",
       "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",

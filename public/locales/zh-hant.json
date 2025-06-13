@@ -21,6 +21,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "獲取數據集{{id}}失敗：{{message}}",
       "fetch_location_changes_failed": "獲取位置變更失敗：{{message}}",
       "fetch_location_failed": "獲取位置 {{id}} 失敗：{{message}}",
       "fetch_review_failed": "獲取評論 {{id}} 失敗：{{message}}",
