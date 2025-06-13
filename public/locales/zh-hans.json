@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "获取位置变更失败：{{message}}",
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
       "fetch_review_failed": "获取评论 {{id}} 失败：{{message}}",
+      "fetch_user_failed": "获取用户{{id}}失败：{{message}}",
       "location_edit_failed": "编辑位置失败：{{message}}",
       "location_submission_failed": "提交位置失败：{{message}}",
       "photo_upload_failed": "照片上传失败：{{message}}",

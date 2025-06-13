@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Falha ao buscar alterações de localização: {{message}}",
       "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
       "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
+      "fetch_user_failed": "Erro ao buscar usuário {{id}}: {{message}}",
       "location_edit_failed": "Falha na edição da localização: {{message}}",
       "location_submission_failed": "Falha no envio da localização: {{message}}",
       "photo_upload_failed": "Falha no upload da foto: {{message}}",

@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Hämtning av platsändringar misslyckades: {{message}}",
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
       "fetch_review_failed": "Fel vid hämtning av recension {{id}}: {{message}}",
+      "fetch_user_failed": "Fel vid hämtning av användare {{id}}: {{message}}",
       "location_edit_failed": "Redigering av plats misslyckades: {{message}}",
       "location_submission_failed": "Inlämning av plats misslyckades: {{message}}",
       "photo_upload_failed": "Bilduppladdning misslyckades: {{message}}",

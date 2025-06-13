@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
       "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
+      "fetch_user_failed": "Lỗi khi tải thông tin người dùng {{id}}: {{message}}",
       "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
       "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
       "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",

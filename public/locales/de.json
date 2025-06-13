@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Abrufen der Standortänderungen fehlgeschlagen: {{message}}",
       "fetch_location_failed": "Fehler beim Abrufen des Standorts {{id}}: {{message}}",
       "fetch_review_failed": "Fehler beim Abrufen der Bewertung {{id}}: {{message}}",
+      "fetch_user_failed": "Fehler beim Abrufen des Benutzers {{id}}: {{message}}",
       "location_edit_failed": "Bearbeitung des Standorts fehlgeschlagen: {{message}}",
       "location_submission_failed": "Übermittlung des Standorts fehlgeschlagen: {{message}}",
       "photo_upload_failed": "Foto-Upload fehlgeschlagen: {{message}}",

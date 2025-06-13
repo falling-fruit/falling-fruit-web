@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Αποτυχία λήψης αλλαγών τοποθεσίας: {{message}}",
       "fetch_location_failed": "Σφάλμα λήψης τοποθεσίας {{id}}: {{message}}",
       "fetch_review_failed": "Σφάλμα λήψης αξιολόγησης {{id}}: {{message}}",
+      "fetch_user_failed": "Σφάλμα ανάκτησης χρήστη {{id}}: {{message}}",
       "location_edit_failed": "Αποτυχία επεξεργασίας τοποθεσίας: {{message}}",
       "location_submission_failed": "Αποτυχία υποβολής τοποθεσίας: {{message}}",
       "photo_upload_failed": "Αποτυχία μεταφόρτωσης φωτογραφίας: {{message}}",

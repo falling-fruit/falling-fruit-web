@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
+      "fetch_user_failed": "Erreur lors de la récupération de l'utilisateur {{id}} : {{message}}",
       "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
       "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
       "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",

@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Pobieranie zmian lokalizacji nie powiodło się: {{message}}",
       "fetch_location_failed": "Błąd podczas pobierania lokalizacji {{id}}: {{message}}",
       "fetch_review_failed": "Błąd podczas pobierania recenzji {{id}}: {{message}}",
+      "fetch_user_failed": "Błąd pobierania użytkownika {{id}}: {{message}}",
       "location_edit_failed": "Edycja lokalizacji nie powiodła się: {{message}}",
       "location_submission_failed": "Przesyłanie lokalizacji nie powiodło się: {{message}}",
       "photo_upload_failed": "Przesyłanie zdjęcia nie powiodło się: {{message}}",

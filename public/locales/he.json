@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "נכשלה משיכת שינויי מיקום: {{message}}",
       "fetch_location_failed": "שגיאה במשיכת מיקום {{id}}: {{message}}",
       "fetch_review_failed": "שגיאה במשיכת ביקורת {{id}}: {{message}}",
+      "fetch_user_failed": "שגיאה בטעינת משתמש {{id}}: {{message}}",
       "location_edit_failed": "עריכת מיקום נכשלה: {{message}}",
       "location_submission_failed": "שליחת מיקום נכשלה: {{message}}",
       "photo_upload_failed": "העלאת תמונה נכשלה: {{message}}",

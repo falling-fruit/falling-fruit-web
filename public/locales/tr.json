@@ -26,6 +26,7 @@
       "fetch_location_changes_failed": "Konum değişikliklerini alma başarısız: {{message}}",
       "fetch_location_failed": "{{id}} konumunu alma hatası: {{message}}",
       "fetch_review_failed": "{{id}} değerlendirmesini alma hatası: {{message}}",
+      "fetch_user_failed": "{{id}} kullanıcısı getirilirken hata oluştu: {{message}}",
       "location_edit_failed": "Konum düzenleme başarısız: {{message}}",
       "location_submission_failed": "Konum gönderimi başarısız: {{message}}",
       "photo_upload_failed": "Fotoğraf yükleme başarısız: {{message}}",
