@@ -212,7 +212,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
         />
       </InlineSelects>
       <CheckboxLabel>
-        <Checkbox name="unverified" label={t('glossary.unverified')} />
+        <Checkbox id="unverified" label={t('glossary.unverified')} />
         {t('glossary.unverified')}
       </CheckboxLabel>
     </>
