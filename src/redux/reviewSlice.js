@@ -9,19 +9,17 @@ export const fetchReviewData = createAsyncThunk(
     return reviewData
   },
 )
-
+const initialState = {
+  isLoading: false,
+  review: null,
+  form: null,
+}
 const reviewSlice = createSlice({
   name: 'review',
-  initialState: {
-    isLoading: false,
-    review: null,
-    form: null,
-  },
+  initialState,
   reducers: {
     clearReview: (state) => {
-      state.isLoading = false
-      state.review = null
-      state.form = null
+      Object.assign(state, initialState)
     },
     saveReviewFormValues: (state, action) => {
       state.form = action.payload
