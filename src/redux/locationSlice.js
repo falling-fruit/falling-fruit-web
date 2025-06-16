@@ -12,6 +12,32 @@ import {
 } from '../utils/api'
 import { fetchReviewData } from './reviewSlice'
 
+const initialState = {
+  isLoading: false,
+  location: null,
+  reviews: [],
+  position: null, // {lat: number, lng: number}
+  locationId: null,
+  isBeingEdited: false,
+  fromSettings: false,
+  form: null,
+  tooltipOpen: false,
+  streetViewOpen: false,
+  lightbox: {
+    isOpen: false,
+    reviewIndex: null,
+    photoIndex: null,
+  },
+  pane: {
+    drawerFullyOpen: false,
+    drawerLow: false,
+    isFromListLocations: false,
+    isFromEmbedViewMap: false,
+    tabIndex: 0,
+  },
+  isBeingInitializedMobile: false,
+}
+
 export const fetchLocationData = createAsyncThunk(
   'location/fetchLocationData',
   async ({
@@ -51,47 +77,10 @@ export const deleteLocationReview = createAsyncThunk(
 
 const locationSlice = createSlice({
   name: 'location',
-  initialState: {
-    isLoading: false,
-    location: null,
-    reviews: [],
-    position: null, // {lat: number, lng: number}
-    locationId: null,
-    isBeingEdited: false,
-    fromSettings: false,
-    form: null,
-    tooltipOpen: false,
-    streetViewOpen: false,
-    lightbox: {
-      isOpen: false,
-      reviewIndex: null,
-      photoIndex: null,
-    },
-    pane: {
-      drawerFullyOpen: false,
-      isFromListLocations: false,
-      isFromEmbedViewMap: false,
-      tabIndex: 0,
-    },
-    isBeingInitializedMobile: false,
-  },
+  initialState,
   reducers: {
     clearLocation: (state) => {
-      state.isLoading = false
-      state.location = null
-      state.locationId = null
-      state.position = null
-      state.isBeingEdited = false
-      state.form = null
-      state.tooltipOpen = false
-      state.streetViewOpen = false
-      state.lightbox.isOpen = false
-      state.lightbox.reviewIndex = null
-      state.lightbox.photoIndex = null
-      state.pane.drawerFullyOpen = false
-      state.pane.isFromListLocations = false
-      state.pane.tabIndex = 0
-      state.isBeingInitializedMobile = false
+      Object.assign(state, initialState)
     },
     duplicateIntoNewLocation: (state) => {
       state.isLoading = false
@@ -147,15 +136,22 @@ const locationSlice = createSlice({
       state.lightbox.reviewIndex = action.payload.reviewIndex
       state.lightbox.photoIndex = action.payload.photoIndex
     },
-    reenableAndPartiallyClosePaneDrawer: (state) => {
+    reenablePaneDrawerAndSetToLowPosition: (state) => {
       state.pane.isFromListLocations = false
       state.pane.drawerFullyOpen = false
+      state.pane.drawerLow = true
     },
     fullyOpenPaneDrawer: (state) => {
       state.pane.drawerFullyOpen = true
+      state.pane.drawerLow = false
     },
-    partiallyClosePaneDrawer: (state) => {
+    setPaneDrawerToMiddlePosition: (state) => {
       state.pane.drawerFullyOpen = false
+      state.pane.drawerLow = false
+    },
+    setPaneDrawerToLowPosition: (state) => {
+      state.pane.drawerFullyOpen = false
+      state.pane.drawerLow = true
     },
     setTabIndex: (state, action) => {
       state.pane.tabIndex = action.payload
@@ -303,10 +299,11 @@ export const {
   openLightbox,
   closeLightbox,
   setLightboxIndices,
-  reenableAndPartiallyClosePaneDrawer,
+  reenablePaneDrawerAndSetToLowPosition,
   setTabIndex,
   fullyOpenPaneDrawer,
-  partiallyClosePaneDrawer,
+  setPaneDrawerToMiddlePosition,
+  setPaneDrawerToLowPosition,
   setFromSettings,
   setIsBeingInitializedMobile,
 } = locationSlice.actions

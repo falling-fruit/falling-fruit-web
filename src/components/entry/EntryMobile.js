@@ -10,8 +10,9 @@ import styled from 'styled-components/macro'
 
 import {
   fullyOpenPaneDrawer,
-  partiallyClosePaneDrawer,
-  reenableAndPartiallyClosePaneDrawer,
+  reenablePaneDrawerAndSetToLowPosition,
+  setPaneDrawerToLowPosition,
+  setPaneDrawerToMiddlePosition,
   setTabIndex,
 } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -30,8 +31,17 @@ const ENTRY_IMAGE_HEIGHT = 250
 const TOP_BAR_HEIGHT = 80
 const ENTRY_TABS_HEIGHT = 50
 
+const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
+  Math.max(
+    0,
+    Math.min(
+      1,
+      1 - (topBoundary - currentPosition) / (topBoundary - bottomBoundary),
+    ),
+  )
+
 const EntryLoading = () => (
-  <>
+  <article style={{ padding: '20px 23px', boxSizing: 'border-box' }}>
     <Skeleton
       height={14}
       width="70%"
@@ -46,7 +56,7 @@ const EntryLoading = () => (
 
     <Skeleton height={16} width="60%" style={{ marginBottom: '0.5em' }} />
     <Skeleton height={16} width="50%" style={{ marginBottom: '0.5em' }} />
-  </>
+  </article>
 )
 
 const RevealedFromUnderneath = styled.div`
@@ -149,6 +159,7 @@ const EntryMobile = () => {
     isLoading,
     pane: {
       drawerFullyOpen,
+      drawerLow,
       tabIndex,
       isFromListLocations,
       isFromEmbedViewMap,
@@ -164,8 +175,19 @@ const EntryMobile = () => {
     reviews.filter((review) => review.photos && review.photos.length > 0)
       .length > 0
 
-  const [progress, setProgress] = useState(
-    drawerFullyOpen || drawerDisabled ? 1 : 0.3,
+  const [currentTranslateY, setCurrentTranslateY] = useState(
+    drawerFullyOpen || drawerDisabled
+      ? hasImages
+        ? ENTRY_IMAGE_HEIGHT
+        : TOP_BAR_HEIGHT
+      : window.innerHeight * 0.7,
+  )
+
+  const offset = hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT
+  const progress = calculateProgress(
+    currentTranslateY,
+    offset,
+    window.innerHeight,
   )
 
   const hasReviews = reviews && reviews.length > 0
@@ -176,31 +198,46 @@ const EntryMobile = () => {
         displayOverTopBar={!filterOpen || drawerFullyOpen}
         topPositionHeight={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
         middlePositionScreenRatio={0.7}
-        position={drawerFullyOpen || drawerDisabled ? 'top' : 'middle'}
+        partialPositionHeightPx={80}
+        position={
+          drawerFullyOpen || drawerDisabled
+            ? 'top'
+            : drawerLow
+              ? 'low'
+              : 'middle'
+        }
         onPositionChange={(position) => {
           if (position === 'top') {
-            setProgress(1)
             setTimeout(() => dispatch(fullyOpenPaneDrawer()), 0.25)
           } else if (position === 'middle') {
-            setProgress(0.3)
-            dispatch(partiallyClosePaneDrawer())
+            dispatch(setPaneDrawerToMiddlePosition())
+          } else if (position === 'low') {
+            dispatch(setPaneDrawerToLowPosition())
           } else if (position === 'bottom') {
             history.push('/map')
+          } else {
+            console.error(position)
           }
         }}
         drawerDisabled={drawerDisabled || drawerFullyOpen}
-        updateProgress={setProgress}
+        onChangeTranslateY={setCurrentTranslateY}
         hasWhiteBackground={!isLoading && hasImages}
         showMoveElement={!(drawerFullyOpen || drawerDisabled)}
       >
-        {!isLoading && hasImages && (
+        {hasImages && (
           <RevealedFromUnderneath
             targetHeight={ENTRY_IMAGE_HEIGHT}
             progress={progress}
             isDrawerFullyOpen={drawerFullyOpen}
           >
-            <LightboxMobile />
-            <Carousel />
+            {isLoading ? (
+              <Skeleton height={ENTRY_IMAGE_HEIGHT} />
+            ) : (
+              <>
+                <LightboxMobile />
+                <Carousel />
+              </>
+            )}
           </RevealedFromUnderneath>
         )}
         {hasReviews && (
@@ -252,7 +289,7 @@ const EntryMobile = () => {
                   ? () => history.push('/list')
                   : (e) => {
                       e.stopPropagation()
-                      dispatch(partiallyClosePaneDrawer())
+                      dispatch(setPaneDrawerToMiddlePosition())
                     }
             }
             icon={<ReturnIcon />}
@@ -263,7 +300,7 @@ const EntryMobile = () => {
               <EntryButton
                 onClick={(event) => {
                   event.stopPropagation()
-                  dispatch(reenableAndPartiallyClosePaneDrawer())
+                  dispatch(reenablePaneDrawerAndSetToLowPosition())
                 }}
                 icon={<MapIcon />}
                 label="map-button"
