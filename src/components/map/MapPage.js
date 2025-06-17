@@ -185,6 +185,7 @@ const GoogleMapWrapper = ({ onUnmount, ...props }) => {
 
 const MapPage = ({ isDesktop }) => {
   const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
   const history = useAppHistory()
   const dispatch = useDispatch()
   const handleViewChangeRef = useRef(() => void 0)
@@ -390,7 +391,9 @@ const MapPage = ({ isDesktop }) => {
             mapTypeId: mapType,
             disableDefaultUI: true,
             rotateControlOptions: {
-              position: googleMaps.ControlPosition.INLINE_START_BLOCK_END,
+              position: isRTL
+                ? googleMaps.ControlPosition.RIGHT_BOTTOM
+                : googleMaps.ControlPosition.LEFT_BOTTOM,
             },
             minZoom: MIN_ZOOM,
             // Toggle all basemap icons
