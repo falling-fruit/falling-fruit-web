@@ -118,7 +118,7 @@ const mercatorToLatLng = (x, y) => {
   return { lat, lng }
 }
 
-const getBoundsForScreenSize = (center, zoom, width, height) => {
+export const getBoundsForScreenSize = (center, zoom, width, height) => {
   const scale = Math.pow(2, zoom)
   const worldCoordinateCenter = project(center)
 
