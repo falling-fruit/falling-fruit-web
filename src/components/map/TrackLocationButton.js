@@ -5,12 +5,11 @@ import { toast } from 'react-toastify'
 import { keyframes } from 'styled-components'
 import styled from 'styled-components/macro'
 
-import { MIN_GEOLOCATION_ZOOM } from '../../constants/map'
 import {
   disableGeolocation,
-  geolocationCentering,
   GeolocationState,
   requestGeolocation,
+  rerequestGeolocation,
 } from '../../redux/geolocationSlice'
 import IconButton from '../ui/IconButton'
 
@@ -49,7 +48,10 @@ const TrackLocationIcon = ({ geolocationState, ...props }) => {
     return <CurrentLocation opacity="0.5" {...props} />
   } else if (geolocationState === GeolocationState.LOADING) {
     return <SpinningLoader {...props} />
-  } else if (geolocationState === GeolocationState.DOT_ON) {
+  } else if (
+    geolocationState === GeolocationState.DOT_ON ||
+    geolocationState === GeolocationState.RELOADING
+  ) {
     return <CurrentLocation opacity="0.8" {...props} />
   } else {
     return <CurrentLocation {...props} />
@@ -91,15 +93,11 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
 const TrackLocationButton = ({ isIcon }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { geolocation, geolocationState } = useSelector(
-    (state) => state.geolocation,
-  )
+  const { geolocationState } = useSelector((state) => state.geolocation)
 
   const TrackLocationBtn = isIcon
     ? TrackLocationIconButton
     : TrackLocationPrependButton
-
-  const { googleMap } = useSelector((state) => state.map)
 
   return (
     <TrackLocationBtn
@@ -107,17 +105,10 @@ const TrackLocationButton = ({ isIcon }) => {
       onClick={(event) => {
         if (geolocationState === GeolocationState.DENIED) {
           toast.info(t('error_message.geolocation.denied'))
-        } else if (geolocationState === GeolocationState.DOT_ON) {
-          dispatch(geolocationCentering(geolocation))
-          googleMap.panTo({
-            lat: geolocation.latitude,
-            lng: geolocation.longitude,
-          })
-          if (googleMap.getZoom() < MIN_GEOLOCATION_ZOOM) {
-            googleMap.setZoom(MIN_GEOLOCATION_ZOOM)
-          }
         } else if (geolocationState === GeolocationState.INITIAL) {
           dispatch(requestGeolocation())
+        } else if (geolocationState === GeolocationState.DOT_ON) {
+          dispatch(rerequestGeolocation())
         } else {
           dispatch(disableGeolocation())
         }
