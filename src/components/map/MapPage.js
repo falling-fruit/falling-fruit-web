@@ -11,6 +11,7 @@ import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { disconnectMap, setGoogle } from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
+import { viewToString } from '../../utils/appUrl'
 import throttle from '../../utils/throttle'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsEmbed } from '../../utils/useBreakpoint'
@@ -272,9 +273,23 @@ const MapPage = ({ isDesktop }) => {
     }
   }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
 
+  const allClusters = clusters.filter((cluster) => {
+    // Skip clusters of size 1 that have the same coordinates as the selected location
+    if (
+      selectedLocation &&
+      cluster.count === 1 &&
+      Math.abs(cluster.lat - selectedLocation.lat) < 1e-6 &&
+      Math.abs(cluster.lng - selectedLocation.lng) < 1e-6
+    ) {
+      return false
+    }
+    return true
+  })
   const allLocations =
     clusters.length !== 0
-      ? []
+      ? selectedLocation
+        ? [selectedLocation]
+        : []
       : selectedLocation
         ? [...locations, selectedLocation].filter(
             (loc, index, self) =>
@@ -306,6 +321,16 @@ const MapPage = ({ isDesktop }) => {
         zoom: currentZoom + 1,
       })
       googleMap?.fitBounds(bounds)
+    }
+    if (isViewingLocation) {
+      // Stop viewing location on cluster click
+      // history.push('/map') will only push to the right URL
+      // after google-maps-react calls onChange and updates coordinates to above
+      // hence we explicitly provide view coordinates
+      const center = googleMap.getCenter()
+      const zoom = googleMap.getZoom()
+      const viewString = viewToString(center.lat(), center.lng(), zoom)
+      history.push(`/map/${viewString}`)
     }
   }
 
@@ -473,7 +498,7 @@ const MapPage = ({ isDesktop }) => {
                 label={place.location.description}
               />
             )}
-          {clusters.map((cluster) => (
+          {allClusters.map((cluster) => (
             <Cluster
               key={JSON.stringify(cluster)}
               onClick={(event) => {

@@ -3,13 +3,14 @@ import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { distanceInMeters } from '../utils/mapDistance'
+import { clearLocation } from './locationSlice'
 import { updateLastMapView } from './viewportSlice'
 
 export const GeolocationState = {
   INITIAL: 'INITIAL',
   DENIED: 'DENIED',
   LOADING: 'LOADING',
-  FIRST_LOCATION: 'FIRST_LOCATION',
+  RELOADING: 'RELOADING',
   CENTERING: 'CENTERING',
   TRACKING: 'TRACKING',
   DOT_ON: 'DOT_ON',
@@ -20,10 +21,14 @@ export const geolocationSlice = createSlice({
   initialState: {
     geolocationState: GeolocationState.INITIAL,
     geolocation: null,
+    centerPoint: null,
   },
   reducers: {
     requestGeolocation: (state) => {
       state.geolocationState = GeolocationState.LOADING
+    },
+    rerequestGeolocation: (state) => {
+      state.geolocationState = GeolocationState.RELOADING
     },
     geolocationDenied: (state) => {
       state.geolocationState = GeolocationState.DENIED
@@ -31,10 +36,12 @@ export const geolocationSlice = createSlice({
     disableGeolocation: (state) => {
       state.geolocationState = GeolocationState.INITIAL
       state.geolocation = null
+      state.centerPoint = null
     },
     geolocationCentering: (state, action) => {
       state.geolocationState = GeolocationState.CENTERING
-      state.geolocation = action.payload
+      state.geolocation = action.payload.geolocation
+      state.centerPoint = action.payload.centerPoint
     },
     geolocationFollowing: (state, action) => {
       state.geolocationState = GeolocationState.DOT_ON
@@ -90,13 +97,31 @@ export const geolocationSlice = createSlice({
         const {
           center: { lat, lng },
         } = action.payload
-        const { latitude, longitude } = state.geolocation
+
+        const referencePoint = state.centerPoint || {
+          lat: state.geolocation.latitude,
+          lng: state.geolocation.longitude,
+        }
 
         // We allow zoom in/out or a tiny movement but panning the map should disable the centering
-        const distanceMeters = distanceInMeters(latitude, longitude, lat, lng)
+        const distanceMeters = distanceInMeters(
+          referencePoint.lat,
+          referencePoint.lng,
+          lat,
+          lng,
+        )
         if (distanceMeters > 1) {
           state.geolocationState = GeolocationState.DOT_ON
         }
+      }
+    },
+    [clearLocation]: (state) => {
+      if (
+        state.geolocation &&
+        !state.geolocation.loading &&
+        state.geolocationState !== GeolocationState.CENTERING
+      ) {
+        state.geolocationState = GeolocationState.DOT_ON
       }
     },
   },
@@ -104,6 +129,7 @@ export const geolocationSlice = createSlice({
 
 export const {
   requestGeolocation,
+  rerequestGeolocation,
   geolocationDenied,
   geolocationLoading,
   geolocationCentering,
