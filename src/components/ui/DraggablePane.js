@@ -49,7 +49,7 @@ const DraggablePane = ({
   middlePositionScreenRatio,
   partialPositionHeightPx,
   drawerDisabled,
-  updateProgress,
+  onChangeTranslateY,
   hasWhiteBackground,
   showMoveElement,
   displayOverTopBar,
@@ -68,9 +68,9 @@ const DraggablePane = ({
       }
       paneRef.current.style.transition = transition
       paneRef.current.style.transform = `translateY(${translateY}px)`
-      updateProgress(translateY)
+      onChangeTranslateY(translateY)
     },
-    [updateProgress],
+    [onChangeTranslateY],
   )
 
   const inferCurrentPosition = useCallback(() => {
