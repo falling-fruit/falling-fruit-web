@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchLocationData } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
 import { fetchReviewData } from '../../redux/reviewSlice'
-import { parseCurrentUrl } from '../../utils/appUrl'
+import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
 const ConnectReview = ({ reviewId }) => {
@@ -44,7 +44,7 @@ const ConnectReview = ({ reviewId }) => {
 
   useEffect(() => {
     if (location && !initialView && isDesktop) {
-      const { view } = parseCurrentUrl()
+      const view = viewFromCurrentUrl()
       if (view) {
         dispatch(setInitialView(view))
       }

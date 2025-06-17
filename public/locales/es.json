@@ -24,6 +24,7 @@
       "fetch_location_changes_failed": "Error al obtener cambios de ubicación: {{message}}",
       "fetch_location_failed": "Error al obtener ubicación {{id}}: {{message}}",
       "fetch_review_failed": "Error al obtener reseña {{id}}: {{message}}",
+      "fetch_user_failed": "Error al obtener usuario {{id}}: {{message}}",
       "location_edit_failed": "Error al editar ubicación: {{message}}",
       "location_submission_failed": "Error al enviar ubicación: {{message}}",
       "photo_upload_failed": "Error al subir foto: {{message}}",
@@ -360,6 +361,8 @@
     "you_reviewed": "Reseñaste esta ubicación el {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Sitio completo",
+    "simplified_controls_only": "Solo controles simplificados",
     "title": "Compartir esta vista",
     "url_copied": "¡URL copiada al portapapeles!",
     "url_copy_failed": "¡Error al copiar la URL al portapapeles!"

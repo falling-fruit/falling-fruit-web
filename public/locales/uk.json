@@ -24,6 +24,7 @@
       "fetch_location_changes_failed": "Не вдалося отримати зміни локації: {{message}}",
       "fetch_location_failed": "Помилка отримання локації {{id}}: {{message}}",
       "fetch_review_failed": "Помилка отримання відгуку {{id}}: {{message}}",
+      "fetch_user_failed": "Помилка отримання користувача {{id}}: {{message}}",
       "location_edit_failed": "Не вдалося відредагувати локацію: {{message}}",
       "location_submission_failed": "Не вдалося надіслати локацію: {{message}}",
       "photo_upload_failed": "Не вдалося завантажити фото: {{message}}",
@@ -360,6 +361,8 @@
     "you_reviewed": "Ви залишили відгук про це місце {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Повна версія сайту",
+    "simplified_controls_only": "Тільки спрощені елементи керування",
     "title": "Поділитися цим виглядом",
     "url_copied": "URL скопійовано до буфера обміну!",
     "url_copy_failed": "Не вдалося скопіювати URL до буфера обміну"

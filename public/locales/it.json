@@ -24,6 +24,7 @@
       "fetch_location_changes_failed": "Recupero modifiche posizione fallito: {{message}}",
       "fetch_location_failed": "Errore nel recupero della posizione {{id}}: {{message}}",
       "fetch_review_failed": "Errore nel recupero della recensione {{id}}: {{message}}",
+      "fetch_user_failed": "Errore nel recupero dell'utente {{id}}: {{message}}",
       "location_edit_failed": "Modifica della posizione fallita: {{message}}",
       "location_submission_failed": "Invio della posizione fallito: {{message}}",
       "photo_upload_failed": "Caricamento foto fallito: {{message}}",
@@ -360,6 +361,8 @@
     "you_reviewed": "Hai recensito questa posizione il {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Sito completo",
+    "simplified_controls_only": "Solo controlli semplificati",
     "title": "Condividi questa vista",
     "url_copied": "URL copiato negli appunti!",
     "url_copy_failed": "Impossibile copiare l'URL negli appunti"

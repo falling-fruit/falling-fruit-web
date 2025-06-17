@@ -24,6 +24,7 @@
       "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
       "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
+      "fetch_user_failed": "Fout bij ophalen gebruiker {{id}}: {{message}}",
       "location_edit_failed": "Bewerken van locatie mislukt: {{message}}",
       "location_submission_failed": "Indienen van locatie mislukt: {{message}}",
       "photo_upload_failed": "Uploaden van foto mislukt: {{message}}",
@@ -360,6 +361,8 @@
     "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Volledige website",
+    "simplified_controls_only": "Alleen vereenvoudigde bediening",
     "title": "Deel deze weergave",
     "url_copied": "URL gekopieerd naar klembord!",
     "url_copy_failed": "URL kopiëren naar klembord mislukt"

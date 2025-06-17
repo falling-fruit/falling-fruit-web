@@ -13,7 +13,7 @@ import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
-import { partiallyClosePaneDrawer } from '../../redux/locationSlice'
+import { setPaneDrawerToLowPosition } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
@@ -98,7 +98,7 @@ const EntryOverview = () => {
       googleMap?.setZoom(MIN_LOCATION_ZOOM)
     }
     if (pane.drawerFullyOpen) {
-      dispatch(partiallyClosePaneDrawer())
+      dispatch(setPaneDrawerToLowPosition())
     }
   }
 
@@ -193,7 +193,7 @@ const EntryOverview = () => {
                       <>
                         {t('locations.overview.added_by', { name: '' })}{' '}
                         {locationData.user_id ? (
-                          <Link to={`/profiles/${locationData.user_id}`}>
+                          <Link to={`/users/${locationData.user_id}`}>
                             {locationData.author}
                           </Link>
                         ) : (
