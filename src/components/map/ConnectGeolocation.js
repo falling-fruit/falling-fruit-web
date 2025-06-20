@@ -196,18 +196,18 @@ export const ConnectGeolocation = () => {
       return
     }
 
-    const handleDragStart = () => setIsMapMoving(true)
-    const handleDragEnd = () => setIsMapMoving(false)
+    const handleBoundsChanged = () => setIsMapMoving(true)
+    const handleIdle = () => setIsMapMoving(false)
 
-    const dragStartListener = googleMap.addListener(
-      'dragstart',
-      handleDragStart,
+    const boundsChangedListener = googleMap.addListener(
+      'bounds_changed',
+      handleBoundsChanged,
     )
-    const dragEndListener = googleMap.addListener('dragend', handleDragEnd)
+    const idleListener = googleMap.addListener('idle', handleIdle)
 
     return () => {
-      dragStartListener.remove()
-      dragEndListener.remove()
+      boundsChangedListener.remove()
+      idleListener.remove()
     }
   }, [googleMap])
 
