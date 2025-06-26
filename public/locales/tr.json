@@ -340,6 +340,12 @@
         "state": "Eyalet"
       },
       "intro_html": "Aşağıda kamusal alanlarda gıda yetiştiren (gıda ormanları, halka açık meyve bahçeleri), gıda toplayan (kent içi yiyecek toplama, tarla artığı toplama) veya gıda dağıtan (takaslar, bağışlar) kuruluşlar listelenmiştir. Kuruluşlar ülke, eyalet (varsa) ve şehre göre listelenmiştir. Üstü çizili olanların artık aktif olmadığı düşünülmektedir. Listede olması gereken başkalarını biliyorsanız, <a href=\"mailto:info@fallingfruit.org\">bizimle iletişime geçin</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Haritayı keşfet",
+      "join_us_for_produce": "Sokaklarımızdaki ürün bolluğunu keşfetmek için bize katılın.",
+      "map_the_urban_harvest": "Kentsel hasadı haritalayın!",
+      "our_platform_is_open": "Platformumuz açık kaynaklı, topluluk odaklı ve ücretsizdir."
     }
   },
   "problems": {

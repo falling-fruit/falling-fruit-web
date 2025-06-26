@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 
-import { checkAuth } from '../redux/authSlice'
-import { pathToSignInPage } from './appUrl'
-import { useAppHistory } from './useAppHistory'
+import { checkAuth } from '../../redux/authSlice'
+import { pathToSignInPage } from '../../utils/appUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 
 const AuthInitializer = () => {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const AuthInitializer = () => {
   useEffect(() => {
     dispatch(checkAuth())
       .unwrap()
-      .then(([_user, error]) => {
+      .then(([_user, error, _hadToken]) => {
         if (error) {
           if (error.message === 'Invalid refresh token') {
             history.push(pathToSignInPage())

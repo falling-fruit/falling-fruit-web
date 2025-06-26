@@ -21,7 +21,6 @@ import { AddLocationMobile } from '../ui/AddLocation'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
-import { ConnectGeolocation, isGeolocationOpen } from './ConnectGeolocation'
 import GeolocationDot from './GeolocationDot'
 import Location from './Location'
 import PanoramaHandler from './PanoramaHandler'
@@ -208,9 +207,7 @@ const MapPage = ({ isDesktop }) => {
 
   const place = useSelector((state) => state.place.selectedPlace)
 
-  const { geolocation, geolocationState } = useSelector(
-    (state) => state.geolocation,
-  )
+  const { geolocation } = useSelector((state) => state.geolocation)
   const { pathname, search } = useLocation()
   const {
     locationId,
@@ -405,8 +402,6 @@ const MapPage = ({ isDesktop }) => {
           )}
         </>
       )}
-
-      {isGeolocationOpen(geolocationState) && <ConnectGeolocation />}
 
       {googleMap && <PanoramaHandler />}
       {showStreetView && <CloseStreetView />}

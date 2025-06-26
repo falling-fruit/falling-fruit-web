@@ -147,7 +147,7 @@ const InfoPage = ({ children }) => {
     <PageScrollWrapper>
       <PageWrapper>
         {isMobile && (
-          <StyledBackButton onClick={() => history.push('/settings')}>
+          <StyledBackButton onClick={() => history.push('/')}>
             <ReturnIcon />
             {t('layouts.back')}
           </StyledBackButton>

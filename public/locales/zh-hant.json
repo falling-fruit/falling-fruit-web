@@ -340,6 +340,12 @@
         "state": "州/省"
       },
       "intro_html": "下面列出的是在公共場所種植食物（食物林、公共果園）、採摘食物（城市覓食、農場拾荒）或分發食物（交換、捐贈）的組織。組織按國家/地區、州（如果適用）和城市列出。那些名字被劃掉的人被認爲是不活躍的。如果您知道應該在此列表中的其他人，請<a href=\"mailto:info@fallingfruit.org\">與我們聯繫</a>！"
+    },
+    "welcome": {
+      "explore_the_map": "探索地圖",
+      "join_us_for_produce": "加入我們，一起發現街道上豐盛的產物。",
+      "map_the_urban_harvest": "映映城市收穫！",
+      "our_platform_is_open": "我們的平台是開源的，社區驅動的，且免費的。"
     }
   },
   "problems": {

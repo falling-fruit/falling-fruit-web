@@ -340,6 +340,12 @@
         "state": "Bundesland"
       },
       "intro_html": "Im Folgenden sind lokale Organisationen aufgeführt, die Lebensmittel anpflanzen (z.B. in Gemeinschaftsgärten), ernten (z.B. 'urban gardening'), oder auf andere Art und Weise verteilen und teilen. Organisationen werden nach Land, Bundesland/Kanton und Stadt aufgeführt. Organisationen mit durchgestrichenem Namen sind zur Zeit vermutlich inaktiv. Wenn du Organisationen kennst, die auf dieser Liste auftauchen müssten, dann <a href=\"mailto:info@fallingfruit.org\">sag uns Bescheid</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Erkunde die Karte",
+      "join_us_for_produce": "Begleiten Sie uns bei der Entdeckung der Fülle von Lebensmitteln auf unseren Straßen.",
+      "map_the_urban_harvest": "Kartiere die urbane Ernte!",
+      "our_platform_is_open": "Unsere Plattform ist Open Source, von der Community betrieben und kostenlos."
     }
   },
   "problems": {
