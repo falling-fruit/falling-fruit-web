@@ -6,6 +6,7 @@ import {
   geolocationCentering,
   geolocationError,
   geolocationFollowing,
+  geolocationReceived,
   GeolocationState,
   geolocationTracking,
 } from '../../redux/geolocationSlice'
@@ -184,7 +185,7 @@ const getContainingView = (
   }
 }
 
-export const ConnectGeolocation = () => {
+const ConnectGeolocationInner = () => {
   const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
   const maps = getGoogleMaps ? getGoogleMaps() : null
   const dispatch = useDispatch()
@@ -211,10 +212,6 @@ export const ConnectGeolocation = () => {
     }
   }, [googleMap])
 
-  /*
-    note: if GeolocationState.INITIAL or GeolocationState.DENIED then this component does not render
-    @see src/components/map/MapPage.js
-    */
   const geolocationState = useSelector(
     (state) => state.geolocation.geolocationState,
   )
@@ -225,15 +222,14 @@ export const ConnectGeolocation = () => {
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (!googleMap) {
-      return
-    }
     if (geolocation.loading) {
       // Still loading, do nothing
     } else if (geolocation.error) {
       dispatch(geolocationError(geolocation.error))
     } else if (!geolocation.latitude || !geolocation.longitude) {
       dispatch(geolocationError({ message: t('error_message.unknown_error') }))
+    } else if (!googleMap) {
+      dispatch(geolocationReceived(geolocation))
     } else if (isMapMoving) {
       // Do nothing
     } else {
@@ -291,3 +287,16 @@ export const ConnectGeolocation = () => {
 
   return null
 }
+const ConnectGeolocation = () => {
+  const geolocationState = useSelector(
+    (state) => state.geolocation.geolocationState,
+  )
+
+  if (!isGeolocationOpen(geolocationState)) {
+    return null
+  }
+
+  return <ConnectGeolocationInner />
+}
+
+export default ConnectGeolocation

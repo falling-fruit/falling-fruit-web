@@ -5,14 +5,10 @@ import styled from 'styled-components/macro'
 import { EMBED_HEADER_HEIGHT_PX } from '../../constants/mobileLayout'
 import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
-import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
-import ForwardChevronIcon from '../ui/ForwardChevronIcon'
 import LabeledRow from '../ui/LabeledRow'
-import ListEntry, { PrimaryText } from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
-import SocialButtons from '../ui/SocialButtons'
 import GoogleBicycling from './mapTiles/google-bicycling.png'
 import GoogleRoadmap from './mapTiles/google-roadmap.png'
 import GoogleSatellite from './mapTiles/google-satellite.png'
@@ -113,30 +109,6 @@ const Attribution = styled.p`
     color: inherit;
     text-decoration: inherit;
     white-space: nowrap;
-  }
-`
-
-const StyledListEntry = styled(ListEntry)`
-  margin: 7px -26px;
-  width: calc(100% + 26px + 26px);
-  padding: 0 26px;
-
-  :not(:last-child) {
-    margin-block-end: 7px;
-  }
-`
-
-const StyledSocialButtons = styled(SocialButtons)`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  a {
-    color: ${({ theme }) => theme.text};
-  }
-
-  svg {
-    height: 32px;
   }
 `
 
@@ -339,49 +311,6 @@ const RegionalSettings = () => {
   )
 }
 
-const SettingsAbout = () => {
-  const { t } = useTranslation()
-  const history = useAppHistory()
-
-  return (
-    <>
-      <StyledSocialButtons />
-      <StyledListEntry
-        rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/changes')}
-      >
-        <PrimaryText>{t('glossary.activity')}</PrimaryText>
-      </StyledListEntry>
-      <StyledListEntry
-        rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/about')}
-      >
-        <PrimaryText>{t('layouts.application.menu.the_project')}</PrimaryText>
-      </StyledListEntry>
-      <StyledListEntry
-        rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/data')}
-      >
-        <PrimaryText>{t('layouts.application.menu.the_data')}</PrimaryText>
-      </StyledListEntry>
-      <StyledListEntry
-        rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/sharing')}
-      >
-        <PrimaryText>
-          {t('layouts.application.menu.sharing_the_harvest')}
-        </PrimaryText>
-      </StyledListEntry>
-      <StyledListEntry
-        rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/press')}
-      >
-        <PrimaryText>{t('layouts.application.menu.in_the_press')}</PrimaryText>
-      </StyledListEntry>
-    </>
-  )
-}
-
 const SettingsPage = ({ isDesktop, isEmbed }) => {
   const { t } = useTranslation()
 
@@ -396,12 +325,6 @@ const SettingsPage = ({ isDesktop, isEmbed }) => {
         <>
           <h3>{t('pages.settings.regional')}</h3>
           <RegionalSettings />
-          {!isEmbed && (
-            <>
-              <h3>{t('glossary.about')}</h3>
-              <SettingsAbout />
-            </>
-          )}
         </>
       )}
     </Page>
