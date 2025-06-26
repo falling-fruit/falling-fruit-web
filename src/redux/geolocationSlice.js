@@ -43,6 +43,9 @@ export const geolocationSlice = createSlice({
       state.geolocation = action.payload.geolocation
       state.centerPoint = action.payload.centerPoint
     },
+    geolocationReceived: (state, action) => {
+      state.geolocation = action.payload
+    },
     geolocationFollowing: (state, action) => {
       state.geolocationState = GeolocationState.DOT_ON
       state.geolocation = action.payload
@@ -135,6 +138,7 @@ export const {
   geolocationCentering,
   geolocationFollowing,
   geolocationError,
+  geolocationReceived,
   disableGeolocation,
   geolocationTracking,
 } = geolocationSlice.actions

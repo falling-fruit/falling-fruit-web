@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 
+import ConnectGeolocation from './ConnectGeolocation'
 import ConnectI18nViz from './ConnectI18nViz'
 import ConnectInitLocation from './ConnectInitLocation'
 import ConnectList from './ConnectList'
@@ -261,6 +262,19 @@ const connectRoutes = [
    */
   <Route key="connect-top-panel" path={['/map', '/list', '/locations']}>
     <ConnectTopPanel />
+  </Route>,
+
+  /*
+   * ConnectGeolocation
+   * why: geolocation tracking needs to respond to requests
+   *
+   * action: handle geolocation state changes and map positioning
+   */
+  <Route
+    key="connect-geolocation"
+    path={['/map', '/locations', '/auth/welcome']}
+  >
+    <ConnectGeolocation />
   </Route>,
 ]
 

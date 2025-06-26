@@ -7,8 +7,10 @@ import * as Yup from 'yup'
 import { editProfile, logout } from '../../redux/authSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { FormButtonWrapper, FormInputWrapper } from '../auth/AuthWrappers'
 import { Input, Textarea } from '../form/FormikWrappers'
+import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
@@ -34,6 +36,7 @@ const AccountPage = () => {
   const isLoggedIn = !!user
   const history = useAppHistory()
   const { t } = useTranslation()
+  const isDesktop = useIsDesktop()
 
   if (!isLoggedIn && !isLoading) {
     return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
@@ -100,6 +103,14 @@ const AccountPage = () => {
           >
             {t('users.sign_out')}
           </Button>
+          <br />
+          {!isDesktop && (
+            <>
+              <br />
+              <h3>{t('glossary.about')}</h3>
+              <AboutSection />
+            </>
+          )}
         </>
       ) : (
         <LoadingIndicator vertical cover />
