@@ -340,6 +340,12 @@
         "state": "State"
       },
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Explore the map",
+      "join_us_for_produce": "Join us to discover the bounty of produce on our streets.",
+      "map_the_urban_harvest": "Map the urban harvest!",
+      "our_platform_is_open": "Our platform is open source, community driven, and free."
     }
   },
   "problems": {
@@ -363,9 +369,9 @@
     "you_reviewed": "You reviewed this location on {{date}}"
   },
   "share": {
-    "title": "Share this view",
-    "simplified_controls_only": "Simplified controls only",
     "leave_embed_view_for_full_site": "Full site",
+    "simplified_controls_only": "Simplified controls only",
+    "title": "Share this view",
     "url_copied": "URL copied to clipboard!",
     "url_copy_failed": "Failed to copy URL to clipboard"
   },
@@ -398,7 +404,6 @@
     "email_settings": "Email settings",
     "forgot_password": "Reset your password",
     "joined_on": "Joined on {{date}}",
-    "your_activity": "Your activity",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
     "options": {
@@ -415,6 +420,7 @@
     "send": "Send",
     "send_password_instructions": "Send password reset instructions",
     "sign_in": "Sign in",
-    "sign_out": "Sign out"
+    "sign_out": "Sign out",
+    "your_activity": "Your activity"
   }
 }

@@ -340,6 +340,12 @@
         "state": "Stan"
       },
       "intro_html": "Poniżej wymienione są organizacje, które uprawiają żywność w przestrzeniach publicznych (lasy żywnościowe, publiczne sady), zbierają żywność (zbieractwo miejskie, zbieranie plonów z gospodarstw) lub dystrybuują żywność (wymiany, darowizny). Organizacje są wymienione według kraju, stanu (jeśli dotyczy) i miasta. Te z przekreślonymi nazwami są prawdopodobnie nieaktywne. Jeśli znasz inne, które powinny znaleźć się na tej liście, <a href=\"mailto:info@fallingfruit.org\">skontaktuj się z nami</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Otwórz mapę",
+      "join_us_for_produce": "Dołącz do nas, aby odkryć bogactwo plonów na naszych ulicach.",
+      "map_the_urban_harvest": "Mapuj miejskie plony!",
+      "our_platform_is_open": "Nasza platforma jest open source, tworzona przez społeczność i darmowa."
     }
   },
   "problems": {

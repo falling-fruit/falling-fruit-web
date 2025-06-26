@@ -7,8 +7,13 @@ import LoginPage from './LoginPage'
 import PasswordResetPage from './PasswordResetPage'
 import PasswordSetPage from './PasswordSetPage'
 import SignupPage from './SignupPage'
+import WelcomePage from './WelcomePage'
 
 const pages = [
+  {
+    path: '/auth/welcome',
+    component: WelcomePage,
+  },
   {
     path: '/auth/sign_in',
     component: LoginPage,

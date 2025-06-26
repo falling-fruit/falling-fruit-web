@@ -340,6 +340,12 @@
         "state": "État"
       },
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Explorez la carte",
+      "join_us_for_produce": "Rejoignez-nous pour découvrir l'abondance de produits dans nos rues.",
+      "map_the_urban_harvest": "Carte du glanage urbain !",
+      "our_platform_is_open": "Notre plateforme est open source, gérée par la communauté et gratuite."
     }
   },
   "problems": {

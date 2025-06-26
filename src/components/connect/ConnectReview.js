@@ -6,8 +6,8 @@ import { toast } from 'react-toastify'
 import { fetchLocationData } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
 import { fetchReviewData } from '../../redux/reviewSlice'
-import { useAppHistory } from '../../utils/useAppHistory'
 import { viewFromCurrentUrl } from '../../utils/appUrl'
+import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
 const ConnectReview = ({ reviewId }) => {

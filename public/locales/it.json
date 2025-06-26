@@ -340,6 +340,12 @@
         "state": "Stato"
       },
       "intro_html": "Di seguito sono elencate le organizzazioni che si occupano di agricoltura urbana negli spazi pubblici (orti urbani, frutteti pubblici), o raccolgono frutta, erbe e ortaggi (raccolta urbana, orti urbani) o distribuiscono prodotti alimentari (donazioni). Le organizzazioni sono suddivise per paese, stato (se applicabile) e città. Quelli con nomi sbarrati si pensa che siano inattivi. Se sei a conoscenza di altri dati che dovrebbero essere in questa lista, <a href=\"mailto:info@fallingfruit.org\">contattaci</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Esplora la mappa",
+      "join_us_for_produce": "Unisciti a noi per scoprire l'abbondanza di prodotti nelle nostre strade.",
+      "map_the_urban_harvest": "Mappatura del raccolto urbano!",
+      "our_platform_is_open": "La nostra piattaforma è open source, gestita dalla comunità e gratuita."
     }
   },
   "problems": {
