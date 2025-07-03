@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { deleteLocationReview } from '../../redux/locationSlice'
-import ImagePreview from '../ui/ImagePreview'
+import ImagePreview, { ImagesContainer } from '../ui/ImagePreview'
 import ResetButton from '../ui/ResetButton'
 import ReviewStats, { getStarRating, Separator, StatsRow } from './ReviewStats'
 import { formatISOString } from './textFormatters'
@@ -171,16 +171,19 @@ const Review = ({
           <p dir="auto">{review.comment}</p>
         </ReviewDescription>
       )}
-      {includePreview &&
-        review.photos.map((photo, index) => (
-          <StyledImagePreview
-            $small
-            key={photo.thumb}
-            onClick={() => onImageClick(index)}
-          >
-            <img src={photo.thumb} alt={review.title} />
-          </StyledImagePreview>
-        ))}
+      {includePreview && review.photos.length > 0 && (
+        <ImagesContainer>
+          {review.photos.map((photo, index) => (
+            <StyledImagePreview
+              $small
+              key={photo.thumb}
+              onClick={() => onImageClick(index)}
+            >
+              <img src={photo.thumb} alt={review.title} />
+            </StyledImagePreview>
+          ))}
+        </ImagesContainer>
+      )}
     </ReviewContainer>
   )
 }

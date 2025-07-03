@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { closeLightbox, setLightboxIndices } from '../../redux/locationSlice'
-import ImagePreview from '../ui/ImagePreview'
+import ImagePreview, { ImagesContainer } from '../ui/ImagePreview'
 import ResetButton from '../ui/ResetButton'
 import Review from './Review'
 
@@ -48,10 +48,7 @@ const ThumbnailImage = styled(ImagePreview)`
   }
 `
 
-const ThumbnailImageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`
+const ThumbnailImageContainer = styled(ImagesContainer)``
 
 const NavButtonContainer = styled.div`
   position: absolute;

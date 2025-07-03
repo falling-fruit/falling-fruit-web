@@ -46,6 +46,11 @@ const Tile = styled.div`
   }
 `
 
+export const ImagesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
 const ImagePreview = ({
   children,
   className,

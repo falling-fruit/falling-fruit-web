@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { closeLightbox, setLightboxIndices } from '../../redux/locationSlice'
-import ImagePreview from '../ui/ImagePreview'
+import ImagePreview, { ImagesContainer } from '../ui/ImagePreview'
 import ResetButton from '../ui/ResetButton'
 import Review from './Review'
 
@@ -50,10 +50,9 @@ const ThumbnailImage = styled(ImagePreview)`
   }
 `
 
-const ThumbnailImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const ThumbnailImageContainer = styled(ImagesContainer)`
   align-items: center;
+  justify-content: center;
 `
 
 const NavButtonContainer = styled.div`
