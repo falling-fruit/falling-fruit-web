@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "Hämtning av platsändringar misslyckades: {{message}}",
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
       "fetch_review_failed": "Fel vid hämtning av recension {{id}}: {{message}}",
+      "fetch_user_failed": "Fel vid hämtning av användare {{id}}: {{message}}",
       "location_edit_failed": "Redigering av plats misslyckades: {{message}}",
       "location_submission_failed": "Inlämning av plats misslyckades: {{message}}",
       "photo_upload_failed": "Bilduppladdning misslyckades: {{message}}",
@@ -338,6 +339,12 @@
         "state": "Delstat"
       },
       "intro_html": "Nedan listas organisationer som odlar mat på offentliga platser (matskog, offentliga fruktträdgårdar), plockar mat (urban skördning, efterplockning på gårdar) eller distribuerar mat (utbyten, donationer). Organisationerna är listade efter land, delstat (om tillämpligt) och stad. De med överstrukna namn antas vara inaktiva. Om du känner till andra som borde vara med på denna lista, <a href=\"mailto:info@fallingfruit.org\">kontakta oss</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Utforska kartan",
+      "join_us_for_produce": "Gå med oss för att upptäcka överflödet av grödor på våra gator.",
+      "map_the_urban_harvest": "Kartlägg stadskörden!",
+      "our_platform_is_open": "Vår plattform är öppen källkod, gemenskapsdriven och gratis."
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "Du recenserade denna plats den {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Fullständig webbplats",
+    "simplified_controls_only": "Endast förenklade kontroller",
     "title": "Dela denna vy",
     "url_copied": "URL kopierad till urklipp!",
     "url_copy_failed": "Misslyckades att kopiera URL till urklipp"

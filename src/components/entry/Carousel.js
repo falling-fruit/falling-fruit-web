@@ -18,6 +18,8 @@ const Carousel = styled(ResponsiveCarousel)`
     width: 100%;
     object-fit: cover;
     height: 250px;
+    background-color: white;
+    display: block;
   }
 
   .control-dots {
@@ -76,7 +78,7 @@ const EntryCarousel = () => {
       showIndicators={allReviewPhotos.length > 1}
     >
       {allReviewPhotos.map((photo) => (
-        <img key={photo.id} src={photo.medium} alt="entry" />
+        <img key={photo.id} src={photo.medium} alt="" />
       ))}
     </Carousel>
   )

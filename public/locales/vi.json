@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
       "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
+      "fetch_user_failed": "Lỗi khi tải thông tin người dùng {{id}}: {{message}}",
       "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
       "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
       "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
@@ -338,6 +339,12 @@
         "state": "Tiểu bang"
       },
       "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Những người có tên bị gạch bỏ được cho là không hoạt động. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Khám phá bản đồ",
+      "join_us_for_produce": "Hãy tham gia cùng chúng tôi để khám phá sự dồi dào của sản phẩm trên đường phố của chúng ta.",
+      "map_the_urban_harvest": "Lập bản đồ thu hoạch đô thị!",
+      "our_platform_is_open": "Nền tảng của chúng tôi là mã nguồn mở, được cộng đồng điều hành và miễn phí."
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Trang web đầy đủ",
+    "simplified_controls_only": "Chỉ hiển thị điều khiển đơn giản",
     "title": "Chia sẻ góc nhìn này",
     "url_copied": "Đã sao chép URL vào bộ nhớ tạm!",
     "url_copy_failed": "Không thể sao chép URL vào bộ nhớ tạm"
