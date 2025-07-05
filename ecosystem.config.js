@@ -1,4 +1,3 @@
-//Knip marks this file as unused, but is still needed for future development purposes. 
 module.exports = {
   name: 'web',
   script: 'serve',
