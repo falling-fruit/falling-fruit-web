@@ -21,8 +21,9 @@ const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid ${({ theme }) => theme.orange};
-  border-radius: 0.225em;
+  margin: 0 7.5px 0 2px;
+  border-radius: 0.1em;
+  box-shadow: 0 0 0 2px ${({ theme }) => theme.orange};
   background: ${({ checked, theme }) =>
     checked && checked !== 'mixed' ? theme.orange : theme.transparentOrange};
 
