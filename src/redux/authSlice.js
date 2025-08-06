@@ -7,7 +7,7 @@ import { editUser, getUser, getUserToken, refreshUserToken } from '../utils/api'
 import authStore from '../utils/authStore'
 
 export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
-  const token = authStore.initFromStorage()
+  const token = authStore.getToken()
   let user = null
   let error = null
 
