@@ -92,7 +92,7 @@ const Tabs = () => {
     } else if (newTabIndex === 3) {
       // Logged in users go to account page
       if (isLoggedIn) {
-        history.push('/users/edit')
+        history.push('/account/edit')
       } else {
         // Otherwise sign in
         history.pushToSignInPage()

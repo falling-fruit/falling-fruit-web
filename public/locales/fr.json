@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
+      "fetch_user_failed": "Erreur lors de la récupération de l'utilisateur {{id}} : {{message}}",
       "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
       "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
       "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
@@ -338,6 +339,12 @@
         "state": "État"
       },
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
+    },
+    "welcome": {
+      "explore_the_map": "Explorez la carte",
+      "join_us_for_produce": "Rejoignez-nous pour découvrir l'abondance de produits dans nos rues.",
+      "map_the_urban_harvest": "Carte du glanage urbain !",
+      "our_platform_is_open": "Notre plateforme est open source, gérée par la communauté et gratuite."
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "Tu as évalué cet emplacement le {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Site complet",
+    "simplified_controls_only": "Commandes simplifiées uniquement",
     "title": "Partager cette vue",
     "url_copied": "URL copiée dans ton presse-papiers !",
     "url_copy_failed": "Échec de la copie de l'URL dans ton presse-papiers"

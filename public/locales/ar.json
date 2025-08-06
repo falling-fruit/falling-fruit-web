@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "فشل في جلب تغييرات الموقع: {{message}}",
       "fetch_location_failed": "خطأ في جلب الموقع {{id}}: {{message}}",
       "fetch_review_failed": "خطأ في جلب المراجعة {{id}}: {{message}}",
+      "fetch_user_failed": "خطأ في جلب المستخدم {{id}}: {{message}}",
       "location_edit_failed": "فشل تحرير الموقع: {{message}}",
       "location_submission_failed": "فشل تقديم الموقع: {{message}}",
       "photo_upload_failed": "فشل تحميل الصورة: {{message}}",
@@ -338,6 +339,12 @@
         "state": "ولاية"
       },
       "intro_html": "المدرجة أدناه هي المنظمات التي تزرع الغذاء في الأماكن العامة (غابات الطعام ، البساتين العامة) ، تختار الطعام (البحث عن الطعام في المناطق الحضرية ، جمع المزارع) ، أو توزيع الطعام (التبادلات ، التبرعات). يتم سرد المنظمات حسب البلد والولاية (إن أمكن) والمدينة. يُعتقد أن الأشخاص ذوي الأسماء المشطوبة غير نشطين. إذا كنت تعرف الآخرين الموجودين في هذه القائمة ، <a href=\"mailto:info@fallingfruit.org\">فاتصل بنا</a> !"
+    },
+    "welcome": {
+      "explore_the_map": "استكشف الخريطة",
+      "join_us_for_produce": "انضم إلينا لاكتشاف وفرة المنتجات في شوارعنا.",
+      "map_the_urban_harvest": "خريطة الحصاد الحضري!",
+      "our_platform_is_open": "منصتنا مفتوحة المصدر، يديرها المجتمع، ومجانية."
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "الموقع الكامل",
+    "simplified_controls_only": "عناصر التحكم المبسطة فقط",
     "title": "مشاركة هذا المنظر",
     "url_copied": "تم نسخ الرابط إلى الحافظة!",
     "url_copy_failed": "فشل نسخ الرابط إلى الحافظة"

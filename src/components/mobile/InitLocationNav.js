@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import { parseCurrentUrl } from '../../utils/appUrl'
+import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { isTooClose } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
@@ -20,7 +20,7 @@ const InitLocationNav = () => {
   const history = useAppHistory()
   const { locations } = useSelector((state) => state.map)
   const { form, locationId } = useSelector((state) => state.location)
-  const { view } = parseCurrentUrl()
+  const view = viewFromCurrentUrl()
 
   const editingId = locationId === 'new' ? undefined : locationId
 

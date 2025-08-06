@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "获取位置变更失败：{{message}}",
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
       "fetch_review_failed": "获取评论 {{id}} 失败：{{message}}",
+      "fetch_user_failed": "获取用户{{id}}失败：{{message}}",
       "location_edit_failed": "编辑位置失败：{{message}}",
       "location_submission_failed": "提交位置失败：{{message}}",
       "photo_upload_failed": "照片上传失败：{{message}}",
@@ -338,6 +339,12 @@
         "state": "州/省"
       },
       "intro_html": "下面列出的是在公共场所种植食物（食物林、公共果园）、采摘食物（城市觅食、农场拾荒）或分发食物（交换、捐赠）的组织。组织按国家/地区、州（如果适用）和城市列出。那些名字被划掉的人被认为是不活跃的。如果您知道应该在此列表中的其他人，请<a href=\"mailto:info@fallingfruit.org\">与我们联系</a>！"
+    },
+    "welcome": {
+      "explore_the_map": "探索地图",
+      "join_us_for_produce": "加入我们，发现街道上丰盛的农产品。",
+      "map_the_urban_harvest": "地图城市收获！",
+      "our_platform_is_open": "我们的平台是开源的，社区驱动的，并且免费。"
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "您于 {{date}} 评论了此地点"
   },
   "share": {
+    "leave_embed_view_for_full_site": "完整网站",
+    "simplified_controls_only": "仅显示简化控件",
     "title": "分享此视图",
     "url_copied": "网址已复制到剪贴板！",
     "url_copy_failed": "复制网址到剪贴板失败"
