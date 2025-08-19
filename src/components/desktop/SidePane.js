@@ -100,7 +100,7 @@ const SidePane = () => {
                 </BackButton>
               </StyledNavBack>
               <Header>{t('menu.settings')}</Header>
-              <SettingsPage desktop />
+              <SettingsPage isDesktop />
             </Route>
             <Route path="/locations/:locationId">
               {({ match }) =>

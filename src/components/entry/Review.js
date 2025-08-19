@@ -109,9 +109,7 @@ const Review = ({
             <>
               <span dir="auto">
                 {review.user_id ? (
-                  <Link to={`/profiles/${review.user_id}`}>
-                    {review.author}
-                  </Link>
+                  <Link to={`/users/${review.user_id}`}>{review.author}</Link>
                 ) : (
                   review.author
                 )}

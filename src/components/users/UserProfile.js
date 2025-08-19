@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { getUserById } from '../../utils/api'
@@ -33,14 +34,24 @@ const UserProfile = () => {
     async function fetchUserData() {
       setIsLoading(true)
 
-      const data = await getUserById(id)
-      setUserData(data)
+      try {
+        const data = await getUserById(id)
+        setUserData(data)
+      } catch (error) {
+        history.push('/map')
+        toast.error(
+          t('error_message.api.fetch_user_failed', {
+            id: id,
+            message: error.message || t('error_message.unknown_error'),
+          }),
+        )
+      }
 
       setIsLoading(false)
     }
 
     fetchUserData()
-  }, [id])
+  }, [id]) //eslint-disable-line
 
   if (isLoading) {
     return <LoadingOverlay />

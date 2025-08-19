@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-import { parseCurrentUrl } from '../../utils/appUrl'
+import { viewFromCurrentUrl } from '../../utils/appUrl'
 
 const ConnectPath = () => {
   const { initialView, googleMap } = useSelector((state) => state.map)
   const { pathname } = useLocation()
   const hasInitialView = !!initialView
-  const { view } = parseCurrentUrl()
+  const view = viewFromCurrentUrl()
 
   useEffect(() => {
     if (hasInitialView && googleMap && view) {
