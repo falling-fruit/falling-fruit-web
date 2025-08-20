@@ -4,13 +4,13 @@ I installed Capacitor on a Macbook and successfully built and ran the Android an
 
 ## Install Capacitor
 
-I installed Capacitor using the VSCode Extension an option described here:
+I installed Capacitor 7 using the VSCode Extension an option described here:
 https://capacitorjs.com/docs/getting-started
 
 ## Environment setup
 
 Capacitor needs NodeJS 20 or higher installed. I installed 22.16.0.\
-I installed the latest versions of Android Studio, xCode and cocoapods used to download iOS packages.\
+I installed the latest versions of Android Studio 2025.1.2, xCode 16.4 and cocoapods 1.16.2 (used to download iOS packages).\
 This document describes what is required for building iOS and Android apps https://capacitorjs.com/docs/getting-started/environment-setup
 
 To support the higher versions, in the web project .nvmrc file change:
