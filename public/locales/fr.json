@@ -342,10 +342,10 @@
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
     },
     "welcome": {
+      "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les emplacements de plantes comestibles et d'autres sources de nourriture gratuite.",
+      "discover_and_contribute": "Vous pouvez découvrir ce que d'autres ont récolté dans votre quartier et partager vos observations.",
       "explore_the_map": "Explorez la carte",
-      "join_us_for_produce": "Rejoignez-nous pour découvrir l'abondance de produits dans nos rues.",
-      "map_the_urban_harvest": "Carte du glanage urbain !",
-      "our_platform_is_open": "Notre plateforme est open source, gérée par la communauté et gratuite."
+      "welcome_visitors_to_the_site_short": "Bienvenue !"
     }
   },
   "problems": {

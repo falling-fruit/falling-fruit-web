@@ -22,10 +22,10 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
       "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
       "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
       "fetch_user_failed": "Error fetching user {{id}}: {{message}}",
       "location_edit_failed": "Location editing failed: {{message}}",
       "location_submission_failed": "Location submission failed: {{message}}",
@@ -342,10 +342,10 @@
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     },
     "welcome": {
+      "community_driven_platform": "Falling Fruit is a community-driven platform for sharing locations of edible plants and other sources of free food.",
+      "discover_and_contribute": "You can discover what others have been harvesting in your neighbourhood, and contribute your observations.",
       "explore_the_map": "Explore the map",
-      "join_us_for_produce": "Join us to discover the bounty of produce on our streets.",
-      "map_the_urban_harvest": "Map the urban harvest!",
-      "our_platform_is_open": "Our platform is open source, community driven, and free."
+      "welcome_visitors_to_the_site_short": "Welcome!"
     }
   },
   "problems": {

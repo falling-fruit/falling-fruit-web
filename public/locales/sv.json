@@ -342,10 +342,10 @@
       "intro_html": "Nedan listas organisationer som odlar mat på offentliga platser (matskog, offentliga fruktträdgårdar), plockar mat (urban skördning, efterplockning på gårdar) eller distribuerar mat (utbyten, donationer). Organisationerna är listade efter land, delstat (om tillämpligt) och stad. De med överstrukna namn antas vara inaktiva. Om du känner till andra som borde vara med på denna lista, <a href=\"mailto:info@fallingfruit.org\">kontakta oss</a>!"
     },
     "welcome": {
+      "community_driven_platform": "Falling Fruit är en gemenskapsdriven plattform för att dela platser med ätbara växter och andra källor till gratis mat.",
+      "discover_and_contribute": "Du kan upptäcka vad andra har skördat i ditt område och bidra med dina egna observationer.",
       "explore_the_map": "Utforska kartan",
-      "join_us_for_produce": "Gå med oss för att upptäcka överflödet av grödor på våra gator.",
-      "map_the_urban_harvest": "Kartlägg stadskörden!",
-      "our_platform_is_open": "Vår plattform är öppen källkod, gemenskapsdriven och gratis."
+      "welcome_visitors_to_the_site_short": "Välkommen!"
     }
   },
   "problems": {

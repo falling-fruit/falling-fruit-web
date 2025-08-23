@@ -342,10 +342,10 @@
       "intro_html": "Aşağıda kamusal alanlarda gıda yetiştiren (gıda ormanları, halka açık meyve bahçeleri), gıda toplayan (kent içi yiyecek toplama, tarla artığı toplama) veya gıda dağıtan (takaslar, bağışlar) kuruluşlar listelenmiştir. Kuruluşlar ülke, eyalet (varsa) ve şehre göre listelenmiştir. Üstü çizili olanların artık aktif olmadığı düşünülmektedir. Listede olması gereken başkalarını biliyorsanız, <a href=\"mailto:info@fallingfruit.org\">bizimle iletişime geçin</a>!"
     },
     "welcome": {
+      "community_driven_platform": "Falling Fruit, yenilebilir bitkiler ve diğer ücretsiz gıda kaynaklarının konumlarını paylaşmak için topluluk tarafından yönlendirilen bir platformdur.",
+      "discover_and_contribute": "Mahallenizde başkalarının neler topladığını keşfedebilir ve kendi gözlemlerinizi ekleyebilirsiniz.",
       "explore_the_map": "Haritayı keşfet",
-      "join_us_for_produce": "Sokaklarımızdaki ürün bolluğunu keşfetmek için bize katılın.",
-      "map_the_urban_harvest": "Kentsel hasadı haritalayın!",
-      "our_platform_is_open": "Platformumuz açık kaynaklı, topluluk odaklı ve ücretsizdir."
+      "welcome_visitors_to_the_site_short": "Hoş geldiniz!"
     }
   },
   "problems": {

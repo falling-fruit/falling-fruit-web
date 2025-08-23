@@ -342,10 +342,10 @@
       "intro_html": "A continuación se enumeran las organizaciones que cultivan alimentos en los espacios públicos (bosques de alimentos, huertas públicas), recogen alimentos (forrajeo urbano, espigueo de campo), o distribuyen alimentos (intercambios, donaciones). Las organizaciones están listadas por país, estado (si procede), y ciudad. Las organizaciones con nombres tachados se consideran inactivas. Si conoces otras que deberían estar en esta lista, ¡<a href=\"mailto:info@fallingfruit.org\">contáctanos</a>!"
     },
     "welcome": {
+      "community_driven_platform": "Falling Fruit es una plataforma impulsada por la comunidad para compartir ubicaciones de plantas comestibles y otras fuentes de comida gratuita.",
+      "discover_and_contribute": "Puedes descubrir lo que otros han estado recolectando en tu vecindario y contribuir con tus observaciones.",
       "explore_the_map": "Explora el mapa",
-      "join_us_for_produce": "Únete a nosotros para descubrir la abundancia de productos en nuestras calles.",
-      "map_the_urban_harvest": "¡Mapeando la cosecha urbana!",
-      "our_platform_is_open": "Nuestra plataforma es de código abierto, impulsada por la comunidad y gratuita."
+      "welcome_visitors_to_the_site_short": "¡Bienvenidos!"
     }
   },
   "problems": {

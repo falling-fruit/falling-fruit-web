@@ -342,10 +342,10 @@
       "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Những người có tên bị gạch bỏ được cho là không hoạt động. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!"
     },
     "welcome": {
+      "community_driven_platform": "Falling Fruit là một nền tảng do cộng đồng điều hành để chia sẻ vị trí của các cây ăn được và các nguồn thực phẩm miễn phí khác.",
+      "discover_and_contribute": "Bạn có thể khám phá những gì người khác đã hái lượm trong khu vực của bạn, và đóng góp quan sát của bạn.",
       "explore_the_map": "Khám phá bản đồ",
-      "join_us_for_produce": "Hãy tham gia cùng chúng tôi để khám phá sự dồi dào của sản phẩm trên đường phố của chúng ta.",
-      "map_the_urban_harvest": "Lập bản đồ thu hoạch đô thị!",
-      "our_platform_is_open": "Nền tảng của chúng tôi là mã nguồn mở, được cộng đồng điều hành và miễn phí."
+      "welcome_visitors_to_the_site_short": "Chào mừng!"
     }
   },
   "problems": {
