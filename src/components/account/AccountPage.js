@@ -12,6 +12,7 @@ import { FormButtonWrapper, FormInputWrapper } from '../auth/AuthWrappers'
 import { Input, Textarea } from '../form/FormikWrappers'
 import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
+import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
 
@@ -84,17 +85,15 @@ const AccountPage = () => {
               </Form>
             )}
           </Formik>
-          <div style={{ margin: '16px 0' }}>
+          <Column>
             <Link to="/account/change-password">
               {t('users.password_settings')}
             </Link>
-          </div>
-          <div style={{ margin: '16px 0' }}>
             <Link to="/account/change-email">{t('users.email_settings')}</Link>
-          </div>
-          <div style={{ margin: '16px 0' }}>
             <Link to={`/activity/${user.id}`}>{t('users.your_activity')}</Link>
-          </div>
+          </Column>
+          <br />
+
           <Button
             onClick={() => {
               dispatch(logout())

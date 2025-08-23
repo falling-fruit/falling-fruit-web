@@ -342,10 +342,10 @@
       "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Aqueles com nomes riscados são inativos. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!"
     },
     "welcome": {
+      "community_driven_platform": "Falling Fruit é uma plataforma colaborativa para compartilhar localizações de plantas comestíveis e outras fontes de alimentos gratuitos.",
+      "discover_and_contribute": "Você pode descobrir o que outros têm colhido em sua vizinhança e contribuir com suas observações.",
       "explore_the_map": "Explore o mapa",
-      "join_us_for_produce": "Junte-se a nós para descobrir a abundância de produtos em nossas ruas.",
-      "map_the_urban_harvest": "Mapeamento da colheita urbana!",
-      "our_platform_is_open": "Nossa plataforma é de código aberto, orientada pela comunidade e gratuita."
+      "welcome_visitors_to_the_site_short": "Bem-vindo!"
     }
   },
   "problems": {

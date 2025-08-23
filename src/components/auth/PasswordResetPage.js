@@ -5,8 +5,8 @@ import { toast } from 'react-toastify'
 
 import { requestResetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
+import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
-import { Column } from './AuthWrappers'
 import { EmailForm } from './EmailForm'
 import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
@@ -38,6 +38,7 @@ const PasswordResetPage = () => {
       <h1>{t('users.send_password_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
+        <Link to="/auth/welcome">{t('glossary.about')}</Link>
         <SignInLink />
         <Link to="/auth/sign_up">{t('glossary.sign_up')}</Link>
         <Link to="/auth/confirmation/new">

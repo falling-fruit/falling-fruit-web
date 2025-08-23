@@ -10,9 +10,9 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { Checkbox, Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
+import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
 import {
-  Column,
   ErrorMessage,
   FormButtonWrapper,
   FormInputWrapper,
@@ -145,6 +145,7 @@ const SignupPage = () => {
         )}
       </Formik>
       <Column>
+        <Link to="/auth/welcome">{t('glossary.about')}</Link>
         <Link to="/auth/sign_in">{t('users.sign_in')}</Link>
         <Link to="/auth/password/new">{t('users.forgot_password')}</Link>
         <Link to="/auth/confirmation/new">
