@@ -37,6 +37,12 @@ const AboutSection = () => {
     <div>
       <StyledListEntry
         rightIcons={<ForwardChevronIcon size="16" />}
+        onClick={() => history.push('/changes')}
+      >
+        <PrimaryText>{t('glossary.activity')}</PrimaryText>
+      </StyledListEntry>
+      <StyledListEntry
+        rightIcons={<ForwardChevronIcon size="16" />}
         onClick={() => history.push('/about')}
       >
         <PrimaryText>{t('layouts.application.menu.the_project')}</PrimaryText>
@@ -60,12 +66,6 @@ const AboutSection = () => {
         onClick={() => history.push('/press')}
       >
         <PrimaryText>{t('layouts.application.menu.in_the_press')}</PrimaryText>
-      </StyledListEntry>
-      <StyledListEntry
-        rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/changes')}
-      >
-        <PrimaryText>{t('glossary.activity')}</PrimaryText>
       </StyledListEntry>
       <br />
       <StyledSocialButtons />

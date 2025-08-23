@@ -8,9 +8,9 @@ import { resetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
+import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
 import {
-  Column,
   ErrorMessage,
   FormButtonWrapper,
   FormInputWrapper,

@@ -23,20 +23,22 @@ const ButtonWrapper = styled.div`
   margin: 1em 0;
 `
 const LargeButton = styled(Button)`
-  min-height: 2.5em;
-  font-size: 1.25em;
+  min-height: 2em;
+  font-size: 1em;
 `
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 1em !important;
 `
+const StyledLinkWhite = styled(StyledLink)`
+  color: ${({ theme }) => theme.background} !important;
+`
 
 const Description = styled.div`
-  font-size: 1.25em;
+  text-align: justify;
   color: ${({ theme }) => theme.secondaryText};
 
-  text-align: justify;
   padding: 0.5em;
 `
 
@@ -57,33 +59,41 @@ const WelcomePage = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
+  const { lastMapView } = useSelector((state) => state.viewport)
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
   )
 
   const handleExploreMap = () => {
-    dispatch(requestGeolocation())
+    if (lastMapView || geolocationState === GeolocationState.DENIED) {
+      history.push('/map')
+    } else {
+      dispatch(requestGeolocation())
+    }
   }
 
   useEffect(() => {
+    if (lastMapView) {
+      return
+    }
     if (geolocationState === GeolocationState.DENIED) {
       history.push('/map')
     } else if (geolocation?.latitude && geolocation?.longitude) {
       history.push(`/map/@${geolocation.latitude},${geolocation.longitude},16z`)
     }
-  }, [geolocation, geolocationState, history])
+  }, [lastMapView, geolocation, geolocationState, history])
 
   return (
     <AuthPage>
       <br />
       <Description>
-        <div style={{ fontSize: '1.25em' }}>
-          {t('pages.welcome.map_the_urban_harvest')}
-        </div>
+        {t('pages.welcome.welcome_visitors_to_the_site_short')}
         <br />
-        <div>{t('pages.welcome.join_us_for_produce')}</div>
         <br />
-        <div>{t('pages.welcome.our_platform_is_open')}</div>
+        {t('pages.welcome.community_driven_platform')}
+        <br />
+        <br />
+        {t('pages.welcome.discover_and_contribute')}
       </Description>
       <ButtonWrapper>
         <LargeButton
@@ -100,11 +110,18 @@ const WelcomePage = () => {
         >
           {t('pages.welcome.explore_the_map')}
         </LargeButton>
-        <LargeButton type="button" secondary>
-          <StyledLink to="/auth/sign_in">{t('users.sign_in')}</StyledLink>
-        </LargeButton>
       </ButtonWrapper>
       <br />
+      <ButtonWrapper>
+        <Button type="button" secondary>
+          <StyledLink to="/auth/sign_in">{t('users.sign_in')}</StyledLink>
+        </Button>
+        <Button type="button">
+          <StyledLinkWhite to="/auth/sign_up">
+            {t('glossary.sign_up')}
+          </StyledLinkWhite>
+        </Button>
+      </ButtonWrapper>
       <h3>{t('glossary.about')}</h3>
       <AboutSection />
     </AuthPage>
