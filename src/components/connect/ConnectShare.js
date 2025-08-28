@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-import i18n, { LANGUAGE_OPTIONS } from '../../i18n'
+import { setLanguageFromLocaleString } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { updateSelection } from '../../redux/updateSelection'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -82,10 +82,7 @@ const ConnectShare = () => {
     }
 
     if (locale !== null) {
-      const supportedLanguages = LANGUAGE_OPTIONS.map((option) => option.value)
-      if (supportedLanguages.includes(locale)) {
-        i18n.changeLanguage(locale)
-      }
+      setLanguageFromLocaleString(locale)
       history.removeParam('locale')
     }
 
