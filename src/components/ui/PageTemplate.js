@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { LanguageSelect } from '../../i18n'
@@ -143,11 +144,18 @@ const InfoPage = ({ children }) => {
   const isMobile = useIsMobile()
   const { t } = useTranslation()
 
+  const { user } = useSelector((state) => state.auth)
   return (
     <PageScrollWrapper>
       <PageWrapper>
         {isMobile && (
-          <StyledBackButton onClick={() => history.push('/')}>
+          <StyledBackButton
+            onClick={() =>
+              user
+                ? history.push('/account/edit')
+                : history.push('/auth/welcome')
+            }
+          >
             <ReturnIcon />
             {t('layouts.back')}
           </StyledBackButton>
