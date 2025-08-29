@@ -100,7 +100,7 @@ const EmbedHeader = () => {
     setIsExpanded(!isExpanded)
   }
 
-  const tabPaths = ['/map', '/settings', '/list']
+  const tabPaths = ['/settings', '/map', '/list']
 
   const findCurrentTabIndex = () => {
     const index = tabPaths.findIndex((path) => pathname.startsWith(path))
@@ -136,12 +136,12 @@ const EmbedHeader = () => {
           >
             <TabList>
               <Tab>
-                <MapAlt size={20} />
-                {t('glossary.map')}
-              </Tab>
-              <Tab>
                 <Cog size={20} />
                 {t('menu.settings')}
+              </Tab>
+              <Tab>
+                <MapAlt size={20} />
+                {t('glossary.map')}
               </Tab>
               <Tab>
                 <ListUl size={20} />
