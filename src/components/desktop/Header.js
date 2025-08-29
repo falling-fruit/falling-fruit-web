@@ -288,7 +288,10 @@ const UserMenu = () => {
               <NavLink to="/account/edit" activeClassName="active">
                 {t('users.edit_account')}
               </NavLink>
-              <NavLink to={`/activity/${user.id}`} activeClassName="active">
+              <NavLink
+                to={`/users/${user.id}/activity`}
+                activeClassName="active"
+              >
                 {t('users.your_activity')}
               </NavLink>
               <ResetButton onClick={handleLogout}>

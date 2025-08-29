@@ -114,7 +114,7 @@ const SidePane = () => {
                             : userActivityUserId
                               ? () =>
                                   history.push(
-                                    `/activity/${userActivityUserId}`,
+                                    `/users/${userActivityUserId}/activity`,
                                   )
                               : recentChangesSectionId
                                 ? () => history.push('/changes')

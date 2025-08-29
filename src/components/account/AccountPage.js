@@ -90,7 +90,9 @@ const AccountPage = () => {
               {t('users.password_settings')}
             </Link>
             <Link to="/account/change-email">{t('users.email_settings')}</Link>
-            <Link to={`/activity/${user.id}`}>{t('users.your_activity')}</Link>
+            <Link to={`/users/${user.id}/activity`}>
+              {t('users.your_activity')}
+            </Link>
           </Column>
           <br />
 

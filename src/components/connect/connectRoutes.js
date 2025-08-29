@@ -161,7 +161,7 @@ const connectRoutes = [
       '/reviews',
       '/settings',
       '/changes',
-      '/activity',
+      '/users/:userId/activity',
     ]}
   >
     <ConnectTypes />
@@ -247,7 +247,10 @@ const connectRoutes = [
    *
    * action: clear when dismounting from activity or locations
    */
-  <Route key="disconnect-activity" path={['/activity', '/locations']}>
+  <Route
+    key="disconnect-activity"
+    path={['/users/:userId/activity', '/locations']}
+  >
     <DisconnectActivity />
   </Route>,
 
