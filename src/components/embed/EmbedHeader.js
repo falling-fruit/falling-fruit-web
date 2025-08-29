@@ -86,6 +86,7 @@ const ExternalSiteLink = styled.a`
 const Logo = styled.img`
   height: 40px;
   margin-inline-end: 0.5em;
+  cursor: pointer;
 `
 
 const EmbedHeader = () => {
@@ -120,7 +121,11 @@ const EmbedHeader = () => {
         >
           {isExpanded ? <X size={24} /> : <Menu size={24} />}
         </ResetButton>
-        <Logo src="/logo_orange.svg" alt="Falling Fruit logo" />
+        <Logo
+          src="/logo_orange.svg"
+          alt="Falling Fruit logo"
+          onClick={() => window.open(shareUrl, '_blank', 'noopener,noreferrer')}
+        />
       </HeaderContent>
 
       {isExpanded && (
