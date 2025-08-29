@@ -23,7 +23,7 @@ const StyledNavBack = styled.div`
   }
 `
 const UserProfile = () => {
-  const { id } = useParams()
+  const { userId } = useParams()
   const history = useAppHistory()
   const { t, i18n } = useTranslation()
   const [userData, setUserData] = useState({})
@@ -35,13 +35,13 @@ const UserProfile = () => {
       setIsLoading(true)
 
       try {
-        const data = await getUserById(id)
+        const data = await getUserById(userId)
         setUserData(data)
       } catch (error) {
         history.push('/map')
         toast.error(
           t('error_message.api.fetch_user_failed', {
-            id: id,
+            id: userId,
             message: error.message || t('error_message.unknown_error'),
           }),
         )
@@ -51,7 +51,7 @@ const UserProfile = () => {
     }
 
     fetchUserData()
-  }, [id]) //eslint-disable-line
+  }, [userId]) //eslint-disable-line
 
   if (isLoading) {
     return <LoadingOverlay />
@@ -95,7 +95,7 @@ const UserProfile = () => {
       <IconBesideText>
         <Book color={theme.secondaryText} size={20} />
         <p>
-          <Link to={`/activity/${id}`}>{t('glossary.activity')}</Link>
+          <Link to={`/users/${userId}/activity`}>{t('glossary.activity')}</Link>
         </p>
       </IconBesideText>
     </Page>

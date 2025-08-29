@@ -23,7 +23,6 @@ import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
 import { PageTabs, TabList, TabPanels } from '../ui/PageTabs'
 import TopBar from '../ui/TopBar'
-import usersRoutes from '../users/usersRoutes'
 import EditLocationPositionNav from './EditLocationPositionNav'
 import InitLocationNav from './InitLocationNav'
 import NavigationBar from './NavigationBar'
@@ -145,7 +144,6 @@ const MobileLayout = () => {
                 {aboutRoutes}
                 {authRoutes}
                 {accountRoutes}
-                {usersRoutes}
                 <Route path={['/map', '/locations', '/list', '/settings']}>
                   <Switch>
                     <Route path="/locations/init" />
