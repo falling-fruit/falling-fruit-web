@@ -192,7 +192,7 @@ const EntryMobile = () => {
 
   const hasReviews = reviews && reviews.length > 0
 
-  return (
+  return isLoading === null ? null : (
     <>
       <DraggablePane
         displayOverTopBar={!filterOpen || drawerFullyOpen}
@@ -283,10 +283,10 @@ const EntryMobile = () => {
         <StyledButtons whiteBackground={!hasImages}>
           <EntryButton
             onClick={
-              isFromEmbedViewMap
-                ? () => history.push('/map')
-                : isFromListLocations
-                  ? () => history.push('/list')
+              isFromListLocations
+                ? () => history.push('/list')
+                : isFromEmbedViewMap
+                  ? () => history.push('/map')
                   : (e) => {
                       e.stopPropagation()
                       dispatch(setPaneDrawerToMiddlePosition())
@@ -298,10 +298,14 @@ const EntryMobile = () => {
           <div>
             {isFromListLocations && (
               <EntryButton
-                onClick={(event) => {
-                  event.stopPropagation()
-                  dispatch(reenablePaneDrawerAndSetToLowPosition())
-                }}
+                onClick={
+                  isFromEmbedViewMap
+                    ? () => history.push('/map')
+                    : (event) => {
+                        event.stopPropagation()
+                        dispatch(reenablePaneDrawerAndSetToLowPosition())
+                      }
+                }
                 icon={<MapIcon />}
                 label="map-button"
               />
