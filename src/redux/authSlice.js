@@ -10,10 +10,13 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
   const token = authStore.getToken()
   let user = null
   let error = null
+  let hadToken = false
 
   if (!token?.access_token || !token?.refresh_token) {
-    return [null, null]
+    return [null, null, hadToken]
   }
+
+  hadToken = true
 
   try {
     user = await getUser(token.access_token)
@@ -40,7 +43,7 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
     }
   }
 
-  return [user, error]
+  return [user, error, hadToken]
 })
 
 export const login = createAsyncThunk('auth/login', async (props) => {
@@ -67,6 +70,7 @@ export const authSlice = createSlice({
   initialState: {
     user: null,
     isLoading: true,
+    isFirstLoad: null,
   },
   reducers: {
     logout: (state) => {
@@ -80,11 +84,12 @@ export const authSlice = createSlice({
       state.isLoading = true
     },
     [checkAuth.fulfilled]: (state, action) => {
-      const [user, _error] = action.payload
+      const [user, _error, hadToken] = action.payload
       if (user) {
         state.user = user
       }
       state.isLoading = false
+      state.isFirstLoad = !hadToken
     },
 
     [login.pending]: (state) => {

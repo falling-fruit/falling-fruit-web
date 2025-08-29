@@ -2,16 +2,13 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { EMBED_HEADER_HEIGHT_PX } from '../../constants/mobileLayout'
 import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
-import { useAppHistory } from '../../utils/useAppHistory'
 import Checkbox from '../ui/Checkbox'
-import ForwardChevronIcon from '../ui/ForwardChevronIcon'
 import LabeledRow from '../ui/LabeledRow'
-import ListEntry, { PrimaryText } from '../ui/ListEntry'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
-import SocialButtons from '../ui/SocialButtons'
 import GoogleBicycling from './mapTiles/google-bicycling.png'
 import GoogleRoadmap from './mapTiles/google-roadmap.png'
 import GoogleSatellite from './mapTiles/google-satellite.png'
@@ -25,18 +22,28 @@ const Page = styled.div`
   height: 100%;
   overflow: auto;
 
-  @media ${({ theme }) => theme.device.mobile} {
-    padding-block-start: 26px;
-    padding-inline: 26px;
-  }
+  ${({ isEmbed, isDesktop }) => {
+    if (isEmbed) {
+      return `
+        padding-block-start: ${10 + EMBED_HEADER_HEIGHT_PX}px;
+        padding-block-end: 2em;
+        padding-inline: 26px;
+      `
+    } else if (isDesktop) {
+      return `
+        padding-inline: 15px;
 
-  @media ${({ theme }) => theme.device.desktop} {
-    padding-inline: 15px;
-
-    h3:first-child {
-      margin-block-start: 8px;
+        h3:first-child {
+          margin-block-start: 8px;
+        }
+      `
+    } else {
+      return `
+        padding-block-start: 26px;
+        padding-inline: 26px;
+      `
     }
-  }
+  }}
 
   > h2 {
     margin-block-start: 0;
@@ -105,79 +112,38 @@ const Attribution = styled.p`
   }
 `
 
-const StyledListEntry = styled(ListEntry)`
-  margin: 7px -26px;
-  width: calc(100% + 26px + 26px);
-  padding: 0 26px;
-
-  :not(:last-child) {
-    margin-block-end: 7px;
-  }
-`
-
-const StyledSocialButtons = styled(SocialButtons)`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  a {
-    color: ${({ theme }) => theme.text};
-  }
-
-  svg {
-    height: 32px;
-  }
-`
-
-const SettingsPage = ({ desktop }) => {
+const ShowLabelsCheckbox = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
 
-  const history = useAppHistory()
+  return (
+    <LabeledRow
+      left={
+        <Checkbox
+          id="showLabels"
+          onClick={(e) =>
+            dispatch(
+              updateSettings({
+                showLabels: e.target.checked,
+              }),
+            )
+          }
+          checked={settings.showLabels}
+        />
+      }
+      label={<label htmlFor="showLabels">{t('pages.settings.labels')}</label>}
+    />
+  )
+}
 
+const MapSettings = () => {
   const { t } = useTranslation()
-
-  const DISTANCE_UNIT_OPTIONS = [
-    { value: 'metric', label: t('pages.settings.units.metric') },
-    { value: 'imperial', label: t('pages.settings.units.imperial') },
-  ]
-
-  const updateUnitsSetting = (object) => {
-    dispatch(updateSettings({ distanceUnit: object.value }))
-  }
+  const dispatch = useDispatch()
+  const settings = useSelector((state) => state.settings)
 
   return (
-    <Page desktop={desktop}>
-      {!desktop && <h2>{t('menu.settings')}</h2>}
-      <h3>{t('pages.settings.data')}</h3>
-
-      {[
-        {
-          field: 'showLabels',
-          label: t('pages.settings.labels'),
-        },
-      ].map(({ field, label }) => (
-        <LabeledRow
-          key={field}
-          left={
-            <Checkbox
-              id={field}
-              onClick={(e) =>
-                dispatch(
-                  updateSettings({
-                    [field]: e.target.checked,
-                  }),
-                )
-              }
-              checked={settings[field]}
-            />
-          }
-          label={<label htmlFor={field}>{label}</label>}
-        />
-      ))}
-
-      <h3>{t('glossary.map')}</h3>
-
+    <>
       <h5>Google</h5>
 
       <RadioTiles
@@ -297,82 +263,73 @@ const SettingsPage = ({ desktop }) => {
       {settings.mapType in Attributions && (
         <Attribution>{Attributions[settings.mapType]}</Attribution>
       )}
+    </>
+  )
+}
 
-      {!desktop && (
+const RegionalSettings = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const settings = useSelector((state) => state.settings)
+
+  const DISTANCE_UNIT_OPTIONS = [
+    { value: 'metric', label: t('pages.settings.units.metric') },
+    { value: 'imperial', label: t('pages.settings.units.imperial') },
+  ]
+
+  const updateUnitsSetting = (object) => {
+    dispatch(updateSettings({ distanceUnit: object.value }))
+  }
+
+  return (
+    <>
+      <LabeledRow
+        label={
+          <label htmlFor="languagePreference">
+            {t('pages.settings.language')}
+          </label>
+        }
+        right={<LanguageSelect></LanguageSelect>}
+      />
+      <LabeledRow
+        label={
+          <label htmlFor="distanceUnit">
+            {t('pages.settings.units.units')}
+          </label>
+        }
+        right={
+          <Select
+            options={DISTANCE_UNIT_OPTIONS}
+            onChange={updateUnitsSetting}
+            value={DISTANCE_UNIT_OPTIONS.find(
+              (option) => option.value === settings.distanceUnit,
+            )}
+          />
+        }
+      />
+    </>
+  )
+}
+
+const SettingsPage = ({ isDesktop, isEmbed }) => {
+  const { t } = useTranslation()
+
+  return (
+    <Page isEmbed={isEmbed} isDesktop={isDesktop}>
+      {!isDesktop && <h2>{t('menu.settings')}</h2>}
+      <h3>{t('pages.settings.data')}</h3>
+      <ShowLabelsCheckbox />
+      <h3>{t('glossary.map')}</h3>
+      <MapSettings />
+      {!isDesktop && (
         <>
           <h3>{t('pages.settings.regional')}</h3>
-
-          <LabeledRow
-            label={
-              <label htmlFor="languagePreference">
-                {t('pages.settings.language')}
-              </label>
-            }
-            right={<LanguageSelect></LanguageSelect>}
-          />
-          <LabeledRow
-            label={
-              <label htmlFor="distanceUnit">
-                {t('pages.settings.units.units')}
-              </label>
-            }
-            right={
-              <Select
-                options={DISTANCE_UNIT_OPTIONS}
-                onChange={updateUnitsSetting}
-                value={DISTANCE_UNIT_OPTIONS.find(
-                  (option) => option.value === settings.distanceUnit,
-                )}
-              />
-            }
-          />
-        </>
-      )}
-
-      {!desktop && (
-        <>
-          <h3>{t('glossary.about')}</h3>
-          <StyledSocialButtons />
-          <StyledListEntry
-            rightIcons={<ForwardChevronIcon size="16" />}
-            onClick={() => history.push('/changes')}
-          >
-            <PrimaryText>{t('glossary.activity')}</PrimaryText>
-          </StyledListEntry>
-          <StyledListEntry
-            rightIcons={<ForwardChevronIcon size="16" />}
-            onClick={() => history.push('/about')}
-          >
-            <PrimaryText>
-              {t('layouts.application.menu.the_project')}
-            </PrimaryText>
-          </StyledListEntry>
-          <StyledListEntry
-            rightIcons={<ForwardChevronIcon size="16" />}
-            onClick={() => history.push('/data')}
-          >
-            <PrimaryText>{t('layouts.application.menu.the_data')}</PrimaryText>
-          </StyledListEntry>
-          <StyledListEntry
-            rightIcons={<ForwardChevronIcon size="16" />}
-            onClick={() => history.push('/sharing')}
-          >
-            <PrimaryText>
-              {t('layouts.application.menu.sharing_the_harvest')}
-            </PrimaryText>
-          </StyledListEntry>
-          <StyledListEntry
-            rightIcons={<ForwardChevronIcon size="16" />}
-            onClick={() => history.push('/press')}
-          >
-            <PrimaryText>
-              {t('layouts.application.menu.in_the_press')}
-            </PrimaryText>
-          </StyledListEntry>
+          <RegionalSettings />
         </>
       )}
     </Page>
   )
 }
 
+export { MapSettings, Page, RegionalSettings, ShowLabelsCheckbox }
 export default SettingsPage

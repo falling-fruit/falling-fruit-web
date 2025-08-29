@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "Abrufen der Standortänderungen fehlgeschlagen: {{message}}",
       "fetch_location_failed": "Fehler beim Abrufen des Standorts {{id}}: {{message}}",
       "fetch_review_failed": "Fehler beim Abrufen der Bewertung {{id}}: {{message}}",
+      "fetch_user_failed": "Fehler beim Abrufen des Benutzers {{id}}: {{message}}",
       "location_edit_failed": "Bearbeitung des Standorts fehlgeschlagen: {{message}}",
       "location_submission_failed": "Übermittlung des Standorts fehlgeschlagen: {{message}}",
       "photo_upload_failed": "Foto-Upload fehlgeschlagen: {{message}}",
@@ -98,7 +99,7 @@
     "review": {
       "other": "Bewertungen"
     },
-    "sign_up": "Anmelden",
+    "sign_up": "Registrieren",
     "tree_inventory": {
       "one": "Bauminventar"
     },
@@ -338,6 +339,12 @@
         "state": "Bundesland"
       },
       "intro_html": "Im Folgenden sind lokale Organisationen aufgeführt, die Lebensmittel anpflanzen (z.B. in Gemeinschaftsgärten), ernten (z.B. 'urban gardening'), oder auf andere Art und Weise verteilen und teilen. Organisationen werden nach Land, Bundesland/Kanton und Stadt aufgeführt. Organisationen mit durchgestrichenem Namen sind zur Zeit vermutlich inaktiv. Wenn du Organisationen kennst, die auf dieser Liste auftauchen müssten, dann <a href=\"mailto:info@fallingfruit.org\">sag uns Bescheid</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit ist eine gemeinschaftlich betriebene Plattform zum Teilen von Standorten essbarer Pflanzen und anderer Quellen kostenloser Nahrung.",
+      "discover_and_contribute": "Du kannst entdecken, was andere in deiner Nachbarschaft geerntet haben, und deine eigenen Beobachtungen beitragen.",
+      "explore_the_map": "Erkunde die Karte",
+      "welcome_visitors_to_the_site_short": "Willkommen!"
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Vollständige Website",
+    "simplified_controls_only": "Nur vereinfachte Steuerung",
     "title": "Diese Ansicht teilen",
     "url_copied": "URL in die Zwischenablage kopiert!",
     "url_copy_failed": "URL konnte nicht in die Zwischenablage kopiert werden"

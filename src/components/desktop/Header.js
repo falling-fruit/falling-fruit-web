@@ -270,7 +270,7 @@ const UserMenu = () => {
   const handleLogout = () => {
     dispatch(logout())
   }
-  const isAccountPage = useRouteMatch('/users/edit') !== null
+  const isAccountPage = useRouteMatch('/account/edit') !== null
 
   return (
     <div>
@@ -285,10 +285,13 @@ const UserMenu = () => {
               }
               isMatch={isAccountPage}
             >
-              <NavLink to="/users/edit" activeClassName="active">
+              <NavLink to="/account/edit" activeClassName="active">
                 {t('users.edit_account')}
               </NavLink>
-              <NavLink to={`/activity/${user.id}`} activeClassName="active">
+              <NavLink
+                to={`/users/${user.id}/activity`}
+                activeClassName="active"
+              >
                 {t('users.your_activity')}
               </NavLink>
               <ResetButton onClick={handleLogout}>
@@ -304,7 +307,7 @@ const UserMenu = () => {
               </NavLink>
             </NavLi>
             <NavLi className="signup">
-              <NavLink to="/users/sign_up" activeClassName="active">
+              <NavLink to="/auth/sign_up" activeClassName="active">
                 <SignupButton>{t('glossary.sign_up')}</SignupButton>
               </NavLink>
             </NavLi>

@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
       "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
+      "fetch_user_failed": "Fout bij ophalen gebruiker {{id}}: {{message}}",
       "location_edit_failed": "Bewerken van locatie mislukt: {{message}}",
       "location_submission_failed": "Indienen van locatie mislukt: {{message}}",
       "photo_upload_failed": "Uploaden van foto mislukt: {{message}}",
@@ -338,6 +339,12 @@
         "state": "Staat"
       },
       "intro_html": "Hieronder is een lijst te vinden met organisaties die voedsel produceren in openbare ruimten (voedselbossen, openbare boomgaarden), voedsel plukken (stadsvoedselverzameling, boerderijvoedselverzameling) of voedsel verspreiden (uitwisselingen, donaties). Organisaties worden gesorteerd op land, staat (indien van toepassing) en stad. Organisaties met doorgehaalde naam zijn waarschijnlijk inactief. Als u organisaties kent die op deze lijst thuishoren, neem dan <a href=\"mailto:info@fallingfruit.org\">contact met ons</a> op!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit is een door de gemeenschap gedreven platform voor het delen van locaties van eetbare planten en andere bronnen van gratis voedsel.",
+      "discover_and_contribute": "U kunt ontdekken wat anderen in uw buurt hebben geoogst en uw eigen waarnemingen bijdragen.",
+      "explore_the_map": "Verken de kaart",
+      "welcome_visitors_to_the_site_short": "Welkom!"
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Volledige website",
+    "simplified_controls_only": "Alleen vereenvoudigde bediening",
     "title": "Deel deze weergave",
     "url_copied": "URL gekopieerd naar klembord!",
     "url_copy_failed": "URL kopiëren naar klembord mislukt"

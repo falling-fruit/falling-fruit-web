@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 
+import ConnectGeolocation from './ConnectGeolocation'
 import ConnectI18nViz from './ConnectI18nViz'
 import ConnectInitLocation from './ConnectInitLocation'
 import ConnectList from './ConnectList'
@@ -160,7 +161,7 @@ const connectRoutes = [
       '/reviews',
       '/settings',
       '/changes',
-      '/activity',
+      '/users/:userId/activity',
     ]}
   >
     <ConnectTypes />
@@ -246,7 +247,10 @@ const connectRoutes = [
    *
    * action: clear when dismounting from activity or locations
    */
-  <Route key="disconnect-activity" path={['/activity', '/locations']}>
+  <Route
+    key="disconnect-activity"
+    path={['/users/:userId/activity', '/locations']}
+  >
     <DisconnectActivity />
   </Route>,
 
@@ -261,6 +265,19 @@ const connectRoutes = [
    */
   <Route key="connect-top-panel" path={['/map', '/list', '/locations']}>
     <ConnectTopPanel />
+  </Route>,
+
+  /*
+   * ConnectGeolocation
+   * why: geolocation tracking needs to respond to requests
+   *
+   * action: handle geolocation state changes and map positioning
+   */
+  <Route
+    key="connect-geolocation"
+    path={['/map', '/locations', '/auth/welcome']}
+  >
+    <ConnectGeolocation />
   </Route>,
 ]
 

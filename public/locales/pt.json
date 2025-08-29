@@ -25,6 +25,7 @@
       "fetch_location_changes_failed": "Falha ao buscar alterações de localização: {{message}}",
       "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
       "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
+      "fetch_user_failed": "Erro ao buscar usuário {{id}}: {{message}}",
       "location_edit_failed": "Falha na edição da localização: {{message}}",
       "location_submission_failed": "Falha no envio da localização: {{message}}",
       "photo_upload_failed": "Falha no upload da foto: {{message}}",
@@ -338,6 +339,12 @@
         "state": "Estado"
       },
       "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Aqueles com nomes riscados são inativos. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit é uma plataforma colaborativa para compartilhar localizações de plantas comestíveis e outras fontes de alimentos gratuitos.",
+      "discover_and_contribute": "Você pode descobrir o que outros têm colhido em sua vizinhança e contribuir com suas observações.",
+      "explore_the_map": "Explore o mapa",
+      "welcome_visitors_to_the_site_short": "Bem-vindo!"
     }
   },
   "problems": {
@@ -361,6 +368,8 @@
     "you_reviewed": "Você avaliou esta localização em {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Site completo",
+    "simplified_controls_only": "Apenas controles simplificados",
     "title": "Compartilhar esta visualização",
     "url_copied": "URL copiada para a área de transferência!",
     "url_copy_failed": "Falha ao copiar URL para a área de transferência"

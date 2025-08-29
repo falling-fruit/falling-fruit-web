@@ -2,10 +2,18 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
+import { setLanguageFromLocaleString } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { updateSelection } from '../../redux/updateSelection'
 import { useAppHistory } from '../../utils/useAppHistory'
 
+const VALID_MAP_TYPES = [
+  'roadmap',
+  'terrain',
+  'hybrid',
+  'osm-standard',
+  'osm-toner-lite',
+]
 const ConnectShare = () => {
   const location = useLocation()
   const history = useAppHistory()
@@ -19,6 +27,7 @@ const ConnectShare = () => {
     const showLabels = searchParams.get('labels')
     const overlay = searchParams.get('overlay')
     const showBusinesses = searchParams.get('poi')
+    const locale = searchParams.get('locale')
 
     const legacyMapType = searchParams.get('t')
     const legacyLabels = searchParams.get('l')
@@ -26,7 +35,9 @@ const ConnectShare = () => {
     const settingsUpdates = {}
 
     if (mapType !== null) {
-      settingsUpdates.mapType = mapType
+      if (VALID_MAP_TYPES.includes(mapType)) {
+        settingsUpdates.mapType = mapType
+      }
       history.removeParam('map')
     }
 
@@ -50,12 +61,15 @@ const ConnectShare = () => {
     }
 
     if (legacyMapType !== null) {
-      if (legacyMapType === 'toner-lite') {
-        settingsUpdates.mapType = 'osm-toner-lite'
-      } else if (legacyMapType === 'osm') {
-        settingsUpdates.mapType = 'osm-standard'
-      } else {
-        settingsUpdates.mapType = legacyMapType
+      let mappedType = legacyMapType.toLowerCase()
+      if (mappedType === 'toner-lite') {
+        mappedType = 'osm-toner-lite'
+      } else if (mappedType === 'osm') {
+        mappedType = 'osm-standard'
+      }
+
+      if (VALID_MAP_TYPES.includes(mappedType)) {
+        settingsUpdates.mapType = mappedType
       }
       history.removeParam('t')
     }
@@ -65,6 +79,11 @@ const ConnectShare = () => {
         settingsUpdates.showLabels = true
       }
       history.removeParam('l')
+    }
+
+    if (locale !== null) {
+      setLanguageFromLocaleString(locale)
+      history.removeParam('locale')
     }
 
     if (Object.keys(settingsUpdates).length > 0) {
