@@ -140,6 +140,16 @@ const DraggablePane = ({
     }
   }, [position, topPositionHeight]) //eslint-disable-line
 
+  // Handle topPositionHeight change when reviews load and images appear
+  useEffect(() => {
+    if (position === POSITIONS.TOP && paneRef.current) {
+      const currentTranslateY = paneRef.current.getBoundingClientRect().top
+      if (currentTranslateY !== topPositionHeight) {
+        movePane('none', topPositionHeight)
+      }
+    }
+  }, [topPositionHeight, position, movePane])
+
   const handleStart = (clientY) => {
     if (drawerDisabled) {
       return
@@ -166,6 +176,7 @@ const DraggablePane = ({
     }
     setIsDragging(false)
     const newPosition = inferCurrentPosition()
+
     const windowHeight = window.innerHeight
 
     const positionToTranslateY = {

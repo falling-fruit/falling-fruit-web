@@ -13,7 +13,7 @@ import {
 import { fetchReviewData } from './reviewSlice'
 
 const initialState = {
-  isLoading: false,
+  isLoading: null,
   location: null,
   reviews: [],
   position: null, // {lat: number, lng: number}
