@@ -11,7 +11,7 @@ import WelcomePage from './WelcomePage'
 
 const pages = [
   {
-    path: '/auth/welcome',
+    path: '/about/welcome',
     component: WelcomePage,
   },
   {

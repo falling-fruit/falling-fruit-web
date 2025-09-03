@@ -153,7 +153,7 @@ const InfoPage = ({ children }) => {
             onClick={() =>
               user
                 ? history.push('/account/edit')
-                : history.push('/auth/welcome')
+                : history.push('/about/welcome')
             }
           >
             <ReturnIcon />

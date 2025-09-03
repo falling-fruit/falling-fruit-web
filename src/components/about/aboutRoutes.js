@@ -8,7 +8,7 @@ import ShareTheHarvestPage from './ShareTheHarvestPage'
 
 const pages = [
   {
-    path: ['/about'],
+    path: ['/about/about-the-project'],
     component: ProjectPage,
   },
   {
@@ -16,15 +16,15 @@ const pages = [
     component: AboutDatasetPage,
   },
   {
-    path: ['/data', '/datasets'],
+    path: ['/about/the-data'],
     component: DataPage,
   },
   {
-    path: ['/press'],
+    path: ['/about/in-the-press'],
     component: InThePressPage,
   },
   {
-    path: ['/sharing'],
+    path: ['/about/sharing-the-harvest'],
     component: ShareTheHarvestPage,
   },
 ]
