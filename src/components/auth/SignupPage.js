@@ -102,6 +102,7 @@ const SignupPage = () => {
                 name="password_confirm"
                 label={t('users.password_confirmation')}
                 required
+                invalidWhenUntouched
               />
               {errors.password_confirm && (
                 <ErrorMessage>

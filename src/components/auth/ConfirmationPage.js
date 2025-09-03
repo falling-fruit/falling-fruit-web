@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
@@ -9,8 +9,13 @@ import { withAuthRedirect } from './withAuthRedirect'
 const ConfirmationPage = () => {
   const history = useAppHistory()
   const { t } = useTranslation()
+  const hasExecutedRef = useRef(false)
 
   useEffect(() => {
+    // Prevent duplicate execution (React StrictMode can cause useEffect to run twice)
+    if (hasExecutedRef.current) return
+    hasExecutedRef.current = true
+
     const handleConfirmation = async () => {
       const token = new URLSearchParams(window.location.search).get('token')
 
@@ -23,13 +28,23 @@ const ConfirmationPage = () => {
           toast.success(t('devise.confirmations.confirmed'))
           history.push({ pathname: '/users/sign_in', state: { email } })
         } catch (error) {
-          toast.error(
-            t('error_message.auth.confirmation_failed', {
-              message: error.message || t('error_message.unknown_error'),
-            }),
-            { autoClose: 5000 },
-          )
-          history.push('/users/confirmation/new')
+          // Check if this is an "already confirmed" error, which should be treated as success
+          const isAlreadyConfirmed = error.message && 
+            (error.message.toLowerCase().includes('already') ||
+             error.message.toLowerCase().includes('confirmed'))
+          
+          if (isAlreadyConfirmed) {
+            toast.success(t('devise.confirmations.confirmed'))
+            history.push({ pathname: '/users/sign_in' })
+          } else {
+            toast.error(
+              t('error_message.auth.confirmation_failed', {
+                message: error.message || t('error_message.unknown_error'),
+              }),
+              { autoClose: 5000 },
+            )
+            history.push('/users/confirmation/new')
+          }
         }
       }
     }
