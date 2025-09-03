@@ -1,9 +1,9 @@
 import { Route } from 'react-router-dom'
 
 import ConnectGeolocation from './ConnectGeolocation'
+import ConnectGoogleMap from './ConnectGoogleMap'
 import ConnectI18nViz from './ConnectI18nViz'
 import ConnectInitLocation from './ConnectInitLocation'
-import ConnectList from './ConnectList'
 import ConnectLocation from './ConnectLocation'
 import ConnectMap from './ConnectMap'
 import ConnectNewLocation from './ConnectNewLocation'
@@ -20,15 +20,34 @@ import DisconnectReview from './DisconnectReview'
 
 const connectRoutes = [
   /*
-   * ConnectList
+   * ConnectGoogleMap - /list
    * why: the list page needs a map in Redux
    *
-   * action: if showing the list before /map was loaded,
-   * briefly visit /map and go back to /list
+   * action: if showing the page before /map was loaded,
+   * briefly visit /map and go back to the target route
    */
   <Route key="connect-list" path={['/map', '/list']}>
     {({ match }) =>
-      match && <ConnectList isListRoute={match.path.startsWith('/list')} />
+      match && (
+        <ConnectGoogleMap
+          isTargetRoute={match.path.startsWith('/list')}
+          targetRoute="/list"
+        />
+      )
+    }
+  </Route>,
+
+  /*
+   * ConnectGoogleMap - /filter, see above
+   */
+  <Route key="connect-filter" path={['/map', '/filter']}>
+    {({ match }) =>
+      match && (
+        <ConnectGoogleMap
+          isTargetRoute={match.path.startsWith('/filter')}
+          targetRoute="/filter"
+        />
+      )
     }
   </Route>,
 

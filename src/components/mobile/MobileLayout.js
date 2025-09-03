@@ -14,6 +14,7 @@ import accountRoutes from '../account/accountRoutes'
 import activityRoutes from '../activity/activityRoutes'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
+import EmbedFilterPage from '../embed/EmbedFilterPage'
 import EmbedHeader from '../embed/EmbedHeader'
 import EntryMobile from '../entry/EntryMobile'
 import { formRoutesMobile } from '../form/formRoutes'
@@ -103,7 +104,7 @@ const MobileLayout = () => {
       </Helmet>
       <PageTabs index={tabIndex} onChange={handleTabChange}>
         <Switch>
-          <Route path={['/map', '/settings', '/list']}>
+          <Route path={['/map', '/settings', '/list', '/filter']}>
             {isEmbed && <EmbedHeader />}
           </Route>
         </Switch>
@@ -144,7 +145,9 @@ const MobileLayout = () => {
                 {aboutRoutes}
                 {authRoutes}
                 {accountRoutes}
-                <Route path={['/map', '/locations', '/list', '/settings']}>
+                <Route
+                  path={['/map', '/locations', '/list', '/settings', '/filter']}
+                >
                   <Switch>
                     <Route path="/locations/init" />
                     <Route path="/locations/:locationId/edit" />
@@ -160,6 +163,9 @@ const MobileLayout = () => {
                     </Route>
                     <Route path="/settings">
                       <SettingsPage isEmbed={isEmbed} />
+                    </Route>
+                    <Route path="/filter">
+                      {isEmbed && <EmbedFilterPage />}
                     </Route>
                   </Switch>
                 </Route>

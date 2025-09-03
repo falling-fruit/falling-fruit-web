@@ -370,7 +370,6 @@
   },
   "share": {
     "leave_embed_view_for_full_site": "Fullständig webbplats",
-    "simplified_controls_only": "Endast förenklade kontroller",
     "title": "Dela denna vy",
     "url_copied": "URL kopierad till urklipp!",
     "url_copy_failed": "Misslyckades att kopiera URL till urklipp"

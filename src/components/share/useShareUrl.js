@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-const useShareUrl = (embedMode) => {
+const useShareUrl = () => {
   const { mapType, showLabels, overlay, showBusinesses } = useSelector(
     (state) => state.settings,
   )
@@ -8,11 +8,7 @@ const useShareUrl = (embedMode) => {
   const typeEncoder = useSelector((state) => state.type.typeEncoder)
 
   const url = new URL(window.location.href)
-  if (embedMode) {
-    url.searchParams.set('embed', 'true')
-  } else {
-    url.searchParams.delete('embed')
-  }
+  url.searchParams.delete('embed')
   if (mapType !== 'roadmap') {
     url.searchParams.set('map', mapType)
   }
