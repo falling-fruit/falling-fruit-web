@@ -1,5 +1,5 @@
 import { LinkExternal, ListUl, Menu, X } from '@styled-icons/boxicons-regular'
-import { Cog, MapAlt } from '@styled-icons/boxicons-solid'
+import { Cog, FilterAlt, MapAlt } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
@@ -100,7 +100,7 @@ const EmbedHeader = () => {
     setIsExpanded(!isExpanded)
   }
 
-  const tabPaths = ['/settings', '/map', '/list']
+  const tabPaths = ['/settings', '/map', '/list', '/filter']
 
   const findCurrentTabIndex = () => {
     const index = tabPaths.findIndex((path) => pathname.startsWith(path))
@@ -146,6 +146,10 @@ const EmbedHeader = () => {
               <Tab>
                 <ListUl size={20} />
                 {t('menu.list')}
+              </Tab>
+              <Tab>
+                <FilterAlt size={20} />
+                {t('glossary.type.other')}
               </Tab>
             </TabList>
           </VerticalTabs>
