@@ -38,7 +38,7 @@ const PasswordResetPage = () => {
       <h1>{t('users.send_password_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <Column>
-        <Link to="/auth/welcome">{t('glossary.about')}</Link>
+        <Link to="/about/welcome">{t('glossary.about')}</Link>
         <SignInLink />
         <Link to="/auth/sign_up">{t('glossary.sign_up')}</Link>
         <Link to="/auth/confirmation/new">

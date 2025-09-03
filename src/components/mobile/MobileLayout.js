@@ -175,7 +175,7 @@ const MobileLayout = () => {
               <Route
                 path={[
                   '/users',
-                  '/auth/welcome',
+                  '/about/welcome',
                   ...aboutRoutes.map((route) => route.props.path).flat(),
                   ...activityRoutes.map((route) => route.props.path).flat(),
                 ]}

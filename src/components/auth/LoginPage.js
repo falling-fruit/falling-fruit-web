@@ -77,7 +77,7 @@ const LoginPage = () => {
         )}
       </Formik>
       <Column>
-        <Link to="/auth/welcome">{t('glossary.about')}</Link>
+        <Link to="/about/welcome">{t('glossary.about')}</Link>
         <Link to="/auth/sign_up">{t('glossary.sign_up')}</Link>
         <Link to="/auth/password/new">{t('users.forgot_password')}</Link>
         <Link to="/auth/confirmation/new">

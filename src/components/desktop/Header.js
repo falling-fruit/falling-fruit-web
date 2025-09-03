@@ -340,16 +340,16 @@ const MainMenu = ({ className }) => {
         </NavLi>
         <NavLi>
           <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
-            <NavLink to="/about" activeClassName="active">
+            <NavLink to="/about/about-the-project" activeClassName="active">
               {t('layouts.application.menu.the_project')}
             </NavLink>
-            <NavLink to="/data" activeClassName="active">
+            <NavLink to="/about/the-data" activeClassName="active">
               {t('layouts.application.menu.the_data')}
             </NavLink>
-            <NavLink to="/sharing" activeClassName="active">
+            <NavLink to="/about/sharing-the-harvest" activeClassName="active">
               {t('layouts.application.menu.sharing_the_harvest')}
             </NavLink>
-            <NavLink to="/press" activeClassName="active">
+            <NavLink to="/about/in-the-press" activeClassName="active">
               {t('layouts.application.menu.in_the_press')}
             </NavLink>
           </StyledDropdown>

@@ -51,7 +51,7 @@ const HomeRedirect = () => {
   }
 
   if (isFirstLoad && !isDesktop) {
-    return <Redirect to="/auth/welcome" />
+    return <Redirect to="/about/welcome" />
   } else {
     return <Redirect to={pathWithCurrentView('/map')} />
   }
@@ -134,6 +134,23 @@ const redirects = [
   {
     path: ['/home', '/locations/home', '/routes', '/routes/:routeId'],
     component: () => <Redirect to={pathWithCurrentView('/map')} />,
+  },
+  {
+    path: '/about',
+    exact: true,
+    component: () => <Redirect to="/about/about-the-project" />,
+  },
+  {
+    path: ['/data', '/datasets'],
+    component: () => <Redirect to="/about/the-data" />,
+  },
+  {
+    path: '/press',
+    component: () => <Redirect to="/about/in-the-press" />,
+  },
+  {
+    path: '/sharing',
+    component: () => <Redirect to="/about/sharing-the-harvest" />,
   },
 ]
 

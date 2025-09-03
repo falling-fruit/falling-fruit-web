@@ -294,7 +294,7 @@ const connectRoutes = [
    */
   <Route
     key="connect-geolocation"
-    path={['/map', '/locations', '/auth/welcome']}
+    path={['/map', '/locations', '/about/welcome']}
   >
     <ConnectGeolocation />
   </Route>,

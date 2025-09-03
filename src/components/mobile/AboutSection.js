@@ -43,19 +43,19 @@ const AboutSection = () => {
       </StyledListEntry>
       <StyledListEntry
         rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/about')}
+        onClick={() => history.push('/about/about-the-project')}
       >
         <PrimaryText>{t('layouts.application.menu.the_project')}</PrimaryText>
       </StyledListEntry>
       <StyledListEntry
         rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/data')}
+        onClick={() => history.push('/about/the-data')}
       >
         <PrimaryText>{t('layouts.application.menu.the_data')}</PrimaryText>
       </StyledListEntry>
       <StyledListEntry
         rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/sharing')}
+        onClick={() => history.push('/about/sharing-the-harvest')}
       >
         <PrimaryText>
           {t('layouts.application.menu.sharing_the_harvest')}
@@ -63,7 +63,7 @@ const AboutSection = () => {
       </StyledListEntry>
       <StyledListEntry
         rightIcons={<ForwardChevronIcon size="16" />}
-        onClick={() => history.push('/press')}
+        onClick={() => history.push('/about/in-the-press')}
       >
         <PrimaryText>{t('layouts.application.menu.in_the_press')}</PrimaryText>
       </StyledListEntry>
