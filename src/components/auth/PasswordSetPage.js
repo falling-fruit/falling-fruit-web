@@ -68,7 +68,7 @@ const PasswordSetPage = () => {
         })}
         onSubmit={handleSubmit}
       >
-        {({ errors, dirty, isValid, isSubmitting }) => (
+        {({ errors, dirty, isValid, isSubmitting, values }) => (
           <Form>
             <FormInputWrapper>
               <Input
@@ -86,6 +86,7 @@ const PasswordSetPage = () => {
                 type="password"
                 name="password_confirm"
                 label={t('users.new_password_confirmation')}
+                invalidWhenUntouched={values.password !== ''}
               />
               {errors.password_confirm && (
                 <ErrorMessage>
