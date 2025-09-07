@@ -66,7 +66,7 @@ const SignupPage = () => {
         })}
         onSubmit={handleSubmit}
       >
-        {({ errors, dirty, isValid, isSubmitting }) => (
+        {({ errors, dirty, isValid, isSubmitting, values }) => (
           <Form>
             <FormInputWrapper>
               <Input
@@ -94,6 +94,7 @@ const SignupPage = () => {
                 name="password_confirm"
                 label={t('users.password_confirmation')}
                 required
+                invalidWhenUntouched={values.password !== ''}
               />
               {errors.password_confirm && (
                 <ErrorMessage>
