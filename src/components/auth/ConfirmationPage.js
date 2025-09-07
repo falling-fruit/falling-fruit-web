@@ -20,9 +20,11 @@ const ConfirmationPage = () => {
       } else {
         try {
           const { email } = await confirmUser(token)
+          history.removeParam('token')
           toast.success(t('devise.confirmations.confirmed'))
           history.push({ pathname: '/auth/sign_in', state: { email } })
         } catch (error) {
+          history.removeParam('token')
           toast.error(
             t('error_message.auth.confirmation_failed', {
               message: error.message || t('error_message.unknown_error'),
@@ -35,7 +37,7 @@ const ConfirmationPage = () => {
     }
 
     handleConfirmation()
-  }, [history, t])
+  }, []) //eslint-disable-line
 
   return null
 }
