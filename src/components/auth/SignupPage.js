@@ -39,7 +39,7 @@ const SignupPage = () => {
           autoClose: 5000,
         },
       )
-      history.push('/map')
+      history.push('/auth/confirmation/check-email')
     } catch (error) {
       toast.error(
         t('error_message.auth.signup_failed', {
