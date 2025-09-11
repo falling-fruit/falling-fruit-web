@@ -1,8 +1,8 @@
 {
+  "auth": {
+    "check_email_header": "Please verify your email"
+  },
   "devise": {
-    "auth": {
-      "check_email_header": "Please verify your email"
-    },
     "confirmations": {
       "confirmed": "Your email address has been successfully confirmed.",
       "no_token": "You can't access this page without coming from a confirmation email. If you do, please make sure you used the full URL provided.",
