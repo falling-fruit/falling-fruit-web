@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "确认您的电子邮件地址",
       "confirmed": "您的电子邮件地址已成功确认。",
       "no_token": "如果没有确认电子邮件，您将无法访问此页面。如果您确实来自确认电子邮件，请确保您使用了提供的完整 URL。",
       "send_instructions": "您将在几分钟内收到一封电子邮件，其中包含有关如何确认您的电子邮件地址的说明。"

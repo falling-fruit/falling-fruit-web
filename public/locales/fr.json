@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Confirme ton adresse e-mail",
       "confirmed": "Votre compte a été validé. Vous êtes maintenant connecté.",
       "no_token": "Tu ne peux pas accéder à cette page sans passer par un e-mail de validation. Si tu viens en effet d'un tel email, assure-toi d'utiliser l'URL complète.",
       "send_instructions": "Tu vas recevoir les instructions nécessaires à la validation de ton compte dans quelques minutes."

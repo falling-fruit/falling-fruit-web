@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "確認您的電子郵件地址",
       "confirmed": "您的電子郵件地址已成功確認。",
       "no_token": "如果沒有確認電子郵件，您將無法訪問此頁面。如果您確實來自確認電子郵件，請確保您使用了提供的完整 URL。",
       "send_instructions": "您將在幾分鐘內收到一封電子郵件，其中包含有關如何確認您的電子郵件地址的說明。"

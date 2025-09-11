@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Bekräfta din epostadress",
       "confirmed": "Din epost har bekräftats.",
       "no_token": "Tillgång till den här sidan kräver att du kommer från ett bekräftelsemejl. Om du gör det, säkerställ att du har använt hela URL:en som tillhandahållits.",
       "send_instructions": "Du kommer snart att få en epost med instruktioner för hur du bekräftar din epost adress."

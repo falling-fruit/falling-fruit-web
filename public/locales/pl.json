@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Potwierdź swój adres e-mail",
       "confirmed": "Konto zostało poprawnie aktywowane.",
       "no_token": "Nie możesz uzyskać dostępu do tej strony bez otrzymania e-maila z potwierdzeniem. Jeśli przyszedłeś/aś z e-maila potwierdzającego, upewnij się, że użyłeś/aś pełnego adresu URL.",
       "send_instructions": "Instrukcja jak aktywować konto zostanie niezwłocznie wysłana na podany adres e-mail."
