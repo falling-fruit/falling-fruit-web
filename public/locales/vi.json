@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Xác nhận địa chỉ email của bạn",
       "confirmed": "Địa chỉ email của bạn đã được xác nhận thành công.",
       "no_token": "Bạn không thể truy cập trang này nếu không nhận được email xác nhận. Nếu bạn nhận được, vui lòng đảm bảo rằng bạn đã sử dụng URL đầy đủ được cung cấp.",
       "send_instructions": "Bạn sẽ nhận được email có hướng dẫn cách xác nhận địa chỉ email của mình sau vài phút."

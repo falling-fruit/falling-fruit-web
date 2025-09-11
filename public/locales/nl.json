@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Bevestig je e-mailadres",
       "confirmed": "Je e-mailadres is succesvol bevestigd.",
       "no_token": "Je kunt deze pagina niet openen als je deze niet hebt geopend vanuit een bevestigingse-mail. Als je hem niet vanuit daar heeft geopend, zorg er dan voor dat je de volledige opgegeven URL gebruikt.",
       "send_instructions": "Je ontvangt binnen een paar minuten een e-mail met instructies om je e-mailadres te bevestigen."

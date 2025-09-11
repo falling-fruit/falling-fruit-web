@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Bestätige deine Email-Adresse",
       "confirmed": "Dein Konto wurde erfolgreich eröffnet. Du bist jetzt angemeldet.",
       "no_token": "Du kannst diese Seite nicht ohne einen Bestätigungslink aus einer Email aufrufen. Falls du von einer Email kommst, stelle bitte sicher, dass du die vollständige URL verwendest.",
       "send_instructions": "In wenigen Minuten erhältst du per Mail eine Anleitung, wie du die Eröffnung deines Kontos aktivieren kannst."

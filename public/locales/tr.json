@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "E-posta adresinizi onaylayın",
       "confirmed": "Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.",
       "no_token": "Bu sayfaya onay e-postasındaki linke tıklayarak gelmeniz gerekmektedir. Eğer geliyorsanız, lütfen size sağlanan tam URL'yi kullandığınızdan emin olun.",
       "send_instructions": "Birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız."

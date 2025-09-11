@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Confirma tu dirección de correo electrónico",
       "confirmed": "Tu cuenta ha sido confirmada. Has sido identificado.",
       "no_token": "No puedes acceder a esta página si no es a través de un correo de confirmación. Si lo haces, asegúrate de que has utilizado la URL completa proporcionada.",
       "send_instructions": "Vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos minutos."
