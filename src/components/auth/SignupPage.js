@@ -31,14 +31,6 @@ const SignupPage = () => {
 
     try {
       await addUser(newUser)
-      toast.success(
-        `${t('devise.registrations.signed_up')} ${t(
-          'devise.confirmations.send_instructions',
-        )}`,
-        {
-          autoClose: 5000,
-        },
-      )
       history.push('/auth/confirmation/check-email')
     } catch (error) {
       toast.error(
