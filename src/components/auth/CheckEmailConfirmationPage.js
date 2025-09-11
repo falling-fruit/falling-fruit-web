@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { AuthPage } from '../ui/PageTemplate'
 import { Column } from './AuthWrappers'
 
-export default function CheckEmailConfirmation() {
+export default function CheckEmailConfirmationPage() {
   const { t } = useTranslation()
 
   return (

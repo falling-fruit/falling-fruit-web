@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
 
-import CheckEmailConfirmation from './CheckEmailConfirmation'
+import CheckEmailConfirmationPage from './CheckEmailConfirmationPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
 import LoginPage from './LoginPage'
@@ -11,7 +11,7 @@ import SignupPage from './SignupPage'
 const pages = [
   {
     path: '/auth/confirmation/check-email',
-    component: CheckEmailConfirmation,
+    component: CheckEmailConfirmationPage,
   },
   {
     path: '/users/sign_in',
