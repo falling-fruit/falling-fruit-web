@@ -9,7 +9,7 @@ export default function CheckEmailConfirmationPage() {
 
   return (
     <AuthPage>
-      <h2>{t('auth.check_email_header')}</h2>
+      <h2>{t('devise.confirmations.confirm_your_email')}</h2>
       <p>{t('devise.confirmations.send_instructions')}</p>
       <Column>
         <Link to="/users/confirmation/new">
