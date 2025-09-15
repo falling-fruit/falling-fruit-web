@@ -31,16 +31,16 @@ const pages = [
     component: PasswordSetPage,
   },
   {
+    path: '/auth/confirmation/check-email',
+    component: CheckEmailConfirmationPage,
+  },
+  {
     path: '/auth/confirmation/new',
     component: ConfirmationResendPage,
   },
   {
     path: '/auth/confirmation',
     component: ConfirmationPage,
-  },
-  {
-    path: '/auth/confirmation/check-email',
-    component: CheckEmailConfirmationPage,
   },
 ]
 
