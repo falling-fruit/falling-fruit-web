@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
+import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
-import { Column } from './AuthWrappers'
+import { withAuthRedirect } from './withAuthRedirect'
 
-export default function CheckEmailConfirmationPage() {
+const CheckEmailConfirmationPage = () => {
   const { t } = useTranslation()
 
   return (
@@ -19,3 +20,5 @@ export default function CheckEmailConfirmationPage() {
     </AuthPage>
   )
 }
+
+export default withAuthRedirect(CheckEmailConfirmationPage)
