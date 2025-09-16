@@ -7,19 +7,19 @@ import PhotoGridTemplate from './AboutPhotoGrid'
 
 const foragingPhotos = [
   {
-    link: 'https://fallingfruit.org/ethan-oranges.jpg',
+    link: '/ethan-oranges.jpg',
     alt: 'ethan oranges',
   },
   {
-    link: 'https://fallingfruit.org/jeff-tree.jpg',
+    link: '/jeff-tree.jpg',
     alt: 'jeff tree',
   },
   {
-    link: 'https://fallingfruit.org/plums.jpg',
+    link: '/plums.jpg',
     alt: 'plums',
   },
   {
-    link: 'https://fallingfruit.org/amittai-mulberries.jpg',
+    link: '/amittai-mulberries.jpg',
     alt: 'amittai mulberries',
   },
 ]
@@ -79,7 +79,7 @@ const Project = () => {
       </div>
       <h2>{t('pages.about.staff')}</h2>
       <div className="content">
-        <img src="https://fallingfruit.org/ethan_welty.jpg" alt="" />
+        <img src="/ethan_welty.jpg" alt="" />
         <p>
           <em>Executive Director</em>
           <br />
@@ -95,7 +95,7 @@ const Project = () => {
       </div>
       <h2>{t('pages.about.directors')}</h2>
       <div className="content">
-        <img src="https://fallingfruit.org/jeff_wanner.jpg" alt="" />
+        <img src="/jeff_wanner.jpg" alt="" />
         <p>
           <em>President</em>
           <br />
@@ -110,7 +110,7 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="https://fallingfruit.org/craig_durkin.jpg" alt="" />
+        <img src="/craig_durkin.jpg" alt="" />
         <p>
           <b>Craig Durkin</b>
           <br />
@@ -121,7 +121,7 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="https://fallingfruit.org/emily_sigman.jpg" alt="" />
+        <img src="/emily_sigman.jpg" alt="" />
         <p>
           <b>Emily Sigman</b>
           <br />
@@ -133,7 +133,7 @@ const Project = () => {
       </div>
       <h2>{t('pages.about.advisors')}</h2>
       <div className="content">
-        <img src="https://fallingfruit.org/alan_gibson.jpg" alt="" />
+        <img src="/alan_gibson.jpg" alt="" />
         <p>
           <b>Alan Gibson</b>
           <br />
@@ -144,7 +144,7 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="https://fallingfruit.org/ana_carolina_de_lima.jpg" alt="" />
+        <img src="/ana_carolina_de_lima.jpg" alt="" />
         <p>
           <b>Ana Carolina de Lima</b>
           <br />
@@ -155,7 +155,7 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="https://fallingfruit.org/caleb_phillips.jpg" alt="" />
+        <img src="/caleb_phillips.jpg" alt="" />
         <p>
           <b>Caleb Phillips</b>
           <br />
@@ -166,7 +166,7 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="https://fallingfruit.org/cristina_rubke.jpg" alt="" />
+        <img src="/cristina_rubke.jpg" alt="" />
         <p>
           <b>Cristina Rubke</b>
           <br />
@@ -177,7 +177,7 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="https://fallingfruit.org/david_craft.jpg" alt="" />
+        <img src="/david_craft.jpg" alt="" />
         <p>
           <b>David Craft</b>
           <br />
@@ -188,7 +188,7 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="https://fallingfruit.org/tristram_stuart.jpg" alt="" />
+        <img src="/tristram_stuart.jpg" alt="" />
         <p>
           <b>Tristram Stuart</b>
           <br />
