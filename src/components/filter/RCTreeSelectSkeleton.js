@@ -1,6 +1,8 @@
 import Skeleton from 'react-loading-skeleton'
 import styled from 'styled-components/macro'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
+
 const TreeSelectContainer = styled.div`
   height: 100%;
   border: 1px solid ${({ theme }) => theme.secondaryBackground};
@@ -10,9 +12,11 @@ const TreeSelectContainer = styled.div`
 
   overflow: hidden;
   margin 0;
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     height: 50vh;
-  }
+  `}
   position: relative;
 
   div {
@@ -22,14 +26,18 @@ const TreeSelectContainer = styled.div`
   }
 `
 
-const RCTreeSelectSkeleton = () => (
-  <TreeSelectContainer>
-    <div>
-      {new Array(32).fill(null).map((_, idx) => (
-        <Skeleton key={idx} width={Math.random() * 100 + 120} />
-      ))}
-    </div>
-  </TreeSelectContainer>
-)
+const RCTreeSelectSkeleton = () => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <TreeSelectContainer isDesktop={isDesktop}>
+      <div>
+        {new Array(32).fill(null).map((_, idx) => (
+          <Skeleton key={idx} width={Math.random() * 100 + 120} />
+        ))}
+      </div>
+    </TreeSelectContainer>
+  )
+}
 
 export default RCTreeSelectSkeleton

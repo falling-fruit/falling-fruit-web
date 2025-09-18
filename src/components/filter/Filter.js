@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 import { setShowOnlyOnMap } from '../../redux/filterSlice'
 import { muniChanged, selectionChanged } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import Input from '../ui/Input'
 import FilterButtons from './FilterButtons'
 import LabeledCheckbox from './LabeledCheckbox'
@@ -19,9 +20,11 @@ const EdibleTypeText = styled.p`
   color: ${({ theme }) => theme.secondaryText};
   margin-block-start: 1.25em;
   margin-block-end: 0.5em;
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     margin-block-start: 0em;
-  }
+  `}
 `
 
 const TreeFiltersContainer = styled.div`
@@ -69,11 +72,14 @@ const Filter = () => {
     [typesAccess, countsById, showOnlyOnMap, searchValue, types],
   )
 
+  const isDesktop = useIsDesktop()
   const { t } = useTranslation()
   return (
     <>
       <div>
-        <EdibleTypeText>{t('glossary.type.other')}</EdibleTypeText>
+        <EdibleTypeText isDesktop={isDesktop}>
+          {t('glossary.type.other')}
+        </EdibleTypeText>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder={t('glossary.type.one')}

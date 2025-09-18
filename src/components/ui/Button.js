@@ -1,6 +1,7 @@
 import { darken } from 'polished'
 import styled from 'styled-components/macro'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { prepend, theme } from './GlobalStyle'
 import ResetButton from './ResetButton'
 
@@ -21,7 +22,9 @@ const StyledButton = styled(ResetButton)`
   padding: 0 10px;
   // TODO: make raised and add a location button in main pane
 
-  @media ${theme.device.desktop} {
+  ${({ isDesktop }) =>
+    isDesktop &&
+    `
     :hover:enabled {
       background: ${({ $secondary }) =>
         $secondary ? theme.orange : darken(0.1, theme.orange)};
@@ -29,7 +32,7 @@ const StyledButton = styled(ResetButton)`
         $secondary ? theme.orange : darken(0.1, theme.orange)};
       color: ${theme.background};
     }
-  }
+  `}
 
   :disabled {
     opacity: 0.6;
@@ -53,12 +56,16 @@ const Button = ({
   rightIcon,
   children,
   ...props
-}) => (
-  <StyledButton $secondary={secondary} {...props}>
-    {leftIcon && <Icon $prepend>{leftIcon}</Icon>}
-    {children}
-    {rightIcon && <Icon>{rightIcon}</Icon>}
-  </StyledButton>
-)
+}) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <StyledButton $secondary={secondary} isDesktop={isDesktop} {...props}>
+      {leftIcon && <Icon $prepend>{leftIcon}</Icon>}
+      {children}
+      {rightIcon && <Icon>{rightIcon}</Icon>}
+    </StyledButton>
+  )
+}
 
 export default Button

@@ -39,25 +39,29 @@ const StyledComboboxPopover = styled(ComboboxPopover)`
   background: none;
   margin-block-start: 8px;
 
-  @media ${({ theme }) => theme.device.desktop} {
-    box-shadow: 0 3px 5px ${({ theme }) => theme.shadow};
+  ${({ isDesktop, theme }) =>
+    isDesktop &&
+    `
+    box-shadow: 0 3px 5px ${theme.shadow};
     border-end-start-radius: 30px;
     border-end-end-radius: 30px;
 
     position: absolute;
     width: 100%;
     z-index: 1;
-    background-color: ${({ theme }) => theme.background};
-  }
+    background-color: ${theme.background};
+  `}
 `
 
 const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
-  @media ${({ theme }) => theme.device.desktop} {
+  ${({ isDesktop }) =>
+    isDesktop &&
+    `
     padding-block: 10px 2px;
     padding-inline: 10px;
-  }
+  `}
 
   & > div {
     flex: 1;
@@ -185,7 +189,7 @@ const Search = (props) => {
       openOnFocus
       {...props}
     >
-      <SearchBarContainer>
+      <SearchBarContainer isDesktop={isDesktop}>
         <ComboboxInput
           as={Input}
           value={value}
@@ -256,7 +260,7 @@ const Search = (props) => {
         )}
       </SearchBarContainer>
       {suggestionsList.length > 0 && (
-        <StyledComboboxPopover portal={false}>
+        <StyledComboboxPopover portal={false} isDesktop={isDesktop}>
           <ComboboxList>
             {suggestionsList.map((suggestion) => {
               const {

@@ -17,11 +17,6 @@ import { createGlobalStyle } from 'styled-components'
 const MOBILE_MAX_WIDTH = 767
 
 const theme = {
-  // media queries for mobile and desktop
-  device: {
-    mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
-    desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
-  },
   fonts:
     '"Noto Sans", "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans SC", sans-serif',
   // text colors
