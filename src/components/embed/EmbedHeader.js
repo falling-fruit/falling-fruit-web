@@ -100,7 +100,7 @@ const EmbedHeader = () => {
     setIsExpanded(!isExpanded)
   }
 
-  const tabPaths = ['/settings', '/map', '/list', '/filter']
+  const tabPaths = ['/settings', '/map', '/list', '/types']
 
   const findCurrentTabIndex = () => {
     const index = tabPaths.findIndex((path) => pathname.startsWith(path))
