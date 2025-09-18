@@ -296,16 +296,12 @@ const EntryMobile = () => {
             label="back-button"
           />
           <div>
-            {isFromListLocations && (
+            {isFromListLocations && !isFromEmbedViewMap && (
               <EntryButton
-                onClick={
-                  isFromEmbedViewMap
-                    ? () => history.push('/map')
-                    : (event) => {
-                        event.stopPropagation()
-                        dispatch(reenablePaneDrawerAndSetToLowPosition())
-                      }
-                }
+                onClick={(event) => {
+                  event.stopPropagation()
+                  dispatch(reenablePaneDrawerAndSetToLowPosition())
+                }}
                 icon={<MapIcon />}
                 label="map-button"
               />
