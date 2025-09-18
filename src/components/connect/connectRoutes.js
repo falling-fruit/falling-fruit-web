@@ -40,12 +40,12 @@ const connectRoutes = [
   /*
    * ConnectGoogleMap - /filter, see above
    */
-  <Route key="connect-filter" path={['/map', '/filter']}>
+  <Route key="connect-filter" path={['/map', '/types']}>
     {({ match }) =>
       match && (
         <ConnectGoogleMap
-          isTargetRoute={match.path.startsWith('/filter')}
-          targetRoute="/filter"
+          isTargetRoute={match.path.startsWith('/types')}
+          targetRoute="/types"
         />
       )
     }
