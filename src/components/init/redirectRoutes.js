@@ -138,19 +138,19 @@ const redirects = [
   {
     path: '/about',
     exact: true,
-    component: () => <Redirect to="/about/about-the-project" />,
+    component: () => <Redirect to="/about/project" />,
   },
   {
     path: ['/data', '/datasets'],
-    component: () => <Redirect to="/about/the-data" />,
+    component: () => <Redirect to="/about/data" />,
   },
   {
     path: '/press',
-    component: () => <Redirect to="/about/in-the-press" />,
+    component: () => <Redirect to="/about/press" />,
   },
   {
     path: '/sharing',
-    component: () => <Redirect to="/about/sharing-the-harvest" />,
+    component: () => <Redirect to="/about/sharing" />,
   },
 ]
 
