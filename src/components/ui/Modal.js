@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { useInvisibleRecaptcha } from '../form/useInvisibleRecaptcha'
 import Button from './Button'
 
@@ -16,9 +17,11 @@ const StyledModal = styled(Dialog)`
   max-width: 800px;
   margin: 15vh auto;
 
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     margin: 8vh auto;
-  }
+  `}
 
   h3 {
     margin-block-start: 0;
@@ -28,16 +31,20 @@ const StyledModal = styled(Dialog)`
 const Buttons = styled.div`
   margin-block-start: 20px;
 
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     text-align: center;
-  }
+  `}
 
   button {
     width: 130px;
 
-    @media ${({ theme }) => theme.device.mobile} {
+    ${({ isDesktop }) =>
+      !isDesktop &&
+      `
       width: 110px;
-    }
+    `}
 
     &:not(:last-child) {
       margin-inline-end: 12px;
@@ -56,6 +63,7 @@ const Modal = ({
   ...props
 }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const isDesktop = useIsDesktop()
   const { t } = useTranslation()
   const { Recaptcha, handlePresubmit: onPresubmit } =
     useInvisibleRecaptcha(onSubmit)
@@ -64,6 +72,7 @@ const Modal = ({
     <StyledModal
       aria-label={`${title} dialog`}
       onDismiss={onDismiss}
+      isDesktop={isDesktop}
       {...props}
     >
       <h3>{title}</h3>
@@ -81,7 +90,7 @@ const Modal = ({
             <Form>
               {children}
               {!isLoggedIn && <Recaptcha />}
-              <Buttons>
+              <Buttons isDesktop={isDesktop}>
                 <Button type="button" onClick={onDismiss} secondary>
                   {t('form.button.cancel')}
                 </Button>

@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import pressData from '../../constants/data/press.json'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { InfoPage } from '../ui/PageTemplate'
 
 const TimelineSection = styled.section`
@@ -51,12 +52,14 @@ const TimelineSection = styled.section`
 const Embed = styled.div`
   margin-block-start: 1em;
 
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     iframe {
       width: 100%;
       height: auto;
     }
-  }
+  `}
 `
 
 const Photo = styled.img`
@@ -70,7 +73,7 @@ const Photo = styled.img`
 const ConditionalLink = ({ href, children }) =>
   href ? <a href={href}>{children}</a> : <>{children}</>
 
-const TimelineItem = ({ data }) => {
+const TimelineItem = ({ data, isDesktop }) => {
   const {
     published_on,
     outlet,
@@ -103,7 +106,10 @@ const TimelineItem = ({ data }) => {
         <ConditionalLink href={url}>{title}</ConditionalLink>
         {author && <> {t('glossary.by_author', { author: author })}</>}
         {embed_html && (
-          <Embed dangerouslySetInnerHTML={{ __html: embed_html }} />
+          <Embed
+            isDesktop={isDesktop}
+            dangerouslySetInnerHTML={{ __html: embed_html }}
+          />
         )}
         {photo_url && <Photo src={photo_url} alt={title} />}
       </div>
@@ -112,6 +118,7 @@ const TimelineItem = ({ data }) => {
 }
 
 const InThePressPage = () => {
+  const isDesktop = useIsDesktop()
   const years = Object.keys(pressData)
   years.sort().reverse()
 
@@ -122,7 +129,11 @@ const InThePressPage = () => {
           <h2>{year}</h2>
           <ol>
             {pressData[year].map((data) => (
-              <TimelineItem key={data.title + data.published_on} data={data} />
+              <TimelineItem
+                key={data.title + data.published_on}
+                data={data}
+                isDesktop={isDesktop}
+              />
             ))}
           </ol>
         </TimelineSection>

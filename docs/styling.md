@@ -20,14 +20,6 @@ FF’s frontend is a progressive web app, which means that the same website is c
 
 Although most UI components are designed to be reusable across both platforms, writing styles and functionality for a specific platform is inevitable because of different layouts and features.
 
-To write styles specific to a platform, use media queries. Standard media queries for each platform are [available in the theme](https://github.com/falling-fruit/falling-fruit-web/blob/bef2edf166848967f16402e81c9726a51013bcd1/src/components/ui/GlobalStyle.js#L15).
-
-```
-@media ${({ theme }) => theme.device.desktop} {
-  padding: 12px;
-}
-```
-
 To write platform-specific functionality, use the `useIsDesktop()` and `useIsMobile()` hooks exported from [`utils/useBreakpoint.js`](https://github.com/falling-fruit/falling-fruit-web/blob/main/src/utils/useBreakpoint.js).
 
 ## Colors
