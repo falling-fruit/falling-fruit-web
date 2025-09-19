@@ -12,24 +12,22 @@ const StyledButton = styled(ResetButton)`
   height: 36px;
   line-height: 0.375rem;
   font-size: 0.875rem;
-  color: ${({ $secondary }) => ($secondary ? theme.orange : theme.background)};
+  color: ${({ secondary }) => (secondary ? theme.orange : theme.background)};
   font-weight: bold;
-  background-color: ${({ $secondary }) =>
-    $secondary ? theme.background : theme.orange};
+  background-color: ${({ secondary }) =>
+    secondary ? theme.background : theme.orange};
   border: 2px solid ${theme.orange};
   box-sizing: border-box;
   border-radius: 0.375em;
   padding: 0 10px;
   // TODO: make raised and add a location button in main pane
 
-  ${({ isDesktop }) =>
+  ${({ isDesktop, secondary }) =>
     isDesktop &&
     `
     :hover:enabled {
-      background: ${({ $secondary }) =>
-        $secondary ? theme.orange : darken(0.1, theme.orange)};
-      border-color: ${({ $secondary }) =>
-        $secondary ? theme.orange : darken(0.1, theme.orange)};
+      background: ${secondary ? theme.orange : darken(0.1, theme.orange)};
+      border-color: ${secondary ? theme.orange : darken(0.1, theme.orange)};
       color: ${theme.background};
     }
   `}
@@ -60,7 +58,7 @@ const Button = ({
   const isDesktop = useIsDesktop()
 
   return (
-    <StyledButton $secondary={secondary} isDesktop={isDesktop} {...props}>
+    <StyledButton secondary={secondary} isDesktop={isDesktop} {...props}>
       {leftIcon && <Icon $prepend>{leftIcon}</Icon>}
       {children}
       {rightIcon && <Icon>{rightIcon}</Icon>}
