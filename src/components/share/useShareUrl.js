@@ -8,6 +8,9 @@ const useShareUrl = () => {
   const typeEncoder = useSelector((state) => state.type.typeEncoder)
 
   const url = new URL(window.location.href)
+  if (url.pathname.startsWith('/filters')) {
+    url.pathname = url.pathname.replace(/^\/filters/, '/map')
+  }
   url.searchParams.delete('embed')
   if (mapType !== 'roadmap') {
     url.searchParams.set('map', mapType)
