@@ -1,5 +1,4 @@
 import { Copy as CopyIcon } from '@styled-icons/boxicons-regular'
-import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -54,23 +53,7 @@ const CopyButton = styled(Button)`
 const Share = ({ onClose }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const [displayUrl, setDisplayUrl] = useState('')
   const currentUrl = useShareUrl()
-  const displayUrlIsInitialValue = displayUrl === ''
-  const displayUrlIsUpToDate = displayUrl === currentUrl
-
-  // If changing after 'simplified_controls_only' checkbox interaction, animate for feedback
-  useEffect(() => {
-    if (displayUrlIsInitialValue) {
-      setDisplayUrl(currentUrl)
-    } else if (!displayUrlIsUpToDate) {
-      setDisplayUrl('...')
-      const timer = setTimeout(() => {
-        setDisplayUrl(currentUrl)
-      }, 200)
-      return () => clearTimeout(timer)
-    }
-  }, [displayUrlIsInitialValue, displayUrlIsUpToDate, currentUrl])
 
   const handleCopy = async () => {
     try {
@@ -94,7 +77,7 @@ const Share = ({ onClose }) => {
       <ShareUrlContainer>
         <ShareInput
           type="text"
-          value={displayUrl}
+          value={currentUrl}
           readOnly
           onClick={(e) => e.target.select()}
           height="30px"

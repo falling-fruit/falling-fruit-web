@@ -100,7 +100,7 @@ const EmbedHeader = () => {
     setIsExpanded(!isExpanded)
   }
 
-  const tabPaths = ['/settings', '/map', '/list', '/types']
+  const tabPaths = ['/settings', '/map', '/list', '/filters']
 
   const findCurrentTabIndex = () => {
     const index = tabPaths.findIndex((path) => pathname.startsWith(path))
@@ -149,7 +149,7 @@ const EmbedHeader = () => {
               </Tab>
               <Tab>
                 <FilterAlt size={20} />
-                {t('glossary.type.other')}
+                {t('menu.filters')}
               </Tab>
             </TabList>
           </VerticalTabs>

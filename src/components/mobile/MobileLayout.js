@@ -104,7 +104,7 @@ const MobileLayout = () => {
       </Helmet>
       <PageTabs index={tabIndex} onChange={handleTabChange}>
         <Switch>
-          <Route path={['/map', '/settings', '/list', '/types']}>
+          <Route path={['/map', '/settings', '/list', '/filters']}>
             {isEmbed && <EmbedHeader />}
           </Route>
         </Switch>
@@ -146,7 +146,13 @@ const MobileLayout = () => {
                 {authRoutes}
                 {accountRoutes}
                 <Route
-                  path={['/map', '/locations', '/list', '/settings', '/types']}
+                  path={[
+                    '/map',
+                    '/locations',
+                    '/list',
+                    '/settings',
+                    '/filters',
+                  ]}
                 >
                   <Switch>
                     <Route path="/locations/init" />
@@ -164,7 +170,7 @@ const MobileLayout = () => {
                     <Route path="/settings">
                       <SettingsPage isEmbed={isEmbed} />
                     </Route>
-                    <Route path="/types">
+                    <Route path="/filters">
                       {isEmbed && <EmbedFilterPage />}
                     </Route>
                   </Switch>
