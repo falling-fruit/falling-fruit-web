@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { pathToSignInPage } from '../../utils/appUrl'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import Column from '../ui/LinkColumn'
 
 const getAvailableLinks = (t) => ({
@@ -27,9 +28,10 @@ const getAvailableLinks = (t) => ({
   },
 })
 
-const AuthLinks = ({ include, exclude, children }) => {
+const AuthLinks = ({ include, exclude }) => {
   const { t } = useTranslation()
   const availableLinks = getAvailableLinks(t)
+  const isDesktop = useIsDesktop()
 
   let linksToShow = Object.keys(availableLinks)
 
@@ -37,6 +39,10 @@ const AuthLinks = ({ include, exclude, children }) => {
     linksToShow = include.filter((key) => availableLinks[key])
   } else if (exclude) {
     linksToShow = linksToShow.filter((key) => !exclude.includes(key))
+  }
+
+  if (isDesktop) {
+    linksToShow = linksToShow.filter((key) => key !== 'about')
   }
 
   return (
@@ -49,7 +55,6 @@ const AuthLinks = ({ include, exclude, children }) => {
           </Link>
         )
       })}
-      {children}
     </Column>
   )
 }
