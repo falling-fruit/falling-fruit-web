@@ -1,14 +1,12 @@
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { requestResetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
+import AuthLinks from './AuthLinks'
 import { EmailForm } from './EmailForm'
-import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const PasswordResetPage = () => {
@@ -37,14 +35,7 @@ const PasswordResetPage = () => {
     <AuthPage>
       <h1>{t('users.send_password_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
-      <Column>
-        <Link to="/about/welcome">{t('glossary.about')}</Link>
-        <SignInLink />
-        <Link to="/auth/sign_up">{t('glossary.sign_up')}</Link>
-        <Link to="/auth/confirmation/new">
-          {t('users.resend_confirmation_instructions')}
-        </Link>
-      </Column>
+      <AuthLinks exclude={['forgotPassword']} />
     </AuthPage>
   )
 }

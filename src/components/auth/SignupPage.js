@@ -1,7 +1,6 @@
 import { Form, Formik } from 'formik'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
@@ -10,8 +9,8 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { Checkbox, Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
-import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
+import AuthLinks from './AuthLinks'
 import {
   ErrorMessage,
   FormButtonWrapper,
@@ -145,14 +144,7 @@ const SignupPage = () => {
           </Form>
         )}
       </Formik>
-      <Column>
-        <Link to="/about/welcome">{t('glossary.about')}</Link>
-        <Link to="/auth/sign_in">{t('users.sign_in')}</Link>
-        <Link to="/auth/password/new">{t('users.forgot_password')}</Link>
-        <Link to="/auth/confirmation/new">
-          {t('users.resend_confirmation_instructions')}
-        </Link>
-      </Column>
+      <AuthLinks exclude={['signUp']} />
     </AuthPage>
   )
 }
