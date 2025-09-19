@@ -8,14 +8,13 @@ import { resetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
-import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
+import AuthLinks from './AuthLinks'
 import {
   ErrorMessage,
   FormButtonWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
-import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const getResetToken = () =>
@@ -109,9 +108,7 @@ const PasswordSetPage = () => {
           </Form>
         )}
       </Formik>
-      <Column>
-        <SignInLink />
-      </Column>
+      <AuthLinks include={['signIn']} />
     </AuthPage>
   )
 }

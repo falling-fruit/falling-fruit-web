@@ -1,15 +1,15 @@
 import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
 import { Checkbox, Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
-import Column from '../ui/LinkColumn'
 import { AuthPage } from '../ui/PageTemplate'
+import AuthLinks from './AuthLinks'
 import {
   FormButtonWrapper,
   FormCheckboxWrapper,
@@ -76,14 +76,7 @@ const LoginPage = () => {
           </Form>
         )}
       </Formik>
-      <Column>
-        <Link to="/about/welcome">{t('glossary.about')}</Link>
-        <Link to="/auth/sign_up">{t('glossary.sign_up')}</Link>
-        <Link to="/auth/password/new">{t('users.forgot_password')}</Link>
-        <Link to="/auth/confirmation/new">
-          {t('users.resend_confirmation_instructions')}
-        </Link>
-      </Column>
+      <AuthLinks exclude={['signIn']} />
     </AuthPage>
   )
 }
