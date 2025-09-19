@@ -13,7 +13,7 @@ export const fetchFilterCounts = createAsyncThunk(
     const isOpen =
       state.filter.isOpenInMobileLayout ||
       state.misc.isDesktop ||
-      (state.misc.isEmbed && window.location.pathname.startsWith('/types'))
+      (state.misc.isEmbed && window.location.pathname.startsWith('/filters'))
     if (isOpen && lastMapView) {
       const { muni } = state.filter
       const { bounds, zoom, center: _ } = lastMapView
