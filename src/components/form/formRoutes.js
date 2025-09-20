@@ -8,7 +8,7 @@ import { saveLocationFormValues } from '../../redux/locationSlice'
 import { saveReviewFormValues } from '../../redux/reviewSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import SettingsButton from '../desktop/SettingsButton'
-import BackButton from '../ui/BackButton'
+import { BackButton } from '../ui/ActionButtons'
 import ReturnIcon from '../ui/ReturnIcon'
 import TopBar from '../ui/TopBar'
 import TopBarNav from '../ui/TopBarNav'
@@ -21,11 +21,6 @@ const StyledNavBack = styled.div`
   padding-inline: 10px 15px;
   display: flex;
   justify-content: space-between;
-
-  svg {
-    height: 20px;
-    margin-inline-end: 5px;
-  }
 `
 
 const Header = styled.h3`

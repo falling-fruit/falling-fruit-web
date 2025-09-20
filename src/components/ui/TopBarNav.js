@@ -1,9 +1,19 @@
 import styled from 'styled-components/macro'
 
 import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
-import BackButton from './BackButton'
+import ResetButton from './ResetButton'
+import ReturnIcon from './ReturnIcon'
 
-const StyledBackButton = styled(BackButton)`
+const StyledBackButton = styled(ResetButton).attrs((props) => ({
+  children: <ReturnIcon />,
+  ...props,
+}))`
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.secondaryText};
+  font-size: 0.9375rem;
+  font-weight: bold;
+
   /* Make the touch target bigger */
   width: 75px;
   height: 100%;

@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "هل أنت متأكد أنك تريد حذف هذا الموقع؟",
+    "delete_review": "هل أنت متأكد أنك تريد حذف هذا التقييم؟"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "قم بتأكيد عنوان بريدك الإلكتروني",
@@ -15,7 +19,6 @@
       "updated_not_active": "تم تغيير كلمة المرور بنجاح."
     },
     "registrations": {
-      "signed_up": "أهلا وسهلا! كنت قد وقعت بنجاح.",
       "update_needs_confirmation": "لقد قمت بتحديث حسابك بنجاح ، لكننا نحتاج إلى التحقق من عنوان بريدك الإلكتروني الجديد. يرجى التحقق من بريدك الإلكتروني واتباع رابط التأكيد لتأكيد عنوان بريدك الإلكتروني الجديد.",
       "updated": "تم تحديث حسابك بنجاح."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "خطأ في جلب الموقع {{id}}: {{message}}",
       "fetch_review_failed": "خطأ في جلب المراجعة {{id}}: {{message}}",
       "fetch_user_failed": "خطأ في جلب المستخدم {{id}}: {{message}}",
+      "location_deletion_failed": "فشل حذف الموقع: {{message}}",
       "location_edit_failed": "فشل تحرير الموقع: {{message}}",
       "location_submission_failed": "فشل تقديم الموقع: {{message}}",
       "photo_upload_failed": "فشل تحميل الصورة: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "لم يتم التحقق",
     "yield": "المحصول"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "يحتوي هذا الموقع على مراجعات من مستخدمين آخرين. لطلب حذفه، يرجى استخدام زر الإبلاغ."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "فشل نسخ الرابط إلى الحافظة"
   },
   "success_message": {
+    "location_deleted": "تم حذف الموقع بنجاح!",
     "location_edited": "تم تعديل الموقع!",
     "location_submitted": "تم إرسال الموقع!",
     "report_submitted": "تم إرسال التقرير بنجاح!",

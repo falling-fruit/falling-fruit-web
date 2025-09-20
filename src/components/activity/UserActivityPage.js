@@ -10,9 +10,8 @@ import {
   resetUserActivityLastBrowsedSection,
 } from '../../redux/activitySlice'
 import { useAppHistory } from '../../utils/useAppHistory'
-import BackButton from '../ui/BackButton'
+import { BackButton } from '../ui/ActionButtons'
 import { Page } from '../ui/PageTemplate'
-import ReturnIcon from '../ui/ReturnIcon'
 import { createActivityDiary } from './ActivityDiary'
 import DiaryEntry from './DiaryEntry'
 import SkeletonLoader from './SkeletonLoader'
@@ -98,11 +97,6 @@ const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
 
 const StyledBackButton = styled(BackButton)`
   margin-bottom: 23px;
-  svg {
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.6em;
-  }
 `
 
 const UserActivityPage = () => {
@@ -156,13 +150,8 @@ const UserActivityPage = () => {
   return (
     <Page>
       <StyledBackButton
-        onClick={() =>
-          history.push(isCurrentUser ? '/account/edit' : `/users/${userId}`)
-        }
-      >
-        <ReturnIcon />
-        {t('layouts.back')}
-      </StyledBackButton>
+        backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
+      />
 
       {changes !== undefined && changes.length > 0 && (
         <h2>
