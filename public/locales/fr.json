@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Êtes-vous sûr de vouloir supprimer cet emplacement ?",
+    "delete_review": "Êtes-vous sûr de vouloir supprimer cet avis ?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Confirme ton adresse e-mail",
@@ -15,7 +19,6 @@
       "updated_not_active": "Ton mot de passe a été changé avec succès."
     },
     "registrations": {
-      "signed_up": "Bienvenue ! Ton inscription a bien été enregistrée.",
       "update_needs_confirmation": "Ton compte a bien été mis à jour mais nous devons vérifier ta nouvelle adresse e-mail. Merci de consulter ta messagerie et de cliquer sur le lien pour confirmer ta nouvelle adresse.",
       "updated": "Ton compte a bien été mis à jour."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
       "fetch_user_failed": "Erreur lors de la récupération de l'utilisateur {{id}} : {{message}}",
+      "location_deletion_failed": "Échec de la suppression de l'emplacement : {{message}}",
       "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
       "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
       "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Non vérifié",
     "yield": "Production"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Cet endroit contient des avis d'autres utilisateurs. Pour demander sa suppression, veuillez utiliser le bouton Signaler."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Échec de la copie de l'URL dans ton presse-papiers"
   },
   "success_message": {
+    "location_deleted": "Emplacement supprimé avec succès !",
     "location_edited": "Emplacement modifié",
     "location_submitted": "Emplacement soumis",
     "report_submitted": "Rapport soumis avec succès !",

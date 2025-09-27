@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Weet je zeker dat je deze locatie wilt verwijderen?",
+    "delete_review": "Weet je zeker dat je deze recensie wilt verwijderen?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Bevestig je e-mailadres",
@@ -15,7 +19,6 @@
       "updated_not_active": "Je wachtwoord is succesvol gewijzigd."
     },
     "registrations": {
-      "signed_up": "Welkom! Je hebt jezelf succesvol geregistreerd.",
       "update_needs_confirmation": "Je account is succesvol bijgewerkt, maar je nieuwe e-mailadres moet nog bevestigd worden. Controleer je e-mail en klik op de bevestigingslink om je nieuwe e-mailadres te bevestigen.",
       "updated": "Je account is succesvol bijgewerkt."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
       "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
       "fetch_user_failed": "Fout bij ophalen gebruiker {{id}}: {{message}}",
+      "location_deletion_failed": "Verwijderen van locatie mislukt: {{message}}",
       "location_edit_failed": "Bewerken van locatie mislukt: {{message}}",
       "location_submission_failed": "Indienen van locatie mislukt: {{message}}",
       "photo_upload_failed": "Uploaden van foto mislukt: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Niet-bevestigd",
     "yield": "Opbrengst"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Deze locatie bevat recensies van andere gebruikers. Gebruik de Melden-knop om verwijdering aan te vragen."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "URL kopiëren naar klembord mislukt"
   },
   "success_message": {
+    "location_deleted": "Locatie succesvol verwijderd!",
     "location_edited": "Locatie succesvol bewerkt!",
     "location_submitted": "Locatie succesvol ingediend!",
     "report_submitted": "Melding succesvol ingediend!",

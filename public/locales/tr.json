@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Bu konumu silmek istediğinizden emin misiniz?",
+    "delete_review": "Bu değerlendirmeyi silmek istediğinizden emin misiniz?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "E-posta adresinizi onaylayın",
@@ -15,7 +19,6 @@
       "updated_not_active": "Şifreniz başarıyla güncellendi."
     },
     "registrations": {
-      "signed_up": "Başarıyla giriş yaptınız. Hoşgeldiniz!",
       "update_needs_confirmation": "Hesabınızı başarıyla güncellediniz, fakat yeni e-posta adresinizin onaylanması gerek. Yeni e-posta hesabınızın onaylanması için lütfen size gönderdiğimiz e-postada bulunan onay linkini açın.",
       "updated": "Hesabınız başarıyla güncellendi."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "{{id}} konumunu alma hatası: {{message}}",
       "fetch_review_failed": "{{id}} değerlendirmesini alma hatası: {{message}}",
       "fetch_user_failed": "{{id}} kullanıcısı getirilirken hata oluştu: {{message}}",
+      "location_deletion_failed": "Konum silme başarısız: {{message}}",
       "location_edit_failed": "Konum düzenleme başarısız: {{message}}",
       "location_submission_failed": "Konum gönderimi başarısız: {{message}}",
       "photo_upload_failed": "Fotoğraf yükleme başarısız: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Doğrulanmamış",
     "yield": "Verim"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Bu konum diğer kullanıcıların yorumlarını içeriyor. Silinmesini talep etmek için lütfen Rapor butonunu kullanın."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "URL panoya kopyalanamadı"
   },
   "success_message": {
+    "location_deleted": "Konum başarıyla silindi!",
     "location_edited": "Konum başarıyla düzenlendi!",
     "location_submitted": "Konum başarıyla gönderildi!",
     "report_submitted": "Rapor başarıyla gönderildi!",

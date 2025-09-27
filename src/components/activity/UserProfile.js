@@ -4,24 +4,16 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import styled from 'styled-components/macro'
 
 import { getUserById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { formatISOString } from '../entry/textFormatters'
-import BackButton from '../ui/BackButton'
+import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
-import ReturnIcon from '../ui/ReturnIcon'
 
-const StyledNavBack = styled.div`
-  svg {
-    height: 20px;
-    margin-inline-end: 5px;
-  }
-`
 const UserProfile = () => {
   const { userId } = useParams()
   const history = useAppHistory()
@@ -61,21 +53,9 @@ const UserProfile = () => {
 
   return (
     <Page>
-      <StyledNavBack>
-        <BackButton
-          onClick={(event) => {
-            event.stopPropagation()
-            if (locationId) {
-              history.push(`/locations/${locationId}`)
-            } else {
-              history.push('/changes')
-            }
-          }}
-        >
-          <ReturnIcon />
-          {t('layouts.back')}
-        </BackButton>
-      </StyledNavBack>
+      <BackButton
+        backPath={locationId ? `/locations/${locationId}` : '/changes'}
+      />
       <h3>{t('users.profile.title', { name })}</h3>
       {bio && (
         <p dir="auto" style={{ whiteSpace: 'pre-line' }}>

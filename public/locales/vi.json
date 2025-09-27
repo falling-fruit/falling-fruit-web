@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Bạn có chắc chắn muốn xóa địa điểm này?",
+    "delete_review": "Bạn có chắc chắn muốn xóa đánh giá này?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Xác nhận địa chỉ email của bạn",
@@ -15,7 +19,6 @@
       "updated_not_active": "Mật khẩu của bạn đã hoàn thành chỉnh sửa."
     },
     "registrations": {
-      "signed_up": "Chào mừng bạn! Bạn đã đăng ký thành công.",
       "update_needs_confirmation": "Bạn đã cập nhật tài khoản của bạn thành công, nhưng chúng mình cần chứng minh địa chỉ email mới của bạn. Xin vui lòng kiểm tra email của bạn và theo đường link để chứng minh địa chỉ email mới của bạn.",
       "updated": "Tài khoản của bạn đã được cập nhật thành công."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
       "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
       "fetch_user_failed": "Lỗi khi tải thông tin người dùng {{id}}: {{message}}",
+      "location_deletion_failed": "Xóa vị trí thất bại: {{message}}",
       "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
       "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
       "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Chưa được xác minh",
     "yield": "Lợi nhuận"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Địa điểm này có chứa đánh giá của người dùng khác. Để yêu cầu xóa, vui lòng sử dụng nút Báo cáo."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Không thể sao chép URL vào bộ nhớ tạm"
   },
   "success_message": {
+    "location_deleted": "Xóa vị trí thành công!",
     "location_edited": "Địa điểm đã được chỉnh sửa thành công!",
     "location_submitted": "Địa điểm đã được gửi thành công!",
     "report_submitted": "Báo cáo đã được gửi thành công!",

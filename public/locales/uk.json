@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Ви впевнені, що хочете видалити цю локацію?",
+    "delete_review": "Ви впевнені, що хочете видалити цей відгук?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Підтвердіть вашу електронну адресу",
@@ -15,7 +19,6 @@
       "updated_not_active": "Ваш пароль успішно змінено."
     },
     "registrations": {
-      "signed_up": "Ласкаво просимо! Ви успішно зареєструвалися.",
       "update_needs_confirmation": "Ви успішно оновили свій обліковий запис, але нам потрібно перевірити вашу нову електронну адресу. Будь ласка, перевірте свою пошту та перейдіть за посиланням для підтвердження нової електронної адреси.",
       "updated": "Ваш обліковий запис успішно оновлено."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Помилка отримання локації {{id}}: {{message}}",
       "fetch_review_failed": "Помилка отримання відгуку {{id}}: {{message}}",
       "fetch_user_failed": "Помилка отримання користувача {{id}}: {{message}}",
+      "location_deletion_failed": "Не вдалося видалити локацію: {{message}}",
       "location_edit_failed": "Не вдалося відредагувати локацію: {{message}}",
       "location_submission_failed": "Не вдалося надіслати локацію: {{message}}",
       "photo_upload_failed": "Не вдалося завантажити фото: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Неперевірений",
     "yield": "Врожайність"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Ця локація містить відгуки інших користувачів. Щоб запитати її видалення, будь ласка, використайте кнопку Скарга."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Не вдалося скопіювати URL до буфера обміну"
   },
   "success_message": {
+    "location_deleted": "Локацію успішно видалено!",
     "location_edited": "Локацію успішно відредаговано!",
     "location_submitted": "Локацію успішно надіслано!",
     "report_submitted": "Скаргу успішно надіслано!",

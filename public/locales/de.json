@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Sind Sie sicher, dass Sie diesen Standort löschen möchten?",
+    "delete_review": "Sind Sie sicher, dass Sie diese Bewertung löschen möchten?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Bestätige deine Email-Adresse",
@@ -15,7 +19,6 @@
       "updated_not_active": "Dein Passwort wurde erfolgreich geändert."
     },
     "registrations": {
-      "signed_up": "Willkommen! Du hast dich erfolgreich angemeldet.",
       "update_needs_confirmation": "Du hast dein Konto aktualisiert, wir müssen jetzt noch deine neue Email Adresse verifizieren. Eine Nachricht mit einem Aktivierungs-Link solltest du erhalten habe. Öffne den Link, um deine Änderungen zu bestätigen.",
       "updated": "Du hast dein Konto erfolgreich aktualisiert."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Fehler beim Abrufen des Standorts {{id}}: {{message}}",
       "fetch_review_failed": "Fehler beim Abrufen der Bewertung {{id}}: {{message}}",
       "fetch_user_failed": "Fehler beim Abrufen des Benutzers {{id}}: {{message}}",
+      "location_deletion_failed": "Löschen des Standorts fehlgeschlagen: {{message}}",
       "location_edit_failed": "Bearbeitung des Standorts fehlgeschlagen: {{message}}",
       "location_submission_failed": "Übermittlung des Standorts fehlgeschlagen: {{message}}",
       "photo_upload_failed": "Foto-Upload fehlgeschlagen: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Ungeprüft",
     "yield": "Ausbeute"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Dieser Ort enthält Bewertungen von anderen Benutzern. Um die Löschung zu beantragen, verwenden Sie bitte die Melden-Schaltfläche."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "URL konnte nicht in die Zwischenablage kopiert werden"
   },
   "success_message": {
+    "location_deleted": "Standort erfolgreich gelöscht!",
     "location_edited": "Standort erfolgreich bearbeitet!",
     "location_submitted": "Standort erfolgreich übermittelt!",
     "report_submitted": "Meldung erfolgreich übermittelt!",

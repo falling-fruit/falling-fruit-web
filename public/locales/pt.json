@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Tem certeza que deseja excluir este local?",
+    "delete_review": "Tem certeza que deseja excluir esta avaliação?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Confirme seu endereço de e-mail",
@@ -15,7 +19,6 @@
       "updated_not_active": "A sua senha foi alterada com sucesso."
     },
     "registrations": {
-      "signed_up": "Bem vindos! Você se inscreveu com sucesso.",
       "update_needs_confirmation": "Você atualizou sua conta com sucesso, mas nós precisamos verificar seu endereço de e-mail. Por favor, verifique seus e-mails e clique no link de confirmação para finalizar a criação da sua conta.",
       "updated": "Você atualizou sua conta com sucesso."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
       "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
       "fetch_user_failed": "Erro ao buscar usuário {{id}}: {{message}}",
+      "location_deletion_failed": "Falha na exclusão da localização: {{message}}",
       "location_edit_failed": "Falha na edição da localização: {{message}}",
       "location_submission_failed": "Falha no envio da localização: {{message}}",
       "photo_upload_failed": "Falha no upload da foto: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Não verificado",
     "yield": "Produção"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Este local contém avaliações de outros usuários. Para solicitar sua exclusão, use o botão Reportar."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Falha ao copiar URL para a área de transferência"
   },
   "success_message": {
+    "location_deleted": "Localização excluída com sucesso!",
     "location_edited": "Local editado",
     "location_submitted": "Local enviado",
     "report_submitted": "Relatório enviado com sucesso!",

@@ -1,4 +1,3 @@
-import { Pencil } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom'
@@ -7,10 +6,10 @@ import styled from 'styled-components/macro'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import EntryDesktop from '../entry/EntryDesktop'
+import TopButtonsDesktop from '../entry/TopButtonsDesktop'
 import { formRoutesDesktop } from '../form/formRoutes'
 import SettingsPage from '../settings/SettingsPage'
-import BackButton from '../ui/BackButton'
-import ReturnIcon from '../ui/ReturnIcon'
+import { BackButton } from '../ui/ActionButtons'
 import MainSidePane from './MainSidePane'
 import SettingsButton from './SettingsButton'
 
@@ -31,11 +30,6 @@ const StyledNavBack = styled.div`
   padding-inline: 10px 15px;
   display: flex;
   justify-content: space-between;
-
-  svg {
-    height: 20px;
-    margin-inline-end: 5px;
-  }
 `
 
 const Header = styled.h3`
@@ -58,16 +52,6 @@ const SidePane = () => {
     (state) => state.activity.userActivityLastBrowsedSection,
   )
 
-  const goToMap = (event) => {
-    event.stopPropagation()
-    history.push('/map')
-  }
-
-  const goToSettings = (event) => {
-    event.stopPropagation()
-    history.push('/settings')
-  }
-
   return (
     <FullHeightPane>
       <Switch>
@@ -80,24 +64,16 @@ const SidePane = () => {
             <Route path="/settings">
               <StyledNavBack>
                 <BackButton
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    if (review) {
-                      history.push(`/reviews/${review.id}/edit`)
-                    } else if (locationId) {
-                      if (isEditingLocation) {
-                        history.push(`/locations/${locationId}/edit`)
-                      } else {
-                        history.push(`/locations/${locationId}`)
-                      }
-                    } else {
-                      history.push('/map')
-                    }
-                  }}
-                >
-                  <ReturnIcon />
-                  {t('layouts.back')}
-                </BackButton>
+                  backPath={
+                    review
+                      ? `/reviews/${review.id}/edit`
+                      : locationId
+                        ? isEditingLocation
+                          ? `/locations/${locationId}/edit`
+                          : `/locations/${locationId}`
+                        : '/map'
+                  }
+                />
               </StyledNavBack>
               <Header>{t('menu.settings')}</Header>
               <SettingsPage isDesktop />
@@ -108,32 +84,17 @@ const SidePane = () => {
                   <>
                     <StyledNavBack>
                       <BackButton
-                        onClick={
+                        backPath={
                           fromSettings
-                            ? goToSettings
+                            ? '/settings'
                             : userActivityUserId
-                              ? () =>
-                                  history.push(
-                                    `/users/${userActivityUserId}/activity`,
-                                  )
+                              ? `/users/${userActivityUserId}/activity`
                               : recentChangesSectionId
-                                ? () => history.push('/changes')
-                                : goToMap
+                                ? '/changes'
+                                : '/map'
                         }
-                      >
-                        <ReturnIcon />
-                        {t('layouts.back')}
-                      </BackButton>
-                      <BackButton
-                        onClick={() =>
-                          history.push(
-                            `/locations/${match.params.locationId}/edit`,
-                          )
-                        }
-                      >
-                        <Pencil />
-                        {t('form.button.edit')}
-                      </BackButton>
+                      />
+                      <TopButtonsDesktop />
                     </StyledNavBack>
                     <EntryDesktop />
                   </>

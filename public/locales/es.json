@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "¿Está seguro de que desea eliminar esta ubicación?",
+    "delete_review": "¿Está seguro de que desea eliminar esta reseña?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Confirma tu dirección de correo electrónico",
@@ -15,7 +19,6 @@
       "updated_not_active": "Tu contraseña fue cambiada."
     },
     "registrations": {
-      "signed_up": "¡Bienvenido! Tu cuenta fue creada.",
       "update_needs_confirmation": "Has actualizado tu cuenta correctamente, pero es necesario confirmar tu nuevo correo electrónico. Por favor, comprueba tu correo y sigue el enlace de confirmación para finalizar la comprobación del nuevo correo electrónico.",
       "updated": "Tu cuenta se ha actualizado."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Error al obtener ubicación {{id}}: {{message}}",
       "fetch_review_failed": "Error al obtener reseña {{id}}: {{message}}",
       "fetch_user_failed": "Error al obtener usuario {{id}}: {{message}}",
+      "location_deletion_failed": "Error al eliminar ubicación: {{message}}",
       "location_edit_failed": "Error al editar ubicación: {{message}}",
       "location_submission_failed": "Error al enviar ubicación: {{message}}",
       "photo_upload_failed": "Error al subir foto: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "No verificado",
     "yield": "Productividad"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Esta ubicación contiene reseñas de otros usuarios. Para solicitar su eliminación, utilice el botón Reportar."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "¡Error al copiar la URL al portapapeles!"
   },
   "success_message": {
+    "location_deleted": "¡Ubicación eliminada exitosamente!",
     "location_edited": "Ubicación editada",
     "location_submitted": "Ubicación enviada",
     "report_submitted": "¡Informe enviado con éxito!",

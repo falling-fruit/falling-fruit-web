@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "您确定要删除这个位置吗？",
+    "delete_review": "您确定要删除这条评论吗？"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "确认您的电子邮件地址",
@@ -15,7 +19,6 @@
       "updated_not_active": "你已经成功更改密码。"
     },
     "registrations": {
-      "signed_up": "欢迎！您已注册成功。",
       "update_needs_confirmation": "您已成功更新您的帐户，但我们需要验证您的新电子邮件地址。请检查您的电子邮件并按照确认链接确认您的新电子邮件地址。",
       "updated": "您的帐户已成功更新。"
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
       "fetch_review_failed": "获取评论 {{id}} 失败：{{message}}",
       "fetch_user_failed": "获取用户{{id}}失败：{{message}}",
+      "location_deletion_failed": "删除位置失败：{{message}}",
       "location_edit_failed": "编辑位置失败：{{message}}",
       "location_submission_failed": "提交位置失败：{{message}}",
       "photo_upload_failed": "照片上传失败：{{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "未经证实",
     "yield": "屈服"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "此地点包含其他用户的评论。如需要删除，请使用“报告”按钮。"
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "复制网址到剪贴板失败"
   },
   "success_message": {
+    "location_deleted": "位置删除成功！",
     "location_edited": "位置已编辑",
     "location_submitted": "位置已提交",
     "report_submitted": "报告提交成功！",

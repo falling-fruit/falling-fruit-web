@@ -4,24 +4,16 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import styled from 'styled-components/macro'
 
 import { getImportById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { formatISOString } from '../entry/textFormatters'
-import BackButton from '../ui/BackButton'
+import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
-import ReturnIcon from '../ui/ReturnIcon'
 
-const StyledNavBack = styled.div`
-  svg {
-    height: 20px;
-    margin-inline-end: 5px;
-  }
-`
 const AboutDatasetPage = () => {
   const { id } = useParams()
   const { t, i18n } = useTranslation()
@@ -63,17 +55,7 @@ const AboutDatasetPage = () => {
 
   return (
     <Page>
-      <StyledNavBack>
-        <BackButton
-          onClick={(event) => {
-            event.stopPropagation()
-            history.goBack()
-          }}
-        >
-          <ReturnIcon />
-          {t('layouts.back')}
-        </BackButton>
-      </StyledNavBack>
+      <BackButton />
       <h3>{t('pages.datasets.import_id_and_name', { id, name })}</h3>
       <a href={url} target="_blank" rel="noreferrer">
         {url}

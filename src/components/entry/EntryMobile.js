@@ -1,7 +1,3 @@
-import {
-  Map as MapIcon,
-  Pencil as PencilIcon,
-} from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
@@ -10,7 +6,6 @@ import styled from 'styled-components/macro'
 
 import {
   fullyOpenPaneDrawer,
-  reenablePaneDrawerAndSetToLowPosition,
   setPaneDrawerToLowPosition,
   setPaneDrawerToMiddlePosition,
   setTabIndex,
@@ -18,13 +13,11 @@ import {
 import { useAppHistory } from '../../utils/useAppHistory'
 import DraggablePane from '../ui/DraggablePane'
 import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
-import { zIndex } from '../ui/GlobalStyle'
-import IconButton from '../ui/IconButton'
-import ReturnIcon from '../ui/ReturnIcon'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 import LightboxMobile from './LightboxMobile'
+import TopButtonsMobile from './TopButtonsMobile'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
@@ -102,42 +95,6 @@ const DummyElementFixingScrollbarInsideTabPanel = styled.div`
   height: ${(props) => props.height}px;
 `
 
-const StyledButtons = styled.div`
-  position: absolute;
-  inset-inline: 0;
-  inset-block-start: 0;
-  z-index: ${zIndex.topBar + 1};
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  ${({ whiteBackground }) => whiteBackground && `background: white;`}
-  pointer-events: none;
-
-  button {
-    pointer-events: auto;
-  }
-
-  > div {
-    display: flex;
-
-    > *:not(:last-of-type) {
-      margin-inline-end: 0.5em;
-    }
-  }
-`
-
-const EntryButton = styled(IconButton)`
-  background-color: rgba(0, 0, 0, 0.45);
-  border: none;
-  svg {
-    color: white;
-  }
-`
-
-EntryButton.defaultProps = {
-  size: 48,
-}
-
 const TextContent = styled.article`
   padding: 20px 23px;
 
@@ -154,7 +111,6 @@ const EntryMobile = () => {
   const dispatch = useDispatch()
   const history = useAppHistory()
   const {
-    locationId,
     reviews,
     isLoading,
     pane: {
@@ -279,44 +235,7 @@ const EntryMobile = () => {
           </TabPanels>
         </EntryTabs>
       </DraggablePane>
-      {drawerFullyOpen && (
-        <StyledButtons whiteBackground={!hasImages}>
-          <EntryButton
-            onClick={
-              isFromListLocations
-                ? () => history.push('/list')
-                : isFromEmbedViewMap
-                  ? () => history.push('/map')
-                  : (e) => {
-                      e.stopPropagation()
-                      dispatch(setPaneDrawerToMiddlePosition())
-                    }
-            }
-            icon={<ReturnIcon />}
-            label="back-button"
-          />
-          <div>
-            {isFromListLocations && !isFromEmbedViewMap && (
-              <EntryButton
-                onClick={(event) => {
-                  event.stopPropagation()
-                  dispatch(reenablePaneDrawerAndSetToLowPosition())
-                }}
-                icon={<MapIcon />}
-                label="map-button"
-              />
-            )}
-            <EntryButton
-              onClick={(event) => {
-                event.stopPropagation()
-                history.push(`/locations/${locationId}/edit`)
-              }}
-              icon={<PencilIcon />}
-              label="edit-button"
-            />
-          </div>
-        </StyledButtons>
-      )}
+      {drawerFullyOpen && <TopButtonsMobile hasImages={hasImages} />}
     </>
   )
 }

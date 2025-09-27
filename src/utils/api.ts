@@ -140,6 +140,10 @@ export const editLocation = (
   data: paths['/locations/{id}']['put']['requestBody']['content']['application/json'],
 ) => instance.put(`/locations/${id}`, data)
 
+export const deleteLocation = (
+  id: paths['/locations/{id}']['put']['parameters']['path']['id'],
+) => instance.delete(`/locations/${id}`)
+
 export const getLocationsChanges = (
   params: paths['/locations/changes']['get']['parameters']['query'],
 ) => instance.get('/locations/changes', { params })
