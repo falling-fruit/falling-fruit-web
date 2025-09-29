@@ -111,7 +111,9 @@ export const mapSlice = createSlice({
       if (state.clusters.length) {
         return
       }
-      state.locations = state.locations.filter((loc) => loc.id !== action.payload)
+      state.locations = state.locations.filter(
+        (loc) => loc.id !== action.payload,
+      )
     },
     [fetchMapLocations.fulfilled]: (state, action) => {
       if (!state.googleMap) {
