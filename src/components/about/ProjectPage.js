@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next'
-import styled from 'styled-components/macro'
 
 import { PLACEHOLDER_COUNTS } from '../../constants/placeholders'
 import { InfoPage } from '../ui/PageTemplate'
 import PhotoGridTemplate from './AboutPhotoGrid'
+import DonationButton from './DonationButton'
 
 const foragingPhotos = [
   {
@@ -23,10 +23,6 @@ const foragingPhotos = [
     alt: 'amittai mulberries',
   },
 ]
-
-const PointerButton = styled.button`
-  cursor: pointer;
-`
 
 const Project = () => {
   const { t, i18n } = useTranslation()
@@ -52,11 +48,7 @@ const Project = () => {
         <p>
           <em>{t('pages.about.give_us_money')}</em>
         </p>
-        <form action="https://www.paypal.com/us/fundraiser/charity/1387793">
-          <PointerButton type="submit">
-            {t('pages.about.give_paypal')}
-          </PointerButton>
-        </form>
+        <DonationButton />
         <h3>{t('pages.about.write')}</h3>
         <p>
           <em>{renderHTML(t('pages.about.contact_us_html'))}</em>
