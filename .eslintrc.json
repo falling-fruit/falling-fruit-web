@@ -3,7 +3,7 @@
     "plugin:@hack4impact-uiuc/base",
     "plugin:@hack4impact-uiuc/react"
   ],
-  "plugins": ["simple-import-sort", "@hack4impact-uiuc"],
+  "plugins": ["simple-import-sort"],
   "rules": {
     "prefer-const": "error",
     "eqeqeq": [
@@ -25,6 +25,8 @@
     ],
     "dot-notation": "error",
     "@hack4impact-uiuc/no-null-ternary": "off",
+    "@hack4impact-uiuc/no-access-state-after-set": "off",
+    "@hack4impact-uiuc/no-redundant-functions": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       1,
