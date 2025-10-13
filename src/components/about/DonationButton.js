@@ -19,7 +19,7 @@ const DonationButton = () => {
         onDismiss={() => setIsDonationModalOpen(false)}
       />
       <PointerButton onClick={() => setIsDonationModalOpen(true)}>
-        {t('pages.about.donate')}
+        {t('pages.about.give_zeffy')}
       </PointerButton>
     </>
   )
