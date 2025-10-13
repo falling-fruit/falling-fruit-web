@@ -34,6 +34,7 @@
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^1.2.2",
     "polished": "^4.1.1",
+    "postcss-normalize": "^13.0.1",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",
