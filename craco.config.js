@@ -15,4 +15,16 @@ module.exports = {
       return webpackConfig
     },
   },
+  eslint: {
+    enable: true,
+    configure: (eslintConfig) => {
+      // Remove CRA's react plugin references
+      delete eslintConfig.plugins
+      delete eslintConfig.extends
+
+      // Let your own .eslintrc.json fully define the config
+      return eslintConfig
+    },
+    mode: 'file', // force ESLint to use your .eslintrc.json
+  },
 }
