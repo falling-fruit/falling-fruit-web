@@ -35,11 +35,13 @@ const ListPage = () => {
 
   useEffect(() => {
     if (lastViewedListPositionId) {
-      const locationElement = document.getElementById(
-        `${lastViewedListPositionId}`,
-      )
+      const locationElement = document.getElementById(lastViewedListPositionId)
       if (locationElement) {
-        locationElement.scrollIntoView()
+        const scrollParent = locationElement.parentElement
+        if (scrollParent) {
+          scrollParent.scrollTop =
+            locationElement.offsetTop - scrollParent.offsetTop
+        }
       }
       dispatch(clearLastViewedListPositionId())
     }
