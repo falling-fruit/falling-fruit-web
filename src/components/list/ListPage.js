@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import {
+  clearLastViewedListPositionId,
   fetchListLocationsExtend,
   fetchListLocationsStart,
+  setLastViewedListPositionId,
 } from '../../redux/listSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Spinner from '../ui/Spinner'
@@ -18,6 +20,7 @@ const ListPage = () => {
     locations,
     isLoading: isNextPageLoading,
     shouldFetchNewLocations: locationsInvalid,
+    lastViewedListPositionId,
   } = useSelector((state) => state.list)
   const history = useAppHistory()
   const { typesAccess } = useSelector((state) => state.type)
@@ -29,6 +32,18 @@ const ListPage = () => {
       dispatch(fetchListLocationsStart())
     }
   }, [dispatch, locationsAvailable, locationsInvalid])
+
+  useEffect(() => {
+    if (lastViewedListPositionId) {
+      const locationElement = document.getElementById(
+        `${lastViewedListPositionId}`,
+      )
+      if (locationElement) {
+        locationElement.scrollIntoView()
+      }
+      dispatch(clearLastViewedListPositionId())
+    }
+  }, [lastViewedListPositionId, dispatch])
 
   if (!locationsAvailable) {
     return <Spinner />
@@ -56,6 +71,7 @@ const ListPage = () => {
       }}
       isNextPageLoading={isNextPageLoading}
       onLocationClick={(locationId) => {
+        dispatch(setLastViewedListPositionId(locationId))
         history.push(`/list-locations/${locationId}`)
       }}
     />
