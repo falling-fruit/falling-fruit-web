@@ -43,6 +43,9 @@ export const listSlice = createSlice({
     setLastViewedListPositionId: (state, action) => {
       state.lastViewedListPositionId = action.payload
     },
+    clearLastViewedListPositionId: (state) => {
+      state.lastViewedListPositionId = null
+    },
   },
   extraReducers: {
     [fetchListLocations.pending]: (state) => {
@@ -74,9 +77,7 @@ export const listSlice = createSlice({
   },
 })
 
-export const clearLastViewedListPositionId = () =>
-  setLastViewedListPositionId(null)
-
-export const { setLastViewedListPositionId } = listSlice.actions
+export const { setLastViewedListPositionId, clearLastViewedListPositionId } =
+  listSlice.actions
 
 export default listSlice.reducer
