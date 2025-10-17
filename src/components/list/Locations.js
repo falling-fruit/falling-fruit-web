@@ -133,6 +133,7 @@ const Locations = ({
       {locations.map((location, index) => (
         <LocationItem
           key={index}
+          id={location.id}
           onClick={(e) => onLocationClick?.(location.id, e)}
         >
           <LeftIcon>

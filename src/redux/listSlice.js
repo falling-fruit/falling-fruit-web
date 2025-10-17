@@ -37,8 +37,13 @@ export const listSlice = createSlice({
     shouldFetchNewLocations: true,
     locations: [],
     lastMapView: null,
+    lastViewedListPositionId: null,
   },
-  reducers: {},
+  reducers: {
+    setLastViewedListPositionId: (state, action) => {
+      state.lastViewedListPositionId = action.payload
+    },
+  },
   extraReducers: {
     [fetchListLocations.pending]: (state) => {
       state.shouldFetchNewLocations = false
@@ -68,5 +73,10 @@ export const listSlice = createSlice({
     },
   },
 })
+
+export const clearLastViewedListPositionId = () =>
+  setLastViewedListPositionId(null)
+
+export const { setLastViewedListPositionId } = listSlice.actions
 
 export default listSlice.reducer
