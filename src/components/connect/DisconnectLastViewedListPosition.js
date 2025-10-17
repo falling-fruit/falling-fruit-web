@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { clearLastViewedListPositionId } from '../../redux/listSlice'
 
-const DisconnectLocationsPage = () => {
+const DisconnectLastViewedListPosition = () => {
   const dispatch = useDispatch()
 
   useEffect(
@@ -16,4 +16,4 @@ const DisconnectLocationsPage = () => {
   return null
 }
 
-export default DisconnectLocationsPage
+export default DisconnectLastViewedListPosition
