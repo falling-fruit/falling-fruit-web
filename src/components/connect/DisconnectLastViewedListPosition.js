@@ -24,7 +24,7 @@ const DisconnectLastViewedListPosition = () => {
         dispatch(clearLastViewedListPositionId())
       }
     },
-    [dispatch],
+    [], // eslint-disable-line react-hooks/exhaustive-deps
   )
 
   return null
