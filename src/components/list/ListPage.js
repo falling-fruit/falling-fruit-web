@@ -33,20 +33,6 @@ const ListPage = () => {
     }
   }, [dispatch, locationsAvailable, locationsInvalid])
 
-  useEffect(() => {
-    if (lastViewedListPositionId) {
-      const locationElement = document.getElementById(lastViewedListPositionId)
-      if (locationElement) {
-        const scrollParent = locationElement.parentElement
-        if (scrollParent) {
-          scrollParent.scrollTop =
-            locationElement.offsetTop - scrollParent.offsetTop
-        }
-      }
-      dispatch(clearLastViewedListPositionId())
-    }
-  }, [lastViewedListPositionId, dispatch])
-
   if (!locationsAvailable) {
     return <Spinner />
   }
@@ -72,6 +58,10 @@ const ListPage = () => {
         }
       }}
       isNextPageLoading={isNextPageLoading}
+      lastViewedListPositionId={lastViewedListPositionId}
+      onClearLastViewedPosition={() =>
+        dispatch(clearLastViewedListPositionId())
+      }
       onLocationClick={(locationId) => {
         dispatch(setLastViewedListPositionId(locationId))
         history.push(`/list-locations/${locationId}`)
