@@ -39,11 +39,11 @@ const MapContainer = styled.div`
 `
 
 const ListPageWrapper = styled.div`
-  height: 100%;
   overflow: scroll;
   margin-block-start: ${(props) =>
     props.isEmbed ? EMBED_HEADER_HEIGHT_PX : NAVIGATION_BAR_HEIGHT_PX}px;
-  padding-top: 4px;
+  inset-block-end: ${(props) => (props.isEmbed ? 0 : TABS_HEIGHT_PX)}px;
+  padding-top: ${(props) => (props.isEmbed ? 0 : 4)}px;
 `
 
 const shouldDisplayMapPage = (pathname) => {
