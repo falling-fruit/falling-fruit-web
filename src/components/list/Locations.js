@@ -105,11 +105,23 @@ const Locations = ({
   itemCount,
   loadNextPage,
   onLocationClick,
+  lastViewedListPositionId,
+  onClearLastViewedPosition,
 }) => {
   const { typesAccess } = useSelector((state) => state.type)
   const { types: selectedTypes } = useSelector((state) => state.filter)
 
   const observerTarget = useRef(null)
+
+  useEffect(() => {
+    if (lastViewedListPositionId) {
+      const locationElement = document.getElementById(lastViewedListPositionId)
+      if (locationElement) {
+        locationElement.scrollIntoView()
+      }
+      onClearLastViewedPosition()
+    }
+  }, [lastViewedListPositionId, onClearLastViewedPosition])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
