@@ -282,7 +282,10 @@ const connectRoutes = [
    *
    * action: clear lastViewedListPositionId when dismounting from list or location pages
    */
-  <Route key="disconnect-last-viewd-position" path={['/list', '/locations']}>
+  <Route
+    key="disconnect-last-viewd-position"
+    path={['/list', '/locations', '/list-locations']}
+  >
     <DisconnectLastViewedListPosition />
   </Route>,
 
