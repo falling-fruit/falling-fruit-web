@@ -1,11 +1,10 @@
 import {
   Calendar,
   Data,
-  EditAlt,
   StreetView,
   User,
 } from '@styled-icons/boxicons-regular'
-import { Map, User as UserYou } from '@styled-icons/boxicons-solid'
+import { EditAlt, Map, User as UserYou } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
