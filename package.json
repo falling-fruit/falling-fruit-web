@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "homepage": "https://falling-fruit.vercel.app/",
   "engines": {
-    "node": "^22.16"
+    "node": "^22.16.0"
   },
   "dependencies": {
     "@craco/craco": "^7.1.0",
