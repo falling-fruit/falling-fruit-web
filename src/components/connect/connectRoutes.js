@@ -15,6 +15,7 @@ import ConnectTopPanel from './ConnectTopPanel'
 import ConnectTypes from './ConnectTypes'
 import DisconnectActivity from './DisconnectActivity'
 import DisconnectInitLocation from './DisconnectInitLocation'
+import DisconnectLastViewedListPosition from './DisconnectLastViewedListPosition'
 import DisconnectLocation from './DisconnectLocation'
 import DisconnectReview from './DisconnectReview'
 
@@ -271,6 +272,21 @@ const connectRoutes = [
     path={['/users/:userId/activity', '/locations']}
   >
     <DisconnectActivity />
+  </Route>,
+
+  /*
+   * DisconnectLastViewedListPosition
+   * why: limit the context for list scroll position restoration
+   * we want to preserve scroll position when navigating list -> location -> [back] to list,
+   * but not when navigating to unrelated pages outside the list/location context
+   *
+   * action: clear lastViewedListPositionId when dismounting from list or location pages
+   */
+  <Route
+    key="disconnect-last-viewd-position"
+    path={['/list', '/locations', '/list-locations']}
+  >
+    <DisconnectLastViewedListPosition />
   </Route>,
 
   /*
