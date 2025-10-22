@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-cache
+          key: ${{ runner.os }}-${{ hashFiles('.nvmrc') }}-cache
 
       - name: Install dependencies
         working-directory: .

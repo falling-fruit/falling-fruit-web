@@ -6,9 +6,10 @@
   "license": "GPL-3.0",
   "homepage": "https://falling-fruit.vercel.app/",
   "engines": {
-    "node": "^16.20"
+    "node": "^22.16"
   },
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@fontsource/noto-sans": "^5.2.5",
     "@fontsource/noto-sans-arabic": "^5.2.5",
     "@fontsource/noto-sans-hebrew": "^5.2.5",
@@ -33,6 +34,7 @@
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^1.2.2",
     "polished": "^4.1.1",
+    "postcss-normalize": "^13.0.1",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",
@@ -46,7 +48,7 @@
     "react-redux": "^7.2.4",
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "react-select": "^4.3.0",
     "react-split-pane": "^0.1.92",
     "react-toastify": "^8.1.0",
@@ -58,25 +60,31 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-syntax-flow": "^7.14.5",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
+    "@types/node": "*",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-select": "^4.0.18",
     "@types/styled-components": "^5.1.26",
+    "browserslist": ">= 4",
     "eslint": "^7.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.3",
+    "postcss": "^8.1.0",
     "prettier": "^3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
     "lint": "yarn lint:check --fix",
     "lint:check": "eslint src --ext js,jsx,ts,tsx",
     "format": "yarn format:output --write",
     "format:check": "yarn format:output --check",
     "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/main/docs/openapi.yml --output src/utils/apiSchema.ts",
     "genData": "node scripts/data.js https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg src/constants/data"
