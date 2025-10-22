@@ -60,14 +60,20 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-syntax-flow": "^7.14.5",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
+    "@types/node": "*",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-select": "^4.0.18",
     "@types/styled-components": "^5.1.26",
+    "browserslist": ">= 4",
     "eslint": "^7.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.3",
+    "postcss": "^8.1.0",
     "prettier": "^3.4.1"
   },
   "scripts": {
