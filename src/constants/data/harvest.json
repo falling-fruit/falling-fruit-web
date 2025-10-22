@@ -208,6 +208,13 @@
     "instagram": "https://www.instagram.com/cidades.comestiveis/"
   },
   {
+    "country": "Brazil",
+    "state": "Minas Gerais",
+    "city": "Belo Horizonte",
+    "name": "Quintal Mimoso",
+    "facebook": "https://www.facebook.com/quintalmimoso/"
+  },
+  {
     "active": true,
     "country": "Canada",
     "name": "Incredible Edible Canada",
@@ -642,8 +649,20 @@
   {
     "active": true,
     "country": "France",
+    "name": "Aux Arbres Citoyens",
+    "name_url": "https://aux-arbres-citoyens.org/"
+  },
+  {
+    "active": true,
+    "country": "France",
     "name": "Communes à croquer",
     "name_url": "https://communesacroquer.fr/"
+  },
+  {
+    "active": true,
+    "country": "France",
+    "name": "Fruitiers",
+    "name_url": "https://www.fruitiers.org/"
   },
   {
     "active": true,
@@ -669,6 +688,18 @@
     "city": "Brest",
     "name": "Incroyables Comestibles Brest",
     "name_url": "www.incroyables.infini.fr"
+  },
+  {
+    "active": true,
+    "country": "France",
+    "state": "Bretagne",
+    "city": "Chantepie",
+    "name": "Collectif les Fol'épis",
+    "name_url": "https://www.collectif-lesfolepis.org/",
+    "subname": "Des fruitiers dans tous les quartiers",
+    "subname_url": "https://www.collectif-lesfolepis.org/project/les-fruitiers-dans-tous-les-quartiers/",
+    "facebook": "https://www.facebook.com/collectifLesFolEpis/",
+    "instagram": "https://www.instagram.com/collectiflesfolepis/"
   },
   {
     "active": true,
@@ -713,7 +744,6 @@
     "facebook": "https://www.facebook.com/lesfruitsduvoisin"
   },
   {
-    "active": true,
     "country": "France",
     "state": "Normandie",
     "city": "Caen",
@@ -1012,6 +1042,14 @@
   },
   {
     "active": true,
+    "country": "Poland",
+    "state": "Województwo dolnośląskie",
+    "city": "Wrocław",
+    "name": "Jadalne Miasto Wrocław",
+    "facebook": "https://www.facebook.com/groups/1112525382459140"
+  },
+  {
+    "active": true,
     "country": "Portugal",
     "state": "Grande Porto",
     "name": "Lipor",
@@ -1034,6 +1072,18 @@
     "name": "Nevera Solidaria Vitoria-Gasteiz",
     "name_url": "http://neverasolidaria.org/",
     "facebook": "https://www.facebook.com/NeveraSolidariaVitoriaGazteiz/"
+  },
+  {
+    "active": true,
+    "country": "Spain",
+    "state": "Barcelona",
+    "name": "Fundació Espigolador",
+    "name_url": "https://espigoladors.cat/",
+    "subname": "Barcelona Espigola",
+    "subname_url": "https://ajuntament.barcelona.cat/lescorts/ca/noticia/incrementa-la-participacio-al-barcelonaespigola-2023-1292122",
+    "facebook": "https://www.facebook.com/espigoladors",
+    "x": "https://x.com/espigoladors",
+    "instagram": "https://www.instagram.com/espigoladors"
   },
   {
     "active": true,
@@ -1820,6 +1870,19 @@
     "country": "United States",
     "state": "Arizona",
     "city": "Phoenix",
+    "name": "Growing to Give",
+    "name_url": "https://growingtogive.org",
+    "subname": "Phoenix Urban Food Forest Initiative",
+    "subname_url": "https://growingtogive.org/arizona-food-forest.html",
+    "facebook": "https://www.facebook.com/growingtogive1",
+    "x": "https://x.com/growingtogive",
+    "instagram": "https://www.instagram.com/growingtogive_"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "Arizona",
+    "city": "Phoenix",
     "name": "St. Mary's Food Bank Alliance",
     "name_url": "http://www.firstfoodbank.org/",
     "subname": "Citrus Gleaners",
@@ -1903,6 +1966,16 @@
     "name_url": "http://www.arhungeralliance.org/",
     "subname": "Gleaning Project",
     "subname_url": "http://www.arhungeralliance.org/programs/arkansas-gleaning-project/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "name": "Food Finders",
+    "name_url": "https://foodfinders.org/",
+    "facebook": "https://www.facebook.com/foodfindersinc",
+    "x": "https://x.com/FoodFindersinc",
+    "instagram": "https://www.instagram.com/foodfindersinc/"
   },
   {
     "active": true,
@@ -2114,6 +2187,17 @@
     "country": "United States",
     "state": "California",
     "city": "Los Angeles",
+    "name": "FoodCycle LA",
+    "name_url": "https://www.foodcyclela.org/",
+    "facebook": "https://facebook.com/foodcyclelosangeles",
+    "x": "https://x.com/Foodcycle_LA",
+    "instagram": "https://instagram.com/foodcycle_la"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Los Angeles",
     "name": "L.A. Community Fridges",
     "name_url": "http://lacommunityfridge.com",
     "instagram": "https://www.instagram.com/lacommunityfridges"
@@ -2213,6 +2297,15 @@
     "city": "Oakland",
     "name": "Edible Parks Task Force",
     "name_url": "http://edibleparksoakland.com/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Oakland",
+    "name": "Feral Ecology",
+    "name_url": "https://www.feralecology.com/",
+    "instagram": "https://www.instagram.com/feralecology"
   },
   {
     "active": true,
@@ -2950,6 +3043,14 @@
     "active": true,
     "country": "United States",
     "state": "Florida",
+    "city": "Largo",
+    "name": "Largo Plant Exchange",
+    "facebook": "https://www.facebook.com/groups/largoplantexchange/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "Florida",
     "city": "Sarasota",
     "name": "Transition Sarasota",
     "name_url": "http://www.transitionsrq.org/",
@@ -2957,6 +3058,14 @@
     "subname_url": "http://www.transitionsrq.org/food/gleaning/",
     "facebook": "https://www.facebook.com/transitionsarasota",
     "x": "https://x.com/transitionsrq"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "Florida",
+    "city": "Seminole",
+    "name": "Seminole Plant Exchange",
+    "facebook": "https://www.facebook.com/groups/seminoleplantexchange/"
   },
   {
     "active": true,
@@ -3711,6 +3820,16 @@
     "active": true,
     "country": "United States",
     "state": "New York",
+    "city": "Syracuse",
+    "name": "Syracuse Urban Food Forest Project",
+    "name_url": "https://www.esf.edu/suffp",
+    "facebook": "https://www.facebook.com/syrfoodforest",
+    "instagram": "https://www.instagram.com/syracuseurbanfoodforest"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "New York",
     "city": "Troy",
     "name": "Capital Roots",
     "name_url": "http://www.capitalroots.org/",
@@ -4394,6 +4513,25 @@
   {
     "active": true,
     "country": "United States",
+    "state": "Virginia",
+    "city": "Richmond",
+    "name": "Happily Natural Festival",
+    "name_url": "https://thenaturalfestival.com/",
+    "facebook": "https://www.facebook.com/happilynaturalfestival/",
+    "instagram": "https://www.instagram.com/happilynaturalfestival/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "Virginia",
+    "city": "Richmond",
+    "name": "Verdant Richmond",
+    "name_url": "https://verdantrichmond.org/",
+    "instagram": "https://www.instagram.com/verdantrichmond/"
+  },
+  {
+    "active": true,
+    "country": "United States",
     "state": "Washington",
     "name": "Food Lifeline",
     "name_url": "https://foodlifeline.org/",
@@ -4807,63 +4945,5 @@
     "name_url": "http://holefoodrescue.org/",
     "facebook": "https://www.facebook.com/HoleFoodRescue",
     "instagram": "https://www.instagram.com/holefoodrescue/"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "New York",
-    "city": "Syracuse",
-    "name": "Syracuse Urban Food Forest Project",
-    "name_url": "https://www.esf.edu/suffp",
-    "facebook": "https://www.facebook.com/syrfoodforest",
-    "instagram": "https://www.instagram.com/syracuseurbanfoodforest"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "Virginia",
-    "city": "Richmond",
-    "name": "Happily Natural Festival",
-    "name_url": "https://thenaturalfestival.com/",
-    "facebook": "https://www.facebook.com/happilynaturalfestival/",
-    "instagram": "https://www.instagram.com/happilynaturalfestival/"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "Virginia",
-    "city": "Richmond",
-    "name": "Verdant Richmond",
-    "name_url": "https://verdantrichmond.org/",
-    "instagram": "https://www.instagram.com/verdantrichmond/"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "California",
-    "city": "Los Angeles",
-    "name": "FoodCycle LA",
-    "name_url": "https://www.foodcyclela.org/",
-    "facebook": "https://facebook.com/foodcyclelosangeles",
-    "x": "https://x.com/Foodcycle_LA",
-    "instagram": "https://instagram.com/foodcycle_la"
-  },
-  {
-    "active": true,
-    "country": "United States",
-    "state": "California",
-    "name": "Food Finders",
-    "name_url": "https://foodfinders.org/",
-    "facebook": "https://www.facebook.com/foodfindersinc",
-    "x": "https://x.com/FoodFindersinc",
-    "instagram": "https://www.instagram.com/foodfindersinc/"
-  },
-  {
-    "active": true,
-    "country": "Poland",
-    "state": "Województwo dolnośląskie",
-    "city": "Wrocław",
-    "name": "Jadalne Miasto Wrocław",
-    "facebook": "https://www.facebook.com/groups/1112525382459140"
   }
 ]
