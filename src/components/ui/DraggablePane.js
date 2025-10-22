@@ -15,14 +15,14 @@ const PaneContainer = styled.div`
   inset-block-end: 0;
   background-color: white;
   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
-  touch-action: ${(props) => (props.isMiddlePosition ? 'none' : 'auto')};
+  touch-action: ${(props) => (props.isDraggablePosition ? 'none' : 'auto')};
   max-width: 100%;
   height: 100%;
   z-index: ${(props) =>
     props.displayOverTopBar ? zIndex.topBar + 1 : zIndex.topBar - 1};
   transition: transform 0.3s linear;
-  background: ${(props) => (props.hasImages ? 'white' : 'none')};
-  padding-block-start: ${(props) => (props.hasImages ? '0' : '10px')};
+  background: ${(props) => (props.hasWhiteBackground ? 'white' : 'none')};
+  padding-block-start: ${(props) => (props.hasWhiteBackground ? '0' : '10px')};
 `
 
 const DragHandle = styled.div`
@@ -37,6 +37,7 @@ const DragHandle = styled.div`
 const POSITIONS = {
   TOP: 'top',
   MIDDLE: 'middle',
+  LOW: 'low',
   BOTTOM: 'bottom',
 }
 
@@ -46,13 +47,15 @@ const DraggablePane = ({
   onPositionChange,
   topPositionHeight,
   middlePositionScreenRatio,
+  partialPositionHeightPx,
   drawerDisabled,
-  updateProgress,
-  hasImages,
+  onChangeTranslateY,
+  hasWhiteBackground,
   showMoveElement,
   displayOverTopBar,
 }) => {
-  const isMiddlePosition = position === POSITIONS.MIDDLE
+  const isDraggablePosition =
+    position === POSITIONS.MIDDLE || position === POSITIONS.LOW
   const paneRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
   const [startY, setStartY] = useState(0)
@@ -65,30 +68,33 @@ const DraggablePane = ({
       }
       paneRef.current.style.transition = transition
       paneRef.current.style.transform = `translateY(${translateY}px)`
-      const windowHeight = window.innerHeight
-      const progress = 1 + (topPositionHeight - translateY) / windowHeight
-      updateProgress(progress)
+      onChangeTranslateY(translateY)
     },
-    [updateProgress, topPositionHeight],
+    [onChangeTranslateY],
   )
 
   const inferCurrentPosition = useCallback(() => {
     const paneTop = paneRef.current.getBoundingClientRect().top
     const windowHeight = window.innerHeight
+    const partialPosition = windowHeight - partialPositionHeightPx
 
     const topThreshold =
       topPositionHeight +
       (windowHeight * middlePositionScreenRatio - topPositionHeight) / 2
-    const middleThreshold = (windowHeight * (1 + middlePositionScreenRatio)) / 2
+    const middleThreshold =
+      (windowHeight * middlePositionScreenRatio + partialPosition) / 2
+    const partialThreshold = (partialPosition + windowHeight) / 2
 
     if (paneTop < topThreshold) {
       return POSITIONS.TOP
     } else if (paneTop < middleThreshold) {
       return POSITIONS.MIDDLE
+    } else if (paneTop < partialThreshold) {
+      return POSITIONS.LOW
     } else {
       return POSITIONS.BOTTOM
     }
-  }, [middlePositionScreenRatio, topPositionHeight])
+  }, [middlePositionScreenRatio, topPositionHeight, partialPositionHeightPx])
 
   useLayoutEffect(() => {
     const pane = paneRef.current
@@ -96,19 +102,21 @@ const DraggablePane = ({
       return
     }
 
-    const windowHeight = window.innerHeight
+    const windowHeightPx = window.innerHeight
 
     const positionToTranslateY = {
       [POSITIONS.TOP]: topPositionHeight,
-      [POSITIONS.MIDDLE]: windowHeight * middlePositionScreenRatio,
-      [POSITIONS.BOTTOM]: windowHeight,
+      [POSITIONS.MIDDLE]: windowHeightPx * middlePositionScreenRatio,
+      [POSITIONS.LOW]: windowHeightPx - partialPositionHeightPx,
+      [POSITIONS.BOTTOM]: windowHeightPx,
     }
 
-    if (!pane.style.transform) {
-      if (position === 'POSITIONS.MIDDLE') {
-        movePane('none', positionToTranslateY[POSITIONS.BOTTOM])
+    const paneIsOnScreen = !!pane.style.transform
 
-        // Use requestAnimationFrame to ensure the initial position is applied before animating
+    if (!paneIsOnScreen) {
+      const openDrawerFromMap = position === POSITIONS.MIDDLE
+      if (openDrawerFromMap) {
+        movePane('none', positionToTranslateY[POSITIONS.BOTTOM])
         requestAnimationFrame(() => {
           movePane('transform 0.3s linear', positionToTranslateY[position])
         })
@@ -130,7 +138,17 @@ const DraggablePane = ({
         movePane('transform 0.3s linear', positionToTranslateY[position])
       }
     }
-  }, [movePane, position, topPositionHeight, middlePositionScreenRatio])
+  }, [position, topPositionHeight]) //eslint-disable-line
+
+  // Handle topPositionHeight change when reviews load and images appear
+  useEffect(() => {
+    if (position === POSITIONS.TOP && paneRef.current) {
+      const currentTranslateY = paneRef.current.getBoundingClientRect().top
+      if (currentTranslateY !== topPositionHeight) {
+        movePane('none', topPositionHeight)
+      }
+    }
+  }, [topPositionHeight, position, movePane])
 
   const handleStart = (clientY) => {
     if (drawerDisabled) {
@@ -158,11 +176,13 @@ const DraggablePane = ({
     }
     setIsDragging(false)
     const newPosition = inferCurrentPosition()
+
     const windowHeight = window.innerHeight
 
     const positionToTranslateY = {
       [POSITIONS.TOP]: topPositionHeight,
       [POSITIONS.MIDDLE]: windowHeight * middlePositionScreenRatio,
+      [POSITIONS.LOW]: windowHeight - partialPositionHeightPx,
       [POSITIONS.BOTTOM]: windowHeight,
     }
 
@@ -221,13 +241,13 @@ const DraggablePane = ({
   return (
     <PaneContainer
       ref={paneRef}
-      onTouchStart={isMiddlePosition ? handleTouchStart : undefined}
-      onTouchMove={isMiddlePosition ? handleTouchMove : undefined}
-      onTouchEnd={isMiddlePosition ? handleTouchEnd : undefined}
-      onMouseDown={isMiddlePosition ? handleMouseDown : undefined}
-      hasImages={hasImages}
+      onTouchStart={isDraggablePosition ? handleTouchStart : undefined}
+      onTouchMove={isDraggablePosition ? handleTouchMove : undefined}
+      onTouchEnd={isDraggablePosition ? handleTouchEnd : undefined}
+      onMouseDown={isDraggablePosition ? handleMouseDown : undefined}
+      hasWhiteBackground={hasWhiteBackground}
       showMoveElement={showMoveElement}
-      isMiddlePosition={isMiddlePosition}
+      isDraggablePosition={isDraggablePosition}
       displayOverTopBar={displayOverTopBar}
     >
       <DragHandle showMoveElement={showMoveElement} />

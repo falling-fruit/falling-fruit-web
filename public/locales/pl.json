@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Potwierdź swój adres e-mail",
       "confirmed": "Konto zostało poprawnie aktywowane.",
       "no_token": "Nie możesz uzyskać dostępu do tej strony bez otrzymania e-maila z potwierdzeniem. Jeśli przyszedłeś/aś z e-maila potwierdzającego, upewnij się, że użyłeś/aś pełnego adresu URL.",
       "send_instructions": "Instrukcja jak aktywować konto zostanie niezwłocznie wysłana na podany adres e-mail."
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "Pobieranie zmian lokalizacji nie powiodło się: {{message}}",
       "fetch_location_failed": "Błąd podczas pobierania lokalizacji {{id}}: {{message}}",
       "fetch_review_failed": "Błąd podczas pobierania recenzji {{id}}: {{message}}",
+      "fetch_user_failed": "Błąd pobierania użytkownika {{id}}: {{message}}",
       "location_edit_failed": "Edycja lokalizacji nie powiodła się: {{message}}",
       "location_submission_failed": "Przesyłanie lokalizacji nie powiodło się: {{message}}",
       "photo_upload_failed": "Przesyłanie zdjęcia nie powiodło się: {{message}}",
@@ -187,6 +189,7 @@
     "add_review": "Dodaj recenzję",
     "edit_location": "Edytuj lokalizację",
     "edit_review": "Edytuj recenzję",
+    "filters": "Filtry",
     "list": "Lista",
     "settings": "Ustawienia",
     "zoom_in_to_add_location": "Przybliż, aby dodać lokalizację"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily jest zagorzałą ewangelistką agroleśnictwa, niepoprawną żarliwą i dumną matką dwóch kotów, czterech przepiórek i najwspanialszego psa świata. Jej korzenie sięgają głęboko w Góry Skaliste, ale obecnie jej naziemna biomasa z dumą nazywa New Haven, Connecticut jej dom. Często można ją znaleźć opiekującą się publicznymi lasami żywieniowymi, zachwyconą czytaniem w jakimś przytulnym kąciku bibliotecznym lub poetycznie nawijającą o magii grzybni (i rzekomo kończącą połączone studia magisterskie na Yale <a href=\"https://environment.yale.edu/\">Szkoła Leśnictwa</a> i <a href=\"https://jackson.yale.edu/person/emily-sigman/\">Szkoła Spraw Globalnych</a>). Emily jest niszczycielsko uzależniona od podróżowania i może być teraz wszędzie.",
       "ethan_welty_bio_html": "Dzięki technologii i danym, Ethan jest mistrzem miast jako źródła świeżej i darmowej żywności. W 2013 roku wraz z Calebem Phillipsem stworzył Falling Fruit, aby promować miejskie żerowanie na całym świecie, a w 2014 roku założył <a href=\"https://fruitrescue.org\"> Community Fruit Rescue</a>, aby zbierać i rozprowadzać nadwyżki owoców rosnących wokół niego w Boulder w Kolorado. Poza owocami, żongluje <a href=\"https://www.weltyphotography.com\">karierą fotograficzną</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">badaniem na lodowcach</a> i apetytem na górskie i rzeczne wyprawy.",
       "ff_disclaimer_html": "Falling Fruit nie jest zrzeszone z Fallen Fruit. Fallen Fruit można znaleźć pod <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
-      "give_paypal": "Wesprzyj nas przez Paypal Giving Fund",
       "give_us_money": "Jesteśmy organizacją non-profit opartą na wolontariacie. Nasze funkcjonowanie zależy od datków. Jeśli możesz, rozważ przekazanie nam darowizny. Darowizny (przynajmniej w obrębie Stanów Zjednoczonych) można odpisać od podatku.",
+      "give_zeffy": "Przekaż darowiznę przez Zeffy",
       "jeff_wanner_bio_html": "Od czasu zbioru czarnych i borówek z rodziną w dzieciństwie, a ostatnio, zauważając bogactwo publicznych drzew owocowych w całym Kolorado, Jeff rozwinął głębokie uznanie dla obfitości upraw owoców w naszych miastach. Jego pierwszą misją dla Falling Fruit było przeczesywanie Boulder i Salt Lake City, papierowe mapy w ręku, aby nagrywać owocujące drzewa. Kiedy nie pracuje nad poprawą efektywności energetycznej budynków, zazwyczaj pomaga w społeczności lub szybko przemieszcza się po górach pieszo, na nartach lub na rowerze.",
-      "join_us_html": "Dołącz do nas w świętowaniu lokalnego jedzenia! <a href=\"/\">Mapa</a> jest otwarta na każdego, bazę danych można <a href=\"/data\">pobrać</a> za pomocą jednego kliknięcia, a jej <a href=\"https://github.com/falling-fruit/falling-fruit\">kod</a> jest  dostępny dla każdego (open-source). Zachęcamy, dziel się tą mapą z innymi! Na naszej <a href=\"/sharing\">stronie udostępniania</a> znajdziesz setki lokalnych organizacji które zakładają publiczne sady i ogrody, zbierają owoce i warzywa z drzew i ogrodów w mieście, odbierają od rolników produkty, które inaczej by się zmarnowały i wreszcie dzielą się tym wszystkim z sąsiadami i osobami potrzebującymi.",
-      "more_about_html": "Nasza mapa nie jest pierwszą tego rodzaju mapą, ale mamy nadzieję, że będzie ona najbardziej wyczerpującą taką mapą na świecie. Podczas gdy nasi użytkownicy dodają własne miejsca na mapie, my przeczesujemy Internet szukając już istniejących informacji i staramy się połączyć siły zbieraczy, botaników, leśników i freegan na całym świecie. Zbieramy też bazy danych o roślinności w mieście. Importowane przez nas <a href=\"/datasets\"> bazy danych</a> mają zakres od lokalnych map sąsiedztwa do profesjonalnie opracowanych spisów drzew. W ten sposób zebraliśmy {{types}} typów różnych rodzajów roślin jadalnych w {{locations}} miejscach. Poza roślinami uprawnymi i powszechnymi są też na mapie rośliny egzotyczne, ale też dawno zapomniane rośliny rodzime. Zbieractwo w Twojej okolicy to podróż w czasie i poznawanie różnych kultur.",
+      "join_us_html": "Dołącz do nas w świętowaniu lokalnego jedzenia! <a href=\"/\">Mapa</a> jest otwarta na każdego, bazę danych można <a href=\"/about/data\">pobrać</a> za pomocą jednego kliknięcia, a jej <a href=\"https://github.com/falling-fruit/falling-fruit\">kod</a> jest  dostępny dla każdego (open-source). Zachęcamy, dziel się tą mapą z innymi! Na naszej <a href=\"/about/sharing\">stronie udostępniania</a> znajdziesz setki lokalnych organizacji które zakładają publiczne sady i ogrody, zbierają owoce i warzywa z drzew i ogrodów w mieście, odbierają od rolników produkty, które inaczej by się zmarnowały i wreszcie dzielą się tym wszystkim z sąsiadami i osobami potrzebującymi.",
+      "more_about_html": "Nasza mapa nie jest pierwszą tego rodzaju mapą, ale mamy nadzieję, że będzie ona najbardziej wyczerpującą taką mapą na świecie. Podczas gdy nasi użytkownicy dodają własne miejsca na mapie, my przeczesujemy Internet szukając już istniejących informacji i staramy się połączyć siły zbieraczy, botaników, leśników i freegan na całym świecie. Zbieramy też bazy danych o roślinności w mieście. Importowane przez nas <a href=\"/about/data\"> bazy danych</a> mają zakres od lokalnych map sąsiedztwa do profesjonalnie opracowanych spisów drzew. W ten sposób zebraliśmy {{types}} typów różnych rodzajów roślin jadalnych w {{locations}} miejscach. Poza roślinami uprawnymi i powszechnymi są też na mapie rośliny egzotyczne, ale też dawno zapomniane rośliny rodzime. Zbieractwo w Twojej okolicy to podróż w czasie i poznawanie różnych kultur.",
       "staff": "Personel",
       "translate": "Przetłumacz",
       "translate_for_us_html": "Chcesz pomóc w tłumaczeniach? Napisz do nas a zaprosimy Cię do dołączenia do <a href=\"https://phrase.com\">Phrase</a>, gdzie zarządzamy tłumaczeniami.",
@@ -265,7 +268,7 @@
       "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Zaimportowane zbiory danych",
       "imported_on": "Zaimportowano {{date}}",
-      "intro_html": "Falling Fruit chce być najbardziej kompleksowym i otwartym światowym zbiorem danych geograficznych o miejskich roślinach jadalnych. Podczas gdy nasi użytkownicy badają, edytują i dodają lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, my przeczesujemy znany wszechświat w poszukiwaniu istniejących zbiorów danych i importujemy je bezpośrednio do naszej <a href=\"/data\">bazy danych</a>, jednocząc wysiłki zbieraczy, leśników i freegan na całym świecie. Jeśli wiesz o zbiorze danych, którego nam brakuje, prosimy <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a>! Możesz też pomóc nam w procesie importu formatując dane przy użyciu naszego <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Pamiętaj, że ponieważ import musi być wykonywany ręcznie, późniejsze zmiany w oryginalnych danych nie będą widoczne na Falling Fruit.",
+      "intro_html": "Falling Fruit chce być najbardziej kompleksowym i otwartym światowym zbiorem danych geograficznych o miejskich roślinach jadalnych. Podczas gdy nasi użytkownicy badają, edytują i dodają lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, my przeczesujemy znany wszechświat w poszukiwaniu istniejących zbiorów danych i importujemy je bezpośrednio do naszej bazy danych, jednocząc wysiłki zbieraczy, leśników i freegan na całym świecie. Jeśli wiesz o zbiorze danych, którego nam brakuje, prosimy <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a>! Możesz też pomóc nam w procesie importu formatując dane przy użyciu naszego <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Pamiętaj, że ponieważ import musi być wykonywany ręcznie, późniejsze zmiany w oryginalnych danych nie będą widoczne na Falling Fruit.",
       "link": "Link",
       "table_info": "Każdy zestaw danych jest wymieniony z nazwą, liczbą lokalizacji i datą importu. Rozwinięcie każdego wiersza ujawnia dalsze szczegóły na temat oryginalnych danych, procesu importu i licencji określającej, jak można wykorzystać dane.",
       "type": "Typ",
@@ -338,6 +341,12 @@
         "state": "Stan"
       },
       "intro_html": "Poniżej wymienione są organizacje, które uprawiają żywność w przestrzeniach publicznych (lasy żywnościowe, publiczne sady), zbierają żywność (zbieractwo miejskie, zbieranie plonów z gospodarstw) lub dystrybuują żywność (wymiany, darowizny). Organizacje są wymienione według kraju, stanu (jeśli dotyczy) i miasta. Te z przekreślonymi nazwami są prawdopodobnie nieaktywne. Jeśli znasz inne, które powinny znaleźć się na tej liście, <a href=\"mailto:info@fallingfruit.org\">skontaktuj się z nami</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit to platforma tworzona przez społeczność, służąca do dzielenia się lokalizacjami roślin jadalnych i innych źródeł darmowej żywności.",
+      "discover_and_contribute": "Możesz odkrywać, co inni zbierają w Twojej okolicy i dodawać własne obserwacje.",
+      "explore_the_map": "Otwórz mapę",
+      "welcome_visitors_to_the_site_short": "Witamy!"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "Zrecenzowałeś/aś tę lokalizację {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Pełna strona",
     "title": "Udostępnij ten widok",
     "url_copied": "URL skopiowany do schowka!",
     "url_copy_failed": "Nie udało się skopiować URL do schowka"

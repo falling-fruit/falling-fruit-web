@@ -100,7 +100,7 @@ const SidePane = () => {
                 </BackButton>
               </StyledNavBack>
               <Header>{t('menu.settings')}</Header>
-              <SettingsPage desktop />
+              <SettingsPage isDesktop />
             </Route>
             <Route path="/locations/:locationId">
               {({ match }) =>
@@ -114,7 +114,7 @@ const SidePane = () => {
                             : userActivityUserId
                               ? () =>
                                   history.push(
-                                    `/activity/${userActivityUserId}`,
+                                    `/users/${userActivityUserId}/activity`,
                                   )
                               : recentChangesSectionId
                                 ? () => history.push('/changes')

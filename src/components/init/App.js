@@ -2,28 +2,25 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { WindowSize } from '@reach/window-size'
 import { useTranslation } from 'react-i18next'
-import { Provider, useSelector } from 'react-redux'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import MainPage from './components/MainPage'
-import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import Toast from './components/ui/Toast'
-import { store } from './redux/store'
-import { pathWithCurrentView } from './utils/appUrl'
-import AuthInitializer from './utils/AuthInitializer'
-import { ConnectedBreakpoint, useIsDesktop } from './utils/useBreakpoint'
-import { useGoogleAnalytics } from './utils/useGoogleAnalytics'
+import { store } from '../../redux/store'
+import { ConnectedBreakpoint, useIsDesktop } from '../../utils/useBreakpoint'
+import { useGoogleAnalytics } from '../../utils/useGoogleAnalytics'
+import DesktopLayout from '../desktop/DesktopLayout'
+import MobileLayout from '../mobile/MobileLayout'
+import GlobalStyle, { theme } from '../ui/GlobalStyle'
+import Toast from '../ui/Toast'
+import Auth from './Auth'
+import redirectRoutes from './redirectRoutes'
 
-const HomeRedirect = () => {
-  const { user, isLoading } = useSelector((state) => state.auth)
-  if (isLoading) {
-    return null
-  } else if (user) {
-    return <Redirect to={pathWithCurrentView('/map')} />
-  } else {
-    return <Redirect to="/users/sign_in" />
-  }
+const Layout = () => {
+  const isDesktop = useIsDesktop()
+  const layout = isDesktop ? <DesktopLayout /> : <MobileLayout />
+
+  return layout
 }
 
 const AppContent = () => {
@@ -33,7 +30,7 @@ const AppContent = () => {
 
   return (
     <>
-      <AuthInitializer />
+      <Auth />
       <Toast
         position={
           isDesktop ? (isRTL ? 'bottom-left' : 'bottom-right') : 'top-center'
@@ -44,11 +41,9 @@ const AppContent = () => {
       />
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact path="/">
-            <HomeRedirect />
-          </Route>
+          {redirectRoutes}
           <Route>
-            <MainPage />
+            <Layout />
           </Route>
         </Switch>
         <WindowSize>

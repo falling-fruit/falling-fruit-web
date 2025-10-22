@@ -1,14 +1,12 @@
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { requestConfirmUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { AuthPage } from '../ui/PageTemplate'
-import { Column } from './AuthWrappers'
+import AuthLinks from './AuthLinks'
 import { EmailForm } from './EmailForm'
-import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const ConfirmationResendPage = () => {
@@ -22,7 +20,7 @@ const ConfirmationResendPage = () => {
       toast.success(t('devise.confirmations.send_instructions'), {
         autoClose: 5000,
       })
-      history.push('/users/sign_in')
+      history.push('/auth/sign_in')
     } catch (error) {
       toast.error(
         t('error_message.auth.resend_confirmation_failed', {
@@ -37,11 +35,7 @@ const ConfirmationResendPage = () => {
     <AuthPage>
       <h1>{t('users.resend_confirmation_instructions')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
-      <Column>
-        <SignInLink />
-        <Link to="/users/sign_up">{t('glossary.sign_up')}</Link>
-        <Link to="/users/password/new">{t('users.forgot_password')}</Link>
-      </Column>
+      <AuthLinks exclude={['resendConfirmation']} />
     </AuthPage>
   )
 }

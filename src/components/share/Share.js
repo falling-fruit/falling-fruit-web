@@ -26,6 +26,7 @@ const ShareTitle = styled.h3`
 const ShareUrlContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-block-end: 0.75rem;
 `
 
 const ShareInput = styled(Input)`

@@ -1,35 +1,45 @@
 import { Route } from 'react-router-dom'
 
+import CheckEmailConfirmationPage from './CheckEmailConfirmationPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
 import LoginPage from './LoginPage'
 import PasswordResetPage from './PasswordResetPage'
 import PasswordSetPage from './PasswordSetPage'
 import SignupPage from './SignupPage'
+import WelcomePage from './WelcomePage'
 
 const pages = [
   {
-    path: '/users/sign_in',
+    path: '/about/welcome',
+    component: WelcomePage,
+  },
+  {
+    path: '/auth/sign_in',
     component: LoginPage,
   },
   {
-    path: '/users/sign_up',
+    path: '/auth/sign_up',
     component: SignupPage,
   },
   {
-    path: '/users/password/new',
+    path: '/auth/password/new',
     component: PasswordResetPage,
   },
   {
-    path: '/users/password/edit',
+    path: '/auth/password/edit',
     component: PasswordSetPage,
   },
   {
-    path: '/users/confirmation/new',
+    path: '/auth/confirmation/check-email',
+    component: CheckEmailConfirmationPage,
+  },
+  {
+    path: '/auth/confirmation/new',
     component: ConfirmationResendPage,
   },
   {
-    path: '/users/confirmation',
+    path: '/auth/confirmation',
     component: ConfirmationPage,
   },
 ]

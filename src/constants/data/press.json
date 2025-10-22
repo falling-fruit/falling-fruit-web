@@ -13,7 +13,7 @@
       "outlet": "Early to Rise",
       "outlet_url": "http://www.earlytorise.com/",
       "title": "Never buy fruit again",
-      "photo_url": "https://fallingfruit.org/press/earlytorise.jpg"
+      "photo_url": "/press/earlytorise.jpg"
     },
     {
       "published_on": "2013-10-04",
@@ -68,7 +68,7 @@
       "outlet": "Food Network Magazine",
       "outlet_url": "http://www.foodnetmag.com/",
       "title": "Free Fall",
-      "photo_url": "https://fallingfruit.org/press/food_network.jpg"
+      "photo_url": "/press/food_network.jpg"
     },
     {
       "published_on": "2013-09-01",
@@ -76,7 +76,7 @@
       "outlet_url": "http://www.aarp.org/bulletin/",
       "title": "Good Eats",
       "author": "Megan Lawson",
-      "photo_url": "https://fallingfruit.org/press/aarp_bulletin.jpg"
+      "photo_url": "/press/aarp_bulletin.jpg"
     },
     {
       "published_on": "2013-09-01",
@@ -84,7 +84,7 @@
       "outlet_url": "http://www.naturalawakeningsmag.com/",
       "title": "Freebie Fruit",
       "url": "https://www.naturalawakenings.com/2013/08/30/271962/freebie-fruit-online-mapping-points-the-way",
-      "photo_url": "https://fallingfruit.org/press/natural_awakenings.jpg"
+      "photo_url": "/press/natural_awakenings.jpg"
     },
     {
       "published_on": "2013-08-27",
@@ -101,7 +101,7 @@
       "title": "Pick some fruit while it pours",
       "author": "Sahil Magoo",
       "url": "https://www.hindustantimes.com/lifestyle/pick-some-fruit-while-it-pours/story-acBUK7iet0SBSi8k6rgBgK.html",
-      "photo_url": "https://fallingfruit.org/press/hindustan_times.jpg"
+      "photo_url": "/press/hindustan_times.jpg"
     },
     {
       "published_on": "2013-08-07",
@@ -110,7 +110,7 @@
       "title": "Hungry hungry hippies",
       "author": "Frederick Reimers",
       "url": "http://www.mountainonline.com/hungry-hungry-hippies-falling-fruit/",
-      "photo_url": "https://fallingfruit.org/press/mountain_magazine.jpg"
+      "photo_url": "/press/mountain_magazine.jpg"
     },
     {
       "published_on": "2013-07-23",
@@ -261,7 +261,7 @@
       "outlet": "Boulder Lifestyle Magazine",
       "outlet_url": "http://www.boulderlifestylepubs.com/",
       "title": "Local scientists map urban edibles",
-      "photo_url": "https://fallingfruit.org/press/boulder_lifestyle.jpg"
+      "photo_url": "/press/boulder_lifestyle.jpg"
     },
     {
       "published_on": "2013-06-01",
@@ -270,7 +270,7 @@
       "title": "Website maps 600,000 spots to pluck produce",
       "author": "Donna Bryson",
       "url": "http://www.oregonlive.com/living/index.ssf/2013/06/produce_website_maps_600000_sp.html",
-      "photo_url": "https://fallingfruit.org/press/oregonian.jpg"
+      "photo_url": "/press/oregonian.jpg"
     },
     {
       "published_on": "2013-05-31",
@@ -635,7 +635,7 @@
       "title": "Fruit networking",
       "author": "Libby Hopkins",
       "url": "http://issuu.com/inthefield/docs/july-august_2014_hillsweb/39?e=1263016/8607512",
-      "photo_url": "https://fallingfruit.org/press/inthefield.jpg"
+      "photo_url": "/press/inthefield.jpg"
     },
     {
       "published_on": "2014-07-01",
@@ -803,7 +803,7 @@
       "outlet_url": "http://urbanfarmonline.com",
       "title": "Great fruit finds",
       "author": "Rachel Werner",
-      "photo_url": "https://fallingfruit.org/press/urban_farm.png"
+      "photo_url": "/press/urban_farm.png"
     }
   ],
   "2015": [
@@ -1050,20 +1050,20 @@
   ],
   "2016": [
     {
-      "published_on": "2016-10-02",
-      "outlet": "Urban Conversion",
-      "outlet_url": "https://www.urbanconversion.com/",
-      "title": "Freegan Awesome",
-      "author": "Colin Hartin",
-      "url": "https://www.amazon.com/Zero-Waste-Home-and-Office/dp/B077V5TPXM"
-    },
-    {
       "published_on": "2016-10-18",
       "outlet": "The Modern Domestique",
       "outlet_url": "http://www.themoderndomestique.com/",
       "title": "Ethan Welty w/ Falling Fruit",
       "author": "Stacey Keating",
       "url": "http://www.themoderndomestique.com/single-post/2016/10/18/TMD-Podcast-S2-E1-Falling-Fruit"
+    },
+    {
+      "published_on": "2016-10-02",
+      "outlet": "Urban Conversion",
+      "outlet_url": "https://www.urbanconversion.com/",
+      "title": "Freegan Awesome",
+      "author": "Colin Hartin",
+      "url": "https://www.amazon.com/Zero-Waste-Home-and-Office/dp/B077V5TPXM"
     },
     {
       "published_on": "2016-09-30",
@@ -1410,6 +1410,14 @@
       "url": "http://www.alsace20.tv/VOD/Actu/Image-du-jour/Recuperez-fruits-gratuitement-en-Alsace-!-XNx97uzHdm.html"
     },
     {
+      "published_on": "2017-04-27",
+      "outlet": "Vegemag",
+      "outlet_url": "https://www.vegemag.fr",
+      "title": "Falling Fruit, l’application qui permet de trouver des arbres fruitiers dans le monde entier",
+      "author": "Corentin Chauvel",
+      "url": "https://www.vegemag.fr/actualite/falling-fruit-lapplication-qui-permet-de-trouver-des-arbres-fruitiers-dans-le-monde-entier-9291/"
+    },
+    {
       "published_on": "2017-04-25",
       "outlet": "Pleine Vie",
       "outlet_url": "https://www.pleinevie.fr",
@@ -1537,7 +1545,7 @@
       "title": "How to urban-forage for your own food",
       "author": "Christi Turner",
       "url": "https://issuu.com/boulderweekly/docs/3.30.17_boulderganic/22",
-      "photo_url": "https://fallingfruit.org/press/boulderganic.jpg"
+      "photo_url": "/press/boulderganic.jpg"
     },
     {
       "published_on": "2017-03-01",
@@ -1546,7 +1554,7 @@
       "title": "Hi-Tech Harvest",
       "author": "Christi Turner",
       "url": "https://modernfarmer.com/2017/04/hi-tech-harvest/",
-      "photo_url": "https://fallingfruit.org/press/modern_farmer.jpg"
+      "photo_url": "/press/modern_farmer.jpg"
     },
     {
       "published_on": "2017-01-03",
@@ -1611,14 +1619,6 @@
   ],
   "2019": [
     {
-      "published_on": "2019-05-31",
-      "outlet": "102.7 The Peak",
-      "outlet_url": "https://www.thepeak.fm/",
-      "title": "Frugal Fridays: Free fruit for life",
-      "author": "Brett Forte",
-      "url": "https://www.instagram.com/tv/ByItDb9BCgb/?id=2056091378160773147_274986261"
-    },
-    {
       "published_on": "2019-11-04",
       "outlet": "The Conversation",
       "outlet_url": "https://theconversation.com/",
@@ -1649,6 +1649,14 @@
       "title": "Une carte pour trouver des fruits gratuits à Amiens",
       "author": "Jeanne Demilly",
       "url": "https://premium.courrier-picard.fr/id23190/article/2019-07-04/une-carte-pour-trouver-des-fruits-gratuits-amiens"
+    },
+    {
+      "published_on": "2019-05-31",
+      "outlet": "102.7 The Peak",
+      "outlet_url": "https://www.thepeak.fm/",
+      "title": "Frugal Fridays: Free fruit for life",
+      "author": "Brett Forte",
+      "url": "https://www.instagram.com/tv/ByItDb9BCgb/?id=2056091378160773147_274986261"
     },
     {
       "published_on": "2019-05-22",
@@ -1744,13 +1752,6 @@
   ],
   "2021": [
     {
-      "published_on": "2021-09-01",
-      "outlet": "CleantechAlps",
-      "outlet_url": "https://www.cleantech-alps.com/",
-      "title": "Agritech in Switzerland",
-      "url": "https://issuu.com/cimark/docs/etude-agritech-2021-en-web1/34"
-    },
-    {
       "published_on": "2021-11-02",
       "outlet": "elDiarioAR",
       "outlet_url": "https://www.eldiarioar.com",
@@ -1765,6 +1766,13 @@
       "title": "Récolter des arbres abandonnés pour éviter le gaspillage",
       "author": "Evan Adelinet",
       "url": "https://www.francebleu.fr/emissions/planete-bleu-le-blog/recolter-des-arbres-abandonnes-pour-eviter-le-gaspillage"
+    },
+    {
+      "published_on": "2021-09-01",
+      "outlet": "CleantechAlps",
+      "outlet_url": "https://www.cleantech-alps.com/",
+      "title": "Agritech in Switzerland",
+      "url": "https://issuu.com/cimark/docs/etude-agritech-2021-en-web1/34"
     },
     {
       "published_on": "2021-09-01",
@@ -1817,6 +1825,13 @@
       "url": "https://barkingdogs.be/nl/2022/09/03/zo-pluk-je-gratis-fruit-bij-jou-in-de-buurt/"
     },
     {
+      "published_on": "2022-04-05",
+      "outlet": "En Nature Simone",
+      "outlet_url": "https://www.ennaturesimone.com",
+      "title": "Homo randonnus, redevenir cueilleur avec Falling fruit",
+      "url": "https://www.ennaturesimone.com/application-randonnee-falling-fruit/"
+    },
+    {
       "published_on": "2022-03-25",
       "outlet": "Landscape Research",
       "outlet_url": "https://www.tandfonline.com/journals/clar20",
@@ -1836,6 +1851,22 @@
   ],
   "2023": [
     {
+      "published_on": "2023-12-15",
+      "outlet": "Peggada",
+      "outlet_url": "https://peggada.com",
+      "title": "Falling Fruit. This website tells you where the fruit trees are — and Portugal is there",
+      "author": "Marta Cerqueira",
+      "url": "https://peggada.com/en/falling-fruit-this-website-tells-you-where-the-fruit-trees-are-and-portugal-is-there/"
+    },
+    {
+      "published_on": "2023-09-27",
+      "outlet": "Ambrook Research",
+      "outlet_url": "https://ambrook.com/research",
+      "title": "A Decade In, FallingFruit Has Kicked Open the Door for Urban Foragers",
+      "author": "Sara Ventiera",
+      "url": "https://ambrook.com/research/technology/food-insecurity-urban-foraging-fallingfruit"
+    },
+    {
       "published_on": "2023-08-30",
       "outlet": "VPM News",
       "outlet_url": "https://www.vpm.org/",
@@ -1852,14 +1883,6 @@
       "url": "https://abakcus.com/tool/falling-fruit-map-the-urban-harvest/"
     },
     {
-      "published_on": "2023-12-15",
-      "outlet": "Peggada",
-      "outlet_url": "https://peggada.com",
-      "title": "Falling Fruit. This website tells you where the fruit trees are — and Portugal is there",
-      "author": "Marta Cerqueira",
-      "url": "https://peggada.com/en/falling-fruit-this-website-tells-you-where-the-fruit-trees-are-and-portugal-is-there/"
-    },
-    {
       "published_on": "2023-08-01",
       "outlet": "The Red Bulletin",
       "outlet_url": "https://www.redbull.com/us-en/theredbulletin",
@@ -1868,20 +1891,12 @@
       "url": "https://issuu.com/redbulletin.com/docs/0823_uk_lowres/20"
     },
     {
-      "published_on": "2023-09-27",
-      "outlet": "Ambrook Research",
-      "outlet_url": "https://ambrook.com/research",
-      "title": "A Decade In, FallingFruit Has Kicked Open the Door for Urban Foragers",
-      "author": "Sara Ventiera",
-      "url": "https://ambrook.com/research/technology/food-insecurity-urban-foraging-fallingfruit"
-    },
-    {
-      "published_on": "2023-01-30",
-      "outlet": "ABC Northern Tasmania",
-      "outlet_url": "https://www.abc.net.au/northtas",
-      "title": "Northern Tasmania Drive",
-      "author": "Kim Napier",
-      "url": "https://www.abc.net.au/listen/programs/northtas-drive/northern-tasmania-drive/14139892"
+      "published_on": "2023-07-14",
+      "outlet": "Journal des Femmes",
+      "outlet_url": "https://www.journaldesfemmes.fr",
+      "title": "Carte glanage : les lieux où ramasser des fruits et légumes gratuitement",
+      "author": "Anaïs Renevier",
+      "url": "https://www.journaldesfemmes.fr/jardin/conseils-jardinage/2910599-carte-glanage-les-lieux-ou-ramasser-des-fruits-et-legumes-gratuitement/"
     },
     {
       "published_on": "2023-06-01",
@@ -1898,24 +1913,24 @@
       "title": "This website reimagines cities as foraging utopias",
       "author": "Liz Susman Karp",
       "url": "https://www.atlasobscura.com/articles/falling-fruit-urban-foraging-map"
+    },
+    {
+      "published_on": "2023-01-30",
+      "outlet": "ABC Northern Tasmania",
+      "outlet_url": "https://www.abc.net.au/northtas",
+      "title": "Northern Tasmania Drive",
+      "author": "Kim Napier",
+      "url": "https://www.abc.net.au/listen/programs/northtas-drive/northern-tasmania-drive/14139892"
     }
   ],
   "2024": [
     {
-      "published_on": "2024-09-11",
-      "outlet": "LAist",
-      "outlet_url": "https://laist.com/",
-      "title": "I went gleaning for fruit to try and reduce my carbon footprint. Was it enough?",
-      "author": "Cato Hernández",
-      "url": "https://laist.com/news/climate-environment/la-foraging-gleaning-carbon-footprint-emissions-falling-fruit"
-    },
-    {
-      "published_on": "2024-07-07",
-      "outlet": "Zielony Wrocław",
-      "outlet_url": "https://www.wroclaw.pl/",
-      "title": "Smaczne i zdrowe owoce za darmo. Zobacz, gdzie rosną dzikie drzewa owocowe we Wrocławiu",
-      "author": "Tomasz Wysocki",
-      "url": "https://www.wroclaw.pl/zielony-wroclaw/owoce-za-darmo-drzewa-owocowe-we-wroclawiu-mapa"
+      "published_on": "2024-11-05",
+      "outlet": "avantages",
+      "outlet_url": "https://www.magazine-avantages.fr",
+      "title": "Comment récupérer des fruits et légumes gratuitement ?",
+      "author": "Juliette Bezille",
+      "url": "https://www.magazine-avantages.fr/glaner-des-fruits-et-legumes-gratuitement-a-cote-de-chez-soi,212144.asp"
     },
     {
       "published_on": "2024-11-04",
@@ -1926,14 +1941,6 @@
       "url": "https://www.sortiraparis.com/bons-plans/sorties-gratuites/articles/321249-le-saviez-vous-on-peut-glaner-gratuitement-des-fruits-et-legumes-en-ile-de-france"
     },
     {
-      "published_on": "2024-09-21",
-      "outlet": "Yorkshire Evening Post",
-      "outlet_url": "https://www.yorkshireeveningpost.co.uk",
-      "title": "Going Green: Shop seasonally and support local farmers this harvest time",
-      "author": "Angela Terry",
-      "url": "https://www.yorkshireeveningpost.co.uk/news/environment/going-green-shop-seasonally-and-support-local-farmers-this-harvest-time-4783938"
-    },
-    {
       "published_on": "2024-11-01",
       "outlet": "piauí",
       "outlet_url": "https://piaui.folha.uol.com.br/",
@@ -1942,12 +1949,36 @@
       "url": "https://piaui.folha.uol.com.br/materia/cidade-de-comer/"
     },
     {
+      "published_on": "2024-09-21",
+      "outlet": "Yorkshire Evening Post",
+      "outlet_url": "https://www.yorkshireeveningpost.co.uk",
+      "title": "Going Green: Shop seasonally and support local farmers this harvest time",
+      "author": "Angela Terry",
+      "url": "https://www.yorkshireeveningpost.co.uk/news/environment/going-green-shop-seasonally-and-support-local-farmers-this-harvest-time-4783938"
+    },
+    {
+      "published_on": "2024-09-11",
+      "outlet": "LAist",
+      "outlet_url": "https://laist.com/",
+      "title": "I went gleaning for fruit to try and reduce my carbon footprint. Was it enough?",
+      "author": "Cato Hernández",
+      "url": "https://laist.com/news/climate-environment/la-foraging-gleaning-carbon-footprint-emissions-falling-fruit"
+    },
+    {
       "published_on": "2024-07-31",
       "outlet": "KUER 90.1",
       "outlet_url": "https://www.kuer.org/",
       "title": "There’s a harvest hiding in Salt Lake City. Just ask the Sugar House fruit guy",
       "author": "Caroline Ballard",
       "url": "https://www.kuer.org/science-environment/2024-07-31/theres-a-harvest-hiding-in-salt-lake-city-just-ask-the-sugar-house-fruit-guy"
+    },
+    {
+      "published_on": "2024-07-07",
+      "outlet": "Zielony Wrocław",
+      "outlet_url": "https://www.wroclaw.pl/",
+      "title": "Smaczne i zdrowe owoce za darmo. Zobacz, gdzie rosną dzikie drzewa owocowe we Wrocławiu",
+      "author": "Tomasz Wysocki",
+      "url": "https://www.wroclaw.pl/zielony-wroclaw/owoce-za-darmo-drzewa-owocowe-we-wroclawiu-mapa"
     },
     {
       "published_on": "2024-07-05",
@@ -1966,6 +1997,53 @@
     }
   ],
   "2025": [
+    {
+      "published_on": "2025-09-04",
+      "outlet": "Marmiton",
+      "outlet_url": "https://www.marmiton.org",
+      "title": "Ramasser des fruits et légumes en Île-de-France c'est maintenant possible et voici tout ce que vous devez savoir",
+      "author": "Fostine Carracillo",
+      "url": "https://www.marmiton.org/adresses/ramasser-des-fruits-et-legumes-en-ile-de-france-c-est-maintenant-possible-et-voici-tout-ce-que-vous-devez-savoir-s4117684.html"
+    },
+    {
+      "published_on": "2025-07-30",
+      "outlet": "The Gazette",
+      "outlet_url": "https://gazette.com",
+      "title": "Website offers edible map of natural resources in urban areas",
+      "author": "Jennifer Mulson",
+      "url": "https://gazette.com/life/live-well-website-offers-edible-map-of-natural-resources-in-urban-areas/article_8536832e-ad4a-4353-91f0-afe9a7ad3148.html"
+    },
+    {
+      "published_on": "2025-06-11",
+      "outlet": "Airzen",
+      "outlet_url": "https://www.airzen.fr",
+      "title": "Où cueillir des fruits gratuitement en juin ? Découvrez comment faire et les endroits sans enfreindre la loi",
+      "author": "Christophe Duhamel",
+      "url": "https://www.airzen.fr/ou-cueillir-des-fruits-gratuitement/"
+    },
+    {
+      "published_on": "2025-05-14",
+      "outlet": "The Opener",
+      "outlet_url": "https://theopener.co.th",
+      "title": "Falling Fruit ปักหมุดแหล่งอาหารฟรีในเมืองใหญ่ที่ใครๆ ก็เก็บกินได้",
+      "url": "https://theopener.co.th/2025/05/14/%E0%B8%9B%E0%B8%B1%E0%B8%81%E0%B8%AB%E0%B8%A1%E0%B8%B8%E0%B8%94%E0%B9%81%E0%B8%AB%E0%B8%A5%E0%B9%88%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%9F%E0%B8%A3%E0%B8%B5%E0%B9%83%E0%B8%99%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%83%E0%B8%84%E0%B8%A3%E0%B9%86%E0%B8%81%E0%B9%87%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B8%81%E0%B8%B4%E0%B8%99%E0%B9%84%E0%B8%94%E0%B9%89"
+    },
+    {
+      "published_on": "2025-04-30",
+      "outlet": "Oregon Humanities",
+      "outlet_url": "https://www.oregonhumanities.org",
+      "title": "Earthly Delights: The unexpected abundance of urban plant life",
+      "author": "Katherine Cusumano",
+      "url": "https://www.oregonhumanities.org/rll/beyond-the-margins/earthly-delights/"
+    },
+    {
+      "published_on": "2025-04-14",
+      "outlet": "goodd.",
+      "outlet_url": "https://goodd.fr",
+      "title": "Cueillette urbaine : Falling Fruit, la carte qui a fait tomber les murs entre ville et nature",
+      "author": "Eric Espinosa",
+      "url": "https://goodd.fr/article/cueillette-urbaine-falling-fruit-la-carte-qui-a-fait-tomber-les-murs-entre-ville-et-nature"
+    },
     {
       "published_on": "2025-03-27",
       "outlet": "Reasons to be Cheerful",

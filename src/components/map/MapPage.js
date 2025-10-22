@@ -11,15 +11,16 @@ import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { disconnectMap, setGoogle } from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
+import { viewToString } from '../../utils/appUrl'
 import throttle from '../../utils/throttle'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsEmbed } from '../../utils/useBreakpoint'
 import Share from '../share/Share'
 import ShareIconButton from '../share/ShareIconButton'
 import { AddLocationMobile } from '../ui/AddLocation'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
-import { ConnectGeolocation, isGeolocationOpen } from './ConnectGeolocation'
 import GeolocationDot from './GeolocationDot'
 import Location from './Location'
 import PanoramaHandler from './PanoramaHandler'
@@ -206,10 +207,8 @@ const MapPage = ({ isDesktop }) => {
 
   const place = useSelector((state) => state.place.selectedPlace)
 
-  const { geolocation, geolocationState } = useSelector(
-    (state) => state.geolocation,
-  )
-  const { pathname } = useLocation()
+  const { geolocation } = useSelector((state) => state.geolocation)
+  const { pathname, search } = useLocation()
   const {
     locationId,
     position,
@@ -248,8 +247,13 @@ const MapPage = ({ isDesktop }) => {
     dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
   }
 
+  const searchParams = new URLSearchParams(search)
+  const hasTypesParams =
+    searchParams.has('types') || searchParams.has('f') || searchParams.has('c')
+
   useEffect(() => {
-    const ready = dispatch && !typesAccess.isEmpty && googleMap
+    const ready =
+      dispatch && !typesAccess.isEmpty && googleMap && !hasTypesParams
     if (ready) {
       /*
        * This usually happens after apiIsLoaded puts googleMap in redux
@@ -264,11 +268,25 @@ const MapPage = ({ isDesktop }) => {
        */
       handleViewChangeRef.current(false)
     }
-  }, [!typesAccess.isEmpty, googleMap, !!dispatch]) //eslint-disable-line
+  }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
 
+  const allClusters = clusters.filter((cluster) => {
+    // Skip clusters of size 1 that have the same coordinates as the selected location
+    if (
+      selectedLocation &&
+      cluster.count === 1 &&
+      Math.abs(cluster.lat - selectedLocation.lat) < 1e-6 &&
+      Math.abs(cluster.lng - selectedLocation.lng) < 1e-6
+    ) {
+      return false
+    }
+    return true
+  })
   const allLocations =
     clusters.length !== 0
-      ? []
+      ? selectedLocation
+        ? [selectedLocation]
+        : []
       : selectedLocation
         ? [...locations, selectedLocation].filter(
             (loc, index, self) =>
@@ -280,6 +298,7 @@ const MapPage = ({ isDesktop }) => {
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
   const showLabels = settingsShowLabels || isAddingLocation || isEditingLocation
+  const isEmbed = useIsEmbed()
 
   useEffect(() => {
     setDraggedPosition(isDesktop ? position : null)
@@ -299,6 +318,16 @@ const MapPage = ({ isDesktop }) => {
         zoom: currentZoom + 1,
       })
       googleMap?.fitBounds(bounds)
+    }
+    if (isViewingLocation) {
+      // Stop viewing location on cluster click
+      // history.push('/map') will only push to the right URL
+      // after google-maps-react calls onChange and updates coordinates to above
+      // hence we explicitly provide view coordinates
+      const center = googleMap.getCenter()
+      const zoom = googleMap.getZoom()
+      const viewString = viewToString(center.lat(), center.lng(), zoom)
+      history.push(`/map/${viewString}`)
     }
   }
 
@@ -330,11 +359,11 @@ const MapPage = ({ isDesktop }) => {
     <>
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
-      {!isAddingLocation && !isEditingLocation && !isDesktop && (
+      {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (
         <AddLocationMobile />
       )}
       {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
-      {!isDesktop && <TrackLocationButton isIcon />}
+      {!isDesktop && !isEmbed && <TrackLocationButton isIcon />}
 
       <ZoomInButton
         onClick={zoomIn}
@@ -373,8 +402,6 @@ const MapPage = ({ isDesktop }) => {
           )}
         </>
       )}
-
-      {isGeolocationOpen(geolocationState) && <ConnectGeolocation />}
 
       {googleMap && <PanoramaHandler />}
       {showStreetView && <CloseStreetView />}
@@ -466,7 +493,7 @@ const MapPage = ({ isDesktop }) => {
                 label={place.location.description}
               />
             )}
-          {clusters.map((cluster) => (
+          {allClusters.map((cluster) => (
             <Cluster
               key={JSON.stringify(cluster)}
               onClick={(event) => {

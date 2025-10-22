@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "E-posta adresinizi onaylayın",
       "confirmed": "Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.",
       "no_token": "Bu sayfaya onay e-postasındaki linke tıklayarak gelmeniz gerekmektedir. Eğer geliyorsanız, lütfen size sağlanan tam URL'yi kullandığınızdan emin olun.",
       "send_instructions": "Birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız."
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "Konum değişikliklerini alma başarısız: {{message}}",
       "fetch_location_failed": "{{id}} konumunu alma hatası: {{message}}",
       "fetch_review_failed": "{{id}} değerlendirmesini alma hatası: {{message}}",
+      "fetch_user_failed": "{{id}} kullanıcısı getirilirken hata oluştu: {{message}}",
       "location_edit_failed": "Konum düzenleme başarısız: {{message}}",
       "location_submission_failed": "Konum gönderimi başarısız: {{message}}",
       "photo_upload_failed": "Fotoğraf yükleme başarısız: {{message}}",
@@ -187,6 +189,7 @@
     "add_review": "Değerlendirme ekle",
     "edit_location": "Konumu düzenle",
     "edit_review": "Değerlendirmeyi düzenle",
+    "filters": "Filtreler",
     "list": "Liste",
     "settings": "Ayarlar",
     "zoom_in_to_add_location": "Konum eklemek için yakınlaştırın"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily, koyu bir tarım ormancılığı savunucusu, düzeltilemez bir yiyecek toplayıcısı ve iki kedi, dört bıldırcın ve dünyanın en muhteşem köpeğinin gururlu annesidir. Kökleri Rocky Dağları'na uzanır, ancak bu günlerde toprak üstü biyokütlesi New Haven, Connecticut'ı evi olarak kabul etmekten gurur duyar. Genellikle halka açık gıda ormanlarına bakarken, kütüphanenin rahat bir köşesinde kendinden geçmiş okurken veya misel sihri hakkında şiirsel konuşurken (ve sözde Yale <a href=\"https://environment.yale.edu/\">Ormancılık Okulu</a> ve <a href=\"https://jackson.yale.edu/person/emily-sigman/\">Küresel İlişkiler Okulu</a>'nda ortak yüksek lisans derecelerini tamamlarken) bulunabilir. Emily'nin seyahate karşı yıkıcı bir bağımlılığı var ve şu anda neredeyse her yerde olabilir.",
       "ethan_welty_bio_html": "Ethan, teknoloji ve veriyi kullanarak şehirleri taze ve ücretsiz gıda kaynakları olarak destekliyor. Kentsel yiyecek toplamayı dünya çapında teşvik etmek için 2013'te Caleb Phillips ile birlikte Falling Fruit'i kurdu ve 2014'te Colorado, Boulder'daki fazla meyveleri toplamak ve dağıtmak için <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a>'yu kurdu. Meyvelerin ötesinde, bir <a href=\"https://www.weltyphotography.com\">fotoğrafçılık kariyeri</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">buzullar üzerine araştırmalar</a> ve dağcılık ve nehir sporları tutkusu arasında mekik dokuyor.",
       "ff_disclaimer_html": "Falling Fruit, Fallen Fruit ile ilişkili değildir. Fallen Fruit'e <a href=\"http://fallenfruit.org\">fallenfruit.org</a> adresinden ulaşılabilir.",
-      "give_paypal": "Paypal Giving Fund üzerinden bağış yapın",
       "give_us_money": "Biz bir 501(c)(3) kar amacı gütmeyen kuruluşuz ve faaliyetlerimizi sürdürmek için bağışlara güveniyoruz. İstekli ve imkanınız varsa, lütfen mali katkıda bulunmayı düşünün. Amerika Birleşik Devletleri'ndeki bağışlar vergiden düşülebilir.",
+      "give_zeffy": "Zeffy üzerinden bağış yap",
       "jeff_wanner_bio_html": "Jeff, çocukken ailesiyle böğürtlen ve yaban mersini topladığından ve daha yakın zamanda Colorado genelinde halka açık meyve ağaçlarının bolluğunu fark ettiğinden beri, şehirlerimizde yetişen meyvelerin bolluğuna derin bir takdir geliştirdi. Falling Fruit için ilk görevi, Boulder ve Salt Lake City'yi elinde kağıt haritalarla tarayarak meyve veren ağaçları kaydetmekti. Bina enerji verimliliğini iyileştirmek için çalışmadığı zamanlarda, genellikle topluma yardım ediyor veya yaya, kayak veya bisikletle dağlar üzerinde hızla hareket ediyor.",
-      "join_us_html": "Yerel gıdayı kutlamada bize katılın! <a href=\"/\">Harita</a> herkesin düzenlemesine açıktır, veritabanı tek bir tıklamayla <a href=\"/data\">indirilebilir</a> ve <a href=\"https://github.com/falling-fruit/\">kod</a> açık kaynaklıdır. Aynı şekilde bolluğu diğer insanlarla paylaşmanız teşvik edilir. <a href=\"/sharing\">Paylaşım sayfamız</a> yüzlerce yerel organizasyonu listeliyor - halka açık meyve bahçeleri ve gıda ormanları dikme, şehir ağaçlarından ve çiftçilerin tarlalarından başka türlü israf olacak meyve ve sebzeleri toplama ve komşular ve ihtiyaç sahipleriyle paylaşma.",
-      "more_about_html": "Yenilebilir haritamız türünün ilki değil, ancak dünyanın en kapsamlısı olmayı hedefliyor. Kullanıcılarımız kendi konumlarını eklerken, biz de mevcut bilgileri internette tarıyor, her yerdeki toplayıcıların, ormancıların ve bedavacıların çabalarını birleştirmeye çalışıyoruz. <a href=\"/datasets\">İçe aktarılan veri setleri</a> küçük mahalle yiyecek toplama haritalarından geniş profesyonel ağaç envanterlerine kadar uzanıyor. Bu şimdiye kadar {{locations}} konuma dağılmış {{types}} farklı yenilebilir türe (çoğu, ancak tümü değil, bitki türleri) ulaştı. Yetiştirilmiş ve yaygın olanlardan yabancı bitkilerin egzotik tatlarına ve uzun zamandır unutulmuş yerli bitkilere kadar, mahallenizde yiyecek toplamak, zaman içinde ve kültürler arasında bir yolculuktur.",
+      "join_us_html": "Yerel gıdayı kutlamada bize katılın! <a href=\"/\">Harita</a> herkesin düzenlemesine açıktır, veritabanı tek bir tıklamayla <a href=\"/about/data\">indirilebilir</a> ve <a href=\"https://github.com/falling-fruit/\">kod</a> açık kaynaklıdır. Aynı şekilde bolluğu diğer insanlarla paylaşmanız teşvik edilir. <a href=\"/about/sharing\">Paylaşım sayfamız</a> yüzlerce yerel organizasyonu listeliyor - halka açık meyve bahçeleri ve gıda ormanları dikme, şehir ağaçlarından ve çiftçilerin tarlalarından başka türlü israf olacak meyve ve sebzeleri toplama ve komşular ve ihtiyaç sahipleriyle paylaşma.",
+      "more_about_html": "Yenilebilir haritamız türünün ilki değil, ancak dünyanın en kapsamlısı olmayı hedefliyor. Kullanıcılarımız kendi konumlarını eklerken, biz de mevcut bilgileri internette tarıyor, her yerdeki toplayıcıların, ormancıların ve bedavacıların çabalarını birleştirmeye çalışıyoruz. <a href=\"/about/data\">İçe aktarılan veri setleri</a> küçük mahalle yiyecek toplama haritalarından geniş profesyonel ağaç envanterlerine kadar uzanıyor. Bu şimdiye kadar {{locations}} konuma dağılmış {{types}} farklı yenilebilir türe (çoğu, ancak tümü değil, bitki türleri) ulaştı. Yetiştirilmiş ve yaygın olanlardan yabancı bitkilerin egzotik tatlarına ve uzun zamandır unutulmuş yerli bitkilere kadar, mahallenizde yiyecek toplamak, zaman içinde ve kültürler arasında bir yolculuktur.",
       "staff": "Personel",
       "translate": "Çevir",
       "translate_for_us_html": "Gönüllü çevirmen olarak katkıda bulunmak ister misiniz? Bize e-posta gönderin ve sizi çevirilerimizin yönetildiği <a href=\"https://phrase.com\">Phrase</a>'e davet edelim.",
@@ -265,7 +268,7 @@
       "import_id_and_name": "İçe Aktarma #{{id}}: {{name}}",
       "imported_datasets": "İçe aktarılan veri setleri",
       "imported_on": "{{date}} tarihinde içe aktarıldı",
-      "intro_html": "Falling Fruit, kentsel yenilebilir ürünlerin en kapsamlı ve açık coğrafi veri seti olmayı hedefliyor. Kullanıcılarımız <a href=\"/\">harita</a> üzerinde keşfeder, düzenler ve yeni konumlar eklerken, biz de mevcut veri setlerini tarıyor ve doğrudan <a href=\"/data\">veritabanına</a> aktararak, dünyanın her yerindeki toplayıcıların, ormancıların ve freegan'ların çabalarını birleştiriyoruz. Gözden kaçırdığımız bir veri seti biliyorsanız, lütfen <a href=\"mailto:info@fallingfruit.org\">bize bildirin</a>! Ayrıca <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">içe aktarma şablonunu</a> kullanarak verileri biçimlendirerek içe aktarma sürecine yardımcı olabilirsiniz. İçe aktarmaların manuel olarak yapılması gerektiğinden, içe aktarma sonrasında orijinal verilerde yapılan tüm değişiklikler Falling Fruit'te yansıtılmaz.",
+      "intro_html": "Falling Fruit, kentsel yenilebilir ürünlerin en kapsamlı ve açık coğrafi veri seti olmayı hedefliyor. Kullanıcılarımız <a href=\"/\">harita</a> üzerinde keşfeder, düzenler ve yeni konumlar eklerken, biz de mevcut veri setlerini tarıyor ve doğrudan veritabanına aktararak, dünyanın her yerindeki toplayıcıların, ormancıların ve freegan'ların çabalarını birleştiriyoruz. Gözden kaçırdığımız bir veri seti biliyorsanız, lütfen <a href=\"mailto:info@fallingfruit.org\">bize bildirin</a>! Ayrıca <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">içe aktarma şablonunu</a> kullanarak verileri biçimlendirerek içe aktarma sürecine yardımcı olabilirsiniz. İçe aktarmaların manuel olarak yapılması gerektiğinden, içe aktarma sonrasında orijinal verilerde yapılan tüm değişiklikler Falling Fruit'te yansıtılmaz.",
       "link": "Bağlantı",
       "table_info": "Her veri seti isim, konum sayısı ve içe aktarma tarihi ile listelenir. Her satırı genişletmek, veriler, içe aktarma süreci ve verilerin nasıl kullanılabileceğini düzenleyen lisans hakkında daha fazla ayrıntı gösterir.",
       "type": "Tür",
@@ -338,6 +341,12 @@
         "state": "Eyalet"
       },
       "intro_html": "Aşağıda kamusal alanlarda gıda yetiştiren (gıda ormanları, halka açık meyve bahçeleri), gıda toplayan (kent içi yiyecek toplama, tarla artığı toplama) veya gıda dağıtan (takaslar, bağışlar) kuruluşlar listelenmiştir. Kuruluşlar ülke, eyalet (varsa) ve şehre göre listelenmiştir. Üstü çizili olanların artık aktif olmadığı düşünülmektedir. Listede olması gereken başkalarını biliyorsanız, <a href=\"mailto:info@fallingfruit.org\">bizimle iletişime geçin</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit, yenilebilir bitkiler ve diğer ücretsiz gıda kaynaklarının konumlarını paylaşmak için topluluk tarafından yönlendirilen bir platformdur.",
+      "discover_and_contribute": "Mahallenizde başkalarının neler topladığını keşfedebilir ve kendi gözlemlerinizi ekleyebilirsiniz.",
+      "explore_the_map": "Haritayı keşfet",
+      "welcome_visitors_to_the_site_short": "Hoş geldiniz!"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Tam site",
     "title": "Bu görünümü paylaş",
     "url_copied": "URL panoya kopyalandı!",
     "url_copy_failed": "URL panoya kopyalanamadı"

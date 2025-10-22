@@ -1,8 +1,9 @@
 import { Route } from 'react-router-dom'
 
+import ConnectGeolocation from './ConnectGeolocation'
+import ConnectGoogleMap from './ConnectGoogleMap'
 import ConnectI18nViz from './ConnectI18nViz'
 import ConnectInitLocation from './ConnectInitLocation'
-import ConnectList from './ConnectList'
 import ConnectLocation from './ConnectLocation'
 import ConnectMap from './ConnectMap'
 import ConnectNewLocation from './ConnectNewLocation'
@@ -14,20 +15,40 @@ import ConnectTopPanel from './ConnectTopPanel'
 import ConnectTypes from './ConnectTypes'
 import DisconnectActivity from './DisconnectActivity'
 import DisconnectInitLocation from './DisconnectInitLocation'
+import DisconnectLastViewedListPosition from './DisconnectLastViewedListPosition'
 import DisconnectLocation from './DisconnectLocation'
 import DisconnectReview from './DisconnectReview'
 
 const connectRoutes = [
   /*
-   * ConnectList
+   * ConnectGoogleMap - /list
    * why: the list page needs a map in Redux
    *
-   * action: if showing the list before /map was loaded,
-   * briefly visit /map and go back to /list
+   * action: if showing the page before /map was loaded,
+   * briefly visit /map and go back to the target route
    */
   <Route key="connect-list" path={['/map', '/list']}>
     {({ match }) =>
-      match && <ConnectList isListRoute={match.path.startsWith('/list')} />
+      match && (
+        <ConnectGoogleMap
+          isTargetRoute={match.path.startsWith('/list')}
+          targetRoute="/list"
+        />
+      )
+    }
+  </Route>,
+
+  /*
+   * ConnectGoogleMap - /filter, see above
+   */
+  <Route key="connect-filter" path={['/map', '/filters']}>
+    {({ match }) =>
+      match && (
+        <ConnectGoogleMap
+          isTargetRoute={match.path.startsWith('/filters')}
+          targetRoute="/filters"
+        />
+      )
     }
   </Route>,
 
@@ -160,7 +181,7 @@ const connectRoutes = [
       '/reviews',
       '/settings',
       '/changes',
-      '/activity',
+      '/users/:userId/activity',
     ]}
   >
     <ConnectTypes />
@@ -246,8 +267,26 @@ const connectRoutes = [
    *
    * action: clear when dismounting from activity or locations
    */
-  <Route key="disconnect-activity" path={['/activity', '/locations']}>
+  <Route
+    key="disconnect-activity"
+    path={['/users/:userId/activity', '/locations']}
+  >
     <DisconnectActivity />
+  </Route>,
+
+  /*
+   * DisconnectLastViewedListPosition
+   * why: limit the context for list scroll position restoration
+   * we want to preserve scroll position when navigating list -> location -> [back] to list,
+   * but not when navigating to unrelated pages outside the list/location context
+   *
+   * action: clear lastViewedListPositionId when dismounting from list or location pages
+   */
+  <Route
+    key="disconnect-last-viewd-position"
+    path={['/list', '/locations', '/list-locations']}
+  >
+    <DisconnectLastViewedListPosition />
   </Route>,
 
   /*
@@ -261,6 +300,19 @@ const connectRoutes = [
    */
   <Route key="connect-top-panel" path={['/map', '/list', '/locations']}>
     <ConnectTopPanel />
+  </Route>,
+
+  /*
+   * ConnectGeolocation
+   * why: geolocation tracking needs to respond to requests
+   *
+   * action: handle geolocation state changes and map positioning
+   */
+  <Route
+    key="connect-geolocation"
+    path={['/map', '/locations', '/about/welcome']}
+  >
+    <ConnectGeolocation />
   </Route>,
 ]
 

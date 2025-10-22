@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { LanguageSelect } from '../../i18n'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsMobile } from '../../utils/useBreakpoint'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import BackButton from '../ui/BackButton'
 import ReturnIcon from './ReturnIcon'
 
@@ -38,13 +39,15 @@ const PageWrapper = styled.article`
   font-style: normal;
   box-sizing: border-box;
 
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     width: 100%;
     padding-block: 0 20px;
     padding-inline: 23px;
     margin-block: 28px 0;
     margin-inline: auto;
-  }
+  `}
 
   h1,
   h2,
@@ -97,12 +100,16 @@ const PageWrapper = styled.article`
       margin: 0;
     }
 
-    @media ${({ theme }) => theme.device.desktop} {
+    ${({ isDesktop }) =>
+      isDesktop &&
+      `
       display: inline-flex;
       align-items: start;
-    }
+    `}
 
-    @media ${({ theme }) => theme.device.mobile} {
+    ${({ isDesktop }) =>
+      !isDesktop &&
+      `
       overflow: hidden;
       margin-block-start: 20px;
 
@@ -113,7 +120,7 @@ const PageWrapper = styled.article`
         clear: left;
         margin-block-end: 10px;
       }
-    }
+    `}
 
     &::after {
       content: '';
@@ -132,22 +139,33 @@ const StyledBackButton = styled(BackButton)`
   }
 `
 
-const Page = ({ children }) => (
-  <PageScrollWrapper>
-    <PageWrapper>{children}</PageWrapper>
-  </PageScrollWrapper>
-)
-
-const InfoPage = ({ children }) => {
-  const history = useAppHistory()
-  const isMobile = useIsMobile()
-  const { t } = useTranslation()
+const Page = ({ children }) => {
+  const isDesktop = useIsDesktop()
 
   return (
     <PageScrollWrapper>
-      <PageWrapper>
-        {isMobile && (
-          <StyledBackButton onClick={() => history.push('/settings')}>
+      <PageWrapper isDesktop={isDesktop}>{children}</PageWrapper>
+    </PageScrollWrapper>
+  )
+}
+
+const InfoPage = ({ children }) => {
+  const history = useAppHistory()
+  const isDesktop = useIsDesktop()
+  const { t } = useTranslation()
+
+  const { user } = useSelector((state) => state.auth)
+  return (
+    <PageScrollWrapper>
+      <PageWrapper isDesktop={isDesktop}>
+        {!isDesktop && (
+          <StyledBackButton
+            onClick={() =>
+              user
+                ? history.push('/account/edit')
+                : history.push('/about/welcome')
+            }
+          >
             <ReturnIcon />
             {t('layouts.back')}
           </StyledBackButton>
@@ -160,17 +178,17 @@ const InfoPage = ({ children }) => {
 }
 
 const AuthPage = ({ children }) => {
-  const isMobile = useIsMobile()
+  const isDesktop = useIsDesktop()
 
   return (
     <PageScrollWrapper>
-      <PageWrapper>
-        {isMobile && (
+      <PageWrapper isDesktop={isDesktop}>
+        {!isDesktop && (
           <MobileHeader>
             <img src="/logo_orange.svg" alt="Falling Fruit logo" />
           </MobileHeader>
         )}
-        {isMobile && (
+        {!isDesktop && (
           <LanguageContainer>
             <LanguageSelect />
           </LanguageContainer>

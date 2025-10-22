@@ -44,10 +44,3 @@ export const ErrorMessage = styled.p`
   font-style: italic;
   font-size: 0.875rem !important;
 `
-
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  margin-block-start: 1em;
-`

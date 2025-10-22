@@ -1,7 +1,6 @@
 import { Form, Formik } from 'formik'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
@@ -11,8 +10,8 @@ import { Checkbox, Input, Recaptcha, Textarea } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
+import AuthLinks from './AuthLinks'
 import {
-  Column,
   ErrorMessage,
   FormButtonWrapper,
   FormInputWrapper,
@@ -31,15 +30,7 @@ const SignupPage = () => {
 
     try {
       await addUser(newUser)
-      toast.success(
-        `${t('devise.registrations.signed_up')} ${t(
-          'devise.confirmations.send_instructions',
-        )}`,
-        {
-          autoClose: 5000,
-        },
-      )
-      history.push('/map')
+      history.push('/auth/confirmation/check-email')
     } catch (error) {
       toast.error(
         t('error_message.auth.signup_failed', {
@@ -74,7 +65,7 @@ const SignupPage = () => {
         })}
         onSubmit={handleSubmit}
       >
-        {({ errors, dirty, isValid, isSubmitting }) => (
+        {({ errors, dirty, isValid, isSubmitting, values }) => (
           <Form>
             <FormInputWrapper>
               <Input
@@ -102,6 +93,7 @@ const SignupPage = () => {
                 name="password_confirm"
                 label={t('users.password_confirmation')}
                 required
+                invalidWhenUntouched={values.password !== ''}
               />
               {errors.password_confirm && (
                 <ErrorMessage>
@@ -152,13 +144,7 @@ const SignupPage = () => {
           </Form>
         )}
       </Formik>
-      <Column>
-        <Link to="/users/sign_in">{t('users.sign_in')}</Link>
-        <Link to="/users/password/new">{t('users.forgot_password')}</Link>
-        <Link to="/users/confirmation/new">
-          {t('users.resend_confirmation_instructions')}
-        </Link>
-      </Column>
+      <AuthLinks exclude={['signUp']} />
     </AuthPage>
   )
 }

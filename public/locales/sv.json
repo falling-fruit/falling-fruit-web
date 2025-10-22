@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Bekräfta din epostadress",
       "confirmed": "Din epost har bekräftats.",
       "no_token": "Tillgång till den här sidan kräver att du kommer från ett bekräftelsemejl. Om du gör det, säkerställ att du har använt hela URL:en som tillhandahållits.",
       "send_instructions": "Du kommer snart att få en epost med instruktioner för hur du bekräftar din epost adress."
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "Hämtning av platsändringar misslyckades: {{message}}",
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
       "fetch_review_failed": "Fel vid hämtning av recension {{id}}: {{message}}",
+      "fetch_user_failed": "Fel vid hämtning av användare {{id}}: {{message}}",
       "location_edit_failed": "Redigering av plats misslyckades: {{message}}",
       "location_submission_failed": "Inlämning av plats misslyckades: {{message}}",
       "photo_upload_failed": "Bilduppladdning misslyckades: {{message}}",
@@ -187,6 +189,7 @@
     "add_review": "Lägg till recension",
     "edit_location": "Redigera plats",
     "edit_review": "Redigera recension",
+    "filters": "Filter",
     "list": "Lista",
     "settings": "Inställningar",
     "zoom_in_to_add_location": "Zooma in för att lägga till plats"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily är en hängiven agroforestry-evangelist, oförbätterlig matletare och stolt mamma till två katter, fyra vaktlar och världens mest magnifika hund. Hennes rötter sträcker sig djupt ner i Klippiga bergen, men nuförtiden är hennes ovanjordiska biomassa stolt över att kalla New Haven, Connecticut sitt hem. Hon kan ofta hittas vårdande offentliga matskogar, fördjupad i läsning i något mysigt bibliotekshörn, eller poetiskt lovordande svampmyceliets magi (och, förmodligen, slutförande av gemensamma examina vid Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> och <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily har ett förödande beroende av att resa och kan befinna sig nästan var som helst just nu.",
       "ethan_welty_bio_html": "Med teknik och data förespråkar Ethan städer som källor till färsk och gratis mat. Han skapade Falling Fruit med Caleb Phillips 2013 för att främja urban matletning världen över, och var medgrundare till <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> 2014 för att skörda och distribuera överskottsfrukt som växer runt honom i Boulder, Colorado. Utöver frukt jonglerar han en <a href=\"https://www.weltyphotography.com\">fotografikarriär</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">forskning om glaciärer</a>, och en aptit för bergs- och flodäventyr.",
       "ff_disclaimer_html": "Falling Fruit har ingenting att göra med Fallen Fruit. Fallen Fruit finns på <a href=\"http://fallenfruit.org\">fallenfruit.org</a>",
-      "give_paypal": "Donera via Paypal Giving Fund",
       "give_us_money": "Vi är en 501(c)(3) ideell organisation och är beroende av donationer för att fungera. Om du är villig och har möjlighet, vänligen överväg att ge ett ekonomiskt bidrag. Donationer inom USA är avdragsgilla.",
+      "give_zeffy": "Donera via Zeffy",
       "jeff_wanner_bio_html": "Sedan han plockade björnbär och blåbär med sin familj som barn och, mer nyligen, upptäckte rikedomen av offentliga fruktträd i hela Colorado, har Jeff utvecklat en djup uppskattning för överflödet av frukt som växer i våra städer. Hans första uppdrag för Falling Fruit var att genomsöka Boulder och Salt Lake City, med papperskartor i hand, för att registrera fruktbärande träd. När han inte arbetar med att förbättra byggnaders energieffektivitet, hjälper han vanligtvis till i samhället eller rör sig snabbt över berg till fots, på skidor eller cykel.",
-      "join_us_html": "Var med och fira hyperlokal mat! <a href=\"/\">Kartan</a> är öppen för alla att redigera, databasen kan <a href=\"/data\">laddas ner</a> med bara ett klick, och <a href=\"https://github.com/falling-fruit/\">koden</a> är öppen källkod. Du uppmuntras också att dela överflödet med dina medmänniskor. Vår <a href=\"/sharing\">delningssida</a> listar hundratals lokala organisationer - som planterar offentliga fruktträdgårdar och matskogar, plockar annars bortkastad frukt och grönsaker från stadsträd och jordbruksfält, och delar med grannar och behövande.",
-      "more_about_html": "Vår ätbara karta är inte den första i sitt slag, men den strävar efter att vara världens mest omfattande. Medan våra användare bidrar med egna platser, genomsöker vi internet efter befintlig kunskap och försöker förena insatserna från matletare, skogsbrukare och freeganare överallt. De <a href=\"/datasets\">importerade dataseten</a> sträcker sig från små lokala matletningskartor till omfattande professionellt sammanställda trädinventeringar. Detta uppgår hittills till {{types}} olika typer av ätbara växter (de flesta, men inte alla, växtarter) fördelade över {{locations}} platser. Bortom det odlade och vardagliga till de exotiska smakerna av utländska växter och länge bortglömda inhemska växter, är matletning i ditt område en resa genom tid och över kulturer.",
+      "join_us_html": "Var med och fira hyperlokal mat! <a href=\"/\">Kartan</a> är öppen för alla att redigera, databasen kan <a href=\"/about/data\">laddas ner</a> med bara ett klick, och <a href=\"https://github.com/falling-fruit/\">koden</a> är öppen källkod. Du uppmuntras också att dela överflödet med dina medmänniskor. Vår <a href=\"/about/sharing\">delningssida</a> listar hundratals lokala organisationer - som planterar offentliga fruktträdgårdar och matskogar, plockar annars bortkastad frukt och grönsaker från stadsträd och jordbruksfält, och delar med grannar och behövande.",
+      "more_about_html": "Vår ätbara karta är inte den första i sitt slag, men den strävar efter att vara världens mest omfattande. Medan våra användare bidrar med egna platser, genomsöker vi internet efter befintlig kunskap och försöker förena insatserna från matletare, skogsbrukare och freeganare överallt. De <a href=\"/about/data\">importerade dataseten</a> sträcker sig från små lokala matletningskartor till omfattande professionellt sammanställda trädinventeringar. Detta uppgår hittills till {{types}} olika typer av ätbara växter (de flesta, men inte alla, växtarter) fördelade över {{locations}} platser. Bortom det odlade och vardagliga till de exotiska smakerna av utländska växter och länge bortglömda inhemska växter, är matletning i ditt område en resa genom tid och över kulturer.",
       "staff": "Personal",
       "translate": "Översätt",
       "translate_for_us_html": "Intresserad av att volontärarbeta som översättare? Mejla oss så bjuder vi in dig att gå med oss på <a href=\"https://phrase.com\">Phrase</a>, där våra översättningar hanteras.",
@@ -265,7 +268,7 @@
       "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Importerade dataset",
       "imported_on": "Importerad den {{date}}",
-      "intro_html": "Falling Fruit strävar efter att vara den mest omfattande och öppna geografiska databasen över ätbara växter i stadsmiljö. Medan våra användare utforskar, redigerar och lägger till platser med hjälp av vår <a href=\"/\">karta</a>, genomsöker vi den kända världen efter befintliga dataset och importerar dem direkt till <a href=\"/data\">databasen</a>, och förenar därmed insatserna från matletare, skogsbrukare och freeganare överallt. Om du känner till ett dataset som vi har missat, vänligen <a href=\"mailto:info@fallingfruit.org\">meddela oss</a>! Du kan också hjälpa oss med importprocessen genom att formatera data med hjälp av vår <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importmall</a>. Observera att eftersom importer måste utföras manuellt kommer alla ändringar i originaldata som görs efter importen inte att återspeglas på Falling Fruit.",
+      "intro_html": "Falling Fruit strävar efter att vara den mest omfattande och öppna geografiska databasen över ätbara växter i stadsmiljö. Medan våra användare utforskar, redigerar och lägger till platser med hjälp av vår <a href=\"/\">karta</a>, genomsöker vi den kända världen efter befintliga dataset och importerar dem direkt till databasen, och förenar därmed insatserna från matletare, skogsbrukare och freeganare överallt. Om du känner till ett dataset som vi har missat, vänligen <a href=\"mailto:info@fallingfruit.org\">meddela oss</a>! Du kan också hjälpa oss med importprocessen genom att formatera data med hjälp av vår <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importmall</a>. Observera att eftersom importer måste utföras manuellt kommer alla ändringar i originaldata som görs efter importen inte att återspeglas på Falling Fruit.",
       "link": "Länk",
       "table_info": "Varje dataset listas med namn, antal platser och importdatum. Genom att expandera varje rad visas ytterligare detaljer om data, importprocessen och licensen som styr hur data får användas.",
       "type": "Typ",
@@ -338,6 +341,12 @@
         "state": "Delstat"
       },
       "intro_html": "Nedan listas organisationer som odlar mat på offentliga platser (matskog, offentliga fruktträdgårdar), plockar mat (urban skördning, efterplockning på gårdar) eller distribuerar mat (utbyten, donationer). Organisationerna är listade efter land, delstat (om tillämpligt) och stad. De med överstrukna namn antas vara inaktiva. Om du känner till andra som borde vara med på denna lista, <a href=\"mailto:info@fallingfruit.org\">kontakta oss</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit är en gemenskapsdriven plattform för att dela platser med ätbara växter och andra källor till gratis mat.",
+      "discover_and_contribute": "Du kan upptäcka vad andra har skördat i ditt område och bidra med dina egna observationer.",
+      "explore_the_map": "Utforska kartan",
+      "welcome_visitors_to_the_site_short": "Välkommen!"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "Du recenserade denna plats den {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Fullständig webbplats",
     "title": "Dela denna vy",
     "url_copied": "URL kopierad till urklipp!",
     "url_copy_failed": "Misslyckades att kopiera URL till urklipp"

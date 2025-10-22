@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Bestätige deine Email-Adresse",
       "confirmed": "Dein Konto wurde erfolgreich eröffnet. Du bist jetzt angemeldet.",
       "no_token": "Du kannst diese Seite nicht ohne einen Bestätigungslink aus einer Email aufrufen. Falls du von einer Email kommst, stelle bitte sicher, dass du die vollständige URL verwendest.",
       "send_instructions": "In wenigen Minuten erhältst du per Mail eine Anleitung, wie du die Eröffnung deines Kontos aktivieren kannst."
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "Abrufen der Standortänderungen fehlgeschlagen: {{message}}",
       "fetch_location_failed": "Fehler beim Abrufen des Standorts {{id}}: {{message}}",
       "fetch_review_failed": "Fehler beim Abrufen der Bewertung {{id}}: {{message}}",
+      "fetch_user_failed": "Fehler beim Abrufen des Benutzers {{id}}: {{message}}",
       "location_edit_failed": "Bearbeitung des Standorts fehlgeschlagen: {{message}}",
       "location_submission_failed": "Übermittlung des Standorts fehlgeschlagen: {{message}}",
       "photo_upload_failed": "Foto-Upload fehlgeschlagen: {{message}}",
@@ -98,7 +100,7 @@
     "review": {
       "other": "Bewertungen"
     },
-    "sign_up": "Anmelden",
+    "sign_up": "Registrieren",
     "tree_inventory": {
       "one": "Bauminventar"
     },
@@ -187,6 +189,7 @@
     "add_review": "Bewertung hinzufügen",
     "edit_location": "Standort bearbeiten",
     "edit_review": "Bewertung bearbeiten",
+    "filters": "Filter",
     "list": "Liste",
     "settings": "Einstellungen",
     "zoom_in_to_add_location": "Zoome hinein, um einen Standort hinzuzufügen"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily ist eine eingefleischte Verfechterin der Agroforstwirtschaft, unverbesserliche Sammlerin und stolze Mutter von zwei Katzen, vier Wachteln und dem prächtigsten Hund der Welt. Ihre Wurzeln reichen tief in die Rocky Mountains, aber heutzutage ist ihre oberirdische Biomasse stolz darauf, New Haven, Connecticut ihr Zuhause zu nennen. Man findet sie oft bei der Pflege öffentlicher Lebensmittelwälder, beim entrückten Lesen in einer gemütlichen Bibliotheksecke oder beim poetischen Schwärmen über die Magie des Myzels (und, angeblich, beim Abschluss eines gemeinsamen Studiums an der Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> und der <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily leidet unter einer verheerenden Reisesucht und könnte im Moment so ziemlich überall sein.",
       "ethan_welty_bio_html": "Mit Technologie und Daten setzt sich Ethan für Städte als Quellen für frische und kostenlose Lebensmittel ein. Zusammen mit Caleb Phillips gründete er 2013 Falling Fruit, um die urbane Nahrungssuche weltweit zu fördern. 2014 war er Mitbegründer von <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a>, um überschüssiges Obst zu ernten und zu verteilen, das in seiner Umgebung in Boulder, Colorado, wächst. Neben dem Obst jongliert er mit einer <a href=\"https://www.weltyphotography.com\">Karriere als Fotograf</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">Forschung über Gletscher</a> und einer Vorliebe für Berg- und Flusslandschaften.",
       "ff_disclaimer_html": "Falling Fruit hat nichts mit Fallen Fruit zu tun. Fallen Fruit finden sie unter <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
-      "give_paypal": "Spende via Paypal Giving Fund",
       "give_us_money": "Wir sind eine komplett auf frewilliger Basis betriebene, gemeinnützige Organisation und sind auf Spenden angewiesen, um diese Seite aufrecht zu halten. Falls du die Möglichkeit hast, einen finanziellen Beitrag zu leisten, sind wir dir herzlich dankbar!",
+      "give_zeffy": "Über Zeffy spenden",
       "jeff_wanner_bio_html": "Auf der Suche nach Heidelbeeren, Himbeeren und Brombeeren durfte Jeff schon als Kind stundenlang durch die Wälder streuen. Seit geraumer Zeit hat er sich nun den urbaneren Standorten zugewandt und für Falling Fruit, auf der Suche nach Obstbäumen und Beerensträuchern, tagelang die Strassen von Boulder und Salt Lake City  abgeklappert. Am Schreibtisch widmet er sich der Verbesserung der Energieeffizienz von Gebäuden, nebenher investiert er gerne viel Zeit in gemmeinnützige Öffentlichkeitsarbeit oder überquert zu Fuss, zu Rad oder zu Ski die Berge in seiner Umgebung.",
-      "join_us_html": "Wir setzen auf lokal und essbar - mach mit! Die <a href=\"/\">Karte</a> kann von jederman und jederfrau bearbeitet werden, die <a href=\"/data\">Datenbank</a> kannst du mit nur einem Klick herunterladen und <a href=\"https://github.com/falling-fruit/falling-fruit\">unser Code</a> ist Open-Source. Wir wollen dich auch dazu ermutigen, deine Ernte mit Anderen zu teilen. Unsere <a href=\"/sharing\">Ernte teilen</a>-Seite listet hunderte von lokalen Organisationen, die sich eine Bessere Verteilung von Lebensmitteln zum Ziel gesetzt haben: Weltweit werden Gemeinschaftsgärten aufgebaut, Lebensmittel eingesammelt, die sonst weggeworfen würden, Früchte in privaten Gärten geerntet, wo die Besitzer keine Lust dazu haben. Teile mit deinen Nachbarn und Bedürftigen!",
-      "more_about_html": "Unsere Karte der urbanen Ernte ist nicht die Erste ihrer Art, aber wir haben uns zum Ziel gesetzt, die weltweit umfassenste Datenbank zu bieten. Während unsere Nutzer täglich eigene Standorte hinzufügen, durchsuchen wir das Internet nach bereits bestehenden Datenquellen. Nur so können wir das Wissen Aller vereinen! Die <a href=\"/datasets\">importierten Datensätze</a> reichen von kleinen Quartier-Datensätzen bis zu riesigen Zusammenstellungen von Bauminventaren ganzer Städte. Bis heute sind so {{types}} verschiedene essbare Arten (die meisten - aber nicht alle - pflanzlich) an über {{locations}} Standorten zusammengekommen. Vom Kultivierten und Alltäglichen, zu exotisch Fremdem oder längst vergessenem Einheimischen - die Suche nach Nahrungsmitteln in unseren urbanen Lebensräumen ist nicht selten auch einfach eine ganz spannende Reise durch verschiedene Kulturen und Zeiten.",
+      "join_us_html": "Wir setzen auf lokal und essbar - mach mit! Die <a href=\"/\">Karte</a> kann von jederman und jederfrau bearbeitet werden, die <a href=\"/about/data\">Datenbank</a> kannst du mit nur einem Klick herunterladen und <a href=\"https://github.com/falling-fruit/falling-fruit\">unser Code</a> ist Open-Source. Wir wollen dich auch dazu ermutigen, deine Ernte mit Anderen zu teilen. Unsere <a href=\"/about/sharing\">Ernte teilen</a>-Seite listet hunderte von lokalen Organisationen, die sich eine Bessere Verteilung von Lebensmitteln zum Ziel gesetzt haben: Weltweit werden Gemeinschaftsgärten aufgebaut, Lebensmittel eingesammelt, die sonst weggeworfen würden, Früchte in privaten Gärten geerntet, wo die Besitzer keine Lust dazu haben. Teile mit deinen Nachbarn und Bedürftigen!",
+      "more_about_html": "Unsere Karte der urbanen Ernte ist nicht die Erste ihrer Art, aber wir haben uns zum Ziel gesetzt, die weltweit umfassenste Datenbank zu bieten. Während unsere Nutzer täglich eigene Standorte hinzufügen, durchsuchen wir das Internet nach bereits bestehenden Datenquellen. Nur so können wir das Wissen Aller vereinen! Die <a href=\"/about/data\">importierten Datensätze</a> reichen von kleinen Quartier-Datensätzen bis zu riesigen Zusammenstellungen von Bauminventaren ganzer Städte. Bis heute sind so {{types}} verschiedene essbare Arten (die meisten - aber nicht alle - pflanzlich) an über {{locations}} Standorten zusammengekommen. Vom Kultivierten und Alltäglichen, zu exotisch Fremdem oder längst vergessenem Einheimischen - die Suche nach Nahrungsmitteln in unseren urbanen Lebensräumen ist nicht selten auch einfach eine ganz spannende Reise durch verschiedene Kulturen und Zeiten.",
       "staff": "Mitarbeiter",
       "translate": "Übersetzen",
       "translate_for_us_html": "Günstiger als Übersetzer in freiwilliges Engagement? Maile uns und wir laden dich zu uns auf <a href=\"https://phrase.com\">Phrase</a>, wo unsere Übersetzungen verwaltet werden.",
@@ -338,6 +341,12 @@
         "state": "Bundesland"
       },
       "intro_html": "Im Folgenden sind lokale Organisationen aufgeführt, die Lebensmittel anpflanzen (z.B. in Gemeinschaftsgärten), ernten (z.B. 'urban gardening'), oder auf andere Art und Weise verteilen und teilen. Organisationen werden nach Land, Bundesland/Kanton und Stadt aufgeführt. Organisationen mit durchgestrichenem Namen sind zur Zeit vermutlich inaktiv. Wenn du Organisationen kennst, die auf dieser Liste auftauchen müssten, dann <a href=\"mailto:info@fallingfruit.org\">sag uns Bescheid</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit ist eine gemeinschaftlich betriebene Plattform zum Teilen von Standorten essbarer Pflanzen und anderer Quellen kostenloser Nahrung.",
+      "discover_and_contribute": "Du kannst entdecken, was andere in deiner Nachbarschaft geerntet haben, und deine eigenen Beobachtungen beitragen.",
+      "explore_the_map": "Erkunde die Karte",
+      "welcome_visitors_to_the_site_short": "Willkommen!"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Vollständige Website",
     "title": "Diese Ansicht teilen",
     "url_copied": "URL in die Zwischenablage kopiert!",
     "url_copy_failed": "URL konnte nicht in die Zwischenablage kopiert werden"

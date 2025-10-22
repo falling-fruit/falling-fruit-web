@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Bevestig je e-mailadres",
       "confirmed": "Je e-mailadres is succesvol bevestigd.",
       "no_token": "Je kunt deze pagina niet openen als je deze niet hebt geopend vanuit een bevestigingse-mail. Als je hem niet vanuit daar heeft geopend, zorg er dan voor dat je de volledige opgegeven URL gebruikt.",
       "send_instructions": "Je ontvangt binnen een paar minuten een e-mail met instructies om je e-mailadres te bevestigen."
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
       "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
+      "fetch_user_failed": "Fout bij ophalen gebruiker {{id}}: {{message}}",
       "location_edit_failed": "Bewerken van locatie mislukt: {{message}}",
       "location_submission_failed": "Indienen van locatie mislukt: {{message}}",
       "photo_upload_failed": "Uploaden van foto mislukt: {{message}}",
@@ -187,6 +189,7 @@
     "add_review": "Recensie toevoegen",
     "edit_location": "Locatie bewerken",
     "edit_review": "Recensie bewerken",
+    "filters": "Filters",
     "list": "Lijst",
     "settings": "Instellingen",
     "zoom_in_to_add_location": "Zoom in om locatie toe te voegen"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily is een diehard agroforestry evangelist, onverbeterlijke vraatzuchtige en trotse moeder van twee katten, vier kwartels en 's werelds mooiste hoektanden. Haar wortels strekken zich uit tot diep in de Rocky Mountains, maar tegenwoordig is haar bovengrondse biomassa trots om New Haven, Connecticut haar thuis te noemen. Ze is vaak te vinden in de openbare voedselbossen, leest verrukt in een of andere gezellige bibliotheekhoek of is poëtisch over de magie van het mycelium (en, zogezegd, voltooit ze gezamenlijke diploma's aan de Yale <a href=\"https://environment.yale.edu/\">School voor Bosbouw</a> en <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School voor Globale Zaken</a>). Emily herbergt een verwoestende reisverslaving, en kan nu zowat overal zijn.",
       "ethan_welty_bio_html": "Met technologie en data, Ethan kampioensteden als bron van vers en gratis voedsel. Hij creëerde Falling Fruit met Caleb Phillips in 2013 om het stedelijk foerageren wereldwijd te promoten, en was mede-oprichter van <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> in 2014 om het overtollige fruit dat om hem heen groeit in Boulder, Colorado, te oogsten en te distribueren. Naast fruit jongleert hij met een <a href=\"https://www.weltyphotography.com\">fotografiecarrière</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">onderzoek naar gletsjers</a>, en een honger naar bergachtige en rivierachtige bezigheden.",
       "ff_disclaimer_html": "Falling Fruit is niet geassocieerd met Fallen Fruit. Fallen Fruit is te vinden op <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
-      "give_paypal": "Doneren met PayPal Giving Fund",
       "give_us_money": "We zijn een organisatie zonder winstoogmerk (501(c)(3)), gerund door vrijwilligers en we zijn afhankelijk van donaties om ons werk voort te kunnen zetten. Als u bereidt en in staat bent, overweeg dan een donatie. Donaties binnen de Verenigde Staten zijn belastingaftrekbaar.",
+      "give_zeffy": "Doneer via Zeffy",
       "jeff_wanner_bio_html": "Sinds dat hij als kind met zijn familie zwarte en bosbessen verzamelde en recentelijk de rijkdom aan openbare fruitbomen in Colorado opmerkte, heeft Jeff een diepe passie voor het in verschillende steden groeiende fruit. Zijn eerste missie voor Falling Fruit was om Boulder en Salt Lake City uit te kammen met papieren kaarten in zijn hand, ondertussen alle fruitbomen noterend. Als hij niet werkt om de energie-efficiëntie van gebouwen te verbeteren, dan is hij meestal de gemeenschap aan het helpen of aan het snelwandelen in de bergen, skiën of fietsen.",
-      "join_us_html": "Doe met ons mee en vier het lokale voedsel! De <a href=\"/\">kaart</a> is openbaar te bewerken door iedereen, de database kan met slechts één klik worden <a href=\"/data\">gedownload</a> en <a href=\"https://github.com/falling-fruit/falling-fruit\">de broncode</a> is open source. U wordt aangemoedigd om het verzamelde voedsel te delen met uw medemens. Onze <a href=\"/sharing\">deelpagina</a> bevat een lijst van honderden lokale organisaties die helpen bij het aanplanten van openbare boomgaarden en voedselbossen, het plukken van groente en fruit uit stadsbomen en boerenvelden dat anders weggegooid zou worden en ze delen het met buren en hulpbehoevenden.",
-      "more_about_html": "Onze eetbare kaart is niet de eerste in zijn soort, maar heeft wél als doel om 's werelds meest uitgebreide te worden. Terwijl onze gebruikers locaties bijdragen, kammen wij het internet uit op zoek naar reeds bestaande kennis, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. De <a href=\"/datasets\">geïmporteerde gegevenssets</a> variëren van kleine buurtkaarten voor voedselverzamelaars tot professionele boominventarissen. Tot dusver heeft dit al geleid tot {{types}} eetbare soorten (de meeste, maar niet alle, zijn plantensoorten), verspreid over {{locations}} locaties. Naast de rijk groeiende locaties met exotische, buitenlandse en vergeten inheemse planten, is voedsel verzamelen in uw buurt een reis door de tijd en cultuur.",
+      "join_us_html": "Doe met ons mee en vier het lokale voedsel! De <a href=\"/\">kaart</a> is openbaar te bewerken door iedereen, de database kan met slechts één klik worden <a href=\"/about/data\">gedownload</a> en <a href=\"https://github.com/falling-fruit/falling-fruit\">de broncode</a> is open source. U wordt aangemoedigd om het verzamelde voedsel te delen met uw medemens. Onze <a href=\"/about/sharing\">deelpagina</a> bevat een lijst van honderden lokale organisaties die helpen bij het aanplanten van openbare boomgaarden en voedselbossen, het plukken van groente en fruit uit stadsbomen en boerenvelden dat anders weggegooid zou worden en ze delen het met buren en hulpbehoevenden.",
+      "more_about_html": "Onze eetbare kaart is niet de eerste in zijn soort, maar heeft wél als doel om 's werelds meest uitgebreide te worden. Terwijl onze gebruikers locaties bijdragen, kammen wij het internet uit op zoek naar reeds bestaande kennis, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. De <a href=\"/about/data\">geïmporteerde gegevenssets</a> variëren van kleine buurtkaarten voor voedselverzamelaars tot professionele boominventarissen. Tot dusver heeft dit al geleid tot {{types}} eetbare soorten (de meeste, maar niet alle, zijn plantensoorten), verspreid over {{locations}} locaties. Naast de rijk groeiende locaties met exotische, buitenlandse en vergeten inheemse planten, is voedsel verzamelen in uw buurt een reis door de tijd en cultuur.",
       "staff": "Personeel",
       "translate": "Vertalen",
       "translate_for_us_html": "Bent u geïnteresseerd in het vrijwillig vertalen van Falling Fruit? Stuur ons dan een e-mail en wij nodigen u uit om ons te helpen op <a href=\"https://phrase.com\">Phrase</a> waar onze vertalingen worden beheerd.",
@@ -265,7 +268,7 @@
       "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Geïmporteerde datasets",
       "imported_on": "Geïmporteerd op {{date}}",
-      "intro_html": "Falling Fruit heeft als doel om 's werelds meest uitgebreide en open aardrijkskunde gegevensset van stadsvoedsel te worden. Terwijl onze gebruikers verkennen, bewerken en locaties bijdragen via onze <a href=\"/\">kaart</a>, kammen wij het universum uit op zoek naar reeds bestaande kennis en importeren deze direct in onze <a href=\"/data\">database</a>, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. Als u ziet dat er een gegevensset ontbreekt, <a href=\"mailto:info@fallingfruit.org\">laat het ons dan weten</a>! U kunt ons helpen bij het importteringsproces door de gegevens op te maken m.b.v. het <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importsjabloon</a>. Let op: importteringen moeten handmatig worden uitgevoerd; alle wijzigingen aan de originele gevens na de importtering worden niet weergegeven op Falling Fruit.",
+      "intro_html": "Falling Fruit heeft als doel om 's werelds meest uitgebreide en open aardrijkskunde gegevensset van stadsvoedsel te worden. Terwijl onze gebruikers verkennen, bewerken en locaties bijdragen via onze <a href=\"/\">kaart</a>, kammen wij het universum uit op zoek naar reeds bestaande kennis en importeren deze direct in onze database, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. Als u ziet dat er een gegevensset ontbreekt, <a href=\"mailto:info@fallingfruit.org\">laat het ons dan weten</a>! U kunt ons helpen bij het importteringsproces door de gegevens op te maken m.b.v. het <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">importsjabloon</a>. Let op: importteringen moeten handmatig worden uitgevoerd; alle wijzigingen aan de originele gevens na de importtering worden niet weergegeven op Falling Fruit.",
       "link": "Link",
       "table_info": "Elke gegevensset wordt opgesomd op naam, aantal locaties en importeringsdatum. Het uitklappen van elke rij weergeeft meer informatie over de gegevens, het importteringsproces en de licentie waarin staat hoe u de gegevens mag gebruiken.",
       "type": "Soort",
@@ -338,6 +341,12 @@
         "state": "Staat"
       },
       "intro_html": "Hieronder is een lijst te vinden met organisaties die voedsel produceren in openbare ruimten (voedselbossen, openbare boomgaarden), voedsel plukken (stadsvoedselverzameling, boerderijvoedselverzameling) of voedsel verspreiden (uitwisselingen, donaties). Organisaties worden gesorteerd op land, staat (indien van toepassing) en stad. Organisaties met doorgehaalde naam zijn waarschijnlijk inactief. Als u organisaties kent die op deze lijst thuishoren, neem dan <a href=\"mailto:info@fallingfruit.org\">contact met ons</a> op!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit is een door de gemeenschap gedreven platform voor het delen van locaties van eetbare planten en andere bronnen van gratis voedsel.",
+      "discover_and_contribute": "U kunt ontdekken wat anderen in uw buurt hebben geoogst en uw eigen waarnemingen bijdragen.",
+      "explore_the_map": "Verken de kaart",
+      "welcome_visitors_to_the_site_short": "Welkom!"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Volledige website",
     "title": "Deel deze weergave",
     "url_copied": "URL gekopieerd naar klembord!",
     "url_copy_failed": "URL kopiëren naar klembord mislukt"

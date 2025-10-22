@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "確認您的電子郵件地址",
       "confirmed": "您的電子郵件地址已成功確認。",
       "no_token": "如果沒有確認電子郵件，您將無法訪問此頁面。如果您確實來自確認電子郵件，請確保您使用了提供的完整 URL。",
       "send_instructions": "您將在幾分鐘內收到一封電子郵件，其中包含有關如何確認您的電子郵件地址的說明。"
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "獲取位置變更失敗：{{message}}",
       "fetch_location_failed": "獲取位置 {{id}} 失敗：{{message}}",
       "fetch_review_failed": "獲取評論 {{id}} 失敗：{{message}}",
+      "fetch_user_failed": "獲取用戶{{id}}失敗：{{message}}",
       "location_edit_failed": "編輯位置失敗：{{message}}",
       "location_submission_failed": "提交位置失敗：{{message}}",
       "photo_upload_failed": "照片上傳失敗：{{message}}",
@@ -187,6 +189,7 @@
     "add_review": "添加評論",
     "edit_location": "編輯位置",
     "edit_review": "編輯評論",
+    "filters": "篩選",
     "list": "列表",
     "settings": "設置",
     "zoom_in_to_add_location": "放大以添加位置"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "艾米麗是一位頑固的農林業佈道者，不可救藥的覓食者，是兩隻貓、四隻鵪鶉和世界上最壯觀的犬科動物的驕傲母親。她的根深入落基山脈，但如今，她的地上生物量自豪地將康涅狄格州的紐黑文稱爲她的家。她經常被發現照料公共食物林，在某個舒適的圖書館角落沉迷於閱讀，或者對菌絲體的魔力充滿詩意（並且，據說，在耶魯<a href=\"https://environment.yale.edu/\">大學林業</a><a href=\"https://jackson.yale.edu/person/emily-sigman/\">學院和全球事務</a>學院完成聯合研究生學位）。艾米麗對旅行有着毀滅性的嗜好，現在幾乎可以在任何地方。",
       "ethan_welty_bio_html": "憑藉技術和數據，Ethan 支持將城市作爲新鮮和免費食物的來源。他於 2013 年與 Caleb Phillips 創建了 Falling Fruit，以促進全球城市覓食，並<a href=\"https://fruitrescue.org\">於 2014 年共同創立了 Community Fruit Rescue</a> ，以收穫和分發他在科羅拉多州博爾德周圍生長的剩餘水果。除了水果，他還要兼顧<a href=\"https://www.weltyphotography.com\">攝影事業</a>、<a href=\"https://instaar.colorado.edu/people/ethan-welty/\">冰川研究</a>以及對山區和河流的追求。",
       "ff_disclaimer_html": "落果與落果無關。 Fallen Fruit 可以在<a href=\"http://fallenfruit.org\">fallfruit.org</a>上找到。",
-      "give_paypal": "通過貝寶捐贈基金捐贈",
       "give_us_money": "我們是一家 501(c)(3) 非營利組織，依靠捐款運營。如果您願意並且有能力，請考慮做出經濟貢獻。在美國境內的捐款可以免稅。",
+      "give_zeffy": "通過 Zeffy 捐贈",
       "jeff_wanner_bio_html": "自從小時候與家人一起收穫黑莓和藍莓，以及最近注意到科羅拉多州各地公共果樹的財富以來，傑夫對我們城市種植的豐富水果產生了深刻的認識。他在《落果》中的第一個任務是梳理博爾德和鹽湖城，手裏拿着紙質地圖，記錄果樹。當不致力於提高建築能源效率時，他通常會在社區中幫忙或步行、滑雪或騎自行車快速翻山越嶺。",
-      "join_us_html": "與我們一起慶祝超級本地美食！<a href=\"/\">地圖</a>開放給任何人編輯，數據庫一鍵<a href=\"/data\">下載</a><a href=\"https://github.com/falling-fruit/\">，代碼</a>開源。您也被鼓勵與您的人類同胞分享賞金。我們的<a href=\"/sharing\">分享頁面</a>列出了數百個當地組織 - 種植公共果園和食用林，從城市樹木和農民的田地中採摘原本浪費的水果和蔬菜，並與鄰居和有需要的人分享。",
-      "more_about_html": "我們的可食用地圖並非同類地圖中的首創，但它渴望成爲世界上最全面的地圖。當我們的用戶貢獻他們自己的位置時，我們會在互聯網上梳理已有的知識，力求將各地的覓食者、林務員和自由主義者的努力聯合起來。<a href=\"/datasets\">導入的數據集</a>範圍從小型社區覓食地圖到大量專業編制的樹木清單。到目前爲止，這相當於{{locations}}位置的{{types}}種不同類型的食物（大多數，但不是全部，植物物種）。除了外來植物和被遺忘已久的本地植物的異國風味的栽培和常見之外，在您的社區覓食是一次穿越時間和跨文化的旅程。",
+      "join_us_html": "與我們一起慶祝超級本地美食！<a href=\"/\">地圖</a>開放給任何人編輯，數據庫一鍵<a href=\"/about/data\">下載</a><a href=\"https://github.com/falling-fruit/\">，代碼</a>開源。您也被鼓勵與您的人類同胞分享賞金。我們的<a href=\"/about/sharing\">分享頁面</a>列出了數百個當地組織 - 種植公共果園和食用林，從城市樹木和農民的田地中採摘原本浪費的水果和蔬菜，並與鄰居和有需要的人分享。",
+      "more_about_html": "我們的可食用地圖並非同類地圖中的首創，但它渴望成爲世界上最全面的地圖。當我們的用戶貢獻他們自己的位置時，我們會在互聯網上梳理已有的知識，力求將各地的覓食者、林務員和自由主義者的努力聯合起來。<a href=\"/about/data\">導入的數據集</a>範圍從小型社區覓食地圖到大量專業編制的樹木清單。到目前爲止，這相當於{{locations}}位置的{{types}}種不同類型的食物（大多數，但不是全部，植物物種）。除了外來植物和被遺忘已久的本地植物的異國風味的栽培和常見之外，在您的社區覓食是一次穿越時間和跨文化的旅程。",
       "staff": "職員",
       "translate": "翻譯",
       "translate_for_us_html": "有興趣志願擔任翻譯嗎？給我們發電子郵件，我們會邀請您加入我們的<a href=\"https://phrase.com\">Phrase</a> ，我們的翻譯在那裏管理。",
@@ -265,7 +268,7 @@
       "import_id_and_name": "導入 #{{id}}: {{name}}",
       "imported_datasets": "已導入的數據集",
       "imported_on": "導入於 {{date}}",
-      "intro_html": "Falling Fruit 立志成爲最全面、最開放的城市食品地理數據集。當我們的用戶使用我們的<a href=\"/\">地圖</a>探索、編輯和添加位置時，我們將已知的宇宙梳理爲預先存在的數據集並將它們直接導入<a href=\"/data\">數據庫</a>，聯合各地的覓食者、林務員和自由主義者的努力。如果您知道我們遺漏的數據集，請<a href=\"mailto:info@fallingfruit.org\">告訴我們</a>！您還可以通過使用<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">導入模板</a>格式化數據來幫助我們完成導入過程。請注意，由於必須手動執行導入，因此導入後對原始數據所做的所有更改都不會反映在 Falling Fruit 上。",
+      "intro_html": "Falling Fruit 立志成爲最全面、最開放的城市食品地理數據集。當我們的用戶使用我們的<a href=\"/\">地圖</a>探索、編輯和添加位置時，我們將已知的宇宙梳理爲預先存在的數據集並將它們直接導入數據庫，聯合各地的覓食者、林務員和自由主義者的努力。如果您知道我們遺漏的數據集，請<a href=\"mailto:info@fallingfruit.org\">告訴我們</a>！您還可以通過使用<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">導入模板</a>格式化數據來幫助我們完成導入過程。請注意，由於必須手動執行導入，因此導入後對原始數據所做的所有更改都不會反映在 Falling Fruit 上。",
       "link": "鏈接",
       "table_info": "每個數據集都按名稱、位置數量和導入日期列出。展開每一行會顯示有關數據、導入過程和管理數據使用方式的許可證的更多詳細信息。",
       "type": "類型",
@@ -338,6 +341,12 @@
         "state": "州/省"
       },
       "intro_html": "下面列出的是在公共場所種植食物（食物林、公共果園）、採摘食物（城市覓食、農場拾荒）或分發食物（交換、捐贈）的組織。組織按國家/地區、州（如果適用）和城市列出。那些名字被劃掉的人被認爲是不活躍的。如果您知道應該在此列表中的其他人，請<a href=\"mailto:info@fallingfruit.org\">與我們聯繫</a>！"
+    },
+    "welcome": {
+      "community_driven_platform": "掉落果實是一個社區驅動的平台，用於分享可食用植物和其他免費食物的位置。",
+      "discover_and_contribute": "您可以發現其他人在您社區收穫的成果，並貢獻您的觀察。",
+      "explore_the_map": "探索地圖",
+      "welcome_visitors_to_the_site_short": "歡迎！"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "您於 {{date}} 評論了此地點"
   },
   "share": {
+    "leave_embed_view_for_full_site": "完整網站",
     "title": "分享此視圖",
     "url_copied": "網址已複製到剪貼板！",
     "url_copy_failed": "網址複製到剪貼板失敗"

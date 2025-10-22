@@ -82,3 +82,20 @@ export const AddLocationDesktop = () => {
     </AddLocationDesktopButton>
   )
 }
+
+export const AddLocationEmbed = (props) => {
+  const { t } = useTranslation()
+  const { handleAddLocation, isZoomSufficient } =
+    useAddLocation('/locations/init')
+
+  return (
+    <AddLocationDesktopButton
+      secondary
+      greyedOut={!isZoomSufficient}
+      onClick={handleAddLocation}
+      {...props}
+    >
+      {t('menu.add_new_location')}
+    </AddLocationDesktopButton>
+  )
+}

@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Confirme ton adresse e-mail",
       "confirmed": "Votre compte a été validé. Vous êtes maintenant connecté.",
       "no_token": "Tu ne peux pas accéder à cette page sans passer par un e-mail de validation. Si tu viens en effet d'un tel email, assure-toi d'utiliser l'URL complète.",
       "send_instructions": "Tu vas recevoir les instructions nécessaires à la validation de ton compte dans quelques minutes."
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
+      "fetch_user_failed": "Erreur lors de la récupération de l'utilisateur {{id}} : {{message}}",
       "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
       "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
       "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
@@ -187,6 +189,7 @@
     "add_review": "Ajouter un avis",
     "edit_location": "Éditer un site",
     "edit_review": "Éditer un avis",
+    "filters": "Filtres",
     "list": "Liste",
     "settings": "Paramètres",
     "zoom_in_to_add_location": "Zoomer pour ajouter un site"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily est une ardente évangéliste de l'agroforesterie, une incorrigible butineuse et une fière mère de deux chats, quatre cailles et le plus magnifique des chiens du monde. Ses racines s'étendent profondément dans les montagnes Rocheuses, mais de nos jours, sa biomasse aérienne est fière d'appeler New Haven, Connecticut, sa maison. On peut souvent la trouver en train de s'occuper de forêts alimentaires publiques, de lire avec ravissement dans un coin de bibliothèque confortable, ou de faire de la poésie sur la magie du mycélium (et, soi-disant, de faire des études supérieures communes à la Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> et <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily souffre d'une terrible dépendance aux voyages et pourrait être n'importe où en ce moment.",
       "ethan_welty_bio_html": "Grâce à la technologie et aux données, Ethan défend les villes comme sources de nourriture fraîche et gratuite. Il a créé Falling Fruit avec Caleb Phillips en 2013 pour promouvoir la recherche de nourriture en milieu urbain dans le monde entier, et a cofondé <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> en 2014 pour récolter et distribuer les fruits excédentaires qui poussent autour de lui à Boulder, au Colorado. Au-delà des fruits, il jongle avec une <a href=\"https://www.weltyphotography.com\">carrière de photographe</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">recherche sur les glaciers</a>, et un appétit pour les activités en montagne et sur les rivières.",
       "ff_disclaimer_html": "Falling Fruit n'est pas lié à Fallen Fruit. Fallen Fruit peut être consulté à <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
-      "give_paypal": "Faire un don avec Paypal Giving Fund",
       "give_us_money": "Nous sommes un organisme caritatif à but non lucratif 501(c)(3) basé à Boulder (Colorado, États-Unis). Les dons réalisés depuis les États-Unis sont donc déductibles des impôts.",
+      "give_zeffy": "Faire un don via Zeffy",
       "jeff_wanner_bio_html": "C'est avec les premières récoltes de mûres et de myrtilles lorsqu'il était enfant et, plus récemment, après avoir remarqué la richesse des arbres fruitiers du Colorado, que Jeff a commencé à apprécier l'abondance des fruits qui poussent dans nos villes. Sa première mission pour Falling Fruit fut de passer Boulder et Salt Lake City au peigne fin, cartes en main, pour en noter tous les arbres fruitiers. \nLorsqu'il ne travaille pas à l'amélioration de l'efficacité énergétique d'un bâtiment, on peut le voir apporter son aide à la communauté, ou parcourir les montagnes à pieds, en ski, ou à vélo.",
-      "join_us_html": "Fan de nourriture hyperlocale ? Rejoignez-nous ! La <a href=\"/\">carte</a> est éditable par tout le monde, la base de données est <a href=\"/data\">téléchargeable</a> en un clic, et <a href=\"https://github.com/falling-fruit/\">le code</a> est en open source. Nous vous encourageons à faire de même en partageant votre récolte avec d'autres. Notre <a href=\"/sharing\">page de partages</a> liste des centaines d'associations locales qui plantent des vergers publics, des jardins-forêts, cueillent dans les arbres des villes et dans les champs de fermiers des fruit et légumes avant qu'ils ne soient jetés, pour les partager avec le voisinage ou les gens dans le besoin. ",
-      "more_about_html": "Notre carte des comestibles n'est pas la première, mais elle se veut la plus complète. Pendant que nos utilisateurs ajoutent leurs propres sites de glanage, nous passons Internet au peigne fin pour en trouver d'autres, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Les <a href=\"/datasets\">données importées</a> comprennent aussi bien des petites cartes de glanage de quartier que des inventaires professionnels d'arbres. À l'heure actuelle, notre application recense jusqu'à  {{types}} d'aliments comestibles différents (principalement des espèces végétales) réparties sur  {{locations}} sites. Les plantes les plus communes côtoient les plantes étrangères ou endémiques depuis longtemps oubliées. Le glanage, c'est un voyage dans le temps, une découverte de nouvelles cultures aux saveurs exotiques.",
+      "join_us_html": "Fan de nourriture hyperlocale ? Rejoignez-nous ! La <a href=\"/\">carte</a> est éditable par tout le monde, la base de données est <a href=\"/about/data\">téléchargeable</a> en un clic, et <a href=\"https://github.com/falling-fruit/\">le code</a> est en open source. Nous vous encourageons à faire de même en partageant votre récolte avec d'autres. Notre <a href=\"/about/sharing\">page de partages</a> liste des centaines d'associations locales qui plantent des vergers publics, des jardins-forêts, cueillent dans les arbres des villes et dans les champs de fermiers des fruit et légumes avant qu'ils ne soient jetés, pour les partager avec le voisinage ou les gens dans le besoin. ",
+      "more_about_html": "Notre carte des comestibles n'est pas la première, mais elle se veut la plus complète. Pendant que nos utilisateurs ajoutent leurs propres sites de glanage, nous passons Internet au peigne fin pour en trouver d'autres, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Les <a href=\"/about/data\">données importées</a> comprennent aussi bien des petites cartes de glanage de quartier que des inventaires professionnels d'arbres. À l'heure actuelle, notre application recense jusqu'à  {{types}} d'aliments comestibles différents (principalement des espèces végétales) réparties sur  {{locations}} sites. Les plantes les plus communes côtoient les plantes étrangères ou endémiques depuis longtemps oubliées. Le glanage, c'est un voyage dans le temps, une découverte de nouvelles cultures aux saveurs exotiques.",
       "staff": "Personnel",
       "translate": "Traduire",
       "translate_for_us_html": "Traduire bénévolement vous intéresse ? Envoyez-nous un e-mail et nous vous inviterons à nous rejoindre sur <a href=\"https://phrase.com\">Phrase</a>, où nous gérons nos traductions.",
@@ -265,7 +268,7 @@
       "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Ensembles de données importés",
       "imported_on": "Importé le {{date}}",
-      "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l'univers au peigne fin, à la recherche d'autres informations que nous ajoutons à notre <a href=\"/data\">base de données</a>, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu'il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n'hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d'importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d'importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d'origine après importation ne seront pas reportés sur Falling Fruit.",
+      "intro_html": "Falling Fruit aspire à devenir la plus complète et la plus ouverte des banques de données de plantes urbaines comestibles. Pendant que nos utilisateurs explorent, éditent et ajoutent des sites à notre <a href=\"/\">carte</a>, nous passons tout l'univers au peigne fin, à la recherche d'autres informations que nous ajoutons à notre base de données, en unissant les efforts des glaneurs, des forestiers et des freegans du monde entier. Si vous voyez qu'il nous manque un ensemble de données, <a href=\"mailto:info@fallingfruit.org\">n'hésitez pas à nous contacter</a> ! Vous pouvez aussi nous aider avec le processus d'importation en formatant les données avec le <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">modèle d'importation</a>. Remarque : Sachant que les importations doivent être réalisées manuellement, les changements effectués sur les données d'origine après importation ne seront pas reportés sur Falling Fruit.",
       "link": "Lien",
       "table_info": "Chaque ensemble de données est listé par nom, nombre de sites et date d'importation. En élargissant chaque ligne de données, vous verrez d'autres détails concernant les données, l'importation et la licence relative aux conditions d'utilisation de ces données.",
       "type": "Type",
@@ -338,6 +341,12 @@
         "state": "État"
       },
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les emplacements de plantes comestibles et d'autres sources de nourriture gratuite.",
+      "discover_and_contribute": "Vous pouvez découvrir ce que d'autres ont récolté dans votre quartier et partager vos observations.",
+      "explore_the_map": "Explorez la carte",
+      "welcome_visitors_to_the_site_short": "Bienvenue !"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "Tu as évalué cet emplacement le {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Site complet",
     "title": "Partager cette vue",
     "url_copied": "URL copiée dans ton presse-papiers !",
     "url_copy_failed": "Échec de la copie de l'URL dans ton presse-papiers"

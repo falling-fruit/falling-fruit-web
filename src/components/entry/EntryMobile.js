@@ -4,13 +4,15 @@ import {
 } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import {
   fullyOpenPaneDrawer,
-  partiallyClosePaneDrawer,
-  reenableAndPartiallyClosePaneDrawer,
+  reenablePaneDrawerAndSetToLowPosition,
+  setPaneDrawerToLowPosition,
+  setPaneDrawerToMiddlePosition,
   setTabIndex,
 } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -28,6 +30,34 @@ const ENTRY_IMAGE_HEIGHT = 250
 
 const TOP_BAR_HEIGHT = 80
 const ENTRY_TABS_HEIGHT = 50
+
+const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
+  Math.max(
+    0,
+    Math.min(
+      1,
+      1 - (topBoundary - currentPosition) / (topBoundary - bottomBoundary),
+    ),
+  )
+
+const EntryLoading = () => (
+  <article style={{ padding: '20px 23px', boxSizing: 'border-box' }}>
+    <Skeleton
+      height={14}
+      width="70%"
+      style={{ marginTop: '0.5em', marginBottom: '0.5em' }}
+    />
+
+    <Skeleton height={16} width="40%" style={{ marginBottom: '1.5em' }} />
+
+    <Skeleton height={16} style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} width="80%" style={{ marginBottom: '2em' }} />
+
+    <Skeleton height={16} width="60%" style={{ marginBottom: '0.5em' }} />
+    <Skeleton height={16} width="50%" style={{ marginBottom: '0.5em' }} />
+  </article>
+)
 
 const RevealedFromUnderneath = styled.div`
   width: 100%;
@@ -71,44 +101,6 @@ const WhitespacePlaceholder = styled.div`
 const DummyElementFixingScrollbarInsideTabPanel = styled.div`
   height: ${(props) => props.height}px;
 `
-
-const TopRibbonButtons = ({ hasImages, drawerDisabled, onBackButtonClick }) => {
-  const history = useAppHistory()
-  const dispatch = useDispatch()
-  const { locationId } = useSelector((state) => state.location)
-
-  return (
-    <StyledButtons whiteBackground={!hasImages}>
-      <EntryButton
-        onClick={
-          drawerDisabled ? () => history.push('/list') : onBackButtonClick
-        }
-        icon={<ReturnIcon />}
-        label="back-button"
-      />
-      <div>
-        {drawerDisabled && (
-          <EntryButton
-            onClick={(event) => {
-              event.stopPropagation()
-              dispatch(reenableAndPartiallyClosePaneDrawer())
-            }}
-            icon={<MapIcon />}
-            label="map-button"
-          />
-        )}
-        <EntryButton
-          onClick={(event) => {
-            event.stopPropagation()
-            history.push(`/locations/${locationId}/edit`)
-          }}
-          icon={<PencilIcon />}
-          label="edit-button"
-        />
-      </div>
-    </StyledButtons>
-  )
-}
 
 const StyledButtons = styled.div`
   position: absolute;
@@ -162,10 +154,19 @@ const EntryMobile = () => {
   const dispatch = useDispatch()
   const history = useAppHistory()
   const {
+    locationId,
     reviews,
     isLoading,
-    pane: { drawerFullyOpen, tabIndex, drawerDisabled },
+    pane: {
+      drawerFullyOpen,
+      drawerLow,
+      tabIndex,
+      isFromListLocations,
+      isFromEmbedViewMap,
+    },
   } = useSelector((state) => state.location)
+
+  const drawerDisabled = isFromEmbedViewMap || isFromListLocations
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
@@ -174,41 +175,53 @@ const EntryMobile = () => {
     reviews.filter((review) => review.photos && review.photos.length > 0)
       .length > 0
 
-  const [progress, setProgress] = useState(
-    drawerFullyOpen || drawerDisabled ? 1 : 0.3,
+  const [currentTranslateY, setCurrentTranslateY] = useState(
+    drawerFullyOpen || drawerDisabled
+      ? hasImages
+        ? ENTRY_IMAGE_HEIGHT
+        : TOP_BAR_HEIGHT
+      : window.innerHeight * 0.7,
   )
-  const onBackButtonClick = (e) => {
-    e.stopPropagation()
-    dispatch(partiallyClosePaneDrawer())
-  }
 
-  if (isLoading) {
-    return null
-  }
+  const offset = hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT
+  const progress = calculateProgress(
+    currentTranslateY,
+    offset,
+    window.innerHeight,
+  )
 
   const hasReviews = reviews && reviews.length > 0
 
-  return (
+  return isLoading === null ? null : (
     <>
       <DraggablePane
         displayOverTopBar={!filterOpen || drawerFullyOpen}
         topPositionHeight={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
         middlePositionScreenRatio={0.7}
-        position={drawerFullyOpen || drawerDisabled ? 'top' : 'middle'}
+        partialPositionHeightPx={80}
+        position={
+          drawerFullyOpen || drawerDisabled
+            ? 'top'
+            : drawerLow
+              ? 'low'
+              : 'middle'
+        }
         onPositionChange={(position) => {
           if (position === 'top') {
-            setProgress(1)
             setTimeout(() => dispatch(fullyOpenPaneDrawer()), 0.25)
           } else if (position === 'middle') {
-            setProgress(0.3)
-            dispatch(partiallyClosePaneDrawer())
+            dispatch(setPaneDrawerToMiddlePosition())
+          } else if (position === 'low') {
+            dispatch(setPaneDrawerToLowPosition())
           } else if (position === 'bottom') {
             history.push('/map')
+          } else {
+            console.error(position)
           }
         }}
         drawerDisabled={drawerDisabled || drawerFullyOpen}
-        updateProgress={setProgress}
-        hasImages={hasImages}
+        onChangeTranslateY={setCurrentTranslateY}
+        hasWhiteBackground={!isLoading && hasImages}
         showMoveElement={!(drawerFullyOpen || drawerDisabled)}
       >
         {hasImages && (
@@ -217,8 +230,14 @@ const EntryMobile = () => {
             progress={progress}
             isDrawerFullyOpen={drawerFullyOpen}
           >
-            <LightboxMobile />
-            <Carousel />
+            {isLoading ? (
+              <Skeleton height={ENTRY_IMAGE_HEIGHT} />
+            ) : (
+              <>
+                <LightboxMobile />
+                <Carousel />
+              </>
+            )}
           </RevealedFromUnderneath>
         )}
         {hasReviews && (
@@ -241,6 +260,7 @@ const EntryMobile = () => {
           )}
           <TabPanels style={{ background: 'white' }}>
             <TabPanel>
+              {isLoading && <EntryLoading />}
               <TextContent>
                 <EntryOverview />
               </TextContent>
@@ -259,12 +279,43 @@ const EntryMobile = () => {
           </TabPanels>
         </EntryTabs>
       </DraggablePane>
-      {(drawerFullyOpen || drawerDisabled) && (
-        <TopRibbonButtons
-          hasImages={hasImages}
-          drawerDisabled={drawerDisabled}
-          onBackButtonClick={onBackButtonClick}
-        />
+      {drawerFullyOpen && (
+        <StyledButtons whiteBackground={!hasImages}>
+          <EntryButton
+            onClick={
+              isFromListLocations
+                ? () => history.push('/list')
+                : isFromEmbedViewMap
+                  ? () => history.push('/map')
+                  : (e) => {
+                      e.stopPropagation()
+                      dispatch(setPaneDrawerToMiddlePosition())
+                    }
+            }
+            icon={<ReturnIcon />}
+            label="back-button"
+          />
+          <div>
+            {isFromListLocations && !isFromEmbedViewMap && (
+              <EntryButton
+                onClick={(event) => {
+                  event.stopPropagation()
+                  dispatch(reenablePaneDrawerAndSetToLowPosition())
+                }}
+                icon={<MapIcon />}
+                label="map-button"
+              />
+            )}
+            <EntryButton
+              onClick={(event) => {
+                event.stopPropagation()
+                history.push(`/locations/${locationId}/edit`)
+              }}
+              icon={<PencilIcon />}
+              label="edit-button"
+            />
+          </div>
+        </StyledButtons>
       )}
     </>
   )

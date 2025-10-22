@@ -7,9 +7,12 @@ import * as Yup from 'yup'
 import { editProfile, logout } from '../../redux/authSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { FormButtonWrapper, FormInputWrapper } from '../auth/AuthWrappers'
 import { Input, Textarea } from '../form/FormikWrappers'
+import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
+import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
 
@@ -34,9 +37,10 @@ const AccountPage = () => {
   const isLoggedIn = !!user
   const history = useAppHistory()
   const { t } = useTranslation()
+  const isDesktop = useIsDesktop()
 
   if (!isLoggedIn && !isLoading) {
-    return <Redirect to={pathWithCurrentView('/users/sign_in')} />
+    return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
   }
 
   const handleSubmit = (values) => {
@@ -81,17 +85,17 @@ const AccountPage = () => {
               </Form>
             )}
           </Formik>
-          <div style={{ margin: '16px 0' }}>
-            <Link to="/users/change-password">
+          <Column>
+            <Link to="/account/change-password">
               {t('users.password_settings')}
             </Link>
-          </div>
-          <div style={{ margin: '16px 0' }}>
-            <Link to="/users/change-email">{t('users.email_settings')}</Link>
-          </div>
-          <div style={{ margin: '16px 0' }}>
-            <Link to={`/activity/${user.id}`}>{t('users.your_activity')}</Link>
-          </div>
+            <Link to="/account/change-email">{t('users.email_settings')}</Link>
+            <Link to={`/users/${user.id}/activity`}>
+              {t('users.your_activity')}
+            </Link>
+          </Column>
+          <br />
+
           <Button
             onClick={() => {
               dispatch(logout())
@@ -100,6 +104,14 @@ const AccountPage = () => {
           >
             {t('users.sign_out')}
           </Button>
+          <br />
+          {!isDesktop && (
+            <>
+              <br />
+              <h3>{t('glossary.about')}</h3>
+              <AboutSection />
+            </>
+          )}
         </>
       ) : (
         <LoadingIndicator vertical cover />

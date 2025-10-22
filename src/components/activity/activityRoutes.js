@@ -2,11 +2,16 @@ import { Route } from 'react-router-dom'
 
 import RecentChangesPage from './RecentChangesPage'
 import UserActivityPage from './UserActivityPage'
+import UserProfile from './UserProfile'
 
 const pages = [
   {
-    path: '/activity/:userId',
+    path: '/users/:userId/activity',
     component: UserActivityPage,
+  },
+  {
+    path: ['/users/:userId'],
+    component: UserProfile,
   },
   {
     path: '/changes',

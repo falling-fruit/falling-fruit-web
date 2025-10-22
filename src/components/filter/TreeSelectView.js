@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { ReactComponent as ArrowIcon } from './arrow.svg'
 
 const ControlsContainer = styled.div`
@@ -17,10 +18,12 @@ const TreeSelectContainer = styled.ul`
   border: 1px solid ${({ theme }) => theme.secondaryBackground};
   border-radius: 0.375em;
 
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     min-height: 5vh;
     max-height: 65vh;
-  }
+  `}
 `
 
 const TreeNode = styled.li`
@@ -111,6 +114,7 @@ const TreeSelectView = ({
 }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
+  const isDesktop = useIsDesktop()
   const renderNode = (node, level) => {
     const isDisabled = node.isDisabled
     const isExpanded = Boolean(expandedNodes.has(node.id) | isDisabled)
@@ -168,7 +172,7 @@ const TreeSelectView = ({
   }
 
   return (
-    <TreeSelectContainer>
+    <TreeSelectContainer isDesktop={isDesktop}>
       {renderTree.map((node) => renderNode(node, 0))}
     </TreeSelectContainer>
   )

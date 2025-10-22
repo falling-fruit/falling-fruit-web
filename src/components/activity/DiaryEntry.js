@@ -154,10 +154,7 @@ const ActivityTextComponent = ({
           {author && !isCurrentUser && (
             <>
               {authorUserId ? (
-                <AuthorLink
-                  to={`/profiles/${authorUserId}`}
-                  onClick={onClickLink}
-                >
+                <AuthorLink to={`/users/${authorUserId}`} onClick={onClickLink}>
                   {author}
                 </AuthorLink>
               ) : (
@@ -175,10 +172,7 @@ const ActivityTextComponent = ({
             <>
               {' — '}
               {authorUserId ? (
-                <AuthorLink
-                  to={`/profiles/${authorUserId}`}
-                  onClick={onClickLink}
-                >
+                <AuthorLink to={`/users/${authorUserId}`} onClick={onClickLink}>
                   {author}
                 </AuthorLink>
               ) : (

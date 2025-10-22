@@ -1,6 +1,7 @@
 {
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Xác nhận địa chỉ email của bạn",
       "confirmed": "Địa chỉ email của bạn đã được xác nhận thành công.",
       "no_token": "Bạn không thể truy cập trang này nếu không nhận được email xác nhận. Nếu bạn nhận được, vui lòng đảm bảo rằng bạn đã sử dụng URL đầy đủ được cung cấp.",
       "send_instructions": "Bạn sẽ nhận được email có hướng dẫn cách xác nhận địa chỉ email của mình sau vài phút."
@@ -25,6 +26,7 @@
       "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
       "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
+      "fetch_user_failed": "Lỗi khi tải thông tin người dùng {{id}}: {{message}}",
       "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
       "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
       "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
@@ -187,6 +189,7 @@
     "add_review": "Thêm đánh giá",
     "edit_location": "Chỉnh sửa địa điểm",
     "edit_review": "Chỉnh sửa đánh giá",
+    "filters": "Bộ lọc",
     "list": "Danh sách",
     "settings": "Cài đặt",
     "zoom_in_to_add_location": "Phóng to để thêm địa điểm"
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily là một nhà truyền giáo nhiệt huyết về nông lâm kết hợp, người kiếm ăn không thể sửa chữa và là người mẹ kiêu hãnh của hai con mèo, bốn con chim cút và chú chó đẹp nhất thế giới. Rễ của cô trải dài sâu vào dãy núi Rocky, nhưng ngày nay sinh khối trên mặt đất của cô tự hào gọi New Haven, Connecticut là quê hương của mình. Người ta thường thấy cô ấy đang chăm sóc các khu rừng thực phẩm công cộng, đọc sách say mê trong một góc thư viện ấm cúng nào đó hoặc viết thơ về sự kỳ diệu của sợi nấm (và được cho là đang hoàn thành bằng tốt nghiệp chung tại <a href=\"https://environment.yale.edu/\">Trường Lâm nghiệp</a> Yale và <a href=\"https://jackson.yale.edu/person/emily-sigman/\">Trường Quan hệ Toàn cầu</a>). Emily có một niềm đam mê du lịch khủng khiếp và có thể ở bất cứ đâu vào lúc này.",
       "ethan_welty_bio_html": "Với công nghệ và dữ liệu, Ethan coi các thành phố là nguồn cung cấp thực phẩm tươi sống và miễn phí. Anh ấy đã tạo ra Falling Fruit cùng với Caleb Phillips vào năm 2013 để thúc đẩy hoạt động tìm kiếm thức ăn ở đô thị trên toàn thế giới và đồng sáng lập <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> vào năm 2014 để thu hoạch và phân phối trái cây dư thừa trồng xung quanh anh ấy ở Boulder, Colorado. Ngoài trái cây, anh còn theo đuổi <a href=\"https://www.weltyphotography.com\">sự nghiệp nhiếp ảnh</a> , <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">nghiên cứu về sông băng</a> và đam mê theo đuổi các hoạt động miền núi và sông nước.",
       "ff_disclaimer_html": "Quả Rơi không liên quan đến Quả Rơi. Fallen Fruit có thể được tìm thấy tại <a href=\"http://fallenfruit.org\">Fallenfruit.org</a> .",
-      "give_paypal": "Quyên góp qua Quỹ từ thiện Paypal",
       "give_us_money": "Chúng mình là tổ chức phi lợi nhuận theo mục 501(c)(3) và hoạt động dựa vào sự quyên góp. Nếu bạn sẵn sàng và có khả năng, vui lòng cân nhắc đóng góp tài chính. Các khoản quyên góp ở Hoa Kỳ được khấu trừ thuế.",
+      "give_zeffy": "Quyên góp qua Zeffy",
       "jeff_wanner_bio_html": "Kể từ khi cùng gia đình thu hoạch quả mâm xôi đen và quả việt quất khi còn nhỏ và gần đây hơn là nhận thấy sự phong phú của các loại cây ăn quả công cộng trên khắp Colorado, Jeff đã đánh giá cao sự phong phú của các loại trái cây mọc ở các thành phố của chúng ta. Nhiệm vụ đầu tiên của anh trong Falling Fruit là rà soát Boulder và Thành phố Salt Lake, cầm trên tay bản đồ giấy để ghi lại những cây ăn quả. Khi không làm việc để cải thiện hiệu quả sử dụng năng lượng của tòa nhà, anh ấy thường giúp đỡ cộng đồng hoặc di chuyển nhanh qua núi bằng cách đi bộ, trượt tuyết hoặc xe đạp.",
-      "join_us_html": "Hãy cùng chúng tôi tôn vinh những món ăn siêu địa phương! <a href=\"/\">Bản đồ</a> mở cho mọi người chỉnh sửa, cơ sở dữ liệu có thể được <a href=\"/data\">tải xuống</a> chỉ bằng một cú nhấp chuột và <a href=\"https://github.com/falling-fruit/\">mã</a> là nguồn mở. Bạn cũng được khuyến khích chia sẻ tiền thưởng với đồng loại của mình. <a href=\"/sharing\">Trang chia sẻ</a> của chúng tôi liệt kê hàng trăm tổ chức địa phương - trồng vườn cây ăn quả công cộng và rừng thực phẩm, hái trái cây và rau quả bị lãng phí từ cây thành phố và cánh đồng của nông dân, đồng thời chia sẻ với hàng xóm và người nghèo.",
-      "more_about_html": "Bản đồ hái lượm của chúng mình không phải là bản đồ đầu tiên thuộc loại này, nhưng nó mong muốn trở thành bản đồ toàn diện nhất thế giới. Trong khi người dùng của chúng tôi đóng góp các địa điểm của riêng họ, chúng tôi tìm kiếm trên Internet những kiến thức có sẵn, tìm cách hợp nhất nỗ lực của những người kiếm ăn, người đi rừng và những người sống tự do ở khắp mọi nơi. <a href=\"/datasets\">Các bộ dữ liệu được nhập</a> bao gồm từ các bản đồ tìm kiếm khu dân cư nhỏ cho đến kho cây khổng lồ được biên soạn chuyên nghiệp. Cho đến nay, con số này lên tới {{types}} loại thực phẩm khác nhau (hầu hết, nhưng không phải tất cả, các loài thực vật) được phân bổ trên {{locations}} vị trí. Ngoài việc trồng trọt và phổ biến đối với hương vị kỳ lạ của các loài thực vật ngoại lai và thực vật bản địa đã bị lãng quên từ lâu, việc tìm kiếm thức ăn trong khu phố của bạn là một cuộc hành trình xuyên thời gian và xuyên suốt các nền văn hóa.",
+      "join_us_html": "Hãy cùng chúng tôi tôn vinh những món ăn siêu địa phương! <a href=\"/\">Bản đồ</a> mở cho mọi người chỉnh sửa, cơ sở dữ liệu có thể được <a href=\"/about/data\">tải xuống</a> chỉ bằng một cú nhấp chuột và <a href=\"https://github.com/falling-fruit/\">mã</a> là nguồn mở. Bạn cũng được khuyến khích chia sẻ tiền thưởng với đồng loại của mình. <a href=\"/about/sharing\">Trang chia sẻ</a> của chúng tôi liệt kê hàng trăm tổ chức địa phương - trồng vườn cây ăn quả công cộng và rừng thực phẩm, hái trái cây và rau quả bị lãng phí từ cây thành phố và cánh đồng của nông dân, đồng thời chia sẻ với hàng xóm và người nghèo.",
+      "more_about_html": "Bản đồ hái lượm của chúng mình không phải là bản đồ đầu tiên thuộc loại này, nhưng nó mong muốn trở thành bản đồ toàn diện nhất thế giới. Trong khi người dùng của chúng tôi đóng góp các địa điểm của riêng họ, chúng tôi tìm kiếm trên Internet những kiến thức có sẵn, tìm cách hợp nhất nỗ lực của những người kiếm ăn, người đi rừng và những người sống tự do ở khắp mọi nơi. <a href=\"/about/data\">Các bộ dữ liệu được nhập</a> bao gồm từ các bản đồ tìm kiếm khu dân cư nhỏ cho đến kho cây khổng lồ được biên soạn chuyên nghiệp. Cho đến nay, con số này lên tới {{types}} loại thực phẩm khác nhau (hầu hết, nhưng không phải tất cả, các loài thực vật) được phân bổ trên {{locations}} vị trí. Ngoài việc trồng trọt và phổ biến đối với hương vị kỳ lạ của các loài thực vật ngoại lai và thực vật bản địa đã bị lãng quên từ lâu, việc tìm kiếm thức ăn trong khu phố của bạn là một cuộc hành trình xuyên thời gian và xuyên suốt các nền văn hóa.",
       "staff": "Nhân viên",
       "translate": "Dịch",
       "translate_for_us_html": "Bạn có muốn làm việc tình nguyện làm phiên dịch viên không? Gửi email cho chúng tôi và chúng tôi sẽ mời bạn tham gia cùng chúng tôi trên <a href=\"https://phrase.com\">Phrase</a> , nơi các bản dịch của chúng tôi được quản lý.",
@@ -265,7 +268,7 @@
       "import_id_and_name": "Nhập #{{id}}: {{name}}",
       "imported_datasets": "Bộ dữ liệu đã nhập",
       "imported_on": "Đã nhập vào {{date}}",
-      "intro_html": "Falling Fruit mong muốn trở thành bộ dữ liệu địa lý mở và toàn diện nhất về thực phẩm đô thị. Trong khi người dùng khám phá, chỉnh sửa và thêm vị trí bằng <a href=\"/\">bản đồ</a> của chúng tôi, chúng tôi tìm kiếm khắp vũ trụ đã biết để tìm các bộ dữ liệu có sẵn và nhập chúng trực tiếp vào <a href=\"/data\">cơ sở dữ liệu</a> , hợp nhất nỗ lực của những người kiếm ăn, người đi rừng và những người tự do ở khắp mọi nơi. Nếu bạn biết về tập dữ liệu mà chúng tôi đã bỏ lỡ, vui lòng <a href=\"mailto:info@fallingfruit.org\">cho chúng tôi biết</a> ! Bạn cũng có thể giúp chúng tôi trong quá trình nhập bằng cách định dạng dữ liệu bằng <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">mẫu nhập</a>. Lưu ý rằng vì quá trình nhập phải được thực hiện thủ công nên tất cả các thay đổi đối với dữ liệu gốc được thực hiện sau khi nhập sẽ không được phản ánh trên Falling Fruit.",
+      "intro_html": "Falling Fruit mong muốn trở thành bộ dữ liệu địa lý mở và toàn diện nhất về thực phẩm đô thị. Trong khi người dùng khám phá, chỉnh sửa và thêm vị trí bằng <a href=\"/\">bản đồ</a> của chúng tôi, chúng tôi tìm kiếm khắp vũ trụ đã biết để tìm các bộ dữ liệu có sẵn và nhập chúng trực tiếp vào cơ sở dữ liệu , hợp nhất nỗ lực của những người kiếm ăn, người đi rừng và những người tự do ở khắp mọi nơi. Nếu bạn biết về tập dữ liệu mà chúng tôi đã bỏ lỡ, vui lòng <a href=\"mailto:info@fallingfruit.org\">cho chúng tôi biết</a> ! Bạn cũng có thể giúp chúng tôi trong quá trình nhập bằng cách định dạng dữ liệu bằng <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">mẫu nhập</a>. Lưu ý rằng vì quá trình nhập phải được thực hiện thủ công nên tất cả các thay đổi đối với dữ liệu gốc được thực hiện sau khi nhập sẽ không được phản ánh trên Falling Fruit.",
       "link": "Liên kết",
       "table_info": "Mỗi tập dữ liệu được liệt kê theo tên, số lượng vị trí và ngày được nhập. Việc mở rộng từng hàng sẽ hiển thị thêm thông tin chi tiết về dữ liệu, quy trình nhập và giấy phép quản lý cách sử dụng dữ liệu.",
       "type": "Loại",
@@ -338,6 +341,12 @@
         "state": "Tiểu bang"
       },
       "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Những người có tên bị gạch bỏ được cho là không hoạt động. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit là một nền tảng do cộng đồng điều hành để chia sẻ vị trí của các cây ăn được và các nguồn thực phẩm miễn phí khác.",
+      "discover_and_contribute": "Bạn có thể khám phá những gì người khác đã hái lượm trong khu vực của bạn, và đóng góp quan sát của bạn.",
+      "explore_the_map": "Khám phá bản đồ",
+      "welcome_visitors_to_the_site_short": "Chào mừng!"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Trang web đầy đủ",
     "title": "Chia sẻ góc nhìn này",
     "url_copied": "Đã sao chép URL vào bộ nhớ tạm!",
     "url_copy_failed": "Không thể sao chép URL vào bộ nhớ tạm"

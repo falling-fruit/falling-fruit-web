@@ -1,14 +1,17 @@
 import styled from 'styled-components/macro'
 
 import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { PageTabs } from '../ui/PageTabs'
 
-const EntryTabs = styled(PageTabs)`
+const StyledEntryTabs = styled(PageTabs)`
   // TODO: make this snippet reusable (copied from ../GlobalStyle.js)
   background-color: white;
-  @media ${({ theme }) => theme.device.mobile} {
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
     width: 100%;
-  }
+  `}
 
   [data-reach-tab-list] {
     height: ${TABS_HEIGHT_PX}px;
@@ -36,5 +39,14 @@ const EntryTabs = styled(PageTabs)`
   }
 `
 
+export const EntryTabs = ({ children, ...props }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <StyledEntryTabs isDesktop={isDesktop} {...props}>
+      {children}
+    </StyledEntryTabs>
+  )
+}
+
 export { Tab, TabList, TabPanel, TabPanels } from '@reach/tabs'
-export { EntryTabs }

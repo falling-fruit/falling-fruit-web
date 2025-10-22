@@ -16,26 +16,28 @@ const ConfirmationPage = () => {
 
       if (!token) {
         toast.error(t('devise.confirmations.no_token'), { autoClose: 5000 })
-        history.push('/users/confirmation/new')
+        history.push('/auth/confirmation/new')
       } else {
         try {
           const { email } = await confirmUser(token)
+          history.removeParam('token')
           toast.success(t('devise.confirmations.confirmed'))
-          history.push({ pathname: '/users/sign_in', state: { email } })
+          history.push({ pathname: '/auth/sign_in', state: { email } })
         } catch (error) {
+          history.removeParam('token')
           toast.error(
             t('error_message.auth.confirmation_failed', {
               message: error.message || t('error_message.unknown_error'),
             }),
             { autoClose: 5000 },
           )
-          history.push('/users/confirmation/new')
+          history.push('/auth/confirmation/new')
         }
       }
     }
 
     handleConfirmation()
-  }, [history, t])
+  }, []) //eslint-disable-line
 
   return null
 }

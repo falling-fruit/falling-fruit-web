@@ -6,9 +6,7 @@ import { useSelector } from 'react-redux'
 import { matchPath, useLocation } from 'react-router-dom'
 
 import { useAppHistory } from '../../utils/useAppHistory'
-import aboutRoutes from '../about/aboutRoutes'
 import { accountPages } from '../account/accountRoutes'
-import activityRoutes from '../activity/activityRoutes'
 import { authPages } from '../auth/authRoutes'
 import { Tab } from '../ui/PageTabs'
 
@@ -26,11 +24,7 @@ const Tabs = () => {
 
   const tabs = [
     {
-      paths: [
-        '/settings',
-        ...aboutRoutes.map((route) => route.props.path).flat(),
-        ...activityRoutes.map((route) => route.props.path).flat(),
-      ],
+      paths: ['/settings'],
       icon: <Cog />,
       label: t('menu.settings'),
     },
@@ -92,7 +86,7 @@ const Tabs = () => {
     } else if (newTabIndex === 3) {
       // Logged in users go to account page
       if (isLoggedIn) {
-        history.push('/users/edit')
+        history.push('/account/edit')
       } else {
         // Otherwise sign in
         history.pushToSignInPage()

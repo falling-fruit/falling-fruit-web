@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { setLocale } from 'yup'
 
-import App from './App'
+import App from './components/init/App'
 import reportWebVitals from './utils/reportWebVitals'
 
 // Translate yup error messages

@@ -9,13 +9,12 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import { AuthPage } from '../ui/PageTemplate'
+import AuthLinks from './AuthLinks'
 import {
-  Column,
   ErrorMessage,
   FormButtonWrapper,
   FormInputWrapper,
 } from './AuthWrappers'
-import SignInLink from './SignInLink'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const getResetToken = () =>
@@ -28,7 +27,7 @@ const PasswordSetPage = () => {
   useEffect(() => {
     if (!getResetToken()) {
       toast.error(t('devise.passwords.no_token'), { autoClose: 5000 })
-      history.push('/users/sign_in')
+      history.push('/auth/sign_in')
     }
   }, [history, t])
 
@@ -41,14 +40,14 @@ const PasswordSetPage = () => {
       toast.success(t('devise.passwords.updated_not_active'), {
         autoClose: 5000,
       })
-      history.push({ pathname: '/users/sign_in', state: { email } })
+      history.push({ pathname: '/auth/sign_in', state: { email } })
     } catch (error) {
       toast.error(
         t('error_message.auth.password_set_failed', {
           message: error.message || t('error_message.unknown_error'),
         }),
       )
-      history.push('/users/sign_in')
+      history.push('/auth/sign_in')
     }
   }
 
@@ -68,7 +67,7 @@ const PasswordSetPage = () => {
         })}
         onSubmit={handleSubmit}
       >
-        {({ errors, dirty, isValid, isSubmitting }) => (
+        {({ errors, dirty, isValid, isSubmitting, values }) => (
           <Form>
             <FormInputWrapper>
               <Input
@@ -86,6 +85,7 @@ const PasswordSetPage = () => {
                 type="password"
                 name="password_confirm"
                 label={t('users.new_password_confirmation')}
+                invalidWhenUntouched={values.password !== ''}
               />
               {errors.password_confirm && (
                 <ErrorMessage>
@@ -108,9 +108,7 @@ const PasswordSetPage = () => {
           </Form>
         )}
       </Formik>
-      <Column>
-        <SignInLink />
-      </Column>
+      <AuthLinks include={['signIn']} />
     </AuthPage>
   )
 }

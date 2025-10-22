@@ -3,6 +3,7 @@
     "confirmations": {
       "confirmed": "Your email address has been successfully confirmed.",
       "no_token": "You can't access this page without coming from a confirmation email. If you do, please make sure you used the full URL provided.",
+      "confirm_your_email": "Confirm your email address",
       "send_instructions": "You will receive an email with instructions for how to confirm your email address in a few minutes."
     },
     "failure": {
@@ -21,10 +22,11 @@
   },
   "error_message": {
     "api": {
+      "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
       "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
       "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
-      "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
+      "fetch_user_failed": "Error fetching user {{id}}: {{message}}",
       "location_edit_failed": "Location editing failed: {{message}}",
       "location_submission_failed": "Location submission failed: {{message}}",
       "photo_upload_failed": "Photo upload failed: {{message}}",
@@ -188,6 +190,7 @@
     "edit_location": "Edit location",
     "edit_review": "Edit review",
     "list": "List",
+    "filters": "Filters",
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
@@ -224,11 +227,11 @@
       "emily_sigman_bio_html": "Emily is a diehard agroforestry evangelist, incorrigible forager, and proud mother to two cats, four quails, and the world's most magnificent canine. Her roots stretch deep into the Rocky Mountains, but these days her aboveground biomass is proud to call New Haven, Connecticut her home. She can often be found tending public food forests, reading enraptured in some cozy library corner, or waxing poetic about the magic of mycelium (and, supposedly, completing joint graduate degrees at the Yale <a href=\"https://environment.yale.edu/\">School of Forestry</a> and <a href=\"https://jackson.yale.edu/person/emily-sigman/\">School of Global Affairs</a>). Emily harbors a devastating addiction to travel, and could be just about anywhere right now.",
       "ethan_welty_bio_html": "With technology and data, Ethan champions cities as sources of fresh and free food. He created Falling Fruit with Caleb Phillips in 2013 to promote urban foraging worldwide, and co-founded <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> in 2014 to harvest and distribute surplus fruit growing around him in Boulder, Colorado. Beyond fruit, he juggles a <a href=\"https://www.weltyphotography.com\">photography career</a>, <a href=\"https://instaar.colorado.edu/people/ethan-welty/\">research on glaciers</a>, and an appetite for mountainous and riverine pursuits.",
       "ff_disclaimer_html": "Falling Fruit is not associated with Fallen Fruit. Fallen Fruit can be found at <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
-      "give_paypal": "Donate via Paypal Giving Fund",
+      "give_zeffy": "Donate via Zeffy",
       "give_us_money": "We are a 501(c)(3) nonprofit and rely on donations to operate. If you are willing and able, please consider making a financial contribution. Donations within the United States are tax deductible.",
       "jeff_wanner_bio_html": "Since harvesting black and blueberries with his family as a child and, more recently, noticing the wealth of public fruit trees throughout Colorado, Jeff has developed a deep appreciation for the abundance of fruit growing in our cities. His first mission for Falling Fruit was to comb Boulder and Salt Lake City, paper maps in-hand, to record fruiting trees. When not working to improve building energy efficiency, he is usually helping out in the community or moving quickly over mountains by foot, ski, or bicycle.",
-      "join_us_html": "Join us in celebrating hyper-local food! The <a href=\"/\">map</a> is open for anyone to edit, the database can be <a href=\"/data\">downloaded</a> with just one click, and <a href=\"https://github.com/falling-fruit/\">the code</a> is open-source. You are likewise encouraged to share the bounty with your fellow humans. Our <a href=\"/sharing\">sharing page</a> lists hundreds of local organizations - planting public orchards and food forests, picking otherwise-wasted fruits and vegetables from city trees and farmers' fields, and sharing with neighbors and the needy.",
-      "more_about_html": "Our edible map is not the first of its kind, but it aspires to be the world's most comprehensive. While our users contribute locations of their own, we comb the internet for pre-existing knowledge, seeking to unite the efforts of foragers, foresters, and freegans everywhere. The <a href=\"/datasets\">imported datasets</a> range from small neighborhood foraging maps to vast professionally-compiled tree inventories. This so far amounts to {{types}} different types of edibles (most, but not all, plant species) distributed over {{locations}} locations. Beyond the cultivated and commonplace to the exotic flavors of foreign plants and long-forgotten native plants, foraging in your neighborhood is a journey through time and across cultures.",
+      "join_us_html": "Join us in celebrating hyper-local food! The <a href=\"/\">map</a> is open for anyone to edit, the database can be <a href=\"/about/data\">downloaded</a> with just one click, and <a href=\"https://github.com/falling-fruit/\">the code</a> is open-source. You are likewise encouraged to share the bounty with your fellow humans. Our <a href=\"/about/sharing\">sharing page</a> lists hundreds of local organizations - planting public orchards and food forests, picking otherwise-wasted fruits and vegetables from city trees and farmers' fields, and sharing with neighbors and the needy.",
+      "more_about_html": "Our edible map is not the first of its kind, but it aspires to be the world's most comprehensive. While our users contribute locations of their own, we comb the internet for pre-existing knowledge, seeking to unite the efforts of foragers, foresters, and freegans everywhere. The <a href=\"/about/data\">imported datasets</a> range from small neighborhood foraging maps to vast professionally-compiled tree inventories. This so far amounts to {{types}} different types of edibles (most, but not all, plant species) distributed over {{locations}} locations. Beyond the cultivated and commonplace to the exotic flavors of foreign plants and long-forgotten native plants, foraging in your neighborhood is a journey through time and across cultures.",
       "staff": "Staff",
       "translate": "Translate",
       "translate_for_us_html": "Interested in volunteering as a translator? Email us and we'll invite you to join us on <a href=\"https://phrase.com\">Phrase</a>, where our translations are managed.",
@@ -265,7 +268,7 @@
       "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Imported datasets",
       "imported_on": "Imported on {{date}}",
-      "intro_html": "Falling Fruit aspires to be the most comprehensive and open geographic dataset of urban edibles. While our users explore, edit, and add locations using our <a href=\"/\">map</a>, we comb the known universe for pre-existing datasets and import them directly into the <a href=\"/data\">database</a>, uniting the efforts of foragers, foresters, and freegans everywhere. If you know of a dataset we've missed, please <a href=\"mailto:info@fallingfruit.org\">let us know</a>! You can also help us with the import process by formatting the data using the <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">import template</a>. Note that since imports must be performed manually, all changes to the original data made after the import are not reflected on Falling Fruit.",
+      "intro_html": "Falling Fruit aspires to be the most comprehensive and open geographic dataset of urban edibles. While our users explore, edit, and add locations using our <a href=\"/\">map</a>, we comb the known universe for pre-existing datasets and import them directly into the database, uniting the efforts of foragers, foresters, and freegans everywhere. If you know of a dataset we've missed, please <a href=\"mailto:info@fallingfruit.org\">let us know</a>! You can also help us with the import process by formatting the data using the <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">import template</a>. Note that since imports must be performed manually, all changes to the original data made after the import are not reflected on Falling Fruit.",
       "link": "Link",
       "table_info": "Each dataset is listed by name, number of locations, and date imported. Expanding each row reveals further details about the data, the import process, and the license governing how the data may be used.",
       "type": "Type",
@@ -338,6 +341,12 @@
         "state": "State"
       },
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruit is a community-driven platform for sharing locations of edible plants and other sources of free food.",
+      "discover_and_contribute": "You can discover what others have been harvesting in your area, and contribute your own observations.",
+      "explore_the_map": "Explore the map",
+      "welcome_visitors_to_the_site_short": "Welcome!"
     }
   },
   "problems": {
@@ -361,6 +370,7 @@
     "you_reviewed": "You reviewed this location on {{date}}"
   },
   "share": {
+    "leave_embed_view_for_full_site": "Full site",
     "title": "Share this view",
     "url_copied": "URL copied to clipboard!",
     "url_copy_failed": "Failed to copy URL to clipboard"
@@ -394,7 +404,6 @@
     "email_settings": "Email settings",
     "forgot_password": "Reset your password",
     "joined_on": "Joined on {{date}}",
-    "your_activity": "Your activity",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
     "options": {
@@ -411,6 +420,7 @@
     "send": "Send",
     "send_password_instructions": "Send password reset instructions",
     "sign_in": "Sign in",
-    "sign_out": "Sign out"
+    "sign_out": "Sign out",
+    "your_activity": "Your activity"
   }
 }

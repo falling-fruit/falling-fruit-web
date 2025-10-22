@@ -59,6 +59,46 @@ const CUSTOM_FALLBACKS = {
   'zh-hant-tw': 'zh-hant',
 }
 
+const findClosestSupportedLanguage = (locale) => {
+  const supportedLanguages = LANGUAGE_OPTIONS.map((option) => option.value)
+  const normalizedLocale = locale.toLowerCase()
+
+  if (CUSTOM_FALLBACKS[normalizedLocale]) {
+    const fallback = CUSTOM_FALLBACKS[normalizedLocale]
+    if (supportedLanguages.includes(fallback)) {
+      return fallback
+    }
+  }
+
+  if (supportedLanguages.includes(normalizedLocale)) {
+    return normalizedLocale
+  }
+
+  const parentLanguage = normalizedLocale.split('-')[0]
+  if (supportedLanguages.includes(parentLanguage)) {
+    return parentLanguage
+  }
+
+  const matchingVariant = supportedLanguages.find((lang) =>
+    lang.startsWith(`${parentLanguage}-`),
+  )
+  if (matchingVariant) {
+    return matchingVariant
+  }
+
+  return null
+}
+
+const setLanguageFromLocaleString = (locale) => {
+  const value = findClosestSupportedLanguage(locale)
+
+  if (value) {
+    i18n.changeLanguage(value)
+    localStorage.setItem(LANGUAGE_CACHE_KEY, value)
+    setDocumentDir(value)
+  }
+}
+
 const LanguageSelect = () => {
   const { t, i18n } = useTranslation()
   const { googleMap } = useSelector((state) => state.map)
@@ -116,5 +156,5 @@ i18n
     () => setDocumentDir(i18n.language),
   )
 
-export { LanguageSelect }
+export { LanguageSelect, setLanguageFromLocaleString }
 export default i18n
