@@ -1,12 +1,9 @@
-import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { LanguageSelect } from '../../i18n'
-import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import BackButton from '../ui/BackButton'
-import ReturnIcon from './ReturnIcon'
+import { BackButton } from './ActionButtons'
 
 const MobileHeader = styled.div`
   width: 100%;
@@ -132,11 +129,6 @@ const PageWrapper = styled.article`
 
 const StyledBackButton = styled(BackButton)`
   margin-block-end: 23px;
-  svg {
-    width: 1.2em;
-    height: 1.2em;
-    margin-inline-end: 0.6em;
-  }
 `
 
 const Page = ({ children }) => {
@@ -150,9 +142,7 @@ const Page = ({ children }) => {
 }
 
 const InfoPage = ({ children }) => {
-  const history = useAppHistory()
   const isDesktop = useIsDesktop()
-  const { t } = useTranslation()
 
   const { user } = useSelector((state) => state.auth)
   return (
@@ -160,15 +150,8 @@ const InfoPage = ({ children }) => {
       <PageWrapper isDesktop={isDesktop}>
         {!isDesktop && (
           <StyledBackButton
-            onClick={() =>
-              user
-                ? history.push('/account/edit')
-                : history.push('/about/welcome')
-            }
-          >
-            <ReturnIcon />
-            {t('layouts.back')}
-          </StyledBackButton>
+            backPath={user ? '/account/edit' : '/about/welcome'}
+          />
         )}
 
         {children}

@@ -1,9 +1,13 @@
 {
+  "confirm_message": {
+    "delete_location": "Are you sure you want to delete this location?",
+    "delete_review": "Are you sure you want to delete this review?"
+  },
   "devise": {
     "confirmations": {
+      "confirm_your_email": "Confirm your email address",
       "confirmed": "Your email address has been successfully confirmed.",
       "no_token": "You can't access this page without coming from a confirmation email. If you do, please make sure you used the full URL provided.",
-      "confirm_your_email": "Confirm your email address",
       "send_instructions": "You will receive an email with instructions for how to confirm your email address in a few minutes."
     },
     "failure": {
@@ -15,7 +19,6 @@
       "updated_not_active": "Your password has been changed successfully."
     },
     "registrations": {
-      "signed_up": "Welcome! You have signed up successfully.",
       "update_needs_confirmation": "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address.",
       "updated": "Your account has been updated successfully."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
       "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
       "fetch_user_failed": "Error fetching user {{id}}: {{message}}",
+      "location_deletion_failed": "Location deletion failed: {{message}}",
       "location_edit_failed": "Location editing failed: {{message}}",
       "location_submission_failed": "Location submission failed: {{message}}",
       "photo_upload_failed": "Photo upload failed: {{message}}",
@@ -111,6 +115,9 @@
     "unverified": "Unverified",
     "yield": "Yield"
   },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "This location contains reviews by other users. To request its deletion, please use the Report button."
+  },
   "layouts": {
     "application": {
       "menu": {
@@ -189,8 +196,8 @@
     "add_review": "Add review",
     "edit_location": "Edit location",
     "edit_review": "Edit review",
-    "list": "List",
     "filters": "Filters",
+    "list": "List",
     "settings": "Settings",
     "zoom_in_to_add_location": "Zoom in to add location"
   },
@@ -376,6 +383,7 @@
     "url_copy_failed": "Failed to copy URL to clipboard"
   },
   "success_message": {
+    "location_deleted": "Location deleted successfully!",
     "location_edited": "Location edited successfully!",
     "location_submitted": "Location submitted successfully!",
     "report_submitted": "Report submitted successfully!",

@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "你確定要刪除這個位置嗎？",
+    "delete_review": "你確定要刪除這個評論嗎？"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "確認您的電子郵件地址",
@@ -15,7 +19,6 @@
       "updated_not_active": "你已經成功更改密碼。"
     },
     "registrations": {
-      "signed_up": "歡迎！您已註冊成功。",
       "update_needs_confirmation": "您已成功更新您的帳戶，但我們需要驗證您的新電子郵件地址。請檢查您的電子郵件並按照確認鏈接確認您的新電子郵件地址。",
       "updated": "您的帳戶已成功更新。"
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "獲取位置 {{id}} 失敗：{{message}}",
       "fetch_review_failed": "獲取評論 {{id}} 失敗：{{message}}",
       "fetch_user_failed": "獲取用戶{{id}}失敗：{{message}}",
+      "location_deletion_failed": "刪除位置失敗：{{message}}",
       "location_edit_failed": "編輯位置失敗：{{message}}",
       "location_submission_failed": "提交位置失敗：{{message}}",
       "photo_upload_failed": "照片上傳失敗：{{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "未經證實",
     "yield": "屈服"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "此地點包含其他用戶的評論。如需要刪除，請使用報告按鈕。"
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "網址複製到剪貼板失敗"
   },
   "success_message": {
+    "location_deleted": "位置刪除成功！",
     "location_edited": "位置已編輯",
     "location_submitted": "位置已提交",
     "report_submitted": "報告提交成功！",

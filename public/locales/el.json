@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την τοποθεσία;",
+    "delete_review": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την κριτική;"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Επιβεβαιώστε τη διεύθυνση email σας",
@@ -15,7 +19,6 @@
       "updated_not_active": "Ο κωδικός σας άλλαξε."
     },
     "registrations": {
-      "signed_up": "Καλωσήρθατε! Έχετε συνδεθεί.",
       "update_needs_confirmation": "Ο λογαριασμός σας ενημερώθηκε, αλλά πρέπει να επιβεβαιώσουμε την νέα σας διεύθυνση. Ελέγξτε το email σας και ακολουθείστε τον σύνδεσμο επιβεβαίωσης.",
       "updated": "Ο λογαριασμός σας ενημερώθηκε."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Σφάλμα λήψης τοποθεσίας {{id}}: {{message}}",
       "fetch_review_failed": "Σφάλμα λήψης αξιολόγησης {{id}}: {{message}}",
       "fetch_user_failed": "Σφάλμα ανάκτησης χρήστη {{id}}: {{message}}",
+      "location_deletion_failed": "Αποτυχία διαγραφής τοποθεσίας: {{message}}",
       "location_edit_failed": "Αποτυχία επεξεργασίας τοποθεσίας: {{message}}",
       "location_submission_failed": "Αποτυχία υποβολής τοποθεσίας: {{message}}",
       "photo_upload_failed": "Αποτυχία μεταφόρτωσης φωτογραφίας: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Ανεπιβεβαίωτο",
     "yield": "Σοδειά"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Αυτή η τοποθεσία περιέχει κριτικές από άλλους χρήστες. Για να ζητήσετε τη διαγραφή της, χρησιμοποιήστε το κουμπί Αναφορά."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Αποτυχία αντιγραφής URL στο πρόχειρο"
   },
   "success_message": {
+    "location_deleted": "Η τοποθεσία διαγράφηκε επιτυχώς!",
     "location_edited": "Η τοποθεσία επεξεργάστηκε με επιτυχία!",
     "location_submitted": "Η τοποθεσία υποβλήθηκε με επιτυχία!",
     "report_submitted": "Η αναφορά υποβλήθηκε με επιτυχία!",

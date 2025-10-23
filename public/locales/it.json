@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Sei sicuro di voler eliminare questa posizione?",
+    "delete_review": "Sei sicuro di voler eliminare questa recensione?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Conferma il tuo indirizzo email",
@@ -15,7 +19,6 @@
       "updated_not_active": "La tua password è stata cambiata."
     },
     "registrations": {
-      "signed_up": "Benvenuto! Ti sei registrato correttamente.",
       "update_needs_confirmation": "Il tuo account è stato aggiornato, tuttavia è necessario verificare il tuo nuovo indirizzo email. Entro qualche minuto riceverai un messaggio email con le istruzioni per confermare il tuo nuovo indirizzo email.",
       "updated": "Il tuo account è stato aggiornato."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Errore nel recupero della posizione {{id}}: {{message}}",
       "fetch_review_failed": "Errore nel recupero della recensione {{id}}: {{message}}",
       "fetch_user_failed": "Errore nel recupero dell'utente {{id}}: {{message}}",
+      "location_deletion_failed": "Eliminazione posizione fallita: {{message}}",
       "location_edit_failed": "Modifica della posizione fallita: {{message}}",
       "location_submission_failed": "Invio della posizione fallito: {{message}}",
       "photo_upload_failed": "Caricamento foto fallito: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Non verificato",
     "yield": "Raccolta"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Questa località contiene recensioni di altri utenti. Per richiederne l'eliminazione, utilizza il pulsante Segnala."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Impossibile copiare l'URL negli appunti"
   },
   "success_message": {
+    "location_deleted": "Posizione eliminata con successo!",
     "location_edited": "Posizione modificata",
     "location_submitted": "Posizione inviata",
     "report_submitted": "Segnalazione inviata con successo!",

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import {
   addLocation,
   addReview,
+  deleteLocation,
   deleteReview,
   editLocation,
   editReview,
@@ -73,6 +74,11 @@ export const editExistingReview = createAsyncThunk(
 export const deleteLocationReview = createAsyncThunk(
   'location/deleteReview',
   (reviewId) => deleteReview(reviewId).then(() => reviewId),
+)
+
+export const deleteExistingLocation = createAsyncThunk(
+  'location/deleteLocation',
+  (locationId) => deleteLocation(locationId).then(() => locationId),
 )
 
 const locationSlice = createSlice({

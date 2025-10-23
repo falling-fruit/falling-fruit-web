@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Czy na pewno chcesz usunąć tę lokalizację?",
+    "delete_review": "Czy na pewno chcesz usunąć tę recenzję?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Potwierdź swój adres e-mail",
@@ -15,7 +19,6 @@
       "updated_not_active": "Hasło zmienione poprawnie."
     },
     "registrations": {
-      "signed_up": "Witaj! Rejestracja zakończyła się sukcesem.",
       "update_needs_confirmation": "Konto zostało zaktualizowane, musimy jednak potwierdzić nowy adres e-mail. Sprawdź swoją skrzynkę pocztową i otwórz link aktywacyjny, aby ukończyć zmianę adresu.",
       "updated": "Konto zostało pomyślnie zaktualizowane."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Błąd podczas pobierania lokalizacji {{id}}: {{message}}",
       "fetch_review_failed": "Błąd podczas pobierania recenzji {{id}}: {{message}}",
       "fetch_user_failed": "Błąd pobierania użytkownika {{id}}: {{message}}",
+      "location_deletion_failed": "Usuwanie lokalizacji nie powiodło się: {{message}}",
       "location_edit_failed": "Edycja lokalizacji nie powiodła się: {{message}}",
       "location_submission_failed": "Przesyłanie lokalizacji nie powiodło się: {{message}}",
       "photo_upload_failed": "Przesyłanie zdjęcia nie powiodło się: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Niezweryfikowane",
     "yield": "Wydajność"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Ta lokalizacja zawiera recenzje innych użytkowników. Aby poprosić o jej usunięcie, użyj przycisku Zgłoś."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Nie udało się skopiować URL do schowka"
   },
   "success_message": {
+    "location_deleted": "Lokalizacja została pomyślnie usunięta!",
     "location_edited": "Lokalizacja została edytowana!",
     "location_submitted": "Lokalizacja została przesłana!",
     "report_submitted": "Raport został pomyślnie przesłany!",

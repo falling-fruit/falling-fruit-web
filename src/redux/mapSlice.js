@@ -3,7 +3,11 @@ import { eqBy, prop, unionWith } from 'ramda'
 
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
-import { addNewLocation, editExistingLocation } from './locationSlice'
+import {
+  addNewLocation,
+  deleteExistingLocation,
+  editExistingLocation,
+} from './locationSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
@@ -102,6 +106,14 @@ export const mapSlice = createSlice({
         return
       }
       state.locations.push(action.payload)
+    },
+    [deleteExistingLocation.fulfilled]: (state, action) => {
+      if (state.clusters.length) {
+        return
+      }
+      state.locations = state.locations.filter(
+        (loc) => loc.id !== action.payload,
+      )
     },
     [fetchMapLocations.fulfilled]: (state, action) => {
       if (!state.googleMap) {

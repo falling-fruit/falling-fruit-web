@@ -1,12 +1,11 @@
-import { Pencil, Trash } from '@styled-icons/boxicons-solid'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { deleteLocationReview } from '../../redux/locationSlice'
+import { DeleteButton, EditButton } from '../ui/ActionButtons'
 import ImagePreview, { ImagesContainer } from '../ui/ImagePreview'
-import ResetButton from '../ui/ResetButton'
 import ReviewStats, { getStarRating, Separator, StatsRow } from './ReviewStats'
 import { formatISOString } from './textFormatters'
 
@@ -50,17 +49,9 @@ const EditableHeader = styled.header`
 const ButtonsRow = styled.div`
   display: flex;
   gap: 1em;
-  width: 100%;
   margin-block-start: 0.5em;
-
   button {
-    display: flex;
-    align-items: center;
     color: ${({ theme }) => theme.blue};
-
-    svg {
-      margin-inline-end: 0.2em;
-    }
   }
 `
 
@@ -88,18 +79,15 @@ const Review = ({
             date: formatISOString(review.created_at, i18n.language),
           })}{' '}
           <ButtonsRow>
-            <ResetButton
+            <DeleteButton
+              regular
               onClick={() => {
-                if (confirm('Are you sure you want to delete this review?')) {
+                if (confirm(t('confirm_message.delete_review'))) {
                   dispatch(deleteLocationReview(review.id))
                 }
               }}
-            >
-              <Trash height={14} /> {t('form.button.delete')}
-            </ResetButton>
-            <ResetButton onClick={onEditClick}>
-              <Pencil height={14} /> {t('form.button.edit')}
-            </ResetButton>
+            />
+            <EditButton regular onClick={onEditClick} />
           </ButtonsRow>
         </EditableHeader>
       )}

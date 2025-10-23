@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "האם אתה בטוח שברצונך למחוק מיקום זה?",
+    "delete_review": "האם אתה בטוח שברצונך למחוק ביקורת זו?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "אשר/י את כתובת האימייל שלך",
@@ -15,7 +19,6 @@
       "updated_not_active": "הסיסמא שלך שונתה בהצלחה."
     },
     "registrations": {
-      "signed_up": "נרשמת בהצלחה. אם נדרש, יישלח אליך אימייל לאישור הרשמתך.",
       "update_needs_confirmation": "עידכנת את חשבונך בהצלחה, אבל אנחנו צריכים לאשר את האימייל החדש שלך. אנא בדק/י את האימייל שלך ולחצ/י על הלינק על מנת לאשר את חשבון האימייל החדש.",
       "updated": "עדכנת בהצלחה את חשבונך."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "שגיאה במשיכת מיקום {{id}}: {{message}}",
       "fetch_review_failed": "שגיאה במשיכת ביקורת {{id}}: {{message}}",
       "fetch_user_failed": "שגיאה בטעינת משתמש {{id}}: {{message}}",
+      "location_deletion_failed": "מחיקת מיקום נכשלה: {{message}}",
       "location_edit_failed": "עריכת מיקום נכשלה: {{message}}",
       "location_submission_failed": "שליחת מיקום נכשלה: {{message}}",
       "photo_upload_failed": "העלאת תמונה נכשלה: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "לא מאומת",
     "yield": "תנובה"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "מיקום זה מכיל ביקורות של משתמשים אחרים. כדי לבקש את מחיקתו, אנא השתמש בכפתור דיווח."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "העתקת הכתובת ללוח נכשלה"
   },
   "success_message": {
+    "location_deleted": "המיקום נמחק בהצלחה!",
     "location_edited": "המיקום נערך בהצלחה!",
     "location_submitted": "המיקום נשלח בהצלחה!",
     "report_submitted": "הדיווח נשלח בהצלחה!",

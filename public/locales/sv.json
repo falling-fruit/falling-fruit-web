@@ -1,4 +1,8 @@
 {
+  "confirm_message": {
+    "delete_location": "Är du säker på att du vill ta bort denna plats?",
+    "delete_review": "Är du säker på att du vill ta bort denna recension?"
+  },
   "devise": {
     "confirmations": {
       "confirm_your_email": "Bekräfta din epostadress",
@@ -15,7 +19,6 @@
       "updated_not_active": "Ditt lösenord har ändrats."
     },
     "registrations": {
-      "signed_up": "Välkommen! Ditt nya konto har skapats.",
       "update_needs_confirmation": "Ditt konto uppdaterades, men vi behöver verifiera din nya epostadress. Kontrollera din epost och klicka på länken för att bekräfta din nya epostadress.",
       "updated": "Ditt konto har uppdaterats."
     }
@@ -27,6 +30,7 @@
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
       "fetch_review_failed": "Fel vid hämtning av recension {{id}}: {{message}}",
       "fetch_user_failed": "Fel vid hämtning av användare {{id}}: {{message}}",
+      "location_deletion_failed": "Borttagning av plats misslyckades: {{message}}",
       "location_edit_failed": "Redigering av plats misslyckades: {{message}}",
       "location_submission_failed": "Inlämning av plats misslyckades: {{message}}",
       "photo_upload_failed": "Bilduppladdning misslyckades: {{message}}",
@@ -110,6 +114,9 @@
     },
     "unverified": "Overifierad",
     "yield": "Avkastning"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "Denna plats innehåller recensioner från andra användare. För att begära borttagning, använd rapporteringsknappen."
   },
   "layouts": {
     "application": {
@@ -376,6 +383,7 @@
     "url_copy_failed": "Misslyckades att kopiera URL till urklipp"
   },
   "success_message": {
+    "location_deleted": "Platsen har tagits bort!",
     "location_edited": "Plats redigerad",
     "location_submitted": "Plats skickad",
     "report_submitted": "Rapport skickad!",
