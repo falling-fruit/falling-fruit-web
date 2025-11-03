@@ -61,7 +61,7 @@ instance.interceptors.response.use(
         originalRequest._retry = true
 
         const newToken = await refreshUserToken(refreshToken)
-        authStore.setToken(newToken)
+        authStore.renewToken(newToken)
 
         return instance(originalRequest)
       }

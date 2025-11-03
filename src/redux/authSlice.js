@@ -20,7 +20,7 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
 
   try {
     user = await getUser(token.access_token)
-    authStore.setToken(token)
+    authStore.renewToken(token)
   } catch (err) {
     if (
       err.response?.status === 401 &&
@@ -29,7 +29,7 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
       try {
         const newToken = await refreshUserToken(token.refresh_token)
         user = await getUser(newToken.access_token)
-        authStore.setToken(newToken)
+        authStore.renewToken(newToken)
       } catch (refreshError) {
         authStore.removeToken()
         error = refreshError
@@ -50,8 +50,7 @@ export const login = createAsyncThunk('auth/login', async (props) => {
   const { email, password, remember_me: rememberMe } = props
   const token = await getUserToken(email, password)
   const user = await getUser(token.access_token)
-  authStore.setRememberMe(rememberMe)
-  authStore.setToken(token)
+  authStore.setNewToken(token, rememberMe)
   return user
 })
 
