@@ -38,7 +38,7 @@ instance.interceptors.request.use((config) => {
 
   const accessToken = authStore.getAccessToken()
 
-  if (accessToken && !isAnonymous) {
+  if (accessToken && !isAnonymous && !isGetUser(config)) {
     config.headers.Authorization = `Bearer ${accessToken}`
   }
 
@@ -53,7 +53,8 @@ instance.interceptors.response.use(
       error.response &&
       error.response.status === 401 &&
       error.response.data.error === 'Expired access token' &&
-      !originalRequest._retry
+      !originalRequest._retry &&
+      !isGetUser(originalRequest)
     ) {
       const refreshToken = authStore.getRefreshToken()
 
@@ -82,6 +83,8 @@ export const editUser = (
   data: paths['/user']['put']['requestBody']['content']['application/json'],
 ) => instance.put('/user', data)
 
+const isGetUser = (config: any) =>
+  config.url === '/user' && config.method === 'get'
 export const getUser = (accessToken: string) =>
   instance.get('/user', {
     headers: { Authorization: `Bearer ${accessToken}` },
