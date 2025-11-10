@@ -61,7 +61,7 @@ instance.interceptors.response.use(
         originalRequest._retry = true
 
         const newToken = await refreshUserToken(refreshToken)
-        authStore.setToken(newToken)
+        authStore.renewToken(newToken)
 
         return instance(originalRequest)
       }
@@ -82,10 +82,7 @@ export const editUser = (
   data: paths['/user']['put']['requestBody']['content']['application/json'],
 ) => instance.put('/user', data)
 
-export const getUser = (accessToken: string) =>
-  instance.get('/user', {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
+export const getUser = () => instance.get('/user')
 
 export const deleteUser = () => instance.delete('/user')
 

@@ -2,60 +2,64 @@ const ACCESS_TOKEN_KEY = 'authToken'
 const REFRESH_TOKEN_KEY = 'refreshToken'
 const LAST_MAP_VIEW_KEY = 'lastMapView'
 
-let accessToken = null
-let refreshToken = null
-let rememberMe = null
-
-const initFromStorage = () => {
+const getStorageInfo = () => {
   if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
-    rememberMe = true
-    accessToken = localStorage.getItem(ACCESS_TOKEN_KEY)
-    refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY)
+    return {
+      storage: localStorage,
+      rememberMe: true,
+      accessToken: localStorage.getItem(ACCESS_TOKEN_KEY),
+      refreshToken: localStorage.getItem(REFRESH_TOKEN_KEY),
+    }
   } else if (sessionStorage.getItem(ACCESS_TOKEN_KEY)) {
-    rememberMe = false
-    accessToken = sessionStorage.getItem(ACCESS_TOKEN_KEY)
-    refreshToken = sessionStorage.getItem(REFRESH_TOKEN_KEY)
+    return {
+      storage: sessionStorage,
+      rememberMe: false,
+      accessToken: sessionStorage.getItem(ACCESS_TOKEN_KEY),
+      refreshToken: sessionStorage.getItem(REFRESH_TOKEN_KEY),
+    }
   } else {
-    rememberMe = false
+    return {
+      storage: null,
+      rememberMe: false,
+      accessToken: null,
+      refreshToken: null,
+    }
   }
 }
 
 const authStore = {
-  getToken: () => {
-    if (rememberMe === null) {
-      initFromStorage()
-    }
-    if (accessToken && refreshToken) {
-      return {
-        access_token: accessToken,
-        refresh_token: refreshToken,
-      }
-    }
-    return null
+  hasTokens: () => {
+    const { accessToken, refreshToken } = getStorageInfo()
+    return accessToken && refreshToken
   },
 
-  getAccessToken: () => accessToken,
-
-  getRefreshToken: () => refreshToken,
-
-  setRememberMe: (remember) => {
-    rememberMe = remember
+  getAccessToken: () => {
+    const { accessToken } = getStorageInfo()
+    return accessToken
   },
 
-  setToken: (token) => {
+  getRefreshToken: () => {
+    const { refreshToken } = getStorageInfo()
+    return refreshToken
+  },
+
+  setNewToken: (token, rememberMe) => {
     const storage = rememberMe ? localStorage : sessionStorage
-
-    accessToken = token.access_token
-    refreshToken = token.refresh_token
 
     storage.setItem(ACCESS_TOKEN_KEY, token.access_token)
     storage.setItem(REFRESH_TOKEN_KEY, token.refresh_token)
   },
 
-  getLastMapView: () => {
-    if (rememberMe === null) {
-      initFromStorage()
+  renewToken: (token) => {
+    const { storage } = getStorageInfo()
+    if (storage) {
+      storage.setItem(ACCESS_TOKEN_KEY, token.access_token)
+      storage.setItem(REFRESH_TOKEN_KEY, token.refresh_token)
     }
+  },
+
+  getLastMapView: () => {
+    const { rememberMe } = getStorageInfo()
     if (rememberMe) {
       const stored = localStorage.getItem(LAST_MAP_VIEW_KEY)
       return stored ? JSON.parse(stored) : null
@@ -64,12 +68,14 @@ const authStore = {
   },
 
   setLastMapView: (mapView) => {
+    const { rememberMe } = getStorageInfo()
     if (rememberMe) {
       localStorage.setItem(LAST_MAP_VIEW_KEY, JSON.stringify(mapView))
     }
   },
 
-  removeToken: () => {
+  removeTokens: () => {
+    const { rememberMe } = getStorageInfo()
     if (rememberMe) {
       localStorage.removeItem(ACCESS_TOKEN_KEY)
       localStorage.removeItem(REFRESH_TOKEN_KEY)
@@ -80,10 +86,6 @@ const authStore = {
       sessionStorage.removeItem(ACCESS_TOKEN_KEY)
       sessionStorage.removeItem(REFRESH_TOKEN_KEY)
     }
-
-    accessToken = null
-    refreshToken = null
-    rememberMe = null
   },
 }
 
