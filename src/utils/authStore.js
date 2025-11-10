@@ -28,15 +28,9 @@ const getStorageInfo = () => {
 }
 
 const authStore = {
-  getToken: () => {
+  hasTokens: () => {
     const { accessToken, refreshToken } = getStorageInfo()
-    if (accessToken && refreshToken) {
-      return {
-        access_token: accessToken,
-        refresh_token: refreshToken,
-      }
-    }
-    return null
+    return accessToken && refreshToken
   },
 
   getAccessToken: () => {
@@ -80,7 +74,7 @@ const authStore = {
     }
   },
 
-  removeToken: () => {
+  removeTokens: () => {
     const { rememberMe } = getStorageInfo()
     if (rememberMe) {
       localStorage.removeItem(ACCESS_TOKEN_KEY)

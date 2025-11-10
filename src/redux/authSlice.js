@@ -3,54 +3,30 @@ import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { LANGUAGE_CACHE_KEY } from '../i18n'
-import { editUser, getUser, getUserToken, refreshUserToken } from '../utils/api'
+import { editUser, getUser, getUserToken } from '../utils/api'
 import authStore from '../utils/authStore'
 
 export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
-  const token = authStore.getToken()
-  let user = null
-  let error = null
-  let hadToken = false
-
-  if (!token?.access_token || !token?.refresh_token) {
-    return [null, null, hadToken]
-  }
-
-  hadToken = true
-
-  try {
-    user = await getUser(token.access_token)
-    authStore.renewToken(token)
-  } catch (err) {
-    if (
-      err.response?.status === 401 &&
-      err.response?.data?.error === 'Expired access token'
-    ) {
-      try {
-        const newToken = await refreshUserToken(token.refresh_token)
-        user = await getUser(newToken.access_token)
-        authStore.renewToken(newToken)
-      } catch (refreshError) {
-        authStore.removeToken()
-        error = refreshError
+  if (!authStore.hasTokens()) {
+    return [null, null, false]
+  } else {
+    try {
+      const user = await getUser()
+      return [user, null, true]
+    } catch (err) {
+      if (err.response?.status === 401) {
+        authStore.removeTokens()
       }
-    } else if (err.response?.status === 401) {
-      // We failed to log in with our token but can't fix the error based on response
-      authStore.removeToken()
-      error = err
-    } else {
-      error = err
+      return [null, err, true]
     }
   }
-
-  return [user, error, hadToken]
 })
 
 export const login = createAsyncThunk('auth/login', async (props) => {
   const { email, password, remember_me: rememberMe } = props
   const token = await getUserToken(email, password)
-  const user = await getUser(token.access_token)
   authStore.setNewToken(token, rememberMe)
+  const user = await getUser()
   return user
 })
 
@@ -73,7 +49,7 @@ export const authSlice = createSlice({
   },
   reducers: {
     logout: (state) => {
-      authStore.removeToken()
+      authStore.removeTokens()
       state.user = null
       localStorage.removeItem(LANGUAGE_CACHE_KEY)
     },
