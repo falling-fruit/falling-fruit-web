@@ -11,10 +11,6 @@
 # production
 /build
 
-# mobile
-/android
-/ios
-
 # misc
 .DS_Store
 .env
