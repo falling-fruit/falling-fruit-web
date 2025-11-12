@@ -33,7 +33,9 @@ const MapContainer = styled.div`
   display: ${(props) => (props.show ? 'block' : 'none')};
   position: absolute;
   inset-block-start: ${(props) =>
-    props.isEmbed ? 0 : NAVIGATION_BAR_HEIGHT_PX}px;
+    props.isEmbed
+      ? 0
+      : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
   inset-block-end: ${(props) => (props.isEmbed ? 0 : TABS_HEIGHT_PX)}px;
   inset-inline: 0;
 `
@@ -41,7 +43,9 @@ const MapContainer = styled.div`
 const ListPageWrapper = styled.div`
   overflow: scroll;
   margin-block-start: ${(props) =>
-    props.isEmbed ? EMBED_HEADER_HEIGHT_PX : NAVIGATION_BAR_HEIGHT_PX}px;
+    props.isEmbed
+      ? `${EMBED_HEADER_HEIGHT_PX}px`
+      : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
   inset-block-end: ${(props) => (props.isEmbed ? 0 : TABS_HEIGHT_PX)}px;
   padding-top: ${(props) => (props.isEmbed ? 0 : 4)}px;
 `
@@ -192,7 +196,11 @@ const MobileLayout = () => {
                   (!match.params.postfix ||
                     match.params.postfix === 'position') && (
                     <>
-                      <div style={{ paddingBlockEnd: `${TABS_HEIGHT_PX}px` }} />
+                      <div
+                        style={{
+                          paddingBlockEnd: `calc(${TABS_HEIGHT_PX}px + env(safe-area-inset-bottom, 0))`,
+                        }}
+                      />
                       <TabList
                         style={{
                           zIndex: zIndex.mobileTablist,
