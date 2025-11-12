@@ -11,6 +11,7 @@
   "packageManager": "yarn@1.22.22",
   "dependencies": {
     "@capacitor/android": "^7.4.4",
+    "@capacitor/camera": "^7.0.2",
     "@capacitor/cli": "^7.4.4",
     "@capacitor/core": "^7.4.4",
     "@capacitor/ios": "^7.4.4",
@@ -68,6 +69,7 @@
     "@babel/core": "^7.0.0-0",
     "@babel/plugin-syntax-flow": "^7.14.5",
     "@babel/plugin-transform-react-jsx": "^7.14.9",
+    "@capacitor/assets": "^3.0.5",
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
     "@types/node": "*",
     "@types/react-router-dom": "^5.3.3",

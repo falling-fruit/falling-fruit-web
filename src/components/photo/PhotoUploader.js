@@ -40,13 +40,32 @@ export const PhotoUploader = ({ value, onChange }) => {
 
     await Promise.all(
       organizerPhotos.map(async (photo) => {
-        if (photo.file) {
+        if (photo.file || photo.capacitorImage) {
           const oldId = photo.id
 
           let resp
+          let fileToUpload = photo.file
+
+          // Convert Capacitor image to File if needed
+          if (photo.capacitorImage && !photo.file) {
+            try {
+              const response = await fetch(photo.capacitorImage.webPath)
+              const blob = await response.blob()
+              fileToUpload = new File([blob], photo.name, {
+                type: 'image/jpeg',
+              })
+            } catch (error) {
+              toast.error(
+                t('error_message.api.photo_upload_failed', {
+                  message: error.message || t('error_message.unknown_error'),
+                }),
+              )
+              return
+            }
+          }
 
           try {
-            resp = await addPhoto(photo.file)
+            resp = await addPhoto(fileToUpload)
           } catch (error) {
             toast.error(
               t('error_message.api.photo_upload_failed', {

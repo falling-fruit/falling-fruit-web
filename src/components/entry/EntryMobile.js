@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import {
+  NAVIGATION_BAR_HEIGHT_PX,
+  TABS_HEIGHT_PX,
+} from '../../constants/mobileLayout'
+import {
   fullyOpenPaneDrawer,
   setPaneDrawerToLowPosition,
   setPaneDrawerToMiddlePosition,
@@ -21,8 +25,8 @@ import TopButtonsMobile from './TopButtonsMobile'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
-const TOP_BAR_HEIGHT = 80
-const ENTRY_TABS_HEIGHT = 50
+const TOP_BAR_HEIGHT = NAVIGATION_BAR_HEIGHT_PX
+const ENTRY_TABS_HEIGHT = TABS_HEIGHT_PX
 
 const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
   Math.max(
