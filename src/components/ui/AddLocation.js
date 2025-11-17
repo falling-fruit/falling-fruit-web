@@ -12,7 +12,7 @@ import IconButton from './IconButton'
 
 const StyledAddLocationButton = styled(IconButton)`
   position: absolute;
-  inset-block-end: 10px;
+  inset-block-end: calc(10px + env(safe-area-inset-bottom, 0));
   inset-inline-end: 10px;
   z-index: 1;
   opacity: ${({ greyedOut }) => (greyedOut ? '0.5' : '1')};
