@@ -208,7 +208,10 @@ const EntryMobile = () => {
           />
         )}
         <EntryTabs
-          style={{ transition: 'none' }}
+          style={{
+            transition: 'none',
+            paddingTop: hasImages ? '0' : 'env(safe-area-inset-top, 0)',
+          }}
           onChange={(index) => dispatch(setTabIndex(index))}
           index={tabIndex}
         >
