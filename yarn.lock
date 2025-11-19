@@ -2018,6 +2018,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor/preferences/-/preferences-7.0.2.tgz#9557bd817b2f4cde942d3ce1cdf5abdb1292357f"
   integrity sha512-JVCy0/oc6RsRencLOZ8rMqjNxAlHs7awPJU/MXqangsJ48oO2PnYGHfCvci6WgIJlqyC0QhvWZaO1BR1lVkHWQ==
 
+"@capacitor/splash-screen@^7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@capacitor/splash-screen/-/splash-screen-7.0.3.tgz#bc3efbcdfc85c017368f5d7d73b3b0c87c42fc45"
+  integrity sha512-coAw2de3rRX0EfneK0/D9IZaDAUOtsPaE9ZNbSdCs2UtmXp0hdcr5Tsil01Kve707nQfLsd03pmvaesJYD60EA==
+
 "@craco/craco@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@craco/craco/-/craco-7.1.0.tgz#12bd394c7f0334e214302e4d35a1768f68042fbb"

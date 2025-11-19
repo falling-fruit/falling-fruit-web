@@ -16,6 +16,7 @@
     "@capacitor/core": "^7.4.4",
     "@capacitor/ios": "^7.4.4",
     "@capacitor/preferences": "^7.0.2",
+    "@capacitor/splash-screen": "^7.0.3",
     "@craco/craco": "^7.1.0",
     "@fontsource/noto-sans": "^5.2.5",
     "@fontsource/noto-sans-arabic": "^5.2.5",
