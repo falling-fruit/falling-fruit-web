@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect,useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
@@ -135,6 +135,31 @@ const EntryMobile = () => {
     reviews.filter((review) => review.photos && review.photos.length > 0)
       .length > 0
 
+  const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0)
+
+  useEffect(() => {
+    const getSafeAreaInsetBottom = () => {
+      const value = getComputedStyle(document.documentElement)
+        .getPropertyValue('--safe-area-inset-bottom')
+        .trim()
+
+      // Convert px value to number, default to 0 if parsing fails
+      const numericValue = parseFloat(value) || 0
+      setSafeAreaInsetBottom(numericValue)
+    }
+
+    getSafeAreaInsetBottom()
+
+    // Listen for orientation changes that might affect safe area
+    window.addEventListener('orientationchange', getSafeAreaInsetBottom)
+    window.addEventListener('resize', getSafeAreaInsetBottom)
+
+    return () => {
+      window.removeEventListener('orientationchange', getSafeAreaInsetBottom)
+      window.removeEventListener('resize', getSafeAreaInsetBottom)
+    }
+  }, [])
+
   const [currentTranslateY, setCurrentTranslateY] = useState(
     drawerFullyOpen || drawerDisabled
       ? hasImages
@@ -158,7 +183,7 @@ const EntryMobile = () => {
         displayOverTopBar={!filterOpen || drawerFullyOpen}
         topPositionHeight={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
         middlePositionScreenRatio={0.7}
-        partialPositionHeightPx={80}
+        partialPositionHeightPx={80 + safeAreaInsetBottom}
         position={
           drawerFullyOpen || drawerDisabled
             ? 'top'
