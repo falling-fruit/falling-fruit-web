@@ -38,8 +38,35 @@
 
   - `REACT_APP_GOOGLE_MAPS_API_KEY`: Your own API key for [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
-- Start the application.
+## Web app
 
-  ```sh
-  yarn start
-  ```
+The above instructions are enough - you can start the application:
+
+```sh
+yarn start
+```
+
+## Mobile apps
+
+We use Capacitor to package the website into Android and iOS apps. These are commands for building the assets and syncing them into the `android`/`ios` directories:
+
+```sh
+yarn build
+npx cap sync
+```
+
+Afterwards you can launch Android Studio:
+
+```sh
+npx cap open android
+```
+
+or xCode:
+
+```sh
+cd ios/App
+pod install
+open App.xcworkspace
+```
+
+NB: most development work can be adequately tested on desktop by just opening a narrow window. Some differences involve device permissions and existence of curved areas in the layout.
