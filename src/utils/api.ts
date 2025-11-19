@@ -2,7 +2,7 @@ import axios from 'axios'
 import { matchPath } from 'react-router'
 
 import { paths } from './apiSchema'
-import authStore from './authStore'
+import persistentStore from './persistentStore'
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -30,7 +30,7 @@ instance.interceptors.request.use((config) => {
     config.url &&
     matchPath(config.url, { path: anonymousGetUrls })
 
-  const accessToken = authStore.getAccessToken()
+  const accessToken = persistentStore.getAccessToken()
 
   if (accessToken && !isAnonymous) {
     config.headers.Authorization = `Bearer ${accessToken}`
@@ -49,13 +49,13 @@ instance.interceptors.response.use(
       error.response.data.error === 'Expired access token' &&
       !originalRequest._retry
     ) {
-      const refreshToken = authStore.getRefreshToken()
+      const refreshToken = persistentStore.getRefreshToken()
 
       if (refreshToken) {
         originalRequest._retry = true
 
         const newToken = await refreshUserToken(refreshToken)
-        authStore.renewToken(newToken)
+        persistentStore.renewToken(newToken)
 
         return instance(originalRequest)
       }
