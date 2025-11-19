@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import { Select } from './components/ui/Select'
+import persistentStore from './utils/persistentStore'
 
 const setDocumentDir = (language) => {
   document.dir = ['ar', 'he'].includes(language) ? 'rtl' : 'ltr'
@@ -95,7 +96,7 @@ const setLanguageFromLocaleString = (locale) => {
 
   if (value) {
     i18n.changeLanguage(value)
-    localStorage.setItem(LANGUAGE_CACHE_KEY, value)
+    persistentStore.setLanguage(value)
     setDocumentDir(value)
   }
 }
@@ -110,7 +111,7 @@ const LanguageSelect = () => {
       value={LANGUAGE_OPTIONS.find((option) => option.value === i18n.language)}
       onChange={(option) => {
         i18n.changeLanguage(option.value, () => {
-          localStorage.setItem(LANGUAGE_CACHE_KEY, option.value)
+          persistentStore.setLanguage(option.value)
           setDocumentDir(option.value)
           if (!hasToasted && googleMap) {
             toast.info(
