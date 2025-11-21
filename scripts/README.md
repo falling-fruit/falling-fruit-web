@@ -1,67 +1,79 @@
 # Translation Management Scripts
 
-This repository contains scripts for managing translations for a React application.
+This folder contains tools for managing translations for a React application.
 
 ## Main Script: translation_manager.py
 
 This script combines multiple functionalities for managing translations.
 
-### Prerequisites
-
-- Python 3.6 or higher
-- `pyyaml` library
-
 ### Installation
-
-1. Ensure you have Python 3.6+ installed.
-2. Install required packages:
-   ```
-   pip install pyyaml
-   ```
-
-### Usage
 
 Run the script with the following command:
 
 ```
-python scripts/translation_manager.py [OPTIONS]
+python3 -m venv .env
+source .env/bin/activate
+pip install -r requirements.txt
 ```
+
+To get AI translations, you also need:
+
+```
+export ANTHROPIC_API_KEY="your api key"
+```
+
+### Usage
 
 Options:
 
-- `--component_path PATH`: Path to the React component file
-- `--yaml_folder PATH`: Path to the folder containing YAML locale files
-- `--json_folder PATH`: Path to the folder for output JSON locale files
-- `--migrate`: Migrate translations from YAML to JSON
-- `--remove-params`: Remove locale parameters from non-English JSON files
-- `--replace-placeholders`: Replace %{...} placeholders with {{...}}
+- `--source_path PATH`: Path to source file or directory to scan for translations
+- `--json_folder_path PATH`: Path to the folder for JSON locale files
+- `--list-in-source`: List all translation keys in the source files
+- `--list-in-json`: List all translation keys and values from JSON files
+- `--rename-key OLD_KEY NEW_KEY`: Rename a translation key in source and JSON files
+- `--check-translations`: Check if all translation keys exist in all language files (TAP format)
+- `--remove-orphan-keys`: Remove keys from JSON files that don't exist in source files
+- `--fill-up-translations`: Fill up missing translations using English as source
 
 ### Examples
 
-1. Migrate translations:
+1. List translation keys in source files:
 
-   ```
-   python scripts/translation_manager.py --component_path src/components/about/ProjectPage.js --yaml_folder config/locales --json_folder public/locales --migrate
-   ```
-
-2. Remove locale parameters:
-
-   ```
-   python scripts/translation_manager.py --json_folder public/locales --remove-params
+   ```bash
+   python translation_manager.py --source_path ../src/components --list-in-source
    ```
 
-3. Replace placeholders:
+2. List translation keys and values in JSON files:
+
+   ```bash
+   python translation_manager.py --json_folder_path ../public/locales --list-in-json
    ```
-   python scripts/translation_manager.py --json_folder public/locales --replace-placeholders
+
+3. Rename a translation key:
+
+   ```bash
+   python translation_manager.py --source_path ../src/components --json_folder_path ../public/locales --rename-key "old.key" "new.key"
    ```
 
-## Other Scripts
+4. Check translation completeness:
 
-### extractTranslationKeys.js
+   ```bash
+   python translation_manager.py --source_path ../src/components --json_folder_path ../public/locales --check-translations
+   ```
 
-This script is designed to be run in a browser console to extract translation keys from a webpage with i18n_viz enabled.
+5. Remove orphaned keys from JSON files:
 
-## Notes
+   ```bash
+   python translation_manager.py --source_path ../src/components --json_folder_path ../public/locales --remove-orphan-keys
+   ```
 
-- Always backup your files before running these scripts.
-- Ensure you have the necessary permissions to read from and write to the specified directories.
+6. Fill up missing translations using English as source:
+   ```bash
+   python translation_manager.py --json_folder_path ../public/locales --fill-up-translations
+   ```
+
+## Adding a new language
+
+```
+echo {} > ../public/locales/ru.json
+```
