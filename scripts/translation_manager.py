@@ -4,6 +4,7 @@ import json
 import os
 import sys
 import re
+import logging
 from pathlib import Path
 
 import sys
@@ -16,6 +17,8 @@ from translation import (
 from tap_stream import TapStream
 from translation_filler import fill_up_translation
 
+logger = logging.getLogger(__name__)
+
 
 class TranslationManager:
     def __init__(self, source_path, json_folder_path):
@@ -26,13 +29,13 @@ class TranslationManager:
 
     def list_component_keys(self):
         if not self.source_directory or not self.source_directory.components:
-            print("Error: No source files with translations found.")
+            logger.error("No source files with translations found.")
             return
 
         all_keys = self.source_directory.list_component_keys()
         
         if not all_keys:
-            print("No translation keys found in any components.")
+            logger.info("No translation keys found in any components.")
             return
 
         # Print sorted keys
@@ -52,18 +55,18 @@ class TranslationManager:
                 key_in_english = True
 
         if not key_in_source and not key_in_english:
-            print(f"Error: Key '{old_key}' not found in source files or English JSON")
+            logger.error(f"Key '{old_key}' not found in source files or English JSON")
             return False
         if not key_in_source:
-            print(f"Error: Key '{old_key}' not found in source files")
+            logger.error(f"Key '{old_key}' not found in source files")
             return False
         if not key_in_english:
-            print(f"Error: Key '{old_key}' not found in English JSON")
+            logger.error(f"Key '{old_key}' not found in English JSON")
             return False
 
         # Rename in source files
         source_files_changed = self.source_directory.rename_key(old_key, new_key)
-        print(f"Updated key in {source_files_changed} source files")
+        logger.info(f"Updated key in {source_files_changed} source files")
 
         # Rename in JSON files
         json_files_changed = 0
@@ -72,26 +75,26 @@ class TranslationManager:
                 translation = Translation.from_json_file(json_file)
                 value = translation.get(old_key)
                 if value is not None:
-                    print(f"Renaming key in JSON file: {json_file}")
-                    print(f"  Old value: {value}")
+                    logger.info(f"Renaming key in JSON file: {json_file}")
+                    logger.debug(f"  Old value: {value}")
                     translation.set(new_key, value)
                     # Remove old key
                     translation.entries.pop(old_key, None)
                     # Save using Translation methods
                     translation.save_as_json(json_file)
                     json_files_changed += 1
-        print(f"Updated key in {json_files_changed} JSON files")
+        logger.info(f"Updated key in {json_files_changed} JSON files")
 
         return True
 
     def list_json_keys(self):
         if not self.json_folder_path or not self.json_folder_path.exists():
-            print("Error: JSON folder does not exist.")
+            logger.error("JSON folder does not exist.")
             return
 
         json_files = list(self.json_folder_path.glob('*.json'))
         if not json_files:
-            print(f"No JSON files found in {self.json_folder_path}")
+            logger.warning(f"No JSON files found in {self.json_folder_path}")
             return
 
         def traverse_dict(d, prefix=""):
@@ -116,16 +119,16 @@ class TranslationManager:
     def remove_orphan_keys(self):
         """Remove keys from JSON files that don't exist in source files"""
         if not self.source_directory or not self.source_directory.components:
-            print("Error: No source files with translations found.")
+            logger.error("No source files with translations found.")
             return
             
         if not self.json_folder_path or not self.json_folder_path.exists():
-            print("Error: JSON folder does not exist.")
+            logger.error("JSON folder does not exist.")
             return
             
         json_files = list(self.json_folder_path.glob('*.json'))
         if not json_files:
-            print(f"No JSON files found in {self.json_folder_path}")
+            logger.warning(f"No JSON files found in {self.json_folder_path}")
             return
             
         # Get all keys from source files
@@ -145,24 +148,24 @@ class TranslationManager:
             # Save the file if orphan keys were removed
             if orphan_keys:
                 translation.save_as_json(json_file)
-                print(f"{json_file.name}: Removed {len(orphan_keys)} orphan keys: {', '.join(orphan_keys)}")
+                logger.info(f"{json_file.name}: Removed {len(orphan_keys)} orphan keys: {', '.join(orphan_keys)}")
             else:
-                print(f"{json_file.name}: No orphan keys found")
+                logger.info(f"{json_file.name}: No orphan keys found")
     
 
     def check_translations(self):
         """Check if all translation keys exist in all language files (TAP format)"""
         if not self.source_directory or not self.source_directory.components:
-            print("Error: No source files with translations found.")
+            logger.error("No source files with translations found.")
             return
             
         if not self.json_folder_path or not self.json_folder_path.exists():
-            print("Error: JSON folder does not exist.")
+            logger.error("JSON folder does not exist.")
             return
             
         json_files = list(self.json_folder_path.glob('*.json'))
         if not json_files:
-            print(f"No JSON files found in {self.json_folder_path}")
+            logger.warning(f"No JSON files found in {self.json_folder_path}")
             return
             
         # Get all keys from source files
@@ -192,18 +195,18 @@ class TranslationManager:
     def fill_up_translations(self):
         """Fill up missing translations in all language files using English as source"""
         if not self.json_folder_path or not self.json_folder_path.exists():
-            print("Error: JSON folder does not exist.")
+            logger.error("JSON folder does not exist.")
             return
             
         json_files = list(self.json_folder_path.glob('*.json'))
         if not json_files:
-            print(f"No JSON files found in {self.json_folder_path}")
+            logger.warning(f"No JSON files found in {self.json_folder_path}")
             return
             
         # Get English translation as source
         en_json_path = self.json_folder_path / "en.json"
         if not en_json_path.exists():
-            print("Error: English translation file (en.json) not found.")
+            logger.error("English translation file (en.json) not found.")
             return
             
         source_translation = Translation.from_json_file(en_json_path)
@@ -213,15 +216,18 @@ class TranslationManager:
             if json_file.stem == "en":
                 continue
                 
-            print(f"Processing {json_file.name}...")
+            logger.info(f"Processing {json_file.name}...")
             target_translation = Translation.from_json_file(json_file)
             
+            # Extract language code from filename (e.g., "ru" from "ru.json")
+            language_code = json_file.stem
+            
             # Fill up translations
-            result_translation = fill_up_translation(source_translation, target_translation)
+            result_translation = fill_up_translation(source_translation, target_translation, language_code)
             
             # Save the result
             result_translation.save_as_json(json_file)
-            print(f"Updated {json_file.name}")
+            logger.info(f"Updated {json_file.name}")
 
 
 def main():
@@ -238,31 +244,41 @@ def main():
                         help="Remove keys from JSON files that don't exist in source files")
     parser.add_argument("--fill-up-translations", action="store_true",
                         help="Fill up missing translations in all language files using English as source")
+    parser.add_argument("--log-level", default="INFO", 
+                        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                        help="Set the logging level (default: INFO)")
     
     args = parser.parse_args()
 
+    # Configure logging
+    logging.basicConfig(
+        level=getattr(logging, args.log_level),
+        format='%(asctime)s %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+
     if args.list_in_source and not args.source_path:
-        print("Error: --source_path must be specified for --list-in-source")
+        logger.error("--source_path must be specified for --list-in-source")
         parser.print_help()
         return
 
     if args.list_in_json and not args.json_folder_path:
-        print("Error: --json_folder_path must be specified for --list-in-json")
+        logger.error("--json_folder_path must be specified for --list-in-json")
         parser.print_help()
         return
         
     if args.check_translations and (not args.source_path or not args.json_folder_path):
-        print("Error: --source_path and --json_folder_path must be specified for --check-translations")
+        logger.error("--source_path and --json_folder_path must be specified for --check-translations")
         parser.print_help()
         return
         
     if args.remove_orphan_keys and (not args.source_path or not args.json_folder_path):
-        print("Error: --source_path and --json_folder_path must be specified for --remove-orphan-keys")
+        logger.error("--source_path and --json_folder_path must be specified for --remove-orphan-keys")
         parser.print_help()
         return
         
     if args.fill_up_translations and not args.json_folder_path:
-        print("Error: --json_folder_path must be specified for --fill-up-translations")
+        logger.error("--json_folder_path must be specified for --fill-up-translations")
         parser.print_help()
         return
 
@@ -270,7 +286,7 @@ def main():
 
     if args.rename_key:
         if not args.source_path or not args.json_folder_path:
-            print("Error: --source_path and --json_folder_path must be specified for --rename-key")
+            logger.error("--source_path and --json_folder_path must be specified for --rename-key")
             parser.print_help()
             return
         old_key, new_key = args.rename_key
@@ -293,7 +309,7 @@ def main():
 
     if not (args.rename_key or args.list_in_source or args.list_in_json or 
             args.check_translations or args.remove_orphan_keys or args.fill_up_translations):
-        print("No action specified. Use --rename_key {old_key} {new_key}, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys, --fill-up-translations.")
+        logger.warning("No action specified. Use --rename_key {old_key} {new_key}, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys, --fill-up-translations.")
         parser.print_help()
 
 if __name__ == "__main__":
