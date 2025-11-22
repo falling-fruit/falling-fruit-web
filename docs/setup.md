@@ -16,13 +16,7 @@
   nvm use
   ```
 
-- Install [`yarn`](https://classic.yarnpkg.com/en/docs/install). This is best done using `npm` (bundled with `node`).
-
-  ```sh
-  npm install --global yarn
-  ```
-
-- Install dependencies.
+- [`yarn`](https://classic.yarnpkg.com/en/docs/install) is already provided (see [`.yarn/releases`](.yarn/releases)). Use it to install dependencies.
 
   ```sh
   yarn
