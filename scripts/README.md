@@ -34,6 +34,7 @@ Options:
 - `--check-translations`: Check if all translation keys exist in all language files (TAP format)
 - `--remove-orphan-keys`: Remove keys from JSON files that don't exist in source files
 - `--fill-up-translations`: Fill up missing translations using English as source
+- `--log-level LEVEL`: Set the logging level (choices: DEBUG, INFO, WARNING, ERROR, CRITICAL; default: INFO)
 
 ### Examples
 
@@ -68,8 +69,14 @@ Options:
    ```
 
 6. Fill up missing translations using English as source:
+
    ```bash
    python translation_manager.py --json_folder_path ../public/locales --fill-up-translations
+   ```
+
+7. Run with debug logging to see detailed information:
+   ```bash
+   python translation_manager.py --source_path ../src/components --json_folder_path ../public/locales --check-translations --log-level DEBUG
    ```
 
 ## Adding a new language
