@@ -286,7 +286,7 @@ const UserMenu = () => {
               isMatch={isAccountPage}
             >
               <NavLink to="/account/edit" activeClassName="active">
-                {t('users.edit_account')}
+                {t('glossary.account')}
               </NavLink>
               <NavLink
                 to={`/users/${user.id}/activity`}
