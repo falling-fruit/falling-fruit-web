@@ -6,7 +6,7 @@ class RequireEnvVarsPlugin {
   apply(compiler) {
     compiler.hooks.beforeCompile.tap('RequireEnvVarsPlugin', () => {
       const missingVars = this.requiredVars.filter(
-        (varName) => !process.env[varName],
+        (varName) => process.env[varName] === undefined,
       )
 
       if (missingVars.length > 0) {
@@ -36,7 +36,12 @@ module.exports = {
       ]
 
       webpackConfig.plugins.push(
-        new RequireEnvVarsPlugin(['REACT_APP_API_URL', 'REACT_APP_API_KEY']),
+        new RequireEnvVarsPlugin([
+          'REACT_APP_API_URL',
+          'REACT_APP_API_KEY',
+          'REACT_APP_RECAPTCHA_SITE_KEY',
+          'REACT_APP_GOOGLE_MAPS_API_KEY',
+        ]),
       )
 
       return webpackConfig
