@@ -36,4 +36,9 @@ jobs:
 
       - name: Build application
         working-directory: .
+        env:
+          REACT_APP_API_URL: ''
+          REACT_APP_API_KEY: ''
+          REACT_APP_RECAPTCHA_SITE_KEY: ''
+          REACT_APP_GOOGLE_MAPS_API_KEY: ''
         run: yarn build
