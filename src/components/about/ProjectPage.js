@@ -187,7 +187,7 @@ const Project = () => {
         <br />
         <b dir="ltr">Ana Carolina de Lima</b> – Português
         <br />
-        <b dir="ltr">Аня Сытенкова</b> – Русский
+        <b dir="ltr">Anya Sytenkova (Аня Сытенкова)</b> – Русский
         <br />
         <b dir="ltr">Daniela Marini</b> – Español
         <br />
