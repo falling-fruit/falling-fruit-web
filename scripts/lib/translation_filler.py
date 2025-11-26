@@ -26,53 +26,8 @@ def narrow_down_source_and_target(source_content, target_content, missing_keys):
     Narrow down source and target dictionaries to a relevant subset for translation.
     Returns two dictionaries ready for Claude's prompt and the list of missing keys.
     """
-    # Find common keys between source and target
-    common_keys = [k for k in source_content if k in target_content]
-    
-    # Find the maximum number of parts in any missing key
-    max_parts = 0
-    for key in missing_keys:
-        parts = key.split('.')
-        max_parts = max(max_parts, len(parts))
-    
-    # Start with an empty set of related keys
-    related_keys = set()
-    
-    # Iterate from max_parts-1 down to 0
-    for num_matching_parts in range(max_parts-1, -1, -1):
-        # For each common key, check if it matches any missing key with at least num_matching_parts
-        for common_key in common_keys:
-            # Skip keys we've already added
-            if common_key in related_keys:
-                continue
-                
-            common_parts = common_key.split('.')
-            
-            # Check against each missing key
-            for missing_key in missing_keys:
-                missing_parts = missing_key.split('.')
-                
-                # Check if we have at least num_matching_parts matching parts
-                matches = 0
-                for i in range(min(len(common_parts), len(missing_parts))):
-                    if common_parts[i] == missing_parts[i]:
-                        matches += 1
-                    else:
-                        break
-                
-                # If we have enough matching parts, add this key to our context
-                if matches >= num_matching_parts:
-                    related_keys.add(common_key)
-                    break
-        
-        # If we have enough context keys, we can stop
-        if len(related_keys) >= 5:
-            break
-    
-    # Convert to list and limit to 5 keys if needed
-    related_keys = list(related_keys)
-    if len(related_keys) > 5:
-        related_keys = related_keys[:5]
+    # AD HOC CHANGE: Only include pages.about.more_about_html
+    related_keys = ['pages.about.more_about_html']
     
     # Create narrowed down dictionaries with only the keys to keep
     narrowed_source = {k: source_content[k] for k in related_keys if k in source_content}
@@ -115,6 +70,8 @@ Missing keys that need translation:
 
 Read the source translation and fill out the gaps in the target translation by translating from source into target language. Be very careful to reply with complete file.
 
+IMPORTANT: Inline the count of types to 'thousands' and the count of locations to 'millions' in the target language. We no longer provide these from the API. Don't make other edits.
+
 Please provide your response as the complete modified version of the target JSON.
 
 Respond with ONLY valid JSON. Do not include code fences or commentary.
@@ -129,6 +86,8 @@ The following keys need to be translated to {language_name}:
 {json.dumps(missing_keys_list, indent=2)}
 
 Please translate these keys from English to {language_name}. Maintain the same JSON structure and key names.
+
+IMPORTANT: Inline the count of types to 'thousands' and the count of locations to 'millions' in the target language. We no longer provide these from the API. Don't make other edits.
 
 Please provide your response as a JSON object containing the translated keys. Respond with ONLY valid JSON. Do not include code fences or commentary.
 
