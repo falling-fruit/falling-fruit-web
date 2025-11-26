@@ -14,7 +14,7 @@ import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
 import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { Page } from '../ui/PageTemplate'
+import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
 const formToUser = ({ email, name, bio, announcements_email, range }) => ({
   email,
@@ -48,7 +48,7 @@ const AccountPage = () => {
   }
 
   return (
-    <Page>
+    <TopSafeAreaInsetPage>
       <h1>{t('users.edit_account')}</h1>
 
       {user ? (
@@ -116,7 +116,7 @@ const AccountPage = () => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </Page>
+    </TopSafeAreaInsetPage>
   )
 }
 

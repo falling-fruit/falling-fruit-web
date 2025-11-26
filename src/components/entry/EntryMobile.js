@@ -16,7 +16,7 @@ import {
 } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import DraggablePane from '../ui/DraggablePane'
-import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
+import { CardTabs, Tab, TabList, TabPanel, TabPanels } from './CardTabs'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
@@ -55,6 +55,19 @@ const EntryLoading = () => (
     <Skeleton height={16} width="50%" style={{ marginBottom: '0.5em' }} />
   </article>
 )
+
+const BlurredSafeArea = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+  pointer-events: none;
+`
 
 const RevealedFromUnderneath = styled.div`
   width: 100%;
@@ -172,6 +185,7 @@ const EntryMobile = () => {
 
   return isLoading === null ? null : (
     <>
+      {hasImages && <BlurredSafeArea />}
       <DraggablePane
         displayOverTopBar={!filterOpen || drawerFullyOpen}
         topPositionHeight={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
@@ -225,7 +239,7 @@ const EntryMobile = () => {
             targetHeight={ENTRY_TABS_HEIGHT}
           />
         )}
-        <EntryTabs
+        <CardTabs
           style={{
             transition: 'none',
             paddingTop: hasImages ? '0' : 'env(safe-area-inset-top, 0)',
@@ -258,7 +272,7 @@ const EntryMobile = () => {
               />
             </TabPanel>
           </TabPanels>
-        </EntryTabs>
+        </CardTabs>
       </DraggablePane>
       {drawerFullyOpen && <TopButtonsMobile hasImages={hasImages} />}
     </>

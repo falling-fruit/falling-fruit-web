@@ -10,8 +10,8 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import useShareUrl from '../share/useShareUrl'
 import { AddLocationEmbed } from '../ui/AddLocation'
 import { zIndex } from '../ui/GlobalStyle'
-import { PageTabs, Tab, TabList } from '../ui/PageTabs'
 import ResetButton from '../ui/ResetButton'
+import { Tab, TabList, VerticalTabs } from './VerticalTabs'
 
 const HeaderContainer = styled.div`
   position: absolute;
@@ -20,42 +20,6 @@ const HeaderContainer = styled.div`
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   flex-direction: column;
-`
-
-const VerticalTabs = styled(PageTabs)`
-  border-top: 1px solid ${({ theme }) => theme.secondaryBackground};
-  border-bottom: 1px solid ${({ theme }) => theme.secondaryBackground};
-  [data-reach-tab-list] {
-    flex-direction: column;
-    height: auto;
-
-    [data-reach-tab] {
-      flex-direction: row;
-      justify-content: flex-start;
-      padding: 8px 16px;
-      border-top: none;
-      border-left: 4px solid ${({ theme }) => theme.secondaryBackground};
-      text-align: left;
-      font-size: 1em;
-      width: 100%;
-      height: 40px;
-      display: flex;
-      align-items: center;
-
-      svg {
-        margin-inline: 0.5em !important;
-        display: inline-block;
-        margin-block: 0 !important;
-        vertical-align: middle;
-        height: 24px;
-      }
-
-      &[data-selected] {
-        border-top: none;
-        border-left-color: ${({ theme }) => theme.orange};
-      }
-    }
-  }
 `
 
 const HeaderContent = styled.div`

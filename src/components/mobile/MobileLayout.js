@@ -22,12 +22,11 @@ import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
-import { PageTabs, TabList, TabPanels } from '../ui/PageTabs'
 import TopBar from '../ui/TopBar'
 import EditLocationPositionNav from './EditLocationPositionNav'
 import InitLocationNav from './InitLocationNav'
+import { PageTabs, TabList, TabPanels, useTabs } from './MobileTabs'
 import NavigationBar from './NavigationBar'
-import Tabs from './Tabs'
 
 const MapContainer = styled.div`
   display: ${(props) => (props.show ? 'block' : 'none')};
@@ -95,7 +94,7 @@ const shouldDisplayMapPage = (pathname) => {
 const MobileLayout = () => {
   const streetView = useSelector((state) => state.location.streetViewOpen)
   const { pathname } = useLocation()
-  const { tabIndex, handleTabChange, tabContent } = Tabs()
+  const { tabIndex, handleTabChange, tabContent } = useTabs()
   const isEmbed = useIsEmbed()
 
   return (
