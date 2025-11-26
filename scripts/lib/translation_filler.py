@@ -5,6 +5,7 @@ import logging
 from anthropic import Anthropic
 from translation import Translation
 from iso639 import Lang
+from iso639.exceptions import InvalidLanguageValue
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ def get_language_name(language_code):
     try:
         lang = Lang(language_code)
         return lang.name
-    except KeyError:
+    except InvalidLanguageValue:
         return language_code.upper()
 
 def find_missing_keys(source, target):
