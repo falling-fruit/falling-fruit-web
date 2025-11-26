@@ -16,7 +16,7 @@ import { Checkbox, Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { Page } from '../ui/PageTemplate'
+import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
 const formToUser = ({ email, password, announcements_email, name }, user) => ({
   email,
@@ -49,7 +49,7 @@ const ChangeEmailPage = () => {
   }
 
   return (
-    <Page>
+    <TopSafeAreaInsetPage>
       <h1>{t('users.email_settings')}</h1>
 
       {user ? (
@@ -139,7 +139,7 @@ const ChangeEmailPage = () => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </Page>
+    </TopSafeAreaInsetPage>
   )
 }
 

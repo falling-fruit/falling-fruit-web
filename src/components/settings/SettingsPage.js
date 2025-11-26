@@ -17,6 +17,15 @@ import GoogleTransit from './mapTiles/google-transit.png'
 import OSMStandard from './mapTiles/osm-standard.png'
 import OSMTonerLite from './mapTiles/osm-toner-lite.png'
 
+const SafeAreaTop = styled.div`
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: env(safe-area-inset-top, 0);
+  background-color: ${({ theme }) => theme.secondaryBackground};
+  z-index: 1;
+`
+
 const Page = styled.div`
   box-sizing: border-box;
   height: 100%;
@@ -39,7 +48,7 @@ const Page = styled.div`
       `
     } else {
       return `
-        padding-block-start: 26px;
+        padding-block-start: calc(26px + env(safe-area-inset-top, 0));
         padding-inline: 26px;
       `
     }
@@ -315,19 +324,22 @@ const SettingsPage = ({ isDesktop, isEmbed }) => {
   const { t } = useTranslation()
 
   return (
-    <Page isEmbed={isEmbed} isDesktop={isDesktop}>
-      {!isDesktop && <h2>{t('menu.settings')}</h2>}
-      <h3>{t('pages.settings.data')}</h3>
-      <ShowLabelsCheckbox />
-      <h3>{t('glossary.map')}</h3>
-      <MapSettings />
-      {!isDesktop && (
-        <>
-          <h3>{t('pages.settings.regional')}</h3>
-          <RegionalSettings />
-        </>
-      )}
-    </Page>
+    <>
+      {!isDesktop && !isEmbed && <SafeAreaTop />}
+      <Page isEmbed={isEmbed} isDesktop={isDesktop}>
+        {!isDesktop && <h2>{t('menu.settings')}</h2>}
+        <h3>{t('pages.settings.data')}</h3>
+        <ShowLabelsCheckbox />
+        <h3>{t('glossary.map')}</h3>
+        <MapSettings />
+        {!isDesktop && (
+          <>
+            <h3>{t('pages.settings.regional')}</h3>
+            <RegionalSettings />
+          </>
+        )}
+      </Page>
+    </>
   )
 }
 

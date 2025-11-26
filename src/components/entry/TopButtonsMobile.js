@@ -27,6 +27,16 @@ const StyledButtons = styled.div`
   ${({ whiteBackground }) => whiteBackground && `background: white;`}
   pointer-events: none;
 
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    height: env(safe-area-inset-top, 0);
+    ${({ theme, whiteBackground }) =>
+      whiteBackground && `background: ${theme.secondaryBackground};`}
+  }
+
   button {
     pointer-events: auto;
   }

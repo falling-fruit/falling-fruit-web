@@ -14,6 +14,16 @@ const TopBar = styled.div`
   min-height: calc(${NAVIGATION_BAR_HEIGHT_PX}px - 32px);
   border-radius: 0;
   transition: border-radius 0.2s ease-out-in;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    height: env(safe-area-inset-top, 0);
+    background: ${({ theme }) => theme.secondaryBackground};
+    z-index: ${zIndex.topBar + 1};
+  }
 `
 
 export default TopBar
