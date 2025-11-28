@@ -21,11 +21,6 @@ const StyledOverlay = styled.div`
 const NavigationBar = () => {
   const filterOpen = useSelector((state) => state.filter.isOpenInMobileLayout)
   const shareOpen = useSelector((state) => state.share.isOpenInMobileLayout)
-  const { typesAccess } = useSelector((state) => state.type)
-
-  if (typesAccess.isEmpty) {
-    return null
-  }
 
   return (
     <TopBar>
