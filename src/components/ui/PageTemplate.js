@@ -217,4 +217,4 @@ const AuthPage = ({ children }) => {
   )
 }
 
-export { AuthPage, InfoPage, Page,TopSafeAreaInsetPage }
+export { AuthPage, InfoPage, Page, TopSafeAreaInsetPage }
