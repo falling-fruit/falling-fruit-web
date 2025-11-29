@@ -71,6 +71,7 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "edit": "Edit",
+      "reload": "Reload",
       "report": "Report",
       "reset": "Reset",
       "review": "Review",
@@ -349,11 +350,21 @@
       },
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     },
+    "something_went_wrong": {
+      "header_message": "Something went wrong",
+      "error_occurred": "The following error has occurred: {{message}}",
+      "please_try_again_or_email_html": "Please try again. If the problem persists, let us know at <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+    },
     "welcome": {
       "community_driven_platform": "Falling Fruit is a community-driven platform for sharing locations of edible plants and other sources of free food.",
       "discover_and_contribute": "You can discover what others have been harvesting in your area, and contribute your own observations.",
       "explore_the_map": "Explore the map",
       "welcome_visitors_to_the_site_short": "Welcome!"
+    },
+    "network_error": {
+      "header_message": "Network error",
+      "you_have_no_internet": "We weren’t able to connect to the server. This can happen if you’re offline or if our services are temporarily unavailable.",
+      "please_try_again": "Please check your connection or try again later."
     }
   },
   "problems": {

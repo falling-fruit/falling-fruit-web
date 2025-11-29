@@ -17,6 +17,7 @@ import connectRoutes from '../connect/connectRoutes'
 import EmbedFilterPage from '../embed/EmbedFilterPage'
 import EmbedHeader from '../embed/EmbedHeader'
 import EntryMobile from '../entry/EntryMobile'
+import errorRoutes from '../error/errorRoutes'
 import { formRoutesMobile } from '../form/formRoutes'
 import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
@@ -148,6 +149,7 @@ const MobileLayout = () => {
                 {aboutRoutes}
                 {authRoutes}
                 {accountRoutes}
+                {errorRoutes}
                 <Route
                   path={[
                     '/map',
@@ -187,6 +189,7 @@ const MobileLayout = () => {
                   '/about/welcome',
                   ...aboutRoutes.map((route) => route.props.path).flat(),
                   ...activityRoutes.map((route) => route.props.path).flat(),
+                  ...errorRoutes.map((route) => route.props.path).flat(),
                 ]}
               />
               <Route path={['/locations/:locationId/edit/:postfix', '*']}>

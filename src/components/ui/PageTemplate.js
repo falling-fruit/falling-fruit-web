@@ -217,4 +217,21 @@ const AuthPage = ({ children }) => {
   )
 }
 
-export { AuthPage, InfoPage, Page, TopSafeAreaInsetPage }
+const ErrorPage = ({ children }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <PageScrollWrapper>
+      <PageWrapper isDesktop={isDesktop}>
+        {!isDesktop && (
+          <MobileHeader>
+            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+          </MobileHeader>
+        )}
+        {children}
+      </PageWrapper>
+    </PageScrollWrapper>
+  )
+}
+
+export { AuthPage, ErrorPage, InfoPage, Page, TopSafeAreaInsetPage }
