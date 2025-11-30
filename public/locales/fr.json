@@ -71,6 +71,7 @@
       "cancel": "Annuler",
       "delete": "Supprimer",
       "edit": "Modifier",
+      "reload": "Recharger",
       "report": "Signaler",
       "reset": "Réinitialiser",
       "review": "Évaluer",
@@ -281,6 +282,11 @@
       "type": "Type",
       "types_of_data": "Il y a deux catégories d'ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d'arbres» sont compilés par des villes, des universités et d'autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s'en occuper. Nous parcourons ces larges bases de données à la recherche d'espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d'arbres avec nous."
     },
+    "network_error": {
+      "header_message": "Erreur réseau",
+      "please_try_again": "Veuillez vérifier votre connexion ou réessayer plus tard.",
+      "you_have_no_internet": "Nous n'avons pas pu nous connecter au serveur. Cela peut se produire si vous êtes hors ligne ou si nos services sont temporairement indisponibles."
+    },
     "settings": {
       "bicycle": "Vélo",
       "data": "Données",
@@ -348,6 +354,11 @@
         "state": "État"
       },
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
+    },
+    "something_went_wrong": {
+      "error_occurred": "L'erreur suivante s'est produite : {{message}}",
+      "header_message": "Une erreur s'est produite",
+      "please_try_again_or_email_html": "Veuillez réessayer. Si le problème persiste, contactez-nous à <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les emplacements de plantes comestibles et d'autres sources de nourriture gratuite.",

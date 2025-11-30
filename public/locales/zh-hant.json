@@ -71,6 +71,7 @@
       "cancel": "取消",
       "delete": "刪除",
       "edit": "編輯",
+      "reload": "重新載入",
       "report": "舉報",
       "reset": "重置",
       "review": "審覈",
@@ -281,6 +282,11 @@
       "type": "類型",
       "types_of_data": "導入到 Falling Fruit 中的數據集分爲兩大類。 “社區地圖”是由覓食者和自由主義者在他們仔細研究社區尋找食物時建立的。我們感謝辛勤工作的公民製圖員，他們編制了這些數據。 “樹木清單”由希望更好地記錄和照顧樹木的城市、大學和其他機構編制。我們爲生產食物的物種挖掘這些龐大的數據集，並將它們添加到地圖中。爲了幫助我們繪製您附近的果樹地圖，請聯繫您的學校或城市，敦促他們與我們分享他們的樹木清單。"
     },
+    "network_error": {
+      "header_message": "網路錯誤",
+      "please_try_again": "請檢查您的連線或稍後再試。",
+      "you_have_no_internet": "我們無法連接到伺服器。這可能是因為您處於離線狀態，或我們的服務暫時無法使用。"
+    },
     "settings": {
       "bicycle": "自行車",
       "data": "數據",
@@ -348,6 +354,11 @@
         "state": "州/省"
       },
       "intro_html": "下面列出的是在公共場所種植食物（食物林、公共果園）、採摘食物（城市覓食、農場拾荒）或分發食物（交換、捐贈）的組織。組織按國家/地區、州（如果適用）和城市列出。那些名字被劃掉的人被認爲是不活躍的。如果您知道應該在此列表中的其他人，請<a href=\"mailto:info@fallingfruit.org\">與我們聯繫</a>！"
+    },
+    "something_went_wrong": {
+      "error_occurred": "發生以下錯誤：{{message}}",
+      "header_message": "發生錯誤",
+      "please_try_again_or_email_html": "請重試。如果問題持續存在，請透過 <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> 與我們聯繫。"
     },
     "welcome": {
       "community_driven_platform": "掉落果實是一個社區驅動的平台，用於分享可食用植物和其他免費食物的位置。",

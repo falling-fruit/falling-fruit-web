@@ -71,6 +71,7 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "edit": "Edit",
+      "reload": "Herlaai",
       "report": "Meld",
       "reset": "Reset",
       "review": "Recenseer",
@@ -281,6 +282,11 @@
       "type": "Soort",
       "types_of_data": "Geïmporteerde gegevenssets vallen onder twee hoofdcategorieën. \"Gemeenschapskaarten\" worden gebouwd door voedselverzamelaars en freegans terwijl ze hun gemeenschap afspeuren op zoek naar eetbaar voedsel. Dit wordt gedaan door hardwerkende inwoners met verstand van cartografie; onze dank is dan ook zeer groot. \"Boominventarissen\" worden samengesteld door steden, universiteiten en andere instituten die bomen beter willen documenteren en beter voor ze willen zorgen. We kammen deze gegevenssets uit en selecteren voedselproducerende soorten en voegen deze toe aan de kaart. Als u wilt helpen bij het in kaart brengen van fruitbomen in uw buurt, neem dan contact op met uw school of stad en overtuig ze ervan hun boominventaris met ons te delen."
     },
+    "network_error": {
+      "header_message": "Netwerkfout",
+      "please_try_again": "Kontroleer asseblief jou verbinding of probeer later weer.",
+      "you_have_no_internet": "Ons kon nie aan die bediener koppel nie. Dit kan gebeur as jy vanlyn is of as ons dienste tydelik onbeskikbaar is."
+    },
     "settings": {
       "bicycle": "Fiets",
       "data": "Gegevens",
@@ -348,6 +354,11 @@
         "state": "Staat"
       },
       "intro_html": "Hieronder is een lijst te vinden met organisaties die voedsel produceren in openbare ruimten (voedselbossen, openbare boomgaarden), voedsel plukken (stadsvoedselverzameling, boerderijvoedselverzameling) of voedsel verspreiden (uitwisselingen, donaties). Organisaties worden gesorteerd op land, staat (indien van toepassing) en stad. Organisaties met doorgehaalde naam zijn waarschijnlijk inactief. Als u organisaties kent die op deze lijst thuishoren, neem dan <a href=\"mailto:info@fallingfruit.org\">contact met ons</a> op!"
+    },
+    "something_went_wrong": {
+      "error_occurred": "Die volgende fout het voorgekom: {{message}}",
+      "header_message": "Iets het verkeerd geloop",
+      "please_try_again_or_email_html": "Probeer asseblief weer. As die probleem voortduur, laat weet ons by <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit is een door de gemeenschap gedreven platform voor het delen van locaties van eetbare planten en andere bronnen van gratis voedsel.",

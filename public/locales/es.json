@@ -71,6 +71,7 @@
       "cancel": "Cancelar",
       "delete": "Eliminar",
       "edit": "Editar",
+      "reload": "Recargar",
       "report": "Informar",
       "reset": "Restablecer",
       "review": "Reseñar",
@@ -281,6 +282,11 @@
       "type": "Tipo",
       "types_of_data": "Los conjuntos de datos importados a Falling Fruit se dividen en dos categorías principales. Los \"mapas comunitarios\" son construidos por cazadores-recolectores y freegans que buscan en su entorno cosas de comer. Estamos en deuda con los diligentes ciudadanos-cartógrafos que han compilado los datos. Los \"inventarios de árboles\" son compilados por ciudades, universidades y otras instituciones que desean documentar mejor y cuidar de sus árboles. Extraemos estos grandes conjuntos de datos para las especies productoras de alimentos y los agregamos al mapa. Para ayudarnos a cartografiar tu vecindario en el mapa, contacta con tu escuela o ciudad instándolos a compartir su inventario de árboles con nosotros."
     },
+    "network_error": {
+      "header_message": "Error de red",
+      "please_try_again": "Por favor, verifica tu conexión o inténtalo de nuevo más tarde.",
+      "you_have_no_internet": "No pudimos conectarnos al servidor. Esto puede suceder si estás desconectado o si nuestros servicios no están disponibles temporalmente."
+    },
     "settings": {
       "bicycle": "Bicicleta",
       "data": "Datos",
@@ -348,6 +354,11 @@
         "state": "Estado/Provincia"
       },
       "intro_html": "A continuación se enumeran las organizaciones que cultivan alimentos en los espacios públicos (bosques de alimentos, huertas públicas), recogen alimentos (forrajeo urbano, espigueo de campo), o distribuyen alimentos (intercambios, donaciones). Las organizaciones están listadas por país, estado (si procede), y ciudad. Las organizaciones con nombres tachados se consideran inactivas. Si conoces otras que deberían estar en esta lista, ¡<a href=\"mailto:info@fallingfruit.org\">contáctanos</a>!"
+    },
+    "something_went_wrong": {
+      "error_occurred": "Ha ocurrido el siguiente error: {{message}}",
+      "header_message": "Algo salió mal",
+      "please_try_again_or_email_html": "Por favor, inténtalo de nuevo. Si el problema persiste, háznoslo saber en <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit es una plataforma impulsada por la comunidad para compartir ubicaciones de plantas comestibles y otras fuentes de comida gratuita.",

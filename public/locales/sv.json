@@ -71,6 +71,7 @@
       "cancel": "Avbryt",
       "delete": "Radera",
       "edit": "Redigera",
+      "reload": "Ladda om",
       "report": "Rapportera",
       "reset": "Återställ",
       "review": "Granska",
@@ -281,6 +282,11 @@
       "type": "Typ",
       "types_of_data": "Dataset som importeras till Falling Fruit faller i två huvudkategorier. \"Gemenskapskartor\" byggs av matletare och freeganare när de utforskar sina områden efter saker att äta. Vi är tacksamma för de hårt arbetande medborgar-kartograferna som har sammanställt dessa data. \"Trädinventeringar\" sammanställs av städer, universitet och andra institutioner som vill dokumentera och ta hand om sina träd bättre. Vi utvinner dessa omfattande dataset för matproducerande arter och lägger till dem på kartan. För att hjälpa oss kartlägga fruktträden i ditt område, kontakta din skola eller stad och uppmana dem att dela sin trädinventering med oss."
     },
+    "network_error": {
+      "header_message": "Nätverksfel",
+      "please_try_again": "Vänligen kontrollera din anslutning eller försök igen senare.",
+      "you_have_no_internet": "Vi kunde inte ansluta till servern. Detta kan hända om du är offline eller om våra tjänster är tillfälligt otillgängliga."
+    },
     "settings": {
       "bicycle": "Cykel",
       "data": "Data",
@@ -348,6 +354,11 @@
         "state": "Delstat"
       },
       "intro_html": "Nedan listas organisationer som odlar mat på offentliga platser (matskog, offentliga fruktträdgårdar), plockar mat (urban skördning, efterplockning på gårdar) eller distribuerar mat (utbyten, donationer). Organisationerna är listade efter land, delstat (om tillämpligt) och stad. De med överstrukna namn antas vara inaktiva. Om du känner till andra som borde vara med på denna lista, <a href=\"mailto:info@fallingfruit.org\">kontakta oss</a>!"
+    },
+    "something_went_wrong": {
+      "error_occurred": "Följande fel har inträffat: {{message}}",
+      "header_message": "Något gick fel",
+      "please_try_again_or_email_html": "Vänligen försök igen. Om problemet kvarstår, låt oss veta på <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit är en gemenskapsdriven plattform för att dela platser med ätbara växter och andra källor till gratis mat.",

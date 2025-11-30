@@ -71,6 +71,7 @@
       "cancel": "Cancelar",
       "delete": "Excluir",
       "edit": "Editar",
+      "reload": "Recarregar",
       "report": "Relatar",
       "reset": "Redefinir",
       "review": "Avaliar",
@@ -281,6 +282,11 @@
       "type": "Tipo",
       "types_of_data": "Os conjuntos de dados importados no Falling Fruit entram em duas categorias principais. \"Mapas comunitários\" são construídas por coletores e freegans enquanto procuram alimentos em suas comunidades. Estamos em dívida com os cidadãos-cartógrafos que compilaram os dados. \"Inventários de árvores\" são compilados por munícipios, universidades e outras instituições que desejam documentar melhor e cuidar de suas árvores. Nós garimpamos esses vastos conjuntos de dados para espécies produtoras de alimentos e os adicionamos ao mapa. Para nos ajudar a mapear sua comunidade, entre em contato com sua escola ou cidade instando-os a partilhar o seu inventário de árvores com a gente."
     },
+    "network_error": {
+      "header_message": "Erro de rede",
+      "please_try_again": "Por favor, verifique sua conexão ou tente novamente mais tarde.",
+      "you_have_no_internet": "Não foi possível conectar ao servidor. Isso pode acontecer se você estiver offline ou se nossos serviços estiverem temporariamente indisponíveis."
+    },
     "settings": {
       "bicycle": "Bicicleta",
       "data": "Dados",
@@ -348,6 +354,11 @@
         "state": "Estado"
       },
       "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Aqueles com nomes riscados são inativos. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!"
+    },
+    "something_went_wrong": {
+      "error_occurred": "Ocorreu o seguinte erro: {{message}}",
+      "header_message": "Algo deu errado",
+      "please_try_again_or_email_html": "Por favor, tente novamente. Se o problema persistir, avise-nos em <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit é uma plataforma colaborativa para compartilhar localizações de plantas comestíveis e outras fontes de alimentos gratuitos.",
