@@ -42,7 +42,6 @@
       "type_add_failed": "Adding new type failed: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentication check failed: {{message}}",
       "confirmation_failed": "Account confirmation failed: {{message}}",
       "expired_refresh_token": "We've signed you out after a period of inactivity. Please sign back in.",
       "password_set_failed": "Setting new password failed: {{message}}",
@@ -282,6 +281,11 @@
       "type": "Type",
       "types_of_data": "Datasets imported into Falling Fruit fall into two main categories. \"Community maps\" are built by foragers and freegans as they peruse their communities for things to eat. We are indebted to the hardworking citizen-cartographers who have compiled this data. \"Tree inventories\" are compiled by cities, universities, and other institutions wishing to better document and care for their trees. We mine these vast datasets for food-producing species and add them to the map. To help us map your neighborhood fruit trees, contact your school or city urging them to share their tree inventory with us."
     },
+    "network_error": {
+      "could_not_connect": "We were unable to connect. You might be offline, or the service may be temporarily unavailable.",
+      "header_message": "Network error",
+      "please_try_again": "Please check your connection or try again later."
+    },
     "settings": {
       "bicycle": "Bicycle",
       "data": "Data",
@@ -351,8 +355,8 @@
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     },
     "something_went_wrong": {
-      "header_message": "Something went wrong",
       "error_occurred": "The following error has occurred: {{message}}",
+      "header_message": "Something went wrong",
       "please_try_again_or_email_html": "Please try again. If the problem persists, let us know at <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
@@ -360,11 +364,6 @@
       "discover_and_contribute": "You can discover what others have been harvesting in your area, and contribute your own observations.",
       "explore_the_map": "Explore the map",
       "welcome_visitors_to_the_site_short": "Welcome!"
-    },
-    "network_error": {
-      "header_message": "Network error",
-      "you_have_no_internet": "We weren’t able to connect to the server. This can happen if you’re offline or if our services are temporarily unavailable.",
-      "please_try_again": "Please check your connection or try again later."
     }
   },
   "problems": {

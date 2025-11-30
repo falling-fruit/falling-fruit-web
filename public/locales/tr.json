@@ -42,7 +42,6 @@
       "type_add_failed": "Yeni tür ekleme başarısız: {{message}}"
     },
     "auth": {
-      "check_failed": "Kimlik doğrulama kontrolü başarısız: {{message}}",
       "confirmation_failed": "Hesap onayı başarısız: {{message}}",
       "expired_refresh_token": "Uzun süreli hareketsizlik nedeniyle oturumunuz sonlandırıldı. Lütfen tekrar giriş yapın.",
       "password_set_failed": "Yeni şifre belirleme başarısız: {{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "Falling Fruit'e aktarılan veri setleri iki ana kategoriye ayrılır. \"Topluluk haritaları\", toplayıcılar ve freegan'lar tarafından toplulukları içinde yiyecek ararken oluşturulur. Bu verileri derleyen özverili vatandaş-kartograflarına minnettarız. \"Ağaç envanterleri\", şehirler, üniversiteler ve diğer kurumlar tarafından ağaçlarını daha iyi belgelemek ve bakımını yapmak için derlenir. Bu geniş veri setlerini gıda üreten türler için tarayıp haritaya ekliyoruz. Mahallenizin meyve ağaçlarını haritalamamıza yardımcı olmak için, okulunuz veya şehrinizle iletişime geçerek ağaç envanterlerini bizimle paylaşmaları için teşvik edin."
     },
     "network_error": {
+      "could_not_connect": "Bağlanamadık. Çevrimdışı olabilirsiniz veya hizmet geçici olarak kullanılamıyor olabilir.",
       "header_message": "Ağ hatası",
-      "please_try_again": "Lütfen bağlantınızı kontrol edin veya daha sonra tekrar deneyin.",
-      "you_have_no_internet": "Sunucuya bağlanamadık. Çevrimdışıysanız veya hizmetlerimiz geçici olarak kullanılamıyorsa bu durum oluşabilir."
+      "please_try_again": "Lütfen bağlantınızı kontrol edin veya daha sonra tekrar deneyin."
     },
     "settings": {
       "bicycle": "Bisiklet",

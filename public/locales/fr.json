@@ -42,7 +42,6 @@
       "type_add_failed": "Échec de l'ajout du nouveau type : {{message}}"
     },
     "auth": {
-      "check_failed": "Échec de la vérification d'authentification : {{message}}",
       "confirmation_failed": "Échec de la confirmation du compte : {{message}}",
       "expired_refresh_token": "Nous t'avons déconnecté après une période d'inactivité. Merci de te reconnecter.",
       "password_set_failed": "Échec de la définition du nouveau mot de passe : {{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "Il y a deux catégories d'ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d'arbres» sont compilés par des villes, des universités et d'autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s'en occuper. Nous parcourons ces larges bases de données à la recherche d'espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d'arbres avec nous."
     },
     "network_error": {
+      "could_not_connect": "Nous n'avons pas pu nous connecter. Vous êtes peut-être hors ligne, ou le service est temporairement indisponible.",
       "header_message": "Erreur réseau",
-      "please_try_again": "Veuillez vérifier votre connexion ou réessayer plus tard.",
-      "you_have_no_internet": "Nous n'avons pas pu nous connecter au serveur. Cela peut se produire si vous êtes hors ligne ou si nos services sont temporairement indisponibles."
+      "please_try_again": "Veuillez vérifier votre connexion ou réessayer plus tard."
     },
     "settings": {
       "bicycle": "Vélo",

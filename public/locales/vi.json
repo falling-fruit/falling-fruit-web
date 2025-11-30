@@ -42,7 +42,6 @@
       "type_add_failed": "Thêm loại mới thất bại: {{message}}"
     },
     "auth": {
-      "check_failed": "Xác thực thất bại: {{message}}",
       "confirmation_failed": "Xác nhận tài khoản thất bại: {{message}}",
       "expired_refresh_token": "Chúng tôi đã đăng xuất bạn sau một thời gian không hoạt động. Vui lòng đăng nhập lại.",
       "password_set_failed": "Đặt mật khẩu mới thất bại: {{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "Các bộ dữ liệu được nhập vào Falling Fruit thuộc hai loại chính. \"Bản đồ cộng đồng\" được xây dựng bởi những người kiếm ăn và những người sống tự do khi họ nghiên cứu cộng đồng của mình để tìm đồ ăn. Chúng tôi mang ơn những người vẽ bản đồ công dân chăm chỉ đã biên soạn dữ liệu này. \"Kiểm kê cây\" được biên soạn bởi các thành phố, trường đại học và các tổ chức khác mong muốn ghi chép và chăm sóc cây của họ tốt hơn. Chúng tôi khai thác những bộ dữ liệu khổng lồ này về các loài sản xuất thực phẩm và thêm chúng vào bản đồ. Để giúp chúng tôi lập bản đồ cây ăn quả ở khu vực lân cận của bạn, hãy liên hệ với trường học hoặc thành phố của bạn để thúc giục họ chia sẻ kho cây của họ với chúng tôi."
     },
     "network_error": {
+      "could_not_connect": "Chúng tôi không thể kết nối. Bạn có thể đang ngoại tuyến hoặc dịch vụ có thể tạm thời không khả dụng.",
       "header_message": "Lỗi mạng",
-      "please_try_again": "Vui lòng kiểm tra kết nối của bạn hoặc thử lại sau.",
-      "you_have_no_internet": "Chúng tôi không thể kết nối với máy chủ. Điều này có thể xảy ra nếu bạn đang ngoại tuyến hoặc nếu dịch vụ của chúng tôi tạm thời không khả dụng."
+      "please_try_again": "Vui lòng kiểm tra kết nối của bạn hoặc thử lại sau."
     },
     "settings": {
       "bicycle": "Xe đạp",

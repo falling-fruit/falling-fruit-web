@@ -42,7 +42,6 @@
       "type_add_failed": "Hinzufügen eines neuen Typs fehlgeschlagen: {{message}}"
     },
     "auth": {
-      "check_failed": "Authentifizierungsprüfung fehlgeschlagen: {{message}}",
       "confirmation_failed": "Kontobestätigung fehlgeschlagen: {{message}}",
       "expired_refresh_token": "Wir haben dich nach einer Zeit der Inaktivität abgemeldet. Bitte melde dich erneut an.",
       "password_set_failed": "Festlegen des neuen Passworts fehlgeschlagen: {{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "Datensätze die von Falling Fruit importiert werden, fallen in zwei Hauptkategorien. \"Gemeinschaftskarten\" werden von Sammlerinnen und Freeganern erstellt, indem sie in ihrem Umfeld öffentliche Nahrungsmittel-Quellen suchen und kartieren. Ein Riesiges Dankeschön geht an alle, die tagtäglich auf der Suche sind und uns ihre Daten übermitteln. \"Bauminventare\" werden durch Städte, Universitäten oder andere Institutionen zusammengestellt, die ihren Baumbestand überblicken und erhalten möchten. Wir filtern aus diesen riesigen Datenmengen die essbaren Arten heraus und fügen sie unserer Karte hinzu. Wenn in deiner Ecke der Welt noch Daten fehlen, dann kontaktiere deine Stadt oder deine Gemeinde und fordere sie auf, allfällig vorhandene Daten mit uns zu teilen! Wir sind für jede Hilfe dankbar!"
     },
     "network_error": {
+      "could_not_connect": "Wir konnten keine Verbindung herstellen. Möglicherweise bist du offline oder der Dienst ist vorübergehend nicht verfügbar.",
       "header_message": "Netzwerkfehler",
-      "please_try_again": "Bitte überprüfen Sie Ihre Verbindung oder versuchen Sie es später erneut.",
-      "you_have_no_internet": "Wir konnten keine Verbindung zum Server herstellen. Dies kann passieren, wenn Sie offline sind oder unsere Dienste vorübergehend nicht verfügbar sind."
+      "please_try_again": "Bitte überprüfen Sie Ihre Verbindung oder versuchen Sie es später erneut."
     },
     "settings": {
       "bicycle": "Fahrrad",
