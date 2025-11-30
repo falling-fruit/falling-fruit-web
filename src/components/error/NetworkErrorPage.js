@@ -10,7 +10,7 @@ const NetworkErrorPage = () => {
     <ErrorPage>
       <div className="grid">
         <h1>{t('pages.network_error.header_message')}</h1>
-        <p>{t('pages.network_error.you_have_no_internet')}</p>
+        <p>{t('pages.network_error.could_not_connect')}</p>
         <p>{t('pages.network_error.please_try_again')}</p>
         <div style={{ marginTop: '2rem' }}>
           <Button onClick={() => (window.location.href = '/')}>

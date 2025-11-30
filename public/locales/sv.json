@@ -42,7 +42,6 @@
       "type_add_failed": "Tillägg av ny typ misslyckades: {{message}}"
     },
     "auth": {
-      "check_failed": "Autentiseringskontroll misslyckades: {{message}}",
       "confirmation_failed": "Kontobekräftelse misslyckades: {{message}}",
       "expired_refresh_token": "Vi har loggat ut dig efter en period av inaktivitet. Vänligen logga in igen.",
       "password_set_failed": "Inställning av nytt lösenord misslyckades: {{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "Dataset som importeras till Falling Fruit faller i två huvudkategorier. \"Gemenskapskartor\" byggs av matletare och freeganare när de utforskar sina områden efter saker att äta. Vi är tacksamma för de hårt arbetande medborgar-kartograferna som har sammanställt dessa data. \"Trädinventeringar\" sammanställs av städer, universitet och andra institutioner som vill dokumentera och ta hand om sina träd bättre. Vi utvinner dessa omfattande dataset för matproducerande arter och lägger till dem på kartan. För att hjälpa oss kartlägga fruktträden i ditt område, kontakta din skola eller stad och uppmana dem att dela sin trädinventering med oss."
     },
     "network_error": {
+      "could_not_connect": "Vi kunde inte ansluta. Du kan vara offline, eller så kan tjänsten vara tillfälligt otillgänglig.",
       "header_message": "Nätverksfel",
-      "please_try_again": "Vänligen kontrollera din anslutning eller försök igen senare.",
-      "you_have_no_internet": "Vi kunde inte ansluta till servern. Detta kan hända om du är offline eller om våra tjänster är tillfälligt otillgängliga."
+      "please_try_again": "Vänligen kontrollera din anslutning eller försök igen senare."
     },
     "settings": {
       "bicycle": "Cykel",

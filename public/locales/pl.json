@@ -42,7 +42,6 @@
       "type_add_failed": "Dodawanie nowego typu nie powiodło się: {{message}}"
     },
     "auth": {
-      "check_failed": "Sprawdzanie uwierzytelnienia nie powiodło się: {{message}}",
       "confirmation_failed": "Potwierdzenie konta nie powiodło się: {{message}}",
       "expired_refresh_token": "Wylogowaliśmy Cię po okresie nieaktywności. Prosimy o ponowne zalogowanie.",
       "password_set_failed": "Ustawianie nowego hasła nie powiodło się: {{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Spisy drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich spisu drzew."
     },
     "network_error": {
+      "could_not_connect": "Nie udało się połączyć. Możesz być offline lub usługa może być tymczasowo niedostępna.",
       "header_message": "Błąd sieci",
-      "please_try_again": "Sprawdź swoje połączenie lub spróbuj ponownie później.",
-      "you_have_no_internet": "Nie udało się połączyć z serwerem. Może się to zdarzyć, gdy jesteś offline lub nasze usługi są tymczasowo niedostępne."
+      "please_try_again": "Sprawdź swoje połączenie lub spróbuj ponownie później."
     },
     "settings": {
       "bicycle": "Rowerowa",

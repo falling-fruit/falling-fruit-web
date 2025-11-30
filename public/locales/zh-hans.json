@@ -42,7 +42,6 @@
       "type_add_failed": "添加新类型失败：{{message}}"
     },
     "auth": {
-      "check_failed": "身份验证检查失败：{{message}}",
       "confirmation_failed": "账户确认失败：{{message}}",
       "expired_refresh_token": "由于长时间未操作，我们已将您登出。请重新登录。",
       "password_set_failed": "设置新密码失败：{{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "导入到 Falling Fruit 中的数据集分为两大类。 “社区地图”是由觅食者和自由主义者在他们仔细研究社区寻找食物时建立的。我们感谢辛勤工作的公民制图员，他们编制了这些数据。 “树木清单”由希望更好地记录和照顾树木的城市、大学和其他机构编制。我们为生产食物的物种挖掘这些庞大的数据集，并将它们添加到地图中。为了帮助我们绘制您附近的果树地图，请联系您的学校或城市，敦促他们与我们分享他们的树木清单。"
     },
     "network_error": {
+      "could_not_connect": "我们无法连接。您可能处于离线状态，或者服务可能暂时不可用。",
       "header_message": "网络错误",
-      "please_try_again": "请检查您的连接或稍后重试。",
-      "you_have_no_internet": "无法连接到服务器。如果您处于离线状态或我们的服务暂时不可用，可能会发生这种情况。"
+      "please_try_again": "请检查您的连接或稍后重试。"
     },
     "settings": {
       "bicycle": "自行车",

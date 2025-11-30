@@ -42,7 +42,6 @@
       "type_add_failed": "Error al agregar nuevo tipo: {{message}}"
     },
     "auth": {
-      "check_failed": "Error en la verificación de autenticación: {{message}}",
       "confirmation_failed": "Error en la confirmación de cuenta: {{message}}",
       "expired_refresh_token": "Te hemos desconectado después de un período de inactividad. Por favor, vuelve a iniciar sesión.",
       "password_set_failed": "Error al establecer nueva contraseña: {{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "Los conjuntos de datos importados a Falling Fruit se dividen en dos categorías principales. Los \"mapas comunitarios\" son construidos por cazadores-recolectores y freegans que buscan en su entorno cosas de comer. Estamos en deuda con los diligentes ciudadanos-cartógrafos que han compilado los datos. Los \"inventarios de árboles\" son compilados por ciudades, universidades y otras instituciones que desean documentar mejor y cuidar de sus árboles. Extraemos estos grandes conjuntos de datos para las especies productoras de alimentos y los agregamos al mapa. Para ayudarnos a cartografiar tu vecindario en el mapa, contacta con tu escuela o ciudad instándolos a compartir su inventario de árboles con nosotros."
     },
     "network_error": {
+      "could_not_connect": "No pudimos conectarnos. Es posible que estés sin conexión o que el servicio no esté disponible temporalmente.",
       "header_message": "Error de red",
-      "please_try_again": "Por favor, verifica tu conexión o inténtalo de nuevo más tarde.",
-      "you_have_no_internet": "No pudimos conectarnos al servidor. Esto puede suceder si estás desconectado o si nuestros servicios no están disponibles temporalmente."
+      "please_try_again": "Por favor, verifica tu conexión o inténtalo de nuevo más tarde."
     },
     "settings": {
       "bicycle": "Bicicleta",

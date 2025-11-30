@@ -42,7 +42,6 @@
       "type_add_failed": "添加新類型失敗：{{message}}"
     },
     "auth": {
-      "check_failed": "身份驗證檢查失敗：{{message}}",
       "confirmation_failed": "賬戶確認失敗：{{message}}",
       "expired_refresh_token": "由於長時間未使用，我們已為您登出。請重新登入。",
       "password_set_failed": "設置新密碼失敗：{{message}}",
@@ -283,9 +282,9 @@
       "types_of_data": "導入到 Falling Fruit 中的數據集分爲兩大類。 “社區地圖”是由覓食者和自由主義者在他們仔細研究社區尋找食物時建立的。我們感謝辛勤工作的公民製圖員，他們編制了這些數據。 “樹木清單”由希望更好地記錄和照顧樹木的城市、大學和其他機構編制。我們爲生產食物的物種挖掘這些龐大的數據集，並將它們添加到地圖中。爲了幫助我們繪製您附近的果樹地圖，請聯繫您的學校或城市，敦促他們與我們分享他們的樹木清單。"
     },
     "network_error": {
+      "could_not_connect": "我們無法連接。您可能處於離線狀態，或服務可能暫時不可用。",
       "header_message": "網路錯誤",
-      "please_try_again": "請檢查您的連線或稍後再試。",
-      "you_have_no_internet": "我們無法連接到伺服器。這可能是因為您處於離線狀態，或我們的服務暫時無法使用。"
+      "please_try_again": "請檢查您的連線或稍後再試。"
     },
     "settings": {
       "bicycle": "自行車",
