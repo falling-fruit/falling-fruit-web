@@ -71,6 +71,7 @@
       "cancel": "Anuluj",
       "delete": "Usuń",
       "edit": "Edytuj",
+      "reload": "Odśwież",
       "report": "Zgłoś",
       "reset": "Resetuj",
       "review": "Recenzuj",
@@ -281,6 +282,11 @@
       "type": "Typ",
       "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Spisy drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich spisu drzew."
     },
+    "network_error": {
+      "header_message": "Błąd sieci",
+      "please_try_again": "Sprawdź swoje połączenie lub spróbuj ponownie później.",
+      "you_have_no_internet": "Nie udało się połączyć z serwerem. Może się to zdarzyć, gdy jesteś offline lub nasze usługi są tymczasowo niedostępne."
+    },
     "settings": {
       "bicycle": "Rowerowa",
       "data": "Dane",
@@ -348,6 +354,11 @@
         "state": "Stan"
       },
       "intro_html": "Poniżej wymienione są organizacje, które uprawiają żywność w przestrzeniach publicznych (lasy żywnościowe, publiczne sady), zbierają żywność (zbieractwo miejskie, zbieranie plonów z gospodarstw) lub dystrybuują żywność (wymiany, darowizny). Organizacje są wymienione według kraju, stanu (jeśli dotyczy) i miasta. Te z przekreślonymi nazwami są prawdopodobnie nieaktywne. Jeśli znasz inne, które powinny znaleźć się na tej liście, <a href=\"mailto:info@fallingfruit.org\">skontaktuj się z nami</a>!"
+    },
+    "something_went_wrong": {
+      "error_occurred": "Wystąpił następujący błąd: {{message}}",
+      "header_message": "Coś poszło nie tak",
+      "please_try_again_or_email_html": "Spróbuj ponownie. Jeśli problem będzie się powtarzał, daj nam znać pod adresem <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit to platforma tworzona przez społeczność, służąca do dzielenia się lokalizacjami roślin jadalnych i innych źródeł darmowej żywności.",
