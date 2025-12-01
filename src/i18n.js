@@ -1,3 +1,4 @@
+import { Capacitor } from '@capacitor/core'
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
@@ -114,10 +115,14 @@ const LanguageSelect = () => {
           persistentStore.setLanguage(option.value)
           setDocumentDir(option.value)
           if (!hasToasted && googleMap) {
-            toast.info(
-              t('error_message.language_changed_refresh_to_reload_map'),
-            )
-            setHasToasted(true)
+            if (Capacitor.isNativePlatform()) {
+              window.location.reload()
+            } else {
+              toast.info(
+                t('error_message.language_changed_refresh_to_reload_map'),
+              )
+              setHasToasted(true)
+            }
           }
         })
       }}
