@@ -199,6 +199,29 @@ const AuthPage = ({ children }) => {
   const isDesktop = useIsDesktop()
 
   return (
+    <TopSafeAreaInsetPageScrollWrapper isDesktop={isDesktop}>
+      {!isDesktop && <SafeAreaInset />}
+      <TopSafeAreaInsetPageWrapper isDesktop={isDesktop}>
+        {!isDesktop && (
+          <MobileHeader>
+            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+          </MobileHeader>
+        )}
+        {!isDesktop && (
+          <LanguageContainer>
+            <LanguageSelect />
+          </LanguageContainer>
+        )}
+        {children}
+      </TopSafeAreaInsetPageWrapper>
+    </TopSafeAreaInsetPageScrollWrapper>
+  )
+}
+
+const LandingPage = ({ children }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
     <PageScrollWrapper>
       <PageWrapper isDesktop={isDesktop}>
         {!isDesktop && (
@@ -234,4 +257,11 @@ const ErrorPage = ({ children }) => {
   )
 }
 
-export { AuthPage, ErrorPage, InfoPage, Page, TopSafeAreaInsetPage }
+export {
+  AuthPage,
+  ErrorPage,
+  InfoPage,
+  LandingPage,
+  Page,
+  TopSafeAreaInsetPage,
+}
