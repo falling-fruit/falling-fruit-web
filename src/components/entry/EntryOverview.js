@@ -12,7 +12,10 @@ import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
-import { setPaneDrawerToLowPosition } from '../../redux/locationSlice'
+import {
+  reenablePaneDrawerAndSetToLowPosition,
+  setPaneDrawerToLowPosition,
+} from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
@@ -98,7 +101,9 @@ const EntryOverview = () => {
     if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
       googleMap?.setZoom(MIN_LOCATION_ZOOM)
     }
-    if (pane.drawerFullyOpen) {
+    if (pane.isFromListLocations) {
+      dispatch(reenablePaneDrawerAndSetToLowPosition())
+    } else if (pane.drawerFullyOpen) {
       dispatch(setPaneDrawerToLowPosition())
     }
   }
