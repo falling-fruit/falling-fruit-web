@@ -85,21 +85,6 @@
     -->
 
     <title>Falling Fruit</title>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID%"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', '%REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID%', {
-        send_page_view: false,
-      })
-    </script>
     <style>
       :root {
         --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
@@ -111,7 +96,7 @@
         align-items: center;
         height: 100vh;
       }
-      #logo img {
+      #logo svg {
         width: 100px;
         margin-bottom: 20px;
         animation: pulse 2s ease-in-out infinite;
