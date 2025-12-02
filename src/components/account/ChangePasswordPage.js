@@ -2,6 +2,7 @@ import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { editProfile } from '../../redux/authSlice'
@@ -13,6 +14,7 @@ import {
   FormInputWrapper,
 } from '../auth/AuthWrappers'
 import { Input } from '../form/FormikWrappers'
+import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
@@ -26,6 +28,10 @@ const formToUser = ({ password, new_password }, user) => ({
   range: null,
   announcements_email: user.announcements_email,
 })
+
+const StyledBackButton = styled(BackButton)`
+  margin-bottom: 23px;
+`
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch()
@@ -50,6 +56,7 @@ const ChangePasswordPage = () => {
 
   return (
     <Page>
+      <StyledBackButton backPath="/account/edit" />
       <h1>{t('users.change_your_password')}</h1>
 
       {user ? (
@@ -121,13 +128,6 @@ const ChangePasswordPage = () => {
                   )}
                 </FormInputWrapper>
                 <FormButtonWrapper>
-                  <Button
-                    secondary
-                    type="button"
-                    onClick={() => history.push('/account/edit')}
-                  >
-                    {t('form.button.cancel')}
-                  </Button>
                   <Button
                     type="submit"
                     disabled={!dirty || !isValid || isSubmitting}
