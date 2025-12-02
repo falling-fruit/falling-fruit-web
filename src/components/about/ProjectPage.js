@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 
-import { PLACEHOLDER_COUNTS } from '../../constants/placeholders'
 import { InfoPage } from '../ui/PageTemplate'
 import PhotoGridTemplate from './AboutPhotoGrid'
 import DonationButton from './DonationButton'
@@ -25,17 +24,11 @@ const foragingPhotos = [
 ]
 
 const Project = () => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
-  // Function to safely render HTML content
   const renderHTML = (html) => (
     <span dangerouslySetInnerHTML={{ __html: html }} />
   )
-
-  // TODO: Replace these placeholder values with actual data from the API in the future
-  const currentLanguage = i18n.language
-  const { types: typesCount, locations: locationsCount } =
-    PLACEHOLDER_COUNTS[currentLanguage] || PLACEHOLDER_COUNTS.en
 
   return (
     <InfoPage>
@@ -59,14 +52,7 @@ const Project = () => {
         </p>
         <h2>{t('pages.about.about_the_site')}</h2>
         <p>{t('pages.about.celebration')}</p>
-        <p>
-          {renderHTML(
-            t('pages.about.more_about_html', {
-              types: typesCount,
-              locations: locationsCount,
-            }),
-          )}
-        </p>
+        <p>{renderHTML(t('pages.about.more_about_html'))}</p>
         <p>{renderHTML(t('pages.about.join_us_html'))}</p>
       </div>
       <h2>{t('pages.about.staff')}</h2>
@@ -200,6 +186,8 @@ const Project = () => {
         – עִברִית
         <br />
         <b dir="ltr">Ana Carolina de Lima</b> – Português
+        <br />
+        <b dir="ltr">Anya Sytenkova (Аня Сытенкова)</b> – Русский
         <br />
         <b dir="ltr">Daniela Marini</b> – Español
         <br />

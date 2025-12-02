@@ -1,2 +1,3 @@
 anthropic
 pyyaml
+iso639-lang
