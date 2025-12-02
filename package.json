@@ -85,6 +85,7 @@
     "format:check": "yarn format:output --check",
     "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
     "build": "craco build",
+    "build:reload": "BUILD_PATH=./build_temp craco build && rm -rf build && mv ./build_temp build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/main/docs/openapi.yml --output src/utils/apiSchema.ts",
