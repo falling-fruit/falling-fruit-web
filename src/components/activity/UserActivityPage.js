@@ -147,38 +147,55 @@ const UserActivityPage = () => {
   }, [dispatch, changesReady, userId]) //eslint-disable-line
 
   const userName = changes?.length > 0 ? changes[0].author : ''
+  const isLoading = changes === undefined
+  const hasChanges = changes !== undefined && changes.length > 0
+
   return (
     <Page>
       <StyledBackButton
         backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
       />
 
-      {changes !== undefined && changes.length > 0 && (
-        <h2>
-          {isCurrentUser ? (
-            t('users.your_activity')
-          ) : (
-            <>
-              {t('glossary.activity')}: {userName}
-            </>
-          )}
-        </h2>
-      )}
-      {changes !== undefined &&
-        (changes.length > 0 ? (
-          <UserActivityDisplay
-            changes={changes}
-            userId={userId}
-            typesAccess={typesAccess}
-          />
+      <h2>
+        {isCurrentUser ? (
+          t('users.your_activity')
         ) : (
-          <p>
-            {isCurrentUser
-              ? t('pages.changes.your_activity_empty')
-              : t('pages.changes.user_activity_empty')}
-          </p>
-        ))}
-      {changes === undefined && <SkeletonLoader count={5} />}
+          <>
+            {t('glossary.activity')}: {userName || '...'}
+          </>
+        )}
+      </h2>
+
+      {hasChanges && (
+        <UserActivityDisplay
+          changes={changes}
+          userId={userId}
+          typesAccess={typesAccess}
+        />
+      )}
+
+      {isLoading && (
+        <>
+          <TypesAndPlaces
+            typeCounts={[]}
+            cityCounts={[]}
+            selectedTypes={[]}
+            selectedPlaces={[]}
+            onTypeChange={() => {}}
+            onPlaceChange={() => {}}
+            isDisabled={true}
+          />
+          <SkeletonLoader count={5} />
+        </>
+      )}
+
+      {changes !== undefined && changes.length === 0 && (
+        <p>
+          {isCurrentUser
+            ? t('pages.changes.your_activity_empty')
+            : t('pages.changes.user_activity_empty')}
+        </p>
+      )}
     </Page>
   )
 }
