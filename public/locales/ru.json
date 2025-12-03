@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "О вас",
+    "change_your_email": "Изменить адрес электронной почты",
     "change_your_password": "Изменить пароль",
     "current_password": "Текущий пароль",
     "edit_account": "Редактировать аккаунт",
     "email_settings": "Настройки электронной почты",
     "forgot_password": "Сбросить пароль",
     "joined_on": "Присоединился {{date}}",
+    "new_email": "Новый адрес электронной почты",
     "new_password": "Новый пароль",
     "new_password_confirmation": "Подтверждение нового пароля",
     "options": {
