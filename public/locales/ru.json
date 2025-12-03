@@ -93,7 +93,7 @@
     "address": "Адрес",
     "by_author": "от {{author}}",
     "description": "Описание",
-    "email": "Электронная почта",
+    "email": "Адрес электронной почты",
     "locations": {
       "other": "Местоположения"
     },
