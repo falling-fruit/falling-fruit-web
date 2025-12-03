@@ -21,13 +21,10 @@ const AtLeastAsLongAsSelectMenu = styled.div`
   min-height: 300px;
 `
 
-const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
-  const { t, i18n } = useTranslation()
+const UserActivityContent = ({ changes, userId }) => {
   const { userActivityLastBrowsedSection } = useSelector(
     (state) => state.activity,
   )
-  const [selectedTypes, setSelectedTypes] = useState([])
-  const [selectedPlaces, setSelectedPlaces] = useState([])
   const loadMoreRef = useRef()
   const [displayLimit, setDisplayLimit] = useState(
     userActivityLastBrowsedSection.displayLimit || 100,
@@ -58,29 +55,10 @@ const UserActivityDisplay = ({ changes, userId, typesAccess }) => {
     }
   }, [needsLoadMore, displayLimit])
 
-  const activityDiary = useMemo(
-    () => createActivityDiary(changes || [], typesAccess, t, i18n.language),
-    [changes, typesAccess, t, i18n.language],
-  )
-
-  // Get filtered entries from the activity diary
-  const filteredEntries = useMemo(
-    () => activityDiary.getFilteredEntries(selectedTypes, selectedPlaces),
-    [activityDiary, selectedTypes, selectedPlaces],
-  )
-
   return (
     <>
-      <TypesAndPlaces
-        typeCounts={activityDiary.calculateTypeCounts(selectedPlaces)}
-        cityCounts={activityDiary.calculateCityCounts(selectedTypes)}
-        selectedTypes={selectedTypes}
-        selectedPlaces={selectedPlaces}
-        onTypeChange={setSelectedTypes}
-        onPlaceChange={setSelectedPlaces}
-      />
       <AtLeastAsLongAsSelectMenu>
-        {filteredEntries.slice(0, displayLimit).map((entry) => (
+        {changes.slice(0, displayLimit).map((entry) => (
           <DiaryEntry
             key={entry.formattedDate}
             entry={entry}
@@ -111,13 +89,28 @@ const UserActivityPage = () => {
   )
   const changes = changesByUser[userId]
 
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const { typesAccess } = useSelector((state) => state.type)
 
   const changesReady = !typesAccess.isEmpty
 
   const isCurrentUser = userId === user?.id
+  const isLoading = changes === undefined
+
+  const [selectedTypes, setSelectedTypes] = useState([])
+  const [selectedPlaces, setSelectedPlaces] = useState([])
+
+  const activityDiary = useMemo(
+    () => createActivityDiary(changes || [], typesAccess, t, i18n.language),
+    [changes, typesAccess, t, i18n.language],
+  )
+
+  // Get filtered entries from the activity diary
+  const filteredEntries = useMemo(
+    () => activityDiary.getFilteredEntries(selectedTypes, selectedPlaces),
+    [activityDiary, selectedTypes, selectedPlaces],
+  )
 
   useEffect(() => {
     if (userActivityLastBrowsedSection.id) {
@@ -147,30 +140,42 @@ const UserActivityPage = () => {
   }, [dispatch, changesReady, userId]) //eslint-disable-line
 
   const userName = changes?.length > 0 ? changes[0].author : ''
+
   return (
     <Page>
       <StyledBackButton
         backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
       />
 
-      {changes !== undefined && changes.length > 0 && (
-        <h2>
-          {isCurrentUser ? (
-            t('users.your_activity')
-          ) : (
-            <>
-              {t('glossary.activity')}: {userName}
-            </>
-          )}
-        </h2>
-      )}
-      {changes !== undefined &&
+      <h2>
+        {isCurrentUser ? (
+          t('users.your_activity')
+        ) : (
+          <>
+            {t('glossary.activity')}: {userName || '...'}
+          </>
+        )}
+      </h2>
+
+      <TypesAndPlaces
+        typeCounts={
+          isLoading ? [] : activityDiary.calculateTypeCounts(selectedPlaces)
+        }
+        cityCounts={
+          isLoading ? [] : activityDiary.calculateCityCounts(selectedTypes)
+        }
+        selectedTypes={selectedTypes}
+        selectedPlaces={selectedPlaces}
+        onTypeChange={setSelectedTypes}
+        onPlaceChange={setSelectedPlaces}
+        isDisabled={isLoading}
+      />
+
+      {isLoading && <SkeletonLoader count={5} />}
+
+      {!isLoading &&
         (changes.length > 0 ? (
-          <UserActivityDisplay
-            changes={changes}
-            userId={userId}
-            typesAccess={typesAccess}
-          />
+          <UserActivityContent changes={filteredEntries} userId={userId} />
         ) : (
           <p>
             {isCurrentUser
@@ -178,7 +183,6 @@ const UserActivityPage = () => {
               : t('pages.changes.user_activity_empty')}
           </p>
         ))}
-      {changes === undefined && <SkeletonLoader count={5} />}
     </Page>
   )
 }
