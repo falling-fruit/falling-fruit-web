@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "אודותיך",
+    "change_your_email": "שנה את כתובת הדוא\"ל שלך",
     "change_your_password": "שנה את הסיסמה שלך",
     "current_password": "סיסמה נוכחית",
     "edit_account": "עריכת החשבון",
     "email_settings": "הגדרות אימייל",
     "forgot_password": "איפוס סיסמה",
     "joined_on": "הצטרף ב-{{date}}",
+    "new_email": "דוא\"ל חדש",
     "new_password": "סיסמה חדשה",
     "new_password_confirmation": "אימות סיסמה חדשה",
     "options": {
