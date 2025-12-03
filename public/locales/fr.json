@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "Parle-nous de toi",
+    "change_your_email": "Modifier votre adresse e-mail",
     "change_your_password": "Modifier votre mot de passe",
     "current_password": "Mot de passe actuel",
     "edit_account": "Modifier ton compte",
     "email_settings": "Paramètres de messagerie",
     "forgot_password": "Réinitialiser ton mot de passe",
     "joined_on": "Inscrit le {{date}}",
+    "new_email": "Nouvelle adresse e-mail",
     "new_password": "Nouveau mot de passe",
     "new_password_confirmation": "Confirmation du nouveau mot de passe",
     "options": {

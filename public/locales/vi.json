@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "Thông tin về bạn",
+    "change_your_email": "Thay đổi email của bạn",
     "change_your_password": "Thay đổi mật khẩu của bạn",
     "current_password": "Mật khẩu hiện tại",
     "edit_account": "Chỉnh sửa tài khoản",
     "email_settings": "Cài đặt email",
     "forgot_password": "Đặt lại mật khẩu của bạn",
     "joined_on": "Tham gia vào {{date}}",
+    "new_email": "Email mới",
     "new_password": "Mật khẩu mới",
     "new_password_confirmation": "Xác nhận mật khẩu mới",
     "options": {

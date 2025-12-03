@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "關於你",
+    "change_your_email": "更改電子郵件",
     "change_your_password": "更改密碼",
     "current_password": "當前密碼",
     "edit_account": "編輯賬戶",
     "email_settings": "電郵設置",
     "forgot_password": "重置密碼",
     "joined_on": "加入於 {{date}}",
+    "new_email": "新電子郵件",
     "new_password": "新密碼",
     "new_password_confirmation": "確認新密碼",
     "options": {

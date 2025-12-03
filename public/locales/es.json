@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "Acerca de ti",
+    "change_your_email": "Cambiar tu correo electrónico",
     "change_your_password": "Cambiar tu contraseña",
     "current_password": "Contraseña actual",
     "edit_account": "Editar cuenta",
     "email_settings": "Configuración de correo electrónico",
     "forgot_password": "Restablecer tu contraseña",
     "joined_on": "Se unió el {{date}}",
+    "new_email": "Nuevo correo electrónico",
     "new_password": "Nueva contraseña",
     "new_password_confirmation": "Confirmación de nueva contraseña",
     "options": {
