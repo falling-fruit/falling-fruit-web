@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "关于你",
+    "change_your_email": "更改电子邮件",
     "change_your_password": "更改密码",
     "current_password": "当前密码",
     "edit_account": "编辑账户",
     "email_settings": "邮箱设置",
     "forgot_password": "重置密码",
     "joined_on": "加入于 {{date}}",
+    "new_email": "新电子邮件",
     "new_password": "新密码",
     "new_password_confirmation": "确认新密码",
     "options": {
