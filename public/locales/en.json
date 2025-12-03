@@ -407,11 +407,13 @@
   "users": {
     "bio": "About you",
     "change_your_password": "Change your password",
+    "change_your_email": "Change your email",
     "current_password": "Current password",
     "edit_account": "Edit account",
     "email_settings": "Email settings",
     "forgot_password": "Reset your password",
     "joined_on": "Joined on {{date}}",
+    "new_email": "New email",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
     "options": {

@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "Om dig",
+    "change_your_email": "Ändra din e-postadress",
     "change_your_password": "Ändra ditt lösenord",
     "current_password": "Nuvarande lösenord",
     "edit_account": "Redigera konto",
     "email_settings": "E-postinställningar",
     "forgot_password": "Återställ ditt lösenord",
     "joined_on": "Gick med {{date}}",
+    "new_email": "Ny e-postadress",
     "new_password": "Nytt lösenord",
     "new_password_confirmation": "Bekräfta nytt lösenord",
     "options": {

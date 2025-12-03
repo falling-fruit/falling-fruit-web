@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "Over jou",
+    "change_your_email": "Wijzig je e-mailadres",
     "change_your_password": "Wijzig je wachtwoord",
     "current_password": "Huidig wachtwoord",
     "edit_account": "Account bewerken",
     "email_settings": "E-mailinstellingen",
     "forgot_password": "Wachtwoord herstellen",
     "joined_on": "Lid sinds {{date}}",
+    "new_email": "Nieuw e-mailadres",
     "new_password": "Nieuw wachtwoord",
     "new_password_confirmation": "Nieuw wachtwoord bevestiging",
     "options": {
