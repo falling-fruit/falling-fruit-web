@@ -149,7 +149,7 @@ const UserActivityPage = () => {
       />
 
       {isLoading ? (
-        <Skeleton width="50%" height={30} style={{ marginBottom: '1em' }} />
+        <Skeleton width="15em" height={30} style={{ marginBottom: '1em' }} />
       ) : (
         <h2>
           {isCurrentUser ? (
