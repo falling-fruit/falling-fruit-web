@@ -21,13 +21,18 @@ const AuthInitializer = () => {
           } else if (error.message === 'Expired refresh token') {
             toast.info(i18next.t('error_message.auth.expired_refresh_token'))
             history.push(pathToSignInPage())
+          } else if (
+            !navigator.onLine ||
+            error.message === 'Network Error' ||
+            error.message === 'Failed to fetch'
+          ) {
+            console.error(error)
+            history.push('/error/offline')
           } else {
-            toast.error(
-              i18next.t('error_message.auth.check_failed', {
-                message:
-                  error.message || i18next.t('error_message.unknown_error'),
-              }),
-            )
+            history.push('/error/fatal', {
+              errorMessage:
+                error.message || i18next.t('error_message.unknown_error'),
+            })
           }
         }
       })

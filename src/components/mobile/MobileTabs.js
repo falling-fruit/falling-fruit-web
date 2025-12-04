@@ -1,16 +1,104 @@
+import '@reach/tabs/styles.css'
+
+import {
+  Tab as ReachTab,
+  TabList as ReachTabList,
+  TabPanel as ReachTabPanel,
+  TabPanels as ReachTabPanels,
+  Tabs,
+} from '@reach/tabs'
 import { ListUl } from '@styled-icons/boxicons-regular'
 import { Cog, MapAlt, User, UserCircle } from '@styled-icons/boxicons-solid'
+import { StyledIconBase } from '@styled-icons/styled-icon'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { matchPath, useLocation } from 'react-router-dom'
+import styled from 'styled-components/macro'
 
+import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { accountPages } from '../account/accountRoutes'
 import { authPages } from '../auth/authRoutes'
-import { Tab } from '../ui/PageTabs'
+import { zIndex } from '../ui/GlobalStyle'
 
-const Tabs = () => {
+const PageTabs = styled(Tabs)`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .page-tab-panels[data-reach-tab-panels] {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+
+    .page-tab-panel[data-reach-tab-panel],
+    > div {
+      flex: 1;
+    }
+  }
+
+  .page-tab-list[data-reach-tab-list] {
+    display: flex;
+    height: ${TABS_HEIGHT_PX}px;
+
+    background: ${({ theme }) => theme.background};
+
+    padding-block-end: env(safe-area-inset-bottom, 0);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0;
+      inset-block-end: 0;
+      height: env(safe-area-inset-bottom, 0);
+      background: ${({ theme }) => theme.secondaryBackground};
+      z-index: ${zIndex.topBar + 1};
+    }
+
+    .page-tab[data-reach-tab] {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-block-start: 4px solid ${({ theme }) => theme.secondaryBackground};
+      font-size: 0.675rem;
+
+      border-block-end: none;
+
+      :focus {
+        outline: none;
+      }
+
+      ${StyledIconBase} {
+        display: block;
+        margin-inline: auto;
+        margin-block: 0 2px;
+        height: 24px;
+      }
+
+      &[data-selected] {
+        color: ${({ theme }) => theme.orange};
+        border-block-start-color: ${({ theme }) => theme.orange};
+
+        ${StyledIconBase} {
+          color: ${({ theme }) => theme.orange};
+        }
+      }
+    }
+  }
+`
+
+const Tab = styled(ReachTab).attrs({ className: 'page-tab' })``
+const TabList = styled(ReachTabList).attrs({ className: 'page-tab-list' })``
+const TabPanel = styled(ReachTabPanel).attrs({ className: 'page-tab-panel' })``
+const TabPanels = styled(ReachTabPanels).attrs({
+  className: 'page-tab-panels',
+})``
+
+// Hook
+const useTabs = () => {
   const { t } = useTranslation()
   const { pathname } = useLocation()
   const history = useAppHistory()
@@ -114,4 +202,4 @@ const Tabs = () => {
 
 export const DEFAULT_TAB = 1 // Map
 
-export default Tabs
+export { PageTabs, Tab, TabList, TabPanel, TabPanels, useTabs }

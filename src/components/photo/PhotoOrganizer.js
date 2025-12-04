@@ -1,3 +1,9 @@
+import {
+  Camera as CapacitorCamera,
+  CameraResultType,
+  CameraSource,
+} from '@capacitor/camera'
+import { Capacitor } from '@capacitor/core'
 import { Camera } from '@styled-icons/boxicons-regular'
 import { PlusCircle } from '@styled-icons/boxicons-solid'
 import { useRef } from 'react'
@@ -45,19 +51,54 @@ export const PhotoOrganizer = ({ photos, onChange }) => {
     onChange([...photos, ...newPhotos])
   }
 
+  const takePicture = async () => {
+    try {
+      const image = await CapacitorCamera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Prompt, // This allows user to choose camera or gallery
+      })
+
+      pendingPhotoId.current--
+
+      const newPhoto = {
+        id: pendingPhotoId.current,
+        name: `photo_${Date.now()}.jpg`,
+        image: image.webPath,
+        isNew: true,
+        isUploading: true,
+        capacitorImage: image,
+      }
+
+      onChange([...photos, newPhoto])
+    } catch (error) {
+      console.error('Error taking picture:', error)
+    }
+  }
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: 'image/*',
     // maxSize: 5000000,
     onDrop,
   })
 
+  const isNative = Capacitor.isNativePlatform()
+
   return (
     <>
-      <StyledDropzone {...getRootProps()} isDragActive={isDragActive}>
-        <input {...getInputProps()} />
-
-        {isDragActive ? <PlusIconStyled /> : <CameraIconStyled />}
-      </StyledDropzone>
+      {isNative ? (
+        <div>
+          <StyledDropzone onClick={takePicture}>
+            <CameraIconStyled />
+          </StyledDropzone>
+        </div>
+      ) : (
+        <StyledDropzone {...getRootProps()} isDragActive={isDragActive}>
+          <input {...getInputProps()} />
+          {isDragActive ? <PlusIconStyled /> : <CameraIconStyled />}
+        </StyledDropzone>
+      )}
       <PhotoList photos={photos} onChange={onChange} />
     </>
   )

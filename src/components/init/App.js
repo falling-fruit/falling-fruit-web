@@ -1,6 +1,8 @@
 import 'react-toastify/dist/ReactToastify.css'
 
+import { SplashScreen } from '@capacitor/splash-screen'
 import { WindowSize } from '@reach/window-size'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
@@ -57,6 +59,10 @@ const AppContent = () => {
 
 const App = () => {
   useGoogleAnalytics()
+
+  useEffect(() => {
+    SplashScreen.hide()
+  }, [])
 
   return (
     <Provider store={store}>

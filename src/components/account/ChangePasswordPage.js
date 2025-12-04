@@ -15,7 +15,7 @@ import {
 import { Input } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { Page } from '../ui/PageTemplate'
+import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
 const formToUser = ({ password, new_password }, user) => ({
   password: new_password || null,
@@ -49,7 +49,7 @@ const ChangePasswordPage = () => {
   }
 
   return (
-    <Page>
+    <TopSafeAreaInsetPage>
       <h1>{t('users.change_your_password')}</h1>
 
       {user ? (
@@ -142,7 +142,7 @@ const ChangePasswordPage = () => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </Page>
+    </TopSafeAreaInsetPage>
   )
 }
 

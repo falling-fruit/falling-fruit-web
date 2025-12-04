@@ -24,6 +24,15 @@ const StyledFormDiv = styled.div`
   padding: 0 10px;
   overflow: auto;
 
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    height: env(safe-area-inset-top, 0);
+    background: ${({ theme }) => theme.secondaryBackground};
+  }
+
   ${({ isDesktop }) =>
     !isDesktop &&
     `
@@ -36,7 +45,7 @@ const StyledFormDiv = styled.div`
         height: 50px;
       }
     }
-    margin-block-start: ${NAVIGATION_BAR_HEIGHT_PX}px;
+    margin-block-start: calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0));
   `}
 `
 
