@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -147,15 +148,19 @@ const UserActivityPage = () => {
         backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
       />
 
-      <h2>
-        {isCurrentUser ? (
-          t('users.your_activity')
-        ) : (
-          <>
-            {t('glossary.activity')}: {userName || '...'}
-          </>
-        )}
-      </h2>
+      {isLoading ? (
+        <Skeleton width="50%" height={30} style={{ marginBottom: '1em' }} />
+      ) : (
+        <h2>
+          {isCurrentUser ? (
+            t('users.your_activity')
+          ) : (
+            <>
+              {t('glossary.activity')}: {userName}
+            </>
+          )}
+        </h2>
+      )}
 
       <TypesAndPlaces
         typeCounts={
