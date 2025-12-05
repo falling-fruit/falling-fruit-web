@@ -382,7 +382,9 @@
     "form": {
       "leave_a_review": "Leave a review",
       "observed_on": "Observed on {{date}}",
-      "photos": "Photos"
+      "photos": "Photos",
+      "add_from_camera": "Take photo",
+      "add_from_gallery": "Choose from gallery"
     },
     "you_reviewed": "You reviewed this location on {{date}}"
   },
