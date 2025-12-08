@@ -24,7 +24,8 @@ const PlusIconStyled = styled(PlusCircle)`
   height: 100%;
 `
 
-const compressImage = (file, maxWidth = 1200, quality = 0.8) => new Promise((resolve) => {
+const compressImage = (file, maxWidth = 1200, quality = 0.8) =>
+  new Promise((resolve) => {
     const reader = new FileReader()
     reader.onload = (e) => {
       const img = new Image()

@@ -93,7 +93,7 @@
     "lint:check": "eslint src --ext js,jsx,ts,tsx",
     "format": "yarn format:output --write",
     "format:check": "yarn format:output --check",
-    "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
+    "format:output": "prettier \"./src/**/*.{js,jsx,ts,tsx,css,scss,json,md}\" \"./public/**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
     "build": "craco build",
     "build:reload": "BUILD_PATH=./build_temp craco build && rm -rf build && mv ./build_temp build",
     "test": "craco test",
@@ -124,10 +124,13 @@
     }
   },
   "lint-staged": {
-    "./**/*.{js,jsx,ts,tsx,css,scss,json,md}": [
+    "./src/**/*.{js,jsx,ts,tsx,css,scss,json,md}": [
       "prettier --write"
     ],
-    "./**/*.{js,jsx,ts,tsx}": [
+    "./public/**/*.{js,jsx,ts,tsx,css,scss,json,md}": [
+      "prettier --write"
+    ],
+    "./src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
   }
