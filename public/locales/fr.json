@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Prendre une photo",
+      "add_from_gallery": "Choisir dans la galerie",
       "leave_a_review": "Laisser un avis",
       "observed_on": "Observé le {{date}}",
       "photos": "Photos"

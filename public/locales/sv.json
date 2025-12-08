@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Ta foto",
+      "add_from_gallery": "Välj från galleri",
       "leave_a_review": "Lämna en recension",
       "observed_on": "Observerad den {{date}}",
       "photos": "Foton"
