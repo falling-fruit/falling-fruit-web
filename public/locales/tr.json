@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Fotoğraf çek",
+      "add_from_gallery": "Galeriden seç",
       "leave_a_review": "Değerlendirme yap",
       "observed_on": "Gözlemlenme tarihi {{date}}",
       "photos": "Fotoğraflar"

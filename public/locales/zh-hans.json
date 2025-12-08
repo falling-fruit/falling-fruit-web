@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "拍照",
+      "add_from_gallery": "从相册选择",
       "leave_a_review": "发表评论",
       "observed_on": "观察于 {{date}}",
       "photos": "照片"

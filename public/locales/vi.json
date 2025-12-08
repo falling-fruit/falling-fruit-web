@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Chụp ảnh",
+      "add_from_gallery": "Chọn từ thư viện",
       "leave_a_review": "Viết đánh giá",
       "observed_on": "Quan sát vào {{date}}",
       "photos": "Hình ảnh"

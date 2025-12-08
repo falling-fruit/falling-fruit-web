@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Зробити фото",
+      "add_from_gallery": "Вибрати з галереї",
       "leave_a_review": "Залишити відгук",
       "observed_on": "Помічено {{date}}",
       "photos": "Фото"

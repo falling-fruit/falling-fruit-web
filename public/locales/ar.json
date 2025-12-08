@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "التقط صورة",
+      "add_from_gallery": "اختر من المعرض",
       "leave_a_review": "اترك مراجعة",
       "observed_on": "تمت الملاحظة في {{date}}",
       "photos": "صور"

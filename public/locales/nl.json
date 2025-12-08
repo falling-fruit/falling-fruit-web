@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Neem foto",
+      "add_from_gallery": "Kies uit galerij",
       "leave_a_review": "Schrijf een recensie",
       "observed_on": "Waargenomen op {{date}}",
       "photos": "Foto's"

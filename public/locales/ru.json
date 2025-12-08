@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Сделать фото",
+      "add_from_gallery": "Выбрать из галереи",
       "leave_a_review": "Оставить отзыв",
       "observed_on": "Замечено {{date}}",
       "photos": "Фотографии"

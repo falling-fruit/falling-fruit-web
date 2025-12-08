@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Λήψη φωτογραφίας",
+      "add_from_gallery": "Επιλογή από συλλογή",
       "leave_a_review": "Γράψτε αξιολόγηση",
       "observed_on": "Παρατηρήθηκε στις {{date}}",
       "photos": "Φωτογραφίες"

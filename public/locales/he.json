@@ -380,6 +380,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "צלם תמונה",
+      "add_from_gallery": "בחר מהגלריה",
       "leave_a_review": "כתוב ביקורת",
       "observed_on": "נצפה בתאריך {{date}}",
       "photos": "תמונות"
