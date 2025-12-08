@@ -45,9 +45,15 @@ export const CardTabs = styled(Tabs)`
       }
     }
   }
-  .card-tab-panels[data-reach-tab-panels]
+  .card-tab-panels[data-reach-tab-panels] {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+
     .card-tab-panel[data-reach-tab-panel] {
-    overflow: auto;
+      flex: 1;
+      overflow: auto;
+    }
   }
 `
 
