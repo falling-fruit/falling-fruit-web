@@ -50,6 +50,7 @@ const Page = styled.div`
       return `
         padding-block-start: calc(26px + env(safe-area-inset-top, 0));
         padding-inline: 26px;
+        padding-block-end: 2em;
       `
     }
   }}
@@ -343,5 +344,4 @@ const SettingsPage = ({ isDesktop, isEmbed }) => {
   )
 }
 
-export { MapSettings, Page, RegionalSettings, ShowLabelsCheckbox }
 export default SettingsPage
