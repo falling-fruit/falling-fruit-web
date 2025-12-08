@@ -24,22 +24,63 @@ const PlusIconStyled = styled(PlusCircle)`
   height: 100%;
 `
 
+const compressImage = (file, maxWidth = 1200, quality = 0.8) => new Promise((resolve) => {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const img = new Image()
+      img.onload = () => {
+        const canvas = document.createElement('canvas')
+        let width = img.width
+        let height = img.height
+
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width
+          width = maxWidth
+        }
+
+        canvas.width = width
+        canvas.height = height
+
+        const ctx = canvas.getContext('2d')
+        ctx.drawImage(img, 0, 0, width, height)
+
+        canvas.toBlob(
+          (blob) => {
+            const compressedFile = new File([blob], file.name, {
+              type: 'image/jpeg',
+              lastModified: Date.now(),
+            })
+            resolve(compressedFile)
+          },
+          'image/jpeg',
+          quality,
+        )
+      }
+      img.src = e.target.result
+    }
+    reader.readAsDataURL(file)
+  })
+
 export const AddPhotosWeb = ({ onAddPhotos }) => {
   const pendingPhotoId = useRef(0)
 
-  const onDrop = (acceptedFiles) => {
-    const newPhotos = acceptedFiles.map((file) => {
-      pendingPhotoId.current--
+  const onDrop = async (acceptedFiles) => {
+    const newPhotos = await Promise.all(
+      acceptedFiles.map(async (file) => {
+        pendingPhotoId.current--
 
-      return {
-        id: pendingPhotoId.current,
-        name: file.path,
-        image: URL.createObjectURL(file),
-        isNew: true,
-        isUploading: true,
-        file,
-      }
-    })
+        const compressedFile = await compressImage(file)
+
+        return {
+          id: pendingPhotoId.current,
+          name: file.path,
+          image: URL.createObjectURL(compressedFile),
+          isNew: true,
+          isUploading: true,
+          file: compressedFile,
+        }
+      }),
+    )
 
     onAddPhotos(newPhotos)
   }
