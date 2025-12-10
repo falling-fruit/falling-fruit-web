@@ -31,11 +31,7 @@ const StyledModal = styled(Dialog)`
 const Buttons = styled.div`
   margin-block-start: 20px;
 
-  ${({ isDesktop }) =>
-    !isDesktop &&
-    `
-    text-align: center;
-  `}
+  text-align: ${({ isDesktop }) => (isDesktop ? 'end' : 'center')};
 
   button {
     width: 130px;
