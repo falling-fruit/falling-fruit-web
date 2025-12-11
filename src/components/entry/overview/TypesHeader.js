@@ -1,18 +1,18 @@
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
-import {
-  TypesAccordion,
-  TypesAccordionButton,
-  TypesAccordionItem,
-  TypesAccordionPanel,
-} from '../../ui/TypesAccordion'
 import EatTheWeedsLogo from './icons/EatTheWeeds.png'
 import ForagingTexasLogo from './icons/ForagingTexas.png'
 import FruitipediaLogo from './icons/Fruitipedia.png'
 import UrbanMushroomsLogo from './icons/UrbanMushrooms.png'
 import USDALogo from './icons/USDA.svg'
 import WikipediaLogo from './icons/Wikipedia.svg'
+import {
+  TypesAccordion,
+  TypesAccordionButton,
+  TypesAccordionItem,
+  TypesAccordionPanel,
+} from './TypesAccordion'
 
 const StyledTypeTitle = styled.div`
   font-family: ${({ theme }) => theme.fonts};
@@ -110,34 +110,58 @@ const ResourceList = ({ urls }) =>
         </Resource>
       ),
   )
-const TypesHeader = ({ types }) => (
-  <TypesAccordion>
-    {types.map((type) => {
-      const typeTitle = (
-        <TypeTitle
-          key={type.id}
-          commonName={type.commonName}
-          scientificName={type.scientificName}
-        />
-      )
 
-      if (Object.keys(type.urls).length > 0) {
-        // At least 1 URL
-        return (
-          <TypesAccordionItem key={type.id}>
-            <TypesAccordionButton>{typeTitle}</TypesAccordionButton>
-            <TypesAccordionPanel>
-              <ResourceList urls={type.urls} />
-            </TypesAccordionPanel>
-          </TypesAccordionItem>
+const SimpleTypeItem = styled.div`
+  margin-block-end: 15px;
+`
+
+const TypesHeader = ({ types, openable }) => {
+  if (!openable) {
+    return (
+      <div>
+        {types.map((type) => (
+          <SimpleTypeItem key={type.id}>
+            <TypeTitle
+              commonName={type.commonName}
+              scientificName={type.scientificName}
+            />
+          </SimpleTypeItem>
+        ))}
+      </div>
+    )
+  }
+
+  return (
+    <TypesAccordion>
+      {types.map((type) => {
+        const typeTitle = (
+          <TypeTitle
+            key={type.id}
+            commonName={type.commonName}
+            scientificName={type.scientificName}
+          />
         )
-      } else {
-        return (
-          <TypesAccordionItem key={type.id}>{typeTitle}</TypesAccordionItem>
-        )
-      }
-    })}
-  </TypesAccordion>
-)
+
+        if (Object.keys(type.urls).length > 0) {
+          // At least 1 URL
+          return (
+            <TypesAccordionItem key={type.id}>
+              <TypesAccordionButton openable={openable}>
+                {typeTitle}
+              </TypesAccordionButton>
+              <TypesAccordionPanel>
+                <ResourceList urls={type.urls} />
+              </TypesAccordionPanel>
+            </TypesAccordionItem>
+          )
+        } else {
+          return (
+            <TypesAccordionItem key={type.id}>{typeTitle}</TypesAccordionItem>
+          )
+        }
+      })}
+    </TypesAccordion>
+  )
+}
 
 export default TypesHeader
