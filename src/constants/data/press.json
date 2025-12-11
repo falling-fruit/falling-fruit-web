@@ -13,7 +13,7 @@
       "outlet": "Early to Rise",
       "outlet_url": "http://www.earlytorise.com/",
       "title": "Never buy fruit again",
-      "photo_url": "/press/earlytorise.jpg"
+      "photo_url": "/images/press/earlytorise.jpg"
     },
     {
       "published_on": "2013-10-04",
@@ -68,7 +68,7 @@
       "outlet": "Food Network Magazine",
       "outlet_url": "http://www.foodnetmag.com/",
       "title": "Free Fall",
-      "photo_url": "/press/food_network.jpg"
+      "photo_url": "/images/press/food_network.jpg"
     },
     {
       "published_on": "2013-09-01",
@@ -76,7 +76,7 @@
       "outlet_url": "http://www.aarp.org/bulletin/",
       "title": "Good Eats",
       "author": "Megan Lawson",
-      "photo_url": "/press/aarp_bulletin.jpg"
+      "photo_url": "/images/press/aarp_bulletin.jpg"
     },
     {
       "published_on": "2013-09-01",
@@ -84,7 +84,7 @@
       "outlet_url": "http://www.naturalawakeningsmag.com/",
       "title": "Freebie Fruit",
       "url": "https://www.naturalawakenings.com/2013/08/30/271962/freebie-fruit-online-mapping-points-the-way",
-      "photo_url": "/press/natural_awakenings.jpg"
+      "photo_url": "/images/press/natural_awakenings.jpg"
     },
     {
       "published_on": "2013-08-27",
@@ -101,7 +101,7 @@
       "title": "Pick some fruit while it pours",
       "author": "Sahil Magoo",
       "url": "https://www.hindustantimes.com/lifestyle/pick-some-fruit-while-it-pours/story-acBUK7iet0SBSi8k6rgBgK.html",
-      "photo_url": "/press/hindustan_times.jpg"
+      "photo_url": "/images/press/hindustan_times.jpg"
     },
     {
       "published_on": "2013-08-07",
@@ -110,7 +110,7 @@
       "title": "Hungry hungry hippies",
       "author": "Frederick Reimers",
       "url": "http://www.mountainonline.com/hungry-hungry-hippies-falling-fruit/",
-      "photo_url": "/press/mountain_magazine.jpg"
+      "photo_url": "/images/press/mountain_magazine.jpg"
     },
     {
       "published_on": "2013-07-23",
@@ -261,7 +261,7 @@
       "outlet": "Boulder Lifestyle Magazine",
       "outlet_url": "http://www.boulderlifestylepubs.com/",
       "title": "Local scientists map urban edibles",
-      "photo_url": "/press/boulder_lifestyle.jpg"
+      "photo_url": "/images/press/boulder_lifestyle.jpg"
     },
     {
       "published_on": "2013-06-01",
@@ -270,7 +270,7 @@
       "title": "Website maps 600,000 spots to pluck produce",
       "author": "Donna Bryson",
       "url": "http://www.oregonlive.com/living/index.ssf/2013/06/produce_website_maps_600000_sp.html",
-      "photo_url": "/press/oregonian.jpg"
+      "photo_url": "/images/press/oregonian.jpg"
     },
     {
       "published_on": "2013-05-31",
@@ -635,7 +635,7 @@
       "title": "Fruit networking",
       "author": "Libby Hopkins",
       "url": "http://issuu.com/inthefield/docs/july-august_2014_hillsweb/39?e=1263016/8607512",
-      "photo_url": "/press/inthefield.jpg"
+      "photo_url": "/images/press/inthefield.jpg"
     },
     {
       "published_on": "2014-07-01",
@@ -803,7 +803,7 @@
       "outlet_url": "http://urbanfarmonline.com",
       "title": "Great fruit finds",
       "author": "Rachel Werner",
-      "photo_url": "/press/urban_farm.png"
+      "photo_url": "/images/press/urban_farm.png"
     }
   ],
   "2015": [
@@ -1545,7 +1545,7 @@
       "title": "How to urban-forage for your own food",
       "author": "Christi Turner",
       "url": "https://issuu.com/boulderweekly/docs/3.30.17_boulderganic/22",
-      "photo_url": "/press/boulderganic.jpg"
+      "photo_url": "/images/press/boulderganic.jpg"
     },
     {
       "published_on": "2017-03-01",
@@ -1554,7 +1554,7 @@
       "title": "Hi-Tech Harvest",
       "author": "Christi Turner",
       "url": "https://modernfarmer.com/2017/04/hi-tech-harvest/",
-      "photo_url": "/press/modern_farmer.jpg"
+      "photo_url": "/images/press/modern_farmer.jpg"
     },
     {
       "published_on": "2017-01-03",
