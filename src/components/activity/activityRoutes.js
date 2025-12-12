@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
 
-import RecentChangesPage from './RecentChangesPage'
+import RecentActivityPage from './RecentActivityPage'
 import UserActivityPage from './UserActivityPage'
 import UserProfile from './UserProfile'
 
@@ -15,7 +15,7 @@ const pages = [
   },
   {
     path: '/changes',
-    component: RecentChangesPage,
+    component: RecentActivityPage,
   },
 ]
 
