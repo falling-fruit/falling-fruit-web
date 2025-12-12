@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Acerca de ti",
-    "change_your_email": "Cambiar tu correo electrónico",
+    "change_email": "Cambiar correo electrónico",
+    "change_password": "Cambiar contraseña",
     "change_your_password": "Cambiar tu contraseña",
     "current_password": "Contraseña actual",
     "edit_account": "Editar cuenta",
     "email_settings": "Configuración de correo electrónico",
-    "forgot_password": "Restablecer tu contraseña",
     "joined_on": "Se unió el {{date}}",
     "new_email": "Nuevo correo electrónico",
     "new_password": "Nueva contraseña",
@@ -420,15 +420,14 @@
       "announcements_email": "Recibir correos electrónicos con anuncios y oportunidades importantes (1-2 por año)"
     },
     "password_confirmation": "Confirmación de contraseña",
-    "password_settings": "Configuración de contraseña",
     "profile": {
       "title": "Usuario: {{name}}"
     },
     "remember_me": "Recuérdame",
     "resend_confirmation_instructions": "Reenviar instrucciones de confirmación",
+    "reset_password": "Restablecer contraseña",
     "save_changes": "Guardar cambios",
     "send": "Enviar",
-    "send_password_instructions": "Enviar instrucciones de recuperación de contraseña",
     "sign_in": "Acceder",
     "sign_out": "Cerrar sesión",
     "your_activity": "Tu actividad"

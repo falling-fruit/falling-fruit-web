@@ -20,7 +20,7 @@ const getAvailableLinks = (t) => ({
   },
   forgotPassword: {
     path: '/auth/password/new',
-    text: t('users.forgot_password'),
+    text: t('users.reset_password'),
   },
   resendConfirmation: {
     path: '/auth/confirmation/new',

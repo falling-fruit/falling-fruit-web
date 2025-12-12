@@ -33,7 +33,7 @@ const PasswordResetPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('users.send_password_instructions')}</h1>
+      <h1>{t('users.reset_password')}</h1>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <AuthLinks exclude={['forgotPassword']} />
     </AuthPage>

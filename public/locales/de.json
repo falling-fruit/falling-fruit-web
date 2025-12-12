@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Über dich",
-    "change_your_email": "E-Mail ändern",
+    "change_email": "E-Mail ändern",
+    "change_password": "Passwort ändern",
     "change_your_password": "Passwort ändern",
     "current_password": "Aktuelles Passwort",
     "edit_account": "Konto bearbeiten",
     "email_settings": "E-Mail-Einstellungen",
-    "forgot_password": "Passwort zurücksetzen",
     "joined_on": "Beigetreten am {{date}}",
     "new_email": "Neue E-Mail",
     "new_password": "Neues Passwort",
@@ -420,15 +420,14 @@
       "announcements_email": "Empfange Emails mit wichtigen Bekanntmachungen und Gelegenheiten (1-2 pro Jahr)"
     },
     "password_confirmation": "Passwort bestätigen",
-    "password_settings": "Passwort-Einstellungen",
     "profile": {
       "title": "Benutzer: {{name}}"
     },
     "remember_me": "Speichere mich",
     "resend_confirmation_instructions": "Bestätigungs-Anleitung erneut senden",
+    "reset_password": "Passwort zurücksetzen",
     "save_changes": "Änderungen speichern",
     "send": "Senden",
-    "send_password_instructions": "Anleitung zur Passwort Erneuerung senden",
     "sign_in": "Anmelden",
     "sign_out": "Abmelden",
     "your_activity": "Deine Aktivitäten"

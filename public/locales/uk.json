@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Про вас",
-    "change_your_email": "Змінити вашу електронну адресу",
+    "change_email": "Змінити електронну адресу",
+    "change_password": "Змінити пароль",
     "change_your_password": "Змінити ваш пароль",
     "current_password": "Поточний пароль",
     "edit_account": "Редагувати обліковий запис",
     "email_settings": "Налаштування електронної пошти",
-    "forgot_password": "Скинути пароль",
     "joined_on": "Приєднався {{date}}",
     "new_email": "Нова електронна адреса",
     "new_password": "Новий пароль",
@@ -420,15 +420,14 @@
       "announcements_email": "Отримувати електронні листи з важливими оголошеннями та можливостями (1-2 на рік)"
     },
     "password_confirmation": "Підтвердження пароля",
-    "password_settings": "Налаштування пароля",
     "profile": {
       "title": "Користувач: {{name}}"
     },
     "remember_me": "Запам'ятати мене",
     "resend_confirmation_instructions": "Повторно надіслати інструкції з підтвердження",
+    "reset_password": "Скинути пароль",
     "save_changes": "Зберегти зміни",
     "send": "Надіслати",
-    "send_password_instructions": "Надіслати інструкції для скидання пароля",
     "sign_in": "Увійти",
     "sign_out": "Вийти",
     "your_activity": "Ваша активність"

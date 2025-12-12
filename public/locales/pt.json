@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Sobre você",
-    "change_your_email": "Alterar seu e-mail",
+    "change_email": "Alterar e-mail",
+    "change_password": "Alterar senha",
     "change_your_password": "Alterar sua senha",
     "current_password": "Senha atual",
     "edit_account": "Editar a conta",
     "email_settings": "Configurações de email",
-    "forgot_password": "Redefina a sua senha",
     "joined_on": "Entrou em {{date}}",
     "new_email": "Novo e-mail",
     "new_password": "Senha nova",
@@ -420,15 +420,14 @@
       "announcements_email": "Receber e-mails com anúncios e oportunidades importantes (1-2 por ano)"
     },
     "password_confirmation": "Confirmação da senha",
-    "password_settings": "Configurações de senha",
     "profile": {
       "title": "Usuário: {{name}}"
     },
     "remember_me": "Lembrar usuário",
     "resend_confirmation_instructions": "Reenviar as instruções de confirmação",
+    "reset_password": "Redefinir senha",
     "save_changes": "Salvar alterações",
     "send": "Enviar",
-    "send_password_instructions": "Enviar as instruções para redefinir a minha senha",
     "sign_in": "Entrar",
     "sign_out": "Sair",
     "your_activity": "Sua atividade"

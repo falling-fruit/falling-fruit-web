@@ -87,9 +87,9 @@ const AccountPage = () => {
           </Formik>
           <Column>
             <Link to="/account/change-password">
-              {t('users.password_settings')}
+              {t('users.change_password')}
             </Link>
-            <Link to="/account/change-email">{t('users.email_settings')}</Link>
+            <Link to="/account/change-email">{t('users.change_email')}</Link>
             <Link to={`/users/${user.id}/activity`}>
               {t('users.your_activity')}
             </Link>
