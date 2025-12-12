@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Om dig",
-    "change_your_email": "Ändra din e-postadress",
+    "change_email": "Ändra e-postadress",
+    "change_password": "Ändra lösenord",
     "change_your_password": "Ändra ditt lösenord",
     "current_password": "Nuvarande lösenord",
     "edit_account": "Redigera konto",
     "email_settings": "E-postinställningar",
-    "forgot_password": "Återställ ditt lösenord",
     "joined_on": "Gick med {{date}}",
     "new_email": "Ny e-postadress",
     "new_password": "Nytt lösenord",
@@ -420,15 +420,14 @@
       "announcements_email": "Ta emot e-postmeddelanden med viktiga meddelanden och möjligheter (1-2 per år)"
     },
     "password_confirmation": "Lösenordsbekräftelse",
-    "password_settings": "Lösenordsinställningar",
     "profile": {
       "title": "Användare: {{name}}"
     },
     "remember_me": "Kom ihåg mig",
     "resend_confirmation_instructions": "Skicka bekräftelseinstruktioner igen",
+    "reset_password": "Återställ lösenord",
     "save_changes": "Spara ändringar",
     "send": "Skicka",
-    "send_password_instructions": "Skicka instruktioner för lösenordsåterställning",
     "sign_in": "Logga in",
     "sign_out": "Logga ut",
     "your_activity": "Din aktivitet"

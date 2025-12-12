@@ -118,13 +118,13 @@ const ChangeEmailPage = () => {
           {!showEmailForm ? (
             <div style={{ marginBottom: '1.5em' }}>
               <Button onClick={() => setShowEmailForm(true)}>
-                {t('users.change_your_email')}
+                {t('users.change_email')}
               </Button>
             </div>
           ) : (
             <>
               <h3 style={{ marginBottom: '1.5em' }}>
-                {t('users.change_your_email')}
+                {t('users.change_email')}
               </h3>
               <Formik
                 initialValues={{

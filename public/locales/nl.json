@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Over jou",
-    "change_your_email": "Wijzig je e-mailadres",
+    "change_email": "E-mailadres wijzigen",
+    "change_password": "Wachtwoord wijzigen",
     "change_your_password": "Wijzig je wachtwoord",
     "current_password": "Huidig wachtwoord",
     "edit_account": "Account bewerken",
     "email_settings": "E-mailinstellingen",
-    "forgot_password": "Wachtwoord herstellen",
     "joined_on": "Lid sinds {{date}}",
     "new_email": "Nieuw e-mailadres",
     "new_password": "Nieuw wachtwoord",
@@ -420,15 +420,14 @@
       "announcements_email": "E-mails ontvangen met belangrijke aankondigingen en uitdagingen (1-2 per jaar)"
     },
     "password_confirmation": "Wachtwoord bevestiging",
-    "password_settings": "Wachtwoordinstellingen",
     "profile": {
       "title": "Gebruiker: {{name}}"
     },
     "remember_me": "Onthoudt me",
     "resend_confirmation_instructions": "Bevestigingsinstructies opnieuw versturen",
+    "reset_password": "Wachtwoord opnieuw instellen",
     "save_changes": "Wijzigingen opslaan",
     "send": "Versturen",
-    "send_password_instructions": "Wachtwoordherstelinstructies versturen",
     "sign_in": "Inloggen",
     "sign_out": "Uitloggen",
     "your_activity": "Jouw activiteit"
