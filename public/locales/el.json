@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Δεν ταιριάζει με το πρωτότυπο",
-      "missing_password": "Απαιτείται για αλλαγή email ή κωδικού",
+      "must_be_different": "Πρέπει να είναι διαφορετικό από την προηγούμενη τιμή",
       "too_short": "Ελάχιστο {{min}} χαρακτήρων"
     },
     "optional": "Προαιρετικό",
@@ -252,6 +252,7 @@
         "one": "Μέρος",
         "other": "Τοποθεσίες"
       },
+      "recent_activity": "Πρόσφατη δραστηριότητα",
       "type": {
         "added": "προστέθηκε",
         "added_by_you": "προστέθηκε από εσάς",
@@ -353,6 +354,7 @@
       "community_driven_platform": "Το Falling Fruit είναι μια πλατφόρμα που καθοδηγείται από την κοινότητα για την κοινοποίηση τοποθεσιών βρώσιμων φυτών και άλλων πηγών δωρεάν τροφής.",
       "discover_and_contribute": "Μπορείτε να ανακαλύψετε τι συλλέγουν οι άλλοι στη γειτονιά σας και να συνεισφέρετε με τις δικές σας παρατηρήσεις.",
       "explore_the_map": "Εξερευνήστε τον χάρτη",
+      "home_page": "Αρχική",
       "welcome_visitors_to_the_site_short": "Καλωσήρθατε!"
     }
   },
@@ -409,9 +411,11 @@
     "change_email": "Αλλαγή email",
     "change_password": "Αλλαγή κωδικού",
     "change_your_password": "Αλλαγή του κωδικού σας",
+    "current_email": "Τρέχον email",
     "current_password": "Τρέχων κωδικός",
-    "edit_account": "Διόρθωση λογαριασμού",
-    "email_settings": "Ρυθμίσεις email",
+    "header": {
+      "profile": "Προφίλ"
+    },
     "joined_on": "Εγγραφή στις {{date}}",
     "new_email": "Νέο email",
     "new_password": "Νέος κωδικός",

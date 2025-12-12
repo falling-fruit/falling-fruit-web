@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Orijinal ile eşleşmiyor",
-      "missing_password": "E-posta veya şifreyi değiştirmek için gerekli",
+      "must_be_different": "Önceki değerden farklı olmalıdır",
       "too_short": "En az {{min}} karakter"
     },
     "optional": "İsteğe bağlı",
@@ -252,6 +252,7 @@
         "one": "Mekan",
         "other": "Mekanlar"
       },
+      "recent_activity": "Son aktiviteler",
       "type": {
         "added": "eklendi",
         "added_by_you": "sizin tarafınızdan eklendi",
@@ -353,6 +354,7 @@
       "community_driven_platform": "Falling Fruit, yenilebilir bitkiler ve diğer ücretsiz gıda kaynaklarının konumlarını paylaşmak için topluluk tarafından yönlendirilen bir platformdur.",
       "discover_and_contribute": "Mahallenizde başkalarının neler topladığını keşfedebilir ve kendi gözlemlerinizi ekleyebilirsiniz.",
       "explore_the_map": "Haritayı keşfet",
+      "home_page": "Ana Sayfa",
       "welcome_visitors_to_the_site_short": "Hoş geldiniz!"
     }
   },
@@ -409,9 +411,11 @@
     "change_email": "E-postayı değiştir",
     "change_password": "Şifreyi değiştir",
     "change_your_password": "Şifrenizi değiştirin",
+    "current_email": "Mevcut e-posta",
     "current_password": "Mevcut şifre",
-    "edit_account": "Hesabı düzenle",
-    "email_settings": "E-posta ayarları",
+    "header": {
+      "profile": "Profil"
+    },
     "joined_on": "Katılma tarihi: {{date}}",
     "new_email": "Yeni e-posta",
     "new_password": "Yeni şifre",

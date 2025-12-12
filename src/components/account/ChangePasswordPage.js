@@ -86,6 +86,7 @@ const ChangePasswordPage = () => {
                     name="password"
                     type="password"
                     label={t('users.current_password')}
+                    required
                   />
                   {errors.password && (
                     <ErrorMessage>
@@ -97,6 +98,7 @@ const ChangePasswordPage = () => {
                     type="password"
                     label={t('users.new_password')}
                     autoComplete="new-password"
+                    required
                   />
                   {errors.new_password && (
                     <ErrorMessage>
@@ -106,9 +108,6 @@ const ChangePasswordPage = () => {
                         t('form.error.too_short', {
                           min: errors.new_password.options.min,
                         })}
-                      {errors.new_password.key ===
-                        'form.error.missing_password' &&
-                        t('form.error.missing_password')}
                     </ErrorMessage>
                   )}
 
@@ -117,6 +116,7 @@ const ChangePasswordPage = () => {
                     type="password"
                     label={t('users.new_password_confirmation')}
                     autoComplete="new-password"
+                    required
                   />
                   {errors.new_password_confirm && (
                     <ErrorMessage>

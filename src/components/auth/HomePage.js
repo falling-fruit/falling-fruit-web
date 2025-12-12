@@ -55,7 +55,7 @@ const SpinnerIcon = styled(Loader)`
   }
 `
 
-const WelcomePage = () => {
+const HomePage = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
@@ -111,8 +111,7 @@ const WelcomePage = () => {
           {t('pages.welcome.explore_the_map')}
         </LargeButton>
       </ButtonWrapper>
-      <br />
-      <ButtonWrapper>
+      <ButtonWrapper style={{ marginTop: '2em' }}>
         <Button type="button" secondary>
           <StyledLink to="/auth/sign_in">{t('users.sign_in')}</StyledLink>
         </Button>
@@ -122,10 +121,9 @@ const WelcomePage = () => {
           </StyledLinkWhite>
         </Button>
       </ButtonWrapper>
-      <h3>{t('glossary.about')}</h3>
       <AboutSection />
     </AuthPage>
   )
 }
 
-export default withAuthRedirect(WelcomePage, false)
+export default withAuthRedirect(HomePage, false)
