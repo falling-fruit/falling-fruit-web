@@ -17,7 +17,7 @@ import {
   setPaneDrawerToLowPosition,
 } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsDesktop } from '../../utils/useBreakpoint'
+import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { ReportButton } from './overview/ReportButton'
@@ -78,6 +78,7 @@ const EntryOverview = () => {
     pane,
     reviews,
   } = useSelector((state) => state.location)
+  const isEmbed = useIsEmbed()
   const { locationsWithoutPanorama } = useSelector((state) => state.misc)
   const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
@@ -94,17 +95,26 @@ const EntryOverview = () => {
     .filter(Boolean)
 
   const handleAddressClick = () => {
-    googleMap?.panTo({
-      lat: locationData.lat,
-      lng: locationData.lng,
-    })
-    if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
-      googleMap?.setZoom(MIN_LOCATION_ZOOM)
-    }
-    if (pane.isFromListLocations) {
-      dispatch(reenablePaneDrawerAndSetToLowPosition())
-    } else if (pane.drawerFullyOpen) {
-      dispatch(setPaneDrawerToLowPosition())
+    if (isEmbed) {
+      history.pushAndChangeView('/map', {
+        center: {
+          lat: locationData.lat,
+          lng: locationData.lng,
+        },
+        zoom: Math.max(googleMap?.getZoom(), MIN_LOCATION_ZOOM),
+      })
+    } else {
+      googleMap?.panTo({
+        lat: locationData.lat,
+        lng: locationData.lng,
+      })
+      if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
+        googleMap?.setZoom(MIN_LOCATION_ZOOM)
+      } else if (pane.isFromListLocations) {
+        dispatch(reenablePaneDrawerAndSetToLowPosition())
+      } else if (pane.drawerFullyOpen) {
+        dispatch(setPaneDrawerToLowPosition())
+      }
     }
   }
 
