@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "אודותיך",
-    "change_your_email": "שנה את כתובת הדוא\"ל שלך",
+    "change_email": "שינוי אימייל",
+    "change_password": "שינוי סיסמה",
     "change_your_password": "שנה את הסיסמה שלך",
     "current_password": "סיסמה נוכחית",
     "edit_account": "עריכת החשבון",
     "email_settings": "הגדרות אימייל",
-    "forgot_password": "איפוס סיסמה",
     "joined_on": "הצטרף ב-{{date}}",
     "new_email": "דוא\"ל חדש",
     "new_password": "סיסמה חדשה",
@@ -420,15 +420,14 @@
       "announcements_email": "קבל הודעות דוא\"ל עם הודעות והזדמנויות חשובות (1-2 בשנה)"
     },
     "password_confirmation": "אימות סיסמה",
-    "password_settings": "הגדרות סיסמה",
     "profile": {
       "title": "משתמש: {{name}}"
     },
     "remember_me": "זכור אותי",
     "resend_confirmation_instructions": "שלח שוב הוראות לאישור",
+    "reset_password": "איפוס סיסמה",
     "save_changes": "שמור שינויים",
     "send": "שלח",
-    "send_password_instructions": "שלח הנחיות איפוס סיסמה",
     "sign_in": "התחברות לחשבון",
     "sign_out": "התנתק",
     "your_activity": "הפעילות שלך"

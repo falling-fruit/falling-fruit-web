@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Su di te",
-    "change_your_email": "Cambia la tua email",
+    "change_email": "Cambia email",
+    "change_password": "Cambia password",
     "change_your_password": "Cambia la tua password",
     "current_password": "Password attuale",
     "edit_account": "Modifica account",
     "email_settings": "Impostazioni email",
-    "forgot_password": "Ricrea la password",
     "joined_on": "Iscritto il {{date}}",
     "new_email": "Nuova email",
     "new_password": "Nuova password",
@@ -420,15 +420,14 @@
       "announcements_email": "Ricevere e-mail con annunci e opportunità importanti (1-2 all'anno)"
     },
     "password_confirmation": "Conferma password",
-    "password_settings": "Impostazioni password",
     "profile": {
       "title": "Utente: {{name}}"
     },
     "remember_me": "Ricordami",
     "resend_confirmation_instructions": "Rinviare le istruzioni di conferma",
+    "reset_password": "Reimposta password",
     "save_changes": "Salva modifiche",
     "send": "Invia",
-    "send_password_instructions": "Invia istruzioni di reimpostazione della password",
     "sign_in": "Accedi",
     "sign_out": "Esci",
     "your_activity": "La tua attività"

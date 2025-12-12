@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "О вас",
-    "change_your_email": "Изменить адрес электронной почты",
+    "change_email": "Изменить адрес электронной почты",
+    "change_password": "Изменить пароль",
     "change_your_password": "Изменить пароль",
     "current_password": "Текущий пароль",
     "edit_account": "Редактировать аккаунт",
     "email_settings": "Настройки электронной почты",
-    "forgot_password": "Сбросить пароль",
     "joined_on": "Присоединился {{date}}",
     "new_email": "Новый адрес электронной почты",
     "new_password": "Новый пароль",
@@ -420,15 +420,14 @@
       "announcements_email": "Получать письма с важными объявлениями и возможностями (1-2 раза в год)"
     },
     "password_confirmation": "Подтверждение пароля",
-    "password_settings": "Настройки пароля",
     "profile": {
       "title": "Пользователь: {{name}}"
     },
     "remember_me": "Запомнить меня",
     "resend_confirmation_instructions": "Отправить инструкции подтверждения повторно",
+    "reset_password": "Сбросить пароль",
     "save_changes": "Сохранить изменения",
     "send": "Отправить",
-    "send_password_instructions": "Отправить инструкции по сбросу пароля",
     "sign_in": "Войти",
     "sign_out": "Выйти",
     "your_activity": "Ваша активность"

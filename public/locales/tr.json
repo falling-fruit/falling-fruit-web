@@ -406,12 +406,12 @@
   },
   "users": {
     "bio": "Hakkınızda",
-    "change_your_email": "E-postanızı değiştirin",
+    "change_email": "E-postayı değiştir",
+    "change_password": "Şifreyi değiştir",
     "change_your_password": "Şifrenizi değiştirin",
     "current_password": "Mevcut şifre",
     "edit_account": "Hesabı düzenle",
     "email_settings": "E-posta ayarları",
-    "forgot_password": "Şifreni sıfırla",
     "joined_on": "Katılma tarihi: {{date}}",
     "new_email": "Yeni e-posta",
     "new_password": "Yeni şifre",
@@ -420,15 +420,14 @@
       "announcements_email": "Önemli duyurular ve fırsatlar içeren e-postalar al (yılda 1-2)"
     },
     "password_confirmation": "Şifre onayı",
-    "password_settings": "Şifre ayarları",
     "profile": {
       "title": "Kullanıcı: {{name}}"
     },
     "remember_me": "Beni hatırla",
     "resend_confirmation_instructions": "Onay talimatlarını tekrar gönder",
+    "reset_password": "Şifreyi sıfırla",
     "save_changes": "Değişiklikleri kaydet",
     "send": "Gönder",
-    "send_password_instructions": "Şifre sıfırlama talimatlarını gönder",
     "sign_in": "Oturum aç",
     "sign_out": "Oturumu kapat",
     "your_activity": "Aktiviteleriniz"
