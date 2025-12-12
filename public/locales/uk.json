@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "Про вас",
+    "change_your_email": "Змінити вашу електронну адресу",
     "change_your_password": "Змінити ваш пароль",
     "current_password": "Поточний пароль",
     "edit_account": "Редагувати обліковий запис",
     "email_settings": "Налаштування електронної пошти",
     "forgot_password": "Скинути пароль",
     "joined_on": "Приєднався {{date}}",
+    "new_email": "Нова електронна адреса",
     "new_password": "Новий пароль",
     "new_password_confirmation": "Підтвердження нового пароля",
     "options": {

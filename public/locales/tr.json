@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "Hakkınızda",
+    "change_your_email": "E-postanızı değiştirin",
     "change_your_password": "Şifrenizi değiştirin",
     "current_password": "Mevcut şifre",
     "edit_account": "Hesabı düzenle",
     "email_settings": "E-posta ayarları",
     "forgot_password": "Şifreni sıfırla",
     "joined_on": "Katılma tarihi: {{date}}",
+    "new_email": "Yeni e-posta",
     "new_password": "Yeni şifre",
     "new_password_confirmation": "Yeni şifre onayı",
     "options": {

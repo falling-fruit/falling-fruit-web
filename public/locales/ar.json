@@ -406,12 +406,14 @@
   },
   "users": {
     "bio": "حولك",
+    "change_your_email": "تغيير بريدك الإلكتروني",
     "change_your_password": "تغيير كلمة المرور",
     "current_password": "كلمة المرور الحالي",
     "edit_account": "تحرير الحساب",
     "email_settings": "إعدادات البريد الإلكتروني",
     "forgot_password": "اعد ضبط كلمه السر",
     "joined_on": "انضم في {{date}}",
+    "new_email": "بريد إلكتروني جديد",
     "new_password": "كلمة مرور جديدة",
     "new_password_confirmation": "تأكيد كلمة المرور الجديدة",
     "options": {
