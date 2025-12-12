@@ -8,7 +8,7 @@ import Column from '../ui/LinkColumn'
 const getAvailableLinks = (t) => ({
   about: {
     path: '/about/welcome',
-    text: t('glossary.about'),
+    text: t('pages.welcome.home_page'),
   },
   signIn: {
     path: pathToSignInPage(),

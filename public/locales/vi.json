@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Không khớp với bản gốc",
-      "missing_password": "Yêu cầu thay đổi email hoặc mật khẩu",
+      "must_be_different": "Phải khác với giá trị trước đó",
       "too_short": "Tối thiểu {{min}} ký tự"
     },
     "optional": "Tùy chọn",
@@ -252,6 +252,7 @@
         "one": "Địa điểm",
         "other": "Địa điểm"
       },
+      "recent_activity": "Hoạt động gần đây",
       "type": {
         "added": "đã thêm",
         "added_by_you": "đã được thêm bởi bạn",
@@ -353,6 +354,7 @@
       "community_driven_platform": "Falling Fruit là một nền tảng do cộng đồng điều hành để chia sẻ vị trí của các cây ăn được và các nguồn thực phẩm miễn phí khác.",
       "discover_and_contribute": "Bạn có thể khám phá những gì người khác đã hái lượm trong khu vực của bạn, và đóng góp quan sát của bạn.",
       "explore_the_map": "Khám phá bản đồ",
+      "home_page": "Trang chủ",
       "welcome_visitors_to_the_site_short": "Chào mừng!"
     }
   },
@@ -409,9 +411,11 @@
     "change_email": "Đổi email",
     "change_password": "Đổi mật khẩu",
     "change_your_password": "Thay đổi mật khẩu của bạn",
+    "current_email": "Email hiện tại",
     "current_password": "Mật khẩu hiện tại",
-    "edit_account": "Chỉnh sửa tài khoản",
-    "email_settings": "Cài đặt email",
+    "header": {
+      "profile": "Hồ sơ"
+    },
     "joined_on": "Tham gia vào {{date}}",
     "new_email": "Email mới",
     "new_password": "Mật khẩu mới",

@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Nie pasuje do oryginału",
-      "missing_password": "Wymagane do zmiany emaila lub hasła",
+      "must_be_different": "Musi być inne niż poprzednia wartość",
       "too_short": "Minimum {{min}} znaków"
     },
     "optional": "Opcjonalne",
@@ -252,6 +252,7 @@
         "one": "Miejsce",
         "other": "Miejsca"
       },
+      "recent_activity": "Ostatnia aktywność",
       "type": {
         "added": "dodano",
         "added_by_you": "dodano przez Ciebie",
@@ -353,6 +354,7 @@
       "community_driven_platform": "Falling Fruit to platforma tworzona przez społeczność, służąca do dzielenia się lokalizacjami roślin jadalnych i innych źródeł darmowej żywności.",
       "discover_and_contribute": "Możesz odkrywać, co inni zbierają w Twojej okolicy i dodawać własne obserwacje.",
       "explore_the_map": "Otwórz mapę",
+      "home_page": "Strona główna",
       "welcome_visitors_to_the_site_short": "Witamy!"
     }
   },
@@ -409,9 +411,11 @@
     "change_email": "Zmień adres e-mail",
     "change_password": "Zmień hasło",
     "change_your_password": "Zmień hasło",
+    "current_email": "Aktualny adres e-mail",
     "current_password": "Aktualne hasło",
-    "edit_account": "Edytuj konto",
-    "email_settings": "Ustawienia e-mail",
+    "header": {
+      "profile": "Profil"
+    },
     "joined_on": "Dołączył(a) {{date}}",
     "new_email": "Nowy adres e-mail",
     "new_password": "Nowe hasło",

@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Does not match original",
-      "missing_password": "Required to change email or password",
+      "must_be_different": "Moet verschillend zijn van de vorige waarde",
       "too_short": "Minimum of {{min}} characters"
     },
     "optional": "Optional",
@@ -252,6 +252,7 @@
         "one": "Plaats",
         "other": "Plaatsen"
       },
+      "recent_activity": "Recente activiteit",
       "type": {
         "added": "toegevoegd",
         "added_by_you": "door jou toegevoegd",
@@ -353,6 +354,7 @@
       "community_driven_platform": "Falling Fruit is een door de gemeenschap gedreven platform voor het delen van locaties van eetbare planten en andere bronnen van gratis voedsel.",
       "discover_and_contribute": "U kunt ontdekken wat anderen in uw buurt hebben geoogst en uw eigen waarnemingen bijdragen.",
       "explore_the_map": "Verken de kaart",
+      "home_page": "Home",
       "welcome_visitors_to_the_site_short": "Welkom!"
     }
   },
@@ -409,9 +411,11 @@
     "change_email": "E-mailadres wijzigen",
     "change_password": "Wachtwoord wijzigen",
     "change_your_password": "Wijzig je wachtwoord",
+    "current_email": "Huidig e-mailadres",
     "current_password": "Huidig wachtwoord",
-    "edit_account": "Account bewerken",
-    "email_settings": "E-mailinstellingen",
+    "header": {
+      "profile": "Profiel"
+    },
     "joined_on": "Lid sinds {{date}}",
     "new_email": "Nieuw e-mailadres",
     "new_password": "Nieuw wachtwoord",

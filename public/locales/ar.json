@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "لا يتطابق مع الأصل",
-      "missing_password": "مطلوب لتغيير البريد الإلكتروني أو كلمة المرور",
+      "must_be_different": "يجب أن يكون مختلفاً عن القيمة السابقة",
       "too_short": "الحد الأدنى {{min}} حروف"
     },
     "optional": "اختياري",
@@ -252,6 +252,7 @@
         "one": "مكان",
         "other": "الأماكن"
       },
+      "recent_activity": "النشاط الأخير",
       "type": {
         "added": "مضاف",
         "added_by_you": "مضاف بواسطتك",
@@ -353,6 +354,7 @@
       "community_driven_platform": "فولينغ فروت هي منصة يديرها المجتمع لمشاركة مواقع النباتات الصالحة للأكل وغيرها من مصادر الطعام المجاني.",
       "discover_and_contribute": "يمكنك اكتشاف ما يحصده الآخرون في حيك، والمساهمة بملاحظاتك.",
       "explore_the_map": "استكشف الخريطة",
+      "home_page": "الصفحة الرئيسية",
       "welcome_visitors_to_the_site_short": "أهلاً وسهلاً!"
     }
   },
@@ -409,9 +411,11 @@
     "change_email": "تغيير البريد الإلكتروني",
     "change_password": "تغيير كلمة المرور",
     "change_your_password": "تغيير كلمة المرور",
+    "current_email": "البريد الإلكتروني الحالي",
     "current_password": "كلمة المرور الحالي",
-    "edit_account": "تحرير الحساب",
-    "email_settings": "إعدادات البريد الإلكتروني",
+    "header": {
+      "profile": "الملف الشخصي"
+    },
     "joined_on": "انضم في {{date}}",
     "new_email": "بريد إلكتروني جديد",
     "new_password": "كلمة مرور جديدة",
