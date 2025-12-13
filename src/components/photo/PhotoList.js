@@ -5,19 +5,6 @@ import styled from 'styled-components/macro'
 import ImagePreview from '../ui/ImagePreview'
 import ListEntry, { Icons, PrimaryText } from '../ui/ListEntry'
 
-const remove = (list, startIndex, deleteCount) => {
-  const result = Array.from(list)
-  result.splice(startIndex, deleteCount)
-  return result
-}
-
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list)
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
-  return result
-}
-
 const PhotoEntry = styled(ListEntry).attrs((props) => ({
   leftIcons: [
     <ListUl size={20} key={1} />,
@@ -50,14 +37,14 @@ const PhotoListContainer = styled.div`
   margin-block-end: 16px;
 `
 
-export const PhotoList = ({ photos, onChange }) => {
+export const PhotoList = ({ photos, reorderPhoto, removePhoto }) => {
   const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
       return
     }
 
-    onChange(reorder(photos, result.source.index, result.destination.index))
+    reorderPhoto(result.source.index, result.destination.index)
   }
 
   const entries =
@@ -73,7 +60,7 @@ export const PhotoList = ({ photos, onChange }) => {
             src={image}
             alt={name}
             isUploading={isUploading}
-            $onDelete={() => onChange(remove(photos, index, 1))}
+            $onDelete={() => removePhoto(index)}
           >
             <PrimaryText>{isNew && <NewBadge />}</PrimaryText>
             <PrimaryText>{name}</PrimaryText>
