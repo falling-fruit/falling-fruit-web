@@ -18,6 +18,7 @@ const StyledLabeledInput = styled.div`
       font-weight: bold;
       color: ${({ theme }) => theme.secondaryText};
       cursor: pointer;
+      flex: 1;
     }
   }
 `
