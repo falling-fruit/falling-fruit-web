@@ -62,9 +62,11 @@
     "unknown_error": "Bilinmeyen hata"
   },
   "filter": {
-    "deselect_all": "Tümünü kaldır",
-    "only_on_map": "Haritada",
-    "select_all": "Tümünü seç"
+    "all_types": "Tüm türler",
+    "deselect_shown": "Gösterilenlerin seçimini kaldır",
+    "include_tree_inventories": "Ağaç envanterlerini dahil et",
+    "select_shown": "Gösterilenlerin tümünü seç",
+    "within_this_area": "Bu alan içinde"
   },
   "form": {
     "button": {

@@ -62,9 +62,11 @@
     "unknown_error": "שגיאה לא ידועה"
   },
   "filter": {
-    "deselect_all": "בטל בחירת הכל",
-    "only_on_map": "על המפה",
-    "select_all": "בחר הכל"
+    "all_types": "כל הסוגים",
+    "deselect_shown": "בטל בחירת כל המוצגים",
+    "include_tree_inventories": "כלול מלאי עצים",
+    "select_shown": "בחר את כל המוצגים",
+    "within_this_area": "בתוך אזור זה"
   },
   "form": {
     "button": {
