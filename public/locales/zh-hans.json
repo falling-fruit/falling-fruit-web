@@ -62,9 +62,11 @@
     "unknown_error": "未知错误"
   },
   "filter": {
-    "deselect_all": "取消全选",
-    "only_on_map": "在地图上",
-    "select_all": "全选"
+    "all_types": "所有类型",
+    "deselect_shown": "取消选择所有显示的",
+    "include_tree_inventories": "包括树木清单",
+    "select_shown": "选择所有显示的",
+    "within_this_area": "在此区域内"
   },
   "form": {
     "button": {
