@@ -62,9 +62,11 @@
     "unknown_error": "Onbekende fout"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all"
+    "all_types": "Alle types",
+    "deselect_shown": "Deselecteer alle getoonde",
+    "include_tree_inventories": "Inclusief boominventarissen",
+    "select_shown": "Selecteer alle getoonde",
+    "within_this_area": "Binnen dit gebied"
   },
   "form": {
     "button": {

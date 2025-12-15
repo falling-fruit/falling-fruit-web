@@ -62,9 +62,11 @@
     "unknown_error": "Nieznany błąd"
   },
   "filter": {
-    "deselect_all": "Odznacz wszystko",
-    "only_on_map": "Na mapie",
-    "select_all": "Zaznacz wszystko"
+    "all_types": "Wszystkie typy",
+    "deselect_shown": "Odznacz wszystkie pokazane",
+    "include_tree_inventories": "Uwzględnij inwentaryzacje drzew",
+    "select_shown": "Zaznacz wszystkie pokazane",
+    "within_this_area": "W tym obszarze"
   },
   "form": {
     "button": {

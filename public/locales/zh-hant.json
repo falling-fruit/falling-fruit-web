@@ -62,9 +62,11 @@
     "unknown_error": "未知錯誤"
   },
   "filter": {
-    "deselect_all": "取消全選",
-    "only_on_map": "在地圖上",
-    "select_all": "全選"
+    "all_types": "所有類型",
+    "deselect_shown": "取消選擇所有顯示的項目",
+    "include_tree_inventories": "包含樹木清單",
+    "select_shown": "選擇所有顯示的項目",
+    "within_this_area": "在此區域內"
   },
   "form": {
     "button": {
