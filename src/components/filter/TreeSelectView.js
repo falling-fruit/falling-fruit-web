@@ -22,7 +22,7 @@ const TreeSelectContainer = styled.ul`
     !isDesktop &&
     `
     min-height: 5vh;
-    max-height: 65vh;
+    max-height: 59.5dvh;
   `}
 `
 

@@ -62,9 +62,11 @@
     "unknown_error": "Unknown error"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all"
+    "all_types": "All types",
+    "deselect_shown": "Deselect all shown",
+    "include_tree_inventories": "Include tree inventories",
+    "select_shown": "Select all shown",
+    "within_this_area": "Within this area"
   },
   "form": {
     "button": {
