@@ -82,6 +82,23 @@
       "must_be_different": "Moet verschillend zijn van de vorige waarde",
       "too_short": "Minimum of {{min}} characters"
     },
+    "not_signed_in": {
+      "add": {
+        "message": "Je bent niet ingelogd. Je kunt deze locatie direct toevoegen, of toevoegen onder je naam.",
+        "title": "Toevoegen zonder in te loggen?"
+      },
+      "continue": "Doorgaan",
+      "do_not_ask_again": "Niet opnieuw vragen",
+      "edit": {
+        "message": "Je bent niet ingelogd. Je kunt deze locatie direct bewerken, of bewerken onder je naam.",
+        "title": "Bewerken zonder in te loggen?"
+      },
+      "review": {
+        "message": "Je bent niet ingelogd. Je kunt deze locatie direct recenseren, of recenseren onder je naam.",
+        "title": "Recenseren zonder in te loggen?"
+      },
+      "why_account": "Een account aanmaken is gratis en stelt je in staat om je bijdragen te volgen en beheren. Het zorgt er ook voor dat ze verschijnen met je naam zodat anderen kunnen zien wie wat heeft gedaan. Anonieme bijdragen zijn ook welkom."
+    },
     "optional": "Optional",
     "required": "Required",
     "search": "Search"

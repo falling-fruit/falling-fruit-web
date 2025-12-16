@@ -82,6 +82,23 @@
       "must_be_different": "Debe ser diferente del valor anterior",
       "too_short": "Mínimo de {{min}} caracteres"
     },
+    "not_signed_in": {
+      "add": {
+        "message": "No has iniciado sesión. Puedes agregar esta ubicación ahora mismo, o agregarla bajo tu nombre.",
+        "title": "¿Agregar sin iniciar sesión?"
+      },
+      "continue": "Continuar",
+      "do_not_ask_again": "No preguntar de nuevo",
+      "edit": {
+        "message": "No has iniciado sesión. Puedes editar esta ubicación ahora mismo, o editarla bajo tu nombre.",
+        "title": "¿Editar sin iniciar sesión?"
+      },
+      "review": {
+        "message": "No has iniciado sesión. Puedes reseñar esta ubicación ahora mismo, o reseñarla bajo tu nombre.",
+        "title": "¿Reseñar sin iniciar sesión?"
+      },
+      "why_account": "Crear una cuenta es gratis y te permite rastrear y gestionar tus contribuciones. También permite que aparezcan con tu nombre para que otros puedan ver quién hizo qué. Las contribuciones anónimas también son bienvenidas."
+    },
     "optional": "Opcional",
     "required": "Requerido",
     "search": "Buscar"

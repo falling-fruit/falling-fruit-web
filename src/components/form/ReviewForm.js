@@ -21,6 +21,7 @@ import {
   Textarea,
 } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
+import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 export const ReviewStep = ({ standalone, hasHeading = true }) => {
@@ -168,6 +169,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
 
   return (
     <StyledForm>
+      {!isLoggedIn && <NotSignedInClickthrough flavour="review" />}
       <Formik
         validate={({ review }) => validateReview(review)}
         initialValues={mergedInitialValues}

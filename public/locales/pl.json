@@ -82,6 +82,23 @@
       "must_be_different": "Musi być inne niż poprzednia wartość",
       "too_short": "Minimum {{min}} znaków"
     },
+    "not_signed_in": {
+      "add": {
+        "message": "Nie jesteś zalogowany. Możesz dodać tę lokalizację od razu lub dodać ją pod swoim imieniem.",
+        "title": "Dodać bez logowania?"
+      },
+      "continue": "Kontynuuj",
+      "do_not_ask_again": "Nie pytaj ponownie",
+      "edit": {
+        "message": "Nie jesteś zalogowany. Możesz edytować tę lokalizację od razu lub edytować ją pod swoim imieniem.",
+        "title": "Edytować bez logowania?"
+      },
+      "review": {
+        "message": "Nie jesteś zalogowany. Możesz zrecenzować tę lokalizację od razu lub zrecenzować ją pod swoim imieniem.",
+        "title": "Recenzować bez logowania?"
+      },
+      "why_account": "Utworzenie konta jest bezpłatne i pozwala śledzić oraz zarządzać swoimi wkładami. Umożliwia również ich wyświetlanie z Twoim imieniem, aby inni mogli zobaczyć, kto co zrobił. Anonimowe wkłady są również mile widziane."
+    },
     "optional": "Opcjonalne",
     "required": "Wymagane",
     "search": "Szukaj"

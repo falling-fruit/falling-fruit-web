@@ -82,6 +82,23 @@
       "must_be_different": "Muss sich vom vorherigen Wert unterscheiden",
       "too_short": "Mindestens {{min}} Zeichen"
     },
+    "not_signed_in": {
+      "add": {
+        "message": "Sie sind nicht angemeldet. Sie können diesen Ort sofort hinzufügen oder ihn unter Ihrem Namen hinzufügen.",
+        "title": "Ohne Anmeldung hinzufügen?"
+      },
+      "continue": "Fortfahren",
+      "do_not_ask_again": "Nicht erneut fragen",
+      "edit": {
+        "message": "Sie sind nicht angemeldet. Sie können diesen Ort sofort bearbeiten oder ihn unter Ihrem Namen bearbeiten.",
+        "title": "Ohne Anmeldung bearbeiten?"
+      },
+      "review": {
+        "message": "Sie sind nicht angemeldet. Sie können diesen Ort sofort bewerten oder ihn unter Ihrem Namen bewerten.",
+        "title": "Ohne Anmeldung bewerten?"
+      },
+      "why_account": "Ein Konto zu erstellen ist kostenlos und ermöglicht es Ihnen, Ihre Beiträge zu verfolgen und zu verwalten. Es ermöglicht auch, dass sie mit Ihrem Namen erscheinen, damit andere sehen können, wer was getan hat. Anonyme Beiträge sind ebenfalls willkommen."
+    },
     "optional": "Optional",
     "required": "Erforderlich",
     "search": "Suchen"

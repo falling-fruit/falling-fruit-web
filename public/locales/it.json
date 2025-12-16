@@ -82,6 +82,23 @@
       "must_be_different": "Deve essere diverso dal valore precedente",
       "too_short": "Minimo {{min}} caratteri"
     },
+    "not_signed_in": {
+      "add": {
+        "message": "Non hai effettuato l'accesso. Puoi aggiungere questa posizione subito oppure aggiungerla con il tuo nome.",
+        "title": "Aggiungere senza effettuare l'accesso?"
+      },
+      "continue": "Continua",
+      "do_not_ask_again": "Non chiedere più",
+      "edit": {
+        "message": "Non hai effettuato l'accesso. Puoi modificare questa posizione subito oppure modificarla con il tuo nome.",
+        "title": "Modificare senza effettuare l'accesso?"
+      },
+      "review": {
+        "message": "Non hai effettuato l'accesso. Puoi recensire questa posizione subito oppure recensirla con il tuo nome.",
+        "title": "Recensire senza effettuare l'accesso?"
+      },
+      "why_account": "Creare un account è gratuito e ti permette di monitorare e gestire i tuoi contributi. Consente inoltre che appaiano con il tuo nome in modo che gli altri possano vedere chi ha fatto cosa. Anche i contributi anonimi sono benvenuti."
+    },
     "optional": "Facoltativo",
     "required": "Obbligatorio",
     "search": "Cerca"
