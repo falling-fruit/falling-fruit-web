@@ -19,13 +19,8 @@ const EdibleTypeText = styled.p`
   font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
-  margin-block-start: 1.25em;
+  margin-block: 0.75em;
   margin-block-end: 0.5em;
-  ${({ isDesktop }) =>
-    !isDesktop &&
-    `
-    margin-block-start: 0em;
-  `}
 `
 
 const TreeFiltersContainer = styled.div`
@@ -53,7 +48,7 @@ const MapAreaSelectWrapper = styled.div`
 `
 
 const MuniCheckbox = styled.div`
-  margin-block: 1em;
+  margin-block-start: 1em;
 `
 
 const Filter = () => {
@@ -88,61 +83,7 @@ const Filter = () => {
     { value: 'all', label: t('filter.all_types') },
   ]
   return (
-    <>
-      <div>
-        <EdibleTypeText isDesktop={isDesktop}>
-          {t('glossary.type.other')}
-        </EdibleTypeText>
-        <SearchAndSelectContainer>
-          <MapAreaSelectWrapper>
-            <Select
-              value={mapAreaOptions.find(
-                (option) => option.value === (showOnlyOnMap ? 'map' : 'all'),
-              )}
-              onChange={(selectedOption) =>
-                dispatch(setShowOnlyOnMap(selectedOption.value === 'map'))
-              }
-              options={mapAreaOptions}
-            />
-          </MapAreaSelectWrapper>
-          <SearchInput
-            onChange={(e) => setSearchValueDebounced(e.target.value)}
-            placeholder={t('form.search')}
-          />
-        </SearchAndSelectContainer>
-        {typesAccess.isEmpty ? (
-          <RCTreeSelectSkeleton />
-        ) : (
-          <TreeSelect
-            types={types}
-            onChange={(selectedTypes) =>
-              dispatch(selectionChanged(selectedTypes))
-            }
-            selectTree={selectTree}
-          />
-        )}
-        <TreeFiltersContainer>
-          <FilterButtons
-            onSelectAllClick={() => {
-              const newSelection = [...new Set([...types, ...visibleTypeIds])]
-              dispatch(selectionChanged(newSelection))
-            }}
-            onDeselectAllClick={() => {
-              const remainingSelection = types.filter(
-                (typeId) => !visibleTypeIds.some((t) => t === typeId),
-              )
-              dispatch(selectionChanged(remainingSelection))
-            }}
-            isSelectAllDisabled={visibleTypeIds.every((typeId) =>
-              types.includes(typeId),
-            )}
-            isDeselectAllDisabled={visibleTypeIds.every(
-              (typeId) => !types.includes(typeId),
-            )}
-          />
-        </TreeFiltersContainer>
-      </div>
-
+    <div>
       <MuniCheckbox>
         <LabeledCheckbox
           field="muni"
@@ -151,7 +92,58 @@ const Filter = () => {
           onChange={(checked) => dispatch(muniChanged(checked))}
         />
       </MuniCheckbox>
-    </>
+      <EdibleTypeText isDesktop={isDesktop}>
+        {t('glossary.type.other')}
+      </EdibleTypeText>
+      <SearchAndSelectContainer>
+        <MapAreaSelectWrapper>
+          <Select
+            value={mapAreaOptions.find(
+              (option) => option.value === (showOnlyOnMap ? 'map' : 'all'),
+            )}
+            onChange={(selectedOption) =>
+              dispatch(setShowOnlyOnMap(selectedOption.value === 'map'))
+            }
+            options={mapAreaOptions}
+          />
+        </MapAreaSelectWrapper>
+        <SearchInput
+          onChange={(e) => setSearchValueDebounced(e.target.value)}
+          placeholder={t('form.search')}
+        />
+      </SearchAndSelectContainer>
+      {typesAccess.isEmpty ? (
+        <RCTreeSelectSkeleton />
+      ) : (
+        <TreeSelect
+          types={types}
+          onChange={(selectedTypes) =>
+            dispatch(selectionChanged(selectedTypes))
+          }
+          selectTree={selectTree}
+        />
+      )}
+      <TreeFiltersContainer>
+        <FilterButtons
+          onSelectAllClick={() => {
+            const newSelection = [...new Set([...types, ...visibleTypeIds])]
+            dispatch(selectionChanged(newSelection))
+          }}
+          onDeselectAllClick={() => {
+            const remainingSelection = types.filter(
+              (typeId) => !visibleTypeIds.some((t) => t === typeId),
+            )
+            dispatch(selectionChanged(remainingSelection))
+          }}
+          isSelectAllDisabled={visibleTypeIds.every((typeId) =>
+            types.includes(typeId),
+          )}
+          isDeselectAllDisabled={visibleTypeIds.every(
+            (typeId) => !types.includes(typeId),
+          )}
+        />
+      </TreeFiltersContainer>
+    </div>
   )
 }
 
