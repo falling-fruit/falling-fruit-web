@@ -62,9 +62,11 @@
     "unknown_error": "Άγνωστο σφάλμα"
   },
   "filter": {
-    "deselect_all": "Αποεπιλογή όλων",
-    "only_on_map": "Στον χάρτη",
-    "select_all": "Επιλογή όλων"
+    "all_types": "Όλοι οι τύποι",
+    "deselect_shown": "Αποεπιλογή όλων των εμφανιζόμενων",
+    "include_tree_inventories": "Συμπερίληψη απογραφών δέντρων",
+    "select_shown": "Επιλογή όλων των εμφανιζόμενων",
+    "within_this_area": "Εντός αυτής της περιοχής"
   },
   "form": {
     "button": {

@@ -62,9 +62,11 @@
     "unknown_error": "Okänt fel"
   },
   "filter": {
-    "deselect_all": "Avmarkera alla",
-    "only_on_map": "På kartan",
-    "select_all": "Markera alla"
+    "all_types": "Alla typer",
+    "deselect_shown": "Avmarkera alla visade",
+    "include_tree_inventories": "Inkludera trädinventeringar",
+    "select_shown": "Markera alla visade",
+    "within_this_area": "Inom detta område"
   },
   "form": {
     "button": {
