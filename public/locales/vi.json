@@ -82,6 +82,23 @@
       "must_be_different": "Phải khác với giá trị trước đó",
       "too_short": "Tối thiểu {{min}} ký tự"
     },
+    "not_signed_in": {
+      "add": {
+        "message": "Bạn chưa đăng nhập. Bạn có thể thêm địa điểm này ngay bây giờ hoặc thêm nó dưới tên của bạn.",
+        "title": "Thêm mà không cần đăng nhập?"
+      },
+      "continue": "Tiếp tục",
+      "do_not_ask_again": "Không hỏi lại",
+      "edit": {
+        "message": "Bạn chưa đăng nhập. Bạn có thể chỉnh sửa địa điểm này ngay bây giờ hoặc chỉnh sửa nó dưới tên của bạn.",
+        "title": "Chỉnh sửa mà không cần đăng nhập?"
+      },
+      "review": {
+        "message": "Bạn chưa đăng nhập. Bạn có thể đánh giá địa điểm này ngay bây giờ hoặc đánh giá nó dưới tên của bạn.",
+        "title": "Đánh giá mà không cần đăng nhập?"
+      },
+      "why_account": "Tạo tài khoản miễn phí và cho phép bạn theo dõi và quản lý các đóng góp của mình. Nó cũng cho phép chúng xuất hiện với tên của bạn để người khác có thể thấy ai đã làm gì. Các đóng góp ẩn danh cũng được chào đón."
+    },
     "optional": "Tùy chọn",
     "required": "Bắt buộc",
     "search": "Tìm kiếm"

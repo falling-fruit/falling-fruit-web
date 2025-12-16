@@ -82,6 +82,23 @@
       "must_be_different": "Deve ser diferente do valor anterior",
       "too_short": "Mínimo de {{min}} caracteres"
     },
+    "not_signed_in": {
+      "add": {
+        "message": "Você não está conectado. Você pode adicionar este local imediatamente ou adicioná-lo em seu nome.",
+        "title": "Adicionar sem fazer login?"
+      },
+      "continue": "Continuar",
+      "do_not_ask_again": "Não perguntar novamente",
+      "edit": {
+        "message": "Você não está conectado. Você pode editar este local imediatamente ou editá-lo em seu nome.",
+        "title": "Editar sem fazer login?"
+      },
+      "review": {
+        "message": "Você não está conectado. Você pode avaliar este local imediatamente ou avaliá-lo em seu nome.",
+        "title": "Avaliar sem fazer login?"
+      },
+      "why_account": "Criar uma conta é gratuito e permite que você acompanhe e gerencie suas contribuições. Também permite que elas apareçam com seu nome para que outros possam ver quem fez o quê. Contribuições anônimas também são bem-vindas."
+    },
     "optional": "Opcional",
     "required": "Obrigatório",
     "search": "Buscar"
