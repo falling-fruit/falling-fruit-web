@@ -97,7 +97,7 @@
         "message": "Du är inte inloggad. Du kan granska denna plats direkt, eller granska den under ditt namn.",
         "title": "Granska utan att logga in?"
       },
-      "why_account": "Att skapa ett konto är gratis och låter dig spåra och hantera dina bidrag. Det gör också att de visas med ditt namn så att andra kan se vem som gjorde vad. Anonyma bidrag är också välkomna."
+      "why_account": "Att skapa ett konto är gratis och låter dig spåra och hantera dina observationer. Det gör också att de visas med ditt namn så att andra kan se vem som gjorde vad. Anonyma bidrag är också välkomna."
     },
     "optional": "Valfri",
     "required": "Obligatorisk",
