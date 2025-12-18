@@ -97,7 +97,7 @@
         "message": "Vous n'êtes pas connecté. Vous pouvez évaluer cet emplacement immédiatement, ou l'évaluer sous votre nom.",
         "title": "Évaluer sans se connecter ?"
       },
-      "why_account": "La création d'un compte est gratuite et vous permet de suivre et gérer vos contributions. Elle permet également qu'elles apparaissent avec votre nom afin que les autres puissent voir qui a fait quoi. Les contributions anonymes sont également les bienvenues."
+      "why_account": "Créer un compte est gratuit et vous permet de suivre et gérer vos observations. Cela permet également qu'elles apparaissent avec votre nom afin que les autres puissent voir qui a fait quoi. Les contributions anonymes sont également les bienvenues."
     },
     "optional": "Facultatif",
     "required": "Obligatoire",

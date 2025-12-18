@@ -97,7 +97,7 @@
         "message": "Oturum açmadınız. Bu konumu hemen inceleyebilir veya adınız altında inceleyebilirsiniz.",
         "title": "Oturum açmadan incelensin mi?"
       },
-      "why_account": "Hesap oluşturmak ücretsizdir ve katkılarınızı takip edip yönetmenizi sağlar. Ayrıca katkılarınızın adınızla görünmesini sağlar, böylece başkaları kimin ne yaptığını görebilir. Anonim katkılar da memnuniyetle karşılanır."
+      "why_account": "Hesap oluşturmak ücretsizdir ve gözlemlerinizi takip edip yönetmenizi sağlar. Ayrıca katkılarınızın adınızla görünmesini sağlayarak başkalarının kimin ne yaptığını görmesine olanak tanır. Anonim katkılar da memnuniyetle karşılanır."
     },
     "optional": "İsteğe bağlı",
     "required": "Gerekli",
