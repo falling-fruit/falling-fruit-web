@@ -30,6 +30,7 @@ import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Checkbox, Select, Textarea } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
+import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { ReviewStep } from './ReviewForm'
 import TypesSelect from './TypesSelect'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
@@ -293,10 +294,13 @@ export const LocationForm = ({ editingId, innerRef }) => {
   const { Recaptcha, handlePresubmit: onPresubmit } =
     useInvisibleRecaptcha(handleSubmit)
 
+  const clickthroughFlavour = editingId ? 'edit' : 'add'
+
   return isLoading || typesAccess.isEmpty ? (
     <div>{t('layouts.loading')}</div>
   ) : (
     <StyledForm>
+      {!isLoggedIn && <NotSignedInClickthrough flavour={clickthroughFlavour} />}
       <Formik
         validate={validateLocation}
         initialValues={mergedInitialValues}
