@@ -11,7 +11,7 @@ import { createActivityDiary } from './ActivityDiary'
 import DiaryEntry from './DiaryEntry'
 import SkeletonLoader from './SkeletonLoader'
 
-const RecentChangesPage = () => {
+const RecentActivityPage = () => {
   const dispatch = useDispatch()
   const loadMoreRef = useRef()
   const { t } = useTranslation()
@@ -80,7 +80,7 @@ const RecentChangesPage = () => {
 
   return (
     <InfoPage>
-      <h1>{t('glossary.activity')}</h1>
+      <h1>{t('pages.changes.recent_activity')}</h1>
       {activityDiary.entries.length > 0 &&
         activityDiary.entries.map((entry) => (
           <DiaryEntry key={entry.formattedDate} entry={entry} />
@@ -93,4 +93,4 @@ const RecentChangesPage = () => {
   )
 }
 
-export default RecentChangesPage
+export default RecentActivityPage

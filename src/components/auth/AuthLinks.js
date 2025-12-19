@@ -8,7 +8,7 @@ import Column from '../ui/LinkColumn'
 const getAvailableLinks = (t) => ({
   about: {
     path: '/about/welcome',
-    text: t('glossary.about'),
+    text: t('pages.welcome.home_page'),
   },
   signIn: {
     path: pathToSignInPage(),
@@ -20,7 +20,7 @@ const getAvailableLinks = (t) => ({
   },
   forgotPassword: {
     path: '/auth/password/new',
-    text: t('users.forgot_password'),
+    text: t('users.reset_password'),
   },
   resendConfirmation: {
     path: '/auth/confirmation/new',
