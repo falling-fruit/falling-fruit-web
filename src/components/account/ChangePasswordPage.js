@@ -72,9 +72,7 @@ const ChangePasswordPage = () => {
               new_password_confirm: Yup.string()
                 .oneOf([Yup.ref('new_password')])
                 .required(),
-              password: Yup.string().required({
-                key: 'form.error.missing_password',
-              }),
+              password: Yup.string().required(),
             })}
             onSubmit={handleSubmit}
           >
@@ -88,11 +86,6 @@ const ChangePasswordPage = () => {
                     label={t('users.current_password')}
                     required
                   />
-                  {errors.password && (
-                    <ErrorMessage>
-                      {t(errors.password.key, errors.password.options)}
-                    </ErrorMessage>
-                  )}
                   <Input
                     name="new_password"
                     type="password"
