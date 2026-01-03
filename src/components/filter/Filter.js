@@ -109,7 +109,7 @@ const Filter = () => {
         </MapAreaSelectWrapper>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
-          placeholder={t('form.search')}
+          placeholder={t('glossary.type.one')}
         />
       </SearchAndSelectContainer>
       {typesAccess.isEmpty ? (
