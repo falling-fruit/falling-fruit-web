@@ -38,6 +38,8 @@ const EmailDisplay = styled.div`
 
 const PreferencesContainer = styled.div`
   margin-bottom: 1.5em;
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.$isDisabled ? 'none' : 'auto')};
 `
 
 const LinksContainer = styled.div`
@@ -102,28 +104,25 @@ const AccountPage = () => {
           <section>
             <EmailLabel>{t('glossary.email')}</EmailLabel>
             <EmailDisplay>{user.email}</EmailDisplay>
-            <PreferencesContainer>
-              {isUpdatingPreferences ? (
-                <LoadingIndicator />
-              ) : (
-                <LabeledRow
-                  label={
-                    <label htmlFor="announcements_email_toggle">
-                      {t('users.options.announcements_email')}
-                    </label>
-                  }
-                  left={
-                    <Checkbox
-                      type="checkbox"
-                      id="announcements_email_toggle"
-                      checked={user.announcements_email}
-                      onChange={(e) =>
-                        handleAnnouncementsToggle(e.target.checked)
-                      }
-                    />
-                  }
-                />
-              )}
+            <PreferencesContainer $isDisabled={isUpdatingPreferences}>
+              <LabeledRow
+                label={
+                  <label htmlFor="announcements_email_toggle">
+                    {t('users.options.announcements_email')}
+                  </label>
+                }
+                left={
+                  <Checkbox
+                    type="checkbox"
+                    id="announcements_email_toggle"
+                    checked={user.announcements_email}
+                    disabled={isUpdatingPreferences}
+                    onChange={(e) =>
+                      handleAnnouncementsToggle(e.target.checked)
+                    }
+                  />
+                }
+              />
             </PreferencesContainer>
             <Button
               onClick={() => {
