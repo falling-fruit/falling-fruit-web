@@ -62,9 +62,11 @@
     "unknown_error": "Неизвестная ошибка"
   },
   "filter": {
-    "deselect_all": "Снять все",
-    "only_on_map": "На карте",
-    "select_all": "Выбрать все"
+    "all_types": "Все типы",
+    "deselect_shown": "Снять выделение со всех показанных",
+    "include_tree_inventories": "Включить инвентаризацию деревьев",
+    "select_shown": "Выбрать все показанные",
+    "within_this_area": "В этой области"
   },
   "form": {
     "button": {

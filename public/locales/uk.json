@@ -62,9 +62,11 @@
     "unknown_error": "Невідома помилка"
   },
   "filter": {
-    "deselect_all": "Скасувати вибір",
-    "only_on_map": "На карті",
-    "select_all": "Вибрати все"
+    "all_types": "Усі типи",
+    "deselect_shown": "Скасувати вибір усіх показаних",
+    "include_tree_inventories": "Включити інвентаризацію дерев",
+    "select_shown": "Вибрати всі показані",
+    "within_this_area": "В межах цієї області"
   },
   "form": {
     "button": {

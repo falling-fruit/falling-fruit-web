@@ -62,9 +62,14 @@
     "unknown_error": "Error desconocido"
   },
   "filter": {
+    "all_types": "Todos los tipos",
     "deselect_all": "Deseleccionar todo",
+    "deselect_shown": "Deseleccionar todos los mostrados",
+    "include_tree_inventories": "Incluir inventarios de árboles",
     "only_on_map": "En el mapa",
-    "select_all": "Seleccionar todo"
+    "select_all": "Seleccionar todo",
+    "select_shown": "Seleccionar todos los mostrados",
+    "within_this_area": "Dentro de esta área"
   },
   "form": {
     "button": {
