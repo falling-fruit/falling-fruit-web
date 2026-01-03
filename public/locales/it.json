@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "Tutti i tipi",
-    "deselect_shown": "Deseleziona tutti i mostrati",
-    "include_tree_inventories": "Includi inventari degli alberi",
+    "clear": "Cancella",
+    "include_locations_from_tree_inventories": "Con posizioni dell'inventario degli alberi",
     "select_shown": "Seleziona tutti i mostrati",
-    "within_this_area": "In quest'area"
+    "within_map_bounds": "Entro i confini della mappa"
   },
   "form": {
     "button": {

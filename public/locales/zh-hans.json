@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "所有类型",
-    "deselect_shown": "取消选择所有显示的",
-    "include_tree_inventories": "包括树木清单",
+    "clear": "清除",
+    "include_locations_from_tree_inventories": "包含树木清单位置",
     "select_shown": "选择所有显示的",
-    "within_this_area": "在此区域内"
+    "within_map_bounds": "在地图边界内"
   },
   "form": {
     "button": {

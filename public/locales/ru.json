@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "Все типы",
-    "deselect_shown": "Снять выделение со всех показанных",
-    "include_tree_inventories": "Включить инвентаризацию деревьев",
+    "clear": "Очистить",
+    "include_locations_from_tree_inventories": "С местоположениями из древесных инвентаризаций",
     "select_shown": "Выбрать все показанные",
-    "within_this_area": "В этой области"
+    "within_map_bounds": "В пределах границ карты"
   },
   "form": {
     "button": {

@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "Alle types",
-    "deselect_shown": "Deselecteer alle getoonde",
-    "include_tree_inventories": "Inclusief boominventarissen",
+    "clear": "Wissen",
+    "include_locations_from_tree_inventories": "Met bomeninventarislocaties",
     "select_shown": "Selecteer alle getoonde",
-    "within_this_area": "Binnen dit gebied"
+    "within_map_bounds": "Binnen kaartgrenzen"
   },
   "form": {
     "button": {

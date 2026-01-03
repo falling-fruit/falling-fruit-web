@@ -63,13 +63,10 @@
   },
   "filter": {
     "all_types": "Alle Typen",
-    "deselect_all": "Alle abwählen",
-    "deselect_shown": "Alle angezeigten abwählen",
-    "include_tree_inventories": "Bauminventare einbeziehen",
-    "only_on_map": "Auf der Karte",
-    "select_all": "Alle auswählen",
+    "clear": "Löschen",
+    "include_locations_from_tree_inventories": "Mit Baumkataster-Standorten",
     "select_shown": "Alle angezeigten auswählen",
-    "within_this_area": "In diesem Bereich"
+    "within_map_bounds": "Innerhalb der Kartengrenzen"
   },
   "form": {
     "button": {

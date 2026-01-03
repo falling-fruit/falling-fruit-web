@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "All types",
-    "deselect_shown": "Deselect all shown",
-    "include_tree_inventories": "Include tree inventories",
+    "clear": "Clear",
+    "include_locations_from_tree_inventories": "With tree inventory locations",
     "select_shown": "Select all shown",
-    "within_this_area": "Within this area"
+    "within_map_bounds": "Within map bounds"
   },
   "form": {
     "button": {

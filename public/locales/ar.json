@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "جميع الأنواع",
-    "deselect_shown": "إلغاء تحديد الكل المعروض",
-    "include_tree_inventories": "تضمين جرد الأشجار",
+    "clear": "مسح",
+    "include_locations_from_tree_inventories": "مع مواقع جرد الأشجار",
     "select_shown": "تحديد الكل المعروض",
-    "within_this_area": "ضمن هذه المنطقة"
+    "within_map_bounds": "ضمن حدود الخريطة"
   },
   "form": {
     "button": {
