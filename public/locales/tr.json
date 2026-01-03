@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "Tüm türler",
-    "deselect_shown": "Gösterilenlerin seçimini kaldır",
-    "include_tree_inventories": "Ağaç envanterlerini dahil et",
+    "clear": "Temizle",
+    "include_locations_from_tree_inventories": "Ağaç envanteri konumlarıyla birlikte",
     "select_shown": "Gösterilenlerin tümünü seç",
-    "within_this_area": "Bu alan içinde"
+    "within_map_bounds": "Harita sınırları içinde"
   },
   "form": {
     "button": {

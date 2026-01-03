@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "Tất cả các loại",
-    "deselect_shown": "Bỏ chọn tất cả đã hiển thị",
-    "include_tree_inventories": "Bao gồm kiểm kê cây",
+    "clear": "Xóa",
+    "include_locations_from_tree_inventories": "Với vị trí kiểm kê cây",
     "select_shown": "Chọn tất cả đã hiển thị",
-    "within_this_area": "Trong khu vực này"
+    "within_map_bounds": "Trong ranh giới bản đồ"
   },
   "form": {
     "button": {

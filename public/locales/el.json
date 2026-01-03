@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "Όλοι οι τύποι",
-    "deselect_shown": "Αποεπιλογή όλων των εμφανιζόμενων",
-    "include_tree_inventories": "Συμπερίληψη απογραφών δέντρων",
+    "clear": "Εκκαθάριση",
+    "include_locations_from_tree_inventories": "Με τοποθεσίες απογραφής δέντρων",
     "select_shown": "Επιλογή όλων των εμφανιζόμενων",
-    "within_this_area": "Εντός αυτής της περιοχής"
+    "within_map_bounds": "Εντός ορίων χάρτη"
   },
   "form": {
     "button": {
