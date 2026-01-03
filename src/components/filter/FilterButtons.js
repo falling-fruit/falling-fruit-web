@@ -4,12 +4,16 @@ import styled from 'styled-components/macro'
 import Button from '../ui/Button'
 
 const FilterButtonsContainer = styled.div`
+  margin-block: 0.5em;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25em;
 
   button {
-    width: 100%;
-    height: 2.5em;
-    margin-block-end: 0.5em;
+    height: 1.75em;
+    margin-block: 0.5em;
     color: ${({ theme }) => theme.tertiaryText};
     border: 2px solid ${({ theme }) => theme.tertiaryText};
 
@@ -41,7 +45,7 @@ const FilterButtons = ({
         onClick={onDeselectAllClick}
         disabled={isDeselectAllDisabled}
       >
-        {t('filter.deselect_shown')}
+        {t('filter.clear')}
       </Button>
     </FilterButtonsContainer>
   )

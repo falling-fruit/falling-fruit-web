@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "Усі типи",
-    "deselect_shown": "Скасувати вибір усіх показаних",
-    "include_tree_inventories": "Включити інвентаризацію дерев",
+    "clear": "Очистити",
+    "include_locations_from_tree_inventories": "З локаціями з інвентаризації дерев",
     "select_shown": "Вибрати всі показані",
-    "within_this_area": "В межах цієї області"
+    "within_map_bounds": "В межах меж карти"
   },
   "form": {
     "button": {

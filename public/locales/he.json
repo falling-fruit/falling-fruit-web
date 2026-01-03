@@ -63,10 +63,10 @@
   },
   "filter": {
     "all_types": "כל הסוגים",
-    "deselect_shown": "בטל בחירת כל המוצגים",
-    "include_tree_inventories": "כלול מלאי עצים",
+    "clear": "נקה",
+    "include_locations_from_tree_inventories": "עם מיקומי מלאי עצים",
     "select_shown": "בחר את כל המוצגים",
-    "within_this_area": "בתוך אזור זה"
+    "within_map_bounds": "בתוך גבולות המפה"
   },
   "form": {
     "button": {
