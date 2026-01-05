@@ -62,9 +62,11 @@
     "unknown_error": "Onbekende fout"
   },
   "filter": {
-    "deselect_all": "Deselect all",
-    "only_on_map": "On the map",
-    "select_all": "Select all"
+    "all_types": "Alle types",
+    "clear": "Wissen",
+    "include_locations_from_tree_inventories": "Met bomeninventarislocaties",
+    "select_shown": "Selecteer alle getoonde",
+    "within_map_bounds": "Binnen kaartgrenzen"
   },
   "form": {
     "button": {

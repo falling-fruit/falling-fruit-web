@@ -62,9 +62,11 @@
     "unknown_error": "خطأ غير معروف"
   },
   "filter": {
-    "deselect_all": "إلغاء تحديد الكل",
-    "only_on_map": "على الخريطة",
-    "select_all": "تحديد الكل"
+    "all_types": "جميع الأنواع",
+    "clear": "مسح",
+    "include_locations_from_tree_inventories": "مع مواقع جرد الأشجار",
+    "select_shown": "تحديد الكل المعروض",
+    "within_map_bounds": "ضمن حدود الخريطة"
   },
   "form": {
     "button": {

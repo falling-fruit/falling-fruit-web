@@ -62,9 +62,11 @@
     "unknown_error": "Error desconocido"
   },
   "filter": {
-    "deselect_all": "Deseleccionar todo",
-    "only_on_map": "En el mapa",
-    "select_all": "Seleccionar todo"
+    "all_types": "Todos los tipos",
+    "clear": "Limpiar",
+    "include_locations_from_tree_inventories": "Con ubicaciones de inventarios de árboles",
+    "select_shown": "Seleccionar todos los mostrados",
+    "within_map_bounds": "Dentro de los límites del mapa"
   },
   "form": {
     "button": {

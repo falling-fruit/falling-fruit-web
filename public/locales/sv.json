@@ -62,9 +62,11 @@
     "unknown_error": "Okänt fel"
   },
   "filter": {
-    "deselect_all": "Avmarkera alla",
-    "only_on_map": "På kartan",
-    "select_all": "Markera alla"
+    "all_types": "Alla typer",
+    "clear": "Rensa",
+    "include_locations_from_tree_inventories": "Med trädinventeringsplatser",
+    "select_shown": "Markera alla visade",
+    "within_map_bounds": "Inom kartgränser"
   },
   "form": {
     "button": {

@@ -62,9 +62,11 @@
     "unknown_error": "Неизвестная ошибка"
   },
   "filter": {
-    "deselect_all": "Снять все",
-    "only_on_map": "На карте",
-    "select_all": "Выбрать все"
+    "all_types": "Все типы",
+    "clear": "Очистить",
+    "include_locations_from_tree_inventories": "С местоположениями из древесных инвентаризаций",
+    "select_shown": "Выбрать все показанные",
+    "within_map_bounds": "В пределах границ карты"
   },
   "form": {
     "button": {

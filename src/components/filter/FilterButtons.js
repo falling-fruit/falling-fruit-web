@@ -4,15 +4,18 @@ import styled from 'styled-components/macro'
 import Button from '../ui/Button'
 
 const FilterButtonsContainer = styled.div`
-  display: inline-block;
+  margin-block: 0.5em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25em;
+
   button {
-    height: 22px;
-    padding: 2px 4px;
+    height: 1.75em;
+    margin-block: 0.5em;
     color: ${({ theme }) => theme.tertiaryText};
     border: 2px solid ${({ theme }) => theme.tertiaryText};
-    &:not(:last-child) {
-      margin-inline-end: 5px;
-    }
 
     &:not(:disabled):hover {
       background-color: ${({ theme }) => theme.tertiaryText};
@@ -35,14 +38,14 @@ const FilterButtons = ({
         onClick={onSelectAllClick}
         disabled={isSelectAllDisabled}
       >
-        {t('filter.select_all')}
+        {t('filter.select_shown')}
       </Button>
       <Button
         secondary
         onClick={onDeselectAllClick}
         disabled={isDeselectAllDisabled}
       >
-        {t('filter.deselect_all')}
+        {t('filter.clear')}
       </Button>
     </FilterButtonsContainer>
   )

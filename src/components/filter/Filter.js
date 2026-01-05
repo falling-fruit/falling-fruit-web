@@ -9,6 +9,7 @@ import { muniChanged, selectionChanged } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import Input from '../ui/Input'
+import { Select } from '../ui/Select'
 import FilterButtons from './FilterButtons'
 import LabeledCheckbox from './LabeledCheckbox'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
@@ -18,33 +19,31 @@ const EdibleTypeText = styled.p`
   font-size: 0.875rem;
   font-weight: bold;
   color: ${({ theme }) => theme.secondaryText};
-  margin-block-start: 1.25em;
+  margin-block: 0.75em;
   margin-block-end: 0.5em;
-  ${({ isDesktop }) =>
-    !isDesktop &&
-    `
-    margin-block-start: 0em;
-  `}
 `
 
-const TreeFiltersContainer = styled.div`
-  margin-block: 0.5em;
-  /* Provide vertical space when buttons wrap over multiple lines */
-  line-height: 1.5rem;
+const SearchAndSelectContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 `
 
 const SearchInput = styled(Input)`
-  height: 2.5em;
-  padding: 0;
-  flex: 0;
+  flex: 1;
+  min-width: 5em;
+  height: 2.65em;
   input {
-    margin-block: 1em;
-    margin-inline: 0.75em;
-    height: 100%;
+    margin-block: 0.5em;
   }
 `
-const MuniCheckbox = styled.div`
-  margin-block: 1em;
+
+const MapAreaSelectWrapper = styled.div`
+  width: 15em;
+`
+
+const MunicipalTreeInventoriesCheckbox = styled.div`
+  margin-block-start: 1em;
 `
 
 const Filter = () => {
@@ -74,65 +73,70 @@ const Filter = () => {
 
   const isDesktop = useIsDesktop()
   const { t } = useTranslation()
+  const mapAreaOptions = [
+    { value: 'map', label: t('filter.within_map_bounds') },
+    { value: 'all', label: t('filter.all_types') },
+  ]
   return (
-    <>
-      <div>
-        <EdibleTypeText isDesktop={isDesktop}>
-          {t('glossary.type.other')}
-        </EdibleTypeText>
+    <div style={{ marginBlockEnd: '0.5em' }}>
+      <MunicipalTreeInventoriesCheckbox>
+        <LabeledCheckbox
+          field="muni"
+          value={muni}
+          label={t('filter.include_locations_from_tree_inventories')}
+          onChange={(checked) => dispatch(muniChanged(checked))}
+        />
+      </MunicipalTreeInventoriesCheckbox>
+      <EdibleTypeText isDesktop={isDesktop}>
+        {t('glossary.type.other')}
+      </EdibleTypeText>
+      <SearchAndSelectContainer>
+        <MapAreaSelectWrapper>
+          <Select
+            value={mapAreaOptions.find(
+              (option) => option.value === (showOnlyOnMap ? 'map' : 'all'),
+            )}
+            onChange={(selectedOption) =>
+              dispatch(setShowOnlyOnMap(selectedOption.value === 'map'))
+            }
+            options={mapAreaOptions}
+          />
+        </MapAreaSelectWrapper>
         <SearchInput
           onChange={(e) => setSearchValueDebounced(e.target.value)}
           placeholder={t('glossary.type.one')}
         />
-        <TreeFiltersContainer>
-          <LabeledCheckbox
-            field="showOnlyOnMap"
-            value={showOnlyOnMap}
-            label={t('filter.only_on_map')}
-            onChange={(checked) => dispatch(setShowOnlyOnMap(checked))}
-            style={{ display: 'inline-block', marginInlineEnd: '5px' }}
-          />
-          <FilterButtons
-            onSelectAllClick={() => {
-              const newSelection = [...new Set([...types, ...visibleTypeIds])]
-              dispatch(selectionChanged(newSelection))
-            }}
-            onDeselectAllClick={() => {
-              const remainingSelection = types.filter(
-                (typeId) => !visibleTypeIds.some((t) => t === typeId),
-              )
-              dispatch(selectionChanged(remainingSelection))
-            }}
-            isSelectAllDisabled={visibleTypeIds.every((typeId) =>
-              types.includes(typeId),
-            )}
-            isDeselectAllDisabled={visibleTypeIds.every(
-              (typeId) => !types.includes(typeId),
-            )}
-          />
-        </TreeFiltersContainer>
-        {typesAccess.isEmpty ? (
-          <RCTreeSelectSkeleton />
-        ) : (
-          <TreeSelect
-            types={types}
-            onChange={(selectedTypes) =>
-              dispatch(selectionChanged(selectedTypes))
-            }
-            selectTree={selectTree}
-          />
+      </SearchAndSelectContainer>
+      <FilterButtons
+        onSelectAllClick={() => {
+          const newSelection = [...new Set([...types, ...visibleTypeIds])]
+          dispatch(selectionChanged(newSelection))
+        }}
+        onDeselectAllClick={() => {
+          const remainingSelection = types.filter(
+            (typeId) => !visibleTypeIds.some((t) => t === typeId),
+          )
+          dispatch(selectionChanged(remainingSelection))
+        }}
+        isSelectAllDisabled={visibleTypeIds.every((typeId) =>
+          types.includes(typeId),
         )}
-      </div>
-
-      <MuniCheckbox>
-        <LabeledCheckbox
-          field="muni"
-          value={muni}
-          label={t('glossary.tree_inventory.one', { count: 2 })}
-          onChange={(checked) => dispatch(muniChanged(checked))}
+        isDeselectAllDisabled={visibleTypeIds.every(
+          (typeId) => !types.includes(typeId),
+        )}
+      />
+      {typesAccess.isEmpty ? (
+        <RCTreeSelectSkeleton />
+      ) : (
+        <TreeSelect
+          types={types}
+          onChange={(selectedTypes) =>
+            dispatch(selectionChanged(selectedTypes))
+          }
+          selectTree={selectTree}
         />
-      </MuniCheckbox>
-    </>
+      )}
+    </div>
   )
 }
 

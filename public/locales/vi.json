@@ -62,9 +62,11 @@
     "unknown_error": "Lỗi không xác định"
   },
   "filter": {
-    "deselect_all": "Bỏ chọn tất cả",
-    "only_on_map": "Trên bản đồ",
-    "select_all": "Chọn tất cả"
+    "all_types": "Tất cả các loại",
+    "clear": "Xóa",
+    "include_locations_from_tree_inventories": "Với vị trí kiểm kê cây",
+    "select_shown": "Chọn tất cả đã hiển thị",
+    "within_map_bounds": "Trong ranh giới bản đồ"
   },
   "form": {
     "button": {
