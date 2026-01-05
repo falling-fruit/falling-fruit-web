@@ -38,35 +38,121 @@
 
   - `REACT_APP_GOOGLE_MAPS_API_KEY`: Your own API key for [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
-## Web app
+# Web app
 
-The above instructions are enough - you can start the application:
+To run the app in a browser:
 
 ```sh
 yarn start
 ```
 
-## Mobile apps
+Then browse to http://localhost:3000. The app is also available on your local network to test (http-only) on other devices, typically at http://192.168.1.206:3000.
 
-We use Capacitor to package the website into Android and iOS apps. These are commands for building the assets and syncing them into the `android`/`ios` directories:
+To create a production build (in the `build` directory):
 
 ```sh
 yarn build
-npx cap sync
 ```
 
-Afterwards you can launch Android Studio:
+If the build fails due to dependency issues, try starting with a clean install:
+
+```sh
+rm -rf node_modules
+yarn cache clean
+yarn
+```
+
+# Mobile apps
+
+We use [Capacitor](https://capacitorjs.com) to package the web app as Android and iOS apps. Make sure you can build the web app first with `yarn build` before proceeding. Although most of the mobile app can be tested by opening the web app in a narrow browser window, this is inadequate for testing device-specific functionality like permissions, curved layouts, and onboard functions (camera, compass, and GPS).
+
+## Android
+
+_[`android`](../android) directory · [setup](https://capacitorjs.com/docs/v7/getting-started/environment-setup#android-requirements) · [get started](https://capacitorjs.com/docs/v7/android)_
+
+First install the [requirements](https://capacitorjs.com/docs/v7/getting-started/environment-setup#android-requirements).
+
+- [Android Studio](https://developer.android.com/studio) 2024.2.1+
+- SDK Platforms:
+  - Android 15 (API Level 35)
+- SDK Tools:
+  - Android SDK Build-Tools [35.0.0]
+  - Android SDK Command-line Tools [latest]
+  - Android SDK Platform-Tools [latest]
+
+Sync the app with any changes to [`package.json`](../package.json) and `build` output:
+
+```sh
+npx cap sync android
+```
+
+Run the app on an emulator or device:
+
+```bash
+npx cap run android  # prompts to select device
+# npx cap run android --list
+# npx cap run android --device
+# npx cap run android --emulator
+# npx cap run android --target=<device>
+```
+
+and debug with Chrome at [chrome://inspect/#devices](chrome://inspect/#devices).
+
+Alternatively, open as a project in Android Studio:
 
 ```sh
 npx cap open android
 ```
 
-or xCode:
+### Android emulators
+
+Follow [these instructions](https://developer.android.com/studio/run/managing-avds) to create and manage Android Virtual Devices (AVD) in Android Studio, or use `avdmanager` from the command line.
+
+### Android devices
+
+First, enable [USB debugging](https://developer.android.com/studio/debug/dev-options) on your device.
+Then plug the device into your computer, start the `adb` (Android Debug Bridge) server, and check that the device is listed:
 
 ```sh
-cd ios/App
-pod install
-open App.xcworkspace
+sudo adb start-server
+npx cap run android --list
 ```
 
-NB: most development work can be adequately tested on desktop by just opening a narrow window. Some differences involve device permissions and existence of curved areas in the layout.
+## iOS
+
+_[`ios`](../ios) directory · [setup](https://capacitorjs.com/docs/v7/getting-started/environment-setup#ios-requirements) · [get started](https://capacitorjs.com/docs/v7/ios)_
+
+First install the [requirements](https://capacitorjs.com/docs/v7/getting-started/environment-setup#ios-requirements).
+
+- [MacOS](https://www.apple.com/os/macos/) 14.5+ ([download](https://support.apple.com/en-us/102662))
+- [Xcode](https://developer.apple.com/xcode/) 16.0+ ([download](https://xcodereleases.com))
+- [Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
+
+And prepare Xcode for first use:
+
+```sh
+# Install Xcode Command Line Tools
+xcode-select --install
+# Accept Xcode license
+sudo xcodebuild -license
+# Run Xcode first launch tasks
+xcodebuild -runFirstLaunch
+```
+
+Sync the app with any changes to [`package.json`](../package.json) and `build` output:
+
+```sh
+npx cap sync ios
+```
+
+Run the app on an emulator or device:
+
+```sh
+npx cap run ios
+```
+
+Alternatively, open [`ios/App/App.xcworkspace`](../ios/App/App.xcworkspace) in Xcode:
+
+```sh
+npx cap open ios
+```
