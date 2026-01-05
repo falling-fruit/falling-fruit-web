@@ -84,6 +84,7 @@ const TypesAndPlaces = ({
   selectedPlaces,
   onTypeChange,
   onPlaceChange,
+  isDisabled = false,
 }) => {
   const { t } = useTranslation()
 
@@ -106,6 +107,7 @@ const TypesAndPlaces = ({
           placeholder={t('glossary.type.one')}
           isClearable
           isMulti
+          isDisabled={isDisabled}
           formatOptionLabel={(option, { context }) => (
             <div
               style={{
@@ -149,6 +151,7 @@ const TypesAndPlaces = ({
           placeholder={t('pages.changes.place.one')}
           isClearable
           isMulti
+          isDisabled={isDisabled}
           formatOptionLabel={(option, { context }) => (
             <PlaceOption
               place={option}

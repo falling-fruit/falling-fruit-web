@@ -2,6 +2,7 @@ import '@reach/accordion/styles.css'
 
 import {
   Accordion,
+  AccordionButton,
   AccordionItem,
   AccordionPanel,
   useAccordionItemContext,
@@ -9,8 +10,25 @@ import {
 import { DownArrow, UpArrow } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components/macro'
 
-import { theme } from './GlobalStyle'
-import IndicatorAccordionButton from './IndicatorAccordionButton'
+import { theme } from '../../ui/GlobalStyle'
+
+const IndicatorAccordionButton = styled(AccordionButton)`
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  border: none;
+  width: 100%;
+  background: ${({ theme }) => theme.background};
+  text-align: left;
+  font-family: ${({ theme }) => theme.fonts};
+
+  :focus {
+    outline: none;
+  }
+`
 
 const TypesAccordionItem = styled(AccordionItem)`
   margin-block-end: 15px;

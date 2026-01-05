@@ -51,15 +51,9 @@ const TimelineSection = styled.section`
 
 const Embed = styled.div`
   margin-block-start: 1em;
-
-  ${({ isDesktop }) =>
-    !isDesktop &&
-    `
-    iframe {
-      width: 100%;
-      height: auto;
-    }
-  `}
+  iframe {
+    max-width: 100%;
+  }
 `
 
 const Photo = styled.img`
