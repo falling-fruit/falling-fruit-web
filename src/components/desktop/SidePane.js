@@ -109,6 +109,7 @@ const SidePane = () => {
       </Switch>
       <Switch>
         <Route path="/locations/:locationId/edit"></Route>
+        <Route path="/locations/:locationId/review"></Route>
         <Route path="/locations/new"></Route>
         <Route path="/reviews/:reviewId/edit"></Route>
         <Route path="/settings"></Route>

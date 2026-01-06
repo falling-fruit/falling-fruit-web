@@ -7,7 +7,6 @@ import { INITIAL_REVIEW_VALUES } from '../../constants/form'
 import { addNewReview, editExistingReview } from '../../redux/locationSlice'
 import { formToReview, validateReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
@@ -24,7 +23,7 @@ import { ProgressButtons, StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
-export const ReviewStep = ({ standalone, hasHeading = true }) => {
+export const ReviewStep = ({ standalone }) => {
   const { t } = useTranslation()
   const fruitingOptions = [
     { label: t('locations.infowindow.fruiting.0'), value: 0 },
@@ -34,12 +33,12 @@ export const ReviewStep = ({ standalone, hasHeading = true }) => {
 
   return (
     <>
-      {hasHeading && (
+      {!standalone && (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a id="review" style={{ textDecoration: 'none' }}>
           <SectionHeading>
             {t('review.form.leave_a_review')}
-            {!standalone && <Optional />}
+            {<Optional />}
           </SectionHeading>
         </a>
       )}
@@ -120,7 +119,6 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
-  const isDesktop = useIsDesktop()
 
   const handleSubmit = (
     { 'g-recaptcha-response': recaptcha, review },
@@ -146,13 +144,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
         if (action.error) {
           formikProps.setSubmitting(false)
         } else {
-          if (isDesktop) {
-            //form inline under location page
-            formikProps.resetForm()
-          } else {
-            //form on its own page - go back to location page
-            history.push(`/locations/${locationId}`)
-          }
+          history.push(`/locations/${locationId}`)
         }
       })
     }
@@ -182,10 +174,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
 
           return (
             <Form>
-              <ReviewStep
-                standalone
-                hasHeading={isDesktop && editingId == null}
-              />
+              <ReviewStep standalone />
               <ProgressButtons>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
