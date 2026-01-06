@@ -83,21 +83,14 @@
       "too_short": "En az {{min}} karakter"
     },
     "not_signed_in": {
-      "add": {
-        "message": "Oturum açmadınız. Bu konumu hemen ekleyebilir veya adınız altında ekleyebilirsiniz.",
-        "title": "Oturum açmadan eklensin mi?"
-      },
       "continue": "Devam et",
       "do_not_ask_again": "Bir daha sorma",
-      "edit": {
-        "message": "Oturum açmadınız. Bu konumu hemen düzenleyebilir veya adınız altında düzenleyebilirsiniz.",
-        "title": "Oturum açmadan düzenlensin mi?"
-      },
-      "review": {
-        "message": "Oturum açmadınız. Bu konumu hemen inceleyebilir veya adınız altında inceleyebilirsiniz.",
-        "title": "Oturum açmadan incelensin mi?"
-      },
-      "why_account": "Hesap oluşturmak ücretsizdir ve gözlemlerinizi takip edip yönetmenizi sağlar. Ayrıca katkılarınızın adınızla görünmesini sağlayarak başkalarının kimin ne yaptığını görmesine olanak tanır. Anonim katkılar da memnuniyetle karşılanır."
+      "message": "Oturum açmadınız. Hesap olmadan devam edin veya bu gözlemi daha sonra takip etmek ve yönetmek için önce oturum açın veya kaydolun.",
+      "title": {
+        "add_location": "Konum anonim olarak eklensin mi?",
+        "add_review": "Yorum anonim olarak eklensin mi?",
+        "edit_location": "Konum anonim olarak düzenlensin mi?"
+      }
     },
     "optional": "İsteğe bağlı",
     "required": "Gerekli",

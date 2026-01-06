@@ -83,21 +83,14 @@
       "too_short": "Minimum de {{min}} caractères"
     },
     "not_signed_in": {
-      "add": {
-        "message": "Vous n'êtes pas connecté. Vous pouvez ajouter cet emplacement immédiatement, ou l'ajouter sous votre nom.",
-        "title": "Ajouter sans se connecter ?"
-      },
       "continue": "Continuer",
       "do_not_ask_again": "Ne plus demander",
-      "edit": {
-        "message": "Vous n'êtes pas connecté. Vous pouvez modifier cet emplacement immédiatement, ou le modifier sous votre nom.",
-        "title": "Modifier sans se connecter ?"
-      },
-      "review": {
-        "message": "Vous n'êtes pas connecté. Vous pouvez évaluer cet emplacement immédiatement, ou l'évaluer sous votre nom.",
-        "title": "Évaluer sans se connecter ?"
-      },
-      "why_account": "Créer un compte est gratuit et vous permet de suivre et gérer vos observations. Cela permet également qu'elles apparaissent avec votre nom afin que les autres puissent voir qui a fait quoi. Les contributions anonymes sont également les bienvenues."
+      "message": "Vous n'êtes pas connecté. Continuez sans compte, ou connectez-vous d'abord ou inscrivez-vous pour suivre et gérer cette observation ultérieurement.",
+      "title": {
+        "add_location": "Ajouter un emplacement de manière anonyme ?",
+        "add_review": "Ajouter un avis de manière anonyme ?",
+        "edit_location": "Modifier l'emplacement de manière anonyme ?"
+      }
     },
     "optional": "Facultatif",
     "required": "Obligatoire",

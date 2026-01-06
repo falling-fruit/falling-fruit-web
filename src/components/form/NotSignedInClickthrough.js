@@ -76,14 +76,9 @@ const NotSignedInClickthrough = ({ flavour }) => {
   }, [])
 
   const title = {
-    add: t('form.not_signed_in.add.title'),
-    edit: t('form.not_signed_in.edit.title'),
-    review: t('form.not_signed_in.review.title'),
-  }[flavour]
-  const message = {
-    add: t('form.not_signed_in.add.message'),
-    edit: t('form.not_signed_in.edit.message'),
-    review: t('form.not_signed_in.review.message'),
+    add: t('form.not_signed_in.title.add_location'),
+    edit: t('form.not_signed_in.title.edit_location'),
+    review: t('form.not_signed_in.title.add_review'),
   }[flavour]
 
   const handleDismiss = () => {
@@ -104,8 +99,7 @@ const NotSignedInClickthrough = ({ flavour }) => {
   return (
     <StyledDialog aria-label={title} onDismiss={handleDismiss}>
       <h3>{title}</h3>
-      <Content>{message}</Content>
-      <Content>{t('form.not_signed_in.why_account')}</Content>
+      <Content>{t('form.not_signed_in.message')}</Content>
       <LinksWrapper>
         <AuthLinks include={['signIn', 'signUp']} />
       </LinksWrapper>

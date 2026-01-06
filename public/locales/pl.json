@@ -83,21 +83,14 @@
       "too_short": "Minimum {{min}} znaków"
     },
     "not_signed_in": {
-      "add": {
-        "message": "Nie jesteś zalogowany. Możesz dodać tę lokalizację od razu lub dodać ją pod swoim imieniem.",
-        "title": "Dodać bez logowania?"
-      },
       "continue": "Kontynuuj",
       "do_not_ask_again": "Nie pytaj ponownie",
-      "edit": {
-        "message": "Nie jesteś zalogowany. Możesz edytować tę lokalizację od razu lub edytować ją pod swoim imieniem.",
-        "title": "Edytować bez logowania?"
-      },
-      "review": {
-        "message": "Nie jesteś zalogowany. Możesz zrecenzować tę lokalizację od razu lub zrecenzować ją pod swoim imieniem.",
-        "title": "Recenzować bez logowania?"
-      },
-      "why_account": "Utworzenie konta jest bezpłatne i pozwala śledzić oraz zarządzać swoimi obserwacjami. Umożliwia również ich wyświetlanie z Twoim imieniem, dzięki czemu inni mogą zobaczyć, kto co zrobił. Anonimowe wkłady są również mile widziane."
+      "message": "Nie jesteś zalogowany. Kontynuuj bez konta lub najpierw zaloguj się lub zarejestruj, aby później śledzić i zarządzać tą obserwacją.",
+      "title": {
+        "add_location": "Dodać lokalizację anonimowo?",
+        "add_review": "Dodać recenzję anonimowo?",
+        "edit_location": "Edytować lokalizację anonimowo?"
+      }
     },
     "optional": "Opcjonalne",
     "required": "Wymagane",
