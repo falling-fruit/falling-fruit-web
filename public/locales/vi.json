@@ -83,21 +83,14 @@
       "too_short": "Tối thiểu {{min}} ký tự"
     },
     "not_signed_in": {
-      "add": {
-        "message": "Bạn chưa đăng nhập. Bạn có thể thêm địa điểm này ngay bây giờ hoặc thêm nó dưới tên của bạn.",
-        "title": "Thêm mà không cần đăng nhập?"
-      },
       "continue": "Tiếp tục",
       "do_not_ask_again": "Không hỏi lại",
-      "edit": {
-        "message": "Bạn chưa đăng nhập. Bạn có thể chỉnh sửa địa điểm này ngay bây giờ hoặc chỉnh sửa nó dưới tên của bạn.",
-        "title": "Chỉnh sửa mà không cần đăng nhập?"
-      },
-      "review": {
-        "message": "Bạn chưa đăng nhập. Bạn có thể đánh giá địa điểm này ngay bây giờ hoặc đánh giá nó dưới tên của bạn.",
-        "title": "Đánh giá mà không cần đăng nhập?"
-      },
-      "why_account": "Tạo tài khoản miễn phí và cho phép bạn theo dõi và quản lý các quan sát của mình. Nó cũng cho phép chúng xuất hiện với tên của bạn để người khác có thể thấy ai đã làm gì. Đóng góp ẩn danh cũng được hoan nghênh."
+      "message": "Bạn chưa đăng nhập. Tiếp tục mà không cần tài khoản, hoặc đăng nhập hoặc đăng ký trước để theo dõi và quản lý quan sát này sau.",
+      "title": {
+        "add_location": "Thêm địa điểm ẩn danh?",
+        "add_review": "Thêm đánh giá ẩn danh?",
+        "edit_location": "Chỉnh sửa địa điểm ẩn danh?"
+      }
     },
     "optional": "Tùy chọn",
     "required": "Bắt buộc",

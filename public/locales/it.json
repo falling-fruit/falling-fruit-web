@@ -83,21 +83,14 @@
       "too_short": "Minimo {{min}} caratteri"
     },
     "not_signed_in": {
-      "add": {
-        "message": "Non hai effettuato l'accesso. Puoi aggiungere questa posizione subito oppure aggiungerla con il tuo nome.",
-        "title": "Aggiungere senza effettuare l'accesso?"
-      },
       "continue": "Continua",
       "do_not_ask_again": "Non chiedere più",
-      "edit": {
-        "message": "Non hai effettuato l'accesso. Puoi modificare questa posizione subito oppure modificarla con il tuo nome.",
-        "title": "Modificare senza effettuare l'accesso?"
-      },
-      "review": {
-        "message": "Non hai effettuato l'accesso. Puoi recensire questa posizione subito oppure recensirla con il tuo nome.",
-        "title": "Recensire senza effettuare l'accesso?"
-      },
-      "why_account": "Creare un account è gratuito e ti permette di monitorare e gestire le tue osservazioni. Consente inoltre che appaiano con il tuo nome in modo che gli altri possano vedere chi ha fatto cosa. Anche i contributi anonimi sono benvenuti."
+      "message": "Non hai effettuato l'accesso. Continua senza un account, oppure accedi o registrati prima per monitorare e gestire questa osservazione in seguito.",
+      "title": {
+        "add_location": "Aggiungere posizione in modo anonimo?",
+        "add_review": "Aggiungere recensione in modo anonimo?",
+        "edit_location": "Modificare posizione in modo anonimo?"
+      }
     },
     "optional": "Facoltativo",
     "required": "Obbligatorio",

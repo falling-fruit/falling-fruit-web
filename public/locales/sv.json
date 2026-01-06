@@ -83,21 +83,14 @@
       "too_short": "Minimum {{min}} tecken"
     },
     "not_signed_in": {
-      "add": {
-        "message": "Du är inte inloggad. Du kan lägga till denna plats direkt, eller lägga till den under ditt namn.",
-        "title": "Lägg till utan att logga in?"
-      },
       "continue": "Fortsätt",
       "do_not_ask_again": "Fråga inte igen",
-      "edit": {
-        "message": "Du är inte inloggad. Du kan redigera denna plats direkt, eller redigera den under ditt namn.",
-        "title": "Redigera utan att logga in?"
-      },
-      "review": {
-        "message": "Du är inte inloggad. Du kan granska denna plats direkt, eller granska den under ditt namn.",
-        "title": "Granska utan att logga in?"
-      },
-      "why_account": "Att skapa ett konto är gratis och låter dig spåra och hantera dina observationer. Det gör också att de visas med ditt namn så att andra kan se vem som gjorde vad. Anonyma bidrag är också välkomna."
+      "message": "Du är inte inloggad. Fortsätt utan konto, eller logga först in eller registrera dig för att spåra och hantera denna observation senare.",
+      "title": {
+        "add_location": "Lägg till plats anonymt?",
+        "add_review": "Lägg till recension anonymt?",
+        "edit_location": "Redigera plats anonymt?"
+      }
     },
     "optional": "Valfri",
     "required": "Obligatorisk",

@@ -83,21 +83,14 @@
       "too_short": "Minimum of {{min}} characters"
     },
     "not_signed_in": {
-      "add": {
-        "message": "Je bent niet ingelogd. Je kunt deze locatie direct toevoegen, of toevoegen onder je naam.",
-        "title": "Toevoegen zonder in te loggen?"
-      },
       "continue": "Doorgaan",
       "do_not_ask_again": "Niet opnieuw vragen",
-      "edit": {
-        "message": "Je bent niet ingelogd. Je kunt deze locatie direct bewerken, of bewerken onder je naam.",
-        "title": "Bewerken zonder in te loggen?"
-      },
-      "review": {
-        "message": "Je bent niet ingelogd. Je kunt deze locatie direct recenseren, of recenseren onder je naam.",
-        "title": "Recenseren zonder in te loggen?"
-      },
-      "why_account": "Een account aanmaken is gratis en stelt je in staat om je observaties bij te houden en te beheren. Het zorgt er ook voor dat ze onder je naam verschijnen, zodat anderen kunnen zien wie wat heeft gedaan. Anonieme bijdragen zijn ook welkom."
+      "message": "You are not signed in. Continue without an account, or first sign in or sign up to track and manage this observation later.",
+      "title": {
+        "add_location": "Add location anonymously?",
+        "add_review": "Add review anonymously?",
+        "edit_location": "Edit location anonymously?"
+      }
     },
     "optional": "Optional",
     "required": "Required",

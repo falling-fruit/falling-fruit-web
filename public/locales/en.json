@@ -83,21 +83,14 @@
       "too_short": "Minimum of {{min}} characters"
     },
     "not_signed_in": {
-      "add": {
-        "message": "You are not signed in. You can add this location right away, or add it under your name.",
-        "title": "Add without signing in?"
+      "message": "You are not signed in. Continue without an account, or first sign in or sign up to track and manage this observation later.",
+      "title": {
+        "add_location": "Add location anonymously?",
+        "edit_location": "Edit location anonymously?",
+        "add_review": "Add review anonymously?"
       },
-      "continue": "Continue",
-      "do_not_ask_again": "Do not ask again",
-      "edit": {
-        "message": "You are not signed in. You can edit this location right away, or edit it under your name.",
-        "title": "Edit without signing in?"
-      },
-      "review": {
-        "message": "You are not signed in. You can review this location right away, or review it under your name.",
-        "title": "Review without signing in?"
-      },
-      "why_account": "Creating an account is free and lets you track and manage your observations. It also lets them appear with your name so others can see who did what. Anonymous contributions are welcome too."
+      "do_not_ask_again": "Don't ask again",
+      "continue": "Continue"
     },
     "optional": "Optional",
     "required": "Required",
