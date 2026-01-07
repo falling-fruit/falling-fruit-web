@@ -39,7 +39,7 @@ const Header = styled.h3`
 const SidePane = () => {
   const history = useAppHistory()
   const { t } = useTranslation()
-  const { review } = useSelector((state) => state.review)
+  const { review, form: reviewForm } = useSelector((state) => state.review)
   const {
     locationId,
     isBeingEdited: isEditingLocation,
@@ -67,11 +67,13 @@ const SidePane = () => {
                   backPath={
                     review
                       ? `/reviews/${review.id}/edit`
-                      : locationId
-                        ? isEditingLocation
+                      : locationId && reviewForm
+                        ? `/locations/${locationId}/review`
+                        : locationId && isEditingLocation
                           ? `/locations/${locationId}/edit`
-                          : `/locations/${locationId}`
-                        : '/map'
+                          : locationId
+                            ? `/locations/${locationId}`
+                            : '/map'
                   }
                 />
               </StyledNavBack>
