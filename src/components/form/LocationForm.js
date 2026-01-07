@@ -22,7 +22,7 @@ import {
   validateLocation,
 } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsDesktop } from '../../utils/useBreakpoint'
+import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { formatMonth } from '../entry/textFormatters'
 import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
@@ -223,6 +223,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
 export const LocationForm = ({ editingId, innerRef }) => {
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
+  const isEmbed = useIsEmbed()
 
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -294,13 +295,13 @@ export const LocationForm = ({ editingId, innerRef }) => {
   const { Recaptcha, handlePresubmit: onPresubmit } =
     useInvisibleRecaptcha(handleSubmit)
 
-  const clickthroughFlavour = editingId ? 'edit' : 'add'
-
   return isLoading || typesAccess.isEmpty ? (
     <div>{t('layouts.loading')}</div>
   ) : (
     <StyledForm>
-      {!isLoggedIn && <NotSignedInClickthrough flavour={clickthroughFlavour} />}
+      {!isLoggedIn && !isEmbed && (
+        <NotSignedInClickthrough flavour={editingId ? 'edit' : 'add'} />
+      )}
       <Formik
         validate={validateLocation}
         initialValues={mergedInitialValues}

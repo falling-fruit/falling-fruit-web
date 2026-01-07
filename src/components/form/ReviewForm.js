@@ -7,6 +7,7 @@ import { INITIAL_REVIEW_VALUES } from '../../constants/form'
 import { addNewReview, editExistingReview } from '../../redux/locationSlice'
 import { formToReview, validateReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsEmbed } from '../../utils/useBreakpoint'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
@@ -119,6 +120,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
+  const isEmbed = useIsEmbed()
 
   const handleSubmit = (
     { 'g-recaptcha-response': recaptcha, review },
@@ -161,7 +163,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
 
   return (
     <StyledForm>
-      {!isLoggedIn && <NotSignedInClickthrough flavour="review" />}
+      {!isLoggedIn && !isEmbed && <NotSignedInClickthrough flavour="review" />}
       <Formik
         validate={({ review }) => validateReview(review)}
         initialValues={mergedInitialValues}
