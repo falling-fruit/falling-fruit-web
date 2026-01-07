@@ -22,7 +22,7 @@ import {
   validateLocation,
 } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { useIsDesktop } from '../../utils/useBreakpoint'
+import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { formatMonth } from '../entry/textFormatters'
 import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
@@ -30,6 +30,7 @@ import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { Checkbox, Select, Textarea } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
+import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { ReviewStep } from './ReviewForm'
 import TypesSelect from './TypesSelect'
 import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
@@ -222,6 +223,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
 export const LocationForm = ({ editingId, innerRef }) => {
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
+  const isEmbed = useIsEmbed()
 
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -297,6 +299,9 @@ export const LocationForm = ({ editingId, innerRef }) => {
     <div>{t('layouts.loading')}</div>
   ) : (
     <StyledForm>
+      {!isLoggedIn && !isEmbed && (
+        <NotSignedInClickthrough flavour={editingId ? 'edit' : 'add'} />
+      )}
       <Formik
         validate={validateLocation}
         initialValues={mergedInitialValues}

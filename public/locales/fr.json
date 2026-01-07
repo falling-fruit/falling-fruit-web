@@ -82,6 +82,16 @@
       "must_be_different": "Doit être différent de la valeur précédente",
       "too_short": "Minimum de {{min}} caractères"
     },
+    "not_signed_in": {
+      "continue": "Continuer",
+      "do_not_ask_again": "Ne plus demander",
+      "message": "Vous n'êtes pas connecté. Continuez sans compte, ou connectez-vous d'abord ou inscrivez-vous pour suivre et gérer cette observation ultérieurement.",
+      "title": {
+        "add_location": "Ajouter un emplacement de manière anonyme ?",
+        "add_review": "Ajouter un avis de manière anonyme ?",
+        "edit_location": "Modifier l'emplacement de manière anonyme ?"
+      }
+    },
     "optional": "Facultatif",
     "required": "Obligatoire",
     "search": "Rechercher"

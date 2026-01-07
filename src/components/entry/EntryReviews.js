@@ -5,7 +5,6 @@ import { deleteLocationReview, openLightbox } from '../../redux/locationSlice'
 import { setReviewData } from '../../redux/reviewSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { ReviewForm } from '../form/ReviewForm'
 import Review from './Review'
 import { ReviewButton } from './ReviewButton'
 
@@ -58,7 +57,6 @@ const EntryReviews = () => {
           }
         })}
       </div>
-      {isDesktop && <ReviewForm />}
     </>
   )
 }

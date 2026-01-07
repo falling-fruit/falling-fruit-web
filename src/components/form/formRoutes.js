@@ -117,8 +117,9 @@ const AddLocation = ({ NavComponent, backUrl, withSettingsButton }) => {
   )
 }
 
-const AddReview = ({ NavComponent }) => {
+const AddReview = ({ NavComponent, withSettingsButton }) => {
   const history = useAppHistory()
+  const formRef = useRef()
   const { locationId } = useParams()
   const { t } = useTranslation()
 
@@ -131,7 +132,13 @@ const AddReview = ({ NavComponent }) => {
           history.push(`/locations/${locationId}`)
         }}
       />
-      <ReviewForm />
+      <ReviewForm innerRef={formRef} />
+      {withSettingsButton && (
+        <DesktopButtonUnderForm
+          formRef={formRef}
+          saveFormValues={saveReviewFormValues}
+        />
+      )}
     </>
   )
 }
@@ -183,6 +190,9 @@ export const formRoutesDesktop = [
   </Route>,
   <Route key="add-location" path="/locations/new">
     <AddLocation NavComponent={DesktopNav} backUrl="/map" withSettingsButton />
+  </Route>,
+  <Route key="add-review" path="/locations/:locationId/review">
+    <AddReview NavComponent={DesktopNav} withSettingsButton />
   </Route>,
   <Route key="edit-review" path="/reviews/:reviewId/edit">
     <EditReview NavComponent={DesktopNav} withSettingsButton />

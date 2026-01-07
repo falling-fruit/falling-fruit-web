@@ -82,6 +82,16 @@
       "must_be_different": "Deve essere diverso dal valore precedente",
       "too_short": "Minimo {{min}} caratteri"
     },
+    "not_signed_in": {
+      "continue": "Continua",
+      "do_not_ask_again": "Non chiedere più",
+      "message": "Non hai effettuato l'accesso. Continua senza un account, oppure accedi o registrati prima per monitorare e gestire questa osservazione in seguito.",
+      "title": {
+        "add_location": "Aggiungere posizione in modo anonimo?",
+        "add_review": "Aggiungere recensione in modo anonimo?",
+        "edit_location": "Modificare posizione in modo anonimo?"
+      }
+    },
     "optional": "Facoltativo",
     "required": "Obbligatorio",
     "search": "Cerca"

@@ -82,6 +82,16 @@
       "must_be_different": "Phải khác với giá trị trước đó",
       "too_short": "Tối thiểu {{min}} ký tự"
     },
+    "not_signed_in": {
+      "continue": "Tiếp tục",
+      "do_not_ask_again": "Không hỏi lại",
+      "message": "Bạn chưa đăng nhập. Tiếp tục mà không cần tài khoản, hoặc đăng nhập hoặc đăng ký trước để theo dõi và quản lý quan sát này sau.",
+      "title": {
+        "add_location": "Thêm địa điểm ẩn danh?",
+        "add_review": "Thêm đánh giá ẩn danh?",
+        "edit_location": "Chỉnh sửa địa điểm ẩn danh?"
+      }
+    },
     "optional": "Tùy chọn",
     "required": "Bắt buộc",
     "search": "Tìm kiếm"

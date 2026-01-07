@@ -82,6 +82,16 @@
       "must_be_different": "Deve ser diferente do valor anterior",
       "too_short": "Mínimo de {{min}} caracteres"
     },
+    "not_signed_in": {
+      "continue": "Continuar",
+      "do_not_ask_again": "Não perguntar novamente",
+      "message": "No has iniciado sesión. Continúa sin una cuenta, o primero inicia sesión o regístrate para rastrear y gestionar esta observación más tarde.",
+      "title": {
+        "add_location": "¿Agregar ubicación de forma anónima?",
+        "add_review": "¿Agregar reseña de forma anónima?",
+        "edit_location": "¿Editar ubicación de forma anónima?"
+      }
+    },
     "optional": "Opcional",
     "required": "Obrigatório",
     "search": "Buscar"

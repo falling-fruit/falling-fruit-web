@@ -82,6 +82,16 @@
       "must_be_different": "Muss sich vom vorherigen Wert unterscheiden",
       "too_short": "Mindestens {{min}} Zeichen"
     },
+    "not_signed_in": {
+      "continue": "Fortfahren",
+      "do_not_ask_again": "Nicht erneut fragen",
+      "message": "Sie sind nicht angemeldet. Fahren Sie ohne Konto fort oder melden Sie sich zuerst an oder registrieren Sie sich, um diese Beobachtung später zu verfolgen und zu verwalten.",
+      "title": {
+        "add_location": "Standort anonym hinzufügen?",
+        "add_review": "Bewertung anonym hinzufügen?",
+        "edit_location": "Standort anonym bearbeiten?"
+      }
+    },
     "optional": "Optional",
     "required": "Erforderlich",
     "search": "Suchen"

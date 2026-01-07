@@ -14,6 +14,7 @@ import ConnectShare from './ConnectShare'
 import ConnectTopPanel from './ConnectTopPanel'
 import ConnectTypes from './ConnectTypes'
 import DisconnectActivity from './DisconnectActivity'
+import DisconnectAddReview from './DisconnectAddReview'
 import DisconnectInitLocation from './DisconnectInitLocation'
 import DisconnectLastViewedListPosition from './DisconnectLastViewedListPosition'
 import DisconnectLocation from './DisconnectLocation'
@@ -228,6 +229,19 @@ const connectRoutes = [
    */
   <Route key="disconnect-review" path={['/map', '/locations']}>
     {({ match }) => match && <DisconnectReview />}
+  </Route>,
+
+  /*
+   * DisconnectAddReview - from add review form
+   * why: if we start adding a review at /locations/:locationId/review and then navigate away, we need to clear the review form state
+   *
+   * action: clear review in Redux when leaving the context of adding review
+   */
+  <Route
+    key="disconnect-add-review"
+    path={['/settings', '/locations/:locationId/review']}
+  >
+    <DisconnectAddReview />
   </Route>,
 
   /*

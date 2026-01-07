@@ -82,6 +82,16 @@
       "must_be_different": "必须与之前的值不同",
       "too_short": "最少需要{{min}}个字符"
     },
+    "not_signed_in": {
+      "continue": "继续",
+      "do_not_ask_again": "不再询问",
+      "message": "您尚未登录。继续以匿名方式操作，或先登录或注册以便稍后跟踪和管理此观察记录。",
+      "title": {
+        "add_location": "匿名添加位置？",
+        "add_review": "匿名添加评论？",
+        "edit_location": "匿名编辑位置？"
+      }
+    },
     "optional": "选填",
     "required": "必填",
     "search": "搜索"

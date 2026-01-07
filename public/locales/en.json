@@ -82,6 +82,16 @@
       "must_be_different": "Must be different from previous value",
       "too_short": "Minimum of {{min}} characters"
     },
+    "not_signed_in": {
+      "message": "You are not signed in. Continue without an account, or first sign in or sign up to track and manage this observation later.",
+      "title": {
+        "add_location": "Add location anonymously?",
+        "edit_location": "Edit location anonymously?",
+        "add_review": "Add review anonymously?"
+      },
+      "do_not_ask_again": "Don't ask again",
+      "continue": "Continue"
+    },
     "optional": "Optional",
     "required": "Required",
     "search": "Search"

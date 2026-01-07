@@ -82,6 +82,16 @@
       "must_be_different": "Måste skilja sig från föregående värde",
       "too_short": "Minimum {{min}} tecken"
     },
+    "not_signed_in": {
+      "continue": "Fortsätt",
+      "do_not_ask_again": "Fråga inte igen",
+      "message": "Du är inte inloggad. Fortsätt utan konto, eller logga först in eller registrera dig för att spåra och hantera denna observation senare.",
+      "title": {
+        "add_location": "Lägg till plats anonymt?",
+        "add_review": "Lägg till recension anonymt?",
+        "edit_location": "Redigera plats anonymt?"
+      }
+    },
     "optional": "Valfri",
     "required": "Obligatorisk",
     "search": "Sök"

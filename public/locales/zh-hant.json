@@ -82,6 +82,16 @@
       "must_be_different": "必須與先前的值不同",
       "too_short": "最少需要{{min}}個字符"
     },
+    "not_signed_in": {
+      "continue": "繼續",
+      "do_not_ask_again": "不再詢問",
+      "message": "您尚未登入。您可以繼續以訪客身份操作，或先登入或註冊以便日後追蹤和管理此觀察記錄。",
+      "title": {
+        "add_location": "以匿名方式新增地點？",
+        "add_review": "以匿名方式新增評論？",
+        "edit_location": "以匿名方式編輯地點？"
+      }
+    },
     "optional": "選填",
     "required": "必填",
     "search": "搜索"

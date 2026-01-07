@@ -82,6 +82,16 @@
       "must_be_different": "Musi być inne niż poprzednia wartość",
       "too_short": "Minimum {{min}} znaków"
     },
+    "not_signed_in": {
+      "continue": "Kontynuuj",
+      "do_not_ask_again": "Nie pytaj ponownie",
+      "message": "Nie jesteś zalogowany. Kontynuuj bez konta lub najpierw zaloguj się lub zarejestruj, aby później śledzić i zarządzać tą obserwacją.",
+      "title": {
+        "add_location": "Dodać lokalizację anonimowo?",
+        "add_review": "Dodać recenzję anonimowo?",
+        "edit_location": "Edytować lokalizację anonimowo?"
+      }
+    },
     "optional": "Opcjonalne",
     "required": "Wymagane",
     "search": "Szukaj"
