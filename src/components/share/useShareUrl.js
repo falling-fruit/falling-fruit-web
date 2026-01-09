@@ -1,3 +1,4 @@
+import { Capacitor } from '@capacitor/core'
 import { useSelector } from 'react-redux'
 
 const useShareUrl = () => {
@@ -7,7 +8,12 @@ const useShareUrl = () => {
   const { muni, types } = useSelector((state) => state.filter)
   const typeEncoder = useSelector((state) => state.type.typeEncoder)
 
-  const url = new URL(window.location.href)
+  const baseUrl = Capacitor.isNativePlatform()
+    ? 'https://beta.fallingfruit.org'
+    : window.location.origin
+  const url = new URL(
+    baseUrl + window.location.pathname + window.location.search,
+  )
   if (url.pathname.startsWith('/filters')) {
     url.pathname = url.pathname.replace(/^\/filters/, '/map')
   }
