@@ -18,13 +18,7 @@ import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { Page } from '../ui/PageTemplate'
-
-const StyledPage = styled(Page)`
-  section {
-    margin-bottom: 32px;
-  }
-`
+import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
 const EmailLabel = styled.label`
   display: block;
@@ -96,7 +90,7 @@ const AccountPage = () => {
   }
 
   return (
-    <StyledPage>
+    <TopSafeAreaInsetPage>
       <h1>{t('glossary.account')}</h1>
 
       {user ? (
@@ -191,7 +185,7 @@ const AccountPage = () => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </StyledPage>
+    </TopSafeAreaInsetPage>
   )
 }
 

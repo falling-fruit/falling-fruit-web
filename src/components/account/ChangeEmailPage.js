@@ -17,7 +17,7 @@ import { Input } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { Page } from '../ui/PageTemplate'
+import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
 const formToUser = ({ email, password, announcements_email, name }, user) => ({
   email,
@@ -68,7 +68,7 @@ const ChangeEmailPage = () => {
   })
 
   return (
-    <Page>
+    <TopSafeAreaInsetPage>
       <StyledBackButton backPath="/account/edit" />
       <h1>{t('users.change_email')}</h1>
 
@@ -128,7 +128,7 @@ const ChangeEmailPage = () => {
       ) : (
         <LoadingIndicator vertical cover />
       )}
-    </Page>
+    </TopSafeAreaInsetPage>
   )
 }
 

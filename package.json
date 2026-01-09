@@ -10,6 +10,16 @@
   },
   "packageManager": "yarn@1.22.22",
   "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/camera": "^7.0.2",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
+    "@capacitor/device": "^7.0.2",
+    "@capacitor/filesystem": "^7.1.5",
+    "@capacitor/ios": "^7.4.4",
+    "@capacitor/preferences": "^7.0.2",
+    "@capacitor/splash-screen": "^7.0.3",
     "@craco/craco": "^7.1.0",
     "@fontsource/noto-sans": "^5.2.5",
     "@fontsource/noto-sans-arabic": "^5.2.5",
@@ -64,6 +74,7 @@
     "@babel/core": "^7.0.0-0",
     "@babel/plugin-syntax-flow": "^7.14.5",
     "@babel/plugin-transform-react-jsx": "^7.14.9",
+    "@capacitor/assets": "^3.0.5",
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
     "@types/node": "*",
     "@types/react-router-dom": "^5.3.3",
@@ -83,7 +94,7 @@
     "lint:check": "eslint src --ext js,jsx,ts,tsx",
     "format": "yarn format:output --write",
     "format:check": "yarn format:output --check",
-    "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
+    "format:output": "prettier \"./src/**/*.{js,jsx,ts,tsx,css,scss,json,md}\" \"./public/**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
     "build": "craco build",
     "build:reload": "BUILD_PATH=./build_temp craco build && rm -rf build && mv ./build_temp build",
     "test": "craco test",
@@ -114,10 +125,13 @@
     }
   },
   "lint-staged": {
-    "./**/*.{js,jsx,ts,tsx,css,scss,json,md}": [
+    "./src/**/*.{js,jsx,ts,tsx,css,scss,json,md}": [
       "prettier --write"
     ],
-    "./**/*.{js,jsx,ts,tsx}": [
+    "./public/**/*.{js,jsx,ts,tsx,css,scss,json,md}": [
+      "prettier --write"
+    ],
+    "./src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
   }

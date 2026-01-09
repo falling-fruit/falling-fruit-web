@@ -17,23 +17,25 @@ import connectRoutes from '../connect/connectRoutes'
 import EmbedFilterPage from '../embed/EmbedFilterPage'
 import EmbedHeader from '../embed/EmbedHeader'
 import EntryMobile from '../entry/EntryMobile'
+import errorRoutes from '../error/errorRoutes'
 import { formRoutesMobile } from '../form/formRoutes'
 import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
-import { PageTabs, TabList, TabPanels } from '../ui/PageTabs'
 import TopBar from '../ui/TopBar'
 import EditLocationPositionNav from './EditLocationPositionNav'
 import InitLocationNav from './InitLocationNav'
+import { PageTabs, TabList, TabPanels, useTabs } from './MobileTabs'
 import NavigationBar from './NavigationBar'
-import Tabs from './Tabs'
 
 const MapContainer = styled.div`
   display: ${(props) => (props.show ? 'block' : 'none')};
   position: absolute;
   inset-block-start: ${(props) =>
-    props.isEmbed ? 0 : NAVIGATION_BAR_HEIGHT_PX}px;
+    props.isEmbed
+      ? 0
+      : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
   inset-block-end: ${(props) => (props.isEmbed ? 0 : TABS_HEIGHT_PX)}px;
   inset-inline: 0;
 `
@@ -41,7 +43,9 @@ const MapContainer = styled.div`
 const ListPageWrapper = styled.div`
   overflow: scroll;
   margin-block-start: ${(props) =>
-    props.isEmbed ? EMBED_HEADER_HEIGHT_PX : NAVIGATION_BAR_HEIGHT_PX}px;
+    props.isEmbed
+      ? `${EMBED_HEADER_HEIGHT_PX}px`
+      : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
   inset-block-end: ${(props) => (props.isEmbed ? 0 : TABS_HEIGHT_PX)}px;
   padding-top: ${(props) => (props.isEmbed ? 0 : 4)}px;
 `
@@ -91,7 +95,7 @@ const shouldDisplayMapPage = (pathname) => {
 const MobileLayout = () => {
   const streetView = useSelector((state) => state.location.streetViewOpen)
   const { pathname } = useLocation()
-  const { tabIndex, handleTabChange, tabContent } = Tabs()
+  const { tabIndex, handleTabChange, tabContent } = useTabs()
   const isEmbed = useIsEmbed()
 
   return (
@@ -145,6 +149,7 @@ const MobileLayout = () => {
                 {aboutRoutes}
                 {authRoutes}
                 {accountRoutes}
+                {errorRoutes}
                 <Route
                   path={[
                     '/map',
@@ -184,6 +189,7 @@ const MobileLayout = () => {
                   '/about/welcome',
                   ...aboutRoutes.map((route) => route.props.path).flat(),
                   ...activityRoutes.map((route) => route.props.path).flat(),
+                  ...errorRoutes.map((route) => route.props.path).flat(),
                 ]}
               />
               <Route path={['/locations/:locationId/edit/:postfix', '*']}>
@@ -192,7 +198,11 @@ const MobileLayout = () => {
                   (!match.params.postfix ||
                     match.params.postfix === 'position') && (
                     <>
-                      <div style={{ paddingBlockEnd: `${TABS_HEIGHT_PX}px` }} />
+                      <div
+                        style={{
+                          paddingBlockEnd: `calc(${TABS_HEIGHT_PX}px + env(safe-area-inset-bottom, 0))`,
+                        }}
+                      />
                       <TabList
                         style={{
                           zIndex: zIndex.mobileTablist,
