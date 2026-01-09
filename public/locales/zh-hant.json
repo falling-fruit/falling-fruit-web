@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "與原始內容不符",
-      "missing_password": "更改郵箱或密碼時必填",
+      "must_be_different": "必須與先前的值不同",
       "too_short": "最少需要{{min}}個字符"
     },
     "optional": "選填",
@@ -252,6 +252,7 @@
         "one": "地點",
         "other": "地點"
       },
+      "recent_activity": "最近的活動",
       "type": {
         "added": "添加",
         "added_by_you": "由您添加",
@@ -363,6 +364,7 @@
       "community_driven_platform": "掉落果實是一個社區驅動的平台，用於分享可食用植物和其他免費食物的位置。",
       "discover_and_contribute": "您可以發現其他人在您社區收穫的成果，並貢獻您的觀察。",
       "explore_the_map": "探索地圖",
+      "home_page": "首頁",
       "welcome_visitors_to_the_site_short": "歡迎！"
     }
   },
@@ -418,27 +420,30 @@
   },
   "users": {
     "bio": "關於你",
+    "change_email": "更改電子郵件",
+    "change_password": "更改密碼",
     "change_your_password": "更改密碼",
+    "current_email": "目前的電子郵件",
     "current_password": "當前密碼",
-    "edit_account": "編輯賬戶",
-    "email_settings": "電郵設置",
-    "forgot_password": "重置密碼",
+    "header": {
+      "profile": "個人資料"
+    },
     "joined_on": "加入於 {{date}}",
+    "new_email": "新電子郵件",
     "new_password": "新密碼",
     "new_password_confirmation": "確認新密碼",
     "options": {
       "announcements_email": "接收包含重要公告和機會的電子郵件（每年1-2次）"
     },
     "password_confirmation": "確認密碼",
-    "password_settings": "密碼設置",
     "profile": {
       "title": "用戶：{{name}}"
     },
     "remember_me": "記住我",
     "resend_confirmation_instructions": "重新發送確認說明",
+    "reset_password": "重設密碼",
     "save_changes": "保存更改",
     "send": "發送",
-    "send_password_instructions": "發送密碼重置說明",
     "sign_in": "登錄",
     "sign_out": "登出",
     "your_activity": "您的活動"

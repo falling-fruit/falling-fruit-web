@@ -15,13 +15,7 @@ const StyledModal = styled(Dialog)`
   padding: 23px 17px;
   width: 80%;
   max-width: 800px;
-  margin: 15vh auto;
-
-  ${({ isDesktop }) =>
-    !isDesktop &&
-    `
-    margin: 8vh auto;
-  `}
+  margin: 8vh auto;
 
   h3 {
     margin-block-start: 0;
@@ -30,21 +24,10 @@ const StyledModal = styled(Dialog)`
 
 const Buttons = styled.div`
   margin-block-start: 20px;
-
-  ${({ isDesktop }) =>
-    !isDesktop &&
-    `
-    text-align: center;
-  `}
+  text-align: end;
 
   button {
-    width: 130px;
-
-    ${({ isDesktop }) =>
-      !isDesktop &&
-      `
-      width: 110px;
-    `}
+    width: 110px;
 
     &:not(:last-child) {
       margin-inline-end: 12px;

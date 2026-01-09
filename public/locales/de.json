@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Stimmt nicht mit Original überein",
-      "missing_password": "Erforderlich, um E-Mail oder Passwort zu ändern",
+      "must_be_different": "Muss sich vom vorherigen Wert unterscheiden",
       "too_short": "Mindestens {{min}} Zeichen"
     },
     "optional": "Optional",
@@ -252,6 +252,7 @@
         "one": "Ort",
         "other": "Orte"
       },
+      "recent_activity": "Letzte Aktivitäten",
       "type": {
         "added": "hinzugefügt",
         "added_by_you": "von Ihnen hinzugefügt",
@@ -363,6 +364,7 @@
       "community_driven_platform": "Falling Fruit ist eine gemeinschaftlich betriebene Plattform zum Teilen von Standorten essbarer Pflanzen und anderer Quellen kostenloser Nahrung.",
       "discover_and_contribute": "Du kannst entdecken, was andere in deiner Nachbarschaft geerntet haben, und deine eigenen Beobachtungen beitragen.",
       "explore_the_map": "Erkunde die Karte",
+      "home_page": "Startseite",
       "welcome_visitors_to_the_site_short": "Willkommen!"
     }
   },
@@ -418,27 +420,30 @@
   },
   "users": {
     "bio": "Über dich",
+    "change_email": "E-Mail ändern",
+    "change_password": "Passwort ändern",
     "change_your_password": "Passwort ändern",
+    "current_email": "Aktuelle E-Mail",
     "current_password": "Aktuelles Passwort",
-    "edit_account": "Konto bearbeiten",
-    "email_settings": "E-Mail-Einstellungen",
-    "forgot_password": "Passwort zurücksetzen",
+    "header": {
+      "profile": "Profil"
+    },
     "joined_on": "Beigetreten am {{date}}",
+    "new_email": "Neue E-Mail",
     "new_password": "Neues Passwort",
     "new_password_confirmation": "Neues Passwort bestätigen",
     "options": {
       "announcements_email": "Empfange Emails mit wichtigen Bekanntmachungen und Gelegenheiten (1-2 pro Jahr)"
     },
     "password_confirmation": "Passwort bestätigen",
-    "password_settings": "Passwort-Einstellungen",
     "profile": {
       "title": "Benutzer: {{name}}"
     },
     "remember_me": "Speichere mich",
     "resend_confirmation_instructions": "Bestätigungs-Anleitung erneut senden",
+    "reset_password": "Passwort zurücksetzen",
     "save_changes": "Änderungen speichern",
     "send": "Senden",
-    "send_password_instructions": "Anleitung zur Passwort Erneuerung senden",
     "sign_in": "Anmelden",
     "sign_out": "Abmelden",
     "your_activity": "Deine Aktivitäten"

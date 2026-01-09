@@ -2,6 +2,7 @@ import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { editProfile } from '../../redux/authSlice'
@@ -13,6 +14,7 @@ import {
   FormInputWrapper,
 } from '../auth/AuthWrappers'
 import { Input } from '../form/FormikWrappers'
+import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
@@ -26,6 +28,10 @@ const formToUser = ({ password, new_password }, user) => ({
   range: null,
   announcements_email: user.announcements_email,
 })
+
+const StyledBackButton = styled(BackButton)`
+  margin-bottom: 23px;
+`
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch()
@@ -50,7 +56,8 @@ const ChangePasswordPage = () => {
 
   return (
     <TopSafeAreaInsetPage>
-      <h1>{t('users.change_your_password')}</h1>
+      <StyledBackButton backPath="/account/edit" />
+      <h1>{t('users.change_password')}</h1>
 
       {user ? (
         <>
@@ -65,9 +72,7 @@ const ChangePasswordPage = () => {
               new_password_confirm: Yup.string()
                 .oneOf([Yup.ref('new_password')])
                 .required(),
-              password: Yup.string().required({
-                key: 'form.error.missing_password',
-              }),
+              password: Yup.string().required(),
             })}
             onSubmit={handleSubmit}
           >
@@ -79,17 +84,14 @@ const ChangePasswordPage = () => {
                     name="password"
                     type="password"
                     label={t('users.current_password')}
+                    required
                   />
-                  {errors.password && (
-                    <ErrorMessage>
-                      {t(errors.password.key, errors.password.options)}
-                    </ErrorMessage>
-                  )}
                   <Input
                     name="new_password"
                     type="password"
                     label={t('users.new_password')}
                     autoComplete="new-password"
+                    required
                   />
                   {errors.new_password && (
                     <ErrorMessage>
@@ -99,9 +101,6 @@ const ChangePasswordPage = () => {
                         t('form.error.too_short', {
                           min: errors.new_password.options.min,
                         })}
-                      {errors.new_password.key ===
-                        'form.error.missing_password' &&
-                        t('form.error.missing_password')}
                     </ErrorMessage>
                   )}
 
@@ -110,6 +109,7 @@ const ChangePasswordPage = () => {
                     type="password"
                     label={t('users.new_password_confirmation')}
                     autoComplete="new-password"
+                    required
                   />
                   {errors.new_password_confirm && (
                     <ErrorMessage>
@@ -121,13 +121,6 @@ const ChangePasswordPage = () => {
                   )}
                 </FormInputWrapper>
                 <FormButtonWrapper>
-                  <Button
-                    secondary
-                    type="button"
-                    onClick={() => history.push('/account/edit')}
-                  >
-                    {t('form.button.cancel')}
-                  </Button>
                   <Button
                     type="submit"
                     disabled={!dirty || !isValid || isSubmitting}

@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "לא תואם למקור",
-      "missing_password": "נדרש לשינוי דוא\"ל או סיסמה",
+      "must_be_different": "חייב להיות שונה מהערך הקודם",
       "too_short": "מינימום של {{min}} תווים"
     },
     "optional": "אופציונלי",
@@ -252,6 +252,7 @@
         "one": "מקום",
         "other": "מקומות"
       },
+      "recent_activity": "פעילות אחרונה",
       "type": {
         "added": "נוסף",
         "added_by_you": "נוסף על ידך",
@@ -363,6 +364,7 @@
       "community_driven_platform": "פולינג פרוט היא פלטפורמה קהילתית לשיתוף מיקומי צמחים אכילים ומקורות אחרים של מזון חינם.",
       "discover_and_contribute": "אתם יכולים לגלות מה אחרים ליקטו בשכונה שלכם, ולתרום את התצפיות שלכם.",
       "explore_the_map": "גלה את המפה",
+      "home_page": "בית",
       "welcome_visitors_to_the_site_short": "ברוכים הבאים!"
     }
   },
@@ -418,27 +420,30 @@
   },
   "users": {
     "bio": "אודותיך",
+    "change_email": "שינוי אימייל",
+    "change_password": "שינוי סיסמה",
     "change_your_password": "שנה את הסיסמה שלך",
+    "current_email": "אימייל נוכחי",
     "current_password": "סיסמה נוכחית",
-    "edit_account": "עריכת החשבון",
-    "email_settings": "הגדרות אימייל",
-    "forgot_password": "איפוס סיסמה",
+    "header": {
+      "profile": "פרופיל"
+    },
     "joined_on": "הצטרף ב-{{date}}",
+    "new_email": "דוא\"ל חדש",
     "new_password": "סיסמה חדשה",
     "new_password_confirmation": "אימות סיסמה חדשה",
     "options": {
       "announcements_email": "קבל הודעות דוא\"ל עם הודעות והזדמנויות חשובות (1-2 בשנה)"
     },
     "password_confirmation": "אימות סיסמה",
-    "password_settings": "הגדרות סיסמה",
     "profile": {
       "title": "משתמש: {{name}}"
     },
     "remember_me": "זכור אותי",
     "resend_confirmation_instructions": "שלח שוב הוראות לאישור",
+    "reset_password": "איפוס סיסמה",
     "save_changes": "שמור שינויים",
     "send": "שלח",
-    "send_password_instructions": "שלח הנחיות איפוס סיסמה",
     "sign_in": "התחברות לחשבון",
     "sign_out": "התנתק",
     "your_activity": "הפעילות שלך"

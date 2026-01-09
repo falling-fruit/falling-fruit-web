@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Không khớp với bản gốc",
-      "missing_password": "Yêu cầu thay đổi email hoặc mật khẩu",
+      "must_be_different": "Phải khác với giá trị trước đó",
       "too_short": "Tối thiểu {{min}} ký tự"
     },
     "optional": "Tùy chọn",
@@ -252,6 +252,7 @@
         "one": "Địa điểm",
         "other": "Địa điểm"
       },
+      "recent_activity": "Hoạt động gần đây",
       "type": {
         "added": "đã thêm",
         "added_by_you": "đã được thêm bởi bạn",
@@ -363,6 +364,7 @@
       "community_driven_platform": "Falling Fruit là một nền tảng do cộng đồng điều hành để chia sẻ vị trí của các cây ăn được và các nguồn thực phẩm miễn phí khác.",
       "discover_and_contribute": "Bạn có thể khám phá những gì người khác đã hái lượm trong khu vực của bạn, và đóng góp quan sát của bạn.",
       "explore_the_map": "Khám phá bản đồ",
+      "home_page": "Trang chủ",
       "welcome_visitors_to_the_site_short": "Chào mừng!"
     }
   },
@@ -418,27 +420,30 @@
   },
   "users": {
     "bio": "Thông tin về bạn",
+    "change_email": "Đổi email",
+    "change_password": "Đổi mật khẩu",
     "change_your_password": "Thay đổi mật khẩu của bạn",
+    "current_email": "Email hiện tại",
     "current_password": "Mật khẩu hiện tại",
-    "edit_account": "Chỉnh sửa tài khoản",
-    "email_settings": "Cài đặt email",
-    "forgot_password": "Đặt lại mật khẩu của bạn",
+    "header": {
+      "profile": "Hồ sơ"
+    },
     "joined_on": "Tham gia vào {{date}}",
+    "new_email": "Email mới",
     "new_password": "Mật khẩu mới",
     "new_password_confirmation": "Xác nhận mật khẩu mới",
     "options": {
       "announcements_email": "Nhận email với các thông báo và cơ hội quan trọng (1-2 mỗi năm)"
     },
     "password_confirmation": "Xác nhận mật khẩu",
-    "password_settings": "Cài đặt mật khẩu",
     "profile": {
       "title": "Người dùng: {{name}}"
     },
     "remember_me": "Nhớ tôi",
     "resend_confirmation_instructions": "Gửi lại hướng dẫn xác nhận",
+    "reset_password": "Đặt lại mật khẩu",
     "save_changes": "Lưu thay đổi",
     "send": "Gửi",
-    "send_password_instructions": "Gửi hướng dẫn đặt lại mật khẩu",
     "sign_in": "Đăng nhập",
     "sign_out": "Đăng xuất",
     "your_activity": "Hoạt động của bạn"

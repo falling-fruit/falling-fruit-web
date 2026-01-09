@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "Does not match original",
-      "missing_password": "Required to change email or password",
+      "must_be_different": "Must be different from previous value",
       "too_short": "Minimum of {{min}} characters"
     },
     "optional": "Optional",
@@ -252,6 +252,7 @@
         "one": "Place",
         "other": "Places"
       },
+      "recent_activity": "Recent activity",
       "type": {
         "added": "added",
         "added_by_you": "added by you",
@@ -363,6 +364,7 @@
       "community_driven_platform": "Falling Fruit is a community-driven platform for sharing locations of edible plants and other sources of free food.",
       "discover_and_contribute": "You can discover what others have been harvesting in your area, and contribute your own observations.",
       "explore_the_map": "Explore the map",
+      "home_page": "Home",
       "welcome_visitors_to_the_site_short": "Welcome!"
     }
   },
@@ -418,27 +420,29 @@
   },
   "users": {
     "bio": "About you",
-    "change_your_password": "Change your password",
+    "change_email": "Change email",
+    "change_password": "Change password",
+    "current_email": "Current email",
     "current_password": "Current password",
-    "edit_account": "Edit account",
-    "email_settings": "Email settings",
-    "forgot_password": "Reset your password",
+    "header": {
+      "profile": "Profile"
+    },
     "joined_on": "Joined on {{date}}",
+    "new_email": "New email",
     "new_password": "New password",
     "new_password_confirmation": "New password confirmation",
     "options": {
       "announcements_email": "Receive emails with important announcements and opportunities (1-2 per year)"
     },
     "password_confirmation": "Password confirmation",
-    "password_settings": "Password settings",
     "profile": {
       "title": "User: {{name}}"
     },
     "remember_me": "Remember me",
     "resend_confirmation_instructions": "Resend confirmation instructions",
+    "reset_password": "Reset password",
     "save_changes": "Save changes",
     "send": "Send",
-    "send_password_instructions": "Send password reset instructions",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
     "your_activity": "Your activity"

@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "与原始内容不符",
-      "missing_password": "更改邮箱或密码时必填",
+      "must_be_different": "必须与之前的值不同",
       "too_short": "最少需要{{min}}个字符"
     },
     "optional": "选填",
@@ -252,6 +252,7 @@
         "one": "地点",
         "other": "地点"
       },
+      "recent_activity": "最近活动",
       "type": {
         "added": "添加",
         "added_by_you": "由您添加",
@@ -363,6 +364,7 @@
       "community_driven_platform": "Falling Fruit是一个社区驱动的平台，用于分享可食用植物和其他免费食物的位置。",
       "discover_and_contribute": "您可以发现其他人在您的社区里采摘的东西，并贡献您的观察。",
       "explore_the_map": "探索地图",
+      "home_page": "主页",
       "welcome_visitors_to_the_site_short": "欢迎！"
     }
   },
@@ -418,27 +420,30 @@
   },
   "users": {
     "bio": "关于你",
+    "change_email": "更改电子邮件",
+    "change_password": "更改密码",
     "change_your_password": "更改密码",
+    "current_email": "当前邮箱",
     "current_password": "当前密码",
-    "edit_account": "编辑账户",
-    "email_settings": "邮箱设置",
-    "forgot_password": "重置密码",
+    "header": {
+      "profile": "个人资料"
+    },
     "joined_on": "加入于 {{date}}",
+    "new_email": "新电子邮件",
     "new_password": "新密码",
     "new_password_confirmation": "确认新密码",
     "options": {
       "announcements_email": "接收包含重要公告和机会的电子邮件（每年1-2次）"
     },
     "password_confirmation": "确认密码",
-    "password_settings": "密码设置",
     "profile": {
       "title": "用户：{{name}}"
     },
     "remember_me": "记住我",
     "resend_confirmation_instructions": "重新发送确认说明",
+    "reset_password": "重置密码",
     "save_changes": "保存更改",
     "send": "发送",
-    "send_password_instructions": "发送密码重置说明",
     "sign_in": "登录",
     "sign_out": "退出",
     "your_activity": "您的活动"

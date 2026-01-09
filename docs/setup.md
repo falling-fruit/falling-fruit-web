@@ -38,7 +38,11 @@
 
   - `REACT_APP_GOOGLE_MAPS_API_KEY`: Your own API key for [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
+  - `REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID`: Tracking ID for Google Analytics. Optional.
+
 # Web app
+
+- Start the application.
 
 To run the app in a browser:
 

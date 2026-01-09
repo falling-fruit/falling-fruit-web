@@ -2,6 +2,7 @@ import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { editProfile } from '../../redux/authSlice'
@@ -12,9 +13,9 @@ import {
   FormButtonWrapper,
   FormInputWrapper,
 } from '../auth/AuthWrappers'
-import { Checkbox, Input } from '../form/FormikWrappers'
+import { Input } from '../form/FormikWrappers'
+import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
-import LabeledRow from '../ui/LabeledRow'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
@@ -27,6 +28,10 @@ const formToUser = ({ email, password, announcements_email, name }, user) => ({
   range: null,
 })
 
+const StyledBackButton = styled(BackButton)`
+  margin-bottom: 23px;
+`
+
 const ChangeEmailPage = () => {
   const dispatch = useDispatch()
   const { user, isLoading } = useSelector((state) => state.auth)
@@ -38,7 +43,7 @@ const ChangeEmailPage = () => {
     return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
   }
 
-  const handleSubmit = (values, formikProps) => {
+  const handleEmailSubmit = (values, formikProps) => {
     dispatch(editProfile(formToUser(values, user))).then((action) => {
       if (action.error) {
         formikProps.setSubmitting(false)
@@ -48,92 +53,76 @@ const ChangeEmailPage = () => {
     })
   }
 
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email()
+      .required()
+      .test(
+        'is-different',
+        t('form.error.must_be_different'),
+        function (value) {
+          return value !== user?.email
+        },
+      ),
+    password: Yup.string().required(),
+  })
+
   return (
     <TopSafeAreaInsetPage>
-      <h1>{t('users.email_settings')}</h1>
+      <StyledBackButton backPath="/account/edit" />
+      <h1>{t('users.change_email')}</h1>
 
       {user ? (
         <>
+          <div style={{ marginBottom: '24px' }}>
+            <label
+              style={{
+                display: 'block',
+                marginBottom: '8px',
+                fontWeight: 'bold',
+              }}
+            >
+              {t('users.current_email')}
+            </label>
+            <div style={{ padding: '8px 0' }}>{user.email}</div>
+          </div>
+
           <Formik
             initialValues={{
-              email: user.email,
+              email: '',
               password: '',
               announcements_email: user.announcements_email,
               name: user.name || '',
             }}
-            validationSchema={Yup.object({
-              email: Yup.string().email().required(),
-              password: Yup.string().when('email', {
-                is: (email) => email !== user.email,
-                then: (schema) =>
-                  schema.required({
-                    key: 'form.error.missing_password',
-                  }),
-                otherwise: (schema) => schema,
-              }),
-            })}
-            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+            onSubmit={handleEmailSubmit}
           >
-            {({ errors, values, initialValues, isValid, isSubmitting }) => {
-              // Only consider the form dirty if email or announcements_email have changed
-              const isDirty =
-                values.email !== initialValues.email ||
-                values.announcements_email !== initialValues.announcements_email
-
-              return (
-                <Form>
-                  <FormInputWrapper>
-                    <Input
-                      name="email"
-                      type="email"
-                      label={t('glossary.email')}
-                      autoComplete="email"
-                    />
-                    {errors.email && (
-                      <ErrorMessage>
-                        {t(errors.email.key, errors.email.options)}
-                      </ErrorMessage>
-                    )}
-
-                    <Input
-                      name="password"
-                      type="password"
-                      label={t('glossary.password')}
-                      autoComplete="current-password"
-                    />
-                    {errors.password && (
-                      <ErrorMessage>
-                        {t(errors.password.key, errors.password.options)}
-                      </ErrorMessage>
-                    )}
-                  </FormInputWrapper>
-                  <LabeledRow
-                    label={
-                      <label htmlFor="announcements_email">
-                        {t('users.options.announcements_email')}
-                      </label>
-                    }
-                    left={<Checkbox id="announcements_email" />}
-                    style={{ margin: '16px 0 8px 0' }}
+            {({ errors, isValid, isSubmitting }) => (
+              <Form>
+                <FormInputWrapper>
+                  <Input
+                    name="email"
+                    type="email"
+                    label={t('users.new_email')}
+                    autoComplete="email"
+                    required
                   />
-                  <FormButtonWrapper>
-                    <Button
-                      secondary
-                      type="button"
-                      onClick={() => history.push('/account/edit')}
-                    >
-                      {t('form.button.cancel')}
-                    </Button>
-                    <Button
-                      type="submit"
-                      disabled={!isDirty || !isValid || isSubmitting}
-                    >
-                      {t('form.button.submit')}
-                    </Button>
-                  </FormButtonWrapper>
-                </Form>
-              )
-            }}
+                  {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+                  <Input
+                    name="password"
+                    type="password"
+                    label={t('glossary.password')}
+                    autoComplete="current-password"
+                    required
+                  />
+                </FormInputWrapper>
+                <FormButtonWrapper>
+                  <Button type="submit" disabled={!isValid || isSubmitting}>
+                    {t('form.button.submit')}
+                  </Button>
+                </FormButtonWrapper>
+              </Form>
+            )}
           </Formik>
         </>
       ) : (

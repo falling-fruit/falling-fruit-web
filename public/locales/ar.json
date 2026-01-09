@@ -79,7 +79,7 @@
     },
     "error": {
       "confirmation": "لا يتطابق مع الأصل",
-      "missing_password": "مطلوب لتغيير البريد الإلكتروني أو كلمة المرور",
+      "must_be_different": "يجب أن يكون مختلفاً عن القيمة السابقة",
       "too_short": "الحد الأدنى {{min}} حروف"
     },
     "optional": "اختياري",
@@ -252,6 +252,7 @@
         "one": "مكان",
         "other": "الأماكن"
       },
+      "recent_activity": "النشاط الأخير",
       "type": {
         "added": "مضاف",
         "added_by_you": "مضاف بواسطتك",
@@ -363,6 +364,7 @@
       "community_driven_platform": "فولينغ فروت هي منصة يديرها المجتمع لمشاركة مواقع النباتات الصالحة للأكل وغيرها من مصادر الطعام المجاني.",
       "discover_and_contribute": "يمكنك اكتشاف ما يحصده الآخرون في حيك، والمساهمة بملاحظاتك.",
       "explore_the_map": "استكشف الخريطة",
+      "home_page": "الصفحة الرئيسية",
       "welcome_visitors_to_the_site_short": "أهلاً وسهلاً!"
     }
   },
@@ -418,27 +420,30 @@
   },
   "users": {
     "bio": "حولك",
+    "change_email": "تغيير البريد الإلكتروني",
+    "change_password": "تغيير كلمة المرور",
     "change_your_password": "تغيير كلمة المرور",
+    "current_email": "البريد الإلكتروني الحالي",
     "current_password": "كلمة المرور الحالي",
-    "edit_account": "تحرير الحساب",
-    "email_settings": "إعدادات البريد الإلكتروني",
-    "forgot_password": "اعد ضبط كلمه السر",
+    "header": {
+      "profile": "الملف الشخصي"
+    },
     "joined_on": "انضم في {{date}}",
+    "new_email": "بريد إلكتروني جديد",
     "new_password": "كلمة مرور جديدة",
     "new_password_confirmation": "تأكيد كلمة المرور الجديدة",
     "options": {
       "announcements_email": "تلقي رسائل البريد الإلكتروني مع الإعلانات والفرص الهامة (1-2 في السنة)"
     },
     "password_confirmation": "تأكيد كلمة المرور",
-    "password_settings": "إعدادات كلمة المرور",
     "profile": {
       "title": "المستخدم: {{name}}"
     },
     "remember_me": "تذكرنى",
     "resend_confirmation_instructions": "إعادة إرسال تعليمات التأكيد",
+    "reset_password": "إعادة تعيين كلمة المرور",
     "save_changes": "حفظ التغييرات",
     "send": "إرسال",
-    "send_password_instructions": "إرسال تعليمات إعادة تعيين كلمة المرور",
     "sign_in": "تسجيل الدخول",
     "sign_out": "تسجيل الخروج",
     "your_activity": "نشاطك"
