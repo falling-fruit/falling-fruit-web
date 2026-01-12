@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 
-import Button from '../ui/Button'
 import { ErrorPage } from '../ui/PageTemplate'
+import ReloadButton from './ReloadButton'
 
 const SomethingWentWrongPage = () => {
   const { t } = useTranslation()
@@ -13,6 +13,7 @@ const SomethingWentWrongPage = () => {
   )
 
   const errorMessage = location.state?.errorMessage
+  const fromPage = location.state?.fromPage || '/'
 
   return (
     <ErrorPage>
@@ -30,11 +31,7 @@ const SomethingWentWrongPage = () => {
             t('pages.something_went_wrong.please_try_again_or_email_html'),
           )}
         </p>
-        <div style={{ marginTop: '2rem' }}>
-          <Button onClick={() => (window.location.href = '/')}>
-            {t('form.button.reload')}
-          </Button>
-        </div>
+        <ReloadButton fromPage={fromPage} />
       </div>
     </ErrorPage>
   )

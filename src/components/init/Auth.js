@@ -6,10 +6,12 @@ import { toast } from 'react-toastify'
 import { checkAuth } from '../../redux/authSlice'
 import { pathToSignInPage } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
+import useShareUrl from '../share/useShareUrl'
 
 const AuthInitializer = () => {
   const dispatch = useDispatch()
   const history = useAppHistory()
+  const shareUrl = useShareUrl()
 
   useEffect(() => {
     dispatch(checkAuth())
@@ -27,11 +29,14 @@ const AuthInitializer = () => {
             error.message === 'Failed to fetch'
           ) {
             console.error(error)
-            history.push('/error/offline')
+            history.push('/error/offline', {
+              fromPage: shareUrl,
+            })
           } else {
             history.push('/error/fatal', {
               errorMessage:
                 error.message || i18next.t('error_message.unknown_error'),
+              fromPage: shareUrl,
             })
           }
         }
