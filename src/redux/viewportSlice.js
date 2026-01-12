@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import authStore from '../utils/authStore'
+import persistentStore from '../utils/persistentStore'
 import { selectPlace } from './placeSlice'
 
 export const viewportSlice = createSlice({
   name: 'viewport',
   initialState: {
-    lastMapView: authStore.getLastMapView(),
+    lastMapView: persistentStore.getLastMapView(),
   },
   reducers: {
     updateLastMapView: (state, action) => {
@@ -20,7 +20,7 @@ export const viewportSlice = createSlice({
         height: action.payload.height || state.lastMapView?.height,
         width: action.payload.width || state.lastMapView?.width,
       }
-      authStore.setLastMapView(state.lastMapView)
+      persistentStore.setLastMapViewThrottledSync(state.lastMapView)
     },
   },
   extraReducers: {
@@ -30,7 +30,7 @@ export const viewportSlice = createSlice({
         width: state.lastMapView.width,
         ...action.payload.place.view,
       }
-      authStore.setLastMapView(state.lastMapView)
+      persistentStore.setLastMapViewImmediateSync(state.lastMapView)
     },
   },
 })

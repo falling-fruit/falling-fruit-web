@@ -1,9 +1,12 @@
 import 'react-toastify/dist/ReactToastify.css'
 
+import { App as CapacitorApp } from '@capacitor/app'
+import { SplashScreen } from '@capacitor/splash-screen'
 import { WindowSize } from '@reach/window-size'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Provider } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import { store } from '../../redux/store'
@@ -55,12 +58,36 @@ const AppContent = () => {
   )
 }
 
+const AppWithRouter = () => {
+  const history = useHistory()
+
+  useEffect(() => {
+    SplashScreen.hide()
+
+    const handleAppUrlOpen = CapacitorApp.addListener('appUrlOpen', (data) => {
+      try {
+        const url = new URL(data.url)
+        const path = url.pathname + url.search + url.hash
+        history.push(path)
+      } catch (error) {
+        console.error('Error parsing app URL:', error)
+      }
+    })
+
+    return () => {
+      handleAppUrlOpen.remove()
+    }
+  }, []) //eslint-disable-line
+
+  return <AppContent />
+}
+
 const App = () => {
   useGoogleAnalytics()
 
   return (
     <Provider store={store}>
-      <AppContent />
+      <AppWithRouter />
     </Provider>
   )
 }
