@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import {
-  clearLastViewedListPositionId,
+  clearLastViewedListPositionState,
   fetchListLocationsExtend,
   fetchListLocationsStart,
-  setLastViewedListPositionId,
+  setLastViewedListPositionState,
 } from '../../redux/listSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Spinner from '../ui/Spinner'
@@ -21,6 +21,8 @@ const ListPage = () => {
     isLoading: isNextPageLoading,
     shouldFetchNewLocations: locationsInvalid,
     lastViewedListPositionId,
+    lastViewedOffsetTop,
+    lastViewedScrollTop,
   } = useSelector((state) => state.list)
   const history = useAppHistory()
   const { typesAccess } = useSelector((state) => state.type)
@@ -59,12 +61,14 @@ const ListPage = () => {
       }}
       isNextPageLoading={isNextPageLoading}
       lastViewedListPositionId={lastViewedListPositionId}
+      lastViewedOffsetTop={lastViewedOffsetTop}
+      lastViewedScrollTop={lastViewedScrollTop}
       onClearLastViewedPosition={() =>
-        dispatch(clearLastViewedListPositionId())
+        dispatch(clearLastViewedListPositionState())
       }
-      onLocationClick={(locationId) => {
-        dispatch(setLastViewedListPositionId(locationId))
-        history.push(`/list-locations/${locationId}`)
+      onLocationClick={(scrollState) => {
+        dispatch(setLastViewedListPositionState(scrollState))
+        history.push(`/list-locations/${scrollState.id}`)
       }}
     />
   )
