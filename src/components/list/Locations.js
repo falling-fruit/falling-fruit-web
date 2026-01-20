@@ -106,6 +106,8 @@ const Locations = ({
   loadNextPage,
   onLocationClick,
   lastViewedListPositionId,
+  lastViewedOffsetTop,
+  lastViewedScrollTop,
   onClearLastViewedPosition,
 }) => {
   const { typesAccess } = useSelector((state) => state.type)
@@ -117,11 +119,26 @@ const Locations = ({
     if (lastViewedListPositionId) {
       const locationElement = document.getElementById(lastViewedListPositionId)
       if (locationElement) {
-        locationElement.scrollIntoView()
+        if (
+          lastViewedOffsetTop !== null &&
+          locationElement.offsetTop === lastViewedOffsetTop
+        ) {
+          const parent = locationElement.parentElement
+          if (parent) {
+            parent.scrollTop = lastViewedScrollTop
+          }
+        } else {
+          locationElement.scrollIntoView()
+        }
       }
       onClearLastViewedPosition()
     }
-  }, [lastViewedListPositionId, onClearLastViewedPosition])
+  }, [
+    lastViewedListPositionId,
+    onClearLastViewedPosition,
+    lastViewedOffsetTop,
+    lastViewedScrollTop,
+  ])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -146,7 +163,17 @@ const Locations = ({
         <LocationItem
           key={index}
           id={location.id}
-          onClick={(e) => onLocationClick?.(location.id, e)}
+          onClick={(e) => {
+            if (e) {
+              return
+            }
+            const element = e.currentTarget
+            onLocationClick?.({
+              id: location.id,
+              offsetTop: element.offsetTop ?? 0,
+              scrollTop: element.parentElement?.scrollTop ?? 0,
+            })
+          }}
         >
           <LeftIcon>
             <ImageIcon imageSrc={location.photo} />

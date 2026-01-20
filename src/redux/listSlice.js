@@ -38,13 +38,21 @@ export const listSlice = createSlice({
     locations: [],
     lastMapView: null,
     lastViewedListPositionId: null,
+    lastViewedOffsetTop: null,
+    lastViewedScrollTop: null,
   },
   reducers: {
-    setLastViewedListPositionId: (state, action) => {
-      state.lastViewedListPositionId = action.payload
+    setLastViewedListPositionState: (state, action) => {
+      const { id, offsetTop, scrollTop } = action.payload
+
+      state.lastViewedListPositionId = id
+      state.lastViewedOffsetTop = offsetTop
+      state.lastViewedScrollTop = scrollTop
     },
-    clearLastViewedListPositionId: (state) => {
+    clearLastViewedListPositionState: (state) => {
       state.lastViewedListPositionId = null
+      state.lastViewedOffsetTop = null
+      state.lastViewedScrollTop = null
     },
   },
   extraReducers: {
@@ -77,7 +85,9 @@ export const listSlice = createSlice({
   },
 })
 
-export const { setLastViewedListPositionId, clearLastViewedListPositionId } =
-  listSlice.actions
+export const {
+  setLastViewedListPositionState,
+  clearLastViewedListPositionState,
+} = listSlice.actions
 
 export default listSlice.reducer
