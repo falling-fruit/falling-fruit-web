@@ -242,7 +242,10 @@ const EntryMobile = () => {
         <CardTabs
           style={{
             transition: 'none',
-            paddingTop: hasImages ? '0' : 'env(safe-area-inset-top, 0)',
+            paddingTop:
+              hasImages || !drawerFullyOpen
+                ? '0'
+                : 'env(safe-area-inset-top, 0)',
           }}
           onChange={(index) => dispatch(setTabIndex(index))}
           index={tabIndex}
