@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
@@ -9,9 +9,32 @@ const ConnectPath = () => {
   const { pathname } = useLocation()
   const hasInitialView = !!initialView
   const view = viewFromCurrentUrl()
+  const [isMapIdle, setIsMapIdle] = useState(true)
 
   useEffect(() => {
-    if (hasInitialView && googleMap && view) {
+    if (!googleMap) {return}
+
+    const idleListener = googleMap.addListener('idle', () => {
+      setIsMapIdle(true)
+    })
+
+    const dragStartListener = googleMap.addListener('dragstart', () => {
+      setIsMapIdle(false)
+    })
+
+    const zoomChangedListener = googleMap.addListener('zoom_changed', () => {
+      setIsMapIdle(false)
+    })
+
+    return () => {
+      idleListener.remove()
+      dragStartListener.remove()
+      zoomChangedListener.remove()
+    }
+  }, [googleMap])
+
+  useEffect(() => {
+    if (hasInitialView && googleMap && view && isMapIdle) {
       const currentCenter = googleMap.getCenter()
       const currentZoom = googleMap.getZoom()
 
@@ -26,7 +49,7 @@ const ConnectPath = () => {
         googleMap.setZoom(view.zoom)
       }
     }
-  }, [pathname, hasInitialView, googleMap]) //eslint-disable-line
+  }, [pathname, hasInitialView, googleMap, isMapIdle]) //eslint-disable-line
 
   return null
 }
