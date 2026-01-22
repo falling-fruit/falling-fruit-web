@@ -300,6 +300,7 @@
       "please_try_again": "Controlla la tua connessione o riprova più tardi."
     },
     "settings": {
+      "always_show_labels": "Mostra sempre le etichette",
       "bicycle": "Bicicletta",
       "data": "Dati",
       "labels": "Etichette",

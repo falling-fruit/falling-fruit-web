@@ -300,6 +300,7 @@
       "please_try_again": "Veuillez vérifier votre connexion ou réessayer plus tard."
     },
     "settings": {
+      "always_show_labels": "Toujours afficher les étiquettes",
       "bicycle": "Vélo",
       "data": "Données",
       "labels": "Étiquettes",

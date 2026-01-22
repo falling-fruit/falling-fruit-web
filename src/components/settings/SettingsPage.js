@@ -142,7 +142,11 @@ const ShowLabelsCheckbox = () => {
           checked={settings.showLabels}
         />
       }
-      label={<label htmlFor="showLabels">{t('pages.settings.labels')}</label>}
+      label={
+        <label htmlFor="showLabels">
+          {t('pages.settings.always_show_labels')}
+        </label>
+      }
     />
   )
 }

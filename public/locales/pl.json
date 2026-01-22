@@ -300,6 +300,7 @@
       "please_try_again": "Sprawdź swoje połączenie lub spróbuj ponownie później."
     },
     "settings": {
+      "always_show_labels": "Zawsze pokazuj etykiety",
       "bicycle": "Rowerowa",
       "data": "Dane",
       "labels": "Etykiety",

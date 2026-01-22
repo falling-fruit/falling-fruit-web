@@ -300,6 +300,7 @@
       "please_try_again": "Vänligen kontrollera din anslutning eller försök igen senare."
     },
     "settings": {
+      "always_show_labels": "Visa alltid etiketter",
       "bicycle": "Cykel",
       "data": "Data",
       "labels": "Etiketter",

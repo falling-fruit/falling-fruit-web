@@ -300,6 +300,7 @@
       "please_try_again": "Bitte überprüfen Sie Ihre Verbindung oder versuchen Sie es später erneut."
     },
     "settings": {
+      "always_show_labels": "Beschriftungen immer anzeigen",
       "bicycle": "Fahrrad",
       "data": "Daten",
       "labels": "Beschriftungen",
