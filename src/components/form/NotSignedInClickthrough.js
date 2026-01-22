@@ -21,7 +21,6 @@ const StyledDialog = styled(Dialog)`
 `
 
 const Content = styled.div`
-  text-align: justify;
   margin-block-start: 1.5em;
   margin-block-end: 1.5em;
 `
@@ -65,7 +64,9 @@ const Buttons = styled.div`
 
 const NotSignedInClickthrough = ({ formType }) => {
   const { t } = useTranslation()
-  const [doNotAskAgain, setDoNotAskAgain] = useState(() => localStorage.getItem('skipNotSignedInClickthrough') === 'true')
+  const [doNotAskAgain, setDoNotAskAgain] = useState(
+    () => localStorage.getItem('skipNotSignedInClickthrough') === 'true',
+  )
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
