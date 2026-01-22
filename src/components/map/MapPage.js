@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
+import {
+  DEFAULT_GEOLOCATION_ZOOM,
+  VISIBLE_CLUSTER_ZOOM_LIMIT,
+} from '../../constants/map'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { disconnectMap, setGoogle } from '../../redux/mapSlice'
@@ -304,7 +307,11 @@ const MapPage = ({ isDesktop }) => {
   const isAddingLocation = locationId === 'new' || isBeingInitializedMobile
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
-  const showLabels = settingsShowLabels || isAddingLocation || isEditingLocation
+  const showLabels =
+    settingsShowLabels ||
+    isAddingLocation ||
+    isEditingLocation ||
+    currentZoom >= DEFAULT_GEOLOCATION_ZOOM
   const isEmbed = useIsEmbed()
 
   useEffect(() => {
