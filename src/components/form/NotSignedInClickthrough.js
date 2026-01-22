@@ -65,7 +65,7 @@ const Buttons = styled.div`
 
 const NotSignedInClickthrough = ({ formType }) => {
   const { t } = useTranslation()
-  const [doNotAskAgain, setDoNotAskAgain] = useState(false)
+  const [doNotAskAgain, setDoNotAskAgain] = useState(() => localStorage.getItem('skipNotSignedInClickthrough') === 'true')
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -86,10 +86,17 @@ const NotSignedInClickthrough = ({ formType }) => {
   }
 
   const handleContinue = () => {
-    if (doNotAskAgain) {
-      localStorage.setItem('skipNotSignedInClickthrough', 'true')
-    }
     setIsOpen(false)
+  }
+
+  const handleDoNotAskAgainChange = (e) => {
+    const checked = e.target.checked
+    setDoNotAskAgain(checked)
+    if (checked) {
+      localStorage.setItem('skipNotSignedInClickthrough', 'true')
+    } else {
+      localStorage.removeItem('skipNotSignedInClickthrough')
+    }
   }
 
   if (!isOpen) {
@@ -108,7 +115,7 @@ const NotSignedInClickthrough = ({ formType }) => {
           type="checkbox"
           id="do-not-ask-again"
           checked={doNotAskAgain}
-          onChange={(e) => setDoNotAskAgain(e.target.checked)}
+          onChange={handleDoNotAskAgainChange}
         />
         <label htmlFor="do-not-ask-again">
           {t('form.not_signed_in.do_not_ask_again')}
