@@ -300,6 +300,7 @@
       "please_try_again": "Por favor, verifique sua conexão ou tente novamente mais tarde."
     },
     "settings": {
+      "always_show_labels": "Sempre mostrar rótulos",
       "bicycle": "Bicicleta",
       "data": "Dados",
       "labels": "Rótulos",

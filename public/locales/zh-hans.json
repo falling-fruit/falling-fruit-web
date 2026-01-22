@@ -300,6 +300,7 @@
       "please_try_again": "请检查您的连接或稍后重试。"
     },
     "settings": {
+      "always_show_labels": "始终显示标签",
       "bicycle": "自行车",
       "data": "数据",
       "labels": "标签",

@@ -300,6 +300,7 @@
       "please_try_again": "אנא בדוק את החיבור שלך או נסה שוב מאוחר יותר."
     },
     "settings": {
+      "always_show_labels": "הצג תמיד תוויות",
       "bicycle": "אופניים",
       "data": "נתונים",
       "labels": "תוויות",

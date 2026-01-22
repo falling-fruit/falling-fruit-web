@@ -300,9 +300,9 @@
       "please_try_again": "Please check your connection or try again later."
     },
     "settings": {
+      "always_show_labels": "Always show labels",
       "bicycle": "Bicycle",
       "data": "Data",
-      "labels": "Labels",
       "language": "Language",
       "points_of_interest": "Points of interest",
       "regional": "Regional",

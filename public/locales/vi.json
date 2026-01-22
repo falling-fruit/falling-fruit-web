@@ -300,6 +300,7 @@
       "please_try_again": "Vui lòng kiểm tra kết nối của bạn hoặc thử lại sau."
     },
     "settings": {
+      "always_show_labels": "Luôn hiển thị nhãn",
       "bicycle": "Xe đạp",
       "data": "Dữ liệu",
       "labels": "Nhãn",

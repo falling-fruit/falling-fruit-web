@@ -300,6 +300,7 @@
       "please_try_again": "Lütfen bağlantınızı kontrol edin veya daha sonra tekrar deneyin."
     },
     "settings": {
+      "always_show_labels": "Etiketleri her zaman göster",
       "bicycle": "Bisiklet",
       "data": "Veri",
       "labels": "Etiketler",

@@ -300,6 +300,7 @@
       "please_try_again": "Kontroleer asseblief jou verbinding of probeer later weer."
     },
     "settings": {
+      "always_show_labels": "Labels altijd weergeven",
       "bicycle": "Fiets",
       "data": "Gegevens",
       "labels": "Labels",
