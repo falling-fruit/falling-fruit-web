@@ -63,7 +63,7 @@ const Buttons = styled.div`
   }
 `
 
-const NotSignedInClickthrough = ({ flavour }) => {
+const NotSignedInClickthrough = ({ formType }) => {
   const { t } = useTranslation()
   const [doNotAskAgain, setDoNotAskAgain] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -76,10 +76,10 @@ const NotSignedInClickthrough = ({ flavour }) => {
   }, [])
 
   const title = {
-    add: t('form.not_signed_in.title.add_location'),
-    edit: t('form.not_signed_in.title.edit_location'),
-    review: t('form.not_signed_in.title.add_review'),
-  }[flavour]
+    add_location: t('form.not_signed_in.title.add_location'),
+    edit_location: t('form.not_signed_in.title.edit_location'),
+    add_review: t('form.not_signed_in.title.add_review'),
+  }[formType]
 
   const handleDismiss = () => {
     setIsOpen(false)

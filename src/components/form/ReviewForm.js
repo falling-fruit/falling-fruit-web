@@ -163,7 +163,9 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
 
   return (
     <StyledForm>
-      {!isLoggedIn && !isEmbed && <NotSignedInClickthrough flavour="review" />}
+      {!isLoggedIn && !isEmbed && (
+        <NotSignedInClickthrough formType="add_review" />
+      )}
       <Formik
         validate={({ review }) => validateReview(review)}
         initialValues={mergedInitialValues}
