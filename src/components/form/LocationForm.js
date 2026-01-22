@@ -300,7 +300,9 @@ export const LocationForm = ({ editingId, innerRef }) => {
   ) : (
     <StyledForm>
       {!isLoggedIn && !isEmbed && (
-        <NotSignedInClickthrough flavour={editingId ? 'edit' : 'add'} />
+        <NotSignedInClickthrough
+          formType={editingId ? 'edit_location' : 'add_location'}
+        />
       )}
       <Formik
         validate={validateLocation}
