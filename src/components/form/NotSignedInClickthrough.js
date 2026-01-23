@@ -3,8 +3,11 @@ import '@reach/dialog/styles.css'
 import { Dialog } from '@reach/dialog'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import persistentStore from '../../utils/persistentStore'
+import { useIsEmbed } from '../../utils/useBreakpoint'
 import AuthLinks from '../auth/AuthLinks'
 import Button from '../ui/Button'
 
@@ -64,14 +67,16 @@ const Buttons = styled.div`
 
 const NotSignedInClickthrough = ({ formType }) => {
   const { t } = useTranslation()
-  const [doNotAskAgain, setDoNotAskAgain] = useState(
-    () => localStorage.getItem('skipNotSignedInClickthrough') === 'true',
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const isEmbed = useIsEmbed()
+  const [doNotAskAgain, setDoNotAskAgain] = useState(() =>
+    persistentStore.getSkipNotSignedInClickthrough(),
   )
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    const skipClickthrough = localStorage.getItem('skipNotSignedInClickthrough')
-    if (skipClickthrough !== 'true') {
+    const skipClickthrough = persistentStore.getSkipNotSignedInClickthrough()
+    if (!skipClickthrough) {
       setIsOpen(true)
     }
   }, [])
@@ -93,14 +98,10 @@ const NotSignedInClickthrough = ({ formType }) => {
   const handleDoNotAskAgainChange = (e) => {
     const checked = e.target.checked
     setDoNotAskAgain(checked)
-    if (checked) {
-      localStorage.setItem('skipNotSignedInClickthrough', 'true')
-    } else {
-      localStorage.removeItem('skipNotSignedInClickthrough')
-    }
+    persistentStore.setSkipNotSignedInClickthrough(checked)
   }
 
-  if (!isOpen) {
+  if (isLoggedIn || isEmbed || !isOpen) {
     return null
   }
 

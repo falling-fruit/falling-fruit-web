@@ -4,6 +4,7 @@ const ACCESS_TOKEN_KEY = 'authToken'
 const REFRESH_TOKEN_KEY = 'refreshToken'
 const LAST_MAP_VIEW_KEY = 'lastMapView'
 const LANGUAGE_KEY = 'language'
+const SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY = 'skipNotSignedInClickthrough'
 
 let throttleTimer = null
 
@@ -40,6 +41,7 @@ const persistentStore = {
         REFRESH_TOKEN_KEY,
         LAST_MAP_VIEW_KEY,
         LANGUAGE_KEY,
+        SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY,
       ]
 
       for (const key of keys) {
@@ -207,6 +209,27 @@ const persistentStore = {
     }, 0)
   },
 
+  getSkipNotSignedInClickthrough: () => localStorage.getItem(SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY) === 'true',
+
+  setSkipNotSignedInClickthrough: (skip) => {
+    const value = skip ? 'true' : 'false'
+    localStorage.setItem(SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY, value)
+
+    setTimeout(async () => {
+      try {
+        await Preferences.set({
+          key: SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY,
+          value,
+        })
+      } catch (error) {
+        console.error(
+          'Failed to persist skip clickthrough to Capacitor Preferences:',
+          error,
+        )
+      }
+    }, 0)
+  },
+
   removeTokens: () => {
     const { rememberMe } = getStorageInfo()
     if (rememberMe) {
@@ -214,6 +237,7 @@ const persistentStore = {
       localStorage.removeItem(REFRESH_TOKEN_KEY)
       localStorage.removeItem(LAST_MAP_VIEW_KEY)
       localStorage.removeItem(LANGUAGE_KEY)
+      localStorage.removeItem(SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY)
       sessionStorage.removeItem(ACCESS_TOKEN_KEY)
       sessionStorage.removeItem(REFRESH_TOKEN_KEY)
 
@@ -223,6 +247,7 @@ const persistentStore = {
           await Preferences.remove({ key: REFRESH_TOKEN_KEY })
           await Preferences.remove({ key: LAST_MAP_VIEW_KEY })
           await Preferences.remove({ key: LANGUAGE_KEY })
+          await Preferences.remove({ key: SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY })
         } catch (error) {
           console.error(
             'Failed to remove tokens from Capacitor Preferences:',
