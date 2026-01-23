@@ -12,7 +12,9 @@ const ConnectPath = () => {
   const [isMapIdle, setIsMapIdle] = useState(true)
 
   useEffect(() => {
-    if (!googleMap) {return}
+    if (!googleMap) {
+      return
+    }
 
     const idleListener = googleMap.addListener('idle', () => {
       setIsMapIdle(true)
@@ -49,7 +51,7 @@ const ConnectPath = () => {
         googleMap.setZoom(view.zoom)
       }
     }
-  }, [pathname, hasInitialView, googleMap, isMapIdle]) //eslint-disable-line
+  }, [pathname, hasInitialView, googleMap]) //eslint-disable-line
 
   return null
 }
