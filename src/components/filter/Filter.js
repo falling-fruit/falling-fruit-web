@@ -15,9 +15,7 @@ import LabeledCheckbox from './LabeledCheckbox'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
 import TreeSelect from './TreeSelect'
 
-const EdibleTypeText = styled.p`
-  font-size: 0.875rem;
-  font-weight: bold;
+const TypesHeader = styled.h5`
   color: ${({ theme }) => theme.secondaryText};
   margin-block: 0.75em;
   margin-block-end: 0.5em;
@@ -87,9 +85,9 @@ const Filter = () => {
           onChange={(checked) => dispatch(muniChanged(checked))}
         />
       </MunicipalTreeInventoriesCheckbox>
-      <EdibleTypeText isDesktop={isDesktop}>
+      <TypesHeader isDesktop={isDesktop}>
         {t('glossary.type.other')}
-      </EdibleTypeText>
+      </TypesHeader>
       <SearchAndSelectContainer>
         <MapAreaSelectWrapper>
           <Select
