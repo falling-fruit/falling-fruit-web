@@ -209,7 +209,8 @@ const persistentStore = {
     }, 0)
   },
 
-  getSkipNotSignedInClickthrough: () => localStorage.getItem(SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY) === 'true',
+  getSkipNotSignedInClickthrough: () =>
+    localStorage.getItem(SKIP_NOT_SIGNED_IN_CLICKTHROUGH_KEY) === 'true',
 
   setSkipNotSignedInClickthrough: (skip) => {
     const value = skip ? 'true' : 'false'
