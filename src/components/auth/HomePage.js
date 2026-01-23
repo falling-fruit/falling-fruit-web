@@ -13,7 +13,7 @@ import {
 import { useAppHistory } from '../../utils/useAppHistory'
 import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
-import { AuthPage } from '../ui/PageTemplate'
+import { LandingPage } from '../ui/PageTemplate'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const ButtonWrapper = styled.div`
@@ -84,7 +84,7 @@ const HomePage = () => {
   }, [lastMapView, geolocation, geolocationState, history])
 
   return (
-    <AuthPage>
+    <LandingPage>
       <br />
       <Description>
         {t('pages.welcome.welcome_visitors_to_the_site_short')}
@@ -122,7 +122,7 @@ const HomePage = () => {
         </Button>
       </ButtonWrapper>
       <AboutSection />
-    </AuthPage>
+    </LandingPage>
   )
 }
 

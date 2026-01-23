@@ -26,6 +26,20 @@ const PageScrollWrapper = styled.div`
   overflow-y: auto;
 `
 
+const TopSafeAreaInsetPageScrollWrapper = styled(PageScrollWrapper)`
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
+    background-color: ${({ theme }) => theme.secondaryBackground};
+  `}
+`
+
+const SafeAreaInset = styled.div`
+  width: 100%;
+  height: env(safe-area-inset-top);
+  background-color: ${({ theme }) => theme.secondaryBackground};
+`
+
 const PageWrapper = styled.article`
   max-width: 950px;
   width: 66%;
@@ -42,7 +56,7 @@ const PageWrapper = styled.article`
     width: 100%;
     padding-block: 0 20px;
     padding-inline: 23px;
-    margin-block: 28px 0;
+    margin-block: calc(28px + env(safe-area-inset-top)) 0;
     margin-inline: auto;
   `}
 
@@ -127,6 +141,14 @@ const PageWrapper = styled.article`
   }
 `
 
+const TopSafeAreaInsetPageWrapper = styled(PageWrapper)`
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
+    margin-block: 28px 0;
+  `}
+`
+
 const StyledBackButton = styled(BackButton)`
   margin-block-end: 23px;
 `
@@ -138,6 +160,19 @@ const Page = ({ children }) => {
     <PageScrollWrapper>
       <PageWrapper isDesktop={isDesktop}>{children}</PageWrapper>
     </PageScrollWrapper>
+  )
+}
+
+const TopSafeAreaInsetPage = ({ children }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <TopSafeAreaInsetPageScrollWrapper isDesktop={isDesktop}>
+      {!isDesktop && <SafeAreaInset />}
+      <TopSafeAreaInsetPageWrapper isDesktop={isDesktop}>
+        {children}
+      </TopSafeAreaInsetPageWrapper>
+    </TopSafeAreaInsetPageScrollWrapper>
   )
 }
 
@@ -164,6 +199,29 @@ const AuthPage = ({ children }) => {
   const isDesktop = useIsDesktop()
 
   return (
+    <TopSafeAreaInsetPageScrollWrapper isDesktop={isDesktop}>
+      {!isDesktop && <SafeAreaInset />}
+      <TopSafeAreaInsetPageWrapper isDesktop={isDesktop}>
+        {!isDesktop && (
+          <MobileHeader>
+            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+          </MobileHeader>
+        )}
+        {!isDesktop && (
+          <LanguageContainer>
+            <LanguageSelect />
+          </LanguageContainer>
+        )}
+        {children}
+      </TopSafeAreaInsetPageWrapper>
+    </TopSafeAreaInsetPageScrollWrapper>
+  )
+}
+
+const LandingPage = ({ children }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
     <PageScrollWrapper>
       <PageWrapper isDesktop={isDesktop}>
         {!isDesktop && (
@@ -182,4 +240,28 @@ const AuthPage = ({ children }) => {
   )
 }
 
-export { AuthPage, InfoPage, Page }
+const ErrorPage = ({ children }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <PageScrollWrapper>
+      <PageWrapper isDesktop={isDesktop}>
+        {!isDesktop && (
+          <MobileHeader>
+            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+          </MobileHeader>
+        )}
+        {children}
+      </PageWrapper>
+    </PageScrollWrapper>
+  )
+}
+
+export {
+  AuthPage,
+  ErrorPage,
+  InfoPage,
+  LandingPage,
+  Page,
+  TopSafeAreaInsetPage,
+}

@@ -21,11 +21,21 @@ const StyledButtons = styled.div`
   inset-inline: 0;
   inset-block-start: 0;
   z-index: ${zIndex.topBar + 1};
-  padding: 16px;
+  padding: calc(16px + env(safe-area-inset-top, 0)) 16px 16px 16px;
   display: flex;
   justify-content: space-between;
   ${({ whiteBackground }) => whiteBackground && `background: white;`}
   pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    height: env(safe-area-inset-top, 0);
+    ${({ theme, whiteBackground }) =>
+      whiteBackground && `background: ${theme.secondaryBackground};`}
+  }
 
   button {
     pointer-events: auto;

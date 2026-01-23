@@ -42,7 +42,6 @@
       "type_add_failed": "Yeni tür ekleme başarısız: {{message}}"
     },
     "auth": {
-      "check_failed": "Kimlik doğrulama kontrolü başarısız: {{message}}",
       "confirmation_failed": "Hesap onayı başarısız: {{message}}",
       "expired_refresh_token": "Uzun süreli hareketsizlik nedeniyle oturumunuz sonlandırıldı. Lütfen tekrar giriş yapın.",
       "password_set_failed": "Yeni şifre belirleme başarısız: {{message}}",
@@ -73,6 +72,7 @@
       "cancel": "İptal",
       "delete": "Sil",
       "edit": "Düzenle",
+      "reload": "Yeniden Yükle",
       "report": "Bildir",
       "reset": "Sıfırla",
       "review": "İncele",
@@ -294,6 +294,11 @@
       "type": "Tür",
       "types_of_data": "Falling Fruit'e aktarılan veri setleri iki ana kategoriye ayrılır. \"Topluluk haritaları\", toplayıcılar ve freegan'lar tarafından toplulukları içinde yiyecek ararken oluşturulur. Bu verileri derleyen özverili vatandaş-kartograflarına minnettarız. \"Ağaç envanterleri\", şehirler, üniversiteler ve diğer kurumlar tarafından ağaçlarını daha iyi belgelemek ve bakımını yapmak için derlenir. Bu geniş veri setlerini gıda üreten türler için tarayıp haritaya ekliyoruz. Mahallenizin meyve ağaçlarını haritalamamıza yardımcı olmak için, okulunuz veya şehrinizle iletişime geçerek ağaç envanterlerini bizimle paylaşmaları için teşvik edin."
     },
+    "network_error": {
+      "could_not_connect": "Bağlanamadık. Çevrimdışı olabilirsiniz veya hizmet geçici olarak kullanılamıyor olabilir.",
+      "header_message": "Ağ hatası",
+      "please_try_again": "Lütfen bağlantınızı kontrol edin veya daha sonra tekrar deneyin."
+    },
     "settings": {
       "bicycle": "Bisiklet",
       "data": "Veri",
@@ -362,6 +367,11 @@
       },
       "intro_html": "Aşağıda kamusal alanlarda gıda yetiştiren (gıda ormanları, halka açık meyve bahçeleri), gıda toplayan (kent içi yiyecek toplama, tarla artığı toplama) veya gıda dağıtan (takaslar, bağışlar) kuruluşlar listelenmiştir. Kuruluşlar ülke, eyalet (varsa) ve şehre göre listelenmiştir. Üstü çizili olanların artık aktif olmadığı düşünülmektedir. Listede olması gereken başkalarını biliyorsanız, <a href=\"mailto:info@fallingfruit.org\">bizimle iletişime geçin</a>!"
     },
+    "something_went_wrong": {
+      "error_occurred": "Şu hata oluştu: {{message}}",
+      "header_message": "Bir şeyler yanlış gitti",
+      "please_try_again_or_email_html": "Lütfen tekrar deneyin. Sorun devam ederse, bize <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> adresinden bildirin."
+    },
     "welcome": {
       "community_driven_platform": "Falling Fruit, yenilebilir bitkiler ve diğer ücretsiz gıda kaynaklarının konumlarını paylaşmak için topluluk tarafından yönlendirilen bir platformdur.",
       "discover_and_contribute": "Mahallenizde başkalarının neler topladığını keşfedebilir ve kendi gözlemlerinizi ekleyebilirsiniz.",
@@ -384,6 +394,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Fotoğraf çek",
+      "add_from_gallery": "Galeriden seç",
       "leave_a_review": "Değerlendirme yap",
       "observed_on": "Gözlemlenme tarihi {{date}}",
       "photos": "Fotoğraflar"

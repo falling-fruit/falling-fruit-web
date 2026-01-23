@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import {
+  NAVIGATION_BAR_HEIGHT_PX,
+  TABS_HEIGHT_PX,
+} from '../../constants/mobileLayout'
 import {
   fullyOpenPaneDrawer,
   setPaneDrawerToLowPosition,
@@ -12,7 +16,7 @@ import {
 } from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import DraggablePane from '../ui/DraggablePane'
-import { EntryTabs, Tab, TabList, TabPanel, TabPanels } from '../ui/EntryTabs'
+import { CardTabs, Tab, TabList, TabPanel, TabPanels } from './CardTabs'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
@@ -21,8 +25,8 @@ import TopButtonsMobile from './TopButtonsMobile'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
-const TOP_BAR_HEIGHT = 80
-const ENTRY_TABS_HEIGHT = 50
+const TOP_BAR_HEIGHT = NAVIGATION_BAR_HEIGHT_PX
+const ENTRY_TABS_HEIGHT = TABS_HEIGHT_PX
 
 const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
   Math.max(
@@ -51,6 +55,19 @@ const EntryLoading = () => (
     <Skeleton height={16} width="50%" style={{ marginBottom: '0.5em' }} />
   </article>
 )
+
+const BlurredSafeArea = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+  pointer-events: none;
+`
 
 const RevealedFromUnderneath = styled.div`
   width: 100%;
@@ -131,6 +148,24 @@ const EntryMobile = () => {
     reviews.filter((review) => review.photos && review.photos.length > 0)
       .length > 0
 
+  const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0)
+
+  useEffect(() => {
+    const value = getComputedStyle(document.documentElement)
+      .getPropertyValue('--safe-area-inset-bottom')
+      .trim()
+
+    const numericValue = parseFloat(value) || 0
+    setSafeAreaInsetBottom(numericValue)
+    /*
+     * NOTE:
+     * The value could change if we resize or rotate screen
+     * and could be updated with event listeners if needed
+     * The Capacitor app shouldn't resize and there's no drawer in horizontal layout
+     * so enough to populate once
+     */
+  }, [])
+
   const [currentTranslateY, setCurrentTranslateY] = useState(
     drawerFullyOpen || drawerDisabled
       ? hasImages
@@ -150,11 +185,12 @@ const EntryMobile = () => {
 
   return isLoading === null ? null : (
     <>
+      {hasImages && <BlurredSafeArea />}
       <DraggablePane
         displayOverTopBar={!filterOpen || drawerFullyOpen}
         topPositionHeight={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
         middlePositionScreenRatio={0.7}
-        partialPositionHeightPx={80}
+        partialPositionHeightPx={80 + safeAreaInsetBottom}
         position={
           drawerFullyOpen || drawerDisabled
             ? 'top'
@@ -203,8 +239,14 @@ const EntryMobile = () => {
             targetHeight={ENTRY_TABS_HEIGHT}
           />
         )}
-        <EntryTabs
-          style={{ transition: 'none' }}
+        <CardTabs
+          style={{
+            transition: 'none',
+            paddingTop:
+              hasImages || !drawerFullyOpen
+                ? '0'
+                : 'env(safe-area-inset-top, 0)',
+          }}
           onChange={(index) => dispatch(setTabIndex(index))}
           index={tabIndex}
         >
@@ -233,7 +275,7 @@ const EntryMobile = () => {
               />
             </TabPanel>
           </TabPanels>
-        </EntryTabs>
+        </CardTabs>
       </DraggablePane>
       {drawerFullyOpen && <TopButtonsMobile hasImages={hasImages} />}
     </>

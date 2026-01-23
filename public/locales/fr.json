@@ -42,7 +42,6 @@
       "type_add_failed": "Échec de l'ajout du nouveau type : {{message}}"
     },
     "auth": {
-      "check_failed": "Échec de la vérification d'authentification : {{message}}",
       "confirmation_failed": "Échec de la confirmation du compte : {{message}}",
       "expired_refresh_token": "Nous t'avons déconnecté après une période d'inactivité. Merci de te reconnecter.",
       "password_set_failed": "Échec de la définition du nouveau mot de passe : {{message}}",
@@ -73,6 +72,7 @@
       "cancel": "Annuler",
       "delete": "Supprimer",
       "edit": "Modifier",
+      "reload": "Recharger",
       "report": "Signaler",
       "reset": "Réinitialiser",
       "review": "Évaluer",
@@ -294,6 +294,11 @@
       "type": "Type",
       "types_of_data": "Il y a deux catégories d'ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d'arbres» sont compilés par des villes, des universités et d'autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s'en occuper. Nous parcourons ces larges bases de données à la recherche d'espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d'arbres avec nous."
     },
+    "network_error": {
+      "could_not_connect": "Nous n'avons pas pu nous connecter. Vous êtes peut-être hors ligne, ou le service est temporairement indisponible.",
+      "header_message": "Erreur réseau",
+      "please_try_again": "Veuillez vérifier votre connexion ou réessayer plus tard."
+    },
     "settings": {
       "bicycle": "Vélo",
       "data": "Données",
@@ -362,6 +367,11 @@
       },
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
     },
+    "something_went_wrong": {
+      "error_occurred": "L'erreur suivante s'est produite : {{message}}",
+      "header_message": "Une erreur s'est produite",
+      "please_try_again_or_email_html": "Veuillez réessayer. Si le problème persiste, contactez-nous à <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+    },
     "welcome": {
       "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les emplacements de plantes comestibles et d'autres sources de nourriture gratuite.",
       "discover_and_contribute": "Vous pouvez découvrir ce que d'autres ont récolté dans votre quartier et partager vos observations.",
@@ -384,6 +394,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Prendre une photo",
+      "add_from_gallery": "Choisir dans la galerie",
       "leave_a_review": "Laisser un avis",
       "observed_on": "Observé le {{date}}",
       "photos": "Photos"

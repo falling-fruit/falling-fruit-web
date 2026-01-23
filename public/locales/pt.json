@@ -42,7 +42,6 @@
       "type_add_failed": "Falha ao adicionar novo tipo: {{message}}"
     },
     "auth": {
-      "check_failed": "Falha na verificação de autenticação: {{message}}",
       "confirmation_failed": "Falha na confirmação da conta: {{message}}",
       "expired_refresh_token": "Você foi desconectado após um período de inatividade. Por favor, faça login novamente.",
       "password_set_failed": "Falha ao definir nova senha: {{message}}",
@@ -73,6 +72,7 @@
       "cancel": "Cancelar",
       "delete": "Excluir",
       "edit": "Editar",
+      "reload": "Recarregar",
       "report": "Relatar",
       "reset": "Redefinir",
       "review": "Avaliar",
@@ -294,6 +294,11 @@
       "type": "Tipo",
       "types_of_data": "Os conjuntos de dados importados no Falling Fruit entram em duas categorias principais. \"Mapas comunitários\" são construídas por coletores e freegans enquanto procuram alimentos em suas comunidades. Estamos em dívida com os cidadãos-cartógrafos que compilaram os dados. \"Inventários de árvores\" são compilados por munícipios, universidades e outras instituições que desejam documentar melhor e cuidar de suas árvores. Nós garimpamos esses vastos conjuntos de dados para espécies produtoras de alimentos e os adicionamos ao mapa. Para nos ajudar a mapear sua comunidade, entre em contato com sua escola ou cidade instando-os a partilhar o seu inventário de árvores com a gente."
     },
+    "network_error": {
+      "could_not_connect": "Não foi possível conectar. Você pode estar offline ou o serviço pode estar temporariamente indisponível.",
+      "header_message": "Erro de rede",
+      "please_try_again": "Por favor, verifique sua conexão ou tente novamente mais tarde."
+    },
     "settings": {
       "bicycle": "Bicicleta",
       "data": "Dados",
@@ -362,6 +367,11 @@
       },
       "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Aqueles com nomes riscados são inativos. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!"
     },
+    "something_went_wrong": {
+      "error_occurred": "Ocorreu o seguinte erro: {{message}}",
+      "header_message": "Algo deu errado",
+      "please_try_again_or_email_html": "Por favor, tente novamente. Se o problema persistir, avise-nos em <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+    },
     "welcome": {
       "community_driven_platform": "Falling Fruit é uma plataforma colaborativa para compartilhar localizações de plantas comestíveis e outras fontes de alimentos gratuitos.",
       "discover_and_contribute": "Você pode descobrir o que outros têm colhido em sua vizinhança e contribuir com suas observações.",
@@ -384,6 +394,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Tirar foto",
+      "add_from_gallery": "Escolher da galeria",
       "leave_a_review": "Deixe uma avaliação",
       "observed_on": "Observado em {{date}}",
       "photos": "Fotos"

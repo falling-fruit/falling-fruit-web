@@ -25,7 +25,7 @@ const EntryReviews = () => {
     <>
       {!isDesktop && <ReviewButton />}
       <h3>{t('glossary.review.other')}</h3>
-      <div>
+      <div style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         {reviews.map((review) => {
           const onReviewImageClick = (imageIndex) =>
             onImageClick(

@@ -42,7 +42,6 @@
       "type_add_failed": "Thêm loại mới thất bại: {{message}}"
     },
     "auth": {
-      "check_failed": "Xác thực thất bại: {{message}}",
       "confirmation_failed": "Xác nhận tài khoản thất bại: {{message}}",
       "expired_refresh_token": "Chúng tôi đã đăng xuất bạn sau một thời gian không hoạt động. Vui lòng đăng nhập lại.",
       "password_set_failed": "Đặt mật khẩu mới thất bại: {{message}}",
@@ -73,6 +72,7 @@
       "cancel": "Hủy",
       "delete": "Xóa",
       "edit": "Chỉnh sửa",
+      "reload": "Tải lại",
       "report": "Báo vi phạm",
       "reset": "Đặt lại",
       "review": "Đánh giá",
@@ -294,6 +294,11 @@
       "type": "Loại",
       "types_of_data": "Các bộ dữ liệu được nhập vào Falling Fruit thuộc hai loại chính. \"Bản đồ cộng đồng\" được xây dựng bởi những người kiếm ăn và những người sống tự do khi họ nghiên cứu cộng đồng của mình để tìm đồ ăn. Chúng tôi mang ơn những người vẽ bản đồ công dân chăm chỉ đã biên soạn dữ liệu này. \"Kiểm kê cây\" được biên soạn bởi các thành phố, trường đại học và các tổ chức khác mong muốn ghi chép và chăm sóc cây của họ tốt hơn. Chúng tôi khai thác những bộ dữ liệu khổng lồ này về các loài sản xuất thực phẩm và thêm chúng vào bản đồ. Để giúp chúng tôi lập bản đồ cây ăn quả ở khu vực lân cận của bạn, hãy liên hệ với trường học hoặc thành phố của bạn để thúc giục họ chia sẻ kho cây của họ với chúng tôi."
     },
+    "network_error": {
+      "could_not_connect": "Chúng tôi không thể kết nối. Bạn có thể đang ngoại tuyến hoặc dịch vụ có thể tạm thời không khả dụng.",
+      "header_message": "Lỗi mạng",
+      "please_try_again": "Vui lòng kiểm tra kết nối của bạn hoặc thử lại sau."
+    },
     "settings": {
       "bicycle": "Xe đạp",
       "data": "Dữ liệu",
@@ -362,6 +367,11 @@
       },
       "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Những người có tên bị gạch bỏ được cho là không hoạt động. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!"
     },
+    "something_went_wrong": {
+      "error_occurred": "Lỗi sau đã xảy ra: {{message}}",
+      "header_message": "Đã xảy ra lỗi",
+      "please_try_again_or_email_html": "Vui lòng thử lại. Nếu vấn đề vẫn tiếp diễn, hãy cho chúng tôi biết tại <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+    },
     "welcome": {
       "community_driven_platform": "Falling Fruit là một nền tảng do cộng đồng điều hành để chia sẻ vị trí của các cây ăn được và các nguồn thực phẩm miễn phí khác.",
       "discover_and_contribute": "Bạn có thể khám phá những gì người khác đã hái lượm trong khu vực của bạn, và đóng góp quan sát của bạn.",
@@ -384,6 +394,8 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Chụp ảnh",
+      "add_from_gallery": "Chọn từ thư viện",
       "leave_a_review": "Viết đánh giá",
       "observed_on": "Quan sát vào {{date}}",
       "photos": "Hình ảnh"
