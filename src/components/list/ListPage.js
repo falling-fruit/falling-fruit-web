@@ -66,9 +66,9 @@ const ListPage = () => {
       onClearLastViewedPosition={() =>
         dispatch(clearLastViewedListPositionState())
       }
-      onLocationClick={(scrollState) => {
-        dispatch(setLastViewedListPositionState(scrollState))
-        history.push(`/list-locations/${scrollState.id}`)
+      onLocationClick={(locationPosition) => {
+        dispatch(setLastViewedListPositionState(locationPosition))
+        history.push(`/list-locations/${locationPosition.id}`)
       }}
     />
   )
