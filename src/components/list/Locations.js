@@ -120,13 +120,11 @@ const Locations = ({
       const locationElement = document.getElementById(lastViewedListPositionId)
       if (locationElement) {
         if (
+          locationElement.parentElement &&
           lastViewedOffsetTop !== null &&
           locationElement.offsetTop === lastViewedOffsetTop
         ) {
-          const parent = locationElement.parentElement
-          if (parent) {
-            parent.scrollTop = lastViewedScrollTop
-          }
+          parent.scrollTop = lastViewedScrollTop
         } else {
           locationElement.scrollIntoView()
         }
@@ -164,14 +162,11 @@ const Locations = ({
           key={index}
           id={location.id}
           onClick={(e) => {
-            if (e) {
-              return
-            }
-            const element = e.currentTarget
-            onLocationClick?.({
+            const locationPosition = e.currentTarget
+            onLocationClick({
               id: location.id,
-              offsetTop: element.offsetTop ?? 0,
-              scrollTop: element.parentElement?.scrollTop ?? 0,
+              offsetTop: locationPosition.offsetTop ?? 0,
+              scrollTop: locationPosition.parentElement?.scrollTop ?? 0,
             })
           }}
         >
