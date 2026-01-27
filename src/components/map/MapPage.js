@@ -140,8 +140,14 @@ const clusterBounds = ({ lat, lng, zoom }) => {
     east: bounds.east * (360 / EARTH_CIRCUMFERENCE),
   }
 }
-const makeHandleViewChange =
-  (dispatch, googleMap, history) => (googleMapReactCallbackArg) => {
+const makeHandleViewChange = (dispatch, googleMap, history) => {
+  const throttledDispatches = throttle((newView) => {
+    dispatch(updateLastMapView(newView))
+    dispatch(fetchLocations())
+    dispatch(fetchFilterCounts())
+  }, 1000)
+
+  return (googleMapReactCallbackArg) => {
     const center = googleMap.getCenter()
     const newView = {
       center: { lat: center.lat(), lng: center.lng() },
@@ -150,13 +156,12 @@ const makeHandleViewChange =
       width: googleMap.getDiv().offsetWidth,
       height: googleMap.getDiv().offsetHeight,
     }
-    dispatch(updateLastMapView(newView))
-    dispatch(fetchLocations())
-    dispatch(fetchFilterCounts())
+    throttledDispatches(newView)
     if (googleMapReactCallbackArg) {
       history.changeView(newView)
     }
   }
+}
 
 /**
  * Calculate XYZ tile coordinates.
@@ -260,9 +265,10 @@ const MapPage = ({ isDesktop }) => {
        * This usually happens after apiIsLoaded puts googleMap in redux
        * but on first render, types might not have been fetched yet so only install the handler when both happened
        */
-      handleViewChangeRef.current = throttle(
-        makeHandleViewChange(dispatch, googleMap, history),
-        1000,
+      handleViewChangeRef.current = makeHandleViewChange(
+        dispatch,
+        googleMap,
+        history,
       )
       /*
        * Call the handler for the first time since map (re)opened
