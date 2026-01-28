@@ -300,10 +300,13 @@
       "please_try_again": "Kontroleer asseblief jou verbinding of probeer later weer."
     },
     "settings": {
-      "always_show_labels": "Labels altijd weergeven",
       "bicycle": "Fiets",
-      "data": "Gegevens",
-      "labels": "Labels",
+      "label_visibility": "Zichtbaarheid labels",
+      "labels": {
+        "always_on": "Altijd aan",
+        "off": "Uit",
+        "when_zoomed_in": "Bij inzoomen"
+      },
       "language": "Taal",
       "points_of_interest": "Interessante punten",
       "regional": "Regionaal",

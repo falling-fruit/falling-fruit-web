@@ -300,10 +300,13 @@
       "please_try_again": "Пожалуйста, проверьте подключение или повторите попытку позже."
     },
     "settings": {
-      "always_show_labels": "Всегда показывать метки",
       "bicycle": "Велосипед",
-      "data": "Данные",
-      "labels": "Метки",
+      "label_visibility": "Видимость меток",
+      "labels": {
+        "always_on": "Всегда включено",
+        "off": "Выключено",
+        "when_zoomed_in": "При увеличении"
+      },
       "language": "Язык",
       "points_of_interest": "Достопримечательности",
       "regional": "Региональный",

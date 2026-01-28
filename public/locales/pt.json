@@ -300,10 +300,13 @@
       "please_try_again": "Por favor, verifique sua conexão ou tente novamente mais tarde."
     },
     "settings": {
-      "always_show_labels": "Sempre mostrar rótulos",
       "bicycle": "Bicicleta",
-      "data": "Dados",
-      "labels": "Rótulos",
+      "label_visibility": "Visibilidade dos rótulos",
+      "labels": {
+        "always_on": "Sempre ativo",
+        "off": "Desativado",
+        "when_zoomed_in": "Quando ampliado"
+      },
       "language": "Idioma",
       "points_of_interest": "Pontos de interesse",
       "regional": "Regional",

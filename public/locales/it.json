@@ -300,10 +300,13 @@
       "please_try_again": "Controlla la tua connessione o riprova più tardi."
     },
     "settings": {
-      "always_show_labels": "Mostra sempre le etichette",
       "bicycle": "Bicicletta",
-      "data": "Dati",
-      "labels": "Etichette",
+      "label_visibility": "Visibilità etichette",
+      "labels": {
+        "always_on": "Sempre attive",
+        "off": "Disattivate",
+        "when_zoomed_in": "Quando ingrandito"
+      },
       "language": "Lingua",
       "points_of_interest": "Punti di interesse",
       "regional": "Regionale",

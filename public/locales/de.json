@@ -300,10 +300,13 @@
       "please_try_again": "Bitte überprüfen Sie Ihre Verbindung oder versuchen Sie es später erneut."
     },
     "settings": {
-      "always_show_labels": "Beschriftungen immer anzeigen",
       "bicycle": "Fahrrad",
-      "data": "Daten",
-      "labels": "Beschriftungen",
+      "label_visibility": "Beschriftungssichtbarkeit",
+      "labels": {
+        "always_on": "Immer an",
+        "off": "Aus",
+        "when_zoomed_in": "Beim Heranzoomen"
+      },
       "language": "Sprache",
       "points_of_interest": "Sehenswürdigkeiten",
       "regional": "Regional",

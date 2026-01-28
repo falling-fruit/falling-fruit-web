@@ -300,10 +300,13 @@
       "please_try_again": "يرجى التحقق من اتصالك أو المحاولة مرة أخرى لاحقاً."
     },
     "settings": {
-      "always_show_labels": "إظهار التسميات دائماً",
       "bicycle": "دراجة هوائية",
-      "data": "البيانات",
-      "labels": "التسميات",
+      "label_visibility": "رؤية التسميات",
+      "labels": {
+        "always_on": "دائماً مفعّل",
+        "off": "متوقف",
+        "when_zoomed_in": "عند التكبير"
+      },
       "language": "اللغة",
       "points_of_interest": "نقاط الاهتمام",
       "regional": "إقليمي",

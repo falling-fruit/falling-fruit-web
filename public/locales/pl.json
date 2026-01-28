@@ -300,10 +300,13 @@
       "please_try_again": "Sprawdź swoje połączenie lub spróbuj ponownie później."
     },
     "settings": {
-      "always_show_labels": "Zawsze pokazuj etykiety",
       "bicycle": "Rowerowa",
-      "data": "Dane",
-      "labels": "Etykiety",
+      "label_visibility": "Widoczność etykiet",
+      "labels": {
+        "always_on": "Zawsze włączone",
+        "off": "Wyłączone",
+        "when_zoomed_in": "Przy przybliżeniu"
+      },
       "language": "Język",
       "points_of_interest": "Punkty zainteresowania",
       "regional": "Regionalne",

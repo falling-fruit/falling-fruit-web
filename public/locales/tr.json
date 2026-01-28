@@ -300,10 +300,13 @@
       "please_try_again": "Lütfen bağlantınızı kontrol edin veya daha sonra tekrar deneyin."
     },
     "settings": {
-      "always_show_labels": "Etiketleri her zaman göster",
       "bicycle": "Bisiklet",
-      "data": "Veri",
-      "labels": "Etiketler",
+      "label_visibility": "Etiket görünürlüğü",
+      "labels": {
+        "always_on": "Her zaman açık",
+        "off": "Kapalı",
+        "when_zoomed_in": "Yakınlaştırıldığında"
+      },
       "language": "Dil",
       "points_of_interest": "İlgi noktaları",
       "regional": "Bölgesel",
