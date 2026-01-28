@@ -85,14 +85,14 @@
       "too_short": "Minimum of {{min}} characters"
     },
     "not_signed_in": {
+      "continue": "Continue",
+      "do_not_ask_again": "Don't ask again",
       "message": "You are not signed in. Continue without an account, or first sign in or sign up to track and manage this observation later.",
       "title": {
         "add_location": "Add location anonymously?",
-        "edit_location": "Edit location anonymously?",
-        "add_review": "Add review anonymously?"
-      },
-      "do_not_ask_again": "Don't ask again",
-      "continue": "Continue"
+        "add_review": "Add review anonymously?",
+        "edit_location": "Edit location anonymously?"
+      }
     },
     "optional": "Optional",
     "required": "Required",
@@ -300,16 +300,14 @@
       "please_try_again": "Please check your connection or try again later."
     },
     "settings": {
-      "always_show_labels": "Always show labels",
       "bicycle": "Bicycle",
-      "data": "Data",
-      "language": "Language",
+      "label_visibility": "Label visibility",
       "labels": {
         "always_on": "Always on",
-        "when_zoomed_in": "When zoomed in",
-        "off": "Off"
+        "off": "Off",
+        "when_zoomed_in": "When zoomed in"
       },
-      "label_visibility": "Label visibility",
+      "language": "Language",
       "points_of_interest": "Points of interest",
       "regional": "Regional",
       "roadmap": "Map",

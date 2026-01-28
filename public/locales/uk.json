@@ -300,10 +300,13 @@
       "please_try_again": "Будь ласка, перевірте з'єднання або спробуйте пізніше."
     },
     "settings": {
-      "always_show_labels": "Завжди показувати мітки",
       "bicycle": "Велосипед",
-      "data": "Дані",
-      "labels": "Мітки",
+      "label_visibility": "Видимість міток",
+      "labels": {
+        "always_on": "Завжди увімкнено",
+        "off": "Вимкнено",
+        "when_zoomed_in": "При збільшенні"
+      },
       "language": "Мова",
       "points_of_interest": "Визначні місця",
       "regional": "Регіональний",

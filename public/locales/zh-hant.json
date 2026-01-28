@@ -300,10 +300,13 @@
       "please_try_again": "請檢查您的連線或稍後再試。"
     },
     "settings": {
-      "always_show_labels": "始終顯示標籤",
       "bicycle": "自行車",
-      "data": "數據",
-      "labels": "標籤",
+      "label_visibility": "標籤可見性",
+      "labels": {
+        "always_on": "始終開啟",
+        "off": "關閉",
+        "when_zoomed_in": "放大時顯示"
+      },
       "language": "語言",
       "points_of_interest": "興趣點",
       "regional": "區域",

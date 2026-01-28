@@ -300,10 +300,13 @@
       "please_try_again": "Veuillez vérifier votre connexion ou réessayer plus tard."
     },
     "settings": {
-      "always_show_labels": "Toujours afficher les étiquettes",
       "bicycle": "Vélo",
-      "data": "Données",
-      "labels": "Étiquettes",
+      "label_visibility": "Visibilité des étiquettes",
+      "labels": {
+        "always_on": "Toujours activé",
+        "off": "Désactivé",
+        "when_zoomed_in": "Lors du zoom"
+      },
       "language": "Langue",
       "points_of_interest": "Points d'intérêt",
       "regional": "Régional",

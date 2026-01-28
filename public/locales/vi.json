@@ -300,10 +300,13 @@
       "please_try_again": "Vui lòng kiểm tra kết nối của bạn hoặc thử lại sau."
     },
     "settings": {
-      "always_show_labels": "Luôn hiển thị nhãn",
       "bicycle": "Xe đạp",
-      "data": "Dữ liệu",
-      "labels": "Nhãn",
+      "label_visibility": "Hiển thị nhãn",
+      "labels": {
+        "always_on": "Luôn bật",
+        "off": "Tắt",
+        "when_zoomed_in": "Khi phóng to"
+      },
       "language": "Ngôn ngữ",
       "points_of_interest": "Điểm đánh dấu",
       "regional": "Khu vực",
