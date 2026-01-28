@@ -124,7 +124,7 @@ const Locations = ({
           lastViewedOffsetTop !== null &&
           locationElement.offsetTop === lastViewedOffsetTop
         ) {
-          parent.scrollTop = lastViewedScrollTop
+          locationElement.parentElement.scrollTop = lastViewedScrollTop
         } else {
           locationElement.scrollIntoView()
         }
@@ -162,12 +162,13 @@ const Locations = ({
           key={index}
           id={location.id}
           onClick={(e) => {
-            const locationPosition = e.currentTarget
-            onLocationClick({
+            const element = e.currentTarget
+            const locationPosition = {
               id: location.id,
-              offsetTop: locationPosition.offsetTop ?? 0,
-              scrollTop: locationPosition.parentElement?.scrollTop ?? 0,
-            })
+              offsetTop: element.offsetTop ?? 0,
+              scrollTop: element.parentElement?.scrollTop ?? 0,
+            }
+            onLocationClick(locationPosition)
           }}
         >
           <LeftIcon>
