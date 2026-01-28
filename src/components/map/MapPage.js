@@ -227,12 +227,9 @@ const MapPage = ({ isDesktop }) => {
     streetViewOpen: showStreetView,
     isBeingInitializedMobile,
   } = useSelector((state) => state.location)
-  const {
-    mapType,
-    overlay,
-    showLabels: settingsShowLabels,
-    showBusinesses,
-  } = useSelector((state) => state.settings)
+  const { mapType, overlay, labelVisibility, showBusinesses } = useSelector(
+    (state) => state.settings,
+  )
 
   // Convert overlay setting to mapLayers format expected by the map
   const getLayerType = (overlayType) => {
@@ -307,11 +304,15 @@ const MapPage = ({ isDesktop }) => {
   const isAddingLocation = locationId === 'new' || isBeingInitializedMobile
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
+
+  // Determine if labels should be shown based on the three-state labelVisibility setting
   const showLabels =
-    settingsShowLabels ||
+    labelVisibility === 'always_on' ||
     isAddingLocation ||
     isEditingLocation ||
-    currentZoom >= DEFAULT_GEOLOCATION_ZOOM
+    (labelVisibility === 'when_zoomed_in' &&
+      currentZoom >= DEFAULT_GEOLOCATION_ZOOM)
+
   const isEmbed = useIsEmbed()
 
   useEffect(() => {

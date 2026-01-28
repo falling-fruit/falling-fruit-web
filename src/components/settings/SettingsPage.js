@@ -7,6 +7,7 @@ import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
+import Radio from '../ui/Radio'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
 import GoogleBicycling from './mapTiles/google-bicycling.png'
@@ -122,32 +123,68 @@ const Attribution = styled.p`
   }
 `
 
-const ShowLabelsCheckbox = () => {
+const LabelsVisibilitySettings = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
 
+  const handleLabelVisibilityChange = (value) => {
+    dispatch(
+      updateSettings({
+        labelVisibility: value,
+      }),
+    )
+  }
+
   return (
-    <LabeledRow
-      left={
-        <Checkbox
-          id="showLabels"
-          onClick={(e) =>
-            dispatch(
-              updateSettings({
-                showLabels: e.target.checked,
-              }),
-            )
-          }
-          checked={settings.showLabels}
-        />
-      }
-      label={
-        <label htmlFor="showLabels">
-          {t('pages.settings.always_show_labels')}
-        </label>
-      }
-    />
+    <>
+      <LabeledRow
+        left={
+          <Radio
+            id="labels-always-on"
+            name="labelVisibility"
+            value="always_on"
+            checked={settings.labelVisibility === 'always_on'}
+            onChange={() => handleLabelVisibilityChange('always_on')}
+          />
+        }
+        label={
+          <label htmlFor="labels-always-on">
+            {t('pages.settings.labels.always_on')}
+          </label>
+        }
+      />
+      <LabeledRow
+        left={
+          <Radio
+            id="labels-when-zoomed"
+            name="labelVisibility"
+            value="when_zoomed_in"
+            checked={settings.labelVisibility === 'when_zoomed_in'}
+            onChange={() => handleLabelVisibilityChange('when_zoomed_in')}
+          />
+        }
+        label={
+          <label htmlFor="labels-when-zoomed">
+            {t('pages.settings.labels.when_zoomed_in')}
+          </label>
+        }
+      />
+      <LabeledRow
+        left={
+          <Radio
+            id="labels-off"
+            name="labelVisibility"
+            value="off"
+            checked={settings.labelVisibility === 'off'}
+            onChange={() => handleLabelVisibilityChange('off')}
+          />
+        }
+        label={
+          <label htmlFor="labels-off">{t('pages.settings.labels.off')}</label>
+        }
+      />
+    </>
   )
 }
 
@@ -333,8 +370,8 @@ const SettingsPage = ({ isDesktop, isEmbed }) => {
       {!isDesktop && !isEmbed && <SafeAreaTop />}
       <Page isEmbed={isEmbed} isDesktop={isDesktop}>
         {!isDesktop && <h2>{t('menu.settings')}</h2>}
-        <h3>{t('pages.settings.data')}</h3>
-        <ShowLabelsCheckbox />
+        <h3>{t('pages.settings.label_visibility')}</h3>
+        <LabelsVisibilitySettings />
         <h3>{t('glossary.map')}</h3>
         <MapSettings />
         {!isDesktop && (
@@ -347,5 +384,4 @@ const SettingsPage = ({ isDesktop, isEmbed }) => {
     </>
   )
 }
-
 export default SettingsPage

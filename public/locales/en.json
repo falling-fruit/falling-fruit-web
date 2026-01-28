@@ -304,6 +304,12 @@
       "bicycle": "Bicycle",
       "data": "Data",
       "language": "Language",
+      "labels": {
+        "always_on": "Always on",
+        "when_zoomed_in": "When zoomed in",
+        "off": "Off"
+      },
+      "label_visibility": "Label visibility",
       "points_of_interest": "Points of interest",
       "regional": "Regional",
       "roadmap": "Map",
