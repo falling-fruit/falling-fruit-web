@@ -23,7 +23,7 @@ import LoadingIndicator from '../ui/LoadingIndicator'
 import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
 import GeolocationDot from './GeolocationDot'
-import Location from './Location'
+import LocationMarkers from './LocationMarkers'
 import PanoramaHandler from './PanoramaHandler'
 import {
   AddLocationCentralUnmovablePin,
@@ -31,6 +31,7 @@ import {
   EditLocationCentralUnmovablePin,
 } from './Pins'
 import Place from './Place'
+import SelectedLocation from './SelectedLocation'
 import TrackLocationButton from './TrackLocationButton'
 
 const MIN_ZOOM = 1
@@ -159,7 +160,7 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
     }
     throttledDispatches(newView)
     if (googleMapReactCallbackArg) {
-      history.changeView(newView)
+      history.syncViewToBrowserUrl(newView)
     }
   }
 }
@@ -197,6 +198,7 @@ const MapPage = ({ isDesktop }) => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const handleViewChangeRef = useRef(() => void 0)
+  const mapClickListenerRef = useRef(null)
 
   const [draggedPosition, setDraggedPosition] = useState(null)
   const [shareOpen, setShareOpen] = useState(false)
@@ -333,19 +335,44 @@ const MapPage = ({ isDesktop }) => {
     }
   }
 
-  const handleLocationClick = (location) => {
-    if (isDesktop && pathname.includes('/settings')) {
-      dispatch(setFromSettings(true))
-    }
-    history.push(`/locations/${location.id}`)
-  }
+  const handleLocationClick = useCallback(
+    (location) => {
+      if (isDesktop && pathname.includes('/settings')) {
+        dispatch(setFromSettings(true))
+      }
+      history.push(`/locations/${location.id}`)
+    },
+    [isDesktop, pathname, dispatch, history],
+  )
 
-  const handleNonspecificClick = ({ event }) => {
-    event.stopPropagation()
-    if (isViewingLocation) {
-      history.push('/map')
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps) {
+      return
     }
-  }
+
+    const google = getGoogleMaps()
+
+    if (mapClickListenerRef.current) {
+      google.event.removeListener(mapClickListenerRef.current)
+    }
+
+    mapClickListenerRef.current = google.event.addListener(
+      googleMap,
+      'click',
+      () => {
+        if (isViewingLocation) {
+          history.push('/map')
+        }
+      },
+    )
+
+    return () => {
+      if (mapClickListenerRef.current) {
+        google.event.removeListener(mapClickListenerRef.current)
+        mapClickListenerRef.current = null
+      }
+    }
+  }, [googleMap, getGoogleMaps, isViewingLocation, history])
 
   const zoomIn = () => {
     googleMap?.setZoom(currentZoom + 1)
@@ -407,7 +434,6 @@ const MapPage = ({ isDesktop }) => {
       {showStreetView && <CloseStreetView />}
       {initialView && (
         <GoogleMapWrapper
-          onClick={handleNonspecificClick}
           bootstrapURLKeys={{
             apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
             version: 'quarterly',
@@ -482,6 +508,14 @@ const MapPage = ({ isDesktop }) => {
               lng={geolocation.longitude}
             />
           )}
+          {locationId && selectedLocation && (
+            <SelectedLocation
+              lat={selectedLocation.lat}
+              lng={selectedLocation.lng}
+              selected={isViewingLocation}
+              editing={isEditingLocation}
+            />
+          )}
           {place &&
             place.location &&
             place.view &&
@@ -505,25 +539,13 @@ const MapPage = ({ isDesktop }) => {
               lng={cluster.lng}
             />
           ))}
-          {allLocations.map((location) => (
-            <Location
-              key={location.id}
-              onClick={
-                isEditingLocation || isAddingLocation
-                  ? null
-                  : (event) => {
-                      handleLocationClick(location)
-                      event.stopPropagation()
-                    }
-              }
-              lat={location.lat}
-              lng={location.lng}
-              selected={location.id === locationId}
-              editing={isEditingLocation && location.id === locationId}
-              showLabel={showLabels}
-              typeIds={location.type_ids}
-            />
-          ))}
+          <LocationMarkers
+            locations={allLocations}
+            googleMap={googleMap}
+            getGoogleMaps={getGoogleMaps}
+            onLocationClick={handleLocationClick}
+            showLabels={showLabels}
+          />
           {(isEditingLocation || isAddingLocation) && draggedPosition && (
             <DraggableMapPin
               lat={draggedPosition.lat}
