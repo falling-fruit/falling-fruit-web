@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { eqBy, prop, unionWith } from 'ramda'
 
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
@@ -22,7 +21,7 @@ export const fetchMapLocations = createAsyncThunk(
       return await getLocations(
         selectParams(
           { types, muni, bounds, zoom, center: undefined },
-          { limit: 250 },
+          { limit: 1000 },
         ),
       )
     } else {
@@ -125,19 +124,22 @@ export const mapSlice = createSlice({
         state.locations = action.payload
         state.isFilterUpdated = false
       } else {
-        // Drop locations out of bounds
         const locationsInBounds = state.locations.filter(
           ({ lat, lng }) =>
             lat <= north && lng <= east && lat >= south && lng >= west,
         )
-        // Combine with new locations in bounds
-        // If IDs are equal, prioritise the payload
-        // to e.g. correctly display a just-updated position
-        state.locations = unionWith(
-          eqBy(prop('id')),
-          action.payload,
-          locationsInBounds,
-        )
+        const locationMap = new Map()
+
+        locationsInBounds.forEach((loc) => {
+          locationMap.set(loc.id, loc)
+        })
+
+        // add/overwrite with payload locations (these take priority)
+        action.payload.forEach((loc) => {
+          locationMap.set(loc.id, loc)
+        })
+
+        state.locations = Array.from(locationMap.values())
       }
 
       state.clusters = []

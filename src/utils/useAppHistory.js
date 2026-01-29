@@ -33,9 +33,9 @@ export const useAppHistory = () => {
     history.replace(newTo)
   }
 
-  const changeView = (newView, state) => {
+  const syncViewToBrowserUrl = (newView) => {
     const newUrl = currentPathWithView(newView)
-    history.push(newUrl, state)
+    window.history.pushState(null, '', newUrl)
   }
 
   const replaceView = (newView, state) => {
@@ -65,7 +65,7 @@ export const useAppHistory = () => {
     ...history,
     push: pushWithMapState,
     replace: replaceWithMapState,
-    changeView,
+    syncViewToBrowserUrl,
     replaceView,
     removeParam,
     pushToSignInPage,
