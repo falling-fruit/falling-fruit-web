@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "自行车",
-      "data": "数据",
-      "labels": "标签",
+      "label_visibility": "标签可见性",
+      "labels": {
+        "always_on": "始终显示",
+        "off": "关闭",
+        "when_zoomed_in": "放大时显示"
+      },
       "language": "语言",
       "points_of_interest": "兴趣点",
       "regional": "区域",

@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "Fiets",
-      "data": "Gegevens",
-      "labels": "Labels",
+      "label_visibility": "Zichtbaarheid labels",
+      "labels": {
+        "always_on": "Altijd aan",
+        "off": "Uit",
+        "when_zoomed_in": "Bij inzoomen"
+      },
       "language": "Taal",
       "points_of_interest": "Interessante punten",
       "regional": "Regionaal",

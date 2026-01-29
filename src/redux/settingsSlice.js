@@ -3,10 +3,10 @@ import { createSlice } from '@reduxjs/toolkit'
 /**
  * Default settings.
  * @constant {Object}
- * @property {boolean} showLabels - Determines if labels appear under locations
+ * @property {string} labelVisibility - Determines when labels appear under locations ('always_on', 'when_zoomed_in', 'off')
  */
 const DEFAULT_SETTINGS = {
-  showLabels: false,
+  labelVisibility: 'when_zoomed_in',
   distanceUnit: 'metric',
   mapType: 'roadmap',
   overlay: null,

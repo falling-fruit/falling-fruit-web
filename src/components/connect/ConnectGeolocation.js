@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { MIN_GEOLOCATION_ZOOM } from '../../constants/map'
 import {
   geolocationCentering,
   geolocationError,
@@ -16,8 +17,6 @@ import { getBoundsForScreenSize } from '../../utils/viewportBounds'
 export const isGeolocationOpen = (geolocationState) =>
   geolocationState !== GeolocationState.INITIAL &&
   geolocationState !== GeolocationState.DENIED
-
-const MIN_TRACKING_ZOOM = 16
 
 const useGeolocation = () => {
   const { t } = useTranslation()
@@ -115,7 +114,7 @@ const calculateViewContainingLocationAndTrackingDot = (
   const paddedEast = east + lngSpan * padding
   const paddedWest = west - lngSpan * padding
 
-  let zoom = Math.max(currentZoom, MIN_TRACKING_ZOOM)
+  let zoom = Math.max(currentZoom, MIN_GEOLOCATION_ZOOM)
 
   for (let testZoom = zoom; testZoom > 0; testZoom--) {
     const bounds = getBoundsForScreenSize(center, testZoom, mapWidth, mapHeight)
@@ -147,7 +146,7 @@ const getContainingView = (
 
   let targetLat = geolocation.latitude
   let targetLng = geolocation.longitude
-  let zoom = Math.max(currentZoom, MIN_TRACKING_ZOOM)
+  let zoom = Math.max(currentZoom, MIN_GEOLOCATION_ZOOM)
 
   if (location && location.lat && location.lng) {
     const userCenter = { lat: geolocation.latitude, lng: geolocation.longitude }

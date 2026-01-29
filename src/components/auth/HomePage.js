@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { DEFAULT_GEOLOCATION_ZOOM } from '../../constants/map'
 import {
   GeolocationState,
   requestGeolocation,
@@ -79,7 +80,9 @@ const HomePage = () => {
     if (geolocationState === GeolocationState.DENIED) {
       history.push('/map')
     } else if (geolocation?.latitude && geolocation?.longitude) {
-      history.push(`/map/@${geolocation.latitude},${geolocation.longitude},16z`)
+      history.push(
+        `/map/@${geolocation.latitude},${geolocation.longitude},${DEFAULT_GEOLOCATION_ZOOM}z`,
+      )
     }
   }, [lastMapView, geolocation, geolocationState, history])
 

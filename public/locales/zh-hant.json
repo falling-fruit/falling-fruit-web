@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "自行車",
-      "data": "數據",
-      "labels": "標籤",
+      "label_visibility": "標籤可見性",
+      "labels": {
+        "always_on": "始終開啟",
+        "off": "關閉",
+        "when_zoomed_in": "放大時顯示"
+      },
       "language": "語言",
       "points_of_interest": "興趣點",
       "regional": "區域",

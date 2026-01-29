@@ -14,6 +14,9 @@ const VALID_MAP_TYPES = [
   'osm-standard',
   'osm-toner-lite',
 ]
+
+const VALID_LABEL_VISIBILITY = ['always_on', 'when_zoomed_in', 'off']
+
 const ConnectShare = () => {
   const location = useLocation()
   const history = useAppHistory()
@@ -24,7 +27,7 @@ const ConnectShare = () => {
     const searchParams = new URLSearchParams(location.search)
 
     const mapType = searchParams.get('map')
-    const showLabels = searchParams.get('labels')
+    const labelVisibility = searchParams.get('labels')
     const overlay = searchParams.get('overlay')
     const showBusinesses = searchParams.get('poi')
     const locale = searchParams.get('locale')
@@ -41,9 +44,15 @@ const ConnectShare = () => {
       history.removeParam('map')
     }
 
-    if (showLabels !== null) {
-      if (showLabels === 'true') {
-        settingsUpdates.showLabels = true
+    if (labelVisibility !== null) {
+      if (VALID_LABEL_VISIBILITY.includes(labelVisibility)) {
+        settingsUpdates.labelVisibility = labelVisibility
+      } else if (labelVisibility === 'true') {
+        // Legacy support: true maps to always_on
+        settingsUpdates.labelVisibility = 'always_on'
+      } else if (labelVisibility === 'false') {
+        // Legacy support: false maps to off
+        settingsUpdates.labelVisibility = 'off'
       }
       history.removeParam('labels')
     }
@@ -76,7 +85,9 @@ const ConnectShare = () => {
 
     if (legacyLabels !== null) {
       if (legacyLabels === 'true') {
-        settingsUpdates.showLabels = true
+        settingsUpdates.labelVisibility = 'always_on'
+      } else if (legacyLabels === 'false') {
+        settingsUpdates.labelVisibility = 'off'
       }
       history.removeParam('l')
     }

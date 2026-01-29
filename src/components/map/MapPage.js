@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
+import {
+  DEFAULT_GEOLOCATION_ZOOM,
+  VISIBLE_CLUSTER_ZOOM_LIMIT,
+} from '../../constants/map'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { disconnectMap, setGoogle } from '../../redux/mapSlice'
@@ -224,12 +227,9 @@ const MapPage = ({ isDesktop }) => {
     streetViewOpen: showStreetView,
     isBeingInitializedMobile,
   } = useSelector((state) => state.location)
-  const {
-    mapType,
-    overlay,
-    showLabels: settingsShowLabels,
-    showBusinesses,
-  } = useSelector((state) => state.settings)
+  const { mapType, overlay, labelVisibility, showBusinesses } = useSelector(
+    (state) => state.settings,
+  )
 
   // Convert overlay setting to mapLayers format expected by the map
   const getLayerType = (overlayType) => {
@@ -304,7 +304,15 @@ const MapPage = ({ isDesktop }) => {
   const isAddingLocation = locationId === 'new' || isBeingInitializedMobile
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
-  const showLabels = settingsShowLabels || isAddingLocation || isEditingLocation
+
+  // Determine if labels should be shown based on the three-state labelVisibility setting
+  const showLabels =
+    labelVisibility === 'always_on' ||
+    isAddingLocation ||
+    isEditingLocation ||
+    (labelVisibility === 'when_zoomed_in' &&
+      currentZoom >= DEFAULT_GEOLOCATION_ZOOM)
+
   const isEmbed = useIsEmbed()
 
   useEffect(() => {

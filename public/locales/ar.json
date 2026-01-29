@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "دراجة هوائية",
-      "data": "البيانات",
-      "labels": "التسميات",
+      "label_visibility": "رؤية التسميات",
+      "labels": {
+        "always_on": "دائماً مفعّل",
+        "off": "متوقف",
+        "when_zoomed_in": "عند التكبير"
+      },
       "language": "اللغة",
       "points_of_interest": "نقاط الاهتمام",
       "regional": "إقليمي",

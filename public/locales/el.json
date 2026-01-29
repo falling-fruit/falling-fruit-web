@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "Ποδήλατο",
-      "data": "Δεδομένα",
-      "labels": "Ετικέτες",
+      "label_visibility": "Ορατότητα ετικετών",
+      "labels": {
+        "always_on": "Πάντα ενεργό",
+        "off": "Ανενεργό",
+        "when_zoomed_in": "Όταν γίνεται μεγέθυνση"
+      },
       "language": "Γλώσσα",
       "points_of_interest": "Σημεία ενδιαφέροντος",
       "regional": "Τοπικά",

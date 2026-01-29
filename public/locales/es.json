@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "Bicicleta",
-      "data": "Datos",
-      "labels": "Etiquetas",
+      "label_visibility": "Visibilidad de etiquetas",
+      "labels": {
+        "always_on": "Siempre activado",
+        "off": "Desactivado",
+        "when_zoomed_in": "Al hacer zoom"
+      },
       "language": "Idioma",
       "points_of_interest": "Puntos de interés",
       "regional": "Regional",

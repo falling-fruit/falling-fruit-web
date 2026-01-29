@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "Fahrrad",
-      "data": "Daten",
-      "labels": "Beschriftungen",
+      "label_visibility": "Beschriftungssichtbarkeit",
+      "labels": {
+        "always_on": "Immer an",
+        "off": "Aus",
+        "when_zoomed_in": "Beim Heranzoomen"
+      },
       "language": "Sprache",
       "points_of_interest": "Sehenswürdigkeiten",
       "regional": "Regional",

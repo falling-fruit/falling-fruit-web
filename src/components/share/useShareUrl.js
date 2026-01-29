@@ -2,7 +2,7 @@ import { Capacitor } from '@capacitor/core'
 import { useSelector } from 'react-redux'
 
 const useShareUrl = () => {
-  const { mapType, showLabels, overlay, showBusinesses } = useSelector(
+  const { mapType, labelVisibility, overlay, showBusinesses } = useSelector(
     (state) => state.settings,
   )
   const { muni, types } = useSelector((state) => state.filter)
@@ -21,8 +21,8 @@ const useShareUrl = () => {
   if (mapType !== 'roadmap') {
     url.searchParams.set('map', mapType)
   }
-  if (showLabels) {
-    url.searchParams.set('labels', 'true')
+  if (labelVisibility !== 'when_zoomed_in') {
+    url.searchParams.set('labels', labelVisibility)
   }
   if (overlay) {
     url.searchParams.set('overlay', overlay)

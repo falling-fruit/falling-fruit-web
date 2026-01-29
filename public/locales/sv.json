@@ -301,8 +301,12 @@
     },
     "settings": {
       "bicycle": "Cykel",
-      "data": "Data",
-      "labels": "Etiketter",
+      "label_visibility": "Etikettssynlighet",
+      "labels": {
+        "always_on": "Alltid på",
+        "off": "Av",
+        "when_zoomed_in": "När inzoomad"
+      },
       "language": "Språk",
       "points_of_interest": "Sevärdheter",
       "regional": "Regional",
