@@ -3,13 +3,13 @@ import styled from 'styled-components/macro'
 
 const StyledRadioDot = styled.div`
   display: ${({ $checked }) => !$checked && 'none'};
-  height: 50%;
-  width: 50%;
+  height: 66%;
+  width: 66%;
   border-radius: 50%;
   background: ${({ theme }) => theme.orange};
 `
 
-const StyledRadioContainer = styled.label`
+const StyledRadioContainer = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -50,6 +50,8 @@ const Radio = ({ checked, name, onChange, id, value, ...props }) => {
         value={value}
         checked={checked}
         onChange={onChange}
+        aria-label={name}
+        aria-checked={checked}
       />
       <StyledRadioDot $checked={checked} />
     </StyledRadioContainer>
