@@ -1,4 +1,5 @@
 import { Capacitor } from '@capacitor/core'
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 const useShareUrl = () => {
@@ -7,6 +8,11 @@ const useShareUrl = () => {
   )
   const { muni, types } = useSelector((state) => state.filter)
   const typeEncoder = useSelector((state) => state.type.typeEncoder)
+
+  const encodedTypes = useMemo(
+    () => typeEncoder.encode(types),
+    [typeEncoder, types],
+  )
 
   const baseUrl = Capacitor.isNativePlatform()
     ? 'https://beta.fallingfruit.org'
@@ -33,7 +39,6 @@ const useShareUrl = () => {
   if (showBusinesses) {
     url.searchParams.set('poi', 'true')
   }
-  const encodedTypes = typeEncoder.encode(types)
   if (encodedTypes !== 'default') {
     url.searchParams.set('types', encodedTypes)
   }
