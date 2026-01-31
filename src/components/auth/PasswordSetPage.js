@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 
 import { resetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { Input } from '../form/FormikWrappers'
+import { PasswordInput } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
@@ -70,19 +70,14 @@ const PasswordSetPage = () => {
         {({ errors, dirty, isValid, isSubmitting, values }) => (
           <Form>
             <FormInputWrapper>
-              <Input
-                type="password"
-                name="password"
-                label={t('users.new_password')}
-              />
+              <PasswordInput name="password" label={t('users.new_password')} />
               {errors.password && (
                 <ErrorMessage>
                   {t(errors.password.key, errors.password.options)}
                 </ErrorMessage>
               )}
 
-              <Input
-                type="password"
+              <PasswordInput
                 name="password_confirm"
                 label={t('users.new_password_confirmation')}
                 invalidWhenUntouched={values.password !== ''}
