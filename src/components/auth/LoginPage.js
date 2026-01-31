@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
-import { Checkbox, Input } from '../form/FormikWrappers'
+import { Checkbox, Input, PasswordInput } from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
@@ -52,11 +52,7 @@ const LoginPage = () => {
                 label={t('glossary.email')}
                 autoComplete="off"
               />
-              <Input
-                name="password"
-                type="password"
-                label={t('glossary.password')}
-              />
+              <PasswordInput name="password" label={t('glossary.password')} />
             </FormInputWrapper>
 
             <FormCheckboxWrapper>

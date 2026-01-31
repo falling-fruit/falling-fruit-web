@@ -13,7 +13,7 @@ import {
   FormButtonWrapper,
   FormInputWrapper,
 } from '../auth/AuthWrappers'
-import { Input } from '../form/FormikWrappers'
+import { Input, PasswordInput } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -108,9 +108,8 @@ const ChangeEmailPage = () => {
                     required
                   />
                   {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-                  <Input
+                  <PasswordInput
                     name="password"
-                    type="password"
                     label={t('glossary.password')}
                     autoComplete="current-password"
                     required

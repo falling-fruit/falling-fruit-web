@@ -13,7 +13,7 @@ import {
   FormButtonWrapper,
   FormInputWrapper,
 } from '../auth/AuthWrappers'
-import { Input } from '../form/FormikWrappers'
+import { PasswordInput } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -79,16 +79,14 @@ const ChangePasswordPage = () => {
             {({ errors, dirty, isValid, isSubmitting }) => (
               <Form>
                 <FormInputWrapper>
-                  <Input
+                  <PasswordInput
                     invalidWhenUntouched
                     name="password"
-                    type="password"
                     label={t('users.current_password')}
                     required
                   />
-                  <Input
+                  <PasswordInput
                     name="new_password"
-                    type="password"
                     label={t('users.new_password')}
                     autoComplete="new-password"
                     required
@@ -104,9 +102,8 @@ const ChangePasswordPage = () => {
                     </ErrorMessage>
                   )}
 
-                  <Input
+                  <PasswordInput
                     name="new_password_confirm"
-                    type="password"
                     label={t('users.new_password_confirmation')}
                     autoComplete="new-password"
                     required
