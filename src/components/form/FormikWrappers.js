@@ -7,6 +7,7 @@ import { useIsMobile } from '../../utils/useBreakpoint'
 import { PhotoUploader } from '../photo/PhotoUploader'
 import Checkbox from '../ui/Checkbox'
 import Input from '../ui/Input'
+import PasswordInput from '../ui/PasswordInput'
 import RatingInput from '../ui/RatingInput'
 import { CreatableSelect, Select } from '../ui/Select'
 import { Slider } from '../ui/Slider'
@@ -44,6 +45,7 @@ const DateInput = ({ $invalid: _$invalid, name, ...props }) => {
 }
 
 const FormikInput = withLabeledField(Input)
+const FormikPasswordInput = withLabeledField(PasswordInput)
 const FormikTextarea = withLabeledField(Textarea)
 const FormikDateInput = withLabeledField(DateInput)
 const FormikSlider = withLabeledField(Slider, undefined, true)
@@ -94,6 +96,7 @@ export {
   FormikCreatableSelect as CreatableSelect,
   FormikDateInput as DateInput,
   FormikInput as Input,
+  FormikPasswordInput as PasswordInput,
   FormikPhotoUploader as PhotoUploader,
   FormikRatingInput as RatingInput,
   FormikRecaptcha as Recaptcha,

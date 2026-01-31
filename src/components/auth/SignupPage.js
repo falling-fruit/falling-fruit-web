@@ -6,7 +6,13 @@ import * as Yup from 'yup'
 
 import { addUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { Checkbox, Input, Recaptcha, Textarea } from '../form/FormikWrappers'
+import {
+  Checkbox,
+  Input,
+  PasswordInput,
+  Recaptcha,
+  Textarea,
+} from '../form/FormikWrappers'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
@@ -76,8 +82,7 @@ const SignupPage = () => {
                 autoComplete="off"
               />
 
-              <Input
-                type="password"
+              <PasswordInput
                 name="password"
                 label={t('glossary.password')}
                 required
@@ -88,8 +93,7 @@ const SignupPage = () => {
                 </ErrorMessage>
               )}
 
-              <Input
-                type="password"
+              <PasswordInput
                 name="password_confirm"
                 label={t('users.password_confirmation')}
                 required
