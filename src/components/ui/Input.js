@@ -60,8 +60,8 @@ const StyledInput = styled(Input)`
   border-radius: 0.375em;
   border: 1px solid ${validatedColor()};
   box-sizing: border-box;
-  padding: 0 20px;
-  padding-inline-start: ${(props) => (props.prepend ? '5px' : 'default')};
+  padding-inline-start: ${(props) => (props.prepend ? '5px' : '20px')};
+  padding-inline-end: ${(props) => (props.append ? '0' : '20px')};
 
   input {
     color: ${({ theme }) => theme.secondaryText};
