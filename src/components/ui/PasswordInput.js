@@ -13,8 +13,13 @@ const TogglePasswordButton = styled(ResetButton)`
   padding: 0 0.5em;
 
   svg {
-    height: 90%;
+    height: 70%;
     width: auto;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `
 
@@ -46,18 +51,21 @@ const EyeOffIcon = (
   </svg>
 )
 
-const PasswordInput = (props) => {
+const PasswordInput = ({ value, ...props }) => {
   const [visible, setVisible] = useState(false)
+  const isEmpty = !value || value.length === 0
 
   return (
     <Input
       {...props}
+      value={value}
       type={visible ? 'text' : 'password'}
       append={
         <TogglePasswordButton
           type="button"
           aria-label={visible ? 'Hide password' : 'Show password'}
           onClick={() => setVisible(!visible)}
+          disabled={isEmpty}
         >
           {visible ? EyeOffIcon : EyeIcon}
         </TogglePasswordButton>
