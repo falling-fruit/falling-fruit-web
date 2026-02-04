@@ -1,14 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-/**
- * Default settings.
- * @constant {Object}
- * @property {string} labelVisibility - Determines when labels appear under locations ('always_on', 'when_zoomed_in', 'off')
- */
+import { LabelVisibility, MapType } from '../constants/settings'
+
 const DEFAULT_SETTINGS = {
-  labelVisibility: 'when_zoomed_in',
+  labelVisibility: LabelVisibility.WhenZoomedIn,
   distanceUnit: 'metric',
-  mapType: 'roadmap',
+  mapType: MapType.Roadmap,
   overlay: null,
   showBusinesses: false,
 }

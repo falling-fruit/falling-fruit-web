@@ -2,20 +2,11 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
+import { LabelVisibility, MapType } from '../../constants/settings'
 import { setLanguageFromLocaleString } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { updateSelection } from '../../redux/updateSelection'
 import { useAppHistory } from '../../utils/useAppHistory'
-
-const VALID_MAP_TYPES = [
-  'roadmap',
-  'terrain',
-  'hybrid',
-  'osm-standard',
-  'osm-toner-lite',
-]
-
-const VALID_LABEL_VISIBILITY = ['always_on', 'when_zoomed_in', 'off']
 
 const ConnectShare = () => {
   const location = useLocation()
@@ -27,7 +18,7 @@ const ConnectShare = () => {
     const searchParams = new URLSearchParams(location.search)
 
     const mapType = searchParams.get('map')
-    const labelVisibility = searchParams.get('labels')
+    const labelVisibilityParam = searchParams.get('labels')
     const overlay = searchParams.get('overlay')
     const showBusinesses = searchParams.get('poi')
     const locale = searchParams.get('locale')
@@ -38,21 +29,16 @@ const ConnectShare = () => {
     const settingsUpdates = {}
 
     if (mapType !== null) {
-      if (VALID_MAP_TYPES.includes(mapType)) {
+      if (MapType.isValid(mapType)) {
         settingsUpdates.mapType = mapType
       }
       history.removeParam('map')
     }
 
-    if (labelVisibility !== null) {
-      if (VALID_LABEL_VISIBILITY.includes(labelVisibility)) {
+    if (labelVisibilityParam !== null) {
+      const labelVisibility = LabelVisibility.fromUrlParam(labelVisibilityParam)
+      if (labelVisibility !== null) {
         settingsUpdates.labelVisibility = labelVisibility
-      } else if (labelVisibility === 'true') {
-        // Legacy support: true maps to always_on
-        settingsUpdates.labelVisibility = 'always_on'
-      } else if (labelVisibility === 'false') {
-        // Legacy support: false maps to off
-        settingsUpdates.labelVisibility = 'off'
       }
       history.removeParam('labels')
     }
@@ -70,24 +56,17 @@ const ConnectShare = () => {
     }
 
     if (legacyMapType !== null) {
-      let mappedType = legacyMapType.toLowerCase()
-      if (mappedType === 'toner-lite') {
-        mappedType = 'osm-toner-lite'
-      } else if (mappedType === 'osm') {
-        mappedType = 'osm-standard'
-      }
-
-      if (VALID_MAP_TYPES.includes(mappedType)) {
+      const mappedType = MapType.fromLegacyParam(legacyMapType)
+      if (mappedType !== null) {
         settingsUpdates.mapType = mappedType
       }
       history.removeParam('t')
     }
 
     if (legacyLabels !== null) {
-      if (legacyLabels === 'true') {
-        settingsUpdates.labelVisibility = 'always_on'
-      } else if (legacyLabels === 'false') {
-        settingsUpdates.labelVisibility = 'off'
+      const labelVisibility = LabelVisibility.fromUrlParam(legacyLabels)
+      if (labelVisibility !== null) {
+        settingsUpdates.labelVisibility = labelVisibility
       }
       history.removeParam('l')
     }
