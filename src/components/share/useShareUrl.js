@@ -1,6 +1,8 @@
 import { Capacitor } from '@capacitor/core'
 import { useSelector } from 'react-redux'
 
+import { LabelVisibility, MapType } from '../../constants/settings'
+
 const useShareUrl = () => {
   const { mapType, labelVisibility, overlay, showBusinesses } = useSelector(
     (state) => state.settings,
@@ -18,11 +20,12 @@ const useShareUrl = () => {
     url.pathname = url.pathname.replace(/^\/filters/, '/map')
   }
   url.searchParams.delete('embed')
-  if (mapType !== 'roadmap') {
+  if (mapType !== MapType.Roadmap) {
     url.searchParams.set('map', mapType)
   }
-  if (labelVisibility !== 'when_zoomed_in') {
-    url.searchParams.set('labels', labelVisibility)
+  const labelParam = LabelVisibility.toUrlParam(labelVisibility)
+  if (labelParam !== null) {
+    url.searchParams.set('labels', labelParam)
   }
   if (overlay) {
     url.searchParams.set('overlay', overlay)

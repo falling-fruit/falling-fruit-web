@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { EMBED_HEADER_HEIGHT_PX } from '../../constants/mobileLayout'
+import { LabelVisibility } from '../../constants/settings'
 import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
-import Radio from '../ui/Radio'
 import RadioTiles from '../ui/RadioTiles'
 import { Select } from '../ui/Select'
 import GoogleBicycling from './mapTiles/google-bicycling.png'
@@ -128,10 +128,22 @@ const LabelsVisibilitySettings = () => {
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
 
-  const handleLabelVisibilityChange = (value) => {
+  const LABEL_VISIBILITY_OPTIONS = [
+    {
+      value: LabelVisibility.AlwaysOn,
+      label: t('pages.settings.labels.always_on'),
+    },
+    {
+      value: LabelVisibility.WhenZoomedIn,
+      label: t('pages.settings.labels.when_zoomed_in'),
+    },
+    { value: LabelVisibility.Off, label: t('pages.settings.labels.off') },
+  ]
+
+  const handleLabelVisibilityChange = (option) => {
     dispatch(
       updateSettings({
-        labelVisibility: value,
+        labelVisibility: option.value,
       }),
     )
   }
@@ -139,49 +151,19 @@ const LabelsVisibilitySettings = () => {
   return (
     <>
       <LabeledRow
-        left={
-          <Radio
-            id="labels-always-on"
-            name="labelVisibility"
-            value="always_on"
-            checked={settings.labelVisibility === 'always_on'}
-            onChange={() => handleLabelVisibilityChange('always_on')}
-          />
-        }
         label={
-          <label htmlFor="labels-always-on">
-            {t('pages.settings.labels.always_on')}
+          <label htmlFor="labelVisibility">
+            {t('pages.settings.label_visibility')}
           </label>
         }
-      />
-      <LabeledRow
-        left={
-          <Radio
-            id="labels-when-zoomed"
-            name="labelVisibility"
-            value="when_zoomed_in"
-            checked={settings.labelVisibility === 'when_zoomed_in'}
-            onChange={() => handleLabelVisibilityChange('when_zoomed_in')}
+        right={
+          <Select
+            options={LABEL_VISIBILITY_OPTIONS}
+            onChange={handleLabelVisibilityChange}
+            value={LABEL_VISIBILITY_OPTIONS.find(
+              (option) => option.value === settings.labelVisibility,
+            )}
           />
-        }
-        label={
-          <label htmlFor="labels-when-zoomed">
-            {t('pages.settings.labels.when_zoomed_in')}
-          </label>
-        }
-      />
-      <LabeledRow
-        left={
-          <Radio
-            id="labels-off"
-            name="labelVisibility"
-            value="off"
-            checked={settings.labelVisibility === 'off'}
-            onChange={() => handleLabelVisibilityChange('off')}
-          />
-        }
-        label={
-          <label htmlFor="labels-off">{t('pages.settings.labels.off')}</label>
         }
       />
     </>

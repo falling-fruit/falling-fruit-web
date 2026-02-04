@@ -9,6 +9,7 @@ import {
   DEFAULT_GEOLOCATION_ZOOM,
   VISIBLE_CLUSTER_ZOOM_LIMIT,
 } from '../../constants/map'
+import { LabelVisibility, MapType } from '../../constants/settings'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { disconnectMap, setGoogle } from '../../redux/mapSlice'
@@ -305,13 +306,15 @@ const MapPage = ({ isDesktop }) => {
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
 
-  // Determine if labels should be shown based on the three-state labelVisibility setting
+  // Determine if labels should be shown based on the labelVisibility setting
   const showLabels =
-    labelVisibility === 'always_on' ||
     isAddingLocation ||
     isEditingLocation ||
-    (labelVisibility === 'when_zoomed_in' &&
-      currentZoom >= DEFAULT_GEOLOCATION_ZOOM)
+    LabelVisibility.shouldShowLabels(
+      labelVisibility,
+      currentZoom,
+      DEFAULT_GEOLOCATION_ZOOM,
+    )
 
   const isEmbed = useIsEmbed()
 
@@ -382,9 +385,7 @@ const MapPage = ({ isDesktop }) => {
 
       <ZoomInButton
         onClick={zoomIn}
-        disabled={
-          !currentZoom || currentZoom >= (mapType === 'roadmap' ? 22 : 21)
-        }
+        disabled={!currentZoom || currentZoom >= MapType.getMaxZoom(mapType)}
         isDesktop={isDesktop}
       >
         +
