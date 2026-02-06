@@ -222,7 +222,7 @@ const MapPage = ({ isDesktop }) => {
     locationId,
     position,
     isBeingEdited: isEditingLocation,
-    location: selectedLocation,
+    location: selectedLocationRedux,
     isLoading: locationIsLoading,
     streetViewOpen: showStreetView,
     isBeingInitializedMobile,
@@ -230,6 +230,10 @@ const MapPage = ({ isDesktop }) => {
   const { mapType, overlay, labelVisibility, showBusinesses } = useSelector(
     (state) => state.settings,
   )
+
+  // Needs to be available straight after clicking on a location, but also when zoomed out
+  const selectedLocation =
+    locations.find((l) => l.id === locationId) || selectedLocationRedux
 
   // Convert overlay setting to mapLayers format expected by the map
   const layerTypes = overlay
