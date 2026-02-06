@@ -1,3 +1,5 @@
+import { DEFAULT_GEOLOCATION_ZOOM } from './map'
+
 export const LabelVisibility = {
   AlwaysOn: 'always_on',
   WhenZoomedIn: 'when_zoomed_in',
@@ -23,10 +25,10 @@ export const LabelVisibility = {
     return null
   },
 
-  shouldShowLabels(value, currentZoom, defaultGeolocationZoom) {
+  shouldShowLabels(value, currentZoom) {
     return (
       value === this.AlwaysOn ||
-      (value === this.WhenZoomedIn && currentZoom >= defaultGeolocationZoom)
+      (value === this.WhenZoomedIn && currentZoom >= DEFAULT_GEOLOCATION_ZOOM)
     )
   },
 }
