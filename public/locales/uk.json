@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Велосипед",
-      "label_visibility": "Видимість міток",
+      "label_visibility_header": "Підписи місць",
       "labels": {
         "always_on": "Завжди увімкнено",
         "off": "Вимкнено",

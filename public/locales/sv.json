@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Cykel",
-      "label_visibility": "Etikettssynlighet",
+      "label_visibility_header": "Platsetiketter",
       "labels": {
         "always_on": "Alltid på",
         "off": "Av",

@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "自行车",
-      "label_visibility": "标签可见性",
+      "label_visibility_header": "位置标签",
       "labels": {
         "always_on": "始终显示",
         "off": "关闭",

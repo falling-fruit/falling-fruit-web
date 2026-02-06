@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Rowerowa",
-      "label_visibility": "Widoczność etykiet",
+      "label_visibility_header": "Etykiety lokalizacji",
       "labels": {
         "always_on": "Zawsze włączone",
         "off": "Wyłączone",

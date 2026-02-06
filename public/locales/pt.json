@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Bicicleta",
-      "label_visibility": "Visibilidade dos rótulos",
+      "label_visibility_header": "Rótulos de localização",
       "labels": {
         "always_on": "Sempre ativo",
         "off": "Desativado",

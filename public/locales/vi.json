@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Xe đạp",
-      "label_visibility": "Hiển thị nhãn",
+      "label_visibility_header": "Nhãn vị trí",
       "labels": {
         "always_on": "Luôn bật",
         "off": "Tắt",

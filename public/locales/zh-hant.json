@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "自行車",
-      "label_visibility": "標籤可見性",
+      "label_visibility_header": "位置標籤",
       "labels": {
         "always_on": "始終開啟",
         "off": "關閉",

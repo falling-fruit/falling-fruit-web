@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Велосипед",
-      "label_visibility": "Видимость меток",
+      "label_visibility_header": "Метки местоположения",
       "labels": {
         "always_on": "Всегда включено",
         "off": "Выключено",

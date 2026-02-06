@@ -71,3 +71,22 @@ export const MapType = {
     return 21
   },
 }
+
+export const OverlayType = {
+  Bicycle: 'bicycle',
+  Transit: 'transit',
+
+  isValid(value) {
+    return value === this.Bicycle || value === this.Transit
+  },
+
+  toLayerType(value) {
+    if (value === this.Bicycle) {
+      return 'BicyclingLayer'
+    }
+    if (value === this.Transit) {
+      return 'TransitLayer'
+    }
+    return null
+  },
+}

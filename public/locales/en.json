@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Bicycle",
-      "label_visibility": "Label visibility",
+      "label_visibility_header": "Location labels",
       "labels": {
         "always_on": "Always on",
         "off": "Off",

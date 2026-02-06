@@ -149,24 +149,13 @@ const LabelsVisibilitySettings = () => {
   }
 
   return (
-    <>
-      <LabeledRow
-        label={
-          <label htmlFor="labelVisibility">
-            {t('pages.settings.label_visibility')}
-          </label>
-        }
-        right={
-          <Select
-            options={LABEL_VISIBILITY_OPTIONS}
-            onChange={handleLabelVisibilityChange}
-            value={LABEL_VISIBILITY_OPTIONS.find(
-              (option) => option.value === settings.labelVisibility,
-            )}
-          />
-        }
-      />
-    </>
+    <Select
+      options={LABEL_VISIBILITY_OPTIONS}
+      onChange={handleLabelVisibilityChange}
+      value={LABEL_VISIBILITY_OPTIONS.find(
+        (option) => option.value === settings.labelVisibility,
+      )}
+    />
   )
 }
 
@@ -352,7 +341,7 @@ const SettingsPage = ({ isDesktop, isEmbed }) => {
       {!isDesktop && !isEmbed && <SafeAreaTop />}
       <Page isEmbed={isEmbed} isDesktop={isDesktop}>
         {!isDesktop && <h2>{t('menu.settings')}</h2>}
-        <h3>{t('pages.settings.label_visibility')}</h3>
+        <h3>{t('pages.settings.label_visibility_header')}</h3>
         <LabelsVisibilitySettings />
         <h3>{t('glossary.map')}</h3>
         <MapSettings />

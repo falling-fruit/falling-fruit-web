@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Vélo",
-      "label_visibility": "Visibilité des étiquettes",
+      "label_visibility_header": "Étiquettes de localisation",
       "labels": {
         "always_on": "Toujours activé",
         "off": "Désactivé",

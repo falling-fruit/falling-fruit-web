@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Bicicletta",
-      "label_visibility": "Visibilità etichette",
+      "label_visibility_header": "Etichette di posizione",
       "labels": {
         "always_on": "Sempre attive",
         "off": "Disattivate",

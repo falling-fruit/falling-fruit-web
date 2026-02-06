@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Bisiklet",
-      "label_visibility": "Etiket görünürlüğü",
+      "label_visibility_header": "Konum etiketleri",
       "labels": {
         "always_on": "Her zaman açık",
         "off": "Kapalı",
