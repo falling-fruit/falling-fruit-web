@@ -62,6 +62,70 @@ const formatLabelHtml = (labelData, selectedTypes) =>
     })
     .join('<br>')
 
+const createLabel = (google, googleMap, location, labelHtml, isHovered) => {
+  const label = new google.OverlayView()
+  label.position = new google.LatLng(location.lat, location.lng)
+  label.labelHtml = labelHtml
+  label.locationId = location.id
+  label.overlayLayerPane = null
+  label.overlayMouseTargetPane = null
+  label.isHovered = isHovered
+
+  label.onAdd = function () {
+    const div = document.createElement('div')
+    div.style.position = 'absolute'
+    div.style.padding = '4px 8px'
+    div.style.fontSize = '12px'
+    div.style.pointerEvents = 'none'
+    div.style.marginTop = '5px'
+    div.style.textAlign = 'center'
+    div.style.color = theme.secondaryText
+    div.style.display = 'block'
+    div.innerHTML = this.labelHtml
+
+    this.div = div
+    const panes = this.getPanes()
+    this.overlayLayerPane = panes.overlayLayer
+    this.overlayMouseTargetPane = panes.overlayMouseTarget
+    const targetPane = this.isHovered
+      ? this.overlayMouseTargetPane
+      : this.overlayLayerPane
+    targetPane.appendChild(div)
+  }
+
+  label.draw = function () {
+    const projection = this.getProjection()
+    const position = projection.fromLatLngToDivPixel(this.position)
+
+    const div = this.div
+    div.style.left = `${position.x}px`
+    div.style.top = `${position.y}px`
+    div.style.transform = 'translate(-50%, 0)'
+  }
+
+  label.onRemove = function () {
+    if (this.div) {
+      this.div.parentNode.removeChild(this.div)
+      this.div = null
+    }
+  }
+
+  label.moveToPane = function (isHovered) {
+    if (!this.div || !this.overlayLayerPane || !this.overlayMouseTargetPane) {
+      return
+    }
+    const targetPane = isHovered
+      ? this.overlayMouseTargetPane
+      : this.overlayLayerPane
+    if (this.div.parentNode !== targetPane) {
+      targetPane.appendChild(this.div)
+    }
+  }
+
+  label.setMap(googleMap)
+  return label
+}
+
 const LocationMarkers = ({
   locations,
   googleMap,
@@ -105,8 +169,6 @@ const LocationMarkers = ({
           .map((id) => getDisplayLabel(typesAccess, id))
           .filter(Boolean)
 
-        const labelHtml = formatLabelHtml(labelData, selectedTypes)
-
         const marker = new google.Marker({
           position: { lat: location.lat, lng: location.lng },
           map: googleMap,
@@ -116,70 +178,6 @@ const LocationMarkers = ({
             anchor: new google.Point(8, 8),
           },
         })
-
-        let label = null
-        if (labelHtml) {
-          label = new google.OverlayView()
-          label.position = new google.LatLng(location.lat, location.lng)
-          label.labelHtml = labelHtml
-          label.locationId = location.id
-          label.overlayLayerPane = null
-          label.overlayMouseTargetPane = null
-
-          label.onAdd = function () {
-            const div = document.createElement('div')
-            div.style.position = 'absolute'
-            div.style.padding = '4px 8px'
-            div.style.fontSize = '12px'
-            div.style.pointerEvents = 'none'
-            div.style.marginTop = '5px'
-            div.style.textAlign = 'center'
-            div.style.color = theme.secondaryText
-            div.style.display = showLabels ? 'block' : 'none'
-            div.innerHTML = this.labelHtml
-
-            this.div = div
-            const panes = this.getPanes()
-            this.overlayLayerPane = panes.overlayLayer
-            this.overlayMouseTargetPane = panes.overlayMouseTarget
-            this.overlayLayerPane.appendChild(div)
-          }
-
-          label.draw = function () {
-            const projection = this.getProjection()
-            const position = projection.fromLatLngToDivPixel(this.position)
-
-            const div = this.div
-            div.style.left = `${position.x}px`
-            div.style.top = `${position.y}px`
-            div.style.transform = 'translate(-50%, 0)'
-          }
-
-          label.onRemove = function () {
-            if (this.div) {
-              this.div.parentNode.removeChild(this.div)
-              this.div = null
-            }
-          }
-
-          label.moveToPane = function (isHovered) {
-            if (
-              !this.div ||
-              !this.overlayLayerPane ||
-              !this.overlayMouseTargetPane
-            ) {
-              return
-            }
-            const targetPane = isHovered
-              ? this.overlayMouseTargetPane
-              : this.overlayLayerPane
-            if (this.div.parentNode !== targetPane) {
-              targetPane.appendChild(this.div)
-            }
-          }
-
-          label.setMap(googleMap)
-        }
 
         google.event.addListener(marker, 'mouseover', () => {
           setHoveredLocationId(location.id)
@@ -196,16 +194,40 @@ const LocationMarkers = ({
           })
         }
 
-        currentMarkers.set(location.id, { marker, label })
+        currentMarkers.set(location.id, {
+          marker,
+          label: null,
+          labelData,
+          location,
+        })
       }
     })
 
     currentMarkers.forEach((markerData, locationId) => {
-      if (markerData.label && markerData.label.div) {
-        const isHovered = hoveredLocationId === locationId
-        const shouldShowLabel = showLabels || isHovered
-        markerData.label.div.style.display = shouldShowLabel ? 'block' : 'none'
+      const isHovered = hoveredLocationId === locationId
+      const shouldShowLabel = showLabels || isHovered
 
+      if (
+        shouldShowLabel &&
+        !markerData.label &&
+        markerData.labelData.length > 0
+      ) {
+        const labelHtml = formatLabelHtml(markerData.labelData, selectedTypes)
+        markerData.label = createLabel(
+          google,
+          googleMap,
+          markerData.location,
+          labelHtml,
+          isHovered,
+        )
+      }
+
+      if (!shouldShowLabel && markerData.label) {
+        markerData.label.setMap(null)
+        markerData.label = null
+      }
+
+      if (markerData.label && markerData.label.div) {
         if (markerData.label.moveToPane) {
           markerData.label.moveToPane(isHovered)
         }
