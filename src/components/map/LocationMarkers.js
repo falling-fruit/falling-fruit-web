@@ -173,9 +173,9 @@ const LocationMarkers = ({
           position: { lat: location.lat, lng: location.lng },
           map: googleMap,
           icon: {
-            url: '/location_blue_dot_16x16.png',
-            size: new google.Size(16, 16),
+            url: '/location_blue_dot.svg',
             anchor: new google.Point(8, 8),
+            scaledSize: new google.Size(16, 16),
           },
         })
 
