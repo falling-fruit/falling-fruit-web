@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import {
-  DEFAULT_GEOLOCATION_ZOOM,
-  VISIBLE_CLUSTER_ZOOM_LIMIT,
-} from '../../constants/map'
+import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { LabelVisibility, MapType, OverlayType } from '../../constants/settings'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings, updatePosition } from '../../redux/locationSlice'
@@ -298,15 +295,10 @@ const MapPage = ({ isDesktop }) => {
   const isViewingLocation =
     locationId !== null && !isEditingLocation && !isAddingLocation
 
-  // Determine if labels should be shown based on the labelVisibility setting
   const showLabels =
     isAddingLocation ||
     isEditingLocation ||
-    LabelVisibility.shouldShowLabels(
-      labelVisibility,
-      currentZoom,
-      DEFAULT_GEOLOCATION_ZOOM,
-    )
+    LabelVisibility.shouldShowLabels(labelVisibility, currentZoom)
 
   const isEmbed = useIsEmbed()
 
