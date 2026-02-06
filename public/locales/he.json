@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "אופניים",
-      "label_visibility": "נראות תוויות",
+      "label_visibility_header": "תוויות מיקום",
       "labels": {
         "always_on": "תמיד פעיל",
         "off": "כבוי",

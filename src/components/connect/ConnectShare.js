@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-import { LabelVisibility, MapType } from '../../constants/settings'
+import { LabelVisibility, MapType, OverlayType } from '../../constants/settings'
 import { setLanguageFromLocaleString } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import { updateSelection } from '../../redux/updateSelection'
@@ -51,7 +51,9 @@ const ConnectShare = () => {
     }
 
     if (overlay !== null) {
-      settingsUpdates.overlay = overlay
+      if (OverlayType.isValid(overlay)) {
+        settingsUpdates.overlay = overlay
+      }
       history.removeParam('overlay')
     }
 

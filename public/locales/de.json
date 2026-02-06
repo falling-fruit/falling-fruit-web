@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Fahrrad",
-      "label_visibility": "Beschriftungssichtbarkeit",
+      "label_visibility_header": "Standortbeschriftungen",
       "labels": {
         "always_on": "Immer an",
         "off": "Aus",

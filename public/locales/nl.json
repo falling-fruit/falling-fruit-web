@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Fiets",
-      "label_visibility": "Zichtbaarheid labels",
+      "label_visibility_header": "Locatielabels",
       "labels": {
         "always_on": "Altijd aan",
         "off": "Uit",

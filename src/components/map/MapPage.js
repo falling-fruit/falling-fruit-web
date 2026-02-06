@@ -9,7 +9,7 @@ import {
   DEFAULT_GEOLOCATION_ZOOM,
   VISIBLE_CLUSTER_ZOOM_LIMIT,
 } from '../../constants/map'
-import { LabelVisibility, MapType } from '../../constants/settings'
+import { LabelVisibility, MapType, OverlayType } from '../../constants/settings'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings, updatePosition } from '../../redux/locationSlice'
 import { disconnectMap, setGoogle } from '../../redux/mapSlice'
@@ -233,17 +233,9 @@ const MapPage = ({ isDesktop }) => {
   )
 
   // Convert overlay setting to mapLayers format expected by the map
-  const getLayerType = (overlayType) => {
-    if (overlayType === 'bicycle') {
-      return 'BicyclingLayer'
-    }
-    if (overlayType === 'transit') {
-      return 'TransitLayer'
-    }
-    return overlayType
-  }
-
-  const layerTypes = overlay ? [getLayerType(overlay)] : []
+  const layerTypes = overlay
+    ? [OverlayType.toLayerType(overlay)].filter(Boolean)
+    : []
 
   const { typesAccess } = useSelector((state) => state.type)
 

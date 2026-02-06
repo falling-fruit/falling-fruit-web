@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "Ποδήλατο",
-      "label_visibility": "Ορατότητα ετικετών",
+      "label_visibility_header": "Ετικέτες τοποθεσίας",
       "labels": {
         "always_on": "Πάντα ενεργό",
         "off": "Ανενεργό",

@@ -301,7 +301,7 @@
     },
     "settings": {
       "bicycle": "دراجة هوائية",
-      "label_visibility": "رؤية التسميات",
+      "label_visibility_header": "تسميات المواقع",
       "labels": {
         "always_on": "دائماً مفعّل",
         "off": "متوقف",
