@@ -172,6 +172,7 @@ const LocationMarkers = ({
         const marker = new google.Marker({
           position: { lat: location.lat, lng: location.lng },
           map: googleMap,
+          optimized: locations.length > 100,
           icon: {
             url: '/location_blue_dot.svg',
             anchor: new google.Point(8, 8),
