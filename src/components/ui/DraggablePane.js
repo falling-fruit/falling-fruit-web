@@ -221,8 +221,7 @@ const DraggablePane = ({
         inferCurrentPosition() === POSITIONS.MIDDLE
       ) {
         const clickY = event.clientY
-        const isAnotherLocation =
-          event.target.tagName.toLowerCase() === 'button'
+        const isAnotherLocation = event.target.tagName.toLowerCase() === 'img'
         const isAboveTopPosition = clickY < topPositionHeight
 
         if (!isAnotherLocation && !isAboveTopPosition) {

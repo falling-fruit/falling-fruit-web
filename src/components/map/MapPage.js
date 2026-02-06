@@ -512,7 +512,7 @@ const MapPage = ({ isDesktop }) => {
               lng={geolocation.longitude}
             />
           )}
-          {locationId && selectedLocation && (
+          {selectedLocation && (
             <SelectedLocation
               lat={selectedLocation.lat}
               lng={selectedLocation.lng}
