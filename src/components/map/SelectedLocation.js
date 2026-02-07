@@ -1,7 +1,7 @@
 import { BackgroundMapPin, MapPin } from './Pins'
 
-const SelectedLocation = ({ selected, editing, ...props }) => (
-  <div dir="ltr" {...props}>
+const SelectedLocation = ({ selected, editing }) => (
+  <div dir="ltr">
     {selected && !editing && <MapPin />}
     {editing && <BackgroundMapPin />}
   </div>

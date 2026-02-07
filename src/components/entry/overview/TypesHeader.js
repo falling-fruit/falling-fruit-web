@@ -146,9 +146,7 @@ const TypesHeader = ({ types, openable }) => {
           // At least 1 URL
           return (
             <TypesAccordionItem key={type.id}>
-              <TypesAccordionButton openable={openable}>
-                {typeTitle}
-              </TypesAccordionButton>
+              <TypesAccordionButton>{typeTitle}</TypesAccordionButton>
               <TypesAccordionPanel>
                 <ResourceList urls={type.urls} />
               </TypesAccordionPanel>
