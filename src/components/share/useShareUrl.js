@@ -9,7 +9,7 @@ const useShareUrl = () => {
   const typeEncoder = useSelector((state) => state.type.typeEncoder)
 
   const baseUrl = Capacitor.isNativePlatform()
-    ? 'https://beta.fallingfruit.org'
+    ? 'https://fallingfruit.org'
     : window.location.origin
   const url = new URL(
     baseUrl + window.location.pathname + window.location.search,
