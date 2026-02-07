@@ -81,6 +81,7 @@ const createLabel = (google, googleMap, location, labelHtml, isHovered) => {
     div.style.textAlign = 'center'
     div.style.color = theme.secondaryText
     div.style.display = 'block'
+    div.style.textShadow = `-1px -1px 0 ${theme.background}, 1px -1px 0 ${theme.background}, -1px 1px 0 ${theme.background}, 1px 1px 0 ${theme.background}`
     div.innerHTML = this.labelHtml
 
     this.div = div
