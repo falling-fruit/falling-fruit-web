@@ -82,7 +82,7 @@ const getLabelStyleConfig = (mapType) => {
     },
     [MapType.OsmTonerLite]: {
       fontWeight: 'bold',
-      color: theme.secondaryText,
+      color: theme.headerText,
       textShadow: createTextShadow(theme.background, 2, 2),
       backgroundColor: 'unset',
     },
