@@ -63,36 +63,29 @@ const formatLabelHtml = (labelData, selectedTypes) =>
     })
     .join('<br>')
 
-const createTextShadow = (color, offsetX = 1, offsetY = 1) =>
-  `${-offsetX}px ${-offsetY}px 0 ${color}, ${offsetX}px ${-offsetY}px 0 ${color}, ${-offsetX}px ${offsetY}px 0 ${color}, ${offsetX}px ${offsetY}px 0 ${color}`
+const createTextShadow = (color, size = 1, times = 1) => {
+  const shadows = []
+  for (let i = 0; i < times; i++) {
+    shadows.push(`0px 0px ${size}px ${color}`)
+  }
+  return shadows.join(', ')
+}
 
 const getLabelStyleConfig = (mapType) => {
   const configs = {
     [MapType.Hybrid]: {
-      fontWeight: 'bold',
+      fontWeight: 500,
       color: theme.background,
-      textShadow: createTextShadow(theme.headerText, 1, 1),
-      backgroundColor: 'unset',
-    },
-    [MapType.OsmStandard]: {
-      fontWeight: 'normal',
-      color: theme.secondaryText,
-      textShadow: 'unset',
-      backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    },
-    [MapType.OsmTonerLite]: {
-      fontWeight: 'bold',
-      color: theme.headerText,
-      textShadow: createTextShadow(theme.background, 2, 2),
+      textShadow: createTextShadow(theme.headerText, 2, 5),
       backgroundColor: 'unset',
     },
   }
 
   return (
     configs[mapType] || {
-      fontWeight: 'normal',
+      fontWeight: 500,
       color: theme.secondaryText,
-      textShadow: createTextShadow(theme.background, 1, 1),
+      textShadow: createTextShadow(theme.background, 2, 10),
       backgroundColor: 'unset',
     }
   )
