@@ -58,7 +58,6 @@ const EyeOffIcon = (
 
 const PasswordInput = ({ value, ...props }) => {
   const [visible, setVisible] = useState(false)
-  const isEmpty = !value || value.length === 0
 
   return (
     <Input
@@ -70,7 +69,6 @@ const PasswordInput = ({ value, ...props }) => {
           type="button"
           aria-label={visible ? 'Hide password' : 'Show password'}
           onClick={() => setVisible(!visible)}
-          disabled={isEmpty}
         >
           {visible ? EyeOffIcon : EyeIcon}
         </TogglePasswordButton>
