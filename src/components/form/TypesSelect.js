@@ -11,7 +11,7 @@ import { tokenizeQuery } from '../../utils/tokenize'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { TypeName } from '../ui/TypeName'
 import { AddTypeModal } from './AddTypeModal'
-import { CreatableSelect as BaseCreatableSelect } from './FormikWrappers'
+import { CreatableMultiSelect as BaseCreatableSelect } from './FormikWrappers'
 
 const StyledCreatableSelect = styled(BaseCreatableSelect)`
   .select__option--is-selected {
@@ -67,7 +67,6 @@ const TypesSelect = () => {
         name="types"
         label={t('glossary.type.other')}
         options={typeOptions}
-        isMulti
         closeMenuOnSelect
         blurInputOnSelect={false}
         formatOptionLabel={(option) =>

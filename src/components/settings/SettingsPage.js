@@ -9,7 +9,7 @@ import { updateSettings } from '../../redux/settingsSlice'
 import Checkbox from '../ui/Checkbox'
 import LabeledRow from '../ui/LabeledRow'
 import RadioTiles from '../ui/RadioTiles'
-import { Select } from '../ui/Select'
+import Select from '../ui/SingleSelect'
 import GoogleBicycling from './mapTiles/google-bicycling.png'
 import GoogleRoadmap from './mapTiles/google-roadmap.png'
 import GoogleSatellite from './mapTiles/google-satellite.png'
@@ -152,9 +152,7 @@ const LabelsVisibilitySettings = () => {
     <Select
       options={LABEL_VISIBILITY_OPTIONS}
       onChange={handleLabelVisibilityChange}
-      value={LABEL_VISIBILITY_OPTIONS.find(
-        (option) => option.value === settings.labelVisibility,
-      )}
+      value={settings.labelVisibility}
     />
   )
 }
@@ -323,9 +321,7 @@ const RegionalSettings = () => {
           <Select
             options={DISTANCE_UNIT_OPTIONS}
             onChange={updateUnitsSetting}
-            value={DISTANCE_UNIT_OPTIONS.find(
-              (option) => option.value === settings.distanceUnit,
-            )}
+            value={settings.distanceUnit}
           />
         }
       />

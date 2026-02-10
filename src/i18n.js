@@ -7,7 +7,7 @@ import { initReactI18next, useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
-import { Select } from './components/ui/Select'
+import Select from './components/ui/SingleSelect'
 import persistentStore from './utils/persistentStore'
 
 const setDocumentDir = (language) => {
@@ -106,12 +106,15 @@ const LanguageSelect = () => {
   const { t, i18n } = useTranslation()
   const { googleMap } = useSelector((state) => state.map)
   const [hasToasted, setHasToasted] = useState(false)
+  const [pendingLanguage, setPendingLanguage] = useState(null)
   return (
     <Select
       options={LANGUAGE_OPTIONS}
-      value={LANGUAGE_OPTIONS.find((option) => option.value === i18n.language)}
+      value={pendingLanguage ?? i18n.language}
       onChange={(option) => {
+        setPendingLanguage(option.value)
         i18n.changeLanguage(option.value, () => {
+          setPendingLanguage(null)
           persistentStore.setLanguage(option.value)
           setDocumentDir(option.value)
           if (!hasToasted && googleMap) {

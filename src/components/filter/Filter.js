@@ -9,7 +9,7 @@ import { muniChanged, selectionChanged } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import Input from '../ui/Input'
-import { Select } from '../ui/Select'
+import Select from '../ui/SingleSelect'
 import FilterButtons from './FilterButtons'
 import LabeledCheckbox from './LabeledCheckbox'
 import RCTreeSelectSkeleton from './RCTreeSelectSkeleton'
@@ -91,9 +91,7 @@ const Filter = () => {
       <SearchAndSelectContainer>
         <MapAreaSelectWrapper>
           <Select
-            value={mapAreaOptions.find(
-              (option) => option.value === (showOnlyOnMap ? 'map' : 'all'),
-            )}
+            value={showOnlyOnMap ? 'map' : 'all'}
             onChange={(selectedOption) =>
               dispatch(setShowOnlyOnMap(selectedOption.value === 'map'))
             }

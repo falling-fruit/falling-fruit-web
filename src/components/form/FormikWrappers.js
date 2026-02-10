@@ -6,51 +6,39 @@ import Reaptcha from 'reaptcha'
 import { useIsMobile } from '../../utils/useBreakpoint'
 import { PhotoUploader } from '../photo/PhotoUploader'
 import Checkbox from '../ui/Checkbox'
+import DateInput from '../ui/DateInput'
 import Input from '../ui/Input'
+import { CreatableMultiSelect } from '../ui/MultiSelect'
 import PasswordInput from '../ui/PasswordInput'
 import RatingInput from '../ui/RatingInput'
-import { CreatableSelect, Select } from '../ui/Select'
-import { Slider } from '../ui/Slider'
+import Select from '../ui/SingleSelect'
 import Textarea from '../ui/Textarea'
 import { withLabeledField } from './withLabeledField'
 
-const DateInput = ({ $invalid: _$invalid, name, ...props }) => {
+const FormikDateInputInner = ({ $invalid: _$invalid, name, ...props }) => {
   const [field, _meta, helpers] = useField(name)
 
-  const clearDate = () => {
-    helpers.setValue('')
-  }
-
   return (
-    <div>
-      <input type="date" {...field} {...props} style={{ flexGrow: 1 }} />
-      {field.value && (
-        <button
-          type="button"
-          onClick={clearDate}
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: '0 8px',
-            cursor: 'pointer',
-            fontSize: '16px',
-          }}
-          aria-label="Clear date"
-        >
-          ✕
-        </button>
-      )}
-    </div>
+    <DateInput
+      value={field.value}
+      onChange={field.onChange}
+      name={name}
+      onClear={() => helpers.setValue('')}
+      {...props}
+    />
   )
 }
 
 const FormikInput = withLabeledField(Input)
 const FormikPasswordInput = withLabeledField(PasswordInput)
 const FormikTextarea = withLabeledField(Textarea)
-const FormikDateInput = withLabeledField(DateInput)
-const FormikSlider = withLabeledField(Slider, undefined, true)
+const FormikDateInput = withLabeledField(FormikDateInputInner)
 const FormikSelect = withLabeledField(Select, undefined, true)
-const FormikCreatableSelect = withLabeledField(CreatableSelect, undefined, true)
+const FormikCreatableMultiSelect = withLabeledField(
+  CreatableMultiSelect,
+  undefined,
+  true,
+)
 const FormikPhotoUploader = withLabeledField(PhotoUploader, undefined, true)
 
 const FormikRecaptcha = forwardRef(
@@ -93,7 +81,7 @@ const FormikCheckbox = ({ id, ...props }) => {
 
 export {
   FormikCheckbox as Checkbox,
-  FormikCreatableSelect as CreatableSelect,
+  FormikCreatableMultiSelect as CreatableMultiSelect,
   FormikDateInput as DateInput,
   FormikInput as Input,
   FormikPasswordInput as PasswordInput,
@@ -101,6 +89,5 @@ export {
   FormikRatingInput as RatingInput,
   FormikRecaptcha as Recaptcha,
   FormikSelect as Select,
-  FormikSlider as Slider,
   FormikTextarea as Textarea,
 }
