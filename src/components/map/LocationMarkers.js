@@ -93,10 +93,9 @@ const getLabelStyleConfig = (mapType) => {
 
 const setLabelTextStyle = (div, mapType) => {
   const config = getLabelStyleConfig(mapType)
-  div.style.fontWeight = config.fontWeight
-  div.style.color = config.color
-  div.style.textShadow = config.textShadow
-  div.style.backgroundColor = config.backgroundColor
+  Object.keys(config).forEach((key) => {
+    div.style[key] = config[key]
+  })
 }
 
 const createBaseLabelDiv = () => {
