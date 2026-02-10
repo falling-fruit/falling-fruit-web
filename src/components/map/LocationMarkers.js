@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
+import { MapType } from '../../constants/settings'
 import { theme } from '../ui/GlobalStyle'
 
 const getDisplayLabel = (typesAccess, id) => {
@@ -62,7 +63,61 @@ const formatLabelHtml = (labelData, selectedTypes) =>
     })
     .join('<br>')
 
-const createLabel = (google, googleMap, location, labelHtml, isHovered) => {
+const createTextShadow = (color, size = 1, times = 1) => {
+  const shadows = []
+  for (let i = 0; i < times; i++) {
+    shadows.push(`0px 0px ${size}px ${color}`)
+  }
+  return shadows.join(', ')
+}
+
+const getLabelStyleConfig = (mapType) => {
+  const configs = {
+    [MapType.Hybrid]: {
+      fontWeight: 500,
+      color: theme.background,
+      textShadow: createTextShadow(theme.headerText, 2, 5),
+      backgroundColor: 'unset',
+    },
+  }
+
+  return (
+    configs[mapType] || {
+      fontWeight: 500,
+      color: theme.secondaryText,
+      textShadow: createTextShadow(theme.background, 2, 10),
+      backgroundColor: 'unset',
+    }
+  )
+}
+
+const setLabelTextStyle = (div, mapType) => {
+  const config = getLabelStyleConfig(mapType)
+  Object.keys(config).forEach((key) => {
+    div.style[key] = config[key]
+  })
+}
+
+const createBaseLabelDiv = () => {
+  const div = document.createElement('div')
+  div.style.position = 'absolute'
+  div.style.padding = '4px 8px'
+  div.style.fontSize = '12px'
+  div.style.pointerEvents = 'none'
+  div.style.marginTop = '5px'
+  div.style.textAlign = 'center'
+  div.style.display = 'block'
+  return div
+}
+
+const createLabel = (
+  google,
+  googleMap,
+  location,
+  labelHtml,
+  isHovered,
+  mapType,
+) => {
   const label = new google.OverlayView()
   label.position = new google.LatLng(location.lat, location.lng)
   label.labelHtml = labelHtml
@@ -70,18 +125,11 @@ const createLabel = (google, googleMap, location, labelHtml, isHovered) => {
   label.overlayLayerPane = null
   label.overlayMouseTargetPane = null
   label.isHovered = isHovered
+  label.mapType = mapType
 
   label.onAdd = function () {
-    const div = document.createElement('div')
-    div.style.position = 'absolute'
-    div.style.padding = '4px 8px'
-    div.style.fontSize = '12px'
-    div.style.pointerEvents = 'none'
-    div.style.marginTop = '5px'
-    div.style.textAlign = 'center'
-    div.style.color = theme.secondaryText
-    div.style.display = 'block'
-    div.style.textShadow = `-1px -1px 0 ${theme.background}, 1px -1px 0 ${theme.background}, -1px 1px 0 ${theme.background}, 1px 1px 0 ${theme.background}`
+    const div = createBaseLabelDiv()
+    setLabelTextStyle(div, this.mapType)
     div.innerHTML = this.labelHtml
 
     this.div = div
@@ -123,6 +171,14 @@ const createLabel = (google, googleMap, location, labelHtml, isHovered) => {
     }
   }
 
+  label.updateStyle = function (mapType) {
+    if (!this.div) {
+      return
+    }
+    this.mapType = mapType
+    setLabelTextStyle(this.div, mapType)
+  }
+
   label.setMap(googleMap)
   return label
 }
@@ -138,6 +194,7 @@ const LocationMarkers = ({
   const [hoveredLocationId, setHoveredLocationId] = useState(null)
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const { types: selectedTypes } = useSelector((state) => state.filter)
+  const { mapType } = useSelector((state) => state.settings)
 
   useEffect(() => {
     if (!googleMap || !getGoogleMaps) {
@@ -221,6 +278,7 @@ const LocationMarkers = ({
           markerData.location,
           labelHtml,
           isHovered,
+          mapType,
         )
       }
 
@@ -232,6 +290,10 @@ const LocationMarkers = ({
       if (markerData.label && markerData.label.div) {
         if (markerData.label.moveToPane) {
           markerData.label.moveToPane(isHovered)
+        }
+
+        if (markerData.label.updateStyle) {
+          markerData.label.updateStyle(mapType)
         }
 
         const spans =
@@ -252,6 +314,7 @@ const LocationMarkers = ({
     selectedTypes,
     showLabels,
     hoveredLocationId,
+    mapType,
   ])
 
   useEffect(
