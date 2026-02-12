@@ -106,6 +106,10 @@ const NavLi = styled.li`
   &.signin,
   &.signup {
     min-width: auto;
+
+    a.active::before {
+      display: none;
+    }
   }
 
   a,
