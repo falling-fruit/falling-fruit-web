@@ -1,11 +1,14 @@
+import { X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components'
 
-import { validatedColor } from '../ui/GlobalStyle'
+import { theme, validatedColor } from '../ui/GlobalStyle'
+import ResetButton from './ResetButton'
 
 const StyledInput = styled.input`
   flex-grow: 1;
   border: 1px solid ${validatedColor()};
   border-radius: 0.375em;
+  margin-inline-end: 0.25em;
   &:focus {
     outline: 2px solid ${({ theme }) => theme.blue};
   }
@@ -19,14 +22,6 @@ const StyledInput = styled.input`
   }
 `
 
-const ClearButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0 8px;
-  cursor: pointer;
-  font-size: 16px;
-`
-
 const DateInput = ({ value, onChange, onClear, ...props }) => (
   <div>
     <StyledInput
@@ -35,11 +30,14 @@ const DateInput = ({ value, onChange, onClear, ...props }) => (
       onChange={onChange}
       {...props}
     />
-    {value && (
-      <ClearButton type="button" onClick={onClear} aria-label="Clear date">
-        ✕
-      </ClearButton>
-    )}
+    <ResetButton
+      type="button"
+      onClick={onClear}
+      aria-label="Clear date"
+      style={{ visibility: value ? 'visible' : 'hidden' }}
+    >
+      <X size="1.6em" color={theme.tertiaryText} />
+    </ResetButton>
   </div>
 )
 
