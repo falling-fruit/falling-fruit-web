@@ -26,6 +26,15 @@ const SelectParent = styled.div`
   .select__control {
     border: 1px solid ${validatedColor()};
     border-radius: 0.375em;
+    box-shadow: none;
+    cursor: pointer;
+
+    &:hover {
+      border-color: ${({ theme }) => theme.text};
+    }
+    &--is-focused {
+      outline: 2px solid ${({ theme }) => theme.blue} !important;
+    }
   }
 
   .select__input {
@@ -142,6 +151,7 @@ const SelectWrapper = ({ isVirtualized, menuMaxHeight, ...props }) => (
     // Reduces typing lag
     filterOption={createFilter({ ignoreAccents: false })}
     placeholder=""
+    isMulti
     {...props}
   />
 )
@@ -167,8 +177,12 @@ const CreatableSelectWrapper = ({
     filterOption={createFilter({ ignoreAccents: false })}
     placeholder=""
     onCreateOption={onCreateOption}
+    isMulti
     {...props}
   />
 )
 
-export { CreatableSelectWrapper as CreatableSelect, SelectWrapper as Select }
+export {
+  CreatableSelectWrapper as CreatableMultiSelect,
+  SelectWrapper as MultiSelect,
+}

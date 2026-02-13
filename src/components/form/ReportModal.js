@@ -67,7 +67,6 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
       <Select
         name="problem_code"
         label={t('problems.problem_type')}
-        isSearchable={false}
         options={PROBLEM_TYPE_OPTIONS}
         required
       />

@@ -81,8 +81,7 @@ const StyledInput = styled(Input)`
   }
 
   &:focus-within {
-    box-shadow: 0 0 0 1pt rgb(0, 95, 204);
-    box-shadow: 0 0 0 1pt -webkit-focus-ring-color;
+    outline: 2px solid ${({ theme }) => theme.blue};
   }
 
   svg {

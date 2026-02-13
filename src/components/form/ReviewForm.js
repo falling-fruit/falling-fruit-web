@@ -59,10 +59,9 @@ export const ReviewStep = ({ standalone }) => {
         label={t('locations.form.fruiting_status')}
         name="review.fruiting"
         options={fruitingOptions}
-        isSearchable={false}
         toFormikValue={(x) => x?.value}
         fromFormikValue={(x) => fruitingOptions.find((o) => o.value === x)}
-        isClearable
+        clearable
       />
 
       <FormRatingWrapper>

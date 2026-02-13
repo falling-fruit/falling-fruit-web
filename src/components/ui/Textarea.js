@@ -18,6 +18,14 @@ const Textarea = styled.textarea`
     color: ${({ theme }) => theme.tertiaryText};
     font-family: ${({ theme }) => theme.fonts};
   }
+
+  &:focus {
+    outline: 2px solid ${({ theme }) => theme.blue};
+  }
+
+  &:hover {
+    border-color: ${({ theme }) => theme.text};
+  }
 `
 
 export default Textarea

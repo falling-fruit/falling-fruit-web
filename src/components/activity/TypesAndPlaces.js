@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { tokenizeQuery } from '../../utils/tokenize'
-import { Select } from '../ui/Select'
+import { MultiSelect } from '../ui/MultiSelect'
 import {
   CountBadge,
   DetailsBlock,
@@ -92,7 +92,7 @@ const TypesAndPlaces = ({
     <Container>
       <div>
         <CategoryLabel>{t('glossary.type.other')}</CategoryLabel>
-        <Select
+        <MultiSelect
           options={typeCounts}
           value={
             selectedTypes
@@ -106,7 +106,6 @@ const TypesAndPlaces = ({
           }
           placeholder={t('glossary.type.one')}
           isClearable
-          isMulti
           isDisabled={isDisabled}
           formatOptionLabel={(option, { context }) => (
             <div
@@ -136,7 +135,7 @@ const TypesAndPlaces = ({
 
       <div>
         <CategoryLabel>{t('pages.changes.place.other')}</CategoryLabel>
-        <Select
+        <MultiSelect
           options={cityCounts}
           value={
             selectedPlaces
@@ -150,7 +149,6 @@ const TypesAndPlaces = ({
           }
           placeholder={t('pages.changes.place.one')}
           isClearable
-          isMulti
           isDisabled={isDisabled}
           formatOptionLabel={(option, { context }) => (
             <PlaceOption

@@ -185,31 +185,28 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
         name="access"
         label={t('locations.form.access')}
         options={propertyAccessOptions}
-        isSearchable={false}
         toFormikValue={(x) => x?.value}
         fromFormikValue={(x) =>
           propertyAccessOptions.find((o) => o.value === x)
         }
-        isClearable
+        clearable
       />
       <Label>{t('locations.form.season')}</Label>
       <InlineSelects>
         <Select
           name="season_start"
           options={monthOptions}
-          isSearchable={false}
           toFormikValue={(x) => x?.value}
           fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
-          isClearable
+          clearable
         />
         <span>{t('locations.form.season_start_to_stop_short')}</span>
         <Select
           name="season_stop"
           options={monthOptions}
-          isSearchable={false}
           toFormikValue={(x) => x?.value}
           fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
-          isClearable
+          clearable
         />
       </InlineSelects>
       <CheckboxLabel>
