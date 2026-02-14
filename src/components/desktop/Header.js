@@ -123,17 +123,17 @@ const NavLi = styled.li`
     &.active {
       background-color: ${({ theme }) => theme.navBackground};
       color: ${({ theme }) => theme.orange};
-
-      ::before {
-        content: '';
-        width: 100%;
-        position: absolute;
-        background-color: ${({ theme }) => theme.orange};
-        height: 3px;
-        inset-block-end: 0;
-        inset-inline-start: 0;
-      }
     }
+  }
+
+  &:not(.signin):not(.signup) a.active::before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    background-color: ${({ theme }) => theme.orange};
+    height: 3px;
+    inset-block-end: 0;
+    inset-inline-start: 0;
   }
 
   &.active {
