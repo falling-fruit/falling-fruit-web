@@ -106,10 +106,7 @@ const NavLi = styled.li`
   &.signin,
   &.signup {
     min-width: auto;
-
-    a.active::before {
-      display: none;
-    }
+    /* Removed the 'display: none' hack from here */
   }
 
   a,
@@ -127,16 +124,21 @@ const NavLi = styled.li`
     &.active {
       background-color: ${({ theme }) => theme.navBackground};
       color: ${({ theme }) => theme.orange};
+      /* Removed the universal ::before underline from here */
+    }
+  }
 
-      ::before {
-        content: '';
-        width: 100%;
-        position: absolute;
-        background-color: ${({ theme }) => theme.orange};
-        height: 3px;
-        inset-block-end: 0;
-        inset-inline-start: 0;
-      }
+  /* NEW: Only apply the underline if this is NOT a signin or signup button */
+  &:not(.signin):not(.signup) {
+    a.active::before,
+    .content button.active::before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      background-color: ${({ theme }) => theme.orange};
+      height: 3px;
+      inset-block-end: 0;
+      inset-inline-start: 0;
     }
   }
 
