@@ -40,6 +40,12 @@
 
   - `REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID`: Tracking ID for Google Analytics. Optional.
 
+- Additional (top secret) environment variables in `.env` are needed to sign and release the mobile apps.
+  - `ANDROID_KEYSTORE_PATH`
+  - `ANDROID_KEYSTORE_PASSWORD`
+  - `ANDROID_KEYSTORE_ALIAS`
+  - `ANDROID_KEYSTORE_ALIAS_PASSWORD`
+
 # Web app
 
 - Start the application.
@@ -116,18 +122,33 @@ Alternatively, open as a project in Android Studio:
 npx cap open android
 ```
 
-### Android emulators
+### Emulators
 
 Follow [these instructions](https://developer.android.com/studio/run/managing-avds) to create and manage Android Virtual Devices (AVD) in Android Studio, or use `avdmanager` from the command line.
 
-### Android devices
+### Devices
 
 First, enable [USB debugging](https://developer.android.com/studio/debug/dev-options) on your device.
 Then plug the device into your computer, start the `adb` (Android Debug Bridge) server, and check that the device is listed:
 
 ```sh
 sudo adb start-server
-npx cap run android --list
+npx cap run android
+```
+
+### Release
+
+Build a signed APK to `android/app/build/outputs/apk/release/app-release-signed.apk`.
+
+```sh
+npx cap build android
+```
+
+It can be installed to a device manually as follows (uninstalling any unsigned version may be needed):
+
+```sh
+sudo adb start-server
+adb install android/app/build/outputs/apk/release/app-release-signed.apk
 ```
 
 ## iOS
