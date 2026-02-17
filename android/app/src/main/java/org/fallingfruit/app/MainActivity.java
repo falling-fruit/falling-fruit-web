@@ -1,4 +1,4 @@
-package org.fallingfruit.app;
+package uh.fallingfruit.app;
 
 import com.getcapacitor.BridgeActivity;
 

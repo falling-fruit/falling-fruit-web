@@ -70,6 +70,14 @@ yarn
 
 We use [Capacitor](https://capacitorjs.com) to package the web app as Android and iOS apps. Make sure you can build the web app first with `yarn build` before proceeding. Although most of the mobile app can be tested by opening the web app in a narrow browser window, this is inadequate for testing device-specific functionality like permissions, curved layouts, and onboard functions (camera, compass, and GPS).
 
+## Bump app versions
+
+Use [`capacitor-set-version`](https://github.com/HausennTechnologies/capacitor-set-version) to set the `version` (e.g., 0.3.0) and integer `build` number.
+
+```sh
+npx capacitor-set-version --version version --build build
+```
+
 ## Android
 
 _[`android`](../android) directory · [setup](https://capacitorjs.com/docs/v7/getting-started/environment-setup#android-requirements) · [get started](https://capacitorjs.com/docs/v7/android)_
