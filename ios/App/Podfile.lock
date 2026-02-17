@@ -1,0 +1,59 @@
+PODS:
+  - Capacitor (7.4.4):
+    - CapacitorCordova
+  - CapacitorCamera (7.0.2):
+    - Capacitor
+  - CapacitorCordova (7.4.4)
+  - CapacitorDevice (7.0.2):
+    - Capacitor
+  - CapacitorFilesystem (7.1.5):
+    - Capacitor
+    - IONFilesystemLib (~> 1.0.1)
+  - CapacitorPreferences (7.0.2):
+    - Capacitor
+  - CapacitorSplashScreen (7.0.3):
+    - Capacitor
+  - IONFilesystemLib (1.0.1)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
+  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
+  - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
+  - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
+  - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
+
+SPEC REPOS:
+  trunk:
+    - IONFilesystemLib
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorCamera:
+    :path: "../../node_modules/@capacitor/camera"
+  CapacitorCordova:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorDevice:
+    :path: "../../node_modules/@capacitor/device"
+  CapacitorFilesystem:
+    :path: "../../node_modules/@capacitor/filesystem"
+  CapacitorPreferences:
+    :path: "../../node_modules/@capacitor/preferences"
+  CapacitorSplashScreen:
+    :path: "../../node_modules/@capacitor/splash-screen"
+
+SPEC CHECKSUMS:
+  Capacitor: 09d9ff8e9618e8c4b3cab2bbee34a17215dd2fef
+  CapacitorCamera: 6e18d54c8ab30d7dc7b8cd93d96f9b4f57e9202a
+  CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
+  CapacitorDevice: a50a45f0d075e55e2392c7a4be5404d4f69515de
+  CapacitorFilesystem: 2caf7ad6e26d68defef0631b0f09adb09a353f27
+  CapacitorPreferences: b583b5deb74e564c35968189d25d32c0fd41200d
+  CapacitorSplashScreen: d06ae8804808e9f649a08e7bb7f283c77b688084
+  IONFilesystemLib: 89258b8e3e85465da93127d25d7ce37f977e8a6f
+
+PODFILE CHECKSUM: 0dd2b3987789efd6504176ece9f17eb8f59f3194
+
+COCOAPODS: 1.16.2
