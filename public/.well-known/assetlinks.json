@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "uh.fallingfruit.app",
+      "sha256_cert_fingerprints": [
+        "AF:D9:28:C9:62:C3:30:14:E1:B4:9A:2E:65:11:41:6F:51:C3:35:4A:68:4B:10:43:8F:3D:31:43:D4:2B:DE:7D"
+      ]
+    }
+  }
+]
