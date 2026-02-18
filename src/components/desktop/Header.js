@@ -91,7 +91,6 @@ const StyledHeader = styled.header`
 `
 
 const MenuItem = styled(NavLink)`
-  text-decoration: none;
   color: ${({ theme }) => theme.secondaryText};
   text-align: center;
   display: flex;
@@ -146,11 +145,6 @@ const NavLi = styled.li`
     flex: 1;
     font-weight: inherit;
     font-size: inherit;
-
-    &.active {
-      background-color: ${({ theme }) => theme.navBackground};
-      color: ${({ theme }) => theme.orange};
-    }
   }
 
   &.active {
