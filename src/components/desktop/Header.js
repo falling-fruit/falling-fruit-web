@@ -90,6 +90,32 @@ const StyledHeader = styled.header`
   }
 `
 
+const MenuItem = styled(NavLink)`
+  color: ${({ theme }) => theme.secondaryText};
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  font-weight: bold;
+  font-size: 1rem;
+
+  &.active {
+    background-color: ${({ theme }) => theme.navBackground};
+    color: ${({ theme }) => theme.orange};
+
+    ::before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      background-color: ${({ theme }) => theme.orange};
+      height: 3px;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+    }
+  }
+`
+
 const NavLi = styled.li`
   display: flex;
   justify-content: stretch;
@@ -119,21 +145,6 @@ const NavLi = styled.li`
     flex: 1;
     font-weight: inherit;
     font-size: inherit;
-
-    &.active {
-      background-color: ${({ theme }) => theme.navBackground};
-      color: ${({ theme }) => theme.orange};
-
-      ::before {
-        content: '';
-        width: 100%;
-        position: absolute;
-        background-color: ${({ theme }) => theme.orange};
-        height: 3px;
-        inset-block-end: 0;
-        inset-inline-start: 0;
-      }
-    }
   }
 
   &.active {
@@ -285,15 +296,15 @@ const UserMenu = () => {
               }
               isMatch={isAccountPage}
             >
-              <NavLink to="/account/edit" activeClassName="active">
+              <MenuItem to="/account/edit" activeClassName="active">
                 {t('glossary.account')}
-              </NavLink>
-              <NavLink
+              </MenuItem>
+              <MenuItem
                 to={`/users/${user.id}/activity`}
                 activeClassName="active"
               >
                 {t('users.your_activity')}
-              </NavLink>
+              </MenuItem>
               <ResetButton onClick={handleLogout}>
                 {t('users.sign_out')}
               </ResetButton>
@@ -329,29 +340,29 @@ const MainMenu = ({ className }) => {
     <div className={className} style={{ marginInlineEnd: 'auto' }}>
       <NavList>
         <NavLi>
-          <NavLink to={pathWithCurrentView('/map')} activeClassName="active">
+          <MenuItem to={pathWithCurrentView('/map')} activeClassName="active">
             {t('glossary.map')}
-          </NavLink>
+          </MenuItem>
         </NavLi>
         <NavLi>
-          <NavLink to="/changes" activeClassName="active">
+          <MenuItem to="/changes" activeClassName="active">
             {t('glossary.activity')}
-          </NavLink>
+          </MenuItem>
         </NavLi>
         <NavLi>
           <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
-            <NavLink to="/about/project" activeClassName="active">
+            <MenuItem to="/about/project" activeClassName="active">
               {t('layouts.application.menu.the_project')}
-            </NavLink>
-            <NavLink to="/about/data" activeClassName="active">
+            </MenuItem>
+            <MenuItem to="/about/data" activeClassName="active">
               {t('layouts.application.menu.the_data')}
-            </NavLink>
-            <NavLink to="/about/sharing" activeClassName="active">
+            </MenuItem>
+            <MenuItem to="/about/sharing" activeClassName="active">
               {t('layouts.application.menu.sharing_the_harvest')}
-            </NavLink>
-            <NavLink to="/about/press" activeClassName="active">
+            </MenuItem>
+            <MenuItem to="/about/press" activeClassName="active">
               {t('layouts.application.menu.in_the_press')}
-            </NavLink>
+            </MenuItem>
           </StyledDropdown>
         </NavLi>
         <NavLi>
