@@ -57,13 +57,13 @@ const connectRoutes = [
    * ConnectMap
    * why:
    * - the map needs an initial view in Redux to do a first render
-   * - if something else changed the URL, the map needs to get back in sync
+   * - the URL needs to resync if the view is lost from the URLbut the initial view and map are still there (we don't dismount the map on mobile but merely hide it)
    *
    * action:
-   * - get the view from URL or default to our chosen location centred on U of Illinois
-   * - if this is the first render, dispatch a Redux update
+   * - if no initial view in Redux, get the view from URL or default to our chosen location centred on U of Illinois
+   * - if map is available but no URL view, call history.replaceView with what's on the map
    */
-  <Route key="connect-view" path={['/map', '/settings', '/locations/init']}>
+  <Route key="connect-map" path={['/map', '/settings', '/locations/init']}>
     <ConnectMap />
   </Route>,
   /*
@@ -114,8 +114,9 @@ const connectRoutes = [
    * - on mobile, we need to center the map on the edited location because the UX involves panning the map on central pin
    * - on mobile, we need to disable the drawer when arriving from list view
    * - on mobile, the drawer needs the user scrolling up and down
-   * - on desktop, clicking location from a settings page should make 'back' go to settings instead if map
+   * - on desktop, clicking location from a settings page should make 'back' go to settings instead of map
    * - location-specific context should reset when going from one location to another
+   * - two way binding between URL and initialView like in ConnectMap, but with center of location as fallback
    *
    * actions:
    * - fetch data from backend
@@ -127,6 +128,8 @@ const connectRoutes = [
    * - on mobile, disable default overscroll (e.g. a refresh on scroll down in Chrome)
    * - on desktop, reset the fromSettings flag when leaving location
    * - when location id changes, drop fromSettings and userActivity state
+   * - if there's no initial view in Redux but there's a location in Redux, set initial view
+   * - if there's no view in URL but the initial view / map is present, set the URL view
    */
   <Route
     key="connect-location"

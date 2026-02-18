@@ -87,6 +87,8 @@ const ConnectLocation = ({
 }) => {
   const dispatch = useDispatch()
   const { initialView, googleMap } = useSelector((state) => state.map)
+  const { lastMapView } = useSelector((state) => state.viewport)
+  const hasInitialView = !!initialView
   const {
     position,
     location,
@@ -134,14 +136,14 @@ const ConnectLocation = ({
       }
 
       if (action.payload && !initialView) {
-        const viewUrl = viewFromCurrentUrl()
-        const view = viewUrl || {
-          center: {
-            lat: action.payload.lat,
-            lng: action.payload.lng,
-          },
-          zoom: 16,
-        }
+        const view = viewFromCurrentUrl() ||
+          lastMapView || {
+            center: {
+              lat: action.payload.lat,
+              lng: action.payload.lng,
+            },
+            zoom: 16,
+          }
         dispatch(setInitialView(view))
         // navigate to the page with the new URL
         // to trigger component reload
@@ -156,13 +158,27 @@ const ConnectLocation = ({
   }, [dispatch, locationId]) //eslint-disable-line
 
   useEffect(() => {
-    if (location && !initialView) {
-      const view = viewFromCurrentUrl()
-      if (view) {
-        dispatch(setInitialView(view))
-      }
+    if (location && !hasInitialView) {
+      const view = viewFromCurrentUrl() ||
+        lastMapView || {
+          center: {
+            lat: location.lat,
+            lng: location.lng,
+          },
+          zoom: 16,
+        }
+      dispatch(setInitialView(view))
     }
-  }, [!!location, !!initialView]) //eslint-disable-line
+  }, [!!location, hasInitialView]) //eslint-disable-line
+
+  useEffect(() => {
+    if (hasInitialView && !viewFromCurrentUrl() && googleMap) {
+      history.replaceView({
+        center: googleMap.getCenter().toJSON(),
+        zoom: googleMap.getZoom(),
+      })
+    }
+  }, [dispatch, hasInitialView, !!viewFromCurrentUrl(), !!googleMap]) //eslint-disable-line
 
   useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
