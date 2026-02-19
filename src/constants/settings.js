@@ -40,14 +40,16 @@ export const MapType = {
   OsmStandard: 'osm-standard',
   OsmTonerLite: 'osm-toner-lite',
 
-  isValid: (value) =>
-    [
+  isValid(value) {
+    const validValues = [
       this.Roadmap,
       this.Terrain,
       this.Hybrid,
       this.OsmStandard,
       this.OsmTonerLite,
-    ].includes(value),
+    ]
+    return validValues.includes(value)
+  },
 
   fromLegacyParam(param) {
     if (!param) {
