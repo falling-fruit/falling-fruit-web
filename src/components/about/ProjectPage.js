@@ -230,61 +230,63 @@ const Project = () => {
       <h2>{t('pages.about.translators')}</h2>
 
       <p>
-        <b>
-          Amit Baum (<span dir="rtl">עמית באום</span>)
-        </b>{' '}
-        – עִברִית
-        <br />
-        <b dir="ltr">Ana Carolina de Lima</b> – Português
-        <br />
-        <b dir="ltr">Anya Sytenkova (Аня Сытенкова)</b> – Русский
-        <br />
-        <b dir="ltr">Daniela Marini</b> – Español
-        <br />
-        <b>David Katzin</b> – עִברִית
-        <br />
-        <b dir="ltr">Ethan Welty</b> – Français, Español
-        <br />
-        <b dir="ltr">Heimen Stoffels</b> – Nederlands
-        <br />
-        <b dir="ltr">Jadalnia Warszawa</b> – Polski
-        <br />
-        <b dir="ltr">Karolina Hansen</b> - Polski
-        <br />
-        <b dir="ltr">Kira Dell</b> – Português, Español
-        <br />
-        <b dir="ltr">Laura Clabé</b> – Français
-        <br />
-        <b dir="ltr">Liana Welty</b> – Español
-        <br />
-        <b dir="ltr">Lola Ortiz</b> – Español
-        <br />
-        <b dir="ltr">Maria Noel Silvera</b> – Español
-        <br />
-        <b dir="ltr">Maria Rosa Puig</b> – Español
-        <br />
-        <b dir="ltr">Michela Pasquali</b> – Italiano
-        <br />
-        <b dir="ltr">Monica Breval Listán</b> – Español
-        <br />
-        <b dir="ltr">Mylène Jacquemart</b> – Deutsch, Italiano
-        <br />
-        <b dir="ltr">Parmenter Welty</b> – Español
-        <br />
-        <b dir="ltr">Raven Lyn</b> – Português
-        <br />
-        <b dir="ltr">Salomé Martin</b> – Français
-        <br />
-        <b dir="ltr">Sifis Diamantidis</b> - Ελληνικά
-        <br />
-        <b dir="ltr">Thomaz Brandão Teixeira</b> – Português
-        <br />
-        <b dir="ltr">Tim Conze</b> – Svenska
-        <br />
-        <b>Timna Raz</b> – עִברִית
-        <br />
-        <b dir="ltr">Tống Thái Vương</b> - Tiếng Việt
-        <br />
+        <b dir="ltr">Amit Baum</b> (<b dir="rtl">עמית באום</b>) –{' '}
+        <span dir="rtl">עִברִית</span>
+        {' · '}
+        <b dir="ltr">Ana Carolina de Lima</b> – <span dir="ltr">Português</span>
+        {' · '}
+        <b dir="ltr">Anya Sytenkova</b> (<b dir="ltr">Аня Сытенкова</b>) –
+        <span dir="ltr">Русский</span>
+        {' · '}
+        <b dir="ltr">Daniela Marini</b> – <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">David Katzin</b> – <span dir="rtl">עִברִית</span>
+        {' · '}
+        <b dir="ltr">Ethan Welty</b> – <span dir="ltr">Français</span>,{' '}
+        <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Heimen Stoffels</b> – <span dir="ltr">Nederlands</span>
+        {' · '}
+        <b dir="ltr">Jadalnia Warszawa</b> – <span dir="ltr">Polski</span>
+        {' · '}
+        <b dir="ltr">Karolina Hansen</b> – <span dir="ltr">Polski</span>
+        {' · '}
+        <b dir="ltr">Kira Dell</b> – <span dir="ltr">Português</span>,{' '}
+        <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Laura Clabé</b> – <span dir="ltr">Français</span>
+        {' · '}
+        <b dir="ltr">Liana Welty</b> – <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Lola Ortiz</b> – <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Maria Noel Silvera</b> – <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Maria Rosa Puig</b> – <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Michela Pasquali</b> – <span dir="ltr">Italiano</span>
+        {' · '}
+        <b dir="ltr">Monica Breval Listán</b> – <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Mylène Jacquemart</b> – <span dir="ltr">Deutsch</span>,{' '}
+        <span dir="ltr">Italiano</span>
+        {' · '}
+        <b dir="ltr">Parmenter Welty</b> – <span dir="ltr">Español</span>
+        {' · '}
+        <b dir="ltr">Raven Lyn</b> – <span dir="ltr">Português</span>
+        {' · '}
+        <b dir="ltr">Salomé Martin</b> – <span dir="ltr">Français</span>
+        {' · '}
+        <b dir="ltr">Sifis Diamantidis</b> – <span dir="ltr">Ελληνικά</span>
+        {' · '}
+        <b dir="ltr">Thomaz Brandão Teixeira</b> –{' '}
+        <span dir="ltr">Português</span>
+        {' · '}
+        <b dir="ltr">Tim Conze</b> – <span dir="ltr">Svenska</span>
+        {' · '}
+        <b dir="ltr">Timna Raz</b> – <span dir="rtl">עִברִית</span>
+        {' · '}
+        <b dir="ltr">Tống Thái Vương</b> – <span dir="ltr">Tiếng Việt</span>
       </p>
 
       <h2>{t('pages.about.closing_remarks')}</h2>
