@@ -88,25 +88,75 @@ const Project = () => {
         </p>
       </div>
       <div className="content">
-        <img src="/craig_durkin.jpg" alt="" />
+        <img src="/ali_moxley.jpg" alt="" />
         <p>
-          <b>Craig Durkin</b>
+          <b>Ali Moxley</b>
           <br />
-          Atlanta, Georgia, USA
+          Bozeman, Montana, USA
           <br />
           <br />
-          {renderHTML(t('pages.about.craig_durkin_bio_html'))}
+          {renderHTML(t('pages.about.ali_moxley_bio_html'))}
         </p>
       </div>
       <div className="content">
-        <img src="/emily_sigman.jpg" alt="" />
+        <img src="/austin_arrington.jpg" alt="" />
         <p>
-          <b>Emily Sigman</b>
+          <b>Austin Arrington</b>
           <br />
-          New Haven, Connecticut, USA
+          <a href="mailto:austin@plantgroup.co">austin@plantgroup.co</a>
+          <br />
+          Philadelphia, Pennsylvania, USA
           <br />
           <br />
-          {renderHTML(t('pages.about.emily_sigman_bio_html'))}
+          {renderHTML(t('pages.about.austin_arrington_bio_html'))}
+        </p>
+      </div>
+      <div className="content">
+        <img src="/billy_daniels.jpg" alt="" />
+        <p>
+          <b>Billy Daniels</b>
+          <br />
+          <a href="mailto:billy@fallingfruit.org">billy@fallingfruit.org</a>
+          <br />
+          Madison, Wisconsin, USA
+          <br />
+          <br />
+          {renderHTML(t('pages.about.billy_daniels_bio_html'))}
+        </p>
+      </div>
+      <div className="content">
+        <img src="/jp_goguen.jpg" alt="" />
+        <p>
+          <b>JP Goguen</b>
+          <br />
+          Urbana, Illinois, USA
+          <br />
+          <br />
+          {renderHTML(t('pages.about.jp_goguen_bio_html'))}
+        </p>
+      </div>
+      <div className="content">
+        <img src="/meagan_shelley.jpg" alt="" />
+        <p>
+          <b>Meagan Shelley</b>
+          <br />
+          Amherst, Virginia, USA
+          <br />
+          <br />
+          {renderHTML(t('pages.about.meagan_shelley_bio_html'))}
+        </p>
+      </div>
+      <div className="content">
+        <img src="/ward_bullard.jpg" alt="" />
+        <p>
+          <b>Ward Bullard</b>
+          <br />
+          <a href="mailto:ward@fallingfruit.org">ward@fallingfruit.org</a>
+          <br />
+          Menlo Park, California, USA
+          <br />
+          <br />
+          {renderHTML(t('pages.about.ward_bullard_bio_html'))}
         </p>
       </div>
       <h2>{t('pages.about.advisors')}</h2>
