@@ -75,6 +75,7 @@
       "reload": "Tải lại",
       "report": "Báo vi phạm",
       "reset": "Đặt lại",
+      "restart": "Khởi động lại",
       "review": "Đánh giá",
       "submit": "Gửi",
       "submitting": "Đang gửi"
@@ -376,9 +377,9 @@
       "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Những người có tên bị gạch bỏ được cho là không hoạt động. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Nếu vấn đề vẫn tiếp diễn, vui lòng cho chúng tôi biết tại <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "Lỗi sau đã xảy ra: {{message}}",
-      "header_message": "Đã xảy ra lỗi",
-      "please_try_again_or_email_html": "Vui lòng thử lại. Nếu vấn đề vẫn tiếp diễn, hãy cho chúng tôi biết tại <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Đã xảy ra lỗi"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit là một nền tảng do cộng đồng điều hành để chia sẻ vị trí của các cây ăn được và các nguồn thực phẩm miễn phí khác.",

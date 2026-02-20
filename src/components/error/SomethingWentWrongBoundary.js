@@ -25,7 +25,12 @@ class SomethingWentWrongBoundary extends Component {
     const { children } = this.props
 
     if (hasError) {
-      return <SomethingWentWrongContent errorMessage={errorMessage} />
+      return (
+        <SomethingWentWrongContent
+          errorMessage={errorMessage}
+          fromPage={window.location.href}
+        />
+      )
     }
 
     return children

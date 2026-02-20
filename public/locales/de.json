@@ -75,6 +75,7 @@
       "reload": "Neu laden",
       "report": "Melden",
       "reset": "Zurücksetzen",
+      "restart": "Neu starten",
       "review": "Bewerten",
       "submit": "Absenden",
       "submitting": "Wird gesendet"
@@ -376,9 +377,9 @@
       "intro_html": "Im Folgenden sind lokale Organisationen aufgeführt, die Lebensmittel anpflanzen (z.B. in Gemeinschaftsgärten), ernten (z.B. 'urban gardening'), oder auf andere Art und Weise verteilen und teilen. Organisationen werden nach Land, Bundesland/Kanton und Stadt aufgeführt. Organisationen mit durchgestrichenem Namen sind zur Zeit vermutlich inaktiv. Wenn du Organisationen kennst, die auf dieser Liste auftauchen müssten, dann <a href=\"mailto:info@fallingfruit.org\">sag uns Bescheid</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Wenn das Problem weiterhin besteht, informieren Sie uns bitte unter <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "Folgender Fehler ist aufgetreten: {{message}}",
-      "header_message": "Etwas ist schiefgelaufen",
-      "please_try_again_or_email_html": "Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, informieren Sie uns unter <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Etwas ist schiefgelaufen"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit ist eine gemeinschaftlich betriebene Plattform zum Teilen von Standorten essbarer Pflanzen und anderer Quellen kostenloser Nahrung.",

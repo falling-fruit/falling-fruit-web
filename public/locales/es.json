@@ -75,6 +75,7 @@
       "reload": "Recargar",
       "report": "Informar",
       "reset": "Restablecer",
+      "restart": "Reiniciar",
       "review": "Reseñar",
       "submit": "Enviar",
       "submitting": "Enviando"
@@ -376,9 +377,9 @@
       "intro_html": "A continuación se enumeran las organizaciones que cultivan alimentos en los espacios públicos (bosques de alimentos, huertas públicas), recogen alimentos (forrajeo urbano, espigueo de campo), o distribuyen alimentos (intercambios, donaciones). Las organizaciones están listadas por país, estado (si procede), y ciudad. Las organizaciones con nombres tachados se consideran inactivas. Si conoces otras que deberían estar en esta lista, ¡<a href=\"mailto:info@fallingfruit.org\">contáctanos</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Si el problema persiste, háganoslo saber en <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "Ha ocurrido el siguiente error: {{message}}",
-      "header_message": "Algo salió mal",
-      "please_try_again_or_email_html": "Por favor, inténtalo de nuevo. Si el problema persiste, háznoslo saber en <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Algo salió mal"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit es una plataforma impulsada por la comunidad para compartir ubicaciones de plantas comestibles y otras fuentes de comida gratuita.",

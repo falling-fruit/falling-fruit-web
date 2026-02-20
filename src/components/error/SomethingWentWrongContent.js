@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import { ErrorPage } from '../ui/PageTemplate'
-import ReloadButton from './ReloadButton'
+import RestartAndReloadButtons from './RestartAndReloadButtons'
 
 const SomethingWentWrongContent = ({ errorMessage, fromPage = '/' }) => {
   const { t } = useTranslation()
@@ -23,10 +23,10 @@ const SomethingWentWrongContent = ({ errorMessage, fromPage = '/' }) => {
         )}
         <p>
           {renderHTML(
-            t('pages.something_went_wrong.please_try_again_or_email_html'),
+            t('pages.something_went_wrong.email_us_if_this_persists_html'),
           )}
         </p>
-        <ReloadButton fromPage={fromPage} />
+        <RestartAndReloadButtons fromPage={fromPage} />
       </div>
     </ErrorPage>
   )

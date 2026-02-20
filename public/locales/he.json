@@ -75,6 +75,7 @@
       "reload": "טען מחדש",
       "report": "דיווח תקלה",
       "reset": "אפס",
+      "restart": "הפעל מחדש",
       "review": "ביקורת",
       "submit": "שלח",
       "submitting": "שולח"
@@ -376,9 +377,9 @@
       "intro_html": "המפורטים להלן הם ארגונים מקומיים הגדלים מזון (יערות מזון ומטעי ציבור), לאסוף מזון (ליקוט עירוני ולקט החווה), או בדרך אחרת להפיץ מזון (עסקות החלף ותרומות). ארגונים רשומים לפי מדינה, מדינה, ועיר. אלה עם שמות דהויים ועזיבה הם האמינו להיות לא פעילים. אם ידוע לכם על אחרים שצריכה להיות ברשימה זו, <a href=\"mailto:info@fallingfruit.org\">צור איתנו קשר</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "אם הבעיה נמשכת, אנא עדכנו אותנו בכתובת <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "השגיאה הבאה התרחשה: {{message}}",
-      "header_message": "משהו השתבש",
-      "please_try_again_or_email_html": "אנא נסה שוב. אם הבעיה נמשכת, הודע לנו בכתובת <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "משהו השתבש"
     },
     "welcome": {
       "community_driven_platform": "פולינג פרוט היא פלטפורמה קהילתית לשיתוף מיקומי צמחים אכילים ומקורות אחרים של מזון חינם.",

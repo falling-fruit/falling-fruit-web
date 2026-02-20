@@ -75,6 +75,7 @@
       "reload": "Recarregar",
       "report": "Relatar",
       "reset": "Redefinir",
+      "restart": "Reiniciar",
       "review": "Avaliar",
       "submit": "Enviar",
       "submitting": "Enviando"
@@ -376,9 +377,9 @@
       "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Aqueles com nomes riscados são inativos. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Se o problema persistir, informe-nos em <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "Ocorreu o seguinte erro: {{message}}",
-      "header_message": "Algo deu errado",
-      "please_try_again_or_email_html": "Por favor, tente novamente. Se o problema persistir, avise-nos em <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Algo deu errado"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit é uma plataforma colaborativa para compartilhar localizações de plantas comestíveis e outras fontes de alimentos gratuitos.",
