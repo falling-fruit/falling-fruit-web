@@ -8,7 +8,7 @@ const Buttons = styled.div`
   text-align: center;
 
   button {
-    width: 110px;
+    min-width: 110px;
 
     &:not(:last-child) {
       margin-inline-end: 12px;
