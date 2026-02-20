@@ -19,7 +19,7 @@ import {
 } from './AuthWrappers'
 import { withAuthRedirect } from './withAuthRedirect'
 
-const LoginPage = () => {
+const SignInPage = () => {
   const isDesktop = useIsDesktop()
   const { isLoading } = useSelector((state) => state.auth)
   const { state } = useLocation()
@@ -86,4 +86,4 @@ const LoginPage = () => {
   )
 }
 
-export default withAuthRedirect(LoginPage, false)
+export default withAuthRedirect(SignInPage, false)

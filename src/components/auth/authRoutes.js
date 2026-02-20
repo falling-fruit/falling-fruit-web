@@ -4,9 +4,9 @@ import CheckEmailConfirmationPage from './CheckEmailConfirmationPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
 import HomePage from './HomePage'
-import LoginPage from './LoginPage'
 import PasswordResetPage from './PasswordResetPage'
 import PasswordSetPage from './PasswordSetPage'
+import SignInPage from './SignInPage'
 import SignupPage from './SignupPage'
 
 const pages = [
@@ -16,7 +16,7 @@ const pages = [
   },
   {
     path: '/auth/sign_in',
-    component: LoginPage,
+    component: SignInPage,
   },
   {
     path: '/auth/sign_up',
