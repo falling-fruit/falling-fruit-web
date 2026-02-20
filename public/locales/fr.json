@@ -75,6 +75,7 @@
       "reload": "Recharger",
       "report": "Signaler",
       "reset": "Réinitialiser",
+      "restart": "Redémarrer",
       "review": "Évaluer",
       "submit": "Soumettre",
       "submitting": "Soumission en cours"
@@ -376,9 +377,9 @@
       "intro_html": "Vous trouverez ci-dessous une liste des associations qui font pousser de la nourriture dans l'espace public (jardins-forêts, vergers publics), cueillent de la nourriture (glanage urbain, glanage en ferme) ou distribuent de la nourriture (troc, dons). Les associations sont classées par pays, état (si applicable) et ville. Celles dont les noms sont barrés sont supposées inactives. Si vous connaissez d'autres associations qui devraient être sur cette liste, <a href=\"mailto:info@fallingfruit.org\">contactez-nous</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Si le problème persiste, faites-le nous savoir à <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "L'erreur suivante s'est produite : {{message}}",
-      "header_message": "Une erreur s'est produite",
-      "please_try_again_or_email_html": "Veuillez réessayer. Si le problème persiste, contactez-nous à <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Une erreur s'est produite"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les emplacements de plantes comestibles et d'autres sources de nourriture gratuite.",

@@ -13,6 +13,7 @@ import { store } from '../../redux/store'
 import { ConnectedBreakpoint, useIsDesktop } from '../../utils/useBreakpoint'
 import { useGoogleAnalytics } from '../../utils/useGoogleAnalytics'
 import DesktopLayout from '../desktop/DesktopLayout'
+import SomethingWentWrongBoundary from '../error/SomethingWentWrongBoundary'
 import MobileLayout from '../mobile/MobileLayout'
 import GlobalStyle, { theme } from '../ui/GlobalStyle'
 import Toast from '../ui/Toast'
@@ -43,12 +44,14 @@ const AppContent = () => {
         rtl={isRTL}
       />
       <ThemeProvider theme={theme}>
-        <Switch>
-          {redirectRoutes}
-          <Route>
-            <Layout />
-          </Route>
-        </Switch>
+        <SomethingWentWrongBoundary>
+          <Switch>
+            {redirectRoutes}
+            <Route>
+              <Layout />
+            </Route>
+          </Switch>
+        </SomethingWentWrongBoundary>
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>

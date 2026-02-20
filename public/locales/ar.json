@@ -75,6 +75,7 @@
       "reload": "إعادة تحميل",
       "report": "أبلغ",
       "reset": "إعادة تعيين",
+      "restart": "إعادة التشغيل",
       "review": "راجع",
       "submit": "إرسال",
       "submitting": "جاري الإرسال"
@@ -376,9 +377,9 @@
       "intro_html": "المدرجة أدناه هي المنظمات التي تزرع الغذاء في الأماكن العامة (غابات الطعام ، البساتين العامة) ، تختار الطعام (البحث عن الطعام في المناطق الحضرية ، جمع المزارع) ، أو توزيع الطعام (التبادلات ، التبرعات). يتم سرد المنظمات حسب البلد والولاية (إن أمكن) والمدينة. يُعتقد أن الأشخاص ذوي الأسماء المشطوبة غير نشطين. إذا كنت تعرف الآخرين الموجودين في هذه القائمة ، <a href=\"mailto:info@fallingfruit.org\">فاتصل بنا</a> !"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "إذا استمرت المشكلة، يرجى إعلامنا على <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "حدث الخطأ التالي: {{message}}",
-      "header_message": "حدث خطأ ما",
-      "please_try_again_or_email_html": "يرجى المحاولة مرة أخرى. إذا استمرت المشكلة، يرجى إعلامنا على <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "حدث خطأ ما"
     },
     "welcome": {
       "community_driven_platform": "فولينغ فروت هي منصة يديرها المجتمع لمشاركة مواقع النباتات الصالحة للأكل وغيرها من مصادر الطعام المجاني.",

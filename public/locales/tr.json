@@ -75,6 +75,7 @@
       "reload": "Yeniden Yükle",
       "report": "Bildir",
       "reset": "Sıfırla",
+      "restart": "Yeniden Başlat",
       "review": "İncele",
       "submit": "Gönder",
       "submitting": "Gönderiliyor"
@@ -376,9 +377,9 @@
       "intro_html": "Aşağıda kamusal alanlarda gıda yetiştiren (gıda ormanları, halka açık meyve bahçeleri), gıda toplayan (kent içi yiyecek toplama, tarla artığı toplama) veya gıda dağıtan (takaslar, bağışlar) kuruluşlar listelenmiştir. Kuruluşlar ülke, eyalet (varsa) ve şehre göre listelenmiştir. Üstü çizili olanların artık aktif olmadığı düşünülmektedir. Listede olması gereken başkalarını biliyorsanız, <a href=\"mailto:info@fallingfruit.org\">bizimle iletişime geçin</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Sorun devam ederse, lütfen <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> adresinden bize bildirin.",
       "error_occurred": "Şu hata oluştu: {{message}}",
-      "header_message": "Bir şeyler yanlış gitti",
-      "please_try_again_or_email_html": "Lütfen tekrar deneyin. Sorun devam ederse, bize <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> adresinden bildirin."
+      "header_message": "Bir şeyler yanlış gitti"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit, yenilebilir bitkiler ve diğer ücretsiz gıda kaynaklarının konumlarını paylaşmak için topluluk tarafından yönlendirilen bir platformdur.",
