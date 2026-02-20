@@ -69,7 +69,7 @@ const connectRoutes = [
   /*
    * ConnectPath
    * why:
-   * - if something else changed the URL, e.g. the back button, the map needs to get back in sync
+   * - if something else changed the URL, e.g. the back button, a share link on mobile being opened, or history.pushAndChangeView being called, the map needs to get back in sync
    *
    * action:
    * - if the map is present but not in sync with the URL, navigate to the URL's view
