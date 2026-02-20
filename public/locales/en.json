@@ -75,6 +75,7 @@
       "reload": "Reload",
       "report": "Report",
       "reset": "Reset",
+      "restart": "Restart",
       "review": "Review",
       "submit": "Submit",
       "submitting": "Submitting"
@@ -374,7 +375,7 @@
     "something_went_wrong": {
       "error_occurred": "The following error has occurred: {{message}}",
       "header_message": "Something went wrong",
-      "please_try_again_or_email_html": "Please try again. If the problem persists, let us know at <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "email_us_if_this_persists_html": "If the problem persists, let us know at <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit is a community-driven platform for sharing locations of edible plants and other sources of free food.",

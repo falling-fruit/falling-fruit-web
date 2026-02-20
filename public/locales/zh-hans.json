@@ -75,6 +75,7 @@
       "reload": "重新加载",
       "report": "举报",
       "reset": "重置",
+      "restart": "重新开始",
       "review": "审核",
       "submit": "提交",
       "submitting": "提交中"
@@ -372,9 +373,9 @@
       "intro_html": "下面列出的是在公共场所种植食物（食物林、公共果园）、采摘食物（城市觅食、农场拾荒）或分发食物（交换、捐赠）的组织。组织按国家/地区、州（如果适用）和城市列出。那些名字被划掉的人被认为是不活跃的。如果您知道应该在此列表中的其他人，请<a href=\"mailto:info@fallingfruit.org\">与我们联系</a>！"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "如果问题仍然存在，请通过 <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> 告知我们。",
       "error_occurred": "发生以下错误：{{message}}",
-      "header_message": "出错了",
-      "please_try_again_or_email_html": "请重试。如果问题仍然存在，请通过 <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> 告知我们。"
+      "header_message": "出错了"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit是一个社区驱动的平台，用于分享可食用植物和其他免费食物的位置。",

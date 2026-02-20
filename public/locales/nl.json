@@ -75,6 +75,7 @@
       "reload": "Herlaai",
       "report": "Meld",
       "reset": "Reset",
+      "restart": "Herbegin",
       "review": "Recenseer",
       "submit": "Submit",
       "submitting": "Submitting"
@@ -372,9 +373,9 @@
       "intro_html": "Hieronder is een lijst te vinden met organisaties die voedsel produceren in openbare ruimten (voedselbossen, openbare boomgaarden), voedsel plukken (stadsvoedselverzameling, boerderijvoedselverzameling) of voedsel verspreiden (uitwisselingen, donaties). Organisaties worden gesorteerd op land, staat (indien van toepassing) en stad. Organisaties met doorgehaalde naam zijn waarschijnlijk inactief. Als u organisaties kent die op deze lijst thuishoren, neem dan <a href=\"mailto:info@fallingfruit.org\">contact met ons</a> op!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "As die probleem voortduur, laat weet ons by <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "Die volgende fout het voorgekom: {{message}}",
-      "header_message": "Iets het verkeerd geloop",
-      "please_try_again_or_email_html": "Probeer asseblief weer. As die probleem voortduur, laat weet ons by <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Iets het verkeerd geloop"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit is een door de gemeenschap gedreven platform voor het delen van locaties van eetbare planten en andere bronnen van gratis voedsel.",

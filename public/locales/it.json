@@ -75,6 +75,7 @@
       "reload": "Ricarica",
       "report": "Relazione",
       "reset": "Reimposta",
+      "restart": "Riavvia",
       "review": "Recensione",
       "submit": "Invia",
       "submitting": "Invio in corso"
@@ -372,9 +373,9 @@
       "intro_html": "Di seguito sono elencate le organizzazioni che si occupano di agricoltura urbana negli spazi pubblici (orti urbani, frutteti pubblici), o raccolgono frutta, erbe e ortaggi (raccolta urbana, orti urbani) o distribuiscono prodotti alimentari (donazioni). Le organizzazioni sono suddivise per paese, stato (se applicabile) e città. Quelli con nomi sbarrati si pensa che siano inattivi. Se sei a conoscenza di altri dati che dovrebbero essere in questa lista, <a href=\"mailto:info@fallingfruit.org\">contattaci</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Se il problema persiste, faccelo sapere a <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "Si è verificato il seguente errore: {{message}}",
-      "header_message": "Qualcosa è andato storto",
-      "please_try_again_or_email_html": "Riprova. Se il problema persiste, faccelo sapere a <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Qualcosa è andato storto"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit è una piattaforma gestita dalla comunità per condividere le posizioni di piante commestibili e altre fonti di cibo gratuito.",

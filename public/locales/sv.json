@@ -75,6 +75,7 @@
       "reload": "Ladda om",
       "report": "Rapportera",
       "reset": "Återställ",
+      "restart": "Starta om",
       "review": "Granska",
       "submit": "Skicka",
       "submitting": "Skickar"
@@ -372,9 +373,9 @@
       "intro_html": "Nedan listas organisationer som odlar mat på offentliga platser (matskog, offentliga fruktträdgårdar), plockar mat (urban skördning, efterplockning på gårdar) eller distribuerar mat (utbyten, donationer). Organisationerna är listade efter land, delstat (om tillämpligt) och stad. De med överstrukna namn antas vara inaktiva. Om du känner till andra som borde vara med på denna lista, <a href=\"mailto:info@fallingfruit.org\">kontakta oss</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "Om problemet kvarstår, låt oss veta på <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "Följande fel har inträffat: {{message}}",
-      "header_message": "Något gick fel",
-      "please_try_again_or_email_html": "Vänligen försök igen. Om problemet kvarstår, låt oss veta på <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Något gick fel"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit är en gemenskapsdriven plattform för att dela platser med ätbara växter och andra källor till gratis mat.",
