@@ -5,7 +5,9 @@ import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { Checkbox, Input, PasswordInput } from '../form/FormikWrappers'
+import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
@@ -18,6 +20,7 @@ import {
 import { withAuthRedirect } from './withAuthRedirect'
 
 const LoginPage = () => {
+  const isDesktop = useIsDesktop()
   const { isLoading } = useSelector((state) => state.auth)
   const { state } = useLocation()
   const { t } = useTranslation()
@@ -73,6 +76,12 @@ const LoginPage = () => {
         )}
       </Formik>
       <AuthLinks exclude={['signIn']} />
+      {!isDesktop && (
+        <>
+          {' '}
+          <br /> <AboutSection />{' '}
+        </>
+      )}
     </AuthPage>
   )
 }
