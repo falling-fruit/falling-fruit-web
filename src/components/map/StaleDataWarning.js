@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
+import { fetchFilterCounts } from '../../redux/filterSlice'
 import { fetchLocations } from '../../redux/viewChange'
 
 const StaleDataWarning = () => {
@@ -43,6 +44,7 @@ const StaleDataWarning = () => {
       // Watch for the internet coming back and re-fetch locations
       onlineListenerRef.current = () => {
         dispatch(fetchLocations())
+        dispatch(fetchFilterCounts())
       }
       window.addEventListener('online', onlineListenerRef.current)
     } else if (!isStale && wasStale === true) {
