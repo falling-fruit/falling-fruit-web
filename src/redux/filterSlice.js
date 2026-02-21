@@ -47,6 +47,7 @@ export const filterSlice = createSlice({
     muni: true,
     isOpenInMobileLayout: false,
     isLoading: false,
+    fetchError: false,
     countsById: {},
     showOnlyOnMap: true,
   },
@@ -75,6 +76,11 @@ export const filterSlice = createSlice({
 
       state.countsById = countsById
       state.isLoading = false
+      state.fetchError = false
+    },
+    [fetchFilterCounts.rejected]: (state) => {
+      state.isLoading = false
+      state.fetchError = true
     },
 
     [updateSelection]: (state, action) => ({

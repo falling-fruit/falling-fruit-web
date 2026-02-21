@@ -8,6 +8,7 @@ import { setShowOnlyOnMap } from '../../redux/filterSlice'
 import { muniChanged, selectionChanged } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import { ResultsUnavailable } from '../list/ListLoading'
 import Input from '../ui/Input'
 import Select from '../ui/SingleSelect'
 import FilterButtons from './FilterButtons'
@@ -52,7 +53,7 @@ const Filter = () => {
   )
 
   const dispatch = useDispatch()
-  const { countsById, types, muni, showOnlyOnMap } = useSelector(
+  const { countsById, types, muni, showOnlyOnMap, fetchError } = useSelector(
     (state) => state.filter,
   )
 
@@ -103,34 +104,40 @@ const Filter = () => {
           placeholder={t('glossary.type.one')}
         />
       </SearchAndSelectContainer>
-      <FilterButtons
-        onSelectAllClick={() => {
-          const newSelection = [...new Set([...types, ...visibleTypeIds])]
-          dispatch(selectionChanged(newSelection))
-        }}
-        onDeselectAllClick={() => {
-          const remainingSelection = types.filter(
-            (typeId) => !visibleTypeIds.some((t) => t === typeId),
-          )
-          dispatch(selectionChanged(remainingSelection))
-        }}
-        isSelectAllDisabled={visibleTypeIds.every((typeId) =>
-          types.includes(typeId),
-        )}
-        isDeselectAllDisabled={visibleTypeIds.every(
-          (typeId) => !types.includes(typeId),
-        )}
-      />
-      {typesAccess.isEmpty ? (
-        <RCTreeSelectSkeleton />
+      {fetchError ? (
+        <ResultsUnavailable />
       ) : (
-        <TreeSelect
-          types={types}
-          onChange={(selectedTypes) =>
-            dispatch(selectionChanged(selectedTypes))
-          }
-          selectTree={selectTree}
-        />
+        <>
+          <FilterButtons
+            onSelectAllClick={() => {
+              const newSelection = [...new Set([...types, ...visibleTypeIds])]
+              dispatch(selectionChanged(newSelection))
+            }}
+            onDeselectAllClick={() => {
+              const remainingSelection = types.filter(
+                (typeId) => !visibleTypeIds.some((t) => t === typeId),
+              )
+              dispatch(selectionChanged(remainingSelection))
+            }}
+            isSelectAllDisabled={visibleTypeIds.every((typeId) =>
+              types.includes(typeId),
+            )}
+            isDeselectAllDisabled={visibleTypeIds.every(
+              (typeId) => !types.includes(typeId),
+            )}
+          />
+          {typesAccess.isEmpty ? (
+            <RCTreeSelectSkeleton />
+          ) : (
+            <TreeSelect
+              types={types}
+              onChange={(selectedTypes) =>
+                dispatch(selectionChanged(selectedTypes))
+              }
+              selectTree={selectTree}
+            />
+          )}
+        </>
       )}
     </div>
   )
