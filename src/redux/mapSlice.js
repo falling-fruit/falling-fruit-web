@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
+import { toast } from 'react-toastify'
 
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
+import isNetworkError from '../utils/isNetworkError'
 import {
   addNewLocation,
   deleteExistingLocation,
@@ -63,6 +66,7 @@ export const mapSlice = createSlice({
     clusters: [],
     googleMap: null,
     getGoogleMaps: null,
+    isStale: false,
   },
   reducers: {
     setGoogle: (state, action) => {
@@ -88,6 +92,35 @@ export const mapSlice = createSlice({
     },
     [fetchMapLocations.pending]: (state) => {
       state.isLoading = true
+    },
+    [fetchMapLocations.rejected]: (state, action) => {
+      state.isLoading = false
+      if (isNetworkError(action.error)) {
+        state.isStale = true
+      } else {
+        toast.error(
+          i18next.t('error_message.api.fetch_locations_failed', {
+            message:
+              action.error.message || i18next.t('error_message.unknown_error'),
+          }),
+        )
+      }
+    },
+    [fetchMapClusters.pending]: (state) => {
+      state.isLoading = true
+    },
+    [fetchMapClusters.rejected]: (state, action) => {
+      state.isLoading = false
+      if (isNetworkError(action.error)) {
+        state.isStale = true
+      } else {
+        toast.error(
+          i18next.t('error_message.api.fetch_clusters_failed', {
+            message:
+              action.error.message || i18next.t('error_message.unknown_error'),
+          }),
+        )
+      }
     },
     [editExistingLocation.fulfilled]: (state, action) => {
       if (state.clusters.length) {
@@ -144,14 +177,13 @@ export const mapSlice = createSlice({
 
       state.clusters = []
       state.isLoading = false
-    },
-    [fetchMapClusters.pending]: (state) => {
-      state.isLoading = true
+      state.isStale = false
     },
     [fetchMapClusters.fulfilled]: (state, action) => {
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
+      state.isStale = false
     },
   },
 })

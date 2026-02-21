@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
+import { toast } from 'react-toastify'
 
 import { getTypeCounts } from '../utils/api'
 import { selectParams } from './selectParams'
@@ -47,6 +49,7 @@ export const filterSlice = createSlice({
     muni: true,
     isOpenInMobileLayout: false,
     isLoading: false,
+    fetchError: false,
     countsById: {},
     showOnlyOnMap: true,
   },
@@ -75,6 +78,19 @@ export const filterSlice = createSlice({
 
       state.countsById = countsById
       state.isLoading = false
+      state.fetchError = false
+    },
+    [fetchFilterCounts.rejected]: (state, action) => {
+      state.isLoading = false
+      if (!state.fetchError) {
+        toast.error(
+          i18next.t('error_message.api.fetch_filter_counts_failed', {
+            message:
+              action.error.message || i18next.t('error_message.unknown_error'),
+          }),
+        )
+      }
+      state.fetchError = true
     },
 
     [updateSelection]: (state, action) => ({
