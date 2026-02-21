@@ -112,43 +112,39 @@ const Filter = () => {
           placeholder={t('glossary.type.one')}
         />
       </SearchAndSelectContainer>
-      {fetchError ? (
+      <FilterButtons
+        onSelectAllClick={() => {
+          const newSelection = [...new Set([...types, ...visibleTypeIds])]
+          dispatch(selectionChanged(newSelection))
+        }}
+        onDeselectAllClick={() => {
+          const remainingSelection = types.filter(
+            (typeId) => !visibleTypeIds.some((t) => t === typeId),
+          )
+          dispatch(selectionChanged(remainingSelection))
+        }}
+        isSelectAllDisabled={visibleTypeIds.every((typeId) =>
+          types.includes(typeId),
+        )}
+        isDeselectAllDisabled={visibleTypeIds.every(
+          (typeId) => !types.includes(typeId),
+        )}
+      />
+      {typesAccess.isEmpty ? (
+        <RCTreeSelectSkeleton />
+      ) : fetchError ? (
         <ErrorContainer>
           <Error size="1em" />
           {t('error_message.results_unavailable')}
         </ErrorContainer>
       ) : (
-        <>
-          <FilterButtons
-            onSelectAllClick={() => {
-              const newSelection = [...new Set([...types, ...visibleTypeIds])]
-              dispatch(selectionChanged(newSelection))
-            }}
-            onDeselectAllClick={() => {
-              const remainingSelection = types.filter(
-                (typeId) => !visibleTypeIds.some((t) => t === typeId),
-              )
-              dispatch(selectionChanged(remainingSelection))
-            }}
-            isSelectAllDisabled={visibleTypeIds.every((typeId) =>
-              types.includes(typeId),
-            )}
-            isDeselectAllDisabled={visibleTypeIds.every(
-              (typeId) => !types.includes(typeId),
-            )}
-          />
-          {typesAccess.isEmpty ? (
-            <RCTreeSelectSkeleton />
-          ) : (
-            <TreeSelect
-              types={types}
-              onChange={(selectedTypes) =>
-                dispatch(selectionChanged(selectedTypes))
-              }
-              selectTree={selectTree}
-            />
-          )}
-        </>
+        <TreeSelect
+          types={types}
+          onChange={(selectedTypes) =>
+            dispatch(selectionChanged(selectedTypes))
+          }
+          selectTree={selectTree}
+        />
       )}
     </div>
   )

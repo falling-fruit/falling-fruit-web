@@ -25,6 +25,7 @@
   },
   "error_message": {
     "api": {
+      "fetch_filter_counts_failed": "Error fetching filter counts: {{message}}",
       "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
       "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
