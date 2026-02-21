@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
+import { toast } from 'react-toastify'
 
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
@@ -9,6 +11,11 @@ import {
 } from './locationSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
+
+const isNetworkError = (error) =>
+  !navigator.onLine ||
+  error?.message === 'Network Error' ||
+  error?.message === 'Failed to fetch'
 
 export const fetchMapLocations = createAsyncThunk(
   'map/fetchMapLocations',
@@ -90,16 +97,24 @@ export const mapSlice = createSlice({
     [fetchMapLocations.pending]: (state) => {
       state.isLoading = true
     },
-    [fetchMapLocations.rejected]: (state) => {
+    [fetchMapLocations.rejected]: (state, action) => {
       state.isLoading = false
-      state.isStale = true
+      if (isNetworkError(action.error)) {
+        state.isStale = true
+      } else {
+        toast.error(i18next.t('error_message.map.fetch_locations_failed'))
+      }
     },
     [fetchMapClusters.pending]: (state) => {
       state.isLoading = true
     },
-    [fetchMapClusters.rejected]: (state) => {
+    [fetchMapClusters.rejected]: (state, action) => {
       state.isLoading = false
-      state.isStale = true
+      if (isNetworkError(action.error)) {
+        state.isStale = true
+      } else {
+        toast.error(i18next.t('error_message.map.fetch_clusters_failed'))
+      }
     },
     [editExistingLocation.fulfilled]: (state, action) => {
       if (state.clusters.length) {
