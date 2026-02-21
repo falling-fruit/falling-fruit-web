@@ -1,3 +1,4 @@
+import { Error } from '@styled-icons/boxicons-regular'
 import { debounce } from 'debounce'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -44,6 +45,14 @@ const MunicipalTreeInventoriesCheckbox = styled.div`
   margin-block-start: 1em;
 `
 
+const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25em;
+  margin-block-start: 1em;
+`
+
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
   const setSearchValueDebounced = useMemo(
@@ -52,7 +61,7 @@ const Filter = () => {
   )
 
   const dispatch = useDispatch()
-  const { countsById, types, muni, showOnlyOnMap } = useSelector(
+  const { countsById, types, muni, showOnlyOnMap, fetchError } = useSelector(
     (state) => state.filter,
   )
 
@@ -123,6 +132,11 @@ const Filter = () => {
       />
       {typesAccess.isEmpty ? (
         <RCTreeSelectSkeleton />
+      ) : fetchError ? (
+        <ErrorContainer>
+          <Error size="1em" />
+          {t('error_message.results_unavailable')}
+        </ErrorContainer>
       ) : (
         <TreeSelect
           types={types}
