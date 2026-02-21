@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 
 import { fetchAndLocalizeTypes } from '../../redux/typeSlice'
+import isNetworkError from '../../utils/isNetworkError'
 import { useAppHistory } from '../../utils/useAppHistory'
 import useShareUrl from '../share/useShareUrl'
 
@@ -17,11 +18,7 @@ const ConnectTypes = () => {
     dispatch(fetchAndLocalizeTypes(language))
       .unwrap()
       .catch((error) => {
-        if (
-          !navigator.onLine ||
-          error.message === 'Network Error' ||
-          error.message === 'Failed to fetch'
-        ) {
+        if (isNetworkError(error)) {
           history.push('/error/offline', {
             fromPage: shareUrl,
           })

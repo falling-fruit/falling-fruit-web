@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
+import isNetworkError from '../utils/isNetworkError'
 import {
   addNewLocation,
   deleteExistingLocation,
@@ -11,11 +12,6 @@ import {
 } from './locationSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
-
-const isNetworkError = (error) =>
-  !navigator.onLine ||
-  error?.message === 'Network Error' ||
-  error?.message === 'Failed to fetch'
 
 export const fetchMapLocations = createAsyncThunk(
   'map/fetchMapLocations',
