@@ -1,13 +1,24 @@
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+
+import { fetchLocations } from '../../redux/viewChange'
 
 const StaleDataWarning = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const isStale = useSelector((state) => state.map.isStale)
   const staleToastIdRef = useRef(null)
   const prevIsStaleRef = useRef(null)
+  const onlineListenerRef = useRef(null)
+
+  const removeOnlineListener = () => {
+    if (onlineListenerRef.current !== null) {
+      window.removeEventListener('online', onlineListenerRef.current)
+      onlineListenerRef.current = null
+    }
+  }
 
   useEffect(() => {
     const wasStale = prevIsStaleRef.current
@@ -28,6 +39,12 @@ const StaleDataWarning = () => {
           toastId: 'stale-data-warning',
         },
       )
+
+      // Watch for the internet coming back and re-fetch locations
+      onlineListenerRef.current = () => {
+        dispatch(fetchLocations())
+      }
+      window.addEventListener('online', onlineListenerRef.current)
     } else if (!isStale && wasStale === true) {
       // Dismiss the stale warning and show a success toast
       if (staleToastIdRef.current !== null) {
@@ -41,16 +58,23 @@ const StaleDataWarning = () => {
           toastId: 'back-online',
         },
       )
-    }
-  }, [isStale, t])
 
-  // Dismiss stale toast on unmount
-  useEffect(() => () => {
+      // No longer stale, so stop listening for online events
+      removeOnlineListener()
+    }
+  }, [isStale, t]) //eslint-disable-line
+
+  // Dismiss stale toast and remove online listener on unmount
+  useEffect(
+    () => () => {
       if (staleToastIdRef.current !== null) {
         toast.dismiss(staleToastIdRef.current)
         staleToastIdRef.current = null
       }
-    }, [])
+      removeOnlineListener()
+    },
+    [], //eslint-disable-line
+  )
 
   return null
 }
