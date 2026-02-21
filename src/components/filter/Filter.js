@@ -45,33 +45,6 @@ const MunicipalTreeInventoriesCheckbox = styled.div`
   margin-block-start: 1em;
 `
 
-const LoadingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-`
-
-const ListState = ({ image, icon, text, ...props }) => (
-  <LoadingContainer {...props}>
-    {image && <img src={image} alt="loading-list-icon" />}
-    {icon}
-    <p>{text}</p>
-  </LoadingContainer>
-)
-
-const ResultsUnavailable = (props) => {
-  const { t } = useTranslation()
-  return (
-    <ListState
-      icon={<Error size="3rem" />}
-      text={t('error_message.results_unavailable')}
-      {...props}
-    />
-  )
-}
-
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
   const setSearchValueDebounced = useMemo(
@@ -132,7 +105,10 @@ const Filter = () => {
         />
       </SearchAndSelectContainer>
       {fetchError ? (
-        <ResultsUnavailable />
+        <div>
+          <Error size="1em" />
+          {t('error_message.results_unavailable')}
+        </div>
       ) : (
         <>
           <FilterButtons
