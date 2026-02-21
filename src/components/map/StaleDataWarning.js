@@ -9,7 +9,7 @@ import { fetchLocations } from '../../redux/viewChange'
 const StaleDataWarning = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const isStale = useSelector((state) => state.map.isStale)
+  const { isStale } = useSelector((state) => state.map)
   const staleToastIdRef = useRef(null)
   const prevIsStaleRef = useRef(null)
   const onlineListenerRef = useRef(null)
@@ -26,47 +26,31 @@ const StaleDataWarning = () => {
     prevIsStaleRef.current = isStale
 
     if (isStale && staleToastIdRef.current === null) {
-      // Show a non-auto-dismissable warning toast
       staleToastIdRef.current = toast.warning(
-        t(
-          'map.stale_data_warning',
-          'Map data may be out of date due to a network error.',
-        ),
+        t('error_message.stale_map_data.the_warning'),
         {
           autoClose: false,
-          closeOnClick: false,
-          draggable: false,
-          closeButton: false,
           toastId: 'stale-data-warning',
         },
       )
 
-      // Watch for the internet coming back and re-fetch locations
       onlineListenerRef.current = () => {
         dispatch(fetchLocations())
         dispatch(fetchFilterCounts())
       }
       window.addEventListener('online', onlineListenerRef.current)
     } else if (!isStale && wasStale === true) {
-      // Dismiss the stale warning and show a success toast
+      toast.dismiss()
       if (staleToastIdRef.current !== null) {
         toast.dismiss(staleToastIdRef.current)
         staleToastIdRef.current = null
       }
-      toast.success(
-        t('map.back_online', 'Back online — map data has been refreshed.'),
-        {
-          autoClose: 4000,
-          toastId: 'back-online',
-        },
-      )
+      toast.success(t('error_message.stale_map_data.you_are_back_online'))
 
-      // No longer stale, so stop listening for online events
       removeOnlineListener()
     }
   }, [isStale, t]) //eslint-disable-line
 
-  // Dismiss stale toast and remove online listener on unmount
   useEffect(
     () => () => {
       if (staleToastIdRef.current !== null) {

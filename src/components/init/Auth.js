@@ -25,7 +25,6 @@ const AuthInitializer = () => {
             toast.info(i18next.t('error_message.auth.expired_refresh_token'))
             history.push(pathToSignInPage())
           } else if (isNetworkError(error)) {
-            console.error(error)
             history.push('/error/offline', {
               fromPage: shareUrl,
             })

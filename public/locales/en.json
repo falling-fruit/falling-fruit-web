@@ -59,6 +59,10 @@
       "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
       "not_supported": "Geolocation not supported"
     },
+    "stale_map_data": {
+      "the_warning": "We were unable to fetch location data. You might be offline, or the service may be temporarily unavailable.",
+      "you_are_back_online": "You are back online. "
+    },
     "language_changed_refresh_to_reload_map": "Language changed. Refresh page to reload map",
     "unknown_error": "Unknown error"
   },
