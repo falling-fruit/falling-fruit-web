@@ -35,6 +35,7 @@ export const listSlice = createSlice({
     isLoading: false,
     totalCount: null,
     shouldFetchNewLocations: true,
+    fetchError: false,
     locations: [],
     lastMapView: null,
     lastViewedListPositionId: null,
@@ -75,6 +76,11 @@ export const listSlice = createSlice({
 
       state.isLoading = false
       state.shouldFetchNewLocations = false
+      state.fetchError = false
+    },
+    [fetchListLocations.rejected]: (state) => {
+      state.isLoading = false
+      state.fetchError = true
     },
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true

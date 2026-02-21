@@ -9,9 +9,10 @@ const LoadingContainer = styled.div`
   height: 100%;
 `
 
-const ListState = ({ image, text, ...props }) => (
+const ListState = ({ image, icon, text, ...props }) => (
   <LoadingContainer {...props}>
     {image && <img src={image} alt="loading-list-icon" />}
+    {icon}
     <p>{text}</p>
   </LoadingContainer>
 )
@@ -34,4 +35,15 @@ const NoResultsFound = (props) => {
   )
 }
 
-export { NoResultsFound, ShouldZoomIn }
+const ResultsUnavailable = (props) => {
+  const { t } = useTranslation()
+  return (
+    <ListState
+      icon={<box-icon name="alert-triangle" type="solid" />}
+      text={t('list.results_unavailable')}
+      {...props}
+    />
+  )
+}
+
+export { NoResultsFound, ResultsUnavailable, ShouldZoomIn }

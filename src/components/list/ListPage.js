@@ -10,7 +10,7 @@ import {
 } from '../../redux/listSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import Spinner from '../ui/Spinner'
-import { NoResultsFound, ShouldZoomIn } from './ListLoading'
+import { NoResultsFound, ResultsUnavailable, ShouldZoomIn } from './ListLoading'
 import Locations from './Locations'
 
 const ListPage = () => {
@@ -20,6 +20,7 @@ const ListPage = () => {
     locations,
     isLoading: isNextPageLoading,
     shouldFetchNewLocations: locationsInvalid,
+    fetchError,
     lastViewedListPositionId,
     lastViewedOffsetTop,
     lastViewedScrollTop,
@@ -41,6 +42,10 @@ const ListPage = () => {
 
   if (lastMapView.zoom <= VISIBLE_CLUSTER_ZOOM_LIMIT) {
     return <ShouldZoomIn />
+  }
+
+  if (fetchError) {
+    return <ResultsUnavailable />
   }
 
   if (locations.length === 0 && !isNextPageLoading && !locationsInvalid) {
