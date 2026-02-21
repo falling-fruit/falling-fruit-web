@@ -1,3 +1,4 @@
+import { Error } from '@styled-icons/boxicons-regular'
 import { debounce } from 'debounce'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +9,6 @@ import { setShowOnlyOnMap } from '../../redux/filterSlice'
 import { muniChanged, selectionChanged } from '../../redux/viewChange'
 import buildSelectTree from '../../utils/buildSelectTree'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { ResultsUnavailable } from '../list/ListLoading'
 import Input from '../ui/Input'
 import Select from '../ui/SingleSelect'
 import FilterButtons from './FilterButtons'
@@ -44,6 +44,33 @@ const MapAreaSelectWrapper = styled.div`
 const MunicipalTreeInventoriesCheckbox = styled.div`
   margin-block-start: 1em;
 `
+
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`
+
+const ListState = ({ image, icon, text, ...props }) => (
+  <LoadingContainer {...props}>
+    {image && <img src={image} alt="loading-list-icon" />}
+    {icon}
+    <p>{text}</p>
+  </LoadingContainer>
+)
+
+const ResultsUnavailable = (props) => {
+  const { t } = useTranslation()
+  return (
+    <ListState
+      icon={<Error size="3rem" />}
+      text={t('error_message.results_unavailable')}
+      {...props}
+    />
+  )
+}
 
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
