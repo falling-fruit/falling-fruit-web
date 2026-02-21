@@ -63,6 +63,7 @@ export const mapSlice = createSlice({
     clusters: [],
     googleMap: null,
     getGoogleMaps: null,
+    isStale: false,
   },
   reducers: {
     setGoogle: (state, action) => {
@@ -88,6 +89,17 @@ export const mapSlice = createSlice({
     },
     [fetchMapLocations.pending]: (state) => {
       state.isLoading = true
+    },
+    [fetchMapLocations.rejected]: (state) => {
+      state.isLoading = false
+      state.isStale = true
+    },
+    [fetchMapClusters.pending]: (state) => {
+      state.isLoading = true
+    },
+    [fetchMapClusters.rejected]: (state) => {
+      state.isLoading = false
+      state.isStale = true
     },
     [editExistingLocation.fulfilled]: (state, action) => {
       if (state.clusters.length) {
@@ -144,14 +156,13 @@ export const mapSlice = createSlice({
 
       state.clusters = []
       state.isLoading = false
-    },
-    [fetchMapClusters.pending]: (state) => {
-      state.isLoading = true
+      state.isStale = false
     },
     [fetchMapClusters.fulfilled]: (state, action) => {
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
+      state.isStale = false
     },
   },
 })
