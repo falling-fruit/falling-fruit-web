@@ -99,7 +99,7 @@ export const mapSlice = createSlice({
         state.isStale = true
       } else {
         toast.error(
-          i18next.t('error_message.api.fetch_map_locations_failed', {
+          i18next.t('error_message.api.fetch_locations_failed', {
             message:
               action.error.message || i18next.t('error_message.unknown_error'),
           }),
@@ -115,7 +115,7 @@ export const mapSlice = createSlice({
         state.isStale = true
       } else {
         toast.error(
-          i18next.t('error_message.api.fetch_map_clusters_failed', {
+          i18next.t('error_message.api.fetch_clusters_failed', {
             message:
               action.error.message || i18next.t('error_message.unknown_error'),
           }),

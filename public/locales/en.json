@@ -28,8 +28,8 @@
       "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
       "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_map_clusters_failed": "Error fetching clusters: {{message}}",
-      "fetch_map_locations_failed": "Error fetching locations: {{message}}",
+      "fetch_clusters_failed": "Error fetching clusters: {{message}}",
+      "fetch_locations_failed": "Error fetching locations: {{message}}",
       "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
       "fetch_user_failed": "Error fetching user {{id}}: {{message}}",
       "location_deletion_failed": "Location deletion failed: {{message}}",
@@ -64,7 +64,8 @@
       "you_are_back_online": "You are back online. "
     },
     "language_changed_refresh_to_reload_map": "Language changed. Refresh page to reload map",
-    "unknown_error": "Unknown error"
+    "unknown_error": "Unknown error",
+    "results_unavailable": "Results unavailable"
   },
   "filter": {
     "all_types": "All types",

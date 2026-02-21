@@ -1,3 +1,4 @@
+import { Error } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
@@ -39,8 +40,8 @@ const ResultsUnavailable = (props) => {
   const { t } = useTranslation()
   return (
     <ListState
-      icon={<box-icon name="alert-triangle" type="solid" />}
-      text={t('list.results_unavailable')}
+      icon={<Error size="3rem" />}
+      text={t('error_message.results_unavailable')}
       {...props}
     />
   )

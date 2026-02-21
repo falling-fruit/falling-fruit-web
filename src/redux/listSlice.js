@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import i18next from 'i18next'
+import { toast } from 'react-toastify'
 
 import { getLocations, getLocationsCount } from '../utils/api'
 import { selectParams } from './selectParams'
@@ -78,9 +80,15 @@ export const listSlice = createSlice({
       state.shouldFetchNewLocations = false
       state.fetchError = false
     },
-    [fetchListLocations.rejected]: (state) => {
+    [fetchListLocations.rejected]: (state, action) => {
       state.isLoading = false
       state.fetchError = true
+      toast.error(
+        i18next.t('error_message.api.fetch_locations_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
     },
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true
