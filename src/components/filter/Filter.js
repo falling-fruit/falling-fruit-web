@@ -45,6 +45,14 @@ const MunicipalTreeInventoriesCheckbox = styled.div`
   margin-block-start: 1em;
 `
 
+const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25em;
+  margin-block-start: 1em;
+`
+
 const Filter = () => {
   const [searchValue, setSearchValue] = useState('')
   const setSearchValueDebounced = useMemo(
@@ -105,10 +113,10 @@ const Filter = () => {
         />
       </SearchAndSelectContainer>
       {fetchError ? (
-        <div>
+        <ErrorContainer>
           <Error size="1em" />
           {t('error_message.results_unavailable')}
-        </div>
+        </ErrorContainer>
       ) : (
         <>
           <FilterButtons
