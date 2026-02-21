@@ -102,7 +102,12 @@ export const mapSlice = createSlice({
       if (isNetworkError(action.error)) {
         state.isStale = true
       } else {
-        toast.error(i18next.t('error_message.map.fetch_locations_failed'))
+        toast.error(
+          i18next.t('error_message.api.fetch_map_locations_failed', {
+            message:
+              action.error.message || i18next.t('error_message.unknown_error'),
+          }),
+        )
       }
     },
     [fetchMapClusters.pending]: (state) => {
@@ -113,7 +118,12 @@ export const mapSlice = createSlice({
       if (isNetworkError(action.error)) {
         state.isStale = true
       } else {
-        toast.error(i18next.t('error_message.map.fetch_clusters_failed'))
+        toast.error(
+          i18next.t('error_message.api.fetch_map_clusters_failed', {
+            message:
+              action.error.message || i18next.t('error_message.unknown_error'),
+          }),
+        )
       }
     },
     [editExistingLocation.fulfilled]: (state, action) => {
