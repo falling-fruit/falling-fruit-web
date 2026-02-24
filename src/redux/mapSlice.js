@@ -66,7 +66,6 @@ export const mapSlice = createSlice({
     clusters: [],
     googleMap: null,
     getGoogleMaps: null,
-    isStale: false,
   },
   reducers: {
     setGoogle: (state, action) => {
@@ -95,9 +94,7 @@ export const mapSlice = createSlice({
     },
     [fetchMapLocations.rejected]: (state, action) => {
       state.isLoading = false
-      if (isNetworkError(action.error)) {
-        state.isStale = true
-      } else {
+      if (!isNetworkError(action.error)) {
         toast.error(
           i18next.t('error_message.api.fetch_locations_failed', {
             message:
@@ -111,9 +108,7 @@ export const mapSlice = createSlice({
     },
     [fetchMapClusters.rejected]: (state, action) => {
       state.isLoading = false
-      if (isNetworkError(action.error)) {
-        state.isStale = true
-      } else {
+      if (!isNetworkError(action.error)) {
         toast.error(
           i18next.t('error_message.api.fetch_clusters_failed', {
             message:
@@ -177,13 +172,11 @@ export const mapSlice = createSlice({
 
       state.clusters = []
       state.isLoading = false
-      state.isStale = false
     },
     [fetchMapClusters.fulfilled]: (state, action) => {
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
-      state.isStale = false
     },
   },
 })

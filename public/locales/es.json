@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Error al obtener grupos: {{message}}",
+      "fetch_filter_counts_failed": "Error al obtener conteos de filtros: {{message}}",
       "fetch_import_failed": "Error al obtener conjunto de datos {{id}}: {{message}}",
       "fetch_location_changes_failed": "Error al obtener cambios de ubicación: {{message}}",
       "fetch_location_failed": "Error al obtener ubicación {{id}}: {{message}}",
+      "fetch_locations_failed": "Error al obtener ubicaciones: {{message}}",
       "fetch_review_failed": "Error al obtener reseña {{id}}: {{message}}",
       "fetch_user_failed": "Error al obtener usuario {{id}}: {{message}}",
       "location_deletion_failed": "Error al eliminar ubicación: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Error al iniciar sesión: {{message}}",
       "signup_failed": "Error al registrarse: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Estás conectado nuevamente.",
+      "you_are_offline": "Estás desconectado."
+    },
     "geolocation": {
       "code_2": "Posición no disponible: {{message}}",
       "code_3": "Tiempo de espera de geolocalización agotado: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Geolocalización no compatible"
     },
     "language_changed_refresh_to_reload_map": "El idioma ha cambiado. Actualiza la página para recargar el mapa",
+    "results_unavailable": "Resultados no disponibles",
     "unknown_error": "Error desconocido"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Los conjuntos de datos importados a Falling Fruit se dividen en dos categorías principales. Los \"mapas comunitarios\" son construidos por cazadores-recolectores y freegans que buscan en su entorno cosas de comer. Estamos en deuda con los diligentes ciudadanos-cartógrafos que han compilado los datos. Los \"inventarios de árboles\" son compilados por ciudades, universidades y otras instituciones que desean documentar mejor y cuidar de sus árboles. Extraemos estos grandes conjuntos de datos para las especies productoras de alimentos y los agregamos al mapa. Para ayudarnos a cartografiar tu vecindario en el mapa, contacta con tu escuela o ciudad instándolos a compartir su inventario de árboles con nosotros."
     },
     "network_error": {
-      "could_not_connect": "No pudimos conectarnos. Es posible que estés sin conexión o que el servicio no esté disponible temporalmente.",
       "header_message": "Error de red",
-      "please_try_again": "Por favor, verifica tu conexión o inténtalo de nuevo más tarde."
+      "please_check_your_connection": "Por favor verifica tu conexión e intenta nuevamente.",
+      "you_are_offline": "No pudimos conectar. Parece que estás desconectado."
     },
     "settings": {
       "bicycle": "Bicicleta",

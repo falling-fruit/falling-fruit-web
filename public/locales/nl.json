@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Fout bij ophalen clusters: {{message}}",
+      "fetch_filter_counts_failed": "Fout bij ophalen filteraantallen: {{message}}",
       "fetch_import_failed": "Fout bij ophalen van dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
+      "fetch_locations_failed": "Fout bij ophalen locaties: {{message}}",
       "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
       "fetch_user_failed": "Fout bij ophalen gebruiker {{id}}: {{message}}",
       "location_deletion_failed": "Verwijderen van locatie mislukt: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Inloggen mislukt: {{message}}",
       "signup_failed": "Registreren mislukt: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "U bent weer online.",
+      "you_are_offline": "U bent offline."
+    },
     "geolocation": {
       "code_2": "Positie niet beschikbaar: {{message}}",
       "code_3": "Geolocatie timeout: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Geolocatie wordt niet ondersteund"
     },
     "language_changed_refresh_to_reload_map": "Taal gewijzigd, vernieuw de pagina om de kaart opnieuw te laden",
+    "results_unavailable": "Resultaten niet beschikbaar",
     "unknown_error": "Onbekende fout"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Geïmporteerde gegevenssets vallen onder twee hoofdcategorieën. \"Gemeenschapskaarten\" worden gebouwd door voedselverzamelaars en freegans terwijl ze hun gemeenschap afspeuren op zoek naar eetbaar voedsel. Dit wordt gedaan door hardwerkende inwoners met verstand van cartografie; onze dank is dan ook zeer groot. \"Boominventarissen\" worden samengesteld door steden, universiteiten en andere instituten die bomen beter willen documenteren en beter voor ze willen zorgen. We kammen deze gegevenssets uit en selecteren voedselproducerende soorten en voegen deze toe aan de kaart. Als u wilt helpen bij het in kaart brengen van fruitbomen in uw buurt, neem dan contact op met uw school of stad en overtuig ze ervan hun boominventaris met ons te delen."
     },
     "network_error": {
-      "could_not_connect": "We konden geen verbinding maken. Mogelijk bent u offline of is de service tijdelijk niet beschikbaar.",
       "header_message": "Netwerkfout",
-      "please_try_again": "Kontroleer asseblief jou verbinding of probeer later weer."
+      "please_check_your_connection": "Controleer uw verbinding en probeer het opnieuw.",
+      "you_are_offline": "We konden geen verbinding maken. Het lijkt erop dat u offline bent."
     },
     "settings": {
       "bicycle": "Fiets",

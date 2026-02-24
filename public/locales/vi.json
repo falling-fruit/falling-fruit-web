@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Lỗi khi tải cụm: {{message}}",
+      "fetch_filter_counts_failed": "Lỗi khi tải số lượng bộ lọc: {{message}}",
       "fetch_import_failed": "Lỗi khi tải tập dữ liệu {{id}}: {{message}}",
       "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
+      "fetch_locations_failed": "Lỗi khi tải vị trí: {{message}}",
       "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
       "fetch_user_failed": "Lỗi khi tải thông tin người dùng {{id}}: {{message}}",
       "location_deletion_failed": "Xóa vị trí thất bại: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Đăng nhập thất bại: {{message}}",
       "signup_failed": "Đăng ký thất bại: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Bạn đã trực tuyến trở lại.",
+      "you_are_offline": "Bạn đang ngoại tuyến."
+    },
     "geolocation": {
       "code_2": "Không thể xác định vị trí: {{message}}",
       "code_3": "Hết thời gian xác định vị trí: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Không hỗ trợ định vị"
     },
     "language_changed_refresh_to_reload_map": "Ngôn ngữ đã thay đổi, làm mới trang để tải lại bản đồ",
+    "results_unavailable": "Kết quả không khả dụng",
     "unknown_error": "Lỗi không xác định"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Các bộ dữ liệu được nhập vào Falling Fruit thuộc hai loại chính. \"Bản đồ cộng đồng\" được xây dựng bởi những người kiếm ăn và những người sống tự do khi họ nghiên cứu cộng đồng của mình để tìm đồ ăn. Chúng tôi mang ơn những người vẽ bản đồ công dân chăm chỉ đã biên soạn dữ liệu này. \"Kiểm kê cây\" được biên soạn bởi các thành phố, trường đại học và các tổ chức khác mong muốn ghi chép và chăm sóc cây của họ tốt hơn. Chúng tôi khai thác những bộ dữ liệu khổng lồ này về các loài sản xuất thực phẩm và thêm chúng vào bản đồ. Để giúp chúng tôi lập bản đồ cây ăn quả ở khu vực lân cận của bạn, hãy liên hệ với trường học hoặc thành phố của bạn để thúc giục họ chia sẻ kho cây của họ với chúng tôi."
     },
     "network_error": {
-      "could_not_connect": "Chúng tôi không thể kết nối. Bạn có thể đang ngoại tuyến hoặc dịch vụ có thể tạm thời không khả dụng.",
       "header_message": "Lỗi mạng",
-      "please_try_again": "Vui lòng kiểm tra kết nối của bạn hoặc thử lại sau."
+      "please_check_your_connection": "Vui lòng kiểm tra kết nối của bạn và thử lại.",
+      "you_are_offline": "Chúng tôi không thể kết nối. Có vẻ như bạn đang ngoại tuyến."
     },
     "settings": {
       "bicycle": "Xe đạp",

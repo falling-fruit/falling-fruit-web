@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Erro ao buscar clusters: {{message}}",
+      "fetch_filter_counts_failed": "Erro ao buscar contagens de filtros: {{message}}",
       "fetch_import_failed": "Erro ao buscar conjunto de dados {{id}}: {{message}}",
       "fetch_location_changes_failed": "Falha ao buscar alterações de localização: {{message}}",
       "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
+      "fetch_locations_failed": "Erro ao buscar localizações: {{message}}",
       "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
       "fetch_user_failed": "Erro ao buscar usuário {{id}}: {{message}}",
       "location_deletion_failed": "Falha na exclusão da localização: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Falha no login: {{message}}",
       "signup_failed": "Falha no cadastro: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Você está online novamente.",
+      "you_are_offline": "Você está offline."
+    },
     "geolocation": {
       "code_2": "Posição indisponível: {{message}}",
       "code_3": "Tempo limite de geolocalização: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Geolocalização não suportada"
     },
     "language_changed_refresh_to_reload_map": "Idioma alterado. Atualize a página para recarregar o mapa",
+    "results_unavailable": "Resultados indisponíveis",
     "unknown_error": "Erro desconhecido"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Os conjuntos de dados importados no Falling Fruit entram em duas categorias principais. \"Mapas comunitários\" são construídas por coletores e freegans enquanto procuram alimentos em suas comunidades. Estamos em dívida com os cidadãos-cartógrafos que compilaram os dados. \"Inventários de árvores\" são compilados por munícipios, universidades e outras instituições que desejam documentar melhor e cuidar de suas árvores. Nós garimpamos esses vastos conjuntos de dados para espécies produtoras de alimentos e os adicionamos ao mapa. Para nos ajudar a mapear sua comunidade, entre em contato com sua escola ou cidade instando-os a partilhar o seu inventário de árvores com a gente."
     },
     "network_error": {
-      "could_not_connect": "Não foi possível conectar. Você pode estar offline ou o serviço pode estar temporariamente indisponível.",
       "header_message": "Erro de rede",
-      "please_try_again": "Por favor, verifique sua conexão ou tente novamente mais tarde."
+      "please_check_your_connection": "Por favor, verifique sua conexão e tente novamente.",
+      "you_are_offline": "Não foi possível conectar. Parece que você está offline."
     },
     "settings": {
       "bicycle": "Bicicleta",

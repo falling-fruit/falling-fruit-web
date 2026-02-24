@@ -32,7 +32,6 @@ import {
 } from './Pins'
 import Place from './Place'
 import SelectedLocation from './SelectedLocation'
-import StaleDataWarning from './StaleDataWarning'
 import TrackLocationButton from './TrackLocationButton'
 
 const MIN_ZOOM = 1
@@ -392,7 +391,6 @@ const MapPage = ({ isDesktop }) => {
 
   return (
     <>
-      <StaleDataWarning />
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
       {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
       {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (

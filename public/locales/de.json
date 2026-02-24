@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Fehler beim Abrufen der Cluster: {{message}}",
+      "fetch_filter_counts_failed": "Fehler beim Abrufen der Filterzählungen: {{message}}",
       "fetch_import_failed": "Fehler beim Abrufen des Datensatzes {{id}}: {{message}}",
       "fetch_location_changes_failed": "Abrufen der Standortänderungen fehlgeschlagen: {{message}}",
       "fetch_location_failed": "Fehler beim Abrufen des Standorts {{id}}: {{message}}",
+      "fetch_locations_failed": "Fehler beim Abrufen der Standorte: {{message}}",
       "fetch_review_failed": "Fehler beim Abrufen der Bewertung {{id}}: {{message}}",
       "fetch_user_failed": "Fehler beim Abrufen des Benutzers {{id}}: {{message}}",
       "location_deletion_failed": "Löschen des Standorts fehlgeschlagen: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Anmeldung fehlgeschlagen: {{message}}",
       "signup_failed": "Registrierung fehlgeschlagen: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Sie sind wieder online.",
+      "you_are_offline": "Sie sind offline."
+    },
     "geolocation": {
       "code_2": "Position nicht verfügbar: {{message}}",
       "code_3": "Geolokalisierungs-Timeout: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Geolokalisierung wird nicht unterstützt"
     },
     "language_changed_refresh_to_reload_map": "Sprache geändert. Bitte lade die Seite neu, um die Karte zu aktualisieren",
+    "results_unavailable": "Ergebnisse nicht verfügbar",
     "unknown_error": "Unbekannter Fehler"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Datensätze die von Falling Fruit importiert werden, fallen in zwei Hauptkategorien. \"Gemeinschaftskarten\" werden von Sammlerinnen und Freeganern erstellt, indem sie in ihrem Umfeld öffentliche Nahrungsmittel-Quellen suchen und kartieren. Ein Riesiges Dankeschön geht an alle, die tagtäglich auf der Suche sind und uns ihre Daten übermitteln. \"Bauminventare\" werden durch Städte, Universitäten oder andere Institutionen zusammengestellt, die ihren Baumbestand überblicken und erhalten möchten. Wir filtern aus diesen riesigen Datenmengen die essbaren Arten heraus und fügen sie unserer Karte hinzu. Wenn in deiner Ecke der Welt noch Daten fehlen, dann kontaktiere deine Stadt oder deine Gemeinde und fordere sie auf, allfällig vorhandene Daten mit uns zu teilen! Wir sind für jede Hilfe dankbar!"
     },
     "network_error": {
-      "could_not_connect": "Wir konnten keine Verbindung herstellen. Möglicherweise bist du offline oder der Dienst ist vorübergehend nicht verfügbar.",
       "header_message": "Netzwerkfehler",
-      "please_try_again": "Bitte überprüfen Sie Ihre Verbindung oder versuchen Sie es später erneut."
+      "please_check_your_connection": "Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+      "you_are_offline": "Wir konnten keine Verbindung herstellen. Es sieht so aus, als wären Sie offline."
     },
     "settings": {
       "bicycle": "Fahrrad",

@@ -14,8 +14,8 @@ const NetworkErrorPage = () => {
     <ErrorPage>
       <div className="grid">
         <h1>{t('pages.network_error.header_message')}</h1>
-        <p>{t('pages.network_error.could_not_connect')}</p>
-        <p>{t('pages.network_error.please_try_again')}</p>
+        <p>{t('pages.network_error.you_are_offline')}</p>
+        <p>{t('pages.network_error.please_check_your_connection')}</p>
         <RestartAndReloadButtons fromPage={fromPage} />
       </div>
     </ErrorPage>

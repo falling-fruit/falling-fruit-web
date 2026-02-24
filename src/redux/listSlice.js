@@ -3,11 +3,12 @@ import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { getLocations, getLocationsCount } from '../utils/api'
+import isNetworkError from '../utils/isNetworkError'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 import { updateLastMapView } from './viewportSlice'
 
-const fetchListLocations = createAsyncThunk(
+export const fetchListLocations = createAsyncThunk(
   'list/fetchListLocations',
   async ({ offset, fetchCount }, { getState }) => {
     const state = getState()
@@ -57,6 +58,9 @@ export const listSlice = createSlice({
       state.lastViewedOffsetTop = null
       state.lastViewedScrollTop = null
     },
+    markShouldFetchNewLocations: (state) => {
+      state.shouldFetchNewLocations = true
+    },
   },
   extraReducers: {
     [fetchListLocations.pending]: (state) => {
@@ -82,13 +86,15 @@ export const listSlice = createSlice({
     },
     [fetchListLocations.rejected]: (state, action) => {
       state.isLoading = false
+      if (!isNetworkError(action.error) && !state.fetchError) {
+        toast.error(
+          i18next.t('error_message.api.fetch_locations_failed', {
+            message:
+              action.error.message || i18next.t('error_message.unknown_error'),
+          }),
+        )
+      }
       state.fetchError = true
-      toast.error(
-        i18next.t('error_message.api.fetch_locations_failed', {
-          message:
-            action.error.message || i18next.t('error_message.unknown_error'),
-        }),
-      )
     },
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true
@@ -102,6 +108,7 @@ export const listSlice = createSlice({
 export const {
   setLastViewedListPositionState,
   clearLastViewedListPositionState,
+  markShouldFetchNewLocations,
 } = listSlice.actions
 
 export default listSlice.reducer

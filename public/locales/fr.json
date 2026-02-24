@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Erreur lors de la récupération des clusters : {{message}}",
+      "fetch_filter_counts_failed": "Erreur lors de la récupération des compteurs de filtres : {{message}}",
       "fetch_import_failed": "Erreur lors de la récupération du jeu de données {{id}} : {{message}}",
       "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
+      "fetch_locations_failed": "Erreur lors de la récupération des emplacements : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
       "fetch_user_failed": "Erreur lors de la récupération de l'utilisateur {{id}} : {{message}}",
       "location_deletion_failed": "Échec de la suppression de l'emplacement : {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Échec de la connexion : {{message}}",
       "signup_failed": "Échec de l'inscription : {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Vous êtes de nouveau en ligne.",
+      "you_are_offline": "Vous êtes hors ligne."
+    },
     "geolocation": {
       "code_2": "Position non disponible : {{message}}",
       "code_3": "Délai d'attente de la géolocalisation dépassé : {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Géolocalisation non prise en charge"
     },
     "language_changed_refresh_to_reload_map": "La langue a été modifiée. Actualise la page pour recharger la carte.",
+    "results_unavailable": "Résultats indisponibles",
     "unknown_error": "Erreur inconnue"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Il y a deux catégories d'ensemble de données importés vers Falling Fruit : Les «cartes communautaires» sont créées par des glaneurs et les freegans qui fouillent leur communauté à la recherche de nourriture. Nous sommes très reconnaissants envers les citoyens-cartographes qui ont travaillé dur pour compiler ces données. Les «inventaires d'arbres» sont compilés par des villes, des universités et d'autres institutions qui cherchent à mieux documenter leurs arbres et à mieux s'en occuper. Nous parcourons ces larges bases de données à la recherche d'espèces qui produisent de la nourriture pour les ajouter à la carte. Aidez-nous à intégrer les arbres de votre voisinage à notre carte en contactant votre université ou votre ville pour leur demander de partager leurs inventaires d'arbres avec nous."
     },
     "network_error": {
-      "could_not_connect": "Nous n'avons pas pu nous connecter. Vous êtes peut-être hors ligne, ou le service est temporairement indisponible.",
       "header_message": "Erreur réseau",
-      "please_try_again": "Veuillez vérifier votre connexion ou réessayer plus tard."
+      "please_check_your_connection": "Veuillez vérifier votre connexion et réessayer.",
+      "you_are_offline": "Nous n'avons pas pu nous connecter. Il semble que vous soyez hors ligne."
     },
     "settings": {
       "bicycle": "Vélo",
