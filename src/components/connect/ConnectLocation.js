@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -102,6 +102,7 @@ const ConnectLocation = ({
   const isEmbed = useIsEmbed()
   const [hasCentered, setHasCentered] = useState(false)
   const { t } = useTranslation()
+  const toastIdRef = useRef(null)
 
   useEffect(() => {
     if (location && `${locationId}` === `${location.id}`) {
@@ -231,13 +232,19 @@ const ConnectLocation = ({
   const initialUIState = !drawerFullyOpen && !filterOpen && !isBeingEdited
   useEffect(() => {
     if (!initialUIState) {
-      // Opening drawer or filter dismisses any toasts
-      toast.dismiss()
+      // Opening drawer or filter dismisses any toasts we created
+      if (toastIdRef.current) {
+        toast.dismiss(toastIdRef.current)
+        toastIdRef.current = null
+      }
     } else if (isSuccessfullyAdded) {
-      toast.success(<ToastContent locationId={locationId} />, {
-        autoClose: false,
-        style: { width: '100%' },
-      })
+      toastIdRef.current = toast.success(
+        <ToastContent locationId={locationId} />,
+        {
+          autoClose: false,
+          style: { width: '100%' },
+        },
+      )
       /*
        * We don't want to toast again after user presses back in the browser
        * so remove 'success' from URL
@@ -249,11 +256,15 @@ const ConnectLocation = ({
        * Closed drawer, but still on location page
        * We're probably here after history.replace happened
        * The user might have closed the toast or be still looking at it
-       * Prepare to close after navigating away
+       * Prepare to close our toast after navigating away if it is still there
        */
       return () => {
-        if (window.location.href.indexOf(`/locations/${locationId}`) === -1) {
-          toast.dismiss()
+        if (
+          window.location.href.indexOf(`/locations/${locationId}`) === -1 &&
+          toastIdRef.current
+        ) {
+          toast.dismiss(toastIdRef.current)
+          toastIdRef.current = null
         }
       }
     }
