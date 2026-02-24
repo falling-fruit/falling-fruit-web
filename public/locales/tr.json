@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Kümeler getirilirken hata oluştu: {{message}}",
+      "fetch_filter_counts_failed": "Filtre sayıları getirilirken hata oluştu: {{message}}",
       "fetch_import_failed": "Veri seti {{id}} alınamadı: {{message}}",
       "fetch_location_changes_failed": "Konum değişikliklerini alma başarısız: {{message}}",
       "fetch_location_failed": "{{id}} konumunu alma hatası: {{message}}",
+      "fetch_locations_failed": "Konumlar getirilirken hata oluştu: {{message}}",
       "fetch_review_failed": "{{id}} değerlendirmesini alma hatası: {{message}}",
       "fetch_user_failed": "{{id}} kullanıcısı getirilirken hata oluştu: {{message}}",
       "location_deletion_failed": "Konum silme başarısız: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Giriş başarısız: {{message}}",
       "signup_failed": "Kayıt başarısız: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Tekrar çevrimiçisiniz.",
+      "you_are_offline": "Çevrimdışısınız."
+    },
     "geolocation": {
       "code_2": "Konum kullanılamıyor: {{message}}",
       "code_3": "Konum zaman aşımı: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Konum özelliği desteklenmiyor"
     },
     "language_changed_refresh_to_reload_map": "Dil değiştirildi, haritayı yenilemek için sayfayı yenileyin",
+    "results_unavailable": "Sonuçlar mevcut değil",
     "unknown_error": "Bilinmeyen hata"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Falling Fruit'e aktarılan veri setleri iki ana kategoriye ayrılır. \"Topluluk haritaları\", toplayıcılar ve freegan'lar tarafından toplulukları içinde yiyecek ararken oluşturulur. Bu verileri derleyen özverili vatandaş-kartograflarına minnettarız. \"Ağaç envanterleri\", şehirler, üniversiteler ve diğer kurumlar tarafından ağaçlarını daha iyi belgelemek ve bakımını yapmak için derlenir. Bu geniş veri setlerini gıda üreten türler için tarayıp haritaya ekliyoruz. Mahallenizin meyve ağaçlarını haritalamamıza yardımcı olmak için, okulunuz veya şehrinizle iletişime geçerek ağaç envanterlerini bizimle paylaşmaları için teşvik edin."
     },
     "network_error": {
-      "could_not_connect": "Bağlanamadık. Çevrimdışı olabilirsiniz veya hizmet geçici olarak kullanılamıyor olabilir.",
       "header_message": "Ağ hatası",
-      "please_try_again": "Lütfen bağlantınızı kontrol edin veya daha sonra tekrar deneyin."
+      "please_check_your_connection": "Lütfen bağlantınızı kontrol edin ve tekrar deneyin.",
+      "you_are_offline": "Bağlanamadık. Çevrimdışı görünüyorsunuz."
     },
     "settings": {
       "bicycle": "Bisiklet",

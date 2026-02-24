@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom'
 
+import ConnectConnectivity from './ConnectConnectivity'
 import ConnectGeolocation from './ConnectGeolocation'
 import ConnectGoogleMap from './ConnectGoogleMap'
 import ConnectI18nViz from './ConnectI18nViz'
@@ -331,6 +332,23 @@ const connectRoutes = [
   >
     <ConnectGeolocation />
   </Route>,
+
+  /*
+   * ConnectConnectivity
+   * why: users need to be warned when they go offline and notified when they come back online
+   *
+   * action:
+   * - show a persistent warning toast when offline
+   * - show a success toast when back online
+   * - refetch filter counts, map locations, and list locations when back online
+   */
+  <Route
+    key="connect-connectivity"
+    path={['/map', '/locations', '/list', '/reviews']}
+    render={({ location }) => (
+      <ConnectConnectivity isListPage={location.pathname.startsWith('/list')} />
+    )}
+  />,
 ]
 
 export default connectRoutes

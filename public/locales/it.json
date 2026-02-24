@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Errore nel recupero dei cluster: {{message}}",
+      "fetch_filter_counts_failed": "Errore nel recupero dei conteggi dei filtri: {{message}}",
       "fetch_import_failed": "Errore nel recupero del dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Recupero modifiche posizione fallito: {{message}}",
       "fetch_location_failed": "Errore nel recupero della posizione {{id}}: {{message}}",
+      "fetch_locations_failed": "Errore nel recupero delle posizioni: {{message}}",
       "fetch_review_failed": "Errore nel recupero della recensione {{id}}: {{message}}",
       "fetch_user_failed": "Errore nel recupero dell'utente {{id}}: {{message}}",
       "location_deletion_failed": "Eliminazione posizione fallita: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Accesso fallito: {{message}}",
       "signup_failed": "Registrazione fallita: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Sei di nuovo online.",
+      "you_are_offline": "Sei offline."
+    },
     "geolocation": {
       "code_2": "Posizione non disponibile: {{message}}",
       "code_3": "Timeout geolocalizzazione: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Geolocalizzazione non supportata"
     },
     "language_changed_refresh_to_reload_map": "Lingua modificata, aggiorna la pagina per ricaricare la mappa",
+    "results_unavailable": "Risultati non disponibili",
     "unknown_error": "Errore sconosciuto"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "I dati importati in Falling Fruit rientrano in due categorie principali: le \"mappe condivise\" che sono create da raccoglitori e volontari mentre indagano attivamente le loro comunità alla ricerca di cibo e siamo grati ai laboriosi cittadini-cartografi che hanno elaborato tutte queste informazioni; gli \"inventari arborei\" che sono stati redatti dai Comuni, dalle università e da altre istituzioni che vogliono documentare e curare il loro patrimonio arboreo. Noi estraiamo da questi inventari le specie produttive e le aggiungiamo alla mappa. Per aiutarci a mappare gli alberi da frutto del tuo quartiere, contatta la tua scuola o il Comune per invitarli a condividere con noi le loro informazioni e i loro inventari sugli alberi."
     },
     "network_error": {
-      "could_not_connect": "Non siamo riusciti a connetterci. Potresti essere offline o il servizio potrebbe essere temporaneamente non disponibile.",
       "header_message": "Errore di rete",
-      "please_try_again": "Controlla la tua connessione o riprova più tardi."
+      "please_check_your_connection": "Controlla la tua connessione e riprova.",
+      "you_are_offline": "Impossibile connettersi. Sembra che tu sia offline."
     },
     "settings": {
       "bicycle": "Bicicletta",

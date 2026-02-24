@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history'
 
 import activityReducer from './activitySlice'
 import authReducer from './authSlice'
+import connectivityReducer from './connectivitySlice'
 import filterReducer from './filterSlice'
 import geolocationReducer from './geolocationSlice'
 import listReducer from './listSlice'
@@ -34,6 +35,7 @@ export const store = configureStore({
     type: typeReducer,
     viewport: viewportReducer,
     activity: activityReducer,
+    connectivity: connectivityReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

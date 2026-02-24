@@ -3,6 +3,7 @@ import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { getTypeCounts } from '../utils/api'
+import isNetworkError from '../utils/isNetworkError'
 import { selectParams } from './selectParams'
 import { fetchAndLocalizeTypes } from './typeSlice'
 import { updateSelection } from './updateSelection'
@@ -33,10 +34,12 @@ export const fetchFilterCounts = createAsyncThunk(
 
       return {
         counts,
+        isFromApiSource: true,
       }
     } else {
       return {
         counts: [],
+        isFromApiSource: false,
       }
     }
   },
@@ -82,7 +85,7 @@ export const filterSlice = createSlice({
     },
     [fetchFilterCounts.rejected]: (state, action) => {
       state.isLoading = false
-      if (!state.fetchError) {
+      if (!isNetworkError(action.error) && !state.fetchError) {
         toast.error(
           i18next.t('error_message.api.fetch_filter_counts_failed', {
             message:

@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "Fel vid hämtning av kluster: {{message}}",
+      "fetch_filter_counts_failed": "Fel vid hämtning av filterräknare: {{message}}",
       "fetch_import_failed": "Fel vid hämtning av datamängd {{id}}: {{message}}",
       "fetch_location_changes_failed": "Hämtning av platsändringar misslyckades: {{message}}",
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
+      "fetch_locations_failed": "Fel vid hämtning av platser: {{message}}",
       "fetch_review_failed": "Fel vid hämtning av recension {{id}}: {{message}}",
       "fetch_user_failed": "Fel vid hämtning av användare {{id}}: {{message}}",
       "location_deletion_failed": "Borttagning av plats misslyckades: {{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "Inloggning misslyckades: {{message}}",
       "signup_failed": "Registrering misslyckades: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "Du är online igen.",
+      "you_are_offline": "Du är offline."
+    },
     "geolocation": {
       "code_2": "Position ej tillgänglig: {{message}}",
       "code_3": "Timeout för platsinformation: {{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "Platsinformation stöds inte"
     },
     "language_changed_refresh_to_reload_map": "Språk ändrat, uppdatera sidan för att ladda om kartan",
+    "results_unavailable": "Resultat inte tillgängliga",
     "unknown_error": "Okänt fel"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "Dataset som importeras till Falling Fruit faller i två huvudkategorier. \"Gemenskapskartor\" byggs av matletare och freeganare när de utforskar sina områden efter saker att äta. Vi är tacksamma för de hårt arbetande medborgar-kartograferna som har sammanställt dessa data. \"Trädinventeringar\" sammanställs av städer, universitet och andra institutioner som vill dokumentera och ta hand om sina träd bättre. Vi utvinner dessa omfattande dataset för matproducerande arter och lägger till dem på kartan. För att hjälpa oss kartlägga fruktträden i ditt område, kontakta din skola eller stad och uppmana dem att dela sin trädinventering med oss."
     },
     "network_error": {
-      "could_not_connect": "Vi kunde inte ansluta. Du kan vara offline, eller så kan tjänsten vara tillfälligt otillgänglig.",
       "header_message": "Nätverksfel",
-      "please_try_again": "Vänligen kontrollera din anslutning eller försök igen senare."
+      "please_check_your_connection": "Vänligen kontrollera din anslutning och försök igen.",
+      "you_are_offline": "Vi kunde inte ansluta. Det verkar som att du är offline."
     },
     "settings": {
       "bicycle": "Cykel",

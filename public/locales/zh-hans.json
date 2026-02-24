@@ -25,9 +25,12 @@
   },
   "error_message": {
     "api": {
+      "fetch_clusters_failed": "获取集群失败：{{message}}",
+      "fetch_filter_counts_failed": "获取筛选计数失败：{{message}}",
       "fetch_import_failed": "获取数据集{{id}}失败：{{message}}",
       "fetch_location_changes_failed": "获取位置变更失败：{{message}}",
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
+      "fetch_locations_failed": "获取位置失败：{{message}}",
       "fetch_review_failed": "获取评论 {{id}} 失败：{{message}}",
       "fetch_user_failed": "获取用户{{id}}失败：{{message}}",
       "location_deletion_failed": "删除位置失败：{{message}}",
@@ -51,6 +54,10 @@
       "signin_failed": "登录失败：{{message}}",
       "signup_failed": "注册失败：{{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "您已重新上线。",
+      "you_are_offline": "您已离线。"
+    },
     "geolocation": {
       "code_2": "位置不可用：{{message}}",
       "code_3": "地理位置超时：{{message}}",
@@ -58,6 +65,7 @@
       "not_supported": "不支持地理位置"
     },
     "language_changed_refresh_to_reload_map": "语言已更改，请刷新页面以重新加载地图",
+    "results_unavailable": "结果不可用",
     "unknown_error": "未知错误"
   },
   "filter": {
@@ -300,9 +308,9 @@
       "types_of_data": "导入到 Falling Fruit 中的数据集分为两大类。 “社区地图”是由觅食者和自由主义者在他们仔细研究社区寻找食物时建立的。我们感谢辛勤工作的公民制图员，他们编制了这些数据。 “树木清单”由希望更好地记录和照顾树木的城市、大学和其他机构编制。我们为生产食物的物种挖掘这些庞大的数据集，并将它们添加到地图中。为了帮助我们绘制您附近的果树地图，请联系您的学校或城市，敦促他们与我们分享他们的树木清单。"
     },
     "network_error": {
-      "could_not_connect": "我们无法连接。您可能处于离线状态，或者服务可能暂时不可用。",
       "header_message": "网络错误",
-      "please_try_again": "请检查您的连接或稍后重试。"
+      "please_check_your_connection": "请检查您的连接并重试。",
+      "you_are_offline": "无法连接。看起来您已离线。"
     },
     "settings": {
       "bicycle": "自行车",

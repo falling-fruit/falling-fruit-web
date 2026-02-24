@@ -14,7 +14,8 @@ const pages = [
   },
 ]
 
-const errorRoutes = pages.map((props) => (
-  <Route key={props.path[0]} {...props} />
-))
+const errorRoutes = [
+  ...pages.map((props) => <Route key={props.path[0]} {...props} />),
+]
+
 export default errorRoutes
