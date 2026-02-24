@@ -409,6 +409,7 @@
       "observed_on": "Gözlemlenme tarihi {{date}}",
       "photos": "Fotoğraflar"
     },
+    "you_observed": "Bu konumu {{date}} tarihinde gözlemlediniz",
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
   },
   "share": {

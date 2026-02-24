@@ -409,6 +409,7 @@
       "observed_on": "Quan sát vào {{date}}",
       "photos": "Hình ảnh"
     },
+    "you_observed": "Bạn đã quan sát địa điểm này vào {{date}}",
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
   "share": {

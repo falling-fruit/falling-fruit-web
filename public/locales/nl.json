@@ -409,6 +409,7 @@
       "observed_on": "Waargenomen op {{date}}",
       "photos": "Foto's"
     },
+    "you_observed": "Je hebt deze locatie waargenomen op {{date}}",
     "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
   },
   "share": {

@@ -409,6 +409,7 @@
       "observed_on": "观察于 {{date}}",
       "photos": "照片"
     },
+    "you_observed": "您于 {{date}} 观察了此地点",
     "you_reviewed": "您于 {{date}} 评论了此地点"
   },
   "share": {

@@ -409,6 +409,7 @@
       "observed_on": "Замечено {{date}}",
       "photos": "Фотографии"
     },
+    "you_observed": "Вы наблюдали это место {{date}}",
     "you_reviewed": "Вы оставили отзыв об этом месте {{date}}"
   },
   "share": {

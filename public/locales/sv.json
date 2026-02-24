@@ -409,6 +409,7 @@
       "observed_on": "Observerad den {{date}}",
       "photos": "Foton"
     },
+    "you_observed": "Du observerade denna plats den {{date}}",
     "you_reviewed": "Du recenserade denna plats den {{date}}"
   },
   "share": {
