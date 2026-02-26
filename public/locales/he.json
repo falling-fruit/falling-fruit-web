@@ -409,6 +409,7 @@
       "observed_on": "נצפה בתאריך {{date}}",
       "photos": "תמונות"
     },
+    "you_observed": "צפית במיקום זה בתאריך {{date}}",
     "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
   },
   "share": {

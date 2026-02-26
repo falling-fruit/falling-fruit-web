@@ -409,7 +409,8 @@
       "add_from_camera": "Take photo",
       "add_from_gallery": "Choose from gallery"
     },
-    "you_reviewed": "You reviewed this location on {{date}}"
+    "you_reviewed": "You reviewed this location on {{date}}",
+    "you_observed": "You observed this location on {{date}}"
   },
   "share": {
     "leave_embed_view_for_full_site": "Full site",

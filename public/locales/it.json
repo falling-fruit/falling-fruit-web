@@ -409,6 +409,7 @@
       "observed_on": "Osservato il {{date}}",
       "photos": "Foto"
     },
+    "you_observed": "Hai osservato questa posizione il {{date}}",
     "you_reviewed": "Hai recensito questa posizione il {{date}}"
   },
   "share": {

@@ -409,6 +409,7 @@
       "observed_on": "Помічено {{date}}",
       "photos": "Фото"
     },
+    "you_observed": "Ви помітили це місце {{date}}",
     "you_reviewed": "Ви залишили відгук про це місце {{date}}"
   },
   "share": {

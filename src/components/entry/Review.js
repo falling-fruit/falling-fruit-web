@@ -75,9 +75,13 @@ const Review = ({
     <ReviewContainer $editable={editable}>
       {editable && (
         <EditableHeader>
-          {t('review.you_reviewed', {
-            date: formatISOString(review.created_at, i18n.language),
-          })}{' '}
+          {review.observed_on
+            ? t('review.you_observed', {
+                date: formatISOString(review.observed_on, i18n.language),
+              })
+            : t('review.you_reviewed', {
+                date: formatISOString(review.created_at, i18n.language),
+              })}{' '}
           <ButtonsRow>
             <DeleteButton
               regular

@@ -409,6 +409,7 @@
       "observed_on": "تمت الملاحظة في {{date}}",
       "photos": "صور"
     },
+    "you_observed": "لقد لاحظت هذا الموقع في {{date}}",
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
   "share": {
