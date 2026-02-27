@@ -35,7 +35,7 @@ export const useDeleteLocation = () => {
     toast.info(t('info_message.cannot_delete_location_with_other_reviews'))
   }
 
-  const isDeleteVisible = locationData?.user_id === user?.id
+  const isDeleteVisible = locationData && locationData.user_id === user?.id
   const isDeleteDisabled =
     reviews?.some((review) => review.user_id !== user?.id) || false
 
