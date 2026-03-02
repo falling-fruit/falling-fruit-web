@@ -179,6 +179,11 @@ const createLabel = (
     setLabelTextStyle(this.div, mapType)
   }
 
+  label.updatePosition = function (google, lat, lng) {
+    this.position = new google.LatLng(lat, lng)
+    this.draw()
+  }
+
   label.setMap(googleMap)
   return label
 }
@@ -259,6 +264,22 @@ const LocationMarkers = ({
           labelData,
           location,
         })
+      } else {
+        const markerData = currentMarkers.get(location.id)
+        const prevLocation = markerData.location
+        if (
+          prevLocation.lat !== location.lat ||
+          prevLocation.lng !== location.lng
+        ) {
+          markerData.marker.setPosition({
+            lat: location.lat,
+            lng: location.lng,
+          })
+          if (markerData.label) {
+            markerData.label.updatePosition(google, location.lat, location.lng)
+          }
+          markerData.location = location
+        }
       }
     })
 
