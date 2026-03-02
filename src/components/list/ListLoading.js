@@ -12,7 +12,7 @@ const LoadingContainer = styled.div`
 
 const ListState = ({ image, icon, text, ...props }) => (
   <LoadingContainer {...props}>
-    {image && <img src={image} alt="loading-list-icon" />}
+    {image && <img src={image} alt="" />}
     {icon}
     <p>{text}</p>
   </LoadingContainer>
