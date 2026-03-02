@@ -36,15 +36,8 @@ const NoResultsFound = (props) => {
   )
 }
 
-const ResultsUnavailable = (props) => {
-  const { t } = useTranslation()
-  return (
-    <ListState
-      icon={<Error size="3rem" />}
-      text={t('error_message.results_unavailable')}
-      {...props}
-    />
-  )
-}
+const ResultsUnavailable = ({ message, ...props }) => (
+  <ListState icon={<Error size="3rem" />} text={message} {...props} />
+)
 
 export { NoResultsFound, ResultsUnavailable, ShouldZoomIn }

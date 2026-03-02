@@ -135,7 +135,7 @@ const Filter = () => {
       ) : fetchError ? (
         <ErrorContainer>
           <Error size="1em" />
-          {t('error_message.results_unavailable')}
+          {fetchError}
         </ErrorContainer>
       ) : (
         <TreeSelect

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import i18next from 'i18next'
-import { toast } from 'react-toastify'
 
 import { getLocations, getLocationsCount } from '../utils/api'
 import isNetworkError from '../utils/isNetworkError'
@@ -38,7 +37,7 @@ export const listSlice = createSlice({
     isLoading: false,
     totalCount: null,
     shouldFetchNewLocations: true,
-    fetchError: false,
+    fetchError: null,
     locations: [],
     lastMapView: null,
     lastViewedListPositionId: null,
@@ -82,19 +81,15 @@ export const listSlice = createSlice({
 
       state.isLoading = false
       state.shouldFetchNewLocations = false
-      state.fetchError = false
+      state.fetchError = null
     },
     [fetchListLocations.rejected]: (state, action) => {
       state.isLoading = false
-      if (!isNetworkError(action.error) && !state.fetchError) {
-        toast.error(
-          i18next.t('error_message.api.fetch_locations_failed', {
-            message:
-              action.error.message || i18next.t('error_message.unknown_error'),
-          }),
-        )
-      }
-      state.fetchError = true
+      state.fetchError = i18next.t('error_message.api.fetch_locations_failed', {
+        message: isNetworkError(action.error)
+          ? i18next.t('error_message.connectivity.you_are_offline')
+          : action.error.message || i18next.t('error_message.unknown_error'),
+      })
     },
     [updateSelection.type]: (state) => {
       state.shouldFetchNewLocations = true

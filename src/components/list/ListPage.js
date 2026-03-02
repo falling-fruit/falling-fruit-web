@@ -45,7 +45,7 @@ const ListPage = () => {
   }
 
   if (fetchError) {
-    return <ResultsUnavailable />
+    return <ResultsUnavailable message={fetchError} />
   }
 
   if (locations.length === 0 && !isNextPageLoading && !locationsInvalid) {
