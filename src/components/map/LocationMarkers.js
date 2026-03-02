@@ -184,6 +184,14 @@ const createLabel = (
     this.draw()
   }
 
+  label.updateHtml = function (newHtml) {
+    if (!this.div || this.labelHtml === newHtml) {
+      return
+    }
+    this.labelHtml = newHtml
+    this.div.innerHTML = newHtml
+  }
+
   label.setMap(googleMap)
   return label
 }
@@ -280,6 +288,11 @@ const LocationMarkers = ({
           }
           markerData.location = location
         }
+
+        const newLabelData = (location.type_ids || [])
+          .map((id) => getDisplayLabel(typesAccess, id))
+          .filter(Boolean)
+        markerData.labelData = newLabelData
       }
     })
 
@@ -315,6 +328,14 @@ const LocationMarkers = ({
 
         if (markerData.label.updateStyle) {
           markerData.label.updateStyle(mapType)
+        }
+
+        const newLabelHtml = formatLabelHtml(
+          markerData.labelData,
+          selectedTypes,
+        )
+        if (markerData.label.updateHtml) {
+          markerData.label.updateHtml(newLabelHtml)
         }
 
         const spans =
