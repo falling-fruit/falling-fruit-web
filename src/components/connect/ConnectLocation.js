@@ -145,19 +145,14 @@ const ConnectLocation = ({
             zoom: 16,
           }
         dispatch(setInitialView(view))
+        // navigate to the page with the new URL
+        // to trigger component reload
         const newUrl = currentPathWithView(view)
-        const currentPathname = window.location.pathname
-        if (!currentPathname.includes('@')) {
-          history.push(newUrl)
-        }
+        history.push(newUrl)
       }
 
       if (isFromListLocations) {
-        const currentPathname = window.location.pathname
-        const targetPath = `/locations/${action.meta.arg.locationId}`
-        if (!currentPathname.includes(targetPath)) {
-          history.push(targetPath)
-        }
+        history.push(`/locations/${locationId}`)
       }
     })
   }, [dispatch, locationId]) //eslint-disable-line
