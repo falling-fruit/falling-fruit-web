@@ -26,11 +26,7 @@ const EntryDesktop = () => {
     isLoading,
   } = useSelector((state) => state.location)
 
-  if (!locationData) {
-    return <LoadingIndicator cover vertical />
-  }
-
-  if (!reviews) {
+  if (!locationData || !reviews) {
     return <LoadingIndicator cover vertical />
   }
 
