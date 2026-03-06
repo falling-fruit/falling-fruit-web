@@ -1,5 +1,8 @@
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { editProfile } from '../../redux/authSlice'
 import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
@@ -37,15 +40,26 @@ const explanationHtml = `
   <p>If you'd like to permanently delete your account and all associated data, please contact us directly.</p>
 `
 
-const HideProfilePage = () => (
-  <TopSafeAreaInsetPage>
-    <StyledBackButton backPath="/account/edit" />
-    <h1>Hide your profile</h1>
-    <Explanation dangerouslySetInnerHTML={{ __html: explanationHtml }} />
-    <Button type="button" onClick={false}>
-      Hide my profile
-    </Button>
-  </TopSafeAreaInsetPage>
-)
+const HideProfilePage = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const handleHideProfile = () => {
+    dispatch(editProfile({ private: true })).then(() => {
+      history.push('/account/edit')
+    })
+  }
+
+  return (
+    <TopSafeAreaInsetPage>
+      <StyledBackButton backPath="/account/edit" />
+      <h1>Hide your profile</h1>
+      <Explanation dangerouslySetInnerHTML={{ __html: explanationHtml }} />
+      <Button type="button" onClick={handleHideProfile}>
+        Hide my profile
+      </Button>
+    </TopSafeAreaInsetPage>
+  )
+}
 
 export default HideProfilePage

@@ -40,6 +40,18 @@ const LinksContainer = styled.div`
   margin-bottom: 1.5em;
 `
 
+const PrivateNotice = styled.div`
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background: ${({ theme }) => theme.secondaryBackground ?? '#f5f5f5'};
+  border-radius: 4px;
+  line-height: 1.6;
+
+  p {
+    margin-bottom: 0.75em;
+  }
+`
+
 const formToUser = ({ email, name, bio, announcements_email, range }) => ({
   email,
   name: name || null,
@@ -63,6 +75,7 @@ const AccountPage = () => {
   const { t } = useTranslation()
   const isDesktop = useIsDesktop()
   const [isUpdatingPreferences, setIsUpdatingPreferences] = useState(false)
+  const [isUnhiding, setIsUnhiding] = useState(false)
 
   if (!isLoggedIn && !isLoading) {
     return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
@@ -88,6 +101,15 @@ const AccountPage = () => {
       setIsUpdatingPreferences(false)
     })
   }
+
+  const handleUnhideProfile = () => {
+    setIsUnhiding(true)
+    dispatch(editProfile({ private: false })).then(() => {
+      setIsUnhiding(false)
+    })
+  }
+
+  const isPrivate = user?.private
 
   return (
     <TopSafeAreaInsetPage>
@@ -137,15 +159,35 @@ const AccountPage = () => {
                 <Link to={`/users/${user.id}/activity`}>
                   {t('users.your_activity')}
                 </Link>
-                <Link to="/account/hide-profile">
-                  {t('users.hide_profile')}
-                </Link>
+                {!isPrivate && (
+                  <Link to="/account/hide-profile">
+                    {t('users.hide_profile')}
+                  </Link>
+                )}
               </Column>
             </LinksContainer>
           </section>
 
           <section>
             <h2>{t('users.header.profile')}</h2>
+            {isPrivate && (
+              <PrivateNotice>
+                <p>
+                  Your profile is currently hidden. Other users cannot see your
+                  name, bio, or profile page. Your contributions remain on the
+                  map anonymously.
+                </p>
+                <Button
+                  type="button"
+                  onClick={handleUnhideProfile}
+                  disabled={isUnhiding}
+                >
+                  {isUnhiding
+                    ? t('form.button.submitting')
+                    : 'Unhide my profile'}
+                </Button>
+              </PrivateNotice>
+            )}
             <Formik
               enableReinitialize
               initialValues={userToForm(user)}
@@ -158,17 +200,26 @@ const AccountPage = () => {
               {({ dirty, isValid, isSubmitting }) => (
                 <Form>
                   <FormInputWrapper>
-                    <Input type="text" name="name" label={t('glossary.name')} />
-                    <Textarea name="bio" label={t('users.bio')} />
+                    <Input
+                      type="text"
+                      name="name"
+                      label={t('glossary.name')}
+                      disabled={isPrivate}
+                    />
+                    <Textarea
+                      name="bio"
+                      label={t('users.bio')}
+                      disabled={isPrivate}
+                    />
                   </FormInputWrapper>
 
                   <FormButtonWrapper>
-                    <Button secondary type="reset">
+                    <Button secondary type="reset" disabled={isPrivate}>
                       {t('form.button.reset')}
                     </Button>
                     <Button
                       type="submit"
-                      disabled={!dirty || !isValid || isSubmitting}
+                      disabled={isPrivate || !dirty || !isValid || isSubmitting}
                     >
                       {isSubmitting
                         ? t('form.button.submitting')
