@@ -32,12 +32,11 @@ const Explanation = styled.div`
 const explanationHtml = `
   <p>Hiding your profile will make your account invisible to other users of the platform. Here's what that means:</p>
   <ul>
-    <li>Your name and bio will no longer appear on any listings or activity you've contributed.</li>
+    <li>Your name and bio will no longer appear on any activity you've contributed.</li>
     <li>Other users will not be able to visit your profile page.</li>
-    <li>Your past contributions (such as added locations) will remain on the map, but will be shown anonymously.</li>
-    <li>You can reverse this at any time by returning to this page.</li>
+    <li>Your locations and reviews will remain on the map, but will be shown anonymously.</li>
+    <li>You can reverse this at any time.</li>
   </ul>
-  <p>If you'd like to permanently delete your account and all associated data, please contact us directly.</p>
 `
 
 const HideProfilePage = () => {

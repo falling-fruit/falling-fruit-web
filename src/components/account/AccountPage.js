@@ -114,7 +114,7 @@ const AccountPage = () => {
     })
   }
 
-  const isPrivate = !user?.private
+  const isPrivate = user?.private
 
   return (
     <TopSafeAreaInsetPage>
@@ -165,9 +165,7 @@ const AccountPage = () => {
                   {t('users.your_activity')}
                 </Link>
                 {!isPrivate && (
-                  <Link to="/account/hide-profile">
-                    {t('users.hide_profile')}
-                  </Link>
+                  <Link to="/account/hide-profile">Hide your profile</Link>
                 )}
               </Column>
             </LinksContainer>
