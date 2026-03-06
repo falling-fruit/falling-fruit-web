@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import AccountPage from './AccountPage'
 import ChangeEmailPage from './ChangeEmailPage'
 import ChangePasswordPage from './ChangePasswordPage'
+import HideProfilePage from './HideProfilePage'
 
 const pages = [
   {
@@ -16,6 +17,10 @@ const pages = [
   {
     path: '/account/change-email',
     component: ChangeEmailPage,
+  },
+  {
+    path: '/account/hide-profile',
+    component: HideProfilePage,
   },
 ]
 

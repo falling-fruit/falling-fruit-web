@@ -137,6 +137,9 @@ const AccountPage = () => {
                 <Link to={`/users/${user.id}/activity`}>
                   {t('users.your_activity')}
                 </Link>
+                <Link to="/account/hide-profile">
+                  {t('users.hide_profile')}
+                </Link>
               </Column>
             </LinksContainer>
           </section>
