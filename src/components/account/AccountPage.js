@@ -52,6 +52,11 @@ const PrivateNotice = styled.div`
   }
 `
 
+const ProfileFormContainer = styled.div`
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
+  transition: opacity 0.2s ease;
+`
+
 const formToUser = ({ email, name, bio, announcements_email, range }) => ({
   email,
   name: name || null,
@@ -188,47 +193,51 @@ const AccountPage = () => {
                 </Button>
               </PrivateNotice>
             )}
-            <Formik
-              enableReinitialize
-              initialValues={userToForm(user)}
-              validationSchema={Yup.object({
-                name: Yup.string(),
-                bio: Yup.string(),
-              })}
-              onSubmit={handleSubmit}
-            >
-              {({ dirty, isValid, isSubmitting }) => (
-                <Form>
-                  <FormInputWrapper>
-                    <Input
-                      type="text"
-                      name="name"
-                      label={t('glossary.name')}
-                      disabled={isPrivate}
-                    />
-                    <Textarea
-                      name="bio"
-                      label={t('users.bio')}
-                      disabled={isPrivate}
-                    />
-                  </FormInputWrapper>
+            <ProfileFormContainer $isDisabled={isPrivate}>
+              <Formik
+                enableReinitialize
+                initialValues={userToForm(user)}
+                validationSchema={Yup.object({
+                  name: Yup.string(),
+                  bio: Yup.string(),
+                })}
+                onSubmit={handleSubmit}
+              >
+                {({ dirty, isValid, isSubmitting }) => (
+                  <Form>
+                    <FormInputWrapper>
+                      <Input
+                        type="text"
+                        name="name"
+                        label={t('glossary.name')}
+                        disabled={isPrivate}
+                      />
+                      <Textarea
+                        name="bio"
+                        label={t('users.bio')}
+                        disabled={isPrivate}
+                      />
+                    </FormInputWrapper>
 
-                  <FormButtonWrapper>
-                    <Button secondary type="reset" disabled={isPrivate}>
-                      {t('form.button.reset')}
-                    </Button>
-                    <Button
-                      type="submit"
-                      disabled={isPrivate || !dirty || !isValid || isSubmitting}
-                    >
-                      {isSubmitting
-                        ? t('form.button.submitting')
-                        : t('users.save_changes')}
-                    </Button>
-                  </FormButtonWrapper>
-                </Form>
-              )}
-            </Formik>
+                    <FormButtonWrapper>
+                      <Button secondary type="reset" disabled={isPrivate}>
+                        {t('form.button.reset')}
+                      </Button>
+                      <Button
+                        type="submit"
+                        disabled={
+                          isPrivate || !dirty || !isValid || isSubmitting
+                        }
+                      >
+                        {isSubmitting
+                          ? t('form.button.submitting')
+                          : t('users.save_changes')}
+                      </Button>
+                    </FormButtonWrapper>
+                  </Form>
+                )}
+              </Formik>
+            </ProfileFormContainer>
           </section>
           {!isDesktop && (
             <section>
