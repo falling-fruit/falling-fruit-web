@@ -109,7 +109,7 @@ const AccountPage = () => {
     })
   }
 
-  const isPrivate = user?.private
+  const isPrivate = !user?.private
 
   return (
     <TopSafeAreaInsetPage>
