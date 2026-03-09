@@ -65,6 +65,7 @@
       "not_supported": "不支持地理位置"
     },
     "language_changed_refresh_to_reload_map": "语言已更改，请刷新页面以重新加载地图",
+    "recaptcha_failed": "ReCAPTCHA 验证失败",
     "results_unavailable": "结果不可用",
     "unknown_error": "未知错误"
   },

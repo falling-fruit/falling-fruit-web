@@ -65,6 +65,7 @@
       "not_supported": "Geolocalizzazione non supportata"
     },
     "language_changed_refresh_to_reload_map": "Lingua modificata, aggiorna la pagina per ricaricare la mappa",
+    "recaptcha_failed": "ReCAPTCHA fallito",
     "results_unavailable": "Risultati non disponibili",
     "unknown_error": "Errore sconosciuto"
   },

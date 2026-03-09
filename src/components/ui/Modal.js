@@ -48,8 +48,10 @@ const Modal = ({
   const isLoggedIn = useSelector((state) => !!state.auth.user)
   const isDesktop = useIsDesktop()
   const { t } = useTranslation()
-  const { Recaptcha, handlePresubmit: onPresubmit } =
-    useInvisibleRecaptcha(onSubmit)
+  const { Recaptcha, handlePresubmit: onPresubmit } = useInvisibleRecaptcha(
+    onSubmit,
+    null,
+  )
 
   return (
     <StyledModal

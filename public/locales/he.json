@@ -65,6 +65,7 @@
       "not_supported": "איתור מיקום אינו נתמך"
     },
     "language_changed_refresh_to_reload_map": "השפה השתנתה, יש לרענן את הדף כדי לטעון מחדש את המפה",
+    "recaptcha_failed": "ReCAPTCHA נכשל",
     "results_unavailable": "תוצאות לא זמינות",
     "unknown_error": "שגיאה לא ידועה"
   },

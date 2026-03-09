@@ -65,6 +65,7 @@
       "not_supported": "Platsinformation stöds inte"
     },
     "language_changed_refresh_to_reload_map": "Språk ändrat, uppdatera sidan för att ladda om kartan",
+    "recaptcha_failed": "ReCAPTCHA misslyckades",
     "results_unavailable": "Resultat inte tillgängliga",
     "unknown_error": "Okänt fel"
   },

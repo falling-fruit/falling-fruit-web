@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Route, useParams } from 'react-router-dom'
+import { Route, useLocation, useParams } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { saveLocationFormValues } from '../../redux/locationSlice'
@@ -62,11 +62,22 @@ const DesktopButtonUnderForm = ({ formRef, saveFormValues }) => {
   return <SettingsButton onClick={handleClick} />
 }
 
+const useHasPendingUrlKey = (key) => {
+  const { search } = useLocation()
+  const searchParams = new URLSearchParams(search)
+  return searchParams.has(key)
+}
+
 const EditLocation = ({ NavComponent, withSettingsButton }) => {
   const history = useAppHistory()
   const formRef = useRef()
   const { locationId } = useParams()
   const { t } = useTranslation()
+  const isPending = useHasPendingUrlKey('locationFormData')
+
+  if (isPending) {
+    return null
+  }
 
   return (
     <>
@@ -93,6 +104,11 @@ const AddLocation = ({ NavComponent, backUrl, withSettingsButton }) => {
   const formRef = useRef()
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const isPending = useHasPendingUrlKey('locationFormData')
+
+  if (isPending) {
+    return null
+  }
 
   return (
     <>
@@ -122,6 +138,11 @@ const AddReview = ({ NavComponent, withSettingsButton }) => {
   const formRef = useRef()
   const { locationId } = useParams()
   const { t } = useTranslation()
+  const isPending = useHasPendingUrlKey('reviewFormData')
+
+  if (isPending) {
+    return null
+  }
 
   return (
     <>
@@ -148,6 +169,11 @@ const EditReview = ({ NavComponent, withSettingsButton }) => {
   const formRef = useRef()
   const { review } = useSelector((state) => state.review)
   const { t } = useTranslation()
+  const isPending = useHasPendingUrlKey('reviewFormData')
+
+  if (isPending) {
+    return null
+  }
 
   return (
     <>

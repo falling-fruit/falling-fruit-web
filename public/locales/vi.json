@@ -65,6 +65,7 @@
       "not_supported": "Không hỗ trợ định vị"
     },
     "language_changed_refresh_to_reload_map": "Ngôn ngữ đã thay đổi, làm mới trang để tải lại bản đồ",
+    "recaptcha_failed": "ReCAPTCHA thất bại",
     "results_unavailable": "Kết quả không khả dụng",
     "unknown_error": "Lỗi không xác định"
   },

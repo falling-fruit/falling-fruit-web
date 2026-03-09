@@ -3,18 +3,23 @@ import { useTranslation } from 'react-i18next'
 import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
 
+import { useAppHistory } from '../../utils/useAppHistory'
+import useShareUrl from '../share/useShareUrl'
+
 const HiddenReaptcha = styled(Reaptcha)`
   visibility: hidden;
 `
 
-export const useInvisibleRecaptcha = (handleSubmit) => {
-  const { i18n } = useTranslation()
+export const useInvisibleRecaptcha = (handleSubmit, formValuesKey) => {
+  const { i18n, t } = useTranslation()
+  const history = useAppHistory()
   const recaptchaRef = useRef()
   const submitArgsRef = useRef()
+  const shareUrl = useShareUrl()
 
-  const handlePresubmit = (values, formikBag) => {
+  const handlePresubmit = async (values, formikBag) => {
     submitArgsRef.current = { values, formikBag }
-    recaptchaRef.current.execute()
+    await recaptchaRef.current.execute()
   }
 
   const handleVerify = (recaptchaResponse) => {
@@ -26,6 +31,26 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
     )
   }
 
+  const navigateToFatalError = () => {
+    const { values } = submitArgsRef.current ?? {}
+    const fromPageUrl = new URL(shareUrl)
+    if (formValuesKey && values !== undefined) {
+      const serializedValues =
+        values?.review?.photos !== undefined
+          ? { ...values, review: { ...values.review, photos: [] } }
+          : values
+      fromPageUrl.searchParams.set(
+        formValuesKey,
+        JSON.stringify(serializedValues),
+      )
+    }
+
+    history.push('/error/fatal', {
+      errorMessage: t('error_message.recaptcha_failed'),
+      fromPage: fromPageUrl.toString(),
+    })
+  }
+
   const Recaptcha = () => (
     <HiddenReaptcha
       size="invisible"
@@ -34,6 +59,8 @@ export const useInvisibleRecaptcha = (handleSubmit) => {
         recaptchaRef.current = e
       }}
       onVerify={handleVerify}
+      onError={navigateToFatalError}
+      onExpire={navigateToFatalError}
       hl={i18n.language}
     />
   )

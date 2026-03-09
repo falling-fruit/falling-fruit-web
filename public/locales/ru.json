@@ -65,6 +65,7 @@
       "not_supported": "Геолокация не поддерживается"
     },
     "language_changed_refresh_to_reload_map": "Язык изменен. Обновите страницу, чтобы перезагрузить карту",
+    "recaptcha_failed": "Ошибка проверки ReCAPTCHA",
     "results_unavailable": "Результаты недоступны",
     "unknown_error": "Неизвестная ошибка"
   },

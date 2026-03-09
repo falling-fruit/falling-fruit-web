@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 import { LabelVisibility, MapType, OverlayType } from '../../constants/settings'
 import { setLanguageFromLocaleString } from '../../i18n'
+import { saveLocationFormValues } from '../../redux/locationSlice'
+import { saveReviewFormValues } from '../../redux/reviewSlice'
 import { updateSettings } from '../../redux/settingsSlice'
 import { updateSelection } from '../../redux/updateSelection'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -25,6 +27,9 @@ const ConnectShare = () => {
 
     const legacyMapType = searchParams.get('t')
     const legacyLabels = searchParams.get('l')
+
+    const reviewFormData = searchParams.get('reviewFormData')
+    const locationFormData = searchParams.get('locationFormData')
 
     const settingsUpdates = {}
 
@@ -76,6 +81,26 @@ const ConnectShare = () => {
     if (locale !== null) {
       setLanguageFromLocaleString(locale)
       history.removeParam('locale')
+    }
+
+    if (reviewFormData !== null) {
+      try {
+        const parsedReviewFormData = JSON.parse(reviewFormData)
+        dispatch(saveReviewFormValues(parsedReviewFormData))
+      } catch (e) {
+        console.error('[ConnectShare] Failed to parse reviewFormData', e)
+      }
+      history.removeParam('reviewFormData')
+    }
+
+    if (locationFormData !== null) {
+      try {
+        const parsedLocationFormData = JSON.parse(locationFormData)
+        dispatch(saveLocationFormValues(parsedLocationFormData))
+      } catch (e) {
+        console.error('[ConnectShare] Failed to parse locationFormData', e)
+      }
+      history.removeParam('locationFormData')
     }
 
     if (Object.keys(settingsUpdates).length > 0) {

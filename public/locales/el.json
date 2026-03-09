@@ -65,6 +65,7 @@
       "not_supported": "Ο εντοπισμός τοποθεσίας δεν υποστηρίζεται"
     },
     "language_changed_refresh_to_reload_map": "Η γλώσσα άλλαξε. Ανανεώστε τη σελίδα για να επαναφορτωθεί ο χάρτης",
+    "recaptcha_failed": "Αποτυχία ReCAPTCHA",
     "results_unavailable": "Τα αποτελέσματα δεν είναι διαθέσιμα",
     "unknown_error": "Άγνωστο σφάλμα"
   },

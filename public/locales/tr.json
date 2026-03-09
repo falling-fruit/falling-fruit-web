@@ -65,6 +65,7 @@
       "not_supported": "Konum özelliği desteklenmiyor"
     },
     "language_changed_refresh_to_reload_map": "Dil değiştirildi, haritayı yenilemek için sayfayı yenileyin",
+    "recaptcha_failed": "ReCAPTCHA başarısız oldu",
     "results_unavailable": "Sonuçlar mevcut değil",
     "unknown_error": "Bilinmeyen hata"
   },

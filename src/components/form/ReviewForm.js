@@ -155,8 +155,10 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
   }
 
   const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const { Recaptcha, handlePresubmit: onPresubmit } =
-    useInvisibleRecaptcha(handleSubmit)
+  const { Recaptcha, handlePresubmit: onPresubmit } = useInvisibleRecaptcha(
+    handleSubmit,
+    'reviewFormData',
+  )
 
   return (
     <StyledForm>

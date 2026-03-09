@@ -65,6 +65,7 @@
       "not_supported": "Geolocatie wordt niet ondersteund"
     },
     "language_changed_refresh_to_reload_map": "Taal gewijzigd, vernieuw de pagina om de kaart opnieuw te laden",
+    "recaptcha_failed": "ReCAPTCHA mislukt",
     "results_unavailable": "Resultaten niet beschikbaar",
     "unknown_error": "Onbekende fout"
   },

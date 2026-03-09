@@ -278,6 +278,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
       })
     }
   }
+
   const handleCancel = (e) => {
     e.stopPropagation()
     if (editingId) {
@@ -288,8 +289,10 @@ export const LocationForm = ({ editingId, innerRef }) => {
   }
 
   const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const { Recaptcha, handlePresubmit: onPresubmit } =
-    useInvisibleRecaptcha(handleSubmit)
+  const { Recaptcha, handlePresubmit: onPresubmit } = useInvisibleRecaptcha(
+    handleSubmit,
+    'locationFormData',
+  )
 
   return isLoading || typesAccess.isEmpty ? (
     <div>{t('layouts.loading')}</div>
