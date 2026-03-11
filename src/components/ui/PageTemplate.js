@@ -248,7 +248,7 @@ const ErrorPage = ({ children }) => {
       <PageWrapper isDesktop={isDesktop}>
         {!isDesktop && (
           <MobileHeader>
-            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+            <img src="/logo_orange.svg" alt="Falling Fruit" />
           </MobileHeader>
         )}
         {children}

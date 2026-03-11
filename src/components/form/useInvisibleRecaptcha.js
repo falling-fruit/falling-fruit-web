@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
 
@@ -18,6 +19,12 @@ export const useInvisibleRecaptcha = (handleSubmit, formValuesKey) => {
   const shareUrl = useShareUrl()
 
   const handlePresubmit = async (values, formikBag) => {
+    if (!navigator.onLine) {
+      toast.warning(t('error_message.connectivity.you_are_offline'))
+      formikBag.setSubmitting(false)
+      return
+    }
+
     submitArgsRef.current = { values, formikBag }
     await recaptchaRef.current.execute()
   }
