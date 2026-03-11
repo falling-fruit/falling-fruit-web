@@ -9,6 +9,7 @@ import { updateLastMapView } from './viewportSlice'
 export const GeolocationState = {
   INITIAL: 'INITIAL',
   DENIED: 'DENIED',
+  FAILED: 'FAILED',
   LOADING: 'LOADING',
   RELOADING: 'RELOADING',
   CENTERING: 'CENTERING',
@@ -66,12 +67,14 @@ export const geolocationSlice = createSlice({
           // Toast the message and suggest a retry
           //
           // @see src/components/map/ConnectedGeolocation.js
-          state.geolocationState = GeolocationState.INITIAL
-          toast.error(i18next.t('error_message.geolocation.code_3'), {
-            message:
-              action.payload.message ||
-              i18next.t('error_message.unknown_error'),
-          })
+          state.geolocationState = GeolocationState.FAILED
+          toast.error(
+            i18next.t('error_message.geolocation.code_3', {
+              message:
+                action.payload.message ||
+                i18next.t('error_message.unknown_error'),
+            }),
+          )
           break
         case 2:
         default:
@@ -79,12 +82,14 @@ export const geolocationSlice = createSlice({
           // Toast the message and suggest a retry
           //
           // @see src/components/map/ConnectedGeolocation.js
-          state.geolocationState = GeolocationState.INITIAL
-          toast.error(i18next.t('error_message.geolocation.code_2'), {
-            message:
-              action.payload.message ||
-              i18next.t('error_message.unknown_error'),
-          })
+          state.geolocationState = GeolocationState.FAILED
+          toast.error(
+            i18next.t('error_message.geolocation.code_2', {
+              message:
+                action.payload.message ||
+                i18next.t('error_message.unknown_error'),
+            }),
+          )
           break
       }
     },
