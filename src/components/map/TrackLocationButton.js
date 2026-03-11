@@ -105,7 +105,10 @@ const TrackLocationButton = ({ isIcon }) => {
       onClick={(event) => {
         if (geolocationState === GeolocationState.DENIED) {
           toast.info(t('error_message.geolocation.denied'))
-        } else if (geolocationState === GeolocationState.INITIAL) {
+        } else if (
+          geolocationState === GeolocationState.INITIAL ||
+          geolocationState === GeolocationState.FAILED
+        ) {
           dispatch(requestGeolocation())
         } else if (geolocationState === GeolocationState.DOT_ON) {
           dispatch(rerequestGeolocation())

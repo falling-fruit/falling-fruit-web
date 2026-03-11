@@ -66,7 +66,11 @@ const HomePage = () => {
   )
 
   const handleExploreMap = () => {
-    if (lastMapView || geolocationState === GeolocationState.DENIED) {
+    if (
+      lastMapView ||
+      geolocationState === GeolocationState.DENIED ||
+      geolocationState === GeolocationState.FAILED
+    ) {
       history.push('/map')
     } else {
       dispatch(requestGeolocation())
@@ -77,7 +81,10 @@ const HomePage = () => {
     if (lastMapView) {
       return
     }
-    if (geolocationState === GeolocationState.DENIED) {
+    if (
+      geolocationState === GeolocationState.DENIED ||
+      geolocationState === GeolocationState.FAILED
+    ) {
       history.push('/map')
     } else if (geolocation?.latitude && geolocation?.longitude) {
       history.push(

@@ -224,9 +224,21 @@ const ConnectGeolocationInner = () => {
     if (geolocation.loading) {
       // Still loading, do nothing
     } else if (geolocation.error) {
-      dispatch(geolocationError(geolocation.error))
+      if (
+        geolocationState !== GeolocationState.FAILED &&
+        geolocationState !== GeolocationState.DENIED
+      ) {
+        dispatch(geolocationError(geolocation.error))
+      }
     } else if (!geolocation.latitude || !geolocation.longitude) {
-      dispatch(geolocationError({ message: t('error_message.unknown_error') }))
+      if (
+        geolocationState !== GeolocationState.FAILED &&
+        geolocationState !== GeolocationState.DENIED
+      ) {
+        dispatch(
+          geolocationError({ message: t('error_message.unknown_error') }),
+        )
+      }
     } else if (!googleMap) {
       dispatch(geolocationReceived(geolocation))
     } else if (isMapMoving) {
@@ -279,6 +291,7 @@ const ConnectGeolocationInner = () => {
     googleMap,
     geolocation.loading,
     geolocationState === GeolocationState.RELOADING,
+    geolocationState === GeolocationState.FAILED,
     Math.round(geolocation.timestamp / 5000),
     dispatch,
   ])
@@ -286,6 +299,7 @@ const ConnectGeolocationInner = () => {
 
   return null
 }
+
 const ConnectGeolocation = () => {
   const geolocationState = useSelector(
     (state) => state.geolocation.geolocationState,
