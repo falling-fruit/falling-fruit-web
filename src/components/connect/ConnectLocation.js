@@ -87,7 +87,6 @@ const ConnectLocation = ({
 }) => {
   const dispatch = useDispatch()
   const { initialView, googleMap } = useSelector((state) => state.map)
-  const { lastMapView } = useSelector((state) => state.viewport)
   const hasInitialView = !!initialView
   const {
     position,
@@ -137,14 +136,13 @@ const ConnectLocation = ({
       }
 
       if (action.payload && !initialView) {
-        const view = viewFromCurrentUrl() ||
-          lastMapView || {
-            center: {
-              lat: action.payload.lat,
-              lng: action.payload.lng,
-            },
-            zoom: 16,
-          }
+        const view = viewFromCurrentUrl() || {
+          center: {
+            lat: action.payload.lat,
+            lng: action.payload.lng,
+          },
+          zoom: 16,
+        }
         dispatch(setInitialView(view))
         // navigate to the page with the new URL
         // to trigger component reload
@@ -160,14 +158,13 @@ const ConnectLocation = ({
 
   useEffect(() => {
     if (location && !hasInitialView) {
-      const view = viewFromCurrentUrl() ||
-        lastMapView || {
-          center: {
-            lat: location.lat,
-            lng: location.lng,
-          },
-          zoom: 16,
-        }
+      const view = viewFromCurrentUrl() || {
+        center: {
+          lat: location.lat,
+          lng: location.lng,
+        },
+        zoom: 16,
+      }
       dispatch(setInitialView(view))
     }
   }, [!!location, hasInitialView]) //eslint-disable-line
