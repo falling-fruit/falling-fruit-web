@@ -179,6 +179,19 @@ const createLabel = (
     setLabelTextStyle(this.div, mapType)
   }
 
+  label.updatePosition = function (google, lat, lng) {
+    this.position = new google.LatLng(lat, lng)
+    this.draw()
+  }
+
+  label.updateHtml = function (newHtml) {
+    if (!this.div || this.labelHtml === newHtml) {
+      return
+    }
+    this.labelHtml = newHtml
+    this.div.innerHTML = newHtml
+  }
+
   label.setMap(googleMap)
   return label
 }
@@ -259,6 +272,27 @@ const LocationMarkers = ({
           labelData,
           location,
         })
+      } else {
+        const markerData = currentMarkers.get(location.id)
+        const prevLocation = markerData.location
+        if (
+          prevLocation.lat !== location.lat ||
+          prevLocation.lng !== location.lng
+        ) {
+          markerData.marker.setPosition({
+            lat: location.lat,
+            lng: location.lng,
+          })
+          if (markerData.label) {
+            markerData.label.updatePosition(google, location.lat, location.lng)
+          }
+          markerData.location = location
+        }
+
+        const newLabelData = (location.type_ids || [])
+          .map((id) => getDisplayLabel(typesAccess, id))
+          .filter(Boolean)
+        markerData.labelData = newLabelData
       }
     })
 
@@ -294,6 +328,14 @@ const LocationMarkers = ({
 
         if (markerData.label.updateStyle) {
           markerData.label.updateStyle(mapType)
+        }
+
+        const newLabelHtml = formatLabelHtml(
+          markerData.labelData,
+          selectedTypes,
+        )
+        if (markerData.label.updateHtml) {
+          markerData.label.updateHtml(newLabelHtml)
         }
 
         const spans =
