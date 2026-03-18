@@ -19,7 +19,6 @@ import {
   isEmptyReview,
   isTooClose,
   locationToForm,
-  validateLocation,
 } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -28,12 +27,11 @@ import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import { Checkbox, Select, Textarea } from './FormikWrappers'
+import { Checkbox, Recaptcha, Select, Textarea } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { ReviewStep } from './ReviewForm'
 import TypesSelect from './TypesSelect'
-import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
 
 const StyledPositionFieldLink = styled(Link)`
   color: ${({ theme }) => theme.orange};
@@ -217,6 +215,43 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   )
 }
 
+const validateReviewStep = (review) => {
+  const errors = {}
+  if (!review.photos.every((photo) => !photo.isUploading)) {
+    errors.photos = true
+  }
+  const r = formToReview(review)
+  if (r.fruiting !== null && !r.observed_on) {
+    errors.observed_on = true
+  }
+  return Object.keys(errors).length > 0 ? { review: errors } : null
+}
+
+const validateLocationForm = ({ review, ...location }, isLoggedIn) => {
+  const errors = {}
+
+  if (location.types.length === 0) {
+    errors.types = true
+  }
+
+  if (!location.position) {
+    errors.position = true
+  }
+
+  if (!isLoggedIn && !location['g-recaptcha-response']) {
+    errors['g-recaptcha-response'] = true
+  }
+
+  if (!isEmptyReview(review)) {
+    const reviewErrors = validateReviewStep(review)
+    if (reviewErrors) {
+      Object.assign(errors, reviewErrors)
+    }
+  }
+
+  return errors
+}
+
 export const LocationForm = ({ editingId, innerRef }) => {
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
@@ -238,11 +273,14 @@ export const LocationForm = ({ editingId, innerRef }) => {
       ? {}
       : locationToForm(location, typesAccess)
 
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
+
   const mergedInitialValues = {
     ...INITIAL_LOCATION_VALUES,
     ...initialValues,
     ...reduxFormValues,
     position,
+    ...(!isLoggedIn && { 'g-recaptcha-response': '' }),
   }
 
   const handleSubmit = (
@@ -278,6 +316,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
       })
     }
   }
+
   const handleCancel = (e) => {
     e.stopPropagation()
     if (editingId) {
@@ -287,10 +326,6 @@ export const LocationForm = ({ editingId, innerRef }) => {
     }
   }
 
-  const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const { Recaptcha, handlePresubmit: onPresubmit } =
-    useInvisibleRecaptcha(handleSubmit)
-
   return isLoading || typesAccess.isEmpty ? (
     <div>{t('layouts.loading')}</div>
   ) : (
@@ -299,9 +334,9 @@ export const LocationForm = ({ editingId, innerRef }) => {
         formType={editingId ? 'edit_location' : 'add_location'}
       />
       <Formik
-        validate={validateLocation}
+        validate={(values) => validateLocationForm(values, isLoggedIn)}
         initialValues={mergedInitialValues}
-        onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
+        onSubmit={handleSubmit}
         innerRef={innerRef}
       >
         {(formikProps) => {
@@ -321,6 +356,9 @@ export const LocationForm = ({ editingId, innerRef }) => {
                   <ReviewStep />
                 </>
               )}
+              {!isLoggedIn && (
+                <Recaptcha centered name="g-recaptcha-response" />
+              )}
               <ProgressButtons>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
@@ -334,7 +372,6 @@ export const LocationForm = ({ editingId, innerRef }) => {
                     : t('form.button.submit')}
                 </Button>
               </ProgressButtons>
-              {!isLoggedIn && <Recaptcha />}
             </Form>
           )
         }}

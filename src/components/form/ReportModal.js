@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 
 import { addReport } from '../../utils/api'
 import Modal from '../ui/Modal'
-import { Input, Select, Textarea } from './FormikWrappers'
+import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
 
 const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
@@ -53,13 +53,17 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
         comment: '',
         name: '',
         email: '',
+        ...(!isLoggedIn && { 'g-recaptcha-response': '' }),
       }}
       validationSchema={Yup.object({
         problem_code: Yup.object().required(),
         comment: Yup.string().when('problem_code', (problem_code, schema) =>
-          problem_code?.value === 5 ? schema.required() : schema,
+          problem_code?.value === 5 ? schema.required() : schema.optional(),
         ),
-        email: !isLoggedIn && Yup.string().email().required(),
+        ...(!isLoggedIn && {
+          email: Yup.string().email().required(),
+          'g-recaptcha-response': Yup.string().required(),
+        }),
       })}
       onSubmit={handleSubmit}
       {...props}
@@ -79,6 +83,7 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
         <>
           <Input name="name" label={t('glossary.name')} />
           <Input name="email" label={t('glossary.email')} required />
+          <Recaptcha name="g-recaptcha-response" />
         </>
       )}
     </Modal>

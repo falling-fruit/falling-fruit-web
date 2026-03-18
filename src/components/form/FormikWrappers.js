@@ -3,7 +3,6 @@ import { forwardRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import Reaptcha from 'reaptcha'
 
-import { useIsMobile } from '../../utils/useBreakpoint'
 import { PhotoUploader } from '../photo/PhotoUploader'
 import Checkbox from '../ui/Checkbox'
 import DateInput from '../ui/DateInput'
@@ -42,21 +41,26 @@ const FormikCreatableMultiSelect = withLabeledField(
 const FormikPhotoUploader = withLabeledField(PhotoUploader, undefined, true)
 
 const FormikRecaptcha = forwardRef(
-  ({ name, isResponsive = true, size, ...props }, ref) => {
+  ({ name, centered = false, ...props }, ref) => {
     const [, , helpers] = useField(name)
-    const isMobile = useIsMobile()
     const { i18n } = useTranslation()
 
     return (
-      <Reaptcha
-        ref={ref}
-        sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-        onVerify={helpers.setValue}
-        onExpire={() => helpers.setValue(null)}
-        size={isResponsive && isMobile ? 'compact' : size}
-        hl={i18n.language}
-        {...props}
-      />
+      <div
+        style={{
+          marginTop: '1rem',
+          ...(centered && { display: 'flex', justifyContent: 'center' }),
+        }}
+      >
+        <Reaptcha
+          ref={ref}
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+          onVerify={helpers.setValue}
+          onExpire={() => helpers.setValue(null)}
+          hl={i18n.language}
+          {...props}
+        />
+      </div>
     )
   },
 )

@@ -27,6 +27,7 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
               name="email"
               label={t('glossary.email')}
               autoComplete="off"
+              required
             />
           </FormInputWrapper>
 
