@@ -8,7 +8,7 @@ import { addTypeAndUpdate, closeAddTypeModal } from '../../redux/typeSlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from '../ui/Button'
 import Modal from '../ui/Modal'
-import { Input, Select, Textarea } from './FormikWrappers'
+import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
 
 const SCIENTIFIC_LANGUAGE_OPTION = {
   value: 'scientific',
@@ -104,26 +104,31 @@ const NamesFieldArray = () => {
 }
 
 // follows submission schema: https://petstore.swagger.io/?url=https://raw.githubusercontent.com/falling-fruit/api/main/docs/openapi.yml#/Types/post_types
-const validationSchema = Yup.object().shape({
-  parent_id: Yup.object().nullable(),
-  pending: Yup.boolean(),
-  taxonomic_rank: Yup.number().integer().nullable(),
-  name_pairs: Yup.array()
-    .of(
-      Yup.object({
-        language: Yup.string().required('Language is required'),
-        name: Yup.string().required('Name is required'),
-      }),
-    )
-    .min(1, 'At least one name is required'),
-  categories: Yup.array().of(Yup.string()),
-  notes: Yup.string(),
-})
+const buildValidationSchema = (isLoggedIn) =>
+  Yup.object().shape({
+    parent_id: Yup.object().nullable(),
+    pending: Yup.boolean(),
+    taxonomic_rank: Yup.number().integer().nullable(),
+    name_pairs: Yup.array()
+      .of(
+        Yup.object({
+          language: Yup.string().required('Language is required'),
+          name: Yup.string().required('Name is required'),
+        }),
+      )
+      .min(1, 'At least one name is required'),
+    categories: Yup.array().of(Yup.string()),
+    notes: Yup.string(),
+    ...(!isLoggedIn && {
+      'g-recaptcha-response': Yup.string().required(),
+    }),
+  })
 
 const AddTypeModal = ({ initialName, onTypeAdded }) => {
   const { t, i18n } = useTranslation()
   const dispatch = useDispatch()
   const { isAddTypeModalOpen } = useSelector((state) => state.type)
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   // Initialize state
   const initialLanguage = LANGUAGE_OPTIONS.find(
@@ -141,6 +146,7 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
     taxonomic_rank: null,
     pending: true,
     notes: '',
+    ...(!isLoggedIn && { 'g-recaptcha-response': '' }),
   }
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -186,7 +192,7 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
       title={t('new_type.title')}
       onDismiss={() => dispatch(closeAddTypeModal())}
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={buildValidationSchema(isLoggedIn)}
       onSubmit={handleSubmit}
       initialDirty={!!initialName}
     >
@@ -203,6 +209,7 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
           {t('new_type.form.pending_notice')}
         </p>
       </div>
+      {!isLoggedIn && <Recaptcha name="g-recaptcha-response" />}
     </Modal>
   )
 }

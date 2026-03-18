@@ -3,11 +3,9 @@ import '@reach/dialog/styles.css'
 import { Dialog } from '@reach/dialog'
 import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { useInvisibleRecaptcha } from '../form/useInvisibleRecaptcha'
 import Button from './Button'
 
 const StyledModal = styled(Dialog)`
@@ -45,11 +43,8 @@ const Modal = ({
   initialDirty = false,
   ...props
 }) => {
-  const isLoggedIn = useSelector((state) => !!state.auth.user)
   const isDesktop = useIsDesktop()
   const { t } = useTranslation()
-  const { Recaptcha, handlePresubmit: onPresubmit } =
-    useInvisibleRecaptcha(onSubmit)
 
   return (
     <StyledModal
@@ -63,16 +58,16 @@ const Modal = ({
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={isLoggedIn ? onSubmit : onPresubmit}
+        onSubmit={onSubmit}
         initialStatus={{ dirty: initialDirty }}
       >
         {(props) => {
           const { dirty, isSubmitting, isValid, status } = props
           const isDirty = dirty || status.dirty
+
           return (
             <Form>
               {children}
-              {!isLoggedIn && <Recaptcha />}
               <Buttons isDesktop={isDesktop}>
                 <Button type="button" onClick={onDismiss} secondary>
                   {t('form.button.cancel')}

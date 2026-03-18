@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 
 import { INITIAL_REVIEW_VALUES } from '../../constants/form'
 import { addNewReview, editExistingReview } from '../../redux/locationSlice'
-import { formToReview, validateReview } from '../../utils/form'
+import { formToReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
@@ -16,12 +16,45 @@ import {
   DateInput,
   PhotoUploader,
   RatingInput,
+  Recaptcha,
   Select,
   Textarea,
 } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
-import { useInvisibleRecaptcha } from './useInvisibleRecaptcha'
+
+const validateReviewForm = ({ review, ...rest }, isLoggedIn) => {
+  const errors = {}
+
+  if (!review.photos.every((photo) => !photo.isUploading)) {
+    errors.review = { ...errors.review, photos: true }
+  }
+
+  const r = formToReview(review)
+  if (r.fruiting !== null && !r.observed_on) {
+    errors.review = { ...errors.review, observed_on: true }
+  }
+
+  if (!isLoggedIn && !rest['g-recaptcha-response']) {
+    errors['g-recaptcha-response'] = true
+  }
+
+  return errors
+}
+
+/**
+ * Returns true if any review fields (excluding recaptcha) differ from their
+ * initial values. This prevents a not-logged-in user from submitting a form
+ * where only the recaptcha has been filled in.
+ */
+const isReviewDirty = (values, initialValues) => {
+  const reviewFields = Object.keys(initialValues.review ?? {})
+  return reviewFields.some(
+    (field) =>
+      JSON.stringify(values.review?.[field]) !==
+      JSON.stringify(initialValues.review?.[field]),
+  )
+}
 
 export const ReviewStep = ({ standalone }) => {
   const { t } = useTranslation()
@@ -110,10 +143,13 @@ const RatingLabeledRow = styled(LabeledRow)`
 export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
   const { locationId } = useSelector((state) => state.location)
   const reduxFormValues = useSelector((state) => state.review.form)
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
+
   const mergedInitialValues = {
     ...INITIAL_REVIEW_VALUES,
     ...initialValues,
     ...reduxFormValues,
+    ...(!isLoggedIn && { 'g-recaptcha-response': '' }),
   }
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -154,32 +190,32 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
     history.push(`/locations/${locationId}`)
   }
 
-  const isLoggedIn = useSelector((state) => !!state.auth.user)
-  const { Recaptcha, handlePresubmit: onPresubmit } =
-    useInvisibleRecaptcha(handleSubmit)
-
   return (
     <StyledForm>
       <NotSignedInClickthrough formType="add_review" />
       <Formik
-        validate={({ review }) => validateReview(review)}
+        validate={(values) => validateReviewForm(values, isLoggedIn)}
         initialValues={mergedInitialValues}
         validateOnMount
-        onSubmit={isLoggedIn ? handleSubmit : onPresubmit}
+        onSubmit={handleSubmit}
         innerRef={innerRef}
       >
         {(formikProps) => {
-          const { isSubmitting, isValid, dirty } = formikProps
+          const { isSubmitting, isValid, values } = formikProps
+          const reviewDirty = isReviewDirty(values, mergedInitialValues)
 
           return (
             <Form>
               <ReviewStep standalone />
+              {!isLoggedIn && (
+                <Recaptcha centered name="g-recaptcha-response" />
+              )}
               <ProgressButtons>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
                 <Button
-                  disabled={isSubmitting || !isValid || !dirty}
+                  disabled={isSubmitting || !isValid || !reviewDirty}
                   type="submit"
                 >
                   {isSubmitting
@@ -187,7 +223,6 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
                     : t('form.button.submit')}
                 </Button>
               </ProgressButtons>
-              {!isLoggedIn && <Recaptcha />}
             </Form>
           )
         }}
