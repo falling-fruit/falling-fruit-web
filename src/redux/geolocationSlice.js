@@ -56,6 +56,8 @@ export const geolocationSlice = createSlice({
       state.geolocation = action.payload
     },
     geolocationError: (state, action) => {
+      state.geolocation = null
+      state.centerPoint = null
       switch (action.payload.code) {
         case 1:
           // code 1 of GeolocationPositionError means user denied location request
@@ -98,6 +100,12 @@ export const geolocationSlice = createSlice({
     [updateLastMapView]: (state, action) => {
       if (!state.geolocation || state.geolocation.loading) {
         // Still loading - do nothing
+      } else if (
+        state.geolocationState === GeolocationState.FAILED ||
+        state.geolocationState === GeolocationState.DENIED ||
+        state.geolocationState === GeolocationState.INITIAL
+      ) {
+        // Error/terminal states - do not change state on map pan
       } else if (state.geolocationState === GeolocationState.CENTERING) {
         // The view changed because we centered on the geolocation dot - update state
         state.geolocationState = GeolocationState.TRACKING
