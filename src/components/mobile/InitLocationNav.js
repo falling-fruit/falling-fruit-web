@@ -24,7 +24,7 @@ const InitLocationNav = () => {
 
   const editingId = locationId === 'new' ? undefined : locationId
 
-  const tooClose = isTooClose(view.center, locations, editingId)
+  const tooClose = view ? isTooClose(view.center, locations, editingId) : false
 
   const handleConfirmClick = () => {
     if (tooClose) {
