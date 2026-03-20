@@ -94,8 +94,8 @@ const LeftIcon = styled.div`
   margin-block-start: 0.5em;
 `
 
-const ImageIcon = ({ imageSrc }) => (
-  <CircleIcon backgroundColor={theme.green}>
+const ImageIcon = ({ imageSrc, isSaved }) => (
+  <CircleIcon backgroundColor={theme.green} isSaved={isSaved}>
     {imageSrc ? <img src={imageSrc} alt="icon" /> : <LeafIcon />}
   </CircleIcon>
 )
@@ -172,7 +172,7 @@ const Locations = ({
           }}
         >
           <LeftIcon>
-            <ImageIcon imageSrc={location.photo} />
+            <ImageIcon imageSrc={location.photo} isSaved={location.in_list} />
           </LeftIcon>
           <ContentWrapper>
             {location.type_ids.map((typeId) => {

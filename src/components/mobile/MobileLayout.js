@@ -21,6 +21,7 @@ import errorRoutes from '../error/errorRoutes'
 import { formRoutesMobile } from '../form/formRoutes'
 import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
+import savedRoutes from '../saved/savedRoutes'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
 import TopBar from '../ui/TopBar'
@@ -150,6 +151,7 @@ const MobileLayout = () => {
                 {authRoutes}
                 {accountRoutes}
                 {errorRoutes}
+                {savedRoutes}
                 <Route
                   path={[
                     '/map',
@@ -190,6 +192,7 @@ const MobileLayout = () => {
                   ...aboutRoutes.map((route) => route.props.path).flat(),
                   ...activityRoutes.map((route) => route.props.path).flat(),
                   ...errorRoutes.map((route) => route.props.path).flat(),
+                  ...savedRoutes.map((route) => route.props.path).flat(),
                 ]}
               />
               <Route path={['/locations/:locationId/edit/:postfix', '*']}>

@@ -53,7 +53,7 @@ const PasswordSetPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('users.change_your_password')}</h1>
+      <h1>{t('users.change_password')}</h1>
       <Formik
         initialValues={{
           password: '',
@@ -97,7 +97,7 @@ const PasswordSetPage = () => {
                 disabled={!dirty || !isValid || isSubmitting}
                 type="submit"
               >
-                {t('users.change_your_password')}
+                {t('users.change_password')}
               </Button>
             </FormButtonWrapper>
           </Form>

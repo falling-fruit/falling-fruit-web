@@ -139,6 +139,40 @@ export const getLocationsChanges = (
   params: paths['/locations/changes']['get']['parameters']['query'],
 ) => instance.get('/locations/changes', { params })
 
+export const getLists = (
+  params?: paths['/locations/lists']['get']['parameters']['query'],
+) => instance.get('/locations/lists', { params })
+
+export const getListsWithLocations = () => getLists({ embed: ['locations'] })
+
+export const addList = (
+  data: paths['/locations/lists']['post']['requestBody']['content']['application/json'],
+) => instance.post('/locations/lists', data)
+
+export const getListById = (
+  listId: paths['/locations/lists/{list_id}']['get']['parameters']['path']['list_id'],
+  params?: paths['/locations/lists/{list_id}']['get']['parameters']['query'],
+) => instance.get(`/locations/lists/${listId}`, { params })
+
+export const editList = (
+  listId: paths['/locations/lists/{list_id}']['put']['parameters']['path']['list_id'],
+  data: paths['/locations/lists/{list_id}']['put']['requestBody']['content']['application/json'],
+) => instance.put(`/locations/lists/${listId}`, data)
+
+export const removeList = (
+  listId: paths['/locations/lists/{list_id}']['delete']['parameters']['path']['list_id'],
+) => instance.delete(`/locations/lists/${listId}`)
+
+export const addLocationToList = (
+  locationId: paths['/locations/{id}/lists/{list_id}']['post']['parameters']['path']['id'],
+  listId: paths['/locations/{id}/lists/{list_id}']['post']['parameters']['path']['list_id'],
+) => instance.post(`/locations/${locationId}/lists/${listId}`)
+
+export const removeLocationFromList = (
+  locationId: paths['/locations/{id}/lists/{list_id}']['delete']['parameters']['path']['id'],
+  listId: paths['/locations/{id}/lists/{list_id}']['delete']['parameters']['path']['list_id'],
+) => instance.delete(`/locations/${locationId}/lists/${listId}`)
+
 export const getTypes = () => instance.get('/types')
 
 export const getTypeCounts = (
