@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Misslyckades med att lägga till platslista: {{message}}",
+      "add_location_to_list_failed": "Misslyckades med att lägga till plats i lista: {{message}}",
       "fetch_clusters_failed": "Fel vid hämtning av kluster: {{message}}",
-      "fetch_filter_counts_failed": "Fel vid hämtning av filterräknare: {{message}}",
       "fetch_import_failed": "Fel vid hämtning av datamängd {{id}}: {{message}}",
       "fetch_location_changes_failed": "Hämtning av platsändringar misslyckades: {{message}}",
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Misslyckades med att hämta platslistor: {{message}}",
       "fetch_locations_failed": "Fel vid hämtning av platser: {{message}}",
       "fetch_review_failed": "Fel vid hämtning av recension {{id}}: {{message}}",
       "fetch_user_failed": "Fel vid hämtning av användare {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Redigering av plats misslyckades: {{message}}",
       "location_submission_failed": "Inlämning av plats misslyckades: {{message}}",
       "photo_upload_failed": "Bilduppladdning misslyckades: {{message}}",
+      "remove_location_from_list_failed": "Misslyckades med att ta bort plats från lista: {{message}}",
+      "remove_location_list_failed": "Misslyckades med att ta bort platslista: {{message}}",
+      "rename_location_list_failed": "Misslyckades med att byta namn på platslista: {{message}}",
       "report_submission_failed": "Inlämning av rapport misslyckades: {{message}}",
       "review_deletion_failed": "Borttagning av recension misslyckades: {{message}}",
       "review_edit_failed": "Redigering av recension misslyckades: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Platsinformation stöds inte"
     },
     "language_changed_refresh_to_reload_map": "Språk ändrat, uppdatera sidan för att ladda om kartan",
-    "results_unavailable": "Resultat inte tillgängliga",
     "unknown_error": "Okänt fel"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Avbryt",
+      "confirm": "Bekräfta",
       "delete": "Radera",
       "edit": "Redigera",
       "reload": "Ladda om",
@@ -420,6 +425,12 @@
     "you_observed": "Du observerade denna plats den {{date}}",
     "you_reviewed": "Du recenserade denna plats den {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Lägg till ny lista",
+    "new_list_placeholder": "Listnamn",
+    "save_label": "Spara",
+    "saved_label": "Sparad"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Fullständig webbplats",
     "title": "Dela denna vy",
@@ -452,7 +463,6 @@
     "bio": "Om dig",
     "change_email": "Ändra e-postadress",
     "change_password": "Ändra lösenord",
-    "change_your_password": "Ändra ditt lösenord",
     "current_email": "Nuvarande e-postadress",
     "current_password": "Nuvarande lösenord",
     "header": {

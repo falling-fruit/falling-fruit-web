@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Falha ao adicionar lista de localização: {{message}}",
+      "add_location_to_list_failed": "Falha ao adicionar localização à lista: {{message}}",
       "fetch_clusters_failed": "Erro ao buscar clusters: {{message}}",
-      "fetch_filter_counts_failed": "Erro ao buscar contagens de filtros: {{message}}",
       "fetch_import_failed": "Erro ao buscar conjunto de dados {{id}}: {{message}}",
       "fetch_location_changes_failed": "Falha ao buscar alterações de localização: {{message}}",
       "fetch_location_failed": "Erro ao buscar localização {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Falha ao buscar listas de localização: {{message}}",
       "fetch_locations_failed": "Erro ao buscar localizações: {{message}}",
       "fetch_review_failed": "Erro ao buscar avaliação {{id}}: {{message}}",
       "fetch_user_failed": "Erro ao buscar usuário {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Falha na edição da localização: {{message}}",
       "location_submission_failed": "Falha no envio da localização: {{message}}",
       "photo_upload_failed": "Falha no upload da foto: {{message}}",
+      "remove_location_from_list_failed": "Falha ao remover localização da lista: {{message}}",
+      "remove_location_list_failed": "Falha ao remover lista de localização: {{message}}",
+      "rename_location_list_failed": "Falha ao renomear lista de localização: {{message}}",
       "report_submission_failed": "Falha no envio do relatório: {{message}}",
       "review_deletion_failed": "Falha na exclusão da avaliação: {{message}}",
       "review_edit_failed": "Falha na edição da avaliação: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Geolocalização não suportada"
     },
     "language_changed_refresh_to_reload_map": "Idioma alterado. Atualize a página para recarregar o mapa",
-    "results_unavailable": "Resultados indisponíveis",
     "unknown_error": "Erro desconhecido"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Cancelar",
+      "confirm": "Confirmar",
       "delete": "Excluir",
       "edit": "Editar",
       "reload": "Recarregar",
@@ -420,6 +425,12 @@
     "you_observed": "Você observou esta localização em {{date}}",
     "you_reviewed": "Você avaliou esta localização em {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Adicionar nova lista",
+    "new_list_placeholder": "Nome da lista",
+    "save_label": "Salvar",
+    "saved_label": "Salvo"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Site completo",
     "title": "Compartilhar esta visualização",
@@ -452,7 +463,6 @@
     "bio": "Sobre você",
     "change_email": "Alterar e-mail",
     "change_password": "Alterar senha",
-    "change_your_password": "Alterar sua senha",
     "current_email": "E-mail atual",
     "current_password": "Senha atual",
     "header": {

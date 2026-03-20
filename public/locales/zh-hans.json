@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "添加位置列表失败：{{message}}",
+      "add_location_to_list_failed": "添加位置到列表失败：{{message}}",
       "fetch_clusters_failed": "获取集群失败：{{message}}",
-      "fetch_filter_counts_failed": "获取筛选计数失败：{{message}}",
       "fetch_import_failed": "获取数据集{{id}}失败：{{message}}",
       "fetch_location_changes_failed": "获取位置变更失败：{{message}}",
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
+      "fetch_location_lists_failed": "获取位置列表失败：{{message}}",
       "fetch_locations_failed": "获取位置失败：{{message}}",
       "fetch_review_failed": "获取评论 {{id}} 失败：{{message}}",
       "fetch_user_failed": "获取用户{{id}}失败：{{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "编辑位置失败：{{message}}",
       "location_submission_failed": "提交位置失败：{{message}}",
       "photo_upload_failed": "照片上传失败：{{message}}",
+      "remove_location_from_list_failed": "从列表中移除位置失败：{{message}}",
+      "remove_location_list_failed": "删除位置列表失败：{{message}}",
+      "rename_location_list_failed": "重命名位置列表失败：{{message}}",
       "report_submission_failed": "提交报告失败：{{message}}",
       "review_deletion_failed": "删除评论失败：{{message}}",
       "review_edit_failed": "编辑评论失败：{{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "不支持地理位置"
     },
     "language_changed_refresh_to_reload_map": "语言已更改，请刷新页面以重新加载地图",
-    "results_unavailable": "结果不可用",
     "unknown_error": "未知错误"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "取消",
+      "confirm": "确认",
       "delete": "删除",
       "edit": "编辑",
       "reload": "重新加载",
@@ -420,6 +425,12 @@
     "you_observed": "您于 {{date}} 观察了此地点",
     "you_reviewed": "您于 {{date}} 评论了此地点"
   },
+  "save_location_to_list": {
+    "add_new_list": "添加新列表",
+    "new_list_placeholder": "列表名称",
+    "save_label": "保存",
+    "saved_label": "已保存"
+  },
   "share": {
     "leave_embed_view_for_full_site": "完整网站",
     "title": "分享此视图",
@@ -452,7 +463,6 @@
     "bio": "关于你",
     "change_email": "更改电子邮件",
     "change_password": "更改密码",
-    "change_your_password": "更改密码",
     "current_email": "当前邮箱",
     "current_password": "当前密码",
     "header": {

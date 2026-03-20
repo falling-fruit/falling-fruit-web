@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Αποτυχία προσθήκης λίστας τοποθεσιών: {{message}}",
+      "add_location_to_list_failed": "Αποτυχία προσθήκης τοποθεσίας στη λίστα: {{message}}",
       "fetch_clusters_failed": "Σφάλμα ανάκτησης ομάδων: {{message}}",
-      "fetch_filter_counts_failed": "Σφάλμα ανάκτησης καταμέτρησης φίλτρων: {{message}}",
       "fetch_import_failed": "Σφάλμα λήψης συνόλου δεδομένων {{id}}: {{message}}",
       "fetch_location_changes_failed": "Αποτυχία λήψης αλλαγών τοποθεσίας: {{message}}",
       "fetch_location_failed": "Σφάλμα λήψης τοποθεσίας {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Αποτυχία ανάκτησης λιστών τοποθεσιών: {{message}}",
       "fetch_locations_failed": "Σφάλμα ανάκτησης τοποθεσιών: {{message}}",
       "fetch_review_failed": "Σφάλμα λήψης αξιολόγησης {{id}}: {{message}}",
       "fetch_user_failed": "Σφάλμα ανάκτησης χρήστη {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Αποτυχία επεξεργασίας τοποθεσίας: {{message}}",
       "location_submission_failed": "Αποτυχία υποβολής τοποθεσίας: {{message}}",
       "photo_upload_failed": "Αποτυχία μεταφόρτωσης φωτογραφίας: {{message}}",
+      "remove_location_from_list_failed": "Αποτυχία αφαίρεσης τοποθεσίας από τη λίστα: {{message}}",
+      "remove_location_list_failed": "Αποτυχία αφαίρεσης λίστας τοποθεσιών: {{message}}",
+      "rename_location_list_failed": "Αποτυχία μετονομασίας λίστας τοποθεσιών: {{message}}",
       "report_submission_failed": "Αποτυχία υποβολής αναφοράς: {{message}}",
       "review_deletion_failed": "Αποτυχία διαγραφής αξιολόγησης: {{message}}",
       "review_edit_failed": "Αποτυχία επεξεργασίας αξιολόγησης: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Ο εντοπισμός τοποθεσίας δεν υποστηρίζεται"
     },
     "language_changed_refresh_to_reload_map": "Η γλώσσα άλλαξε. Ανανεώστε τη σελίδα για να επαναφορτωθεί ο χάρτης",
-    "results_unavailable": "Τα αποτελέσματα δεν είναι διαθέσιμα",
     "unknown_error": "Άγνωστο σφάλμα"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Ακύρωση",
+      "confirm": "Επιβεβαίωση",
       "delete": "Διαγραφή",
       "edit": "Επεξεργασία",
       "reload": "Επαναφόρτωση",
@@ -420,6 +425,12 @@
     "you_observed": "Παρατηρήσατε αυτή την τοποθεσία στις {{date}}",
     "you_reviewed": "Αξιολογήσατε αυτή την τοποθεσία στις {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Προσθήκη νέας λίστας",
+    "new_list_placeholder": "Όνομα λίστας",
+    "save_label": "Αποθήκευση",
+    "saved_label": "Αποθηκεύτηκε"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Πλήρης ιστότοπος",
     "title": "Μοιραστείτε αυτή την προβολή",
@@ -452,7 +463,6 @@
     "bio": "Σχετικά με εσάς",
     "change_email": "Αλλαγή email",
     "change_password": "Αλλαγή κωδικού",
-    "change_your_password": "Αλλαγή του κωδικού σας",
     "current_email": "Τρέχον email",
     "current_password": "Τρέχων κωδικός",
     "header": {

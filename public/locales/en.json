@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
-      "fetch_filter_counts_failed": "Error fetching filter counts: {{message}}",
+      "add_location_list_failed": "Failed to add location list: {{message}}",
+      "add_location_to_list_failed": "Failed to add location to list: {{message}}",
+      "fetch_clusters_failed": "Error fetching clusters: {{message}}",
       "fetch_import_failed": "Error fetching dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Fetching location changes failed: {{message}}",
       "fetch_location_failed": "Error fetching location {{id}}: {{message}}",
-      "fetch_clusters_failed": "Error fetching clusters: {{message}}",
+      "fetch_location_lists_failed": "Failed to fetch location lists: {{message}}",
       "fetch_locations_failed": "Error fetching locations: {{message}}",
       "fetch_review_failed": "Error fetching review {{id}}: {{message}}",
       "fetch_user_failed": "Error fetching user {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Location editing failed: {{message}}",
       "location_submission_failed": "Location submission failed: {{message}}",
       "photo_upload_failed": "Photo upload failed: {{message}}",
+      "remove_location_from_list_failed": "Failed to remove location from list: {{message}}",
+      "remove_location_list_failed": "Failed to remove location list: {{message}}",
+      "rename_location_list_failed": "Failed to rename location list: {{message}}",
       "report_submission_failed": "Report submission failed: {{message}}",
       "review_deletion_failed": "Review deletion failed: {{message}}",
       "review_edit_failed": "Review editing failed: {{message}}",
@@ -54,19 +59,18 @@
       "signin_failed": "Sign in failed: {{message}}",
       "signup_failed": "Sign up failed: {{message}}"
     },
+    "connectivity": {
+      "you_are_back_online": "You are back online.",
+      "you_are_offline": "You are offline."
+    },
     "geolocation": {
       "code_2": "Position unavailable: {{message}}",
       "code_3": "Geolocation timeout: {{message}}",
       "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
       "not_supported": "Geolocation not supported"
     },
-    "connectivity": {
-      "you_are_offline": "You are offline.",
-      "you_are_back_online": "You are back online."
-    },
     "language_changed_refresh_to_reload_map": "Language changed. Refresh page to reload map",
-    "unknown_error": "Unknown error",
-    "results_unavailable": "Results unavailable"
+    "unknown_error": "Unknown error"
   },
   "filter": {
     "all_types": "All types",
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Cancel",
+      "confirm": "Confirm",
       "delete": "Delete",
       "edit": "Edit",
       "reload": "Reload",
@@ -240,8 +245,8 @@
       "advisors": "Board of advisors",
       "alan_gibson_bio_html": "Alan has always enjoyed adventures and exploring. He began foraging as a way to introduce his young children to the outdoors lifestyle. He writes the <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> blog and published the <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Fruit and Nuts For Free</a> book. He has legitimised foraging in public parks and established a community orchard in his home town, Southampton UK.",
       "ali_moxley_bio_html": "Ali works with her community to spread awareness of the bountiful fruit and wild foods that grow in and around Bozeman, MT. Her day job involves working with food and agriculture businesses throughout the country to identify and apply for funding. She is an amateur journalist on the weekends, highlighting the stories of rural communities, farmers, and ranchers. Ali loves walks in the woods with her friends, foraging, contra dancing, and raging against corporate consolidation of our food systems.",
-      "austin_arrington_bio_html": "Since founding <a href=\"https://plantgroupnyc.com\">PLANT Group</a>, Austin has focused his work on climate tech that supports healthier ecosystems and communities. A proud father to a three-year-old son, he spends his off hours gardening, playing music, and nurturing a deep passion for local food and resilient, place-based systems.",
       "ana_carolina_bio_html": "Ana is a postdoctoral researcher at the Federal University of Pará in Brazil. She is an anthropologist interested in understanding social and cultural diet habits. Ana worked mostly in the Brazilian Amazon. In Acre (western Amazon) she studied regional fruit consumption. Then, she worked in the Middle Solimões region, investigating diet change in remote communities. Between 2017 and 2018, Ana lived in small and medium towns of the Amazon Delta, looking at the effects of climate change on the food security of people living in informal settlements. She recently moved to southern New Mexico in the United States, where she works as a consultant.",
+      "austin_arrington_bio_html": "Since founding <a href=\"https://plantgroupnyc.com\">PLANT Group</a>, Austin has focused his work on climate tech that supports healthier ecosystems and communities. A proud father to a three-year-old son, he spends his off hours gardening, playing music, and nurturing a deep passion for local food and resilient, place-based systems.",
       "billy_daniels_bio_html": "Billy's love of urban foraging began with a simple surprise: picking an avocado from a tree in a friend's California backyard after growing up in the Midwest. While living in San Francisco, he was always on the lookout for publicly accessible fruit growing around the Bay Area. Billy now lives in Wisconsin, where you can find him biking, gardening, and frequenting Madison's many farmers markets. He is a product management leader excited to advance Falling Fruit's mission and make foraging easier for newcomers to discover.",
       "caleb_phillips_bio_html": "Caleb is a featherless bipedal humanoid passionate about food justice and finding creative ways to use technology to address social issues. When he's not biking around gawking at trees, he balances his efforts between his day job as a data scientist at the <a href=\"https://www.nrel.gov/research/caleb-phillips.html\">National Renewable Energy Laboratory</a> in Golden, Colorado and as an adjunct professor of computer science at the <a href=\"https://www.colorado.edu/cs/caleb-phillips\">University of Colorado</a>. Besides all that work stuff, he likes to climb rocks, run trails, ride bikes, and generally be outdoors as much as possible. Caleb created Falling Fruit with Ethan Welty in 2013 and served on the Board of Directors for 6 years before taking a position on the Advisory Board.",
       "celebration": "Falling Fruit is a celebration of the overlooked culinary bounty of our city streets. By quantifying this resource on an interactive map, we hope to facilitate intimate connections between people, food, and the natural organisms growing in our neighborhoods. Not just a free lunch! Foraging in the 21st century is an opportunity for urban exploration, to fight the scourge of stained sidewalks, and to reconnect with the botanical origins of food.",
@@ -259,8 +264,8 @@
       "give_us_money": "We are a 501(c)(3) nonprofit and rely on donations to operate. If you are willing and able, please consider making a financial contribution. Donations within the United States are tax deductible.",
       "give_zeffy": "Donate via Zeffy",
       "jeff_wanner_bio_html": "Since harvesting black and blueberries with his family as a child and, more recently, noticing the wealth of public fruit trees throughout Colorado, Jeff has developed a deep appreciation for the abundance of fruit growing in our cities. His first mission for Falling Fruit was to comb Boulder and Salt Lake City, paper maps in-hand, to record fruiting trees. When not working to improve building energy efficiency, he is usually helping out in the community or moving quickly over mountains by foot, ski, or bicycle.",
-      "jp_goguen_bio_html": "JP is a media technology specialist at the <a href=\"https://library.illinois.edu\">University of Illinois Library</a> with a background in art and information science. Based in Urbana, IL, he maps and photographs the local wild food network and organizes community forays and skillshares. In 2025, his research and story-collecting led to the launch of the <a href=\"https://instagram.com/minipopuppawpawmuseum\">Mini Popup Pawpaw Museum</a>. When he isn't at the library, he's usually playing guitar at the <a href=\"https://rosebowltavern.com\">Urbana Hootenanny</a> or hitting the disc golf course with his dog, Dalí.",
       "join_us_html": "Join us in celebrating hyper-local food! The <a href=\"/\">map</a> is open for anyone to edit, the database can be <a href=\"/about/data\">downloaded</a> with just one click, and <a href=\"https://github.com/falling-fruit/\">the code</a> is open-source. You are likewise encouraged to share the bounty with your fellow humans. Our <a href=\"/about/sharing\">sharing page</a> lists hundreds of local organizations - planting public orchards and food forests, picking otherwise-wasted fruits and vegetables from city trees and farmers' fields, and sharing with neighbors and the needy.",
+      "jp_goguen_bio_html": "JP is a media technology specialist at the <a href=\"https://library.illinois.edu\">University of Illinois Library</a> with a background in art and information science. Based in Urbana, IL, he maps and photographs the local wild food network and organizes community forays and skillshares. In 2025, his research and story-collecting led to the launch of the <a href=\"https://instagram.com/minipopuppawpawmuseum\">Mini Popup Pawpaw Museum</a>. When he isn't at the library, he's usually playing guitar at the <a href=\"https://rosebowltavern.com\">Urbana Hootenanny</a> or hitting the disc golf course with his dog, Dalí.",
       "meagan_shelley_bio_html": "Meagan is a business owner and PhD candidate who lives in Central Virginia. She is a certified <a href=\"https://vmga.net\">Master Gardener</a> and lives on a 10-acre homestead growing fruit, nuts, and vegetables, as well as chickens, quail, and rabbits. Her goal is to practice closed-loop agriculture, which is a constant work in progress. In the meantime, she works to forage, grow, and trade roughly 20-30% of her annual food supply.",
       "more_about_html": "Our edible map is not the first of its kind, but it aspires to be the world's most comprehensive. While our users contribute locations of their own, we comb the internet for pre-existing knowledge, seeking to unite the efforts of foragers, foresters, and freegans everywhere. The <a href=\"/about/data\">imported datasets</a> range from small neighborhood foraging maps to vast professionally-compiled tree inventories. This so far amounts to thousands of different types of edibles (most, but not all, plant species) distributed over millions of locations. Beyond the cultivated and commonplace to the exotic flavors of foreign plants and long-forgotten native plants, foraging in your neighborhood is a journey through time and across cultures.",
       "staff": "Staff",
@@ -308,9 +313,9 @@
       "types_of_data": "Datasets imported into Falling Fruit fall into two main categories. \"Community maps\" are built by foragers and freegans as they peruse their communities for things to eat. We are indebted to the hardworking citizen-cartographers who have compiled this data. \"Tree inventories\" are compiled by cities, universities, and other institutions wishing to better document and care for their trees. We mine these vast datasets for food-producing species and add them to the map. To help us map your neighborhood fruit trees, contact your school or city urging them to share their tree inventory with us."
     },
     "network_error": {
-      "you_are_offline": "We were unable to connect. It looks like you're offline.",
       "header_message": "Network error",
-      "please_check_your_connection": "Please check your connection and retry."
+      "please_check_your_connection": "Please check your connection and retry.",
+      "you_are_offline": "We were unable to connect. It looks like you're offline."
     },
     "settings": {
       "bicycle": "Bicycle",
@@ -385,9 +390,9 @@
       "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
     },
     "something_went_wrong": {
+      "email_us_if_this_persists_html": "If the problem persists, let us know at <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
       "error_occurred": "The following error has occurred: {{message}}",
-      "header_message": "Something went wrong",
-      "email_us_if_this_persists_html": "If the problem persists, let us know at <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>."
+      "header_message": "Something went wrong"
     },
     "welcome": {
       "community_driven_platform": "Falling Fruit is a community-driven platform for sharing locations of edible plants and other sources of free food.",
@@ -411,14 +416,20 @@
   },
   "review": {
     "form": {
+      "add_from_camera": "Take photo",
+      "add_from_gallery": "Choose from gallery",
       "leave_a_review": "Leave a review",
       "observed_on": "Observed on {{date}}",
-      "photos": "Photos",
-      "add_from_camera": "Take photo",
-      "add_from_gallery": "Choose from gallery"
+      "photos": "Photos"
     },
-    "you_reviewed": "You reviewed this location on {{date}}",
-    "you_observed": "You observed this location on {{date}}"
+    "you_observed": "You observed this location on {{date}}",
+    "you_reviewed": "You reviewed this location on {{date}}"
+  },
+  "save_location_to_list": {
+    "add_new_list": "Add new list",
+    "new_list_placeholder": "List name",
+    "save_label": "Save",
+    "saved_label": "Saved"
   },
   "share": {
     "leave_embed_view_for_full_site": "Full site",

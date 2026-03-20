@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Error al agregar lista de ubicaciones: {{message}}",
+      "add_location_to_list_failed": "Error al agregar ubicación a la lista: {{message}}",
       "fetch_clusters_failed": "Error al obtener grupos: {{message}}",
-      "fetch_filter_counts_failed": "Error al obtener conteos de filtros: {{message}}",
       "fetch_import_failed": "Error al obtener conjunto de datos {{id}}: {{message}}",
       "fetch_location_changes_failed": "Error al obtener cambios de ubicación: {{message}}",
       "fetch_location_failed": "Error al obtener ubicación {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Error al obtener listas de ubicaciones: {{message}}",
       "fetch_locations_failed": "Error al obtener ubicaciones: {{message}}",
       "fetch_review_failed": "Error al obtener reseña {{id}}: {{message}}",
       "fetch_user_failed": "Error al obtener usuario {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Error al editar ubicación: {{message}}",
       "location_submission_failed": "Error al enviar ubicación: {{message}}",
       "photo_upload_failed": "Error al subir foto: {{message}}",
+      "remove_location_from_list_failed": "Error al eliminar ubicación de la lista: {{message}}",
+      "remove_location_list_failed": "Error al eliminar lista de ubicaciones: {{message}}",
+      "rename_location_list_failed": "Error al renombrar lista de ubicaciones: {{message}}",
       "report_submission_failed": "Error al enviar informe: {{message}}",
       "review_deletion_failed": "Error al eliminar reseña: {{message}}",
       "review_edit_failed": "Error al editar reseña: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Geolocalización no compatible"
     },
     "language_changed_refresh_to_reload_map": "El idioma ha cambiado. Actualiza la página para recargar el mapa",
-    "results_unavailable": "Resultados no disponibles",
     "unknown_error": "Error desconocido"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Cancelar",
+      "confirm": "Confirmar",
       "delete": "Eliminar",
       "edit": "Editar",
       "reload": "Recargar",
@@ -420,6 +425,12 @@
     "you_observed": "Observaste esta ubicación el {{date}}",
     "you_reviewed": "Reseñaste esta ubicación el {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Agregar nueva lista",
+    "new_list_placeholder": "Nombre de la lista",
+    "save_label": "Guardar",
+    "saved_label": "Guardado"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Sitio completo",
     "title": "Compartir esta vista",
@@ -452,7 +463,6 @@
     "bio": "Acerca de ti",
     "change_email": "Cambiar correo electrónico",
     "change_password": "Cambiar contraseña",
-    "change_your_password": "Cambiar tu contraseña",
     "current_email": "Correo electrónico actual",
     "current_password": "Contraseña actual",
     "header": {

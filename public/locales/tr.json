@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Konum listesi eklenemedi: {{message}}",
+      "add_location_to_list_failed": "Listeye konum eklenemedi: {{message}}",
       "fetch_clusters_failed": "Kümeler getirilirken hata oluştu: {{message}}",
-      "fetch_filter_counts_failed": "Filtre sayıları getirilirken hata oluştu: {{message}}",
       "fetch_import_failed": "Veri seti {{id}} alınamadı: {{message}}",
       "fetch_location_changes_failed": "Konum değişikliklerini alma başarısız: {{message}}",
       "fetch_location_failed": "{{id}} konumunu alma hatası: {{message}}",
+      "fetch_location_lists_failed": "Konum listeleri getirilemedi: {{message}}",
       "fetch_locations_failed": "Konumlar getirilirken hata oluştu: {{message}}",
       "fetch_review_failed": "{{id}} değerlendirmesini alma hatası: {{message}}",
       "fetch_user_failed": "{{id}} kullanıcısı getirilirken hata oluştu: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Konum düzenleme başarısız: {{message}}",
       "location_submission_failed": "Konum gönderimi başarısız: {{message}}",
       "photo_upload_failed": "Fotoğraf yükleme başarısız: {{message}}",
+      "remove_location_from_list_failed": "Konumu listeden kaldırma başarısız: {{message}}",
+      "remove_location_list_failed": "Konum listesi kaldırılamadı: {{message}}",
+      "rename_location_list_failed": "Konum listesi yeniden adlandırılamadı: {{message}}",
       "report_submission_failed": "Rapor gönderimi başarısız: {{message}}",
       "review_deletion_failed": "Değerlendirme silme başarısız: {{message}}",
       "review_edit_failed": "Değerlendirme düzenleme başarısız: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Konum özelliği desteklenmiyor"
     },
     "language_changed_refresh_to_reload_map": "Dil değiştirildi, haritayı yenilemek için sayfayı yenileyin",
-    "results_unavailable": "Sonuçlar mevcut değil",
     "unknown_error": "Bilinmeyen hata"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "İptal",
+      "confirm": "Onayla",
       "delete": "Sil",
       "edit": "Düzenle",
       "reload": "Yeniden Yükle",
@@ -420,6 +425,12 @@
     "you_observed": "Bu konumu {{date}} tarihinde gözlemlediniz",
     "you_reviewed": "Bu konumu {{date}} tarihinde değerlendirdiniz"
   },
+  "save_location_to_list": {
+    "add_new_list": "Yeni liste ekle",
+    "new_list_placeholder": "Liste adı",
+    "save_label": "Kaydet",
+    "saved_label": "Kaydedildi"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Tam site",
     "title": "Bu görünümü paylaş",
@@ -452,7 +463,6 @@
     "bio": "Hakkınızda",
     "change_email": "E-postayı değiştir",
     "change_password": "Şifreyi değiştir",
-    "change_your_password": "Şifrenizi değiştirin",
     "current_email": "Mevcut e-posta",
     "current_password": "Mevcut şifre",
     "header": {

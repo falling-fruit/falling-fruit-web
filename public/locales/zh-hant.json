@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "新增位置清單失敗：{{message}}",
+      "add_location_to_list_failed": "新增位置至清單失敗：{{message}}",
       "fetch_clusters_failed": "獲取群集失敗：{{message}}",
-      "fetch_filter_counts_failed": "獲取篩選計數失敗：{{message}}",
       "fetch_import_failed": "獲取數據集{{id}}失敗：{{message}}",
       "fetch_location_changes_failed": "獲取位置變更失敗：{{message}}",
       "fetch_location_failed": "獲取位置 {{id}} 失敗：{{message}}",
+      "fetch_location_lists_failed": "獲取位置清單失敗：{{message}}",
       "fetch_locations_failed": "獲取位置失敗：{{message}}",
       "fetch_review_failed": "獲取評論 {{id}} 失敗：{{message}}",
       "fetch_user_failed": "獲取用戶{{id}}失敗：{{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "編輯位置失敗：{{message}}",
       "location_submission_failed": "提交位置失敗：{{message}}",
       "photo_upload_failed": "照片上傳失敗：{{message}}",
+      "remove_location_from_list_failed": "從清單移除位置失敗：{{message}}",
+      "remove_location_list_failed": "移除位置清單失敗：{{message}}",
+      "rename_location_list_failed": "重新命名位置清單失敗：{{message}}",
       "report_submission_failed": "提交報告失敗：{{message}}",
       "review_deletion_failed": "刪除評論失敗：{{message}}",
       "review_edit_failed": "編輯評論失敗：{{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "不支持地理位置"
     },
     "language_changed_refresh_to_reload_map": "語言已更改，請刷新頁面以重新加載地圖",
-    "results_unavailable": "結果無法取得",
     "unknown_error": "未知錯誤"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "取消",
+      "confirm": "確認",
       "delete": "刪除",
       "edit": "編輯",
       "reload": "重新載入",
@@ -420,6 +425,12 @@
     "you_observed": "您於 {{date}} 觀察了此地點",
     "you_reviewed": "您於 {{date}} 評論了此地點"
   },
+  "save_location_to_list": {
+    "add_new_list": "新增清單",
+    "new_list_placeholder": "清單名稱",
+    "save_label": "儲存",
+    "saved_label": "已儲存"
+  },
   "share": {
     "leave_embed_view_for_full_site": "完整網站",
     "title": "分享此視圖",
@@ -452,7 +463,6 @@
     "bio": "關於你",
     "change_email": "更改電子郵件",
     "change_password": "更改密碼",
-    "change_your_password": "更改密碼",
     "current_email": "目前的電子郵件",
     "current_password": "當前密碼",
     "header": {

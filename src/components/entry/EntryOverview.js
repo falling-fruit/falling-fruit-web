@@ -21,6 +21,7 @@ import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { ReportButton } from './overview/ReportButton'
+import SaveToListButton from './overview/SaveToListButton'
 import Tags from './overview/Tags'
 import TypesHeader from './overview/TypesHeader'
 import { ReviewButton } from './ReviewButton'
@@ -52,10 +53,6 @@ const Description = styled.section`
 
   & > p:first-child {
     margin-block-end: 14px;
-  }
-
-  button {
-    margin-inline-end: 10px;
   }
 `
 
@@ -189,6 +186,19 @@ const LastEditedInfo = ({ locationData }) => {
     </IconBesideText>
   )
 }
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const ButtonGroupStart = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`
 
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
@@ -279,10 +289,13 @@ const EntryOverview = () => {
           )}
           <LastEditedInfo locationData={locationData} />
           <ReviewSummary reviews={reviews} />
-          <div>
-            <ReviewButton />
+          <ButtonRow>
+            <ButtonGroupStart>
+              <ReviewButton />
+              {user && <SaveToListButton locationId={locationId} />}
+            </ButtonGroupStart>
             <ReportButton />
-          </div>
+          </ButtonRow>
         </Description>
       </>
     </div>

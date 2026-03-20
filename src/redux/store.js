@@ -12,6 +12,7 @@ import mapReducer from './mapSlice'
 import miscReducer from './miscSlice'
 import placeReducer from './placeSlice'
 import reviewReducer from './reviewSlice'
+import saveReducer from './saveSlice'
 import settingsReducer from './settingsSlice'
 import shareReducer from './shareSlice'
 import typeReducer from './typeSlice'
@@ -36,6 +37,7 @@ export const store = configureStore({
     viewport: viewportReducer,
     activity: activityReducer,
     connectivity: connectivityReducer,
+    save: saveReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

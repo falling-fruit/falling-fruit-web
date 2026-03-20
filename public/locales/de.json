@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Fehler beim Hinzufügen der Standortliste: {{message}}",
+      "add_location_to_list_failed": "Fehler beim Hinzufügen des Standorts zur Liste: {{message}}",
       "fetch_clusters_failed": "Fehler beim Abrufen der Cluster: {{message}}",
-      "fetch_filter_counts_failed": "Fehler beim Abrufen der Filterzählungen: {{message}}",
       "fetch_import_failed": "Fehler beim Abrufen des Datensatzes {{id}}: {{message}}",
       "fetch_location_changes_failed": "Abrufen der Standortänderungen fehlgeschlagen: {{message}}",
       "fetch_location_failed": "Fehler beim Abrufen des Standorts {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Fehler beim Abrufen der Standortlisten: {{message}}",
       "fetch_locations_failed": "Fehler beim Abrufen der Standorte: {{message}}",
       "fetch_review_failed": "Fehler beim Abrufen der Bewertung {{id}}: {{message}}",
       "fetch_user_failed": "Fehler beim Abrufen des Benutzers {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Bearbeitung des Standorts fehlgeschlagen: {{message}}",
       "location_submission_failed": "Übermittlung des Standorts fehlgeschlagen: {{message}}",
       "photo_upload_failed": "Foto-Upload fehlgeschlagen: {{message}}",
+      "remove_location_from_list_failed": "Fehler beim Entfernen des Standorts aus der Liste: {{message}}",
+      "remove_location_list_failed": "Fehler beim Entfernen der Standortliste: {{message}}",
+      "rename_location_list_failed": "Fehler beim Umbenennen der Standortliste: {{message}}",
       "report_submission_failed": "Meldungsübermittlung fehlgeschlagen: {{message}}",
       "review_deletion_failed": "Löschen der Bewertung fehlgeschlagen: {{message}}",
       "review_edit_failed": "Bearbeitung der Bewertung fehlgeschlagen: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Geolokalisierung wird nicht unterstützt"
     },
     "language_changed_refresh_to_reload_map": "Sprache geändert. Bitte lade die Seite neu, um die Karte zu aktualisieren",
-    "results_unavailable": "Ergebnisse nicht verfügbar",
     "unknown_error": "Unbekannter Fehler"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
       "delete": "Löschen",
       "edit": "Bearbeiten",
       "reload": "Neu laden",
@@ -420,6 +425,12 @@
     "you_observed": "Du hast diesen Standort am {{date}} beobachtet",
     "you_reviewed": "Du hast diesen Standort am {{date}} bewertet"
   },
+  "save_location_to_list": {
+    "add_new_list": "Neue Liste hinzufügen",
+    "new_list_placeholder": "Listenname",
+    "save_label": "Speichern",
+    "saved_label": "Gespeichert"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Vollständige Website",
     "title": "Diese Ansicht teilen",
@@ -452,7 +463,6 @@
     "bio": "Über dich",
     "change_email": "E-Mail ändern",
     "change_password": "Passwort ändern",
-    "change_your_password": "Passwort ändern",
     "current_email": "Aktuelle E-Mail",
     "current_password": "Aktuelles Passwort",
     "header": {

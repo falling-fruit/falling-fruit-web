@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Toevoegen van locatielijst mislukt: {{message}}",
+      "add_location_to_list_failed": "Toevoegen van locatie aan lijst mislukt: {{message}}",
       "fetch_clusters_failed": "Fout bij ophalen clusters: {{message}}",
-      "fetch_filter_counts_failed": "Fout bij ophalen filteraantallen: {{message}}",
       "fetch_import_failed": "Fout bij ophalen van dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Ophalen van locatielijsten mislukt: {{message}}",
       "fetch_locations_failed": "Fout bij ophalen locaties: {{message}}",
       "fetch_review_failed": "Fout bij ophalen recensie {{id}}: {{message}}",
       "fetch_user_failed": "Fout bij ophalen gebruiker {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Bewerken van locatie mislukt: {{message}}",
       "location_submission_failed": "Indienen van locatie mislukt: {{message}}",
       "photo_upload_failed": "Uploaden van foto mislukt: {{message}}",
+      "remove_location_from_list_failed": "Verwijderen van locatie uit lijst mislukt: {{message}}",
+      "remove_location_list_failed": "Verwijderen van locatielijst mislukt: {{message}}",
+      "rename_location_list_failed": "Hernoemen van locatielijst mislukt: {{message}}",
       "report_submission_failed": "Indienen van melding mislukt: {{message}}",
       "review_deletion_failed": "Verwijderen van recensie mislukt: {{message}}",
       "review_edit_failed": "Bewerken van recensie mislukt: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Geolocatie wordt niet ondersteund"
     },
     "language_changed_refresh_to_reload_map": "Taal gewijzigd, vernieuw de pagina om de kaart opnieuw te laden",
-    "results_unavailable": "Resultaten niet beschikbaar",
     "unknown_error": "Onbekende fout"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Cancel",
+      "confirm": "Bekreft",
       "delete": "Delete",
       "edit": "Edit",
       "reload": "Herlaai",
@@ -420,6 +425,12 @@
     "you_observed": "Je hebt deze locatie waargenomen op {{date}}",
     "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Legg til ny liste",
+    "new_list_placeholder": "Listenavn",
+    "save_label": "Lagre",
+    "saved_label": "Lagret"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Volledige website",
     "title": "Deel deze weergave",
@@ -452,7 +463,6 @@
     "bio": "Over jou",
     "change_email": "E-mailadres wijzigen",
     "change_password": "Wachtwoord wijzigen",
-    "change_your_password": "Wijzig je wachtwoord",
     "current_email": "Huidig e-mailadres",
     "current_password": "Huidig wachtwoord",
     "header": {

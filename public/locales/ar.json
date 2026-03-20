@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "فشل إضافة قائمة المواقع: {{message}}",
+      "add_location_to_list_failed": "فشل إضافة الموقع إلى القائمة: {{message}}",
       "fetch_clusters_failed": "خطأ في جلب المجموعات: {{message}}",
-      "fetch_filter_counts_failed": "خطأ في جلب عدد الفلاتر: {{message}}",
       "fetch_import_failed": "خطأ في جلب مجموعة البيانات {{id}}: {{message}}",
       "fetch_location_changes_failed": "فشل في جلب تغييرات الموقع: {{message}}",
       "fetch_location_failed": "خطأ في جلب الموقع {{id}}: {{message}}",
+      "fetch_location_lists_failed": "فشل جلب قوائم المواقع: {{message}}",
       "fetch_locations_failed": "خطأ في جلب المواقع: {{message}}",
       "fetch_review_failed": "خطأ في جلب المراجعة {{id}}: {{message}}",
       "fetch_user_failed": "خطأ في جلب المستخدم {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "فشل تحرير الموقع: {{message}}",
       "location_submission_failed": "فشل تقديم الموقع: {{message}}",
       "photo_upload_failed": "فشل تحميل الصورة: {{message}}",
+      "remove_location_from_list_failed": "فشل إزالة الموقع من القائمة: {{message}}",
+      "remove_location_list_failed": "فشل إزالة قائمة المواقع: {{message}}",
+      "rename_location_list_failed": "فشل إعادة تسمية قائمة المواقع: {{message}}",
       "report_submission_failed": "فشل تقديم التقرير: {{message}}",
       "review_deletion_failed": "فشل حذف المراجعة: {{message}}",
       "review_edit_failed": "فشل تحرير المراجعة: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "تحديد الموقع الجغرافي غير مدعوم"
     },
     "language_changed_refresh_to_reload_map": "تم تغيير اللغة، يرجى تحديث الصفحة لإعادة تحميل الخريطة",
-    "results_unavailable": "النتائج غير متاحة",
     "unknown_error": "خطأ غير معروف"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "إلغاء",
+      "confirm": "تأكيد",
       "delete": "حذف",
       "edit": "تعديل",
       "reload": "إعادة تحميل",
@@ -420,6 +425,12 @@
     "you_observed": "لقد لاحظت هذا الموقع في {{date}}",
     "you_reviewed": "لقد راجعت هذا الموقع في {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "إضافة قائمة جديدة",
+    "new_list_placeholder": "اسم القائمة",
+    "save_label": "حفظ",
+    "saved_label": "تم الحفظ"
+  },
   "share": {
     "leave_embed_view_for_full_site": "الموقع الكامل",
     "title": "مشاركة هذا المنظر",
@@ -452,7 +463,6 @@
     "bio": "حولك",
     "change_email": "تغيير البريد الإلكتروني",
     "change_password": "تغيير كلمة المرور",
-    "change_your_password": "تغيير كلمة المرور",
     "current_email": "البريد الإلكتروني الحالي",
     "current_password": "كلمة المرور الحالي",
     "header": {

@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Échec de l'ajout de la liste d'emplacements : {{message}}",
+      "add_location_to_list_failed": "Échec de l'ajout de l'emplacement à la liste : {{message}}",
       "fetch_clusters_failed": "Erreur lors de la récupération des clusters : {{message}}",
-      "fetch_filter_counts_failed": "Erreur lors de la récupération des compteurs de filtres : {{message}}",
       "fetch_import_failed": "Erreur lors de la récupération du jeu de données {{id}} : {{message}}",
       "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
+      "fetch_location_lists_failed": "Échec de la récupération des listes d'emplacements : {{message}}",
       "fetch_locations_failed": "Erreur lors de la récupération des emplacements : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
       "fetch_user_failed": "Erreur lors de la récupération de l'utilisateur {{id}} : {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
       "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
       "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
+      "remove_location_from_list_failed": "Échec de la suppression de l'emplacement de la liste : {{message}}",
+      "remove_location_list_failed": "Échec de la suppression de la liste d'emplacements : {{message}}",
+      "rename_location_list_failed": "Échec du renommage de la liste d'emplacements : {{message}}",
       "report_submission_failed": "Échec de l'envoi du rapport : {{message}}",
       "review_deletion_failed": "Échec de la suppression de l'avis : {{message}}",
       "review_edit_failed": "Échec de la modification de l'avis : {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Géolocalisation non prise en charge"
     },
     "language_changed_refresh_to_reload_map": "La langue a été modifiée. Actualise la page pour recharger la carte.",
-    "results_unavailable": "Résultats indisponibles",
     "unknown_error": "Erreur inconnue"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Annuler",
+      "confirm": "Confirmer",
       "delete": "Supprimer",
       "edit": "Modifier",
       "reload": "Recharger",
@@ -420,6 +425,12 @@
     "you_observed": "Tu as observé cet emplacement le {{date}}",
     "you_reviewed": "Tu as évalué cet emplacement le {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Ajouter une nouvelle liste",
+    "new_list_placeholder": "Nom de la liste",
+    "save_label": "Enregistrer",
+    "saved_label": "Enregistré"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Site complet",
     "title": "Partager cette vue",
@@ -452,7 +463,6 @@
     "bio": "Parle-nous de toi",
     "change_email": "Changer l'adresse e-mail",
     "change_password": "Changer le mot de passe",
-    "change_your_password": "Modifier votre mot de passe",
     "current_email": "E-mail actuel",
     "current_password": "Mot de passe actuel",
     "header": {

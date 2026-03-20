@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Не вдалося додати список локацій: {{message}}",
+      "add_location_to_list_failed": "Не вдалося додати локацію до списку: {{message}}",
       "fetch_clusters_failed": "Помилка отримання кластерів: {{message}}",
-      "fetch_filter_counts_failed": "Помилка отримання кількості фільтрів: {{message}}",
       "fetch_import_failed": "Помилка отримання набору даних {{id}}: {{message}}",
       "fetch_location_changes_failed": "Не вдалося отримати зміни локації: {{message}}",
       "fetch_location_failed": "Помилка отримання локації {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Не вдалося отримати списки локацій: {{message}}",
       "fetch_locations_failed": "Помилка отримання локацій: {{message}}",
       "fetch_review_failed": "Помилка отримання відгуку {{id}}: {{message}}",
       "fetch_user_failed": "Помилка отримання користувача {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Не вдалося відредагувати локацію: {{message}}",
       "location_submission_failed": "Не вдалося надіслати локацію: {{message}}",
       "photo_upload_failed": "Не вдалося завантажити фото: {{message}}",
+      "remove_location_from_list_failed": "Не вдалося видалити локацію зі списку: {{message}}",
+      "remove_location_list_failed": "Не вдалося видалити список локацій: {{message}}",
+      "rename_location_list_failed": "Не вдалося перейменувати список локацій: {{message}}",
       "report_submission_failed": "Не вдалося надіслати скаргу: {{message}}",
       "review_deletion_failed": "Не вдалося видалити відгук: {{message}}",
       "review_edit_failed": "Не вдалося відредагувати відгук: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Геолокація не підтримується"
     },
     "language_changed_refresh_to_reload_map": "Мову змінено. Оновіть сторінку, щоб перезавантажити карту",
-    "results_unavailable": "Результати недоступні",
     "unknown_error": "Невідома помилка"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Скасувати",
+      "confirm": "Підтвердити",
       "delete": "Видалити",
       "edit": "Редагувати",
       "reload": "Перезавантажити",
@@ -420,6 +425,12 @@
     "you_observed": "Ви помітили це місце {{date}}",
     "you_reviewed": "Ви залишили відгук про це місце {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Додати новий список",
+    "new_list_placeholder": "Назва списку",
+    "save_label": "Зберегти",
+    "saved_label": "Збережено"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Повна версія сайту",
     "title": "Поділитися цим виглядом",
@@ -452,7 +463,6 @@
     "bio": "Про вас",
     "change_email": "Змінити електронну адресу",
     "change_password": "Змінити пароль",
-    "change_your_password": "Змінити ваш пароль",
     "current_email": "Поточна електронна адреса",
     "current_password": "Поточний пароль",
     "header": {
