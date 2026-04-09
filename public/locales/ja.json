@@ -1,0 +1,480 @@
+{
+  "confirm_message": {
+    "delete_location": "この場所を削除してもよろしいですか？",
+    "delete_review": "このレビューを削除してもよろしいですか？"
+  },
+  "devise": {
+    "confirmations": {
+      "confirm_your_email": "メールアドレスを確認してください",
+      "confirmed": "メールアドレスが正常に確認されました。",
+      "no_token": "確認メールからアクセスしない限り、このページにアクセスすることはできません。確認メールからアクセスしている場合は、提供された完全なURLを使用していることを確認してください。",
+      "send_instructions": "数分以内にメールアドレスの確認方法が記載されたメールが届きます。"
+    },
+    "failure": {
+      "already_authenticated": "既にログインしています。"
+    },
+    "passwords": {
+      "no_token": "パスワードリセットメールからアクセスしない限り、このページにアクセスすることはできません。パスワードリセットメールからアクセスしている場合は、提供された完全なURLを使用していることを確認してください。",
+      "send_instructions": "数分以内にパスワードのリセット方法が記載されたメールが届きます。",
+      "updated_not_active": "パスワードが正常に変更されました。"
+    },
+    "registrations": {
+      "update_needs_confirmation": "アカウントが正常に更新されましたが、新しいメールアドレスの確認が必要です。メールを確認して、確認リンクをクリックして新しいメールアドレスを確認してください。",
+      "updated": "アカウントが正常に更新されました。"
+    }
+  },
+  "error_message": {
+    "api": {
+      "fetch_clusters_failed": "クラスターの取得エラー: {{message}}",
+      "fetch_filter_counts_failed": "フィルターカウントの取得エラー: {{message}}",
+      "fetch_import_failed": "データセット{{id}}の取得エラー: {{message}}",
+      "fetch_location_changes_failed": "ロケーション変更の取得に失敗しました: {{message}}",
+      "fetch_location_failed": "ロケーション{{id}}の取得エラー: {{message}}",
+      "fetch_locations_failed": "ロケーションの取得エラー: {{message}}",
+      "fetch_review_failed": "レビュー{{id}}の取得エラー: {{message}}",
+      "fetch_user_failed": "ユーザー{{id}}の取得エラー: {{message}}",
+      "location_deletion_failed": "ロケーションの削除に失敗しました: {{message}}",
+      "location_edit_failed": "ロケーションの編集に失敗しました: {{message}}",
+      "location_submission_failed": "ロケーションの送信に失敗しました: {{message}}",
+      "photo_upload_failed": "写真のアップロードに失敗しました: {{message}}",
+      "report_submission_failed": "レポートの送信に失敗しました: {{message}}",
+      "review_deletion_failed": "レビューの削除に失敗しました: {{message}}",
+      "review_edit_failed": "レビューの編集に失敗しました: {{message}}",
+      "review_submission_failed": "レビューの送信に失敗しました: {{message}}",
+      "street_view_unavailable": "ロケーション{{id}}のストリートビューは利用できません",
+      "type_add_failed": "新しいタイプの追加に失敗しました: {{message}}"
+    },
+    "auth": {
+      "confirmation_failed": "アカウントの確認に失敗しました: {{message}}",
+      "expired_refresh_token": "一定期間操作がなかったため、サインアウトしました。再度サインインしてください。",
+      "password_set_failed": "新しいパスワードの設定に失敗しました: {{message}}",
+      "profile_update_failed": "プロフィールの更新に失敗しました: {{message}}",
+      "resend_confirmation_failed": "確認メールの再送信に失敗しました: {{message}}",
+      "reset_password_failed": "パスワードのリセットに失敗しました: {{message}}",
+      "signin_failed": "サインインに失敗しました: {{message}}",
+      "signup_failed": "サインアップに失敗しました: {{message}}"
+    },
+    "connectivity": {
+      "you_are_back_online": "オンラインに戻りました。",
+      "you_are_offline": "オフラインです。"
+    },
+    "geolocation": {
+      "code_2": "位置情報が利用できません: {{message}}",
+      "code_3": "位置情報の取得がタイムアウトしました: {{message}}",
+      "denied": "位置情報の使用許可が拒否されました。位置情報を有効にするには、ブラウザの設定で位置情報の共有を許可し、ページを更新してください。",
+      "not_supported": "位置情報がサポートされていません"
+    },
+    "language_changed_refresh_to_reload_map": "言語が変更されました。ページを更新して地図を再読み込みしてください",
+    "results_unavailable": "結果を取得できません",
+    "unknown_error": "不明なエラー"
+  },
+  "filter": {
+    "all_types": "すべてのタイプ",
+    "clear": "クリア",
+    "include_locations_from_tree_inventories": "樹木台帳の位置情報を含む",
+    "select_shown": "表示されているものをすべて選択",
+    "within_map_bounds": "地図の範囲内"
+  },
+  "form": {
+    "button": {
+      "cancel": "キャンセル",
+      "delete": "削除",
+      "edit": "編集",
+      "reload": "再読み込み",
+      "report": "報告",
+      "reset": "リセット",
+      "restart": "再起動",
+      "review": "レビュー",
+      "submit": "\tefx\tefx\tefx",
+      "submitting": "\tefx\tefx中"
+    },
+    "error": {
+      "confirmation": "元の値と一致しません",
+      "must_be_different": "前の値とは異なる必要があります",
+      "too_short": "最低{{min}}文字必要です"
+    },
+    "not_signed_in": {
+      "continue": "続ける",
+      "do_not_ask_again": "今後表示しない",
+      "message": "サインインしていません。アカウントなしで続けるか、後でこの観察を追跡・管理するために先にサインインまたはサインアップしてください。",
+      "title": {
+        "add_location": "匿名で場所を追加しますか？",
+        "add_review": "匿名でレビューを追加しますか？",
+        "edit_location": "匿名で場所を編集しますか?"
+      }
+    },
+    "optional": "任意",
+    "required": "必須",
+    "search": "検索"
+  },
+  "glossary": {
+    "about": "について",
+    "account": "アカウント",
+    "activity": "アクティビティ",
+    "address": "住所",
+    "by_author": "{{author}}による",
+    "description": "説明",
+    "email": "メール",
+    "locations": {
+      "other": "場所"
+    },
+    "map": "地図",
+    "name": "名前",
+    "password": "パスワード",
+    "quality": "品質",
+    "review": {
+      "other": "レビュー"
+    },
+    "sign_up": "サインアップ",
+    "tree_inventory": {
+      "one": "樹木目録"
+    },
+    "type": {
+      "one": "タイプ",
+      "other": "タイプ"
+    },
+    "unverified": "未確認",
+    "yield": "収穫量"
+  },
+  "info_message": {
+    "cannot_delete_location_with_other_reviews": "この場所には他のユーザーのレビューが含まれています。削除をリクエストするには、報告ボタンをご使用ください。"
+  },
+  "layouts": {
+    "application": {
+      "menu": {
+        "in_the_press": "プレスで",
+        "sharing_the_harvest": "収穫の共有",
+        "the_data": "データ",
+        "the_project": "プロジェクト"
+      }
+    },
+    "back": "戻る",
+    "loading": "読み込み中..."
+  },
+  "list": {
+    "no_results": "結果が見つかりません",
+    "zoom_in": "地図をズームインして位置データを表示"
+  },
+  "locations": {
+    "add_new": "新規追加",
+    "add_similar": "類似を追加",
+    "edit_position": {
+      "cancel": "位置編集をキャンセル",
+      "confirm": "位置編集を確定",
+      "instructions": "位置を編集してください。"
+    },
+    "form": {
+      "access": "アクセス",
+      "comments": "コメント",
+      "comments_subtext": "更新情報、アクセスの問題、植物の健康状態...",
+      "description_subtext": "場所の詳細、アクセスの問題、植物の健康状態...",
+      "fruiting_status": "結実状況",
+      "position": "位置",
+      "season": "季節",
+      "season_start_to_stop_short": "から"
+    },
+    "index": {
+      "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！"
+    },
+    "infowindow": {
+      "access_mode": [
+        "ソースは私の所有地にあります",
+        "所有者からソースを追加する許可を得ています",
+        "ソースは公有地にあります",
+        "ソースは私有地にありますが、公有地にはみ出しています",
+        "ソースは私有地にあります（採取前に許可を求めてください）"
+      ],
+      "access_short": [
+        "所有者が追加",
+        "所有者が許可",
+        "公共",
+        "私有地だが張り出している",
+        "私有地"
+      ],
+      "fruiting": ["花", "未熟な果実", "熟した果実"]
+    },
+    "init": {
+      "cancel": "場所の選択をキャンセル",
+      "choose_instructions": "新しい場所の位置を選択してください。",
+      "confirm": "場所の選択を確認",
+      "edit_instructions": "新しい場所の位置を編集してください。",
+      "position_too_close": "既存の場所とは異なる位置を選択してください"
+    },
+    "overview": {
+      "added_by": "{{name}}によって追加されました",
+      "added_by_you": "あなたによって追加されました",
+      "date_edited": "{{date}}に更新されました",
+      "imported_from": "{{name}}からインポートされました",
+      "season": {
+        "in_season": "{{start_month}}から{{stop_month}}まで旬です",
+        "year_round": "一年中"
+      },
+      "title": "概要"
+    }
+  },
+  "menu": {
+    "add_new_location": "場所を追加",
+    "add_review": "レビューを追加",
+    "edit_location": "場所を編集",
+    "edit_review": "レビューを編集",
+    "filters": "フィルター",
+    "list": "リスト",
+    "settings": "設定",
+    "zoom_in_to_add_location": "ズームインして場所を追加"
+  },
+  "new_type": {
+    "add_type_label": "タイプを追加:",
+    "form": {
+      "add_name": "名前を追加",
+      "language": "言語",
+      "notes": "メモ",
+      "notes_placeholder": "説明、Wikipediaリンク、分類情報など...",
+      "pending_notice": "注意：すべての新しいタイプはデフォルトで保留中に設定されます。管理者のみが保留中でないタイプを追加できます。",
+      "remove": "削除"
+    },
+    "title": "新しいタイプを追加"
+  },
+  "pages": {
+    "about": {
+      "about_the_site": "プロジェクトについて",
+      "advisors": "顧問委員会",
+      "alan_gibson_bio_html": "アランは常に冒険と探検を楽しんできました。彼は幼い子供たちをアウトドアライフスタイルに導く方法として採集を始めました。彼は<a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a>ブログを執筆し、<a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Fruit and Nuts For Free</a>という本を出版しました。彼は公共公園での採集を正当化し、故郷の英国サウサンプトンにコミュニティ果樹園を設立しました。",
+      "ali_moxley_bio_html": "アリは、モンタナ州ボーズマンとその周辺で育つ豊富な果物や野生食物についての認識を広めるため、コミュニティと協力しています。彼女の本業は、全国の食品・農業ビジネスが資金調達の機会を特定し申請するのを支援することです。週末にはアマチュアジャーナリストとして、地方コミュニティ、農家、牧場主の物語を紹介しています。アリは友人との森の散歩、採集、コントラダンス、そして食品システムの企業統合に対する抗議を愛しています。",
+      "ana_carolina_bio_html": "アナは、ブラジルのパラ連邦大学のポスドク研究員です。彼女は社会的・文化的な食習慣を理解することに関心を持つ人類学者です。アナは主にブラジルのアマゾンで働いてきました。アクレ州（西部アマゾン）では地域の果物消費を研究しました。その後、中部ソリモンエス地域で、遠隔地のコミュニティにおける食生活の変化を調査しました。2017年から2018年にかけて、アナはアマゾンデルタの小・中規模の町に住み、非公式居住地に住む人々の食料安全保障に対する気候変動の影響を調べました。彼女は最近、米国ニューメキシコ州南部に移住し、コンサルタントとして働いています。",
+      "austin_arrington_bio_html": "<a href=\"https://plantgroupnyc.com\">PLANT Group</a>を設立して以来、オースティンは、より健全な生態系とコミュニティを支援する気候技術に焦点を当てて活動しています。3歳の息子を持つ誇り高い父親として、彼は余暇にガーデニング、音楽演奏、そして地元の食品と回復力のある地域ベースのシステムへの深い情熱を育んでいます。",
+      "billy_daniels_bio_html": "ビリーの都市採集への愛は、シンプルな驚きから始まりました。中西部で育った後、カリフォルニアの友人の裏庭の木からアボカドを摘んだことです。サンフランシスコに住んでいた間、彼は常にベイエリア周辺で公共にアクセス可能な果物を探していました。ビリーは現在ウィスコンシン州に住んでおり、サイクリング、ガーデニング、マディソンの多くのファーマーズマーケットに通う姿を見ることができます。彼はFalling Fruitの使命を推進し、初心者が採集を発見しやすくすることに熱心なプロダクトマネジメントリーダーです。",
+      "caleb_phillips_bio_html": "ケイレブは、食の正義と社会問題に対処するために技術を創造的に活用することに情熱を持つ、羽のない二足歩行のヒューマノイドです。自転車で木々を眺めながら走り回っていないときは、コロラド州ゴールデンの<a href=\"https://www.nrel.gov/research/caleb-phillips.html\">国立再生可能エネルギー研究所</a>でのデータサイエンティストとしての本業と、<a href=\"https://www.colorado.edu/cs/caleb-phillips\">コロラド大学</a>のコンピュータサイエンスの非常勤教授としての活動のバランスを取っています。仕事以外では、岩登り、トレイルランニング、サイクリング、そして可能な限り屋外で過ごすことを好みます。ケイレブは2013年にイーサン・ウェルティと共にFalling Fruitを創設し、6年間理事会に在籍した後、諮問委員会のポジションに就きました。",
+      "celebration": "Falling Fruitは、私たちの街路に見過ごされている料理の恵みを祝うものです。この資源をインタラクティブな地図上で定量化することで、人々、食べ物、そして私たちの近隣で育つ自然の生物との親密なつながりを促進したいと考えています。単なる無料のランチではありません！21世紀の採集は、都市探索の機会であり、汚れた歩道の惨劇と戦い、食べ物の植物学的起源と再びつながる機会です。",
+      "closing_remarks": "結びの言葉",
+      "closing_remarks_para1_html": "Falling Fruitは、コロラド州ボルダーに拠点を置く501(c)(3)（免税）公益慈善団体です。その結果、米国内での寄付は税控除の対象となります。IRSからの<a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">免除状</a>を確認し、<a href=\"https://apps.irs.gov/app/eos/\">IRS Publication 78</a>または<a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">コロラド州務長官</a>で私たちの地位を確認できます。また、<a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">定款</a>と理事会会議の<a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">議事録</a>もご覧いただけます。",
+      "closing_remarks_para2_html": "都市環境での食料の収穫には、特定の実用的および道徳的な考慮事項が伴います。都市採集の倫理入門として、次の<a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">要約</a>をお勧めします。",
+      "closing_remarks_para3_html": "Falling Fruitの情報は間違っているか古い可能性があります。例えば、Falling Fruitに移行された多くの採集マップは、公開されたGoogle Mapとしてホストされており、マーカーが誤って移動されることがよくありました。また、市の樹木インベントリは、メンテナンスのために樹木が訪問された場合にのみ（もしあれば）更新されます。現場で不正確な情報に遭遇する準備をし、発見に基づいて必要に応じて地図を編集してください。最終的に、植物の識別、食用性、場所を判断するのはあなたの責任であり、地図の品質を向上させるのはすべての人の責任です。",
+      "contact_us_html": "Falling Fruitは採集者によって、採集者のために構築されています – 私たちはそれを現代の採集者が利用できる最高のツールにしたいと考えています。<a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>までご連絡ください。皆様からのご意見をお待ちしております！",
+      "cristina_rubke_bio_html": "クリスティーナは、カリフォルニア州サンフランシスコの<a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a>の弁護士で、商標出願と助言を専門としています。彼女はまた、サンフランシスコの公共交通機関、交通、駐車場を監督する<a href=\"//www.sfmta.com/\">サンフランシスコ市交通局</a>の理事会メンバーでもあります。余暇には、<a href=\"//www.baads.org/\">ベイエリア障害者セーリング協会</a>でサンフランシスコ湾をセーリングし、地元および国際的なレガッタに出場しています。",
+      "david_craft_bio_html": "デビッドは、マサチューセッツ州ボストンの<a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">ハーバード医科大学</a>放射線腫瘍学部門の研究者です。彼はまた、熱心な採集者であり、<a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and Eating Wild Plants in the City</a>（<a href=\"/docs/David Craft - Urban Foraging.pdf\">無料ダウンロード</a>）の著者でもあります。",
+      "directors": "理事会",
+      "donate": "寄付",
+      "ethan_welty_bio_html": "イーサンは、テクノロジーとデータを駆使して、都市を新鮮で無料の食料源として推進しています。彼は2013年にCaleb Phillipsと共にFalling Fruitを創設し、世界中で都市採集を促進し、2014年にはコロラド州ボルダーで育つ余剰果物を収穫・配布するために<a href=\"https://fruitrescue.org\">Community Fruit Rescue</a>を共同設立しました。果物以外にも、<a href=\"https://geo.uzh.ch/en/department/Staff/ethanwelty.html\">氷河の研究</a>、<a href=\"https://www.weltyphotography.com\">写真家としてのキャリア</a>、そして山岳や河川での活動への情熱を両立させています。",
+      "ff_disclaimer_html": "Falling FruitはFallen Fruitとは関係ありません。Fallen Fruitは<a href=\"http://fallenfruit.org\">fallenfruit.org</a>でご覧いただけます。",
+      "give_us_money": "私たちは501(c)(3)非営利団体であり、運営には寄付に頼っています。可能であれば、ぜひ財政的な貢献をご検討ください。米国内での寄付は税控除の対象となります。",
+      "give_zeffy": "Zeffyで寄付する",
+      "jeff_wanner_bio_html": "ジェフは、子供の頃に家族とブラックベリーやブルーベリーを収穫し、最近ではコロラド州全域に豊富にある公共の果樹に気づいたことから、私たちの都市で育つ果物の豊かさに深い感謝の念を抱くようになりました。Falling Fruitでの彼の最初の任務は、紙の地図を手に、ボルダーとソルトレイクシティを歩き回り、果樹を記録することでした。建物のエネルギー効率の向上に取り組んでいないときは、通常、コミュニティで手伝いをしたり、徒歩、スキー、自転車で山を素早く移動したりしています。",
+      "join_us_html": "ハイパーローカルな食を一緒に祝いましょう！<a href=\"/\">マップ</a>は誰でも編集でき、データベースは<a href=\"/about/data\">ダウンロード</a>がワンクリックで可能で、<a href=\"https://github.com/falling-fruit/\">コード</a>はオープンソースです。同様に、仲間の人間と恵みを共有することをお勧めします。私たちの<a href=\"/about/sharing\">共有ページ</a>には、公共の果樹園やフードフォレストを植え、都市の木々や農家の畑から無駄になる果物や野菜を収穫し、近隣や困っている人々と共有する数百の地域組織がリストされています。",
+      "jp_goguen_bio_html": "JPは、芸術と情報科学のバックグラウンドを持つ<a href=\"https://library.illinois.edu\">イリノイ大学図書館</a>のメディア技術スペシャリストです。イリノイ州アーバナを拠点に、地元の野生食料ネットワークをマッピングし写真撮影を行い、コミュニティの採集活動やスキルシェアを組織しています。2025年、彼の研究とストーリー収集は<a href=\"https://instagram.com/minipopuppawpawmuseum\">ミニポップアップポーポーミュージアム</a>の立ち上げにつながりました。図書館にいないときは、通常<a href=\"https://rosebowltavern.com\">アーバナ・フーテナニー</a>でギターを演奏しているか、愛犬のダリと一緒にディスクゴルフコースに出かけています。",
+      "meagan_shelley_bio_html": "ミーガンは、バージニア州中部に住むビジネスオーナーであり博士課程の候補者です。彼女は認定<a href=\"https://vmga.net\">マスターガーデナー</a>であり、10エーカーの自給農場で果物、ナッツ、野菜、そして鶏、ウズラ、ウサギを育てています。彼女の目標は、常に進行中の作業であるクローズドループ農業を実践することです。その間、彼女は年間食料供給の約20〜30%を採集、栽培、交換することに取り組んでいます。",
+      "more_about_html": "私たちの食用マップは、この種のものとして最初ではありませんが、世界で最も包括的なものになることを目指しています。ユーザーが独自の場所を投稿する一方で、私たちはインターネットを精査して既存の知識を探し、採集者、森林管理者、フリーガンの努力を統合しようとしています。<a href=\"/about/data\">インポートされたデータセット</a>は、小さな近隣の採集マップから広大な専門的に編纂された樹木インベントリまで多岐にわたります。これまでのところ、数百万の場所に分布する数千種類の食用植物（ほとんどが植物種ですが、すべてではありません）に相当します。栽培された一般的なものから、外来植物や長い間忘れられていた在来植物のエキゾチックな風味まで、あなたの近所での採集は時間を超えた文化を横断する旅です。",
+      "staff": "スタッフ",
+      "translate": "翻訳",
+      "translate_for_us_html": "翻訳者としてボランティアに興味がありますか？メールでご連絡いただければ、翻訳が管理されている<a href=\"https://phrase.com\">Phrase</a>への参加をご招待します。",
+      "translators": "翻訳者",
+      "tristram_stuart_bio_html": "10代の頃、トリストラムは学校の厨房、地元のパン屋、村の八百屋から集めた余剰食品で豚を飼育していました。この食品の多くがまだ人間の消費に適していることに気づいたことで、新鮮で良質な食品が大規模に無駄にされているという認識に至りました。トリストラムはそれ以来、この問題を一般市民、メディア、政策立案者の注意を引くために精力的に活動してきました。彼は食品廃棄物キャンペーン組織<a href=\"//feedbackglobal.org\">Feedback Global</a>を設立し、<a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a>を執筆して、世界規模での問題の範囲を示しました。2011年、トリストラムは食品廃棄物との闘いで<a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">ソフィー賞</a>を受賞しました。",
+      "ward_bullard_bio_html": "ウォードは、戦略的アドバイザリー会社である31st Venturesのパートナーです。彼は<a href=\"https://designforamerica.org\">Design for America</a>での仕事を通じて初めてFalling Fruitに紹介され、そこで両組織間のコラボレーションを主導しました。すべての果物（特に近所の柿）の愛好家であるウォードは、米国全土の新鮮な果物砂漠の問題に取り組む複数のデザインおよび技術イニシアチブに参加しており、Falling Fruitの活動に貢献できることを楽しみにしています。",
+      "write": "書く"
+    },
+    "changes": {
+      "change_in_city": "{{city}}で{{type}}",
+      "place": {
+        "one": "場所",
+        "other": "場所"
+      },
+      "recent_activity": "最近のアクティビティ",
+      "type": {
+        "added": "追加されました",
+        "added_by_you": "あなたが追加しました",
+        "edited": "編集されました",
+        "edited_by_you": "あなたが編集しました",
+        "visited": "訪問しました",
+        "visited_by_you": "あなたが訪問しました"
+      },
+      "user_activity_empty": "このユーザーはまだ場所を追加、編集、またはレビューしていません",
+      "your_activity_empty": "あなたはまだ場所を追加、編集、またはレビューしていません"
+    },
+    "data": {
+      "beware_html": "ただし注意してください！解凍すると、データベースは巨大なファイルとなり、ほとんどのスプレッドシートソフトウェアでは処理できません。小さな地域のデータのみが必要な場合は、まず<a href=\"/\">マップ</a>に統合されたダウンロードツールを使用してデータを取得してみてください。",
+      "caveat_emptor_html": "データの正確性については一切責任を負いません - データは現状のまま提供されます。<i>買い手の責任において</i>。データを使って何かクールなことをした場合は、<a href=\"mailto:feedback@fallingfruit.org\">お知らせください</a>！",
+      "intro": "Falling Fruitは公開データとユーザーの皆様の寛大さによって構築されています。私たちは都市での採集をできるだけ多くの人々に届けたいと考えており、誰もが私たちの共同作業の成果に平等にアクセスできるべきだと信じています。オープンの精神に基づき、ご覧ください！データベース全体です",
+      "license_html": "プロジェクト、特に商業プロジェクトでデータを使用することに興味がある場合は、私たちに連絡することをお勧めします（<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>）。特に指定がない限り、データは<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a>（クリエイティブ・コモンズ - 表示、非営利、継承）としてライセンスされています。これは、元の著者/ソースの帰属を保持し、（許可なく）商業目的で使用しない限り、データを自由に使用および配布できることを意味します。Falling Fruitのソースコードもオープンであり、<a href=\"https://github.com/falling-fruit/\">GitHub</a>で入手できます。"
+    },
+    "datasets": {
+      "community_map": "コミュニティマップ",
+      "date_imported": "インポート日",
+      "import_id_and_name": "インポート #{{id}}: {{name}}",
+      "imported_datasets": "インポートされたデータセット",
+      "imported_on": "{{date}}にインポートされました",
+      "intro_html": "Falling Fruitは、都市部の食用植物に関する最も包括的でオープンな地理データセットを目指しています。ユーザーが<a href=\"/\">マップ</a>を使用して場所を探索、編集、追加する一方で、私たちは既存のデータセットを探し出し、データベースに直接インポートすることで、世界中のフォレジャー、森林管理者、フリーガンの取り組みを統合しています。私たちが見逃しているデータセットをご存知の場合は、<a href=\"mailto:info@fallingfruit.org\">お知らせください</a>！また、<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">インポートテンプレート</a>を使用してデータをフォーマットすることで、インポートプロセスをお手伝いいただくこともできます。インポートは手動で実行する必要があるため、インポート後に元のデータに加えられたすべての変更はFalling Fruitに反映されないことにご注意ください。",
+      "link": "リンク",
+      "table_info": "各データセットは、名前、場所の数、インポート日でリストされています。各行を展開すると、データ、インポートプロセス、およびデータの使用方法を規定するライセンスに関する詳細が表示されます。",
+      "type": "タイプ",
+      "types_of_data": "Falling Fruitにインポートされるデータセットは、主に2つのカテゴリに分類されます。「コミュニティマップ」は、フォレジャーやフリーガンが食べ物を求めてコミュニティを探索する際に構築されます。このデータをまとめてくださった勤勉な市民地図作成者の皆様に感謝いたします。「樹木インベントリ」は、都市、大学、その他の機関が樹木をより適切に記録し、管理することを望んで編集したものです。私たちはこれらの膨大なデータセットから食用種を抽出し、マップに追加しています。お住まいの地域の果樹をマッピングするお手伝いをするために、学校や市に連絡して、樹木インベントリを私たちと共有するよう促してください。"
+    },
+    "network_error": {
+      "header_message": "ネットワークエラー",
+      "please_check_your_connection": "接続を確認して、再試行してください。",
+      "you_are_offline": "接続できませんでした。オフラインのようです。"
+    },
+    "settings": {
+      "bicycle": "自転車",
+      "label_visibility_header": "場所のラベル",
+      "labels": {
+        "always_on": "常に表示",
+        "off": "オフ",
+        "when_zoomed_in": "ズーム時に表示"
+      },
+      "language": "言語",
+      "points_of_interest": "関心地点",
+      "regional": "地域",
+      "roadmap": "地図",
+      "satellite": "衛星",
+      "terrain": "地形",
+      "transit": "交通機関",
+      "units": {
+        "distance": {
+          "foot": {
+            "one": "{{count}}フィート",
+            "other": "{{count}}フィート"
+          },
+          "kilometer": {
+            "one": "{{count}}キロメートル",
+            "other": "{{count}}キロメートル"
+          },
+          "meter": {
+            "one": "{{count}}メートル",
+            "other": "{{count}}メートル"
+          },
+          "mile": {
+            "one": "{{count}}マイル",
+            "other": "{{count}}マイル"
+          }
+        },
+        "imperial": "ヤード・ポンド法",
+        "metric": "メートル法",
+        "units": "単位"
+      }
+    },
+    "sharing": {
+      "countries": {
+        "australia": "オーストラリア",
+        "belgium": "ベルギー",
+        "brazil": "ブラジル",
+        "canada": "カナダ",
+        "chile": "チリ",
+        "czechia": "チェコ",
+        "fiji": "フィジー",
+        "finland": "フィンランド",
+        "france": "フランス",
+        "germany": "ドイツ",
+        "greece": "ギリシャ",
+        "ireland": "アイルランド",
+        "italy": "イタリア",
+        "new_zealand": "ニュージーランド",
+        "poland": "ポーランド",
+        "portugal": "ポルトガル",
+        "spain": "スペイン",
+        "sweden": "スウェーデン",
+        "switzerland": "スイス",
+        "united_kingdom": "イギリス",
+        "united_states": "アメリカ合衆国"
+      },
+      "grow_pick_and_distribute": "栽培 · 収穫 · 配布",
+      "heading": {
+        "city": "都市",
+        "country": "国",
+        "social": "ソーシャル",
+        "state": "州"
+      },
+      "intro_html": "以下は、公共スペースで食料を栽培する組織（フードフォレスト、公共果樹園）、食料を収穫する組織（都市採集、農場落穂拾い）、または食料を配布する組織（交換、寄付）のリストです。組織は国、州（該当する場合）、都市別にリストされています。取り消し線が引かれた名前は、活動していないと考えられています。このリストに追加すべき他の組織をご存知の場合は、<a href=\"mailto:info@fallingfruit.org\">お問い合わせください</a>！"
+    },
+    "something_went_wrong": {
+      "email_us_if_this_persists_html": "問題が解決しない場合は、<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>までお知らせください。",
+      "error_occurred": "次のエラーが発生しました: {{message}}",
+      "header_message": "問題が発生しました"
+    },
+    "welcome": {
+      "community_driven_platform": "Falling Fruitは、食用植物や無料の食料源の場所を共有するためのコミュニティ主導のプラットフォームです。",
+      "discover_and_contribute": "あなたの地域で他の人が収穫しているものを発見し、自分の観察を投稿することができます。",
+      "explore_the_map": "地図を探索する",
+      "home_page": "ホーム",
+      "welcome_visitors_to_the_site_short": "ようこそ！"
+    }
+  },
+  "problems": {
+    "description_subtext": "問題を評価するのに役立つ情報",
+    "problem_type": "問題の種類",
+    "problem_types": [
+      "場所はスパムです",
+      "場所は存在しません",
+      "場所は重複しています",
+      "不適切なレビュー写真",
+      "不適切なレビューコメント",
+      "その他（以下に説明してください）"
+    ]
+  },
+  "review": {
+    "form": {
+      "add_from_camera": "写真を撮る",
+      "add_from_gallery": "ギャラリーから選択",
+      "leave_a_review": "レビューを残す",
+      "observed_on": "{{date}}に観察",
+      "photos": "写真"
+    },
+    "you_observed": "{{date}}にこの場所を観察しました",
+    "you_reviewed": "{{date}}にこの場所をレビューしました"
+  },
+  "share": {
+    "leave_embed_view_for_full_site": "完全なサイト",
+    "title": "このビューを共有",
+    "url_copied": "URLをクリップボードにコピーしました！",
+    "url_copy_failed": "URLのクリップボードへのコピーに失敗しました"
+  },
+  "success_message": {
+    "location_deleted": "場所が正常に削除されました！",
+    "location_edited": "場所が正常に編集されました！",
+    "location_submitted": "場所が正常に送信されました！",
+    "report_submitted": "レポートが正常に送信されました！",
+    "review_deleted": "レビューが正常に削除されました！",
+    "review_edited": "レビューが正常に編集されました！",
+    "review_submitted": "レビューが正常に送信されました！",
+    "type_added": "新しいタイプが正常に追加されました！"
+  },
+  "time": {
+    "days": {
+      "one": "{{count}}日",
+      "other": "{{count}}日"
+    },
+    "last_24_hours": "過去24時間",
+    "time_ago": "{{time}}前"
+  },
+  "type": {
+    "pending_review_category": "レビュー待ち",
+    "pending_review_item": "{{name}}（レビュー待ち）"
+  },
+  "users": {
+    "bio": "自己紹介",
+    "change_email": "メールアドレスを変更",
+    "change_password": "パスワードを変更",
+    "current_email": "現在のメールアドレス",
+    "current_password": "現在のパスワード",
+    "header": {
+      "profile": "プロフィール"
+    },
+    "joined_on": "{{date}}に参加",
+    "new_email": "新しいメールアドレス",
+    "new_password": "新しいパスワード",
+    "new_password_confirmation": "新しいパスワードの確認",
+    "options": {
+      "announcements_email": "重要なお知らせや機会に関するメールを受け取る（年1〜2回）"
+    },
+    "password_confirmation": "パスワードの確認",
+    "profile": {
+      "title": "ユーザー: {{name}}"
+    },
+    "remember_me": "ログイン状態を保持する",
+    "resend_confirmation_instructions": "確認メールを再送信",
+    "reset_password": "パスワードをリセット",
+    "save_changes": "変更を保存",
+    "send": "送信",
+    "sign_in": "ログイン",
+    "sign_out": "ログアウト",
+    "your_activity": "あなたのアクティビティ"
+  }
+}

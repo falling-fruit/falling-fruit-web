@@ -222,12 +222,10 @@ class TranslationManager:
             # Extract language code from filename (e.g., "ru" from "ru.json")
             language_code = json_file.stem
             
-            # Fill up translations
-            result_translation = fill_up_translation(source_translation, target_translation, language_code)
+            # Fill up translations, passing the file path for incremental saves
+            result_translation = fill_up_translation(source_translation, target_translation, language_code, json_file)
             
-            # Save the result
-            result_translation.save_as_json(json_file)
-            logger.info(f"Updated {json_file.name}")
+            logger.info(f"Finished {json_file.name}")
 
 
 def main():
