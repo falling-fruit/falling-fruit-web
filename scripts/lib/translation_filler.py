@@ -166,7 +166,7 @@ Please provide your response as a JSON object containing the translated keys. Re
     
     return json.loads(message.content[0].text.strip())
 
-def fill_up_translation(source_translation, target_translation, language_code, batch_size=10):
+def fill_up_translation(source_translation, target_translation, language_code, output_path, batch_size=10):
     source_content = source_translation.entries
     target_content = target_translation.entries
     
@@ -179,9 +179,6 @@ def fill_up_translation(source_translation, target_translation, language_code, b
     total_missing = len(all_missing_keys)
     language_name = get_language_name(language_code)
     logger.info(f"Found {total_missing} missing keys for {language_name} ({language_code}). Processing in batches of {batch_size}.")
-    
-    # Track successfully processed keys
-    successfully_processed_keys = []
     
     # Process missing keys in batches using while loop
     batch_start = 0
@@ -209,7 +206,9 @@ def fill_up_translation(source_translation, target_translation, language_code, b
                 # Update target_content so subsequent batches see this translation
                 target_content[key] = value
         
-        logger.info(f"Batch {batch_num}/{total_batches} completed successfully")
+        # Save to disk after each batch
+        target_translation.save_as_json(output_path)
+        logger.info(f"Batch {batch_num}/{total_batches} completed and saved to {output_path}")
         
         # Move to next batch
         batch_start = batch_end
