@@ -33,6 +33,7 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
 
           <Recaptcha
             name="g-recaptcha-response"
+            widthMargin={28}
             ref={(e) => {
               recaptchaRef.current = e
             }}

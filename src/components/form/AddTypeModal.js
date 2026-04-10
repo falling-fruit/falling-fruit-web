@@ -209,7 +209,9 @@ const AddTypeModal = ({ initialName, onTypeAdded }) => {
           {t('new_type.form.pending_notice')}
         </p>
       </div>
-      {!isLoggedIn && <Recaptcha name="g-recaptcha-response" />}
+      {!isLoggedIn && (
+        <Recaptcha name="g-recaptcha-response" widthMargin={58} />
+      )}
     </Modal>
   )
 }
