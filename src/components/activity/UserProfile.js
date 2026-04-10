@@ -50,13 +50,14 @@ const UserProfile = () => {
   }
 
   const { created_at, name, bio } = userData
+  const displayName = name || `#${userId}`
 
   return (
     <Page>
       <BackButton
         backPath={locationId ? `/locations/${locationId}` : '/changes'}
       />
-      <h3>{t('users.profile.title', { name })}</h3>
+      <h3>{t('users.profile.title', { name: displayName })}</h3>
       {bio && (
         <p dir="auto" style={{ whiteSpace: 'pre-line' }}>
           {bio}

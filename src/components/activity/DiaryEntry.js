@@ -127,6 +127,8 @@ const ActivityTextComponent = ({
   const isRTL = i18n.dir() === 'rtl'
   const isCurrentUser = currentUserId && authorUserId === currentUserId
 
+  const displayName = author || (authorUserId ? `#${authorUserId}` : null)
+
   const LocationDisplay = () => (
     <>
       {hasLocationInfo ? (
@@ -151,14 +153,14 @@ const ActivityTextComponent = ({
       })}
       {isRTL ? (
         <>
-          {author && !isCurrentUser && (
+          {displayName && !isCurrentUser && (
             <>
               {authorUserId ? (
                 <AuthorLink to={`/users/${authorUserId}`} onClick={onClickLink}>
-                  {author}
+                  {displayName}
                 </AuthorLink>
               ) : (
-                <span>{author}</span>
+                <span>{displayName}</span>
               )}
               {' — '}
             </>
@@ -168,15 +170,15 @@ const ActivityTextComponent = ({
       ) : (
         <>
           <LocationDisplay />
-          {author && !isCurrentUser && (
+          {displayName && !isCurrentUser && (
             <>
               {' — '}
               {authorUserId ? (
                 <AuthorLink to={`/users/${authorUserId}`} onClick={onClickLink}>
-                  {author}
+                  {displayName}
                 </AuthorLink>
               ) : (
-                <span>{author}</span>
+                <span>{displayName}</span>
               )}
             </>
           )}
