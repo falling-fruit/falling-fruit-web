@@ -83,7 +83,7 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
         <>
           <Input name="name" label={t('glossary.name')} />
           <Input name="email" label={t('glossary.email')} required />
-          <Recaptcha name="g-recaptcha-response" />
+          <Recaptcha name="g-recaptcha-response" widthMargin={58} />
         </>
       )}
     </Modal>

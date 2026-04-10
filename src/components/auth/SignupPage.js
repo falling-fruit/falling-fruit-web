@@ -129,6 +129,7 @@ const SignupPage = () => {
 
             <Recaptcha
               name="g-recaptcha-response"
+              widthMargin={28}
               ref={(e) => {
                 recaptchaRef.current = e
               }}

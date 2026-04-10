@@ -40,10 +40,22 @@ const FormikCreatableMultiSelect = withLabeledField(
 )
 const FormikPhotoUploader = withLabeledField(PhotoUploader, undefined, true)
 
+const RECAPTCHA_WIDTH = 304
+
 const FormikRecaptcha = forwardRef(
-  ({ name, centered = false, ...props }, ref) => {
+  ({ name, centered = false, widthMargin = 0, ...props }, ref) => {
     const [, , helpers] = useField(name)
     const { i18n } = useTranslation()
+
+    const availableWidthPx = window.innerWidth - (centered ? 0 : widthMargin)
+
+    const scaleStyle =
+      availableWidthPx < RECAPTCHA_WIDTH
+        ? {
+            transform: `scale(${availableWidthPx / RECAPTCHA_WIDTH})`,
+            transformOrigin: centered ? 'center top' : 'left top',
+          }
+        : {}
 
     return (
       <div
@@ -52,14 +64,16 @@ const FormikRecaptcha = forwardRef(
           ...(centered && { display: 'flex', justifyContent: 'center' }),
         }}
       >
-        <Reaptcha
-          ref={ref}
-          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-          onVerify={helpers.setValue}
-          onExpire={() => helpers.setValue(null)}
-          hl={i18n.language}
-          {...props}
-        />
+        <div style={scaleStyle}>
+          <Reaptcha
+            ref={ref}
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+            onVerify={helpers.setValue}
+            onExpire={() => helpers.setValue(null)}
+            hl={i18n.language}
+            {...props}
+          />
+        </div>
       </div>
     )
   },
