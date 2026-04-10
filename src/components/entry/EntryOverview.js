@@ -33,6 +33,7 @@ const hasSeasonality = (locationData) =>
     locationData.season_start != null ||
     locationData.season_stop != null
   )
+
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   word-break: normal;
@@ -67,6 +68,128 @@ const DisabledIconBesideText = styled(IconBesideText)`
     `}
 `
 
+const AddressInfo = ({ locationData, onClick }) => (
+  <IconBesideText bold onClick={onClick} tabIndex={0}>
+    <Map color={theme.secondaryText} size={20} />
+    <p dir="ltr">
+      {locationData.address ??
+        `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(6)}`}
+    </p>
+  </IconBesideText>
+)
+
+const StreetViewInfo = ({ streetViewOpen, isDisabled, onOpen, onClose }) =>
+  streetViewOpen ? (
+    <IconBesideText bold onClick={onClose}>
+      <Map size={20} />
+      <p>Google Maps</p>
+    </IconBesideText>
+  ) : (
+    <DisabledIconBesideText
+      bold
+      onClick={isDisabled ? undefined : onOpen}
+      disabled={isDisabled}
+    >
+      <StreetView size={20} />
+      <p>Google Street View</p>
+    </DisabledIconBesideText>
+  )
+
+const SeasonalityInfo = ({ locationData }) => {
+  const { t, i18n } = useTranslation()
+  return (
+    <IconBesideText>
+      <Calendar color={theme.secondaryText} size={20} />
+      <p>
+        {locationData.no_season ||
+        (locationData.season_start === 0 && locationData.season_stop === 11)
+          ? t('locations.overview.season.year_round')
+          : t('locations.overview.season.in_season', {
+              start_month:
+                locationData.season_start != null
+                  ? formatMonth(locationData.season_start, i18n.language)
+                  : '?',
+              stop_month:
+                locationData.season_stop != null
+                  ? formatMonth(locationData.season_stop, i18n.language)
+                  : '?',
+            })}
+      </p>
+    </IconBesideText>
+  )
+}
+
+const ImportedByInfo = ({ locationData }) => {
+  const { t } = useTranslation()
+  return (
+    <IconBesideText>
+      <Data size={20} />
+      <p>
+        {locationData.author
+          ? t('locations.overview.imported_from', { name: locationData.author })
+          : null}
+        {locationData.import_id && (
+          <>
+            {locationData.author && ' ('}
+            <Link to={`/imports/${locationData.import_id}`}>
+              #{locationData.import_id}
+            </Link>
+            {locationData.author && ')'}
+          </>
+        )}
+      </p>
+    </IconBesideText>
+  )
+}
+
+const AddedByInfo = ({ locationData, user }) => {
+  const { t } = useTranslation()
+  const isCurrentUser = locationData.user_id === user?.id
+  const displayName = locationData.author || `#${locationData.user_id}`
+  return (
+    <IconBesideText>
+      {isCurrentUser ? <UserYou size={20} /> : <User size={20} />}
+      <p>
+        {isCurrentUser ? (
+          t('locations.overview.added_by_you')
+        ) : (
+          <>
+            {t('locations.overview.added_by', { name: '' })}{' '}
+            {locationData.user_id ? (
+              <Link to={`/users/${locationData.user_id}`}>{displayName}</Link>
+            ) : (
+              locationData.author
+            )}
+          </>
+        )}
+      </p>
+    </IconBesideText>
+  )
+}
+
+const AuthorInfo = ({ locationData, user }) =>
+  locationData.import_id ? (
+    <ImportedByInfo locationData={locationData} />
+  ) : (
+    <AddedByInfo locationData={locationData} user={user} />
+  )
+
+const LastEditedInfo = ({ locationData }) => {
+  const { t, i18n } = useTranslation()
+  return (
+    <IconBesideText>
+      <EditAlt size={20} />
+      <p>
+        <time dateTime={locationData.updated_at}>
+          {t('locations.overview.date_edited', {
+            date: formatISOString(locationData.updated_at, i18n.language),
+          })}
+        </time>
+      </p>
+    </IconBesideText>
+  )
+}
+
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
@@ -83,8 +206,6 @@ const EntryOverview = () => {
   const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
-
-  const { t, i18n } = useTranslation()
 
   if (!locationData) {
     return null
@@ -138,112 +259,25 @@ const EntryOverview = () => {
         <Description>
           <p dir="auto">{locationData.description}</p>
 
-          <IconBesideText bold onClick={handleAddressClick} tabIndex={0}>
-            <Map color={theme.secondaryText} size={20} />
-            <p dir="ltr">
-              {locationData.address ??
-                `${locationData.lat.toFixed(6)}, ${locationData.lng.toFixed(
-                  6,
-                )}`}
-            </p>
-          </IconBesideText>
-          {streetViewOpen ? (
-            <IconBesideText bold onClick={closeStreetView}>
-              <Map size={20} />
-              <p>Google Maps</p>
-            </IconBesideText>
-          ) : (
-            <DisabledIconBesideText
-              bold
-              onClick={
-                locationsWithoutPanorama[locationData.id]
-                  ? undefined
-                  : openStreetView
-              }
-              disabled={locationsWithoutPanorama[locationData.id]}
-            >
-              <StreetView size={20} />
-              <p>Google Street View</p>
-            </DisabledIconBesideText>
-          )}
+          <AddressInfo
+            locationData={locationData}
+            onClick={handleAddressClick}
+          />
+          <StreetViewInfo
+            streetViewOpen={streetViewOpen}
+            isDisabled={!!locationsWithoutPanorama[locationData.id]}
+            onOpen={openStreetView}
+            onClose={closeStreetView}
+          />
           {hasSeasonality(locationData) && (
-            <IconBesideText>
-              <Calendar color={theme.secondaryText} size={20} />
-              <p>
-                {locationData.no_season ||
-                (locationData.season_start === 0 &&
-                  locationData.season_stop === 11)
-                  ? t('locations.overview.season.year_round')
-                  : t('locations.overview.season.in_season', {
-                      start_month:
-                        locationData.season_start != null
-                          ? formatMonth(
-                              locationData.season_start,
-                              i18n.language,
-                            )
-                          : '?',
-                      stop_month:
-                        locationData.season_stop != null
-                          ? formatMonth(locationData.season_stop, i18n.language)
-                          : '?',
-                    })}
-              </p>
-            </IconBesideText>
+            <SeasonalityInfo locationData={locationData} />
           )}
-          {(locationData.import_id || locationData.author) && (
-            <IconBesideText>
-              {locationData.import_id ? (
-                <Data size={20} />
-              ) : locationData.user_id === user?.id ? (
-                <UserYou size={20} />
-              ) : (
-                <User size={20} />
-              )}
-              <p>
-                {locationData.author && locationData.import_id ? (
-                  t('locations.overview.imported_from', {
-                    name: locationData.author,
-                  })
-                ) : (
-                  <>
-                    {locationData.user_id === user?.id ? (
-                      t('locations.overview.added_by_you')
-                    ) : (
-                      <>
-                        {t('locations.overview.added_by', { name: '' })}{' '}
-                        {locationData.user_id ? (
-                          <Link to={`/users/${locationData.user_id}`}>
-                            {locationData.author}
-                          </Link>
-                        ) : (
-                          locationData.author
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
-                {locationData.import_id && (
-                  <>
-                    {locationData.author && ' ('}
-                    <Link to={`/imports/${locationData.import_id}`}>
-                      #{locationData.import_id}
-                    </Link>
-                    {locationData.author && ')'}
-                  </>
-                )}
-              </p>
-            </IconBesideText>
+          {(locationData.import_id ||
+            locationData.author ||
+            locationData.user_id) && (
+            <AuthorInfo locationData={locationData} user={user} />
           )}
-          <IconBesideText>
-            <EditAlt size={20} />
-            <p>
-              <time dateTime={locationData.updated_at}>
-                {t('locations.overview.date_edited', {
-                  date: formatISOString(locationData.updated_at, i18n.language),
-                })}
-              </time>
-            </p>
-          </IconBesideText>
+          <LastEditedInfo locationData={locationData} />
           <ReviewSummary reviews={reviews} />
           <div>
             <ReviewButton />
