@@ -1,4 +1,4 @@
-import { Map } from '@styled-icons/boxicons-solid'
+import { Pencil } from '@styled-icons/boxicons-solid'
 import { ErrorMessage, Form, Formik, useFormikContext } from 'formik'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -124,7 +124,7 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
   return (
     <>
       <IconBesideText tabIndex={0}>
-        <Map size={20} />
+        <Pencil size={20} />
         <p className="small" dir="ltr">
           {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
         </p>
