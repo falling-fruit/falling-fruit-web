@@ -1,4 +1,3 @@
-import { Pencil } from '@styled-icons/boxicons-solid'
 import { ErrorMessage, Form, Formik, useFormikContext } from 'formik'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -27,6 +26,7 @@ import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import PositionEditIcon from '../ui/PositionEditIcon'
 import { Checkbox, Recaptcha, Select, Textarea } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
@@ -124,7 +124,7 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
   return (
     <>
       <IconBesideText tabIndex={0}>
-        <Pencil size={20} />
+        <PositionEditIcon />
         <p className="small" dir="ltr">
           {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
         </p>
