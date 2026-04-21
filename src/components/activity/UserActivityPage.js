@@ -140,7 +140,8 @@ const UserActivityPage = () => {
     }
   }, [dispatch, changesReady, userId]) //eslint-disable-line
 
-  const userName = changes?.length > 0 ? changes[0].author : ''
+  const userName =
+    changes?.length > 0 && changes[0].author ? changes[0].author : `#${userId}`
 
   return (
     <Page>
