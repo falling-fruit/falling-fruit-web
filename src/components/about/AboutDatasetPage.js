@@ -73,7 +73,7 @@ const AboutDatasetPage = () => {
       </IconBesideText>
       <IconBesideText>
         <MapPin color={theme.secondaryText} size={20} />
-        <p>{`${location_count} ${t('glossary.locations.other')}`}</p>
+        <p>{`${location_count} ${location_count === 1 ? t('glossary.locations.one') : t('glossary.locations.other')}`}</p>
       </IconBesideText>
       <IconBesideText>
         <Calendar color={theme.secondaryText} size={20} />

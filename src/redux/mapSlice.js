@@ -10,6 +10,7 @@ import {
   deleteExistingLocation,
   editExistingLocation,
 } from './locationSlice'
+import { addLocationToList, removeLocationFromList } from './saveSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 
@@ -177,6 +178,20 @@ export const mapSlice = createSlice({
       state.clusters = action.payload
       state.locations = []
       state.isLoading = false
+    },
+    [addLocationToList.fulfilled]: (state, action) => {
+      const { locationId } = action.payload
+      const index = state.locations.findIndex((loc) => loc.id === locationId)
+      if (index !== -1) {
+        state.locations[index].in_list = true
+      }
+    },
+    [removeLocationFromList.fulfilled]: (state, action) => {
+      const { locationId, locationStillInAnyList } = action.payload
+      const index = state.locations.findIndex((loc) => loc.id === locationId)
+      if (index !== -1) {
+        state.locations[index].in_list = locationStillInAnyList
+      }
     },
   },
 })

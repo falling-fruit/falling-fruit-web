@@ -12,6 +12,7 @@ import {
   getLocationById,
 } from '../utils/api'
 import { fetchReviewData } from './reviewSlice'
+import { addLocationToList, removeLocationFromList } from './saveSlice'
 
 const initialState = {
   isLoading: null,
@@ -24,6 +25,7 @@ const initialState = {
   form: null,
   tooltipOpen: false,
   streetViewOpen: false,
+  inList: false,
   lightbox: {
     isOpen: false,
     reviewIndex: null,
@@ -185,13 +187,15 @@ const locationSlice = createSlice({
         action.meta.arg.isFromListLocations ||
         action.meta.arg.isFromEmbedViewMap
       state.pane.tabIndex = 0
+      state.inList = false
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
       // Accept the fetch if it's the most recent 'pending' one
       if (state.locationId === parseInt(action.payload.id)) {
-        const { reviews, ...locationData } = action.payload
+        const { reviews, lists, ...locationData } = action.payload
         state.location = locationData
+        state.inList = lists.length > 0
         state.reviews = reviews
         state.position = { lat: action.payload.lat, lng: action.payload.lng }
       }
@@ -203,10 +207,12 @@ const locationSlice = createSlice({
       state.position = null
       state.isBeingEdited = false
       state.tooltipOpen = false
+      state.inList = false
     },
     [fetchReviewData.fulfilled]: (state, action) => {
       state.isLoading = false
       state.location = null
+      state.inList = false
       state.locationId = parseInt(action.payload.location_id)
       state.position = null
       state.isBeingEdited = false
@@ -219,6 +225,9 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.isBeingInitializedMobile = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
+      state.inList = Array.isArray(action.payload.lists)
+        ? action.payload.lists.length > 0
+        : false
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false
@@ -288,6 +297,18 @@ const locationSlice = createSlice({
             action.error.message || i18next.t('error_message.unknown_error'),
         }),
       )
+    },
+    [addLocationToList.fulfilled]: (state, action) => {
+      const { locationId } = action.payload
+      if (state.locationId === locationId) {
+        state.inList = true
+      }
+    },
+    [removeLocationFromList.fulfilled]: (state, action) => {
+      const { locationId, locationStillInAnyList } = action.payload
+      if (state.locationId === locationId) {
+        state.inList = locationStillInAnyList
+      }
     },
   },
 })

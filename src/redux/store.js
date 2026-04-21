@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { createBrowserHistory } from 'history'
 
 import activityReducer from './activitySlice'
 import authReducer from './authSlice'
@@ -17,8 +16,6 @@ import settingsReducer from './settingsSlice'
 import shareReducer from './shareSlice'
 import typeReducer from './typeSlice'
 import viewportReducer from './viewportSlice'
-
-export const history = createBrowserHistory()
 
 export const store = configureStore({
   reducer: {

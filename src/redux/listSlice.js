@@ -3,6 +3,7 @@ import i18next from 'i18next'
 
 import { getLocations, getLocationsCount } from '../utils/api'
 import isNetworkError from '../utils/isNetworkError'
+import { addLocationToList, removeLocationFromList } from './saveSlice'
 import { selectParams } from './selectParams'
 import { updateSelection } from './updateSelection'
 import { updateLastMapView } from './viewportSlice'
@@ -96,6 +97,20 @@ export const listSlice = createSlice({
     },
     [updateLastMapView]: (state) => {
       state.shouldFetchNewLocations = true
+    },
+    [addLocationToList.fulfilled]: (state, action) => {
+      const { locationId } = action.payload
+      const index = state.locations.findIndex((loc) => loc.id === locationId)
+      if (index !== -1) {
+        state.locations[index].in_list = true
+      }
+    },
+    [removeLocationFromList.fulfilled]: (state, action) => {
+      const { locationId, locationStillInAnyList } = action.payload
+      const index = state.locations.findIndex((loc) => loc.id === locationId)
+      if (index !== -1) {
+        state.locations[index].in_list = locationStillInAnyList
+      }
     },
   },
 })

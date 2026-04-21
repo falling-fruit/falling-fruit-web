@@ -2,12 +2,14 @@ import { Check, Plus, X } from '@styled-icons/boxicons-regular'
 import { Bookmark as BookmarkSolid } from '@styled-icons/boxicons-solid'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import Skeleton from 'react-loading-skeleton'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import {
   addList,
   addLocationToList,
+  fetchLists,
   removeLocationFromList,
 } from '../../../redux/saveSlice'
 import Button from '../../ui/Button'
@@ -15,6 +17,18 @@ import { theme } from '../../ui/GlobalStyle'
 import Input from '../../ui/Input'
 import useSavedLists from './useSavedLists'
 
+const SkeletonItemRow = styled.div`
+  padding: 10px 14px;
+`
+const SkeletonListItems = ({ count = 2 }) => (
+  <>
+    {Array.from({ length: count }).map((_, index) => (
+      <SkeletonItemRow key={index}>
+        <Skeleton width="70%" height={16} />
+      </SkeletonItemRow>
+    ))}
+  </>
+)
 const Wrapper = styled.div`
   position: relative;
   display: inline-block;
@@ -32,6 +46,15 @@ const Dropdown = styled.div`
   min-width: 200px;
   overflow: hidden;
   font-family: ${theme.fonts};
+  display: flex;
+  flex-direction: column;
+  max-height: ${({ maxHeight }) => (maxHeight ? `${maxHeight}px` : '400px')};
+`
+
+const ListScrollArea = styled.div`
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 `
 
 const ListItem = styled.button`
@@ -43,16 +66,19 @@ const ListItem = styled.button`
   background: ${({ checked }) => (checked ? theme.transparentOrange : 'none')};
   border: none;
   border-bottom: 1px solid ${theme.secondaryBackground};
-  cursor: pointer;
+  cursor: ${({ pending }) => (pending ? 'wait' : 'pointer')};
   font-size: 0.875rem;
   font-family: ${theme.fonts};
   font-weight: normal;
   color: ${theme.secondaryText};
   text-align: left;
   box-sizing: border-box;
+  opacity: ${({ pending }) => (pending ? 0.5 : 1)};
+  transition: opacity 0.15s ease;
 
   &:hover {
-    background: ${({ checked }) => !checked && theme.transparentBlue};
+    background: ${({ checked, pending }) =>
+      !pending && !checked && theme.transparentBlue};
   }
 `
 
@@ -62,10 +88,26 @@ const Divider = styled.hr`
   border-top: 1px solid ${theme.secondaryBackground};
 `
 
-const AddNewItem = styled(ListItem)`
+const AddNewItem = styled.button`
+  display: flex;
+  align-items: center;
   justify-content: center;
-  color: ${theme.headerText};
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: ${theme.fonts};
   font-weight: bold;
+  color: ${theme.headerText};
+  text-align: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  &:hover {
+    background: ${theme.transparentBlue};
+  }
 `
 
 const AddNewRow = styled.div`
@@ -74,6 +116,7 @@ const AddNewRow = styled.div`
   gap: 6px;
   padding: 8px 10px;
   box-sizing: border-box;
+  flex-shrink: 0;
 `
 
 const AddNewInput = styled(Input)`
@@ -103,16 +146,25 @@ const IconActionButton = styled.button`
   }
 `
 
-const SaveToListButton = ({ locationId }) => {
+const BottomSection = styled.div`
+  flex-shrink: 0;
+`
+
+const SaveToListButton = ({ locationId, isSavedToAny, containerRef }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const isLoading = useSelector((state) => state.save.isLoading)
+  const isAddingNew = useSelector((state) => state.save.isAddingNew)
+  const pendingToggles = useSelector((state) => state.save.pendingToggles)
   const [open, setOpen] = useState(false)
   const [addingNew, setAddingNew] = useState(false)
   const [newListName, setNewListName] = useState('')
+  const [dropdownMaxHeight, setDropdownMaxHeight] = useState(null)
   const wrapperRef = useRef(null)
   const newListInputRef = useRef(null)
+  const addingNewSkeletonRef = useRef(null)
 
-  const { lists, isSavedToAny } = useSavedLists(locationId)
+  const { lists } = useSavedLists(locationId)
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -134,7 +186,37 @@ const SaveToListButton = ({ locationId }) => {
     }
   }, [addingNew])
 
+  useEffect(() => {
+    if (open && wrapperRef.current && containerRef?.current) {
+      const containerRect = containerRef.current.getBoundingClientRect()
+      const buttonRect = wrapperRef.current.getBoundingClientRect()
+      // Available space = from top of container to top of button, minus a small gap
+      const available = buttonRect.top - containerRect.top - 8
+      setDropdownMaxHeight(Math.max(available, 120))
+    }
+  }, [open, containerRef])
+
+  // Scroll the pending skeleton into view when isAddingNew becomes true
+  useEffect(() => {
+    if (isAddingNew && addingNewSkeletonRef.current) {
+      addingNewSkeletonRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      })
+    }
+  }, [isAddingNew])
+
+  const handleButtonClick = () => {
+    if (!open) {
+      dispatch(fetchLists())
+    }
+    setOpen((o) => !o)
+  }
+
   const handleToggle = (listId, checked) => {
+    if (listId in pendingToggles) {
+      return
+    }
     if (checked) {
       dispatch(removeLocationFromList({ listId, locationId }))
     } else {
@@ -163,7 +245,7 @@ const SaveToListButton = ({ locationId }) => {
 
   return (
     <Wrapper ref={wrapperRef}>
-      <Button secondary={!isSavedToAny} onClick={() => setOpen((o) => !o)}>
+      <Button secondary={!isSavedToAny} onClick={handleButtonClick}>
         {isSavedToAny ? (
           <>
             <BookmarkSolid size={18} />
@@ -177,46 +259,69 @@ const SaveToListButton = ({ locationId }) => {
         )}
       </Button>
       {open && (
-        <Dropdown>
-          {lists.map(({ listId, name, checked }) => (
-            <ListItem
-              key={listId}
-              checked={checked}
-              onClick={() => handleToggle(listId, checked)}
-            >
-              {name}
-            </ListItem>
-          ))}
-          <Divider />
-          {addingNew ? (
-            <AddNewRow>
-              <AddNewInput
-                ref={newListInputRef}
-                value={newListName}
-                onChange={(e) => setNewListName(e.target.value)}
-                placeholder={t('save_location_to_list.new_list_placeholder')}
-                onEnter={handleConfirmNewList}
-              />
-              <IconActionButton
-                onClick={handleCancelNewList}
-                color={theme.red}
-                title={t('form.button.cancel')}
-              >
-                <X />
-              </IconActionButton>
-              <IconActionButton
-                onClick={handleConfirmNewList}
-                color={theme.green}
-                title={t('form.button.confirm')}
-              >
-                <Check />
-              </IconActionButton>
-            </AddNewRow>
-          ) : (
-            <AddNewItem onClick={handleAddNewClick}>
-              {t('save_location_to_list.add_new_list')}
-            </AddNewItem>
-          )}
+        <Dropdown maxHeight={dropdownMaxHeight}>
+          <ListScrollArea>
+            {isLoading ? (
+              <SkeletonListItems count={2} />
+            ) : (
+              <>
+                {lists.map(({ listId, name, checked }) => {
+                  const isPending = listId in pendingToggles
+                  // Show the optimistic (flipped) checked state while pending
+                  const effectiveChecked = isPending
+                    ? pendingToggles[listId]
+                    : checked
+                  return (
+                    <ListItem
+                      key={listId}
+                      checked={effectiveChecked}
+                      pending={isPending}
+                      onClick={() => handleToggle(listId, checked)}
+                    >
+                      {name}
+                    </ListItem>
+                  )
+                })}
+                {isAddingNew && (
+                  <div ref={addingNewSkeletonRef}>
+                    <SkeletonListItems count={1} />
+                  </div>
+                )}
+              </>
+            )}
+          </ListScrollArea>
+          <BottomSection>
+            <Divider />
+            {addingNew ? (
+              <AddNewRow>
+                <AddNewInput
+                  ref={newListInputRef}
+                  value={newListName}
+                  onChange={(e) => setNewListName(e.target.value)}
+                  placeholder={t('save_location_to_list.new_list_placeholder')}
+                  onEnter={handleConfirmNewList}
+                />
+                <IconActionButton
+                  onClick={handleCancelNewList}
+                  color={theme.red}
+                  title={t('form.button.cancel')}
+                >
+                  <X />
+                </IconActionButton>
+                <IconActionButton
+                  onClick={handleConfirmNewList}
+                  color={theme.green}
+                  title={t('form.button.confirm')}
+                >
+                  <Check />
+                </IconActionButton>
+              </AddNewRow>
+            ) : (
+              <AddNewItem onClick={handleAddNewClick}>
+                {t('save_location_to_list.add_new_list')}
+              </AddNewItem>
+            )}
+          </BottomSection>
         </Dropdown>
       )}
     </Wrapper>
