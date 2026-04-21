@@ -121,6 +121,7 @@
     "description": "Описание",
     "email": "Адрес электронной почты",
     "locations": {
+      "one": "Местоположение",
       "other": "Местоположения"
     },
     "map": "Карта",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Добавить новый список",
+    "delete_list_confirm": "Удалить список \"{{name}}\"?",
     "new_list_placeholder": "Название списка",
+    "remove_from_list_confirm": "Удалить \"{{name}}\" из списка?",
     "save_label": "Сохранить",
-    "saved_label": "Сохранено"
+    "saved_label": "Сохранено",
+    "saved_locations_title": "Сохраненные местоположения"
   },
   "share": {
     "leave_embed_view_for_full_site": "Полная версия сайта",

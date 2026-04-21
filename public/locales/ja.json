@@ -121,6 +121,7 @@
     "description": "説明",
     "email": "メール",
     "locations": {
+      "one": "場所",
       "other": "場所"
     },
     "map": "地図",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "新しいリストを追加",
+    "delete_list_confirm": "リスト「{{name}}」を削除しますか？",
     "new_list_placeholder": "リスト名",
+    "remove_from_list_confirm": "「{{name}}」をリストから削除しますか？",
     "save_label": "保存",
-    "saved_label": "保存済み"
+    "saved_label": "保存済み",
+    "saved_locations_title": "保存された場所"
   },
   "share": {
     "leave_embed_view_for_full_site": "完全なサイト",

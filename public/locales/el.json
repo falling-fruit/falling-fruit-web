@@ -121,6 +121,7 @@
     "description": "Περιγραφή",
     "email": "Email",
     "locations": {
+      "one": "Τοποθεσία",
       "other": "Τοποθεσίες"
     },
     "map": "Χάρτης",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Προσθήκη νέας λίστας",
+    "delete_list_confirm": "Διαγραφή λίστας \"{{name}}\";",
     "new_list_placeholder": "Όνομα λίστας",
+    "remove_from_list_confirm": "Αφαίρεση \"{{name}}\" από τη λίστα;",
     "save_label": "Αποθήκευση",
-    "saved_label": "Αποθηκεύτηκε"
+    "saved_label": "Αποθηκεύτηκε",
+    "saved_locations_title": "Αποθηκευμένες τοποθεσίες"
   },
   "share": {
     "leave_embed_view_for_full_site": "Πλήρης ιστότοπος",

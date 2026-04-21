@@ -121,6 +121,7 @@
     "description": "Description",
     "email": "Email",
     "locations": {
+      "one": "Location",
       "other": "Locations"
     },
     "map": "Map",
@@ -428,6 +429,9 @@
   "save_location_to_list": {
     "add_new_list": "Add new list",
     "new_list_placeholder": "List name",
+    "saved_locations_title": "Saved locations",
+    "remove_from_list_confirm": "Remove \"{{name}}\" from the list?",
+    "delete_list_confirm": "Delete list \"{{name}}\"?",
     "save_label": "Save",
     "saved_label": "Saved"
   },

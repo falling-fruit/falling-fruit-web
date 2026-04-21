@@ -121,6 +121,7 @@
     "description": "Beskrivning",
     "email": "Email",
     "locations": {
+      "one": "Plats",
       "other": "Platser"
     },
     "map": "Karta",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Lägg till ny lista",
+    "delete_list_confirm": "Ta bort listan \"{{name}}\"?",
     "new_list_placeholder": "Listnamn",
+    "remove_from_list_confirm": "Ta bort \"{{name}}\" från listan?",
     "save_label": "Spara",
-    "saved_label": "Sparad"
+    "saved_label": "Sparad",
+    "saved_locations_title": "Sparade platser"
   },
   "share": {
     "leave_embed_view_for_full_site": "Fullständig webbplats",

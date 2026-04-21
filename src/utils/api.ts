@@ -15,16 +15,14 @@ instance.interceptors.request.use((config) => {
   const anonymousGetUrls = [
     '/types',
     '/types/counts',
-    '/locations',
-    '/locations/:id',
-    '/locations/:id/reviews',
     '/locations/changes',
     '/reviews/:id',
     '/clusters',
-    '/imports',
     '/imports/:id',
+    '/imports',
     '/users/:id',
   ]
+
   const isAnonymous =
     config.method === 'get' &&
     config.url &&
@@ -143,7 +141,7 @@ export const getLists = (
   params?: paths['/locations/lists']['get']['parameters']['query'],
 ) => instance.get('/locations/lists', { params })
 
-export const getListsWithLocations = () => getLists({ embed: ['locations'] })
+export const getListsWithLocations = () => getLists({ embed: 'locations' })
 
 export const addList = (
   data: paths['/locations/lists']['post']['requestBody']['content']['application/json'],
@@ -186,10 +184,6 @@ export const getTypeById = (
 export const addType = (
   data: paths['/types']['post']['requestBody']['content']['application/json'],
 ) => instance.post('/types', data)
-
-export const getReviews = (
-  locationId: paths['/locations/{id}/reviews']['get']['parameters']['path']['id'],
-) => instance.get(`/locations/${locationId}/reviews`)
 
 export const getReviewById = (
   id: paths['/reviews/{id}']['get']['parameters']['path']['id'],

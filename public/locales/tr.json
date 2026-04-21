@@ -121,6 +121,7 @@
     "description": "Açıklama",
     "email": "E-posta",
     "locations": {
+      "one": "Konum",
       "other": "Konumlar"
     },
     "map": "Harita",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Yeni liste ekle",
+    "delete_list_confirm": "\"{{name}}\" listesi silinsin mi?",
     "new_list_placeholder": "Liste adı",
+    "remove_from_list_confirm": "\"{{name}}\" listeden kaldırılsın mı?",
     "save_label": "Kaydet",
-    "saved_label": "Kaydedildi"
+    "saved_label": "Kaydedildi",
+    "saved_locations_title": "Kaydedilen konumlar"
   },
   "share": {
     "leave_embed_view_for_full_site": "Tam site",

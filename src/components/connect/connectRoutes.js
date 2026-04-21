@@ -187,7 +187,7 @@ const connectRoutes = [
       '/settings',
       '/changes',
       '/users/:userId/activity',
-      '/lists',
+      '/account/lists',
     ]}
   >
     <ConnectTypes />

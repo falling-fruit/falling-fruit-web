@@ -121,6 +121,7 @@
     "description": "Omschrijving",
     "email": "E-mail",
     "locations": {
+      "one": "Locatie",
       "other": "Locaties"
     },
     "map": "Kaart",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Legg til ny liste",
+    "delete_list_confirm": "Lijst \"{{name}}\" verwijderen?",
     "new_list_placeholder": "Listenavn",
+    "remove_from_list_confirm": "\"{{name}}\" van de lijst verwijderen?",
     "save_label": "Lagre",
-    "saved_label": "Lagret"
+    "saved_label": "Lagret",
+    "saved_locations_title": "Opgeslagen locaties"
   },
   "share": {
     "leave_embed_view_for_full_site": "Volledige website",

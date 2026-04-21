@@ -121,6 +121,7 @@
     "description": "Опис",
     "email": "Електронна пошта",
     "locations": {
+      "one": "Місцезнаходження",
       "other": "Локації"
     },
     "map": "Карта",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Додати новий список",
+    "delete_list_confirm": "Видалити список \"{{name}}\"?",
     "new_list_placeholder": "Назва списку",
+    "remove_from_list_confirm": "Видалити \"{{name}}\" зі списку?",
     "save_label": "Зберегти",
-    "saved_label": "Збережено"
+    "saved_label": "Збережено",
+    "saved_locations_title": "Збережені місця"
   },
   "share": {
     "leave_embed_view_for_full_site": "Повна версія сайту",

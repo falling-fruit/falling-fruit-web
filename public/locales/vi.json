@@ -121,6 +121,7 @@
     "description": "Miêu tả",
     "email": "Email",
     "locations": {
+      "one": "Vị trí",
       "other": "Vị trí"
     },
     "map": "Bản đồ",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Thêm danh sách mới",
+    "delete_list_confirm": "Xóa danh sách \"{{name}}\"?",
     "new_list_placeholder": "Tên danh sách",
+    "remove_from_list_confirm": "Xóa \"{{name}}\" khỏi danh sách?",
     "save_label": "Lưu",
-    "saved_label": "Đã lưu"
+    "saved_label": "Đã lưu",
+    "saved_locations_title": "Vị trí đã lưu"
   },
   "share": {
     "leave_embed_view_for_full_site": "Trang web đầy đủ",

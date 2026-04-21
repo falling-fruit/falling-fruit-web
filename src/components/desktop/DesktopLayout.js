@@ -10,7 +10,6 @@ import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import errorRoutes from '../error/errorRoutes'
 import MapPage from '../map/MapPage'
-import savedRoutes from '../saved/savedRoutes'
 import Header from './Header'
 import SidePane from './SidePane'
 
@@ -55,7 +54,6 @@ const DesktopLayout = () => (
       {authRoutes}
       {accountRoutes}
       {errorRoutes}
-      {savedRoutes}
       <Route>
         <WindowSize>
           {({ width: vw }) => (

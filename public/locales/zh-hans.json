@@ -121,6 +121,7 @@
     "description": "描述",
     "email": "电子邮件",
     "locations": {
+      "one": "位置",
       "other": "位置"
     },
     "map": "地图",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "添加新列表",
+    "delete_list_confirm": "删除列表 「{{name}}」？",
     "new_list_placeholder": "列表名称",
+    "remove_from_list_confirm": "从列表中删除「{{name}}」？",
     "save_label": "保存",
-    "saved_label": "已保存"
+    "saved_label": "已保存",
+    "saved_locations_title": "已保存的位置"
   },
   "share": {
     "leave_embed_view_for_full_site": "完整网站",

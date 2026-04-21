@@ -121,6 +121,7 @@
     "description": "وصف",
     "email": "البريد الإلكتروني",
     "locations": {
+      "one": "موقع",
       "other": "المواقع"
     },
     "map": "خريطة",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "إضافة قائمة جديدة",
+    "delete_list_confirm": "حذف القائمة \"{{name}}\"؟",
     "new_list_placeholder": "اسم القائمة",
+    "remove_from_list_confirm": "إزالة \"{{name}}\" من القائمة؟",
     "save_label": "حفظ",
-    "saved_label": "تم الحفظ"
+    "saved_label": "تم الحفظ",
+    "saved_locations_title": "المواقع المحفوظة"
   },
   "share": {
     "leave_embed_view_for_full_site": "الموقع الكامل",

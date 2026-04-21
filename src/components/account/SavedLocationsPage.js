@@ -7,11 +7,13 @@ import {
 import { Pencil, Trash } from '@styled-icons/boxicons-solid'
 import { darken } from 'polished'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import {
-  addList,
   fetchLists,
   removeList,
   removeLocationFromList,
@@ -28,6 +30,9 @@ const ListCard = styled.div`
   border: 1px solid #ddd;
   overflow: hidden;
   background-color: #fff;
+  opacity: ${({ $isDeleting }) => ($isDeleting ? 0.4 : 1)};
+  pointer-events: ${({ $isDeleting }) => ($isDeleting ? 'none' : 'auto')};
+  transition: opacity 0.2s ease;
 `
 
 const TitleRow = styled.div`
@@ -112,7 +117,7 @@ const LocationItem = styled.li`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1.25rem;
-  border-bottom: 1px solid ${theme.secondaryBackground};
+  border-bottom: 1px solid #efefef;
   position: relative;
 
   &:last-child {
@@ -120,14 +125,10 @@ const LocationItem = styled.li`
   }
 `
 
-const LocationButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  text-align: left;
+const LocationLink = styled(Link)`
+  color: ${({ theme }) => theme.blue} !important;
+  text-decoration: none;
   flex: 1;
-  color: ${({ theme }) => theme.blue};
   font-size: 1rem;
 
   &:hover {
@@ -160,35 +161,6 @@ const RemoveButton = styled.button`
   }
 `
 
-const LocationMenu = styled.div`
-  position: absolute;
-  right: 3rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 100;
-  min-width: 160px;
-  overflow: hidden;
-`
-
-const MenuOption = styled.button`
-  display: block;
-  width: 100%;
-  padding: 0.6rem 1rem;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  font-size: 0.95rem;
-
-  &:hover {
-    background: ${theme.secondaryBackground};
-  }
-`
-
 const ScientificName = styled.span`
   font-style: italic;
 `
@@ -197,45 +169,27 @@ const CommonName = styled.span`
   font-weight: bold;
 `
 
-const AddListCardWrapper = styled(ListCard)`
-  cursor: pointer;
-`
-
-const AddListPromptRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+const SkeletonGroup = styled.div`
+  border: 1px solid #ddd;
+  background-color: #fff;
+  overflow: hidden;
   padding: 0.75rem 1.25rem;
-  color: ${theme.headerText};
-  font-weight: bold;
-  font-size: 1rem;
-  user-select: none;
-
-  &:hover {
-    background: ${theme.secondaryBackground};
-  }
-
-  svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
+  margin-bottom: 1rem;
 `
 
-const AddListInputRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0.75rem 1.25rem;
-`
+/* ─── Skeleton loader ───────────────────────────────────────────── */
 
-const AddListInput = styled(Input)`
-  flex: 1;
-  height: 34px;
-  font-size: 1rem;
-  font-weight: bold;
-`
+const SavedLocationsSkeletonLoader = ({ count = 3 }) => (
+  <div>
+    {Array.from({ length: count }).map((_, index) => (
+      <SkeletonGroup key={index}>
+        <Skeleton width="40%" height={20} style={{ marginBottom: 8 }} />
+        <Skeleton width="80%" height={16} style={{ marginBottom: 8 }} />
+        <Skeleton width="55%" height={16} />
+      </SkeletonGroup>
+    ))}
+  </div>
+)
 
 /* ─── Helpers ───────────────────────────────────────────────────── */
 
@@ -285,60 +239,46 @@ const getLocationPlainName = (location, typesAccess) => {
 
 /* ─── LocationRow ───────────────────────────────────────────────── */
 
-const LocationRow = ({ location, listId, isListBusy, typesAccess }) => {
+const LocationRow = ({ location, listId, typesAccess }) => {
+  const [isRemoving, setIsRemoving] = useState(false)
   const dispatch = useDispatch()
-  const [menuOpen, setMenuOpen] = useState(false)
-  const menuRef = useRef(null)
+  const { t } = useTranslation()
 
   const displayName = getLocationPlainName(location, typesAccess)
 
-  // Close menu when clicking outside
-  useEffect(() => {
-    if (!menuOpen) {
-      return
-    }
-    const handleClick = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [menuOpen])
-
-  const handleViewOnMap = () => {
-    setMenuOpen(false)
-    window.location.hash = `/locations/${location.id}`
-  }
-
-  const handleRemove = () => {
-    setMenuOpen(false)
-    if (window.confirm(`Remove "${displayName}" from the list?`)) {
-      dispatch(removeLocationFromList({ listId, locationId: location.id }))
+  const handleRemove = async () => {
+    if (
+      window.confirm(
+        t('save_location_to_list.remove_from_list_confirm', {
+          name: displayName,
+        }),
+      )
+    ) {
+      setIsRemoving(true)
+      await dispatch(
+        removeLocationFromList({ listId, locationId: location.id }),
+      )
     }
   }
 
   return (
-    <LocationItem>
-      <LocationButton onClick={() => setMenuOpen((v) => !v)}>
+    <LocationItem
+      style={{
+        opacity: isRemoving ? 0.4 : 1,
+        pointerEvents: isRemoving ? 'none' : 'auto',
+        transition: 'opacity 0.2s ease',
+      }}
+    >
+      <LocationLink to={`/locations/${location.id}`}>
         <LocationTypeDisplay location={location} typesAccess={typesAccess} />
         {location.address && <Address>{location.address}</Address>}
-      </LocationButton>
-
-      {menuOpen && (
-        <LocationMenu ref={menuRef}>
-          <MenuOption onClick={handleViewOnMap}>View on map</MenuOption>
-          <MenuOption onClick={handleRemove} style={{ color: theme.red }}>
-            Remove from list
-          </MenuOption>
-        </LocationMenu>
-      )}
+      </LocationLink>
 
       <RemoveButton
         onClick={handleRemove}
-        disabled={isListBusy}
-        aria-label={`Remove ${displayName} from list`}
-        title="Remove from list"
+        disabled={isRemoving}
+        aria-label={t('form.button.delete')}
+        title={t('form.button.delete')}
       >
         <X size={20} />
       </RemoveButton>
@@ -350,15 +290,16 @@ const LocationRow = ({ location, listId, isListBusy, typesAccess }) => {
 
 const ListCardComponent = ({ list }) => {
   const dispatch = useDispatch()
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(true)
   const [editing, setEditing] = useState(false)
   const [editName, setEditName] = useState(list.name)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [isBusy, setIsBusy] = useState(false)
   const inputRef = useRef(null)
+  const { t } = useTranslation()
 
-  const { loadingLists } = useSelector((state) => state.save)
   const { typesAccess } = useSelector((state) => state.type)
 
-  const isListBusy = !!loadingLists[list.id]
   const locations = list.locations || []
   const hasLocations = locations.length > 0
 
@@ -387,24 +328,31 @@ const ListCardComponent = ({ list }) => {
     setEditName(list.name)
   }
 
-  const handleConfirmEdit = (e) => {
+  const handleConfirmEdit = async (e) => {
     e?.stopPropagation()
     const trimmed = editName.trim()
     if (trimmed && trimmed !== list.name) {
-      dispatch(renameList({ listId: list.id, newName: trimmed }))
+      setIsBusy(true)
+      await dispatch(renameList({ listId: list.id, newName: trimmed }))
+      setIsBusy(false)
     }
     setEditing(false)
   }
 
-  const handleDeleteClick = (e) => {
+  const handleDeleteClick = async (e) => {
     e.stopPropagation()
-    if (window.confirm(`Delete "${list.name}"?`)) {
-      dispatch(removeList({ listId: list.id }))
+    if (
+      window.confirm(
+        t('save_location_to_list.delete_list_confirm', { name: list.name }),
+      )
+    ) {
+      setIsDeleting(true)
+      await dispatch(removeList({ listId: list.id }))
     }
   }
 
   return (
-    <ListCard>
+    <ListCard $isDeleting={isDeleting}>
       {/* Row 1: title + edit/delete icons (or edit input) */}
       {editing ? (
         <EditRow>
@@ -413,18 +361,21 @@ const ListCardComponent = ({ list }) => {
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
             onEnter={handleConfirmEdit}
+            disabled={isBusy}
           />
           <IconButton
             onClick={handleCancelEdit}
             color={theme.red}
-            title="Cancel"
+            title={t('form.button.cancel')}
+            disabled={isBusy}
           >
             <X />
           </IconButton>
           <IconButton
             onClick={handleConfirmEdit}
             color={theme.green}
-            title="Confirm"
+            title={t('form.button.confirm')}
+            disabled={isBusy}
           >
             <Check />
           </IconButton>
@@ -432,10 +383,13 @@ const ListCardComponent = ({ list }) => {
       ) : (
         <TitleRow>
           <ListName>{list.name}</ListName>
-          <IconButton onClick={handleEditClick} title="Rename list">
+          <IconButton onClick={handleEditClick} title={t('form.button.edit')}>
             <Pencil />
           </IconButton>
-          <IconButton onClick={handleDeleteClick} title="Delete list">
+          <IconButton
+            onClick={handleDeleteClick}
+            title={t('form.button.delete')}
+          >
             <Trash />
           </IconButton>
         </TitleRow>
@@ -446,7 +400,7 @@ const ListCardComponent = ({ list }) => {
         {hasLocations &&
           (expanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />)}
         <LocationCount>
-          {locations.length} {locations.length === 1 ? 'location' : 'locations'}
+          {`${locations.length} ${locations.length === 1 ? t('glossary.locations.one') : t('glossary.locations.other')}`}
         </LocationCount>
       </ExpandRow>
 
@@ -458,7 +412,6 @@ const ListCardComponent = ({ list }) => {
               key={location.id}
               location={location}
               listId={list.id}
-              isListBusy={isListBusy}
               typesAccess={typesAccess}
             />
           ))}
@@ -468,96 +421,35 @@ const ListCardComponent = ({ list }) => {
   )
 }
 
-/* ─── AddListCard ───────────────────────────────────────────────── */
+/* ─── SavedLocationsPage ────────────────────────────────────────────── */
 
-const AddListCard = () => {
-  const dispatch = useDispatch()
-  const [adding, setAdding] = useState(false)
-  const [newListName, setNewListName] = useState('')
-  const inputRef = useRef(null)
-
-  useEffect(() => {
-    if (adding && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [adding])
-
-  const handleConfirm = () => {
-    const trimmed = newListName.trim()
-    if (trimmed) {
-      dispatch(addList({ name: trimmed }))
-    }
-    setAdding(false)
-    setNewListName('')
-  }
-
-  const handleCancel = () => {
-    setAdding(false)
-    setNewListName('')
-  }
-
-  return (
-    <AddListCardWrapper>
-      {adding ? (
-        <AddListInputRow>
-          <AddListInput
-            ref={inputRef}
-            value={newListName}
-            onChange={(e) => setNewListName(e.target.value)}
-            placeholder="List name"
-            onEnter={handleConfirm}
-          />
-          <IconButton onClick={handleCancel} color={theme.red} title="Cancel">
-            <X />
-          </IconButton>
-          <IconButton
-            onClick={handleConfirm}
-            color={theme.green}
-            title="Confirm"
-          >
-            <Check />
-          </IconButton>
-        </AddListInputRow>
-      ) : (
-        <AddListPromptRow onClick={() => setAdding(true)}>
-          Add new list
-        </AddListPromptRow>
-      )}
-    </AddListCardWrapper>
-  )
-}
-
-/* ─── SavedListsPage ────────────────────────────────────────────── */
-
-const SavedListsPage = () => {
+const SavedLocationsPage = () => {
   const dispatch = useDispatch()
   const { lists, isLoading } = useSelector((state) => state.save)
+  const { t } = useTranslation()
 
   useEffect(() => {
     dispatch(fetchLists())
   }, [dispatch])
 
-  if (isLoading) {
-    return (
-      <Page>
-        <p>Loading…</p>
-      </Page>
-    )
-  }
-
   return (
     <Page>
       <BackButton backPath="/account/edit" />
-      <h1>Saved locations</h1>
+      <h1>{t('save_location_to_list.saved_locations_title')}</h1>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        {lists.map((list) => (
-          <ListCardComponent key={list.id} list={list} />
-        ))}
-        <AddListCard />
-      </div>
+      {isLoading ? (
+        <SavedLocationsSkeletonLoader />
+      ) : (
+        <div
+          style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+        >
+          {lists.map((list) => (
+            <ListCardComponent key={list.id} list={list} />
+          ))}
+        </div>
+      )}
     </Page>
   )
 }
 
-export default SavedListsPage
+export default SavedLocationsPage

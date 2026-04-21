@@ -5,6 +5,7 @@ import {
   User,
 } from '@styled-icons/boxicons-regular'
 import { EditAlt, Map, User as UserYou } from '@styled-icons/boxicons-solid'
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -200,6 +201,10 @@ const ButtonGroupStart = styled.div`
   gap: 10px;
 `
 
+const OverviewContainer = styled.div`
+  position: relative;
+`
+
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
@@ -208,6 +213,7 @@ const EntryOverview = () => {
     streetViewOpen,
     locationId,
     location: locationData,
+    inList,
     pane,
     reviews,
   } = useSelector((state) => state.location)
@@ -216,6 +222,10 @@ const EntryOverview = () => {
   const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
+
+  const { t, i18n } = useTranslation()
+
+  const containerRef = useRef(null)
 
   if (!locationData) {
     return null
@@ -259,7 +269,7 @@ const EntryOverview = () => {
   }
 
   return (
-    <div>
+    <OverviewContainer ref={containerRef}>
       <>
         <TypesHeader
           types={types}
@@ -292,13 +302,19 @@ const EntryOverview = () => {
           <ButtonRow>
             <ButtonGroupStart>
               <ReviewButton />
-              {user && <SaveToListButton locationId={locationId} />}
+              {user && (
+                <SaveToListButton
+                  locationId={locationId}
+                  isSavedToAny={inList}
+                  containerRef={containerRef}
+                />
+              )}
             </ButtonGroupStart>
             <ReportButton />
           </ButtonRow>
         </Description>
       </>
-    </div>
+    </OverviewContainer>
   )
 }
 export default EntryOverview

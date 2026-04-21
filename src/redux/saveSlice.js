@@ -14,64 +14,56 @@ import {
 const initialState = {
   lists: [],
   isLoading: false,
-  loadingLists: {},
+  isAddingNew: false,
+  pendingToggles: {},
 }
 
-// Fetch all lists (with embedded locations) from the backend
 export const fetchLists = createAsyncThunk('save/fetchLists', async () => {
   const lists = await apiGetLists()
   return lists
 })
 
-// Add a new named list
-// Payload: { name: string }
 export const addList = createAsyncThunk('save/addList', async ({ name }) => {
-  await apiAddList({ name })
-  const lists = await apiGetLists()
-  return lists
+  const newList = await apiAddList({ name })
+  return newList
 })
 
-// Remove a list by id
-// Payload: { listId: number }
 export const removeList = createAsyncThunk(
   'save/removeList',
   async ({ listId }) => {
     await apiRemoveList(listId)
-    const lists = await apiGetLists()
-    return lists
+    return listId
   },
 )
 
-// Rename an existing list
-// Payload: { listId: number, newName: string }
 export const renameList = createAsyncThunk(
   'save/renameList',
   async ({ listId, newName }) => {
-    await apiEditList(listId, { name: newName })
-    const lists = await apiGetLists()
-    return lists
+    await apiEditList(listId, { name: newName, description: null })
+    return { listId, newName }
   },
 )
 
-// Add a location to a list
-// Payload: { listId: number, locationId: number }
 export const addLocationToList = createAsyncThunk(
   'save/addLocationToList',
   async ({ listId, locationId }) => {
-    await apiAddLocationToList(Number(locationId), listId)
-    const updatedLists = await apiGetLists()
-    return updatedLists
+    await apiAddLocationToList(locationId, listId)
+    return { listId, locationId }
   },
 )
 
-// Remove a location from a list
-// Payload: { listId: number, locationId: number }
 export const removeLocationFromList = createAsyncThunk(
   'save/removeLocationFromList',
-  async ({ listId, locationId }) => {
+  async ({ listId, locationId }, { getState }) => {
     await apiRemoveLocationFromList(Number(locationId), listId)
-    const updatedLists = await apiGetLists()
-    return updatedLists
+
+    const lists = getState().save.lists
+    const locationStillInAnyList = lists.some(
+      (list) =>
+        list.id !== listId && list.locations.some((l) => l.id === locationId),
+    )
+
+    return { listId, locationId, locationStillInAnyList }
   },
 )
 
@@ -80,13 +72,15 @@ const saveSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    // fetchLists
     [fetchLists.pending]: (state) => {
       state.isLoading = true
     },
     [fetchLists.fulfilled]: (state, action) => {
       state.isLoading = false
-      state.lists = action.payload
+      state.lists = action.payload.map((list) => ({
+        ...list,
+        locations: list.locations ?? [],
+      }))
     },
     [fetchLists.rejected]: (state, action) => {
       state.isLoading = false
@@ -97,16 +91,15 @@ const saveSlice = createSlice({
         }),
       )
     },
-
     [addList.pending]: (state) => {
-      state.isLoading = true
+      state.isAddingNew = true
     },
     [addList.fulfilled]: (state, action) => {
-      state.isLoading = false
-      state.lists = action.payload
+      state.isAddingNew = false
+      state.lists.push(action.payload)
     },
     [addList.rejected]: (state, action) => {
-      state.isLoading = false
+      state.isAddingNew = false
       toast.error(
         i18next.t('error_message.api.add_location_list_failed', {
           message:
@@ -114,19 +107,10 @@ const saveSlice = createSlice({
         }),
       )
     },
-
-    [removeList.pending]: (state, action) => {
-      const { listId } = action.meta.arg
-      state.loadingLists[listId] = true
-    },
     [removeList.fulfilled]: (state, action) => {
-      const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
-      state.lists = action.payload
+      state.lists = state.lists.filter((list) => list.id !== action.payload)
     },
     [removeList.rejected]: (state, action) => {
-      const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
       toast.error(
         i18next.t('error_message.api.remove_location_list_failed', {
           message:
@@ -134,19 +118,14 @@ const saveSlice = createSlice({
         }),
       )
     },
-
-    [renameList.pending]: (state, action) => {
-      const { listId } = action.meta.arg
-      state.loadingLists[listId] = true
-    },
     [renameList.fulfilled]: (state, action) => {
-      const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
-      state.lists = action.payload
+      const { listId, newName } = action.payload
+      const list = state.lists.find((list) => list.id === listId)
+      if (list) {
+        list.name = newName
+      }
     },
     [renameList.rejected]: (state, action) => {
-      const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
       toast.error(
         i18next.t('error_message.api.rename_location_list_failed', {
           message:
@@ -154,20 +133,21 @@ const saveSlice = createSlice({
         }),
       )
     },
-
-    // addLocationToList
     [addLocationToList.pending]: (state, action) => {
       const { listId } = action.meta.arg
-      state.loadingLists[listId] = true
+      state.pendingToggles[listId] = true
     },
     [addLocationToList.fulfilled]: (state, action) => {
-      const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
-      state.lists = action.payload
+      const { listId, locationId } = action.payload
+      delete state.pendingToggles[listId]
+      const listIndex = state.lists.findIndex((list) => list.id === listId)
+      if (listIndex !== -1) {
+        state.lists[listIndex].locations.push({ id: locationId })
+      }
     },
     [addLocationToList.rejected]: (state, action) => {
       const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
+      delete state.pendingToggles[listId]
       toast.error(
         i18next.t('error_message.api.add_location_to_list_failed', {
           message:
@@ -175,20 +155,23 @@ const saveSlice = createSlice({
         }),
       )
     },
-
-    // removeLocationFromList
     [removeLocationFromList.pending]: (state, action) => {
       const { listId } = action.meta.arg
-      state.loadingLists[listId] = true
+      state.pendingToggles[listId] = false
     },
     [removeLocationFromList.fulfilled]: (state, action) => {
-      const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
-      state.lists = action.payload
+      const { listId, locationId } = action.payload
+      delete state.pendingToggles[listId]
+      const listIndex = state.lists.findIndex((list) => list.id === listId)
+      if (listIndex !== -1) {
+        state.lists[listIndex].locations = state.lists[
+          listIndex
+        ].locations.filter((l) => l.id !== locationId)
+      }
     },
     [removeLocationFromList.rejected]: (state, action) => {
       const { listId } = action.meta.arg
-      delete state.loadingLists[listId]
+      delete state.pendingToggles[listId]
       toast.error(
         i18next.t('error_message.api.remove_location_from_list_failed', {
           message:

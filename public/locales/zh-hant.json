@@ -121,6 +121,7 @@
     "description": "描述",
     "email": "電子郵件",
     "locations": {
+      "one": "地點",
       "other": "位置"
     },
     "map": "地圖",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "新增清單",
+    "delete_list_confirm": "刪除清單「{{name}}」？",
     "new_list_placeholder": "清單名稱",
+    "remove_from_list_confirm": "從清單中移除「{{name}}」？",
     "save_label": "儲存",
-    "saved_label": "已儲存"
+    "saved_label": "已儲存",
+    "saved_locations_title": "已儲存的地點"
   },
   "share": {
     "leave_embed_view_for_full_site": "完整網站",

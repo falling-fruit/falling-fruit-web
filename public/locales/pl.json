@@ -121,6 +121,7 @@
     "description": "Opis",
     "email": "Email",
     "locations": {
+      "one": "Lokalizacja",
       "other": "Lokalizacje"
     },
     "map": "Mapa",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Dodaj nową listę",
+    "delete_list_confirm": "Usunąć listę \"{{name}}\"?",
     "new_list_placeholder": "Nazwa listy",
+    "remove_from_list_confirm": "Usunąć \"{{name}}\" z listy?",
     "save_label": "Zapisz",
-    "saved_label": "Zapisano"
+    "saved_label": "Zapisano",
+    "saved_locations_title": "Zapisane lokalizacje"
   },
   "share": {
     "leave_embed_view_for_full_site": "Pełna strona",

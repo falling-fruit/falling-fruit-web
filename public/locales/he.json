@@ -121,6 +121,7 @@
     "description": "תיאור",
     "email": "כתובת דוא\"ל",
     "locations": {
+      "one": "מיקום",
       "other": "מיקומים"
     },
     "map": "מפה",
@@ -427,9 +428,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "הוסף רשימה חדשה",
+    "delete_list_confirm": "למחוק את הרשימה \"{{name}}\"?",
     "new_list_placeholder": "שם הרשימה",
+    "remove_from_list_confirm": "להסיר את \"{{name}}\" מהרשימה?",
     "save_label": "שמור",
-    "saved_label": "נשמר"
+    "saved_label": "נשמר",
+    "saved_locations_title": "מיקומים שמורים"
   },
   "share": {
     "leave_embed_view_for_full_site": "אתר מלא",

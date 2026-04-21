@@ -151,7 +151,7 @@ export interface paths {
            * Additional information to include.
            * - locations: List locations.
            */
-          embed?: ("locations")[];
+          embed?: ("locations");
         };
       };
       responses: {
