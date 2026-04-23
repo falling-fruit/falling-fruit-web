@@ -27,6 +27,7 @@ import Button from '../ui/Button'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import PositionEditIcon from '../ui/PositionEditIcon'
 import { Checkbox, Recaptcha, Select, Textarea } from './FormikWrappers'
 import { ProgressButtons, StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
@@ -83,6 +84,7 @@ const PositionFieldLink = ({ lat, lng, editingId }) => {
 }
 
 const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
+  const isDesktop = useIsDesktop()
   const { locations } = useSelector((state) => state.map)
   const { position } = useSelector((state) => state.location)
   const { t } = useTranslation()
@@ -124,7 +126,7 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
   return (
     <>
       <IconBesideText tabIndex={0}>
-        <Map size={20} />
+        {isDesktop ? <Map size={20} /> : <PositionEditIcon />}
         <p className="small" dir="ltr">
           {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
         </p>
