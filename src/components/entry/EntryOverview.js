@@ -223,8 +223,6 @@ const EntryOverview = () => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
 
-  const { t, i18n } = useTranslation()
-
   const containerRef = useRef(null)
 
   if (!locationData) {
