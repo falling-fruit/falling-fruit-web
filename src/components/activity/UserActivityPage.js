@@ -127,7 +127,7 @@ const UserActivityPage = () => {
 
   useEffect(() => {
     if (changesReady) {
-      dispatch(getUserActivity(userId)).then((action) => {
+      dispatch(getUserActivity(userId, isCurrentUser)).then((action) => {
         if (action.error) {
           history.push('/map')
           toast.error(
