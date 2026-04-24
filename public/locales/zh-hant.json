@@ -290,7 +290,6 @@
       "your_activity_empty": "您尚未添加、編輯或審查任何地點"
     },
     "data": {
-      "beware_html": "但要小心！解壓縮後，數據庫是一個巨大的文件，它會粉碎大多數電子表格軟件。如果您只需要一個小區域的數據，首先嚐試使用集成到<a href=\"/\">地圖中</a>的下載工具檢索它們。",
       "caveat_emptor_html": "我們對數據的準確性不承擔任何責任 - 它按原樣提供，請<i>注意</i>。如果您對數據做了一些很酷的事情，請<a href=\"mailto:feedback@fallingfruit.org\">告訴我們</a>！",
       "intro": "Falling Fruit 建立在公共數據和我們用戶的慷慨之上。我們希望城市覓食能夠惠及儘可能多的人，我們相信每個人都應該平等地獲得我們集體勞動的成果。本着開放的精神，看！整個數據庫",
       "license_html": "如果您有興趣在您的項目中使用這些數據，尤其是商業項目，我們建議您聯繫我們（<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>）。除非另有說明，否則數據許可爲<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a>（知識共享 - 署名、非商業性、相同方式共享）。這意味着您可以自由使用和分發數據，只要您保留原始作者/來源署名，並且不（未經許可）將其用於商業應用。Falling Fruit 的源代碼也已開放，可在<a href=\"https://github.com/falling-fruit/\">GitHub 上獲得</a>。"
