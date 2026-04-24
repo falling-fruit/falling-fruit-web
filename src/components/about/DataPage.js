@@ -17,7 +17,6 @@ const DataPage = () => {
           types.csv.bz2
         </a>
       </blockquote>
-      <p dangerouslySetInnerHTML={{ __html: t('pages.data.beware_html') }} />
       <p dangerouslySetInnerHTML={{ __html: t('pages.data.license_html') }} />
       <p
         dangerouslySetInnerHTML={{
