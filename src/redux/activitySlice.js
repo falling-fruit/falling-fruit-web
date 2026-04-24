@@ -3,7 +3,14 @@ import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { getLocationsChanges } from '../utils/api'
-import { deleteExistingLocation, deleteLocationReview } from './locationSlice'
+import {
+  addNewLocation,
+  addNewReview,
+  deleteExistingLocation,
+  deleteLocationReview,
+  editExistingLocation,
+  editExistingReview,
+} from './locationSlice'
 
 const fetchLocationChangesUser = createAsyncThunk(
   'activity/fetchLocationChangesUser',
@@ -25,16 +32,25 @@ const fetchLocationChangesLatest = createAsyncThunk(
   getLocationsChanges,
 )
 
-export const getUserActivity = (userId) => (dispatch, getState) => {
-  const state = getState()
-  const { changesByUser } = state.activity
+export const getUserActivity =
+  (userId, isCurrentUser) => (dispatch, getState) => {
+    const state = getState()
+    const { changesByUser, currentUserActivityIsStale } = state.activity
+    const data = changesByUser[userId]
 
-  if (changesByUser[userId]) {
-    return Promise.resolve(changesByUser[userId])
-  } else {
-    return dispatch(fetchLocationChangesUser({ user_id: userId }))
+    if (data && !currentUserActivityIsStale) {
+      return Promise.resolve(data)
+    } else {
+      return dispatch(fetchLocationChangesUser({ user_id: userId })).then(
+        (result) => {
+          if (isCurrentUser) {
+            dispatch(clearCurrentUserActivityStale())
+          }
+          return result
+        },
+      )
+    }
   }
-}
 
 /**
  * Fetches the first page of changes when the page is first loaded.
@@ -113,6 +129,7 @@ const activitySlice = createSlice({
       },
     },
     changesByUser: {},
+    currentUserActivityIsStale: false,
     userActivityLastBrowsedSection: {
       id: null,
       userId: null,
@@ -126,10 +143,13 @@ const activitySlice = createSlice({
     setUserActivityLastBrowsedSection: (state, action) => {
       state.userActivityLastBrowsedSection = action.payload
     },
+    clearCurrentUserActivityStale: (state) => {
+      state.currentUserActivityIsStale = false
+    },
   },
   extraReducers: {
     [fetchLocationChangesUser.fulfilled]: (state, action) => {
-      const userId = action.meta.arg.user_id
+      const { user_id: userId } = action.meta.arg
       state.changesByUser[userId] = action.payload
     },
     [fetchLocationChangesInitial.pending]: (state) => {
@@ -192,13 +212,27 @@ const activitySlice = createSlice({
         }),
       )
     },
+    [addNewLocation.fulfilled]: (state) => {
+      state.currentUserActivityIsStale = true
+    },
+    [editExistingLocation.fulfilled]: (state) => {
+      state.currentUserActivityIsStale = true
+    },
+    [addNewReview.fulfilled]: (state) => {
+      state.currentUserActivityIsStale = true
+    },
+    [editExistingReview.fulfilled]: (state) => {
+      state.currentUserActivityIsStale = true
+    },
     [deleteLocationReview.fulfilled]: (state) => {
       state.recentChanges.data = []
       state.recentChanges.isStale = true
+      state.currentUserActivityIsStale = true
     },
     [deleteExistingLocation.fulfilled]: (state) => {
       state.recentChanges.data = []
       state.recentChanges.isStale = true
+      state.currentUserActivityIsStale = true
     },
   },
 })
@@ -218,6 +252,7 @@ export const resetUserActivityLastBrowsedSection = () =>
 export const {
   setRecentChangesLastBrowsedSection,
   setUserActivityLastBrowsedSection,
+  clearCurrentUserActivityStale,
 } = activitySlice.actions
 
 export default activitySlice.reducer
