@@ -1,6 +1,7 @@
 import { MapAlt as Map } from '@styled-icons/boxicons-regular'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -64,6 +65,10 @@ const ListItem = styled.li`
     margin-block: 0 ${(props) => (props.isDesktop ? '0.5rem' : '1rem')};
     margin-inline: 0;
   }
+`
+
+const LatestSkeletonItem = styled.li`
+  margin-bottom: 0.5rem;
 `
 
 const LocationTypesList = ({ locations, onClickLink }) => (
@@ -215,7 +220,7 @@ const ListItemInteraction = ({
   )
 }
 
-const DiaryEntry = ({ entry, userId, displayLimit }) => {
+const DiaryEntry = ({ entry, userId, displayLimit, isLoadingLatest }) => {
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
   const { user } = useSelector((state) => state.auth)
@@ -243,6 +248,11 @@ const DiaryEntry = ({ entry, userId, displayLimit }) => {
     <div id={entry.formattedDate}>
       <h3>{entry.formattedDate}</h3>
       <ListChanges>
+        {isLoadingLatest && (
+          <LatestSkeletonItem>
+            <Skeleton width="100%" height={20} />
+          </LatestSkeletonItem>
+        )}
         {entry.activities.map((activity, index) => (
           <ListItem key={index} isDesktop={isDesktop}>
             {['added', 'edited', 'visited'].map((interactionType) => (
