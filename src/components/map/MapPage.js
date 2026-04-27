@@ -142,14 +142,14 @@ const clusterBounds = ({ lat, lng, zoom }) => {
     east: bounds.east * (360 / EARTH_CIRCUMFERENCE),
   }
 }
-const makeHandleViewChange = (dispatch, googleMap, history) => {
+const makeHandleViewChange = (dispatch, googleMap, history, setPopstate) => {
   const throttledDispatches = throttle((newView) => {
     dispatch(updateLastMapView(newView))
     dispatch(fetchLocations())
     dispatch(fetchFilterCounts())
   }, 1000)
 
-  return (googleMapReactCallbackArg) => {
+  return (popstateSinceLastSync) => (googleMapReactCallbackArg) => {
     const center = googleMap.getCenter()
     const newView = {
       center: { lat: center.lat(), lng: center.lng() },
@@ -159,8 +159,13 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
       height: googleMap.getDiv().offsetHeight,
     }
     throttledDispatches(newView)
-    if (googleMapReactCallbackArg) {
+
+    // Don't sync if bounds changed due to browser back button
+    if (!popstateSinceLastSync && googleMapReactCallbackArg) {
       history.syncViewToBrowserUrl(newView)
+    } else if (popstateSinceLastSync) {
+      // reset after first skip
+      setPopstate(false)
     }
   }
 }
@@ -202,6 +207,12 @@ const MapPage = ({ isDesktop }) => {
 
   const [draggedPosition, setDraggedPosition] = useState(null)
   const [shareOpen, setShareOpen] = useState(false)
+
+  // True if browser back button was hit since last call to `syncViewToBrowserUrl`
+  const [popstateSinceLastSync, setPopstateSinceLastSync] = useState(false)
+  const handlePopstate = (_event) => {
+    setPopstateSinceLastSync(true)
+  }
 
   const {
     initialView,
@@ -265,11 +276,13 @@ const MapPage = ({ isDesktop }) => {
         dispatch,
         googleMap,
         history,
+        setPopstateSinceLastSync,
       )
       /*
        * Call the handler for the first time since map (re)opened
+       * (popstateSinceLastSync)(googleMapReactCallbackArg)
        */
-      handleViewChangeRef.current(false)
+      handleViewChangeRef.current(false)(false)
     }
   }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
 
@@ -378,6 +391,20 @@ const MapPage = ({ isDesktop }) => {
     }
   }, [googleMap, getGoogleMaps, isViewingLocation, history])
 
+  /* Don't sync URL on browser back button: Using browser back button after
+   * navigating in the map widget causes map to pan/zoom which triggers
+   * GoogleMapReact onChange (bounds_changed) event. This means the url that
+   * the back button just popped out of history gets added right back. Also,
+   * if history.pushState is triggered programmatically (instead of by user
+   * action), it may be also be flagged by some browsers and lead to broken
+   * back button behavior. */
+  useEffect(() => {
+    window.addEventListener('popstate', handlePopstate)
+    return () => {
+      window.removeEventListener('popstate', handlePopstate)
+    }
+  }, [])
+
   const zoomIn = () => {
     googleMap?.setZoom(currentZoom + 1)
   }
@@ -472,7 +499,7 @@ const MapPage = ({ isDesktop }) => {
           layerTypes={layerTypes}
           defaultCenter={initialView.center}
           defaultZoom={initialView.zoom}
-          onChange={handleViewChangeRef.current}
+          onChange={handleViewChangeRef.current(popstateSinceLastSync)}
           onGoogleApiLoaded={({ map, maps }) => {
             map.mapTypes.set(
               'osm-standard',
