@@ -34,8 +34,11 @@ export const useAppHistory = () => {
   }
 
   const syncViewToBrowserUrl = (newView) => {
-    const newUrl = currentPathWithView(newView)
-    window.history.pushState(null, '', newUrl)
+    const newPath = currentPathWithView(newView)
+    const oldPath = window.location.pathname
+    if (oldPath !== newPath) {
+      window.history.pushState(null, '', newPath)
+    }
   }
 
   const replaceView = (newView, state) => {
