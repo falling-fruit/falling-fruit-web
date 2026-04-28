@@ -24,23 +24,16 @@ import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import { Page } from '../ui/PageTemplate'
 
-/* ─── Styled components ─────────────────────────────────────────── */
-
 const ListCard = styled.div`
-  border: 1px solid #ddd;
-  overflow: hidden;
-  background-color: #fff;
   opacity: ${({ $isDeleting }) => ($isDeleting ? 0.4 : 1)};
   pointer-events: ${({ $isDeleting }) => ($isDeleting ? 'none' : 'auto')};
-  transition: opacity 0.2s ease;
 `
 
-const TitleRow = styled.div`
+const TopRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid ${theme.secondaryBackground};
+  padding: 0 1.25rem;
 `
 
 const ListName = styled.h2`
@@ -55,12 +48,6 @@ const ExpandRow = styled.div`
   gap: 6px;
   padding: 0.6rem 1.25rem;
   cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
-  user-select: none;
-
-  &:hover {
-    background: ${({ $clickable }) =>
-      $clickable ? theme.secondaryBackground : 'transparent'};
-  }
 `
 
 const LocationCount = styled.span`
@@ -90,14 +77,6 @@ const IconButton = styled.button`
   }
 `
 
-const EditRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid #ddd;
-`
-
 const EditInput = styled(Input)`
   flex: 1;
   height: 34px;
@@ -109,7 +88,6 @@ const LocationList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid ${theme.secondaryBackground};
 `
 
 const LocationItem = styled.li`
@@ -169,29 +147,45 @@ const CommonName = styled.span`
   font-weight: bold;
 `
 
-const SkeletonGroup = styled.div`
-  border: 1px solid #ddd;
-  background-color: #fff;
-  overflow: hidden;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-`
+const SkeletonListCard = () => (
+  <ListCard>
+    <TopRow>
+      <ListName>
+        <Skeleton width="40%" />
+      </ListName>
+    </TopRow>
+    <ExpandRow>
+      <LocationCount>
+        <Skeleton width={80} />
+      </LocationCount>
+    </ExpandRow>
+    <LocationList>
+      <LocationItem>
+        <LocationLink>
+          <Skeleton width="60%" />
+        </LocationLink>
+      </LocationItem>
+      <LocationItem>
+        <LocationLink>
+          <Skeleton width="40%" />
+        </LocationLink>
+      </LocationItem>
+      <LocationItem>
+        <LocationLink>
+          <Skeleton width="55%" />
+        </LocationLink>
+      </LocationItem>
+    </LocationList>
+  </ListCard>
+)
 
-/* ─── Skeleton loader ───────────────────────────────────────────── */
-
-const SavedLocationsSkeletonLoader = ({ count = 3 }) => (
-  <div>
+const SavedLocationsSkeletonLoader = ({ count = 2 }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
     {Array.from({ length: count }).map((_, index) => (
-      <SkeletonGroup key={index}>
-        <Skeleton width="40%" height={20} style={{ marginBottom: 8 }} />
-        <Skeleton width="80%" height={16} style={{ marginBottom: 8 }} />
-        <Skeleton width="55%" height={16} />
-      </SkeletonGroup>
+      <SkeletonListCard key={index} />
     ))}
   </div>
 )
-
-/* ─── Helpers ───────────────────────────────────────────────────── */
 
 const LocationTypeDisplay = ({ location, typesAccess }) => {
   const typeIds = location.type_ids || []
@@ -236,8 +230,6 @@ const getLocationPlainName = (location, typesAccess) => {
   })
   return names.length > 0 ? names.join(', ') : String(location.id)
 }
-
-/* ─── LocationRow ───────────────────────────────────────────────── */
 
 const LocationRow = ({ location, listId, typesAccess }) => {
   const [isRemoving, setIsRemoving] = useState(false)
@@ -285,8 +277,6 @@ const LocationRow = ({ location, listId, typesAccess }) => {
     </LocationItem>
   )
 }
-
-/* ─── ListCardComponent ─────────────────────────────────────────── */
 
 const ListCardComponent = ({ list }) => {
   const dispatch = useDispatch()
@@ -353,49 +343,48 @@ const ListCardComponent = ({ list }) => {
 
   return (
     <ListCard $isDeleting={isDeleting}>
-      {/* Row 1: title + edit/delete icons (or edit input) */}
-      {editing ? (
-        <EditRow>
-          <EditInput
-            ref={inputRef}
-            value={editName}
-            onChange={(e) => setEditName(e.target.value)}
-            onEnter={handleConfirmEdit}
-            disabled={isBusy}
-          />
-          <IconButton
-            onClick={handleCancelEdit}
-            color={theme.red}
-            title={t('form.button.cancel')}
-            disabled={isBusy}
-          >
-            <X />
-          </IconButton>
-          <IconButton
-            onClick={handleConfirmEdit}
-            color={theme.green}
-            title={t('form.button.confirm')}
-            disabled={isBusy}
-          >
-            <Check />
-          </IconButton>
-        </EditRow>
-      ) : (
-        <TitleRow>
-          <ListName>{list.name}</ListName>
-          <IconButton onClick={handleEditClick} title={t('form.button.edit')}>
-            <Pencil />
-          </IconButton>
-          <IconButton
-            onClick={handleDeleteClick}
-            title={t('form.button.delete')}
-          >
-            <Trash />
-          </IconButton>
-        </TitleRow>
-      )}
-
-      {/* Row 2: chevron + "x locations" expand toggle */}
+      <TopRow>
+        {editing ? (
+          <>
+            <EditInput
+              ref={inputRef}
+              value={editName}
+              onChange={(e) => setEditName(e.target.value)}
+              onEnter={handleConfirmEdit}
+              disabled={isBusy}
+            />
+            <IconButton
+              onClick={handleCancelEdit}
+              color={theme.red}
+              title={t('form.button.cancel')}
+              disabled={isBusy}
+            >
+              <X />
+            </IconButton>
+            <IconButton
+              onClick={handleConfirmEdit}
+              color={theme.green}
+              title={t('form.button.confirm')}
+              disabled={isBusy}
+            >
+              <Check />
+            </IconButton>
+          </>
+        ) : (
+          <>
+            <ListName>{list.name}</ListName>
+            <IconButton onClick={handleEditClick} title={t('form.button.edit')}>
+              <Pencil />
+            </IconButton>
+            <IconButton
+              onClick={handleDeleteClick}
+              title={t('form.button.delete')}
+            >
+              <Trash />
+            </IconButton>
+          </>
+        )}
+      </TopRow>
       <ExpandRow onClick={handleToggleExpand} $clickable={hasLocations}>
         {hasLocations &&
           (expanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />)}
@@ -403,8 +392,6 @@ const ListCardComponent = ({ list }) => {
           {`${locations.length} ${locations.length === 1 ? t('glossary.locations.one') : t('glossary.locations.other')}`}
         </LocationCount>
       </ExpandRow>
-
-      {/* Expanded location list */}
       {expanded && (
         <LocationList>
           {locations.map((location) => (
@@ -420,8 +407,6 @@ const ListCardComponent = ({ list }) => {
     </ListCard>
   )
 }
-
-/* ─── SavedLocationsPage ────────────────────────────────────────────── */
 
 const SavedLocationsPage = () => {
   const dispatch = useDispatch()
