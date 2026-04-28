@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "ロケーションリストの追加に失敗しました: {{message}}",
+      "add_location_to_list_failed": "リストへのロケーション追加に失敗しました: {{message}}",
       "fetch_clusters_failed": "クラスターの取得エラー: {{message}}",
-      "fetch_filter_counts_failed": "フィルターカウントの取得エラー: {{message}}",
       "fetch_import_failed": "データセット{{id}}の取得エラー: {{message}}",
       "fetch_location_changes_failed": "ロケーション変更の取得に失敗しました: {{message}}",
       "fetch_location_failed": "ロケーション{{id}}の取得エラー: {{message}}",
+      "fetch_location_lists_failed": "ロケーションリストの取得に失敗しました: {{message}}",
       "fetch_locations_failed": "ロケーションの取得エラー: {{message}}",
       "fetch_review_failed": "レビュー{{id}}の取得エラー: {{message}}",
       "fetch_user_failed": "ユーザー{{id}}の取得エラー: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "ロケーションの編集に失敗しました: {{message}}",
       "location_submission_failed": "ロケーションの送信に失敗しました: {{message}}",
       "photo_upload_failed": "写真のアップロードに失敗しました: {{message}}",
+      "remove_location_from_list_failed": "リストからのロケーション削除に失敗しました: {{message}}",
+      "remove_location_list_failed": "ロケーションリストの削除に失敗しました: {{message}}",
+      "rename_location_list_failed": "ロケーションリストの名前変更に失敗しました: {{message}}",
       "report_submission_failed": "レポートの送信に失敗しました: {{message}}",
       "review_deletion_failed": "レビューの削除に失敗しました: {{message}}",
       "review_edit_failed": "レビューの編集に失敗しました: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "位置情報がサポートされていません"
     },
     "language_changed_refresh_to_reload_map": "言語が変更されました。ページを更新して地図を再読み込みしてください",
-    "results_unavailable": "結果を取得できません",
     "unknown_error": "不明なエラー"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "キャンセル",
+      "confirm": "確認",
       "delete": "削除",
       "edit": "編集",
       "reload": "再読み込み",
@@ -116,6 +121,7 @@
     "description": "説明",
     "email": "メール",
     "locations": {
+      "one": "場所",
       "other": "場所"
     },
     "map": "地図",
@@ -419,6 +425,15 @@
     },
     "you_observed": "{{date}}にこの場所を観察しました",
     "you_reviewed": "{{date}}にこの場所をレビューしました"
+  },
+  "save_location_to_list": {
+    "add_new_list": "新しいリストを追加",
+    "delete_list_confirm": "リスト「{{name}}」を削除しますか？",
+    "new_list_placeholder": "リスト名",
+    "remove_from_list_confirm": "「{{name}}」をリストから削除しますか？",
+    "save_label": "保存",
+    "saved_label": "保存済み",
+    "saved_locations_title": "保存された場所"
   },
   "share": {
     "leave_embed_view_for_full_site": "完全なサイト",

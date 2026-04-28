@@ -5,6 +5,7 @@ import {
   User,
 } from '@styled-icons/boxicons-regular'
 import { EditAlt, Map, User as UserYou } from '@styled-icons/boxicons-solid'
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -21,6 +22,7 @@ import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { ReportButton } from './overview/ReportButton'
+import SaveToListButton from './overview/SaveToListButton'
 import Tags from './overview/Tags'
 import TypesHeader from './overview/TypesHeader'
 import { ReviewButton } from './ReviewButton'
@@ -52,10 +54,6 @@ const Description = styled.section`
 
   & > p:first-child {
     margin-block-end: 14px;
-  }
-
-  button {
-    margin-inline-end: 10px;
   }
 `
 
@@ -189,6 +187,23 @@ const LastEditedInfo = ({ locationData }) => {
     </IconBesideText>
   )
 }
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const ButtonGroupStart = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`
+
+const OverviewContainer = styled.div`
+  position: relative;
+`
 
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
@@ -198,6 +213,7 @@ const EntryOverview = () => {
     streetViewOpen,
     locationId,
     location: locationData,
+    inList,
     pane,
     reviews,
   } = useSelector((state) => state.location)
@@ -206,6 +222,8 @@ const EntryOverview = () => {
   const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
+
+  const containerRef = useRef(null)
 
   if (!locationData) {
     return null
@@ -249,7 +267,7 @@ const EntryOverview = () => {
   }
 
   return (
-    <div>
+    <OverviewContainer ref={containerRef}>
       <>
         <TypesHeader
           types={types}
@@ -279,13 +297,22 @@ const EntryOverview = () => {
           )}
           <LastEditedInfo locationData={locationData} />
           <ReviewSummary reviews={reviews} />
-          <div>
-            <ReviewButton />
+          <ButtonRow>
+            <ButtonGroupStart>
+              <ReviewButton />
+              {user && (
+                <SaveToListButton
+                  locationId={locationId}
+                  isSavedToAny={inList}
+                  containerRef={containerRef}
+                />
+              )}
+            </ButtonGroupStart>
             <ReportButton />
-          </div>
+          </ButtonRow>
         </Description>
       </>
-    </div>
+    </OverviewContainer>
   )
 }
 export default EntryOverview

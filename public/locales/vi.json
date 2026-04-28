@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Thêm danh sách vị trí thất bại: {{message}}",
+      "add_location_to_list_failed": "Thêm vị trí vào danh sách thất bại: {{message}}",
       "fetch_clusters_failed": "Lỗi khi tải cụm: {{message}}",
-      "fetch_filter_counts_failed": "Lỗi khi tải số lượng bộ lọc: {{message}}",
       "fetch_import_failed": "Lỗi khi tải tập dữ liệu {{id}}: {{message}}",
       "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Tải danh sách vị trí thất bại: {{message}}",
       "fetch_locations_failed": "Lỗi khi tải vị trí: {{message}}",
       "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
       "fetch_user_failed": "Lỗi khi tải thông tin người dùng {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
       "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
       "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
+      "remove_location_from_list_failed": "Xóa vị trí khỏi danh sách thất bại: {{message}}",
+      "remove_location_list_failed": "Xóa danh sách vị trí thất bại: {{message}}",
+      "rename_location_list_failed": "Đổi tên danh sách vị trí thất bại: {{message}}",
       "report_submission_failed": "Gửi báo cáo thất bại: {{message}}",
       "review_deletion_failed": "Xóa đánh giá thất bại: {{message}}",
       "review_edit_failed": "Chỉnh sửa đánh giá thất bại: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Không hỗ trợ định vị"
     },
     "language_changed_refresh_to_reload_map": "Ngôn ngữ đã thay đổi, làm mới trang để tải lại bản đồ",
-    "results_unavailable": "Kết quả không khả dụng",
     "unknown_error": "Lỗi không xác định"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Hủy",
+      "confirm": "Xác nhận",
       "delete": "Xóa",
       "edit": "Chỉnh sửa",
       "reload": "Tải lại",
@@ -116,6 +121,7 @@
     "description": "Miêu tả",
     "email": "Email",
     "locations": {
+      "one": "Vị trí",
       "other": "Vị trí"
     },
     "map": "Bản đồ",
@@ -420,6 +426,15 @@
     "you_observed": "Bạn đã quan sát địa điểm này vào {{date}}",
     "you_reviewed": "Bạn đã đánh giá địa điểm này vào {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Thêm danh sách mới",
+    "delete_list_confirm": "Xóa danh sách \"{{name}}\"?",
+    "new_list_placeholder": "Tên danh sách",
+    "remove_from_list_confirm": "Xóa \"{{name}}\" khỏi danh sách?",
+    "save_label": "Lưu",
+    "saved_label": "Đã lưu",
+    "saved_locations_title": "Vị trí đã lưu"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Trang web đầy đủ",
     "title": "Chia sẻ góc nhìn này",
@@ -452,7 +467,6 @@
     "bio": "Thông tin về bạn",
     "change_email": "Đổi email",
     "change_password": "Đổi mật khẩu",
-    "change_your_password": "Thay đổi mật khẩu của bạn",
     "current_email": "Email hiện tại",
     "current_password": "Mật khẩu hiện tại",
     "header": {

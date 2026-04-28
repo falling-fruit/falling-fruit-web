@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "Не удалось добавить список местоположений: {{message}}",
+      "add_location_to_list_failed": "Не удалось добавить местоположение в список: {{message}}",
       "fetch_clusters_failed": "Ошибка при получении кластеров: {{message}}",
-      "fetch_filter_counts_failed": "Ошибка при получении количества фильтров: {{message}}",
       "fetch_import_failed": "Ошибка при получении набора данных {{id}}: {{message}}",
       "fetch_location_changes_failed": "Не удалось получить изменения местоположения: {{message}}",
       "fetch_location_failed": "Ошибка при получении местоположения {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Не удалось получить списки местоположений: {{message}}",
       "fetch_locations_failed": "Ошибка при получении местоположений: {{message}}",
       "fetch_review_failed": "Ошибка при получении отзыва {{id}}: {{message}}",
       "fetch_user_failed": "Ошибка при получении пользователя {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "Не удалось отредактировать местоположение: {{message}}",
       "location_submission_failed": "Не удалось отправить местоположение: {{message}}",
       "photo_upload_failed": "Не удалось загрузить фото: {{message}}",
+      "remove_location_from_list_failed": "Не удалось удалить местоположение из списка: {{message}}",
+      "remove_location_list_failed": "Не удалось удалить список местоположений: {{message}}",
+      "rename_location_list_failed": "Не удалось переименовать список местоположений: {{message}}",
       "report_submission_failed": "Не удалось отправить жалобу: {{message}}",
       "review_deletion_failed": "Не удалось удалить отзыв: {{message}}",
       "review_edit_failed": "Не удалось отредактировать отзыв: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "Геолокация не поддерживается"
     },
     "language_changed_refresh_to_reload_map": "Язык изменен. Обновите страницу, чтобы перезагрузить карту",
-    "results_unavailable": "Результаты недоступны",
     "unknown_error": "Неизвестная ошибка"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "Отмена",
+      "confirm": "Подтвердить",
       "delete": "Удалить",
       "edit": "Редактировать",
       "reload": "Перезагрузить",
@@ -116,6 +121,7 @@
     "description": "Описание",
     "email": "Адрес электронной почты",
     "locations": {
+      "one": "Местоположение",
       "other": "Местоположения"
     },
     "map": "Карта",
@@ -420,6 +426,15 @@
     "you_observed": "Вы наблюдали это место {{date}}",
     "you_reviewed": "Вы оставили отзыв об этом месте {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "Добавить новый список",
+    "delete_list_confirm": "Удалить список \"{{name}}\"?",
+    "new_list_placeholder": "Название списка",
+    "remove_from_list_confirm": "Удалить \"{{name}}\" из списка?",
+    "save_label": "Сохранить",
+    "saved_label": "Сохранено",
+    "saved_locations_title": "Сохраненные местоположения"
+  },
   "share": {
     "leave_embed_view_for_full_site": "Полная версия сайта",
     "title": "Поделиться этим видом",
@@ -452,7 +467,6 @@
     "bio": "О вас",
     "change_email": "Изменить адрес электронной почты",
     "change_password": "Изменить пароль",
-    "change_your_password": "Изменить пароль",
     "current_email": "Текущий email",
     "current_password": "Текущий пароль",
     "header": {

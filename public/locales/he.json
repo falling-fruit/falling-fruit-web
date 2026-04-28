@@ -25,11 +25,13 @@
   },
   "error_message": {
     "api": {
+      "add_location_list_failed": "הוספת רשימת מיקומים נכשלה: {{message}}",
+      "add_location_to_list_failed": "הוספת מיקום לרשימה נכשלה: {{message}}",
       "fetch_clusters_failed": "שגיאה בטעינת אשכולות: {{message}}",
-      "fetch_filter_counts_failed": "שגיאה בטעינת ספירת מסננים: {{message}}",
       "fetch_import_failed": "שגיאה במשיכת מאגר נתונים {{id}}: {{message}}",
       "fetch_location_changes_failed": "נכשלה משיכת שינויי מיקום: {{message}}",
       "fetch_location_failed": "שגיאה במשיכת מיקום {{id}}: {{message}}",
+      "fetch_location_lists_failed": "טעינת רשימות מיקומים נכשלה: {{message}}",
       "fetch_locations_failed": "שגיאה בטעינת מיקומים: {{message}}",
       "fetch_review_failed": "שגיאה במשיכת ביקורת {{id}}: {{message}}",
       "fetch_user_failed": "שגיאה בטעינת משתמש {{id}}: {{message}}",
@@ -37,6 +39,9 @@
       "location_edit_failed": "עריכת מיקום נכשלה: {{message}}",
       "location_submission_failed": "שליחת מיקום נכשלה: {{message}}",
       "photo_upload_failed": "העלאת תמונה נכשלה: {{message}}",
+      "remove_location_from_list_failed": "הסרת מיקום מהרשימה נכשלה: {{message}}",
+      "remove_location_list_failed": "הסרת רשימת מיקומים נכשלה: {{message}}",
+      "rename_location_list_failed": "שינוי שם רשימת מיקומים נכשל: {{message}}",
       "report_submission_failed": "שליחת דיווח נכשלה: {{message}}",
       "review_deletion_failed": "מחיקת ביקורת נכשלה: {{message}}",
       "review_edit_failed": "עריכת ביקורת נכשלה: {{message}}",
@@ -65,7 +70,6 @@
       "not_supported": "איתור מיקום אינו נתמך"
     },
     "language_changed_refresh_to_reload_map": "השפה השתנתה, יש לרענן את הדף כדי לטעון מחדש את המפה",
-    "results_unavailable": "תוצאות לא זמינות",
     "unknown_error": "שגיאה לא ידועה"
   },
   "filter": {
@@ -78,6 +82,7 @@
   "form": {
     "button": {
       "cancel": "לבטל",
+      "confirm": "אישור",
       "delete": "מחק",
       "edit": "ערוך",
       "reload": "טען מחדש",
@@ -116,6 +121,7 @@
     "description": "תיאור",
     "email": "כתובת דוא\"ל",
     "locations": {
+      "one": "מיקום",
       "other": "מיקומים"
     },
     "map": "מפה",
@@ -420,6 +426,15 @@
     "you_observed": "צפית במיקום זה בתאריך {{date}}",
     "you_reviewed": "ביקרת במיקום זה בתאריך {{date}}"
   },
+  "save_location_to_list": {
+    "add_new_list": "הוסף רשימה חדשה",
+    "delete_list_confirm": "למחוק את הרשימה \"{{name}}\"?",
+    "new_list_placeholder": "שם הרשימה",
+    "remove_from_list_confirm": "להסיר את \"{{name}}\" מהרשימה?",
+    "save_label": "שמור",
+    "saved_label": "נשמר",
+    "saved_locations_title": "מיקומים שמורים"
+  },
   "share": {
     "leave_embed_view_for_full_site": "אתר מלא",
     "title": "שתף תצוגה זו",
@@ -452,7 +467,6 @@
     "bio": "אודותיך",
     "change_email": "שינוי אימייל",
     "change_password": "שינוי סיסמה",
-    "change_your_password": "שנה את הסיסמה שלך",
     "current_email": "אימייל נוכחי",
     "current_password": "סיסמה נוכחית",
     "header": {
