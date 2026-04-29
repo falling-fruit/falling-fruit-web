@@ -1,8 +1,6 @@
 import { sortBy } from 'lodash'
 
-import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import { components } from '../../utils/apiSchema'
-import { viewToString } from '../../utils/appUrl'
 import {
   displayOrderProperties,
   LocalizedType,
@@ -214,11 +212,7 @@ function transformActivityData(
         const locationTypes: LocationTypes = {
           locationId: change.location_id,
           types,
-          url: `/locations/${change.location_id}/${viewToString(
-            change.lat,
-            change.lng,
-            MIN_LOCATION_ZOOM,
-          )}`,
+          url: `/list-locations/${change.location_id}`,
           isSelected: true,
         }
         switch (change.description) {
