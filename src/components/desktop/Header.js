@@ -31,14 +31,39 @@ const AuthLinksList = styled.ul`
   gap: 12px;
 `
 
-const TIGHT_LAYOUT_MAX_WIDTH = 1080
-const TIGHT_LAYOUT_MAX_WIDTH_USER = 980
+const VERY_NARROW_MAX_WIDTH = 900
+const NARROW_MAX_WIDTH = 1080
+const NARROW_MAX_WIDTH_USER = 980
+
+function getLayoutType(user) {
+  const width = window.innerWidth
+
+  if (user) {
+    if (width <= VERY_NARROW_MAX_WIDTH) {
+      return 'very-narrow'
+    }
+    if (width <= NARROW_MAX_WIDTH_USER) {
+      return 'narrow'
+    }
+    return 'normal'
+  } else {
+    if (width <= VERY_NARROW_MAX_WIDTH) {
+      return 'very-narrow'
+    }
+    if (width <= NARROW_MAX_WIDTH) {
+      return 'narrow'
+    }
+    return 'normal'
+  }
+}
 
 function layoutIstight(user) {
-  return (
-    (user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH_USER) ||
-    (!user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH)
-  )
+  const layoutType = getLayoutType(user)
+  return layoutType === 'narrow' || layoutType === 'very-narrow'
+}
+
+function layoutIsVeryNarrow(user) {
+  return getLayoutType(user) === 'very-narrow'
 }
 
 const StyledHeader = styled.header`
@@ -120,8 +145,16 @@ const NavLi = styled.li`
   display: flex;
   justify-content: stretch;
   align-items: stretch;
-  min-width: ${() =>
-    window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH ? '80px' : '110px'};
+  min-width: ${() => {
+    const width = window.innerWidth
+    if (width <= VERY_NARROW_MAX_WIDTH) {
+      return '70px'
+    }
+    if (width <= NARROW_MAX_WIDTH) {
+      return '80px'
+    }
+    return '110px'
+  }};
   margin: 0;
   color: ${({ theme }) => theme.secondaryText};
   cursor: pointer;
@@ -250,6 +283,7 @@ const SignupButton = styled(Button)`
 const StyledSocialButtons = styled(SocialButtons)`
   margin: 0 5px;
   display: flex;
+  display: ${({ user }) => (layoutIsVeryNarrow(user) ? 'none' : 'flex')};
 
   a {
     color: ${({ theme }) => theme.text};
@@ -412,7 +446,7 @@ const Header = () => {
         />
         <div className="auth-social">
           {!isMobileMenuOpen && <UserMenu />}
-          <StyledSocialButtons />
+          <StyledSocialButtons user={user} />
         </div>
       </nav>
     </StyledHeader>
