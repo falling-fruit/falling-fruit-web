@@ -31,26 +31,28 @@ const AuthLinksList = styled.ul`
   gap: 12px;
 `
 
-const VERY_NARROW_MAX_WIDTH = 900
-const NARROW_MAX_WIDTH = 1080
-const NARROW_MAX_WIDTH_USER = 980
+const MAX_WIDTHS = {
+  VERY_NARROW: 900,
+  NARROW: 1080,
+  NARROW_USER: 980,
+}
 
 function getLayoutType(user) {
   const width = window.innerWidth
 
   if (user) {
-    if (width <= VERY_NARROW_MAX_WIDTH) {
+    if (width <= MAX_WIDTHS.VERY_NARROW) {
       return 'very-narrow'
     }
-    if (width <= NARROW_MAX_WIDTH_USER) {
+    if (width <= MAX_WIDTHS.NARROW_USER) {
       return 'narrow'
     }
     return 'normal'
   } else {
-    if (width <= VERY_NARROW_MAX_WIDTH) {
+    if (width <= MAX_WIDTHS.VERY_NARROW) {
       return 'very-narrow'
     }
-    if (width <= NARROW_MAX_WIDTH) {
+    if (width <= MAX_WIDTHS.NARROW) {
       return 'narrow'
     }
     return 'normal'
@@ -146,11 +148,11 @@ const NavLi = styled.li`
   justify-content: stretch;
   align-items: stretch;
   min-width: ${() => {
-    const width = window.innerWidth
-    if (width <= VERY_NARROW_MAX_WIDTH) {
+    const layoutType = getLayoutType(false) // Use false for general layout calculation
+    if (layoutType === 'very-narrow') {
       return '70px'
     }
-    if (width <= NARROW_MAX_WIDTH) {
+    if (layoutType === 'narrow') {
       return '80px'
     }
     return '110px'
@@ -282,8 +284,12 @@ const SignupButton = styled(Button)`
 
 const StyledSocialButtons = styled(SocialButtons)`
   margin: 0 5px;
-  display: flex;
-  display: ${({ user }) => (layoutIsVeryNarrow(user) ? 'none' : 'flex')};
+  display: ${({ user, isMobileMenuOpen }) => {
+    if (isMobileMenuOpen) {
+      return 'flex'
+    }
+    return layoutIsVeryNarrow(user) ? 'none' : 'flex'
+  }};
 
   a {
     color: ${({ theme }) => theme.text};
@@ -446,7 +452,10 @@ const Header = () => {
         />
         <div className="auth-social">
           {!isMobileMenuOpen && <UserMenu />}
-          <StyledSocialButtons user={user} />
+          <StyledSocialButtons
+            user={user}
+            isMobileMenuOpen={isMobileMenuOpen}
+          />
         </div>
       </nav>
     </StyledHeader>
