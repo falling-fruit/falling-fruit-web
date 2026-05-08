@@ -302,7 +302,6 @@ const StyledSocialButtons = styled(SocialButtons)`
     return layoutIsVeryNarrow(user) ? 'none' : 'flex'
   }};
 
-  // When hidden, ensure no margin to prevent auth button overflow
   &[style*='display: none'] {
     margin: 0;
   }
