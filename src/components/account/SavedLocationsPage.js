@@ -15,15 +15,18 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import {
+  clearLastViewedListId,
   fetchLists,
   removeList,
   removeLocationFromList,
   renameList,
+  setLastViewedListId,
 } from '../../redux/saveSlice'
 import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import { Page } from '../ui/PageTemplate'
+import ResetButton from '../ui/ResetButton'
 
 const ListCard = styled.div`
   opacity: ${({ $isDeleting }) => ($isDeleting ? 0.4 : 1)};
@@ -56,13 +59,10 @@ const LocationCount = styled.span`
   color: ${theme.secondaryText};
 `
 
-const IconButton = styled.button`
+const IconButton = styled(ResetButton)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
   padding: 4px;
   border-radius: 4px;
   color: ${({ color }) => color || theme.secondaryText};
@@ -105,7 +105,7 @@ const LocationItem = styled.li`
 `
 
 const LocationLink = styled(Link)`
-  color: ${({ theme }) => theme.blue} !important;
+  color: ${theme.blue} !important;
   text-decoration: none;
   flex: 1;
   font-size: 1rem;
@@ -121,11 +121,7 @@ const Address = styled.span`
   margin-left: 0.5rem;
 `
 
-const RemoveButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
+const RemoveButton = styled(ResetButton)`
   display: flex;
   align-items: center;
   color: ${theme.secondaryText};
@@ -268,6 +264,9 @@ const LocationRow = ({ location, listId, typesAccess }) => {
     }
     return null
   }
+  const handleLocationClick = () => {
+    dispatch(setLastViewedListId(listId))
+  }
 
   return (
     <LocationItem
@@ -277,7 +276,10 @@ const LocationRow = ({ location, listId, typesAccess }) => {
         transition: 'opacity 0.2s ease',
       }}
     >
-      <LocationLink to={`/locations/${location.id}`}>
+      <LocationLink
+        to={`/locations/${location.id}/standalone`}
+        onClick={handleLocationClick}
+      >
         <LocationTypeDisplay location={location} typesAccess={typesAccess} />
         {renderAddress()}
       </LocationLink>
@@ -358,7 +360,7 @@ const ListCardComponent = ({ list }) => {
   }
 
   return (
-    <ListCard $isDeleting={isDeleting}>
+    <ListCard $isDeleting={isDeleting} id={`list-${list.id}`}>
       <TopRow>
         {editing ? (
           <>
@@ -426,12 +428,26 @@ const ListCardComponent = ({ list }) => {
 
 const SavedLocationsPage = () => {
   const dispatch = useDispatch()
-  const { lists, isLoading } = useSelector((state) => state.save)
+  const { lists, isLoading, lastViewedListId } = useSelector(
+    (state) => state.save,
+  )
   const { t } = useTranslation()
 
   useEffect(() => {
-    dispatch(fetchLists())
-  }, [dispatch])
+    if (!lastViewedListId) {
+      dispatch(fetchLists())
+    }
+  }, [dispatch]) // eslint-disable-line
+
+  useEffect(() => {
+    if (lastViewedListId) {
+      const listElement = document.getElementById(`list-${lastViewedListId}`)
+      if (listElement) {
+        listElement.scrollIntoView()
+      }
+      dispatch(clearLastViewedListId())
+    }
+  }, [lastViewedListId, dispatch])
 
   return (
     <Page>

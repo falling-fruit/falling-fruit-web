@@ -214,7 +214,7 @@ function transformActivityData(
         const locationTypes: LocationTypes = {
           locationId: change.location_id,
           types,
-          url: `/locations/${change.location_id}/${viewToString(
+          url: `/locations/${change.location_id}/standalone/${viewToString(
             change.lat,
             change.lng,
             MIN_LOCATION_ZOOM,
