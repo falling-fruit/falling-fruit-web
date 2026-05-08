@@ -16,6 +16,7 @@ const initialState = {
   isLoading: false,
   isAddingNew: false,
   pendingToggles: {},
+  lastViewedListId: null,
 }
 
 export const fetchLists = createAsyncThunk('save/fetchLists', async () => {
@@ -70,7 +71,14 @@ export const removeLocationFromList = createAsyncThunk(
 const saveSlice = createSlice({
   name: 'save',
   initialState,
-  reducers: {},
+  reducers: {
+    setLastViewedListId: (state, action) => {
+      state.lastViewedListId = action.payload
+    },
+    clearLastViewedListId: (state) => {
+      state.lastViewedListId = null
+    },
+  },
   extraReducers: {
     [fetchLists.pending]: (state) => {
       state.isLoading = true
@@ -184,5 +192,7 @@ const saveSlice = createSlice({
     },
   },
 })
+
+export const { setLastViewedListId, clearLastViewedListId } = saveSlice.actions
 
 export default saveSlice.reducer

@@ -249,7 +249,7 @@ const EntryOverview = () => {
       })
       if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
         googleMap?.setZoom(MIN_LOCATION_ZOOM)
-      } else if (pane.isFromListLocations) {
+      } else if (pane.isStandalone) {
         dispatch(reenablePaneDrawerAndSetToLowPosition())
       } else if (pane.drawerFullyOpen) {
         dispatch(setPaneDrawerToLowPosition())

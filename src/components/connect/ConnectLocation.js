@@ -83,7 +83,7 @@ const ConnectLocation = ({
   isBeingEditedPosition,
   isStreetView,
   isSuccessfullyAdded,
-  isFromListLocations,
+  isStandalone,
 }) => {
   const dispatch = useDispatch()
   const { initialView, googleMap } = useSelector((state) => state.map)
@@ -111,7 +111,7 @@ const ConnectLocation = ({
        * (e.g. location to settings and back)
        * so if data is present in redux, don't fetch
        * */
-      if (isFromListLocations) {
+      if (isStandalone) {
         history.push(`/locations/${locationId}`)
       }
       return
@@ -121,7 +121,7 @@ const ConnectLocation = ({
         locationId,
         isBeingEdited,
         isStreetView,
-        isFromListLocations,
+        isStandalone,
         isFromEmbedViewMap: isEmbed,
       }),
     ).then((action) => {
@@ -150,7 +150,7 @@ const ConnectLocation = ({
         history.push(newUrl)
       }
 
-      if (isFromListLocations) {
+      if (isStandalone) {
         history.push(`/locations/${locationId}`)
       }
     })

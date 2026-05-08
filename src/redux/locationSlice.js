@@ -34,7 +34,7 @@ const initialState = {
   pane: {
     drawerFullyOpen: false,
     drawerLow: false,
-    isFromListLocations: false,
+    isStandalone: false,
     isFromEmbedViewMap: false,
     tabIndex: 0,
   },
@@ -145,7 +145,7 @@ const locationSlice = createSlice({
       state.lightbox.photoIndex = action.payload.photoIndex
     },
     reenablePaneDrawerAndSetToLowPosition: (state) => {
-      state.pane.isFromListLocations = false
+      state.pane.isStandalone = false
       state.pane.drawerFullyOpen = false
       state.pane.drawerLow = true
     },
@@ -181,11 +181,10 @@ const locationSlice = createSlice({
       state.form = null
       state.tooltipOpen = action.meta.arg.isBeingEdited
       state.streetViewOpen = action.meta.arg.isStreetView
-      state.pane.isFromListLocations = action.meta.arg.isFromListLocations
+      state.pane.isStandalone = action.meta.arg.isStandalone
       state.pane.isFromEmbedViewMap = action.meta.arg.isFromEmbedViewMap
       state.pane.drawerFullyOpen =
-        action.meta.arg.isFromListLocations ||
-        action.meta.arg.isFromEmbedViewMap
+        action.meta.arg.isStandalone || action.meta.arg.isFromEmbedViewMap
       state.pane.tabIndex = 0
       state.inList = false
     },

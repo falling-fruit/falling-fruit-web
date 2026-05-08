@@ -51,6 +51,7 @@ const SidePane = () => {
   const { userId: userActivityUserId } = useSelector(
     (state) => state.activity.userActivityLastBrowsedSection,
   )
+  const { lastViewedListId } = useSelector((state) => state.save)
 
   return (
     <FullHeightPane>
@@ -89,11 +90,13 @@ const SidePane = () => {
                         backPath={
                           fromSettings
                             ? '/settings'
-                            : userActivityUserId
-                              ? `/users/${userActivityUserId}/activity`
-                              : recentChangesSectionId
-                                ? '/changes'
-                                : '/map'
+                            : lastViewedListId
+                              ? '/account/lists'
+                              : userActivityUserId
+                                ? `/users/${userActivityUserId}/activity`
+                                : recentChangesSectionId
+                                  ? '/changes'
+                                  : '/map'
                         }
                       />
                       <TopButtonsDesktop />

@@ -73,7 +73,7 @@ const ListPage = () => {
       }
       onLocationClick={(locationPosition) => {
         dispatch(setLastViewedListPositionState(locationPosition))
-        history.push(`/list-locations/${locationPosition.id}`)
+        history.push(`/locations/${locationPosition.id}/standalone`)
       }}
     />
   )

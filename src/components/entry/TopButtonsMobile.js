@@ -68,17 +68,35 @@ const TopButtonsMobile = ({ hasImages }) => {
   const history = useAppHistory()
   const {
     locationId,
-    pane: { isFromListLocations, isFromEmbedViewMap },
+    pane: { isStandalone, isFromEmbedViewMap },
   } = useSelector((state) => state.location)
+  const { id: recentChangesSectionId } = useSelector(
+    (state) => state.activity.recentChanges.lastBrowsedSection,
+  )
+  const { userId: userActivityUserId } = useSelector(
+    (state) => state.activity.userActivityLastBrowsedSection,
+  )
+  const { lastViewedListId } = useSelector((state) => state.save)
   const { handleClickDelete, isDeleteVisible, isDeleteDisabled } =
     useDeleteLocation()
+
+  const handleBack = () => {
+    const standaloneBackPath = lastViewedListId
+      ? '/account/lists'
+      : userActivityUserId
+        ? `/users/${userActivityUserId}/activity`
+        : recentChangesSectionId
+          ? '/changes'
+          : '/list'
+    history.push(standaloneBackPath)
+  }
 
   return (
     <StyledButtons whiteBackground={!hasImages}>
       <EntryButton
         onClick={
-          isFromListLocations
-            ? () => history.push('/list')
+          isStandalone
+            ? handleBack
             : isFromEmbedViewMap
               ? () => history.push('/map')
               : (e) => {
@@ -90,7 +108,7 @@ const TopButtonsMobile = ({ hasImages }) => {
         label="back-button"
       />
       <div>
-        {isFromListLocations && !isFromEmbedViewMap && (
+        {isStandalone && !isFromEmbedViewMap && (
           <EntryButton
             onClick={(event) => {
               event.stopPropagation()

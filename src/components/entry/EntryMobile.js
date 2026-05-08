@@ -134,12 +134,12 @@ const EntryMobile = () => {
       drawerFullyOpen,
       drawerLow,
       tabIndex,
-      isFromListLocations,
+      isStandalone,
       isFromEmbedViewMap,
     },
   } = useSelector((state) => state.location)
 
-  const drawerDisabled = isFromEmbedViewMap || isFromListLocations
+  const drawerDisabled = isFromEmbedViewMap || isStandalone
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
