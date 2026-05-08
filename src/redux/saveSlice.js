@@ -96,7 +96,10 @@ const saveSlice = createSlice({
     },
     [addList.fulfilled]: (state, action) => {
       state.isAddingNew = false
-      state.lists.push(action.payload)
+      state.lists.push({
+        ...action.payload,
+        locations: action.payload.locations ?? [],
+      })
     },
     [addList.rejected]: (state, action) => {
       state.isAddingNew = false
