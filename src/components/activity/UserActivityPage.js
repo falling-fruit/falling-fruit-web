@@ -11,6 +11,7 @@ import {
   resetUserActivityLastBrowsedSection,
 } from '../../redux/activitySlice'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { BackButton } from '../ui/ActionButtons'
 import { Page } from '../ui/PageTemplate'
 import { createActivityDiary } from './ActivityDiary'
@@ -84,6 +85,7 @@ const UserActivityPage = () => {
   let { userId } = useParams()
   userId = parseInt(userId)
   const history = useAppHistory()
+  const isDesktop = useIsDesktop()
 
   const { changesByUser, userActivityLastBrowsedSection } = useSelector(
     (state) => state.activity,
@@ -143,11 +145,15 @@ const UserActivityPage = () => {
   const userName =
     changes?.length > 0 && changes[0].author ? changes[0].author : `#${userId}`
 
+  const showBackButton = !(isDesktop && isCurrentUser)
+
   return (
     <Page>
-      <StyledBackButton
-        backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
-      />
+      {showBackButton && (
+        <StyledBackButton
+          backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
+        />
+      )}
 
       {isLoading ? (
         <Skeleton width="15em" height={30} style={{ marginBottom: '1em' }} />
