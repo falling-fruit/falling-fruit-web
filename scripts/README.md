@@ -59,7 +59,7 @@ Options:
 4. Check translation completeness:
 
    ```bash
-   python translation_manager.py --source_path ../src/components --json_folder_path ../public/locales --check-translations
+   python translation_manager.py --source_path ../src/components --json_folder_path ../public/locales --check-translations | grep 'not ok'
    ```
 
 5. Remove orphaned keys from JSON files:
@@ -81,6 +81,23 @@ Options:
 
 ## Adding a new language
 
+1. Seed the file
+
+Look up the ISO code for the new language, for example Russian is `ru`, and add a new file with an empty translation:
+
 ```
 echo {} > ../public/locales/ru.json
 ```
+
+2. Fill up translations and check
+
+Use translation manager as documented above. First run --fill-up-translations, then --check-translations.
+
+3. Add new language to the app
+
+Add a new entry to `LANGUAGE_OPTIONS` in the file `src/i18n.js`. We keep languages sorted by ISO code.
+
+
+4. Check with native speaker
+
+Show the new translation to someone who knows the language well. If their contribution is substantial, offer to list them as a translator in `src/components/about/ProjectPage.js`. 
