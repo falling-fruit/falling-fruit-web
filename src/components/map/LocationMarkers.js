@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux'
 import { MapType } from '../../constants/settings'
 import { theme } from '../ui/GlobalStyle'
 
+const Z_INDEX = {
+  SAVED: 2,
+  DEFAULT: 1,
+}
+
 const getDisplayLabel = (typesAccess, id) => {
   const type = typesAccess.getType(id)
   if (!type) {
@@ -98,7 +103,7 @@ const setLabelTextStyle = (div, mapType) => {
   })
 }
 
-const createBaseLabelDiv = () => {
+const createBaseLabelDiv = (isSaved) => {
   const div = document.createElement('div')
   div.style.position = 'absolute'
   div.style.padding = '4px 8px'
@@ -107,6 +112,7 @@ const createBaseLabelDiv = () => {
   div.style.marginTop = '5px'
   div.style.textAlign = 'center'
   div.style.display = 'block'
+  div.style.zIndex = isSaved ? Z_INDEX.SAVED : Z_INDEX.DEFAULT
   return div
 }
 
@@ -117,6 +123,7 @@ const createLabel = (
   labelHtml,
   isHovered,
   mapType,
+  isSaved,
 ) => {
   const label = new google.OverlayView()
   label.position = new google.LatLng(location.lat, location.lng)
@@ -126,9 +133,10 @@ const createLabel = (
   label.overlayMouseTargetPane = null
   label.isHovered = isHovered
   label.mapType = mapType
+  label.isSaved = isSaved
 
   label.onAdd = function () {
-    const div = createBaseLabelDiv()
+    const div = createBaseLabelDiv(this.isSaved)
     setLabelTextStyle(div, this.mapType)
     div.innerHTML = this.labelHtml
 
@@ -253,6 +261,7 @@ const LocationMarkers = ({
           map: googleMap,
           optimized: locations.length > 100,
           icon: getMarkerIcon(google, isSaved),
+          zIndex: isSaved ? Z_INDEX.SAVED : Z_INDEX.DEFAULT,
         })
 
         google.event.addListener(marker, 'mouseover', () => {
@@ -294,10 +303,18 @@ const LocationMarkers = ({
           markerData.location = location
         }
 
-        // Update marker icon if saved state changed
+        // Update marker icon and zIndex if saved state changed
         if (markerData.isSaved !== isSaved) {
           markerData.marker.setIcon(getMarkerIcon(google, isSaved))
+          markerData.marker.setZIndex(isSaved ? Z_INDEX.SAVED : Z_INDEX.DEFAULT)
           markerData.isSaved = isSaved
+          // Update label z-index if it exists
+          if (markerData.label && markerData.label.div) {
+            markerData.label.div.style.zIndex = isSaved
+              ? Z_INDEX.SAVED
+              : Z_INDEX.DEFAULT
+            markerData.label.isSaved = isSaved
+          }
         }
 
         const newLabelData = (location.type_ids || [])
@@ -324,6 +341,7 @@ const LocationMarkers = ({
           labelHtml,
           isHovered,
           mapType,
+          markerData.isSaved,
         )
       }
 
