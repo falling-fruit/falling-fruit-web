@@ -28,11 +28,16 @@ const AuthLinksList = styled.ul`
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+
+  // Reduce gap in very narrow layouts to prevent overflow
+  @media (max-width: 800px) {
+    gap: 6px;
+  }
 `
 
 const MAX_WIDTHS = {
-  VERY_NARROW: 900,
+  VERY_NARROW: 800,
   NARROW: 1080,
   NARROW_USER: 980,
 }
@@ -107,6 +112,12 @@ const StyledHeader = styled.header`
 
     .auth-social {
       display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex-shrink: 0;
+      margin-inline-end: 10px;
+      justify-content: flex-end;
     }
 
     .auth-buttons {
@@ -291,6 +302,11 @@ const StyledSocialButtons = styled(SocialButtons)`
     return layoutIsVeryNarrow(user) ? 'none' : 'flex'
   }};
 
+  // When hidden, ensure no margin to prevent auth button overflow
+  &[style*='display: none'] {
+    margin: 0;
+  }
+
   a {
     color: ${({ theme }) => theme.text};
     position: relative;
@@ -324,14 +340,24 @@ const UserMenu = () => {
   const isAccountPage = useRouteMatch('/account/edit') !== null
 
   return (
-    <div>
+    <div style={{ minWidth: 0, flexShrink: 1 }}>
       <NavList>
         {user ? (
           <NavLi>
             <StyledDropdown
               label={
                 <>
-                  <StyledUser height={15} /> {user.name || user.email}
+                  <StyledUser height={15} />
+                  <span
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      maxWidth: '120px',
+                    }}
+                  >
+                    {user.name || user.email}
+                  </span>
                 </>
               }
               isMatch={isAccountPage}
