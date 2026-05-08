@@ -31,13 +31,13 @@ const AuthLinksList = styled.ul`
   gap: 8px;
 
   // Reduce gap in very narrow layouts to prevent overflow
-  @media (max-width: 800px) {
+  @media (max-width: 825px) {
     gap: 6px;
   }
 `
 
 const MAX_WIDTHS = {
-  VERY_NARROW: 800,
+  VERY_NARROW: 825,
   NARROW: 1080,
   NARROW_USER: 980,
 }
