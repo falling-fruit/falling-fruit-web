@@ -2,6 +2,7 @@ import {
   Check,
   ChevronDown,
   ChevronRight,
+  Map,
   X,
 } from '@styled-icons/boxicons-regular'
 import { Pencil, Trash } from '@styled-icons/boxicons-solid'
@@ -253,6 +254,21 @@ const LocationRow = ({ location, listId, typesAccess }) => {
     }
   }
 
+  const renderAddress = () => {
+    if (location.address) {
+      return <Address>{location.address}</Address>
+    }
+    if (location.lat != null && location.lng != null) {
+      return (
+        <Address>
+          <Map color={theme.secondaryText} size={16} />
+          {`${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}`}
+        </Address>
+      )
+    }
+    return null
+  }
+
   return (
     <LocationItem
       style={{
@@ -263,7 +279,7 @@ const LocationRow = ({ location, listId, typesAccess }) => {
     >
       <LocationLink to={`/locations/${location.id}`}>
         <LocationTypeDisplay location={location} typesAccess={typesAccess} />
-        {location.address && <Address>{location.address}</Address>}
+        {renderAddress()}
       </LocationLink>
 
       <RemoveButton
