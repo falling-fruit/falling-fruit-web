@@ -436,9 +436,13 @@ const ListCardComponent = ({ list }) => {
 
 const SavedLocationsPage = () => {
   const dispatch = useDispatch()
-  const { lists, isLoading, lastViewedListId } = useSelector(
-    (state) => state.save,
-  )
+  const {
+    lists,
+    isLoading: isLoadingSavedLocations,
+    lastViewedListId,
+  } = useSelector((state) => state.save)
+  const { typesAccess } = useSelector((state) => state.type)
+  const typesReady = !typesAccess.isEmpty
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -462,7 +466,7 @@ const SavedLocationsPage = () => {
       <BackButton backPath="/account/edit" />
       <h1>{t('save_location_to_list.saved_locations_title')}</h1>
 
-      {isLoading ? (
+      {isLoadingSavedLocations || !typesReady ? (
         <SavedLocationsSkeletonLoader />
       ) : (
         <div
