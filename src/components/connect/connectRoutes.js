@@ -139,6 +139,7 @@ const connectRoutes = [
       '/locations/:locationId/:nextSegment/:nextNextSegment',
       '/locations/:locationId/:nextSegment',
       '/locations/:locationId',
+      '/locations-standalone/:locationId',
     ]}
   >
     {({ match }) =>
@@ -151,7 +152,7 @@ const connectRoutes = [
           isBeingEditedPosition={match.params.nextNextSegment === 'position'}
           isStreetView={match.params.nextSegment === 'panorama'}
           isSuccessfullyAdded={match.params.nextSegment === 'success'}
-          isStandalone={match.params.nextSegment === 'standalone'}
+          isStandalone={match.path.startsWith('/locations-standalone')}
         />
       )
     }
@@ -287,7 +288,7 @@ const connectRoutes = [
    */
   <Route
     key="disconnect-activity"
-    path={['/users/:userId/activity', '/locations']}
+    path={['/users/:userId/activity', '/locations', '/locations-standalone']}
   >
     <DisconnectActivity />
   </Route>,
@@ -300,7 +301,10 @@ const connectRoutes = [
    *
    * action: clear lastViewedListPositionId when dismounting from list or location pages
    */
-  <Route key="disconnect-last-viewed-position" path={['/list', '/locations']}>
+  <Route
+    key="disconnect-last-viewed-position"
+    path={['/list', '/locations', '/locations-standalone']}
+  >
     <DisconnectLastViewedListPosition />
   </Route>,
 
@@ -312,7 +316,10 @@ const connectRoutes = [
    *
    * action: clear lastViewedListId when dismounting from account/lists or location pages
    */
-  <Route key="disconnect-lists" path={['/account/lists', '/locations']}>
+  <Route
+    key="disconnect-lists"
+    path={['/account/lists', '/locations', '/locations-standalone']}
+  >
     <DisconnectLists />
   </Route>,
 
