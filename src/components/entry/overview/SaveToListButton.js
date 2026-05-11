@@ -150,9 +150,14 @@ const BottomSection = styled.div`
   flex-shrink: 0;
 `
 
-const SaveToListButton = ({ locationId, isSavedToAny, containerRef }) => {
+const SaveToListButton = ({ containerRef }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const {
+    locationId,
+    inList: isSavedToAny,
+    location,
+  } = useSelector((state) => state.location)
   const isLoading = useSelector((state) => state.save.isLoading)
   const isAddingNew = useSelector((state) => state.save.isAddingNew)
   const pendingToggles = useSelector((state) => state.save.pendingToggles)
@@ -220,7 +225,7 @@ const SaveToListButton = ({ locationId, isSavedToAny, containerRef }) => {
     if (checked) {
       dispatch(removeLocationFromList({ listId, locationId }))
     } else {
-      dispatch(addLocationToList({ listId, locationId }))
+      dispatch(addLocationToList({ listId, location }))
     }
   }
 

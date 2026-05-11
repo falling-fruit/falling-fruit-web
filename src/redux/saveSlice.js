@@ -47,9 +47,9 @@ export const renameList = createAsyncThunk(
 
 export const addLocationToList = createAsyncThunk(
   'save/addLocationToList',
-  async ({ listId, locationId }) => {
-    await apiAddLocationToList(locationId, listId)
-    return { listId, locationId }
+  async ({ listId, location }) => {
+    await apiAddLocationToList(location.id, listId)
+    return { listId, location }
   },
 )
 
@@ -149,11 +149,11 @@ const saveSlice = createSlice({
       state.pendingToggles[listId] = true
     },
     [addLocationToList.fulfilled]: (state, action) => {
-      const { listId, locationId } = action.payload
+      const { listId, location } = action.payload
       delete state.pendingToggles[listId]
       const listIndex = state.lists.findIndex((list) => list.id === listId)
       if (listIndex !== -1) {
-        state.lists[listIndex].locations.push({ id: locationId })
+        state.lists[listIndex].locations.push(location)
       }
     },
     [addLocationToList.rejected]: (state, action) => {
