@@ -24,6 +24,7 @@ import {
   setLastViewedListId,
 } from '../../redux/saveSlice'
 import { viewToString } from '../../utils/appUrl'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
@@ -444,6 +445,7 @@ const SavedLocationsPage = () => {
   const { typesAccess } = useSelector((state) => state.type)
   const typesReady = !typesAccess.isEmpty
   const { t } = useTranslation()
+  const isDesktop = useIsDesktop()
 
   useEffect(() => {
     if (!lastViewedListId) {
@@ -463,7 +465,7 @@ const SavedLocationsPage = () => {
 
   return (
     <Page>
-      <BackButton backPath="/account/edit" />
+      {!isDesktop && <BackButton backPath="/account/edit" />}
       <h1>{t('save_location_to_list.saved_locations_title')}</h1>
 
       {isLoadingSavedLocations || !typesReady ? (
