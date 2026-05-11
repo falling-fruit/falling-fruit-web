@@ -18,6 +18,7 @@ export const LANGUAGE_CACHE_KEY = 'language'
 
 export const LANGUAGE_OPTIONS = [
   { value: 'ar', label: 'ﺎﻠﻋﺮﺒﻳﺓ' },
+  { value: 'cs', label: 'Čeština' },
   { value: 'de', label: 'Deutsch' },
   { value: 'en', label: 'English' },
   { value: 'el', label: 'Ελληνικά' },
