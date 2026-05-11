@@ -213,7 +213,6 @@ const EntryOverview = () => {
     streetViewOpen,
     locationId,
     location: locationData,
-    inList,
     pane,
     reviews,
   } = useSelector((state) => state.location)
@@ -300,13 +299,7 @@ const EntryOverview = () => {
           <ButtonRow>
             <ButtonGroupStart>
               <ReviewButton />
-              {user && (
-                <SaveToListButton
-                  locationId={locationId}
-                  isSavedToAny={inList}
-                  containerRef={containerRef}
-                />
-              )}
+              {user && <SaveToListButton containerRef={containerRef} />}
             </ButtonGroupStart>
             <ReportButton />
           </ButtonRow>

@@ -298,8 +298,8 @@ const locationSlice = createSlice({
       )
     },
     [addLocationToList.fulfilled]: (state, action) => {
-      const { locationId } = action.payload
-      if (state.locationId === locationId) {
+      const { location } = action.payload
+      if (state.locationId === location.id) {
         state.inList = true
       }
     },

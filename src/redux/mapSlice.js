@@ -180,8 +180,8 @@ export const mapSlice = createSlice({
       state.isLoading = false
     },
     [addLocationToList.fulfilled]: (state, action) => {
-      const { locationId } = action.payload
-      const index = state.locations.findIndex((loc) => loc.id === locationId)
+      const { location } = action.payload
+      const index = state.locations.findIndex((loc) => loc.id === location.id)
       if (index !== -1) {
         state.locations[index].in_list = true
       }
