@@ -117,6 +117,11 @@ const LocationLink = styled(Link)`
   }
 `
 
+const LocationLinkSkeleton = styled.a`
+  flex: 1;
+  font-size: 1rem;
+`
+
 const Address = styled.span`
   color: ${theme.secondaryText};
   font-size: 0.85rem;
@@ -160,19 +165,19 @@ const SkeletonListCard = () => (
     </ExpandRow>
     <LocationList>
       <LocationItem>
-        <LocationLink>
+        <LocationLinkSkeleton>
           <Skeleton width="60%" />
-        </LocationLink>
+        </LocationLinkSkeleton>
       </LocationItem>
       <LocationItem>
-        <LocationLink>
+        <LocationLinkSkeleton>
           <Skeleton width="40%" />
-        </LocationLink>
+        </LocationLinkSkeleton>
       </LocationItem>
       <LocationItem>
-        <LocationLink>
+        <LocationLinkSkeleton>
           <Skeleton width="55%" />
-        </LocationLink>
+        </LocationLinkSkeleton>
       </LocationItem>
     </LocationList>
   </ListCard>
