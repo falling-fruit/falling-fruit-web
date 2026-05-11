@@ -306,7 +306,7 @@ const UserMenu = () => {
                 {t('users.your_activity')}
               </MenuItem>
               <MenuItem to={`/account/lists`} activeClassName="active">
-                Saved locations
+                {t('save_location_to_list.saved_locations_title')}
               </MenuItem>
               <ResetButton onClick={handleLogout}>
                 {t('users.sign_out')}
