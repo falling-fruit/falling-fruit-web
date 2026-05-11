@@ -134,12 +134,16 @@ const AccountPage = () => {
                 <Link to="/account/change-password">
                   {t('users.change_password')}
                 </Link>
-                <Link to={`/users/${user.id}/activity`}>
-                  {t('users.your_activity')}
-                </Link>
-                <Link to="/account/lists">
-                  {t('save_location_to_list.saved_locations_title')}
-                </Link>
+                {!isDesktop && (
+                  <Link to={`/users/${user.id}/activity`}>
+                    {t('users.your_activity')}
+                  </Link>
+                )}
+                {!isDesktop && (
+                  <Link to="/account/lists">
+                    {t('save_location_to_list.saved_locations_title')}
+                  </Link>
+                )}
               </Column>
             </LinksContainer>
           </section>
