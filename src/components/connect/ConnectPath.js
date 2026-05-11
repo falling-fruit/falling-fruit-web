@@ -6,12 +6,15 @@ import { viewFromCurrentUrl } from '../../utils/appUrl'
 
 const ConnectPath = () => {
   const { initialView, googleMap } = useSelector((state) => state.map)
+  const {
+    pane: { drawerFullyOpen },
+  } = useSelector((state) => state.location)
   const { pathname } = useLocation()
   const hasInitialView = !!initialView
   const view = viewFromCurrentUrl()
 
   useEffect(() => {
-    if (hasInitialView && googleMap && view) {
+    if (hasInitialView && googleMap && view && !drawerFullyOpen) {
       const currentCenter = googleMap.getCenter()
       const currentZoom = googleMap.getZoom()
 
@@ -26,7 +29,7 @@ const ConnectPath = () => {
         googleMap.setZoom(view.zoom)
       }
     }
-  }, [pathname, hasInitialView, googleMap]) //eslint-disable-line
+  }, [pathname, hasInitialView, googleMap, drawerFullyOpen]) //eslint-disable-line
 
   return null
 }

@@ -81,7 +81,12 @@ const SidePane = () => {
               <Header>{t('menu.settings')}</Header>
               <SettingsPage isDesktop />
             </Route>
-            <Route path="/locations/:locationId">
+            <Route
+              path={[
+                '/locations/:locationId',
+                '/locations-standalone/:locationId',
+              ]}
+            >
               {({ match }) =>
                 match && (
                   <>
