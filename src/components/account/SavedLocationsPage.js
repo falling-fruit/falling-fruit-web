@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
+import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import {
   clearLastViewedListId,
   fetchLists,
@@ -22,6 +23,7 @@ import {
   renameList,
   setLastViewedListId,
 } from '../../redux/saveSlice'
+import { viewToString } from '../../utils/appUrl'
 import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
@@ -264,6 +266,7 @@ const LocationRow = ({ location, listId, typesAccess }) => {
     }
     return null
   }
+
   const handleLocationClick = () => {
     dispatch(setLastViewedListId(listId))
   }
@@ -277,7 +280,7 @@ const LocationRow = ({ location, listId, typesAccess }) => {
       }}
     >
       <LocationLink
-        to={`/locations/${location.id}/standalone`}
+        to={`/locations/${location.id}/standalone/${viewToString(location.lat, location.lng, MIN_LOCATION_ZOOM)}`}
         onClick={handleLocationClick}
       >
         <LocationTypeDisplay location={location} typesAccess={typesAccess} />
