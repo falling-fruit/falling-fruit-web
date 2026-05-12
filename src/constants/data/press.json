@@ -1599,6 +1599,14 @@
       "url": "http://avenues.ca/breves/falling-fruit-richesse-culinaire-de-nos-rues/"
     },
     {
+      "published_on": "2018-05-30",
+      "outlet": "Fordham Urban Law Journal",
+      "outlet_url": "https://ir.lawnet.fordham.edu/ulj/",
+      "title": "Food Law Gone Wild: The Law of Foraging",
+      "author": "Baylen J. Linnekin",
+      "url": "https://ir.lawnet.fordham.edu/ulj/vol45/iss4/3/"
+    },
+    {
       "published_on": "2018-02-10",
       "outlet": "En Vert et Contre Tout",
       "outlet_url": "http://envertetcontretout.ch/",
@@ -1815,6 +1823,13 @@
   ],
   "2022": [
     {
+      "published_on": "2022-11-27",
+      "outlet": "L'info durable",
+      "outlet_url": "https://www.linfodurable.fr/",
+      "title": "Où trouver un lieu pour glaner des fruits et légumes?",
+      "url": "https://www.linfodurable.fr/conso/ou-trouver-un-lieu-pour-glaner-des-fruits-et-legumes-35450"
+    },
+    {
       "published_on": "2022-09-03",
       "outlet": "Barking Dogs",
       "outlet_url": "https://barkingdogs.be",
@@ -1996,12 +2011,66 @@
   ],
   "2025": [
     {
+      "published_on": "2025-12-16",
+      "outlet": "Sentient Media",
+      "outlet_url": "https://sentientmedia.org",
+      "title": "Urban foragers are mapping edible plants around the world",
+      "author": "Grace Hussain",
+      "url": "https://sentientmedia.org/urban-foragers-are-mapping-edible-plants/"
+    },
+    {
+      "published_on": "2025-11-01",
+      "outlet": "Le Mag Communal",
+      "outlet_url": "https://www.pontacelles.be",
+      "title": "Novembre = le temps des derniers glanages",
+      "author": "Commune de Pont-à-Celles",
+      "url": "https://www.pontacelles.be/wp-content/uploads/2025/11/MAG-NOVEMBRE-2025-22-10-1-min.pdf"
+    },
+    {
+      "published_on": "2025-10-14",
+      "outlet": "Bluedot Living",
+      "outlet_url": "https://bluedotliving.com/",
+      "title": "What I found — and ate — foraging in New York City",
+      "author": "Caroline Saunders",
+      "url": "https://bluedotliving.com/what-i-found-and-ate-foraging-in-new-york-city/"
+    },
+    {
+      "published_on": "2025-10-11",
+      "outlet": "Le Soir",
+      "outlet_url": "https://sosoir.lesoir.be",
+      "title": "Où ramasser des fruits gratuitement à Bruxelles?",
+      "url": "https://sosoir.lesoir.be/704211/article/2025-10-11/ou-ramasser-des-fruits-gratuitement-bruxelles"
+    },
+    {
+      "published_on": "2025-10-06",
+      "outlet": "Aktualnósci",
+      "outlet_url": "https://aktualnosci.be/",
+      "title": "Darmowe owoce do zebrania w wielu miejscach w Belgii",
+      "author": "Mateusz Kapica",
+      "url": "https://aktualnosci.be/2025/10/06/darmowe-owoce-do-zebrania-w-wielu-miejscach-w-belgii/"
+    },
+    {
+      "published_on": "2025-10-05",
+      "outlet": "BruxellesToday",
+      "outlet_url": "https://www.bruxellestoday.be",
+      "title": "Bon plan: vous pouvez ramasser gratuitement des fruits dans plusieurs endroits à Bruxelles",
+      "author": "Margot Houget",
+      "url": "https://www.bruxellestoday.be/que-faire/bruxelles-recolter-gratuitement-fruits.html"
+    },
+    {
       "published_on": "2025-09-04",
       "outlet": "Marmiton",
       "outlet_url": "https://www.marmiton.org",
       "title": "Ramasser des fruits et légumes en Île-de-France c'est maintenant possible et voici tout ce que vous devez savoir",
       "author": "Fostine Carracillo",
       "url": "https://www.marmiton.org/adresses/ramasser-des-fruits-et-legumes-en-ile-de-france-c-est-maintenant-possible-et-voici-tout-ce-que-vous-devez-savoir-s4117684.html"
+    },
+    {
+      "published_on": "2025-08-31",
+      "outlet": "de zondag",
+      "outlet_url": "https://www.dezondag.be",
+      "title": "Gratis en voor niets: pluk zelf je stadsfruit",
+      "url": "https://www.dezondag.be/lifestyle/budget/gratis-en-voor-niets-pluk-zelf-je-stadsfruit/"
     },
     {
       "published_on": "2025-07-30",
@@ -2049,6 +2118,24 @@
       "title": "For modern foragers, this map reveals urban abundance",
       "author": "Natasha Khullar Relph",
       "url": "https://reasonstobecheerful.world/falling-fruit-urban-foraging/"
+    }
+  ],
+  "2026": [
+    {
+      "published_on": "2026-03-20",
+      "outlet": "UBIQUE",
+      "outlet_url": "https://ubiqueags.org/",
+      "title": "Map of the Week: Falling Fruit",
+      "author": "Dorothy Janick",
+      "url": "https://ubiqueags.org/map-of-the-week-falling-fruit/"
+    },
+    {
+      "published_on": "2026-01-20",
+      "outlet": "Forest & Bird",
+      "outlet_url": "https://www.forestandbird.org.nz/",
+      "title": "Urban rewilding",
+      "author": "Caroline Wood",
+      "url": "https://www.forestandbird.org.nz/resources/urban-rewilding"
     }
   ]
 }

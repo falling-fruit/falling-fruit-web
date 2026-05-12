@@ -4945,5 +4945,65 @@
     "name_url": "http://holefoodrescue.org/",
     "facebook": "https://www.facebook.com/HoleFoodRescue",
     "instagram": "https://www.instagram.com/holefoodrescue/"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "New York",
+    "city": "Ithaca",
+    "name": "South Hill Cider",
+    "name_url": "https://www.southhillcider.com/",
+    "subname": "Finger Lakes Apple Tree Project",
+    "subname_url": "https://appleproject.exposure.co"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "name": "Fresh Food Network",
+    "name_url": "https://freshfoodnetwork.org"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "Ohio",
+    "city": "Dayton",
+    "name": "Access to Excess",
+    "name_url": "https://www.accesstoexcessfood.org/"
+  },
+  {
+    "active": true,
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "city": "Gent",
+    "name": "Fruitstraat Gent",
+    "name_url": "https://fruitstraat.be/"
+  },
+  {
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "city": "Gent",
+    "name": "Buurtfruit in Gent",
+    "name_url": "https://velt.nu/buurtfruit-gent"
+  },
+  {
+    "active": true,
+    "country": "Belgium",
+    "state": "Vlaanderen (Flandre)",
+    "city": "Gent",
+    "name": "Foodsavers Gent",
+    "name_url": "https://stad.gent/nl/werken-ondernemen/werken/werken-regio-gent/sociale-economie-gent/dienstenbedrijf-sociale-economie/foodsavers-gent-laat-geen-eten-verloren-gaan"
+  },
+  {
+    "active": true,
+    "country": "United States",
+    "state": "California",
+    "city": "Oakland",
+    "name": "East Oakland Collective",
+    "name_url": "https://www.eastoaklandcollective.org/",
+    "subname": "Food & Supply Distribution",
+    "subname_url": "https://www.eastoaklandcollective.org/food-and-supply-distribution.html",
+    "facebook": "https://facebook.com/eoakcollective",
+    "x": "https://twitter.com/eoakcollective",
+    "instagram": "https://instagram.com/eastoaklandcollective"
   }
 ]
