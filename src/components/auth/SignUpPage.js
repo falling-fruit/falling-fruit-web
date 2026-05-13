@@ -26,7 +26,7 @@ import { withAuthRedirect } from './withAuthRedirect'
 
 const formToUser = (form) => ({ ...form, password_confirm: undefined })
 
-const SignupPage = () => {
+const SignUpPage = () => {
   const history = useAppHistory()
   const recaptchaRef = useRef()
   const { t } = useTranslation()
@@ -154,4 +154,4 @@ const SignupPage = () => {
   )
 }
 
-export default withAuthRedirect(SignupPage)
+export default withAuthRedirect(SignUpPage)

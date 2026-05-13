@@ -3,20 +3,6 @@ import styled from 'styled-components/macro'
 import { NAVIGATION_BAR_HEIGHT_PX } from '../../constants/mobileLayout'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 
-export const ProgressButtons = styled.div`
-  margin-block-start: 16px;
-  margin-block-end: 16px;
-  text-align: center;
-
-  button {
-    width: 110px;
-
-    &:not(:last-child) {
-      margin-inline-end: 12px;
-    }
-  }
-`
-
 const StyledFormDiv = styled.div`
   box-sizing: border-box;
   width: 100%;

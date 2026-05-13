@@ -24,12 +24,13 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { formatMonth } from '../entry/textFormatters'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import PositionEditIcon from '../ui/PositionEditIcon'
 import { Checkbox, Recaptcha, Select, Textarea } from './FormikWrappers'
-import { ProgressButtons, StyledForm } from './FormLayout'
+import { StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { ReviewStep } from './ReviewForm'
 import TypesSelect from './TypesSelect'
@@ -361,7 +362,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
               {!isLoggedIn && (
                 <Recaptcha centered name="g-recaptcha-response" />
               )}
-              <ProgressButtons>
+              <FormButtons align={'center'}>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
@@ -373,7 +374,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
                     ? t('form.button.submitting')
                     : t('form.button.submit')}
                 </Button>
-              </ProgressButtons>
+              </FormButtons>
             </Form>
           )
         }}
