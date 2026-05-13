@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro'
 
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import { validatedColor } from '../ui/GlobalStyle'
 
-const Textarea = styled.textarea`
+const TextareaElement = styled.textarea`
   border: 1px solid ${validatedColor()};
   box-sizing: border-box;
   border-radius: 0.375em;
@@ -12,7 +13,7 @@ const Textarea = styled.textarea`
   font-family: inherit;
   font-size: 1rem;
   width: 100%;
-  height: 140px;
+  height: 8em;
 
   &::placeholder {
     color: ${({ theme }) => theme.tertiaryText};
@@ -26,6 +27,25 @@ const Textarea = styled.textarea`
   &:hover {
     border-color: ${({ theme }) => theme.text};
   }
+
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
+    height: 6.5em;
+
+    @media (max-height: 600px) {
+      height: 4.5em;
+    }
+  `}
 `
+const Textarea = ({ children, ...props }) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <TextareaElement isDesktop={isDesktop} {...props}>
+      {children}
+    </TextareaElement>
+  )
+}
 
 export default Textarea
