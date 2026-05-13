@@ -238,6 +238,8 @@ const Project = () => {
         <b dir="ltr">Anya Sytenkova</b> (<b dir="ltr">Аня Сытенкова</b>) –
         <span dir="ltr">Русский</span>
         {' · '}
+        <b dir="ltr"> Barbora Boulová </b> – <span dir="ltr">Čeština</span>
+        {' · '}
         <b dir="ltr">Daniela Marini</b> – <span dir="ltr">Español</span>
         {' · '}
         <b dir="ltr">David Katzin</b> – <span dir="rtl">עִברִית</span>
