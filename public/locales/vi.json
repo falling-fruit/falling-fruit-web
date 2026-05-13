@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{type}} tại {{city}}",
+      "days_ago": {
+        "one": "{{count}} ngày",
+        "other": "{{count}} ngày"
+      },
       "place": {
         "one": "Địa điểm",
         "other": "Địa điểm"
@@ -451,10 +455,6 @@
     "type_added": "Loại đã được thêm thành công!"
   },
   "time": {
-    "days": {
-      "one": "{{count}} ngày",
-      "other": "{{count}} ngày"
-    },
     "last_24_hours": "24 giờ qua",
     "time_ago": "{{time}} trước"
   },

@@ -110,10 +110,10 @@ function formatPeriodName(
     if (daysAgo === 0) {
       return t('time.last_24_hours')
     } else if (daysAgo === 1) {
-      const time = t('time.days.one', { count: daysAgo })
+      const time = t('pages.changes.days_ago.one', { count: daysAgo })
       return t('time.time_ago', { time })
     } else {
-      const time = t('time.days.other', { count: daysAgo })
+      const time = t('pages.changes.days_ago.other', { count: daysAgo })
       return t('time.time_ago', { time })
     }
   } else {

@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{type}} в {{city}}",
+      "days_ago": {
+        "one": "{{count}} день",
+        "other": "{{count}} дней"
+      },
       "place": {
         "one": "Место",
         "other": "Места"
@@ -451,10 +455,6 @@
     "type_added": "Новый тип успешно добавлен!"
   },
   "time": {
-    "days": {
-      "one": "{{count}} день",
-      "other": "{{count}} дней"
-    },
     "last_24_hours": "Последние 24 часа",
     "time_ago": "{{time}} назад"
   },

@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
+      "days_ago": {
+        "one": "{{count}} dia",
+        "other": "{{count}} dias"
+      },
       "place": {
         "one": "Local",
         "other": "Lugares"
@@ -451,10 +455,6 @@
     "type_added": "Tipo adicionado"
   },
   "time": {
-    "days": {
-      "one": "{{count}} dia",
-      "other": "{{count}} dias"
-    },
     "last_24_hours": "Últimas 24 horas",
     "time_ago": "{{time}} atrás"
   },

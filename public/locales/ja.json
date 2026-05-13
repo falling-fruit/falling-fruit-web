@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{city}}で{{type}}",
+      "days_ago": {
+        "one": "{{count}}日",
+        "other": "{{count}}日"
+      },
       "place": {
         "one": "場所",
         "other": "場所"
@@ -451,10 +455,6 @@
     "type_added": "新しいタイプが正常に追加されました！"
   },
   "time": {
-    "days": {
-      "one": "{{count}}日",
-      "other": "{{count}}日"
-    },
     "last_24_hours": "過去24時間",
     "time_ago": "{{time}}前"
   },

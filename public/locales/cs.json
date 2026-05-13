@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{type}} v {{city}}",
+      "days_ago": {
+        "one": "{{count}} dnem",
+        "other": "{{count}} dny"
+      },
       "place": {
         "one": "Místo",
         "other": "Místa"
@@ -451,10 +455,6 @@
     "type_added": "Nový typ byl úspěšně přidán!"
   },
   "time": {
-    "days": {
-      "one": "{{count}} dnem",
-      "other": "{{count}} dny"
-    },
     "last_24_hours": "Posledních 24 hodin",
     "time_ago": "před {{time}}"
   },

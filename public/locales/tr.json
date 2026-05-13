@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{city}} şehrinde {{type}}",
+      "days_ago": {
+        "one": "{{count}} gün",
+        "other": "{{count}} gün"
+      },
       "place": {
         "one": "Mekan",
         "other": "Mekanlar"
@@ -451,10 +455,6 @@
     "type_added": "Tür başarıyla eklendi!"
   },
   "time": {
-    "days": {
-      "one": "{{count}} gün",
-      "other": "{{count}} gün"
-    },
     "last_24_hours": "Son 24 saat",
     "time_ago": "{{time}} önce"
   },

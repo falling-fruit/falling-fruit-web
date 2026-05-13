@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
+      "days_ago": {
+        "one": "{{count}} dag",
+        "other": "{{count}} dagen"
+      },
       "place": {
         "one": "Plaats",
         "other": "Plaatsen"
@@ -451,10 +455,6 @@
     "type_added": "Type succesvol toegevoegd!"
   },
   "time": {
-    "days": {
-      "one": "{{count}} dag",
-      "other": "{{count}} dagen"
-    },
     "last_24_hours": "Laatste 24 uur",
     "time_ago": "{{time}} geleden"
   },

@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
+      "days_ago": {
+        "one": "{{count}} μέρα",
+        "other": "{{count}} μέρες"
+      },
       "place": {
         "one": "Μέρος",
         "other": "Τοποθεσίες"
@@ -451,10 +455,6 @@
     "type_added": "Ο τύπος προστέθηκε με επιτυχία!"
   },
   "time": {
-    "days": {
-      "one": "{{count}} μέρα",
-      "other": "{{count}} μέρες"
-    },
     "last_24_hours": "Τελευταίες 24 ώρες",
     "time_ago": "{{time}} πριν"
   },

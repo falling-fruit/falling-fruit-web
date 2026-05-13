@@ -279,6 +279,10 @@
     },
     "changes": {
       "change_in_city": "{{type}} в {{city}}",
+      "days_ago": {
+        "one": "{{count}} день",
+        "other": "{{count}} днів"
+      },
       "place": {
         "one": "Місце",
         "other": "Місця"
@@ -451,10 +455,6 @@
     "type_added": "Тип успішно додано!"
   },
   "time": {
-    "days": {
-      "one": "{{count}} день",
-      "other": "{{count}} днів"
-    },
     "last_24_hours": "Останні 24 години",
     "time_ago": "{{time}} тому"
   },
