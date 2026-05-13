@@ -56,19 +56,10 @@ const isReviewDirty = (values, initialValues) => {
   )
 }
 
-const FormRatingWrapper = styled.div`
-  &:not(:last-child) {
-    margin-block-end: 1em;
-  }
-  margin: 1em 0;
+const RatingInputs = styled.div`
+  margin-block: 1em;
   & > *:not(:last-child) {
-    margin-inline-end: 0.5em;
-  }
-  flex-direction: column;
-
-  & > *:not(:last-child) {
-    margin-block: 0 0.5em;
-    margin-inline: 0;
+    margin-block-end: 0.5em;
   }
 `
 
@@ -113,7 +104,7 @@ export const ReviewStep = ({ standalone }) => {
         clearable
       />
 
-      <FormRatingWrapper>
+      <RatingInputs>
         <RatingLabeledRow
           label={
             <label htmlFor="review.quality_rating-group">
@@ -142,7 +133,7 @@ export const ReviewStep = ({ standalone }) => {
             />
           }
         />
-      </FormRatingWrapper>
+      </RatingInputs>
 
       <PhotoUploader name="review.photos" label={t('review.form.photos')} />
     </>
@@ -226,7 +217,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
               {!isLoggedIn && (
                 <Recaptcha centered name="g-recaptcha-response" />
               )}
-              <FormButtons>
+              <FormButtons align={'center'}>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
