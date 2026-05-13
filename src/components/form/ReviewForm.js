@@ -9,6 +9,7 @@ import { formToReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
@@ -20,7 +21,7 @@ import {
   Select,
   Textarea,
 } from './FormikWrappers'
-import { ProgressButtons, StyledForm } from './FormLayout'
+import { StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
 
 const validateReviewForm = ({ review, ...rest }, isLoggedIn) => {
@@ -210,7 +211,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
               {!isLoggedIn && (
                 <Recaptcha centered name="g-recaptcha-response" />
               )}
-              <ProgressButtons>
+              <FormButtons>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
@@ -222,7 +223,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
                     ? t('form.button.submitting')
                     : t('form.button.submit')}
                 </Button>
-              </ProgressButtons>
+              </FormButtons>
             </Form>
           )
         }}

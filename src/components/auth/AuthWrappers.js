@@ -11,19 +11,13 @@ export const FormInputWrapper = styled(FormWrapper)`
 `
 
 export const FormCheckboxWrapper = styled(FormWrapper)`
-  display: flex;
-  flex-direction: column;
-
   & > *:not(:last-child) {
     margin-block-end: 0.5em;
   }
 `
 
 export const FormButtonWrapper = styled(FormWrapper)`
-  display: flex;
-  flex-direction: row;
   margin: 1em 0;
-
   & > *:not(:last-child) {
     margin-inline-end: 0.5em;
   }
