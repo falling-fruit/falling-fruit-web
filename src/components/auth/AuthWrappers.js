@@ -23,15 +23,6 @@ export const FormButtonWrapper = styled(FormWrapper)`
   }
 `
 
-export const FormRatingWrapper = styled(FormButtonWrapper)`
-  flex-direction: column;
-
-  & > *:not(:last-child) {
-    margin-block: 0 0.5em;
-    margin-inline: 0;
-  }
-`
-
 export const ErrorMessage = styled.p`
   color: ${({ theme }) => theme.invalid} !important;
   margin-block-start: 0.25em;
