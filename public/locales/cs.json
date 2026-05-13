@@ -113,7 +113,7 @@
     "search": "Hledat"
   },
   "glossary": {
-    "about": "O aplikaci",
+    "about": "O nás",
     "account": "Účet",
     "activity": "Aktivita",
     "address": "Adresa",
@@ -131,7 +131,7 @@
     "review": {
       "other": "Recenze"
     },
-    "sign_up": "Registrovat se",
+    "sign_up": "Registrace",
     "tree_inventory": {
       "one": "Inventář stromů"
     },
@@ -140,7 +140,7 @@
       "other": "Typy"
     },
     "unverified": "Neověřeno",
-    "yield": "Výnos"
+    "yield": "Množství"
   },
   "info_message": {
     "cannot_delete_location_with_other_reviews": "Toto místo obsahuje recenze od jiných uživatelů. Pro žádost o jeho smazání prosím použijte tlačítko Nahlásit."
@@ -148,7 +148,7 @@
   "layouts": {
     "application": {
       "menu": {
-        "in_the_press": "V tisku",
+        "in_the_press": "Psali o nás",
         "sharing_the_harvest": "Sdílení úrody",
         "the_data": "Data",
         "the_project": "Projekt"
@@ -174,7 +174,7 @@
       "comments": "Komentáře",
       "comments_subtext": "Aktualizace, problémy s přístupem, zdraví rostliny...",
       "description_subtext": "Detaily lokality, problémy s přístupem, zdraví rostliny...",
-      "fruiting_status": "Stav plodnosti",
+      "fruiting_status": "Stav úrody",
       "position": "Poloha",
       "season": "Sezóna",
       "season_start_to_stop_short": "do"
@@ -246,35 +246,35 @@
       "advisors": "Poradní rada",
       "alan_gibson_bio_html": "Alan vždy rád podnikal dobrodružství a objevoval nové věci. Začal sbírat potravu jako způsob, jak seznámit své malé děti s životem venku. Píše blog <a href=\"http://theurbaneforager.blogspot.com\">Urbane Forager</a> a publikoval knihu <a href=\"https://www.amazon.co.uk/Urbane-Forager-Fruit-Nuts-Free/dp/1785073001\">Urbane Forager: Fruit and Nuts For Free</a>. Legitimizoval sběr potravy ve veřejných parcích a založil komunitní sad ve svém rodném městě Southampton ve Velké Británii.",
       "ali_moxley_bio_html": "Ali pracuje se svou komunitou na šíření povědomí o hojném ovoci a divoké potravě, která roste v Bozemanu v Montaně a jeho okolí. Její denní práce zahrnuje spolupráci s podniky v oblasti potravin a zemědělství po celé zemi při identifikaci a žádání o financování. O víkendech je amatérskou novinářkou, která zdůrazňuje příběhy venkovských komunit, farmářů a rančerů. Ali miluje procházky v lese s přáteli, sběr potravy, contra tanec a boj proti korporátní konsolidaci našich potravinových systémů.",
-      "ana_carolina_bio_html": "Ana je postdoktorandskou výzkumnicí na Federální univerzitě v Pará v Brazílii. Je antropoložkou, která se zajímá o pochopení sociálních a kulturních stravovacích návyků. Ana pracovala převážně v brazilském Amazonii. V Acre (západní Amazonie) studovala spotřebu regionálního ovoce. Poté pracovala v regionu Middle Solimões a zkoumala změny stravy ve vzdálených komunitách. Mezi lety 2017 a 2018 Ana žila v malých a středních městech delty Amazonu a zkoumala dopady klimatických změn na potravinovou bezpečnost lidí žijících v neformálních osadách. Nedávno se přestěhovala do jižního Nového Mexika ve Spojených státech, kde pracuje jako konzultantka.",
-      "austin_arrington_bio_html": "Od založení <a href=\"https://plantgroupnyc.com\">PLANT Group</a> se Austin zaměřuje na klimatické technologie, které podporují zdravější ekosystémy a komunity. Jako hrdý otec tříletého syna tráví svůj volný čas zahradničením, hraním hudby a pěstováním hluboké vášně pro místní potraviny a odolné systémy založené na místě.",
+      "ana_carolina_bio_html": "Ana je postdoktorandskou výzkumnicí na Federální univerzitě v Pará v Brazílii. Je antropoložkou, která se zajímá o pochopení sociálních a kulturních stravovacích návyků. Ana pracovala převážně v brazilské Amazonii. V Acre (západní Amazonie) studovala spotřebu regionálního ovoce. Poté pracovala v regionu Middle Solimões a zkoumala změny stravy ve vzdálených komunitách. Mezi lety 2017 a 2018 Ana žila v malých a středních městech delty Amazonu a zkoumala dopady klimatických změn na potravinovou bezpečnost lidí žijících v neformálních osadách. Nedávno se přestěhovala do jižního Nového Mexika ve Spojených státech, kde pracuje jako konzultantka.",
+      "austin_arrington_bio_html": "Od založení <a href=\"https://plantgroupnyc.com\">PLANT Group</a> se Austin zaměřuje na klimatické technologie, které podporují zdravější ekosystémy a komunity. Jako hrdý otec tříletého syna tráví svůj volný čas zahradničením, hraním hudby a pěstováním hluboké vášně pro místní potraviny a odolné systémy vázané na konkrétní místo.",
       "billy_daniels_bio_html": "Billyho láska k městskému sběru potravy začala jednoduchým překvapením: trháním avokáda ze stromu na zahradě přítele v Kalifornii poté, co vyrostl na Středozápadě. Když žil v San Franciscu, vždy hledal veřejně dostupné ovoce rostoucí v oblasti Bay Area. Billy nyní žije ve Wisconsinu, kde ho můžete najít na kole, při zahradničení a při častých návštěvách mnoha farmářských trhů v Madisonu. Je lídrem v oblasti produktového managementu a je nadšený z toho, že může prosazovat poslání Falling Fruit a usnadnit nováčkům objevování sběru potravy.",
       "caleb_phillips_bio_html": "Caleb je bezpeří dvounohý humanoid vášnivě se zajímající o potravinovou spravedlnost a hledání kreativních způsobů, jak využít technologie k řešení sociálních problémů. Když nejezdí na kole a nezírá na stromy, vyvažuje své úsilí mezi svou denní prací jako datový vědec v <a href=\"https://www.nrel.gov/research/caleb-phillips.html\">National Renewable Energy Laboratory</a> v Golden v Coloradu a jako mimořádný profesor informatiky na <a href=\"https://www.colorado.edu/cs/caleb-phillips\">University of Colorado</a>. Kromě všech těch pracovních věcí rád leze po skalách, běhá po stezkách, jezdí na kole a obecně je venku, jak jen to jde. Caleb vytvořil Falling Fruit s Ethanem Weltym v roce 2013 a působil v představenstvu 6 let, než přijal pozici v poradní radě.",
-      "celebration": "Falling Fruit je oslavou přehlížené kulinářské hojnosti našich městských ulic. Kvantifikací tohoto zdroje na interaktivní mapě doufáme, že usnadníme intimní spojení mezi lidmi, jídlem a přírodními organismy rostoucími v našich čtvrtích. Nejen bezplatný oběd! Sběr potravy ve 21. století je příležitostí k městskému průzkumu, k boji proti pohromě poskvrněných chodníků a k opětovnému spojení s botanickým původem potravin.",
+      "celebration": "Falling Fruit je oslavou přehlížené kulinářské hojnosti našich městských ulic. Kvantifikací tohoto zdroje na interaktivní mapě doufáme, že usnadníme bližší spojení mezi lidmi, jídlem a přírodními organismy rostoucími v našich čtvrtích. Nejde jen o bezplatný oběd! Sběr potravy ve 21. století je příležitostí k městskému průzkumu, k boji proti pohromě poskvrněných chodníků a k opětovnému spojení s botanickým původem potravin.",
       "closing_remarks": "Závěrečné poznámky",
       "closing_remarks_para1_html": "Falling Fruit je 501(c)(3) (osvobozená od daně) veřejná charita se sídlem v Boulderu v Coloradu. V důsledku toho jsou dary ve Spojených státech daňově odpočitatelné. Můžete si prohlédnout naše <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">osvědčení o osvobození</a> od IRS a ověřit naše postavení pomocí <a href=\"https://apps.irs.gov/app/eos/\">IRS Publication 78</a> nebo <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Colorado Secretary of State</a>. K dispozici jsou také naše <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">stanovy</a> a <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">zápisy</a> ze zasedání představenstva.",
       "closing_remarks_para2_html": "Sklizeň potravin v městském prostředí přináší určité praktické a morální úvahy. Pro úvod do etiky městského sběru potravy doporučujeme následující <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">shrnutí</a>.",
       "closing_remarks_para3_html": "Informace na Falling Fruit mohou být chybné nebo zastaralé. Například mnoho map sběru potravy migrovaných do Falling Fruit bylo hostováno jako veřejné Google Maps, na kterých byly značky často omylem přesunuty, a městské inventury stromů jsou aktualizovány pouze (pokud vůbec) při návštěvě stromů za účelem údržby. Buďte připraveni na nepřesnosti v terénu a podle svých objevů prosím upravte mapu podle potřeby. V konečném důsledku je vaší odpovědností určit identitu, jedlost a umístění rostliny a odpovědností všech zlepšovat kvalitu mapy.",
-      "contact_us_html": "Falling Fruit je vytvořen sběrači potravy pro sběrače potravy – chceme, aby to byl nejlepší dostupný nástroj pro současného sběrače. Napište nám na <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, rádi bychom od vás slyšeli!",
+      "contact_us_html": "Falling Fruit je vytvořen sběrači potravy pro sběrače potravy – chceme, aby to byl nejlepší dostupný nástroj pro současného sběrače. Napište nám na <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, budeme rádi, když se ozvete!",
       "cristina_rubke_bio_html": "Cristina je právničkou ve <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> v San Franciscu v Kalifornii, kde se zaměřuje na stíhání ochranných známek a poradenství. Je také členkou představenstva <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>, která dohlíží na veřejnou dopravu, provoz a parkování v San Franciscu. Ve svém volném čase Cristina pluje po San Francisco Bay s <a href=\"//www.baads.org/\">Bay Area Association of Disabled Sailors</a> a soutěží v místních a mezinárodních regatách.",
       "david_craft_bio_html": "David je výzkumníkem na Katedře radiační onkologie na <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Harvard Medical School</a> v Bostonu v Massachusetts. Je také zapáleným sběračem potravy a autorem knihy <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and Eating Wild Plants in the City</a> (<a href=\"/docs/David Craft - Urban Foraging.pdf\">bezplatné stažení</a>).",
       "directors": "Představenstvo",
       "donate": "Přispět",
-      "ethan_welty_bio_html": "Pomocí technologií a dat Ethan prosazuje města jako zdroje čerstvého a bezplatného jídla. Vytvořil Falling Fruit s Calebem Phillipsem v roce 2013 za účelem podpory městského sběru potravy po celém světě a spoluzaložil <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> v roce 2014, aby sklízel a distribuoval přebytečné ovoce rostoucí kolem něj v Boulderu v Coloradu. Kromě ovoce žongluje s <a href=\"https://geo.uzh.ch/en/department/Staff/ethanwelty.html\">výzkumem ledovců</a>, <a href=\"https://www.weltyphotography.com\">fotografickou kariérou</a> a chutí na horské a říční aktivity.",
+      "ethan_welty_bio_html": "Pomocí technologií a dat prosazuje Ethan města jako zdroje čerstvého a bezplatného jídla. Falling Fruit vytvořil s Calebem Phillipsem v roce 2013 za účelem podpory městského sběru potravy po celém světě a spoluzaložil <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a> v roce 2014, aby sklízel a distribuoval přebytečné ovoce rostoucí kolem něj v Boulderu v Coloradu. Kromě ovoce žongluje s <a href=\"https://geo.uzh.ch/en/department/Staff/ethanwelty.html\">výzkumem ledovců</a>, <a href=\"https://www.weltyphotography.com\">fotografickou kariérou</a> a chutí k horským a říčním aktivitám.",
       "ff_disclaimer_html": "Falling Fruit není spojeno s Fallen Fruit. Fallen Fruit lze nalézt na <a href=\"http://fallenfruit.org\">fallenfruit.org</a>.",
       "give_us_money": "Jsme nezisková organizace 501(c)(3) a spoléháme na dary k provozu. Pokud jste ochotni a schopni, zvažte prosím finanční příspěvek. Dary ve Spojených státech jsou daňově odpočitatelné.",
       "give_zeffy": "Přispět přes Zeffy",
-      "jeff_wanner_bio_html": "Od doby, kdy jako dítě sbíral ostružiny a borůvky se svou rodinou, a v poslední době si všiml bohatství veřejných ovocných stromů po celém Coloradu, Jeff vyvinul hluboké ocenění pro hojnost ovoce rostoucího v našich městech. Jeho první misí pro Falling Fruit bylo pročesat Boulder a Salt Lake City s papírovými mapami v ruce a zaznamenat plodící stromy. Když nepracuje na zlepšování energetické účinnosti budov, obvykle pomáhá v komunitě nebo se rychle pohybuje po horách pěšky, na lyžích nebo na kole.",
+      "jeff_wanner_bio_html": "Od té chvíle, kdy jako dítě sbíral ostružiny a borůvky se svou rodinou - a navíc si v poslední době všiml bohatství veřejných ovocných stromů po celém Coloradu - si Jeff vyvinul hluboké ocenění pro hojnost ovoce rostoucího v našich městech. Jeho první misí pro Falling Fruit bylo pročesat Boulder a Salt Lake City s papírovými mapami v ruce a zaznamenat plodící stromy. Když nepracuje na zlepšování energetické účinnosti budov, obvykle pomáhá ve své komunitě nebo se rychle pohybuje po horách pěšky, na lyžích nebo na kole.",
       "join_us_html": "Připojte se k nám při oslavě hyperlokalního jídla! <a href=\"/\">Mapa</a> je otevřená pro úpravy kýmkoli, databázi lze <a href=\"/about/data\">stáhnout</a> jediným kliknutím a <a href=\"https://github.com/falling-fruit/\">kód</a> je open-source. Stejně tak jste vyzýváni ke sdílení hojnosti se svými bližními. Naše <a href=\"/about/sharing\">stránka sdílení</a> uvádí stovky místních organizací - vysazujících veřejné sady a potravinové lesy, sbírajících jinak promarněné ovoce a zeleninu z městských stromů a farmářských polí a sdílejících se sousedy a potřebnými.",
       "jp_goguen_bio_html": "JP je specialista na mediální technologie v <a href=\"https://library.illinois.edu\">University of Illinois Library</a> se zkušenostmi v umění a informační vědě. Sídlí v Urbaně v Illinois, mapuje a fotografuje místní síť divoké potravy a organizuje komunitní výpravy a sdílení dovedností. V roce 2025 jeho výzkum a sbírání příběhů vedlo ke spuštění <a href=\"https://instagram.com/minipopuppawpawmuseum\">Mini Popup Pawpaw Museum</a>. Když není v knihovně, obvykle hraje na kytaru na <a href=\"https://rosebowltavern.com\">Urbana Hootenanny</a> nebo hraje disc golf se svým psem Dalím.",
-      "meagan_shelley_bio_html": "Meagan je majitelka firmy a doktorandka žijící v centrální Virginii. Je certifikovaná <a href=\"https://vmga.net\">Master Gardener</a> a žije na 10akrovém statku, kde pěstuje ovoce, ořechy a zeleninu, stejně jako slepice, křepelky a králíky. Jejím cílem je praktikovat zemědělství s uzavřeným cyklem, což je neustálá práce v procesu. Mezitím pracuje na sběru, pěstování a výměně přibližně 20-30% své roční zásoby potravin.",
-      "more_about_html": "Naše jedlá mapa není první svého druhu, ale aspiruje být nejkomplexnější na světě. Zatímco naši uživatelé přispívají vlastními lokalitami, pročesáváme internet pro již existující znalosti a snažíme se sjednotit úsilí sběračů, lesníků a freeganů všude. <a href=\"/about/data\">Importované datové sady</a> sahají od malých sousedských map sběru potravy až po rozsáhlé profesionálně sestavené inventáře stromů. To zatím představuje tisíce různých druhů jedlých rostlin (většinou, ale ne všechny, rostlinné druhy) rozložených na milionech lokalit. Kromě kultivovaných a běžných až po exotické chutě cizích rostlin a dávno zapomenutých původních rostlin je sběr potravy ve vašem sousedství cestou časem a napříč kulturami.",
-      "staff": "Personál",
+      "meagan_shelley_bio_html": "Meagan je majitelka firmy a doktorandka žijící v centrální Virginii. Je certifikovaná <a href=\"https://vmga.net\">Master Gardener</a> a žije na 10akrovém statku, kde pěstuje ovoce, ořechy a zeleninu, a stejně tak chová slepice, křepelky a králíky. Jejím cílem je praktikovat zemědělství s uzavřeným cyklem, což je věčně rozdělaná práce. Mezitím pracuje na tom, aby 20-30% její roční zásoby potravin pocházelo ze sběru, pěstování a výměny.",
+      "more_about_html": "Naše jedlá mapa není první svého druhu, ale aspiruje být nejkomplexnější na světě. Zatímco naši uživatelé přispívají vlastními lokalitami, pročesáváme internet pro již existující znalosti a snažíme se sjednotit úsilí sběračů a freeganů všude. <a href=\"/about/data\">Importované datové sady</a> sahají od malých sousedských map sběru potravy až po rozsáhlé profesionálně sestavené inventáře stromů. To zatím představuje tisíce různých typů jedlých rostlin (většiny, nikolik však všech rostlinných druhů) rozložených na milionech lokalit. Od těch kultivovaných a běžných až po exotické chutě cizích rostlin a dávno zapomenutých původních rostlin je sběr potravy ve vašem sousedství cestou napříč časem a kulturami.",
+      "staff": "Pracovníci",
       "translate": "Přeložit",
-      "translate_for_us_html": "Máte zájem dobrovolně překládat? Napište nám e-mail a pozveme vás k nám na <a href=\"https://phrase.com\">Phrase</a>, kde jsou spravovány naše překlady.",
+      "translate_for_us_html": "Máte zájem zapojit se do překladu jakožto dobrovolník? Napište nám e-mail a přizveme vás k nám na <a href=\"https://phrase.com\">Phrase</a>, kde jsou spravovány naše překlady.",
       "translators": "Překladatelé",
-      "tristram_stuart_bio_html": "Jako teenager Tristram choval prasata na přebytečné potraviny, které sbíral ze školních kuchyní, od místního pekaře a vesničního zelinářství. Všiml si, že mnoho z těchto potravin bylo stále vhodných k lidské spotřebě, což ho vedlo k poznání, že dobré, čerstvé potraviny jsou plýtvány v kolosálním měřítku. Tristram od té doby neúnavně pracuje na tom, aby upozornil na tento problém veřejnost, média a tvůrce politik. Založil organizaci kampaně proti plýtvání potravinami <a href=\"//feedbackglobal.org\">Feedback Global</a> a napsal <a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a>, aby demonstroval rozsah problému v globálním měřítku. V roce 2011 byl Tristram oceněn <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">Cenou Sophie</a> za svůj boj proti plýtvání potravinami.",
-      "ward_bullard_bio_html": "Ward je partnerem ve společnosti 31st Ventures, strategické poradenské firmě. S Falling Fruit se poprvé seznámil prostřednictvím své práce v <a href=\"https://designforamerica.org\">Design for America</a>, kde vedl spolupráci mezi oběma organizacemi. Jako milovník všech druhů ovoce (zejména sousedských kaki) se Ward účastnil několika designových a technologických iniciativ, které řeší problém pouští čerstvého ovoce v celých USA, a je nadšený, že může přispět k práci Falling Fruit.",
+      "tristram_stuart_bio_html": "Jako teenager Tristram choval prasata. Ta krmil přebytečnými potravinami, které sbíral ze školních kuchyní, od místního pekaře a zelináře na vesnici. Všiml si, že mnoho z těchto potravin bylo stále vhodných k lidské spotřebě, což ho vedlo k poznání, že dobré, čerstvé potraviny jsou plýtvány v kolosálním měřítku. Tristram od té doby neúnavně pracuje na tom, aby na tento problém upozornil veřejnost, média a tvůrce politik. Založil organizaci <a href=\"//feedbackglobal.org\">Feedback Global</a> vedoucí kampaň proti plýtvání potravinami a napsal <a href=\"//tristramstuart.co.uk/\">Waste: Uncovering the Global Food Scandal</a>, aby demonstroval rozsah problému v globálním měřítku. V roce 2011 byl Tristram oceněn <a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">Cenou Sophie</a> za svůj boj proti plýtvání potravinami.",
+      "ward_bullard_bio_html": "Ward je partnerem ve společnosti 31st Ventures, strategické poradenské firmě. S Falling Fruit se poprvé seznámil prostřednictvím své práce v <a href=\"https://designforamerica.org\">Design for America</a>, kde vedl spolupráci mezi oběma organizacemi. Jako milovník všech druhů ovoce (zejména kaki rostoucích v jeho sousedství) se Ward účastnil několika designových a technologických iniciativ, které řeší problém pouští čerstvého ovoce v celých USA, a je nadšený, že může přispět k práci Falling Fruit.",
       "write": "Napsat"
     },
     "changes": {
@@ -297,7 +297,7 @@
     },
     "data": {
       "caveat_emptor_html": "Nepřebíráme žádnou odpovědnost za přesnost dat - jsou poskytována tak, jak jsou, <i>caveat emptor</i>. Pokud s daty uděláte něco zajímavého, prosím <a href=\"mailto:feedback@fallingfruit.org\">dejte nám vědět</a>!",
-      "intro": "Falling Fruit je postaven na veřejných datech a štědrosti našich uživatelů. Chceme, aby městské sběračství dosáhlo co nejvíce lidí, a věříme, že každý by měl mít stejný přístup k plodům naší společné práce. V duchu otevřenosti, hle! Celá databáze:",
+      "intro": "Falling Fruit je postaven na veřejných datech a štědrosti našich uživatelů. Chceme, aby městský sběr dosáhl co nejvíce lidí, a věříme, že každý by měl mít stejný přístup k plodům naší společné práce. V duchu otevřenosti, hle! Celá databáze:",
       "license_html": "Pokud máte zájem použít data ve svém projektu, zejména v komerčním projektu, doporučujeme nás kontaktovat (<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>). Pokud není uvedeno jinak, data jsou licencována jako <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> (Creative Commons - Uveďte autora, Nekomercně, Zachovejte licenci). To znamená, že můžete data volně používat a šířit, pokud zachováte původní uvedení autora/zdroje a nepoužijete je (bez povolení) pro komerční aplikace. Zdrojový kód Falling Fruit je také otevřený a dostupný na <a href=\"https://github.com/falling-fruit/\">GitHubu</a>."
     },
     "datasets": {
@@ -306,11 +306,11 @@
       "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Importované datové sady",
       "imported_on": "Importováno dne {{date}}",
-      "intro_html": "Falling Fruit usiluje o to, být nejkomplexnější a nejotevřenější geografickou datovou sadou městských jedlých rostlin. Zatímco naši uživatelé prozkoumávají, upravují a přidávají umístění pomocí naší <a href=\"/\">mapy</a>, prohledáváme známý vesmír pro již existující datové sady a importujeme je přímo do databáze, čímž spojujeme úsilí sběračů, lesníků a freeganů všude. Pokud víte o datové sadě, kterou jsme přehlédli, prosím <a href=\"mailto:info@fallingfruit.org\">dejte nám vědět</a>! Můžete nám také pomoci s procesem importu formátováním dat pomocí <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">šablony pro import</a>. Upozorňujeme, že protože importy musí být prováděny ručně, všechny změny původních dat provedené po importu se na Falling Fruit neprojeví.",
+      "intro_html": "Falling Fruit usiluje o to, být nejkomplexnější a nejotevřenější geografickou datovou sadou městských jedlých rostlin. Zatímco naši uživatelé prozkoumávají, upravují a přidávají umístění pomocí naší <a href=\"/\">mapy</a>, prohledáváme známý vesmír pro již existující datové sady a importujeme je přímo do databáze, čímž spojujeme úsilí sběračů a freeganů všude. Pokud víte o datové sadě, kterou jsme přehlédli, prosím <a href=\"mailto:info@fallingfruit.org\">dejte nám vědět</a>! Můžete nám také pomoci s procesem importu, a to formátováním dat pomocí <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">šablony pro import</a>. Upozorňujeme, že protože importy musí být prováděny ručně, všechny změny původních dat provedené po importu se na Falling Fruit neprojeví.",
       "link": "Odkaz",
       "table_info": "Každá datová sada je uvedena podle názvu, počtu umístění a data importu. Rozbalením každého řádku se zobrazí další podrobnosti o datech, procesu importu a licenci upravující způsob použití dat.",
       "type": "Typ",
-      "types_of_data": "Datové sady importované do Falling Fruit spadají do dvou hlavních kategorií. \"Komunitní mapy\" jsou vytvářeny sběrači a freegany při procházení svých komunit za účelem hledání věcí k jídlu. Jsme zavázáni pracovitým občanským kartografům, kteří tato data sestavili. \"Inventáře stromů\" jsou sestavovány městy, univerzitami a dalšími institucemi, které si přejí lépe dokumentovat a pečovat o své stromy. Těžíme z těchto rozsáhlých datových sad druhy produkující potraviny a přidáváme je na mapu. Chcete-li nám pomoci zmapovat ovocné stromy ve vašem okolí, kontaktujte svou školu nebo město a vyzvěte je, aby s námi sdílely svůj inventář stromů."
+      "types_of_data": "Datové sady importované do Falling Fruit spadají do dvou hlavních kategorií. \"Komunitní mapy\" jsou vytvářeny sběrači a freegany při procházení svých komunit za účelem hledání věcí k jídlu. Jsme zavázáni pracovitým občanským kartografům, kteří tato data sestavili. \"Inventáře stromů\" jsou sestavovány městy, univerzitami a dalšími institucemi, které si přejí lépe dokumentovat a pečovat o své stromy. Těžíme z těchto rozsáhlých datových sad druhy produkující potraviny a přidáváme je do mapy. Chcete-li nám pomoci zmapovat ovocné stromy ve vašem okolí, kontaktujte svou školu nebo město a vyzvěte je, aby s námi sdílely svůj inventář stromů."
     },
     "network_error": {
       "header_message": "Chyba sítě",
@@ -336,18 +336,22 @@
         "distance": {
           "foot": {
             "one": "{{count}} stopa",
+            "two_to_four": "stopy",
             "other": "{{count}} stop"
           },
           "kilometer": {
             "one": "{{count}} kilometr",
+            "two_to_four": "kilometry",
             "other": "{{count}} kilometrů"
           },
           "meter": {
             "one": "{{count}} metr",
+            "two_to_four": "metry",
             "other": "{{count}} metrů"
           },
           "mile": {
             "one": "{{count}} míle",
+            "two_to_four": "míle",
             "other": "{{count}} mil"
           }
         },
@@ -384,10 +388,10 @@
       "heading": {
         "city": "Město",
         "country": "Země",
-        "social": "Sociální",
+        "social": "Sociální sítě",
         "state": "Stát"
       },
-      "intro_html": "Níže jsou uvedeny organizace, které pěstují potraviny na veřejných prostranstvích (potravinové lesy, veřejné sady), sbírají potraviny (městské sběračství, paběrkování na farmách) nebo distribuují potraviny (výměny, dary). Organizace jsou seřazeny podle země, státu (je-li to relevantní) a města. Ty s přeškrtnutými názvy jsou považovány za neaktivní. Pokud víte o dalších, které by měly být na tomto seznamu, <a href=\"mailto:info@fallingfruit.org\">kontaktujte nás</a>!"
+      "intro_html": "Níže jsou uvedeny organizace, které pěstují potraviny na veřejných prostranstvích (potravinové lesy, veřejné sady), sbírají potraviny (městský sběr, paběrkování na farmách) nebo distribuují potraviny (výměny, dary). Organizace jsou seřazeny podle země, státu (je-li to relevantní) a města. Ty s přeškrtnutými názvy jsou považovány za neaktivní. Pokud víte o dalších, které by měly být na tomto seznamu, <a href=\"mailto:info@fallingfruit.org\">kontaktujte nás</a>!"
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "Pokud problém přetrvává, dejte nám vědět na <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
@@ -452,8 +456,8 @@
   },
   "time": {
     "days": {
-      "one": "{{count}} den",
-      "other": "{{count}} dní"
+      "one": "{{count}} dnem",
+      "other": "{{count}} dny"
     },
     "last_24_hours": "Posledních 24 hodin",
     "time_ago": "před {{time}}"
