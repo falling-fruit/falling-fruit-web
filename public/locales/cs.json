@@ -336,22 +336,18 @@
         "distance": {
           "foot": {
             "one": "{{count}} stopa",
-            "two_to_four": "stopy",
             "other": "{{count}} stop"
           },
           "kilometer": {
             "one": "{{count}} kilometr",
-            "two_to_four": "kilometry",
             "other": "{{count}} kilometrů"
           },
           "meter": {
             "one": "{{count}} metr",
-            "two_to_four": "metry",
             "other": "{{count}} metrů"
           },
           "mile": {
             "one": "{{count}} míle",
-            "two_to_four": "míle",
             "other": "{{count}} mil"
           }
         },
