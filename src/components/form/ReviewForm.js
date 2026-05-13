@@ -7,7 +7,6 @@ import { INITIAL_REVIEW_VALUES } from '../../constants/form'
 import { addNewReview, editExistingReview } from '../../redux/locationSlice'
 import { formToReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
@@ -56,6 +55,22 @@ const isReviewDirty = (values, initialValues) => {
       JSON.stringify(initialValues.review?.[field]),
   )
 }
+
+const FormRatingWrapper = styled.div`
+  &:not(:last-child) {
+    margin-block-end: 1em;
+  }
+  margin: 1em 0;
+  & > *:not(:last-child) {
+    margin-inline-end: 0.5em;
+  }
+  flex-direction: column;
+
+  & > *:not(:last-child) {
+    margin-block: 0 0.5em;
+    margin-inline: 0;
+  }
+`
 
 export const ReviewStep = ({ standalone }) => {
   const { t } = useTranslation()
