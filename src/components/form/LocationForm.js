@@ -78,13 +78,12 @@ const PositionFieldLink = ({ lat, lng, editingId }) => {
       }}
       to={pathWithCurrentView(`/locations/${editingId}/edit/position`)}
     >
-      <PositionFieldReadOnly lat={lat} lng={lng} editingId={editingId} />
+      <PositionField editable lat={lat} lng={lng} editingId={editingId} />
     </StyledPositionFieldLink>
   )
 }
 
-const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
-  const isDesktop = useIsDesktop()
+const PositionField = ({ lat, lng, editingId, editable }) => {
   const { locations } = useSelector((state) => state.map)
   const { position } = useSelector((state) => state.location)
   const { t } = useTranslation()
@@ -126,7 +125,7 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
   return (
     <>
       <IconBesideText tabIndex={0}>
-        {isDesktop ? <Map size={20} /> : <PositionEditIcon />}
+        {editable ? <PositionEditIcon /> : <Map size={20} />}
         <p className="small" dir="ltr">
           {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
         </p>
@@ -136,6 +135,10 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
     </>
   )
 }
+
+const PositionFieldReadOnly = (props) => (
+  <PositionField editable={false} {...props} />
+)
 
 const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   const { i18n, t } = useTranslation()
