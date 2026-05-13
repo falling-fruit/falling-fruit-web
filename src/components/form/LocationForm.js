@@ -46,7 +46,7 @@ const CheckboxLabel = styled.label`
   align-items: center;
   font-size: 0.875rem;
   color: ${({ theme }) => theme.tertiaryText};
-  margin-block-start: 15px;
+  margin-block-start: 1em;
 `
 
 const ErrorText = styled.p`
@@ -54,19 +54,12 @@ const ErrorText = styled.p`
   font-size: 0.85rem;
 `
 
+const InlineDivider = styled.span`
+  margin-inline: 0.75em;
+`
 const InlineSelects = styled.div`
   display: flex;
   align-items: center;
-
-  > span {
-    // Text
-    margin: 0 10px;
-  }
-
-  > div {
-    // Select
-    flex: 1;
-  }
 `
 
 const PositionFieldLink = ({ lat, lng, editingId }) => {
@@ -204,7 +197,9 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
           fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
           clearable
         />
-        <span>{t('locations.form.season_start_to_stop_short')}</span>
+        <InlineDivider>
+          {t('locations.form.season_start_to_stop_short')}
+        </InlineDivider>
         <Select
           name="season_stop"
           options={monthOptions}
