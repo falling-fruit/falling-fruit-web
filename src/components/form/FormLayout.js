@@ -38,14 +38,6 @@ const StyledFormDiv = styled.div`
     !isDesktop &&
     `
     padding-inline: 1em;
-
-    textarea {
-      height: 100px;
-
-      @media (max-device-height: 600px) {
-        height: 50px;
-      }
-    }
     margin-block-start: calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0));
   `}
 `
