@@ -76,6 +76,7 @@
     "@babel/plugin-transform-react-jsx": "^7.14.9",
     "@capacitor/assets": "^3.0.5",
     "@hack4impact-uiuc/eslint-plugin": "^2.0.10",
+    "@types/dotenv": "^8.2.3",
     "@types/node": "*",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-select": "^4.0.18",
