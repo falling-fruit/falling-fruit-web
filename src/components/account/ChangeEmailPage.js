@@ -8,14 +8,11 @@ import * as Yup from 'yup'
 import { editProfile } from '../../redux/authSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
-import {
-  ErrorMessage,
-  FormButtonWrapper,
-  FormInputWrapper,
-} from '../auth/AuthWrappers'
+import { ErrorMessage } from '../auth/AuthWrappers'
 import { Input, PasswordInput } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
@@ -99,7 +96,7 @@ const ChangeEmailPage = () => {
           >
             {({ errors, isValid, isSubmitting }) => (
               <Form>
-                <FormInputWrapper>
+                <div>
                   <Input
                     name="email"
                     type="email"
@@ -114,12 +111,12 @@ const ChangeEmailPage = () => {
                     autoComplete="current-password"
                     required
                   />
-                </FormInputWrapper>
-                <FormButtonWrapper>
+                </div>
+                <FormButtons>
                   <Button type="submit" disabled={!isValid || isSubmitting}>
                     {t('form.button.submit')}
                   </Button>
-                </FormButtonWrapper>
+                </FormButtons>
               </Form>
             )}
           </Formik>

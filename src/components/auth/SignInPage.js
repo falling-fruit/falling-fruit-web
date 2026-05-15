@@ -2,6 +2,7 @@ import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/authSlice'
@@ -9,15 +10,15 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import { Checkbox, Input, PasswordInput } from '../form/FormikWrappers'
 import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
-import {
-  FormButtonWrapper,
-  FormCheckboxWrapper,
-  FormInputWrapper,
-} from './AuthWrappers'
 import { withAuthRedirect } from './withAuthRedirect'
+
+const RememberMeRow = styled.div`
+  margin-block-start: 1em;
+`
 
 const SignInPage = () => {
   const isDesktop = useIsDesktop()
@@ -48,7 +49,7 @@ const SignInPage = () => {
       >
         {({ dirty, isValid }) => (
           <Form>
-            <FormInputWrapper>
+            <div>
               <Input
                 name="email"
                 type="text"
@@ -56,22 +57,22 @@ const SignInPage = () => {
                 autoComplete="off"
               />
               <PasswordInput name="password" label={t('glossary.password')} />
-            </FormInputWrapper>
+            </div>
 
-            <FormCheckboxWrapper>
+            <RememberMeRow>
               <LabeledRow
                 label={
                   <label htmlFor="remember_me">{t('users.remember_me')}</label>
                 }
                 left={<Checkbox id="remember_me" />}
               />
-            </FormCheckboxWrapper>
+            </RememberMeRow>
 
-            <FormButtonWrapper>
+            <FormButtons>
               <Button disabled={!dirty || !isValid || isLoading} type="submit">
                 {t('users.sign_in')}
               </Button>
-            </FormButtonWrapper>
+            </FormButtons>
           </Form>
         )}
       </Formik>

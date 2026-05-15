@@ -8,13 +8,10 @@ import { resetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PasswordInput } from '../form/FormikWrappers'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
-import {
-  ErrorMessage,
-  FormButtonWrapper,
-  FormInputWrapper,
-} from './AuthWrappers'
+import { ErrorMessage } from './AuthWrappers'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const getResetToken = () =>
@@ -69,7 +66,7 @@ const PasswordSetPage = () => {
       >
         {({ errors, dirty, isValid, isSubmitting, values }) => (
           <Form>
-            <FormInputWrapper>
+            <div>
               <PasswordInput name="password" label={t('users.new_password')} />
               {errors.password && (
                 <ErrorMessage>
@@ -90,16 +87,16 @@ const PasswordSetPage = () => {
                   )}
                 </ErrorMessage>
               )}
-            </FormInputWrapper>
+            </div>
 
-            <FormButtonWrapper>
+            <FormButtons>
               <Button
                 disabled={!dirty || !isValid || isSubmitting}
                 type="submit"
               >
                 {t('users.change_password')}
               </Button>
-            </FormButtonWrapper>
+            </FormButtons>
           </Form>
         )}
       </Formik>

@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 
 import { Input, Recaptcha } from '../form/FormikWrappers'
 import Button from '../ui/Button'
-import { FormButtonWrapper, FormInputWrapper } from './AuthWrappers'
+import FormButtons from '../ui/FormButtons'
 
 export const EmailForm = ({ onSubmit, recaptchaRef }) => {
   const { t } = useTranslation()
@@ -21,7 +21,7 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
     >
       {({ dirty, isValid, isSubmitting }) => (
         <Form>
-          <FormInputWrapper>
+          <div>
             <Input
               type="text"
               name="email"
@@ -29,7 +29,7 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
               autoComplete="off"
               required
             />
-          </FormInputWrapper>
+          </div>
 
           <Recaptcha
             name="g-recaptcha-response"
@@ -39,11 +39,11 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
             }}
           />
 
-          <FormButtonWrapper>
+          <FormButtons>
             <Button disabled={!dirty || !isValid || isSubmitting} type="submit">
               {t('users.send')}
             </Button>
-          </FormButtonWrapper>
+          </FormButtons>
         </Form>
       )}
     </Formik>
