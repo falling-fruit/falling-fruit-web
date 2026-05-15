@@ -7,7 +7,7 @@ import { checkAuth } from '../../redux/authSlice'
 import { pathToSignInPage } from '../../utils/appUrl'
 import isNetworkError from '../../utils/isNetworkError'
 import { useAppHistory } from '../../utils/useAppHistory'
-import useShareUrl from '../share/useShareUrl'
+import { useShareUrl } from '../share/useStatefulUrl'
 
 const AuthInitializer = () => {
   const dispatch = useDispatch()

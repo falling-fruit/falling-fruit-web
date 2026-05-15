@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { fetchAndLocalizeTypes } from '../../redux/typeSlice'
 import isNetworkError from '../../utils/isNetworkError'
 import { useAppHistory } from '../../utils/useAppHistory'
-import useShareUrl from '../share/useShareUrl'
+import { useShareUrl } from '../share/useStatefulUrl'
 
 const ConnectTypes = () => {
   const { i18n, t } = useTranslation()
