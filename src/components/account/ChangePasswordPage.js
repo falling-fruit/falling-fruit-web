@@ -8,14 +8,11 @@ import * as Yup from 'yup'
 import { editProfile } from '../../redux/authSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
-import {
-  ErrorMessage,
-  FormButtonWrapper,
-  FormInputWrapper,
-} from '../auth/AuthWrappers'
+import { ErrorMessage } from '../auth/AuthWrappers'
 import { PasswordInput } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 
@@ -78,7 +75,7 @@ const ChangePasswordPage = () => {
           >
             {({ errors, dirty, isValid, isSubmitting }) => (
               <Form>
-                <FormInputWrapper>
+                <div>
                   <PasswordInput
                     invalidWhenUntouched
                     name="password"
@@ -116,15 +113,15 @@ const ChangePasswordPage = () => {
                       )}
                     </ErrorMessage>
                   )}
-                </FormInputWrapper>
-                <FormButtonWrapper>
+                </div>
+                <FormButtons>
                   <Button
                     type="submit"
                     disabled={!dirty || !isValid || isSubmitting}
                   >
                     {t('form.button.submit')}
                   </Button>
-                </FormButtonWrapper>
+                </FormButtons>
               </Form>
             )}
           </Formik>
