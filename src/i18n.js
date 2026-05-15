@@ -7,6 +7,7 @@ import { initReactI18next, useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
+import { useRestartUrl } from './components/share/useStatefulUrl'
 import Select from './components/ui/SingleSelect'
 import persistentStore from './utils/persistentStore'
 
@@ -109,6 +110,7 @@ const LanguageSelect = () => {
   const { googleMap } = useSelector((state) => state.map)
   const [hasToasted, setHasToasted] = useState(false)
   const [pendingLanguage, setPendingLanguage] = useState(null)
+  const restartUrl = useRestartUrl()
   return (
     <Select
       options={LANGUAGE_OPTIONS}
@@ -121,7 +123,7 @@ const LanguageSelect = () => {
           setDocumentDir(option.value)
           if (!hasToasted && googleMap) {
             if (Capacitor.isNativePlatform()) {
-              window.location.reload()
+              window.location.href = restartUrl
             } else {
               toast.info(
                 t('error_message.language_changed_refresh_to_reload_map'),
