@@ -77,7 +77,7 @@ yarn
 
 # Mobile apps
 
-We use [Capacitor](https://capacitorjs.com) to package the web app as Android and iOS apps. Make sure you can build the web app first with `yarn build` before proceeding. Although most of the mobile app can be tested by opening the web app in a narrow browser window, this is inadequate for testing device-specific functionality like permissions, curved layouts, and onboard functions (camera, compass, and GPS).
+We use [Capacitor](https://capacitorjs.com) to package the web app as Android and iOS apps. Although most of the mobile app can be tested by opening the web app in a narrow browser window, this is inadequate for testing device-specific functionality like permissions, curved layouts, and onboard functions (camera, compass, and GPS).
 
 ## Bump app versions
 
@@ -104,20 +104,15 @@ First install the [requirements](https://capacitorjs.com/docs/v7/getting-started
 Sync the app with any changes to [`package.json`](../package.json) and `build` output:
 
 ```sh
+yarn build:android
 npx cap sync android
 ```
 
-Run the app on an emulator or device:
+Run the app on an emulator or device (see below) and debug with Chrome at [chrome://inspect/#devices](chrome://inspect/#devices).
 
 ```bash
-npx cap run android  # prompts to select device
-# npx cap run android --list
-# npx cap run android --device
-# npx cap run android --emulator
-# npx cap run android --target=<device>
+npx cap run android
 ```
-
-and debug with Chrome at [chrome://inspect/#devices](chrome://inspect/#devices).
 
 Alternatively, open as a project in Android Studio:
 
@@ -136,7 +131,7 @@ Then plug the device into your computer, start the `adb` (Android Debug Bridge) 
 
 ```sh
 sudo adb start-server
-npx cap run android
+adb devices
 ```
 
 ### Release
@@ -178,6 +173,7 @@ xcodebuild -runFirstLaunch
 Sync the app with any changes to [`package.json`](../package.json) and `build` output:
 
 ```sh
+yarn build:ios
 npx cap sync ios
 ```
 
