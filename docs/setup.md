@@ -162,7 +162,7 @@ First install the [requirements](https://capacitorjs.com/docs/v7/getting-started
 
 - [MacOS](https://www.apple.com/os/macos/) 14.5+ ([download](https://support.apple.com/en-us/102662))
 - [Xcode](https://developer.apple.com/xcode/) 16.0+ ([download](https://xcodereleases.com))
-- [Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
+- [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) with ruby 3.1.3
 
 And prepare Xcode for first use:
 
