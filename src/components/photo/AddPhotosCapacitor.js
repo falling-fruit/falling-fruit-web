@@ -64,7 +64,7 @@ export const AddPhotosCapacitor = ({ onAddPhotos }) => {
       })
 
       pendingPhotoId.current--
-      const fileName = `photo_${new Date().toISOString()}.jpg`
+      const fileName = image.path.split('/').pop()
 
       const newPhoto = {
         id: pendingPhotoId.current,
