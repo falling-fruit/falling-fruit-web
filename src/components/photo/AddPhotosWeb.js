@@ -4,6 +4,8 @@ import { useRef } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components/macro'
 
+import { JPEG_QUALITY, PHOTO_MAX_DIMENSION } from '../../constants/photo'
+
 const StyledDropzone = styled.div`
   border: 2px dashed ${({ theme }) => theme.orange};
   border-radius: 0.375em;
@@ -24,7 +26,7 @@ const PlusIconStyled = styled(PlusCircle)`
   height: 100%;
 `
 
-const compressImage = (file, maxWidth = 1200, quality = 0.8) =>
+const compressImage = (file) =>
   new Promise((resolve) => {
     const reader = new FileReader()
     reader.onload = (e) => {
@@ -34,9 +36,13 @@ const compressImage = (file, maxWidth = 1200, quality = 0.8) =>
         let width = img.width
         let height = img.height
 
-        if (width > maxWidth) {
-          height = (height * maxWidth) / width
-          width = maxWidth
+        if (width > PHOTO_MAX_DIMENSION) {
+          height = (height * PHOTO_MAX_DIMENSION) / width
+          width = PHOTO_MAX_DIMENSION
+        }
+        if (height > PHOTO_MAX_DIMENSION) {
+          width = (width * PHOTO_MAX_DIMENSION) / height
+          height = PHOTO_MAX_DIMENSION
         }
 
         canvas.width = width
@@ -54,7 +60,7 @@ const compressImage = (file, maxWidth = 1200, quality = 0.8) =>
             resolve(compressedFile)
           },
           'image/jpeg',
-          quality,
+          JPEG_QUALITY,
         )
       }
       img.src = e.target.result

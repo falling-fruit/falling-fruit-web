@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
+import { JPEG_QUALITY, PHOTO_MAX_DIMENSION } from '../../constants/photo'
+
 const ButtonContainer = styled.div`
   display: flex;
   gap: 0.5em;
@@ -55,12 +57,13 @@ export const AddPhotosCapacitor = ({ onAddPhotos }) => {
   const handlePhoto = async (source) => {
     try {
       const image = await CapacitorCamera.getPhoto({
-        quality: 80,
+        quality: JPEG_QUALITY * 100,
         allowEditing: false,
         resultType: CameraResultType.Uri,
         source: source,
         saveToGallery: true,
-        width: 1200,
+        width: PHOTO_MAX_DIMENSION,
+        height: PHOTO_MAX_DIMENSION,
       })
 
       pendingPhotoId.current--
