@@ -41,10 +41,13 @@
   - `REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID`: Tracking ID for Google Analytics. Optional.
 
 - Additional (top secret) environment variables in `.env` are needed to sign and release the mobile apps.
+
   - `ANDROID_KEYSTORE_PATH`
   - `ANDROID_KEYSTORE_PASSWORD`
   - `ANDROID_KEYSTORE_ALIAS`
   - `ANDROID_KEYSTORE_ALIAS_PASSWORD`
+
+- Additional `.env.android` and `.env.ios` files are used to set platform-specific environment variables that override those in `.env` when building for that platform.
 
 # Web app
 
