@@ -286,6 +286,9 @@ const Project = () => {
         {' · '}
         <b dir="ltr">Timna Raz</b> – <span dir="rtl">עִברִית</span>
         {' · '}
+        <b dir="ltr">Tong Kitchen-Huan</b> (<b dir="ltr">还彤</b>) –{' '}
+        <span dir="ltr">简体中文</span>, <span dir="ltr">繁体中文</span>
+        {' · '}
         <b dir="ltr">Tống Thái Vương</b> – <span dir="ltr">Tiếng Việt</span>
       </p>
 
