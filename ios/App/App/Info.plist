@@ -46,14 +46,14 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to camera to take photos of fruit locations.</string>
+	<string>This app requires camera access to take photos.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location to show nearby fruit locations.</string>
+	<string>This app requires location access to show nearby locations.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app needs access to location to show nearby fruit locations.</string>
+	<string>This app requires location access to show nearby locations.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to photo library to save and select photos.</string>
+	<string>This app requires photo library access to select photos.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app needs access to photo library to save photos.</string>
+	<string>This app requires photo library access to save photos.</string>
 </dict>
 </plist>
