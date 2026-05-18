@@ -10,11 +10,11 @@ import { editProfile, logout } from '../../redux/authSlice'
 import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { FormButtonWrapper, FormInputWrapper } from '../auth/AuthWrappers'
 import { Input, Textarea } from '../form/FormikWrappers'
 import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
 import Checkbox from '../ui/Checkbox'
+import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -161,12 +161,12 @@ const AccountPage = () => {
             >
               {({ dirty, isValid, isSubmitting }) => (
                 <Form>
-                  <FormInputWrapper>
+                  <div>
                     <Input type="text" name="name" label={t('glossary.name')} />
                     <Textarea name="bio" label={t('users.bio')} />
-                  </FormInputWrapper>
+                  </div>
 
-                  <FormButtonWrapper>
+                  <FormButtons>
                     <Button secondary type="reset">
                       {t('form.button.reset')}
                     </Button>
@@ -178,7 +178,7 @@ const AccountPage = () => {
                         ? t('form.button.submitting')
                         : t('users.save_changes')}
                     </Button>
-                  </FormButtonWrapper>
+                  </FormButtons>
                 </Form>
               )}
             </Formik>

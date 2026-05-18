@@ -7,7 +7,7 @@ import HomePage from './HomePage'
 import PasswordResetPage from './PasswordResetPage'
 import PasswordSetPage from './PasswordSetPage'
 import SignInPage from './SignInPage'
-import SignupPage from './SignupPage'
+import SignUpPage from './SignUpPage'
 
 const pages = [
   {
@@ -20,7 +20,7 @@ const pages = [
   },
   {
     path: '/auth/sign_up',
-    component: SignupPage,
+    component: SignUpPage,
   },
   {
     path: '/auth/password/new',

@@ -14,19 +14,16 @@ import {
   Textarea,
 } from '../form/FormikWrappers'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
-import {
-  ErrorMessage,
-  FormButtonWrapper,
-  FormInputWrapper,
-} from './AuthWrappers'
+import { ErrorMessage } from './AuthWrappers'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const formToUser = (form) => ({ ...form, password_confirm: undefined })
 
-const SignupPage = () => {
+const SignUpPage = () => {
   const history = useAppHistory()
   const recaptchaRef = useRef()
   const { t } = useTranslation()
@@ -73,7 +70,7 @@ const SignupPage = () => {
       >
         {({ errors, dirty, isValid, isSubmitting, values }) => (
           <Form>
-            <FormInputWrapper>
+            <div>
               <Input
                 type="email"
                 name="email"
@@ -116,7 +113,7 @@ const SignupPage = () => {
               />
 
               <Textarea name="bio" label={t('users.bio')} />
-            </FormInputWrapper>
+            </div>
             <LabeledRow
               label={
                 <label htmlFor="announcements_email">
@@ -135,7 +132,7 @@ const SignupPage = () => {
               }}
             />
 
-            <FormButtonWrapper>
+            <FormButtons>
               <Button secondary type="reset">
                 {t('form.button.reset')}
               </Button>
@@ -145,7 +142,7 @@ const SignupPage = () => {
               >
                 {t('glossary.sign_up')}
               </Button>
-            </FormButtonWrapper>
+            </FormButtons>
           </Form>
         )}
       </Formik>
@@ -154,4 +151,4 @@ const SignupPage = () => {
   )
 }
 
-export default withAuthRedirect(SignupPage)
+export default withAuthRedirect(SignUpPage)

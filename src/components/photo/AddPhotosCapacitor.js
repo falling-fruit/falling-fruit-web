@@ -3,13 +3,13 @@ import {
   CameraResultType,
   CameraSource,
 } from '@capacitor/camera'
-import { Device } from '@capacitor/device'
-import { Directory, Filesystem } from '@capacitor/filesystem'
 import { Camera, Images } from '@styled-icons/boxicons-regular'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
+
+import { JPEG_QUALITY, PHOTO_MAX_DIMENSION } from '../../constants/photo'
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -56,47 +56,18 @@ export const AddPhotosCapacitor = ({ onAddPhotos }) => {
 
   const handlePhoto = async (source) => {
     try {
-      const deviceInfo = await Device.getInfo()
-      const isAndroid = deviceInfo.platform === 'android'
-
       const image = await CapacitorCamera.getPhoto({
-        quality: 80,
+        quality: JPEG_QUALITY * 100,
         allowEditing: false,
         resultType: CameraResultType.Uri,
         source: source,
-        saveToGallery: !isAndroid,
-        width: 1200,
+        saveToGallery: true,
+        width: PHOTO_MAX_DIMENSION,
+        height: PHOTO_MAX_DIMENSION,
       })
 
-      if (isAndroid && source === CameraSource.Camera) {
-        try {
-          const fileName = `photo_${new Date().toISOString()}.jpg`
-
-          // Read the image data
-          const response = await fetch(image.webPath)
-          const blob = await response.blob()
-          const base64Data = await new Promise((resolve) => {
-            const reader = new FileReader()
-            reader.onloadend = () => {
-              const base64 = reader.result.split(',')[1]
-              resolve(base64)
-            }
-            reader.readAsDataURL(blob)
-          })
-
-          await Filesystem.writeFile({
-            path: `DCIM/Falling Fruit/${fileName}`,
-            data: base64Data,
-            directory: Directory.ExternalStorage,
-            recursive: true,
-          })
-        } catch (fsError) {
-          console.error('Failed to save to custom directory:', fsError)
-        }
-      }
-
       pendingPhotoId.current--
-      const fileName = `photo_${new Date().toISOString()}.jpg`
+      const fileName = image.path.split('/').pop()
 
       const newPhoto = {
         id: pendingPhotoId.current,

@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from './Button'
+import FormButtons from './FormButtons'
 
 const StyledModal = styled(Dialog)`
   border-radius: 0.375em;
@@ -17,19 +18,6 @@ const StyledModal = styled(Dialog)`
 
   h3 {
     margin-block-start: 0;
-  }
-`
-
-const Buttons = styled.div`
-  margin-block-start: 20px;
-  text-align: end;
-
-  button {
-    width: 110px;
-
-    &:not(:last-child) {
-      margin-inline-end: 12px;
-    }
   }
 `
 
@@ -68,7 +56,7 @@ const Modal = ({
           return (
             <Form>
               {children}
-              <Buttons isDesktop={isDesktop}>
+              <FormButtons align={'end'}>
                 <Button type="button" onClick={onDismiss} secondary>
                   {t('form.button.cancel')}
                 </Button>
@@ -80,7 +68,7 @@ const Modal = ({
                     ? t('form.button.submitting')
                     : t('form.button.submit')}
                 </Button>
-              </Buttons>
+              </FormButtons>
             </Form>
           )
         }}

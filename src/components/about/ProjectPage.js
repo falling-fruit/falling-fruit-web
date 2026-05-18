@@ -235,7 +235,7 @@ const Project = () => {
         {' · '}
         <b dir="ltr">Ana Carolina de Lima</b> – <span dir="ltr">Português</span>
         {' · '}
-        <b dir="ltr">Anya Sytenkova</b> (<b dir="ltr">Аня Сытенкова</b>) –
+        <b dir="ltr">Anya Sytenkova</b> (<b dir="ltr">Аня Сытенкова</b>) –{' '}
         <span dir="ltr">Русский</span>
         {' · '}
         <b dir="ltr">Daniela Marini</b> – <span dir="ltr">Español</span>

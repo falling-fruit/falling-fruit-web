@@ -7,8 +7,8 @@ import { INITIAL_REVIEW_VALUES } from '../../constants/form'
 import { addNewReview, editExistingReview } from '../../redux/locationSlice'
 import { formToReview } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { FormRatingWrapper } from '../auth/AuthWrappers'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
@@ -20,7 +20,7 @@ import {
   Select,
   Textarea,
 } from './FormikWrappers'
-import { ProgressButtons, StyledForm } from './FormLayout'
+import { StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
 
 const validateReviewForm = ({ review, ...rest }, isLoggedIn) => {
@@ -55,6 +55,13 @@ const isReviewDirty = (values, initialValues) => {
       JSON.stringify(initialValues.review?.[field]),
   )
 }
+
+const RatingInputs = styled.div`
+  margin-block: 1em;
+  & > *:not(:last-child) {
+    margin-block-end: 0.5em;
+  }
+`
 
 export const ReviewStep = ({ standalone }) => {
   const { t } = useTranslation()
@@ -97,7 +104,7 @@ export const ReviewStep = ({ standalone }) => {
         clearable
       />
 
-      <FormRatingWrapper>
+      <RatingInputs>
         <RatingLabeledRow
           label={
             <label htmlFor="review.quality_rating-group">
@@ -126,7 +133,7 @@ export const ReviewStep = ({ standalone }) => {
             />
           }
         />
-      </FormRatingWrapper>
+      </RatingInputs>
 
       <PhotoUploader name="review.photos" label={t('review.form.photos')} />
     </>
@@ -210,7 +217,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
               {!isLoggedIn && (
                 <Recaptcha centered name="g-recaptcha-response" />
               )}
-              <ProgressButtons>
+              <FormButtons align={'center'}>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
@@ -222,7 +229,7 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
                     ? t('form.button.submitting')
                     : t('form.button.submit')}
                 </Button>
-              </ProgressButtons>
+              </FormButtons>
             </Form>
           )
         }}
