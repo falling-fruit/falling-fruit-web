@@ -273,6 +273,9 @@ const Project = () => {
         <b dir="ltr">Mylène Jacquemart</b> – <span dir="ltr">Deutsch</span>,{' '}
         <span dir="ltr">Italiano</span>
         {' · '}
+        <b dir="ltr">Omar Naamani</b> (<span dir="rtl">عمر نعماني</span>) –{' '}
+        <span dir="rtl">عربي</span>
+        {' · '}
         <b dir="ltr">Parmenter Welty</b> – <span dir="ltr">Español</span>
         {' · '}
         <b dir="ltr">Raven Lyn</b> – <span dir="ltr">Português</span>
