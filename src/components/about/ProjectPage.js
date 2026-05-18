@@ -247,6 +247,8 @@ const Project = () => {
         {' · '}
         <b dir="ltr">Heimen Stoffels</b> – <span dir="ltr">Nederlands</span>
         {' · '}
+        <b dir="ltr">Itai Boneh</b> – <span dir="rtl">עברית</span>
+        {' · '}
         <b dir="ltr">Jadalnia Warszawa</b> – <span dir="ltr">Polski</span>
         {' · '}
         <b dir="ltr">Karolina Hansen</b> – <span dir="ltr">Polski</span>
