@@ -292,6 +292,8 @@ const Project = () => {
         <span dir="ltr">简体中文</span>, <span dir="ltr">繁体中文</span>
         {' · '}
         <b dir="ltr">Tống Thái Vương</b> – <span dir="ltr">Tiếng Việt</span>
+        {' · '}
+        <b dir="ltr">Wojtek Bażant</b> – <span dir="ltr">Polski</span>
       </p>
 
       <h2>{t('pages.about.closing_remarks')}</h2>
