@@ -286,7 +286,7 @@ const LocationRow = ({ location, listId, typesAccess }) => {
       }}
     >
       <LocationLink
-        to={`/locations-standalone/${location.id}/${viewToString(location.lat, location.lng, MIN_LOCATION_ZOOM)}`}
+        to={`/locations/${location.id}/${viewToString(location.lat, location.lng, MIN_LOCATION_ZOOM)}?pane=standalone`}
         onClick={handleLocationClick}
       >
         <LocationTypeDisplay location={location} typesAccess={typesAccess} />

@@ -3,18 +3,15 @@ import {
   Pencil as PencilIcon,
   Trash as TrashIcon,
 } from '@styled-icons/boxicons-solid'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import {
-  reenablePaneDrawerAndSetToLowPosition,
-  setPaneDrawerToMiddlePosition,
-} from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { zIndex } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import ReturnIcon from '../ui/ReturnIcon'
 import { useDeleteLocation } from './useDeleteLocation'
+import useLocationPane from './useLocationPane'
 
 const StyledButtons = styled.div`
   position: absolute;
@@ -64,12 +61,14 @@ EntryButton.defaultProps = {
 }
 
 const TopButtonsMobile = ({ hasImages }) => {
-  const dispatch = useDispatch()
   const history = useAppHistory()
+  const { locationId } = useSelector((state) => state.location)
   const {
-    locationId,
-    pane: { isStandalone, isFromEmbedViewMap },
-  } = useSelector((state) => state.location)
+    isStandalone,
+    isFromEmbedViewMap,
+    setPaneDrawerToMiddlePosition,
+    reenablePaneDrawerAndSetToLowPosition,
+  } = useLocationPane()
   const { id: recentChangesSectionId } = useSelector(
     (state) => state.activity.recentChanges.lastBrowsedSection,
   )
@@ -88,7 +87,7 @@ const TopButtonsMobile = ({ hasImages }) => {
         : recentChangesSectionId
           ? '/changes'
           : '/list'
-    history.push(standaloneBackPath)
+    history.push(`${standaloneBackPath}?pane=&tab=`)
   }
 
   return (
@@ -101,7 +100,7 @@ const TopButtonsMobile = ({ hasImages }) => {
               ? () => history.push('/map')
               : (e) => {
                   e.stopPropagation()
-                  dispatch(setPaneDrawerToMiddlePosition())
+                  setPaneDrawerToMiddlePosition()
                 }
         }
         icon={<ReturnIcon />}
@@ -112,7 +111,7 @@ const TopButtonsMobile = ({ hasImages }) => {
           <EntryButton
             onClick={(event) => {
               event.stopPropagation()
-              dispatch(reenablePaneDrawerAndSetToLowPosition())
+              reenablePaneDrawerAndSetToLowPosition()
             }}
             icon={<MapIcon />}
             label="map-button"

@@ -126,7 +126,6 @@ const connectRoutes = [
    * - sync property of being edited from URL routes to Redux
    * - sync property of being viewed in street view from URL routes to Redux
    * - on mobile, center and zoom on edited location
-   * - on mobile, keep track of whether we arrived via standalone URL
    * - on mobile, disable default overscroll (e.g. a refresh on scroll down in Chrome)
    * - on desktop, reset the fromSettings flag when leaving location
    * - when location id changes, drop fromSettings and userActivity state
@@ -139,7 +138,6 @@ const connectRoutes = [
       '/locations/:locationId/:nextSegment/:nextNextSegment',
       '/locations/:locationId/:nextSegment',
       '/locations/:locationId',
-      '/locations-standalone/:locationId',
     ]}
   >
     {({ match }) =>
@@ -152,7 +150,6 @@ const connectRoutes = [
           isBeingEditedPosition={match.params.nextNextSegment === 'position'}
           isStreetView={match.params.nextSegment === 'panorama'}
           isSuccessfullyAdded={match.params.nextSegment === 'success'}
-          isStandalone={match.path.startsWith('/locations-standalone')}
         />
       )
     }
@@ -288,7 +285,7 @@ const connectRoutes = [
    */
   <Route
     key="disconnect-activity"
-    path={['/users/:userId/activity', '/locations', '/locations-standalone']}
+    path={['/users/:userId/activity', '/locations']}
   >
     <DisconnectActivity />
   </Route>,
@@ -301,10 +298,7 @@ const connectRoutes = [
    *
    * action: clear lastViewedListPositionId when dismounting from list or location pages
    */
-  <Route
-    key="disconnect-last-viewed-position"
-    path={['/list', '/locations', '/locations-standalone']}
-  >
+  <Route key="disconnect-last-viewed-position" path={['/list', '/locations']}>
     <DisconnectLastViewedListPosition />
   </Route>,
 
@@ -316,10 +310,7 @@ const connectRoutes = [
    *
    * action: clear lastViewedListId when dismounting from account/lists or location pages
    */
-  <Route
-    key="disconnect-lists"
-    path={['/account/lists', '/locations', '/locations-standalone']}
-  >
+  <Route key="disconnect-lists" path={['/account/lists', '/locations']}>
     <DisconnectLists />
   </Route>,
 

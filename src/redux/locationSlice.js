@@ -31,13 +31,6 @@ const initialState = {
     reviewIndex: null,
     photoIndex: null,
   },
-  pane: {
-    drawerFullyOpen: false,
-    drawerLow: false,
-    isStandalone: false,
-    isFromEmbedViewMap: false,
-    tabIndex: 0,
-  },
   isBeingInitializedMobile: false,
 }
 
@@ -144,26 +137,6 @@ const locationSlice = createSlice({
       state.lightbox.reviewIndex = action.payload.reviewIndex
       state.lightbox.photoIndex = action.payload.photoIndex
     },
-    reenablePaneDrawerAndSetToLowPosition: (state) => {
-      state.pane.isStandalone = false
-      state.pane.drawerFullyOpen = false
-      state.pane.drawerLow = true
-    },
-    fullyOpenPaneDrawer: (state) => {
-      state.pane.drawerFullyOpen = true
-      state.pane.drawerLow = false
-    },
-    setPaneDrawerToMiddlePosition: (state) => {
-      state.pane.drawerFullyOpen = false
-      state.pane.drawerLow = false
-    },
-    setPaneDrawerToLowPosition: (state) => {
-      state.pane.drawerFullyOpen = false
-      state.pane.drawerLow = true
-    },
-    setTabIndex: (state, action) => {
-      state.pane.tabIndex = action.payload
-    },
     setFromSettings: (state, action) => {
       state.fromSettings = action.payload
     },
@@ -181,11 +154,6 @@ const locationSlice = createSlice({
       state.form = null
       state.tooltipOpen = action.meta.arg.isBeingEdited
       state.streetViewOpen = action.meta.arg.isStreetView
-      state.pane.isStandalone = action.meta.arg.isStandalone
-      state.pane.isFromEmbedViewMap = action.meta.arg.isFromEmbedViewMap
-      state.pane.drawerFullyOpen =
-        action.meta.arg.isStandalone || action.meta.arg.isFromEmbedViewMap
-      state.pane.tabIndex = 0
       state.inList = false
     },
     [fetchLocationData.fulfilled]: (state, action) => {
@@ -325,11 +293,6 @@ export const {
   openLightbox,
   closeLightbox,
   setLightboxIndices,
-  reenablePaneDrawerAndSetToLowPosition,
-  setTabIndex,
-  fullyOpenPaneDrawer,
-  setPaneDrawerToMiddlePosition,
-  setPaneDrawerToLowPosition,
   setFromSettings,
   setIsBeingInitializedMobile,
 } = locationSlice.actions

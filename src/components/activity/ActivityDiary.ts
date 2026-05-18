@@ -211,14 +211,11 @@ function transformActivityData(
           .map((typeId) => typesAccess.getType(typeId))
           .filter(Boolean)
 
+        const view = viewToString(change.lat, change.lng, MIN_LOCATION_ZOOM)
         const locationTypes: LocationTypes = {
           locationId: change.location_id,
           types,
-          url: `/locations-standalone/${change.location_id}/${viewToString(
-            change.lat,
-            change.lng,
-            MIN_LOCATION_ZOOM,
-          )}`,
+          url: `/locations/${change.location_id}/${view}?pane=standalone`,
           isSelected: true,
         }
         switch (change.description) {

@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 import { viewFromCurrentUrl } from '../../utils/appUrl'
+import useLocationPane from '../entry/useLocationPane'
 
 const ConnectPath = () => {
   const { initialView, googleMap } = useSelector((state) => state.map)
-  const {
-    pane: { drawerFullyOpen },
-  } = useSelector((state) => state.location)
+  const { drawerFullyOpen } = useLocationPane()
   const { pathname } = useLocation()
   const hasInitialView = !!initialView
   const view = viewFromCurrentUrl()

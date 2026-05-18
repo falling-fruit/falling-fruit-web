@@ -344,7 +344,7 @@ const MapPage = ({ isDesktop }) => {
       if (isDesktop && pathname.includes('/settings')) {
         dispatch(setFromSettings(true))
       }
-      history.push(`/locations/${location.id}`)
+      history.push(`/locations/${location.id}?pane=&tab=`)
     },
     [isDesktop, pathname, dispatch, history],
   )
@@ -365,7 +365,7 @@ const MapPage = ({ isDesktop }) => {
       'click',
       () => {
         if (isViewingLocation) {
-          history.push('/map')
+          history.push('/map?pane=&tab=')
         }
       },
     )

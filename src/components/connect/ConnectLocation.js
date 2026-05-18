@@ -20,6 +20,7 @@ import { setInitialView } from '../../redux/mapSlice'
 import { currentPathWithView, viewFromCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
+import useLocationPane from '../entry/useLocationPane'
 import Button from '../ui/Button'
 
 const LessPaddingButton = styled(Button)`
@@ -83,16 +84,12 @@ const ConnectLocation = ({
   isBeingEditedPosition,
   isStreetView,
   isSuccessfullyAdded,
-  isStandalone,
 }) => {
   const dispatch = useDispatch()
   const { initialView, googleMap } = useSelector((state) => state.map)
   const hasInitialView = !!initialView
-  const {
-    position,
-    location,
-    pane: { drawerFullyOpen },
-  } = useSelector((state) => state.location)
+  const { position, location } = useSelector((state) => state.location)
+  const { drawerFullyOpen } = useLocationPane()
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
@@ -111,9 +108,6 @@ const ConnectLocation = ({
        * (e.g. location to settings and back)
        * so if data is present in redux, don't fetch
        * */
-      if (isStandalone) {
-        history.push(`/locations/${locationId}`)
-      }
       return
     }
     dispatch(
@@ -121,7 +115,6 @@ const ConnectLocation = ({
         locationId,
         isBeingEdited,
         isStreetView,
-        isStandalone,
         isFromEmbedViewMap: isEmbed,
       }),
     ).then((action) => {
@@ -148,10 +141,6 @@ const ConnectLocation = ({
         // to trigger component reload
         const newUrl = currentPathWithView(view)
         history.push(newUrl)
-      }
-
-      if (isStandalone) {
-        history.push(`/locations/${locationId}`)
       }
     })
   }, [dispatch, locationId]) //eslint-disable-line

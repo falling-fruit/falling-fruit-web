@@ -36,7 +36,8 @@ const legacyViewFromSearchParams = (searchParams) => {
 const findViewSegmentIndex = (pathname) => {
   const parts = pathname.split('/')
   for (let i = parts.length - 1; i >= 0; i--) {
-    if (VIEW_SEGMENT_REGEX.test(parts[i])) {
+    const partWithoutParams = parts[i].split('?')[0]
+    if (VIEW_SEGMENT_REGEX.test(partWithoutParams)) {
       return pathname.lastIndexOf(`/${parts[i]}`)
     }
   }
@@ -71,13 +72,27 @@ export const applyLegacyViewParams = (searchParams, view) => {
   searchParams.set('z', String(view.zoom))
 }
 
+const dropEmptyParams = (searchParams) => {
+  const keysToDelete = []
+  for (const [key, value] of searchParams.entries()) {
+    if (value === '') {
+      keysToDelete.push(key)
+    }
+  }
+  keysToDelete.forEach((key) => searchParams.delete(key))
+}
+
 const pathComponentsToString = (path, view, searchParams) => {
   const urlParts = []
-  urlParts.push(path.replace(/\/*$/, ''))
+  urlParts.push(path.replace(/\/*$/, '')) // */
 
   if (view) {
     urlParts.push('/')
     urlParts.push(viewToString(view.center.lat, view.center.lng, view.zoom))
+  }
+
+  if (searchParams) {
+    dropEmptyParams(searchParams)
   }
 
   const searchString = searchParams?.toString()
@@ -101,14 +116,17 @@ const legacyViewFromCurrentUrl = () => {
 const parseViewFromCurrentUrl = () => {
   const { pathname } = new URL(window.location.href)
   const parts = pathname.split('/')
-  const viewSegment = parts.find((part) => VIEW_SEGMENT_REGEX.test(part))
+  const viewSegment = parts.find((part) =>
+    VIEW_SEGMENT_REGEX.test(part.split('?')[0]),
+  )
 
   if (!viewSegment) {
     return null
   }
 
   const parsedUrlValues = viewSegment
-    .substring(0, viewSegment.length - 1)
+    .split('?')[0]
+    .substring(0, viewSegment.split('?')[0].length - 1)
     .split(',')
 
   const lat = parseFloat(parsedUrlValues[0])
@@ -132,13 +150,22 @@ export const pathWithCurrentView = (path) => {
     return path
   }
 
+  // Split any params off the incoming path and merge them into the search params
+  const [pathWithoutParams, incomingSearch] = path.split('?')
+  const incomingParams = new URLSearchParams(incomingSearch)
+
   const { search } = new URL(window.location.href)
   const searchParams = new URLSearchParams(search)
   searchParams.delete('fromPage')
 
+  // Merge incoming params into searchParams (incoming params take precedence)
+  for (const [key, value] of incomingParams.entries()) {
+    searchParams.set(key, value)
+  }
+
   const currentView = viewFromCurrentUrl()
   if (currentView) {
-    return pathComponentsToString(path, currentView, searchParams)
+    return pathComponentsToString(pathWithoutParams, currentView, searchParams)
   }
 
   const legacyView = legacyViewFromSearchParams(searchParams)
@@ -146,10 +173,10 @@ export const pathWithCurrentView = (path) => {
     searchParams.delete('x')
     searchParams.delete('y')
     searchParams.delete('z')
-    return pathComponentsToString(path, legacyView, searchParams)
+    return pathComponentsToString(pathWithoutParams, legacyView, searchParams)
   }
 
-  return pathComponentsToString(path, null, searchParams)
+  return pathComponentsToString(pathWithoutParams, null, searchParams)
 }
 
 export const currentPathWithView = (view) => {
