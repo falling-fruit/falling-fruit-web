@@ -18,7 +18,7 @@ export const useDeleteLocation = () => {
     if (confirm(t('confirm_message.delete_location'))) {
       dispatch(deleteExistingLocation(locationId)).then((result) => {
         if (result.type.endsWith('/fulfilled')) {
-          history.push('/map')
+          history.push('/map?pane=&tab=')
           toast.success(t('success_message.location_deleted'))
         } else if (result.type.endsWith('/rejected')) {
           toast.error(

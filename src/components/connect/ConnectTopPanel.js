@@ -1,17 +1,16 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 import { closeFilter } from '../../redux/filterSlice'
 import { closeShare } from '../../redux/shareSlice'
+import useLocationPane from '../entry/useLocationPane'
 
 const ConnectTopPanel = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const isLocationsPath = location.pathname.startsWith('/locations')
-  const drawerFullyOpen = useSelector(
-    (state) => state.location.pane.drawerFullyOpen,
-  )
+  const { drawerFullyOpen } = useLocationPane()
 
   useEffect(
     () => () => {

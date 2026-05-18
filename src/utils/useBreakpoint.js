@@ -25,13 +25,10 @@ const useBreakpoint = ({
 }
 
 const getIsEmbed = () => {
-  if (typeof window !== 'undefined') {
-    const urlParams = new URLSearchParams(window.location.search)
-    const isEmbedParam = urlParams.get('embed') === 'true'
-    const isEmbedPath = window.location.pathname.startsWith('/locations/embed')
-    return isEmbedParam || isEmbedPath
-  }
-  return false
+  const urlParams = new URLSearchParams(window.location.search)
+  const isEmbedParam = urlParams.get('embed') === 'true'
+  const isEmbedPath = window.location.pathname.startsWith('/locations/embed')
+  return isEmbedParam || isEmbedPath
 }
 
 const useIsEmbed = () => {

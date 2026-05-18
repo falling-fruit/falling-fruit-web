@@ -20,7 +20,6 @@ const StyledButton = styled(ResetButton)`
   box-sizing: border-box;
   border-radius: 0.375em;
   padding: 0 10px;
-  // TODO: make raised and add a location button in main pane
 
   ${({ isDesktop, secondary }) =>
     isDesktop &&
@@ -47,7 +46,6 @@ const Icon = styled.span`
   ${prepend('margin-inline', '0.25em')}
 `
 
-// TODO: forward ref and remaining props in all UI components, rather than taking specific props
 const Button = ({
   secondary = false,
   leftIcon,
