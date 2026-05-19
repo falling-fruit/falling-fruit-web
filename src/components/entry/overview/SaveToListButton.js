@@ -15,6 +15,7 @@ import {
 import Button from '../../ui/Button'
 import { theme } from '../../ui/GlobalStyle'
 import Input from '../../ui/Input'
+import useLocationPane from '../useLocationPane'
 import useSavedLists from './useSavedLists'
 
 const SkeletonItemRow = styled.div`
@@ -170,6 +171,7 @@ const SaveToListButton = ({ containerRef }) => {
   const addingNewSkeletonRef = useRef(null)
 
   const { lists } = useSavedLists(locationId)
+  const { drawerFullyOpen, fullyOpenPaneDrawer } = useLocationPane()
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -212,6 +214,9 @@ const SaveToListButton = ({ containerRef }) => {
   }, [isAddingNew])
 
   const handleButtonClick = () => {
+    if (!drawerFullyOpen) {
+      fullyOpenPaneDrawer()
+    }
     if (!open) {
       dispatch(fetchLists())
     }
