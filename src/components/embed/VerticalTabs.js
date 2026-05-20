@@ -1,12 +1,6 @@
 import '@reach/tabs/styles.css'
 
-import {
-  Tab as ReachTab,
-  TabList as ReachTabList,
-  TabPanel as ReachTabPanel,
-  TabPanels as ReachTabPanels,
-  Tabs,
-} from '@reach/tabs'
+import { Tab as ReachTab, TabList as ReachTabList, Tabs } from '@reach/tabs'
 import styled from 'styled-components/macro'
 
 const VerticalTabs = styled(Tabs)`
@@ -52,11 +46,5 @@ const VerticalTabs = styled(Tabs)`
 
 const Tab = styled(ReachTab).attrs({ className: 'vertical-tab' })``
 const TabList = styled(ReachTabList).attrs({ className: 'vertical-tab-list' })``
-const TabPanel = styled(ReachTabPanel).attrs({
-  className: 'vertical-tab-panel',
-})``
-const TabPanels = styled(ReachTabPanels).attrs({
-  className: 'vertical-tab-panels',
-})``
 
-export { Tab, TabList, TabPanel, TabPanels, VerticalTabs }
+export { Tab, TabList, VerticalTabs }

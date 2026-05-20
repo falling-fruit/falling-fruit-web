@@ -17,7 +17,7 @@ export const GeolocationState = {
   DOT_ON: 'DOT_ON',
 }
 
-export const geolocationSlice = createSlice({
+const geolocationSlice = createSlice({
   name: 'geolocation',
   initialState: {
     geolocationState: GeolocationState.INITIAL,
@@ -146,8 +146,6 @@ export const geolocationSlice = createSlice({
 export const {
   requestGeolocation,
   rerequestGeolocation,
-  geolocationDenied,
-  geolocationLoading,
   geolocationCentering,
   geolocationFollowing,
   geolocationError,

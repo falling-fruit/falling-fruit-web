@@ -40,7 +40,7 @@ export const editProfile = createAsyncThunk(
   },
 )
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: null,

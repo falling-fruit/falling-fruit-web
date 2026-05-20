@@ -57,7 +57,7 @@ export const fetchMapClusters = createAsyncThunk(
   },
 )
 
-export const mapSlice = createSlice({
+const mapSlice = createSlice({
   name: 'map',
   initialState: {
     initialView: null,

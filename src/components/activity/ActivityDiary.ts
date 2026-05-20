@@ -267,7 +267,7 @@ function transformActivityData(
   )
 }
 
-export class ActivityDiary {
+class ActivityDiary {
   entries: DiaryEntry[]
 
   constructor(entries: DiaryEntry[]) {

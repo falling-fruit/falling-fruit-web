@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const miscSlice = createSlice({
+const miscSlice = createSlice({
   name: 'misc',
   initialState: {
     isDesktop: null,

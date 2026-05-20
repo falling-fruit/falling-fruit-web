@@ -32,7 +32,7 @@ export const fetchListLocationsStart = () =>
 export const fetchListLocationsExtend = (locations) =>
   fetchListLocations({ fetchCount: false, offset: locations.length })
 
-export const listSlice = createSlice({
+const listSlice = createSlice({
   name: 'list',
   initialState: {
     isLoading: false,
