@@ -195,6 +195,14 @@ const InfoPage = ({ children }) => {
   )
 }
 
+const LimitedWidthContainer = styled.div`
+  ${({ isDesktop }) =>
+    isDesktop &&
+    `
+    max-width: 400px;
+  `}
+`
+
 const AuthPage = ({ children }) => {
   const isDesktop = useIsDesktop()
 
@@ -212,7 +220,9 @@ const AuthPage = ({ children }) => {
             <LanguageSelect />
           </LanguageContainer>
         )}
-        {children}
+        <LimitedWidthContainer isDesktop={isDesktop}>
+          {children}
+        </LimitedWidthContainer>
       </TopSafeAreaInsetPageWrapper>
     </TopSafeAreaInsetPageScrollWrapper>
   )

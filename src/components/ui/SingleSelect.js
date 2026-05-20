@@ -44,6 +44,7 @@ const StyledSelect = styled.select`
   padding-block: 0.5em;
   padding-inline-start: 0.75em;
   padding-inline-end: 2em;
+  height: 3em;
   width: 100%;
   appearance: none;
   cursor: pointer;

@@ -235,10 +235,10 @@ const Project = () => {
         {' · '}
         <b dir="ltr">Ana Carolina de Lima</b> – <span dir="ltr">Português</span>
         {' · '}
-        <b dir="ltr">Anya Sytenkova</b> (<b dir="ltr">Аня Сытенкова</b>) –
+        <b dir="ltr">Anya Sytenkova</b> (<b dir="ltr">Аня Сытенкова</b>) –{' '}
         <span dir="ltr">Русский</span>
         {' · '}
-        <b dir="ltr"> Barbora Boulová </b> – <span dir="ltr">Čeština</span>
+        <b dir="ltr">Barbora Boulová</b> – <span dir="ltr">Čeština</span>
         {' · '}
         <b dir="ltr">Daniela Marini</b> – <span dir="ltr">Español</span>
         {' · '}
@@ -248,6 +248,8 @@ const Project = () => {
         <span dir="ltr">Español</span>
         {' · '}
         <b dir="ltr">Heimen Stoffels</b> – <span dir="ltr">Nederlands</span>
+        {' · '}
+        <b dir="ltr">Itai Boneh</b> – <span dir="rtl">עברית</span>
         {' · '}
         <b dir="ltr">Jadalnia Warszawa</b> – <span dir="ltr">Polski</span>
         {' · '}
@@ -273,6 +275,9 @@ const Project = () => {
         <b dir="ltr">Mylène Jacquemart</b> – <span dir="ltr">Deutsch</span>,{' '}
         <span dir="ltr">Italiano</span>
         {' · '}
+        <b dir="ltr">Omar Naamani</b> (<span dir="rtl">عمر نعماني</span>) –{' '}
+        <span dir="rtl">عربي</span>
+        {' · '}
         <b dir="ltr">Parmenter Welty</b> – <span dir="ltr">Español</span>
         {' · '}
         <b dir="ltr">Raven Lyn</b> – <span dir="ltr">Português</span>
@@ -288,7 +293,12 @@ const Project = () => {
         {' · '}
         <b dir="ltr">Timna Raz</b> – <span dir="rtl">עִברִית</span>
         {' · '}
+        <b dir="ltr">Tong Kitchen-Huan</b> (<b dir="ltr">还彤</b>) –{' '}
+        <span dir="ltr">简体中文</span>, <span dir="ltr">繁体中文</span>
+        {' · '}
         <b dir="ltr">Tống Thái Vương</b> – <span dir="ltr">Tiếng Việt</span>
+        {' · '}
+        <b dir="ltr">Wojtek Bażant</b> – <span dir="ltr">Polski</span>
       </p>
 
       <h2>{t('pages.about.closing_remarks')}</h2>

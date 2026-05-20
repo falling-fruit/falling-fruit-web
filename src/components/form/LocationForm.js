@@ -24,12 +24,13 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { formatMonth } from '../entry/textFormatters'
 import Button from '../ui/Button'
+import FormButtons from '../ui/FormButtons'
 import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import PositionEditIcon from '../ui/PositionEditIcon'
 import { Checkbox, Recaptcha, Select, Textarea } from './FormikWrappers'
-import { ProgressButtons, StyledForm } from './FormLayout'
+import { StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { ReviewStep } from './ReviewForm'
 import TypesSelect from './TypesSelect'
@@ -45,7 +46,7 @@ const CheckboxLabel = styled.label`
   align-items: center;
   font-size: 0.875rem;
   color: ${({ theme }) => theme.tertiaryText};
-  margin-block-start: 15px;
+  margin-block-start: 1em;
 `
 
 const ErrorText = styled.p`
@@ -53,19 +54,12 @@ const ErrorText = styled.p`
   font-size: 0.85rem;
 `
 
+const InlineDivider = styled.span`
+  margin-inline: 0.75em;
+`
 const InlineSelects = styled.div`
   display: flex;
   align-items: center;
-
-  > span {
-    // Text
-    margin: 0 10px;
-  }
-
-  > div {
-    // Select
-    flex: 1;
-  }
 `
 
 const PositionFieldLink = ({ lat, lng, editingId }) => {
@@ -78,13 +72,12 @@ const PositionFieldLink = ({ lat, lng, editingId }) => {
       }}
       to={pathWithCurrentView(`/locations/${editingId}/edit/position`)}
     >
-      <PositionFieldReadOnly lat={lat} lng={lng} editingId={editingId} />
+      <PositionField editable lat={lat} lng={lng} editingId={editingId} />
     </StyledPositionFieldLink>
   )
 }
 
-const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
-  const isDesktop = useIsDesktop()
+const PositionField = ({ lat, lng, editingId, editable }) => {
   const { locations } = useSelector((state) => state.map)
   const { position } = useSelector((state) => state.location)
   const { t } = useTranslation()
@@ -126,7 +119,7 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
   return (
     <>
       <IconBesideText tabIndex={0}>
-        {isDesktop ? <Map size={20} /> : <PositionEditIcon />}
+        {editable ? <PositionEditIcon /> : <Map size={20} />}
         <p className="small" dir="ltr">
           {lat && lng ? `${lat.toFixed(6)}, ${lng.toFixed(6)}` : ''}
         </p>
@@ -136,6 +129,10 @@ const PositionFieldReadOnly = ({ lat, lng, editingId }) => {
     </>
   )
 }
+
+const PositionFieldReadOnly = (props) => (
+  <PositionField editable={false} {...props} />
+)
 
 const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
   const { i18n, t } = useTranslation()
@@ -200,7 +197,9 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
           fromFormikValue={(x) => monthOptions.find((o) => o.value === x)}
           clearable
         />
-        <span>{t('locations.form.season_start_to_stop_short')}</span>
+        <InlineDivider>
+          {t('locations.form.season_start_to_stop_short')}
+        </InlineDivider>
         <Select
           name="season_stop"
           options={monthOptions}
@@ -361,7 +360,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
               {!isLoggedIn && (
                 <Recaptcha centered name="g-recaptcha-response" />
               )}
-              <ProgressButtons>
+              <FormButtons align={'center'}>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
@@ -373,7 +372,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
                     ? t('form.button.submitting')
                     : t('form.button.submit')}
                 </Button>
-              </ProgressButtons>
+              </FormButtons>
             </Form>
           )
         }}

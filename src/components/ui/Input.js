@@ -53,7 +53,7 @@ const Input = React.forwardRef(
 Input.displayName = 'Input'
 
 const StyledInput = styled(Input)`
-  height: ${(props) => props.height || '46px'};
+  height: 3em;
   display: flex;
   justify-content: space-between;
   align-items: center;

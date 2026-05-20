@@ -33,10 +33,6 @@ const NewBadge = styled.div.attrs({ children: 'New photo' })`
   padding: 2px;
 `
 
-const PhotoListContainer = styled.div`
-  margin-block-end: 16px;
-`
-
 export const PhotoList = ({ photos, reorderPhoto, removePhoto }) => {
   const onDragEnd = (result) => {
     // dropped outside the list
@@ -70,7 +66,7 @@ export const PhotoList = ({ photos, reorderPhoto, removePhoto }) => {
     ))
 
   return (
-    <PhotoListContainer>
+    <div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (
@@ -81,6 +77,6 @@ export const PhotoList = ({ photos, reorderPhoto, removePhoto }) => {
           )}
         </Droppable>
       </DragDropContext>
-    </PhotoListContainer>
+    </div>
   )
 }
