@@ -1260,7 +1260,7 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@csstools/normalize.css@*", "@csstools/normalize.css@12.1.1":
+"@csstools/normalize.css@*":
   version "12.1.1"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-12.1.1.tgz#f0ad221b7280f3fc814689786fd9ee092776ef8f"
   integrity sha512-YAYeJ+Xqh7fUou1d1j9XHl44BmsuThiTr4iNrgCQ3J27IbhXsxXDGZ1cXv8Qvs99d4rBbLiSKy3+WZiet32PcQ==
@@ -2439,14 +2439,6 @@
     "@reach/utils" "0.13.2"
     tslib "^2.1.0"
 
-"@reach/auto-id@0.15.3":
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.15.3.tgz#23b6ae8de3bf7520044c95a85c992ae46cdcef9c"
-  integrity sha512-lbLUI9mrn74qVis141ib0Rsyhgk+gzUMtpplRmjy06cUWDFZyiBATNWMUxN5T+0fU4tpfgcjkAuPeTCCGThKtQ==
-  dependencies:
-    "@reach/utils" "0.15.3"
-    tslib "^2.3.0"
-
 "@reach/checkbox@^0.13.2":
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/@reach/checkbox/-/checkbox-0.13.2.tgz#b972b922cf6cea0c2bbabca0129c58307b566a4e"
@@ -2542,17 +2534,6 @@
     "@reach/utils" "0.13.2"
     prop-types "^15.7.2"
     tslib "^2.1.0"
-
-"@reach/slider@^0.15.0":
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/@reach/slider/-/slider-0.15.3.tgz#0d2545aa5146c4f60c7d9fa47e8918cac0da6f36"
-  integrity sha512-YjLNJNOHwjnd83vyV8DLWR1A4aB/3oCD7F/XrU3M6UXbKtPJAj+2I1mjMzqSP6/mpBjJseB4kxO9c1UeKxaJMQ==
-  dependencies:
-    "@reach/auto-id" "0.15.3"
-    "@reach/utils" "0.15.3"
-    prop-types "^15.7.2"
-    tiny-warning "^1.0.3"
-    tslib "^2.3.0"
 
 "@reach/tabs@^0.13.0":
   version "0.13.2"
@@ -10389,15 +10370,6 @@ postcss-normalize@^10.0.1:
     postcss-browser-comments "^4"
     sanitize.css "*"
 
-postcss-normalize@^13.0.1:
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/postcss-normalize/-/postcss-normalize-13.0.1.tgz#4e367c8933caba83557c6150af5aa4774b2a1c99"
-  integrity sha512-oGfXG7IQ44FUIMFco2N2Uz71UotM+tZ9trEmT1bHIUR5gAplyG3RnHqpMDEcCx1r+1bwBJTrI5uhiQr4YOpqhQ==
-  dependencies:
-    "@csstools/normalize.css" "12.1.1"
-    postcss-browser-comments "^6.0.1"
-    sanitize.css "13.0.0"
-
 postcss-opacity-percentage@^1.1.2:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/postcss-opacity-percentage/-/postcss-opacity-percentage-1.1.3.tgz#5b89b35551a556e20c5d23eb5260fbfcf5245da6"
@@ -11588,7 +11560,7 @@ safe-regex-test@^1.0.3, safe-regex-test@^1.1.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sanitize.css@*, sanitize.css@13.0.0:
+sanitize.css@*:
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/sanitize.css/-/sanitize.css-13.0.0.tgz#2675553974b27964c75562ade3bd85d79879f173"
   integrity sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==
