@@ -1,21 +1,13 @@
 #!/usr/bin/env python
 import argparse
-import json
-import os
-import sys
-import re
 import logging
 from pathlib import Path
 
-import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent / 'lib'))
-from source_dir import SourceDirectory
-from translation import (
-    Translation, print_colored_dict
-)
-from tap_stream import TapStream
-from translation_filler import fill_up_translation
+from lib.source_dir import SourceDirectory
+from lib.translation import Translation
+from lib.tap_stream import TapStream
+from lib.translation_filler import fill_up_translation
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +25,7 @@ class TranslationManager:
             return
 
         all_keys = self.source_directory.list_component_keys()
-        
+
         if not all_keys:
             logger.info("No translation keys found in any components.")
             return
@@ -115,71 +107,71 @@ class TranslationManager:
                 # Replace newlines with spaces in the value for TSV compatibility
                 value = value.replace('\n', ' ').replace('\r', '')
                 print(f"{json_file}\t{key}\t{value}")
-                
+
     def remove_orphan_keys(self):
         """Remove keys from JSON files that don't exist in source files"""
         if not self.source_directory or not self.source_directory.components:
             logger.error("No source files with translations found.")
             return
-            
+
         if not self.json_folder_path or not self.json_folder_path.exists():
             logger.error("JSON folder does not exist.")
             return
-            
+
         json_files = list(self.json_folder_path.glob('*.json'))
         if not json_files:
             logger.warning(f"No JSON files found in {self.json_folder_path}")
             return
-            
+
         # Get all keys from source files
         all_keys = self.source_directory.get_all_keys()
-        
+
         # Process each JSON file
         for json_file in json_files:
             translation = Translation.from_json_file(json_file)
             orphan_keys = []
-            
+
             # Find orphan keys
             for key in list(translation.entries.keys()):
                 if key not in all_keys:
                     orphan_keys.append(key)
                     translation.entries.pop(key)
-            
+
             # Save the file if orphan keys were removed
             if orphan_keys:
                 translation.save_as_json(json_file)
                 logger.info(f"{json_file.name}: Removed {len(orphan_keys)} orphan keys: {', '.join(orphan_keys)}")
             else:
                 logger.info(f"{json_file.name}: No orphan keys found")
-    
+
 
     def check_translations(self):
         """Check if all translation keys exist in all language files (TAP format)"""
         if not self.source_directory or not self.source_directory.components:
             logger.error("No source files with translations found.")
             return
-            
+
         if not self.json_folder_path or not self.json_folder_path.exists():
             logger.error("JSON folder does not exist.")
             return
-            
+
         json_files = list(self.json_folder_path.glob('*.json'))
         if not json_files:
             logger.warning(f"No JSON files found in {self.json_folder_path}")
             return
-            
+
         # Get all keys from source files
         all_keys = self.source_directory.get_all_keys()
-        
+
         # Get all language codes from JSON files
         languages = [json_file.stem for json_file in json_files]
-        
+
         # Load all translations
         translations = {}
         for lang in languages:
             json_file = self.json_folder_path / f"{lang}.json"
             translations[lang] = Translation.from_json_file(json_file)
-        
+
         # Group keys by source file for better organization
         key_to_files = {}
         for component in self.source_directory.components:
@@ -187,44 +179,44 @@ class TranslationManager:
                 if key not in key_to_files:
                     key_to_files[key] = []
                 key_to_files[key].append(str(component.file_path))
-        
+
         # Create TAP stream and run checks
         tap = TapStream()
         tap.check_translations_tap(all_keys, key_to_files, translations, languages)
-        
+
     def fill_up_translations(self):
         """Fill up missing translations in all language files using English as source"""
         if not self.json_folder_path or not self.json_folder_path.exists():
             logger.error("JSON folder does not exist.")
             return
-            
+
         json_files = list(self.json_folder_path.glob('*.json'))
         if not json_files:
             logger.warning(f"No JSON files found in {self.json_folder_path}")
             return
-            
+
         # Get English translation as source
         en_json_path = self.json_folder_path / "en.json"
         if not en_json_path.exists():
             logger.error("English translation file (en.json) not found.")
             return
-            
+
         source_translation = Translation.from_json_file(en_json_path)
-        
+
         # Process each non-English JSON file
         for json_file in json_files:
             if json_file.stem == "en":
                 continue
-                
+
             logger.info(f"Processing {json_file.name}...")
             target_translation = Translation.from_json_file(json_file)
-            
+
             # Extract language code from filename (e.g., "ru" from "ru.json")
             language_code = json_file.stem
-            
+
             # Fill up translations, passing the file path for incremental saves
             result_translation = fill_up_translation(source_translation, target_translation, language_code, json_file)
-            
+
             logger.info(f"Finished {json_file.name}")
 
 
@@ -234,18 +226,18 @@ def main():
     parser.add_argument("--json_folder_path", help="Path to the folder for JSON locale files")
     parser.add_argument("--list-in-source", action="store_true", help="List all translation keys in the component file")
     parser.add_argument("--list-in-json", action="store_true", help="List all translation keys and values from JSON files")
-    parser.add_argument("--rename-key", nargs=2, metavar=('OLD_KEY', 'NEW_KEY'), 
+    parser.add_argument("--rename-key", nargs=2, metavar=('OLD_KEY', 'NEW_KEY'),
                         help="Rename a translation key in source and JSON files")
-    parser.add_argument("--check-translations", action="store_true", 
+    parser.add_argument("--check-translations", action="store_true",
                         help="Check if all translation keys exist in all language files and template variables match (TAP format)")
     parser.add_argument("--remove-orphan-keys", action="store_true",
                         help="Remove keys from JSON files that don't exist in source files")
     parser.add_argument("--fill-up-translations", action="store_true",
                         help="Fill up missing translations in all language files using English as source")
-    parser.add_argument("--log-level", default="INFO", 
+    parser.add_argument("--log-level", default="INFO",
                         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                         help="Set the logging level (default: INFO)")
-    
+
     args = parser.parse_args()
 
     # Configure logging
@@ -264,17 +256,17 @@ def main():
         logger.error("--json_folder_path must be specified for --list-in-json")
         parser.print_help()
         return
-        
+
     if args.check_translations and (not args.source_path or not args.json_folder_path):
         logger.error("--source_path and --json_folder_path must be specified for --check-translations")
         parser.print_help()
         return
-        
+
     if args.remove_orphan_keys and (not args.source_path or not args.json_folder_path):
         logger.error("--source_path and --json_folder_path must be specified for --remove-orphan-keys")
         parser.print_help()
         return
-        
+
     if args.fill_up_translations and not args.json_folder_path:
         logger.error("--json_folder_path must be specified for --fill-up-translations")
         parser.print_help()
@@ -295,17 +287,17 @@ def main():
 
     if args.list_in_json:
         manager.list_json_keys()
-        
+
     if args.check_translations:
         manager.check_translations()
-        
+
     if args.remove_orphan_keys:
         manager.remove_orphan_keys()
-        
+
     if args.fill_up_translations:
         manager.fill_up_translations()
 
-    if not (args.rename_key or args.list_in_source or args.list_in_json or 
+    if not (args.rename_key or args.list_in_source or args.list_in_json or
             args.check_translations or args.remove_orphan_keys or args.fill_up_translations):
         logger.warning("No action specified. Use --rename_key {old_key} {new_key}, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys, --fill-up-translations.")
         parser.print_help()
