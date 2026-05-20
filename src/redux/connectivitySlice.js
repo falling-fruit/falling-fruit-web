@@ -5,7 +5,7 @@ import { fetchFilterCounts } from './filterSlice'
 import { fetchListLocations } from './listSlice'
 import { fetchMapClusters, fetchMapLocations } from './mapSlice'
 
-export const connectivitySlice = createSlice({
+const connectivitySlice = createSlice({
   name: 'connectivity',
   initialState: {
     isOffline: false,

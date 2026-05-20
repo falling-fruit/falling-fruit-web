@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const shareSlice = createSlice({
+const shareSlice = createSlice({
   name: 'share',
   initialState: {
     isOpenInMobileLayout: false,

@@ -45,12 +45,6 @@ const useIsEmbed = () => {
   return isEmbed
 }
 
-const useIsMobile = () => {
-  const isEmbed = useIsEmbed()
-  const isMobileWidth = useBreakpoint({ maxWidth: MOBILE_MAX_WIDTH })
-  return isEmbed || isMobileWidth
-}
-
 const useIsDesktop = () => {
   const isEmbed = useIsEmbed()
   const isDesktopWidth = useBreakpoint({ minWidth: MOBILE_MAX_WIDTH + 1 })
@@ -69,10 +63,4 @@ const ConnectedBreakpoint = () => {
   return null
 }
 
-export {
-  ConnectedBreakpoint,
-  useBreakpoint,
-  useIsDesktop,
-  useIsEmbed,
-  useIsMobile,
-}
+export { ConnectedBreakpoint, useIsDesktop, useIsEmbed }

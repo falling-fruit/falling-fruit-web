@@ -44,7 +44,7 @@ export const fetchFilterCounts = createAsyncThunk(
   },
 )
 
-export const filterSlice = createSlice({
+const filterSlice = createSlice({
   name: 'filter',
   initialState: {
     types: null,

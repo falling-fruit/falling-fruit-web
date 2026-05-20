@@ -10,7 +10,7 @@ const DEFAULT_SETTINGS = {
   showBusinesses: false,
 }
 
-export const settingsSlice = createSlice({
+const settingsSlice = createSlice({
   name: 'settings',
   initialState: DEFAULT_SETTINGS,
   reducers: {

@@ -14,7 +14,7 @@ const validateLatLngZoom = (lat, lng, zoom) => {
   return { center: { lat, lng }, zoom }
 }
 
-export const legacyViewFromSearchParams = (searchParams) => {
+const legacyViewFromSearchParams = (searchParams) => {
   const legacyLng = searchParams.get('x')
   const legacyLat = searchParams.get('y')
   const legacyZoom = searchParams.get('z')

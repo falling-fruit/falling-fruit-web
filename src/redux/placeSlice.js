@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const placeSlice = createSlice({
+const placeSlice = createSlice({
   name: 'place',
   initialState: {
     selectedPlace: null,

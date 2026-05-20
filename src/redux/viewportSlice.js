@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import persistentStore from '../utils/persistentStore'
 import { selectPlace } from './placeSlice'
 
-export const viewportSlice = createSlice({
+const viewportSlice = createSlice({
   name: 'viewport',
   initialState: {
     lastMapView: persistentStore.getLastMapView(),

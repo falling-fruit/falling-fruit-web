@@ -76,8 +76,6 @@ export const editUser = (
 
 export const getUser = () => instance.get('/user')
 
-export const deleteUser = () => instance.delete('/user')
-
 export const confirmUser = (token: string) =>
   instance.post('/user/confirmation', { token })
 
@@ -97,7 +95,7 @@ export const getUserToken = (username: string, password: string) => {
   return instance.post('/user/token', formData)
 }
 
-export const refreshUserToken = (refreshToken: string) => {
+const refreshUserToken = (refreshToken: string) => {
   const formData = new FormData()
   formData.append('refresh_token', refreshToken)
   return instance.post('/user/token/refresh', formData)
@@ -176,10 +174,6 @@ export const getTypes = () => instance.get('/types')
 export const getTypeCounts = (
   params: paths['/types/counts']['get']['parameters']['query'],
 ) => instance.get('/types/counts', { params })
-
-export const getTypeById = (
-  id: paths['/types/{id}']['get']['parameters']['path']['id'],
-) => instance.get(`/types/${id}`)
 
 export const addType = (
   data: paths['/types']['post']['requestBody']['content']['application/json'],
