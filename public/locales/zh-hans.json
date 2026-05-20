@@ -279,11 +279,17 @@
     },
     "changes": {
       "change_in_city": "在{{city}}{{type}}",
+      "days": {
+        "one": "{{count}} 天",
+        "other": "{{count}} 天"
+      },
+      "last_24_hours": "最近24小时",
       "place": {
         "one": "地点",
         "other": "地点"
       },
       "recent_activity": "最近活动",
+      "time_ago": "{{time}}前",
       "type": {
         "added": "添加",
         "added_by_you": "由您添加",
@@ -449,14 +455,6 @@
     "review_edited": "评论已编辑",
     "review_submitted": "评论已提交",
     "type_added": "类型已添加"
-  },
-  "time": {
-    "days": {
-      "one": "{{count}} 天",
-      "other": "{{count}} 天"
-    },
-    "last_24_hours": "最近24小时",
-    "time_ago": "{{time}}前"
   },
   "type": {
     "pending_review_category": "待审核",

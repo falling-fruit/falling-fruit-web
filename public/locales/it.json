@@ -279,11 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
+      "days": {
+        "one": "{{count}} giorno",
+        "other": "{{count}} giorni"
+      },
+      "last_24_hours": "Ultime 24 ore",
       "place": {
         "one": "Luogo",
         "other": "Luoghi"
       },
       "recent_activity": "Attività recente",
+      "time_ago": "{{time}} fa",
       "type": {
         "added": "aggiunto",
         "added_by_you": "aggiunto da te",
@@ -449,14 +455,6 @@
     "review_edited": "Recensione modificata",
     "review_submitted": "Recensione inviata",
     "type_added": "Tipo aggiunto"
-  },
-  "time": {
-    "days": {
-      "one": "{{count}} giorno",
-      "other": "{{count}} giorni"
-    },
-    "last_24_hours": "Ultime 24 ore",
-    "time_ago": "{{time}} fa"
   },
   "type": {
     "pending_review_category": "In attesa di revisione",

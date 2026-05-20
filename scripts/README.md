@@ -97,7 +97,6 @@ Use translation manager as documented above. First run --fill-up-translations, t
 
 Add a new entry to `LANGUAGE_OPTIONS` in the file `src/i18n.js`. We keep languages sorted by ISO code.
 
-
 4. Check with native speaker
 
-Show the new translation to someone who knows the language well. If their contribution is substantial, offer to list them as a translator in `src/components/about/ProjectPage.js`. 
+Show the new translation to someone who knows the language well. If their contribution is substantial, offer to list them as a translator in `src/components/about/ProjectPage.js`.

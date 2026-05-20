@@ -279,11 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
+      "days": {
+        "one": "{{count}} day",
+        "other": "{{count}} days"
+      },
+      "last_24_hours": "Last 24 hours",
       "place": {
         "one": "Place",
         "other": "Places"
       },
       "recent_activity": "Recent activity",
+      "time_ago": "{{time}} ago",
       "type": {
         "added": "added",
         "added_by_you": "added by you",
@@ -427,12 +433,12 @@
   },
   "save_location_to_list": {
     "add_new_list": "Add new list",
-    "new_list_placeholder": "List name",
-    "saved_locations_title": "Saved locations",
-    "remove_from_list_confirm": "Remove \"{{name}}\" from the list?",
     "delete_list_confirm": "Delete list \"{{name}}\"?",
+    "new_list_placeholder": "List name",
+    "remove_from_list_confirm": "Remove \"{{name}}\" from the list?",
     "save_label": "Save",
-    "saved_label": "Saved"
+    "saved_label": "Saved",
+    "saved_locations_title": "Saved locations"
   },
   "share": {
     "leave_embed_view_for_full_site": "Full site",
@@ -449,14 +455,6 @@
     "review_edited": "Review edited successfully!",
     "review_submitted": "Review submitted successfully!",
     "type_added": "New type added successfully!"
-  },
-  "time": {
-    "days": {
-      "one": "{{count}} day",
-      "other": "{{count}} days"
-    },
-    "last_24_hours": "Last 24 hours",
-    "time_ago": "{{time}} ago"
   },
   "type": {
     "pending_review_category": "Pending review",

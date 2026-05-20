@@ -279,11 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{city}} şehrinde {{type}}",
+      "days": {
+        "one": "{{count}} gün",
+        "other": "{{count}} gün"
+      },
+      "last_24_hours": "Son 24 saat",
       "place": {
         "one": "Mekan",
         "other": "Mekanlar"
       },
       "recent_activity": "Son aktiviteler",
+      "time_ago": "{{time}} önce",
       "type": {
         "added": "eklendi",
         "added_by_you": "sizin tarafınızdan eklendi",
@@ -449,14 +455,6 @@
     "review_edited": "Değerlendirme başarıyla düzenlendi!",
     "review_submitted": "Değerlendirme başarıyla gönderildi!",
     "type_added": "Tür başarıyla eklendi!"
-  },
-  "time": {
-    "days": {
-      "one": "{{count}} gün",
-      "other": "{{count}} gün"
-    },
-    "last_24_hours": "Son 24 saat",
-    "time_ago": "{{time}} önce"
   },
   "type": {
     "pending_review_category": "İnceleme bekliyor",

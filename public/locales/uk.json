@@ -279,11 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} в {{city}}",
+      "days": {
+        "one": "{{count}} день",
+        "other": "{{count}} днів"
+      },
+      "last_24_hours": "Останні 24 години",
       "place": {
         "one": "Місце",
         "other": "Місця"
       },
       "recent_activity": "Недавня активність",
+      "time_ago": "{{time}} тому",
       "type": {
         "added": "додано",
         "added_by_you": "додано вами",
@@ -449,14 +455,6 @@
     "review_edited": "Відгук успішно відредаговано!",
     "review_submitted": "Відгук успішно надіслано!",
     "type_added": "Тип успішно додано!"
-  },
-  "time": {
-    "days": {
-      "one": "{{count}} день",
-      "other": "{{count}} днів"
-    },
-    "last_24_hours": "Останні 24 години",
-    "time_ago": "{{time}} тому"
   },
   "type": {
     "pending_review_category": "Очікує перевірки",

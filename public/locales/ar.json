@@ -279,11 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} في {{city}}",
+      "days": {
+        "one": "{{count}} يوم",
+        "other": "{{count}} أيام"
+      },
+      "last_24_hours": "أخر 24 ساعه",
       "place": {
         "one": "مكان",
         "other": "الأماكن"
       },
       "recent_activity": "النشاط الأخير",
+      "time_ago": "منذ {{time}}",
       "type": {
         "added": "مضاف",
         "added_by_you": "مضاف بواسطتك",
@@ -449,14 +455,6 @@
     "review_edited": "تم تعديل المراجعة!",
     "review_submitted": "تم إرسال المراجعة!",
     "type_added": "تمت إضافة النوع!"
-  },
-  "time": {
-    "days": {
-      "one": "{{count}} يوم",
-      "other": "{{count}} أيام"
-    },
-    "last_24_hours": "أخر 24 ساعه",
-    "time_ago": "منذ {{time}}"
   },
   "type": {
     "pending_review_category": "قيد المراجعة",
