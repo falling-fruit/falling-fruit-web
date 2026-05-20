@@ -99,6 +99,7 @@
     "format": "yarn format:output --write",
     "format:check": "yarn format:output --check",
     "format:output": "prettier \"./src/**/*.{js,jsx,ts,tsx,css,scss,json,md}\" \"./public/**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
+    "knip": "knip",
     "build": "craco build",
     "build:android": "npx dotenvx run -f .env.android -f .env -- craco build",
     "build:ios": "npx dotenvx run -f .env.ios -f .env -- craco build",
