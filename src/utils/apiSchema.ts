@@ -1100,5 +1100,3 @@ export interface components {
     import_id: number;
   };
 }
-
-export interface operations {}
