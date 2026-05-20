@@ -234,10 +234,14 @@ const SaveToListButton = ({ containerRef }) => {
     setNewListName('')
   }
 
-  const handleConfirmNewList = () => {
+  const handleConfirmNewList = async () => {
     const trimmed = newListName.trim()
     if (trimmed) {
-      dispatch(addList({ name: trimmed }))
+      const resultAction = await dispatch(addList({ name: trimmed }))
+      if (addList.fulfilled.match(resultAction)) {
+        const newList = resultAction.payload
+        dispatch(addLocationToList({ listId: newList.id, location }))
+      }
     }
     setAddingNew(false)
     setNewListName('')
