@@ -279,15 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "days_ago": {
+      "days": {
         "one": "{{count}} dag",
         "other": "{{count}} dagen"
       },
+      "last_24_hours": "Laatste 24 uur",
       "place": {
         "one": "Plaats",
         "other": "Plaatsen"
       },
       "recent_activity": "Recente activiteit",
+      "time_ago": "{{time}} geleden",
       "type": {
         "added": "toegevoegd",
         "added_by_you": "door jou toegevoegd",
@@ -453,10 +455,6 @@
     "review_edited": "Beoordeling succesvol bewerkt!",
     "review_submitted": "Beoordeling succesvol ingediend!",
     "type_added": "Type succesvol toegevoegd!"
-  },
-  "time": {
-    "last_24_hours": "Laatste 24 uur",
-    "time_ago": "{{time}} geleden"
   },
   "type": {
     "pending_review_category": "In afwachting van beoordeling",

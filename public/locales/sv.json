@@ -279,15 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} i {{city}}",
-      "days_ago": {
+      "days": {
         "one": "{{count}} dag",
         "other": "{{count}} dagar"
       },
+      "last_24_hours": "Senaste 24 timmarna",
       "place": {
         "one": "Plats",
         "other": "Platser"
       },
       "recent_activity": "Senaste aktivitet",
+      "time_ago": "för {{time}} sedan",
       "type": {
         "added": "tillagd",
         "added_by_you": "tillagd av dig",
@@ -453,10 +455,6 @@
     "review_edited": "Recension redigerad",
     "review_submitted": "Recension skickad",
     "type_added": "Typ tillagd"
-  },
-  "time": {
-    "last_24_hours": "Senaste 24 timmarna",
-    "time_ago": "för {{time}} sedan"
   },
   "type": {
     "pending_review_category": "Väntar på granskning",

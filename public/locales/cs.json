@@ -279,15 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} v {{city}}",
-      "days_ago": {
+      "days": {
         "one": "{{count}} dnem",
         "other": "{{count}} dny"
       },
+      "last_24_hours": "Posledních 24 hodin",
       "place": {
         "one": "Místo",
         "other": "Místa"
       },
       "recent_activity": "Nedávná aktivita",
+      "time_ago": "před {{time}}",
       "type": {
         "added": "přidáno",
         "added_by_you": "přidáno vámi",
@@ -453,10 +455,6 @@
     "review_edited": "Recenze byla úspěšně upravena!",
     "review_submitted": "Recenze byla úspěšně odeslána!",
     "type_added": "Nový typ byl úspěšně přidán!"
-  },
-  "time": {
-    "last_24_hours": "Posledních 24 hodin",
-    "time_ago": "před {{time}}"
   },
   "type": {
     "pending_review_category": "Čeká na schválení",

@@ -279,15 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} tại {{city}}",
-      "days_ago": {
+      "days": {
         "one": "{{count}} ngày",
         "other": "{{count}} ngày"
       },
+      "last_24_hours": "24 giờ qua",
       "place": {
         "one": "Địa điểm",
         "other": "Địa điểm"
       },
       "recent_activity": "Hoạt động gần đây",
+      "time_ago": "{{time}} trước",
       "type": {
         "added": "đã thêm",
         "added_by_you": "đã được thêm bởi bạn",
@@ -453,10 +455,6 @@
     "review_edited": "Đánh giá đã được chỉnh sửa thành công!",
     "review_submitted": "Đánh giá đã được gửi thành công!",
     "type_added": "Loại đã được thêm thành công!"
-  },
-  "time": {
-    "last_24_hours": "24 giờ qua",
-    "time_ago": "{{time}} trước"
   },
   "type": {
     "pending_review_category": "Đang chờ duyệt",

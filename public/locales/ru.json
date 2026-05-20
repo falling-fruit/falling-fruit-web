@@ -279,15 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} в {{city}}",
-      "days_ago": {
+      "days": {
         "one": "{{count}} день",
         "other": "{{count}} дней"
       },
+      "last_24_hours": "Последние 24 часа",
       "place": {
         "one": "Место",
         "other": "Места"
       },
       "recent_activity": "Недавняя активность",
+      "time_ago": "{{time}} назад",
       "type": {
         "added": "добавлено",
         "added_by_you": "добавлено вами",
@@ -453,10 +455,6 @@
     "review_edited": "Отзыв успешно отредактирован!",
     "review_submitted": "Отзыв успешно отправлен!",
     "type_added": "Новый тип успешно добавлен!"
-  },
-  "time": {
-    "last_24_hours": "Последние 24 часа",
-    "time_ago": "{{time}} назад"
   },
   "type": {
     "pending_review_category": "Ожидает проверки",

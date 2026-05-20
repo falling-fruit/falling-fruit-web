@@ -279,15 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} in {{city}}",
-      "days_ago": {
+      "days": {
         "one": "{{count}} μέρα",
         "other": "{{count}} μέρες"
       },
+      "last_24_hours": "Τελευταίες 24 ώρες",
       "place": {
         "one": "Μέρος",
         "other": "Τοποθεσίες"
       },
       "recent_activity": "Πρόσφατη δραστηριότητα",
+      "time_ago": "{{time}} πριν",
       "type": {
         "added": "προστέθηκε",
         "added_by_you": "προστέθηκε από εσάς",
@@ -453,10 +455,6 @@
     "review_edited": "Η κριτική επεξεργάστηκε με επιτυχία!",
     "review_submitted": "Η κριτική υποβλήθηκε με επιτυχία!",
     "type_added": "Ο τύπος προστέθηκε με επιτυχία!"
-  },
-  "time": {
-    "last_24_hours": "Τελευταίες 24 ώρες",
-    "time_ago": "{{time}} πριν"
   },
   "type": {
     "pending_review_category": "Σε αναμονή αξιολόγησης",

@@ -108,13 +108,13 @@ function formatPeriodName(
 ): string {
   if (daysAgo <= 14) {
     if (daysAgo === 0) {
-      return t('time.last_24_hours')
+      return t('pages.changes.last_24_hours')
     } else if (daysAgo === 1) {
-      const time = t('pages.changes.days_ago.one', { count: daysAgo })
-      return t('time.time_ago', { time })
+      const time = t('pages.changes.days.one', { count: daysAgo })
+      return t('pages.changes.time_ago', { time })
     } else {
-      const time = t('pages.changes.days_ago.other', { count: daysAgo })
-      return t('time.time_ago', { time })
+      const time = t('pages.changes.days.other', { count: daysAgo })
+      return t('pages.changes.time_ago', { time })
     }
   } else {
     return formatISOString(date, language)

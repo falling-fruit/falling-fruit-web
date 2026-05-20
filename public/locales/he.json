@@ -279,15 +279,17 @@
     },
     "changes": {
       "change_in_city": "{{type}} ב{{city}}",
-      "days_ago": {
+      "days": {
         "one": "{{count}} יום",
         "other": "{{count}} ימים"
       },
+      "last_24_hours": "24 השעות האחרונות",
       "place": {
         "one": "מקום",
         "other": "מקומות"
       },
       "recent_activity": "פעילות אחרונה",
+      "time_ago": "לפני {{time}}",
       "type": {
         "added": "נוסף",
         "added_by_you": "נוסף על ידך",
@@ -453,10 +455,6 @@
     "review_edited": "הביקורת נערכה בהצלחה!",
     "review_submitted": "הביקורת נשלחה בהצלחה!",
     "type_added": "הסוג נוסף בהצלחה!"
-  },
-  "time": {
-    "last_24_hours": "24 השעות האחרונות",
-    "time_ago": "לפני {{time}}"
   },
   "type": {
     "pending_review_category": "ממתין לביקורת",
