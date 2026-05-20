@@ -107,7 +107,6 @@
     "serve": "serve build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "genApiSchema": "npx openapi-typescript https://raw.githubusercontent.com/falling-fruit/api/main/docs/openapi.yml --output src/utils/apiSchema.ts",
     "genData": "node scripts/data.js https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg src/constants/data"
   },
   "browserslist": {
