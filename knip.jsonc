@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
+  "ignoreFiles": [
+    // Packaged yarn binary
+    ".yarn/releases/yarn-1.22.22.cjs",
+    // Android app
+    "android/**",
+    // iOS app
+    "ios/**",
+    // Craco build configuration
+    "craco.config.js",
+    // PM2 ecosystem configuration (server)
+    "ecosystem.config.js",
+  ],
+  "ignoreDependencies": [
+    // Required by craco
+    "browserslist",
+    "postcss",
+    "postcss-normalize",
+    // Required by craco via react-scripts
+    "@babel/core",
+    "@babel/plugin-syntax-flow",
+    "@babel/plugin-transform-react-jsx",
+  ],
+}
