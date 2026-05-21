@@ -28,7 +28,6 @@
       "add_location_list_failed": "添加位置列表失败：{{message}}",
       "add_location_to_list_failed": "添加位置到列表失败：{{message}}",
       "fetch_clusters_failed": "获取集群失败：{{message}}",
-      "fetch_filter_counts_failed": "获取筛选统计失败：{{message}}",
       "fetch_import_failed": "获取数据集 {{id}} 失败：{{message}}",
       "fetch_location_changes_failed": "获取位置变更记录失败：{{message}}",
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
@@ -71,7 +70,6 @@
       "not_supported": "当前浏览器不支持定位功能"
     },
     "language_changed_refresh_to_reload_map": "语言设置已更改，请刷新页面以更新地图",
-    "results_unavailable": "暂无结果",
     "unknown_error": "发生未知错误"
   },
   "filter": {
@@ -123,6 +121,7 @@
     "description": "描述",
     "email": "电子邮箱",
     "locations": {
+      "one": "地点",
       "other": "地点"
     },
     "map": "地图",
@@ -280,11 +279,17 @@
     },
     "changes": {
       "change_in_city": "在 {{city}} {{type}}",
+      "days": {
+        "one": "{{count}} 天",
+        "other": "{{count}} 天"
+      },
+      "last_24_hours": "最近 24 小时",
       "place": {
         "one": "地点",
         "other": "地点"
       },
       "recent_activity": "最近动态",
+      "time_ago": "{{time}}前",
       "type": {
         "added": "新增",
         "added_by_you": "由你新增",
@@ -297,7 +302,6 @@
       "your_activity_empty": "你尚未添加、编辑或审核过任何地点"
     },
     "data": {
-      "beware_html": "提示：由于数据量巨大，解压后的文件可能会导致大多数 Excel 等电子表格软件卡死。如果你只需要特定区域的数据，请先尝试使用地图页面自带的下载工具。",
       "caveat_emptor_html": "数据仅供参考，我们不保证其准确性。如果你利用这些数据做出了有趣的应用，请 <a href=\"mailto:feedback@fallingfruit.org\">联系我们</a>！",
       "intro": "Falling Fruit 建立在公共数据和用户无私分享的基础之上。我们相信每个人都有权平等地获得我们集体劳动的成果。秉承开放精神，你可以下载我们的完整数据库：",
       "license_html": "如果你希望在项目（特别是商业项目）中使用这些数据，请联系我们。除特别说明外，数据遵循 <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> 许可协议。这意味着你可以自由使用和分发，但必须署名来源且不得用于商业用途。我们的源代码已在 <a href=\"https://github.com/falling-fruit/\">GitHub</a> 上开源。"
@@ -452,14 +456,6 @@
     "review_submitted": "评价已提交",
     "type_added": "类别已添加"
   },
-  "time": {
-    "days": {
-      "one": "{{count}} 天",
-      "other": "{{count}} 天"
-    },
-    "last_24_hours": "最近 24 小时",
-    "time_ago": "{{time}}前"
-  },
   "type": {
     "pending_review_category": "待审核",
     "pending_review_item": "{{name}}（审核中）"
@@ -468,7 +464,6 @@
     "bio": "个人简介",
     "change_email": "修改电子邮箱",
     "change_password": "修改密码",
-    "change_your_password": "修改你的密码",
     "current_email": "当前邮箱",
     "current_password": "当前密码",
     "header": {
