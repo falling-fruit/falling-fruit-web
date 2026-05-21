@@ -89,6 +89,7 @@
     "postcss": "^8.1.0",
     "postcss-normalize": "^13.0.1",
     "prettier": "^3.4.1",
+    "replace-in-file": "^8.4.0",
     "serve": "^14.2.6"
   },
   "scripts": {
@@ -107,7 +108,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "genData": "node scripts/data.js https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg src/constants/data",
-    "genAssets": "npx @capacitor/assets generate --ios --android"
+    "genAssets": "npx @capacitor/assets generate --ios --android && cd public && npx @capacitor/assets generate --pwa --pwaManifestPath manifest.webmanifest --assetPath ../assets && replace-in-file '/\\.\\.\\/icons\\//g' 'icons/' manifest.webmanifest && replace-in-file '/\"image\\/png\"/g' '\"image/webp\"' manifest.webmanifest"
   },
   "browserslist": {
     "production": [
