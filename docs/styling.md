@@ -20,7 +20,7 @@ FF’s frontend is a progressive web app, which means that the same website is c
 
 Although most UI components are designed to be reusable across both platforms, writing styles and functionality for a specific platform is inevitable because of different layouts and features.
 
-To write platform-specific functionality, use the `useIsDesktop()` and `useIsMobile()` hooks exported from [`utils/useBreakpoint.js`](https://github.com/falling-fruit/falling-fruit-web/blob/main/src/utils/useBreakpoint.js).
+To write platform-specific functionality, use the `useIsDesktop()` hook exported from [`utils/useBreakpoint.js`](https://github.com/falling-fruit/falling-fruit-web/blob/main/src/utils/useBreakpoint.js).
 
 ## Colors
 
