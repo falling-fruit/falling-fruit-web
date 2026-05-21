@@ -21,5 +21,8 @@
     "@babel/core",
     "@babel/plugin-syntax-flow",
     "@babel/plugin-transform-react-jsx",
+    // Required by capacitor
+    "@capacitor/device",
+    "@capacitor/filesystem",
   ],
 }

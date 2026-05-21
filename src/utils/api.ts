@@ -135,7 +135,7 @@ export const getLocationsChanges = (
   params: paths['/locations/changes']['get']['parameters']['query'],
 ) => instance.get('/locations/changes', { params })
 
-export const getLists = (
+const getLists = (
   params?: paths['/locations/lists']['get']['parameters']['query'],
 ) => instance.get('/locations/lists', { params })
 
@@ -144,11 +144,6 @@ export const getListsWithLocations = () => getLists({ embed: 'locations' })
 export const addList = (
   data: paths['/locations/lists']['post']['requestBody']['content']['application/json'],
 ) => instance.post('/locations/lists', data)
-
-export const getListById = (
-  listId: paths['/locations/lists/{list_id}']['get']['parameters']['path']['list_id'],
-  params?: paths['/locations/lists/{list_id}']['get']['parameters']['query'],
-) => instance.get(`/locations/lists/${listId}`, { params })
 
 export const editList = (
   listId: paths['/locations/lists/{list_id}']['put']['parameters']['path']['list_id'],
