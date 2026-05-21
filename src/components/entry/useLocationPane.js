@@ -50,9 +50,15 @@ const useLocationPane = () => {
       }
 
       const nextSearch = next.toString()
-      history.replace({
+      const nextSearchString = nextSearch ? `?${nextSearch}` : ''
+
+      if (nextSearchString === search) {
+        return
+      }
+
+      history.push({
         pathname,
-        search: nextSearch ? `?${nextSearch}` : '',
+        search: nextSearchString,
       })
     },
     [history, pathname, search],
