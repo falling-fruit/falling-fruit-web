@@ -11,4 +11,4 @@ export const PHOTO_MAX_DIMENSION = 2048
  *
  * @constant {number}
  */
-export const JPEG_QUALITY = 0.85
+export const JPEG_QUALITY = 0.8
