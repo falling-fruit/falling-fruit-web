@@ -106,7 +106,8 @@
     "serve": "serve build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "genData": "node scripts/data.js https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg src/constants/data"
+    "genData": "node scripts/data.js https://opensheet.elk.sh/1GSB07pn7RMbZbFwv85CextwGzUTTGE2ZJZxn0XxvoEg src/constants/data",
+    "genAssets": "npx @capacitor/assets generate --ios --android"
   },
   "browserslist": {
     "production": [
