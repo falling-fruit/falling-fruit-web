@@ -89,7 +89,7 @@
       "report": "举报/报告",
       "reset": "重置",
       "restart": "重新开始",
-      "review": "审核",
+      "review": "评价",
       "submit": "提交",
       "submitting": "提交中..."
     },
@@ -424,7 +424,7 @@
     "form": {
       "add_from_camera": "拍摄照片",
       "add_from_gallery": "从相册选择",
-      "leave_a_review": "发表评价/观察记录",
+      "leave_a_review": "发表评价",
       "observed_on": "观察日期 {{date}}",
       "photos": "现场照片"
     },
@@ -487,6 +487,6 @@
     "send": "发送邮件",
     "sign_in": "登录",
     "sign_out": "退出登录",
-    "your_activity": "我的动态"
+    "your_activity": "你的动态"
   }
 }
