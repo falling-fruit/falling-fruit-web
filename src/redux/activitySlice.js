@@ -249,10 +249,10 @@ export const resetUserActivityLastBrowsedSection = () =>
     displayLimit: null,
   })
 
+const { clearCurrentUserActivityStale } = activitySlice.actions
 export const {
   setRecentChangesLastBrowsedSection,
   setUserActivityLastBrowsedSection,
-  clearCurrentUserActivityStale,
 } = activitySlice.actions
 
 export default activitySlice.reducer
