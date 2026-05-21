@@ -31,7 +31,6 @@ const SearchAndSelectContainer = styled.div`
 const SearchInput = styled(Input)`
   flex: 1;
   min-width: 5em;
-  height: 2.65em;
   input {
     margin-block: 0.5em;
   }
