@@ -107,7 +107,6 @@ const setLanguageFromLocaleString = (locale) => {
 const LanguageSelect = () => {
   const { t, i18n } = useTranslation()
   const { googleMap } = useSelector((state) => state.map)
-  const [hasToasted, setHasToasted] = useState(false)
   const [pendingLanguage, setPendingLanguage] = useState(null)
   const restartUrl = useRestartUrl()
   return (
@@ -120,15 +119,12 @@ const LanguageSelect = () => {
           setPendingLanguage(null)
           persistentStore.setLanguage(option.value)
           setDocumentDir(option.value)
-          if (!hasToasted && googleMap) {
-            if (Capacitor.isNativePlatform()) {
-              window.location.href = restartUrl
-            } else {
-              toast.info(
-                t('error_message.language_changed_refresh_to_reload_map'),
-              )
-              setHasToasted(true)
-            }
+          if (Capacitor.isNativePlatform()) {
+            window.location.href = restartUrl
+          } else if (googleMap) {
+            toast.info(
+              t('error_message.language_changed_refresh_to_reload_map'),
+            )
           }
         })
       }}
