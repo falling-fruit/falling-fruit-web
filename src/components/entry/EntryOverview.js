@@ -199,7 +199,7 @@ const ButtonGroupStart = styled.div`
 `
 
 const OverviewContainer = styled.div`
-  position: relative;
+  padding-block-end: env(safe-area-inset-bottom, 0);
 `
 
 const EntryOverview = () => {
@@ -269,41 +269,36 @@ const EntryOverview = () => {
 
   return (
     <OverviewContainer ref={containerRef}>
-      <>
-        <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
-        <Tags locationData={locationData} />
-        <Description>
-          <p dir="auto">{locationData.description}</p>
+      <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
+      <Tags locationData={locationData} />
+      <Description>
+        <p dir="auto">{locationData.description}</p>
 
-          <AddressInfo
-            locationData={locationData}
-            onClick={handleAddressClick}
-          />
-          <StreetViewInfo
-            streetViewOpen={streetViewOpen}
-            isDisabled={!!locationsWithoutPanorama[locationData.id]}
-            onOpen={openStreetView}
-            onClose={closeStreetView}
-          />
-          {hasSeasonality(locationData) && (
-            <SeasonalityInfo locationData={locationData} />
-          )}
-          {(locationData.import_id ||
-            locationData.author ||
-            locationData.user_id) && (
-            <AuthorInfo locationData={locationData} user={user} />
-          )}
-          <LastEditedInfo locationData={locationData} />
-          <ReviewSummary reviews={reviews} />
-          <ButtonRow>
-            <ButtonGroupStart>
-              <ReviewButton />
-              {user && <SaveToListButton containerRef={containerRef} />}
-            </ButtonGroupStart>
-            <ReportButton />
-          </ButtonRow>
-        </Description>
-      </>
+        <AddressInfo locationData={locationData} onClick={handleAddressClick} />
+        <StreetViewInfo
+          streetViewOpen={streetViewOpen}
+          isDisabled={!!locationsWithoutPanorama[locationData.id]}
+          onOpen={openStreetView}
+          onClose={closeStreetView}
+        />
+        {hasSeasonality(locationData) && (
+          <SeasonalityInfo locationData={locationData} />
+        )}
+        {(locationData.import_id ||
+          locationData.author ||
+          locationData.user_id) && (
+          <AuthorInfo locationData={locationData} user={user} />
+        )}
+        <LastEditedInfo locationData={locationData} />
+        <ReviewSummary reviews={reviews} />
+        <ButtonRow>
+          <ButtonGroupStart>
+            <ReviewButton />
+            {user && <SaveToListButton containerRef={containerRef} />}
+          </ButtonGroupStart>
+          <ReportButton />
+        </ButtonRow>
+      </Description>
     </OverviewContainer>
   )
 }
