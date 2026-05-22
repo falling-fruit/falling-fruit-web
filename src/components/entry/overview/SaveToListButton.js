@@ -169,6 +169,7 @@ const SaveToListButton = ({ containerRef }) => {
   const wrapperRef = useRef(null)
   const newListInputRef = useRef(null)
   const addingNewSkeletonRef = useRef(null)
+  const addNewRowRef = useRef(null)
 
   const { lists } = useSavedLists(locationId)
   const { drawerFullyOpen, fullyOpenPaneDrawer } = useLocationPane()
@@ -190,7 +191,26 @@ const SaveToListButton = ({ containerRef }) => {
   useEffect(() => {
     if (addingNew && newListInputRef.current) {
       newListInputRef.current.focus()
+      addNewRowRef.current?.scrollIntoView()
     }
+  }, [addingNew])
+
+  // Re-scroll after soft keyboard appears on mobile
+  useEffect(() => {
+    if (!addingNew) {
+      return
+    }
+    const viewport = window.visualViewport
+    if (!viewport) {
+      return
+    }
+
+    const handleViewportResize = () => {
+      addNewRowRef.current?.scrollIntoView()
+    }
+
+    viewport.addEventListener('resize', handleViewportResize)
+    return () => viewport.removeEventListener('resize', handleViewportResize)
   }, [addingNew])
 
   useEffect(() => {
@@ -307,7 +327,7 @@ const SaveToListButton = ({ containerRef }) => {
           <BottomSection>
             <Divider />
             {addingNew ? (
-              <AddNewRow>
+              <AddNewRow ref={addNewRowRef}>
                 <AddNewInput
                   ref={newListInputRef}
                   value={newListName}
