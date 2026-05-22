@@ -126,8 +126,6 @@ const EntryMobile = () => {
   const {
     drawerFullyOpen,
     drawerLow,
-    isStandalone,
-    isFromEmbedViewMap,
     tabIndex,
     fullyOpenPaneDrawer,
     setPaneDrawerToMiddlePosition,
@@ -135,7 +133,6 @@ const EntryMobile = () => {
     setTabIndex,
   } = useLocationPane()
 
-  const drawerDisabled = isFromEmbedViewMap || isStandalone
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
@@ -163,7 +160,7 @@ const EntryMobile = () => {
   }, [])
 
   const [currentTranslateY, setCurrentTranslateY] = useState(
-    drawerFullyOpen || drawerDisabled
+    drawerFullyOpen
       ? hasImages
         ? ENTRY_IMAGE_HEIGHT
         : TOP_BAR_HEIGHT
@@ -187,13 +184,7 @@ const EntryMobile = () => {
         topPositionHeight={hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT}
         middlePositionScreenRatio={0.7}
         partialPositionHeightPx={80 + safeAreaInsetBottom}
-        position={
-          drawerFullyOpen || drawerDisabled
-            ? 'top'
-            : drawerLow
-              ? 'low'
-              : 'middle'
-        }
+        position={drawerFullyOpen ? 'top' : drawerLow ? 'low' : 'middle'}
         onPositionChange={(position) => {
           if (position === 'top') {
             setTimeout(fullyOpenPaneDrawer, 0.25)
@@ -207,10 +198,8 @@ const EntryMobile = () => {
             console.error(position)
           }
         }}
-        drawerDisabled={drawerDisabled || drawerFullyOpen}
         onChangeTranslateY={setCurrentTranslateY}
         hasWhiteBackground={!isLoading && hasImages}
-        showMoveElement={!(drawerFullyOpen || drawerDisabled)}
       >
         {hasImages && (
           <RevealedFromUnderneath

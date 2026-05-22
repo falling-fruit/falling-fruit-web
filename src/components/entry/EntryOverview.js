@@ -217,12 +217,7 @@ const EntryOverview = () => {
   const user = useSelector((state) => state.auth.user)
   const isDesktop = useIsDesktop()
 
-  const {
-    drawerFullyOpen,
-    isStandalone,
-    reenablePaneDrawerAndSetToLowPosition,
-    setPaneDrawerToLowPosition,
-  } = useLocationPane()
+  const { drawerFullyOpen, setPaneDrawerToLowPosition } = useLocationPane()
 
   const containerRef = useRef(null)
 
@@ -250,8 +245,6 @@ const EntryOverview = () => {
       })
       if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
         googleMap?.setZoom(MIN_LOCATION_ZOOM)
-      } else if (isStandalone) {
-        reenablePaneDrawerAndSetToLowPosition()
       } else if (drawerFullyOpen) {
         setPaneDrawerToLowPosition()
       }

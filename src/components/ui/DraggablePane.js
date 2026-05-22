@@ -31,7 +31,7 @@ const DragHandle = styled.div`
   background-color: #ccc;
   border-radius: 3px;
   margin: 10px auto;
-  ${(props) => !props.showMoveElement && `display: none`};
+  ${(props) => !props.visible && `display: none`};
 `
 
 const POSITIONS = {
@@ -48,14 +48,11 @@ const DraggablePane = ({
   topPositionHeight,
   middlePositionScreenRatio,
   partialPositionHeightPx,
-  drawerDisabled,
   onChangeTranslateY,
   hasWhiteBackground,
-  showMoveElement,
   displayOverTopBar,
 }) => {
-  const isDraggablePosition =
-    position === POSITIONS.MIDDLE || position === POSITIONS.LOW
+  const isDraggablePosition = position !== POSITIONS.TOP
   const paneRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
   const [startY, setStartY] = useState(0)
@@ -151,7 +148,7 @@ const DraggablePane = ({
   }, [topPositionHeight, position, movePane])
 
   const handleStart = (clientY) => {
-    if (drawerDisabled) {
+    if (!isDraggablePosition) {
       return
     }
     setIsDragging(true)
@@ -160,7 +157,7 @@ const DraggablePane = ({
   }
 
   const handleMove = (clientY) => {
-    if (!isDragging || drawerDisabled) {
+    if (!isDragging || !isDraggablePosition) {
       return
     }
 
@@ -171,7 +168,7 @@ const DraggablePane = ({
   }
 
   const handleEnd = () => {
-    if (!isDragging || drawerDisabled) {
+    if (!isDragging || !isDraggablePosition) {
       return
     }
     setIsDragging(false)
@@ -245,11 +242,10 @@ const DraggablePane = ({
       onTouchEnd={isDraggablePosition ? handleTouchEnd : undefined}
       onMouseDown={isDraggablePosition ? handleMouseDown : undefined}
       hasWhiteBackground={hasWhiteBackground}
-      showMoveElement={showMoveElement}
       isDraggablePosition={isDraggablePosition}
       displayOverTopBar={displayOverTopBar}
     >
-      <DragHandle showMoveElement={showMoveElement} />
+      <DragHandle visible={isDraggablePosition} />
       {children}
     </PaneContainer>
   )
