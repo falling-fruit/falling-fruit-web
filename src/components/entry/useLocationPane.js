@@ -3,30 +3,17 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import { useIsEmbed } from '../../utils/useBreakpoint'
 
-/**
- * Manages location pane state via URL search params.
- *
- * URL params:
- *   pane = 'low' | 'full' | 'standalone' | (absent = middle)
- *   tab  = '1'   | (absent = 0)
- *
- * Returns an object with the same shape as state.location.pane in Redux,
- * plus functions to mutate the state.
- */
 const useLocationPane = () => {
   const history = useHistory()
   const { search, pathname } = useLocation()
   const isEmbed = useIsEmbed()
 
   const params = new URLSearchParams(search)
-  const paneParam = params.get('pane') // 'low' | 'full' | 'standalone' | null
-  const tabParam = params.get('tab') // '1' | null
+  const paneParam = params.get('pane') // 'low' | 'full' | null -> middle position
+  const tabParam = params.get('tab') // '1' | null -> 0
 
-  const isStandalone = paneParam === 'standalone'
-  const isFromEmbedViewMap = isEmbed
-  const drawerFullyOpen =
-    paneParam === 'full' || isStandalone || isFromEmbedViewMap
-  const drawerLow = paneParam === 'low'
+  const drawerFullyOpen = isEmbed || paneParam === 'full'
+  const drawerLow = !isEmbed && paneParam === 'low'
   const tabIndex = drawerFullyOpen && tabParam === '1' ? 1 : 0
 
   const setParams = useCallback(
@@ -66,7 +53,6 @@ const useLocationPane = () => {
 
   const setPaneParam = useCallback(
     (newPaneValue) => {
-      // If we're moving away from fully open, clear the tab index
       const isLeavingFullyOpen = drawerFullyOpen && newPaneValue !== 'full'
       setParams(
         newPaneValue,
@@ -88,10 +74,6 @@ const useLocationPane = () => {
     setPaneParam('low')
   }, [setPaneParam])
 
-  const reenablePaneDrawerAndSetToLowPosition = useCallback(() => {
-    setPaneParam('low')
-  }, [setPaneParam])
-
   const setTabIndex = useCallback(
     (index) => {
       setParams(paneParam, index === 0 ? null : index)
@@ -102,13 +84,10 @@ const useLocationPane = () => {
   return {
     drawerFullyOpen,
     drawerLow,
-    isStandalone,
-    isFromEmbedViewMap,
     tabIndex,
     fullyOpenPaneDrawer,
     setPaneDrawerToMiddlePosition,
     setPaneDrawerToLowPosition,
-    reenablePaneDrawerAndSetToLowPosition,
     setTabIndex,
   }
 }

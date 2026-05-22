@@ -215,7 +215,7 @@ function transformActivityData(
         const locationTypes: LocationTypes = {
           locationId: change.location_id,
           types,
-          url: `/locations/${change.location_id}/${view}?pane=standalone`,
+          url: `/locations/${change.location_id}/${view}?pane=full`,
           isSelected: true,
         }
         switch (change.description) {

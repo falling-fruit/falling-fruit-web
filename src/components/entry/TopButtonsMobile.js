@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsEmbed } from '../../utils/useBreakpoint'
 import { zIndex } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
 import ReturnIcon from '../ui/ReturnIcon'
@@ -47,7 +48,7 @@ const StyledButtons = styled.div`
   }
 `
 
-const EntryButton = styled(IconButton)`
+const RoundIconButton = styled(IconButton)`
   background-color: rgba(0, 0, 0, 0.45);
   border: none;
   svg {
@@ -56,19 +57,16 @@ const EntryButton = styled(IconButton)`
   ${({ opaque }) => opaque && `opacity: 0.5; cursor: help;`}
 `
 
-EntryButton.defaultProps = {
+RoundIconButton.defaultProps = {
   size: 48,
 }
 
 const TopButtonsMobile = ({ hasImages }) => {
   const history = useAppHistory()
   const { locationId } = useSelector((state) => state.location)
-  const {
-    isStandalone,
-    isFromEmbedViewMap,
-    setPaneDrawerToMiddlePosition,
-    reenablePaneDrawerAndSetToLowPosition,
-  } = useLocationPane()
+  const isEmbed = useIsEmbed()
+  const { setPaneDrawerToMiddlePosition, setPaneDrawerToLowPosition } =
+    useLocationPane()
   const { id: recentChangesSectionId } = useSelector(
     (state) => state.activity.recentChanges.lastBrowsedSection,
   )
@@ -76,49 +74,54 @@ const TopButtonsMobile = ({ hasImages }) => {
     (state) => state.activity.userActivityLastBrowsedSection,
   )
   const { lastViewedListId } = useSelector((state) => state.save)
+  const { lastViewedListPositionId } = useSelector((state) => state.list)
   const { handleClickDelete, isDeleteVisible, isDeleteDisabled } =
     useDeleteLocation()
 
+  const backPath = lastViewedListId
+    ? '/account/lists'
+    : userActivityUserId
+      ? `/users/${userActivityUserId}/activity`
+      : recentChangesSectionId
+        ? '/changes'
+        : lastViewedListPositionId
+          ? '/list'
+          : '/map'
+
+  const backGoesToMap = backPath === '/map'
+
   const handleBack = () => {
-    const standaloneBackPath = lastViewedListId
-      ? '/account/lists'
-      : userActivityUserId
-        ? `/users/${userActivityUserId}/activity`
-        : recentChangesSectionId
-          ? '/changes'
-          : '/list'
-    history.push(`${standaloneBackPath}?pane=&tab=`)
+    if (backGoesToMap && !isEmbed) {
+      setPaneDrawerToMiddlePosition()
+    } else {
+      history.push(`${backPath}?pane=&tab=`)
+    }
   }
 
   return (
     <StyledButtons whiteBackground={!hasImages}>
-      <EntryButton
-        onClick={
-          isStandalone
-            ? handleBack
-            : isFromEmbedViewMap
-              ? () => history.push('/map')
-              : (e) => {
-                  e.stopPropagation()
-                  setPaneDrawerToMiddlePosition()
-                }
-        }
+      <RoundIconButton
+        onClick={handleBack}
         icon={<ReturnIcon />}
         label="back-button"
       />
       <div>
-        {isStandalone && !isFromEmbedViewMap && (
-          <EntryButton
+        {!backGoesToMap && (
+          <RoundIconButton
             onClick={(event) => {
               event.stopPropagation()
-              reenablePaneDrawerAndSetToLowPosition()
+              if (isEmbed) {
+                history.push('/map?pane=&tab=')
+              } else {
+                setPaneDrawerToLowPosition()
+              }
             }}
             icon={<MapIcon />}
             label="map-button"
           />
         )}
         {isDeleteVisible && (
-          <EntryButton
+          <RoundIconButton
             onClick={(event) => {
               event.stopPropagation()
               handleClickDelete(locationId)
@@ -128,7 +131,7 @@ const TopButtonsMobile = ({ hasImages }) => {
             opaque={isDeleteDisabled}
           />
         )}
-        <EntryButton
+        <RoundIconButton
           onClick={(event) => {
             event.stopPropagation()
             history.push(`/locations/${locationId}/edit`)
