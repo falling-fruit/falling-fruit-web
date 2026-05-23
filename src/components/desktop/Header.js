@@ -68,11 +68,6 @@ function layoutIstight(user) {
   const layoutType = getLayoutType(user)
   return layoutType === 'narrow' || layoutType === 'very-narrow'
 }
-
-function layoutIsVeryNarrow(user) {
-  return getLayoutType(user) === 'very-narrow'
-}
-
 const StyledHeader = styled.header`
   height: 56px;
   background-color: ${({ theme }) => theme.background};
@@ -299,7 +294,7 @@ const StyledSocialButtons = styled(SocialButtons)`
     if (isMobileMenuOpen) {
       return 'flex'
     }
-    return layoutIsVeryNarrow(user) ? 'none' : 'flex'
+    return layoutIstight(user) ? 'none' : 'flex'
   }};
 
   &[style*='display: none'] {
