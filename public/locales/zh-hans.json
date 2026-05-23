@@ -86,7 +86,7 @@
       "delete": "删除",
       "edit": "编辑",
       "reload": "重新加载",
-      "report": "举报/报告",
+      "report": "报告",
       "reset": "重置",
       "restart": "重新开始",
       "review": "评价",
@@ -101,7 +101,7 @@
     "not_signed_in": {
       "continue": "继续操作",
       "do_not_ask_again": "不再提示",
-      "message": "你尚未登录。你可以继续以匿名身份操作，或者立即登录/注册以方便日后管理你的观察记录。",
+      "message": "你尚未登录。你可以继续以匿名身份操作，或立即登录，或注册，以方便日后管理你的观察记录。",
       "title": {
         "add_location": "以匿名身份添加地点？",
         "add_review": "以匿名身份添加评价？",
@@ -170,7 +170,7 @@
       "instructions": "拖动标记以修改位置。"
     },
     "form": {
-      "access": "准入/权限",
+      "access": "权限",
       "comments": "备注信息",
       "comments_subtext": "关于维护、准入问题或植物健康状况...",
       "description_subtext": "地点详情、采摘指南、生长情况...",
@@ -184,15 +184,15 @@
     },
     "infowindow": {
       "access_mode": [
-        "在我私人土地上",
+        "在我本人的土地上",
         "我已获得所有者许可",
         "在公共土地上",
-        "在私人土地上，但枝条悬垂在公有区域",
+        "在私人土地上，但枝条悬垂在公共区域",
         "在私人土地上（采摘前请询问）"
       ],
       "access_short": [
         "所有者添加",
-        "已获准",
+        "已获许可",
         "公共区域",
         "私人（悬垂）",
         "私人"
@@ -256,8 +256,8 @@
       "closing_remarks_para2_html": "在城市环境中采摘需要遵循实际和道德准则。有关城市采摘伦理的介绍，我们推荐阅读这份 <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">总结</a>。",
       "closing_remarks_para3_html": "由于数据来源广泛（如过时的地图或市政维护信息），本站的信息可能存在误差或已失效。在前往实地之前，请做好遇到不实信息的准备，并根据你的发现实时修正地图。最终，辨别植物种类、确认可食用性以及判断具体位置的责任在于用户本人。",
       "contact_us_html": "Falling Fruit 是为采摘者量身打造的，我们希望它能成为大家的最佳工具。如有任何意见，请致信 <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>。",
-      "cristina_rubke_bio_html": "Cristina是<a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">旧金山的一名律师，专注于商标法律咨询。她还是旧金山市交通局的董事会成员，负责监管公共交通和停车。业余时间，她通过残疾水手协会参与帆船运动，参加各种赛事。",
-      "david_craft_bio_html": "David 是哈佛医学院的研究员<a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">，也是一位资深的采摘爱好者，著有《城市觅食：在城市中寻找和食用野生植物》一书<a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\"></a>（提供<a href=\"/docs/David Craft - Urban Foraging.pdf\">免费下载</a>）。",
+      "cristina_rubke_bio_html": "Cristina是<a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">旧金山Shartsis Friese LLP</a>律师事务所的一名律师，专注于商标法律咨询。她还是<a href=\"//www.sfmta.com/\">旧金山市交通局</a>的董事会成员，负责监管公共交通和停车。业余时间，她通过<a href=\"//www.baads.org/\">湾区残疾海员协会</a>参与帆船运动，参加各种赛事。",
+      "david_craft_bio_html": "David 是<a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">哈佛医学院</a>的研究员<a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">，也是一位资深的采摘爱好者，著有《城市觅食：在城市中寻找和食用野生植物》一书<a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\"></a>（提供<a href=\"/docs/David Craft - Urban Foraging.pdf\">免费下载</a>）。",
       "directors": "董事会",
       "donate": "捐赠",
       "ethan_welty_bio_html": "Ethan 致力于利用技术和数据将城市转化为新鲜食物的来源。2013 年他与 Caleb 共同创建了 Falling Fruit，2014 年又共同创办了 <a href=\"https://fruitrescue.org\">Community Fruit Rescue</a>，旨在采摘和分发博尔德地区剩余的水果。此外，他还兼顾<a href=\"https://www.weltyphotography.com\">摄影事业</a>和<a href=\"https://instaar.colorado.edu/people/ethan-welty/\">冰川研究</a>。",
