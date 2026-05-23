@@ -7,16 +7,12 @@ import {
 import { EditAlt, Map, User as UserYou } from '@styled-icons/boxicons-solid'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
-import {
-  reenablePaneDrawerAndSetToLowPosition,
-  setPaneDrawerToLowPosition,
-} from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
@@ -28,6 +24,7 @@ import TypesHeader from './overview/TypesHeader'
 import { ReviewButton } from './ReviewButton'
 import ReviewSummary from './ReviewSummary'
 import { formatISOString, formatMonth } from './textFormatters'
+import useLocationPane from './useLocationPane'
 
 const hasSeasonality = (locationData) =>
   !!(
@@ -202,7 +199,7 @@ const ButtonGroupStart = styled.div`
 `
 
 const OverviewContainer = styled.div`
-  position: relative;
+  padding-block-end: env(safe-area-inset-bottom, 0);
 `
 
 const EntryOverview = () => {
@@ -213,14 +210,19 @@ const EntryOverview = () => {
     streetViewOpen,
     locationId,
     location: locationData,
-    pane,
     reviews,
   } = useSelector((state) => state.location)
   const isEmbed = useIsEmbed()
   const { locationsWithoutPanorama } = useSelector((state) => state.misc)
   const user = useSelector((state) => state.auth.user)
-  const dispatch = useDispatch()
   const isDesktop = useIsDesktop()
+
+  const {
+    drawerFullyOpen,
+    isStandalone,
+    reenablePaneDrawerAndSetToLowPosition,
+    setPaneDrawerToLowPosition,
+  } = useLocationPane()
 
   const containerRef = useRef(null)
 
@@ -248,10 +250,10 @@ const EntryOverview = () => {
       })
       if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
         googleMap?.setZoom(MIN_LOCATION_ZOOM)
-      } else if (pane.isStandalone) {
-        dispatch(reenablePaneDrawerAndSetToLowPosition())
-      } else if (pane.drawerFullyOpen) {
-        dispatch(setPaneDrawerToLowPosition())
+      } else if (isStandalone) {
+        reenablePaneDrawerAndSetToLowPosition()
+      } else if (drawerFullyOpen) {
+        setPaneDrawerToLowPosition()
       }
     }
   }
@@ -267,44 +269,36 @@ const EntryOverview = () => {
 
   return (
     <OverviewContainer ref={containerRef}>
-      <>
-        <TypesHeader
-          types={types}
-          openable={pane.drawerFullyOpen || isDesktop}
-        />
-        <Tags locationData={locationData} />
-        <Description>
-          <p dir="auto">{locationData.description}</p>
+      <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
+      <Tags locationData={locationData} />
+      <Description>
+        <p dir="auto">{locationData.description}</p>
 
-          <AddressInfo
-            locationData={locationData}
-            onClick={handleAddressClick}
-          />
-          <StreetViewInfo
-            streetViewOpen={streetViewOpen}
-            isDisabled={!!locationsWithoutPanorama[locationData.id]}
-            onOpen={openStreetView}
-            onClose={closeStreetView}
-          />
-          {hasSeasonality(locationData) && (
-            <SeasonalityInfo locationData={locationData} />
-          )}
-          {(locationData.import_id ||
-            locationData.author ||
-            locationData.user_id) && (
-            <AuthorInfo locationData={locationData} user={user} />
-          )}
-          <LastEditedInfo locationData={locationData} />
-          <ReviewSummary reviews={reviews} />
-          <ButtonRow>
-            <ButtonGroupStart>
-              <ReviewButton />
-              {user && <SaveToListButton containerRef={containerRef} />}
-            </ButtonGroupStart>
-            <ReportButton />
-          </ButtonRow>
-        </Description>
-      </>
+        <AddressInfo locationData={locationData} onClick={handleAddressClick} />
+        <StreetViewInfo
+          streetViewOpen={streetViewOpen}
+          isDisabled={!!locationsWithoutPanorama[locationData.id]}
+          onOpen={openStreetView}
+          onClose={closeStreetView}
+        />
+        {hasSeasonality(locationData) && (
+          <SeasonalityInfo locationData={locationData} />
+        )}
+        {(locationData.import_id ||
+          locationData.author ||
+          locationData.user_id) && (
+          <AuthorInfo locationData={locationData} user={user} />
+        )}
+        <LastEditedInfo locationData={locationData} />
+        <ReviewSummary reviews={reviews} />
+        <ButtonRow>
+          <ButtonGroupStart>
+            <ReviewButton />
+            {user && <SaveToListButton containerRef={containerRef} />}
+          </ButtonGroupStart>
+          <ReportButton />
+        </ButtonRow>
+      </Description>
     </OverviewContainer>
   )
 }

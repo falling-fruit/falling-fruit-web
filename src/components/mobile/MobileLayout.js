@@ -8,6 +8,7 @@ import {
   NAVIGATION_BAR_HEIGHT_PX,
   TABS_HEIGHT_PX,
 } from '../../constants/mobileLayout'
+import { isViewSegment } from '../../utils/appUrl'
 import { useIsEmbed } from '../../utils/useBreakpoint'
 import aboutRoutes from '../about/aboutRoutes'
 import accountRoutes from '../account/accountRoutes'
@@ -70,7 +71,7 @@ const shouldDisplayMapPage = (pathname) => {
   const locationId =
     match?.params.locationId && parseInt(match.params.locationId)
   const isViewingLocation =
-    locationId && match.params.nextSegment?.indexOf('@') === 0
+    locationId && isViewSegment(match.params.nextSegment)
 
   const isEditingLocationMarker =
     locationId &&

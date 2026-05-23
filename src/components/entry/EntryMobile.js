@@ -1,19 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import {
   NAVIGATION_BAR_HEIGHT_PX,
   TABS_HEIGHT_PX,
 } from '../../constants/mobileLayout'
-import {
-  fullyOpenPaneDrawer,
-  setPaneDrawerToLowPosition,
-  setPaneDrawerToMiddlePosition,
-  setTabIndex,
-} from '../../redux/locationSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import DraggablePane from '../ui/DraggablePane'
 import { CardTabs, Tab, TabList, TabPanel, TabPanels } from './CardTabs'
@@ -22,6 +16,7 @@ import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 import LightboxMobile from './LightboxMobile'
 import TopButtonsMobile from './TopButtonsMobile'
+import useLocationPane from './useLocationPane'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
@@ -125,19 +120,20 @@ const TextContent = styled.article`
 
 const EntryMobile = () => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const history = useAppHistory()
+  const { reviews, isLoading } = useSelector((state) => state.location)
+
   const {
-    reviews,
-    isLoading,
-    pane: {
-      drawerFullyOpen,
-      drawerLow,
-      tabIndex,
-      isStandalone,
-      isFromEmbedViewMap,
-    },
-  } = useSelector((state) => state.location)
+    drawerFullyOpen,
+    drawerLow,
+    isStandalone,
+    isFromEmbedViewMap,
+    tabIndex,
+    fullyOpenPaneDrawer,
+    setPaneDrawerToMiddlePosition,
+    setPaneDrawerToLowPosition,
+    setTabIndex,
+  } = useLocationPane()
 
   const drawerDisabled = isFromEmbedViewMap || isStandalone
   const { isOpenInMobileLayout: filterOpen } = useSelector(
@@ -200,11 +196,11 @@ const EntryMobile = () => {
         }
         onPositionChange={(position) => {
           if (position === 'top') {
-            setTimeout(() => dispatch(fullyOpenPaneDrawer()), 0.25)
+            setTimeout(fullyOpenPaneDrawer, 0.25)
           } else if (position === 'middle') {
-            dispatch(setPaneDrawerToMiddlePosition())
+            setPaneDrawerToMiddlePosition()
           } else if (position === 'low') {
-            dispatch(setPaneDrawerToLowPosition())
+            setPaneDrawerToLowPosition()
           } else if (position === 'bottom') {
             history.push('/map')
           } else {
@@ -247,7 +243,7 @@ const EntryMobile = () => {
                 ? '0'
                 : 'env(safe-area-inset-top, 0)',
           }}
-          onChange={(index) => dispatch(setTabIndex(index))}
+          onChange={setTabIndex}
           index={tabIndex}
         >
           {drawerFullyOpen && hasReviews && (

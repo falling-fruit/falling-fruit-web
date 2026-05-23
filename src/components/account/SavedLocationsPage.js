@@ -40,7 +40,7 @@ const TopRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 1.25rem;
+  margin-block-end: 0.5em;
 `
 
 const ListName = styled.h2`
@@ -53,7 +53,6 @@ const ExpandRow = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0.6rem 1.25rem;
   cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
 `
 
@@ -98,8 +97,8 @@ const LocationItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1.25rem;
   border-bottom: 1px solid #efefef;
+  padding-block: 0.5em;
   position: relative;
 
   &:last-child {
@@ -111,7 +110,6 @@ const LocationLink = styled(Link)`
   color: ${theme.blue} !important;
   text-decoration: none;
   flex: 1;
-  font-size: 1rem;
 
   &:hover {
     text-decoration: underline;
@@ -286,7 +284,7 @@ const LocationRow = ({ location, listId, typesAccess }) => {
       }}
     >
       <LocationLink
-        to={`/locations-standalone/${location.id}/${viewToString(location.lat, location.lng, MIN_LOCATION_ZOOM)}`}
+        to={`/locations/${location.id}/${viewToString(location.lat, location.lng, MIN_LOCATION_ZOOM)}?pane=standalone`}
         onClick={handleLocationClick}
       >
         <LocationTypeDisplay location={location} typesAccess={typesAccess} />

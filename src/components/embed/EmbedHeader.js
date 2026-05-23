@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 
 import { EMBED_HEADER_HEIGHT_PX } from '../../constants/mobileLayout'
 import { useAppHistory } from '../../utils/useAppHistory'
-import useShareUrl from '../share/useShareUrl'
+import { useShareUrl } from '../share/useStatefulUrl'
 import { AddLocationEmbed } from '../ui/AddLocation'
 import { zIndex } from '../ui/GlobalStyle'
 import ResetButton from '../ui/ResetButton'

@@ -11,6 +11,7 @@ import {
   GeolocationState,
   requestGeolocation,
 } from '../../redux/geolocationSlice'
+import { viewToString } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AboutSection from '../mobile/AboutSection'
 import Button from '../ui/Button'
@@ -88,7 +89,7 @@ const HomePage = () => {
       history.push('/map')
     } else if (geolocation?.latitude && geolocation?.longitude) {
       history.push(
-        `/map/@${geolocation.latitude},${geolocation.longitude},${DEFAULT_GEOLOCATION_ZOOM}z`,
+        `/map/${viewToString(geolocation.latitude, geolocation.longitude, DEFAULT_GEOLOCATION_ZOOM)}`,
       )
     }
   }, [lastMapView, geolocation, geolocationState, history])

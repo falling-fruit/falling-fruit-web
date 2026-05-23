@@ -8,7 +8,7 @@ import { closeShare } from '../../redux/shareSlice'
 import Button from '../ui/Button'
 import CloseButton from '../ui/CloseButton'
 import Input from '../ui/Input'
-import useShareUrl from './useShareUrl'
+import { useShareUrl } from './useStatefulUrl'
 
 const ShareContainer = styled.div`
   display: flex;
