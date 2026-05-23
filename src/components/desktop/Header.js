@@ -292,7 +292,7 @@ const StyledSocialButtons = styled(SocialButtons)`
   margin: 0 5px;
   display: ${({ user, isMobileMenuOpen }) => {
     if (isMobileMenuOpen) {
-      return 'flex'
+      return 'none'
     }
     return layoutIstight(user) ? 'none' : 'flex'
   }};
