@@ -40,6 +40,13 @@ const SafeAreaInset = styled.div`
   background-color: ${({ theme }) => theme.secondaryBackground};
 `
 
+const StickyHeader = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: ${({ theme }) => theme.background};
+`
+
 const PageWrapper = styled.article`
   max-width: 950px;
   width: 66%;
@@ -150,7 +157,8 @@ const TopSafeAreaInsetPageWrapper = styled(PageWrapper)`
 `
 
 const StyledBackButton = styled(BackButton)`
-  margin-block-end: 23px;
+  padding-inline: 23px;
+  padding-block: 1.5em;
 `
 
 const Page = ({ children }) => {
@@ -182,15 +190,15 @@ const InfoPage = ({ children }) => {
   const { user } = useSelector((state) => state.auth)
   return (
     <PageScrollWrapper>
-      <PageWrapper isDesktop={isDesktop}>
-        {!isDesktop && (
+      {!isDesktop && (
+        <StickyHeader>
+          <SafeAreaInset />
           <StyledBackButton
             backPath={user ? '/account/edit' : '/about/welcome'}
           />
-        )}
-
-        {children}
-      </PageWrapper>
+        </StickyHeader>
+      )}
+      <PageWrapper isDesktop={isDesktop}>{children}</PageWrapper>
     </PageScrollWrapper>
   )
 }
