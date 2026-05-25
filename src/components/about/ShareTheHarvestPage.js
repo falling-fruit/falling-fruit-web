@@ -7,7 +7,8 @@ const ShareTheHarvestPage = () => {
   const { t } = useTranslation()
   return (
     <InfoPage>
-      <h1>{t('pages.sharing.grow_pick_and_distribute')}</h1>
+      <h1>{t('layouts.application.menu.sharing_the_harvest')}</h1>
+      <h2>{t('pages.sharing.grow_pick_and_distribute')}</h2>
       <p dangerouslySetInnerHTML={{ __html: t('pages.sharing.intro_html') }} />
       <ShareTheHarvestTable />
     </InfoPage>

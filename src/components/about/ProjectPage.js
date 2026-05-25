@@ -32,6 +32,7 @@ const Project = () => {
 
   return (
     <InfoPage>
+      <h1>{t('layouts.application.menu.the_project')}</h1>
       <div className="grid">
         <PhotoGridTemplate photos={foragingPhotos} float={'inline-end'} />
         <p>

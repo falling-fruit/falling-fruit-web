@@ -112,12 +112,14 @@ const TimelineItem = ({ data, isDesktop }) => {
 }
 
 const InThePressPage = () => {
+  const { t } = useTranslation()
   const isDesktop = useIsDesktop()
   const years = Object.keys(pressData)
   years.sort().reverse()
 
   return (
     <InfoPage>
+      <h1>{t('layouts.application.menu.in_the_press')}</h1>
       {years.map((year) => (
         <TimelineSection key={year}>
           <h2>{year}</h2>
