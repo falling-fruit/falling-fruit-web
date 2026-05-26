@@ -9,6 +9,7 @@ import {
   setLastViewedListPositionState,
 } from '../../redux/listSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { useIsDesktop } from '../../utils/useBreakpoint'
 import Spinner from '../ui/Spinner'
 import { NoResultsFound, ResultsUnavailable, ShouldZoomIn } from './ListLoading'
 import Locations from './Locations'
@@ -29,6 +30,7 @@ const ListPage = () => {
   const { typesAccess } = useSelector((state) => state.type)
   const { lastMapView } = useSelector((state) => state.viewport)
   const locationsAvailable = !(typesAccess.isEmpty || lastMapView === null)
+  const isDesktop = useIsDesktop()
 
   useEffect(() => {
     if (locationsAvailable && locationsInvalid) {
@@ -73,7 +75,9 @@ const ListPage = () => {
       }
       onLocationClick={(locationPosition) => {
         dispatch(setLastViewedListPositionState(locationPosition))
-        history.push(`/locations/${locationPosition.id}?pane=full`)
+        history.push(
+          `/locations/${locationPosition.id}${isDesktop ? '' : '?pane=full'}`,
+        )
       }}
     />
   )
