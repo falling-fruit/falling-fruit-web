@@ -24,7 +24,7 @@ const SelectParent = styled.div`
   }
 
   .select__control {
-    height: 3em;
+    min-height: 3em;
     border: 1px solid ${validatedColor()};
     border-radius: 0.375em;
     box-shadow: none;
