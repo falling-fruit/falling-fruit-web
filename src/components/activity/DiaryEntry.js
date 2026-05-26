@@ -71,48 +71,52 @@ const LatestSkeletonItem = styled.li`
   margin-bottom: 0.5rem;
 `
 
-const LocationTypesList = ({ locations, onClickLink }) => (
-  <>
-    {locations.map((loc, idx) => {
-      const typeElements = loc.types.map((type, typeIdx) => {
-        // Use the isSelected property that was set by ActivityDiaryFilter
-        const opacity = loc.isSelected ? 1 : 0.5
+const LocationTypesList = ({ locations, onClickLink }) => {
+  const isDesktop = useIsDesktop()
+  return (
+    <>
+      {locations.map((loc, idx) => {
+        const typeElements = loc.types.map((type, typeIdx) => {
+          // Use the isSelected property that was set by ActivityDiaryFilter
+          const opacity = loc.isSelected ? 1 : 0.5
 
-        if (type.commonName) {
-          return (
-            <CommonName key={`common-${typeIdx}`} style={{ opacity }}>
-              {type.commonName}
-            </CommonName>
-          )
-        }
-        if (type.scientificName) {
-          return (
-            <ScientificName key={`scientific-${typeIdx}`} style={{ opacity }}>
-              {type.scientificName}
-            </ScientificName>
-          )
-        }
-        return null
-      })
+          if (type.commonName) {
+            return (
+              <CommonName key={`common-${typeIdx}`} style={{ opacity }}>
+                {type.commonName}
+              </CommonName>
+            )
+          }
+          if (type.scientificName) {
+            return (
+              <ScientificName key={`scientific-${typeIdx}`} style={{ opacity }}>
+                {type.scientificName}
+              </ScientificName>
+            )
+          }
+          return null
+        })
 
-      const filteredTypes = typeElements.filter(Boolean)
-      const typesWithSeparators = filteredTypes.reduce((prev, curr, idx) => {
-        if (prev.length) {
-          return [...prev, <span key={`separator-${idx}`}>, </span>, curr]
-        }
-        return [curr]
-      }, [])
-      return (
-        <React.Fragment key={`${loc.locationId}-${idx}`}>
-          <LocationLink to={loc.url} onClick={onClickLink}>
-            {typesWithSeparators}
-          </LocationLink>
-          {idx < locations.length - 1 && <span> · </span>}
-        </React.Fragment>
-      )
-    })}
-  </>
-)
+        const filteredTypes = typeElements.filter(Boolean)
+        const typesWithSeparators = filteredTypes.reduce((prev, curr, idx) => {
+          if (prev.length) {
+            return [...prev, <span key={`separator-${idx}`}>, </span>, curr]
+          }
+          return [curr]
+        }, [])
+        const url = `/locations/${loc.locationId}/${loc.viewString}${isDesktop ? '' : '?pane=full'}`
+        return (
+          <React.Fragment key={`${loc.locationId}-${idx}`}>
+            <LocationLink to={url} onClick={onClickLink}>
+              {typesWithSeparators}
+            </LocationLink>
+            {idx < locations.length - 1 && <span> · </span>}
+          </React.Fragment>
+        )
+      })}
+    </>
+  )
+}
 
 const ActivityText = styled.span`
   color: ${({ theme }) => theme.secondaryText};

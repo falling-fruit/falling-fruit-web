@@ -234,7 +234,7 @@ const getLocationPlainName = (location, typesAccess) => {
   return names.length > 0 ? names.join(', ') : String(location.id)
 }
 
-const LocationRow = ({ location, listId, typesAccess }) => {
+const LocationRow = ({ location, listId, typesAccess, isDesktop }) => {
   const [isRemoving, setIsRemoving] = useState(false)
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -275,6 +275,8 @@ const LocationRow = ({ location, listId, typesAccess }) => {
     dispatch(setLastViewedListId(listId))
   }
 
+  const locationUrl = `/locations/${location.id}/${viewToString(location.lat, location.lng, MIN_LOCATION_ZOOM)}${isDesktop ? '' : '?pane=full'}`
+
   return (
     <LocationItem
       style={{
@@ -283,10 +285,7 @@ const LocationRow = ({ location, listId, typesAccess }) => {
         transition: 'opacity 0.2s ease',
       }}
     >
-      <LocationLink
-        to={`/locations/${location.id}/${viewToString(location.lat, location.lng, MIN_LOCATION_ZOOM)}?pane=full`}
-        onClick={handleLocationClick}
-      >
+      <LocationLink to={locationUrl} onClick={handleLocationClick}>
         <LocationTypeDisplay location={location} typesAccess={typesAccess} />
         {renderAddress()}
       </LocationLink>
@@ -303,7 +302,7 @@ const LocationRow = ({ location, listId, typesAccess }) => {
   )
 }
 
-const ListCardComponent = ({ list }) => {
+const ListCardComponent = ({ list, isDesktop }) => {
   const dispatch = useDispatch()
   const [expanded, setExpanded] = useState(true)
   const [editing, setEditing] = useState(false)
@@ -425,6 +424,7 @@ const ListCardComponent = ({ list }) => {
               location={location}
               listId={list.id}
               typesAccess={typesAccess}
+              isDesktop={isDesktop}
             />
           ))}
         </LocationList>
@@ -473,7 +473,11 @@ const SavedLocationsPage = () => {
           style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
         >
           {lists.map((list) => (
-            <ListCardComponent key={list.id} list={list} />
+            <ListCardComponent
+              key={list.id}
+              list={list}
+              isDesktop={isDesktop}
+            />
           ))}
         </div>
       )}

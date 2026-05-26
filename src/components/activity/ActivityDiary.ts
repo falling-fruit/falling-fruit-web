@@ -67,7 +67,7 @@ function createTypeCount(
 interface LocationTypes {
   locationId: number
   types: Array<LocalizedType>
-  url: string
+  viewString: string
   isSelected: boolean
 }
 
@@ -211,11 +211,10 @@ function transformActivityData(
           .map((typeId) => typesAccess.getType(typeId))
           .filter(Boolean)
 
-        const view = viewToString(change.lat, change.lng, MIN_LOCATION_ZOOM)
         const locationTypes: LocationTypes = {
           locationId: change.location_id,
           types,
-          url: `/locations/${change.location_id}/${view}?pane=full`,
+          viewString: viewToString(change.lat, change.lng, MIN_LOCATION_ZOOM),
           isSelected: true,
         }
         switch (change.description) {
