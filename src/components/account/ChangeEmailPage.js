@@ -1,12 +1,10 @@
 import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { editProfile } from '../../redux/authSlice'
-import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { ErrorMessage } from '../auth/AuthWrappers'
 import { Input, PasswordInput } from '../form/FormikWrappers'
@@ -15,6 +13,7 @@ import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
+import withRedirectToAuth from './withRedirectToAuth'
 
 const formToUser = ({ email, password, announcements_email, name }, user) => ({
   email,
@@ -31,14 +30,9 @@ const StyledBackButton = styled(BackButton)`
 
 const ChangeEmailPage = () => {
   const dispatch = useDispatch()
-  const { user, isLoading } = useSelector((state) => state.auth)
-  const isLoggedIn = !!user
+  const { user } = useSelector((state) => state.auth)
   const { t } = useTranslation()
   const history = useAppHistory()
-
-  if (!isLoggedIn && !isLoading) {
-    return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
-  }
 
   const handleEmailSubmit = (values, formikProps) => {
     dispatch(editProfile(formToUser(values, user))).then((action) => {
@@ -128,4 +122,4 @@ const ChangeEmailPage = () => {
   )
 }
 
-export default ChangeEmailPage
+export default withRedirectToAuth(ChangeEmailPage)

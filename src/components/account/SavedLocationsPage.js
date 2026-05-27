@@ -30,6 +30,7 @@ import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import { Page } from '../ui/PageTemplate'
 import ResetButton from '../ui/ResetButton'
+import withRedirectToAuth from './withRedirectToAuth'
 
 const ListCard = styled.div`
   opacity: ${({ $isDeleting }) => ($isDeleting ? 0.4 : 1)};
@@ -435,6 +436,8 @@ const ListCardComponent = ({ list, isDesktop }) => {
 
 const SavedLocationsPage = () => {
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+  const isLoggedIn = !!user
   const {
     lists,
     isLoading: isLoadingSavedLocations,
@@ -446,10 +449,10 @@ const SavedLocationsPage = () => {
   const isDesktop = useIsDesktop()
 
   useEffect(() => {
-    if (!lastViewedListId) {
+    if (!lastViewedListId && isLoggedIn) {
       dispatch(fetchLists())
     }
-  }, [dispatch]) // eslint-disable-line
+  }, [dispatch, isLoggedIn]) // eslint-disable-line
 
   useEffect(() => {
     if (lastViewedListId) {
@@ -485,4 +488,4 @@ const SavedLocationsPage = () => {
   )
 }
 
-export default SavedLocationsPage
+export default withRedirectToAuth(SavedLocationsPage)
