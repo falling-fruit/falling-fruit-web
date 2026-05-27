@@ -2,12 +2,11 @@ import { Form, Formik } from 'formik'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import { editProfile, logout } from '../../redux/authSlice'
-import { pathWithCurrentView } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { Input, Textarea } from '../form/FormikWrappers'
@@ -19,6 +18,7 @@ import LabeledRow from '../ui/LabeledRow'
 import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
+import withRedirectToAuth from './withRedirectToAuth'
 
 const EmailLabel = styled.label`
   display: block;
@@ -57,16 +57,11 @@ const userToForm = (user) => ({
 
 const AccountPage = () => {
   const dispatch = useDispatch()
-  const { user, isLoading } = useSelector((state) => state.auth)
-  const isLoggedIn = !!user
+  const { user } = useSelector((state) => state.auth)
   const history = useAppHistory()
   const { t } = useTranslation()
   const isDesktop = useIsDesktop()
   const [isUpdatingPreferences, setIsUpdatingPreferences] = useState(false)
-
-  if (!isLoggedIn && !isLoading) {
-    return <Redirect to={pathWithCurrentView('/auth/sign_in')} />
-  }
 
   const handleSubmit = (values) => {
     dispatch(editProfile(formToUser(values)))
@@ -196,4 +191,4 @@ const AccountPage = () => {
   )
 }
 
-export default AccountPage
+export default withRedirectToAuth(AccountPage)
