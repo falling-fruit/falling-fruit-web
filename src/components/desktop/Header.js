@@ -33,8 +33,9 @@ const AuthLinksList = styled.ul`
 
 const TIGHT_LAYOUT_MAX_WIDTH = 1080
 const TIGHT_LAYOUT_MAX_WIDTH_USER = 980
+const VERY_TIGHT_LAYOUT_MAX_WIDTH = 840 // minimal needed for Greek menu which has longest verbiage
 
-function layoutIstight(user) {
+function layoutisTight(user) {
   return (
     (user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH_USER) ||
     (!user && window.innerWidth <= TIGHT_LAYOUT_MAX_WIDTH)
@@ -56,7 +57,7 @@ const StyledHeader = styled.header`
   }
 
   .hamburger {
-    display: ${({ user }) => (layoutIstight(user) ? 'flex' : 'none')};
+    display: ${({ user }) => (layoutisTight(user) ? 'flex' : 'none')};
     margin-inline-end: 1rem;
     cursor: pointer;
     color: ${({ theme }) => theme.secondaryText};
@@ -71,7 +72,7 @@ const StyledHeader = styled.header`
     flex: 1;
 
     .main-menu {
-      display: ${({ user }) => (layoutIstight(user) ? 'none' : 'block')};
+      display: ${({ user }) => (layoutisTight(user) ? 'none' : 'block')};
 
       &.mobile-visible {
         display: block;
@@ -384,7 +385,6 @@ const MainMenu = ({ className }) => {
   )
 }
 
-// TODO: Clean up file structure (i.e. logo_white.svg) from ./public
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const user = useSelector((state) => state.auth.user)
@@ -415,7 +415,10 @@ const Header = () => {
         />
         <div className="auth-social">
           {!isMobileMenuOpen && <UserMenu />}
-          <StyledSocialButtons />
+          {(!isMobileMenuOpen ||
+            window.innerWidth > VERY_TIGHT_LAYOUT_MAX_WIDTH) && (
+            <StyledSocialButtons />
+          )}
         </div>
       </nav>
     </StyledHeader>
