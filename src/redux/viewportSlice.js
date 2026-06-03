@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
 import persistentStore from '../utils/persistentStore'
 import { selectPlace } from './placeSlice'
@@ -21,17 +22,26 @@ const viewportSlice = createSlice({
         width: action.payload.width || state.lastMapView?.width,
       }
       state.lastMapView = view
-      persistentStore.setLastMapViewThrottledSync(view)
+      try {
+        persistentStore.setLastMapViewThrottledSync(view)
+      } catch (error) {
+        toast.error(error?.message ?? error)
+      }
     },
   },
   extraReducers: {
     [selectPlace]: (state, action) => {
-      state.lastMapView = {
+      const view = {
         height: state.lastMapView.height,
         width: state.lastMapView.width,
         ...action.payload.place.view,
       }
-      persistentStore.setLastMapViewImmediateSync(state.lastMapView)
+      state.lastMapView = view
+      try {
+        persistentStore.setLastMapViewImmediateSync(view)
+      } catch (error) {
+        toast.error(error?.message ?? error)
+      }
     },
   },
 })
