@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
@@ -144,9 +145,13 @@ const clusterBounds = ({ lat, lng, zoom }) => {
 }
 const makeHandleViewChange = (dispatch, googleMap, history) => {
   const throttledDispatches = throttle((newView) => {
-    dispatch(updateLastMapView(newView))
-    dispatch(fetchLocations())
-    dispatch(fetchFilterCounts())
+    try {
+      dispatch(updateLastMapView(newView))
+      dispatch(fetchLocations())
+      dispatch(fetchFilterCounts())
+    } catch (error) {
+      toast.error(error?.message ?? error)
+    }
   }, 1000)
 
   return () => {
