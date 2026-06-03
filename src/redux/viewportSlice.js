@@ -15,12 +15,13 @@ const viewportSlice = createSlice({
        * (if the API was previously loaded but map went off screen)
        */
       // Hold on to the viewport dimensions so we can use it
-      state.lastMapView = {
+      const view = {
         ...action.payload,
         height: action.payload.height || state.lastMapView?.height,
         width: action.payload.width || state.lastMapView?.width,
       }
-      persistentStore.setLastMapViewThrottledSync(state.lastMapView)
+      state.lastMapView = view
+      persistentStore.setLastMapViewThrottledSync(view)
     },
   },
   extraReducers: {
