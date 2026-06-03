@@ -149,7 +149,7 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
     dispatch(fetchFilterCounts())
   }, 1000)
 
-  return (googleMapReactCallbackArg) => {
+  return () => {
     const center = googleMap.getCenter()
     const newView = {
       center: { lat: center.lat(), lng: center.lng() },
@@ -159,9 +159,7 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
       height: googleMap.getDiv().offsetHeight,
     }
     throttledDispatches(newView)
-    if (googleMapReactCallbackArg) {
-      history.syncViewToBrowserUrl(newView)
-    }
+    history.syncViewToBrowserUrl(newView)
   }
 }
 
@@ -269,7 +267,7 @@ const MapPage = ({ isDesktop }) => {
       /*
        * Call the handler for the first time since map (re)opened
        */
-      handleViewChangeRef.current(false)
+      handleViewChangeRef.current()
     }
   }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
 
