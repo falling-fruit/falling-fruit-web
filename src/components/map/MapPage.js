@@ -377,10 +377,14 @@ const MapPage = ({ isDesktop }) => {
   }, [googleMap, getGoogleMaps, isViewingLocation, history])
 
   const zoomIn = () => {
-    googleMap?.setZoom(currentZoom + 1)
+    if (googleMap) {
+      googleMap.setZoom(googleMap.getZoom() + 1)
+    }
   }
   const zoomOut = () => {
-    googleMap?.setZoom(currentZoom - 1)
+    if (googleMap) {
+      googleMap.setZoom(googleMap.getZoom() - 1)
+    }
   }
 
   const toggleShare = useCallback(() => {
