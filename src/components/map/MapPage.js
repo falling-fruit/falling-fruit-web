@@ -142,6 +142,7 @@ const clusterBounds = ({ lat, lng, zoom }) => {
     east: bounds.east * (360 / EARTH_CIRCUMFERENCE),
   }
 }
+
 const makeHandleViewChange = (dispatch, googleMap, history) => {
   const throttledDispatches = throttle((newView) => {
     dispatch(updateLastMapView(newView))
@@ -195,7 +196,7 @@ const MapPage = ({ isDesktop }) => {
   const isRTL = i18n.dir() === 'rtl'
   const history = useAppHistory()
   const dispatch = useDispatch()
-  const handleViewChangeRef = useRef(() => void 0)
+  const idleListenerRef = useRef(null)
   const mapClickListenerRef = useRef(null)
 
   const [draggedPosition, setDraggedPosition] = useState(null)
@@ -254,21 +255,25 @@ const MapPage = ({ isDesktop }) => {
   useEffect(() => {
     const ready =
       dispatch && !typesAccess.isEmpty && googleMap && !hasTypesParams
-    if (ready) {
-      /*
-       * This usually happens after apiIsLoaded puts googleMap in redux
-       * but on first render, types might not have been fetched yet so only install the handler when both happened
-       */
-      handleViewChangeRef.current = makeHandleViewChange(
-        dispatch,
-        googleMap,
-        history,
-      )
-      /*
-       * Call the handler for the first time since map (re)opened
-       */
-      handleViewChangeRef.current()
+    if (!ready) {
+      return
     }
+
+    const handleViewChange = makeHandleViewChange(dispatch, googleMap, history)
+    const google = getGoogleMaps()
+
+    // Re-register the idle listener with the latest handler
+    if (idleListenerRef.current) {
+      google.event.removeListener(idleListenerRef.current)
+    }
+    idleListenerRef.current = google.event.addListener(
+      googleMap,
+      'idle',
+      handleViewChange,
+    )
+
+    // Call the handler for the first time since map (re)opened
+    handleViewChange()
   }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
 
   const allClusters = clusters.filter((cluster) => {
@@ -470,7 +475,6 @@ const MapPage = ({ isDesktop }) => {
           layerTypes={layerTypes}
           defaultCenter={initialView.center}
           defaultZoom={initialView.zoom}
-          onChange={handleViewChangeRef.current}
           onGoogleApiLoaded={({ map, maps }) => {
             map.mapTypes.set(
               'osm-standard',
@@ -502,6 +506,10 @@ const MapPage = ({ isDesktop }) => {
           }}
           yesIWantToUseGoogleMapApiInternals
           onUnmount={() => {
+            if (idleListenerRef.current && getGoogleMaps) {
+              getGoogleMaps().event.removeListener(idleListenerRef.current)
+              idleListenerRef.current = null
+            }
             dispatch(disconnectMap())
           }}
         >
