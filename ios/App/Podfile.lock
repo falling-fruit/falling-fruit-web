@@ -1,19 +1,19 @@
 PODS:
-  - Capacitor (7.4.4):
+  - Capacitor (7.6.5):
     - CapacitorCordova
   - CapacitorApp (7.1.2):
     - Capacitor
-  - CapacitorCamera (7.0.2):
+  - CapacitorCamera (7.0.5):
     - Capacitor
-  - CapacitorCordova (7.4.4)
-  - CapacitorDevice (7.0.2):
+  - CapacitorCordova (7.6.5)
+  - CapacitorDevice (7.0.5):
     - Capacitor
   - CapacitorFilesystem (7.1.5):
     - Capacitor
     - IONFilesystemLib (~> 1.0.1)
-  - CapacitorPreferences (7.0.2):
+  - CapacitorPreferences (7.0.4):
     - Capacitor
-  - CapacitorSplashScreen (7.0.3):
+  - CapacitorSplashScreen (7.0.5):
     - Capacitor
   - IONFilesystemLib (1.0.1)
 
@@ -50,14 +50,14 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/splash-screen"
 
 SPEC CHECKSUMS:
-  Capacitor: 09d9ff8e9618e8c4b3cab2bbee34a17215dd2fef
+  Capacitor: fa6393e8023cd0f4740c9a22bc73720c049fffa2
   CapacitorApp: 6b89831465d6bc99bc89779b1b7f5327e33011ce
-  CapacitorCamera: 6e18d54c8ab30d7dc7b8cd93d96f9b4f57e9202a
-  CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
-  CapacitorDevice: a50a45f0d075e55e2392c7a4be5404d4f69515de
+  CapacitorCamera: fdbf24f93bc44ca13c4209866368a1972349d3d2
+  CapacitorCordova: 2b36392a7292c3c451dcae154185ee8804d7b6b3
+  CapacitorDevice: 12b136398a320a395ddc8d227ab532848058d796
   CapacitorFilesystem: 2caf7ad6e26d68defef0631b0f09adb09a353f27
-  CapacitorPreferences: b583b5deb74e564c35968189d25d32c0fd41200d
-  CapacitorSplashScreen: d06ae8804808e9f649a08e7bb7f283c77b688084
+  CapacitorPreferences: d82a7e3b95fcab43a553268b803356522910d153
+  CapacitorSplashScreen: b3d12b4324d93ce605fe57f05a199ade7f26189e
   IONFilesystemLib: 89258b8e3e85465da93127d25d7ce37f977e8a6f
 
 PODFILE CHECKSUM: 65b8d02a3a45fe655b11a56a21c3c7bde4b1dfd5

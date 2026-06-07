@@ -1213,10 +1213,10 @@
   resolved "https://registry.yarnpkg.com/@capacitor/device/-/device-7.0.5.tgz#8030a11234a859a540a5152906023a9784b4ea3c"
   integrity sha512-tf6BYeQMBARNLKELQq2RGsvG3z03oM/ga+aqVhvE8M4IM8+h/516eeSz07Eqm4+yySGaQFT+2rIkpJrvA7gaAA==
 
-"@capacitor/filesystem@^7.1.5":
-  version "7.1.8"
-  resolved "https://registry.yarnpkg.com/@capacitor/filesystem/-/filesystem-7.1.8.tgz#82ace28c836959cbc60d93b1083a7ea4585ca9e6"
-  integrity sha512-Qpw/2SE4/CzqAUvGgSM9hw/uXQ5qoOaF4wxbToXwpAaKPS+tzletS1h5ti3jjLmGcqizTs2sEXMtcsARW/Ceew==
+"@capacitor/filesystem@7.1.5":
+  version "7.1.5"
+  resolved "https://registry.yarnpkg.com/@capacitor/filesystem/-/filesystem-7.1.5.tgz#44e8f8c3b96e4f929a7b35068a9dfe8296e2aee3"
+  integrity sha512-ZzJxpEh6SwKhF1cqSVmIAkEyNG3ozf3Lwg8rUNltX6CGdd94UJV45asqmFoP6X6aT5eVu7FPjPU5SHxi6XOFgA==
   dependencies:
     "@capacitor/synapse" "^1.0.3"
 

@@ -29,7 +29,6 @@
   ```
 
 - Set environment variables in `.env`.
-
   - `REACT_APP_API_URL`: URL for [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api). Use https://fallingfruit.org/api/0.3 for the production API if you only want to make frontend changes, or http://localhost:3300/api/0.3 (by default) if you are contributing to both backend and frontend.
 
   - `REACT_APP_API_KEY`: API key for [falling-fruit-api](https://github.com/falling-fruit/falling-fruit-api). Use `AKDJGHSD` for the production API or any value in column `api_keys.api_key` if running [falling-fruit](https://github.com/falling-fruit/falling-fruit) locally (see [database seeds](https://github.com/falling-fruit/falling-fruit/blob/main/db/seeds.rb)).
@@ -41,7 +40,6 @@
   - `REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID`: Tracking ID for Google Analytics. Optional.
 
 - Additional (top secret) environment variables in `.env` are needed to sign and release the mobile apps.
-
   - `ANDROID_KEYSTORE_PATH`
   - `ANDROID_KEYSTORE_PASSWORD`
   - `ANDROID_KEYSTORE_ALIAS`
@@ -130,7 +128,7 @@ First, enable [USB debugging](https://developer.android.com/studio/debug/dev-opt
 Then plug the device into your computer, start the `adb` (Android Debug Bridge) server, and check that the device is listed:
 
 ```sh
-sudo adb start-server
+adb start-server
 adb devices
 ```
 
@@ -145,7 +143,7 @@ npx cap build android
 It can be installed to a device manually as follows (uninstalling any unsigned version may be needed):
 
 ```sh
-sudo adb start-server
+adb start-server
 adb install android/app/build/outputs/apk/release/app-release-signed.apk
 ```
 
@@ -155,8 +153,8 @@ _[`ios`](../ios) directory · [setup](https://capacitorjs.com/docs/v7/getting-st
 
 First install the [requirements](https://capacitorjs.com/docs/v7/getting-started/environment-setup#ios-requirements).
 
-- [MacOS](https://www.apple.com/os/macos/) 14.5+ ([download](https://support.apple.com/en-us/102662))
-- [Xcode](https://developer.apple.com/xcode/) 16.0+ ([download](https://xcodereleases.com))
+- [MacOS](https://www.apple.com/os/macos/) 15.6+ ([download](https://support.apple.com/en-us/102662))
+- [Xcode](https://developer.apple.com/xcode/) 26.0+ ([download](https://xcodereleases.com))
 - [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) with ruby 3.1.3
 
 And prepare Xcode for first use:
