@@ -82,7 +82,7 @@ We use [Capacitor](https://capacitorjs.com) to package the web app as Android an
 Use [`capacitor-set-version`](https://github.com/HausennTechnologies/capacitor-set-version) to set the `version` (e.g., 0.3.0) and integer `build` number.
 
 ```sh
-npx capacitor-set-version --version version --build build
+npx capacitor-set-version . --version version --build build
 ```
 
 ## Android
