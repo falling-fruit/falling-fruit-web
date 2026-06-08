@@ -141,7 +141,8 @@ const redirects = [
     component: () => <Redirect to="/about/project" />,
   },
   {
-    path: ['/data', '/datasets'],
+    path: ['/data', '/datasets', '/imports'],
+    exact: true,
     component: () => <Redirect to="/about/data" />,
   },
   {
