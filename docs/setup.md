@@ -186,3 +186,5 @@ Alternatively, open [`ios/App/App.xcworkspace`](../ios/App/App.xcworkspace) in X
 ```sh
 npx cap open ios
 ```
+
+To build a release, select "Any iOS Device (arm64)" as the build target, then Product > Archive. Follow the prompts to upload to App Store Connect and submit for review.
