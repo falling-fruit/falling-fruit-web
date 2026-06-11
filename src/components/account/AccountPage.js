@@ -129,6 +129,7 @@ const AccountPage = () => {
                 <Link to="/account/change-password">
                   {t('users.change_password')}
                 </Link>
+                <Link to="/account/delete">{t('users.delete_account')}</Link>
                 {!isDesktop && (
                   <Link to={`/users/${user.id}/activity`}>
                     {t('users.your_activity')}

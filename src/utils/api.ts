@@ -76,6 +76,8 @@ export const editUser = (
 
 export const getUser = () => instance.get('/user')
 
+export const deleteUser = () => instance.delete('/user')
+
 export const confirmUser = (token: string) =>
   instance.post('/user/confirmation', { token })
 
