@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Не удалось подтвердить аккаунт: {{message}}",
+      "delete_account_failed": "Не удалось удалить аккаунт: {{message}}",
       "expired_refresh_token": "Мы вышли из вашей учетной записи после периода бездействия. Пожалуйста, войдите снова.",
       "password_set_failed": "Не удалось установить новый пароль: {{message}}",
       "profile_update_failed": "Не удалось обновить профиль: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Не удалось скопировать URL в буфер обмена"
   },
   "success_message": {
+    "account_deleted": "Аккаунт успешно удален!",
     "location_deleted": "Местоположение успешно удалено!",
     "location_edited": "Местоположение успешно отредактировано!",
     "location_submitted": "Местоположение успешно отправлено!",
@@ -466,6 +468,8 @@
     "change_password": "Изменить пароль",
     "current_email": "Текущий email",
     "current_password": "Текущий пароль",
+    "delete_account": "Удалить аккаунт",
+    "delete_account_confirmation": "Удалить вашу учетную запись навсегда?",
     "header": {
       "profile": "Профиль"
     },
@@ -487,6 +491,8 @@
     "send": "Отправить",
     "sign_in": "Войти",
     "sign_out": "Выйти",
+    "this_will_delete_your_account": "Это навсегда удалит вашу учетную запись.",
+    "this_will_delete_your_account_explanation": "Страницы, связанные с вашей учетной записью, больше не будут существовать. Все места и отзывы, которые вы добавили, станут анонимными.",
     "your_activity": "Ваша активность"
   }
 }

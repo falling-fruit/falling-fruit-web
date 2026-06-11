@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "אישור החשבון נכשל: {{message}}",
+      "delete_account_failed": "מחיקת החשבון נכשלה: {{message}}",
       "expired_refresh_token": "נותקת מהמערכת לאחר תקופה של חוסר פעילות. אנא התחבר מחדש.",
       "password_set_failed": "הגדרת סיסמה חדשה נכשלה: {{message}}",
       "profile_update_failed": "עדכון הפרופיל נכשל: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "העתקת הכתובת ללוח נכשלה"
   },
   "success_message": {
+    "account_deleted": "החשבון נמחק בהצלחה!",
     "location_deleted": "המיקום נמחק בהצלחה!",
     "location_edited": "המיקום נערך בהצלחה!",
     "location_submitted": "המיקום נשלח בהצלחה!",
@@ -466,6 +468,8 @@
     "change_password": "שינוי סיסמה",
     "current_email": "אימייל נוכחי",
     "current_password": "סיסמה נוכחית",
+    "delete_account": "מחק חשבון",
+    "delete_account_confirmation": "למחוק את החשבון שלך לצמיתות?",
     "header": {
       "profile": "פרופיל"
     },
@@ -487,6 +491,8 @@
     "send": "שלח",
     "sign_in": "התחברות לחשבון",
     "sign_out": "התנתק",
+    "this_will_delete_your_account": "פעולה זו תמחק את החשבון שלך לצמיתות.",
+    "this_will_delete_your_account_explanation": "דפים המשויכים לחשבון שלך לא יהיו קיימים יותר. כל המיקומים והביקורות שתרמת יהפכו לאנונימיים.",
     "your_activity": "הפעילות שלך"
   }
 }

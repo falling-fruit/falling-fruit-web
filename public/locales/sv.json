@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Kontobekräftelse misslyckades: {{message}}",
+      "delete_account_failed": "Misslyckades med att radera konto: {{message}}",
       "expired_refresh_token": "Vi har loggat ut dig efter en period av inaktivitet. Vänligen logga in igen.",
       "password_set_failed": "Inställning av nytt lösenord misslyckades: {{message}}",
       "profile_update_failed": "Profiluppdatering misslyckades: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Misslyckades att kopiera URL till urklipp"
   },
   "success_message": {
+    "account_deleted": "Kontot har raderats!",
     "location_deleted": "Platsen har tagits bort!",
     "location_edited": "Plats redigerad",
     "location_submitted": "Plats skickad",
@@ -466,6 +468,8 @@
     "change_password": "Ändra lösenord",
     "current_email": "Nuvarande e-postadress",
     "current_password": "Nuvarande lösenord",
+    "delete_account": "Radera konto",
+    "delete_account_confirmation": "Radera ditt konto permanent?",
     "header": {
       "profile": "Profil"
     },
@@ -487,6 +491,8 @@
     "send": "Skicka",
     "sign_in": "Logga in",
     "sign_out": "Logga ut",
+    "this_will_delete_your_account": "Detta kommer att radera ditt konto permanent.",
+    "this_will_delete_your_account_explanation": "Sidor som är kopplade till ditt konto kommer inte längre att finnas. Platser och recensioner du har bidragit med kommer att bli anonyma.",
     "your_activity": "Din aktivitet"
   }
 }

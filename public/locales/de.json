@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Kontobestätigung fehlgeschlagen: {{message}}",
+      "delete_account_failed": "Löschen des Kontos fehlgeschlagen: {{message}}",
       "expired_refresh_token": "Wir haben dich nach einer Zeit der Inaktivität abgemeldet. Bitte melde dich erneut an.",
       "password_set_failed": "Festlegen des neuen Passworts fehlgeschlagen: {{message}}",
       "profile_update_failed": "Profilaktualisierung fehlgeschlagen: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "URL konnte nicht in die Zwischenablage kopiert werden"
   },
   "success_message": {
+    "account_deleted": "Konto erfolgreich gelöscht!",
     "location_deleted": "Standort erfolgreich gelöscht!",
     "location_edited": "Standort erfolgreich bearbeitet!",
     "location_submitted": "Standort erfolgreich übermittelt!",
@@ -466,6 +468,8 @@
     "change_password": "Passwort ändern",
     "current_email": "Aktuelle E-Mail",
     "current_password": "Aktuelles Passwort",
+    "delete_account": "Konto löschen",
+    "delete_account_confirmation": "Dein Konto dauerhaft löschen?",
     "header": {
       "profile": "Profil"
     },
@@ -487,6 +491,8 @@
     "send": "Senden",
     "sign_in": "Anmelden",
     "sign_out": "Abmelden",
+    "this_will_delete_your_account": "Dies wird dein Konto dauerhaft löschen.",
+    "this_will_delete_your_account_explanation": "Seiten, die mit deinem Konto verknüpft sind, werden nicht mehr existieren. Alle Orte und Bewertungen, die du beigetragen hast, werden anonym.",
     "your_activity": "Deine Aktivitäten"
   }
 }

@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Potwierdzenie konta nie powiodło się: {{message}}",
+      "delete_account_failed": "Nie udało się usunąć konta: {{message}}",
       "expired_refresh_token": "Wylogowaliśmy Cię po okresie nieaktywności. Prosimy o ponowne zalogowanie.",
       "password_set_failed": "Ustawianie nowego hasła nie powiodło się: {{message}}",
       "profile_update_failed": "Aktualizacja profilu nie powiodła się: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Nie udało się skopiować URL do schowka"
   },
   "success_message": {
+    "account_deleted": "Konto zostało pomyślnie usunięte!",
     "location_deleted": "Lokalizacja została pomyślnie usunięta!",
     "location_edited": "Lokalizacja została edytowana!",
     "location_submitted": "Lokalizacja została przesłana!",
@@ -466,6 +468,8 @@
     "change_password": "Zmień hasło",
     "current_email": "Aktualny adres e-mail",
     "current_password": "Aktualne hasło",
+    "delete_account": "Usuń konto",
+    "delete_account_confirmation": "Trwale usunąć Twoje konto?",
     "header": {
       "profile": "Profil"
     },
@@ -487,6 +491,8 @@
     "send": "Wyślij",
     "sign_in": "Zaloguj się",
     "sign_out": "Wyloguj się",
+    "this_will_delete_your_account": "To trwale usunie Twoje konto.",
+    "this_will_delete_your_account_explanation": "Strony powiązane z Twoim kontem przestaną istnieć. Wszelkie lokalizacje i recenzje, które dodałeś, staną się anonimowe.",
     "your_activity": "Twoja aktywność"
   }
 }

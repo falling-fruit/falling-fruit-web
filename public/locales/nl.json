@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Accountbevestiging mislukt: {{message}}",
+      "delete_account_failed": "Verwijderen van account mislukt: {{message}}",
       "expired_refresh_token": "We hebben je uitgelogd na een periode van inactiviteit. Log opnieuw in.",
       "password_set_failed": "Instellen nieuw wachtwoord mislukt: {{message}}",
       "profile_update_failed": "Profielupdate mislukt: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "URL kopiëren naar klembord mislukt"
   },
   "success_message": {
+    "account_deleted": "Account succesvol verwijderd!",
     "location_deleted": "Locatie succesvol verwijderd!",
     "location_edited": "Locatie succesvol bewerkt!",
     "location_submitted": "Locatie succesvol ingediend!",
@@ -466,6 +468,8 @@
     "change_password": "Wachtwoord wijzigen",
     "current_email": "Huidig e-mailadres",
     "current_password": "Huidig wachtwoord",
+    "delete_account": "Account verwijderen",
+    "delete_account_confirmation": "Je account permanent verwijderen?",
     "header": {
       "profile": "Profiel"
     },
@@ -487,6 +491,8 @@
     "send": "Versturen",
     "sign_in": "Inloggen",
     "sign_out": "Uitloggen",
+    "this_will_delete_your_account": "Dit zal je account permanent verwijderen.",
+    "this_will_delete_your_account_explanation": "Pagina's die aan je account zijn gekoppeld zullen niet langer bestaan. Locaties en beoordelingen die je hebt bijgedragen worden anoniem.",
     "your_activity": "Jouw activiteit"
   }
 }

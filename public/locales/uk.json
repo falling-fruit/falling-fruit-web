@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Не вдалося підтвердити обліковий запис: {{message}}",
+      "delete_account_failed": "Не вдалося видалити обліковий запис: {{message}}",
       "expired_refresh_token": "Ми вийшли з системи після періоду неактивності. Будь ласка, увійдіть знову.",
       "password_set_failed": "Не вдалося встановити новий пароль: {{message}}",
       "profile_update_failed": "Не вдалося оновити профіль: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Не вдалося скопіювати URL до буфера обміну"
   },
   "success_message": {
+    "account_deleted": "Обліковий запис успішно видалено!",
     "location_deleted": "Локацію успішно видалено!",
     "location_edited": "Локацію успішно відредаговано!",
     "location_submitted": "Локацію успішно надіслано!",
@@ -466,6 +468,8 @@
     "change_password": "Змінити пароль",
     "current_email": "Поточна електронна адреса",
     "current_password": "Поточний пароль",
+    "delete_account": "Видалити обліковий запис",
+    "delete_account_confirmation": "Назавжди видалити ваш обліковий запис?",
     "header": {
       "profile": "Профіль"
     },
@@ -487,6 +491,8 @@
     "send": "Надіслати",
     "sign_in": "Увійти",
     "sign_out": "Вийти",
+    "this_will_delete_your_account": "Це назавжди видалить ваш обліковий запис.",
+    "this_will_delete_your_account_explanation": "Сторінки, пов'язані з вашим обліковим записом, більше не існуватимуть. Будь-які локації та відгуки, які ви додали, стануть анонімними.",
     "your_activity": "Ваша активність"
   }
 }

@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Xác nhận tài khoản thất bại: {{message}}",
+      "delete_account_failed": "Xóa tài khoản thất bại: {{message}}",
       "expired_refresh_token": "Chúng tôi đã đăng xuất bạn sau một thời gian không hoạt động. Vui lòng đăng nhập lại.",
       "password_set_failed": "Đặt mật khẩu mới thất bại: {{message}}",
       "profile_update_failed": "Cập nhật hồ sơ thất bại: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Không thể sao chép URL vào bộ nhớ tạm"
   },
   "success_message": {
+    "account_deleted": "Tài khoản đã được xóa thành công!",
     "location_deleted": "Xóa vị trí thành công!",
     "location_edited": "Địa điểm đã được chỉnh sửa thành công!",
     "location_submitted": "Địa điểm đã được gửi thành công!",
@@ -466,6 +468,8 @@
     "change_password": "Đổi mật khẩu",
     "current_email": "Email hiện tại",
     "current_password": "Mật khẩu hiện tại",
+    "delete_account": "Xóa tài khoản",
+    "delete_account_confirmation": "Xóa vĩnh viễn tài khoản của bạn?",
     "header": {
       "profile": "Hồ sơ"
     },
@@ -487,6 +491,8 @@
     "send": "Gửi",
     "sign_in": "Đăng nhập",
     "sign_out": "Đăng xuất",
+    "this_will_delete_your_account": "Điều này sẽ xóa vĩnh viễn tài khoản của bạn.",
+    "this_will_delete_your_account_explanation": "Các trang liên kết với tài khoản của bạn sẽ không còn tồn tại. Mọi địa điểm và đánh giá bạn đóng góp sẽ trở thành ẩn danh.",
     "your_activity": "Hoạt động của bạn"
   }
 }

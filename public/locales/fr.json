@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Échec de la confirmation du compte : {{message}}",
+      "delete_account_failed": "Échec de la suppression du compte : {{message}}",
       "expired_refresh_token": "Nous t'avons déconnecté après une période d'inactivité. Merci de te reconnecter.",
       "password_set_failed": "Échec de la définition du nouveau mot de passe : {{message}}",
       "profile_update_failed": "Échec de la mise à jour du profil : {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Échec de la copie de l'URL dans ton presse-papiers"
   },
   "success_message": {
+    "account_deleted": "Compte supprimé avec succès !",
     "location_deleted": "Emplacement supprimé avec succès !",
     "location_edited": "Emplacement modifié",
     "location_submitted": "Emplacement soumis",
@@ -466,6 +468,8 @@
     "change_password": "Changer le mot de passe",
     "current_email": "E-mail actuel",
     "current_password": "Mot de passe actuel",
+    "delete_account": "Supprimer le compte",
+    "delete_account_confirmation": "Supprimer définitivement ton compte ?",
     "header": {
       "profile": "Profil"
     },
@@ -487,6 +491,8 @@
     "send": "Envoyer",
     "sign_in": "Se connecter",
     "sign_out": "Se déconnecter",
+    "this_will_delete_your_account": "Cela supprimera définitivement ton compte.",
+    "this_will_delete_your_account_explanation": "Les pages associées à ton compte n'existeront plus. Tous les lieux et avis que tu as contribués deviendront anonymes.",
     "your_activity": "Ton activité"
   }
 }
