@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Potvrzení účtu se nezdařilo: {{message}}",
+      "delete_account_failed": "Smazání účtu se nezdařilo: {{message}}",
       "expired_refresh_token": "Byli jste odhlášeni po období nečinnosti. Přihlaste se prosím znovu.",
       "password_set_failed": "Nastavení nového hesla se nezdařilo: {{message}}",
       "profile_update_failed": "Aktualizace profilu se nezdařila: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Nepodařilo se zkopírovat URL do schránky"
   },
   "success_message": {
+    "account_deleted": "Účet byl úspěšně smazán!",
     "location_deleted": "Umístění bylo úspěšně smazáno!",
     "location_edited": "Umístění bylo úspěšně upraveno!",
     "location_submitted": "Umístění bylo úspěšně odesláno!",
@@ -466,6 +468,8 @@
     "change_password": "Změnit heslo",
     "current_email": "Současný e-mail",
     "current_password": "Současné heslo",
+    "delete_account": "Smazat účet",
+    "delete_account_confirmation": "Trvale smazat váš účet?",
     "header": {
       "profile": "Profil"
     },
@@ -487,6 +491,8 @@
     "send": "Odeslat",
     "sign_in": "Přihlásit se",
     "sign_out": "Odhlásit se",
+    "this_will_delete_your_account": "Tímto trvale smažete svůj účet.",
+    "this_will_delete_your_account_explanation": "Stránky spojené s vaším účtem již nebudou existovat. Jakákoli místa a recenze, které jste přispěli, se stanou anonymními.",
     "your_activity": "Vaše aktivita"
   }
 }

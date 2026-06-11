@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "فشل تأكيد الحساب: {{message}}",
+      "delete_account_failed": "فشل حذف الحساب: {{message}}",
       "expired_refresh_token": "لقد قمنا بتسجيل خروجك بعد فترة من عدم النشاط. يرجى تسجيل الدخول مرة أخرى.",
       "password_set_failed": "فشل تعيين كلمة المرور الجديدة: {{message}}",
       "profile_update_failed": "فشل تحديث الملف الشخصي: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "فشل نسخ الرابط إلى الحافظة"
   },
   "success_message": {
+    "account_deleted": "تم حذف الحساب بنجاح!",
     "location_deleted": "تم حذف الموقع بنجاح!",
     "location_edited": "تم تعديل الموقع!",
     "location_submitted": "تم إرسال الموقع!",
@@ -466,6 +468,8 @@
     "change_password": "تغيير كلمة المرور",
     "current_email": "البريد الإلكتروني الحالي",
     "current_password": "كلمة المرور الحالي",
+    "delete_account": "حذف الحساب",
+    "delete_account_confirmation": "حذف حسابك نهائياً؟",
     "header": {
       "profile": "الملف الشخصي"
     },
@@ -487,6 +491,8 @@
     "send": "إرسال",
     "sign_in": "تسجيل الدخول",
     "sign_out": "تسجيل الخروج",
+    "this_will_delete_your_account": "سيؤدي هذا إلى حذف حسابك نهائياً.",
+    "this_will_delete_your_account_explanation": "لن تعود الصفحات المرتبطة بحسابك موجودة. ستصبح أي مواقع ومراجعات ساهمت بها مجهولة المصدر.",
     "your_activity": "نشاطك"
   }
 }

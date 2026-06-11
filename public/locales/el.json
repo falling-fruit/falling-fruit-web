@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Η επιβεβαίωση λογαριασμού απέτυχε: {{message}}",
+      "delete_account_failed": "Αποτυχία διαγραφής λογαριασμού: {{message}}",
       "expired_refresh_token": "Σας αποσυνδέσαμε μετά από μια περίοδο αδράνειας. Παρακαλώ συνδεθείτε ξανά.",
       "password_set_failed": "Η ρύθμιση νέου κωδικού απέτυχε: {{message}}",
       "profile_update_failed": "Η ενημέρωση προφίλ απέτυχε: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Αποτυχία αντιγραφής URL στο πρόχειρο"
   },
   "success_message": {
+    "account_deleted": "Ο λογαριασμός διαγράφηκε επιτυχώς!",
     "location_deleted": "Η τοποθεσία διαγράφηκε επιτυχώς!",
     "location_edited": "Η τοποθεσία επεξεργάστηκε με επιτυχία!",
     "location_submitted": "Η τοποθεσία υποβλήθηκε με επιτυχία!",
@@ -466,6 +468,8 @@
     "change_password": "Αλλαγή κωδικού",
     "current_email": "Τρέχον email",
     "current_password": "Τρέχων κωδικός",
+    "delete_account": "Διαγραφή λογαριασμού",
+    "delete_account_confirmation": "Οριστική διαγραφή του λογαριασμού σας;",
     "header": {
       "profile": "Προφίλ"
     },
@@ -487,6 +491,8 @@
     "send": "Αποστολή",
     "sign_in": "Σύνδεση",
     "sign_out": "Αποσύνδεση",
+    "this_will_delete_your_account": "Αυτό θα διαγράψει οριστικά τον λογαριασμό σας.",
+    "this_will_delete_your_account_explanation": "Οι σελίδες που σχετίζονται με τον λογαριασμό σας δεν θα υπάρχουν πλέον. Οποιεσδήποτε τοποθεσίες και κριτικές που συνεισφέρατε θα γίνουν ανώνυμες.",
     "your_activity": "Η δραστηριότητά σας"
   }
 }

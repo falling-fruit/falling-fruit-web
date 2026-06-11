@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Error en la confirmación de cuenta: {{message}}",
+      "delete_account_failed": "Error al eliminar la cuenta: {{message}}",
       "expired_refresh_token": "Te hemos desconectado después de un período de inactividad. Por favor, vuelve a iniciar sesión.",
       "password_set_failed": "Error al establecer nueva contraseña: {{message}}",
       "profile_update_failed": "Error al actualizar perfil: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "¡Error al copiar la URL al portapapeles!"
   },
   "success_message": {
+    "account_deleted": "¡Cuenta eliminada exitosamente!",
     "location_deleted": "¡Ubicación eliminada exitosamente!",
     "location_edited": "Ubicación editada",
     "location_submitted": "Ubicación enviada",
@@ -466,6 +468,8 @@
     "change_password": "Cambiar contraseña",
     "current_email": "Correo electrónico actual",
     "current_password": "Contraseña actual",
+    "delete_account": "Eliminar cuenta",
+    "delete_account_confirmation": "¿Eliminar permanentemente tu cuenta?",
     "header": {
       "profile": "Perfil"
     },
@@ -487,6 +491,8 @@
     "send": "Enviar",
     "sign_in": "Acceder",
     "sign_out": "Cerrar sesión",
+    "this_will_delete_your_account": "Esto eliminará permanentemente tu cuenta.",
+    "this_will_delete_your_account_explanation": "Las páginas asociadas con tu cuenta ya no existirán. Cualquier ubicación y reseña que hayas contribuido se volverán anónimas.",
     "your_activity": "Tu actividad"
   }
 }

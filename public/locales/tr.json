@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Hesap onayı başarısız: {{message}}",
+      "delete_account_failed": "Hesap silme başarısız: {{message}}",
       "expired_refresh_token": "Uzun süreli hareketsizlik nedeniyle oturumunuz sonlandırıldı. Lütfen tekrar giriş yapın.",
       "password_set_failed": "Yeni şifre belirleme başarısız: {{message}}",
       "profile_update_failed": "Profil güncelleme başarısız: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "URL panoya kopyalanamadı"
   },
   "success_message": {
+    "account_deleted": "Hesap başarıyla silindi!",
     "location_deleted": "Konum başarıyla silindi!",
     "location_edited": "Konum başarıyla düzenlendi!",
     "location_submitted": "Konum başarıyla gönderildi!",
@@ -466,6 +468,8 @@
     "change_password": "Şifreyi değiştir",
     "current_email": "Mevcut e-posta",
     "current_password": "Mevcut şifre",
+    "delete_account": "Hesabı sil",
+    "delete_account_confirmation": "Hesabınızı kalıcı olarak silmek istiyor musunuz?",
     "header": {
       "profile": "Profil"
     },
@@ -487,6 +491,8 @@
     "send": "Gönder",
     "sign_in": "Oturum aç",
     "sign_out": "Oturumu kapat",
+    "this_will_delete_your_account": "Bu işlem hesabınızı kalıcı olarak silecektir.",
+    "this_will_delete_your_account_explanation": "Hesabınızla ilişkili sayfalar artık mevcut olmayacaktır. Katkıda bulunduğunuz tüm konumlar ve yorumlar anonim hale gelecektir.",
     "your_activity": "Aktiviteleriniz"
   }
 }

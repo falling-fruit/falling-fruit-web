@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "账户验证失败：{{message}}",
+      "delete_account_failed": "删除账户失败：{{message}}",
       "expired_refresh_token": "登录已过期，请重新登录。",
       "password_set_failed": "设置新密码失败：{{message}}",
       "profile_update_failed": "更新个人资料失败：{{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "链接复制失败"
   },
   "success_message": {
+    "account_deleted": "账户已成功删除！",
     "location_deleted": "地点已删除",
     "location_edited": "修改已保存",
     "location_submitted": "位置提交成功",
@@ -466,6 +468,8 @@
     "change_password": "修改密码",
     "current_email": "当前邮箱",
     "current_password": "当前密码",
+    "delete_account": "删除账户",
+    "delete_account_confirmation": "永久删除您的账户？",
     "header": {
       "profile": "个人资料"
     },
@@ -487,6 +491,8 @@
     "send": "发送邮件",
     "sign_in": "登录",
     "sign_out": "退出登录",
+    "this_will_delete_your_account": "这将永久删除您的账户。",
+    "this_will_delete_your_account_explanation": "与您账户关联的页面将不复存在。您贡献的任何地点和评论将变为匿名。",
     "your_activity": "你的动态"
   }
 }

@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "アカウントの確認に失敗しました: {{message}}",
+      "delete_account_failed": "アカウントの削除に失敗しました: {{message}}",
       "expired_refresh_token": "一定期間操作がなかったため、サインアウトしました。再度サインインしてください。",
       "password_set_failed": "新しいパスワードの設定に失敗しました: {{message}}",
       "profile_update_failed": "プロフィールの更新に失敗しました: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "URLのクリップボードへのコピーに失敗しました"
   },
   "success_message": {
+    "account_deleted": "アカウントが正常に削除されました！",
     "location_deleted": "場所が正常に削除されました！",
     "location_edited": "場所が正常に編集されました！",
     "location_submitted": "場所が正常に送信されました！",
@@ -466,6 +468,8 @@
     "change_password": "パスワードを変更",
     "current_email": "現在のメールアドレス",
     "current_password": "現在のパスワード",
+    "delete_account": "アカウントを削除",
+    "delete_account_confirmation": "アカウントを完全に削除しますか？",
     "header": {
       "profile": "プロフィール"
     },
@@ -487,6 +491,8 @@
     "send": "送信",
     "sign_in": "ログイン",
     "sign_out": "ログアウト",
+    "this_will_delete_your_account": "これによりアカウントが完全に削除されます。",
+    "this_will_delete_your_account_explanation": "アカウントに関連付けられたページは存在しなくなります。投稿した場所やレビューは匿名になります。",
     "your_activity": "あなたのアクティビティ"
   }
 }
