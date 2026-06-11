@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
-import { editUser, getUser, getUserToken } from '../utils/api'
+import { deleteUser, editUser, getUser, getUserToken } from '../utils/api'
 import persistentStore from '../utils/persistentStore'
 
 export const checkAuth = createAsyncThunk('auth/checkAuth', async (_data) => {
@@ -37,6 +37,15 @@ export const editProfile = createAsyncThunk(
     const isEmailChanged = userData.email !== currentUser.email
     const response = await editUser({ ...userData, range: currentUser.range })
     return { response, isEmailChanged }
+  },
+)
+
+export const deleteAccount = createAsyncThunk(
+  'auth/deleteAccount',
+  async (_data, { dispatch }) => {
+    await deleteUser()
+    persistentStore.removeTokens()
+    dispatch(authSlice.actions.logout())
   },
 )
 
@@ -103,6 +112,24 @@ const authSlice = createSlice({
     [editProfile.rejected]: (state, action) => {
       toast.error(
         i18next.t('error_message.auth.profile_update_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
+      state.isLoading = false
+    },
+
+    [deleteAccount.pending]: (state) => {
+      state.isLoading = true
+    },
+    [deleteAccount.fulfilled]: (state) => {
+      state.user = null
+      toast.success(i18next.t('success_message.account_deleted'))
+      state.isLoading = false
+    },
+    [deleteAccount.rejected]: (state, action) => {
+      toast.error(
+        i18next.t('error_message.auth.delete_account_failed', {
           message:
             action.error.message || i18next.t('error_message.unknown_error'),
         }),

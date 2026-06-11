@@ -51,6 +51,7 @@
     },
     "auth": {
       "confirmation_failed": "Account confirmation failed: {{message}}",
+      "delete_account_failed": "Failed to delete accoint: {{message}}",
       "expired_refresh_token": "We've signed you out after a period of inactivity. Please sign back in.",
       "password_set_failed": "Setting new password failed: {{message}}",
       "profile_update_failed": "Profile update failed: {{message}}",
@@ -447,6 +448,7 @@
     "url_copy_failed": "Failed to copy URL to clipboard"
   },
   "success_message": {
+    "account_deleted": "Account deleted successfully!",
     "location_deleted": "Location deleted successfully!",
     "location_edited": "Location edited successfully!",
     "location_submitted": "Location submitted successfully!",
@@ -466,6 +468,10 @@
     "change_password": "Change password",
     "current_email": "Current email",
     "current_password": "Current password",
+    "delete_account": "Delete account",
+    "delete_account_confirmation": "Permanently delete your account?",
+    "this_will_delete_your_account": "This will permanently delete your account.",
+    "this_will_delete_your_account_explanation": "Pages associated with your account will no longer exist. Any locations and reviews you contributed will become anonymous.",
     "header": {
       "profile": "Profile"
     },
