@@ -492,7 +492,7 @@
     "sign_in": "Acceder",
     "sign_out": "Cerrar sesión",
     "this_will_delete_your_account": "Esto eliminará permanentemente tu cuenta.",
-    "this_will_delete_your_account_explanation": "Las páginas asociadas con tu cuenta ya no existirán. Cualquier ubicación y reseña que hayas contribuido se volverán anónimas.",
+    "this_will_delete_your_account_explanation": "Cualquier ubicación y reseña que hayas contribuido se volverá anónima.",
     "your_activity": "Tu actividad"
   }
 }

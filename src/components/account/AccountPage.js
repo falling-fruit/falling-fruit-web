@@ -40,6 +40,10 @@ const LinksContainer = styled.div`
   margin-bottom: 1.5em;
 `
 
+const LinkSpacer = styled.div`
+  margin-bottom: 1em;
+`
+
 const formToUser = ({ email, name, bio, announcements_email, range }) => ({
   email,
   name: name || null,
@@ -131,14 +135,15 @@ const AccountPage = () => {
                 </Link>
                 <Link to="/account/delete">{t('users.delete_account')}</Link>
                 {!isDesktop && (
-                  <Link to={`/users/${user.id}/activity`}>
-                    {t('users.your_activity')}
-                  </Link>
-                )}
-                {!isDesktop && (
-                  <Link to="/account/lists">
-                    {t('save_location_to_list.saved_locations_title')}
-                  </Link>
+                  <>
+                    <LinkSpacer />
+                    <Link to={`/users/${user.id}/activity`}>
+                      {t('users.your_activity')}
+                    </Link>
+                    <Link to="/account/lists">
+                      {t('save_location_to_list.saved_locations_title')}
+                    </Link>
+                  </>
                 )}
               </Column>
             </LinksContainer>

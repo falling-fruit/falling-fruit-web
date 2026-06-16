@@ -492,7 +492,7 @@
     "sign_in": "Đăng nhập",
     "sign_out": "Đăng xuất",
     "this_will_delete_your_account": "Điều này sẽ xóa vĩnh viễn tài khoản của bạn.",
-    "this_will_delete_your_account_explanation": "Các trang liên kết với tài khoản của bạn sẽ không còn tồn tại. Mọi địa điểm và đánh giá bạn đóng góp sẽ trở thành ẩn danh.",
+    "this_will_delete_your_account_explanation": "Mọi địa điểm và đánh giá bạn đã đóng góp sẽ trở thành ẩn danh.",
     "your_activity": "Hoạt động của bạn"
   }
 }

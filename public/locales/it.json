@@ -491,8 +491,8 @@
     "send": "Invia",
     "sign_in": "Accedi",
     "sign_out": "Esci",
-    "this_will_delete_your_account": "Questo eliminerà definitivamente il tuo account.",
-    "this_will_delete_your_account_explanation": "Le pagine associate al tuo account non esisteranno più. Eventuali luoghi e recensioni che hai contribuito diventeranno anonimi.",
+    "this_will_delete_your_account": "Questo eliminerà permanentemente il tuo account.",
+    "this_will_delete_your_account_explanation": "Eventuali luoghi e recensioni che hai contribuito diventeranno anonimi.",
     "your_activity": "La tua attività"
   }
 }

@@ -492,7 +492,7 @@
     "sign_in": "Inloggen",
     "sign_out": "Uitloggen",
     "this_will_delete_your_account": "Dit zal je account permanent verwijderen.",
-    "this_will_delete_your_account_explanation": "Pagina's die aan je account zijn gekoppeld zullen niet langer bestaan. Locaties en beoordelingen die je hebt bijgedragen worden anoniem.",
+    "this_will_delete_your_account_explanation": "Alle locaties en beoordelingen die je hebt bijgedragen worden anoniem.",
     "your_activity": "Jouw activiteit"
   }
 }

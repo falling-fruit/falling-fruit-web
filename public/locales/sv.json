@@ -491,8 +491,8 @@
     "send": "Skicka",
     "sign_in": "Logga in",
     "sign_out": "Logga ut",
-    "this_will_delete_your_account": "Detta kommer att radera ditt konto permanent.",
-    "this_will_delete_your_account_explanation": "Sidor som är kopplade till ditt konto kommer inte längre att finnas. Platser och recensioner du har bidragit med kommer att bli anonyma.",
+    "this_will_delete_your_account": "Detta kommer permanent radera ditt konto.",
+    "this_will_delete_your_account_explanation": "Alla platser och recensioner du bidragit med kommer bli anonyma.",
     "your_activity": "Din aktivitet"
   }
 }

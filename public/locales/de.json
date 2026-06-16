@@ -491,8 +491,8 @@
     "send": "Senden",
     "sign_in": "Anmelden",
     "sign_out": "Abmelden",
-    "this_will_delete_your_account": "Dies wird dein Konto dauerhaft löschen.",
-    "this_will_delete_your_account_explanation": "Seiten, die mit deinem Konto verknüpft sind, werden nicht mehr existieren. Alle Orte und Bewertungen, die du beigetragen hast, werden anonym.",
+    "this_will_delete_your_account": "Dies wird Ihr Konto dauerhaft löschen.",
+    "this_will_delete_your_account_explanation": "Alle von Ihnen beigetragenen Orte und Bewertungen werden anonym.",
     "your_activity": "Deine Aktivitäten"
   }
 }

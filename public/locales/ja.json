@@ -492,7 +492,7 @@
     "sign_in": "ログイン",
     "sign_out": "ログアウト",
     "this_will_delete_your_account": "これによりアカウントが完全に削除されます。",
-    "this_will_delete_your_account_explanation": "アカウントに関連付けられたページは存在しなくなります。投稿した場所やレビューは匿名になります。",
+    "this_will_delete_your_account_explanation": "あなたが投稿した場所やレビューは匿名になります。",
     "your_activity": "あなたのアクティビティ"
   }
 }

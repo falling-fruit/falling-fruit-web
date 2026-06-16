@@ -491,8 +491,8 @@
     "send": "發送",
     "sign_in": "登錄",
     "sign_out": "登出",
-    "this_will_delete_your_account": "這將永久刪除您的帳戶。",
-    "this_will_delete_your_account_explanation": "與您帳戶相關的頁面將不再存在。您貢獻的任何地點和評論將變為匿名。",
+    "this_will_delete_your_account": "這將永久刪除你的帳戶。",
+    "this_will_delete_your_account_explanation": "你貢獻的任何地點和評論將變為匿名。",
     "your_activity": "您的活動"
   }
 }
