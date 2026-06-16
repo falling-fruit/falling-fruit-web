@@ -492,7 +492,7 @@
     "sign_in": "تسجيل الدخول",
     "sign_out": "تسجيل الخروج",
     "this_will_delete_your_account": "سيؤدي هذا إلى حذف حسابك نهائياً.",
-    "this_will_delete_your_account_explanation": "لن تعود الصفحات المرتبطة بحسابك موجودة. ستصبح أي مواقع ومراجعات ساهمت بها مجهولة المصدر.",
+    "this_will_delete_your_account_explanation": "ستصبح أي مواقع ومراجعات ساهمت بها مجهولة المصدر.",
     "your_activity": "نشاطك"
   }
 }

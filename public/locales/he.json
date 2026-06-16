@@ -491,8 +491,8 @@
     "send": "שלח",
     "sign_in": "התחברות לחשבון",
     "sign_out": "התנתק",
-    "this_will_delete_your_account": "פעולה זו תמחק את החשבון שלך לצמיתות.",
-    "this_will_delete_your_account_explanation": "דפים המשויכים לחשבון שלך לא יהיו קיימים יותר. כל המיקומים והביקורות שתרמת יהפכו לאנונימיים.",
+    "this_will_delete_your_account": "פעולה זו תמחק את חשבונך לצמיתות.",
+    "this_will_delete_your_account_explanation": "כל המיקומים והביקורות שתרמת יהפכו לאנונימיים.",
     "your_activity": "הפעילות שלך"
   }
 }

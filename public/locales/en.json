@@ -470,8 +470,6 @@
     "current_password": "Current password",
     "delete_account": "Delete account",
     "delete_account_confirmation": "Permanently delete your account?",
-    "this_will_delete_your_account": "This will permanently delete your account.",
-    "this_will_delete_your_account_explanation": "Pages associated with your account will no longer exist. Any locations and reviews you contributed will become anonymous.",
     "header": {
       "profile": "Profile"
     },
@@ -493,6 +491,8 @@
     "send": "Send",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
+    "this_will_delete_your_account": "This will permanently delete your account.",
+    "this_will_delete_your_account_explanation": "Any locations and reviews you contributed will become anonymous.",
     "your_activity": "Your activity"
   }
 }

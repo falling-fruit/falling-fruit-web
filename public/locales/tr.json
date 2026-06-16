@@ -492,7 +492,7 @@
     "sign_in": "Oturum aç",
     "sign_out": "Oturumu kapat",
     "this_will_delete_your_account": "Bu işlem hesabınızı kalıcı olarak silecektir.",
-    "this_will_delete_your_account_explanation": "Hesabınızla ilişkili sayfalar artık mevcut olmayacaktır. Katkıda bulunduğunuz tüm konumlar ve yorumlar anonim hale gelecektir.",
+    "this_will_delete_your_account_explanation": "Katkıda bulunduğunuz tüm konumlar ve yorumlar anonim hale gelecektir.",
     "your_activity": "Aktiviteleriniz"
   }
 }

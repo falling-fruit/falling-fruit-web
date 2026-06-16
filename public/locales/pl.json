@@ -492,7 +492,7 @@
     "sign_in": "Zaloguj się",
     "sign_out": "Wyloguj się",
     "this_will_delete_your_account": "To trwale usunie Twoje konto.",
-    "this_will_delete_your_account_explanation": "Strony powiązane z Twoim kontem przestaną istnieć. Wszelkie lokalizacje i recenzje, które dodałeś, staną się anonimowe.",
+    "this_will_delete_your_account_explanation": "Wszystkie lokalizacje i recenzje, które dodałeś(aś), staną się anonimowe.",
     "your_activity": "Twoja aktywność"
   }
 }

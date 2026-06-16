@@ -492,7 +492,7 @@
     "sign_in": "登录",
     "sign_out": "退出登录",
     "this_will_delete_your_account": "这将永久删除您的账户。",
-    "this_will_delete_your_account_explanation": "与您账户关联的页面将不复存在。您贡献的任何地点和评论将变为匿名。",
+    "this_will_delete_your_account_explanation": "您贡献的任何地点和评论将变为匿名。",
     "your_activity": "你的动态"
   }
 }
