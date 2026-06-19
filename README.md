@@ -22,7 +22,7 @@ React-based, mobile-friendly website for Falling Fruit.
 
 ## Technologies
 
-Built with React, Redux, Reach UI, Styled Components, and Formik. Vercel was once used for automatic deployments.
+Built with React, Redux, Reach UI, Styled Components, and Formik. Main branch deploys to [https://falling-fruit-web.pages.dev/](https://falling-fruit-web.pages.dev/). Live site is [https://fallingfruit.org](https://fallingfruit.org).
 
 ## Contributors
 
