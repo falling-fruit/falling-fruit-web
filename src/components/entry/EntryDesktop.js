@@ -26,7 +26,7 @@ const EntryDesktop = () => {
     isLoading,
   } = useSelector((state) => state.location)
 
-  if (!locationData || !reviews) {
+  if (!locationData) {
     return <LoadingIndicator cover vertical />
   }
 
@@ -37,9 +37,11 @@ const EntryDesktop = () => {
       <TextContent>
         <EntryOverview />
       </TextContent>
-      <TextContent>
-        <EntryReviews />
-      </TextContent>
+      {reviews.length > 0 && (
+        <TextContent>
+          <EntryReviews />
+        </TextContent>
+      )}
       {isLoading && <LoadingOverlay />}
     </div>
   )
