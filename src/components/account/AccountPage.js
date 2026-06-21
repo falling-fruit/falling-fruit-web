@@ -12,6 +12,7 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import { Input, Textarea } from '../form/FormikWrappers'
 import AboutSection from '../mobile/AboutSection'
 import MobileAppLinks from '../mobile/MobileAppLinks'
+import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
 import Checkbox from '../ui/Checkbox'
 import FormButtons from '../ui/FormButtons'
@@ -189,6 +190,8 @@ const AccountPage = () => {
             <section>
               <MobileAppLinks />
               <AboutSection />
+              <br />
+              <MobileSocialLinks />
             </section>
           )}
         </>

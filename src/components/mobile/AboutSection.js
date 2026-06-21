@@ -4,7 +4,6 @@ import styled from 'styled-components/macro'
 import { useAppHistory } from '../../utils/useAppHistory'
 import ForwardChevronIcon from '../ui/ForwardChevronIcon'
 import ListEntry, { PrimaryText } from '../ui/ListEntry'
-import SocialButtons from '../ui/SocialButtons'
 
 const StyledListEntry = styled(ListEntry)`
   width: 100%;
@@ -12,20 +11,6 @@ const StyledListEntry = styled(ListEntry)`
 
   :not(:last-child) {
     margin-block-end: 7px;
-  }
-`
-
-const StyledSocialButtons = styled(SocialButtons)`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  a {
-    color: ${({ theme }) => theme.text};
-  }
-
-  svg {
-    height: 32px;
   }
 `
 
@@ -67,8 +52,6 @@ const AboutSection = () => {
       >
         <PrimaryText>{t('layouts.application.menu.in_the_press')}</PrimaryText>
       </StyledListEntry>
-      <br />
-      <StyledSocialButtons />
     </div>
   )
 }

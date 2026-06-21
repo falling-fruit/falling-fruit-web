@@ -15,6 +15,7 @@ import { viewToString } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import AboutSection from '../mobile/AboutSection'
 import MobileAppLinks from '../mobile/MobileAppLinks'
+import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
 import { LandingPage } from '../ui/PageTemplate'
 import { withAuthRedirect } from './withAuthRedirect'
@@ -135,6 +136,8 @@ const HomePage = () => {
       </ButtonWrapper>
       <MobileAppLinks />
       <AboutSection />
+      <br />
+      <MobileSocialLinks />
     </LandingPage>
   )
 }
