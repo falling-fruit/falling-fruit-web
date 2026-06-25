@@ -1,1 +1,4 @@
+/news /news/index.html 200
+/news/* /news/*/index.html 200
+
 /* /index.html 200
