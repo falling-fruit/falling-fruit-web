@@ -180,6 +180,15 @@
       "season": "Saison",
       "season_start_to_stop_short": "bis"
     },
+    "hints": {
+      "add_description": "Beschreibung hinzufügen",
+      "add_season_start": "Saisonbeginn hinzufügen",
+      "add_season_stop": "Saisonende hinzufügen",
+      "edit_description_eg_still_there": "Beschreibung bearbeiten: 'noch vorhanden'",
+      "over_x_years_ago": "Vor über {{yearsAgo}} Jahren",
+      "report_comment_placeholder_no_longer_exists": "Existiert nicht mehr",
+      "report_no_longer_exists": "Melden: existiert nicht mehr"
+    },
     "index": {
       "editmarker_html": "<b>Gehe zum Standort dieser Quelle.</b><br><br>Satellitenansicht betrachten - der Standort könnte aus dem All sichtbar sein!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "Hinzugefügt von {{name}}",
       "added_by_you": "Von dir hinzugefügt",
-      "date_edited": "Aktualisiert am {{date}}",
+      "date_added": "Hinzugefügt am {{date}}",
+      "date_last_edited": "Zuletzt bearbeitet am {{date}}",
       "imported_from": "Importiert von {{name}}",
       "season": {
         "in_season": "Saison von {{start_month}} bis {{stop_month}}",

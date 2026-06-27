@@ -180,6 +180,15 @@
       "season": "Saison",
       "season_start_to_stop_short": "à"
     },
+    "hints": {
+      "add_description": "Ajouter une description",
+      "add_season_start": "Ajouter le début de saison",
+      "add_season_stop": "Ajouter la fin de saison",
+      "edit_description_eg_still_there": "Modifier la description : 'toujours là'",
+      "over_x_years_ago": "Il y a plus de {{yearsAgo}} ans",
+      "report_comment_placeholder_no_longer_exists": "N'existe plus",
+      "report_no_longer_exists": "Signaler : n'existe plus"
+    },
     "index": {
       "editmarker_html": "<b>Déplacez à la position de la source.</b><br><br>Vérifiez la vue satellite - la source pourrait être visible depuis l'espace!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "Ajouté par {{name}}",
       "added_by_you": "Ajouté par toi",
-      "date_edited": "Modifié le {{date}}",
+      "date_added": "Ajouté le {{date}}",
+      "date_last_edited": "Dernière modification le {{date}}",
       "imported_from": "Importé de {{name}}",
       "season": {
         "in_season": "En saison de {{start_month}} à {{stop_month}}",

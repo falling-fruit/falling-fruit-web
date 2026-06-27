@@ -180,6 +180,15 @@
       "season": "Сезон",
       "season_start_to_stop_short": "до"
     },
+    "hints": {
+      "add_description": "Добавить описание",
+      "add_season_start": "Добавить начало сезона",
+      "add_season_stop": "Добавить конец сезона",
+      "edit_description_eg_still_there": "Редактировать описание: 'все еще там'",
+      "over_x_years_ago": "Более {{yearsAgo}} лет назад",
+      "report_comment_placeholder_no_longer_exists": "Больше не существует",
+      "report_no_longer_exists": "Сообщить: больше не существует"
+    },
     "index": {
       "editmarker_html": "<b>Переместите в позицию источника.</b><br><br>Проверьте спутниковый вид - источник может быть виден из космоса!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "Добавлено {{name}}",
       "added_by_you": "Добавлено вами",
-      "date_edited": "Обновлено {{date}}",
+      "date_added": "Добавлено {{date}}",
+      "date_last_edited": "Последнее изменение {{date}}",
       "imported_from": "Импортировано из {{name}}",
       "season": {
         "in_season": "В сезоне с {{start_month}} по {{stop_month}}",

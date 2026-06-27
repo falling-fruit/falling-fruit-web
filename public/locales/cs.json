@@ -180,6 +180,15 @@
       "season": "Sezóna",
       "season_start_to_stop_short": "do"
     },
+    "hints": {
+      "add_description": "Přidat popis",
+      "add_season_start": "Přidat začátek sezóny",
+      "add_season_stop": "Přidat konec sezóny",
+      "edit_description_eg_still_there": "Upravit popis: 'stále tam'",
+      "over_x_years_ago": "Před více než {{yearsAgo}} lety",
+      "report_comment_placeholder_no_longer_exists": "Již neexistuje",
+      "report_no_longer_exists": "Nahlásit: již neexistuje"
+    },
     "index": {
       "editmarker_html": "<b>Přesuňte na pozici zdroje.</b><br><br>Zkontrolujte satelitní zobrazení - zdroj může být viditelný z vesmíru!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "Přidal(a) {{name}}",
       "added_by_you": "Přidáno vámi",
-      "date_edited": "Aktualizováno {{date}}",
+      "date_added": "Přidáno {{date}}",
+      "date_last_edited": "Naposledy upraveno {{date}}",
       "imported_from": "Importováno z {{name}}",
       "season": {
         "in_season": "V sezóně od {{start_month}} do {{stop_month}}",

@@ -1,3 +1,5 @@
+import { useFormikContext } from 'formik'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -7,7 +9,26 @@ import { addReport } from '../../utils/api'
 import Modal from '../ui/Modal'
 import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
 
-const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
+const SetInitialValue = ({ name, value }) => {
+  //Set the value programmatically to the form submittable afterwards
+  const { setFieldValue } = useFormikContext()
+  useEffect(() => {
+    if (value != null) {
+      setFieldValue(name, value, true)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  return null
+}
+
+const ReportModal = ({
+  locationId,
+  title,
+  onDismiss,
+  defaultProblemCode,
+  defaultComment,
+  ...props
+}) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
   const { t } = useTranslation()
 
@@ -68,6 +89,12 @@ const ReportModal = ({ locationId, title, onDismiss, ...props }) => {
       onSubmit={handleSubmit}
       {...props}
     >
+      {defaultProblemCode != null && (
+        <SetInitialValue name="problem_code" value={defaultProblemCode} />
+      )}
+      {defaultComment != null && (
+        <SetInitialValue name="comment" value={defaultComment} />
+      )}
       <Select
         name="problem_code"
         label={t('problems.problem_type')}
