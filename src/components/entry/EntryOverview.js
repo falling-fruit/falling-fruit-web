@@ -13,6 +13,7 @@ import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
+import { RIPENESS } from '../../constants/ripeness'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
@@ -53,6 +54,66 @@ const Description = styled.section`
     margin-block-end: 14px;
   }
 `
+
+// "When is it ripe?" guidance for the most common edible fruit/nut tree types,
+// keyed by Type id in constants/ripeness.js. Rendered inside the location description.
+const RipenessSection = styled.section`
+  border-inline-start: 3px solid ${({ theme }) => theme.blip || theme.orange};
+  padding-inline-start: 12px;
+
+  h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: ${({ theme }) => theme.headerText};
+    margin: 0 0 6px;
+  }
+
+  .ripeness-item:not(:last-child) {
+    margin-block-end: 10px;
+  }
+
+  .ripeness-item .label {
+    font-weight: 600;
+    color: ${({ theme }) => theme.headerText};
+  }
+
+  .ripeness-item p {
+    font-size: 0.95rem;
+    margin: 2px 0;
+  }
+
+  .ripeness-item .off-tree {
+    color: ${({ theme }) => theme.secondaryText};
+  }
+`
+
+const RipenessInfo = ({ types }) => {
+  const withRipeness = types.filter((type) => RIPENESS[type.id])
+  if (withRipeness.length === 0) {
+    return null
+  }
+  return (
+    <RipenessSection>
+      <h4>When is it ripe?</h4>
+      {withRipeness.map((type) => {
+        const ripeness = RIPENESS[type.id]
+        return (
+          <div className="ripeness-item" key={type.id}>
+            {withRipeness.length > 1 && (
+              <div className="label">
+                {type.commonName || type.scientificName}
+              </div>
+            )}
+            <p>{ripeness.whenRipe}</p>
+            <p className="off-tree">
+              <strong>Off the tree:</strong> {ripeness.offTree}
+            </p>
+          </div>
+        )
+      })}
+    </RipenessSection>
+  )
+}
 
 const DisabledIconBesideText = styled(IconBesideText)`
   ${({ disabled }) =>
@@ -266,6 +327,8 @@ const EntryOverview = () => {
       <Tags locationData={locationData} />
       <Description>
         <p dir="auto">{locationData.description}</p>
+
+        <RipenessInfo types={types} />
 
         <AddressInfo locationData={locationData} onClick={handleAddressClick} />
         <StreetViewInfo
