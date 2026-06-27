@@ -172,7 +172,7 @@ const SaveToListButton = ({ containerRef }) => {
   const addNewRowRef = useRef(null)
 
   const { lists } = useSavedLists(locationId)
-  const { drawerFullyOpen, fullyOpenPaneDrawer } = useLocationPane()
+  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -234,9 +234,7 @@ const SaveToListButton = ({ containerRef }) => {
   }, [isAddingNew])
 
   const handleButtonClick = () => {
-    if (!drawerFullyOpen) {
-      fullyOpenPaneDrawer()
-    }
+    fullyOpenPaneDrawerIfMobile()
     if (!open) {
       dispatch(fetchLists())
     }

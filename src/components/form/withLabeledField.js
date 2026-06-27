@@ -1,4 +1,5 @@
 import { useField } from 'formik'
+import { useLocation } from 'react-router-dom'
 
 import Label from '../ui/Label'
 import { Optional, Required } from '../ui/LabelTag'
@@ -52,9 +53,13 @@ export const withField = (WrappedComponent, type, bypassFormik = false) => {
       meta.error = false
     }
 
+    const { state } = useLocation()
+    const autoFocus = state?.focus != null && state.focus === props.name
+
     return (
       <WrappedComponent
         invalid={(invalidWhenUntouched || meta.touched) && meta.error}
+        autoFocus={autoFocus} //eslint-disable-line
         {...customProps}
         {...props}
       />

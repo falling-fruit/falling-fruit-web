@@ -1,12 +1,13 @@
 import { useCallback } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { useIsEmbed } from '../../utils/useBreakpoint'
+import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 
 const useLocationPane = () => {
   const history = useHistory()
   const { search, pathname } = useLocation()
   const isEmbed = useIsEmbed()
+  const isDesktop = useIsDesktop()
 
   const params = new URLSearchParams(search)
   const paneParam = params.get('pane') // 'low' | 'full' | null -> middle position
@@ -66,6 +67,12 @@ const useLocationPane = () => {
     setPaneParam('full')
   }, [setPaneParam])
 
+  const fullyOpenPaneDrawerIfMobile = useCallback(() => {
+    if (!isDesktop) {
+      fullyOpenPaneDrawer()
+    }
+  }, [isDesktop, fullyOpenPaneDrawer])
+
   const setPaneDrawerToMiddlePosition = useCallback(() => {
     setPaneParam(null)
   }, [setPaneParam])
@@ -86,6 +93,7 @@ const useLocationPane = () => {
     drawerLow,
     tabIndex,
     fullyOpenPaneDrawer,
+    fullyOpenPaneDrawerIfMobile,
     setPaneDrawerToMiddlePosition,
     setPaneDrawerToLowPosition,
     setTabIndex,

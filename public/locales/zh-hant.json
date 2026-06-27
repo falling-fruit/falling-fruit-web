@@ -180,6 +180,15 @@
       "season": "季節",
       "season_start_to_stop_short": "至"
     },
+    "hints": {
+      "add_description": "新增描述",
+      "add_season_start": "新增季節開始",
+      "add_season_stop": "新增季節結束",
+      "edit_description_eg_still_there": "編輯描述：「仍然存在」",
+      "over_x_years_ago": "超過{{yearsAgo}}年前",
+      "report_comment_placeholder_no_longer_exists": "已不存在",
+      "report_no_longer_exists": "回報：已不存在"
+    },
     "index": {
       "editmarker_html": "<b>移動到源的位置。</b><br><br>檢查衛星視圖 - 從太空中可以看到源！"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "由{{name}}添加",
       "added_by_you": "由您添加",
-      "date_edited": "更新於{{date}}",
+      "date_added": "已於{{date}}添加",
+      "date_last_edited": "最後編輯於{{date}}",
       "imported_from": "從{{name}}導入",
       "season": {
         "in_season": "從{{start_month}}到{{stop_month}}的季節",

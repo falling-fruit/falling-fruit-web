@@ -1,29 +1,49 @@
 import { Flag } from '@styled-icons/boxicons-solid'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
+import { useAppHistory } from '../../../utils/useAppHistory'
 import { ReportModal } from '../../form/ReportModal'
 import Button from '../../ui/Button'
-import useLocationPane from '../useLocationPane'
+
+const PROBLEM_TYPE_OPTIONS = [
+  { value: 0 },
+  { value: 1 },
+  { value: 2 },
+  { value: 3 },
+  { value: 4 },
+  { value: 5 },
+]
 
 export const ReportButton = () => {
   const { location: locationData } = useSelector((state) => state.location)
   const { t } = useTranslation()
   const typesAccess = useSelector((state) => state.type.typesAccess)
-  const { drawerFullyOpen, fullyOpenPaneDrawer } = useLocationPane()
+  const history = useAppHistory()
+  const location = useLocation()
+
+  const isReportModalOpen =
+    new URLSearchParams(location.search).get('report') === 'true'
+
+  const problemCode = location.state?.problem_code ?? null
+  const defaultProblemCode =
+    problemCode != null
+      ? (PROBLEM_TYPE_OPTIONS.find((o) => o.value === problemCode) ?? null)
+      : null
+  const defaultComment = location.state?.comment ?? null
 
   const locationName = locationData?.type_ids
     .map((id) => typesAccess?.getType(id)?.commonName)
     .filter(Boolean)
     .join(', ')
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false)
 
   const handleReportClick = () => {
-    if (!drawerFullyOpen) {
-      fullyOpenPaneDrawer()
-    }
-    setIsReportModalOpen(true)
+    history.addParam('report', 'true')
+  }
+
+  const handleDismiss = () => {
+    history.removeParam('report')
   }
 
   return (
@@ -33,7 +53,9 @@ export const ReportButton = () => {
           locationId={locationData.id}
           title={`${t('form.button.report')} ${locationName}`}
           name={locationName}
-          onDismiss={() => setIsReportModalOpen(false)}
+          onDismiss={handleDismiss}
+          defaultProblemCode={defaultProblemCode}
+          defaultComment={defaultComment}
         />
       )}
       <Button leftIcon={<Flag />} secondary onClick={handleReportClick}>

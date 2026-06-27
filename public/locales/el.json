@@ -180,6 +180,15 @@
       "season": "Εποχή",
       "season_start_to_stop_short": "έως"
     },
+    "hints": {
+      "add_description": "Προσθήκη περιγραφής",
+      "add_season_start": "Προσθήκη έναρξης εποχής",
+      "add_season_stop": "Προσθήκη λήξης εποχής",
+      "edit_description_eg_still_there": "Επεξεργασία περιγραφής: 'εξακολουθεί να υπάρχει'",
+      "over_x_years_ago": "Πριν από πάνω από {{yearsAgo}} χρόνια",
+      "report_comment_placeholder_no_longer_exists": "Δεν υπάρχει πλέον",
+      "report_no_longer_exists": "Αναφορά: δεν υπάρχει πλέον"
+    },
     "index": {
       "editmarker_html": "<b>Μετακίνηση στην θέση της πηγής.</b><br><br>Έλεγξε την δορυφορική προβολή - η τοποθεσία μπορεί να έιναι ορατή από το διάστημα!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "Προστέθηκε από {{name}}",
       "added_by_you": "Προστέθηκε από εσάς",
-      "date_edited": "Ενημερώθηκε {{date}}",
+      "date_added": "Προστέθηκε {{date}}",
+      "date_last_edited": "Τελευταία επεξεργασία {{date}}",
       "imported_from": "Εισήχθη από {{name}}",
       "season": {
         "in_season": "Σε εποχή από {{start_month}} έως {{stop_month}}",

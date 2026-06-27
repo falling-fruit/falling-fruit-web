@@ -180,6 +180,15 @@
       "season": "Mùa",
       "season_start_to_stop_short": "đến"
     },
+    "hints": {
+      "add_description": "Thêm mô tả",
+      "add_season_start": "Thêm mùa bắt đầu",
+      "add_season_stop": "Thêm mùa kết thúc",
+      "edit_description_eg_still_there": "Chỉnh sửa mô tả: 'vẫn còn đó'",
+      "over_x_years_ago": "Hơn {{yearsAgo}} năm trước",
+      "report_comment_placeholder_no_longer_exists": "Không còn tồn tại",
+      "report_no_longer_exists": "Báo cáo: không còn tồn tại"
+    },
     "index": {
       "editmarker_html": "<b>Di chuyển đến vị trí của nguồn.</b><br><br>Kiểm tra chế độ xem vệ tinh - nguồn có thể được nhìn thấy từ không gian!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "Được thêm bởi {{name}}",
       "added_by_you": "Thêm bởi bạn",
-      "date_edited": "Cập nhật {{date}}",
+      "date_added": "Đã thêm {{date}}",
+      "date_last_edited": "Chỉnh sửa lần cuối {{date}}",
       "imported_from": "Được nhập từ {{name}}",
       "season": {
         "in_season": "Trong mùa từ {{start_month}} đến {{stop_month}}",

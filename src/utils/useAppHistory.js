@@ -1,6 +1,7 @@
 import { useHistory, useLocation } from 'react-router-dom'
 
 import {
+  addParam,
   currentPathWithView,
   pathToSignInPage,
   pathWithCurrentView,
@@ -54,6 +55,12 @@ export const useAppHistory = () => {
     history.replace(newPath)
   }
 
+  const addParamToHistory = (paramName, paramValue, state) => {
+    const currentPath = `${location.pathname}${location.search}`
+    const newPath = addParam(currentPath, paramName, paramValue)
+    history.push(newPath, state)
+  }
+
   const pushToSignInPage = () => {
     const signInPath = pathToSignInPage()
     history.push(signInPath)
@@ -71,6 +78,7 @@ export const useAppHistory = () => {
     syncViewToBrowserUrl,
     replaceView,
     removeParam,
+    addParam: addParamToHistory,
     pushToSignInPage,
     pushAndChangeView,
   }

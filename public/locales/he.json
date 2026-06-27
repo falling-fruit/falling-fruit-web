@@ -180,6 +180,15 @@
       "season": "עונה",
       "season_start_to_stop_short": "עד"
     },
+    "hints": {
+      "add_description": "הוסף תיאור",
+      "add_season_start": "הוסף תחילת עונה",
+      "add_season_stop": "הוסף סוף עונה",
+      "edit_description_eg_still_there": "ערוך תיאור: 'עדיין שם'",
+      "over_x_years_ago": "לפני יותר מ-{{yearsAgo}} שנים",
+      "report_comment_placeholder_no_longer_exists": "כבר לא קיים",
+      "report_no_longer_exists": "דווח: כבר לא קיים"
+    },
     "index": {
       "editmarker_html": "<b>עבור למיקום המקור.</b><br><br>בדוק את תצוגת הלוויין - ייתכן שהמקור נראה מהחלל!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "נוסף על ידי {{name}}",
       "added_by_you": "נוסף על ידך",
-      "date_edited": "עודכן {{date}}",
+      "date_added": "נוסף ב-{{date}}",
+      "date_last_edited": "נערך לאחרונה ב-{{date}}",
       "imported_from": "יובא מ {{name}}",
       "season": {
         "in_season": "בעונה מ {{start_month}} עד {{stop_month}}",

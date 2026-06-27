@@ -180,6 +180,15 @@
       "season": "Season",
       "season_start_to_stop_short": "to"
     },
+    "hints": {
+      "add_description": "Add description",
+      "add_season_start": "Add season start",
+      "add_season_stop": "Add season stop",
+      "edit_description_eg_still_there": "Edit description: 'still there'",
+      "over_x_years_ago": "Over {{yearsAgo}} years ago",
+      "report_no_longer_exists": "Report: no longer exists",
+      "report_comment_placeholder_no_longer_exists": "No longer exists"
+    },
     "index": {
       "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "Added by {{name}}",
       "added_by_you": "Added by you",
-      "date_edited": "Updated {{date}}",
+      "date_added": "Added {{date}}",
+      "date_last_edited": "Last edited {{date}}",
       "imported_from": "Imported from {{name}}",
       "season": {
         "in_season": "In season from {{start_month}} to {{stop_month}}",

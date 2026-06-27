@@ -180,6 +180,15 @@
       "season": "季節",
       "season_start_to_stop_short": "から"
     },
+    "hints": {
+      "add_description": "説明を追加",
+      "add_season_start": "シーズン開始を追加",
+      "add_season_stop": "シーズン終了を追加",
+      "edit_description_eg_still_there": "説明を編集：「まだあります」",
+      "over_x_years_ago": "{{yearsAgo}}年以上前",
+      "report_comment_placeholder_no_longer_exists": "もう存在しません",
+      "report_no_longer_exists": "報告：もう存在しません"
+    },
     "index": {
       "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！"
     },
@@ -210,7 +219,8 @@
     "overview": {
       "added_by": "{{name}}によって追加されました",
       "added_by_you": "あなたによって追加されました",
-      "date_edited": "{{date}}に更新されました",
+      "date_added": "{{date}}に追加されました",
+      "date_last_edited": "{{date}}に最終編集",
       "imported_from": "{{name}}からインポートされました",
       "season": {
         "in_season": "{{start_month}}から{{stop_month}}まで旬です",

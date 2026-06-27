@@ -1,11 +1,12 @@
 import {
   Calendar,
   Data,
+  EditAlt as Created,
   StreetView,
   User,
 } from '@styled-icons/boxicons-regular'
 import { EditAlt, Map, User as UserYou } from '@styled-icons/boxicons-solid'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -17,6 +18,13 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
+import {
+  AddDescriptionHint,
+  AddSeasonStartHint,
+  AddSeasonStopHint,
+  StaleLocationHintActions,
+  StaleLocationHintToggle,
+} from './overview/Hints'
 import { ReportButton } from './overview/ReportButton'
 import SaveToListButton from './overview/SaveToListButton'
 import Tags from './overview/Tags'
@@ -32,6 +40,13 @@ const hasSeasonality = (locationData) =>
     locationData.season_start != null ||
     locationData.season_stop != null
   )
+
+const isSameDay = (dateStringA, dateStringB) => {
+  if (!dateStringA || !dateStringB) {
+    return false
+  }
+  return dateStringA.slice(0, 10) === dateStringB.slice(0, 10)
+}
 
 // Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
@@ -61,6 +76,24 @@ const DisabledIconBesideText = styled(IconBesideText)`
       opacity: 0.5;
       cursor: not-allowed;
     `}
+`
+
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const ButtonGroupStart = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`
+
+const OverviewContainer = styled.div`
+  padding-block-end: env(safe-area-inset-bottom, 0);
 `
 
 const AddressInfo = ({ locationData, onClick }) => (
@@ -109,6 +142,8 @@ const SeasonalityInfo = ({ locationData }) => {
                   ? formatMonth(locationData.season_stop, i18n.language)
                   : '?',
             })}
+        <AddSeasonStartHint locationData={locationData} />
+        <AddSeasonStopHint locationData={locationData} />
       </p>
     </IconBesideText>
   )
@@ -171,36 +206,43 @@ const AuthorInfo = ({ locationData, user }) =>
 
 const LastEditedInfo = ({ locationData }) => {
   const { t, i18n } = useTranslation()
+  const [expanded, setExpanded] = useState(false)
+  const wasCreatedSameDay = isSameDay(
+    locationData.created_at,
+    locationData.updated_at,
+  )
+
+  const icon = wasCreatedSameDay ? <Created size={20} /> : <EditAlt size={20} />
+
+  const dateTime = wasCreatedSameDay
+    ? locationData.created_at
+    : locationData.updated_at
+
+  const label = wasCreatedSameDay
+    ? t('locations.overview.date_added', {
+        date: formatISOString(locationData.created_at, i18n.language),
+      })
+    : t('locations.overview.date_last_edited', {
+        date: formatISOString(locationData.updated_at, i18n.language),
+      })
+
   return (
-    <IconBesideText>
-      <EditAlt size={20} />
-      <p>
-        <time dateTime={locationData.updated_at}>
-          {t('locations.overview.date_edited', {
-            date: formatISOString(locationData.updated_at, i18n.language),
-          })}
-        </time>
-      </p>
-    </IconBesideText>
+    <>
+      <IconBesideText>
+        {icon}
+        <p>
+          <time dateTime={dateTime}>{label}</time>
+        </p>
+        <StaleLocationHintToggle
+          locationData={locationData}
+          expanded={expanded}
+          onToggle={() => setExpanded((prev) => !prev)}
+        />
+      </IconBesideText>
+      {expanded && <StaleLocationHintActions locationData={locationData} />}
+    </>
   )
 }
-const ButtonRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`
-
-const ButtonGroupStart = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-`
-
-const OverviewContainer = styled.div`
-  padding-block-end: env(safe-area-inset-bottom, 0);
-`
 
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
@@ -265,7 +307,10 @@ const EntryOverview = () => {
       <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
       <Tags locationData={locationData} />
       <Description>
-        <p dir="auto">{locationData.description}</p>
+        <AddDescriptionHint locationData={locationData} />
+        {locationData.description && (
+          <p dir="auto">{locationData.description}</p>
+        )}
 
         <AddressInfo locationData={locationData} onClick={handleAddressClick} />
         <StreetViewInfo
