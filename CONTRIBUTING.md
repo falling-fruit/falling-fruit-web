@@ -109,9 +109,8 @@ Run these locally before opening a PR to avoid round-trips.
 
 ## Branches and pull requests
 
-- Fork the repo (or branch directly if you have access) and create a topic
-  branch off `main`. Use a short, descriptive prefix, e.g. `feature/…`,
-  `fix/…`, or `docs/…`.
+- Fork the repo and create a topic branch off `main`. Use a short, descriptive
+  prefix, e.g. `feature/…`, `fix/…`, or `docs/…`.
 - Keep PRs focused and reasonably small; a reviewer should be able to understand
   the change in one sitting.
 - Write a clear PR description: what changed, why, and how to test it. Link any
