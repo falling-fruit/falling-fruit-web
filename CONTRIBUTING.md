@@ -134,6 +134,9 @@ Falling Fruit is a community-run project. A few things worth knowing:
   [fallingfruit.org](https://fallingfruit.org)**.
 - **Monthly community calls** are the main venue to discuss ideas and gather
   input; the newsletter is another way to ask the community for opinions.
+- **Day-to-day chat happens on Slack.** It's the best place to float a feature
+  idea, ask questions, and get quick feedback before opening an issue or PR.
+  Join the workspace at [fallingfruit.org/join-slack](https://fallingfruit.org/join-slack).
 - **Board meetings** handle large or governance-type decisions.
 
 For anything beyond a small, self-contained fix, it's worth surfacing the idea
