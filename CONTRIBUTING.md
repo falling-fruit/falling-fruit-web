@@ -1,173 +1,62 @@
 # Contributing to Falling Fruit (web)
 
-Thanks for your interest in improving the [Falling Fruit](https://fallingfruit.org)
-frontend! This is a community project — a collaborative map of forageable food
-around the world — and contributions of all sizes are welcome.
+The mobile-friendly frontend for [Falling Fruit](https://fallingfruit.org), a
+community map of forageable food. Contributions of all sizes are welcome — this
+page is about **how to actually get a change merged**. For setup, architecture,
+and styling, see [`/docs`](./docs) (start with [`docs/setup.md`](./docs/setup.md)).
 
-This document covers how to get set up, the conventions we follow, and how
-changes get reviewed and shipped. For deeper technical docs, see [`/docs`](./docs).
+## Talk first
 
-## Table of contents
+Most changes go smoother if you raise them before writing much code:
 
-- [Getting set up](#getting-set-up)
-- [Project layout](#project-layout)
-- [Running, building, and testing](#running-building-and-testing)
-- [Code style](#code-style)
-- [Continuous integration](#continuous-integration)
-- [Branches and pull requests](#branches-and-pull-requests)
-- [Governance and how changes get shipped](#governance-and-how-changes-get-shipped)
-- [Proposing larger features or new content](#proposing-larger-features-or-new-content)
+- **Slack** — day-to-day chat and the fastest way to get feedback or sanity-check
+  an idea. Join at [fallingfruit.org/join-slack](https://fallingfruit.org/join-slack).
+- **Monthly community calls** for bigger discussions, and the **newsletter** to
+  poll the wider community.
+- **GitHub issues** for concrete bugs and proposals.
 
-## Getting set up
+Maintainers are **Ethan Welty** and **Wojtek Bażant**; Ethan decides when a merged
+change is deployed to [fallingfruit.org](https://fallingfruit.org). Large or
+governance-type decisions go through board meetings. For anything beyond a small,
+self-contained fix, get buy-in from a maintainer (and ideally the community) first
+— it's the difference between a PR that lands and one that stalls.
 
-Full setup instructions live in [`docs/setup.md`](./docs/setup.md). In short:
+## Opening a pull request
 
-```sh
-git clone https://github.com/falling-fruit/falling-fruit-web
-cd falling-fruit-web
-nvm install        # installs the Node version pinned in .nvmrc (22.16.0)
-nvm use
-yarn               # Yarn 1.x is vendored; just run it to install deps
-cp example.env .env
-```
-
-Then fill in `.env` (see [`docs/setup.md`](./docs/setup.md) for what each variable
-does). To make frontend-only changes you can point `REACT_APP_API_URL` at the
-production API (`https://fallingfruit.org/api/0.3`) instead of running the
-[backend](https://github.com/falling-fruit/falling-fruit) and
-[API](https://github.com/falling-fruit/falling-fruit-api) locally.
-
-## Project layout
-
-See [`docs/file-structure.md`](./docs/file-structure.md) for the full tour. The
-codebase is a [Create React App](https://create.react-app.dev/) (via
-[CRACO](https://craco.js.org/)) project; source lives under `src/`, with
-[`src/components/ui`](./src/components/ui) holding reusable UI primitives. The web
-app is also packaged for Android and iOS with [Capacitor](https://capacitorjs.com).
-
-## Running, building, and testing
-
-```sh
-yarn start          # run the dev server at http://localhost:3000
-yarn build          # production build into ./build
-yarn test           # run tests (react-scripts / Jest)
-```
-
-Mobile (Capacitor) build and release steps are documented in
-[`docs/setup.md`](./docs/setup.md#mobile-apps).
-
-## Code style
-
-Formatting and linting are enforced automatically — please don't fight the
-tools, just run them.
-
-- **Prettier** handles formatting. Config lives in `package.json`: no semicolons,
-  single quotes, trailing commas everywhere.
-  - `yarn format` — format `src/` and `public/` in place
-  - `yarn format:check` — check formatting without writing (what CI runs)
-- **ESLint** handles linting (`eslint src --ext js,jsx,ts,tsx`).
-  - `yarn lint` — lint and auto-fix
-  - `yarn lint:check` — lint without fixing (what CI runs)
-- **Knip** flags unused files, dependencies, and exports.
-  - `yarn knip` — run dead-code detection (config in `knip.jsonc`)
-
-A [Husky](https://typicode.github.io/husky) pre-commit hook runs
-[lint-staged](https://github.com/okonet/lint-staged), which formats and lints
-staged files for you. If the hook is not running, make sure you installed
-dependencies with `yarn` (which sets it up).
-
-### Styling
-
-Read [`docs/styling.md`](./docs/styling.md) before adding UI. The short version:
-
-- Style with [styled-components](https://styled-components.com); avoid imported
-  CSS stylesheets and use inline styles sparingly.
-- Build on [Reach UI](https://reach.tech) primitives where one fits, so
-  components stay accessible.
-- Pull colors and breakpoints from the theme rather than hardcoding them; use
-  `rem` for font sizes and the `useIsDesktop()` hook for platform-specific
-  behavior.
-
-### Internationalization
-
-The UI is translated with [`react-i18next`](https://react.i18next.com). User-facing
-strings should go through the i18n layer rather than being hardcoded, and new
-content should be designed so it can be translated as languages are added.
-
-## Continuous integration
-
-The [`main`](./.github/workflows/main.yml) GitHub Actions workflow runs on every
-push and on pull requests to `main`. It must pass before a change can merge. It
-runs, in order:
-
-1. `yarn format:check`
-2. `yarn lint:check`
-3. `yarn knip`
-4. `yarn build`
-
-Run these locally before opening a PR to avoid round-trips.
-
-## Branches and pull requests
-
-- Fork the repo and create a topic branch off `main`. Use a short, descriptive
-  prefix, e.g. `feature/…`, `fix/…`, or `docs/…`.
-- Keep PRs focused and reasonably small; a reviewer should be able to understand
-  the change in one sitting.
-- Write a clear PR description: what changed, why, and how to test it. Link any
-  related issue (e.g. `Closes #1128`).
-- Make sure CI is green and the app builds locally.
-- Open the PR against `falling-fruit/falling-fruit-web` `main`. For work in
-  progress or to invite early feedback, open it as a **draft PR**. Maintainers
-  may also pull a contributor branch and open the draft PR themselves.
-- Deploy previews: the `main` branch deploys to
-  [falling-fruit-web.pages.dev](https://falling-fruit-web.pages.dev/), and
-  per-branch Cloudflare Pages previews
-  (e.g. `issue-1128.falling-fruit-web.pages.dev`) make it easy to test a change
-  on a phone in the field before it merges.
-
-## Governance and how changes get shipped
-
-Falling Fruit is a community-run project. A few things worth knowing:
-
-- **Maintainers** review and merge contributions. Ethan Welty and Wojtek Bażant
-  currently hold maintainer permissions, and **Ethan decides when to deploy to
-  [fallingfruit.org](https://fallingfruit.org)**.
-- **Monthly community calls** are the main venue to discuss ideas and gather
-  input; the newsletter is another way to ask the community for opinions.
-- **Day-to-day chat happens on Slack.** It's the best place to float a feature
-  idea, ask questions, and get quick feedback before opening an issue or PR.
-  Join the workspace at [fallingfruit.org/join-slack](https://fallingfruit.org/join-slack).
-- **Board meetings** handle large or governance-type decisions.
-
-For anything beyond a small, self-contained fix, it's worth surfacing the idea
-on a community call or with a maintainer before investing heavily in the
-implementation — both to get buy-in and to make sure the approach fits the
-roadmap.
+1. Fork the repo and branch off `main` (`feature/…`, `fix/…`, `docs/…`).
+2. Keep it focused — small enough to review in one sitting.
+3. **Green CI is required.** The [`main`](./.github/workflows/main.yml) workflow runs,
+   in order: `yarn format:check` → `yarn lint:check` → `yarn knip` → `yarn build`.
+   Run them locally first (`yarn format` and `yarn lint` auto-fix). A Husky
+   pre-commit hook formats/lints staged files for you.
+4. Write a description that says **what changed, why, and how to test it**, and
+   link any issue (e.g. `Closes #1234`).
+5. Open the PR against `falling-fruit/falling-fruit-web` `main`. Use a **draft PR**
+   for work in progress or early feedback. Depending on the change, a maintainer
+   may pull your branch and open the draft PR themselves — coordinate on Slack.
+6. **Test it like a user.** `main` deploys to
+   [falling-fruit-web.pages.dev](https://falling-fruit-web.pages.dev/), and each
+   branch/PR gets its own Cloudflare Pages preview
+   (e.g. `issue-1234.falling-fruit-web.pages.dev`) — handy for trying a change on
+   your phone in the field before it merges.
 
 ## Proposing larger features or new content
 
-Larger features (especially ones that add new kinds of content to locations or
-types) tend to need more than code. Lessons from past proposals worth keeping in
-mind:
+Adding a new kind of content to locations/types is usually more work than the data
+itself. Lessons from past proposals:
 
-- **Design the UI/UX first.** A feature won't merge just because the data is
-  good — the relevant UI/UX has to be worked out, and it has to fit existing
-  structures (for example, content about a location's `type`, and how the type
-  accordion handles a location with _multiple_ types; search for "Fruta
-  Campground" in Utah for an extreme multi-type case).
-- **Plan for the backend, not hardcoding.** Content that varies by type or
-  language should be fetched from the backend, with a workflow for writing new
-  entries as types or languages are added — not baked into the frontend.
-- **Mind translation.** New content needs to be translatable; account for that
-  in the design rather than bolting it on later.
-- **Scope content appropriately.** Technical content (e.g. ripeness or other
-  type-level guidance) is most useful when limited to (sub)specific taxa. It
-  tends to read poorly when applied to generic taxa — compare the genus-level
-  _Pyrus_ with the species-level _Pyrus calleryana_.
-- **Connect it to the bigger picture.** Many of these ideas are part of the
-  larger goal of fleshing out
+- **Design the UI/UX first.** It has to fit existing structures — e.g. content
+  under a location's `type`, and how the accordion handles a location with
+  _multiple_ types (search "Fruta Campground" in Utah for an extreme case). A good
+  idea won't merge until the UX is worked out.
+- **Fetch from the backend; don't hardcode.** Content that varies by type or
+  language belongs in the backend, with a workflow to add entries as new types or
+  languages appear.
+- **Mind translation.** Design new content to be translatable from the start.
+- **Scope it.** Type-level text (e.g. ripeness guides) reads best on (sub)specific
+  taxa, not generic ones — compare _Pyrus_ vs _Pyrus calleryana_.
+- **Tie it to the roadmap.** Much of this feeds the larger goal of fleshing out
   [location types](https://docs.google.com/document/d/1ah6jKO9uizBqeBtTVoIXi51gpYEQEyYzzastcMKOp5Y/edit),
-  which don't yet have their own pages. Framing a proposal in that context helps.
+  which don't yet have their own pages — framing a proposal that way helps.
 
-When in doubt, open an issue or raise it on the next community call. Thanks for
-contributing!
+Not sure where to start? Ask on Slack or open an issue. Thanks for contributing!
