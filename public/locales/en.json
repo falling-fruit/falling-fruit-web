@@ -182,11 +182,12 @@
     },
     "hints": {
       "add_description": "Add description",
+      "add_season_end": "Add season end",
       "add_season_start": "Add season start",
-      "add_season_stop": "Add season stop",
-      "edit_description_eg_still_there": "Edit description: 'still there'",
+      "confirm_still_exists": "Confirm still exists",
       "over_x_years_ago": "Over {{yearsAgo}} years ago",
-      "report_no_longer_exists": "Report: no longer exists",
+      "review_comment_placeholder_still_exists": "Still there!",
+      "report_no_longer_exists": "Report no longer exists",
       "report_comment_placeholder_no_longer_exists": "No longer exists"
     },
     "index": {
@@ -220,7 +221,7 @@
       "added_by": "Added by {{name}}",
       "added_by_you": "Added by you",
       "date_added": "Added {{date}}",
-      "date_last_edited": "Last edited {{date}}",
+      "date_last_updated": "Last updated {{date}}",
       "imported_from": "Imported from {{name}}",
       "season": {
         "in_season": "In season from {{start_month}} to {{stop_month}}",

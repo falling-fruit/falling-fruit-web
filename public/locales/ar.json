@@ -182,12 +182,13 @@
     },
     "hints": {
       "add_description": "إضافة وصف",
+      "add_season_end": "إضافة نهاية الموسم",
       "add_season_start": "إضافة بداية الموسم",
-      "add_season_stop": "إضافة نهاية الموسم",
-      "edit_description_eg_still_there": "تعديل الوصف: 'لا يزال موجوداً'",
+      "confirm_still_exists": "تأكيد أنه لا يزال موجوداً",
       "over_x_years_ago": "منذ أكثر من {{yearsAgo}} سنة",
-      "report_comment_placeholder_no_longer_exists": "لم يعد موجوداً",
-      "report_no_longer_exists": "الإبلاغ: لم يعد موجوداً"
+      "report_comment_placeholder_no_longer_exists": "لم يعد موجودًا",
+      "report_no_longer_exists": "الإبلاغ عن عدم وجوده",
+      "review_comment_placeholder_still_exists": "لا يزال موجودًا!"
     },
     "index": {
       "editmarker_html": "<b>انتقل إلى موضع المصدر.</b><br>تحقق من عرض القمر الصناعي - قد يكون المصدر مرئيًا من الفضاء!"
@@ -220,7 +221,7 @@
       "added_by": "أضيف بواسطة {{name}}",
       "added_by_you": "أضيف بواسطتك",
       "date_added": "تمت الإضافة {{date}}",
-      "date_last_edited": "آخر تعديل {{date}}",
+      "date_last_updated": "آخر تحديث {{date}}",
       "imported_from": "تم الاستيراد من {{name}}",
       "season": {
         "in_season": "في الموسم من {{start_month}} إلى {{stop_month}}",

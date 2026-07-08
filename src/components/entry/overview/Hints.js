@@ -119,23 +119,21 @@ export const AddSeasonStopHint = ({ locationData }) => {
           })
         }}
       >
-        {t('locations.hints.add_season_stop')}
+        {t('locations.hints.add_season_end')}
       </HintAction>
     </HintsContainerInline>
   )
 }
 
 export const StaleLocationHintToggle = ({
-  locationData,
+  lastUpdatedDate,
   expanded,
   onToggle,
 }) => {
   const { t } = useTranslation()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
-  const updatedAt = locationData.updated_at
-    ? new Date(locationData.updated_at)
-    : null
+  const updatedAt = lastUpdatedDate ? new Date(lastUpdatedDate) : null
 
   if (!updatedAt || Date.now() - updatedAt.getTime() <= TEN_YEARS_MS) {
     return null
@@ -161,20 +159,23 @@ export const StaleLocationHintToggle = ({
   )
 }
 
-export const StaleLocationHintActions = ({ locationData }) => {
+export const StaleLocationHintActions = ({ locationData, lastUpdatedDate }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
-  const updatedAt = locationData.updated_at
-    ? new Date(locationData.updated_at)
-    : null
+  const updatedAt = lastUpdatedDate ? new Date(lastUpdatedDate) : null
 
   if (!updatedAt || Date.now() - updatedAt.getTime() <= TEN_YEARS_MS) {
     return null
   }
-  const comment = t(
+
+  const reportComment = t(
     'locations.hints.report_comment_placeholder_no_longer_exists',
+  )
+
+  const reviewComment = t(
+    'locations.hints.review_comment_placeholder_still_exists',
   )
 
   return (
@@ -182,19 +183,20 @@ export const StaleLocationHintActions = ({ locationData }) => {
       <HintAction
         onClick={() => {
           fullyOpenPaneDrawerIfMobile()
-          history.push(`/locations/${locationData.id}/edit`, {
-            focus: 'description',
+          history.push(`/locations/${locationData.id}/review`, {
+            defaultComment: reviewComment,
+            focus: 'review.comment',
           })
         }}
       >
-        {t('locations.hints.edit_description_eg_still_there')}
+        {t('locations.hints.confirm_still_exists')}
       </HintAction>
       <HintAction
         onClick={() => {
           fullyOpenPaneDrawerIfMobile()
           history.addParam('report', 'true', {
             problem_code: 1,
-            comment: comment,
+            comment: reportComment,
             focus: 'comment',
           })
         }}

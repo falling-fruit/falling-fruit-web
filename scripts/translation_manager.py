@@ -11,6 +11,10 @@ from lib.translation_filler import fill_up_translation
 
 logger = logging.getLogger(__name__)
 
+SCRIPT_DIR = Path(__file__).parent
+DEFAULT_SOURCE_PATH = str(SCRIPT_DIR / "../src")
+DEFAULT_JSON_FOLDER_PATH = str(SCRIPT_DIR / "../public/locales")
+
 
 class TranslationManager:
     def __init__(self, source_path, json_folder_path):
@@ -222,8 +226,10 @@ class TranslationManager:
 
 def main():
     parser = argparse.ArgumentParser(description="Manage translations")
-    parser.add_argument("--source_path", help="Path to source file or directory to scan for translations")
-    parser.add_argument("--json_folder_path", help="Path to the folder for JSON locale files")
+    parser.add_argument("--source_path", default=DEFAULT_SOURCE_PATH,
+                        help="Path to source file or directory to scan for translations (default: ../src relative to script)")
+    parser.add_argument("--json_folder_path", default=DEFAULT_JSON_FOLDER_PATH,
+                        help="Path to the folder for JSON locale files (default: ../public/locales relative to script)")
     parser.add_argument("--list-in-source", action="store_true", help="List all translation keys in the component file")
     parser.add_argument("--list-in-json", action="store_true", help="List all translation keys and values from JSON files")
     parser.add_argument("--rename-key", nargs=2, metavar=('OLD_KEY', 'NEW_KEY'),

@@ -182,12 +182,13 @@
     },
     "hints": {
       "add_description": "Додати опис",
+      "add_season_end": "Додати кінець сезону",
       "add_season_start": "Додати початок сезону",
-      "add_season_stop": "Додати кінець сезону",
-      "edit_description_eg_still_there": "Редагувати опис: 'все ще там'",
+      "confirm_still_exists": "Підтвердити, що все ще існує",
       "over_x_years_ago": "Понад {{yearsAgo}} років тому",
       "report_comment_placeholder_no_longer_exists": "Більше не існує",
-      "report_no_longer_exists": "Повідомити: більше не існує"
+      "report_no_longer_exists": "Повідомити, що більше не існує",
+      "review_comment_placeholder_still_exists": "Все ще тут!"
     },
     "index": {
       "editmarker_html": "<b>Перемістіть до позиції джерела.</b><br><br>Перевірте супутниковий вигляд - джерело може бути видно з космосу!"
@@ -220,7 +221,7 @@
       "added_by": "Додано користувачем {{name}}",
       "added_by_you": "Додано вами",
       "date_added": "Додано {{date}}",
-      "date_last_edited": "Востаннє редаговано {{date}}",
+      "date_last_updated": "Останнє оновлення {{date}}",
       "imported_from": "Імпортовано з {{name}}",
       "season": {
         "in_season": "В сезоні з {{start_month}} по {{stop_month}}",

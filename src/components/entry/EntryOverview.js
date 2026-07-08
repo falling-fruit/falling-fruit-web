@@ -142,9 +142,9 @@ const SeasonalityInfo = ({ locationData }) => {
                   ? formatMonth(locationData.season_stop, i18n.language)
                   : '?',
             })}
-        <AddSeasonStartHint locationData={locationData} />
-        <AddSeasonStopHint locationData={locationData} />
       </p>
+      <AddSeasonStartHint locationData={locationData} />
+      <AddSeasonStopHint locationData={locationData} />
     </IconBesideText>
   )
 }
@@ -204,42 +204,42 @@ const AuthorInfo = ({ locationData, user }) =>
     <AddedByInfo locationData={locationData} user={user} />
   )
 
-const LastEditedInfo = ({ locationData }) => {
+const LastEditedInfo = ({ locationData, lastUpdatedDate }) => {
   const { t, i18n } = useTranslation()
   const [expanded, setExpanded] = useState(false)
-  const wasCreatedSameDay = isSameDay(
-    locationData.created_at,
-    locationData.updated_at,
-  )
+  const onToggle = () => setExpanded((prev) => !prev)
 
-  const icon = wasCreatedSameDay ? <Created size={20} /> : <EditAlt size={20} />
-
-  const dateTime = wasCreatedSameDay
-    ? locationData.created_at
-    : locationData.updated_at
-
-  const label = wasCreatedSameDay
-    ? t('locations.overview.date_added', {
-        date: formatISOString(locationData.created_at, i18n.language),
-      })
-    : t('locations.overview.date_last_edited', {
-        date: formatISOString(locationData.updated_at, i18n.language),
-      })
+  const hadNoUpdates = isSameDay(locationData.created_at, lastUpdatedDate)
 
   return (
     <>
       <IconBesideText>
-        {icon}
+        {hadNoUpdates ? <Created size={20} /> : <EditAlt size={20} />}
         <p>
-          <time dateTime={dateTime}>{label}</time>
+          <time
+            dateTime={hadNoUpdates ? locationData.created_at : lastUpdatedDate}
+          >
+            {hadNoUpdates
+              ? t('locations.overview.date_added', {
+                  date: formatISOString(locationData.created_at, i18n.language),
+                })
+              : t('locations.overview.date_last_updated', {
+                  date: formatISOString(lastUpdatedDate, i18n.language),
+                })}
+          </time>
         </p>
         <StaleLocationHintToggle
-          locationData={locationData}
+          lastUpdatedDate={lastUpdatedDate}
           expanded={expanded}
-          onToggle={() => setExpanded((prev) => !prev)}
+          onToggle={onToggle}
         />
       </IconBesideText>
-      {expanded && <StaleLocationHintActions locationData={locationData} />}
+      {expanded && (
+        <StaleLocationHintActions
+          locationData={locationData}
+          lastUpdatedDate={lastUpdatedDate}
+        />
+      )}
     </>
   )
 }
@@ -253,6 +253,7 @@ const EntryOverview = () => {
     locationId,
     location: locationData,
     reviews,
+    lastUpdatedDate,
   } = useSelector((state) => state.location)
   const isEmbed = useIsEmbed()
   const { locationsWithoutPanorama } = useSelector((state) => state.misc)
@@ -327,7 +328,10 @@ const EntryOverview = () => {
           locationData.user_id) && (
           <AuthorInfo locationData={locationData} user={user} />
         )}
-        <LastEditedInfo locationData={locationData} />
+        <LastEditedInfo
+          locationData={locationData}
+          lastUpdatedDate={lastUpdatedDate}
+        />
         <ReviewSummary reviews={reviews} />
         <ButtonRow>
           <ButtonGroupStart>

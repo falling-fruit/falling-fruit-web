@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { INITIAL_REVIEW_VALUES } from '../../constants/form'
@@ -22,6 +23,7 @@ import {
 } from './FormikWrappers'
 import { StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
+import SetInitialValue from './SetInitialValue'
 
 const validateReviewForm = ({ review, ...rest }, isLoggedIn) => {
   const errors = {}
@@ -151,6 +153,8 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
   const { locationId } = useSelector((state) => state.location)
   const reduxFormValues = useSelector((state) => state.review.form)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const routeLocation = useLocation()
+  const defaultComment = routeLocation.state?.defaultComment ?? null
 
   const mergedInitialValues = {
     ...INITIAL_REVIEW_VALUES,
@@ -213,6 +217,9 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
 
           return (
             <Form>
+              {defaultComment != null && (
+                <SetInitialValue name="review.comment" value={defaultComment} />
+              )}
               <ReviewStep standalone />
               {!isLoggedIn && (
                 <Recaptcha centered name="g-recaptcha-response" />

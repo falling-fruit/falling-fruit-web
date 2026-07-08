@@ -182,12 +182,13 @@
     },
     "hints": {
       "add_description": "Beschrijving toevoegen",
+      "add_season_end": "Seizoenseinde toevoegen",
       "add_season_start": "Seizoensstart toevoegen",
-      "add_season_stop": "Seizoenseinde toevoegen",
-      "edit_description_eg_still_there": "Beschrijving bewerken: 'nog steeds aanwezig'",
+      "confirm_still_exists": "Bevestig dat het nog bestaat",
       "over_x_years_ago": "Meer dan {{yearsAgo}} jaar geleden",
       "report_comment_placeholder_no_longer_exists": "Bestaat niet meer",
-      "report_no_longer_exists": "Melden: bestaat niet meer"
+      "report_no_longer_exists": "Meld dat het niet meer bestaat",
+      "review_comment_placeholder_still_exists": "Nog steeds daar!"
     },
     "index": {
       "editmarker_html": "<b>Verplaats naar de bronlocatie.</b><br><br>Gebruik de satellietweergave - er bestaat een kans dat de bron zichtbaar is vanuit de ruimte!"
@@ -220,7 +221,7 @@
       "added_by": "Toegevoegd door {{name}}",
       "added_by_you": "Door jou toegevoegd",
       "date_added": "Toegevoegd op {{date}}",
-      "date_last_edited": "Laatst bewerkt {{date}}",
+      "date_last_updated": "Laatst bijgewerkt {{date}}",
       "imported_from": "Geïmporteerd van {{name}}",
       "season": {
         "in_season": "In seizoen van {{start_month}} tot {{stop_month}}",

@@ -182,12 +182,13 @@
     },
     "hints": {
       "add_description": "Aggiungi descrizione",
+      "add_season_end": "Aggiungi fine stagione",
       "add_season_start": "Aggiungi inizio stagione",
-      "add_season_stop": "Aggiungi fine stagione",
-      "edit_description_eg_still_there": "Modifica descrizione: 'ancora presente'",
+      "confirm_still_exists": "Conferma che esiste ancora",
       "over_x_years_ago": "Oltre {{yearsAgo}} anni fa",
       "report_comment_placeholder_no_longer_exists": "Non esiste più",
-      "report_no_longer_exists": "Segnala: non esiste più"
+      "report_no_longer_exists": "Segnala che non esiste più",
+      "review_comment_placeholder_still_exists": "Ancora presente!"
     },
     "index": {
       "editmarker_html": "<b>Sposta la posizione della sorgente.</b> <br><br> Controlla l'immagine satellitare - la fonte può essere visibile dallo spazio!"
@@ -220,7 +221,7 @@
       "added_by": "Aggiunto da {{name}}",
       "added_by_you": "Aggiunto da te",
       "date_added": "Aggiunto il {{date}}",
-      "date_last_edited": "Ultima modifica {{date}}",
+      "date_last_updated": "Ultimo aggiornamento {{date}}",
       "imported_from": "Importato da {{name}}",
       "season": {
         "in_season": "In stagione da {{start_month}} a {{stop_month}}",

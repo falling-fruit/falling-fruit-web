@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro'
 
-export default styled.div`
+const IconBesideText = styled.div`
   display: flex;
+  flex-wrap: wrap;
   font-style: normal;
   font-weight: ${($props) => ($props.bold ? 'bold' : 'normal')};
   align-items: center;
 
-  ${'' /* TODO: Add another wrapper */}
   & + & {
     margin-block-start: 4px !important;
   }
@@ -18,7 +18,8 @@ export default styled.div`
 
   svg {
     flex-shrink: 0;
-    align-self: center;
+    align-self: flex-start;
+    margin-block-start: 2px;
   }
 
   ${($props) =>
@@ -27,3 +28,5 @@ export default styled.div`
   cursor: pointer;
   `};
 `
+
+export default IconBesideText

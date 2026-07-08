@@ -182,12 +182,13 @@
     },
     "hints": {
       "add_description": "Açıklama ekle",
+      "add_season_end": "Sezon sonu ekle",
       "add_season_start": "Sezon başlangıcını ekle",
-      "add_season_stop": "Sezon bitişini ekle",
-      "edit_description_eg_still_there": "Açıklamayı düzenle: 'hala orada'",
+      "confirm_still_exists": "Hala var olduğunu onayla",
       "over_x_years_ago": "{{yearsAgo}} yıldan fazla önce",
-      "report_comment_placeholder_no_longer_exists": "Artık mevcut değil",
-      "report_no_longer_exists": "Bildir: artık mevcut değil"
+      "report_comment_placeholder_no_longer_exists": "Artık var olmadığını bildir",
+      "report_no_longer_exists": "Artık var olmadığını bildir",
+      "review_comment_placeholder_still_exists": "Hâlâ orada!"
     },
     "index": {
       "editmarker_html": "<b>Kaynağın konumuna taşıyın.</b><br><br>Uydu görünümünü kontrol edin - kaynak uzaydan görünür olabilir!"
@@ -220,7 +221,7 @@
       "added_by": "{{name}} tarafından eklendi",
       "added_by_you": "Sizin tarafınızdan eklendi",
       "date_added": "{{date}} tarihinde eklendi",
-      "date_last_edited": "Son düzenleme {{date}}",
+      "date_last_updated": "Son güncelleme {{date}}",
       "imported_from": "{{name}} kaynağından içe aktarıldı",
       "season": {
         "in_season": "{{start_month}} ile {{stop_month}} arasında mevsiminde",
