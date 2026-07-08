@@ -26,6 +26,7 @@ const initialState = {
   tooltipOpen: false,
   streetViewOpen: false,
   inList: false,
+  lastUpdatedDate: null,
   lightbox: {
     isOpen: false,
     reviewIndex: null,
@@ -33,6 +34,14 @@ const initialState = {
   },
   isBeingInitializedMobile: false,
 }
+
+const computeLastUpdatedDate = (locationData, reviews) =>
+  reviews
+    .map((r) => r.created_at)
+    .reduce(
+      (latest, date) => (date > latest ? date : latest),
+      locationData.updated_at,
+    )
 
 export const fetchLocationData = createAsyncThunk(
   'location/fetchLocationData',
@@ -155,6 +164,7 @@ const locationSlice = createSlice({
       state.tooltipOpen = action.meta.arg.isBeingEdited
       state.streetViewOpen = action.meta.arg.isStreetView
       state.inList = false
+      state.lastUpdatedDate = null
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -165,6 +175,7 @@ const locationSlice = createSlice({
         state.inList = lists.length > 0
         state.reviews = reviews
         state.position = { lat: action.payload.lat, lng: action.payload.lng }
+        state.lastUpdatedDate = computeLastUpdatedDate(locationData, reviews)
       }
     },
     [fetchLocationData.rejected]: (state) => {
@@ -175,6 +186,7 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
       state.tooltipOpen = false
       state.inList = false
+      state.lastUpdatedDate = null
     },
     [fetchReviewData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -183,10 +195,12 @@ const locationSlice = createSlice({
       state.locationId = parseInt(action.payload.location_id)
       state.position = null
       state.isBeingEdited = false
+      state.lastUpdatedDate = null
     },
     [addNewLocation.fulfilled]: (state, action) => {
+      const reviews = action.payload.reviews || []
       state.location = action.payload
-      state.reviews = action.payload.reviews || []
+      state.reviews = reviews
       state.locationId = parseInt(action.payload.id)
       state.isLoading = false
       state.isBeingEdited = false
@@ -195,6 +209,7 @@ const locationSlice = createSlice({
       state.inList = Array.isArray(action.payload.lists)
         ? action.payload.lists.length > 0
         : false
+      state.lastUpdatedDate = computeLastUpdatedDate(action.payload, reviews)
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false
@@ -211,6 +226,10 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
+      state.lastUpdatedDate = computeLastUpdatedDate(
+        action.payload,
+        state.reviews,
+      )
       toast.success(i18next.t('success_message.location_edited'))
     },
     [editExistingLocation.rejected]: (state, action) => {
@@ -224,6 +243,10 @@ const locationSlice = createSlice({
     },
     [addNewReview.fulfilled]: (state, action) => {
       state.reviews.push(action.payload)
+      state.lastUpdatedDate = computeLastUpdatedDate(
+        state.location,
+        state.reviews,
+      )
       toast.success(i18next.t('success_message.review_submitted'))
     },
     [addNewReview.rejected]: (_, action) => {
@@ -241,6 +264,10 @@ const locationSlice = createSlice({
       if (reviewIndex !== -1) {
         state.reviews[reviewIndex] = action.payload
       }
+      state.lastUpdatedDate = computeLastUpdatedDate(
+        state.location,
+        state.reviews,
+      )
       toast.success(i18next.t('success_message.review_edited'))
     },
     [editExistingReview.rejected]: (_, action) => {
@@ -254,6 +281,10 @@ const locationSlice = createSlice({
     [deleteLocationReview.fulfilled]: (state, action) => {
       state.reviews = state.reviews.filter(
         (review) => review.id !== action.payload,
+      )
+      state.lastUpdatedDate = computeLastUpdatedDate(
+        state.location,
+        state.reviews,
       )
       toast.success(i18next.t('success_message.review_deleted'))
     },

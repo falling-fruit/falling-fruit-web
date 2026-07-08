@@ -1,5 +1,3 @@
-import { useFormikContext } from 'formik'
-import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -8,18 +6,7 @@ import * as Yup from 'yup'
 import { addReport } from '../../utils/api'
 import Modal from '../ui/Modal'
 import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
-
-const SetInitialValue = ({ name, value }) => {
-  //Set the value programmatically to the form submittable afterwards
-  const { setFieldValue } = useFormikContext()
-  useEffect(() => {
-    if (value != null) {
-      setFieldValue(name, value, true)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  return null
-}
+import SetInitialValue from './SetInitialValue'
 
 const ReportModal = ({
   locationId,
