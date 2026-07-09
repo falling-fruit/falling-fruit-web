@@ -2,7 +2,6 @@ import styled from 'styled-components/macro'
 
 const IconBesideText = styled.div`
   display: flex;
-  flex-wrap: wrap;
   font-style: normal;
   font-weight: ${($props) => ($props.bold ? 'bold' : 'normal')};
   align-items: center;
@@ -16,11 +15,20 @@ const IconBesideText = styled.div`
     margin-inline: 4px 0;
   }
 
+  ${($props) =>
+    $props.wrap
+      ? `
+  flex-wrap: wrap;
+  svg {
+    align-self: flex-start;
+  }
+  `
+      : `
   svg {
     flex-shrink: 0;
-    align-self: flex-start;
-    margin-block-start: 2px;
+    align-self: center;
   }
+  `};
 
   ${($props) =>
     $props.onClick &&
