@@ -126,7 +126,7 @@ const StreetViewInfo = ({ streetViewOpen, isDisabled, onOpen, onClose }) =>
 const SeasonalityInfo = ({ locationData }) => {
   const { t, i18n } = useTranslation()
   return (
-    <IconBesideText>
+    <IconBesideText wrap>
       <Calendar color={theme.secondaryText} size={20} />
       <p>
         {locationData.no_season ||
@@ -213,7 +213,7 @@ const LastEditedInfo = ({ locationData, lastUpdatedDate }) => {
 
   return (
     <>
-      <IconBesideText>
+      <IconBesideText wrap>
         {hadNoUpdates ? <Created size={20} /> : <EditAlt size={20} />}
         <p>
           <time
