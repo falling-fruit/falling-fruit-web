@@ -34,21 +34,8 @@ import ReviewSummary from './ReviewSummary'
 import { formatISOString, formatMonth } from './textFormatters'
 import useLocationPane from './useLocationPane'
 
-const hasSeasonality = (locationData) =>
-  !!(
-    locationData.no_season != null ||
-    locationData.season_start != null ||
-    locationData.season_stop != null
-  )
+const TEN_YEARS_MS = 10 * 365.25 * 24 * 60 * 60 * 1000
 
-const isSameDay = (dateStringA, dateStringB) => {
-  if (!dateStringA || !dateStringB) {
-    return false
-  }
-  return dateStringA.slice(0, 10) === dateStringB.slice(0, 10)
-}
-
-// Wraps description, last updated text, and review and report buttons
 const Description = styled.section`
   word-break: normal;
   overflow-wrap: anywhere;
@@ -106,8 +93,28 @@ const AddressInfo = ({ locationData, onClick }) => (
   </IconBesideText>
 )
 
-const StreetViewInfo = ({ streetViewOpen, isDisabled, onOpen, onClose }) =>
-  streetViewOpen ? (
+const StreetViewInfo = () => {
+  const history = useAppHistory()
+  const {
+    streetViewOpen,
+    locationId,
+    location: locationData,
+  } = useSelector((state) => state.location)
+  const { locationsWithoutPanorama } = useSelector((state) => state.misc)
+
+  const isDisabled = !!locationsWithoutPanorama[locationData.id]
+
+  const onOpen = (event) => {
+    event.stopPropagation()
+    history.push(`/locations/${locationId}/panorama`)
+  }
+
+  const onClose = (event) => {
+    event.stopPropagation()
+    history.push(`/locations/${locationId}`)
+  }
+
+  return streetViewOpen ? (
     <IconBesideText bold onClick={onClose}>
       <Map size={20} />
       <p>Google Maps</p>
@@ -122,6 +129,7 @@ const StreetViewInfo = ({ streetViewOpen, isDisabled, onOpen, onClose }) =>
       <p>Google Street View</p>
     </DisabledIconBesideText>
   )
+}
 
 const SeasonalityInfo = ({ locationData }) => {
   const { t, i18n } = useTranslation()
@@ -129,8 +137,7 @@ const SeasonalityInfo = ({ locationData }) => {
     <IconBesideText wrap>
       <Calendar color={theme.secondaryText} size={20} />
       <p>
-        {locationData.no_season ||
-        (locationData.season_start === 0 && locationData.season_stop === 11)
+        {locationData.season_start === 0 && locationData.season_stop === 11
           ? t('locations.overview.season.year_round')
           : t('locations.overview.season.in_season', {
               start_month:
@@ -142,9 +149,15 @@ const SeasonalityInfo = ({ locationData }) => {
                   ? formatMonth(locationData.season_stop, i18n.language)
                   : '?',
             })}
+        {locationData.season_stop != null &&
+          locationData.season_start == null && (
+            <AddSeasonStartHint locationData={locationData} />
+          )}
+        {locationData.season_start != null &&
+          locationData.season_stop == null && (
+            <AddSeasonStopHint locationData={locationData} />
+          )}
       </p>
-      <AddSeasonStartHint locationData={locationData} />
-      <AddSeasonStopHint locationData={locationData} />
     </IconBesideText>
   )
 }
@@ -204,41 +217,47 @@ const AuthorInfo = ({ locationData, user }) =>
     <AddedByInfo locationData={locationData} user={user} />
   )
 
-const LastEditedInfo = ({ locationData, lastUpdatedDate }) => {
+const LastEditedInfo = ({ locationData }) => {
   const { t, i18n } = useTranslation()
   const [expanded, setExpanded] = useState(false)
-  const onToggle = () => setExpanded((prev) => !prev)
+  const wasCreatedSameDay =
+    locationData.created_at.slice(0, 10) ===
+    locationData.updated_at.slice(0, 10)
 
-  const hadNoUpdates = isSameDay(locationData.created_at, lastUpdatedDate)
+  const icon = wasCreatedSameDay ? <Created size={20} /> : <EditAlt size={20} />
+
+  const dateTime = wasCreatedSameDay
+    ? locationData.created_at
+    : locationData.updated_at
+
+  const label = wasCreatedSameDay
+    ? t('locations.overview.date_added', {
+        date: formatISOString(locationData.created_at, i18n.language),
+      })
+    : t('locations.overview.date_last_updated', {
+        date: formatISOString(locationData.updated_at, i18n.language),
+      })
+
+  const isStale =
+    Date.now() - new Date(locationData.updated_at).getTime() > TEN_YEARS_MS
 
   return (
     <>
-      <IconBesideText wrap>
-        {hadNoUpdates ? <Created size={20} /> : <EditAlt size={20} />}
+      <IconBesideText>
+        {icon}
         <p>
-          <time
-            dateTime={hadNoUpdates ? locationData.created_at : lastUpdatedDate}
-          >
-            {hadNoUpdates
-              ? t('locations.overview.date_added', {
-                  date: formatISOString(locationData.created_at, i18n.language),
-                })
-              : t('locations.overview.date_last_updated', {
-                  date: formatISOString(lastUpdatedDate, i18n.language),
-                })}
-          </time>
+          <time dateTime={dateTime}>{label}</time>
         </p>
-        <StaleLocationHintToggle
-          lastUpdatedDate={lastUpdatedDate}
-          expanded={expanded}
-          onToggle={onToggle}
-        />
+        {isStale && (
+          <StaleLocationHintToggle
+            locationData={locationData}
+            expanded={expanded}
+            onToggle={() => setExpanded((prev) => !prev)}
+          />
+        )}
       </IconBesideText>
-      {expanded && (
-        <StaleLocationHintActions
-          locationData={locationData}
-          lastUpdatedDate={lastUpdatedDate}
-        />
+      {isStale && expanded && (
+        <StaleLocationHintActions locationData={locationData} />
       )}
     </>
   )
@@ -248,15 +267,10 @@ const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
   const { googleMap } = useSelector((state) => state.map)
-  const {
-    streetViewOpen,
-    locationId,
-    location: locationData,
-    reviews,
-    lastUpdatedDate,
-  } = useSelector((state) => state.location)
+  const { location: locationData, reviews } = useSelector(
+    (state) => state.location,
+  )
   const isEmbed = useIsEmbed()
-  const { locationsWithoutPanorama } = useSelector((state) => state.misc)
   const user = useSelector((state) => state.auth.user)
   const isDesktop = useIsDesktop()
 
@@ -294,44 +308,27 @@ const EntryOverview = () => {
     }
   }
 
-  const openStreetView = (event) => {
-    event.stopPropagation()
-    history.push(`/locations/${locationId}/panorama`)
-  }
-  const closeStreetView = (event) => {
-    event.stopPropagation()
-    history.push(`/locations/${locationId}`)
-  }
-
   return (
     <OverviewContainer ref={containerRef}>
       <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
       <Tags locationData={locationData} />
       <Description>
-        <AddDescriptionHint locationData={locationData} />
-        {locationData.description && (
-          <p dir="auto">{locationData.description}</p>
-        )}
-
+        <p dir="auto">
+          {locationData.description || (
+            <AddDescriptionHint locationData={locationData} />
+          )}
+        </p>
         <AddressInfo locationData={locationData} onClick={handleAddressClick} />
-        <StreetViewInfo
-          streetViewOpen={streetViewOpen}
-          isDisabled={!!locationsWithoutPanorama[locationData.id]}
-          onOpen={openStreetView}
-          onClose={closeStreetView}
-        />
-        {hasSeasonality(locationData) && (
-          <SeasonalityInfo locationData={locationData} />
-        )}
+        <StreetViewInfo />
+        {!!(
+          locationData.season_start != null || locationData.season_stop != null
+        ) && <SeasonalityInfo locationData={locationData} />}
         {(locationData.import_id ||
           locationData.author ||
           locationData.user_id) && (
           <AuthorInfo locationData={locationData} user={user} />
         )}
-        <LastEditedInfo
-          locationData={locationData}
-          lastUpdatedDate={lastUpdatedDate}
-        />
+        <LastEditedInfo locationData={locationData} />
         <ReviewSummary reviews={reviews} />
         <ButtonRow>
           <ButtonGroupStart>

@@ -28,6 +28,12 @@ const ReportModal = ({
     { label: t('problems.problem_types.5'), value: 5 },
   ]
 
+  const defaultProblemCodeOption =
+    defaultProblemCode != null
+      ? (PROBLEM_TYPE_OPTIONS.find((o) => o.value === defaultProblemCode) ??
+        null)
+      : null
+
   const handleSubmit = async (values) => {
     const reportValues = {
       ...values,
@@ -76,8 +82,8 @@ const ReportModal = ({
       onSubmit={handleSubmit}
       {...props}
     >
-      {defaultProblemCode != null && (
-        <SetInitialValue name="problem_code" value={defaultProblemCode} />
+      {defaultProblemCodeOption != null && (
+        <SetInitialValue name="problem_code" value={defaultProblemCodeOption} />
       )}
       {defaultComment != null && (
         <SetInitialValue name="comment" value={defaultComment} />

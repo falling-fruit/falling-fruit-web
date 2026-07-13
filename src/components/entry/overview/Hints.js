@@ -6,8 +6,6 @@ import { useAppHistory } from '../../../utils/useAppHistory'
 import ResetButton from '../../ui/ResetButton'
 import useLocationPane from '../useLocationPane'
 
-const TEN_YEARS_MS = 10 * 365.25 * 24 * 60 * 60 * 1000
-
 const HintAction = styled(ResetButton)`
   font-style: italic;
   text-decoration: underline;
@@ -19,14 +17,6 @@ const HintAction = styled(ResetButton)`
 `
 const HintsContainerInline = styled.span`
   margin-inline: 0.5em;
-`
-
-const HintsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1em;
-  margin-block: 1em;
 `
 
 const OldLabelInline = styled(ResetButton)`
@@ -55,23 +45,17 @@ export const AddDescriptionHint = ({ locationData }) => {
   const history = useAppHistory()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
-  if (locationData.description && locationData.description.trim() !== '') {
-    return null
-  }
-
   return (
-    <HintsContainer>
-      <HintAction
-        onClick={() => {
-          fullyOpenPaneDrawerIfMobile()
-          history.push(`/locations/${locationData.id}/edit`, {
-            focus: 'description',
-          })
-        }}
-      >
-        {t('locations.hints.add_description')}
-      </HintAction>
-    </HintsContainer>
+    <HintAction
+      onClick={() => {
+        fullyOpenPaneDrawerIfMobile()
+        history.push(`/locations/${locationData.id}/edit`, {
+          focus: 'description',
+        })
+      }}
+    >
+      {t('locations.hints.add_description')}
+    </HintAction>
   )
 }
 
@@ -79,10 +63,6 @@ export const AddSeasonStartHint = ({ locationData }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
-
-  if (locationData.season_stop == null || locationData.season_start != null) {
-    return null
-  }
 
   return (
     <HintsContainerInline>
@@ -105,10 +85,6 @@ export const AddSeasonStopHint = ({ locationData }) => {
   const history = useAppHistory()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
-  if (locationData.season_start == null || locationData.season_stop != null) {
-    return null
-  }
-
   return (
     <HintsContainerInline>
       <HintAction
@@ -126,19 +102,14 @@ export const AddSeasonStopHint = ({ locationData }) => {
 }
 
 export const StaleLocationHintToggle = ({
-  lastUpdatedDate,
+  locationData,
   expanded,
   onToggle,
 }) => {
   const { t } = useTranslation()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
-  const updatedAt = lastUpdatedDate ? new Date(lastUpdatedDate) : null
-
-  if (!updatedAt || Date.now() - updatedAt.getTime() <= TEN_YEARS_MS) {
-    return null
-  }
-
+  const updatedAt = new Date(locationData.updated_at)
   const yearsAgo = Math.floor(
     (Date.now() - updatedAt.getTime()) / (365.25 * 24 * 60 * 60 * 1000),
   )
@@ -159,18 +130,12 @@ export const StaleLocationHintToggle = ({
   )
 }
 
-export const StaleLocationHintActions = ({ locationData, lastUpdatedDate }) => {
+export const StaleLocationHintActions = ({ locationData }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
-  const updatedAt = lastUpdatedDate ? new Date(lastUpdatedDate) : null
-
-  if (!updatedAt || Date.now() - updatedAt.getTime() <= TEN_YEARS_MS) {
-    return null
-  }
-
-  const reportComment = t(
+  const comment = t(
     'locations.hints.report_comment_placeholder_no_longer_exists',
   )
 
@@ -196,7 +161,7 @@ export const StaleLocationHintActions = ({ locationData, lastUpdatedDate }) => {
           fullyOpenPaneDrawerIfMobile()
           history.addParam('report', 'true', {
             problem_code: 1,
-            comment: reportComment,
+            comment: comment,
             focus: 'comment',
           })
         }}
