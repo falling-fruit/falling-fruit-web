@@ -7,15 +7,6 @@ import { useAppHistory } from '../../../utils/useAppHistory'
 import { ReportModal } from '../../form/ReportModal'
 import Button from '../../ui/Button'
 
-const PROBLEM_TYPE_OPTIONS = [
-  { value: 0 },
-  { value: 1 },
-  { value: 2 },
-  { value: 3 },
-  { value: 4 },
-  { value: 5 },
-]
-
 export const ReportButton = () => {
   const { location: locationData } = useSelector((state) => state.location)
   const { t } = useTranslation()
@@ -26,11 +17,7 @@ export const ReportButton = () => {
   const isReportModalOpen =
     new URLSearchParams(location.search).get('report') === 'true'
 
-  const problemCode = location.state?.problem_code ?? null
-  const defaultProblemCode =
-    problemCode != null
-      ? (PROBLEM_TYPE_OPTIONS.find((o) => o.value === problemCode) ?? null)
-      : null
+  const defaultProblemCode = location.state?.problem_code ?? null
   const defaultComment = location.state?.comment ?? null
 
   const locationName = locationData?.type_ids
