@@ -39,7 +39,13 @@ const ConnectNewLocation = () => {
       // Should only happen for an artificially constructed URL
       history.push('/map')
     }
-  }, [dispatch, locationId, hasInitialView, isDesktop]) //eslint-disable-line
+    /*
+     * Mount-only: after a successful submit, locationId changes from 'new' to
+     * the new location's id while this component is still mounted. Re-running
+     * would call initNewLocation and wipe the just-added location from Redux,
+     * which the success page and 'Add similar' still need.
+     */
+  }, []) //eslint-disable-line
   return null
 }
 
