@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Redirect, Route } from 'react-router-dom'
+import { Redirect, Route, useParams } from 'react-router-dom'
 
 import { addParam, pathWithCurrentView, pathWithView } from '../../utils/appUrl'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -30,6 +30,11 @@ const CommunityFruitTreesRedirect = () => {
   let mapPath = pathWithView('/map', view)
   mapPath = addParam(mapPath, 'f', '4628')
   return <Redirect to={mapPath} />
+}
+
+const ProfileRedirect = () => {
+  const { userId } = useParams()
+  return <Redirect to={pathWithCurrentView(`/users/${userId}`)} />
 }
 
 const SeedLibraryRedirect = () => {
@@ -82,6 +87,10 @@ const redirects = [
   {
     path: ['/seedlibrary', '/seedlibraries'],
     component: SeedLibraryRedirect,
+  },
+  {
+    path: '/profiles/:userId',
+    component: ProfileRedirect,
   },
   {
     path: '/users/sign_in',
