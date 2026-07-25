@@ -89,7 +89,7 @@ const redirects = [
     component: SeedLibraryRedirect,
   },
   {
-    path: '/profiles/:userId',
+    path: '/profiles/:userId([0-9]+)',
     component: ProfileRedirect,
   },
   {
