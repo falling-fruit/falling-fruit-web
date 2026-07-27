@@ -20,8 +20,9 @@ export const fetchMapLocations = createAsyncThunk(
     const state = getState()
     const { types, muni } = state.filter
     const { lastMapView } = state.viewport
+
     if (lastMapView) {
-      const { bounds, zoom, center: _ } = lastMapView
+      const { bounds, zoom } = lastMapView
       return await getLocations(
         selectParams(
           { types, muni, bounds, zoom, center: undefined },
@@ -40,8 +41,9 @@ export const fetchMapClusters = createAsyncThunk(
     const state = getState()
     const { types, muni } = state.filter
     const { lastMapView } = state.viewport
+
     if (lastMapView) {
-      const { bounds, zoom, center: _ } = lastMapView
+      const { bounds, zoom } = lastMapView
       return await getClusters(
         selectParams({
           types,

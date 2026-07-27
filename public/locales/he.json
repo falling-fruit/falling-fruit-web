@@ -46,7 +46,6 @@
       "review_deletion_failed": "מחיקת ביקורת נכשלה: {{message}}",
       "review_edit_failed": "עריכת ביקורת נכשלה: {{message}}",
       "review_submission_failed": "שליחת ביקורת נכשלה: {{message}}",
-      "street_view_unavailable": "תצוגת רחוב אינה זמינה למיקום {{id}}",
       "type_add_failed": "הוספת סוג חדש נכשלה: {{message}}"
     },
     "auth": {
@@ -178,7 +177,8 @@
       "fruiting_status": "מצב הפרי",
       "position": "מיקום",
       "season": "עונה",
-      "season_start_to_stop_short": "עד"
+      "season_start_to_stop_short": "עד",
+      "street_view_position_warning": "מיקומי Street View עלולים להיות לא מדויקים. צא מ-Street View ובדוק את המיקום על המפה לפני השליחה."
     },
     "hints": {
       "add_description": "הוסף תיאור",

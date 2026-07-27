@@ -102,12 +102,10 @@ const useTabs = () => {
   const { t } = useTranslation()
   const { pathname } = useLocation()
   const history = useAppHistory()
-  const {
-    isBeingInitializedMobile,
-    locationId,
-    isBeingEdited,
-    streetViewOpen,
-  } = useSelector((state) => state.location)
+  const { isBeingInitializedMobile, locationId, isBeingEdited } = useSelector(
+    (state) => state.location,
+  )
+  const streetViewOpen = useSelector((state) => state.panorama.streetViewOpen)
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   const tabs = [
@@ -169,8 +167,7 @@ const useTabs = () => {
       // We could also be editing position of the location
       history.push(`/locations/${locationId}/edit/position`)
     } else if (newTabIndex === 1 && locationId && streetViewOpen) {
-      // We could also be viewing the panorama
-      history.push(`/locations/${locationId}/panorama`)
+      history.push(`/locations/${locationId}`)
     } else if (newTabIndex === 3) {
       // Logged in users go to account page
       if (isLoggedIn) {

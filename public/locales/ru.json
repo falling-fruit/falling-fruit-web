@@ -46,7 +46,6 @@
       "review_deletion_failed": "Не удалось удалить отзыв: {{message}}",
       "review_edit_failed": "Не удалось отредактировать отзыв: {{message}}",
       "review_submission_failed": "Не удалось отправить отзыв: {{message}}",
-      "street_view_unavailable": "Street View недоступен для местоположения {{id}}",
       "type_add_failed": "Не удалось добавить новый тип: {{message}}"
     },
     "auth": {
@@ -178,7 +177,8 @@
       "fruiting_status": "Статус плодоношения",
       "position": "Позиция",
       "season": "Сезон",
-      "season_start_to_stop_short": "до"
+      "season_start_to_stop_short": "до",
+      "street_view_position_warning": "Позиции Street View могут быть неточными. Выйдите из Street View и проверьте позицию на карте перед отправкой."
     },
     "hints": {
       "add_description": "Добавить описание",

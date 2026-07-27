@@ -2,7 +2,6 @@ import {
   Calendar,
   Data,
   EditAlt as Created,
-  StreetView,
   User,
 } from '@styled-icons/boxicons-regular'
 import { EditAlt, Map, User as UserYou } from '@styled-icons/boxicons-solid'
@@ -10,7 +9,6 @@ import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import { MIN_LOCATION_ZOOM } from '../../constants/map'
@@ -56,15 +54,6 @@ const Description = styled.section`
   }
 `
 
-const DisabledIconBesideText = styled(IconBesideText)`
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
-`
-
 const ButtonRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -92,44 +81,6 @@ const AddressInfo = ({ locationData, onClick }) => (
     </p>
   </IconBesideText>
 )
-
-const StreetViewInfo = () => {
-  const history = useAppHistory()
-  const {
-    streetViewOpen,
-    locationId,
-    location: locationData,
-  } = useSelector((state) => state.location)
-  const { locationsWithoutPanorama } = useSelector((state) => state.misc)
-
-  const isDisabled = !!locationsWithoutPanorama[locationData.id]
-
-  const onOpen = (event) => {
-    event.stopPropagation()
-    history.push(`/locations/${locationId}/panorama`)
-  }
-
-  const onClose = (event) => {
-    event.stopPropagation()
-    history.push(`/locations/${locationId}`)
-  }
-
-  return streetViewOpen ? (
-    <IconBesideText bold onClick={onClose}>
-      <Map size={20} />
-      <p>Google Maps</p>
-    </IconBesideText>
-  ) : (
-    <DisabledIconBesideText
-      bold
-      onClick={isDisabled ? undefined : onOpen}
-      disabled={isDisabled}
-    >
-      <StreetView size={20} />
-      <p>Google Street View</p>
-    </DisabledIconBesideText>
-  )
-}
 
 const SeasonalityInfo = ({ locationData }) => {
   const { t, i18n } = useTranslation()
@@ -263,14 +214,45 @@ const LastEditedInfo = ({ locationData }) => {
   )
 }
 
+const movePanoramaToFaceLocation = async (
+  googleMap,
+  getGoogleMaps,
+  locationData,
+) => {
+  const googleMaps = getGoogleMaps()
+  const panorama = googleMap.getStreetView()
+  const panoClient = new googleMaps.StreetViewService()
+
+  try {
+    const panoData = await panoClient.getPanorama({
+      location: { lat: locationData.lat, lng: locationData.lng },
+      radius: 50,
+    })
+    const centerLatLng = new googleMaps.LatLng(
+      locationData.lat,
+      locationData.lng,
+    )
+    const panoLatLng = panoData.data.location.latLng
+    const heading = googleMaps.geometry.spherical.computeHeading(
+      panoLatLng,
+      centerLatLng,
+    )
+    panorama.setPosition(panoLatLng)
+    panorama.setPov({ heading, pitch: 0 })
+  } catch {
+    // ignored — no nearby panorama available
+  }
+}
+
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
-  const { googleMap } = useSelector((state) => state.map)
+  const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
   const { location: locationData, reviews } = useSelector(
     (state) => state.location,
   )
   const isEmbed = useIsEmbed()
+  const streetViewOpen = useSelector((state) => state.panorama.streetViewOpen)
   const user = useSelector((state) => state.auth.user)
   const isDesktop = useIsDesktop()
 
@@ -286,7 +268,7 @@ const EntryOverview = () => {
     .map((id) => typesAccess.getType(id))
     .filter(Boolean)
 
-  const handleAddressClick = () => {
+  const handleAddressClick = async () => {
     if (isEmbed) {
       history.pushAndChangeView('/map', {
         center: {
@@ -295,16 +277,23 @@ const EntryOverview = () => {
         },
         zoom: Math.max(googleMap?.getZoom(), MIN_LOCATION_ZOOM),
       })
-    } else {
-      googleMap?.panTo({
-        lat: locationData.lat,
-        lng: locationData.lng,
-      })
-      if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
-        googleMap?.setZoom(MIN_LOCATION_ZOOM)
-      } else if (drawerFullyOpen) {
-        setPaneDrawerToLowPosition()
-      }
+      return
+    }
+
+    googleMap?.panTo({
+      lat: locationData.lat,
+      lng: locationData.lng,
+    })
+    if (googleMap?.getZoom() < MIN_LOCATION_ZOOM) {
+      googleMap?.setZoom(MIN_LOCATION_ZOOM)
+    }
+
+    if (streetViewOpen && googleMap && getGoogleMaps) {
+      await movePanoramaToFaceLocation(googleMap, getGoogleMaps, locationData)
+    }
+
+    if (drawerFullyOpen) {
+      setPaneDrawerToLowPosition()
     }
   }
 
@@ -319,9 +308,9 @@ const EntryOverview = () => {
           )}
         </p>
         <AddressInfo locationData={locationData} onClick={handleAddressClick} />
-        <StreetViewInfo />
-        {!!(
-          locationData.season_start != null || locationData.season_stop != null
+        {!(
+          locationData.season_start === null &&
+          locationData.season_stop === null
         ) && <SeasonalityInfo locationData={locationData} />}
         {(locationData.import_id ||
           locationData.author ||
@@ -341,4 +330,5 @@ const EntryOverview = () => {
     </OverviewContainer>
   )
 }
+
 export default EntryOverview

@@ -24,7 +24,6 @@ const initialState = {
   fromSettings: false,
   form: null,
   tooltipOpen: false,
-  streetViewOpen: false,
   inList: false,
   lastUpdatedDate: null,
   lightbox: {
@@ -45,12 +44,7 @@ const computeLastUpdatedDate = (locationData, reviews) =>
 
 export const fetchLocationData = createAsyncThunk(
   'location/fetchLocationData',
-  async ({
-    locationId,
-    isBeingEdited: _,
-    isStreetView: __,
-    paneDrawerDisabled: ___,
-  }) => {
+  async ({ locationId, isBeingEdited: _, paneDrawerDisabled: __ }) => {
     const locationData = await getLocationById(locationId, 'reviews')
     return locationData
   },
@@ -98,7 +92,6 @@ const locationSlice = createSlice({
       state.locationId = 'new'
       state.tooltipOpen = true
       state.form = null
-      state.streetViewOpen = false
     },
     initNewLocation: (state, action) => {
       state.isLoading = false
@@ -108,7 +101,6 @@ const locationSlice = createSlice({
       state.tooltipOpen = true
       state.form = null
       state.position = action.payload
-      state.streetViewOpen = false
     },
     updatePosition: (state, action) => {
       state.position = action.payload
@@ -128,9 +120,6 @@ const locationSlice = createSlice({
     },
     reopenLocationTooltip: (state) => {
       state.tooltipOpen = true
-    },
-    setStreetView: (state, action) => {
-      state.streetViewOpen = action.payload
     },
     openLightbox: (state, action) => {
       state.lightbox.isOpen = true
@@ -162,7 +151,6 @@ const locationSlice = createSlice({
       state.isBeingEdited = action.meta.arg.isBeingEdited
       state.form = null
       state.tooltipOpen = action.meta.arg.isBeingEdited
-      state.streetViewOpen = action.meta.arg.isStreetView
       state.inList = false
       state.lastUpdatedDate = null
     },
@@ -320,7 +308,6 @@ export const {
   setIsBeingEditedAndResetPosition,
   dismissLocationTooltip,
   reopenLocationTooltip,
-  setStreetView,
   openLightbox,
   closeLightbox,
   setLightboxIndices,

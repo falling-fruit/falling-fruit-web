@@ -46,7 +46,6 @@
       "review_deletion_failed": "Falha na exclusão da avaliação: {{message}}",
       "review_edit_failed": "Falha na edição da avaliação: {{message}}",
       "review_submission_failed": "Falha no envio da avaliação: {{message}}",
-      "street_view_unavailable": "Street View não disponível para localização {{id}}",
       "type_add_failed": "Falha ao adicionar novo tipo: {{message}}"
     },
     "auth": {
@@ -178,7 +177,8 @@
       "fruiting_status": "Estado de frutificação",
       "position": "Posição",
       "season": "Estação",
-      "season_start_to_stop_short": "até"
+      "season_start_to_stop_short": "até",
+      "street_view_position_warning": "As posições do Street View podem ser imprecisas. Saia do Street View e verifique a posição no mapa antes de enviar."
     },
     "hints": {
       "add_description": "Adicionar descrição",

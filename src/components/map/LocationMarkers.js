@@ -1,13 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
-import { getDisplayLabel } from '../../utils/getDisplayLabel'
-import {
-  createLabel,
-  formatLabelHtml,
-  getMarkerIcon,
-  Z_INDEX,
-} from './locationMarkerHelpers'
+import { MapType } from '../../constants/settings'
+import { createLocationDotMarker } from './createDotMarker'
+
+const PANORAMA_LABEL_RADIUS_METRES = 100
+const approxDistanceMetres = (lat1, lng1, lat2, lng2) => {
+  const R = 6_371_000 // Earth radius in metres
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLng = ((lng2 - lng1) * Math.PI) / 180
+  const avgLat = ((lat1 + lat2) / 2) * (Math.PI / 180)
+  const x = dLng * Math.cos(avgLat)
+  return R * Math.sqrt(dLat * dLat + x * x)
+}
 
 const LocationMarkers = ({
   locations,
@@ -17,11 +22,17 @@ const LocationMarkers = ({
   showLabels,
 }) => {
   const markersRef = useRef(new Map())
-  const [hoveredLocationId, setHoveredLocationId] = useState(null)
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const { types: selectedTypes } = useSelector((state) => state.filter)
   const { mapType } = useSelector((state) => state.settings)
-  const streetViewOpen = useSelector((state) => state.location.streetViewOpen)
+  const invertColors = mapType === MapType.Hybrid
+  const panoramaReady = useSelector((state) => state.panorama.panoramaReady)
+  const panoramaCenter = useSelector((state) => state.panorama.panoramaCenter)
+
+  const onLocationClickRef = useRef(onLocationClick)
+  useEffect(() => {
+    onLocationClickRef.current = onLocationClick
+  }, [onLocationClick])
 
   useEffect(() => {
     if (!googleMap || !getGoogleMaps) {
@@ -31,167 +42,138 @@ const LocationMarkers = ({
     const google = getGoogleMaps()
     const currentMarkers = markersRef.current
 
-    // While Street View is open, Google projects the map markers into the
-    // panorama. Hide them all there; PanoramaHandler draws the dots and
-    // fruit-name labels (and the selected "here" pin) for the panorama instead.
-    const visibleLocations = streetViewOpen ? [] : locations
+    const mapTarget =
+      panoramaReady && googleMap ? googleMap.getStreetView() : googleMap
 
-    const newLocationIds = new Set(visibleLocations.map((loc) => loc.id))
+    if (!mapTarget) {
+      return
+    }
+
+    const shouldShowLabel = (location) => {
+      if (!showLabels) {
+        return false
+      }
+      if (panoramaReady) {
+        if (!panoramaCenter) {
+          return false
+        }
+        const dist = approxDistanceMetres(
+          panoramaCenter.lat,
+          panoramaCenter.lng,
+          location.lat,
+          location.lng,
+        )
+        return dist <= PANORAMA_LABEL_RADIUS_METRES
+      }
+      return true
+    }
+
+    const newLocationIds = new Set(locations.map((loc) => loc.id))
     const existingLocationIds = new Set(currentMarkers.keys())
 
     existingLocationIds.forEach((locationId) => {
       if (!newLocationIds.has(locationId)) {
-        const markerData = currentMarkers.get(locationId)
-        if (markerData) {
-          markerData.marker.setMap(null)
-          if (markerData.label) {
-            markerData.label.setMap(null)
-          }
-          google.event.clearInstanceListeners(markerData.marker)
+        const marker = currentMarkers.get(locationId)
+        if (marker) {
+          marker.detachHoverListeners()
+          marker.removeLabel()
+          marker.setMap(null)
+          google.event.clearInstanceListeners(marker)
           currentMarkers.delete(locationId)
         }
       }
     })
 
-    visibleLocations.forEach((location) => {
-      const isSaved = Boolean(location.in_list)
-
-      if (!existingLocationIds.has(location.id)) {
-        const labelData = (location.type_ids || [])
-          .map((id) => getDisplayLabel(typesAccess, id))
-          .filter(Boolean)
-
-        const marker = new google.Marker({
-          position: { lat: location.lat, lng: location.lng },
-          map: googleMap,
-          optimized: visibleLocations.length > 100,
-          icon: getMarkerIcon(google, isSaved),
-          zIndex: isSaved ? Z_INDEX.SAVED : Z_INDEX.DEFAULT,
-        })
-
-        google.event.addListener(marker, 'mouseover', () => {
-          setHoveredLocationId(location.id)
-        })
-
-        google.event.addListener(marker, 'mouseout', () => {
-          setHoveredLocationId(null)
-        })
-
-        if (onLocationClick) {
-          google.event.addListener(marker, 'click', (event) => {
-            event.stop()
-            onLocationClick(location)
-          })
+    currentMarkers.forEach((marker) => {
+      if (marker.getMap() !== mapTarget) {
+        marker.setMap(mapTarget)
+        if (marker._label) {
+          marker._label.setMap(mapTarget)
         }
-
-        currentMarkers.set(location.id, {
-          marker,
-          label: null,
-          labelData,
-          location,
-          isSaved,
-        })
-      } else {
-        const markerData = currentMarkers.get(location.id)
-        const prevLocation = markerData.location
-        if (
-          prevLocation.lat !== location.lat ||
-          prevLocation.lng !== location.lng
-        ) {
-          markerData.marker.setPosition({
-            lat: location.lat,
-            lng: location.lng,
-          })
-          if (markerData.label) {
-            markerData.label.updatePosition(google, location.lat, location.lng)
-          }
-          markerData.location = location
-        }
-
-        // Update marker icon and zIndex if saved state changed
-        if (markerData.isSaved !== isSaved) {
-          markerData.marker.setIcon(getMarkerIcon(google, isSaved))
-          markerData.marker.setZIndex(isSaved ? Z_INDEX.SAVED : Z_INDEX.DEFAULT)
-          markerData.isSaved = isSaved
-          // Update label z-index if it exists
-          if (markerData.label && markerData.label.div) {
-            markerData.label.div.style.zIndex = isSaved
-              ? Z_INDEX.SAVED
-              : Z_INDEX.DEFAULT
-            markerData.label.isSaved = isSaved
-          }
-        }
-
-        const newLabelData = (location.type_ids || [])
-          .map((id) => getDisplayLabel(typesAccess, id))
-          .filter(Boolean)
-        markerData.labelData = newLabelData
       }
     })
 
-    currentMarkers.forEach((markerData, locationId) => {
-      const isHovered = hoveredLocationId === locationId
-      const shouldShowLabel = showLabels || isHovered
+    const locationsNeedingNewMarkers = locations.filter(
+      (loc) => !existingLocationIds.has(loc.id),
+    )
+    const locationsNeedingUpdate = locations.filter((loc) =>
+      existingLocationIds.has(loc.id),
+    )
+
+    locationsNeedingUpdate.forEach((location) => {
+      const marker = currentMarkers.get(location.id)
+      const prevLocation = marker._location
 
       if (
-        shouldShowLabel &&
-        !markerData.label &&
-        markerData.labelData.length > 0
+        prevLocation.lat !== location.lat ||
+        prevLocation.lng !== location.lng
       ) {
-        const labelHtml = formatLabelHtml(markerData.labelData, selectedTypes)
-        markerData.label = createLabel(
-          google,
-          googleMap,
-          markerData.location,
-          labelHtml,
-          isHovered,
-          mapType,
-          markerData.isSaved,
-        )
+        marker.updatePosition(location.lat, location.lng)
       }
 
-      if (!shouldShowLabel && markerData.label) {
-        markerData.label.setMap(null)
-        markerData.label = null
+      if (marker._isSaved !== Boolean(location.in_list)) {
+        marker.updateSavedState(Boolean(location.in_list))
       }
+    })
 
-      if (markerData.label && markerData.label.div) {
-        if (markerData.label.moveToPane) {
-          markerData.label.moveToPane(isHovered)
-        }
-
-        if (markerData.label.updateStyle) {
-          markerData.label.updateStyle(mapType)
-        }
-
-        const newLabelHtml = formatLabelHtml(
-          markerData.labelData,
-          selectedTypes,
-        )
-        if (markerData.label.updateHtml) {
-          markerData.label.updateHtml(newLabelHtml)
-        }
-
-        const spans =
-          markerData.label.div.querySelectorAll('span[data-type-id]')
-        spans.forEach((span) => {
-          const typeId = parseInt(span.getAttribute('data-type-id'), 10)
-          const isSelected = selectedTypes.includes(typeId)
-          span.style.opacity = isSelected ? '1.0' : '0.5'
+    const createNewMarkers = () => {
+      locationsNeedingNewMarkers.forEach((location) => {
+        const marker = createLocationDotMarker(google, mapTarget, location, {
+          optimized: locations.length > 100,
         })
+
+        google.event.addListener(marker, 'click', (event) => {
+          event.stop()
+          onLocationClickRef.current?.(location)
+        })
+
+        currentMarkers.set(location.id, marker)
+      })
+    }
+
+    const overlay = new google.OverlayView()
+    overlay.onAdd = () => void 0
+    overlay.draw = () => void 0
+    overlay.onRemove = () => void 0
+    overlay.setMap(mapTarget)
+
+    if (overlay.getProjection()) {
+      overlay.setMap(null)
+      createNewMarkers()
+    } else {
+      const listener = google.event.addListenerOnce(
+        mapTarget,
+        'projection_changed',
+        () => {
+          overlay.setMap(null)
+          createNewMarkers()
+        },
+      )
+      return () => {
+        google.event.removeListener(listener)
+        overlay.setMap(null)
       }
+    }
+
+    currentMarkers.forEach((marker) => {
+      const effectiveShowLabel = shouldShowLabel(marker._location)
+      marker.syncLabel(
+        typesAccess,
+        selectedTypes,
+        effectiveShowLabel,
+        invertColors,
+      )
     })
   }, [
     locations,
     googleMap,
     getGoogleMaps,
-    onLocationClick,
     typesAccess,
     selectedTypes,
     showLabels,
-    hoveredLocationId,
-    mapType,
-    streetViewOpen,
+    invertColors,
+    panoramaReady,
+    panoramaCenter,
   ])
 
   useEffect(
@@ -201,12 +183,11 @@ const LocationMarkers = ({
         return
       }
 
-      markersRef.current.forEach((markerData) => {
-        markerData.marker.setMap(null)
-        if (markerData.label) {
-          markerData.label.setMap(null)
-        }
-        google.event.clearInstanceListeners(markerData.marker)
+      markersRef.current.forEach((marker) => {
+        marker.detachHoverListeners()
+        marker.removeLabel()
+        marker.setMap(null)
+        google.event.clearInstanceListeners(marker)
       })
 
       markersRef.current.clear()

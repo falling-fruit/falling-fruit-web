@@ -269,6 +269,17 @@ export const LocationForm = ({ editingId, innerRef }) => {
 
   const { typesAccess } = useSelector((state) => state.type)
 
+  const streetViewOpen = useSelector((state) => state.panorama.streetViewOpen)
+
+  const positionDirty =
+    editingId &&
+    position &&
+    location &&
+    (Math.abs(position.lat - location.lat) > 1e-6 ||
+      Math.abs(position.lng - location.lng) > 1e-6)
+
+  const blockedByStreetView = streetViewOpen && positionDirty
+
   const initialValues =
     !location || typesAccess.isEmpty
       ? {}
@@ -360,12 +371,19 @@ export const LocationForm = ({ editingId, innerRef }) => {
               {!isLoggedIn && (
                 <Recaptcha centered name="g-recaptcha-response" />
               )}
+              {blockedByStreetView && (
+                <ErrorText>
+                  {t('locations.form.street_view_position_warning')}
+                </ErrorText>
+              )}
               <FormButtons align={'center'}>
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
                 <Button
-                  disabled={isSubmitting || !isValid || !dirty}
+                  disabled={
+                    isSubmitting || !isValid || !dirty || blockedByStreetView
+                  }
                   type="submit"
                 >
                   {isSubmitting

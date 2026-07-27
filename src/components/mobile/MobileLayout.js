@@ -34,10 +34,11 @@ const MapContainer = styled.div`
   display: ${(props) => (props.show ? 'block' : 'none')};
   position: absolute;
   inset-block-start: ${(props) =>
-    props.isEmbed
+    props.isEmbed || props.streetView
       ? 0
       : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
-  inset-block-end: ${(props) => (props.isEmbed ? 0 : TABS_HEIGHT_PX)}px;
+  inset-block-end: ${(props) =>
+    props.isEmbed || props.streetView ? 0 : TABS_HEIGHT_PX}px;
   inset-inline: 0;
 `
 
@@ -78,9 +79,6 @@ const shouldDisplayMapPage = (pathname) => {
     match.params.nextSegment === 'edit' &&
     match.params.nextNextSegment === 'position'
 
-  const isViewingPanorama =
-    locationId && match.params.nextSegment === 'panorama'
-
   const isSuccessfullyAdded =
     locationId && match.params.nextSegment === 'success'
 
@@ -88,13 +86,12 @@ const shouldDisplayMapPage = (pathname) => {
     isPlacingNewLocationMarker ||
     isEditingLocationMarker ||
     isViewingLocation ||
-    isViewingPanorama ||
     isSuccessfullyAdded
   )
 }
 
 const MobileLayout = () => {
-  const streetView = useSelector((state) => state.location.streetViewOpen)
+  const streetView = useSelector((state) => state.panorama.streetViewOpen)
   const { pathname } = useLocation()
   const { tabIndex, handleTabChange, tabContent } = useTabs()
   const isEmbed = useIsEmbed()
@@ -114,7 +111,11 @@ const MobileLayout = () => {
           </Route>
         </Switch>
         <Switch>{formRoutesMobile}</Switch>
-        <MapContainer show={shouldDisplayMapPage(pathname)} isEmbed={isEmbed}>
+        <MapContainer
+          show={shouldDisplayMapPage(pathname)}
+          isEmbed={isEmbed}
+          streetView={streetView}
+        >
           <MapPage />
         </MapContainer>
         {connectRoutes}
@@ -141,7 +142,7 @@ const MobileLayout = () => {
               <Route path="/locations/:locationId/edit" />
               <Route
                 path={['/map', '/list', '/locations/:locationId']}
-                component={isEmbed ? null : NavigationBar}
+                component={isEmbed || streetView ? null : NavigationBar}
               />
             </Switch>
             <TabPanels>
@@ -196,6 +197,7 @@ const MobileLayout = () => {
               <Route path={['/locations/:locationId/edit/:postfix', '*']}>
                 {({ match }) =>
                   !isEmbed &&
+                  !streetView &&
                   (!match.params.postfix ||
                     match.params.postfix === 'position') && (
                     <>

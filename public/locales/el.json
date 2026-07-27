@@ -46,7 +46,6 @@
       "review_deletion_failed": "Αποτυχία διαγραφής αξιολόγησης: {{message}}",
       "review_edit_failed": "Αποτυχία επεξεργασίας αξιολόγησης: {{message}}",
       "review_submission_failed": "Αποτυχία υποβολής αξιολόγησης: {{message}}",
-      "street_view_unavailable": "Το Street View δεν είναι διαθέσιμο για την τοποθεσία {{id}}",
       "type_add_failed": "Αποτυχία προσθήκης νέου τύπου: {{message}}"
     },
     "auth": {
@@ -178,7 +177,8 @@
       "fruiting_status": "Κατάσταση καρποφορίας",
       "position": "Θέση",
       "season": "Εποχή",
-      "season_start_to_stop_short": "έως"
+      "season_start_to_stop_short": "έως",
+      "street_view_position_warning": "Οι θέσεις του Street View μπορεί να είναι ανακριβείς. Βγείτε από το Street View και ελέγξτε τη θέση στον χάρτη πριν την υποβολή."
     },
     "hints": {
       "add_description": "Προσθήκη περιγραφής",

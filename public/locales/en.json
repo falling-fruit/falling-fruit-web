@@ -46,7 +46,6 @@
       "review_deletion_failed": "Review deletion failed: {{message}}",
       "review_edit_failed": "Review editing failed: {{message}}",
       "review_submission_failed": "Review submission failed: {{message}}",
-      "street_view_unavailable": "Street View not available for location {{id}}",
       "type_add_failed": "Adding new type failed: {{message}}"
     },
     "auth": {
@@ -178,7 +177,8 @@
       "fruiting_status": "Fruiting status",
       "position": "Position",
       "season": "Season",
-      "season_start_to_stop_short": "to"
+      "season_start_to_stop_short": "to",
+      "street_view_position_warning": "Street View positions can be inaccurate. Exit the Street View and check position on the map before submitting."
     },
     "hints": {
       "add_description": "Add description",
@@ -186,9 +186,9 @@
       "add_season_start": "Add season start",
       "confirm_still_exists": "Confirm still exists",
       "over_x_years_ago": "Over {{yearsAgo}} years ago",
-      "review_comment_placeholder_still_exists": "Still there!",
+      "report_comment_placeholder_no_longer_exists": "No longer exists",
       "report_no_longer_exists": "Report no longer exists",
-      "report_comment_placeholder_no_longer_exists": "No longer exists"
+      "review_comment_placeholder_still_exists": "Still there!"
     },
     "index": {
       "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!"

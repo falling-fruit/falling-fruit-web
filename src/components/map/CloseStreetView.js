@@ -2,7 +2,6 @@ import { X } from '@styled-icons/boxicons-regular'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { useAppHistory } from '../../utils/useAppHistory'
 import ResetButton from '../ui/ResetButton'
 
 const OpacityButton = styled(ResetButton)`
@@ -27,12 +26,14 @@ const StreetViewUIWrapper = styled.div`
 `
 
 const CloseStreetView = () => {
-  const history = useAppHistory()
-  const { locationId } = useSelector((state) => state.location)
+  const { googleMap } = useSelector((state) => state.map)
 
   const handleClose = (event) => {
     event.stopPropagation()
-    history.push(`/locations/${locationId}`)
+    if (googleMap) {
+      const panorama = googleMap.getStreetView()
+      panorama.setVisible(false)
+    }
   }
 
   return (

@@ -60,6 +60,12 @@ type TypeSelectMenuEntry = {
   taxonomicRank: number
 }
 
+type DisplayLabel = {
+  text: string
+  isScientific: boolean
+  typeId: Id
+}
+
 const localize = (type: SchemaType, language: string): LocalizedType => {
   const scientificName = type.scientific_names?.[0] || ''
   let commonName = type.common_names?.[language]?.[0] || ''
@@ -186,6 +192,49 @@ export class TypesAccess {
     const t = this.localizedTypes[this.idIndex[id]]
     return t ? t.scientificName : ''
   }
+
+  getDisplayLabel(id: Id): DisplayLabel | null {
+    const type = this.getType(id)
+    if (!type) {
+      return null
+    }
+
+    if (type.cultivar) {
+      const parentType = this.getParentType(id)
+      if (
+        parentType &&
+        parentType.commonName &&
+        parentType.scientificName &&
+        (!type.commonName ||
+          type.commonName.toLowerCase() === parentType.commonName.toLowerCase())
+      ) {
+        return {
+          text: `${parentType.commonName} '${type.cultivar}'`,
+          isScientific: false,
+          typeId: id,
+        }
+      }
+    }
+
+    if (type.commonName) {
+      return {
+        text: type.commonName,
+        isScientific: false,
+        typeId: id,
+      }
+    }
+
+    if (type.scientificName) {
+      return {
+        text: type.scientificName,
+        isScientific: true,
+        typeId: id,
+      }
+    }
+
+    return null
+  }
+
   asMenuEntries(): TypeSelectMenuEntry[] {
     return this.localizedTypes.map((t) =>
       toMenuEntry(t, this.getCommonName(t.parentId)),

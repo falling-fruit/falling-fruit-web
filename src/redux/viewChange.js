@@ -14,6 +14,11 @@ const getIsShowingClusters = (state) => {
 
 export const fetchLocations = () => (dispatch, getState) => {
   const state = getState()
+
+  if (state.panorama.streetViewOpen) {
+    return
+  }
+
   if (getIsShowingClusters(state)) {
     dispatch(fetchMapClusters())
   } else {
