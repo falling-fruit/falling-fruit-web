@@ -67,16 +67,19 @@ const EditLocation = ({ NavComponent, withSettingsButton }) => {
   const formRef = useRef()
   const { locationId } = useParams()
   const { t } = useTranslation()
+  const streetViewOpen = useSelector((state) => state.panorama.streetViewOpen)
 
   return (
     <>
-      <NavComponent
-        title={t('menu.edit_location')}
-        onBack={(event) => {
-          event.stopPropagation()
-          history.push(`/locations/${locationId}`)
-        }}
-      />
+      {!streetViewOpen && (
+        <NavComponent
+          title={t('menu.edit_location')}
+          onBack={(event) => {
+            event.stopPropagation()
+            history.push(`/locations/${locationId}`)
+          }}
+        />
+      )}
       <LocationForm editingId={Number(locationId)} innerRef={formRef} />
       {withSettingsButton && (
         <DesktopButtonUnderForm

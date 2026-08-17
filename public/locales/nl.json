@@ -28,6 +28,7 @@
       "add_location_list_failed": "Toevoegen van locatielijst mislukt: {{message}}",
       "add_location_to_list_failed": "Toevoegen van locatie aan lijst mislukt: {{message}}",
       "fetch_clusters_failed": "Fout bij ophalen clusters: {{message}}",
+      "fetch_filter_counts_failed": "Fout bij ophalen van filtertelling: {{message}}",
       "fetch_import_failed": "Fout bij ophalen van dataset {{id}}: {{message}}",
       "fetch_location_changes_failed": "Ophalen van locatiewijzigingen mislukt: {{message}}",
       "fetch_location_failed": "Fout bij ophalen locatie {{id}}: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Nog steeds daar!"
     },
     "index": {
-      "editmarker_html": "<b>Verplaats naar de bronlocatie.</b><br><br>Gebruik de satellietweergave - er bestaat een kans dat de bron zichtbaar is vanuit de ruimte!"
+      "editmarker_html": "<b>Verplaats naar de bronlocatie.</b><br><br>Gebruik de satellietweergave - er bestaat een kans dat de bron zichtbaar is vanuit de ruimte!",
+      "editmarker_streetview_html": "Ga naar de positie van de bron."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "In seizoen van {{start_month}} tot {{stop_month}}",
         "year_round": "Het hele jaar door"
       },
-      "title": "Overzicht"
+      "title": "Overzicht",
+      "street_view_unavailable": "Street View niet beschikbaar in de buurt van deze locatie"
     }
   },
   "menu": {

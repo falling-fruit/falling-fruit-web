@@ -28,6 +28,7 @@
       "add_location_list_failed": "Misslyckades med att lägga till platslista: {{message}}",
       "add_location_to_list_failed": "Misslyckades med att lägga till plats i lista: {{message}}",
       "fetch_clusters_failed": "Fel vid hämtning av kluster: {{message}}",
+      "fetch_filter_counts_failed": "Fel vid hämtning av filterantal: {{message}}",
       "fetch_import_failed": "Fel vid hämtning av datamängd {{id}}: {{message}}",
       "fetch_location_changes_failed": "Hämtning av platsändringar misslyckades: {{message}}",
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Finns fortfarande där!"
     },
     "index": {
-      "editmarker_html": "<b>Flytta till källans position.</b><br><br>Kontrollera satellitvy - källan kan vara synlig från rymden!"
+      "editmarker_html": "<b>Flytta till källans position.</b><br><br>Kontrollera satellitvy - källan kan vara synlig från rymden!",
+      "editmarker_streetview_html": "Flytta till källans position."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "I säsong från {{start_month}} till {{stop_month}}",
         "year_round": "Året runt"
       },
-      "title": "Översikt"
+      "title": "Översikt",
+      "street_view_unavailable": "Gatuvy är inte tillgängligt nära denna plats"
     }
   },
   "menu": {

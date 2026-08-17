@@ -28,6 +28,7 @@
       "add_location_list_failed": "Échec de l'ajout de la liste d'emplacements : {{message}}",
       "add_location_to_list_failed": "Échec de l'ajout de l'emplacement à la liste : {{message}}",
       "fetch_clusters_failed": "Erreur lors de la récupération des clusters : {{message}}",
+      "fetch_filter_counts_failed": "Erreur lors de la récupération des compteurs de filtres : {{message}}",
       "fetch_import_failed": "Erreur lors de la récupération du jeu de données {{id}} : {{message}}",
       "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
       "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Toujours là !"
     },
     "index": {
-      "editmarker_html": "<b>Déplacez à la position de la source.</b><br><br>Vérifiez la vue satellite - la source pourrait être visible depuis l'espace!"
+      "editmarker_html": "<b>Déplacez à la position de la source.</b><br><br>Vérifiez la vue satellite - la source pourrait être visible depuis l'espace!",
+      "editmarker_streetview_html": "Déplacez-vous vers la position de la source."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "En saison de {{start_month}} à {{stop_month}}",
         "year_round": "Toute l'année"
       },
-      "title": "Aperçu"
+      "title": "Aperçu",
+      "street_view_unavailable": "Street View n'est pas disponible à proximité de cet emplacement"
     }
   },
   "menu": {

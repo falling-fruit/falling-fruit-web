@@ -25,17 +25,6 @@ const getDraggablePinIcon = (google, isAdding) => ({
   anchor: new google.Point(24, 44),
 })
 
-/**
- * Creates a tooltip OverlayView that is anchored to a lat/lng position.
- * The tooltip renders above the pin and moves with it.
- *
- * @param {object} google - Google Maps API namespace
- * @param {object} map - Google Map instance
- * @param {{ lat: number, lng: number }} position - Initial position
- * @param {string} html - Inner HTML content of the tooltip
- * @param {() => void} onClose - Called when the close button is clicked
- * @returns {google.maps.OverlayView}
- */
 export const createTooltipOverlay = (google, map, position, html, onClose) => {
   const overlay = new google.OverlayView()
   overlay._position = new google.LatLng(position.lat, position.lng)
@@ -60,7 +49,6 @@ export const createTooltipOverlay = (google, map, position, html, onClose) => {
     box.style.fontSize = '16px'
     box.style.whiteSpace = 'nowrap'
     box.style.transform = 'translate(-50%, -100%)'
-    // Extra margin so the tooltip sits above the pin (pin anchor is 44px from top of 48px icon)
     box.style.marginTop = '-52px'
 
     // Close button

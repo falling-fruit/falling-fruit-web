@@ -28,6 +28,7 @@
       "add_location_list_failed": "Thêm danh sách vị trí thất bại: {{message}}",
       "add_location_to_list_failed": "Thêm vị trí vào danh sách thất bại: {{message}}",
       "fetch_clusters_failed": "Lỗi khi tải cụm: {{message}}",
+      "fetch_filter_counts_failed": "Lỗi khi tải số lượng bộ lọc: {{message}}",
       "fetch_import_failed": "Lỗi khi tải tập dữ liệu {{id}}: {{message}}",
       "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Vẫn còn đó!"
     },
     "index": {
-      "editmarker_html": "<b>Di chuyển đến vị trí của nguồn.</b><br><br>Kiểm tra chế độ xem vệ tinh - nguồn có thể được nhìn thấy từ không gian!"
+      "editmarker_html": "<b>Di chuyển đến vị trí của nguồn.</b><br><br>Kiểm tra chế độ xem vệ tinh - nguồn có thể được nhìn thấy từ không gian!",
+      "editmarker_streetview_html": "Di chuyển đến vị trí của nguồn."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "Trong mùa từ {{start_month}} đến {{stop_month}}",
         "year_round": "Quanh năm"
       },
-      "title": "Tổng quan"
+      "title": "Tổng quan",
+      "street_view_unavailable": "Street View không khả dụng gần vị trí này"
     }
   },
   "menu": {

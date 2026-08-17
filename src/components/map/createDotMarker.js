@@ -51,6 +51,7 @@ const createBaseLabelDiv = (isSaved) => {
   div.style.marginTop = '5px'
   div.style.textAlign = 'center'
   div.style.display = 'block'
+  div.style.whiteSpace = 'nowrap'
   div.style.zIndex = isSaved ? Z_INDEX.SAVED : Z_INDEX.DEFAULT
   return div
 }

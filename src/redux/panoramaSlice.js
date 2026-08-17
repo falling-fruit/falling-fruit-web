@@ -46,6 +46,7 @@ const panoramaSlice = createSlice({
   name: 'panorama',
   initialState: {
     streetViewOpen: false,
+    locationsWithoutPanorama: {},
     panoramaReady: false,
     panoramaCenter: null,
     locations: [],
@@ -57,6 +58,9 @@ const panoramaSlice = createSlice({
     closeStreetView: (state) => {
       state.streetViewOpen = false
       state.locations = []
+    },
+    addLocationWithoutPanorama: (state, action) => {
+      state.locationsWithoutPanorama[action.payload] = true
     },
     setPanoramaReady: (state, action) => {
       state.panoramaReady = action.payload
@@ -92,6 +96,7 @@ const panoramaSlice = createSlice({
 export const {
   openStreetView,
   closeStreetView,
+  addLocationWithoutPanorama,
   setPanoramaReady,
   setPanoramaCenter,
 } = panoramaSlice.actions

@@ -20,17 +20,14 @@ import Share from '../share/Share'
 import ShareIconButton from '../share/ShareIconButton'
 import { AddLocationMobile } from '../ui/AddLocation'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import CloseStreetView from './CloseStreetView'
 import Cluster from './Cluster'
+import DesktopCloseStreetView from './DesktopCloseStreetView'
 import GeolocationDot from './GeolocationDot'
 import LocationMarkers from './LocationMarkers'
 import PanoramaEvents from './PanoramaEvents'
 import PinMarkers from './PinMarkers'
 import Place from './Place'
-import {
-  AddLocationCentralUnmovablePin,
-  EditLocationCentralUnmovablePin,
-} from './StaticPins'
+import { AddLocationCentralUnmovablePin } from './StaticPins'
 import TrackLocationButton from './TrackLocationButton'
 
 const MIN_ZOOM = 1
@@ -171,15 +168,17 @@ function getTileCoordinates(coord, zoom) {
   return { x, y, z: zoom }
 }
 
-const configurePanoramaControls = (googleMap, showPegman) => {
+const configurePanoramaControls = (googleMap, showPegman, isDesktop) => {
   googleMap.setOptions({ streetViewControl: showPegman })
 
   const panorama = googleMap.getStreetView()
   if (panorama) {
     panorama.setOptions({
       fullscreenControl: false,
-      enableCloseButton: false,
+      enableCloseButton: !isDesktop,
       addressControl: false,
+      motionTracking: false,
+      motionTrackingControl: true,
     })
   }
 }
@@ -245,9 +244,11 @@ const MapPage = ({ isDesktop }) => {
 
   const currentZoom = googleMap?.getZoom()
 
-  const { panoramaReady, locations: panoramaLocations } = useSelector(
-    (state) => state.panorama,
-  )
+  const {
+    panoramaReady,
+    streetViewOpen,
+    locations: panoramaLocations,
+  } = useSelector((state) => state.panorama)
 
   const place = useSelector((state) => state.place.selectedPlace)
 
@@ -335,10 +336,9 @@ const MapPage = ({ isDesktop }) => {
     }
     const zoom = googleMap.getZoom()
     const zoomOk = zoom == null || zoom > VISIBLE_CLUSTER_ZOOM_LIMIT
-    const showPegman =
-      zoomOk && (isDesktop || (!isEditingLocation && !isAddingLocation))
-    configurePanoramaControls(googleMap, showPegman)
-  }, [googleMap, currentZoom, isDesktop, isEditingLocation, isAddingLocation])
+    const showPegman = zoomOk
+    configurePanoramaControls(googleMap, showPegman, isDesktop)
+  }, [googleMap, currentZoom, isDesktop])
 
   const isEmbed = useIsEmbed()
 
@@ -422,11 +422,12 @@ const MapPage = ({ isDesktop }) => {
   return (
     <>
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
-      {isAddingLocation && !isDesktop && <AddLocationCentralUnmovablePin />}
+      {isAddingLocation && !isDesktop && !streetViewOpen && (
+        <AddLocationCentralUnmovablePin />
+      )}
       {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (
         <AddLocationMobile />
       )}
-      {isEditingLocation && !isDesktop && <EditLocationCentralUnmovablePin />}
       {!isDesktop && !isEmbed && <TrackLocationButton isIcon />}
 
       <ZoomInButton
@@ -466,7 +467,7 @@ const MapPage = ({ isDesktop }) => {
       )}
 
       {googleMap && <PanoramaEvents />}
-      {panoramaReady && <CloseStreetView />}
+      {panoramaReady && isDesktop && <DesktopCloseStreetView />}
 
       {googleMap && getGoogleMaps && (
         <PinMarkers
@@ -477,6 +478,7 @@ const MapPage = ({ isDesktop }) => {
           isEditing={isEditingLocation}
           isAdding={isAddingLocation}
           isDesktop={isDesktop}
+          streetViewOpen={streetViewOpen}
         />
       )}
 
@@ -492,13 +494,9 @@ const MapPage = ({ isDesktop }) => {
             mapTypeId: mapType,
             disableDefaultUI: true,
             streetViewControlOptions: {
-              position: isDesktop
-                ? isRTL
-                  ? googleMaps.ControlPosition.RIGHT_BOTTOM
-                  : googleMaps.ControlPosition.LEFT_BOTTOM
-                : isRTL
-                  ? googleMaps.ControlPosition.RIGHT_TOP
-                  : googleMaps.ControlPosition.LEFT_TOP,
+              position: isRTL
+                ? googleMaps.ControlPosition.RIGHT_BOTTOM
+                : googleMaps.ControlPosition.LEFT_BOTTOM,
             },
             rotateControlOptions: {
               position: isRTL

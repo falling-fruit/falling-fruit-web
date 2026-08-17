@@ -28,6 +28,7 @@
       "add_location_list_failed": "הוספת רשימת מיקומים נכשלה: {{message}}",
       "add_location_to_list_failed": "הוספת מיקום לרשימה נכשלה: {{message}}",
       "fetch_clusters_failed": "שגיאה בטעינת אשכולות: {{message}}",
+      "fetch_filter_counts_failed": "שגיאה בטעינת מספרי המסננים: {{message}}",
       "fetch_import_failed": "שגיאה במשיכת מאגר נתונים {{id}}: {{message}}",
       "fetch_location_changes_failed": "נכשלה משיכת שינויי מיקום: {{message}}",
       "fetch_location_failed": "שגיאה במשיכת מיקום {{id}}: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "עדיין שם!"
     },
     "index": {
-      "editmarker_html": "<b>עבור למיקום המקור.</b><br><br>בדוק את תצוגת הלוויין - ייתכן שהמקור נראה מהחלל!"
+      "editmarker_html": "<b>עבור למיקום המקור.</b><br><br>בדוק את תצוגת הלוויין - ייתכן שהמקור נראה מהחלל!",
+      "editmarker_streetview_html": "עברו למיקום המקור."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "בעונה מ {{start_month}} עד {{stop_month}}",
         "year_round": "כל השנה"
       },
-      "title": "סקירה"
+      "title": "סקירה",
+      "street_view_unavailable": "תצוגת רחוב אינה זמינה בקרבת מיקום זה"
     }
   },
   "menu": {

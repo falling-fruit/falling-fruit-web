@@ -28,6 +28,7 @@
       "add_location_list_failed": "Konum listesi eklenemedi: {{message}}",
       "add_location_to_list_failed": "Listeye konum eklenemedi: {{message}}",
       "fetch_clusters_failed": "Kümeler getirilirken hata oluştu: {{message}}",
+      "fetch_filter_counts_failed": "Filtre sayıları alınırken hata: {{message}}",
       "fetch_import_failed": "Veri seti {{id}} alınamadı: {{message}}",
       "fetch_location_changes_failed": "Konum değişikliklerini alma başarısız: {{message}}",
       "fetch_location_failed": "{{id}} konumunu alma hatası: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Hâlâ orada!"
     },
     "index": {
-      "editmarker_html": "<b>Kaynağın konumuna taşıyın.</b><br><br>Uydu görünümünü kontrol edin - kaynak uzaydan görünür olabilir!"
+      "editmarker_html": "<b>Kaynağın konumuna taşıyın.</b><br><br>Uydu görünümünü kontrol edin - kaynak uzaydan görünür olabilir!",
+      "editmarker_streetview_html": "Kaynağın konumuna gidin."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "{{start_month}} ile {{stop_month}} arasında mevsiminde",
         "year_round": "Yıl Boyu"
       },
-      "title": "Genel Bakış"
+      "title": "Genel Bakış",
+      "street_view_unavailable": "Bu konum yakınında Sokak Görünümü mevcut değil"
     }
   },
   "menu": {

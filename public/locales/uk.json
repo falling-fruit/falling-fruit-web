@@ -28,6 +28,7 @@
       "add_location_list_failed": "Не вдалося додати список локацій: {{message}}",
       "add_location_to_list_failed": "Не вдалося додати локацію до списку: {{message}}",
       "fetch_clusters_failed": "Помилка отримання кластерів: {{message}}",
+      "fetch_filter_counts_failed": "Помилка отримання лічильників фільтрів: {{message}}",
       "fetch_import_failed": "Помилка отримання набору даних {{id}}: {{message}}",
       "fetch_location_changes_failed": "Не вдалося отримати зміни локації: {{message}}",
       "fetch_location_failed": "Помилка отримання локації {{id}}: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Все ще тут!"
     },
     "index": {
-      "editmarker_html": "<b>Перемістіть до позиції джерела.</b><br><br>Перевірте супутниковий вигляд - джерело може бути видно з космосу!"
+      "editmarker_html": "<b>Перемістіть до позиції джерела.</b><br><br>Перевірте супутниковий вигляд - джерело може бути видно з космосу!",
+      "editmarker_streetview_html": "Перемістіться до позиції джерела."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "В сезоні з {{start_month}} по {{stop_month}}",
         "year_round": "Цілий рік"
       },
-      "title": "Огляд"
+      "title": "Огляд",
+      "street_view_unavailable": "Street View недоступний поблизу цієї локації"
     }
   },
   "menu": {

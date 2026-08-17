@@ -131,6 +131,18 @@ const LocationMarkers = ({
       })
     }
 
+    const syncAllLabels = () => {
+      currentMarkers.forEach((marker) => {
+        const effectiveShowLabel = shouldShowLabel(marker._location)
+        marker.syncLabel(
+          typesAccess,
+          selectedTypes,
+          effectiveShowLabel,
+          invertColors,
+        )
+      })
+    }
+
     const overlay = new google.OverlayView()
     overlay.onAdd = () => void 0
     overlay.draw = () => void 0
@@ -140,13 +152,17 @@ const LocationMarkers = ({
     if (overlay.getProjection()) {
       overlay.setMap(null)
       createNewMarkers()
+      syncAllLabels()
     } else {
+      syncAllLabels()
+
       const listener = google.event.addListenerOnce(
         mapTarget,
         'projection_changed',
         () => {
           overlay.setMap(null)
           createNewMarkers()
+          syncAllLabels()
         },
       )
       return () => {
@@ -154,16 +170,6 @@ const LocationMarkers = ({
         overlay.setMap(null)
       }
     }
-
-    currentMarkers.forEach((marker) => {
-      const effectiveShowLabel = shouldShowLabel(marker._location)
-      marker.syncLabel(
-        typesAccess,
-        selectedTypes,
-        effectiveShowLabel,
-        invertColors,
-      )
-    })
   }, [
     locations,
     googleMap,

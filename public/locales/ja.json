@@ -28,6 +28,7 @@
       "add_location_list_failed": "ロケーションリストの追加に失敗しました: {{message}}",
       "add_location_to_list_failed": "リストへのロケーション追加に失敗しました: {{message}}",
       "fetch_clusters_failed": "クラスターの取得エラー: {{message}}",
+      "fetch_filter_counts_failed": "フィルターカウントの取得エラー: {{message}}",
       "fetch_import_failed": "データセット{{id}}の取得エラー: {{message}}",
       "fetch_location_changes_failed": "ロケーション変更の取得に失敗しました: {{message}}",
       "fetch_location_failed": "ロケーション{{id}}の取得エラー: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "まだあります！"
     },
     "index": {
-      "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！"
+      "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！",
+      "editmarker_streetview_html": "ソースの位置に移動してください。"
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "{{start_month}}から{{stop_month}}まで旬です",
         "year_round": "一年中"
       },
-      "title": "概要"
+      "title": "概要",
+      "street_view_unavailable": "この場所の近くにストリートビューはありません"
     }
   },
   "menu": {

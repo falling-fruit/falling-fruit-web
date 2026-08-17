@@ -25,6 +25,7 @@ import {
 } from './overview/Hints'
 import { ReportButton } from './overview/ReportButton'
 import SaveToListButton from './overview/SaveToListButton'
+import StreetViewLink from './overview/StreetViewLink'
 import Tags from './overview/Tags'
 import TypesHeader from './overview/TypesHeader'
 import { ReviewButton } from './ReviewButton'
@@ -256,7 +257,11 @@ const EntryOverview = () => {
   const user = useSelector((state) => state.auth.user)
   const isDesktop = useIsDesktop()
 
-  const { drawerFullyOpen, setPaneDrawerToLowPosition } = useLocationPane()
+  const {
+    drawerFullyOpen,
+    setPaneDrawerToLowPosition,
+    setPaneDrawerToMiddlePosition,
+  } = useLocationPane()
 
   const containerRef = useRef(null)
 
@@ -308,6 +313,13 @@ const EntryOverview = () => {
           )}
         </p>
         <AddressInfo locationData={locationData} onClick={handleAddressClick} />
+        <StreetViewLink
+          lat={locationData.lat}
+          lng={locationData.lng}
+          locationId={locationData.id}
+          setPaneDrawerToLowPosition={setPaneDrawerToLowPosition}
+          setPaneDrawerToMiddlePosition={setPaneDrawerToMiddlePosition}
+        />
         {!(
           locationData.season_start === null &&
           locationData.season_stop === null

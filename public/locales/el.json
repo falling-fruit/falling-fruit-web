@@ -28,6 +28,7 @@
       "add_location_list_failed": "Αποτυχία προσθήκης λίστας τοποθεσιών: {{message}}",
       "add_location_to_list_failed": "Αποτυχία προσθήκης τοποθεσίας στη λίστα: {{message}}",
       "fetch_clusters_failed": "Σφάλμα ανάκτησης ομάδων: {{message}}",
+      "fetch_filter_counts_failed": "Σφάλμα κατά τη λήψη των αριθμών φίλτρων: {{message}}",
       "fetch_import_failed": "Σφάλμα λήψης συνόλου δεδομένων {{id}}: {{message}}",
       "fetch_location_changes_failed": "Αποτυχία λήψης αλλαγών τοποθεσίας: {{message}}",
       "fetch_location_failed": "Σφάλμα λήψης τοποθεσίας {{id}}: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Εξακολουθεί να υπάρχει!"
     },
     "index": {
-      "editmarker_html": "<b>Μετακίνηση στην θέση της πηγής.</b><br><br>Έλεγξε την δορυφορική προβολή - η τοποθεσία μπορεί να έιναι ορατή από το διάστημα!"
+      "editmarker_html": "<b>Μετακίνηση στην θέση της πηγής.</b><br><br>Έλεγξε την δορυφορική προβολή - η τοποθεσία μπορεί να έιναι ορατή από το διάστημα!",
+      "editmarker_streetview_html": "Μετακινηθείτε στη θέση της πηγής."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "Σε εποχή από {{start_month}} έως {{stop_month}}",
         "year_round": "Όλο το χρόνο"
       },
-      "title": "Επισκόπηση"
+      "title": "Επισκόπηση",
+      "street_view_unavailable": "Το Street View δεν είναι διαθέσιμο κοντά σε αυτήν την τοποθεσία"
     }
   },
   "menu": {

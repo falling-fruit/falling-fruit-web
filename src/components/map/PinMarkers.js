@@ -21,6 +21,7 @@ const PinMarkers = ({
   isEditing,
   isAdding,
   isDesktop,
+  streetViewOpen,
 }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -28,13 +29,22 @@ const PinMarkers = ({
   const position = useSelector((state) => state.location.position)
   const tooltipOpen = useSelector((state) => state.location.tooltipOpen)
 
+  const shouldShowDraggableForEditing = isEditing
+  const shouldShowDraggableForAdding = isAdding && (isDesktop || streetViewOpen)
+
   const [draggablePosition, setDraggablePosition] = useState(
-    isDesktop ? position : null,
+    shouldShowDraggableForEditing || shouldShowDraggableForAdding
+      ? position
+      : null,
   )
 
   useEffect(() => {
-    setDraggablePosition(isDesktop ? position : null)
-  }, [position, isDesktop])
+    setDraggablePosition(
+      shouldShowDraggableForEditing || shouldShowDraggableForAdding
+        ? position
+        : null,
+    )
+  }, [position, shouldShowDraggableForEditing, shouldShowDraggableForAdding])
 
   const selectedPinRef = useRef(null)
   const draggablePinRef = useRef(null)
@@ -96,13 +106,16 @@ const PinMarkers = ({
     isEditing,
   ])
 
+  const hasDraggablePosition = Boolean(draggablePosition)
+
   useEffect(() => {
     if (!googleMap || !getGoogleMaps) {
       return
     }
 
     const showDraggable =
-      isDesktop && (isEditing || isAdding) && draggablePosition
+      (isEditing || (isAdding && (isDesktop || streetViewOpen))) &&
+      draggablePosition
 
     if (!showDraggable) {
       if (draggablePinRef.current) {
@@ -117,11 +130,12 @@ const PinMarkers = ({
     }
 
     const google = getGoogleMaps()
+    const mapTarget = streetViewOpen ? googleMap.getStreetView() : googleMap
 
     if (!draggablePinRef.current) {
       draggablePinRef.current = createDraggablePin(
         google,
-        googleMap,
+        mapTarget,
         { lat: draggablePosition.lat, lng: draggablePosition.lng },
         {
           isAdding,
@@ -164,31 +178,17 @@ const PinMarkers = ({
         }
         tooltipOverlayRef.current = createTooltipOverlay(
           google,
-          googleMap,
+          mapTarget,
           { lat: draggablePosition.lat, lng: draggablePosition.lng },
-          t('locations.index.editmarker_html'),
+          streetViewOpen
+            ? t('locations.index.editmarker_streetview_html')
+            : t('locations.index.editmarker_html'),
           () => dispatch(dismissLocationTooltip()),
         )
       }
     } else {
-      const current = draggablePinRef.current.getPosition()
-      const latChanged = Math.abs(current.lat() - draggablePosition.lat) > 1e-9
-      const lngChanged = Math.abs(current.lng() - draggablePosition.lng) > 1e-9
-      if (latChanged || lngChanged) {
-        draggablePinRef.current.updatePosition(
-          draggablePosition.lat,
-          draggablePosition.lng,
-        )
-        if (tooltipOverlayRef.current) {
-          tooltipOverlayRef.current.updatePosition(
-            draggablePosition.lat,
-            draggablePosition.lng,
-          )
-        }
-      }
-
-      if (draggablePinRef.current.getMap() !== googleMap) {
-        draggablePinRef.current.setMap(googleMap)
+      if (draggablePinRef.current.getMap() !== mapTarget) {
+        draggablePinRef.current.setMap(mapTarget)
       }
     }
 
@@ -202,16 +202,43 @@ const PinMarkers = ({
         tooltipOverlayRef.current = null
       }
     }
+    // Note: draggablePosition is intentionally excluded from deps.
+    // Position updates are handled by the effect below to avoid
+    // destroying/recreating the pin on every position change.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     googleMap,
     getGoogleMaps,
     isDesktop,
+    streetViewOpen,
     isEditing,
     isAdding,
-    draggablePosition,
+    hasDraggablePosition,
     dispatch,
     t,
   ])
+
+  useEffect(() => {
+    if (!draggablePinRef.current || !draggablePosition) {
+      return
+    }
+
+    const current = draggablePinRef.current.getPosition()
+    const latChanged = Math.abs(current.lat() - draggablePosition.lat) > 1e-9
+    const lngChanged = Math.abs(current.lng() - draggablePosition.lng) > 1e-9
+    if (latChanged || lngChanged) {
+      draggablePinRef.current.updatePosition(
+        draggablePosition.lat,
+        draggablePosition.lng,
+      )
+      if (tooltipOverlayRef.current) {
+        tooltipOverlayRef.current.updatePosition(
+          draggablePosition.lat,
+          draggablePosition.lng,
+        )
+      }
+    }
+  }, [draggablePosition])
 
   useEffect(() => {
     if (!googleMap || !getGoogleMaps || !draggablePinRef.current) {
@@ -223,6 +250,7 @@ const PinMarkers = ({
     }
 
     const google = getGoogleMaps()
+    const mapTarget = streetViewOpen ? googleMap.getStreetView() : googleMap
     const pinPosition = draggablePinRef.current.getPosition()
     const pos = {
       lat: pinPosition.lat(),
@@ -233,9 +261,11 @@ const PinMarkers = ({
       if (!tooltipOverlayRef.current) {
         tooltipOverlayRef.current = createTooltipOverlay(
           google,
-          googleMap,
+          mapTarget,
           pos,
-          t('locations.index.editmarker_html'),
+          streetViewOpen
+            ? t('locations.index.editmarker_streetview_html')
+            : t('locations.index.editmarker_html'),
           () => dispatch(dismissLocationTooltip()),
         )
       }
@@ -245,7 +275,7 @@ const PinMarkers = ({
         tooltipOverlayRef.current = null
       }
     }
-  }, [tooltipOpen, googleMap, getGoogleMaps, t, dispatch])
+  }, [tooltipOpen, googleMap, getGoogleMaps, streetViewOpen, t, dispatch])
 
   return null
 }

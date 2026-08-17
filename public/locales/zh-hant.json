@@ -28,6 +28,7 @@
       "add_location_list_failed": "新增位置清單失敗：{{message}}",
       "add_location_to_list_failed": "新增位置至清單失敗：{{message}}",
       "fetch_clusters_failed": "獲取群集失敗：{{message}}",
+      "fetch_filter_counts_failed": "取得篩選計數時發生錯誤：{{message}}",
       "fetch_import_failed": "獲取數據集{{id}}失敗：{{message}}",
       "fetch_location_changes_failed": "獲取位置變更失敗：{{message}}",
       "fetch_location_failed": "獲取位置 {{id}} 失敗：{{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "還在那裡！"
     },
     "index": {
-      "editmarker_html": "<b>移動到源的位置。</b><br><br>檢查衛星視圖 - 從太空中可以看到源！"
+      "editmarker_html": "<b>移動到源的位置。</b><br><br>檢查衛星視圖 - 從太空中可以看到源！",
+      "editmarker_streetview_html": "移動到來源的位置。"
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "從{{start_month}}到{{stop_month}}的季節",
         "year_round": "全年"
       },
-      "title": "概覽"
+      "title": "概覽",
+      "street_view_unavailable": "此位置附近的街景視圖不可用"
     }
   },
   "menu": {

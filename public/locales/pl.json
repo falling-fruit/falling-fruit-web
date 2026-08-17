@@ -28,6 +28,7 @@
       "add_location_list_failed": "Nie udało się dodać listy lokalizacji: {{message}}",
       "add_location_to_list_failed": "Nie udało się dodać lokalizacji do listy: {{message}}",
       "fetch_clusters_failed": "Błąd pobierania klastrów: {{message}}",
+      "fetch_filter_counts_failed": "Błąd pobierania liczników filtrów: {{message}}",
       "fetch_import_failed": "Błąd pobierania zbioru danych {{id}}: {{message}}",
       "fetch_location_changes_failed": "Pobieranie zmian lokalizacji nie powiodło się: {{message}}",
       "fetch_location_failed": "Błąd podczas pobierania lokalizacji {{id}}: {{message}}",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Wciąż tam jest!"
     },
     "index": {
-      "editmarker_html": "<b>Przesuń do pozycji źródła.</b><br><br>Sprawdź widok satelitarny - źródło może być widoczne z powietrza!"
+      "editmarker_html": "<b>Przesuń do pozycji źródła.</b><br><br>Sprawdź widok satelitarny - źródło może być widoczne z powietrza!",
+      "editmarker_streetview_html": "Przesuń do pozycji źródła."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "W sezonie {{start_month}} - {{stop_month}}",
         "year_round": "Całoroczne"
       },
-      "title": "Przegląd"
+      "title": "Przegląd",
+      "street_view_unavailable": "Street View niedostępne w pobliżu tej lokalizacji"
     }
   },
   "menu": {
