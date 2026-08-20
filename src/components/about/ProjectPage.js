@@ -76,8 +76,6 @@ const Project = () => {
       <div className="content">
         <img src="/jeff_wanner.jpg" alt="" />
         <p>
-          <em>President</em>
-          <br />
           <b>Jeff Wanner</b>
           <br />
           <a href="mailto:jeff@fallingfruit.org">jeff@fallingfruit.org</a>
