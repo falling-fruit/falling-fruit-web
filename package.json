@@ -147,5 +147,8 @@
     "./src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
+  },
+  "resolutions": {
+    "shell-quote": "1.9.0"
   }
 }
