@@ -27,7 +27,7 @@ const LessPaddingButton = styled(Button)`
   padding: 0 10px;
 `
 
-const ToastContent = () => {
+const ToastContent = ({ location }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const dispatch = useDispatch()
@@ -57,7 +57,7 @@ const ToastContent = () => {
         <LessPaddingButton
           type="button"
           onClick={() => {
-            dispatch(duplicateIntoNewLocation())
+            dispatch(duplicateIntoNewLocation(location))
             history.push(`/locations/init`)
           }}
         >
@@ -225,7 +225,7 @@ const ConnectLocation = ({
       }
     } else if (isSuccessfullyAdded) {
       toastIdRef.current = toast.success(
-        <ToastContent locationId={locationId} />,
+        <ToastContent locationId={locationId} location={location} />,
         {
           autoClose: false,
           style: { width: '100%' },

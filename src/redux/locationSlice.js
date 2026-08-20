@@ -92,7 +92,15 @@ const locationSlice = createSlice({
     clearLocation: (state) => {
       Object.assign(state, initialState)
     },
-    duplicateIntoNewLocation: (state) => {
+    duplicateIntoNewLocation: (state, action) => {
+      /*
+       * The location captured when the success toast was created. Restore it
+       * in case something (e.g. the mobile drawer closing through /map)
+       * cleared the slice before the user tapped 'Add similar'.
+       */
+      if (action.payload) {
+        state.location = action.payload
+      }
       state.isLoading = false
       state.isBeingEdited = false
       state.locationId = 'new'
