@@ -72,6 +72,21 @@ const Project = () => {
           {renderHTML(t('pages.about.ethan_welty_bio_html'))}
         </p>
       </div>
+      <div className="content">
+        <img src="/wojtek_bazant.jpg" alt="" />
+        <p>
+          <em>{t('pages.about.technical_director')}</em>
+          <br />
+          <b>Wojtek Bazant</b>
+          <br />
+          <a href="mailto:wojtek@fallingfruit.org">wojtek@fallingfruit.org</a>
+          <br />
+          Glasgow, Scotland, United Kingdom
+          <br />
+          <br />
+          {renderHTML(t('pages.about.wojtek_bazant_bio_html'))}
+        </p>
+      </div>
       <h2>{t('pages.about.directors')}</h2>
       <div className="content">
         <img src="/jeff_wanner.jpg" alt="" />
