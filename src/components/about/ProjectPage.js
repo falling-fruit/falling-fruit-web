@@ -60,7 +60,7 @@ const Project = () => {
       <div className="content">
         <img src="/ethan_welty.jpg" alt="" />
         <p>
-          <em>Executive Director</em>
+          <em>{t('pages.about.executive_director')}</em>
           <br />
           <b>Ethan Welty</b>
           <br />
