@@ -1,23 +1,25 @@
-class RequireEnvVarsPlugin {
-  constructor(requiredVars) {
-    this.requiredVars = requiredVars
-  }
+const dotenv = require('dotenv')
 
-  apply(compiler) {
-    compiler.hooks.beforeCompile.tap('RequireEnvVarsPlugin', () => {
-      const missingVars = this.requiredVars.filter(
-        (varName) => process.env[varName] === undefined,
-      )
+// Check .env file completeness
+dotenv.config({ quiet: true })
 
-      if (missingVars.length > 0) {
-        throw new Error(
-          `Build failed: Missing required environment variables:\n${missingVars
-            .map((v) => `  - ${v}`)
-            .join('\n')}`,
-        )
-      }
-    })
-  }
+const REQUIRED_VARS = [
+  'REACT_APP_API_URL',
+  'REACT_APP_API_KEY',
+  'REACT_APP_RECAPTCHA_SITE_KEY',
+  'REACT_APP_GOOGLE_MAPS_API_KEY',
+]
+
+const missingVars = REQUIRED_VARS.filter(
+  (varName) => process.env[varName] === undefined,
+)
+
+if (missingVars.length > 0) {
+  throw new Error(
+    `Build failed: Missing required environment variables:\n${missingVars
+      .map((v) => `  - ${v}`)
+      .join('\n')}`,
+  )
 }
 
 module.exports = {
@@ -34,15 +36,6 @@ module.exports = {
           )
         },
       ]
-
-      webpackConfig.plugins.push(
-        new RequireEnvVarsPlugin([
-          'REACT_APP_API_URL',
-          'REACT_APP_API_KEY',
-          'REACT_APP_RECAPTCHA_SITE_KEY',
-          'REACT_APP_GOOGLE_MAPS_API_KEY',
-        ]),
-      )
 
       return webpackConfig
     },

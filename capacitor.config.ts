@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli'
 import * as dotenv from 'dotenv'
 
 // Load build options from .env file
-dotenv.config()
+dotenv.config({ quiet: true })
 
 const config: CapacitorConfig = {
   // android: uh.fallingfruit.app
