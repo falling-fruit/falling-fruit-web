@@ -164,7 +164,7 @@ const Project = () => {
         <p>
           <b>Alan Gibson</b>
           <br />
-          Southampton, United Kingdom
+          Southampton, England, United Kingdom
           <br />
           <br />
           {renderHTML(t('pages.about.alan_gibson_bio_html'))}
@@ -219,7 +219,7 @@ const Project = () => {
         <p>
           <b>Tristram Stuart</b>
           <br />
-          United Kingdom
+          Wych Cross, England, United Kingdom
           <br />
           <br />
           {renderHTML(t('pages.about.tristram_stuart_bio_html'))}
