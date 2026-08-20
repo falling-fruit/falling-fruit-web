@@ -1,8 +1,4 @@
-import {
-  Camera as CapacitorCamera,
-  CameraResultType,
-  CameraSource,
-} from '@capacitor/camera'
+import { Camera as CapacitorCamera } from '@capacitor/camera'
 import { Camera, Images } from '@styled-icons/boxicons-regular'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -54,20 +50,26 @@ export const AddPhotosCapacitor = ({ onAddPhotos }) => {
   const pendingPhotoId = useRef(0)
   const { t } = useTranslation()
 
-  const handlePhoto = async (source) => {
+  const handlePhoto = async (method) => {
     try {
-      const image = await CapacitorCamera.getPhoto({
+      const result = await method({
         quality: JPEG_QUALITY * 100,
-        allowEditing: false,
-        resultType: CameraResultType.Uri,
-        source: source,
+        editable: 'no',
         saveToGallery: true,
-        width: PHOTO_MAX_DIMENSION,
-        height: PHOTO_MAX_DIMENSION,
+        targetWidth: PHOTO_MAX_DIMENSION,
+        targetHeight: PHOTO_MAX_DIMENSION,
+        includeMetadata: true,
       })
 
+      let image
+      if ('results' in result) {
+        image = result.results[0]
+      } else {
+        image = result
+      }
+
       pendingPhotoId.current--
-      const fileName = image.path.split('/').pop()
+      const fileName = image.webPath.split('/').pop()
 
       const newPhoto = {
         id: pendingPhotoId.current,
@@ -107,11 +109,11 @@ export const AddPhotosCapacitor = ({ onAddPhotos }) => {
   }
 
   const takePicture = async () => {
-    await handlePhoto(CameraSource.Camera)
+    await handlePhoto(CapacitorCamera.takePhoto)
   }
 
   const selectFromGallery = async () => {
-    await handlePhoto(CameraSource.Photos)
+    await handlePhoto(CapacitorCamera.chooseFromGallery)
   }
 
   return (
