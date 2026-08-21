@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Är du säker på att du vill ta bort denna plats?",
-    "delete_review": "Är du säker på att du vill ta bort denna recension?"
+    "delete_review": "Är du säker på att du vill ta bort denna recension?",
+    "mark_as_verified": "Markera denna plats som verifierad?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "Över {{yearsAgo}} år sedan",
       "report_comment_placeholder_no_longer_exists": "Finns inte längre",
       "report_no_longer_exists": "Rapportera att den inte längre finns",
-      "review_comment_placeholder_still_exists": "Finns fortfarande där!"
+      "review_comment_placeholder_still_exists": "Finns fortfarande där!",
+      "unverified_edit_position": "Redigera position",
+      "unverified_edit_types": "Redigera typer",
+      "unverified_mark_as_verified": "Markera som verifierad",
+      "unverified_may_be_inaccurate": "Overifierad - Kan vara felaktig",
+      "unverified_report_does_not_exist": "Rapportera att den inte finns"
     },
     "index": {
       "editmarker": "Flytta till källans position."
@@ -228,8 +234,8 @@
         "in_season": "I säsong från {{start_month}} till {{stop_month}}",
         "year_round": "Året runt"
       },
-      "title": "Översikt",
-      "street_view_unavailable": "Gatuvy är inte tillgängligt nära denna plats"
+      "street_view_unavailable": "Gatuvy är inte tillgängligt nära denna plats",
+      "title": "Översikt"
     }
   },
   "menu": {

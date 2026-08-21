@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Bu konumu silmek istediğinizden emin misiniz?",
-    "delete_review": "Bu değerlendirmeyi silmek istediğinizden emin misiniz?"
+    "delete_review": "Bu değerlendirmeyi silmek istediğinizden emin misiniz?",
+    "mark_as_verified": "Bu konumu doğrulanmış olarak işaretle?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "{{yearsAgo}} yıldan fazla önce",
       "report_comment_placeholder_no_longer_exists": "Artık var olmadığını bildir",
       "report_no_longer_exists": "Artık var olmadığını bildir",
-      "review_comment_placeholder_still_exists": "Hâlâ orada!"
+      "review_comment_placeholder_still_exists": "Hâlâ orada!",
+      "unverified_edit_position": "Konumu düzenle",
+      "unverified_edit_types": "Türleri düzenle",
+      "unverified_mark_as_verified": "Doğrulanmış olarak işaretle",
+      "unverified_may_be_inaccurate": "Doğrulanmamış - Yanlış olabilir",
+      "unverified_report_does_not_exist": "Mevcut olmadığını bildir"
     },
     "index": {
       "editmarker": "Kaynağın konumuna gidin."
@@ -228,8 +234,8 @@
         "in_season": "{{start_month}} ile {{stop_month}} arasında mevsiminde",
         "year_round": "Yıl Boyu"
       },
-      "title": "Genel Bakış",
-      "street_view_unavailable": "Bu konum yakınında Sokak Görünümü mevcut değil"
+      "street_view_unavailable": "Bu konum yakınında Sokak Görünümü mevcut değil",
+      "title": "Genel Bakış"
     }
   },
   "menu": {

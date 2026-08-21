@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Weet je zeker dat je deze locatie wilt verwijderen?",
-    "delete_review": "Weet je zeker dat je deze recensie wilt verwijderen?"
+    "delete_review": "Weet je zeker dat je deze recensie wilt verwijderen?",
+    "mark_as_verified": "Deze locatie als geverifieerd markeren?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "Meer dan {{yearsAgo}} jaar geleden",
       "report_comment_placeholder_no_longer_exists": "Bestaat niet meer",
       "report_no_longer_exists": "Meld dat het niet meer bestaat",
-      "review_comment_placeholder_still_exists": "Nog steeds daar!"
+      "review_comment_placeholder_still_exists": "Nog steeds daar!",
+      "unverified_edit_position": "Positie bewerken",
+      "unverified_edit_types": "Types bewerken",
+      "unverified_mark_as_verified": "Markeer als geverifieerd",
+      "unverified_may_be_inaccurate": "Niet-bevestigd - Kan onnauwkeurig zijn",
+      "unverified_report_does_not_exist": "Meld dat het niet bestaat"
     },
     "index": {
       "editmarker": "Ga naar de positie van de bron."
@@ -228,8 +234,8 @@
         "in_season": "In seizoen van {{start_month}} tot {{stop_month}}",
         "year_round": "Het hele jaar door"
       },
-      "title": "Overzicht",
-      "street_view_unavailable": "Street View niet beschikbaar in de buurt van deze locatie"
+      "street_view_unavailable": "Street View niet beschikbaar in de buurt van deze locatie",
+      "title": "Overzicht"
     }
   },
   "menu": {

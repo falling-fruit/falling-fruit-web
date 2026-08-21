@@ -22,6 +22,8 @@ import {
   AddSeasonStopHint,
   StaleLocationHintActions,
   StaleLocationHintToggle,
+  UnverifiedHintActions,
+  UnverifiedHintToggle,
 } from './overview/Hints'
 import { ReportButton } from './overview/ReportButton'
 import SaveToListButton from './overview/SaveToListButton'
@@ -264,6 +266,7 @@ const EntryOverview = () => {
   } = useLocationPane()
 
   const containerRef = useRef(null)
+  const [unverifiedExpanded, setUnverifiedExpanded] = useState(false)
 
   if (!locationData) {
     return null
@@ -306,6 +309,15 @@ const EntryOverview = () => {
     <OverviewContainer ref={containerRef}>
       <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
       <Tags locationData={locationData} />
+      {locationData.unverified && (
+        <UnverifiedHintToggle
+          expanded={unverifiedExpanded}
+          onToggle={() => setUnverifiedExpanded((prev) => !prev)}
+        />
+      )}
+      {locationData.unverified && unverifiedExpanded && (
+        <UnverifiedHintActions locationData={locationData} />
+      )}
       <Description>
         <p dir="auto">
           {locationData.description || (

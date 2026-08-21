@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "האם אתה בטוח שברצונך למחוק מיקום זה?",
-    "delete_review": "האם אתה בטוח שברצונך למחוק ביקורת זו?"
+    "delete_review": "האם אתה בטוח שברצונך למחוק ביקורת זו?",
+    "mark_as_verified": "לסמן מיקום זה כמאומת?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "לפני יותר מ-{{yearsAgo}} שנים",
       "report_comment_placeholder_no_longer_exists": "לא קיים יותר",
       "report_no_longer_exists": "דווח שלא קיים יותר",
-      "review_comment_placeholder_still_exists": "עדיין שם!"
+      "review_comment_placeholder_still_exists": "עדיין שם!",
+      "unverified_edit_position": "ערוך מיקום",
+      "unverified_edit_types": "ערוך סוגים",
+      "unverified_mark_as_verified": "סמן כמאומת",
+      "unverified_may_be_inaccurate": "לא מאומת - עלול להיות לא מדויק",
+      "unverified_report_does_not_exist": "דווח שלא קיים"
     },
     "index": {
       "editmarker": "עברו למיקום המקור."
@@ -228,8 +234,8 @@
         "in_season": "בעונה מ {{start_month}} עד {{stop_month}}",
         "year_round": "כל השנה"
       },
-      "title": "סקירה",
-      "street_view_unavailable": "תצוגת רחוב אינה זמינה בקרבת מיקום זה"
+      "street_view_unavailable": "תצוגת רחוב אינה זמינה בקרבת מיקום זה",
+      "title": "סקירה"
     }
   },
   "menu": {
