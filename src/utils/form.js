@@ -69,6 +69,26 @@ export const formToLocation = ({
   lng,
 })
 
+export const locationToApiValues = ({
+  type_ids,
+  description,
+  season_start,
+  season_stop,
+  access,
+  unverified,
+  lat,
+  lng,
+}) => ({
+  type_ids,
+  description,
+  season_start: season_start ?? null,
+  season_stop: season_stop ?? null,
+  access: access ?? null,
+  unverified,
+  lat,
+  lng,
+})
+
 export const locationToForm = (
   { type_ids, description, season_start, season_stop, access, unverified },
   typesAccess,

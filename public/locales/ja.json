@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "この場所を削除してもよろしいですか？",
-    "delete_review": "このレビューを削除してもよろしいですか？"
+    "delete_review": "このレビューを削除してもよろしいですか？",
+    "mark_as_verified": "この場所を確認済みとしてマークしますか？"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "{{yearsAgo}}年以上前",
       "report_comment_placeholder_no_longer_exists": "存在しなくなりました",
       "report_no_longer_exists": "存在しなくなったことを報告",
-      "review_comment_placeholder_still_exists": "まだあります！"
+      "review_comment_placeholder_still_exists": "まだあります！",
+      "unverified_edit_position": "位置を編集",
+      "unverified_edit_types": "種類を編集",
+      "unverified_mark_as_verified": "検証済みとしてマーク",
+      "unverified_may_be_inaccurate": "未確認 - 不正確な可能性があります",
+      "unverified_report_does_not_exist": "存在しないことを報告"
     },
     "index": {
       "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！",
@@ -229,8 +235,8 @@
         "in_season": "{{start_month}}から{{stop_month}}まで旬です",
         "year_round": "一年中"
       },
-      "title": "概要",
-      "street_view_unavailable": "この場所の近くにストリートビューはありません"
+      "street_view_unavailable": "この場所の近くにストリートビューはありません",
+      "title": "概要"
     }
   },
   "menu": {
