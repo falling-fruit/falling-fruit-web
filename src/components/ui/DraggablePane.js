@@ -220,8 +220,11 @@ const DraggablePane = ({
         const clickY = event.clientY
         const isAnotherLocation = event.target.tagName.toLowerCase() === 'img'
         const isAboveTopPosition = clickY < topPositionHeight
+        const isMapControl = event.target.closest(
+          '.gm-svpc, .gm-control-active, .gmnoprint',
+        )
 
-        if (!isAnotherLocation && !isAboveTopPosition) {
+        if (!isAnotherLocation && !isAboveTopPosition && !isMapControl) {
           event.stopPropagation()
           onPositionChange(POSITIONS.BOTTOM)
         }

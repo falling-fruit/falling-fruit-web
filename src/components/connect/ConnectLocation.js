@@ -14,7 +14,6 @@ import {
   initNewLocation,
   setFromSettings,
   setIsBeingEditedAndResetPosition,
-  setStreetView,
 } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
 import { currentPathWithView, viewFromCurrentUrl } from '../../utils/appUrl'
@@ -82,7 +81,6 @@ const ConnectLocation = ({
   locationId,
   isBeingEdited,
   isBeingEditedPosition,
-  isStreetView,
   isSuccessfullyAdded,
 }) => {
   const dispatch = useDispatch()
@@ -114,7 +112,6 @@ const ConnectLocation = ({
       fetchLocationData({
         locationId,
         isBeingEdited,
-        isStreetView,
         isFromEmbedViewMap: isEmbed,
       }),
     ).then((action) => {
@@ -171,10 +168,6 @@ const ConnectLocation = ({
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
   }, [dispatch, isBeingEdited])
 
-  useEffect(() => {
-    dispatch(setStreetView(isStreetView))
-  }, [dispatch, isStreetView])
-
   useEffect(
     () => () => {
       dispatch(setFromSettings(false))
@@ -193,8 +186,6 @@ const ConnectLocation = ({
       googleMap &&
       !hasCentered
     ) {
-      // On mobile, we need to center the map on the edited location
-      // because the UX involves panning the map under a central pin
       googleMap.setCenter(position)
       if (googleMap.getZoom() < 16) {
         googleMap.setZoom(16)
@@ -211,7 +202,6 @@ const ConnectLocation = ({
   ])
 
   useEffect(() => {
-    // Reset hasCentered when locationId changes
     setHasCentered(false)
   }, [locationId])
 

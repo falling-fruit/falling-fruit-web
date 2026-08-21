@@ -9,6 +9,7 @@ import listReducer from './listSlice'
 import locationReducer from './locationSlice'
 import mapReducer from './mapSlice'
 import miscReducer from './miscSlice'
+import panoramaReducer from './panoramaSlice'
 import placeReducer from './placeSlice'
 import reviewReducer from './reviewSlice'
 import saveReducer from './saveSlice'
@@ -25,6 +26,7 @@ export const store = configureStore({
     settings: settingsReducer,
     auth: authReducer,
     misc: miscReducer,
+    panorama: panoramaReducer,
     location: locationReducer,
     review: reviewReducer,
     share: shareReducer,

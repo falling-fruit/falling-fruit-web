@@ -28,6 +28,7 @@
       "add_location_list_failed": "Nepodařilo se přidat seznam lokalit: {{message}}",
       "add_location_to_list_failed": "Nepodařilo se přidat lokalitu do seznamu: {{message}}",
       "fetch_clusters_failed": "Chyba při načítání clusterů: {{message}}",
+      "fetch_filter_counts_failed": "Chyba při načítání počtů filtrů: {{message}}",
       "fetch_import_failed": "Chyba při načítání datasetu {{id}}: {{message}}",
       "fetch_location_changes_failed": "Načítání změn lokalit selhalo: {{message}}",
       "fetch_location_failed": "Chyba při načítání lokality {{id}}: {{message}}",
@@ -46,7 +47,6 @@
       "review_deletion_failed": "Smazání recenze se nezdařilo: {{message}}",
       "review_edit_failed": "Úprava recenze se nezdařila: {{message}}",
       "review_submission_failed": "Odeslání recenze se nezdařilo: {{message}}",
-      "street_view_unavailable": "Street View není k dispozici pro lokalitu {{id}}",
       "type_add_failed": "Přidání nového typu se nezdařilo: {{message}}"
     },
     "auth": {
@@ -178,7 +178,8 @@
       "fruiting_status": "Stav úrody",
       "position": "Poloha",
       "season": "Sezóna",
-      "season_start_to_stop_short": "do"
+      "season_start_to_stop_short": "do",
+      "street_view_position_warning": "Pozice ve Street View může být nepřesná. Ukončete Street View a před odesláním zkontrolujte pozici na mapě."
     },
     "hints": {
       "add_description": "Přidat popis",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Stále tam je!"
     },
     "index": {
-      "editmarker_html": "<b>Přesuňte na pozici zdroje.</b><br><br>Zkontrolujte satelitní zobrazení - zdroj může být viditelný z vesmíru!"
+      "editmarker_html": "<b>Přesuňte na pozici zdroje.</b><br><br>Zkontrolujte satelitní zobrazení - zdroj může být viditelný z vesmíru!",
+      "editmarker_streetview_html": "Přesuňte se na pozici zdroje."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "V sezóně od {{start_month}} do {{stop_month}}",
         "year_round": "Celoročně"
       },
-      "title": "Přehled"
+      "title": "Přehled",
+      "street_view_unavailable": "Street View není k dispozici poblíž této lokality"
     }
   },
   "menu": {

@@ -112,7 +112,6 @@ const connectRoutes = [
    * why:
    * - map marker for editing location position and location form need position info
    * - keep track of starting to edit a location
-   * - keep track of whether user wants street view
    * - on mobile, we need to center the map on the edited location because the UX involves panning the map on central pin
    * - on mobile, we need to disable the drawer when arriving from list view
    * - on mobile, the drawer needs the user scrolling up and down
@@ -148,7 +147,6 @@ const connectRoutes = [
           locationId={match.params.locationId}
           isBeingEdited={match.params.nextSegment === 'edit'}
           isBeingEditedPosition={match.params.nextNextSegment === 'position'}
-          isStreetView={match.params.nextSegment === 'panorama'}
           isSuccessfullyAdded={match.params.nextSegment === 'success'}
         />
       )
@@ -218,7 +216,6 @@ const connectRoutes = [
     {({ match }) =>
       match &&
       (!match.params.nextNextSegment ||
-        match.params.nextSegment === 'panorama' ||
         match.params.nextNextSegment === 'position') && <ConnectOverscroll />
     }
   </Route>,

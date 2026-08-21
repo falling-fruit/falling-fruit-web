@@ -28,6 +28,7 @@
       "add_location_list_failed": "ロケーションリストの追加に失敗しました: {{message}}",
       "add_location_to_list_failed": "リストへのロケーション追加に失敗しました: {{message}}",
       "fetch_clusters_failed": "クラスターの取得エラー: {{message}}",
+      "fetch_filter_counts_failed": "フィルターカウントの取得エラー: {{message}}",
       "fetch_import_failed": "データセット{{id}}の取得エラー: {{message}}",
       "fetch_location_changes_failed": "ロケーション変更の取得に失敗しました: {{message}}",
       "fetch_location_failed": "ロケーション{{id}}の取得エラー: {{message}}",
@@ -46,7 +47,6 @@
       "review_deletion_failed": "レビューの削除に失敗しました: {{message}}",
       "review_edit_failed": "レビューの編集に失敗しました: {{message}}",
       "review_submission_failed": "レビューの送信に失敗しました: {{message}}",
-      "street_view_unavailable": "ロケーション{{id}}のストリートビューは利用できません",
       "type_add_failed": "新しいタイプの追加に失敗しました: {{message}}"
     },
     "auth": {
@@ -178,7 +178,8 @@
       "fruiting_status": "結実状況",
       "position": "位置",
       "season": "季節",
-      "season_start_to_stop_short": "から"
+      "season_start_to_stop_short": "から",
+      "street_view_position_warning": "ストリートビューの位置は不正確な場合があります。送信する前にストリートビューを終了し、地図上で位置を確認してください。"
     },
     "hints": {
       "add_description": "説明を追加",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "まだあります！"
     },
     "index": {
-      "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！"
+      "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！",
+      "editmarker_streetview_html": "ソースの位置に移動してください。"
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "{{start_month}}から{{stop_month}}まで旬です",
         "year_round": "一年中"
       },
-      "title": "概要"
+      "title": "概要",
+      "street_view_unavailable": "この場所の近くにストリートビューはありません"
     }
   },
   "menu": {

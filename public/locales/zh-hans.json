@@ -28,6 +28,7 @@
       "add_location_list_failed": "添加位置列表失败：{{message}}",
       "add_location_to_list_failed": "添加位置到列表失败：{{message}}",
       "fetch_clusters_failed": "获取集群失败：{{message}}",
+      "fetch_filter_counts_failed": "获取筛选计数时出错：{{message}}",
       "fetch_import_failed": "获取数据集 {{id}} 失败：{{message}}",
       "fetch_location_changes_failed": "获取位置变更记录失败：{{message}}",
       "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
@@ -46,7 +47,6 @@
       "review_deletion_failed": "评价删除失败：{{message}}",
       "review_edit_failed": "评价编辑失败：{{message}}",
       "review_submission_failed": "评价提交失败：{{message}}",
-      "street_view_unavailable": "地点 {{id}} 暂无街景视图",
       "type_add_failed": "添加新类别失败：{{message}}"
     },
     "auth": {
@@ -178,7 +178,8 @@
       "fruiting_status": "结果状态",
       "position": "位置",
       "season": "采摘季节",
-      "season_start_to_stop_short": "至"
+      "season_start_to_stop_short": "至",
+      "street_view_position_warning": "街景视图的位置可能不准确。请退出街景视图并在地图上确认位置后再提交。"
     },
     "hints": {
       "add_description": "添加描述",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "还在那里！"
     },
     "index": {
-      "editmarker_html": "<b>拖动到确切位置。</b><br><br>建议切换到卫星视图——有时可以从空中直接看到果树！"
+      "editmarker_html": "<b>拖动到确切位置。</b><br><br>建议切换到卫星视图——有时可以从空中直接看到果树！",
+      "editmarker_streetview_html": "移动到来源的位置。"
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "采摘期：{{start_month}} 至 {{stop_month}}",
         "year_round": "全年"
       },
-      "title": "概览"
+      "title": "概览",
+      "street_view_unavailable": "此地点附近暂无街景视图"
     }
   },
   "menu": {

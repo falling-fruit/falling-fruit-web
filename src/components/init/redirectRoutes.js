@@ -62,6 +62,11 @@ const HomeRedirect = () => {
   }
 }
 
+const PanoramaRedirect = () => {
+  const { locationId } = useParams()
+  return <Redirect to={pathWithCurrentView(`/locations/${locationId}`)} />
+}
+
 const redirects = [
   {
     path: '/',
@@ -139,6 +144,10 @@ const redirects = [
     component: () => (
       <Redirect to={pathWithCurrentView('/account/change-email')} />
     ),
+  },
+  {
+    path: '/locations/:locationId([0-9]+)/panorama',
+    component: PanoramaRedirect,
   },
   {
     path: ['/home', '/locations/home', '/routes', '/routes/:routeId'],

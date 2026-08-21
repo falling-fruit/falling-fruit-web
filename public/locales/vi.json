@@ -28,6 +28,7 @@
       "add_location_list_failed": "Thêm danh sách vị trí thất bại: {{message}}",
       "add_location_to_list_failed": "Thêm vị trí vào danh sách thất bại: {{message}}",
       "fetch_clusters_failed": "Lỗi khi tải cụm: {{message}}",
+      "fetch_filter_counts_failed": "Lỗi khi tải số lượng bộ lọc: {{message}}",
       "fetch_import_failed": "Lỗi khi tải tập dữ liệu {{id}}: {{message}}",
       "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
       "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
@@ -46,7 +47,6 @@
       "review_deletion_failed": "Xóa đánh giá thất bại: {{message}}",
       "review_edit_failed": "Chỉnh sửa đánh giá thất bại: {{message}}",
       "review_submission_failed": "Gửi đánh giá thất bại: {{message}}",
-      "street_view_unavailable": "Street View không khả dụng cho vị trí {{id}}",
       "type_add_failed": "Thêm loại mới thất bại: {{message}}"
     },
     "auth": {
@@ -178,7 +178,8 @@
       "fruiting_status": "Tình trạng đậu quả",
       "position": "Vị trí",
       "season": "Mùa",
-      "season_start_to_stop_short": "đến"
+      "season_start_to_stop_short": "đến",
+      "street_view_position_warning": "Vị trí Street View có thể không chính xác. Thoát khỏi Street View và kiểm tra vị trí trên bản đồ trước khi gửi."
     },
     "hints": {
       "add_description": "Thêm mô tả",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Vẫn còn đó!"
     },
     "index": {
-      "editmarker_html": "<b>Di chuyển đến vị trí của nguồn.</b><br><br>Kiểm tra chế độ xem vệ tinh - nguồn có thể được nhìn thấy từ không gian!"
+      "editmarker_html": "<b>Di chuyển đến vị trí của nguồn.</b><br><br>Kiểm tra chế độ xem vệ tinh - nguồn có thể được nhìn thấy từ không gian!",
+      "editmarker_streetview_html": "Di chuyển đến vị trí của nguồn."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "Trong mùa từ {{start_month}} đến {{stop_month}}",
         "year_round": "Quanh năm"
       },
-      "title": "Tổng quan"
+      "title": "Tổng quan",
+      "street_view_unavailable": "Street View không khả dụng gần vị trí này"
     }
   },
   "menu": {

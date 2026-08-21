@@ -28,6 +28,7 @@
       "add_location_list_failed": "Misslyckades med att lägga till platslista: {{message}}",
       "add_location_to_list_failed": "Misslyckades med att lägga till plats i lista: {{message}}",
       "fetch_clusters_failed": "Fel vid hämtning av kluster: {{message}}",
+      "fetch_filter_counts_failed": "Fel vid hämtning av filterantal: {{message}}",
       "fetch_import_failed": "Fel vid hämtning av datamängd {{id}}: {{message}}",
       "fetch_location_changes_failed": "Hämtning av platsändringar misslyckades: {{message}}",
       "fetch_location_failed": "Fel vid hämtning av plats {{id}}: {{message}}",
@@ -46,7 +47,6 @@
       "review_deletion_failed": "Borttagning av recension misslyckades: {{message}}",
       "review_edit_failed": "Redigering av recension misslyckades: {{message}}",
       "review_submission_failed": "Inlämning av recension misslyckades: {{message}}",
-      "street_view_unavailable": "Gatuvy är inte tillgängligt för plats {{id}}",
       "type_add_failed": "Tillägg av ny typ misslyckades: {{message}}"
     },
     "auth": {
@@ -178,7 +178,8 @@
       "fruiting_status": "Fruktstatus",
       "position": "Position",
       "season": "Säsong",
-      "season_start_to_stop_short": "till"
+      "season_start_to_stop_short": "till",
+      "street_view_position_warning": "Street View-positioner kan vara oprecisa. Avsluta Street View och kontrollera positionen på kartan innan du skickar in."
     },
     "hints": {
       "add_description": "Lägg till beskrivning",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Finns fortfarande där!"
     },
     "index": {
-      "editmarker_html": "<b>Flytta till källans position.</b><br><br>Kontrollera satellitvy - källan kan vara synlig från rymden!"
+      "editmarker_html": "<b>Flytta till källans position.</b><br><br>Kontrollera satellitvy - källan kan vara synlig från rymden!",
+      "editmarker_streetview_html": "Flytta till källans position."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "I säsong från {{start_month}} till {{stop_month}}",
         "year_round": "Året runt"
       },
-      "title": "Översikt"
+      "title": "Översikt",
+      "street_view_unavailable": "Gatuvy är inte tillgängligt nära denna plats"
     }
   },
   "menu": {

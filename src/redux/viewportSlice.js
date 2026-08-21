@@ -15,7 +15,6 @@ const viewportSlice = createSlice({
        * height and width are set to zero when coming back from list or activity page
        * (if the API was previously loaded but map went off screen)
        */
-      // Hold on to the viewport dimensions so we can use it
       const view = {
         ...action.payload,
         height: action.payload.height || state.lastMapView?.height,

@@ -28,6 +28,7 @@
       "add_location_list_failed": "Fehler beim Hinzufügen der Standortliste: {{message}}",
       "add_location_to_list_failed": "Fehler beim Hinzufügen des Standorts zur Liste: {{message}}",
       "fetch_clusters_failed": "Fehler beim Abrufen der Cluster: {{message}}",
+      "fetch_filter_counts_failed": "Fehler beim Abrufen der Filterzähler: {{message}}",
       "fetch_import_failed": "Fehler beim Abrufen des Datensatzes {{id}}: {{message}}",
       "fetch_location_changes_failed": "Abrufen der Standortänderungen fehlgeschlagen: {{message}}",
       "fetch_location_failed": "Fehler beim Abrufen des Standorts {{id}}: {{message}}",
@@ -46,7 +47,6 @@
       "review_deletion_failed": "Löschen der Bewertung fehlgeschlagen: {{message}}",
       "review_edit_failed": "Bearbeitung der Bewertung fehlgeschlagen: {{message}}",
       "review_submission_failed": "Übermittlung der Bewertung fehlgeschlagen: {{message}}",
-      "street_view_unavailable": "Street View nicht verfügbar für Standort {{id}}",
       "type_add_failed": "Hinzufügen eines neuen Typs fehlgeschlagen: {{message}}"
     },
     "auth": {
@@ -178,7 +178,8 @@
       "fruiting_status": "Fruchtstand",
       "position": "Position",
       "season": "Saison",
-      "season_start_to_stop_short": "bis"
+      "season_start_to_stop_short": "bis",
+      "street_view_position_warning": "Street View-Positionen können ungenau sein. Verlassen Sie die Street View-Ansicht und überprüfen Sie die Position auf der Karte, bevor Sie absenden."
     },
     "hints": {
       "add_description": "Beschreibung hinzufügen",
@@ -191,7 +192,8 @@
       "review_comment_placeholder_still_exists": "Immer noch da!"
     },
     "index": {
-      "editmarker_html": "<b>Gehe zum Standort dieser Quelle.</b><br><br>Satellitenansicht betrachten - der Standort könnte aus dem All sichtbar sein!"
+      "editmarker_html": "<b>Gehe zum Standort dieser Quelle.</b><br><br>Satellitenansicht betrachten - der Standort könnte aus dem All sichtbar sein!",
+      "editmarker_streetview_html": "Bewegen Sie sich zur Position der Quelle."
     },
     "infowindow": {
       "access_mode": [
@@ -227,7 +229,8 @@
         "in_season": "Saison von {{start_month}} bis {{stop_month}}",
         "year_round": "Ganzjährig"
       },
-      "title": "Übersicht"
+      "title": "Übersicht",
+      "street_view_unavailable": "Street View nicht verfügbar in der Nähe dieses Standorts"
     }
   },
   "menu": {
