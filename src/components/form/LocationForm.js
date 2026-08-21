@@ -3,7 +3,7 @@ import { ErrorMessage, Form, Formik, useFormikContext } from 'formik'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { INITIAL_LOCATION_VALUES } from '../../constants/form'
@@ -33,6 +33,7 @@ import { Checkbox, Recaptcha, Select, Textarea } from './FormikWrappers'
 import { StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
 import { ReviewStep } from './ReviewForm'
+import SetInitialValue from './SetInitialValue'
 import TypesSelect from './TypesSelect'
 
 const StyledPositionFieldLink = styled(Link)`
@@ -256,6 +257,7 @@ const validateLocationForm = ({ review, ...location }, isLoggedIn) => {
 export const LocationForm = ({ editingId, innerRef }) => {
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
+  const routeLocation = useLocation()
 
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -356,6 +358,12 @@ export const LocationForm = ({ editingId, innerRef }) => {
 
           return (
             <Form>
+              {routeLocation.state?.setValues &&
+                Object.entries(routeLocation.state.setValues).map(
+                  ([name, value]) => (
+                    <SetInitialValue key={name} name={name} value={value} />
+                  ),
+                )}
               <LocationStep
                 lat={position?.lat}
                 lng={position?.lng}

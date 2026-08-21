@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 import argparse
+import json
 import logging
+import sys
 from pathlib import Path
 
-from pathlib import Path
 from lib.source_dir import SourceDirectory
 from lib.translation import Translation
 from lib.tap_stream import TapStream
-from lib.translation_filler import fill_up_translation
+
+try:
+    from lib.translation_filler import fill_up_translation
+except ImportError:
+    fill_up_translation = None
 
 logger = logging.getLogger(__name__)
 
@@ -188,8 +193,41 @@ class TranslationManager:
         tap = TapStream()
         tap.check_translations_tap(all_keys, key_to_files, translations, languages)
 
+    def insert_keys(self, translations_by_lang: dict):
+        """Insert translation keys from a dict of {lang: {dotted_key: value}}.
+
+        Each language's JSON file is loaded as a Translation object, keys are
+        set via translation.set(), and the file is saved back with
+        translation.save_as_json().
+
+        Args:
+            translations_by_lang: dict mapping language codes to dicts of
+                {dotted_key: value}, e.g.
+                {"en": {"locations.hints.my_key": "My value"}, "fr": {...}}
+        """
+        if not self.json_folder_path or not self.json_folder_path.exists():
+            logger.error("JSON folder does not exist.")
+            return
+
+        for lang, keys_dict in translations_by_lang.items():
+            json_file = self.json_folder_path / f"{lang}.json"
+            if not json_file.exists():
+                logger.warning(f"Locale file not found, creating: {json_file.name}")
+
+            translation = Translation.from_json_file(json_file)
+
+            for key, value in keys_dict.items():
+                translation.set(key, value)
+
+            translation.save_as_json(json_file)
+            logger.info(f"{json_file.name}: Inserted {len(keys_dict)} key(s)")
+
     def fill_up_translations(self):
         """Fill up missing translations in all language files using English as source"""
+        if fill_up_translation is None:
+            logger.error("Cannot fill translations: 'anthropic' package is not installed. Run: pip install anthropic")
+            return
+
         if not self.json_folder_path or not self.json_folder_path.exists():
             logger.error("JSON folder does not exist.")
             return
@@ -240,6 +278,8 @@ def main():
                         help="Remove keys from JSON files that don't exist in source files")
     parser.add_argument("--fill-up-translations", action="store_true",
                         help="Fill up missing translations in all language files using English as source")
+    parser.add_argument("--insert-keys", metavar="JSON_FILE",
+                        help="Insert translation keys from a JSON file. Format: {lang: {dotted_key: value}}. Use '-' for stdin.")
     parser.add_argument("--log-level", default="INFO",
                         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                         help="Set the logging level (default: INFO)")
@@ -303,9 +343,18 @@ def main():
     if args.fill_up_translations:
         manager.fill_up_translations()
 
+    if args.insert_keys:
+        if args.insert_keys == '-':
+            data = json.loads(sys.stdin.read())
+        else:
+            with open(args.insert_keys, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        manager.insert_keys(data)
+
     if not (args.rename_key or args.list_in_source or args.list_in_json or
-            args.check_translations or args.remove_orphan_keys or args.fill_up_translations):
-        logger.warning("No action specified. Use --rename_key {old_key} {new_key}, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys, --fill-up-translations.")
+            args.check_translations or args.remove_orphan_keys or args.fill_up_translations or
+            args.insert_keys):
+        logger.warning("No action specified. Use --rename_key {old_key} {new_key}, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys, --fill-up-translations, --insert-keys.")
         parser.print_help()
 
 if __name__ == "__main__":

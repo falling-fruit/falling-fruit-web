@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "هل أنت متأكد أنك تريد حذف هذا الموقع؟",
-    "delete_review": "هل أنت متأكد أنك تريد حذف هذا التقييم؟"
+    "delete_review": "هل أنت متأكد أنك تريد حذف هذا التقييم؟",
+    "mark_as_verified": "هل تريد تحديد هذا الموقع كموثق؟"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "منذ أكثر من {{yearsAgo}} سنة",
       "report_comment_placeholder_no_longer_exists": "لم يعد موجودًا",
       "report_no_longer_exists": "الإبلاغ عن عدم وجوده",
-      "review_comment_placeholder_still_exists": "لا يزال موجودًا!"
+      "review_comment_placeholder_still_exists": "لا يزال موجودًا!",
+      "unverified_edit_position": "تعديل الموقع",
+      "unverified_edit_types": "تعديل الأنواع",
+      "unverified_mark_as_verified": "وضع علامة كمتحقق",
+      "unverified_may_be_inaccurate": "لم يتم التحقق - قد يكون غير دقيق",
+      "unverified_report_does_not_exist": "الإبلاغ عن عدم وجوده"
     },
     "index": {
       "editmarker_html": "<b>انتقل إلى موضع المصدر.</b><br>تحقق من عرض القمر الصناعي - قد يكون المصدر مرئيًا من الفضاء!",
@@ -229,8 +235,8 @@
         "in_season": "في الموسم من {{start_month}} إلى {{stop_month}}",
         "year_round": "على مدار السنة"
       },
-      "title": "نظرة عامة",
-      "street_view_unavailable": "خدمة Street View غير متوفرة بالقرب من هذا الموقع"
+      "street_view_unavailable": "خدمة Street View غير متوفرة بالقرب من هذا الموقع",
+      "title": "نظرة عامة"
     }
   },
   "menu": {

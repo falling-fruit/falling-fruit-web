@@ -1,7 +1,10 @@
 import { ChevronDown, ChevronUp } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { editExistingLocation } from '../../../redux/locationSlice'
+import { locationToApiValues } from '../../../utils/form'
 import { useAppHistory } from '../../../utils/useAppHistory'
 import ResetButton from '../../ui/ResetButton'
 import useLocationPane from '../useLocationPane'
@@ -167,6 +170,83 @@ export const StaleLocationHintActions = ({ locationData }) => {
         }}
       >
         {t('locations.hints.report_no_longer_exists')}
+      </HintAction>
+    </ExistenceActionsContainer>
+  )
+}
+
+export const UnverifiedHintToggle = ({ expanded, onToggle }) => {
+  const { t } = useTranslation()
+  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+
+  return (
+    <OldLabelInline
+      onClick={(e) => {
+        e.stopPropagation()
+        fullyOpenPaneDrawerIfMobile()
+        onToggle()
+      }}
+      role="button"
+      aria-expanded={expanded}
+    >
+      {t('locations.hints.unverified_may_be_inaccurate')}
+      {expanded ? <ChevronUp size="1em" /> : <ChevronDown size="1em" />}
+    </OldLabelInline>
+  )
+}
+
+export const UnverifiedHintActions = ({ locationData }) => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const history = useAppHistory()
+  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+
+  return (
+    <ExistenceActionsContainer>
+      <HintAction
+        onClick={() => {
+          if (confirm(t('confirm_message.mark_as_verified'))) {
+            dispatch(
+              editExistingLocation({
+                locationId: locationData.id,
+                locationValues: locationToApiValues({
+                  ...locationData,
+                  unverified: false,
+                }),
+              }),
+            )
+          }
+        }}
+      >
+        {t('locations.hints.unverified_mark_as_verified')}
+      </HintAction>
+      <HintAction
+        onClick={() => {
+          fullyOpenPaneDrawerIfMobile()
+          history.push(`/locations/${locationData.id}/edit/position`)
+        }}
+      >
+        {t('locations.hints.unverified_edit_position')}
+      </HintAction>
+      <HintAction
+        onClick={() => {
+          fullyOpenPaneDrawerIfMobile()
+          history.push(`/locations/${locationData.id}/edit`, {
+            focus: 'types',
+          })
+        }}
+      >
+        {t('locations.hints.unverified_edit_types')}
+      </HintAction>
+      <HintAction
+        onClick={() => {
+          fullyOpenPaneDrawerIfMobile()
+          history.addParam('report', 'true', {
+            problem_code: 1,
+          })
+        }}
+      >
+        {t('locations.hints.unverified_report_does_not_exist')}
       </HintAction>
     </ExistenceActionsContainer>
   )

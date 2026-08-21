@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "确定要删除此地点吗？",
-    "delete_review": "确定要删除此评价吗？"
+    "delete_review": "确定要删除此评价吗？",
+    "mark_as_verified": "将此位置标记为已验证？"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
       "report_no_longer_exists": "报告不再存在",
-      "review_comment_placeholder_still_exists": "还在那里！"
+      "review_comment_placeholder_still_exists": "还在那里！",
+      "unverified_edit_position": "编辑位置",
+      "unverified_edit_types": "编辑类型",
+      "unverified_mark_as_verified": "标记为已验证",
+      "unverified_may_be_inaccurate": "未验证 - 可能不准确",
+      "unverified_report_does_not_exist": "报告不存在"
     },
     "index": {
       "editmarker_html": "<b>拖动到确切位置。</b><br><br>建议切换到卫星视图——有时可以从空中直接看到果树！",
@@ -229,8 +235,8 @@
         "in_season": "采摘期：{{start_month}} 至 {{stop_month}}",
         "year_round": "全年"
       },
-      "title": "概览",
-      "street_view_unavailable": "此地点附近暂无街景视图"
+      "street_view_unavailable": "此地点附近暂无街景视图",
+      "title": "概览"
     }
   },
   "menu": {

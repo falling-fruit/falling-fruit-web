@@ -49,14 +49,6 @@ const EntryTags = ({ locationData }) => {
             t('locations.infowindow.access_short.4')}
         </Tag>
       )}
-      {locationData.unverified && (
-        <Tag
-          color={theme.tag.unverified}
-          backgroundColor={theme.transparentPink}
-        >
-          {t('glossary.unverified')}
-        </Tag>
-      )}
     </TagList>
   )
 }
