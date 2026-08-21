@@ -60,7 +60,7 @@ const Project = () => {
       <div className="content">
         <img src="/ethan_welty.jpg" alt="" />
         <p>
-          <em>Executive Director</em>
+          <em>{t('pages.about.executive_director')}</em>
           <br />
           <b>Ethan Welty</b>
           <br />
@@ -72,12 +72,25 @@ const Project = () => {
           {renderHTML(t('pages.about.ethan_welty_bio_html'))}
         </p>
       </div>
+      <div className="content">
+        <img src="/wojtek_bazant.jpg" alt="" />
+        <p>
+          <em>{t('pages.about.technical_director')}</em>
+          <br />
+          <b>Wojtek Bazant</b>
+          <br />
+          <a href="mailto:wojtek@fallingfruit.org">wojtek@fallingfruit.org</a>
+          <br />
+          Glasgow, Scotland, United Kingdom
+          <br />
+          <br />
+          {renderHTML(t('pages.about.wojtek_bazant_bio_html'))}
+        </p>
+      </div>
       <h2>{t('pages.about.directors')}</h2>
       <div className="content">
         <img src="/jeff_wanner.jpg" alt="" />
         <p>
-          <em>President</em>
-          <br />
           <b>Jeff Wanner</b>
           <br />
           <a href="mailto:jeff@fallingfruit.org">jeff@fallingfruit.org</a>
@@ -166,7 +179,7 @@ const Project = () => {
         <p>
           <b>Alan Gibson</b>
           <br />
-          Southampton, United Kingdom
+          Southampton, England, United Kingdom
           <br />
           <br />
           {renderHTML(t('pages.about.alan_gibson_bio_html'))}
@@ -221,7 +234,7 @@ const Project = () => {
         <p>
           <b>Tristram Stuart</b>
           <br />
-          United Kingdom
+          Wych Cross, England, United Kingdom
           <br />
           <br />
           {renderHTML(t('pages.about.tristram_stuart_bio_html'))}

@@ -273,6 +273,7 @@
       "directors": "董事會",
       "donate": "捐贈",
       "ethan_welty_bio_html": "憑藉技術和數據，Ethan 支持將城市作爲新鮮和免費食物的來源。他於 2013 年與 Caleb Phillips 創建了 Falling Fruit，以促進全球城市覓食，並<a href=\"https://fruitrescue.org\">於 2014 年共同創立了 Community Fruit Rescue</a> ，以收穫和分發他在科羅拉多州博爾德周圍生長的剩餘水果。除了水果，他還要兼顧<a href=\"https://www.weltyphotography.com\">攝影事業</a>、<a href=\"https://instaar.colorado.edu/people/ethan-welty/\">冰川研究</a>以及對山區和河流的追求。",
+      "executive_director": "執行董事",
       "ff_disclaimer_html": "落果與落果無關。 Fallen Fruit 可以在<a href=\"http://fallenfruit.org\">fallfruit.org</a>上找到。",
       "give_us_money": "我們是一家 501(c)(3) 非營利組織，依靠捐款運營。如果您願意並且有能力，請考慮做出經濟貢獻。在美國境內的捐款可以免稅。",
       "give_zeffy": "通過 Zeffy 捐贈",
@@ -282,11 +283,13 @@
       "meagan_shelley_bio_html": "Meagan 是一位企業主和博士候選人，居住在維吉尼亞州中部。她是一名經過認證的<a href=\"https://vmga.net\">園藝大師</a>，住在一個 10 英畝的家園，種植水果、堅果和蔬菜，以及飼養雞、鵪鶉和兔子。她的目標是實踐閉環農業，這是一項持續進行的工作。與此同時，她努力覓食、種植和交換大約 20-30% 的年度食物供應。",
       "more_about_html": "我們的可食用地圖並非同類地圖中的首創,但它渴望成為世界上最全面的地圖。當我們的用戶貢獻他們自己的位置時,我們會在互聯網上梳理已有的知識,力求將各地的覓食者、林務員和自由主義者的努力聯合起來。<a href=\"/about/data\">導入的數據集</a>範圍從小型社區覓食地圖到大量專業編制的樹木清單。到目前為止,這相當於數百萬位置的數千種不同類型的食物(大多數,但不是全部,植物物種)。除了外來植物和被遺忘已久的本地植物的異國風味的栽培和常見之外,在您的社區覓食是一次穿越時間和跨文化的旅程。",
       "staff": "職員",
+      "technical_director": "技術總監",
       "translate": "翻譯",
       "translate_for_us_html": "有興趣志願擔任翻譯嗎？給我們發電子郵件，我們會邀請您加入我們的<a href=\"https://phrase.com\">Phrase</a> ，我們的翻譯在那裏管理。",
       "translators": "翻譯員",
       "tristram_stuart_bio_html": "十幾歲的時候，崔斯特瑞姆靠從學校廚房、當地麪包師和鄉村蔬菜水果商那裏收集的剩餘食物養豬。注意到這些食物中有很多仍然適合人類食用，這讓他意識到優質的新鮮食物正在被大規模浪費。自那以後，崔斯特瑞姆一直在不知疲倦地工作，以引起公衆、媒體和政策制定者的注意。他創立了食物浪費運動組織“<a href=\"//feedbackglobal.org\">反饋全球”，</a>並撰寫了《<a href=\"//tristramstuart.co.uk/\">浪費：揭開全球食物醜聞》</a>以在全球範圍內展示問題的嚴重程度。 2011 年，崔斯特瑞姆因與食物浪費作鬥爭<a href=\"//www.sofieprisen.no/Prize_Winners/2011/index.html\">而獲得蘇菲獎。</a>",
       "ward_bullard_bio_html": "Ward 是 31st Ventures 的合夥人，這是一家戰略諮詢公司。他最初是通過在 <a href=\"https://designforamerica.org\">Design for America</a> 的工作接觸到 Falling Fruit 的，在那裡他領導了兩個組織之間的合作。作為所有水果（特別是鄰里柿子）的愛好者，Ward 參與了多項設計和技術計劃，以解決美國各地新鮮水果沙漠的問題，並很高興為 Falling Fruit 的工作做出貢獻。",
+      "wojtek_bazant_bio_html": "Wojtek 在波蘭鄉村長大。他欣賞蘇格蘭家附近的公園，因為那裡同樣有豐富的黑莓和蘋果樹，其中一些據稱是他種植的。Wojtek 在一家諮詢公司擔任軟體工程師，並倡導 Falling Fruit 作為人們分享和聯繫覓食的地方，而不會淪為廣告商的受眾。",
       "write": "寫"
     },
     "changes": {
