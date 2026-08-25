@@ -12,9 +12,10 @@ const ConnectNewLocation = () => {
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
   const { initialView } = useSelector((state) => state.map)
-  const { locationId, position: existingPosition } = useSelector(
+  const { locationId, position: positionInRedux } = useSelector(
     (state) => state.location,
   )
+  const locationIdNullInRedux = locationId === null
 
   const hasInitialView = !!initialView
   useEffect(() => {
@@ -29,11 +30,8 @@ const ConnectNewLocation = () => {
           }),
         )
       }
-      if (locationId !== 'new') {
-        // On mobile, preserve the position from the draggable marker if already set
-        const positionToUse =
-          !isDesktop && existingPosition ? existingPosition : view.center
-        dispatch(initNewLocation(positionToUse))
+      if (locationIdNullInRedux) {
+        dispatch(initNewLocation(positionInRedux || view.center))
       }
     } else {
       // Should only happen for an artificially constructed URL
