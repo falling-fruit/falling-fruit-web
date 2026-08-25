@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Nog steeds daar!"
     },
     "index": {
-      "editmarker_html": "<b>Verplaats naar de bronlocatie.</b><br><br>Gebruik de satellietweergave - er bestaat een kans dat de bron zichtbaar is vanuit de ruimte!",
-      "editmarker_streetview_html": "Ga naar de positie van de bron."
+      "editmarker": "Ga naar de positie van de bron."
     },
     "infowindow": {
       "access_mode": [

@@ -140,6 +140,9 @@ const locationSlice = createSlice({
     },
     setIsBeingInitializedMobile: (state, action) => {
       state.isBeingInitializedMobile = action.payload
+      if (action.payload) {
+        state.tooltipOpen = true
+      }
     },
   },
   extraReducers: {

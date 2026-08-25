@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Finns fortfarande där!"
     },
     "index": {
-      "editmarker_html": "<b>Flytta till källans position.</b><br><br>Kontrollera satellitvy - källan kan vara synlig från rymden!",
-      "editmarker_streetview_html": "Flytta till källans position."
+      "editmarker": "Flytta till källans position."
     },
     "infowindow": {
       "access_mode": [

@@ -25,10 +25,10 @@ const getDraggablePinIcon = (google, isAdding) => ({
   anchor: new google.Point(24, 44),
 })
 
-export const createTooltipOverlay = (google, map, position, html, onClose) => {
+export const createTooltipOverlay = (google, map, position, text, onClose) => {
   const overlay = new google.OverlayView()
   overlay._position = new google.LatLng(position.lat, position.lng)
-  overlay._html = html
+  overlay._text = text
   overlay._onClose = onClose
   overlay._div = null
 
@@ -58,6 +58,7 @@ export const createTooltipOverlay = (google, map, position, html, onClose) => {
     closeBtn.style.right = '4px'
     closeBtn.style.background = 'none'
     closeBtn.style.border = 'none'
+    closeBtn.style.color = theme.text
     closeBtn.style.cursor = 'pointer'
     closeBtn.style.padding = '2px'
     closeBtn.style.lineHeight = '1'
@@ -74,7 +75,7 @@ export const createTooltipOverlay = (google, map, position, html, onClose) => {
     const content = document.createElement('div')
     content.style.padding = '8px'
     content.setAttribute('dir', 'auto')
-    content.innerHTML = overlay._html
+    content.textContent = overlay._text
 
     // Arrow
     const arrow = document.createElement('div')

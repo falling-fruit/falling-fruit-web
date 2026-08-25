@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Всё ещё здесь!"
     },
     "index": {
-      "editmarker_html": "<b>Переместите в позицию источника.</b><br><br>Проверьте спутниковый вид - источник может быть виден из космоса!",
-      "editmarker_streetview_html": "Переместитесь к позиции источника."
+      "editmarker": "Переместитесь к позиции источника."
     },
     "infowindow": {
       "access_mode": [

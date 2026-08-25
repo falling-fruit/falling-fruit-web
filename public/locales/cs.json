@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Stále tam je!"
     },
     "index": {
-      "editmarker_html": "<b>Přesuňte na pozici zdroje.</b><br><br>Zkontrolujte satelitní zobrazení - zdroj může být viditelný z vesmíru!",
-      "editmarker_streetview_html": "Přesuňte se na pozici zdroje."
+      "editmarker": "Přesuňte se na pozici zdroje."
     },
     "infowindow": {
       "access_mode": [

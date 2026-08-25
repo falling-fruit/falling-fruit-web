@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "まだあります！"
     },
     "index": {
-      "editmarker_html": "<b>ソースの位置に移動してください。</b><br><br>衛星ビューを確認してください - ソースは宇宙から見えるかもしれません！",
-      "editmarker_streetview_html": "ソースの位置に移動してください。"
+      "editmarker": "ソースの位置に移動してください。"
     },
     "infowindow": {
       "access_mode": [

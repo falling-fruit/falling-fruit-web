@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Все ще тут!"
     },
     "index": {
-      "editmarker_html": "<b>Перемістіть до позиції джерела.</b><br><br>Перевірте супутниковий вигляд - джерело може бути видно з космосу!",
-      "editmarker_streetview_html": "Перемістіться до позиції джерела."
+      "editmarker": "Перемістіться до позиції джерела."
     },
     "infowindow": {
       "access_mode": [

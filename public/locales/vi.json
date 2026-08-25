@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Vẫn còn đó!"
     },
     "index": {
-      "editmarker_html": "<b>Di chuyển đến vị trí của nguồn.</b><br><br>Kiểm tra chế độ xem vệ tinh - nguồn có thể được nhìn thấy từ không gian!",
-      "editmarker_streetview_html": "Di chuyển đến vị trí của nguồn."
+      "editmarker": "Di chuyển đến vị trí của nguồn."
     },
     "infowindow": {
       "access_mode": [

@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
-import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { isTooClose } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
@@ -19,12 +18,11 @@ const InitLocationNav = () => {
   const { t } = useTranslation()
   const history = useAppHistory()
   const { locations } = useSelector((state) => state.map)
-  const { form, locationId } = useSelector((state) => state.location)
-  const view = viewFromCurrentUrl()
+  const { form, locationId, position } = useSelector((state) => state.location)
 
   const editingId = locationId === 'new' ? undefined : locationId
 
-  const tooClose = view ? isTooClose(view.center, locations, editingId) : false
+  const tooClose = position ? isTooClose(position, locations, editingId) : false
 
   const handleConfirmClick = () => {
     if (tooClose) {

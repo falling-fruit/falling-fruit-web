@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "还在那里！"
     },
     "index": {
-      "editmarker_html": "<b>拖动到确切位置。</b><br><br>建议切换到卫星视图——有时可以从空中直接看到果树！",
-      "editmarker_streetview_html": "移动到来源的位置。"
+      "editmarker": "移动到来源的位置。"
     },
     "infowindow": {
       "access_mode": [

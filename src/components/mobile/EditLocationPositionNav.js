@@ -8,7 +8,6 @@ import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
 import { isTooClose } from '../../utils/form'
-import { distanceInMeters } from '../../utils/mapDistance'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
 import IconButton from '../ui/IconButton'
@@ -23,42 +22,32 @@ const EditLocationPositionNav = () => {
   const history = useAppHistory()
   const dispatch = useDispatch()
   const { locationId } = useParams()
-  const { googleMap, locations } = useSelector((state) => state.map)
-  const { position: storedPosition } = useSelector((state) => state.location)
+  const { locations } = useSelector((state) => state.map)
+  const {
+    position: storedPosition,
+    location,
+    form,
+  } = useSelector((state) => state.location)
 
   const editingId = Number(locationId)
   const tooClose =
-    googleMap &&
-    isTooClose(googleMap.getCenter().toJSON(), locations, editingId)
+    storedPosition && isTooClose(storedPosition, locations, editingId)
 
   const handleCancel = () => {
-    if (storedPosition && googleMap) {
-      const currentCenter = googleMap.getCenter().toJSON()
-      const distanceMeters = distanceInMeters(
-        currentCenter.lat,
-        currentCenter.lng,
-        storedPosition.lat,
-        storedPosition.lng,
-      )
-
-      googleMap.setCenter(storedPosition)
-
-      if (distanceMeters > 1) {
-        // Wait half a second to let the user observe the edited position being undone
-        setTimeout(() => history.push(`/locations/${locationId}/edit`), 500)
-      } else {
-        history.push(`/locations/${locationId}/edit`)
-      }
-    } else {
-      history.push(`/locations/${locationId}/edit`)
+    // Revert to the position the user last set in the form
+    const revertPosition =
+      form?.position || (location && { lat: location.lat, lng: location.lng })
+    if (revertPosition) {
+      dispatch(updatePosition(revertPosition))
     }
+    history.push(`/locations/${locationId}/edit`)
   }
 
   const handleConfirm = () => {
     if (tooClose) {
       toast.warning(t('locations.init.position_too_close'))
     } else {
-      dispatch(updatePosition(googleMap?.getCenter().toJSON()))
+      // storedPosition already reflects the draggable marker's position via redux
       history.push(`/locations/${locationId}/edit`)
     }
   }

@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Still there!"
     },
     "index": {
-      "editmarker_html": "<b>Move to the position of the source.</b><br><br>Check the satellite view - the source may be visible from space!",
-      "editmarker_streetview_html": "Move to the position of the source."
+      "editmarker": "Move to the position of the source."
     },
     "infowindow": {
       "access_mode": [
