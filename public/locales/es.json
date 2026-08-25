@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "¡Todavía está ahí!"
     },
     "index": {
-      "editmarker_html": "<b>Mueve a la posición del sitio.</b><br><br>Comprueba la vista de satélite - ¡el sitio puede ser visible desde el espacio!",
-      "editmarker_streetview_html": "Muévase a la posición de la fuente."
+      "editmarker": "Muévase a la posición de la fuente."
     },
     "infowindow": {
       "access_mode": [

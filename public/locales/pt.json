@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Ainda está lá!"
     },
     "index": {
-      "editmarker_html": "<b>Mover para a código da fonte </b><br><br>Verifique a visão por satélite - a fonte pode ser visível do espaço!",
-      "editmarker_streetview_html": "Mova-se para a posição da fonte."
+      "editmarker": "Mova-se para a posição da fonte."
     },
     "infowindow": {
       "access_mode": [

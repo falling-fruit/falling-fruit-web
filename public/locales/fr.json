@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Toujours là !"
     },
     "index": {
-      "editmarker_html": "<b>Déplacez à la position de la source.</b><br><br>Vérifiez la vue satellite - la source pourrait être visible depuis l'espace!",
-      "editmarker_streetview_html": "Déplacez-vous vers la position de la source."
+      "editmarker": "Déplacez-vous vers la position de la source."
     },
     "infowindow": {
       "access_mode": [

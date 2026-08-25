@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Hâlâ orada!"
     },
     "index": {
-      "editmarker_html": "<b>Kaynağın konumuna taşıyın.</b><br><br>Uydu görünümünü kontrol edin - kaynak uzaydan görünür olabilir!",
-      "editmarker_streetview_html": "Kaynağın konumuna gidin."
+      "editmarker": "Kaynağın konumuna gidin."
     },
     "infowindow": {
       "access_mode": [

@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Wciąż tam jest!"
     },
     "index": {
-      "editmarker_html": "<b>Przesuń do pozycji źródła.</b><br><br>Sprawdź widok satelitarny - źródło może być widoczne z powietrza!",
-      "editmarker_streetview_html": "Przesuń do pozycji źródła."
+      "editmarker": "Przesuń do pozycji źródła."
     },
     "infowindow": {
       "access_mode": [

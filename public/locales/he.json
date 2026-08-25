@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "עדיין שם!"
     },
     "index": {
-      "editmarker_html": "<b>עבור למיקום המקור.</b><br><br>בדוק את תצוגת הלוויין - ייתכן שהמקור נראה מהחלל!",
-      "editmarker_streetview_html": "עברו למיקום המקור."
+      "editmarker": "עברו למיקום המקור."
     },
     "infowindow": {
       "access_mode": [

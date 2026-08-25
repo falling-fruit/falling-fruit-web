@@ -27,7 +27,6 @@ import LocationMarkers from './LocationMarkers'
 import PanoramaEvents from './PanoramaEvents'
 import PinMarkers from './PinMarkers'
 import Place from './Place'
-import { AddLocationCentralUnmovablePin } from './StaticPins'
 import TrackLocationButton from './TrackLocationButton'
 
 const MIN_ZOOM = 1
@@ -422,9 +421,6 @@ const MapPage = ({ isDesktop }) => {
   return (
     <>
       {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
-      {isAddingLocation && !isDesktop && !streetViewOpen && (
-        <AddLocationCentralUnmovablePin />
-      )}
       {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (
         <AddLocationMobile />
       )}
@@ -477,7 +473,6 @@ const MapPage = ({ isDesktop }) => {
           selectedLocationLng={selectedLocation?.lng}
           isEditing={isEditingLocation}
           isAdding={isAddingLocation}
-          isDesktop={isDesktop}
           streetViewOpen={streetViewOpen}
         />
       )}

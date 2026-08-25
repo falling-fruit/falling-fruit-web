@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Εξακολουθεί να υπάρχει!"
     },
     "index": {
-      "editmarker_html": "<b>Μετακίνηση στην θέση της πηγής.</b><br><br>Έλεγξε την δορυφορική προβολή - η τοποθεσία μπορεί να έιναι ορατή από το διάστημα!",
-      "editmarker_streetview_html": "Μετακινηθείτε στη θέση της πηγής."
+      "editmarker": "Μετακινηθείτε στη θέση της πηγής."
     },
     "infowindow": {
       "access_mode": [

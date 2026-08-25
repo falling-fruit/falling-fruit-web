@@ -20,7 +20,6 @@ const PinMarkers = ({
   selectedLocationLng,
   isEditing,
   isAdding,
-  isDesktop,
   streetViewOpen,
 }) => {
   const dispatch = useDispatch()
@@ -30,7 +29,7 @@ const PinMarkers = ({
   const tooltipOpen = useSelector((state) => state.location.tooltipOpen)
 
   const shouldShowDraggableForEditing = isEditing
-  const shouldShowDraggableForAdding = isAdding && (isDesktop || streetViewOpen)
+  const shouldShowDraggableForAdding = isAdding
 
   const [draggablePosition, setDraggablePosition] = useState(
     shouldShowDraggableForEditing || shouldShowDraggableForAdding
@@ -113,9 +112,7 @@ const PinMarkers = ({
       return
     }
 
-    const showDraggable =
-      (isEditing || (isAdding && (isDesktop || streetViewOpen))) &&
-      draggablePosition
+    const showDraggable = (isEditing || isAdding) && draggablePosition
 
     if (!showDraggable) {
       if (draggablePinRef.current) {
@@ -180,9 +177,7 @@ const PinMarkers = ({
           google,
           mapTarget,
           { lat: draggablePosition.lat, lng: draggablePosition.lng },
-          streetViewOpen
-            ? t('locations.index.editmarker_streetview_html')
-            : t('locations.index.editmarker_html'),
+          t('locations.index.editmarker'),
           () => dispatch(dismissLocationTooltip()),
         )
       }
@@ -209,7 +204,6 @@ const PinMarkers = ({
   }, [
     googleMap,
     getGoogleMaps,
-    isDesktop,
     streetViewOpen,
     isEditing,
     isAdding,
@@ -263,9 +257,7 @@ const PinMarkers = ({
           google,
           mapTarget,
           pos,
-          streetViewOpen
-            ? t('locations.index.editmarker_streetview_html')
-            : t('locations.index.editmarker_html'),
+          t('locations.index.editmarker'),
           () => dispatch(dismissLocationTooltip()),
         )
       }

@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "還在那裡！"
     },
     "index": {
-      "editmarker_html": "<b>移動到源的位置。</b><br><br>檢查衛星視圖 - 從太空中可以看到源！",
-      "editmarker_streetview_html": "移動到來源的位置。"
+      "editmarker": "移動到來源的位置。"
     },
     "infowindow": {
       "access_mode": [

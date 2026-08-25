@@ -192,8 +192,7 @@
       "review_comment_placeholder_still_exists": "Immer noch da!"
     },
     "index": {
-      "editmarker_html": "<b>Gehe zum Standort dieser Quelle.</b><br><br>Satellitenansicht betrachten - der Standort könnte aus dem All sichtbar sein!",
-      "editmarker_streetview_html": "Bewegen Sie sich zur Position der Quelle."
+      "editmarker": "Bewegen Sie sich zur Position der Quelle."
     },
     "infowindow": {
       "access_mode": [

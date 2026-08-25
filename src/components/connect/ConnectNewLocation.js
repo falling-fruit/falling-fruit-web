@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { initNewLocation, updatePosition } from '../../redux/locationSlice'
+import { initNewLocation } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
 import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -12,7 +12,9 @@ const ConnectNewLocation = () => {
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
   const { initialView } = useSelector((state) => state.map)
-  const { locationId } = useSelector((state) => state.location)
+  const { locationId, position: existingPosition } = useSelector(
+    (state) => state.location,
+  )
 
   const hasInitialView = !!initialView
   useEffect(() => {
@@ -28,9 +30,10 @@ const ConnectNewLocation = () => {
         )
       }
       if (locationId !== 'new') {
-        dispatch(initNewLocation(view.center))
-      } else if (!isDesktop) {
-        dispatch(updatePosition(view.center))
+        // On mobile, preserve the position from the draggable marker if already set
+        const positionToUse =
+          !isDesktop && existingPosition ? existingPosition : view.center
+        dispatch(initNewLocation(positionToUse))
       }
     } else {
       // Should only happen for an artificially constructed URL
