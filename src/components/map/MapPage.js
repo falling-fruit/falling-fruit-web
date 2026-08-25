@@ -366,12 +366,22 @@ const MapPage = ({ isDesktop }) => {
 
   const handleLocationClick = useCallback(
     (location) => {
+      if (isEditingLocation || isAddingLocation) {
+        return
+      }
       if (isDesktop && pathname.includes('/settings')) {
         dispatch(setFromSettings(true))
       }
       history.push(`/locations/${location.id}?pane=&tab=`)
     },
-    [isDesktop, pathname, dispatch, history],
+    [
+      isDesktop,
+      pathname,
+      dispatch,
+      history,
+      isEditingLocation,
+      isAddingLocation,
+    ],
   )
 
   useEffect(() => {
