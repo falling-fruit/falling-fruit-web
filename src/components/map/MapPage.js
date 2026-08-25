@@ -150,7 +150,6 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
     const center = googleMap.getCenter()
     const bounds = googleMap.getBounds().toJSON()
 
-    // Skip degenerate bounds (e.g. map resized to ~1px when switching tabs on mobile)
     if (isDegenerate(bounds)) {
       return
     }
