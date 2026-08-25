@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "你確定要刪除這個位置嗎？",
-    "delete_review": "你確定要刪除這個評論嗎？"
+    "delete_review": "你確定要刪除這個評論嗎？",
+    "mark_as_verified": "將此位置標記為已驗證？"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "超過{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
       "report_no_longer_exists": "報告不再存在",
-      "review_comment_placeholder_still_exists": "還在那裡！"
+      "review_comment_placeholder_still_exists": "還在那裡！",
+      "unverified_edit_position": "編輯位置",
+      "unverified_edit_types": "編輯類型",
+      "unverified_mark_as_verified": "標記為已驗證",
+      "unverified_may_be_inaccurate": "未經證實: 可能不準確",
+      "unverified_report_does_not_exist": "報告不存在"
     },
     "index": {
       "editmarker": "移動到來源的位置。"
@@ -228,8 +234,8 @@
         "in_season": "從{{start_month}}到{{stop_month}}的季節",
         "year_round": "全年"
       },
-      "title": "概覽",
-      "street_view_unavailable": "此位置附近的街景視圖不可用"
+      "street_view_unavailable": "此位置附近的街景視圖不可用",
+      "title": "概覽"
     }
   },
   "menu": {

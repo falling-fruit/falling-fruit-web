@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Bạn có chắc chắn muốn xóa địa điểm này?",
-    "delete_review": "Bạn có chắc chắn muốn xóa đánh giá này?"
+    "delete_review": "Bạn có chắc chắn muốn xóa đánh giá này?",
+    "mark_as_verified": "Đánh dấu địa điểm này là đã xác minh?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "Hơn {{yearsAgo}} năm trước",
       "report_comment_placeholder_no_longer_exists": "Không còn tồn tại",
       "report_no_longer_exists": "Báo cáo không còn tồn tại",
-      "review_comment_placeholder_still_exists": "Vẫn còn đó!"
+      "review_comment_placeholder_still_exists": "Vẫn còn đó!",
+      "unverified_edit_position": "Chỉnh sửa vị trí",
+      "unverified_edit_types": "Chỉnh sửa loại",
+      "unverified_mark_as_verified": "Đánh dấu là đã xác minh",
+      "unverified_may_be_inaccurate": "Chưa được xác minh: có thể không chính xác",
+      "unverified_report_does_not_exist": "Báo cáo không tồn tại"
     },
     "index": {
       "editmarker": "Di chuyển đến vị trí của nguồn."
@@ -228,8 +234,8 @@
         "in_season": "Trong mùa từ {{start_month}} đến {{stop_month}}",
         "year_round": "Quanh năm"
       },
-      "title": "Tổng quan",
-      "street_view_unavailable": "Street View không khả dụng gần vị trí này"
+      "street_view_unavailable": "Street View không khả dụng gần vị trí này",
+      "title": "Tổng quan"
     }
   },
   "menu": {

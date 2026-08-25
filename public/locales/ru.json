@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Вы уверены, что хотите удалить это местоположение?",
-    "delete_review": "Вы уверены, что хотите удалить этот отзыв?"
+    "delete_review": "Вы уверены, что хотите удалить этот отзыв?",
+    "mark_as_verified": "Отметить это местоположение как проверенное?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "Более {{yearsAgo}} лет назад",
       "report_comment_placeholder_no_longer_exists": "Больше не существует",
       "report_no_longer_exists": "Сообщить, что больше не существует",
-      "review_comment_placeholder_still_exists": "Всё ещё здесь!"
+      "review_comment_placeholder_still_exists": "Всё ещё здесь!",
+      "unverified_edit_position": "Изменить позицию",
+      "unverified_edit_types": "Изменить типы",
+      "unverified_mark_as_verified": "Отметить как проверенное",
+      "unverified_may_be_inaccurate": "Не проверено: может быть неточным",
+      "unverified_report_does_not_exist": "Сообщить, что не существует"
     },
     "index": {
       "editmarker": "Переместитесь к позиции источника."
@@ -228,8 +234,8 @@
         "in_season": "В сезоне с {{start_month}} по {{stop_month}}",
         "year_round": "Круглый год"
       },
-      "title": "Обзор",
-      "street_view_unavailable": "Street View недоступен вблизи этого местоположения"
+      "street_view_unavailable": "Street View недоступен вблизи этого местоположения",
+      "title": "Обзор"
     }
   },
   "menu": {

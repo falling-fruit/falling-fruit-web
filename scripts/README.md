@@ -34,6 +34,7 @@ Options:
 - `--check-translations`: Check if all translation keys exist in all language files (TAP format)
 - `--remove-orphan-keys`: Remove keys from JSON files that don't exist in source files
 - `--fill-up-translations`: Fill up missing translations using English as source
+- `--insert-keys JSON_FILE`: Insert translation keys from a JSON file (or `-` for stdin). Format: `{lang: {dotted_key: value}}`
 - `--log-level LEVEL`: Set the logging level (choices: DEBUG, INFO, WARNING, ERROR, CRITICAL; default: INFO)
 
 ### Examples
@@ -74,7 +75,28 @@ Options:
    python translation_manager.py --json_folder_path ../public/locales --fill-up-translations
    ```
 
-7. Run with debug logging to see detailed information:
+7. Insert translation keys from a JSON file:
+
+   ```bash
+   python translation_manager.py --insert-keys translations.json
+   ```
+
+   Where `translations.json` has the format:
+
+   ```json
+   {
+     "en": {"locations.hints.my_key": "My value"},
+     "fr": {"locations.hints.my_key": "Ma valeur"}
+   }
+   ```
+
+   You can also pipe from stdin:
+
+   ```bash
+   echo '{"en": {"locations.hints.new_key": "New value"}}' | python translation_manager.py --insert-keys -
+   ```
+
+8. Run with debug logging to see detailed information:
    ```bash
    python translation_manager.py --source_path ../src/components --json_folder_path ../public/locales --check-translations --log-level DEBUG
    ```

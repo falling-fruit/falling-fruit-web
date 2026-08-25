@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Czy na pewno chcesz usunąć tę lokalizację?",
-    "delete_review": "Czy na pewno chcesz usunąć tę recenzję?"
+    "delete_review": "Czy na pewno chcesz usunąć tę recenzję?",
+    "mark_as_verified": "Oznaczyć tę lokalizację jako zweryfikowaną?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "Ponad {{yearsAgo}} lat temu",
       "report_comment_placeholder_no_longer_exists": "Już nie istnieje",
       "report_no_longer_exists": "Zgłoś, że już nie istnieje",
-      "review_comment_placeholder_still_exists": "Wciąż tam jest!"
+      "review_comment_placeholder_still_exists": "Wciąż tam jest!",
+      "unverified_edit_position": "Edytuj pozycję",
+      "unverified_edit_types": "Edytuj typy",
+      "unverified_mark_as_verified": "Oznacz jako zweryfikowane",
+      "unverified_may_be_inaccurate": "Niezweryfikowane: może być niedokładne",
+      "unverified_report_does_not_exist": "Zgłoś, że nie istnieje"
     },
     "index": {
       "editmarker": "Przesuń do pozycji źródła."
@@ -228,8 +234,8 @@
         "in_season": "W sezonie {{start_month}} - {{stop_month}}",
         "year_round": "Całoroczne"
       },
-      "title": "Przegląd",
-      "street_view_unavailable": "Street View niedostępne w pobliżu tej lokalizacji"
+      "street_view_unavailable": "Street View niedostępne w pobliżu tej lokalizacji",
+      "title": "Przegląd"
     }
   },
   "menu": {

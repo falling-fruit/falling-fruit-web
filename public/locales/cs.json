@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Opravdu chcete smazat toto umístění?",
-    "delete_review": "Opravdu chcete smazat tuto recenzi?"
+    "delete_review": "Opravdu chcete smazat tuto recenzi?",
+    "mark_as_verified": "Označit toto místo jako ověřené?"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "Před více než {{yearsAgo}} lety",
       "report_comment_placeholder_no_longer_exists": "Již neexistuje",
       "report_no_longer_exists": "Nahlásit, že již neexistuje",
-      "review_comment_placeholder_still_exists": "Stále tam je!"
+      "review_comment_placeholder_still_exists": "Stále tam je!",
+      "unverified_edit_position": "Upravit pozici",
+      "unverified_edit_types": "Upravit typy",
+      "unverified_mark_as_verified": "Označit jako ověřené",
+      "unverified_may_be_inaccurate": "Neověřeno: může být nepřesné",
+      "unverified_report_does_not_exist": "Nahlásit, že neexistuje"
     },
     "index": {
       "editmarker": "Přesuňte se na pozici zdroje."
@@ -228,8 +234,8 @@
         "in_season": "V sezóně od {{start_month}} do {{stop_month}}",
         "year_round": "Celoročně"
       },
-      "title": "Přehled",
-      "street_view_unavailable": "Street View není k dispozici poblíž této lokality"
+      "street_view_unavailable": "Street View není k dispozici poblíž této lokality",
+      "title": "Přehled"
     }
   },
   "menu": {

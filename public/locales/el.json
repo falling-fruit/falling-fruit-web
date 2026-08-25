@@ -1,7 +1,8 @@
 {
   "confirm_message": {
     "delete_location": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την τοποθεσία;",
-    "delete_review": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την κριτική;"
+    "delete_review": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την κριτική;",
+    "mark_as_verified": "Σημείωση αυτής της τοποθεσίας ως επαληθευμένη;"
   },
   "devise": {
     "confirmations": {
@@ -189,7 +190,12 @@
       "over_x_years_ago": "Πριν από πάνω από {{yearsAgo}} χρόνια",
       "report_comment_placeholder_no_longer_exists": "Δεν υπάρχει πλέον",
       "report_no_longer_exists": "Αναφορά ότι δεν υπάρχει πλέον",
-      "review_comment_placeholder_still_exists": "Εξακολουθεί να υπάρχει!"
+      "review_comment_placeholder_still_exists": "Εξακολουθεί να υπάρχει!",
+      "unverified_edit_position": "Επεξεργασία θέσης",
+      "unverified_edit_types": "Επεξεργασία τύπων",
+      "unverified_mark_as_verified": "Επισήμανση ως επαληθευμένο",
+      "unverified_may_be_inaccurate": "Ανεπιβεβαίωτο: μπορεί να είναι ανακριβές",
+      "unverified_report_does_not_exist": "Αναφορά ότι δεν υπάρχει"
     },
     "index": {
       "editmarker": "Μετακινηθείτε στη θέση της πηγής."
@@ -228,8 +234,8 @@
         "in_season": "Σε εποχή από {{start_month}} έως {{stop_month}}",
         "year_round": "Όλο το χρόνο"
       },
-      "title": "Επισκόπηση",
-      "street_view_unavailable": "Το Street View δεν είναι διαθέσιμο κοντά σε αυτήν την τοποθεσία"
+      "street_view_unavailable": "Το Street View δεν είναι διαθέσιμο κοντά σε αυτήν την τοποθεσία",
+      "title": "Επισκόπηση"
     }
   },
   "menu": {
