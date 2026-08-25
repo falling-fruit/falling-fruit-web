@@ -3,7 +3,7 @@ const DEFAULT_LNG = -88.2287926
 const DEFAULT_ZOOM = 4
 
 const VIEW_SEGMENT_REGEX =
-  /^\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,[1-9]\d*z$/
+  /^@?\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,\-?[0-9]+(e[0-9]+)?(\.[0-9]+)?,[1-9]\d*z$/
 
 const validateLatLngZoom = (lat, lng, zoom) => {
   if (isNaN(lat) || isNaN(lng) || isNaN(zoom)) {
@@ -124,9 +124,12 @@ const parseViewFromCurrentUrl = () => {
     return null
   }
 
-  const parsedUrlValues = viewSegment
-    .split('?')[0]
-    .substring(0, viewSegment.split('?')[0].length - 1)
+  const segmentWithoutParams = viewSegment.split('?')[0]
+  const segmentBody = segmentWithoutParams.startsWith('@')
+    ? segmentWithoutParams.substring(1)
+    : segmentWithoutParams
+  const parsedUrlValues = segmentBody
+    .substring(0, segmentBody.length - 1)
     .split(',')
 
   const lat = parseFloat(parsedUrlValues[0])
