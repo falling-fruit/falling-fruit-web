@@ -145,7 +145,7 @@
     "yield": "Raccolta"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Questa località contiene recensioni di altri utenti. Per richiederne l'eliminazione, utilizza il pulsante Segnala."
+    "cannot_delete_location_with_other_reviews": "Questa posizione contiene recensioni di altri utenti. Per richiederne l'eliminazione, utilizza il pulsante Segnala."
   },
   "layouts": {
     "application": {

@@ -2,7 +2,7 @@
   "confirm_message": {
     "delete_location": "确定要删除此地点吗？",
     "delete_review": "确定要删除此评价吗？",
-    "mark_as_verified": "将此位置标记为已验证？"
+    "mark_as_verified": "将此地点标记为已验证？"
   },
   "devise": {
     "confirmations": {
@@ -26,24 +26,24 @@
   },
   "error_message": {
     "api": {
-      "add_location_list_failed": "添加位置列表失败：{{message}}",
-      "add_location_to_list_failed": "添加位置到列表失败：{{message}}",
+      "add_location_list_failed": "添加地点列表失败：{{message}}",
+      "add_location_to_list_failed": "添加地点到列表失败：{{message}}",
       "fetch_clusters_failed": "获取集群失败：{{message}}",
       "fetch_filter_counts_failed": "获取筛选计数时出错：{{message}}",
       "fetch_import_failed": "获取数据集 {{id}} 失败：{{message}}",
-      "fetch_location_changes_failed": "获取位置变更记录失败：{{message}}",
-      "fetch_location_failed": "获取位置 {{id}} 失败：{{message}}",
-      "fetch_location_lists_failed": "获取位置列表失败：{{message}}",
-      "fetch_locations_failed": "获取位置失败：{{message}}",
+      "fetch_location_changes_failed": "获取地点变更记录失败：{{message}}",
+      "fetch_location_failed": "获取地点 {{id}} 失败：{{message}}",
+      "fetch_location_lists_failed": "获取地点列表失败：{{message}}",
+      "fetch_locations_failed": "获取地点失败：{{message}}",
       "fetch_review_failed": "获取评价 {{id}} 失败：{{message}}",
       "fetch_user_failed": "获取用户 {{id}} 失败：{{message}}",
-      "location_deletion_failed": "删除位置失败：{{message}}",
-      "location_edit_failed": "编辑位置失败：{{message}}",
-      "location_submission_failed": "提交位置失败：{{message}}",
+      "location_deletion_failed": "删除地点失败：{{message}}",
+      "location_edit_failed": "编辑地点失败：{{message}}",
+      "location_submission_failed": "提交地点失败：{{message}}",
       "photo_upload_failed": "照片上传失败：{{message}}",
-      "remove_location_from_list_failed": "从列表中移除位置失败：{{message}}",
-      "remove_location_list_failed": "删除位置列表失败：{{message}}",
-      "rename_location_list_failed": "重命名位置列表失败：{{message}}",
+      "remove_location_from_list_failed": "从列表中移除地点失败：{{message}}",
+      "remove_location_list_failed": "删除地点列表失败：{{message}}",
+      "rename_location_list_failed": "重命名地点列表失败：{{message}}",
       "report_submission_failed": "举报提交失败：{{message}}",
       "review_deletion_failed": "评价删除失败：{{message}}",
       "review_edit_failed": "评价编辑失败：{{message}}",
@@ -77,7 +77,7 @@
   "filter": {
     "all_types": "所有种类",
     "clear": "清除",
-    "include_locations_from_tree_inventories": "包含树木清单位置",
+    "include_locations_from_tree_inventories": "包含树木清单地点",
     "select_shown": "全选当前显示",
     "within_map_bounds": "仅限地图范围内"
   },
@@ -161,7 +161,7 @@
   },
   "list": {
     "no_results": "未找到相关结果",
-    "zoom_in": "请放大地图以查看位置数据"
+    "zoom_in": "请放大地图以查看地点数据"
   },
   "locations": {
     "add_new": "添加新地点",
@@ -289,7 +289,7 @@
       "join_us_html": "加入我们！我们的 <a href=\"/\">地图</a> 开放编辑，数据库可一键 <a href=\"/about/data\">下载</a>，<a href=\"https://github.com/falling-fruit/\">代码</a> 亦完全开源。我们也鼓励你分享收获。我们的 <a href=\"/about/sharing\">分享页面</a> 列出了数百个致力于城市果园和食物分发的当地组织。",
       "jp_goguen_bio_html": "JP 是伊利诺伊大学图书馆的媒体技术专家。他居住在伊利诺伊州厄巴纳，专注于绘制当地野生食物网络。2025 年，他创办了<a href=\"https://instagram.com/minipopuppawpawmuseum\">迷你弹出木瓜博物馆</a>。业余时间他通常在<a href=\"https://rosebowltavern.com\">厄巴纳民谣聚会</a>上弹吉他，或者和他的狗 Dalí 一起打飞盘高尔夫。",
       "meagan_shelley_bio_html": "Meagan 居住在弗吉尼亚州中部，是一名企业主和博士候选人。作为认证的<a href=\"https://vmga.net\">园艺大师</a>，她在自己的家园种植蔬果并饲养禽畜。她的目标是实现闭环农业，目前她已能自给自足约 20-30% 的年度食物需求。",
-      "more_about_html": "我们的地图旨在成为全球最全面的城市食用植物图谱。通过用户的实时贡献以及对互联网已有知识（如市政树木清单、社区地图）的梳理，我们将各地的采摘者联合起来。目前，数据库已涵盖数百万个位置和数千个品种。在自己的社区采摘不仅是味觉探索，更是一次穿越时空的文化之旅。",
+      "more_about_html": "我们的地图旨在成为全球最全面的城市食用植物图谱。通过用户的实时贡献以及对互联网已有知识（如市政树木清单、社区地图）的梳理，我们将各地的采摘者联合起来。目前，数据库已涵盖数百万个地点和数千个品种。在自己的社区采摘不仅是味觉探索，更是一次穿越时空的文化之旅。",
       "staff": "工作人员",
       "technical_director": "技术总监",
       "translate": "翻译",
@@ -337,7 +337,7 @@
       "imported_on": "导入于 {{date}}",
       "intro_html": "我们整合了全球各地的采摘者、林务员和志愿者的成果。如果你知道我们遗漏了哪些数据集，请 <a href=\"mailto:info@fallingfruit.org\">告知我们</a>！你也可以使用我们的 <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">模板</a> 协助我们导入数据。请注意，手动导入后的数据不会与原始来源同步更新。",
       "link": "链接",
-      "table_info": "数据集按名称、位置数量和导入日期排序。展开行可查看具体的授权许可和导入详情。",
+      "table_info": "数据集按名称、地点数量和导入日期排序。展开行可查看具体的授权许可和导入详情。",
       "type": "种类",
       "types_of_data": "本站数据主要分为两类：\"社区地图\"由各地的采摘爱好者建立；\"树木清单\"则由城市、大学等机构编制。我们从庞大的清单中挖掘可生产食物的物种并标注在地图上。"
     },
@@ -463,7 +463,7 @@
     "remove_from_list_confirm": "从列表中删除「{{name}}」？",
     "save_label": "保存",
     "saved_label": "已保存",
-    "saved_locations_title": "已保存的位置"
+    "saved_locations_title": "已保存的地点"
   },
   "share": {
     "leave_embed_view_for_full_site": "跳转至完整网站",
@@ -475,7 +475,7 @@
     "account_deleted": "账户已成功删除！",
     "location_deleted": "地点已删除",
     "location_edited": "修改已保存",
-    "location_submitted": "位置提交成功",
+    "location_submitted": "地点提交成功",
     "report_submitted": "举报已提交",
     "review_deleted": "评价已删除",
     "review_edited": "评价已保存",

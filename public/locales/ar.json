@@ -239,14 +239,14 @@
     }
   },
   "menu": {
-    "add_new_location": "إضافة وجهة",
+    "add_new_location": "إضافة موقع",
     "add_review": "إضافة مراجعة",
-    "edit_location": "تحرير الوجهة",
+    "edit_location": "تحرير الموقع",
     "edit_review": "تحرير المراجعة",
     "filters": "الفلاتر",
     "list": "قائمة",
     "settings": "الإعدادات",
-    "zoom_in_to_add_location": "قرّب لإضافة وجهة"
+    "zoom_in_to_add_location": "قرّب لإضافة موقع"
   },
   "new_type": {
     "add_type_label": "إضافة نوع:",

@@ -1,6 +1,6 @@
 {
   "confirm_message": {
-    "delete_location": "Opravdu chcete smazat toto umístění?",
+    "delete_location": "Opravdu chcete smazat tuto lokalitu?",
     "delete_review": "Opravdu chcete smazat tuto recenzi?",
     "mark_as_verified": "Označit toto místo jako ověřené?"
   },
@@ -105,9 +105,9 @@
       "do_not_ask_again": "Příště se neptat",
       "message": "Nejste přihlášeni. Pokračujte bez účtu, nebo se nejprve přihlaste či zaregistrujte, abyste mohli toto pozorování později sledovat a spravovat.",
       "title": {
-        "add_location": "Přidat místo anonymně?",
+        "add_location": "Přidat lokalitu anonymně?",
         "add_review": "Přidat recenzi anonymně?",
-        "edit_location": "Upravit místo anonymně?"
+        "edit_location": "Upravit lokalitu anonymně?"
       }
     },
     "optional": "Volitelné",
@@ -145,7 +145,7 @@
     "yield": "Množství"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Toto místo obsahuje recenze od jiných uživatelů. Pro žádost o jeho smazání prosím použijte tlačítko Nahlásit."
+    "cannot_delete_location_with_other_reviews": "Tato lokalita obsahuje recenze od jiných uživatelů. Pro žádost o její smazání prosím použijte tlačítko Nahlásit."
   },
   "layouts": {
     "application": {
@@ -218,11 +218,11 @@
       "fruiting": ["Květy", "Nezralé ovoce", "Zralé ovoce"]
     },
     "init": {
-      "cancel": "Zrušit výběr umístění",
-      "choose_instructions": "Vyberte pozici pro vaše nové umístění.",
-      "confirm": "Potvrdit výběr umístění",
-      "edit_instructions": "Upravit pozici pro vaše nové umístění.",
-      "position_too_close": "Vyberte pozici odlišnou od pozic existujících umístění"
+      "cancel": "Zrušit výběr lokality",
+      "choose_instructions": "Vyberte pozici pro vaši novou lokalitu.",
+      "confirm": "Potvrdit výběr lokality",
+      "edit_instructions": "Upravit pozici pro vaši novou lokalitu.",
+      "position_too_close": "Vyberte pozici odlišnou od pozic existujících lokalit"
     },
     "overview": {
       "added_by": "Přidal(a) {{name}}",
@@ -239,9 +239,9 @@
     }
   },
   "menu": {
-    "add_new_location": "Přidat umístění",
+    "add_new_location": "Přidat lokalitu",
     "add_review": "Přidat recenzi",
-    "edit_location": "Upravit umístění",
+    "edit_location": "Upravit lokalitu",
     "edit_review": "Upravit recenzi",
     "filters": "Filtry",
     "list": "Seznam",
@@ -321,8 +321,8 @@
         "visited": "navštíveno",
         "visited_by_you": "navštíveno vámi"
       },
-      "user_activity_empty": "Tento uživatel zatím nepřidal, neupravil ani nezkontroloval žádná umístění",
-      "your_activity_empty": "Zatím jste nepřidali, neupravili ani nezkontrolovali žádná umístění"
+      "user_activity_empty": "Tento uživatel zatím nepřidal, neupravil ani nezkontroloval žádné lokality",
+      "your_activity_empty": "Zatím jste nepřidali, neupravili ani nezkontrolovali žádné lokality"
     },
     "data": {
       "caveat_emptor_html": "Nepřebíráme žádnou odpovědnost za přesnost dat - jsou poskytována tak, jak jsou, <i>caveat emptor</i>. Pokud s daty uděláte něco zajímavého, prosím <a href=\"mailto:feedback@fallingfruit.org\">dejte nám vědět</a>!",
@@ -335,9 +335,9 @@
       "import_id_and_name": "Import #{{id}}: {{name}}",
       "imported_datasets": "Importované datové sady",
       "imported_on": "Importováno dne {{date}}",
-      "intro_html": "Falling Fruit usiluje o to, být nejkomplexnější a nejotevřenější geografickou datovou sadou městských jedlých rostlin. Zatímco naši uživatelé prozkoumávají, upravují a přidávají umístění pomocí naší <a href=\"/\">mapy</a>, prohledáváme známý vesmír pro již existující datové sady a importujeme je přímo do databáze, čímž spojujeme úsilí sběračů a freeganů všude. Pokud víte o datové sadě, kterou jsme přehlédli, prosím <a href=\"mailto:info@fallingfruit.org\">dejte nám vědět</a>! Můžete nám také pomoci s procesem importu, a to formátováním dat pomocí <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">šablony pro import</a>. Upozorňujeme, že protože importy musí být prováděny ručně, všechny změny původních dat provedené po importu se na Falling Fruit neprojeví.",
+      "intro_html": "Falling Fruit usiluje o to, být nejkomplexnější a nejotevřenější geografickou datovou sadou městských jedlých rostlin. Zatímco naši uživatelé prozkoumávají, upravují a přidávají lokality pomocí naší <a href=\"/\">mapy</a>, prohledáváme známý vesmír pro již existující datové sady a importujeme je přímo do databáze, čímž spojujeme úsilí sběračů a freeganů všude. Pokud víte o datové sadě, kterou jsme přehlédli, prosím <a href=\"mailto:info@fallingfruit.org\">dejte nám vědět</a>! Můžete nám také pomoci s procesem importu, a to formátováním dat pomocí <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">šablony pro import</a>. Upozorňujeme, že protože importy musí být prováděny ručně, všechny změny původních dat provedené po importu se na Falling Fruit neprojeví.",
       "link": "Odkaz",
-      "table_info": "Každá datová sada je uvedena podle názvu, počtu umístění a data importu. Rozbalením každého řádku se zobrazí další podrobnosti o datech, procesu importu a licenci upravující způsob použití dat.",
+      "table_info": "Každá datová sada je uvedena podle názvu, počtu lokalit a data importu. Rozbalením každého řádku se zobrazí další podrobnosti o datech, procesu importu a licenci upravující způsob použití dat.",
       "type": "Typ",
       "types_of_data": "Datové sady importované do Falling Fruit spadají do dvou hlavních kategorií. \"Komunitní mapy\" jsou vytvářeny sběrači a freegany při procházení svých komunit za účelem hledání věcí k jídlu. Jsme zavázáni pracovitým občanským kartografům, kteří tato data sestavili. \"Inventáře stromů\" jsou sestavovány městy, univerzitami a dalšími institucemi, které si přejí lépe dokumentovat a pečovat o své stromy. Těžíme z těchto rozsáhlých datových sad druhy produkující potraviny a přidáváme je do mapy. Chcete-li nám pomoci zmapovat ovocné stromy ve vašem okolí, kontaktujte svou školu nebo město a vyzvěte je, aby s námi sdílely svůj inventář stromů."
     },
@@ -348,7 +348,7 @@
     },
     "settings": {
       "bicycle": "Kolo",
-      "label_visibility_header": "Popisky umístění",
+      "label_visibility_header": "Popisky lokalit",
       "labels": {
         "always_on": "Vždy zapnuto",
         "off": "Vypnuto",
@@ -437,9 +437,9 @@
     "description_subtext": "Jakékoliv informace, které by nám mohly pomoci vyhodnotit problém",
     "problem_type": "Typ problému",
     "problem_types": [
-      "Umístění je spam",
-      "Umístění neexistuje",
-      "Umístění je duplikát",
+      "Lokalita je spam",
+      "Lokalita neexistuje",
+      "Lokalita je duplikát",
       "Nevhodná fotografie recenze",
       "Nevhodný komentář recenze",
       "Jiné (vysvětlete níže)"
@@ -453,8 +453,8 @@
       "observed_on": "Pozorováno dne {{date}}",
       "photos": "Fotografie"
     },
-    "you_observed": "Pozorovali jste toto umístění dne {{date}}",
-    "you_reviewed": "Recenzovali jste toto umístění dne {{date}}"
+    "you_observed": "Pozorovali jste tuto lokalitu dne {{date}}",
+    "you_reviewed": "Recenzovali jste tuto lokalitu dne {{date}}"
   },
   "save_location_to_list": {
     "add_new_list": "Přidat nový seznam",
@@ -463,7 +463,7 @@
     "remove_from_list_confirm": "Odebrat \"{{name}}\" ze seznamu?",
     "save_label": "Uložit",
     "saved_label": "Uloženo",
-    "saved_locations_title": "Uložená umístění"
+    "saved_locations_title": "Uložené lokality"
   },
   "share": {
     "leave_embed_view_for_full_site": "Plná verze webu",
@@ -473,9 +473,9 @@
   },
   "success_message": {
     "account_deleted": "Účet byl úspěšně smazán!",
-    "location_deleted": "Umístění bylo úspěšně smazáno!",
-    "location_edited": "Umístění bylo úspěšně upraveno!",
-    "location_submitted": "Umístění bylo úspěšně odesláno!",
+    "location_deleted": "Lokalita byla úspěšně smazána!",
+    "location_edited": "Lokalita byla úspěšně upravena!",
+    "location_submitted": "Lokalita byla úspěšně odeslána!",
     "report_submitted": "Hlášení bylo úspěšně odesláno!",
     "review_deleted": "Recenze byla úspěšně smazána!",
     "review_edited": "Recenze byla úspěšně upravena!",

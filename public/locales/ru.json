@@ -453,8 +453,8 @@
       "observed_on": "Замечено {{date}}",
       "photos": "Фотографии"
     },
-    "you_observed": "Вы наблюдали это место {{date}}",
-    "you_reviewed": "Вы оставили отзыв об этом месте {{date}}"
+    "you_observed": "Вы наблюдали это местоположение {{date}}",
+    "you_reviewed": "Вы оставили отзыв об этом местоположении {{date}}"
   },
   "save_location_to_list": {
     "add_new_list": "Добавить новый список",

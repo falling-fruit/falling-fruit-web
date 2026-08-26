@@ -239,14 +239,14 @@
     }
   },
   "menu": {
-    "add_new_location": "Ajouter un site",
+    "add_new_location": "Ajouter un emplacement",
     "add_review": "Ajouter un avis",
-    "edit_location": "Éditer un site",
+    "edit_location": "Modifier un emplacement",
     "edit_review": "Éditer un avis",
     "filters": "Filtres",
     "list": "Liste",
     "settings": "Paramètres",
-    "zoom_in_to_add_location": "Zoomer pour ajouter un site"
+    "zoom_in_to_add_location": "Zoomer pour ajouter un emplacement"
   },
   "new_type": {
     "add_type_label": "Ajouter un type :",

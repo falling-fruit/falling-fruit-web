@@ -26,24 +26,24 @@
   },
   "error_message": {
     "api": {
-      "add_location_list_failed": "Thêm danh sách vị trí thất bại: {{message}}",
-      "add_location_to_list_failed": "Thêm vị trí vào danh sách thất bại: {{message}}",
+      "add_location_list_failed": "Thêm danh sách địa điểm thất bại: {{message}}",
+      "add_location_to_list_failed": "Thêm địa điểm vào danh sách thất bại: {{message}}",
       "fetch_clusters_failed": "Lỗi khi tải cụm: {{message}}",
       "fetch_filter_counts_failed": "Lỗi khi tải số lượng bộ lọc: {{message}}",
       "fetch_import_failed": "Lỗi khi tải tập dữ liệu {{id}}: {{message}}",
-      "fetch_location_changes_failed": "Không thể tải thay đổi vị trí: {{message}}",
-      "fetch_location_failed": "Lỗi khi tải vị trí {{id}}: {{message}}",
-      "fetch_location_lists_failed": "Tải danh sách vị trí thất bại: {{message}}",
-      "fetch_locations_failed": "Lỗi khi tải vị trí: {{message}}",
+      "fetch_location_changes_failed": "Không thể tải thay đổi địa điểm: {{message}}",
+      "fetch_location_failed": "Lỗi khi tải địa điểm {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Tải danh sách địa điểm thất bại: {{message}}",
+      "fetch_locations_failed": "Lỗi khi tải địa điểm: {{message}}",
       "fetch_review_failed": "Lỗi khi tải đánh giá {{id}}: {{message}}",
       "fetch_user_failed": "Lỗi khi tải thông tin người dùng {{id}}: {{message}}",
-      "location_deletion_failed": "Xóa vị trí thất bại: {{message}}",
-      "location_edit_failed": "Chỉnh sửa vị trí thất bại: {{message}}",
-      "location_submission_failed": "Gửi vị trí thất bại: {{message}}",
+      "location_deletion_failed": "Xóa địa điểm thất bại: {{message}}",
+      "location_edit_failed": "Chỉnh sửa địa điểm thất bại: {{message}}",
+      "location_submission_failed": "Gửi địa điểm thất bại: {{message}}",
       "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
-      "remove_location_from_list_failed": "Xóa vị trí khỏi danh sách thất bại: {{message}}",
-      "remove_location_list_failed": "Xóa danh sách vị trí thất bại: {{message}}",
-      "rename_location_list_failed": "Đổi tên danh sách vị trí thất bại: {{message}}",
+      "remove_location_from_list_failed": "Xóa địa điểm khỏi danh sách thất bại: {{message}}",
+      "remove_location_list_failed": "Xóa danh sách địa điểm thất bại: {{message}}",
+      "rename_location_list_failed": "Đổi tên danh sách địa điểm thất bại: {{message}}",
       "report_submission_failed": "Gửi báo cáo thất bại: {{message}}",
       "review_deletion_failed": "Xóa đánh giá thất bại: {{message}}",
       "review_edit_failed": "Chỉnh sửa đánh giá thất bại: {{message}}",
@@ -77,7 +77,7 @@
   "filter": {
     "all_types": "Tất cả các loại",
     "clear": "Xóa",
-    "include_locations_from_tree_inventories": "Với vị trí kiểm kê cây",
+    "include_locations_from_tree_inventories": "Với địa điểm kiểm kê cây",
     "select_shown": "Chọn tất cả đã hiển thị",
     "within_map_bounds": "Trong ranh giới bản đồ"
   },
@@ -123,8 +123,8 @@
     "description": "Miêu tả",
     "email": "Email",
     "locations": {
-      "one": "Vị trí",
-      "other": "Vị trí"
+      "one": "Địa điểm",
+      "other": "Địa điểm"
     },
     "map": "Bản đồ",
     "name": "Tên",
@@ -161,7 +161,7 @@
   },
   "list": {
     "no_results": "Không tìm thấy kết quả",
-    "zoom_in": "Phóng to bản đồ để xem dữ liệu vị trí"
+    "zoom_in": "Phóng to bản đồ để xem dữ liệu địa điểm"
   },
   "locations": {
     "add_new": "Thêm mới",
@@ -348,7 +348,7 @@
     },
     "settings": {
       "bicycle": "Xe đạp",
-      "label_visibility_header": "Nhãn vị trí",
+      "label_visibility_header": "Nhãn địa điểm",
       "labels": {
         "always_on": "Luôn bật",
         "off": "Tắt",
@@ -463,7 +463,7 @@
     "remove_from_list_confirm": "Xóa \"{{name}}\" khỏi danh sách?",
     "save_label": "Lưu",
     "saved_label": "Đã lưu",
-    "saved_locations_title": "Vị trí đã lưu"
+    "saved_locations_title": "Địa điểm đã lưu"
   },
   "share": {
     "leave_embed_view_for_full_site": "Trang web đầy đủ",
@@ -473,7 +473,7 @@
   },
   "success_message": {
     "account_deleted": "Tài khoản đã được xóa thành công!",
-    "location_deleted": "Xóa vị trí thành công!",
+    "location_deleted": "Xóa địa điểm thành công!",
     "location_edited": "Địa điểm đã được chỉnh sửa thành công!",
     "location_submitted": "Địa điểm đã được gửi thành công!",
     "report_submitted": "Báo cáo đã được gửi thành công!",
