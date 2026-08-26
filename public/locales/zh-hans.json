@@ -178,14 +178,14 @@
       "description_subtext": "地点详情、采摘指南、生长情况...",
       "fruiting_status": "结果状态",
       "position": "位置",
-      "season": "采摘季节",
+      "season": "采摘季",
       "season_start_to_stop_short": "至",
       "street_view_position_warning": "街景视图的位置可能不准确。请退出街景视图并在地图上确认位置后再提交。"
     },
     "hints": {
       "add_description": "添加描述",
-      "add_season_end": "添加季节结束",
-      "add_season_start": "添加采摘期开始时间",
+      "add_season_end": "添加采摘季结束",
+      "add_season_start": "添加采摘季开始",
       "confirm_still_exists": "确认仍然存在",
       "over_x_years_ago": "{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
@@ -231,7 +231,7 @@
       "date_last_updated": "最后更新于 {{date}}",
       "imported_from": "导入自 {{name}}",
       "season": {
-        "in_season": "采摘期：{{start_month}} 至 {{stop_month}}",
+        "in_season": "采摘季：{{start_month}} 至 {{stop_month}}",
         "year_round": "全年"
       },
       "street_view_unavailable": "此地点附近暂无街景视图",

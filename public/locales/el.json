@@ -184,7 +184,7 @@
     },
     "hints": {
       "add_description": "Προσθήκη περιγραφής",
-      "add_season_end": "Προσθήκη λήξης περιόδου",
+      "add_season_end": "Προσθήκη λήξης εποχής",
       "add_season_start": "Προσθήκη έναρξης εποχής",
       "confirm_still_exists": "Επιβεβαίωση ότι εξακολουθεί να υπάρχει",
       "over_x_years_ago": "Πριν από πάνω από {{yearsAgo}} χρόνια",

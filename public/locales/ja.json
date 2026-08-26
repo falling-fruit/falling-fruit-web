@@ -178,14 +178,14 @@
       "description_subtext": "場所の詳細、アクセスの問題、植物の健康状態...",
       "fruiting_status": "結実状況",
       "position": "位置",
-      "season": "季節",
+      "season": "旬",
       "season_start_to_stop_short": "から",
       "street_view_position_warning": "ストリートビューの位置は不正確な場合があります。送信する前にストリートビューを終了し、地図上で位置を確認してください。"
     },
     "hints": {
       "add_description": "説明を追加",
-      "add_season_end": "シーズン終了日を追加",
-      "add_season_start": "シーズン開始を追加",
+      "add_season_end": "旬の終了を追加",
+      "add_season_start": "旬の開始を追加",
       "confirm_still_exists": "まだ存在することを確認",
       "over_x_years_ago": "{{yearsAgo}}年以上前",
       "report_comment_placeholder_no_longer_exists": "存在しなくなりました",

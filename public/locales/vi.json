@@ -185,7 +185,7 @@
     "hints": {
       "add_description": "Thêm mô tả",
       "add_season_end": "Thêm ngày kết thúc mùa",
-      "add_season_start": "Thêm mùa bắt đầu",
+      "add_season_start": "Thêm ngày bắt đầu mùa",
       "confirm_still_exists": "Xác nhận vẫn tồn tại",
       "over_x_years_ago": "Hơn {{yearsAgo}} năm trước",
       "report_comment_placeholder_no_longer_exists": "Không còn tồn tại",

@@ -178,14 +178,14 @@
       "description_subtext": "位置詳細信息、訪問問題、植物健康...",
       "fruiting_status": "果實狀態",
       "position": "位置",
-      "season": "季節",
+      "season": "採收季",
       "season_start_to_stop_short": "至",
       "street_view_position_warning": "街景視圖位置可能不準確。在提交之前，請退出街景視圖並在地圖上檢查位置。"
     },
     "hints": {
       "add_description": "新增描述",
-      "add_season_end": "新增季節結束",
-      "add_season_start": "新增季節開始",
+      "add_season_end": "新增採收季結束",
+      "add_season_start": "新增採收季開始",
       "confirm_still_exists": "確認仍然存在",
       "over_x_years_ago": "超過{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
@@ -231,7 +231,7 @@
       "date_last_updated": "最後更新於{{date}}",
       "imported_from": "從{{name}}導入",
       "season": {
-        "in_season": "從{{start_month}}到{{stop_month}}的季節",
+        "in_season": "採收季：{{start_month}} 至 {{stop_month}}",
         "year_round": "全年"
       },
       "street_view_unavailable": "此位置附近的街景視圖不可用",

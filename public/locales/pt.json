@@ -178,14 +178,14 @@
       "description_subtext": "Detalhes da localização, problemas de acesso, estado fitossanitário ...",
       "fruiting_status": "Estado de frutificação",
       "position": "Posição",
-      "season": "Estação",
+      "season": "Temporada",
       "season_start_to_stop_short": "até",
       "street_view_position_warning": "As posições do Street View podem ser imprecisas. Saia do Street View e verifique a posição no mapa antes de enviar."
     },
     "hints": {
       "add_description": "Adicionar descrição",
       "add_season_end": "Adicionar fim da temporada",
-      "add_season_start": "Adicionar início da estação",
+      "add_season_start": "Adicionar início da temporada",
       "confirm_still_exists": "Confirmar que ainda existe",
       "over_x_years_ago": "Há mais de {{yearsAgo}} anos",
       "report_comment_placeholder_no_longer_exists": "Não existe mais",
@@ -231,7 +231,7 @@
       "date_last_updated": "Última atualização {{date}}",
       "imported_from": "Importado de {{name}}",
       "season": {
-        "in_season": "Na estação de {{start_month}} até {{stop_month}}",
+        "in_season": "Na temporada de {{start_month}} até {{stop_month}}",
         "year_round": "Todo o Ano"
       },
       "street_view_unavailable": "Street View não disponível perto desta localização",
