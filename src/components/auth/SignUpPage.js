@@ -133,14 +133,13 @@ const SignUpPage = () => {
             />
 
             <FormButtons>
-              <Button secondary type="reset">
-                {t('form.button.reset')}
-              </Button>
               <Button
                 type="submit"
                 disabled={!dirty || !isValid || isSubmitting}
               >
-                {t('glossary.sign_up')}
+                {isSubmitting
+                  ? t('form.button.submitting')
+                  : t('form.button.submit')}
               </Button>
             </FormButtons>
           </Form>
