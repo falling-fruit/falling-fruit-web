@@ -141,7 +141,7 @@
       "one": "類型",
       "other": "類型"
     },
-    "unverified": "未經證實",
+    "unverified": "未驗證",
     "yield": "產量"
   },
   "info_message": {
@@ -194,7 +194,7 @@
       "unverified_edit_position": "編輯位置",
       "unverified_edit_types": "編輯類型",
       "unverified_mark_as_verified": "標記為已驗證",
-      "unverified_may_be_inaccurate": "未經證實: 可能不準確",
+      "unverified_may_be_inaccurate": "未驗證: 可能不準確",
       "unverified_report_does_not_exist": "報告不存在"
     },
     "index": {

@@ -141,7 +141,7 @@
       "one": "Art",
       "other": "Arten"
     },
-    "unverified": "Ungeprüft",
+    "unverified": "Nicht verifiziert",
     "yield": "Ausbeute"
   },
   "info_message": {
@@ -194,7 +194,7 @@
       "unverified_edit_position": "Position bearbeiten",
       "unverified_edit_types": "Typen bearbeiten",
       "unverified_mark_as_verified": "Als verifiziert markieren",
-      "unverified_may_be_inaccurate": "Ungeprüft: möglicherweise ungenau",
+      "unverified_may_be_inaccurate": "Nicht verifiziert: möglicherweise ungenau",
       "unverified_report_does_not_exist": "Melden, dass es nicht existiert"
     },
     "index": {

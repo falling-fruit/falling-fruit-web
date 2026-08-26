@@ -141,7 +141,7 @@
       "one": "Soort",
       "other": "Soorten"
     },
-    "unverified": "Niet-bevestigd",
+    "unverified": "Niet geverifieerd",
     "yield": "Opbrengst"
   },
   "info_message": {
@@ -194,7 +194,7 @@
       "unverified_edit_position": "Positie bewerken",
       "unverified_edit_types": "Types bewerken",
       "unverified_mark_as_verified": "Markeer als geverifieerd",
-      "unverified_may_be_inaccurate": "Niet-bevestigd: kan onnauwkeurig zijn",
+      "unverified_may_be_inaccurate": "Niet geverifieerd: kan onnauwkeurig zijn",
       "unverified_report_does_not_exist": "Meld dat het niet bestaat"
     },
     "index": {

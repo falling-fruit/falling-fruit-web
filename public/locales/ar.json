@@ -2,7 +2,7 @@
   "confirm_message": {
     "delete_location": "هل أنت متأكد أنك تريد حذف هذا الموقع؟",
     "delete_review": "هل أنت متأكد أنك تريد حذف هذا التقييم؟",
-    "mark_as_verified": "هل تريد تحديد هذا الموقع كموثق؟"
+    "mark_as_verified": "هل تريد تحديد هذا الموقع كمتحقق منه؟"
   },
   "devise": {
     "confirmations": {
