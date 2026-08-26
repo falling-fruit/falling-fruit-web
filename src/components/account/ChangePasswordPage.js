@@ -112,6 +112,7 @@ const ChangePasswordPage = () => {
                   <SubmitButton
                     isSubmitting={isSubmitting}
                     disabled={!dirty || !isValid}
+                    label={t('users.change_password')}
                   />
                 </FormButtons>
               </Form>

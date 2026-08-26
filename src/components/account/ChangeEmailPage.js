@@ -110,6 +110,7 @@ const ChangeEmailPage = () => {
                   <SubmitButton
                     isSubmitting={isSubmitting}
                     disabled={!isValid}
+                    label={t('users.change_email')}
                   />
                 </FormButtons>
               </Form>
