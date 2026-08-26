@@ -103,11 +103,11 @@
     "not_signed_in": {
       "continue": "Continuar",
       "do_not_ask_again": "Não perguntar novamente",
-      "message": "No has iniciado sesión. Continúa sin una cuenta, o primero inicia sesión o regístrate para rastrear y gestionar esta observación más tarde.",
+      "message": "Você não está conectado. Continue sem uma conta, ou primeiro entre ou cadastre-se para acompanhar e gerenciar esta observação mais tarde.",
       "title": {
-        "add_location": "¿Agregar ubicación de forma anónima?",
-        "add_review": "¿Agregar reseña de forma anónima?",
-        "edit_location": "¿Editar ubicación de forma anónima?"
+        "add_location": "Adicionar localização anonimamente?",
+        "add_review": "Adicionar avaliação anonimamente?",
+        "edit_location": "Editar localização anonimamente?"
       }
     },
     "optional": "Opcional",

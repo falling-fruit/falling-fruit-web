@@ -215,7 +215,7 @@
         "Privato ma sporge su suolo pubblico",
         "Privato"
       ],
-      "fruiting": ["Fioritura", "Frutto acerbo", "Frutto matura"]
+      "fruiting": ["Fioritura", "Frutto acerbo", "Frutto maturo"]
     },
     "init": {
       "cancel": "Annulla scelta posizione",
