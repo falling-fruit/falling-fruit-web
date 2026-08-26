@@ -8,6 +8,7 @@ import styled from 'styled-components/macro'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from './Button'
 import FormButtons from './FormButtons'
+import SubmitButton from './SubmitButton'
 
 const StyledModal = styled(Dialog)`
   border-radius: 0.375em;
@@ -60,14 +61,10 @@ const Modal = ({
                 <Button type="button" onClick={onDismiss} secondary>
                   {t('form.button.cancel')}
                 </Button>
-                <Button
-                  disabled={!isDirty || isSubmitting || !isValid}
-                  type="submit"
-                >
-                  {isSubmitting
-                    ? t('form.button.submitting')
-                    : t('form.button.submit')}
-                </Button>
+                <SubmitButton
+                  isSubmitting={isSubmitting}
+                  disabled={!isDirty || !isValid}
+                />
               </FormButtons>
             </Form>
           )

@@ -9,10 +9,10 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { ErrorMessage } from '../auth/AuthWrappers'
 import { Input, PasswordInput } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
-import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
+import SubmitButton from '../ui/SubmitButton'
 import withRedirectToAuth from './withRedirectToAuth'
 
 const formToUser = ({ email, password, announcements_email, name }, user) => ({
@@ -107,9 +107,10 @@ const ChangeEmailPage = () => {
                   />
                 </div>
                 <FormButtons>
-                  <Button type="submit" disabled={!isValid || isSubmitting}>
-                    {t('form.button.submit')}
-                  </Button>
+                  <SubmitButton
+                    isSubmitting={isSubmitting}
+                    disabled={!isValid}
+                  />
                 </FormButtons>
               </Form>
             )}

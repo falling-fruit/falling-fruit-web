@@ -20,6 +20,7 @@ import LabeledRow from '../ui/LabeledRow'
 import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
+import SubmitButton from '../ui/SubmitButton'
 import withRedirectToAuth from './withRedirectToAuth'
 
 const EmailLabel = styled.label`
@@ -173,14 +174,11 @@ const AccountPage = () => {
                     <Button secondary type="reset">
                       {t('form.button.reset')}
                     </Button>
-                    <Button
-                      type="submit"
-                      disabled={!dirty || !isValid || isSubmitting}
-                    >
-                      {isSubmitting
-                        ? t('form.button.submitting')
-                        : t('users.save_changes')}
-                    </Button>
+                    <SubmitButton
+                      isSubmitting={isSubmitting}
+                      disabled={!dirty || !isValid}
+                      label={t('users.save_changes')}
+                    />
                   </FormButtons>
                 </Form>
               )}

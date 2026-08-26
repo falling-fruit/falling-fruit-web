@@ -7,9 +7,9 @@ import * as Yup from 'yup'
 import { resetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PasswordInput } from '../form/FormikWrappers'
-import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import { AuthPage } from '../ui/PageTemplate'
+import SubmitButton from '../ui/SubmitButton'
 import AuthLinks from './AuthLinks'
 import { ErrorMessage } from './AuthWrappers'
 import { withAuthRedirect } from './withAuthRedirect'
@@ -90,12 +90,10 @@ const PasswordSetPage = () => {
             </div>
 
             <FormButtons>
-              <Button
-                disabled={!dirty || !isValid || isSubmitting}
-                type="submit"
-              >
-                {t('form.button.submit')}
-              </Button>
+              <SubmitButton
+                isSubmitting={isSubmitting}
+                disabled={!dirty || !isValid}
+              />
             </FormButtons>
           </Form>
         )}

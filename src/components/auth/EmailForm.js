@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
 import { Input, Recaptcha } from '../form/FormikWrappers'
-import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
+import SubmitButton from '../ui/SubmitButton'
 
 export const EmailForm = ({ onSubmit, recaptchaRef }) => {
   const { t } = useTranslation()
@@ -40,9 +40,11 @@ export const EmailForm = ({ onSubmit, recaptchaRef }) => {
           />
 
           <FormButtons>
-            <Button disabled={!dirty || !isValid || isSubmitting} type="submit">
-              {t('users.send')}
-            </Button>
+            <SubmitButton
+              isSubmitting={isSubmitting}
+              disabled={!dirty || !isValid}
+              label={t('users.send')}
+            />
           </FormButtons>
         </Form>
       )}
