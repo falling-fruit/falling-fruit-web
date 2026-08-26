@@ -29,6 +29,7 @@ import IconBesideText from '../ui/IconBesideText'
 import Label from '../ui/Label'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import PositionEditIcon from '../ui/PositionEditIcon'
+import SubmitButton from '../ui/SubmitButton'
 import { Checkbox, Recaptcha, Select, Textarea } from './FormikWrappers'
 import { StyledForm } from './FormLayout'
 import NotSignedInClickthrough from './NotSignedInClickthrough'
@@ -388,16 +389,10 @@ export const LocationForm = ({ editingId, innerRef }) => {
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
-                <Button
-                  disabled={
-                    isSubmitting || !isValid || !dirty || blockedByStreetView
-                  }
-                  type="submit"
-                >
-                  {isSubmitting
-                    ? t('form.button.submitting')
-                    : t('form.button.submit')}
-                </Button>
+                <SubmitButton
+                  isSubmitting={isSubmitting}
+                  disabled={!isValid || !dirty || blockedByStreetView}
+                />
               </FormButtons>
             </Form>
           )

@@ -6,7 +6,7 @@ const FormButtons = styled.div`
   text-align: ${({ align }) => align};
 
   button {
-    width: 9em;
+    min-width: 9em;
 
     &:not(:last-child) {
       margin-inline-end: 1em;

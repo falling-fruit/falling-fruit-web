@@ -9,10 +9,10 @@ import { login } from '../../redux/authSlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { Checkbox, Input, PasswordInput } from '../form/FormikWrappers'
 import AboutSection from '../mobile/AboutSection'
-import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
+import SubmitButton from '../ui/SubmitButton'
 import AuthLinks from './AuthLinks'
 import { withAuthRedirect } from './withAuthRedirect'
 
@@ -69,9 +69,11 @@ const SignInPage = () => {
             </RememberMeRow>
 
             <FormButtons>
-              <Button disabled={!dirty || !isValid || isLoading} type="submit">
-                {t('users.sign_in')}
-              </Button>
+              <SubmitButton
+                isSubmitting={isLoading}
+                disabled={!dirty || !isValid}
+                label={t('users.sign_in')}
+              />
             </FormButtons>
           </Form>
         )}

@@ -93,7 +93,7 @@
       "restart": "重新开始",
       "review": "评价",
       "submit": "提交",
-      "submitting": "提交中..."
+      "submitting": "提交中"
     },
     "error": {
       "confirmation": "与原始内容不符",

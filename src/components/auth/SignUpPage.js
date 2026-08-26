@@ -13,10 +13,10 @@ import {
   Recaptcha,
   Textarea,
 } from '../form/FormikWrappers'
-import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
+import SubmitButton from '../ui/SubmitButton'
 import AuthLinks from './AuthLinks'
 import { ErrorMessage } from './AuthWrappers'
 import { withAuthRedirect } from './withAuthRedirect'
@@ -133,15 +133,11 @@ const SignUpPage = () => {
             />
 
             <FormButtons>
-              <Button secondary type="reset">
-                {t('form.button.reset')}
-              </Button>
-              <Button
-                type="submit"
-                disabled={!dirty || !isValid || isSubmitting}
-              >
-                {t('glossary.sign_up')}
-              </Button>
+              <SubmitButton
+                isSubmitting={isSubmitting}
+                disabled={!dirty || !isValid}
+                label={t('glossary.sign_up')}
+              />
             </FormButtons>
           </Form>
         )}

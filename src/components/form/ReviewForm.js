@@ -13,6 +13,7 @@ import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import { Optional } from '../ui/LabelTag'
 import SectionHeading from '../ui/SectionHeading'
+import SubmitButton from '../ui/SubmitButton'
 import {
   DateInput,
   PhotoUploader,
@@ -228,14 +229,10 @@ export const ReviewForm = ({ initialValues, editingId = null, innerRef }) => {
                 <Button secondary type="button" onClick={handleCancel}>
                   {t('form.button.cancel')}
                 </Button>
-                <Button
-                  disabled={isSubmitting || !isValid || !reviewDirty}
-                  type="submit"
-                >
-                  {isSubmitting
-                    ? t('form.button.submitting')
-                    : t('form.button.submit')}
-                </Button>
+                <SubmitButton
+                  isSubmitting={isSubmitting}
+                  disabled={!isValid || !reviewDirty}
+                />
               </FormButtons>
             </Form>
           )

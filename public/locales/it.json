@@ -93,7 +93,7 @@
       "restart": "Riavvia",
       "review": "Recensione",
       "submit": "Invia",
-      "submitting": "Invio in corso"
+      "submitting": "Invio"
     },
     "error": {
       "confirmation": "Non corrisponde all'originale",

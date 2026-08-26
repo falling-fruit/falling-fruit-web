@@ -9,10 +9,10 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { ErrorMessage } from '../auth/AuthWrappers'
 import { PasswordInput } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
-import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
+import SubmitButton from '../ui/SubmitButton'
 import withRedirectToAuth from './withRedirectToAuth'
 
 const formToUser = ({ password, new_password }, user) => ({
@@ -109,12 +109,11 @@ const ChangePasswordPage = () => {
                   )}
                 </div>
                 <FormButtons>
-                  <Button
-                    type="submit"
-                    disabled={!dirty || !isValid || isSubmitting}
-                  >
-                    {t('form.button.submit')}
-                  </Button>
+                  <SubmitButton
+                    isSubmitting={isSubmitting}
+                    disabled={!dirty || !isValid}
+                    label={t('users.change_password')}
+                  />
                 </FormButtons>
               </Form>
             )}
