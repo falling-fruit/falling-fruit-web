@@ -158,7 +158,7 @@ const UserActivityPage = () => {
       {isLoading ? (
         <Skeleton width="15em" height={30} style={{ marginBottom: '1em' }} />
       ) : (
-        <h2>
+        <h1>
           {isCurrentUser ? (
             t('users.your_activity')
           ) : (
@@ -166,7 +166,7 @@ const UserActivityPage = () => {
               {t('glossary.activity')}: {userName}
             </>
           )}
-        </h2>
+        </h1>
       )}
 
       <TypesAndPlaces
