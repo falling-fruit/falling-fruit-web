@@ -321,8 +321,8 @@
         "visited": "到访/审核",
         "visited_by_you": "由你审核"
       },
-      "user_activity_empty": "该用户尚未添加、编辑或审核过任何地点",
-      "your_activity_empty": "你尚未添加、编辑或审核过任何地点"
+      "user_activity_empty": "该用户尚未添加、编辑或评价过任何地点",
+      "your_activity_empty": "你尚未添加、编辑或评价过任何地点"
     },
     "data": {
       "caveat_emptor_html": "数据仅供参考，我们不保证其准确性。如果你利用这些数据做出了有趣的应用，请 <a href=\"mailto:feedback@fallingfruit.org\">联系我们</a>！",
@@ -440,8 +440,8 @@
       "垃圾信息/广告",
       "地点不存在",
       "重复地点",
-      "照片不当",
-      "评论内容不当",
+      "评价照片不当",
+      "评价内容不当",
       "其他（请在下方说明）"
     ]
   },
@@ -516,7 +516,7 @@
     "sign_in": "登录",
     "sign_out": "退出登录",
     "this_will_delete_your_account": "这将永久删除您的账户。",
-    "this_will_delete_your_account_explanation": "您贡献的任何地点和评论将变为匿名。",
+    "this_will_delete_your_account_explanation": "您贡献的任何地点和评价将变为匿名。",
     "your_activity": "你的动态"
   }
 }

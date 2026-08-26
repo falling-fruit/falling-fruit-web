@@ -91,7 +91,7 @@
       "report": "Bildir",
       "reset": "Sıfırla",
       "restart": "Yeniden Başlat",
-      "review": "İncele",
+      "review": "Değerlendir",
       "submit": "Gönder",
       "submitting": "Gönderiliyor"
     },
@@ -106,7 +106,7 @@
       "message": "Oturum açmadınız. Hesap olmadan devam edin veya bu gözlemi daha sonra takip etmek ve yönetmek için önce oturum açın veya kaydolun.",
       "title": {
         "add_location": "Konum anonim olarak eklensin mi?",
-        "add_review": "Yorum anonim olarak eklensin mi?",
+        "add_review": "Değerlendirme anonim olarak eklensin mi?",
         "edit_location": "Konum anonim olarak düzenlensin mi?"
       }
     },
@@ -145,7 +145,7 @@
     "yield": "Verim"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Bu konum diğer kullanıcıların yorumlarını içeriyor. Silinmesini talep etmek için lütfen Bildir butonunu kullanın."
+    "cannot_delete_location_with_other_reviews": "Bu konum diğer kullanıcıların değerlendirmelerini içeriyor. Silinmesini talep etmek için lütfen Bildir butonunu kullanın."
   },
   "layouts": {
     "application": {
@@ -321,8 +321,8 @@
         "visited": "ziyaret edildi",
         "visited_by_you": "sizin tarafınızdan ziyaret edildi"
       },
-      "user_activity_empty": "Bu kullanıcı henüz hiç mekan eklemedi, düzenlemedi veya incelemedi",
-      "your_activity_empty": "Henüz hiç mekan eklemediniz, düzenlemediniz veya incelemediniz"
+      "user_activity_empty": "Bu kullanıcı henüz hiç mekan eklemedi, düzenlemedi veya değerlendirmedi",
+      "your_activity_empty": "Henüz hiç mekan eklemediniz, düzenlemediniz veya değerlendirmediniz"
     },
     "data": {
       "caveat_emptor_html": "Verilerin doğruluğu konusunda hiçbir sorumluluk kabul etmiyoruz - veriler olduğu gibi sunulmaktadır, <i>caveat emptor</i>. Eğer verilerle harika bir şey yaparsanız, lütfen <a href=\"mailto:feedback@fallingfruit.org\">bize bildirin</a>!",
@@ -440,8 +440,8 @@
       "Konum spam içeriyor",
       "Konum mevcut değil",
       "Konum tekrar ediyor",
-      "Uygunsuz inceleme fotoğrafı",
-      "Uygunsuz inceleme yorumu",
+      "Uygunsuz değerlendirme fotoğrafı",
+      "Uygunsuz değerlendirme yorumu",
       "Diğer (aşağıda açıklayın)"
     ]
   },
@@ -516,7 +516,7 @@
     "sign_in": "Oturum aç",
     "sign_out": "Oturumu kapat",
     "this_will_delete_your_account": "Bu işlem hesabınızı kalıcı olarak silecektir.",
-    "this_will_delete_your_account_explanation": "Katkıda bulunduğunuz tüm konumlar ve yorumlar anonim hale gelecektir.",
+    "this_will_delete_your_account_explanation": "Katkıda bulunduğunuz tüm konumlar ve değerlendirmeler anonim hale gelecektir.",
     "your_activity": "Aktiviteleriniz"
   }
 }

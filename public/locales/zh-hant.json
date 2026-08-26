@@ -91,7 +91,7 @@
       "report": "舉報",
       "reset": "重置",
       "restart": "重新開始",
-      "review": "審覈",
+      "review": "評論",
       "submit": "提交",
       "submitting": "提交中"
     },
@@ -255,7 +255,7 @@
       "language": "語言",
       "notes": "備註",
       "notes_placeholder": "描述、維基百科鏈接、分類信息...",
-      "pending_notice": "注意：所有新類型默認設置爲待審覈狀態。只有管理員可以添加非待審覈類型。",
+      "pending_notice": "注意：所有新類型默認設置為待審核狀態。只有管理員可以添加非待審核類型。",
       "remove": "刪除"
     },
     "title": "添加新類型"
@@ -321,8 +321,8 @@
         "visited": "訪問",
         "visited_by_you": "由您訪問"
       },
-      "user_activity_empty": "此用戶尚未添加、編輯或審查任何地點",
-      "your_activity_empty": "您尚未添加、編輯或審查任何地點"
+      "user_activity_empty": "此用戶尚未添加、編輯或評論任何地點",
+      "your_activity_empty": "您尚未添加、編輯或評論任何地點"
     },
     "data": {
       "caveat_emptor_html": "我們對數據的準確性不承擔任何責任 - 它按原樣提供，請<i>注意</i>。如果您對數據做了一些很酷的事情，請<a href=\"mailto:feedback@fallingfruit.org\">告訴我們</a>！",

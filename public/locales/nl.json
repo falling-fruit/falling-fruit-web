@@ -106,7 +106,7 @@
       "message": "You are not signed in. Continue without an account, or first sign in or sign up to track and manage this observation later.",
       "title": {
         "add_location": "Add location anonymously?",
-        "add_review": "Add review anonymously?",
+        "add_review": "Recensie anoniem toevoegen?",
         "edit_location": "Edit location anonymously?"
       }
     },
@@ -321,8 +321,8 @@
         "visited": "bezocht",
         "visited_by_you": "door jou bezocht"
       },
-      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld",
-      "your_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld"
+      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of gerecenseerd",
+      "your_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of gerecenseerd"
     },
     "data": {
       "caveat_emptor_html": "We nemen geen verantwoordelijkheid voor de juistheid van de gegevens. Ze worden verstrekt zoals ze zijn, <i>caveat emptor</i>. Als u iets cools doet met onze gegevens, <a href=\"mailto:feedback@fallingfruit.org\">laat het ons dan weten</a>!",
@@ -454,7 +454,7 @@
       "photos": "Foto's"
     },
     "you_observed": "Je hebt deze locatie waargenomen op {{date}}",
-    "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
+    "you_reviewed": "Je hebt deze locatie gerecenseerd op {{date}}"
   },
   "save_location_to_list": {
     "add_new_list": "Nieuwe lijst toevoegen",
@@ -477,9 +477,9 @@
     "location_edited": "Locatie succesvol bewerkt!",
     "location_submitted": "Locatie succesvol ingediend!",
     "report_submitted": "Melding succesvol ingediend!",
-    "review_deleted": "Beoordeling succesvol verwijderd!",
-    "review_edited": "Beoordeling succesvol bewerkt!",
-    "review_submitted": "Beoordeling succesvol ingediend!",
+    "review_deleted": "Recensie succesvol verwijderd!",
+    "review_edited": "Recensie succesvol bewerkt!",
+    "review_submitted": "Recensie succesvol ingediend!",
     "type_added": "Soort succesvol toegevoegd!"
   },
   "type": {
@@ -516,7 +516,7 @@
     "sign_in": "Inloggen",
     "sign_out": "Uitloggen",
     "this_will_delete_your_account": "Dit zal je account permanent verwijderen.",
-    "this_will_delete_your_account_explanation": "Alle locaties en beoordelingen die je hebt bijgedragen worden anoniem.",
+    "this_will_delete_your_account_explanation": "Alle locaties en recensies die je hebt bijgedragen worden anoniem.",
     "your_activity": "Jouw activiteit"
   }
 }
