@@ -44,7 +44,7 @@
       "remove_location_from_list_failed": "从列表中移除位置失败：{{message}}",
       "remove_location_list_failed": "删除位置列表失败：{{message}}",
       "rename_location_list_failed": "重命名位置列表失败：{{message}}",
-      "report_submission_failed": "报告提交失败：{{message}}",
+      "report_submission_failed": "举报提交失败：{{message}}",
       "review_deletion_failed": "评价删除失败：{{message}}",
       "review_edit_failed": "评价编辑失败：{{message}}",
       "review_submission_failed": "评价提交失败：{{message}}",
@@ -88,7 +88,7 @@
       "delete": "删除",
       "edit": "编辑",
       "reload": "重新加载",
-      "report": "报告",
+      "report": "举报",
       "reset": "重置",
       "restart": "重新开始",
       "review": "评价",
@@ -189,13 +189,13 @@
       "confirm_still_exists": "确认仍然存在",
       "over_x_years_ago": "{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
-      "report_no_longer_exists": "报告不再存在",
+      "report_no_longer_exists": "举报不再存在",
       "review_comment_placeholder_still_exists": "还在那里！",
       "unverified_edit_position": "编辑位置",
       "unverified_edit_types": "编辑类型",
       "unverified_mark_as_verified": "标记为已验证",
       "unverified_may_be_inaccurate": "未验证: 可能不准确",
-      "unverified_report_does_not_exist": "报告不存在"
+      "unverified_report_does_not_exist": "举报不存在"
     },
     "index": {
       "editmarker": "移动到来源的位置。"
@@ -476,7 +476,7 @@
     "location_deleted": "地点已删除",
     "location_edited": "修改已保存",
     "location_submitted": "位置提交成功",
-    "report_submitted": "报告已提交",
+    "report_submitted": "举报已提交",
     "review_deleted": "评价已删除",
     "review_edited": "评价已保存",
     "review_submitted": "评价已提交",

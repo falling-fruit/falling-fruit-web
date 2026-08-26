@@ -44,7 +44,7 @@
       "remove_location_from_list_failed": "Konumu listeden kaldırma başarısız: {{message}}",
       "remove_location_list_failed": "Konum listesi kaldırılamadı: {{message}}",
       "rename_location_list_failed": "Konum listesi yeniden adlandırılamadı: {{message}}",
-      "report_submission_failed": "Rapor gönderimi başarısız: {{message}}",
+      "report_submission_failed": "Bildirim gönderimi başarısız: {{message}}",
       "review_deletion_failed": "Değerlendirme silme başarısız: {{message}}",
       "review_edit_failed": "Değerlendirme düzenleme başarısız: {{message}}",
       "review_submission_failed": "Değerlendirme gönderimi başarısız: {{message}}",
@@ -145,7 +145,7 @@
     "yield": "Verim"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Bu konum diğer kullanıcıların yorumlarını içeriyor. Silinmesini talep etmek için lütfen Rapor butonunu kullanın."
+    "cannot_delete_location_with_other_reviews": "Bu konum diğer kullanıcıların yorumlarını içeriyor. Silinmesini talep etmek için lütfen Bildir butonunu kullanın."
   },
   "layouts": {
     "application": {
@@ -476,7 +476,7 @@
     "location_deleted": "Konum başarıyla silindi!",
     "location_edited": "Konum başarıyla düzenlendi!",
     "location_submitted": "Konum başarıyla gönderildi!",
-    "report_submitted": "Rapor başarıyla gönderildi!",
+    "report_submitted": "Bildirim başarıyla gönderildi!",
     "review_deleted": "Değerlendirme başarıyla silindi!",
     "review_edited": "Değerlendirme başarıyla düzenlendi!",
     "review_submitted": "Değerlendirme başarıyla gönderildi!",

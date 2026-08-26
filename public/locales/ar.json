@@ -44,7 +44,7 @@
       "remove_location_from_list_failed": "فشل إزالة الموقع من القائمة: {{message}}",
       "remove_location_list_failed": "فشل إزالة قائمة المواقع: {{message}}",
       "rename_location_list_failed": "فشل إعادة تسمية قائمة المواقع: {{message}}",
-      "report_submission_failed": "فشل تقديم التقرير: {{message}}",
+      "report_submission_failed": "فشل تقديم البلاغ: {{message}}",
       "review_deletion_failed": "فشل حذف المراجعة: {{message}}",
       "review_edit_failed": "فشل تحرير المراجعة: {{message}}",
       "review_submission_failed": "فشل تقديم المراجعة: {{message}}",
@@ -145,7 +145,7 @@
     "yield": "المحصول"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "يحتوي هذا الموقع على مراجعات من مستخدمين آخرين. لطلب حذفه، يرجى استخدام زر الإبلاغ."
+    "cannot_delete_location_with_other_reviews": "يحتوي هذا الموقع على مراجعات من مستخدمين آخرين. لطلب حذفه، يرجى استخدام زر أبلغ."
   },
   "layouts": {
     "application": {
@@ -476,7 +476,7 @@
     "location_deleted": "تم حذف الموقع بنجاح!",
     "location_edited": "تم تعديل الموقع!",
     "location_submitted": "تم إرسال الموقع!",
-    "report_submitted": "تم إرسال التقرير بنجاح!",
+    "report_submitted": "تم إرسال البلاغ بنجاح!",
     "review_deleted": "تم حذف المراجعة!",
     "review_edited": "تم تعديل المراجعة!",
     "review_submitted": "تم إرسال المراجعة!",

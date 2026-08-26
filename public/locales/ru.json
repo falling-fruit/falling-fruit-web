@@ -145,7 +145,7 @@
     "yield": "Урожайность"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Это местоположение содержит отзывы других пользователей. Чтобы запросить его удаление, пожалуйста, используйте кнопку «Сообщить»."
+    "cannot_delete_location_with_other_reviews": "Это местоположение содержит отзывы других пользователей. Чтобы запросить его удаление, пожалуйста, используйте кнопку «Пожаловаться»."
   },
   "layouts": {
     "application": {
@@ -189,13 +189,13 @@
       "confirm_still_exists": "Подтвердить, что существует",
       "over_x_years_ago": "Более {{yearsAgo}} лет назад",
       "report_comment_placeholder_no_longer_exists": "Больше не существует",
-      "report_no_longer_exists": "Сообщить, что больше не существует",
+      "report_no_longer_exists": "Пожаловаться, что больше не существует",
       "review_comment_placeholder_still_exists": "Всё ещё здесь!",
       "unverified_edit_position": "Изменить позицию",
       "unverified_edit_types": "Изменить типы",
       "unverified_mark_as_verified": "Отметить как проверенное",
       "unverified_may_be_inaccurate": "Не проверено: может быть неточным",
-      "unverified_report_does_not_exist": "Сообщить, что не существует"
+      "unverified_report_does_not_exist": "Пожаловаться, что не существует"
     },
     "index": {
       "editmarker": "Переместитесь к позиции источника."
@@ -476,7 +476,7 @@
     "location_deleted": "Местоположение успешно удалено!",
     "location_edited": "Местоположение успешно отредактировано!",
     "location_submitted": "Местоположение успешно отправлено!",
-    "report_submitted": "Отчет успешно отправлен!",
+    "report_submitted": "Жалоба успешно отправлена!",
     "review_deleted": "Отзыв успешно удален!",
     "review_edited": "Отзыв успешно отредактирован!",
     "review_submitted": "Отзыв успешно отправлен!",

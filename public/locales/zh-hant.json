@@ -44,7 +44,7 @@
       "remove_location_from_list_failed": "從清單移除位置失敗：{{message}}",
       "remove_location_list_failed": "移除位置清單失敗：{{message}}",
       "rename_location_list_failed": "重新命名位置清單失敗：{{message}}",
-      "report_submission_failed": "提交報告失敗：{{message}}",
+      "report_submission_failed": "舉報提交失敗：{{message}}",
       "review_deletion_failed": "刪除評論失敗：{{message}}",
       "review_edit_failed": "編輯評論失敗：{{message}}",
       "review_submission_failed": "提交評論失敗：{{message}}",
@@ -145,7 +145,7 @@
     "yield": "產量"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "此地點包含其他用戶的評論。如需要刪除，請使用報告按鈕。"
+    "cannot_delete_location_with_other_reviews": "此地點包含其他用戶的評論。如需要刪除，請使用「舉報」按鈕。"
   },
   "layouts": {
     "application": {
@@ -189,13 +189,13 @@
       "confirm_still_exists": "確認仍然存在",
       "over_x_years_ago": "超過{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
-      "report_no_longer_exists": "報告不再存在",
+      "report_no_longer_exists": "舉報不再存在",
       "review_comment_placeholder_still_exists": "還在那裡！",
       "unverified_edit_position": "編輯位置",
       "unverified_edit_types": "編輯類型",
       "unverified_mark_as_verified": "標記為已驗證",
       "unverified_may_be_inaccurate": "未驗證: 可能不準確",
-      "unverified_report_does_not_exist": "報告不存在"
+      "unverified_report_does_not_exist": "舉報不存在"
     },
     "index": {
       "editmarker": "移動到來源的位置。"
@@ -476,7 +476,7 @@
     "location_deleted": "位置刪除成功！",
     "location_edited": "位置已編輯",
     "location_submitted": "位置已提交",
-    "report_submitted": "報告提交成功！",
+    "report_submitted": "舉報提交成功！",
     "review_deleted": "評論已刪除",
     "review_edited": "評論已編輯",
     "review_submitted": "評論已提交",
