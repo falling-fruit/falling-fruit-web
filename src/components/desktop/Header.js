@@ -241,7 +241,6 @@ const SignupButton = styled(Button)`
   display: block;
   border-radius: 0.375em;
   border: none;
-  font-size: 100%;
   font-family: inherit;
   cursor: pointer;
   background-color: ${({ theme }) => theme.orange};
