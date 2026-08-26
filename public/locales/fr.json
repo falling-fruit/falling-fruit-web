@@ -1,8 +1,8 @@
 {
   "confirm_message": {
-    "delete_location": "Êtes-vous sûr de vouloir supprimer cet emplacement ?",
+    "delete_location": "Êtes-vous sûr de vouloir supprimer ce site ?",
     "delete_review": "Êtes-vous sûr de vouloir supprimer cet avis ?",
-    "mark_as_verified": "Marquer cet emplacement comme vérifié ?"
+    "mark_as_verified": "Marquer ce site comme vérifié ?"
   },
   "devise": {
     "confirmations": {
@@ -26,24 +26,24 @@
   },
   "error_message": {
     "api": {
-      "add_location_list_failed": "Échec de l'ajout de la liste d'emplacements : {{message}}",
-      "add_location_to_list_failed": "Échec de l'ajout de l'emplacement à la liste : {{message}}",
+      "add_location_list_failed": "Échec de l'ajout de la liste de sites : {{message}}",
+      "add_location_to_list_failed": "Échec de l'ajout du site à la liste : {{message}}",
       "fetch_clusters_failed": "Erreur lors de la récupération des clusters : {{message}}",
       "fetch_filter_counts_failed": "Erreur lors de la récupération des compteurs de filtres : {{message}}",
       "fetch_import_failed": "Erreur lors de la récupération du jeu de données {{id}} : {{message}}",
-      "fetch_location_changes_failed": "Échec de la récupération des changements de position : {{message}}",
-      "fetch_location_failed": "Erreur lors de la récupération de l'emplacement {{id}} : {{message}}",
-      "fetch_location_lists_failed": "Échec de la récupération des listes d'emplacements : {{message}}",
-      "fetch_locations_failed": "Erreur lors de la récupération des emplacements : {{message}}",
+      "fetch_location_changes_failed": "Échec de la récupération des changements du site : {{message}}",
+      "fetch_location_failed": "Erreur lors de la récupération du site {{id}} : {{message}}",
+      "fetch_location_lists_failed": "Échec de la récupération des listes de sites : {{message}}",
+      "fetch_locations_failed": "Erreur lors de la récupération des sites : {{message}}",
       "fetch_review_failed": "Erreur lors de la récupération de l'avis {{id}} : {{message}}",
       "fetch_user_failed": "Erreur lors de la récupération de l'utilisateur {{id}} : {{message}}",
-      "location_deletion_failed": "Échec de la suppression de l'emplacement : {{message}}",
-      "location_edit_failed": "Échec de la modification de l'emplacement : {{message}}",
-      "location_submission_failed": "Échec de l'ajout de l'emplacement : {{message}}",
+      "location_deletion_failed": "Échec de la suppression du site : {{message}}",
+      "location_edit_failed": "Échec de la modification du site : {{message}}",
+      "location_submission_failed": "Échec de l'ajout du site : {{message}}",
       "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
-      "remove_location_from_list_failed": "Échec de la suppression de l'emplacement de la liste : {{message}}",
-      "remove_location_list_failed": "Échec de la suppression de la liste d'emplacements : {{message}}",
-      "rename_location_list_failed": "Échec du renommage de la liste d'emplacements : {{message}}",
+      "remove_location_from_list_failed": "Échec de la suppression du site de la liste : {{message}}",
+      "remove_location_list_failed": "Échec de la suppression de la liste de sites : {{message}}",
+      "rename_location_list_failed": "Échec du renommage de la liste de sites : {{message}}",
       "report_submission_failed": "Échec de l'envoi du rapport : {{message}}",
       "review_deletion_failed": "Échec de la suppression de l'avis : {{message}}",
       "review_edit_failed": "Échec de la modification de l'avis : {{message}}",
@@ -77,7 +77,7 @@
   "filter": {
     "all_types": "Tous les types",
     "clear": "Effacer",
-    "include_locations_from_tree_inventories": "Avec les emplacements d'inventaires d'arbres",
+    "include_locations_from_tree_inventories": "Avec les sites d'inventaires d'arbres",
     "select_shown": "Tout sélectionner",
     "within_map_bounds": "Dans les limites de la carte"
   },
@@ -105,9 +105,9 @@
       "do_not_ask_again": "Ne plus demander",
       "message": "Vous n'êtes pas connecté. Continuez sans compte, ou connectez-vous d'abord ou inscrivez-vous pour suivre et gérer cette observation ultérieurement.",
       "title": {
-        "add_location": "Ajouter un emplacement de manière anonyme ?",
+        "add_location": "Ajouter un site de manière anonyme ?",
         "add_review": "Ajouter un avis de manière anonyme ?",
-        "edit_location": "Modifier l'emplacement de manière anonyme ?"
+        "edit_location": "Modifier le site de manière anonyme ?"
       }
     },
     "optional": "Facultatif",
@@ -123,8 +123,8 @@
     "description": "Description",
     "email": "Email",
     "locations": {
-      "one": "Emplacement",
-      "other": "Emplacements"
+      "one": "Site",
+      "other": "Sites"
     },
     "map": "Carte",
     "name": "Nom",
@@ -145,7 +145,7 @@
     "yield": "Production"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Cet endroit contient des avis d'autres utilisateurs. Pour demander sa suppression, veuillez utiliser le bouton Signaler."
+    "cannot_delete_location_with_other_reviews": "Ce site contient des avis d'autres utilisateurs. Pour demander sa suppression, veuillez utiliser le bouton Signaler."
   },
   "layouts": {
     "application": {
@@ -161,7 +161,7 @@
   },
   "list": {
     "no_results": "Aucun résultat trouvé",
-    "zoom_in": "Zoomez sur la carte pour voir les emplacements"
+    "zoom_in": "Zoomez sur la carte pour voir les sites"
   },
   "locations": {
     "add_new": "Ajouter nouveau",
@@ -169,7 +169,7 @@
     "edit_position": {
       "cancel": "Annuler la modification de position",
       "confirm": "Confirmer la modification de position",
-      "instructions": "Modifier la position de l'emplacement."
+      "instructions": "Modifier la position du site."
     },
     "form": {
       "access": "Accès",
@@ -218,11 +218,11 @@
       "fruiting": ["Fleurs", "Fruits pas mûrs", "Fruits mûrs"]
     },
     "init": {
-      "cancel": "Annuler le choix de l'emplacement",
-      "choose_instructions": "Choisissez une position pour votre nouvel emplacement.",
-      "confirm": "Confirmer le choix de l'emplacement",
-      "edit_instructions": "Modifier la position de votre nouvel emplacement.",
-      "position_too_close": "Choisissez une position différente des positions des lieux existants"
+      "cancel": "Annuler le choix du site",
+      "choose_instructions": "Choisissez une position pour votre nouveau site.",
+      "confirm": "Confirmer le choix du site",
+      "edit_instructions": "Modifier la position de votre nouveau site.",
+      "position_too_close": "Choisissez une position différente des positions des sites existants"
     },
     "overview": {
       "added_by": "Ajouté par {{name}}",
@@ -234,7 +234,7 @@
         "in_season": "En saison de {{start_month}} à {{stop_month}}",
         "year_round": "Toute l'année"
       },
-      "street_view_unavailable": "Street View n'est pas disponible à proximité de cet emplacement",
+      "street_view_unavailable": "Street View n'est pas disponible à proximité de ce site",
       "title": "Aperçu"
     }
   },
@@ -321,8 +321,8 @@
         "visited": "visité",
         "visited_by_you": "visité par toi"
       },
-      "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué d'emplacements",
-      "your_activity_empty": "Tu n'as pas encore ajouté, modifié ou évalué d'emplacements"
+      "user_activity_empty": "Cet utilisateur n'a pas encore ajouté, modifié ou évalué de sites",
+      "your_activity_empty": "Tu n'as pas encore ajouté, modifié ou évalué de sites"
     },
     "data": {
       "caveat_emptor_html": "Nous ne sommes pas responsables de la précision des données - elles sont fournies telles quelles, <i>caveat emptor</i>. Si vous faites quelque chose de cool avec ces données, <a href=\"mailto:feedback@fallingfruit.org\">faites-le nous savoir</a>!",
@@ -348,7 +348,7 @@
     },
     "settings": {
       "bicycle": "Vélo",
-      "label_visibility_header": "Étiquettes de localisation",
+      "label_visibility_header": "Étiquettes de site",
       "labels": {
         "always_on": "Toujours activé",
         "off": "Désactivé",
@@ -424,7 +424,7 @@
       "header_message": "Une erreur s'est produite"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les emplacements de plantes comestibles et d'autres sources de nourriture gratuite.",
+      "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les sites de plantes comestibles et d'autres sources de nourriture gratuite.",
       "discover_and_contribute": "Vous pouvez découvrir ce que d'autres ont récolté dans votre quartier et partager vos observations.",
       "explore_the_map": "Explorez la carte",
       "falling_fruit_app_for_android": "Falling Fruit pour Android",
@@ -437,9 +437,9 @@
     "description_subtext": "Toute information pouvant nous aider à évaluer le problème",
     "problem_type": "Type de problème",
     "problem_types": [
-      "L'emplacement est du spam",
-      "L'emplacement n'existe pas",
-      "L'emplacement est un doublon",
+      "Le site est du spam",
+      "Le site n'existe pas",
+      "Le site est un doublon",
       "Photo d'avis inappropriée",
       "Commentaire d'avis inapproprié",
       "Autre (expliquez ci-dessous)"
@@ -453,8 +453,8 @@
       "observed_on": "Observé le {{date}}",
       "photos": "Photos"
     },
-    "you_observed": "Tu as observé cet emplacement le {{date}}",
-    "you_reviewed": "Tu as évalué cet emplacement le {{date}}"
+    "you_observed": "Tu as observé ce site le {{date}}",
+    "you_reviewed": "Tu as évalué ce site le {{date}}"
   },
   "save_location_to_list": {
     "add_new_list": "Ajouter une nouvelle liste",
@@ -463,7 +463,7 @@
     "remove_from_list_confirm": "Retirer \"{{name}}\" de la liste ?",
     "save_label": "Enregistrer",
     "saved_label": "Enregistré",
-    "saved_locations_title": "Emplacements enregistrés"
+    "saved_locations_title": "Sites enregistrés"
   },
   "share": {
     "leave_embed_view_for_full_site": "Site complet",
@@ -473,9 +473,9 @@
   },
   "success_message": {
     "account_deleted": "Compte supprimé avec succès !",
-    "location_deleted": "Emplacement supprimé avec succès !",
-    "location_edited": "Emplacement modifié",
-    "location_submitted": "Emplacement soumis",
+    "location_deleted": "Site supprimé avec succès !",
+    "location_edited": "Site modifié",
+    "location_submitted": "Site soumis",
     "report_submitted": "Rapport soumis avec succès !",
     "review_deleted": "Avis supprimé",
     "review_edited": "Avis modifié",
@@ -516,7 +516,7 @@
     "sign_in": "Se connecter",
     "sign_out": "Se déconnecter",
     "this_will_delete_your_account": "Cela supprimera définitivement votre compte.",
-    "this_will_delete_your_account_explanation": "Tous les lieux et avis que vous avez contribués deviendront anonymes.",
+    "this_will_delete_your_account_explanation": "Tous les sites et avis que vous avez contribués deviendront anonymes.",
     "your_activity": "Ton activité"
   }
 }
