@@ -94,7 +94,7 @@ const PasswordSetPage = () => {
                 disabled={!dirty || !isValid || isSubmitting}
                 type="submit"
               >
-                {t('users.change_password')}
+                {t('form.button.submit')}
               </Button>
             </FormButtons>
           </Form>
