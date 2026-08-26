@@ -156,6 +156,14 @@ const TopSafeAreaInsetPageWrapper = styled(PageWrapper)`
   `}
 `
 
+const InfoPageWrapper = styled(PageWrapper)`
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
+    margin-block: 0;
+  `}
+`
+
 const StyledBackButton = styled(BackButton)`
   padding-inline: 23px;
   padding-block: 1.5em;
@@ -198,7 +206,7 @@ const InfoPage = ({ children }) => {
           />
         </StickyHeader>
       )}
-      <PageWrapper isDesktop={isDesktop}>{children}</PageWrapper>
+      <InfoPageWrapper isDesktop={isDesktop}>{children}</InfoPageWrapper>
     </PageScrollWrapper>
   )
 }
