@@ -48,7 +48,7 @@
       "review_deletion_failed": "Löschen der Bewertung fehlgeschlagen: {{message}}",
       "review_edit_failed": "Bearbeitung der Bewertung fehlgeschlagen: {{message}}",
       "review_submission_failed": "Übermittlung der Bewertung fehlgeschlagen: {{message}}",
-      "type_add_failed": "Hinzufügen eines neuen Typs fehlgeschlagen: {{message}}"
+      "type_add_failed": "Hinzufügen einer neuen Art fehlgeschlagen: {{message}}"
     },
     "auth": {
       "confirmation_failed": "Kontobestätigung fehlgeschlagen: {{message}}",
@@ -75,7 +75,7 @@
     "unknown_error": "Unbekannter Fehler"
   },
   "filter": {
-    "all_types": "Alle Typen",
+    "all_types": "Alle Arten",
     "clear": "Löschen",
     "include_locations_from_tree_inventories": "Mit Baumkataster-Standorten",
     "select_shown": "Alle angezeigten auswählen",
@@ -192,7 +192,7 @@
       "report_no_longer_exists": "Melden, dass es nicht mehr existiert",
       "review_comment_placeholder_still_exists": "Immer noch da!",
       "unverified_edit_position": "Position bearbeiten",
-      "unverified_edit_types": "Typen bearbeiten",
+      "unverified_edit_types": "Arten bearbeiten",
       "unverified_mark_as_verified": "Als verifiziert markieren",
       "unverified_may_be_inaccurate": "Nicht verifiziert: möglicherweise ungenau",
       "unverified_report_does_not_exist": "Melden, dass es nicht existiert"
@@ -249,16 +249,16 @@
     "zoom_in_to_add_location": "Zoome hinein, um einen Standort hinzuzufügen"
   },
   "new_type": {
-    "add_type_label": "Typ hinzufügen:",
+    "add_type_label": "Art hinzufügen:",
     "form": {
       "add_name": "Name hinzufügen",
       "language": "Sprache",
       "notes": "Notizen",
       "notes_placeholder": "Beschreibung, Wikipedia-Link, taxonomische Informationen ...",
-      "pending_notice": "Hinweis: Alle neuen Typen werden standardmäßig als ausstehend markiert. Nur Administratoren können nicht-ausstehende Typen hinzufügen.",
+      "pending_notice": "Hinweis: Alle neuen Arten werden standardmäßig als ausstehend markiert. Nur Administratoren können nicht-ausstehende Arten hinzufügen.",
       "remove": "Entfernen"
     },
-    "title": "Neuen Typ hinzufügen"
+    "title": "Neue Art hinzufügen"
   },
   "pages": {
     "about": {
@@ -480,7 +480,7 @@
     "review_deleted": "Bewertung erfolgreich gelöscht!",
     "review_edited": "Bewertung erfolgreich bearbeitet!",
     "review_submitted": "Bewertung erfolgreich übermittelt!",
-    "type_added": "Typ erfolgreich hinzugefügt!"
+    "type_added": "Art erfolgreich hinzugefügt!"
   },
   "type": {
     "pending_review_category": "Ausstehende Prüfung",

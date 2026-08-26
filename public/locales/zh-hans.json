@@ -48,7 +48,7 @@
       "review_deletion_failed": "评价删除失败：{{message}}",
       "review_edit_failed": "评价编辑失败：{{message}}",
       "review_submission_failed": "评价提交失败：{{message}}",
-      "type_add_failed": "添加新类别失败：{{message}}"
+      "type_add_failed": "添加新种类失败：{{message}}"
     },
     "auth": {
       "confirmation_failed": "账户验证失败：{{message}}",
@@ -75,7 +75,7 @@
     "unknown_error": "发生未知错误"
   },
   "filter": {
-    "all_types": "所有类型",
+    "all_types": "所有种类",
     "clear": "清除",
     "include_locations_from_tree_inventories": "包含树木清单位置",
     "select_shown": "全选当前显示",
@@ -138,8 +138,8 @@
       "one": "树木清单"
     },
     "type": {
-      "one": "类别",
-      "other": "类别"
+      "one": "种类",
+      "other": "种类"
     },
     "unverified": "未验证",
     "yield": "产量"
@@ -192,7 +192,7 @@
       "report_no_longer_exists": "举报不再存在",
       "review_comment_placeholder_still_exists": "还在那里！",
       "unverified_edit_position": "编辑位置",
-      "unverified_edit_types": "编辑类型",
+      "unverified_edit_types": "编辑种类",
       "unverified_mark_as_verified": "标记为已验证",
       "unverified_may_be_inaccurate": "未验证: 可能不准确",
       "unverified_report_does_not_exist": "举报不存在"
@@ -249,16 +249,16 @@
     "zoom_in_to_add_location": "请放大地图以添加地点"
   },
   "new_type": {
-    "add_type_label": "添加类别：",
+    "add_type_label": "添加种类：",
     "form": {
-      "add_name": "类别名称",
+      "add_name": "种类名称",
       "language": "语言",
       "notes": "备注",
       "notes_placeholder": "描述、维基百科链接、分类信息...",
-      "pending_notice": "注意：所有新类别默认为\"待审核\"状态，通过管理员审核后生效。",
+      "pending_notice": "注意：所有新种类默认为\"待审核\"状态，通过管理员审核后生效。",
       "remove": "移除"
     },
-    "title": "添加新类别"
+    "title": "添加新种类"
   },
   "pages": {
     "about": {
@@ -338,7 +338,7 @@
       "intro_html": "我们整合了全球各地的采摘者、林务员和志愿者的成果。如果你知道我们遗漏了哪些数据集，请 <a href=\"mailto:info@fallingfruit.org\">告知我们</a>！你也可以使用我们的 <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">模板</a> 协助我们导入数据。请注意，手动导入后的数据不会与原始来源同步更新。",
       "link": "链接",
       "table_info": "数据集按名称、位置数量和导入日期排序。展开行可查看具体的授权许可和导入详情。",
-      "type": "类型",
+      "type": "种类",
       "types_of_data": "本站数据主要分为两类：\"社区地图\"由各地的采摘爱好者建立；\"树木清单\"则由城市、大学等机构编制。我们从庞大的清单中挖掘可生产食物的物种并标注在地图上。"
     },
     "network_error": {
@@ -435,7 +435,7 @@
   },
   "problems": {
     "description_subtext": "请提供更多详情，以帮助我们核实问题",
-    "problem_type": "问题类别",
+    "problem_type": "问题种类",
     "problem_types": [
       "垃圾信息/广告",
       "地点不存在",
@@ -480,7 +480,7 @@
     "review_deleted": "评价已删除",
     "review_edited": "评价已保存",
     "review_submitted": "评价已提交",
-    "type_added": "类别已添加"
+    "type_added": "种类已添加"
   },
   "type": {
     "pending_review_category": "待审核",

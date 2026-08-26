@@ -48,7 +48,7 @@
       "review_deletion_failed": "Usuwanie recenzji nie powiodło się: {{message}}",
       "review_edit_failed": "Edycja recenzji nie powiodła się: {{message}}",
       "review_submission_failed": "Przesyłanie recenzji nie powiodło się: {{message}}",
-      "type_add_failed": "Dodawanie nowego typu nie powiodło się: {{message}}"
+      "type_add_failed": "Dodawanie nowego rodzaju nie powiodło się: {{message}}"
     },
     "auth": {
       "confirmation_failed": "Potwierdzenie konta nie powiodło się: {{message}}",
@@ -75,7 +75,7 @@
     "unknown_error": "Nieznany błąd"
   },
   "filter": {
-    "all_types": "Wszystkie typy",
+    "all_types": "Wszystkie rodzaje",
     "clear": "Wyczyść",
     "include_locations_from_tree_inventories": "Z lokalizacjami z inwentaryzacji drzew",
     "select_shown": "Zaznacz wszystkie pokazane",
@@ -192,7 +192,7 @@
       "report_no_longer_exists": "Zgłoś, że już nie istnieje",
       "review_comment_placeholder_still_exists": "Wciąż tam jest!",
       "unverified_edit_position": "Edytuj pozycję",
-      "unverified_edit_types": "Edytuj typy",
+      "unverified_edit_types": "Edytuj rodzaje",
       "unverified_mark_as_verified": "Oznacz jako zweryfikowane",
       "unverified_may_be_inaccurate": "Niezweryfikowane: może być niedokładne",
       "unverified_report_does_not_exist": "Zgłoś, że nie istnieje"
@@ -249,16 +249,16 @@
     "zoom_in_to_add_location": "Przybliż, aby dodać lokalizację"
   },
   "new_type": {
-    "add_type_label": "Dodaj typ:",
+    "add_type_label": "Dodaj rodzaj:",
     "form": {
       "add_name": "Dodaj nazwę",
       "language": "Język",
       "notes": "Notatki",
       "notes_placeholder": "Opis, link do Wikipedii, informacje taksonomiczne ...",
-      "pending_notice": "Uwaga: Wszystkie nowe typy są domyślnie ustawione jako oczekujące. Tylko administratorzy mogą dodawać typy nieoczekujące.",
+      "pending_notice": "Uwaga: Wszystkie nowe rodzaje są domyślnie ustawione jako oczekujące. Tylko administratorzy mogą dodawać rodzaje nieoczekujące.",
       "remove": "Usuń"
     },
-    "title": "Dodaj nowy typ"
+    "title": "Dodaj nowy rodzaj"
   },
   "pages": {
     "about": {
@@ -338,7 +338,7 @@
       "intro_html": "Falling Fruit chce być najbardziej kompleksowym i otwartym światowym zbiorem danych geograficznych o miejskich roślinach jadalnych. Podczas gdy nasi użytkownicy badają, edytują i dodają lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, my przeczesujemy znany wszechświat w poszukiwaniu istniejących zbiorów danych i importujemy je bezpośrednio do naszej bazy danych, jednocząc wysiłki zbieraczy, leśników i freegan na całym świecie. Jeśli wiesz o zbiorze danych, którego nam brakuje, prosimy <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a>! Możesz też pomóc nam w procesie importu formatując dane przy użyciu naszego <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Pamiętaj, że ponieważ import musi być wykonywany ręcznie, późniejsze zmiany w oryginalnych danych nie będą widoczne na Falling Fruit.",
       "link": "Link",
       "table_info": "Każdy zestaw danych jest wymieniony z nazwą, liczbą lokalizacji i datą importu. Rozwinięcie każdego wiersza ujawnia dalsze szczegóły na temat oryginalnych danych, procesu importu i licencji określającej, jak można wykorzystać dane.",
-      "type": "Typ",
+      "type": "Rodzaj",
       "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Inwentaryzacje drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich inwentaryzacji drzew."
     },
     "network_error": {
@@ -480,7 +480,7 @@
     "review_deleted": "Recenzja została usunięta!",
     "review_edited": "Recenzja została edytowana!",
     "review_submitted": "Recenzja została przesłana!",
-    "type_added": "Typ został dodany!"
+    "type_added": "Rodzaj został dodany!"
   },
   "type": {
     "pending_review_category": "Oczekuje na przegląd",

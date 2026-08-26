@@ -48,7 +48,7 @@
       "review_deletion_failed": "Αποτυχία διαγραφής αξιολόγησης: {{message}}",
       "review_edit_failed": "Αποτυχία επεξεργασίας αξιολόγησης: {{message}}",
       "review_submission_failed": "Αποτυχία υποβολής αξιολόγησης: {{message}}",
-      "type_add_failed": "Αποτυχία προσθήκης νέου τύπου: {{message}}"
+      "type_add_failed": "Αποτυχία προσθήκης νέου είδους: {{message}}"
     },
     "auth": {
       "confirmation_failed": "Η επιβεβαίωση λογαριασμού απέτυχε: {{message}}",
@@ -75,7 +75,7 @@
     "unknown_error": "Άγνωστο σφάλμα"
   },
   "filter": {
-    "all_types": "Όλοι οι τύποι",
+    "all_types": "Όλα τα είδη",
     "clear": "Εκκαθάριση",
     "include_locations_from_tree_inventories": "Με τοποθεσίες καταγραφής δέντρων",
     "select_shown": "Επιλογή όλων",
@@ -192,7 +192,7 @@
       "report_no_longer_exists": "Αναφορά ότι δεν υπάρχει πλέον",
       "review_comment_placeholder_still_exists": "Εξακολουθεί να υπάρχει!",
       "unverified_edit_position": "Επεξεργασία θέσης",
-      "unverified_edit_types": "Επεξεργασία τύπων",
+      "unverified_edit_types": "Επεξεργασία ειδών",
       "unverified_mark_as_verified": "Επισήμανση ως επαληθευμένο",
       "unverified_may_be_inaccurate": "Μη επαληθευμένο: μπορεί να είναι ανακριβές",
       "unverified_report_does_not_exist": "Αναφορά ότι δεν υπάρχει"
@@ -249,16 +249,16 @@
     "zoom_in_to_add_location": "Μεγέθυνση για προσθήκη τοποθεσίας"
   },
   "new_type": {
-    "add_type_label": "Προσθήκη τύπου:",
+    "add_type_label": "Προσθήκη είδους:",
     "form": {
       "add_name": "Προσθήκη ονόματος",
       "language": "Γλώσσα",
       "notes": "Σημειώσεις",
       "notes_placeholder": "Περιγραφή, σύνδεσμος Wikipedia, ταξινομικές πληροφορίες ...",
-      "pending_notice": "Σημείωση: Όλοι οι νέοι τύποι ορίζονται ως εκκρεμείς από προεπιλογή. Μόνο οι διαχειριστές μπορούν να προσθέσουν μη εκκρεμείς τύπους.",
+      "pending_notice": "Σημείωση: Όλα τα νέα είδη ορίζονται ως εκκρεμή από προεπιλογή. Μόνο οι διαχειριστές μπορούν να προσθέσουν μη εκκρεμή είδη.",
       "remove": "Αφαίρεση"
     },
-    "title": "Προσθήκη νέου τύπου"
+    "title": "Προσθήκη νέου είδους"
   },
   "pages": {
     "about": {
@@ -480,7 +480,7 @@
     "review_deleted": "Η κριτική διαγράφηκε με επιτυχία!",
     "review_edited": "Η κριτική επεξεργάστηκε με επιτυχία!",
     "review_submitted": "Η κριτική υποβλήθηκε με επιτυχία!",
-    "type_added": "Ο τύπος προστέθηκε με επιτυχία!"
+    "type_added": "Το είδος προστέθηκε με επιτυχία!"
   },
   "type": {
     "pending_review_category": "Σε αναμονή αξιολόγησης",

@@ -252,11 +252,11 @@
     "add_type_label": "הוסף סוג:",
     "form": {
       "add_name": "הוסף שם",
-      "language": "Language",
-      "notes": "Notes",
-      "notes_placeholder": "Description, Wikipedia link, taxonomic information ...",
-      "pending_notice": "Note: All new types are set to pending by default. Only administrators can add non-pending types.",
-      "remove": "Remove"
+      "language": "שפה",
+      "notes": "הערות",
+      "notes_placeholder": "תיאור, קישור לויקיפדיה, מידע טקסונומי ...",
+      "pending_notice": "הערה: כל הסוגים החדשים מוגדרים כממתינים כברירת מחדל. רק מנהלי מערכת יכולים להוסיף סוגים שאינם ממתינים.",
+      "remove": "הסר"
     },
     "title": "הוסף סוג חדש"
   },

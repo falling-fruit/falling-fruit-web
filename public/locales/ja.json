@@ -48,7 +48,7 @@
       "review_deletion_failed": "レビューの削除に失敗しました: {{message}}",
       "review_edit_failed": "レビューの編集に失敗しました: {{message}}",
       "review_submission_failed": "レビューの送信に失敗しました: {{message}}",
-      "type_add_failed": "新しいタイプの追加に失敗しました: {{message}}"
+      "type_add_failed": "新しい種類の追加に失敗しました: {{message}}"
     },
     "auth": {
       "confirmation_failed": "アカウントの確認に失敗しました: {{message}}",
@@ -75,7 +75,7 @@
     "unknown_error": "不明なエラー"
   },
   "filter": {
-    "all_types": "すべてのタイプ",
+    "all_types": "すべての種類",
     "clear": "クリア",
     "include_locations_from_tree_inventories": "樹木台帳の位置情報を含む",
     "select_shown": "表示されているものをすべて選択",
@@ -138,8 +138,8 @@
       "one": "樹木台帳"
     },
     "type": {
-      "one": "タイプ",
-      "other": "タイプ"
+      "one": "種類",
+      "other": "種類"
     },
     "unverified": "未確認",
     "yield": "収穫量"
@@ -249,16 +249,16 @@
     "zoom_in_to_add_location": "ズームインして場所を追加"
   },
   "new_type": {
-    "add_type_label": "タイプを追加:",
+    "add_type_label": "種類を追加:",
     "form": {
       "add_name": "名前を追加",
       "language": "言語",
       "notes": "メモ",
       "notes_placeholder": "説明、Wikipediaリンク、分類情報など...",
-      "pending_notice": "注意：すべての新しいタイプはデフォルトで保留中に設定されます。管理者のみが保留中でないタイプを追加できます。",
+      "pending_notice": "注意：すべての新しい種類はデフォルトで保留中に設定されます。管理者のみが保留中でない種類を追加できます。",
       "remove": "削除"
     },
-    "title": "新しいタイプを追加"
+    "title": "新しい種類を追加"
   },
   "pages": {
     "about": {
@@ -338,7 +338,7 @@
       "intro_html": "Falling Fruitは、都市部の食用植物に関する最も包括的でオープンな地理データセットを目指しています。ユーザーが<a href=\"/\">マップ</a>を使用して場所を探索、編集、追加する一方で、私たちは既存のデータセットを探し出し、データベースに直接インポートすることで、世界中のフォレジャー、森林管理者、フリーガンの取り組みを統合しています。私たちが見逃しているデータセットをご存知の場合は、<a href=\"mailto:info@fallingfruit.org\">お知らせください</a>！また、<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">インポートテンプレート</a>を使用してデータをフォーマットすることで、インポートプロセスをお手伝いいただくこともできます。インポートは手動で実行する必要があるため、インポート後に元のデータに加えられたすべての変更はFalling Fruitに反映されないことにご注意ください。",
       "link": "リンク",
       "table_info": "各データセットは、名前、場所の数、インポート日でリストされています。各行を展開すると、データ、インポートプロセス、およびデータの使用方法を規定するライセンスに関する詳細が表示されます。",
-      "type": "タイプ",
+      "type": "種類",
       "types_of_data": "Falling Fruitにインポートされるデータセットは、主に2つのカテゴリに分類されます。「コミュニティマップ」は、フォレジャーやフリーガンが食べ物を求めてコミュニティを探索する際に構築されます。このデータをまとめてくださった勤勉な市民地図作成者の皆様に感謝いたします。「樹木台帳」は、都市、大学、その他の機関が樹木をより適切に記録し、管理することを望んで編集したものです。私たちはこれらの膨大なデータセットから食用種を抽出し、マップに追加しています。お住まいの地域の果樹をマッピングするお手伝いをするために、学校や市に連絡して、樹木台帳を私たちと共有するよう促してください。"
     },
     "network_error": {
@@ -480,7 +480,7 @@
     "review_deleted": "レビューが正常に削除されました！",
     "review_edited": "レビューが正常に編集されました！",
     "review_submitted": "レビューが正常に送信されました！",
-    "type_added": "新しいタイプが正常に追加されました！"
+    "type_added": "新しい種類が正常に追加されました！"
   },
   "type": {
     "pending_review_category": "レビュー待ち",

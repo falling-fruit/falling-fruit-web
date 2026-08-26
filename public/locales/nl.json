@@ -48,7 +48,7 @@
       "review_deletion_failed": "Verwijderen van recensie mislukt: {{message}}",
       "review_edit_failed": "Bewerken van recensie mislukt: {{message}}",
       "review_submission_failed": "Indienen van recensie mislukt: {{message}}",
-      "type_add_failed": "Toevoegen van nieuw type mislukt: {{message}}"
+      "type_add_failed": "Toevoegen van nieuwe soort mislukt: {{message}}"
     },
     "auth": {
       "confirmation_failed": "Accountbevestiging mislukt: {{message}}",
@@ -75,7 +75,7 @@
     "unknown_error": "Onbekende fout"
   },
   "filter": {
-    "all_types": "Alle types",
+    "all_types": "Alle soorten",
     "clear": "Wissen",
     "include_locations_from_tree_inventories": "Met bomenregisterlocaties",
     "select_shown": "Selecteer alle getoonde",
@@ -192,7 +192,7 @@
       "report_no_longer_exists": "Meld dat het niet meer bestaat",
       "review_comment_placeholder_still_exists": "Nog steeds daar!",
       "unverified_edit_position": "Positie bewerken",
-      "unverified_edit_types": "Types bewerken",
+      "unverified_edit_types": "Soorten bewerken",
       "unverified_mark_as_verified": "Markeer als geverifieerd",
       "unverified_may_be_inaccurate": "Niet geverifieerd: kan onnauwkeurig zijn",
       "unverified_report_does_not_exist": "Meld dat het niet bestaat"
@@ -249,7 +249,7 @@
     "zoom_in_to_add_location": "Zoom in om locatie toe te voegen"
   },
   "new_type": {
-    "add_type_label": "Type toevoegen:",
+    "add_type_label": "Soort toevoegen:",
     "form": {
       "add_name": "Naam toevoegen",
       "language": "Taal",
@@ -480,7 +480,7 @@
     "review_deleted": "Beoordeling succesvol verwijderd!",
     "review_edited": "Beoordeling succesvol bewerkt!",
     "review_submitted": "Beoordeling succesvol ingediend!",
-    "type_added": "Type succesvol toegevoegd!"
+    "type_added": "Soort succesvol toegevoegd!"
   },
   "type": {
     "pending_review_category": "In afwachting van beoordeling",
