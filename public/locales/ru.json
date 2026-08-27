@@ -1,8 +1,8 @@
 {
   "confirm_message": {
-    "delete_location": "Вы уверены, что хотите удалить это местоположение?",
+    "delete_location": "Вы уверены, что хотите удалить это место?",
     "delete_review": "Вы уверены, что хотите удалить этот отзыв?",
-    "mark_as_verified": "Отметить это местоположение как проверенное?"
+    "mark_as_verified": "Отметить это место как проверенное?"
   },
   "devise": {
     "confirmations": {
@@ -26,24 +26,24 @@
   },
   "error_message": {
     "api": {
-      "add_location_list_failed": "Не удалось добавить список местоположений: {{message}}",
-      "add_location_to_list_failed": "Не удалось добавить местоположение в список: {{message}}",
+      "add_location_list_failed": "Не удалось добавить список мест: {{message}}",
+      "add_location_to_list_failed": "Не удалось добавить место в список: {{message}}",
       "fetch_clusters_failed": "Ошибка при получении кластеров: {{message}}",
       "fetch_filter_counts_failed": "Ошибка при получении количества фильтров: {{message}}",
       "fetch_import_failed": "Ошибка при получении набора данных {{id}}: {{message}}",
-      "fetch_location_changes_failed": "Не удалось получить изменения местоположения: {{message}}",
-      "fetch_location_failed": "Ошибка при получении местоположения {{id}}: {{message}}",
-      "fetch_location_lists_failed": "Не удалось получить списки местоположений: {{message}}",
-      "fetch_locations_failed": "Ошибка при получении местоположений: {{message}}",
+      "fetch_location_changes_failed": "Не удалось получить изменения места: {{message}}",
+      "fetch_location_failed": "Ошибка при получении места {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Не удалось получить списки мест: {{message}}",
+      "fetch_locations_failed": "Ошибка при получении мест: {{message}}",
       "fetch_review_failed": "Ошибка при получении отзыва {{id}}: {{message}}",
       "fetch_user_failed": "Ошибка при получении пользователя {{id}}: {{message}}",
-      "location_deletion_failed": "Не удалось удалить местоположение: {{message}}",
-      "location_edit_failed": "Не удалось отредактировать местоположение: {{message}}",
-      "location_submission_failed": "Не удалось отправить местоположение: {{message}}",
+      "location_deletion_failed": "Не удалось удалить место: {{message}}",
+      "location_edit_failed": "Не удалось отредактировать место: {{message}}",
+      "location_submission_failed": "Не удалось отправить место: {{message}}",
       "photo_upload_failed": "Не удалось загрузить фото: {{message}}",
-      "remove_location_from_list_failed": "Не удалось удалить местоположение из списка: {{message}}",
-      "remove_location_list_failed": "Не удалось удалить список местоположений: {{message}}",
-      "rename_location_list_failed": "Не удалось переименовать список местоположений: {{message}}",
+      "remove_location_from_list_failed": "Не удалось удалить место из списка: {{message}}",
+      "remove_location_list_failed": "Не удалось удалить список мест: {{message}}",
+      "rename_location_list_failed": "Не удалось переименовать список мест: {{message}}",
       "report_submission_failed": "Не удалось отправить жалобу: {{message}}",
       "review_deletion_failed": "Не удалось удалить отзыв: {{message}}",
       "review_edit_failed": "Не удалось отредактировать отзыв: {{message}}",
