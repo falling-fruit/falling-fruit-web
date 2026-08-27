@@ -48,7 +48,7 @@
       "review_deletion_failed": "Usuwanie recenzji nie powiodło się: {{message}}",
       "review_edit_failed": "Edycja recenzji nie powiodła się: {{message}}",
       "review_submission_failed": "Przesyłanie recenzji nie powiodło się: {{message}}",
-      "type_add_failed": "Dodawanie nowego typu nie powiodło się: {{message}}"
+      "type_add_failed": "Dodawanie nowego rodzaju nie powiodło się: {{message}}"
     },
     "auth": {
       "confirmation_failed": "Potwierdzenie konta nie powiodło się: {{message}}",
@@ -75,7 +75,7 @@
     "unknown_error": "Nieznany błąd"
   },
   "filter": {
-    "all_types": "Wszystkie typy",
+    "all_types": "Wszystkie rodzaje",
     "clear": "Wyczyść",
     "include_locations_from_tree_inventories": "Z lokalizacjami z inwentaryzacji drzew",
     "select_shown": "Zaznacz wszystkie pokazane",
@@ -135,7 +135,7 @@
     },
     "sign_up": "Zarejestruj się",
     "tree_inventory": {
-      "one": "Spis drzew"
+      "one": "Inwentaryzacja drzew"
     },
     "type": {
       "one": "Rodzaj",
@@ -192,7 +192,7 @@
       "report_no_longer_exists": "Zgłoś, że już nie istnieje",
       "review_comment_placeholder_still_exists": "Wciąż tam jest!",
       "unverified_edit_position": "Edytuj pozycję",
-      "unverified_edit_types": "Edytuj typy",
+      "unverified_edit_types": "Edytuj rodzaje",
       "unverified_mark_as_verified": "Oznacz jako zweryfikowane",
       "unverified_may_be_inaccurate": "Niezweryfikowane: może być niedokładne",
       "unverified_report_does_not_exist": "Zgłoś, że nie istnieje"
@@ -231,8 +231,8 @@
       "date_last_updated": "Ostatnia aktualizacja {{date}}",
       "imported_from": "Zaimportowane z {{name}}",
       "season": {
-        "in_season": "W sezonie {{start_month}} - {{stop_month}}",
-        "year_round": "Całoroczne"
+        "in_season": "W sezonie od {{start_month}} do {{stop_month}}",
+        "year_round": "Cały rok"
       },
       "street_view_unavailable": "Street View niedostępne w pobliżu tej lokalizacji",
       "title": "Przegląd"
@@ -249,16 +249,16 @@
     "zoom_in_to_add_location": "Przybliż, aby dodać lokalizację"
   },
   "new_type": {
-    "add_type_label": "Dodaj typ:",
+    "add_type_label": "Dodaj rodzaj:",
     "form": {
       "add_name": "Dodaj nazwę",
       "language": "Język",
       "notes": "Notatki",
       "notes_placeholder": "Opis, link do Wikipedii, informacje taksonomiczne ...",
-      "pending_notice": "Uwaga: Wszystkie nowe typy są domyślnie ustawione jako oczekujące. Tylko administratorzy mogą dodawać typy nieoczekujące.",
+      "pending_notice": "Uwaga: Wszystkie nowe rodzaje są domyślnie ustawione jako oczekujące. Tylko administratorzy mogą dodawać rodzaje nieoczekujące.",
       "remove": "Usuń"
     },
-    "title": "Dodaj nowy typ"
+    "title": "Dodaj nowy rodzaj"
   },
   "pages": {
     "about": {
@@ -274,7 +274,7 @@
       "closing_remarks": "Uwagi końcowe",
       "closing_remarks_para1_html": "Falling Fruit jest organizacją charytatywną typu 501(c)(3) (zwolnioną z podatku) z siedzibą w Boulder w stanie Kolorado. W rezultacie darowizny w Stanach Zjednoczonych podlegają odliczeniu od podatku. Możesz zapoznać się z naszym <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">pismem o zwolnieniu</a> od IRS i zweryfikować nasz status w <a href=\"https://apps.irs.gov/app/eos/\">Publikacji 78 IRS</a> lub u <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Sekretarza Stanu Kolorado</a>. Dostępne są również nasze <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">statuty</a> i <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">protokoły</a> z posiedzeń zarządu.",
       "closing_remarks_para2_html": "Zbieranie żywności w mieście wiąże się z pewnymi względami praktycznymi i moralnymi. Jako wprowadzenie do etyki zbieractwa miejskiego, polecamy wspaniałe podsumowanie tych tematów na bliźniaczej nam stronie z Portland, Oregon <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a>.",
-      "closing_remarks_para3_html": "Informacje na stronie Falling Fruit mogą nie być zgodne z prawdą albo być nieaktualne. Na przykład wiele z map, które zaimportowano do Falling Fruit było na publicznych stronach Google Maps, na których znaczniki mogły być niedokładne albo marker mógł zostać przypadkowo przesunięty. Podobnie, spisy drzew w mieście są aktualizowane rzadko. Proszę, bądźcie przygotowani na pojawiające się czasem niezgodności i poprawiajcie mapę zgodnie z waszymi odkryciami w terenie. Od nas wszystkich zależy czy rośliny na mapie będą dobrze zidentyfikowane i opisane. Dzięki wysiłkowi nas wszystkich mapa ta będzie coraz lepsza.",
+      "closing_remarks_para3_html": "Informacje na stronie Falling Fruit mogą nie być zgodne z prawdą albo być nieaktualne. Na przykład wiele z map, które zaimportowano do Falling Fruit było na publicznych stronach Google Maps, na których znaczniki mogły być niedokładne albo marker mógł zostać przypadkowo przesunięty. Podobnie, inwentaryzacje drzew w mieście są aktualizowane rzadko. Proszę, bądźcie przygotowani na pojawiające się czasem niezgodności i poprawiajcie mapę zgodnie z waszymi odkryciami w terenie. Od nas wszystkich zależy czy rośliny na mapie będą dobrze zidentyfikowane i opisane. Dzięki wysiłkowi nas wszystkich mapa ta będzie coraz lepsza.",
       "contact_us_html": "Ta strona internetowa została stworzona przez i dla zbieraczy - chcemy, aby była najlepszym dostępnym narzędziem dla współczesnych zbieraczy. Napisz do nas na <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>. Chętnie usłyszymy Twoje komentarze!",
       "cristina_rubke_bio_html": "Cristina jest prawnikiem z <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> w San Francisco w Kalifornii, gdzie koncentruje się na ściganiu znaków towarowych i doradztwie. Jest również członkiem zarządu <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a>, która nadzoruje transport publiczny, ruch i parkowanie w San Francisco. W wolnym czasie Cristina pływa w Zatoce San Francisco z <a href=\"//www.baads.org/\">Zrzeszenie Niepełnosprawnych Żeglarzy Zatoki</a> i bierze udział w lokalnych i międzynarodowych regatach.",
       "david_craft_bio_html": "David jest pracownikiem naukowym w Zakładzie Onkologii Radiacyjnej w <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Harvard Medical School</a> w Bostonie, Massachusetts. Jest on również zapalonym poszukiwaczem i autorem książki <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and eating Wild Plants in the City</a> (<a href=\"https://drive.google.com/file/d/1vOp5-5B0BhCwBIxWlewUZYkXlp3fnv_P\">free download</a>).",
@@ -338,8 +338,8 @@
       "intro_html": "Falling Fruit chce być najbardziej kompleksowym i otwartym światowym zbiorem danych geograficznych o miejskich roślinach jadalnych. Podczas gdy nasi użytkownicy badają, edytują i dodają lokalizacje przy użyciu naszej <a href=\"/\">mapy</a>, my przeczesujemy znany wszechświat w poszukiwaniu istniejących zbiorów danych i importujemy je bezpośrednio do naszej bazy danych, jednocząc wysiłki zbieraczy, leśników i freegan na całym świecie. Jeśli wiesz o zbiorze danych, którego nam brakuje, prosimy <a href=\"mailto:info@fallingfruit.org\">daj nam znać</a>! Możesz też pomóc nam w procesie importu formatując dane przy użyciu naszego <a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">szablonu importu</a>. Pamiętaj, że ponieważ import musi być wykonywany ręcznie, późniejsze zmiany w oryginalnych danych nie będą widoczne na Falling Fruit.",
       "link": "Link",
       "table_info": "Każdy zestaw danych jest wymieniony z nazwą, liczbą lokalizacji i datą importu. Rozwinięcie każdego wiersza ujawnia dalsze szczegóły na temat oryginalnych danych, procesu importu i licencji określającej, jak można wykorzystać dane.",
-      "type": "Typ",
-      "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Spisy drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich spisu drzew."
+      "type": "Rodzaj",
+      "types_of_data": "Zbiory danych importowane do Falling Fruit dzielą się na dwie główne kategorie. \"Mapy społecznościowe\" są tworzone przez zbieraczy i freegan, którzy dokumentują jadalne zasoby w swoim otoczeniu. Jesteśmy wdzięczni pracowitym obywatelom-kartografom, którzy zebrali te dane. \"Inwentaryzacje drzew\" są opracowywane przez miasta, uczelnie i inne instytucje, które chcą lepiej dokumentować i dbać o swoje drzewa. Z tych ogromnych zbiorów danych wydobywamy gatunki produkujące żywność i dodajemy je do mapy. Aby pomóc nam umieścić swoją okolicę na mapie, skontaktuj się ze swoją szkołą lub miastem, zachęcając ich do udostępnienia nam ich inwentaryzacji drzew."
     },
     "network_error": {
       "header_message": "Błąd sieci",
@@ -476,11 +476,11 @@
     "location_deleted": "Lokalizacja została pomyślnie usunięta!",
     "location_edited": "Lokalizacja została edytowana!",
     "location_submitted": "Lokalizacja została przesłana!",
-    "report_submitted": "Raport został pomyślnie przesłany!",
+    "report_submitted": "Zgłoszenie zostało pomyślnie przesłane!",
     "review_deleted": "Recenzja została usunięta!",
     "review_edited": "Recenzja została edytowana!",
     "review_submitted": "Recenzja została przesłana!",
-    "type_added": "Typ został dodany!"
+    "type_added": "Rodzaj został dodany!"
   },
   "type": {
     "pending_review_category": "Oczekuje na przegląd",

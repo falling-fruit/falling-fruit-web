@@ -44,7 +44,7 @@
       "remove_location_from_list_failed": "Falha ao remover localização da lista: {{message}}",
       "remove_location_list_failed": "Falha ao remover lista de localização: {{message}}",
       "rename_location_list_failed": "Falha ao renomear lista de localização: {{message}}",
-      "report_submission_failed": "Falha no envio do relatório: {{message}}",
+      "report_submission_failed": "Falha no envio da denúncia: {{message}}",
       "review_deletion_failed": "Falha na exclusão da avaliação: {{message}}",
       "review_edit_failed": "Falha na edição da avaliação: {{message}}",
       "review_submission_failed": "Falha no envio da avaliação: {{message}}",
@@ -88,7 +88,7 @@
       "delete": "Excluir",
       "edit": "Editar",
       "reload": "Recarregar",
-      "report": "Relatar",
+      "report": "Denunciar",
       "reset": "Redefinir",
       "restart": "Reiniciar",
       "review": "Avaliar",
@@ -103,11 +103,11 @@
     "not_signed_in": {
       "continue": "Continuar",
       "do_not_ask_again": "Não perguntar novamente",
-      "message": "No has iniciado sesión. Continúa sin una cuenta, o primero inicia sesión o regístrate para rastrear y gestionar esta observación más tarde.",
+      "message": "Você não está conectado. Continue sem uma conta, ou primeiro entre ou cadastre-se para acompanhar e gerenciar esta observação mais tarde.",
       "title": {
-        "add_location": "¿Agregar ubicación de forma anónima?",
-        "add_review": "¿Agregar reseña de forma anónima?",
-        "edit_location": "¿Editar ubicación de forma anónima?"
+        "add_location": "Adicionar localização anonimamente?",
+        "add_review": "Adicionar avaliação anonimamente?",
+        "edit_location": "Editar localização anonimamente?"
       }
     },
     "optional": "Opcional",
@@ -124,7 +124,7 @@
     "email": "Email",
     "locations": {
       "one": "Localização",
-      "other": "Locais"
+      "other": "Localizações"
     },
     "map": "Mapa",
     "name": "Nome",
@@ -145,7 +145,7 @@
     "yield": "Produção"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Este local contém avaliações de outros usuários. Para solicitar sua exclusão, use o botão Reportar."
+    "cannot_delete_location_with_other_reviews": "Este local contém avaliações de outros usuários. Para solicitar sua exclusão, use o botão Denunciar."
   },
   "layouts": {
     "application": {
@@ -178,24 +178,24 @@
       "description_subtext": "Detalhes da localização, problemas de acesso, estado fitossanitário ...",
       "fruiting_status": "Estado de frutificação",
       "position": "Posição",
-      "season": "Estação",
+      "season": "Temporada",
       "season_start_to_stop_short": "até",
       "street_view_position_warning": "As posições do Street View podem ser imprecisas. Saia do Street View e verifique a posição no mapa antes de enviar."
     },
     "hints": {
       "add_description": "Adicionar descrição",
       "add_season_end": "Adicionar fim da temporada",
-      "add_season_start": "Adicionar início da estação",
+      "add_season_start": "Adicionar início da temporada",
       "confirm_still_exists": "Confirmar que ainda existe",
       "over_x_years_ago": "Há mais de {{yearsAgo}} anos",
       "report_comment_placeholder_no_longer_exists": "Não existe mais",
-      "report_no_longer_exists": "Reportar que não existe mais",
+      "report_no_longer_exists": "Denunciar que não existe mais",
       "review_comment_placeholder_still_exists": "Ainda está lá!",
       "unverified_edit_position": "Editar posição",
       "unverified_edit_types": "Editar tipos",
       "unverified_mark_as_verified": "Marcar como verificado",
       "unverified_may_be_inaccurate": "Não verificado: pode ser impreciso",
-      "unverified_report_does_not_exist": "Reportar que não existe"
+      "unverified_report_does_not_exist": "Denunciar que não existe"
     },
     "index": {
       "editmarker": "Mova-se para a posição da fonte."
@@ -231,7 +231,7 @@
       "date_last_updated": "Última atualização {{date}}",
       "imported_from": "Importado de {{name}}",
       "season": {
-        "in_season": "Na estação de {{start_month}} até {{stop_month}}",
+        "in_season": "Na temporada de {{start_month}} até {{stop_month}}",
         "year_round": "Todo o Ano"
       },
       "street_view_unavailable": "Street View não disponível perto desta localização",
@@ -476,7 +476,7 @@
     "location_deleted": "Localização excluída com sucesso!",
     "location_edited": "Local editado",
     "location_submitted": "Local enviado",
-    "report_submitted": "Relatório enviado com sucesso!",
+    "report_submitted": "Denúncia enviada com sucesso!",
     "review_deleted": "Avaliação excluída",
     "review_edited": "Avaliação editada",
     "review_submitted": "Avaliação enviada",

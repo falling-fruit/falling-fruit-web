@@ -1,8 +1,8 @@
 {
   "confirm_message": {
-    "delete_location": "Вы уверены, что хотите удалить это местоположение?",
+    "delete_location": "Вы уверены, что хотите удалить это место?",
     "delete_review": "Вы уверены, что хотите удалить этот отзыв?",
-    "mark_as_verified": "Отметить это местоположение как проверенное?"
+    "mark_as_verified": "Отметить это место как проверенное?"
   },
   "devise": {
     "confirmations": {
@@ -26,24 +26,24 @@
   },
   "error_message": {
     "api": {
-      "add_location_list_failed": "Не удалось добавить список местоположений: {{message}}",
-      "add_location_to_list_failed": "Не удалось добавить местоположение в список: {{message}}",
+      "add_location_list_failed": "Не удалось добавить список мест: {{message}}",
+      "add_location_to_list_failed": "Не удалось добавить место в список: {{message}}",
       "fetch_clusters_failed": "Ошибка при получении кластеров: {{message}}",
       "fetch_filter_counts_failed": "Ошибка при получении количества фильтров: {{message}}",
       "fetch_import_failed": "Ошибка при получении набора данных {{id}}: {{message}}",
-      "fetch_location_changes_failed": "Не удалось получить изменения местоположения: {{message}}",
-      "fetch_location_failed": "Ошибка при получении местоположения {{id}}: {{message}}",
-      "fetch_location_lists_failed": "Не удалось получить списки местоположений: {{message}}",
-      "fetch_locations_failed": "Ошибка при получении местоположений: {{message}}",
+      "fetch_location_changes_failed": "Не удалось получить изменения места: {{message}}",
+      "fetch_location_failed": "Ошибка при получении места {{id}}: {{message}}",
+      "fetch_location_lists_failed": "Не удалось получить списки мест: {{message}}",
+      "fetch_locations_failed": "Ошибка при получении мест: {{message}}",
       "fetch_review_failed": "Ошибка при получении отзыва {{id}}: {{message}}",
       "fetch_user_failed": "Ошибка при получении пользователя {{id}}: {{message}}",
-      "location_deletion_failed": "Не удалось удалить местоположение: {{message}}",
-      "location_edit_failed": "Не удалось отредактировать местоположение: {{message}}",
-      "location_submission_failed": "Не удалось отправить местоположение: {{message}}",
+      "location_deletion_failed": "Не удалось удалить место: {{message}}",
+      "location_edit_failed": "Не удалось отредактировать место: {{message}}",
+      "location_submission_failed": "Не удалось отправить место: {{message}}",
       "photo_upload_failed": "Не удалось загрузить фото: {{message}}",
-      "remove_location_from_list_failed": "Не удалось удалить местоположение из списка: {{message}}",
-      "remove_location_list_failed": "Не удалось удалить список местоположений: {{message}}",
-      "rename_location_list_failed": "Не удалось переименовать список местоположений: {{message}}",
+      "remove_location_from_list_failed": "Не удалось удалить место из списка: {{message}}",
+      "remove_location_list_failed": "Не удалось удалить список мест: {{message}}",
+      "rename_location_list_failed": "Не удалось переименовать список мест: {{message}}",
       "report_submission_failed": "Не удалось отправить жалобу: {{message}}",
       "review_deletion_failed": "Не удалось удалить отзыв: {{message}}",
       "review_edit_failed": "Не удалось отредактировать отзыв: {{message}}",
@@ -77,7 +77,7 @@
   "filter": {
     "all_types": "Все типы",
     "clear": "Очистить",
-    "include_locations_from_tree_inventories": "С местоположениями из древесных инвентаризаций",
+    "include_locations_from_tree_inventories": "С местоположениями из инвентаризации деревьев",
     "select_shown": "Выбрать все показанные",
     "within_map_bounds": "В пределах границ карты"
   },
@@ -145,7 +145,7 @@
     "yield": "Урожайность"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "Это местоположение содержит отзывы других пользователей. Чтобы запросить его удаление, пожалуйста, используйте кнопку «Сообщить»."
+    "cannot_delete_location_with_other_reviews": "Это местоположение содержит отзывы других пользователей. Чтобы запросить его удаление, пожалуйста, используйте кнопку «Пожаловаться»."
   },
   "layouts": {
     "application": {
@@ -189,13 +189,13 @@
       "confirm_still_exists": "Подтвердить, что существует",
       "over_x_years_ago": "Более {{yearsAgo}} лет назад",
       "report_comment_placeholder_no_longer_exists": "Больше не существует",
-      "report_no_longer_exists": "Сообщить, что больше не существует",
+      "report_no_longer_exists": "Пожаловаться, что больше не существует",
       "review_comment_placeholder_still_exists": "Всё ещё здесь!",
       "unverified_edit_position": "Изменить позицию",
       "unverified_edit_types": "Изменить типы",
       "unverified_mark_as_verified": "Отметить как проверенное",
       "unverified_may_be_inaccurate": "Не проверено: может быть неточным",
-      "unverified_report_does_not_exist": "Сообщить, что не существует"
+      "unverified_report_does_not_exist": "Пожаловаться, что не существует"
     },
     "index": {
       "editmarker": "Переместитесь к позиции источника."
@@ -453,8 +453,8 @@
       "observed_on": "Замечено {{date}}",
       "photos": "Фотографии"
     },
-    "you_observed": "Вы наблюдали это место {{date}}",
-    "you_reviewed": "Вы оставили отзыв об этом месте {{date}}"
+    "you_observed": "Вы наблюдали это местоположение {{date}}",
+    "you_reviewed": "Вы оставили отзыв об этом местоположении {{date}}"
   },
   "save_location_to_list": {
     "add_new_list": "Добавить новый список",
@@ -476,7 +476,7 @@
     "location_deleted": "Местоположение успешно удалено!",
     "location_edited": "Местоположение успешно отредактировано!",
     "location_submitted": "Местоположение успешно отправлено!",
-    "report_submitted": "Отчет успешно отправлен!",
+    "report_submitted": "Жалоба успешно отправлена!",
     "review_deleted": "Отзыв успешно удален!",
     "review_edited": "Отзыв успешно отредактирован!",
     "review_submitted": "Отзыв успешно отправлен!",

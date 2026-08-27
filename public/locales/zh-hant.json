@@ -1,8 +1,8 @@
 {
   "confirm_message": {
-    "delete_location": "你確定要刪除這個位置嗎？",
+    "delete_location": "你確定要刪除這個地點嗎？",
     "delete_review": "你確定要刪除這個評論嗎？",
-    "mark_as_verified": "將此位置標記為已驗證？"
+    "mark_as_verified": "將此地點標記為已驗證？"
   },
   "devise": {
     "confirmations": {
@@ -26,25 +26,25 @@
   },
   "error_message": {
     "api": {
-      "add_location_list_failed": "新增位置清單失敗：{{message}}",
-      "add_location_to_list_failed": "新增位置至清單失敗：{{message}}",
+      "add_location_list_failed": "新增地點清單失敗：{{message}}",
+      "add_location_to_list_failed": "新增地點至清單失敗：{{message}}",
       "fetch_clusters_failed": "獲取群集失敗：{{message}}",
       "fetch_filter_counts_failed": "取得篩選計數時發生錯誤：{{message}}",
       "fetch_import_failed": "獲取數據集{{id}}失敗：{{message}}",
-      "fetch_location_changes_failed": "獲取位置變更失敗：{{message}}",
-      "fetch_location_failed": "獲取位置 {{id}} 失敗：{{message}}",
-      "fetch_location_lists_failed": "獲取位置清單失敗：{{message}}",
-      "fetch_locations_failed": "獲取位置失敗：{{message}}",
+      "fetch_location_changes_failed": "獲取地點變更失敗：{{message}}",
+      "fetch_location_failed": "獲取地點 {{id}} 失敗：{{message}}",
+      "fetch_location_lists_failed": "獲取地點清單失敗：{{message}}",
+      "fetch_locations_failed": "獲取地點失敗：{{message}}",
       "fetch_review_failed": "獲取評論 {{id}} 失敗：{{message}}",
       "fetch_user_failed": "獲取用戶{{id}}失敗：{{message}}",
-      "location_deletion_failed": "刪除位置失敗：{{message}}",
-      "location_edit_failed": "編輯位置失敗：{{message}}",
-      "location_submission_failed": "提交位置失敗：{{message}}",
+      "location_deletion_failed": "刪除地點失敗：{{message}}",
+      "location_edit_failed": "編輯地點失敗：{{message}}",
+      "location_submission_failed": "提交地點失敗：{{message}}",
       "photo_upload_failed": "照片上傳失敗：{{message}}",
-      "remove_location_from_list_failed": "從清單移除位置失敗：{{message}}",
-      "remove_location_list_failed": "移除位置清單失敗：{{message}}",
-      "rename_location_list_failed": "重新命名位置清單失敗：{{message}}",
-      "report_submission_failed": "提交報告失敗：{{message}}",
+      "remove_location_from_list_failed": "從清單移除地點失敗：{{message}}",
+      "remove_location_list_failed": "移除地點清單失敗：{{message}}",
+      "rename_location_list_failed": "重新命名地點清單失敗：{{message}}",
+      "report_submission_failed": "舉報提交失敗：{{message}}",
       "review_deletion_failed": "刪除評論失敗：{{message}}",
       "review_edit_failed": "編輯評論失敗：{{message}}",
       "review_submission_failed": "提交評論失敗：{{message}}",
@@ -77,7 +77,7 @@
   "filter": {
     "all_types": "所有類型",
     "clear": "清除",
-    "include_locations_from_tree_inventories": "包含樹木清單位置",
+    "include_locations_from_tree_inventories": "包含樹木清單地點",
     "select_shown": "選擇所有顯示的項目",
     "within_map_bounds": "在地圖範圍內"
   },
@@ -91,7 +91,7 @@
       "report": "舉報",
       "reset": "重置",
       "restart": "重新開始",
-      "review": "審覈",
+      "review": "評論",
       "submit": "提交",
       "submitting": "提交中"
     },
@@ -124,7 +124,7 @@
     "email": "電子郵件",
     "locations": {
       "one": "地點",
-      "other": "位置"
+      "other": "地點"
     },
     "map": "地圖",
     "name": "名稱",
@@ -141,11 +141,11 @@
       "one": "類型",
       "other": "類型"
     },
-    "unverified": "未經證實",
-    "yield": "屈服"
+    "unverified": "未驗證",
+    "yield": "產量"
   },
   "info_message": {
-    "cannot_delete_location_with_other_reviews": "此地點包含其他用戶的評論。如需要刪除，請使用報告按鈕。"
+    "cannot_delete_location_with_other_reviews": "此地點包含其他用戶的評論。如需要刪除，請使用「舉報」按鈕。"
   },
   "layouts": {
     "application": {
@@ -161,7 +161,7 @@
   },
   "list": {
     "no_results": "未找到結果",
-    "zoom_in": "放大地圖以查看位置數據"
+    "zoom_in": "放大地圖以查看地點數據"
   },
   "locations": {
     "add_new": "添加新的",
@@ -175,27 +175,27 @@
       "access": "訪問",
       "comments": "註釋",
       "comments_subtext": "更新、訪問問題、植物健康......",
-      "description_subtext": "位置詳細信息、訪問問題、植物健康...",
+      "description_subtext": "地點詳細信息、訪問問題、植物健康...",
       "fruiting_status": "果實狀態",
       "position": "位置",
-      "season": "季節",
+      "season": "採收季",
       "season_start_to_stop_short": "至",
       "street_view_position_warning": "街景視圖位置可能不準確。在提交之前，請退出街景視圖並在地圖上檢查位置。"
     },
     "hints": {
       "add_description": "新增描述",
-      "add_season_end": "新增季節結束",
-      "add_season_start": "新增季節開始",
+      "add_season_end": "新增採收季結束",
+      "add_season_start": "新增採收季開始",
       "confirm_still_exists": "確認仍然存在",
       "over_x_years_ago": "超過{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
-      "report_no_longer_exists": "報告不再存在",
+      "report_no_longer_exists": "舉報不再存在",
       "review_comment_placeholder_still_exists": "還在那裡！",
       "unverified_edit_position": "編輯位置",
       "unverified_edit_types": "編輯類型",
       "unverified_mark_as_verified": "標記為已驗證",
-      "unverified_may_be_inaccurate": "未經證實: 可能不準確",
-      "unverified_report_does_not_exist": "報告不存在"
+      "unverified_may_be_inaccurate": "未驗證: 可能不準確",
+      "unverified_report_does_not_exist": "舉報不存在"
     },
     "index": {
       "editmarker": "移動到來源的位置。"
@@ -231,7 +231,7 @@
       "date_last_updated": "最後更新於{{date}}",
       "imported_from": "從{{name}}導入",
       "season": {
-        "in_season": "從{{start_month}}到{{stop_month}}的季節",
+        "in_season": "採收季：{{start_month}} 至 {{stop_month}}",
         "year_round": "全年"
       },
       "street_view_unavailable": "此位置附近的街景視圖不可用",
@@ -239,14 +239,14 @@
     }
   },
   "menu": {
-    "add_new_location": "添加位置",
+    "add_new_location": "添加地點",
     "add_review": "添加評論",
-    "edit_location": "編輯位置",
+    "edit_location": "編輯地點",
     "edit_review": "編輯評論",
     "filters": "篩選",
     "list": "列表",
     "settings": "設置",
-    "zoom_in_to_add_location": "放大以添加位置"
+    "zoom_in_to_add_location": "放大以添加地點"
   },
   "new_type": {
     "add_type_label": "添加類型：",
@@ -255,7 +255,7 @@
       "language": "語言",
       "notes": "備註",
       "notes_placeholder": "描述、維基百科鏈接、分類信息...",
-      "pending_notice": "注意：所有新類型默認設置爲待審覈狀態。只有管理員可以添加非待審覈類型。",
+      "pending_notice": "注意：所有新類型默認設置為待審核狀態。只有管理員可以添加非待審核類型。",
       "remove": "刪除"
     },
     "title": "添加新類型"
@@ -289,7 +289,7 @@
       "join_us_html": "與我們一起慶祝超級本地美食！<a href=\"/\">地圖</a>開放給任何人編輯，數據庫一鍵<a href=\"/about/data\">下載</a><a href=\"https://github.com/falling-fruit/\">，代碼</a>開源。您也被鼓勵與您的人類同胞分享賞金。我們的<a href=\"/about/sharing\">分享頁面</a>列出了數百個當地組織 - 種植公共果園和食用林，從城市樹木和農民的田地中採摘原本浪費的水果和蔬菜，並與鄰居和有需要的人分享。",
       "jp_goguen_bio_html": "JP 是<a href=\"https://library.illinois.edu\">伊利諾伊大學圖書館</a>的媒體技術專家，擁有藝術和資訊科學背景。他居住在伊利諾伊州厄巴納，繪製和拍攝當地野生食物網絡，並組織社區覓食活動和技能分享。2025 年，他的研究和故事收集促成了<a href=\"https://instagram.com/minipopuppawpawmuseum\">迷你快閃木瓜博物館</a>的啟動。當他不在圖書館時，他通常在<a href=\"https://rosebowltavern.com\">厄巴納民謠音樂會</a>彈吉他，或與他的狗 Dalí 一起打飛盤高爾夫。",
       "meagan_shelley_bio_html": "Meagan 是一位企業主和博士候選人，居住在維吉尼亞州中部。她是一名經過認證的<a href=\"https://vmga.net\">園藝大師</a>，住在一個 10 英畝的家園，種植水果、堅果和蔬菜，以及飼養雞、鵪鶉和兔子。她的目標是實踐閉環農業，這是一項持續進行的工作。與此同時，她努力覓食、種植和交換大約 20-30% 的年度食物供應。",
-      "more_about_html": "我們的可食用地圖並非同類地圖中的首創,但它渴望成為世界上最全面的地圖。當我們的用戶貢獻他們自己的位置時,我們會在互聯網上梳理已有的知識,力求將各地的覓食者、林務員和自由主義者的努力聯合起來。<a href=\"/about/data\">導入的數據集</a>範圍從小型社區覓食地圖到大量專業編制的樹木清單。到目前為止,這相當於數百萬位置的數千種不同類型的食物(大多數,但不是全部,植物物種)。除了外來植物和被遺忘已久的本地植物的異國風味的栽培和常見之外,在您的社區覓食是一次穿越時間和跨文化的旅程。",
+      "more_about_html": "我們的可食用地圖並非同類地圖中的首創,但它渴望成為世界上最全面的地圖。當我們的用戶貢獻他們自己的地點時,我們會在互聯網上梳理已有的知識,力求將各地的覓食者、林務員和自由主義者的努力聯合起來。<a href=\"/about/data\">導入的數據集</a>範圍從小型社區覓食地圖到大量專業編制的樹木清單。到目前為止,這相當於數百萬地點的數千種不同類型的食物(大多數,但不是全部,植物物種)。除了外來植物和被遺忘已久的本地植物的異國風味的栽培和常見之外,在您的社區覓食是一次穿越時間和跨文化的旅程。",
       "staff": "職員",
       "technical_director": "技術總監",
       "translate": "翻譯",
@@ -321,8 +321,8 @@
         "visited": "訪問",
         "visited_by_you": "由您訪問"
       },
-      "user_activity_empty": "此用戶尚未添加、編輯或審查任何地點",
-      "your_activity_empty": "您尚未添加、編輯或審查任何地點"
+      "user_activity_empty": "此用戶尚未添加、編輯或評論任何地點",
+      "your_activity_empty": "您尚未添加、編輯或評論任何地點"
     },
     "data": {
       "caveat_emptor_html": "我們對數據的準確性不承擔任何責任 - 它按原樣提供，請<i>注意</i>。如果您對數據做了一些很酷的事情，請<a href=\"mailto:feedback@fallingfruit.org\">告訴我們</a>！",
@@ -335,9 +335,9 @@
       "import_id_and_name": "導入 #{{id}}: {{name}}",
       "imported_datasets": "已導入的數據集",
       "imported_on": "導入於 {{date}}",
-      "intro_html": "Falling Fruit 立志成爲最全面、最開放的城市食品地理數據集。當我們的用戶使用我們的<a href=\"/\">地圖</a>探索、編輯和添加位置時，我們將已知的宇宙梳理爲預先存在的數據集並將它們直接導入數據庫，聯合各地的覓食者、林務員和自由主義者的努力。如果您知道我們遺漏的數據集，請<a href=\"mailto:info@fallingfruit.org\">告訴我們</a>！您還可以通過使用<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">導入模板</a>格式化數據來幫助我們完成導入過程。請注意，由於必須手動執行導入，因此導入後對原始數據所做的所有更改都不會反映在 Falling Fruit 上。",
+      "intro_html": "Falling Fruit 立志成爲最全面、最開放的城市食品地理數據集。當我們的用戶使用我們的<a href=\"/\">地圖</a>探索、編輯和添加地點時，我們將已知的宇宙梳理爲預先存在的數據集並將它們直接導入數據庫，聯合各地的覓食者、林務員和自由主義者的努力。如果您知道我們遺漏的數據集，請<a href=\"mailto:info@fallingfruit.org\">告訴我們</a>！您還可以通過使用<a href=\"https://docs.google.com/spreadsheet/ccc?key=0AiHNFwLuWHvtdGVPamU2M0FZNFhpVTVSNXUtN3ZjRmc&usp=sharing\">導入模板</a>格式化數據來幫助我們完成導入過程。請注意，由於必須手動執行導入，因此導入後對原始數據所做的所有更改都不會反映在 Falling Fruit 上。",
       "link": "鏈接",
-      "table_info": "每個數據集都按名稱、位置數量和導入日期列出。展開每一行會顯示有關數據、導入過程和管理數據使用方式的許可證的更多詳細信息。",
+      "table_info": "每個數據集都按名稱、地點數量和導入日期列出。展開每一行會顯示有關數據、導入過程和管理數據使用方式的許可證的更多詳細信息。",
       "type": "類型",
       "types_of_data": "導入到 Falling Fruit 中的數據集分爲兩大類。 “社區地圖”是由覓食者和自由主義者在他們仔細研究社區尋找食物時建立的。我們感謝辛勤工作的公民製圖員，他們編制了這些數據。 “樹木清單”由希望更好地記錄和照顧樹木的城市、大學和其他機構編制。我們爲生產食物的物種挖掘這些龐大的數據集，並將它們添加到地圖中。爲了幫助我們繪製您附近的果樹地圖，請聯繫您的學校或城市，敦促他們與我們分享他們的樹木清單。"
     },
@@ -348,7 +348,7 @@
     },
     "settings": {
       "bicycle": "自行車",
-      "label_visibility_header": "位置標籤",
+      "label_visibility_header": "地點標籤",
       "labels": {
         "always_on": "始終開啟",
         "off": "關閉",
@@ -424,7 +424,7 @@
       "header_message": "發生錯誤"
     },
     "welcome": {
-      "community_driven_platform": "掉落果實是一個社區驅動的平台，用於分享可食用植物和其他免費食物的位置。",
+      "community_driven_platform": "掉落果實是一個社區驅動的平台，用於分享可食用植物和其他免費食物的地點。",
       "discover_and_contribute": "您可以發現其他人在您社區收穫的成果，並貢獻您的觀察。",
       "explore_the_map": "探索地圖",
       "falling_fruit_app_for_android": "Falling Fruit Android版",
@@ -473,10 +473,10 @@
   },
   "success_message": {
     "account_deleted": "帳戶已成功刪除！",
-    "location_deleted": "位置刪除成功！",
-    "location_edited": "位置已編輯",
-    "location_submitted": "位置已提交",
-    "report_submitted": "報告提交成功！",
+    "location_deleted": "地點已成功刪除！",
+    "location_edited": "地點已編輯",
+    "location_submitted": "地點已提交",
+    "report_submitted": "舉報提交成功！",
     "review_deleted": "評論已刪除",
     "review_edited": "評論已編輯",
     "review_submitted": "評論已提交",

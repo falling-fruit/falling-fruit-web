@@ -48,7 +48,7 @@
       "review_deletion_failed": "Verwijderen van recensie mislukt: {{message}}",
       "review_edit_failed": "Bewerken van recensie mislukt: {{message}}",
       "review_submission_failed": "Indienen van recensie mislukt: {{message}}",
-      "type_add_failed": "Toevoegen van nieuw type mislukt: {{message}}"
+      "type_add_failed": "Toevoegen van nieuwe soort mislukt: {{message}}"
     },
     "auth": {
       "confirmation_failed": "Accountbevestiging mislukt: {{message}}",
@@ -75,9 +75,9 @@
     "unknown_error": "Onbekende fout"
   },
   "filter": {
-    "all_types": "Alle types",
+    "all_types": "Alle soorten",
     "clear": "Wissen",
-    "include_locations_from_tree_inventories": "Met bomeninventarislocaties",
+    "include_locations_from_tree_inventories": "Met bomenregisterlocaties",
     "select_shown": "Selecteer alle getoonde",
     "within_map_bounds": "Binnen kaartgrenzen"
   },
@@ -88,7 +88,7 @@
       "delete": "Delete",
       "edit": "Edit",
       "reload": "Herlaai",
-      "report": "Meld",
+      "report": "Melden",
       "reset": "Reset",
       "restart": "Herbegin",
       "review": "Recenseer",
@@ -106,7 +106,7 @@
       "message": "You are not signed in. Continue without an account, or first sign in or sign up to track and manage this observation later.",
       "title": {
         "add_location": "Add location anonymously?",
-        "add_review": "Add review anonymously?",
+        "add_review": "Recensie anoniem toevoegen?",
         "edit_location": "Edit location anonymously?"
       }
     },
@@ -135,13 +135,13 @@
     },
     "sign_up": "Registreren",
     "tree_inventory": {
-      "one": "Boominventarisatie"
+      "one": "Bomenregister"
     },
     "type": {
       "one": "Soort",
       "other": "Soorten"
     },
-    "unverified": "Niet-bevestigd",
+    "unverified": "Niet geverifieerd",
     "yield": "Opbrengst"
   },
   "info_message": {
@@ -192,9 +192,9 @@
       "report_no_longer_exists": "Meld dat het niet meer bestaat",
       "review_comment_placeholder_still_exists": "Nog steeds daar!",
       "unverified_edit_position": "Positie bewerken",
-      "unverified_edit_types": "Types bewerken",
+      "unverified_edit_types": "Soorten bewerken",
       "unverified_mark_as_verified": "Markeer als geverifieerd",
-      "unverified_may_be_inaccurate": "Niet-bevestigd: kan onnauwkeurig zijn",
+      "unverified_may_be_inaccurate": "Niet geverifieerd: kan onnauwkeurig zijn",
       "unverified_report_does_not_exist": "Meld dat het niet bestaat"
     },
     "index": {
@@ -249,7 +249,7 @@
     "zoom_in_to_add_location": "Zoom in om locatie toe te voegen"
   },
   "new_type": {
-    "add_type_label": "Type toevoegen:",
+    "add_type_label": "Soort toevoegen:",
     "form": {
       "add_name": "Naam toevoegen",
       "language": "Taal",
@@ -274,7 +274,7 @@
       "closing_remarks": "Afsluiting",
       "closing_remarks_para1_html": "Falling Fruit is een 501(c)(3) (vrijgesteld van belasting) openbaar goed doel, gevestigd in Boulder, Colorado. Donaties binnen de Verenigde Staten zijn belastingaftrekbaar. U kunt onze <a href=\"https://apps.irs.gov/pub/epostcard/dl/FinalLetter_46-5363428_FALLINGFRUIT_04122014.tif\">brief van vrijstelling</a> van de Belastingdienst lezen en onze verhouding met de <a href=\"https://apps.irs.gov/app/eos/\">IRS Publication 78</a> of <a href=\"http://www.sos.state.co.us/biz/BusinessEntityCriteriaExt.do?resetTransTyp=Y\">Colorado Secretary of State</a> verifiëren. Tevens beschikbaar zijn onze <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">wetten</a> en raadsvergadering<a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">notulen</a>.",
       "closing_remarks_para2_html": "Het oogsten van voedsel in een stedelijke omgeving brengt bepaalde praktische en morele overwegingen met zich mee. Als u een introductie wilt lezen over de ethiek van stedelijke voedselverzameling, dan raden we onze zustersite aan - Portland, Oregon's <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">Urban Edibles</a>.",
-      "closing_remarks_para3_html": "De informatie op Falling Fruit kan onjuist zijn of verouderd. Het is bijv. zo dat vele van de voedselverzamelkaarten die gemigreerd zijn naar Falling Fruit voorheen gehost waren als Google Maps. De markeerders kunnen dus per ongeluk verplaatst zijn en gemeentelijke boominventarissen worden alleen bijgewerkt als bomen bezocht worden voor onderhoud. Wees voorbereid op onjuistheden en bewerk de map zo nodig indien u ontdekkingen doet. Uiteindelijk komt het op u aan om de identiteit, eetbaarheid en locatie van een plant te bepalen en tevens de verantwoordelijkheid om de kwaliteit van de kaart te verbeteren.",
+      "closing_remarks_para3_html": "De informatie op Falling Fruit kan onjuist zijn of verouderd. Het is bijv. zo dat vele van de voedselverzamelkaarten die gemigreerd zijn naar Falling Fruit voorheen gehost waren als Google Maps. De markeerders kunnen dus per ongeluk verplaatst zijn en gemeentelijke bomenregisters worden alleen bijgewerkt als bomen bezocht worden voor onderhoud. Wees voorbereid op onjuistheden en bewerk de map zo nodig indien u ontdekkingen doet. Uiteindelijk komt het op u aan om de identiteit, eetbaarheid en locatie van een plant te bepalen en tevens de verantwoordelijkheid om de kwaliteit van de kaart te verbeteren.",
       "contact_us_html": "Falling Fruit wordt gebouwd door en voor voedselverzamelaars. Ons doel is het beste hulpmiddel te worden voor alle voedselverzamelaars. Schrijf ons een mailtje, <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>, we horen graag van u!",
       "cristina_rubke_bio_html": "Christina is een advocaat bij <a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">Shartsis Friese LLP</a> in San Francisco, California, waar ze focust op handelsrechtvervolging en begeleiding. Ze is ook lid van het bestuur van de <a href=\"//www.sfmta.com/\">San Francisco Municipal Transportation Agency</a> waar ze zich buigt over openbaar vervoer, verkeer en parkeren in San Francisco. In haar vrije tijd zeilt ze over de San Francisco Bay, samen met de <a href=\"//www.baads.org/\">Bay Area Association of Disabled Sailors</a> en neemt ze deel aan lokale en internationale regatta's.",
       "david_craft_bio_html": "David is een onderzoeker op de Afdeling Radiologie-Oncologie aan de <a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">Harvard Medical School</a> in Boston, Massachusetts. Hij is een gretige voedselverzamelaar en auteur van het boek <a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\">Urban Foraging: Finding and Eating Wild Plants in the City</a> (<a href=\"https://drive.google.com/file/d/1vOp5-5B0BhCwBIxWlewUZYkXlp3fnv_P\">gratis download</a>).",
@@ -289,7 +289,7 @@
       "join_us_html": "Doe met ons mee en vier het lokale voedsel! De <a href=\"/\">kaart</a> is openbaar te bewerken door iedereen, de database kan met slechts één klik worden <a href=\"/about/data\">gedownload</a> en <a href=\"https://github.com/falling-fruit/falling-fruit\">de broncode</a> is open source. U wordt aangemoedigd om het verzamelde voedsel te delen met uw medemens. Onze <a href=\"/about/sharing\">deelpagina</a> bevat een lijst van honderden lokale organisaties die helpen bij het aanplanten van openbare boomgaarden en voedselbossen, het plukken van groente en fruit uit stadsbomen en boerenvelden dat anders weggegooid zou worden en ze delen het met buren en hulpbehoevenden.",
       "jp_goguen_bio_html": "JP is een mediatechnologiespecialist bij de <a href=\"https://library.illinois.edu\">University of Illinois Library</a> met een achtergrond in kunst en informatiewetenschap. Gevestigd in Urbana, IL, brengt hij het lokale wilde voedselnetwerk in kaart en fotografeert hij het, en organiseert hij gemeenschapsexcursies en kennisdelingen. In 2025 leidde zijn onderzoek en het verzamelen van verhalen tot de lancering van het <a href=\"https://instagram.com/minipopuppawpawmuseum\">Mini Popup Pawpaw Museum</a>. Als hij niet in de bibliotheek is, speelt hij meestal gitaar bij de <a href=\"https://rosebowltavern.com\">Urbana Hootenanny</a> of gaat hij discgolfen met zijn hond, Dalí.",
       "meagan_shelley_bio_html": "Meagan is een bedrijfseigenaar en PhD-kandidaat die in Centraal-Virginia woont. Ze is een gecertificeerde <a href=\"https://vmga.net\">Master Gardener</a> en woont op een 10 hectare grote boerderij waar ze fruit, noten en groenten verbouwt, evenals kippen, kwartels en konijnen. Haar doel is om gesloten-kringloop landbouw te beoefenen, wat een voortdurend werk in uitvoering is. Ondertussen werkt ze eraan om ongeveer 20-30% van haar jaarlijkse voedselvoorziening te foerageren, te verbouwen en te ruilen.",
-      "more_about_html": "Onze eetbare kaart is niet de eerste in zijn soort, maar heeft wél als doel om 's werelds meest uitgebreide te worden. Terwijl onze gebruikers locaties bijdragen, kammen wij het internet uit op zoek naar reeds bestaande kennis, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. De <a href=\"/about/data\">geïmporteerde gegevenssets</a> variëren van kleine buurtkaarten voor voedselverzamelaars tot professionele boominventarissen. Tot dusver heeft dit al geleid tot duizenden eetbare soorten (de meeste, maar niet alle, zijn plantensoorten), verspreid over miljoenen locaties. Naast de rijk groeiende locaties met exotische, buitenlandse en vergeten inheemse planten, is voedsel verzamelen in uw buurt een reis door de tijd en cultuur.",
+      "more_about_html": "Onze eetbare kaart is niet de eerste in zijn soort, maar heeft wél als doel om 's werelds meest uitgebreide te worden. Terwijl onze gebruikers locaties bijdragen, kammen wij het internet uit op zoek naar reeds bestaande kennis, met als doel voedselverzamelaars, boswachters en freegans overal ter wereld samen te laten werken. De <a href=\"/about/data\">geïmporteerde gegevenssets</a> variëren van kleine buurtkaarten voor voedselverzamelaars tot professionele bomenregisters. Tot dusver heeft dit al geleid tot duizenden eetbare soorten (de meeste, maar niet alle, zijn plantensoorten), verspreid over miljoenen locaties. Naast de rijk groeiende locaties met exotische, buitenlandse en vergeten inheemse planten, is voedsel verzamelen in uw buurt een reis door de tijd en cultuur.",
       "staff": "Personeel",
       "technical_director": "Technisch Directeur",
       "translate": "Vertalen",
@@ -321,8 +321,8 @@
         "visited": "bezocht",
         "visited_by_you": "door jou bezocht"
       },
-      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of beoordeeld",
-      "your_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of beoordeeld"
+      "user_activity_empty": "Deze gebruiker heeft nog geen locaties toegevoegd, bewerkt of gerecenseerd",
+      "your_activity_empty": "Je hebt nog geen locaties toegevoegd, bewerkt of gerecenseerd"
     },
     "data": {
       "caveat_emptor_html": "We nemen geen verantwoordelijkheid voor de juistheid van de gegevens. Ze worden verstrekt zoals ze zijn, <i>caveat emptor</i>. Als u iets cools doet met onze gegevens, <a href=\"mailto:feedback@fallingfruit.org\">laat het ons dan weten</a>!",
@@ -339,7 +339,7 @@
       "link": "Link",
       "table_info": "Elke gegevensset wordt opgesomd op naam, aantal locaties en importeringsdatum. Het uitklappen van elke rij weergeeft meer informatie over de gegevens, het importteringsproces en de licentie waarin staat hoe u de gegevens mag gebruiken.",
       "type": "Soort",
-      "types_of_data": "Geïmporteerde gegevenssets vallen onder twee hoofdcategorieën. \"Gemeenschapskaarten\" worden gebouwd door voedselverzamelaars en freegans terwijl ze hun gemeenschap afspeuren op zoek naar eetbaar voedsel. Dit wordt gedaan door hardwerkende inwoners met verstand van cartografie; onze dank is dan ook zeer groot. \"Boominventarissen\" worden samengesteld door steden, universiteiten en andere instituten die bomen beter willen documenteren en beter voor ze willen zorgen. We kammen deze gegevenssets uit en selecteren voedselproducerende soorten en voegen deze toe aan de kaart. Als u wilt helpen bij het in kaart brengen van fruitbomen in uw buurt, neem dan contact op met uw school of stad en overtuig ze ervan hun boominventaris met ons te delen."
+      "types_of_data": "Geïmporteerde gegevenssets vallen onder twee hoofdcategorieën. \"Gemeenschapskaarten\" worden gebouwd door voedselverzamelaars en freegans terwijl ze hun gemeenschap afspeuren op zoek naar eetbaar voedsel. Dit wordt gedaan door hardwerkende inwoners met verstand van cartografie; onze dank is dan ook zeer groot. \"Bomenregisters\" worden samengesteld door steden, universiteiten en andere instituten die bomen beter willen documenteren en beter voor ze willen zorgen. We kammen deze gegevenssets uit en selecteren voedselproducerende soorten en voegen deze toe aan de kaart. Als u wilt helpen bij het in kaart brengen van fruitbomen in uw buurt, neem dan contact op met uw school of stad en overtuig ze ervan hun bomenregister met ons te delen."
     },
     "network_error": {
       "header_message": "Netwerkfout",
@@ -454,15 +454,15 @@
       "photos": "Foto's"
     },
     "you_observed": "Je hebt deze locatie waargenomen op {{date}}",
-    "you_reviewed": "Je hebt deze locatie beoordeeld op {{date}}"
+    "you_reviewed": "Je hebt deze locatie gerecenseerd op {{date}}"
   },
   "save_location_to_list": {
-    "add_new_list": "Legg til ny liste",
+    "add_new_list": "Nieuwe lijst toevoegen",
     "delete_list_confirm": "Lijst \"{{name}}\" verwijderen?",
-    "new_list_placeholder": "Listenavn",
+    "new_list_placeholder": "Lijstnaam",
     "remove_from_list_confirm": "\"{{name}}\" van de lijst verwijderen?",
-    "save_label": "Lagre",
-    "saved_label": "Lagret",
+    "save_label": "Opslaan",
+    "saved_label": "Opgeslagen",
     "saved_locations_title": "Opgeslagen locaties"
   },
   "share": {
@@ -477,10 +477,10 @@
     "location_edited": "Locatie succesvol bewerkt!",
     "location_submitted": "Locatie succesvol ingediend!",
     "report_submitted": "Melding succesvol ingediend!",
-    "review_deleted": "Beoordeling succesvol verwijderd!",
-    "review_edited": "Beoordeling succesvol bewerkt!",
-    "review_submitted": "Beoordeling succesvol ingediend!",
-    "type_added": "Type succesvol toegevoegd!"
+    "review_deleted": "Recensie succesvol verwijderd!",
+    "review_edited": "Recensie succesvol bewerkt!",
+    "review_submitted": "Recensie succesvol ingediend!",
+    "type_added": "Soort succesvol toegevoegd!"
   },
   "type": {
     "pending_review_category": "In afwachting van beoordeling",
@@ -516,7 +516,7 @@
     "sign_in": "Inloggen",
     "sign_out": "Uitloggen",
     "this_will_delete_your_account": "Dit zal je account permanent verwijderen.",
-    "this_will_delete_your_account_explanation": "Alle locaties en beoordelingen die je hebt bijgedragen worden anoniem.",
+    "this_will_delete_your_account_explanation": "Alle locaties en recensies die je hebt bijgedragen worden anoniem.",
     "your_activity": "Jouw activiteit"
   }
 }
