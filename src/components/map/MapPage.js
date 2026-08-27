@@ -133,6 +133,12 @@ const clusterBounds = ({ lat, lng, zoom }) => {
   }
 }
 
+const isDegenerate = (bounds) => {
+  const latSpan = Math.abs(bounds.north - bounds.south)
+  const lngSpan = Math.abs(bounds.east - bounds.west)
+  return latSpan < 1e-6 && lngSpan < 1e-6
+}
+
 const makeHandleViewChange = (dispatch, googleMap, history) => {
   const throttledDispatches = throttle((newView) => {
     dispatch(updateLastMapView(newView))
@@ -142,10 +148,16 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
 
   return () => {
     const center = googleMap.getCenter()
+    const bounds = googleMap.getBounds().toJSON()
+
+    if (isDegenerate(bounds)) {
+      return
+    }
+
     const newView = {
       center: { lat: center.lat(), lng: center.lng() },
       zoom: googleMap.getZoom(),
-      bounds: googleMap.getBounds().toJSON(),
+      bounds,
       width: googleMap.getDiv().offsetWidth,
       height: googleMap.getDiv().offsetHeight,
     }
