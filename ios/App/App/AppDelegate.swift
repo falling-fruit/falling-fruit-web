@@ -27,6 +27,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
+        // Workaround for a known iOS/WKWebView bug: after the system presents a
+        // remote-scene-hosted UI (e.g. the PHPickerViewController used by
+        // @capacitor/camera's "choose from library"), WKWebView's internal
+        // gesture recognizers can get stuck in a "possible" state, freezing touch
+        // input until iOS times them out.
+        scheduleStuckWebViewGesturesReset()
+    }
+
+    @objc private func scheduleStuckWebViewGesturesReset() {
+        // The exact moment the picker's hosted scene finishes tearing down (and
+        // therefore the moment the WKWebView's gesture recognizers actually get
+        // stuck) isn't precisely observable from here, so retry a few times
+        // over ~2s to reliably catch and reset any recognizer left in the
+        // "possible" state.
+        for delay in [0.0, 0.2, 0.5, 1.0, 2.0] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                self?.resetStuckWebViewGestures()
+            }
+        }
+    }
+
+    private func resetStuckWebViewGestures() {
+        guard let bridgeViewController = window?.rootViewController as? CAPBridgeViewController,
+              let webView = bridgeViewController.webView else {
+            return
+        }
+
+        // WKWebView's internal touch-handling gesture recognizers (attached to
+        // its private WKContentView subview) can get stuck in the "possible"
+        // state after a remote-scene-hosted picker is dismissed. For any
+        // recognizer still in that state, toggling isEnabled off/on asks UIKit
+        // to cancel it (see UIGestureRecognizer.isEnabled).
+        resetPossibleGestureRecognizers(in: webView)
+    }
+
+    private func resetPossibleGestureRecognizers(in view: UIView) {
+        for recognizer in view.gestureRecognizers ?? [] where recognizer.state == .possible {
+            recognizer.isEnabled = false
+            recognizer.isEnabled = true
+        }
+
+        for subview in view.subviews {
+            resetPossibleGestureRecognizers(in: subview)
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
