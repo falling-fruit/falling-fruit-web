@@ -35,6 +35,10 @@ const OldLabelInline = styled(ResetButton)`
   }
 `
 
+const UnverifiedLabel = styled(OldLabelInline)`
+  margin-inline-start: 0;
+`
+
 const ExistenceActionsContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -180,7 +184,7 @@ export const UnverifiedHintToggle = ({ expanded, onToggle }) => {
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
   return (
-    <OldLabelInline
+    <UnverifiedLabel
       onClick={(e) => {
         e.stopPropagation()
         fullyOpenPaneDrawerIfMobile()
@@ -191,7 +195,7 @@ export const UnverifiedHintToggle = ({ expanded, onToggle }) => {
     >
       {t('locations.hints.unverified_may_be_inaccurate')}
       {expanded ? <ChevronUp size="1em" /> : <ChevronDown size="1em" />}
-    </OldLabelInline>
+    </UnverifiedLabel>
   )
 }
 
