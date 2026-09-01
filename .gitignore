@@ -17,6 +17,7 @@
 .env.*
 .eslintcache
 .vscode
+*.swp
 
 npm-debug.log*
 
