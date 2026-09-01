@@ -98,14 +98,60 @@ const createLabel = (
     targetPane.appendChild(div)
   }
 
-  label.draw = function () {
-    const projection = this.getProjection()
-    const position = projection.fromLatLngToDivPixel(this.position)
+  label._isOnPanorama = function () {
+    const map = this.getMap ? this.getMap() : null
+    return Boolean(map && typeof map.getPov === 'function')
+  }
 
+  label.draw = function () {
+    if (!this.div) {
+      return
+    }
+
+    const projection = this.getProjection()
+    const position = projection
+      ? projection.fromLatLngToDivPixel(this.position)
+      : null
+
+    if (!this._isOnPanorama()) {
+      if (position) {
+        this.div.style.left = `${position.x}px`
+        this.div.style.top = `${position.y}px`
+        this.div.style.transform = 'translate(-50%, 0)'
+      }
+      this.div.style.display = 'block'
+      return
+    }
+
+    let visible = false
     if (position) {
-      this.div.style.left = `${position.x}px`
-      this.div.style.top = `${position.y}px`
-      this.div.style.transform = 'translate(-50%, 0)'
+      const bounds = this._panoramaBounds()
+      const withinX =
+        position.x >= -bounds.marginX &&
+        position.x <= bounds.width + bounds.marginX
+      const withinY =
+        position.y >= -bounds.marginY &&
+        position.y <= bounds.height + bounds.marginY
+      if (withinX && withinY) {
+        this.div.style.left = `${position.x}px`
+        this.div.style.top = `${position.y}px`
+        this.div.style.transform = 'translate(-50%, 0)'
+        visible = true
+      }
+    }
+    this.div.style.display = visible ? 'block' : 'none'
+  }
+
+  label._panoramaBounds = function () {
+    const map = this.getMap ? this.getMap() : null
+    const el = map && map.getDiv ? map.getDiv() : null
+    const width = el ? el.offsetWidth : window.innerWidth
+    const height = el ? el.offsetHeight : window.innerHeight
+    return {
+      width,
+      height,
+      marginX: width,
+      marginY: height,
     }
   }
 
@@ -143,6 +189,10 @@ const createLabel = (
       : this.overlayLayerPane
     if (this.div.parentNode !== targetPane) {
       targetPane.appendChild(this.div)
+    }
+
+    if (this.div.style.display === 'none') {
+      this.draw()
     }
   }
 
