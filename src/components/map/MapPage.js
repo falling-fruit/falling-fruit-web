@@ -133,13 +133,37 @@ const clusterBounds = ({ lat, lng, zoom }) => {
   }
 }
 
-const isDegenerate = (bounds) => {
-  const latSpan = Math.abs(bounds.north - bounds.south)
-  const lngSpan = Math.abs(bounds.east - bounds.west)
-  return latSpan < 1e-6 && lngSpan < 1e-6
+// ~1e-6 degrees ≈ 0.1 m
+const VIEW_EPSILON = 1e-6
+
+const boundsAreEqual = (a, b) =>
+  Math.abs(a.north - b.north) < VIEW_EPSILON &&
+  Math.abs(a.south - b.south) < VIEW_EPSILON &&
+  Math.abs(a.east - b.east) < VIEW_EPSILON &&
+  Math.abs(a.west - b.west) < VIEW_EPSILON
+
+const boundsAreEmpty = (bounds) =>
+  Math.abs(bounds.north - bounds.south) < VIEW_EPSILON &&
+  Math.abs(bounds.east - bounds.west) < VIEW_EPSILON
+
+const shouldFetchForView = (previousView, nextView) => {
+  if (boundsAreEmpty(nextView.bounds)) {
+    return false
+  }
+  if (!previousView) {
+    return true
+  }
+  return (
+    previousView.zoom !== nextView.zoom ||
+    previousView.width !== nextView.width ||
+    previousView.height !== nextView.height ||
+    !boundsAreEqual(previousView.bounds, nextView.bounds)
+  )
 }
 
 const makeHandleViewChange = (dispatch, googleMap, history) => {
+  let lastFetchedView = null
+
   const throttledDispatches = throttle((newView) => {
     dispatch(updateLastMapView(newView))
     dispatch(fetchLocations())
@@ -148,21 +172,21 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
 
   return () => {
     const center = googleMap.getCenter()
-    const bounds = googleMap.getBounds().toJSON()
-
-    if (isDegenerate(bounds)) {
-      return
-    }
-
     const newView = {
       center: { lat: center.lat(), lng: center.lng() },
       zoom: googleMap.getZoom(),
-      bounds,
+      bounds: googleMap.getBounds().toJSON(),
       width: googleMap.getDiv().offsetWidth,
       height: googleMap.getDiv().offsetHeight,
     }
-    throttledDispatches(newView)
+
     history.syncViewToBrowserUrl(newView)
+
+    if (!shouldFetchForView(lastFetchedView, newView)) {
+      return
+    }
+    lastFetchedView = newView
+    throttledDispatches(newView)
   }
 }
 
