@@ -130,9 +130,11 @@ const MobileLayout = () => {
           <Route>
             <Switch>
               <Route path="/locations/init">
-                <TopBar>
-                  <InitLocationNav />
-                </TopBar>
+                {!streetView && (
+                  <TopBar>
+                    <InitLocationNav />
+                  </TopBar>
+                )}
               </Route>
               <Route path="/locations/:locationId/edit/position">
                 {!streetView && (
