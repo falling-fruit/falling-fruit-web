@@ -85,7 +85,11 @@ const mapSlice = createSlice({
 
       const newUrl = currentPathWithView(state.initialView)
 
-      window.history.pushState({}, '', newUrl)
+      const { pathname, search } = window.location
+      const currentUrl = `${pathname}${search}`
+      if (currentUrl !== newUrl) {
+        window.history.pushState({}, '', newUrl)
+      }
     },
   },
   extraReducers: {
