@@ -87,7 +87,16 @@ const FormattedSocials = ({ facebook, instagram, x }) => {
 
 const ShareTheHarvestTable = () => {
   const [filterText, setFilterText] = React.useState('')
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
+  const sortBy = (selector) => (rowA, rowB) => {
+    const a = selector(rowA)
+    const b = selector(rowB)
+    return String(a).localeCompare(String(b), i18n.language, {
+      sensitivity: 'base',
+      numeric: true,
+    })
+  }
 
   const translatedCountries = {
     Australia: t('pages.sharing.countries.australia'),
@@ -113,26 +122,34 @@ const ShareTheHarvestTable = () => {
     'United States': t('pages.sharing.countries.united_states'),
   }
 
+  const countrySelector = (row) =>
+    translatedCountries[row.country] || row.country || '-'
+  const stateSelector = (row) => row.state ?? '-'
+  const citySelector = (row) => row.city ?? '-'
+
   const columns = [
     {
       id: 'country',
       name: t('pages.sharing.heading.country'),
-      selector: (row) => translatedCountries[row.country] || row.country || '-',
+      selector: countrySelector,
       sortable: true,
+      sortFunction: sortBy(countrySelector),
       wrap: true,
     },
     {
       id: 'state',
       name: t('pages.sharing.heading.state'),
-      selector: (row) => row.state ?? '-',
+      selector: stateSelector,
       sortable: true,
+      sortFunction: sortBy(stateSelector),
       wrap: true,
     },
     {
       id: 'city',
       name: t('pages.sharing.heading.city'),
-      selector: (row) => row.city ?? '-',
+      selector: citySelector,
       sortable: true,
+      sortFunction: sortBy(citySelector),
       wrap: true,
     },
     {
@@ -140,6 +157,7 @@ const ShareTheHarvestTable = () => {
       name: t('glossary.name'),
       selector: (row) => row.name,
       sortable: true,
+      sortFunction: sortBy((row) => row.name ?? ''),
       grow: 2.5,
       format: FormattedOrganization,
       wrap: true,
