@@ -1,14 +1,16 @@
 import { getGeocode } from 'use-places-autocomplete'
 
+// Add defaults so place search works before map view has been saved
+const getMapViewSize = (lastMapView) => ({
+    width: lastMapView?.width || 1024,
+    height: lastMapView?.height || 768,
+  })
+
 export const getZoomedInView = (locationLat, locationLng, lastMapView) => {
   const center = { lat: locationLat, lng: locationLng }
   const zoom = 17
-  const bounds = getBoundsForScreenSize(
-    center,
-    zoom,
-    lastMapView.width,
-    lastMapView.height,
-  )
+  const { width, height } = getMapViewSize(lastMapView)
+  const bounds = getBoundsForScreenSize(center, zoom, width, height)
 
   return {
     location: {
@@ -76,20 +78,9 @@ export const getPlaceBounds = async (description, placeId, lastMapView) => {
   }
 
   const center = mercatorToLatLng(mercatorCenter.x, mercatorCenter.y)
-  const zoom = getZoom(
-    ne.lat(),
-    ne.lng(),
-    sw.lat(),
-    sw.lng(),
-    lastMapView.height,
-    lastMapView.width,
-  )
-  const bounds = getBoundsForScreenSize(
-    center,
-    zoom,
-    lastMapView.width,
-    lastMapView.height,
-  )
+  const { width, height } = getMapViewSize(lastMapView)
+  const zoom = getZoom(ne.lat(), ne.lng(), sw.lat(), sw.lng(), height, width)
+  const bounds = getBoundsForScreenSize(center, zoom, width, height)
 
   return {
     location: {

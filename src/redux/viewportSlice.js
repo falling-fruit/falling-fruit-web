@@ -31,8 +31,8 @@ const viewportSlice = createSlice({
   extraReducers: {
     [selectPlace]: (state, action) => {
       const view = {
-        height: state.lastMapView.height,
-        width: state.lastMapView.width,
+        height: state.lastMapView?.height,
+        width: state.lastMapView?.width,
         ...action.payload.place.view,
       }
       state.lastMapView = view
