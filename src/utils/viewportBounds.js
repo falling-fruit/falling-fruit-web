@@ -2,9 +2,9 @@ import { getGeocode } from 'use-places-autocomplete'
 
 // Add defaults so place search works before map view has been saved
 const getMapViewSize = (lastMapView) => ({
-    width: lastMapView?.width || 1024,
-    height: lastMapView?.height || 768,
-  })
+  width: lastMapView?.width || 1024,
+  height: lastMapView?.height || 768,
+})
 
 export const getZoomedInView = (locationLat, locationLng, lastMapView) => {
   const center = { lat: locationLat, lng: locationLng }
