@@ -16,7 +16,7 @@ import {
   setIsBeingEditedAndResetPosition,
 } from '../../redux/locationSlice'
 import { setInitialView } from '../../redux/mapSlice'
-import { currentPathWithView, viewFromCurrentUrl } from '../../utils/appUrl'
+import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import useLocationPane from '../entry/useLocationPane'
@@ -134,10 +134,6 @@ const ConnectLocation = ({
           zoom: 16,
         }
         dispatch(setInitialView(view))
-        // navigate to the page with the new URL
-        // to trigger component reload
-        const newUrl = currentPathWithView(view)
-        history.push(newUrl)
       }
     })
   }, [dispatch, locationId]) //eslint-disable-line

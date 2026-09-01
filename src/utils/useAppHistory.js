@@ -36,7 +36,7 @@ export const useAppHistory = () => {
 
   const syncViewToBrowserUrl = (newView) => {
     const newPath = currentPathWithView(newView)
-    const oldPath = window.location.pathname
+    const oldPath = `${window.location.pathname}${window.location.search}`
     if (oldPath !== newPath) {
       window.history.pushState(null, '', newPath)
     }
