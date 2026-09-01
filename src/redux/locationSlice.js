@@ -42,6 +42,12 @@ const computeLastUpdatedDate = (locationData, reviews) =>
       locationData.updated_at,
     )
 
+const reviewDate = (review) =>
+  new Date(review.observed_on || review.created_at).getTime()
+
+const sortReviewsLatestFirst = (reviews) =>
+  [...reviews].sort((a, b) => reviewDate(b) - reviewDate(a))
+
 export const fetchLocationData = createAsyncThunk(
   'location/fetchLocationData',
   async ({ locationId, isBeingEdited: _, paneDrawerDisabled: __ }) => {
@@ -164,7 +170,7 @@ const locationSlice = createSlice({
         const { reviews, lists, ...locationData } = action.payload
         state.location = locationData
         state.inList = lists.length > 0
-        state.reviews = reviews
+        state.reviews = sortReviewsLatestFirst(reviews)
         state.position = { lat: action.payload.lat, lng: action.payload.lng }
         state.lastUpdatedDate = computeLastUpdatedDate(locationData, reviews)
       }
@@ -191,7 +197,7 @@ const locationSlice = createSlice({
     [addNewLocation.fulfilled]: (state, action) => {
       const reviews = action.payload.reviews || []
       state.location = action.payload
-      state.reviews = reviews
+      state.reviews = sortReviewsLatestFirst(reviews)
       state.locationId = parseInt(action.payload.id)
       state.isLoading = false
       state.isBeingEdited = false
@@ -234,6 +240,7 @@ const locationSlice = createSlice({
     },
     [addNewReview.fulfilled]: (state, action) => {
       state.reviews.push(action.payload)
+      state.reviews = sortReviewsLatestFirst(state.reviews)
       state.lastUpdatedDate = computeLastUpdatedDate(
         state.location,
         state.reviews,
