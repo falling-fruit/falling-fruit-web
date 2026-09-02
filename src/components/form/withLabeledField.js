@@ -45,6 +45,7 @@ export const withField = (WrappedComponent, type, bypassFormik = false) => {
           onChange: toFormikValue
             ? (v) => helpers.setValue(toFormikValue(v))
             : helpers.setValue,
+          onBlur: () => helpers.setTouched(true),
         }
       : field
 
