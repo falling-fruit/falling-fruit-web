@@ -37,6 +37,21 @@ instance.interceptors.request.use((config) => {
   return config
 })
 
+// Singleton so we don't try to refresh twice
+let refreshTokenPromise: Promise<void> | null = null
+
+const refreshAccessToken = (refreshToken: string): Promise<void> => {
+  if (!refreshTokenPromise) {
+    refreshTokenPromise = refreshUserToken(refreshToken)
+      .then((newToken) => persistentStore.renewToken(newToken))
+      .finally(() => {
+        refreshTokenPromise = null
+      })
+  }
+
+  return refreshTokenPromise
+}
+
 instance.interceptors.response.use(
   (response) => response?.data,
   async (error) => {
@@ -52,8 +67,7 @@ instance.interceptors.response.use(
       if (refreshToken) {
         originalRequest._retry = true
 
-        const newToken = await refreshUserToken(refreshToken)
-        persistentStore.renewToken(newToken)
+        await refreshAccessToken(refreshToken)
 
         return instance(originalRequest)
       }
