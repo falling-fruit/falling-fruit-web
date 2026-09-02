@@ -302,6 +302,9 @@ const locationSlice = createSlice({
   },
 })
 
+export const selectReviewsWithPhotos = (state) =>
+  state.location.reviews.filter((review) => review.photos.length > 0)
+
 export const {
   initNewLocation,
   duplicateIntoNewLocation,
