@@ -61,6 +61,7 @@ const ZoomableImage = ({
   const gesture = useRef(null)
   const clickCandidate = useRef(null)
   const movedDuringGesture = useRef(false)
+  const pendingZoomPoint = useRef(null)
 
   const maxScale = naturalScale * MAX_ZOOM_FACTOR
 
@@ -87,6 +88,25 @@ const ZoomableImage = ({
       y: clamp(y, -maxY, maxY),
     }
   }, [])
+
+  const offsetForZoomPoint = useCallback(
+    (prevOffset, prevScale, nextScale, clientX, clientY) => {
+      const el = viewportRef.current
+      if (!el) {
+        return prevOffset
+      }
+      const rect = el.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+      const ratio = nextScale / prevScale
+      const dx = clientX - centerX
+      const dy = clientY - centerY
+      const nextX = ratio * (prevOffset.x - dx) + dx
+      const nextY = ratio * (prevOffset.y - dy) + dy
+      return clampOffset(nextX, nextY, nextScale)
+    },
+    [clampOffset],
+  )
 
   const measureNaturalScale = useCallback(() => {
     const el = viewportRef.current
@@ -115,11 +135,27 @@ const ZoomableImage = ({
 
   useEffect(() => {
     const target = modeScale(viewMode)
-    setScale(target)
-    setOffset((prev) =>
-      target <= 1 ? { x: 0, y: 0 } : clampOffset(prev.x, prev.y, target),
-    )
-  }, [viewMode, modeScale, clampOffset])
+    const zoomPoint = pendingZoomPoint.current
+    pendingZoomPoint.current = null
+    setScale((prevScale) => {
+      setOffset((prev) => {
+        if (target <= 1) {
+          return { x: 0, y: 0 }
+        }
+        if (zoomPoint) {
+          return offsetForZoomPoint(
+            prev,
+            prevScale,
+            target,
+            zoomPoint.x,
+            zoomPoint.y,
+          )
+        }
+        return clampOffset(prev.x, prev.y, target)
+      })
+      return target
+    })
+  }, [viewMode, modeScale, clampOffset, offsetForZoomPoint])
 
   useEffect(() => {
     onZoomedChange?.(scale > 1.001)
@@ -146,9 +182,6 @@ const ZoomableImage = ({
       if (!el) {
         return
       }
-      const rect = el.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
 
       setScale((prevScale) => {
         const clampedScale = clamp(nextScale, 1, maxScale)
@@ -156,22 +189,24 @@ const ZoomableImage = ({
           if (clampedScale <= 1) {
             return { x: 0, y: 0 }
           }
-          const ratio = clampedScale / prevScale
-          const dx = clientX - centerX
-          const dy = clientY - centerY
-          const nextX = ratio * (prevOffset.x - dx) + dx
-          const nextY = ratio * (prevOffset.y - dy) + dy
-          return clampOffset(nextX, nextY, clampedScale)
+          return offsetForZoomPoint(
+            prevOffset,
+            prevScale,
+            clampedScale,
+            clientX,
+            clientY,
+          )
         })
         return clampedScale
       })
     },
-    [clampOffset, maxScale],
+    [offsetForZoomPoint, maxScale],
   )
 
   const handleClick = useCallback(
     (clientX, clientY) => {
       if (viewMode !== 'zoomed') {
+        pendingZoomPoint.current = { x: clientX, y: clientY }
         onStepUp?.()
         return
       }
