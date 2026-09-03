@@ -1,94 +1,106 @@
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
-// Generic wrapper for both type and place displays
-export const ItemWrapper = styled.div`
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  .select__option & {
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
+const ScientificNameRoot = styled.span`
+  font-style: italic;
 `
 
-export const DetailsBlock = styled.span`
-  .select__control & {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 0.1em;
-  }
-  .select__option & {
-    display: block;
-  }
+const Cultivar = styled.span`
+  font-style: normal;
+  margin-inline-start: 0.25em;
 `
 
-export const PrimaryName = styled.span`
+export const ScientificName = ({
+  botanical,
+  cultivar,
+  className,
+  dir,
+  style,
+}) => {
+  if (!botanical && !cultivar) {
+    return null
+  }
+  return (
+    <ScientificNameRoot className={className} dir={dir} style={style}>
+      {botanical}
+      {cultivar && <Cultivar>{cultivar}</Cultivar>}
+    </ScientificNameRoot>
+  )
+}
+
+export const CommonName = styled.span`
   font-weight: bold;
-  color: ${({ theme }) => theme.headerText};
-  .select__control & {
-    margin-inline-end: 0.5em;
-  }
 `
 
-export const SecondaryDetails = styled.span`
-  .select__option & {
-    display: block;
-  }
-
+export const SecondaryScientificName = styled(ScientificName)`
   font-weight: normal;
   color: ${({ theme }) => theme.secondaryText};
 `
 
-export const CountBadge = styled.span`
-  margin-inline-start: 6px;
-  font-size: 0.8rem;
-  background: ${({ theme }) => theme.secondaryBackground};
-  border-radius: 10px;
-  padding: 2px 6px;
-  color: ${({ theme }) => theme.secondaryText};
-  margin-left: auto;
-`
-
-// Type-specific styling for scientific name
-const ScientificName = styled(SecondaryDetails)`
-  font-style: italic;
-`
-
-const Synonyms = styled.span`
-  color: ${({ theme }) => theme.secondaryText};
-
-  .select__control & {
-    display: none;
-  }
-  .select__option & {
-    display: block;
-    flex: 1;
-    text-align: end;
-  }
-`
-
-export const TypeName = ({ commonName, scientificName, synonyms, count }) => {
+export const CommonAndScientificName = ({
+  type,
+  className,
+  style,
+  dir,
+  commonNameAs: CommonNameComponent = CommonName,
+  scientificNameAs: ScientificNameComponent = SecondaryScientificName,
+  commonNameProps,
+  scientificNameProps,
+}) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
+  const { commonName, botanical, cultivar } = type ?? {}
   return (
-    <ItemWrapper>
-      <DetailsBlock>
-        {commonName && <PrimaryName>{commonName}</PrimaryName>}
-        {scientificName && (
-          <ScientificName
-            dir="ltr"
-            style={{ textAlign: isRTL ? 'right' : 'left' }}
-          >
-            {scientificName}
-          </ScientificName>
-        )}
-      </DetailsBlock>
-      {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
-      {count !== undefined && <CountBadge>{count}</CountBadge>}
-    </ItemWrapper>
+    <span className={className} style={style}>
+      {commonName && (
+        <CommonNameComponent {...commonNameProps}>
+          {commonName}
+        </CommonNameComponent>
+      )}
+      {(botanical || cultivar) && (
+        <ScientificNameComponent
+          botanical={botanical}
+          cultivar={cultivar}
+          dir={dir ?? 'ltr'}
+          style={{ textAlign: isRTL ? 'right' : 'left' }}
+          {...scientificNameProps}
+        />
+      )}
+    </span>
+  )
+}
+
+const TypeNameWrapper = styled(CommonAndScientificName)`
+  ${CommonName} {
+    margin-inline-end: 0.25em;
+    color: ${({ theme }) => theme.headerText};
+  }
+`
+
+export const TypeName = ({ type, className, style, dir }) => (
+  <TypeNameWrapper type={type} className={className} style={style} dir={dir} />
+)
+
+export const CommonOrScientificName = ({ label, className, style, dir }) => {
+  if (!label) {
+    return null
+  }
+
+  if (label.isScientific) {
+    return (
+      <ScientificName
+        className={className}
+        style={style}
+        dir={dir ?? 'ltr'}
+        botanical={label.botanical}
+        cultivar={label.cultivar}
+      />
+    )
+  }
+
+  return (
+    <CommonName className={className} style={style} dir={dir}>
+      {label.text}
+    </CommonName>
   )
 }

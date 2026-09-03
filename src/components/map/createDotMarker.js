@@ -11,11 +11,22 @@ const escapeHtml = (text) => {
   return div.innerHTML
 }
 
+const formatScientificHtml = (botanical, cultivar) => {
+  const botanicalHtml = `<i>${escapeHtml(botanical)}</i>`
+  const cultivarHtml = cultivar
+    ? `<span style="font-style: normal; margin-inline-start: 0.25em">${escapeHtml(
+        cultivar,
+      )}</span>`
+    : ''
+  return `<span dir="ltr">${botanicalHtml}${cultivarHtml}</span>`
+}
+
 const formatLabelHtml = (labelData, selectedTypes) =>
   labelData
     .map((item) => {
-      const escapedText = escapeHtml(item.text)
-      const content = item.isScientific ? `<i>${escapedText}</i>` : escapedText
+      const content = item.isScientific
+        ? formatScientificHtml(item.botanical, item.cultivar)
+        : escapeHtml(item.text)
       const isSelected = selectedTypes.includes(item.typeId)
       const opacity = isSelected ? '1.0' : '0.5'
       return `<span data-type-id="${item.typeId}" style="opacity: ${opacity}">${content}</span>`

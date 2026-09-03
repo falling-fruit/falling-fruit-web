@@ -29,6 +29,20 @@ const extractCultivar = (scientificName: string): string | null => {
   return cultivar[1]
 }
 
+const splitScientificName = (
+  scientificName: string,
+): { botanical: string; cultivar: string | null } => {
+  const cultivar = extractCultivar(scientificName)
+  if (cultivar === null) {
+    return { botanical: scientificName.trim(), cultivar: null }
+  }
+  const quoteIndex = scientificName.indexOf("'")
+  return {
+    botanical: scientificName.slice(0, quoteIndex).trim(),
+    cultivar: scientificName.slice(quoteIndex).trim(),
+  }
+}
+
 type Id = number
 type IdDict<T> = { [key: Id]: T }
 const PENDING_ID: Id = -1
@@ -47,13 +61,15 @@ export type LocalizedType = {
   urls: { [url: string]: string }
   categories: string[]
   synonyms: string[]
+  botanical: string
   cultivar: string | null
 }
 
 type TypeSelectMenuEntry = {
   value: Id
   searchReference: string
-  scientificName: string
+  botanical: string
+  cultivar: string | null
   commonName: string
   label: string
   synonyms: string[]
@@ -62,6 +78,8 @@ type TypeSelectMenuEntry = {
 
 type DisplayLabel = {
   text: string
+  botanical: string
+  cultivar: string | null
   isScientific: boolean
   typeId: Id
 }
@@ -77,8 +95,7 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
 
   const synonyms = type.common_names?.[language]?.slice(1) || []
 
-  // Extract cultivar if present
-  const cultivar = extractCultivar(scientificName)
+  const { botanical, cultivar } = splitScientificName(scientificName)
 
   return {
     id: type.id,
@@ -89,6 +106,7 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
     urls: type.urls || {},
     categories: type.categories || [],
     synonyms,
+    botanical,
     cultivar,
   }
 }
@@ -106,14 +124,15 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
   return new TypesAccess(localizedTypes, idIndex, childrenById)
 }
 
-const toMenuEntry = (
-  localizedType: LocalizedType,
+const buildTypeSearchReference = (
+  type: LocalizedType,
   parentCommonName: string,
-) => {
-  const { id, parentId, commonName, scientificName, taxonomicRank, synonyms } =
-    localizedType
+): string => {
+  const { commonName, scientificName, cultivar, synonyms } = type
 
-  const referenceStrings = [commonName, scientificName, ...synonyms]
+  const referenceStrings = [commonName, scientificName, ...synonyms].filter(
+    Boolean,
+  )
 
   // If common name starts with 'common ' or 'Common ', add version without that prefix
   if (commonName.toLowerCase().startsWith('common ')) {
@@ -129,10 +148,23 @@ const toMenuEntry = (
     referenceStrings.push(parentCommonName)
   }
 
-  const cultivar = extractCultivar(scientificName)
   if (cultivar) {
     referenceStrings.push(cultivar)
   }
+
+  return tokenizeReference(referenceStrings)
+}
+
+const toMenuEntry = (localizedType: LocalizedType, searchReference: string) => {
+  const {
+    id,
+    parentId,
+    commonName,
+    botanical,
+    cultivar,
+    taxonomicRank,
+    synonyms,
+  } = localizedType
 
   const commonNameLabel =
     parentId === PENDING_ID
@@ -141,10 +173,11 @@ const toMenuEntry = (
 
   return {
     value: id,
-    searchReference: tokenizeReference(referenceStrings),
+    searchReference,
     commonName: commonNameLabel,
     label: commonNameLabel,
-    scientificName: scientificName,
+    botanical,
+    cultivar,
     taxonomicRank,
     synonyms,
   }
@@ -188,9 +221,8 @@ export class TypesAccess {
     return t ? t.commonName : ''
   }
 
-  getScientificName(id: Id): string {
-    const t = this.localizedTypes[this.idIndex[id]]
-    return t ? t.scientificName : ''
+  buildSearchReference(type: LocalizedType): string {
+    return buildTypeSearchReference(type, this.getCommonName(type.parentId))
   }
 
   getDisplayLabel(id: Id): DisplayLabel | null {
@@ -209,7 +241,9 @@ export class TypesAccess {
           type.commonName.toLowerCase() === parentType.commonName.toLowerCase())
       ) {
         return {
-          text: `${parentType.commonName} '${type.cultivar}'`,
+          text: `${parentType.commonName} ${type.cultivar}`,
+          botanical: '',
+          cultivar: null,
           isScientific: false,
           typeId: id,
         }
@@ -219,6 +253,8 @@ export class TypesAccess {
     if (type.commonName) {
       return {
         text: type.commonName,
+        botanical: '',
+        cultivar: null,
         isScientific: false,
         typeId: id,
       }
@@ -227,6 +263,8 @@ export class TypesAccess {
     if (type.scientificName) {
       return {
         text: type.scientificName,
+        botanical: type.botanical,
+        cultivar: type.cultivar,
         isScientific: true,
         typeId: id,
       }
@@ -237,12 +275,12 @@ export class TypesAccess {
 
   asMenuEntries(): TypeSelectMenuEntry[] {
     return this.localizedTypes.map((t) =>
-      toMenuEntry(t, this.getCommonName(t.parentId)),
+      toMenuEntry(t, this.buildSearchReference(t)),
     )
   }
   getMenuEntry(id: Id): TypeSelectMenuEntry | null {
     const t = this.localizedTypes[this.idIndex[id]]
-    return t ? toMenuEntry(t, this.getCommonName(t.parentId)) : null
+    return t ? toMenuEntry(t, this.buildSearchReference(t)) : null
   }
 
   filter(predicate: (_type: LocalizedType) => boolean): TypesAccess {
@@ -308,6 +346,7 @@ export const typesAccessInLanguage = (
       urls: {},
       categories: [],
       synonyms: [],
+      botanical: '',
       cultivar: null,
     })
   }

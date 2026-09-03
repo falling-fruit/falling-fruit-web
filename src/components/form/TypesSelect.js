@@ -9,7 +9,7 @@ import styled from 'styled-components/macro'
 import { openAddTypeModal } from '../../redux/typeSlice'
 import { tokenizeQuery } from '../../utils/tokenize'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { TypeName } from '../ui/TypeName'
+import { TypeNameOption } from '../ui/SelectOptionLayout'
 import { AddTypeModal } from './AddTypeModal'
 import { CreatableMultiSelect as BaseCreatableSelect } from './FormikWrappers'
 
@@ -76,7 +76,7 @@ const TypesSelect = () => {
               {option.label}
             </div>
           ) : (
-            <TypeName {...option} />
+            <TypeNameOption {...option} />
           )
         }
         isVirtualized

@@ -32,41 +32,26 @@ interface TypeCount extends LocalizedType {
   searchReference: string
 }
 
-function createTypeCount(
-  typeId: number,
-  commonName: string,
-  scientificName: string,
-  count: number = 0,
-  synonyms?: string[],
-): TypeCount {
-  const displayName = commonName || scientificName || `Type ${typeId}`
+interface DiaryType extends LocalizedType {
+  searchReference: string
+}
 
-  const referenceStrings = [
-    commonName,
-    scientificName,
-    ...(synonyms || []),
-  ].filter(Boolean)
+function createTypeCount(type: DiaryType, count: number = 0): TypeCount {
+  const { commonName, scientificName } = type
+  const displayName = commonName || scientificName || `Type ${type.id}`
 
   return {
-    id: typeId,
-    parentId: 0,
-    taxonomicRank: 0,
-    urls: {},
-    categories: [],
-    cultivar: null,
-    commonName,
-    scientificName,
-    synonyms: synonyms || [],
+    ...type,
     count,
-    value: typeId,
+    value: type.id,
     label: displayName,
-    searchReference: tokenizeReference(referenceStrings),
+    searchReference: type.searchReference,
   }
 }
 
 interface LocationTypes {
   locationId: number
-  types: Array<LocalizedType>
+  types: Array<DiaryType>
   viewString: string
   isSelected: boolean
 }
@@ -207,9 +192,13 @@ function transformActivityData(
         }
 
         const group = groupedActivities.get(groupKey)!
-        const types = change.type_ids
+        const types: DiaryType[] = change.type_ids
           .map((typeId) => typesAccess.getType(typeId))
           .filter(Boolean)
+          .map((type) => ({
+            ...type,
+            searchReference: typesAccess.buildSearchReference(type),
+          }))
 
         const locationTypes: LocationTypes = {
           locationId: change.location_id,
@@ -312,13 +301,7 @@ class ActivityDiary {
             const typeId = type.id
 
             if (!typeCountMap[typeId]) {
-              typeCountMap[typeId] = createTypeCount(
-                typeId,
-                type.commonName || '',
-                type.scientificName || '',
-                0,
-                type.synonyms,
-              )
+              typeCountMap[typeId] = createTypeCount(type, 0)
             }
 
             // Always increment the total count

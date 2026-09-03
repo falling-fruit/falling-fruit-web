@@ -11,6 +11,7 @@ import {
   setUserActivityLastBrowsedSection,
 } from '../../redux/activitySlice'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import { CommonOrScientificName } from '../ui/TypeName'
 
 const formatChangeType = (type, t, isCurrentUser = false) => {
   // Create a composite key for the switch statement
@@ -46,14 +47,6 @@ const LocationLink = styled(Link)`
   }
 `
 
-const ScientificName = styled.span`
-  font-style: italic;
-`
-
-const CommonName = styled.span`
-  font-weight: bold;
-`
-
 const ListChanges = styled.ul`
   list-style-type: none;
   padding: 0;
@@ -73,28 +66,21 @@ const LatestSkeletonItem = styled.li`
 
 const LocationTypesList = ({ locations, onClickLink }) => {
   const isDesktop = useIsDesktop()
+  const { typesAccess } = useSelector((state) => state.type)
   return (
     <>
       {locations.map((loc, idx) => {
         const typeElements = loc.types.map((type, typeIdx) => {
-          // Use the isSelected property that was set by ActivityDiaryFilter
           const opacity = loc.isSelected ? 1 : 0.5
 
-          if (type.commonName) {
-            return (
-              <CommonName key={`common-${typeIdx}`} style={{ opacity }}>
-                {type.commonName}
-              </CommonName>
-            )
-          }
-          if (type.scientificName) {
-            return (
-              <ScientificName key={`scientific-${typeIdx}`} style={{ opacity }}>
-                {type.scientificName}
-              </ScientificName>
-            )
-          }
-          return null
+          const label = typesAccess.getDisplayLabel(type.id)
+          return (
+            <CommonOrScientificName
+              key={`type-${typeIdx}`}
+              label={label}
+              style={{ opacity }}
+            />
+          )
         })
 
         const filteredTypes = typeElements.filter(Boolean)

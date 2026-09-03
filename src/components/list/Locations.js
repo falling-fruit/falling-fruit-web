@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
+import { TypeName } from '../ui/TypeName'
 import DistanceText from './DistanceText'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
@@ -19,26 +20,6 @@ const TypeNameTagWrapper = styled.span`
     color: ${({ theme }) => theme.secondaryText};
   }
 `
-const CommonName = styled.span`
-  font-weight: bold;
-  color: ${({ theme }) => theme.headerText};
-`
-
-const ScientificName = styled.span`
-  font-weight: normal;
-  font-style: italic;
-  color: ${({ theme }) => theme.secondaryText};
-`
-
-const TypeName = ({ commonName, scientificName }) => (
-  <span>
-    {commonName && <CommonName>{commonName}</CommonName>}
-    {commonName && scientificName && <span style={{ margin: '0 0.25em' }} />}
-    {scientificName && (
-      <ScientificName dir="ltr">{scientificName}</ScientificName>
-    )}
-  </span>
-)
 
 const LocationItem = styled.li`
   display: flex;
@@ -180,10 +161,7 @@ const Locations = ({
               const isSelected = selectedTypes.includes(typeId)
               return (
                 <TypeNameTagWrapper key={typeId} isSelected={isSelected}>
-                  <TypeName
-                    commonName={type?.commonName}
-                    scientificName={type?.scientificName}
-                  />
+                  <TypeName type={type} />
                 </TypeNameTagWrapper>
               )
             })}

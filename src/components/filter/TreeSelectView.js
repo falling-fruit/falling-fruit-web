@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import { ScientificName as ScientificNameBase } from '../ui/TypeName'
 import { ReactComponent as ArrowIcon } from './arrow.svg'
 
 const ControlsContainer = styled.div`
@@ -75,8 +76,7 @@ const CommonName = styled.span`
     isDisabled ? theme.text : theme.secondaryText};
 `
 
-const ScientificName = styled.span`
-  font-style: italic;
+const ScientificName = styled(ScientificNameBase)`
   margin-inline-end: 0.5em;
   opacity: ${({ isDisabled }) => (isDisabled ? 0.7 : 1)};
   color: ${({ theme }) => theme.text};
@@ -157,10 +157,12 @@ const TreeSelectView = ({
             {node.commonName && (
               <CommonName isDisabled={isDisabled}>{node.commonName}</CommonName>
             )}
-            {node.scientificName && (
-              <ScientificName isDisabled={isDisabled}>
-                {node.scientificName}
-              </ScientificName>
+            {(node.botanical || node.cultivar) && (
+              <ScientificName
+                isDisabled={isDisabled}
+                botanical={node.botanical}
+                cultivar={node.cultivar}
+              />
             )}
             <Count dir="auto">({node.count})</Count>
           </NodeContent>

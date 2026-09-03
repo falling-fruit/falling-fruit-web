@@ -1,6 +1,9 @@
-import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
+import {
+  CommonAndScientificName,
+  ScientificName as ScientificNameBase,
+} from '../../ui/TypeName'
 import EatTheWeedsLogo from './icons/EatTheWeeds.png'
 import ForagingTexasLogo from './icons/ForagingTexas.png'
 import FruitipediaLogo from './icons/Fruitipedia.png'
@@ -14,7 +17,7 @@ import {
   TypesAccordionPanel,
 } from './TypesAccordion'
 
-const StyledTypeTitle = styled.div`
+const StyledTypeTitle = styled(CommonAndScientificName)`
   font-family: ${({ theme }) => theme.fonts};
   text-align: start;
 `
@@ -26,30 +29,22 @@ const CommonName = styled.div`
   margin-block: 0px;
 `
 
-const ScientificName = styled.div`
+const ScientificName = styled(ScientificNameBase)`
+  display: block;
   font-size: ${(props) => (props.standalone ? '1.125rem' : '0.875rem')};
-  font-style: italic;
   color: ${({ theme }) => theme.text};
   margin-block: 0px;
   font-weight: normal;
 `
 
-const TypeTitle = ({ commonName, scientificName }) => {
-  const { i18n } = useTranslation()
-  const isRTL = i18n.dir() === 'rtl'
-  return (
-    <StyledTypeTitle>
-      {commonName && <CommonName>{commonName}</CommonName>}
-      <ScientificName
-        dir="ltr"
-        style={{ textAlign: isRTL ? 'right' : 'left' }}
-        standalone={!commonName}
-      >
-        {scientificName}
-      </ScientificName>
-    </StyledTypeTitle>
-  )
-}
+const TypeTitle = ({ type }) => (
+  <StyledTypeTitle
+    type={type}
+    commonNameAs={CommonName}
+    scientificNameAs={ScientificName}
+    scientificNameProps={{ standalone: !type.commonName }}
+  />
+)
 
 const RESOURCES = [
   {
@@ -121,10 +116,7 @@ const TypesHeader = ({ types, openable }) => {
       <div>
         {types.map((type) => (
           <SimpleTypeItem key={type.id}>
-            <TypeTitle
-              commonName={type.commonName}
-              scientificName={type.scientificName}
-            />
+            <TypeTitle type={type} />
           </SimpleTypeItem>
         ))}
       </div>
@@ -134,13 +126,7 @@ const TypesHeader = ({ types, openable }) => {
   return (
     <TypesAccordion>
       {types.map((type) => {
-        const typeTitle = (
-          <TypeTitle
-            key={type.id}
-            commonName={type.commonName}
-            scientificName={type.scientificName}
-          />
-        )
+        const typeTitle = <TypeTitle key={type.id} type={type} />
 
         if (Object.keys(type.urls).length > 0) {
           // At least 1 URL

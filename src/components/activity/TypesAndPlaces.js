@@ -10,8 +10,8 @@ import {
   ItemWrapper,
   PrimaryName,
   SecondaryDetails,
-  TypeName,
-} from '../ui/TypeName'
+  TypeNameOption,
+} from '../ui/SelectOptionLayout'
 
 const Container = styled.div`
   display: flex;
@@ -115,9 +115,10 @@ const TypesAndPlaces = ({
                 width: '100%',
               }}
             >
-              <TypeName
+              <TypeNameOption
                 commonName={option.commonName}
-                scientificName={option.scientificName}
+                botanical={option.botanical}
+                cultivar={option.cultivar}
                 count={
                   context === 'menu'
                     ? option.filteredCount !== undefined &&
