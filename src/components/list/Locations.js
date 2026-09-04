@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
-import { TypeName } from '../ui/TypeName'
+import { CommonName, CommonOrScientificName } from '../ui/TypeName'
 import DistanceText from './DistanceText'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
@@ -18,6 +18,14 @@ const TypeNameTagWrapper = styled.span`
     content: '·';
     margin: 0 0.5em;
     color: ${({ theme }) => theme.secondaryText};
+  }
+`
+
+const ColoredTypeName = styled(CommonOrScientificName)`
+  color: ${({ theme }) => theme.secondaryText};
+
+  &${CommonName} {
+    color: ${({ theme }) => theme.headerText};
   }
 `
 
@@ -161,7 +169,7 @@ const Locations = ({
               const isSelected = selectedTypes.includes(typeId)
               return (
                 <TypeNameTagWrapper key={typeId} isSelected={isSelected}>
-                  <TypeName type={type} />
+                  <ColoredTypeName type={type} />
                 </TypeNameTagWrapper>
               )
             })}

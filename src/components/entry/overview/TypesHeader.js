@@ -1,9 +1,7 @@
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
-import {
-  CommonAndScientificName,
-  ScientificName as ScientificNameBase,
-} from '../../ui/TypeName'
+import { ScientificName as ScientificNameBase } from '../../ui/TypeName'
 import EatTheWeedsLogo from './icons/EatTheWeeds.png'
 import ForagingTexasLogo from './icons/ForagingTexas.png'
 import FruitipediaLogo from './icons/Fruitipedia.png'
@@ -17,7 +15,7 @@ import {
   TypesAccordionPanel,
 } from './TypesAccordion'
 
-const StyledTypeTitle = styled(CommonAndScientificName)`
+const StyledTypeTitle = styled.span`
   font-family: ${({ theme }) => theme.fonts};
   text-align: start;
 `
@@ -37,14 +35,26 @@ const ScientificName = styled(ScientificNameBase)`
   font-weight: normal;
 `
 
-const TypeTitle = ({ type }) => (
-  <StyledTypeTitle
-    type={type}
-    commonNameAs={CommonName}
-    scientificNameAs={ScientificName}
-    scientificNameProps={{ standalone: !type.commonName }}
-  />
-)
+const TypeTitle = ({ type }) => {
+  const { i18n } = useTranslation()
+  const isRTL = i18n.dir() === 'rtl'
+  const { commonName, botanical, cultivar } = type ?? {}
+
+  return (
+    <StyledTypeTitle>
+      {commonName && <CommonName>{commonName}</CommonName>}
+      {(botanical || cultivar) && (
+        <ScientificName
+          botanical={botanical}
+          cultivar={cultivar}
+          dir="ltr"
+          style={{ textAlign: isRTL ? 'right' : 'left' }}
+          standalone={!commonName}
+        />
+      )}
+    </StyledTypeTitle>
+  )
+}
 
 const RESOURCES = [
   {
