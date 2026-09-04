@@ -99,11 +99,11 @@ class SelectTreeBuilder {
         .toLowerCase()
         .startsWith(parent.scientificName.toLowerCase())
     ) {
-      const treeFields = type.treeDisplayFields()
-      node.commonName = treeFields.commonName
-      node.scientificName = treeFields.scientificName
-      node.botanical = treeFields.botanical
-      node.cultivar = treeFields.cultivar
+      node.isCultivarOfParent = type.isCultivarOfParent()
+      node.commonName = type.commonName
+      node.scientificName = type.scientificName
+      node.botanical = type.botanical
+      node.cultivar = type.cultivar
     }
 
     const ownCount = this.getCount(type.id)

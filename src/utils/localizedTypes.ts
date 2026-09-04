@@ -137,6 +137,7 @@ export class LocalizedType implements LocalizedTypeData {
   private isCultivarOfParent(): boolean {
     return Boolean(
       this.cultivar &&
+      this.parentCommonName &&
       this.parentScientificName &&
       this.scientificName
         .toLowerCase()
@@ -218,28 +219,6 @@ export class LocalizedType implements LocalizedTypeData {
     return {
       value: this.id,
       type: this,
-    }
-  }
-
-  treeDisplayFields(): {
-    commonName: string
-    scientificName: string
-    botanical: string
-    cultivar: string | null
-  } {
-    if (this.isCultivarOfParent()) {
-      return {
-        commonName: '',
-        scientificName: this.cultivar as string,
-        botanical: '',
-        cultivar: this.cultivar,
-      }
-    }
-    return {
-      commonName: this.commonName,
-      scientificName: this.scientificName,
-      botanical: this.botanical,
-      cultivar: this.cultivar,
     }
   }
 }

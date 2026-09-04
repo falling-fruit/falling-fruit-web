@@ -154,15 +154,23 @@ const TreeSelectView = ({
             />
           </ControlsContainer>
           <NodeContent>
-            {node.commonName && (
-              <CommonName isDisabled={isDisabled}>{node.commonName}</CommonName>
-            )}
-            {(node.botanical || node.cultivar) && (
-              <ScientificName
-                isDisabled={isDisabled}
-                botanical={node.botanical}
-                cultivar={node.cultivar}
-              />
+            {node.isCultivarOfParent ? (
+              <CommonName isDisabled={isDisabled}>{node.cultivar}</CommonName>
+            ) : (
+              <>
+                {node.commonName && (
+                  <CommonName isDisabled={isDisabled}>
+                    {node.commonName}
+                  </CommonName>
+                )}
+                {(node.botanical || node.cultivar) && (
+                  <ScientificName
+                    isDisabled={isDisabled}
+                    botanical={node.botanical}
+                    cultivar={node.cultivar}
+                  />
+                )}
+              </>
             )}
             <Count dir="auto">({node.count})</Count>
           </NodeContent>
