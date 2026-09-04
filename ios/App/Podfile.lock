@@ -1,21 +1,23 @@
 PODS:
-  - Capacitor (7.6.5):
+  - Capacitor (8.5.0):
     - CapacitorCordova
-  - CapacitorApp (7.1.2):
+  - CapacitorApp (8.1.1):
     - Capacitor
-  - CapacitorCamera (7.0.5):
+  - CapacitorCamera (8.2.2):
     - Capacitor
-  - CapacitorCordova (7.6.5)
-  - CapacitorDevice (7.0.5):
+    - IONCameraLib (~> 1.0.5)
+  - CapacitorCordova (8.5.0)
+  - CapacitorDevice (8.0.3):
     - Capacitor
-  - CapacitorFilesystem (7.1.5):
+  - CapacitorFilesystem (8.1.2):
     - Capacitor
-    - IONFilesystemLib (~> 1.0.1)
-  - CapacitorPreferences (7.0.4):
+    - IONFilesystemLib (~> 1.1.1)
+  - CapacitorPreferences (8.0.1):
     - Capacitor
-  - CapacitorSplashScreen (7.0.5):
+  - CapacitorSplashScreen (8.0.2):
     - Capacitor
-  - IONFilesystemLib (1.0.1)
+  - IONCameraLib (1.0.5)
+  - IONFilesystemLib (1.1.2)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -29,6 +31,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - IONCameraLib
     - IONFilesystemLib
 
 EXTERNAL SOURCES:
@@ -50,16 +53,17 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/splash-screen"
 
 SPEC CHECKSUMS:
-  Capacitor: fa6393e8023cd0f4740c9a22bc73720c049fffa2
-  CapacitorApp: 6b89831465d6bc99bc89779b1b7f5327e33011ce
-  CapacitorCamera: fdbf24f93bc44ca13c4209866368a1972349d3d2
-  CapacitorCordova: 2b36392a7292c3c451dcae154185ee8804d7b6b3
-  CapacitorDevice: 12b136398a320a395ddc8d227ab532848058d796
-  CapacitorFilesystem: 2caf7ad6e26d68defef0631b0f09adb09a353f27
-  CapacitorPreferences: d82a7e3b95fcab43a553268b803356522910d153
-  CapacitorSplashScreen: b3d12b4324d93ce605fe57f05a199ade7f26189e
-  IONFilesystemLib: 89258b8e3e85465da93127d25d7ce37f977e8a6f
+  Capacitor: 34ed46c7364734d8d92feb1949ba731013acc93e
+  CapacitorApp: 9fd99482b6536ddf1a54721ce678145fc7fa3418
+  CapacitorCamera: bf2f2528dc2429c658f25e804fd771b95ea07333
+  CapacitorCordova: 9d3acbb574048e7167d2af127a0af2123e619f2f
+  CapacitorDevice: e5599fa82274e59220170995826a16095ad20c40
+  CapacitorFilesystem: 7d3e3df84be4f0d999a5d6baa23aeb30c2de6450
+  CapacitorPreferences: 0fa33b3affebf12d96358b491ed7c2b39bec3270
+  CapacitorSplashScreen: 120117d1b2264bba31a6e6f998f51e510144dd12
+  IONCameraLib: ecbd8ef0077d481df429cee267bbeb1a7b9bddd0
+  IONFilesystemLib: 21a63377696b2d8fab5632ecfb7d2ac67bddb68a
 
-PODFILE CHECKSUM: 65b8d02a3a45fe655b11a56a21c3c7bde4b1dfd5
+PODFILE CHECKSUM: 0d33ce9f9caf3016ac518a0025ec49c30b14978e
 
 COCOAPODS: 1.16.2
