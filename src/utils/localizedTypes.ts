@@ -53,22 +53,6 @@ const PENDING_ID: Id = -1
  */
 type SchemaType = components['schemas']['Type']
 
-/** The plain data fields of a localized type (no behavior). */
-export interface LocalizedTypeData {
-  id: Id
-  parentId: Id
-  scientificName: string
-  commonName: string
-  taxonomicRank: number
-  urls: { [url: string]: string }
-  categories: string[]
-  synonyms: string[]
-  botanical: string
-  cultivar: string | null
-  parentCommonName: string
-  parentScientificName: string
-}
-
 export type DisplayLabel = {
   text: string
   botanical: string
@@ -82,7 +66,7 @@ export type TypeSelectMenuEntry = {
   type: LocalizedType
 }
 
-export class LocalizedType implements LocalizedTypeData {
+export class LocalizedType {
   id: Id
   parentId: Id
   scientificName: string
