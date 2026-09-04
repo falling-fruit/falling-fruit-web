@@ -38,7 +38,10 @@ const ScientificName = styled(ScientificNameBase)`
 const TypeTitle = ({ type }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
-  const { commonName, botanical, cultivar } = type ?? {}
+  const { botanical, cultivar } = type ?? {}
+
+  const label = type?.displayLabel()
+  const commonName = label && !label.isScientific ? label.text : undefined
 
   return (
     <StyledTypeTitle>
