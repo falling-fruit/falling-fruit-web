@@ -66,7 +66,6 @@ const LatestSkeletonItem = styled.li`
 
 const LocationTypesList = ({ locations, onClickLink }) => {
   const isDesktop = useIsDesktop()
-  const { typesAccess } = useSelector((state) => state.type)
   return (
     <>
       {locations.map((loc, idx) => {
@@ -76,7 +75,7 @@ const LocationTypesList = ({ locations, onClickLink }) => {
           return (
             <CommonOrScientificName
               key={`type-${typeIdx}`}
-              type={typesAccess.getType(type.id)}
+              type={type}
               style={{ opacity }}
             />
           )

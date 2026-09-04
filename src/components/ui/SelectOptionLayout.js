@@ -79,11 +79,11 @@ const Synonyms = styled.span`
 export const TypeNameOption = ({ type, count }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
-  const { commonName, botanical, cultivar, synonyms } = type ?? {}
+  const { commonNameLabel, botanical, cultivar, synonyms } = type ?? {}
   return (
     <ItemWrapper>
       <DetailsBlock>
-        {commonName && <PrimaryName>{commonName}</PrimaryName>}
+        {commonNameLabel && <PrimaryName>{commonNameLabel}</PrimaryName>}
         {(botanical || cultivar) && (
           <OptionScientificName
             botanical={botanical}

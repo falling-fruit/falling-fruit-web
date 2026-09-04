@@ -79,13 +79,6 @@ export type DisplayLabel = {
 
 export type TypeSelectMenuEntry = {
   value: Id
-  searchReference: string
-  botanical: string
-  cultivar: string | null
-  commonName: string
-  label: string
-  synonyms: string[]
-  taxonomicRank: number
   type: LocalizedType
 }
 
@@ -222,16 +215,8 @@ export class LocalizedType implements LocalizedTypeData {
   }
 
   menuEntry(): TypeSelectMenuEntry {
-    const commonNameLabel = this.commonNameLabel
     return {
       value: this.id,
-      searchReference: this.searchReference(),
-      commonName: commonNameLabel,
-      label: commonNameLabel,
-      botanical: this.botanical,
-      cultivar: this.cultivar,
-      taxonomicRank: this.taxonomicRank,
-      synonyms: this.synonyms,
       type: this,
     }
   }

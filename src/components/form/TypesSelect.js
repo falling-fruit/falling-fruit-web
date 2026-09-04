@@ -24,7 +24,9 @@ export const matchFromTokenStart = (candidate, input) => {
   if (!input || candidate.data.__isNew__) {
     return true
   } else {
-    return candidate.data.searchReference.indexOf(tokenizeQuery(input)) > -1
+    return (
+      candidate.data.type.searchReference().indexOf(tokenizeQuery(input)) > -1
+    )
   }
 }
 
@@ -69,6 +71,10 @@ const TypesSelect = () => {
         options={typeOptions}
         closeMenuOnSelect
         blurInputOnSelect={false}
+        getOptionValue={(option) => option.value}
+        getOptionLabel={(option) =>
+          option.type ? option.type.commonNameLabel : option.label
+        }
         formatOptionLabel={(option) =>
           option.__isNew__ ? (
             <div>
@@ -76,7 +82,7 @@ const TypesSelect = () => {
               {option.label}
             </div>
           ) : (
-            <TypeNameOption type={option} />
+            <TypeNameOption type={option.type} />
           )
         }
         isVirtualized
