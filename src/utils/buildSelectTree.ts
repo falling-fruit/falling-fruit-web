@@ -99,17 +99,17 @@ class SelectTreeBuilder {
         .toLowerCase()
         .startsWith(parent.scientificName.toLowerCase())
     ) {
-      node.commonName = ''
-      node.scientificName = type.cultivar
-      node.botanical = ''
-      node.cultivar = type.cultivar
+      const treeFields = type.treeDisplayFields()
+      node.commonName = treeFields.commonName
+      node.scientificName = treeFields.scientificName
+      node.botanical = treeFields.botanical
+      node.cultivar = treeFields.cultivar
     }
 
     const ownCount = this.getCount(type.id)
     if (
       children.length &&
-      (ownCount > 0 ||
-        (!this.showOnlyOnMap && this.typesAccess.isSelectable(type.id))) &&
+      (ownCount > 0 || (!this.showOnlyOnMap && type.isSelectable)) &&
       matchesSearch
     ) {
       const childNode: RenderTreeNode = {

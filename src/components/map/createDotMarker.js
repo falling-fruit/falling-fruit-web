@@ -90,7 +90,7 @@ const createLabel = (
 
   label._buildLabelData = function () {
     return (location.type_ids || [])
-      .map((id) => this.typesAccess.getDisplayLabel(id))
+      .map((id) => this.typesAccess.getType(id)?.displayLabel())
       .filter(Boolean)
   }
 

@@ -5,7 +5,7 @@ import { components } from '../../utils/apiSchema'
 import { viewToString } from '../../utils/appUrl'
 import {
   displayOrderProperties,
-  LocalizedType,
+  LocalizedTypeData,
   TypesAccess,
 } from '../../utils/localizedTypes'
 import { tokenizeReference } from '../../utils/tokenize'
@@ -24,7 +24,7 @@ interface CityCount {
   coordinatesGrid?: string
 }
 
-interface TypeCount extends LocalizedType {
+interface TypeCount extends LocalizedTypeData {
   count: number
   filteredCount?: number
   value: number
@@ -32,7 +32,7 @@ interface TypeCount extends LocalizedType {
   searchReference: string
 }
 
-interface DiaryType extends LocalizedType {
+interface DiaryType extends LocalizedTypeData {
   searchReference: string
 }
 
@@ -197,7 +197,7 @@ function transformActivityData(
           .filter(Boolean)
           .map((type) => ({
             ...type,
-            searchReference: typesAccess.buildSearchReference(type),
+            searchReference: type.searchReference(),
           }))
 
         const locationTypes: LocationTypes = {

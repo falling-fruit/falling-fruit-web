@@ -81,7 +81,14 @@ export const TypeName = ({ type, className, style, dir }) => (
   <TypeNameWrapper type={type} className={className} style={style} dir={dir} />
 )
 
-export const CommonOrScientificName = ({ label, className, style, dir }) => {
+export const CommonOrScientificName = ({
+  type,
+  label: labelProp,
+  className,
+  style,
+  dir,
+}) => {
+  const label = type ? type.displayLabel() : labelProp
   if (!label) {
     return null
   }

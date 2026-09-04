@@ -73,11 +73,10 @@ const LocationTypesList = ({ locations, onClickLink }) => {
         const typeElements = loc.types.map((type, typeIdx) => {
           const opacity = loc.isSelected ? 1 : 0.5
 
-          const label = typesAccess.getDisplayLabel(type.id)
           return (
             <CommonOrScientificName
               key={`type-${typeIdx}`}
-              label={label}
+              type={typesAccess.getType(type.id)}
               style={{ opacity }}
             />
           )

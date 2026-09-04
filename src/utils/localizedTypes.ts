@@ -52,7 +52,9 @@ const PENDING_ID: Id = -1
  * and not type as programming concept
  */
 type SchemaType = components['schemas']['Type']
-export type LocalizedType = {
+
+/** The plain data fields of a localized type (no behavior). */
+export interface LocalizedTypeData {
   id: Id
   parentId: Id
   scientificName: string
@@ -63,9 +65,19 @@ export type LocalizedType = {
   synonyms: string[]
   botanical: string
   cultivar: string | null
+  parentCommonName: string
+  parentScientificName: string
 }
 
-type TypeSelectMenuEntry = {
+export type DisplayLabel = {
+  text: string
+  botanical: string
+  cultivar: string | null
+  isScientific: boolean
+  typeId: Id
+}
+
+export type TypeSelectMenuEntry = {
   value: Id
   searchReference: string
   botanical: string
@@ -74,14 +86,177 @@ type TypeSelectMenuEntry = {
   label: string
   synonyms: string[]
   taxonomicRank: number
+  type: LocalizedType
 }
 
-type DisplayLabel = {
-  text: string
+export class LocalizedType implements LocalizedTypeData {
+  id: Id
+  parentId: Id
+  scientificName: string
+  commonName: string
+  taxonomicRank: number
+  urls: { [url: string]: string }
+  categories: string[]
+  synonyms: string[]
   botanical: string
   cultivar: string | null
-  isScientific: boolean
-  typeId: Id
+  parentCommonName: string
+  parentScientificName: string
+
+  constructor(fields: {
+    id: Id
+    parentId: Id
+    scientificName: string
+    commonName: string
+    taxonomicRank: number
+    urls: { [url: string]: string }
+    categories: string[]
+    synonyms: string[]
+    botanical: string
+    cultivar: string | null
+    parentCommonName?: string
+    parentScientificName?: string
+  }) {
+    this.id = fields.id
+    this.parentId = fields.parentId
+    this.scientificName = fields.scientificName
+    this.commonName = fields.commonName
+    this.taxonomicRank = fields.taxonomicRank
+    this.urls = fields.urls
+    this.categories = fields.categories
+    this.synonyms = fields.synonyms
+    this.botanical = fields.botanical
+    this.cultivar = fields.cultivar
+    this.parentCommonName = fields.parentCommonName ?? ''
+    this.parentScientificName = fields.parentScientificName ?? ''
+  }
+
+  get isSelectable(): boolean {
+    return this.id !== PENDING_ID
+  }
+
+  get commonNameLabel(): string {
+    return this.parentId === PENDING_ID
+      ? i18next.t('type.pending_review_item', { name: this.commonName })
+      : this.commonName
+  }
+
+  private isCultivarOfParent(): boolean {
+    return Boolean(
+      this.cultivar &&
+      this.parentScientificName &&
+      this.scientificName
+        .toLowerCase()
+        .startsWith(this.parentScientificName.toLowerCase()),
+    )
+  }
+
+  searchReference(): string {
+    const { commonName, scientificName, cultivar, synonyms, parentCommonName } =
+      this
+
+    const referenceStrings = [commonName, scientificName, ...synonyms].filter(
+      Boolean,
+    )
+
+    // If common name starts with 'common ' or 'Common ', add version without that prefix
+    if (commonName.toLowerCase().startsWith('common ')) {
+      referenceStrings.push(commonName.replace(/^[Cc]ommon\s+/, ''))
+    }
+
+    // Add parent name to references if it appears within common name but not at start
+    if (
+      parentCommonName &&
+      commonName.includes(parentCommonName.toLowerCase()) &&
+      !commonName.startsWith(parentCommonName)
+    ) {
+      referenceStrings.push(parentCommonName)
+    }
+
+    if (cultivar) {
+      referenceStrings.push(cultivar)
+    }
+
+    return tokenizeReference(referenceStrings)
+  }
+
+  displayLabel(): DisplayLabel | null {
+    if (this.cultivar) {
+      if (
+        this.parentCommonName &&
+        this.parentScientificName &&
+        (!this.commonName ||
+          this.commonName.toLowerCase() === this.parentCommonName.toLowerCase())
+      ) {
+        return {
+          text: `${this.parentCommonName} ${this.cultivar}`,
+          botanical: '',
+          cultivar: null,
+          isScientific: false,
+          typeId: this.id,
+        }
+      }
+    }
+
+    if (this.commonName) {
+      return {
+        text: this.commonName,
+        botanical: '',
+        cultivar: null,
+        isScientific: false,
+        typeId: this.id,
+      }
+    }
+
+    if (this.scientificName) {
+      return {
+        text: this.scientificName,
+        botanical: this.botanical,
+        cultivar: this.cultivar,
+        isScientific: true,
+        typeId: this.id,
+      }
+    }
+
+    return null
+  }
+
+  menuEntry(): TypeSelectMenuEntry {
+    const commonNameLabel = this.commonNameLabel
+    return {
+      value: this.id,
+      searchReference: this.searchReference(),
+      commonName: commonNameLabel,
+      label: commonNameLabel,
+      botanical: this.botanical,
+      cultivar: this.cultivar,
+      taxonomicRank: this.taxonomicRank,
+      synonyms: this.synonyms,
+      type: this,
+    }
+  }
+
+  treeDisplayFields(): {
+    commonName: string
+    scientificName: string
+    botanical: string
+    cultivar: string | null
+  } {
+    if (this.isCultivarOfParent()) {
+      return {
+        commonName: '',
+        scientificName: this.cultivar as string,
+        botanical: '',
+        cultivar: this.cultivar,
+      }
+    }
+    return {
+      commonName: this.commonName,
+      scientificName: this.scientificName,
+      botanical: this.botanical,
+      cultivar: this.cultivar,
+    }
+  }
 }
 
 const localize = (type: SchemaType, language: string): LocalizedType => {
@@ -97,7 +272,7 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
 
   const { botanical, cultivar } = splitScientificName(scientificName)
 
-  return {
+  return new LocalizedType({
     id: type.id,
     parentId: type.pending ? PENDING_ID : type.parent_id || 0,
     scientificName,
@@ -108,10 +283,26 @@ const localize = (type: SchemaType, language: string): LocalizedType => {
     synonyms,
     botanical,
     cultivar,
-  }
+  })
+}
+
+const wireUpParents = (localizedTypes: LocalizedType[]): LocalizedType[] => {
+  const byId: IdDict<LocalizedType> = {}
+  localizedTypes.forEach((type) => {
+    byId[type.id] = type
+  })
+  localizedTypes.forEach((type) => {
+    const parent = byId[type.parentId]
+    if (parent) {
+      type.parentCommonName = parent.commonName
+      type.parentScientificName = parent.scientificName
+    }
+  })
+  return localizedTypes
 }
 
 const createTypesAccess = (localizedTypes: LocalizedType[]) => {
+  wireUpParents(localizedTypes)
   const idIndex: IdDict<number> = {}
   const childrenById: IdDict<Id[]> = {}
   localizedTypes.forEach((type, index) => {
@@ -122,65 +313,6 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
     childrenById[type.parentId].push(type.id)
   })
   return new TypesAccess(localizedTypes, idIndex, childrenById)
-}
-
-const buildTypeSearchReference = (
-  type: LocalizedType,
-  parentCommonName: string,
-): string => {
-  const { commonName, scientificName, cultivar, synonyms } = type
-
-  const referenceStrings = [commonName, scientificName, ...synonyms].filter(
-    Boolean,
-  )
-
-  // If common name starts with 'common ' or 'Common ', add version without that prefix
-  if (commonName.toLowerCase().startsWith('common ')) {
-    referenceStrings.push(commonName.replace(/^[Cc]ommon\s+/, ''))
-  }
-
-  // Add parent name to references if it appears within common name but not at start
-  if (
-    parentCommonName &&
-    commonName.includes(parentCommonName.toLowerCase()) &&
-    !commonName.startsWith(parentCommonName)
-  ) {
-    referenceStrings.push(parentCommonName)
-  }
-
-  if (cultivar) {
-    referenceStrings.push(cultivar)
-  }
-
-  return tokenizeReference(referenceStrings)
-}
-
-const toMenuEntry = (localizedType: LocalizedType, searchReference: string) => {
-  const {
-    id,
-    parentId,
-    commonName,
-    botanical,
-    cultivar,
-    taxonomicRank,
-    synonyms,
-  } = localizedType
-
-  const commonNameLabel =
-    parentId === PENDING_ID
-      ? i18next.t('type.pending_review_item', { name: commonName })
-      : commonName
-
-  return {
-    value: id,
-    searchReference,
-    commonName: commonNameLabel,
-    label: commonNameLabel,
-    botanical,
-    cultivar,
-    taxonomicRank,
-    synonyms,
-  }
 }
 
 export class TypesAccess {
@@ -200,109 +332,23 @@ export class TypesAccess {
   }
 
   selectableTypes(): LocalizedType[] {
-    return this.localizedTypes.filter((t) => t.id !== PENDING_ID)
-  }
-
-  isSelectable(id: Id): boolean {
-    return id !== PENDING_ID
+    return this.localizedTypes.filter((t) => t.isSelectable)
   }
 
   getType(id: Id): LocalizedType {
     return this.localizedTypes[this.idIndex[id]]
   }
 
-  getParentType(id: Id): LocalizedType | null {
-    const type = this.getType(id)
-    return type ? this.getType(type.parentId) : null
-  }
-
-  getCommonName(id: Id): string {
-    const t = this.localizedTypes[this.idIndex[id]]
-    return t ? t.commonName : ''
-  }
-
-  buildSearchReference(type: LocalizedType): string {
-    return buildTypeSearchReference(type, this.getCommonName(type.parentId))
-  }
-
-  getDisplayLabel(id: Id): DisplayLabel | null {
-    const type = this.getType(id)
-    if (!type) {
-      return null
-    }
-
-    if (type.cultivar) {
-      const parentType = this.getParentType(id)
-      if (
-        parentType &&
-        parentType.commonName &&
-        parentType.scientificName &&
-        (!type.commonName ||
-          type.commonName.toLowerCase() === parentType.commonName.toLowerCase())
-      ) {
-        return {
-          text: `${parentType.commonName} ${type.cultivar}`,
-          botanical: '',
-          cultivar: null,
-          isScientific: false,
-          typeId: id,
-        }
-      }
-    }
-
-    if (type.commonName) {
-      return {
-        text: type.commonName,
-        botanical: '',
-        cultivar: null,
-        isScientific: false,
-        typeId: id,
-      }
-    }
-
-    if (type.scientificName) {
-      return {
-        text: type.scientificName,
-        botanical: type.botanical,
-        cultivar: type.cultivar,
-        isScientific: true,
-        typeId: id,
-      }
-    }
-
-    return null
-  }
-
   asMenuEntries(): TypeSelectMenuEntry[] {
-    return this.localizedTypes.map((t) =>
-      toMenuEntry(t, this.buildSearchReference(t)),
-    )
-  }
-  getMenuEntry(id: Id): TypeSelectMenuEntry | null {
-    const t = this.localizedTypes[this.idIndex[id]]
-    return t ? toMenuEntry(t, this.buildSearchReference(t)) : null
+    return this.localizedTypes.map((t) => t.menuEntry())
   }
 
   filter(predicate: (_type: LocalizedType) => boolean): TypesAccess {
-    const filteredTypes = this.localizedTypes.filter(predicate)
-    const newIdIndex: IdDict<number> = {}
-    const newChildrenById: IdDict<Id[]> = {}
-
-    filteredTypes.forEach((type, index) => {
-      newIdIndex[type.id] = index
-      if (!newChildrenById[type.parentId]) {
-        newChildrenById[type.parentId] = []
-      }
-      newChildrenById[type.parentId].push(type.id)
-    })
-
-    return new TypesAccess(filteredTypes, newIdIndex, newChildrenById)
+    return createTypesAccess(this.localizedTypes.filter(predicate))
   }
 
   onlyAllowedParents(): TypesAccess {
-    return this.filter(
-      ({ taxonomicRank, id }) => taxonomicRank !== 9 && id !== PENDING_ID,
-    )
+    return this.filter((t) => t.taxonomicRank !== 9 && t.isSelectable)
   }
 
   addType(newType: SchemaType, language: string): TypesAccess {
@@ -315,7 +361,7 @@ export class TypesAccess {
   selectableTypesWithCategories(...categories: string[]): LocalizedType[] {
     return this.localizedTypes.filter(
       (t) =>
-        t.id !== PENDING_ID &&
+        t.isSelectable &&
         t.categories.some((category) => categories.includes(category)),
     )
   }
@@ -337,18 +383,20 @@ export const typesAccessInLanguage = (
 ) => {
   const localizedTypes = types.map((t: SchemaType) => localize(t, language))
   if (types.some((type) => type.pending)) {
-    localizedTypes.push({
-      id: PENDING_ID,
-      parentId: 0,
-      scientificName: '',
-      commonName: i18next.t('type.pending_review_category'),
-      taxonomicRank: 0,
-      urls: {},
-      categories: [],
-      synonyms: [],
-      botanical: '',
-      cultivar: null,
-    })
+    localizedTypes.push(
+      new LocalizedType({
+        id: PENDING_ID,
+        parentId: 0,
+        scientificName: '',
+        commonName: i18next.t('type.pending_review_category'),
+        taxonomicRank: 0,
+        urls: {},
+        categories: [],
+        synonyms: [],
+        botanical: '',
+        cultivar: null,
+      }),
+    )
   }
   return createTypesAccess(toDisplayOrder(localizedTypes))
 }

@@ -76,7 +76,7 @@ const TypesSelect = () => {
               {option.label}
             </div>
           ) : (
-            <TypeNameOption {...option} />
+            <TypeNameOption type={option} />
           )
         }
         isVirtualized

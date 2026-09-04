@@ -191,11 +191,11 @@ const LocationTypeDisplay = ({ location, typesAccess }) => {
   }
 
   const typeElements = typeIds.map((typeId, idx) => {
-    const label = typesAccess.getDisplayLabel(typeId)
-    if (!label) {
+    const type = typesAccess.getType(typeId)
+    if (!type?.displayLabel()) {
       return <span key={idx}>{typeId}</span>
     }
-    return <CommonOrScientificName key={idx} label={label} />
+    return <CommonOrScientificName key={idx} type={type} />
   })
 
   return (

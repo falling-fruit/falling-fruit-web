@@ -76,15 +76,10 @@ const Synonyms = styled.span`
   }
 `
 
-export const TypeNameOption = ({
-  commonName,
-  botanical,
-  cultivar,
-  synonyms,
-  count,
-}) => {
+export const TypeNameOption = ({ type, count }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
+  const { commonName, botanical, cultivar, synonyms } = type ?? {}
   return (
     <ItemWrapper>
       <DetailsBlock>

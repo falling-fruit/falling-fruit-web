@@ -116,9 +116,7 @@ const TypesAndPlaces = ({
               }}
             >
               <TypeNameOption
-                commonName={option.commonName}
-                botanical={option.botanical}
-                cultivar={option.cultivar}
+                type={option}
                 count={
                   context === 'menu'
                     ? option.filteredCount !== undefined &&
