@@ -10,8 +10,8 @@ import {
   ItemWrapper,
   PrimaryName,
   SecondaryDetails,
-  TypeName,
-} from '../ui/TypeName'
+  TypeNameOption,
+} from '../ui/SelectOptionLayout'
 
 const Container = styled.div`
   display: flex;
@@ -77,6 +77,14 @@ const filterOption = (candidate, input) => {
   return searchReference && searchReference.includes(tokenizedInput)
 }
 
+const filterTypeOption = (candidate, input) => {
+  if (!input) {
+    return true
+  }
+
+  return candidate.data.type.searchReference().includes(tokenizeQuery(input))
+}
+
 const TypesAndPlaces = ({
   typeCounts,
   cityCounts,
@@ -94,15 +102,16 @@ const TypesAndPlaces = ({
         <CategoryLabel>{t('glossary.type.other')}</CategoryLabel>
         <MultiSelect
           options={typeCounts}
+          getOptionValue={(option) => option.type.id}
           value={
             selectedTypes
               ?.map((typeId) =>
-                typeCounts.find((option) => option.value === typeId),
+                typeCounts.find((option) => option.type.id === typeId),
               )
               .filter(Boolean) || []
           }
           onChange={(options) =>
-            onTypeChange(options?.map((option) => option.value) || [])
+            onTypeChange(options?.map((option) => option.type.id) || [])
           }
           placeholder={t('glossary.type.one')}
           isClearable
@@ -115,9 +124,8 @@ const TypesAndPlaces = ({
                 width: '100%',
               }}
             >
-              <TypeName
-                commonName={option.commonName}
-                scientificName={option.scientificName}
+              <TypeNameOption
+                type={option.type}
                 count={
                   context === 'menu'
                     ? option.filteredCount !== undefined &&
@@ -129,7 +137,7 @@ const TypesAndPlaces = ({
               />
             </div>
           )}
-          filterOption={filterOption}
+          filterOption={filterTypeOption}
         />
       </div>
 

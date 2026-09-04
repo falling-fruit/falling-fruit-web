@@ -6,6 +6,8 @@ interface RenderTreeNode {
   value?: number
   commonName: string
   scientificName: string
+  botanical: string
+  cultivar: string | null
   count: number
   searchLabel: string
   children: RenderTreeNode[]
@@ -64,6 +66,8 @@ class SelectTreeBuilder {
       parent,
       commonName: type.commonName,
       scientificName: type.scientificName,
+      botanical: type.botanical,
+      cultivar: type.cultivar,
       count,
       searchLabel,
       children: [],
@@ -95,18 +99,17 @@ class SelectTreeBuilder {
         .toLowerCase()
         .startsWith(parent.scientificName.toLowerCase())
     ) {
-      node.commonName = ''
-      node.scientificName = `'${type.cultivar}'`
-    } else {
+      node.isCultivarOfParent = type.isCultivarOfParent()
       node.commonName = type.commonName
       node.scientificName = type.scientificName
+      node.botanical = type.botanical
+      node.cultivar = type.cultivar
     }
 
     const ownCount = this.getCount(type.id)
     if (
       children.length &&
-      (ownCount > 0 ||
-        (!this.showOnlyOnMap && this.typesAccess.isSelectable(type.id))) &&
+      (ownCount > 0 || (!this.showOnlyOnMap && type.isSelectable)) &&
       matchesSearch
     ) {
       const childNode: RenderTreeNode = {

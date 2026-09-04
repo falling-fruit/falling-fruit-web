@@ -27,7 +27,7 @@ export const addTypeAndUpdate = createAsyncThunk(
     )
     const typeEncoder = new TypeShareEncoder(updatedTypesAccess)
     return {
-      newMenuEntry: updatedTypesAccess.getMenuEntry(response.id),
+      newMenuEntry: updatedTypesAccess.getType(response.id).menuEntry(),
       updatedTypesAccess,
       typeEncoder,
     }

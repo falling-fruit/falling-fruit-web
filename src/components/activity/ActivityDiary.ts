@@ -24,43 +24,16 @@ interface CityCount {
   coordinatesGrid?: string
 }
 
-interface TypeCount extends LocalizedType {
+interface TypeCount {
+  type: LocalizedType
   count: number
   filteredCount?: number
-  value: number
-  label: string
-  searchReference: string
 }
 
-function createTypeCount(
-  typeId: number,
-  commonName: string,
-  scientificName: string,
-  count: number = 0,
-  synonyms?: string[],
-): TypeCount {
-  const displayName = commonName || scientificName || `Type ${typeId}`
-
-  const referenceStrings = [
-    commonName,
-    scientificName,
-    ...(synonyms || []),
-  ].filter(Boolean)
-
+function createTypeCount(type: LocalizedType, count: number = 0): TypeCount {
   return {
-    id: typeId,
-    parentId: 0,
-    taxonomicRank: 0,
-    urls: {},
-    categories: [],
-    cultivar: null,
-    commonName,
-    scientificName,
-    synonyms: synonyms || [],
+    type,
     count,
-    value: typeId,
-    label: displayName,
-    searchReference: tokenizeReference(referenceStrings),
   }
 }
 
@@ -207,7 +180,7 @@ function transformActivityData(
         }
 
         const group = groupedActivities.get(groupKey)!
-        const types = change.type_ids
+        const types: LocalizedType[] = change.type_ids
           .map((typeId) => typesAccess.getType(typeId))
           .filter(Boolean)
 
@@ -312,13 +285,7 @@ class ActivityDiary {
             const typeId = type.id
 
             if (!typeCountMap[typeId]) {
-              typeCountMap[typeId] = createTypeCount(
-                typeId,
-                type.commonName || '',
-                type.scientificName || '',
-                0,
-                type.synonyms,
-              )
+              typeCountMap[typeId] = createTypeCount(type, 0)
             }
 
             // Always increment the total count
@@ -335,9 +302,9 @@ class ActivityDiary {
     })
 
     // Add filtered count information to each type
-    Object.values(typeCountMap).forEach((type) => {
+    Object.values(typeCountMap).forEach((typeCount) => {
       if (selectedPlaces.length > 0) {
-        type.filteredCount = filteredTypeCountMap[type.id] || 0
+        typeCount.filteredCount = filteredTypeCountMap[typeCount.type.id] || 0
       }
     })
 
@@ -346,13 +313,19 @@ class ActivityDiary {
     const filteredTypeCounts =
       selectedPlaces.length > 0
         ? typeCounts.filter(
-            (type) => type.filteredCount && type.filteredCount > 0,
+            (typeCount) =>
+              typeCount.filteredCount && typeCount.filteredCount > 0,
           )
         : typeCounts
 
     return sortBy(filteredTypeCounts, [
       (o) => -(selectedPlaces.length > 0 ? o.filteredCount || 0 : o.count),
-      ...displayOrderProperties,
+      ...displayOrderProperties.map(
+        (prop) => (o: TypeCount) =>
+          typeof prop === 'function'
+            ? prop(o.type)
+            : o.type[prop as keyof LocalizedType],
+      ),
     ])
   }
 
@@ -520,8 +493,17 @@ class ActivityDiary {
       return this.entries
     }
 
-    // Create a deep copy of entries to avoid modifying the original
-    const entriesCopy: DiaryEntry[] = JSON.parse(JSON.stringify(this.entries))
+    const cloneLocation = (loc: LocationTypes): LocationTypes => ({ ...loc })
+    const cloneActivity = (activity: ActivityGroup): ActivityGroup => ({
+      ...activity,
+      added: activity.added.map(cloneLocation),
+      edited: activity.edited.map(cloneLocation),
+      visited: activity.visited.map(cloneLocation),
+    })
+    const entriesCopy: DiaryEntry[] = this.entries.map((entry) => ({
+      ...entry,
+      activities: entry.activities.map(cloneActivity),
+    }))
 
     // Process each entry
     const filteredEntries = entriesCopy

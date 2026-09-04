@@ -93,13 +93,10 @@ export const locationToForm = (
   { type_ids, description, season_start, season_stop, access, unverified },
   typesAccess,
 ) => ({
-  types: type_ids?.map((id) => {
-    const type = typesAccess.getType(id)
-    return {
-      ...type,
-      value: id,
-    }
-  }),
+  types: type_ids?.map((id) => ({
+    type: typesAccess.getType(id),
+    value: id,
+  })),
   description,
   season_start,
   season_stop,
