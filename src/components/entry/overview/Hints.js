@@ -1,6 +1,8 @@
 import { ChevronDown, ChevronUp } from '@styled-icons/boxicons-regular'
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
 
 import { editExistingLocation } from '../../../redux/locationSlice'
@@ -204,24 +206,49 @@ export const UnverifiedHintActions = ({ locationData }) => {
   const dispatch = useDispatch()
   const history = useAppHistory()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const recaptchaRef = useRef(null)
+
+  const markAsVerified = (recaptcha) => {
+    dispatch(
+      editExistingLocation({
+        locationId: locationData.id,
+        locationValues: {
+          ...locationToApiValues({
+            ...locationData,
+            unverified: false,
+          }),
+          ...(recaptcha && { 'g-recaptcha-response': recaptcha }),
+        },
+      }),
+    )
+  }
+
+  const handleMarkAsVerified = () => {
+    if (!confirm(t('confirm_message.mark_as_verified'))) {
+      return
+    }
+
+    if (isLoggedIn) {
+      markAsVerified()
+    } else {
+      Promise.resolve(recaptchaRef.current?.reset()).finally(() => {
+        recaptchaRef.current?.execute()
+      })
+    }
+  }
 
   return (
     <ExistenceActionsContainer>
-      <HintAction
-        onClick={() => {
-          if (confirm(t('confirm_message.mark_as_verified'))) {
-            dispatch(
-              editExistingLocation({
-                locationId: locationData.id,
-                locationValues: locationToApiValues({
-                  ...locationData,
-                  unverified: false,
-                }),
-              }),
-            )
-          }
-        }}
-      >
+      {!isLoggedIn && (
+        <Reaptcha
+          ref={recaptchaRef}
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+          size="invisible"
+          onVerify={markAsVerified}
+        />
+      )}
+      <HintAction onClick={handleMarkAsVerified}>
         {t('locations.hints.unverified_mark_as_verified')}
       </HintAction>
       <HintAction
