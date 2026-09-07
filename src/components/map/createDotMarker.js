@@ -11,8 +11,36 @@ const escapeHtml = (text) => {
   return div.innerHTML
 }
 
+const HYBRID_MARKER = /(^|\s)x(\s|$)/g
+
+const formatBotanicalHtml = (botanical) => {
+  let html = ''
+  let lastIndex = 0
+  let match
+
+  HYBRID_MARKER.lastIndex = 0
+  while ((match = HYBRID_MARKER.exec(botanical)) !== null) {
+    const [, leading, trailing] = match
+    const italicText = botanical.slice(lastIndex, match.index) + leading
+    if (italicText) {
+      html += `<i>${escapeHtml(italicText)}</i>`
+    }
+    html += `<span style="font-style: normal">×</span>`
+    if (trailing) {
+      html += escapeHtml(trailing)
+    }
+    lastIndex = HYBRID_MARKER.lastIndex
+  }
+
+  if (lastIndex < botanical.length) {
+    html += `<i>${escapeHtml(botanical.slice(lastIndex))}</i>`
+  }
+
+  return html
+}
+
 const formatScientificHtml = (botanical, cultivar) => {
-  const botanicalHtml = botanical ? `<i>${escapeHtml(botanical)}</i>` : ''
+  const botanicalHtml = botanical ? formatBotanicalHtml(botanical) : ''
   const cultivarHtml = cultivar
     ? `<span style="font-style: normal; margin-inline-start: 0.25em">${escapeHtml(
         cultivar,
