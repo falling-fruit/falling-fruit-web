@@ -33,7 +33,6 @@ const Lightbox = () => {
     hasMultiple,
     isFirst,
     isLast,
-    canZoomOut,
     resetSignal,
     stepUp,
     stepDown,
@@ -57,13 +56,10 @@ const Lightbox = () => {
         resetSignal={resetSignal}
         onStepUp={stepUp}
         onStepDown={stepDown}
+        onZoomOut={zoomOut}
         onZoomedChange={onImageZoomedChange}
       />
-      <LightboxTopButtons
-        canZoomOut={canZoomOut}
-        onZoomOut={zoomOut}
-        onClose={close}
-      />
+      <LightboxTopButtons onClose={close} />
       {hasMultiple && (
         <LightboxNavButtons
           isRTL={isRTL}

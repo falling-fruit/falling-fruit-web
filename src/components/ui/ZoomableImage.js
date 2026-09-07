@@ -13,14 +13,8 @@ const Viewport = styled.div`
   touch-action: none;
   background-color: black;
   user-select: none;
-  cursor: ${({ $canPan, $panning, $canStepUp }) =>
-    $canPan
-      ? $panning
-        ? 'grabbing'
-        : 'grab'
-      : $canStepUp
-        ? 'zoom-in'
-        : 'default'};
+  cursor: ${({ $canPan, $panning }) =>
+    $canPan ? ($panning ? 'grabbing' : 'grab') : 'zoom-in'};
 `
 
 const Image = styled.img`
@@ -47,6 +41,7 @@ const ZoomableImage = ({
   viewMode = 'fullscreen',
   onStepUp,
   onStepDown,
+  onZoomOut,
   onZoomedChange,
   resetSignal,
   ...props
@@ -205,17 +200,17 @@ const ZoomableImage = ({
 
   const handleClick = useCallback(
     (clientX, clientY) => {
-      if (viewMode !== 'zoomed') {
-        pendingZoomPoint.current = { x: clientX, y: clientY }
-        onStepUp?.()
+      // When zoomed in (either via view mode or pinch/scroll), a click snaps
+      // all the way back to the fullscreen (fit) view.
+      if (viewMode !== 'fullscreen' || scale > 1.001) {
+        onZoomOut?.()
         return
       }
-      if (scale < maxScale - 0.001) {
-        const next = Math.min(scale * 1.5, maxScale)
-        zoomToPoint(next, clientX, clientY)
-      }
+      // At fullscreen, a click zooms in on the tapped point.
+      pendingZoomPoint.current = { x: clientX, y: clientY }
+      onStepUp?.()
     },
-    [viewMode, scale, maxScale, onStepUp, zoomToPoint],
+    [viewMode, scale, onStepUp, onZoomOut],
   )
 
   const maybeStepDown = useCallback(
@@ -374,15 +369,12 @@ const ZoomableImage = ({
     [canPan, offset, handleClick],
   )
 
-  const canStepUp = viewMode !== 'zoomed' || scale < maxScale - 0.001
-
   return (
     <Viewport
       ref={viewportRef}
       className={className}
       $canPan={canPan}
       $panning={panning}
-      $canStepUp={canStepUp}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

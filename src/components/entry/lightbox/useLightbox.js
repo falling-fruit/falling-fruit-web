@@ -43,7 +43,7 @@ export const useLightbox = () => {
   }, [])
 
   const zoomOut = useCallback(() => {
-    setViewMode((mode) => prevMode(mode))
+    setViewMode(VIEW_MODES[0])
     setResetSignal((n) => n + 1)
   }, [])
 
@@ -115,15 +115,17 @@ export const useLightbox = () => {
   }, [reviewIndex, photoIndex])
 
   const currentSrc = reviewImages[reviewIndex]?.[photoIndex]?.original ?? ''
-  const hasMultiple = reviewImages.length > 1
+  const totalPhotos = reviewImages.reduce(
+    (sum, photos) => sum + photos.length,
+    0,
+  )
+  const hasMultiple = totalPhotos > 1
 
   const isFirst = reviewIndex === 0 && photoIndex === 0
   const isLast =
     reviewImages.length > 0 &&
     reviewIndex === reviewImages.length - 1 &&
     photoIndex === reviewImages[reviewImages.length - 1].length - 1
-
-  const canZoomOut = viewMode !== VIEW_MODES[0] || isImageZoomed
 
   return {
     viewMode,
@@ -132,7 +134,6 @@ export const useLightbox = () => {
     hasMultiple,
     isFirst,
     isLast,
-    canZoomOut,
     resetSignal,
     stepUp,
     stepDown,

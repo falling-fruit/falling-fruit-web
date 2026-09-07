@@ -1,13 +1,7 @@
-import {
-  ExitFullscreen,
-  LeftArrowAlt,
-  RightArrowAlt,
-  X,
-} from '@styled-icons/boxicons-regular'
+import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
 import ResetButton from '../../ui/ResetButton'
-import RoundIconButton from '../../ui/RoundIconButton'
 
 const TopButtons = styled.div`
   position: absolute;
@@ -18,12 +12,18 @@ const TopButtons = styled.div`
   z-index: 2;
 `
 
-const TopButton = styled(RoundIconButton)`
-  svg {
-    height: 65%;
-  }
+const TopButton = styled(ResetButton)`
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 0.375em;
+  background: rgba(0, 0, 0, 0.65);
+  box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &:disabled svg {
+  &:disabled {
     color: grey;
   }
 `
@@ -55,15 +55,11 @@ const NavButton = styled(ResetButton)`
   }
 `
 
-export const LightboxTopButtons = ({ canZoomOut, onZoomOut, onClose }) => (
+export const LightboxTopButtons = ({ onClose }) => (
   <TopButtons>
-    <TopButton
-      label="Zoom out"
-      icon={<ExitFullscreen />}
-      disabled={!canZoomOut}
-      onClick={onZoomOut}
-    />
-    <TopButton label="Close" icon={<X />} onClick={onClose} />
+    <TopButton onClick={onClose} aria-label="Close">
+      <X size={30} />
+    </TopButton>
   </TopButtons>
 )
 
