@@ -53,31 +53,12 @@ const PENDING_ID: Id = -1
  */
 type SchemaType = components['schemas']['Type']
 
-/**
- * The bits of text needed to display a type, leaving styling to the caller.
- *
- * - `common`: plain-text common name, the primary way to refer to the type.
- *   May already include the cultivar when it has been subsumed into the
- *   common name (e.g. "Apple 'Gala'"). Empty string when there is no common
- *   name (in which case the scientific name is the primary label).
- * - `scientific`: the botanical/binomial name, to be rendered in italics per
- *   convention. Empty string when there is no scientific name.
- * - `cultivar`: the cultivar, to be rendered upright (not italic) alongside
- *   the scientific name. `null` when there is no cultivar, or when the
- *   cultivar has been subsumed into `common` (so it is never shown twice).
- * - `pendingReview`: whether this type is awaiting review. Callers that
- *   annotate locations with types (i.e. the type select option) surface this;
- *   the text bits themselves stay clean.
- *
- * Callers derive layout from which bits are present: `common` is the primary
- * (bold) atom when non-empty, otherwise `scientific` (+ `cultivar`) is; the
- * remaining bits form the secondary atom.
- */
 export type DisplayComponents = {
   common: string
   scientific: string
   cultivar: string | null
   pendingReview: boolean
+  cultivarOfParent: string
   typeId: Id
 }
 
@@ -99,6 +80,8 @@ export class LocalizedType {
   cultivar: string | null
   parentCommonName: string
   parentScientificName: string
+
+  private searchReferenceCache: { [includeSynonyms: string]: string } = {}
 
   constructor(fields: {
     id: Id
@@ -138,13 +121,45 @@ export class LocalizedType {
       : this.commonName
   }
 
-  searchReference(): string {
+  /**
+   * Returns the tokenized search reference for this type, memoized per
+   * `includeSynonyms` value. Filtering select options runs this against every
+   * candidate on each keystroke, so the result is cached on the instance (and
+   * warmed up front via {@link precomputeSearchReferences}) to keep search
+   * responsive.
+   */
+  searchReference({
+    includeSynonyms = true,
+  }: { includeSynonyms?: boolean } = {}): string {
+    const cacheKey = includeSynonyms ? 'with' : 'without'
+    const cached = this.searchReferenceCache[cacheKey]
+    if (cached !== undefined) {
+      return cached
+    }
+    const computed = this.computeSearchReference(includeSynonyms)
+    this.searchReferenceCache[cacheKey] = computed
+    return computed
+  }
+
+  /**
+   * Warms the search reference cache for both synonym variants. Called once
+   * when a {@link TypesAccess} is built, after parent names are wired up, so
+   * the first keystroke does not pay the tokenization cost.
+   */
+  precomputeSearchReferences(): void {
+    this.searchReference({ includeSynonyms: true })
+    this.searchReference({ includeSynonyms: false })
+  }
+
+  private computeSearchReference(includeSynonyms: boolean): string {
     const { commonName, scientificName, cultivar, synonyms, parentCommonName } =
       this
 
-    const referenceStrings = [commonName, scientificName, ...synonyms].filter(
-      Boolean,
-    )
+    const referenceStrings = [
+      commonName,
+      scientificName,
+      ...(includeSynonyms ? synonyms : []),
+    ].filter(Boolean)
 
     // If common name starts with 'common ' or 'Common ', add version without that prefix
     if (commonName.toLowerCase().startsWith('common ')) {
@@ -167,15 +182,6 @@ export class LocalizedType {
     return tokenizeReference(referenceStrings)
   }
 
-  /**
-   * The text bits needed to display this type, leaving styling to the caller.
-   * See {@link DisplayComponents}.
-   *
-   * The cultivar is subsumed into `common` (and therefore reported as `null`)
-   * when the type has a cultivar, a parent common and scientific name, and
-   * either no common name of its own or one identical to the parent's. In that
-   * case `common` becomes "<parent common name> <cultivar>".
-   */
   displayComponents(): DisplayComponents {
     const cultivarSubsumed =
       Boolean(this.cultivar) &&
@@ -193,6 +199,7 @@ export class LocalizedType {
       scientific: this.botanical,
       cultivar: cultivarSubsumed ? null : this.cultivar,
       pendingReview: this.parentId === PENDING_ID,
+      cultivarOfParent: cultivarSubsumed ? (this.cultivar as string) : '',
       typeId: this.id,
     }
   }
@@ -257,6 +264,9 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
       childrenById[type.parentId] = []
     }
     childrenById[type.parentId].push(type.id)
+    // Parent names are wired up, so search references are stable now: warm the
+    // cache so keystroke-driven filtering does not tokenize on the fly.
+    type.precomputeSearchReferences()
   })
   return new TypesAccess(localizedTypes, idIndex, childrenById)
 }

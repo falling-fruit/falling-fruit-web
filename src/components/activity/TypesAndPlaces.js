@@ -82,7 +82,9 @@ const filterTypeOption = (candidate, input) => {
     return true
   }
 
-  return candidate.data.type.searchReference().includes(tokenizeQuery(input))
+  return candidate.data.type
+    .searchReference({ includeSynonyms: false })
+    .includes(tokenizeQuery(input))
 }
 
 const TypesAndPlaces = ({
