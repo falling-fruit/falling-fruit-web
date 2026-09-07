@@ -77,16 +77,23 @@ const Synonyms = styled.span`
 `
 
 export const TypeNameOption = ({ type, count }) => {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
-  const { commonNameLabel, botanical, cultivar, synonyms } = type ?? {}
+  const { synonyms } = type ?? {}
+  const { common, scientific, cultivar, pendingReview } =
+    type?.displayComponents() ?? {}
+
+  const primary = pendingReview
+    ? t('type.pending_review_item', { name: common })
+    : common
+
   return (
     <ItemWrapper>
       <DetailsBlock>
-        {commonNameLabel && <PrimaryName>{commonNameLabel}</PrimaryName>}
-        {(botanical || cultivar) && (
+        {common && <PrimaryName>{primary}</PrimaryName>}
+        {(scientific || cultivar) && (
           <OptionScientificName
-            botanical={botanical}
+            botanical={scientific}
             cultivar={cultivar}
             dir="ltr"
             style={{ textAlign: isRTL ? 'right' : 'left' }}

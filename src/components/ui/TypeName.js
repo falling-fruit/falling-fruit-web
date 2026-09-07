@@ -32,26 +32,73 @@ export const CommonName = styled.span`
 `
 
 export const CommonOrScientificName = ({ type, className, style, dir }) => {
-  const label = type?.displayLabel()
-  if (!label) {
+  const components = type?.displayComponents()
+  if (!components) {
     return null
   }
 
-  if (label.isScientific) {
+  const { common, scientific, cultivar } = components
+
+  if (common) {
+    return (
+      <CommonName className={className} style={style} dir={dir}>
+        {common}
+      </CommonName>
+    )
+  }
+
+  return (
+    <ScientificName
+      className={className}
+      style={style}
+      dir={dir ?? 'ltr'}
+      botanical={scientific}
+      cultivar={cultivar}
+    />
+  )
+}
+
+const SecondaryScientificName = styled(ScientificName)`
+  margin-inline-start: 0.4em;
+`
+
+/**
+ * Shows the common name (bold, primary) alongside the scientific name
+ * (italic secondary) plus its cultivar. When there is no common name, the
+ * scientific name stands alone as the primary label. When the cultivar has
+ * been subsumed into the common name it is not repeated on the scientific
+ * part (`cultivar` comes back `null` from displayComponents).
+ */
+export const CommonWithScientificName = ({ type, className, style, dir }) => {
+  const components = type?.displayComponents()
+  if (!components) {
+    return null
+  }
+
+  const { common, scientific, cultivar } = components
+
+  if (!common) {
     return (
       <ScientificName
         className={className}
         style={style}
         dir={dir ?? 'ltr'}
-        botanical={label.botanical}
-        cultivar={label.cultivar}
+        botanical={scientific}
+        cultivar={cultivar}
       />
     )
   }
 
   return (
-    <CommonName className={className} style={style} dir={dir}>
-      {label.text}
-    </CommonName>
+    <span className={className} style={style} dir={dir}>
+      <CommonName>{common}</CommonName>
+      {(scientific || cultivar) && (
+        <SecondaryScientificName
+          dir="ltr"
+          botanical={scientific}
+          cultivar={cultivar}
+        />
+      )}
+    </span>
   )
 }

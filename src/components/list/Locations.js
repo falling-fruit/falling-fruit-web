@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 
 import CircleIcon from '../ui/CircleIcon'
 import { theme } from '../ui/GlobalStyle'
-import { CommonName, CommonOrScientificName } from '../ui/TypeName'
+import { CommonName, CommonWithScientificName } from '../ui/TypeName'
 import DistanceText from './DistanceText'
 import { ReactComponent as LeafIcon } from './leaf.svg'
 
@@ -21,10 +21,10 @@ const TypeNameTagWrapper = styled.span`
   }
 `
 
-const ColoredTypeName = styled(CommonOrScientificName)`
+const ColoredTypeName = styled(CommonWithScientificName)`
   color: ${({ theme }) => theme.secondaryText};
 
-  &${CommonName} {
+  ${CommonName} {
     color: ${({ theme }) => theme.headerText};
   }
 `

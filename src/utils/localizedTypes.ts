@@ -53,11 +53,31 @@ const PENDING_ID: Id = -1
  */
 type SchemaType = components['schemas']['Type']
 
-export type DisplayLabel = {
-  text: string
-  botanical: string
+/**
+ * The bits of text needed to display a type, leaving styling to the caller.
+ *
+ * - `common`: plain-text common name, the primary way to refer to the type.
+ *   May already include the cultivar when it has been subsumed into the
+ *   common name (e.g. "Apple 'Gala'"). Empty string when there is no common
+ *   name (in which case the scientific name is the primary label).
+ * - `scientific`: the botanical/binomial name, to be rendered in italics per
+ *   convention. Empty string when there is no scientific name.
+ * - `cultivar`: the cultivar, to be rendered upright (not italic) alongside
+ *   the scientific name. `null` when there is no cultivar, or when the
+ *   cultivar has been subsumed into `common` (so it is never shown twice).
+ * - `pendingReview`: whether this type is awaiting review. Callers that
+ *   annotate locations with types (i.e. the type select option) surface this;
+ *   the text bits themselves stay clean.
+ *
+ * Callers derive layout from which bits are present: `common` is the primary
+ * (bold) atom when non-empty, otherwise `scientific` (+ `cultivar`) is; the
+ * remaining bits form the secondary atom.
+ */
+export type DisplayComponents = {
+  common: string
+  scientific: string
   cultivar: string | null
-  isScientific: boolean
+  pendingReview: boolean
   typeId: Id
 }
 
@@ -118,17 +138,6 @@ export class LocalizedType {
       : this.commonName
   }
 
-  private isCultivarOfParent(): boolean {
-    return Boolean(
-      this.cultivar &&
-      this.parentCommonName &&
-      this.parentScientificName &&
-      this.scientificName
-        .toLowerCase()
-        .startsWith(this.parentScientificName.toLowerCase()),
-    )
-  }
-
   searchReference(): string {
     const { commonName, scientificName, cultivar, synonyms, parentCommonName } =
       this
@@ -158,45 +167,34 @@ export class LocalizedType {
     return tokenizeReference(referenceStrings)
   }
 
-  displayLabel(): DisplayLabel | null {
-    if (this.cultivar) {
-      if (
-        this.parentCommonName &&
-        this.parentScientificName &&
-        (!this.commonName ||
-          this.commonName.toLowerCase() === this.parentCommonName.toLowerCase())
-      ) {
-        return {
-          text: `${this.parentCommonName} ${this.cultivar}`,
-          botanical: '',
-          cultivar: null,
-          isScientific: false,
-          typeId: this.id,
-        }
-      }
-    }
+  /**
+   * The text bits needed to display this type, leaving styling to the caller.
+   * See {@link DisplayComponents}.
+   *
+   * The cultivar is subsumed into `common` (and therefore reported as `null`)
+   * when the type has a cultivar, a parent common and scientific name, and
+   * either no common name of its own or one identical to the parent's. In that
+   * case `common` becomes "<parent common name> <cultivar>".
+   */
+  displayComponents(): DisplayComponents {
+    const cultivarSubsumed =
+      Boolean(this.cultivar) &&
+      Boolean(this.parentCommonName) &&
+      Boolean(this.parentScientificName) &&
+      (!this.commonName ||
+        this.commonName.toLowerCase() === this.parentCommonName.toLowerCase())
 
-    if (this.commonName) {
-      return {
-        text: this.commonName,
-        botanical: '',
-        cultivar: null,
-        isScientific: false,
-        typeId: this.id,
-      }
-    }
+    const common = cultivarSubsumed
+      ? `${this.parentCommonName} ${this.cultivar}`
+      : this.commonName
 
-    if (this.scientificName) {
-      return {
-        text: this.scientificName,
-        botanical: this.botanical,
-        cultivar: this.cultivar,
-        isScientific: true,
-        typeId: this.id,
-      }
+    return {
+      common,
+      scientific: this.botanical,
+      cultivar: cultivarSubsumed ? null : this.cultivar,
+      pendingReview: this.parentId === PENDING_ID,
+      typeId: this.id,
     }
-
-    return null
   }
 
   menuEntry(): TypeSelectMenuEntry {

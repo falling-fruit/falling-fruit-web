@@ -12,7 +12,7 @@ const escapeHtml = (text) => {
 }
 
 const formatScientificHtml = (botanical, cultivar) => {
-  const botanicalHtml = `<i>${escapeHtml(botanical)}</i>`
+  const botanicalHtml = botanical ? `<i>${escapeHtml(botanical)}</i>` : ''
   const cultivarHtml = cultivar
     ? `<span style="font-style: normal; margin-inline-start: 0.25em">${escapeHtml(
         cultivar,
@@ -21,15 +21,16 @@ const formatScientificHtml = (botanical, cultivar) => {
   return `<span dir="ltr">${botanicalHtml}${cultivarHtml}</span>`
 }
 
+const formatComponentsHtml = ({ common, scientific, cultivar }) =>
+  common ? escapeHtml(common) : formatScientificHtml(scientific, cultivar)
+
 const formatLabelHtml = (labelData, selectedTypes) =>
   labelData
-    .map((item) => {
-      const content = item.isScientific
-        ? formatScientificHtml(item.botanical, item.cultivar)
-        : escapeHtml(item.text)
-      const isSelected = selectedTypes.includes(item.typeId)
+    .map((components) => {
+      const content = formatComponentsHtml(components)
+      const isSelected = selectedTypes.includes(components.typeId)
       const opacity = isSelected ? '1.0' : '0.5'
-      return `<span data-type-id="${item.typeId}" style="opacity: ${opacity}">${content}</span>`
+      return `<span data-type-id="${components.typeId}" style="opacity: ${opacity}">${content}</span>`
     })
     .join('<br>')
 
@@ -90,8 +91,11 @@ const createLabel = (
 
   label._buildLabelData = function () {
     return (location.type_ids || [])
-      .map((id) => this.typesAccess.getType(id)?.displayLabel())
-      .filter(Boolean)
+      .map((id) => this.typesAccess.getType(id)?.displayComponents())
+      .filter(
+        (components) =>
+          components && (components.common || components.scientific),
+      )
   }
 
   label.onAdd = function () {

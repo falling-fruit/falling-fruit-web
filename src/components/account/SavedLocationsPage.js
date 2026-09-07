@@ -192,7 +192,8 @@ const LocationTypeDisplay = ({ location, typesAccess }) => {
 
   const typeElements = typeIds.map((typeId, idx) => {
     const type = typesAccess.getType(typeId)
-    if (!type?.displayLabel()) {
+    const components = type?.displayComponents()
+    if (!components || (!components.common && !components.scientific)) {
       return <span key={idx}>{typeId}</span>
     }
     return <CommonOrScientificName key={idx} type={type} />
@@ -213,10 +214,16 @@ const LocationTypeDisplay = ({ location, typesAccess }) => {
 const getLocationPlainName = (location, typesAccess) => {
   const names = (location.type_ids || []).map((typeId) => {
     const type = typesAccess.getType(typeId)
-    if (!type) {
+    const components = type?.displayComponents()
+    if (!components) {
       return typeId
     }
-    return type.commonName || type.scientificName || typeId
+    const { common, scientific, cultivar } = components
+    if (common) {
+      return common
+    }
+    const scientificName = [scientific, cultivar].filter(Boolean).join(' ')
+    return scientificName || typeId
   })
   return names.length > 0 ? names.join(', ') : String(location.id)
 }

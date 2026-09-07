@@ -38,21 +38,24 @@ const ScientificName = styled(ScientificNameBase)`
 const TypeTitle = ({ type }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
-  const { botanical, cultivar } = type ?? {}
 
-  const label = type?.displayLabel()
-  const commonName = label && !label.isScientific ? label.text : undefined
+  const components = type?.displayComponents()
+  if (!components) {
+    return null
+  }
+
+  const { common, scientific, cultivar } = components
 
   return (
     <StyledTypeTitle>
-      {commonName && <CommonName>{commonName}</CommonName>}
-      {(botanical || cultivar) && (
+      {common && <CommonName>{common}</CommonName>}
+      {(scientific || cultivar) && (
         <ScientificName
-          botanical={botanical}
+          botanical={scientific}
           cultivar={cultivar}
           dir="ltr"
           style={{ textAlign: isRTL ? 'right' : 'left' }}
-          standalone={!commonName}
+          standalone={!common}
         />
       )}
     </StyledTypeTitle>

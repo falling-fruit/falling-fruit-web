@@ -1,4 +1,4 @@
-import { LocalizedType, TypesAccess } from './localizedTypes'
+import { DisplayComponents, LocalizedType, TypesAccess } from './localizedTypes'
 
 interface RenderTreeNode {
   id: number
@@ -8,6 +8,7 @@ interface RenderTreeNode {
   scientificName: string
   botanical: string
   cultivar: string | null
+  display: DisplayComponents
   count: number
   searchLabel: string
   children: RenderTreeNode[]
@@ -68,6 +69,7 @@ class SelectTreeBuilder {
       scientificName: type.scientificName,
       botanical: type.botanical,
       cultivar: type.cultivar,
+      display: type.displayComponents(),
       count,
       searchLabel,
       children: [],
@@ -92,19 +94,6 @@ class SelectTreeBuilder {
     }
 
     node.children = children
-    if (
-      type.cultivar &&
-      parent?.scientificName &&
-      type.scientificName
-        .toLowerCase()
-        .startsWith(parent.scientificName.toLowerCase())
-    ) {
-      node.isCultivarOfParent = type.isCultivarOfParent()
-      node.commonName = type.commonName
-      node.scientificName = type.scientificName
-      node.botanical = type.botanical
-      node.cultivar = type.cultivar
-    }
 
     const ownCount = this.getCount(type.id)
     if (
