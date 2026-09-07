@@ -121,13 +121,6 @@ export class LocalizedType {
       : this.commonName
   }
 
-  /**
-   * Returns the tokenized search reference for this type, memoized per
-   * `includeSynonyms` value. Filtering select options runs this against every
-   * candidate on each keystroke, so the result is cached on the instance (and
-   * warmed up front via {@link precomputeSearchReferences}) to keep search
-   * responsive.
-   */
   searchReference({
     includeSynonyms = true,
   }: { includeSynonyms?: boolean } = {}): string {
@@ -141,11 +134,6 @@ export class LocalizedType {
     return computed
   }
 
-  /**
-   * Warms the search reference cache for both synonym variants. Called once
-   * when a {@link TypesAccess} is built, after parent names are wired up, so
-   * the first keystroke does not pay the tokenization cost.
-   */
   precomputeSearchReferences(): void {
     this.searchReference({ includeSynonyms: true })
     this.searchReference({ includeSynonyms: false })
@@ -264,8 +252,6 @@ const createTypesAccess = (localizedTypes: LocalizedType[]) => {
       childrenById[type.parentId] = []
     }
     childrenById[type.parentId].push(type.id)
-    // Parent names are wired up, so search references are stable now: warm the
-    // cache so keystroke-driven filtering does not tokenize on the fly.
     type.precomputeSearchReferences()
   })
   return new TypesAccess(localizedTypes, idIndex, childrenById)

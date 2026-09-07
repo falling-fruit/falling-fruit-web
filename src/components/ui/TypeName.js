@@ -62,13 +62,6 @@ const SecondaryScientificName = styled(ScientificName)`
   margin-inline-start: 0.4em;
 `
 
-/**
- * Shows the common name (bold, primary) alongside the scientific name
- * (italic secondary) plus its cultivar. When there is no common name, the
- * scientific name stands alone as the primary label. When the cultivar has
- * been subsumed into the common name it is not repeated on the scientific
- * part (`cultivar` comes back `null` from displayComponents).
- */
 export const CommonWithScientificName = ({ type, className, style, dir }) => {
   const components = type?.displayComponents()
   if (!components) {
