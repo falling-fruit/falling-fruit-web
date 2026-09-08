@@ -115,6 +115,8 @@ export const useLightbox = () => {
   }, [reviewIndex, photoIndex])
 
   const currentSrc = reviewImages[reviewIndex]?.[photoIndex]?.original ?? ''
+  const currentPlaceholderSrc =
+    reviewImages[reviewIndex]?.[photoIndex]?.medium ?? ''
   const totalPhotos = reviewImages.reduce(
     (sum, photos) => sum + photos.length,
     0,
@@ -131,6 +133,7 @@ export const useLightbox = () => {
     viewMode,
     isOpen,
     currentSrc,
+    currentPlaceholderSrc,
     hasMultiple,
     isFirst,
     isLast,

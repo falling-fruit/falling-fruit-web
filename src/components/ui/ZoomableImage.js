@@ -32,10 +32,16 @@ const Image = styled.img`
   -webkit-user-drag: none;
 `
 
+const FullImage = styled(Image)`
+  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  transition: opacity 150ms ease-out;
+`
+
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
 const ZoomableImage = ({
   src,
+  placeholderSrc,
   alt = '',
   className,
   viewMode = 'fullscreen',
@@ -47,10 +53,12 @@ const ZoomableImage = ({
   ...props
 }) => {
   const viewportRef = useRef(null)
+  const fullImageRef = useRef(null)
   const [scale, setScale] = useState(1)
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   const [panning, setPanning] = useState(false)
   const [naturalScale, setNaturalScale] = useState(1)
+  const [fullLoaded, setFullLoaded] = useState(false)
 
   const pointers = useRef(new Map())
   const gesture = useRef(null)
@@ -69,6 +77,9 @@ const ZoomableImage = ({
     },
     [naturalScale],
   )
+
+  const modeScaleRef = useRef(modeScale)
+  modeScaleRef.current = modeScale
 
   const clampOffset = useCallback((x, y, nextScale) => {
     const el = viewportRef.current
@@ -105,7 +116,7 @@ const ZoomableImage = ({
 
   const measureNaturalScale = useCallback(() => {
     const el = viewportRef.current
-    const img = el?.querySelector('img')
+    const img = fullImageRef.current
     if (!el || !img || !img.naturalWidth || !img.naturalHeight) {
       return
     }
@@ -126,10 +137,16 @@ const ZoomableImage = ({
     setScale(1)
     setOffset({ x: 0, y: 0 })
     setNaturalScale(1)
-  }, [src])
+    setFullLoaded(false)
+    const img = fullImageRef.current
+    if (img && img.complete && img.naturalWidth) {
+      measureNaturalScale()
+      setFullLoaded(true)
+    }
+  }, [src, measureNaturalScale])
 
   useEffect(() => {
-    const target = modeScale(viewMode)
+    const target = modeScaleRef.current(viewMode)
     const zoomPoint = pendingZoomPoint.current
     pendingZoomPoint.current = null
     setScale((prevScale) => {
@@ -150,7 +167,7 @@ const ZoomableImage = ({
       })
       return target
     })
-  }, [viewMode, modeScale, clampOffset, offsetForZoomPoint])
+  }, [viewMode, clampOffset, offsetForZoomPoint])
 
   useEffect(() => {
     onZoomedChange?.(scale > 1.001)
@@ -376,11 +393,29 @@ const ZoomableImage = ({
       onPointerCancel={onPointerUp}
       {...props}
     >
-      <Image
+      {placeholderSrc && (
+        <Image
+          key={placeholderSrc}
+          src={placeholderSrc}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          $x={offset.x}
+          $y={offset.y}
+          $scale={scale}
+        />
+      )}
+      <FullImage
+        key={src}
+        ref={fullImageRef}
         src={src}
         alt={alt}
         draggable={false}
-        onLoad={measureNaturalScale}
+        $loaded={fullLoaded}
+        onLoad={() => {
+          measureNaturalScale()
+          setFullLoaded(true)
+        }}
         $x={offset.x}
         $y={offset.y}
         $scale={scale}

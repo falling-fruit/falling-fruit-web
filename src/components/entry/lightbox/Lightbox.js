@@ -30,6 +30,7 @@ const Lightbox = () => {
     viewMode,
     isOpen,
     currentSrc,
+    currentPlaceholderSrc,
     hasMultiple,
     isFirst,
     isLast,
@@ -51,6 +52,7 @@ const Lightbox = () => {
     <StyledDialog aria-label="Photo viewer" onDismiss={close}>
       <FullscreenImage
         src={currentSrc}
+        placeholderSrc={currentPlaceholderSrc}
         alt=""
         viewMode={viewMode}
         resetSignal={resetSignal}
