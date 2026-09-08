@@ -3,11 +3,6 @@ import styled from 'styled-components/macro'
 
 import ResetButton from './ResetButton'
 
-/**
- * Shared dark-overlay background used by icon buttons that sit on top of
- * media or the map (lightbox, street view). Kept in sync with
- * RoundIconButton so the two button shapes stay visually harmonised.
- */
 export const OVERLAY_BACKGROUND = 'rgba(0, 0, 0, 0.65)'
 
 const StyledSquareIconButton = styled(ResetButton)`

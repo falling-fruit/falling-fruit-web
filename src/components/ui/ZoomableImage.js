@@ -200,13 +200,10 @@ const ZoomableImage = ({
 
   const handleClick = useCallback(
     (clientX, clientY) => {
-      // When zoomed in (either via view mode or pinch/scroll), a click snaps
-      // all the way back to the fullscreen (fit) view.
       if (viewMode !== 'fullscreen' || scale > 1.001) {
         onZoomOut?.()
         return
       }
-      // At fullscreen, a click zooms in on the tapped point.
       pendingZoomPoint.current = { x: clientX, y: clientY }
       onStepUp?.()
     },
@@ -353,10 +350,6 @@ const ZoomableImage = ({
         gesture.current = null
         setPanning(false)
 
-        // A pan gesture that never actually moved past the movement threshold
-        // still counts as a click. `movedDuringGesture` already distinguishes a
-        // real drag from a stationary press, so we don't gate on the pan type
-        // here (doing so would swallow stationary clicks while zoomed in).
         if (
           wasClickCandidate &&
           !movedDuringGesture.current &&
