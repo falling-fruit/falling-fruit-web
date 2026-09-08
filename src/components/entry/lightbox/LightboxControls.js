@@ -1,31 +1,15 @@
 import { LeftArrowAlt, RightArrowAlt, X } from '@styled-icons/boxicons-regular'
 import styled from 'styled-components/macro'
 
-import ResetButton from '../../ui/ResetButton'
+import SquareIconButton from '../../ui/SquareIconButton'
 
 const TopButtons = styled.div`
   position: absolute;
-  inset-block-start: max(10px, env(safe-area-inset-top));
-  inset-inline-end: 10px;
+  inset-block-start: max(16px, env(safe-area-inset-top));
+  inset-inline-end: 16px;
   display: flex;
   gap: 10px;
   z-index: 2;
-`
-
-const TopButton = styled(ResetButton)`
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 0.375em;
-  background: rgba(0, 0, 0, 0.65);
-  box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:disabled {
-    color: grey;
-  }
 `
 
 const NavButtonContainer = styled.div`
@@ -35,31 +19,13 @@ const NavButtonContainer = styled.div`
   inset-inline-end: 0;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   z-index: 2;
-`
-
-const NavButton = styled(ResetButton)`
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 0.375em;
-  background: rgba(0, 0, 0, 0.65);
-  box-shadow: 0px 4px 4px ${({ theme }) => theme.shadow};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:disabled {
-    color: grey;
-  }
 `
 
 export const LightboxTopButtons = ({ onClose }) => (
   <TopButtons>
-    <TopButton onClick={onClose} aria-label="Close">
-      <X size={30} />
-    </TopButton>
+    <SquareIconButton label="Close" icon={<X />} onClick={onClose} />
   </TopButtons>
 )
 
@@ -71,15 +37,17 @@ export const LightboxNavButtons = ({
   onNext,
 }) => (
   <NavButtonContainer>
-    <NavButton
+    <SquareIconButton
       disabled={disablePrev}
       onClick={onPrev}
-      aria-label="Previous photo"
-    >
-      {isRTL ? <RightArrowAlt size={30} /> : <LeftArrowAlt size={30} />}
-    </NavButton>
-    <NavButton disabled={disableNext} onClick={onNext} aria-label="Next photo">
-      {isRTL ? <LeftArrowAlt size={30} /> : <RightArrowAlt size={30} />}
-    </NavButton>
+      label="Previous photo"
+      icon={isRTL ? <RightArrowAlt /> : <LeftArrowAlt />}
+    />
+    <SquareIconButton
+      disabled={disableNext}
+      onClick={onNext}
+      label="Next photo"
+      icon={isRTL ? <LeftArrowAlt /> : <RightArrowAlt />}
+    />
   </NavButtonContainer>
 )

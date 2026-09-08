@@ -1,9 +1,10 @@
 import styled from 'styled-components/macro'
 
 import IconButton from './IconButton'
+import { OVERLAY_BACKGROUND } from './SquareIconButton'
 
 const RoundIconButton = styled(IconButton)`
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: ${OVERLAY_BACKGROUND};
   border: none;
   svg {
     color: white;
@@ -12,7 +13,7 @@ const RoundIconButton = styled(IconButton)`
 `
 
 RoundIconButton.defaultProps = {
-  size: 48,
+  size: 50,
 }
 
 export default RoundIconButton
