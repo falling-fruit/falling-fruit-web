@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel'
 import styled from 'styled-components/macro'
 
-import { openLightbox } from '../../redux/locationSlice'
+import {
+  openLightbox,
+  selectReviewsWithPhotos,
+} from '../../redux/locationSlice'
 
 const Carousel = styled(ResponsiveCarousel)`
   width: 100%;
@@ -53,9 +56,8 @@ Carousel.defaultProps = {
 
 const EntryCarousel = () => {
   const dispatch = useDispatch()
-  const { reviews } = useSelector((state) => state.location)
+  const reviewsWithPhotos = useSelector(selectReviewsWithPhotos)
 
-  const reviewsWithPhotos = reviews.filter((review) => review.photos.length > 0)
   const lightboxIndices = reviewsWithPhotos
     .map((review, ri) => review.photos.map((_, pi) => [ri, pi]))
     .flat()

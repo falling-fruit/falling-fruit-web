@@ -9,8 +9,8 @@ import styled from 'styled-components/macro'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsEmbed } from '../../utils/useBreakpoint'
 import { zIndex } from '../ui/GlobalStyle'
-import IconButton from '../ui/IconButton'
 import ReturnIcon from '../ui/ReturnIcon'
+import RoundIconButton from '../ui/RoundIconButton'
 import { useDeleteLocation } from './useDeleteLocation'
 import useLocationPane from './useLocationPane'
 
@@ -47,19 +47,6 @@ const StyledButtons = styled.div`
     }
   }
 `
-
-const RoundIconButton = styled(IconButton)`
-  background-color: rgba(0, 0, 0, 0.45);
-  border: none;
-  svg {
-    color: white;
-  }
-  ${({ opaque }) => opaque && `opacity: 0.5; cursor: help;`}
-`
-
-RoundIconButton.defaultProps = {
-  size: 48,
-}
 
 const TopButtonsMobile = ({ hasImages }) => {
   const history = useAppHistory()

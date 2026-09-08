@@ -6,7 +6,7 @@ import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
-import LightboxDesktop from './LightboxDesktop'
+import Lightbox from './lightbox/Lightbox'
 
 const TextContent = styled.article`
   padding: 12px;
@@ -32,7 +32,7 @@ const EntryDesktop = () => {
 
   return (
     <div>
-      <LightboxDesktop />
+      <Lightbox />
       <Carousel />
       <TextContent>
         <EntryOverview />

@@ -1,7 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { deleteLocationReview, openLightbox } from '../../redux/locationSlice'
+import {
+  deleteLocationReview,
+  openLightbox,
+  selectReviewsWithPhotos,
+} from '../../redux/locationSlice'
 import { setReviewData } from '../../redux/reviewSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
@@ -16,7 +20,7 @@ const EntryReviews = () => {
   const user = useSelector((state) => state.auth.user)
   const reviews = useSelector((state) => state.location.reviews)
 
-  const reviewsWithPhotos = reviews.filter((r) => r.photos.length > 0)
+  const reviewsWithPhotos = useSelector(selectReviewsWithPhotos)
 
   const onImageClick = (reviewIndex, photoIndex) => {
     dispatch(openLightbox({ reviewIndex, photoIndex }))

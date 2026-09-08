@@ -14,7 +14,7 @@ import { CardTabs, Tab, TabList, TabPanel, TabPanels } from './CardTabs'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
-import LightboxMobile from './LightboxMobile'
+import Lightbox from './lightbox/Lightbox'
 import TopButtonsMobile from './TopButtonsMobile'
 import useLocationPane from './useLocationPane'
 
@@ -211,7 +211,7 @@ const EntryMobile = () => {
               <Skeleton height={ENTRY_IMAGE_HEIGHT} />
             ) : (
               <>
-                <LightboxMobile />
+                <Lightbox />
                 <Carousel />
               </>
             )}
