@@ -350,14 +350,16 @@ const ZoomableImage = ({
       }
 
       if (pointers.current.size === 0) {
-        const wasPan = gesture.current?.type === 'pan'
         gesture.current = null
         setPanning(false)
 
+        // A pan gesture that never actually moved past the movement threshold
+        // still counts as a click. `movedDuringGesture` already distinguishes a
+        // real drag from a stationary press, so we don't gate on the pan type
+        // here (doing so would swallow stationary clicks while zoomed in).
         if (
           wasClickCandidate &&
           !movedDuringGesture.current &&
-          !wasPan &&
           Date.now() - wasClickCandidate.time < CLICK_TIME_THRESHOLD
         ) {
           handleClick(wasClickCandidate.x, wasClickCandidate.y)
