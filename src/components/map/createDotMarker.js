@@ -1,3 +1,4 @@
+import { tokenizeBotanicalName } from '../../utils/botanicalName'
 import { theme } from '../ui/GlobalStyle'
 
 const Z_INDEX = {
@@ -11,33 +12,14 @@ const escapeHtml = (text) => {
   return div.innerHTML
 }
 
-const HYBRID_MARKER = /(^|\s)x(\s|$)/g
-
-const formatBotanicalHtml = (botanical) => {
-  let html = ''
-  let lastIndex = 0
-  let match
-
-  HYBRID_MARKER.lastIndex = 0
-  while ((match = HYBRID_MARKER.exec(botanical)) !== null) {
-    const [, leading, trailing] = match
-    const italicText = botanical.slice(lastIndex, match.index) + leading
-    if (italicText) {
-      html += `<i>${escapeHtml(italicText)}</i>`
-    }
-    html += `<span style="font-style: normal">×</span>`
-    if (trailing) {
-      html += escapeHtml(trailing)
-    }
-    lastIndex = HYBRID_MARKER.lastIndex
-  }
-
-  if (lastIndex < botanical.length) {
-    html += `<i>${escapeHtml(botanical.slice(lastIndex))}</i>`
-  }
-
-  return html
-}
+const formatBotanicalHtml = (botanical) =>
+  tokenizeBotanicalName(botanical)
+    .map((segment) =>
+      segment.type === 'hybridSign'
+        ? `<span style="font-style: normal">×</span>`
+        : `<i>${escapeHtml(segment.value)}</i>`,
+    )
+    .join('')
 
 const formatScientificHtml = (botanical, cultivar) => {
   const botanicalHtml = botanical ? formatBotanicalHtml(botanical) : ''
