@@ -1,94 +1,112 @@
-import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
-// Generic wrapper for both type and place displays
-export const ItemWrapper = styled.div`
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  width: 100%;
+import { tokenizeBotanicalName } from '../../utils/botanicalName'
 
-  .select__option & {
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
-`
-
-export const DetailsBlock = styled.span`
-  .select__control & {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 0.1em;
-  }
-  .select__option & {
-    display: block;
-  }
-`
-
-export const PrimaryName = styled.span`
-  font-weight: bold;
-  color: ${({ theme }) => theme.headerText};
-  .select__control & {
-    margin-inline-end: 0.5em;
-  }
-`
-
-export const SecondaryDetails = styled.span`
-  .select__option & {
-    display: block;
-  }
-
-  font-weight: normal;
-  color: ${({ theme }) => theme.secondaryText};
-`
-
-export const CountBadge = styled.span`
-  margin-inline-start: 6px;
-  font-size: 0.8rem;
-  background: ${({ theme }) => theme.secondaryBackground};
-  border-radius: 10px;
-  padding: 2px 6px;
-  color: ${({ theme }) => theme.secondaryText};
-  margin-left: auto;
-`
-
-// Type-specific styling for scientific name
-const ScientificName = styled(SecondaryDetails)`
+const ScientificNameRoot = styled.span`
   font-style: italic;
 `
 
-const Synonyms = styled.span`
-  color: ${({ theme }) => theme.secondaryText};
-
-  .select__control & {
-    display: none;
-  }
-  .select__option & {
-    display: block;
-    flex: 1;
-    text-align: end;
-  }
+const HybridSign = styled.span`
+  font-style: normal;
 `
 
-export const TypeName = ({ commonName, scientificName, synonyms, count }) => {
-  const { i18n } = useTranslation()
-  const isRTL = i18n.dir() === 'rtl'
+const Cultivar = styled.span`
+  font-style: normal;
+  margin-inline-start: 0.25em;
+`
+
+const renderBotanicalWithHybridSign = (botanical) =>
+  tokenizeBotanicalName(botanical).map((segment, index) =>
+    segment.type === 'hybridSign' ? (
+      <HybridSign key={`hybrid-${index}`}>×</HybridSign>
+    ) : (
+      segment.value
+    ),
+  )
+
+export const ScientificName = ({
+  botanical,
+  cultivar,
+  className,
+  dir,
+  style,
+}) => {
+  if (!botanical && !cultivar) {
+    return null
+  }
   return (
-    <ItemWrapper>
-      <DetailsBlock>
-        {commonName && <PrimaryName>{commonName}</PrimaryName>}
-        {scientificName && (
-          <ScientificName
-            dir="ltr"
-            style={{ textAlign: isRTL ? 'right' : 'left' }}
-          >
-            {scientificName}
-          </ScientificName>
-        )}
-      </DetailsBlock>
-      {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
-      {count !== undefined && <CountBadge>{count}</CountBadge>}
-    </ItemWrapper>
+    <ScientificNameRoot className={className} dir={dir} style={style}>
+      {botanical && renderBotanicalWithHybridSign(botanical)}
+      {cultivar && <Cultivar>{cultivar}</Cultivar>}
+    </ScientificNameRoot>
+  )
+}
+
+export const CommonName = styled.span`
+  font-weight: bold;
+`
+
+export const CommonOrScientificName = ({ type, className, style, dir }) => {
+  const components = type?.displayComponents()
+  if (!components) {
+    return null
+  }
+
+  const { common, scientific, cultivar } = components
+
+  if (common) {
+    return (
+      <CommonName className={className} style={style} dir={dir}>
+        {common}
+      </CommonName>
+    )
+  }
+
+  return (
+    <ScientificName
+      className={className}
+      style={style}
+      dir={dir ?? 'ltr'}
+      botanical={scientific}
+      cultivar={cultivar}
+    />
+  )
+}
+
+const SecondaryScientificName = styled(ScientificName)`
+  margin-inline-start: 0.4em;
+`
+
+export const CommonWithScientificName = ({ type, className, style, dir }) => {
+  const components = type?.displayComponents()
+  if (!components) {
+    return null
+  }
+
+  const { common, scientific, cultivar } = components
+
+  if (!common) {
+    return (
+      <ScientificName
+        className={className}
+        style={style}
+        dir={dir ?? 'ltr'}
+        botanical={scientific}
+        cultivar={cultivar}
+      />
+    )
+  }
+
+  return (
+    <span className={className} style={style} dir={dir}>
+      <CommonName>{common}</CommonName>
+      {(scientific || cultivar) && (
+        <SecondaryScientificName
+          dir="ltr"
+          botanical={scientific}
+          cultivar={cultivar}
+        />
+      )}
+    </span>
   )
 }

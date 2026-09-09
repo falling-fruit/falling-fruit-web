@@ -30,6 +30,7 @@ import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import { Page } from '../ui/PageTemplate'
 import ResetButton from '../ui/ResetButton'
+import { CommonOrScientificName } from '../ui/TypeName'
 import withRedirectToAuth from './withRedirectToAuth'
 
 const ListCard = styled.div`
@@ -125,7 +126,6 @@ const LocationLinkSkeleton = styled.a`
 const Address = styled.span`
   color: ${theme.secondaryText};
   font-size: 0.85rem;
-  margin-left: 0.5rem;
 `
 
 const RemoveButton = styled(ResetButton)`
@@ -136,19 +136,11 @@ const RemoveButton = styled(ResetButton)`
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   transition: color 0.15s ease;
   flex-shrink: 0;
-  margin-left: 0.5rem;
+  margin-inline-start: 0.5rem;
 
   &:hover {
     color: ${darken(0.4, theme.secondaryText)};
   }
-`
-
-const ScientificName = styled.span`
-  font-style: italic;
-`
-
-const CommonName = styled.span`
-  font-weight: bold;
 `
 
 const SkeletonListCard = () => (
@@ -200,16 +192,11 @@ const LocationTypeDisplay = ({ location, typesAccess }) => {
 
   const typeElements = typeIds.map((typeId, idx) => {
     const type = typesAccess.getType(typeId)
-    if (!type) {
+    const components = type?.displayComponents()
+    if (!components || (!components.common && !components.scientific)) {
       return <span key={idx}>{typeId}</span>
     }
-    if (type.commonName) {
-      return <CommonName key={idx}>{type.commonName}</CommonName>
-    }
-    if (type.scientificName) {
-      return <ScientificName key={idx}>{type.scientificName}</ScientificName>
-    }
-    return <span key={idx}>{typeId}</span>
+    return <CommonOrScientificName key={idx} type={type} />
   })
 
   return (
@@ -227,10 +214,16 @@ const LocationTypeDisplay = ({ location, typesAccess }) => {
 const getLocationPlainName = (location, typesAccess) => {
   const names = (location.type_ids || []).map((typeId) => {
     const type = typesAccess.getType(typeId)
-    if (!type) {
+    const components = type?.displayComponents()
+    if (!components) {
       return typeId
     }
-    return type.commonName || type.scientificName || typeId
+    const { common, scientific, cultivar } = components
+    if (common) {
+      return common
+    }
+    const scientificName = [scientific, cultivar].filter(Boolean).join(' ')
+    return scientificName || typeId
   })
   return names.length > 0 ? names.join(', ') : String(location.id)
 }
@@ -287,7 +280,7 @@ const LocationRow = ({ location, listId, typesAccess, isDesktop }) => {
       }}
     >
       <LocationLink to={locationUrl} onClick={handleLocationClick}>
-        <LocationTypeDisplay location={location} typesAccess={typesAccess} />
+        <LocationTypeDisplay location={location} typesAccess={typesAccess} />{' '}
         {renderAddress()}
       </LocationLink>
 

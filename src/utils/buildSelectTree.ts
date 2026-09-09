@@ -1,13 +1,11 @@
-import { LocalizedType, TypesAccess } from './localizedTypes'
+import { DisplayComponents, LocalizedType, TypesAccess } from './localizedTypes'
 
 interface RenderTreeNode {
   id: number
   parent: RenderTreeNode | null
   value?: number
-  commonName: string
-  scientificName: string
+  display: DisplayComponents
   count: number
-  searchLabel: string
   children: RenderTreeNode[]
   isSelected: boolean
   isIndeterminate: boolean
@@ -62,10 +60,8 @@ class SelectTreeBuilder {
     const node: RenderTreeNode = {
       id: type.id,
       parent,
-      commonName: type.commonName,
-      scientificName: type.scientificName,
+      display: type.displayComponents(),
       count,
-      searchLabel,
       children: [],
       isSelected: this.selectedTypes.includes(type.id),
       isIndeterminate: false,
@@ -88,25 +84,11 @@ class SelectTreeBuilder {
     }
 
     node.children = children
-    if (
-      type.cultivar &&
-      parent?.scientificName &&
-      type.scientificName
-        .toLowerCase()
-        .startsWith(parent.scientificName.toLowerCase())
-    ) {
-      node.commonName = ''
-      node.scientificName = `'${type.cultivar}'`
-    } else {
-      node.commonName = type.commonName
-      node.scientificName = type.scientificName
-    }
 
     const ownCount = this.getCount(type.id)
     if (
       children.length &&
-      (ownCount > 0 ||
-        (!this.showOnlyOnMap && this.typesAccess.isSelectable(type.id))) &&
+      (ownCount > 0 || (!this.showOnlyOnMap && type.isSelectable)) &&
       matchesSearch
     ) {
       const childNode: RenderTreeNode = {

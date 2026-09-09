@@ -1,3 +1,4 @@
+import { tokenizeBotanicalName } from '../../utils/botanicalName'
 import { theme } from '../ui/GlobalStyle'
 
 const Z_INDEX = {
@@ -11,14 +12,35 @@ const escapeHtml = (text) => {
   return div.innerHTML
 }
 
+const formatBotanicalHtml = (botanical) =>
+  tokenizeBotanicalName(botanical)
+    .map((segment) =>
+      segment.type === 'hybridSign'
+        ? `<span style="font-style: normal">×</span>`
+        : `<i>${escapeHtml(segment.value)}</i>`,
+    )
+    .join('')
+
+const formatScientificHtml = (botanical, cultivar) => {
+  const botanicalHtml = botanical ? formatBotanicalHtml(botanical) : ''
+  const cultivarHtml = cultivar
+    ? `<span style="font-style: normal; margin-inline-start: 0.25em">${escapeHtml(
+        cultivar,
+      )}</span>`
+    : ''
+  return `<span dir="ltr">${botanicalHtml}${cultivarHtml}</span>`
+}
+
+const formatComponentsHtml = ({ common, scientific, cultivar }) =>
+  common ? escapeHtml(common) : formatScientificHtml(scientific, cultivar)
+
 const formatLabelHtml = (labelData, selectedTypes) =>
   labelData
-    .map((item) => {
-      const escapedText = escapeHtml(item.text)
-      const content = item.isScientific ? `<i>${escapedText}</i>` : escapedText
-      const isSelected = selectedTypes.includes(item.typeId)
+    .map((components) => {
+      const content = formatComponentsHtml(components)
+      const isSelected = selectedTypes.includes(components.typeId)
       const opacity = isSelected ? '1.0' : '0.5'
-      return `<span data-type-id="${item.typeId}" style="opacity: ${opacity}">${content}</span>`
+      return `<span data-type-id="${components.typeId}" style="opacity: ${opacity}">${content}</span>`
     })
     .join('<br>')
 
@@ -79,8 +101,11 @@ const createLabel = (
 
   label._buildLabelData = function () {
     return (location.type_ids || [])
-      .map((id) => this.typesAccess.getDisplayLabel(id))
-      .filter(Boolean)
+      .map((id) => this.typesAccess.getType(id)?.displayComponents())
+      .filter(
+        (components) =>
+          components && (components.common || components.scientific),
+      )
   }
 
   label.onAdd = function () {
