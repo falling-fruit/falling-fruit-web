@@ -1,6 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css'
 
 import { App as CapacitorApp } from '@capacitor/app'
+import { Capacitor } from '@capacitor/core'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { WindowSize } from '@reach/window-size'
 import { useEffect } from 'react'
@@ -66,6 +67,10 @@ const AppWithRouter = () => {
 
   useEffect(() => {
     SplashScreen.hide()
+
+    if (Capacitor.getPlatform() === 'ios') {
+      document.documentElement.classList.add('platform-ios')
+    }
 
     const handleAppUrlOpen = CapacitorApp.addListener('appUrlOpen', (data) => {
       try {

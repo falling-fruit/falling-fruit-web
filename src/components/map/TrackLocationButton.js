@@ -85,7 +85,7 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
   cursor: ${({ geolocationState }) => getCursorStyle(geolocationState)};
 
   position: absolute;
-  inset-block-end: calc(84px + env(safe-area-inset-bottom, 0));
+  inset-block-end: calc(84px + var(--safe-area-inset-bottom, 0px));
   inset-inline-end: 10px;
   z-index: 1;
 `

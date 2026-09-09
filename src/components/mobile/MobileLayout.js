@@ -207,7 +207,7 @@ const MobileLayout = () => {
                     <>
                       <div
                         style={{
-                          paddingBlockEnd: `calc(${TABS_HEIGHT_PX}px + env(safe-area-inset-bottom, 0))`,
+                          paddingBlockEnd: `calc(${TABS_HEIGHT_PX}px + var(--safe-area-inset-bottom, 0px))`,
                         }}
                       />
                       <TabList

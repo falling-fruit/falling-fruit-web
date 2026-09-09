@@ -44,14 +44,14 @@ const PageTabs = styled(Tabs)`
 
     background: ${({ theme }) => theme.background};
 
-    padding-block-end: env(safe-area-inset-bottom, 0);
+    padding-block-end: var(--safe-area-inset-bottom, 0px);
 
     &::after {
       content: '';
       position: absolute;
       inset-inline: 0;
       inset-block-end: 0;
-      height: env(safe-area-inset-bottom, 0);
+      height: var(--safe-area-inset-bottom, 0px);
       background: ${({ theme }) => theme.secondaryBackground};
       z-index: ${zIndex.topBar + 1};
     }
