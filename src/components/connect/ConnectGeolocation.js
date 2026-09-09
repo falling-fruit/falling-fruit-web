@@ -67,7 +67,6 @@ const useGeolocation = () => {
 
     Geolocation.watchPosition(options, callback)
       .then((id) => {
-        // The effect may have been cleaned up before the watch was registered
         if (cleared) {
           Geolocation.clearWatch({ id })
         } else {

@@ -2,11 +2,6 @@ import { useEffect, useRef } from 'react'
 
 import { createClusterMarker } from './createClusterMarker'
 
-/**
- * Stable-ish key for a cluster. Clusters have no id and are recomputed on each
- * view change, but two clusters at the same position with the same count are
- * visually identical, so we can reuse the marker instead of recreating it.
- */
 const clusterKey = (cluster) => `${cluster.lat},${cluster.lng},${cluster.count}`
 
 const ClusterMarkers = ({
@@ -17,7 +12,6 @@ const ClusterMarkers = ({
 }) => {
   const markersRef = useRef(new Map())
 
-  // Keep the latest click handler available without recreating markers.
   const onClusterClickRef = useRef(onClusterClick)
   useEffect(() => {
     onClusterClickRef.current = onClusterClick
@@ -34,7 +28,6 @@ const ClusterMarkers = ({
     const nextKeys = new Set(clusters.map(clusterKey))
     const existingKeys = new Set(currentMarkers.keys())
 
-    // Remove markers no longer present.
     existingKeys.forEach((key) => {
       if (!nextKeys.has(key)) {
         const marker = currentMarkers.get(key)
@@ -43,14 +36,12 @@ const ClusterMarkers = ({
       }
     })
 
-    // Ensure markers are attached to the current map (e.g. after remount).
     currentMarkers.forEach((marker) => {
       if (marker.getMap() !== googleMap) {
         marker.setMap(googleMap)
       }
     })
 
-    // Create markers for new clusters.
     clusters.forEach((cluster) => {
       const key = clusterKey(cluster)
       if (!currentMarkers.has(key)) {
@@ -65,7 +56,6 @@ const ClusterMarkers = ({
     return undefined
   }, [clusters, googleMap, getGoogleMaps])
 
-  // Clean up all markers on unmount / map change.
   useEffect(
     () => () => {
       markersRef.current.forEach((marker) => marker.destroy())

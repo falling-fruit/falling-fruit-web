@@ -2,19 +2,10 @@ import { rgba } from 'polished'
 
 import { theme } from '../ui/GlobalStyle'
 
-/**
- * z-index within the shared marker pane. Location dots use 1-2 and location
- * pins use 10-11 (see createDotMarker/createPinMarker), so 5 renders the
- * geolocation dot above the location dots but below the location pins.
- */
 const GEOLOCATION_Z_INDEX = 5
 
 const STYLE_ELEMENT_ID = 'geolocation-marker-styles'
 
-/**
- * Inject the keyframes/base styles once. These mirror the previous
- * GeolocationDot styled-component so the animation is preserved.
- */
 const ensureStylesInjected = () => {
   if (document.getElementById(STYLE_ELEMENT_ID)) {
     return
@@ -110,16 +101,6 @@ const ensureStylesInjected = () => {
   document.head.appendChild(style)
 }
 
-/**
- * Creates a geolocation dot as a google.maps OverlayView rendered into the
- * marker pane, so it layers correctly relative to location markers/pins while
- * keeping the pulsing animation and heading cone.
- *
- * @param {object} google - google.maps namespace
- * @param {google.maps.Map} map
- * @param {{ latitude: number, longitude: number, heading: number|null }} geolocation
- * @param {{ isPulsing: boolean, isClickable: boolean, onClick: function }} options
- */
 export const createGeolocationMarker = (
   google,
   map,
@@ -151,7 +132,6 @@ export const createGeolocationMarker = (
     this._container.style.cursor = this._isClickable ? 'pointer' : ''
     this._container.style.pointerEvents = this._isClickable ? 'auto' : 'none'
 
-    // Heading cone suppresses the pulse (matches the previous hasHeadingLtr logic)
     const hasHeading = this._heading !== null && this._heading !== undefined
     this._pulse.classList.toggle(
       'geolocation-marker__pulse--pulsing',
@@ -177,7 +157,6 @@ export const createGeolocationMarker = (
     container.style.zIndex = GEOLOCATION_Z_INDEX
     container.dir = 'ltr'
 
-    // Anchor is the point positioned at the geolocation coordinate.
     const anchor = document.createElement('div')
     anchor.className = 'geolocation-marker__anchor'
 
@@ -203,8 +182,6 @@ export const createGeolocationMarker = (
     }
     container.addEventListener('click', this._clickListener)
 
-    // markerLayer is the same pane google.maps.Marker uses, so zIndex on the
-    // container interleaves this overlay with the location markers/pins.
     this.getPanes().markerLayer.appendChild(container)
 
     this._applyState()

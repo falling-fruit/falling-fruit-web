@@ -17,8 +17,6 @@ const GeolocationDot = () => {
 
   const markerRef = useRef(null)
 
-  // Keep the latest values available to the marker's click handler without
-  // recreating the marker on every state change.
   const handlersRef = useRef({})
   handlersRef.current = { geolocation, geolocationState, googleMap, dispatch }
 
@@ -49,7 +47,6 @@ const GeolocationDot = () => {
   const isPulsing = geolocationState !== GeolocationState.DOT_ON
   const isClickable = geolocationState === GeolocationState.DOT_ON
 
-  // Create/destroy the overlay marker with the map lifecycle.
   useEffect(() => {
     if (!googleMap || !getGoogleMaps || !shouldRender) {
       return undefined
@@ -67,13 +64,9 @@ const GeolocationDot = () => {
       marker.setMap(null)
       markerRef.current = null
     }
-    // Only re-create when the map or render eligibility changes.
-    // Position/state updates are handled by the update effect below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [googleMap, getGoogleMaps, shouldRender])
 
-  // Update position/state on the existing overlay without recreating it,
-  // preserving the running animation.
   useEffect(() => {
     if (markerRef.current && shouldRender) {
       markerRef.current.update(geolocation, {

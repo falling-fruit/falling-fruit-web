@@ -2,58 +2,24 @@ import { rgba } from 'polished'
 
 import { theme } from '../ui/GlobalStyle'
 
-/**
- * The minimum cluster diameter in pixels.
- * @constant {number}
- */
 const MIN_CLUSTER_DIAMETER = 30
 
-/**
- * The maximum cluster diameter in pixels.
- * @constant {number}
- */
 const MAX_CLUSTER_DIAMETER = 100
 
-/**
- * z-index within the shared marker pane. Location dots use 1-2, the geolocation
- * dot uses 5 and location pins use 10-11. Clusters sit just above the location
- * dots (they are never shown together anyway) but below the geolocation dot and
- * pins.
- */
 const CLUSTER_Z_INDEX = 3
 
-/**
- * Extra room around the circle so the drop shadow isn't clipped by the SVG
- * viewport.
- */
 const SHADOW_PADDING = 6
 
-/**
- * Rounds and formats cluster labels.
- * @param {number} count - The total number of locations within this cluster
- * @return {string} - The rounded number label
- */
+const LABEL_FONT_SIZE = 15.75
+
 const formatClusterLabel = (count) =>
   count < 1000 ? count : `${Math.ceil(count / 1000)}K`
 
-/**
- * Calculates a cluster's diameter given its count.
- * @param {number} count - The total number of locations within this cluster
- * @return {number} - The diameter of the cluster in pixels
- */
 const calculateDiameter = (count) =>
   Math.min(
     Math.max((Math.round(Math.log10(count)) + 2) * 10, MIN_CLUSTER_DIAMETER),
     MAX_CLUSTER_DIAMETER,
   )
-
-/**
- * Fixed label font size in pixels. The previous implementation rendered the
- * count in a <p>, which inherited the global `p { font-size: 1.125rem }` with a
- * 14px root, i.e. ~15.75px, regardless of the cluster's diameter. Keep it
- * constant so only the dot size varies.
- */
-const LABEL_FONT_SIZE = 15.75
 
 const escapeXml = (text) =>
   String(text).replace(/[<>&'"]/g, (char) => {
@@ -71,10 +37,6 @@ const escapeXml = (text) =>
     }
   })
 
-/**
- * Builds the SVG data URI for a cluster of the given count. Mirrors the previous
- * styled circle: blue fill at 90% alpha, soft shadow and white centered label.
- */
 const clusterSvgDataUri = (count) => {
   const diameter = calculateDiameter(count)
   const radius = diameter / 2
@@ -83,9 +45,6 @@ const clusterSvgDataUri = (count) => {
   const fontSize = LABEL_FONT_SIZE
   const label = escapeXml(formatClusterLabel(count))
   const fill = rgba(theme.blue, 0.9)
-  // theme.fonts contains double quotes ("Noto Sans", ...), which would break a
-  // double-quoted XML attribute. Swap them for single quotes so the SVG stays
-  // valid; the exact font is not critical for a numeric label.
   const fontFamily = theme.fonts.replace(/"/g, "'")
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
@@ -113,15 +72,6 @@ const getClusterIcon = (google, count) => {
   }
 }
 
-/**
- * Creates a cluster as a google.maps.Marker, so it layers correctly relative to
- * the location markers/pins/geolocation dot via marker zIndex ordering.
- *
- * @param {object} google - google.maps namespace
- * @param {google.maps.Map} map
- * @param {{ lat: number, lng: number, count: number }} cluster
- * @param {{ onClick: function }} options
- */
 export const createClusterMarker = (google, map, cluster, { onClick } = {}) => {
   const marker = new google.Marker({
     position: { lat: cluster.lat, lng: cluster.lng },
