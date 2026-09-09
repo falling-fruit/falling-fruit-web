@@ -4,13 +4,8 @@ interface RenderTreeNode {
   id: number
   parent: RenderTreeNode | null
   value?: number
-  commonName: string
-  scientificName: string
-  botanical: string
-  cultivar: string | null
   display: DisplayComponents
   count: number
-  searchLabel: string
   children: RenderTreeNode[]
   isSelected: boolean
   isIndeterminate: boolean
@@ -65,13 +60,8 @@ class SelectTreeBuilder {
     const node: RenderTreeNode = {
       id: type.id,
       parent,
-      commonName: type.commonName,
-      scientificName: type.scientificName,
-      botanical: type.botanical,
-      cultivar: type.cultivar,
       display: type.displayComponents(),
       count,
-      searchLabel,
       children: [],
       isSelected: this.selectedTypes.includes(type.id),
       isIndeterminate: false,
