@@ -87,15 +87,15 @@ npx capacitor-set-version . --version version --build build
 
 ## Android
 
-_[`android`](../android) directory · [setup](https://capacitorjs.com/docs/v7/getting-started/environment-setup#android-requirements) · [get started](https://capacitorjs.com/docs/v7/android)_
+_[`android`](../android) directory · [setup](https://capacitorjs.com/docs/v8/getting-started/environment-setup#android-requirements) · [get started](https://capacitorjs.com/docs/v8/android)_
 
-First install the [requirements](https://capacitorjs.com/docs/v7/getting-started/environment-setup#android-requirements).
+First install the [requirements](https://capacitorjs.com/docs/v8/getting-started/environment-setup#android-requirements).
 
-- [Android Studio](https://developer.android.com/studio) 2024.2.1+
+- [Android Studio](https://developer.android.com/studio) 2025.2.1+
 - SDK Platforms:
-  - Android 15 (API Level 35)
+  - Android 16 (API Level 36.1)
 - SDK Tools:
-  - Android SDK Build-Tools [35.0.0]
+  - Android SDK Build-Tools [36.1.0]
   - Android SDK Command-line Tools [latest]
   - Android SDK Platform-Tools [latest]
 
@@ -149,9 +149,9 @@ adb install android/app/build/outputs/apk/release/app-release-signed.apk
 
 ## iOS
 
-_[`ios`](../ios) directory · [setup](https://capacitorjs.com/docs/v7/getting-started/environment-setup#ios-requirements) · [get started](https://capacitorjs.com/docs/v7/ios)_
+_[`ios`](../ios) directory · [setup](https://capacitorjs.com/docs/v8/getting-started/environment-setup#ios-requirements) · [get started](https://capacitorjs.com/docs/v8/ios)_
 
-First install the [requirements](https://capacitorjs.com/docs/v7/getting-started/environment-setup#ios-requirements).
+First install the [requirements](https://capacitorjs.com/docs/v8/getting-started/environment-setup#ios-requirements).
 
 - [MacOS](https://www.apple.com/os/macos/) 15.6+ ([download](https://support.apple.com/en-us/102662))
 - [Xcode](https://developer.apple.com/xcode/) 26.0+ ([download](https://xcodereleases.com))
