@@ -600,10 +600,7 @@ const MapPage = ({ isDesktop }) => {
           }}
         >
           {geolocation && !geolocation.loading && !geolocation.error && (
-            <GeolocationDot
-              lat={geolocation.latitude}
-              lng={geolocation.longitude}
-            />
+            <GeolocationDot />
           )}
           {place &&
             place.location &&
