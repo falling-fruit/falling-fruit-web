@@ -72,7 +72,7 @@ const ButtonGroupStart = styled.div`
 `
 
 const OverviewContainer = styled.div`
-  padding-block-end: env(safe-area-inset-bottom, 0);
+  padding-block-end: var(--safe-area-inset-bottom, 0px);
 `
 
 const AddressInfo = ({ locationData, onClick }) => (

@@ -8,7 +8,7 @@ const StyledFormDiv = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 10px;
-  padding-block-end: env(safe-area-inset-bottom, 0);
+  padding-block-end: var(--safe-area-inset-bottom, 0px);
   overflow: auto;
 
   &::before {

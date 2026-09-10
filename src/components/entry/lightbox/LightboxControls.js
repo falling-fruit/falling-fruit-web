@@ -14,7 +14,7 @@ const TopButtons = styled.div`
 
 const NavButtonContainer = styled.div`
   position: absolute;
-  inset-block-end: max(16px, env(safe-area-inset-bottom));
+  inset-block-end: max(16px, var(--safe-area-inset-bottom, 0px));
   inset-inline-start: 0;
   inset-inline-end: 0;
   display: flex;

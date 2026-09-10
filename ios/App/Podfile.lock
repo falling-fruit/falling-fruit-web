@@ -12,12 +12,16 @@ PODS:
   - CapacitorFilesystem (8.1.2):
     - Capacitor
     - IONFilesystemLib (~> 1.1.1)
+  - CapacitorGeolocation (8.2.2):
+    - Capacitor
+    - IONGeolocationLib (= 2.1.0)
   - CapacitorPreferences (8.0.1):
     - Capacitor
   - CapacitorSplashScreen (8.0.2):
     - Capacitor
   - IONCameraLib (1.0.5)
   - IONFilesystemLib (1.1.2)
+  - IONGeolocationLib (2.1.0)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -26,6 +30,7 @@ DEPENDENCIES:
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
   - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
+  - "CapacitorGeolocation (from `../../node_modules/@capacitor/geolocation`)"
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
 
@@ -33,6 +38,7 @@ SPEC REPOS:
   trunk:
     - IONCameraLib
     - IONFilesystemLib
+    - IONGeolocationLib
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -47,23 +53,27 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/device"
   CapacitorFilesystem:
     :path: "../../node_modules/@capacitor/filesystem"
+  CapacitorGeolocation:
+    :path: "../../node_modules/@capacitor/geolocation"
   CapacitorPreferences:
     :path: "../../node_modules/@capacitor/preferences"
   CapacitorSplashScreen:
     :path: "../../node_modules/@capacitor/splash-screen"
 
 SPEC CHECKSUMS:
-  Capacitor: 34ed46c7364734d8d92feb1949ba731013acc93e
-  CapacitorApp: 9fd99482b6536ddf1a54721ce678145fc7fa3418
-  CapacitorCamera: bf2f2528dc2429c658f25e804fd771b95ea07333
+  Capacitor: 00b87168591cc006ea6f5c0de681ec5c39a2c8eb
+  CapacitorApp: 305bd13c44f6f9d164e2ee66a4faa956ed8c0e06
+  CapacitorCamera: a8e5798460aa967d0636d34d3a0bf1f69a5b5a39
   CapacitorCordova: 9d3acbb574048e7167d2af127a0af2123e619f2f
-  CapacitorDevice: e5599fa82274e59220170995826a16095ad20c40
-  CapacitorFilesystem: 7d3e3df84be4f0d999a5d6baa23aeb30c2de6450
-  CapacitorPreferences: 0fa33b3affebf12d96358b491ed7c2b39bec3270
-  CapacitorSplashScreen: 120117d1b2264bba31a6e6f998f51e510144dd12
+  CapacitorDevice: 708e742b60a61572cd593e44c809592e8f31da14
+  CapacitorFilesystem: 2db285a1ac6e475cc27cae2e1bea999000f9e2be
+  CapacitorGeolocation: 327f18983c8f8a55e191fcf7dee80b9294f1ab78
+  CapacitorPreferences: cca2021f386efb75947c850334447d9ff22b14f1
+  CapacitorSplashScreen: 7bf61c2001557ff9e195e601c6b87344480d3c65
   IONCameraLib: ecbd8ef0077d481df429cee267bbeb1a7b9bddd0
   IONFilesystemLib: 21a63377696b2d8fab5632ecfb7d2ac67bddb68a
+  IONGeolocationLib: 6a7b6f76063fb1b01cfb14fae7d0f526e3c9b271
 
-PODFILE CHECKSUM: 0d33ce9f9caf3016ac518a0025ec49c30b14978e
+PODFILE CHECKSUM: 7f7b7775bb29b33cd6fcc98a28643c84fc65fe64
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0

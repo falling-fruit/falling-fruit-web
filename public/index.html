@@ -87,6 +87,9 @@
     <title>Falling Fruit</title>
     <style>
       :root {
+        --safe-area-inset-bottom: 0px;
+      }
+      html.platform-ios {
         --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
       }
       #logo {
