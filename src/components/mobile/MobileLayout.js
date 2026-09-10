@@ -38,7 +38,9 @@ const MapContainer = styled.div`
       ? 0
       : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
   inset-block-end: ${(props) =>
-    props.isEmbed || props.streetView ? 0 : TABS_HEIGHT_PX}px;
+    props.isEmbed || props.streetView
+      ? 0
+      : `calc(${TABS_HEIGHT_PX}px + var(--safe-area-inset-bottom, 0px))`};
   inset-inline: 0;
 `
 
