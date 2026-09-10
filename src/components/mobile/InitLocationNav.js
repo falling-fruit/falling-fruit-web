@@ -1,19 +1,11 @@
-import { Check, X } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import styled from 'styled-components/macro'
 
 import { updatePosition } from '../../redux/locationSlice'
 import { isTooClose } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { theme } from '../ui/GlobalStyle'
-import IconButton from '../ui/IconButton'
-import TopBarNav from '../ui/TopBarNav'
-
-const Instructions = styled.span`
-  margin-inline-start: 15px;
-`
+import PositionPickerNav from './PositionPickerNav'
 
 const InitLocationNav = () => {
   const { t } = useTranslation()
@@ -28,7 +20,7 @@ const InitLocationNav = () => {
 
   const tooClose = position ? isTooClose(position, locations, editingId) : false
 
-  const handleConfirmClick = () => {
+  const handleConfirm = () => {
     if (tooClose) {
       toast.warning(t('locations.init.position_too_close'))
     } else {
@@ -36,7 +28,7 @@ const InitLocationNav = () => {
     }
   }
 
-  const handleCancelClick = () => {
+  const handleCancel = () => {
     if (isAdjustingFromForm) {
       if (form?.position) {
         dispatch(updatePosition(form.position))
@@ -48,37 +40,17 @@ const InitLocationNav = () => {
   }
 
   return (
-    <TopBarNav
-      left={
-        <Instructions>
-          {isAdjustingFromForm
-            ? t('locations.init.edit_instructions')
-            : t('locations.init.choose_instructions')}
-        </Instructions>
+    <PositionPickerNav
+      instructions={
+        isAdjustingFromForm
+          ? t('locations.init.edit_instructions')
+          : t('locations.init.choose_instructions')
       }
-      rightIcons={
-        <>
-          <IconButton
-            label={t('locations.init.cancel')}
-            icon={<X />}
-            raised
-            size={54}
-            onClick={handleCancelClick}
-          />
-          <IconButton
-            label={t('locations.init.confirm')}
-            icon={<Check />}
-            raised
-            size={54}
-            color={theme.green}
-            onClick={handleConfirmClick}
-            style={{
-              opacity: tooClose ? 0.5 : 1,
-              cursor: tooClose ? 'help' : 'pointer',
-            }}
-          />
-        </>
-      }
+      cancelLabel={t('locations.init.cancel')}
+      confirmLabel={t('locations.init.confirm')}
+      onCancel={handleCancel}
+      onConfirm={handleConfirm}
+      tooClose={tooClose}
     />
   )
 }
