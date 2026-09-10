@@ -1,9 +1,10 @@
 import { Check, X } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
+import { updatePosition } from '../../redux/locationSlice'
 import { isTooClose } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { theme } from '../ui/GlobalStyle'
@@ -17,10 +18,13 @@ const Instructions = styled.span`
 const InitLocationNav = () => {
   const { t } = useTranslation()
   const history = useAppHistory()
+  const dispatch = useDispatch()
   const { locations } = useSelector((state) => state.map)
   const { form, locationId, position } = useSelector((state) => state.location)
 
   const editingId = locationId === 'new' ? undefined : locationId
+
+  const isAdjustingFromForm = !!form
 
   const tooClose = position ? isTooClose(position, locations, editingId) : false
 
@@ -32,11 +36,22 @@ const InitLocationNav = () => {
     }
   }
 
+  const handleCancelClick = () => {
+    if (isAdjustingFromForm) {
+      if (form?.position) {
+        dispatch(updatePosition(form.position))
+      }
+      history.push('/locations/new')
+    } else {
+      history.push('/map')
+    }
+  }
+
   return (
     <TopBarNav
       left={
         <Instructions>
-          {form
+          {isAdjustingFromForm
             ? t('locations.init.edit_instructions')
             : t('locations.init.choose_instructions')}
         </Instructions>
@@ -48,7 +63,7 @@ const InitLocationNav = () => {
             icon={<X />}
             raised
             size={54}
-            onClick={() => history.push('/map')}
+            onClick={handleCancelClick}
           />
           <IconButton
             label={t('locations.init.confirm')}
