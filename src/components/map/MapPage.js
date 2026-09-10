@@ -20,7 +20,7 @@ import Share from '../share/Share'
 import ShareIconButton from '../share/ShareIconButton'
 import { AddLocationMobile } from '../ui/AddLocation'
 import LoadingIndicator from '../ui/LoadingIndicator'
-import Cluster from './Cluster'
+import ClusterMarkers from './ClusterMarkers'
 import DesktopCloseStreetView from './DesktopCloseStreetView'
 import GeolocationDot from './GeolocationDot'
 import LocationMarkers from './LocationMarkers'
@@ -600,10 +600,7 @@ const MapPage = ({ isDesktop }) => {
           }}
         >
           {geolocation && !geolocation.loading && !geolocation.error && (
-            <GeolocationDot
-              lat={geolocation.latitude}
-              lng={geolocation.longitude}
-            />
+            <GeolocationDot />
           )}
           {place &&
             place.location &&
@@ -616,18 +613,12 @@ const MapPage = ({ isDesktop }) => {
                 label={place.location.description}
               />
             )}
-          {allClusters.map((cluster) => (
-            <Cluster
-              key={JSON.stringify(cluster)}
-              onClick={(event) => {
-                handleClusterClick(cluster)
-                event.stopPropagation()
-              }}
-              count={cluster.count}
-              lat={cluster.lat}
-              lng={cluster.lng}
-            />
-          ))}
+          <ClusterMarkers
+            clusters={allClusters}
+            googleMap={googleMap}
+            getGoogleMaps={getGoogleMaps}
+            onClusterClick={handleClusterClick}
+          />
           <LocationMarkers
             locations={allLocations}
             googleMap={googleMap}

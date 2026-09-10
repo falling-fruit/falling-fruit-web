@@ -1,3 +1,4 @@
+import { Geolocation } from '@capacitor/geolocation'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,7 +20,6 @@ export const isGeolocationOpen = (geolocationState) =>
   geolocationState !== GeolocationState.DENIED
 
 const useGeolocation = () => {
-  const { t } = useTranslation()
   const [state, setState] = useState({
     loading: true,
     heading: null,
@@ -31,19 +31,22 @@ const useGeolocation = () => {
   const watchId = useRef(null)
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      setState((s) => ({
-        ...s,
-        loading: false,
-        error: {
-          code: 0,
-          message: t('error_message.geolocation.not_supported'),
-        },
-      }))
-      return
-    }
+    let cleared = false
 
-    const onSuccess = (position) => {
+    const callback = (position, err) => {
+      if (err) {
+        setState((s) => ({
+          ...s,
+          loading: false,
+          error: err,
+        }))
+        return
+      }
+
+      if (!position) {
+        return
+      }
+
       const { heading, latitude, longitude } = position.coords
 
       setState({
@@ -56,29 +59,33 @@ const useGeolocation = () => {
       })
     }
 
-    const onError = (error) => {
-      setState((s) => ({
-        ...s,
-        loading: false,
-        error,
-      }))
-    }
-
     const options = {
       enableHighAccuracy: true,
       maximumAge: 5000,
       timeout: 60000,
     }
 
-    watchId.current = navigator.geolocation.watchPosition(
-      onSuccess,
-      onError,
-      options,
-    )
+    Geolocation.watchPosition(options, callback)
+      .then((id) => {
+        if (cleared) {
+          Geolocation.clearWatch({ id })
+        } else {
+          watchId.current = id
+        }
+      })
+      .catch((error) => {
+        setState((s) => ({
+          ...s,
+          loading: false,
+          error,
+        }))
+      })
 
     return () => {
+      cleared = true
       if (watchId.current) {
-        navigator.geolocation.clearWatch(watchId.current)
+        Geolocation.clearWatch({ id: watchId.current })
+        watchId.current = null
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

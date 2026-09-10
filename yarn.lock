@@ -1221,6 +1221,13 @@
   dependencies:
     "@capacitor/synapse" "^1.0.4"
 
+"@capacitor/geolocation@^8.0.0":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@capacitor/geolocation/-/geolocation-8.2.2.tgz#e8d809c397bd61d6a2049c0813513e18ab702847"
+  integrity sha512-X8ryw6CfL4LspJnnfVL4++DUKKZVfdUIA9JljWVRljEDIQxZQZtz6xf7qstht+ymc+le6oa5EaUChVA6KsCYlA==
+  dependencies:
+    "@capacitor/synapse" "^1.0.4"
+
 "@capacitor/ios@^8.5.0":
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-8.5.0.tgz#d21c99b50119e586ca08b25e7630396db6fcf91f"

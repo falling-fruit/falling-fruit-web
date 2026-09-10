@@ -1,139 +1,91 @@
-import { rgba } from 'polished'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { css } from 'styled-components'
-import styled from 'styled-components/macro'
 
 import { MIN_GEOLOCATION_ZOOM } from '../../constants/map'
 import {
   geolocationCentering,
   GeolocationState,
 } from '../../redux/geolocationSlice'
-
-const HeadingLtr = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: -35px;
-  transform-origin: bottom center;
-  transform: rotate(${({ heading }) => heading}deg);
-
-  height: 55px;
-  width: 70px;
-  clip-path: polygon(35% 100%, 65% 100%, 100% 0%, 0% 0%);
-  // Fix gradient in Safari: https://css-tricks.com/thing-know-gradients-transparent-black/
-  background: linear-gradient(
-    to top,
-    ${({ theme }) => theme.orange},
-    ${({ theme }) => rgba(theme.orange, 0)}
-  );
-`
-
-const PinLtr = styled.div`
-  position: absolute;
-  z-index: 1;
-
-  transform: translate(-50%, -50%);
-
-  width: 28px;
-  height: 28px;
-
-  border-radius: 50%;
-  background: ${({ theme }) => theme.orange};
-`
-
-const GeolocationWrapper = styled.div`
-  ${({ isClickable }) => isClickable && 'cursor: pointer;'};
-  position: relative;
-  z-index: 3;
-
-  &::before,
-  &::after {
-    content: '';
-    width: 34px;
-    height: 34px;
-
-    position: absolute;
-    transform: translate(-50%, -50%);
-    transform-origin: 50% 50%;
-
-    border-radius: 50%;
-  }
-
-  ${({ hasHeadingLtr, isPulsing }) =>
-    !hasHeadingLtr &&
-    isPulsing &&
-    css`
-      &::before {
-        z-index: 1;
-        background: radial-gradient(
-          ${({ theme }) => rgba(theme.orange, 0.75)},
-          ${({ theme }) => rgba(theme.orange, 0)}
-        );
-        animation: 3s ease infinite pulseScale;
-      }
-    `}
-
-  &::after {
-    z-index: 3;
-    box-shadow: 0 0 0 7px #fefefe inset;
-    animation: 3s ease infinite pulseBoxShadow;
-  }
-
-  @keyframes pulseBoxShadow {
-    0% {
-      box-shadow: 0 0 0 7px #fefefe inset;
-    }
-    50% {
-      box-shadow: 0 0 0 5px #fefefe inset;
-    }
-    0% {
-      box-shadow: 0 0 0 7px #fefefe inset;
-    }
-  }
-
-  @keyframes pulseScale {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1.5);
-    }
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-`
+import { createGeolocationMarker } from './createGeolocationMarker'
 
 const GeolocationDot = () => {
-  const { googleMap } = useSelector((state) => state.map)
+  const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
   )
   const dispatch = useDispatch()
 
+  const markerRef = useRef(null)
+
+  const handlersRef = useRef({})
+  handlersRef.current = { geolocation, geolocationState, googleMap, dispatch }
+
   const handleClick = () => {
-    if (geolocation && geolocationState === GeolocationState.DOT_ON) {
-      dispatch(geolocationCentering(geolocation))
-      googleMap.panTo({ lat: geolocation.latitude, lng: geolocation.longitude })
-      if (googleMap.getZoom() < MIN_GEOLOCATION_ZOOM) {
-        googleMap.setZoom(MIN_GEOLOCATION_ZOOM)
+    const {
+      geolocation: geo,
+      geolocationState: state,
+      googleMap: map,
+      dispatch: dispatchFn,
+    } = handlersRef.current
+
+    if (geo && state === GeolocationState.DOT_ON) {
+      dispatchFn(geolocationCentering(geo))
+      map.panTo({ lat: geo.latitude, lng: geo.longitude })
+      if (map.getZoom() < MIN_GEOLOCATION_ZOOM) {
+        map.setZoom(MIN_GEOLOCATION_ZOOM)
       }
     }
   }
 
-  return (
-    <GeolocationWrapper
-      onClick={handleClick}
-      hasHeadingLtr={!!geolocation?.heading}
-      isPulsing={geolocationState !== GeolocationState.DOT_ON}
-      isClickable={geolocationState === GeolocationState.DOT_ON}
-      dir="ltr"
-    >
-      <PinLtr />
-      {geolocation && geolocation.heading !== null && (
-        <HeadingLtr heading={geolocation.heading} />
-      )}
-    </GeolocationWrapper>
-  )
+  const shouldRender =
+    geolocation &&
+    !geolocation.loading &&
+    !geolocation.error &&
+    geolocation.latitude != null &&
+    geolocation.longitude != null
+
+  const isPulsing = geolocationState !== GeolocationState.DOT_ON
+  const isClickable = geolocationState === GeolocationState.DOT_ON
+
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps || !shouldRender) {
+      return undefined
+    }
+
+    const google = getGoogleMaps()
+    const marker = createGeolocationMarker(google, googleMap, geolocation, {
+      isPulsing,
+      isClickable,
+      onClick: handleClick,
+    })
+    markerRef.current = marker
+
+    return () => {
+      marker.setMap(null)
+      markerRef.current = null
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [googleMap, getGoogleMaps, shouldRender])
+
+  useEffect(() => {
+    if (markerRef.current && shouldRender) {
+      markerRef.current.update(geolocation, {
+        isPulsing,
+        isClickable,
+        onClick: handleClick,
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    shouldRender,
+    isPulsing,
+    isClickable,
+    geolocation?.latitude,
+    geolocation?.longitude,
+    geolocation?.heading,
+  ])
+
+  return null
 }
 
 export default GeolocationDot
