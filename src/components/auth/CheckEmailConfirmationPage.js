@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
+import PageHeader from '../ui/PageHeader'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
 import { withAuthRedirect } from './withAuthRedirect'
@@ -9,7 +10,7 @@ const CheckEmailConfirmationPage = () => {
 
   return (
     <AuthPage>
-      <h2>{t('devise.confirmations.confirm_your_email')}</h2>
+      <PageHeader>{t('devise.confirmations.confirm_your_email')}</PageHeader>
       <p>{t('devise.confirmations.send_instructions')}</p>
       <AuthLinks include={['resendConfirmation']} />
     </AuthPage>

@@ -11,6 +11,7 @@ import { PasswordInput } from '../form/FormikWrappers'
 import { BackButton } from '../ui/ActionButtons'
 import FormButtons from '../ui/FormButtons'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import PageHeader from '../ui/PageHeader'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 import SubmitButton from '../ui/SubmitButton'
 import withRedirectToAuth from './withRedirectToAuth'
@@ -48,7 +49,7 @@ const ChangePasswordPage = () => {
   return (
     <TopSafeAreaInsetPage>
       <StyledBackButton backPath="/account/edit" />
-      <h1>{t('users.change_password')}</h1>
+      <PageHeader>{t('users.change_password')}</PageHeader>
 
       {user ? (
         <>

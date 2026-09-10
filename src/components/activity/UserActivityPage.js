@@ -13,6 +13,7 @@ import {
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { BackButton } from '../ui/ActionButtons'
+import PageHeader from '../ui/PageHeader'
 import { Page } from '../ui/PageTemplate'
 import { createActivityDiary } from './ActivityDiary'
 import DiaryEntry from './DiaryEntry'
@@ -158,7 +159,13 @@ const UserActivityPage = () => {
       {isLoading ? (
         <Skeleton width="15em" height={30} style={{ marginBottom: '1em' }} />
       ) : (
-        <h1>
+        <PageHeader
+          title={
+            isCurrentUser
+              ? t('users.your_activity')
+              : `${t('glossary.activity')}: ${userName}`
+          }
+        >
           {isCurrentUser ? (
             t('users.your_activity')
           ) : (
@@ -166,7 +173,7 @@ const UserActivityPage = () => {
               {t('glossary.activity')}: {userName}
             </>
           )}
-        </h1>
+        </PageHeader>
       )}
 
       <TypesAndPlaces

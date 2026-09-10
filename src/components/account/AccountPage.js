@@ -19,6 +19,7 @@ import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
 import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import PageHeader from '../ui/PageHeader'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 import SubmitButton from '../ui/SubmitButton'
 import withRedirectToAuth from './withRedirectToAuth'
@@ -93,7 +94,7 @@ const AccountPage = () => {
 
   return (
     <TopSafeAreaInsetPage>
-      <h1>{t('glossary.account')}</h1>
+      <PageHeader>{t('glossary.account')}</PageHeader>
 
       {user ? (
         <>

@@ -11,6 +11,7 @@ import { Checkbox, Input, PasswordInput } from '../form/FormikWrappers'
 import AboutSection from '../mobile/AboutSection'
 import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
+import PageHeader from '../ui/PageHeader'
 import { AuthPage } from '../ui/PageTemplate'
 import SubmitButton from '../ui/SubmitButton'
 import AuthLinks from './AuthLinks'
@@ -30,7 +31,7 @@ const SignInPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('users.sign_in')}</h1>
+      <PageHeader>{t('users.sign_in')}</PageHeader>
       <Formik
         initialValues={{
           email: state?.email ?? '',

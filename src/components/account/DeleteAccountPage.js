@@ -8,6 +8,7 @@ import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import PageHeader from '../ui/PageHeader'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 import withRedirectToAuth from './withRedirectToAuth'
 
@@ -34,7 +35,7 @@ const DeleteAccountPage = () => {
   return (
     <TopSafeAreaInsetPage>
       <StyledBackButton backPath="/account/edit" />
-      <h1>{t('users.delete_account')}</h1>
+      <PageHeader>{t('users.delete_account')}</PageHeader>
 
       {user ? (
         <>

@@ -15,6 +15,7 @@ import {
 } from '../form/FormikWrappers'
 import FormButtons from '../ui/FormButtons'
 import LabeledRow from '../ui/LabeledRow'
+import PageHeader from '../ui/PageHeader'
 import { AuthPage } from '../ui/PageTemplate'
 import SubmitButton from '../ui/SubmitButton'
 import AuthLinks from './AuthLinks'
@@ -46,7 +47,7 @@ const SignUpPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('glossary.sign_up')}</h1>
+      <PageHeader>{t('glossary.sign_up')}</PageHeader>
       <Formik
         initialValues={{
           email: '',

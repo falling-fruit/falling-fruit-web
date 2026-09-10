@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
+import PageHeader from '../ui/PageHeader'
 import { InfoPage } from '../ui/PageTemplate'
 import PhotoGridTemplate from './AboutPhotoGrid'
 import DonationButton from './DonationButton'
@@ -32,7 +33,7 @@ const Project = () => {
 
   return (
     <InfoPage>
-      <h1>{t('layouts.application.menu.the_project')}</h1>
+      <PageHeader>{t('layouts.application.menu.the_project')}</PageHeader>
       <div className="grid">
         <PhotoGridTemplate photos={foragingPhotos} float={'inline-end'} />
         <p>

@@ -12,6 +12,7 @@ import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
+import PageHeader from '../ui/PageHeader'
 import { Page } from '../ui/PageTemplate'
 
 const AboutDatasetPage = () => {
@@ -56,7 +57,9 @@ const AboutDatasetPage = () => {
   return (
     <Page>
       <BackButton />
-      <h3>{t('pages.datasets.import_id_and_name', { id, name })}</h3>
+      <PageHeader>
+        {t('pages.datasets.import_id_and_name', { id, name })}
+      </PageHeader>
       <a href={url} target="_blank" rel="noreferrer">
         {url}
       </a>

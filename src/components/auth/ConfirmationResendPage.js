@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import { requestConfirmUser } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
+import PageHeader from '../ui/PageHeader'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
 import { EmailForm } from './EmailForm'
@@ -33,7 +34,7 @@ const ConfirmationResendPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('users.resend_confirmation_instructions')}</h1>
+      <PageHeader>{t('users.resend_confirmation_instructions')}</PageHeader>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <AuthLinks exclude={['resendConfirmation']} />
     </AuthPage>
