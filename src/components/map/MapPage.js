@@ -1,4 +1,4 @@
-import GoogleMapReact from 'google-map-react'
+import { importLibrary, setOptions } from '@googlemaps/js-api-loader'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -97,6 +97,13 @@ const ShareContainer = styled.div`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   z-index: 1;
   width: 300px;
+`
+
+const MapContainer = styled.div`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 `
 
 const EARTH_RADIUS = 6378137
@@ -202,6 +209,60 @@ function getTileCoordinates(coord, zoom) {
   }
   return { x, y, z: zoom }
 }
+const buildMapStyles = (showBusinesses) => [
+  {
+    featureType: 'poi',
+    elementType: 'labels.icon',
+    stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
+  },
+  {
+    featureType: 'landscape',
+    elementType: 'labels.icon',
+    stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
+  },
+]
+
+const registerOsmTileTypes = (map, maps) => {
+  map.mapTypes.set(
+    'osm-standard',
+    new maps.ImageMapType({
+      getTileUrl: (coord, zoom) => {
+        const { x, y, z } = getTileCoordinates(coord, zoom)
+        if (y !== null) {
+          return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
+        }
+      },
+      tileSize: new maps.Size(256, 256),
+      maxZoom: 19,
+    }),
+  )
+  map.mapTypes.set(
+    'osm-toner-lite',
+    new maps.ImageMapType({
+      getTileUrl: (coord, zoom) => {
+        const { x, y, z } = getTileCoordinates(coord, zoom)
+        if (y !== null) {
+          return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
+        }
+      },
+      tileSize: new maps.Size(256, 256),
+      maxZoom: 20,
+    }),
+  )
+}
+
+const createOverlayLayers = (maps, map, layerTypes) =>
+  layerTypes
+    .map((name) => {
+      const LayerClass = maps[name]
+      if (!LayerClass) {
+        return null
+      }
+      const layer = new LayerClass()
+      layer.setMap(map)
+      return layer
+    })
+    .filter(Boolean)
 
 const configurePanoramaControls = (googleMap, showPegman, isDesktop) => {
   googleMap.setOptions({ streetViewControl: showPegman })
@@ -252,12 +313,6 @@ const getVisibleLocations = (
   return locations
 }
 
-const GoogleMapWrapper = ({ onUnmount, ...props }) => {
-  useEffect(() => onUnmount, []) //eslint-disable-line
-
-  return <GoogleMapReact {...props} />
-}
-
 const MapPage = ({ isDesktop }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
@@ -265,6 +320,9 @@ const MapPage = ({ isDesktop }) => {
   const dispatch = useDispatch()
   const idleListenerRef = useRef(null)
   const mapClickListenerRef = useRef(null)
+  const mapContainerRef = useRef(null)
+  const overlayLayersRef = useRef([])
+  const initListenerRef = useRef(null)
 
   const [shareOpen, setShareOpen] = useState(false)
 
@@ -300,6 +358,11 @@ const MapPage = ({ isDesktop }) => {
     (state) => state.settings,
   )
 
+  const mapTypeRef = useRef(mapType)
+  mapTypeRef.current = mapType
+  const showBusinessesRef = useRef(showBusinesses)
+  showBusinessesRef.current = showBusinesses
+
   const selectedLocation =
     locations.find((l) => l.id === locationId) || selectedLocationRedux
 
@@ -309,16 +372,127 @@ const MapPage = ({ isDesktop }) => {
 
   const { typesAccess } = useSelector((state) => state.type)
 
-  const apiIsLoaded = (map, maps) => {
-    /*
-     * Something breaks when storing maps in redux so pass a reference to it
-     */
-    dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
-  }
+  useEffect(() => {
+    if (!initialView || !mapContainerRef.current || googleMap) {
+      return undefined
+    }
+
+    let cancelled = false
+
+    setOptions({
+      key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+      v: 'quarterly',
+      libraries: ['places', 'geometry'],
+      language: i18n.language,
+    })
+
+    Promise.all([
+      importLibrary('maps'),
+      importLibrary('places'),
+      importLibrary('geometry'),
+    ])
+      .then(() => {
+        if (cancelled || !mapContainerRef.current) {
+          return
+        }
+
+        const maps = window.google.maps
+
+        const createdMap = new maps.Map(mapContainerRef.current, {
+          center: initialView.center,
+          zoom: initialView.zoom,
+          mapTypeId: mapTypeRef.current,
+          disableDefaultUI: true,
+          streetViewControlOptions: {
+            position: isRTL
+              ? maps.ControlPosition.RIGHT_BOTTOM
+              : maps.ControlPosition.LEFT_BOTTOM,
+          },
+          rotateControlOptions: {
+            position: isRTL
+              ? maps.ControlPosition.RIGHT_BOTTOM
+              : maps.ControlPosition.LEFT_BOTTOM,
+          },
+          minZoom: MIN_ZOOM,
+          styles: buildMapStyles(showBusinessesRef.current),
+        })
+
+        registerOsmTileTypes(createdMap, maps)
+
+        /*
+         * Something breaks when storing maps in redux so pass a reference to it
+         */
+        initListenerRef.current = maps.event.addListenerOnce(
+          createdMap,
+          'idle',
+          () => {
+            initListenerRef.current = null
+            if (cancelled) {
+              return
+            }
+            dispatch(
+              setGoogle({ googleMap: createdMap, getGoogleMaps: () => maps }),
+            )
+          },
+        )
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Failed to load Google Maps', error)
+      })
+
+    return () => {
+      cancelled = true
+      const maps = window.google?.maps
+      if (initListenerRef.current && maps) {
+        maps.event.removeListener(initListenerRef.current)
+        initListenerRef.current = null
+      }
+      if (idleListenerRef.current && maps) {
+        maps.event.removeListener(idleListenerRef.current)
+        idleListenerRef.current = null
+      }
+      overlayLayersRef.current.forEach((layer) => layer.setMap(null))
+      overlayLayersRef.current = []
+      dispatch(disconnectMap())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialView])
 
   const searchParams = new URLSearchParams(search)
   const hasTypesParams =
     searchParams.has('types') || searchParams.has('f') || searchParams.has('c')
+
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps) {
+      return
+    }
+    const maps = getGoogleMaps()
+    googleMap.setOptions({
+      mapTypeId: mapType,
+      streetViewControlOptions: {
+        position: isRTL
+          ? maps.ControlPosition.RIGHT_BOTTOM
+          : maps.ControlPosition.LEFT_BOTTOM,
+      },
+      rotateControlOptions: {
+        position: isRTL
+          ? maps.ControlPosition.RIGHT_BOTTOM
+          : maps.ControlPosition.LEFT_BOTTOM,
+      },
+      styles: buildMapStyles(showBusinesses),
+    })
+  }, [googleMap, getGoogleMaps, mapType, showBusinesses, isRTL])
+
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps) {
+      return
+    }
+    const maps = getGoogleMaps()
+    overlayLayersRef.current.forEach((layer) => layer.setMap(null))
+    overlayLayersRef.current = createOverlayLayers(maps, googleMap, layerTypes)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [googleMap, getGoogleMaps, layerTypes.join(',')])
 
   useEffect(() => {
     const ready =
@@ -523,82 +697,10 @@ const MapPage = ({ isDesktop }) => {
         />
       )}
 
-      {initialView && (
-        <GoogleMapWrapper
-          bootstrapURLKeys={{
-            apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-            version: 'quarterly',
-            libraries: ['places'],
-            language: i18n.language,
-          }}
-          options={(googleMaps) => ({
-            mapTypeId: mapType,
-            disableDefaultUI: true,
-            streetViewControlOptions: {
-              position: isRTL
-                ? googleMaps.ControlPosition.RIGHT_BOTTOM
-                : googleMaps.ControlPosition.LEFT_BOTTOM,
-            },
-            rotateControlOptions: {
-              position: isRTL
-                ? googleMaps.ControlPosition.RIGHT_BOTTOM
-                : googleMaps.ControlPosition.LEFT_BOTTOM,
-            },
-            minZoom: MIN_ZOOM,
-            styles: [
-              {
-                featureType: 'poi',
-                elementType: 'labels.icon',
-                stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
-              },
-              {
-                featureType: 'landscape',
-                elementType: 'labels.icon',
-                stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
-              },
-            ],
-          })}
-          layerTypes={layerTypes}
-          defaultCenter={initialView.center}
-          defaultZoom={initialView.zoom}
-          onGoogleApiLoaded={({ map, maps }) => {
-            map.mapTypes.set(
-              'osm-standard',
-              new maps.ImageMapType({
-                getTileUrl: (coord, zoom) => {
-                  const { x, y, z } = getTileCoordinates(coord, zoom)
-                  if (y !== null) {
-                    return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
-                  }
-                },
-                tileSize: new maps.Size(256, 256),
-                maxZoom: 19,
-              }),
-            )
-            map.mapTypes.set(
-              'osm-toner-lite',
-              new maps.ImageMapType({
-                getTileUrl: (coord, zoom) => {
-                  const { x, y, z } = getTileCoordinates(coord, zoom)
-                  if (y !== null) {
-                    return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
-                  }
-                },
-                tileSize: new maps.Size(256, 256),
-                maxZoom: 20,
-              }),
-            )
-            apiIsLoaded(map, maps)
-          }}
-          yesIWantToUseGoogleMapApiInternals
-          onUnmount={() => {
-            if (idleListenerRef.current && getGoogleMaps) {
-              getGoogleMaps().event.removeListener(idleListenerRef.current)
-              idleListenerRef.current = null
-            }
-            dispatch(disconnectMap())
-          }}
-        >
+      {initialView && <MapContainer ref={mapContainerRef} />}
+
+      {googleMap && getGoogleMaps && (
+        <>
           {geolocation && !geolocation.loading && !geolocation.error && (
             <GeolocationDot />
           )}
@@ -626,7 +728,7 @@ const MapPage = ({ isDesktop }) => {
             onLocationClick={handleLocationClick}
             showLabels={showLabels}
           />
-        </GoogleMapWrapper>
+        </>
       )}
     </>
   )
