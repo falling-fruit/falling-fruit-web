@@ -86,6 +86,16 @@
 
     <title>Falling Fruit</title>
     <style>
+      /*
+       * --safe-area-inset-bottom sources by platform:
+       * - Web / default: 0px (no system-bar overlap in a normal browser).
+       * - iOS: env(safe-area-inset-bottom) via the .platform-ios class
+       *   (added in App.js), which iOS resolves correctly out of the box.
+       * - Android: the bundled Capacitor SystemBars plugin injects the real
+       *   value as an inline style on <html> (document.documentElement), which
+       *   overrides these stylesheet rules. This works around the Chromium bug
+       *   where env(safe-area-inset-*) is 0 on Android WebView < 140.
+       */
       :root {
         --safe-area-inset-bottom: 0px;
       }

@@ -19,6 +19,17 @@ const config: CapacitorConfig = {
       splashFullScreen: true,
       splashImmersive: true,
     },
+    // Android 15+ (targetSdk 35+) forces edge-to-edge, so the WebView draws
+    // behind the system bars and window.innerHeight includes the bottom
+    // navigation bar. The bundled SystemBars plugin injects the real
+    // --safe-area-inset-* CSS variables as inline styles on the document root
+    // (working around a Chromium bug where env(safe-area-inset-*) is 0 on
+    // Android WebView < 140), which the layout already consumes to reserve
+    // space for the bottom system bar. It also zeroes the bottom inset while
+    // the keyboard is visible.
+    SystemBars: {
+      insetsHandling: 'css',
+    },
   },
   android: {
     buildOptions: {

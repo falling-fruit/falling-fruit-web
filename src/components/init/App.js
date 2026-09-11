@@ -1,7 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css'
 
 import { App as CapacitorApp } from '@capacitor/app'
-import { Capacitor } from '@capacitor/core'
+import { Capacitor, SystemBars, SystemBarsStyle } from '@capacitor/core'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { WindowSize } from '@reach/window-size'
 import { useEffect } from 'react'
@@ -70,6 +70,16 @@ const AppWithRouter = () => {
 
     if (Capacitor.getPlatform() === 'ios') {
       document.documentElement.classList.add('platform-ios')
+    }
+
+    if (Capacitor.getPlatform() === 'android') {
+      // With forced edge-to-edge on Android 15+, the SystemBars plugin injects
+      // --safe-area-inset-* CSS variables the layout uses to reserve space for
+      // the bottom navigation bar. Use DEFAULT style so the bar icons adapt to
+      // the (light) app background and stay legible.
+      SystemBars.setStyle({ style: SystemBarsStyle.Default }).catch((error) => {
+        console.error('Failed to set system bars style:', error)
+      })
     }
 
     const handleAppUrlOpen = CapacitorApp.addListener('appUrlOpen', (data) => {
