@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
+import { PageHeader } from '../ui/Headers'
 import { ErrorPage } from '../ui/PageTemplate'
 import RestartAndReloadButtons from './RestartAndReloadButtons'
 
@@ -13,7 +14,9 @@ const SomethingWentWrongContent = ({ errorMessage, fromPage = '/' }) => {
   return (
     <ErrorPage>
       <div className="grid">
-        <h1>{t('pages.something_went_wrong.header_message')}</h1>
+        <PageHeader>
+          {t('pages.something_went_wrong.header_message')}
+        </PageHeader>
         {errorMessage && (
           <p>
             {t('pages.something_went_wrong.error_occurred', {

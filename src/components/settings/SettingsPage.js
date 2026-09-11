@@ -7,6 +7,7 @@ import { LabelVisibility } from '../../constants/settings'
 import { LanguageSelect } from '../../i18n'
 import { updateSettings } from '../../redux/settingsSlice'
 import Checkbox from '../ui/Checkbox'
+import { PageHeader } from '../ui/Headers'
 import LabeledRow from '../ui/LabeledRow'
 import RadioTiles from '../ui/RadioTiles'
 import Select from '../ui/SingleSelect'
@@ -336,7 +337,7 @@ const SettingsPage = ({ isDesktop, isEmbed }) => {
     <>
       {!isDesktop && !isEmbed && <SafeAreaTop />}
       <Page isEmbed={isEmbed} isDesktop={isDesktop}>
-        {!isDesktop && <h2>{t('menu.settings')}</h2>}
+        {!isDesktop && <PageHeader>{t('menu.settings')}</PageHeader>}
         <h3>{t('pages.settings.label_visibility_header')}</h3>
         <LabelsVisibilitySettings />
         <h3>{t('glossary.map')}</h3>

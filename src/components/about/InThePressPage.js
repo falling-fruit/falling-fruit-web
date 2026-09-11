@@ -3,6 +3,7 @@ import styled from 'styled-components/macro'
 
 import pressData from '../../constants/data/press.json'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import { PageHeader } from '../ui/Headers'
 import { InfoPage } from '../ui/PageTemplate'
 
 const TimelineSection = styled.section`
@@ -119,7 +120,7 @@ const InThePressPage = () => {
 
   return (
     <InfoPage>
-      <h1>{t('layouts.application.menu.in_the_press')}</h1>
+      <PageHeader>{t('layouts.application.menu.in_the_press')}</PageHeader>
       {years.map((year) => (
         <TimelineSection key={year}>
           <h2>{year}</h2>

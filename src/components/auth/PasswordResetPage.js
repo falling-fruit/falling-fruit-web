@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import { requestResetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { PageHeader } from '../ui/Headers'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
 import { EmailForm } from './EmailForm'
@@ -33,7 +34,7 @@ const PasswordResetPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('users.reset_password')}</h1>
+      <PageHeader>{t('users.reset_password')}</PageHeader>
       <EmailForm onSubmit={handleSubmit} recaptchaRef={recaptchaRef} />
       <AuthLinks exclude={['forgotPassword']} />
     </AuthPage>

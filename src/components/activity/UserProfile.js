@@ -10,6 +10,7 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { formatISOString } from '../entry/textFormatters'
 import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
+import { PageHeader } from '../ui/Headers'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
@@ -57,7 +58,7 @@ const UserProfile = () => {
       <BackButton
         backPath={locationId ? `/locations/${locationId}` : '/changes'}
       />
-      <h3>{t('users.profile.title', { name: displayName })}</h3>
+      <PageHeader>{t('users.profile.title', { name: displayName })}</PageHeader>
       {bio && (
         <p dir="auto" style={{ whiteSpace: 'pre-line' }}>
           {bio}

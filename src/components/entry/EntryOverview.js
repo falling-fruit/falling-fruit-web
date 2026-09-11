@@ -15,6 +15,7 @@ import { MIN_LOCATION_ZOOM } from '../../constants/map'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop, useIsEmbed } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
+import { PageTitle } from '../ui/Headers'
 import IconBesideText from '../ui/IconBesideText'
 import {
   AddDescriptionHint,
@@ -276,6 +277,14 @@ const EntryOverview = () => {
     .map((id) => typesAccess.getType(id))
     .filter(Boolean)
 
+  const pageTitle = types
+    .map((type) => {
+      const { common, scientific } = type.displayComponents()
+      return common || scientific
+    })
+    .filter(Boolean)
+    .join(', ')
+
   const handleAddressClick = async () => {
     if (isEmbed) {
       history.pushAndChangeView('/map', {
@@ -307,6 +316,7 @@ const EntryOverview = () => {
 
   return (
     <OverviewContainer ref={containerRef}>
+      <PageTitle>{pageTitle}</PageTitle>
       <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
       <Tags locationData={locationData} />
       {locationData.unverified && (

@@ -10,6 +10,7 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import { Checkbox, Input, PasswordInput } from '../form/FormikWrappers'
 import AboutSection from '../mobile/AboutSection'
 import FormButtons from '../ui/FormButtons'
+import { PageHeader } from '../ui/Headers'
 import LabeledRow from '../ui/LabeledRow'
 import { AuthPage } from '../ui/PageTemplate'
 import SubmitButton from '../ui/SubmitButton'
@@ -30,7 +31,7 @@ const SignInPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('users.sign_in')}</h1>
+      <PageHeader>{t('users.sign_in')}</PageHeader>
       <Formik
         initialValues={{
           email: state?.email ?? '',
