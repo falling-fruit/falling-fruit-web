@@ -1,4 +1,4 @@
-import { importLibrary, setOptions } from '@googlemaps/js-api-loader'
+import { setOptions } from '@googlemaps/js-api-loader'
 import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,16 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
+import { MIN_ZOOM, VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { LabelVisibility, MapType, OverlayType } from '../../constants/settings'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings } from '../../redux/locationSlice'
-import {
-  disconnectMap,
-  setGeometryReady,
-  setGoogle,
-  setPlacesReady,
-} from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import { viewToString } from '../../utils/appUrl'
@@ -34,8 +28,7 @@ import PanoramaEvents from './PanoramaEvents'
 import PinMarkers from './PinMarkers'
 import Place from './Place'
 import TrackLocationButton from './TrackLocationButton'
-
-const MIN_ZOOM = 1
+import useCreateGoogleMap from './useCreateGoogleMap'
 
 setOptions({
   key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -210,18 +203,6 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
   }
 }
 
-function getTileCoordinates(coord, zoom) {
-  const tilesPerGlobe = 1 << zoom
-  let x = coord.x % tilesPerGlobe
-  if (x < 0) {
-    x = tilesPerGlobe + x
-  }
-  let y = coord.y
-  if (coord.y < 0 || coord.y >= tilesPerGlobe) {
-    y = null
-  }
-  return { x, y, z: zoom }
-}
 const buildMapStyles = (showBusinesses) => [
   {
     featureType: 'poi',
@@ -234,35 +215,6 @@ const buildMapStyles = (showBusinesses) => [
     stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
   },
 ]
-
-const registerOsmTileTypes = (map, maps) => {
-  map.mapTypes.set(
-    'osm-standard',
-    new maps.ImageMapType({
-      getTileUrl: (coord, zoom) => {
-        const { x, y, z } = getTileCoordinates(coord, zoom)
-        if (y !== null) {
-          return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
-        }
-      },
-      tileSize: new maps.Size(256, 256),
-      maxZoom: 19,
-    }),
-  )
-  map.mapTypes.set(
-    'osm-toner-lite',
-    new maps.ImageMapType({
-      getTileUrl: (coord, zoom) => {
-        const { x, y, z } = getTileCoordinates(coord, zoom)
-        if (y !== null) {
-          return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
-        }
-      },
-      tileSize: new maps.Size(256, 256),
-      maxZoom: 20,
-    }),
-  )
-}
 
 const createOverlayLayers = (maps, map, layerTypes) =>
   layerTypes
@@ -382,81 +334,14 @@ const MapPage = ({ isDesktop }) => {
     (state) => state.type,
   )
 
-  useEffect(() => {
-    if (!initialView || !mapContainerRef.current || googleMap) {
-      return undefined
-    }
-
-    let cancelled = false
-
-    importLibrary('maps')
-      .then(() => {
-        if (cancelled || !mapContainerRef.current) {
-          return
-        }
-
-        const maps = window.google.maps
-
-        const createdMap = new maps.Map(mapContainerRef.current, {
-          center: initialView.center,
-          zoom: initialView.zoom,
-          disableDefaultUI: true,
-          minZoom: MIN_ZOOM,
-        })
-
-        registerOsmTileTypes(createdMap, maps)
-
-        importLibrary('places').then(() => {
-          if (!cancelled) {
-            dispatch(setPlacesReady(true))
-          }
-        })
-
-        importLibrary('geometry').then(() => {
-          if (!cancelled) {
-            dispatch(setGeometryReady(true))
-          }
-        })
-
-        /*
-         * Something breaks when storing maps in redux so pass a reference to it
-         */
-        initListenerRef.current = maps.event.addListenerOnce(
-          createdMap,
-          'idle',
-          () => {
-            initListenerRef.current = null
-            if (cancelled) {
-              return
-            }
-            dispatch(
-              setGoogle({ googleMap: createdMap, getGoogleMaps: () => maps }),
-            )
-          },
-        )
-      })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Failed to load Google Maps', error)
-      })
-
-    return () => {
-      cancelled = true
-      const maps = window.google?.maps
-      if (initListenerRef.current && maps) {
-        maps.event.removeListener(initListenerRef.current)
-        initListenerRef.current = null
-      }
-      if (idleListenerRef.current && maps) {
-        maps.event.removeListener(idleListenerRef.current)
-        idleListenerRef.current = null
-      }
-      overlayLayersRef.current.forEach((layer) => layer.setMap(null))
-      overlayLayersRef.current = []
-      dispatch(disconnectMap())
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialView])
+  useCreateGoogleMap({
+    initialView,
+    googleMap,
+    mapContainerRef,
+    initListenerRef,
+    idleListenerRef,
+    overlayLayersRef,
+  })
 
   const searchParams = new URLSearchParams(search)
   const hasTypesParams =

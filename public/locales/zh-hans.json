@@ -65,6 +65,7 @@
       "you_are_back_online": "网络已恢复。",
       "you_are_offline": "你目前处于离线状态。"
     },
+    "failed_to_load": "加载失败：{{error}}",
     "geolocation": {
       "code_2": "无法定位：{{message}}",
       "code_3": "定位超时：{{message}}",

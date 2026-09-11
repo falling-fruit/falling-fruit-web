@@ -65,6 +65,7 @@
       "you_are_back_online": "Ви знову онлайн.",
       "you_are_offline": "Ви офлайн."
     },
+    "failed_to_load": "Не вдалося завантажити: {{error}}",
     "geolocation": {
       "code_2": "Позиція недоступна: {{message}}",
       "code_3": "Час очікування геолокації минув: {{message}}",

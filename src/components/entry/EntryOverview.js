@@ -225,11 +225,12 @@ const movePanoramaToFaceLocation = async (
 ) => {
   const googleMaps = getGoogleMaps()
   const panorama = googleMap.getStreetView()
-  const panoClient = new googleMaps.StreetViewService()
 
   if (!geometryReady) {
     return
   }
+
+  const panoClient = new googleMaps.StreetViewService()
 
   try {
     const panoData = await panoClient.getPanorama({
