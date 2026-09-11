@@ -378,7 +378,9 @@ const MapPage = ({ isDesktop }) => {
     ? [OverlayType.toLayerType(overlay)].filter(Boolean)
     : []
 
-  const { typesAccess } = useSelector((state) => state.type)
+  const { typesAccess, isLoading: typesAreLoading } = useSelector(
+    (state) => state.type,
+  )
 
   useEffect(() => {
     if (!initialView || !mapContainerRef.current || googleMap) {
@@ -404,27 +406,17 @@ const MapPage = ({ isDesktop }) => {
 
         registerOsmTileTypes(createdMap, maps)
 
-        importLibrary('places')
-          .then(() => {
-            if (!cancelled) {
-              dispatch(setPlacesReady(true))
-            }
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-console
-            console.error('Failed to load Google Maps places library', error)
-          })
+        importLibrary('places').then(() => {
+          if (!cancelled) {
+            dispatch(setPlacesReady(true))
+          }
+        })
 
-        importLibrary('geometry')
-          .then(() => {
-            if (!cancelled) {
-              dispatch(setGeometryReady(true))
-            }
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-console
-            console.error('Failed to load Google Maps geometry library', error)
-          })
+        importLibrary('geometry').then(() => {
+          if (!cancelled) {
+            dispatch(setGeometryReady(true))
+          }
+        })
 
         /*
          * Something breaks when storing maps in redux so pass a reference to it
@@ -647,7 +639,9 @@ const MapPage = ({ isDesktop }) => {
 
   return (
     <>
-      {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
+      {(mapIsLoading || locationIsLoading || typesAreLoading) && (
+        <BottomLeftLoadingIndicator />
+      )}
       {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (
         <AddLocationMobile />
       )}

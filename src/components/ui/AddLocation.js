@@ -15,8 +15,14 @@ const StyledAddLocationButton = styled(IconButton)`
   inset-block-end: calc(10px + var(--safe-area-inset-bottom, 0px));
   inset-inline-end: 10px;
   z-index: 1;
-  opacity: ${({ greyedOut }) => (greyedOut ? '0.5' : '1')};
-  cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
+  opacity: ${({ greyedOut, disabled }) =>
+    greyedOut || disabled ? '0.5' : '1'};
+  cursor: ${({ greyedOut, disabled }) => {
+    if (disabled) {
+      return 'not-allowed'
+    }
+    return greyedOut ? 'help' : 'pointer'
+  }};
 `
 
 const AddLocationDesktopButton = styled(Button)`
@@ -25,8 +31,14 @@ const AddLocationDesktopButton = styled(Button)`
   margin-block-end: 1em;
   padding-block: 1em;
   padding-inline: 0;
-  opacity: ${({ greyedOut }) => (greyedOut ? '0.5' : '1')};
-  cursor: ${({ greyedOut }) => (greyedOut ? 'help' : 'pointer')};
+  opacity: ${({ greyedOut, disabled }) =>
+    greyedOut || disabled ? '0.5' : '1'};
+  cursor: ${({ greyedOut, disabled }) => {
+    if (disabled) {
+      return 'not-allowed'
+    }
+    return greyedOut ? 'help' : 'pointer'
+  }};
 `
 
 const useAddLocation = (addLocationPath) => {
@@ -34,10 +46,15 @@ const useAddLocation = (addLocationPath) => {
   const history = useAppHistory()
   const { googleMap } = useSelector((state) => state.map)
 
+  const noMap = !googleMap
+
   const isZoomSufficient =
     !googleMap || googleMap.getZoom() > VISIBLE_CLUSTER_ZOOM_LIMIT
 
   const handleAddLocation = () => {
+    if (noMap) {
+      return
+    }
     if (isZoomSufficient) {
       history.push(addLocationPath)
     } else {
@@ -48,12 +65,13 @@ const useAddLocation = (addLocationPath) => {
   return {
     handleAddLocation,
     isZoomSufficient,
+    noMap,
   }
 }
 
 export const AddLocationMobile = () => {
   const { t } = useTranslation()
-  const { handleAddLocation, isZoomSufficient } =
+  const { handleAddLocation, isZoomSufficient, noMap } =
     useAddLocation('/locations/init')
 
   return (
@@ -64,18 +82,20 @@ export const AddLocationMobile = () => {
       raised
       onClick={handleAddLocation}
       greyedOut={!isZoomSufficient}
+      disabled={noMap}
     />
   )
 }
 
 export const AddLocationDesktop = () => {
   const { t } = useTranslation()
-  const { handleAddLocation, isZoomSufficient } =
+  const { handleAddLocation, isZoomSufficient, noMap } =
     useAddLocation('/locations/new')
 
   return (
     <AddLocationDesktopButton
       greyedOut={!isZoomSufficient}
+      disabled={noMap}
       onClick={handleAddLocation}
     >
       {t('menu.add_new_location')}
@@ -85,13 +105,14 @@ export const AddLocationDesktop = () => {
 
 export const AddLocationEmbed = (props) => {
   const { t } = useTranslation()
-  const { handleAddLocation, isZoomSufficient } =
+  const { handleAddLocation, isZoomSufficient, noMap } =
     useAddLocation('/locations/init')
 
   return (
     <AddLocationDesktopButton
       secondary
       greyedOut={!isZoomSufficient}
+      disabled={noMap}
       onClick={handleAddLocation}
       {...props}
     >
