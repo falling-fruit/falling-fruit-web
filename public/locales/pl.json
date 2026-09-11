@@ -65,6 +65,7 @@
       "you_are_back_online": "Jesteś z powrotem online.",
       "you_are_offline": "Jesteś offline."
     },
+    "failed_to_load": "Nie udało się załadować: {{error}}",
     "geolocation": {
       "code_2": "Pozycja niedostępna: {{message}}",
       "code_3": "Przekroczono limit czasu geolokalizacji: {{message}}",

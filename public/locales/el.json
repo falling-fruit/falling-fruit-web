@@ -65,6 +65,7 @@
       "you_are_back_online": "Είστε ξανά συνδεδεμένοι.",
       "you_are_offline": "Είστε εκτός σύνδεσης."
     },
+    "failed_to_load": "Αποτυχία φόρτωσης: {{error}}",
     "geolocation": {
       "code_2": "Η θέση δεν είναι διαθέσιμη: {{message}}",
       "code_3": "Λήξη χρόνου εντοπισμού θέσης: {{message}}",
