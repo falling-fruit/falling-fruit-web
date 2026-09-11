@@ -221,15 +221,9 @@ const movePanoramaToFaceLocation = async (
   googleMap,
   getGoogleMaps,
   locationData,
-  geometryReady,
 ) => {
   const googleMaps = getGoogleMaps()
   const panorama = googleMap.getStreetView()
-
-  if (!geometryReady) {
-    return
-  }
-
   const panoClient = new googleMaps.StreetViewService()
 
   try {
@@ -256,9 +250,7 @@ const movePanoramaToFaceLocation = async (
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
-  const { googleMap, getGoogleMaps, geometryReady } = useSelector(
-    (state) => state.map,
-  )
+  const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
   const { location: locationData, reviews } = useSelector(
     (state) => state.location,
   )
@@ -305,12 +297,7 @@ const EntryOverview = () => {
     }
 
     if (streetViewOpen && googleMap && getGoogleMaps) {
-      await movePanoramaToFaceLocation(
-        googleMap,
-        getGoogleMaps,
-        locationData,
-        geometryReady,
-      )
+      await movePanoramaToFaceLocation(googleMap, getGoogleMaps, locationData)
     }
 
     if (drawerFullyOpen) {

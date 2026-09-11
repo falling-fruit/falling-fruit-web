@@ -298,6 +298,7 @@ const MapPage = ({ isDesktop }) => {
     isLoading: mapIsLoading,
     googleMap,
     getGoogleMaps,
+    geometryReady,
   } = useSelector((state) => state.map)
 
   const currentZoom = googleMap?.getZoom()
@@ -429,9 +430,9 @@ const MapPage = ({ isDesktop }) => {
     }
     const zoom = googleMap.getZoom()
     const zoomOk = zoom == null || zoom > VISIBLE_CLUSTER_ZOOM_LIMIT
-    const showPegman = zoomOk
+    const showPegman = zoomOk && geometryReady
     configurePanoramaControls(googleMap, showPegman, isDesktop)
-  }, [googleMap, currentZoom, isDesktop])
+  }, [googleMap, currentZoom, isDesktop, geometryReady])
 
   const isEmbed = useIsEmbed()
 
