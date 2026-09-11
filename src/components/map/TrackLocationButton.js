@@ -33,7 +33,10 @@ const getTrackLocationColor = (geolocationState) =>
     ? 'blue'
     : 'tertiaryText'
 
-const getCursorStyle = (geolocationState) => {
+const getCursorStyle = (geolocationState, disabled) => {
+  if (disabled) {
+    return 'not-allowed'
+  }
   if (geolocationState === GeolocationState.DENIED) {
     return 'help'
   }
@@ -63,7 +66,9 @@ const TrackLocationPrependButton = styled.button.attrs((props) => ({
 }))`
   padding-inline: 3px 8px;
 
-  cursor: ${({ geolocationState }) => getCursorStyle(geolocationState)};
+  cursor: ${({ geolocationState, disabled }) =>
+    getCursorStyle(geolocationState, disabled)};
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 
   svg {
     color: ${({ theme, geolocationState }) =>
@@ -82,7 +87,9 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
   svg {
     padding: 10px;
   }
-  cursor: ${({ geolocationState }) => getCursorStyle(geolocationState)};
+  cursor: ${({ geolocationState, disabled }) =>
+    getCursorStyle(geolocationState, disabled)};
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 
   position: absolute;
   inset-block-end: calc(84px + var(--safe-area-inset-bottom, 0px));
@@ -90,7 +97,7 @@ const TrackLocationIconButton = styled(IconButton).attrs((props) => ({
   z-index: 1;
 `
 
-const TrackLocationButton = ({ isIcon }) => {
+const TrackLocationButton = ({ isIcon, disabled }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { geolocationState } = useSelector((state) => state.geolocation)
@@ -117,7 +124,7 @@ const TrackLocationButton = ({ isIcon }) => {
         }
         event.stopPropagation()
       }}
-      disabled={geolocationState === GeolocationState.LOADING}
+      disabled={disabled || geolocationState === GeolocationState.LOADING}
     />
   )
 }

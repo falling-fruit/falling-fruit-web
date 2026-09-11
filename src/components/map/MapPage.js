@@ -651,18 +651,24 @@ const MapPage = ({ isDesktop }) => {
       {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (
         <AddLocationMobile />
       )}
-      {!isDesktop && !isEmbed && <TrackLocationButton isIcon />}
+      {!isDesktop && !isEmbed && (
+        <TrackLocationButton isIcon disabled={!googleMap} />
+      )}
 
       <ZoomInButton
         onClick={zoomIn}
-        disabled={!currentZoom || currentZoom >= MapType.getMaxZoom(mapType)}
+        disabled={
+          !googleMap ||
+          !currentZoom ||
+          currentZoom >= MapType.getMaxZoom(mapType)
+        }
         isDesktop={isDesktop}
       >
         +
       </ZoomInButton>
       <ZoomOutButton
         onClick={zoomOut}
-        disabled={!currentZoom || currentZoom <= MIN_ZOOM}
+        disabled={!googleMap || !currentZoom || currentZoom <= MIN_ZOOM}
         isDesktop={isDesktop}
       >
         -
