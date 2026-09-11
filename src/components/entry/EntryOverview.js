@@ -226,6 +226,10 @@ const movePanoramaToFaceLocation = async (
   const panorama = googleMap.getStreetView()
   const panoClient = new googleMaps.StreetViewService()
 
+  if (!googleMaps.geometry) {
+    return
+  }
+
   try {
     const panoData = await panoClient.getPanorama({
       location: { lat: locationData.lat, lng: locationData.lng },

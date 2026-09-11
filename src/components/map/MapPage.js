@@ -1,4 +1,5 @@
 import { importLibrary, setOptions } from '@googlemaps/js-api-loader'
+import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,7 +10,12 @@ import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { LabelVisibility, MapType, OverlayType } from '../../constants/settings'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings } from '../../redux/locationSlice'
-import { disconnectMap, setGoogle } from '../../redux/mapSlice'
+import {
+  disconnectMap,
+  setGeometryReady,
+  setGoogle,
+  setPlacesReady,
+} from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import { viewToString } from '../../utils/appUrl'
@@ -30,6 +36,13 @@ import Place from './Place'
 import TrackLocationButton from './TrackLocationButton'
 
 const MIN_ZOOM = 1
+
+setOptions({
+  key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  v: 'quarterly',
+  libraries: ['places', 'geometry'],
+  language: i18next.language,
+})
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
@@ -358,11 +371,6 @@ const MapPage = ({ isDesktop }) => {
     (state) => state.settings,
   )
 
-  const mapTypeRef = useRef(mapType)
-  mapTypeRef.current = mapType
-  const showBusinessesRef = useRef(showBusinesses)
-  showBusinessesRef.current = showBusinesses
-
   const selectedLocation =
     locations.find((l) => l.id === locationId) || selectedLocationRedux
 
@@ -379,18 +387,7 @@ const MapPage = ({ isDesktop }) => {
 
     let cancelled = false
 
-    setOptions({
-      key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-      v: 'quarterly',
-      libraries: ['places', 'geometry'],
-      language: i18n.language,
-    })
-
-    Promise.all([
-      importLibrary('maps'),
-      importLibrary('places'),
-      importLibrary('geometry'),
-    ])
+    importLibrary('maps')
       .then(() => {
         if (cancelled || !mapContainerRef.current) {
           return
@@ -401,23 +398,33 @@ const MapPage = ({ isDesktop }) => {
         const createdMap = new maps.Map(mapContainerRef.current, {
           center: initialView.center,
           zoom: initialView.zoom,
-          mapTypeId: mapTypeRef.current,
           disableDefaultUI: true,
-          streetViewControlOptions: {
-            position: isRTL
-              ? maps.ControlPosition.RIGHT_BOTTOM
-              : maps.ControlPosition.LEFT_BOTTOM,
-          },
-          rotateControlOptions: {
-            position: isRTL
-              ? maps.ControlPosition.RIGHT_BOTTOM
-              : maps.ControlPosition.LEFT_BOTTOM,
-          },
           minZoom: MIN_ZOOM,
-          styles: buildMapStyles(showBusinessesRef.current),
         })
 
         registerOsmTileTypes(createdMap, maps)
+
+        importLibrary('places')
+          .then(() => {
+            if (!cancelled) {
+              dispatch(setPlacesReady(true))
+            }
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Failed to load Google Maps places library', error)
+          })
+
+        importLibrary('geometry')
+          .then(() => {
+            if (!cancelled) {
+              dispatch(setGeometryReady(true))
+            }
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Failed to load Google Maps geometry library', error)
+          })
 
         /*
          * Something breaks when storing maps in redux so pass a reference to it
