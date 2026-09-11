@@ -159,20 +159,10 @@ const UserActivityPage = () => {
       {isLoading ? (
         <Skeleton width="15em" height={30} style={{ marginBottom: '1em' }} />
       ) : (
-        <PageHeader
-          title={
-            isCurrentUser
-              ? t('users.your_activity')
-              : `${t('glossary.activity')}: ${userName}`
-          }
-        >
-          {isCurrentUser ? (
-            t('users.your_activity')
-          ) : (
-            <>
-              {t('glossary.activity')}: {userName}
-            </>
-          )}
+        <PageHeader>
+          {isCurrentUser
+            ? t('users.your_activity')
+            : `${t('glossary.activity')}: ${userName}`}
         </PageHeader>
       )}
 

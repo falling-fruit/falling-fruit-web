@@ -17,6 +17,7 @@ import AboutSection from '../mobile/AboutSection'
 import MobileAppLinks from '../mobile/MobileAppLinks'
 import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
+import { PageTitle } from '../ui/Headers'
 import { LandingPage } from '../ui/PageTemplate'
 import { withAuthRedirect } from './withAuthRedirect'
 
@@ -98,6 +99,7 @@ const HomePage = () => {
 
   return (
     <LandingPage>
+      <PageTitle>{t('pages.welcome.home_page')}</PageTitle>
       <br />
       <Description>
         {t('pages.welcome.welcome_visitors_to_the_site_short')}
