@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 
 import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
+import NavHeader from './NavHeader'
 import ResetButton from './ResetButton'
 import ReturnIcon from './ReturnIcon'
 
@@ -56,7 +57,7 @@ const TopBarNav = ({ left, onBack, title, rightIcons }) => (
       {onBack && <StyledBackButton onClick={onBack} tabindex={0} />}
       {left}
     </div>
-    <h3>{title}</h3>
+    <NavHeader>{title}</NavHeader>
     <Icons>{rightIcons}</Icons>
   </StyledTopBarNav>
 )

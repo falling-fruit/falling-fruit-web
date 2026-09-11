@@ -9,6 +9,7 @@ import { saveReviewFormValues } from '../../redux/reviewSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import SettingsButton from '../desktop/SettingsButton'
 import { BackButton } from '../ui/ActionButtons'
+import NavHeader from '../ui/NavHeader'
 import ReturnIcon from '../ui/ReturnIcon'
 import TopBar from '../ui/TopBar'
 import TopBarNav from '../ui/TopBarNav'
@@ -23,7 +24,7 @@ const StyledNavBack = styled.div`
   justify-content: space-between;
 `
 
-const Header = styled.h3`
+const Header = styled(NavHeader)`
   margin-inline-start: 10px;
 `
 

@@ -10,6 +10,7 @@ import TopButtonsDesktop from '../entry/TopButtonsDesktop'
 import { formRoutesDesktop } from '../form/formRoutes'
 import SettingsPage from '../settings/SettingsPage'
 import { BackButton } from '../ui/ActionButtons'
+import NavHeader from '../ui/NavHeader'
 import MainSidePane from './MainSidePane'
 import SettingsButton from './SettingsButton'
 
@@ -32,7 +33,7 @@ const StyledNavBack = styled.div`
   justify-content: space-between;
 `
 
-const Header = styled.h3`
+const Header = styled(NavHeader)`
   margin-inline-start: 10px;
 `
 
