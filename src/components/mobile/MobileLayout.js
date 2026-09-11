@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { matchPath, Route, Switch, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -24,6 +25,7 @@ import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
 import { zIndex } from '../ui/GlobalStyle'
+import { PageTitle } from '../ui/Headers'
 import TopBar from '../ui/TopBar'
 import EditLocationPositionNav from './EditLocationPositionNav'
 import InitLocationNav from './InitLocationNav'
@@ -97,6 +99,7 @@ const MobileLayout = () => {
   const { pathname } = useLocation()
   const { tabIndex, handleTabChange, tabContent } = useTabs()
   const isEmbed = useIsEmbed()
+  const { t } = useTranslation()
 
   return (
     <>
@@ -106,6 +109,14 @@ const MobileLayout = () => {
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
         />
       </Helmet>
+      <Switch>
+        <Route path="/map">
+          <PageTitle>{t('glossary.map')}</PageTitle>
+        </Route>
+        <Route path="/list">
+          <PageTitle>{t('menu.list')}</PageTitle>
+        </Route>
+      </Switch>
       <PageTabs index={tabIndex} onChange={handleTabChange}>
         <Switch>
           <Route path={['/map', '/settings', '/list', '/filters']}>
