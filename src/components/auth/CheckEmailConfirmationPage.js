@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
 import { withAuthRedirect } from './withAuthRedirect'

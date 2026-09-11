@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { InfoPage } from '../ui/PageTemplate'
 import PhotoGridTemplate from './AboutPhotoGrid'
 import DonationButton from './DonationButton'

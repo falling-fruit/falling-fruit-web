@@ -10,7 +10,7 @@ import TopButtonsDesktop from '../entry/TopButtonsDesktop'
 import { formRoutesDesktop } from '../form/formRoutes'
 import SettingsPage from '../settings/SettingsPage'
 import { BackButton } from '../ui/ActionButtons'
-import NavHeader from '../ui/NavHeader'
+import { NavHeader } from '../ui/Headers'
 import MainSidePane from './MainSidePane'
 import SettingsButton from './SettingsButton'
 

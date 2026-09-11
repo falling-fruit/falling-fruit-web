@@ -5,6 +5,7 @@ import { Capacitor } from '@capacitor/core'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { WindowSize } from '@reach/window-size'
 import { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { Route, Switch, useHistory } from 'react-router-dom'
@@ -35,6 +36,7 @@ const AppContent = () => {
 
   return (
     <>
+      <Helmet defaultTitle="Falling Fruit" titleTemplate="%s | Falling Fruit" />
       <Auth />
       <Toast
         position={

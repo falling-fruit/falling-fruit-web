@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import { requestResetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { AuthPage } from '../ui/PageTemplate'
 import AuthLinks from './AuthLinks'
 import { EmailForm } from './EmailForm'

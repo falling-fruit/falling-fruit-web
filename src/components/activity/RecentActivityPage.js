@@ -8,7 +8,7 @@ import {
   fetchMoreLocationChanges,
   resetRecentChangesLastBrowsedSection,
 } from '../../redux/activitySlice'
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { InfoPage } from '../ui/PageTemplate'
 import { createActivityDiary } from './ActivityDiary'
 import DiaryEntry from './DiaryEntry'

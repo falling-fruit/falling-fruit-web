@@ -13,7 +13,7 @@ import {
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { BackButton } from '../ui/ActionButtons'
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { Page } from '../ui/PageTemplate'
 import { createActivityDiary } from './ActivityDiary'
 import DiaryEntry from './DiaryEntry'

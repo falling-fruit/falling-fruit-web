@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 
 import pressData from '../../constants/data/press.json'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { InfoPage } from '../ui/PageTemplate'
 
 const TimelineSection = styled.section`

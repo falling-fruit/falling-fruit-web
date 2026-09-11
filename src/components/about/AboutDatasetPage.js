@@ -10,9 +10,9 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { formatISOString } from '../entry/textFormatters'
 import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
+import { PageHeader } from '../ui/Headers'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
-import PageHeader from '../ui/PageHeader'
 import { Page } from '../ui/PageTemplate'
 
 const AboutDatasetPage = () => {

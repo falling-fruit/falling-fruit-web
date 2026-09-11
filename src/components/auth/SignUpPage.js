@@ -14,8 +14,8 @@ import {
   Textarea,
 } from '../form/FormikWrappers'
 import FormButtons from '../ui/FormButtons'
+import { PageHeader } from '../ui/Headers'
 import LabeledRow from '../ui/LabeledRow'
-import PageHeader from '../ui/PageHeader'
 import { AuthPage } from '../ui/PageTemplate'
 import SubmitButton from '../ui/SubmitButton'
 import AuthLinks from './AuthLinks'

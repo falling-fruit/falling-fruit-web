@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { ErrorPage } from '../ui/PageTemplate'
 import RestartAndReloadButtons from './RestartAndReloadButtons'
 

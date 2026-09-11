@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import ShareTheHarvestTable from '../table/ShareTheHarvestTable'
-import PageHeader from '../ui/PageHeader'
+import { PageHeader } from '../ui/Headers'
 import { InfoPage } from '../ui/PageTemplate'
 
 const ShareTheHarvestPage = () => {

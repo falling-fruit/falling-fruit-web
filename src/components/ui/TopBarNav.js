@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 
 import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
-import NavHeader from './NavHeader'
+import { NavHeader } from './Headers'
 import ResetButton from './ResetButton'
 import ReturnIcon from './ReturnIcon'
 
