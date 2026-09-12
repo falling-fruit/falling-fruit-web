@@ -35,7 +35,13 @@ module.exports = {
             warning.details.includes('source-map-loader')
           )
         },
-      ]
+	]
+
+      webpackConfig.resolve.alias = {
+        ...webpackConfig.resolve.alias,
+        'react/jsx-runtime': require.resolve('react/jsx-runtime.js'),
+        'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime.js'),
+      }
 
       return webpackConfig
     },
