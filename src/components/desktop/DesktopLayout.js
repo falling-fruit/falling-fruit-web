@@ -33,11 +33,10 @@ const StyledSplit = styled(SplitPane)`
     box-shadow: 2px 0px 8px ${({ theme }) => theme.shadow};
   }
 
-  .Resizer {
-    width: 10px;
+  .split-pane-divider.horizontal {
+    width: 10px !important;
     margin: 0 -5px;
-    cursor: ${(props) =>
-      props.minSize < props.maxSize ? 'col-resize' : 'default'};
+    cursor: col-resize;
     z-index: 1;
   }
 `
