@@ -35,13 +35,15 @@ module.exports = {
             warning.details.includes('source-map-loader')
           )
         },
-	]
-
-      webpackConfig.resolve.alias = {
-        ...webpackConfig.resolve.alias,
-        'react/jsx-runtime': require.resolve('react/jsx-runtime.js'),
-        'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime.js'),
-      }
+      ]
+      // Some ESM packages (e.g. react-split-pane) import 'react/jsx-runtime'
+      // without a file extension. Webpack 5 requires fully specified imports
+      webpackConfig.module.rules.push({
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      })
 
       return webpackConfig
     },
