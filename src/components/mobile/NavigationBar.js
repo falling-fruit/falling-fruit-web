@@ -11,6 +11,8 @@ const StyledOverlay = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column-reverse;
+  flex: 0 1 auto;
+  min-height: 0;
   ${({ isOpen }) =>
     !isOpen &&
     css`

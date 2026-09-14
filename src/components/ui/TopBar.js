@@ -15,6 +15,11 @@ const TopBar = styled.div`
   border-radius: 0;
   transition: border-radius 0.2s ease-out-in;
 
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - var(--safe-area-inset-bottom, 0px));
+
   &::before {
     content: '';
     position: absolute;

@@ -22,6 +22,20 @@ const TypesHeader = styled.h5`
   margin-block-end: 0.5em;
 `
 
+const FilterContainer = styled.div`
+  margin-block-end: 0.5em;
+
+  // flex on mobile so the type tree can fill remaining space
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 auto;
+    min-height: 0;
+  `}
+`
+
 const SearchAndSelectContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -84,7 +98,7 @@ const Filter = () => {
     { value: 'all', label: t('filter.all_types') },
   ]
   return (
-    <div style={{ marginBlockEnd: '0.5em' }}>
+    <FilterContainer isDesktop={isDesktop}>
       <MunicipalTreeInventoriesCheckbox>
         <LabeledCheckbox
           field="muni"
@@ -145,7 +159,7 @@ const Filter = () => {
           selectTree={selectTree}
         />
       )}
-    </div>
+    </FilterContainer>
   )
 }
 
