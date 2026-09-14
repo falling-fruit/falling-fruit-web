@@ -1,30 +1,26 @@
-import { Check, X } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import styled from 'styled-components/macro'
 
+import { updatePosition } from '../../redux/locationSlice'
 import { isTooClose } from '../../utils/form'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { theme } from '../ui/GlobalStyle'
-import IconButton from '../ui/IconButton'
-import TopBarNav from '../ui/TopBarNav'
-
-const Instructions = styled.span`
-  margin-inline-start: 15px;
-`
+import PositionPickerNav from './PositionPickerNav'
 
 const InitLocationNav = () => {
   const { t } = useTranslation()
   const history = useAppHistory()
+  const dispatch = useDispatch()
   const { locations } = useSelector((state) => state.map)
   const { form, locationId, position } = useSelector((state) => state.location)
 
   const editingId = locationId === 'new' ? undefined : locationId
 
+  const isAdjustingFromForm = !!form
+
   const tooClose = position ? isTooClose(position, locations, editingId) : false
 
-  const handleConfirmClick = () => {
+  const handleConfirm = () => {
     if (tooClose) {
       toast.warning(t('locations.init.position_too_close'))
     } else {
@@ -32,38 +28,29 @@ const InitLocationNav = () => {
     }
   }
 
+  const handleCancel = () => {
+    if (isAdjustingFromForm) {
+      if (form?.position) {
+        dispatch(updatePosition(form.position))
+      }
+      history.push('/locations/new')
+    } else {
+      history.push('/map')
+    }
+  }
+
   return (
-    <TopBarNav
-      left={
-        <Instructions>
-          {form
-            ? t('locations.init.edit_instructions')
-            : t('locations.init.choose_instructions')}
-        </Instructions>
+    <PositionPickerNav
+      instructions={
+        isAdjustingFromForm
+          ? t('locations.init.edit_instructions')
+          : t('locations.init.choose_instructions')
       }
-      rightIcons={
-        <>
-          <IconButton
-            label={t('locations.init.cancel')}
-            icon={<X />}
-            raised
-            size={54}
-            onClick={() => history.push('/map')}
-          />
-          <IconButton
-            label={t('locations.init.confirm')}
-            icon={<Check />}
-            raised
-            size={54}
-            color={theme.green}
-            onClick={handleConfirmClick}
-            style={{
-              opacity: tooClose ? 0.5 : 1,
-              cursor: tooClose ? 'help' : 'pointer',
-            }}
-          />
-        </>
-      }
+      cancelLabel={t('locations.init.cancel')}
+      confirmLabel={t('locations.init.confirm')}
+      onCancel={handleCancel}
+      onConfirm={handleConfirm}
+      tooClose={tooClose}
     />
   )
 }

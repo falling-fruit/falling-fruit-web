@@ -67,12 +67,15 @@ const InlineSelects = styled.div`
 const PositionFieldLink = ({ lat, lng, editingId }) => {
   const { values } = useFormikContext()
   const dispatch = useDispatch()
+  const to = editingId
+    ? `/locations/${editingId}/edit/position`
+    : '/locations/init'
   return (
     <StyledPositionFieldLink
       onClick={() => {
         dispatch(saveLocationFormValues(values))
       }}
-      to={pathWithCurrentView(`/locations/${editingId}/edit/position`)}
+      to={pathWithCurrentView(to)}
     >
       <PositionField editable lat={lat} lng={lng} editingId={editingId} />
     </StyledPositionFieldLink>
@@ -170,7 +173,7 @@ const LocationStep = ({ lat, lng, isDesktop, editingId, isLoading }) => {
       <Label>{t('locations.form.position')}</Label>
       {isLoading ? (
         <LoadingIndicator />
-      ) : isDesktop || !editingId ? (
+      ) : isDesktop ? (
         <PositionFieldReadOnly lat={lat} lng={lng} editingId={editingId} />
       ) : (
         <PositionFieldLink lat={lat} lng={lng} editingId={editingId} />

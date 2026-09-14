@@ -94,7 +94,6 @@ const EditLocation = ({ NavComponent, withSettingsButton }) => {
 const AddLocation = ({ NavComponent, backUrl, withSettingsButton }) => {
   const history = useAppHistory()
   const formRef = useRef()
-  const dispatch = useDispatch()
   const { t } = useTranslation()
 
   return (
@@ -103,9 +102,6 @@ const AddLocation = ({ NavComponent, backUrl, withSettingsButton }) => {
         title={t('menu.add_new_location')}
         onBack={(event) => {
           event.stopPropagation()
-          if (formRef.current) {
-            dispatch(saveLocationFormValues(formRef.current.values))
-          }
           history.push(backUrl)
         }}
       />
@@ -177,7 +173,7 @@ export const formRoutesMobile = [
     <EditLocation NavComponent={MobileNav} />
   </Route>,
   <Route key="add-location" path="/locations/new">
-    <AddLocation NavComponent={MobileNav} backUrl="/locations/init" />
+    <AddLocation NavComponent={MobileNav} backUrl="/map" />
   </Route>,
   <Route key="add-review" path="/locations/:locationId/review">
     <AddReview NavComponent={MobileNav} />
