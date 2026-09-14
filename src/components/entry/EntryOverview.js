@@ -248,6 +248,25 @@ const movePanoramaToFaceLocation = async (
   }
 }
 
+const EntryTitle = ({ types, locationData }) => {
+  const { t } = useTranslation()
+
+  const typesTitle = types
+    .map((type) => {
+      const { common, scientific } = type.displayComponents()
+      return common || scientific
+    })
+    .filter(Boolean)
+    .join(', ')
+
+  const locationLabel = `${t('glossary.locations.one')} #${locationData.id}`
+  const pageTitle = typesTitle
+    ? `${typesTitle} (${locationLabel})`
+    : locationLabel
+
+  return <PageTitle>{pageTitle}</PageTitle>
+}
+
 const EntryOverview = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
@@ -276,14 +295,6 @@ const EntryOverview = () => {
   const types = locationData.type_ids
     .map((id) => typesAccess.getType(id))
     .filter(Boolean)
-
-  const pageTitle = types
-    .map((type) => {
-      const { common, scientific } = type.displayComponents()
-      return common || scientific
-    })
-    .filter(Boolean)
-    .join(', ')
 
   const handleAddressClick = async () => {
     if (isEmbed) {
@@ -316,7 +327,7 @@ const EntryOverview = () => {
 
   return (
     <OverviewContainer ref={containerRef}>
-      <PageTitle>{pageTitle}</PageTitle>
+      <EntryTitle types={types} locationData={locationData} />
       <TypesHeader types={types} openable={drawerFullyOpen || isDesktop} />
       <Tags locationData={locationData} />
       {locationData.unverified && (
