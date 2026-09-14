@@ -1,6 +1,9 @@
 import styled from 'styled-components/macro'
 
-import { NAVIGATION_BAR_HEIGHT_PX } from '../../constants/mobileLayout'
+import {
+  NAVIGATION_BAR_HEIGHT_PX,
+  TABS_HEIGHT_PX,
+} from '../../constants/mobileLayout'
 import { zIndex } from './GlobalStyle'
 
 const TopBar = styled.div`
@@ -14,6 +17,13 @@ const TopBar = styled.div`
   min-height: calc(${NAVIGATION_BAR_HEIGHT_PX}px - 32px);
   border-radius: 0;
   transition: border-radius 0.2s ease-out-in;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(
+    100% - ${TABS_HEIGHT_PX}px - var(--safe-area-inset-bottom, 0px)
+  );
 
   &::before {
     content: '';

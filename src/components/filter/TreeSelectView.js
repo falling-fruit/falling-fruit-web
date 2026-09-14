@@ -22,8 +22,8 @@ const TreeSelectContainer = styled.ul`
   ${({ isDesktop }) =>
     !isDesktop &&
     `
-    min-height: 5vh;
-    max-height: 65dvh;
+    flex: 1 1 auto;
+    min-height: 3em;
   `}
 `
 
