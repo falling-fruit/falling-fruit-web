@@ -65,6 +65,7 @@
       "you_are_back_online": "Sei di nuovo online.",
       "you_are_offline": "Sei offline."
     },
+    "failed_to_load": "Caricamento non riuscito: {{error}}",
     "geolocation": {
       "code_2": "Posizione non disponibile: {{message}}",
       "code_3": "Timeout geolocalizzazione: {{message}}",

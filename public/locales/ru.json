@@ -65,6 +65,7 @@
       "you_are_back_online": "Вы снова в сети.",
       "you_are_offline": "Вы не в сети."
     },
+    "failed_to_load": "Не удалось загрузить: {{error}}",
     "geolocation": {
       "code_2": "Местоположение недоступно: {{message}}",
       "code_3": "Превышено время ожидания геолокации: {{message}}",

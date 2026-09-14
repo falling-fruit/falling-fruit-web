@@ -65,6 +65,7 @@
       "you_are_back_online": "Estás conectado nuevamente.",
       "you_are_offline": "Estás desconectado."
     },
+    "failed_to_load": "Error al cargar: {{error}}",
     "geolocation": {
       "code_2": "Posición no disponible: {{message}}",
       "code_3": "Tiempo de espera de geolocalización agotado: {{message}}",

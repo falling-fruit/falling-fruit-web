@@ -1667,10 +1667,12 @@
   resolved "https://registry.yarnpkg.com/@fontsource/noto-sans/-/noto-sans-5.3.0.tgz#b89fca1fb672e173249250ac90fe75f5759a04c4"
   integrity sha512-fBCog2PY7DiVVTEEqtI/Qdinx/knobHYfoGpjFXdfBX5RoJaBp1Prw2G75p0OIsdlMZg3cLo0c+YbIUYOxnQJw==
 
-"@googlemaps/js-api-loader@^1.13.8":
-  version "1.16.10"
-  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.16.10.tgz#b61cf2b4a1b6ed77017b0dab131e6d51e814ec4e"
-  integrity sha512-c2erv2k7P2ilYzMmtYcMgAR21AULosQuUHJbStnrvRk2dG93k5cqptDrh9A8p+ZNlyhiqEOgHW7N9PAizdUM7Q==
+"@googlemaps/js-api-loader@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-2.1.1.tgz#49c2fa6cc2ad4eb49727d9f3572bae8ff519dbdf"
+  integrity sha512-yUpAwksbHrlZIWD49JmveNSfBG4oAK0AwMknfSaPMnP5N7UT8oFRVCqwjGb1XQovi//7KLbPQKZpbofiLGzpDw==
+  dependencies:
+    "@types/google.maps" "^3.53.1"
 
 "@hack4impact-uiuc/eslint-plugin@^2.0.10":
   version "2.0.11"
@@ -2139,11 +2141,6 @@
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz#4fc56c15c580b9adb7dc3c333a134e540b44bfb1"
   integrity sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==
-
-"@mapbox/point-geometry@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@mapbox/point-geometry/-/point-geometry-0.1.0.tgz#8a83f9335c7860effa2eeeca254332aa0aeed8f2"
-  integrity sha512-6j56HdLTwWGO0fJPlrZtdU/B13q8Uwmo18Ck2GnGgN9PCFyKTZ3UbXeEdRFh18i9XQ92eH2VdtpJHpBD3aripQ==
 
 "@napi-rs/wasm-runtime@^1.1.6":
   version "1.2.3"
@@ -2957,6 +2954,11 @@
   integrity sha512-0dzKcwO+S8s2kuF5Z9oUWatQJj5Uq/iqphEtE3GQJVRRYm/tD1LglU2UnXi2A8jLq5umkGouOXOR9y0n613ZwQ==
   dependencies:
     "@types/node" "*"
+
+"@types/google.maps@^3.53.1":
+  version "3.66.2"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.66.2.tgz#aa545315ecc74ace33845c2f4d8e7b7f2ab1b5d2"
+  integrity sha512-Lg/U5iLj90fQV3jQJo6hmGYsNAecXH3J+3LkKb4AupYyyI3UFx7y4hINz1pYILX0DEWNN1FeCAXLUEjBBeV9XA==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.9"
@@ -6264,7 +6266,7 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-eventemitter3@^4.0.0, eventemitter3@^4.0.4:
+eventemitter3@^4.0.0:
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
   integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
@@ -6910,16 +6912,6 @@ globby@^11.0.3, globby@^11.0.4, globby@^11.1.0:
     ignore "^5.2.0"
     merge2 "^1.4.1"
     slash "^3.0.0"
-
-google-map-react@^2.1.9:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/google-map-react/-/google-map-react-2.2.5.tgz#2147fe89099c1c0953a54984a917cf3c4ba426df"
-  integrity sha512-6n4pb4Ckmt3TnvJ5fNPSu2kceIItMrJR413YfX89tNq95nTipFwxL2lmeR+IHFl1cXzKpFvQ4leXzJza0LlapA==
-  dependencies:
-    "@googlemaps/js-api-loader" "^1.13.8"
-    "@mapbox/point-geometry" "^0.1.0"
-    eventemitter3 "^4.0.4"
-    prop-types "^15.7.2"
 
 gopd@^1.0.1, gopd@^1.2.0:
   version "1.2.0"

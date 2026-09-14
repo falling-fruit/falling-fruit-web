@@ -72,6 +72,7 @@
       "not_supported": "Geolocation not supported"
     },
     "language_changed_refresh_to_reload_map": "Language changed. Refresh page to reload map",
+    "failed_to_load": "Failed to load: {{error}}",
     "unknown_error": "Unknown error"
   },
   "filter": {

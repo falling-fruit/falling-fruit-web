@@ -69,16 +69,26 @@ const mapSlice = createSlice({
     clusters: [],
     googleMap: null,
     getGoogleMaps: null,
+    placesReady: false,
+    geometryReady: false,
   },
   reducers: {
     setGoogle: (state, action) => {
       state.googleMap = action.payload.googleMap
       state.getGoogleMaps = action.payload.getGoogleMaps
     },
+    setPlacesReady: (state, action) => {
+      state.placesReady = action.payload
+    },
+    setGeometryReady: (state, action) => {
+      state.geometryReady = action.payload
+    },
     disconnectMap: (state) => {
       state.initialView = null
       state.googleMap = null
       state.getGoogleMaps = null
+      state.placesReady = false
+      state.geometryReady = false
     },
     setInitialView: (state, action) => {
       state.initialView = action.payload
@@ -202,6 +212,12 @@ const mapSlice = createSlice({
   },
 })
 
-export const { disconnectMap, setGoogle, setInitialView } = mapSlice.actions
+export const {
+  disconnectMap,
+  setGoogle,
+  setInitialView,
+  setPlacesReady,
+  setGeometryReady,
+} = mapSlice.actions
 
 export default mapSlice.reducer

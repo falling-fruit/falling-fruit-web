@@ -65,6 +65,7 @@
       "you_are_back_online": "חזרת למצב מקוון.",
       "you_are_offline": "אתה במצב לא מקוון."
     },
+    "failed_to_load": "הטעינה נכשלה: {{error}}",
     "geolocation": {
       "code_2": "מיקום לא זמין: {{message}}",
       "code_3": "תם הזמן הקצוב לאיתור מיקום: {{message}}",

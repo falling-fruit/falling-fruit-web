@@ -65,6 +65,7 @@
       "you_are_back_online": "Bạn đã trực tuyến trở lại.",
       "you_are_offline": "Bạn đang ngoại tuyến."
     },
+    "failed_to_load": "Tải không thành công: {{error}}",
     "geolocation": {
       "code_2": "Không thể xác định vị trí: {{message}}",
       "code_3": "Hết thời gian xác định vị trí: {{message}}",

@@ -65,6 +65,7 @@
       "you_are_back_online": "您已重新連線。",
       "you_are_offline": "您目前處於離線狀態。"
     },
+    "failed_to_load": "載入失敗：{{error}}",
     "geolocation": {
       "code_2": "位置不可用：{{message}}",
       "code_3": "地理位置超時：{{message}}",

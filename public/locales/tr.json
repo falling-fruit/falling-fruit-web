@@ -65,6 +65,7 @@
       "you_are_back_online": "Tekrar çevrimiçisiniz.",
       "you_are_offline": "Çevrimdışısınız."
     },
+    "failed_to_load": "Yükleme başarısız: {{error}}",
     "geolocation": {
       "code_2": "Konum kullanılamıyor: {{message}}",
       "code_3": "Konum zaman aşımı: {{message}}",

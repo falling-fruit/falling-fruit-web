@@ -29,6 +29,7 @@ const StreetViewLink = ({
 
   const googleMap = useSelector((state) => state.map.googleMap)
   const getGoogleMaps = useSelector((state) => state.map.getGoogleMaps)
+  const geometryReady = useSelector((state) => state.map.geometryReady)
   const googleMaps = getGoogleMaps ? getGoogleMaps() : null
 
   const isStreetViewOpen = useSelector((state) => state.panorama.streetViewOpen)
@@ -37,7 +38,8 @@ const StreetViewLink = ({
   )
 
   const noPanorama =
-    locationId != null && locationsWithoutPanorama[locationId] === true
+    (locationId != null && locationsWithoutPanorama[locationId] === true) ||
+    !geometryReady
 
   const getPanorama = () => googleMap?.getStreetView?.() ?? null
 

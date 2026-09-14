@@ -1,15 +1,15 @@
-import GoogleMapReact from 'google-map-react'
+import { setOptions } from '@googlemaps/js-api-loader'
+import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import { VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
+import { MIN_ZOOM, VISIBLE_CLUSTER_ZOOM_LIMIT } from '../../constants/map'
 import { LabelVisibility, MapType, OverlayType } from '../../constants/settings'
 import { fetchFilterCounts } from '../../redux/filterSlice'
 import { setFromSettings } from '../../redux/locationSlice'
-import { disconnectMap, setGoogle } from '../../redux/mapSlice'
 import { fetchLocations } from '../../redux/viewChange'
 import { updateLastMapView } from '../../redux/viewportSlice'
 import { viewToString } from '../../utils/appUrl'
@@ -28,8 +28,14 @@ import PanoramaEvents from './PanoramaEvents'
 import PinMarkers from './PinMarkers'
 import Place from './Place'
 import TrackLocationButton from './TrackLocationButton'
+import useCreateGoogleMap from './useCreateGoogleMap'
 
-const MIN_ZOOM = 1
+setOptions({
+  key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  v: 'quarterly',
+  libraries: ['places', 'geometry'],
+  language: i18next.language,
+})
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
@@ -97,6 +103,13 @@ const ShareContainer = styled.div`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   z-index: 1;
   width: 300px;
+`
+
+const MapContainer = styled.div`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 `
 
 const EARTH_RADIUS = 6378137
@@ -190,18 +203,31 @@ const makeHandleViewChange = (dispatch, googleMap, history) => {
   }
 }
 
-function getTileCoordinates(coord, zoom) {
-  const tilesPerGlobe = 1 << zoom
-  let x = coord.x % tilesPerGlobe
-  if (x < 0) {
-    x = tilesPerGlobe + x
-  }
-  let y = coord.y
-  if (coord.y < 0 || coord.y >= tilesPerGlobe) {
-    y = null
-  }
-  return { x, y, z: zoom }
-}
+const buildMapStyles = (showBusinesses) => [
+  {
+    featureType: 'poi',
+    elementType: 'labels.icon',
+    stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
+  },
+  {
+    featureType: 'landscape',
+    elementType: 'labels.icon',
+    stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
+  },
+]
+
+const createOverlayLayers = (maps, map, layerTypes) =>
+  layerTypes
+    .map((name) => {
+      const LayerClass = maps[name]
+      if (!LayerClass) {
+        return null
+      }
+      const layer = new LayerClass()
+      layer.setMap(map)
+      return layer
+    })
+    .filter(Boolean)
 
 const configurePanoramaControls = (googleMap, showPegman, isDesktop) => {
   googleMap.setOptions({ streetViewControl: showPegman })
@@ -252,12 +278,6 @@ const getVisibleLocations = (
   return locations
 }
 
-const GoogleMapWrapper = ({ onUnmount, ...props }) => {
-  useEffect(() => onUnmount, []) //eslint-disable-line
-
-  return <GoogleMapReact {...props} />
-}
-
 const MapPage = ({ isDesktop }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
@@ -265,6 +285,9 @@ const MapPage = ({ isDesktop }) => {
   const dispatch = useDispatch()
   const idleListenerRef = useRef(null)
   const mapClickListenerRef = useRef(null)
+  const mapContainerRef = useRef(null)
+  const overlayLayersRef = useRef([])
+  const initListenerRef = useRef(null)
 
   const [shareOpen, setShareOpen] = useState(false)
 
@@ -275,6 +298,7 @@ const MapPage = ({ isDesktop }) => {
     isLoading: mapIsLoading,
     googleMap,
     getGoogleMaps,
+    geometryReady,
   } = useSelector((state) => state.map)
 
   const currentZoom = googleMap?.getZoom()
@@ -307,18 +331,53 @@ const MapPage = ({ isDesktop }) => {
     ? [OverlayType.toLayerType(overlay)].filter(Boolean)
     : []
 
-  const { typesAccess } = useSelector((state) => state.type)
+  const { typesAccess, isLoading: typesAreLoading } = useSelector(
+    (state) => state.type,
+  )
 
-  const apiIsLoaded = (map, maps) => {
-    /*
-     * Something breaks when storing maps in redux so pass a reference to it
-     */
-    dispatch(setGoogle({ googleMap: map, getGoogleMaps: () => maps }))
-  }
+  useCreateGoogleMap({
+    initialView,
+    googleMap,
+    mapContainerRef,
+    initListenerRef,
+    idleListenerRef,
+    overlayLayersRef,
+  })
 
   const searchParams = new URLSearchParams(search)
   const hasTypesParams =
     searchParams.has('types') || searchParams.has('f') || searchParams.has('c')
+
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps) {
+      return
+    }
+    const maps = getGoogleMaps()
+    googleMap.setOptions({
+      mapTypeId: mapType,
+      streetViewControlOptions: {
+        position: isRTL
+          ? maps.ControlPosition.RIGHT_BOTTOM
+          : maps.ControlPosition.LEFT_BOTTOM,
+      },
+      rotateControlOptions: {
+        position: isRTL
+          ? maps.ControlPosition.RIGHT_BOTTOM
+          : maps.ControlPosition.LEFT_BOTTOM,
+      },
+      styles: buildMapStyles(showBusinesses),
+    })
+  }, [googleMap, getGoogleMaps, mapType, showBusinesses, isRTL])
+
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps) {
+      return
+    }
+    const maps = getGoogleMaps()
+    overlayLayersRef.current.forEach((layer) => layer.setMap(null))
+    overlayLayersRef.current = createOverlayLayers(maps, googleMap, layerTypes)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [googleMap, getGoogleMaps, layerTypes.join(',')])
 
   useEffect(() => {
     const ready =
@@ -371,9 +430,9 @@ const MapPage = ({ isDesktop }) => {
     }
     const zoom = googleMap.getZoom()
     const zoomOk = zoom == null || zoom > VISIBLE_CLUSTER_ZOOM_LIMIT
-    const showPegman = zoomOk
+    const showPegman = zoomOk && geometryReady
     configurePanoramaControls(googleMap, showPegman, isDesktop)
-  }, [googleMap, currentZoom, isDesktop])
+  }, [googleMap, currentZoom, isDesktop, geometryReady])
 
   const isEmbed = useIsEmbed()
 
@@ -466,22 +525,30 @@ const MapPage = ({ isDesktop }) => {
 
   return (
     <>
-      {(mapIsLoading || locationIsLoading) && <BottomLeftLoadingIndicator />}
+      {(mapIsLoading || locationIsLoading || typesAreLoading) && (
+        <BottomLeftLoadingIndicator />
+      )}
       {!isAddingLocation && !isEditingLocation && !isDesktop && !isEmbed && (
         <AddLocationMobile />
       )}
-      {!isDesktop && !isEmbed && <TrackLocationButton isIcon />}
+      {!isDesktop && !isEmbed && (
+        <TrackLocationButton isIcon disabled={!googleMap} />
+      )}
 
       <ZoomInButton
         onClick={zoomIn}
-        disabled={!currentZoom || currentZoom >= MapType.getMaxZoom(mapType)}
+        disabled={
+          !googleMap ||
+          !currentZoom ||
+          currentZoom >= MapType.getMaxZoom(mapType)
+        }
         isDesktop={isDesktop}
       >
         +
       </ZoomInButton>
       <ZoomOutButton
         onClick={zoomOut}
-        disabled={!currentZoom || currentZoom <= MIN_ZOOM}
+        disabled={!googleMap || !currentZoom || currentZoom <= MIN_ZOOM}
         isDesktop={isDesktop}
       >
         -
@@ -523,82 +590,10 @@ const MapPage = ({ isDesktop }) => {
         />
       )}
 
-      {initialView && (
-        <GoogleMapWrapper
-          bootstrapURLKeys={{
-            apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-            version: 'quarterly',
-            libraries: ['places'],
-            language: i18n.language,
-          }}
-          options={(googleMaps) => ({
-            mapTypeId: mapType,
-            disableDefaultUI: true,
-            streetViewControlOptions: {
-              position: isRTL
-                ? googleMaps.ControlPosition.RIGHT_BOTTOM
-                : googleMaps.ControlPosition.LEFT_BOTTOM,
-            },
-            rotateControlOptions: {
-              position: isRTL
-                ? googleMaps.ControlPosition.RIGHT_BOTTOM
-                : googleMaps.ControlPosition.LEFT_BOTTOM,
-            },
-            minZoom: MIN_ZOOM,
-            styles: [
-              {
-                featureType: 'poi',
-                elementType: 'labels.icon',
-                stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
-              },
-              {
-                featureType: 'landscape',
-                elementType: 'labels.icon',
-                stylers: [{ visibility: showBusinesses ? 'on' : 'off' }],
-              },
-            ],
-          })}
-          layerTypes={layerTypes}
-          defaultCenter={initialView.center}
-          defaultZoom={initialView.zoom}
-          onGoogleApiLoaded={({ map, maps }) => {
-            map.mapTypes.set(
-              'osm-standard',
-              new maps.ImageMapType({
-                getTileUrl: (coord, zoom) => {
-                  const { x, y, z } = getTileCoordinates(coord, zoom)
-                  if (y !== null) {
-                    return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
-                  }
-                },
-                tileSize: new maps.Size(256, 256),
-                maxZoom: 19,
-              }),
-            )
-            map.mapTypes.set(
-              'osm-toner-lite',
-              new maps.ImageMapType({
-                getTileUrl: (coord, zoom) => {
-                  const { x, y, z } = getTileCoordinates(coord, zoom)
-                  if (y !== null) {
-                    return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
-                  }
-                },
-                tileSize: new maps.Size(256, 256),
-                maxZoom: 20,
-              }),
-            )
-            apiIsLoaded(map, maps)
-          }}
-          yesIWantToUseGoogleMapApiInternals
-          onUnmount={() => {
-            if (idleListenerRef.current && getGoogleMaps) {
-              getGoogleMaps().event.removeListener(idleListenerRef.current)
-              idleListenerRef.current = null
-            }
-            dispatch(disconnectMap())
-          }}
-        >
+      {initialView && <MapContainer ref={mapContainerRef} />}
+
+      {googleMap && getGoogleMaps && (
+        <>
           {geolocation && !geolocation.loading && !geolocation.error && (
             <GeolocationDot />
           )}
@@ -626,7 +621,7 @@ const MapPage = ({ isDesktop }) => {
             onLocationClick={handleLocationClick}
             showLabels={showLabels}
           />
-        </GoogleMapWrapper>
+        </>
       )}
     </>
   )

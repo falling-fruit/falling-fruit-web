@@ -65,6 +65,7 @@
       "you_are_back_online": "オンラインに戻りました。",
       "you_are_offline": "オフラインです。"
     },
+    "failed_to_load": "読み込みに失敗しました: {{error}}",
     "geolocation": {
       "code_2": "位置情報が利用できません: {{message}}",
       "code_3": "位置情報の取得がタイムアウトしました: {{message}}",

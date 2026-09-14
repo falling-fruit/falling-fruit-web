@@ -65,6 +65,7 @@
       "you_are_back_online": "Du är online igen.",
       "you_are_offline": "Du är offline."
     },
+    "failed_to_load": "Det gick inte att läsa in: {{error}}",
     "geolocation": {
       "code_2": "Position ej tillgänglig: {{message}}",
       "code_3": "Timeout för platsinformation: {{message}}",

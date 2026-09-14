@@ -65,6 +65,7 @@
       "you_are_back_online": "أنت متصل بالإنترنت مرة أخرى.",
       "you_are_offline": "أنت غير متصل بالإنترنت."
     },
+    "failed_to_load": "فشل التحميل: {{error}}",
     "geolocation": {
       "code_2": "الموقع غير متوفر: {{message}}",
       "code_3": "انتهت مهلة تحديد الموقع: {{message}}",

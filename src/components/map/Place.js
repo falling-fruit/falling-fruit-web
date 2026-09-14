@@ -1,37 +1,35 @@
-import PropTypes from 'prop-types'
-import styled from 'styled-components/macro'
+import { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 
-import { ReactComponent as CrosshairIcon } from './crosshair-medium-green.svg'
-import MapLabel from './MapLabel'
+import { createPlaceMarker } from './createPlaceMarker'
 
-const PlaceLabel = styled(MapLabel)`
-  font-size: 1rem;
-  margin-block-start: 20px;
-  z-index: 3;
-  pointer-events: none;
-  touch-action: none;
-`
+const Place = ({ lat, lng, label }) => {
+  const { googleMap, getGoogleMaps } = useSelector((state) => state.map)
+  const markerRef = useRef(null)
 
-const PlaceCrosshair = styled(CrosshairIcon)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  background-color: transparent;
-  pointer-events: none;
-  touch-action: none;
-`
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps) {
+      return undefined
+    }
 
-const Place = ({ label, ...props }) => (
-  <>
-    <PlaceCrosshair {...props} />
-    <PlaceLabel>{label}</PlaceLabel>
-  </>
-)
+    const google = getGoogleMaps()
+    const marker = createPlaceMarker(google, googleMap, { lat, lng }, label)
+    markerRef.current = marker
 
-Place.propTypes = {
-  label: PropTypes.string,
+    return () => {
+      marker.setMap(null)
+      markerRef.current = null
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [googleMap, getGoogleMaps])
+
+  useEffect(() => {
+    if (markerRef.current) {
+      markerRef.current.update({ lat, lng }, label)
+    }
+  }, [lat, lng, label])
+
+  return null
 }
 
 export default Place

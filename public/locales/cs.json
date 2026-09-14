@@ -65,6 +65,7 @@
       "you_are_back_online": "Jste opět online.",
       "you_are_offline": "Jste offline."
     },
+    "failed_to_load": "Načtení se nezdařilo: {{error}}",
     "geolocation": {
       "code_2": "Poloha není dostupná: {{message}}",
       "code_3": "Časový limit geolokace: {{message}}",

@@ -8,6 +8,8 @@ export const VISIBLE_CLUSTER_ZOOM_LIMIT = 13
 export const MIN_GEOLOCATION_ZOOM = 15
 export const MIN_LOCATION_ZOOM = 18
 
+export const MIN_ZOOM = 1
+
 /**
  * Default zoom level when navigating to a geolocation on the map
  * @constant {number}

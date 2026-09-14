@@ -118,7 +118,7 @@ const Search = (props) => {
     debounce: 200,
   })
 
-  const { googleMap } = useSelector((state) => state.map)
+  const { placesReady } = useSelector((state) => state.map)
   const { lastMapView } = useSelector((state) => state.viewport)
 
   const coordinatesResultOrNull = getCoordinatesResult(value)
@@ -131,10 +131,10 @@ const Search = (props) => {
   const inputRef = useRef()
 
   useEffect(() => {
-    if (googleMap) {
+    if (placesReady) {
       init()
     }
-  }, [init, googleMap])
+  }, [init, placesReady])
 
   useEffect(
     () => {
