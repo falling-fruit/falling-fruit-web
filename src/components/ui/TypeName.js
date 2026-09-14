@@ -4,6 +4,7 @@ import { tokenizeBotanicalName } from '../../utils/botanicalName'
 
 const ScientificNameRoot = styled.span`
   font-style: italic;
+  white-space: nowrap;
 `
 
 const HybridSign = styled.span`
@@ -44,6 +45,7 @@ export const ScientificName = ({
 
 export const CommonName = styled.span`
   font-weight: bold;
+  white-space: nowrap;
 `
 
 export const CommonOrScientificName = ({ type, className, style, dir }) => {
