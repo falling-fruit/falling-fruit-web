@@ -93,9 +93,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root {
-    // We use innerHeight instead of vh here to avoid viewport issues on mobile
-    // This gets passed in from App via @reach/window-size
-    height: ${({ windowSize }) => windowSize.height}px;
+    height: 100dvh;
+  }
+
+  #root.auto-height {
+    height: auto;
+    min-height: 100dvh;
   }
 
   h1, h2, h3, h4, h5, h6 {

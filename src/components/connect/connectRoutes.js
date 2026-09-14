@@ -1,5 +1,7 @@
 import { Route } from 'react-router-dom'
 
+import aboutRoutes from '../about/aboutRoutes'
+import activityRoutes from '../activity/activityRoutes'
 import ConnectConnectivity from './ConnectConnectivity'
 import ConnectGeolocation from './ConnectGeolocation'
 import ConnectGoogleMap from './ConnectGoogleMap'
@@ -11,6 +13,7 @@ import ConnectNewLocation from './ConnectNewLocation'
 import ConnectOverscroll from './ConnectOverscroll'
 import ConnectPath from './ConnectPath'
 import ConnectReview from './ConnectReview'
+import ConnectRootHeight from './ConnectRootHeight'
 import ConnectShare from './ConnectShare'
 import ConnectTopPanel from './ConnectTopPanel'
 import ConnectTypes from './ConnectTypes'
@@ -353,6 +356,27 @@ const connectRoutes = [
       <ConnectConnectivity isListPage={location.pathname.startsWith('/list')} />
     )}
   />,
+
+  /*
+   * ConnectRootHeight
+   * why: by default #root is pinned to the viewport (height: 100dvh), which
+   * suits the map, list, and settings layouts. Text-heavy pages read better
+   * when the document flows and grows naturally (native scrolling, collapsing
+   * mobile URL bar).
+   *
+   * action: while on a text-heavy route, add the `auto-height` class to #root
+   * so it uses `height: auto; min-height: 100dvh` (see GlobalStyle); remove it
+   * on unmount to restore the default fixed-height layout.
+   */
+  <Route
+    key="connect-root-height"
+    path={[
+      ...aboutRoutes.map((route) => route.props.path).flat(),
+      ...activityRoutes.map((route) => route.props.path).flat(),
+    ]}
+  >
+    {({ match }) => match && <ConnectRootHeight />}
+  </Route>,
 ]
 
 export default connectRoutes

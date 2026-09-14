@@ -18,7 +18,7 @@ const TopBar = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - var(--safe-area-inset-bottom, 0px));
+  max-height: calc(100dvh - var(--safe-area-inset-bottom, 0px));
 
   &::before {
     content: '';
