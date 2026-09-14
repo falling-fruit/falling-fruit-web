@@ -36,6 +36,14 @@ module.exports = {
           )
         },
       ]
+      // Some ESM packages (e.g. react-split-pane) import 'react/jsx-runtime'
+      // without a file extension. Webpack 5 requires fully specified imports
+      webpackConfig.module.rules.push({
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      })
 
       return webpackConfig
     },

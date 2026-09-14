@@ -1,6 +1,6 @@
 import { WindowSize } from '@reach/window-size'
 import { Route, Switch } from 'react-router-dom'
-import SplitPane from 'react-split-pane'
+import { Pane, SplitPane } from 'react-split-pane'
 import styled from 'styled-components/macro'
 
 import aboutRoutes from '../about/aboutRoutes'
@@ -33,11 +33,10 @@ const StyledSplit = styled(SplitPane)`
     box-shadow: 2px 0px 8px ${({ theme }) => theme.shadow};
   }
 
-  .Resizer {
-    width: 10px;
+  .split-pane-divider.horizontal {
+    width: 10px !important;
     margin: 0 -5px;
-    cursor: ${(props) =>
-      props.minSize < props.maxSize ? 'col-resize' : 'default'};
+    cursor: col-resize;
     z-index: 1;
   }
 `
@@ -57,14 +56,17 @@ const DesktopLayout = () => (
       <Route>
         <WindowSize>
           {({ width: vw }) => (
-            <StyledSplit
-              split="vertical"
-              minSize={MIN_PANE_WIDTH(vw)}
-              maxSize={MAX_PANE_WIDTH(vw)}
-              defaultSize={DEFAULT_PANE_WIDTH(vw)}
-            >
-              <SidePane />
-              <MapPage isDesktop />
+            <StyledSplit direction="horizontal">
+              <Pane
+                minSize={MIN_PANE_WIDTH(vw)}
+                maxSize={MAX_PANE_WIDTH(vw)}
+                defaultSize={DEFAULT_PANE_WIDTH(vw)}
+              >
+                <SidePane />
+              </Pane>
+              <Pane>
+                <MapPage isDesktop />
+              </Pane>
             </StyledSplit>
           )}
         </WindowSize>
