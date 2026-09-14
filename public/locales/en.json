@@ -219,7 +219,7 @@
     },
     "init": {
       "cancel": "Cancel choose location",
-      "choose_instructions": "Choose a position for your new location.",
+      "choose_instructions": "Choose position for your new location.",
       "confirm": "Confirm choose location",
       "edit_instructions": "Edit position for your new location.",
       "position_too_close": "Choose position different from positions of existing locations"
