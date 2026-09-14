@@ -92,6 +92,15 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
 
+  #root {
+    height: 100dvh;
+  }
+
+  #root.auto-height {
+    height: auto;
+    min-height: 100dvh;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     color: ${({ theme }) => theme.headerText};
   }
