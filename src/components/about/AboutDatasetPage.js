@@ -10,6 +10,7 @@ import { useAppHistory } from '../../utils/useAppHistory'
 import { formatISOString } from '../entry/textFormatters'
 import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
+import { PageHeader } from '../ui/Headers'
 import IconBesideText from '../ui/IconBesideText'
 import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
@@ -56,7 +57,9 @@ const AboutDatasetPage = () => {
   return (
     <Page>
       <BackButton />
-      <h3>{t('pages.datasets.import_id_and_name', { id, name })}</h3>
+      <PageHeader>
+        {t('pages.datasets.import_id_and_name', { id, name })}
+      </PageHeader>
       <a href={url} target="_blank" rel="noreferrer">
         {url}
       </a>

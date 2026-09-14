@@ -16,6 +16,7 @@ import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
 import Checkbox from '../ui/Checkbox'
 import FormButtons from '../ui/FormButtons'
+import { PageHeader } from '../ui/Headers'
 import LabeledRow from '../ui/LabeledRow'
 import Column from '../ui/LinkColumn'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -93,7 +94,7 @@ const AccountPage = () => {
 
   return (
     <TopSafeAreaInsetPage>
-      <h1>{t('glossary.account')}</h1>
+      <PageHeader>{t('glossary.account')}</PageHeader>
 
       {user ? (
         <>

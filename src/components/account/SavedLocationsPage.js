@@ -27,6 +27,7 @@ import { viewToString } from '../../utils/appUrl'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
+import { PageHeader } from '../ui/Headers'
 import Input from '../ui/Input'
 import { Page } from '../ui/PageTemplate'
 import ResetButton from '../ui/ResetButton'
@@ -460,7 +461,9 @@ const SavedLocationsPage = () => {
   return (
     <Page>
       {!isDesktop && <BackButton backPath="/account/edit" />}
-      <h1>{t('save_location_to_list.saved_locations_title')}</h1>
+      <PageHeader>
+        {t('save_location_to_list.saved_locations_title')}
+      </PageHeader>
 
       {isLoadingSavedLocations || !typesReady ? (
         <SavedLocationsSkeletonLoader />

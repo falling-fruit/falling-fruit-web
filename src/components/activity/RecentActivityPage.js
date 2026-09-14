@@ -8,6 +8,7 @@ import {
   fetchMoreLocationChanges,
   resetRecentChangesLastBrowsedSection,
 } from '../../redux/activitySlice'
+import { PageHeader } from '../ui/Headers'
 import { InfoPage } from '../ui/PageTemplate'
 import { createActivityDiary } from './ActivityDiary'
 import DiaryEntry from './DiaryEntry'
@@ -97,7 +98,7 @@ const RecentActivityPage = () => {
 
   return (
     <InfoPage>
-      <h1>{t('pages.changes.recent_activity')}</h1>
+      <PageHeader>{t('pages.changes.recent_activity')}</PageHeader>
       {activityDiary.entries.length > 0 &&
         activityDiary.entries.map((entry, index) => (
           <DiaryEntry

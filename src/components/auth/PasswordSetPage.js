@@ -8,6 +8,7 @@ import { resetPassword } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { PasswordInput } from '../form/FormikWrappers'
 import FormButtons from '../ui/FormButtons'
+import { PageHeader } from '../ui/Headers'
 import { AuthPage } from '../ui/PageTemplate'
 import SubmitButton from '../ui/SubmitButton'
 import AuthLinks from './AuthLinks'
@@ -50,7 +51,7 @@ const PasswordSetPage = () => {
 
   return (
     <AuthPage>
-      <h1>{t('users.change_password')}</h1>
+      <PageHeader>{t('users.change_password')}</PageHeader>
       <Formik
         initialValues={{
           password: '',
