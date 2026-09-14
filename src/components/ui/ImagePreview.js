@@ -23,7 +23,7 @@ const Tile = styled.div`
   position: relative;
   display: inline-block;
   width: ${(props) => (props.$small ? '48px' : '70px')};
-  height: ${(props) => (props.$small ? '48px' : '70px')};
+  height: auto;
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.background};
   overflow: visible;
@@ -40,7 +40,7 @@ const Tile = styled.div`
     border-radius: 0.375em;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 
     ${({ $isUploading }) => $isUploading && 'filter: brightness(0.8);'}
   }
