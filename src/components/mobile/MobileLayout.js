@@ -34,7 +34,7 @@ import NavigationBar from './NavigationBar'
 
 const MapContainer = styled.div`
   display: ${(props) => (props.show ? 'block' : 'none')};
-  position: absolute;
+  position: fixed;
   inset-block-start: ${(props) =>
     props.isEmbed || props.streetView
       ? 0

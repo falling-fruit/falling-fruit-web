@@ -3,7 +3,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import { App as CapacitorApp } from '@capacitor/app'
 import { Capacitor } from '@capacitor/core'
 import { SplashScreen } from '@capacitor/splash-screen'
-import { WindowSize } from '@reach/window-size'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
@@ -55,9 +54,7 @@ const AppContent = () => {
             </Route>
           </Switch>
         </SomethingWentWrongBoundary>
-        <WindowSize>
-          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-        </WindowSize>
+        <GlobalStyle />
         <ConnectedBreakpoint />
       </ThemeProvider>
     </>
