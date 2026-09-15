@@ -140,6 +140,7 @@ const LocationContent = ({
         style={{ transition: 'none' }}
         onChange={onTabChange}
         index={tabIndex}
+        $sheetMode={sheetMode}
       >
         {showTabList && hasReviews && (
           <TabList>

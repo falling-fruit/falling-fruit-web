@@ -52,7 +52,14 @@ export const CardTabs = styled(Tabs)`
 
     .card-tab-panel[data-reach-tab-panel] {
       flex: 1;
-      overflow: auto;
+      /*
+       * In the draggable sheet (peek), the whole gesture must drive the sheet,
+       * so the panel must NOT be an independent scroll container — otherwise
+       * the same drag both opens the drawer and scrolls the content (#1091).
+       * The full page (sheetMode=false) keeps its internal scroll; to read the
+       * rest of the content from the peek, the user opens the drawer fully.
+       */
+      overflow: ${({ $sheetMode }) => ($sheetMode ? 'hidden' : 'auto')};
     }
   }
 `
