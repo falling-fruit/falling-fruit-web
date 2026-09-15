@@ -76,9 +76,8 @@ const EntryCarousel = ({ autoPlay = false }) => {
     return null
   }
 
-  // The selected slide is kept in Redux so it survives the sheet -> full-page
-  // remount (swiping to photo 3 in the peek then opening the drawer keeps
-  // photo 3). Clamp defensively in case the photo set shrank.
+  // Kept in Redux so the slide survives the sheet -> full-page remount.
+  // Clamp in case the photo set shrank.
   const selectedItem = Math.min(carouselIndex, allReviewPhotos.length - 1)
   const hasMultiple = allReviewPhotos.length > 1
 
@@ -88,10 +87,8 @@ const EntryCarousel = ({ autoPlay = false }) => {
       onChange={(index) => dispatch(setCarouselIndex(index))}
       onClickItem={onClickCarousel}
       showIndicators={hasMultiple}
-      // Autoplay only in the fully-open pane, never in the peek. `infiniteLoop`
-      // is kept independent of `autoPlay`: it changes the slide layout (adds
-      // clone slides), so toggling it when the save/report overlay opens would
-      // make the image jump and show a blank clone slot at the last photo.
+      // Keep infiniteLoop independent of autoPlay: toggling it adds/removes
+      // clone slides, which makes the image jump when the overlay opens.
       autoPlay={autoPlay && hasMultiple}
       infiniteLoop={hasMultiple}
       interval={5000}

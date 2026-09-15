@@ -23,8 +23,7 @@ const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
     ),
   )
 
-// Blur strip over the safe area, shown on the full page when an image sits
-// beneath the top safe area.
+// Blur strip over the top safe area, shown on the full page behind an image.
 const BlurredSafeArea = styled.div`
   position: fixed;
   top: 0;
@@ -78,9 +77,8 @@ const EntryMobile = () => {
 
   const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0)
 
-  // Track whether the previous render showed the fully-open page. When the
-  // sheet re-mounts right after that, it should animate down from the top
-  // rather than slide up from the bottom.
+  // When the sheet re-mounts right after the full page, animate down from the
+  // top rather than up from the bottom.
   const wasFullyOpenRef = useRef(drawerFullyOpen)
   const enterFromTop = wasFullyOpenRef.current && !drawerFullyOpen
   useEffect(() => {

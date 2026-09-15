@@ -42,19 +42,13 @@ const ContentColumn = styled.div`
   overflow: ${({ sheetMode }) => (sheetMode ? 'visible' : 'hidden')};
 `
 
-// Full-page image block: a normal fixed-height block at the top of the flow.
 const ImageBlock = styled.div`
   width: 100%;
   flex-shrink: 0;
 `
 
-/*
- * Sheet reveal: in the draggable sheet the image is pulled up out of the peek
- * as the sheet is lowered, so the overview leads the visible peek (matching the
- * deployed behaviour). It is absolutely positioned and translated by the drag
- * progress; a matching whitespace placeholder reserves the space that the tab
- * list will occupy once fully open.
- */
+// In sheet mode the image is pulled up out of the peek as the sheet is
+// lowered, revealing the overview beneath it.
 const RevealedImage = styled.div`
   width: 100%;
   position: absolute;
@@ -68,24 +62,16 @@ const RevealedImage = styled.div`
 const WhitespacePlaceholder = styled.div`
   width: 100%;
   background: white;
-  /*
-   * The peek's fixed drag-handle band (DRAG_HANDLE_HEIGHT_PX) is the analogue
-   * of the full page's tab ribbon (TABS_HEIGHT_PX). So the placeholder grows
-   * only by the *remainder* — the gap between the handle and a full ribbon —
-   * so that at full reveal (progress 1) handle + placeholder === the tab
-   * ribbon height and the body below lines up with the full page.
-   */
+  // At full reveal, drag handle + placeholder equals the tab ribbon height so
+  // the body lines up with the full page.
   height: ${({ progress }) =>
     progress * (TABS_HEIGHT_PX - DRAG_HANDLE_HEIGHT_PX)}px;
   transition: transform 0.15s linear;
   ${({ hidden }) => hidden && `display: none;`}
 `
 
-/*
- * ScrollablePane layout has a translateY property, which can hide some of the
- * content in e.g. the reviews tab; as a workaround add an element with that
- * same height. Only needed in sheet reveal mode.
- */
+// Workaround for ScrollablePane's translateY hiding content (e.g. reviews tab):
+// add a spacer of the same height. Only needed in sheet reveal mode.
 const DummyScrollSpacer = styled.div`
   height: ${({ height }) => height}px;
 `
@@ -111,14 +97,6 @@ const ImageContents = ({ isLoading, autoPlay }) =>
     </>
   )
 
-/**
- * The shared content tree for both the bottom-sheet and full-page shells.
- *
- * - Full page (sheetMode=false): image is a normal block at the top of a
- *   fill-height flex column; CardTabs fill the rest with internal scroll.
- * - Sheet (sheetMode=true): image is revealed/parallaxed by drag `progress`
- *   so the overview leads the peek, reproducing the deployed sheet geometry.
- */
 const LocationContent = ({
   isLoading,
   hasImages,
@@ -134,9 +112,7 @@ const LocationContent = ({
   const { t } = useTranslation()
   const { saveDropdownOpen, reportModalOpen } = useLocationPane()
 
-  // Autoplay runs in the fully-open pane, but not while the save dropdown or
-  // report modal is open (they overlay the content and shouldn't have slides
-  // shuffling behind them).
+  // No autoplay while the save dropdown or report modal overlays the content.
   const carouselAutoPlay = !saveDropdownOpen && !reportModalOpen
 
   return (
@@ -144,7 +120,6 @@ const LocationContent = ({
       {hasImages &&
         (sheetMode ? (
           <RevealedImage progress={progress}>
-            {/* No autoplay in the peek: the sheet is a static summary. */}
             <ImageContents isLoading={isLoading} autoPlay={false} />
           </RevealedImage>
         ) : (

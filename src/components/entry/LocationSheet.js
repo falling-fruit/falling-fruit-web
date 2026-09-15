@@ -40,27 +40,13 @@ const POSITIONS = {
   BOTTOM: 'bottom',
 }
 
-/**
- * Read the viewport height used for snap-point math. We use the layout
- * viewport (`window.innerHeight`), which is the integer height the CSS
- * dvh/env() layout settles to and matches the rest of the app. The
- * visualViewport is used only as a *change signal* (URL bar, keyboard,
- * rotation) via a resize listener — reading its fractional height directly at
- * first paint can be transiently off by a sub-pixel and desync the sheet from
- * the CSS layout.
- */
+// Use the layout viewport, which matches the CSS dvh/env() layout. The
+// visualViewport is used only as a change signal (URL bar, keyboard, rotation).
 const getViewportHeight = () => window.innerHeight
 
-/**
- * Bottom sheet for the location entry, shown when the drawer is NOT fully
- * open. It only knows three positions: MIDDLE (default peek), LOW (small
- * peek) and BOTTOM (dismissed -> back to map). Reaching the top is not this
- * component's concern: dragging past MIDDLE hands off to the full page shell
- * via onRequestFullyOpen.
- */
 const LocationSheet = ({
   children,
-  position, // 'middle' | 'low'
+  position,
   onPositionChange,
   onRequestFullyOpen,
   middlePositionScreenRatio,
@@ -76,16 +62,12 @@ const LocationSheet = ({
   const [startTranslateY, setStartTranslateY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(getViewportHeight)
 
-  // Tracks the most recent pointer samples so we can estimate the release
-  // velocity (a "flick") in handleEnd. A fast upward flick promotes the sheet
-  // one snap position further than its resting position would suggest, so a
-  // short-but-quick swipe is recognised even if the finger lifts before the
-  // sheet has physically travelled past the distance threshold.
+  // Recent pointer samples, used to estimate release velocity (flick) in
+  // handleEnd.
   const lastSamplesRef = useRef([])
 
-  // The photo lightbox is a full-screen Dialog portaled to <body>, i.e.
-  // outside this sheet's DOM. While it is open its clicks must not be treated
-  // as taps "outside" the sheet (which would dismiss the drawer to the map).
+  // Lightbox is a Dialog portaled to <body>, so its clicks must not count as
+  // taps outside the sheet.
   const lightboxOpen = useSelector((state) => state.location.lightbox.isOpen)
 
   const getSnapTranslateY = useCallback(
@@ -139,8 +121,7 @@ const LocationSheet = ({
     }
   }, [viewportHeight, getSnapTranslateY])
 
-  // Place the sheet at its target position, animating in the first time it
-  // appears.
+  // Place the sheet at its target position, animating in on first appearance.
   useLayoutEffect(() => {
     const pane = sheetRef.current
     if (!pane) {
@@ -151,13 +132,8 @@ const LocationSheet = ({
     const target = getSnapTranslateY(position)
 
     if (!paneIsOnScreen) {
-      // Animate into place on first mount. When arriving from the fully-open
-      // page (`enterFromTop`), the content is visually at the top, so start
-      // there and animate *down* to the target. Otherwise the sheet is
-      // appearing over the map, so slide *up* from the bottom edge.
-      // Do not report the transient start frame: `progress` (which drives the
-      // image reveal) should reflect the resting position, not the animation
-      // start.
+      // Animate in from the top when arriving from the fully-open page,
+      // otherwise slide up from the bottom edge. Don't report the start frame.
       const startTy = enterFromTop ? 0 : getSnapTranslateY(POSITIONS.BOTTOM)
       movePane('none', startTy, false)
       requestAnimationFrame(() => {
@@ -169,7 +145,7 @@ const LocationSheet = ({
   }, [position, getSnapTranslateY, movePane, enterFromTop])
 
   // Keep snap points in sync with the dynamic viewport (URL bar, rotation,
-  // keyboard). Re-snap to the current logical position when it changes.
+  // keyboard).
   useEffect(() => {
     const viewport = window.visualViewport
     if (!viewport) {
@@ -201,9 +177,7 @@ const LocationSheet = ({
     const newTranslateY = Math.max(0, startTranslateY + deltaY)
     movePane('none', newTranslateY)
 
-    // Keep a short window of recent samples for velocity estimation. Two is
-    // enough to compute the release velocity while staying robust to a single
-    // jittery event.
+    // Keep a short window of recent samples for velocity estimation.
     const samples = lastSamplesRef.current
     samples.push({ y: clientY, t: performance.now() })
     if (samples.length > 3) {
@@ -211,8 +185,7 @@ const LocationSheet = ({
     }
   }
 
-  // Estimate the vertical release velocity in px/ms from the recent samples.
-  // Negative means moving upward (towards fully-open).
+  // Vertical release velocity in px/ms. Negative means moving upward.
   const getReleaseVelocity = () => {
     const samples = lastSamplesRef.current
     if (samples.length < 2) {
@@ -227,11 +200,10 @@ const LocationSheet = ({
     return (last.y - first.y) / dt
   }
 
-  // px/ms. A clean, quick swipe comfortably exceeds this; a slow deliberate
-  // drag stays under it and falls back to nearest-position snapping.
+  // A flick faster than this (px/ms) promotes the sheet a step; slower drags
+  // snap to nearest.
   const FLICK_VELOCITY_THRESHOLD = 0.5
 
-  // Return the next snap position one step in the given direction.
   const stepPosition = (from, direction) => {
     const order = ['top', POSITIONS.MIDDLE, POSITIONS.LOW, POSITIONS.BOTTOM]
     const index = order.indexOf(from)
@@ -252,9 +224,7 @@ const LocationSheet = ({
     setIsDragging(false)
     const restingPosition = inferCurrentPosition()
 
-    // A fast flick promotes the sheet one step in the direction of travel,
-    // even if it did not physically reach the next snap point's threshold.
-    // Slow drags keep the existing nearest-position behaviour.
+    // A fast flick promotes the sheet one step in the direction of travel.
     const velocity = getReleaseVelocity()
     let newPosition = restingPosition
     if (velocity <= -FLICK_VELOCITY_THRESHOLD) {
