@@ -23,7 +23,6 @@ const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
     ),
   )
 
-// Blur strip over the top safe area, shown on the full page behind an image.
 const BlurredSafeArea = styled.div`
   position: fixed;
   top: 0;
@@ -35,20 +34,6 @@ const BlurredSafeArea = styled.div`
   background: rgba(255, 255, 255, 0.3);
   z-index: 1000;
   pointer-events: none;
-`
-
-// Fade the top buttons in as the full page appears, so they do not pop.
-const FadeInTopButtons = styled.div`
-  animation: location-top-buttons-fade-in 0.2s linear;
-
-  @keyframes location-top-buttons-fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 `
 
 const EntryMobile = () => {
@@ -130,9 +115,7 @@ const EntryMobile = () => {
             reviewCount={reviews.length}
           />
         </LocationFullPage>
-        <FadeInTopButtons>
-          <TopButtonsMobile hasImages={hasImages} />
-        </FadeInTopButtons>
+        <TopButtonsMobile hasImages={hasImages} />
       </>
     )
   }

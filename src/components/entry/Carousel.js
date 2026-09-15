@@ -76,19 +76,14 @@ const EntryCarousel = ({ autoPlay = false }) => {
     return null
   }
 
-  // Kept in Redux so the slide survives the sheet -> full-page remount.
-  // Clamp in case the photo set shrank.
-  const selectedItem = Math.min(carouselIndex, allReviewPhotos.length - 1)
   const hasMultiple = allReviewPhotos.length > 1
 
   return (
     <Carousel
-      selectedItem={selectedItem}
+      selectedItem={carouselIndex}
       onChange={(index) => dispatch(setCarouselIndex(index))}
       onClickItem={onClickCarousel}
       showIndicators={hasMultiple}
-      // Keep infiniteLoop independent of autoPlay: toggling it adds/removes
-      // clone slides, which makes the image jump when the overlay opens.
       autoPlay={autoPlay && hasMultiple}
       infiniteLoop={hasMultiple}
       interval={5000}
