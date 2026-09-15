@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { useAppHistory } from '../../utils/useAppHistory'
@@ -70,17 +69,6 @@ const EntryMobile = () => {
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
-
-  // --- DEBUG HOOK -------------------------------------------------------
-  // `?peekFull=1` renders the bottom-sheet (peek) content but pins the sheet
-  // to the very top (translateY 0) with the drag `progress` locked at 1 — i.e.
-  // the peek exactly as it looks at the instant it hands off to the full page.
-  // It is purely a visual-inspection / harness aid and does not change any
-  // real user path: normal peek/full behaviour is untouched unless the param
-  // is present. See visual-harness (`peekfull-vs-full-*` scenarios).
-  const { search } = useLocation()
-  const debugPeekAtFullHeight =
-    new URLSearchParams(search).get('peekFull') === '1'
 
   const hasImages =
     reviews &&
@@ -160,7 +148,6 @@ const EntryMobile = () => {
       onRequestFullyOpen={fullyOpenPaneDrawer}
       onChangeTranslateY={setCurrentTranslateY}
       enterFromTop={enterFromTop}
-      pinTop={debugPeekAtFullHeight}
       onPositionChange={(position) => {
         if (position === 'middle') {
           setPaneDrawerToMiddlePosition()
@@ -183,7 +170,7 @@ const EntryMobile = () => {
         onTabChange={setTabIndex}
         reviewCount={reviews.length}
         sheetMode
-        progress={debugPeekAtFullHeight ? 1 : progress}
+        progress={progress}
         isDrawerFullyOpen={false}
       />
     </LocationSheet>

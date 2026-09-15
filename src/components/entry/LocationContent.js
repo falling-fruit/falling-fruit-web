@@ -2,7 +2,10 @@ import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
 import styled from 'styled-components/macro'
 
-import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
+import {
+  DRAG_HANDLE_HEIGHT_PX,
+  TABS_HEIGHT_PX,
+} from '../../constants/mobileLayout'
 import { CardTabs, Tab, TabList, TabPanel, TabPanels } from './CardTabs'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
@@ -65,7 +68,15 @@ const RevealedImage = styled.div`
 const WhitespacePlaceholder = styled.div`
   width: 100%;
   background: white;
-  height: ${({ progress }) => progress * TABS_HEIGHT_PX}px;
+  /*
+   * The peek's fixed drag-handle band (DRAG_HANDLE_HEIGHT_PX) is the analogue
+   * of the full page's tab ribbon (TABS_HEIGHT_PX). So the placeholder grows
+   * only by the *remainder* — the gap between the handle and a full ribbon —
+   * so that at full reveal (progress 1) handle + placeholder === the tab
+   * ribbon height and the body below lines up with the full page.
+   */
+  height: ${({ progress }) =>
+    progress * (TABS_HEIGHT_PX - DRAG_HANDLE_HEIGHT_PX)}px;
   transition: transform 0.15s linear;
   ${({ hidden }) => hidden && `display: none;`}
 `

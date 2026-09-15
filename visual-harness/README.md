@@ -38,24 +38,6 @@ handoff), middle → drag down to low peek, low → drag up to middle, full page
 tap the reviews tab, reviews tab → tap back to overview, plus the
 drag-up-to-full case without images.
 
-## Peek-at-full-height vs full page
-
-To verify the peek↔full transition is smooth, the app exposes a debug param
-`?peekFull=1` (see `EntryMobile`) that renders the bottom-sheet (peek) content
-but pins it to the very top (translateY 0) with drag `progress` locked at 1 —
-i.e. the peek exactly as it looks the instant it hands off to the full page.
-It is inert unless the param is present and changes no real user path.
-
-The `peekfull-vs-full-*` scenarios compare `?peekFull=1` against the real full
-page (`?pane=full`) across several locations. Unlike every other scenario,
-BOTH sides render on the **local** target (a local-vs-local structural check),
-via per-scenario `localPath` / `referencePath` / `referenceTarget` overrides
-(supported by the runner). The intended result: the peek's drag-handle band
-maps onto the full page's tab ribbon, and everything else lines up. Each
-location has a `-band` variant (top handle/ribbon band + image band masked, so
-its diff should be ~0% if the body matches) and a `-raw` variant (un-masked, so
-the report visually shows the handle↔ribbon swap).
-
 ## Prerequisites
 
 - Local dev server running: `yarn start` (defaults to `http://localhost:3000`).
