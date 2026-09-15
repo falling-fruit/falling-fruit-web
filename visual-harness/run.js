@@ -63,6 +63,16 @@ const captureScreenshot = async (context, url, scenario) => {
       })
       .catch(() => {})
     await page.waitForTimeout(scenario.settleMs || 1000)
+    // Optional runtime interaction: drag the sheet, tap a tab, click the
+    // carousel, etc. Runs identically against both targets after the initial
+    // load has settled, so the diff reflects the *post-interaction* state.
+    // Transitions are frozen (see FREEZE_CSS), so the sheet snaps to its
+    // resting position immediately; `interactSettleMs` gives React a beat to
+    // commit the resulting re-render before we screenshot.
+    if (typeof scenario.interact === 'function') {
+      await scenario.interact(page)
+      await page.waitForTimeout(scenario.interactSettleMs || 600)
+    }
     result.buffer = await page.screenshot({ type: 'png' })
     result.ok = true
   } catch (err) {

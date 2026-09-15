@@ -11,11 +11,32 @@ images, reviews tab) it:
 
 1. loads the same URL on both targets in an identical mobile viewport,
 2. freezes CSS animations and waits for the drawer transition + images to settle,
-3. screenshots both,
-4. masks the Google map area (non-deterministic external tiles) so the diff
+3. optionally performs a runtime **interaction** (see below),
+4. screenshots both,
+5. masks the Google map area (non-deterministic external tiles) so the diff
    focuses on the drawer chrome,
-5. pixel-diffs local vs reference with `pixelmatch`,
-6. writes an HTML report with local / reference / diff side by side, worst first.
+6. pixel-diffs local vs reference with `pixelmatch`,
+7. writes an HTML report with local / reference / diff side by side, worst first.
+
+## Interaction scenarios
+
+Beyond deep-linking to a drawer state via URL params, some scenarios (ids
+prefixed `interact-`) load at one state and then drive the sheet at runtime —
+dragging between snap points or tapping tabs — before the screenshot. This
+exercises the reimplemented drawer's drag/snap and tab-switch behaviour, not
+just its initial render.
+
+A scenario declares this with an optional async `interact(page)` hook and an
+`interactSettleMs` wait. Interactions are driven purely by the fixed viewport
+and the drawer's known snap geometry (no app-specific selectors), so the exact
+same gesture runs against both the local and deployed targets. Each interaction
+scenario should land on the same pixels as its equivalent deep-linked scenario;
+a divergence means the runtime transition settles differently from a fresh load.
+
+Covered interactions: middle → drag up to full page (the release-then-animate
+handoff), middle → drag down to low peek, low → drag up to middle, full page →
+tap the reviews tab, reviews tab → tap back to overview, plus the
+drag-up-to-full case without images.
 
 ## Prerequisites
 

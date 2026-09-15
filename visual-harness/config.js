@@ -32,7 +32,65 @@ const deviceScaleFactor = 2
  * `mask` regions (in CSS pixels, pre-scale) are painted over before diffing
  * so non-deterministic content (the Google map tiles behind the sheet) does
  * not create noise. The drawer chrome itself is never masked.
+ *
+ * `interact(page)` is an optional async hook run after the initial load has
+ * settled but before the screenshot. It drives the *reimplemented drawer's
+ * runtime behaviour* — dragging the sheet between snap points, tapping tabs —
+ * rather than deep-linking to a state via URL params. The same interaction
+ * runs against both targets, so the diff reflects the post-interaction render.
+ * `interactSettleMs` is the wait after the interaction (defaults to 600ms).
  */
+
+// --- Interaction helpers -------------------------------------------------
+//
+// The sheet listens for both mouse and touch drags (see LocationSheet). The
+// harness runs desktop Chromium with a mobile viewport, so we drive it with
+// mouse events, which the sheet's mousedown/mousemove/mouseup handlers accept.
+// Transitions are frozen during capture, so the sheet snaps to its resting
+// position on release without an animation to wait out.
+//
+// Grab points are computed purely from the fixed viewport and the drawer's
+// known snap geometry — NOT from an app-specific selector — so the exact same
+// gesture is issued to both the local and reference targets. (The reference is
+// the deployed main branch and may not share local-only test ids.)
+
+const MIDDLE_SCREEN_RATIO = 0.7 // mirrors EntryMobile
+const LOW_PEEK_HEIGHT_PX = 80 // mirrors EntryMobile (safe-area inset ~0 in headless)
+
+// Sheet top (translateY) at each resting snap point, in CSS pixels.
+const SNAP_TOP = {
+  middle: Math.round(viewport.height * MIDDLE_SCREEN_RATIO), // ~591
+  low: viewport.height - LOW_PEEK_HEIGHT_PX, // ~764
+}
+// The grab handle sits ~15px below the sheet top (margin 10 + ~half of 5px).
+const HANDLE_OFFSET = 15
+
+/**
+ * Drag the sheet grab-handle by `dy` CSS pixels (negative = up towards full,
+ * positive = down towards the low peek / dismiss), starting from the resting
+ * position `from` ('middle' | 'low').
+ */
+const dragSheet = async (page, from, dy) => {
+  const startX = viewport.width / 2
+  const startY = SNAP_TOP[from] + HANDLE_OFFSET
+  await page.mouse.move(startX, startY)
+  await page.mouse.down()
+  // Move in a few steps so the drag registers as a gesture, not a teleport.
+  const steps = 8
+  for (let i = 1; i <= steps; i++) {
+    await page.mouse.move(startX, startY + (dy * i) / steps)
+  }
+  await page.mouse.up()
+}
+
+/** Click a tab in the full-page tab list by its accessible role/index. */
+const clickTab = async (page, index) => {
+  const tabs = await page.$$('[role="tab"]')
+  if (tabs[index]) {
+    await tabs[index].click()
+  }
+}
+
 const scenarios = [
   {
     id: 'sheet-middle-with-images',
@@ -80,6 +138,76 @@ const scenarios = [
     path: `/locations/${LOCATION_WITHOUT_IMAGES}?pane=full`,
     mask: [],
     settleMs: 1500,
+  },
+
+  // --- Load-then-interact scenarios --------------------------------------
+  //
+  // These load at one drawer state and then drive the sheet at runtime to
+  // reach another, exercising the reimplemented drag/snap and tab-switch
+  // paths rather than the deep-linked initial render. Each should land on the
+  // same pixels as its equivalent deep-linked scenario above; a divergence
+  // means the runtime transition settles differently from a fresh load.
+  {
+    id: 'interact-middle-drag-to-full',
+    label: 'Interaction — load middle, drag up to full page — with images',
+    path: `/locations/${LOCATION_WITH_IMAGES}`,
+    // Ends full page; nothing to mask.
+    mask: [],
+    settleMs: 2200,
+    // Drag well past the middle→top threshold to trigger the full-page handoff.
+    interact: (page) => dragSheet(page, 'middle', -700),
+    interactSettleMs: 800,
+  },
+  {
+    id: 'interact-middle-drag-to-low',
+    label: 'Interaction — load middle, drag down to low peek — with images',
+    path: `/locations/${LOCATION_WITH_IMAGES}`,
+    // Lands at low peek; mask the map above the visible sheet content.
+    mask: [{ x: 0, y: 0, width: viewport.width, height: 620 }],
+    settleMs: 2200,
+    interact: (page) => dragSheet(page, 'middle', 200),
+    interactSettleMs: 800,
+  },
+  {
+    id: 'interact-low-drag-to-middle',
+    label: 'Interaction — load low, drag up to middle — with images',
+    path: `/locations/${LOCATION_WITH_IMAGES}?pane=low`,
+    // Lands at middle. The revealed carousel photo is non-deterministic between
+    // two independent loads (each settles the responsive carousel on a slightly
+    // different scroll/scale), so mask the whole image band and diff only the
+    // drawer chrome below it — the point of this scenario is that the drag
+    // lands the sheet at the same middle position, not the photo pixels.
+    mask: [{ x: 0, y: 0, width: viewport.width, height: 700 }],
+    settleMs: 1500,
+    interact: (page) => dragSheet(page, 'low', -260),
+    interactSettleMs: 800,
+  },
+  {
+    id: 'interact-full-tap-reviews',
+    label: 'Interaction — load full page, tap reviews tab — with images',
+    path: `/locations/${LOCATION_WITH_IMAGES}?pane=full`,
+    mask: [],
+    settleMs: 1800,
+    interact: (page) => clickTab(page, 1),
+    interactSettleMs: 700,
+  },
+  {
+    id: 'interact-full-reviews-tap-overview',
+    label: 'Interaction — load reviews tab, tap back to overview — with images',
+    path: `/locations/${LOCATION_WITH_IMAGES}?pane=full&tab=1`,
+    mask: [],
+    settleMs: 1800,
+    interact: (page) => clickTab(page, 0),
+    interactSettleMs: 700,
+  },
+  {
+    id: 'interact-middle-drag-to-full-no-images',
+    label: 'Interaction — load middle, drag up to full page — without images',
+    path: `/locations/${LOCATION_WITHOUT_IMAGES}`,
+    mask: [],
+    settleMs: 1500,
+    interact: (page) => dragSheet(page, 'middle', -700),
+    interactSettleMs: 800,
   },
 ]
 
