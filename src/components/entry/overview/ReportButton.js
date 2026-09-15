@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 import { useAppHistory } from '../../../utils/useAppHistory'
 import { ReportModal } from '../../form/ReportModal'
 import Button from '../../ui/Button'
+import useLocationPane from '../useLocationPane'
 
 export const ReportButton = () => {
   const { location: locationData } = useSelector((state) => state.location)
@@ -13,6 +14,7 @@ export const ReportButton = () => {
   const typesAccess = useSelector((state) => state.type.typesAccess)
   const history = useAppHistory()
   const location = useLocation()
+  const { openReportModal } = useLocationPane()
 
   const isReportModalOpen =
     new URLSearchParams(location.search).get('report') === 'true'
@@ -24,10 +26,6 @@ export const ReportButton = () => {
     .map((id) => typesAccess?.getType(id)?.commonName)
     .filter(Boolean)
     .join(', ')
-
-  const handleReportClick = () => {
-    history.addParam('report', 'true')
-  }
 
   const handleDismiss = () => {
     history.removeParam('report')
@@ -45,7 +43,9 @@ export const ReportButton = () => {
           defaultComment={defaultComment}
         />
       )}
-      <Button leftIcon={<Flag />} secondary onClick={handleReportClick}>
+      {/* Opens the report modal; on mobile also fully opens the drawer, in a
+          single navigation. */}
+      <Button leftIcon={<Flag />} secondary onClick={openReportModal}>
         {t('form.button.report')}
       </Button>
     </>

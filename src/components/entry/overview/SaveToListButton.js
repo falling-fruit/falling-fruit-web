@@ -162,7 +162,6 @@ const SaveToListButton = ({ containerRef }) => {
   const isLoading = useSelector((state) => state.save.isLoading)
   const isAddingNew = useSelector((state) => state.save.isAddingNew)
   const pendingToggles = useSelector((state) => state.save.pendingToggles)
-  const [open, setOpen] = useState(false)
   const [addingNew, setAddingNew] = useState(false)
   const [newListName, setNewListName] = useState('')
   const [dropdownMaxHeight, setDropdownMaxHeight] = useState(null)
@@ -172,12 +171,16 @@ const SaveToListButton = ({ containerRef }) => {
   const addNewRowRef = useRef(null)
 
   const { lists } = useSavedLists(locationId)
-  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+  const {
+    saveDropdownOpen: open,
+    openSaveDropdown,
+    closeSaveDropdown,
+  } = useLocationPane()
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        setOpen(false)
+        closeSaveDropdown()
         setAddingNew(false)
         setNewListName('')
       }
@@ -186,7 +189,7 @@ const SaveToListButton = ({ containerRef }) => {
       document.addEventListener('mousedown', handleClickOutside)
     }
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [open])
+  }, [open, closeSaveDropdown])
 
   useEffect(() => {
     if (addingNew && newListInputRef.current) {
@@ -234,11 +237,12 @@ const SaveToListButton = ({ containerRef }) => {
   }, [isAddingNew])
 
   const handleButtonClick = () => {
-    fullyOpenPaneDrawerIfMobile()
-    if (!open) {
+    if (open) {
+      closeSaveDropdown()
+    } else {
       dispatch(fetchLists())
+      openSaveDropdown()
     }
-    setOpen((o) => !o)
   }
 
   const handleToggle = (listId, checked) => {
