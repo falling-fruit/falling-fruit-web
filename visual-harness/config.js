@@ -209,6 +209,85 @@ const scenarios = [
     interact: (page) => dragSheet(page, 'middle', -700),
     interactSettleMs: 800,
   },
+
+  // --- Peek-at-full-height vs full page ----------------------------------
+  //
+  // These compare the debug "peek at full height" (`?peekFull=1`, which pins
+  // the bottom-sheet/peek content to translateY 0 with drag progress locked
+  // at 1 — the peek exactly as it looks the instant it hands off) against the
+  // real full page (`?pane=full`). BOTH sides render on the LOCAL target
+  // (referenceTarget = local), so this is a local-vs-local structural check,
+  // not a local-vs-deployed check.
+  //
+  // Intended result: the peek's drag-handle band sits where the full page's
+  // tab ribbon sits, and everything else lines up. The `-band` variant masks
+  // the top band (drag handle ↔ tab ribbon), so its diff should be ~0% if the
+  // rest matches; the un-masked variant is kept so the report visually shows
+  // the handle↔ribbon swap. `TAB_RIBBON_TOP` is where the ribbon/handle band
+  // begins: at the top for no-image locations, below the 250px image for
+  // image locations.
+  ...(() => {
+    const IMAGE_TOP = 250 // ENTRY_IMAGE_HEIGHT — image band on the full page
+    const RIBBON_BAND = 50 // TABS_HEIGHT_PX — the tab ribbon / handle band
+    const peekFull = (id) => `/locations/${id}?peekFull=1`
+    const full = (id) => `/locations/${id}?pane=full`
+
+    // Locations to sweep. With-images cases exercise the image + ribbon
+    // geometry; the without-images case exercises the bare ribbon-at-top case.
+    const withImageIds = [
+      LOCATION_WITH_IMAGES, // 2402673
+      '2294274',
+      '2292274',
+    ]
+
+    const scns = []
+    for (const id of withImageIds) {
+      // Mask the top image band (non-deterministic carousel photo) AND the
+      // ribbon band (drag handle vs tab ribbon — expected to differ by design),
+      // so this variant checks that the overview content BELOW lines up.
+      scns.push({
+        id: `peekfull-vs-full-${id}-band`,
+        label: `Peek@full vs full page — ${id} — body aligned (handle/ribbon band masked)`,
+        localPath: peekFull(id),
+        referencePath: full(id),
+        referenceTarget: LOCAL,
+        mask: [{ x: 0, y: 0, width: viewport.width, height: IMAGE_TOP + RIBBON_BAND }],
+        settleMs: 2000,
+      })
+      // Un-masked companion: shows the full frame so the report reveals the
+      // handle↔ribbon swap and any image-band difference visually.
+      scns.push({
+        id: `peekfull-vs-full-${id}-raw`,
+        label: `Peek@full vs full page — ${id} — full frame (visual)`,
+        localPath: peekFull(id),
+        referencePath: full(id),
+        referenceTarget: LOCAL,
+        mask: [],
+        settleMs: 2000,
+      })
+    }
+
+    // Without images: no image band, so the ribbon band is at the very top.
+    scns.push({
+      id: `peekfull-vs-full-${LOCATION_WITHOUT_IMAGES}-band`,
+      label: `Peek@full vs full page — ${LOCATION_WITHOUT_IMAGES} (no images) — body aligned (ribbon band masked)`,
+      localPath: peekFull(LOCATION_WITHOUT_IMAGES),
+      referencePath: full(LOCATION_WITHOUT_IMAGES),
+      referenceTarget: LOCAL,
+      mask: [{ x: 0, y: 0, width: viewport.width, height: RIBBON_BAND }],
+      settleMs: 1800,
+    })
+    scns.push({
+      id: `peekfull-vs-full-${LOCATION_WITHOUT_IMAGES}-raw`,
+      label: `Peek@full vs full page — ${LOCATION_WITHOUT_IMAGES} (no images) — full frame (visual)`,
+      localPath: peekFull(LOCATION_WITHOUT_IMAGES),
+      referencePath: full(LOCATION_WITHOUT_IMAGES),
+      referenceTarget: LOCAL,
+      mask: [],
+      settleMs: 1800,
+    })
+    return scns
+  })(),
 ]
 
 module.exports = {

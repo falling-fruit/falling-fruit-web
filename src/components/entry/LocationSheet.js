@@ -69,6 +69,10 @@ const LocationSheet = ({
   hasWhiteBackground,
   displayOverTopBar,
   enterFromTop,
+  // DEBUG: when true, pin the sheet to the very top (translateY 0) and disable
+  // dragging, so the peek content can be inspected at full height. Off by
+  // default; only the `?peekFull=1` debug path sets it (see EntryMobile).
+  pinTop = false,
 }) => {
   const sheetRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -83,6 +87,10 @@ const LocationSheet = ({
 
   const getSnapTranslateY = useCallback(
     (pos, height = viewportHeight) => {
+      // DEBUG: pinned to the top for full-height peek inspection.
+      if (pinTop) {
+        return 0
+      }
       switch (pos) {
         case POSITIONS.MIDDLE:
           return height * middlePositionScreenRatio
@@ -93,7 +101,12 @@ const LocationSheet = ({
           return height
       }
     },
-    [viewportHeight, middlePositionScreenRatio, partialPositionHeightPx],
+    [
+      viewportHeight,
+      middlePositionScreenRatio,
+      partialPositionHeightPx,
+      pinTop,
+    ],
   )
 
   const movePane = useCallback(
@@ -180,6 +193,10 @@ const LocationSheet = ({
   }, [position, isDragging, getSnapTranslateY, movePane])
 
   const handleStart = (clientY) => {
+    if (pinTop) {
+      // DEBUG: pinned full-height view is static; ignore drags entirely.
+      return
+    }
     setIsDragging(true)
     setStartY(clientY)
     setStartTranslateY(sheetRef.current.getBoundingClientRect().top)

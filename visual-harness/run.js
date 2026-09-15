@@ -110,6 +110,15 @@ const applyMasks = (png, masks, scale) => {
 
 const run = async () => {
   const { targets, viewport, deviceScaleFactor, scenarios, matchThreshold, failFraction, outDir } = config
+  // Optional substring filter (comma-separated) to run a subset by id, e.g.
+  // `HARNESS_ONLY=peekfull yarn visual-diff`.
+  const only = (process.env.HARNESS_ONLY || '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
+  const selectedScenarios = only.length
+    ? scenarios.filter((s) => only.some((frag) => s.id.includes(frag)))
+    : scenarios
   const shotsDir = path.join(outDir, 'shots')
   ensureDir(shotsDir)
 
@@ -128,9 +137,19 @@ const run = async () => {
 
   const results = []
 
-  for (const scenario of scenarios) {
-    const localUrl = targets.local + scenario.path
-    const refUrl = targets.reference + scenario.path
+  for (const scenario of selectedScenarios) {
+    // A scenario normally compares the SAME path across the two targets
+    // (local dev vs deployed reference). Some scenarios instead compare two
+    // different drawer states on the SAME target — e.g. the debug
+    // peek-at-full-height (`?peekFull=1`) against the real full page
+    // (`?pane=full`), both on local — to confirm the peek, stretched to full
+    // height, lines up with the full page. Such a scenario sets
+    // `localPath` + `referencePath` (and optionally `referenceTarget`) to
+    // override the default `targets.local/reference + scenario.path`.
+    const localBase = scenario.localTarget || targets.local
+    const refBase = scenario.referenceTarget || targets.reference
+    const localUrl = localBase + (scenario.localPath || scenario.path)
+    const refUrl = refBase + (scenario.referencePath || scenario.path)
     process.stdout.write(`• ${scenario.id} ... `)
 
     const [local, reference] = await Promise.all([
@@ -141,7 +160,12 @@ const run = async () => {
     const entry = {
       id: scenario.id,
       label: scenario.label,
-      path: scenario.path,
+      path:
+        scenario.localPath || scenario.referencePath
+          ? `${scenario.localPath || scenario.path}  ⟷  ${
+              scenario.referencePath || scenario.path
+            }`
+          : scenario.path,
       localError: local.error,
       referenceError: reference.error,
       localShot: null,
