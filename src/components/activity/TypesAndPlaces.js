@@ -128,6 +128,7 @@ const TypesAndPlaces = ({
             >
               <TypeNameOption
                 type={option.type}
+                showSynonyms={false}
                 count={
                   context === 'menu'
                     ? option.filteredCount !== undefined &&
