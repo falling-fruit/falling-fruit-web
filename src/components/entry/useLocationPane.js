@@ -13,6 +13,7 @@ const useLocationPane = () => {
   const paneParam = params.get('pane') // 'low' | 'full' | null -> middle position
   const tabParam = params.get('tab') // '1' | null -> 0
   const saveParam = params.get('save') // 'true' | null
+  const reportParam = params.get('report') // 'true' | null
 
   const drawerFullyOpen = isEmbed || paneParam === 'full'
   const drawerLow = !isEmbed && paneParam === 'low'
@@ -20,6 +21,7 @@ const useLocationPane = () => {
   // The save-to-list dropdown open flag lives in the URL so it survives the
   // sheet -> full-page remount that happens when opening the drawer.
   const saveDropdownOpen = saveParam === 'true'
+  const reportModalOpen = reportParam === 'true'
 
   const setParams = useCallback(
     (newPaneValue, newTabValue, newSaveValue) => {
@@ -128,6 +130,7 @@ const useLocationPane = () => {
     drawerLow,
     tabIndex,
     saveDropdownOpen,
+    reportModalOpen,
     fullyOpenPaneDrawer,
     fullyOpenPaneDrawerIfMobile,
     setPaneDrawerToMiddlePosition,

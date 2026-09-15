@@ -8,6 +8,7 @@ import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 import Lightbox from './lightbox/Lightbox'
+import useLocationPane from './useLocationPane'
 
 const ENTRY_IMAGE_HEIGHT = 250
 
@@ -120,6 +121,12 @@ const LocationContent = ({
   isDrawerFullyOpen = false,
 }) => {
   const { t } = useTranslation()
+  const { saveDropdownOpen, reportModalOpen } = useLocationPane()
+
+  // Autoplay runs in the fully-open pane, but not while the save dropdown or
+  // report modal is open (they overlay the content and shouldn't have slides
+  // shuffling behind them).
+  const carouselAutoPlay = !saveDropdownOpen && !reportModalOpen
 
   return (
     <ContentColumn sheetMode={sheetMode}>
@@ -131,7 +138,7 @@ const LocationContent = ({
           </RevealedImage>
         ) : (
           <ImageBlock>
-            <ImageContents isLoading={isLoading} autoPlay />
+            <ImageContents isLoading={isLoading} autoPlay={carouselAutoPlay} />
           </ImageBlock>
         ))}
       {sheetMode && hasReviews && (
