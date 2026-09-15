@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
 import styled from 'styled-components/macro'
 
+import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
 import { CardTabs, Tab, TabList, TabPanel, TabPanels } from './CardTabs'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
@@ -34,12 +35,47 @@ const ContentColumn = styled.div`
   flex-direction: column;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: ${({ sheetMode }) => (sheetMode ? 'visible' : 'hidden')};
 `
 
+// Full-page image block: a normal fixed-height block at the top of the flow.
 const ImageBlock = styled.div`
   width: 100%;
   flex-shrink: 0;
+`
+
+/*
+ * Sheet reveal: in the draggable sheet the image is pulled up out of the peek
+ * as the sheet is lowered, so the overview leads the visible peek (matching the
+ * deployed behaviour). It is absolutely positioned and translated by the drag
+ * progress; a matching whitespace placeholder reserves the space that the tab
+ * list will occupy once fully open.
+ */
+const RevealedImage = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 0;
+  height: ${ENTRY_IMAGE_HEIGHT}px;
+  transform: translateY(${({ progress }) => -progress * ENTRY_IMAGE_HEIGHT}px);
+  transition: transform 0.15s linear;
+  z-index: -1;
+`
+
+const WhitespacePlaceholder = styled.div`
+  width: 100%;
+  background: white;
+  height: ${({ progress }) => progress * TABS_HEIGHT_PX}px;
+  transition: transform 0.15s linear;
+  ${({ hidden }) => hidden && `display: none;`}
+`
+
+/*
+ * ScrollablePane layout has a translateY property, which can hide some of the
+ * content in e.g. the reviews tab; as a workaround add an element with that
+ * same height. Only needed in sheet reveal mode.
+ */
+const DummyScrollSpacer = styled.div`
+  height: ${({ height }) => height}px;
 `
 
 const TextContent = styled.article`
@@ -53,19 +89,23 @@ const TextContent = styled.article`
   }
 `
 
+const ImageContents = ({ isLoading }) =>
+  isLoading ? (
+    <Skeleton height={ENTRY_IMAGE_HEIGHT} />
+  ) : (
+    <>
+      <Lightbox />
+      <Carousel />
+    </>
+  )
+
 /**
- * The persistent content tree shared by both the bottom-sheet and the
- * full-page shells. It is mounted once and never swapped, so the image
- * and tab state survive the mode change between sheet and page.
+ * The shared content tree for both the bottom-sheet and full-page shells.
  *
- * It is a fill-height flex column: an optional fixed-height image block on
- * top, and the CardTabs (with its own internally-scrolling panels) filling
- * the remaining space. Both shells simply give it a box to fill; the content
- * itself never computes a viewport height.
- *
- * Layout differences between modes are expressed purely through props:
- * - hasImages: render the image carousel block (only when there are photos)
- * - showTabList: render the overview/reviews tab switcher (full page only)
+ * - Full page (sheetMode=false): image is a normal block at the top of a
+ *   fill-height flex column; CardTabs fill the rest with internal scroll.
+ * - Sheet (sheetMode=true): image is revealed/parallaxed by drag `progress`
+ *   so the overview leads the peek, reproducing the deployed sheet geometry.
  */
 const LocationContent = ({
   isLoading,
@@ -75,22 +115,26 @@ const LocationContent = ({
   tabIndex,
   onTabChange,
   reviewCount,
+  sheetMode = false,
+  progress = 0,
+  isDrawerFullyOpen = false,
 }) => {
   const { t } = useTranslation()
 
   return (
-    <ContentColumn>
-      {hasImages && (
-        <ImageBlock>
-          {isLoading ? (
-            <Skeleton height={ENTRY_IMAGE_HEIGHT} />
-          ) : (
-            <>
-              <Lightbox />
-              <Carousel />
-            </>
-          )}
-        </ImageBlock>
+    <ContentColumn sheetMode={sheetMode}>
+      {hasImages &&
+        (sheetMode ? (
+          <RevealedImage progress={progress}>
+            <ImageContents isLoading={isLoading} />
+          </RevealedImage>
+        ) : (
+          <ImageBlock>
+            <ImageContents isLoading={isLoading} />
+          </ImageBlock>
+        ))}
+      {sheetMode && hasReviews && (
+        <WhitespacePlaceholder progress={progress} hidden={isDrawerFullyOpen} />
       )}
       <CardTabs
         style={{ transition: 'none' }}
@@ -109,11 +153,13 @@ const LocationContent = ({
             <TextContent>
               <EntryOverview />
             </TextContent>
+            {sheetMode && <DummyScrollSpacer height={ENTRY_IMAGE_HEIGHT} />}
           </TabPanel>
           <TabPanel>
             <TextContent>
               <EntryReviews />
             </TextContent>
+            {sheetMode && <DummyScrollSpacer height={ENTRY_IMAGE_HEIGHT} />}
           </TabPanel>
         </TabPanels>
       </CardTabs>

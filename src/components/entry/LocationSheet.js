@@ -40,13 +40,15 @@ const POSITIONS = {
 }
 
 /**
- * Read the height of the visual viewport, falling back to the layout
- * viewport. The visual viewport tracks the *dynamic* mobile viewport
- * (collapsing URL bar, on-screen keyboard) so the sheet's snap points
- * agree with the dvh/env()-based layout used by the rest of the app.
+ * Read the viewport height used for snap-point math. We use the layout
+ * viewport (`window.innerHeight`), which is the integer height the CSS
+ * dvh/env() layout settles to and matches the rest of the app. The
+ * visualViewport is used only as a *change signal* (URL bar, keyboard,
+ * rotation) via a resize listener — reading its fractional height directly at
+ * first paint can be transiently off by a sub-pixel and desync the sheet from
+ * the CSS layout.
  */
-const getViewportHeight = () =>
-  (window.visualViewport && window.visualViewport.height) || window.innerHeight
+const getViewportHeight = () => window.innerHeight
 
 /**
  * Bottom sheet for the location entry, shown when the drawer is NOT fully
@@ -62,6 +64,7 @@ const LocationSheet = ({
   onRequestFullyOpen,
   middlePositionScreenRatio,
   partialPositionHeightPx,
+  onChangeTranslateY,
   hasWhiteBackground,
   displayOverTopBar,
 }) => {
@@ -86,13 +89,19 @@ const LocationSheet = ({
     [viewportHeight, middlePositionScreenRatio, partialPositionHeightPx],
   )
 
-  const movePane = useCallback((transition, translateY) => {
-    if (!sheetRef.current) {
-      return
-    }
-    sheetRef.current.style.transition = transition
-    sheetRef.current.style.transform = `translateY(${translateY}px)`
-  }, [])
+  const movePane = useCallback(
+    (transition, translateY, reportTranslateY = true) => {
+      if (!sheetRef.current) {
+        return
+      }
+      sheetRef.current.style.transition = transition
+      sheetRef.current.style.transform = `translateY(${translateY}px)`
+      if (reportTranslateY) {
+        onChangeTranslateY?.(translateY)
+      }
+    },
+    [onChangeTranslateY],
+  )
 
   const inferCurrentPosition = useCallback(() => {
     const paneTop = sheetRef.current.getBoundingClientRect().top
@@ -128,8 +137,10 @@ const LocationSheet = ({
     const target = getSnapTranslateY(position)
 
     if (!paneIsOnScreen) {
-      // Animate up from the bottom edge on first mount.
-      movePane('none', getSnapTranslateY(POSITIONS.BOTTOM))
+      // Animate up from the bottom edge on first mount. Do not report the
+      // transient bottom frame: `progress` (which drives the image reveal)
+      // should reflect the resting position, not the animation start.
+      movePane('none', getSnapTranslateY(POSITIONS.BOTTOM), false)
       requestAnimationFrame(() => {
         movePane('transform 0.3s linear', target)
       })

@@ -11,6 +11,17 @@ import useLocationPane from './useLocationPane'
 
 const MIDDLE_SCREEN_RATIO = 0.7
 const LOW_PEEK_HEIGHT_PX = 80
+const ENTRY_IMAGE_HEIGHT = 250
+const TOP_BAR_HEIGHT = 80
+
+const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
+  Math.max(
+    0,
+    Math.min(
+      1,
+      1 - (topBoundary - currentPosition) / (topBoundary - bottomBoundary),
+    ),
+  )
 
 // Blur strip over the safe area, shown on the full page when an image sits
 // beneath the top safe area.
@@ -67,6 +78,16 @@ const EntryMobile = () => {
 
   const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0)
 
+  const offset = hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT
+  const [currentTranslateY, setCurrentTranslateY] = useState(
+    () => window.innerHeight * MIDDLE_SCREEN_RATIO,
+  )
+  const progress = calculateProgress(
+    currentTranslateY,
+    offset,
+    window.innerHeight,
+  )
+
   useEffect(() => {
     const value = getComputedStyle(document.documentElement)
       .getPropertyValue('--safe-area-inset-bottom')
@@ -87,23 +108,21 @@ const EntryMobile = () => {
     return null
   }
 
-  const content = (
-    <LocationContent
-      isLoading={isLoading}
-      hasImages={hasImages}
-      hasReviews={hasReviews}
-      showTabList={drawerFullyOpen}
-      tabIndex={tabIndex}
-      onTabChange={setTabIndex}
-      reviewCount={reviews.length}
-    />
-  )
-
   if (drawerFullyOpen) {
     return (
       <>
         {hasImages && <BlurredSafeArea />}
-        <LocationFullPage hasImages={hasImages}>{content}</LocationFullPage>
+        <LocationFullPage hasImages={hasImages}>
+          <LocationContent
+            isLoading={isLoading}
+            hasImages={hasImages}
+            hasReviews={hasReviews}
+            showTabList
+            tabIndex={tabIndex}
+            onTabChange={setTabIndex}
+            reviewCount={reviews.length}
+          />
+        </LocationFullPage>
         <FadeInTopButtons>
           <TopButtonsMobile hasImages={hasImages} />
         </FadeInTopButtons>
@@ -118,6 +137,7 @@ const EntryMobile = () => {
       partialPositionHeightPx={LOW_PEEK_HEIGHT_PX + safeAreaInsetBottom}
       position={drawerLow ? 'low' : 'middle'}
       onRequestFullyOpen={fullyOpenPaneDrawer}
+      onChangeTranslateY={setCurrentTranslateY}
       onPositionChange={(position) => {
         if (position === 'middle') {
           setPaneDrawerToMiddlePosition()
@@ -131,7 +151,18 @@ const EntryMobile = () => {
       }}
       hasWhiteBackground={!isLoading && hasImages}
     >
-      {content}
+      <LocationContent
+        isLoading={isLoading}
+        hasImages={hasImages}
+        hasReviews={hasReviews}
+        showTabList={false}
+        tabIndex={tabIndex}
+        onTabChange={setTabIndex}
+        reviewCount={reviews.length}
+        sheetMode
+        progress={progress}
+        isDrawerFullyOpen={false}
+      />
     </LocationSheet>
   )
 }

@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 
+import { NAVIGATION_BAR_HEIGHT_PX } from '../../constants/mobileLayout'
 import { zIndex } from '../ui/GlobalStyle'
 
 /**
@@ -9,23 +10,28 @@ import { zIndex } from '../ui/GlobalStyle'
  * JS-computed top offset, so there is no post-load height hop and structurally
  * no gap between the map and the page.
  *
- * The container fills the viewport; the shared LocationContent inside it is a
- * flex column whose CardTabs panels scroll internally (sticky tab list),
- * preserving the existing scroll behaviour.
+ * The white page rests below a top band, matching the deployed layout:
+ * - with an image, the image occupies the top of the page (band = 0);
+ * - without an image, the page rests below the navigation bar height so the
+ *   area above stays clear (band = NAVIGATION_BAR_HEIGHT_PX), reproducing the
+ *   old fully-open pane which rested at translateY(topPositionHeight).
+ *
+ * The shared LocationContent inside is a flex column whose CardTabs panels
+ * scroll internally (sticky tab list), preserving the existing scroll
+ * behaviour.
  */
 const FullPageContainer = styled.div`
   position: fixed;
   inset-inline: 0;
-  inset-block-start: 0;
+  inset-block-start: ${(props) =>
+    props.hasImages
+      ? '0'
+      : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
   inset-block-end: 0;
   z-index: ${zIndex.topBar + 1};
   background: white;
   display: flex;
   flex-direction: column;
-
-  /* Reserve the safe area at the top when there is no image to sit under it. */
-  padding-block-start: ${(props) =>
-    props.hasImages ? '0' : 'env(safe-area-inset-top, 0)'};
 `
 
 const LocationFullPage = ({ hasImages, children }) => (

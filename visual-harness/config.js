@@ -38,15 +38,18 @@ const scenarios = [
     id: 'sheet-middle-with-images',
     label: 'Bottom sheet — middle — location with images',
     path: `/locations/${LOCATION_WITH_IMAGES}`,
-    // Middle sheet peeks ~30% of the screen; the map fills the top ~70%.
-    mask: [{ x: 0, y: 0, width: viewport.width, height: 590 }],
-    settleMs: 1500,
+    // At middle the sheet top rests ~591px; the image is revealed up to ~484px.
+    // Mask only the pure map region above the highest sheet content.
+    mask: [{ x: 0, y: 0, width: viewport.width, height: 480 }],
+    settleMs: 2200,
   },
   {
     id: 'sheet-low-with-images',
     label: 'Bottom sheet — low peek — location with images',
     path: `/locations/${LOCATION_WITH_IMAGES}?pane=low`,
-    mask: [{ x: 0, y: 0, width: viewport.width, height: 760 }],
+    // At low the sheet top rests ~764px; revealed image starts higher. Mask the
+    // map above the visible sheet content only.
+    mask: [{ x: 0, y: 0, width: viewport.width, height: 620 }],
     settleMs: 1500,
   },
   {
@@ -89,7 +92,9 @@ module.exports = {
   // anti-aliasing / subpixel differences.
   matchThreshold: 0.1,
   // Fraction of non-masked pixels allowed to differ before a scenario is
-  // flagged as a regression in the report.
+  // flagged. A small tolerance absorbs residual text anti-aliasing between two
+  // independent page loads; structural regressions produce far larger,
+  // spatially-coherent diffs.
   failFraction: 0.005,
   outDir: __dirname + '/output',
 }

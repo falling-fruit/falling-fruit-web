@@ -45,6 +45,23 @@ const captureScreenshot = async (context, url, scenario) => {
     })
     await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 })
     await page.addStyleTag({ content: FREEZE_CSS })
+    // Wait for all images to finish decoding so the carousel is not captured
+    // mid-load (a common source of false diffs).
+    await page
+      .evaluate(async () => {
+        const imgs = Array.from(document.images)
+        await Promise.all(
+          imgs.map((img) =>
+            img.complete && img.naturalWidth > 0
+              ? Promise.resolve()
+              : new Promise((res) => {
+                  img.addEventListener('load', res, { once: true })
+                  img.addEventListener('error', res, { once: true })
+                }),
+          ),
+        )
+      })
+      .catch(() => {})
     await page.waitForTimeout(scenario.settleMs || 1000)
     result.buffer = await page.screenshot({ type: 'png' })
     result.ok = true
