@@ -67,6 +67,7 @@ const LocationSheet = ({
   onChangeTranslateY,
   hasWhiteBackground,
   displayOverTopBar,
+  enterFromTop,
 }) => {
   const sheetRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -125,8 +126,8 @@ const LocationSheet = ({
     }
   }, [viewportHeight, getSnapTranslateY])
 
-  // Place the sheet at its target position, animating in from the bottom the
-  // first time it appears.
+  // Place the sheet at its target position, animating in the first time it
+  // appears.
   useLayoutEffect(() => {
     const pane = sheetRef.current
     if (!pane) {
@@ -137,17 +138,22 @@ const LocationSheet = ({
     const target = getSnapTranslateY(position)
 
     if (!paneIsOnScreen) {
-      // Animate up from the bottom edge on first mount. Do not report the
-      // transient bottom frame: `progress` (which drives the image reveal)
-      // should reflect the resting position, not the animation start.
-      movePane('none', getSnapTranslateY(POSITIONS.BOTTOM), false)
+      // Animate into place on first mount. When arriving from the fully-open
+      // page (`enterFromTop`), the content is visually at the top, so start
+      // there and animate *down* to the target. Otherwise the sheet is
+      // appearing over the map, so slide *up* from the bottom edge.
+      // Do not report the transient start frame: `progress` (which drives the
+      // image reveal) should reflect the resting position, not the animation
+      // start.
+      const startTy = enterFromTop ? 0 : getSnapTranslateY(POSITIONS.BOTTOM)
+      movePane('none', startTy, false)
       requestAnimationFrame(() => {
         movePane('transform 0.3s linear', target)
       })
     } else {
       movePane('transform 0.3s linear', target)
     }
-  }, [position, getSnapTranslateY, movePane])
+  }, [position, getSnapTranslateY, movePane, enterFromTop])
 
   // Keep snap points in sync with the dynamic viewport (URL bar, rotation,
   // keyboard). Re-snap to the current logical position when it changes.

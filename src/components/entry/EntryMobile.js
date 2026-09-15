@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -78,6 +78,15 @@ const EntryMobile = () => {
 
   const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0)
 
+  // Track whether the previous render showed the fully-open page. When the
+  // sheet re-mounts right after that, it should animate down from the top
+  // rather than slide up from the bottom.
+  const wasFullyOpenRef = useRef(drawerFullyOpen)
+  const enterFromTop = wasFullyOpenRef.current && !drawerFullyOpen
+  useEffect(() => {
+    wasFullyOpenRef.current = drawerFullyOpen
+  })
+
   const offset = hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT
   const [currentTranslateY, setCurrentTranslateY] = useState(
     () => window.innerHeight * MIDDLE_SCREEN_RATIO,
@@ -138,6 +147,7 @@ const EntryMobile = () => {
       position={drawerLow ? 'low' : 'middle'}
       onRequestFullyOpen={fullyOpenPaneDrawer}
       onChangeTranslateY={setCurrentTranslateY}
+      enterFromTop={enterFromTop}
       onPositionChange={(position) => {
         if (position === 'middle') {
           setPaneDrawerToMiddlePosition()
