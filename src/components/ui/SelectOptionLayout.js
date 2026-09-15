@@ -76,7 +76,7 @@ const Synonyms = styled.span`
   }
 `
 
-export const TypeNameOption = ({ type, count }) => {
+export const TypeNameOption = ({ type, count, showSynonyms = true }) => {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
   const { synonyms } = type ?? {}
@@ -100,7 +100,9 @@ export const TypeNameOption = ({ type, count }) => {
           />
         )}
       </DetailsBlock>
-      {synonyms?.length > 0 && <Synonyms> {synonyms.join(' · ')}</Synonyms>}
+      {showSynonyms && synonyms?.length > 0 && (
+        <Synonyms> {synonyms.join(' · ')}</Synonyms>
+      )}
       {count !== undefined && <CountBadge>{count}</CountBadge>}
     </ItemWrapper>
   )
