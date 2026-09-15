@@ -80,16 +80,20 @@ const EntryCarousel = ({ autoPlay = false }) => {
   // remount (swiping to photo 3 in the peek then opening the drawer keeps
   // photo 3). Clamp defensively in case the photo set shrank.
   const selectedItem = Math.min(carouselIndex, allReviewPhotos.length - 1)
+  const hasMultiple = allReviewPhotos.length > 1
 
   return (
     <Carousel
       selectedItem={selectedItem}
       onChange={(index) => dispatch(setCarouselIndex(index))}
       onClickItem={onClickCarousel}
-      showIndicators={allReviewPhotos.length > 1}
-      // Autoplay only in the fully-open pane, never in the peek.
-      autoPlay={autoPlay && allReviewPhotos.length > 1}
-      infiniteLoop={autoPlay && allReviewPhotos.length > 1}
+      showIndicators={hasMultiple}
+      // Autoplay only in the fully-open pane, never in the peek. `infiniteLoop`
+      // is kept independent of `autoPlay`: it changes the slide layout (adds
+      // clone slides), so toggling it when the save/report overlay opens would
+      // make the image jump and show a blank clone slot at the last photo.
+      autoPlay={autoPlay && hasMultiple}
+      infiniteLoop={hasMultiple}
       interval={5000}
       stopOnHover
     >
