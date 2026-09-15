@@ -89,13 +89,13 @@ const TextContent = styled.article`
   }
 `
 
-const ImageContents = ({ isLoading }) =>
+const ImageContents = ({ isLoading, autoPlay }) =>
   isLoading ? (
     <Skeleton height={ENTRY_IMAGE_HEIGHT} />
   ) : (
     <>
       <Lightbox />
-      <Carousel />
+      <Carousel autoPlay={autoPlay} />
     </>
   )
 
@@ -126,11 +126,12 @@ const LocationContent = ({
       {hasImages &&
         (sheetMode ? (
           <RevealedImage progress={progress}>
-            <ImageContents isLoading={isLoading} />
+            {/* No autoplay in the peek: the sheet is a static summary. */}
+            <ImageContents isLoading={isLoading} autoPlay={false} />
           </RevealedImage>
         ) : (
           <ImageBlock>
-            <ImageContents isLoading={isLoading} />
+            <ImageContents isLoading={isLoading} autoPlay />
           </ImageBlock>
         ))}
       {sheetMode && hasReviews && (

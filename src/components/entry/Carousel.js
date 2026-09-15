@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 import {
   openLightbox,
   selectReviewsWithPhotos,
+  setCarouselIndex,
 } from '../../redux/locationSlice'
 
 const Carousel = styled(ResponsiveCarousel)`
@@ -54,9 +55,10 @@ Carousel.defaultProps = {
   useKeyboardArrows: true,
 }
 
-const EntryCarousel = () => {
+const EntryCarousel = ({ autoPlay = false }) => {
   const dispatch = useDispatch()
   const reviewsWithPhotos = useSelector(selectReviewsWithPhotos)
+  const carouselIndex = useSelector((state) => state.location.carouselIndex)
 
   const lightboxIndices = reviewsWithPhotos
     .map((review, ri) => review.photos.map((_, pi) => [ri, pi]))
@@ -74,10 +76,22 @@ const EntryCarousel = () => {
     return null
   }
 
+  // The selected slide is kept in Redux so it survives the sheet -> full-page
+  // remount (swiping to photo 3 in the peek then opening the drawer keeps
+  // photo 3). Clamp defensively in case the photo set shrank.
+  const selectedItem = Math.min(carouselIndex, allReviewPhotos.length - 1)
+
   return (
     <Carousel
+      selectedItem={selectedItem}
+      onChange={(index) => dispatch(setCarouselIndex(index))}
       onClickItem={onClickCarousel}
       showIndicators={allReviewPhotos.length > 1}
+      // Autoplay only in the fully-open pane, never in the peek.
+      autoPlay={autoPlay && allReviewPhotos.length > 1}
+      infiniteLoop={autoPlay && allReviewPhotos.length > 1}
+      interval={5000}
+      stopOnHover
     >
       {allReviewPhotos.map((photo) => (
         <img key={photo.id} src={photo.medium} alt="" />

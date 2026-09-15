@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { zIndex } from '../ui/GlobalStyle'
@@ -74,6 +75,11 @@ const LocationSheet = ({
   const [startY, setStartY] = useState(0)
   const [startTranslateY, setStartTranslateY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(getViewportHeight)
+
+  // The photo lightbox is a full-screen Dialog portaled to <body>, i.e.
+  // outside this sheet's DOM. While it is open its clicks must not be treated
+  // as taps "outside" the sheet (which would dismiss the drawer to the map).
+  const lightboxOpen = useSelector((state) => state.location.lightbox.isOpen)
 
   const getSnapTranslateY = useCallback(
     (pos, height = viewportHeight) => {
@@ -233,6 +239,12 @@ const LocationSheet = ({
   // Tap outside the sheet while at MIDDLE dismisses it back to the map.
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Ignore clicks while the lightbox is open: it is a full-screen Dialog
+      // rendered outside the sheet, so its close/backdrop clicks would
+      // otherwise look like taps on the map and dismiss the drawer.
+      if (lightboxOpen) {
+        return
+      }
       if (
         sheetRef.current &&
         !sheetRef.current.contains(event.target) &&
@@ -253,7 +265,7 @@ const LocationSheet = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [inferCurrentPosition, onPositionChange])
+  }, [inferCurrentPosition, onPositionChange, lightboxOpen])
 
   return (
     <SheetContainer
