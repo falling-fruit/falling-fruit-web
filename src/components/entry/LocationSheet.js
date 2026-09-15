@@ -76,6 +76,13 @@ const LocationSheet = ({
   const [startTranslateY, setStartTranslateY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(getViewportHeight)
 
+  // Tracks the most recent pointer samples so we can estimate the release
+  // velocity (a "flick") in handleEnd. A fast upward flick promotes the sheet
+  // one snap position further than its resting position would suggest, so a
+  // short-but-quick swipe is recognised even if the finger lifts before the
+  // sheet has physically travelled past the distance threshold.
+  const lastSamplesRef = useRef([])
+
   // The photo lightbox is a full-screen Dialog portaled to <body>, i.e.
   // outside this sheet's DOM. While it is open its clicks must not be treated
   // as taps "outside" the sheet (which would dismiss the drawer to the map).
@@ -183,6 +190,7 @@ const LocationSheet = ({
     setIsDragging(true)
     setStartY(clientY)
     setStartTranslateY(sheetRef.current.getBoundingClientRect().top)
+    lastSamplesRef.current = [{ y: clientY, t: performance.now() }]
   }
 
   const handleMove = (clientY) => {
@@ -192,6 +200,49 @@ const LocationSheet = ({
     const deltaY = clientY - startY
     const newTranslateY = Math.max(0, startTranslateY + deltaY)
     movePane('none', newTranslateY)
+
+    // Keep a short window of recent samples for velocity estimation. Two is
+    // enough to compute the release velocity while staying robust to a single
+    // jittery event.
+    const samples = lastSamplesRef.current
+    samples.push({ y: clientY, t: performance.now() })
+    if (samples.length > 3) {
+      samples.shift()
+    }
+  }
+
+  // Estimate the vertical release velocity in px/ms from the recent samples.
+  // Negative means moving upward (towards fully-open).
+  const getReleaseVelocity = () => {
+    const samples = lastSamplesRef.current
+    if (samples.length < 2) {
+      return 0
+    }
+    const first = samples[0]
+    const last = samples[samples.length - 1]
+    const dt = last.t - first.t
+    if (dt <= 0) {
+      return 0
+    }
+    return (last.y - first.y) / dt
+  }
+
+  // px/ms. A clean, quick swipe comfortably exceeds this; a slow deliberate
+  // drag stays under it and falls back to nearest-position snapping.
+  const FLICK_VELOCITY_THRESHOLD = 0.5
+
+  // Return the next snap position one step in the given direction.
+  const stepPosition = (from, direction) => {
+    const order = ['top', POSITIONS.MIDDLE, POSITIONS.LOW, POSITIONS.BOTTOM]
+    const index = order.indexOf(from)
+    if (index === -1) {
+      return from
+    }
+    const nextIndex = Math.min(
+      order.length - 1,
+      Math.max(0, index + (direction === 'up' ? -1 : 1)),
+    )
+    return order[nextIndex]
   }
 
   const handleEnd = () => {
@@ -199,7 +250,18 @@ const LocationSheet = ({
       return
     }
     setIsDragging(false)
-    const newPosition = inferCurrentPosition()
+    const restingPosition = inferCurrentPosition()
+
+    // A fast flick promotes the sheet one step in the direction of travel,
+    // even if it did not physically reach the next snap point's threshold.
+    // Slow drags keep the existing nearest-position behaviour.
+    const velocity = getReleaseVelocity()
+    let newPosition = restingPosition
+    if (velocity <= -FLICK_VELOCITY_THRESHOLD) {
+      newPosition = stepPosition(restingPosition, 'up')
+    } else if (velocity >= FLICK_VELOCITY_THRESHOLD) {
+      newPosition = stepPosition(restingPosition, 'down')
+    }
 
     if (newPosition === 'top') {
       // Animate the rest of the way to the top, then hand off to the full
