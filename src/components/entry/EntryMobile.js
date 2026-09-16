@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import {
+  ENTRY_IMAGE_HEIGHT_PX,
+  NAVIGATION_BAR_HEIGHT_PX,
+} from '../../constants/mobileLayout'
 import { useAppHistory } from '../../utils/useAppHistory'
 import LocationContent from './LocationContent'
 import LocationFullPage from './LocationFullPage'
@@ -10,9 +14,6 @@ import TopButtonsMobile from './TopButtonsMobile'
 import useLocationPane from './useLocationPane'
 
 const MIDDLE_SCREEN_RATIO = 0.7
-const LOW_PEEK_HEIGHT_PX = 80
-const ENTRY_IMAGE_HEIGHT = 250
-const TOP_BAR_HEIGHT = 80
 
 const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
   Math.max(
@@ -70,7 +71,7 @@ const EntryMobile = () => {
     wasFullyOpenRef.current = drawerFullyOpen
   })
 
-  const offset = hasImages ? ENTRY_IMAGE_HEIGHT : TOP_BAR_HEIGHT
+  const offset = hasImages ? ENTRY_IMAGE_HEIGHT_PX : NAVIGATION_BAR_HEIGHT_PX
   const [currentTranslateY, setCurrentTranslateY] = useState(
     () => window.innerHeight * MIDDLE_SCREEN_RATIO,
   )
@@ -124,7 +125,7 @@ const EntryMobile = () => {
     <LocationSheet
       displayOverTopBar={!filterOpen}
       middlePositionScreenRatio={MIDDLE_SCREEN_RATIO}
-      partialPositionHeightPx={LOW_PEEK_HEIGHT_PX + safeAreaInsetBottom}
+      partialPositionHeightPx={NAVIGATION_BAR_HEIGHT_PX + safeAreaInsetBottom}
       position={drawerLow ? 'low' : 'middle'}
       onRequestFullyOpen={fullyOpenPaneDrawer}
       onChangeTranslateY={setCurrentTranslateY}

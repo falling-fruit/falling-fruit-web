@@ -4,6 +4,7 @@ import styled from 'styled-components/macro'
 
 import {
   DRAG_HANDLE_HEIGHT_PX,
+  ENTRY_IMAGE_HEIGHT_PX,
   TABS_HEIGHT_PX,
 } from '../../constants/mobileLayout'
 import { CardTabs, Tab, TabList, TabPanel, TabPanels } from './CardTabs'
@@ -12,8 +13,6 @@ import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 import Lightbox from './lightbox/Lightbox'
 import useLocationPane from './useLocationPane'
-
-const ENTRY_IMAGE_HEIGHT = 250
 
 const EntryLoading = () => (
   <article style={{ padding: '20px 23px', boxSizing: 'border-box' }}>
@@ -51,8 +50,10 @@ const RevealedImage = styled.div`
   width: 100%;
   position: absolute;
   top: 0;
-  height: ${ENTRY_IMAGE_HEIGHT}px;
-  transform: translateY(${({ progress }) => -progress * ENTRY_IMAGE_HEIGHT}px);
+  height: ${ENTRY_IMAGE_HEIGHT_PX}px;
+  transform: translateY(
+    ${({ progress }) => -progress * ENTRY_IMAGE_HEIGHT_PX}px
+  );
   transition: transform 0.15s linear;
   z-index: -1;
 `
@@ -83,7 +84,7 @@ const TextContent = styled.article`
 
 const ImageContents = ({ isLoading, autoPlay }) =>
   isLoading ? (
-    <Skeleton height={ENTRY_IMAGE_HEIGHT} />
+    <Skeleton height={ENTRY_IMAGE_HEIGHT_PX} />
   ) : (
     <>
       <Lightbox />
@@ -141,13 +142,13 @@ const LocationContent = ({
             <TextContent>
               <EntryOverview />
             </TextContent>
-            {sheetMode && <DummyScrollSpacer height={ENTRY_IMAGE_HEIGHT} />}
+            {sheetMode && <DummyScrollSpacer height={ENTRY_IMAGE_HEIGHT_PX} />}
           </TabPanel>
           <TabPanel>
             <TextContent>
               <EntryReviews />
             </TextContent>
-            {sheetMode && <DummyScrollSpacer height={ENTRY_IMAGE_HEIGHT} />}
+            {sheetMode && <DummyScrollSpacer height={ENTRY_IMAGE_HEIGHT_PX} />}
           </TabPanel>
         </TabPanels>
       </CardTabs>
