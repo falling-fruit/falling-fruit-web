@@ -1,5 +1,4 @@
 import { setOptions } from '@googlemaps/js-api-loader'
-import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,12 +29,20 @@ import Place from './Place'
 import TrackLocationButton from './TrackLocationButton'
 import useCreateGoogleMap from './useCreateGoogleMap'
 
-setOptions({
-  key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  v: 'quarterly',
-  libraries: ['places', 'geometry'],
-  language: i18next.language,
-})
+let googleMapsLoaderConfigured = false
+const configureGoogleMapsLoader = (language) => {
+  if (googleMapsLoaderConfigured) {
+    return
+  }
+  setOptions({
+    key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    v: 'quarterly',
+    libraries: ['places', 'geometry'],
+    language,
+    region: 'CH',
+  })
+  googleMapsLoaderConfigured = true
+}
 
 const BottomLeftLoadingIndicator = styled(LoadingIndicator)`
   position: absolute;
@@ -293,6 +300,8 @@ const getVisibleLocations = (
 const MapPage = ({ isDesktop }) => {
   const { i18n } = useTranslation()
   const isRTL = i18n.dir() === 'rtl'
+
+  configureGoogleMapsLoader(i18n.language)
   const history = useAppHistory()
   const dispatch = useDispatch()
   const idleListenerRef = useRef(null)
