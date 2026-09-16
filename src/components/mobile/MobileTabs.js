@@ -38,6 +38,10 @@ const PageTabs = styled(Tabs)`
     }
   }
 
+  #root.auto-height & .page-tab-panels[data-reach-tab-panels] {
+    overflow: visible;
+  }
+
   .page-tab-list[data-reach-tab-list] {
     display: flex;
     height: ${TABS_HEIGHT_PX}px;
