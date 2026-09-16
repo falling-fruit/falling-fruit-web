@@ -536,6 +536,7 @@ const MapPage = ({ isDesktop }) => {
       )}
 
       <ZoomInButton
+        className="map-zoom-button"
         onClick={zoomIn}
         disabled={
           !googleMap ||
@@ -547,6 +548,7 @@ const MapPage = ({ isDesktop }) => {
         +
       </ZoomInButton>
       <ZoomOutButton
+        className="map-zoom-button"
         onClick={zoomOut}
         disabled={!googleMap || !currentZoom || currentZoom <= MIN_ZOOM}
         isDesktop={isDesktop}

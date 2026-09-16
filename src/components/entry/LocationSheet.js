@@ -268,12 +268,8 @@ const LocationSheet = ({
     }
   }, [isDragging]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Tap outside the sheet while at MIDDLE dismisses it back to the map.
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Ignore clicks while the lightbox is open: it is a full-screen Dialog
-      // rendered outside the sheet, so its close/backdrop clicks would
-      // otherwise look like taps on the map and dismiss the drawer.
       if (lightboxOpen) {
         return
       }
@@ -284,7 +280,7 @@ const LocationSheet = ({
       ) {
         const isAnotherLocation = event.target.tagName.toLowerCase() === 'img'
         const isMapControl = event.target.closest(
-          '.gm-svpc, .gm-control-active, .gmnoprint',
+          '.gm-svpc, .gm-control-active, .gmnoprint, .map-zoom-button',
         )
         if (!isAnotherLocation && !isMapControl) {
           event.stopPropagation()

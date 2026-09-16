@@ -16,9 +16,6 @@ export const ReviewButton = (props) => {
     <Button
       leftIcon={<Star />}
       onClick={() => {
-        // On mobile, open the drawer first so returning from the review form
-        // (which pushes back to /locations/:id) lands on the full drawer
-        // rather than the half-open sheet.
         fullyOpenPaneDrawerIfMobile()
         history.push(`/locations/${locationId}/review`)
       }}

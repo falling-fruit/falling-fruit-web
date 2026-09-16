@@ -18,8 +18,6 @@ const useLocationPane = () => {
   const drawerFullyOpen = isEmbed || paneParam === 'full'
   const drawerLow = !isEmbed && paneParam === 'low'
   const tabIndex = drawerFullyOpen && tabParam === '1' ? 1 : 0
-  // The save-to-list dropdown open flag lives in the URL so it survives the
-  // sheet -> full-page remount that happens when opening the drawer.
   const saveDropdownOpen = saveParam === 'true'
   const reportModalOpen = reportParam === 'true'
 
@@ -70,7 +68,6 @@ const useLocationPane = () => {
       setParams(
         newPaneValue,
         isLeavingFullyOpen ? null : tabIndex === 0 ? null : tabIndex,
-        // Closing/collapsing the drawer also closes the save dropdown.
         newPaneValue === 'full' ? saveDropdownOpen : false,
       )
     },
@@ -102,8 +99,6 @@ const useLocationPane = () => {
     [setParams, paneParam, saveDropdownOpen],
   )
 
-  // Open the save-to-list dropdown. On mobile this also fully opens the
-  // drawer, and the flag is encoded in the URL so it survives the remount.
   const openSaveDropdown = useCallback(() => {
     const nextPane = isDesktop ? paneParam : 'full'
     setParams(nextPane, tabIndex === 0 ? null : tabIndex, true)
@@ -113,8 +108,6 @@ const useLocationPane = () => {
     setParams(paneParam, tabIndex === 0 ? null : tabIndex, false)
   }, [setParams, paneParam, tabIndex])
 
-  // Open the report modal. On mobile this also fully opens the drawer, in a
-  // single navigation so neither param clobbers the other.
   const openReportModal = useCallback(() => {
     const next = new URLSearchParams(search)
     next.set('report', 'true')

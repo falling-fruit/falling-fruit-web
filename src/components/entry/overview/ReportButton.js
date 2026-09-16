@@ -43,8 +43,6 @@ export const ReportButton = () => {
           defaultComment={defaultComment}
         />
       )}
-      {/* Opens the report modal; on mobile also fully opens the drawer, in a
-          single navigation. */}
       <Button leftIcon={<Flag />} secondary onClick={openReportModal}>
         {t('form.button.report')}
       </Button>

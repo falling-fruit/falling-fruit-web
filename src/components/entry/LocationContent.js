@@ -47,8 +47,6 @@ const ImageBlock = styled.div`
   flex-shrink: 0;
 `
 
-// In sheet mode the image is pulled up out of the peek as the sheet is
-// lowered, revealing the overview beneath it.
 const RevealedImage = styled.div`
   width: 100%;
   position: absolute;
@@ -62,16 +60,12 @@ const RevealedImage = styled.div`
 const WhitespacePlaceholder = styled.div`
   width: 100%;
   background: white;
-  // At full reveal, drag handle + placeholder equals the tab ribbon height so
-  // the body lines up with the full page.
   height: ${({ progress }) =>
     progress * (TABS_HEIGHT_PX - DRAG_HANDLE_HEIGHT_PX)}px;
   transition: transform 0.15s linear;
   ${({ hidden }) => hidden && `display: none;`}
 `
 
-// Workaround for ScrollablePane's translateY hiding content (e.g. reviews tab):
-// add a spacer of the same height. Only needed in sheet reveal mode.
 const DummyScrollSpacer = styled.div`
   height: ${({ height }) => height}px;
 `
@@ -112,7 +106,6 @@ const LocationContent = ({
   const { t } = useTranslation()
   const { saveDropdownOpen, reportModalOpen } = useLocationPane()
 
-  // No autoplay while the save dropdown or report modal overlays the content.
   const carouselAutoPlay = !saveDropdownOpen && !reportModalOpen
 
   return (
