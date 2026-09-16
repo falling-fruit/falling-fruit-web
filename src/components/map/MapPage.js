@@ -229,7 +229,13 @@ const createOverlayLayers = (maps, map, layerTypes) =>
     })
     .filter(Boolean)
 
-const configurePanoramaControls = (googleMap, showPegman, isDesktop) => {
+const configurePanoramaControls = (
+  googleMap,
+  showPegman,
+  isDesktop,
+  maps,
+  isRTL,
+) => {
   googleMap.setOptions({ streetViewControl: showPegman })
 
   const panorama = googleMap.getStreetView()
@@ -240,6 +246,12 @@ const configurePanoramaControls = (googleMap, showPegman, isDesktop) => {
       addressControl: false,
       motionTracking: false,
       motionTrackingControl: true,
+      zoomControl: true,
+      zoomControlOptions: maps && {
+        position: isRTL
+          ? maps.ControlPosition.RIGHT_CENTER
+          : maps.ControlPosition.LEFT_CENTER,
+      },
     })
   }
 }
@@ -425,14 +437,15 @@ const MapPage = ({ isDesktop }) => {
       : LabelVisibility.shouldShowLabels(labelVisibility, currentZoom))
 
   useEffect(() => {
-    if (!googleMap) {
+    if (!googleMap || !getGoogleMaps) {
       return
     }
+    const maps = getGoogleMaps()
     const zoom = googleMap.getZoom()
     const zoomOk = zoom == null || zoom > VISIBLE_CLUSTER_ZOOM_LIMIT
     const showPegman = zoomOk && geometryReady
-    configurePanoramaControls(googleMap, showPegman, isDesktop)
-  }, [googleMap, currentZoom, isDesktop, geometryReady])
+    configurePanoramaControls(googleMap, showPegman, isDesktop, maps, isRTL)
+  }, [googleMap, getGoogleMaps, currentZoom, isDesktop, geometryReady, isRTL])
 
   const isEmbed = useIsEmbed()
 
