@@ -9,7 +9,6 @@ import { toast } from 'react-toastify'
 import { getImportById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { formatISOString } from '../entry/textFormatters'
-import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import { PageHeader } from '../ui/Headers'
 import IconBesideText from '../ui/IconBesideText'
@@ -51,8 +50,7 @@ const AboutDatasetPage = () => {
     importData
 
   return (
-    <Page>
-      <BackButton />
+    <Page showBackButton>
       {isLoading ? (
         <>
           <PageHeader>
