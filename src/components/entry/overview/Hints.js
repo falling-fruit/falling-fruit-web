@@ -142,7 +142,7 @@ export const StaleLocationHintToggle = ({
 export const StaleLocationHintActions = ({ locationData }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
-  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+  const { fullyOpenPaneDrawerIfMobile, openReportModal } = useLocationPane()
 
   const comment = t(
     'locations.hints.report_comment_placeholder_no_longer_exists',
@@ -167,8 +167,7 @@ export const StaleLocationHintActions = ({ locationData }) => {
       </HintAction>
       <HintAction
         onClick={() => {
-          fullyOpenPaneDrawerIfMobile()
-          history.addParam('report', 'true', {
+          openReportModal({
             problem_code: 1,
             comment: comment,
             focus: 'comment',
@@ -205,7 +204,7 @@ export const UnverifiedHintActions = ({ locationData }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
-  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+  const { fullyOpenPaneDrawerIfMobile, openReportModal } = useLocationPane()
   const isLoggedIn = useSelector((state) => !!state.auth.user)
   const recaptchaRef = useRef(null)
 
@@ -271,8 +270,7 @@ export const UnverifiedHintActions = ({ locationData }) => {
       </HintAction>
       <HintAction
         onClick={() => {
-          fullyOpenPaneDrawerIfMobile()
-          history.addParam('report', 'true', {
+          openReportModal({
             problem_code: 1,
           })
         }}

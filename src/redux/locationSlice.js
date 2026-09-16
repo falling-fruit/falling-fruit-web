@@ -31,6 +31,7 @@ const initialState = {
     reviewIndex: null,
     photoIndex: null,
   },
+  carouselIndex: 0,
   isBeingInitializedMobile: false,
 }
 
@@ -141,6 +142,9 @@ const locationSlice = createSlice({
       state.lightbox.reviewIndex = action.payload.reviewIndex
       state.lightbox.photoIndex = action.payload.photoIndex
     },
+    setCarouselIndex: (state, action) => {
+      state.carouselIndex = action.payload
+    },
     setFromSettings: (state, action) => {
       state.fromSettings = action.payload
     },
@@ -162,6 +166,7 @@ const locationSlice = createSlice({
       state.tooltipOpen = action.meta.arg.isBeingEdited
       state.inList = false
       state.lastUpdatedDate = null
+      state.carouselIndex = 0
     },
     [fetchLocationData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -324,6 +329,7 @@ export const {
   openLightbox,
   closeLightbox,
   setLightboxIndices,
+  setCarouselIndex,
   setFromSettings,
   setIsBeingInitializedMobile,
 } = locationSlice.actions

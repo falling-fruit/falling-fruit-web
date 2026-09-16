@@ -52,7 +52,7 @@ export const CardTabs = styled(Tabs)`
 
     .card-tab-panel[data-reach-tab-panel] {
       flex: 1;
-      overflow: auto;
+      overflow: ${({ $sheetMode }) => ($sheetMode ? 'hidden' : 'auto')};
     }
   }
 `

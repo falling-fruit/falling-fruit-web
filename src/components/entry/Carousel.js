@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 import {
   openLightbox,
   selectReviewsWithPhotos,
+  setCarouselIndex,
 } from '../../redux/locationSlice'
 
 const Carousel = styled(ResponsiveCarousel)`
@@ -54,9 +55,10 @@ Carousel.defaultProps = {
   useKeyboardArrows: true,
 }
 
-const EntryCarousel = () => {
+const EntryCarousel = ({ autoPlay = false }) => {
   const dispatch = useDispatch()
   const reviewsWithPhotos = useSelector(selectReviewsWithPhotos)
+  const carouselIndex = useSelector((state) => state.location.carouselIndex)
 
   const lightboxIndices = reviewsWithPhotos
     .map((review, ri) => review.photos.map((_, pi) => [ri, pi]))
@@ -74,10 +76,18 @@ const EntryCarousel = () => {
     return null
   }
 
+  const hasMultiple = allReviewPhotos.length > 1
+
   return (
     <Carousel
+      selectedItem={carouselIndex}
+      onChange={(index) => dispatch(setCarouselIndex(index))}
       onClickItem={onClickCarousel}
-      showIndicators={allReviewPhotos.length > 1}
+      showIndicators={hasMultiple}
+      autoPlay={autoPlay && hasMultiple}
+      infiniteLoop={hasMultiple}
+      interval={5000}
+      stopOnHover
     >
       {allReviewPhotos.map((photo) => (
         <img key={photo.id} src={photo.medium} alt="" />
