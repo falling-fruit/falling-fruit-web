@@ -24,6 +24,10 @@ const LanguageContainer = styled.div`
 const PageScrollWrapper = styled.div`
   width: 100%;
   overflow-y: auto;
+
+  #root.auto-height & {
+    overflow-y: visible;
+  }
 `
 
 const TopSafeAreaInsetPageScrollWrapper = styled(PageScrollWrapper)`
