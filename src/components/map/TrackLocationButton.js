@@ -6,10 +6,10 @@ import { keyframes } from 'styled-components'
 import styled from 'styled-components/macro'
 
 import {
-  disableGeolocation,
   GeolocationState,
   requestGeolocation,
   rerequestGeolocation,
+  stopGeolocation,
 } from '../../redux/geolocationSlice'
 import IconButton from '../ui/IconButton'
 
@@ -39,9 +39,6 @@ const getCursorStyle = (geolocationState, disabled) => {
   }
   if (geolocationState === GeolocationState.DENIED) {
     return 'help'
-  }
-  if (geolocationState === GeolocationState.LOADING) {
-    return 'wait'
   }
   return 'pointer'
 }
@@ -120,11 +117,11 @@ const TrackLocationButton = ({ isIcon, disabled }) => {
         } else if (geolocationState === GeolocationState.DOT_ON) {
           dispatch(rerequestGeolocation())
         } else {
-          dispatch(disableGeolocation())
+          dispatch(stopGeolocation())
         }
         event.stopPropagation()
       }}
-      disabled={disabled || geolocationState === GeolocationState.LOADING}
+      disabled={disabled}
     />
   )
 }
