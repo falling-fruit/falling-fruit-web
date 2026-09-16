@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import LoadingIndicator, { LoadingOverlay } from '../ui/LoadingIndicator'
+import LoadingIndicator from '../ui/LoadingIndicator'
 import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
@@ -20,13 +20,9 @@ const TextContent = styled.article`
 `
 
 const EntryDesktop = () => {
-  const {
-    location: locationData,
-    reviews,
-    isLoading,
-  } = useSelector((state) => state.location)
+  const { reviews, isLoading } = useSelector((state) => state.location)
 
-  if (!locationData) {
+  if (isLoading) {
     return <LoadingIndicator cover vertical />
   }
 
@@ -42,7 +38,6 @@ const EntryDesktop = () => {
           <EntryReviews />
         </TextContent>
       )}
-      {isLoading && <LoadingOverlay />}
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { Book, Calendar } from '@styled-icons/boxicons-regular'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -12,7 +13,6 @@ import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import { PageHeader } from '../ui/Headers'
 import IconBesideText from '../ui/IconBesideText'
-import { LoadingOverlay } from '../ui/LoadingIndicator'
 import { Page } from '../ui/PageTemplate'
 
 const UserProfile = () => {
@@ -46,10 +46,6 @@ const UserProfile = () => {
     fetchUserData()
   }, [userId]) //eslint-disable-line
 
-  if (isLoading) {
-    return <LoadingOverlay />
-  }
-
   const { created_at, name, bio } = userData
   const displayName = name || `#${userId}`
 
@@ -58,28 +54,57 @@ const UserProfile = () => {
       <BackButton
         backPath={locationId ? `/locations/${locationId}` : '/changes'}
       />
-      <PageHeader>{t('users.profile.title', { name: displayName })}</PageHeader>
-      {bio && (
-        <p dir="auto" style={{ whiteSpace: 'pre-line' }}>
-          {bio}
-        </p>
+      {isLoading ? (
+        <>
+          <PageHeader>
+            <Skeleton width="12em" />
+          </PageHeader>
+          <p>
+            <Skeleton count={2} width="80%" />
+          </p>
+          <IconBesideText>
+            <Calendar color={theme.secondaryText} size={20} />
+            <p>
+              <Skeleton width="10em" />
+            </p>
+          </IconBesideText>
+          <IconBesideText>
+            <Book color={theme.secondaryText} size={20} />
+            <p>
+              <Skeleton width="6em" />
+            </p>
+          </IconBesideText>
+        </>
+      ) : (
+        <>
+          <PageHeader>
+            {t('users.profile.title', { name: displayName })}
+          </PageHeader>
+          {bio && (
+            <p dir="auto" style={{ whiteSpace: 'pre-line' }}>
+              {bio}
+            </p>
+          )}
+          <IconBesideText>
+            <Calendar color={theme.secondaryText} size={20} />
+            <p>
+              <time dateTime={created_at}>
+                {t('users.joined_on', {
+                  date: formatISOString(created_at, i18n.language),
+                })}
+              </time>
+            </p>
+          </IconBesideText>
+          <IconBesideText>
+            <Book color={theme.secondaryText} size={20} />
+            <p>
+              <Link to={`/users/${userId}/activity`}>
+                {t('glossary.activity')}
+              </Link>
+            </p>
+          </IconBesideText>
+        </>
       )}
-      <IconBesideText>
-        <Calendar color={theme.secondaryText} size={20} />
-        <p>
-          <time dateTime={created_at}>
-            {t('users.joined_on', {
-              date: formatISOString(created_at, i18n.language),
-            })}
-          </time>
-        </p>
-      </IconBesideText>
-      <IconBesideText>
-        <Book color={theme.secondaryText} size={20} />
-        <p>
-          <Link to={`/users/${userId}/activity`}>{t('glossary.activity')}</Link>
-        </p>
-      </IconBesideText>
     </Page>
   )
 }
