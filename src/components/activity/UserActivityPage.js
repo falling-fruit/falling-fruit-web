@@ -12,7 +12,6 @@ import {
 } from '../../redux/activitySlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { BackButton } from '../ui/ActionButtons'
 import { PageHeader } from '../ui/Headers'
 import { Page } from '../ui/PageTemplate'
 import { createActivityDiary } from './ActivityDiary'
@@ -75,10 +74,6 @@ const UserActivityContent = ({ changes, userId }) => {
     </>
   )
 }
-
-const StyledBackButton = styled(BackButton)`
-  margin-bottom: 23px;
-`
 
 const UserActivityPage = () => {
   const dispatch = useDispatch()
@@ -149,13 +144,10 @@ const UserActivityPage = () => {
   const showBackButton = !(isDesktop && isCurrentUser)
 
   return (
-    <Page>
-      {showBackButton && (
-        <StyledBackButton
-          backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
-        />
-      )}
-
+    <Page
+      backPath={isCurrentUser ? '/account/edit' : `/users/${userId}`}
+      showBackButton={showBackButton}
+    >
       {isLoading ? (
         <Skeleton width="15em" height={30} style={{ marginBottom: '1em' }} />
       ) : (

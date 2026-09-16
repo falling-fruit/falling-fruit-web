@@ -173,12 +173,39 @@ const StyledBackButton = styled(BackButton)`
   padding-block: 1.5em;
 `
 
-const Page = ({ children }) => {
+const StickyBackHeader = ({ backPath }) => (
+  <StickyHeader>
+    <SafeAreaInset />
+    <StyledBackButton backPath={backPath} />
+  </StickyHeader>
+)
+
+const NoTopMarginPageWrapper = styled(PageWrapper)`
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
+    margin-block: 0;
+  `}
+`
+
+const InlineBackButton = styled(BackButton)`
+  margin-block-end: 23px;
+`
+
+const Page = ({ children, backPath, showBackButton }) => {
   const isDesktop = useIsDesktop()
+  const hasBackButton = showBackButton ?? backPath !== undefined
+
+  const Wrapper =
+    hasBackButton && !isDesktop ? NoTopMarginPageWrapper : PageWrapper
 
   return (
     <PageScrollWrapper>
-      <PageWrapper isDesktop={isDesktop}>{children}</PageWrapper>
+      {hasBackButton && !isDesktop && <StickyBackHeader backPath={backPath} />}
+      <Wrapper isDesktop={isDesktop}>
+        {hasBackButton && isDesktop && <InlineBackButton backPath={backPath} />}
+        {children}
+      </Wrapper>
     </PageScrollWrapper>
   )
 }
@@ -203,12 +230,9 @@ const InfoPage = ({ children }) => {
   return (
     <PageScrollWrapper>
       {!isDesktop && (
-        <StickyHeader>
-          <SafeAreaInset />
-          <StyledBackButton
-            backPath={user ? '/account/edit' : '/about/welcome'}
-          />
-        </StickyHeader>
+        <StickyBackHeader
+          backPath={user ? '/account/edit' : '/about/welcome'}
+        />
       )}
       <InfoPageWrapper isDesktop={isDesktop}>{children}</InfoPageWrapper>
     </PageScrollWrapper>

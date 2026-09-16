@@ -25,7 +25,6 @@ import {
 } from '../../redux/saveSlice'
 import { viewToString } from '../../utils/appUrl'
 import { useIsDesktop } from '../../utils/useBreakpoint'
-import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import { PageHeader } from '../ui/Headers'
 import Input from '../ui/Input'
@@ -459,8 +458,7 @@ const SavedLocationsPage = () => {
   }, [lastViewedListId, dispatch])
 
   return (
-    <Page>
-      {!isDesktop && <BackButton backPath="/account/edit" />}
+    <Page backPath="/account/edit" showBackButton={!isDesktop}>
       <PageHeader>
         {t('save_location_to_list.saved_locations_title')}
       </PageHeader>

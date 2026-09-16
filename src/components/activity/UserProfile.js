@@ -9,7 +9,6 @@ import { toast } from 'react-toastify'
 import { getUserById } from '../../utils/api'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { formatISOString } from '../entry/textFormatters'
-import { BackButton } from '../ui/ActionButtons'
 import { theme } from '../ui/GlobalStyle'
 import { PageHeader } from '../ui/Headers'
 import IconBesideText from '../ui/IconBesideText'
@@ -50,10 +49,7 @@ const UserProfile = () => {
   const displayName = name || `#${userId}`
 
   return (
-    <Page>
-      <BackButton
-        backPath={locationId ? `/locations/${locationId}` : '/changes'}
-      />
+    <Page backPath={locationId ? `/locations/${locationId}` : '/changes'}>
       {isLoading ? (
         <>
           <PageHeader>
