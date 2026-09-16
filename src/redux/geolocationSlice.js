@@ -34,7 +34,7 @@ const geolocationSlice = createSlice({
     geolocationDenied: (state) => {
       state.geolocationState = GeolocationState.DENIED
     },
-    disableGeolocation: (state) => {
+    stopGeolocation: (state) => {
       state.geolocationState = GeolocationState.INITIAL
       state.geolocation = null
       state.centerPoint = null
@@ -150,7 +150,7 @@ export const {
   geolocationFollowing,
   geolocationError,
   geolocationReceived,
-  disableGeolocation,
+  stopGeolocation,
   geolocationTracking,
 } = geolocationSlice.actions
 
