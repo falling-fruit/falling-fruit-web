@@ -1,6 +1,4 @@
-import { WindowSize } from '@reach/window-size'
 import { Route, Switch } from 'react-router-dom'
-import { Pane, SplitPane } from 'react-split-pane'
 import styled from 'styled-components/macro'
 
 import aboutRoutes from '../about/aboutRoutes'
@@ -12,11 +10,11 @@ import errorRoutes from '../error/errorRoutes'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePane from './SidePane'
+import SplitPane from './SplitPane'
 
-// Min and max pane width, in pixels
-const MIN_PANE_WIDTH = (_vw) => 200
-const MAX_PANE_WIDTH = (_vw) => 600
-const DEFAULT_PANE_WIDTH = (_vw) => 340
+const MIN_PANE_WIDTH = 200
+const MAX_PANE_WIDTH = 600
+const DEFAULT_PANE_WIDTH = 340
 
 const DesktopContainer = styled.div`
   display: flex;
@@ -24,26 +22,12 @@ const DesktopContainer = styled.div`
   height: 100%;
 `
 
-const StyledSplit = styled(SplitPane)`
-  position: relative !important;
+const SplitContainer = styled.div`
+  position: relative;
   flex: 1;
-
-  .Pane1 {
-    z-index: 1;
-    box-shadow: 2px 0px 8px ${({ theme }) => theme.shadow};
-  }
-
-  .split-pane-divider.horizontal {
-    width: 10px !important;
-    margin: 0 -5px;
-    cursor: col-resize;
-    z-index: 1;
-  }
 `
 
 const DesktopLayout = () => (
-  // Hack: must use WindowSize here because react-split-pane doesn't allow for
-  // a non-numerical maxSize like "21.5vw"
   <DesktopContainer>
     <Header />
     {connectRoutes}
@@ -54,22 +38,16 @@ const DesktopLayout = () => (
       {accountRoutes}
       {errorRoutes}
       <Route>
-        <WindowSize>
-          {({ width: vw }) => (
-            <StyledSplit direction="horizontal">
-              <Pane
-                minSize={MIN_PANE_WIDTH(vw)}
-                maxSize={MAX_PANE_WIDTH(vw)}
-                defaultSize={DEFAULT_PANE_WIDTH(vw)}
-              >
-                <SidePane />
-              </Pane>
-              <Pane>
-                <MapPage isDesktop />
-              </Pane>
-            </StyledSplit>
-          )}
-        </WindowSize>
+        <SplitContainer>
+          <SplitPane
+            minSize={MIN_PANE_WIDTH}
+            maxSize={MAX_PANE_WIDTH}
+            defaultSize={DEFAULT_PANE_WIDTH}
+          >
+            <SidePane />
+            <MapPage isDesktop />
+          </SplitPane>
+        </SplitContainer>
       </Route>
     </Switch>
   </DesktopContainer>
