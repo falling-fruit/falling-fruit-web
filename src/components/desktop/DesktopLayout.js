@@ -25,6 +25,7 @@ const DesktopContainer = styled.div`
 const SplitContainer = styled.div`
   position: relative;
   flex: 1;
+  min-height: 0;
 `
 
 const DesktopLayout = () => (
