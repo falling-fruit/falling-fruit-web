@@ -1,14 +1,12 @@
 import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components/macro'
 import * as Yup from 'yup'
 
 import { editProfile } from '../../redux/authSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { ErrorMessage } from '../auth/AuthWrappers'
 import { PasswordInput } from '../form/FormikWrappers'
-import { BackButton } from '../ui/ActionButtons'
 import FormButtons from '../ui/FormButtons'
 import { PageHeader } from '../ui/Headers'
 import LoadingIndicator from '../ui/LoadingIndicator'
@@ -25,10 +23,6 @@ const formToUser = ({ password, new_password }, user) => ({
   range: null,
   announcements_email: user.announcements_email,
 })
-
-const StyledBackButton = styled(BackButton)`
-  margin-bottom: 23px;
-`
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch()
@@ -47,8 +41,7 @@ const ChangePasswordPage = () => {
   }
 
   return (
-    <TopSafeAreaInsetPage>
-      <StyledBackButton backPath="/account/edit" />
+    <TopSafeAreaInsetPage backPath="/account/edit">
       <PageHeader>{t('users.change_password')}</PageHeader>
 
       {user ? (

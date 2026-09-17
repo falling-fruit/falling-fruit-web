@@ -206,6 +206,10 @@ const MobileLayout = () => {
                 path={[
                   '/users',
                   '/about/welcome',
+                  ...accountRoutes
+                    .map((route) => route.props.path)
+                    .filter((path) => path !== '/account/edit')
+                    .flat(),
                   ...aboutRoutes.map((route) => route.props.path).flat(),
                   ...activityRoutes.map((route) => route.props.path).flat(),
                   ...errorRoutes.map((route) => route.props.path).flat(),

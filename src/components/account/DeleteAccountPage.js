@@ -1,20 +1,14 @@
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components/macro'
 
 import { deleteAccount } from '../../redux/authSlice'
 import { useAppHistory } from '../../utils/useAppHistory'
-import { BackButton } from '../ui/ActionButtons'
 import Button from '../ui/Button'
 import FormButtons from '../ui/FormButtons'
 import { PageHeader } from '../ui/Headers'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import { TopSafeAreaInsetPage } from '../ui/PageTemplate'
 import withRedirectToAuth from './withRedirectToAuth'
-
-const StyledBackButton = styled(BackButton)`
-  margin-bottom: 23px;
-`
 
 const DeleteAccountPage = () => {
   const dispatch = useDispatch()
@@ -33,8 +27,7 @@ const DeleteAccountPage = () => {
   }
 
   return (
-    <TopSafeAreaInsetPage>
-      <StyledBackButton backPath="/account/edit" />
+    <TopSafeAreaInsetPage backPath="/account/edit">
       <PageHeader>{t('users.delete_account')}</PageHeader>
 
       {user ? (
