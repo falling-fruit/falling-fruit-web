@@ -210,15 +210,37 @@ const Page = ({ children, backPath, showBackButton }) => {
   )
 }
 
-const TopSafeAreaInsetPage = ({ children }) => {
+const NoTopMarginTopSafeAreaInsetPageWrapper = styled(
+  TopSafeAreaInsetPageWrapper,
+)`
+  ${({ isDesktop }) =>
+    !isDesktop &&
+    `
+    margin-block: 0;
+  `}
+`
+
+const TopSafeAreaInsetPage = ({ children, backPath, showBackButton }) => {
   const isDesktop = useIsDesktop()
+  const hasBackButton = showBackButton ?? backPath !== undefined
+  const hasStickyBack = hasBackButton && !isDesktop
+
+  const Wrapper = hasStickyBack
+    ? NoTopMarginTopSafeAreaInsetPageWrapper
+    : TopSafeAreaInsetPageWrapper
 
   return (
     <TopSafeAreaInsetPageScrollWrapper isDesktop={isDesktop}>
-      {!isDesktop && <SafeAreaInset />}
-      <TopSafeAreaInsetPageWrapper isDesktop={isDesktop}>
+      {!isDesktop &&
+        (hasStickyBack ? (
+          <StickyBackHeader backPath={backPath} />
+        ) : (
+          <SafeAreaInset />
+        ))}
+      <Wrapper isDesktop={isDesktop}>
+        {hasBackButton && isDesktop && <InlineBackButton backPath={backPath} />}
         {children}
-      </TopSafeAreaInsetPageWrapper>
+      </Wrapper>
     </TopSafeAreaInsetPageScrollWrapper>
   )
 }
