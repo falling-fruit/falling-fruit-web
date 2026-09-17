@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 import { NAVIGATION_BAR_HEIGHT_PX } from '../../constants/mobileLayout'
 import { zIndex } from './GlobalStyle'
 
-const TopBar = styled.div`
+const TopBar = styled.div.attrs({ className: 'top-bar' })`
   position: absolute;
   inset-inline: 0;
   inset-block-start: 0;
