@@ -282,7 +282,8 @@ const LocationSheet = ({
         const isMapControl = event.target.closest(
           '.gm-svpc, .gm-control-active, .gmnoprint, .map-zoom-button',
         )
-        if (!isAnotherLocation && !isMapControl) {
+        const isTopBar = event.target.closest('.top-bar')
+        if (!isAnotherLocation && !isMapControl && !isTopBar) {
           event.stopPropagation()
           onPositionChange(POSITIONS.BOTTOM)
         }
