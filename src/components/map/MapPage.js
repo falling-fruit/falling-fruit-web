@@ -369,8 +369,28 @@ const MapPage = ({ isDesktop }) => {
   const hasTypesParams =
     searchParams.has('types') || searchParams.has('f') || searchParams.has('c')
 
+  const [isMapVisible, setIsMapVisible] = useState(false)
+
   useEffect(() => {
-    if (!googleMap || !getGoogleMaps) {
+    const container = mapContainerRef.current
+    if (!container) {
+      return undefined
+    }
+
+    const updateVisibility = () => {
+      setIsMapVisible(container.offsetWidth > 0 && container.offsetHeight > 0)
+    }
+
+    updateVisibility()
+
+    const observer = new ResizeObserver(updateVisibility)
+    observer.observe(container)
+
+    return () => observer.disconnect()
+  }, [googleMap])
+
+  useEffect(() => {
+    if (!googleMap || !getGoogleMaps || !isMapVisible) {
       return
     }
     const maps = getGoogleMaps()
@@ -388,7 +408,7 @@ const MapPage = ({ isDesktop }) => {
       },
       styles: buildMapStyles(showBusinesses),
     })
-  }, [googleMap, getGoogleMaps, mapType, showBusinesses, isRTL])
+  }, [googleMap, getGoogleMaps, isMapVisible, mapType, showBusinesses, isRTL])
 
   useEffect(() => {
     if (!googleMap || !getGoogleMaps) {
