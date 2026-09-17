@@ -65,7 +65,7 @@ const PageWrapper = styled.article`
     !isDesktop &&
     `
     width: 100%;
-    padding-block: 0 20px;
+    padding-block: 0 calc(30px + var(--safe-area-inset-bottom, 0px));
     padding-inline: 23px;
     margin-block: calc(28px + env(safe-area-inset-top)) 0;
     margin-inline: auto;
