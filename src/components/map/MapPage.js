@@ -309,6 +309,7 @@ const MapPage = ({ isDesktop }) => {
   const mapContainerRef = useRef(null)
   const overlayLayersRef = useRef([])
   const initListenerRef = useRef(null)
+  const prevIsLoggedInRef = useRef(null)
 
   const [shareOpen, setShareOpen] = useState(false)
 
@@ -321,6 +322,8 @@ const MapPage = ({ isDesktop }) => {
     getGoogleMaps,
     geometryReady,
   } = useSelector((state) => state.map)
+
+  const isLoggedIn = useSelector((state) => !!state.auth.user)
 
   const currentZoom = googleMap?.getZoom()
 
@@ -441,6 +444,23 @@ const MapPage = ({ isDesktop }) => {
 
     handleViewChange()
   }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
+
+  // fetchLocations has in_list when logged in
+  useEffect(() => {
+    const prevIsLoggedIn = prevIsLoggedInRef.current
+    prevIsLoggedInRef.current = isLoggedIn
+
+    if (prevIsLoggedIn === null) {
+      return
+    }
+    if (prevIsLoggedIn === isLoggedIn) {
+      return
+    }
+    if (!googleMap || !getGoogleMaps) {
+      return
+    }
+    dispatch(fetchLocations())
+  }, [isLoggedIn, googleMap, getGoogleMaps, dispatch])
 
   const allClusters = filterClustersAroundSelectedLocation(
     clusters,
