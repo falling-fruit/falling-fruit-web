@@ -1,8 +1,8 @@
 import { Form, Formik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
@@ -67,9 +67,17 @@ const AccountPage = () => {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
   const history = useAppHistory()
+  const location = useLocation()
+  const bottomRef = useRef(null)
   const { t } = useTranslation()
   const isDesktop = useIsDesktop()
   const [isUpdatingPreferences, setIsUpdatingPreferences] = useState(false)
+
+  useEffect(() => {
+    if (location.state?.scrollToBottom && user && !isDesktop) {
+      bottomRef.current?.scrollIntoView()
+    }
+  }, [location.state, user, isDesktop])
 
   const handleSubmit = (values) => {
     dispatch(editProfile(formToUser(values)))
@@ -191,6 +199,7 @@ const AccountPage = () => {
               <AboutSection />
               <br />
               <MobileSocialLinks />
+              <div ref={bottomRef} />
             </section>
           )}
         </>

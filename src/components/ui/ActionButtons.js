@@ -24,14 +24,14 @@ const StyledButton = styled(ResetButton)`
   }
 `
 
-const BackButton = ({ backPath, ...props }) => {
+const BackButton = ({ backPath, backState, ...props }) => {
   const { t } = useTranslation()
   const history = useAppHistory()
 
   const handleBack = (event) => {
     event.stopPropagation()
     if (backPath) {
-      history.push(backPath)
+      history.push(backPath, backState)
     } else {
       history.goBack()
     }
