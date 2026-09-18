@@ -73,6 +73,7 @@
       "not_supported": "不支持地理位置"
     },
     "language_changed_refresh_to_reload_map": "語言已更改，請刷新頁面以重新加載地圖",
+    "street_view_error": "街景視圖錯誤：{{error}}",
     "unknown_error": "未知錯誤"
   },
   "filter": {

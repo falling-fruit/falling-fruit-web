@@ -73,6 +73,7 @@
       "not_supported": "Геолокація не підтримується"
     },
     "language_changed_refresh_to_reload_map": "Мову змінено. Оновіть сторінку, щоб перезавантажити карту",
+    "street_view_error": "Помилка Street View: {{error}}",
     "unknown_error": "Невідома помилка"
   },
   "filter": {

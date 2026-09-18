@@ -73,6 +73,7 @@
       "not_supported": "Geolocalizzazione non supportata"
     },
     "language_changed_refresh_to_reload_map": "Lingua modificata, aggiorna la pagina per ricaricare la mappa",
+    "street_view_error": "Errore di Street View: {{error}}",
     "unknown_error": "Errore sconosciuto"
   },
   "filter": {

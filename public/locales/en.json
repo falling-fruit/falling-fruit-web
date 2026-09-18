@@ -65,6 +65,7 @@
       "you_are_back_online": "You are back online.",
       "you_are_offline": "You are offline."
     },
+    "failed_to_load": "Failed to load: {{error}}",
     "geolocation": {
       "code_2": "Position unavailable: {{message}}",
       "code_3": "Geolocation timeout: {{message}}",
@@ -72,7 +73,7 @@
       "not_supported": "Geolocation not supported"
     },
     "language_changed_refresh_to_reload_map": "Language changed. Refresh page to reload map",
-    "failed_to_load": "Failed to load: {{error}}",
+    "street_view_error": "Street View error: {{error}}",
     "unknown_error": "Unknown error"
   },
   "filter": {

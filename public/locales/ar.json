@@ -73,6 +73,7 @@
       "not_supported": "تحديد الموقع الجغرافي غير مدعوم"
     },
     "language_changed_refresh_to_reload_map": "تم تغيير اللغة، يرجى تحديث الصفحة لإعادة تحميل الخريطة",
+    "street_view_error": "خطأ في Street View: {{error}}",
     "unknown_error": "خطأ غير معروف"
   },
   "filter": {

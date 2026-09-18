@@ -73,6 +73,7 @@
       "not_supported": "Không hỗ trợ định vị"
     },
     "language_changed_refresh_to_reload_map": "Ngôn ngữ đã thay đổi, làm mới trang để tải lại bản đồ",
+    "street_view_error": "Lỗi Street View: {{error}}",
     "unknown_error": "Lỗi không xác định"
   },
   "filter": {

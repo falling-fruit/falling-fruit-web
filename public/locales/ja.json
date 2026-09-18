@@ -73,6 +73,7 @@
       "not_supported": "位置情報がサポートされていません"
     },
     "language_changed_refresh_to_reload_map": "言語が変更されました。ページを更新して地図を再読み込みしてください",
+    "street_view_error": "ストリートビューのエラー：{{error}}",
     "unknown_error": "不明なエラー"
   },
   "filter": {

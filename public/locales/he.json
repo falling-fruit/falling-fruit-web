@@ -73,6 +73,7 @@
       "not_supported": "איתור מיקום אינו נתמך"
     },
     "language_changed_refresh_to_reload_map": "השפה השתנתה, יש לרענן את הדף כדי לטעון מחדש את המפה",
+    "street_view_error": "שגיאת Street View: {{error}}",
     "unknown_error": "שגיאה לא ידועה"
   },
   "filter": {

@@ -73,6 +73,7 @@
       "not_supported": "Geolokace není podporována"
     },
     "language_changed_refresh_to_reload_map": "Jazyk byl změněn. Obnovte stránku pro načtení mapy",
+    "street_view_error": "Chyba Street View: {{error}}",
     "unknown_error": "Neznámá chyba"
   },
   "filter": {

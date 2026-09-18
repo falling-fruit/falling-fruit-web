@@ -73,6 +73,7 @@
       "not_supported": "Geolokalizacja nie jest obsługiwana"
     },
     "language_changed_refresh_to_reload_map": "Język został zmieniony. Odśwież stronę, aby przeładować mapę",
+    "street_view_error": "Błąd Street View: {{error}}",
     "unknown_error": "Nieznany błąd"
   },
   "filter": {

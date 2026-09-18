@@ -73,6 +73,7 @@
       "not_supported": "Platsinformation stöds inte"
     },
     "language_changed_refresh_to_reload_map": "Språk ändrat, uppdatera sidan för att ladda om kartan",
+    "street_view_error": "Street View-fel: {{error}}",
     "unknown_error": "Okänt fel"
   },
   "filter": {
