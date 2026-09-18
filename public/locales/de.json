@@ -69,8 +69,7 @@
     "geolocation": {
       "code_2": "Position nicht verfügbar: {{message}}",
       "code_3": "Geolokalisierungs-Timeout: {{message}}",
-      "denied": "Die Erlaubnis zur Nutzung deines Standorts wurde verweigert. Um die Geolokalisierung zu aktivieren, erlaube bitte die Standortfreigabe in deinen Browsereinstellungen und aktualisiere die Seite.",
-      "not_supported": "Geolokalisierung wird nicht unterstützt"
+      "denied": "Die Erlaubnis zur Nutzung deines Standorts wurde verweigert. Um die Geolokalisierung zu aktivieren, erlaube bitte die Standortfreigabe in deinen Browsereinstellungen und aktualisiere die Seite."
     },
     "language_changed_refresh_to_reload_map": "Sprache geändert. Bitte lade die Seite neu, um die Karte zu aktualisieren",
     "street_view_error": "Street View-Fehler: {{error}}",

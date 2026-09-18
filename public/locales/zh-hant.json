@@ -69,8 +69,7 @@
     "geolocation": {
       "code_2": "位置不可用：{{message}}",
       "code_3": "地理位置超時：{{message}}",
-      "denied": "獲取您的位置權限被拒絕。要啓用地理位置，請在瀏覽器設置中允許位置共享並刷新頁面。",
-      "not_supported": "不支持地理位置"
+      "denied": "獲取您的位置權限被拒絕。要啓用地理位置，請在瀏覽器設置中允許位置共享並刷新頁面。"
     },
     "language_changed_refresh_to_reload_map": "語言已更改，請刷新頁面以重新加載地圖",
     "street_view_error": "街景視圖錯誤：{{error}}",

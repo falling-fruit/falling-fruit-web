@@ -69,8 +69,7 @@
     "geolocation": {
       "code_2": "Posición no disponible: {{message}}",
       "code_3": "Tiempo de espera de geolocalización agotado: {{message}}",
-      "denied": "Permiso para usar tu ubicación denegado. Para habilitar la geolocalización, permite compartir ubicación en la configuración de tu navegador y actualiza la página.",
-      "not_supported": "Geolocalización no compatible"
+      "denied": "Permiso para usar tu ubicación denegado. Para habilitar la geolocalización, permite compartir ubicación en la configuración de tu navegador y actualiza la página."
     },
     "language_changed_refresh_to_reload_map": "El idioma ha cambiado. Actualiza la página para recargar el mapa",
     "street_view_error": "Error de Street View: {{error}}",

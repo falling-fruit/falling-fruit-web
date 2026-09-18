@@ -69,8 +69,7 @@
     "geolocation": {
       "code_2": "Position unavailable: {{message}}",
       "code_3": "Geolocation timeout: {{message}}",
-      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page.",
-      "not_supported": "Geolocation not supported"
+      "denied": "Permission to use your location was denied. To enable geolocation, please allow location sharing in your browser settings and refresh the page."
     },
     "language_changed_refresh_to_reload_map": "Language changed. Refresh page to reload map",
     "street_view_error": "Street View error: {{error}}",

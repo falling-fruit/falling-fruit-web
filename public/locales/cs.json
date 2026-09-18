@@ -69,8 +69,7 @@
     "geolocation": {
       "code_2": "Poloha není dostupná: {{message}}",
       "code_3": "Časový limit geolokace: {{message}}",
-      "denied": "Oprávnění k použití vaší polohy bylo zamítnuto. Pro povolení geolokace prosím povolte sdílení polohy v nastavení prohlížeče a obnovte stránku.",
-      "not_supported": "Geolokace není podporována"
+      "denied": "Oprávnění k použití vaší polohy bylo zamítnuto. Pro povolení geolokace prosím povolte sdílení polohy v nastavení prohlížeče a obnovte stránku."
     },
     "language_changed_refresh_to_reload_map": "Jazyk byl změněn. Obnovte stránku pro načtení mapy",
     "street_view_error": "Chyba Street View: {{error}}",
