@@ -69,10 +69,10 @@
     "geolocation": {
       "code_2": "Không thể xác định vị trí: {{message}}",
       "code_3": "Hết thời gian xác định vị trí: {{message}}",
-      "denied": "Quyền sử dụng vị trí của bạn đã bị từ chối. Để bật định vị, vui lòng cho phép chia sẻ vị trí trong cài đặt trình duyệt và làm mới trang.",
-      "not_supported": "Không hỗ trợ định vị"
+      "denied": "Quyền sử dụng vị trí của bạn đã bị từ chối. Để bật định vị, vui lòng cho phép chia sẻ vị trí trong cài đặt trình duyệt và làm mới trang."
     },
     "language_changed_refresh_to_reload_map": "Ngôn ngữ đã thay đổi, làm mới trang để tải lại bản đồ",
+    "street_view_error": "Lỗi Street View: {{error}}",
     "unknown_error": "Lỗi không xác định"
   },
   "filter": {

@@ -1,6 +1,7 @@
 import { Map, StreetView } from '@styled-icons/boxicons-regular'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { css } from 'styled-components'
 import styled from 'styled-components/macro'
 
@@ -60,8 +61,18 @@ const StreetViewLink = ({
         location: { lat, lng },
         radius: 50,
       })
-    } catch {
+    } catch (error) {
       dispatch(addLocationWithoutPanorama(locationId))
+      if (error?.code === 'ZERO_RESULTS') {
+        toast.info(t('locations.overview.street_view_unavailable'))
+      } else {
+        toast.error(
+          t('error_message.street_view_error', {
+            error:
+              error?.message || error?.code || t('error_message.unknown_error'),
+          }),
+        )
+      }
       return
     }
 

@@ -69,10 +69,10 @@
     "geolocation": {
       "code_2": "Posizione non disponibile: {{message}}",
       "code_3": "Timeout geolocalizzazione: {{message}}",
-      "denied": "Permesso di utilizzare la tua posizione negato. Per abilitare la geolocalizzazione, consenti la condivisione della posizione nelle impostazioni del tuo browser e aggiorna la pagina.",
-      "not_supported": "Geolocalizzazione non supportata"
+      "denied": "Permesso di utilizzare la tua posizione negato. Per abilitare la geolocalizzazione, consenti la condivisione della posizione nelle impostazioni del tuo browser e aggiorna la pagina."
     },
     "language_changed_refresh_to_reload_map": "Lingua modificata, aggiorna la pagina per ricaricare la mappa",
+    "street_view_error": "Errore di Street View: {{error}}",
     "unknown_error": "Errore sconosciuto"
   },
   "filter": {

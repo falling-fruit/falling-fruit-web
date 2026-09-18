@@ -69,10 +69,10 @@
     "geolocation": {
       "code_2": "Positie niet beschikbaar: {{message}}",
       "code_3": "Geolocatie timeout: {{message}}",
-      "denied": "Toestemming om je locatie te gebruiken is geweigerd. Om geolocatie in te schakelen, sta locatiedeling toe in je browserinstellingen en vernieuw de pagina.",
-      "not_supported": "Geolocatie wordt niet ondersteund"
+      "denied": "Toestemming om je locatie te gebruiken is geweigerd. Om geolocatie in te schakelen, sta locatiedeling toe in je browserinstellingen en vernieuw de pagina."
     },
     "language_changed_refresh_to_reload_map": "Taal gewijzigd, vernieuw de pagina om de kaart opnieuw te laden",
+    "street_view_error": "Street View-fout: {{error}}",
     "unknown_error": "Onbekende fout"
   },
   "filter": {

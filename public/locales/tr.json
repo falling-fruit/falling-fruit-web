@@ -69,10 +69,10 @@
     "geolocation": {
       "code_2": "Konum kullanılamıyor: {{message}}",
       "code_3": "Konum zaman aşımı: {{message}}",
-      "denied": "Konumunuzu kullanma izni reddedildi. Konum özelliğini etkinleştirmek için lütfen tarayıcı ayarlarınızdan konum paylaşımına izin verin ve sayfayı yenileyin.",
-      "not_supported": "Konum özelliği desteklenmiyor"
+      "denied": "Konumunuzu kullanma izni reddedildi. Konum özelliğini etkinleştirmek için lütfen tarayıcı ayarlarınızdan konum paylaşımına izin verin ve sayfayı yenileyin."
     },
     "language_changed_refresh_to_reload_map": "Dil değiştirildi, haritayı yenilemek için sayfayı yenileyin",
+    "street_view_error": "Street View hatası: {{error}}",
     "unknown_error": "Bilinmeyen hata"
   },
   "filter": {

@@ -69,10 +69,10 @@
     "geolocation": {
       "code_2": "无法定位：{{message}}",
       "code_3": "定位超时：{{message}}",
-      "denied": "定位权限被拒绝。请在浏览器设置中开启位置共享并刷新页面。",
-      "not_supported": "当前浏览器不支持定位功能"
+      "denied": "定位权限被拒绝。请在浏览器设置中开启位置共享并刷新页面。"
     },
     "language_changed_refresh_to_reload_map": "语言设置已更改，请刷新页面以更新地图",
+    "street_view_error": "街景视图错误：{{error}}",
     "unknown_error": "发生未知错误"
   },
   "filter": {

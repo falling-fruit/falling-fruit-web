@@ -69,10 +69,10 @@
     "geolocation": {
       "code_2": "Position ej tillgänglig: {{message}}",
       "code_3": "Timeout för platsinformation: {{message}}",
-      "denied": "Tillstånd att använda din plats nekades. För att aktivera platsinformation, tillåt platsdelning i dina webbläsarinställningar och uppdatera sidan.",
-      "not_supported": "Platsinformation stöds inte"
+      "denied": "Tillstånd att använda din plats nekades. För att aktivera platsinformation, tillåt platsdelning i dina webbläsarinställningar och uppdatera sidan."
     },
     "language_changed_refresh_to_reload_map": "Språk ändrat, uppdatera sidan för att ladda om kartan",
+    "street_view_error": "Street View-fel: {{error}}",
     "unknown_error": "Okänt fel"
   },
   "filter": {
