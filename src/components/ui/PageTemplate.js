@@ -173,10 +173,10 @@ const StyledBackButton = styled(BackButton)`
   padding-block: 1.5em;
 `
 
-const StickyBackHeader = ({ backPath }) => (
+const StickyBackHeader = ({ backPath, backState }) => (
   <StickyHeader>
     <SafeAreaInset />
-    <StyledBackButton backPath={backPath} />
+    <StyledBackButton backPath={backPath} backState={backState} />
   </StickyHeader>
 )
 
@@ -254,6 +254,7 @@ const InfoPage = ({ children }) => {
       {!isDesktop && (
         <StickyBackHeader
           backPath={user ? '/account/edit' : '/about/welcome'}
+          backState={{ scrollToBottom: true }}
         />
       )}
       <InfoPageWrapper isDesktop={isDesktop}>{children}</InfoPageWrapper>

@@ -1,9 +1,9 @@
 import { Loader } from '@styled-icons/boxicons-regular'
 import { MapAlt } from '@styled-icons/boxicons-solid'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { DEFAULT_GEOLOCATION_ZOOM } from '../../constants/map'
@@ -64,6 +64,8 @@ const HomePage = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useAppHistory()
+  const location = useLocation()
+  const bottomRef = useRef(null)
   const { lastMapView } = useSelector((state) => state.viewport)
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
@@ -96,6 +98,12 @@ const HomePage = () => {
       )
     }
   }, [lastMapView, geolocation, geolocationState, history])
+
+  useEffect(() => {
+    if (location.state?.scrollToBottom) {
+      bottomRef.current?.scrollIntoView()
+    }
+  }, [location.state])
 
   return (
     <LandingPage>
@@ -140,6 +148,7 @@ const HomePage = () => {
       <AboutSection />
       <br />
       <MobileSocialLinks />
+      <div ref={bottomRef} />
     </LandingPage>
   )
 }
