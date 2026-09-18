@@ -249,7 +249,13 @@ const PanoramaEvents = () => {
   }, [googleMap, googleMaps, dispatch])
 
   useEffect(() => {
-    if (!googleMap || !googleMaps || !streetViewOpen || !isViewingLocation) {
+    if (
+      isDesktop ||
+      !googleMap ||
+      !googleMaps ||
+      !streetViewOpen ||
+      !isViewingLocation
+    ) {
       return
     }
 
@@ -258,8 +264,7 @@ const PanoramaEvents = () => {
       return
     }
 
-    // Use pointer events on the DOM container to detect taps reliably on
-    // mobile (Google Maps' 'click' event doesn't fire on touch in Firefox).
+    // dismiss location drawer with a tap (extra code just for panorama)
     const container = panorama.getContainer?.() || googleMap.getDiv()
 
     let pointerStart = null
@@ -278,7 +283,11 @@ const PanoramaEvents = () => {
       const dt = Date.now() - pointerStart.time
       const distance = Math.sqrt(dx * dx + dy * dy)
 
-      if (distance < 10 && dt < 300) {
+      const isStreetViewControl = e.target.closest?.(
+        '.gm-control-active, .gm-iv-back, .gm-iv-close, .gm-bundled-control, .gm-compass',
+      )
+
+      if (!isStreetViewControl && distance < 10 && dt < 300) {
         history.push('/map?pane=&tab=')
       }
 
@@ -292,7 +301,14 @@ const PanoramaEvents = () => {
       container.removeEventListener('pointerdown', handlePointerDown)
       container.removeEventListener('pointerup', handlePointerUp)
     }
-  }, [googleMap, googleMaps, streetViewOpen, isViewingLocation, history])
+  }, [
+    isDesktop,
+    googleMap,
+    googleMaps,
+    streetViewOpen,
+    isViewingLocation,
+    history,
+  ])
 
   return null
 }

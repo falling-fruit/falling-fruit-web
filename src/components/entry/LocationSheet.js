@@ -273,14 +273,16 @@ const LocationSheet = ({
       if (lightboxOpen) {
         return
       }
+      const currentPosition = inferCurrentPosition()
       if (
         sheetRef.current &&
         !sheetRef.current.contains(event.target) &&
-        inferCurrentPosition() === POSITIONS.MIDDLE
+        (currentPosition === POSITIONS.MIDDLE ||
+          currentPosition === POSITIONS.LOW)
       ) {
         const isAnotherLocation = event.target.tagName.toLowerCase() === 'img'
         const isMapControl = event.target.closest(
-          '.gm-svpc, .gm-control-active, .gmnoprint, .map-zoom-button',
+          '.gm-svpc, .gm-control-active, .gmnoprint, .map-zoom-button, .gm-iv-back, .gm-iv-close',
         )
         const isTopBar = event.target.closest('.top-bar')
         if (!isAnotherLocation && !isMapControl && !isTopBar) {
