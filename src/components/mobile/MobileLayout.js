@@ -76,7 +76,9 @@ const shouldDisplayMapPage = (pathname) => {
   const locationId =
     match?.params.locationId && parseInt(match.params.locationId)
   const isViewingLocation =
-    locationId && isViewSegment(match.params.nextSegment)
+    locationId &&
+    (match.params.nextSegment == null ||
+      isViewSegment(match.params.nextSegment))
 
   const isEditingLocationMarker =
     locationId &&
