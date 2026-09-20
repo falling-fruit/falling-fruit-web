@@ -362,6 +362,7 @@ const MapPage = ({ isDesktop }) => {
   useCreateGoogleMap({
     initialView,
     googleMap,
+    mapType,
     mapContainerRef,
     initListenerRef,
     idleListenerRef,

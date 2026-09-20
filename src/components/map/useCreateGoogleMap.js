@@ -61,6 +61,7 @@ const registerOsmTileTypes = (map, maps) => {
 const useCreateGoogleMap = ({
   initialView,
   googleMap,
+  mapType,
   mapContainerRef,
   initListenerRef,
   idleListenerRef,
@@ -87,6 +88,7 @@ const useCreateGoogleMap = ({
         const createdMap = new maps.Map(mapContainerRef.current, {
           center: initialView.center,
           zoom: initialView.zoom,
+          mapTypeId: mapType,
           disableDefaultUI: true,
           minZoom: MIN_ZOOM,
         })
