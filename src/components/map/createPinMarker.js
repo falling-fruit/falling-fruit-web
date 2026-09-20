@@ -3,8 +3,9 @@ import { theme } from '../ui/GlobalStyle'
 const Z_INDEX = {
   SELECTED: 10,
   DRAGGABLE: 11,
-  TOOLTIP: 12,
 }
+
+const DRAGGABLE_PIN_SCALE = 1.35
 
 const pinSvgDataUri = (color) => {
   const svg = `<svg width="48" height="48" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -13,119 +14,24 @@ const pinSvgDataUri = (color) => {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`
 }
 
-const getSelectedPinIcon = (google, isEditing) => ({
-  url: pinSvgDataUri(isEditing ? theme.transparentOrange : theme.orange),
-  scaledSize: new google.Size(48, 48),
-  anchor: new google.Point(24, 44),
-})
-
-const getDraggablePinIcon = (google, isAdding) => ({
-  url: pinSvgDataUri(isAdding ? theme.blue : theme.orange),
-  scaledSize: new google.Size(48, 48),
-  anchor: new google.Point(24, 44),
-})
-
-export const createTooltipOverlay = (google, map, position, text, onClose) => {
-  const overlay = new google.OverlayView()
-  overlay._position = new google.LatLng(position.lat, position.lng)
-  overlay._text = text
-  overlay._onClose = onClose
-  overlay._div = null
-
-  overlay.onAdd = function () {
-    const container = document.createElement('div')
-    container.style.position = 'absolute'
-    container.style.zIndex = Z_INDEX.TOOLTIP
-    container.style.pointerEvents = 'auto'
-
-    // Tooltip box
-    const box = document.createElement('div')
-    box.style.position = 'relative'
-    box.style.backgroundColor = theme.background || '#fff'
-    box.style.color = theme.text || '#000'
-    box.style.padding = '16px'
-    box.style.borderRadius = '4px'
-    box.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)'
-    box.style.fontSize = '16px'
-    box.style.whiteSpace = 'nowrap'
-    box.style.transform = 'translate(-50%, -100%)'
-    box.style.marginTop = '-52px'
-
-    // Close button
-    const closeBtn = document.createElement('button')
-    closeBtn.style.position = 'absolute'
-    closeBtn.style.top = '4px'
-    closeBtn.style.right = '4px'
-    closeBtn.style.background = 'none'
-    closeBtn.style.border = 'none'
-    closeBtn.style.color = theme.text
-    closeBtn.style.cursor = 'pointer'
-    closeBtn.style.padding = '2px'
-    closeBtn.style.lineHeight = '1'
-    closeBtn.style.fontSize = '16px'
-    closeBtn.innerHTML = '&#x2715;' // ✕
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation()
-      if (overlay._onClose) {
-        overlay._onClose()
-      }
-    })
-
-    // Content
-    const content = document.createElement('div')
-    content.style.padding = '8px'
-    content.setAttribute('dir', 'auto')
-    content.textContent = overlay._text
-
-    // Arrow
-    const arrow = document.createElement('div')
-    arrow.style.position = 'absolute'
-    arrow.style.bottom = '-10px'
-    arrow.style.left = '50%'
-    arrow.style.transform = 'translateX(-50%)'
-    arrow.style.width = '0'
-    arrow.style.height = '0'
-    arrow.style.borderWidth = '10px 10px 0'
-    arrow.style.borderStyle = 'solid'
-    arrow.style.borderColor = `${theme.background || '#fff'} transparent transparent transparent`
-
-    box.appendChild(closeBtn)
-    box.appendChild(content)
-    box.appendChild(arrow)
-    container.appendChild(box)
-
-    overlay._div = container
-    const panes = this.getPanes()
-    panes.floatPane.appendChild(container)
+const getSelectedPinIcon = (google, isEditing) => {
+  const color = isEditing ? theme.transparentOrange : theme.orange
+  const scale = isEditing ? DRAGGABLE_PIN_SCALE : 1
+  return {
+    url: pinSvgDataUri(color),
+    scaledSize: new google.Size(scale * 48, scale * 48),
+    anchor: new google.Point(scale * 24, scale * 44),
   }
-
-  overlay.draw = function () {
-    if (!overlay._div) {
-      return
-    }
-    const projection = this.getProjection()
-    const point = projection.fromLatLngToDivPixel(overlay._position)
-    if (point) {
-      overlay._div.style.left = `${point.x}px`
-      overlay._div.style.top = `${point.y}px`
-    }
-  }
-
-  overlay.onRemove = function () {
-    if (overlay._div && overlay._div.parentNode) {
-      overlay._div.parentNode.removeChild(overlay._div)
-      overlay._div = null
-    }
-  }
-
-  overlay.updatePosition = function (lat, lng) {
-    overlay._position = new google.LatLng(lat, lng)
-    overlay.draw()
-  }
-
-  overlay.setMap(map)
-  return overlay
 }
+
+const getDraggablePinIcon = (google) => ({
+  url: pinSvgDataUri(theme.orange),
+  scaledSize: new google.Size(
+    DRAGGABLE_PIN_SCALE * 48,
+    DRAGGABLE_PIN_SCALE * 48,
+  ),
+  anchor: new google.Point(DRAGGABLE_PIN_SCALE * 24, DRAGGABLE_PIN_SCALE * 44),
+})
 
 export const createSelectedPin = (
   google,

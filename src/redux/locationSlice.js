@@ -23,7 +23,6 @@ const initialState = {
   isBeingEdited: false,
   fromSettings: false,
   form: null,
-  tooltipOpen: false,
   inList: false,
   lastUpdatedDate: null,
   lightbox: {
@@ -97,7 +96,6 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.isBeingEdited = false
       state.locationId = 'new'
-      state.tooltipOpen = true
       state.form = null
     },
     initNewLocation: (state, action) => {
@@ -105,7 +103,6 @@ const locationSlice = createSlice({
       state.location = null
       state.isBeingEdited = false
       state.locationId = 'new'
-      state.tooltipOpen = true
       state.form = null
       state.position = action.payload
     },
@@ -120,13 +117,6 @@ const locationSlice = createSlice({
       if (state.location) {
         state.position = { lat: state.location.lat, lng: state.location.lng }
       }
-      state.tooltipOpen = action.payload ? true : false
-    },
-    dismissLocationTooltip: (state) => {
-      state.tooltipOpen = false
-    },
-    reopenLocationTooltip: (state) => {
-      state.tooltipOpen = true
     },
     openLightbox: (state, action) => {
       state.lightbox.isOpen = true
@@ -150,9 +140,6 @@ const locationSlice = createSlice({
     },
     setIsBeingInitializedMobile: (state, action) => {
       state.isBeingInitializedMobile = action.payload
-      if (action.payload) {
-        state.tooltipOpen = true
-      }
     },
   },
   extraReducers: {
@@ -163,7 +150,6 @@ const locationSlice = createSlice({
       state.position = null
       state.isBeingEdited = action.meta.arg.isBeingEdited
       state.form = null
-      state.tooltipOpen = action.meta.arg.isBeingEdited
       state.inList = false
       state.lastUpdatedDate = null
       state.carouselIndex = 0
@@ -186,7 +172,6 @@ const locationSlice = createSlice({
       state.locationId = null
       state.position = null
       state.isBeingEdited = false
-      state.tooltipOpen = false
       state.inList = false
       state.lastUpdatedDate = null
     },
@@ -324,8 +309,6 @@ export const {
   updatePosition,
   saveLocationFormValues,
   setIsBeingEditedAndResetPosition,
-  dismissLocationTooltip,
-  reopenLocationTooltip,
   openLightbox,
   closeLightbox,
   setLightboxIndices,
