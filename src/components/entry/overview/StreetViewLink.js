@@ -109,7 +109,7 @@ const StreetViewLink = ({
     return (
       <IconBesideText bold onClick={handleClose} tabIndex={0}>
         <Map size={20} />
-        <p>Google Maps</p>
+        <p>{t('glossary.map')}</p>
       </IconBesideText>
     )
   }
@@ -125,7 +125,7 @@ const StreetViewLink = ({
       }
     >
       <StreetView size={20} />
-      <p>Google Street View</p>
+      <p>Street view</p>
     </StyledIconBesideText>
   )
 }
