@@ -100,6 +100,7 @@ const ShareTheHarvestTable = () => {
 
   const translatedCountries = {
     Australia: t('pages.sharing.countries.australia'),
+    Austria: t('pages.sharing.countries.austria'),
     Belgium: t('pages.sharing.countries.belgium'),
     Brazil: t('pages.sharing.countries.brazil'),
     Canada: t('pages.sharing.countries.canada'),

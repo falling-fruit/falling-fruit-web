@@ -984,6 +984,13 @@
       "url": "http://www.mirror.co.uk/money/3-ways-legally-freegan-5697406"
     },
     {
+      "published_on": "2015-04-28",
+      "outlet": "laRegione",
+      "outlet_url": "https://www.laregione.ch",
+      "title": "\"Falling Fruit\", la mappa interattiva per la raccolta (gratuita) della frutta",
+      "url": "https://www.laregione.ch/culture/1184635/falling-fruit-la-mappa-interattiva-per-la-raccolta-gratuita-della-frutta"
+    },
+    {
       "published_on": "2015-04-22",
       "outlet": "Hot Pads",
       "outlet_url": "http://hotpads.com",
@@ -1046,9 +1053,25 @@
       "title": "Falling Fruit map points the way to edible plants on Vancouver streets",
       "author": "Stephen Hui",
       "url": "http://www.straight.com/blogra/799171/falling-fruit-map-points-way-edible-plants-vancouver-streets"
+    },
+    {
+      "published_on": "2015-01-01",
+      "outlet": "Patterns of Commoning",
+      "outlet_url": "https://patternsofcommoning.org/",
+      "title": "Mapping Our Shared Wealth: The Cartography of the Commons",
+      "author": "Ellen Friedman",
+      "url": "https://patternsofcommoning.org/mapping-our-shared-wealth-the-cartography-of-the-commons/"
     }
   ],
   "2016": [
+    {
+      "published_on": "2016-12-02",
+      "outlet": "DNA Info",
+      "outlet_url": "https://www.dnainfo.com",
+      "title": "There's a map of where to forage for dumpster bagels, falling fruit & more",
+      "author": "Janet Rausa Fuller",
+      "url": "https://www.dnainfo.com/chicago/20161202/downtown/falling-fruit-map-urban-foraging-free-food/"
+    },
     {
       "published_on": "2016-10-18",
       "outlet": "The Modern Domestique",
@@ -1579,8 +1602,7 @@
       "outlet_url": "https://theworld.org/programs/living-earth",
       "title": "Online map helps city dwellers find wild produce growing in their neighborhoods",
       "author": "Savannah Christiansen",
-      "url": "https://theworld.org/stories/2018-10-16/online-map-helps-city-dwellers-find-wild-produce-growing-their-neighborhoods",
-      "embed_html": "<iframe title=\"TheWorld.org Embedded Audio Player - Online map helps city dwellers find wild produce growing in their neighborhoods\" src=\"https://theworld.org/embed/audio/cG9zdDo1NTI2MzA=\" frameborder=\"0\" height=\"50\" width=\"100%\" style=\"margin-block: 1rem\"></iframe>"
+      "url": "https://theworld.org/stories/2018-10-16/online-map-helps-city-dwellers-find-wild-produce-growing-their-neighborhoods"
     },
     {
       "published_on": "2018-08-24",
@@ -1597,6 +1619,14 @@
       "title": "Falling Fruit: La richesse culinaire de nos rues",
       "author": "Véronique Leduc",
       "url": "http://avenues.ca/breves/falling-fruit-richesse-culinaire-de-nos-rues/"
+    },
+    {
+      "published_on": "2018-07-13",
+      "outlet": "L'actualité",
+      "outlet_url": "https://lactualite.com",
+      "title": "Actus verte",
+      "author": "Annick Poitras",
+      "url": "https://lactualite.com/temps-libre/art-de-vivre/un-delicieux-dechet/"
     },
     {
       "published_on": "2018-05-30",
@@ -1859,7 +1889,7 @@
       "title": "How urban foraging could change cities forever",
       "author": "Corinna Bellizzi",
       "url": "https://caremorebebetter.com/ethan-welty-on-how-urban-foraging-could-change-cities-forever",
-      "photo_url": "https://caremorebebetter.com/wp-content/uploads/2022/01/71CMBBEthan.png"
+      "photo_url": "/images/press/care_more_be_better.png"
     }
   ],
   "2023": [
@@ -1901,7 +1931,8 @@
       "outlet_url": "https://www.redbull.com/us-en/theredbulletin",
       "title": "Urban bounty",
       "author": "Lou Boyd",
-      "url": "https://issuu.com/redbulletin.com/docs/0823_uk_lowres/20"
+      "url": "https://issuu.com/redbulletin.com/docs/0823_uk_lowres/20",
+      "photo_url": "/images/press/red_bulletin.jpg"
     },
     {
       "published_on": "2023-07-14",
@@ -1999,7 +2030,8 @@
       "outlet_url": "https://www.publico.pt/",
       "title": "Falling Fruit: vamos respigar nos jardins das cidades?",
       "author": "Mara Gonçalves · Nuno Ferreira Santos",
-      "url": "https://www.publico.pt/2024/07/05/fugas/reportagem/falling-fruit-vamos-respigar-jardins-cidades-2095899"
+      "url": "https://www.publico.pt/2024/07/05/fugas/reportagem/falling-fruit-vamos-respigar-jardins-cidades-2095899",
+      "photo_url": "/images/press/fugas.jpg"
     },
     {
       "published_on": "2024-05-16",
@@ -2066,6 +2098,14 @@
       "url": "https://www.marmiton.org/adresses/ramasser-des-fruits-et-legumes-en-ile-de-france-c-est-maintenant-possible-et-voici-tout-ce-que-vous-devez-savoir-s4117684.html"
     },
     {
+      "published_on": "2025-09-02",
+      "outlet": "Happy Eco News",
+      "outlet_url": "https://happyeconews.com",
+      "title": "Urban foraging for everyone through Falling Fruit’s community mapping",
+      "author": "Cyrene Oraya Reyes",
+      "url": "https://happyeconews.com/urban-foraging-for-everyone/"
+    },
+    {
       "published_on": "2025-08-31",
       "outlet": "de zondag",
       "outlet_url": "https://www.dezondag.be",
@@ -2079,6 +2119,15 @@
       "title": "Website offers edible map of natural resources in urban areas",
       "author": "Jennifer Mulson",
       "url": "https://gazette.com/life/live-well-website-offers-edible-map-of-natural-resources-in-urban-areas/article_8536832e-ad4a-4353-91f0-afe9a7ad3148.html"
+    },
+    {
+      "published_on": "2025-07-01",
+      "outlet": "Robin Press",
+      "outlet_url": "https://www.robingreenfield.org/robinsbooks",
+      "title": "Food Freedom: A Year of Growing and Foraging 100% of My Food",
+      "author": "Robin Greenfield",
+      "url": "https://www.robingreenfield.org/robinsbooks/foodfreedom/",
+      "photo_url": "/images/press/food_freedom.png"
     },
     {
       "published_on": "2025-06-11",
@@ -2121,6 +2170,30 @@
     }
   ],
   "2026": [
+    {
+      "published_on": "2026-09-15",
+      "outlet": "European Correspondent",
+      "outlet_url": "https://europeancorrespondent.com",
+      "title": "Eating our way through the city, for free",
+      "author": "Liene Lūsīte",
+      "url": "https://europeancorrespondent.com/en/r/eating-our-way-through-the-city-for-free"
+    },
+    {
+      "published_on": "2026-09-01",
+      "outlet": "Écologie 360",
+      "outlet_url": "https://www.ecologie360.fr/",
+      "title": "Ethan Welty, libre-cueilleur",
+      "author": "Valérie Ferrer",
+      "photo_url": "/images/press/ecologie360.jpg"
+    },
+    {
+      "published_on": "2026-06-29",
+      "outlet": "The Cool Down",
+      "outlet_url": "https://www.thecooldown.com",
+      "title": "App maps local trees for free, fresh fruit in your community",
+      "author": "Aaron Goldstein",
+      "url": "https://www.thecooldown.com/sustainable-food/finding-free-locally-available-produce/"
+    },
     {
       "published_on": "2026-03-20",
       "outlet": "UBIQUE",
