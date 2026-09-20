@@ -249,7 +249,7 @@ const configurePanoramaControls = (
   if (panorama) {
     panorama.setOptions({
       fullscreenControl: false,
-      enableCloseButton: !isDesktop,
+      enableCloseButton: false,
       addressControl: false,
       motionTracking: false,
       motionTrackingControl: true,
@@ -641,7 +641,7 @@ const MapPage = ({ isDesktop }) => {
       )}
 
       {googleMap && <PanoramaEvents />}
-      {panoramaReady && isDesktop && <DesktopCloseStreetView />}
+      {panoramaReady && <DesktopCloseStreetView />}
 
       {googleMap && getGoogleMaps && (
         <PinMarkers
