@@ -5,7 +5,6 @@ import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
-import { useIsDesktop } from '../../utils/useBreakpoint'
 import Button from './Button'
 import FormButtons from './FormButtons'
 import SubmitButton from './SubmitButton'
@@ -32,14 +31,12 @@ const Modal = ({
   initialDirty = false,
   ...props
 }) => {
-  const isDesktop = useIsDesktop()
   const { t } = useTranslation()
 
   return (
     <StyledModal
       aria-label={`${title} dialog`}
       onDismiss={onDismiss}
-      isDesktop={isDesktop}
       {...props}
     >
       <h3>{title}</h3>

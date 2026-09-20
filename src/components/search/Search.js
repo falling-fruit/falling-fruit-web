@@ -260,7 +260,7 @@ const Search = (props) => {
         )}
       </SearchBarContainer>
       {suggestionsList.length > 0 && (
-        <StyledComboboxPopover portal={false} isDesktop={isDesktop}>
+        <StyledComboboxPopover portal={false}>
           <ComboboxList>
             {suggestionsList.map((suggestion) => {
               const {
