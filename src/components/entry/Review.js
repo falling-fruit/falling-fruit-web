@@ -58,6 +58,8 @@ const ButtonsRow = styled.div`
 export const StyledImagePreview = styled(ImagePreview)`
   cursor: pointer;
   margin-inline-end: 7px;
+  width: 100px;
+  height: 100px;
 `
 
 const AuthorAndDateRow = styled.div``
