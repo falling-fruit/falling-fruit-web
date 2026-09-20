@@ -7,7 +7,7 @@ import SquareIconButton from '../ui/SquareIconButton'
 const StreetViewUIWrapper = styled.div`
   display: flex;
   inset-block-start: 16px;
-  inset-inline-end: 16px;
+  inset-inline-start: 16px;
   justify-content: flex-end;
   position: absolute;
   z-index: 2;
