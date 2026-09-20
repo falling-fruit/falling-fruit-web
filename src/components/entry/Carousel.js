@@ -55,7 +55,7 @@ Carousel.defaultProps = {
   useKeyboardArrows: true,
 }
 
-const EntryCarousel = ({ autoPlay = false, swipeable = true }) => {
+const EntryCarousel = ({ swipeable = true }) => {
   const dispatch = useDispatch()
   const reviewsWithPhotos = useSelector(selectReviewsWithPhotos)
   const carouselIndex = useSelector((state) => state.location.carouselIndex)
@@ -84,7 +84,7 @@ const EntryCarousel = ({ autoPlay = false, swipeable = true }) => {
       onChange={(index) => dispatch(setCarouselIndex(index))}
       onClickItem={onClickCarousel}
       showIndicators={hasMultiple}
-      autoPlay={autoPlay && hasMultiple}
+      autoPlay={false}
       swipeable={swipeable && hasMultiple}
       infiniteLoop={hasMultiple}
       interval={5000}
