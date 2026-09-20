@@ -45,25 +45,28 @@ const ImageBlock = styled.div`
   flex-shrink: 0;
 `
 
-const RevealedImage = styled.div`
+const RevealedImage = styled.div.attrs(({ progress }) => ({
+  style: {
+    transform: `translateY(${-progress * ENTRY_IMAGE_HEIGHT_PX}px)`,
+  },
+}))`
   width: 100%;
   position: absolute;
   top: 0;
   height: ${ENTRY_IMAGE_HEIGHT_PX}px;
-  transform: translateY(
-    ${({ progress }) => -progress * ENTRY_IMAGE_HEIGHT_PX}px
-  );
   transition: transform 0.15s linear;
   z-index: -1;
 `
 
-const WhitespacePlaceholder = styled.div`
+const WhitespacePlaceholder = styled.div.attrs(({ progress, hidden }) => ({
+  style: {
+    height: `${progress * (TABS_HEIGHT_PX - DRAG_HANDLE_HEIGHT_PX)}px`,
+    display: hidden ? 'none' : 'block',
+  },
+}))`
   width: 100%;
   background: white;
-  height: ${({ progress }) =>
-    progress * (TABS_HEIGHT_PX - DRAG_HANDLE_HEIGHT_PX)}px;
   transition: transform 0.15s linear;
-  ${({ hidden }) => hidden && `display: none;`}
 `
 
 const DummyScrollSpacer = styled.div`
