@@ -89,7 +89,7 @@ const AddressInfo = ({ locationData, onClick }) => (
 const SeasonalityInfo = ({ locationData }) => {
   const { t, i18n } = useTranslation()
   return (
-    <IconBesideText wrap>
+    <IconBesideText $wrap>
       <Calendar color={theme.secondaryText} size={20} />
       <p>
         {locationData.season_start === 0 && locationData.season_stop === 11

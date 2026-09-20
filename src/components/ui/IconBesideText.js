@@ -14,7 +14,7 @@ const IconBesideText = styled.div`
   }
 
   ${($props) =>
-    $props.wrap
+    $props.$wrap
       ? `
   svg {
     vertical-align: middle;
