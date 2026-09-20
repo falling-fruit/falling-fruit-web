@@ -81,13 +81,13 @@ const TextContent = styled.article`
   }
 `
 
-const ImageContents = ({ isLoading, autoPlay }) =>
+const ImageContents = ({ isLoading, autoPlay = false, swipeable = true }) =>
   isLoading ? (
     <Skeleton height={ENTRY_IMAGE_HEIGHT_PX} />
   ) : (
     <>
       <Lightbox />
-      <Carousel autoPlay={autoPlay} />
+      <Carousel autoPlay={autoPlay} swipeable={swipeable} />
     </>
   )
 
@@ -110,7 +110,11 @@ const LocationContent = ({
       {hasImages &&
         (sheetMode ? (
           <RevealedImage progress={progress}>
-            <ImageContents isLoading={isLoading} autoPlay={false} />
+            <ImageContents
+              isLoading={isLoading}
+              autoPlay={false}
+              swipeable={false}
+            />
           </RevealedImage>
         ) : (
           <ImageBlock>
