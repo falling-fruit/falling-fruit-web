@@ -12,7 +12,6 @@ import Carousel from './Carousel'
 import EntryOverview from './EntryOverview'
 import EntryReviews from './EntryReviews'
 import Lightbox from './lightbox/Lightbox'
-import useLocationPane from './useLocationPane'
 
 const EntryLoading = () => (
   <article style={{ padding: '20px 23px', boxSizing: 'border-box' }}>
@@ -105,9 +104,6 @@ const LocationContent = ({
   isDrawerFullyOpen = false,
 }) => {
   const { t } = useTranslation()
-  const { saveDropdownOpen, reportModalOpen } = useLocationPane()
-
-  const carouselAutoPlay = !saveDropdownOpen && !reportModalOpen
 
   return (
     <ContentColumn sheetMode={sheetMode}>
@@ -118,7 +114,7 @@ const LocationContent = ({
           </RevealedImage>
         ) : (
           <ImageBlock>
-            <ImageContents isLoading={isLoading} autoPlay={carouselAutoPlay} />
+            <ImageContents isLoading={isLoading} autoPlay={false} />
           </ImageBlock>
         ))}
       {sheetMode && hasReviews && (
