@@ -276,7 +276,7 @@
       "closing_remarks_para1_html": "Falling Fruit 是一家位于科罗拉多州博尔德的 501(c)(3) 非营利公共慈善机构。美国境内的捐赠可申请免税。你可以查看我们的 <a href=\"/501c3.pdf\">IRS 豁免函</a> 或在相关机构网站核实我们的地位。我们也公开了我们的 <a href=\"https://docs.google.com/document/d/18E7PiiYbReq2c3BKYzxjHphiXsdtvkW-14UcN5y_5P4/edit?usp=sharing\">章程</a> 和董事会会议 <a href=\"https://docs.google.com/document/d/1fzqYZ7rxYfeVqDuvI_uAyWhKm50RilqdTz6oxx3Ohw4\">记录</a>。",
       "closing_remarks_para2_html": "在城市环境中采摘需要遵循实际和道德准则。有关城市采摘伦理的介绍，我们推荐阅读这份 <a href=\"https://docs.google.com/document/d/1SupIGQKC5Vgi3VYkdIQc05y_S7jSoZ4RTS-CzwlEAMY\">总结</a>。",
       "closing_remarks_para3_html": "由于数据来源广泛（如过时的地图或市政维护信息），本站的信息可能存在误差或已失效。在前往实地之前，请做好遇到不实信息的准备，并根据你的发现实时修正地图。最终，辨别植物种类、确认可食用性以及判断具体位置的责任在于用户本人。",
-      "contact_us_html": "Falling Fruit 是为采摘者量身打造的，我们希望它能成为大家的最佳工具。如有任何意见，请致信 <a href=\"mailto:feedback@fallingfruit.org\">feedback@fallingfruit.org</a>。",
+      "contact_us_html": "Falling Fruit 是为采摘者量身打造的，我们希望它能成为大家的最佳工具。如有任何意见，请致信 <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>。",
       "cristina_rubke_bio_html": "Cristina是<a href=\"//sflaw.com/Bios/Rubke-Cristina-N.htm\">旧金山Shartsis Friese LLP</a>律师事务所的一名律师，专注于商标法律咨询。她还是<a href=\"//www.sfmta.com/\">旧金山市交通局</a>的董事会成员，负责监管公共交通和停车。业余时间，她通过<a href=\"//www.baads.org/\">湾区残疾海员协会</a>参与帆船运动，参加各种赛事。",
       "david_craft_bio_html": "David 是<a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">哈佛医学院</a>的研究员<a href=\"//gray.mgh.harvard.edu/index.php?option=com_content&view=article&id=4:david-craft-phd&catid=1:f\">，也是一位资深的采摘爱好者，著有《城市觅食：在城市中寻找和食用野生植物》一书<a href=\"//www.amazon.com/Urban-Foraging-finding-eating-plants-ebook/dp/B003LSTEGO/\"></a>（提供<a href=\"/docs/David Craft - Urban Foraging.pdf\">免费下载</a>）。",
       "directors": "董事会",
@@ -326,7 +326,7 @@
       "your_activity_empty": "你尚未添加、编辑或评价过任何地点"
     },
     "data": {
-      "caveat_emptor_html": "数据仅供参考，我们不保证其准确性。如果你利用这些数据做出了有趣的应用，请 <a href=\"mailto:feedback@fallingfruit.org\">联系我们</a>！",
+      "caveat_emptor_html": "数据仅供参考，我们不保证其准确性。如果你利用这些数据做出了有趣的应用，请 <a href=\"mailto:info@fallingfruit.org\">联系我们</a>！",
       "intro": "Falling Fruit 建立在公共数据和用户无私分享的基础之上。我们相信每个人都有权平等地获得我们集体劳动的成果。秉承开放精神，你可以下载我们的完整数据库：",
       "license_html": "如果你希望在项目（特别是商业项目）中使用这些数据，请联系我们。除特别说明外，数据遵循 <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA</a> 许可协议。这意味着你可以自由使用和分发，但必须署名来源且不得用于商业用途。我们的源代码已在 <a href=\"https://github.com/falling-fruit/\">GitHub</a> 上开源。"
     },
