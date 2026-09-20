@@ -58,8 +58,6 @@ const ButtonsRow = styled.div`
 export const StyledImagePreview = styled(ImagePreview)`
   cursor: pointer;
   margin-inline-end: 7px;
-  width: 100px;
-  height: 100px;
 `
 
 const AuthorAndDateRow = styled.div``
@@ -171,7 +169,7 @@ const Review = ({
         <ImagesContainer>
           {review.photos.map((photo, index) => (
             <StyledImagePreview
-              $small
+              size={100}
               key={photo.thumb}
               onClick={() => onImageClick(index)}
             >
