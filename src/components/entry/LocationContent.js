@@ -35,6 +35,7 @@ const EntryLoading = () => (
 const ContentColumn = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 0;
   height: 100%;
   width: 100%;
   overflow: ${({ sheetMode }) => (sheetMode ? 'visible' : 'hidden')};

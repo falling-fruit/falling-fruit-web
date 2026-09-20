@@ -14,6 +14,8 @@ import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
 export const CardTabs = styled(Tabs)`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
   height: 100%;
   width: 100%;
   background-color: white;
@@ -49,10 +51,15 @@ export const CardTabs = styled(Tabs)`
     flex: 1;
     display: flex;
     overflow: hidden;
+    min-height: 0;
 
     .card-tab-panel[data-reach-tab-panel] {
       flex: 1;
+      min-height: 0;
       overflow: ${({ $sheetMode }) => ($sheetMode ? 'hidden' : 'auto')};
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
     }
   }
 `

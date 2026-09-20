@@ -15,6 +15,7 @@ const LocationFullPage = styled.div`
   background: white;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 `
 
 export default LocationFullPage
