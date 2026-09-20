@@ -45,7 +45,11 @@ const registerOsmTileTypes = (map, maps) => {
       getTileUrl: (coord, zoom) => {
         const { x, y, z } = getTileCoordinates(coord, zoom)
         if (y !== null) {
-          return `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
+          var url = `https://tiles.stadiamaps.com/tiles/stamen_toner-lite/${z}/${x}/${y}.png`
+          if (process.env.REACT_APP_STADIA_MAPS_API_KEY) {
+            url += `?api_key=${process.env.REACT_APP_STADIA_MAPS_API_KEY}`
+          }
+          return url
         }
       },
       tileSize: new maps.Size(256, 256),

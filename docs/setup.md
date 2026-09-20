@@ -45,7 +45,7 @@
   - `ANDROID_KEYSTORE_ALIAS`
   - `ANDROID_KEYSTORE_ALIAS_PASSWORD`
 
-- Additional `.env.android` and `.env.ios` files are used to set platform-specific environment variables that override those in `.env` when building for that platform.
+- Additional `.env.android` and `.env.ios` files are used to set platform-specific environment variables that override or supplement those in `.env` when building for that platform.
 
 # Web app
 
