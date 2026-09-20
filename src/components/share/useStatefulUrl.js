@@ -37,7 +37,7 @@ const useStatefulUrl = ({ baseUrl, useLegacyViewParams }) => {
     applyLegacyViewParams(url.searchParams, viewFromCurrentUrl())
   }
 
-  if (mapType !== MapType.Roadmap) {
+  if (mapType !== MapType.Hybrid) {
     url.searchParams.set('map', mapType)
   }
 

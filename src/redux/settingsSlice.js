@@ -5,7 +5,7 @@ import { LabelVisibility, MapType } from '../constants/settings'
 const DEFAULT_SETTINGS = {
   labelVisibility: LabelVisibility.WhenZoomedIn,
   distanceUnit: 'metric',
-  mapType: MapType.Roadmap,
+  mapType: MapType.Hybrid,
   overlay: null,
   showBusinesses: false,
 }
