@@ -37,6 +37,8 @@ const ReportModal = ({
   const handleSubmit = async (values) => {
     const reportValues = {
       ...values,
+      comment: values.comment === '' ? null : values.comment,
+      name: values.name === '' ? null : values.name,
       problem_code: values.problem_code.value,
       location_id: locationId,
     }

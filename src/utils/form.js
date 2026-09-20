@@ -60,7 +60,7 @@ export const formToLocation = ({
   position: { lat, lng },
 }) => ({
   type_ids: types.map(({ value }) => value),
-  description,
+  description: description === '' ? null : description,
   season_start: season_start ?? null,
   season_stop: season_stop ?? null,
   access: access ?? null,
@@ -80,7 +80,7 @@ export const locationToApiValues = ({
   lng,
 }) => ({
   type_ids,
-  description,
+  description: description === '' ? null : description,
   season_start: season_start ?? null,
   season_stop: season_stop ?? null,
   access: access ?? null,
@@ -97,7 +97,7 @@ export const locationToForm = (
     type: typesAccess.getType(id),
     value: id,
   })),
-  description,
+  description: description ?? '',
   season_start,
   season_stop,
   access,
