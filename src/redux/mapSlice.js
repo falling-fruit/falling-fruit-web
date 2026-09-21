@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
+import { MAX_CLUSTER_ZOOM } from '../constants/map'
 import { getClusters, getLocations } from '../utils/api'
 import { currentPathWithView } from '../utils/appUrl'
 import isNetworkError from '../utils/isNetworkError'
@@ -49,7 +50,7 @@ export const fetchMapClusters = createAsyncThunk(
           types,
           muni,
           bounds,
-          zoom: zoom + 1,
+          zoom: Math.min(zoom + 1, MAX_CLUSTER_ZOOM),
           center: undefined,
         }),
       )
