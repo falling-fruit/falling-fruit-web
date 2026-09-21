@@ -268,14 +268,16 @@ const PanoramaEvents = () => {
     const container = panorama.getContainer?.() || googleMap.getDiv()
 
     let pointerStart = null
+    // When a pointer sequence qualifies as a "dismiss drawer" tap, stop events so we don't also move
+    let suppressUntil = 0
 
     const handlePointerDown = (e) => {
       pointerStart = { x: e.clientX, y: e.clientY, time: Date.now() }
     }
 
-    const handlePointerUp = (e) => {
+    const isDismissTap = (e) => {
       if (!pointerStart) {
-        return
+        return false
       }
 
       const dx = e.clientX - pointerStart.x
@@ -287,19 +289,44 @@ const PanoramaEvents = () => {
         '.gm-control-active, .gm-iv-back, .gm-iv-close, .gm-bundled-control, .gm-compass',
       )
 
-      if (!isStreetViewControl && distance < 10 && dt < 300) {
+      return !isStreetViewControl && distance < 10 && dt < 300
+    }
+
+    const handlePointerUpCapture = (e) => {
+      if (!pointerStart) {
+        return
+      }
+
+      if (isDismissTap(e)) {
+        // Cancel this pointerup so Street View never navigates, and suppress the
+        // follow-up mouseup/click that the browser synthesises from this gesture.
+        e.stopPropagation()
+        e.preventDefault()
+        suppressUntil = Date.now() + 400
         history.push('/map?pane=&tab=')
       }
 
       pointerStart = null
     }
 
+    const suppressSyntheticEvent = (e) => {
+      if (Date.now() < suppressUntil) {
+        e.stopPropagation()
+        e.preventDefault()
+      }
+    }
+
     container.addEventListener('pointerdown', handlePointerDown)
-    container.addEventListener('pointerup', handlePointerUp)
+    // Capture phase: intercept before Street View's inner handlers run.
+    container.addEventListener('pointerup', handlePointerUpCapture, true)
+    container.addEventListener('mouseup', suppressSyntheticEvent, true)
+    container.addEventListener('click', suppressSyntheticEvent, true)
 
     return () => {
       container.removeEventListener('pointerdown', handlePointerDown)
-      container.removeEventListener('pointerup', handlePointerUp)
+      container.removeEventListener('pointerup', handlePointerUpCapture, true)
+      container.removeEventListener('mouseup', suppressSyntheticEvent, true)
+      container.removeEventListener('click', suppressSyntheticEvent, true)
     }
   }, [
     isDesktop,
