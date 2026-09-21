@@ -41,7 +41,7 @@ const Tile = styled.div`
     border-radius: 0.375em;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 
     ${({ $isUploading }) => $isUploading && 'filter: brightness(0.8);'}
   }
