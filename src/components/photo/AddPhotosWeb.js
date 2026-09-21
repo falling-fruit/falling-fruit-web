@@ -75,11 +75,12 @@ export const AddPhotosWeb = ({ onAddPhotos }) => {
     const newPhotos = await Promise.all(
       acceptedFiles.map(async (file) => {
         pendingPhotoId.current--
+        const id = pendingPhotoId.current
 
         const compressedFile = await compressImage(file)
 
         return {
-          id: pendingPhotoId.current,
+          id,
           name: file.path,
           image: URL.createObjectURL(compressedFile),
           isNew: true,
