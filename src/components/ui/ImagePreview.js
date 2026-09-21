@@ -22,11 +22,12 @@ const DeleteButton = styled(ResetButton)`
 const Tile = styled.div`
   position: relative;
   display: inline-block;
-  width: ${(props) => (props.$small ? '48px' : '70px')};
-  height: ${(props) => (props.$small ? '48px' : '70px')};
+  width: ${({ $size }) => `${$size}px`};
+  height: ${({ $size }) => `${$size}px`};
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.background};
-  overflow: visible;
+  background-color: ${({ theme }) => theme.secondaryBackground};
+  border-radius: 0.375em;
+  overflow: hidden;
 
   ${Spinner} {
     position: absolute;
@@ -56,13 +57,13 @@ const ImagePreview = ({
   className,
   onDelete,
   isUploading,
-  small,
+  sizePx,
   ...props
 }) => (
   <Tile
     className={className}
     $isUploading={isUploading}
-    $small={small}
+    $size={sizePx}
     {...props}
   >
     {children}
