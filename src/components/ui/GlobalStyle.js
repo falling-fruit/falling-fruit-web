@@ -135,6 +135,15 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.blue};
   }
 
+  .gm-style a {
+    text-decoration: none;
+    color: #444444;
+  }
+
+  .gm-style div:has(> .gmnoprint) {
+    align-items: flex-end;
+  }
+
   [data-reach-dialog-overlay] {
     z-index: ${zIndex.modal};
   }
