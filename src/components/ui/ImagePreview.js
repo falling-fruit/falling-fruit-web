@@ -26,6 +26,7 @@ const Tile = styled.div`
   height: ${({ $size, $small }) => ($size ? `${$size}px` : $small ? '48px' : '70px')};
   box-sizing: border-box;
   background-color: #000;
+  border-radius: 0.375em;
   overflow: hidden;
 
   ${Spinner} {
