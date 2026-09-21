@@ -22,11 +22,12 @@ const DeleteButton = styled(ResetButton)`
 const Tile = styled.div`
   position: relative;
   display: inline-block;
-  width: ${(props) => (props.$small ? '48px' : '70px')};
-  height: ${(props) => (props.$small ? '48px' : '70px')};
+  width: ${({ $size, $small }) => ($size ? `${$size}px` : $small ? '48px' : '70px')};
+  height: ${({ $size, $small }) => ($size ? `${$size}px` : $small ? '48px' : '70px')};
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.background};
-  overflow: visible;
+  background-color: #000;
+  border-radius: 0.375em;
+  overflow: hidden;
 
   ${Spinner} {
     position: absolute;
@@ -40,7 +41,7 @@ const Tile = styled.div`
     border-radius: 0.375em;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 
     ${({ $isUploading }) => $isUploading && 'filter: brightness(0.8);'}
   }
@@ -57,12 +58,14 @@ const ImagePreview = ({
   onDelete,
   isUploading,
   small,
+  size,
   ...props
 }) => (
   <Tile
     className={className}
     $isUploading={isUploading}
     $small={small}
+    $size={size}
     {...props}
   >
     {children}
