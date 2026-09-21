@@ -231,10 +231,12 @@
       "date_added": "Tillagd {{date}}",
       "date_last_updated": "Senast uppdaterad {{date}}",
       "imported_from": "Importerad från {{name}}",
+      "map_view": "På kartan",
       "season": {
         "in_season": "I säsong från {{start_month}} till {{stop_month}}",
         "year_round": "Året runt"
       },
+      "street_view": "Vy från gatan",
       "street_view_unavailable": "Gatuvy är inte tillgängligt nära denna plats",
       "title": "Översikt"
     }

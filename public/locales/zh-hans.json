@@ -231,10 +231,12 @@
       "date_added": "添加于 {{date}}",
       "date_last_updated": "最后更新于 {{date}}",
       "imported_from": "导入自 {{name}}",
+      "map_view": "在地图上",
       "season": {
         "in_season": "采摘季：{{start_month}} 至 {{stop_month}}",
         "year_round": "全年"
       },
+      "street_view": "街道视图",
       "street_view_unavailable": "此地点附近暂无街景视图",
       "title": "概览"
     }

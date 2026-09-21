@@ -231,10 +231,12 @@
       "date_added": "Додано {{date}}",
       "date_last_updated": "Останнє оновлення {{date}}",
       "imported_from": "Імпортовано з {{name}}",
+      "map_view": "На карті",
       "season": {
         "in_season": "В сезоні з {{start_month}} по {{stop_month}}",
         "year_round": "Цілий рік"
       },
+      "street_view": "Вид з вулиці",
       "street_view_unavailable": "Street View недоступний поблизу цієї локації",
       "title": "Огляд"
     }

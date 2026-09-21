@@ -231,10 +231,12 @@
       "date_added": "{{date}} tarihinde eklendi",
       "date_last_updated": "Son güncelleme {{date}}",
       "imported_from": "{{name}} kaynağından içe aktarıldı",
+      "map_view": "Haritada",
       "season": {
         "in_season": "{{start_month}} ile {{stop_month}} arası sezon",
         "year_round": "Yıl Boyu"
       },
+      "street_view": "Sokaktan görünüm",
       "street_view_unavailable": "Bu konum yakınında Sokak Görünümü mevcut değil",
       "title": "Genel Bakış"
     }

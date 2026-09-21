@@ -231,10 +231,12 @@
       "date_added": "Đã thêm {{date}}",
       "date_last_updated": "Cập nhật lần cuối {{date}}",
       "imported_from": "Được nhập từ {{name}}",
+      "map_view": "Trên bản đồ",
       "season": {
         "in_season": "Trong mùa từ {{start_month}} đến {{stop_month}}",
         "year_round": "Quanh năm"
       },
+      "street_view": "Xem từ đường phố",
       "street_view_unavailable": "Street View không khả dụng gần vị trí này",
       "title": "Tổng quan"
     }

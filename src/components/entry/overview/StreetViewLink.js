@@ -109,7 +109,7 @@ const StreetViewLink = ({
     return (
       <IconBesideText bold onClick={handleClose} tabIndex={0}>
         <Map size={20} />
-        <p>{t('glossary.map')}</p>
+        <p>{t('locations.overview.map_view')}</p>
       </IconBesideText>
     )
   }
@@ -125,7 +125,7 @@ const StreetViewLink = ({
       }
     >
       <StreetView size={20} />
-      <p>Street view</p>
+      <p>{t('locations.overview.street_view')}</p>
     </StyledIconBesideText>
   )
 }

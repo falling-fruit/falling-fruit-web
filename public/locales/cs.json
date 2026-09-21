@@ -231,10 +231,12 @@
       "date_added": "Přidáno {{date}}",
       "date_last_updated": "Naposledy aktualizováno {{date}}",
       "imported_from": "Importováno z {{name}}",
+      "map_view": "Na mapě",
       "season": {
         "in_season": "V sezóně od {{start_month}} do {{stop_month}}",
         "year_round": "Celoročně"
       },
+      "street_view": "Pohled z ulice",
       "street_view_unavailable": "Street View není k dispozici poblíž této lokality",
       "title": "Přehled"
     }

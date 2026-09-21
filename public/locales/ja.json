@@ -231,10 +231,12 @@
       "date_added": "{{date}}に追加されました",
       "date_last_updated": "最終更新日 {{date}}",
       "imported_from": "{{name}}からインポートされました",
+      "map_view": "地図上",
       "season": {
         "in_season": "{{start_month}}から{{stop_month}}まで旬です",
         "year_round": "一年中"
       },
+      "street_view": "ストリートビュー",
       "street_view_unavailable": "この場所の近くにストリートビューはありません",
       "title": "概要"
     }

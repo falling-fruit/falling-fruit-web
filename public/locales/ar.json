@@ -231,10 +231,12 @@
       "date_added": "تمت الإضافة {{date}}",
       "date_last_updated": "آخر تحديث {{date}}",
       "imported_from": "تم الاستيراد من {{name}}",
+      "map_view": "على الخريطة",
       "season": {
         "in_season": "في الموسم من {{start_month}} إلى {{stop_month}}",
         "year_round": "على مدار السنة"
       },
+      "street_view": "عرض من الشارع",
       "street_view_unavailable": "خدمة Street View غير متوفرة بالقرب من هذا الموقع",
       "title": "نظرة عامة"
     }

@@ -231,10 +231,12 @@
       "date_added": "Προστέθηκε {{date}}",
       "date_last_updated": "Τελευταία ενημέρωση {{date}}",
       "imported_from": "Εισήχθη από {{name}}",
+      "map_view": "Στον χάρτη",
       "season": {
         "in_season": "Σε εποχή από {{start_month}} έως {{stop_month}}",
         "year_round": "Όλο το χρόνο"
       },
+      "street_view": "Προβολή από τον δρόμο",
       "street_view_unavailable": "Το Street View δεν είναι διαθέσιμο κοντά σε αυτήν την τοποθεσία",
       "title": "Επισκόπηση"
     }

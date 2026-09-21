@@ -231,10 +231,12 @@
       "date_added": "Добавлено {{date}}",
       "date_last_updated": "Последнее обновление {{date}}",
       "imported_from": "Импортировано из {{name}}",
+      "map_view": "На карте",
       "season": {
         "in_season": "В сезоне с {{start_month}} по {{stop_month}}",
         "year_round": "Круглый год"
       },
+      "street_view": "Вид с улицы",
       "street_view_unavailable": "Street View недоступен вблизи этого местоположения",
       "title": "Обзор"
     }

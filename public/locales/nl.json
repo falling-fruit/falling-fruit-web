@@ -231,10 +231,12 @@
       "date_added": "Toegevoegd op {{date}}",
       "date_last_updated": "Laatst bijgewerkt {{date}}",
       "imported_from": "Geïmporteerd van {{name}}",
+      "map_view": "Op de kaart",
       "season": {
         "in_season": "In seizoen van {{start_month}} tot {{stop_month}}",
         "year_round": "Het hele jaar door"
       },
+      "street_view": "Weergave vanaf de straat",
       "street_view_unavailable": "Street View niet beschikbaar in de buurt van deze locatie",
       "title": "Overzicht"
     }

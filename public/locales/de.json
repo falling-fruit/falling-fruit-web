@@ -231,10 +231,12 @@
       "date_added": "Hinzugefügt am {{date}}",
       "date_last_updated": "Zuletzt aktualisiert {{date}}",
       "imported_from": "Importiert von {{name}}",
+      "map_view": "Auf der Karte",
       "season": {
         "in_season": "Saison von {{start_month}} bis {{stop_month}}",
         "year_round": "Ganzjährig"
       },
+      "street_view": "Ansicht von der Straße",
       "street_view_unavailable": "Street View nicht verfügbar in der Nähe dieses Standorts",
       "title": "Übersicht"
     }

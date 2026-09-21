@@ -231,10 +231,12 @@
       "date_added": "נוסף ב-{{date}}",
       "date_last_updated": "עודכן לאחרונה ב-{{date}}",
       "imported_from": "יובא מ {{name}}",
+      "map_view": "על המפה",
       "season": {
         "in_season": "בעונה מ {{start_month}} עד {{stop_month}}",
         "year_round": "כל השנה"
       },
+      "street_view": "תצוגה מהרחוב",
       "street_view_unavailable": "תצוגת רחוב אינה זמינה בקרבת מיקום זה",
       "title": "סקירה"
     }
