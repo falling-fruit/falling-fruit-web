@@ -45,7 +45,7 @@ const orientPanoramaTowardsTarget = (
   target,
 ) => {
   if (!target || !googleMaps.geometry) {
-    return
+    return null
   }
   const panoLatLng = new googleMaps.LatLng(position.lat(), position.lng())
   const targetLatLng = new googleMaps.LatLng(target.lat, target.lng)
@@ -54,6 +54,7 @@ const orientPanoramaTowardsTarget = (
     targetLatLng,
   )
   panorama.setPov({ heading, pitch: 0 })
+  return heading
 }
 
 const waitForProjectionReady = (googleMaps, panorama, onReady) => {
@@ -139,6 +140,7 @@ const PanoramaEvents = () => {
   const positionListenerRef = useRef(null)
   const lastFetchedBoundsRef = useRef(null)
   const needsInitialOrientRef = useRef(false)
+  const desiredHeadingRef = useRef(null)
 
   useEffect(() => {
     if (!googleMap || !googleMaps) {
@@ -153,6 +155,7 @@ const PanoramaEvents = () => {
       () => {
         if (panorama.getVisible()) {
           needsInitialOrientRef.current = true
+          desiredHeadingRef.current = null
 
           const pos = panorama.getPosition()
           if (pos) {
@@ -161,12 +164,15 @@ const PanoramaEvents = () => {
             lastFetchedBoundsRef.current = null
             dispatch(fetchPanoramaLocations())
 
-            orientPanoramaTowardsTarget(
+            const heading = orientPanoramaTowardsTarget(
               panorama,
               googleMaps,
               pos,
               targetRef.current,
             )
+            if (heading !== null) {
+              desiredHeadingRef.current = heading
+            }
             needsInitialOrientRef.current = false
           }
           dispatch(openStreetView())
@@ -178,17 +184,44 @@ const PanoramaEvents = () => {
           waitForProjectionReady(googleMaps, panorama, () => {
             dispatch(setPanoramaReady(true))
 
+            let targetHeading = desiredHeadingRef.current
+            if (targetRef.current) {
+              const readyPos = panorama.getPosition()
+              if (readyPos) {
+                const heading = orientPanoramaTowardsTarget(
+                  panorama,
+                  googleMaps,
+                  readyPos,
+                  targetRef.current,
+                )
+                if (heading !== null) {
+                  targetHeading = heading
+                  desiredHeadingRef.current = heading
+                  needsInitialOrientRef.current = false
+                }
+              }
+            }
+
+            if (targetHeading !== null) {
+              panorama.setPov({ heading: targetHeading, pitch: 0 })
+            }
+
             // Workaround: jiggle POV back and forth to force markers to render on first panorama load
             setTimeout(() => {
               const pov = panorama.getPov()
-              panorama.setPov({ ...pov, heading: pov.heading + 0.01 })
+              const basePov =
+                targetHeading !== null
+                  ? { ...pov, heading: targetHeading, pitch: 0 }
+                  : pov
+              panorama.setPov({ ...basePov, heading: basePov.heading + 0.01 })
               setTimeout(() => {
-                panorama.setPov(pov)
+                panorama.setPov(basePov)
               }, 50)
             }, 100)
           })
         } else {
           needsInitialOrientRef.current = false
+          desiredHeadingRef.current = null
           if (isAddingPositionMobileRef.current && editingPositionRef.current) {
             googleMap.setCenter(editingPositionRef.current)
           }
@@ -213,12 +246,15 @@ const PanoramaEvents = () => {
         dispatch(setPanoramaCenter(newCenter))
         lastFetchedBoundsRef.current = computeFetchBounds(newCenter)
         dispatch(fetchPanoramaLocations())
-        orientPanoramaTowardsTarget(
+        const heading = orientPanoramaTowardsTarget(
           panorama,
           googleMaps,
           pos,
           targetRef.current,
         )
+        if (heading !== null) {
+          desiredHeadingRef.current = heading
+        }
         return
       }
 
