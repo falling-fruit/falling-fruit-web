@@ -8,7 +8,7 @@ import ListEntry, { Icons, PrimaryText } from '../ui/ListEntry'
 const PhotoEntry = styled(ListEntry).attrs((props) => ({
   leftIcons: [
     <ListUl size={20} key={1} />,
-    <ImagePreview isUploading={props.isUploading} small key={2}>
+    <ImagePreview isUploading={props.isUploading} sizePx={48} key={2}>
       <img src={props.src} alt={props.alt} />
     </ImagePreview>,
   ],

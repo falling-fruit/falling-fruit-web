@@ -166,7 +166,7 @@ const Review = ({
         <ImagesContainer>
           {review.photos.map((photo, index) => (
             <StyledImagePreview
-              size={100}
+              sizePx={100}
               key={photo.thumb}
               onClick={() => onImageClick(index)}
             >
