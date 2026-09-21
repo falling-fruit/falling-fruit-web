@@ -32,25 +32,10 @@ import Input from '../ui/Input'
 import ClearSearchButton from './ClearSearch'
 import SearchEntry from './SearchEntry'
 
-// TODO: ask Siraj how highlighting should look
-// TODO: for long option descriptions, scroll to beginning of input
 const StyledComboboxPopover = styled(ComboboxPopover)`
   border: none;
   background: none;
   margin-block-start: 8px;
-
-  ${({ isDesktop, theme }) =>
-    isDesktop &&
-    `
-    box-shadow: 0 3px 5px ${theme.shadow};
-    border-end-start-radius: 30px;
-    border-end-end-radius: 30px;
-
-    position: absolute;
-    width: 100%;
-    z-index: 1;
-    background-color: ${theme.background};
-  `}
 `
 
 const SearchBarContainer = styled.div`
