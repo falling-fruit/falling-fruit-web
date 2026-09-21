@@ -5,6 +5,8 @@
  */
 export const VISIBLE_CLUSTER_ZOOM_LIMIT = 13
 
+export const MAX_CLUSTER_ZOOM = VISIBLE_CLUSTER_ZOOM_LIMIT + 1
+
 export const MIN_GEOLOCATION_ZOOM = 15
 export const MIN_LOCATION_ZOOM = 18
 
