@@ -13,7 +13,7 @@ const StreetViewUIWrapper = styled.div`
   z-index: 2;
 `
 
-const DesktopCloseStreetView = () => {
+const CloseStreetView = () => {
   const { googleMap } = useSelector((state) => state.map)
 
   const handleClose = (event) => {
@@ -35,4 +35,4 @@ const DesktopCloseStreetView = () => {
   )
 }
 
-export default DesktopCloseStreetView
+export default CloseStreetView

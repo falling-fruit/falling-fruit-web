@@ -19,8 +19,8 @@ import Share from '../share/Share'
 import ShareIconButton from '../share/ShareIconButton'
 import { AddLocationMobile } from '../ui/AddLocation'
 import LoadingIndicator from '../ui/LoadingIndicator'
+import CloseStreetView from './CloseStreetView'
 import ClusterMarkers from './ClusterMarkers'
-import DesktopCloseStreetView from './DesktopCloseStreetView'
 import GeolocationDot from './GeolocationDot'
 import LocationMarkers from './LocationMarkers'
 import PanoramaEvents from './PanoramaEvents'
@@ -641,7 +641,7 @@ const MapPage = ({ isDesktop }) => {
       )}
 
       {googleMap && <PanoramaEvents />}
-      {panoramaReady && <DesktopCloseStreetView />}
+      {panoramaReady && <CloseStreetView />}
 
       {googleMap && getGoogleMaps && (
         <PinMarkers
