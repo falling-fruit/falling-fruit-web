@@ -25,7 +25,7 @@ const CloseStreetView = () => {
   }
 
   return (
-    <StreetViewUIWrapper>
+    <StreetViewUIWrapper className="close-street-view">
       <SquareIconButton
         label="Close street view"
         icon={<X />}
