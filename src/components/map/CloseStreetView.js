@@ -14,6 +14,16 @@ const StreetViewUIWrapper = styled.div`
   z-index: 2;
 `
 
+const BottomSafeAreaBar = styled.div`
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  height: var(--safe-area-inset-bottom, 0px);
+  background: ${({ theme }) => theme.secondaryBackground};
+  z-index: 1000;
+  pointer-events: none;
+`
+
 const CloseStreetView = () => {
   const { googleMap } = useSelector((state) => state.map)
 
@@ -35,6 +45,7 @@ const CloseStreetView = () => {
           onClick={handleClose}
         />
       </StreetViewUIWrapper>
+      <BottomSafeAreaBar />
     </>
   )
 }
