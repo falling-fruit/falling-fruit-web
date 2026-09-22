@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components/macro'
 
 import {
   ENTRY_IMAGE_HEIGHT_PX,
   NAVIGATION_BAR_HEIGHT_PX,
 } from '../../constants/mobileLayout'
 import { useAppHistory } from '../../utils/useAppHistory'
+import BlurredSafeArea from '../mobile/BlurredSafeArea'
 import LocationContent from './LocationContent'
 import LocationFullPage from './LocationFullPage'
 import LocationSheet from './LocationSheet'
@@ -23,19 +23,6 @@ const calculateProgress = (currentPosition, topBoundary, bottomBoundary) =>
       1 - (topBoundary - currentPosition) / (topBoundary - bottomBoundary),
     ),
   )
-
-const BlurredSafeArea = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: env(safe-area-inset-top, 0);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  background: rgba(255, 255, 255, 0.3);
-  z-index: 1000;
-  pointer-events: none;
-`
 
 const EntryMobile = () => {
   const history = useAppHistory()
