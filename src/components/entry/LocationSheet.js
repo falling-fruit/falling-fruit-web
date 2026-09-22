@@ -282,7 +282,7 @@ const LocationSheet = ({
       ) {
         const isAnotherLocation = event.target.tagName.toLowerCase() === 'img'
         const isMapControl = event.target.closest(
-          '.gm-svpc, .gm-control-active, .gmnoprint, .map-zoom-button, .gm-iv-back, .gm-iv-close',
+          '.gm-svpc, .gm-control-active, .gmnoprint, .map-zoom-button, .gm-iv-back, .gm-iv-close, .close-street-view',
         )
         const isTopBar = event.target.closest('.top-bar')
         if (!isAnotherLocation && !isMapControl && !isTopBar) {
