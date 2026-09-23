@@ -12,3 +12,7 @@ and styling, see [`/docs`](./docs) (start with [`docs/setup.md`](./docs/setup.md
 4. Open the PR against `falling-fruit/falling-fruit-web` `main`. 
 
 Not sure where to start? Ask on Slack or open an issue. Thanks for contributing!
+
+## Code style
+
+We try to be light on comments to reduce maintenance burden caused by overly verbose comments. In new code, we find it best to not use comments at all, and instead use good names for variables and functions.

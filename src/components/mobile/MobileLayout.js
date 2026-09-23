@@ -39,10 +39,15 @@ const MapContainer = styled.div`
     props.isEmbed || props.streetView
       ? 0
       : `calc(${NAVIGATION_BAR_HEIGHT_PX}px + env(safe-area-inset-top, 0))`};
-  inset-block-end: ${(props) =>
-    props.isEmbed || props.streetView
-      ? 0
-      : `calc(${TABS_HEIGHT_PX}px + var(--safe-area-inset-bottom, 0px))`};
+  inset-block-end: ${(props) => {
+    if (props.isEmbed) {
+      return 0
+    }
+    if (props.streetView) {
+      return `var(--safe-area-inset-bottom, 0px)`
+    }
+    return `calc(${TABS_HEIGHT_PX}px + var(--safe-area-inset-bottom, 0px))`
+  }};
   inset-inline: 0;
 `
 
