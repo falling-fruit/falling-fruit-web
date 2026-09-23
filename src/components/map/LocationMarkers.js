@@ -118,7 +118,7 @@ const LocationMarkers = ({
         prevTypeIds.some((id, index) => id !== nextTypeIds[index])
 
       if (typeIdsChanged) {
-        marker.updateLocationData(location)
+        marker.updateTypeIds(nextTypeIds)
       }
 
       if (marker._isSaved !== Boolean(location.in_list)) {

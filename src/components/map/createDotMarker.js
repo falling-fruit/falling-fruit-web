@@ -380,8 +380,8 @@ export const createLocationDotMarker = (
     }
   }
 
-  marker.updateLocationData = function (newLocation) {
-    this._location = newLocation
+  marker.updateTypeIds = function (typeIds) {
+    this._location = { ...this._location, type_ids: typeIds }
     if (this._label) {
       this._label.sync(
         this._buildLabelData(),
