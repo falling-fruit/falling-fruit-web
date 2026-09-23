@@ -38,7 +38,7 @@ const CloseStreetView = () => {
   return (
     <>
       <BlurredSafeArea />
-      <StreetViewUIWrapper>
+      <StreetViewUIWrapper className="close-street-view">
         <SquareIconButton
           label="Close street view"
           icon={<X />}
