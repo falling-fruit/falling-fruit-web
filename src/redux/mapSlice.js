@@ -143,7 +143,10 @@ const mapSlice = createSlice({
         (loc) => loc.id === action.payload.id,
       )
       if (index !== -1) {
-        state.locations[index] = action.payload
+        state.locations[index] = {
+          ...action.payload,
+          in_list: state.locations[index].in_list,
+        }
       }
     },
     [addNewLocation.fulfilled]: (state, action) => {
