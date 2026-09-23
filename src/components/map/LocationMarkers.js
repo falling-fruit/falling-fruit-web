@@ -111,6 +111,16 @@ const LocationMarkers = ({
         marker.updatePosition(location.lat, location.lng)
       }
 
+      const prevTypeIds = prevLocation.type_ids || []
+      const nextTypeIds = location.type_ids || []
+      const typeIdsChanged =
+        prevTypeIds.length !== nextTypeIds.length ||
+        prevTypeIds.some((id, index) => id !== nextTypeIds[index])
+
+      if (typeIdsChanged) {
+        marker.updateLocationData(location)
+      }
+
       if (marker._isSaved !== Boolean(location.in_list)) {
         marker.updateSavedState(Boolean(location.in_list))
       }
