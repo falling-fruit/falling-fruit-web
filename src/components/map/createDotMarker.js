@@ -81,37 +81,27 @@ const createBaseLabelDiv = (isSaved) => {
 const createLabel = (
   google,
   mapOrPanorama,
-  location,
-  typesAccess,
+  position,
+  labelData,
   selectedTypes,
   invertColors,
   isSaved,
   isHovered = false,
 ) => {
   const label = new google.OverlayView()
-  label.position = new google.LatLng(location.lat, location.lng)
-  label.typesAccess = typesAccess
+  label.position = new google.LatLng(position.lat, position.lng)
   label.selectedTypes = selectedTypes
-  label.locationId = location.id
+  label.labelData = labelData
   label.overlayLayerPane = null
   label.overlayMouseTargetPane = null
   label.isHovered = isHovered
   label.invertColors = invertColors
   label.isSaved = isSaved
 
-  label._buildLabelData = function () {
-    return (location.type_ids || [])
-      .map((id) => this.typesAccess.getType(id)?.displayComponents())
-      .filter(
-        (components) =>
-          components && (components.common || components.scientific),
-      )
-  }
-
   label.onAdd = function () {
     const div = createBaseLabelDiv(this.isSaved)
     setLabelTextStyle(div, this.invertColors)
-    div.innerHTML = formatLabelHtml(this._buildLabelData(), this.selectedTypes)
+    div.innerHTML = formatLabelHtml(this.labelData, this.selectedTypes)
 
     this.div = div
     const panes = this.getPanes()
@@ -188,12 +178,12 @@ const createLabel = (
   }
 
   label.sync = function (
-    newTypesAccess,
+    newLabelData,
     newSelectedTypes,
     newIsHovered,
     newInvertColors,
   ) {
-    this.typesAccess = newTypesAccess
+    this.labelData = newLabelData
     this.selectedTypes = newSelectedTypes
     this.isHovered = newIsHovered
     this.invertColors = newInvertColors
@@ -204,10 +194,7 @@ const createLabel = (
 
     setLabelTextStyle(this.div, this.invertColors)
 
-    this.div.innerHTML = formatLabelHtml(
-      this._buildLabelData(),
-      this.selectedTypes,
-    )
+    this.div.innerHTML = formatLabelHtml(this.labelData, this.selectedTypes)
 
     const targetPane = this.isHovered
       ? this.overlayMouseTargetPane
@@ -265,17 +252,27 @@ export const createLocationDotMarker = (
 
   marker._hoverListeners = []
 
+  marker._buildLabelData = function () {
+    return (this._location.type_ids || [])
+      .map((id) => this._typesAccess?.getType(id)?.displayComponents())
+      .filter(
+        (components) =>
+          components && (components.common || components.scientific),
+      )
+  }
+
   marker.setLabel = function (
     typesAccess,
     selectedTypes,
     invertColors,
     isHovered = false,
   ) {
+    this._typesAccess = typesAccess
     this._label = createLabel(
       this._google,
       this._mapOrPanorama,
-      this._location,
-      typesAccess,
+      { lat: this._location.lat, lng: this._location.lng },
+      this._buildLabelData(),
       selectedTypes,
       invertColors,
       this._isSaved,
@@ -309,7 +306,7 @@ export const createLocationDotMarker = (
       this.removeLabel()
     } else if (this._label) {
       this._label.sync(
-        typesAccess,
+        this._buildLabelData(),
         selectedTypes,
         this._isHovered,
         invertColors,
@@ -330,7 +327,7 @@ export const createLocationDotMarker = (
           )
         } else {
           this._label.sync(
-            this._typesAccess,
+            this._buildLabelData(),
             this._selectedTypes,
             true,
             this._invertColors,
@@ -344,7 +341,7 @@ export const createLocationDotMarker = (
       if (this._label) {
         if (this._showLabels) {
           this._label.sync(
-            this._typesAccess,
+            this._buildLabelData(),
             this._selectedTypes,
             false,
             this._invertColors,
@@ -380,6 +377,18 @@ export const createLocationDotMarker = (
     this.setPosition({ lat, lng })
     if (this._label) {
       this._label.updatePosition(this._google, lat, lng)
+    }
+  }
+
+  marker.updateTypeIds = function (typeIds) {
+    this._location = { ...this._location, type_ids: typeIds }
+    if (this._label) {
+      this._label.sync(
+        this._buildLabelData(),
+        this._selectedTypes,
+        this._isHovered,
+        this._invertColors,
+      )
     }
   }
 
