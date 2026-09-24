@@ -1,15 +1,26 @@
 import { ListUl, X } from '@styled-icons/boxicons-regular'
+import { useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components/macro'
 
+import SingleImageLightbox from '../entry/lightbox/SingleImageLightbox'
 import ImagePreview from '../ui/ImagePreview'
 import ListEntry, { Icons, PrimaryText } from '../ui/ListEntry'
+
+const ClickableImage = styled.img`
+  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
+`
 
 const PhotoEntry = styled(ListEntry).attrs((props) => ({
   leftIcons: [
     <ListUl size={20} key={1} />,
     <ImagePreview isUploading={props.isUploading} sizePx={48} key={2}>
-      <img src={props.src} alt={props.alt} />
+      <ClickableImage
+        src={props.src}
+        alt={props.alt}
+        $clickable={Boolean(props.$onView)}
+        onClick={props.$onView}
+      />
     </ImagePreview>,
   ],
   rightIcons: (
@@ -34,6 +45,8 @@ const NewBadge = styled.div.attrs({ children: 'New photo' })`
 `
 
 export const PhotoList = ({ photos, reorderPhoto, removePhoto }) => {
+  const [lightboxSrc, setLightboxSrc] = useState(null)
+
   const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
@@ -56,6 +69,7 @@ export const PhotoList = ({ photos, reorderPhoto, removePhoto }) => {
             src={image}
             alt={name}
             isUploading={isUploading}
+            $onView={image ? () => setLightboxSrc(image) : undefined}
             $onDelete={() => removePhoto(index)}
           >
             <PrimaryText>{isNew && <NewBadge />}</PrimaryText>
@@ -77,6 +91,10 @@ export const PhotoList = ({ photos, reorderPhoto, removePhoto }) => {
           )}
         </Droppable>
       </DragDropContext>
+      <SingleImageLightbox
+        src={lightboxSrc}
+        onClose={() => setLightboxSrc(null)}
+      />
     </div>
   )
 }
