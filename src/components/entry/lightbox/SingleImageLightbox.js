@@ -33,10 +33,6 @@ const FullscreenImage = styled(ZoomableImage)`
   height: 100%;
 `
 
-/**
- * A self-contained lightbox for viewing a single image, decoupled from the
- * Redux review-based lightbox. Used e.g. for previewing a newly added photo.
- */
 const SingleImageLightbox = ({ src, placeholderSrc, alt = '', onClose }) => {
   const [viewMode, setViewMode] = useState('fullscreen')
   const [isImageZoomed, setIsImageZoomed] = useState(false)

@@ -191,9 +191,6 @@ const ZoomableImage = ({
   }, [resetSignal]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const canPan = scale > 1.001
-  // A click steps up to "fullsize" (scale = naturalScale). For images whose
-  // natural resolution is smaller than or equal to the fitted size (e.g.
-  // screenshots), naturalScale clamps to 1, so clicking wouldn't zoom at all.
   const canZoom = naturalScale > 1.001
 
   const zoomToPoint = useCallback(
@@ -229,7 +226,6 @@ const ZoomableImage = ({
         onZoomOut?.()
         return
       }
-      // Nothing to zoom into: image is not larger than the fitted size.
       if (naturalScale <= 1.001) {
         return
       }
