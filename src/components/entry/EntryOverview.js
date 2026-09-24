@@ -177,24 +177,24 @@ const LastEditedInfo = ({ locationData }) => {
   const [expanded, setExpanded] = useState(false)
   const wasCreatedSameDay =
     locationData.created_at.slice(0, 10) ===
-    locationData.updated_at.slice(0, 10)
+    locationData.lastUpdated.slice(0, 10)
 
   const icon = wasCreatedSameDay ? <Created size={20} /> : <EditAlt size={20} />
 
   const dateTime = wasCreatedSameDay
     ? locationData.created_at
-    : locationData.updated_at
+    : locationData.lastUpdated
 
   const label = wasCreatedSameDay
     ? t('locations.overview.date_added', {
         date: formatISOString(locationData.created_at, i18n.language),
       })
     : t('locations.overview.date_last_updated', {
-        date: formatISOString(locationData.updated_at, i18n.language),
+        date: formatISOString(locationData.lastUpdated, i18n.language),
       })
 
   const isStale =
-    Date.now() - new Date(locationData.updated_at).getTime() > TEN_YEARS_MS
+    Date.now() - new Date(locationData.lastUpdated).getTime() > TEN_YEARS_MS
 
   return (
     <>
@@ -205,7 +205,7 @@ const LastEditedInfo = ({ locationData }) => {
         </p>
         {isStale && (
           <StaleLocationHintToggle
-            locationData={locationData}
+            lastUpdatedDate={locationData.lastUpdated}
             expanded={expanded}
             onToggle={() => setExpanded((prev) => !prev)}
           />
