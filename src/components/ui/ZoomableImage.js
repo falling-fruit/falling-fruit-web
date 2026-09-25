@@ -13,8 +13,12 @@ const Viewport = styled.div`
   touch-action: none;
   background-color: black;
   user-select: none;
-  cursor: ${({ $canPan, $panning }) =>
-    $canPan ? ($panning ? 'grabbing' : 'grab') : 'zoom-in'};
+  cursor: ${({ $canPan, $panning, $canZoom }) => {
+    if ($canPan) {
+      return $panning ? 'grabbing' : 'grab'
+    }
+    return $canZoom ? 'zoom-in' : 'default'
+  }};
 `
 
 const Image = styled.img`
@@ -187,6 +191,7 @@ const ZoomableImage = ({
   }, [resetSignal]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const canPan = scale > 1.001
+  const canZoom = naturalScale > 1.001
 
   const zoomToPoint = useCallback(
     (nextScale, clientX, clientY) => {
@@ -221,10 +226,13 @@ const ZoomableImage = ({
         onZoomOut?.()
         return
       }
+      if (naturalScale <= 1.001) {
+        return
+      }
       pendingZoomPoint.current = { x: clientX, y: clientY }
       onStepUp?.()
     },
-    [viewMode, scale, onStepUp, onZoomOut],
+    [viewMode, scale, naturalScale, onStepUp, onZoomOut],
   )
 
   const maybeStepDown = useCallback(
@@ -386,6 +394,7 @@ const ZoomableImage = ({
       ref={viewportRef}
       className={className}
       $canPan={canPan}
+      $canZoom={canZoom}
       $panning={panning}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
