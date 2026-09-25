@@ -111,14 +111,14 @@ export const AddSeasonStopHint = ({ locationData }) => {
 }
 
 export const StaleLocationHintToggle = ({
-  locationData,
+  lastUpdatedDate,
   expanded,
   onToggle,
 }) => {
   const { t } = useTranslation()
   const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
 
-  const updatedAt = new Date(locationData.updated_at)
+  const updatedAt = new Date(lastUpdatedDate)
   const yearsAgo = Math.floor(
     (Date.now() - updatedAt.getTime()) / (365.25 * 24 * 60 * 60 * 1000),
   )

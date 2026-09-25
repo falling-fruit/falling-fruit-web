@@ -24,7 +24,6 @@ const initialState = {
   fromSettings: false,
   form: null,
   inList: false,
-  lastUpdatedDate: null,
   lightbox: {
     isOpen: false,
     reviewIndex: null,
@@ -34,13 +33,21 @@ const initialState = {
   isBeingInitializedMobile: false,
 }
 
-const computeLastUpdatedDate = (locationData, reviews) =>
-  reviews
-    .map((r) => r.created_at)
-    .reduce(
-      (latest, date) => (date > latest ? date : latest),
-      locationData.updated_at,
-    )
+const computeLastUpdatedDate = (locationData, reviews) => {
+  const timestamps = [
+    locationData.created_at,
+    locationData.updated_at,
+    ...reviews.flatMap((r) => [r.created_at, r.updated_at]),
+  ].filter(Boolean)
+
+  return timestamps.reduce(
+    (latest, date) =>
+      latest === null || new Date(date).getTime() > new Date(latest).getTime()
+        ? date
+        : latest,
+    null,
+  )
+}
 
 const reviewDate = (review) =>
   new Date(review.observed_on || review.created_at).getTime()
@@ -151,7 +158,6 @@ const locationSlice = createSlice({
       state.isBeingEdited = action.meta.arg.isBeingEdited
       state.form = null
       state.inList = false
-      state.lastUpdatedDate = null
       state.carouselIndex = 0
     },
     [fetchLocationData.fulfilled]: (state, action) => {
@@ -163,7 +169,10 @@ const locationSlice = createSlice({
         state.inList = lists.length > 0
         state.reviews = sortReviewsLatestFirst(reviews)
         state.position = { lat: action.payload.lat, lng: action.payload.lng }
-        state.lastUpdatedDate = computeLastUpdatedDate(locationData, reviews)
+        state.location.lastUpdated = computeLastUpdatedDate(
+          locationData,
+          reviews,
+        )
       }
     },
     [fetchLocationData.rejected]: (state) => {
@@ -173,7 +182,6 @@ const locationSlice = createSlice({
       state.position = null
       state.isBeingEdited = false
       state.inList = false
-      state.lastUpdatedDate = null
     },
     [fetchReviewData.fulfilled]: (state, action) => {
       state.isLoading = false
@@ -182,7 +190,6 @@ const locationSlice = createSlice({
       state.locationId = parseInt(action.payload.location_id)
       state.position = null
       state.isBeingEdited = false
-      state.lastUpdatedDate = null
     },
     [addNewLocation.fulfilled]: (state, action) => {
       const reviews = action.payload.reviews || []
@@ -196,7 +203,10 @@ const locationSlice = createSlice({
       state.inList = Array.isArray(action.payload.lists)
         ? action.payload.lists.length > 0
         : false
-      state.lastUpdatedDate = computeLastUpdatedDate(action.payload, reviews)
+      state.location.lastUpdated = computeLastUpdatedDate(
+        action.payload,
+        reviews,
+      )
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false
@@ -213,7 +223,7 @@ const locationSlice = createSlice({
       state.isLoading = false
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      state.lastUpdatedDate = computeLastUpdatedDate(
+      state.location.lastUpdated = computeLastUpdatedDate(
         action.payload,
         state.reviews,
       )
@@ -231,7 +241,7 @@ const locationSlice = createSlice({
     [addNewReview.fulfilled]: (state, action) => {
       state.reviews.push(action.payload)
       state.reviews = sortReviewsLatestFirst(state.reviews)
-      state.lastUpdatedDate = computeLastUpdatedDate(
+      state.location.lastUpdated = computeLastUpdatedDate(
         state.location,
         state.reviews,
       )
@@ -252,7 +262,7 @@ const locationSlice = createSlice({
       if (reviewIndex !== -1) {
         state.reviews[reviewIndex] = action.payload
       }
-      state.lastUpdatedDate = computeLastUpdatedDate(
+      state.location.lastUpdated = computeLastUpdatedDate(
         state.location,
         state.reviews,
       )
@@ -270,7 +280,7 @@ const locationSlice = createSlice({
       state.reviews = state.reviews.filter(
         (review) => review.id !== action.payload,
       )
-      state.lastUpdatedDate = computeLastUpdatedDate(
+      state.location.lastUpdated = computeLastUpdatedDate(
         state.location,
         state.reviews,
       )
