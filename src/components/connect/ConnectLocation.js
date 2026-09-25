@@ -166,6 +166,7 @@ const ConnectLocation = ({
     ) {
       history.replaceView(viewFromLocationCenter(location))
     }
+    //eslint-disable-next-line
   }, [
     dispatch,
     hasInitialView,
@@ -173,7 +174,7 @@ const ConnectLocation = ({
     hasGoogleMap,
     hasLocation,
     locationId,
-  ]) //eslint-disable-line
+  ])
 
   useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
