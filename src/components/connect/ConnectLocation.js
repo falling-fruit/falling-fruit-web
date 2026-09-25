@@ -153,6 +153,10 @@ const ConnectLocation = ({
     }
   }, [!!location, hasInitialView]) //eslint-disable-line
 
+  const hasCurrentUrl = !!viewFromCurrentUrl()
+  const hasGoogleMap = !!googleMap
+  const hasLocation = !!location
+
   useEffect(() => {
     if (
       hasInitialView &&
@@ -162,16 +166,14 @@ const ConnectLocation = ({
     ) {
       history.replaceView(viewFromLocationCenter(location))
     }
-
-    // eslint-disable-next-line
   }, [
     dispatch,
     hasInitialView,
-    !!viewFromCurrentUrl(),
-    !!googleMap,
-    !!location,
+    hasCurrentUrl,
+    hasGoogleMap,
+    hasLocation,
     locationId,
-  ])
+  ]) //eslint-disable-line
 
   useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
