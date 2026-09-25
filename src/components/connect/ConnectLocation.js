@@ -82,6 +82,9 @@ const viewFromLocationCenter = ({ lat, lng }) => ({
   zoom: 16,
 })
 
+const locationLoaded = (location, locationId) =>
+  location && `${locationId}` === `${location.id}`
+
 const ConnectLocation = ({
   locationId,
   isBeingEdited,
@@ -104,7 +107,7 @@ const ConnectLocation = ({
   const toastIdRef = useRef(null)
 
   useEffect(() => {
-    if (location && `${locationId}` === `${location.id}`) {
+    if (locationLoaded(location, locationId)) {
       /*
        * We redo this effect each time locationId changes
        * but the component itself could be getting rerendered
@@ -151,7 +154,12 @@ const ConnectLocation = ({
   }, [!!location, hasInitialView]) //eslint-disable-line
 
   useEffect(() => {
-    if (hasInitialView && !viewFromCurrentUrl() && googleMap && location) {
+    if (
+      hasInitialView &&
+      !viewFromCurrentUrl() &&
+      googleMap &&
+      locationLoaded(location, locationId)
+    ) {
       history.replaceView(viewFromLocationCenter(location))
     }
   }, [
@@ -160,6 +168,7 @@ const ConnectLocation = ({
     !!viewFromCurrentUrl(),
     !!googleMap,
     !!location,
+    locationId,
   ]) //eslint-disable-line
 
   useEffect(() => {
