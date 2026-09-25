@@ -77,6 +77,11 @@ const ToastContent = () => {
   )
 }
 
+const viewFromLocationCenter = ({ lat, lng }) => ({
+  center: { lat, lng },
+  zoom: 16,
+})
+
 const ConnectLocation = ({
   locationId,
   isBeingEdited,
@@ -126,39 +131,36 @@ const ConnectLocation = ({
       }
 
       if (action.payload && !initialView) {
-        const view = viewFromCurrentUrl() || {
-          center: {
-            lat: action.payload.lat,
-            lng: action.payload.lng,
-          },
-          zoom: 16,
-        }
-        dispatch(setInitialView(view))
+        dispatch(
+          setInitialView(
+            viewFromCurrentUrl() || viewFromLocationCenter(action.payload),
+          ),
+        )
       }
     })
   }, [dispatch, locationId]) //eslint-disable-line
 
   useEffect(() => {
     if (location && !hasInitialView) {
-      const view = viewFromCurrentUrl() || {
-        center: {
-          lat: location.lat,
-          lng: location.lng,
-        },
-        zoom: 16,
-      }
-      dispatch(setInitialView(view))
+      dispatch(
+        setInitialView(
+          viewFromCurrentUrl() || viewFromLocationCenter(location),
+        ),
+      )
     }
   }, [!!location, hasInitialView]) //eslint-disable-line
 
   useEffect(() => {
-    if (hasInitialView && !viewFromCurrentUrl() && googleMap) {
-      history.replaceView({
-        center: googleMap.getCenter().toJSON(),
-        zoom: googleMap.getZoom(),
-      })
+    if (hasInitialView && !viewFromCurrentUrl() && googleMap && location) {
+      history.replaceView(viewFromLocationCenter(location))
     }
-  }, [dispatch, hasInitialView, !!viewFromCurrentUrl(), !!googleMap]) //eslint-disable-line
+  }, [
+    dispatch,
+    hasInitialView,
+    !!viewFromCurrentUrl(),
+    !!googleMap,
+    !!location,
+  ]) //eslint-disable-line
 
   useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))

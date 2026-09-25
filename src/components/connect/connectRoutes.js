@@ -121,6 +121,7 @@ const connectRoutes = [
    * - on desktop, clicking location from a settings page should make 'back' go to settings instead of map
    * - location-specific context should reset when going from one location to another
    * - two way binding between URL and initialView like in ConnectMap, but with center of location as fallback
+   * - opening a bare URL externally should shift the view in a running app
    *
    * actions:
    * - fetch data from backend
@@ -132,7 +133,7 @@ const connectRoutes = [
    * - on desktop, reset the fromSettings flag when leaving location
    * - when location id changes, drop fromSettings and userActivity state
    * - if there's no initial view in Redux but there's a location in Redux, set initial view
-   * - if there's no view in URL but the initial view / map is present, set the URL view
+   * - if there's no view in URL but the initial view / map is present, wait for location to load and set the URL view to location centre
    */
   <Route
     key="connect-location"
