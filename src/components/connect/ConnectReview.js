@@ -9,6 +9,7 @@ import { fetchReviewData } from '../../redux/reviewSlice'
 import { viewFromCurrentUrl } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { useIsDesktop } from '../../utils/useBreakpoint'
+import { viewFromLocationCenter } from './ConnectLocation'
 
 const ConnectReview = ({ reviewId }) => {
   const dispatch = useDispatch()
@@ -41,13 +42,10 @@ const ConnectReview = ({ reviewId }) => {
           (locationAction) => {
             if (locationAction.payload) {
               dispatch(
-                setInitialView({
-                  center: {
-                    lat: locationAction.payload.lat,
-                    lng: locationAction.payload.lng,
-                  },
-                  zoom: 16,
-                }),
+                setInitialView(
+                  viewFromCurrentUrl() ||
+                    viewFromLocationCenter(locationAction.payload),
+                ),
               )
             }
           },

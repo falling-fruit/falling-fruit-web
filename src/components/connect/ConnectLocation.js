@@ -77,7 +77,7 @@ const ToastContent = () => {
   )
 }
 
-const viewFromLocationCenter = ({ lat, lng }) => ({
+export const viewFromLocationCenter = ({ lat, lng }) => ({
   center: { lat, lng },
   zoom: 16,
 })
@@ -162,6 +162,8 @@ const ConnectLocation = ({
     ) {
       history.replaceView(viewFromLocationCenter(location))
     }
+
+    // eslint-disable-next-line
   }, [
     dispatch,
     hasInitialView,
@@ -169,7 +171,7 @@ const ConnectLocation = ({
     !!googleMap,
     !!location,
     locationId,
-  ]) //eslint-disable-line
+  ])
 
   useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
