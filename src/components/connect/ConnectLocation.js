@@ -77,10 +77,13 @@ const ToastContent = () => {
   )
 }
 
-const viewFromLocationCenter = ({ lat, lng }) => ({
+export const viewFromLocationCenter = ({ lat, lng }) => ({
   center: { lat, lng },
   zoom: 16,
 })
+
+const locationLoaded = (location, locationId) =>
+  location && `${locationId}` === `${location.id}`
 
 const ConnectLocation = ({
   locationId,
@@ -104,7 +107,7 @@ const ConnectLocation = ({
   const toastIdRef = useRef(null)
 
   useEffect(() => {
-    if (location && `${locationId}` === `${location.id}`) {
+    if (locationLoaded(location, locationId)) {
       /*
        * We redo this effect each time locationId changes
        * but the component itself could be getting rerendered
@@ -150,17 +153,28 @@ const ConnectLocation = ({
     }
   }, [!!location, hasInitialView]) //eslint-disable-line
 
+  const hasCurrentUrl = !!viewFromCurrentUrl()
+  const hasGoogleMap = !!googleMap
+  const hasLocation = !!location
+
   useEffect(() => {
-    if (hasInitialView && !viewFromCurrentUrl() && googleMap && location) {
+    if (
+      hasInitialView &&
+      !viewFromCurrentUrl() &&
+      googleMap &&
+      locationLoaded(location, locationId)
+    ) {
       history.replaceView(viewFromLocationCenter(location))
     }
+    //eslint-disable-next-line
   }, [
     dispatch,
     hasInitialView,
-    !!viewFromCurrentUrl(),
-    !!googleMap,
-    !!location,
-  ]) //eslint-disable-line
+    hasCurrentUrl,
+    hasGoogleMap,
+    hasLocation,
+    locationId,
+  ])
 
   useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
