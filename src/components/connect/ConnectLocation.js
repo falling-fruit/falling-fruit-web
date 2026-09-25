@@ -152,13 +152,18 @@ const ConnectLocation = ({
   }, [!!location, hasInitialView]) //eslint-disable-line
 
   useEffect(() => {
-    if (hasInitialView && !viewFromCurrentUrl() && googleMap) {
-      history.replaceView({
-        center: googleMap.getCenter().toJSON(),
-        zoom: googleMap.getZoom(),
-      })
+    if (hasInitialView && !viewFromCurrentUrl() && googleMap && location) {
+      const center = { lat: location.lat, lng: location.lng }
+      const zoom = 16
+      history.replaceView({ center, zoom })
     }
-  }, [dispatch, hasInitialView, !!viewFromCurrentUrl(), !!googleMap]) //eslint-disable-line
+  }, [
+    dispatch,
+    hasInitialView,
+    !!viewFromCurrentUrl(),
+    !!googleMap,
+    !!location,
+  ]) //eslint-disable-line
 
   useEffect(() => {
     dispatch(setIsBeingEditedAndResetPosition(isBeingEdited))
