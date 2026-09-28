@@ -55,6 +55,7 @@ const LocationSheet = ({
   hasWhiteBackground,
   displayOverTopBar,
   enterFromTop,
+  enterFromTopOffset,
 }) => {
   const sheetRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -132,9 +133,9 @@ const LocationSheet = ({
     const target = getSnapTranslateY(position)
 
     if (!paneIsOnScreen) {
-      // Animate in from the top when arriving from the fully-open page,
-      // otherwise slide up from the bottom edge. Don't report the start frame.
-      const startTy = enterFromTop ? 0 : getSnapTranslateY(POSITIONS.BOTTOM)
+      const startTy = enterFromTop
+        ? enterFromTopOffset
+        : getSnapTranslateY(POSITIONS.BOTTOM)
       movePane('none', startTy, false)
       requestAnimationFrame(() => {
         movePane('transform 0.3s linear', target)

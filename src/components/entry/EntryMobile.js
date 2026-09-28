@@ -49,6 +49,7 @@ const EntryMobile = () => {
   const hasReviews = reviews && reviews.length > 0
 
   const [safeAreaInsetBottom, setSafeAreaInsetBottom] = useState(0)
+  const [safeAreaInsetTop, setSafeAreaInsetTop] = useState(0)
 
   // When the sheet re-mounts right after the full page, animate down from the
   // top rather than up from the bottom.
@@ -75,6 +76,13 @@ const EntryMobile = () => {
 
     const numericValue = parseFloat(value) || 0
     setSafeAreaInsetBottom(numericValue)
+
+    const topValue = getComputedStyle(document.documentElement)
+      .getPropertyValue('--safe-area-inset-top')
+      .trim()
+
+    const numericTopValue = parseFloat(topValue) || 0
+    setSafeAreaInsetTop(numericTopValue)
     /*
      * NOTE:
      * The value could change if we resize or rotate screen
@@ -117,6 +125,11 @@ const EntryMobile = () => {
       onRequestFullyOpen={fullyOpenPaneDrawer}
       onChangeTranslateY={setCurrentTranslateY}
       enterFromTop={enterFromTop}
+      enterFromTopOffset={
+        hasImages
+          ? ENTRY_IMAGE_HEIGHT_PX
+          : NAVIGATION_BAR_HEIGHT_PX + safeAreaInsetTop
+      }
       onPositionChange={(position) => {
         if (position === 'middle') {
           setPaneDrawerToMiddlePosition()
