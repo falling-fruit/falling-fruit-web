@@ -55,6 +55,7 @@ const LocationSheet = ({
   hasWhiteBackground,
   displayOverTopBar,
   enterFromTop,
+  enterFromTopOffset,
 }) => {
   const sheetRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -132,17 +133,20 @@ const LocationSheet = ({
     const target = getSnapTranslateY(position)
 
     if (!paneIsOnScreen) {
-      // Animate in from the top when arriving from the fully-open page,
-      // otherwise slide up from the bottom edge. Don't report the start frame.
-      const startTy = enterFromTop ? 0 : getSnapTranslateY(POSITIONS.BOTTOM)
+      const startTy = enterFromTop
+        ? enterFromTopOffset
+        : getSnapTranslateY(POSITIONS.BOTTOM)
       movePane('none', startTy, false)
+      // double RAF fixes mobile Firefox quirk
       requestAnimationFrame(() => {
-        movePane('transform 0.3s linear', target)
+        requestAnimationFrame(() => {
+          movePane('transform 0.3s linear', target)
+        })
       })
     } else {
       movePane('transform 0.3s linear', target)
     }
-  }, [position, getSnapTranslateY, movePane, enterFromTop])
+  }, [position]) //eslint-disable-line
 
   // Keep snap points in sync with the dynamic viewport (URL bar, rotation,
   // keyboard).
