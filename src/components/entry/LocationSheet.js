@@ -285,7 +285,8 @@ const LocationSheet = ({
           '.gm-svpc, .gm-control-active, .gmnoprint, .map-zoom-button, .gm-iv-back, .gm-iv-close, .close-street-view',
         )
         const isTopBar = event.target.closest('.top-bar')
-        if (!isAnotherLocation && !isMapControl && !isTopBar) {
+        const isToast = event.target.closest('.Toastify')
+        if (!isAnotherLocation && !isMapControl && !isTopBar && !isToast) {
           event.stopPropagation()
           onPositionChange(POSITIONS.BOTTOM)
         }
