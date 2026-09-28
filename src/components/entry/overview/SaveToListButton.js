@@ -236,6 +236,14 @@ const SaveToListButton = ({ containerRef }) => {
     }
   }, [isAddingNew])
 
+  // If the dropdown is already open on mount, fetch
+  useEffect(() => {
+    if (open) {
+      dispatch(fetchLists())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleButtonClick = () => {
     if (open) {
       closeSaveDropdown()
