@@ -192,21 +192,17 @@ const locationSlice = createSlice({
       state.isBeingEdited = false
     },
     [addNewLocation.fulfilled]: (state, action) => {
-      const reviews = action.payload.reviews || []
-      state.location = action.payload
+      const { reviews: rawReviews, lists, ...locationData } = action.payload
+      const reviews = rawReviews || []
+      state.location = locationData
       state.reviews = sortReviewsLatestFirst(reviews)
       state.locationId = parseInt(action.payload.id)
       state.isLoading = false
       state.isBeingEdited = false
       state.isBeingInitializedMobile = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
-      state.inList = Array.isArray(action.payload.lists)
-        ? action.payload.lists.length > 0
-        : false
-      state.location.lastUpdated = computeLastUpdatedDate(
-        action.payload,
-        reviews,
-      )
+      state.inList = Array.isArray(lists) ? lists.length > 0 : false
+      state.location.lastUpdated = computeLastUpdatedDate(locationData, reviews)
     },
     [addNewLocation.rejected]: (state, action) => {
       state.isLoading = false
@@ -219,12 +215,17 @@ const locationSlice = createSlice({
     },
     [editExistingLocation.fulfilled]: (state, action) => {
       // Keep existing reviews as they don't change when editing location
-      state.location = action.payload
+      const {
+        reviews: _reviews,
+        lists: _lists,
+        ...locationData
+      } = action.payload
+      state.location = locationData
       state.isLoading = false
       state.isBeingEdited = false
       state.position = { lat: action.payload.lat, lng: action.payload.lng }
       state.location.lastUpdated = computeLastUpdatedDate(
-        action.payload,
+        locationData,
         state.reviews,
       )
       toast.success(i18next.t('success_message.location_edited'))
