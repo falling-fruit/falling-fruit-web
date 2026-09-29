@@ -187,4 +187,40 @@ Alternatively, open [`ios/App/App.xcworkspace`](../ios/App/App.xcworkspace) in X
 npx cap open ios
 ```
 
-To build a release, select "Any iOS Device (arm64)" as the build target, then Product > Archive. Follow the prompts to upload to App Store Connect and submit for review.
+To build a release, select "Any iOS Device (arm64)" as the build target, then Product > Archive. Follow the prompts to "Validate App" and then "Distribute App" to App Store Connect.
+
+# Release
+
+* Write release notes with `*` bullet points, staying below 500 characters (the limit on Google Play). See https://github.com/falling-fruit/falling-fruit-web/compare/v{last}...main, where `last` is the previous [release](https://github.com/falling-fruit/falling-fruit-web/releases).
+* GitHub
+  * [GitHub Releases](https://github.com/falling-fruit/falling-fruit-web/releases)
+  * Draft a new release
+  * Tag: `v{version}` and create new tag
+  * Title: `v{version}`
+  * Description: Release notes from above and a list of contributors
+* [Google Play Console](https://play.google.com/console)
+  * Select app
+  * Test and release > Production > Create new release
+  * Upload android/app/build/outputs/apk/release/app-release-signed.apk
+  * Release notes: Release notes from above (not including any specific to web or ios)
+  * Submit for review
+* [App Store Connect](https://appstoreconnect.apple.com/)
+  * Validate and submit for review from Xcode (see above)
+  * Click "+" with name `{version}`
+  * What's new in this version: Release notes from above (not including any specific to web or android)
+  * Build > Add Build > Select build uploaded above
+  * Submit for review
+* Server
+  * Pull latest changes for both API and frontend and reload as follows:
+
+  ```sh
+  nvm use 22.16
+  cd /var/www/falling-fruit-api
+  git pull
+  yarn
+  pm2 reload api
+  cd /var/www/falling-fruit-web
+  git pull
+  yarn
+  yarn rebuild
+  ```
