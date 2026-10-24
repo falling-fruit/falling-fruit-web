@@ -39,7 +39,6 @@ const Headline = styled(PageHeader)`
 
 const Description = styled.div`
   color: ${({ theme }) => theme.secondaryText};
-`
 
 const SpinnerIcon = styled(Loader)`
   animation: spin 1s linear infinite;
