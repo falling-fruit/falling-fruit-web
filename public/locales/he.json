@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "לא מאומת: עלול להיות לא מדויק",
       "unverified_report_does_not_exist": "דווח שלא קיים"
     },
-    "index": {
-      "editmarker": "עברו למיקום המקור."
-    },
     "infowindow": {
       "access_mode": [
         "יש לי מקור זה",
@@ -428,13 +425,13 @@
       "header_message": "משהו השתבש"
     },
     "welcome": {
-      "community_driven_platform": "פולינג פרוט היא פלטפורמה קהילתית לשיתוף מיקומי צמחים אכילים ומקורות אחרים של מזון חינם.",
-      "discover_and_contribute": "אתם יכולים לגלות מה אחרים ליקטו בשכונה שלכם, ולתרום את התצפיות שלכם.",
       "explore_the_map": "גלה את המפה",
       "falling_fruit_app_for_android": "פולינג פרוט לאנדרואיד",
       "falling_fruit_app_for_ios": "פולינג פרוט ל-iOS",
+      "headline": "מצאו מזון חינם שגדל קרוב אליכם",
       "home_page": "בית",
-      "welcome_visitors_to_the_site_short": "ברוכים הבאים!"
+      "intro_community": "Falling Fruit היא מפה של מיליוני צמחים אכילים ומקורות נוספים למזון חינם, שנוצרה בשיתוף פעולה על ידי קהילה עולמית של לקטים.",
+      "intro_contribute": "גלו מה זמין בקרבתכם, למדו מלקטים אחרים ושתפו את המציאות שלכם."
     }
   },
   "problems": {

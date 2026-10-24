@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "Overifierad: kan vara felaktig",
       "unverified_report_does_not_exist": "Rapportera att den inte finns"
     },
-    "index": {
-      "editmarker": "Flytta till källans position."
-    },
     "infowindow": {
       "access_mode": [
         "Källan finns på min egendom",
@@ -428,13 +425,13 @@
       "header_message": "Något gick fel"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit är en gemenskapsdriven plattform för att dela platser med ätbara växter och andra källor till gratis mat.",
-      "discover_and_contribute": "Du kan upptäcka vad andra har skördat i ditt område och bidra med dina egna observationer.",
       "explore_the_map": "Utforska kartan",
       "falling_fruit_app_for_android": "Falling Fruit för Android",
       "falling_fruit_app_for_ios": "Falling Fruit för iOS",
+      "headline": "Hitta gratis mat som växer nära dig",
       "home_page": "Hem",
-      "welcome_visitors_to_the_site_short": "Välkommen!"
+      "intro_community": "Falling Fruit är en karta över miljontals ätbara växter och andra källor till gratis mat, skapad i samarbete av en världsomspännande gemenskap av samlare.",
+      "intro_contribute": "Upptäck vad som finns tillgängligt nära dig, lär dig av andra samlare och dela med dig av dina egna fynd."
     }
   },
   "problems": {

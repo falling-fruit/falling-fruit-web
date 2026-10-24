@@ -1,9 +1,15 @@
+import { Menu, X } from '@styled-icons/boxicons-regular'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { LanguageSelect } from '../../i18n'
 import { useIsDesktop } from '../../utils/useBreakpoint'
 import { BackButton } from './ActionButtons'
+import Button from './Button'
+import ResetButton from './ResetButton'
 
 const MobileHeader = styled.div`
   width: 100%;
@@ -19,6 +25,56 @@ const LanguageContainer = styled.div`
   margin-inline-start: auto;
   max-width: 120px;
   text-align: start;
+`
+
+const LandingTopBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  img {
+    height: 48px;
+    width: auto;
+    margin-inline-end: 0;
+  }
+`
+
+const HamburgerButton = styled(ResetButton)`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: ${({ theme }) => theme.secondaryText};
+`
+
+const LandingMenuPanel = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75em;
+  width: 100%;
+  margin-block-start: 1em;
+
+  ${LanguageContainer} {
+    margin-inline: 0 auto;
+    max-width: 120px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+`
+
+const MenuAuthActions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75em;
+`
+
+const MenuLinkWhite = styled(Link)`
+  color: ${({ theme }) => theme.background} !important;
 `
 
 const PageScrollWrapper = styled.div`
@@ -297,19 +353,39 @@ const AuthPage = ({ children }) => {
 
 const LandingPage = ({ children }) => {
   const isDesktop = useIsDesktop()
+  const { t } = useTranslation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <PageScrollWrapper>
       <PageWrapper isDesktop={isDesktop}>
-        {!isDesktop && (
-          <MobileHeader>
-            <img src="/logo_orange.svg" alt="Falling Fruit logo" />
-          </MobileHeader>
-        )}
-        {!isDesktop && (
-          <LanguageContainer>
-            <LanguageSelect />
-          </LanguageContainer>
+        <LandingTopBar>
+          <img src="/logo_orange.svg" alt="Falling Fruit logo" />
+          <HamburgerButton
+            className="hamburger"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={28} />}
+          </HamburgerButton>
+        </LandingTopBar>
+        {isMenuOpen && (
+          <LandingMenuPanel>
+            <LanguageContainer>
+              <LanguageSelect />
+            </LanguageContainer>
+            <MenuAuthActions>
+              <Button type="button" secondary>
+                <Link to="/auth/sign_in">{t('users.sign_in')}</Link>
+              </Button>
+              <Button type="button">
+                <MenuLinkWhite to="/auth/sign_up">
+                  {t('glossary.sign_up')}
+                </MenuLinkWhite>
+              </Button>
+            </MenuAuthActions>
+          </LandingMenuPanel>
         )}
         {children}
       </PageWrapper>

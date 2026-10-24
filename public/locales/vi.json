@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "Chưa được xác minh: có thể không chính xác",
       "unverified_report_does_not_exist": "Báo cáo không tồn tại"
     },
-    "index": {
-      "editmarker": "Di chuyển đến vị trí của nguồn."
-    },
     "infowindow": {
       "access_mode": [
         "Nguồn là tài sản của tôi",
@@ -428,13 +425,13 @@
       "header_message": "Đã xảy ra lỗi"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit là một nền tảng do cộng đồng điều hành để chia sẻ vị trí của các cây ăn được và các nguồn thực phẩm miễn phí khác.",
-      "discover_and_contribute": "Bạn có thể khám phá những gì người khác đã hái lượm trong khu vực của bạn, và đóng góp quan sát của bạn.",
       "explore_the_map": "Khám phá bản đồ",
       "falling_fruit_app_for_android": "Falling Fruit cho Android",
       "falling_fruit_app_for_ios": "Falling Fruit cho iOS",
+      "headline": "Tìm thức ăn miễn phí mọc gần bạn",
       "home_page": "Trang chủ",
-      "welcome_visitors_to_the_site_short": "Chào mừng!"
+      "intro_community": "Falling Fruit là bản đồ về hàng triệu loài cây ăn được và các nguồn thức ăn miễn phí khác, được xây dựng cùng nhau bởi một cộng đồng người hái lượm trên toàn thế giới.",
+      "intro_contribute": "Khám phá những gì có sẵn gần bạn, học hỏi từ những người hái lượm khác và chia sẻ những phát hiện của riêng bạn."
     }
   },
   "problems": {

@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "Doğrulanmamış: yanlış olabilir",
       "unverified_report_does_not_exist": "Mevcut olmadığını bildir"
     },
-    "index": {
-      "editmarker": "Kaynağın konumuna gidin."
-    },
     "infowindow": {
       "access_mode": [
         "Kaynak benim mülkümde",
@@ -428,13 +425,13 @@
       "header_message": "Bir şeyler yanlış gitti"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit, yenilebilir bitkiler ve diğer ücretsiz gıda kaynaklarının konumlarını paylaşmak için topluluk tarafından yönlendirilen bir platformdur.",
-      "discover_and_contribute": "Mahallenizde başkalarının neler topladığını keşfedebilir ve kendi gözlemlerinizi ekleyebilirsiniz.",
       "explore_the_map": "Haritayı keşfet",
       "falling_fruit_app_for_android": "Android için Falling Fruit",
       "falling_fruit_app_for_ios": "iOS için Falling Fruit",
+      "headline": "Yakınınızda yetişen ücretsiz yiyecekleri bulun",
       "home_page": "Ana Sayfa",
-      "welcome_visitors_to_the_site_short": "Hoş geldiniz!"
+      "intro_community": "Falling Fruit, dünya çapında bir toplayıcı topluluğu tarafından birlikte oluşturulan, milyonlarca yenilebilir bitki ve diğer ücretsiz gıda kaynaklarının haritasıdır.",
+      "intro_contribute": "Yakınınızda nelerin bulunduğunu keşfedin, diğer toplayıcılardan öğrenin ve kendi bulduklarınızı paylaşın."
     }
   },
   "problems": {

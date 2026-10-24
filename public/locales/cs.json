@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "Neověřeno: může být nepřesné",
       "unverified_report_does_not_exist": "Nahlásit, že neexistuje"
     },
-    "index": {
-      "editmarker": "Přesuňte se na pozici zdroje."
-    },
     "infowindow": {
       "access_mode": [
         "Zdroj je na mém pozemku",
@@ -428,13 +425,13 @@
       "header_message": "Něco se pokazilo"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit je komunitní platforma pro sdílení lokalit jedlých rostlin a dalších zdrojů bezplatného jídla.",
-      "discover_and_contribute": "Můžete objevit, co ostatní sklízeli ve vaší oblasti, a přispět vlastními pozorováními.",
       "explore_the_map": "Prozkoumejte mapu",
       "falling_fruit_app_for_android": "Falling Fruit pro Android",
       "falling_fruit_app_for_ios": "Falling Fruit pro iOS",
+      "headline": "Najděte jídlo zdarma rostoucí ve vašem okolí",
       "home_page": "Domů",
-      "welcome_visitors_to_the_site_short": "Vítejte!"
+      "intro_community": "Falling Fruit je mapa milionů jedlých rostlin a dalších zdrojů jídla zdarma, kterou společně vytváří celosvětová komunita sběračů.",
+      "intro_contribute": "Objevte, co je dostupné ve vašem okolí, učte se od ostatních sběračů a sdílejte své vlastní nálezy."
     }
   },
   "problems": {
