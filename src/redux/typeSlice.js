@@ -3,7 +3,7 @@ import i18next from 'i18next'
 import { toast } from 'react-toastify'
 
 import { addType, getTypes } from '../utils/api'
-import { typesAccessInLanguage } from '../utils/localizedTypes'
+import { nullTypesAccess, typesAccessInLanguage } from '../utils/localizedTypes'
 import TypeShareEncoder from '../utils/typeShareEncoder'
 
 export const fetchAndLocalizeTypes = createAsyncThunk(
@@ -38,8 +38,8 @@ const typeSlice = createSlice({
   name: 'type',
   initialState: {
     isLoading: false,
-    typesAccess: typesAccessInLanguage([], ''),
-    typeEncoder: new TypeShareEncoder(typesAccessInLanguage([], '')),
+    typesAccess: nullTypesAccess(),
+    typeEncoder: new TypeShareEncoder(nullTypesAccess()),
     isAddTypeModalOpen: false,
   },
   reducers: {

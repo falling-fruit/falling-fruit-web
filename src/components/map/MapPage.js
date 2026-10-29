@@ -415,7 +415,7 @@ const MapPage = ({ isDesktop }) => {
 
   useEffect(() => {
     const ready =
-      dispatch && !typesAccess.isEmpty && googleMap && !hasTypesParams
+      dispatch && !typesAccess.isNull && googleMap && !hasTypesParams
     if (!ready) {
       return
     }
@@ -433,7 +433,7 @@ const MapPage = ({ isDesktop }) => {
     )
 
     handleViewChange()
-  }, [!typesAccess.isEmpty, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
+  }, [!typesAccess.isNull, googleMap, !!dispatch, hasTypesParams]) //eslint-disable-line
 
   // fetchLocations has in_list when logged in
   useEffect(() => {

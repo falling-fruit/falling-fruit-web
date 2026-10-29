@@ -29,7 +29,7 @@ const ListPage = () => {
   const history = useAppHistory()
   const { typesAccess } = useSelector((state) => state.type)
   const { lastMapView } = useSelector((state) => state.viewport)
-  const locationsAvailable = !(typesAccess.isEmpty || lastMapView === null)
+  const locationsAvailable = !(typesAccess.isNull || lastMapView === null)
   const isDesktop = useIsDesktop()
 
   useEffect(() => {

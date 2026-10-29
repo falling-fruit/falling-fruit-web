@@ -8,7 +8,7 @@ const FilterIconButton = (props) => {
 
   const { typesAccess } = useSelector((state) => state.type)
 
-  const isInitialized = !typesAccess.isEmpty && types !== null
+  const isInitialized = !typesAccess.isNull && types !== null
 
   const defaultSelectionSet = new Set(
     typesAccess

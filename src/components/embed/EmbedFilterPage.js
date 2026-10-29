@@ -19,7 +19,7 @@ const EmbedFilterPage = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!typesAccess.isEmpty && lastMapView) {
+    if (!typesAccess.isNull && lastMapView) {
       dispatch(fetchFilterCounts())
     }
   }, [dispatch, typesAccess, lastMapView])

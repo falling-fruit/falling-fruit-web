@@ -30,7 +30,7 @@ const RecentActivityPage = () => {
     lastBrowsedSection,
   } = recentChanges
 
-  const typesReady = !typesAccess.isEmpty
+  const typesReady = !typesAccess.isNull
   const hasChanges = changes.length > 0
 
   // 1. Initial load: fetch the first page of changes once types are ready

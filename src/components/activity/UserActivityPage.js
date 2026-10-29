@@ -92,7 +92,7 @@ const UserActivityPage = () => {
 
   const { typesAccess } = useSelector((state) => state.type)
 
-  const changesReady = !typesAccess.isEmpty
+  const changesReady = !typesAccess.isNull
 
   const isCurrentUser = userId === user?.id
   const isLoading = changes === undefined

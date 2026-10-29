@@ -27,7 +27,7 @@ const FilterWrapper = () => {
   const { lastMapView } = useSelector((state) => state.viewport)
   const dispatch = useDispatch()
 
-  const countsAvailable = !(typesAccess.isEmpty || lastMapView === null)
+  const countsAvailable = !(typesAccess.isNull || lastMapView === null)
 
   useEffect(() => {
     if (countsAvailable) {

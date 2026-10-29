@@ -262,15 +262,18 @@ export class TypesAccess {
   idIndex: IdDict<number>
   childrenById: IdDict<Id[]>
   isEmpty: boolean
+  isNull: boolean
   constructor(
     localizedTypes: LocalizedType[],
     idIndex: IdDict<number>,
     childrenById: IdDict<Id[]>,
+    isNull: boolean = false,
   ) {
     this.localizedTypes = localizedTypes
     this.idIndex = idIndex
     this.childrenById = childrenById
     this.isEmpty = localizedTypes.length === 0
+    this.isNull = isNull
   }
 
   selectableTypes(): LocalizedType[] {
@@ -342,3 +345,5 @@ export const typesAccessInLanguage = (
   }
   return createTypesAccess(toDisplayOrder(localizedTypes))
 }
+
+export const nullTypesAccess = () => new TypesAccess([], {}, {}, true)
