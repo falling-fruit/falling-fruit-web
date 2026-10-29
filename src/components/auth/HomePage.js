@@ -13,11 +13,12 @@ import {
 } from '../../redux/geolocationSlice'
 import { viewToString } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
+import ActivityGlobe from '../activity/ActivityGlobe'
 import AboutSection from '../mobile/AboutSection'
 import MobileAppLinks from '../mobile/MobileAppLinks'
 import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
-import { PageHeader } from '../ui/Headers'
+import { NavHeader, PageHeader } from '../ui/Headers'
 import { LandingPage } from '../ui/PageTemplate'
 import { withAuthRedirect } from './withAuthRedirect'
 
@@ -167,6 +168,8 @@ const HomePage = () => {
           {t('pages.welcome.explore_the_map')}
         </LargeButton>
       </ButtonWrapper>
+      <NavHeader>{t('pages.changes.last_24_hours')}</NavHeader>
+      <ActivityGlobe />
       <MobileAppLinks />
       <AboutSection />
       <br />
