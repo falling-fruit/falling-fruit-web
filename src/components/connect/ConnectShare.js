@@ -84,7 +84,7 @@ const ConnectShare = () => {
   }, [location.search, dispatch, history])
 
   useEffect(() => {
-    if (typesAccess.isEmpty) {
+    if (typesAccess.isNull) {
       return
     }
 

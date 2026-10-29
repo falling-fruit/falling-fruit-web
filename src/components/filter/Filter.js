@@ -143,7 +143,7 @@ const Filter = () => {
           (typeId) => !types.includes(typeId),
         )}
       />
-      {typesAccess.isEmpty ? (
+      {typesAccess.isNull ? (
         <RCTreeSelectSkeleton />
       ) : fetchError ? (
         <ErrorContainer>

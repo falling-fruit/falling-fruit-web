@@ -287,9 +287,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
   const blockedByStreetView = streetViewOpen && positionDirty
 
   const initialValues =
-    !location || typesAccess.isEmpty
-      ? {}
-      : locationToForm(location, typesAccess)
+    !location || typesAccess.isNull ? {} : locationToForm(location, typesAccess)
 
   const isLoggedIn = useSelector((state) => !!state.auth.user)
 
@@ -344,7 +342,7 @@ export const LocationForm = ({ editingId, innerRef }) => {
     }
   }
 
-  return isLoading || typesAccess.isEmpty ? (
+  return isLoading || typesAccess.isNull ? (
     <div>{t('layouts.loading')}</div>
   ) : (
     <StyledForm>

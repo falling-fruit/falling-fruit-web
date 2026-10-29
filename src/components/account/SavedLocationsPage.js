@@ -437,7 +437,7 @@ const SavedLocationsPage = () => {
     lastViewedListId,
   } = useSelector((state) => state.save)
   const { typesAccess } = useSelector((state) => state.type)
-  const typesReady = !typesAccess.isEmpty
+  const typesReady = !typesAccess.isNull
   const { t } = useTranslation()
   const isDesktop = useIsDesktop()
 
