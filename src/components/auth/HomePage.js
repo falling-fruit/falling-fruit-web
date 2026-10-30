@@ -40,7 +40,7 @@ const Headline = styled(PageHeader)`
 
 const Description = styled.div`
   color: ${({ theme }) => theme.secondaryText};
-
+`
 const SpinnerIcon = styled(Loader)`
   animation: spin 1s linear infinite;
 
@@ -168,9 +168,9 @@ const HomePage = () => {
           {t('pages.welcome.explore_the_map')}
         </LargeButton>
       </ButtonWrapper>
+      <MobileAppLinks />
       <NavHeader>{t('pages.changes.last_24_hours')}</NavHeader>
       <ActivityGlobe />
-      <MobileAppLinks />
       <AboutSection />
       <br />
       <MobileSocialLinks />
