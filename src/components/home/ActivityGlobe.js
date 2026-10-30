@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import { createActivityDiary } from './ActivityDiary'
-import { ActivityLines } from './DiaryEntry'
-import worldMapPaths from './worldMapPaths.json'
+import { createActivityDiary } from '../activity/ActivityDiary'
+import { ActivityLines } from '../activity/DiaryEntry'
+import worldMapPaths from '../activity/worldMapPaths.json'
 
 const MAP_WIDTH = worldMapPaths.width
 const MAP_HEIGHT = worldMapPaths.height

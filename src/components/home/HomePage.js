@@ -13,14 +13,14 @@ import {
 } from '../../redux/geolocationSlice'
 import { viewToString } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
-import ActivityGlobe from '../activity/ActivityGlobe'
+import { withAuthRedirect } from '../auth/withAuthRedirect'
 import AboutSection from '../mobile/AboutSection'
 import MobileAppLinks from '../mobile/MobileAppLinks'
 import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
 import { NavHeader, PageHeader } from '../ui/Headers'
 import { LandingPage } from '../ui/PageTemplate'
-import { withAuthRedirect } from './withAuthRedirect'
+import ActivityGlobe from './ActivityGlobe'
 
 const ButtonWrapper = styled.div`
   display: flex;

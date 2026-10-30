@@ -7,6 +7,7 @@ import activityRoutes from '../activity/activityRoutes'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import errorRoutes from '../error/errorRoutes'
+import homeRoutes from '../home/homeRoutes'
 import MapPage from '../map/MapPage'
 import Header from './Header'
 import SidePane from './SidePane'
@@ -36,6 +37,7 @@ const DesktopLayout = () => (
       {aboutRoutes}
       {activityRoutes}
       {authRoutes}
+      {homeRoutes}
       {accountRoutes}
       {errorRoutes}
       <Route>
