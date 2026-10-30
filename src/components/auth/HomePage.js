@@ -24,19 +24,14 @@ import { withAuthRedirect } from './withAuthRedirect'
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1em;
   margin: 1em 0;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-  }
 `
 const LargeButton = styled(Button)`
   min-height: 2em;
   font-size: 1em;
-  @media (max-width: 480px) {
-    max-width: 80%;
-  }
+  flex: 0 0 auto;
 `
 
 const Headline = styled(PageHeader)`
