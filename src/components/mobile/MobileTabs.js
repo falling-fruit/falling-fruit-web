@@ -20,6 +20,7 @@ import { TABS_HEIGHT_PX } from '../../constants/mobileLayout'
 import { useAppHistory } from '../../utils/useAppHistory'
 import { accountPages } from '../account/accountRoutes'
 import { authPages } from '../auth/authRoutes'
+import { homePages } from '../home/homeRoutes'
 import { zIndex } from '../ui/GlobalStyle'
 
 const PageTabs = styled(Tabs)`
@@ -131,6 +132,7 @@ const useTabs = () => {
     {
       paths: [
         ...authPages.map((route) => route.path),
+        ...homePages.map((route) => route.path),
         ...accountPages.map((route) => route.path),
       ],
       icon: isLoggedIn ? <UserCircle /> : <User />,

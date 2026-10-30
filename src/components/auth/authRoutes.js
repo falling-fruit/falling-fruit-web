@@ -3,17 +3,12 @@ import { Route } from 'react-router-dom'
 import CheckEmailConfirmationPage from './CheckEmailConfirmationPage'
 import ConfirmationPage from './ConfirmationPage'
 import ConfirmationResendPage from './ConfirmationResendPage'
-import HomePage from './HomePage'
 import PasswordResetPage from './PasswordResetPage'
 import PasswordSetPage from './PasswordSetPage'
 import SignInPage from './SignInPage'
 import SignUpPage from './SignUpPage'
 
 const pages = [
-  {
-    path: '/about/welcome',
-    component: HomePage,
-  },
   {
     path: '/auth/sign_in',
     component: SignInPage,

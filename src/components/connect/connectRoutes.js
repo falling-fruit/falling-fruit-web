@@ -17,6 +17,7 @@ import ConnectRootHeight from './ConnectRootHeight'
 import ConnectShare from './ConnectShare'
 import ConnectTopPanel from './ConnectTopPanel'
 import ConnectTypes from './ConnectTypes'
+import ConnectWelcomeData from './ConnectWelcomeData'
 import DisconnectActivity from './DisconnectActivity'
 import DisconnectAddReview from './DisconnectAddReview'
 import DisconnectInitLocation from './DisconnectInitLocation'
@@ -188,9 +189,19 @@ const connectRoutes = [
       '/changes',
       '/users/:userId/activity',
       '/account/lists',
+      '/about/welcome',
     ]}
   >
     <ConnectTypes />
+  </Route>,
+  /*
+   * ConnectWelcomeData
+   * why: the welcome page globe needs recent activity from the last 24 hours
+   *
+   * action: once types are loaded, fetch the last 24 hours of location changes
+   */
+  <Route key="connect-welcome-data" path="/about/welcome">
+    <ConnectWelcomeData />
   </Route>,
   /*
    * DisconnectLocation

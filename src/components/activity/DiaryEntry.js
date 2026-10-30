@@ -208,9 +208,37 @@ const ListItemInteraction = ({
   )
 }
 
+export const ActivityLines = ({
+  activities,
+  hideAuthor,
+  onClickLink,
+  currentUserId,
+}) => {
+  const isDesktop = useIsDesktop()
+
+  return (
+    <ListChanges>
+      {activities.map((activity, index) => (
+        <ListItem key={index} isDesktop={isDesktop}>
+          {['added', 'edited', 'visited'].map((interactionType) => (
+            <ListItemInteraction
+              key={interactionType}
+              interactionType={interactionType}
+              locations={activity[interactionType]}
+              activity={activity}
+              hideAuthor={hideAuthor}
+              onClickLink={onClickLink}
+              currentUserId={currentUserId}
+            />
+          ))}
+        </ListItem>
+      ))}
+    </ListChanges>
+  )
+}
+
 const DiaryEntry = ({ entry, userId, displayLimit, isLoadingLatest }) => {
   const dispatch = useDispatch()
-  const isDesktop = useIsDesktop()
   const { user } = useSelector((state) => state.auth)
   const currentUserId = user?.id
 
@@ -235,28 +263,19 @@ const DiaryEntry = ({ entry, userId, displayLimit, isLoadingLatest }) => {
   return (
     <div id={entry.formattedDate}>
       <h3>{entry.formattedDate}</h3>
-      <ListChanges>
-        {isLoadingLatest && (
+      {isLoadingLatest && (
+        <ListChanges>
           <LatestSkeletonItem>
             <Skeleton width="100%" height={20} />
           </LatestSkeletonItem>
-        )}
-        {entry.activities.map((activity, index) => (
-          <ListItem key={index} isDesktop={isDesktop}>
-            {['added', 'edited', 'visited'].map((interactionType) => (
-              <ListItemInteraction
-                key={interactionType}
-                interactionType={interactionType}
-                locations={activity[interactionType]}
-                activity={activity}
-                hideAuthor={!!userId}
-                onClickLink={onClickLink}
-                currentUserId={currentUserId}
-              />
-            ))}
-          </ListItem>
-        ))}
-      </ListChanges>
+        </ListChanges>
+      )}
+      <ActivityLines
+        activities={entry.activities}
+        hideAuthor={!!userId}
+        onClickLink={onClickLink}
+        currentUserId={currentUserId}
+      />
     </div>
   )
 }

@@ -32,6 +32,11 @@ const fetchLocationChangesLatest = createAsyncThunk(
   getLocationsChanges,
 )
 
+const fetchLocationChangesLast24h = createAsyncThunk(
+  'activity/fetchLocationChangesLast24h',
+  getLocationsChanges,
+)
+
 export const getUserActivity =
   (userId, isCurrentUser) => (dispatch, getState) => {
     const state = getState()
@@ -115,6 +120,26 @@ export const fetchLatestLocationChanges = () => (dispatch, getState) => {
   return dispatch(fetchLocationChangesLatest({ earliest, latest }))
 }
 
+/**
+ * Fetches all changes from the last 24 hours, used by the welcome page globe.
+ * Refetches only when there is no data yet or the data is stale.
+ */
+export const fetchLast24hLocationChanges = () => (dispatch, getState) => {
+  const state = getState()
+  const { isLoading, isStale, data } = state.activity.last24hChanges
+
+  if (isLoading || (data.length > 0 && !isStale)) {
+    return Promise.resolve()
+  }
+
+  const latest = new Date().toISOString()
+  const earliest = new Date(
+    new Date(latest).getTime() - 24 * 60 * 60 * 1000,
+  ).toISOString()
+
+  return dispatch(fetchLocationChangesLast24h({ earliest, latest }))
+}
+
 const activitySlice = createSlice({
   name: 'activity',
   initialState: {
@@ -130,6 +155,11 @@ const activitySlice = createSlice({
     },
     changesByUser: {},
     currentUserActivityIsStale: false,
+    last24hChanges: {
+      data: [],
+      isLoading: false,
+      isStale: false,
+    },
     userActivityLastBrowsedSection: {
       id: null,
       userId: null,
@@ -212,6 +242,23 @@ const activitySlice = createSlice({
         }),
       )
     },
+    [fetchLocationChangesLast24h.pending]: (state) => {
+      state.last24hChanges.isLoading = true
+    },
+    [fetchLocationChangesLast24h.fulfilled]: (state, action) => {
+      state.last24hChanges.data = action.payload
+      state.last24hChanges.isLoading = false
+      state.last24hChanges.isStale = false
+    },
+    [fetchLocationChangesLast24h.rejected]: (state, action) => {
+      state.last24hChanges.isLoading = false
+      toast.error(
+        i18next.t('error_message.api.fetch_location_changes_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
+    },
     [addNewLocation.fulfilled]: (state) => {
       state.currentUserActivityIsStale = true
     },
@@ -227,11 +274,13 @@ const activitySlice = createSlice({
     [deleteLocationReview.fulfilled]: (state) => {
       state.recentChanges.data = []
       state.recentChanges.isStale = true
+      state.last24hChanges.isStale = true
       state.currentUserActivityIsStale = true
     },
     [deleteExistingLocation.fulfilled]: (state) => {
       state.recentChanges.data = []
       state.recentChanges.isStale = true
+      state.last24hChanges.isStale = true
       state.currentUserActivityIsStale = true
     },
   },
