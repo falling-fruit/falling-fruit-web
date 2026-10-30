@@ -40,10 +40,6 @@ const Headline = styled(PageHeader)`
 
 const Description = styled.div`
   color: ${({ theme }) => theme.secondaryText};
-
-  p {
-    margin: 0 0 0.75em;
-  }
 `
 
 const SpinnerIcon = styled(Loader)`
