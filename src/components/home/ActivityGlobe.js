@@ -38,8 +38,6 @@ const MapFrame = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: ${MAP_WIDTH} / ${MAP_HEIGHT};
-  background-color: ${({ theme }) => theme.navBackground};
-  border-radius: 8px;
   overflow: hidden;
 `
 
@@ -48,6 +46,7 @@ const WorldSvg = styled.svg`
   inset: 0;
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) => theme.navBackground};
 
   path {
     fill: ${({ theme }) => theme.secondaryBackground};
@@ -103,12 +102,13 @@ const Popup = styled.div`
   z-index: 2;
   left: 12px;
   right: 12px;
+`
+
+const PopupBody = styled.div`
   max-height: 220px;
   overflow-y: auto;
   padding: 10px 12px;
   background-color: ${({ theme }) => theme.background};
-  border-radius: 8px;
-  box-shadow: 0 2px 10px ${({ theme }) => theme.shadow};
 
   p {
     font-size: 0.875rem;
@@ -329,15 +329,17 @@ const ActivityGlobe = () => {
               style={{ left: `${popupLayout.arrowLeft}px` }}
             />
           )}
-          {popupDiary.entries.map((entry) => (
-            <ActivityLines
-              key={entry.formattedDate}
-              activities={entry.activities}
-              hideAuthor={false}
-              onClickLink={() => setOpenClusterId(null)}
-              currentUserId={undefined}
-            />
-          ))}
+          <PopupBody>
+            {popupDiary.entries.map((entry) => (
+              <ActivityLines
+                key={entry.formattedDate}
+                activities={entry.activities}
+                hideAuthor={false}
+                onClickLink={() => setOpenClusterId(null)}
+                currentUserId={undefined}
+              />
+            ))}
+          </PopupBody>
         </Popup>
       )}
     </GlobeWrapper>
