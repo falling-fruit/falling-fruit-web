@@ -1,5 +1,5 @@
 import { rgba } from 'polished'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
@@ -95,34 +95,48 @@ const ClusterCircle = styled.button`
   box-shadow: 0 0 3px ${({ theme }) => theme.shadow};
 `
 
+const POPUP_ARROW_SIZE = 8
+const POPUP_GAP = POPUP_ARROW_SIZE + 4
+
 const Popup = styled.div`
   position: absolute;
   z-index: 2;
-  width: min(280px, 80vw);
+  left: 12px;
+  right: 12px;
   max-height: 220px;
   overflow-y: auto;
   padding: 10px 12px;
   background-color: ${({ theme }) => theme.background};
   border-radius: 8px;
   box-shadow: 0 2px 10px ${({ theme }) => theme.shadow};
-  transform: translate(-50%, calc(-100% - 12px));
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 8px;
-    border-style: solid;
-    border-color: ${({ theme }) => theme.background} transparent transparent
-      transparent;
-  }
 
   p {
     font-size: 0.875rem;
     line-height: 1.4;
   }
+`
+
+const PopupArrow = styled.span`
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: ${POPUP_ARROW_SIZE}px;
+  border-color: transparent;
+
+  ${({ $pointsDown, theme }) =>
+    $pointsDown
+      ? `
+    top: 100%;
+    border-top-color: ${theme.background};
+    border-bottom-width: 0;
+  `
+      : `
+    bottom: 100%;
+    border-bottom-color: ${theme.background};
+    border-top-width: 0;
+  `}
 `
 
 const clusterChanges = (changes) => {
@@ -180,7 +194,10 @@ const ActivityGlobe = () => {
   const { last24hChanges } = useSelector((state) => state.activity)
   const { typesAccess } = useSelector((state) => state.type)
   const wrapperRef = useRef(null)
+  const mapFrameRef = useRef(null)
+  const popupRef = useRef(null)
   const [openClusterId, setOpenClusterId] = useState(null)
+  const [popupLayout, setPopupLayout] = useState(null)
 
   const changes = last24hChanges.data
 
@@ -218,9 +235,38 @@ const ActivityGlobe = () => {
   const toggleCluster = (clusterId) =>
     setOpenClusterId((current) => (current === clusterId ? null : clusterId))
 
+  useLayoutEffect(() => {
+    if (!openCluster || !mapFrameRef.current || !popupRef.current) {
+      setPopupLayout(null)
+      return
+    }
+
+    const mapRect = mapFrameRef.current.getBoundingClientRect()
+    const popupHeight = popupRef.current.offsetHeight
+    const popupRect = popupRef.current.getBoundingClientRect()
+
+    const dotX = (openCluster.xPercent / 100) * mapRect.width
+    const dotY = (openCluster.yPercent / 100) * mapRect.height
+
+    const spaceAbove = dotY
+    const pointsDown = spaceAbove >= popupHeight + POPUP_GAP
+
+    const top = pointsDown ? dotY - popupHeight - POPUP_GAP : dotY + POPUP_GAP
+
+    const dotViewportX = mapRect.left + dotX
+    const arrowMin = POPUP_ARROW_SIZE + 4
+    const arrowMax = popupRect.width - POPUP_ARROW_SIZE - 4
+    const arrowLeft = Math.min(
+      Math.max(dotViewportX - popupRect.left, arrowMin),
+      arrowMax,
+    )
+
+    setPopupLayout({ top, pointsDown, arrowLeft })
+  }, [openCluster, popupDiary])
+
   return (
     <GlobeWrapper ref={wrapperRef}>
-      <MapFrame>
+      <MapFrame ref={mapFrameRef}>
         <WorldSvg
           viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
           preserveAspectRatio="none"
@@ -271,11 +317,18 @@ const ActivityGlobe = () => {
       </MapFrame>
       {openCluster && popupDiary && (
         <Popup
+          ref={popupRef}
           style={{
-            left: `${openCluster.xPercent}%`,
-            top: `${openCluster.yPercent}%`,
+            top: popupLayout ? `${popupLayout.top}px` : 0,
+            visibility: popupLayout ? 'visible' : 'hidden',
           }}
         >
+          {popupLayout && (
+            <PopupArrow
+              $pointsDown={popupLayout.pointsDown}
+              style={{ left: `${popupLayout.arrowLeft}px` }}
+            />
+          )}
           {popupDiary.entries.map((entry) => (
             <ActivityLines
               key={entry.formattedDate}
