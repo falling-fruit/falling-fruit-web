@@ -26,10 +26,17 @@ const ButtonWrapper = styled.div`
   flex-direction: row;
   gap: 1em;
   margin: 1em 0;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `
 const LargeButton = styled(Button)`
   min-height: 2em;
   font-size: 1em;
+  @media (max-width: 480px) {
+    max-width: 80%;
+  }
 `
 
 const Headline = styled(PageHeader)`
