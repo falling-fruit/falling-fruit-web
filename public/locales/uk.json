@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "Неперевірений: може бути неточним",
       "unverified_report_does_not_exist": "Поскаржитися, що не існує"
     },
-    "index": {
-      "editmarker": "Перемістіться до позиції джерела."
-    },
     "infowindow": {
       "access_mode": [
         "Джерело знаходиться на моїй території",
@@ -428,13 +425,13 @@
       "header_message": "Щось пішло не так"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit - це платформа, керована спільнотою, для обміну місцями розташування їстівних рослин та інших джерел безкоштовної їжі.",
-      "discover_and_contribute": "Ви можете дізнатися, що збирають інші у вашому районі, та додати власні спостереження.",
       "explore_the_map": "Дослідіть карту",
       "falling_fruit_app_for_android": "Falling Fruit для Android",
       "falling_fruit_app_for_ios": "Falling Fruit для iOS",
+      "headline": "Знайдіть безкоштовну їжу, що росте поруч із вами",
       "home_page": "Головна",
-      "welcome_visitors_to_the_site_short": "Ласкаво просимо!"
+      "intro_community": "Falling Fruit — це карта мільйонів їстівних рослин та інших джерел безкоштовної їжі, створена спільно всесвітньою спільнотою збирачів.",
+      "intro_contribute": "Дізнайтеся, що доступно поруч із вами, навчайтеся в інших збирачів і діліться власними знахідками."
     }
   },
   "problems": {

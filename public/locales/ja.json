@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "未確認: 不正確な可能性があります",
       "unverified_report_does_not_exist": "存在しないことを報告"
     },
-    "index": {
-      "editmarker": "ソースの位置に移動してください。"
-    },
     "infowindow": {
       "access_mode": [
         "ソースは私の所有地にあります",
@@ -428,13 +425,13 @@
       "header_message": "問題が発生しました"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruitは、食用植物や無料の食料源の場所を共有するためのコミュニティ主導のプラットフォームです。",
-      "discover_and_contribute": "あなたの地域で他の人が収穫しているものを発見し、自分の観察を投稿することができます。",
       "explore_the_map": "地図を探索する",
       "falling_fruit_app_for_android": "Falling Fruit for Android",
       "falling_fruit_app_for_ios": "Falling Fruit for iOS",
+      "headline": "近くで育つ無料の食べ物を見つけよう",
       "home_page": "ホーム",
-      "welcome_visitors_to_the_site_short": "ようこそ！"
+      "intro_community": "Falling Fruitは、世界中の採集者のコミュニティが協力して作成した、何百万もの食用植物やその他の無料の食料源を示す地図です。",
+      "intro_contribute": "近くで手に入るものを見つけ、ほかの採集者から学び、あなた自身の発見を共有しましょう。"
     }
   },
   "problems": {

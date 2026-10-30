@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "Non vérifié: peut être inexact",
       "unverified_report_does_not_exist": "Signaler qu'il n'existe pas"
     },
-    "index": {
-      "editmarker": "Déplacez-vous vers la position de la source."
-    },
     "infowindow": {
       "access_mode": [
         "La source m'appartient",
@@ -428,13 +425,13 @@
       "header_message": "Une erreur s'est produite"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit est une plateforme communautaire pour partager les sites de plantes comestibles et d'autres sources de nourriture gratuite.",
-      "discover_and_contribute": "Vous pouvez découvrir ce que d'autres ont récolté dans votre quartier et partager vos observations.",
       "explore_the_map": "Explorez la carte",
       "falling_fruit_app_for_android": "Falling Fruit pour Android",
       "falling_fruit_app_for_ios": "Falling Fruit pour iOS",
+      "headline": "Trouvez de la nourriture gratuite qui pousse près de chez vous",
       "home_page": "Accueil",
-      "welcome_visitors_to_the_site_short": "Bienvenue !"
+      "intro_community": "Falling Fruit est une carte de millions de plantes comestibles et d'autres sources de nourriture gratuite, créée en collaboration par une communauté mondiale de cueilleurs.",
+      "intro_contribute": "Découvrez ce qui est disponible près de chez vous, apprenez des autres cueilleurs et partagez vos propres trouvailles."
     }
   },
   "problems": {

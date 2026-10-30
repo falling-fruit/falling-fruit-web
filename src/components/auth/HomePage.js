@@ -1,9 +1,9 @@
-import { Loader } from '@styled-icons/boxicons-regular'
+import { Loader, Plus } from '@styled-icons/boxicons-regular'
 import { MapAlt } from '@styled-icons/boxicons-solid'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import { DEFAULT_GEOLOCATION_ZOOM } from '../../constants/map'
@@ -17,13 +17,14 @@ import AboutSection from '../mobile/AboutSection'
 import MobileAppLinks from '../mobile/MobileAppLinks'
 import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
-import { PageTitle } from '../ui/Headers'
+import { PageHeader } from '../ui/Headers'
 import { LandingPage } from '../ui/PageTemplate'
 import { withAuthRedirect } from './withAuthRedirect'
 
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1em;
   margin: 1em 0;
 `
@@ -32,19 +33,12 @@ const LargeButton = styled(Button)`
   font-size: 1em;
 `
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  font-size: 1em !important;
-`
-const StyledLinkWhite = styled(StyledLink)`
-  color: ${({ theme }) => theme.background} !important;
+const Headline = styled(PageHeader)`
+  margin-block-end: 0.25em;
 `
 
 const Description = styled.div`
-  text-align: justify;
   color: ${({ theme }) => theme.secondaryText};
-
-  padding: 0.5em;
 `
 
 const SpinnerIcon = styled(Loader)`
@@ -66,22 +60,44 @@ const HomePage = () => {
   const history = useAppHistory()
   const location = useLocation()
   const bottomRef = useRef(null)
+  const destinationRef = useRef('/map')
+  const [pendingDestination, setPendingDestination] = useState(null)
   const { lastMapView } = useSelector((state) => state.viewport)
   const { geolocation, geolocationState } = useSelector(
     (state) => state.geolocation,
   )
 
-  const handleExploreMap = () => {
+  const goToDestination = (view) => {
+    const destination = destinationRef.current
+    const viewString =
+      view ||
+      (lastMapView?.center
+        ? viewToString(
+            lastMapView.center.lat,
+            lastMapView.center.lng,
+            lastMapView.zoom,
+          )
+        : null)
+    history.push(viewString ? `${destination}/${viewString}` : destination)
+  }
+
+  const requestLocationThen = (destination) => {
+    destinationRef.current = destination
+    setPendingDestination(destination)
     if (
       lastMapView ||
       geolocationState === GeolocationState.DENIED ||
       geolocationState === GeolocationState.FAILED
     ) {
-      history.push('/map')
+      goToDestination()
     } else {
       dispatch(requestGeolocation())
     }
   }
+
+  const handleExploreMap = () => requestLocationThen('/map')
+
+  const handleAddLocation = () => requestLocationThen('/locations/init')
 
   useEffect(() => {
     if (lastMapView) {
@@ -91,13 +107,17 @@ const HomePage = () => {
       geolocationState === GeolocationState.DENIED ||
       geolocationState === GeolocationState.FAILED
     ) {
-      history.push('/map')
+      goToDestination()
     } else if (geolocation?.latitude && geolocation?.longitude) {
-      history.push(
-        `/map/${viewToString(geolocation.latitude, geolocation.longitude, DEFAULT_GEOLOCATION_ZOOM)}`,
+      goToDestination(
+        viewToString(
+          geolocation.latitude,
+          geolocation.longitude,
+          DEFAULT_GEOLOCATION_ZOOM,
+        ),
       )
     }
-  }, [lastMapView, geolocation, geolocationState, history])
+  }, [lastMapView, geolocation, geolocationState, history]) //eslint-disable-line
 
   useEffect(() => {
     if (location.state?.scrollToBottom) {
@@ -105,44 +125,48 @@ const HomePage = () => {
     }
   }, [location.state])
 
+  const isLocating = geolocationState === GeolocationState.LOADING
+  const isAddLocationSpinning =
+    isLocating && pendingDestination === '/locations/init'
+  const isExploreMapSpinning = isLocating && pendingDestination === '/map'
+
   return (
     <LandingPage>
-      <PageTitle>{t('pages.welcome.home_page')}</PageTitle>
-      <br />
+      <Headline>{t('pages.welcome.headline')}</Headline>
       <Description>
-        {t('pages.welcome.welcome_visitors_to_the_site_short')}
-        <br />
-        <br />
-        {t('pages.welcome.community_driven_platform')}
-        <br />
-        <br />
-        {t('pages.welcome.discover_and_contribute')}
+        <p>{t('pages.welcome.intro_community')}</p>
+        <p>{t('pages.welcome.intro_contribute')}</p>
       </Description>
       <ButtonWrapper>
         <LargeButton
           type="button"
+          secondary
           leftIcon={
-            geolocationState === GeolocationState.LOADING ? (
+            isAddLocationSpinning ? (
+              <SpinnerIcon height={30} />
+            ) : (
+              <Plus height={30} />
+            )
+          }
+          onClick={handleAddLocation}
+          disabled={isLocating}
+        >
+          {t('menu.add_new_location')}
+        </LargeButton>
+        <LargeButton
+          type="button"
+          leftIcon={
+            isExploreMapSpinning ? (
               <SpinnerIcon height={30} />
             ) : (
               <MapAlt height={30} />
             )
           }
           onClick={handleExploreMap}
-          disabled={geolocationState === GeolocationState.LOADING}
+          disabled={isLocating}
         >
           {t('pages.welcome.explore_the_map')}
         </LargeButton>
-      </ButtonWrapper>
-      <ButtonWrapper style={{ marginTop: '2em' }}>
-        <Button type="button" secondary>
-          <StyledLink to="/auth/sign_in">{t('users.sign_in')}</StyledLink>
-        </Button>
-        <Button type="button">
-          <StyledLinkWhite to="/auth/sign_up">
-            {t('glossary.sign_up')}
-          </StyledLinkWhite>
-        </Button>
       </ButtonWrapper>
       <MobileAppLinks />
       <AboutSection />

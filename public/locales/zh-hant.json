@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "未驗證: 可能不準確",
       "unverified_report_does_not_exist": "舉報不存在"
     },
-    "index": {
-      "editmarker": "移動到來源的位置。"
-    },
     "infowindow": {
       "access_mode": [
         "來源在我的財產上",
@@ -428,13 +425,13 @@
       "header_message": "發生錯誤"
     },
     "welcome": {
-      "community_driven_platform": "掉落果實是一個社區驅動的平台，用於分享可食用植物和其他免費食物的地點。",
-      "discover_and_contribute": "您可以發現其他人在您社區收穫的成果，並貢獻您的觀察。",
       "explore_the_map": "探索地圖",
       "falling_fruit_app_for_android": "Falling Fruit Android版",
       "falling_fruit_app_for_ios": "Falling Fruit iOS版",
+      "headline": "尋找在你附近生長的免費食物",
       "home_page": "首頁",
-      "welcome_visitors_to_the_site_short": "歡迎！"
+      "intro_community": "Falling Fruit 是一張標註了數百萬種可食用植物和其他免費食物來源的地圖，由全球採集者社群共同協作建立。",
+      "intro_contribute": "發現你附近有哪些可採集的食物，向其他採集者學習，並分享你自己的發現。"
     }
   },
   "problems": {

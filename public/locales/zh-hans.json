@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "未验证: 可能不准确",
       "unverified_report_does_not_exist": "举报不存在"
     },
-    "index": {
-      "editmarker": "移动到来源的位置。"
-    },
     "infowindow": {
       "access_mode": [
         "在我本人的土地上",
@@ -428,13 +425,13 @@
       "header_message": "出错了"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit 是一个社区驱动的平台，旨在分享城市中可食用植物和其他免费食物的位置。",
-      "discover_and_contribute": "你可以探索邻里间的采摘记录，并分享你的发现。",
       "explore_the_map": "开始探索地图",
       "falling_fruit_app_for_android": "Falling Fruit 安卓版",
       "falling_fruit_app_for_ios": "Falling Fruit iOS版",
+      "headline": "寻找在你附近生长的免费食物",
       "home_page": "首页",
-      "welcome_visitors_to_the_site_short": "欢迎！"
+      "intro_community": "Falling Fruit 是一张标注了数百万种可食用植物和其他免费食物来源的地图，由全球采集者社区共同协作创建。",
+      "intro_contribute": "发现你附近有哪些可采集的食物，向其他采集者学习，并分享你自己的发现。"
     }
   },
   "problems": {

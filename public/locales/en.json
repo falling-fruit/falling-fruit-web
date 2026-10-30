@@ -198,9 +198,6 @@
       "unverified_may_be_inaccurate": "Unverified: may be inaccurate",
       "unverified_report_does_not_exist": "Report does not exist"
     },
-    "index": {
-      "editmarker": "Move to the position of the source."
-    },
     "infowindow": {
       "access_mode": [
         "Source is on my property",
@@ -428,13 +425,13 @@
       "header_message": "Something went wrong"
     },
     "welcome": {
-      "community_driven_platform": "Falling Fruit is a community-driven platform for sharing locations of edible plants and other sources of free food.",
-      "discover_and_contribute": "You can discover what others have been harvesting in your area, and contribute your own observations.",
       "explore_the_map": "Explore the map",
       "falling_fruit_app_for_android": "Falling Fruit for Android",
       "falling_fruit_app_for_ios": "Falling Fruit for iOS",
+      "headline": "Find free food growing near you",
       "home_page": "Home",
-      "welcome_visitors_to_the_site_short": "Welcome!"
+      "intro_community": "Falling Fruit is a map of millions of edible plants and other sources of free food, produced in collaboration by a worldwide community of foragers.",
+      "intro_contribute": "Discover what's available near you, learn from fellow foragers, and share your own finds."
     }
   },
   "problems": {
