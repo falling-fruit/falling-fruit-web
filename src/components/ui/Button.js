@@ -20,6 +20,7 @@ const StyledButton = styled(ResetButton)`
   box-sizing: border-box;
   border-radius: 0.375em;
   padding: 0 10px;
+  white-space: nowrap;
 
   ${({ isDesktop, secondary }) =>
     isDesktop &&

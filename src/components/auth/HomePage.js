@@ -31,7 +31,6 @@ const ButtonWrapper = styled.div`
 const LargeButton = styled(Button)`
   min-height: 2em;
   font-size: 1em;
-  flex: 0 0 auto;
 `
 
 const Headline = styled(PageHeader)`
