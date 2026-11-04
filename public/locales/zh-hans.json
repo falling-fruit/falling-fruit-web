@@ -40,6 +40,7 @@
       "location_deletion_failed": "删除地点失败：{{message}}",
       "location_edit_failed": "编辑地点失败：{{message}}",
       "location_submission_failed": "提交地点失败：{{message}}",
+      "location_unhide_failed": "更新可见性失败：{{message}}",
       "photo_upload_failed": "照片上传失败：{{message}}",
       "remove_location_from_list_failed": "从列表中移除地点失败：{{message}}",
       "remove_location_list_failed": "删除地点列表失败：{{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "添加采摘季结束",
       "add_season_start": "添加采摘季开始",
       "confirm_still_exists": "确认仍然存在",
+      "hidden_not_on_shared_map": "已隐藏 - 无法从共享地图访问",
       "over_x_years_ago": "{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
       "report_no_longer_exists": "举报不再存在",
       "reported_on": "（于 {{date}} 报告）",
+      "reported_pending_review": "此地点已被报告存在问题",
       "review_comment_placeholder_still_exists": "还在那里！",
+      "unhide": "取消隐藏",
       "unverified_edit_position": "编辑位置",
       "unverified_edit_types": "编辑种类",
       "unverified_mark_as_verified": "标记为已验证",
       "unverified_may_be_inaccurate": "未验证: 可能不准确",
-      "unverified_report_does_not_exist": "举报不存在",
-      "you_reported_on": "（您于 {{date}} 报告）"
+      "unverified_report_does_not_exist": "举报不存在"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "地点已删除",
     "location_edited": "修改已保存",
     "location_submitted": "地点提交成功",
+    "location_unhidden": "地点已成功取消隐藏！",
     "report_submitted": "举报已提交",
     "review_deleted": "评价已删除",
     "review_edited": "评价已保存",

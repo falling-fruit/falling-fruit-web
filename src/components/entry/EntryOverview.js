@@ -21,6 +21,8 @@ import {
   AddDescriptionHint,
   AddSeasonStartHint,
   AddSeasonStopHint,
+  HiddenHintActions,
+  HiddenHintToggle,
   ReportsHintList,
   ReportsHintToggle,
   StaleLocationHintActions,
@@ -290,6 +292,7 @@ const EntryOverview = () => {
   const containerRef = useRef(null)
   const [unverifiedExpanded, setUnverifiedExpanded] = useState(false)
   const [reportsExpanded, setReportsExpanded] = useState(false)
+  const [hiddenExpanded, setHiddenExpanded] = useState(false)
 
   if (!locationData) {
     return null
@@ -341,6 +344,15 @@ const EntryOverview = () => {
       )}
       {locationData.unverified && unverifiedExpanded && (
         <UnverifiedHintActions locationData={locationData} />
+      )}
+      {locationData.hidden && (
+        <HiddenHintToggle
+          expanded={hiddenExpanded}
+          onToggle={() => setHiddenExpanded((prev) => !prev)}
+        />
+      )}
+      {locationData.hidden && hiddenExpanded && (
+        <HiddenHintActions locationData={locationData} />
       )}
       {locationData.open_reports?.length > 0 && (
         <ReportsHintToggle

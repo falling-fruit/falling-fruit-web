@@ -11,8 +11,9 @@ import {
   editLocation,
   editReview,
   getLocationById,
+  resolveReports,
+  setLocationVisibility,
 } from '../utils/api'
-import { logout } from './authSlice'
 import { fetchReviewData } from './reviewSlice'
 import { addLocationToList, removeLocationFromList } from './saveSlice'
 
@@ -94,6 +95,23 @@ export const deleteLocationReview = createAsyncThunk(
 export const deleteExistingLocation = createAsyncThunk(
   'location/deleteLocation',
   (locationId) => deleteLocation(locationId).then(() => locationId),
+)
+
+export const setExistingLocationVisibility = createAsyncThunk(
+  'location/setVisibility',
+  ({ locationId, hidden }) =>
+    setLocationVisibility(locationId, hidden).then(() => ({
+      locationId,
+      hidden,
+    })),
+)
+
+export const resolveReportsForLocation = createAsyncThunk(
+  'location/resolveReports',
+  ({ locationId, reportIds, resolution, notifyReporters }) =>
+    resolveReports({ report_ids: reportIds, resolution }, notifyReporters).then(
+      (result) => ({ locationId, reportIds, emails: result.emails }),
+    ),
 )
 
 const locationSlice = createSlice({
@@ -269,7 +287,6 @@ const locationSlice = createSlice({
         const openReport = {
           created_at: report.created_at,
           problem_code: report.problem_code,
-          ...(report.reporter_id != null && { reported_by_me: true }),
         }
         state.location.open_reports = [
           ...(state.location.open_reports ?? []),
@@ -325,6 +342,25 @@ const locationSlice = createSlice({
         }),
       )
     },
+    [setExistingLocationVisibility.fulfilled]: (state, action) => {
+      const { locationId, hidden } = action.payload
+      if (state.location && state.location.id === locationId) {
+        state.location.hidden = hidden
+      }
+    },
+    [resolveReportsForLocation.fulfilled]: (state, action) => {
+      const { locationId, reportIds } = action.payload
+      if (state.location && state.location.id === locationId) {
+        if (reportIds?.length && state.location.open_reports) {
+          const resolvedIds = new Set(reportIds)
+          state.location.open_reports = state.location.open_reports.filter(
+            (report) => !resolvedIds.has(report.id),
+          )
+        } else {
+          state.location.open_reports = []
+        }
+      }
+    },
     [addLocationToList.fulfilled]: (state, action) => {
       const { location } = action.payload
       if (state.locationId === location.id) {
@@ -335,13 +371,6 @@ const locationSlice = createSlice({
       const { locationId, locationStillInAnyList } = action.payload
       if (state.locationId === locationId) {
         state.inList = locationStillInAnyList
-      }
-    },
-    [logout]: (state) => {
-      if (state.location?.open_reports) {
-        state.location.open_reports = state.location.open_reports.map(
-          ({ reported_by_me: _reported_by_me, ...report }) => report,
-        )
       }
     },
   },

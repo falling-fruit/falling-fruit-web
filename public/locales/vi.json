@@ -40,6 +40,7 @@
       "location_deletion_failed": "Xóa địa điểm thất bại: {{message}}",
       "location_edit_failed": "Chỉnh sửa địa điểm thất bại: {{message}}",
       "location_submission_failed": "Gửi địa điểm thất bại: {{message}}",
+      "location_unhide_failed": "Không thể cập nhật hiển thị: {{message}}",
       "photo_upload_failed": "Tải ảnh lên thất bại: {{message}}",
       "remove_location_from_list_failed": "Xóa địa điểm khỏi danh sách thất bại: {{message}}",
       "remove_location_list_failed": "Xóa danh sách địa điểm thất bại: {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "Thêm ngày kết thúc mùa",
       "add_season_start": "Thêm ngày bắt đầu mùa",
       "confirm_still_exists": "Xác nhận vẫn tồn tại",
+      "hidden_not_on_shared_map": "Đã ẩn - không thể truy cập từ bản đồ chia sẻ",
       "over_x_years_ago": "Hơn {{yearsAgo}} năm trước",
       "report_comment_placeholder_no_longer_exists": "Không còn tồn tại",
       "report_no_longer_exists": "Báo cáo không còn tồn tại",
       "reported_on": "(đã báo cáo vào {{date}})",
+      "reported_pending_review": "Đã có báo cáo vấn đề cho địa điểm này",
       "review_comment_placeholder_still_exists": "Vẫn còn đó!",
+      "unhide": "Bỏ ẩn",
       "unverified_edit_position": "Chỉnh sửa vị trí",
       "unverified_edit_types": "Chỉnh sửa loại",
       "unverified_mark_as_verified": "Đánh dấu là đã xác minh",
       "unverified_may_be_inaccurate": "Chưa được xác minh: có thể không chính xác",
-      "unverified_report_does_not_exist": "Báo cáo không tồn tại",
-      "you_reported_on": "(bạn đã báo cáo vào {{date}})"
+      "unverified_report_does_not_exist": "Báo cáo không tồn tại"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "Xóa địa điểm thành công!",
     "location_edited": "Địa điểm đã được chỉnh sửa thành công!",
     "location_submitted": "Địa điểm đã được gửi thành công!",
+    "location_unhidden": "Đã bỏ ẩn địa điểm thành công!",
     "report_submitted": "Báo cáo đã được gửi thành công!",
     "review_deleted": "Đánh giá đã được xóa thành công!",
     "review_edited": "Đánh giá đã được chỉnh sửa thành công!",

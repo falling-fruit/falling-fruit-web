@@ -2,6 +2,7 @@ import { Route } from 'react-router-dom'
 
 import aboutRoutes from '../about/aboutRoutes'
 import activityRoutes from '../activity/activityRoutes'
+import adminRoutes from '../admin/adminRoutes'
 import ConnectConnectivity from './ConnectConnectivity'
 import ConnectGeolocation from './ConnectGeolocation'
 import ConnectGoogleMap from './ConnectGoogleMap'
@@ -190,6 +191,7 @@ const connectRoutes = [
       '/changes',
       '/users/:userId/activity',
       '/account/lists',
+      '/admin',
     ]}
   >
     <ConnectTypes />
@@ -376,6 +378,7 @@ const connectRoutes = [
     path={[
       ...aboutRoutes.map((route) => route.props.path).flat(),
       ...activityRoutes.map((route) => route.props.path).flat(),
+      ...adminRoutes.map((route) => route.props.path).flat(),
     ]}
   >
     {({ match }) => match && <ConnectRootHeight />}

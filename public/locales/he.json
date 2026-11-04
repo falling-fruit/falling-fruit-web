@@ -40,6 +40,7 @@
       "location_deletion_failed": "מחיקת מיקום נכשלה: {{message}}",
       "location_edit_failed": "עריכת מיקום נכשלה: {{message}}",
       "location_submission_failed": "שליחת מיקום נכשלה: {{message}}",
+      "location_unhide_failed": "עדכון נראות נכשל: {{message}}",
       "photo_upload_failed": "העלאת תמונה נכשלה: {{message}}",
       "remove_location_from_list_failed": "הסרת מיקום מהרשימה נכשלה: {{message}}",
       "remove_location_list_failed": "הסרת רשימת מיקומים נכשלה: {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "הוסף סוף עונה",
       "add_season_start": "הוסף תחילת עונה",
       "confirm_still_exists": "אשר שעדיין קיים",
+      "hidden_not_on_shared_map": "מוסתר - לא נגיש ממפה משותפת",
       "over_x_years_ago": "לפני יותר מ-{{yearsAgo}} שנים",
       "report_comment_placeholder_no_longer_exists": "לא קיים יותר",
       "report_no_longer_exists": "דווח שלא קיים יותר",
       "reported_on": "(דווח ב-{{date}})",
+      "reported_pending_review": "דווחו בעיות עבור מיקום זה",
       "review_comment_placeholder_still_exists": "עדיין שם!",
+      "unhide": "בטל הסתרה",
       "unverified_edit_position": "ערוך מיקום",
       "unverified_edit_types": "ערוך סוגים",
       "unverified_mark_as_verified": "סמן כמאומת",
       "unverified_may_be_inaccurate": "לא מאומת: עלול להיות לא מדויק",
-      "unverified_report_does_not_exist": "דווח שלא קיים",
-      "you_reported_on": "(דיווחת ב-{{date}})"
+      "unverified_report_does_not_exist": "דווח שלא קיים"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "המיקום נמחק בהצלחה!",
     "location_edited": "המיקום נערך בהצלחה!",
     "location_submitted": "המיקום נשלח בהצלחה!",
+    "location_unhidden": "המיקום הוצג בהצלחה!",
     "report_submitted": "הדיווח נשלח בהצלחה!",
     "review_deleted": "הביקורת נמחקה בהצלחה!",
     "review_edited": "הביקורת נערכה בהצלחה!",

@@ -40,6 +40,7 @@
       "location_deletion_failed": "刪除地點失敗：{{message}}",
       "location_edit_failed": "編輯地點失敗：{{message}}",
       "location_submission_failed": "提交地點失敗：{{message}}",
+      "location_unhide_failed": "更新可見性失敗：{{message}}",
       "photo_upload_failed": "照片上傳失敗：{{message}}",
       "remove_location_from_list_failed": "從清單移除地點失敗：{{message}}",
       "remove_location_list_failed": "移除地點清單失敗：{{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "新增採收季結束",
       "add_season_start": "新增採收季開始",
       "confirm_still_exists": "確認仍然存在",
+      "hidden_not_on_shared_map": "已隱藏 - 無法從共享地圖存取",
       "over_x_years_ago": "超過{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
       "report_no_longer_exists": "舉報不再存在",
       "reported_on": "（於 {{date}} 回報）",
+      "reported_pending_review": "此地點已被回報問題",
       "review_comment_placeholder_still_exists": "還在那裡！",
+      "unhide": "取消隱藏",
       "unverified_edit_position": "編輯位置",
       "unverified_edit_types": "編輯類型",
       "unverified_mark_as_verified": "標記為已驗證",
       "unverified_may_be_inaccurate": "未驗證: 可能不準確",
-      "unverified_report_does_not_exist": "舉報不存在",
-      "you_reported_on": "（您於 {{date}} 回報）"
+      "unverified_report_does_not_exist": "舉報不存在"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "地點已成功刪除！",
     "location_edited": "地點已編輯",
     "location_submitted": "地點已提交",
+    "location_unhidden": "地點已成功取消隱藏！",
     "report_submitted": "舉報提交成功！",
     "review_deleted": "評論已刪除",
     "review_edited": "評論已編輯",

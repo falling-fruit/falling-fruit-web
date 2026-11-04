@@ -4,6 +4,7 @@ import styled from 'styled-components/macro'
 import aboutRoutes from '../about/aboutRoutes'
 import accountRoutes from '../account/accountRoutes'
 import activityRoutes from '../activity/activityRoutes'
+import adminRoutes from '../admin/adminRoutes'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import errorRoutes from '../error/errorRoutes'
@@ -37,6 +38,7 @@ const DesktopLayout = () => (
       {activityRoutes}
       {authRoutes}
       {accountRoutes}
+      {adminRoutes}
       {errorRoutes}
       <Route>
         <SplitContainer>

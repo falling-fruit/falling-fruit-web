@@ -40,6 +40,7 @@
       "location_deletion_failed": "Usuwanie lokalizacji nie powiodło się: {{message}}",
       "location_edit_failed": "Edycja lokalizacji nie powiodła się: {{message}}",
       "location_submission_failed": "Przesyłanie lokalizacji nie powiodło się: {{message}}",
+      "location_unhide_failed": "Nie udało się zaktualizować widoczności: {{message}}",
       "photo_upload_failed": "Przesyłanie zdjęcia nie powiodło się: {{message}}",
       "remove_location_from_list_failed": "Nie udało się usunąć lokalizacji z listy: {{message}}",
       "remove_location_list_failed": "Nie udało się usunąć listy lokalizacji: {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "Dodaj koniec sezonu",
       "add_season_start": "Dodaj początek sezonu",
       "confirm_still_exists": "Potwierdź, że nadal istnieje",
+      "hidden_not_on_shared_map": "Ukryte - niedostępne z udostępnionej mapy",
       "over_x_years_ago": "Ponad {{yearsAgo}} lat temu",
       "report_comment_placeholder_no_longer_exists": "Już nie istnieje",
       "report_no_longer_exists": "Zgłoś, że już nie istnieje",
       "reported_on": "(zgłoszono {{date}})",
+      "reported_pending_review": "Zgłoszono problemy dla tej lokalizacji",
       "review_comment_placeholder_still_exists": "Wciąż tam jest!",
+      "unhide": "Pokaż",
       "unverified_edit_position": "Edytuj pozycję",
       "unverified_edit_types": "Edytuj rodzaje",
       "unverified_mark_as_verified": "Oznacz jako zweryfikowane",
       "unverified_may_be_inaccurate": "Niezweryfikowane: może być niedokładne",
-      "unverified_report_does_not_exist": "Zgłoś, że nie istnieje",
-      "you_reported_on": "(zgłoszono przez Ciebie {{date}})"
+      "unverified_report_does_not_exist": "Zgłoś, że nie istnieje"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "Lokalizacja została pomyślnie usunięta!",
     "location_edited": "Lokalizacja została edytowana!",
     "location_submitted": "Lokalizacja została przesłana!",
+    "location_unhidden": "Lokalizacja została pomyślnie odkryta!",
     "report_submitted": "Zgłoszenie zostało pomyślnie przesłane!",
     "review_deleted": "Recenzja została usunięta!",
     "review_edited": "Recenzja została edytowana!",

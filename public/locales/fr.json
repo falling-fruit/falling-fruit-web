@@ -40,6 +40,7 @@
       "location_deletion_failed": "Échec de la suppression du site : {{message}}",
       "location_edit_failed": "Échec de la modification du site : {{message}}",
       "location_submission_failed": "Échec de l'ajout du site : {{message}}",
+      "location_unhide_failed": "Échec de la mise à jour de la visibilité : {{message}}",
       "photo_upload_failed": "Échec du téléchargement de la photo : {{message}}",
       "remove_location_from_list_failed": "Échec de la suppression du site de la liste : {{message}}",
       "remove_location_list_failed": "Échec de la suppression de la liste de sites : {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "Ajouter la fin de saison",
       "add_season_start": "Ajouter le début de saison",
       "confirm_still_exists": "Confirmer qu'il existe toujours",
+      "hidden_not_on_shared_map": "Masqué - non accessible depuis la carte partagée",
       "over_x_years_ago": "Il y a plus de {{yearsAgo}} ans",
       "report_comment_placeholder_no_longer_exists": "N'existe plus",
       "report_no_longer_exists": "Signaler qu'il n'existe plus",
       "reported_on": "(signalé le {{date}})",
+      "reported_pending_review": "Des problèmes ont été signalés pour ce site",
       "review_comment_placeholder_still_exists": "Toujours là !",
+      "unhide": "Afficher",
       "unverified_edit_position": "Modifier la position",
       "unverified_edit_types": "Modifier les types",
       "unverified_mark_as_verified": "Marquer comme vérifié",
       "unverified_may_be_inaccurate": "Non vérifié: peut être inexact",
-      "unverified_report_does_not_exist": "Signaler qu'il n'existe pas",
-      "you_reported_on": "(signalé par vous le {{date}})"
+      "unverified_report_does_not_exist": "Signaler qu'il n'existe pas"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "Site supprimé avec succès !",
     "location_edited": "Site modifié",
     "location_submitted": "Site soumis",
+    "location_unhidden": "Site affiché avec succès !",
     "report_submitted": "Signalement soumis avec succès !",
     "review_deleted": "Avis supprimé",
     "review_edited": "Avis modifié",

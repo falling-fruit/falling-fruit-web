@@ -40,6 +40,7 @@
       "location_deletion_failed": "Konum silme başarısız: {{message}}",
       "location_edit_failed": "Konum düzenleme başarısız: {{message}}",
       "location_submission_failed": "Konum gönderimi başarısız: {{message}}",
+      "location_unhide_failed": "Görünürlük güncelleme başarısız: {{message}}",
       "photo_upload_failed": "Fotoğraf yükleme başarısız: {{message}}",
       "remove_location_from_list_failed": "Konumu listeden kaldırma başarısız: {{message}}",
       "remove_location_list_failed": "Konum listesi kaldırılamadı: {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "Sezon sonu ekle",
       "add_season_start": "Sezon başlangıcını ekle",
       "confirm_still_exists": "Hala var olduğunu onayla",
+      "hidden_not_on_shared_map": "Gizli - paylaşılan haritadan erişilemez",
       "over_x_years_ago": "{{yearsAgo}} yıldan fazla önce",
       "report_comment_placeholder_no_longer_exists": "Artık var olmadığını bildir",
       "report_no_longer_exists": "Artık var olmadığını bildir",
       "reported_on": "({{date}} tarihinde bildirildi)",
+      "reported_pending_review": "Bu konum için sorunlar bildirildi",
       "review_comment_placeholder_still_exists": "Hâlâ orada!",
+      "unhide": "Göster",
       "unverified_edit_position": "Konumu düzenle",
       "unverified_edit_types": "Türleri düzenle",
       "unverified_mark_as_verified": "Doğrulanmış olarak işaretle",
       "unverified_may_be_inaccurate": "Doğrulanmamış: yanlış olabilir",
-      "unverified_report_does_not_exist": "Mevcut olmadığını bildir",
-      "you_reported_on": "({{date}} tarihinde siz bildirdiniz)"
+      "unverified_report_does_not_exist": "Mevcut olmadığını bildir"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "Konum başarıyla silindi!",
     "location_edited": "Konum başarıyla düzenlendi!",
     "location_submitted": "Konum başarıyla gönderildi!",
+    "location_unhidden": "Konum başarıyla gösterildi!",
     "report_submitted": "Bildirim başarıyla gönderildi!",
     "review_deleted": "Değerlendirme başarıyla silindi!",
     "review_edited": "Değerlendirme başarıyla düzenlendi!",

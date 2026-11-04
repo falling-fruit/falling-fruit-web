@@ -40,6 +40,7 @@
       "location_deletion_failed": "Smazání lokality selhalo: {{message}}",
       "location_edit_failed": "Úprava lokality selhala: {{message}}",
       "location_submission_failed": "Odeslání lokality selhalo: {{message}}",
+      "location_unhide_failed": "Nepodařilo se aktualizovat viditelnost: {{message}}",
       "photo_upload_failed": "Nahrání fotografie selhalo: {{message}}",
       "remove_location_from_list_failed": "Nepodařilo se odebrat lokalitu ze seznamu: {{message}}",
       "remove_location_list_failed": "Nepodařilo se odebrat seznam lokalit: {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "Přidat konec sezóny",
       "add_season_start": "Přidat začátek sezóny",
       "confirm_still_exists": "Potvrdit, že stále existuje",
+      "hidden_not_on_shared_map": "Skryto - nedostupné ze sdílené mapy",
       "over_x_years_ago": "Před více než {{yearsAgo}} lety",
       "report_comment_placeholder_no_longer_exists": "Již neexistuje",
       "report_no_longer_exists": "Nahlásit, že již neexistuje",
       "reported_on": "(nahlášeno {{date}})",
+      "reported_pending_review": "Pro tuto lokalitu byly nahlášeny problémy",
       "review_comment_placeholder_still_exists": "Stále tam je!",
+      "unhide": "Zrušit skrytí",
       "unverified_edit_position": "Upravit pozici",
       "unverified_edit_types": "Upravit typy",
       "unverified_mark_as_verified": "Označit jako ověřené",
       "unverified_may_be_inaccurate": "Neověřeno: může být nepřesné",
-      "unverified_report_does_not_exist": "Nahlásit, že neexistuje",
-      "you_reported_on": "(nahlásili jste {{date}})"
+      "unverified_report_does_not_exist": "Nahlásit, že neexistuje"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "Lokalita byla úspěšně smazána!",
     "location_edited": "Lokalita byla úspěšně upravena!",
     "location_submitted": "Lokalita byla úspěšně odeslána!",
+    "location_unhidden": "Lokalita byla úspěšně odkryta!",
     "report_submitted": "Hlášení bylo úspěšně odesláno!",
     "review_deleted": "Recenze byla úspěšně smazána!",
     "review_edited": "Recenze byla úspěšně upravena!",

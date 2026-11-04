@@ -40,6 +40,7 @@
       "location_deletion_failed": "Falha na exclusão da localização: {{message}}",
       "location_edit_failed": "Falha na edição da localização: {{message}}",
       "location_submission_failed": "Falha no envio da localização: {{message}}",
+      "location_unhide_failed": "Falha ao atualizar visibilidade: {{message}}",
       "photo_upload_failed": "Falha no upload da foto: {{message}}",
       "remove_location_from_list_failed": "Falha ao remover localização da lista: {{message}}",
       "remove_location_list_failed": "Falha ao remover lista de localização: {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "Adicionar fim da temporada",
       "add_season_start": "Adicionar início da temporada",
       "confirm_still_exists": "Confirmar que ainda existe",
+      "hidden_not_on_shared_map": "Oculto - não acessível pelo mapa compartilhado",
       "over_x_years_ago": "Há mais de {{yearsAgo}} anos",
       "report_comment_placeholder_no_longer_exists": "Não existe mais",
       "report_no_longer_exists": "Denunciar que não existe mais",
       "reported_on": "(relatado em {{date}})",
+      "reported_pending_review": "Problemas foram reportados para esta localização",
       "review_comment_placeholder_still_exists": "Ainda está lá!",
+      "unhide": "Exibir",
       "unverified_edit_position": "Editar posição",
       "unverified_edit_types": "Editar tipos",
       "unverified_mark_as_verified": "Marcar como verificado",
       "unverified_may_be_inaccurate": "Não verificado: pode ser impreciso",
-      "unverified_report_does_not_exist": "Denunciar que não existe",
-      "you_reported_on": "(relatado por você em {{date}})"
+      "unverified_report_does_not_exist": "Denunciar que não existe"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "Localização excluída com sucesso!",
     "location_edited": "Local editado",
     "location_submitted": "Local enviado",
+    "location_unhidden": "Localização exibida com sucesso!",
     "report_submitted": "Denúncia enviada com sucesso!",
     "review_deleted": "Avaliação excluída",
     "review_edited": "Avaliação editada",

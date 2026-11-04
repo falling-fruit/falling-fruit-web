@@ -14,6 +14,7 @@ import { useIsEmbed } from '../../utils/useBreakpoint'
 import aboutRoutes from '../about/aboutRoutes'
 import accountRoutes from '../account/accountRoutes'
 import activityRoutes from '../activity/activityRoutes'
+import adminRoutes from '../admin/adminRoutes'
 import authRoutes from '../auth/authRoutes'
 import connectRoutes from '../connect/connectRoutes'
 import EmbedFilterPage from '../embed/EmbedFilterPage'
@@ -175,6 +176,7 @@ const MobileLayout = () => {
                 {aboutRoutes}
                 {authRoutes}
                 {accountRoutes}
+                {adminRoutes}
                 {errorRoutes}
                 <Route
                   path={[
@@ -219,6 +221,7 @@ const MobileLayout = () => {
                     .flat(),
                   ...aboutRoutes.map((route) => route.props.path).flat(),
                   ...activityRoutes.map((route) => route.props.path).flat(),
+                  ...adminRoutes.map((route) => route.props.path).flat(),
                   ...errorRoutes.map((route) => route.props.path).flat(),
                 ]}
               />

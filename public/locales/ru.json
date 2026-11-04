@@ -40,6 +40,7 @@
       "location_deletion_failed": "Не удалось удалить место: {{message}}",
       "location_edit_failed": "Не удалось отредактировать место: {{message}}",
       "location_submission_failed": "Не удалось отправить место: {{message}}",
+      "location_unhide_failed": "Не удалось обновить видимость: {{message}}",
       "photo_upload_failed": "Не удалось загрузить фото: {{message}}",
       "remove_location_from_list_failed": "Не удалось удалить место из списка: {{message}}",
       "remove_location_list_failed": "Не удалось удалить список мест: {{message}}",
@@ -188,17 +189,19 @@
       "add_season_end": "Добавить конец сезона",
       "add_season_start": "Добавить начало сезона",
       "confirm_still_exists": "Подтвердить, что существует",
+      "hidden_not_on_shared_map": "Скрыто - недоступно с общей карты",
       "over_x_years_ago": "Более {{yearsAgo}} лет назад",
       "report_comment_placeholder_no_longer_exists": "Больше не существует",
       "report_no_longer_exists": "Пожаловаться, что больше не существует",
       "reported_on": "(сообщено {{date}})",
+      "reported_pending_review": "Для этого места были сообщены проблемы",
       "review_comment_placeholder_still_exists": "Всё ещё здесь!",
+      "unhide": "Показать",
       "unverified_edit_position": "Изменить позицию",
       "unverified_edit_types": "Изменить типы",
       "unverified_mark_as_verified": "Отметить как проверенное",
       "unverified_may_be_inaccurate": "Не проверено: может быть неточным",
-      "unverified_report_does_not_exist": "Пожаловаться, что не существует",
-      "you_reported_on": "(вы сообщили {{date}})"
+      "unverified_report_does_not_exist": "Пожаловаться, что не существует"
     },
     "infowindow": {
       "access_mode": [
@@ -479,6 +482,7 @@
     "location_deleted": "Местоположение успешно удалено!",
     "location_edited": "Местоположение успешно отредактировано!",
     "location_submitted": "Местоположение успешно отправлено!",
+    "location_unhidden": "Место успешно отображено!",
     "report_submitted": "Жалоба успешно отправлена!",
     "review_deleted": "Отзыв успешно удален!",
     "review_edited": "Отзыв успешно отредактирован!",
