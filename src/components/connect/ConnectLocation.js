@@ -99,12 +99,14 @@ const ConnectLocation = ({
   const { isOpenInMobileLayout: filterOpen } = useSelector(
     (state) => state.filter,
   )
+  const userId = useSelector((state) => state.auth.user?.id ?? null)
   const history = useAppHistory()
   const isDesktop = useIsDesktop()
   const isEmbed = useIsEmbed()
   const [hasCentered, setHasCentered] = useState(false)
   const { t } = useTranslation()
   const toastIdRef = useRef(null)
+  const previousUserIdRef = useRef(userId)
 
   useEffect(() => {
     if (locationLoaded(location, locationId)) {
@@ -142,6 +144,22 @@ const ConnectLocation = ({
       }
     })
   }, [dispatch, locationId]) //eslint-disable-line
+
+  useEffect(() => {
+    const previousUserId = previousUserIdRef.current
+    previousUserIdRef.current = userId
+    if (previousUserId === null && userId !== null) {
+      if (locationLoaded(location, locationId)) {
+        dispatch(
+          fetchLocationData({
+            locationId,
+            isBeingEdited,
+            isFromEmbedViewMap: isEmbed,
+          }),
+        )
+      }
+    }
+  }, [dispatch, userId]) //eslint-disable-line
 
   useEffect(() => {
     if (location && !hasInitialView) {
