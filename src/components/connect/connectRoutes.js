@@ -122,6 +122,7 @@ const connectRoutes = [
    * - location-specific context should reset when going from one location to another
    * - two way binding between URL and initialView like in ConnectMap, but with center of location as fallback
    * - opening a bare URL externally should shift the view in a running app
+   * - logged in users get their own location information in the payload
    *
    * actions:
    * - fetch data from backend
@@ -134,6 +135,7 @@ const connectRoutes = [
    * - when location id changes, drop fromSettings and userActivity state
    * - if there's no initial view in Redux but there's a location in Redux, set initial view
    * - if there's no view in URL but the initial view / map is present, wait for location to load and set the URL view to location centre
+   * - if logging in, refetch location
    */
   <Route
     key="connect-location"
