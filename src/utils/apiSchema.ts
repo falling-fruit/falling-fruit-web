@@ -893,6 +893,8 @@ export interface components {
         reviews?: components["schemas"]["Review"][];
         /** User's lists that include the Location. */
         lists?: components["schemas"]["LocationList"][];
+        /** Unresolved reports of problems with the Location. Empty if there are none. */
+        open_reports: components["schemas"]["OpenReport"][];
       };
     LocationChange: {
       /** Time of the change creation */
@@ -1006,6 +1008,34 @@ export interface components {
         /** Email change pending confirmation. */
         unconfirmed_email?: string;
       };
+    /** An unresolved Report of a problem with a Location. Fields beyond `created_at` and `problem_code` are only included for authenticated users (`reported_by_me`) or admins (`comment`, `reporter`). */
+    OpenReport: {
+      /** Date and time created in format YYYY-MM-DDThh:mm:ss.sssZ. */
+      created_at: string;
+      /**
+       * Problem code.
+       * - 0: Location is spam
+       * - 1: Location does not exist
+       * - 2: Location is a duplicate
+       * - 3: Inappropriate review photo
+       * - 4: Inappropriate review comment
+       * - 5: Other (explain below)
+       */
+      problem_code: 0 | 1 | 2 | 3 | 4 | 5;
+      /** Comment. Only included for an authenticated admin. */
+      comment?: string | null;
+      /** Whether the report was made by the authenticated user. Only included for an authenticated user. */
+      reported_by_me?: boolean;
+      /** Reporter details. Only included for an authenticated admin. */
+      reporter?: {
+        /** ID of reporting User (if authenticated). */
+        user_id: number | null;
+        /** Name of the reporter. */
+        name: string | null;
+        /** Email of the reporter. */
+        email: string | null;
+      };
+    };
     /** Report properties that can be edited. */
     EditReport: {
       /** Location ID. */

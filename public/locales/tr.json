@@ -191,12 +191,14 @@
       "over_x_years_ago": "{{yearsAgo}} yıldan fazla önce",
       "report_comment_placeholder_no_longer_exists": "Artık var olmadığını bildir",
       "report_no_longer_exists": "Artık var olmadığını bildir",
+      "reported_on": "({{date}} tarihinde bildirildi)",
       "review_comment_placeholder_still_exists": "Hâlâ orada!",
       "unverified_edit_position": "Konumu düzenle",
       "unverified_edit_types": "Türleri düzenle",
       "unverified_mark_as_verified": "Doğrulanmış olarak işaretle",
       "unverified_may_be_inaccurate": "Doğrulanmamış: yanlış olabilir",
-      "unverified_report_does_not_exist": "Mevcut olmadığını bildir"
+      "unverified_report_does_not_exist": "Mevcut olmadığını bildir",
+      "you_reported_on": "({{date}} tarihinde siz bildirdiniz)"
     },
     "infowindow": {
       "access_mode": [

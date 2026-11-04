@@ -191,12 +191,14 @@
       "over_x_years_ago": "Před více než {{yearsAgo}} lety",
       "report_comment_placeholder_no_longer_exists": "Již neexistuje",
       "report_no_longer_exists": "Nahlásit, že již neexistuje",
+      "reported_on": "(nahlášeno {{date}})",
       "review_comment_placeholder_still_exists": "Stále tam je!",
       "unverified_edit_position": "Upravit pozici",
       "unverified_edit_types": "Upravit typy",
       "unverified_mark_as_verified": "Označit jako ověřené",
       "unverified_may_be_inaccurate": "Neověřeno: může být nepřesné",
-      "unverified_report_does_not_exist": "Nahlásit, že neexistuje"
+      "unverified_report_does_not_exist": "Nahlásit, že neexistuje",
+      "you_reported_on": "(nahlásili jste {{date}})"
     },
     "infowindow": {
       "access_mode": [

@@ -191,12 +191,14 @@
       "over_x_years_ago": "منذ أكثر من {{yearsAgo}} سنة",
       "report_comment_placeholder_no_longer_exists": "لم يعد موجودًا",
       "report_no_longer_exists": "الإبلاغ عن عدم وجوده",
+      "reported_on": "(تم الإبلاغ في {{date}})",
       "review_comment_placeholder_still_exists": "لا يزال موجودًا!",
       "unverified_edit_position": "تعديل الموقع",
       "unverified_edit_types": "تعديل الأنواع",
       "unverified_mark_as_verified": "وضع علامة كمتحقق",
       "unverified_may_be_inaccurate": "لم يتم التحقق: قد يكون غير دقيق",
-      "unverified_report_does_not_exist": "الإبلاغ عن عدم وجوده"
+      "unverified_report_does_not_exist": "الإبلاغ عن عدم وجوده",
+      "you_reported_on": "(أبلغت في {{date}})"
     },
     "infowindow": {
       "access_mode": [

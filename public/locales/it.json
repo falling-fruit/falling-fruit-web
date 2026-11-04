@@ -191,12 +191,14 @@
       "over_x_years_ago": "Oltre {{yearsAgo}} anni fa",
       "report_comment_placeholder_no_longer_exists": "Non esiste più",
       "report_no_longer_exists": "Segnala che non esiste più",
+      "reported_on": "(segnalato il {{date}})",
       "review_comment_placeholder_still_exists": "Ancora presente!",
       "unverified_edit_position": "Modifica posizione",
       "unverified_edit_types": "Modifica tipi",
       "unverified_mark_as_verified": "Segna come verificato",
       "unverified_may_be_inaccurate": "Non verificato: potrebbe essere impreciso",
-      "unverified_report_does_not_exist": "Segnala che non esiste"
+      "unverified_report_does_not_exist": "Segnala che non esiste",
+      "you_reported_on": "(segnalato da te il {{date}})"
     },
     "infowindow": {
       "access_mode": [

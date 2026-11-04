@@ -191,12 +191,14 @@
       "over_x_years_ago": "Πριν από πάνω από {{yearsAgo}} χρόνια",
       "report_comment_placeholder_no_longer_exists": "Δεν υπάρχει πλέον",
       "report_no_longer_exists": "Αναφορά ότι δεν υπάρχει πλέον",
+      "reported_on": "(αναφέρθηκε στις {{date}})",
       "review_comment_placeholder_still_exists": "Εξακολουθεί να υπάρχει!",
       "unverified_edit_position": "Επεξεργασία θέσης",
       "unverified_edit_types": "Επεξεργασία ειδών",
       "unverified_mark_as_verified": "Επισήμανση ως επαληθευμένο",
       "unverified_may_be_inaccurate": "Μη επαληθευμένο: μπορεί να είναι ανακριβές",
-      "unverified_report_does_not_exist": "Αναφορά ότι δεν υπάρχει"
+      "unverified_report_does_not_exist": "Αναφορά ότι δεν υπάρχει",
+      "you_reported_on": "(το αναφέρατε στις {{date}})"
     },
     "infowindow": {
       "access_mode": [

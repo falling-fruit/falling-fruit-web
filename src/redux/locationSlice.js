@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import {
   addLocation,
+  addReport,
   addReview,
   deleteLocation,
   deleteReview,
@@ -11,6 +12,7 @@ import {
   editReview,
   getLocationById,
 } from '../utils/api'
+import { logout } from './authSlice'
 import { fetchReviewData } from './reviewSlice'
 import { addLocationToList, removeLocationFromList } from './saveSlice'
 
@@ -76,6 +78,8 @@ export const addNewReview = createAsyncThunk(
   'location/addNewReview',
   ({ locationId, reviewValues }) => addReview(locationId, reviewValues),
 )
+
+export const addNewReport = createAsyncThunk('location/addNewReport', addReport)
 
 export const editExistingReview = createAsyncThunk(
   'location/editExistingReview',
@@ -256,6 +260,32 @@ const locationSlice = createSlice({
         }),
       )
     },
+    [addNewReport.fulfilled]: (state, action) => {
+      const report = action.payload
+      if (
+        state.location &&
+        state.location.id === parseInt(report.location_id)
+      ) {
+        const openReport = {
+          created_at: report.created_at,
+          problem_code: report.problem_code,
+          ...(report.reporter_id != null && { reported_by_me: true }),
+        }
+        state.location.open_reports = [
+          ...(state.location.open_reports ?? []),
+          openReport,
+        ]
+      }
+      toast.success(i18next.t('success_message.report_submitted'))
+    },
+    [addNewReport.rejected]: (_, action) => {
+      toast.error(
+        i18next.t('error_message.api.report_submission_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
+    },
     [editExistingReview.fulfilled]: (state, action) => {
       const reviewIndex = state.reviews.findIndex(
         (review) => review.id === action.meta.arg.reviewId,
@@ -305,6 +335,13 @@ const locationSlice = createSlice({
       const { locationId, locationStillInAnyList } = action.payload
       if (state.locationId === locationId) {
         state.inList = locationStillInAnyList
+      }
+    },
+    [logout]: (state) => {
+      if (state.location?.open_reports) {
+        state.location.open_reports = state.location.open_reports.map(
+          ({ reported_by_me: _reported_by_me, ...report }) => report,
+        )
       }
     },
   },

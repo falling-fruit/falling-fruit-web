@@ -191,12 +191,14 @@
       "over_x_years_ago": "Meer dan {{yearsAgo}} jaar geleden",
       "report_comment_placeholder_no_longer_exists": "Bestaat niet meer",
       "report_no_longer_exists": "Meld dat het niet meer bestaat",
+      "reported_on": "(gemeld op {{date}})",
       "review_comment_placeholder_still_exists": "Nog steeds daar!",
       "unverified_edit_position": "Positie bewerken",
       "unverified_edit_types": "Soorten bewerken",
       "unverified_mark_as_verified": "Markeer als geverifieerd",
       "unverified_may_be_inaccurate": "Niet geverifieerd: kan onnauwkeurig zijn",
-      "unverified_report_does_not_exist": "Meld dat het niet bestaat"
+      "unverified_report_does_not_exist": "Meld dat het niet bestaat",
+      "you_reported_on": "(door jou gemeld op {{date}})"
     },
     "infowindow": {
       "access_mode": [

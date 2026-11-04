@@ -191,12 +191,14 @@
       "over_x_years_ago": "{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
       "report_no_longer_exists": "举报不再存在",
+      "reported_on": "（于 {{date}} 报告）",
       "review_comment_placeholder_still_exists": "还在那里！",
       "unverified_edit_position": "编辑位置",
       "unverified_edit_types": "编辑种类",
       "unverified_mark_as_verified": "标记为已验证",
       "unverified_may_be_inaccurate": "未验证: 可能不准确",
-      "unverified_report_does_not_exist": "举报不存在"
+      "unverified_report_does_not_exist": "举报不存在",
+      "you_reported_on": "（您于 {{date}} 报告）"
     },
     "infowindow": {
       "access_mode": [

@@ -191,12 +191,14 @@
       "over_x_years_ago": "{{yearsAgo}}年以上前",
       "report_comment_placeholder_no_longer_exists": "存在しなくなりました",
       "report_no_longer_exists": "存在しなくなったことを報告",
+      "reported_on": "（{{date}} に報告）",
       "review_comment_placeholder_still_exists": "まだあります！",
       "unverified_edit_position": "位置を編集",
       "unverified_edit_types": "種類を編集",
       "unverified_mark_as_verified": "確認済みとしてマーク",
       "unverified_may_be_inaccurate": "未確認: 不正確な可能性があります",
-      "unverified_report_does_not_exist": "存在しないことを報告"
+      "unverified_report_does_not_exist": "存在しないことを報告",
+      "you_reported_on": "（あなたが {{date}} に報告）"
     },
     "infowindow": {
       "access_mode": [

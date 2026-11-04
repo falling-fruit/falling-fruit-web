@@ -191,12 +191,14 @@
       "over_x_years_ago": "Hơn {{yearsAgo}} năm trước",
       "report_comment_placeholder_no_longer_exists": "Không còn tồn tại",
       "report_no_longer_exists": "Báo cáo không còn tồn tại",
+      "reported_on": "(đã báo cáo vào {{date}})",
       "review_comment_placeholder_still_exists": "Vẫn còn đó!",
       "unverified_edit_position": "Chỉnh sửa vị trí",
       "unverified_edit_types": "Chỉnh sửa loại",
       "unverified_mark_as_verified": "Đánh dấu là đã xác minh",
       "unverified_may_be_inaccurate": "Chưa được xác minh: có thể không chính xác",
-      "unverified_report_does_not_exist": "Báo cáo không tồn tại"
+      "unverified_report_does_not_exist": "Báo cáo không tồn tại",
+      "you_reported_on": "(bạn đã báo cáo vào {{date}})"
     },
     "infowindow": {
       "access_mode": [

@@ -191,12 +191,14 @@
       "over_x_years_ago": "超過{{yearsAgo}}年前",
       "report_comment_placeholder_no_longer_exists": "不再存在",
       "report_no_longer_exists": "舉報不再存在",
+      "reported_on": "（於 {{date}} 回報）",
       "review_comment_placeholder_still_exists": "還在那裡！",
       "unverified_edit_position": "編輯位置",
       "unverified_edit_types": "編輯類型",
       "unverified_mark_as_verified": "標記為已驗證",
       "unverified_may_be_inaccurate": "未驗證: 可能不準確",
-      "unverified_report_does_not_exist": "舉報不存在"
+      "unverified_report_does_not_exist": "舉報不存在",
+      "you_reported_on": "（您於 {{date}} 回報）"
     },
     "infowindow": {
       "access_mode": [

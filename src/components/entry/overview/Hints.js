@@ -9,6 +9,7 @@ import { editExistingLocation } from '../../../redux/locationSlice'
 import { locationToApiValues } from '../../../utils/form'
 import { useAppHistory } from '../../../utils/useAppHistory'
 import ResetButton from '../../ui/ResetButton'
+import { formatISOString } from '../textFormatters'
 import useLocationPane from '../useLocationPane'
 
 const HintAction = styled(ResetButton)`
@@ -47,6 +48,19 @@ const ExistenceActionsContainer = styled.div`
   flex-wrap: wrap;
   gap: 1em;
   margin-block-start: 0.75em;
+`
+
+const ReportsList = styled.ul`
+  margin-block: 0.5em 0;
+  padding-inline-start: 1.5em;
+  list-style: none;
+  font-style: italic;
+  color: ${({ theme }) => theme.tertiaryText};
+
+  li::before {
+    content: '-';
+    margin-inline-end: 0.5em;
+  }
 `
 
 export const AddDescriptionHint = ({ locationData }) => {
@@ -278,5 +292,43 @@ export const UnverifiedHintActions = ({ locationData }) => {
         {t('locations.hints.unverified_report_does_not_exist')}
       </HintAction>
     </ExistenceActionsContainer>
+  )
+}
+
+export const ReportsHintToggle = ({ expanded, onToggle }) => {
+  const { t } = useTranslation()
+  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+
+  return (
+    <UnverifiedLabel
+      onClick={(e) => {
+        e.stopPropagation()
+        fullyOpenPaneDrawerIfMobile()
+        onToggle()
+      }}
+      role="button"
+      aria-expanded={expanded}
+    >
+      {t('locations.hints.reported_pending_review')}
+      {expanded ? <ChevronUp size="1em" /> : <ChevronDown size="1em" />}
+    </UnverifiedLabel>
+  )
+}
+
+export const ReportsHintList = ({ reports }) => {
+  const { t, i18n } = useTranslation()
+
+  return (
+    <ReportsList>
+      {reports.map((report, index) => {
+        const problem = t(`problems.problem_types.${report.problem_code}`)
+        const date = formatISOString(report.created_at, i18n.language)
+        const reportedLabel = report.reported_by_me
+          ? t('locations.hints.you_reported_on', { date })
+          : t('locations.hints.reported_on', { date })
+
+        return <li key={index}>{`${problem} ${reportedLabel}`}</li>
+      })}
+    </ReportsList>
   )
 }
