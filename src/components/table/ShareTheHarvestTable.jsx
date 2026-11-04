@@ -6,6 +6,7 @@ import styled from 'styled-components/macro'
 
 import harvestData from '../../constants/data/harvest.json'
 import X from '../../constants/X.svg'
+import LabeledCheckbox from '../filter/LabeledCheckbox.js'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
 import DataTable from './DataTable'
@@ -29,7 +30,14 @@ const OrganizationName = styled.span`
     !$isActive &&
     `
   opacity: 0.5;
+  text-decoration: line-through;
 `}
+`
+
+const SubHeaderContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 `
 
 // TODO: Consider updating organization name formatting
@@ -87,7 +95,12 @@ const FormattedSocials = ({ facebook, instagram, x }) => {
 
 const ShareTheHarvestTable = () => {
   const [filterText, setFilterText] = React.useState('')
+  const [hideInactive, setHideInactive] = React.useState(false)
   const { t, i18n } = useTranslation()
+
+  const visibleRows = hideInactive
+    ? harvestData.filter((r) => r.active === true)
+    : harvestData
 
   const sortBy = (selector) => (rowA, rowB) => {
     const a = selector(rowA)
@@ -174,7 +187,7 @@ const ShareTheHarvestTable = () => {
     },
   ]
 
-  const filteredData = harvestData.filter((item) => {
+  const filteredData = visibleRows.filter((item) => {
     const query = filterText.toLowerCase()
     const translatedCountry = translatedCountries[item.country] || item.country
     const keywords = [translatedCountry, item.state, item.city, item.name]
@@ -191,13 +204,21 @@ const ShareTheHarvestTable = () => {
       defaultSortFieldId={'country'}
       subHeader
       subHeaderComponent={
-        <Input
-          placeholder={t('form.search')}
-          icon={<SearchIcon />}
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-          name="search"
-        />
+        <SubHeaderContainer>
+          <LabeledCheckbox
+            label={t('Active')}
+            value={hideInactive}
+            onChange={setHideInactive}
+            style={{ marginRight: '16px' }}
+          />
+          <Input
+            placeholder={t('form.search')}
+            icon={<SearchIcon />}
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            name="search"
+          />
+        </SubHeaderContainer>
       }
       persistTableHead
     />
