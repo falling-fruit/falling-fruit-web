@@ -25,30 +25,14 @@ const TablePreviewLink = styled.a`
   }
 `
 
-const OrganizationName = styled.span`
-  ${({ $isActive }) =>
-    !$isActive &&
-    `
-  opacity: 0.5;
-  text-decoration: line-through;
-`}
-`
-
 const SubHeaderContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
 `
 
-// TODO: Consider updating organization name formatting
-const FormattedOrganization = ({
-  name,
-  name_url,
-  subname,
-  subname_url,
-  active,
-}) => (
-  <OrganizationName $isActive={active}>
+const FormattedOrganization = ({ name, name_url, subname, subname_url }) => (
+  <>
     {name_url ? (
       <a href={name_url} target="_blank" rel="noreferrer">
         {name}
@@ -65,7 +49,7 @@ const FormattedOrganization = ({
       ) : (
         <>{subname}</>
       ))}
-  </OrganizationName>
+  </>
 )
 
 const FormattedSocials = ({ facebook, instagram, x }) => {
@@ -206,7 +190,7 @@ const ShareTheHarvestTable = () => {
       subHeaderComponent={
         <SubHeaderContainer>
           <LabeledCheckbox
-            label={t('Active')}
+            label={t('pages.sharing.show_active_only')}
             value={hideInactive}
             onChange={setHideInactive}
             style={{ marginRight: '16px' }}
