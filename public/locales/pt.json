@@ -417,7 +417,8 @@
         "social": "Social",
         "state": "Estado"
       },
-      "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Aqueles com nomes riscados são inativos. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!"
+      "intro_html": "Abaixo estão listadas as organizações locais que cultivam alimentos em locais públicos (florestas e pomares), colhem alimentos (coleta urbana e hortas), ou de outra forma redistribuirem alimentos (trocas e doações). As organizações estão listados por país, estado e cidade. Se você souber de outros que deveriam estar nesta lista, <a href=\"mailto:info@fallingfruit.org\">entre em contato conosco</a>!",
+      "show_active_only": "Mostrar apenas ativas"
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "Se o problema persistir, informe-nos em <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
