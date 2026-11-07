@@ -417,7 +417,15 @@
         "social": "Sociální sítě",
         "state": "Stát"
       },
-      "intro_html": "Níže jsou uvedeny organizace, které pěstují potraviny na veřejných prostranstvích (potravinové lesy, veřejné sady), sbírají potraviny (městský sběr, paběrkování na farmách) nebo distribuují potraviny (výměny, dary). Organizace jsou seřazeny podle země, státu (je-li to relevantní) a města. Ty s přeškrtnutými názvy jsou považovány za neaktivní. Pokud víte o dalších, které by měly být na tomto seznamu, <a href=\"mailto:info@fallingfruit.org\">kontaktujte nás</a>!"
+      "intro_html": "Níže jsou uvedeny organizace, které pěstují potraviny na veřejných prostranstvích (potravinové lesy, veřejné sady), sbírají potraviny (městský sběr, paběrkování na farmách) nebo distribuují potraviny (výměny, dary). Organizace jsou seřazeny podle země, státu (je-li to relevantní) a města. Pokud víte o dalších, které by měly být na tomto seznamu, <a href=\"mailto:info@fallingfruit.org\">kontaktujte nás</a>!",
+      "show_active_only": "Zobrazit pouze aktivní",
+      "donates_food": "Daruje jídlo",
+      "type_filter": {
+        "all": "Všechny typy",
+        "grow": "Pěstování",
+        "distribute": "Distribuce",
+        "pick": "Sbírat"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "Pokud problém přetrvává, dejte nám vědět na <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",

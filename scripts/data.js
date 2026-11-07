@@ -44,6 +44,8 @@ const HARVEST_KEYS = [
   'facebook',
   'x',
   'instagram',
+  'donate',
+  'type',
 ]
 
 const isIncluded = ({ include }) => !!include
@@ -61,6 +63,15 @@ const substituteBy = (substitutions) => (rawRow) => {
   return substitutedRow
 }
 
+const addHarvestType = (rows) =>
+  rows.map((row) => {
+    const types = []
+    if (['orchard_public', 'orchard_historic', 'garden_public', 'garden_private', 'seeds', 'plants'].some((k) => row[k])) types.push('grow')
+    if (['forage', 'glean_urban', 'glean_rural', 'dive'].some((k) => row[k])) types.push('forage')
+    if (['rescue', 'fridge', 'pantry', 'meals', 'trade'].some((k) => row[k])) types.push('distribute')
+    return types.length ? { ...row, type: types } : row
+  })
+
 const getDataByYear = (rows) =>
   rows.reduce((dataByYear, row) => {
     const year = new Date(row.published_on).getFullYear()
@@ -77,9 +88,12 @@ async function getAndWriteData(
   substitutions = {},
   formatters = [],
   keys = null,
+  preFormatters = [],
 ) {
   const { data } = await axios.get(url)
   let processed = data.map(substituteBy(substitutions)).filter(isIncluded)
+
+  processed = preFormatters.reduce((rows, fn) => fn(rows), processed)
 
   // Keep only keys that are listed and have truthy values
   if (keys) {
@@ -121,4 +135,5 @@ getAndWriteData(
   HARVEST_SUBSTITUTIONS,
   [],
   HARVEST_KEYS,
+  [addHarvestType],
 )

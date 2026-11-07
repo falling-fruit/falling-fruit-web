@@ -5,6 +5,7 @@ import logging
 import sys
 from pathlib import Path
 
+from lib.harvest_from_csv import HarvestCSV
 from lib.source_dir import SourceDirectory
 from lib.translation import Translation
 from lib.tap_stream import TapStream
@@ -19,6 +20,7 @@ logger = logging.getLogger(__name__)
 SCRIPT_DIR = Path(__file__).parent
 DEFAULT_SOURCE_PATH = str(SCRIPT_DIR / "../src")
 DEFAULT_JSON_FOLDER_PATH = str(SCRIPT_DIR / "../public/locales")
+DEFAULT_HARVEST_OUTPUT_PATH = str(SCRIPT_DIR / "../src/constants/data/harvest.json")
 
 
 class TranslationManager:
@@ -280,6 +282,10 @@ def main():
                         help="Fill up missing translations in all language files using English as source")
     parser.add_argument("--insert-keys", metavar="JSON_FILE",
                         help="Insert translation keys from a JSON file. Format: {lang: {dotted_key: value}}. Use '-' for stdin.")
+    parser.add_argument("--harvest-from-csv", metavar="CSV_FILE",
+                        help="Generate harvest.json from a local CSV export of the organizations spreadsheet.")
+    parser.add_argument("--harvest-output", default=DEFAULT_HARVEST_OUTPUT_PATH,
+                        help="Output path for harvest.json (default: %(default)s)")
     parser.add_argument("--log-level", default="INFO",
                         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                         help="Set the logging level (default: INFO)")
@@ -351,9 +357,12 @@ def main():
                 data = json.load(f)
         manager.insert_keys(data)
 
+    if args.harvest_from_csv:
+        HarvestCSV(args.harvest_from_csv, args.harvest_output).process()
+
     if not (args.rename_key or args.list_in_source or args.list_in_json or
             args.check_translations or args.remove_orphan_keys or args.fill_up_translations or
-            args.insert_keys):
+            args.insert_keys or args.harvest_from_csv):
         logger.warning("No action specified. Use --rename_key {old_key} {new_key}, --list-in-source, --list-in-json, --check-translations, --remove-orphan-keys, --fill-up-translations, --insert-keys.")
         parser.print_help()
 

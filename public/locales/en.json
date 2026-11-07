@@ -417,7 +417,15 @@
         "social": "Social",
         "state": "State"
       },
-      "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. Those with crossed-out names are believed to be inactive. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!"
+      "intro_html": "Listed below are organizations that grow food in public spaces (food forests, public orchards), pick food (urban foraging, farm gleaning), or distribute food (exchanges, donations). Organizations are listed by country, state (if applicable), and city. If you know of others that should be on this list, <a href=\"mailto:info@fallingfruit.org\">contact us</a>!",
+      "show_active_only": "Show active only",
+      "donates_food": "Donates food",
+      "type_filter": {
+        "all": "All types",
+        "grow": "Grow",
+        "distribute": "Distribute",
+        "pick": "Pick"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "If the problem persists, let us know at <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",

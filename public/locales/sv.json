@@ -417,7 +417,15 @@
         "social": "Socialt",
         "state": "Delstat"
       },
-      "intro_html": "Nedan listas organisationer som odlar mat på offentliga platser (matskog, offentliga fruktträdgårdar), plockar mat (urban skördning, efterplockning på gårdar) eller distribuerar mat (utbyten, donationer). Organisationerna är listade efter land, delstat (om tillämpligt) och stad. De med överstrukna namn antas vara inaktiva. Om du känner till andra som borde vara med på denna lista, <a href=\"mailto:info@fallingfruit.org\">kontakta oss</a>!"
+      "intro_html": "Nedan listas organisationer som odlar mat på offentliga platser (matskog, offentliga fruktträdgårdar), plockar mat (urban skördning, efterplockning på gårdar) eller distribuerar mat (utbyten, donationer). Organisationerna är listade efter land, delstat (om tillämpligt) och stad. Om du känner till andra som borde vara med på denna lista, <a href=\"mailto:info@fallingfruit.org\">kontakta oss</a>!",
+      "show_active_only": "Visa endast aktiva",
+      "donates_food": "Donerar mat",
+      "type_filter": {
+        "all": "Alla typer",
+        "grow": "Odling",
+        "distribute": "Distribution",
+        "pick": "Plocka"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "Om problemet kvarstår, låt oss veta på <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",

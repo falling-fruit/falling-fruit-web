@@ -417,7 +417,15 @@
         "social": "社交媒体",
         "state": "州/省"
       },
-      "intro_html": "以下是在公共场所种植食物、组织采摘或分发收获（交换、捐赠）的组织列表。名字被划掉的代表该组织可能已不活跃。如果你知道其他相关组织，请 <a href=\"mailto:info@fallingfruit.org\">联系我们</a>！"
+      "intro_html": "以下是在公共场所种植食物、组织采摘或分发收获（交换、捐赠）的组织列表。如果你知道其他相关组织，请 <a href=\"mailto:info@fallingfruit.org\">联系我们</a>！",
+      "show_active_only": "仅显示活跃",
+      "donates_food": "捐赠食物",
+      "type_filter": {
+        "all": "所有类型",
+        "grow": "种植",
+        "distribute": "分发",
+        "pick": "采摘"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "如果问题持续出现，请通过 <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a> 联系我们。",

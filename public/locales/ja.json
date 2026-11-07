@@ -417,7 +417,15 @@
         "social": "ソーシャル",
         "state": "州"
       },
-      "intro_html": "以下は、公共スペースで食料を栽培する組織（フードフォレスト、公共果樹園）、食料を収穫する組織（都市採集、農場落穂拾い）、または食料を配布する組織（交換、寄付）のリストです。組織は国、州（該当する場合）、都市別にリストされています。取り消し線が引かれた名前は、活動していないと考えられています。このリストに追加すべき他の組織をご存知の場合は、<a href=\"mailto:info@fallingfruit.org\">お問い合わせください</a>！"
+      "intro_html": "以下は、公共スペースで食料を栽培する組織（フードフォレスト、公共果樹園）、食料を収穫する組織（都市採集、農場落穂拾い）、または食料を配布する組織（交換、寄付）のリストです。組織は国、州（該当する場合）、都市別にリストされています。このリストに追加すべき他の組織をご存知の場合は、<a href=\"mailto:info@fallingfruit.org\">お問い合わせください</a>！",
+      "show_active_only": "アクティブのみ表示",
+      "donates_food": "食料を寄付",
+      "type_filter": {
+        "all": "すべての種類",
+        "grow": "栽培",
+        "distribute": "配布",
+        "pick": "採取"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "問題が解決しない場合は、<a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>までお知らせください。",

@@ -417,7 +417,15 @@
         "social": "Redes sociales",
         "state": "Estado/Provincia"
       },
-      "intro_html": "A continuación se enumeran las organizaciones que cultivan alimentos en los espacios públicos (bosques de alimentos, huertas públicas), recogen alimentos (forrajeo urbano, espigueo de campo), o distribuyen alimentos (intercambios, donaciones). Las organizaciones están listadas por país, estado (si procede), y ciudad. Las organizaciones con nombres tachados se consideran inactivas. Si conoces otras que deberían estar en esta lista, ¡<a href=\"mailto:info@fallingfruit.org\">contáctanos</a>!"
+      "intro_html": "A continuación se enumeran las organizaciones que cultivan alimentos en los espacios públicos (bosques de alimentos, huertas públicas), recogen alimentos (forrajeo urbano, espigueo de campo), o distribuyen alimentos (intercambios, donaciones). Las organizaciones están listadas por país, estado (si procede), y ciudad. Si conoces otras que deberían estar en esta lista, ¡<a href=\"mailto:info@fallingfruit.org\">contáctanos</a>!",
+      "show_active_only": "Mostrar solo activas",
+      "donates_food": "Dona alimentos",
+      "type_filter": {
+        "all": "Todos los tipos",
+        "grow": "Cultivo",
+        "distribute": "Distribución",
+        "pick": "Recolectar"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "Si el problema persiste, háganoslo saber en <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
