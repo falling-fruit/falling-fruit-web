@@ -9,6 +9,7 @@ import X from '../../constants/X.svg'
 import LabeledCheckbox from '../filter/LabeledCheckbox.js'
 import { theme } from '../ui/GlobalStyle'
 import Input from '../ui/Input'
+import Select from '../ui/SingleSelect'
 import DataTable from './DataTable'
 
 const TablePreviewLink = styled.a`
@@ -28,7 +29,8 @@ const TablePreviewLink = styled.a`
 const SubHeaderContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  align-items: center;
+  gap: 10px;
 `
 
 const FormattedOrganization = ({ name, name_url, subname, subname_url }) => (
@@ -80,11 +82,16 @@ const FormattedSocials = ({ facebook, instagram, x }) => {
 const ShareTheHarvestTable = () => {
   const [filterText, setFilterText] = React.useState('')
   const [hideInactive, setHideInactive] = React.useState(false)
+  const [donateOnly, setDonateOnly] = React.useState(false)
+  const [typeFilter, setTypeFilter] = React.useState('all')
   const { t, i18n } = useTranslation()
 
-  const visibleRows = hideInactive
-    ? harvestData.filter((r) => r.active === true)
-    : harvestData
+  const visibleRows = harvestData
+    .filter((r) => !hideInactive || r.active === true)
+    .filter((r) => !donateOnly || r.donate === true)
+    .filter(
+      (r) => typeFilter === 'all' || (r.type && r.type.includes(typeFilter)),
+    )
 
   const sortBy = (selector) => (rowA, rowB) => {
     const a = selector(rowA)
@@ -193,8 +200,27 @@ const ShareTheHarvestTable = () => {
             label={t('pages.sharing.show_active_only')}
             value={hideInactive}
             onChange={setHideInactive}
-            style={{ marginRight: '16px' }}
           />
+          <LabeledCheckbox
+            label={t('pages.sharing.donates_food')}
+            value={donateOnly}
+            onChange={setDonateOnly}
+          />
+          <div style={{ width: '140px' }}>
+            <Select
+              options={[
+                { value: 'all', label: t('pages.sharing.type_filter.all') },
+                { value: 'grow', label: t('pages.sharing.type_filter.grow') },
+                { value: 'forage', label: t('pages.sharing.type_filter.pick') },
+                {
+                  value: 'distribute',
+                  label: t('pages.sharing.type_filter.distribute'),
+                },
+              ]}
+              value={typeFilter}
+              onChange={(opt) => setTypeFilter(opt?.value ?? 'all')}
+            />
+          </div>
           <Input
             placeholder={t('form.search')}
             icon={<SearchIcon />}
