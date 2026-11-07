@@ -21,6 +21,7 @@ import EmbedHeader from '../embed/EmbedHeader'
 import EntryMobile from '../entry/EntryMobile'
 import errorRoutes from '../error/errorRoutes'
 import { formRoutesMobile } from '../form/formRoutes'
+import homeRoutes from '../home/homeRoutes'
 import ListPage from '../list/ListPage'
 import MapPage from '../map/MapPage'
 import SettingsPage from '../settings/SettingsPage'
@@ -174,6 +175,7 @@ const MobileLayout = () => {
                 {activityRoutes}
                 {aboutRoutes}
                 {authRoutes}
+                {homeRoutes}
                 {accountRoutes}
                 {errorRoutes}
                 <Route

@@ -13,13 +13,14 @@ import {
 } from '../../redux/geolocationSlice'
 import { viewToString } from '../../utils/appUrl'
 import { useAppHistory } from '../../utils/useAppHistory'
+import { withAuthRedirect } from '../auth/withAuthRedirect'
 import AboutSection from '../mobile/AboutSection'
 import MobileAppLinks from '../mobile/MobileAppLinks'
 import MobileSocialLinks from '../mobile/MobileSocialLinks'
 import Button from '../ui/Button'
-import { PageHeader } from '../ui/Headers'
+import { NavHeader, PageHeader } from '../ui/Headers'
 import { LandingPage } from '../ui/PageTemplate'
-import { withAuthRedirect } from './withAuthRedirect'
+import ActivityGlobe from './ActivityGlobe'
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -40,7 +41,6 @@ const Headline = styled(PageHeader)`
 const Description = styled.div`
   color: ${({ theme }) => theme.secondaryText};
 `
-
 const SpinnerIcon = styled(Loader)`
   animation: spin 1s linear infinite;
 
@@ -169,6 +169,8 @@ const HomePage = () => {
         </LargeButton>
       </ButtonWrapper>
       <MobileAppLinks />
+      <NavHeader>{t('pages.changes.last_24_hours')}</NavHeader>
+      <ActivityGlobe />
       <AboutSection />
       <br />
       <MobileSocialLinks />
