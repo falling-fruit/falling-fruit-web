@@ -418,7 +418,14 @@
         "state": "Bundesland"
       },
       "intro_html": "Im Folgenden sind lokale Organisationen aufgeführt, die Lebensmittel anpflanzen (z.B. in Gemeinschaftsgärten), ernten (z.B. 'urban gardening'), oder auf andere Art und Weise verteilen und teilen. Organisationen werden nach Land, Bundesland/Kanton und Stadt aufgeführt. Wenn du Organisationen kennst, die auf dieser Liste auftauchen müssten, dann <a href=\"mailto:info@fallingfruit.org\">sag uns Bescheid</a>!",
-      "show_active_only": "Nur aktive anzeigen"
+      "show_active_only": "Nur aktive anzeigen",
+      "donates_food": "Spendet Lebensmittel",
+      "type_filter": {
+        "all": "Alle Typen",
+        "grow": "Anbau",
+        "distribute": "Verteilen",
+        "pick": "Ernten"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "Wenn das Problem weiterhin besteht, informieren Sie uns bitte unter <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",

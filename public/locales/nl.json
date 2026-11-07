@@ -418,7 +418,14 @@
         "state": "Staat"
       },
       "intro_html": "Hieronder is een lijst te vinden met organisaties die voedsel produceren in openbare ruimten (voedselbossen, openbare boomgaarden), voedsel plukken (stadsvoedselverzameling, boerderijvoedselverzameling) of voedsel verspreiden (uitwisselingen, donaties). Organisaties worden gesorteerd op land, staat (indien van toepassing) en stad. Als u organisaties kent die op deze lijst thuishoren, neem dan <a href=\"mailto:info@fallingfruit.org\">contact met ons</a> op!",
-      "show_active_only": "Alleen actieve tonen"
+      "show_active_only": "Alleen actieve tonen",
+      "donates_food": "Doneert voedsel",
+      "type_filter": {
+        "all": "Alle typen",
+        "grow": "Verbouwen",
+        "distribute": "Distribueren",
+        "pick": "Plukken"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "As die probleem voortduur, laat weet ons by <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",

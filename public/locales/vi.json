@@ -418,7 +418,14 @@
         "state": "Tiểu bang"
       },
       "intro_html": "Dưới đây là các tổ chức trồng lương thực trong không gian công cộng (rừng lương thực, vườn cây ăn quả công cộng), hái lượm (tìm kiếm thức ăn ở đô thị, lượm lặt trong trang trại) hoặc phân phối thực phẩm (trao đổi, quyên góp). Các tổ chức được liệt kê theo quốc gia, tiểu bang (nếu có) và thành phố. Nếu bạn biết những người khác nên có trong danh sách này, <a href=\"mailto:info@fallingfruit.org\">hãy liên hệ với chúng tôi</a>!",
-      "show_active_only": "Chỉ hiển thị đang hoạt động"
+      "show_active_only": "Chỉ hiển thị đang hoạt động",
+      "donates_food": "Quyên góp thực phẩm",
+      "type_filter": {
+        "all": "Tất cả loại",
+        "grow": "Trồng trọt",
+        "distribute": "Phân phối",
+        "pick": "Hái lượm"
+      }
     },
     "something_went_wrong": {
       "email_us_if_this_persists_html": "Nếu vấn đề vẫn tiếp diễn, vui lòng cho chúng tôi biết tại <a href=\"mailto:info@fallingfruit.org\">info@fallingfruit.org</a>.",
