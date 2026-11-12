@@ -2,13 +2,20 @@ import { ChevronDown, ChevronUp } from '@styled-icons/boxicons-regular'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
 
-import { editExistingLocation } from '../../../redux/locationSlice'
+import {
+  editExistingLocation,
+  setExistingLocationVisibility,
+} from '../../../redux/locationSlice'
 import { locationToApiValues } from '../../../utils/form'
 import { useAppHistory } from '../../../utils/useAppHistory'
+import { adminStrings } from '../../admin/adminStrings'
 import ResetButton from '../../ui/ResetButton'
+import { formatISOString } from '../textFormatters'
 import useLocationPane from '../useLocationPane'
 
 const HintAction = styled(ResetButton)`
@@ -46,7 +53,27 @@ const ExistenceActionsContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1em;
-  margin-block-start: 0.75em;
+  margin-block: 0.75em;
+`
+
+const ReportsList = styled.ul`
+  margin-block: 0.5em 0;
+  padding-inline-start: 1.5em;
+  list-style: none;
+  font-style: italic;
+  color: ${({ theme }) => theme.tertiaryText};
+
+  li::before {
+    content: '-';
+    margin-inline-end: 0.5em;
+  }
+`
+
+const ReportComment = styled.span`
+  display: block;
+  margin-inline-start: 1em;
+  font-style: normal;
+  color: ${({ theme }) => theme.secondaryText};
 `
 
 export const AddDescriptionHint = ({ locationData }) => {
@@ -276,6 +303,124 @@ export const UnverifiedHintActions = ({ locationData }) => {
         }}
       >
         {t('locations.hints.unverified_report_does_not_exist')}
+      </HintAction>
+    </ExistenceActionsContainer>
+  )
+}
+
+export const ReportsHintToggle = ({ expanded, onToggle }) => {
+  const { t } = useTranslation()
+  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+
+  return (
+    <UnverifiedLabel
+      onClick={(e) => {
+        e.stopPropagation()
+        fullyOpenPaneDrawerIfMobile()
+        onToggle()
+      }}
+      role="button"
+      aria-expanded={expanded}
+    >
+      {t('locations.hints.reported_pending_review')}
+      {expanded ? <ChevronUp size="1em" /> : <ChevronDown size="1em" />}
+    </UnverifiedLabel>
+  )
+}
+
+export const ReportsHintList = ({ reports }) => {
+  const { t, i18n } = useTranslation()
+
+  const problemTypeLabels = {
+    0: t('problems.problem_types.0'),
+    1: t('problems.problem_types.1'),
+    2: t('problems.problem_types.2'),
+    3: t('problems.problem_types.3'),
+    4: t('problems.problem_types.4'),
+    5: t('problems.problem_types.5'),
+  }
+
+  return (
+    <ReportsList>
+      {reports.map((report) => {
+        const problem = problemTypeLabels[report.problem_code]
+        const date = formatISOString(report.created_at, i18n.language)
+        const reportedLabel = t('locations.hints.reported_on', { date })
+
+        const reporterName = report.reporter
+          ? report.reporter.name || adminStrings.reports.anonymous
+          : null
+
+        return (
+          <li key={`${report.problem_code}-${report.created_at}`}>
+            {`${problem} ${reportedLabel}`}
+            {reporterName && (
+              <>
+                {' — '}
+                {report.reporter.user_id != null ? (
+                  <Link to={`/users/${report.reporter.user_id}`}>
+                    {reporterName}
+                  </Link>
+                ) : (
+                  reporterName
+                )}
+              </>
+            )}
+            {report.comment && <ReportComment>{report.comment}</ReportComment>}
+          </li>
+        )
+      })}
+    </ReportsList>
+  )
+}
+
+export const HiddenHintToggle = ({ expanded, onToggle }) => {
+  const { t } = useTranslation()
+  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
+
+  return (
+    <UnverifiedLabel
+      onClick={(e) => {
+        e.stopPropagation()
+        fullyOpenPaneDrawerIfMobile()
+        onToggle()
+      }}
+      role="button"
+      aria-expanded={expanded}
+    >
+      {t('locations.hints.hidden_not_on_shared_map')}
+      {expanded ? <ChevronUp size="1em" /> : <ChevronDown size="1em" />}
+    </UnverifiedLabel>
+  )
+}
+
+export const HiddenHintActions = ({ locationData }) => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+
+  const handleUnhide = () => {
+    dispatch(
+      setExistingLocationVisibility({
+        locationId: locationData.id,
+        hidden: false,
+      }),
+    ).then((result) => {
+      if (setExistingLocationVisibility.fulfilled.match(result)) {
+        toast.success(t('success_message.location_unhidden'))
+      } else {
+        toast.error(
+          t('error_message.api.location_unhide_failed', {
+            message: result.error?.message || t('error_message.unknown_error'),
+          }),
+        )
+      }
+    })
+  }
+
+  return (
+    <ExistenceActionsContainer>
+      <HintAction onClick={handleUnhide}>
+        {t('locations.hints.unhide')}
       </HintAction>
     </ExistenceActionsContainer>
   )

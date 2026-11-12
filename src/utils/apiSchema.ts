@@ -525,6 +525,76 @@ export interface paths {
       };
     };
   };
+  "/reports/open": {
+    /** List all unresolved Reports of problems with Locations, with full details. Not paginated. Admin only. */
+    get: {
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["AdminReport"][];
+          };
+        };
+      };
+    };
+  };
+  "/reports/resolved": {
+    /** List resolved Reports of problems with Locations, with full details including how each was resolved. Supports free-text search, filtering by problem and resolution code, sorting by resolution date, and pagination. Admin only. */
+    get: {
+      parameters: {
+        query: {
+          /** Free-text search matched (case-insensitively) against the report comment, resolution response, and reporter name and email. */
+          q?: components["parameters"]["report_search"];
+          /** Only return Reports with this problem code. */
+          problem_code?: components["parameters"]["report_problem_code"];
+          /** Only return Reports resolved with this resolution code. */
+          resolution_code?: components["parameters"]["report_resolution_code"];
+          /**
+           * Sort order by resolution date.
+           * - `newest`: Most recently resolved first.
+           * - `oldest`: Least recently resolved first.
+           */
+          sort?: components["parameters"]["report_sort"];
+          /** Maximum number of results to return. */
+          limit?: components["parameters"]["limit"];
+          /** Offset from which to apply `limit`. */
+          offset?: components["parameters"]["offset"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["ResolvedReport"][];
+          };
+        };
+      };
+    };
+  };
+  "/reports/resolution": {
+    /** Resolve one or more Reports by applying a single action, transactionally. Admin only. If `notify_reporters` is true, each distinct reporter is emailed once about all of their resolved Reports. Sending is best-effort: a failed email does not roll back the resolution or stop other emails. The response reports which notifications were sent and which failed. */
+    post: {
+      parameters: {
+        query: {
+          /** Whether to email the reporters about the resolution. */
+          notify_reporters?: components["parameters"]["notify_reporters"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["ReportResolutionResult"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["ReportBatchResolution"];
+        };
+      };
+    };
+  };
   "/user": {
     get: {
       responses: {
@@ -866,6 +936,30 @@ export interface components {
       /** Last month in season (zero-based). */
       season_stop?: number;
     };
+    /** Location properties that can be edited when resolving Reports. All fields are optional. */
+    PatchLocation: components["schemas"]["LatLngFields"] & {
+      /** Type IDs. */
+      type_ids?: number[];
+      /** Whether suspected to be wrong in some way and requires verification. */
+      unverified?: boolean;
+      /** Whether hidden from public map tiles, clusters, and search results. Only an admin can set this to `true` or change its value. */
+      hidden?: boolean;
+      /**
+       * Access level.
+       * - 0: Location is on my property.
+       * - 1: I have permission from the owner to add this Location.
+       * - 2: Location is on public land.
+       * - 3: Location is on private property but overhangs public property.
+       * - 4: Location is on private property.
+       */
+      access?: (0 | 1 | 2 | 3 | 4) | null;
+      /** Description. */
+      description?: string | null;
+      /** First month in season (zero-based). */
+      season_start?: number | null;
+      /** Last month in season (zero-based). */
+      season_stop?: number | null;
+    };
     /** Location properties that can be added. */
     AddLocation: components["schemas"]["EditLocation"] & {
       review?: components["schemas"]["EditReview"];
@@ -893,6 +987,8 @@ export interface components {
         reviews?: components["schemas"]["Review"][];
         /** User's lists that include the Location. */
         lists?: components["schemas"]["LocationList"][];
+        /** Unresolved reports of problems with the Location. Empty if there are none. */
+        open_reports: components["schemas"]["OpenReport"][];
       };
     LocationChange: {
       /** Time of the change creation */
@@ -936,16 +1032,19 @@ export interface components {
         /** Locations in the list, in order of addition or, for legacy routes, custom arbitrary order. */
         locations?: components["schemas"]["LocationListLocation"][];
       };
-    /** Location in a Location List. */
-    LocationListLocation: components["schemas"]["IdField"] &
+    /** Summary of the reported Location, in the same shape used to display a saved location in a Location List. */
+    ReportLocation: components["schemas"]["IdField"] &
       components["schemas"]["LatLngFields"] & {
         /** Type IDs. */
         type_ids: number[];
-        /** Date and time added to list, in format YYYY-MM-DDThh:mm:ss.sssZ. */
-        added_at: string;
         /** Address. */
         address?: string | null;
       };
+    /** Location in a Location List. */
+    LocationListLocation: components["schemas"]["ReportLocation"] & {
+      /** Date and time added to list, in format YYYY-MM-DDThh:mm:ss.sssZ. */
+      added_at: string;
+    };
     BaseReview: {
       /** Comment. */
       comment?: string | null;
@@ -1006,6 +1105,34 @@ export interface components {
         /** Email change pending confirmation. */
         unconfirmed_email?: string;
       };
+    /** An unresolved Report of a problem with a Location. Fields beyond `created_at` and `problem_code` are only included for admins (`comment`, `reporter`). */
+    OpenReport: {
+      /** Report ID. Only included for an authenticated admin. */
+      id?: number;
+      /** Date and time created in format YYYY-MM-DDThh:mm:ss.sssZ. */
+      created_at: string;
+      /**
+       * Problem code.
+       * - 0: Location is spam
+       * - 1: Location does not exist
+       * - 2: Location is a duplicate
+       * - 3: Inappropriate review photo
+       * - 4: Inappropriate review comment
+       * - 5: Other (explain below)
+       */
+      problem_code: 0 | 1 | 2 | 3 | 4 | 5;
+      /** Comment. Only included for an authenticated admin. */
+      comment?: string | null;
+      /** Reporter details. Only included for an authenticated admin. */
+      reporter?: {
+        /** ID of reporting User (if authenticated). */
+        user_id: number | null;
+        /** Name of the reporter. */
+        name: string | null;
+        /** Email of the reporter. */
+        email: string | null;
+      };
+    };
     /** Report properties that can be edited. */
     EditReport: {
       /** Location ID. */
@@ -1048,6 +1175,132 @@ export interface components {
         /** ID of responding User. */
         responder_id?: number | null;
       };
+    /** How a Report was resolved. */
+    ReportResolution: {
+      /**
+       * Resolution code.
+       * - 0: Made no changes
+       * - 1: Edited the location
+       * - 2: Deleted the location
+       * - 3: Deleted the photo
+       * - 4: Deleted the review
+       * - 5: Hid the location
+       */
+      code: 0 | 1 | 2 | 3 | 4 | 5;
+      /** Response comment. */
+      response?: string | null;
+      /** The admin who resolved the Report. */
+      responder: {
+        /** ID of the responding admin. */
+        id: number;
+        /** Name of the responding admin. */
+        name: string | null;
+      };
+    };
+    /**
+     * The action to perform when resolving Reports, discriminated by `code`.
+     * - 0: Made no changes (records the resolution only).
+     * - 1: Edited the location (requires `location`; single Location only).
+     * - 2: Deleted the location.
+     * - 3: Deleted the photo (requires `photo_id` belonging to the reported Location).
+     * - 4: Deleted the review (requires `review_id` belonging to the reported Location).
+     * - 5: Hid the location.
+     */
+    ResolutionAction:
+      | {
+          code: 0;
+          /** Response comment recorded on each resolved Report. */
+          response?: string | null;
+        }
+      | {
+          code: 1;
+          /** Response comment recorded on each resolved Report. */
+          response?: string | null;
+          /** Fields to edit on the reported Location. All resolved Reports must target the same Location. */
+          location: components["schemas"]["PatchLocation"];
+        }
+      | {
+          code: 2;
+          /** Response comment recorded on each resolved Report. */
+          response?: string | null;
+        }
+      | {
+          code: 3;
+          /** Response comment recorded on each resolved Report. */
+          response?: string | null;
+          /** ID of the photo to delete. Its review must belong to the reported Location. */
+          photo_id: number;
+        }
+      | {
+          code: 4;
+          /** Response comment recorded on each resolved Report. */
+          response?: string | null;
+          /** IDs of the reviews to delete. Each must belong to the reported Location. */
+          review_ids: number[];
+        }
+      | {
+          code: 5;
+          /** Response comment recorded on each resolved Report. */
+          response?: string | null;
+        };
+    /** Resolve one or more Reports by applying a single action. Location-wide actions (delete, hide) apply once per distinct reported Location; target-specific actions (edit, delete photo, delete review) require the Reports to resolve to a single Location. */
+    ReportBatchResolution: {
+      /** IDs of the open Reports to resolve with this action. */
+      report_ids: number[];
+      resolution: components["schemas"]["ResolutionAction"];
+    };
+    /** An open Report of a problem with a Location, with full details for admins. */
+    AdminReport: components["schemas"]["IdField"] & {
+      /** Date and time created in format YYYY-MM-DDThh:mm:ss.sssZ. */
+      created_at: string;
+      /** Summary of the reported Location, including its ID, for display in a table. Null if the Location was since deleted. */
+      location: components["schemas"]["ReportLocation"] | null;
+      /**
+       * Problem code.
+       * - 0: Location is spam
+       * - 1: Location does not exist
+       * - 2: Location is a duplicate
+       * - 3: Inappropriate review photo
+       * - 4: Inappropriate review comment
+       * - 5: Other (explain below)
+       */
+      problem_code: 0 | 1 | 2 | 3 | 4 | 5;
+      /** Comment. */
+      comment: string | null;
+      /** Reporter details. */
+      reporter: {
+        /** ID of reporting User (if authenticated). */
+        user_id: number | null;
+        /** Name of the reporter. */
+        name: string | null;
+        /** Email of the reporter. */
+        email: string | null;
+      };
+    };
+    /** A resolved Report of a problem with a Location, with full details for admins. */
+    ResolvedReport: components["schemas"]["AdminReport"] & {
+      /** Date and time resolved in format YYYY-MM-DDThh:mm:ss.sssZ. */
+      resolved_at: string;
+      /** How the Report was resolved. */
+      resolution: components["schemas"]["ReportResolution"];
+    };
+    /** The result of resolving one or more Reports: the resolved Reports and the per-recipient outcome of any reporter notifications. */
+    ReportResolutionResult: {
+      /** The Reports that were resolved by this action. */
+      resolved: components["schemas"]["Report"][];
+      /** Outcome of reporter notifications. Both lists are empty unless `notify_reporters` was true. */
+      emails: {
+        /** Reporter emails that were notified successfully. Empty unless `notify_reporters` was true. */
+        sent: string[];
+        /** Reporter notifications that failed to send. Resolution still succeeded; sending is best-effort. */
+        failed: {
+          /** Reporter email that could not be notified. */
+          email: string;
+          /** Why the notification failed. */
+          error: string;
+        }[];
+      };
+    };
     /** Imported dataset. */
     Import: components["schemas"]["IdField"] &
       components["schemas"]["DateFields"] & {
@@ -1098,5 +1351,25 @@ export interface components {
     user_id: number;
     /** Import ID. */
     import_id: number;
+    /** Report ID. */
+    report_id: number;
+    /** Whether to email the reporters about the resolution. */
+    notify_reporters: boolean;
+    /** Maximum number of results to return. */
+    limit: number;
+    /** Offset from which to apply `limit`. */
+    offset: number;
+    /** Free-text search matched (case-insensitively) against the report comment, resolution response, and reporter name and email. */
+    report_search: string;
+    /** Only return Reports with this problem code. */
+    report_problem_code: number;
+    /** Only return Reports resolved with this resolution code. */
+    report_resolution_code: number;
+    /**
+     * Sort order by resolution date.
+     * - `newest`: Most recently resolved first.
+     * - `oldest`: Least recently resolved first.
+     */
+    report_sort: "newest" | "oldest";
   };
 }

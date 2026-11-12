@@ -222,6 +222,15 @@ const InfoPageWrapper = styled(PageWrapper)`
     `
     margin-block: 0;
   `}
+
+  ${({ isDesktop, fullWidth }) =>
+    isDesktop &&
+    fullWidth &&
+    `
+    max-width: none;
+    width: auto;
+    margin-inline: 28px;
+  `}
 `
 
 const StyledBackButton = styled(BackButton)`
@@ -301,7 +310,7 @@ const TopSafeAreaInsetPage = ({ children, backPath, showBackButton }) => {
   )
 }
 
-const InfoPage = ({ children }) => {
+const InfoPage = ({ children, fullWidth }) => {
   const isDesktop = useIsDesktop()
 
   const { user } = useSelector((state) => state.auth)
@@ -313,7 +322,9 @@ const InfoPage = ({ children }) => {
           backState={{ scrollToBottom: true }}
         />
       )}
-      <InfoPageWrapper isDesktop={isDesktop}>{children}</InfoPageWrapper>
+      <InfoPageWrapper isDesktop={isDesktop} fullWidth={fullWidth}>
+        {children}
+      </InfoPageWrapper>
     </PageScrollWrapper>
   )
 }
