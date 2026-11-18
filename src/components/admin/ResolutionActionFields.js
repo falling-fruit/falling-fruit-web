@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components/macro'
 
 import { getLocationById } from '../../utils/api'
 import Review from '../entry/Review'
+import { formatISOString } from '../entry/textFormatters'
 import Checkbox from '../ui/Checkbox'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import SingleSelect from '../ui/SingleSelect'
@@ -12,9 +14,11 @@ import {
   resolutionCodeLabel,
 } from './adminStrings'
 import {
+  RESOLUTION_DELETE_LOCATION,
   RESOLUTION_DELETE_PHOTO,
   RESOLUTION_DELETE_REVIEW,
   RESOLUTION_EDIT_LOCATION,
+  RESOLUTION_HIDE_LOCATION,
   SINGLE_LOCATION_RESOLUTION_CODES,
 } from './resolution'
 
@@ -123,6 +127,32 @@ const buildResolutionActionOptions = ({
       (code === RESOLUTION_DELETE_REVIEW && !hasReviews),
   }))
 
+const LocationSummary = styled.p`
+  margin-block: 0 1.5em;
+  color: ${({ theme }) => theme.secondaryText};
+`
+
+const Note = styled.p`
+  margin-block: 0.5em 0;
+  color: ${({ theme }) => theme.tertiaryText};
+  font-style: italic;
+`
+
+const summaryParts = (details, photoCount, language) => {
+  const strings = adminStrings.resolve.locationSummary
+  const sameDay =
+    details.updated_at == null ||
+    details.created_at.slice(0, 10) === details.updated_at.slice(0, 10)
+  return [
+    strings.created(formatISOString(details.created_at, language)),
+    ...(sameDay
+      ? []
+      : [strings.edited(formatISOString(details.updated_at, language))]),
+    strings.reviews((details.reviews ?? []).length),
+    strings.photos(photoCount),
+  ]
+}
+
 const ResolutionActionFields = ({
   code,
   onCodeChange,
@@ -139,6 +169,7 @@ const ResolutionActionFields = ({
   singleLocationId,
   hasReporters,
 }) => {
+  const { i18n } = useTranslation()
   const [locationDetails, setLocationDetails] = useState(null)
   const [isLoadingDetails, setIsLoadingDetails] = useState(false)
 
@@ -189,6 +220,13 @@ const ResolutionActionFields = ({
 
   return (
     <>
+      {locationDetails && (
+        <LocationSummary>
+          {summaryParts(locationDetails, photos.length, i18n.language).join(
+            ' · ',
+          )}
+        </LocationSummary>
+      )}
       <Field>
         <label htmlFor="resolution-code-select">
           {adminStrings.resolve.resolutionCodeLabel}
@@ -199,6 +237,12 @@ const ResolutionActionFields = ({
           value={code}
           onChange={(option) => onCodeChange(option ? option.value : null)}
         />
+        {code === RESOLUTION_DELETE_LOCATION && (
+          <Note>{adminStrings.resolve.deleteLocationNote}</Note>
+        )}
+        {code === RESOLUTION_HIDE_LOCATION && (
+          <Note>{adminStrings.resolve.hideLocationNote}</Note>
+        )}
       </Field>
 
       {(code === RESOLUTION_DELETE_PHOTO ||

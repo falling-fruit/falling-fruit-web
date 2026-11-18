@@ -1040,6 +1040,10 @@ export interface components {
         /** Address. */
         address?: string | null;
       };
+    AdminReportLocation: components["schemas"]["ReportLocation"] & {
+      /** Whether the Location is hidden. */
+      hidden: boolean;
+    };
     /** Location in a Location List. */
     LocationListLocation: components["schemas"]["ReportLocation"] & {
       /** Date and time added to list, in format YYYY-MM-DDThh:mm:ss.sssZ. */
@@ -1254,7 +1258,7 @@ export interface components {
       /** Date and time created in format YYYY-MM-DDThh:mm:ss.sssZ. */
       created_at: string;
       /** Summary of the reported Location, including its ID, for display in a table. Null if the Location was since deleted. */
-      location: components["schemas"]["ReportLocation"] | null;
+      location: components["schemas"]["AdminReportLocation"] | null;
       /**
        * Problem code.
        * - 0: Location is spam

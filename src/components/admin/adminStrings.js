@@ -51,6 +51,7 @@ export const adminStrings = {
     resolvedOn: 'Resolved',
     anonymous: 'Anonymous',
     deletedLocation: 'Deleted location',
+    hidden: 'hidden',
     emptyOpen: 'There are no open reports.',
     emptyResolved: 'There are no resolved reports.',
     resolvedSearchPlaceholder: 'Search resolved reports',
@@ -93,12 +94,21 @@ export const adminStrings = {
     noPhotos: 'This location has no photos.',
     selectReview: 'Select the review to delete',
     noReviews: 'This location has no reviews.',
+    deleteLocationNote: 'This will delete the entire location.',
+    hideLocationNote:
+      'This will hide the entire location from the public map and search results.',
+    locationSummary: {
+      created: (date) => `Created ${date}`,
+      edited: (date) => `Last edited ${date}`,
+      reviews: (count) => `${count} review${count === 1 ? '' : 's'}`,
+      photos: (count) => `${count} photo${count === 1 ? '' : 's'}`,
+    },
     selectReports: 'Select reports to resolve',
     selectAll: 'Select all reports',
     emptySelectionHint:
       'Select one or more reports above to choose how to resolve them.',
     multiLocationNote:
-      'The selected reports span multiple locations. Only dismiss, delete, and hide can be applied across locations. Select reports from a single location to edit it or delete a photo or review.',
+      'The selected reports span multiple locations. Select reports from a single location to edit it or delete a photo or review.',
     relatedReportsWarning: (count) =>
       `${count} other open report${count === 1 ? '' : 's'} for ${count === 1 ? 'this location' : 'these locations'} ${count === 1 ? 'is' : 'are'} not included:`,
     addRelatedReport: 'add',

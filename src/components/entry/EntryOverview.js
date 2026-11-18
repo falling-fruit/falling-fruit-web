@@ -22,7 +22,6 @@ import {
   AddSeasonStartHint,
   AddSeasonStopHint,
   HiddenHintActions,
-  HiddenHintToggle,
   ReportsHintList,
   ReportsHintToggle,
   StaleLocationHintActions,
@@ -292,7 +291,6 @@ const EntryOverview = () => {
   const containerRef = useRef(null)
   const [unverifiedExpanded, setUnverifiedExpanded] = useState(false)
   const [reportsExpanded, setReportsExpanded] = useState(false)
-  const [hiddenExpanded, setHiddenExpanded] = useState(false)
 
   if (!locationData) {
     return null
@@ -345,15 +343,7 @@ const EntryOverview = () => {
       {locationData.unverified && unverifiedExpanded && (
         <UnverifiedHintActions locationData={locationData} />
       )}
-      {locationData.hidden && (
-        <HiddenHintToggle
-          expanded={hiddenExpanded}
-          onToggle={() => setHiddenExpanded((prev) => !prev)}
-        />
-      )}
-      {locationData.hidden && hiddenExpanded && (
-        <HiddenHintActions locationData={locationData} />
-      )}
+      {locationData.hidden && <HiddenHintActions locationData={locationData} />}
       {locationData.open_reports?.length > 0 && (
         <ReportsHintToggle
           expanded={reportsExpanded}
@@ -390,10 +380,12 @@ const EntryOverview = () => {
         <ReviewSummary reviews={reviews} />
         <ButtonRow>
           <ButtonGroupStart>
-            <ReviewButton />
-            {user && <SaveToListButton containerRef={containerRef} />}
+            {!locationData.hidden && <ReviewButton />}
+            {user && !locationData.hidden && (
+              <SaveToListButton containerRef={containerRef} />
+            )}
           </ButtonGroupStart>
-          <ReportButton />
+          {!locationData.hidden && <ReportButton />}
         </ButtonRow>
       </Description>
     </OverviewContainer>

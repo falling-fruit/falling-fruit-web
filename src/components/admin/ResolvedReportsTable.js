@@ -66,6 +66,7 @@ const ResolvedReportsTable = () => {
   const { i18n } = useTranslation()
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [hasLoaded, setHasLoaded] = useState(false)
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
   const [totalRows, setTotalRows] = useState(0)
@@ -100,6 +101,7 @@ const ResolvedReportsTable = () => {
       const loadedCount = offset + rows.length
       setTotalRows(rows.length < perPage ? loadedCount : loadedCount + perPage)
       setIsLoading(false)
+      setHasLoaded(true)
     },
     [search, problemCode, resolutionCode, sort],
   )
@@ -153,13 +155,32 @@ const ResolvedReportsTable = () => {
       name: adminStrings.reports.reporter,
       cell: (row) => {
         const name = row.reporter?.name || adminStrings.reports.anonymous
-        return row.reporter?.user_id != null ? (
-          <Link to={`/users/${row.reporter.user_id}`}>{name}</Link>
-        ) : (
-          name
+        const email = row.reporter?.email
+        return (
+          <span>
+            {row.reporter?.user_id != null ? (
+              <Link
+                to={{
+                  pathname: `/users/${row.reporter.user_id}`,
+                  state: { backPath: '/admin/reports/resolved' },
+                }}
+              >
+                {name}
+              </Link>
+            ) : (
+              name
+            )}
+            {email && (
+              <>
+                {' '}
+                <a href={`mailto:${email}`}>{email}</a>
+              </>
+            )}
+          </span>
         )
       },
       minWidth: '9em',
+      wrap: true,
     },
     {
       id: 'problem',
@@ -257,7 +278,7 @@ const ResolvedReportsTable = () => {
         columns={columns}
         data={data}
         keyField="id"
-        progressPending={isLoading}
+        progressPending={isLoading && !hasLoaded}
         persistTableHead
         pagination
         paginationServer

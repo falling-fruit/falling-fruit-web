@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Skeleton from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { getUserById } from '../../utils/api'
@@ -20,7 +20,9 @@ const UserProfile = () => {
   const { t, i18n } = useTranslation()
   const [userData, setUserData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const { state: routeState } = useLocation()
   const { locationId } = useSelector((state) => state.location)
+  const defaultBackPath = locationId ? `/locations/${locationId}` : '/changes'
 
   useEffect(() => {
     async function fetchUserData() {
@@ -49,7 +51,7 @@ const UserProfile = () => {
   const displayName = name || `#${userId}`
 
   return (
-    <Page backPath={locationId ? `/locations/${locationId}` : '/changes'}>
+    <Page backPath={routeState?.backPath ?? defaultBackPath}>
       {isLoading ? (
         <>
           <PageHeader>

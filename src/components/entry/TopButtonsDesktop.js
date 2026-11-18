@@ -12,7 +12,10 @@ const ButtonGroup = styled.div`
 
 const TopButtonsDesktop = () => {
   const history = useAppHistory()
-  const { locationId } = useSelector((state) => state.location)
+  const { locationId, location: locationData } = useSelector(
+    (state) => state.location,
+  )
+  const isHidden = !!locationData?.hidden
   const { handleClickDelete, isDeleteVisible, isDeleteDisabled } =
     useDeleteLocation()
 
@@ -28,6 +31,11 @@ const TopButtonsDesktop = () => {
         />
       )}
       <EditButton
+        disabled={isHidden}
+        style={{
+          opacity: isHidden ? 0.5 : 1,
+          cursor: isHidden ? 'not-allowed' : 'pointer',
+        }}
         onClick={() => history.push(`/locations/${locationId}/edit`)}
       />
     </ButtonGroup>

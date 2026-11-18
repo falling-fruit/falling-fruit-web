@@ -374,26 +374,6 @@ export const ReportsHintList = ({ reports }) => {
   )
 }
 
-export const HiddenHintToggle = ({ expanded, onToggle }) => {
-  const { t } = useTranslation()
-  const { fullyOpenPaneDrawerIfMobile } = useLocationPane()
-
-  return (
-    <UnverifiedLabel
-      onClick={(e) => {
-        e.stopPropagation()
-        fullyOpenPaneDrawerIfMobile()
-        onToggle()
-      }}
-      role="button"
-      aria-expanded={expanded}
-    >
-      {t('locations.hints.hidden_not_on_shared_map')}
-      {expanded ? <ChevronUp size="1em" /> : <ChevronDown size="1em" />}
-    </UnverifiedLabel>
-  )
-}
-
 export const HiddenHintActions = ({ locationData }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()

@@ -511,14 +511,32 @@ const OpenReportsTable = () => {
         key,
         id: reporter?.user_id ?? null,
         name: reporterName(reporter) || adminStrings.reports.anonymous,
+        email: reporter?.email ?? null,
       })
     })
 
     return (
       <ReportLines>
-        {[...uniqueReporters.values()].map(({ key, id, name }) => (
+        {[...uniqueReporters.values()].map(({ key, id, name, email }) => (
           <li key={key}>
-            {id != null ? <Link to={`/users/${id}`}>{name}</Link> : name}
+            {id != null ? (
+              <Link
+                to={{
+                  pathname: `/users/${id}`,
+                  state: { backPath: '/admin/reports/open' },
+                }}
+              >
+                {name}
+              </Link>
+            ) : (
+              name
+            )}
+            {email && (
+              <>
+                {' '}
+                <a href={`mailto:${email}`}>{email}</a>
+              </>
+            )}
           </li>
         ))}
       </ReportLines>

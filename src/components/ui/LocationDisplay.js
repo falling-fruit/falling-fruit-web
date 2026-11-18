@@ -2,6 +2,7 @@ import { Map } from '@styled-icons/boxicons-regular'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
+import { adminStrings } from '../admin/adminStrings'
 import { theme } from './GlobalStyle'
 import { CommonOrScientificName } from './TypeName'
 
@@ -71,10 +72,17 @@ export const LocationAddress = ({ location }) => {
   return null
 }
 
+const HiddenTag = styled.span`
+  color: ${({ theme }) => theme.tertiaryText};
+  font-size: 0.85rem;
+  font-style: italic;
+`
+
 const LocationDisplay = ({ location }) => (
   <>
-    <LocationTypeNames location={location} />{' '}
+    {location.id}: <LocationTypeNames location={location} />{' '}
     <LocationAddress location={location} />
+    {location.hidden && <HiddenTag> ({adminStrings.reports.hidden})</HiddenTag>}
   </>
 )
 
