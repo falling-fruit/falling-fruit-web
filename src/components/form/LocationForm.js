@@ -314,7 +314,10 @@ export const LocationForm = ({ editingId, innerRef }) => {
 
     if (editingId) {
       dispatch(
-        editExistingLocation({ locationId: editingId, locationValues }),
+        editExistingLocation({
+          locationId: editingId,
+          locationValues,
+        }),
       ).then((action) => {
         if (action.error) {
           formikProps.setSubmitting(false)

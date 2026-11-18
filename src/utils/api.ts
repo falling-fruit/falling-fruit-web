@@ -218,6 +218,29 @@ export const addReport = (
   data: paths['/reports']['post']['requestBody']['content']['application/json'],
 ) => instance.post('/reports', data)
 
+export const getOpenReports = () => instance.get('/reports/open')
+
+export const getResolvedReports = (
+  params?: NonNullable<
+    paths['/reports/resolved']['get']['parameters']['query']
+  >,
+) => instance.get('/reports/resolved', { params })
+
+export const resolveReports = (
+  data: paths['/reports/resolution']['post']['requestBody']['content']['application/json'],
+  notifyReporters?: NonNullable<
+    paths['/reports/resolution']['post']['parameters']['query']
+  >['notify_reporters'],
+) =>
+  instance.post('/reports/resolution', data, {
+    params: { notify_reporters: notifyReporters },
+  })
+
+export const setLocationVisibility = (
+  id: paths['/locations/{id}']['put']['parameters']['path']['id'],
+  hidden: boolean,
+) => instance.put(`/locations/${id}`, { hidden })
+
 export const getImports = () => instance.get(`/imports`)
 
 export const getImportById = (

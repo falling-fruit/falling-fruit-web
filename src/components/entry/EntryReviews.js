@@ -25,6 +25,7 @@ const EntryReviews = () => {
   const onImageClick = (reviewIndex, photoIndex) => {
     dispatch(openLightbox({ reviewIndex, photoIndex }))
   }
+
   return (
     <>
       {!isDesktop && <ReviewButton />}

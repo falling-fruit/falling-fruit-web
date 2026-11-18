@@ -10,7 +10,9 @@ import styled from 'styled-components/macro'
 import { LanguageSelect } from '../../i18n'
 import { logout } from '../../redux/authSlice'
 import { pathToSignInPage, pathWithCurrentView } from '../../utils/appUrl'
+import { selectIsAdmin } from '../../utils/isAdmin'
 import aboutRoutes from '../about/aboutRoutes'
+import { adminStrings } from '../admin/adminStrings'
 import Button from '../ui/Button'
 import ResetButton from '../ui/ResetButton'
 import SocialButtons from '../ui/SocialButtons'
@@ -334,10 +336,13 @@ const UserMenu = () => {
 
 const MainMenu = ({ className }) => {
   const { t } = useTranslation()
+  const isAdmin = useSelector(selectIsAdmin)
+  const { pathname } = useLocation()
   const isAboutPage =
-    matchPath(useLocation().pathname, {
+    matchPath(pathname, {
       path: aboutRoutes.map((route) => route.props.path).flat(),
     }) !== null
+  const isAdminPage = matchPath(pathname, { path: '/admin' }) !== null
 
   return (
     <div className={className} style={{ marginInlineEnd: 'auto' }}>
@@ -352,6 +357,18 @@ const MainMenu = ({ className }) => {
             {t('glossary.activity')}
           </MenuItem>
         </NavLi>
+        {isAdmin && (
+          <NavLi>
+            <StyledDropdown label={adminStrings.header} isMatch={isAdminPage}>
+              <MenuItem to="/admin/reports/open" activeClassName="active">
+                {adminStrings.openReports}
+              </MenuItem>
+              <MenuItem to="/admin/reports/resolved" activeClassName="active">
+                {adminStrings.resolvedReports}
+              </MenuItem>
+            </StyledDropdown>
+          </NavLi>
+        )}
         <NavLi>
           <StyledDropdown label={t('glossary.about')} isMatch={isAboutPage}>
             <MenuItem to="/about/project" activeClassName="active">

@@ -50,7 +50,10 @@ const StyledButtons = styled.div`
 
 const TopButtonsMobile = ({ hasImages }) => {
   const history = useAppHistory()
-  const { locationId } = useSelector((state) => state.location)
+  const { locationId, location: locationData } = useSelector(
+    (state) => state.location,
+  )
+  const isHidden = !!locationData?.hidden
   const isEmbed = useIsEmbed()
   const { setPaneDrawerToMiddlePosition, setPaneDrawerToLowPosition } =
     useLocationPane()
@@ -121,10 +124,14 @@ const TopButtonsMobile = ({ hasImages }) => {
         <RoundIconButton
           onClick={(event) => {
             event.stopPropagation()
-            history.push(`/locations/${locationId}/edit`)
+            if (!isHidden) {
+              history.push(`/locations/${locationId}/edit`)
+            }
           }}
           icon={<PencilIcon />}
           label="edit-button"
+          opaque={isHidden}
+          disabled={isHidden}
         />
       </div>
     </StyledButtons>

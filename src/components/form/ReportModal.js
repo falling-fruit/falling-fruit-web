@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 
-import { addReport } from '../../utils/api'
+import { addNewReport } from '../../redux/locationSlice'
 import Modal from '../ui/Modal'
 import { Input, Recaptcha, Select, Textarea } from './FormikWrappers'
 import SetInitialValue from './SetInitialValue'
@@ -17,6 +16,7 @@ const ReportModal = ({
   ...props
 }) => {
   const isLoggedIn = useSelector((state) => !!state.auth.user)
+  const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const PROBLEM_TYPE_OPTIONS = [
@@ -43,19 +43,9 @@ const ReportModal = ({
       location_id: locationId,
     }
 
-    let response
-    try {
-      response = await addReport(reportValues)
-      toast.success(t('success_message.report_submitted'))
-    } catch (error) {
-      toast.error(
-        t('error_message.api.report_submission_failed', {
-          message: error.message || t('error_message.unknown_error'),
-        }),
-      )
-    }
+    const result = await dispatch(addNewReport(reportValues))
 
-    if (response && !response.error) {
+    if (addNewReport.fulfilled.match(result)) {
       onDismiss()
     }
   }

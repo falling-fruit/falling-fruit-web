@@ -4,12 +4,15 @@ import { toast } from 'react-toastify'
 
 import {
   addLocation,
+  addReport,
   addReview,
   deleteLocation,
   deleteReview,
   editLocation,
   editReview,
   getLocationById,
+  resolveReports,
+  setLocationVisibility,
 } from '../utils/api'
 import { fetchReviewData } from './reviewSlice'
 import { addLocationToList, removeLocationFromList } from './saveSlice'
@@ -77,6 +80,8 @@ export const addNewReview = createAsyncThunk(
   ({ locationId, reviewValues }) => addReview(locationId, reviewValues),
 )
 
+export const addNewReport = createAsyncThunk('location/addNewReport', addReport)
+
 export const editExistingReview = createAsyncThunk(
   'location/editExistingReview',
   ({ reviewId, reviewValues }) => editReview(reviewId, reviewValues),
@@ -90,6 +95,23 @@ export const deleteLocationReview = createAsyncThunk(
 export const deleteExistingLocation = createAsyncThunk(
   'location/deleteLocation',
   (locationId) => deleteLocation(locationId).then(() => locationId),
+)
+
+export const setExistingLocationVisibility = createAsyncThunk(
+  'location/setVisibility',
+  ({ locationId, hidden }) =>
+    setLocationVisibility(locationId, hidden).then(() => ({
+      locationId,
+      hidden,
+    })),
+)
+
+export const resolveReportsForLocation = createAsyncThunk(
+  'location/resolveReports',
+  ({ locationId, reportIds, resolution, notifyReporters }) =>
+    resolveReports({ report_ids: reportIds, resolution }, notifyReporters).then(
+      (result) => ({ locationId, reportIds, emails: result.emails }),
+    ),
 )
 
 const locationSlice = createSlice({
@@ -256,6 +278,31 @@ const locationSlice = createSlice({
         }),
       )
     },
+    [addNewReport.fulfilled]: (state, action) => {
+      const report = action.payload
+      if (
+        state.location &&
+        state.location.id === parseInt(report.location_id)
+      ) {
+        const openReport = {
+          created_at: report.created_at,
+          problem_code: report.problem_code,
+        }
+        state.location.open_reports = [
+          ...(state.location.open_reports ?? []),
+          openReport,
+        ]
+      }
+      toast.success(i18next.t('success_message.report_submitted'))
+    },
+    [addNewReport.rejected]: (_, action) => {
+      toast.error(
+        i18next.t('error_message.api.report_submission_failed', {
+          message:
+            action.error.message || i18next.t('error_message.unknown_error'),
+        }),
+      )
+    },
     [editExistingReview.fulfilled]: (state, action) => {
       const reviewIndex = state.reviews.findIndex(
         (review) => review.id === action.meta.arg.reviewId,
@@ -294,6 +341,25 @@ const locationSlice = createSlice({
             action.error.message || i18next.t('error_message.unknown_error'),
         }),
       )
+    },
+    [setExistingLocationVisibility.fulfilled]: (state, action) => {
+      const { locationId, hidden } = action.payload
+      if (state.location && state.location.id === locationId) {
+        state.location.hidden = hidden
+      }
+    },
+    [resolveReportsForLocation.fulfilled]: (state, action) => {
+      const { locationId, reportIds } = action.payload
+      if (state.location && state.location.id === locationId) {
+        if (reportIds?.length && state.location.open_reports) {
+          const resolvedIds = new Set(reportIds)
+          state.location.open_reports = state.location.open_reports.filter(
+            (report) => !resolvedIds.has(report.id),
+          )
+        } else {
+          state.location.open_reports = []
+        }
+      }
     },
     [addLocationToList.fulfilled]: (state, action) => {
       const { location } = action.payload

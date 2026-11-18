@@ -2,7 +2,6 @@ import {
   Check,
   ChevronDown,
   ChevronRight,
-  Map,
   X,
 } from '@styled-icons/boxicons-regular'
 import { Pencil, Trash } from '@styled-icons/boxicons-solid'
@@ -28,9 +27,13 @@ import { useIsDesktop } from '../../utils/useBreakpoint'
 import { theme } from '../ui/GlobalStyle'
 import { PageHeader } from '../ui/Headers'
 import Input from '../ui/Input'
+import {
+  getLocationPlainName,
+  LocationAddress,
+  LocationTypeNames,
+} from '../ui/LocationDisplay'
 import { Page } from '../ui/PageTemplate'
 import ResetButton from '../ui/ResetButton'
-import { CommonOrScientificName } from '../ui/TypeName'
 import withRedirectToAuth from './withRedirectToAuth'
 
 const ListCard = styled.div`
@@ -123,11 +126,6 @@ const LocationLinkSkeleton = styled.a`
   font-size: 1rem;
 `
 
-const Address = styled.span`
-  color: ${theme.secondaryText};
-  font-size: 0.85rem;
-`
-
 const RemoveButton = styled(ResetButton)`
   display: flex;
   align-items: center;
@@ -183,51 +181,6 @@ const SavedLocationsSkeletonLoader = ({ count = 2 }) => (
   </div>
 )
 
-const LocationTypeDisplay = ({ location, typesAccess }) => {
-  const typeIds = location.type_ids || []
-
-  if (typeIds.length === 0) {
-    return <span>{String(location.id)}</span>
-  }
-
-  const typeElements = typeIds.map((typeId, idx) => {
-    const type = typesAccess.getType(typeId)
-    const components = type?.displayComponents()
-    if (!components || (!components.common && !components.scientific)) {
-      return <span key={idx}>{typeId}</span>
-    }
-    return <CommonOrScientificName key={idx} type={type} />
-  })
-
-  return (
-    <>
-      {typeElements.reduce((prev, curr, idx) => {
-        if (prev.length) {
-          return [...prev, <span key={`sep-${idx}`}>, </span>, curr]
-        }
-        return [curr]
-      }, [])}
-    </>
-  )
-}
-
-const getLocationPlainName = (location, typesAccess) => {
-  const names = (location.type_ids || []).map((typeId) => {
-    const type = typesAccess.getType(typeId)
-    const components = type?.displayComponents()
-    if (!components) {
-      return typeId
-    }
-    const { common, scientific, cultivar } = components
-    if (common) {
-      return common
-    }
-    const scientificName = [scientific, cultivar].filter(Boolean).join(' ')
-    return scientificName || typeId
-  })
-  return names.length > 0 ? names.join(', ') : String(location.id)
-}
-
 const LocationRow = ({ location, listId, typesAccess, isDesktop }) => {
   const [isRemoving, setIsRemoving] = useState(false)
   const dispatch = useDispatch()
@@ -250,21 +203,6 @@ const LocationRow = ({ location, listId, typesAccess, isDesktop }) => {
     }
   }
 
-  const renderAddress = () => {
-    if (location.address) {
-      return <Address>{location.address}</Address>
-    }
-    if (location.lat != null && location.lng != null) {
-      return (
-        <Address>
-          <Map color={theme.secondaryText} size={16} />
-          {`${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}`}
-        </Address>
-      )
-    }
-    return null
-  }
-
   const handleLocationClick = () => {
     dispatch(setLastViewedListId(listId))
   }
@@ -280,8 +218,8 @@ const LocationRow = ({ location, listId, typesAccess, isDesktop }) => {
       }}
     >
       <LocationLink to={locationUrl} onClick={handleLocationClick}>
-        <LocationTypeDisplay location={location} typesAccess={typesAccess} />{' '}
-        {renderAddress()}
+        <LocationTypeNames location={location} />{' '}
+        <LocationAddress location={location} />
       </LocationLink>
 
       <RemoveButton

@@ -31,6 +31,7 @@ const StyledCustomCheckboxContainer = styled(CustomCheckboxContainer)`
     width: 60%;
     height: 60%;
     z-index: 1;
+    pointer-events: none;
     background: ${({ theme }) => theme.orange};
   }
 `

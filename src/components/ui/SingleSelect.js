@@ -87,7 +87,11 @@ const Select = ({
       >
         <option value="" disabled={!clearable} hidden={!clearable} />
         {options.map((opt) => (
-          <option key={opt.value} value={String(opt.value)}>
+          <option
+            key={opt.value}
+            value={String(opt.value)}
+            disabled={opt.isDisabled}
+          >
             {opt.label}
           </option>
         ))}
