@@ -26,7 +26,7 @@ instance.interceptors.request.use((config) => {
   const isAnonymous =
     config.method === 'get' &&
     config.url &&
-    matchPath(config.url, { path: anonymousGetUrls })
+    matchPath(config.url, { path: anonymousGetUrls, exact: true })
 
   const accessToken = persistentStore.getAccessToken()
 
@@ -185,6 +185,16 @@ export const getTypes = () => instance.get('/types')
 export const getTypeCounts = (
   params: paths['/types/counts']['get']['parameters']['query'],
 ) => instance.get('/types/counts', { params })
+
+export const getTypeById = (id: number) => instance.get(`/types/${id}`)
+
+export const editType = (id: number, data: any) =>
+  instance.put(`/types/${id}`, data)
+
+export const deleteType = (id: number) => instance.delete(`/types/${id}`)
+
+export const mergeType = (id: number, intoId: number) =>
+  instance.post(`/types/${id}/merge`, { into_id: intoId })
 
 export const addType = (
   data: paths['/types']['post']['requestBody']['content']['application/json'],

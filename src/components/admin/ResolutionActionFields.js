@@ -9,10 +9,10 @@ import Checkbox from '../ui/Checkbox'
 import LoadingIndicator from '../ui/LoadingIndicator'
 import SingleSelect from '../ui/SingleSelect'
 import {
-  adminStrings,
+  reportStrings,
   RESOLUTION_CODE_LABELS,
   resolutionCodeLabel,
-} from './adminStrings'
+} from './reportStrings'
 import {
   RESOLUTION_DELETE_LOCATION,
   RESOLUTION_DELETE_PHOTO,
@@ -139,7 +139,7 @@ const Note = styled.p`
 `
 
 const summaryParts = (details, photoCount, language) => {
-  const strings = adminStrings.resolve.locationSummary
+  const strings = reportStrings.resolve.locationSummary
   const sameDay =
     details.updated_at == null ||
     details.created_at.slice(0, 10) === details.updated_at.slice(0, 10)
@@ -229,7 +229,7 @@ const ResolutionActionFields = ({
       )}
       <Field>
         <label htmlFor="resolution-code-select">
-          {adminStrings.resolve.resolutionCodeLabel}
+          {reportStrings.resolve.resolutionCodeLabel}
         </label>
         <SingleSelect
           id="resolution-code-select"
@@ -238,10 +238,10 @@ const ResolutionActionFields = ({
           onChange={(option) => onCodeChange(option ? option.value : null)}
         />
         {code === RESOLUTION_DELETE_LOCATION && (
-          <Note>{adminStrings.resolve.deleteLocationNote}</Note>
+          <Note>{reportStrings.resolve.deleteLocationNote}</Note>
         )}
         {code === RESOLUTION_HIDE_LOCATION && (
-          <Note>{adminStrings.resolve.hideLocationNote}</Note>
+          <Note>{reportStrings.resolve.hideLocationNote}</Note>
         )}
       </Field>
 
@@ -255,7 +255,7 @@ const ResolutionActionFields = ({
 
       {code === RESOLUTION_EDIT_LOCATION && singleLocationId != null && (
         <Field>
-          <label>{adminStrings.resolve.editLocationLabel}</label>
+          <label>{reportStrings.resolve.editLocationLabel}</label>
           <AttestationRow>
             <Checkbox
               id="edit-attested"
@@ -263,7 +263,7 @@ const ResolutionActionFields = ({
               onChange={(e) => onEditAttestedChange(e.target.checked)}
             />
             <label htmlFor="edit-attested">
-              {adminStrings.resolve.editAttestation}
+              {reportStrings.resolve.editAttestation}
             </label>
           </AttestationRow>
           <EditLocationLink
@@ -272,16 +272,16 @@ const ResolutionActionFields = ({
             rel="noopener noreferrer"
             onClick={() => onEditAttestedChange(true)}
           >
-            {adminStrings.resolve.editLocationLink}
+            {reportStrings.resolve.editLocationLink}
           </EditLocationLink>
         </Field>
       )}
 
       {code === RESOLUTION_DELETE_PHOTO && locationDetails && (
         <Field>
-          <label>{adminStrings.resolve.selectPhoto}</label>
+          <label>{reportStrings.resolve.selectPhoto}</label>
           {photos.length === 0 ? (
-            <p>{adminStrings.resolve.noPhotos}</p>
+            <p>{reportStrings.resolve.noPhotos}</p>
           ) : (
             <PhotoGrid>
               {photos.map(({ photo }) => (
@@ -302,9 +302,9 @@ const ResolutionActionFields = ({
 
       {code === RESOLUTION_DELETE_REVIEW && locationDetails && (
         <Field>
-          <label>{adminStrings.resolve.selectReview}</label>
+          <label>{reportStrings.resolve.selectReview}</label>
           {reviews.length === 0 ? (
-            <p>{adminStrings.resolve.noReviews}</p>
+            <p>{reportStrings.resolve.noReviews}</p>
           ) : (
             <ReviewList>
               {reviews.map((review) => (
@@ -334,12 +334,12 @@ const ResolutionActionFields = ({
 
       <Field>
         <label htmlFor="resolution-response">
-          {adminStrings.resolve.responseLabel}
+          {reportStrings.resolve.responseLabel}
         </label>
         <ResponseTextarea
           id="resolution-response"
           value={response}
-          placeholder={adminStrings.resolve.responsePlaceholder}
+          placeholder={reportStrings.resolve.responsePlaceholder}
           onChange={(e) => onResponseChange(e.target.value)}
         />
       </Field>
@@ -353,7 +353,7 @@ const ResolutionActionFields = ({
               onChange={(e) => onNotifyReportersChange(e.target.checked)}
             />
             <label htmlFor="notify-reporters">
-              {adminStrings.resolve.notifyReporters}
+              {reportStrings.resolve.notifyReporters}
             </label>
           </NotifyRow>
         </Field>

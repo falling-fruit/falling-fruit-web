@@ -13,7 +13,7 @@ import {
 } from '../../../redux/locationSlice'
 import { locationToApiValues } from '../../../utils/form'
 import { useAppHistory } from '../../../utils/useAppHistory'
-import { adminStrings } from '../../admin/adminStrings'
+import { reportStrings } from '../../admin/reportStrings'
 import ResetButton from '../../ui/ResetButton'
 import { formatISOString } from '../textFormatters'
 import useLocationPane from '../useLocationPane'
@@ -348,7 +348,7 @@ export const ReportsHintList = ({ reports }) => {
         const reportedLabel = t('locations.hints.reported_on', { date })
 
         const reporterName = report.reporter
-          ? report.reporter.name || adminStrings.reports.anonymous
+          ? report.reporter.name || reportStrings.reports.anonymous
           : null
 
         return (

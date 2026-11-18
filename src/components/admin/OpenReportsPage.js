@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom'
 import { selectIsAdmin, selectIsAuthLoading } from '../../utils/isAdmin'
 import { PageHeader } from '../ui/Headers'
 import { InfoPage } from '../ui/PageTemplate'
-import { adminStrings } from './adminStrings'
 import OpenReportsTable from './OpenReportsTable'
+import { reportStrings } from './reportStrings'
 
 const OpenReportsPage = () => {
   const isAdmin = useSelector(selectIsAdmin)
@@ -17,7 +17,7 @@ const OpenReportsPage = () => {
 
   return (
     <InfoPage fullWidth>
-      <PageHeader>{adminStrings.reports.openTitle}</PageHeader>
+      <PageHeader>{reportStrings.reports.openTitle}</PageHeader>
       <OpenReportsTable />
     </InfoPage>
   )

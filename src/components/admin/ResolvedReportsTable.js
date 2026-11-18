@@ -10,12 +10,12 @@ import Input from '../ui/Input'
 import LocationDisplay from '../ui/LocationDisplay'
 import SingleSelect from '../ui/SingleSelect'
 import {
-  adminStrings,
   PROBLEM_TYPE_LABELS,
   problemTypeLabel,
+  reportStrings,
   RESOLUTION_CODE_LABELS,
   resolutionCodeLabel,
-} from './adminStrings'
+} from './reportStrings'
 
 const DEFAULT_PAGE_SIZE = 25
 const SEARCH_DEBOUNCE_MS = 300
@@ -58,8 +58,8 @@ const resolutionOptions = RESOLUTION_CODE_LABELS.map((label, code) => ({
 }))
 
 const sortOptions = [
-  { value: 'newest', label: adminStrings.reports.sortNewest },
-  { value: 'oldest', label: adminStrings.reports.sortOldest },
+  { value: 'newest', label: reportStrings.reports.sortNewest },
+  { value: 'oldest', label: reportStrings.reports.sortOldest },
 ]
 
 const ResolvedReportsTable = () => {
@@ -131,7 +131,7 @@ const ResolvedReportsTable = () => {
   const columns = [
     {
       id: 'id',
-      name: adminStrings.reports.id,
+      name: reportStrings.reports.id,
       selector: (row) => row.id,
       format: (row) => <ReportId>#{row.id}</ReportId>,
       minWidth: '5em',
@@ -139,22 +139,22 @@ const ResolvedReportsTable = () => {
     },
     {
       id: 'location',
-      name: adminStrings.reports.location,
+      name: reportStrings.reports.location,
       cell: (row) =>
         row.location != null ? (
           <Link to={`/locations/${row.location.id}`}>
             <LocationDisplay location={row.location} />
           </Link>
         ) : (
-          <Secondary>{adminStrings.reports.deletedLocation}</Secondary>
+          <Secondary>{reportStrings.reports.deletedLocation}</Secondary>
         ),
       minWidth: '7em',
     },
     {
       id: 'reporter',
-      name: adminStrings.reports.reporter,
+      name: reportStrings.reports.reporter,
       cell: (row) => {
-        const name = row.reporter?.name || adminStrings.reports.anonymous
+        const name = row.reporter?.name || reportStrings.reports.anonymous
         const email = row.reporter?.email
         return (
           <span>
@@ -184,7 +184,7 @@ const ResolvedReportsTable = () => {
     },
     {
       id: 'problem',
-      name: adminStrings.reports.problem,
+      name: reportStrings.reports.problem,
       cell: (row) => (
         <span>
           {problemTypeLabel(row.problem_code)}
@@ -196,7 +196,7 @@ const ResolvedReportsTable = () => {
     },
     {
       id: 'resolution',
-      name: adminStrings.reports.resolution,
+      name: reportStrings.reports.resolution,
       cell: (row) =>
         row.resolution ? (
           <span>
@@ -213,14 +213,14 @@ const ResolvedReportsTable = () => {
     },
     {
       id: 'responder',
-      name: adminStrings.reports.responder,
+      name: reportStrings.reports.responder,
       selector: (row) => row.resolution?.responder?.name,
       format: (row) => row.resolution?.responder?.name || '',
       minWidth: '8em',
     },
     {
       id: 'resolved_at',
-      name: adminStrings.reports.resolvedOn,
+      name: reportStrings.reports.resolvedOn,
       selector: (row) => row.resolved_at,
       format: (row) => formatISOString(row.resolved_at, i18n.language),
       minWidth: '9em',
@@ -235,8 +235,8 @@ const ResolvedReportsTable = () => {
             type="search"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder={adminStrings.reports.resolvedSearchPlaceholder}
-            aria-label={adminStrings.reports.resolvedSearchPlaceholder}
+            placeholder={reportStrings.reports.resolvedSearchPlaceholder}
+            aria-label={reportStrings.reports.resolvedSearchPlaceholder}
           />
         </SearchContainer>
         <SelectContainer>
@@ -249,7 +249,7 @@ const ResolvedReportsTable = () => {
                 option && option.value !== '' ? option.value : null,
               )
             }
-            aria-label={adminStrings.reports.filterByProblem}
+            aria-label={reportStrings.reports.filterByProblem}
           />
         </SelectContainer>
         <SelectContainer>
@@ -262,7 +262,7 @@ const ResolvedReportsTable = () => {
                 option && option.value !== '' ? option.value : null,
               )
             }
-            aria-label={adminStrings.reports.filterByResolution}
+            aria-label={reportStrings.reports.filterByResolution}
           />
         </SelectContainer>
         <SelectContainer>
@@ -270,7 +270,7 @@ const ResolvedReportsTable = () => {
             options={sortOptions}
             value={sort}
             onChange={(option) => option && setSort(option.value)}
-            aria-label={adminStrings.reports.sortBy}
+            aria-label={reportStrings.reports.sortBy}
           />
         </SelectContainer>
       </Toolbar>
@@ -288,7 +288,7 @@ const ResolvedReportsTable = () => {
         paginationRowsPerPageOptions={[25, 50, 100]}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
-        noDataComponent={<p>{adminStrings.reports.emptyResolved}</p>}
+        noDataComponent={<p>{reportStrings.reports.emptyResolved}</p>}
       />
     </>
   )

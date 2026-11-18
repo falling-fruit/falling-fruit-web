@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 import LocationDisplay from '../ui/LocationDisplay'
-import { problemTypeLabel } from './adminStrings'
+import { problemTypeLabel } from './reportStrings'
 import { uniqueLocations } from './resolution'
 
 const Summary = styled.h3`
