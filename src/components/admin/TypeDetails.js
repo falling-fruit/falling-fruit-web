@@ -7,6 +7,8 @@ import { editType, getTypeById } from '../../utils/api'
 import Button from '../ui/Button'
 import { ScientificName } from '../ui/TypeName'
 import TypeActions from './TypeActions'
+import TypeCategories from './TypeCategories'
+import TypeEdibility from './TypeEdibility'
 import TypeExampleLocations from './TypeExampleLocations'
 import TypeLinksTable from './TypeLinksTable'
 import TypeNamesTable from './TypeNamesTable'
@@ -229,6 +231,8 @@ const TypeDetails = ({
       <TypeExampleLocations typeId={type.id} count={count} />
       <TypeNamesTable type={type} save={save} isSaving={isSaving} />
       <TypeLinksTable type={type} save={save} isSaving={isSaving} />
+      <TypeEdibility type={type} save={save} isSaving={isSaving} />
+      <TypeCategories type={type} save={save} isSaving={isSaving} />
     </div>
   )
 }

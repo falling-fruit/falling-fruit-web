@@ -945,6 +945,8 @@ export interface components {
       common_names?: { [key: string]: string[] };
       /**Categories associated with the type */
       categories?: string[];
+      /** Edibility information. */
+      edibility?: string | null;
     };
     /** Type properties that can be submitted. At least one name (in `common_names.en` or `scientific_names`) is required. */
     SubmitType: components["schemas"]["BaseType"] & {

@@ -28,6 +28,13 @@ export const WRITABLE_LINK_CODES = [
   'fruitipedia',
 ]
 
+export const CATEGORY_OPTIONS = [
+  { value: 'forager', label: 'Forager' },
+  { value: 'freegan', label: 'Freegan' },
+  { value: 'honeybee', label: 'Honeybee' },
+  { value: 'grafter', label: 'Grafter' },
+]
+
 export const typeStrings = {
   title: 'Types',
 
@@ -148,6 +155,18 @@ export const typeStrings = {
     add: 'Add link',
     urlPlaceholder: 'https://…',
     confirmDelete: (label) => `Delete the ${label} link?`,
+  },
+
+  edibility: {
+    title: 'Edibility',
+    edit: 'Edit edibility',
+    confirm: 'Confirm',
+    cancel: 'Cancel',
+    empty: 'No edibility information.',
+  },
+
+  categories: {
+    title: 'Categories',
   },
 
   notes: {
