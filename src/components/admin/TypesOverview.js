@@ -27,6 +27,10 @@ const StatList = styled.dl`
   }
 `
 
+const StatRow = styled.div`
+  display: contents;
+`
+
 const TopList = styled.ol`
   margin: 0;
   padding-inline-start: 1.5em;
@@ -43,10 +47,9 @@ const TopButton = styled(ResetButton)`
 
 const TOP_TYPES_COUNT = 10
 
-const TypesOverview = ({ types, counts, language, onSelect }) => {
+const TypesOverview = ({ types, typeById, counts, language, onSelect }) => {
   const totalLocations = [...counts.values()].reduce((sum, n) => sum + n, 0)
   const withLocations = types.filter((type) => counts.get(type.id) > 0).length
-  const typeById = new Map(types.map((type) => [type.id, type]))
   const topLevel = types.filter(
     (type) => !type.parent_id || !typeById.has(type.parent_id),
   ).length
@@ -74,10 +77,10 @@ const TypesOverview = ({ types, counts, language, onSelect }) => {
         <SectionTitle>{typeStrings.overview.title}</SectionTitle>
         <StatList>
           {stats.map(([label, value]) => (
-            <div key={label} style={{ display: 'contents' }}>
+            <StatRow key={label}>
               <dt>{label}</dt>
               <dd>{value.toLocaleString()}</dd>
-            </div>
+            </StatRow>
           ))}
         </StatList>
       </Section>

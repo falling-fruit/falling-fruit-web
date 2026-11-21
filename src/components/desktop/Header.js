@@ -12,8 +12,7 @@ import { logout } from '../../redux/authSlice'
 import { pathToSignInPage, pathWithCurrentView } from '../../utils/appUrl'
 import { selectIsAdmin } from '../../utils/isAdmin'
 import aboutRoutes from '../about/aboutRoutes'
-import { reportStrings } from '../admin/reportStrings'
-import { typeStrings } from '../admin/typeStrings'
+import { menuStrings } from '../admin/menuStrings'
 import Button from '../ui/Button'
 import ResetButton from '../ui/ResetButton'
 import SocialButtons from '../ui/SocialButtons'
@@ -360,15 +359,15 @@ const MainMenu = ({ className }) => {
         </NavLi>
         {isAdmin && (
           <NavLi>
-            <StyledDropdown label={reportStrings.header} isMatch={isAdminPage}>
+            <StyledDropdown label={menuStrings.header} isMatch={isAdminPage}>
               <MenuItem to="/admin/reports/open" activeClassName="active">
-                {reportStrings.openReports}
+                {menuStrings.openReports}
               </MenuItem>
               <MenuItem to="/admin/reports/resolved" activeClassName="active">
-                {reportStrings.resolvedReports}
+                {menuStrings.resolvedReports}
               </MenuItem>
               <MenuItem to="/admin/types" activeClassName="active">
-                {typeStrings.menuLabel}
+                {menuStrings.types}
               </MenuItem>
             </StyledDropdown>
           </NavLi>

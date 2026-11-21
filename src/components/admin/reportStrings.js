@@ -23,10 +23,6 @@ export const resolutionCodeLabel = (code) =>
   RESOLUTION_CODE_LABELS[code] ?? `Resolution ${code}`
 
 export const reportStrings = {
-  header: 'Admin',
-  openReports: 'Open reports',
-  resolvedReports: 'Resolved reports',
-
   reports: {
     openTitle: 'Open reports',
     resolvedTitle: 'Resolved reports',

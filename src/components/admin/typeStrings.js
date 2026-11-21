@@ -29,7 +29,6 @@ export const WRITABLE_LINK_CODES = [
 ]
 
 export const typeStrings = {
-  menuLabel: 'Types',
   title: 'Types',
 
   validation: {
@@ -147,7 +146,6 @@ export const typeStrings = {
     url: 'URL',
     none: 'No links.',
     add: 'Add link',
-    chooseResource: 'Resource',
     urlPlaceholder: 'https://…',
     confirmDelete: (label) => `Delete the ${label} link?`,
   },
@@ -162,7 +160,6 @@ export const typeStrings = {
 
   settings: {
     parent: 'Parent',
-    parentNone: 'None',
     rank: 'Taxonomic rank',
     pending: 'Pending review',
     yes: 'Yes',

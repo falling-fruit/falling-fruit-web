@@ -120,35 +120,38 @@ const TypeDetails = ({
   )
   const { common, botanical, cultivar } = labelParts(type, language)
 
-  const errorMessage = (error) => {
+  const errorMessage = (validationError) => {
     const { validation } = typeStrings
     const rankLabel = TAXONOMIC_RANK_LABELS[type.taxonomic_rank]
-    if (error.code === 'rankNotLower') {
-      const parent = typeById.get(error.parentId)
+    if (validationError.code === 'rankNotLower') {
+      const parent = typeById.get(validationError.parentId)
       return validation.rankNotLower(
         rankLabel,
         plainLabel(parent, language),
         TAXONOMIC_RANK_LABELS[parent.taxonomic_rank],
       )
     }
-    if (error.code === 'suggestedParent') {
-      return validation.suggestedParent(error.name, error.parentName)
+    if (validationError.code === 'suggestedParent') {
+      return validation.suggestedParent(
+        validationError.name,
+        validationError.parentName,
+      )
     }
-    if (error.code === 'missingScientificName') {
+    if (validationError.code === 'missingScientificName') {
       return validation.missingScientificName(
         `${type.taxonomic_rank} (${rankLabel})`,
       )
     }
-    if (error.code === 'rankMismatch') {
+    if (validationError.code === 'rankMismatch') {
       return validation.rankMismatch(
-        error.name,
-        error.shape,
-        error.min,
-        error.max,
+        validationError.name,
+        validationError.shape,
+        validationError.min,
+        validationError.max,
         type.taxonomic_rank,
       )
     }
-    return validation[error.code]
+    return validation[validationError.code]
   }
   return (
     <div>
@@ -159,11 +162,13 @@ const TypeDetails = ({
         <ErrorBanner role="alert">
           <strong>{typeStrings.validation.title}</strong>
           <ul>
-            {errors.map((error) => (
-              <li key={`${error.code}-${error.parentId ?? ''}`}>
-                {errorMessage(error)}
-                {error.code === 'suggestedParent' &&
-                  error.parentIds.map((parentId) => (
+            {errors.map((validationError) => (
+              <li
+                key={`${validationError.code}-${validationError.parentId ?? ''}`}
+              >
+                {errorMessage(validationError)}
+                {validationError.code === 'suggestedParent' &&
+                  validationError.parentIds.map((parentId) => (
                     <FixButton
                       key={parentId}
                       secondary

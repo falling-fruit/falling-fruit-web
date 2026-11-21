@@ -7,6 +7,7 @@ import { typeStrings } from './typeStrings'
 export const SCIENTIFIC_KEY = 'scientific'
 export const NO_LANGUAGE = 'none'
 export const MAX_PARENT_RANK = 8
+export const WORLD_BOUNDS = '-85.0511,-180|85.0511,180'
 
 export const languageLabel = (key) =>
   key === SCIENTIFIC_KEY
@@ -154,7 +155,7 @@ export const ancestorIds = (typeId, typeById) => {
   return result
 }
 
-export const POLYPHYLETIC_RANK = 0
+const POLYPHYLETIC_RANK = 0
 
 const NAME_SHAPES = [
   { shape: 'cultivar', pattern: /'[^']+'/u, min: 8, max: 9 },

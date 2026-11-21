@@ -26,7 +26,8 @@ instance.interceptors.request.use((config) => {
   const isAnonymous =
     config.method === 'get' &&
     config.url &&
-    matchPath(config.url, { path: anonymousGetUrls, exact: true })
+    matchPath(config.url, { path: anonymousGetUrls }) &&
+    !matchPath(config.url, { path: '/types/:id(\\d+)' })
 
   const accessToken = persistentStore.getAccessToken()
 
@@ -186,15 +187,23 @@ export const getTypeCounts = (
   params: paths['/types/counts']['get']['parameters']['query'],
 ) => instance.get('/types/counts', { params })
 
-export const getTypeById = (id: number) => instance.get(`/types/${id}`)
+export const getTypeById = (
+  id: paths['/types/{id}']['get']['parameters']['path']['id'],
+) => instance.get(`/types/${id}`)
 
-export const editType = (id: number, data: any) =>
-  instance.put(`/types/${id}`, data)
+export const editType = (
+  id: paths['/types/{id}']['put']['parameters']['path']['id'],
+  data: paths['/types/{id}']['put']['requestBody']['content']['application/json'],
+) => instance.put(`/types/${id}`, data)
 
-export const deleteType = (id: number) => instance.delete(`/types/${id}`)
+export const deleteType = (
+  id: paths['/types/{id}']['delete']['parameters']['path']['id'],
+) => instance.delete(`/types/${id}`)
 
-export const mergeType = (id: number, intoId: number) =>
-  instance.post(`/types/${id}/merge`, { into_id: intoId })
+export const mergeType = (
+  id: paths['/types/{id}/merge']['post']['parameters']['path']['id'],
+  intoId: paths['/types/{id}/merge']['post']['requestBody']['content']['application/json']['into_id'],
+) => instance.post(`/types/${id}/merge`, { into_id: intoId })
 
 export const addType = (
   data: paths['/types']['post']['requestBody']['content']['application/json'],

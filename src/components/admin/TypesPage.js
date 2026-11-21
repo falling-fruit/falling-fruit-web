@@ -33,6 +33,7 @@ import {
   normalizeText,
   plainLabel,
   validateTypes,
+  WORLD_BOUNDS,
 } from './typeUtils'
 
 const Toolbar = styled.div`
@@ -108,8 +109,6 @@ const Message = styled.p`
   padding: 1em;
   margin: 0;
 `
-
-const WORLD_BOUNDS = '-85.0511,-180|85.0511,180'
 
 const languageOptions = [
   { value: NO_LANGUAGE, label: typeStrings.toolbar.languageNone },
@@ -500,6 +499,7 @@ const TypesPage = () => {
             ) : (
               <TypesOverview
                 types={typeList}
+                typeById={typeById}
                 counts={counts}
                 language={language}
                 onSelect={handleSelect}

@@ -471,6 +471,7 @@ export interface paths {
     };
   };
   "/types/{id}": {
+    /** Admins also receive `notes`. */
     get: {
       parameters: {
         path: {
@@ -482,7 +483,69 @@ export interface paths {
         /** Success */
         200: {
           content: {
+            "application/json": components["schemas"]["AdminType"];
+          };
+        };
+      };
+    };
+    /** Only the provided fields are updated; omitted fields are left unchanged. `common_names`, `scientific_names`, `categories` and `urls` are replaced as a whole when provided. */
+    put: {
+      parameters: {
+        path: {
+          /** Type ID. */
+          id: components["parameters"]["type_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
+            "application/json": components["schemas"]["AdminType"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["SubmitType"];
+        };
+      };
+    };
+    /** Fails with 409 if any Location still has the Type; use the merge endpoint instead. Child Types are reparented to the Type's parent. */
+    delete: {
+      parameters: {
+        path: {
+          /** Type ID. */
+          id: components["parameters"]["type_id"];
+        };
+      };
+      responses: {
+        /** Success (no content) */
+        204: never;
+      };
+    };
+  };
+  "/types/{id}/merge": {
+    /** Moves all Locations, clusters, invasive records, and child Types of the Type to `into_id`, then deletes the Type. Returns the target Type. */
+    post: {
+      parameters: {
+        path: {
+          /** Type ID. */
+          id: components["parameters"]["type_id"];
+        };
+      };
+      responses: {
+        /** Success */
+        200: {
+          content: {
             "application/json": components["schemas"]["Type"];
+          };
+        };
+      };
+      requestBody: {
+        content: {
+          "application/json": {
+            /** ID of the Type to merge into. */
+            into_id: number;
           };
         };
       };
@@ -885,6 +948,14 @@ export interface components {
     };
     /** Type properties that can be submitted. At least one name (in `common_names.en` or `scientific_names`) is required. */
     SubmitType: components["schemas"]["BaseType"] & {
+      /** Links to more information, by resource code. Omitted resources are cleared. The `usda` link is read-only. */
+      urls?: {
+        wikipedia?: string;
+        eat_the_weeds?: string;
+        foraging_texas?: string;
+        urban_mushrooms?: string;
+        fruitipedia?: string;
+      };
       /** Submission notes. */
       notes?: string | null;
     };
@@ -903,6 +974,11 @@ export interface components {
          */
         urls: { [key: string]: string };
       };
+    /** All Type properties, and `notes` (only included for admins). */
+    AdminType: components["schemas"]["Type"] & {
+      /** Submission notes. Only included for admins. */
+      notes?: string | null;
+    };
     ListLocation: components["schemas"]["IdField"] &
       components["schemas"]["LatLngFields"] & {
         /** Type IDs. */

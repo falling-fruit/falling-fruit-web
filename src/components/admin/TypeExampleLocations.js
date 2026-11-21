@@ -8,9 +8,9 @@ import { viewToString } from '../../utils/appUrl'
 import LocationDisplay from '../ui/LocationDisplay'
 import { typeStrings } from './typeStrings'
 import { Muted, Section, SectionTitle } from './typeStyles'
+import { WORLD_BOUNDS } from './typeUtils'
 
 const EXAMPLE_COUNT = 5
-const WORLD_BOUNDS = '-85,-180|85,180'
 
 const List = styled.ul`
   margin: 0;
