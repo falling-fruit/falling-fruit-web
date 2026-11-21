@@ -1,7 +1,11 @@
+import { sortBy } from 'lodash'
 import { useEffect, useRef } from 'react'
 
 import { LANGUAGE_OPTIONS } from '../../i18n'
-import { splitScientificName } from '../../utils/localizedTypes'
+import {
+  displayOrderProperties,
+  splitScientificName,
+} from '../../utils/localizedTypes'
 import { typeStrings } from './typeStrings'
 
 export const SCIENTIFIC_KEY = 'scientific'
@@ -62,14 +66,14 @@ export const typeOption = (type, language) => {
   return {
     value: type.id,
     label: `${[scientificName, common].filter(Boolean).join(' – ')} (${type.id})`,
-    hasScientific: Boolean(scientificName),
-    sortKey: normalizeText(scientificName || common),
+    scientificName,
+    commonName: common,
+    taxonomicRank: type.taxonomic_rank || 0,
   }
 }
 
-export const compareTypeOptions = (a, b) =>
-  Number(b.hasScientific) - Number(a.hasScientific) ||
-  a.sortKey.localeCompare(b.sortKey)
+export const sortTypeOptions = (options) =>
+  sortBy(options, displayOrderProperties)
 
 export const buildSearchIndex = (types) => {
   const index = new Map()
@@ -102,19 +106,19 @@ export const buildChildrenMap = (types) => {
 
 export const buildTree = (types, language) => {
   const { children, roots } = buildChildrenMap(types)
-  const sortKey = (type) => {
-    const { common, scientificName } = labelParts(type, language)
-    return normalizeText(
-      language === NO_LANGUAGE
-        ? scientificName || common
-        : common || scientificName,
-    )
-  }
   const sortTypes = (list) =>
-    list
-      .map((type) => ({ type, key: sortKey(type) }))
-      .sort((a, b) => a.key.localeCompare(b.key))
-      .map(({ type }) => type)
+    sortBy(
+      list.map((type) => {
+        const { common, scientificName } = labelParts(type, language)
+        return {
+          type,
+          scientificName,
+          commonName: common,
+          taxonomicRank: type.taxonomic_rank || 0,
+        }
+      }),
+      displayOrderProperties,
+    ).map(({ type }) => type)
   const toNode = (type, seen) => {
     const nextSeen = new Set(seen).add(type.id)
     return {

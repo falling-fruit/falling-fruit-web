@@ -7,7 +7,7 @@ import Button from '../ui/Button'
 import SingleSelect from '../ui/SingleSelect'
 import { typeStrings } from './typeStrings'
 import { Section } from './typeStyles'
-import { compareTypeOptions, plainLabel, typeOption } from './typeUtils'
+import { plainLabel, sortTypeOptions, typeOption } from './typeUtils'
 
 const ButtonRow = styled.div`
   display: flex;
@@ -47,15 +47,19 @@ const TypeActions = ({
 
   const targetOptions = useMemo(
     () =>
-      types
-        .filter((candidate) => candidate.id !== type.id)
-        .map((candidate) => typeOption(candidate, language))
-        .sort(compareTypeOptions),
+      sortTypeOptions(
+        types
+          .filter((candidate) => candidate.id !== type.id)
+          .map((candidate) => typeOption(candidate, language)),
+      ),
     [types, type.id, language],
   )
 
+  const isUnused = count === 0 && childCount === 0
+
   const handleDelete = async () => {
     if (
+      !isUnused &&
       !window.confirm(
         typeStrings.actions.confirmDelete(
           plainLabel(type, language),
@@ -78,8 +82,11 @@ const TypeActions = ({
 
   const handleMerge = async () => {
     const target = typeById.get(targetId)
+    if (!target) {
+      return
+    }
     if (
-      !target ||
+      !isUnused &&
       !window.confirm(
         typeStrings.actions.confirmMerge(
           plainLabel(type, language),

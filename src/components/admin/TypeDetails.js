@@ -225,10 +225,10 @@ const TypeDetails = ({
         save={save}
         isSaving={isSaving}
       />
+      <TypeNotes type={type} save={save} isSaving={isSaving} />
       <TypeExampleLocations typeId={type.id} count={count} />
       <TypeNamesTable type={type} save={save} isSaving={isSaving} />
       <TypeLinksTable type={type} save={save} isSaving={isSaving} />
-      <TypeNotes type={type} save={save} isSaving={isSaving} />
     </div>
   )
 }

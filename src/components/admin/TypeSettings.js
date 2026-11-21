@@ -4,9 +4,9 @@ import SingleSelect from '../ui/SingleSelect'
 import { TAXONOMIC_RANK_LABELS, typeStrings } from './typeStrings'
 import { FieldGrid, Section } from './typeStyles'
 import {
-  compareTypeOptions,
   descendantIds,
   MAX_PARENT_RANK,
+  sortTypeOptions,
   typeOption,
 } from './typeUtils'
 
@@ -31,15 +31,16 @@ const TypeSettings = ({
   const parentOptions = useMemo(() => {
     const excluded = descendantIds(type.id, childrenMap)
     excluded.add(type.id)
-    return types
-      .filter(
-        (candidate) =>
-          !excluded.has(candidate.id) &&
-          (candidate.id === type.parent_id ||
-            (candidate.taxonomic_rank ?? 0) <= MAX_PARENT_RANK),
-      )
-      .map((candidate) => typeOption(candidate, language))
-      .sort(compareTypeOptions)
+    return sortTypeOptions(
+      types
+        .filter(
+          (candidate) =>
+            !excluded.has(candidate.id) &&
+            (candidate.id === type.parent_id ||
+              (candidate.taxonomic_rank ?? 0) <= MAX_PARENT_RANK),
+        )
+        .map((candidate) => typeOption(candidate, language)),
+    )
   }, [types, type.id, type.parent_id, childrenMap, language])
 
   return (
