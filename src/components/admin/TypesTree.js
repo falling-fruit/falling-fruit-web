@@ -47,6 +47,7 @@ const Row = styled.li`
   white-space: nowrap;
   font-size: 0.875rem;
   cursor: pointer;
+  user-select: none;
   background: ${({ $selected, $dropTarget, theme }) =>
     $selected || $dropTarget ? theme.transparentOrange : 'transparent'};
   outline: ${({ $dropTarget, theme }) =>
@@ -105,6 +106,7 @@ const TypesTree = ({
   nodes,
   expanded,
   selectedId,
+  selectedIds,
   counts,
   errors,
   language,
@@ -113,7 +115,7 @@ const TypesTree = ({
   canMove,
   onMove,
 }) => {
-  const [dragId, setDragId] = useState(null)
+  const [dragIds, setDragIds] = useState(null)
   const [overId, setOverId] = useState(null)
 
   useEffect(() => {
@@ -125,17 +127,29 @@ const TypesTree = ({
   }, [selectedId])
 
   const endDrag = () => {
-    setDragId(null)
+    setDragIds(null)
     setOverId(null)
   }
 
+  const canDrop = (parentId) =>
+    dragIds !== null && dragIds.some((id) => canMove(id, parentId))
+
+  const visibleIds = []
+  const collectVisible = (node) => {
+    visibleIds.push(node.type.id)
+    if (expanded.has(node.type.id)) {
+      node.children.forEach(collectVisible)
+    }
+  }
+  nodes.forEach(collectVisible)
+
   const dropHandlers = (parentId) => ({
     onDragOver: (event) => {
-      if (dragId === null) {
+      if (dragIds === null) {
         return
       }
       event.stopPropagation()
-      if (canMove(dragId, parentId)) {
+      if (canDrop(parentId)) {
         event.preventDefault()
         event.dataTransfer.dropEffect = 'move'
         setOverId(parentId ?? ROOT_DROP)
@@ -144,15 +158,15 @@ const TypesTree = ({
       }
     },
     onDrop: (event) => {
-      if (dragId === null) {
+      if (dragIds === null) {
         return
       }
       event.preventDefault()
       event.stopPropagation()
-      if (canMove(dragId, parentId)) {
-        const movedId = dragId
+      if (canDrop(parentId)) {
+        const movedIds = dragIds
         endDrag()
-        onMove(movedId, parentId)
+        onMove(movedIds, parentId)
       } else {
         endDrag()
       }
@@ -171,15 +185,15 @@ const TypesTree = ({
         <Row
           id={`type-node-${type.id}`}
           $level={level}
-          $selected={type.id === selectedId}
+          $selected={type.id === selectedId || selectedIds.has(type.id)}
           $dropTarget={overId === type.id}
-          $disabled={dragId !== null && !canMove(dragId, type.id)}
-          onClick={() => onSelect(type.id)}
+          $disabled={dragIds !== null && !canDrop(type.id)}
+          onClick={(event) => onSelect(type.id, event, visibleIds)}
           draggable
           onDragStart={(event) => {
             event.dataTransfer.effectAllowed = 'move'
             event.dataTransfer.setData('text/plain', String(type.id))
-            setDragId(type.id)
+            setDragIds(selectedIds.has(type.id) ? [...selectedIds] : [type.id])
           }}
           onDragEnd={endDrag}
           {...dropHandlers(type.id)}
@@ -238,9 +252,9 @@ const TypesTree = ({
       {...dropHandlers(null)}
     >
       <TreeList>{nodes.map((node) => renderNode(node, 0))}</TreeList>
-      {dragId !== null && (
+      {dragIds !== null && (
         <DetachZone $dropTarget={overId === ROOT_DROP}>
-          {canMove(dragId, null)
+          {canDrop(null)
             ? typeStrings.tree.detachHere
             : typeStrings.tree.alreadyTopLevel}
         </DetachZone>

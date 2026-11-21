@@ -89,11 +89,15 @@ export const typeStrings = {
     detachHere: 'Drop here to make top-level',
     alreadyTopLevel: 'Already top-level',
     dragHint:
-      'Tip: drag a type onto another type to change its parent, or onto the zone at the bottom to make it top-level.',
+      'Tip: drag a type onto another type to change its parent, or onto the zone at the bottom to make it top-level. Ctrl-click or Shift-click to select several types.',
     moved: (name, parentName) =>
       parentName
         ? `Moved "${name}" under "${parentName}".`
         : `Moved "${name}" to the top level.`,
+    movedMany: (count, parentName) =>
+      parentName
+        ? `Moved ${count} types under "${parentName}".`
+        : `Moved ${count} types to the top level.`,
     undo: 'Undo',
     dismiss: 'Dismiss',
   },

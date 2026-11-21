@@ -136,6 +136,8 @@ const TypesPage = () => {
   const [expanded, setExpanded] = useState(new Set())
   const [collapsedInFilter, setCollapsedInFilter] = useState(new Set())
   const [notice, setNotice] = useState({ message: typeStrings.tree.dragHint })
+  const [multiSelected, setMultiSelected] = useState(new Set())
+  const anchorId = useRef(null)
   const hasChanges = useRef(false)
   const expandedForSelection = useRef(null)
 
@@ -290,7 +292,43 @@ const TypesPage = () => {
     }
   }
 
-  const handleSelect = (id) => history.push(`/admin/types/${id}`)
+  const handleSelect = (id) => {
+    setMultiSelected(new Set())
+    anchorId.current = id
+    history.push(`/admin/types/${id}`)
+  }
+
+  const handleRowClick = (id, event, visibleIds) => {
+    if (event.shiftKey) {
+      const anchor = visibleIds.includes(anchorId.current)
+        ? anchorId.current
+        : visibleIds.includes(selectedId)
+          ? selectedId
+          : id
+      const from = visibleIds.indexOf(anchor)
+      const to = visibleIds.indexOf(id)
+      const range = visibleIds.slice(Math.min(from, to), Math.max(from, to) + 1)
+      setMultiSelected(
+        new Set(
+          event.ctrlKey || event.metaKey ? [...multiSelected, ...range] : range,
+        ),
+      )
+    } else if (event.ctrlKey || event.metaKey) {
+      const next = new Set(multiSelected)
+      if (next.size === 0 && selectedId) {
+        next.add(selectedId)
+      }
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
+      anchorId.current = id
+      setMultiSelected(next)
+    } else {
+      handleSelect(id)
+    }
+  }
 
   const canMove = (typeId, parentId) => {
     const moved = typeById.get(typeId)
@@ -323,27 +361,39 @@ const TypesPage = () => {
     }
   }
 
-  const handleMove = async (typeId, parentId) => {
-    const moved = typeById.get(typeId)
+  const handleMove = async (typeIds, parentId) => {
     const parent = parentId === null ? null : typeById.get(parentId)
-    const previousParentId = moved.parent_id ?? null
-    if (await applyParent(typeId, parentId)) {
+    const moves = []
+    for (const typeId of typeIds.filter((id) => canMove(id, parentId))) {
+      const previousParentId = typeById.get(typeId).parent_id ?? null
+      if (await applyParent(typeId, parentId)) {
+        moves.push({ typeId, previousParentId })
+      }
+    }
+    if (moves.length > 0) {
+      setMultiSelected(new Set())
+      const parentLabel = parent ? plainLabel(parent, language) : null
       setNotice({
-        typeId,
-        previousParentId,
-        message: typeStrings.tree.moved(
-          plainLabel(moved, language),
-          parent ? plainLabel(parent, language) : null,
-        ),
+        moves,
+        message:
+          moves.length === 1
+            ? typeStrings.tree.moved(
+                plainLabel(typeById.get(moves[0].typeId), language),
+                parentLabel,
+              )
+            : typeStrings.tree.movedMany(moves.length, parentLabel),
       })
     }
   }
 
   const handleUndo = async () => {
-    const { typeId, previousParentId } = notice
-    if (await applyParent(typeId, previousParentId)) {
-      setNotice(null)
+    const remaining = []
+    for (const move of notice.moves) {
+      if (!(await applyParent(move.typeId, move.previousParentId))) {
+        remaining.push(move)
+      }
     }
+    setNotice(remaining.length > 0 ? { ...notice, moves: remaining } : null)
   }
 
   const handleTypeChange = (updated) => {
@@ -446,7 +496,7 @@ const TypesPage = () => {
           {types !== null && !loadError && notice && (
             <Notice>
               <span>{notice.message}</span>
-              {notice.typeId !== undefined && (
+              {notice.moves && (
                 <Button secondary onClick={handleUndo}>
                   {typeStrings.tree.undo}
                 </Button>
@@ -471,11 +521,12 @@ const TypesPage = () => {
               nodes={nodes}
               expanded={effectiveExpanded}
               selectedId={selectedId}
+              selectedIds={multiSelected}
               counts={counts}
               errors={validationErrors}
               language={language}
               onToggle={handleToggle}
-              onSelect={handleSelect}
+              onSelect={handleRowClick}
               canMove={canMove}
               onMove={handleMove}
             />
