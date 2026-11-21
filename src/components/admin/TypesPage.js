@@ -405,6 +405,7 @@ const TypesPage = () => {
 
   const handleStructureChange = async (nextSelectedId) => {
     hasChanges.current = true
+    setMultiSelected(new Set())
     await load()
     history.push(
       nextSelectedId ? `/admin/types/${nextSelectedId}` : '/admin/types',
