@@ -189,6 +189,17 @@ export const typeStrings = {
     pickerNoOptions: 'No matching types',
   },
 
+  multi: {
+    title: (count) => `${count} types selected`,
+    pendingTitle: 'Review status',
+    unpend: (count) => `Mark ${count} pending as not pending`,
+    unpended: (count) =>
+      `Marked ${count} type${count === 1 ? '' : 's'} as not pending.`,
+    assignParent: 'Assign common parent',
+    apply: 'Assign',
+    clear: 'Clear selection',
+  },
+
   create: {
     title: 'New type',
     button: 'Create type',

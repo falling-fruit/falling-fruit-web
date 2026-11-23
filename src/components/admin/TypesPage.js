@@ -16,6 +16,7 @@ import Input from '../ui/Input'
 import { MultiSelect } from '../ui/MultiSelect'
 import { InfoPage } from '../ui/PageTemplate'
 import SingleSelect from '../ui/SingleSelect'
+import MultiTypePanel from './MultiTypePanel'
 import NewTypeForm from './NewTypeForm'
 import TypeDetails from './TypeDetails'
 import TypesOverview from './TypesOverview'
@@ -202,12 +203,13 @@ const TypesPage = () => {
     setTypes((previous) => [...previous, created])
   }, [])
 
-  const { canMove, moveTypes, undoMoves, createType } = useTypeMutations({
-    typeById,
-    childrenMap,
-    onTypeUpdated: handleTypeChange,
-    onTypeAdded: handleTypeAdded,
-  })
+  const { canMove, moveTypes, undoMoves, unpendTypes, createType } =
+    useTypeMutations({
+      typeById,
+      childrenMap,
+      onTypeUpdated: handleTypeChange,
+      onTypeAdded: handleTypeAdded,
+    })
 
   const updateFilters = (changes) =>
     setFilters((previous) => ({ ...previous, ...changes }))
@@ -293,6 +295,13 @@ const TypesPage = () => {
     }
   }
 
+  const handleUnpend = async (typeIds) => {
+    const count = await unpendTypes(typeIds)
+    if (count > 0) {
+      setNotice({ message: typeStrings.multi.unpended(count) })
+    }
+  }
+
   const handleUndo = async () => {
     const remaining = await undoMoves(notice.moves)
     setNotice(remaining.length > 0 ? { ...notice, moves: remaining } : null)
@@ -362,6 +371,7 @@ const TypesPage = () => {
   }
 
   const selectedType = selectedId ? typeById.get(selectedId) : null
+  const isMultiSelect = multiSelected.size > 1
 
   return (
     <InfoPage fullWidth>
@@ -424,9 +434,6 @@ const TypesPage = () => {
         </Button>
         <Button secondary onClick={collapseAll} disabled={!canCollapseAll}>
           {typeStrings.toolbar.collapseAll}
-        </Button>
-        <Button onClick={() => startCreating([])}>
-          {typeStrings.toolbar.newType}
         </Button>
         <Button
           secondary
@@ -491,6 +498,18 @@ const TypesPage = () => {
                 onCreate={handleCreate}
                 onCancel={() => history.push('/admin/types')}
               />
+            ) : isMultiSelect ? (
+              <MultiTypePanel
+                selectedIds={multiSelected}
+                typeOptions={typeOptions}
+                typeById={typeById}
+                childrenMap={childrenMap}
+                language={language}
+                onUnpend={handleUnpend}
+                onAssignParent={handleMove}
+                onCreateParent={startCreating}
+                onClear={handleDeselect}
+              />
             ) : selectedType ? (
               <TypeDetails
                 key={selectedType.id}
@@ -511,6 +530,7 @@ const TypesPage = () => {
                 counts={counts}
                 language={language}
                 onSelect={handleSelect}
+                onNewType={() => startCreating([])}
               />
             ))}
         </DetailPane>

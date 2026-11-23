@@ -72,6 +72,22 @@ export const useTypeMutations = ({
     [applyParent],
   )
 
+  const unpendTypes = useCallback(
+    async (typeIds) => {
+      let count = 0
+      for (const typeId of typeIds) {
+        try {
+          onTypeUpdated(await editType(typeId, { pending: false }))
+          count += 1
+        } catch (error) {
+          toast.error(typeStrings.details.saveFailed(error.message))
+        }
+      }
+      return count
+    },
+    [onTypeUpdated],
+  )
+
   const createType = useCallback(
     async (data, childIds) => {
       let created
@@ -93,5 +109,5 @@ export const useTypeMutations = ({
     [onTypeAdded, applyParent],
   )
 
-  return { canMove, applyParent, moveTypes, undoMoves, createType }
+  return { canMove, applyParent, moveTypes, undoMoves, unpendTypes, createType }
 }

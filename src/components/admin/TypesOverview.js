@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 
+import Button from '../ui/Button'
 import ResetButton from '../ui/ResetButton'
 import { typeStrings } from './typeStrings'
 import { Section, SectionTitle } from './typeStyles'
@@ -47,7 +48,14 @@ const TopButton = styled(ResetButton)`
 
 const TOP_TYPES_COUNT = 10
 
-const TypesOverview = ({ types, typeById, counts, language, onSelect }) => {
+const TypesOverview = ({
+  types,
+  typeById,
+  counts,
+  language,
+  onSelect,
+  onNewType,
+}) => {
   const totalLocations = [...counts.values()].reduce((sum, n) => sum + n, 0)
   const withLocations = types.filter((type) => counts.get(type.id) > 0).length
   const topLevel = types.filter(
@@ -73,6 +81,9 @@ const TypesOverview = ({ types, typeById, counts, language, onSelect }) => {
   return (
     <>
       <Hint>{typeStrings.overview.hint}</Hint>
+      <Section>
+        <Button onClick={onNewType}>{typeStrings.toolbar.newType}</Button>
+      </Section>
       <Section>
         <SectionTitle>{typeStrings.overview.title}</SectionTitle>
         <StatList>
