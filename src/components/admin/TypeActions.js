@@ -4,56 +4,39 @@ import styled from 'styled-components/macro'
 
 import { deleteType, mergeType } from '../../utils/api'
 import Button from '../ui/Button'
-import SingleSelect from '../ui/SingleSelect'
+import TypePicker from './TypePicker'
 import { typeStrings } from './typeStrings'
 import { Section } from './typeStyles'
-import { plainLabel, sortTypeOptions, typeOption } from './typeUtils'
+import { plainLabel } from './typeUtils'
 
-const ButtonRow = styled.div`
+const ActionRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75em;
 `
 
-const MergeRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75em;
-  margin-block-start: 1em;
-
-  & > div:first-child {
-    flex: 1;
-    min-width: 14em;
-    max-width: 28em;
-  }
+const MergePicker = styled.div`
+  flex: 1;
+  min-width: 14em;
+  max-width: 28em;
 `
 
 const TypeActions = ({
   type,
-  types,
+  typeOptions,
   typeById,
   childrenMap,
   count,
   language,
   onStructureChange,
 }) => {
-  const [isMerging, setIsMerging] = useState(false)
   const [targetId, setTargetId] = useState(null)
   const [isBusy, setIsBusy] = useState(false)
 
   const childCount = (childrenMap.get(type.id) ?? []).length
 
-  const targetOptions = useMemo(
-    () =>
-      sortTypeOptions(
-        types
-          .filter((candidate) => candidate.id !== type.id)
-          .map((candidate) => typeOption(candidate, language)),
-      ),
-    [types, type.id, language],
-  )
+  const excludedTargetIds = useMemo(() => new Set([type.id]), [type.id])
 
   const isUnused = count === 0 && childCount === 0
 
@@ -111,7 +94,22 @@ const TypeActions = ({
 
   return (
     <Section>
-      <ButtonRow>
+      <ActionRow>
+        <MergePicker>
+          <TypePicker
+            options={typeOptions}
+            excludedIds={excludedTargetIds}
+            value={targetId}
+            language={language}
+            onChange={setTargetId}
+            placeholder={typeStrings.actions.mergeTarget}
+            aria-label={typeStrings.actions.mergeTarget}
+            disabled={isBusy}
+          />
+        </MergePicker>
+        <Button onClick={handleMerge} disabled={targetId === null || isBusy}>
+          {typeStrings.actions.mergeConfirmButton}
+        </Button>
         <Button
           secondary
           onClick={handleDelete}
@@ -120,40 +118,7 @@ const TypeActions = ({
         >
           {typeStrings.actions.delete}
         </Button>
-        {!isMerging && (
-          <Button
-            secondary
-            onClick={() => setIsMerging(true)}
-            disabled={isBusy}
-          >
-            {typeStrings.actions.merge}
-          </Button>
-        )}
-      </ButtonRow>
-      {isMerging && (
-        <MergeRow>
-          <SingleSelect
-            options={targetOptions}
-            value={targetId}
-            onChange={(option) => setTargetId(option.value)}
-            aria-label={typeStrings.actions.mergeTarget}
-            disabled={isBusy}
-          />
-          <Button onClick={handleMerge} disabled={targetId === null || isBusy}>
-            {typeStrings.actions.mergeConfirmButton}
-          </Button>
-          <Button
-            secondary
-            onClick={() => {
-              setIsMerging(false)
-              setTargetId(null)
-            }}
-            disabled={isBusy}
-          >
-            {typeStrings.actions.mergeCancel}
-          </Button>
-        </MergeRow>
-      )}
+      </ActionRow>
     </Section>
   )
 }

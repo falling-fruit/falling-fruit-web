@@ -11,12 +11,20 @@ const StyledLabel = styled.label`
   color: ${({ theme }) => theme.secondaryText};
 `
 
-const LabeledCheckbox = ({ field, value, onChange, label, style }) => (
+const LabeledCheckbox = ({
+  field,
+  value,
+  onChange,
+  label,
+  style,
+  disabled = false,
+}) => (
   <StyledLabel htmlFor={field} style={style}>
     <Checkbox
       id={field}
       checked={value}
       name={field}
+      disabled={disabled}
       onChange={(event) => onChange(event.target.checked)}
     />
     {label}

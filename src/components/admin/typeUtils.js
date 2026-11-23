@@ -1,14 +1,14 @@
 import { sortBy } from 'lodash'
-import { useEffect, useRef } from 'react'
 
 import { LANGUAGE_OPTIONS } from '../../i18n'
 import {
   displayOrderProperties,
   splitScientificName,
 } from '../../utils/localizedTypes'
-import { typeStrings } from './typeStrings'
+import { CATEGORY_OPTIONS, typeStrings } from './typeStrings'
 
 export const SCIENTIFIC_KEY = 'scientific'
+export const ENGLISH_KEY = 'en'
 export const NO_LANGUAGE = 'none'
 export const MAX_PARENT_RANK = 8
 export const WORLD_BOUNDS = '-85.0511,-180|85.0511,180'
@@ -18,7 +18,10 @@ export const languageLabel = (key) =>
     ? typeStrings.names.scientific
     : (LANGUAGE_OPTIONS.find((option) => option.value === key)?.label ?? key)
 
-const LANGUAGE_ORDER = ['en', ...LANGUAGE_OPTIONS.map((option) => option.value)]
+const LANGUAGE_ORDER = [
+  ENGLISH_KEY,
+  ...LANGUAGE_OPTIONS.map((option) => option.value),
+]
 
 export const orderedLanguageKeys = (keys) =>
   [...new Set(keys)].sort((a, b) => {
@@ -48,7 +51,7 @@ export const labelParts = (type, language) => {
     language === NO_LANGUAGE ? '' : (type.common_names?.[language]?.[0] ?? '')
   if (!common && !scientificName) {
     common =
-      type.common_names?.en?.[0] ??
+      type.common_names?.[ENGLISH_KEY]?.[0] ??
       Object.values(type.common_names ?? {})[0]?.[0] ??
       ''
   }
@@ -61,19 +64,25 @@ export const plainLabel = (type, language) => {
   return [common, scientificName].filter(Boolean).join(' – ') || `#${type.id}`
 }
 
-export const typeOption = (type, language) => {
+const sortFields = (type, language) => {
   const { common, scientificName } = labelParts(type, language)
   return {
-    value: type.id,
-    label: `${[scientificName, common].filter(Boolean).join(' – ')} (${type.id})`,
     scientificName,
     commonName: common,
     taxonomicRank: type.taxonomic_rank || 0,
   }
 }
 
-export const sortTypeOptions = (options) =>
-  sortBy(options, displayOrderProperties)
+const typeOption = (type, language) => {
+  const fields = sortFields(type, language)
+  return {
+    value: type.id,
+    label: `${[fields.scientificName, fields.commonName].filter(Boolean).join(' – ')} (${type.id})`,
+    ...fields,
+  }
+}
+
+const sortTypeOptions = (options) => sortBy(options, displayOrderProperties)
 
 export const buildSearchIndex = (types) => {
   const index = new Map()
@@ -108,15 +117,7 @@ export const buildTree = (types, language) => {
   const { children, roots } = buildChildrenMap(types)
   const sortTypes = (list) =>
     sortBy(
-      list.map((type) => {
-        const { common, scientificName } = labelParts(type, language)
-        return {
-          type,
-          scientificName,
-          commonName: common,
-          taxonomicRank: type.taxonomic_rank || 0,
-        }
-      }),
+      list.map((type) => ({ type, ...sortFields(type, language) })),
       displayOrderProperties,
     ).map(({ type }) => type)
   const toNode = (type, seen) => {
@@ -161,6 +162,11 @@ export const ancestorIds = (typeId, typeById) => {
 
 const POLYPHYLETIC_RANK = 0
 
+const isRanked = (rank) => rank != null && rank !== POLYPHYLETIC_RANK
+
+const isRankNotLower = (rank, parentRank) =>
+  isRanked(rank) && isRanked(parentRank) && rank <= parentRank
+
 const NAME_SHAPES = [
   { shape: 'cultivar', pattern: /'[^']+'/u, min: 8, max: 9 },
   {
@@ -175,7 +181,7 @@ const NAME_SHAPES = [
     min: 1,
     max: 6,
   },
-  { shape: 'single', pattern: /^\p{Lu}\p{Ll}+$/u, min: 1, max: 6 },
+  { shape: 'single', pattern: /^\p{Lu}\p{Ll}+$/u, min: 1, max: 7 },
   {
     shape: 'binomial',
     pattern: /^\p{Lu}\p{Ll}+(?: x)? \p{Ll}+$/u,
@@ -205,17 +211,38 @@ const canBeParent = (type, candidate, typeById) => {
   if ((candidateRank ?? 0) > MAX_PARENT_RANK) {
     return false
   }
-  if (
-    rank != null &&
-    candidateRank != null &&
-    rank !== POLYPHYLETIC_RANK &&
-    candidateRank !== POLYPHYLETIC_RANK &&
-    candidateRank >= rank
-  ) {
+  if (isRankNotLower(rank, candidateRank)) {
     return false
   }
   return !ancestorIds(candidate.id, typeById).includes(type.id)
 }
+
+const rankFixes = (candidates) =>
+  candidates.map((rank) => ({ changes: { taxonomic_rank: rank }, rank }))
+
+const MAX_RANK_SUGGESTIONS = 2
+
+const suggestRanks = (match, parent) => {
+  if (!match) {
+    return []
+  }
+  const parentRank = parent?.taxonomic_rank
+  const candidates = []
+  for (let rank = match.min; rank <= match.max; rank++) {
+    if (!parentRank || parentRank === POLYPHYLETIC_RANK || rank > parentRank) {
+      candidates.push(rank)
+    }
+  }
+  return candidates.length <= MAX_RANK_SUGGESTIONS ? rankFixes(candidates) : []
+}
+
+const ATTACHED_ERROR_FIELDS = ['parent_id', 'taxonomic_rank']
+
+export const errorsForField = (errors, field) =>
+  (errors ?? []).filter((error) => error.field === field)
+
+export const unattachedErrors = (errors) =>
+  (errors ?? []).filter((error) => !ATTACHED_ERROR_FIELDS.includes(error.field))
 
 export const validateTypes = (types, typeById) => {
   const errors = new Map()
@@ -247,45 +274,52 @@ export const validateTypes = (types, typeById) => {
     const found = []
     const rank = type.taxonomic_rank
     const scientificName = type.scientific_names?.[0]
+    const parent = type.parent_id ? typeById.get(type.parent_id) : null
+    const match = scientificName ? matchNameShape(scientificName) : null
     if (!type.parent_id && scientificName) {
       const suggestion = suggestParents(type)
       if (suggestion) {
         found.push({
           code: 'suggestedParent',
+          field: 'parent_id',
           name: scientificName,
           parentName: suggestion.name,
-          parentIds: suggestion.options.map((option) => option.id),
+          fixes: suggestion.options.map((option) => ({
+            changes: { parent_id: option.id },
+            typeId: option.id,
+          })),
         })
       }
     }
-    if (rank == null && type.scientific_names?.length > 0) {
-      found.push({ code: 'missingRank' })
+    if (rank == null && scientificName) {
+      found.push({
+        code: 'missingRank',
+        field: 'taxonomic_rank',
+        fixes: suggestRanks(match, parent),
+      })
     }
-    if (rank != null && rank !== POLYPHYLETIC_RANK && !scientificName) {
-      found.push({ code: 'missingScientificName' })
+    if (isRanked(rank) && !scientificName) {
+      found.push({ code: 'missingScientificName', field: 'scientific_names' })
     }
-    if (rank != null && rank !== POLYPHYLETIC_RANK && scientificName) {
-      const match = matchNameShape(scientificName)
-      if (match && (rank < match.min || rank > match.max)) {
+    if (isRanked(rank) && match) {
+      if (rank < match.min || rank > match.max) {
         found.push({
           code: 'rankMismatch',
+          field: 'taxonomic_rank',
           name: scientificName,
           shape: match.shape,
           min: match.min,
           max: match.max,
+          fixes: suggestRanks(match, parent),
         })
       }
     }
-    const parent = type.parent_id ? typeById.get(type.parent_id) : null
-    if (
-      parent &&
-      rank != null &&
-      parent.taxonomic_rank != null &&
-      rank !== POLYPHYLETIC_RANK &&
-      parent.taxonomic_rank !== POLYPHYLETIC_RANK &&
-      rank <= parent.taxonomic_rank
-    ) {
-      found.push({ code: 'rankNotLower', parentId: parent.id })
+    if (parent && isRankNotLower(rank, parent.taxonomic_rank)) {
+      found.push({
+        code: 'rankNotLower',
+        field: 'taxonomic_rank',
+        parentId: parent.id,
+      })
     }
     if (found.length > 0) {
       errors.set(type.id, found)
@@ -311,7 +345,7 @@ export const descendantIds = (typeId, childrenMap) => {
 
 export const hasRequiredName = (type) =>
   (type.scientific_names?.length ?? 0) > 0 ||
-  (type.common_names?.en?.length ?? 0) > 0
+  (type.common_names?.[ENGLISH_KEY]?.length ?? 0) > 0
 
 export const withNames = (type, key, names) => {
   if (key === SCIENTIFIC_KEY) {
@@ -326,10 +360,110 @@ export const withNames = (type, key, names) => {
   return { common_names: commonNames }
 }
 
-export const useFocusOnMount = () => {
-  const ref = useRef(null)
-  useEffect(() => {
-    ref.current?.focus()
-  }, [])
-  return ref
+export const parseNames = (text) =>
+  text
+    .split(/\s*,\s*/u)
+    .map((name) => name.trim())
+    .filter(Boolean)
+
+export const formatNames = (names) => (names ?? []).join(', ')
+
+export const searchQuery = (filters) => normalizeText(filters.search.trim())
+
+export const UNCATEGORIZED = 'none'
+
+export const DEFAULT_FILTERS = {
+  search: '',
+  conditions: [],
+}
+
+const CONDITION_PREDICATES = {
+  pending: (type) => Boolean(type.pending),
+  errors: (type, { errors }) => errors.has(type.id),
+  withLocations: (type, { counts }) => counts.get(type.id) > 0,
+  withoutLocations: (type, { counts }) => !(counts.get(type.id) > 0),
+  [UNCATEGORIZED]: (type) => (type.categories ?? []).length === 0,
+  ...Object.fromEntries(
+    CATEGORY_OPTIONS.map(({ value }) => [
+      value,
+      (type) => (type.categories ?? []).includes(value),
+    ]),
+  ),
+}
+
+export const isFilterActive = (filters) =>
+  Boolean(searchQuery(filters)) || filters.conditions.length > 0
+
+export const matchesFilters = (
+  type,
+  filters,
+  { query, searchIndex, counts, errors },
+) =>
+  (!query || searchIndex.get(type.id).includes(query)) &&
+  filters.conditions.every((condition) =>
+    CONDITION_PREDICATES[condition](type, { counts, errors }),
+  )
+
+export const contextIds = (selectedId, typeById, childrenMap) => {
+  const ids = new Set()
+  const selected = typeById.get(selectedId)
+  if (!selected) {
+    return ids
+  }
+  ids.add(selectedId)
+  const addChildren = (parentId) =>
+    (childrenMap.get(parentId) ?? []).forEach((child) => ids.add(child.id))
+  addChildren(selectedId)
+  if (selected.parent_id) {
+    addChildren(selected.parent_id)
+  }
+  return ids
+}
+
+export const buildTypeOptions = (types, language, searchIndex) =>
+  sortTypeOptions(
+    types.map((type) => ({
+      ...typeOption(type, language),
+      type,
+      search: searchIndex.get(type.id),
+    })),
+  )
+
+export const matchesOptionSearch = (search, input) =>
+  normalizeText(input)
+    .split(/\s+/u)
+    .filter(Boolean)
+    .every((token) => search.includes(token))
+
+export const flattenNodes = (nodes, isExpanded, isMatch) => {
+  const rows = []
+  const walk = (list, level) => {
+    list.forEach((node) => {
+      const hasChildren = node.children.length > 0
+      const expanded = hasChildren && isExpanded(node.type.id)
+      rows.push({
+        type: node.type,
+        level,
+        hasChildren,
+        isExpanded: expanded,
+        isMatch: isMatch(node.type),
+      })
+      if (expanded) {
+        walk(node.children, level + 1)
+      }
+    })
+  }
+  walk(nodes, 0)
+  return rows
+}
+
+export const orderedTypeIds = (nodes) => {
+  const ids = []
+  const walk = (list) =>
+    list.forEach((node) => {
+      ids.push(node.type.id)
+      walk(node.children)
+    })
+  walk(nodes)
+  return ids
 }

@@ -4,19 +4,14 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components/macro'
 
 import { editType, getTypeById } from '../../utils/api'
-import Button from '../ui/Button'
-import { ScientificName } from '../ui/TypeName'
 import TypeActions from './TypeActions'
-import TypeCategories from './TypeCategories'
-import TypeEdibility from './TypeEdibility'
+import TypeErrors from './TypeErrors'
 import TypeExampleLocations from './TypeExampleLocations'
-import TypeLinksTable from './TypeLinksTable'
-import TypeNamesTable from './TypeNamesTable'
-import TypeNotes from './TypeNotes'
-import TypeSettings from './TypeSettings'
-import { TAXONOMIC_RANK_LABELS, typeStrings } from './typeStrings'
+import TypeForm from './TypeForm'
+import TypeLabel from './TypeLabel'
+import { typeStrings } from './typeStrings'
 import { Muted } from './typeStyles'
-import { labelParts, plainLabel, typeOption } from './typeUtils'
+import { labelParts, unattachedErrors } from './typeUtils'
 
 const BackLink = styled(Link)`
   display: inline-block;
@@ -32,15 +27,6 @@ const ErrorBanner = styled.div`
   color: ${({ theme }) => theme.red};
   background: ${({ theme }) => theme.secondaryBackground};
   font-size: 0.9rem;
-
-  ul {
-    margin: 0.25em 0 0;
-    padding-inline-start: 1.25em;
-  }
-`
-
-const FixButton = styled(Button)`
-  margin-inline-start: 0.5em;
 `
 
 const Title = styled.h2`
@@ -59,7 +45,7 @@ const Pending = styled.span`
 
 const TypeDetails = ({
   typeId,
-  types,
+  typeOptions,
   typeById,
   childrenMap,
   counts,
@@ -121,76 +107,28 @@ const TypeDetails = ({
     0,
   )
   const { common, botanical, cultivar } = labelParts(type, language)
+  const bannerErrors = unattachedErrors(errors)
 
-  const errorMessage = (validationError) => {
-    const { validation } = typeStrings
-    const rankLabel = TAXONOMIC_RANK_LABELS[type.taxonomic_rank]
-    if (validationError.code === 'rankNotLower') {
-      const parent = typeById.get(validationError.parentId)
-      return validation.rankNotLower(
-        rankLabel,
-        plainLabel(parent, language),
-        TAXONOMIC_RANK_LABELS[parent.taxonomic_rank],
-      )
-    }
-    if (validationError.code === 'suggestedParent') {
-      return validation.suggestedParent(
-        validationError.name,
-        validationError.parentName,
-      )
-    }
-    if (validationError.code === 'missingScientificName') {
-      return validation.missingScientificName(
-        `${type.taxonomic_rank} (${rankLabel})`,
-      )
-    }
-    if (validationError.code === 'rankMismatch') {
-      return validation.rankMismatch(
-        validationError.name,
-        validationError.shape,
-        validationError.min,
-        validationError.max,
-        type.taxonomic_rank,
-      )
-    }
-    return validation[validationError.code]
-  }
   return (
     <div>
       <BackLink to="/admin/types">
         {typeStrings.details.backToOverview}
       </BackLink>
-      {errors && errors.length > 0 && (
-        <ErrorBanner role="alert">
+      {bannerErrors.length > 0 && (
+        <ErrorBanner>
           <strong>{typeStrings.validation.title}</strong>
-          <ul>
-            {errors.map((validationError) => (
-              <li
-                key={`${validationError.code}-${validationError.parentId ?? ''}`}
-              >
-                {errorMessage(validationError)}
-                {validationError.code === 'suggestedParent' &&
-                  validationError.parentIds.map((parentId) => (
-                    <FixButton
-                      key={parentId}
-                      secondary
-                      disabled={isSaving}
-                      onClick={() => save({ parent_id: parentId })}
-                    >
-                      {typeStrings.validation.setParent(
-                        typeOption(typeById.get(parentId), language).label,
-                      )}
-                    </FixButton>
-                  ))}
-              </li>
-            ))}
-          </ul>
+          <TypeErrors
+            errors={bannerErrors}
+            type={type}
+            typeById={typeById}
+            language={language}
+            disabled={isSaving}
+            onFix={(fix) => save(fix.changes)}
+          />
         </ErrorBanner>
       )}
       <Title>
-        {common}
-        {common && (botanical || cultivar) && ' '}
-        <ScientificName botanical={botanical} cultivar={cultivar} />
+        <TypeLabel type={type} language={language} />
         {!common && !botanical && !cultivar && typeStrings.details.unnamed}
       </Title>
       <Meta>
@@ -212,27 +150,24 @@ const TypeDetails = ({
       <br />
       <TypeActions
         type={type}
-        types={types}
+        typeOptions={typeOptions}
         typeById={typeById}
         childrenMap={childrenMap}
         count={count}
         language={language}
         onStructureChange={onStructureChange}
       />
-      <TypeSettings
+      <TypeForm
         type={type}
-        types={types}
+        typeOptions={typeOptions}
+        typeById={typeById}
         childrenMap={childrenMap}
+        errors={errors}
         language={language}
         save={save}
         isSaving={isSaving}
       />
-      <TypeNotes type={type} save={save} isSaving={isSaving} />
       <TypeExampleLocations typeId={type.id} count={count} />
-      <TypeNamesTable type={type} save={save} isSaving={isSaving} />
-      <TypeLinksTable type={type} save={save} isSaving={isSaving} />
-      <TypeEdibility type={type} save={save} isSaving={isSaving} />
-      <TypeCategories type={type} save={save} isSaving={isSaving} />
     </div>
   )
 }

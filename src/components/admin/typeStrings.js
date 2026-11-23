@@ -35,15 +35,21 @@ export const CATEGORY_OPTIONS = [
   { value: 'grafter', label: 'Grafter' },
 ]
 
+export const EDIBILITY_OPTIONS = [
+  { value: 'Include', label: 'Include' },
+  { value: 'Maybe include', label: 'Maybe include' },
+  { value: 'Not worth it (or toxic)', label: 'Not worth it (or toxic)' },
+]
+
 export const typeStrings = {
   title: 'Types',
 
   validation: {
     title: 'This type has validation errors:',
-    missingRank: 'Has a scientific name but no taxonomic rank.',
-    suggestedParent: (name, parentName) =>
-      `Has no parent, but scientific name "${name}" suggests a parent named "${parentName}".`,
-    setParent: (label) => `Set parent to ${label}`,
+    missingRank: 'No taxonomic rank.',
+    suggestedParentTitle: (name, parentName) =>
+      `Scientific name "${name}" suggests a parent named "${parentName}".`,
+    setRank: (rank) => `${rank} (${TAXONOMIC_RANK_LABELS[rank]})`,
     missingScientificName: (rank) =>
       `Has taxonomic rank ${rank} but no scientific name.`,
     nameShapes: {
@@ -68,10 +74,15 @@ export const typeStrings = {
     language: 'Language',
     languageNone: 'None (Latin names only)',
     searchPlaceholder: 'Search all names',
-    pendingOnly: 'Pending only',
-    errorsOnly: 'Errors only',
-    withLocationsOnly: 'With locations only',
-    withoutLocationsOnly: 'Without locations only',
+    filters: 'Filters',
+    pending: 'Pending',
+    errors: 'Has errors',
+    withLocations: 'With locations',
+    withoutLocations: 'Without locations',
+    uncategorized: 'No category',
+    nextPending: 'Next pending',
+    nextError: 'Next error',
+    newType: 'New type',
     expandAll: 'Expand all',
     collapseAll: 'Collapse all',
   },
@@ -80,16 +91,22 @@ export const typeStrings = {
     loading: 'Loading types…',
     loadFailed: (message) => `Failed to load types: ${message}`,
     noMatches: 'No types match the current filters.',
-    pendingMarker: '(*)',
+    pendingMarker: 'P',
     pendingTitle: 'Pending review',
-    errorMarker: '(*)',
+    errorMarker: 'E',
     errorTitle: 'Has validation errors',
+    noNextPending: 'No more pending types.',
+    noNextError: 'No more types with errors.',
     expand: 'Expand',
     collapse: 'Collapse',
+    ariaLabel: 'Types',
     detachHere: 'Drop here to make top-level',
     alreadyTopLevel: 'Already top-level',
     dragHint:
-      'Tip: drag a type onto another type to change its parent, or onto the zone at the bottom to make it top-level. Ctrl-click or Shift-click to select several types.',
+      'Tip: drag a type onto another type to change its parent, or onto the zone at the bottom to make it top-level. Ctrl-click or Shift-click to select several types, then use "Create parent" to group them under a new type.',
+    createdWithChildren: (name, count) =>
+      `Created "${name}" with ${count} child type${count === 1 ? '' : 's'}.`,
+    created: (name) => `Created "${name}".`,
     moved: (name, parentName) =>
       parentName
         ? `Moved "${name}" under "${parentName}".`
@@ -135,38 +152,21 @@ export const typeStrings = {
 
   names: {
     title: 'Names',
-    language: 'Language',
-    name: 'Name',
     scientific: 'Scientific',
-    add: 'Add language',
-    addSame: 'Add another name in this language',
-    edit: 'Edit',
-    delete: 'Delete',
-    confirm: 'Confirm',
-    cancel: 'Cancel',
-    chooseLanguage: 'Language',
-    namePlaceholder: 'Name',
-    confirmDelete: (name) => `Delete the name "${name}"?`,
+    addLanguage: 'Add language',
+    separatorHint: 'Separate names with commas. The first name is preferred.',
     lastNameBlocked:
       'A type needs at least one scientific name or English common name.',
   },
 
   links: {
     title: 'Links',
-    resource: 'Resource',
-    url: 'URL',
-    none: 'No links.',
     add: 'Add link',
     urlPlaceholder: 'https://…',
-    confirmDelete: (label) => `Delete the ${label} link?`,
   },
 
   edibility: {
     title: 'Edibility',
-    edit: 'Edit edibility',
-    confirm: 'Confirm',
-    cancel: 'Cancel',
-    empty: 'No edibility information.',
   },
 
   categories: {
@@ -185,8 +185,19 @@ export const typeStrings = {
     parent: 'Parent',
     rank: 'Taxonomic rank',
     pending: 'Pending review',
-    yes: 'Yes',
-    no: 'No',
+    pickerPlaceholder: 'Search by any name',
+    pickerNoOptions: 'No matching types',
+  },
+
+  create: {
+    title: 'New type',
+    button: 'Create type',
+    cancel: 'Cancel',
+    createParent: 'Create parent',
+    children: 'Children',
+    failed: (message) => `Failed to create type: ${message}`,
+    nameRequired:
+      'A type needs at least one scientific name or English common name.',
   },
 
   actions: {
@@ -197,10 +208,9 @@ export const typeStrings = {
       `Delete "${name}"?${children > 0 ? ` Its ${children} child type${children === 1 ? '' : 's'} will be moved to its parent.` : ''}`,
     deleted: 'Type deleted.',
     deleteFailed: (message) => `Failed to delete type: ${message}`,
-    merge: 'Merge into another type',
+    merge: 'Merge into',
     mergeTarget: 'Merge into',
     mergeConfirmButton: 'Merge',
-    mergeCancel: 'Cancel',
     confirmMerge: (name, target, locations, children) =>
       `Merge "${name}" into "${target}"? This moves ${locations.toLocaleString()} location${locations === 1 ? '' : 's'} and ${children} child type${children === 1 ? '' : 's'}, then deletes "${name}". This cannot be undone.`,
     merged: 'Types merged.',

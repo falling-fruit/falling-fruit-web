@@ -1,16 +1,22 @@
 import { ChevronDown, ChevronRight } from '@styled-icons/boxicons-regular'
-import React, { useEffect, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import ResetButton from '../ui/ResetButton'
-import { ScientificName } from '../ui/TypeName'
+import TypeLabel from './TypeLabel'
 import { typeStrings } from './typeStrings'
-import { labelParts } from './typeUtils'
+import { useStableCallback } from './useStableCallback'
+import VirtualList from './VirtualList'
 
 const ROOT_DROP = 'root'
+const ROW_HEIGHT = 28
+const INDENT_EM = 1.25
 
 const Root = styled.div`
-  min-height: 12em;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   outline: ${({ $dropTarget, theme }) =>
     $dropTarget ? `2px dashed ${theme.orange}` : 'none'};
@@ -18,8 +24,7 @@ const Root = styled.div`
 `
 
 const DetachZone = styled.div`
-  position: sticky;
-  bottom: 0;
+  flex: 0 0 auto;
   padding: 0.75em;
   text-align: center;
   font-size: 0.875rem;
@@ -31,19 +36,13 @@ const DetachZone = styled.div`
     $dropTarget ? theme.transparentOrange : theme.background};
 `
 
-const TreeList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`
-
-const Row = styled.li`
+const Row = styled.div`
   display: flex;
   align-items: center;
   gap: 0.25em;
-  padding-block: 0.2em;
+  height: 100%;
+  box-sizing: border-box;
   padding-inline-end: 0.5em;
-  padding-inline-start: ${({ $level }) => $level * 1.25}em;
   white-space: nowrap;
   font-size: 0.875rem;
   cursor: pointer;
@@ -53,12 +52,24 @@ const Row = styled.li`
   outline: ${({ $dropTarget, theme }) =>
     $dropTarget ? `2px solid ${theme.orange}` : 'none'};
   outline-offset: -2px;
-  opacity: ${({ $disabled }) => ($disabled ? 0.4 : 1)};
+  opacity: ${({ $faded }) => ($faded ? 0.4 : 1)};
 
   &:hover {
     background: ${({ $selected, theme }) =>
       $selected ? theme.transparentOrange : theme.navBackground};
   }
+`
+
+const Marker = styled.span`
+  flex: 0 0 1.1em;
+  text-align: center;
+  font-weight: bold;
+  color: ${({ $error, theme }) => ($error ? theme.red : theme.orange)};
+`
+
+const Indent = styled.span`
+  flex: 0 0 auto;
+  display: inline-block;
 `
 
 const Toggle = styled(ResetButton)`
@@ -77,34 +88,80 @@ const Spacer = styled.span`
   flex-shrink: 0;
 `
 
-const Common = styled.span`
-  font-weight: bold;
-  color: ${({ theme }) => theme.secondaryText};
-`
-
-const Latin = styled(ScientificName)`
-  color: ${({ theme }) => theme.text};
-`
-
 const Count = styled.span`
+  margin-inline-start: 0.25em;
   font-weight: bold;
   color: ${({ theme, $zero }) => ($zero ? theme.tertiaryText : theme.text)};
   font-variant-numeric: tabular-nums;
 `
 
-const Pending = styled.span`
-  color: ${({ theme }) => theme.orange};
-  font-weight: bold;
-`
+const TypeRow = memo(
+  ({
+    type,
+    level,
+    hasChildren,
+    isExpanded,
+    isSelected,
+    isFaded,
+    isDropTarget,
+    hasError,
+    count,
+    language,
+    onToggle,
+    onSelect,
+    onDragStart,
+    onDragEnd,
+    onDragOver,
+    onDrop,
+  }) => (
+    <Row
+      role="treeitem"
+      aria-level={level + 1}
+      aria-selected={isSelected}
+      aria-expanded={hasChildren ? isExpanded : undefined}
+      $selected={isSelected}
+      $dropTarget={isDropTarget}
+      $faded={isFaded}
+      onClick={(event) => onSelect(type.id, event)}
+      draggable
+      onDragStart={(event) => onDragStart(event, type.id)}
+      onDragEnd={onDragEnd}
+      onDragOver={(event) => onDragOver(event, type.id)}
+      onDrop={(event) => onDrop(event, type.id)}
+    >
+      <Marker title={typeStrings.tree.pendingTitle}>
+        {type.pending && typeStrings.tree.pendingMarker}
+      </Marker>
+      <Marker $error title={typeStrings.tree.errorTitle}>
+        {hasError && typeStrings.tree.errorMarker}
+      </Marker>
+      <Indent style={{ width: `${level * INDENT_EM}em` }} />
+      {hasChildren ? (
+        <Toggle
+          onClick={(event) => {
+            event.stopPropagation()
+            onToggle(type.id)
+          }}
+          aria-label={
+            isExpanded ? typeStrings.tree.collapse : typeStrings.tree.expand
+          }
+        >
+          {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+        </Toggle>
+      ) : (
+        <Spacer />
+      )}
+      <TypeLabel type={type} language={language} />
+      <Count $zero={count === 0}>{count.toLocaleString()}</Count>
+    </Row>
+  ),
+)
 
-const ErrorMarker = styled.span`
-  color: ${({ theme }) => theme.red};
-  font-weight: bold;
-`
+TypeRow.displayName = 'TypeRow'
 
 const TypesTree = ({
-  nodes,
-  expanded,
+  rows,
+  indexById,
   selectedId,
   selectedIds,
   counts,
@@ -115,144 +172,143 @@ const TypesTree = ({
   canMove,
   onMove,
 }) => {
-  const [dragIds, setDragIds] = useState(null)
+  const [drag, setDrag] = useState(null)
   const [overId, setOverId] = useState(null)
+  const listRef = useRef(null)
+  const scrolledFor = useRef(null)
 
+  const selectedIndex = indexById.get(selectedId)
   useEffect(() => {
-    if (selectedId) {
-      document
-        .getElementById(`type-node-${selectedId}`)
-        ?.scrollIntoView({ block: 'nearest' })
+    if (selectedIndex !== undefined && scrolledFor.current !== selectedId) {
+      scrolledFor.current = selectedId
+      listRef.current?.scrollToIndex(selectedIndex)
     }
-  }, [selectedId])
+  }, [selectedId, selectedIndex])
 
-  const endDrag = () => {
-    setDragIds(null)
+  const stableCanMove = useStableCallback(canMove)
+  const stableOnMove = useStableCallback(onMove)
+  const stableOnSelect = useStableCallback(onSelect)
+  const stableOnToggle = useStableCallback(onToggle)
+  const stableSelectedIds = useStableCallback(() => selectedIds)
+  const stableRows = useStableCallback(() => rows)
+
+  const dropCache = useRef({ drag: null, results: new Map() })
+  if (dropCache.current.drag !== drag) {
+    dropCache.current = { drag, results: new Map() }
+  }
+
+  const canDrop = (parentId) => {
+    if (drag === null) {
+      return false
+    }
+    const key = parentId ?? ROOT_DROP
+    const { results } = dropCache.current
+    if (!results.has(key)) {
+      results.set(
+        key,
+        drag.ids.some((id) => stableCanMove(id, parentId)),
+      )
+    }
+    return results.get(key)
+  }
+
+  const endDrag = useStableCallback(() => {
+    setDrag(null)
     setOverId(null)
-  }
-
-  const canDrop = (parentId) =>
-    dragIds !== null && dragIds.some((id) => canMove(id, parentId))
-
-  const visibleIds = []
-  const collectVisible = (node) => {
-    visibleIds.push(node.type.id)
-    if (expanded.has(node.type.id)) {
-      node.children.forEach(collectVisible)
-    }
-  }
-  nodes.forEach(collectVisible)
-
-  const dropHandlers = (parentId) => ({
-    onDragOver: (event) => {
-      if (dragIds === null) {
-        return
-      }
-      event.stopPropagation()
-      if (canDrop(parentId)) {
-        event.preventDefault()
-        event.dataTransfer.dropEffect = 'move'
-        setOverId(parentId ?? ROOT_DROP)
-      } else {
-        setOverId(null)
-      }
-    },
-    onDrop: (event) => {
-      if (dragIds === null) {
-        return
-      }
-      event.preventDefault()
-      event.stopPropagation()
-      if (canDrop(parentId)) {
-        const movedIds = dragIds
-        endDrag()
-        onMove(movedIds, parentId)
-      } else {
-        endDrag()
-      }
-    },
   })
 
-  const renderNode = (node, level) => {
-    const { type } = node
-    const hasChildren = node.children.length > 0
-    const isExpanded = expanded.has(type.id)
-    const { common, botanical, cultivar } = labelParts(type, language)
-    const count = counts.get(type.id) ?? 0
+  const handleRowSelect = useStableCallback((id, event) =>
+    stableOnSelect(
+      id,
+      event,
+      stableRows().map((row) => row.type.id),
+    ),
+  )
 
-    return (
-      <React.Fragment key={type.id}>
-        <Row
-          id={`type-node-${type.id}`}
-          $level={level}
-          $selected={type.id === selectedId || selectedIds.has(type.id)}
-          $dropTarget={overId === type.id}
-          $disabled={dragIds !== null && !canDrop(type.id)}
-          onClick={(event) => onSelect(type.id, event, visibleIds)}
-          draggable
-          onDragStart={(event) => {
-            event.dataTransfer.effectAllowed = 'move'
-            event.dataTransfer.setData('text/plain', String(type.id))
-            setDragIds(selectedIds.has(type.id) ? [...selectedIds] : [type.id])
-          }}
-          onDragEnd={endDrag}
-          {...dropHandlers(type.id)}
-        >
-          {hasChildren ? (
-            <Toggle
-              onClick={(event) => {
-                event.stopPropagation()
-                onToggle(type.id)
-              }}
-              aria-label={
-                isExpanded ? typeStrings.tree.collapse : typeStrings.tree.expand
-              }
-              aria-expanded={isExpanded}
-            >
-              {isExpanded ? (
-                <ChevronDown size={16} />
-              ) : (
-                <ChevronRight size={16} />
-              )}
-            </Toggle>
-          ) : (
-            <Spacer />
-          )}
-          {common && <Common>{common}</Common>}
-          {(botanical || cultivar) && (
-            <Latin botanical={botanical} cultivar={cultivar} />
-          )}
-          <Count $zero={count === 0}>{count.toLocaleString()}</Count>
-          {errors.has(type.id) && (
-            <ErrorMarker title={typeStrings.tree.errorTitle}>
-              {typeStrings.tree.errorMarker}
-            </ErrorMarker>
-          )}
-          {type.pending && (
-            <Pending title={typeStrings.tree.pendingTitle}>
-              {typeStrings.tree.pendingMarker}
-            </Pending>
-          )}
-        </Row>
-        {hasChildren &&
-          isExpanded &&
-          node.children.map((child) => renderNode(child, level + 1))}
-      </React.Fragment>
-    )
+  const handleDragStart = useStableCallback((event, id) => {
+    event.dataTransfer.effectAllowed = 'move'
+    event.dataTransfer.setData('text/plain', String(id))
+    const selected = stableSelectedIds()
+    setDrag({ ids: selected.has(id) ? [...selected] : [id], sourceId: id })
+  })
+
+  const handleDragOver = (event, parentId) => {
+    if (drag === null) {
+      return
+    }
+    event.stopPropagation()
+    if (canDrop(parentId)) {
+      event.preventDefault()
+      event.dataTransfer.dropEffect = 'move'
+      setOverId(parentId ?? ROOT_DROP)
+    } else {
+      setOverId(null)
+    }
   }
+
+  const handleDrop = (event, parentId) => {
+    if (drag === null) {
+      return
+    }
+    event.preventDefault()
+    event.stopPropagation()
+    const movedIds = drag.ids
+    const allowed = canDrop(parentId)
+    endDrag()
+    if (allowed) {
+      stableOnMove(movedIds, parentId)
+    }
+  }
+
+  const stableDragOver = useStableCallback(handleDragOver)
+  const stableDrop = useStableCallback(handleDrop)
+
+  const sourceIndex = drag ? indexById.get(drag.sourceId) : undefined
 
   return (
     <Root
+      role="tree"
+      aria-label={typeStrings.tree.ariaLabel}
       $dropTarget={overId === ROOT_DROP}
       onDragLeave={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           setOverId(null)
         }
       }}
-      {...dropHandlers(null)}
+      onDragOver={(event) => handleDragOver(event, null)}
+      onDrop={(event) => handleDrop(event, null)}
     >
-      <TreeList>{nodes.map((node) => renderNode(node, 0))}</TreeList>
-      {dragIds !== null && (
+      <VirtualList
+        ref={listRef}
+        itemCount={rows.length}
+        itemHeight={ROW_HEIGHT}
+        alwaysRenderIndices={sourceIndex === undefined ? [] : [sourceIndex]}
+        getItemKey={(index) => rows[index].type.id}
+        renderItem={(index) => {
+          const { type, level, hasChildren, isExpanded, isMatch } = rows[index]
+          return (
+            <TypeRow
+              type={type}
+              level={level}
+              hasChildren={hasChildren}
+              isExpanded={isExpanded}
+              isSelected={type.id === selectedId || selectedIds.has(type.id)}
+              isFaded={drag !== null ? !canDrop(type.id) : !isMatch}
+              isDropTarget={overId === type.id}
+              hasError={errors.has(type.id)}
+              count={counts.get(type.id) ?? 0}
+              language={language}
+              onToggle={stableOnToggle}
+              onSelect={handleRowSelect}
+              onDragStart={handleDragStart}
+              onDragEnd={endDrag}
+              onDragOver={stableDragOver}
+              onDrop={stableDrop}
+            />
+          )
+        }}
+      />
+      {drag !== null && (
         <DetachZone $dropTarget={overId === ROOT_DROP}>
           {canDrop(null)
             ? typeStrings.tree.detachHere
