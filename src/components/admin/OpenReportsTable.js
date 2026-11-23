@@ -14,7 +14,7 @@ import Checkbox from '../ui/Checkbox'
 import Input from '../ui/Input'
 import LocationDisplay from '../ui/LocationDisplay'
 import SingleSelect from '../ui/SingleSelect'
-import { adminStrings, problemTypeLabel } from './adminStrings'
+import { problemTypeLabel, reportStrings } from './reportStrings'
 import {
   buildResolutionAction,
   isResolutionActionReady,
@@ -163,7 +163,7 @@ const minLocationId = (reports) =>
 
 const firstReporterName = (reports) => {
   const name =
-    reporterName(reports[0]?.reporter) || adminStrings.reports.anonymous
+    reporterName(reports[0]?.reporter) || reportStrings.reports.anonymous
   return name.toLowerCase()
 }
 
@@ -444,7 +444,7 @@ const OpenReportsTable = () => {
 
     if (resolveReportsForLocation.fulfilled.match(result)) {
       const emails = result.payload?.emails
-      const message = adminStrings.resolve.resolved(emails)
+      const message = reportStrings.resolve.resolved(emails)
 
       if (emails?.failed?.length) {
         toast.info(message)
@@ -456,7 +456,7 @@ const OpenReportsTable = () => {
       fetchData()
     } else {
       toast.error(
-        adminStrings.resolve.failure(
+        reportStrings.resolve.failure(
           result.error?.message || t('error_message.unknown_error'),
         ),
       )
@@ -464,11 +464,11 @@ const OpenReportsTable = () => {
   }
 
   const groupByOptions = [
-    { value: 'location', label: adminStrings.reports.groupByLocation },
-    { value: 'reporter', label: adminStrings.reports.groupByReporter },
-    { value: 'problem', label: adminStrings.reports.groupByProblem },
-    { value: 'date', label: adminStrings.reports.groupByDate },
-    { value: 'none', label: adminStrings.reports.groupByNone },
+    { value: 'location', label: reportStrings.reports.groupByLocation },
+    { value: 'reporter', label: reportStrings.reports.groupByReporter },
+    { value: 'problem', label: reportStrings.reports.groupByProblem },
+    { value: 'date', label: reportStrings.reports.groupByDate },
+    { value: 'none', label: reportStrings.reports.groupByNone },
   ]
 
   const SelectCell = ({ reports }) => {
@@ -478,7 +478,7 @@ const OpenReportsTable = () => {
       <Checkbox
         checked={checked}
         onChange={(e) => toggleGroup(reports, e.target.checked)}
-        aria-label={adminStrings.resolve.selectReports}
+        aria-label={reportStrings.resolve.selectReports}
       />
     )
   }
@@ -488,7 +488,7 @@ const OpenReportsTable = () => {
       {uniqueLocations(reports).map(({ key, locationId, location }) => (
         <li key={key}>
           {locationId == null ? (
-            <span>{adminStrings.reports.deletedLocation}</span>
+            <span>{reportStrings.reports.deletedLocation}</span>
           ) : (
             <Link to={`/locations/${locationId}`}>
               {location ? (
@@ -510,7 +510,7 @@ const OpenReportsTable = () => {
       uniqueReporters.set(key, {
         key,
         id: reporter?.user_id ?? null,
-        name: reporterName(reporter) || adminStrings.reports.anonymous,
+        name: reporterName(reporter) || reportStrings.reports.anonymous,
         email: reporter?.email ?? null,
       })
     })
@@ -564,7 +564,7 @@ const OpenReportsTable = () => {
               id={`select-${report.id}`}
               checked={!!selectedIds[report.id]}
               onChange={(e) => toggleReport(report.id, e.target.checked)}
-              aria-label={adminStrings.resolve.selectReports}
+              aria-label={reportStrings.resolve.selectReports}
             />
             <span>
               <ReportId>#{report.id}</ReportId>
@@ -583,13 +583,13 @@ const OpenReportsTable = () => {
     ? [
         {
           id: 'problem_type',
-          name: adminStrings.reports.problemType,
+          name: reportStrings.reports.problemType,
           cell: (row) => <ProblemTypeCell reports={row.reports} />,
           minWidth: '10em',
         },
         {
           id: 'problem_details',
-          name: adminStrings.reports.problemDetails,
+          name: reportStrings.reports.problemDetails,
           cell: (row) => (
             <ProblemDetailsCell reports={row.reports} showType={false} />
           ),
@@ -600,7 +600,7 @@ const OpenReportsTable = () => {
     : [
         {
           id: 'problem',
-          name: adminStrings.reports.problem,
+          name: reportStrings.reports.problem,
           cell: (row) => <ProblemDetailsCell reports={row.reports} showType />,
           grow: 3,
           wrap: true,
@@ -613,7 +613,7 @@ const OpenReportsTable = () => {
       <Checkbox
         checked={allChecked}
         onChange={(e) => toggleAll(e.target.checked)}
-        aria-label={adminStrings.resolve.selectAll}
+        aria-label={reportStrings.resolve.selectAll}
       />
     ),
     cell: (row) => <SelectCell reports={row.reports} />,
@@ -625,7 +625,7 @@ const OpenReportsTable = () => {
   const dataColumns = [
     {
       id: 'date',
-      name: adminStrings.reports.date,
+      name: reportStrings.reports.date,
       selector: (row) => maxCreatedAt(row.reports),
       sortable: true,
       format: (row) =>
@@ -634,7 +634,7 @@ const OpenReportsTable = () => {
     },
     {
       id: 'location',
-      name: adminStrings.reports.location,
+      name: reportStrings.reports.location,
       cell: (row) => <LocationCell reports={row.reports} />,
       sortable: true,
       sortFunction: (a, b) =>
@@ -643,7 +643,7 @@ const OpenReportsTable = () => {
     },
     {
       id: 'reporter',
-      name: adminStrings.reports.reporter,
+      name: reportStrings.reports.reporter,
       cell: (row) => <ReporterCell reports={row.reports} />,
       sortable: true,
       selector: (row) => firstReporterName(row.reports),
@@ -663,10 +663,12 @@ const OpenReportsTable = () => {
   return (
     <>
       {!isLoading && (
-        <ReportCount>{adminStrings.reports.openCount(data.length)}</ReportCount>
+        <ReportCount>
+          {reportStrings.reports.openCount(data.length)}
+        </ReportCount>
       )}
       <Toolbar>
-        <label htmlFor="group-by-select">{adminStrings.reports.groupBy}</label>
+        <label htmlFor="group-by-select">{reportStrings.reports.groupBy}</label>
         <SelectContainer>
           <SingleSelect
             id="group-by-select"
@@ -680,8 +682,8 @@ const OpenReportsTable = () => {
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder={adminStrings.reports.searchPlaceholder}
-            aria-label={adminStrings.reports.searchPlaceholder}
+            placeholder={reportStrings.reports.searchPlaceholder}
+            aria-label={reportStrings.reports.searchPlaceholder}
           />
         </SearchContainer>
       </Toolbar>
@@ -705,14 +707,14 @@ const OpenReportsTable = () => {
         paginationRowsPerPageOptions={[10, 20, 50, 100]}
         paginationComponentOptions={{
           selectAllRowsItem: true,
-          selectAllRowsItemText: adminStrings.reports.all,
+          selectAllRowsItemText: reportStrings.reports.all,
         }}
         onChangePage={setPage}
         onChangeRowsPerPage={(newPerPage, newPage) => {
           setPerPage(newPerPage)
           setPage(newPage)
         }}
-        noDataComponent={<p>{adminStrings.reports.emptyOpen}</p>}
+        noDataComponent={<p>{reportStrings.reports.emptyOpen}</p>}
       />
 
       {selectedReports.length > 0 ? (
@@ -722,7 +724,7 @@ const OpenReportsTable = () => {
           {relatedReports.length > 0 && (
             <RelatedReportsNote>
               <p>
-                {adminStrings.resolve.relatedReportsWarning(
+                {reportStrings.resolve.relatedReportsWarning(
                   relatedReportLocationCount,
                 )}
               </p>
@@ -736,7 +738,7 @@ const OpenReportsTable = () => {
                       type="button"
                       onClick={() => toggleReport(report.id, true)}
                     >
-                      {adminStrings.resolve.addRelatedReport}
+                      {reportStrings.resolve.addRelatedReport}
                     </AddReportButton>
                   </li>
                 ))}
@@ -746,7 +748,7 @@ const OpenReportsTable = () => {
 
           {singleLocationId == null && (
             <MultiLocationNote>
-              {adminStrings.resolve.multiLocationNote}
+              {reportStrings.resolve.multiLocationNote}
             </MultiLocationNote>
           )}
 
@@ -772,13 +774,13 @@ const OpenReportsTable = () => {
               {t('form.button.cancel')}
             </Button>
             <Button onClick={handleSubmit} disabled={!canSubmit}>
-              {adminStrings.resolve.submit}
+              {reportStrings.resolve.submit}
             </Button>
           </ButtonRow>
         </ResolvePanel>
       ) : (
         <ResolvePanel>
-          <ResolveHint>{adminStrings.resolve.emptySelectionHint}</ResolveHint>
+          <ResolveHint>{reportStrings.resolve.emptySelectionHint}</ResolveHint>
           <ResolveForm disabled>
             <ResolutionActionFields
               code={null}
@@ -802,7 +804,7 @@ const OpenReportsTable = () => {
                 {t('form.button.cancel')}
               </Button>
               <Button type="button" disabled>
-                {adminStrings.resolve.submit}
+                {reportStrings.resolve.submit}
               </Button>
             </ButtonRow>
           </ResolveForm>

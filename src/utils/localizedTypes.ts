@@ -29,7 +29,7 @@ const extractCultivar = (scientificName: string): string | null => {
   return cultivar[1]
 }
 
-const splitScientificName = (
+export const splitScientificName = (
   scientificName: string,
 ): { botanical: string; cultivar: string | null } => {
   const cultivar = extractCultivar(scientificName)

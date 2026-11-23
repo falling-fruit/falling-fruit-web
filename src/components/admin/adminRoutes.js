@@ -2,6 +2,7 @@ import { Route } from 'react-router-dom'
 
 import OpenReportsPage from './OpenReportsPage'
 import ResolvedReportsPage from './ResolvedReportsPage'
+import TypesPage from './TypesPage'
 
 const pages = [
   {
@@ -11,6 +12,10 @@ const pages = [
   {
     path: '/admin/reports/resolved',
     component: ResolvedReportsPage,
+  },
+  {
+    path: '/admin/types/:typeId?',
+    component: TypesPage,
   },
 ]
 

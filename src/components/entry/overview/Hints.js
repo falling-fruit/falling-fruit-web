@@ -2,7 +2,6 @@ import { ChevronDown, ChevronUp } from '@styled-icons/boxicons-regular'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Reaptcha from 'reaptcha'
 import styled from 'styled-components/macro'
@@ -13,7 +12,6 @@ import {
 } from '../../../redux/locationSlice'
 import { locationToApiValues } from '../../../utils/form'
 import { useAppHistory } from '../../../utils/useAppHistory'
-import { adminStrings } from '../../admin/adminStrings'
 import ResetButton from '../../ui/ResetButton'
 import { formatISOString } from '../textFormatters'
 import useLocationPane from '../useLocationPane'
@@ -67,13 +65,6 @@ const ReportsList = styled.ul`
     content: '-';
     margin-inline-end: 0.5em;
   }
-`
-
-const ReportComment = styled.span`
-  display: block;
-  margin-inline-start: 1em;
-  font-style: normal;
-  color: ${({ theme }) => theme.secondaryText};
 `
 
 export const AddDescriptionHint = ({ locationData }) => {
@@ -347,26 +338,9 @@ export const ReportsHintList = ({ reports }) => {
         const date = formatISOString(report.created_at, i18n.language)
         const reportedLabel = t('locations.hints.reported_on', { date })
 
-        const reporterName = report.reporter
-          ? report.reporter.name || adminStrings.reports.anonymous
-          : null
-
         return (
           <li key={`${report.problem_code}-${report.created_at}`}>
             {`${problem} ${reportedLabel}`}
-            {reporterName && (
-              <>
-                {' — '}
-                {report.reporter.user_id != null ? (
-                  <Link to={`/users/${report.reporter.user_id}`}>
-                    {reporterName}
-                  </Link>
-                ) : (
-                  reporterName
-                )}
-              </>
-            )}
-            {report.comment && <ReportComment>{report.comment}</ReportComment>}
           </li>
         )
       })}
