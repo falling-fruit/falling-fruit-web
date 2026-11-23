@@ -39,7 +39,7 @@ export const orderedLanguageKeys = (keys) =>
     return indexA - indexB
   })
 
-export const normalizeText = (text) =>
+const normalizeText = (text) =>
   text
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
