@@ -1,4 +1,4 @@
-import { getGeocode } from 'use-places-autocomplete'
+import { getDetails } from 'google-places-autocomplete-hook/compat'
 
 // Add defaults so place search works before map view has been saved
 const getMapViewSize = (lastMapView) => ({
@@ -63,10 +63,9 @@ const EARTH_RADIUS = 6378137
 const MAX_LATITUDE = 85.0511287798
 
 export const getPlaceBounds = async (description, placeId, lastMapView) => {
-  const results = await getGeocode({ placeId })
   const {
     geometry: { viewport, location },
-  } = results[0]
+  } = await getDetails({ placeId, fields: ['geometry'] })
 
   const [ne, sw] = [viewport.getNorthEast(), viewport.getSouthWest()]
 
