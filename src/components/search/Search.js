@@ -9,11 +9,11 @@ import {
 } from '@reach/combobox'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular'
 import CoordinateParser from 'coordinate-parser'
+import usePlacesAutocomplete from 'google-places-autocomplete-hook/compat'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
-import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import {
   closeFilter,
